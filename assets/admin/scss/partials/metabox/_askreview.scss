@@ -1,0 +1,236 @@
+// main: ../../metabox.scss
+.ask-review {
+	text-align: center;
+
+	h3 {
+		font-size: 2em;
+	}
+
+	p {
+		font-size: 16px;
+
+		margin-bottom: 20px;
+	}
+
+	.stars-wrapper {
+		line-height: 60px;
+
+		width: 316px;
+		margin: 0 auto;
+		margin-bottom: 20px;
+
+		border: 1px solid #e2e4e7;
+		border-radius: 6px;
+
+		.stars {
+			a {
+				position: relative;
+				top: 9px;
+
+				display: inline-block;
+
+				text-decoration: none;
+
+				color: #aaa;
+
+				@include size( 40px );
+
+				span {
+					font-size: 40px;
+
+					@include size( 40px );
+				}
+
+				&.highlighted,
+				&:hover {
+					color: #f9cb12;
+				}
+			}
+		}
+
+		.face {
+			float: right;
+			position: relative;
+
+			border-left: 1px solid #e2e4e7;
+			background: #f0f2f4;
+			border-radius: 0 6px 6px 0;
+
+			@include size( 70px, 60px );
+		}
+	}
+}
+
+/* Smiley */
+$smiley-size: 40px;
+
+.smiley {
+	padding: 5px;
+	position: relative;
+
+	margin: 9px auto 0 auto;
+
+	border-radius: 100%;
+	background: linear-gradient(135deg, rgb(255, 233, 25) 0%, rgb(251, 192, 0) 100%);
+
+	@include size( $smiley-size );
+	box-sizing: border-box;
+}
+
+.mouth {
+	box-sizing: border-box;
+	margin-left: -30%;
+
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: $smiley-size;
+	border-bottom-left-radius: $smiley-size;
+	background: #b57700;
+
+	@include prefixer( transition, all 300ms cubic-bezier(.645, .045, .355, 1), $browser );
+	@include size( 60%, 30% );
+	@include position( absolute, null null 18% 50% );
+}
+
+.eyes {
+	box-sizing: border-box;
+	width: 100%;
+	margin-top: 15%;
+	padding: 0 5px;
+
+	@include prefixer( transition, all 300ms cubic-bezier(.645, .045, .355, 1), $browser );
+
+	.eye {
+		position: relative;
+
+		float: left;
+
+		border-radius: 100%;
+		background: #b57700;
+
+		@include size( $smiley-size / 5 );
+
+		&:nth-of-type(2) {
+			float: right;
+		}
+
+		&::after {
+			display: block;
+
+			content: '';
+
+			background: #fed800;
+
+			@include prefixer( transform, rotate(0deg), $browser );
+			@include prefixer( transition, all 300ms cubic-bezier(.645, .045, .355, 1), $browser );
+			@include size( 0 );
+			@include position( absolute, -15px null null 5px );
+		}
+
+		&:first-of-type::after {
+			right: 5px;
+			left: auto;
+
+			@include prefixer( transform, rotate(0deg), $browser );
+		}
+	}
+}
+
+/* Normal animation */
+.smiley.normal {
+	.mouth {
+		bottom: 25%;
+
+		margin-left: -20%;
+
+		border-top-left-radius: $smiley-size;
+		border-top-right-radius: $smiley-size;
+		border-bottom-right-radius: $smiley-size;
+		border-bottom-left-radius: $smiley-size;
+
+		@include size( 40%, 10% );
+	}
+
+	.eyes {
+		margin-top: 30%;
+	}
+
+	.eye {
+		height: $smiley-size / 5;
+		margin-top: 0;
+
+		@include prefixer( animation-delay, .3s, $browser );
+		@include prefixer( animation, blink .6s, $browser );
+	}
+}
+
+/* Angry animation */
+.smiley.angry {
+	.mouth,
+	.eyes {
+		@include prefixer( animation-delay, .3s, $browser );
+		@include prefixer( animation, move-angry-head .6s, $browser );
+	}
+
+	.mouth {
+		bottom: 18%;
+		left: 50%;
+
+		margin-left: -20%;
+
+		border-bottom: 0;
+		border-top-left-radius: 100%;
+		border-top-right-radius: 100%;
+		border-bottom-right-radius: $smiley-size / 5;
+		border-bottom-left-radius: $smiley-size / 5;
+
+		@include size( 40%, 20% );
+	}
+
+	.eyes {
+		margin-top: 35%;
+	}
+
+	.eye::after {
+		top: -3px;
+		left: -5px;
+
+		width: 120%;
+		height: 50%;
+
+		transform: rotate(-35deg);
+
+		border-radius: 0;
+	}
+
+	.eye:first-of-type::after {
+		right: -5px;
+		left: auto;
+
+		transform: rotate(35deg);
+	}
+}
+
+/* happy animation */
+.smiley.happy {
+	.mouth {
+		@include prefixer( animation-delay, .3s, $browser );
+		@include prefixer( animation, move-mouth-down .8s, $browser );
+	}
+
+	.eyes {
+		@include prefixer( animation-delay, .3s, $browser );
+		@include prefixer( animation, move-eyes-down .8s, $browser );
+	}
+
+
+	.eye:nth-of-type(2) {
+		height: $smiley-size / 5;
+		margin-top: 0;
+
+		@include prefixer( animation-delay, .3s, $browser );
+		@include prefixer( animation, wink .8s, $browser );
+	}
+}
+
+@import 'smiley-animations';

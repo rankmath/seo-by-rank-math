@@ -1,0 +1,22 @@
+// main: ../sidebar.scss
+
+@import 'tagify';
+
+.#{$namespace}-focus-keyword {
+	.components-panel__body-title {
+		margin-bottom: 0;
+		padding: 16px;
+		padding-bottom: 10px;
+
+		background: transparent !important;
+	}
+
+	.components-notice {
+		margin: 0 0 10px;
+		color: #555d66;
+
+		&__content {
+			margin: 0;
+		}
+	}
+}

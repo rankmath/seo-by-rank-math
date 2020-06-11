@@ -1,0 +1,22 @@
+// main: ../../common.scss
+
+.consent-box {
+	background: #f6f7f9;
+	padding: 20px;
+	border-radius: 6px;
+	margin-top: 1rem;
+
+	input[type=checkbox] {
+		float: left;
+		margin-top: 5px;
+		margin-right: 10px;
+	}
+
+	p {
+		font-size: 14px!important;
+		line-height: 1.7;
+		margin: 0;
+		opacity: 0.8;
+		overflow: hidden;
+	}
+}

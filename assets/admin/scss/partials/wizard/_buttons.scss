@@ -1,0 +1,63 @@
+// main: ../../setup-wizard.scss
+
+.#{$namespace}-wizard .#{$namespace}-ui {
+	.button {
+		&.button-small {
+			border-radius: 10px;
+		}
+	}
+
+	@media screen and (max-width: 782px) {
+		.button {
+			font-size: 15px;
+
+			padding: 0 20px;
+		}
+	}
+
+	.cmb-type-multicheck {
+		.cmb-td p:first-of-type {
+			margin: 0;
+		}
+	}
+
+	.cmb-multicheck-toggle {
+		padding: 0;
+
+		cursor: pointer;
+
+		color: $primary;
+		border: 0;
+		background: transparent;
+		box-shadow: none;
+
+		&:active {
+			transform: none;
+			box-shadow: none;
+		}
+	}
+}
+
+.form-footer:not(.rank-math-custom) {
+
+	width: calc(100% + 80px);
+	margin: 75px -40px -50px;
+
+	border: 0;
+	border-top: 1px solid $light_gray;
+	border-radius: 0 0 5px 5px;
+
+	overflow: hidden;
+
+	.button {
+		font-size: 16px;
+		line-height: 48px;
+
+		height: 48px;
+		padding: 0 30px;
+
+		&-secondary {
+			margin-right: 10px;
+		}
+	}
+}

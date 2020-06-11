@@ -1,0 +1,74 @@
+// main: ../../common.scss
+
+.#{$namespace}-box {
+	position: relative;
+
+	margin-bottom: 15px;
+
+	background: #fff;
+
+	border: 1px solid $gray;
+
+	border-radius: 6px;
+	padding: 1.875rem;
+
+	&.no-borders {
+		border: 0;
+		padding: 0;
+		background: transparent;
+	}
+
+	&.switch-at-top {
+		.#{$namespace}-switch {
+			@include position(absolute, -12px 0 null null);
+		}
+
+		header {
+			padding: 0 20px;
+
+			h3 {
+				padding-top: 14px;
+			}
+		}
+	}
+
+	header {
+		line-height: 55px;
+
+		h3 {
+			color: $text;
+			position: relative;
+			z-index: 1;
+
+			margin: 0 0 20px;
+		}
+
+		p {
+			color: $dark_gray;
+			margin-top: 0;
+			padding: 0 10px;
+		}
+	}
+
+	&-content {
+
+		form {
+			.frm-submit {
+				p {
+					display: inline-block;
+
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+
+	footer {
+		background: #f8f9fa;
+		padding: 1.25rem 1.875rem;
+		margin: 1.875rem -1.875rem -1.875rem;
+		border: 0;
+		border-top: 1px solid $gray;
+		border-radius: 0 0 6px 6px;
+	}
+}

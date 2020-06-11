@@ -1,0 +1,32 @@
+// compileCompressed: ../css/$1.css
+
+/*!
+ * Plugin:	Rank Math
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	common.css
+ */
+
+// Common and Vendors
+@import "../../vendor/bourbon/bourbon";
+@import "variables";
+@import "mixins";
+
+@import "_font-icons";
+@import "partials/common/header";
+@import 'partials/common/search';
+@import "partials/common/page";
+@import "partials/common/box";
+.#{$namespace}-page {
+	@import "partials/common/button";
+}
+@import "partials/common/consent-box";
+@import "partials/common/pro-badge";
+@import "partials/common/tabs";
+@import "partials/common/tooltip";
+@import "partials/common/export";
+@import "partials/common/misc";
+@import "partials/common/rtl";
+@import "partials/common/vars";
+@import "partials/common/table";
+@import "partials/common/responsive";
+@import "partials/common/validate";

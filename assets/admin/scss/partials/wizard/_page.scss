@@ -1,0 +1,96 @@
+// main: ../../setup-wizard.scss
+
+.#{$namespace}-wizard {
+	background: #f0f2f4;
+	color: $text;
+
+	:focus {
+		outline: none;
+		box-shadow: none;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.notice-error {
+		position: relative;
+
+		margin-right: auto;
+		margin-left: auto;
+
+		background: #ffebee;
+	}
+
+	.text-center {
+		color: $dark_gray;
+		font-size: 1rem;
+		font-weight: normal;
+		text-align: center;
+	}
+
+	.header {
+		max-width: 970px;
+		margin: 75px auto 0;
+	}
+
+	.wrapper {
+		box-sizing: border-box;
+		max-width: 970px;
+		margin: 35px auto 45px;
+		padding: 42px 40px 50px;
+
+		border-radius: 5px;
+		background: #fff;
+		box-shadow: 0 2px 6px rgba(50,50,93,0.05), 0 1px 3px rgba(0,0,0,0.05);
+	}
+
+	.cmb-form {
+		> header,
+		header.redirections-header {
+			margin-bottom: 40px;
+
+			text-align: center;
+
+			h1 {
+				font-size: 30px;
+				font-weight: 700;
+
+				margin: 0 0 14px;
+			}
+
+			p {
+				font-size: 15px;
+
+				max-width: 600px;
+				margin: 10px auto;
+
+				color: $dark_gray;
+			}
+		}
+
+		> .notice {
+			display: none;
+		}
+
+		header.redirections-header {
+			margin-bottom: 0;
+			h1 {
+				margin-top: .67em;
+			}
+		}
+
+		.cmb-type-file,
+		.cmb-type-switch,
+		.cmb-type-multicheck,
+		.cmb-type-radio-inline {
+			.cmb-th label {
+				cursor: default;
+			}
+
+			.cmb-multicheck-toggle {
+				cursor: pointer;
+			}
+		}
+	}
+}

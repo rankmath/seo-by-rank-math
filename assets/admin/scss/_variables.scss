@@ -1,0 +1,41 @@
+$namespace: 'rank-math';
+
+$container_width: 1020px;
+
+// Primary Pelette
+$primary:   #069de3;
+$gray:      #b5bfc9;
+$light_gray: #dadfe4;
+$dark_gray: #7f868d;
+$text:      #242628;
+$white:     #fff;
+$error:     #ee6a5e;
+$success:   #58bb58;
+$warning:   #f7ca63;
+
+// Text color
+$muted: #999;
+
+// Primary Button Colors
+$primary-border-color: #069de3;
+$primary-hover: #08a7f1;
+$primary-hover-border-color: #08a7f1;
+
+// Secondary Button Colors
+$border-hover-color: #069de3;
+
+// Focus keyword status
+$status-good: #58bb58;
+$status-ok: #ffbe5f;
+$status-bad: #e93f30;
+
+// Gutenberg & Elementor
+$color-blue: #00a0d2;
+$color-good: #79c979;
+$color-good-dark: #52a652;
+$color-ok: #ffbe5f;
+$color-ok-dark: #e59901;
+$color-bad: #f29c96;
+$color-bad-dark: #f0776f;
+$browser: ( "webkit" );
+$all-browser: ( "webkit", "moz", "ms" );

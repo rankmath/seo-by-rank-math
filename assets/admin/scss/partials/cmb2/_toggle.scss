@@ -1,0 +1,86 @@
+// main: ../../cmb2.scss
+
+.cmb2-toggle {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 24px;
+
+	input {
+		display:none;
+
+		&:checked {
+			+ .cmb2-slider {
+			  background-color: $primary;
+				border-color: $primary;
+
+				&:before {
+					background: #fff;
+					transform: translateX(24px);
+				}
+
+				.toggle_off {
+					display: none;
+				}
+
+				.toggle_on {
+					display: block;
+				}
+			}
+		}
+
+		+ .cmb2-slider:focus {
+			box-shadow: 0 0 0 2px #fff, 0 0 0 3px #555d66;
+		}
+	}
+}
+
+.cmb2-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border: 2px solid #6c7781;
+	border-radius: 34px;
+
+	&:before {
+		position: absolute;
+		content: "";
+		height: 14px;
+		width: 14px;
+		left: 4px;
+		bottom: 3px;
+		background-color: #6c7781;
+		border-radius: 50%;
+	}
+}
+
+.toggle_on, .toggle_off {
+	position: absolute;
+	top: 6px;
+	left: 10px;
+	box-sizing: border-box;
+}
+
+.toggle_on {
+	display: none;
+	outline: 1px solid transparent;
+	outline-offset: -1px;
+	background: #fff;
+	fill: #fff;
+	border: 1px solid #fff;
+	border-radius: 2px;
+}
+
+.toggle_off {
+	color: #6c7781;
+	fill: currentColor;
+	right: 6px;
+	left: auto;
+}
+
+#side-sortables .cmb-row .cmb2-toggle + .cmb2-metabox-description {
+	padding-bottom: 0;
+}

@@ -1,0 +1,76 @@
+// compileCompressed: $1.css
+/*!
+ * Plugin:	Rank Math - Status & Tools
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	status.css
+ */
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/variables';
+
+.rank-math-status-table {
+	margin-top: 20px;
+
+	tr {
+		th,
+		td {
+			padding: 10px;
+		}
+	}
+
+	thead {
+		tr th {
+			color: #32373c;
+
+			h2 {
+				font-size: 14px;
+
+				margin: 0;
+			}
+		}
+	}
+
+	tbody tr td:first-child {
+		width: 33%;
+	}
+}
+
+.rank-math-tools-table.widefat {
+	padding: 0;
+	border-color: $gray;
+
+	tr {
+
+		&:first-of-type {
+			th {
+				border-radius: 6px 0 0 0;
+			}
+
+			td {
+				border-radius: 0 6px 0 0;
+			}
+		}
+
+		&:nth-child(odd) {
+			background: #f8f9fa;
+		}
+
+		th,
+		td {
+			font-size: 1.1em;
+			font-weight: 400;
+			border-bottom: 1px solid $gray;
+
+			padding: 2em;
+		}
+
+		&:last-of-type {
+			th, td {
+				border-bottom: 0;
+			}
+		}
+	}
+
+	h4 {
+		margin: 0 0 0.825rem;
+	}
+}

@@ -1,0 +1,171 @@
+// main: ../../common.scss;
+
+body .rank-math-wrap {
+	@media screen and ( max-width: 1020px ) {
+		h1,
+		.page-title {
+			margin-right: 0;
+		}
+
+		.nav-tab {
+			margin-bottom: 10px;
+
+			border-bottom: 1px solid #ccc;
+		}
+	}
+
+	@media screen and ( max-width: 782px ) {
+		@at-root .form-table input.regular-text {
+			height: 36px;
+		}
+
+		@at-root body .cmb2-wrap select {
+			padding: 0;
+		}
+
+		.cmb-row.cmb-type-file .regular-text:not([type='hidden']) + .cmb2-upload-button {
+			line-height: 35px;
+		}
+
+		.rank-math-search-options .search-field input {
+			width: 200px;
+		}
+
+		.cmb2-id-console-profile {
+			select {
+				max-width: 100%;
+			}
+			button {
+				margin-top: 5px;
+			}
+		}
+
+		.rank-math-rss-variables thead th,
+		.rank-math-rss-variables tbody td {
+			margin-bottom: 0;
+		}
+
+		input[type=checkbox]:checked:before,
+		.cmb2-wrap input[type=checkbox]:checked:before {
+			font-size: 30px;
+		}
+
+		@at-root body #rank-math-redirection-popup .media-modal {
+			left: 0;
+
+			height: 100%;
+		}
+
+		.module-listing .two-col .col {
+			width: 100%;
+			min-width: 100%;
+			max-width: 100%;
+		}
+
+		.rank-math-systm-status td,
+		.rank-math-systm-status th {
+			border: 0;
+			border-bottom: 1px solid #ededed;
+		}
+	}
+
+	@media only screen and ( max-width: 768px ) {
+		.rank-math-tabs-navigation:not(.rank-math-custom),
+		&.rank-math-wrap-settings .form-footer {
+			width: 100%;
+			margin: 0;
+		}
+	}
+
+	@media only screen and ( max-width: 640px ) {
+		.rank-math-tabs-content:not(.rank-math-custom) {
+			padding: 15px;
+		}
+
+		.rank-math-search-options {
+			width: 100%;
+			margin-bottom: 15px;
+		}
+
+		@at-root body .cmb2-wrap .cmb-row {
+			padding: 15px 0;
+		}
+
+		.cmb-row .cmb-th {
+			max-width: 100%;
+			margin-bottom: 5px;
+		}
+
+		.rank-math-ui.settings-footer input {
+			padding: 0 25px;
+		}
+
+		.rank-math-box-help.two-col .col {
+			width: 100%;
+			min-width: 100%;
+			max-width: 100%;
+		}
+
+		@at-root body .rank-math-social-preview-item {
+			padding: 10px;
+		}
+	}
+
+	@media only screen and ( max-width: 595px ) {
+		h1,
+		.page-title {
+			font-size: 30px;
+		}
+
+		h2.nav-tab-wrapper {
+			margin-bottom: 15px;
+		}
+
+		.cmb-group-text-only .cmb-field-list .cmb-field-list > .cmb-remove-field-row {
+			padding-top: 0;
+		}
+
+		.cmb2-wrap .cmb-row.cmb-type-file .regular-text {
+			width: 100%;
+			margin-top: 5px;
+
+			border-radius: 3px;
+		}
+
+		@at-root body {
+			.rank-math-metabox-wrap .rank-math-tab {
+				padding: 15px;
+			}
+
+			.rank-math-redirections-wrap .wp-heading-inline a {
+				display: inline-block;
+			}
+
+			.rank-math-metabox-wrap .rank-math-tabs-navigation:not(.social-tabs-navigation) a {
+				.dashicons {
+					font-size: 18px;
+
+					margin-right: 0;
+					padding-bottom: 2px;
+					padding-left: 2px;
+				}
+
+				.rank-math-tab-text {
+					display: none;
+				}
+			}
+
+			.cmb2-wrap .cmb-row.cmb-row-33,
+			.cmb2-wrap .cmb-row.cmb-row-50 {
+				width: 100%;
+			}
+
+			.cmb2-wrap .cmb-row.cmb-row-33 .cmb-th,
+			.cmb2-wrap .cmb-row.cmb-row-33 .cmb-td,
+			.cmb2-wrap .cmb-row.cmb-row-50 .cmb-th,
+			.cmb2-wrap .cmb-row.cmb-row-50 .cmb-td {
+				padding: 0;
+			}
+		}
+	}
+}

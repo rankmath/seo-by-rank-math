@@ -1,0 +1,52 @@
+<wpml-config>
+	<custom-fields>
+		<custom-field action="translate">rank_math_title</custom-field>
+		<custom-field action="translate">rank_math_description</custom-field>
+		<custom-field action="translate">rank_math_focus_keyword</custom-field>
+		<custom-field action="ignore">rank_math_canonical_url</custom-field>
+		<custom-field action="copy-once">rank_math_robots</custom-field>
+		<custom-field action="copy-once">rank_math_pillar_content</custom-field>
+		<custom-field action="copy">rank_math_facebook_enable_image_overlay</custom-field>
+		<custom-field action="copy">rank_math_facebook_image_overlay</custom-field>
+		<custom-field action="copy">rank_math_twitter_use_facebook</custom-field>
+		<custom-field action="copy">rank_math_twitter_card_type</custom-field>
+		<custom-field action="copy">rank_math_twitter_enable_image_overlay</custom-field>
+		<custom-field action="copy">rank_math_twitter_image_overlay</custom-field>
+	</custom-fields>
+	<admin-texts>
+		<key name="rank-math-options-titles">
+			<key name="title_separator"/>
+			<key name="homepage_title"/>
+			<key name="homepage_description"/>
+			<key name="homepage_facebook_title"/>
+			<key name="homepage_facebook_description"/>
+			<key name="url_author_base"/>
+			<key name="author_archive_title"/>
+			<key name="author_archive_description"/>
+			<key name="date_archive_title"/>
+			<key name="date_archive_description"/>
+			<key name="search_title"/>
+			<key name="404_title"/>
+			<key name="pt_*_title"/>
+			<key name="pt_*_description"/>
+			<key name="pt_*_archive_title"/>
+			<key name="pt_*_archive_description"/>
+			<key name="pt_*_default_snippet_name"/>
+			<key name="pt_*_default_snippet_desc"/>
+			<key name="tax_*_title"/>
+			<key name="tax_*_description"/>
+		</key>
+		<key name="rank-math-options-general">
+			<key name="img_alt_format"/>
+			<key name="img_title_format"/>
+			<key name="breadcrumbs_separator"/>
+			<key name="breadcrumbs_prefix"/>
+			<key name="breadcrumbs_home_label"/>
+			<key name="breadcrumbs_archive_format"/>
+			<key name="breadcrumbs_search_format"/>
+			<key name="breadcrumbs_404_label"/>
+			<key name="rss_before_content"/>
+			<key name="rss_after_content"/>
+		</key>
+	</admin-texts>
+</wpml-config>

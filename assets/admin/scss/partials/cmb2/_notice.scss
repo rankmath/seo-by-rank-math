@@ -1,0 +1,32 @@
+// main: ../../cmb2.scss
+
+[id^="cmb2-metabox-rank"] {
+	.rank-math-desc {
+		color: #7e8993;
+		margin-top: 0;
+
+		pre {
+			background: #222;
+			color: #c9c9c9;
+			overflow: scroll;
+			width: 100%;
+			padding: 10px;
+			margin: 5px 0 10px 0;
+			box-sizing: border-box;
+		}
+	}
+
+	.tab-header + .cmb-type-notice {
+		padding-top: 0;
+	}
+
+	.cmb-type-notice {
+		padding-bottom: 0;
+
+		border: 0;
+
+		.cmb-td {
+			width: 100%;
+		}
+	}
+}

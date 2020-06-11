@@ -1,0 +1,92 @@
+// main: ../../setup-wizard.scss
+
+.wizard-navigation {
+	display: flex;
+	margin: 50px auto 0;
+	text-align: center;
+	justify-content: space-between;
+
+	a {
+		font-size: 13px;
+		position: relative;
+		display: block;
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+		color: #5b6065;
+		flex: 1;
+
+		&:before {
+			font-weight: 600;
+			display: block;
+			padding-bottom: 10px;
+			content: attr(title);
+			color: #5b6065;
+		}
+
+		&:after {
+			content: '';
+			transform: translate(-50%, 23px);
+			background-color: #cbd2d9;
+			@include size(100%, 3px);
+			@include position(absolute, 15px null null 0);
+			pointer-events: none;
+		}
+	}
+
+	span {
+		line-height: 20px;
+		position: relative;
+		z-index: 10;
+		display: inline-block;
+		border: 2px solid #cbd2d9;
+		border-radius: 50%;
+		background: #cbd2d9;
+		box-shadow: inset 0 0 0 2px #fff;
+		@include size(18px);
+	}
+
+	.step-label {
+		&:before {
+			color: $primary;
+		}
+
+		&:after {
+			display: none;
+		}
+
+		+ a:after {
+			width: 162%;
+			transform: translate(-60%, 23px);
+		}
+	}
+	// States
+	a.active {
+		span {
+			color: #fff;
+			border: 2px solid $primary;
+			background: $primary;
+			box-shadow: inset 0 0 0 2px #fff;
+		}
+
+		&:after {
+			background: linear-gradient(to right, $success 0%, $primary 100%);
+		}
+
+		&:before {
+			color: $primary;
+		}
+	}
+
+	a.done {
+		span {
+			color: $white;
+			border-color: $success;
+			background-color: $success;
+			box-shadow: inset 0 0 0 2px #fff;
+		}
+
+		&:after {
+			background-color: $success;
+		}
+	}
+}

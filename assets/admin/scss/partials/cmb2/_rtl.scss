@@ -1,0 +1,57 @@
+// main: ../../cmb2.scss
+
+body.rtl {
+	.cmb2-media-status {
+		.img-status .cmb2-remove-file-button {
+			right: auto;
+			left: 1px;
+		}
+	}
+
+	[id^="cmb2-metabox-rank"] {
+		.cmb-row {
+			.cmb-th label {
+				padding-right: 0;
+				padding-left: 15px;
+			}
+
+			.cmb-td {
+				float: right;
+
+				.rank-math-tooltip {
+					margin-right: 6px;
+					margin-left: 0;
+				}
+			}
+		}
+
+		.cmb-group-text-only .cmb-field-list .cmb-field-list > .cmb-row + .cmb-row {
+			margin-right: 10px;
+			margin-left: 0;
+		}
+
+		.cmb-big-labels .cmb2-checkbox-list li {
+			label {
+				padding-right: 40px;
+				padding-left: 12px;
+			}
+
+			input {
+				right: 21px;
+				left: auto;
+
+				&[type=checkbox]:checked:before {
+					margin-right: -2px;
+				}
+			}
+		}
+
+		.select2-container--default .select2-selection--single .select2-selection__arrow b {
+			margin-left: 10px;
+		}
+	}
+
+	.form-footer:not(.rank-math-custom) .button-primary {
+		float: left;
+	}
+}

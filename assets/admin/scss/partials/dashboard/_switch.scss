@@ -1,0 +1,44 @@
+// main: ../../common.scss
+
+.#{$namespace}-switch {
+	input[type=checkbox] {
+		visibility: hidden;
+
+		@include size( 0 );
+	}
+
+	label {
+		position: relative;
+
+		display: block;
+
+		cursor: pointer;
+		text-indent: -9999px;
+
+		border-radius: 100px;
+		background: #ddd;
+
+		@include size( 44px, 24px );
+	}
+
+	label:after {
+		@include position( absolute, 2px null null 2px );
+
+		content: '';
+		transition: .4s;
+
+		border-radius: 90px;
+		background: #fff;
+
+		@include size( 20px );
+	}
+
+	input:checked + label {
+		background: #528fcc;
+	}
+
+	input:checked + label:after {
+		-webkit-transform: translateX(100%);
+				transform: translateX(100%);
+	}
+}

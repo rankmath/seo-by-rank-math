@@ -1,0 +1,150 @@
+// main: ../../common.scss
+
+.invalid,
+.widefat.invalid,
+.wp-admin .invalid,
+.wp-admin .widefat.invalid {
+	border-color: #dd2c00 !important;
+	background: pink;
+
+	& ~ .validation-message {
+		display: inline-block;
+	}
+}
+
+.validation-message {
+	font-size: 12px;
+	font-style: italic;
+
+	display: none;
+	overflow: hidden;
+
+	margin-top: 5px;
+	margin-left: 2px;
+	padding: 4px 8px;
+	transition: .28s;
+	vertical-align: middle;
+
+	color: #fff;
+	border-radius: 3px;
+	background: #dd2c00;
+}
+
+span.input-loading {
+	background: url('../img/loader.svg') no-repeat center 4px;
+	background-size: contain;
+
+	display: inline-block;
+
+	margin: 0 0 0 16px;
+
+	@include size(16px, 24px);
+}
+
+body .cmb2-wrap {
+	.cmb2-id-console-profile,
+	.cmb2-id-console-authorization-code {
+		.regular-text,
+		select {
+			display: inline-block;
+
+			max-width: 60%;
+			margin-right: 10px;
+		}
+	}
+
+	.cmb2-id-console-authorization-code .button-secondary {
+		margin-top: 5px;
+	}
+}
+
+.wizard-share {
+	margin-top: 3px;
+
+	vertical-align: 3px;
+
+	a {
+		font-size: 12px;
+		font-weight: 700;
+		line-height: 24px;
+
+		display: inline-block;
+
+		margin-left: 5px;
+		padding: 0 15px 0 10px;
+
+		text-decoration: none;
+
+		color: #fff;
+		border-radius: 3px;
+		background: #3b5998;
+
+		&.share-twitter {
+			background: #55acee;
+		}
+	}
+
+	.dashicons {
+		font-size: 16px;
+		height: auto;
+
+		vertical-align: middle;
+	}
+}
+
+#gsc-dp-info {
+	font-weight: bold;
+}
+
+// Code Box.
+textarea.#{$namespace}-code-box, textarea.#{$namespace}-code-box:focus, div.#{$namespace}-code-box textarea, div.#{$namespace}-code-box textarea:focus {
+	color: #bbbec5;
+	background: #32344b;
+	border-color: #32344b;
+	width: 100%;
+
+	&:disabled {
+		color: darken(#bbbec5,3);
+	}
+}
+
+.#{$namespace}-code-box div.cmb-td {
+	width: 100%!important;
+}
+
+// Notices.
+#new_post_type {
+	width: $container_width;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.#{$namespace}-notice {
+	border-radius: 4px;
+
+	.notice-info, .notice-warning, .notice-error {
+		border-radius: 4px;
+	}
+}
+
+.update-message p.rank-math-beta-update-notice {
+	font-weight: bold;
+
+	&:before {
+		content: "\f534";
+	}
+}
+.updating-message p.rank-math-beta-update-notice,
+.updated-message p.rank-math-beta-update-notice {
+	display: none;
+}
+
+.#{$namespace}-mode-basic {
+	.#{$namespace}-advanced-option {
+		display: none !important;
+	}
+}
+
+#footer-thankyou {
+	font-style: normal;
+}

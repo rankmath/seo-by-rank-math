@@ -1,0 +1,373 @@
+// main: ../sidebar.scss
+
+.tagify {
+
+	// SCSS "default" allows overriding variables BEFORE they are set in the below lines of code
+	$self: &;
+	$tags-border-color       : #8d96a0 !default;
+	$tags-hover-border-color : #8d96a0 !default;
+	$tags-focus-border-color : #00a0d2 !default;
+
+	$tagMargin               : 5px !default;
+	$tag-pad                 : 6px 6px 7px !default;
+
+	$tag-text-color          : black !default;
+	$tag-text-color--edit    : black !default;
+	$tag-bg                  : #E5E5E5 !default;
+	$tag-hover               : #D3E2E2 !default;
+	$tag-remove              : #D39494 !default;
+	$tag-remove-btn-bg       : none !default;
+	$tag-remove-btn-bg--hover: darken($tag-remove, 8) !default;
+	$tag-inset-shadow-size   : 1.1em !default;
+
+	@mixin placeholder( $show:true, $opacity:.5 ) {
+		transition:.2s ease-out;
+		@if $show == true {
+			opacity:$opacity; transform:none;
+		}
+		@else {
+			opacity:0; transform:translatex(6px);
+		}
+	}
+
+	@mixin tagReadonlyBG{
+		background: linear-gradient(45deg, $tag-bg  25%,
+										   transparent    25%,
+										   transparent    50%,
+										   $tag-bg  50%,
+										   $tag-bg  75%,
+										   transparent    75%,
+										   transparent)         0/5px 5px;
+		box-shadow: none;
+		-webkit-filter: brightness(.95);
+		filter: brightness(.95);
+	}
+
+	@-webkit-keyframes tags--bump {
+		30% { transform: scale(1.2); }
+	}
+
+	@keyframes tags--bump {
+		30% { transform: scale(1.2); }
+	}
+
+	@include value-prefixer( display, flex, $browser );
+	@include prefixer( align-items, flex-start, $browser );
+	@include prefixer( flex-wrap, wrap, $browser );
+	border: 1px solid $tags-border-color;
+	padding: 0;
+	cursor: text;
+	position: relative;
+	border-radius: 4px;
+	margin-bottom: 16px;
+	overflow: auto;
+
+	&:hover {
+		border-color:$tags-hover-border-color;
+	}
+	&.tagify--focus {
+		border-color: $tags-focus-border-color;
+		box-shadow: 0 0 0 1px $tags-focus-border-color;
+	}
+
+	// Hides originals
+	+ input,
+	+ textarea {
+		display:none !important;
+	}
+
+	&__tag {
+		@include value-prefixer( display, inline-flex, $browser );
+		@include prefixer( align-items, center, $browser );
+		margin         : $tagMargin 0 $tagMargin $tagMargin;
+		position       : relative;
+		z-index        : 1;
+		cursor         : pointer;
+		padding        : 4px 6px 4px 10px;
+		border-radius: 14px;
+
+		&:focus {
+			outline: none;
+		}
+
+		&.tagify--editable {
+			> div {
+				color : $tag-text-color--edit;
+			}
+		}
+
+		// :not([contenteditable])
+		> div {
+			vertical-align : top;
+			box-sizing     : border-box;
+			max-width      : 100%;
+			line-height    : inherit;
+			border-radius  : 3px;
+			@include prefixer( user-select, none, $all-browser );
+
+			> * {
+				white-space    : nowrap;
+				overflow       : hidden;
+				text-overflow  : ellipsis;
+				display        : inline-block;
+				vertical-align : top;
+				min-width      : 10px;
+				line-height: 17px;
+
+				&[contenteditable]{
+					outline: none;
+					@include prefixer( user-select, text, $all-browser );
+					cursor: text;
+					// fix: sometimes the caret after the last character wasn't visible (when setting {backspace:"edit"})
+					margin: -2px;
+					padding: 2px;
+				}
+			}
+		}
+
+		&#{ $self } {
+			&--noAnim {
+				-webkit-animation:none;
+				animation:none;
+			}
+
+			&--hide {
+				width          : 0 !important;
+				padding-left   : 0;
+				padding-right  : 0;
+				margin-left    : 0;
+				margin-right   : 0;
+				opacity        : 0;
+				transform      : scale(0);
+				transition     : .3s;
+				pointer-events : none;
+			}
+
+			&--mark {
+				div::before{ -webkit-animation:none; animation:none; }
+			}
+		}
+
+		// Keyword states.
+		&:first-child {
+			#{ $self }__tag-text:before {
+				font-family: 'dashicons';
+				font-size: 12px;
+				margin-right: 5px;
+				vertical-align: -1px;
+				display: inline-block;
+				content: '\f155';
+				text-align: center;
+				color: currentColor;
+				border-radius: 50%;
+			}
+		}
+
+		&.bad-fk {
+			color: darken( $color-bad, 5% );
+			background: lighten( $color-bad, 18% );
+
+			&.selected {
+				color: lighten( $color-bad, 40% );
+				background: $color-bad;
+
+				#{ $self }__tag__removeBtn {
+					color: lighten( $color-bad, 50% );
+					background: desaturate( darken( $color-bad, 8% ), 12% );
+
+					&:hover {
+						background: desaturate( darken( $color-bad, 12% ), 15% );
+					}
+				}
+			}
+
+			#{ $self }__tag__removeBtn {
+				color: lighten( $color-bad, 50% );
+				background: desaturate( lighten( $color-bad, 12% ), 8% );
+
+				&:hover {
+					background: desaturate( lighten( $color-bad, 8% ), 5% );
+				}
+			}
+		}
+
+		&.ok-fk {
+			color: darken( $color-ok, 15% );
+			background: lighten( $color-ok, 22% );
+
+			&.selected {
+				color: lighten( $color-ok, 40% );
+				background: $color-ok;
+
+				#{ $self }__tag__removeBtn {
+					color: lighten( $color-ok, 50% );
+					background: desaturate( darken( $color-ok, 8% ), 12% );
+
+					&:hover {
+						background: desaturate( darken( $color-ok, 12% ), 15% );
+					}
+				}
+			}
+
+			#{ $self }__tag__removeBtn {
+				color: lighten( $color-ok, 50% );
+				background: desaturate( lighten( $color-ok, 12% ), 8% );
+
+				&:hover {
+					background: desaturate( lighten( $color-ok, 7% ), 5% );
+				}
+			}
+		}
+
+		&.good-fk {
+			color: darken( $color-good, 5% );
+			background: lighten( $color-good, 28% );
+
+			&.selected {
+				color: lighten( $color-good, 40% );
+				background: $color-good;
+
+				#{ $self }__tag__removeBtn {
+					color: lighten( $color-good, 50% );
+					background: desaturate( darken( $color-good, 8% ), 12% );
+
+					&:hover {
+						background: desaturate( darken( $color-good, 12% ), 15% );
+					}
+				}
+			}
+
+			#{ $self }__tag__removeBtn {
+				color: lighten( $color-good, 50% );
+				background: desaturate( lighten( $color-good, 15% ), 5% );
+
+				&:hover {
+					background: desaturate( lighten( $color-good, 8% ), 5% );
+				}
+			}
+		}
+	}
+
+	&__tag__removeBtn {
+		$size: 18px;
+
+		order         : 5;
+		font          : 14px/#{$size} Dashicons;
+		color         : #fff;
+		@include size( $size );
+		text-align    : center;
+		cursor        : pointer;
+		margin-left   : 4px;
+		border-radius : 50px;
+		background    : rgba(0, 0, 0, 0.35);
+
+		&::after {
+			content: "\f335";
+		}
+
+		&:hover {
+			color: #fff !important;
+			background: rgba(86, 86, 86, 0.35);
+			border-radius: 50px;
+		}
+	}
+
+	&--hasMaxTags .tagify__input { display:none }
+
+	// Holds the placeholder & the tags input
+	&__input {
+		@mixin placeholder-show{ opacity:.5; transform:none; };
+		display: block;
+		min-width: 160px;
+		margin: $tagMargin;
+		padding: $tag-pad;
+		line-height: 1;
+		position: relative;
+
+		&::before {
+			display:inline-block;
+			width:0;
+			content: attr(data-placeholder);
+			line-height: 1.8;
+			position: absolute;
+			top: 1px;
+			z-index: 1;
+			color: $tag-text-color;
+			white-space: nowrap;
+			pointer-events: none;
+			opacity: 0;
+
+			@supports ( -moz-appearance:none ) {
+				line-height: inherit;
+				position:relative;
+			}
+		}
+
+		&:empty::before {
+			@include placeholder;
+			width:auto;
+		}
+
+		&:focus {
+			outline:none;
+			&::before {
+				@include placeholder(false);
+				@supports ( -moz-appearance:none ) {
+					display:none;
+				}
+			}
+			&:empty::before {
+				@include placeholder(true, .3);
+				@supports ( -moz-appearance:none ) {
+					display:inline-block;
+				}
+			}
+		}
+
+		// tries to suggest the rest of the value from the first item in the whitelist which matches it
+		&::after {
+			content: attr(data-suggest);
+			color: $tag-text-color;
+			opacity: .3;
+			pointer-events:none;
+		}
+
+		#{ $self }__tag + & {
+			min-width: 20px;
+
+			&::before {
+				display: none;
+			}
+		}
+	}
+
+	// Since the dropdown is an external element, which is positioned directly on the body element
+	// it cannot ingerit the CSS variables applied on the ".Tagify" element
+	&__dropdown{
+		position: absolute;
+		z-index: 9999;
+		background: white;
+		max-height: 350px;
+		overflow: auto;
+		border: 1px solid #e8e9ec;
+		border-radius: 4px;
+		box-shadow: 0 9px 18px 0 rgba( #191e23, .18 );
+		box-sizing: border-box;
+
+		&__item{
+			box-sizing: inherit;
+			padding: 6px 13px;
+			cursor: pointer;
+			position: relative;
+			outline:none;
+			color: #717780;
+			border-top: 1px solid #edf0f2;
+
+			&--active,
+			&:active {
+				background: #0095cd;
+				color: #fff;
+			}
+		}
+	}
+}

@@ -1,0 +1,163 @@
+// main: ../../cmb2.scss
+
+[id^="cmb2-metabox-rank"] {
+	.cmb-row {
+		margin: 0;
+		padding: 25px 0;
+
+		&:not(.rank-math-advanced-option):not(.tab-header):not(.cmb-type-notice) ~ .cmb-row:not(.rank-math-advanced-option):not(.rank-math-notice), &.rank-math-advanced-option ~ .rank-math-advanced-option {
+			border-top: 1px solid $light_gray;
+			border-bottom: 0;
+		}
+
+		&.nob {
+			border: 0;
+		}
+
+		&.nop {
+			padding: 0;
+		}
+
+		&.nopt {
+			padding-top: 0;
+		}
+
+		&.nopb {
+			padding-bottom: 0;
+		}
+
+		&:not(.cmb-type-title) {
+			&:first-of-type {
+				padding-top: 0;
+			}
+			&:last-of-type {
+				padding-bottom: 0;
+			}
+		}
+
+		.cmb-td,
+		.cmb-th {
+			box-sizing: border-box;
+			padding: 0;
+		}
+
+		.cmb-th {
+			color: $text;
+			width: 25%;
+			max-width: 200px;
+
+			label {
+				padding: 0 15px 0 0;
+			}
+		}
+
+		.cmb-td {
+			float: left;
+
+			width: 75%;
+		}
+
+		@media screen and (max-width: 640px) {
+			.cmb-td,
+			.cmb-th {
+				width: 100%;
+				padding: 0;
+			}
+
+			.cmb-th {
+				label {
+					padding: 0 0 5px 2px;
+				}
+			}
+		}
+
+		// Width
+		&.cmb-row-25,
+		&.cmb-row-33,
+		&.cmb-row-50 {
+			display: inline-block;
+
+			.cmb-td,
+			.cmb-th {
+				float: none;
+
+				width: 100%;
+				max-width: 100%;
+				padding: 0 10px;
+			}
+
+			.cmb-th {
+				margin-bottom: 8px;
+
+				label {
+					padding: 0;
+				}
+			}
+		}
+
+		&.cmb-row-25 {
+			width: 25%;
+		}
+
+		&.cmb-row-33 {
+			width: 33.33%;
+		}
+
+		&.cmb-row-50 {
+			width: 50%;
+		}
+	}
+
+	.cmb2-metabox-description {
+		font-size: 14px;
+		font-style: normal;
+		padding-top: 10px;
+
+		color: $dark_gray;
+
+		code {
+			background: rgba(0,0,0,.05);
+		}
+	}
+
+	.cmb2-timepicker.text-time + .cmb2-metabox-description {
+		display: block;
+	}
+}
+
+.form-footer:not(.rank-math-custom) {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 20px 40px;
+	background: #fbfbfb;
+
+	margin-bottom: 2rem;
+
+	.button-primary {
+		float: right;
+	}
+}
+
+.cmb-field-list > .cmb-row {
+	vertical-align: top;
+}
+
+%cmb2-button {
+	font-size: 14px;
+	line-height: 40px;
+
+	height: 100%;
+	padding: 0 20px;
+
+	text-decoration: none;
+
+	color: #fff;
+	border: 1px solid $primary;
+	border-radius: 3px;
+	background: $primary;
+	text-shadow: none;
+
+	&:hover {
+		background: $primary-hover;
+	}
+}

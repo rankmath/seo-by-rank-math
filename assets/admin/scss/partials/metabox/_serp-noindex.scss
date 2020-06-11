@@ -1,0 +1,44 @@
+// main: ../../metabox.scss
+
+.serp-preview-noindex {
+	display: none;
+}
+// Overlay if `noindex` is enabled
+.noindex-preview {
+	.serp-preview-body {
+		opacity: 0.6;
+	}
+
+	.serp-preview {
+		&-body {
+			pointer-events: none;
+		}
+
+		&-noindex {
+			z-index: 1;
+			display: block;
+			margin-top: 10px;
+			padding: 5px 10px;
+			border-left: 4px solid #f0b849;
+			border-radius: 4px;
+			background: #fef8ee;
+
+			h3 {
+				font-weight: 700;
+				line-height: 1.4;
+				margin: 5px 0 0;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				color: #32383d;
+			}
+
+			p {
+				font-size: 14px;
+				width: 400px;
+				max-width: 100%;
+				margin: 5px 0;
+				color: #333;
+			}
+		}
+	}
+}

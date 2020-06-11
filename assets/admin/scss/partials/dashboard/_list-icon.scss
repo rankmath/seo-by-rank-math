@@ -1,0 +1,83 @@
+// main: ../../dashboard.scss
+
+.#{$namespace}-list-icon {
+	margin: 0 0 1.5rem;
+
+	li {
+		margin-bottom: 18px;
+		overflow: hidden;
+
+		a {
+			text-decoration: none;
+			color: $dark_gray;
+
+			&:hover {
+				strong {
+					color: $primary;
+				}
+			}
+
+			&:focus {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+
+		strong {
+			font-weight: 600;
+
+			display: block;
+
+			margin: 3px 0;
+			color: $text;
+			transition: 0.25s linear all;
+		}
+
+		p {
+			margin: 0;
+		}
+
+		i {
+			float: left;
+			margin-right: 15px;
+			@extend %rm-icon;
+			text-align: center;
+
+			&.rm-icon {
+				&-settings {
+					color: #B8423F;
+					background: rgba( #B8423F, 0.1 );
+				}
+
+				&-import {
+					color: #3494BE;
+					background: rgba( #3494BE, 0.1 );
+				}
+
+				&-post {
+					color: #E3765C;
+					background: rgba( #E3765C, 0.1 );
+				}
+
+				&-help {
+					color: #87a627;
+					background: rgba( #87a627, 0.1 );
+				}
+
+				&-comments {
+					color: #DBA240;
+					background: rgba( #DBA240, 0.1 );
+				}
+
+				&-support {
+					color: #2940C9;
+					background: rgba( #2940C9, 0.1 );
+				}
+			}
+		}
+
+		> div {
+			overflow: hidden;
+		}
+	}
+}

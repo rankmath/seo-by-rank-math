@@ -1,0 +1,41 @@
+// main: ../sidebar.scss
+
+.length-indicator-wrapper {
+	position: relative;
+
+	display: block;
+
+	.length-indicator {
+		overflow: hidden;
+
+		border-radius: 2px;
+		background: linear-gradient(to right, #e33e2b 0%, #f06818 18%, #fff 19%, #fff 19%, #f16b17 20%, #f1a104 38%, #fff 39%, #fff 39%, #f1a404 40%, #d9b507 58%, #fff 59%, #fff 59%, #d4b509 60%, #7bb02c 78%, #fff 79%, #fff 79%, #76ae2e 80%, #2da24c 100%);
+
+		@include size(180px, 8px);
+		@include position(absolute, -18px 65px null null);
+
+		span {
+			position: absolute;
+			z-index: 11;
+
+			background: #e0e0e0;
+
+			@include size(100%);
+		}
+	}
+
+	&.invalid {
+		.length-indicator {
+			background: linear-gradient(to right, #e33d2a 0%, #e33d2a 18%, #fff 19%, #fff 19%, #e33d2a 20%, #e33d2a 38%, #fff 39%, #fff 39%, #e33d2a 40%, #e33d2a 58%, #fff 59%, #fff 59%, #e33d2a 60%, #e33d2a 78%, #fff 79%, #fff 79%, #e33d2a 80%, #e33d2a 100%);
+		}
+	}
+
+	.length-count {
+		font-size: 12px;
+		line-height: 18px;
+
+		color: #afafaf;
+
+		@include position( absolute, -23px 4px null null );
+	}
+}

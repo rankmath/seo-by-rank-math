@@ -1,0 +1,46 @@
+// main: ../../dashboard.scss
+
+.#{$namespace}-systm-status {
+	border-collapse: collapse;
+
+	td,
+	th {
+		border: 1px solid $gray;
+	}
+
+	td:first-child {
+		width: 33%;
+	}
+
+	thead th {
+		font-weight: 700;
+	}
+
+	.#{$namespace}-tooltip {
+		float: right;
+	}
+
+	& + & {
+		margin-top: 40px;
+	}
+}
+
+#debug-report {
+	display: none;
+
+	textarea {
+		font-family: monospace;
+		font-size: 12px;
+		line-height: 20px;
+
+		margin: 0;
+		padding: 20px;
+
+		resize: none;
+
+		border-radius: 0;
+		outline: 0;
+
+		@include size( 100%, 300px );
+	}
+}

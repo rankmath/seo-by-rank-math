@@ -1,0 +1,158 @@
+// main: ../sidebar.scss
+
+%rank-math-tabs {
+	> .components-tab-panel__tabs {
+		background: #f8f9fa;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: left;
+
+		button {
+			position: relative;
+
+			display: block;
+
+			font-weight: normal;
+
+			padding: 3px 15px;
+
+			color: darken($dark_gray, 15);
+			background: none;
+
+			border-radius: 0;
+
+			@include size( 48px, 50px );
+
+			&:hover {
+				color: inherit;
+			}
+
+			&:focus {
+				background: transparent;
+				box-shadow: none;
+				font-weight: normal;
+			}
+
+			&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover{
+				background: transparent;
+				box-shadow: none;
+
+				i {
+					border-radius: 20em;
+					background: #d9e9ed;
+					box-shadow: 0 0 0 8px #d9e9ed;
+				}
+			}
+
+			i {
+				font-size: 12px;
+
+				vertical-align: -1px;
+				margin-right: 5px;
+
+				@include size( 16px );
+			}
+
+			span {
+				display: none;
+			}
+
+			&.is-active {
+
+				width: auto;
+
+				color: $text;
+
+				padding-top: 2px;
+				margin-bottom: -1px;
+
+				&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
+					i {
+						background: transparent;
+						box-shadow: none;
+					}
+				}
+
+				i {
+					@include margin( null 5px null 0 );
+					box-shadow: none;
+				}
+
+				span {
+					display: inline-block;
+				}
+
+				&:after {
+					width: 100%;
+					height: 3px;
+
+					content: '';
+
+					background: #0095cd;
+
+					@include position( absolute, null null 0 0 );
+				}
+			}
+		}
+	}
+
+	.components-tab-panel__tab-content {
+		.components-panel__body {
+			background: #fff;
+		}
+
+		// Edit Snippet Button.
+		.rank-math-edit-snippet {
+			margin-top: 16px;
+			height: 30px;
+		}
+	}
+
+	// Date Control
+	.rank-math-datepicker {
+		position: relative;
+
+		> button {
+			position: absolute;
+			top: 31px;
+			right: 2px;
+			height: 24px;
+			padding: 0 3px;
+
+			&:not(:disabled):not([aria-disabled=true]):not(.is-default):hover {
+				background: transparent;
+				box-shadow: none;
+			}
+		}
+	}
+
+	// SEO Score Toggle Control
+	.rank-math-frontend-score {
+		.components-base-control__field {
+			margin-bottom: 0;
+		}
+		.components-toggle-control__label {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.#{$namespace}-tabs {
+	@extend %rank-math-tabs;
+}
+
+body.rtl {
+	.rank-math-tabs>.components-tab-panel__tabs {
+		button {
+			&.is-active i, i {
+				margin-right: 0;
+				margin-left: 5px;
+			}
+
+			&[id='1-review'] {
+				margin-left: 0;
+				margin-right: auto;
+			}
+		}
+	}
+}

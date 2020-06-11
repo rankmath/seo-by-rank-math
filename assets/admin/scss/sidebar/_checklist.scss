@@ -1,0 +1,139 @@
+// main: ../sidebar.scss
+
+.#{$namespace}-checklist {
+	background: #fff;
+
+	.components-panel__body-title,
+	.components-panel__body-toggle.components-button {
+		font-size: 14px;
+
+		outline: 0 !important;
+	}
+
+	li {
+		position: relative;
+
+		padding-left: 24px;
+		line-height: 1.4;
+		margin-bottom: 6px;
+
+		&:before {
+			font-family: dashicons;
+			font-size: 14px;
+			line-height: 16px;
+
+			content: '\f335';
+			text-align: center;
+
+			color: #fff;
+			border-radius: 50em;
+			background: $color-bad;
+
+			@include position( absolute, 1px null null -1px );
+			@include size( 16px );
+		}
+
+		&.test-ok:before {
+			content: '\f147';
+
+			background: $color-good;
+		}
+
+		&.test-warning:before {
+			background: $color-ok;
+		}
+
+		// Partially passed tests.
+		&.test-check-good:before {
+			background: #fff;
+			color: $color-good;
+			box-shadow: inset 0 0 0 2px $color-good;
+		}
+
+		&.test-check-ok:before {
+			background: #fff;
+			color: $color-ok;
+			box-shadow: inset 0 0 0 2px $color-ok;
+		}
+
+		&.test-check-bad:before {
+			background: #fff;
+			color: adjust-hue($color-ok, -10);
+			box-shadow: inset 0 0 0 2px adjust-hue($color-ok, -10);
+		}
+	}
+
+	li.seo-check-fleschReading {
+		&.okay,
+		&.fairly-difficult {
+			&:before {
+				background: #ffbe5f;
+			}
+		}
+
+		&.difficult {
+			&:before {
+				background: #eac0c2;
+			}
+		}
+	}
+}
+
+.#{$namespace}-group-score {
+	font-size: 11px;
+	font-weight: normal;
+	line-height: 21px;
+
+	padding: 0 10px 0 7px;
+
+	letter-spacing: .05em;
+
+	color: #fff;
+	border-radius: 20em;
+	background: $color-bad;
+
+	@include margin( -2px null null 10px );
+
+	&:before {
+		font-family: dashicons;
+		font-size: 13px;
+		line-height: 12px;
+
+		content: '\f335';
+
+		@include margin( 3px 2px null null );
+
+		vertical-align: middle;
+	}
+
+	&.test-ok {
+		background: $color-good;
+
+		&:before {
+			content: '\f147';
+		}
+	}
+
+	&.test-warning {
+		padding: 3px 10px 3px 5px;
+
+		background: $color-ok;
+
+		&:before {
+			font-size: 11px;
+			font-weight: 500;
+
+			margin-top: 1px;
+			padding: 0 4px 0 6px;
+
+			content: '!';
+			text-align: center;
+		}
+	}
+}
+
+body.rtl {
+	.#{$namespace}-group-score {
+		margin: 0 10px 0 0;
+	}
+}

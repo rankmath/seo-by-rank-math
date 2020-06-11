@@ -1,0 +1,216 @@
+@-webkit-keyframes blink {
+	0% {
+		height: 8px;
+		margin-top: 0;
+	}
+
+	25% {
+		height: 2px;
+		margin-top: 8px;
+	}
+
+	50% {
+		height: 8px;
+		margin-top: 0;
+	}
+
+	75% {
+		height: 2px;
+		margin-top: 8px;
+	}
+
+	100% {
+		height: 8px;
+		margin-top: 0;
+	}
+}
+@keyframes blink {
+	0% {
+		height: 8px;
+		margin-top: 0;
+	}
+
+	25% {
+		height: 2px;
+		margin-top: 8px;
+	}
+
+	50% {
+		height: 8px;
+		margin-top: 0;
+	}
+
+	75% {
+		height: 2px;
+		margin-top: 8px;
+	}
+
+	100% {
+		height: 8px;
+		margin-top: 0;
+	}
+}
+
+@-webkit-keyframes move-mouth-down {
+	0% {
+		bottom: 18%;
+	}
+
+	35% {
+		bottom: 16%;
+	}
+
+	65% {
+		bottom: 16%;
+	}
+
+	100% {
+		bottom: 18%;
+	}
+}
+@keyframes move-mouth-down {
+	0% {
+		bottom: 18%;
+	}
+
+	35% {
+		bottom: 16%;
+	}
+
+	65% {
+		bottom: 16%;
+	}
+
+	100% {
+		bottom: 18%;
+	}
+}
+
+@-webkit-keyframes move-eyes-down {
+	0% {
+		margin-top: 15%;
+	}
+
+	35% {
+		margin-top: 19%;
+	}
+
+	65% {
+		margin-top: 19%;
+	}
+
+	100% {
+		margin-top: 15%;
+	}
+}
+@keyframes move-eyes-down {
+	0% {
+		margin-top: 15%;
+	}
+
+	35% {
+		margin-top: 19%;
+	}
+
+	65% {
+		margin-top: 19%;
+	}
+
+	100% {
+		margin-top: 15%;
+	}
+}
+
+@-webkit-keyframes wink {
+	0% {
+		height: 8px;
+		margin-top: 0;
+	}
+
+	30% {
+		height: 4px;
+		margin-top: 4px;
+	}
+
+	70% {
+		height: 4px;
+		margin-top: 4px;
+	}
+
+	100% {
+		height: 8px;
+		margin-top: 0;
+	}
+}
+@keyframes wink {
+	0% {
+		height: 8px;
+		margin-top: 0;
+	}
+
+	30% {
+		height: 4px;
+		margin-top: 4px;
+	}
+
+	70% {
+		height: 4px;
+		margin-top: 4px;
+	}
+
+	100% {
+		height: 8px;
+		margin-top: 0;
+	}
+}
+
+@-webkit-keyframes move-angry-head {
+	0% {
+		@include prefixer( transform, translateX(0%), $browser );
+	}
+
+	20% {
+		@include prefixer( transform, translateX(-20%), $browser );
+	}
+
+	40% {
+		@include prefixer( transform, translateX(15%), $browser );
+	}
+
+	60% {
+		@include prefixer( transform, translateX(-10%), $browser );
+	}
+
+	80% {
+		@include prefixer( transform, translateX(5%), $browser );
+	}
+
+	100% {
+		@include prefixer( transform, translateX(0%), $browser );
+	}
+}
+@keyframes move-angry-head {
+	0% {
+		@include prefixer( transform, translateX(0%), $browser );
+	}
+
+	20% {
+		@include prefixer( transform, translateX(-20%), $browser );
+	}
+
+	40% {
+		@include prefixer( transform, translateX(15%), $browser );
+	}
+
+	60% {
+		@include prefixer( transform, translateX(-10%), $browser );
+	}
+
+	80% {
+		@include prefixer( transform, translateX(5%), $browser );
+	}
+
+	100% {
+		@include prefixer( transform, translateX(0%), $browser );
+	}
+}

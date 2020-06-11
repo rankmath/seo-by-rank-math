@@ -1,0 +1,90 @@
+// main: ../../option-panel.scss
+
+.#{$namespace}-console-db-info {
+	display: inline-block;
+
+	margin: 8px 8px 0 0;
+	padding: 5px 8px;
+
+	border-radius: 4px;
+	background: #f6f6f6;
+
+	i {
+		font-size: 12px;
+		vertical-align: -1px;
+		margin-right: 3px;
+	}
+}
+
+#console_caching_control {
+	margin-bottom: 10px;
+}
+
+#console-updating-manually-progress {
+	position: relative;
+
+	display: none;
+	overflow: hidden;
+
+	margin: 10px 0;
+	padding: 8px;
+
+	border-radius: 4px;
+	background: #f6f6f6;
+
+	.progress {
+		overflow: hidden;
+
+		height: 100%;
+		padding: 8px;
+		transition: width 2s ease-in-out;
+		white-space: nowrap;
+
+		color: #fff;
+		border-radius: 3px;
+		background: #008ec2;
+
+		@include position( absolute, 0 null null 0 );
+	}
+}
+
+#setting-panel-search-console {
+	.select2-container {
+		min-width: 65%;
+	}
+}
+
+.cmb2-id-console-authorization-code {
+
+	&.unauthorized {
+		~ div {
+			display: none;
+		}
+
+		input, button {
+			display: none !important;
+		}
+	}
+
+	&.authorizing {
+		input, button {
+			display: inline-block !important;
+		}
+
+		.rank-math-get-authorization-code {
+			margin-top: 10px;
+		}
+	}
+
+	&.authorized {
+		#console_authorization_code {
+			display: none;
+		}
+	}
+}
+
+.cmb2-id-console-profile {
+	.rank-math-refresh {
+		margin-right: 10px;
+	}
+}

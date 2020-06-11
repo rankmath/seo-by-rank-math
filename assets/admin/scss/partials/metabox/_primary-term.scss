@@ -1,0 +1,52 @@
+// main: ../../metabox.scss
+.cmb2-wrap .cmb2-id-#{$namespace}-pillar-content {
+	border-top: 0!important;
+
+	.cmb-th {
+		display: none;
+	}
+	.cmb-td {
+		width: 100%;
+	}
+}
+.#{$namespace}-primary-term-li {
+	position: relative;
+
+	display: block;
+
+	.#{$namespace}-tooltip {
+		@include position( absolute, null 0 null null );
+
+		display: none;
+
+		> span {
+			@include position( null, 50% 32px auto auto );
+
+			width: 110px;
+			transform: translate3d(-70%, -50%, 0);
+
+			&:after {
+				content: '';
+				transform: translate3d(0, -50%, 0);
+
+				@include position(null, 50% -8px null auto);
+				@include triangle(right, 8px, 14px, #555d66);
+			}
+		}
+
+		&:hover {
+			span {
+				bottom: auto;
+				transform: translate3d(0, -50%, 0);
+
+				opacity: 1;
+			}
+		}
+	}
+
+	&.term-checked {
+		> label > .#{$namespace}-tooltip {
+			display: inline-block;
+		}
+	}
+}

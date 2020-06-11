@@ -1,0 +1,30 @@
+@mixin clearfix {
+	&:before,
+	&:after {
+		display: table;
+
+		content: '';
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+@mixin font-smoothing {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@mixin flex {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+@mixin noselect {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+		-ms-user-select: none;
+			user-select: none;
+
+	 -khtml-user-select: none;
+}

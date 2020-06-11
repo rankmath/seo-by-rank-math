@@ -1,0 +1,89 @@
+// main: ../../common.scss
+
+.list-table {
+	border: 1px solid $gray;
+	border-radius: 6px;
+
+	+ .notice {
+		margin-top: 10px;
+	}
+
+	.empty-notice {
+		font-weight: 600;
+
+		padding-left: 15px;
+	}
+
+	table {
+		margin: 0;
+	}
+
+	th,
+	td {
+		padding: 12px 15px;
+
+		border-bottom: 1px solid $gray;
+	}
+
+	tr:last-child {
+		th,
+		td {
+			border: 0;
+		}
+	}
+
+	th {
+		strong {
+			font-size: 16px;
+
+			display: block;
+		}
+	}
+
+	.cmb2-checkbox-list {
+		li {
+			display: inline-block;
+
+			width: 48%;
+			margin: 10px 0 0;
+		}
+		label {
+			font-weight: 400;
+		}
+	}
+
+	&.with-action {
+		th {
+			width: auto;
+
+			vertical-align: middle;
+		}
+
+		td:last-child {
+			text-align: right;
+
+			.button + .button {
+				margin-left: 5px;
+			}
+		}
+
+		&.at-top td:last-child {
+			vertical-align: top;
+		}
+
+		.choices {
+			td {
+				padding-top: 0;
+
+				text-align: left;
+			}
+		}
+
+		.importer-header {
+			th,
+			td {
+				border-bottom: none;
+			}
+		}
+	}
+}

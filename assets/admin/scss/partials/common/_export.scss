@@ -1,0 +1,34 @@
+// main: ../../common.scss
+
+.import_export .no-borders {
+	margin-top: 2rem;
+}
+
+.#{$namespace}-export-form {
+	padding-bottom: 71px;
+
+	.list-table {
+		background: #fff;
+	}
+
+	& + & {
+		margin-top: 30px;
+	}
+
+	th,
+	td {
+		padding: 0;
+	}
+	h3 {
+		margin-top: 0;
+	}
+
+	footer {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		margin: 0;
+		width: 100%;
+		box-sizing: border-box;
+	}
+}

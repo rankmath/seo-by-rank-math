@@ -1,0 +1,86 @@
+// compileCompressed: $1.css
+/*!
+ * Plugin:	Rank Math - Redirections
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	redirections.css
+ */
+
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/variables';
+
+.column-url_from,
+.column-url_to {
+	width: 28%;
+}
+
+%hide {
+	display: none;
+}
+
+.rank-math-redirections-form {
+	box-sizing: border-box;
+	width: 808px;
+	max-width: 100%;
+	margin-top: 1rem;
+
+	@extend %hide;
+
+	&.is-editing {
+		display: block;
+	}
+
+	> h2 {
+		margin-top: 0;
+		margin-bottom: 2rem;
+	}
+
+	.cmb-row {
+		border-top: 0!important;
+	}
+}
+
+.form-footer:not(.rank-math-custom) {
+	margin: 1.875rem -1.875rem -1.875rem;
+	padding: 20px 1.875rem;
+	width: auto;
+	overflow: hidden;
+	border: 0;
+	border-top: 1px solid $gray;
+}
+
+.rank-math-more {
+	@extend %hide;
+}
+
+tr.rank-math-redirection-activated {
+	.activate {
+		@extend %hide;
+	}
+}
+
+tr.rank-math-redirection-deactivated {
+	opacity: .5;
+
+	.deactivate {
+		@extend %hide;
+	}
+}
+
+// Source URls Area.
+.cmb2-wrap .cmb-group-text-only .cmb-field-list .cmb-field-list {
+	display: flex;
+	flex-flow: row wrap;
+
+	.cmb-row {
+		&:not(.cmb-remove-field-row) {
+			flex: 0 0 41%;
+		}
+
+		&[data-fieldtype="checkbox"] {
+			order: 4;
+			margin-top: 10px;
+			margin-left: 0;
+		}
+	}
+}

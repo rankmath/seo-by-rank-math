@@ -1,0 +1,291 @@
+// main: ../../setup-wizard.scss
+
+.#{$namespace}-wizard-body--requirements {
+	h2 {
+		> .dashicons {
+			opacity: 0.5;
+			width: 18px;
+			height: 18px;
+			font-size: 16px;
+			line-height: 18px;
+			padding: 0;
+			vertical-align: -2px;
+			@extend %header-icon;
+		}
+
+		> .dashicons-warning {
+			background: #e8cb57;
+		}
+	}
+
+	##{$namespace}-compatibility-collapsible {
+		width: 770px;
+		max-width: 100%;
+		margin: 0 auto;
+	}
+
+	.form-table {
+		margin-top: 50px;
+
+		border-width: 1px 1px 0 1px;
+		border-style: solid;
+		border-color: $gray;
+
+		tr {
+			&:nth-child(odd) {
+				background: #f8f9fa;
+			}
+		}
+
+		td,
+		th {
+			padding: 10px 20px;
+
+			border-bottom: 1px solid $gray;
+		}
+
+		th {
+			color: $text;
+			width: auto;
+
+			.description {
+				font-size: 12px;
+				font-weight: normal;
+				font-style: normal;
+
+				color: #939596;
+			}
+		}
+
+		td {
+			vertical-align: top;
+
+			&:last-child {
+				text-align: right;
+
+				.dashicons {
+					font-size: 24px;
+				}
+			}
+		}
+
+		.check-no {
+			th {
+				border-left: 3px solid $error;
+			}
+
+			td {
+				color: $error;
+			}
+		}
+	}
+
+	.checklist-ok,
+	.checklist-not-ok {
+		margin-top: 10px;
+
+		color: #969696;
+	}
+
+	.checklist-not-ok {
+		color: $error;
+	}
+
+	.conflict-text {
+		font-size: 15px;
+		font-weight: 500;
+
+		margin-top: 20px;
+		margin-bottom: 0;
+
+		color: $error;
+	}
+
+	.noconflict {
+		color: $success;
+	}
+
+	.wizard-conflicts {
+		margin-top: 10px;
+
+		.import-info {
+			font-size: 12px;
+			font-weight: normal;
+
+			color: #777;
+
+			&:before {
+				content: ' - ';
+			}
+		}
+
+		td {
+			padding: 8px 10px;
+			vertical-align: middle;
+
+			&:first-child {
+				width: 20px;
+				padding-right: 0;
+
+				color: $error;
+
+				.dashicons-yes {
+					color: $success;
+				}
+			}
+
+			a.disabled {
+				cursor: not-allowed;
+			}
+		}
+	}
+
+	.form-footer {
+		margin: 60px 0 25px;
+	}
+
+	.#{$namespace}-collapsible-trigger {
+		margin-left: 10px;
+		color: inherit;
+
+		&:hover {
+			background: #f8f9fa;
+		}
+	}
+
+	// Mode
+	.rank-math-ui {
+		border: none;
+
+		.rank-math-setup-mode {
+			margin: 0 auto;
+			width: 770px;
+			max-width: 100%;
+			margin-top: 3rem;
+
+			.cmb-td {
+				display: block;
+				width: 100%;
+
+				ul {
+					display: block;
+					width: 100%;
+					border: none;
+					padding: 0;
+
+					li {
+						float: none;
+						width: 100%;
+						position: relative;
+
+						input {
+							display: inline-block;
+							margin-top: 3px;
+							margin-right: 16px;
+							position: absolute;
+							top: 20px;
+							left: 20px;
+
+							&:checked + label {
+								border-color: $primary;
+								box-shadow: 0 0 0 1px $primary;
+							}
+
+							&:focus+ label {
+								border-color: $dark_gray;
+							}
+						}
+
+						&:hover label {
+							border-color: $dark_gray;
+						}
+
+						label {
+							display: block;
+							width: 100%;
+							color: $text;
+							font-size: 17px;
+							font-weight: 600;
+							height: auto;
+							white-space: normal;
+							line-height: 1;
+
+							padding: 20px 20px 20px 50px;
+							background: #f8f9fa;
+							border: 1px solid $light_gray;
+							margin: 0 0 16px 0;
+							border-radius: 6px;
+							transition: 0.25s all linear;
+							box-sizing: border-box;
+
+							p {
+								display: block;
+								clear: both;
+								font-weight: normal;
+								font-size: 14px;
+								line-height: 1.5;
+								font-style: normal;
+								padding: 0;
+								margin: 0;
+								padding-top: 10px;
+								color: $dark_gray;
+
+								strong {
+									font-weight: 500;
+								}
+							}
+						}
+
+						&:last-child {
+							pointer-events: none;
+
+							input{
+								opacity: 0.5;
+							}
+
+							label {
+								margin-bottom: 0;
+							}
+
+							.#{$namespace}-mode-title {
+								color: rgba( $text, 0.5 );
+
+								&:after {
+									content: 'Pro';
+									margin-left: 10px;
+									vertical-align: 1px;
+									opacity: 1;
+									color: #fff;
+									background: #4CAF50;
+									background: linear-gradient(100deg, #4CAF50 0%, #8baf4c 100%);
+									font-size: 11px;
+									font-weight: normal;
+									text-transform: uppercase;
+									padding: 5px 10px;
+									border-radius: 3px;
+									margin-left: 5px;
+								}
+							}
+						}
+					}
+				}
+
+				.cmb2-metabox-description {
+					strong {
+						padding: 2px 6px;
+						color: #977d30;
+						background: #ffe8a5;
+						border-radius: 3px;
+					}
+				}
+			}
+		}
+	}
+
+	&.#{$namespace}-mode-basic {
+		.wizard-navigation a {
+			pointer-events: none;
+			cursor: default;
+		}
+	}
+}

@@ -1,0 +1,62 @@
+// main: ../../metabox.scss
+.suggestion-item {
+	overflow: hidden;
+
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+
+	border-bottom: 1px dotted $gray;
+
+	a {
+		text-decoration: none;
+		box-shadow: none !important;
+	}
+
+	.suggestion-actions {
+		float: right;
+
+		margin-left: 5px;
+	}
+
+	.dashicons {
+		margin-top: 5px;
+
+		cursor: pointer;
+	}
+}
+
+#rank_math_keyword_density {
+	font-weight: 600;
+
+	display: none;
+	float: right;
+
+	cursor: pointer;
+
+	color: #888;
+	span {
+		float: right;
+	}
+	.inner-wrapper {
+		position: absolute;
+		z-index: 1;
+		right: 30px;
+
+		margin-top: 8px;
+		padding: 5px 15px;
+
+		background: #fff;
+		box-shadow: 0 1px 1px rgba(0,0,0,.1);
+		ul {
+			margin-top: 15px;
+		}
+	}
+	&.state-closed {
+		span:before {
+			content: '\f140' !important;
+		}
+		.inner-wrapper {
+			display: none;
+		}
+	}
+}

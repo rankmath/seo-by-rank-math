@@ -1,0 +1,160 @@
+// compileCompressed: ../css/$1.css
+
+/*!
+ * Plugin:	Rank Math
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	feedback.css
+ */
+
+// Common and Vendors
+@import '../../vendor/bourbon/bourbon';
+@import 'variables';
+@import 'mixins';
+
+.rank-math-feedback-content {
+	@import 'partials/common/button';
+}
+
+.#{$namespace}-feedback {
+	&-modal {
+		z-index: 11000;
+
+		display: none;
+
+		background: rgba(#000,.8);
+
+		@include position( fixed, 0 );
+
+		h2 {
+			margin: 0;
+			font-weight: 700;
+			border-bottom: 1px solid #e1e1e1;
+		}
+
+		h2 {
+			padding: 15px 20px;
+		}
+
+		p {
+			font-size: 15px;
+			padding: 10px 20px 0;
+		}
+
+		form {
+			padding: 0 20px;
+		}
+
+		.button-close {
+			cursor: pointer;
+		}
+
+		footer {
+			padding: 20px 0;
+
+			.button {
+				text-decoration: none;
+
+				&.loading, &.loading:focus {
+					border: 0;
+					background: url("../img/loader.svg") no-repeat center 12px;
+					background-size: contain;
+					@include size(16px, 24px);
+					padding: 0;
+					text-indent: -9999em;
+					box-shadow: none;
+				}
+
+				&.button-link.button-skip {
+					background: transparent;
+					padding: 0;
+					line-height: 40px;
+
+					&:hover {
+						color: $primary;
+					}
+				}
+			}
+		}
+	}
+
+	&-content {
+		width: 550px;
+		margin: auto;
+		transform: translate( -50%, -50% );
+
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 10px 10px 40px rgba(#000, .3 );
+
+		@include position( absolute, 50% null null 50% );
+
+		.notice-alt {
+			background: rgba(#ea4c89, 0.15);
+			padding: 10px 0;
+
+			p {
+				margin: 0;
+				padding-top: 0;
+
+				strong {
+					color: darken(#ea4c89, 15);
+				}
+			}
+		}
+	}
+
+	&-options-wrapper {
+		position: relative;
+
+		&.selected {
+			padding-bottom: 50px;
+		}
+	}
+
+	&-input-wrapper {
+		display: inline-block;
+
+		input {
+			display: none;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 12px;
+			padding: 9px 15px;
+			background: lighten($text, 80);
+			margin-right: 5px;
+			border-radius: 50px;
+			font-weight: 600;
+			font-size: 14px;
+
+			color: #666;
+			transition: 0.2s background ease-in;
+		}
+
+		.regular-text {
+			display: none;
+			width: 100%;
+			margin: 0 0 10px 0;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+
+		&:hover label {
+			background: lighten($text, 77);
+		}
+
+		&.checked label {
+			background: lighten($primary, 45);
+			color: darken($primary, 30);
+		}
+
+		&.checked {
+			.regular-text {
+				display: block;
+			}
+		}
+	}
+}

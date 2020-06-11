@@ -1,0 +1,178 @@
+// main: ../../setup-wizard.scss
+
+.#{$namespace}-wizard-body--import {
+
+	.cmb-field-list {
+		position: relative;
+		overflow: hidden;
+
+		h3.import-label {
+			display: inline-block;
+			width: 20%;
+		}
+
+		.cmb-type-group {
+			float: right;
+			width: 80%;
+		}
+
+		.cmb-group-description {
+			position: absolute;
+			z-index: 1;
+			top: 6px;
+			left: 20px;
+		}
+
+		.cmb-row {
+			padding: 0;
+			margin-bottom: 5px;
+			border: none!important;
+
+			.cmbhandle {
+				top: 14px;
+				right: 20px;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				text-align: center;
+				background-color: #059de2;
+				color: #fff;
+
+				&:before {
+					content: "\f343";
+					padding: 0;
+					right: 0;
+					left: 1px;
+					top: 5px;
+					bottom: 0;
+				}
+			}
+
+			&.closed {
+				h3 {
+					border-radius: 4px;
+				}
+
+				.inside {
+					display: none;
+				}
+
+				.cmbhandle {
+					background-color: #fff;
+					color: #a4a4a4;
+					box-shadow: 1px -1px 62px -13px rgba(0,0,0,0.14);
+
+					&:before {
+						content: "\f347";
+						left: 0;
+						top: 6px;
+					}
+				}
+			}
+
+			h3 {
+				margin: 0;
+				background-color: #f1f2f4;
+				padding: 14px 20px 13px 50px;
+				font-size: 18px;
+				cursor: pointer;
+				border-radius: 4px 4px 0 0;
+			}
+
+			.cmb-td {
+				width: 100%;
+
+				> p {
+					margin: 0;
+
+					.cmb-multicheck-toggle {
+						font-size: 15px;
+						color: #0474ab
+					}
+				}
+			}
+
+			.inside {
+				width: 100%;
+				margin: 0;
+				background-color: #f8f9fa;
+				padding: 30px 20px;
+				overflow: visible;
+				border-radius: 4px;
+
+				.cmb2-list {
+					width: 100%;
+
+					li {
+						margin-bottom: 9px;
+
+						label {
+							font-size: 16px;
+							color: #24292e;
+						}
+					}
+				}
+
+				.cmb2-metabox-description {
+					width: 100%;
+					color: #888;
+					font-size: 13px;
+					font-style: italic;
+					margin-top: 20px;
+				}
+			}
+		}
+	}
+
+	.import-progress-area {
+		display: none;
+
+		margin: 20px 0;
+
+		background: #eee;
+
+		width: 80%;
+		float: right;
+	}
+
+	.cmb2-id-import-from {
+		.cmb-th {
+			width: auto;
+		}
+	}
+}
+
+#import-progress-bar {
+	display: none;
+    width: 80%;
+	float: right;
+	font-size: 15px;
+	color: #959798;
+
+	#importProgress {
+		margin-top: 30px;
+		margin-bottom: 10px;
+	    background-color: #dddfe0;
+		border-radius: 50px;
+
+		#importBar {
+		    width: 1%;
+		    height: 8px;
+		    background-color: #069de3;
+			border-radius: 50px;
+			transition: width 1s;
+		}
+	}
+
+	.left {
+		float: left;
+
+		strong {
+			color: #65676a;
+		}
+	}
+
+	.right {
+		float: right;
+	}
+}

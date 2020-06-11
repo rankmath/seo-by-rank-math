@@ -1,0 +1,91 @@
+// main: ../../dashboard.scss
+
+.#{$namespace}-welcome-text {
+	padding: 10px 30px;
+
+	border: 1px solid #d8d8d8;
+	border-radius: 3px;
+	box-shadow: 4px 4px 20px rgba(#000,.12);
+}
+
+.#{$namespace}-box {
+	margin-bottom: 1.875rem;
+
+	header {
+		.button {
+			font-weight: 500;
+
+			@include position( absolute, 1.875rem 1.875rem null null );
+
+			color: #fff;
+			border: 0;
+			border-radius: 4px;
+			box-shadow: none;
+
+			i {
+				font-weight: 600;
+				margin-right: 5px;
+				font-size: 10px;
+				text-shadow: 1px 0px 0px #fff;
+			}
+		}
+	}
+
+	&.status-green {
+		header {
+			h3 {
+				color: $success;
+			}
+			.button {
+				background: $success;
+			}
+		}
+	}
+
+	&.status-red {
+		header {
+			h3 {
+				color: $error;
+			}
+			.button {
+				background: $error;
+			}
+		}
+	}
+
+	.regular-text.fullwidth {
+		width: 100%;
+		margin-top: 5px;
+		padding: 12px;
+
+		vertical-align: top;
+
+		color: #777;
+		border-color: #ddd;
+		background: #e5e5e5;
+		box-shadow: none!important;
+
+		&:focus {
+			background: #f5f5f5;
+		}
+	}
+
+	form {
+		p {
+			font-size: 1.125rem;
+			margin-bottom: 0;
+		}
+
+		.button-xlarge {
+			margin-top: 25px;
+		}
+
+		.button-animated {
+			margin: 25px auto 0;
+			display: table;
+		}
+	}
+}
+
+// Toggle.
+@import "../cmb2/checkbox";

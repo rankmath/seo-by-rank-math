@@ -1,0 +1,64 @@
+// main: ../sidebar.scss
+
+.#{$namespace}-tooltip {
+	label {
+		position: relative;
+
+		margin-left: 1px;
+
+		vertical-align: .5px;
+
+		opacity: .45;
+		color: #6d7379;
+
+		&:hover {
+			opacity: 1;
+			color: $color-blue;
+		}
+
+		&:after {
+			display: none;
+
+			content: '';
+			transform: translate(-50%, 3px);
+
+			@include triangle( 'up', 20px, 8px, #edf0f2 );
+			@include position( absolute, 100% null null 50% );
+		}
+	}
+	input {
+		display: none!important;
+
+		&:checked {
+			+ label {
+				opacity: 1;
+				color: $color-blue;
+				&:after {
+					display: block;
+				}
+			}
+			~ .#{$namespace}-tooltip-content {
+				display: block;
+			}
+		}
+	}
+
+	&-content {
+		font-weight: normal;
+		line-height: 1.3;
+
+		display: none;
+		width: 100%;
+
+		margin: 7px 0 0;
+		padding: 8px 10px;
+
+		color: #737982;
+		border-radius: 3px;
+		background: #edf0f2;
+
+		a {
+			text-decoration: underline;
+		}
+	}
+}

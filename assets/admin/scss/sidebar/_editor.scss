@@ -1,0 +1,224 @@
+// main: ../sidebar.scss
+
+@import 'length-indicator';
+
+.#{$namespace}-editor {
+	overflow: hidden;
+
+	> .components-tab-panel__tabs {
+		padding: 0 17px;
+
+		background: #f0f2f4;
+
+		border-bottom: 1px solid #e2e4e7;
+
+		button {
+			width: auto;
+
+			&.is-active i, i {
+				@include margin( null 5px null 0 );
+			}
+
+			span {
+				display: inline-block;
+			}
+
+			&:not(.is-active):not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
+				i {
+					background: none;
+					box-shadow: none;
+				}
+			}
+
+			&[id='1-review'] {
+				margin-left: auto;
+			}
+
+			// Review Tab.
+			.rm-icon-heart-filled {
+				color: #F44336;
+				transition: 0.25s all linear;
+				margin-right: 0!important
+			}
+
+			&:not(.is-active):hover {
+				.rm-icon-heart-filled {
+					color: #e93f30;
+					text-shadow: 0 0 5px #f5aaa3;
+				}
+			}
+		}
+	}
+
+	> .components-tab-panel__tab-content {
+		padding: 20px;
+	}
+
+	// Field Wrapper
+	.field-group {
+		position: relative;
+
+		margin-top: 12px;
+		padding: 20px 15px 15px;
+
+		border-radius: 4px;
+		background: #f0f2f4;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+
+		label:not(.components-toggle-control__label) {
+			font-weight: 600;
+
+			margin-bottom: 6px;
+
+			@include value-prefixer( display, flex, $browser );
+			@include prefixer( flex-direction, column, $browser );
+			@include prefixer( justify-content, center, $browser );
+		}
+
+		.components-toggle-control__label {
+			font-weight: 600;
+		}
+
+		.components-base-control__help {
+			margin-bottom: 0;
+
+			opacity: 0.7;
+
+			@include padding( 8px null null null );
+		}
+
+		.notice {
+			margin-bottom: 0;
+		}
+
+		.components-toggle-control {
+			.components-base-control__field {
+				margin-bottom: 0;
+			}
+
+			+ .components-base-control {
+				margin-top: 12px;
+			}
+		}
+
+		input, textarea {
+			background: #fff;
+			border-color: inherit;
+			margin: 0;
+
+			&:focus {
+				border-color: #007cba;
+			}
+		}
+	}
+
+	.serp-preview-wrapper {
+		padding: 15px 0 10px;
+	}
+
+	// Non-expanded preview.
+	.serp-title {
+		font-size: 20px;
+		margin-bottom: 10px;
+	}
+
+	.serp-url {
+		font-size: 16px;
+
+		margin: 7px 0 5px;
+	}
+
+	.serp-description {
+		font-size: 14px;
+		line-height: 1.57;
+	}
+}
+
+.#{$namespace}-editor-social {
+	.components-tab-panel__tabs {
+		width: 266px;
+		height: 48px;
+		margin: 10px auto 0;
+
+		border-radius: 4px;
+		background: transparent;
+		box-shadow: 0 0px 6px rgba(50,50,93,0.1), 0 0px 3px rgba(0,0,0,0.1);
+
+		button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+			font-size: 16px;
+			line-height: 48px;
+			float: left;
+
+			display: inline-block;
+
+			width: 50%;
+			height: auto;
+			padding: 0;
+
+			text-align: center;
+
+			color: #939393;
+			border: 0;
+			box-shadow: none !important;
+
+			&:first-child {
+				border-radius: 3px 0 0 3px;
+			}
+
+			&:last-child {
+				border-radius: 0 3px 3px 0;
+			}
+
+			&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+				&.is-active, &:focus {
+					color: #fff;
+					background: #3b5998;
+
+					&.button-twitter {
+						background: #55acee;
+					}
+				}
+			}
+		}
+
+		.dashicon {
+			margin-right: 5px;
+
+			vertical-align: -4px;
+		}
+	}
+
+	.notice {
+		margin: 5px 0 20px;
+	}
+
+	// Fields
+	.components-base-control {
+
+		.button {
+			margin-bottom: 8px;
+		}
+
+		.is-destructive {
+			margin-left: 10px;
+			vertical-align: vertical-align;
+		}
+
+		&__label {
+			font-weight: 600;
+			margin-bottom: 10px;
+			margin-left: 2px;
+		}
+
+		+ .components-base-control {
+			&:last-of-type, &.components-toggle-control {
+				border-bottom: 0;
+				padding-bottom: 0;
+				margin-bottom: 0;
+			}
+		}
+	}
+}

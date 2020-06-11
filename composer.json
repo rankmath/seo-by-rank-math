@@ -1,0 +1,31 @@
+{
+	"name": "mythemeshop/rank-math",
+	"description": "A complete seo package",
+	"keywords": [ "wordpress", "plugin" ],
+	"homepage": "https://rankmath.com",
+	"type": "wordpress-plugin",
+	"license": "GPL-3.0",
+	"authors": [
+		{
+			"name": "Shakeeb Ahmed",
+			"email": "me@shakeebahmed.com"
+		}
+	],
+	"require": {
+		"a5hleyrich/wp-background-processing": ">=1.0",
+		"mythemeshop/wordpress-helpers": ">=1.0.12",
+		"cmb2/cmb2": "^2.7"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"RankMath\\": "includes/"
+		},
+		"classmap" : [ "includes/" ],
+		"files": [ "vendor/cmb2/cmb2/init.php", "includes/template-tags.php" ]
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"require-dev": {
+	}
+}

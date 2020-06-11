@@ -1,0 +1,38 @@
+// compileCompressed: ../css/$1.css
+
+/*!
+ * Plugin:	Rank Math
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	setup-wizard.css
+ */
+
+// Common and Vendors
+@import "../../vendor/bourbon/bourbon";
+@import "variables";
+@import "mixins";
+
+%header-icon {
+	margin-right: 5px;
+	padding: 4px;
+
+	vertical-align: -3px;
+
+	color: #fff;
+	border-radius: 50%;
+	background: $success;
+}
+
+@import "partials/wizard/page";
+@import "partials/wizard/common";
+@import 'partials/wizard/buttons';
+@import "partials/wizard/navigation";
+@import 'partials/wizard/requirements';
+@import 'partials/wizard/import';
+@import 'partials/wizard/your-site';
+@import 'partials/wizard/searchconsole';
+@import 'partials/options/search-console';
+@import 'partials/wizard/optimization';
+@import 'partials/wizard/ready';
+@import "partials/wizard/register";
+@import 'partials/wizard/responsive';
+@import 'partials/wizard/rtl';

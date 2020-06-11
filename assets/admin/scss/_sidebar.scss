@@ -1,0 +1,37 @@
+// compileCompressed: ../css/$1.css
+
+@import '../../vendor/bourbon/bourbon';
+@import 'mixins';
+@import 'variables';
+
+// @import '1sidebar';
+
+// Common
+@import 'sidebar/panel';
+@import '_font-icons';
+@import 'sidebar/tabs';
+@import 'sidebar/button';
+@import 'sidebar/tooltip';
+@import 'sidebar/modal';
+@import 'sidebar/variable-dropdown';
+
+// Toolbar
+@import 'sidebar/toolbar-score';
+
+// General
+@import 'sidebar/focus-keyword';
+@import 'sidebar/checklist';
+
+// Serp Preview
+@import 'partials/metabox/serp-noindex';
+@import 'sidebar/serp-preview';
+@import 'sidebar/social-preview';
+
+// Editor
+@import 'sidebar/editor';
+
+// Review
+@import 'sidebar/review';
+
+// Publish Action
+@import 'sidebar/post-publish';

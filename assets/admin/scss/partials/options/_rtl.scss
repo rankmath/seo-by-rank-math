@@ -1,0 +1,35 @@
+// main: ../../option-panel.scss
+
+body.rtl {
+	.rank-math-tabs-navigation:not(.rank-math-custom) {
+		a {
+			border-right-width: 1px;
+			border-left-width: 0;
+
+			.rm-icon {
+				float: right;
+				margin-right: 0;
+				margin-left: 10px;
+			}
+
+			&.active {
+				border-left: 0;
+				border-right: 3px solid;
+
+				&:after {
+					right: auto;
+					left: -1px;
+				}
+			}
+
+			&:last-child {
+				border-radius: 0 0 6px 0;
+			}
+		}
+
+		.separator {
+			border-left: 0;
+			border-right: 1px solid #b5bfc9;
+		}
+	}
+}

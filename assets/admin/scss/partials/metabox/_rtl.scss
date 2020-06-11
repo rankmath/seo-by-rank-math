@@ -1,0 +1,164 @@
+// main: ../../metabox.scss
+body.rtl {
+	.#{$namespace}-metabox-wrap {
+		.#{$namespace}-tabs-navigation:not(.social-tabs-navigation) {
+			a {
+				float: right;
+
+				.rm-icon {
+					float: right;
+					margin-right: 0;
+					margin-left: 6px;
+				}
+
+				&[href='#setting-panel-askreview'] {
+					float: left;
+				}
+			}
+		}
+	}
+
+	.serp-preview {
+		 .group .serp-close {
+			left: 10px;
+			right: auto;
+		}
+
+		.#{$namespace}-variables-wrap input, .#{$namespace}-variables-wrap textarea {
+			padding-right: .6em!important;
+			padding-left: 50px;
+		}
+	}
+
+	.length-indicator-wrapper {
+		.length-count {
+			left: 0;
+			right: auto;
+		}
+
+		.length-indicator {
+			left: 60px;
+			right: auto;
+		}
+	}
+
+	.tag-editor {
+		padding: 7px 10px 7px 80px;
+
+		> li {
+			float: right;
+
+			margin-right: 0;
+			margin-left: 10px;
+
+			&:nth-child(2):before {
+				right: -6px;
+				left: auto;
+			}
+		}
+
+		div {
+			float: right;
+		}
+
+		&-hidden-src {
+			right: -99999px;
+		}
+	}
+
+	.#{$namespace}-tab .tagify {
+		padding: 5px 5px 5px 105px;
+
+		&__tag {
+			padding: 4px 10px 4px 6px;
+		}
+
+		&__tag:first-child .tagify__tag-text:before {
+			margin: 0 0 0 5px;
+		}
+
+		&__tag__removeBtn {
+			margin: 0 4px 0 0;
+		}
+	}
+
+	.#{$namespace}-seo-score {
+		right: auto;
+		left: 1px;
+		border-radius: 3px 0 0 3px;
+	}
+
+	.#{$namespace}-serp-checklist .group-handlediv {
+		right: auto;
+		left: 10px;
+	}
+
+	.#{$namespace}-rank-math-checklist  {
+		&.state-closed .group-status {
+			float: right;
+
+			&:before {
+				margin: 0 0 0 10px;
+			}
+		}
+
+		.#{$namespace}-group-score {
+			margin: 0 10px 0 0;
+		}
+
+		li {
+			padding-left: 0;
+			padding-right: 30px;
+
+			&:before {
+				float: right;
+				margin: 4px -30px 0 10px;
+			}
+		}
+	}
+
+	.#{$namespace}-primary-term-li {
+		.#{$namespace}-make-primary, .text-primary {
+			right: auto;
+			left: 0;
+		}
+
+		.#{$namespace}-tooltip {
+			right: auto;
+			left: 0;
+
+			> span {
+				right: auto;
+				left: 32px;
+				transform: translate3d(70%, -50%, 0);
+
+				&:after {
+					left: -8px;
+					right: auto;
+					top: 30%;
+					transform: rotate(180deg);
+				}
+			}
+
+			&:hover {
+				> span {
+					transform: translate3d(0, -50%, 0);
+				}
+			}
+		}
+	}
+
+	.suggestion-item .suggestion-actions {
+		float: left;
+
+		margin-right: 5px;
+	}
+
+	input[type=checkbox]:checked:before {
+		margin: -3px;
+	}
+
+	.postbox-container #side-sortables {
+		overflow: hidden;
+	}
+}

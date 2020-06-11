@@ -1,0 +1,30 @@
+// main: ../../metabox.scss
+
+#rank_math_metabox {
+	.inside {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.#{$namespace}-metabox-frame {
+	position: relative;
+
+	min-width: 255px;
+	max-width: 1000px;
+	margin-bottom: 25px;
+
+	border: 1px solid $gray;
+	background: #fff;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+
+	&-title {
+		font-size: 14px;
+		line-height: 1.4;
+
+		margin: 0;
+		padding: 8px 12px;
+
+		border-bottom: 1px solid $gray;
+	}
+}

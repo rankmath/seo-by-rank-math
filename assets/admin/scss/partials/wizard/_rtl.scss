@@ -1,0 +1,104 @@
+// main: ../../setup-wizard.scss
+
+body.rtl {
+	&.#{$namespace}-wizard-body--requirements {
+		.#{$namespace}-collapsible-trigger {
+			display: inline-block;
+
+			margin-right: 10px;
+			margin-left: 0;
+			padding: 0 5px 0 12px;
+		}
+
+		h2 {
+			> .dashicons {
+				margin-right: 0;
+				margin-left: 5px;
+			}
+		}
+
+		.form-table {
+			td:last-child {
+				text-align: left;
+			}
+		}
+
+		.form-footer {
+			.button {
+				.dashicons-arrow-right-alt2:before {
+					content: '\f341';
+				}
+			}
+		}
+	}
+
+	.wizard-navigation {
+		.step-label + a:after {
+			-webkit-transform: translate(20%, 23px);
+			transform: translate(20%, 23px);
+		}
+
+		a:after {
+			-webkit-transform: translate(50%, 23px);
+			transform: translate(50%, 23px);
+		}
+	}
+
+	.return-to-dashboard a .dashicons-arrow-left-alt2:before {
+		content: '\f345';
+	}
+
+	&.rank-math-wizard .form-footer:not(.rank-math-custom) .button-secondary {
+		margin-right: 0;
+		margin-left: 10px;
+	}
+
+	&.#{$namespace}-wizard-body--ready {
+		.cmb-form > header .dashicons-yes {
+			margin-right: 0;
+			margin-left: 5px;
+		}
+
+		.wizard-share {
+			margin-right: 10px;
+			margin-left: 0;
+
+			a {
+				display: inline-block;
+
+				margin-right: 5px;
+				margin-left: 0;
+				padding-right: 15px;
+				padding-left: 20px;
+			}
+
+			.dashicons {
+				margin-right: 0 !important;
+				margin-left: 5px !important;
+			}
+		}
+
+		.wizard-next-steps {
+			> div {
+				float: right;
+			}
+
+			.learn-more {
+				padding-right: 35px;
+				padding-left: 0;
+
+				.dashicons {
+					margin-right: 0;
+					margin-left: 13px;
+				}
+			}
+		}
+
+		.rank-math-score-wrapper {
+			.switch {
+				margin-left: 0;
+				margin-right: 15px;
+			}
+		}
+	}
+}

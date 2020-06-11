@@ -1,0 +1,611 @@
+// compileCompressed: $1.css
+/*!
+ * Plugin:	Rank Math - SEO Analysis
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	seo-analysis.css
+ */
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/variables';
+
+.#{$namespace} {
+	&-seo-analysis-wrap {
+		width: 1120px;
+		max-width: 100%;
+		box-sizing: border-box;
+		margin-top: 20px;
+
+		header {
+			background: #fff;
+			border-radius: 6px 6px 0 0;
+			margin-bottom: 0;
+			border-bottom: 0;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+
+			h2 {
+				margin: 10px 0 0;
+
+				.button {
+					vertical-align: 2px;
+					margin-left: 10px;
+				}
+			}
+		}
+
+		.progress-bar,
+		.progress {
+			height: 4px;
+
+			border-radius: 3px;
+			background: #e9e9ea;
+
+			label {
+				display: block;
+
+				padding-top: 6px;
+
+				color: rgba(#75797f,.6);
+			}
+		}
+
+		.progress {
+			width: 0;
+
+			background: linear-gradient(-135deg, #ff4492, #434e8f);
+		}
+	}
+
+	&-analyzer-result {
+		background: #f9f9f9;
+		border-radius: 0 0 6px 6px;
+	}
+
+	&-results-wrapper {
+	}
+
+	&-seo-analysis-header {
+		padding: 30px;
+
+		text-align: center;
+
+		h2,
+		.progress-bar {
+			display: none;
+		}
+
+		h2 {
+			font-size: 2em;
+		}
+	}
+
+	&-result-graphs {
+		text-align: center;
+		padding-bottom: 1.825rem;
+
+		.rank-math-recheck {
+			margin-top: 50px;
+		}
+
+		.graphs-main,
+		.graphs-side {
+			box-sizing: border-box;
+			padding: 35px 20px 20px;
+
+			border: 1px solid $gray;
+			border-radius: 3px;
+			background: #fff;
+			flex: 1;
+		}
+
+		.graphs-main {
+			flex: 0 0 30%;
+		}
+
+		.graphs-side {
+			margin-left: 3%;
+		}
+
+		.result-score {
+			display: inline-block;
+
+			width: 160px;
+			padding-top: 20px;
+
+			strong {
+				font-size: 24px;
+				font-weight: 700;
+			}
+
+			label {
+				font-size: 15px;
+
+				display: block;
+
+				padding-top: 5px;
+
+				color: #75797f;
+			}
+		}
+	}
+
+	// OLD
+	&-analyze-url {
+		display: none;
+
+		width: 300px;
+	}
+
+	&-changeurl-ok.button {
+		display: none;
+	}
+}
+
+.is-loading {
+	.#{$namespace}-recheck,
+	.#{$namespace}-results-wrapper {
+		display: none;
+	}
+
+	.#{$namespace}-seo-analysis-header {
+		display: block;
+
+		h2,
+		.progress-bar {
+			display: block;
+		}
+	}
+}
+
+.is-loaded .#{$namespace}-seo-analysis-header {
+	display: none;
+}
+
+@-webkit-keyframes drawchart {
+	0% {
+		height: 0;
+	}
+}
+@keyframes drawchart {
+	0% {
+		height: 0;
+	}
+}
+
+#rank-math-circle-progress {
+	position: relative;
+
+	strong {
+		font-size: 5em;
+		font-weight: 700;
+
+		width: 100%;
+		transform: translateY(-50%);
+		text-align: center;
+
+		@include position( absolute, 50% null null 0 );
+	}
+}
+.score-good {
+	color: $success;
+}
+
+.score-average {
+	color: $warning;
+}
+
+.score-bad {
+	color: #ed6a5e;
+}
+
+.status-ok,
+.chart .chart-bar-good span {
+	background: $success;
+}
+
+.status-warning,
+.chart .chart-bar-average span {
+	background: $warning;
+}
+
+.status-fail,
+.chart .chart-bar-bad span {
+	background: #ed6a5e;
+}
+
+.chart {
+	display: table;
+
+	width: 100%;
+	margin: 0;
+
+	table-layout: fixed;
+
+	border-bottom: 1px solid $gray;
+	background-image: radial-gradient(circle, $gray 1px, transparent 1px);
+	background-size: 6px 50px;
+
+	li {
+		position: relative;
+
+		display: table-cell;
+
+		height: 211px;
+
+		vertical-align: bottom;
+	}
+
+	span {
+		display: block;
+
+		width: 60px;
+		margin: auto;
+
+		-webkit-animation: drawchart 1s ease-in-out;
+				animation: drawchart 1s ease-in-out;
+
+		background: rgba(209, 236, 250, .75);
+	}
+
+	.result-score {
+		position: absolute;
+		top: 100%;
+		left: 0;
+
+		width: 100%;
+	}
+}
+
+// Table
+.#{$namespace}-result {
+	&-tables {
+		background: #fff;
+		margin: 0 -1.875rem -1.875rem;
+		padding: 1.875rem;
+		border-top: 1px solid $gray;
+		border-radius: 0 0 6px 6px;
+	}
+
+	&-table {
+		padding: 30px 0 0;
+
+		&:first-of-type {
+			padding-top: 0;
+		}
+
+		&:last-of-type {
+			padding-bottom: 30px;
+		}
+
+		.category-title {
+			color: $text;
+			font-size: 16px;
+			font-weight: 600;
+			padding: 11px 20px;
+			background: #f9f9f9;
+			border-radius: 6px 6px 0 0;
+			border: 1px solid $light_gray;
+		}
+
+		.table-row {
+			display: table;
+
+			width: 100%;
+
+			table-layout: fixed;
+
+			border: 1px solid $light_gray;
+			border-top: 0;
+			box-sizing: border-box;
+
+			&:last-of-type {
+				border-radius: 0 0 6px 6px;
+			}
+		}
+
+		.row-title,
+		.row-description {
+			display: table-cell;
+
+			padding: 15px 20px;
+			position: relative;
+		}
+
+		.row-title {
+			width: 26%;
+
+			vertical-align: top;
+
+			h3 {
+				font-size: 14px;
+
+				display: inline-block;
+
+				margin: 0;
+			}
+		}
+
+		.row-content {
+			font-size: 14px;
+
+			position: relative;
+
+			padding-left: 40px;
+
+			code {
+				background: #f2f3f5;
+				display: inline-block;
+				padding: 0 3px;
+				border-radius: 3px;
+
+				&.full-width {
+					display: block;
+					padding: 10px;
+					margin-top: 10px;
+					border-radius: 4px;
+				}
+			}
+		}
+
+		.auto-update-disabled {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+
+			&.hidden {
+				display: none;
+			}
+		}
+
+		.enable-auto-update {
+			margin-top: -3px;
+		}
+	}
+}
+
+.#{$namespace}-tooltip {
+	em {
+		color: $gray;
+	}
+
+	&:hover {
+		em {
+			color: $primary;
+		}
+
+		span {
+			bottom: 130%;
+
+			opacity: 1;
+		}
+	}
+}
+
+// Status Icon
+.status-icon {
+	position: absolute;
+
+	color: #fff;
+	border: 1px solid transparent;
+	border-radius: 50em;
+	top: 13px;
+
+	&.status-info {
+		background: $primary;
+	}
+}
+
+.how-to-fix-wrapper {
+	ul {
+		clear: both;
+
+		margin-top: 0;
+		margin-bottom: 0;
+		margin-left: 15px;
+
+		list-style-type: disc;
+	}
+}
+
+.analysis-test-how-to-fix,
+.how-to-fix-wrapper {
+	transition: all 200ms linear;
+
+	.result-action {
+		display: none;
+	}
+}
+
+.result-action {
+	float: right;
+
+	&:after {
+		font-family: dashicons;
+		font-size: 20px;
+		line-height: 1;
+
+		display: inline-block;
+
+		content: '\f140';
+		vertical-align: -6px;
+
+		@include size( 20px, 15px );
+
+		@at-root .expanded & {
+			content: '\f142';
+		}
+	}
+
+	@at-root .expanded &,
+	&:hover {
+		color: #fff;
+		border-color: $primary;
+		background: $primary;
+	}
+}
+
+.analysis-test-how-to-fix {
+	line-height: 1.5;
+
+	display: none;
+
+	margin: 22px auto 0;
+	padding: 15px;
+	color: darken( $dark_gray, 10 );
+	background: #f9f9f9;
+	border-radius: 6px;
+
+	pre {
+		margin: 0;
+		padding: 0;
+
+		color: inherit;
+		background: transparent;
+	}
+
+	p:first-of-type {
+		margin-top: 0;
+	}
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+
+	// Expanded
+	@at-root .expanded & {
+		display: block;
+	}
+}
+
+.serp-preview {
+	margin-top: 10px;
+	margin-left: -10px;
+	padding: 20px;
+
+	background: #fff;
+
+	// Text
+	.serp-description,
+	.serp-title,
+	.serp-url {
+		font-family: arial, sans-serif;
+
+		position: relative;
+		z-index: 1;
+
+		display: block;
+		overflow: hidden;
+
+		max-width: 630px;
+		margin: 0;
+
+		cursor: pointer;
+	}
+
+	.serp-title {
+		font-size: 18px;
+		font-weight: normal;
+		line-height: 19px;
+
+		white-space: nowrap;
+		text-overflow: ellipsis;
+
+		color: #1a0dab;
+	}
+
+	.serp-url {
+		font-size: 14px;
+		line-height: 16px;
+
+		margin: 3px 0 5px;
+
+		color: #006621;
+	}
+
+	.serp-description {
+		font-size: 13px;
+		line-height: 1.4;
+
+		word-wrap: break-word;
+
+		color: #545454;
+	}
+}
+
+.keyword-cloud-item {
+	display: inline-block;
+
+	padding: 4px;
+
+	vertical-align: middle;
+}
+
+.info-list {
+	padding: 4px;
+
+	background: #f2f3f5;
+	border-radius: 6px;
+
+	li {
+		font-family: Consolas, Monaco, monospace;
+		font-size: 13px;
+
+		margin: 0 1px;
+		padding: 3px 6px 2px;
+
+		direction: ltr;
+		overflow-wrap: break-word;
+		unicode-bidi: embed;
+	}
+}
+
+body.rtl {
+	.#{$namespace}-result-table .row-content {
+		padding-right: 40px;
+		padding-left: 0;
+	}
+
+	.result-action {
+		float: left;
+
+		margin-right: 10px;
+		margin-left: 0;
+		padding-right: 12px;
+		padding-left: 6px;
+	}
+}
+
+.#{$namespace}-seo-analysis-wrap {
+	@media screen and (max-width: 782px) {
+		.graphs-main,
+		.graphs-side {
+			margin: 0;
+			flex: 0 0 100%;
+		}
+
+		.graphs-side {
+			padding-bottom: 75px;
+
+			border-top: 0;
+		}
+
+		.chart li {
+			height: 170px;
+		}
+
+		.info-list {
+			overflow: scroll;
+		}
+	}
+
+	@media screen and (max-width: 595px) {
+		.#{$namespace}-result-table {
+			.row-title,
+			.row-description {
+				display: block;
+				box-sizing: border-box;
+				width: 100%;
+			}
+		}
+	}
+}

@@ -1,0 +1,156 @@
+// main: ../../common.scss
+.rank-math-tabs > .cmb-row.tab-header {
+	background: #f8f9fa;
+	padding: 30px;
+	text-align: center;
+	border: 1px solid $gray;
+	border-bottom: 0;
+	border-radius: 6px 6px 0 0;
+	display: block !important;
+
+	.rank-math-notice {
+		margin: 1rem 0 0;
+	}
+}
+
+.#{$namespace}-tabs-navigation:not(.rank-math-custom) {
+	float: left;
+	width: 200px;
+
+	a {
+		font-size: 15px;
+		position: relative;
+		display: block;
+		box-sizing: border-box;
+		padding: 11px 15px;
+		text-decoration: none;
+		color: #5b6065;
+		border: solid $gray;
+		border-width: 1px 0 0 1px;
+		outline: none;
+		background: #f8f9fa;
+		box-shadow: none;
+		transition: 0.2s all linear;
+
+		.rm-icon, .dashicons {
+			font-size: 14px;
+			min-width: 20px;
+			margin-right: 10px;
+			vertical-align: -1px;
+			text-align: center;
+		}
+
+		&.active,
+		&:focus,
+		&:hover {
+			color: $primary;
+			background: #fff;
+			border-left: 3px solid;
+		}
+
+		&.active {
+			&:after {
+				position: absolute;
+				top: 0;
+				right: -1px;
+				width: 1px;
+				height: 100%;
+				content: '';
+				background: #fff;
+			}
+		}
+
+		&:last-child {
+			border-bottom: 1px solid $gray;
+			border-radius: 0 0 0 6px;
+		}
+	}
+
+	.separator {
+		background: #e9ecef;
+	}
+}
+
+.#{$namespace}-tabs-content:not(.rank-math-custom) {
+	overflow: hidden;
+	box-sizing: border-box;
+	min-height: 400px;
+	margin-bottom: 20px;
+	padding: 30px;
+	border: 1px solid $gray;
+	border-radius: 0;
+	background: #fff;
+
+	.tab-header {
+		display: none !important;
+	}
+}
+
+.#{$namespace}-tab {
+	h3:first-of-type {
+		margin-top: 0;
+	}
+
+	.cmb-type-title:first-of-type {
+		padding-top: 0;
+		text-align: center;
+		border-top: 0;
+	}
+
+	.cmb2-checkbox-list {
+		li {
+			display: inline-block;
+			width: 49%;
+		}
+	}
+
+	.cmb2-checkbox-list {
+		li {
+			display: inline-block;
+			width: 49%;
+		}
+	}
+
+	.cmb-advanced-robots-list {
+		li {
+			display: inline-block;
+			box-sizing: border-box;
+			width: 33%;
+			padding: 0 1% 0 0;
+
+			&:last-child {
+				padding-right: 0;
+			}
+
+			label {
+				display: inline-block;
+				margin-bottom: 5px;
+
+				input[type='checkbox'] {
+					margin-right: 2px;
+				}
+			}
+
+			.rank-math-tooltip {
+				margin-left: 3px;
+			}
+		}
+	}
+}
+
+.form-footer:not(.rank-math-custom) {
+	border: 1px solid $gray;
+	border-top: 0;
+	border-radius: 0 0 6px 6px;
+}
+
+// Help Page.
+##{$namespace}-help-wrapper.#{$namespace}-tabs {
+	.#{$namespace}-tabs-content {
+		border-radius: 0 0 6px 6px;
+
+		img {
+			max-width: 100%;
+		}
+	}
+}

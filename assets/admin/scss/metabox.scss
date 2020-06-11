@@ -1,0 +1,32 @@
+// compileCompressed: ../css/$1.css
+
+/*!
+ * Plugin:	Rank Math
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	metabox.css
+ */
+
+// Common and Vendors
+@import "../../vendor/bourbon/bourbon";
+@import "variables";
+@import "mixins";
+
+$color-blue: #00a0d2;
+$color-good: #79c979;
+$color-good-dark: #52a652;
+$color-ok: #ffbe5f;
+$color-ok-dark: #e59901;
+$color-bad: #f29c96;
+$color-bad-dark: #f0776f;
+$browser: ( "webkit" );
+$all-browser: ( "webkit", "moz", "ms" );
+
+@import "partials/metabox/frame";
+@import "partials/metabox/tabs";
+@import "partials/metabox/serp-preview";
+@import "partials/metabox/serp-noindex";
+@import "partials/metabox/rich-snippet";
+@import "partials/metabox/suggestion";
+@import "partials/metabox/rtl";
+@import "partials/metabox/askreview";
+@import 'sidebar/tagify';

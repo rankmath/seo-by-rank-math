@@ -1,0 +1,126 @@
+// main: ../../setup-wizard.scss
+
+.#{$namespace}-collapsible {
+	&-trigger {
+		letter-spacing: 0.5px;
+
+		.dashicons {
+			font-size: 16px;
+			vertical-align: top;
+			display: inline-block;
+			width: 47px;
+
+			&:before {
+				vertical-align: -1px;
+			}
+
+			span {
+				font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;
+				font-size: 12px;
+				vertical-align: 3px;
+				color: rgba(#24292e,.65);
+			}
+		}
+
+		.dashicons-arrow-up-alt2 {
+			display: none;
+		}
+
+		&.open {
+			.dashicons-arrow-up-alt2 {
+				display: inline-block;
+			}
+
+			.dashicons-arrow-down-alt2 {
+				display: none;
+			}
+		}
+	}
+
+	&-content {
+		display: none;
+
+		&.open {
+			display: block;
+		}
+	}
+}
+
+.return-to-dashboard {
+	margin-bottom: 50px;
+	text-align: center;
+
+	a {
+		font-size: 14px;
+		display: inline-block;
+		text-align: center;
+		text-decoration: none;
+		color: $dark_gray;
+		border-bottom: 1px dotted;
+
+		&:hover {
+			color: $primary;
+			border-color: $primary;
+		}
+	}
+	/* Applies styles when Reduced Motion is enabled */
+	@media screen and (prefers-reduced-motion: reduce) {
+		opacity: 1 !important;
+	}
+}
+
+.cmb2-wrap .cmb-row.features-child {
+	margin-top: -5px;
+	padding: 25px 20px!important;
+	border-bottom-color: #f8f9fa;
+	background: #f8f9fa;
+}
+
+.responsive-video {
+	position: relative;
+	overflow: hidden;
+	padding-top: 56.25%;
+
+	iframe {
+		border: 0;
+		@include size(100%);
+		@include position(absolute, 0);
+	}
+}
+
+.cmb-row.cmb-multicheck-inline {
+	&.with-description .cmb2-metabox-description,
+	.cmb2-checkbox-list,
+	.cmb2-checkbox-list li {
+		display: inline-block;
+		width: 48%;
+		vertical-align: top;
+	}
+
+	.cmb2-checkbox-list {
+		width: 420px;
+		max-width: 100%;
+	}
+
+	&.with-description {
+		.cmb-td {
+			width: 100%;
+		}
+
+		.cmb2-checkbox-list {
+			padding-top: 20px;
+		}
+
+		.cmb2-metabox-description {
+			font-size: 15px;
+			line-height: 1.5;
+			padding: 0;
+			color: #21262c;
+		}
+	}
+}
+
+[id^='cmb2-metabox-rank'] select {
+	padding-top: 0;
+	padding-bottom: 0;
+}

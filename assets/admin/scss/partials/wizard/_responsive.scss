@@ -1,0 +1,106 @@
+// main: ../../setup-wizard.scss
+
+// Responsiveness
+.#{$namespace}-wizard {
+	@media screen and (max-width: 905px) {
+		#cmb2-metabox-rank-math-wizard .cmb2-id-console-authorization-code .button-primary,
+		#cmb2-metabox-rank-math-wizard .cmb2-id-console-profile .button-primary {
+			display: block;
+
+			margin-top: 10px;
+			margin-left: 0;
+		}
+
+		.cmb-row.cmb-multicheck-inline.with-description .cmb2-metabox-description {
+			width: 100%;
+			margin-top: 20px;
+		}
+	}
+	@media screen and (max-width: 782px) {
+		.wizard-navigation a:before {
+			font-size: 12px;
+		}
+
+		.cmb2-wrap .cmb-row input[type=checkbox]:checked:before {
+			font-size: 30px;
+		}
+
+		#rank-math-compatibility-collapsible .form-table {
+			th,
+			td {
+				display: table-cell;
+			}
+		}
+		@media screen and (max-width: 640px) {
+			.logo img {
+				width: 190px;
+			}
+
+			.wrapper {
+				padding: 30px 15px 35px;
+			}
+
+			.form-footer {
+				margin-top: 15px;
+			}
+
+			.cmb2-wrap .cmb-row .regular-text,
+			#cmb2-metabox-rank-math-wizard select {
+				width: 100%;
+				max-width: 100%;
+			}
+
+			.form-footer:not(.rank-math-custom) {
+				text-align: center;
+			}
+		}
+		@media screen and (max-width: 595px) {
+			.wizard-navigation {
+				margin: 25px auto 50px;
+
+				a:before {
+					display: none;
+				}
+
+				a:first-child:before {
+					position: relative;
+					z-index: 1;
+
+					display: block;
+
+					margin-top: -7px;
+
+					background: #fff;
+				}
+
+				a:after {
+					top: -12px;
+				}
+			}
+
+			&.#{$namespace}-wizard .cmb-form > header {
+				h1 {
+					font-size: 24px;
+				}
+				p {
+					margin-top: 10px;
+				}
+			}
+
+			&.#{$namespace}-wizard-body--ready {
+				.wizard-share {
+					margin-top: 25px;
+				}
+
+				.wizard-next-steps {
+					margin: 25px 0 0;
+
+					> div {
+						width: 100%;
+						padding: 0 0 25px;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,7 @@
+// compileCompressed: ../css/$1.css
+
+@import '../../vendor/bourbon/bourbon';
+@import 'mixins';
+@import 'variables';
+
+@import "sidebar";

@@ -1,0 +1,68 @@
+// main: ../sidebar.scss
+%flex{
+	@include flex;
+}
+
+.#{$namespace}-post-publish {
+    h2 button.components-button {
+        -webkit-text-fill-color: transparent;
+        background: linear-gradient(to right, #414ea7 0%, #bb3eb1 40%);
+       -webkit-background-clip: text;
+
+       &:hover {
+        -webkit-text-fill-color: initial;
+        -webkit-background-clip: initial;
+       }
+    }
+
+    p {
+        margin-top: 0;
+    }
+
+    .#{$namespace}-social-share-buttons {
+        @extend %flex;
+    }
+
+    .#{$namespace}-share-button {
+        font-size: 22px;
+        flex-grow: 1;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #D14836;
+        margin-right: 5px;
+        border-radius: 30px;
+        padding: 0;
+
+		transition: 0.2s all linear;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        a {
+            color: inherit;
+            display: block;
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        svg {
+            vertical-align: -2px;
+        }
+
+        &.rm-facebook {
+            background: #1877F2;
+        }
+
+        &.rm-twitter {
+            background: #1DA1F2;
+        }
+    }
+}

@@ -1,0 +1,463 @@
+// compileCompressed: $1.css
+
+/*!
+ * Plugin:	Rank Math - Search Console
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	search-console.css
+ */
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/variables';
+
+.rank-math-review-items {
+	display: flex;
+
+	width: 100%;
+	margin-top: 30px;
+	margin-left: -15px;
+
+	.rank-math-review-item {
+		position: relative;
+		box-sizing: border-box;
+		width: 50%;
+		min-height: 1px;
+		margin-left: 16px;
+		padding: 16px;
+
+		cursor: pointer;
+
+		border: 1px solid #ccc;
+		background-color: #fff;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+		flex: 1;
+
+		.rank-math-review-text {
+			overflow: hidden;
+		}
+
+		h3 {
+			margin-top: 0;
+			margin-bottom: 8px;
+		}
+
+		&:hover {
+			.rank-math-review-icon {
+				color: #555;
+			}
+		}
+	}
+
+	.rank-math-review-icon {
+		font-size: 70px;
+
+		position: relative;
+
+		float: left;
+
+		margin-right: 20px;
+
+		text-align: center;
+
+		color: #ccc;
+
+		.error-status {
+			font-size: 22px;
+
+			position: absolute;
+			top: 12px;
+			left: 50%;
+			transform: translate( -50%, 0 );
+
+			&.fa-exclamation-circle {
+				color: #f00;
+			}
+		}
+	}
+
+	.rank-math-errors-smartphone {
+		.rank-math-review-icon {
+			i:first-child {
+				font-size: 96px;
+				line-height: 76px;
+			}
+		}
+		.error-status {
+			top: 24px;
+		}
+	}
+
+	.rank-math-review-counts {
+		a {
+			display: block;
+
+			text-decoration: none;
+
+			&:first-child {
+				font-weight: 700;
+
+				margin-bottom: 10px;
+			}
+		}
+	}
+}
+
+.rank-math-search-console-analytics {
+	.tablenav.top {
+		margin-top: 20px;
+	}
+
+	.widefat td {
+		padding: 10px;
+	}
+}
+
+.compare-value {
+	font-size: 14px;
+	font-weight: 600;
+
+	small {
+		font-size: 12px;
+
+		display: inline-block;
+
+		padding-left: 4px;
+	}
+
+	.dashicons {
+		font-size: 16px;
+
+		vertical-align: middle;
+	}
+}
+
+.value-down {
+	small,
+	.dashicons {
+		color: #bf2a19;
+	}
+}
+
+.value-up {
+	small,
+	.dashicons {
+		color: #3f8639;
+	}
+}
+
+.rank-math-row {
+	display: flex;
+	overflow: hidden;
+
+	margin: 20px auto;
+
+	border: 1px solid #ccc;
+	background: #fff;
+	flex-flow: row wrap;
+
+	.column {
+		padding: 25px 40px;
+
+		cursor: pointer;
+
+		border-right: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+		flex-grow: 1;
+		-ms-flex-positive: 1;
+
+		header {
+			font-size: 13px;
+			font-weight: 600;
+
+			display: block;
+
+			margin-bottom: 5px;
+
+			color: #999;
+		}
+
+		header + strong {
+			font-size: 3em;
+			line-height: 1;
+
+			display: block;
+
+			color: #777;
+		}
+
+		&.fullwidth {
+			max-width: 100%;
+
+			border: 0;
+		}
+
+		&.halfwidth {
+			max-width: 50%;
+
+			border: 0;
+
+			h3 {
+				margin: 0;
+			}
+		}
+	}
+
+	.break {
+		display: block;
+
+		width: 100%;
+		height: 0;
+	}
+}
+
+.search-console-analysis-overview {
+	.compare-value {
+		small {
+			font-size: 22px;
+
+			padding-right: 4px;
+			padding-left: 10px;
+		}
+
+		.dashicons {
+			vertical-align: bottom;
+		}
+	}
+}
+
+.rank-math-date-selector-container {
+	overflow: hidden;
+
+	margin-top: 20px;
+	padding: 10px;
+
+	text-align: right;
+
+	border-radius: 2px;
+	background: #337ab7;
+	box-shadow: 0 1px 1px rgba(0,0,0,.2);
+
+	+ .wp-header-end + .rank-math-notice,
+	+ .wp-header-end + .notice {
+		margin-top: 20px;
+	}
+
+	strong,
+	a {
+		font-size: 14px;
+
+		display: block;
+		float: left;
+
+		margin-top: 1px;
+		margin-right: 5px;
+		padding: 6px 15px;
+
+		text-decoration: none;
+		letter-spacing: .03em;
+
+		color: #fff;
+		border-radius: 4px;
+	}
+
+	strong {
+		font-size: 18px;
+
+		margin-top: 0;
+		margin-right: 10px;
+	}
+
+	a.active,
+	a:hover {
+		background-color: rgba(0,0,0,.2);
+	}
+
+	form {
+		position: relative;
+
+		float: right;
+		width: 100%;
+		padding: 15px 15px 0;
+		box-sizing: border-box;
+	}
+
+	@at-root .rank-math-search-console-overview .rank-math-date-selector-container form .input-group {
+		float: left;
+	}
+
+	input,
+	select {
+		line-height: 1;
+
+		width: 15em;
+		height: auto;
+		margin: 0 1px;
+		padding: 5px 10px;
+
+		vertical-align: initial;
+
+		border: 0;
+		border-radius: 2px;
+		background: #fff;
+		box-shadow: none;
+
+		float: left;
+	}
+	select {
+		width: 10em;
+		padding: 4px 10px;
+		height: 27px;
+	}
+
+	.input-group {
+		position: relative;
+
+		display: inline-block;
+
+		input {
+			width: 280px;
+			padding-left: 40px;
+
+			cursor: pointer;
+		}
+	}
+	.dashicons {
+		position: absolute;
+		top: 5px;
+		left: 10px;
+	}
+}
+
+.search-console-analysis-nodata {
+	font-size: 14px;
+	font-weight: 600;
+
+	padding: 0 1em;
+}
+
+.search-console-analysis-tracker {
+	overflow: hidden;
+
+	margin-right: -20px;
+	margin-left: -20px;
+
+	> div {
+		overflow: hidden;
+
+		margin: 20px;
+		padding: 20px;
+
+		border: 1px solid #ccc;
+		background: #fff;
+
+		h3 {
+			margin: 0;
+		}
+	}
+
+	&-list {
+		float: left;
+
+		width: 60%;
+	}
+
+	ul {
+		li {
+			position: relative;
+
+			margin-bottom: 3px;
+			padding: 5px 0;
+
+			border-bottom: 1px solid #eaeaea;
+
+			&:last-of-type {
+				margin: 0;
+
+				border: 0;
+			}
+		}
+
+		a {
+			font-size: 11px;
+
+			position: absolute;
+			right: 0;
+		}
+	}
+
+	&-form {
+		form {
+			box-sizing: border-box;
+			margin-top: 5px;
+			margin-bottom: 20px;
+		}
+	}
+}
+
+.wp-list-table.errors {
+	.column-primary {
+		width: 50%;
+	}
+
+	&.striped > tbody > :nth-child(odd) {
+		.error-linked-urls {
+			background: #fff;
+		}
+	}
+
+	.error-linked-urls {
+		margin-top: 10px;
+		padding: 15px 20px 9px;
+
+		border: 1px solid $gray;
+		border-radius: 4px;
+		background: #f6f6f6;
+
+		ul {
+			margin: 0;
+		}
+	}
+}
+
+body.rtl {
+	.rank-math-date-selector-container {
+		strong {
+			float: right;
+
+			margin-right: 0;
+			margin-left: 10px;
+		}
+
+		a {
+			float: right;
+
+			margin-right: 0;
+			margin-left: 5px;
+		}
+
+		form {
+			float: left;
+
+			input, select {
+				float: right;
+			}
+
+			.input-group {
+				float: left;
+			}
+		}
+	}
+
+	.search-console-analysis-tracker-list {
+		float: right;
+
+		a {
+			right: auto;
+			left: 0;
+		}
+	}
+
+	.date-picker-wrapper .drp_top-bar .apply-btn {
+		right: auto;
+		left: 0;
+	}
+}

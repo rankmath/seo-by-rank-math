@@ -1,0 +1,74 @@
+/**
+ * WordPress dependencies
+ */
+import { __, sprintf } from '@wordpress/i18n'
+import { addFilter } from '@wordpress/hooks'
+
+class CommonFilters {
+	constructor() {
+		if ( ! rankMath.is_front_page ) {
+			return
+		}
+
+		addFilter(
+			'rankMath_analysis_contentLength',
+			'rank-math',
+			this.contentLength
+		)
+		addFilter(
+			'rankMath_analysis_contentLength_boundaries',
+			'rank-math',
+			this.contentLengthBoundary
+		)
+	}
+
+	/**
+	 * Change recommended content length text on homepage.
+	 *
+	 * @param  {Object} data Content Length Text.
+	 * @return {Object} Filtered Content Length Text.
+	 */
+	contentLength( data ) {
+		return {
+			hasScore: data.hasScore,
+			failed: __(
+				'Content is %1$d words long. Consider using at least 300 words.'
+			),
+			tooltipText: __(
+				'Minimum recommended content length should be 300 words.',
+				'rank-math'
+			),
+			emptyContent: sprintf(
+				__( 'Content should be %1$s long.', 'rank-math' ),
+				'<a href="https://s.rankmath.com/100contentlength" target="_blank">' +
+					__( '300 words', 'rank-math' ) +
+					'</a>'
+			),
+		}
+	}
+
+	/**
+	 * Change recommended content length boundaries on homepage.
+	 *
+	 * @param  {Object} data Contnt Length Boundaries.
+	 * @return {Object} Contnt Length Boundaries
+	 */
+	contentLengthBoundary( data ) {
+		return {
+			recommended: {
+				boundary: 299,
+				score: 8,
+			},
+			belowRecommended: {
+				boundary: 200,
+				score: 5,
+			},
+			low: {
+				boundary: 50,
+				score: 2,
+			},
+		}
+	}
+}
+
+export default CommonFilters

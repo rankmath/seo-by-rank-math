@@ -1,0 +1,55 @@
+// compileCompressed: $1.css
+/*!
+ * Plugin:	Rank Math - Role Manager
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	role-manager.css
+ */
+;
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/variables';
+
+.cmb-form {
+	> header {
+		margin: -1.875rem -1.875rem 30px;
+		padding: 1.875rem 1.875rem 0;
+		text-align: center;
+		border-bottom: 1px solid $gray;
+		border-radius: 6px 6px 0 0;
+		background: #f8f9fa;
+
+		h2 {
+			font-size: 30px;
+			font-weight: 500;
+			margin: 0;
+		}
+
+		> p {
+			font-size: 1rem;
+			max-width: 715px;
+			margin: 0 auto 2rem;
+		}
+
+		.notice p {
+			font-size: 13px;
+		}
+	}
+
+	> footer.form-footer {
+		margin: 30px -1.875rem -1.875rem;
+		padding: 1.875rem;
+		text-align: center;
+		border: 0;
+		border-top: 1px solid $gray;
+		border-radius: 0 0 6px 6px;
+		background: #f8f9fa;
+		overflow: hidden;
+		width: auto;
+	}
+}
+
+.cmb2-wrap .cmb-big-labels .cmb2-checkbox-list li {
+	@media (min-width: 1200px) {
+		width: 33.33%;
+	}
+}
