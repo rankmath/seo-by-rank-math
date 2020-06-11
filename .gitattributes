@@ -1,0 +1,44 @@
+# Standards for multi-platform colaboration
+
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text=auto
+
+*.php text eol=lf
+
+# Export Ignore Files
+.babelrc export-ignore
+.codeclimate.yml export-ignore
+.csscomb.json export-ignore
+.editorconfig export-ignore
+.eslintignore export-ignore
+.eslintrc export-ignore
+.gitattributes export-ignore
+.github export-ignore
+.gitignore export-ignore
+.phpcs.xml.dist export-ignore
+.prettierrc export-ignore
+.travis.yml export-ignore
+composer.json export-ignore
+composer.lock export-ignore
+gulpfile.js export-ignore
+multisite.xml.dist export-ignore
+package-lock.json export-ignore
+package.json export-ignore
+phpmd.xml export-ignore
+phpunit.xml export-ignore
+webpack.config.js export-ignore
+
+# Export Ignore Folders
+assets/admin/scss export-ignore
+assets/admin/src export-ignore
+assets/front/scss export-ignore
+assets/vendor/bourbon export-ignore
+vendor/cmb2/cmb2/css/sass export-ignore
+bin export-ignore
+tests export-ignore
+
+# Export SCSS Files from Modules
+includes/modules/redirections/assets/redirections.scss export-ignore
+includes/modules/role-manager/assets/role-manager.scss export-ignore
+includes/modules/search-console/assets/search-console.scss export-ignore
+includes/modules/seo-analysis/assets/seo-analysis.scss export-ignore
