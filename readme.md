@@ -263,7 +263,7 @@ Even with significantly more features than other plugins, Rank Math loads amazin
 
 **<a href="https://www.facebook.com/groups/rankmathseopluginwordpress/?utm_campaign=Rank+Math" target="_blank">JOIN FACEBOOK GROUP COMMUNITY</a>**: The purpose of this Facebook group is to have a collective place where the community can help each other, and we can get some feedback to improve Rank Math as well. Joining the group is also a great way to connect with like-minded people and share your SEO experience.
 
-= Getting Started:
+### Getting Started:
 **<a href="https://rankmath.com/kb/how-to-setup/?utm_source=LP&utm_campaign=WP" target="_blank">1. How to Setup Rank Math:</a>** Once you install Rank Math for the first time, you will be greeted with the Setup Wizard, which is discussed in detail here.
 
 **<a href="https://www.facebook.com/groups/rankmathseopluginwordpress/?utm_campaign=Rank+Math">2. Facebook Group:</a>** In this group, you will find the team of Rank Math SEO plugin fairly active and ready to answer your SEO related queries.
