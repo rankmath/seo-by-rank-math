@@ -129,6 +129,17 @@ export function updateBreadcrumbTitle( title ) {
  */
 export function updateRichSnippet( id, key, value ) {
 	const data = select( 'rank-math' ).getRichSnippets()
+
+	if ( data[ id ] === value ) {
+		return {
+			type: 'RANK_MATH_APP_DATA',
+			key: 'richSnippets',
+			value: data,
+			metaKey: 'snippetType' === id ? key : 'rank_math_snippet_' + key,
+			metaValue: value,
+		}
+	}
+
 	data[ id ] = value
 	return updateAppData(
 		'richSnippets',

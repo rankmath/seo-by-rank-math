@@ -2,6 +2,10 @@
 	<custom-fields>
 		<custom-field action="translate">rank_math_title</custom-field>
 		<custom-field action="translate">rank_math_description</custom-field>
+		<custom-field action="translate">rank_math_facebook_title</custom-field>
+		<custom-field action="translate">rank_math_facebook_description</custom-field>
+		<custom-field action="translate">rank_math_twitter_title</custom-field>
+		<custom-field action="translate">rank_math_twitter_description</custom-field>
 		<custom-field action="translate">rank_math_focus_keyword</custom-field>
 		<custom-field action="ignore">rank_math_canonical_url</custom-field>
 		<custom-field action="copy-once">rank_math_robots</custom-field>
@@ -41,6 +45,7 @@
 			<key name="img_title_format"/>
 			<key name="breadcrumbs_separator"/>
 			<key name="breadcrumbs_prefix"/>
+			<key name="breadcrumbs_home_link"/>
 			<key name="breadcrumbs_home_label"/>
 			<key name="breadcrumbs_archive_format"/>
 			<key name="breadcrumbs_search_format"/>

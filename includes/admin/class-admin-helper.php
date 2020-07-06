@@ -97,8 +97,6 @@ class Admin_Helper {
 	 * @return array
 	 */
 	public static function get_registration_data( $data = null ) {
-		$encryption = new Data_Encryption();
-
 		$row  = 'rank_math_connect_data';
 		$keys = [
 			'username',
@@ -115,7 +113,7 @@ class Admin_Helper {
 
 			foreach ( $keys as $key ) {
 				if ( isset( $data[ $key ] ) ) {
-					$data[ $key ] = $encryption->encrypt( $data[ $key ] );
+					$data[ $key ] = Data_Encryption::encrypt( $data[ $key ] );
 				}
 			}
 
@@ -131,7 +129,7 @@ class Admin_Helper {
 
 		foreach ( $keys as $key ) {
 			if ( isset( $options[ $key ] ) ) {
-				$options[ $key ] = $encryption->decrypt( $options[ $key ] );
+				$options[ $key ] = Data_Encryption::decrypt( $options[ $key ] );
 			}
 		}
 

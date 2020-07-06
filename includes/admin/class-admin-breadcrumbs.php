@@ -29,7 +29,7 @@ class Admin_Breadcrumbs {
 		?>
 		<div class="rank-math-breadcrumbs-wrap">
 		<div class="rank-math-breadcrumbs">
-				<span><?php echo esc_attr( 'Dashboard', 'rank-math' ); ?></span>
+				<span><?php echo esc_html__( 'Dashboard', 'rank-math' ); ?></span>
 				<span class="divider">/</span>
 				<span class="active"><?php echo esc_html( $this->get_page_title() ); ?></span>
 			</div>

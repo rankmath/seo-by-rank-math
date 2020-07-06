@@ -122,11 +122,14 @@ class Block_Parser {
 		 * @param array $data  Array of json-ld data.
 		 * @param array $block The block.
 		 */
-		$nested = $this->do_filter( 'schema/nested_blocks', [
-			'core/group',
-			'core/columns',
-			'core/column',
-		] );
+		$nested = $this->do_filter(
+			'schema/nested_blocks',
+			[
+				'core/group',
+				'core/columns',
+				'core/column',
+			]
+		);
 
 		if ( ! in_array( $block['blockName'], $nested, true ) ) {
 			return false;

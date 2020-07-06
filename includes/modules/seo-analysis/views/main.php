@@ -50,7 +50,8 @@ rank_math()->admin->display_admin_header();
 
 			<?php else : ?>
 				<div class="rank-math-seo-analysis-header">
-					<h3><?php echo esc_html( 'Analyze your site by ', 'rank-math' ) . '<a href="' . Helper::get_connect_url() . '" target="_blank">' . esc_html( 'linking your Rank Math account', 'rank-math' ) . '</a>.</h3>'; ?>
+					<?php // Translators: placeholders are opening and closing tag for link. ?>
+					<h3><?php echo wp_kses_post( sprintf( __( 'Analyze your site by %1$s linking your Rank Math account %2$s', 'rank-math' ), '<a href="' . Helper::get_connect_url() . '" target="_blank">', '</a>' ) ); ?>
 				</div>
 			<?php endif; ?>
 		</div>

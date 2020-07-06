@@ -23,13 +23,12 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'              => 'bp_group_description',
-		'type'            => 'textarea',
-		'name'            => esc_html__( 'Group Description', 'rank-math' ),
-		'desc'            => esc_html__( 'BuddyPress group description', 'rank-math' ),
-		'classes'         => 'rank-math-supports-variables rank-math-description',
-		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
-		'attributes'      => [
+		'id'         => 'bp_group_description',
+		'type'       => 'textarea',
+		'name'       => esc_html__( 'Group Description', 'rank-math' ),
+		'desc'       => esc_html__( 'BuddyPress group description', 'rank-math' ),
+		'classes'    => 'rank-math-supports-variables rank-math-description',
+		'attributes' => [
 			'data-exclude-variables' => 'seo_title,seo_description',
 			'rows'                   => 2,
 		],

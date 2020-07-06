@@ -304,6 +304,21 @@ class CMB2 {
 	}
 
 	/**
+	 * Handles escaping of rank_math_permalink.
+	 *
+	 * @param string $value The value from the DB.
+	 *
+	 * @return string Escaped value.
+	 */
+	public static function escape_permalink( $value ) {
+		if ( empty( $value ) ) {
+			return '';
+		}
+
+		return esc_attr( urldecode( $value ) );
+	}
+
+	/**
 	 * Handles sanitization of floating point values.
 	 *
 	 * @param string $value The unsanitized value from the form.
@@ -344,6 +359,10 @@ class CMB2 {
 	 * @return array Sanitized value to be stored.
 	 */
 	public static function sanitize_advanced_robots( $robots ) {
+		if ( empty( $robots ) ) {
+			return [];
+		}
+
 		$advanced_robots = [];
 		foreach ( $robots as $key => $robot ) {
 			$advanced_robots[ $key ] = ! empty( $robot['enable'] ) ? $robot['length'] : false;
@@ -369,10 +388,27 @@ class CMB2 {
 			',',
 			array_map(
 				function ( $entry ) {
-					return sanitize_text_field( $entry['value']  );
+					return sanitize_text_field( $entry['value'] );
 				},
 				$values
 			)
 		);
+	}
+
+	/**
+	 * Handles sanitization of Robots text.
+	 *
+	 * @since 1.0.45
+	 *
+	 * @param mixed $value The unsanitized Robots text.
+	 *
+	 * @return string Sanitized Robots text to be stored.
+	 */
+	public static function sanitize_robots_text( $value ) {
+		if ( empty( $value ) ) {
+			return '';
+		}
+
+		return wp_strip_all_tags( $value );
 	}
 }

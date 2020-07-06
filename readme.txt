@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.4.1
 Requires at least: 4.9.0
 Requires PHP: 5.6
-Stable tag: 1.0.44
+Stable tag: 1.0.45
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -284,7 +284,7 @@ Even with significantly more features than other plugins, Rank Math loads amazin
 
 <a href="https://www.producthunt.com/posts/rank-math-seo/?utm_campaign=Rank+Math" target="_blank">Rank Math on Product Hunt</a>
 
-<a href="https://www.suganthan.com/blog/rank-math-seo-plugin-review-from-an-seo-guy/?&utm_campaign=Rank+Math" target="_blank">Rank Math SEO Plugin Review from an SEO Consultant</a>
+<a href="https://www.suganthan.com/blog/rank-math-seo-plugin-review-from-an-seo-guy/?utm_campaign=Rank+Math" target="_blank">Rank Math SEO Plugin Review from an SEO Consultant</a>
 
 and many more
 
@@ -473,27 +473,36 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.44 [Jun 12, 2020] =
-* Added: [NEW!] Added Social share buttons in the Gutenberg publish flow, now you will see the share buttons after publishing the post
-* Added: Title attribute for the sidebar tabs for better usability
-* Added: Full compatibility with the WPML plugin [WPML String Translation Plugin is required]
-* Added: Some missing strings in the translation file
-* Improved: The variable [Product Schema](https://rankmath.com/kb/rich-snippets/#product) output by replacing `Offer` with `AggregateOffer`
-* Improved: Made the registration step simpler to understand as to why a [FREE account](https://rankmath.com/#signup) is needed and the benefits
-* Improved: The [new UI's](https://www.facebook.com/RankMath/videos/237502667553008/) checkbox styling was getting applied in the Classic Editor's sidebar
-* Improved: We've tinkered with the internal workings and polished some rough edges. The plugin is now **better & secure** than it was
-* Removed: The [usage tracking](https://rankmath.com/usage-tracking/) option is not needed as the data received was not stored on the servers or utilized
-* Removed: Unused JS files
-* Fixed: Option to set custom data in the [Twitter's social tab](https://rankmath.com/kb/meta-box-social-tab/#twitter-options) was not working in the Classic Editor
-* Fixed: [Open links in a new tab](https://rankmath.com/kb/how-to-setup/#open-external-links-new-tab-window) and [nofollow](https://rankmath.com/kb/how-to-setup/#nofollow-external-links) options were not working if the [Image SEO](https://rankmath.com/kb/general-settings/#add-missing-alt-attributes) module was deactivated
-* Fixed: The [strip category base](https://rankmath.com/kb/general-settings/#strip-category-base) option was not getting [imported from Yoast](https://rankmath.com/kb/how-to-setup/#step-1-import-data-from-other-plugins)
-* Fixed: The option to select multiple Employment Types in the [JobPosting Schema](https://rankmath.com/kb/rich-snippets/#job-posting) was not working in the Gutenberg
-* Fixed: [Sitemap](https://rankmath.com/kb/fix-sitemap-issues/) was not working when a custom permalink structure with `index.php` was used before the `%postname%` variable
-* Fixed: Content analysis not working on the taxonomy pages when quotes were used in the title
-* Fixed: A redirection conflict with BuddyPress when the [Redirect 404 to Homepage](https://rankmath.com/kb/general-settings/#fallback-behaviour) option was enabled in the [General Settings](https://rankmath.com/kb/general-settings/)
-* Fixed: The Gutenberg editor was incorrectly displaying the [Icon Overlay](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails) in the [Social preview](https://rankmath.com/kb/meta-box-social-tab/#checking-the-facebook-preview) when the overlay option value was set to off. This was not affecting the frontend output
-* Fixed: [Redirections](https://rankmath.com/kb/setting-up-redirections/) were not working from the advanced tab of the category/term edit page
-* Fixed: The URL preview in the Classic Editor was incorrect for languages like Arabic but the output, for the search engines, was correct
-* Fixed: An issue with the Members plugin where the general settings were not accessible when creating a new role using that plugin
+= 1.0.45 [Jul 06, 2020] =
+* Added: [New!] Support for [Google Web Stories](https://rankmath.com/kb/google-web-stories/) by integrating with the Web Stories plugin for WordPress
+* Added: An option to enable/disable update emails in the `Auto Update` option as well as the [ready step of the setup wizard](https://rankmath.com/kb/how-to-setup/#step-6-showing-off-your-optimized-website)
+* Added: [Facebook & Twitter meta fields](https://rankmath.com/kb/meta-box-social-tab/#title) in the [WPML](https://rankmath.com/compatibility/wpml/) config file
+* Added: Some missing text in the [translation](https://translate.wordpress.org/projects/wp-plugins/seo-by-rank-math/) file
+* Added: A [filter](https://rankmath.com/kb/filters-hooks-api-developer/#remove-rank-math-link-class) to remove `rank-math-link` class from the content links on the frontend
+* Added: A dismiss button in the [Auto-post Redirect](https://rankmath.com/kb/general-settings/#auto-post-redirect) notice that was missing accidentally. Sorry about that
+* Improved: Single post editor's performance by removing some unnecessary [Focus Keyword](https://rankmath.com/kb/score-100-in-tests/#first-step-choosing-focus-keywords) related combinations
+* Improved: Validating the [Robots data](https://rankmath.com/kb/advanced-tab/#robots-meta) before using them on the frontend
+* Improved: Hiding the [Attachment Options](https://rankmath.com/kb/titles-and-meta/#media) in the Titles & Meta setting if the ['Redirect Attachments'](https://rankmath.com/kb/general-settings/#redirect-attachments) option is turned on
+* Improved: Set attachments to `noindex` after [importing settings from Yoast](https://rankmath.com/kb/how-to-setup/#step-1-import-data-from-other-plugins) and if the Redirection Attachment option was set to on
+* Improved: Renamed 'Media' tab in the [Sitemap settings](https://rankmath.com/kb/configure-sitemaps/#media) to 'Attachments'
+* Improved: Compatibility with WordPress 4.9 and the users will see a notice in the backend requesting them to update their WordPress to the latest version if someone wants to use the future releases of Rank Math (they might not be compatible)
+* Improved: `Product In Stock` value in the [Product Schema](https://rankmath.com/kb/rich-snippets/#product) shortcode will now show `Available` or `Not Available` instead of a boolean value
+* Improved: Enhanced security in some places in the plugin
+* Replaced: A third-party `useragent` checking API in the [advanced 404 Monitor](https://rankmath.com/kb/monitor-404-errors/#advanced-404-monitor) with a native library
+* Removed: Missing description tag HTML comment notice from the frontend for admins
+* Changed: [Dropdown labels](https://i.rankmath.com/cMn6dc) to filter the post by SEO Scores
+* Changed: [Sitemap](https://rankmath.com/kb/configure-sitemaps/) cache directory from plugin folder to `wp-content/rank-math`
+* Fixed: Few users were not able to connect their [Google Search Console](https://rankmath.com/kb/search-console/) & [Rank Math account](https://rankmath.com/kb/free-account-benefits/)
+* Fixed: The status of [Elementor's](https://rankmath.com/blog/elementor-seo/) update button was not updating in some cases which were causing confusion
+* Fixed: An issue where the AMP plugin by Google was throwing errors for admin-related scripts. Even though it was working fine on the frontend
+* Fixed: Block Styling was not loading in the backend with the Gutenberg v8.4+ Plugin
+* Fixed: An issue where using a spacebar while adding a meta description was throwing the cursor to the end of the description entered
+* Fixed: Compatibility with the Duplicate Post plugin
+* Fixed: Getting an invalid argument supplied error in `class-cmb2.php` file on some installations
+* Fixed: Russian focus keywords were not getting detected in the URL in Rank Math's tests
+* Fixed: An error was generating in the backend when the post thumbnail image was removed from the media folder
+* Fixed: In some cases, `invalid` was getting added to the Focus Keyword field after updating the post
+* Fixed: Guided [Recipe Schema](https://rankmath.com/kb/rich-snippets/#recipe) was throwing an invalid value in the field `itemtype` when a `HowtoSection` value was added
+* Fixed: A PHP warning for `missing constant` if WordPress version requirement was not met
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

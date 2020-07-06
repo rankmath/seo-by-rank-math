@@ -166,8 +166,8 @@ class Post_Filters implements Runner {
 
 		$options = [
 			''          => esc_html__( 'All Posts', 'rank-math' ),
-			'great-seo' => esc_html__( 'SEO Score: Great', 'rank-math' ),
-			'good-seo'  => esc_html__( 'SEO Score: Good', 'rank-math' ),
+			'great-seo' => esc_html__( 'SEO Score: Good', 'rank-math' ),
+			'good-seo'  => esc_html__( 'SEO Score: Ok', 'rank-math' ),
 			'bad-seo'   => esc_html__( 'SEO Score: Bad', 'rank-math' ),
 			'empty-fk'  => esc_html__( 'Focus Keyword Not Set', 'rank-math' ),
 			'noindexed' => esc_html__( 'Articles noindexed', 'rank-math' ),

@@ -91,6 +91,9 @@ msgstr ""
 msgid "404 Error: page not found"
 msgstr ""
 
+msgid "Rank Math SEO"
+msgstr ""
+
 msgid "Rank Math Dashboard"
 msgstr ""
 
@@ -427,6 +430,9 @@ msgstr ""
 msgid "We detected new post type(s) (%1$s), and you would want to check the settings of <a href=\"%2$s\">Titles &amp; Meta page</a>."
 msgstr ""
 
+msgid "From the next update, you'll need atleast WordPress 5.0 to run the Rank Math plugin. Please update to the latest version."
+msgstr ""
+
 msgid "Please activate the WPML String Translation plugin to convert Rank Math Setting values in different languages."
 msgstr ""
 
@@ -611,10 +617,10 @@ msgstr ""
 msgid "All Posts"
 msgstr ""
 
-msgid "SEO Score: Great"
+msgid "SEO Score: Good"
 msgstr ""
 
-msgid "SEO Score: Good"
+msgid "SEO Score: Ok"
 msgstr ""
 
 msgid "SEO Score: Bad"
@@ -779,9 +785,6 @@ msgstr ""
 
 #. translators: %s expands to the current page number
 msgid "Page %s"
-msgstr ""
-
-msgid "Admin only notice: this page has no meta description set. Please edit the page to add one, or setup a template in Rank Math -> Titles &amp; Metas."
 msgstr ""
 
 msgid "Search Engine Optimization by Rank Math - https://s.rankmath.com/home"
@@ -1292,6 +1295,15 @@ msgstr ""
 msgid "Please activate ACF plugin to use this module."
 msgstr ""
 
+msgid "Google Web Stories"
+msgstr ""
+
+msgid "Make any Story created with the Web Stories WordPress plugin SEO-Ready with automatic support for Schema and Meta tags."
+msgstr ""
+
+msgid "Please activate Web Stories plugin to use this module."
+msgstr ""
+
 msgid "Post ID"
 msgstr ""
 
@@ -1777,9 +1789,6 @@ msgid "Click on the button to copy URL or insert link in content. You can also d
 msgstr ""
 
 msgid "We can't show any link suggestions for this post. Try selecting categories and tags for this post, and mark other posts as Pillar Content to make them show up here."
-msgstr ""
-
-msgid "Rank Math SEO"
 msgstr ""
 
 msgid "General"
@@ -2624,6 +2633,12 @@ msgid "Post ID does not exists or was deleted."
 msgstr ""
 
 msgid "Snippet not selected."
+msgstr ""
+
+msgid "Available"
+msgstr ""
+
+msgid "Not Available"
 msgstr ""
 
 msgid "Edition"
@@ -3979,6 +3994,9 @@ msgstr ""
 msgid "Prevent password protected pages & posts from getting indexed by search engines."
 msgstr ""
 
+msgid "To configure attachment-related meta tags disable attachment redirection to parent."
+msgstr ""
+
 #. translators: post type name
 msgid "Single %s Title"
 msgstr ""
@@ -4009,6 +4027,9 @@ msgstr ""
 
 #. translators: post type name
 msgid "Description for %s archive pages."
+msgstr ""
+
+msgid "Default rich snippet selected when creating a new story."
 msgstr ""
 
 msgid "Headline"
@@ -4342,6 +4363,12 @@ msgstr ""
 msgid "PHP MBstring Extension missing"
 msgstr ""
 
+msgid "PHP OpenSSL Extension installed"
+msgstr ""
+
+msgid "PHP OpenSSL Extension missing"
+msgstr ""
+
 msgid "Please resolve the issues above to be able to use all features of Rank Math plugin. If you are not sure how to do it, please contact your hosting provider."
 msgstr ""
 
@@ -4381,7 +4408,7 @@ msgstr ""
 msgid "Enable auto update of the plugin"
 msgstr ""
 
-msgid "Proudly Show the SEO Score to Your Visitors"
+msgid "Email me every time the plugin auto-updates."
 msgstr ""
 
 msgid "Your site is now optimized."
@@ -5453,6 +5480,10 @@ msgstr ""
 msgid "Start Analysis Again"
 msgstr ""
 
+#. translators: placeholders are opening and closing tag for link.
+msgid "Analyze your site by %1$s linking your Rank Math account %2$s"
+msgstr ""
+
 msgid "Exclude User Roles"
 msgstr ""
 
@@ -5563,6 +5594,9 @@ msgid "Turn on auto-updates to automatically update to stable versions of Rank M
 msgstr ""
 
 msgid "Auto Update Plugin"
+msgstr ""
+
+msgid "Email me every time the plugin auto-updates"
 msgstr ""
 
 msgid "Rank Math will not auto-update because you have rolled back to a previous version. Update to the latest version manually to make this option work again."

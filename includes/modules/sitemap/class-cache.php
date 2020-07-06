@@ -147,7 +147,8 @@ class Cache {
 	 * @return string
 	 */
 	public static function get_cache_directory() {
-		$default = rank_math()->plugin_dir() . 'sitemap-cache';
+		$dir     = wp_upload_dir();
+		$default = $dir['basedir'] . '/rank-math';
 
 		/**
 		 * Filter XML sitemap cache directory.

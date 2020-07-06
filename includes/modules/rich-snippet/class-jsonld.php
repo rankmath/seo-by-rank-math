@@ -54,7 +54,7 @@ class JsonLD {
 	public function __construct() {
 		$this->action( 'rank_math/head', 'json_ld', 90 );
 		$this->action( 'rank_math/json_ld', 'add_context_data' );
-		new Block_Parser;
+		new Block_Parser();
 	}
 
 	/**
@@ -107,7 +107,7 @@ class JsonLD {
 
 		foreach ( $snippets as $class => $can_run ) {
 			if ( $can_run ) {
-				$class = new $class;
+				$class = new $class();
 				$data  = $class->process( $data, $this );
 			}
 		}
@@ -370,6 +370,9 @@ class JsonLD {
 		}
 
 		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+		if ( empty( $image ) ) {
+			return false;
+		}
 
 		return [
 			'@type'  => 'ImageObject',

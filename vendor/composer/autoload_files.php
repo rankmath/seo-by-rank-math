@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'da5f6548f070d3d306f90eee42dd5de6' => $vendorDir . '/donatj/phpuseragentparser/src/UserAgentParser.php',
     '958baf679ab014f6517c26661e8969b7' => $vendorDir . '/cmb2/cmb2/init.php',
     'c137015539481e56a35f44f2d09649d5' => $baseDir . '/includes/template-tags.php',
 );

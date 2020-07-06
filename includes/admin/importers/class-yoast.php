@@ -573,6 +573,10 @@ class Yoast extends Plugin_Importer {
 			$this->titles['author_custom_robots'] = 'on';
 			$this->titles['author_robots'][]      = 'noindex';
 		}
+
+		if ( ! empty( $yoast_titles['disable-attachment'] ) ) {
+			$this->titles['pt_attachment_robots'][] = 'noindex';
+		}
 	}
 
 	/**

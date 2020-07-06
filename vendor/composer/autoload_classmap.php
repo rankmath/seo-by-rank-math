@@ -257,6 +257,7 @@ return array(
     'RankMath\\Updates' => $baseDir . '/includes/class-updates.php',
     'RankMath\\User' => $baseDir . '/includes/class-user.php',
     'RankMath\\Version_Control' => $baseDir . '/includes/modules/version-control/class-version-control.php',
+    'RankMath\\Web_Stories\\Web_Stories' => $baseDir . '/includes/modules/web-stories/class-web-stories.php',
     'RankMath\\Wizard\\Compatibility' => $baseDir . '/includes/admin/wizard/class-compatibility.php',
     'RankMath\\Wizard\\Import' => $baseDir . '/includes/admin/wizard/class-import.php',
     'RankMath\\Wizard\\Monitor_Redirection' => $baseDir . '/includes/admin/wizard/class-monitor-redirection.php',
@@ -277,4 +278,9 @@ return array(
     'RankMath\\WooCommerce\\WooCommerce' => $baseDir . '/includes/modules/woocommerce/class-woocommerce.php',
     'WP_Async_Request' => $vendorDir . '/a5hleyrich/wp-background-processing/classes/wp-async-request.php',
     'WP_Background_Process' => $vendorDir . '/a5hleyrich/wp-background-processing/classes/wp-background-process.php',
+    'donatj\\UserAgent\\Browsers' => $vendorDir . '/donatj/phpuseragentparser/src/UserAgent/Browsers.php',
+    'donatj\\UserAgent\\Platforms' => $vendorDir . '/donatj/phpuseragentparser/src/UserAgent/Platforms.php',
+    'donatj\\UserAgent\\UserAgent' => $vendorDir . '/donatj/phpuseragentparser/src/UserAgent/UserAgent.php',
+    'donatj\\UserAgent\\UserAgentInterface' => $vendorDir . '/donatj/phpuseragentparser/src/UserAgent/UserAgentInterface.php',
+    'donatj\\UserAgent\\UserAgentParser' => $vendorDir . '/donatj/phpuseragentparser/src/UserAgent/UserAgentParser.php',
 );

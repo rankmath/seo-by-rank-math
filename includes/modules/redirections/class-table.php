@@ -102,10 +102,10 @@ class Table extends List_Table {
 	 */
 	public function column_default( $item, $column_name ) {
 		if ( in_array( $column_name, [ 'hits', 'header_code', 'url_to' ], true ) ) {
-			return $item[ $column_name ];
+			return esc_html( $item[ $column_name ] );
 		}
 
-		return print_r( $item, true );
+		return esc_html( print_r( $item, true ) );
 	}
 
 	/**

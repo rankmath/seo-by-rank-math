@@ -269,6 +269,15 @@ class Manager {
 			'disabled_text' => esc_html__( 'Please activate ACF plugin to use this module.', 'rank-math' ),
 		];
 
+		$modules['web-stories'] = [
+			'title'         => esc_html__( 'Google Web Stories', 'rank-math' ),
+			'desc'          => esc_html__( 'Make any Story created with the Web Stories WordPress plugin SEO-Ready with automatic support for Schema and Meta tags.', 'rank-math' ),
+			'class'         => 'RankMath\Web_Stories\Web_Stories',
+			'icon'          => 'stories',
+			'disabled'      => ( ! defined( 'WEBSTORIES_VERSION' ) ),
+			'disabled_text' => esc_html__( 'Please activate Web Stories plugin to use this module.', 'rank-math' ),
+		];
+
 		return $modules;
 	}
 

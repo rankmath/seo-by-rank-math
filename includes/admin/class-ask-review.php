@@ -57,9 +57,9 @@ class Ask_Review {
 		$stars = '<a href="https://wordpress.org/support/plugin/seo-by-rank-math/reviews/#new-post" target="_blank" style="color:#FF9800;font-size:9px;text-decoration:none;letter-spacing:2px;">' . str_repeat( $star, 5 ) . '</a>';
 
 		/* translators: placeholder is a wp.org review link */
-		$new_text = sprintf( wp_kses_post( __( 'If you like Rank Math, please take a minute to rate it on WordPress.org: %s', 'rank-math' ) ), $stars );
+		$new_text = sprintf( esc_html__( 'If you like Rank Math, please take a minute to rate it on WordPress.org: %s', 'rank-math' ), $stars );
 
-		return  '<span id="rank-math-footer-ask-review" data-original-text="' . esc_attr( $text ) . '">' . $new_text . '</span>';
+		return '<span id="rank-math-footer-ask-review" data-original-text="' . esc_attr( $text ) . '">' . $new_text . '</span>';
 	}
 
 	/**

@@ -39,8 +39,15 @@ class Blocks {
 			return;
 		}
 
-		new Block_FAQ;
-		new Block_HowTo;
+		wp_register_style(
+			'rank-math-block-admin',
+			rank_math()->plugin_url() . 'assets/admin/css/blocks.css',
+			null,
+			rank_math()->version
+		);
+
+		new Block_FAQ();
+		new Block_HowTo();
 	}
 
 	/**
@@ -85,13 +92,6 @@ class Blocks {
 			[],
 			rank_math()->version,
 			true
-		);
-
-		wp_register_style(
-			'rank-math-block-admin',
-			rank_math()->plugin_url() . 'assets/admin/css/blocks.css',
-			null,
-			rank_math()->version
 		);
 	}
 

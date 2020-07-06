@@ -112,10 +112,7 @@ class SerpPreview extends SerpHooks {
 
 		// Permalink
 		this.serpPermalinkField
-			.val(
-				this.serpPermalinkField.val() ||
-					rankMathEditor.assessor.dataCollector.getSlug()
-			)
+			.val( rankMathEditor.assessor.dataCollector.getSlug() )
 			.on( 'blur', () => {
 				rankMathEditor.updatePermalink( this.serpPermalinkField.val() )
 			} )

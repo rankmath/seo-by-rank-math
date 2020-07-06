@@ -42,21 +42,20 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'              => 'tax_' . $taxonomy . '_description',
-		'type'            => 'textarea_small',
+		'id'         => 'tax_' . $taxonomy . '_description',
+		'type'       => 'textarea_small',
 		/* translators: taxonomy name */
-		'name'            => sprintf( esc_html__( '%s Archive Descriptions', 'rank-math' ), $name ),
+		'name'       => sprintf( esc_html__( '%s Archive Descriptions', 'rank-math' ), $name ),
 		/* translators: taxonomy name */
-		'desc'            => sprintf( esc_html__( 'Description for %s archives', 'rank-math' ), $name ),
-		'classes'         => 'rank-math-supports-variables rank-math-description',
-		'attributes'      => [
+		'desc'       => sprintf( esc_html__( 'Description for %s archives', 'rank-math' ), $name ),
+		'classes'    => 'rank-math-supports-variables rank-math-description',
+		'attributes' => [
 			'class'                  => 'cmb2-textarea-small wp-exclude-emoji',
 			'data-gramm_editor'      => 'false',
 			'rows'                   => 2,
 			'data-exclude-variables' => 'seo_title,seo_description',
 		],
-		'default'         => '%term_description%',
-		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
+		'default'    => '%term_description%',
 	]
 );
 

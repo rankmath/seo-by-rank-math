@@ -108,11 +108,14 @@ class Version_Control {
 		}
 
 		// Sanitize input.
-		$new_value = Param::post( 'enable_auto_update' ) === 'on' ? 'on' : 'off';
+		$new_value         = Param::post( 'enable_auto_update' ) === 'on' ? 'on' : 'off';
+		$auto_update_email = 'off' === $new_value ? 'off' : ( 'on' === Param::post( 'enable_auto_update_email' ) ? 'on' : 'off' );
 
-		$settings                       = get_option( 'rank-math-options-general', [] );
-		$settings['enable_auto_update'] = $new_value;
+		$settings                             = get_option( 'rank-math-options-general', [] );
+		$settings['enable_auto_update']       = $new_value;
+		$settings['enable_auto_update_email'] = $auto_update_email;
 		rank_math()->settings->set( 'general', 'enable_auto_update', 'on' === $new_value ? true : false );
+		rank_math()->settings->set( 'general', 'enable_auto_update_email', 'on' === $auto_update_email ? true : false );
 		update_option( 'rank-math-options-general', $settings );
 
 		return true;

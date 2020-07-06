@@ -34,10 +34,10 @@ class Admin extends Base {
 			[
 				'id'        => 'sitemap',
 				'directory' => $directory,
-				'help'      => array(
+				'help'      => [
 					'title' => esc_html__( 'Sitemap', 'rank-math' ),
 					'view'  => $directory . '/views/help.php',
-				),
+				],
 			]
 		);
 		parent::__construct();
@@ -104,20 +104,20 @@ class Admin extends Base {
 	 */
 	public function post_type_settings( $tabs ) {
 		$icons  = Helper::choices_post_type_icons();
-		$things = array(
+		$things = [
 			'attachment' => esc_html__( 'attachments', 'rank-math' ),
 			'product'    => esc_html__( 'your product pages', 'rank-math' ),
-		);
-		$urls   = array(
+		];
+		$urls   = [
 			'attachment' => KB::get( 'sitemap-media' ),
 			'product'    => KB::get( 'sitemap-product' ),
-		);
+		];
 
 		// Post type label seprator.
-		$tabs['p_types'] = array(
+		$tabs['p_types'] = [
 			'title' => esc_html__( 'Post Types:', 'rank-math' ),
 			'type'  => 'seprator',
-		);
+		];
 
 		foreach ( Helper::get_accessible_post_types() as $post_type ) {
 			$object      = get_post_type_object( $post_type );
@@ -129,8 +129,8 @@ class Admin extends Base {
 			$thing = isset( $things[ $post_type ] ) ? $things[ $post_type ] : sprintf( __( 'single %s', 'rank-math' ), $name );
 			$url   = isset( $urls[ $post_type ] ) ? $urls[ $post_type ] : ( in_array( $name, [ 'post', 'page' ], true ) ? KB::get( "sitemap-{$name}" ) : '' );
 
-			$tabs[ 'sitemap-post-type-' . $object->name ] = array(
-				'title'     => $object->label,
+			$tabs[ 'sitemap-post-type-' . $object->name ] = [
+				'title'     => 'attachment' === $post_type ? esc_html__( 'Attachments', 'rank-math' ) : $object->label,
 				'icon'      => isset( $icons[ $object->name ] ) ? $icons[ $object->name ] : $icons['default'],
 				/* translators: %1$s: thing, %2$s: Learn more link. */
 				'desc'      => sprintf( esc_html__( 'Change Sitemap settings of %1$s. %2$s.', 'rank-math' ), $thing, '<a href="' . $url . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
@@ -138,7 +138,7 @@ class Admin extends Base {
 				'file'      => $this->directory . '/settings/post-types.php',
 				/* translators: Post Type Sitemap Url */
 				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Sitemap URL: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . $notice_end,
-			);
+			];
 
 			if ( 'attachment' === $post_type ) {
 				$tabs[ 'sitemap-post-type-' . $object->name ]['after_row'] = $this->get_notice_start() . esc_html__( 'Please note that this will add the attachment page URLs to the sitemap, not direct image URLs.', 'rank-math' ) . $notice_end;
@@ -160,10 +160,10 @@ class Admin extends Base {
 		$icons = Helper::choices_taxonomy_icons();
 
 		// Taxonomy label seprator.
-		$tabs['t_types'] = array(
+		$tabs['t_types'] = [
 			'title' => esc_html__( 'Taxonomies:', 'rank-math' ),
 			'type'  => 'seprator',
-		);
+		];
 
 		foreach ( Helper::get_accessible_taxonomies() as $taxonomy ) {
 			if ( 'post_format' === $taxonomy->name ) {
@@ -187,7 +187,7 @@ class Admin extends Base {
 					$url   = in_array( $name, [ 'category', 'tags' ], true ) ? KB::get( "sitemap-{$name}" ) : '';
 			}
 
-			$tabs[ 'sitemap-taxonomy-' . $taxonomy->name ] = array(
+			$tabs[ 'sitemap-taxonomy-' . $taxonomy->name ] = [
 				'icon'      => isset( $icons[ $taxonomy->name ] ) ? $icons[ $taxonomy->name ] : $icons['default'],
 				'title'     => $taxonomy->label,
 				/* translators: %1$s: thing, %2$s: Learn more link. */
@@ -196,7 +196,7 @@ class Admin extends Base {
 				'file'      => $this->directory . '/settings/taxonomies.php',
 				/* translators: Taxonomy Sitemap Url */
 				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Sitemap URL: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . $notice_end,
-			);
+			];
 		}
 
 		return $tabs;
@@ -211,10 +211,10 @@ class Admin extends Base {
 	 */
 	public function special_seprator( $tabs ) {
 		if ( Helper::is_module_active( 'news-sitemap' ) || Helper::is_module_active( 'video-sitemap' ) ) {
-			$tabs['special'] = array(
+			$tabs['special'] = [
 				'title' => esc_html__( 'Special Sitemaps:', 'rank-math' ),
 				'type'  => 'seprator',
-			);
+			];
 		}
 
 		return $tabs;
@@ -237,7 +237,7 @@ class Admin extends Base {
 		$checkbox  = '<label><input type="checkbox" name="attachments[' . $post->ID . '][rank_math_media_exclude_sitemap]" ' . checked( $exclude, true, 0 ) . ' /> ';
 		$checkbox .= esc_html__( 'Exclude this image from sitemap', 'rank-math' ) . '</label>';
 
-		$form_fields['rank_math_exclude_sitemap'] = array( 'tr' => "\t\t<tr><td></td><td>$checkbox</td></tr>\n" );
+		$form_fields['rank_math_exclude_sitemap'] = [ 'tr' => "\t\t<tr><td></td><td>$checkbox</td></tr>\n" ];
 
 		return $form_fields;
 	}

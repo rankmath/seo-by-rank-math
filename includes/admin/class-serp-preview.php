@@ -33,7 +33,7 @@ class Serp_Preview {
 		if ( 'post' === CMB2::current_object_type() && Helper::is_module_active( 'rich-snippet' ) ) {
 			$snippet_preview = $this->get_snippet_html();
 		}
-		$favicon = get_site_icon_url( 16 );
+		$favicon = esc_url( get_site_icon_url( 16 ) );
 		if ( empty( $favicon ) ) {
 			$favicon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC';
 		}
@@ -170,10 +170,8 @@ class Serp_Preview {
 		if ( empty( $termlink ) ) {
 			$permalink_format = $permalink;
 		} else {
-			$slugs            = $this->get_ancestors( $term_id, $term->taxonomy );
-			$termlink         = $this->get_termlink( $termlink, $term->taxonomy );
-			$slugs[]          = '%postname%';
-			$termlink         = str_replace( "%$term->taxonomy%", implode( '/', $slugs ), $termlink );
+			$termlink         = str_replace( $this->get_home_url(), '', $permalink );
+			$termlink         = str_replace( $term->slug, '%postname%', $termlink );
 			$permalink_format = $this->get_home_url( user_trailingslashit( $termlink, 'category' ) );
 		}
 
@@ -195,50 +193,6 @@ class Serp_Preview {
 		}
 
 		return trailingslashit( pll_home_url() ) . $path;
-	}
-
-	/**
-	 * Filter term link.
-	 *
-	 * @param string $termlink Term Link.
-	 * @param string $taxonomy Taxonomy name.
-	 *
-	 * @return string
-	 */
-	private function get_termlink( $termlink, $taxonomy ) {
-		if ( 'category' === $taxonomy && Helper::get_settings( 'general.strip_category_base' ) ) {
-			$termlink = str_replace( '/category/', '', $termlink );
-		}
-
-		if ( Conditional::is_woocommerce_active() && 'product_cat' === $taxonomy && Helper::get_settings( 'general.wc_remove_category_base' ) ) {
-			$termlink = str_replace( 'product-category', '', $termlink );
-		}
-
-		return $termlink;
-	}
-
-	/**
-	 * Whether to add ancestors in taxonomy page.
-	 *
-	 * @param int    $term_id  Term ID.
-	 * @param string $taxonomy Taxonomy name.
-	 *
-	 * @return array
-	 */
-	private function get_ancestors( $term_id, $taxonomy ) {
-		$slugs = [];
-
-		if ( Conditional::is_woocommerce_active() && 'product_cat' === $taxonomy && Helper::get_settings( 'general.wc_remove_category_parent_slugs' ) ) {
-			return $slugs;
-		}
-
-		$ancestors = get_ancestors( $term_id, $taxonomy, 'taxonomy' );
-		foreach ( (array) $ancestors as $ancestor ) {
-			$ancestor_term = get_term( $ancestor, $taxonomy );
-			$slugs[]       = $ancestor_term->slug;
-		}
-
-		return array_reverse( $slugs );
 	}
 
 	/**

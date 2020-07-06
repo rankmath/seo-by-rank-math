@@ -9,6 +9,7 @@ import { get, debounce, forEach, isEmpty, isInteger, isUndefined } from 'lodash'
 import { __ } from '@wordpress/i18n'
 import { dispatch, select, subscribe } from '@wordpress/data'
 import apiFetch from '@wordpress/api-fetch'
+import { safeDecodeURIComponent } from '@wordpress/url'
 
 /**
  * Internal dependencies
@@ -122,7 +123,7 @@ class DataCollector {
 			generatedSlug = ''
 		}
 
-		return this._coreEditorSelect.getPermalink()
+		return safeDecodeURIComponent( this._coreEditorSelect.getPermalink() )
 	}
 
 	/**
@@ -153,7 +154,9 @@ class DataCollector {
 		}
 
 		// When no custom slug is provided we should use the generated_slug attribute.
-		return this.getPostAttribute( 'slug' ) || generatedSlug
+		return safeDecodeURIComponent(
+			this.getPostAttribute( 'slug' ) || generatedSlug
+		)
 	}
 
 	/**

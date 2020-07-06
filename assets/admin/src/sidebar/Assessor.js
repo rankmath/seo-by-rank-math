@@ -60,7 +60,7 @@ class Assessor {
 			return value
 		}
 
-		return isEmpty( value ) ? value : Helpers.sanitizeText( value )
+		return isEmpty( value ) ? value : Helpers.sanitizeAppData( value )
 	}
 
 	getPaper( keyword ) {

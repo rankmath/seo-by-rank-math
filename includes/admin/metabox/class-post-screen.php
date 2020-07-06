@@ -353,6 +353,7 @@ class Post_Screen implements IScreen {
 
 		$plugins_found  = [];
 		$active_plugins = get_option( 'active_plugins' );
+		$active_plugins = is_multisite() ? array_merge( $active_plugins, array_keys( get_site_option( 'active_sitewide_plugins', [] ) ) ) : $active_plugins;
 
 		/**
 		 * Allow developers to add plugins to the TOC list.

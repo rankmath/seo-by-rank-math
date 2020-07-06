@@ -21,7 +21,8 @@ $dom_ext       = extension_loaded( 'dom' );
 $simplexml_ext = extension_loaded( 'SimpleXML' );
 $gd_ext        = extension_loaded( 'gd' );
 $mb_string     = extension_loaded( 'mbstring' );
-$all_good      = $php_version_ok && $wp_version_ok && $dom_ext && $simplexml_ext && $gd_ext && $mb_string;
+$openssl       = extension_loaded( 'openssl' );
+$all_good      = $php_version_ok && $wp_version_ok && $dom_ext && $simplexml_ext && $gd_ext && $mb_string && $openssl;
 
 ?>
 
@@ -102,6 +103,12 @@ if ( $all_good ) :
 		<tr class="check-<?php echo $mb_string ? 'yes' : 'no'; ?>">
 			<th>
 				<?php echo $mb_string ? esc_html__( 'PHP MBstring Extension installed', 'rank-math' ) : esc_html__( 'PHP MBstring Extension missing', 'rank-math' ); ?>
+			</th>
+			<td><span class="dashicons dashicons-<?php echo $mb_string ? 'yes' : 'no'; ?>"></span></td>
+		</tr>
+		<tr class="check-<?php echo $openssl ? 'yes' : 'no'; ?>">
+			<th>
+				<?php echo $openssl ? esc_html__( 'PHP OpenSSL Extension installed', 'rank-math' ) : esc_html__( 'PHP OpenSSL Extension missing', 'rank-math' ); ?>
 			</th>
 			<td><span class="dashicons dashicons-<?php echo $mb_string ? 'yes' : 'no'; ?>"></span></td>
 		</tr>

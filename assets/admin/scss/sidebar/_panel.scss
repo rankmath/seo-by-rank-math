@@ -122,6 +122,10 @@
 
 		&__field {
 			margin-bottom: 0;
+
+			label {
+				cursor: pointer;
+			}
 		}
 
 		&:nth-child(even) {

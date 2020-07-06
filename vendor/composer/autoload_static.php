@@ -7,11 +7,16 @@ namespace Composer\Autoload;
 class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
 {
     public static $files = array (
+        'da5f6548f070d3d306f90eee42dd5de6' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgentParser.php',
         '958baf679ab014f6517c26661e8969b7' => __DIR__ . '/..' . '/cmb2/cmb2/init.php',
         'c137015539481e56a35f44f2d09649d5' => __DIR__ . '/../..' . '/includes/template-tags.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'd' => 
+        array (
+            'donatj\\UserAgent\\' => 17,
+        ),
         'R' => 
         array (
             'RankMath\\' => 9,
@@ -23,6 +28,10 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
     );
 
     public static $prefixDirsPsr4 = array (
+        'donatj\\UserAgent\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent',
+        ),
         'RankMath\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
@@ -285,6 +294,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Updates' => __DIR__ . '/../..' . '/includes/class-updates.php',
         'RankMath\\User' => __DIR__ . '/../..' . '/includes/class-user.php',
         'RankMath\\Version_Control' => __DIR__ . '/../..' . '/includes/modules/version-control/class-version-control.php',
+        'RankMath\\Web_Stories\\Web_Stories' => __DIR__ . '/../..' . '/includes/modules/web-stories/class-web-stories.php',
         'RankMath\\Wizard\\Compatibility' => __DIR__ . '/../..' . '/includes/admin/wizard/class-compatibility.php',
         'RankMath\\Wizard\\Import' => __DIR__ . '/../..' . '/includes/admin/wizard/class-import.php',
         'RankMath\\Wizard\\Monitor_Redirection' => __DIR__ . '/../..' . '/includes/admin/wizard/class-monitor-redirection.php',
@@ -305,6 +315,11 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\WooCommerce\\WooCommerce' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-woocommerce.php',
         'WP_Async_Request' => __DIR__ . '/..' . '/a5hleyrich/wp-background-processing/classes/wp-async-request.php',
         'WP_Background_Process' => __DIR__ . '/..' . '/a5hleyrich/wp-background-processing/classes/wp-background-process.php',
+        'donatj\\UserAgent\\Browsers' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent/Browsers.php',
+        'donatj\\UserAgent\\Platforms' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent/Platforms.php',
+        'donatj\\UserAgent\\UserAgent' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent/UserAgent.php',
+        'donatj\\UserAgent\\UserAgentInterface' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent/UserAgentInterface.php',
+        'donatj\\UserAgent\\UserAgentParser' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent/UserAgentParser.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

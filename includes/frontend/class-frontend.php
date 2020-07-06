@@ -94,6 +94,11 @@ class Frontend {
 
 		// Leave this for backwards compatibility as AMP plugin uses head function. We can remove this in the future update.
 		rank_math()->head = new Head();
+
+		if ( function_exists( 'amp_is_dev_mode' ) && amp_is_dev_mode() ) {
+			$this->filter( 'script_loader_tag', 'add_amp_dev_mode_attributes', 10, 2 );
+			$this->filter( 'amp_dev_mode_element_xpaths', 'add_amp_dev_mode_xpaths' );
+		}
 	}
 
 	/**
@@ -177,6 +182,39 @@ class Frontend {
 	 */
 	public function embed_rssfooter_excerpt( $content ) {
 		return $this->embed_rss( $content, 'excerpt' );
+	}
+
+	/**
+	 * Add data-ampdevmode attribute to enqueued scripts.
+	 *
+	 * @since 1.0.45
+	 *
+	 * @param string $tag    The script tag.
+	 * @param string $handle The script handle.
+	 *
+	 * @return string Modified script tag.
+	 */
+	public function add_amp_dev_mode_attributes( $tag, $handle ) {
+		if ( ! in_array( $handle, [ 'rank-math', 'jquery-core', 'jquery-migrate' ], true ) ) {
+			return $tag;
+		}
+
+		return preg_replace( '/(?<=<script)(?=\s|>)/i', ' data-ampdevmode', $tag );
+	}
+
+	/**
+	 * Add data-ampdevmode attributes to the elements that need it.
+	 *
+	 * @since 1.0.45
+	 *
+	 * @param string[] $xpaths XPath queries for elements that should get the data-ampdevmode attribute.
+	 *
+	 * @return string[] XPath queries.
+	 */
+	public function add_amp_dev_mode_xpaths( $xpaths ) {
+		$xpaths[] = '//script[ contains( text(), "var rankMath" ) ]';
+		$xpaths[] = '//*[ @id = "rank-math-css" ]';
+		return $xpaths;
 	}
 
 	/**

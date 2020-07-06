@@ -298,7 +298,7 @@ class FocusKeywordField extends Component {
 		var output = doc.body.textContent || "";
 
 		// Strip remaining characters.
-		return output.replace( /["<>]/g, '' ) || '(invalid)';
+		return output.replace( /["<>]/g, '' ) || '';
 	}
 
 }

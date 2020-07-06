@@ -102,6 +102,7 @@ class LinkEdit extends Component {
 				)
 			}
 
+			activeFormat.unregisteredAttributes.class = ''
 			let newValue = value
 			newValue = applyFormat( newValue, activeFormat )
 			newValue = removeFormat( newValue, 'core/link' )

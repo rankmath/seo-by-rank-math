@@ -91,7 +91,7 @@ class Analytics_List extends List_Table {
 	 */
 	protected function column_property( $item ) {
 		return 'query' === $this->filters['dimension'] ? $item['property'] :
-			'<a href="' . esc_url( $item['property'] ) . '">' . $item['property'] . '</a>';
+			'<a href="' . esc_url( $item['property'] ) . '">' . esc_html( $item['property'] ) . '</a>';
 	}
 
 	/**
@@ -106,7 +106,7 @@ class Analytics_List extends List_Table {
 			$current    = in_array( $column_name, [ 'ctr', 'position' ], true ) ? round( $item[ $column_name ], 2 ) : $item[ $column_name ];
 			$inverted   = 'position' === $column_name ? true : false;
 			$percentage = 'ctr' === $column_name ? true : false;
-			return isset( $this->old_items[ $item['property'] ] ) ? self::diff_label( $current, $this->old_items[ $item['property'] ][ $column_name ], $inverted, $percentage ) : $current;
+			return isset( $this->old_items[ $item['property'] ] ) ? self::diff_label( $current, $this->old_items[ $item['property'] ][ $column_name ], $inverted, $percentage ) : esc_html( $current );
 		}
 
 		return print_r( $item, true );
@@ -155,7 +155,7 @@ class Analytics_List extends List_Table {
 	public static function diff_label( $current, $previous = 0, $inverted = false, $percentage = false ) {
 		$diff = Admin_Helper::compare_values( $previous, $current );
 		if ( 0 === $diff ) {
-			return '<span class="compare-value">' . $current . '</span>';
+			return '<span class="compare-value">' . esc_html( $current ) . '</span>';
 		}
 
 		$downward = $inverted ? 'up' : 'down';
@@ -167,7 +167,7 @@ class Analytics_List extends List_Table {
 			$class,
 			/* translators: previous value */
 			esc_attr( sprintf( esc_html__( 'Previously: %s', 'rank-math' ), $previous ) ),
-			$current,
+			esc_html( $current ),
 			$inverted ? abs( $diff ) : ( $diff < 0 ? $diff : '+' . $diff ),
 			( $percentage ? '%' : '' )
 		);

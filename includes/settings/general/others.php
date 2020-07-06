@@ -86,32 +86,19 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'              => 'rss_before_content',
-		'type'            => 'textarea_small',
-		'name'            => esc_html__( 'RSS Before Content', 'rank-math' ),
-		'desc'            => esc_html__( 'Add content before each post in your site feeds.', 'rank-math' ),
-		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
+		'id'   => 'rss_before_content',
+		'type' => 'textarea_small',
+		'name' => esc_html__( 'RSS Before Content', 'rank-math' ),
+		'desc' => esc_html__( 'Add content before each post in your site feeds.', 'rank-math' ),
 	]
 );
 
 $cmb->add_field(
 	[
-		'id'              => 'rss_after_content',
-		'type'            => 'textarea_small',
-		'name'            => esc_html__( 'RSS After Content', 'rank-math' ),
-		'desc'            => esc_html__( 'Add content after each post in your site feeds.', 'rank-math' ),
-		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
-	]
-);
-
-$cmb->add_field(
-	[
-		'id'              => 'rss_after_content',
-		'type'            => 'textarea_small',
-		'name'            => esc_html__( 'RSS After Content', 'rank-math' ),
-		'desc'            => esc_html__( 'Add content after each post in your site feeds.', 'rank-math' ),
-		'classes'         => 'nob',
-		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
+		'id'   => 'rss_after_content',
+		'type' => 'textarea_small',
+		'name' => esc_html__( 'RSS After Content', 'rank-math' ),
+		'desc' => esc_html__( 'Add content after each post in your site feeds.', 'rank-math' ),
 	]
 );
 

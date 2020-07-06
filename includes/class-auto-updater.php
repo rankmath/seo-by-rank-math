@@ -14,6 +14,7 @@ namespace RankMath;
 
 use RankMath\Paper\Paper;
 use RankMath\Traits\Hooker;
+use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 
 defined( 'ABSPATH' ) || exit;
@@ -71,10 +72,6 @@ class Auto_Updater {
 			return;
 		}
 
-		if ( ! $this->do_filter( 'auto_update_send_email', true, $plugin_upgrader_obj ) ) {
-			return;
-		}
-
 		$this->send_update_email( $plugin_upgrader_obj );
 	}
 
@@ -84,6 +81,10 @@ class Auto_Updater {
 	 * @param object $plugin_upgrader_obj Plugin_Upgrader object of the finished update process.
 	 */
 	public function send_update_email( $plugin_upgrader_obj ) {
+		if ( ! $this->do_filter( 'auto_update_send_email', Helper::get_settings( 'general.enable_auto_update_email' ), $plugin_upgrader_obj ) ) {
+			return;
+		}
+
 		// Extract version number.
 		preg_match( '/seo-by-rank-math\.([0-9.]+)/', $plugin_upgrader_obj->result['source'], $matches );
 		$version = $matches[1];

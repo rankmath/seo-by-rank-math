@@ -103,7 +103,6 @@ class Recipe implements Snippet {
 	 * @return mixed
 	 */
 	private function get_list_how_to_section( $steps ) {
-		$list = $steps;
 		if ( 1 < count( $steps ) ) {
 			$list = [];
 			foreach ( $steps as $step ) {
@@ -112,9 +111,14 @@ class Recipe implements Snippet {
 					'text' => $step,
 				];
 			}
+
+			return $list;
 		}
 
-		return $list;
+		return [
+			'type' => 'HowtoStep',
+			'text' => $steps,
+		];
 	}
 
 	/**

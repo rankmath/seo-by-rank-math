@@ -112,7 +112,7 @@ class Snippet_Shortcode {
 		?>
 			<div id="rank-math-rich-snippet-wrapper">
 
-				<h5 class="rank-math-title"><?php echo $title; ?></h5>
+				<h5 class="rank-math-title"><?php echo esc_html( $title ); ?></h5>
 
 				<?php if ( ! empty( $image ) ) { ?>
 					<div class="rank-math-review-image">
@@ -152,13 +152,16 @@ class Snippet_Shortcode {
 			return;
 		}
 
-		$id = 'event_startdate_date' === $id ? 'event_startdate' : ( 'event__enddate' === $id ? 'event_enddate' : $id );
-		if ( ! $value = Helper::get_post_meta( "snippet_{$id}", $post->ID ) ) { // phpcs:ignore
+		$id    = 'event_startdate_date' === $id ? 'event_startdate' : ( 'event__enddate' === $id ? 'event_enddate' : $id );
+		$value = Helper::get_post_meta( "snippet_{$id}", $post->ID );
+		$value = 'product_instock' !== $id ? $value : ( $value ? esc_html__( 'Available', 'rank-math' ) : esc_html__( 'Not Available', 'rank-math' ) );
+
+		if ( ! $value ) {
 			return;
 		}
 		?>
 		<p>
-			<strong><?php echo $field; ?>: </strong>
+			<strong><?php echo esc_html( $field ); ?>: </strong>
 			<?php
 			if ( in_array( $id, [ 'recipe_instructions', 'recipe_ingredients', 'book_editions', 'event_attendance_mode' ], true ) ) {
 				$perform = "get_{$id}";
@@ -186,7 +189,7 @@ class Snippet_Shortcode {
 	 */
 	public function get_recipe_instructions( $value ) {
 		foreach ( $value as $key => $data ) {
-			echo '<p><strong>' . $data['name'] . ': </strong>' . $data['text'] . '</p>';
+			echo '<p><strong>' . esc_html( $data['name'] ) . ': </strong>' . esc_html( $data['text'] ) . '</p>';
 		}
 	}
 
@@ -273,12 +276,12 @@ class Snippet_Shortcode {
 	 */
 	public function get_event_attendance_mode( $value ) {
 		$hash = [
-			'online'  => __( 'Online', 'rank-math' ),
-			'offline' => __( 'Offline', 'rank-math' ),
-			'both'    => __( 'Online + Offline', 'rank-math' ),
+			'online'  => esc_html__( 'Online', 'rank-math' ),
+			'offline' => esc_html__( 'Offline', 'rank-math' ),
+			'both'    => esc_html__( 'Online + Offline', 'rank-math' ),
 		];
 
-		echo ! empty( $hash[ $value ] ) ? $hash[ $value ] : __( 'Offline', 'rank-math' );
+		echo ! empty( $hash[ $value ] ) ? $hash[ $value ] : esc_html__( 'Offline', 'rank-math' );
 	}
 
 	/**

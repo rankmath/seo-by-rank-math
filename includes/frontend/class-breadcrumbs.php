@@ -145,7 +145,7 @@ class Breadcrumbs {
 			$html .= $args['before'] . $link . $args['after'];
 
 			if ( $size !== $key + 1 ) {
-				$html .= '<span class="separator"> ' . $this->settings['separator'] . ' </span>';
+				$html .= '<span class="separator"> ' . wp_kses_post( $this->settings['separator'] ) . ' </span>';
 			}
 		}
 

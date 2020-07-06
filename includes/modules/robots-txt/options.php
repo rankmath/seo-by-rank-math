@@ -41,7 +41,7 @@ $cmb->add_field(
 		'desc'            => ! $data['exists'] ? '' : esc_html__( 'Contents are locked because robots.txt file is present in the root folder.', 'rank-math' ),
 		'attributes'      => $attributes,
 		'classes'         => 'nob rank-math-code-box',
-		'sanitization_cb' => false,
+		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_robots_text' ],
 	]
 );
 

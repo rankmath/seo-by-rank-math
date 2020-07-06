@@ -17,6 +17,7 @@ use MyThemeShop\Helpers\Arr;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\Conditional;
+use donatj\UserAgent\UserAgentParser;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -34,7 +35,7 @@ class Monitor {
 	 */
 	public function __construct() {
 		if ( is_admin() ) {
-			$this->admin = new Admin;
+			$this->admin = new Admin();
 		}
 
 		if ( Conditional::is_ajax() ) {
@@ -109,12 +110,14 @@ class Monitor {
 		}
 
 		// Mode = advanced.
-		DB::add([
-			'uri'        => $uri,
-			'ip'         => Param::server( 'REMOTE_ADDR', '' ),
-			'referer'    => Param::server( 'HTTP_REFERER', '' ),
-			'user_agent' => $this->get_user_agent(),
-		]);
+		DB::add(
+			[
+				'uri'        => $uri,
+				'ip'         => Param::server( 'REMOTE_ADDR', '' ),
+				'referer'    => Param::server( 'HTTP_REFERER', '' ),
+				'user_agent' => $this->get_user_agent(),
+			]
+		);
 	}
 
 	/**
@@ -179,14 +182,13 @@ class Monitor {
 			];
 		}
 
-		$response = wp_remote_get( 'https://api.redirect.li/v1/useragent/' . urlencode( $u_agent ) );
-		$response = wp_remote_retrieve_body( $response );
-		$response = json_decode( $response, true );
+		$parser = new UserAgentParser();
+		$agent  = $parser->parse( $u_agent );
 
 		return [
-			'platform' => $response['os']['name'] . ' ' . $response['os']['version'],
-			'browser'  => $response['browser']['name'],
-			'version'  => $response['browser']['version'],
+			'platform' => $agent->platform(),
+			'browser'  => $agent->browser(),
+			'version'  => $agent->browserVersion(),
 		];
 	}
 }

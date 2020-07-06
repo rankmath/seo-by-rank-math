@@ -40,14 +40,13 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'              => 'date_archive_description',
-		'type'            => 'textarea_small',
-		'name'            => esc_html__( 'Date Archive Description', 'rank-math' ),
-		'desc'            => esc_html__( 'Date archive description.', 'rank-math' ),
-		'classes'         => 'rank-math-supports-variables rank-math-description rank-math-advanced-option',
-		'dep'             => $dep,
-		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
-		'attributes'      => [
+		'id'         => 'date_archive_description',
+		'type'       => 'textarea_small',
+		'name'       => esc_html__( 'Date Archive Description', 'rank-math' ),
+		'desc'       => esc_html__( 'Date archive description.', 'rank-math' ),
+		'classes'    => 'rank-math-supports-variables rank-math-description rank-math-advanced-option',
+		'dep'        => $dep,
+		'attributes' => [
 			'class'                  => 'cmb2-textarea-small wp-exclude-emoji',
 			'data-gramm_editor'      => 'false',
 			'rows'                   => 2,

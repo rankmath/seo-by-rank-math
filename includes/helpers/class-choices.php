@@ -534,6 +534,7 @@ trait Choices {
 				'page'       => 'rm-icon rm-icon-page',
 				'attachment' => 'rm-icon rm-icon-attachment',
 				'product'    => 'rm-icon rm-icon-cart',
+				'web-story'  => 'rm-icon rm-icon-stories',
 			]
 		);
 	}

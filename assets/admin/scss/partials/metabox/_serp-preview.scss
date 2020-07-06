@@ -249,8 +249,11 @@
 
 	// Device Buttons
 	.button-secondary:not(.rank-math-edit-snippet) {
+		font-size: 11px;
 		margin-bottom: 0;
+		padding: 0 8px;
 		height: 30px;
+		min-height: 30px;
 		line-height: 32px;
 
 		&.active,

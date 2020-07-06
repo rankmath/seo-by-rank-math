@@ -9,8 +9,7 @@
  * External Dependencies
  */
 import jQuery from 'jquery'
-
-( function( $ ) {
+;( function( $ ) {
 	// Document Ready
 	$( function() {
 		window.rankMathSetupWizard = {
@@ -439,48 +438,36 @@ import jQuery from 'jquery'
 			},
 
 			ready() {
-				// Show/Hide SEO Score on frontend.
-				$( '#show-seo-score' ).on( 'change', function() {
-					$.ajax( {
-						url: rankMath.api.root + 'rankmath/v1/enableScore',
-						method: 'POST',
-						beforeSend( xhr ) {
-							xhr.setRequestHeader(
-								'X-WP-Nonce',
-								rankMath.api.nonce
-							)
-						},
-						data: {
-							enable: $( this ).is( ':checked' ),
-						},
-					} )
-				} )
-
-				$( '.rank-math-score-image img' ).on( 'click', function( e ) {
-					e.preventDefault()
-					$( '#show-seo-score' ).trigger( 'click' )
-					return false
-				} )
-
 				// Enable/Disable auto-update.
 				$( '#auto-update' ).on( 'change', function() {
-					$.ajax( {
-						url: rankMath.api.root + 'rankmath/v1/autoUpdate',
-						method: 'POST',
-						beforeSend( xhr ) {
-							xhr.setRequestHeader(
-								'X-WP-Nonce',
-								rankMath.api.nonce
-							)
-						},
-						data: {
-							enable: $( this ).is( ':checked' ),
-						},
-					} )
+					$( '.rank-math-auto-update-email-wrapper' ).toggle(
+						$( this ).is( ':checked' )
+					)
 				} )
+
+				$( '.rank-math-additional-options input.rank-math-modules' ).on(
+					'change',
+					function() {
+						const $this = $( this )
+						$.ajax( {
+							url: rankMath.api.root + 'rankmath/v1/autoUpdate',
+							method: 'POST',
+							beforeSend( xhr ) {
+								xhr.setRequestHeader(
+									'X-WP-Nonce',
+									rankMath.api.nonce
+								)
+							},
+							data: {
+								key: $this.data( 'key' ),
+								value: $this.is( ':checked' ),
+							},
+						} )
+					}
+				)
 			},
 		}
 
 		window.rankMathSetupWizard.init()
 	} )
-}( jQuery ) )
+} )( jQuery )

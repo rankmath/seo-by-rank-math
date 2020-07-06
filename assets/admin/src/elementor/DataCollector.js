@@ -19,6 +19,7 @@ import {
 import { dispatch, select, subscribe } from '@wordpress/data'
 import apiFetch from '@wordpress/api-fetch'
 import { addAction } from '@wordpress/hooks'
+import { safeDecodeURIComponent } from '@wordpress/url'
 
 /**
  * Internal dependencies
@@ -64,14 +65,31 @@ class DataCollector {
 	 */
 	elementorPreviewLoaded() {
 		addAction( 'rank_math_data_changed', 'rank-math', () => {
-			const footerSaver = get( elementor, 'saver.footerSaver', false )
-			if ( false !== footerSaver ) {
-				footerSaver.activateSaveButtons( document, true )
+			this.activateSaveButton()
+		} )
+
+		addAction( 'rank_math_update_app_ui', 'rank-math', ( key, value ) => {
+			if ( 'hasRedirect' !== key ) {
 				return
 			}
 
-			elementor.channels.editor.trigger( 'status:change', true )
+			this.activateSaveButton()
 		} )
+	}
+
+	/**
+	 * Activate Elementor's update button.
+	 *
+	 * @return {void}
+	 */
+	activateSaveButton() {
+		const footerSaver = get( elementor, 'saver.footerSaver', false )
+		if ( false !== footerSaver ) {
+			footerSaver.activateSaveButtons( document, true )
+			return
+		}
+
+		elementor.channels.editor.trigger( 'status:change', true )
 	}
 
 	/**
@@ -151,10 +169,7 @@ class DataCollector {
 		return rankMath.is_front_page
 			? rankMath.homeUrl + '/'
 			: rankMath.permalinkFormat
-				.replace(
-					/%(postname|pagename)%/,
-					select( 'rank-math' ).getPermalink()
-				)
+				.replace( /%(postname|pagename)%/, this.getSlug() )
 				.trimRight( '/' ) + '/'
 	}
 
@@ -164,7 +179,7 @@ class DataCollector {
 	 * @return {string} The post's slug.
 	 */
 	getSlug() {
-		return select( 'rank-math' ).getPermalink()
+		return safeDecodeURIComponent( select( 'rank-math' ).getPermalink() )
 	}
 
 	/**

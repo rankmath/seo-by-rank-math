@@ -113,7 +113,7 @@ class Block_HowTo extends Block {
 	 * @return array
 	 */
 	public function add_graph( $data, $block ) {
-		// Early bail!!!
+		// Early bail.
 		if ( ! $this->has_steps( $block['attrs'] ) ) {
 			return $data;
 		}
@@ -210,7 +210,7 @@ class Block_HowTo extends Block {
 	 * @param array $step        The step block data.
 	 */
 	private function add_step_image_from_content( &$schema_step, $step ) {
-		// Erly Bail!!!
+		// Early Bail.
 		if ( empty( $step['content'] ) || ! Str::contains( '<img', $step['content'] ) ) {
 			return;
 		}
@@ -272,7 +272,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * [add_caption description]
+	 * Add Caption
 	 *
 	 * @param [type] $schema_image [description].
 	 * @param [type] $image_id     [description].
@@ -307,7 +307,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * [add_duration description]
+	 * Add Duration.
 	 *
 	 * @param [type] $data  [description].
 	 * @param [type] $attrs [description].
@@ -332,7 +332,7 @@ class Block_HowTo extends Block {
 	 * @return string
 	 */
 	public function render( $attributes ) {
-		// Early bail!!!
+		// Early bail.
 		if ( ! $this->has_steps( $attributes ) ) {
 			return '';
 		}
@@ -399,7 +399,7 @@ class Block_HowTo extends Block {
 	 */
 	private function build_duration( $attrs ) {
 		if ( ! isset( $attrs['hasDuration'] ) || ! $attrs['hasDuration'] ) {
-			return'';
+			return '';
 		}
 
 		$days    = isset( $attrs['days'] ) ? absint( $attrs['days'] ) : 0;

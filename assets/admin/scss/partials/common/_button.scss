@@ -8,6 +8,8 @@
 	background: #f8f9fa;
 	border: 1px solid $gray;
 	color: darken($dark_gray, 8);
+	min-height: 30px;
+    height: auto;
 
 	&.active {
 		color: darken($dark_gray, 12);
@@ -91,6 +93,8 @@
 	line-height: 82px;
 	transform: perspective(1px) translateZ(0);
 	border-radius: 82px;
+	min-height: 30px;
+	height: auto;
 
 	i {
 		line-height: 85px;

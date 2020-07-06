@@ -297,6 +297,7 @@ class Installer {
 			'buddypress',
 			'bbpress',
 			'acf',
+			'web-stories',
 		];
 
 		// Role Manager.
@@ -430,8 +431,8 @@ class Installer {
 	 * @param array $sitemap Hold sitemap settings.
 	 */
 	private function create_post_type_options( &$titles, &$sitemap ) {
-		$post_types   = Helper::get_accessible_post_types();
-		$post_types[] = 'product';
+		$post_types = Helper::get_accessible_post_types();
+		array_push( $post_types, 'product', 'web-story' );
 
 		$titles['pt_download_default_rich_snippet'] = 'product';
 		foreach ( $post_types as $post_type ) {
@@ -450,7 +451,7 @@ class Installer {
 				$titles[ 'pt_' . $post_type . '_archive_title' ] = '%title% %page% %sep% %sitename%';
 			}
 
-			if ( 'attachment' === $post_type ) {
+			if ( in_array( $post_type, [ 'attachment', 'web-story' ], true ) ) {
 				$sitemap[ 'pt_' . $post_type . '_sitemap' ]     = 'off';
 				$titles[ 'pt_' . $post_type . '_add_meta_box' ] = 'off';
 				continue;
@@ -482,10 +483,11 @@ class Installer {
 	 */
 	private function get_post_type_defaults( $post_type ) {
 		$rich_snippets = [
-			'post'     => 'article',
-			'page'     => 'article',
-			'product'  => 'product',
-			'download' => 'product',
+			'post'      => 'article',
+			'page'      => 'article',
+			'product'   => 'product',
+			'download'  => 'product',
+			'web-story' => 'article',
 		];
 
 		$defaults = [

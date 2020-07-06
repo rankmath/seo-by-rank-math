@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.44
+ * Version:           1.0.45
  * Plugin URI:        https://s.rankmath.com/home
  * Description:       Rank Math is a revolutionary SEO product that combines the features of many SEO tools and lets you multiply your traffic in the easiest way possible.
  * Author:            Rank Math
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.44';
+	public $version = '1.0.45';
 
 	/**
 	 * Rank Math database version.
@@ -171,12 +171,12 @@ final class RankMath {
 	 * Instantiate the plugin.
 	 */
 	private function setup() {
+		// Define plugin constants.
+		$this->define_constants();
+
 		if ( ! $this->is_requirements_meet() ) {
 			return;
 		}
-
-		// Define plugin constants.
-		$this->define_constants();
 
 		// Include required files.
 		$this->includes();
@@ -404,18 +404,18 @@ final class RankMath {
 	 */
 	public function plugin_action_links( $links ) {
 		$options = [
-			'options-general' => esc_html__( 'Settings', 'rank-math' ),
-			'wizard'          => esc_html__( 'Setup Wizard', 'rank-math' ),
+			'options-general' => __( 'Settings', 'rank-math' ),
+			'wizard'          => __( 'Setup Wizard', 'rank-math' ),
 		];
 
 		if ( $this->container['registration']->invalid ) {
 			$options = [
-				'registration' => esc_html__( 'Setup Wizard', 'rank-math' ),
+				'registration' => __( 'Setup Wizard', 'rank-math' ),
 			];
 		}
 
 		foreach ( $options as $link => $label ) {
-			$plugin_links[] = '<a href="' . \RankMath\Helper::get_admin_url( $link ) . '">' . $label . '</a>';
+			$plugin_links[] = '<a href="' . \RankMath\Helper::get_admin_url( $link ) . '">' . esc_html( $label ) . '</a>';
 		}
 
 		return array_merge( $links, $plugin_links );

@@ -21,34 +21,19 @@ defined( 'ABSPATH' ) || exit;
 class Data_Encryption {
 
 	/**
-	 * Holds the encryption key.
+	 * Enryption available or not.
 	 *
-	 * @var string
+	 * @var bool
 	 */
-	private $key;
-
-	/**
-	 * Holds the salt.
-	 *
-	 * @var string
-	 */
-	private $salt;
-
-	/**
-	 * Constructor.
-	 */
-	public function __construct() {
-		$this->key  = $this->get_default_key();
-		$this->salt = $this->get_default_salt();
-	}
+	private static $encryption_possible = null;
 
 	/**
 	 * Get encryption key.
 	 *
 	 * @return string Key.
 	 */
-	private function get_default_key() {
-		if ( defined( 'RANK_MATH_ENCRYPTION_KEY' ) && '' !== GOOGLESITEKIT_ENCRYPTION_KEY ) {
+	public static function get_key() {
+		if ( defined( 'RANK_MATH_ENCRYPTION_KEY' ) && '' !== RANK_MATH_ENCRYPTION_KEY ) {
 			return RANK_MATH_ENCRYPTION_KEY;
 		}
 
@@ -64,8 +49,8 @@ class Data_Encryption {
 	 *
 	 * @return string Salt.
 	 */
-	private function get_default_salt() {
-		if ( defined( 'RANK_MATH_ENCRYPTION_SALT' ) && '' !== GOOGLESITEKIT_ENCRYPTION_SALT ) {
+	public static function get_salt() {
+		if ( defined( 'RANK_MATH_ENCRYPTION_SALT' ) && '' !== RANK_MATH_ENCRYPTION_SALT ) {
 			return RANK_MATH_ENCRYPTION_SALT;
 		}
 
@@ -82,18 +67,23 @@ class Data_Encryption {
 	 * @param  mixed $value Original string.
 	 * @return string       Encrypted string.
 	 */
-	public function encrypt( $value ) {
-		if ( ! extension_loaded( 'openssl' ) ) {
+	public static function encrypt( $value ) {
+		if ( ! self::is_available() ) {
 			return $value;
 		}
 
-		$method = 'aes-256-ctr';
-		$ivlen  = openssl_cipher_iv_length( $method );
-		$iv     = openssl_random_pseudo_bytes( $ivlen );
+		$method  = 'aes-256-ctr';
+		$ciphers = openssl_get_cipher_methods();
+		if ( ! in_array( $method, $ciphers, true ) ) {
+			$method = $ciphers[0];
+		}
 
-		$raw_value = openssl_encrypt( $value . $this->salt, $method, $this->key, 0, $iv );
+		$ivlen = openssl_cipher_iv_length( $method );
+		$iv    = openssl_random_pseudo_bytes( $ivlen );
+
+		$raw_value = openssl_encrypt( $value . self::get_salt(), $method, self::get_key(), 0, $iv );
 		if ( ! $raw_value ) {
-			return false;
+			return $value;
 		}
 
 		return base64_encode( $iv . $raw_value );
@@ -105,66 +95,87 @@ class Data_Encryption {
 	 * @param  string $raw_value Encrypted string.
 	 * @return string            Decrypted string.
 	 */
-	public function decrypt( $raw_value ) {
-		if ( ! extension_loaded( 'openssl' ) ) {
+	public static function decrypt( $raw_value ) {
+		if ( ! self::is_available() ) {
 			return $raw_value;
+		}
+
+		$method  = 'aes-256-ctr';
+		$ciphers = openssl_get_cipher_methods();
+		if ( ! in_array( $method, $ciphers, true ) ) {
+			$method = $ciphers[0];
 		}
 
 		$raw_value = base64_decode( $raw_value, true );
 
-		$method = 'aes-256-ctr';
-		$ivlen  = openssl_cipher_iv_length( $method );
-		$iv     = substr( $raw_value, 0, $ivlen );
+		$ivlen = openssl_cipher_iv_length( $method );
+		$iv    = substr( $raw_value, 0, $ivlen );
 
 		$raw_value = substr( $raw_value, $ivlen );
 
 		if ( ! $raw_value || strlen( $iv ) !== $ivlen ) {
-			return false;
+			return $raw_value;
 		}
 
-		$value = openssl_decrypt( $raw_value, $method, $this->key, 0, $iv );
-		if ( ! $value || substr( $value, - strlen( $this->salt ) ) !== $this->salt ) {
-			return false;
+		$salt = self::get_salt();
+
+		$value = openssl_decrypt( $raw_value, $method, self::get_key(), 0, $iv );
+		if ( ! $value || substr( $value, - strlen( $salt ) ) !== $salt ) {
+			return $raw_value;
 		}
 
-		return substr( $value, 0, - strlen( $this->salt ) );
+		return substr( $value, 0, - strlen( $salt ) );
 	}
 
 	/**
 	 * Recursively encrypt array of strings.
 	 *
-	 * @param  mixed $value Original strings.
+	 * @param  mixed $data Original strings.
 	 * @return string       Encrypted strings.
 	 */
-	public function deep_encrypt( $data ) {
+	public static function deep_encrypt( $data ) {
 		if ( is_array( $data ) ) {
 			$encrypted = [];
 			foreach ( $data as $key => $value ) {
-				$encrypted[ $this->encrypt( $key ) ] = $this->deep_encrypt( $value );
+				$encrypted[ self::encrypt( $key ) ] = self::deep_encrypt( $value );
 			}
 
 			return $encrypted;
 		}
 
-		return $this->encrypt( $data );
+		return self::encrypt( $data );
 	}
 
 	/**
 	 * Recursively decrypt array of strings.
 	 *
-	 * @param  string $raw_value Encrypted strings.
-	 * @return string            Decrypted strings.
+	 * @param  string $data Encrypted strings.
+	 * @return string       Decrypted strings.
 	 */
-	public function deep_decrypt( $data ) {
+	public static function deep_decrypt( $data ) {
 		if ( is_array( $data ) ) {
 			$decrypted = [];
 			foreach ( $data as $key => $value ) {
-				$decrypted[ $this->decrypt( $key ) ] = $this->deep_decrypt( $value );
+				$decrypted[ self::decrypt( $key ) ] = self::deep_decrypt( $value );
 			}
 
 			return $decrypted;
 		}
 
-		return $this->decrypt( $data );
+		return self::decrypt( $data );
+	}
+
+	/**
+	 * Check if OpenSSL is available and encryption is not disabled with filter.
+	 *
+	 * @return bool Whether encryption is possible or not.
+	 */
+	public static function is_available() {
+		static $encryption_possible;
+		if ( null === $encryption_possible ) {
+			$encryption_possible = extension_loaded( 'openssl' ) && apply_filters( 'rank_math/admin/sensitive_data_encryption', true );
+		}
+
+		return (bool) $encryption_possible;
 	}
 }

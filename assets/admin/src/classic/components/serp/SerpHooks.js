@@ -142,6 +142,9 @@ class SerpHooks {
 	updatePermalinkPreview() {
 		const format = this.serpPermalink.data( 'format' ) || ''
 		const slug = this.serpPermalinkField.val()
+		const keywordPermalink = rankMathEditor.assessor.getResearch(
+			'slugify'
+		)( rankMathEditor.getSelectedKeyword() )
 
 		// Set Placeholder and Permalink
 		this.permalink =
@@ -159,7 +162,7 @@ class SerpHooks {
 		} )
 		this.serpPermalink.html(
 			highlight(
-				rankMathEditor.getSelectedKeyword(),
+				keywordPermalink,
 				Helpers.sanitizeText(
 					safeDecodeURIComponent( this.permalink )
 				),

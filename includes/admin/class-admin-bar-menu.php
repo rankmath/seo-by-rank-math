@@ -145,7 +145,7 @@ class Admin_Bar_Menu {
 
 		$this->items['main'] = [
 			'id'       => self::MENU_IDENTIFIER,
-			'title'    => '<span class="rank-math-icon">' . $this->get_icon() . '</span><span class="rank-math-text">' . esc_html( 'Rank Math SEO', 'rank-math' ) . '</span>',
+			'title'    => '<span class="rank-math-icon">' . $this->get_icon() . '</span><span class="rank-math-text">' . esc_html__( 'Rank Math SEO', 'rank-math' ) . '</span>',
 			'href'     => Helper::get_admin_url( $first_menu ),
 			'meta'     => [ 'title' => esc_html__( 'Rank Math Dashboard', 'rank-math' ) ],
 			'priority' => 10,

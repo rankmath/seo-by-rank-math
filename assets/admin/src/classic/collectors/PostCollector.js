@@ -20,6 +20,7 @@ class PostCollector extends DataCollector {
 		this.elemTitle = $( '#title' )
 		this.elemDescription = $( '#excerpt' )
 		this.elemContent = $( '#content' )
+		this.editableName = $( '#editable-post-name-full' )
 
 		this.assessThumbnail = this.assessThumbnail.bind( this )
 		addAction(
@@ -47,16 +48,18 @@ class PostCollector extends DataCollector {
 			: this.elemContent.val()
 	}
 
-	events() {
-		if (
-			'' === this.elemSlug.val() &&
-			$( '#editable-post-name-full' ).length
-		) {
-			this.elemSlug
-				.val( $( '#editable-post-name-full' ).text() )
-				.trigger( 'input' )
-		}
+	/**
+	 * Get the post's slug.
+	 *
+	 * @return {string} The post's slug.
+	 */
+	getSlug() {
+		return '' === this.elemSlug.val() && this.editableName.length
+			? this.editableName.text()
+			: this.elemSlug.val()
+	}
 
+	events() {
 		this.elemContent.on(
 			'input change',
 			debounce( () => {

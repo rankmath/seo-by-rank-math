@@ -20,8 +20,8 @@ $cmb->add_field(
 
 $serp_footer = '<div class="serp-preview-footer wp-clearfix">
 			<div class="rank-math-ui">
-				<a href="#" class="button button-secondary rank-math-edit-snippet">' . __( 'Edit Snippet', 'rank-math' ) . '</a>
-				<a href="#" class="button button-secondary rank-math-edit-snippet hidden">' . __( 'Close Editor', 'rank-math' ) . '</a>
+				<a href="#" class="button button-secondary rank-math-edit-snippet">' . esc_html__( 'Edit Snippet', 'rank-math' ) . '</a>
+				<a href="#" class="button button-secondary rank-math-edit-snippet hidden">' . esc_html__( 'Close Editor', 'rank-math' ) . '</a>
 			</div>
 		</div>';
 
@@ -48,27 +48,27 @@ $cmb->add_field(
 		'type'            => 'text',
 		'name'            => esc_html__( 'Permalink', 'rank-math' ),
 		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_permalink' ],
+		'escape_cb'       => [ '\RankMath\CMB2', 'escape_permalink' ],
 		'desc'            => Admin_Helper::is_home_page() ? esc_html__( 'Editing Homepage permalink is not possible.', 'rank-math' ) : esc_html__( 'This is the unique URL of this page, displayed below the post title in the search results.', 'rank-math' ),
 	]
 );
 
 $cmb->add_field(
 	[
-		'id'              => 'rank_math_description',
-		'type'            => 'textarea',
-		'name'            => esc_html__( 'Description', 'rank-math' ),
-		'desc'            => esc_html__( 'This is what will appear as the description when this post shows up in the search results.', 'rank-math' ),
-		'classes'         => 'rank-math-supports-variables',
-		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
-		'escape_cb'       => 'esc_html',
-		'attributes'      => [
+		'id'         => 'rank_math_description',
+		'type'       => 'textarea',
+		'name'       => esc_html__( 'Description', 'rank-math' ),
+		'desc'       => esc_html__( 'This is what will appear as the description when this post shows up in the search results.', 'rank-math' ),
+		'classes'    => 'rank-math-supports-variables',
+		'escape_cb'  => 'esc_html',
+		'attributes' => [
 			'class'                  => 'cmb2_textarea wp-exclude-emoji',
 			'rows'                   => 2,
 			'data-autoresize'        => true,
 			'data-gramm_editor'      => 'false',
 			'data-exclude-variables' => 'seo_title,seo_description',
 		],
-		'after_row'       => '</div>' . $serp_footer,
+		'after_row'  => '</div>' . $serp_footer,
 	]
 );
 

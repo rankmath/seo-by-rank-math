@@ -79,7 +79,7 @@ class Block_FAQ extends Block {
 	 * @return array
 	 */
 	public function add_graph( $data, $block ) {
-		// Early bail!!!
+		// Early bail.
 		if ( ! $this->has_questions( $block['attrs'] ) ) {
 			return $data;
 		}
@@ -119,7 +119,7 @@ class Block_FAQ extends Block {
 	 * @return string
 	 */
 	public function render( $attributes ) {
-		// Early bail!!!
+		// Early bail.
 		if ( ! $this->has_questions( $attributes ) ) {
 			return '';
 		}

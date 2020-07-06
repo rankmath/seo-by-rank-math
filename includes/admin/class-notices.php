@@ -41,6 +41,7 @@ class Notices implements Runner {
 		$this->is_plugin_configured();
 		$this->new_post_type();
 		$this->convert_wpml_settings();
+		$this->update_wp_notice();
 	}
 
 	/**
@@ -61,6 +62,10 @@ class Notices implements Runner {
 
 		if ( 'convert_wpml_settings' === $notification_id ) {
 			update_option( 'rank_math_wpml_notice_dismissed', true );
+		}
+
+		if ( 'update_wordpress' === $notification_id ) {
+			update_option( 'rank_math_update_wp_notice_dismissed', true );
 		}
 	}
 
@@ -110,6 +115,21 @@ class Notices implements Runner {
 				'id'   => 'new_post_type',
 			]
 		);
+	}
+
+	/**
+	 * Add notification if WordPress version is below 5.0.
+	 */
+	private function update_wp_notice() {
+		if ( version_compare( get_bloginfo( 'version' ), '5.0', '<' ) && ! get_option( 'rank_math_update_wp_notice_dismissed' ) ) {
+			Helper::add_notification(
+				__( 'From the next update, you\'ll need atleast WordPress 5.0 to run the Rank Math plugin. Please update to the latest version.', 'rank-math' ),
+				[
+					'type' => 'error',
+					'id'   => 'update_wordpress',
+				]
+			);
+		}
 	}
 
 	/**
@@ -168,6 +188,7 @@ class Notices implements Runner {
 			'img_title_format',
 			'breadcrumbs_separator',
 			'breadcrumbs_prefix',
+			'breadcrumbs_home_link',
 			'breadcrumbs_home_label',
 			'breadcrumbs_archive_format',
 			'breadcrumbs_search_format',
