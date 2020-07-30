@@ -63,7 +63,6 @@
 
 				color: $text;
 
-				padding-top: 2px;
 				margin-bottom: -1px;
 
 				&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
@@ -83,12 +82,14 @@
 				}
 
 				&:after {
+					visibility: visible;
 					width: 100%;
 					height: 3px;
 
 					content: '';
 
 					background: #0095cd;
+					box-shadow: none;
 
 					@include position( absolute, null null 0 0 );
 				}
@@ -139,6 +140,28 @@
 
 .#{$namespace}-tabs {
 	@extend %rank-math-tabs;
+
+	@media (min-width: 600px) {
+		.components-checkbox-control {
+			&__input-container {
+				width: 16px;
+				height: 16px;
+				margin-right: 8px;
+			}
+	
+			&__input[type=checkbox] {
+				width: 16px;
+				height: 16px;
+			}
+		}
+	
+		svg.components-checkbox-control__checked {
+			width: 16px;
+			height: 16px;
+			left: 0;
+			top: 0;
+		}
+	}
 }
 
 body.rtl {

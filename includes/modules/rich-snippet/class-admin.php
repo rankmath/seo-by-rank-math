@@ -34,10 +34,6 @@ class Admin extends Base {
 			[
 				'id'        => 'rich-snippet',
 				'directory' => $directory,
-				'help'      => [
-					'title' => esc_html__( 'Schema Markup', 'rank-math' ),
-					'view'  => $directory . '/views/help.php',
-				],
 			]
 		);
 		parent::__construct();

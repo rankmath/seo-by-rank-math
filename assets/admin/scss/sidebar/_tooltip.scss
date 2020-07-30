@@ -8,12 +8,11 @@
 
 		vertical-align: .5px;
 
-		opacity: .45;
-		color: #6d7379;
+		color: $gray;
 
 		&:hover {
 			opacity: 1;
-			color: $color-blue;
+			color: $primary;
 		}
 
 		&:after {

@@ -54,4 +54,23 @@
 			<key name="rss_after_content"/>
 		</key>
 	</admin-texts>
+	<gutenberg-blocks>
+		<gutenberg-block type="rank-math/faq-block" translate="1">
+			<key name="questions">
+				<key name="*">
+					<key name="title"/>
+					<key name="content"/>
+				</key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="rank-math/howto-block" translate="1">
+			<key name="description"/>
+			<key name="steps">
+				<key name="*">
+					<key name="title"/>
+					<key name="content"/>
+				</key>
+			</key>
+		</gutenberg-block>
+	</gutenberg-blocks>
 </wpml-config>

@@ -108,23 +108,23 @@ class Detector {
 	 */
 	public function get() {
 		return $this->do_filter( 'importers/detect_plugins', [
-			'seopress'         => [
-				'class' => '\\RankMath\\Admin\\Importers\\SEOPress',
-				'file'  => 'wp-seopress/seopress.php',
-			],
 			'yoast'            => [
 				'class'   => '\\RankMath\\Admin\\Importers\\Yoast',
 				'file'    => 'wordpress-seo/wp-seo.php',
 				'premium' => 'yoast-premium',
 			],
-			'yoast-premium'    => [
-				'class'  => '\\RankMath\\Admin\\Importers\\Yoast',
-				'file'   => 'wordpress-seo-premium/wp-seo-premium.php',
-				'parent' => 'yoast',
+			'seopress'         => [
+				'class' => '\\RankMath\\Admin\\Importers\\SEOPress',
+				'file'  => 'wp-seopress/seopress.php',
 			],
 			'aioseo'           => [
 				'class' => '\\RankMath\\Admin\\Importers\\AIOSEO',
 				'file'  => 'all-in-one-seo-pack/all_in_one_seo_pack.php',
+			],
+			'yoast-premium'    => [
+				'class'  => '\\RankMath\\Admin\\Importers\\Yoast',
+				'file'   => 'wordpress-seo-premium/wp-seo-premium.php',
+				'parent' => 'yoast',
 			],
 			'aio-rich-snippet' => [
 				'class' => '\\RankMath\\Admin\\Importers\\AIO_Rich_Snippet',

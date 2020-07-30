@@ -4,31 +4,115 @@
 	margin-top: 2rem;
 }
 
-.#{$namespace}-export-form {
-	padding-bottom: 71px;
+.#{$namespace}-import-export {
 
-	.list-table {
-		background: #fff;
-	}
+    > div {
+        margin-bottom: 3rem;
 
-	& + & {
-		margin-top: 30px;
-	}
+        > h2 {
+            font-size: 1.375rem;
+            margin-top: 0;
+            margin-bottom: 0.825rem;
+        }
 
-	th,
-	td {
-		padding: 0;
-	}
-	h3 {
-		margin-top: 0;
-	}
+        > p.description {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    }
 
-	footer {
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		margin: 0;
-		width: 100%;
-		box-sizing: border-box;
-	}
+    .#{$namespace}-box {
+        &-content {
+            padding: 1.875rem;
+
+            p:first-child {
+                margin-top: 0;
+            }
+
+            input[type=checkbox] {
+                margin-top: -1px;
+            }
+        }
+
+        &-inner {
+            & > * {
+                display: none;
+            }
+
+            & > .active-tab {
+                display: block;
+            }
+        }
+
+        &-tabs {
+            border-bottom: 1px solid $gray;
+            background: #f8f9fa;
+            border-radius: 6px 6px 0 0;
+        
+            > a {
+                color: #5b6065;
+                font-size: 0.825rem;
+                font-weight: 500;
+                line-height: 46px;
+                position: relative;
+                float: left;
+                padding: 0 15px;
+                text-decoration: none;
+                box-shadow: none;
+                border-right: 1px solid $gray;
+
+                &:first-child {
+                    border-radius: 6px 0 0 0;
+                }
+
+                &:hover {
+                    color: $primary;
+                }
+
+                &.active {
+                    color: $primary;
+                    background: #fff;
+
+                    &:after {
+                        position: absolute;
+                        bottom: -1px;
+                        left: 0;
+                        width: 100%;
+                        height: 1px;
+                        content: '';
+                        background: #fff;
+                    }
+                }
+
+                .rm-icon {
+                    vertical-align: -1px;
+                    margin-right: 3px;
+                }
+            }
+        }
+    }
+
+    .#{$namespace}-export-form {
+        .form-table {
+            margin-top: 0;
+
+            ul {
+                margin: 0;
+            }
+        }
+
+        th, td {
+            padding: 0
+        }
+
+        .empty-notice {
+            padding: 0 1rem;
+        }
+    }
+
+    .#{$namespace}-settings-backup-form {
+        .list-table {
+            background: #fff;
+        }
+    }
 }

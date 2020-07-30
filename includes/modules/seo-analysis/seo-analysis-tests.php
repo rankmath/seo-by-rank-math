@@ -151,7 +151,7 @@ function rank_math_register_seo_analysis_auto_update_test( $tests ) {
  * @return array
  */
 function rank_math_analyze_auto_update() {
-	if ( Helper::get_settings( 'general.enable_auto_update' ) ) {
+	if ( Helper::get_auto_update_setting() ) {
 		return [
 			'status'  => 'ok',
 			'message' => __( 'Rank Math auto-update option is enabled on your site.', 'rank-math' ),

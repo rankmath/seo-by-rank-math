@@ -55,6 +55,8 @@
 
 				&:after {
 					position: absolute;
+					box-shadow: none;
+					visibility: visible;
 					bottom: -1px;
 					left: 0;
 					width: 100%;
@@ -124,6 +126,7 @@
 
 	.cmb2-id-rank-math-pillar-content .cmb2-metabox-description {
 		color: $text;
+		padding-top: 0;
 	}
 
 	.cmb2-id-rank-math-snippet-desc .rank-math-variables-dropdown {

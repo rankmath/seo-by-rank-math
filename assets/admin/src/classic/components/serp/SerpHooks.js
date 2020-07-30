@@ -125,6 +125,8 @@ class SerpHooks {
 			text: this.title,
 			min: 15,
 			max: 60,
+			pixelWidth: 580,
+			widthCheckerClass: 'title',
 		} )
 		// Set Placeholder and Title
 		this.serpTitle.html(
@@ -186,6 +188,8 @@ class SerpHooks {
 			text: this.description,
 			min: 80,
 			max: 160,
+			pixelWidth: 920,
+			widthCheckerClass: 'description',
 		} )
 		this.serpDescription.html(
 			highlight(

@@ -18,7 +18,7 @@ const EditorTitle = ( { title, serpTitle, updateTitle } ) => (
 			{ __( 'Title', 'rank-math' ) }
 		</label>
 
-		<LengthIndicator source={ serpTitle } min={ 15 } max={ 60 } />
+		<LengthIndicator source={ serpTitle } min={ 15 } max={ 60 } pixelWidth={ 580 } widthCheckerClass={ 'title' } />
 
 		<div className="variable-group">
 			<TextControl

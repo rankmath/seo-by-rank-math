@@ -50,7 +50,7 @@ class Sitepress {
 		static $instance;
 
 		if ( is_null( $instance ) && ! ( $instance instanceof Sitepress ) ) {
-			$instance = new Sitepress;
+			$instance = new Sitepress();
 		}
 
 		return $instance;
@@ -101,18 +101,6 @@ class Sitepress {
 			$this->has_get_terms_args = false;
 			add_filter( 'get_terms_args', [ $sitepress, 'get_terms_args_filter' ], 10, 2 );
 		}
-	}
-
-	/**
-	 * Get Site URL.
-	 */
-	public function get_site_url() {
-		if ( ! $this->is_active() ) {
-			return site_url();
-		}
-
-		$sitepress = $this->get_var();
-		return $sitepress->language_url();
 	}
 
 	/**

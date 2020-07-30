@@ -41,6 +41,8 @@ $primary_taxonomy_hash = [
 	'product' => 'product_cat',
 ];
 
+$is_stories_post_type = defined( 'WEBSTORIES_VERSION' ) && 'web-story' === $post_type;
+
 $cmb->add_field(
 	[
 		'id'              => 'pt_' . $post_type . '_title',
@@ -124,34 +126,21 @@ if ( ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) || ( class_ex
 	);
 
 } else {
-	if ( defined( 'WEBSTORIES_VERSION' ) && 'web-story' === $post_type ) {
-		$cmb->add_field(
-			[
-				'id'      => 'pt_' . $post_type . '_default_rich_snippet',
-				'type'    => 'select',
-				'name'    => esc_html__( 'Schema Type', 'rank-math' ),
-				/* translators: link to title setting screen */
-				'desc'    => __( 'Default rich snippet selected when creating a new story.', 'rank-math' ),
-				'options' => [
-					'off'     => esc_html__( 'None', 'rank-math' ),
-					'article' => esc_html__( 'Article', 'rank-math' ),
-				],
-				'default' => $this->do_filter( 'settings/snippet/type', 'article', $post_type ),
-			]
-		);
-	} else {
-		$cmb->add_field(
-			[
-				'id'         => 'pt_' . $post_type . '_default_rich_snippet',
-				'type'       => 'select',
-				'name'       => esc_html__( 'Schema Type', 'rank-math' ),
-				'desc'       => esc_html__( 'Default rich snippet selected when creating a new post of this type. ', 'rank-math' ),
-				'options'    => Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ) ),
-				'default'    => $this->do_filter( 'settings/snippet/type', isset( $richsnp_default[ $post_type ] ) ? $richsnp_default[ $post_type ] : 'off', $post_type ),
-				'attributes' => [ 'data-s2' => '' ],
-			]
-		);
-	}
+
+	$cmb->add_field(
+		[
+			'id'         => 'pt_' . $post_type . '_default_rich_snippet',
+			'type'       => 'select',
+			'name'       => esc_html__( 'Schema Type', 'rank-math' ),
+			'desc'       => esc_html__( 'Default rich snippet selected when creating a new post of this type. ', 'rank-math' ),
+			'options'    => $is_stories_post_type ? [
+				'off'     => esc_html__( 'None', 'rank-math' ),
+				'article' => esc_html__( 'Article', 'rank-math' ),
+			] : Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ) ),
+			'default'    => $this->do_filter( 'settings/snippet/type', isset( $richsnp_default[ $post_type ] ) ? $richsnp_default[ $post_type ] : 'off', $post_type ),
+			'attributes' => ! $is_stories_post_type ? [ 'data-s2' => '' ] : '',
+		]
+	);
 
 	// Common fields.
 	$cmb->add_field(
@@ -370,7 +359,8 @@ if ( 'attachment' === $post_type ) {
 	$cmb->remove_field( 'pt_' . $post_type . '_ls_use_fk' );
 }
 
-if ( defined( 'WEBSTORIES_VERSION' ) && 'web-story' === $post_type ) {
+if ( $is_stories_post_type ) {
+	$cmb->remove_field( 'pt_' . $post_type . '_default_snippet_desc' );
 	$cmb->remove_field( 'pt_' . $post_type . '_description' );
 	$cmb->remove_field( 'pt_' . $post_type . '_link_suggestions' );
 	$cmb->remove_field( 'pt_' . $post_type . '_ls_use_fk' );

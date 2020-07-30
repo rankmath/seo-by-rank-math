@@ -5,7 +5,15 @@
 
 	cursor: pointer;
 
-	color: $primary;
+	color: $gray;
+
+	display: inline-block;
+	line-height: 20px;
+	height: 20px;
+
+	em {
+		line-height: 20px;
+	}
 
 	> span {
 		font-size: 11px;
@@ -38,10 +46,14 @@
 	}
 
 	&:hover {
+		color: $primary;
+
 		span {
 			bottom: 130%;
 
 			opacity: 1;
+
+			z-index: 1;
 		}
 	}
 }

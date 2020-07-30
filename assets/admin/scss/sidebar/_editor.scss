@@ -1,6 +1,6 @@
 // main: ../sidebar.scss
 
-@import 'length-indicator';
+@import '../partials/metabox/length-indicator';
 
 .#{$namespace}-editor {
 	overflow: hidden;

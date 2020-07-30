@@ -54,9 +54,12 @@ class PostCollector extends DataCollector {
 	 * @return {string} The post's slug.
 	 */
 	getSlug() {
-		return '' === this.elemSlug.val() && this.editableName.length
-			? this.editableName.text()
-			: this.elemSlug.val()
+		const slug =
+			'' === this.elemSlug.val() && this.editableName.length
+				? this.editableName.text()
+				: this.elemSlug.val()
+
+		return isUndefined( slug ) ? '' : slug
 	}
 
 	events() {

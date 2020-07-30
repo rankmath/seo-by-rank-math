@@ -66,12 +66,55 @@ class Import_Export implements Runner {
 	}
 
 	/**
-	 * Display Import/Export tools.
+	 * Display Import/Export tools page.
 	 *
 	 * @return void
 	 */
 	public function display() {
-		include( $this->get_view( 'main' ) );
+		include $this->get_view( 'main' );
+	}
+
+	/**
+	 * Display panels for Import/Export tools.
+	 *
+	 * @return void
+	 */
+	public function show_panels() {
+		foreach ( (array) $this->get_panels() as $panel ) {
+			if ( ! isset( $panel['view'] ) || ! file_exists( $panel['view'] ) ) {
+				continue;
+			}
+
+			echo '<div class="' . ( isset( $panel['class'] ) ? esc_attr( $panel['class'] ) : '' ) . '">';
+			include $panel['view'];
+			echo '</div>';
+		}
+	}
+
+	/**
+	 * Get list of panels.
+	 *
+	 * @return array
+	 */
+	public function get_panels() {
+		$dir = dirname( __FILE__ ) . '/views/import-export/';
+
+		$panels = [
+			'import-export' => [
+				'view'  => $dir . 'import-export-panel.php',
+				'class' => 'import-export-settings',
+			],
+			'plugins'       => [
+				'view'  => $dir . 'plugins-panel.php',
+				'class' => 'import-plugins',
+			],
+			'backup'        => [
+				'view'  => $dir . 'backup-panel.php',
+				'class' => 'settings-backup',
+			],
+		];
+
+		return apply_filters( 'rank_math/admin/import_export_panels', $panels );
 	}
 
 	/**
@@ -92,13 +135,13 @@ class Import_Export implements Runner {
 	 * @return void
 	 */
 	public function enqueue() {
-		wp_enqueue_script( 'rank-math-import-export', rank_math()->plugin_url() . 'assets/admin/js/import-export.js' );
+		wp_enqueue_script( 'rank-math-import-export', rank_math()->plugin_url() . 'assets/admin/js/import-export.js', [], rank_math()->version, true );
 		wp_enqueue_style( 'cmb2-styles' );
 		wp_enqueue_style( 'rank-math-common' );
 		wp_enqueue_style( 'rank-math-cmb2' );
 
 		Helper::add_json( 'importConfirm', esc_html__( 'Are you sure you want to import settings into Rank Math? Don\'t worry, your current configuration will be saved as a backup.', 'rank-math' ) );
-		Helper::add_json( 'restoreConfirm', esc_html__( 'Are you sure you want to restore this backup? Your current configuration will be overwritten.', 'rank-math' ) );
+		Helper::add_json( 'restoreConfirm', esc_html__( 'Are you sure you want to restore this snapshot? Your current configuration will be overwritten.', 'rank-math' ) );
 		Helper::add_json( 'deleteBackupConfirm', esc_html__( 'Are you sure you want to delete this backup?', 'rank-math' ) );
 		Helper::add_json( 'cleanPluginConfirm', esc_html__( 'Are you sure you want erase traces of plugin?', 'rank-math' ) );
 	}
@@ -291,7 +334,7 @@ class Import_Export implements Runner {
 
 		\unlink( $file['file'] );
 
-		if ( $this->do_import_data( $settings ) ) {
+		if ( is_array( $settings ) && $this->do_import_data( $settings ) ) {
 			Helper::add_notification( esc_html__( 'Settings successfully imported. Your old configuration has been saved as a backup.', 'rank-math' ), [ 'type' => 'success' ] );
 			return;
 		}

@@ -31,10 +31,6 @@ class Admin extends Base {
 			[
 				'id'        => 'seo-analysis',
 				'directory' => $directory,
-				'help'      => [
-					'title' => esc_html__( 'SEO Analysis', 'rank-math' ),
-					'view'  => $directory . '/views/help.php',
-				],
 			]
 		);
 		parent::__construct();

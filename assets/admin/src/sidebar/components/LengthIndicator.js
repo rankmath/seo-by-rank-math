@@ -10,6 +10,7 @@ import lengthIndicator from '@helpers/LengthIndicator'
 
 const LengthIndicator = ( props ) => {
 	const lengthData = lengthIndicator( props.source, props )
+	const lengthpixelWidth = lengthData.pixelWidth ? ` (${lengthData.pixelWidth})` : ''
 
 	return (
 		<span
@@ -17,10 +18,13 @@ const LengthIndicator = ( props ) => {
 				invalid: lengthData.isInvalid,
 			} ) }
 		>
+			<span className="length-count">
+				{ lengthData.count }
+				{ lengthpixelWidth }
+			</span>
 			<span className="length-indicator">
 				<span style={ { left: lengthData.left } }></span>
 			</span>
-			<span className="length-count">{ lengthData.count }</span>
 		</span>
 	)
 }

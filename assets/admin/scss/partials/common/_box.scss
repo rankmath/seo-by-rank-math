@@ -3,7 +3,7 @@
 .#{$namespace}-box {
 	position: relative;
 
-	margin-bottom: 15px;
+	margin-bottom: 1rem;
 
 	background: #fff;
 
@@ -16,6 +16,10 @@
 		border: 0;
 		padding: 0;
 		background: transparent;
+	}
+
+	&.no-padding {
+		padding: 0;
 	}
 
 	&.switch-at-top {

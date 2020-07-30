@@ -369,7 +369,7 @@ class Installer {
 					'frontend_seo_score_post_types'       => [ 'post' ],
 					'frontend_seo_score_position'         => 'top',
 					'frontend_seo_score'                  => 'off',
-					'enable_auto_update'                  => 'off',
+					'enable_auto_update_email'            => 'off',
 					'setup_mode'                          => 'easy',
 				]
 			)

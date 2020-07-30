@@ -127,13 +127,9 @@
 	}
 
 	.cmb-td .#{$namespace}-tooltip {
-		margin-left: 6px;
-
-		em:before {
-			height: 17px;
-			margin-top: -2px;
-		}
+		margin-left: 4px;
 	}
+
 	// Radio Button
 	.cmb2-radio-list {
 		position: relative;

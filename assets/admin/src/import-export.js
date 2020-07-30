@@ -35,6 +35,7 @@ import addNotice from '@helpers/addNotice'
 					}
 				)
 				this.importConfirm()
+				this.importExportTabs()
 			},
 
 			importConfirm() {
@@ -55,6 +56,16 @@ import addNotice from '@helpers/addNotice'
 						event.preventDefault()
 					}
 				} )
+			},
+
+			importExportTabs() {
+				$( '.rank-math-box-tabs a' ).on( 'click', function( e ) {
+					e.preventDefault();
+					var $this = $( this );
+					var target = $this.attr( 'href' ).substr( 1 );
+					$this.addClass( 'active' ).siblings().removeClass( 'active' );
+					$( '#'+target ).addClass( 'active-tab' ).siblings().removeClass( 'active-tab' );
+				});
 			},
 
 			createBackup( event ) {
@@ -308,6 +319,7 @@ import addNotice from '@helpers/addNotice'
 				ajax( 'clean_plugin', { pluginSlug: button.data( 'slug' ) } )
 					.always( function() {
 						button.prop( 'disabled', false )
+						$( 'html, body' ).animate( { scrollTop: 0 }, 'fast' );
 					} )
 					.done( function( response ) {
 						if ( response.success ) {
@@ -321,7 +333,7 @@ import addNotice from '@helpers/addNotice'
 								: response.error,
 							response.success ? 'success' : 'error',
 							$( '.wp-header-end' ),
-							2000
+							5000
 						)
 					} )
 			},

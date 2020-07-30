@@ -15,6 +15,7 @@ namespace RankMath;
 use RankMath\Paper\Paper;
 use RankMath\Traits\Hooker;
 use RankMath\Helper;
+use MyThemeShop\Helpers\Param;
 use RankMath\Admin\Admin_Helper;
 
 defined( 'ABSPATH' ) || exit;
@@ -30,8 +31,12 @@ class Auto_Updater {
 	 * Constructor method.
 	 */
 	public function __construct() {
-		$this->filter( 'auto_update_plugin', 'auto_update_plugin', 10, 2 );
-		$this->action( 'upgrader_process_complete', 'upgrader_process_complete', 10, 2 );
+		$this->filter( 'auto_update_plugin', 'auto_update_plugin', 20, 2 );
+		$this->filter( 'plugin_auto_update_setting_html', 'plugin_auto_update_setting_html', 10, 3 );
+		$this->action( 'update_site_option_auto_update_plugins', 'update_site_option_auto_update_plugins', 10, 3 );
+		if ( Helper::get_auto_update_setting() && false === boolval( get_option( 'rank_math_rollback_version', false ) ) ) {
+			$this->action( 'upgrader_process_complete', 'upgrader_process_complete', 10, 2 );
+		}
 	}
 
 	/**
@@ -43,16 +48,38 @@ class Auto_Updater {
 	 * @return bool
 	 */
 	public function auto_update_plugin( $update, $item ) {
-		if (
-			isset( $item->slug ) &&
-			'seo-by-rank-math' === $item->slug &&
-			isset( $item->new_version ) &&
-			false === stripos( $item->new_version, 'beta' )
-		) {
-			return true;
+		if ( $this->is_rm_update( $item ) ) {
+			// Never update to beta automatically.
+			if ( $this->is_beta_update( $item->new_version ) ) {
+				return false;
+			}
+
+			return Helper::get_auto_update_setting();
 		}
 
 		return $update;
+	}
+
+	/**
+	 * Check if updatable object is RM.
+	 *
+	 * @param object $item Updatable object.
+	 * @return boolean
+	 */
+	public function is_rm_update( $item ) {
+		return isset( $item->slug ) &&
+			'seo-by-rank-math' === $item->slug &&
+			isset( $item->new_version );
+	}
+
+	/**
+	 * Check if given version is beta.
+	 *
+	 * @param string $version Version number.
+	 * @return boolean
+	 */
+	public function is_beta_update( $version ) {
+		return false !== stripos( $version, 'beta' );
 	}
 
 	/**
@@ -114,5 +141,42 @@ class Auto_Updater {
 		$email = $this->do_filter( 'auto_update_email', $email, $version, $plugin_upgrader_obj );
 
 		wp_mail( $email['to_address'], wp_specialchars_decode( $email['subject'] ), $email['body'], $email['headers'] );
+	}
+
+	/**
+	 * Make sure to turn off "enable_auto_update_email" setting if we turn off auto updates.
+	 *
+	 * @param mixed $value      Option value.
+	 * @param mixed $old_value  Previous option value.
+	 * @param int   $network_id Network ID.
+	 * @return void
+	 */
+	public function update_site_option_auto_update_plugins( $value, $old_value, $network_id ) {
+		if ( ! is_array( $value ) || ! in_array( 'seo-by-rank-math/rank-math.php', $value, true ) ) {
+			$settings = get_option( 'rank-math-options-general', [] );
+			$settings['enable_auto_update_email'] = 'off';
+			rank_math()->settings->set( 'general', 'enable_auto_update_email', false );
+			update_option( 'rank-math-options-general', $settings );
+		}
+	}
+
+	/**
+	 * Hide "update scheduled in X hours" message if update is a beta version.
+	 *
+	 * @param string $html        HTML string.
+	 * @param string $plugin_file Plugin file relative to the plugin directory.
+	 * @param array  $plugin_data Plugin update data.
+	 * @return string
+	 */
+	public function plugin_auto_update_setting_html( $html, $plugin_file, $plugin_data ) {
+		if ( 'seo-by-rank-math/rank-math.php' !== $plugin_file ) {
+			return $html;
+		}
+
+		if ( ! empty( $plugin_data['is_beta'] ) ) {
+			$html = str_replace( 'class="auto-update-time"', 'class="auto-update-time hidden"', $html );
+		}
+
+		return $html;
 	}
 }

@@ -114,7 +114,7 @@ class DataCollector {
 	 * @return {string} The post's permalink.
 	 */
 	getPermalink() {
-		return rankMath.homeUrl + '/' + this.elemSlug.val()
+		return rankMath.homeUrl + '/' + this.getSlug()
 	}
 
 	/**

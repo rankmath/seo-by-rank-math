@@ -30,10 +30,6 @@ class Base {
 	public function __construct() {
 		$this->register_admin_page();
 
-		if ( isset( $this->help ) ) {
-			$this->filter( 'rank_math/help/tabs', 'add_help_section' );
-		}
-
 		if ( isset( $this->page ) && $this->page->is_current_page() ) {
 			$this->register_screen_options();
 			if ( isset( $this->table ) ) {
@@ -55,41 +51,6 @@ class Base {
 	}
 
 	/**
-	 * Add help tab on help page.
-	 *
-	 * @param array $tabs Array of tabs.
-	 * @return array
-	 */
-	public function add_help_section( $tabs ) {
-		if ( ! $this->can_add_tab() ) {
-			return $tabs;
-		}
-
-		$tabs[ $this->id ] = $this->help;
-
-		return $tabs;
-	}
-
-	/**
-	 * Can add Module Tab on help page.
-	 *
-	 * @return bool
-	 */
-	private function can_add_tab() {
-		$caps = [
-			'404-monitor'    => '404_monitor',
-			'redirect'       => 'redirections',
-			'rich-snippet'   => 'onpage_snippet',
-			'role-manager'   => 'role_manager',
-			'search-console' => 'search_console',
-			'seo-analysis'   => 'site_analysis',
-			'sitemap'        => 'sitemap',
-		];
-
-		return isset( $caps[ $this->id ] ) ? Helper::has_cap( $caps[ $this->id ] ) : true;
-	}
-
-	/**
 	 * Register screen options.
 	 */
 	private function register_screen_options() {
@@ -105,11 +66,14 @@ class Base {
 	 * Add screen options.
 	 */
 	public function add_screen_options() {
-		add_screen_option( 'per_page', array(
-			'option'  => $this->screen_options['id'],
-			'default' => $this->screen_options['default'],
-			'label'   => esc_html__( 'Items per page', 'rank-math' ),
-		) );
+		add_screen_option(
+			'per_page',
+			[
+				'option'  => $this->screen_options['id'],
+				'default' => $this->screen_options['default'],
+				'label'   => esc_html__( 'Items per page', 'rank-math' ),
+			]
+		);
 	}
 
 	/**

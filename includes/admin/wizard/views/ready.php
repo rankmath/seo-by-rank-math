@@ -20,7 +20,7 @@ use RankMath\KB;
 	<div class="rank-math-auto-update-wrapper">
 		<h3><?php esc_html_e( 'Enable auto update of the plugin', 'rank-math' ); ?></h3>
 		<span class="cmb2-toggle">
-			<input type="checkbox" class="rank-math-modules" id="auto-update" value="" <?php checked( Helper::get_settings( 'general.enable_auto_update' ) ); ?>  data-key="enable_auto_update" />
+			<input type="checkbox" class="rank-math-modules" id="auto-update" value="" <?php checked( Helper::get_auto_update_setting() ); ?>  data-key="enable_auto_update" />
 			<label for="auto-update" class="cmb2-slider">
 				<svg width="3" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 6" class="toggle_on" role="img" aria-hidden="true" focusable="false"><path d="M0 0h2v6H0z"></path></svg>
 				<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg>
@@ -28,7 +28,7 @@ use RankMath\KB;
 		</span>
 	</div>
 
-	<?php $style = ! Helper::get_settings( 'general.enable_auto_update' ) ? 'style="display: none";' : ''; ?>
+	<?php $style = ! Helper::get_auto_update_setting() ? 'style="display: none";' : ''; ?>
 	<div class="rank-math-auto-update-email-wrapper" <?php echo $style; ?>>
 		<h3><?php esc_html_e( 'Email me every time the plugin auto-updates.', 'rank-math' ); ?></h3>
 		<span class="cmb2-toggle">

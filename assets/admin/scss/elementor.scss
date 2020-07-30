@@ -20,6 +20,7 @@
 					font-size: 11px;
 					line-height: 17px;
 					text-transform: uppercase;
+					box-shadow: none;
 
 					&:not(.is-active):hover i {
 						background: #f6e7ee;
@@ -171,6 +172,8 @@
 					}
 
 					&.is-active {
+						box-shadow: none;
+
 						&:after {
 							display: block;
 							background: #d30c5c;

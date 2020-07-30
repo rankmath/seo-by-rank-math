@@ -23,7 +23,7 @@ const EditorDescription = ( {
 			{ __( 'Description', 'rank-math' ) }
 		</label>
 
-		<LengthIndicator source={ serpDescription } min={ 80 } max={ 160 } />
+		<LengthIndicator source={ serpDescription } min={ 80 } max={ 160 } pixelWidth={ 920 } widthCheckerClass={ 'description' } />
 
 		<div className="variable-group">
 			<TextareaControl

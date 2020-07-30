@@ -35,7 +35,6 @@ class Article implements Snippet {
 		$entity = [
 			'@type'            => $type,
 			'headline'         => $jsonld->parts['title'],
-			'description'      => $jsonld->parts['desc'],
 			'datePublished'    => $jsonld->parts['published'],
 			'dateModified'     => $jsonld->parts['modified'],
 			'publisher'        => $jsonld->get_publisher( $data ),
@@ -48,6 +47,10 @@ class Article implements Snippet {
 				'name'  => $jsonld->parts['author'],
 			],
 		];
+
+		if ( ! empty( $jsonld->parts['desc'] ) ) {
+			$entity['description'] = $jsonld->parts['desc'];
+		}
 
 		if ( isset( $data['Organization'] ) ) {
 			unset( $data['Organization'] );

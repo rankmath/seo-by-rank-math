@@ -254,17 +254,9 @@ class Admin extends WP_REST_Controller {
 			return false;
 		}
 
-		$value    = 'true' === $request->get_param( 'value' ) ? 'on' : 'off';
-		$settings = wp_parse_args(
-			rank_math()->settings->all_raw(),
-			[ 'general' => '' ]
-		);
+		$value = 'true' === $request->get_param( 'value' ) ? 'on' : 'off';
+		Helper::toggle_auto_update_setting( $value );
 
-		$settings['general'][ $field ] = $value;
-		if ( 'enable_auto_update' === $field && 'off' === $value ) {
-			$settings['general']['enable_auto_update_email'] = 'off';
-		}
-		Helper::update_all_settings( $settings['general'], null, null );
 		return true;
 	}
 

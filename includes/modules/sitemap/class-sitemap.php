@@ -29,16 +29,16 @@ class Sitemap {
 	public function __construct() {
 
 		if ( is_admin() ) {
-			new Admin;
-			new Cache_Watcher;
+			new Admin();
+			new Cache_Watcher();
 		}
 
-		new Router;
-		$this->index = new Sitemap_Index;
+		new Router();
+		$this->index = new Sitemap_Index();
 		$this->index->hooks();
 
-		add_action( 'rank_math/sitemap/hit_index', array( __CLASS__, 'hit_sitemap_index' ) );
-		add_action( 'rank_math/sitemap/ping_search_engines', array( __CLASS__, 'ping_search_engines' ) );
+		add_action( 'rank_math/sitemap/hit_index', [ __CLASS__, 'hit_sitemap_index' ] );
+		add_action( 'rank_math/sitemap/ping_search_engines', [ __CLASS__, 'ping_search_engines' ] );
 
 		$this->filter( 'rank_math/admin/notice/new_post_type', 'new_post_type_notice' );
 
@@ -46,6 +46,11 @@ class Sitemap {
 			$this->filter( 'rank_math/sitemap/build_type', 'rank_math_build_sitemap_filter' );
 			$this->filter( 'rank_math/sitemap/xml_post_url', 'exclude_hidden_language_posts', 10, 2 );
 		}
+
+		/**
+		 * Disable the WP core XML sitemaps.
+		 */
+		add_filter( 'wp_sitemaps_enabled', '__return_false' );
 	}
 
 	/**
@@ -138,15 +143,15 @@ class Sitemap {
 		}
 
 		if ( empty( $url ) ) {
-			$url = urlencode( Router::get_base_url( 'sitemap_index.xml' ) );
+			$url = rawurlencode( Router::get_base_url( 'sitemap_index.xml' ) );
 		}
 
 		// Ping Google and Bing.
-		wp_remote_get( 'http://www.google.com/webmasters/tools/ping?sitemap=' . $url, array( 'blocking' => false ) );
+		wp_remote_get( 'http://www.google.com/webmasters/tools/ping?sitemap=' . $url, [ 'blocking' => false ] );
 
 		if ( Router::get_base_url( 'geo-sitemap.xml' ) !== $url ) {
-			wp_remote_get( 'http://www.google.com/ping?sitemap=' . $url, array( 'blocking' => false ) );
-			wp_remote_get( 'http://www.bing.com/ping?sitemap=' . $url, array( 'blocking' => false ) );
+			wp_remote_get( 'http://www.google.com/ping?sitemap=' . $url, [ 'blocking' => false ] );
+			wp_remote_get( 'http://www.bing.com/ping?sitemap=' . $url, [ 'blocking' => false ] );
 		}
 	}
 
@@ -191,7 +196,7 @@ class Sitemap {
 
 			// Remove object.
 			if ( ! $include && in_array( $object_id, $ids, true ) ) {
-				$ids = array_diff( $ids, array( $object_id ) );
+				$ids = array_diff( $ids, [ $object_id ] );
 			}
 
 			$ids = implode( ',', $ids );
@@ -217,7 +222,7 @@ class Sitemap {
 
 		static $post_type_dates = null;
 		if ( ! is_array( $post_types ) ) {
-			$post_types = array( $post_types );
+			$post_types = [ $post_types ];
 		}
 
 		foreach ( $post_types as $post_type ) {
@@ -229,7 +234,7 @@ class Sitemap {
 
 		if ( is_null( $post_type_dates ) ) {
 			$post_type_dates = [];
-			$post_type_names = get_post_types( array( 'public' => true ) );
+			$post_type_names = get_post_types( [ 'public' => true ] );
 
 			if ( ! empty( $post_type_names ) ) {
 				$sql = "

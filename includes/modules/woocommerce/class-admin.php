@@ -36,10 +36,6 @@ class Admin extends Base {
 			[
 				'id'        => 'woocommerce',
 				'directory' => $directory,
-				'help'      => [
-					'title' => esc_html__( 'WooCommerce', 'rank-math' ),
-					'view'  => $directory . '/views/help.php',
-				],
 			]
 		);
 		parent::__construct();

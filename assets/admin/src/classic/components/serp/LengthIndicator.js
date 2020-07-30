@@ -1,4 +1,10 @@
 /**
+ * External dependencies
+ */
+import classnames from 'classnames'
+import { get as _get } from 'lodash'
+
+/**
  * Internal dependencies
  */
 import lengthIndicator from '@helpers/LengthIndicator'
@@ -6,7 +12,7 @@ import lengthIndicator from '@helpers/LengthIndicator'
 class LengthIndicator {
 	check( elem, settings ) {
 		this.elem = elem
-		if ( ! this.elem.parent().hasClass( 'length-indicator-wrapper' ) ) {
+		if ( ! this.elem.closest('.cmb-td').find( '.length-indicator-wrapper' ).length ) {
 			this.wrapIndicator( settings )
 		}
 
@@ -14,28 +20,32 @@ class LengthIndicator {
 	}
 
 	wrapIndicator( settings ) {
-		this.elem.wrap( '<span class="length-indicator-wrapper"/>' )
 		this.elem
-			.parent()
+			.closest('.cmb-td')
 			.append(
-				'<span class="length-indicator"><span/></span><span class="length-count">0 / ' +
+				'<span class="' + classnames( 'length-indicator-wrapper', {
+					'width-indicator': _get( settings, 'pixelWidth', false ) !== false,
+				} ) + '"><span class="length-count">0 / ' +
 					settings.max +
-					'</span>'
+					'</span><span class="length-indicator"><span></span></span></span>'
 			)
 	}
 
 	updateLength( settings ) {
-		const indicator = this.elem.parent().find( '.length-indicator' ),
+		const indicator = this.elem.closest('.cmb-td').find( '.length-indicator' ),
 			progress = indicator.find( '>span' ),
-			counter = this.elem.parent().find( '.length-count' )
+			counter = this.elem.closest('.cmb-td').find( '.length-count' )
 
 		const lengthData = lengthIndicator( settings.text, settings )
 		indicator.removeClass( 'invalid short' )
 		progress.css( 'left', lengthData.left )
 		counter.text( lengthData.count )
+		if ( _get( settings, 'pixelWidth', false ) !== false ) {
+			counter.text( counter.text() + ' (' + lengthData.pixelWidth + ')' )
+		}
 
 		// Short and Long
-		if ( lengthData.isInvalid ) {
+		if ( lengthData.isInvalid || lengthData.isInvalidWidth ) {
 			indicator.addClass( 'invalid' )
 		}
 	}

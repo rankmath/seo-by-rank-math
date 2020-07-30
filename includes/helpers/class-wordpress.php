@@ -60,10 +60,11 @@ trait WordPress {
 	 *
 	 * @param  string  $key     Internal key of the value to get (without prefix).
 	 * @param  integer $post_id Post ID of the post to get the value for.
+	 * @param  string  $default  Default value to use.
 	 * @return mixed
 	 */
-	public static function get_post_meta( $key, $post_id = 0 ) {
-		return Post::get_meta( $key, $post_id );
+	public static function get_post_meta( $key, $post_id = 0, $default = '' ) {
+		return Post::get_meta( $key, $post_id, $default );
 	}
 
 	/**

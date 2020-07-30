@@ -141,12 +141,6 @@ msgstr ""
 msgid "External Tools"
 msgstr ""
 
-msgid "Google Structured Data"
-msgstr ""
-
-msgid "Google Structured Data Testing Tool"
-msgstr ""
-
 msgid "Google PageSpeed"
 msgstr ""
 
@@ -368,7 +362,7 @@ msgstr ""
 msgid "Are you sure you want to import settings into Rank Math? Don't worry, your current configuration will be saved as a backup."
 msgstr ""
 
-msgid "Are you sure you want to restore this backup? Your current configuration will be overwritten."
+msgid "Are you sure you want to restore this snapshot? Your current configuration will be overwritten."
 msgstr ""
 
 msgid "Are you sure you want to delete this backup?"
@@ -392,7 +386,7 @@ msgid "Unable to create backup this time."
 msgstr ""
 
 #. translators: Backup formatted date
-#. translators: Backup formatted date
+#. translators: Snapshot formatted date
 msgid "Backup: %s"
 msgstr ""
 
@@ -599,7 +593,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Update your post"
+msgid "No Index"
 msgstr ""
 
 msgid "Is Pillar"
@@ -809,9 +803,6 @@ msgid "Index"
 msgstr ""
 
 msgid "Instructs search engines to index and show these pages in the search results."
-msgstr ""
-
-msgid "No Index"
 msgstr ""
 
 msgid "Prevents pages from being indexed and displayed in search engine result pages"
@@ -1858,9 +1849,6 @@ msgid "Direct help from our qualified support team"
 msgstr ""
 
 msgid "Visit Support Center"
-msgstr ""
-
-msgid "Getting started"
 msgstr ""
 
 msgid "Account"
@@ -3097,6 +3085,13 @@ msgstr ""
 msgid "Rank Math auto-update option is enabled on your site."
 msgstr ""
 
+#. translators: placeholder is a HTTP error code.
+msgid "HTTP %d error."
+msgstr ""
+
+msgid "Unexpected API response."
+msgstr ""
+
 msgid "Priority"
 msgstr ""
 
@@ -4029,9 +4024,6 @@ msgstr ""
 msgid "Description for %s archive pages."
 msgstr ""
 
-msgid "Default rich snippet selected when creating a new story."
-msgstr ""
-
 msgid "Headline"
 msgstr ""
 
@@ -4180,90 +4172,38 @@ msgstr ""
 msgid "Remove schema data from %s."
 msgstr ""
 
-msgid "Accelerated Mobile Pages, or AMP for short, is a way for you to create fast loading pages that load blazing fast on mobile browsers. AMPs deliver consistent performance across multiple mobile devices."
+msgid "Create Snapshot"
 msgstr ""
 
-msgid "Because they work so well and help pages load fast, Google has come to love the AMP enabled websites over their counterparts when it comes to rankings in the SERPs."
+msgid "Settings Backup"
 msgstr ""
 
-msgid "That is why having an AMP enabled website is so essential these days. But, having an AMP website brings its challenges with regards to the SEO. When you create AMPs, there are two versions of your site - one for the regular desktop browsers and one for the mobile browsers. If not handled properly, AMPs can backfire and create duplicate content issues which lead to de-ranked or worse, de-indexing of your posts."
-msgstr ""
-
-msgid "Thankfully, we have thought this through and equipped Rank Math with the right tools to make sure your AMPS help your SEO, not ruin it."
-msgstr ""
-
-#. translators: link to module dashboard
-msgid "To get the most out of AMP along with Rank Math - simply install any of the below AMP plugin and then <a href=\"%1$s\" target=\"_blank\">enable the AMP module of Rank Math</a>."
-msgstr ""
-
-msgid "AMP for WordPress"
-msgstr ""
-
-msgid "AMP for WP"
-msgstr ""
-
-msgid "WP AMP Ninja"
-msgstr ""
-
-msgid "AMP on WordPress – weeblrAMP CE"
-msgstr ""
-
-msgid "AMP for WooCommerce"
-msgstr ""
-
-msgid "WP AMP"
-msgstr ""
-
-msgid "If you face any issues with it, simply <a rel=\"nofollow noopener noreferrer\" href=\"https://support.rankmath.com/\" target=\"_blank\">open a support ticket here</a>."
-msgstr ""
-
-msgid "Congratulations on installing Rank Math. We hope that you've had no issues with installing Rank Math on your website. After the installation, the next step is to run the setup wizard and configure Rank Math."
-msgstr ""
-
-msgid "While Rank Math automatically initiates the setup wizard once you install it, it is possible to skip it accidentally. If you’ve also skipped Rank Math’s setup wizard, then you can rerun the setup wizard by going to Rank Math’s dashboard, and then clicking the Setup Wizard tab."
-msgstr ""
-
-msgid "Rank Math Setup Wizard Tab"
-msgstr ""
-
-msgid "Click here to read full setup tutorial"
-msgstr ""
-
-#. translators: link to support
-msgid "If you have any questions about the setup process or are facing difficulties in setting up Rank Math for your website, then get in touch with our support staff by <a href=\"%1$s\" target=\"_blank\">opening a support ticket</a>. The support staff is available 24x7x365 and will help you out with any issues that you have."
-msgstr ""
-
-msgid "Local SEO is a way for you to rank better for searches made by your people in the area where you operate. It is the best way for you to get your products and services in front of the local customers."
-msgstr ""
-
-msgid "There are various methods for optimizing your website for local SEO but the easiest method is built right inside the Rank Math plugin."
-msgstr ""
-
-#. translators: link to local-seo
-msgid "Simply <a rel=\"nofollow noopener noreferrer\" href=\"%1$s\" target=\"_blank\">setup your business as Local Business</a> during the setup wizard."
-msgstr ""
-
-msgid "Make sure the Local SEO & Google Knowledge Graph module is enabled."
-msgstr ""
-
-#. translators: link to local seo settings
-msgid "Then, head over to <a href=\"%1$s\">Rank Math > Titles and Meta > Local SEO</a> and add more information about your Local Business like your Company Name, Logo, Email ID, Phone number, Address, And Contact/About pages."
-msgstr ""
-
-#. translators: link to support
-msgid "If you face any sort of issue, <a href=\"%1$s\" target=\"_blank\">open a new ticket here</a> so that we can help."
-msgstr ""
-
-msgid "Create Backup"
-msgstr ""
-
-msgid "Backups"
+msgid "Take a snapshot of your plugin settings in case you wish to restore them in future. Use it as backup before making substantial changes to Rank Math settings. For taking a backup of the SEO data of your content, use the XML Export option."
 msgstr ""
 
 msgid "There is no backup."
 msgstr ""
 
+msgid "Plugin Settings"
+msgstr ""
+
+#. translators: Link to learn about import export panel KB article
+msgid "Import or export your Rank Math settings, This option is useful for replicating Rank Math settings across multiple websites. %s"
+msgstr ""
+
+msgid "Learn more about the Import/Export options."
+msgstr ""
+
 msgid "Export Settings"
+msgstr ""
+
+msgid "Settings File"
+msgstr ""
+
+msgid "Please select a file to import."
+msgstr ""
+
+msgid "Import settings by locating settings file and clicking \"Import settings\"."
 msgstr ""
 
 msgid "Titles &amp; Metas"
@@ -4278,23 +4218,11 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-msgid "Setting File"
-msgstr ""
-
-msgid "Please select a file to import."
-msgstr ""
-
-msgid "Import settings by locating setting file and clicking \"Import settings\"."
+msgid "Other Plugins"
 msgstr ""
 
 #. translators: Link to learn about import export panel KB article
-msgid "Import your previous backed up setting. Or, Export your Rank Math settings and meta data for backup or for reuse on (another) blog. %s"
-msgstr ""
-
-msgid "Learn more about the Import/Export option."
-msgstr ""
-
-msgid "Plugin Importers"
+msgid "If you were using another plugin to add important SEO information to your website before switching to Rank Math SEO, you can import the settings and data here. %s"
 msgstr ""
 
 msgid "Clean"
@@ -4492,45 +4420,6 @@ msgid "You can search items using the search form at the top."
 msgstr ""
 
 msgid "You can reorder the list by clicking on the column headings. "
-msgstr ""
-
-msgid "404 errors happen when someone requests a page or file that doesn't exist - actually, it's more accurate to say the web server can't find the file."
-msgstr ""
-
-msgid "404s happen when:"
-msgstr ""
-
-msgid "Someone types the wrong address"
-msgstr ""
-
-msgid "Someone links to the wrong address"
-msgstr ""
-
-msgid "The file or page moves to a different address"
-msgstr ""
-
-msgid "The page or file is deleted"
-msgstr ""
-
-msgid "The page or file never existed"
-msgstr ""
-
-msgid "They're actually very common on the web. And they're never a good thing."
-msgstr ""
-
-msgid "If you visit a site, you probably want to read or view content on that site. You won't stay on the site if the content is missing. Serving 404 errors to your visitors is a good way to lose them."
-msgstr ""
-
-msgid "It doesn't matter if it's your fault, their fault, or someone else's. Maybe they clicked on a broken link caused by a typing mistake on another website. Maybe they cut-and-pasted a URL wrong. Or possibly they made a spelling mistake when they typed a URL manually."
-msgstr ""
-
-msgid "Maybe you changed the URL of an article to make it more appealing to the search engines."
-msgstr ""
-
-msgid "Whatever the cause, the result is a disappointed reader. So fixing 404 errors is a usability issue. Patching them up will result in more useful traffic to your site, and for many sites, that means more revenue."
-msgstr ""
-
-msgid "Click here to read full 404 Monitor tutorial"
 msgstr ""
 
 #. translators: 1: link to Monitor docs 2: link to Fix 404 docs
@@ -4740,21 +4629,6 @@ msgid "Using a 302 <em>temporary</em> redirection is useful when you want to tes
 msgstr ""
 
 msgid "Redirections can be exported to your .htaccess file for faster redirections, in SEO > Settings > Import/Export."
-msgstr ""
-
-msgid "An HTTP redirection is a magical thing. When you visit a URL with a redirection, your browser automatically jumps to a new address."
-msgstr ""
-
-msgid "You’ve seen this before with URL shortener services like bit.ly – instead of typing a long address, you type a short one. Your browser is automatically redirected to a different site, and it happens faster than you can blink."
-msgstr ""
-
-msgid "HTTP redirections are powerful tools in SEO, and they have lots of other uses, too. You can read about why that’s a good idea in this article."
-msgstr ""
-
-msgid "Rank Math makes it easy to set up HTTP redirects – in this article, we show you how."
-msgstr ""
-
-msgid "Click here to read full Redirection tutorial"
 msgstr ""
 
 msgid "Add New"
@@ -5024,39 +4898,6 @@ msgid "Rating minimum score of the event."
 msgstr ""
 
 msgid "Rating maximum score of the event."
-msgstr ""
-
-msgid "Google has changed over the years. They've made their results pages more interesting and more useful at the same time. New kinds of content were added."
-msgstr ""
-
-msgid "You often see all kinds of content in a SERP. Images, videos, tweets, and maps. Business listings and little bits of trivia (like personal bios or historical facts) were added."
-msgstr ""
-
-msgid "These were the first wave of enhancements. They were \"added\" content, as they were added to the original results (which were pushed down the page). Google has also added enhancements to the way certain listings are displayed."
-msgstr ""
-
-msgid "Do you remember when you used to see author pictures next to certain listings?"
-msgstr ""
-
-msgid "These were \"authorship\" snippets - they were displayed whenever Google recognized the author of an article. Google has dropped support for authorship, but there are other enhancements that it does support today."
-msgstr ""
-
-msgid "For instance, there are \"schemas\" for articles, videos, businesses, events, products, and recipes."
-msgstr ""
-
-msgid "These snippets look different - which makes them stand out. They also tend to rank higher - above the fold (in the top 4 results)."
-msgstr ""
-
-msgid "Both of these benefits make Rich Snippets extremely attractive. But Google can't display rich results unless it understands your content type. And it needs your help."
-msgstr ""
-
-msgid "Google needs you to include special meta-data in your markup to describe what your content is. You need to use a special format called Schema.org, and it has to be perfectly valid."
-msgstr ""
-
-msgid "Rank Math can format the Schema.org markup for you - that's what the Rich Snippet tab does for you."
-msgstr ""
-
-msgid "Click here to read full Schema tutorial"
 msgstr ""
 
 msgid "Salary (Recommended)"
@@ -5332,32 +5173,11 @@ msgstr ""
 msgid "Number of views"
 msgstr ""
 
-msgid "In this knowledge base article, we are going to discuss one of the most amazing features of Rank Math, the Role Manager."
-msgstr ""
-
-msgid "You may have started your website alone, but as it grows, you will have to hire help or outsource certain tasks to keep your website growing. When you get more people working on your website, it poses a significant problem. You have to give them access to your backend. But as you probably understand, giving someone else full access to your website can lead to accidents, disasters, and frauds."
-msgstr ""
-
-msgid "To prevent that from happening, we created the Role Manager in Rank Math. It’s an innovative feature that lets you restrict Rank Math’s individual features for each user, depending on what roles you give them on your website. If you didn’t understand that, do not worry. You will understand once we get into the details."
-msgstr ""
-
-msgid "Click here to read full Role Manager tutorial"
-msgstr ""
-
 #. translators: %s is a Learn More link to the documentation
 msgid "Control which user has access to which options of Rank Math. %s"
 msgstr ""
 
 msgid "Update Capabilities"
-msgstr ""
-
-msgid "Google Search Console is a website management tool by Google. Specifically, it was created so that website owners can see important information about their websites and resolve issues related to search engines. Your Google Search Console account will contain important information such as your website’s index status, crawl or other issues, your search engines rankings and most importantly, the keywords that your website ranks for. This information comes directly from Google and is very accurate compared to any 3rd party tool."
-msgstr ""
-
-msgid "Once you setup Rank Math to work with Google Search Console, then Rank Math can fetch important information like keyword ranking, craw errors etc from Search Console and display it right inside your WordPress admin. This saves you a lot of time and gives you actionable information to work with when creating new content."
-msgstr ""
-
-msgid "Click here to read full Search Console tutorial"
 msgstr ""
 
 msgid "Review sitemaps submitted to your Search Console account."
@@ -5445,33 +5265,6 @@ msgid "Passed Tests"
 msgstr ""
 
 msgid "Failed Tests"
-msgstr ""
-
-msgid "In this section, we're going to introduce the SEO analysis tool. As the name suggests, it analyzes your site's SEO and points out what you're doing right and the issues you need to fix."
-msgstr ""
-
-msgid "Analyzing your SEO is the first step to making it perfect, so you should run this tool as your first step. It's a fast process, and it puts you on the right path."
-msgstr ""
-
-msgid "You may have used SEO tools in the past - many of these tools check your page as you type and tell you if you're optimizing it properly. Rank Math does this too - but it does much more."
-msgstr ""
-
-msgid "Checking a page as you type will detect \"on-page\" ranking factors - factors that influence the rankings for individual pages. But that only covers a single piece of the SEO puzzle. Although on-page factors are extremely important, there are other details that affect your site's rankings."
-msgstr ""
-
-msgid "These include technical and performance issues, like caching, URL structure, and pagination."
-msgstr ""
-
-msgid "Before you dig into every post and page on your site, you should fix any site-wide issues. But you have to identify them first - and that's where the analysis tool comes into play."
-msgstr ""
-
-msgid "You have better things to do than spend hours poring over settings and working through checklists - that's why Rank Math has a built-in SEO Analysis tool. It scans your site in seconds and gives you a detailed breakdown of any issues it locates."
-msgstr ""
-
-msgid "The tool also gives you instructions on how to fix each issue it finds - whether it's changing a setting or installing a simple plugin, you'll know what to do and how to do it."
-msgstr ""
-
-msgid "Click here to read full SEO Analysis tutorial"
 msgstr ""
 
 msgid "What is this?"
@@ -5563,30 +5356,6 @@ msgstr ""
 msgid "Include archive pages of terms that have no posts associated."
 msgstr ""
 
-msgid "XML sitemaps are files that serve a single purpose - to help search engines find and index all of your content."
-msgstr ""
-
-msgid "Once upon a time, search engine bots would have a hard time finding all the content on a site. Many sites had a weak internal link structure, and that meant that some pages or posts would go overlooked."
-msgstr ""
-
-msgid "The early search engines gave us forms where we could enter our URLs one at a time. They'd feed this information into their queue of pages to crawl, and the pages would get visited and indexed at some point."
-msgstr ""
-
-msgid "Typing in dozens or even hundreds of URLs was a tedious job - in fact, many companies popped up offering to submit your site to the search engines, because who had the time to do that?"
-msgstr ""
-
-msgid "When Google appeared on the scene, people soon noticed that submitting pages didn't lead to fast crawls. Linking to a page from another page (even on the same site) would get the bot to visit quickly."
-msgstr ""
-
-msgid "To solve the problem of getting pages crawled and indexed, many webmasters created a \"sitemap\". It was an ugly HTML page with nothing but links to all the site's content. It was a bit of an eyesore, and human users had little use for it. But it helped the spiders to find pages and it got them into the index."
-msgstr ""
-
-msgid "Search engines realized that people were building these pages that didn't do anything for human visitors, and they decided to cut us a break. They invented a new XML based file that we could use to communicate directly with the robots. We could announce our new pages without cluttering up our sites with pointless pages."
-msgstr ""
-
-msgid "Click here to read how to configure Sitemaps"
-msgstr ""
-
 msgid "Auto Update"
 msgstr ""
 
@@ -5667,55 +5436,6 @@ msgid "Install Selected Version"
 msgstr ""
 
 msgid "Reinstalling, please wait..."
-msgstr ""
-
-msgid "SEO is the backbone of any website and it couldn't be more true for a WooCommerce store."
-msgstr ""
-
-msgid "When you sell something online, you want people to buy it. And, SEO is the best way to do so in the long run."
-msgstr ""
-
-msgid "With the Rank Math SEO plugin, you can easily optimize your WooCommerce store in general and product pages in particular."
-msgstr ""
-
-msgid "Optimizing Your WooCommerce Store"
-msgstr ""
-
-#. translators: link to local seo settings
-msgid "Rank Math can help you make your product category or tag archives `noindex`. You can do that from <a href=\"%1$s\">WordPress Dashboard > Rank Math > Titles & Meta > Product Categories</a>"
-msgstr ""
-
-msgid "or"
-msgstr ""
-
-msgid "WordPress Dashboard > Rank Math > Titles & Meta > Product Tags."
-msgstr ""
-
-msgid "Optimizing Your Product Pages"
-msgstr ""
-
-#. translators: link to local seo settings
-msgid "You can customize and automate the SEO Title/Description generation easily as well. Just head over to <a href=\"%1$s\">WordPress Dashboard > Rank Math > Titles & Meta > Products</a>"
-msgstr ""
-
-msgid "You can also add rich snippets to your product pages easily with Rank Math, apart from doing the regular SEO like you would do on posts."
-msgstr ""
-
-#. translators: link to local seo settings
-msgid "Do that from the product pages themeselve. Go to <a href=\"%1$s\">WordPress Dashboard > Products > Add New</a>"
-msgstr ""
-
-msgid "And, choose the product schema from the Rich Snippets tab."
-msgstr ""
-
-msgid "Optimizing Your Product URLs"
-msgstr ""
-
-msgid "Rank Math offers you to remove category base from your product archive URLs so the URLs are cleaner, more SEO friendly and easier to remember."
-msgstr ""
-
-#. translators: link to local seo settings
-msgid "To access those options, head over to <a href=\"%1$s\">WordPress Dashboard > Rank Math > General Settings > WooCommerce</a>."
 msgstr ""
 
 msgid "Remove base"

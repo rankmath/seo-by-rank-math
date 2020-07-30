@@ -41,10 +41,6 @@ class Admin extends Base {
 				'id'             => 'redirect',
 				'directory'      => $directory,
 				'table'          => 'RankMath\Redirections\Table',
-				'help'           => [
-					'title' => esc_html__( 'Redirections', 'rank-math' ),
-					'view'  => $directory . '/views/help.php',
-				],
 				'screen_options' => [
 					'id'      => 'rank_math_redirections_per_page',
 					'default' => 100,
@@ -62,12 +58,12 @@ class Admin extends Base {
 		}
 
 		if ( $this->page->is_current_page() || 'rank_math_save_redirections' === Param::post( 'action' ) ) {
-			$this->form = new Form;
+			$this->form = new Form();
 			$this->form->hooks();
 		}
 
 		if ( $this->page->is_current_page() ) {
-			new Export;
+			new Export();
 			$this->action( 'init', 'init' );
 			add_action( 'admin_enqueue_scripts', [ 'CMB2_Hookup', 'enqueue_cmb_css' ] );
 			Helper::add_json( 'maintenanceMode', esc_html__( 'Maintenance Code', 'rank-math' ) );
@@ -82,7 +78,7 @@ class Admin extends Base {
 	 */
 	private function load_metabox() {
 		if ( Admin_Helper::is_post_edit() || Admin_Helper::is_term_edit() ) {
-			new Metabox;
+			new Metabox();
 		}
 	}
 

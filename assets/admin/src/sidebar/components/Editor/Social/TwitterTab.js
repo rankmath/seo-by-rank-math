@@ -93,11 +93,11 @@ const TwitterTab = ( props ) => (
 				<p>
 					{ sprintf(
 						__(
-							'Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. Player Cards must be submitted for approval before they can be used. More information: %s',
+							'Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. Player Cards must be submitted for approval before they can be used. More information: ',
 							'rank-math'
 						),
-						'<a href="https://dev.twitter.com/cards/types/player" target="blank">https://dev.twitter.com/cards/types/player</a>'
 					) }{ ' ' }
+					<a href="https://dev.twitter.com/cards/types/player" target="blank">https://dev.twitter.com/cards/types/player</a>
 				</p>
 			</div>
 		) }
@@ -107,11 +107,11 @@ const TwitterTab = ( props ) => (
 				<p>
 					{ sprintf(
 						__(
-							'The App Card is a great way to represent mobile applications on Twitter and to drive installs. More information: %s',
+							'The App Card is a great way to represent mobile applications on Twitter and to drive installs. More information: ',
 							'rank-math'
 						),
-						'<a href="https://dev.twitter.com/cards/types/app" target="blank"> https://dev.twitter.com/cards/types/app</a>'
 					) }{ ' ' }
+					<a href="https://dev.twitter.com/cards/types/app" target="blank"> https://dev.twitter.com/cards/types/app</a>
 				</p>
 			</div>
 		) }

@@ -46,13 +46,9 @@ class Common {
 
 		add_action( 'wp_ajax_nopriv_rank_math_overlay_thumb', [ $this, 'generate_overlay_thumbnail' ] );
 
-		// Auto-update the plugin.
-		if ( Helper::get_settings( 'general.enable_auto_update' ) && false === boolval( get_option( 'rank_math_rollback_version', false ) ) ) {
-			new Auto_Updater();
-		}
-
 		$this->filter( 'is_protected_meta', 'hide_rank_math_meta', 10, 2 );
 
+		new Auto_Updater();
 		new Defaults();
 		new Admin_Bar_Menu();
 	}

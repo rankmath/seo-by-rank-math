@@ -94,10 +94,11 @@ abstract class Metadata {
 	/**
 	 * Get metadata for the object.
 	 *
-	 * @param  string $key Value to get, without prefix.
+	 * @param  string $key     Value to get, without prefix.
+	 * @param  string $default Default value to use when metadata does not exists.
 	 * @return mixed
 	 */
-	public function get_metadata( $key ) {
+	public function get_metadata( $key, $default = '' ) {
 		$meta_key = 'rank_math_' . $key;
 		if ( isset( $this->$meta_key ) ) {
 			return $this->$meta_key;
@@ -111,7 +112,7 @@ abstract class Metadata {
 		}
 
 		if ( ! $value ) {
-			return '';
+			return $default;
 		}
 
 		$this->$meta_key = Helper::normalize_data( $value );
@@ -127,7 +128,7 @@ abstract class Metadata {
 	 * @return string|bool False if replacement not needed. Replaced variable string.
 	 */
 	public function maybe_replace_vars( $key, $value, $object ) {
-		$need_replacements = array( 'title', 'description', 'facebook_title', 'twitter_title', 'facebook_description', 'twitter_description', 'snippet_name', 'snippet_desc' );
+		$need_replacements = [ 'title', 'description', 'facebook_title', 'twitter_title', 'facebook_description', 'twitter_description', 'snippet_name', 'snippet_desc' ];
 
 		// Early bail.
 		if ( ! in_array( $key, $need_replacements, true ) || ! is_string( $value ) || '' === $value ) {

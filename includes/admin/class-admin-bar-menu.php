@@ -341,14 +341,8 @@ class Admin_Bar_Menu {
 			]
 		);
 
-		$url   = urlencode( Url::get_current_url() );
+		$url   = rawurlencode( Url::get_current_url() );
 		$items = [
-			'google-structured-data'     => [
-				'title' => esc_html__( 'Google Structured Data', 'rank-math' ),
-				'href'  => 'https://search.google.com/structured-data/testing-tool/?url=' . $url,
-				'meta'  => [ 'title' => esc_html__( 'Google Structured Data Testing Tool', 'rank-math' ) ],
-			],
-
 			'google-pagespeed'           => [
 				'title' => esc_html__( 'Google PageSpeed', 'rank-math' ),
 				'href'  => 'https://developers.google.com/speed/pagespeed/insights/?url=' . $url,

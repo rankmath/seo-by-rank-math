@@ -37,10 +37,6 @@ class Admin extends Base {
 				'id'             => '404-monitor',
 				'directory'      => $directory,
 				'table'          => 'RankMath\Monitor\Table',
-				'help'           => [
-					'title' => esc_html__( '404 Monitor', 'rank-math' ),
-					'view'  => $directory . '/views/help.php',
-				],
 				'screen_options' => [
 					'id'      => 'rank_math_404_monitor_per_page',
 					'default' => 100,

@@ -31,7 +31,7 @@ class SwapVariables {
 	}
 
 	replace( map, matched ) {
-		let token = matched.toLowerCase().replace( /%+/g, '' )
+		let token = matched.toLowerCase().slice( 1, -1 )
 
 		if ( [ 'term_description', 'user_description' ].includes( token ) ) {
 			return jQuery( '#description' ).val()
@@ -49,7 +49,7 @@ class SwapVariables {
 		token = 'seo_title' === token ? 'title' : token
 		token = 'seo_description' === token ? 'excerpt' : token
 
-		return token in map ? map[ token ] : token
+		return token in map ? map[ token ] : ''
 	}
 
 	getMap() {

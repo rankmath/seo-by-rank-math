@@ -83,7 +83,7 @@ class Twitter extends OpenGraph {
 	 */
 	public function use_facebook() {
 		$use_facebook = ( is_category() || is_tag() || is_tax() ) ? Helper::get_term_meta( 'twitter_use_facebook' ) :
-			Helper::get_post_meta( 'twitter_use_facebook' );
+			Helper::get_post_meta( 'twitter_use_facebook', 0, true );
 
 		if ( $use_facebook ) {
 			$this->prefix = 'facebook';

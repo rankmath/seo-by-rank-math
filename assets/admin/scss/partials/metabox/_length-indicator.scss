@@ -5,18 +5,24 @@
 
 	display: block;
 
+	@include position(absolute, 22px 15px null null);
+
 	.length-indicator {
+		position: relative;
+		display: inline-block;
 		overflow: hidden;
 
 		border-radius: 2px;
 		background: linear-gradient(to right, #e33e2b 0%, #f06818 18%, #fff 19%, #fff 19%, #f16b17 20%, #f1a104 38%, #fff 39%, #fff 39%, #f1a404 40%, #d9b507 58%, #fff 59%, #fff 59%, #d4b509 60%, #7bb02c 78%, #fff 79%, #fff 79%, #76ae2e 80%, #2da24c 100%);
 
-		@include position(absolute, -13px 60px null null);
 		@include size(180px, 8px);
+		margin-left: 10px;
 
 		span {
 			position: absolute;
 			z-index: 11;
+
+			border-radius: 0 2px 2px 0;
 
 			background: #e0e0e0;
 
@@ -35,9 +41,25 @@
 
 	.length-count {
 		font-size: 12px;
-
-		@include position( absolute, -17px 0 null null );
-
 		color: #afafaf;
+	}
+}
+
+#rank-math-width-tester {
+    position: absolute;
+    top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	white-space: nowrap;
+	font-family: arial, sans-serif;
+
+	&.title {
+		font-size: 20px;
+	}
+
+	&.description {
+		font-size: 14px;
 	}
 }

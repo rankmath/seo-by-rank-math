@@ -34,10 +34,6 @@ class Admin extends Base {
 			[
 				'id'        => 'sitemap',
 				'directory' => $directory,
-				'help'      => [
-					'title' => esc_html__( 'Sitemap', 'rank-math' ),
-					'view'  => $directory . '/views/help.php',
-				],
 			]
 		);
 		parent::__construct();
@@ -309,14 +305,14 @@ class Admin extends Base {
 		$sitemap_base = Router::get_sitemap_base() ? Router::get_sitemap_base() : '';
 
 		return '<div class="sitemap-nginx-notice notice notice-alt notice-warning rank-math-notice">
- 		<p>' . sprintf( __( 'Since you are using NGINX, add this code to your NGINX %s <strong>if your Sitemap pages are not loading</strong> or you can ask your hosting support to add it.', 'rank-math' ), '<a href="https://help.dreamhost.com/hc/en-us/articles/216455077-Nginx-configuration-file-locations/?utm_campaign=Rank+Math" target="_blank">' . __( 'configuration file', 'rank-math' ) . '</a>' ) . '
- 		<a href="#"><span class="show">' . __( 'Click here to see the code.', 'rank-math' ) . '</span><span class="hide">' . __( 'Hide', 'rank-math' ) . '</span></a></p>
+		 <p>' . sprintf( __( 'Since you are using NGINX, add this code to your NGINX %s <strong>if your Sitemap pages are not loading</strong> or you can ask your hosting support to add it.', 'rank-math' ), '<a href="https://help.dreamhost.com/hc/en-us/articles/216455077-Nginx-configuration-file-locations/?utm_campaign=Rank+Math" target="_blank">' . __( 'configuration file', 'rank-math' ) . '</a>' ) . '
+		 <a href="#"><span class="show">' . __( 'Click here to see the code.', 'rank-math' ) . '</span><span class="hide">' . __( 'Hide', 'rank-math' ) . '</span></a></p>
  <pre>
  # START Nginx Rewrites for Rank Math Sitemaps
  rewrite ^/' . $sitemap_base . 'sitemap_index.xml$ /index.php?sitemap=1 last;
  rewrite ^/' . $sitemap_base . '([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?sitemap=$1&sitemap_n=$2 last;
  # END Nginx Rewrites for Rank Math Sitemaps
  </pre>
- 		</div>';
+		 </div>';
 	}
 }

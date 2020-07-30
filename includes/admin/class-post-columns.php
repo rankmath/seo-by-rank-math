@@ -13,6 +13,7 @@ namespace RankMath\Admin;
 use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
+use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
@@ -167,7 +168,9 @@ class Post_Columns implements Runner {
 	 * @param int    $post_id     The current post ID.
 	 */
 	public function columns_contents( $column_name, $post_id ) {
-		do_action( $column_name, $post_id );
+		if ( Str::starts_with( 'rank_math', $column_name ) ) {
+			do_action( $column_name, $post_id );
+		}
 	}
 
 	/**
@@ -212,7 +215,6 @@ class Post_Columns implements Runner {
 			<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
 		</div>
 		<?php
-		return;
 	}
 
 	/**
@@ -221,42 +223,44 @@ class Post_Columns implements Runner {
 	 * @param int $post_id The current post ID.
 	 */
 	public function get_column_seo_details( $post_id ) {
-		$score     = get_post_meta( $post_id, 'rank_math_seo_score', true );
+		if ( ! Helper::is_post_indexable( $post_id ) ) {
+			echo '<span class="rank-math-column-display seo-score no-score "><strong>—/—</strong></span>';
+			echo '<strong>' . esc_html__( 'No Index', 'rank-math' ) . '</strong>';
+			return;
+		}
+
 		$keyword   = get_post_meta( $post_id, 'rank_math_focus_keyword', true );
 		$keyword   = explode( ',', $keyword )[0];
 		$is_pillar = get_post_meta( $post_id, 'rank_math_pillar_content', true );
-		$score     = $score ? $score : 0;
-		$class     = $this->get_seo_score_class( $score );
 
-		$score = Helper::is_score_enabled() ? $score . ' / 100' : false;
-		if ( ! metadata_exists( 'post', $post_id, 'rank_math_seo_score' ) ) {
-			$score = __( 'Update your post', 'rank-math' );
-			$class = 'no-score';
-		}
+		$score = empty( $keyword ) ? false : $this->get_seo_score( $post_id );
+		$class = ! $score ? 'no-score' : $this->get_seo_score_class( $score );
+		$score = $score ? $score . ' / 100' : '—/—';
+
 		?>
-		<span class="rank-math-column-display seo-score <?php echo $class; ?> <?php echo ! $score ? 'disabled' : ''; ?>">
-			<strong><?php echo $score; ?></strong>
-			<?php if ( 'on' === $is_pillar ) : ?>
-				<img class="is-pillar" src="<?php echo esc_url( rank_math()->plugin_url() . 'assets/admin/img/pillar.svg' ); ?>" alt="<?php _e( 'Is Pillar', 'rank-math' ); ?>" title="<?php _e( 'Is Pillar', 'rank-math' ); ?>" width="25" />
-			<?php endif; ?>
+		<span class="rank-math-column-display seo-score <?php echo esc_attr( $class ); ?> <?php echo ! $score ? 'disabled' : ''; ?>">
+			<strong><?php echo esc_html( $score ); ?></strong>
+			<?php if ( 'on' === $is_pillar ) { ?>
+				<img class="is-pillar" src="<?php echo esc_url( rank_math()->plugin_url() . 'assets/admin/img/pillar.svg' ); ?>" alt="<?php esc_html_e( 'Is Pillar', 'rank-math' ); ?>" title="<?php esc_html_e( 'Is Pillar', 'rank-math' ); ?>" width="25" />
+			<?php } ?>
 		</span>
 
-		<label><?php _e( 'Focus Keyword', 'rank-math' ); ?>:</label>
-		<span class="rank-math-column-display">
-			<strong title="Focus Keyword"><?php _e( 'Keyword', 'rank-math' ); ?>:</strong>
-			<span><?php echo $keyword ? esc_html( $keyword ) : esc_html__( 'Not Set', 'rank-math' ); ?></span>
-		</span>
+			<label><?php esc_html_e( 'Focus Keyword', 'rank-math' ); ?>:</label>
+			<span class="rank-math-column-display">
+				<strong title="Focus Keyword"><?php esc_html_e( 'Keyword', 'rank-math' ); ?>:</strong>
+				<span><?php echo $keyword ? esc_html( $keyword ) : esc_html__( 'Not Set', 'rank-math' ); ?></span>
+			</span>
 
-		<span class="rank-math-column-value" data-field="focus_keyword" contenteditable="true" tabindex="11">
-			<span><?php echo esc_html( $keyword ); ?></span>
-		</span>
+			<span class="rank-math-column-value" data-field="focus_keyword" contenteditable="true" tabindex="11">
+				<span><?php echo esc_html( $keyword ); ?></span>
+			</span>
 
-		<?php $this->do_action( 'post/column/seo_details', $post_id ); ?>
+			<?php $this->do_action( 'post/column/seo_details', $post_id ); ?>
 
-		<div class="rank-math-column-edit">
-			<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
-			<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
-		</div>
+			<div class="rank-math-column-edit">
+				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
+				<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
+			</div>
 
 		<?php
 	}
@@ -293,6 +297,26 @@ class Post_Columns implements Runner {
 			<?php
 			return;
 		}
+	}
+
+	/**
+	 * Get SEO score.
+	 *
+	 * @param int $post_id Post ID.
+	 *
+	 * @return string
+	 */
+	private function get_seo_score( $post_id ) {
+		if ( ! metadata_exists( 'post', $post_id, 'rank_math_seo_score' ) ) {
+			return false;
+		}
+
+		if ( ! Helper::is_score_enabled() ) {
+			return false;
+		}
+
+		$score = get_post_meta( $post_id, 'rank_math_seo_score', true );
+		return $score ? $score : 0;
 	}
 
 	/**

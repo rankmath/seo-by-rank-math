@@ -166,11 +166,15 @@ class DataCollector {
 	 * @return {string} The post's permalink.
 	 */
 	getPermalink() {
-		return rankMath.is_front_page
-			? rankMath.homeUrl + '/'
-			: rankMath.permalinkFormat
+		if ( rankMath.is_front_page ) {
+			return rankMath.homeUrl + '/'
+		}
+
+		return this.getSlug()
+			? rankMath.permalinkFormat
 				.replace( /%(postname|pagename)%/, this.getSlug() )
-				.trimRight( '/' ) + '/'
+				.trimRight( '/' )
+			: ''
 	}
 
 	/**

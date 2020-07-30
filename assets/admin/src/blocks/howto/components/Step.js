@@ -8,12 +8,12 @@ import classnames from 'classnames'
  */
 import { __ } from '@wordpress/i18n'
 import { Component } from '@wordpress/element'
-import { IconButton } from '@wordpress/components'
 import { RichText, MediaUpload } from '@wordpress/block-editor'
 
 /**
  * Internal dependencies
  */
+import { IconButton } from '@helpers/deprecated'
 import MediaUploader from '@blocks/shared/MediaUploader'
 
 class Step extends Component {

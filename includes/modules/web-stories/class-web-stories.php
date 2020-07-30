@@ -26,7 +26,7 @@ class Web_Stories {
 	 */
 	public function __construct() {
 		$this->action( 'web_stories_story_head', 'remove_web_stories_meta_tags', 0 );
-		$this->action( 'web_stories_story_head', 'add_rank_math_tags', 9 );
+		$this->action( 'web_stories_story_head', 'add_rank_math_tags' );
 	}
 
 	/**
@@ -45,6 +45,7 @@ class Web_Stories {
 	 * Add Rank Math meta tags.
 	 */
 	public function add_rank_math_tags() {
+		add_filter( 'rank_math/frontend/description', '__return_false' );
 		add_filter( 'rank_math/opengraph/facebook/og_description', '__return_false' );
 		add_filter( 'rank_math/opengraph/twitter/twitter_description', '__return_false' );
 		do_action( 'rank_math/head' );

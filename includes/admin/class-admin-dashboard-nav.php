@@ -127,7 +127,7 @@ class Admin_Dashboard_Nav {
 		}
 
 		if ( is_network_admin() ) {
-			$links = array();
+			$links = [];
 		}
 
 		return apply_filters( 'rank_math/admin/dashboard_nav_links', $links );

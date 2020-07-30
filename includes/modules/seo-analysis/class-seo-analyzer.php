@@ -10,12 +10,11 @@
 
 namespace RankMath\SEO_Analysis;
 
-use RankMath\Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
 use RankMath\Helpers\Security;
 use MyThemeShop\Helpers\Param;
+use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -300,12 +299,8 @@ class SEO_Analyzer {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
 		$this->has_cap_ajax( 'general' );
 
-		$settings                       = get_option( 'rank-math-options-general', array() );
-		$settings['enable_auto_update'] = '1';
-		rank_math()->settings->set( 'general', 'enable_auto_update', true );
-		update_option( 'rank-math-options-general', $settings );
-
 		$this->enable_auto_update_in_stored_data();
+		Helper::toggle_auto_update_setting( 'on' );
 
 		echo '1';
 		die;
@@ -383,14 +378,17 @@ class SEO_Analyzer {
 			return false;
 		}
 
-		$response = wp_remote_retrieve_body( $request );
-		$response = json_decode( $response, true );
-		if ( ! is_array( $response ) ) {
+		$status = absint( wp_remote_retrieve_response_code( $request ) );
+		if ( 200 !== $status ) {
+			// Translators: placeholder is a HTTP error code.
+			$this->api_error = sprintf( __( 'HTTP %d error.', 'rank-math' ), $status );
 			return false;
 		}
 
-		if ( 200 !== absint( wp_remote_retrieve_response_code( $request ) ) ) {
-			$this->api_error = join( ', ', $response['errors'] );
+		$response = wp_remote_retrieve_body( $request );
+		$response = json_decode( $response, true );
+		if ( ! is_array( $response ) ) {
+			$this->api_error = __( 'Unexpected API response.', 'rank-math' );
 			return false;
 		}
 

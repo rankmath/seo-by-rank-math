@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, map } from 'lodash'
+import { get, map, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -102,7 +102,10 @@ class LinkEdit extends Component {
 				)
 			}
 
-			activeFormat.unregisteredAttributes.class = ''
+			if ( ! isUndefined( activeFormat.unregisteredAttributes ) ) {
+				activeFormat.unregisteredAttributes.class = ''
+			}
+
 			let newValue = value
 			newValue = applyFormat( newValue, activeFormat )
 			newValue = removeFormat( newValue, 'core/link' )

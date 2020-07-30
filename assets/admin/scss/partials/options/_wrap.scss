@@ -4,21 +4,6 @@
 	width: 978px;
 	max-width: 100%;
 
-	.#{$namespace}-tabs-navigation {
-		.separator {
-			font-weight: 600;
-
-			display: block;
-
-			padding: 12px 15px 10px;
-
-			color: #5b646c;
-
-			border-left: 1px solid $gray;
-			border-top: 1px solid $gray;
-		}
-	}
-
 	.#{$namespace}-tabs-content {
 		margin-bottom: 0;
 	}
