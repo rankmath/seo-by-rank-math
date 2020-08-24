@@ -32,21 +32,6 @@
 					</ul>
 				</td>
 			</tr>
-			<tr class="cmb-row cmb-type-switch rank-math-auto-update-email" style="<?php echo ! $auto_update ? 'display:none' : ''; ?>">
-				<th scope="row"><label><?php esc_html_e( 'Email me every time the plugin auto-updates', 'rank-math' ); ?></label></th>
-				<td>
-					<ul class="cmb2-radio-list cmb2-list">
-						<li>
-							<input type="radio" class="cmb2-option" name="enable_auto_update_email" id="enable_auto_update_email1" value="off" <?php checked( ! $auto_update_email ); ?>>
-							<label for="enable_auto_update_email1"><?php esc_html_e( 'Off', 'rank-math' ); ?></label>
-						</li>
-						<li>
-							<input type="radio" class="cmb2-option" name="enable_auto_update_email" id="enable_auto_update_email2" value="on" <?php checked( $auto_update_email ); ?>>
-							<label for="enable_auto_update_email2"><?php esc_html_e( 'On', 'rank-math' ); ?></label>
-						</li>
-					</ul>
-				</td>
-			</tr>
 		</tbody>
 	</table>
 

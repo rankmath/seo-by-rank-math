@@ -29,7 +29,7 @@ class Link_Attributes {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		$this->action( 'wp_head', 'add_attributes', 99 );
+		$this->action( 'wp', 'add_attributes', 9999 );
 	}
 
 	/**
@@ -149,7 +149,7 @@ class Link_Attributes {
 	 * @return array $attrs
 	 */
 	private function set_external_attrs( $attrs ) {
-		if ( ! $this->nofollow_link && $this->new_window_link && $this->nofollow_image && $this->add_noopener ) {
+		if ( ! $this->nofollow_link && ! $this->new_window_link && ! $this->nofollow_image && ! $this->add_noopener ) {
 			return $attrs;
 		}
 

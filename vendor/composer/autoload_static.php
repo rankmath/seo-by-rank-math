@@ -271,6 +271,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Sitemap\\Providers\\Post_Type' => __DIR__ . '/../..' . '/includes/modules/sitemap/providers/class-post-type.php',
         'RankMath\\Sitemap\\Providers\\Provider' => __DIR__ . '/../..' . '/includes/modules/sitemap/providers/interface-provider.php',
         'RankMath\\Sitemap\\Providers\\Taxonomy' => __DIR__ . '/../..' . '/includes/modules/sitemap/providers/class-taxonomy.php',
+        'RankMath\\Sitemap\\Redirect_Core_Sitemaps' => __DIR__ . '/../..' . '/includes/modules/sitemap/class-redirect-core-sitemaps.php',
         'RankMath\\Sitemap\\Router' => __DIR__ . '/../..' . '/includes/modules/sitemap/class-router.php',
         'RankMath\\Sitemap\\Sitemap' => __DIR__ . '/../..' . '/includes/modules/sitemap/class-sitemap.php',
         'RankMath\\Sitemap\\Sitemap_Index' => __DIR__ . '/../..' . '/includes/modules/sitemap/class-sitemap-index.php',

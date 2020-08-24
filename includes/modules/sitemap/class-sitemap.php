@@ -36,6 +36,7 @@ class Sitemap {
 		new Router();
 		$this->index = new Sitemap_Index();
 		$this->index->hooks();
+		new Redirect_Core_Sitemaps();
 
 		add_action( 'rank_math/sitemap/hit_index', [ __CLASS__, 'hit_sitemap_index' ] );
 		add_action( 'rank_math/sitemap/ping_search_engines', [ __CLASS__, 'ping_search_engines' ] );
@@ -46,11 +47,6 @@ class Sitemap {
 			$this->filter( 'rank_math/sitemap/build_type', 'rank_math_build_sitemap_filter' );
 			$this->filter( 'rank_math/sitemap/xml_post_url', 'exclude_hidden_language_posts', 10, 2 );
 		}
-
-		/**
-		 * Disable the WP core XML sitemaps.
-		 */
-		add_filter( 'wp_sitemaps_enabled', '__return_false' );
 	}
 
 	/**

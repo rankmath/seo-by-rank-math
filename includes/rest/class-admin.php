@@ -250,7 +250,7 @@ class Admin extends WP_REST_Controller {
 	 */
 	public function auto_update( WP_REST_Request $request ) {
 		$field = $request->get_param( 'key' );
-		if ( ! in_array( $field, [ 'enable_auto_update', 'enable_auto_update_email' ], true ) ) {
+		if ( 'enable_auto_update' !== $field ) {
 			return false;
 		}
 

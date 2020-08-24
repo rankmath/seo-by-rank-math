@@ -61,18 +61,9 @@ trait Api {
 	 * Toggle auto updates option.
 	 *
 	 * @param string $toggle       New status.
-	 * @param string $toggle_email New email status.
 	 * @return void
 	 */
-	public static function toggle_auto_update_setting( $toggle, $toggle_email = null ) {
-		if ( ! is_null( $toggle_email ) ) {
-			$settings = get_option( 'rank-math-options-general', [] );
-			$toggle_email = 'on' === $toggle_email ? 'on' : 'off';
-			$settings['enable_auto_update_email'] = $toggle_email;
-			rank_math()->settings->set( 'general', 'enable_auto_update_email', 'on' === $toggle_email ? true : false );
-			update_option( 'rank-math-options-general', $settings );
-		}
-
+	public static function toggle_auto_update_setting( $toggle ) {
 		$auto_updates = (array) get_site_option( 'auto_update_plugins', [] );
 		if ( ! empty( $toggle ) && 'off' !== $toggle ) {
 			$auto_updates[] = 'seo-by-rank-math/rank-math.php';

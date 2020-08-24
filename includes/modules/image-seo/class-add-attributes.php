@@ -28,7 +28,7 @@ class Add_Attributes {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		$this->action( 'wp_head', 'add_attributes', 99 );
+		$this->action( 'wp', 'add_attributes', 9999 );
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Add_Attributes {
 	private function get_post() {
 		$post = \get_post();
 		if ( empty( $post ) ) {
-			$post = new stdClass;
+			$post = new stdClass();
 		}
 
 		return $post;

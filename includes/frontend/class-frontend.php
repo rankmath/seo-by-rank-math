@@ -31,6 +31,10 @@ class Frontend {
 	 * The Constructor.
 	 */
 	public function __construct() {
+		if ( \MyThemeShop\Helpers\Param::get( 'et_fb' ) ) {
+			return;
+		}
+
 		$this->includes();
 		$this->hooks();
 
@@ -214,6 +218,7 @@ class Frontend {
 	public function add_amp_dev_mode_xpaths( $xpaths ) {
 		$xpaths[] = '//script[ contains( text(), "var rankMath" ) ]';
 		$xpaths[] = '//*[ @id = "rank-math-css" ]';
+		$xpaths[] = '//a[starts-with(@href, "tel://")]';
 		return $xpaths;
 	}
 

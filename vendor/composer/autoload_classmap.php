@@ -234,6 +234,7 @@ return array(
     'RankMath\\Sitemap\\Providers\\Post_Type' => $baseDir . '/includes/modules/sitemap/providers/class-post-type.php',
     'RankMath\\Sitemap\\Providers\\Provider' => $baseDir . '/includes/modules/sitemap/providers/interface-provider.php',
     'RankMath\\Sitemap\\Providers\\Taxonomy' => $baseDir . '/includes/modules/sitemap/providers/class-taxonomy.php',
+    'RankMath\\Sitemap\\Redirect_Core_Sitemaps' => $baseDir . '/includes/modules/sitemap/class-redirect-core-sitemaps.php',
     'RankMath\\Sitemap\\Router' => $baseDir . '/includes/modules/sitemap/class-router.php',
     'RankMath\\Sitemap\\Sitemap' => $baseDir . '/includes/modules/sitemap/class-sitemap.php',
     'RankMath\\Sitemap\\Sitemap_Index' => $baseDir . '/includes/modules/sitemap/class-sitemap-index.php',

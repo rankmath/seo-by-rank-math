@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://s.rankmath.com/homepage
 Tags: seo, sitemap, google search console, schema, redirection
-Tested up to: 5.4.2
-Requires at least: 4.9.0
-Requires PHP: 5.6
-Stable tag: 1.0.46
+Tested up to: 5.5
+Requires at least: 5.2
+Requires PHP: 7.0
+Stable tag: 1.0.47
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -473,29 +473,24 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.46 [Jul 30, 2020] =
-* [NEW] Added: Pixel length counter for the SEO title & description fields [(view preview)](https://i.rankmath.com/zh0cI2)
-* Added: Synced Rank Math's [auto-update](https://rankmath.com/kb/version-control/#auto-update) feature with the auto-update option introduced in WordPress 5.5
-* Added: Rank Math's blocks are now translation-ready in the [WPML plugin](https://rankmath.com/compatibility/wpml/)
-* Improved: The [UI of Import/Export](https://i.rankmath.com/jpguHX) settings page
-* Improved: Only show the [SEO score in post lists](https://rankmath.com/kb/bulk-editing-in-rank-math/#bulk-editing-posts) when a [focus keyword](https://rankmath.com/kb/score-100-in-tests/#first-step-choosing-focus-keywords) is set and if the post is indexable
-* Improved: Show a green indicator for keywords with the first position in the [Search Console](https://rankmath.com/kb/search-console/#search-analytics)
-* Improved: `Help & Support` link in the sidebar menu now links directly to the [Knowledge Base](https://rankmath.com/kb/)
-* Improved: Removed the description from the [Article Schema](https://rankmath.com/kb/rich-snippets/#article) code for [Google Web Stories](https://rankmath.com/kb/google-web-stories/) as Google no longer requires it
-* Improved: Tooltip icon styling and consistency across both the Classic and the Gutenberg (aka Block) editor
-* Improved: API error handling for the [SEO Analysis](https://rankmath.com/kb/seo-analysis/) functionality
-* Improved: Variables with double `%` will not show a preview in the Rank Math's post preview area as they don't work on the frontend
-* Improved: Error handling if an invalid file is uploaded in the [settings importer](https://rankmath.com/kb/import-export-settings/#importing-your-settings)
-* Improved: Checkbox styling in the Gutenberg & Elementor sidebar for the upcoming WordPress 5.5
-* Removed: Deprecated Structured Data Testing Tool from the [admin bar](https://rankmath.com/kb/quick-actions/)
-* Removed: Disabled Core Sitemaps coming in WordPress 5.5 to avoid conflicts with the [Rank Math's Sitemap feature](https://rankmath.com/kb/configure-sitemaps/) as Rank Math's Sitemaps are more robust at this time
-* Fixed: `twitter:image` tag was not using the image set in the [Facebook tab](https://rankmath.com/kb/meta-box-social-tab/) of Rank Math for the newly created posts using the Gutenberg Editor
-* Fixed: Broken links in the [Twitter preview tab](https://rankmath.com/kb/meta-box-social-tab/#twitter-options) for App & Player Card notice
-* Fixed: An issue where an extra slash in the Elementor's [Canonical URL](https://rankmath.com/kb/advanced-tab/#canonical-url) option was shown. Though, it was not affecting the output for the search engine bots
-* Fixed: Adding a copied link from the clipboard to the block aka Gutenberg editor was breaking the paragraph
-* Fixed: Content analysis was not working for the pending posts when the [editor user role](https://rankmath.com/kb/role-manager/) did not have the capability to `publish_pages`
-* Fixed: Multiple broken [KB links](https://rankmath.com/kb/) in the [Setup Wizard](https://rankmath.com/kb/how-to-setup/)
-* Fixed: A PHP error appearing in the post list if 'Hongo Addon' plugin was active
-* Fixed: A problem where `WP_HOMEURL` was getting used instead of `WP_SITEURL` for the [redirect 404 to homepage option](https://rankmath.com/kb/general-settings/#redirections)
+= 1.0.47 [Aug 17, 2020] =
+* Improved: [WooCommerce](https://rankmath.com/compatibility/woocommerce/) products with 100s of variations should load extremely fast with proper Schema data
+* Improved: Rank Math won't add Meta tags on [Divi's](https://rankmath.com/compatibility/divi/) frontend page builder area to improve the loading time
+* Improved: Redirect Core Sitemap URL(s) to [Rank Math's Sitemap](https://rankmath.com/kb/configure-sitemaps/)
+* Improved: Long [focus keyword](https://rankmath.com/kb/score-100-in-tests/#first-step-choosing-focus-keywords) in featured images should be getting detected properly
+* Improved: Added a primary key to `rank_math_internal_meta` table
+* Improved: Compatibility with MainWP Plugin's Bulk Settings editor
+* Improved: RTL styling for the SERP fields in the preview area of Rank Math
+* Updated: Minimum WordPress version supported by Rank Math is 5.2 & PHP 7.0
+* Removed: Removed auto-update email notification feature to avoid any conflict with WordPress 5.5's auto-update email notifications
+* Fixed: `OG:Locale` not updating for a couple of languages like Telugu & Urdu
+* Fixed: A typo in the [filter to allow Shortcodes in the product Schema description](https://rankmath.com/kb/filters-hooks-api-developer/#allow-shortcodes-in-product-description)
+* Fixed: AMP Plugin was throwing an Invalid URL error on a page that used `rank_math_contact_info` Shortcode
+* Fixed: The `%parent_title%` variable was showing the example text in the preview section. Though, the value was printing correctly for the search engine bots
+* Fixed: The [open external links in a new tab](https://rankmath.com/kb/general-settings/#open-external-links-in-new-tab) option was not working when [Nofollow Image Link](https://rankmath.com/kb/general-settings/#no-follow-image-file-links) option was enabled
+* Fixed: [NoFollow External links](https://rankmath.com/kb/general-settings/#no-follow-external-links) option was not working with the AMP pages
+* Fixed: In the Classic Editor, [Show SEO Score](https://rankmath.com/kb/general-settings/#show-seo-score) option was disabled even after enabling it in the Options Panel
+* Fixed: The exclude post type from the [Sitemap](https://rankmath.com/kb/fix-sitemap-issues/) option was not working on the sites where a boolean value was stored in an integer format
+* Fixed: The [import data option](https://rankmath.com/kb/import-export-settings/#importing-your-settings) from other plugins was not working when not run via the setup wizard
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

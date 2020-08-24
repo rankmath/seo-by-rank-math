@@ -71,7 +71,7 @@ class Post_Type implements Provider {
 	public function handles_type( $type ) {
 		if (
 			false === post_type_exists( $type ) ||
-			false === Helper::get_settings( 'sitemap.pt_' . $type . '_sitemap' ) ||
+			! Helper::get_settings( 'sitemap.pt_' . $type . '_sitemap' ) ||
 			( 'attachment' === $type && Helper::get_settings( 'general.attachment_redirect_urls', true ) )
 		) {
 			return false;

@@ -46,8 +46,8 @@
 }
 
 #rank-math-width-tester {
-    position: absolute;
-    top: 0;
+	position: absolute;
+	top: 0;
 	left: 0;
 	margin: 0;
 	padding: 0;
@@ -61,5 +61,17 @@
 
 	&.description {
 		font-size: 14px;
+	}
+}
+
+body.rtl {
+	.length-indicator-wrapper {
+		right: auto;
+		left: 15px;
+
+		.length-indicator {
+			margin-left: 0;
+			margin-right: 10px;
+		}
 	}
 }

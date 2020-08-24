@@ -137,7 +137,7 @@ class Admin_Menu implements Runner {
 	 * Check for deactivation.
 	 */
 	private function maybe_deregister() {
-		if ( ! Helper::has_cap( 'general' ) ) {
+		if ( ! Helper::has_cap( 'general' ) || 'deregister' !== Param::post( 'registration-action' ) ) {
 			return;
 		}
 
@@ -146,8 +146,6 @@ class Admin_Menu implements Runner {
 			return;
 		}
 
-		if ( 'deregister' === Param::post( 'registration-action' ) ) {
-			Admin_Helper::deregister_user();
-		}
+		Admin_Helper::deregister_user();
 	}
 }

@@ -262,13 +262,13 @@ class Product_WooCommerce {
 	 * @param array  $seller  Seller info.
 	 */
 	private function set_offers_variable( $product, &$entity, $seller ) {
-		$permalink = $product->get_permalink();
-		if ( false === $this->has_variations( $product ) ) {
+		if ( ! $product->is_type( 'variable' ) ) {
 			return false;
 		}
 
-		$lowest  = wc_format_decimal( $product->get_variation_price( 'min', false ), wc_get_price_decimals() );
-		$highest = wc_format_decimal( $product->get_variation_price( 'max', false ), wc_get_price_decimals() );
+		$permalink = $product->get_permalink();
+		$lowest    = wc_format_decimal( $product->get_variation_price( 'min', false ), wc_get_price_decimals() );
+		$highest   = wc_format_decimal( $product->get_variation_price( 'max', false ), wc_get_price_decimals() );
 
 		if ( $lowest === $highest ) {
 			$offer = [
@@ -316,21 +316,5 @@ class Product_WooCommerce {
 			'priceCurrency'         => get_woocommerce_currency(),
 			'valueAddedTaxIncluded' => wc_prices_include_tax() ? 'true' : 'false',
 		];
-	}
-
-	/**
-	 * If product is variable, send variations.
-	 *
-	 * @param object $product Current product.
-	 *
-	 * @return array|boolean
-	 */
-	private function has_variations( $product ) {
-		if ( ! $product->is_type( 'variable' ) ) {
-			return false;
-		}
-
-		$variations = $product->get_available_variations();
-		return ! empty( $variations ) ? $variations : false;
 	}
 }

@@ -606,7 +606,7 @@ class JsonLD {
 		}
 
 		$description = $product->get_short_description() ? $product->get_short_description() : $product->get_description();
-		$description = $this->do_filter( 'product_description/appy_shortcode', false ) ? do_shortcode( $description ) : WordPress::strip_shortcodes( $description );
+		$description = $this->do_filter( 'product_description/apply_shortcode', false ) ? do_shortcode( $description ) : WordPress::strip_shortcodes( $description );
 		return wp_strip_all_tags( $description, true );
 	}
 

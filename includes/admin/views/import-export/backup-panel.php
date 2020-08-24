@@ -8,11 +8,11 @@
 
 $backups = get_option( 'rank_math_backups', [] );
 ?>
-<button type="button" class="button button-primary alignright rank-math-action" data-action="createBackup"><?php esc_html_e( 'Create Snapshot', 'rank-math' ); ?></button>
+<button type="button" class="button button-primary alignright rank-math-action" data-action="createBackup"><?php esc_html_e( 'Create Backup', 'rank-math' ); ?></button>
 
 <h3><?php esc_html_e( 'Settings Backup', 'rank-math' ); ?></h3>
 
-<p class="description"><?php esc_html_e( 'Take a snapshot of your plugin settings in case you wish to restore them in future. Use it as backup before making substantial changes to Rank Math settings. For taking a backup of the SEO data of your content, use the XML Export option.', 'rank-math' ); ?></p>
+<p class="description"><?php esc_html_e( 'Take a backup of your plugin settings in case you wish to restore them in future. Use it as backup before making substantial changes to Rank Math settings. For taking a backup of the SEO data of your content, use the XML Export option.', 'rank-math' ); ?></p>
 
 <div class="rank-math-settings-backup-form cmb2-form">
 	<div class="list-table with-action">

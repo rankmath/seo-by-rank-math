@@ -45,7 +45,7 @@ class Post_Variables extends Advanced_Variables {
 				'name'        => esc_html__( 'Post Title of parent page', 'rank-math' ),
 				'description' => esc_html__( 'Title of the parent page of the current post/page', 'rank-math' ),
 				'variable'    => 'parent_title',
-				'example'     => esc_html__( 'Example Parent Title', 'rank-math' ),
+				'example'     => $this->get_parent_title(),
 			],
 			[ $this, 'get_parent_title' ]
 		);

@@ -225,7 +225,7 @@ class Frontend_SEO_Score {
 	 * @param  CMB2_Field $field The current field.
 	 * @return boolean
 	 */
-	public static function show_on( $field = array() ) {
+	public static function show_on( $field = [] ) {
 		// Early Bail if is sttic homepage.
 		if ( Admin_Helper::is_home_page() ) {
 			return false;
@@ -245,7 +245,7 @@ class Frontend_SEO_Score {
 		$cmb->add_field(
 			[
 				'id'         => 'rank_math_dont_show_seo_score',
-				'type'       => 'toggle',
+				'type'       => 'switch',
 				'name'       => esc_html__( 'Show SEO Score on Front-end', 'rank-math' ),
 				'options'    => [
 					'on'  => esc_html__( 'Off', 'rank-math' ),

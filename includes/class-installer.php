@@ -236,11 +236,11 @@ class Installer {
 
 			// Link meta.
 			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}rank_math_internal_meta (
-				object_id bigint(20) UNSIGNED NOT NULL,
+				object_id BIGINT(20) UNSIGNED NOT NULL,
 				internal_link_count int(10) UNSIGNED NULL DEFAULT 0,
 				external_link_count int(10) UNSIGNED NULL DEFAULT 0,
 				incoming_link_count int(10) UNSIGNED NULL DEFAULT 0,
-				UNIQUE KEY object_id (object_id)
+				PRIMARY KEY (object_id)
 			) $collate;",
 
 			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}rank_math_sc_analytics (
@@ -369,7 +369,6 @@ class Installer {
 					'frontend_seo_score_post_types'       => [ 'post' ],
 					'frontend_seo_score_position'         => 'top',
 					'frontend_seo_score'                  => 'off',
-					'enable_auto_update_email'            => 'off',
 					'setup_mode'                          => 'easy',
 				]
 			)

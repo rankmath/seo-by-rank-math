@@ -193,8 +193,8 @@ import addNotice from '@helpers/addNotice'
 
 				const actions = $.map(
 					button
-						.closest( 'tr' )
-						.next( 'tr' )
+						.parents( '.active-tab' )
+						.find( '.choices' )
 						.find( 'input:checkbox:checked' ),
 					function( input ) {
 						return input.value
@@ -218,7 +218,7 @@ import addNotice from '@helpers/addNotice'
 				)
 
 				$( '#import-progress-area' ).remove()
-				button.closest( '.list-table' ).after( importTextarea )
+				button.parents( '.active-tab' ).find( 'table' ).after( importTextarea )
 				this.addLog( 'Import started...', importTextarea )
 				this.ajaxImport(
 					button.data( 'slug' ),

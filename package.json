@@ -60,7 +60,8 @@
 	},
 	"scripts": {
 		"build": "webpack --progress --mode production",
-		"dev": "webpack --watch"
+		"dev": "webpack --watch",
+		"dist": "webpack --progress --mode production && gulp pot && gulp frontCSS && gulp adminCSS"
 	},
 	"browserslist": [
 		"last 2 versions"

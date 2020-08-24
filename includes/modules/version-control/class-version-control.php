@@ -109,12 +109,8 @@ class Version_Control {
 
 		// Sanitize input.
 		$new_value         = Param::post( 'enable_auto_update' ) === 'on' ? 'on' : 'off';
-		$auto_update_email = 'off';
-		if ( 'on' === $new_value && Param::post( 'enable_auto_update_email' ) === 'on' ) {
-			$auto_update_email = 'on';
-		}
 
-		Helper::toggle_auto_update_setting( $new_value, $auto_update_email );
+		Helper::toggle_auto_update_setting( $new_value );
 
 		return true;
 	}

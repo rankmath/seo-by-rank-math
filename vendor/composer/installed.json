@@ -146,16 +146,6 @@
             "parser",
             "user agent",
             "useragent"
-        ],
-        "funding": [
-            {
-                "url": "https://www.paypal.me/donatj/15",
-                "type": "custom"
-            },
-            {
-                "url": "https://github.com/donatj",
-                "type": "github"
-            }
         ]
     },
     {

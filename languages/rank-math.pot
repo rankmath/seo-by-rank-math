@@ -38,24 +38,6 @@ msgstr ""
 msgid "Once Weekly"
 msgstr ""
 
-#. translators: placeholder is the new version number.
-msgid "(!) Rank Math SEO has been updated to %1$s"
-msgstr ""
-
-#. translators: 1 is the site URL, 2 is the new version number.
-msgid "Hi! The Rank Math plugin installed on %1$s has been automatically updated to version %2$s."
-msgstr ""
-
-#. translators: placeholder is the new version number.
-msgid "No further action is needed on your part. For more on version %1$s, see the official changelog: https://rankmath.com/changelog/"
-msgstr ""
-
-msgid "If you experience any issues or need support, we are here to help: https://support.rankmath.com/"
-msgstr ""
-
-msgid "Thank you for using Rank Math."
-msgstr ""
-
 msgid "Rank Math"
 msgstr ""
 
@@ -362,7 +344,7 @@ msgstr ""
 msgid "Are you sure you want to import settings into Rank Math? Don't worry, your current configuration will be saved as a backup."
 msgstr ""
 
-msgid "Are you sure you want to restore this snapshot? Your current configuration will be overwritten."
+msgid "Are you sure you want to restore this backup? Your current configuration will be overwritten."
 msgstr ""
 
 msgid "Are you sure you want to delete this backup?"
@@ -1476,9 +1458,6 @@ msgid "Post Title of parent page"
 msgstr ""
 
 msgid "Title of the parent page of the current post/page"
-msgstr ""
-
-msgid "Example Parent Title"
 msgstr ""
 
 msgid "Post Excerpt"
@@ -4172,13 +4151,13 @@ msgstr ""
 msgid "Remove schema data from %s."
 msgstr ""
 
-msgid "Create Snapshot"
+msgid "Create Backup"
 msgstr ""
 
 msgid "Settings Backup"
 msgstr ""
 
-msgid "Take a snapshot of your plugin settings in case you wish to restore them in future. Use it as backup before making substantial changes to Rank Math settings. For taking a backup of the SEO data of your content, use the XML Export option."
+msgid "Take a backup of your plugin settings in case you wish to restore them in future. Use it as backup before making substantial changes to Rank Math settings. For taking a backup of the SEO data of your content, use the XML Export option."
 msgstr ""
 
 msgid "There is no backup."
@@ -4334,9 +4313,6 @@ msgid "Your site is ready!"
 msgstr ""
 
 msgid "Enable auto update of the plugin"
-msgstr ""
-
-msgid "Email me every time the plugin auto-updates."
 msgstr ""
 
 msgid "Your site is now optimized."
@@ -5363,9 +5339,6 @@ msgid "Turn on auto-updates to automatically update to stable versions of Rank M
 msgstr ""
 
 msgid "Auto Update Plugin"
-msgstr ""
-
-msgid "Email me every time the plugin auto-updates"
 msgstr ""
 
 msgid "Rank Math will not auto-update because you have rolled back to a previous version. Update to the latest version manually to make this option work again."
