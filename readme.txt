@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.47.1-beta
+Stable tag: 1.0.47.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -473,13 +473,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.47.1-beta [Aug 24, 2020] =
+= 1.0.47.1 [Aug 25, 2020] =
 * Added: Proper credits and attribution wherever they were missing. We are incredibly sorry about missing them in the first place. That should not have happened. Please feel free to reach out to us in case the credits are still missing anywhere in the plugin. We would be more than obliged to add.
-* Improved: Exclude image caption text from the auto-generated SEO description
-* Improved: Automated open graph image tag(`og:image`) functionality, now it can also pick the first external image from the content
-* Improved: Fixed PHPCS warnings in most of the code 
-* Fixed: SERP preview section not showing the Hindi characters properly
-* Removed: Unused `remove_stopwords` function from the Redirection module
+* Improved: Excluded image caption text from the auto-generated SEO descriptions
+* Improved: Added more automation to the Open Graph Image tag(`og:image`) functionality. It can now pick the first external image from the content as well
+* Improved: Fixed PHPCS warnings throughout the plugin
+* Removed: Unused `remove_stopwords` function from the [Redirection](https://rankmath.com/kb/setting-up-redirections/) module
 * Removed: Some unused `error_log()` calls from the plugin
+* Fixed: [SERP preview](https://rankmath.com/kb/general-tab/#the-preview-section) section not showing Hindi characters properly
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**
