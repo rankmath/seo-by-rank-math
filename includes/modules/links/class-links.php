@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Links
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\Links;
@@ -76,7 +78,7 @@ class Links {
 	/**
 	 * Post column content.
 	 *
-	 * @param int $post_id Post id.
+	 * @param int $post_id Post ID.
 	 */
 	public function post_column_content( $post_id ) {
 		if ( ! Helper::is_post_indexable( $post_id ) ) {

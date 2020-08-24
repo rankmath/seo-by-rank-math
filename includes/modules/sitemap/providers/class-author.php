@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Sitemap
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Some functionality adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\Sitemap\Providers;
@@ -213,11 +215,7 @@ class Author implements Provider {
 	 */
 	public function exclude_post_types( $args ) {
 		// Exclude post types.
-		$public_post_types = get_post_types(
-			array(
-				'public' => true,
-			)
-		);
+		$public_post_types = get_post_types( [ 'public' => true ] );
 
 		// We're not supporting sitemaps for author pages for attachments.
 		unset( $public_post_types['attachment'] );

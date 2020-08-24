@@ -22,7 +22,7 @@ class JobPosting implements Snippet {
 	/**
 	 * Job Posting rich snippet.
 	 *
-	 * @param array  $data   Array of json-ld data.
+	 * @param array  $data   Array of JSON-LD data.
 	 * @param JsonLD $jsonld JsonLD Instance.
 	 *
 	 * @return array
@@ -91,7 +91,7 @@ class JobPosting implements Snippet {
 	 * Unpublish job posting when expired.
 	 *
 	 * @param JsonLD $jsonld JsonLD Instance.
-	 * @param array  $entity Array of json-ld entity.
+	 * @param array  $entity Array of JSON-LD entity.
 	 */
 	private function is_expired_unpublish( $jsonld, &$entity ) {
 		$end_date = Helper::get_post_meta( 'snippet_jobposting_expirydate' );
@@ -108,9 +108,11 @@ class JobPosting implements Snippet {
 			return;
 		}
 
-		wp_update_post([
-			'ID'          => $jsonld->post_id,
-			'post_status' => 'draft',
-		]);
+		wp_update_post(
+			[
+				'ID'          => $jsonld->post_id,
+				'post_status' => 'draft',
+			]
+		);
 	}
 }

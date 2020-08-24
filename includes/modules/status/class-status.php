@@ -48,13 +48,6 @@ class Status extends Base {
 	}
 
 	/**
-	 * Load the REST API endpoints.
-	 */
-	public function init_rest_api() {
-		\error_log( 'coming' );
-	}
-
-	/**
 	 * Register admin page.
 	 */
 	public function register_admin_page() {

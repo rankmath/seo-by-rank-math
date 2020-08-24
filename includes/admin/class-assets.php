@@ -194,7 +194,7 @@ class Assets implements Runner {
 	/**
 	 * Enqueues styles.
 	 *
-	 * @param string $style The name of the style to enqueue.
+	 * @param string $style Name of the style.
 	 */
 	public function enqueue_style( $style ) {
 		wp_enqueue_style( self::PREFIX . $style );
@@ -203,7 +203,7 @@ class Assets implements Runner {
 	/**
 	 * Enqueues scripts.
 	 *
-	 * @param string $script The name of the script to enqueue.
+	 * @param string $script Name of the script.
 	 */
 	public function enqueue_script( $script ) {
 		wp_enqueue_script( self::PREFIX . $script );

@@ -109,7 +109,7 @@ class Admin extends Base {
 		$schema = $schema ? $schema : __( 'Off', 'rank-math' );
 		?>
 			<span class="rank-math-column-display schema-type">
-				<strong><?php _e( 'Schema', 'rank-math' ); ?>:</strong>
+				<strong><?php esc_html_e( 'Schema', 'rank-math' ); ?>:</strong>
 				<?php echo ucfirst( $schema ); ?>
 			</span>
 		<?php

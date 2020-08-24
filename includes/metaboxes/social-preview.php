@@ -74,13 +74,13 @@ $twitter_username = $twitter_username ? $twitter_username : esc_html( 'username'
 
 			<div class="rank-math-social-preview-meta facebook-meta">
 				<div class="social-profile-image"></div>
-				<div class="social-name"><?php echo $name; ?></div>
+				<div class="social-name"><?php echo esc_attr( $name ); ?></div>
 				<div class="social-time"><span><?php esc_html_e( '2 hrs', 'rank-math' ); ?></span><span class="dashicons dashicons-admin-site"></span></div>
 			</div>
 
 			<div class="rank-math-social-preview-meta twitter-meta">
 				<div class="social-profile-image"></div>
-				<div class="social-name"><?php echo $name; ?><span class="social-username">@<?php echo $twitter_username; ?></span><span class="social-time"><?php esc_html_e( '2h', 'rank-math' ); ?></span></div>
+				<div class="social-name"><?php echo esc_attr( $name ); ?><span class="social-username">@<?php echo esc_attr( $twitter_username ); ?></span><span class="social-time"><?php esc_html_e( '2h', 'rank-math' ); ?></span></div>
 				<div class="social-text">The card for your website will look little something like this!</div>
 			</div>
 
@@ -88,8 +88,8 @@ $twitter_username = $twitter_username ? $twitter_username : esc_html( 'username'
 
 				<div class="rank-math-social-preview-image">
 					<?php the_post_thumbnail( 'full', 'id=rank_math_post_thumbnail' ); ?>
-					<img class="facebook-thumbnail" src="<?php echo $fb_thumbnail; ?>" width="526" height="275" />
-					<img class="twitter-thumbnail" src="<?php echo $tw_thumbnail; ?>" width="526" height="275" />
+					<img class="facebook-thumbnail" src="<?php echo esc_url( $fb_thumbnail ); ?>" width="526" height="275" />
+					<img class="twitter-thumbnail" src="<?php echo esc_url( $tw_thumbnail ); ?>" width="526" height="275" />
 					<img src="" class="rank-math-social-preview-image-overlay">
 				</div>
 

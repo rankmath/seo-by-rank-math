@@ -45,7 +45,7 @@ class Local_Seo {
 			'company' === Helper::get_settings( 'titles.knowledgegraph_type' ) &&
 			$this->do_filter( 'sitemap/locations', false )
 		) {
-			new KML_File;
+			new KML_File();
 		}
 	}
 

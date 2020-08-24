@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 
 add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_basic_tests' );
 /**
- * Register local seo analysis basic tests.
+ * Register local SEO analysis basic tests.
  *
  * @param array $tests Array of tests.
  *
@@ -39,7 +39,7 @@ function rank_math_register_seo_analysis_basic_tests( $tests ) {
 		'description' => esc_html__( 'Your site may not be visible to search engine.', 'rank-math' ),
 		'how_to_fix'  => '<p>' .
 			sprintf(
-				/* translators: %1$s resolves to the opening tag of the link to the reading settings, %1$s resolves to the closing tag for the link */
+				/* translators: %1$s link to the reading settings, %2$s closing tag for the link */
 				esc_html__( 'You must %1$sgo to your Reading Settings%2$s and uncheck the box for Search Engine Visibility.', 'rank-math' ),
 				'<a href="' . esc_url( admin_url( 'options-reading.php' ) ) . '">',
 				'</a>'
@@ -86,7 +86,7 @@ function rank_math_register_seo_analysis_basic_tests( $tests ) {
 
 add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_advance_tests' );
 /**
- * Register local seo analysis basic tests.
+ * Register local SEO analysis basic tests.
  *
  * @param array $tests Array of tests.
  *
@@ -183,7 +183,7 @@ function rank_math_analyze_site_description() {
 		return [
 			'status'  => 'warning',
 			'message' => sprintf(
-				/* translators: 1: link open tag; 2: link close tag. */
+				/* translators: %1$s link to the customize settings, %2$s closing tag for the link */
 				esc_html__( 'You have not entered a tagline yet. It is a good idea to choose one. %1$sYou can fix this in the customizer%2$s.', 'rank-math' ),
 				'<a href="' . esc_url( admin_url( 'customize.php' ) ) . '" target="_blank">',
 				'</a>'
@@ -369,7 +369,7 @@ function rank_math_analyze_post_titles() {
 	}
 	$count = count( $post_ids ) - 20;
 	if ( $count > 0 ) {
-		/* translators: post id count */
+		/* translators: post ID count */
 		$info[] = sprintf( esc_html__( '+%d More...', 'rank-math' ), $count );
 	}
 
@@ -382,7 +382,7 @@ function rank_math_analyze_post_titles() {
 }
 
 /**
- * Get post_type links.
+ * Get `post_type` links.
  *
  * @param array $rows Rows.
  *
@@ -442,9 +442,9 @@ function rank_math_get_posts_with_titles() {
 }
 
 /**
- * Group Result Data by Post type.
+ * Group result data by post type.
  *
- * @param array $data Result Data.
+ * @param array $data Result data.
  *
  * @return array
  */

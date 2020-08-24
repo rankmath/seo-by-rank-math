@@ -255,7 +255,7 @@ class Yoast extends Plugin_Importer {
 	/**
 	 * Set post robots.
 	 *
-	 * @param int $post_id Post id.
+	 * @param int $post_id Post ID.
 	 */
 	private function set_post_robots( $post_id ) {
 		// Early bail if robots data is set in Rank Math plugin.
@@ -289,7 +289,7 @@ class Yoast extends Plugin_Importer {
 	/**
 	 * Set post robots based on the Settings.
 	 *
-	 * @param int $post_id        Post id.
+	 * @param int $post_id        Post ID.
 	 * @param int $robots_noindex Whether or not the post is indexed.
 	 *
 	 * @return string
@@ -306,7 +306,7 @@ class Yoast extends Plugin_Importer {
 	/**
 	 * Set Focus Keyword.
 	 *
-	 * @param int $post_id Post id.
+	 * @param int $post_id Post ID.
 	 */
 	private function set_post_focus_keyword( $post_id ) {
 		$extra_fks = get_post_meta( $post_id, '_yoast_wpseo_focuskeywords', true );
@@ -333,7 +333,7 @@ class Yoast extends Plugin_Importer {
 	/**
 	 * Set primary term for the posts.
 	 *
-	 * @param int[] $post_ids Post ids.
+	 * @param int[] $post_ids Post IDs.
 	 */
 	private function set_primary_term( $post_ids ) {
 		$post_ids = wp_list_pluck( $post_ids, 'ID' );
@@ -389,7 +389,7 @@ class Yoast extends Plugin_Importer {
 	/**
 	 * Set term robots.
 	 *
-	 * @param int   $term_id Term id.
+	 * @param int   $term_id Term ID.
 	 * @param array $data    Term data.
 	 */
 	private function set_term_robots( $term_id, $data ) {
@@ -407,7 +407,7 @@ class Yoast extends Plugin_Importer {
 	/**
 	 * Set term social media.
 	 *
-	 * @param int   $term_id Term id.
+	 * @param int   $term_id Term ID.
 	 * @param array $data    Term data.
 	 */
 	private function set_term_social_media( $term_id, $data ) {
@@ -652,7 +652,7 @@ class Yoast extends Plugin_Importer {
 	/**
 	 * Local phones settings.
 	 *
-	 * @param array $yoast_local Array of yoast local seo settings.
+	 * @param array $yoast_local Array of yoast local SEO settings.
 	 */
 	private function local_phones_settings( $yoast_local ) {
 		if ( empty( $yoast_local['location_phone'] ) ) {
@@ -675,7 +675,7 @@ class Yoast extends Plugin_Importer {
 	/**
 	 * Local address settings.
 	 *
-	 * @param array $yoast_local Array of yoast local seo settings.
+	 * @param array $yoast_local Array of yoast local SEO settings.
 	 */
 	private function local_address_settings( $yoast_local ) {
 		// Address Format.

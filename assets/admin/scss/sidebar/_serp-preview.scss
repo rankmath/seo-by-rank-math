@@ -116,9 +116,8 @@ $title-height: 24px;
 	.serp-title {
 		font-size: 16px;
 		font-weight: normal;
-		line-height: 19px;
+		line-height: 1.5;
 		color: #1a0dab;
-		margin-bottom: 5px;
 	}
 	// URL
 	.serp-url {
@@ -419,7 +418,7 @@ $title-height: 24px;
 	@at-root .#{$namespace}-editor & {
 		.serp-title {
 			font-size: 16px;
-			line-height: 20px;
+			line-height: 1.5;
 			color: #1967d2;
 		}
 
@@ -460,7 +459,7 @@ $title-height: 24px;
 		}
 
 		.serp-title {
-			margin-bottom: 7px;
+			margin-bottom: 5px;
 		}
 
 		.serp-description {

@@ -77,7 +77,11 @@ class Singular implements IPaper {
 		$canonical_unpaged  = $canonical;
 		$canonical_override = Post::get_meta( 'canonical_url', $object_id );
 
-		// Fix paginated pages canonical, but only if the page is truly paginated.
+		/**
+		 * Fix paginated pages canonical, but only if the page is truly paginated.
+		 *
+		 * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
+		 */
 		if ( get_query_var( 'page' ) > 1 ) {
 			$num_pages = ( substr_count( get_queried_object()->post_content, '<!--nextpage-->' ) + 1 );
 			if ( $num_pages && get_query_var( 'page' ) <= $num_pages ) {
@@ -187,7 +191,7 @@ class Singular implements IPaper {
 			$robots = Paper::robots_combine( Helper::get_settings( "titles.pt_{$post_type}_robots" ), true );
 		}
 
-		// Noindex these conditions.
+		// `noindex` these conditions.
 		$noindex_private            = 'private' === $object->post_status;
 		$no_index_subpages          = is_paged() && Helper::get_settings( 'titles.noindex_paginated_pages' );
 		$noindex_password_protected = ! empty( $object->post_password ) && Helper::get_settings( 'titles.noindex_password_protected' );

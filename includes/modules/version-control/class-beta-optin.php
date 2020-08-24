@@ -92,7 +92,7 @@ class Beta_Optin {
 	 * @return array List of versions and download URLs.
 	 */
 	public static function get_available_versions( $beta = false ) {
-		$versions    = array();
+		$versions    = [];
 		$plugin_info = Version_Control::get_plugin_info();
 
 		foreach ( (array) $plugin_info['versions'] as $version => $url ) {

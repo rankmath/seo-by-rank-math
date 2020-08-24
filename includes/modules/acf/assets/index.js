@@ -2,6 +2,8 @@
 
 /**
  * External dependencies
+ *
+ * Inspiration for ACF integration taken from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 import jQuery from 'jquery'
 import { debounce } from 'lodash'
@@ -18,7 +20,12 @@ class App {
 	constructor() {
 		this.maybeRefresh = this.maybeRefresh.bind( this )
 		this.refresh = debounce( this.maybeRefresh, rankMath.acf.refreshRate )
-		addFilter( 'rank_math_content', 'rank-math', collect.append.bind( collect ) )
+		addFilter(
+			'rank_math_content',
+			'rank-math',
+			collect.append.bind( collect )
+		);
+
 		jQuery( '.acf-field' ).on( 'change', () => {
 			this.refresh()
 		} )

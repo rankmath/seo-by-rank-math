@@ -75,7 +75,7 @@ $cmb->add_field(
 		'id'      => 'rank_math_facebook_enable_image_overlay',
 		'type'    => 'toggle',
 		'name'    => esc_html__( 'Add icon overlay to thumbnail', 'rank-math' ),
-		'desc'    => wp_kses_post( __( '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>Please be careful with this option. Although this option will help increase CTR on Facebook, it might get you penalised if over-used.</p></div>', 'rank-math' ) ),
+		'desc'    => '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>' . wp_kses_post( __( 'Please be careful with this option. Although this option will help increase CTR on Facebook, it might get you penalised if over-used.', 'rank-math' ) ) . '</p></div>',
 		'default' => $this->do_filter( 'metabox/social/overlay_icon', 'off', 'facebook' ),
 	]
 );
@@ -143,6 +143,7 @@ $card_type = [
 	'app'                 => esc_html__( 'App Card', 'rank-math' ),
 	'player'              => esc_html__( 'Player Card', 'rank-math' ),
 ];
+
 if ( Admin_Helper::is_term_profile_page() ) {
 	unset( $card_type['app'], $card_type['player'] );
 }
@@ -227,7 +228,7 @@ $cmb->add_field(
 		'id'      => 'rank_math_twitter_enable_image_overlay',
 		'type'    => 'toggle',
 		'name'    => esc_html__( 'Add icon overlay to thumbnail', 'rank-math' ),
-		'desc'    => wp_kses_post( __( '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>Please be careful with this option. Although this option will help increace CTR on Facebook, it might get you penalised if over-used.</p></div>', 'rank-math' ) ),
+		'desc'    => '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>' . wp_kses_post( __( 'Please be careful with this option. Although this option will help increace CTR on Facebook, it might get you penalised if over-used.', 'rank-math' ) ) . '</p></div>',
 		'default' => $this->do_filter( 'metabox/social/overlay_icon', 'off', 'twitter' ),
 		'dep'     => $img_overlay,
 	]

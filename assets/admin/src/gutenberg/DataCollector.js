@@ -17,6 +17,11 @@ import { safeDecodeURIComponent } from '@wordpress/url'
 import { swapVariables } from '@helpers/swapVariables'
 import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
 
+/**
+ * DataCollector class
+ *
+ * Some functionality adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
+ */
 class DataCollector {
 	/**
 	 * Is plugin initialize
@@ -59,9 +64,9 @@ class DataCollector {
 	}
 
 	/**
-	 * Collects the content, title, slug and excerpt of a post from Gutenberg.
+	 * Collects the title, slug, permalink, content, featured image and excerpt of a post from Gutenberg.
 	 *
-	 * @return {Object} The content, title, slug and excerpt.
+	 * @return {Object} Collected data.
 	 */
 	collectGutenbergData() {
 		if ( ! isGutenbergAvailable() ) {
@@ -88,9 +93,9 @@ class DataCollector {
 	}
 
 	/**
-	 * Get the post id.
+	 * Get the post ID.
 	 *
-	 * @return {number} The post's id.
+	 * @return {number} The post's ID.
 	 */
 	getPostID() {
 		return this._coreEditorSelect.getCurrentPostId()
@@ -160,7 +165,7 @@ class DataCollector {
 	}
 
 	/**
-	 * Gett featued image.
+	 * Get featured image.
 	 *
 	 * @return {null|Object} null or image datta.
 	 */
@@ -345,7 +350,7 @@ class DataCollector {
 	/**
 	 * Updates the redux store with the changed data.
 	 *
-	 * @param {Object} oldData The old data.
+	 * @param {Object} oldData Old data.
 	 *
 	 * @return {void}
 	 */

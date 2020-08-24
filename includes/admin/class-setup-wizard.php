@@ -371,7 +371,7 @@ class Setup_Wizard {
 		}
 
 		if ( false === get_option( 'rank_math_is_configured' ) ) {
-			$detector = new Detector;
+			$detector = new Detector();
 			$plugins  = $detector->detect();
 			if ( ! empty( $plugins ) ) {
 				return false;

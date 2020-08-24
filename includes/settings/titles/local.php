@@ -1,6 +1,6 @@
 <?php
 /**
- * The local seo settings.
+ * The local SEO settings.
  *
  * @package    RankMath
  * @subpackage RankMath\Local_Seo

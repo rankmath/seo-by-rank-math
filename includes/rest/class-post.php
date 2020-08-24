@@ -80,7 +80,7 @@ class Post extends WP_REST_Controller {
 	/**
 	 * Save single row.
 	 *
-	 * @param int   $post_id Post id.
+	 * @param int   $post_id Post ID.
 	 * @param array $data    Post data.
 	 */
 	private function save_row( $post_id, $data ) {
@@ -92,7 +92,7 @@ class Post extends WP_REST_Controller {
 	/**
 	 * Save row columns.
 	 *
-	 * @param int    $post_id Post id.
+	 * @param int    $post_id Post ID.
 	 * @param string $column  Column name.
 	 * @param string $value   Column value.
 	 */

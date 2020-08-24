@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.47
+Stable tag: 1.0.47.1-beta
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -473,24 +473,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.47 [Aug 17, 2020] =
-* Improved: [WooCommerce](https://rankmath.com/compatibility/woocommerce/) products with 100s of variations should load extremely fast with proper Schema data
-* Improved: Rank Math won't add Meta tags on [Divi's](https://rankmath.com/compatibility/divi/) frontend page builder area to improve the loading time
-* Improved: Redirect Core Sitemap URL(s) to [Rank Math's Sitemap](https://rankmath.com/kb/configure-sitemaps/)
-* Improved: Long [focus keyword](https://rankmath.com/kb/score-100-in-tests/#first-step-choosing-focus-keywords) in featured images should be getting detected properly
-* Improved: Added a primary key to `rank_math_internal_meta` table
-* Improved: Compatibility with MainWP Plugin's Bulk Settings editor
-* Improved: RTL styling for the SERP fields in the preview area of Rank Math
-* Updated: Minimum WordPress version supported by Rank Math is 5.2 & PHP 7.0
-* Removed: Removed auto-update email notification feature to avoid any conflict with WordPress 5.5's auto-update email notifications
-* Fixed: `OG:Locale` not updating for a couple of languages like Telugu & Urdu
-* Fixed: A typo in the [filter to allow Shortcodes in the product Schema description](https://rankmath.com/kb/filters-hooks-api-developer/#allow-shortcodes-in-product-description)
-* Fixed: AMP Plugin was throwing an Invalid URL error on a page that used `rank_math_contact_info` Shortcode
-* Fixed: The `%parent_title%` variable was showing the example text in the preview section. Though, the value was printing correctly for the search engine bots
-* Fixed: The [open external links in a new tab](https://rankmath.com/kb/general-settings/#open-external-links-in-new-tab) option was not working when [Nofollow Image Link](https://rankmath.com/kb/general-settings/#no-follow-image-file-links) option was enabled
-* Fixed: [NoFollow External links](https://rankmath.com/kb/general-settings/#no-follow-external-links) option was not working with the AMP pages
-* Fixed: In the Classic Editor, [Show SEO Score](https://rankmath.com/kb/general-settings/#show-seo-score) option was disabled even after enabling it in the Options Panel
-* Fixed: The exclude post type from the [Sitemap](https://rankmath.com/kb/fix-sitemap-issues/) option was not working on the sites where a boolean value was stored in an integer format
-* Fixed: The [import data option](https://rankmath.com/kb/import-export-settings/#importing-your-settings) from other plugins was not working when not run via the setup wizard
+= 1.0.47.1-beta [Aug 24, 2020] =
+* Added: Proper credits and attribution wherever they were missing. We are incredibly sorry about missing them in the first place. That should not have happened. Please feel free to reach out to us in case the credits are still missing anywhere in the plugin. We would be more than obliged to add.
+* Improved: Exclude image caption text from the auto-generated SEO description
+* Improved: Automated open graph image tag(`og:image`) functionality, now it can also pick the first external image from the content
+* Improved: Fixed PHPCS warnings in most of the code 
+* Fixed: SERP preview section not showing the Hindi characters properly
+* Removed: Unused `remove_stopwords` function from the Redirection module
+* Removed: Some unused `error_log()` calls from the plugin
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

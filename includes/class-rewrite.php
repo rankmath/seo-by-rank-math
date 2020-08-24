@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Core
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Some functionality forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath;
@@ -49,10 +51,10 @@ class Rewrite {
 	}
 
 	/**
-	 * Change the url to the author's page.
+	 * Change the URL to the author's page.
 	 *
 	 * @param  string $link            The URL to the author's page.
-	 * @param  int    $author_id       The author's id.
+	 * @param  int    $author_id       The author's ID.
 	 * @param  string $author_nicename The author's nice name.
 	 * @return string
 	 */
@@ -169,6 +171,8 @@ class Rewrite {
 
 	/**
 	 * Remove the category base from the category link.
+	 *
+	 * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
 	 *
 	 * @param  string $link     Term link.
 	 * @param  object $term     Current Term Object.

@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Sitemap
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Some functionality adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\Sitemap;
@@ -73,7 +75,7 @@ class Generator extends XML {
 		$this->stylesheet     = '<?xml-stylesheet type="text/xsl" href="' . $this->stylesheet . '"?>';
 		$this->charset        = get_bloginfo( 'charset' );
 		$this->output_charset = $this->charset;
-		$this->timezone       = new Timezone;
+		$this->timezone       = new Timezone();
 
 		if (
 			'UTF-8' !== $this->charset
@@ -92,14 +94,14 @@ class Generator extends XML {
 	 */
 	private function instantiate() {
 		// Initialize sitemap providers classes.
-		$this->providers = array(
-			new \RankMath\Sitemap\Providers\Post_Type,
-			new \RankMath\Sitemap\Providers\Taxonomy,
-		);
+		$this->providers = [
+			new \RankMath\Sitemap\Providers\Post_Type(),
+			new \RankMath\Sitemap\Providers\Taxonomy(),
+		];
 
 		// Author Provider.
 		if ( true === Helper::is_author_archive_indexable() ) {
-			$this->providers[] = new \RankMath\Sitemap\Providers\Author;
+			$this->providers[] = new \RankMath\Sitemap\Providers\Author();
 		}
 
 		$external_providers = $this->do_filter( 'sitemap/providers', [] );
@@ -339,7 +341,7 @@ class Generator extends XML {
 	}
 
 	/**
-	 * Convret encoding if needed
+	 * Convret encoding if needed.
 	 *
 	 * @param string  $data   Data to be added.
 	 * @param string  $tag    Tag to create CDATA for.

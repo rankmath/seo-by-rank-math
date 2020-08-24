@@ -138,11 +138,14 @@ class Taxonomy implements IPaper {
 		}
 
 		if ( is_object( $object ) && 0 === $object->count && Helper::get_settings( 'titles.noindex_empty_taxonomies' ) ) {
-			$children = get_terms( $object->taxonomy, [
-				'parent' => $object->term_id,
-				'number' => 1,
-				'fields' => 'ids',
-			]);
+			$children = get_terms(
+				$object->taxonomy,
+				[
+					'parent' => $object->term_id,
+					'number' => 1,
+					'fields' => 'ids',
+				]
+			);
 
 			if ( empty( $children ) ) {
 				return true;

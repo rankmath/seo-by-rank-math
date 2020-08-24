@@ -26,7 +26,7 @@ class BuddyPress {
 	 */
 	public function __construct() {
 		if ( is_admin() ) {
-			new Admin;
+			new Admin();
 		}
 
 		$this->filter( 'rank_math/paper/hash', 'paper' );
@@ -51,7 +51,7 @@ class BuddyPress {
 	/**
 	 * Collect data to output in JSON-LD.
 	 *
-	 * @param array  $data An array of data to output in json-ld.
+	 * @param array  $data An array of data to output in JSON-LD.
 	 * @param JsonLD $json JsonLD instance.
 	 */
 	public function json_ld( $data, $json ) {

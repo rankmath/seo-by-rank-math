@@ -74,7 +74,7 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	/**
 	 * Set snippet meta.
 	 *
-	 * @param int    $post_id   Post id.
+	 * @param int    $post_id   Post ID.
 	 * @param string $type      Type to get keys for.
 	 * @param array  $meta_keys Array of meta keys to save.
 	 */
@@ -121,7 +121,7 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	}
 
 	/**
-	 * Get all post ids of all allowed post types only.
+	 * Get all post IDs of all allowed post types only.
 	 *
 	 * @param bool $count If we need count only for pagination purposes.
 	 * @return int|array

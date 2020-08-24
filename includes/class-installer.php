@@ -106,6 +106,8 @@ class Installer {
 	 * Run network-wide activation/deactivation of the plugin.
 	 *
 	 * @param bool $activate True for plugin activation, false for de-activation.
+	 *
+	 * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
 	 */
 	private function network_activate_deactivate( $activate ) {
 		global $wpdb;
@@ -158,7 +160,7 @@ class Installer {
 		}
 
 		// Activate Watcher.
-		$watcher = new Watcher;
+		$watcher = new Watcher();
 		$watcher->check_activated_plugin();
 
 		$this->clear_rewrite_rules( true );

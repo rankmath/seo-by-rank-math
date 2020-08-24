@@ -38,7 +38,7 @@ class Author_Variables extends Term_Variables {
 			'userid',
 			[
 				'name'        => esc_html__( 'Author ID', 'rank-math' ),
-				'description' => esc_html__( 'Author\'s user id of the current post, page or author archive.', 'rank-math' ),
+				'description' => esc_html__( 'Author\'s user ID of the current post, page or author archive.', 'rank-math' ),
 				'variable'    => 'userid',
 				'example'     => $this->is_post_edit ? $post->post_author : $user_id,
 			],

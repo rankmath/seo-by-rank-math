@@ -60,6 +60,8 @@ class Admin implements Runner {
 	 *
 	 * @param array $contactmethods Current contact methods.
 	 * @return array New contact methods with extra items.
+	 *
+	 * Adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
 	 */
 	public function update_user_contactmethods( $contactmethods ) {
 		$contactmethods['twitter']  = esc_html__( 'Twitter username (without @)', 'rank-math' );
@@ -118,7 +120,7 @@ class Admin implements Runner {
 	/**
 	 * Show notice when canonical URL is not a valid URL.
 	 *
-	 * @param int $post_id The post id.
+	 * @param int $post_id The post ID.
 	 */
 	public function canonical_check_notice( $post_id ) {
 		$post_type  = get_post_type( $post_id );

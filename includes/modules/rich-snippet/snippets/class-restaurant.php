@@ -28,7 +28,7 @@ class Restaurant implements Snippet {
 	 * @return array
 	 */
 	public function process( $data, $jsonld ) {
-		$local  = new Local;
+		$local  = new Local();
 		$entity = $local->process( $data, $jsonld );
 
 		$entity['@type']       = 'Restaurant';

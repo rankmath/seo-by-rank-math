@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Frontend
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Forked from WooCommerce (https://github.com/woocommerce/woocommerce/)
  */
 
 namespace RankMath\Frontend;
@@ -54,7 +56,7 @@ class Breadcrumbs {
 
 		$instance = false;
 		if ( Helper::get_settings( 'general.breadcrumbs' ) && false === $instance ) {
-			$instance = new Breadcrumbs;
+			$instance = new Breadcrumbs();
 		}
 
 		return $instance;

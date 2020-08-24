@@ -342,11 +342,14 @@ class Google_Api {
 		 * @param  array $config Array of Application data.
 		 * @return array $config Filtered Application data.
 		 */
-		$config = apply_filters( 'rank_math/search_console/alternate_app', [
-			'application_name' => 'Rank Math',
-			'client_id'        => '521003500769-n68nimh2rrahq6b4cdcjm03ojgsukr1f.apps.googleusercontent.com',
-			'client_secret'    => 'nPNvFDg-1MHrT1cAFQouaVtK',
-		] );
+		$config = apply_filters(
+			'rank_math/search_console/alternate_app',
+			[
+				'application_name' => 'Rank Math',
+				'client_id'        => '521003500769-n68nimh2rrahq6b4cdcjm03ojgsukr1f.apps.googleusercontent.com',
+				'client_secret'    => 'nPNvFDg-1MHrT1cAFQouaVtK',
+			]
+		);
 
 		$config['redirect_uri'] = 'urn:ietf:wg:oauth:2.0:oob';
 		$config['scopes']       = [ 'https://www.googleapis.com/auth/webmasters', 'https://www.googleapis.com/auth/analytics.readonly', 'https://www.googleapis.com/auth/adsense.readonly' ];

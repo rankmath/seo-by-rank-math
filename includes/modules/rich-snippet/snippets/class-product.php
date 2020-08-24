@@ -69,7 +69,7 @@ class Product implements Snippet {
 		if ( Conditional::is_woocommerce_active() && is_product() ) {
 			remove_action( 'wp_footer', [ WC()->structured_data, 'output_structured_data' ], 10 );
 			remove_action( 'woocommerce_email_order_details', [ WC()->structured_data, 'output_email_structured_data' ], 30 );
-			$product = new Product_WooCommerce;
+			$product = new Product_WooCommerce();
 			unset( $entity['offers'] );
 			$product->set_product( $entity, $jsonld );
 		}
@@ -77,7 +77,7 @@ class Product implements Snippet {
 		if ( Conditional::is_edd_active() && is_singular( 'download' ) ) {
 			remove_action( 'edd_purchase_link_top', 'edd_purchase_link_single_pricing_schema', 10 );
 			remove_action( 'loop_start', 'edd_microdata_wrapper_open', 10 );
-			$product = new Product_Edd;
+			$product = new Product_Edd();
 			$product->set_product( $entity, $jsonld );
 		}
 

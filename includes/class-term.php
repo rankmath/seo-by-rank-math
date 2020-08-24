@@ -29,7 +29,7 @@ class Term extends Metadata {
 	/**
 	 * Retrieve Term instance.
 	 *
-	 * @param mixed  $term     Term to get either (string) term name, (int) term id or (object) term.
+	 * @param mixed  $term     Term to get either (string) term name, (int) term ID or (object) term.
 	 * @param string $taxonomy Optional. Limit matched terms to those matching `$taxonomy`. Only used for
 	 *                         disambiguating potentially shared terms.
 	 * @return Term|false Term object, false otherwise.
@@ -52,9 +52,9 @@ class Term extends Metadata {
 	}
 
 	/**
-	 * Get term id
+	 * Get term ID.
 	 *
-	 * @param mixed  $term     Term to get either (string) term name, (int) term id or (object) term.
+	 * @param mixed  $term     Term to get either (string) term name, (int) term ID or (object) term.
 	 * @param string $taxonomy Optional. Limit matched terms to those matching `$taxonomy`. Only used for
 	 *                         disambiguating potentially shared terms.
 	 */

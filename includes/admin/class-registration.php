@@ -107,13 +107,13 @@ class Registration {
 		if ( 'cancel' === $status ) {
 			// User canceled activation.
 			Helper::add_notification( __( 'Rank Math plugin could not be connected.', 'rank-math' ), [ 'type' => 'error' ] );
-			return Security::remove_query_arg_raw( array( 'rankmath_connect', 'rankmath_auth' ) );
+			return Security::remove_query_arg_raw( [ 'rankmath_connect', 'rankmath_auth' ] );
 		}
 
 		if ( 'banned' === $status ) {
 			// User or site banned.
 			Helper::add_notification( __( 'Unable to connect Rank Math.', 'rank-math' ), [ 'type' => 'error' ] );
-			return Security::remove_query_arg_raw( array( 'rankmath_connect', 'rankmath_auth' ) );
+			return Security::remove_query_arg_raw( [ 'rankmath_connect', 'rankmath_auth' ] );
 		}
 
 		if ( 'ok' === $status && $auth_data = $this->get_registration_params() ) { // phpcs:ignore
@@ -131,7 +131,7 @@ class Registration {
 				return Helper::get_admin_url( 'wizard' );
 			}
 
-			return Security::remove_query_arg_raw( array( 'rankmath_connect', 'rankmath_auth', 'nonce' ) );
+			return Security::remove_query_arg_raw( [ 'rankmath_connect', 'rankmath_auth', 'nonce' ] );
 		}
 
 		return false;
@@ -210,7 +210,7 @@ class Registration {
 			ob_end_clean();
 		}
 
-		$assets = new Assets;
+		$assets = new Assets();
 		$assets->register();
 
 		wp_styles()->done  = [];

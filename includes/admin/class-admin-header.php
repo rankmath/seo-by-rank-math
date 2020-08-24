@@ -26,7 +26,7 @@ class Admin_Header {
 	/**
 	 * Hold current screen ID.
 	 *
-	 * @var Current screen id.
+	 * @var Current screen ID.
 	 */
 	private $screen_id = '';
 
@@ -39,7 +39,7 @@ class Admin_Header {
 		?>
 		<div class="rank-math-header">
 			<div class="rank-math-logo">
-				<?php echo $logo_url; ?>
+				<?php echo $logo_url; // phpcs:ignore ?>
 			</div>
 			<h1 class="rank-math-logo-text">Rank Math SEO</h1>
 			<?php $this->get_search_options(); ?>

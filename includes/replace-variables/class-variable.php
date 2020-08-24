@@ -83,7 +83,7 @@ class Variable {
 			throw new \InvalidArgumentException( __( 'The $id variable is required.', 'rank-math' ) );
 		}
 
-		$variable          = new Variable;
+		$variable          = new Variable();
 		$variable->id      = $id;
 		$variable->example = isset( $args['example'] ) ? $args['example'] : __( 'Example', 'rank-math' );
 

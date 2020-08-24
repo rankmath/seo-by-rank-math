@@ -13,6 +13,13 @@ import { Component } from '@wordpress/element'
 import { dispatch, withSelect } from '@wordpress/data'
 import { SelectControl, Spinner } from '@wordpress/components'
 
+/**
+ * Primary Term Picker
+ *
+ * Class inspiration taken from Yoast (https://github.com/Yoast/wordpress-seo/)
+ *
+ * @extends Component
+ */
 class PrimaryTermPicker extends Component {
 	constructor() {
 		super( ...arguments )
@@ -82,7 +89,7 @@ class PrimaryTermPicker extends Component {
 
 		if ( ! selectedTerm ) {
 			/**
-			 * If the selected term is no longer available, set the primary term id to
+			 * If the selected term is no longer available, set the primary term ID to
 			 * the first term, and to -1 if no term is available.
 			 */
 			this.onChange( selectedTerms.length ? selectedTerms[ 0 ].id : '' )

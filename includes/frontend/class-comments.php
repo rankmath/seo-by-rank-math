@@ -20,6 +20,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Comments class.
+ *
+ * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 class Comments {
 
@@ -33,7 +35,7 @@ class Comments {
 	}
 
 	/**
-	 * Add ugc attribute and remove ?replytocom parameters.
+	 * Add UGC attribute and remove ?replytocom parameters.
 	 */
 	public function add_attributes() {
 		/**

@@ -34,7 +34,7 @@ class Analytics {
 	 * Admin Initialize.
 	 */
 	public function admin_init() {
-		$this->table = new Analytics_List;
+		$this->table = new Analytics_List();
 		$this->table->prepare_items();
 	}
 

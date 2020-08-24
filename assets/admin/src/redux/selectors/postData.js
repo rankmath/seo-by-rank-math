@@ -1,9 +1,9 @@
 /**
- * Get post id.
+ * Get post ID.
  *
  * @param {Object} state The app state.
  *
- * @return {number} Return post id.
+ * @return {number} Return post ID.
  */
 export function getPostID( state ) {
 	return state.appData.postID

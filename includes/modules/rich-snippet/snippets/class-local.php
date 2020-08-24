@@ -40,11 +40,14 @@ class Local implements Snippet {
 
 		$jsonld->set_address( 'local', $entity );
 
-		$jsonld->set_data([
-			'snippet_local_opendays' => 'dayOfWeek',
-			'snippet_local_opens'    => 'opens',
-			'snippet_local_closes'   => 'closes',
-		], $entity['openingHoursSpecification'] );
+		$jsonld->set_data(
+			[
+				'snippet_local_opendays' => 'dayOfWeek',
+				'snippet_local_opens'    => 'opens',
+				'snippet_local_closes'   => 'closes',
+			],
+			$entity['openingHoursSpecification']
+		);
 
 		// GPS.
 		if ( $geo = Helper::get_post_meta( 'snippet_local_geo' ) ) { // phpcs:ignore

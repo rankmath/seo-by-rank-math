@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Sitemap
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\Sitemap;
@@ -62,9 +64,9 @@ class Cache_Watcher {
 
 		$this->action( 'rank_math/sitemap/invalidate_object_type', 'invalidate_object_type', 10, 2 );
 
-		add_action( 'shutdown', array( __CLASS__, 'clear_queued' ) );
-		add_action( 'update_option', array( __CLASS__, 'clear_on_option_update' ) );
-		add_action( 'deleted_term_relationships', array( __CLASS__, 'invalidate' ) );
+		add_action( 'shutdown', [ __CLASS__, 'clear_queued' ] );
+		add_action( 'update_option', [ __CLASS__, 'clear_on_option_update' ] );
+		add_action( 'deleted_term_relationships', [ __CLASS__, 'invalidate' ] );
 
 		// Option on updatation of which clear cache.
 		self::register_clear_on_option_update( 'home' );
@@ -148,9 +150,9 @@ class Cache_Watcher {
 	}
 
 	/**
-	 * While bulk importing, just save unique post_types.
+	 * While bulk importing, just save unique `post_types`.
 	 *
-	 * When importing is done, if we have a post_type that is saved in the sitemap
+	 * When importing is done, if we have a `post_type` that is saved in the sitemap
 	 * try to ping the search engines
 	 *
 	 * @param string   $new_status New post status.
@@ -163,7 +165,7 @@ class Cache_Watcher {
 	}
 
 	/**
-	 * After import finished, walk through imported post_types and update info.
+	 * After import finished, walk through imported `post_types` and update info.
 	 */
 	public function status_transition_bulk_finished() {
 		if ( ! defined( 'WP_IMPORTING' ) || empty( $this->importing_post_types ) ) {
@@ -220,7 +222,7 @@ class Cache_Watcher {
 	 * @param string $type Sitemap type to invalidate.
 	 */
 	public static function invalidate( $type ) {
-		self::clear( array( $type ) );
+		self::clear( [ $type ] );
 	}
 
 	/**
@@ -254,7 +256,7 @@ class Cache_Watcher {
 	}
 
 	/**
-	 * Function to clear Sitemap Cache.
+	 * Function to clear the Sitemap Cache.
 	 *
 	 * @param string $object_type Object type for destination where to save.
 	 * @param int    $object_id   Object id for destination where to save.

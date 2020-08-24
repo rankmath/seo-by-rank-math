@@ -558,7 +558,7 @@ class SEOPress extends Plugin_Importer {
 	/**
 	 * Set schema data.
 	 *
-	 * @param int $post_id Post id.
+	 * @param int $post_id Post ID.
 	 */
 	private function set_schema_data( $post_id ) {
 		if ( ! $type = get_post_meta( $post_id, '_seopress_pro_rich_snippets_type', true ) ) { // phpcs:ignore
@@ -611,7 +611,7 @@ class SEOPress extends Plugin_Importer {
 	/**
 	 * Get snippet value.
 	 *
-	 * @param int $post_id  Post id.
+	 * @param int $post_id  Post ID.
 	 * @param int $meta_key Meta key.
 	 *
 	 * @return string $value Snippet value
@@ -710,7 +710,7 @@ class SEOPress extends Plugin_Importer {
 	/**
 	 * Set primary term for post
 	 *
-	 * @param int[] $post_ids Post ids.
+	 * @param int[] $post_ids Post IDs.
 	 */
 	private function set_primary_term( $post_ids ) {
 		$post_ids = wp_list_pluck( $post_ids, 'ID' );

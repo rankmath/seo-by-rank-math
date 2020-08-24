@@ -50,7 +50,7 @@ class Metabox implements Runner {
 			return;
 		}
 
-		$this->screen = new Screen;
+		$this->screen = new Screen();
 		if ( $this->screen->is_loaded() ) {
 			$this->action( 'cmb2_admin_init', 'add_main_metabox', 30 );
 			$this->action( 'rank_math/admin/enqueue_scripts', 'enqueue' );

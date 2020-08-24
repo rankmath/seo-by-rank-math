@@ -41,54 +41,64 @@ class Your_Site implements Wizard_Step {
 	 */
 	public function form( $wizard ) {
 		$displayname = $this->get_site_display_name();
-		$wizard->cmb->add_field([
-			'id'      => 'site_type',
-			'type'    => 'select',
-			/* translators: sitename */
-			'name'    => sprintf( esc_html__( '%1$s is a&hellip;', 'rank-math' ), $displayname ),
-			'options' => $this->get_type_choices(),
-			'default' => $this->get_default_site_type(),
-		]);
+		$wizard->cmb->add_field(
+			[
+				'id'      => 'site_type',
+				'type'    => 'select',
+				/* translators: sitename */
+				'name'    => sprintf( esc_html__( '%1$s is a&hellip;', 'rank-math' ), $displayname ),
+				'options' => $this->get_type_choices(),
+				'default' => $this->get_default_site_type(),
+			]
+		);
 
-		$wizard->cmb->add_field([
-			'id'         => 'business_type',
-			'type'       => 'select',
-			'name'       => esc_html__( 'Business Type', 'rank-math' ),
-			'desc'       => esc_html__( 'Select the type that best describes your business. If you can\'t find one that applies exactly, use the generic "Organization" or "Local Business" types.', 'rank-math' ),
-			'options'    => Helper::choices_business_types(),
-			'attributes' => [
-				'data-s2'      => '',
-				'data-default' => Helper::get_settings( 'titles.local_business_type' ) ? '0' : '1',
-			],
-			'default'    => Helper::get_settings( 'titles.local_business_type' ),
-			'dep'        => $this->get_type_dependency(),
-		]);
+		$wizard->cmb->add_field(
+			[
+				'id'         => 'business_type',
+				'type'       => 'select',
+				'name'       => esc_html__( 'Business Type', 'rank-math' ),
+				'desc'       => esc_html__( 'Select the type that best describes your business. If you can\'t find one that applies exactly, use the generic "Organization" or "Local Business" types.', 'rank-math' ),
+				'options'    => Helper::choices_business_types(),
+				'attributes' => [
+					'data-s2'      => '',
+					'data-default' => Helper::get_settings( 'titles.local_business_type' ) ? '0' : '1',
+				],
+				'default'    => Helper::get_settings( 'titles.local_business_type' ),
+				'dep'        => $this->get_type_dependency(),
+			]
+		);
 
-		$wizard->cmb->add_field([
-			'id'      => 'company_name',
-			'type'    => 'text',
-			'name'    => esc_html__( 'Company Name', 'rank-math' ),
-			'default' => Helper::get_settings( 'titles.knowledgegraph_name', $displayname ),
-			'dep'     => $this->get_type_dependency(),
-		]);
+		$wizard->cmb->add_field(
+			[
+				'id'      => 'company_name',
+				'type'    => 'text',
+				'name'    => esc_html__( 'Company Name', 'rank-math' ),
+				'default' => Helper::get_settings( 'titles.knowledgegraph_name', $displayname ),
+				'dep'     => $this->get_type_dependency(),
+			]
+		);
 
-		$wizard->cmb->add_field([
-			'id'      => 'company_logo',
-			'type'    => 'file',
-			'name'    => esc_html__( 'Logo for Google', 'rank-math' ),
-			'default' => $this->get_default_logo(),
-			'desc'    => __( '<strong>Min Size: 160Χ90px, Max Size: 1920X1080px</strong>.<br />A squared image is preferred by the search engines.', 'rank-math' ),
-			'options' => [ 'url' => false ],
-		]);
+		$wizard->cmb->add_field(
+			[
+				'id'      => 'company_logo',
+				'type'    => 'file',
+				'name'    => esc_html__( 'Logo for Google', 'rank-math' ),
+				'default' => $this->get_default_logo(),
+				'desc'    => __( '<strong>Min Size: 160Χ90px, Max Size: 1920X1080px</strong>.<br />A squared image is preferred by the search engines.', 'rank-math' ),
+				'options' => [ 'url' => false ],
+			]
+		);
 
-		$wizard->cmb->add_field([
-			'id'      => 'open_graph_image',
-			'type'    => 'file',
-			'name'    => esc_html__( 'Default Social Share Image', 'rank-math' ),
-			'desc'    => __( 'When a featured image is not set, this image will be used as a thumbnail when your post is shared on Facebook. <strong>Recommended image size 1200 x 630 pixels.</strong>', 'rank-math' ),
-			'options' => [ 'url' => false ],
-			'default' => Helper::get_settings( 'titles.open_graph_image' ),
-		]);
+		$wizard->cmb->add_field(
+			[
+				'id'      => 'open_graph_image',
+				'type'    => 'file',
+				'name'    => esc_html__( 'Default Social Share Image', 'rank-math' ),
+				'desc'    => __( 'When a featured image is not set, this image will be used as a thumbnail when your post is shared on Facebook. <strong>Recommended image size 1200 x 630 pixels.</strong>', 'rank-math' ),
+				'options' => [ 'url' => false ],
+				'default' => Helper::get_settings( 'titles.open_graph_image' ),
+			]
+		);
 	}
 
 	/**
@@ -100,18 +110,24 @@ class Your_Site implements Wizard_Step {
 	 * @return bool
 	 */
 	public function save( $values, $wizard ) {
-		$settings     = wp_parse_args( rank_math()->settings->all_raw(), [
-			'titles'  => '',
-			'sitemap' => '',
-		]);
+		$settings     = wp_parse_args(
+			rank_math()->settings->all_raw(),
+			[
+				'titles'  => '',
+				'sitemap' => '',
+			]
+		);
 		$current_user = wp_get_current_user();
-		$values       = wp_parse_args( $values, [
-			'author_name'         => $current_user->display_name,
-			'company_logo'        => '',
-			'company_logo_id'     => '',
-			'open_graph_image'    => '',
-			'open_graph_image_id' => '',
-		]);
+		$values       = wp_parse_args(
+			$values,
+			[
+				'author_name'         => $current_user->display_name,
+				'company_logo'        => '',
+				'company_logo_id'     => '',
+				'open_graph_image'    => '',
+				'open_graph_image_id' => '',
+			]
+		);
 
 		// Save these settings.
 		$functions = [ 'save_local_seo', 'save_open_graph', 'save_post_types', 'save_taxonomies' ];

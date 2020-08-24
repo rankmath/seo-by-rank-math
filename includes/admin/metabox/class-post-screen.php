@@ -428,7 +428,7 @@ class Post_Screen implements IScreen {
 	}
 
 	/**
-	 * Get primary term id.
+	 * Get primary term ID.
 	 *
 	 * @return int
 	 */

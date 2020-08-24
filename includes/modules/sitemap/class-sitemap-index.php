@@ -18,7 +18,7 @@ use MyThemeShop\Helpers\Str;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Sitemap_Index class.
+ * Sitemap Index class.
  */
 class Sitemap_Index implements Runner {
 
@@ -53,7 +53,9 @@ class Sitemap_Index implements Runner {
 	}
 
 	/**
-	 * Stop trailing slashes on sitemap.xml URLs.
+	 * Stop trailing slashes on `sitemap.xml` URLs.
+	 *
+	 * Adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
 	 *
 	 * @param string $redirect The redirect URL currently determined.
 	 *

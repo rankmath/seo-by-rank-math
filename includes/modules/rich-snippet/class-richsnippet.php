@@ -27,12 +27,12 @@ class RichSnippet {
 	public function __construct() {
 
 		if ( is_admin() ) {
-			new Admin;
+			new Admin();
 		}
 		$this->action( 'wp', 'integrations' );
 
-		new Blocks;
-		new Snippet_Shortcode;
+		new Blocks();
+		new Snippet_Shortcode();
 	}
 
 	/**
@@ -44,6 +44,6 @@ class RichSnippet {
 			return;
 		}
 
-		new JsonLD;
+		new JsonLD();
 	}
 }

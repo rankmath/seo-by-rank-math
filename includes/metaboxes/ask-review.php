@@ -8,8 +8,10 @@
 
 use RankMath\Admin\Ask_Review;
 
-$cmb->add_field([
-	'id'      => 'rank_math_ask_review',
-	'type'    => 'raw',
-	'content' => Ask_Review::display(),
-]);
+$cmb->add_field(
+	[
+		'id'      => 'rank_math_ask_review',
+		'type'    => 'raw',
+		'content' => Ask_Review::display(),
+	]
+);

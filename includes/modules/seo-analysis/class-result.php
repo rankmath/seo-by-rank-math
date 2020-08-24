@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 class Result {
 
 	/**
-	 * Result id.
+	 * Result ID.
 	 *
 	 * @var string
 	 */

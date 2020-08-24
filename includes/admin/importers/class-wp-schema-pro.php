@@ -145,7 +145,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 	/**
 	 * Update post meta.
 	 *
-	 * @param int   $post_id Post id.
+	 * @param int   $post_id Post ID.
 	 * @param array $snippet Snippet data.
 	 */
 	private function update_postmeta( $post_id, $snippet ) {
@@ -183,7 +183,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 *
 	 * @param  array  $details       Array of details.
 	 * @param  string $snippet_key   Snippet key.
-	 * @param  string $post_id       Post id.
+	 * @param  string $post_id       Post ID.
 	 * @param  array  $snippet       Snippet data.
 	 * @param  string $snippet_value Snippet value.
 	 * @return string
@@ -206,7 +206,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 *
 	 * @param  array  $details       Array of details.
 	 * @param  string $snippet_key   Snippet key.
-	 * @param  string $post_id       Post id.
+	 * @param  string $post_id       Post ID.
 	 * @param  array  $snippet       Snippet data.
 	 * @param  string $snippet_value Snippet value.
 	 * @return string
@@ -234,7 +234,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 *
 	 * @param  array  $details       Array of details.
 	 * @param  string $snippet_key   Snippet key.
-	 * @param  string $post_id       Post id.
+	 * @param  string $post_id       Post ID.
 	 * @param  array  $snippet       Snippet data.
 	 * @param  string $snippet_value Snippet value.
 	 * @return string
@@ -348,7 +348,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 	/**
 	 * Get Snippet Details stored in aiosrs-schema posts
 	 *
-	 * @param int $post_id Post id.
+	 * @param int $post_id Post ID.
 	 * @return array
 	 */
 	private function get_snippet_details( $post_id ) {

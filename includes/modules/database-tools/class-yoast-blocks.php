@@ -49,7 +49,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 		static $instance;
 
 		if ( is_null( $instance ) && ! ( $instance instanceof Yoast_Blocks ) ) {
-			$instance = new Yoast_Blocks;
+			$instance = new Yoast_Blocks();
 		}
 
 		return $instance;
@@ -109,8 +109,8 @@ class Yoast_Blocks extends \WP_Background_Process {
 	protected function task( $posts ) {
 		try {
 			remove_filter( 'pre_kses', 'wp_pre_kses_block_attributes', 10 );
-			$this->faq_converter   = new Yoast_FAQ_Converter;
-			$this->howto_converter = new Yoast_HowTo_Converter;
+			$this->faq_converter   = new Yoast_FAQ_Converter();
+			$this->howto_converter = new Yoast_HowTo_Converter();
 			foreach ( $posts as $post_id ) {
 				$post = get_post( $post_id );
 				$this->convert( $post );

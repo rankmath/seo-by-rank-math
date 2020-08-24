@@ -82,12 +82,12 @@ class Serp_Preview {
 
 					<h5 class="serp-title" data-format="<?php echo esc_attr( $data['title_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter custom title', 'rank-math' ); ?>"></h5>
 					<div class="serp-url-wrapper">
-						<img src="<?php echo $favicon; ?>" width="16" height="16" class="serp-favicon" />
+						<img src="<?php echo $favicon; // phpcs:ignore ?>" width="16" height="16" class="serp-favicon" />
 						<span class="serp-url" data-baseurl="<?php echo trailingslashit( substr( $data['url'], 0, strrpos( $data['url'], '/' ) ) ); ?>" data-format="<?php echo esc_attr( $data['permalink_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter permalink', 'rank-math' ); ?>"><?php echo esc_url( $data['permalink'] ); ?></span>
 					</div>
 					<?php
 					if ( 'event' !== $snippet_type ) {
-						echo $desktop_preview;
+						echo $desktop_preview; // phpcs:ignore
 					}
 					?>
 
@@ -95,10 +95,10 @@ class Serp_Preview {
 
 					<?php
 					if ( 'event' === $snippet_type ) {
-						echo $desktop_preview;
+						echo $desktop_preview; // phpcs:ignore
 					}
 
-					echo $mobile_preview;
+					echo $mobile_preview; // phpcs:ignore
 					?>
 
 				</div>

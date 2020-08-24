@@ -43,7 +43,7 @@ class Capability_Manager {
 		static $instance;
 
 		if ( is_null( $instance ) && ! ( $instance instanceof Capability_Manager ) ) {
-			$instance = new Capability_Manager;
+			$instance = new Capability_Manager();
 			$instance->set_capabilities();
 		}
 

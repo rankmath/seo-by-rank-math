@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Sitemap
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Some functionality adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\Sitemap;
@@ -116,7 +118,7 @@ class Timezone {
 	}
 
 	/**
-	 * Determine timezone manually
+	 * Determine timezone manually.
 	 *
 	 * @param int $offset UTC Offset.
 	 *

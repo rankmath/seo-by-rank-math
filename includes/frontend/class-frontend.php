@@ -22,6 +22,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Frontend class.
+ *
+ * Some functionality inspired from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 class Frontend {
 
@@ -106,7 +108,7 @@ class Frontend {
 	}
 
 	/**
-	 * Enqueue Styles and Scripts required by plugin.
+	 * Enqueue Styles and Scripts
 	 */
 	public function enqueue() {
 		if ( ! is_admin_bar_showing() || ! Helper::has_cap( 'admin_bar' ) ) {
@@ -252,6 +254,8 @@ class Frontend {
 	/**
 	 * Check if we can add the RSS footer and/or header to the RSS feed item.
 	 *
+	 * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
+	 *
 	 * @param string $content Feed item content.
 	 * @param string $context Feed item context, either 'excerpt' or 'full'.
 	 *
@@ -272,9 +276,9 @@ class Frontend {
 	}
 
 	/**
-	 * Get rss content for specified location.
+	 * Get RSS content for specified location.
 	 *
-	 * @param string $which Location id.
+	 * @param string $which Location ID.
 	 *
 	 * @return string
 	 */

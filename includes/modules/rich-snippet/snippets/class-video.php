@@ -39,11 +39,14 @@ class Video implements Snippet {
 			$entity['duration'] = Helper::get_formatted_duration( $duration );
 		}
 
-		$jsonld->set_data([
-			'snippet_video_url'       => 'contentUrl',
-			'snippet_video_embed_url' => 'embedUrl',
-			'snippet_video_views'     => 'interactionCount',
-		], $entity );
+		$jsonld->set_data(
+			[
+				'snippet_video_url'       => 'contentUrl',
+				'snippet_video_embed_url' => 'embedUrl',
+				'snippet_video_views'     => 'interactionCount',
+			],
+			$entity
+		);
 
 		if ( isset( $data['Organization'] ) ) {
 			$jsonld->set_publisher( $entity, $data['Organization'] );

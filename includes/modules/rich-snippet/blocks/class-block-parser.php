@@ -40,7 +40,7 @@ class Block_Parser {
 	/**
 	 * Parse the blocks.
 	 *
-	 * @param array $data Array of json-ld data.
+	 * @param array $data Array of JSON-LD data.
 	 *
 	 * @return array
 	 */
@@ -56,7 +56,7 @@ class Block_Parser {
 				/**
 				 * Filter: 'rank_math/schema/block/<block-type>' - Allows filtering graph output per block.
 				 *
-				 * @param array $data  Array of json-ld data.
+				 * @param array $data  Array of JSON-LD data.
 				 * @param array $block The block.
 				 */
 				$data = $this->do_filter( 'schema/block/' . $block_type, $data, $block );
@@ -119,7 +119,7 @@ class Block_Parser {
 		/**
 		 * Filter: 'rank_math/schema/nested_blocks' - Allows filtering for nested blocks.
 		 *
-		 * @param array $data  Array of json-ld data.
+		 * @param array $data  Array of JSON-LD data.
 		 * @param array $block The block.
 		 */
 		$nested = $this->do_filter(

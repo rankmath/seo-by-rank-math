@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Links
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\Links;

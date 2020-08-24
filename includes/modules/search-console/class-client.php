@@ -54,7 +54,7 @@ class Client {
 		static $instance;
 
 		if ( is_null( $instance ) && ! ( $instance instanceof Client ) ) {
-			$instance = new Client;
+			$instance = new Client();
 			$instance->set_data();
 			$instance->refresh_auth_token_on_login();
 		}
@@ -69,7 +69,7 @@ class Client {
 	 */
 	public function get_google_client() {
 		if ( ! $this->google_api instanceof Google_Api ) {
-			$this->google_api = new Google_Api;
+			$this->google_api = new Google_Api();
 		}
 
 		return $this->google_api;

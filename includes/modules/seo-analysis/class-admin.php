@@ -37,7 +37,7 @@ class Admin extends Base {
 
 		if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || $this->page->is_current_page() ) {
 			include_once 'seo-analysis-tests.php';
-			$this->analyzer = new SEO_Analyzer;
+			$this->analyzer = new SEO_Analyzer();
 		}
 	}
 

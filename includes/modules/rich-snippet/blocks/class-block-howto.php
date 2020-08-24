@@ -19,7 +19,7 @@ use MyThemeShop\Helpers\Attachment;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Block_HowTo class.
+ * HowTo Block class.
  */
 class Block_HowTo extends Block {
 
@@ -105,7 +105,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * FAQ rich snippet.
+	 * HowTo Structured Data.
 	 *
 	 * @param array $data  Array of JSON-LD data.
 	 * @param array $block JsonLD Instance.
@@ -149,10 +149,10 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * [add_step description]
+	 * Add Step
 	 *
-	 * @param [type] $step [description].
-	 * @param [type] $permalink [description].
+	 * @param array  $step Step.
+	 * @param string $permalink Permalink.
 	 */
 	private function add_step( $step, $permalink ) {
 		$name = wp_strip_all_tags( $step['title'] );
@@ -204,7 +204,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * Checks if we have an inline image, if we do, add it.
+	 * Checks if we have an inline image and add it.
 	 *
 	 * @param array $schema_step Our Schema output for the Step.
 	 * @param array $step        The step block data.
@@ -238,7 +238,9 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * Checks if we have a step image, if we do, add it.
+	 * Checks if we have a step image and add it.
+	 *
+	 * Adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
 	 *
 	 * @param array $schema_step Our Schema output for the Step.
 	 * @param array $step        The step block data.
@@ -291,7 +293,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * [add_image_size description]
+	 * Add Image Size
 	 *
 	 * @param [type] $schema_image [description].
 	 * @param [type] $image_id     [description].
@@ -391,7 +393,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * [build_duration description]
+	 * HowTo Duration
 	 *
 	 * @param [type] $attrs [description].
 	 *

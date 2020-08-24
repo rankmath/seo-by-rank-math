@@ -56,7 +56,7 @@ class Common {
 	/**
 	 * Add rel="nofollow" to a link.
 	 *
-	 * @param string $link The link as a string.
+	 * @param string $link Link.
 	 *
 	 * @return string
 	 */

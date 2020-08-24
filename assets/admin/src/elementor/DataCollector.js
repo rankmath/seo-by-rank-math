@@ -26,6 +26,9 @@ import { safeDecodeURIComponent } from '@wordpress/url'
  */
 import { swapVariables } from '@helpers/swapVariables'
 
+/**
+ * DataCollector class
+ */
 class DataCollector {
 	/**
 	 * Is plugin initialize
@@ -93,9 +96,9 @@ class DataCollector {
 	}
 
 	/**
-	 * Collects the content, title, slug and excerpt of a post from Gutenberg.
+	 * Collects the title, slug, permalink, content, featured image and excerpt of a post from elementor.
 	 *
-	 * @return {Object} The content, title, slug and excerpt.
+	 * @return {Object} Collected data.
 	 */
 	collectGutenbergData() {
 		return {
@@ -110,9 +113,9 @@ class DataCollector {
 	}
 
 	/**
-	 * Get the post id.
+	 * Get the post ID.
 	 *
-	 * @return {number} The post's id.
+	 * @return {number} The post's ID.
 	 */
 	getPostID() {
 		return elementor.config.document.id
@@ -187,7 +190,7 @@ class DataCollector {
 	}
 
 	/**
-	 * Gett featued image.
+	 * Get featured image.
 	 *
 	 * @return {null|Object} null or image datta.
 	 */

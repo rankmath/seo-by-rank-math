@@ -77,17 +77,17 @@ class Classifier {
 	/**
 	 * Returns true when the link starts with https:// or http://
 	 *
-	 * @param  array $url_parts The url parts to use.
-	 * @return bool True if the url starts with a protocol.
+	 * @param  array $url_parts The URL parts to use.
+	 * @return bool True if the URL starts with a protocol.
 	 */
 	protected function contains_protocol( array $url_parts ) {
 		return isset( $url_parts['scheme'] ) && null !== $url_parts['scheme'];
 	}
 
 	/**
-	 * Checks if the link contains the home_url. Returns true if this isn't the case.
+	 * Checks if the link contains the `home_url`. Returns true if this isn't the case.
 	 *
-	 * @param  array $url_parts The url parts to use.
+	 * @param  array $url_parts The URL parts to use.
 	 * @return bool True when the link doesn't contain the home url.
 	 */
 	protected function is_external_link( array $url_parts ) {
@@ -111,17 +111,17 @@ class Classifier {
 	/**
 	 * Checks if the link contains valid scheme
 	 *
-	 * @param  array $url_parts The url parts to use.
+	 * @param  array $url_parts The URL parts to use.
 	 * @return bool
 	 */
 	private function has_valid_scheme( array $url_parts ) {
-		return isset( $url_parts['scheme'] ) && ! in_array( $url_parts['scheme'], array( 'http', 'https' ), true );
+		return isset( $url_parts['scheme'] ) && ! in_array( $url_parts['scheme'], [ 'http', 'https' ], true );
 	}
 
 	/**
 	 * Checks if the base host is equal to the host
 	 *
-	 * @param  array $url_parts The url parts to use.
+	 * @param  array $url_parts The URL parts to use.
 	 * @return bool
 	 */
 	private function has_different_host( array $url_parts ) {

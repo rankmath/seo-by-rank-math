@@ -14,6 +14,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Storage class.
+ *
+ * Some functionality adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 class Storage {
 

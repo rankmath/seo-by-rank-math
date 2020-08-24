@@ -56,49 +56,57 @@ class Sitemap implements Wizard_Step {
 	 * @return void
 	 */
 	public function form( $wizard ) {
-		$wizard->cmb->add_field([
-			'id'      => 'sitemap',
-			'type'    => 'toggle',
-			'name'    => esc_html__( 'Sitemaps', 'rank-math' ),
-			'desc'    => esc_html__( 'XML Sitemaps help search engines index your website&#039;s content more effectively.', 'rank-math' ),
-			'default' => Helper::is_module_active( 'sitemap' ) ? 'on' : 'off',
-		]);
+		$wizard->cmb->add_field(
+			[
+				'id'      => 'sitemap',
+				'type'    => 'toggle',
+				'name'    => esc_html__( 'Sitemaps', 'rank-math' ),
+				'desc'    => esc_html__( 'XML Sitemaps help search engines index your website&#039;s content more effectively.', 'rank-math' ),
+				'default' => Helper::is_module_active( 'sitemap' ) ? 'on' : 'off',
+			]
+		);
 
-		$wizard->cmb->add_field([
-			'id'      => 'include_images',
-			'type'    => 'toggle',
-			'name'    => esc_html__( 'Include Images', 'rank-math' ),
-			'desc'    => esc_html__( 'Include reference to images from the post content in sitemaps. This helps search engines index your images better.', 'rank-math' ),
-			'default' => Helper::get_settings( 'sitemap.include_images' ) ? 'on' : 'off',
-			'classes' => 'features-child',
-			'dep'     => [ [ 'sitemap', 'on' ] ],
-		]);
+		$wizard->cmb->add_field(
+			[
+				'id'      => 'include_images',
+				'type'    => 'toggle',
+				'name'    => esc_html__( 'Include Images', 'rank-math' ),
+				'desc'    => esc_html__( 'Include reference to images from the post content in sitemaps. This helps search engines index your images better.', 'rank-math' ),
+				'default' => Helper::get_settings( 'sitemap.include_images' ) ? 'on' : 'off',
+				'classes' => 'features-child',
+				'dep'     => [ [ 'sitemap', 'on' ] ],
+			]
+		);
 
 		// Post Types.
 		$post_types = $this->get_post_types();
-		$wizard->cmb->add_field([
-			'id'      => 'sitemap_post_types',
-			'type'    => 'multicheck',
-			'name'    => esc_html__( 'Public Post Types', 'rank-math' ),
-			'desc'    => esc_html__( 'Select post types to enable SEO options for them and include them in the sitemap.', 'rank-math' ),
-			'options' => $post_types['post_types'],
-			'default' => $post_types['defaults'],
-			'classes' => 'features-child cmb-multicheck-inline' . ( count( $post_types['post_types'] ) === count( $post_types['defaults'] ) ? ' multicheck-checked' : '' ),
-			'dep'     => [ [ 'sitemap', 'on' ] ],
-		]);
+		$wizard->cmb->add_field(
+			[
+				'id'      => 'sitemap_post_types',
+				'type'    => 'multicheck',
+				'name'    => esc_html__( 'Public Post Types', 'rank-math' ),
+				'desc'    => esc_html__( 'Select post types to enable SEO options for them and include them in the sitemap.', 'rank-math' ),
+				'options' => $post_types['post_types'],
+				'default' => $post_types['defaults'],
+				'classes' => 'features-child cmb-multicheck-inline' . ( count( $post_types['post_types'] ) === count( $post_types['defaults'] ) ? ' multicheck-checked' : '' ),
+				'dep'     => [ [ 'sitemap', 'on' ] ],
+			]
+		);
 
 		// Taxonomies.
 		$taxonomies = $this->get_taxonomies();
-		$wizard->cmb->add_field([
-			'id'      => 'sitemap_taxonomies',
-			'type'    => 'multicheck',
-			'name'    => esc_html__( 'Public Taxonomies', 'rank-math' ),
-			'desc'    => esc_html__( 'Select taxonomies to enable SEO options for them and include them in the sitemap.', 'rank-math' ),
-			'options' => $taxonomies['taxonomies'],
-			'default' => $taxonomies['defaults'],
-			'classes' => 'features-child cmb-multicheck-inline' . ( count( $taxonomies['taxonomies'] ) === count( $taxonomies['defaults'] ) ? ' multicheck-checked' : '' ),
-			'dep'     => [ [ 'sitemap', 'on' ] ],
-		]);
+		$wizard->cmb->add_field(
+			[
+				'id'      => 'sitemap_taxonomies',
+				'type'    => 'multicheck',
+				'name'    => esc_html__( 'Public Taxonomies', 'rank-math' ),
+				'desc'    => esc_html__( 'Select taxonomies to enable SEO options for them and include them in the sitemap.', 'rank-math' ),
+				'options' => $taxonomies['taxonomies'],
+				'default' => $taxonomies['defaults'],
+				'classes' => 'features-child cmb-multicheck-inline' . ( count( $taxonomies['taxonomies'] ) === count( $taxonomies['defaults'] ) ? ' multicheck-checked' : '' ),
+				'dep'     => [ [ 'sitemap', 'on' ] ],
+			]
+		);
 	}
 
 	/**

@@ -271,7 +271,7 @@ class Options {
 
 			<span class="wp-header-end"></span>
 
-			<form class="cmb-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="POST" id="<?php echo $cmb->cmb_id; ?>" enctype="multipart/form-data" encoding="multipart/form-data">
+			<form class="cmb-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="POST" id="<?php echo esc_attr( $cmb->cmb_id ); ?>" enctype="multipart/form-data" encoding="multipart/form-data">
 
 				<input type="hidden" name="action" value="<?php echo esc_attr( $machine->option_key ); ?>">
 				<?php $machine->options_page_metabox(); ?>

@@ -14,6 +14,9 @@ import { addAction } from '@wordpress/hooks'
  */
 import { swapVariables } from '@helpers/swapVariables'
 
+/**
+ * DataCollector class
+ */
 class DataCollector {
 	/**
 	 * Class constructor
@@ -61,7 +64,9 @@ class DataCollector {
 	}
 
 	/**
-	 * Collects the content, title, slug and excerpt of a post from Gutenberg.
+	 * Collects the title, slug, permalink, content, featured image and excerpt of a post from Gutenberg.
+	 *
+	 * Function adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
 	 */
 	collectData() {
 		this._data = {
@@ -76,9 +81,9 @@ class DataCollector {
 	}
 
 	/**
-	 * Get the post id.
+	 * Get the post ID.
 	 *
-	 * @return {number} The post's id.
+	 * @return {number} The post's ID.
 	 */
 	getPostID() {
 		return rankMath.objectID
@@ -127,7 +132,7 @@ class DataCollector {
 	}
 
 	/**
-	 * Gett featued image.
+	 * Get featured image.
 	 *
 	 * @return {null|Object} null or image datta.
 	 */
@@ -136,7 +141,7 @@ class DataCollector {
 	}
 
 	/**
-	 * Refreshes app when the Elementor data is dirty.
+	 * Refreshes App when the Elementor data is dirty.
 	 *
 	 * @return {void}
 	 */

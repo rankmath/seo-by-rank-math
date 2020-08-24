@@ -3,6 +3,11 @@
  */
 import { debounce } from 'lodash'
 
+/**
+ * Gutenberg DataCollector
+ *
+ * Some functionality adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
+ */
 class GutenbergDataCollector {
 	constructor( metabox ) {
 		this.metabox = metabox
@@ -13,7 +18,7 @@ class GutenbergDataCollector {
 	}
 
 	/**
-	 * Collects the content, title, slug and excerpt of a post from Gutenberg.
+	 * Collects the title, slug, content and excerpt of a post from Gutenberg.
 	 *
 	 * @return {{content: string, title: string, slug: string, excerpt: string}} The content, title, slug and excerpt.
 	 */
@@ -83,7 +88,7 @@ class GutenbergDataCollector {
 	}
 
 	/**
-	 * Refreshes app when the Gutenberg data is dirty.
+	 * Refreshes App when the Gutenberg data is dirty.
 	 *
 	 * @return {void}
 	 */

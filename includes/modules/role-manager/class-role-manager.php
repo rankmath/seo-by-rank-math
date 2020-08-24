@@ -46,12 +46,12 @@ class Role_Manager extends Base {
 
 		// Members plugin integration.
 		if ( \function_exists( 'members_plugin' ) ) {
-			new Members;
+			new Members();
 		}
 
 		// User Role Editor plugin integration.
 		if ( defined( 'URE_PLUGIN_URL' ) ) {
-			new User_Role_Editor;
+			new User_Role_Editor();
 		}
 	}
 

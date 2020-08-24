@@ -81,7 +81,7 @@ class Event implements Snippet {
 	/**
 	 * Add Performer data.
 	 *
-	 * @param array $entity   Array of json-ld data.
+	 * @param array $entity   Array of JSON-LD data.
 	 *
 	 * @return array
 	 */

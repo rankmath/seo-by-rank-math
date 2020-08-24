@@ -22,6 +22,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Head class.
+ *
+ * Some functionality inspired from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 class Head {
 

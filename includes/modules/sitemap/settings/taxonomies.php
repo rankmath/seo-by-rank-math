@@ -27,7 +27,7 @@ $cmb->add_field(
 		'name'    => esc_html__( 'Include Empty Terms', 'rank-math' ),
 		'desc'    => esc_html__( 'Include archive pages of terms that have no posts associated.', 'rank-math' ),
 		'default' => 'off',
-		'dep'     => array( array( $prefix . 'sitemap', 'on' ) ),
+		'dep'     => [ [ $prefix . 'sitemap', 'on' ] ],
 		'classes' => 'rank-math-advanced-option',
 	]
 );

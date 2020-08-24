@@ -80,13 +80,13 @@ class CMB2_Fields implements Runner {
 		$field_name   = $field->_name();
 		$active_value = ! empty( $field->args( 'active_value' ) ) ? $field->args( 'active_value' ) : 'on';
 
-		$args = array(
+		$args = [
 			'type'  => 'checkbox',
 			'id'    => $field_name,
 			'name'  => $field_name,
 			'desc'  => '',
 			'value' => $active_value,
-		);
+		];
 
 		if ( $escaped_value === $active_value ) {
 			$args['checked'] = 'checked';

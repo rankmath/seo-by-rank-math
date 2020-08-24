@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Sitemap class.
+ *
+ * Some functionality forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 class Sitemap {
 
@@ -108,9 +110,9 @@ class Sitemap {
 	}
 
 	/**
-	 * Add New CPT Notice
+	 * Add new CPT notice.
 	 *
-	 * @param  string $notice New CPT Notice.
+	 * @param  string $notice New CPT notice.
 	 * @return string
 	 */
 	public function new_post_type_notice( $notice ) {
@@ -128,7 +130,7 @@ class Sitemap {
 	}
 
 	/**
-	 * Notify search engines of the updated sitemap.
+	 * Notify Search Engines of the updated sitemap.
 	 *
 	 * @param string|null $url Optional URL to make the ping for.
 	 */
@@ -170,7 +172,7 @@ class Sitemap {
 	}
 
 	/**
-	 * Exclude object frmofrom sitemap.
+	 * Exclude object from sitemap.
 	 *
 	 * @param  int     $object_id   Object id.
 	 * @param  string  $object_type Object type. Accetps: post, term, user.
@@ -276,7 +278,7 @@ class Sitemap {
 	}
 
 	/**
-	 * Check if Object is indexable.
+	 * Check if `object` is indexable.
 	 *
 	 * @param int/object $object Post|Term Object.
 	 * @param string     $type   Object Type.

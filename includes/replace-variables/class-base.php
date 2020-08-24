@@ -41,7 +41,7 @@ class Base {
 		}
 
 		/**
-		 * Filter: Allows changing the %category% and %tag% terms lists.
+		 * Filter: Allows changing the `%category%` and `%tag%` terms lists.
 		 *
 		 * @param string $output   The terms list, comma separated.
 		 * @param string $taxonomy The taxonomy of the terms.
@@ -145,7 +145,7 @@ class Base {
 	}
 
 	/**
-	 * Get post object.
+	 * Get post `object`.
 	 *
 	 * @return WP_Post
 	 */
@@ -180,7 +180,7 @@ class Base {
 	}
 
 	/**
-	 * Determine the page number of the current post/page/cpt.
+	 * Determine the page number of the current post/page/CPT.
 	 *
 	 * @return int|null
 	 */
@@ -194,7 +194,7 @@ class Base {
 	}
 
 	/**
-	 * Determine the max num of pages of the current post/page/cpt.
+	 * Determine the max num of pages of the current post/page/CPT.
 	 *
 	 * @return int|null
 	 */
@@ -208,7 +208,9 @@ class Base {
 	}
 
 	/**
-	 * Determine the post type names for the current post/page/cpt.
+	 * Determine the post type names for the current post/page/CPT.
+	 *
+	 * Adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
 	 *
 	 * @param string $request Either 'single'|'plural' - whether to return the single or plural form.
 	 *
@@ -259,7 +261,6 @@ class Base {
 			return $this->args->post_type;
 		}
 
-		// Make it work in preview mode.
 		return $wp_query->get_queried_object()->post_type;
 	}
 }

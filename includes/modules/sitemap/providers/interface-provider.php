@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Sitemap
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\Sitemap\Providers;

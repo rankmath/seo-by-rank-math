@@ -39,7 +39,7 @@ class Data_Fetcher extends \WP_Background_Process {
 		static $instance;
 
 		if ( is_null( $instance ) && ! ( $instance instanceof Data_Fetcher ) ) {
-			$instance = new Data_Fetcher;
+			$instance = new Data_Fetcher();
 		}
 
 		return $instance;

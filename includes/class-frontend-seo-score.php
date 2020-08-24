@@ -111,7 +111,7 @@ class Frontend_SEO_Score {
 	}
 
 	/**
-	 * Get the seo score HTML.
+	 * Get the SEO score HTML.
 	 *
 	 * @param array $args Arguments.
 	 * @return string
@@ -205,7 +205,7 @@ class Frontend_SEO_Score {
 	}
 
 	/**
-	 * Get the seo score for given post.
+	 * Get the SEO score for given post.
 	 *
 	 * @param int $post_id Post ID.
 	 * @return int

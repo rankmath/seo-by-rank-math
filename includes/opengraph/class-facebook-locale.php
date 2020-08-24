@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\OpenGraph
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Functionality adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\OpenGraph;

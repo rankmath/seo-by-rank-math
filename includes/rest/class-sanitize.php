@@ -30,7 +30,7 @@ class Sanitize {
 		static $instance;
 
 		if ( is_null( $instance ) && ! ( $instance instanceof Sanitize ) ) {
-			$instance = new Sanitize;
+			$instance = new Sanitize();
 		}
 
 		return $instance;

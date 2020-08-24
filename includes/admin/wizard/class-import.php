@@ -61,7 +61,7 @@ class Import implements Wizard_Step {
 	 * @return void
 	 */
 	public function form( $wizard ) {
-		$detector = new Detector;
+		$detector = new Detector();
 		$plugins  = $detector->detect();
 		$plugins  = $this->set_priority( $plugins );
 
@@ -92,17 +92,20 @@ class Import implements Wizard_Step {
 
 			$group_id  = $wizard->cmb->add_field( $field_args );
 			$is_active = is_plugin_active( $plugin['file'] );
-			$wizard->cmb->add_group_field( $group_id, [
-				'id'         => $slug . '_meta',
-				'type'       => 'multicheck',
-				'repeatable' => false,
-				'desc'       => $this->get_choice_description( $slug, $plugin, $is_active ),
-				'options'    => $plugin['choices'],
-				'default'    => $choices,
-				'dep'        => [ [ 'import_from', $slug ] ],
-				'classes'    => 'nob nopb cmb-multicheck-inline with-description ' . $multi_checked . ' ' . $is_active,
-				'attributes' => [ 'data-active' => $is_active ],
-			]);
+			$wizard->cmb->add_group_field(
+				$group_id,
+				[
+					'id'         => $slug . '_meta',
+					'type'       => 'multicheck',
+					'repeatable' => false,
+					'desc'       => $this->get_choice_description( $slug, $plugin, $is_active ),
+					'options'    => $plugin['choices'],
+					'default'    => $choices,
+					'dep'        => [ [ 'import_from', $slug ] ],
+					'classes'    => 'nob nopb cmb-multicheck-inline with-description ' . $multi_checked . ' ' . $is_active,
+					'attributes' => [ 'data-active' => $is_active ],
+				]
+			);
 
 			$count++;
 		}

@@ -78,7 +78,7 @@ class Manager extends Post_Variables {
 	 *
 	 * For developers see rank_math_register_var_replacement().
 	 *
-	 * @param string $id        Uniquer id of variable, for example custom.
+	 * @param string $id        Uniquer ID of variable, for example custom.
 	 * @param array  $args      Array with additional name, description, variable and example values for the variable.
 	 * @param mixed  $callback  Replacement callback. Should return value, not output it.
 	 *
@@ -98,9 +98,9 @@ class Manager extends Post_Variables {
 	}
 
 	/**
-	 * Check if variable id is valid and unique before further processing.
+	 * Check if variable ID is valid and unique before further processing.
 	 *
-	 * @param string $id Variable id.
+	 * @param string $id Variable ID.
 	 *
 	 * @return bool Whether the variable is valid or not.
 	 */
@@ -186,7 +186,7 @@ class Manager extends Post_Variables {
 	}
 
 	/**
-	 * Setup json for use in ui.
+	 * Setup JSON for use in ui.
 	 */
 	public function setup_json() {
 		$json = [];

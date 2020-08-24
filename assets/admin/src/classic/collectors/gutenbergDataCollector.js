@@ -14,6 +14,11 @@ import { addAction } from '@wordpress/hooks'
  */
 import { swapVariables } from '@helpers/swapVariables'
 
+/**
+ * DataCollector class
+ *
+ * Some functionality adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
+ */
 class DataCollector {
 	/**
 	 * Is plugin initialize
@@ -49,9 +54,9 @@ class DataCollector {
 	}
 
 	/**
-	 * Collects the content, title, slug and excerpt of a post from Gutenberg.
+	 * Collects the title, slug, permalink, content, featured image and excerpt of a post from Gutenberg.
 	 *
-	 * @return {Object} The content, title, slug and excerpt.
+	 * @return {Object} Collected data.
 	 */
 	collectGutenbergData() {
 		if ( false === this.oldSlug && '' !== this.getSlug() ) {
@@ -70,9 +75,9 @@ class DataCollector {
 	}
 
 	/**
-	 * Get the post id.
+	 * Get the post ID.
 	 *
-	 * @return {number} The post's id.
+	 * @return {number} The post's ID.
 	 */
 	getPostID() {
 		return rankMath.objectID
@@ -85,7 +90,7 @@ class DataCollector {
 	 */
 	getPermalink() {
 		/**
-		 * Before the post has been saved for the first time, the generated_slug is "auto-draft".
+		 * Before the post has been saved for the first time, the `generated_slug` is "auto-draft".
 		 *
 		 * Before the post is saved the post status is "auto-draft", so when this is the case the slug
 		 * should be empty.
@@ -115,7 +120,7 @@ class DataCollector {
 	 */
 	getSlug() {
 		/**
-		 * Before the post has been saved for the first time, the generated_slug is "auto-draft".
+		 * Before the post has been saved for the first time, the `generated_slug` is "auto-draft".
 		 *
 		 * Before the post is saved the post status is "auto-draft", so when this is the case the slug
 		 * should be empty.
@@ -140,7 +145,7 @@ class DataCollector {
 	}
 
 	/**
-	 * Gett featued image.
+	 * Get featured image.
 	 *
 	 * @return {null|Object} null or image datta.
 	 */
@@ -196,7 +201,7 @@ class DataCollector {
 	}
 
 	/**
-	 * Refreshes app when the Gutenberg data is dirty.
+	 * Refreshes App when the Gutenberg data is dirty.
 	 *
 	 * @return {void}
 	 */

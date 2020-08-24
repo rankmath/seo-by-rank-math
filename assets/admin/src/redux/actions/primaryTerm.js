@@ -4,9 +4,9 @@
 import { updateAppData } from './metadata'
 
 /**
- * Update primary term id.
+ * Update primary term ID.
  *
- * @param {number} id       The new id.
+ * @param {number} id       The new ID.
  * @param {string} taxonomy The taxonomy.
  *
  * @return {Object} An action for redux.

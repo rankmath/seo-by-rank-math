@@ -15,7 +15,9 @@ use RankMath\Helper;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Post_Type class.
+ * Post Type class.
+ *
+ * Some functionality inspired from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 trait Post_Type {
 

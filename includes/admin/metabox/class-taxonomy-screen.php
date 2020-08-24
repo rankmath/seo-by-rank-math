@@ -31,7 +31,7 @@ class Taxonomy_Screen implements IScreen {
 	}
 
 	/**
-	 * Get object id
+	 * Get object ID.
 	 *
 	 * @return int
 	 */

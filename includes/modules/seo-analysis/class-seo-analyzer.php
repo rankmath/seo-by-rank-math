@@ -200,7 +200,7 @@ class SEO_Analyzer {
 		foreach ( $this->sort_results_by_category() as $category => $results ) :
 			$label = $this->get_category_label( $category );
 			?>
-			<div class="rank-math-result-table rank-math-result-category-<?php echo $category; ?>">
+			<div class="rank-math-result-table rank-math-result-category-<?php echo esc_attr( $category ); ?>">
 				<div class="category-title">
 					<?php echo $label; ?>
 				</div>
@@ -274,7 +274,6 @@ class SEO_Analyzer {
 		delete_option( 'rank_math_seo_analysis_results' );
 
 		if ( ! $this->run_api_tests() ) {
-			error_log( $this->api_error );
 			/* translators: API error */
 			echo '<div class="notice notice-error is-dismissible notice-seo-analysis-error rank-math-notice"><p>' . sprintf( __( '<strong>API Error:</strong> %s', 'rank-math' ), $this->api_error ) . '</p></div>';
 			$success = false;

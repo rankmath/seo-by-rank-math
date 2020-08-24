@@ -20,7 +20,7 @@ interface Snippet {
 	/**
 	 * Process snippet data
 	 *
-	 * @param array  $data   Array of json-ld data.
+	 * @param array  $data   Array of JSON-LD data.
 	 * @param JsonLD $jsonld Instance of JsonLD.
 	 *
 	 * @return array

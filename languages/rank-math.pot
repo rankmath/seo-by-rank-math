@@ -1025,7 +1025,7 @@ msgstr ""
 msgid "Add icon overlay to thumbnail"
 msgstr ""
 
-msgid "<div class=\"notice notice-alt notice-warning warning inline rank-math-notice\"><p>Please be careful with this option. Although this option will help increase CTR on Facebook, it might get you penalised if over-used.</p></div>"
+msgid "Please be careful with this option. Although this option will help increase CTR on Facebook, it might get you penalised if over-used."
 msgstr ""
 
 msgid "Icon overlay"
@@ -1067,7 +1067,7 @@ msgstr ""
 msgid "Images for this Card support an aspect ratio of 2:1 with minimum dimensions of 300x157 or maximum of 4096x4096 pixels. Images must be less than 5MB in size."
 msgstr ""
 
-msgid "<div class=\"notice notice-alt notice-warning warning inline rank-math-notice\"><p>Please be careful with this option. Although this option will help increace CTR on Facebook, it might get you penalised if over-used.</p></div>"
+msgid "Please be careful with this option. Although this option will help increace CTR on Facebook, it might get you penalised if over-used."
 msgstr ""
 
 msgid "Author Twitter Username"
@@ -1335,7 +1335,7 @@ msgstr ""
 msgid "Author ID"
 msgstr ""
 
-msgid "Author's user id of the current post, page or author archive."
+msgid "Author's user ID of the current post, page or author archive."
 msgstr ""
 
 msgid "Post Author"
@@ -1850,24 +1850,6 @@ msgid "The plugin is currently not connected with your Rank Math account. Click 
 msgstr ""
 
 msgid "Connect Now"
-msgstr ""
-
-msgid "Plugin Updates"
-msgstr ""
-
-msgid "Update Available"
-msgstr ""
-
-msgid "Plugin up to date"
-msgstr ""
-
-msgid "Installed Version"
-msgstr ""
-
-msgid "Latest Available Version"
-msgstr ""
-
-msgid "Check for Updates"
 msgstr ""
 
 msgid "Sorry, you are not allowed to deactivate plugins for this site."
@@ -2448,9 +2430,6 @@ msgstr ""
 
 #. translators: delete counter
 msgid "%d redirection(s) successfully deleted."
-msgstr ""
-
-msgid "a,about,above,after,again,against,all,am,an,and,any,are,as,at,be,because,been,before,being,below,between,both,but,by,could,did,do,does,doing,down,during,each,few,for,from,further,had,has,have,having,he,he'd,he'll,he's,her,here,here's,hers,herself,him,himself,his,how,how's,i,i'd,i'll,i'm,i've,if,in,into,is,it,it's,its,itself,let's,me,more,most,my,myself,nor,of,on,once,only,or,other,ought,our,ours,ourselves,out,over,own,same,she,she'd,she'll,she's,should,so,some,such,than,that,that's,the,their,theirs,them,themselves,then,there,there's,these,they,they'd,they'll,they're,they've,this,those,through,to,too,under,until,up,very,was,we,we'd,we'll,we're,we've,were,what,what's,when,when's,where,where's,which,while,who,who's,whom,why,why's,with,would,you,you'd,you'll,you're,you've,your,yours,yourself,yourselves"
 msgstr ""
 
 msgid "Add"
@@ -3113,7 +3092,7 @@ msgstr ""
 msgid "Your site may not be visible to search engine."
 msgstr ""
 
-#. translators: %1$s resolves to the opening tag of the link to the reading settings, %1$s resolves to the closing tag for the link
+#. translators: %1$s link to the reading settings, %2$s closing tag for the link
 #. translators: %1$s resolves to the opening tag of the link to the reading settings, %1$s resolves to the closing tag for the link
 msgid "You must %1$sgo to your Reading Settings%2$s and uncheck the box for Search Engine Visibility."
 msgstr ""
@@ -3205,7 +3184,7 @@ msgstr ""
 msgid "Enable Auto Updates"
 msgstr ""
 
-#. translators: 1: link open tag; 2: link close tag.
+#. translators: %1$s link to the customize settings, %2$s closing tag for the link
 msgid "You have not entered a tagline yet. It is a good idea to choose one. %1$sYou can fix this in the customizer%2$s."
 msgstr ""
 
@@ -3241,7 +3220,7 @@ msgstr ""
 msgid "Focus keywords appear in the titles of published posts where it is set."
 msgstr ""
 
-#. translators: post id count
+#. translators: post ID count
 msgid "+%d More..."
 msgstr ""
 
@@ -3312,6 +3291,7 @@ msgstr ""
 msgid "Exclude this image from sitemap"
 msgstr ""
 
+#. translators: sitemap base url
 msgid "Since you are using NGINX, add this code to your NGINX %s <strong>if your Sitemap pages are not loading</strong> or you can ask your hosting support to add it."
 msgstr ""
 

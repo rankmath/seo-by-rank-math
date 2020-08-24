@@ -8,7 +8,7 @@
 
 use RankMath\Admin\Importers\Detector;
 
-$detector = new Detector;
+$detector = new Detector();
 $plugins  = $detector->detect();
 $first = empty( $plugins ) ? '' : array_keys( $plugins )[0];
 ?>

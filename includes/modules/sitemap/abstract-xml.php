@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Sitemap
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\Sitemap;
@@ -38,14 +40,14 @@ abstract class XML {
 	 */
 	protected function send_headers( $headers = [] ) {
 		$expires  = gmdate( 'D, d M Y H:i:s', ( time() + YEAR_IN_SECONDS ) );
-		$defaults = array(
+		$defaults = [
 			'X-Robots-Tag'  => 'noindex',
 			'Content-Type'  => 'text/xml; charset=' . $this->get_output_charset(),
 			'Pragma'        => 'public',
 			'Cache-Control' => 'maxage=' . YEAR_IN_SECONDS,
 			'Expires'       => $expires . ' GMT',
 			'Etag'          => md5( $expires . $this->type ),
-		);
+		];
 
 		$headers = wp_parse_args( $headers, $defaults );
 
@@ -71,7 +73,7 @@ abstract class XML {
 	}
 
 	/**
-	 * Get charset for the output.
+	 * Get `charset` for the output.
 	 *
 	 * @return string
 	 */

@@ -77,7 +77,7 @@ class Detector {
 	 * @param string $perform The action to perform when running import action.
 	 */
 	public static function run_by_slug( $slug, $action, $perform = '' ) {
-		$detector  = new self;
+		$detector  = new self();
 		$importers = $detector->get();
 		if ( ! isset( $importers[ $slug ] ) ) {
 			return false;
@@ -94,7 +94,7 @@ class Detector {
 	 * Deactivate all plugins.
 	 */
 	public static function deactivate_all() {
-		$detector = new Detector;
+		$detector = new Detector();
 		$plugins  = $detector->get();
 		foreach ( $plugins as $plugin ) {
 			deactivate_plugins( $plugin['file'] );
@@ -107,38 +107,41 @@ class Detector {
 	 * @return array Available importers.
 	 */
 	public function get() {
-		return $this->do_filter( 'importers/detect_plugins', [
-			'yoast'            => [
-				'class'   => '\\RankMath\\Admin\\Importers\\Yoast',
-				'file'    => 'wordpress-seo/wp-seo.php',
-				'premium' => 'yoast-premium',
-			],
-			'seopress'         => [
-				'class' => '\\RankMath\\Admin\\Importers\\SEOPress',
-				'file'  => 'wp-seopress/seopress.php',
-			],
-			'aioseo'           => [
-				'class' => '\\RankMath\\Admin\\Importers\\AIOSEO',
-				'file'  => 'all-in-one-seo-pack/all_in_one_seo_pack.php',
-			],
-			'yoast-premium'    => [
-				'class'  => '\\RankMath\\Admin\\Importers\\Yoast',
-				'file'   => 'wordpress-seo-premium/wp-seo-premium.php',
-				'parent' => 'yoast',
-			],
-			'aio-rich-snippet' => [
-				'class' => '\\RankMath\\Admin\\Importers\\AIO_Rich_Snippet',
-				'file'  => 'all-in-one-schemaorg-rich-snippets/index.php',
-			],
-			'wp-schema-pro'    => [
-				'class' => '\\RankMath\\Admin\\Importers\\WP_Schema_Pro',
-				'file'  => 'wp-schema-pro/wp-schema-pro.php',
-			],
-			'redirections'     => [
-				'class' => '\\RankMath\\Admin\\Importers\\Redirections',
-				'file'  => 'redirection/redirection.php',
-			],
-		]);
+		return $this->do_filter(
+			'importers/detect_plugins',
+			[
+				'yoast'            => [
+					'class'   => '\\RankMath\\Admin\\Importers\\Yoast',
+					'file'    => 'wordpress-seo/wp-seo.php',
+					'premium' => 'yoast-premium',
+				],
+				'seopress'         => [
+					'class' => '\\RankMath\\Admin\\Importers\\SEOPress',
+					'file'  => 'wp-seopress/seopress.php',
+				],
+				'aioseo'           => [
+					'class' => '\\RankMath\\Admin\\Importers\\AIOSEO',
+					'file'  => 'all-in-one-seo-pack/all_in_one_seo_pack.php',
+				],
+				'yoast-premium'    => [
+					'class'  => '\\RankMath\\Admin\\Importers\\Yoast',
+					'file'   => 'wordpress-seo-premium/wp-seo-premium.php',
+					'parent' => 'yoast',
+				],
+				'aio-rich-snippet' => [
+					'class' => '\\RankMath\\Admin\\Importers\\AIO_Rich_Snippet',
+					'file'  => 'all-in-one-schemaorg-rich-snippets/index.php',
+				],
+				'wp-schema-pro'    => [
+					'class' => '\\RankMath\\Admin\\Importers\\WP_Schema_Pro',
+					'file'  => 'wp-schema-pro/wp-schema-pro.php',
+				],
+				'redirections'     => [
+					'class' => '\\RankMath\\Admin\\Importers\\Redirections',
+					'file'  => 'redirection/redirection.php',
+				],
+			]
+		);
 	}
 
 	/**

@@ -77,7 +77,7 @@ class Product_WooCommerce {
 	 * Set product weight.
 	 *
 	 * @param object $product Product instance.
-	 * @param array  $entity  Array of json-ld entity.
+	 * @param array  $entity  Array of JSON-LD entity.
 	 */
 	private function set_weight( $product, &$entity ) {
 		if ( ! $product->has_weight() ) {
@@ -103,7 +103,7 @@ class Product_WooCommerce {
 	 * Set product dimension.
 	 *
 	 * @param object $product Product instance.
-	 * @param array  $entity  Array of json-ld entity.
+	 * @param array  $entity  Array of JSON-LD entity.
 	 */
 	private function set_dimensions( $product, &$entity ) {
 		if ( ! $product->has_dimensions() ) {
@@ -143,7 +143,7 @@ class Product_WooCommerce {
 	 * Set product images.
 	 *
 	 * @param object $product Product instance.
-	 * @param array  $entity  Array of json-ld entity.
+	 * @param array  $entity  Array of JSON-LD entity.
 	 */
 	private function set_images( $product, &$entity ) {
 		if ( ! $product->get_image_id() ) {
@@ -174,7 +174,7 @@ class Product_WooCommerce {
 	 * Set product ratings.
 	 *
 	 * @param object $product Product instance.
-	 * @param array  $entity  Array of json-ld entity.
+	 * @param array  $entity  Array of JSON-LD entity.
 	 */
 	private function set_ratings( $product, &$entity ) {
 		if ( $product->get_rating_count() < 1 ) {
@@ -224,7 +224,7 @@ class Product_WooCommerce {
 	 * Set product offers.
 	 *
 	 * @param object $product Product instance.
-	 * @param array  $entity  Array of json-ld entity.
+	 * @param array  $entity  Array of JSON-LD entity.
 	 * @param array  $seller  Seller info.
 	 */
 	private function set_offers( $product, &$entity, $seller ) {
@@ -258,7 +258,7 @@ class Product_WooCommerce {
 	 * Set product variable offers.
 	 *
 	 * @param object $product Product instance.
-	 * @param array  $entity  Array of json-ld entity.
+	 * @param array  $entity  Array of JSON-LD entity.
 	 * @param array  $seller  Seller info.
 	 */
 	private function set_offers_variable( $product, &$entity, $seller ) {

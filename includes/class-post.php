@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\Core
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Some functionality forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath;
@@ -30,7 +32,7 @@ class Post extends Metadata {
 	/**
 	 * Retrieve Post instance.
 	 *
-	 * @param  WP_Post|object|int $post Post to get either (int) post id or (WP_Post|object) post.
+	 * @param  WP_Post|object|int $post Post to get either (int) post ID or (WP_Post|object) post.
 	 * @return Post|false Post object, false otherwise.
 	 */
 	public static function get( $post = 0 ) {
@@ -100,7 +102,7 @@ class Post extends Metadata {
 		/**
 		 * Filter: Allow changing the default page ID. Short-circuit if 3rd party set page ID.
 		 *
-		 * @param unsigned int $page_id The default page id.
+		 * @param unsigned int $page_id The default page ID.
 		 */
 		$page_id = apply_filters( 'rank_math/pre_simple_page_id', false );
 		if ( false !== $page_id ) {

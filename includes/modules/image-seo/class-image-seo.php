@@ -33,7 +33,7 @@ class Image_Seo {
 	public function __construct() {
 		$this->load_admin();
 
-		new Add_Attributes;
+		new Add_Attributes();
 	}
 
 	/**
@@ -41,7 +41,7 @@ class Image_Seo {
 	 */
 	private function load_admin() {
 		if ( is_admin() ) {
-			$this->admin = new Admin;
+			$this->admin = new Admin();
 		}
 	}
 

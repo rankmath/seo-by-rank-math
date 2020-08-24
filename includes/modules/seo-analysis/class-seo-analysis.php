@@ -33,7 +33,7 @@ class SEO_Analysis {
 		}
 
 		if ( is_admin() ) {
-			$this->admin = new Admin;
+			$this->admin = new Admin();
 		}
 
 		if ( Helper::has_cap( 'rank_math_site_analysis' ) ) {

@@ -60,7 +60,7 @@ class Option_Center implements Runner {
 				'classes'   => 'rank-math-advanced-option',
 				/* translators: Link to kb article */
 				'desc'      => sprintf( esc_html__( 'Here you can set up the breadcrumbs function. %s', 'rank-math' ), '<a href="' . KB::get( 'breadcrumbs' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>. <br/>' ),
-				'after_row' => '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>' . esc_html__( 'Use the following code in your theme template files to display breadcrumbs:', 'rank-math' ) . '<br /><code>&lt;?php if (function_exists(\'rank_math_the_breadcrumbs\')) rank_math_the_breadcrumbs(); ?&gt;</code><br /> OR <br /><code>[rank_math_breadcrumb]</code>' . '</p></div>',
+				'after_row' => '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>' . esc_html__( 'Use the following code in your theme template files to display breadcrumbs:', 'rank-math' ) . '<br /><code>&lt;?php if (function_exists(\'rank_math_the_breadcrumbs\')) rank_math_the_breadcrumbs(); ?&gt;</code><br /> OR <br /><code>[rank_math_breadcrumb]</code></p></div>',
 			],
 			'webmaster'   => [
 				'icon'  => 'rm-icon rm-icon-toolbox',

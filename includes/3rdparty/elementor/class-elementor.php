@@ -123,13 +123,13 @@ class Elementor {
 	}
 
 	/**
-	 * Can add SEO tab in Elementor Page Builder.
+	 * Add SEO tab in Elementor Page Builder.
 	 *
 	 * @return bool
 	 */
 	private function can_add_seo_tab() {
 		/**
-		 * Filter to show/hide SEO Tab in Elementor Editor.
+		 * Filter to show/hide SEO Tab in the Elementor Editor.
 		 */
 		if ( ! $this->do_filter( 'elementor/add_seo_tab', true ) ) {
 			return false;

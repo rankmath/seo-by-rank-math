@@ -23,6 +23,8 @@ import {
 /**
  * Check for issues with the provided href.
  *
+ * Function inspired by Yoast (https://github.com/Yoast/wordpress-seo/)
+ *
  * @param {string} href The href.
  *
  * @return {boolean} Is the href invalid?
@@ -38,7 +40,7 @@ export function isValidHref( href ) {
 		return false
 	}
 
-	// Does the href start with something that looks like a URL protocol?
+	// Does the `href` start with something that looks like a URL protocol?
 	if ( /^\S+:/.test( trimmedHref ) ) {
 		const protocol = getProtocol( trimmedHref )
 		if ( ! isValidProtocol( protocol ) ) {

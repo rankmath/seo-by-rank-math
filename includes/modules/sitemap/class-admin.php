@@ -217,10 +217,6 @@ class Admin extends Base {
 	}
 
 	/**
-	 * Metabox API -----------------------------------------------------------
-	 */
-
-	/**
 	 * Adds new "exclude from sitemap" checkbox to media popup in the post editor.
 	 *
 	 * @param array  $form_fields Default form fields.
@@ -228,7 +224,7 @@ class Admin extends Base {
 	 *
 	 * @return array New form fields
 	 */
-	function media_popup_fields( $form_fields, $post ) {
+	public function media_popup_fields( $form_fields, $post ) {
 		$exclude   = get_post_meta( $post->ID, 'rank_math_exclude_sitemap', true );
 		$checkbox  = '<label><input type="checkbox" name="attachments[' . $post->ID . '][rank_math_media_exclude_sitemap]" ' . checked( $exclude, true, 0 ) . ' /> ';
 		$checkbox .= esc_html__( 'Exclude this image from sitemap', 'rank-math' ) . '</label>';
@@ -246,7 +242,7 @@ class Admin extends Base {
 	 *
 	 * @return array Post
 	 */
-	function media_popup_fields_save( $post, $attachment ) {
+	public function media_popup_fields_save( $post, $attachment ) {
 
 		if ( isset( $attachment['rank_math_media_exclude_sitemap'] ) ) {
 			update_post_meta( $post['ID'], 'rank_math_exclude_sitemap', true );
@@ -304,6 +300,7 @@ class Admin extends Base {
 
 		$sitemap_base = Router::get_sitemap_base() ? Router::get_sitemap_base() : '';
 
+		/* translators: sitemap base url */
 		return '<div class="sitemap-nginx-notice notice notice-alt notice-warning rank-math-notice">
 		 <p>' . sprintf( __( 'Since you are using NGINX, add this code to your NGINX %s <strong>if your Sitemap pages are not loading</strong> or you can ask your hosting support to add it.', 'rank-math' ), '<a href="https://help.dreamhost.com/hc/en-us/articles/216455077-Nginx-configuration-file-locations/?utm_campaign=Rank+Math" target="_blank">' . __( 'configuration file', 'rank-math' ) . '</a>' ) . '
 		 <a href="#"><span class="show">' . __( 'Click here to see the code.', 'rank-math' ) . '</span><span class="hide">' . __( 'Hide', 'rank-math' ) . '</span></a></p>

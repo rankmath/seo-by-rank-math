@@ -49,7 +49,7 @@ class Sitemaps {
 	public function display_table() {
 		echo '<form method="post">';
 
-		$this->table = new Sitemaps_List;
+		$this->table = new Sitemaps_List();
 		$this->table->prepare_items();
 		$this->table->get_refresh_button();
 		$this->table->display();

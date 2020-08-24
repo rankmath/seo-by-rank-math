@@ -111,19 +111,19 @@ if ( ! Admin_Helper::is_term_profile_page() ) {
  *
  * @param bool $return True to disable.
  */
-if ( false === apply_filters_deprecated( 'rank_math/primary_term', array( false ), '1.0.43', 'rank_math/admin/disable_primary_term' )
+if ( false === apply_filters_deprecated( 'rank_math/primary_term', [ false ], '1.0.43', 'rank_math/admin/disable_primary_term' )
 	&& false === $this->do_filter( 'admin/disable_primary_term', false ) ) {
 	$taxonomies = Helper::get_object_taxonomies( WordPress::get_post_type(), 'objects' );
-	$taxonomies = wp_filter_object_list( $taxonomies, array( 'hierarchical' => true ), 'and', 'name' );
+	$taxonomies = wp_filter_object_list( $taxonomies, [ 'hierarchical' => true ], 'and', 'name' );
 	foreach ( $taxonomies as $taxonomy ) {
 		$cmb->add_field(
 			[
 				'id'         => 'rank_math_primary_' . $taxonomy,
 				'type'       => 'hidden',
 				'default'    => 0,
-				'attributes' => array(
+				'attributes' => [
 					'data-primary-term' => $taxonomy,
-				),
+				],
 			]
 		);
 	}

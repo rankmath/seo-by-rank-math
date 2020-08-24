@@ -389,7 +389,7 @@ class Admin_Bar_Menu {
 	/**
 	 * Add sub menu item
 	 *
-	 * @param string $id     Unique id for the node.
+	 * @param string $id     Unique ID for the node.
 	 * @param array  $args   Arguments for adding a node.
 	 * @param string $parent Node parent.
 	 */

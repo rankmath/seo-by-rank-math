@@ -16,7 +16,9 @@ use MyThemeShop\Helpers\Str;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Redirect_Core_Sitemaps class
+ * Redirect Core Sitemaps class
+ *
+ * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 class Redirect_Core_Sitemaps {
 

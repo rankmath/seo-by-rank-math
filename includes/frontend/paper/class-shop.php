@@ -30,7 +30,7 @@ class Shop extends Singular {
 		$post  = Post::get( Post::get_shop_page_id() );
 		$title = $this->get_post_title( $post->get_object() );
 
-		// Early Bail!!!
+		// Early Bail!
 		if ( Str::is_non_empty( $title ) ) {
 			return $title;
 		}

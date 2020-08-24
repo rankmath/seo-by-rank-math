@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\OpenGraph
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\OpenGraph;
@@ -51,12 +53,12 @@ class Image {
 	 *
 	 * @var array
 	 */
-	private $usable_dimensions = array(
+	private $usable_dimensions = [
 		'min_width'  => 200,
 		'max_width'  => 2000,
 		'min_height' => 200,
 		'max_height' => 2000,
-	);
+	];
 
 	/**
 	 * The Constructor.
@@ -127,7 +129,7 @@ class Image {
 	 * @param array $image_meta Image meta data to output.
 	 */
 	private function image_meta( $image_meta ) {
-		$image_tags = array( 'width', 'height', 'alt', 'type' );
+		$image_tags = [ 'width', 'height', 'alt', 'type' ];
 		foreach ( $image_tags as $key ) {
 			if ( ! empty( $image_meta[ $key ] ) ) {
 				$this->opengraph->tag( 'og:image:' . $key, $image_meta[ $key ] );
@@ -152,7 +154,7 @@ class Image {
 			return;
 		}
 
-		$this->add_image( array( 'url' => $url ) );
+		$this->add_image( [ 'url' => $url ] );
 	}
 
 	/**
@@ -178,7 +180,7 @@ class Image {
 		if ( $attachment ) {
 			// In the past `add_image` accepted an image url, so leave this for backwards compatibility.
 			if ( Str::is_non_empty( $attachment ) ) {
-				$attachment = array( 'url' => $attachment );
+				$attachment = [ 'url' => $attachment ];
 			}
 			$attachment['alt'] = Attachment::get_alt_tag( $attachment_id );
 
@@ -194,7 +196,7 @@ class Image {
 	public function add_image( $attachment ) {
 		// In the past `add_image` accepted an image url, so leave this for backwards compatibility.
 		if ( Str::is_non_empty( $attachment ) ) {
-			$attachment = array( 'url' => $attachment );
+			$attachment = [ 'url' => $attachment ];
 		}
 
 		if ( ! is_array( $attachment ) || empty( $attachment['url'] ) ) {
@@ -233,7 +235,7 @@ class Image {
 
 		$attachment['url'] = $image_url;
 
-		if ( ! $attachment['alt'] && is_singular() ) {
+		if ( empty( $attachment['alt'] ) && is_singular() ) {
 			$attachment['alt'] = $this->get_attachment_alt();
 		}
 
@@ -323,7 +325,7 @@ class Image {
 	}
 
 	/**
-	 * If the frontpage image exists, call add_image.
+	 * If the frontpage image exists, call `add_image`.
 	 *
 	 * @return void
 	 */
@@ -343,7 +345,7 @@ class Image {
 	/**
 	 * Gets the user-defined image of the post.
 	 *
-	 * @param null|int $post_id The post id to get the images for.
+	 * @param null|int $post_id The post ID to get the images for.
 	 */
 	private function set_user_defined_image( $post_id = null ) {
 		if ( null === $post_id ) {
@@ -360,7 +362,7 @@ class Image {
 	}
 
 	/**
-	 * If opengraph-image is set, call add_image and return true.
+	 * If opengraph-image is set, call `add_image` and return true.
 	 *
 	 * @param int $post_id Optional post ID to use.
 	 */
@@ -411,7 +413,7 @@ class Image {
 	}
 
 	/**
-	 * If this is an attachment page, call add_image with the attachment.
+	 * If this is an attachment page, call `add_image` with the attachment.
 	 */
 	private function set_attachment_page_image() {
 		$post_id = get_queried_object_id();
@@ -423,7 +425,7 @@ class Image {
 	/**
 	 * Get the images of the singular post.
 	 *
-	 * @param null|int $post_id The post id to get the images for.
+	 * @param null|int $post_id The post ID to get the images for.
 	 */
 	private function set_singular_image( $post_id = null ) {
 		$post_id = is_null( $post_id ) ? get_queried_object_id() : $post_id;
@@ -476,16 +478,13 @@ class Image {
 			return;
 		}
 
-		foreach ( $images as $image_url ) {
-			$attachment_id = Attachment::get_by_url( $image_url );
-
-			// If image is hosted externally, skip it and continue to the next image.
+		foreach ( $images as $image ) {
+			$attachment_id = Attachment::get_by_url( $image );
 			if ( 0 === $attachment_id ) {
-				continue;
+				$this->add_image( $image );
+			} else {
+				$this->add_image_by_id( $attachment_id );
 			}
-
-			// If locally hosted image meets the requirements, add it as OG image.
-			$this->add_image_by_id( $attachment_id );
 
 			// If an image has been added, we're done.
 			if ( $this->has_images() ) {
@@ -536,7 +535,7 @@ class Image {
 			return false;
 		}
 
-		return in_array( $check['ext'], array( 'jpeg', 'jpg', 'gif', 'png' ), true );
+		return in_array( $check['ext'], [ 'jpeg', 'jpg', 'gif', 'png' ], true );
 	}
 
 	/**
@@ -554,7 +553,7 @@ class Image {
 		 *
 		 * @param unsigned array - The array of image sizes to loop through.
 		 */
-		$sizes = $this->do_filter( 'opengraph/image_sizes', array( 'full', 'large', 'medium_large' ) );
+		$sizes = $this->do_filter( 'opengraph/image_sizes', [ 'full', 'large', 'medium_large' ] );
 
 		foreach ( $sizes as $size ) {
 			if ( $variation = $this->get_attachment_image( $attachment_id, $size ) ) { // phpcs:ignore
@@ -585,14 +584,14 @@ class Image {
 
 		list( $src, $width, $height ) = $image;
 
-		return array(
+		return [
 			'id'     => $attachment_id,
 			'url'    => $src,
 			'width'  => $width,
 			'height' => $height,
 			'type'   => get_post_mime_type( $attachment_id ),
 			'alt'    => Attachment::get_alt_tag( $attachment_id ),
-		);
+		];
 	}
 
 	/**
@@ -602,7 +601,7 @@ class Image {
 	 * @return bool True if the image has usable measurements, false if not.
 	 */
 	private function has_usable_dimensions( $dimensions ) {
-		foreach ( array( 'width', 'height' ) as $param ) {
+		foreach ( [ 'width', 'height' ] as $param ) {
 			$minimum = $this->usable_dimensions[ 'min_' . $param ];
 			$maximum = $this->usable_dimensions[ 'max_' . $param ];
 

@@ -36,6 +36,8 @@ class Helper {
 	 * @param array  $args    Context object, can be post, taxonomy or term.
 	 * @param array  $exclude Excluded variables won't be replaced.
 	 *
+	 * Inspired from Yoast (https://github.com/Yoast/wordpress-seo/)
+	 *
 	 * @return string
 	 */
 	public static function replace_vars( $content, $args = [], $exclude = [] ) {
@@ -86,6 +88,8 @@ class Helper {
 	 * @param  string $url  The URL to parse.
 	 * @param  string $part The URL part to retrieve.
 	 * @return string The extracted URL part.
+	 *
+	 * Adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
 	 */
 	public static function get_url_part( $url, $part ) {
 		$url_parts = wp_parse_url( $url );

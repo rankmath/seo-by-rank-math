@@ -40,16 +40,16 @@ class WooCommerce extends WC_Vars {
 		$this->remove_parent_slugs  = Helper::get_settings( 'general.wc_remove_category_parent_slugs' );
 
 		if ( is_admin() ) {
-			new Admin;
+			new Admin();
 		}
 
 		$this->integrations();
 
 		if ( $this->remove_product_base || $this->remove_category_base ) {
-			new Product_Redirection;
+			new Product_Redirection();
 		}
 
-		new Permalink_Watcher;
+		new Permalink_Watcher();
 		parent::__construct();
 	}
 

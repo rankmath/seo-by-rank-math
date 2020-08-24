@@ -6,6 +6,8 @@
  * @package    RankMath
  * @subpackage RankMath\OpenGraph
  * @author     Rank Math <support@rankmath.com>
+ *
+ * Functionality forked from Yoast (https://github.com/Yoast/wordpress-seo/)
  */
 
 namespace RankMath\OpenGraph;
@@ -113,7 +115,7 @@ class OpenGraph {
 	}
 
 	/**
-	 * Get description
+	 * Get description.
 	 *
 	 * @return bool|string
 	 */
