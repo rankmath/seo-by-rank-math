@@ -92,7 +92,7 @@ class Product implements Snippet {
 	 * @return array
 	 */
 	public static function get_seller( $jsonld ) {
-		$site_url = site_url();
+		$site_url = home_url();
 		$type     = Helper::get_settings( 'titles.knowledgegraph_type' );
 		$seller   = [
 			'@type' => 'person' === $type ? 'Person' : 'Organization',

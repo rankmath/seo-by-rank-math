@@ -88,9 +88,9 @@ class Redirector {
 	 * Set the required values.
 	 */
 	private function start() {
-		$this->uri = str_replace( site_url( '/' ), '', Param::server( 'REQUEST_URI' ) );
+		$this->uri = str_replace( home_url( '/' ), '', Param::server( 'REQUEST_URI' ) );
 		$this->uri = urldecode( $this->uri );
-		$this->uri = trim( Redirection::strip_subdirectory( $this->uri ), '/' );
+		$this->uri = trim( $this->uri ), '/' );
 
 		// Complete request uri.
 		$this->full_uri = $this->uri;

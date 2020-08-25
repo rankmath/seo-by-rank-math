@@ -101,9 +101,8 @@ class Robots_Txt {
 		if ( 0 === $public ) {
 			$default .= "Disallow: /\n";
 		} else {
-			$site_url = parse_url( site_url() );
-			$default .= "Disallow: /wp-admin/\n";
-			$default .= "Allow: /wp-admin/admin-ajax.php\n";
+			$default .= "Disallow: " . admin_url() . "\n";
+			$default .= "Allow: " . admin_url('admin-ajax.php') . "\n";
 		}
 
 		return [

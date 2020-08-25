@@ -197,7 +197,6 @@ class Watcher {
 		Cache::purge_by_object_id( $object_id, $type );
 		if ( $from_url ) {
 			$from_url = parse_url( $from_url, PHP_URL_PATH );
-			$from_url = Redirection::strip_subdirectory( $from_url );
 			Cache::add(
 				[
 					'from_url'       => $from_url,
@@ -274,7 +273,7 @@ class Watcher {
 	 * @return string
 	 */
 	private function get_site_path() {
-		$path = parse_url( get_site_url(), PHP_URL_PATH );
+		$path = parse_url( get_home_url(), PHP_URL_PATH );
 		if ( $path ) {
 			return rtrim( $path, '/' ) . '/';
 		}
