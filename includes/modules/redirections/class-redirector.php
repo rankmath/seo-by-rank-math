@@ -90,7 +90,7 @@ class Redirector {
 	private function start() {
 		$this->uri = str_replace( home_url( '/' ), '', Param::server( 'REQUEST_URI' ) );
 		$this->uri = urldecode( $this->uri );
-		$this->uri = trim( $this->uri ), '/' );
+		$this->uri = trim( $this->uri, '/' );
 
 		// Complete request uri.
 		$this->full_uri = $this->uri;
