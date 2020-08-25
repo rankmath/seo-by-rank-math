@@ -102,7 +102,7 @@ class Robots_Txt {
 			$default .= "Disallow: /\n";
 		} else {
 			$default .= "Disallow: " . admin_url() . "\n";
-			$default .= "Allow: " . admin_url('admin-ajax.php') . "\n";
+			$default .= "Allow: " . admin_url( 'admin-ajax.php' ) . "\n";
 		}
 
 		return [
