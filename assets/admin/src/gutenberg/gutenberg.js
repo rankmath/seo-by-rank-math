@@ -32,6 +32,7 @@ import PrimaryTermSelector from '@components/PrimaryTerm/PrimaryTermSelector'
  */
 import RankMathAfterEditor from '@slots/AfterEditor'
 import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
+import RankMathAdvancedTab from '@slots/AdvancedTab'
 
 class GutenbergEditor extends Editor {
 	setup( dataCollector ) {
@@ -50,9 +51,11 @@ class GutenbergEditor extends Editor {
 	registerSlots() {
 		this.RankMathAfterEditor = RankMathAfterEditor
 		this.RankMathAfterFocusKeyword = RankMathAfterFocusKeyword
+		this.RankMathAdvancedTab = RankMathAdvancedTab
 		this.slots = {
 			AfterEditor: RankMathAfterEditor,
 			AfterFocusKeyword: RankMathAfterFocusKeyword,
+			AdvancedTab: RankMathAdvancedTab,
 		}
 	}
 

@@ -7,23 +7,22 @@ import { withDispatch, withSelect } from '@wordpress/data'
 /**
  * Internal dependencies
  */
-import { IconButton } from '@helpers/deprecated'
 import classnames from 'classnames'
 
 const PreviewDevices = ( { type, updatePreviewType } ) => {
 	const desktopClassess = classnames(
 		'button button-secondary button-small',
-		{ 'active': 'desktop' === type }
+		{ active: 'desktop' === type }
 	)
 	const mobileClassess = classnames(
 		'button button-secondary button-small',
-		{ 'active': 'mobile' === type }
+		{ active: 'mobile' === type }
 	)
 	return (
 		<div className="rank-math-button-devices alignright">
 			<div
 				onClick={ () => updatePreviewType( 'desktop' ) }
-				className= { desktopClassess }
+				className={ desktopClassess }
 			>
 				<i className="rm-icon rm-icon-desktop"></i>
 			</div>

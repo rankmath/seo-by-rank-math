@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, debounce, forEach, isEmpty, isInteger, isUndefined } from 'lodash'
+import { get, map, debounce, forEach, isEmpty, isInteger, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -36,6 +36,13 @@ class DataCollector {
 	 * @type {boolean}
 	 */
 	isSavingRedirection = false
+
+	/**
+	 * Saving schemas
+	 *
+	 * @type {boolean}
+	 */
+	isSavingSchemas = false
 
 	/**
 	 * Old slug.
@@ -264,7 +271,50 @@ class DataCollector {
 				this.saveRedirection()
 				this.autoCreateRedirectionNotice()
 			}
+
+			this.saveSchemas()
 		}
+	}
+
+	saveSchemas() {
+		if ( this.isSavingSchemas ) {
+			return
+		}
+
+		const schemas = select( 'rank-math' ).getSchemas()
+		if ( isEmpty( schemas ) ) {
+			return
+		}
+
+		this.isSavingSchemas = true
+
+		const editSchemas = select( 'rank-math' ).getEditSchemas()
+		apiFetch( {
+			method: 'POST',
+			path: 'rankmath/v1/updateSchemas',
+			data: {
+				objectID: this.getPostID(),
+				objectType: rankMath.objectType,
+				schemas,
+			},
+		} ).then( ( response ) => {
+			if ( ! isEmpty( response ) ) {
+				const newSchemas = { ...schemas }
+				const newEditSchemas = { ...editSchemas }
+				map( response, ( metaId, schemaId ) => {
+					newSchemas[ 'schema-' + metaId ] = { ...newSchemas[ schemaId ] }
+					newEditSchemas[ 'schema-' + metaId ] = { ...newEditSchemas[ schemaId ] }
+					delete newSchemas[ schemaId ]
+					delete newEditSchemas[ schemaId ]
+				} )
+
+				dispatch( 'rank-math' ).updateSchemas( newSchemas )
+				dispatch( 'rank-math' ).updateEditSchemas( newEditSchemas )
+			}
+			setTimeout( () => {
+				this.isSavingSchemas = false
+			}, 2000 )
+		} )
 	}
 
 	/**

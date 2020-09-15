@@ -13,6 +13,8 @@ namespace RankMath\Admin\Importers;
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Redirections\Redirection;
+use RankMath\Schema\JsonLD;
+use RankMath\Schema\Singular;
 use MyThemeShop\Helpers\DB;
 
 defined( 'ABSPATH' ) || exit;
@@ -49,6 +51,20 @@ class SEOPress extends Plugin_Importer {
 	 * @var array
 	 */
 	protected $choices = [ 'settings', 'postmeta', 'termmeta', 'redirections' ];
+
+	/**
+	 * JsonLD.
+	 *
+	 * @var JsonLD
+	 */
+	private $json_ld;
+
+	/**
+	 * Singular.
+	 *
+	 * @var Singular
+	 */
+	private $single;
 
 	/**
 	 * Convert SEOPress variables if needed.
@@ -176,6 +192,10 @@ class SEOPress extends Plugin_Importer {
 			'_seopress_social_twitter_img'   => 'rank_math_twitter_image',
 			'_seopress_robots_breadcrumbs'   => 'rank_math_breadcrumb_title',
 		];
+
+		// Set Converter.
+		$this->json_ld = new JsonLD();
+		$this->single  = new Singular();
 
 		foreach ( $post_ids as $post ) {
 			$post_id = $post->ID;
@@ -576,6 +596,18 @@ class SEOPress extends Plugin_Importer {
 				}
 
 				update_post_meta( $post_id, "rank_math_snippet_{$data}", $value );
+			}
+
+			// Convert post now.
+			$data = $this->json_ld->get_old_schema( $post_id, $this->single );
+			if ( isset( $data['richSnippet'] ) ) {
+				$data             = $data['richSnippet'];
+				$type             = $data['@type'];
+				$data['metadata'] = [
+					'title' => $type,
+					'type'  => 'template',
+				];
+				update_post_meta( $post_id, 'rank_math_schema_' . $type, $data );
 			}
 		}
 	}

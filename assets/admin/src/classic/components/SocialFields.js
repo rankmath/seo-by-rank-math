@@ -172,7 +172,8 @@ class SocialFields {
 
 		// Use Facebook data for Twitter
 		const useFacebook = $( '#rank_math_twitter_use_facebook' )
-		useFacebook.on( 'input change', () => {
+		useFacebook
+			.on( 'input change', () => {
 				this.useFacebook = useFacebook.is( ':checked' )
 				this.updatePreview()
 			} )

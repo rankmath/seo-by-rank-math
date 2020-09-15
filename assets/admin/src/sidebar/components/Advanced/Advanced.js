@@ -13,6 +13,7 @@ import Canonical from './Canonical'
 import Breadcrumb from './Breadcrumb'
 import AdvancedRobots from './AdvancedRobots'
 import FrontEndScore from './FrontEndScore'
+import RankMathAdvancedTab from '@slots/AdvancedTab'
 
 const AdvancedTab = () => (
 	<Fragment>
@@ -45,6 +46,16 @@ const AdvancedTab = () => (
 				<FrontEndScore />
 			</PanelBody>
 		) }
+
+		<RankMathAdvancedTab.Slot>
+			{ ( fills ) => {
+				if ( fills.length > 0 ) {
+					return fills
+				}
+
+				return []
+			} }
+		</RankMathAdvancedTab.Slot>
 	</Fragment>
 )
 

@@ -34,7 +34,7 @@
 	}
 }
 
-.rank-math-block {
+div.rank-math-block {
 	padding: 30px 15px;
 	border-radius: 5px;
 	background: #f3f4f5;
@@ -55,7 +55,7 @@
 			color: #6a1b1a;
 			background: #f1dada;
 
-			&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+			&:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 				&:active,
 				&:focus,
 				&:hover {
@@ -66,12 +66,16 @@
 				}
 			}
 
+			svg {
+				vertical-align: top;
+			}
+
 			&.rank-math-item-visbility {
 				margin-right: 10px;
 				color: #2f7a36;
 				background: #d0ecd3;
 
-				&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+				&:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 					&:active,
 					&:focus,
 					&:hover {
@@ -89,7 +93,7 @@
 		border-color: $primary-border-color;
 		background: $primary;
 
-		&:not(:disabled):not([aria-disabled=true]):hover {
+		&:hover {
 			border-color: $primary-hover-border-color;
 			background: $primary-hover;
 		}

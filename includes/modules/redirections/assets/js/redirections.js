@@ -13,6 +13,7 @@
 				this.wrap = $( '.rank-math-redirections-wrap' )
 
 				this.addNew()
+				this.importExport()
 				this.showMore()
 				this.columnActions()
 				this.validateForm()
@@ -30,8 +31,11 @@
 					function( event ) {
 						event.preventDefault()
 						const form = self.wrap.find(
-							'.rank-math-redirections-form'
+							'.rank-math-editcreate-form'
 						)
+
+						self.wrap.find('.rank-math-importexport-form').hide()
+
 						if ( form.is( ':visible' ) ) {
 							form.hide()
 							return
@@ -71,15 +75,35 @@
 					event.preventDefault()
 
 					const $this = $( this )
-					$this.closest( '.rank-math-redirections-form' ).hide()
+					$this.closest( '.rank-math-editcreate-form' ).hide()
 				} )
+			},
+
+			importExport() {
+				const self = this,
+					page = $( 'html, body' )
+
+				this.wrap.on(
+					'click',
+					'.rank-math-redirections-import_export',
+					function( event ) {
+						event.preventDefault()
+						const form = self.wrap.find(
+							'.rank-math-importexport-form'
+						)
+
+						self.wrap.find('.rank-math-editcreate-form').hide()
+
+						form.slideToggle( 200 )
+					}
+				)
 			},
 
 			validateForm() {
 				const buttonPrimary = $(
-					'.rank-math-redirections-form .button-primary'
+					'.rank-math-editcreate-form .button-primary'
 				)
-				$( '.rank-math-redirections-form > .cmb-form' ).on(
+				$( '.rank-math-editcreate-form > .cmb-form' ).on(
 					'submit',
 					function( event ) {
 						let form = $( this ),

@@ -29,15 +29,15 @@ import Inspector from './inspector'
 import generateId from '@helpers/generateId'
 import MediaUploader from '@blocks/shared/MediaUploader'
 
+/**
+ * HowTo block edit component.
+ */
 class Edit extends Component {
-	constructor() {
-		super( ...arguments )
-		this.addNew = this.addNew.bind( this )
-		this.removeImage = this.removeImage.bind( this )
-		this.onSelectImage = this.onSelectImage.bind( this )
-		this.toggleDuration = this.toggleDuration.bind( this )
-	}
-
+	/**
+	 * Renders the component.
+	 *
+	 * @return {Component} HowTo block editor.
+	 */
 	render() {
 		const { className, isSelected, attributes, setAttributes } = this.props
 		const { imageID, mainSizeSlug, textAlign } = attributes
@@ -191,6 +191,11 @@ class Edit extends Component {
 		)
 	}
 
+	/**
+	 * Render Steps component.
+	 *
+	 * @return {Array} Array of step editor.
+	 */
 	renderSteps() {
 		const {
 			steps,
@@ -223,7 +228,10 @@ class Edit extends Component {
 		} )
 	}
 
-	addNew() {
+	/**
+	 * Add an empty Step into block.
+	 */
+	addNew = () => {
 		const { steps } = this.props.attributes
 		const newSteps = isEmpty( steps ) ? [] : [ ...steps ]
 		newSteps.push( {
@@ -236,19 +244,30 @@ class Edit extends Component {
 		this.props.setAttributes( { steps: newSteps } )
 	}
 
-	toggleDuration() {
+	/**
+	 * Toggle duration form visibility.
+	 */
+	toggleDuration = () => {
 		this.props.setAttributes( {
 			hasDuration: ! this.props.attributes.hasDuration,
 		} )
 	}
 
-	onSelectImage( image ) {
+	/**
+	 * When an image selected.
+	 *
+	 * @param {Object} image Seelected image object.
+	 */
+	onSelectImage = ( image ) => {
 		const { setAttributes } = this.props
 
 		setAttributes( { imageID: image.id } )
 	}
 
-	removeImage() {
+	/**
+	 * Remove image from step.
+	 */
+	removeImage = () => {
 		const { setAttributes } = this.props
 
 		setAttributes( { imageID: 0 } )

@@ -103,6 +103,10 @@ class Paper {
 			}
 		}
 
+		if ( ! method_exists( $this->paper, 'set_object' ) ) {
+			return;
+		}
+
 		if ( Post::is_home_static_page() ) {
 			$this->paper->set_object( get_queried_object() );
 		} elseif ( Post::is_simple_page() ) {

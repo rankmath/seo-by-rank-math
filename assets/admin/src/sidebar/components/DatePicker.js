@@ -33,7 +33,7 @@ const EnhancedDatePicker = ( {
 			) }
 			renderContent={ () => (
 				<DatePicker
-					currentDate={ value }
+					currentDate={ value.split( 'T' )[ 0 ] }
 					onChange={ ( date ) => {
 						onChange( date.split( 'T' )[ 0 ] )
 					} }

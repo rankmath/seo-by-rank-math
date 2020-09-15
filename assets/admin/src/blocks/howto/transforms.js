@@ -2,8 +2,17 @@
  * WordPress dependencies
  */
 import { createBlock } from '@wordpress/blocks'
+
+/**
+ * Internal dependencies
+ */
 import generateId from '@helpers/generateId'
 
+/**
+ * Transform yoast howto block.
+ *
+ * @type {Array}
+ */
 export default {
 	from: [
 		{

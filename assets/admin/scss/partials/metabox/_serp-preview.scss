@@ -298,6 +298,21 @@
 	}
 }
 
+.#{$namespace}-serp-fields-wrapper {
+	> .cmb-row {
+		position: relative;
+		margin-top: 12px;
+		padding: 20px 15px !important;
+		border-radius: 4px;
+		background: #f3f5f6;
+
+		.cmb-th, .cmb-td {
+			width: 100%;
+			margin-top: 3px;
+		}
+	}
+}
+
 // Length Indicator
 @import 'length-indicator';
 

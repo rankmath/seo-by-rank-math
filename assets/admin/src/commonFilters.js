@@ -31,14 +31,17 @@ class CommonFilters {
 	contentLength( data ) {
 		return {
 			hasScore: data.hasScore,
+			// translators: contet length
 			failed: __(
-				'Content is %1$d words long. Consider using at least 300 words.'
+				'Content is %1$d words long. Consider using at least 300 words.',
+				'rank-math'
 			),
 			tooltipText: __(
 				'Minimum recommended content length should be 300 words.',
 				'rank-math'
 			),
 			emptyContent: sprintf(
+				// translators: contet length
 				__( 'Content should be %1$s long.', 'rank-math' ),
 				'<a href="https://s.rankmath.com/100contentlength" target="_blank">' +
 					__( '300 words', 'rank-math' ) +
@@ -50,10 +53,9 @@ class CommonFilters {
 	/**
 	 * Change recommended content length boundaries on homepage.
 	 *
-	 * @param  {Object} data Contnt Length Boundaries.
 	 * @return {Object} Contnt Length Boundaries
 	 */
-	contentLengthBoundary( data ) {
+	contentLengthBoundary() {
 		return {
 			recommended: {
 				boundary: 299,

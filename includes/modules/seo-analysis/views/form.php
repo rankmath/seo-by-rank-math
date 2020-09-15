@@ -34,7 +34,7 @@ $analyzer = Helper::get_module( 'seo-analysis' )->admin->analyzer;
 
 	<div class="progress-bar">
 		<div class="progress"></div>
-		<label><span>0%</span> <?php esc_html_e( 'Complete', 'rank-math' ); ?></label>
+		<div class="progress-text"><span>0%</span> <?php esc_html_e( 'Complete', 'rank-math' ); ?></div>
 	</div>
 
 </div>

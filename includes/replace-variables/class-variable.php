@@ -174,7 +174,7 @@ class Variable {
 	public function run_callback( $var_args, $args = [] ) {
 		rank_math()->variables->set_arguments( $args );
 
-		$value = ! empty( $this->callback ) ? call_user_func( $this->callback, $var_args ) :
+		$value = ! empty( $this->callback ) ? call_user_func( $this->callback, $var_args, $args ) :
 			apply_filters( 'rank_math/vars/' . $this->get_id(), $var_args, $this );
 
 		rank_math()->variables->reset_arguments();

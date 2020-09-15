@@ -11,6 +11,7 @@ import { doAction } from '@wordpress/hooks'
 /**
  * Internal dependencies
  */
+import './helpers'
 import { getStore } from './redux/store'
 import Assessor from './sidebar/Assessor'
 import CommonFilters from './commonFilters'

@@ -12,14 +12,23 @@
 	.components-modal__content {
 		padding: 0;
 	}
+	
+	.components-panel__body {
+		border: 0;
+	}
 
 	.components-modal__header {
 		height: 51px;
 		margin: 0;
 		padding: 0 17px;
+		border-bottom: 1px solid $light_gray;
 
 		.components-modal__header-heading {
 			font-size: 14px;
+		}
+
+		button {
+			padding: 0 10px;
 		}
 	}
 }

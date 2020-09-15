@@ -46,6 +46,7 @@ const SnippetEditor = ( {
 	if ( rankMath.showReviewTab && false === rankMath.pluginReviewed ) {
 		tabs.push( {
 			name: 'review',
+			className: 'review-tab',
 			title: (
 				<Fragment>
 					<i className="rm-icon rm-icon-heart-filled"></i>
@@ -59,7 +60,6 @@ const SnippetEditor = ( {
 		<Fragment>
 			<Button
 				isPrimary
-				isLarge
 				className="rank-math-edit-snippet"
 				onClick={ toggleEditor }
 			>

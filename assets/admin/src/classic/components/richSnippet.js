@@ -3,6 +3,11 @@
  */
 import $ from 'jquery'
 
+/**
+ * Internal dependencies
+ */
+import { getSnippetIcon } from '@helpers/snippetIcon'
+
 class richSnippet {
 	/**
 	 * Class constructor
@@ -12,26 +17,8 @@ class richSnippet {
 			return
 		}
 
-		const classHash = {
-			off: 'rm-icon-misc',
-			article: 'rm-icon-post',
-			book: 'rm-icon-book',
-			course: 'rm-icon-course',
-			event: 'rm-icon-calendar',
-			jobposting: 'rm-icon-job',
-			local: 'rm-icon-local-seo',
-			music: 'rm-icon-music',
-			product: 'rm-icon-cart',
-			recipe: 'rm-icon-recipe',
-			restaurant: 'rm-icon-restaurant',
-			video: 'rm-icon-video',
-			person: 'rm-icon-users',
-			review: 'rm-icon-star',
-			service: 'rm-icon-service',
-			software: 'rm-icon-software',
-		}
 		const icon = $(
-			'.rank-math-tabs-navigation a[href="#setting-panel-richsnippet"] .dashicons'
+			'.rank-math-tabs-navigation a[href="#setting-panel-schema"] .dashicons'
 		)
 
 		const wpaiors = $( '#_bsf_post_type' )
@@ -47,7 +34,7 @@ class richSnippet {
 							'input[type="radio"][name="rank_math_rich_snippet"]:checked'
 						).val()
 
-				icon.removeClass().addClass( 'rm-icon ' + classHash[ value ] )
+				icon.removeClass().addClass( getSnippetIcon( value ) )
 
 				if ( wpaiors.length && 'off' !== value ) {
 					wpaiors.val( '0' ).trigger( 'change' )

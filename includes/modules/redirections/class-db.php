@@ -88,6 +88,8 @@ class DB {
 			$table->orderBy( $args['orderby'], $args['order'] );
 		}
 
+		do_action_ref_array( 'rank_math/redirection/get_redirections_query', [ &$table, $args ] );
+
 		$redirections = $table->get( ARRAY_A );
 		$count        = $table->get_found_rows();
 

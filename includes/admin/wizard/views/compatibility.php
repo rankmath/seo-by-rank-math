@@ -16,13 +16,12 @@ $php_version           = phpversion();
 $php_version_ok        = version_compare( $php_version, rank_math()->php_version, '>' );
 $php_version_recommend = version_compare( $php_version, '7', '<' );
 
-$wp_version_ok = version_compare( $wp_version, rank_math()->wordpress_version, '>' );
 $dom_ext       = extension_loaded( 'dom' );
 $simplexml_ext = extension_loaded( 'SimpleXML' );
 $gd_ext        = extension_loaded( 'gd' );
 $mb_string     = extension_loaded( 'mbstring' );
 $openssl       = extension_loaded( 'openssl' );
-$all_good      = $php_version_ok && $wp_version_ok && $dom_ext && $simplexml_ext && $gd_ext && $mb_string && $openssl;
+$all_good      = $php_version_ok && $dom_ext && $simplexml_ext && $gd_ext && $mb_string && $openssl;
 
 ?>
 
@@ -70,17 +69,13 @@ if ( $all_good ) :
 			</th>
 			<td><span class="dashicons dashicons-<?php echo $php_version_ok ? ( $php_version_recommend ? 'warning' : 'yes' ) : 'no'; ?>"></span></td>
 		</tr>
-		<tr class="check-<?php echo $wp_version_ok ? 'yes' : 'no'; ?>">
+		<tr class="check-yes">
 			<th>
 				<?php
-				echo $wp_version_ok ?
-					/* translators: WordPress version */
-					sprintf( esc_html__( 'WordPress Version: %s', 'rank-math' ), $wp_version ) :
-					/* translators: WordPress version */
-					( is_multisite() ? '' : '<a href="' . admin_url( 'update-core.php' ) . '">' ) . sprintf( esc_html__( 'Your WordPress Version: %s | Recommended version: 4.4+', 'rank-math' ), $wp_version ) . ( is_multisite() ? '' : '</a>' );
+				echo esc_html__( 'You are using minimum recommended WordPress version.', 'rank-math' );
 				?>
 			</th>
-			<td><span class="dashicons dashicons-<?php echo $wp_version_ok ? 'yes' : 'no'; ?>"></span></td>
+			<td><span class="dashicons dashicons-yes"></span></td>
 		</tr>
 		<tr class="check-<?php echo $dom_ext ? 'yes' : 'no'; ?>">
 			<th>

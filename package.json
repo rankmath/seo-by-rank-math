@@ -1,21 +1,21 @@
 {
 	"name": "rank-math",
-	"version": "1.0.33",
-	"description": "Development files for the SEO by Rank Math plugin",
-	"author": "",
+	"version": "1.0.0",
+	"description": "Rank Math is the Swiss Army knife of SEO tools for WordPress. It gives you complete control over your entire website’s on-page SEO.",
+	"author": "Rank Math",
 	"license": "GPL-2.0+",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/MyThemeShopTeam/rank-math.git"
 	},
 	"plugin": {
-		"glotpress": "https://translate.wordpress.org/projects/wp-plugins/seo-by-rank-math/",
+		"glotpress": "http://translate.wordpress.org",
 		"textdomain": "rank-math"
 	},
 	"pot": {
 		"reportmsgidbugsto": "https://wordpress.org/support/plugin/seo-by-rank-math/",
-		"languageteam": "Rank Math Team <support@rankmath.com>",
-		"lasttranslator": "Rank Math Team <support@rankmath.com>"
+		"languageteam": "Rank Math <support@rankmath.com>",
+		"lasttranslator": "Rank Math <support@rankmath.com>"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.11.4",
@@ -55,7 +55,7 @@
 		"@wordpress/autop": "^2.9.0",
 		"interpolate-components": "^1.1.1",
 		"lodash": "^4.17.20",
-		"npm": "^6.14.7",
+		"npm": "^6.14.8",
 		"parse-english": "^4.1.1"
 	},
 	"scripts": {

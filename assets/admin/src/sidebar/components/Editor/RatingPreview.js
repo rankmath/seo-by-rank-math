@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { includes, get, isEmpty } from 'lodash'
+import { includes, get, isEmpty, find } from 'lodash'
 import { __ } from '@wordpress/i18n'
 
 /**
@@ -35,23 +35,19 @@ const RenderStars = ( rating, min, max ) => {
 	)
 }
 
-const RatingPreview = ( { type, data } ) => {
-	if (
-		! includes(
-			[ 'book', 'course', 'event', 'product', 'recipe', 'software' ],
-			type
-		)
-	) {
+const RatingPreview = ( { schema } ) => {
+	if ( isEmpty( schema ) ) {
 		return null
 	}
 
-	const rating = get( data, type + 'Rating' )
+	const reviewRating = get( schema, 'review.reviewRating', {} )
+	const rating = reviewRating.ratingValue
 	if ( isEmpty( rating ) ) {
 		return null
 	}
 
-	const max = get( data, type + 'RatingMax' )
-	const min = get( data, type + 'RatingMin' )
+	const min = get( reviewRating, 'worstRating', 1 )
+	const max = get( reviewRating, 'bestRating', 5 )
 
 	return (
 		<div className="rank-math-rating-preview">
@@ -68,10 +64,10 @@ const RatingPreview = ( { type, data } ) => {
 }
 
 export default withSelect( ( select ) => {
-	const data = select( 'rank-math' ).getRichSnippets()
+	const schemas = select( 'rank-math' ).getSchemas()
+	const found = find( schemas, ( schema ) => {
+		return includes( [ 'Book', 'Course', 'Product', 'Recipe', 'Software' ], schema[ '@type' ] )
+	} )
 
-	return {
-		type: data.snippetType,
-		data,
-	}
+	return { schema: found }
 } )( RatingPreview )

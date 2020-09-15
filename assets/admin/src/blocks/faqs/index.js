@@ -12,6 +12,9 @@ import edit from './components/edit'
 import transforms from './transforms'
 import save from './components/save'
 
+/**
+ * Register faq block
+ */
 export default () => {
 	const keywords = [
 		__( 'FAQ', 'rank-math' ),

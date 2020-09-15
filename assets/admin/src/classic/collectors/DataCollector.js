@@ -198,7 +198,7 @@ class DataCollector {
 	}
 
 	isTinymce() {
-		return 'undefined' !== typeof( tinymce )
+		return ! isUndefined( tinymce )
 	}
 }
 

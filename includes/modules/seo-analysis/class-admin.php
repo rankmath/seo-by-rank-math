@@ -51,7 +51,7 @@ class Admin extends Base {
 			'rank-math-seo-analysis',
 			esc_html__( 'SEO Analysis', 'rank-math' ),
 			[
-				'position'   => 12,
+				'position'   => 60,
 				'parent'     => 'rank-math',
 				'capability' => 'rank_math_site_analysis',
 				'classes'    => [ 'rank-math-page' ],

@@ -11,6 +11,9 @@ import { ServerSideRender, TextControl } from '@wordpress/components'
  */
 import icon from '@blocks/icon'
 
+/**
+ * Register schema snippet block.
+ */
 export default () => {
 	const keywords = [
 		__( 'Schema', 'rank-math' ),

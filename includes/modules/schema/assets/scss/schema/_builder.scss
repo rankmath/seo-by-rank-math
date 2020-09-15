@@ -1,0 +1,437 @@
+// main: ../schema.scss
+.schema-builder {
+    font-size: 14px;
+    line-height: 1.25;
+
+    // Pre-defined Templates.
+    &.schema-template-pre-defined {
+        .schema-group--actions {
+            display: none;
+        }
+
+        .schema-group-or-property-container {
+            > .schema-group-or-property {
+                &:before {
+                    top: -21px;
+
+                    border-width: 0 0 2px 2px;
+                }
+            }
+        }
+
+        .schema-group--children {
+            > .no-array-map {
+                > .schema-group-or-property {
+                    padding: 8px 0 0;
+
+                    border: 0;
+                    background: transparent;
+
+                    &:before,
+                    &:after {
+                        left: -13px;
+
+                        width: 16px;
+                    }
+
+                    > .schema-group-header {
+                        @extend %flex;
+                        justify-content: space-between;
+
+                        > .schema-group--actions {
+                            button {
+                                display: none;
+
+                                &.rank-math-add-property {
+                                    display: inline-flex;
+
+                                    padding-right: 0;
+
+                                    border-right: 0!important;
+                                }
+                            }
+                        }
+                    }
+
+                    .schema-property--body .schema-property--field {
+                        display: none;
+                    }
+                }
+            }
+
+            .hide-group-header > .schema-group {
+                padding: 0;
+
+                border: 0;
+                background: transparent;
+
+                &:before {
+                    display: none;
+                }
+
+                &:after {
+                    left: -13px;
+                }
+
+                > .schema-group-header {
+                    display: none;
+                }
+
+                > .schema-group--children {
+                    > .schema-group-or-property-container > .schema-group-or-property {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+
+        .is-array:not(.no-array-map) .schema-group {
+            > .schema-group-header {
+                @extend %flex;
+                justify-content: space-between;
+
+                > .schema-group--actions {
+                    display: flex;
+
+                    button {
+                        display: none;
+
+                        &.rank-math-add-property-group {
+                            display: inline-flex;
+
+                            padding-right: 0;
+
+                            border-right: 0!important;
+                        }
+                    }
+                }
+            }
+
+            .schema-group > .schema-group-header > .schema-group--actions {
+                margin-bottom: 0;
+
+                button {
+                    display: none;
+                }
+
+                button.rank-math-delete-group {
+                    display: inline-flex;
+                }
+            }
+
+            .schema-group--children:empty {
+                display: none;
+
+                &:before {
+                    display: none;
+                }
+            }
+        }
+
+        button.is-destructive {
+            // opacity: 0;
+            display: none;
+        }
+
+        .hide-property,
+        .hide-group {
+            display: none;
+        }
+
+        .show-property {
+            display: block;
+        }
+
+        &:not(.local-person) .article-notice {
+            display: none;
+        }
+    }
+
+    // Group.
+    .schema-group {
+        &--children {
+            margin: 0 0 5px;
+            padding-top: 10px;
+
+            flex: 1;
+
+            > .schema-group-or-property-container {
+                > .schema-group-or-property {
+                    margin-bottom: 10px;
+                    margin-left: 1rem;
+                    padding: 10px;
+
+                    border: 1px solid $light_gray;
+                    border-radius: 4px;
+                    background: #f8f9fa;
+
+                    &:before {
+                        top: -11px;
+
+                        border-width: 0 0 2px 2px;
+                    }
+
+                    &::after {
+                        top: 50%;
+
+                        border-width: 0 0 0 2px;
+                    }
+
+                    &::before,
+                    &::after {
+                        position: absolute;
+                        left: -14px;
+
+                        box-sizing: border-box;
+                        width: 14px;
+                        height: calc(50% + 14px);
+
+                        content: '';
+
+                        border-style: solid;
+                        border-color: $light_gray;
+                    }
+
+                    input[type='text'],
+                    input[type='number'],
+                    textarea {
+                        &:hover {
+                            border-color: $primary;
+                        }
+
+                        &:focus {
+                            border-color: $primary;
+                            box-shadow: 0 0 0 1px $primary;
+                        }
+                    }
+
+                    .components-notice {
+                        margin-top: 1rem;
+                        margin-left: 0;
+                    }
+                }
+
+                &:first-child > .schema-group-or-property::before {
+                    top: -13px;
+
+                    height: calc(50% + 13px);
+                }
+
+                &:last-child > .schema-group-or-property {
+                    &::before {
+                        border-radius: 0 0 0 4px;
+                    }
+
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &-or-property {
+            position: relative;
+
+            border-radius: 5px;
+        }
+
+        &--actions {
+            display: flex;
+
+            margin-left: 10px;
+
+            flex: 1;
+
+            button.button {
+                height: 22px;
+            }
+        }
+
+        &--actions--tr {
+            margin-bottom: 10px;
+
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .components-base-control {
+            .components-base-control__field {
+                margin-bottom: 0;
+            }
+
+            &.components-toggle-control .components-base-control__field {
+                margin-bottom: 5px;
+
+                label {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+
+    // Property.
+    .schema-property {
+        margin-bottom: 15px;
+
+        &--body {
+            @extend %flex;
+        }
+
+        &--label {
+            font-weight: 600;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        &--field {
+            font-weight: 600;
+
+            display: inline-block;
+
+            margin-right: 10px;
+        }
+
+        &--value {
+            flex: 1;
+
+            label span {
+                color: $status-bad;
+            }
+
+            div:not(.components-radio-control__option) > label {
+                font-weight: 600;
+
+                margin-bottom: 6px;
+            }
+
+            .components-select-control__input {
+                display: block;
+            }
+
+            .components-base-control__help {
+                font-size: 14px;
+                font-style: normal;
+
+                margin-bottom: 0;
+                padding-top: 10px;
+
+                color: $dark_gray;
+            }
+        }
+
+        input[type='text'] {
+            width: 100%;
+        }
+
+        textarea {
+            line-height: 1.42857143;
+
+            min-height: 30px;
+            padding: 4px 8px;
+
+            &:disabled {
+                color: inherit;
+                background: $light-gray;
+            }
+        }
+
+        &--header {
+            > div {
+                display: inline-block;
+            }
+
+            button.button.is-secondary {
+                display: none;
+                line-height: 30px;
+
+                width: 32px;
+                height: 30px;
+                padding: 0 6px;
+
+                margin-left: 10px;
+
+                text-align: center;
+                text-decoration: none;
+
+                border-color: #7e8993;
+                border-radius: 3px;
+                background: #fff;
+
+                &:hover,
+                &:focus {
+                    color: $error;
+                    border-color: $error;
+                    background: #fff;
+                    box-shadow: none;
+                }
+            }
+
+            > button:first-child {
+                display: inline-block;
+
+                i {
+                    font-size: 16px;
+
+                    vertical-align: middle;
+                }
+
+                &:hover,
+                &:focus {
+                    color: $primary;
+                    border-color: $primary;
+                }
+            }
+        }
+    }
+
+    &-save-as {
+        margin-top: 1.5rem;
+
+        @extend %flex;
+    }
+}
+
+.#{$namespace}-datepicker {
+
+    &__dialog {
+        position: absolute;
+        margin-top: -2px;
+
+        .components-popover {
+            &__content {
+                padding: 0;
+
+                button.is-secondary {
+                    height: 26px;
+                    line-height: 26px;
+                }
+
+                .components-datetime__date {
+                    border-top: 0;
+                    padding-left: 0;
+
+                    .CalendarMonth {
+                        padding: 0!important;
+                    }
+                }
+            }
+        }
+    }
+
+    > button.components-button {
+        line-height: 26px;
+
+        height: 26px;
+        margin: -7px 0 0 0;
+        padding: 0 8px;
+
+        border: 0;
+        background: transparent;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}

@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.47.1
+ * Version:           1.0.48-beta
  * Plugin URI:        https://s.rankmath.com/home
  * Description:       Rank Math is a revolutionary SEO product that combines the features of many SEO tools and lets you multiply your traffic in the easiest way possible.
  * Author:            Rank Math
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.47.1';
+	public $version = '1.0.48-beta';
 
 	/**
 	 * Rank Math database version.
@@ -48,7 +48,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	private $wordpress_version = '4.9';
+	private $wordpress_version = '5.2';
 
 	/**
 	 * Minimum version of PHP required to run Rank Math.
@@ -62,14 +62,14 @@ final class RankMath {
 	 *
 	 * @var array
 	 */
-	private $container = [];
+	private $container = array();
 
 	/**
 	 * Hold install error messages.
 	 *
 	 * @var bool
 	 */
-	private $messages = [];
+	private $messages = array();
 
 	/**
 	 * The single instance of the class.
@@ -129,13 +129,13 @@ final class RankMath {
 	 * @return mixed Return value of the callback.
 	 */
 	public function __call( $name, $arguments ) {
-		$hash = [
+		$hash = array(
 			'plugin_dir'   => RANK_MATH_PATH,
 			'plugin_url'   => RANK_MATH_URL,
 			'includes_dir' => RANK_MATH_PATH . 'includes/',
 			'assets'       => RANK_MATH_URL . 'assets/front/',
 			'admin_dir'    => RANK_MATH_PATH . 'includes/admin/',
-		];
+		);
 
 		if ( isset( $hash[ $name ] ) ) {
 			return $hash[ $name ];
@@ -201,7 +201,7 @@ final class RankMath {
 		// Check WordPress version.
 		if ( version_compare( get_bloginfo( 'version' ), $this->wordpress_version, '<' ) ) {
 			/* translators: WordPress Version */
-			$this->messages[] = sprintf( esc_html__( 'Rank Math requires WordPress version %s or above. Please update WordPress to run this plugin.', 'rank-math' ), $this->wordpress_version );
+			$this->messages[] = sprintf( esc_html__( 'You are using the outdated WordPress, please update it to version %s or higher.', 'rank-math' ), $this->wordpress_version );
 		}
 
 		// Check PHP version.
@@ -215,8 +215,8 @@ final class RankMath {
 		}
 
 		// Auto-deactivate plugin.
-		add_action( 'admin_init', [ $this, 'auto_deactivate' ] );
-		add_action( 'admin_notices', [ $this, 'activation_error' ] );
+		add_action( 'admin_init', array( $this, 'auto_deactivate' ) );
+		add_action( 'admin_notices', array( $this, 'activation_error' ) );
 
 		return false;
 	}
@@ -307,31 +307,31 @@ final class RankMath {
 	 */
 	private function init_actions() {
 
-		add_action( 'init', [ $this, 'localization_setup' ] );
-		add_filter( 'cron_schedules', [ $this, 'cron_schedules' ] );
+		add_action( 'init', array( $this, 'localization_setup' ) );
+		add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) );
 
 		// Add plugin action links.
-		add_filter( 'plugin_row_meta', [ $this, 'plugin_row_meta' ], 10, 2 );
-		add_filter( 'plugin_action_links_' . plugin_basename( RANK_MATH_FILE ), [ $this, 'plugin_action_links' ] );
+		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
+		add_filter( 'plugin_action_links_' . plugin_basename( RANK_MATH_FILE ), array( $this, 'plugin_action_links' ) );
 
 		// Booting.
-		add_action( 'plugins_loaded', [ $this, 'init' ], 14 );
-		add_action( 'rest_api_init', [ $this, 'init_rest_api' ] );
-		add_action( 'wp_login', [ $this, 'on_login' ] );
+		add_action( 'plugins_loaded', array( $this, 'init' ), 14 );
+		add_action( 'rest_api_init', array( $this, 'init_rest_api' ) );
+		add_action( 'wp_login', array( $this, 'on_login' ) );
 
 		// Load admin-related functionality.
 		if ( is_admin() ) {
-			add_action( 'plugins_loaded', [ $this, 'init_admin' ], 15 );
+			add_action( 'plugins_loaded', array( $this, 'init_admin' ), 15 );
 		}
 
 		// Frontend-only functionality.
-		if ( ! is_admin() || in_array( \MyThemeShop\Helpers\Param::request( 'action' ), [ 'elementor', 'elementor_ajax' ], true ) ) {
-			add_action( 'plugins_loaded', [ $this, 'init_frontend' ], 15 );
+		if ( ! is_admin() || in_array( \MyThemeShop\Helpers\Param::request( 'action' ), array( 'elementor', 'elementor_ajax' ), true ) ) {
+			add_action( 'plugins_loaded', array( $this, 'init_frontend' ), 15 );
 		}
 
 		// WP_CLI.
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
-			add_action( 'plugins_loaded', [ $this, 'init_wp_cli' ], 20 );
+			add_action( 'plugins_loaded', array( $this, 'init_wp_cli' ), 20 );
 		}
 	}
 
@@ -386,7 +386,7 @@ final class RankMath {
 	 * Add our custom WP-CLI commands.
 	 */
 	public function init_wp_cli() {
-		WP_CLI::add_command( 'rankmath sitemap generate', [ '\RankMath\CLI\Commands', 'sitemap_generate' ] );
+		WP_CLI::add_command( 'rankmath sitemap generate', array( '\RankMath\CLI\Commands', 'sitemap_generate' ) );
 	}
 
 	/**
@@ -434,10 +434,10 @@ final class RankMath {
 			return $links;
 		}
 
-		$more = [
+		$more = array(
 			'<a href="' . \RankMath\Helper::get_admin_url( 'help' ) . '">' . esc_html__( 'Getting Started', 'rank-math' ) . '</a>',
 			'<a href="https://s.rankmath.com/documentation">' . esc_html__( 'Documentation', 'rank-math' ) . '</a>',
-		];
+		);
 
 		return array_merge( $links, $more );
 	}

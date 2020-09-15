@@ -1,0 +1,50 @@
+// main: ../schema.scss
+
+%noselect {
+    @include noselect;
+}
+
+%clearfix {
+    @include clearfix;
+}
+
+%flex {
+    @include flex;
+}
+
+.#{$namespace}-schema-tabs {
+    overflow: visible;
+}
+
+.#{$namespace}-modal.#{$namespace}-schema-modal.#{$namespace}-schema-modal-no-map {
+    width: 80vw;
+}
+
+.#{$namespace}-schema-info {
+    font-size: 14px;
+    line-height: 30px;
+
+    position: absolute;
+    top: 62px;
+    right: 20px;
+
+    padding: 0 5px;
+
+    text-decoration: none;
+
+    color: inherit;
+    color: #78797a;
+    border-radius: 16px;
+    background: #ebeced;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+
+    svg {
+        vertical-align: -5px;
+    }
+
+    &:hover {
+        color: $text;
+        background: #dfe0e1;
+    }
+}

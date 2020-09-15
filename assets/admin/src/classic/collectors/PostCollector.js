@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import $ from 'jquery'
+import jQuery from 'jquery'
 import { debounce, isUndefined } from 'lodash'
 
 /**
@@ -16,11 +16,11 @@ import DataCollector from './DataCollector'
 
 class PostCollector extends DataCollector {
 	setup() {
-		this.elemSlug = $( '#post_name' )
-		this.elemTitle = $( '#title' )
-		this.elemDescription = $( '#excerpt' )
-		this.elemContent = $( '#content' )
-		this.editableName = $( '#editable-post-name-full' )
+		this.elemSlug = jQuery( '#post_name' )
+		this.elemTitle = jQuery( '#title' )
+		this.elemDescription = jQuery( '#excerpt' )
+		this.elemContent = jQuery( '#content' )
+		this.editableName = jQuery( '#editable-post-name-full' )
 
 		this.assessThumbnail = this.assessThumbnail.bind( this )
 		addAction(
@@ -70,7 +70,7 @@ class PostCollector extends DataCollector {
 			}, 500 )
 		)
 
-		$( window ).on( 'load', () => {
+		jQuery( window ).on( 'load', () => {
 			if ( ! this.isTinymce() ) {
 				return
 			}
@@ -99,7 +99,7 @@ class PostCollector extends DataCollector {
 		} )
 
 		// Update Permalink.
-		$( document ).on( 'ajaxComplete', ( event, response, ajaxOptions ) => {
+		jQuery( document ).on( 'ajaxComplete', ( event, response, ajaxOptions ) => {
 			const ajaxEndPoint = '/admin-ajax.php'
 			if (
 				ajaxEndPoint !==
@@ -117,7 +117,7 @@ class PostCollector extends DataCollector {
 					slug = this.elemTitle.val()
 				} else {
 					// Added divs to the response text, otherwise jQuery won't parse to HTML, but an array.
-					slug = $( '<div>' + response.responseText + '</div>' )
+					slug = jQuery( '<div>' + response.responseText + '</div>' )
 						.find( '#editable-post-name-full' )
 						.text()
 				}

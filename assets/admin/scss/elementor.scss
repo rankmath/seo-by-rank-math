@@ -15,7 +15,7 @@
 				background: #f8f9fa;
 				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), inset 0px 1px 1px rgba(0, 0, 0, 0.1);
 
-				button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+				button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 					height: 34px;
 					font-size: 11px;
 					line-height: 17px;
@@ -65,7 +65,7 @@
 			&-title {
 				margin: -16px;
 
-				button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+				button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 					color: #6d7882;
 				}
 
@@ -147,7 +147,7 @@
 				letter-spacing: 1px;
 			}
 
-			button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+			button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 				&:hover, &:active, &:focus {
 					background: #404349;
 					color: #fff;
@@ -159,7 +159,7 @@
 		// Tabs
 		.rank-math-tabs > .components-tab-panel {
 			&__tabs {
-				button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+				button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 					font-size: 13px;
 					text-transform: none;
 					height: 44px;

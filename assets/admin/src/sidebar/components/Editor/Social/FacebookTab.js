@@ -114,7 +114,7 @@ const FacebookTab = ( props ) => (
 export default compose(
 	withSelect( ( select ) => {
 		const repo = select( 'rank-math' )
-		const image = ( function() {
+		const image = ( () => {
 			if ( repo.getFacebookImage() ) {
 				return repo.getFacebookImage()
 			}

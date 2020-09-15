@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import $ from 'jquery'
+import jQuery from 'jquery'
 import { debounce, isUndefined } from 'lodash'
 
 /**
@@ -11,9 +11,9 @@ import DataCollector from './DataCollector'
 
 class TermCollector extends DataCollector {
 	setup() {
-		this.elemSlug = $( '#slug' )
-		this.elemTitle = $( '#name' )
-		this.elemDescription = $( '#rank_math_description_editor' )
+		this.elemSlug = jQuery( '#slug' )
+		this.elemTitle = jQuery( '#name' )
+		this.elemDescription = jQuery( '#rank_math_description_editor' )
 
 		this.events()
 	}
@@ -34,7 +34,7 @@ class TermCollector extends DataCollector {
 	}
 
 	events() {
-		$( window ).on( 'load', () => {
+		jQuery( window ).on( 'load', () => {
 			if (
 				this.isTinymce() &&
 				tinymce.activeEditor &&

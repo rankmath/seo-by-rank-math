@@ -36,6 +36,6 @@ blockHowTo()
 /**
  * Register Schema block.
  */
-if ( rankMath.canUser.snippet && ! isUndefined( rankMath.richSnippets ) ) {
+if ( rankMath.canUser.snippet && ! isUndefined( rankMath.schemas ) ) {
 	schemaSnippet()
 }

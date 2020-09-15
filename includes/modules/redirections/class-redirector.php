@@ -88,7 +88,7 @@ class Redirector {
 	 * Set the required values.
 	 */
 	private function start() {
-		$this->uri = str_replace( site_url( '/' ), '', Param::server( 'REQUEST_URI' ) );
+		$this->uri = str_replace( home_url( '/' ), '', Param::server( 'REQUEST_URI' ) );
 		$this->uri = urldecode( $this->uri );
 		$this->uri = trim( Redirection::strip_subdirectory( $this->uri ), '/' );
 
@@ -147,7 +147,7 @@ class Redirector {
 			$this->redirect_to .= '?' . $this->query_string;
 		}
 
-		if ( wp_redirect( esc_url_raw( $this->redirect_to ), $header_code, $this->get_redirect_header() ) ) {
+		if ( wp_safe_redirect( esc_url_raw( $this->redirect_to ), $header_code, $this->get_redirect_header() ) ) {
 			exit;
 		}
 		// @codeCoverageIgnoreEnd

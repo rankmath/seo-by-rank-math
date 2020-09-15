@@ -15,9 +15,10 @@ import { safeDecodeURIComponent } from '@wordpress/url'
  * Internal dependencies
  */
 import PreviewDevices from './PreviewDevices'
-import RatingPreview from './RatingPreview'
 import AnalysisScore from '@components/AnalysisScore'
 import highlight from '@helpers/highlight'
+import RatingPreview from './RatingPreview'
+import EventPreview from './EventPreview'
 
 const SerpPreview = ( {
 	title,
@@ -215,6 +216,9 @@ const SerpPreview = ( {
 							} }
 						></div>
 					</div>
+
+					<EventPreview />
+
 				</div>
 
 				<div className="serp-preview-noindex">

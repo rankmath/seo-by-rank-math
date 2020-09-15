@@ -8,20 +8,23 @@
     "packages": [
         {
             "name": "a5hleyrich/wp-background-processing",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/A5hleyRich/wp-background-processing.git",
-                "reference": "1f070aab5058dbaf45d5435a343033ddd8a641b1"
+                "url": "https://github.com/deliciousbrains/wp-background-processing.git",
+                "reference": "2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/A5hleyRich/wp-background-processing/zipball/1f070aab5058dbaf45d5435a343033ddd8a641b1",
-                "reference": "1f070aab5058dbaf45d5435a343033ddd8a641b1",
+                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800",
+                "reference": "2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2"
+            },
+            "suggest": {
+                "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
             },
             "type": "library",
             "autoload": {
@@ -31,16 +34,16 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-2.0-only"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
-                    "name": "Ashley Rich",
-                    "email": "hello@ashleyrich.com"
+                    "name": "Delicious Brains",
+                    "email": "nom@deliciousbrains.com"
                 }
             ],
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
-            "time": "2018-02-12T09:24:05+00:00"
+            "time": "2020-07-31T07:00:11+00:00"
         },
         {
             "name": "cmb2/cmb2",

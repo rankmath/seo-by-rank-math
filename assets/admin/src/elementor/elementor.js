@@ -19,6 +19,7 @@ import ElementorAddRegion from './AddRegion'
 import UIThemeComponent from './UIThemeComponent'
 import RankMathAfterEditor from '@slots/AfterEditor'
 import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
+import RankMathAdvancedTab from '@slots/AdvancedTab'
 
 const replaceMediaUpload = () => MediaUpload
 
@@ -41,6 +42,7 @@ class ElementorEditor extends Editor {
 	registerSlots() {
 		this.RankMathAfterEditor = RankMathAfterEditor
 		this.RankMathAfterFocusKeyword = RankMathAfterFocusKeyword
+		this.RankMathAdvancedTab = RankMathAdvancedTab
 	}
 
 	updatePermalink( slug ) {

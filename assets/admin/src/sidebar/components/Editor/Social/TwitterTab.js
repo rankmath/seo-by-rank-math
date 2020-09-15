@@ -92,6 +92,7 @@ const TwitterTab = ( props ) => (
 			<div className="notice notice-alt notice-info">
 				<p>
 					{ sprintf(
+						// translators: link to twitter doc
 						__(
 							'Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. Player Cards must be submitted for approval before they can be used. More information: ',
 							'rank-math'
@@ -106,6 +107,7 @@ const TwitterTab = ( props ) => (
 			<div className="notice notice-alt notice-info">
 				<p>
 					{ sprintf(
+						// translators: link to twitter doc
 						__(
 							'The App Card is a great way to represent mobile applications on Twitter and to drive installs. More information: ',
 							'rank-math'
@@ -184,7 +186,7 @@ export default compose(
 		const repo = select( 'rank-math' ),
 			useFacebook = repo.getTwitterUseFacebook()
 
-		const image = ( function() {
+		const image = ( () => {
 			if ( useFacebook && repo.getFacebookImage() ) {
 				return repo.getFacebookImage()
 			}

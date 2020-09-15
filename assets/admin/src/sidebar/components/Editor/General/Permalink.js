@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { debounce } from 'lodash'
 import { Helpers } from '@rankMath/analyzer'
 
 /**
@@ -49,7 +48,7 @@ const EditorPermalink = ( { permalink, serpPermalink, updatePermalink, updatePer
 						'rank-math'
 					)
 			}
-			disabled= { rankMath.is_front_page ? 'disabled' : '' }
+			disabled={ rankMath.is_front_page ? 'disabled' : '' }
 			onBlur={ ( event ) => {
 				updatePermalinkSanitize( event.target.value )
 			} }
@@ -66,7 +65,7 @@ export default compose(
 			serpPermalink: editor.getPermalink(),
 		}
 	} ),
-	withDispatch( ( dispatch ) => {
+	withDispatch( () => {
 		return {
 			updatePermalink( slug ) {
 				rankMathEditor.updatePermalink( Helpers.sanitizeText( slug ) )

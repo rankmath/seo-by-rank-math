@@ -4,7 +4,7 @@
 @import 'mixins';
 @import 'variables';
 
-@import "sidebar";
+@use "sidebar";
 
 // Dark Mode
 	.#{$namespace} {
@@ -17,7 +17,7 @@
 						color: inherit;
 					}
 
-					button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+					button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 						&.is-active {
 							color: #70d5f5;
 						}
@@ -66,7 +66,7 @@
 						background: #404349;
 						border-color: #34383c;
 
-						button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+						button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 							color: #e0e1e3;
 
 							&:hover {
@@ -77,7 +77,7 @@
 						.#{$namespace}-datepicker > button {
 							opacity: 0.6;
 
-							&:not(:disabled):not([aria-disabled=true]):not(.is-default):hover, &:focus:not(:disabled) {
+							&:not(.is-default):hover, &:focus:not(:disabled) {
 								color: #fff;
 								background: transparent;
 								box-shadow: none;
@@ -90,7 +90,7 @@
 						.components-button {
 							opacity: 0.6;
 
-							&:not(:disabled):not([aria-disabled=true]):not(.is-default):hover, &:focus:not(:disabled) {
+							&:not(.is-default):hover, &:focus:not(:disabled) {
 								color: #fff;
 								background: transparent;
 								box-shadow: none;
@@ -216,7 +216,7 @@
 					background: #404349;
 					border-bottom: 0;
 
-					button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+					button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 						color: #e0e1e3;
 						font-weight: 500;
 
@@ -300,7 +300,7 @@
 			}
 
 			.rank-math-editor-social {
-				button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+				button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 					background: #404349;
 
 					&:hover {

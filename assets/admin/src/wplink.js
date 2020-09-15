@@ -850,7 +850,7 @@ import jQuery from 'jquery'
 				query = {
 					action: 'wp-link-ajax',
 					page: this.page,
-					'_ajax_linking_nonce': inputs.nonce.val(),
+					_ajax_linking_nonce: inputs.nonce.val(),
 				}
 
 			if ( this.search ) {

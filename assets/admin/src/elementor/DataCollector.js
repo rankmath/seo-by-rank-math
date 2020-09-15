@@ -4,6 +4,7 @@
 import jQuery from 'jquery'
 import {
 	get,
+	map,
 	debounce,
 	forEach,
 	isString,
@@ -16,9 +17,9 @@ import {
 /**
  * WordPress dependencies
  */
-import { dispatch, select, subscribe } from '@wordpress/data'
-import apiFetch from '@wordpress/api-fetch'
 import { addAction } from '@wordpress/hooks'
+import apiFetch from '@wordpress/api-fetch'
+import { dispatch, select, subscribe } from '@wordpress/data'
 import { safeDecodeURIComponent } from '@wordpress/url'
 
 /**
@@ -53,6 +54,7 @@ class DataCollector {
 		this.refresh = this.refresh.bind( this )
 		this.savePost = this.savePost.bind( this )
 		this.saveRedirection = this.saveRedirection.bind( this )
+		this.saveSchemas = this.saveSchemas.bind( this )
 		this.subscribeToElementor()
 
 		elementor.once(
@@ -71,7 +73,7 @@ class DataCollector {
 			this.activateSaveButton()
 		} )
 
-		addAction( 'rank_math_update_app_ui', 'rank-math', ( key, value ) => {
+		addAction( 'rank_math_update_app_ui', 'rank-math', ( key ) => {
 			if ( 'hasRedirect' !== key ) {
 				return
 			}
@@ -239,6 +241,7 @@ class DataCollector {
 		subscribe( this.subscriber )
 		elementor.saver.on( 'before:save', this.savePost )
 		elementor.saver.on( 'before:save', this.saveRedirection )
+		elementor.saver.on( 'before:save', this.saveSchemas )
 		elementor.settings.page.model.on( 'change', this.subscriber )
 	}
 
@@ -306,6 +309,38 @@ class DataCollector {
 		} )
 
 		dispatch( 'rank-math' ).resetRedirection()
+	}
+
+	saveSchemas() {
+		const schemas = select( 'rank-math' ).getSchemas()
+		if ( isEmpty( schemas ) ) {
+			return
+		}
+
+		const editSchemas = select( 'rank-math' ).getEditSchemas()
+		apiFetch( {
+			method: 'POST',
+			path: 'rankmath/v1/updateSchemas',
+			data: {
+				objectID: rankMath.objectID,
+				objectType: rankMath.objectType,
+				schemas,
+			},
+		} ).then( ( response ) => {
+			if ( ! isEmpty( response ) ) {
+				const newSchemas = { ...schemas }
+				const newEditSchemas = { ...editSchemas }
+				map( response, ( metaId, schemaId ) => {
+					newSchemas[ 'schema-' + metaId ] = { ...newSchemas[ schemaId ] }
+					newEditSchemas[ 'schema-' + metaId ] = { ...newEditSchemas[ schemaId ] }
+					delete newSchemas[ schemaId ]
+					delete newEditSchemas[ schemaId ]
+				} )
+
+				dispatch( 'rank-math' ).updateSchemas( newSchemas )
+				dispatch( 'rank-math' ).updateEditSchemas( newEditSchemas )
+			}
+		} )
 	}
 
 	/**

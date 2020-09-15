@@ -8,22 +8,19 @@
 	> .components-tab-panel__tabs {
 		padding: 0 17px;
 
-		background: #f0f2f4;
+		background: #f8f9fa;
 
-		border-bottom: 1px solid #e2e4e7;
+		border-bottom: 1px solid $gray;
 
 		button {
 			width: auto;
-
-			&.is-active i, i {
-				@include margin( null 5px null 0 );
-			}
+			border: 0!important;
 
 			span {
 				display: inline-block;
 			}
 
-			&:not(.is-active):not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
+			&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
 				i {
 					background: none;
 					box-shadow: none;
@@ -52,6 +49,7 @@
 
 	> .components-tab-panel__tab-content {
 		padding: 20px;
+		position: relative;
 	}
 
 	// Field Wrapper
@@ -104,13 +102,17 @@
 			}
 		}
 
-		input, textarea {
+		input[type="text"], input[type="url"], textarea, select {
 			background: #fff;
-			border-color: inherit;
 			margin: 0;
 
+			&:hover {
+				border-color: $primary;
+			}
+	
 			&:focus {
-				border-color: #007cba;
+				border-color: $primary;
+				box-shadow: 0 0 0 1px #069de3;
 			}
 		}
 	}
@@ -147,7 +149,7 @@
 		background: transparent;
 		box-shadow: 0 0px 6px rgba(50,50,93,0.1), 0 0px 3px rgba(0,0,0,0.1);
 
-		button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+		button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 			font-size: 16px;
 			line-height: 48px;
 			float: left;
@@ -172,7 +174,7 @@
 				border-radius: 0 3px 3px 0;
 			}
 
-			&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+			&:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 				&.is-active, &:focus {
 					color: #fff;
 					background: #3b5998;

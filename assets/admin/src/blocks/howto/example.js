@@ -1,3 +1,8 @@
+/**
+ * HowTo eample for in block preview pane.
+ *
+ * @type {Object}
+ */
 export default {
 	attributes: {
 		steps: [

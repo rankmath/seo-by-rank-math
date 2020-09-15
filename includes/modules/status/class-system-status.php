@@ -10,8 +10,8 @@
 
 namespace RankMath\Status;
 
-use MyThemeShop\Helpers\WordPress as WordPress_Helper;
 use MyThemeShop\Helpers\Str;
+use MyThemeShop\Helpers\WordPress as WordPress_Helper;
 
 /**
  * System_Status class.
@@ -25,7 +25,7 @@ class System_Status {
 		$this->prepare_info();
 
 		$this->display_system_info();
-		( new Error_Log )->display();
+		( new Error_Log() )->display();
 	}
 
 	/**

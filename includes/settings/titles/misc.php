@@ -8,7 +8,7 @@
 
 use RankMath\Helper;
 
-$dep = [ [ 'disable_date_archives', 'off' ] ];
+$dep = [ [ 'disable_date_archives', 'on' ] ];
 
 $cmb->add_field(
 	[

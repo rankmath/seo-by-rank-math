@@ -85,7 +85,7 @@ trait Taxonomy {
 	public static function get_accessible_taxonomies() {
 		static $accessible_taxonomies;
 
-		if ( isset( $accessible_taxonomies ) ) {
+		if ( isset( $accessible_taxonomies ) && did_action( 'wp_loaded' ) ) {
 			return $accessible_taxonomies;
 		}
 

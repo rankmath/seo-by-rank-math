@@ -10,7 +10,7 @@
 
 		@include position( absolute, 2px 2px null null );
 
-		&:not(:disabled):not([aria-disabled=true]):not(.is-default):hover {
+		&:not(.is-default):hover {
 			background: transparent;
 			box-shadow: none;
 		}

@@ -16,13 +16,13 @@ const SocialTab = () => (
 				{ __( 'Social Media Preview', 'rank-math' ) }
 			</span>
 
-			<p>
+			<p className="cmb2-metabox-description">
 				{ __(
-					'Here  you can view and edit the thumbnail, title and description that will be displayed when your site is shared on social media.',
+					'Here you can view and edit the thumbnail, title and description that will be displayed when your site is shared on social media.',
 					'rank-math'
 				) }
 			</p>
-			<p>
+			<p className="cmb2-metabox-description">
 				{ __(
 					'Click on the button below to view and edit the preview.',
 					'rank-math'

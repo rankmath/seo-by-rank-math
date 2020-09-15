@@ -78,6 +78,7 @@ class Basic_Variables extends Cache {
 		$this->setup_site_variables();
 		$this->setup_date_variables();
 		$this->setup_time_variables();
+		$this->setup_organization_variables();
 	}
 
 	/**
@@ -180,6 +181,33 @@ class Basic_Variables extends Cache {
 				'example'     => $this->get_current_time( 'F jS, Y' ),
 			],
 			[ $this, 'get_current_time' ]
+		);
+	}
+
+	/**
+	 * Setup site info variables.
+	 */
+	private function setup_organization_variables() {
+		$this->register_replacement(
+			'org_name',
+			[
+				'name'        => esc_html__( 'Organization Name', 'rank-math' ),
+				'description' => esc_html__( 'The Organization Name added in Local SEO Settings.', 'rank-math' ),
+				'variable'    => 'org_name',
+				'example'     => $this->get_sitename(),
+			],
+			[ $this, 'get_org_name' ]
+		);
+
+		$this->register_replacement(
+			'org_logo',
+			[
+				'name'        => esc_html__( 'Organization Logo', 'rank-math' ),
+				'description' => esc_html__( 'Organization Logo added in Local SEO Settings.', 'rank-math' ),
+				'variable'    => 'org_logo',
+				'example'     => $this->get_sitedesc(),
+			],
+			[ $this, 'get_org_logo' ]
 		);
 	}
 
@@ -341,6 +369,28 @@ class Basic_Variables extends Cache {
 	 */
 	public function get_current_year() {
 		return $this->date_i18n( 'Y' );
+	}
+
+	/**
+	 * Get the current time to use as a replacement.
+	 *
+	 * @return string
+	 */
+	public function get_org_name() {
+		$name = Helper::get_settings( 'titles.knowledgegraph_name' );
+
+		return $name ? $name : get_bloginfo( 'name' );
+	}
+
+	/**
+	 * Get the current time to use as a replacement.
+	 *
+	 * @return string
+	 */
+	public function get_org_logo() {
+		$logo = Helper::get_settings( 'titles.knowledgegraph_logo' );
+
+		return $logo ? $logo : '';
 	}
 
 	/**

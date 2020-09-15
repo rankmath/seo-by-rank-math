@@ -114,8 +114,8 @@ export function createLinkFormat( {
 	const relAttributes = []
 
 	if ( opensInNewWindow ) {
-		// translators: accessibility label for external links, where the argument is the link text
 		const label = sprintf(
+			// translators: accessibility label for external links, where the argument is the link text
 			__( '%s (opens in a new tab)', 'rank-math' ),
 			text
 		)

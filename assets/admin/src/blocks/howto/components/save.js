@@ -8,6 +8,11 @@ import { isEmpty } from 'lodash'
  */
 import { RichText } from '@wordpress/block-editor'
 
+/**
+ * Save block for display on front
+ *
+ * @param {Object} props This component's props.
+ */
 export default ( props ) => {
 	const { steps, titleWrapper } = props.attributes
 

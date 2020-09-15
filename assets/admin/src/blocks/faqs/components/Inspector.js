@@ -11,6 +11,12 @@ import { withSelect } from '@wordpress/data'
 import { InspectorControls } from '@wordpress/block-editor'
 import { PanelBody, SelectControl, TextControl } from '@wordpress/components'
 
+/**
+ * Format array of image sizes.
+ *
+ * @param  {Array} imageSizes Array of image sizes.
+ * @return {Array} Formatted array.
+ */
 const getImageSizeOptions = ( imageSizes ) => {
 	return map( imageSizes, ( { name, slug } ) => ( {
 		value: slug,
@@ -18,6 +24,11 @@ const getImageSizeOptions = ( imageSizes ) => {
 	} ) )
 }
 
+/**
+ * Adds controls to the editor sidebar to control params.
+ *
+ * @param {Object} props This component's props.
+ */
 const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 	const imageSizeOptions = getImageSizeOptions( imageSizes )
 

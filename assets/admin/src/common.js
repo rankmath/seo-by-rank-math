@@ -662,4 +662,4 @@ import addNotice from '@helpers/addNotice'
 
 		window.rankMathAdmin.init()
 	} )
-} )( jQuery )
+}( jQuery ) )

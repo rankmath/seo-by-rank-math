@@ -12,6 +12,8 @@ namespace RankMath\Admin\Importers;
 
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
+use RankMath\Schema\JsonLD;
+use RankMath\Schema\Singular;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,6 +49,20 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 * @var array
 	 */
 	protected $choices = [ 'settings', 'postmeta' ];
+
+	/**
+	 * JsonLD.
+	 *
+	 * @var JsonLD
+	 */
+	private $json_ld;
+
+	/**
+	 * Singular.
+	 *
+	 * @var Singular
+	 */
+	private $single;
 
 	/**
 	 * Convert SEOPress variables if needed.
@@ -129,6 +145,10 @@ class WP_Schema_Pro extends Plugin_Importer {
 	protected function postmeta() {
 		$this->set_pagination( $this->get_post_ids( true ) );
 
+		// Set Converter.
+		$this->json_ld = new JsonLD();
+		$this->single  = new Singular();
+
 		foreach ( $this->get_post_ids() as $snippet_post ) {
 			$post_id = $snippet_post->ID;
 			$snippet = $this->get_snippet_details( $post_id );
@@ -176,6 +196,18 @@ class WP_Schema_Pro extends Plugin_Importer {
 		}
 
 		update_post_meta( $post_id, 'rank_math_rich_snippet', $schema_type );
+
+		// Convert post now.
+		$data = $this->json_ld->get_old_schema( $post_id, $this->single );
+		if ( isset( $data['richSnippet'] ) ) {
+			$data             = $data['richSnippet'];
+			$type             = $data['@type'];
+			$data['metadata'] = [
+				'title' => $type,
+				'type'  => 'template',
+			];
+			update_post_meta( $post_id, 'rank_math_schema_' . $type, $data );
+		}
 	}
 
 	/**

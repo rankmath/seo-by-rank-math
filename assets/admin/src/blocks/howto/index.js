@@ -12,6 +12,9 @@ import edit from './components/edit'
 import save from './components/save'
 import transforms from './transforms'
 
+/**
+ * Register howto block
+ */
 export default () => {
 	const keywords = [
 		__( 'HowTo', 'rank-math' ),

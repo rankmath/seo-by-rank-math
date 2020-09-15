@@ -21,7 +21,7 @@ class RankMathApp {
 		rankMathEditor.refresh( 'content' )
 	}
 
-	registerPlugin( plugin, status = 'ready' ) {
+	registerPlugin() {
 		console.warn( 'RankMathApp.registerPlugin is deprecated.' )
 	}
 

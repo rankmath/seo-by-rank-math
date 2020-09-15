@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import $ from 'jquery'
+import jQuery from 'jquery'
 import { isUndefined } from 'lodash'
 
 /**
@@ -25,11 +25,11 @@ class CheckLists {
 			return
 		}
 
-		$( '#setting-panel-general' ).append(
+		jQuery( '#setting-panel-general' ).append(
 			'<div id="rank-math-serp-checklist" class="rank-math-serp-checklist"></div>'
 		)
 
-		this.elem = $( '#rank-math-serp-checklist' )
+		this.elem = jQuery( '#rank-math-serp-checklist' )
 		this.scoreText = rankMath.showScore
 			? '<span class="score-text"><span class="score-icon"><svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" width="20"><g><path d="m462 234.84-76.17 3.43 13.43 21-127 81.18-126-52.93-146.26 60.97 10.14 24.34 136.1-56.71 128.57 54 138.69-88.61 13.43 21z"/><path d="m54.1 312.78 92.18-38.41 4.49 1.89v-54.58h-96.67zm210.9-223.57v235.05l7.26 3 89.43-57.05v-181zm-105.44 190.79 96.67 40.62v-165.19h-96.67z"/></g></svg></span> SEO: <strong>Not available</strong></span>'
 			: ''
@@ -37,7 +37,7 @@ class CheckLists {
 			? '<span class="score-text">Not available</span>'
 			: ''
 		// Score in the Publish box.
-		this.scoreElem = $(
+		this.scoreElem = jQuery(
 			'<div class="misc-pub-section rank-math-seo-score loading">' +
 				this.scoreText +
 				'</div>'
@@ -45,18 +45,18 @@ class CheckLists {
 		this.scoreText = this.scoreElem.find( 'strong' )
 
 		// Update Score in score field
-		this.scoreField = $( '#rank_math_seo_score' )
+		this.scoreField = jQuery( '#rank_math_seo_score' )
 
 		// Score below Focus keyword label.
-		this.fkScoreElem = $(
+		this.fkScoreElem = jQuery(
 			'<div class="rank-math-seo-score loading below-focus-keyword">' +
 				this.fkScoreText +
 				'</div>'
 		)
 		this.fkScoreText = this.fkScoreElem.find( 'span' )
 
-		$( '#misc-publishing-actions' ).append( this.scoreElem )
-		$( '.cmb-td', '.cmb2-id-rank-math-focus-keyword' ).append(
+		jQuery( '#misc-publishing-actions' ).append( this.scoreElem )
+		jQuery( '.cmb-td', '.cmb2-id-rank-math-focus-keyword' ).append(
 			this.fkScoreElem
 		)
 
@@ -73,20 +73,20 @@ class CheckLists {
 	events() {
 		this.elem.on( 'click', '.group-handle', ( event ) => {
 			event.preventDefault()
-			const handle = $( event.target ),
+			const handle = jQuery( event.target ),
 				layout = {}
 
 			let group = handle.closest( '.rank-math-serp-group' )
 			group.toggleClass( 'state-open state-closed' )
 
 			this.elem.find( '>.rank-math-serp-group' ).each( function() {
-				group = $( this )
+				group = jQuery( this )
 				layout[ group.data( 'id' ) ] = group.hasClass( 'state-closed' )
 					? 'closed'
 					: 'open'
 			} )
 
-			$.ajax( {
+			jQuery.ajax( {
 				url: rankMath.ajaxurl,
 				type: 'POST',
 				data: {
@@ -120,7 +120,7 @@ class CheckLists {
 		const listItems = this.renderGroupItems( index )
 		const stateClass =
 			'basic' === index ||
-			$( '#rank-math-serp-group-' + index ).hasClass( 'state-open' )
+			jQuery( '#rank-math-serp-group-' + index ).hasClass( 'state-open' )
 				? 'state-open'
 				: 'state-closed'
 		const scoreClass = 0 === this.errors ? 'test-ok' : 'test-fail'

@@ -144,7 +144,11 @@ class Beta_Optin {
 	 */
 	public function get_latest_beta_version() {
 		$plugin_info = Version_Control::get_plugin_info();
-		$versions    = $plugin_info['versions'];
+		if ( ! is_array( $plugin_info ) || empty( $plugin_info['versions'] ) ) {
+			return 0;
+		}
+
+		$versions = $plugin_info['versions'];
 
 		uksort( $versions, 'version_compare' );
 
@@ -170,6 +174,10 @@ class Beta_Optin {
 	public function transient_update_plugins( $value ) {
 		$beta_version = $this->get_latest_beta_version();
 		$new_version  = isset( $value->response['seo-by-rank-math/rank-math.php'] ) && ! empty( $value->response['seo-by-rank-math/rank-math.php']->new_version ) ? $value->response['seo-by-rank-math/rank-math.php']->new_version : 0;
+
+		if ( ! $beta_version || ! $new_version ) {
+			return $value;
+		}
 
 		if ( version_compare( $beta_version, rank_math()->version, '>' ) && version_compare( $beta_version, $new_version, '>' ) ) {
 			$value = $this->inject_beta( $value, $beta_version );

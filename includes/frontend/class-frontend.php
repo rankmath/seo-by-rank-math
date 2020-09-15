@@ -83,6 +83,10 @@ class Frontend {
 		if ( Helper::get_settings( 'titles.disable_author_archives' ) || Helper::get_settings( 'titles.disable_date_archives' ) ) {
 			$this->action( 'wp', 'archive_redirect' );
 		}
+
+		// Add support for shortcode in the Category/Term description.
+		add_filter( 'category_description', 'do_shortcode' );
+		add_filter( 'term_description', 'do_shortcode' );
 	}
 
 	/**

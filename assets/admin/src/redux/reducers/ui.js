@@ -1,9 +1,13 @@
+/**
+ * External dependencies
+ */
 import { get, isEmpty } from 'lodash'
 
 const hasRedirection = rankMath.assessor.hasRedirection
 
 const DEFAULT_STATE = {
 	isLoaded: false,
+	isPro: false,
 	selectedKeyword: {
 		tag: '',
 		index: 0,
@@ -21,6 +25,14 @@ const DEFAULT_STATE = {
 	snippetPreviewType: '',
 	refreshResults: '',
 	redirectionItem: {},
+
+	// Schema.
+	editorTab: '',
+	templateTab: '',
+	editSchemas: {},
+	editingSchemaId: '',
+	isSchemaEditorOpen: false,
+	isSchemaTemplatesOpen: false,
 }
 
 /**

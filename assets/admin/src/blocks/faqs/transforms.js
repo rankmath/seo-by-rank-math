@@ -3,6 +3,11 @@
  */
 import { createBlock } from '@wordpress/blocks'
 
+/**
+ * Transform yoast faq block.
+ *
+ * @type {Array}
+ */
 export default {
 	from: [
 		{

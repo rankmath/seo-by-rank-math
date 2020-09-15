@@ -227,6 +227,7 @@ class Assets implements Runner {
 			'rank-math_page_rank-math-help',
 			'user-edit',
 			'profile',
+			'rank_math_schema',
 		];
 
 		return array_merge( $pages, Helper::get_allowed_post_types() );

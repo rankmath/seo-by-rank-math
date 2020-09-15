@@ -288,4 +288,116 @@
 			cursor: default;
 		}
 	}
+
+	// Mode
+	.rank-math-ui {
+		border: none;
+
+		.rank-math-setup-mode {
+			margin: 0 auto;
+			width: 770px;
+			max-width: 100%;
+			margin-top: 3rem;
+
+			.cmb-td {
+				display: block;
+				width: 100%;
+
+				ul {
+					display: block;
+					width: 100%;
+					border: none;
+					padding: 0;
+
+					li {
+						float: none;
+						width: 100%;
+						position: relative;
+
+						input {
+							display: inline-block;
+							margin-top: 3px;
+							margin-right: 16px;
+							position: absolute;
+							top: 20px;
+							left: 20px;
+
+							&:checked + label {
+								border-color: $primary;
+								box-shadow: 0 0 0 1px $primary;
+							}
+
+							&:focus+ label {
+								border-color: $dark_gray;
+							}
+						}
+
+						&:hover label {
+							border-color: $dark_gray;
+						}
+
+						label {
+							display: block;
+							width: 100%;
+							color: $text;
+							font-size: 17px;
+							font-weight: 600;
+							height: auto;
+							white-space: normal;
+							line-height: 1;
+
+							padding: 20px 20px 20px 50px;
+							background: #fafafa;
+							border: 1px solid $light_gray;
+							margin-bottom: 16px;
+							border-radius: 6px;
+							transition: 0.25s all linear;
+							box-sizing: border-box;
+
+							p {
+								display: block;
+								clear: both;
+								font-weight: normal;
+								font-size: 14px;
+								line-height: 1.5;
+								font-style: normal;
+								padding: 0;
+								margin: 0;
+								padding-top: 10px;
+								color: $dark_gray;
+							}
+						}
+
+						&:last-child {
+							pointer-events: none;
+
+							input{
+								opacity: 0.5;
+							}
+
+							.#{$namespace}-mode-title {
+								color: rgba( $text, 0.5 );
+
+								&:after {
+									content: 'Pro';
+									margin-left: 10px;
+									vertical-align: 1px;
+									opacity: 1;
+									color: #fff;
+									background: #4CAF50;
+									background: linear-gradient(100deg, #4CAF50 0%, #8baf4c 100%);
+									font-size: 11px;
+									font-weight: normal;
+									text-transform: uppercase;
+									padding: 5px 10px;
+									border-radius: 3px;
+									margin-left: 5px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

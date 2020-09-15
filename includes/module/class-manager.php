@@ -107,7 +107,7 @@ class Manager {
 		$modules['rich-snippet'] = [
 			'title'    => esc_html__( 'Schema (Structured Data)', 'rank-math' ),
 			'desc'     => esc_html__( 'Enable support for the structured data, which adds Schema code in your website, resulting in rich search results, better CTR and more traffic.', 'rank-math' ),
-			'class'    => 'RankMath\RichSnippet\RichSnippet',
+			'class'    => 'RankMath\Schema\Schema',
 			'icon'     => 'schema',
 			'settings' => Helper::get_admin_url( 'options-titles' ) . '#setting-panel-post-type-post',
 		];

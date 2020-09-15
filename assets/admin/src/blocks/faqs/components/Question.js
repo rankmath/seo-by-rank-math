@@ -16,13 +16,15 @@ import { __ } from '@wordpress/i18n'
 import { Component } from '@wordpress/element'
 import { RichText, MediaUpload } from '@wordpress/block-editor'
 
+/**
+ * A Question and answer pair within FAQ block.
+ */
 class Question extends Component {
-	constructor() {
-		super( ...arguments )
-		this.deleteQuestion = this.deleteQuestion.bind( this )
-		this.toggleVisibility = this.toggleVisibility.bind( this )
-	}
-
+	/**
+	 * Renders the component.
+	 *
+	 * @return {Component} Question editor.
+	 */
 	render() {
 		const {
 			title,
@@ -67,7 +69,7 @@ class Question extends Component {
 						this.setQuestionProp( 'title', newTitle )
 					} }
 					keepPlaceholderOnFocus={ true }
-					placeholder={ __( 'Question...', 'rank-math' ) }
+					placeholder={ __( 'Question…', 'rank-math' ) }
 				/>
 
 				<MediaUpload
@@ -106,6 +108,12 @@ class Question extends Component {
 		)
 	}
 
+	/**
+	 * Update question properties.
+	 *
+	 * @param {string} prop  Poperty name.
+	 * @param {string} value Property value.
+	 */
 	setQuestionProp( prop, value ) {
 		const { setAttributes, index } = this.props
 		const questions = [ ...this.props.questions ]
@@ -114,7 +122,10 @@ class Question extends Component {
 		setAttributes( { questions } )
 	}
 
-	toggleVisibility() {
+	/**
+	 * Toggle question visibility.
+	 */
+	toggleVisibility = () => {
 		const { setAttributes, index } = this.props
 		const questions = [ ...this.props.questions ]
 		questions[ index ].visible = ! this.props.visible
@@ -122,7 +133,10 @@ class Question extends Component {
 		setAttributes( { questions } )
 	}
 
-	deleteQuestion() {
+	/**
+	 * Delete question from block.
+	 */
+	deleteQuestion = () => {
 		const { setAttributes, index } = this.props
 		const questions = [ ...this.props.questions ]
 		questions.splice( index, 1 )

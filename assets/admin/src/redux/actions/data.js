@@ -1,9 +1,4 @@
 /**
- * WordPress dependencies
- */
-import { select } from '@wordpress/data'
-
-/**
  * Internal dependencies
  */
 import { swapVariables } from '@helpers/swapVariables'
@@ -115,37 +110,6 @@ export function updateBreadcrumbTitle( title ) {
 		'breadcrumbTitle',
 		title,
 		'rank_math_breadcrumb_title'
-	)
-}
-
-/**
- * Update rich snippet data.
- *
- * @param {string} id    Unique id of data.
- * @param {string} key   Meta key to update metadata.
- * @param {string} value Updated meta value.
- *
- * @return {Object} An action for redux.
- */
-export function updateRichSnippet( id, key, value ) {
-	const data = select( 'rank-math' ).getRichSnippets()
-
-	if ( data[ id ] === value ) {
-		return {
-			type: 'RANK_MATH_APP_DATA',
-			key: 'richSnippets',
-			value: data,
-			metaKey: 'snippetType' === id ? key : 'rank_math_snippet_' + key,
-			metaValue: value,
-		}
-	}
-
-	data[ id ] = value
-	return updateAppData(
-		'richSnippets',
-		data,
-		'snippetType' === id ? key : 'rank_math_snippet_' + key,
-		value
 	)
 }
 

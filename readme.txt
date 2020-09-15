@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.47.1
+Stable tag: 1.0.48-beta
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -473,13 +473,21 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.47.1 [Aug 25, 2020] =
-* Added: Proper credits and attribution wherever they were missing. We are incredibly sorry about missing them in the first place. That should not have happened. Please feel free to reach out to us in case the credits are still missing anywhere in the plugin. We would be more than obliged to add.
-* Improved: Excluded image caption text from the auto-generated SEO descriptions
-* Improved: Added more automation to the Open Graph Image tag(`og:image`) functionality. It can now pick the first external image from the content as well
-* Improved: Fixed PHPCS warnings throughout the plugin
-* Removed: Unused `remove_stopwords` function from the [Redirection](https://rankmath.com/kb/setting-up-redirections/) module
-* Removed: Some unused `error_log()` calls from the plugin
-* Fixed: [SERP preview](https://rankmath.com/kb/general-tab/#the-preview-section) section not showing Hindi characters properly
+= 1.0.48-beta [Sep 15, 2020] =
+* Added: [HUGE] Completely revamped UI for the [Schema](https://rankmath.com/kb/rich-snippets/) module
+* Added: [NEW] [Entity Graph](https://www.w3.org/TR/json-ld/#named-graphs) for the Schema markup. Now all the nodes are connected by edges
+* Added: Code to make upcoming Pro version compatible with the free version
+* Improved: UI of the export option in the Redirections page
+* Improved: Some missing text in the translation file
+* Improved: Added a condition to check if a method exists in the `Paper` class
+* Improved: Use `site_url()` instead of `home_url()`
+* Changed: Time options in the Recipe Schema now need `PT` as a prefix, example: PT1H30M
+* Fixed: Shortcodes were not rendering on the frontend for the Category/Taxonomy description text
+* Fixed: CPTs created by some third party plugins in the [Titles & Meta](https://rankmath.com/kb/titles-and-meta/) global settings were not displaying
+* Fixed: PHP warnings related to [beta testing](https://rankmath.com/kb/version-control/#beta-updates) functionality on some installations
+* Fixed: Datepicker styling issue with the Coupon theme from PremiumPress
+* Fixed: Opening Days in the Restaurant Schema were not available for the block editor & Elementor
+* Fixed: Minimum required WordPress version notice in the Setup Wizard
+* Fixed: Icon styling in the FAQ and HowTo blocks
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

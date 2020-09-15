@@ -33,7 +33,7 @@ class Local_Seo {
 		$this->ajax( 'search_pages', 'search_pages' );
 		$this->action( 'after_setup_theme', 'location_sitemap' );
 		$this->filter( 'rank_math/settings/title', 'add_settings' );
-		$this->filter( 'rank_math/json_ld', 'organization_or_person', 15, 2 );
+		$this->filter( 'rank_math/json_ld', 'organization_or_person', 9, 2 );
 	}
 
 	/**
@@ -102,10 +102,6 @@ class Local_Seo {
 	 * @return array
 	 */
 	public function organization_or_person( $data, $json_ld ) {
-		if ( ! $this->can_output_schema() ) {
-			return $data;
-		}
-
 		$entity = [
 			'@type' => '',
 			'@id'   => '',
@@ -120,29 +116,14 @@ class Local_Seo {
 
 		switch ( Helper::get_settings( 'titles.knowledgegraph_type' ) ) {
 			case 'company':
-				$data['Organization'] = $this->organization( $entity );
+				$data['publisher'] = $this->organization( $entity );
 				break;
 			case 'person':
-				$data['Person'] = $this->person( $entity, $json_ld );
+				$data['publisher'] = $this->person( $entity, $json_ld );
 				break;
 		}
 
 		return $data;
-	}
-
-	/**
-	 * Check if schema data can be output.
-	 *
-	 * @return bool
-	 */
-	private function can_output_schema() {
-		$post_id = Post::get_simple_page_id();
-		$pages   = array_map( 'absint', array_filter( [ Helper::get_settings( 'titles.local_seo_about_page' ), Helper::get_settings( 'titles.local_seo_contact_page' ) ] ) );
-		if ( $post_id > 0 && ! in_array( $post_id, $pages, true ) && ! is_front_page() ) {
-			return false;
-		}
-
-		return true;
 	}
 
 	/**
@@ -154,7 +135,7 @@ class Local_Seo {
 		$name            = Helper::get_settings( 'titles.knowledgegraph_name' );
 		$type            = Helper::get_settings( 'titles.local_business_type' );
 		$entity['@type'] = $type ? $type : 'Organization';
-		$entity['@id']   = get_home_url() . '#organization';
+		$entity['@id']   = get_home_url() . '/#organization';
 		$entity['name']  = $name ? $name : get_bloginfo( 'name' );
 
 		$this->add_contact_points( $entity );
@@ -182,7 +163,7 @@ class Local_Seo {
 		}
 
 		$entity['@type'] = 'Person';
-		$entity['@id']   = '#person';
+		$entity['@id']   = '/#person';
 		$entity['name']  = $name;
 		$json_ld->add_prop( 'phone', $entity );
 

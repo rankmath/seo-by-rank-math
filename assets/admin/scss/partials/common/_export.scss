@@ -33,63 +33,6 @@
                 margin-top: -1px;
             }
         }
-
-        &-inner {
-            & > * {
-                display: none;
-            }
-
-            & > .active-tab {
-                display: block;
-            }
-        }
-
-        &-tabs {
-            border-bottom: 1px solid $gray;
-            background: #f8f9fa;
-            border-radius: 6px 6px 0 0;
-        
-            > a {
-                color: #5b6065;
-                font-size: 0.825rem;
-                font-weight: 500;
-                line-height: 46px;
-                position: relative;
-                float: left;
-                padding: 0 15px;
-                text-decoration: none;
-                box-shadow: none;
-                border-right: 1px solid $gray;
-
-                &:first-child {
-                    border-radius: 6px 0 0 0;
-                }
-
-                &:hover {
-                    color: $primary;
-                }
-
-                &.active {
-                    color: $primary;
-                    background: #fff;
-
-                    &:after {
-                        position: absolute;
-                        bottom: -1px;
-                        left: 0;
-                        width: 100%;
-                        height: 1px;
-                        content: '';
-                        background: #fff;
-                    }
-                }
-
-                .rm-icon {
-                    vertical-align: -1px;
-                    margin-right: 3px;
-                }
-            }
-        }
     }
 
     .#{$namespace}-export-form {
@@ -113,6 +56,65 @@
     .#{$namespace}-settings-backup-form {
         .list-table {
             background: #fff;
+        }
+    }
+}
+
+.rank-math-box {
+    &-inner {
+        & > * {
+            display: none;
+        }
+
+        & > .active-tab {
+            display: block;
+        }
+    }
+
+    &-tabs {
+        border-bottom: 1px solid $gray;
+        background: #f8f9fa;
+        border-radius: 6px 6px 0 0;
+
+        > a {
+            color: #5b6065;
+            font-size: 0.825rem;
+            font-weight: 500;
+            line-height: 46px;
+            position: relative;
+            float: left;
+            padding: 0 15px;
+            text-decoration: none;
+            box-shadow: none;
+            border-right: 1px solid $gray;
+
+            &:first-child {
+                border-radius: 6px 0 0 0;
+            }
+
+            &:hover {
+                color: $primary;
+            }
+
+            &.active-tab {
+                color: $primary;
+                background: #fff;
+
+                &:after {
+                    position: absolute;
+                    bottom: -1px;
+                    left: 0;
+                    width: 100%;
+                    height: 1px;
+                    content: '';
+                    background: #fff;
+                }
+            }
+
+            .rm-icon {
+                vertical-align: -1px;
+                margin-right: 3px;
+            }
         }
     }
 }

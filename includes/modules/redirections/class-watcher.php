@@ -274,7 +274,7 @@ class Watcher {
 	 * @return string
 	 */
 	private function get_site_path() {
-		$path = parse_url( get_site_url(), PHP_URL_PATH );
+		$path = parse_url( get_home_url(), PHP_URL_PATH );
 		if ( $path ) {
 			return rtrim( $path, '/' ) . '/';
 		}

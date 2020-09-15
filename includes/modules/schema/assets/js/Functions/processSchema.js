@@ -1,0 +1,142 @@
+/**
+ * External dependencies
+ */
+import { isEmpty, isUndefined, map, get } from 'lodash'
+
+/**
+ * WordPress dependencies
+ */
+import { applyFilters } from '@wordpress/hooks'
+
+/**
+ * Process property value.
+ *
+ * This function includes filters to modify property value.
+ *
+ * @param  {Object} property Property of which value to process.
+ * @return {string} Processed value.
+ */
+const processValues = ( property ) => {
+	let value = false
+
+	value = applyFilters(
+		'rank_math_schema_process_value',
+		value,
+		property
+	)
+
+	value = applyFilters(
+		'rank_math_schema_process_' + property.property,
+		value,
+		property
+	)
+
+	return value
+}
+
+/**
+ * Get property value or default value.
+ *
+ * @param  {Object} property Property of which value to process.
+ * @return {string} Processed value.
+ */
+const getValue = ( property ) => {
+	if ( ! isEmpty( property.value ) ) {
+		return property.value
+	}
+
+	const placeholder = get( property, 'map.field.placeholder' )
+	if ( ! isEmpty( placeholder ) ) {
+		return placeholder
+	}
+
+	return get( property, 'map.field.default', false )
+}
+
+/**
+ * Process schema from maps to json.
+ *
+ * @param  {Object} data schema as maps.
+ * @return {Object} Converted schema.
+ */
+const processData = ( data ) => {
+	if ( isEmpty( data ) || isUndefined( data.properties ) ) {
+		return data
+	}
+
+	const schema = {}
+
+	if ( 'metadata' in data ) {
+		schema.metadata = { ...data.metadata }
+		schema.metadata.title = data.property
+	}
+
+	map( data.properties, ( property ) => {
+		const canSave = get( property, 'map.save', true )
+		const isHidden = get( property, 'map.isHidden', false )
+
+		// Don't save.
+		if ( false === canSave || isHidden ) {
+			return
+		}
+
+		// Save to metadata.
+		if ( 'metadata' === canSave ) {
+			const value = getValue( property )
+			if ( isEmpty( value ) ) {
+				return
+			}
+
+			schema.metadata[ property.property ] = value
+			return
+		}
+
+		const processedValue = processValues( property )
+
+		// Short-circuit.
+		if ( false !== processedValue ) {
+			schema[ property.property ] = processedValue
+			return
+		}
+
+		if ( property.map.isArray ) {
+			const array = []
+			map( property.properties, ( arrayItem ) => {
+				array.push( isUndefined( arrayItem.properties ) ? arrayItem.value : processSchema( arrayItem ) )
+			} )
+
+			schema[ property.property ] = array
+			return
+		}
+
+		if ( property.map.isGroup ) {
+			const subProperty = processSchema( property )
+			subProperty[ '@type' ] = get( subProperty, '@type', property.property )
+			schema[ property.property ] = subProperty
+			return
+		}
+
+		const value = getValue( property )
+		if ( isEmpty( value ) ) {
+			return
+		}
+
+		schema[ property.property ] = value
+	} )
+
+	return schema
+}
+
+/**
+ * Process schema from maps to json.
+ *
+ * @param  {Object} data schema as maps.
+ * @return {Object} Converted schema.
+ */
+export function processSchema( data ) {
+	let schema = processData( data )
+
+	schema = applyFilters( 'rank_math_processed_schema_' + schema[ '@type' ], schema )
+
+	return applyFilters( 'rank_math_processed_schema', schema )
+}

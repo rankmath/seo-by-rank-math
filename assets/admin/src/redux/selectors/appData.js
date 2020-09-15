@@ -105,7 +105,7 @@ export function getBreadcrumbTitle( state ) {
  * @return {string} Return rich snippet data.
  */
 export function getRichSnippets( state ) {
-	return state.appData.richSnippets
+	return 'todo'
 }
 
 /**

@@ -56,7 +56,7 @@ class Assessor {
 
 	sanitizeData( value, key ) {
 		// TODO: move it to helper itself
-		if ( 'richSnippets' === key || isObject( value ) ) {
+		if ( 'schemas' === key || isObject( value ) ) {
 			return value
 		}
 

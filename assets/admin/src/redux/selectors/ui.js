@@ -30,3 +30,14 @@ export function getSelectedKeyword( state ) {
 export function isRefreshing( state ) {
 	return state.appUi.refreshResults
 }
+
+/**
+ * Is pro results.
+ *
+ * @param {Object} state The app state.
+ *
+ * @return {boolean} Return is pro.
+ */
+export function isPro( state ) {
+	return state.appUi.isPro
+}

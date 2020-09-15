@@ -17,6 +17,10 @@ const paths = {
 		src: 'assets/admin/scss/**/*.scss',
 		dest: 'assets/admin/css',
 	},
+	schema: {
+		src: 'includes/modules/schema/assets/scss/**/*.scss',
+		dest: 'includes/modules/schema/assets/css',
+	},
 	pot: {
 		src: [ '**/*.php', '!node_modules/**/*', '!vendor/**/*' ],
 		dest: 'languages/rank-math.pot',
@@ -93,13 +97,31 @@ function adminCSS() {
 		.pipe( dest( paths.admin.dest, { sourcemaps: '.' } ) )
 }
 
+/**
+ * Converting Schema Sass into css
+ *  1. Applying autoprefixer
+ *  2. Creatings sourcemaps
+ *
+ * @return {Object} Gulp source.
+ */
+function schemaCSS() {
+	return src( paths.schema.src, { sourcemaps: false } )
+		.pipe(
+			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
+		)
+		.pipe( autoprefixer() )
+		.pipe( dest( paths.schema.dest, { sourcemaps: '.' } ) )
+}
+
 function watchFiles() {
 	watch( paths.front.src, frontCSS )
 	watch( paths.admin.src, adminCSS )
+	watch( paths.schema.src, schemaCSS )
 }
 
 exports.ct = ct
 exports.pot = pot
 exports.frontCSS = frontCSS
 exports.adminCSS = adminCSS
+exports.schemaCSS = schemaCSS
 exports.watch = watchFiles

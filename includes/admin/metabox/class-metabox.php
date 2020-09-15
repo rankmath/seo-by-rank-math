@@ -79,8 +79,9 @@ class Metabox implements Runner {
 
 		$is_gutenberg = Helper::is_block_editor() && \rank_math_is_gutenberg();
 		$is_elementor = 'elementor' === Param::get( 'action' );
+		Helper::add_json( 'knowledgegraphType', Helper::get_settings( 'titles.knowledgegraph_type' ) );
 
-		if ( ! $is_gutenberg && ! $is_elementor ) {
+		if ( ! $is_gutenberg && ! $is_elementor && 'rank_math_schema' !== $screen->post_type ) {
 			\CMB2_Hookup::enqueue_cmb_css();
 			wp_enqueue_style(
 				'rank-math-metabox',
@@ -92,18 +93,27 @@ class Metabox implements Runner {
 				rank_math()->version
 			);
 
+			wp_register_script( 'rank-math-schema-classic', rank_math()->plugin_url() . 'assets/admin/js/schema-classic.js', [ 'clipboard' ], rank_math()->version, true );
+
 			wp_enqueue_script(
 				'rank-math-metabox',
 				rank_math()->plugin_url() . 'assets/admin/js/classic.js',
 				[
 					'clipboard',
 					'wp-hooks',
-					'wp-url',
+					'moment',
+					'wp-date',
+					'wp-data',
+					'wp-api-fetch',
+					'wp-components',
+					'wp-element',
 					'wp-i18n',
+					'wp-url',
 					'rank-math-common',
 					'rank-math-analyzer',
 					'rank-math-validate',
 					'tagify',
+					'rank-math-schema-classic',
 				],
 				rank_math()->version,
 				true
@@ -117,6 +127,7 @@ class Metabox implements Runner {
 	 * Enqueque scripts common for all builders.
 	 */
 	private function enqueue_commons() {
+		wp_register_style( 'rank-math-post-metabox', rank_math()->plugin_url() . 'assets/admin/css/gutenberg.css', [], rank_math()->version );
 		wp_register_script( 'rank-math-analyzer', rank_math()->plugin_url() . 'assets/admin/js/analyzer.js', [ 'lodash', 'wp-autop', 'wp-wordcount' ], rank_math()->version, true );
 	}
 

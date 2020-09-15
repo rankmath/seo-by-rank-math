@@ -1,0 +1,12 @@
+// compileCompressed: ../css/$1.css
+
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/variables';
+
+@import 'schema/common';
+@import 'schema/sidebar';
+@import 'schema/templates';
+@import 'schema/validator';
+@import 'schema/builder';
+@import "../../../../../assets/admin/scss/partials/common/pro-cta";

@@ -63,7 +63,7 @@ class Sanitize {
 				$sanitized_value = $this->sanitize_textarea( $field_id, $value );
 				break;
 			default:
-				$sanitized_value = is_array( $value ) ? $this->loop_sanitize( $value ) : sanitize_text_field( $value );
+				$sanitized_value = is_array( $value ) ? $this->loop_sanitize( $value ) : \RankMath\CMB2::sanitize_textfield( $value );
 		}
 
 		return $sanitized_value;

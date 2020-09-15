@@ -11,10 +11,11 @@
 namespace RankMath\Admin\Importers;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\DB;
-use MyThemeShop\Helpers\WordPress;
 use RankMath\Redirections\Redirection;
 use RankMath\Tools\Yoast_Blocks;
+use MyThemeShop\Helpers\DB;
+use MyThemeShop\Helpers\WordPress;
+use MyThemeShop\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -49,7 +50,7 @@ class Yoast extends Plugin_Importer {
 	 *
 	 * @var array
 	 */
-	protected $choices = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks' ];
+	protected $choices = [ 'settings', 'locations', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks' ];
 
 	/**
 	 * Table names to drop while cleaning.
@@ -250,6 +251,224 @@ class Yoast extends Plugin_Importer {
 		}
 
 		return $this->get_pagination_arg();
+	}
+
+	/**
+	 * Import Locations data from Yoast Local plugin.
+	 *
+	 * @return array
+	 */
+	protected function locations() {
+		$this->import_locations_terms();
+		$this->set_pagination( $this->get_location_ids( true ) );
+		$locations = $this->get_location_ids();
+
+		foreach ( $locations as $location ) {
+			$args = (array) $location;
+			unset( $args['ID'] );
+			$args['post_type'] = 'rank_math_locations';
+
+			$post_id = wp_insert_post( $args );
+			if ( is_wp_error( $post_id ) ) {
+				continue;
+			}
+
+			$post_terms = wp_get_object_terms( $location->ID, 'wpseo_locations_category', [ 'fields' => 'slugs' ] );
+			wp_set_object_terms( $post_id, $post_terms, 'rank_math_location_category', false );
+
+			$this->locations_meta( $location->ID, $post_id );
+		}
+
+		return $this->get_pagination_arg();
+	}
+
+	/**
+	 * Import Locations terms.
+	 */
+	private function import_locations_terms() {
+		$terms = get_terms( 'wpseo_locations_category' );
+		foreach ( $terms as $term ) {
+			wp_insert_term( $term->name, 'rank_math_location_category', $term );
+		}
+	}
+
+	/**
+	 * Import Locations metadata.
+	 *
+	 * @param int $old_post_id Yoast's location id.
+	 * @param int $new_post_id Newly created location id.
+	 */
+	private function locations_meta( $old_post_id, $new_post_id ) {
+		$metas = DB::query_builder( 'postmeta' )->where( 'post_id', $old_post_id )->select()->get();
+		if ( empty( $metas ) ) {
+			return;
+		}
+
+		$hash = [
+			'_wpseo_business_type'                => '@type',
+			'_wpseo_business_email'               => 'email',
+			'_wpseo_business_url'                 => 'url',
+			'_wpseo_business_address'             => 'address',
+			'_wpseo_business_address_2'           => 'address',
+			'_wpseo_business_city'                => 'address',
+			'_wpseo_business_state'               => 'address',
+			'_wpseo_business_zipcode'             => 'address',
+			'_wpseo_business_country'             => 'address',
+			'_wpseo_business_phone'               => 'telephone',
+			'_wpseo_business_fax'                 => 'faxNumber',
+			'_wpseo_business_location_logo'       => 'image',
+			'_wpseo_business_vat_id'              => 'vatID',
+			'_wpseo_business_tax_id'              => 'taxID',
+			'_wpseo_business_price_range'         => 'priceRange',
+			'_wpseo_business_currencies_accepted' => 'currenciesAccepted',
+			'_wpseo_business_payment_accepted'    => 'paymentAccepted',
+			'_wpseo_business_area_served'         => 'areaServed',
+			'_wpseo_coordinates_lat'              => 'latitude',
+			'_wpseo_coordinates_long'             => 'longitude',
+			'_wpseo_business_phone_2nd'           => 'secondary_number',
+			'_wpseo_business_coc_id'              => 'coc_id',
+		];
+
+		$schema        = [
+			'name'     => '%seo_title%',
+			'metadata' => [
+				'type'  => 'template',
+				'title' => 'LocalBusiness',
+			],
+			'geo'      => [
+				'@type' => 'GeoCoordinates',
+			],
+		];
+		$address       = [];
+		$opening_hours = [];
+
+		foreach ( $metas as $meta ) {
+			if ( ! Str::starts_with( '_wpseo_', $meta->meta_key ) ) {
+				update_post_meta( $new_post_id, $meta->meta_key, $meta->meta_value );
+				continue;
+			}
+
+			if ( Str::starts_with( '_wpseo_opening_hours_', $meta->meta_key ) ) {
+				$opening_hours[ $meta->meta_key ] = $meta->meta_value;
+				continue;
+			}
+
+			if ( ! isset( $hash[ $meta->meta_key ] ) ) {
+				continue;
+			}
+
+			if ( in_array( $hash[ $meta->meta_key ], [ 'secondary_number', 'coc_id' ], true ) ) {
+				$schema['metadata'][ $hash[ $meta->meta_key ] ] = $meta->meta_value;
+				continue;
+			}
+
+			if ( 'address' === $hash[ $meta->meta_key ] ) {
+				$address[ $meta->meta_key ] = $meta->meta_value;
+				continue;
+			}
+
+			if ( in_array( $hash[ $meta->meta_key ], [ 'latitude', 'longitude' ], true ) ) {
+				$schema['geo'][ $hash[ $meta->meta_key ] ] = $meta->meta_value;
+				continue;
+			}
+
+			$schema[ $hash[ $meta->meta_key ] ] = $meta->meta_value;
+		}
+
+		if ( ! empty( $address ) ) {
+			$schema['address'] = $this->replace_address( $address );
+		}
+
+		if ( ! empty( $opening_hours ) ) {
+			$schema['openingHoursSpecification'] = $this->replace_opening_hours( $opening_hours );
+		}
+
+		$schema['@type'] = 'LocalBusiness';
+
+		if ( ! empty( $schema['image'] ) ) {
+			$schema['image'] = [
+				'@type' => 'ImageObject',
+				'url'   => $schema['image'],
+			];
+		}
+
+		if ( isset( $schema['geo']['latitude'] ) && isset( $schema['geo']['longitude'] ) ) {
+			update_post_meta( $new_post_id, 'rank_math_local_business_latitide', $schema['geo']['latitude'] );
+			update_post_meta( $new_post_id, 'rank_math_local_business_longitude', $schema['geo']['longitude'] );
+		}
+
+		update_post_meta( $new_post_id, 'rank_math_schema_' . $schema['@type'], $schema );
+	}
+
+	/**
+	 * Replace Opening Hours data.
+	 *
+	 * @param array $opening_hours Opening Hours data.
+	 * @return array Processed data.
+	 */
+	private function replace_opening_hours( $opening_hours ) {
+		$data = [];
+		$days = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
+		foreach ( $days as $day ) {
+			$opens  = ! empty( $opening_hours[ '_wpseo_opening_hours_' . strtolower( $day ) . '_from' ] ) ? $opening_hours[ '_wpseo_opening_hours_' . strtolower( $day ) . '_from' ] : 'closed';
+			$closes = ! empty( $opening_hours[ '_wpseo_opening_hours_' . strtolower( $day ) . '_to' ] ) ? $opening_hours[ '_wpseo_opening_hours_' . strtolower( $day ) . '_to' ] : 'closed';
+
+			if ( 'closed' === $opens ) {
+				continue;
+			}
+
+			$data[ $day ] = [
+				'@type'     => 'OpeningHoursSpecification',
+				'dayOfWeek' => $day,
+				'opens'     => $opens,
+				'closes'    => $closes,
+			];
+		}
+
+		return array_values( $data );
+	}
+
+	/**
+	 * Replace Address data.
+	 *
+	 * @param array $address Address data.
+	 * @return array Processed data.
+	 */
+	private function replace_address( $address ) {
+		$data = [
+			'@type' => 'PostalAddress',
+		];
+		$hash = [
+			'_wpseo_business_address'   => 'streetAddress',
+			'_wpseo_business_address_2' => 'addressLocality',
+			'_wpseo_business_state'     => 'addressRegion',
+			'_wpseo_business_zipcode'   => 'postalCode',
+			'_wpseo_business_country'   => 'addressCountry',
+		];
+
+		foreach ( $hash as $key => $value ) {
+			$data[ $value ] = isset( $address[ $key ] ) ? $address[ $key ] : '';
+		}
+
+		if ( ! empty( $address['_wpseo_business_city'] ) ) {
+			$data['addressLocality'] = $data['addressLocality'] . ', ' . $address['_wpseo_business_city'];
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Get all location IDs.
+	 *
+	 * @param bool $count If we need count only for pagination purposes.
+	 * @return int|array
+	 */
+	private function get_location_ids( $count = false ) {
+		$paged = $this->get_pagination_arg( 'page' );
+		$table = DB::query_builder( 'posts' )->where( 'post_type', 'wpseo_locations' );
+
+		return $count ? absint( $table->selectCount( 'ID', 'total' )->getVar() ) :
+			$table->select()->page( $paged - 1, $this->items_per_page )->get();
 	}
 
 	/**

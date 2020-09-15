@@ -37,7 +37,7 @@ export default compose(
 	withSelect( ( select ) => {
 		const repo = select( 'rank-math' )
 		const dataCollector = rankMathEditor.assessor.dataCollector
-		const placeholder = ( function() {
+		const placeholder = ( () => {
 			if ( repo.getCanonicalUrl() ) {
 				return repo.getCanonicalUrl()
 			}

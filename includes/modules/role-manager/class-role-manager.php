@@ -65,7 +65,7 @@ class Role_Manager extends Base {
 			'rank-math-role-manager',
 			esc_html__( 'Role Manager', 'rank-math' ),
 			[
-				'position'   => 11,
+				'position'   => 20,
 				'parent'     => 'rank-math',
 				'capability' => 'rank_math_role_manager',
 				'render'     => $this->directory . '/views/main.php',

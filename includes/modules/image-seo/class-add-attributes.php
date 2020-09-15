@@ -81,6 +81,10 @@ class Add_Attributes {
 				$post->filename = $attrs['data-layzr'];
 			}
 
+			// Pass attributes so they can be used later.
+			$post->alttext   = isset( $attrs['alt'] ) ? $attrs['alt'] : '';
+			$post->titletext = isset( $attrs['title'] ) ? $attrs['title'] : '';
+
 			$this->set_image_attribute( $attrs, 'alt', $this->is_alt, $is_dirty, $post );
 			$this->set_image_attribute( $attrs, 'title', $this->is_title, $is_dirty, $post );
 

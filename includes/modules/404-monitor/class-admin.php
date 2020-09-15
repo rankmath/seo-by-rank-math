@@ -10,6 +10,7 @@
 
 namespace RankMath\Monitor;
 
+use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Module\Base;
 use MyThemeShop\Admin\Page;
@@ -121,7 +122,7 @@ class Admin extends Base {
 			'rank-math-404-monitor',
 			esc_html__( '404 Monitor', 'rank-math' ),
 			[
-				'position'   => 12,
+				'position'   => 30,
 				'parent'     => 'rank-math',
 				'capability' => 'rank_math_404_monitor',
 				'render'     => $dir . 'main.php',
@@ -173,7 +174,7 @@ class Admin extends Base {
 				'404-monitor' => [
 					'icon'  => 'rm-icon rm-icon-404',
 					'title' => esc_html__( '404 Monitor', 'rank-math' ),
-					/* translators: 1. Link to kb article 2. Link to redirection setting scree */
+					/* translators: 1. Link to KB article 2. Link to redirection setting scree */
 					'desc'  => sprintf( esc_html__( 'Monitor broken pages that ruin user-experience and affect SEO. %s.', 'rank-math' ), '<a href="' . \RankMath\KB::get( '404-monitor-settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
 				],
@@ -199,5 +200,33 @@ class Admin extends Base {
 			<li><span><?php esc_html_e( '404 URL Hits', 'rank-math' ); ?></span><?php echo esc_html( Str::human_number( $data->hits ) ); ?></li>
 		</ul>
 		<?php
+	}
+
+	/**
+	 * Output page title actions.
+	 *
+	 * @param bool $is_editing User is editing a redirection.
+	 * @return void
+	 */
+	public function page_title_actions() {
+		$actions = [
+			'settings' => [
+				'class' => 'page-title-action',
+				'href'  => Helper::get_admin_url( 'options-general#setting-panel-404-monitor' ),
+				'label' => __( 'Settings', 'rank-math' ),
+			],
+			'learn_more' => [
+				'class' => 'page-title-action',
+				'href'  => KB::get( '404-monitor' ),
+				'label' => __( 'Learn More', 'rank-math' ),
+			],
+		];
+		$actions = $this->do_filter( '404_monitor/page_title_actions', $actions );
+
+		foreach ( $actions as $action_name => $action ) {
+			?>
+				<a class="<?php echo esc_attr( $action['class'] ); ?> rank-math-404-monitor-<?php echo esc_attr( $action_name ); ?>" href="<?php echo esc_attr( $action['href'] ); ?>"><?php echo esc_attr( $action['label'] ); ?></a>
+			<?php
+		}
 	}
 }

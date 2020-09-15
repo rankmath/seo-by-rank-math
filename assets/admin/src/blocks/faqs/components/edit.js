@@ -18,12 +18,15 @@ import Inspector from './Inspector'
 import Question from './Question'
 import generateId from '@helpers/generateId'
 
+/**
+ * FAQ block edit component.
+ */
 class Edit extends Component {
-	constructor() {
-		super( ...arguments )
-		this.addNew = this.addNew.bind( this )
-	}
-
+	/**
+	 * Renders the component.
+	 *
+	 * @return {Component} FAQ block editor.
+	 */
 	render() {
 		const { className, isSelected } = this.props
 		const { textAlign } = this.props.attributes
@@ -72,6 +75,11 @@ class Edit extends Component {
 		)
 	}
 
+	/**
+	 * Render Quetion component.
+	 *
+	 * @return {Array} Array of question editor.
+	 */
 	renderQuestions() {
 		const {
 			sizeSlug,
@@ -110,7 +118,10 @@ class Edit extends Component {
 		} )
 	}
 
-	addNew() {
+	/**
+	 * Add an empty Question into block.
+	 */
+	addNew = () => {
 		const questions = [ ...this.props.attributes.questions ]
 		questions.push( {
 			id: generateId( 'faq-question' ),

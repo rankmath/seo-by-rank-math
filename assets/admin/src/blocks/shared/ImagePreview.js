@@ -8,6 +8,11 @@ import { getImageByID } from '@helpers/imageHelper'
  */
 import { withSelect } from '@wordpress/data'
 
+/**
+ * Render image from image id.
+ *
+ * @param {string} imageUrl Image url.
+ */
 const ImagePreview = ( { imageUrl } ) => {
 	if ( ! imageUrl ) {
 		return null

@@ -38,7 +38,7 @@
 		font-weight: 600;
 	}
 
-	div {
+	> div {
 		outline: 0;
 	}
 
@@ -82,7 +82,7 @@
 }
 
 // Schema Tab.
-.#{$namespace}-tab-content-richsnippet {
+.#{$namespace}-tab-content-schema {
 	.variable-group {
 		.components-button {
 			top: 30px;

@@ -16,13 +16,15 @@ import { RichText, MediaUpload } from '@wordpress/block-editor'
 import { IconButton } from '@helpers/deprecated'
 import MediaUploader from '@blocks/shared/MediaUploader'
 
+/**
+ * A Step within HowTo block.
+ */
 class Step extends Component {
-	constructor() {
-		super( ...arguments )
-		this.deleteStep = this.deleteStep.bind( this )
-		this.toggleVisibility = this.toggleVisibility.bind( this )
-	}
-
+	/**
+	 * Renders the component.
+	 *
+	 * @return {Component} Step editor.
+	 */
 	render() {
 		const {
 			title,
@@ -112,6 +114,12 @@ class Step extends Component {
 		)
 	}
 
+	/**
+	 * Update step properties.
+	 *
+	 * @param {string} prop  Poperty name.
+	 * @param {string} value Property value.
+	 */
 	setStepProp( prop, value ) {
 		const { setAttributes, index } = this.props
 		const steps = [ ...this.props.steps ]
@@ -120,7 +128,10 @@ class Step extends Component {
 		setAttributes( { steps } )
 	}
 
-	toggleVisibility() {
+	/**
+	 * Toggle step visibility.
+	 */
+	toggleVisibility = () => {
 		const { setAttributes, index } = this.props
 		const steps = [ ...this.props.steps ]
 		steps[ index ].visible = ! this.props.visible
@@ -128,7 +139,10 @@ class Step extends Component {
 		setAttributes( { steps } )
 	}
 
-	deleteStep() {
+	/**
+	 * Delete step from block.
+	 */
+	deleteStep = () => {
 		const { setAttributes, index } = this.props
 		const steps = [ ...this.props.steps ]
 		steps.splice( index, 1 )

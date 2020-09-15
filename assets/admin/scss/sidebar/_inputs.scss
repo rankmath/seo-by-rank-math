@@ -1,0 +1,25 @@
+// main: ../../common.scss
+
+.#{$namespace} {
+	&-tabs {
+		input[type="text"], input[type="number"], input[type="url"], textarea, select {
+			border-color: $dark-gray;
+			border-radius: 4px;
+
+			&:focus,
+			&:hover {
+				border-color: $border-hover-color;
+				outline: none;
+			}
+
+			&:focus {
+				background: #fff;
+				box-shadow: 0 0 0 1px $border-hover-color;
+			}
+		}
+
+		input[type="radio"]:before {
+			box-sizing: inherit;
+		}
+	}
+}

@@ -9,7 +9,6 @@ import { isUndefined } from 'lodash'
 import { __ } from '@wordpress/i18n'
 import { dispatch } from '@wordpress/data'
 import { applyFilters } from '@wordpress/hooks'
-import { TabPanel } from '@wordpress/components'
 import { createElement, Fragment } from '@wordpress/element'
 
 /**
@@ -17,10 +16,16 @@ import { createElement, Fragment } from '@wordpress/element'
  */
 import General from '@components/General/General'
 import Advanced from '@components/Advanced/Advanced'
-import RichSnippet from '@components/RichSnippets/RichSnippets'
-import RichSnippetTabIcon from '@components/RichSnippets/TabIcon'
+import Schema from '@schema/Schema'
 import Social from '@components/Social/Social'
+import SchemaTabIcon from '@schema/TabIcon'
+import TabPanel from '@components/TabPanel'
 
+/**
+ * @description Tab on select
+ *
+ * @param {string} tabName Tab name.
+ */
 const TabonSelect = ( tabName ) => {
 	if ( 'social' === tabName ) {
 		dispatch( 'rank-math' ).toggleSnippetEditor( true )
@@ -64,12 +69,12 @@ const getTabs = () => {
 		} )
 	}
 
-	if ( rankMath.canUser.snippet && ! isUndefined( rankMath.richSnippets ) ) {
+	if ( rankMath.canUser.snippet && ! isUndefined( rankMath.schemas ) ) {
 		tabs.push( {
-			name: 'richsnippet',
-			title: <RichSnippetTabIcon />,
-			view: RichSnippet,
-			className: 'rank-math-richsnippet-tab',
+			name: 'schema',
+			title: <SchemaTabIcon />,
+			view: Schema,
+			className: 'rank-math-schema-tab',
 		} )
 	}
 

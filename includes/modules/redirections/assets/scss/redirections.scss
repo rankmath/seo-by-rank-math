@@ -26,7 +26,7 @@
 
 	@extend %hide;
 
-	&.is-editing {
+	&.is-open {
 		display: block;
 	}
 
@@ -83,4 +83,8 @@ tr.rank-math-redirection-deactivated {
 			margin-left: 0;
 		}
 	}
+}
+
+.rank-math-redirections-export-options {
+	padding: 20px;
 }

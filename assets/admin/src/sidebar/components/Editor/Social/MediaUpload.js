@@ -18,7 +18,6 @@ const SocialMediaUpload = ( props ) => (
 						onClick={ open }
 						className="button"
 						isPrimary
-						isLarge
 					>
 						{ props.imageID > 0
 							? __( 'Replace Image', 'rank-math' )

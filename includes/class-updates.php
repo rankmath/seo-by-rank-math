@@ -46,6 +46,7 @@ class Updates implements Runner {
 		'1.0.43-beta-2' => 'updates/update-1.0.43.php',
 		'1.0.46'        => 'updates/update-1.0.46.php',
 		'1.0.47'        => 'updates/update-1.0.47.php',
+		'1.0.48-beta'   => 'updates/update-1.0.48.php',
 	];
 
 	/**

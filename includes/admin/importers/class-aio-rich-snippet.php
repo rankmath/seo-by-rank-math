@@ -12,6 +12,8 @@ namespace RankMath\Admin\Importers;
 
 use RankMath\Admin\Admin_Helper;
 use MyThemeShop\Helpers\DB;
+use RankMath\Schema\JsonLD;
+use RankMath\Schema\Singular;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -49,15 +51,32 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	protected $choices = [ 'postmeta' ];
 
 	/**
+	 * JsonLD.
+	 *
+	 * @var JsonLD
+	 */
+	private $json_ld;
+
+	/**
+	 * Singular.
+	 *
+	 * @var Singular
+	 */
+	private $single;
+
+	/**
 	 * Import post meta of plugin.
 	 *
 	 * @return array
 	 */
 	protected function postmeta() {
 		$this->set_pagination( $this->get_post_ids( true ) );
-		$snippet_posts = $this->get_post_ids();
 
-		foreach ( $snippet_posts as $snippet_post ) {
+		// Set Converter.
+		$this->json_ld = new JsonLD();
+		$this->single  = new Singular();
+
+		foreach ( $this->get_post_ids() as $snippet_post ) {
 			$type      = $this->is_allowed_type( $snippet_post->meta_value );
 			$meta_keys = $this->get_metakeys( $type );
 			if ( false === $type || false === $meta_keys ) {
@@ -90,6 +109,17 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 			}
 
 			update_post_meta( $post_id, 'rank_math_snippet_' . $snippet_value, $value );
+		}
+		// Convert post now.
+		$data = $this->json_ld->get_old_schema( $post_id, $this->single );
+		if ( isset( $data['richSnippet'] ) ) {
+			$data             = $data['richSnippet'];
+			$type             = $data['@type'];
+			$data['metadata'] = [
+				'title' => $type,
+				'type'  => 'template',
+			];
+			update_post_meta( $post_id, 'rank_math_schema_' . $type, $data );
 		}
 	}
 

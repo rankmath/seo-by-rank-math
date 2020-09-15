@@ -6,8 +6,8 @@ import { debounce, forEach, isInteger, isUndefined } from 'lodash'
 /**
  * WordPress dependencies
  */
-import { select, subscribe } from '@wordpress/data'
 import { addAction } from '@wordpress/hooks'
+import { select, subscribe } from '@wordpress/data'
 
 /**
  * Internal dependencies

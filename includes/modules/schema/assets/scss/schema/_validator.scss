@@ -1,0 +1,118 @@
+// main: ../schema.scss
+
+.#{$namespace} {
+    &-pretty-json {
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        textarea {
+            display: none;
+        }
+
+		&.free-version {
+			form,
+			.code-output {
+				filter: blur(2px);
+			}
+		}
+
+        form {
+            align-items: center;
+            @extend %flex;
+
+            h4 {
+                margin-right: auto;
+                margin-bottom: 0;
+            }
+
+            button.is-small {
+                i {
+                    font-size: 13px;
+
+                    display: inline-block;
+
+                    vertical-align: -3.5px;
+                }
+
+                &:first-of-type {
+                    i {
+                        margin-right: 3px;
+                    }
+                }
+            }
+
+            .structured-data-copy {
+                margin-right: 5px;
+
+                .success {
+                    display: none;
+                }
+
+                &.copied.is-small {
+                    color: $color-good-dark;
+                    border-color: $color-good-dark;
+
+                    .original-text {
+                        display: none;
+                    }
+
+                    .success {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+
+        .code-output {
+            line-height: 1.5em;
+
+            overflow-y: auto;
+
+            margin: 1rem 0 0;
+
+            border-radius: 4px;
+            background: #283142;
+
+            code {
+                font-family: 'Roboto Mono', monospace;
+                font-size: 14px;
+                line-height: 20px;
+
+                display: block;
+                overflow: scroll;
+
+                max-height: 540px;
+                padding: 1rem;
+
+                color: #eceff1;
+            }
+        }
+
+        .string {
+            color: #4dd0e1;
+        }
+
+        .number {
+            color: #ffab70;
+        }
+
+        .boolean {
+            color: #ffab70;
+        }
+
+        .null {
+            color: #fafbfc;
+        }
+
+        .key {
+            color: #9ccc65;
+        }
+    }
+}

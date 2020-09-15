@@ -9,6 +9,7 @@
  * External Dependencies
  */
 import jQuery from 'jquery'
+import { debounce } from 'lodash'
 
 /**
  * Internal Dependencies
@@ -64,7 +65,7 @@ import addNotice from '@helpers/addNotice'
 					self.form.append( dropdown )
 					dropdown.hide().empty()
 
-					const searchIndexes = _.debounce( function( query ) {
+					const searchIndexes = debounce( function( query ) {
 						self.wrap.addClass( 'searching' )
 						self.searchIndexes( query, dropdown )
 					}, 300 )
@@ -593,4 +594,4 @@ import addNotice from '@helpers/addNotice'
 
 		window.rankMathOptions.init()
 	} )
-} )( jQuery )
+}( jQuery ) )

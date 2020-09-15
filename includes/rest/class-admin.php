@@ -109,6 +109,17 @@ class Admin extends WP_REST_Controller {
 				'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'get_object_permissions_check' ],
 			]
 		);
+
+		register_rest_route(
+			$this->namespace,
+			'/updateSchemas',
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'update_schemas' ],
+				'args'                => $this->get_update_schemas_args(),
+				'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'get_object_permissions_check' ],
+			]
+		);
 	}
 
 	/**
@@ -174,6 +185,12 @@ class Admin extends WP_REST_Controller {
 
 		$sanitizer = Sanitize::get();
 		foreach ( $meta as $meta_key => $meta_value ) {
+			// Delete schema by meta id.
+			if ( Str::starts_with( 'rank_math_delete_schema-', $meta_key ) ) {
+				\delete_metadata_by_mid( 'post', absint( \str_replace( 'rank_math_delete_schema-', '', $meta_key ) ) );
+				continue;
+			}
+
 			if ( empty( $meta_value ) ) {
 				delete_metadata( $object_type, $object_id, $meta_key );
 				continue;
@@ -183,6 +200,36 @@ class Admin extends WP_REST_Controller {
 		}
 
 		return $new_slug;
+	}
+
+	/**
+	 * Update metadata.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function update_schemas( WP_REST_Request $request ) {
+		$object_id = $request->get_param( 'objectID' );
+		$schemas   = $request->get_param( 'schemas' );
+
+		$new_ids   = [];
+		$sanitizer = Sanitize::get();
+		foreach ( $schemas as $meta_id => $schema ) {
+			$meta_key = 'rank_math_schema_' . $schema['@type'];
+
+			// Add new.
+			if ( Str::starts_with( 'new-', $meta_id ) ) {
+				$new_ids[ $meta_id ] = add_post_meta( $object_id, $meta_key, $sanitizer->sanitize( $meta_key, $schema ) );
+				continue;
+			}
+
+			// Update old.
+			$db_id      = absint( str_replace( 'schema-', '', $meta_id ) );
+			$prev_value = update_metadata_by_mid( 'post', $db_id, $schema, $meta_key );
+		}
+
+		return $new_ids;
 	}
 
 	/**
@@ -198,7 +245,7 @@ class Admin extends WP_REST_Controller {
 	}
 
 	/**
-	 * Get update metadta endpoint arguments.
+	 * Get update metadata endpoint arguments.
 	 *
 	 * @return array
 	 */
@@ -219,6 +266,33 @@ class Admin extends WP_REST_Controller {
 			'meta'       => [
 				'required'          => true,
 				'description'       => esc_html__( 'Meta to add or update data.', 'rank-math' ),
+				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
+			],
+		];
+	}
+
+	/**
+	 * Get update schemas endpoint arguments.
+	 *
+	 * @return array
+	 */
+	private function get_update_schemas_args() {
+		return [
+			'objectType' => [
+				'type'              => 'string',
+				'required'          => true,
+				'description'       => esc_html__( 'Object Type i.e. post, term, user', 'rank-math' ),
+				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
+			],
+			'objectID'   => [
+				'type'              => 'integer',
+				'required'          => true,
+				'description'       => esc_html__( 'Object unique id', 'rank-math' ),
+				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
+			],
+			'schemas'    => [
+				'required'          => true,
+				'description'       => esc_html__( 'schemas to add or update data.', 'rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 		];

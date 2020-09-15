@@ -1,6 +1,6 @@
 // main: ../../common.scss
 // Button.
-.button, .button-secondary, .components-button, .is-secondary:not(:disabled):not([aria-disabled=true]) {
+.button, .button-secondary, .is-secondary {
 	font-size: 14px;
 	line-height: 38px;
 	padding: 0 20px;
@@ -9,7 +9,8 @@
 	border: 1px solid $gray;
 	color: darken($dark_gray, 8);
 	min-height: 30px;
-    height: auto;
+	height: auto;
+	box-shadow: none;
 
 	&.active {
 		color: darken($dark_gray, 12);
@@ -22,7 +23,7 @@
 	&:hover {
 		color: darken($dark_gray, 12);
 		background: #f8f9fa;
-		border-color: $dark_gray;
+		border-color: $primary;
 	}
 
 	&:focus {
@@ -36,7 +37,7 @@
 }
 
 // Primary Button.
-.button-primary:not(.default) {
+.button-primary:not(.default), .is-primary {
 	color: #fff;
 	border-color: $primary;
 	background: $primary;
@@ -66,20 +67,20 @@
 }
 
 // Link Button.
-.button-link {
+.button-link, .is-link {
 	border: 0;
 	background: transparent;
 	box-shadow: none;
 }
 // Small Button.
-.button-small {
+.button-small, .is-small {
 	font-size: 12px;
 	line-height: 24px;
 	padding: 0 8px;
 }
 
 // Large Button.
-.button-xlarge {
+.button-xlarge, .is-large {
 	font-size: 16px;
 	line-height: 44px;
 	height: 46px;

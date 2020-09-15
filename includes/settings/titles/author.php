@@ -8,7 +8,7 @@
 
 use RankMath\Helper;
 
-$dep = [ [ 'disable_author_archives', 'off' ] ];
+$dep = [ [ 'disable_author_archives', 'on' ] ];
 
 $cmb->add_field(
 	[

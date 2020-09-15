@@ -111,6 +111,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 			remove_filter( 'pre_kses', 'wp_pre_kses_block_attributes', 10 );
 			$this->faq_converter   = new Yoast_FAQ_Converter();
 			$this->howto_converter = new Yoast_HowTo_Converter();
+			$this->local_converter = new Yoast_Local_Converter();
 			foreach ( $posts as $post_id ) {
 				$post = get_post( $post_id );
 				$this->convert( $post );
@@ -139,6 +140,11 @@ class Yoast_Blocks extends \WP_Background_Process {
 		if ( isset( $blocks['yoast/how-to-block'] ) && ! empty( $blocks['yoast/how-to-block'] ) ) {
 			$dirty   = true;
 			$content = $this->howto_converter->replace( $post->post_content, $blocks['yoast/how-to-block'] );
+		}
+
+		if ( ! empty( array_intersect( array_keys( $blocks ), $this->local_converter->yoast_blocks ) ) ) {
+			$dirty   = true;
+			$content = $this->local_converter->replace( $post->post_content, $blocks );
 		}
 
 		if ( $dirty ) {
@@ -171,7 +177,12 @@ class Yoast_Blocks extends \WP_Background_Process {
 		// HowTo Posts.
 		$args['s'] = 'wp:yoast/how-to-block';
 		$howto     = get_posts( $args );
-		$posts     = array_merge( $faqs, $howto );
+
+		// Local Business Posts.
+		$args['s']         = ':yoast-seo-local/';
+		$args['post_type'] = 'any';
+		$local_business    = get_posts( $args );
+		$posts             = array_merge( $faqs, $howto, $local_business );
 
 		$posts_data = [
 			'posts' => $posts,
@@ -214,6 +225,11 @@ class Yoast_Blocks extends \WP_Background_Process {
 
 			if ( 'yoast/how-to-block' === $name ) {
 				$block             = $this->howto_converter->convert( $block );
+				$blocks[ $name ][] = \serialize_block( $block );
+			}
+
+			if ( in_array( $name, $this->local_converter->yoast_blocks, true ) ) {
+				$block             = $this->local_converter->convert( $block );
 				$blocks[ $name ][] = \serialize_block( $block );
 			}
 		}

@@ -63,7 +63,7 @@ import addNotice from '@helpers/addNotice'
 					e.preventDefault();
 					var $this = $( this );
 					var target = $this.attr( 'href' ).substr( 1 );
-					$this.addClass( 'active' ).siblings().removeClass( 'active' );
+					$this.addClass( 'active-tab' ).siblings().removeClass( 'active-tab' );
 					$( '#'+target ).addClass( 'active-tab' ).siblings().removeClass( 'active-tab' );
 				});
 			},

@@ -9,7 +9,7 @@
 	$tags-focus-border-color : #00a0d2 !default;
 
 	$tagMargin               : 5px !default;
-	$tag-pad                 : 6px 6px 7px !default;
+	$tag-pad                 : 7px 6px 6px !default;
 
 	$tag-text-color          : black !default;
 	$tag-text-color--edit    : black !default;
@@ -290,7 +290,7 @@
 			content: attr(data-placeholder);
 			line-height: 1.8;
 			position: absolute;
-			top: 1px;
+			top: 2px;
 			z-index: 1;
 			color: $tag-text-color;
 			white-space: nowrap;

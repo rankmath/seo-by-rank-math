@@ -1,5 +1,5 @@
 const resolve = require( 'path' ).resolve
-const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' )
+const UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' )
 
 const externals = {
 	jquery: 'jQuery',
@@ -37,6 +37,7 @@ const externals = {
 }
 
 const alias = {
+	'@root': resolve( __dirname, './assets/admin/src/' ),
 	'@blocks': resolve( __dirname, './assets/admin/src/blocks' ),
 	'@components': resolve(
 		__dirname,
@@ -46,9 +47,9 @@ const alias = {
 		__dirname,
 		'./assets/admin/src/sidebar/containers'
 	),
-	'@snippets': resolve(
+	'@schema': resolve(
 		__dirname,
-		'./assets/admin/src/sidebar/components/rich-snippets'
+		'./includes/modules/schema/assets/js'
 	),
 	'@helpers': resolve( __dirname, './assets/admin/src/helpers' ),
 	'@slots': resolve( __dirname, './assets/admin/src/sidebar/slots' ),
@@ -59,6 +60,8 @@ const entryPoints = {
 	blocks: './assets/admin/src/blocks.js',
 	classic: './assets/admin/src/classic/classic.js',
 	gutenberg: './assets/admin/src/gutenberg/gutenberg.js',
+	'schema-classic': './includes/modules/schema/assets/js/metabox-classic.js',
+	'schema-template': './includes/modules/schema/assets/js/metabox-template.js',
 	elementor: './assets/admin/src/elementor/elementor.js',
 	'gutenberg-formats': './assets/admin/src/gutenberg/formats/index.js',
 	'gutenberg-primary-term': './assets/admin/src/gutenberg-primary-term.js',
@@ -78,7 +81,7 @@ const entryPoints = {
 }
 
 // Adding our UglifyJS plugin
-const uglifyjs = new UglifyJSPlugin( {
+const uglifyjs = new UglifyJsPlugin( {
 	uglifyOptions: {
 		mangle: true,
 		compress: {
@@ -101,9 +104,12 @@ const uglifyjs = new UglifyJSPlugin( {
 	},
 } )
 
-module.exports = function( env ) {
+module.exports = function( env, arg ) {
 	const mode =
-		( env && env.environment ) || process.env.NODE_ENV || 'production'
+		( env && env.environment ) ||
+		process.env.NODE_ENV ||
+		arg.mode ||
+		'production'
 
 	return {
 		devtool:

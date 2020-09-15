@@ -80,6 +80,8 @@ class Post_Screen implements IScreen {
 		$is_elementor    = Helper::is_elementor_editor();
 		$is_block_editor = Helper::is_block_editor() && \rank_math_is_gutenberg();
 
+		Helper::add_json( 'postType', get_post_type() );
+
 		if ( ! $is_elementor ) {
 			$this->enqueue_custom_fields();
 		}
@@ -94,7 +96,6 @@ class Post_Screen implements IScreen {
 
 		if ( $is_block_editor || $is_elementor ) {
 			$this->enqueue_commons();
-			Helper::add_json( 'postType', get_post_type() );
 		}
 
 		if ( $is_block_editor && ! $is_elementor && Editor::can_add_editor() ) {
@@ -310,6 +311,7 @@ class Post_Screen implements IScreen {
 			'rank-math-gutenberg',
 			rank_math()->plugin_url() . 'assets/admin/js/gutenberg.js',
 			[
+				'clipboard',
 				'tagify',
 				'wp-autop',
 				'wp-blocks',

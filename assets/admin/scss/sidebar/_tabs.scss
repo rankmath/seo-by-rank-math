@@ -9,6 +9,8 @@
 
 		button {
 			position: relative;
+			overflow: visible;
+			box-shadow: none;
 
 			display: block;
 
@@ -31,9 +33,10 @@
 				background: transparent;
 				box-shadow: none;
 				font-weight: normal;
+				outline: none;
 			}
 
-			&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover{
+			&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
 				background: transparent;
 				box-shadow: none;
 
@@ -48,9 +51,14 @@
 				font-size: 12px;
 
 				vertical-align: -1px;
-				margin-right: 5px;
+				@include margin( null 7px null 0 );
 
 				@include size( 16px );
+
+				&.rm-icon-schema {
+					font-size: 13px;
+					vertical-align: -3px;
+				}
 			}
 
 			span {
@@ -73,7 +81,7 @@
 				}
 
 				i {
-					@include margin( null 5px null 0 );
+					@include margin( null 7px null 0 );
 					box-shadow: none;
 				}
 
@@ -91,7 +99,7 @@
 					background: #0095cd;
 					box-shadow: none;
 
-					@include position( absolute, null null 0 0 );
+					@include position( absolute, null null -1px 0 );
 				}
 			}
 		}
@@ -99,14 +107,29 @@
 
 	.components-tab-panel__tab-content {
 		.components-panel__body {
+			@import '../partials/common/button';
+
 			background: #fff;
+			border-bottom: 0;
+			margin-bottom: 0;
 		}
 
 		// Edit Snippet Button.
 		.rank-math-edit-snippet {
+			background: $primary;
+			border-color: $primary-border-color;
 			margin-top: 16px;
 			height: 30px;
+
+			&:hover {
+				background: $primary-hover;
+				border-color: $primary-hover-border-color;
+			}
 		}
+	}
+
+	.cmb2-metabox-description {
+		font-style: normal;
 	}
 
 	// Date Control
@@ -120,7 +143,7 @@
 			height: 24px;
 			padding: 0 3px;
 
-			&:not(:disabled):not([aria-disabled=true]):not(.is-default):hover {
+			&:not(.is-default):hover {
 				background: transparent;
 				box-shadow: none;
 			}

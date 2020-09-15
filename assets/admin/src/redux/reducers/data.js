@@ -1,24 +1,10 @@
 /**
  * External dependencies
  */
-import { get, isEmpty, map } from 'lodash'
-
-/**
- * Internal dependencies
- */
-import decodeEntities from '@helpers/decodeEntities'
+import { get } from 'lodash'
 
 const serpData = rankMath.assessor.serpData
 const hasRedirection = rankMath.assessor.hasRedirection
-const richSnippets = get( rankMath, 'richSnippets', {} )
-richSnippets.snippetType = get( richSnippets, 'snippetType', 'off' )
-richSnippets.snippetType = isEmpty( richSnippets.snippetType )
-	? 'off'
-	: richSnippets.snippetType
-
-map( richSnippets, ( value, key ) => {
-	richSnippets[ key ] = decodeEntities( value )
-} )
 
 const DEFAULT_STATE = {
 	postID: null,
@@ -87,7 +73,7 @@ const DEFAULT_STATE = {
 	twitterAppGoogleplayUrl: serpData.twitterAppGoogleplayUrl,
 	twitterAppCountry: serpData.twitterAppCountry,
 
-	richSnippets,
+	schemas: get( rankMath, 'schemas', {} ),
 
 	// Misc.
 	score: 0,

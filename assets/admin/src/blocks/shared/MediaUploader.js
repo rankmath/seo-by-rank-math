@@ -10,6 +10,11 @@ import { Button } from '@wordpress/components'
 import { IconButton } from '@helpers/deprecated'
 import ImagePreview from '@blocks/shared/ImagePreview'
 
+/**
+ * Media uploader component.
+ *
+ * @param {Object} props This component's props.
+ */
 const MediaUploader = ( {
 	imageID,
 	sizeSlug,

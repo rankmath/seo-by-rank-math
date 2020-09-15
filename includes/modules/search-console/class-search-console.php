@@ -168,7 +168,7 @@ class Search_Console extends Base {
 			'rank-math-search-console',
 			esc_html__( 'Search Console', 'rank-math' ),
 			[
-				'position'   => 12,
+				'position'   => 50,
 				'parent'     => 'rank-math',
 				'capability' => 'rank_math_search_console',
 				'render'     => $this->directory . '/views/main.php',

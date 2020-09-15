@@ -10,7 +10,7 @@
  */
 import $ from 'jquery'
 
-class RankMath_Dashboard {
+class RankMathDashboard {
 	/**
 	 * Class constructor
 	 */
@@ -19,6 +19,7 @@ class RankMath_Dashboard {
 		this.updateModules()
 		this.initializeClipBoard()
 		this.modeSelector()
+		this.usageTracking()
 	}
 
 	deactivatePlugins() {
@@ -127,10 +128,10 @@ class RankMath_Dashboard {
 	}
 
 	modeSelector() {
-		$( '.rank-math-mode-selector a' ).on( 'click', function(e) {
-			e.preventDefault();
+		$( '.rank-math-mode-selector a' ).on( 'click', function( e ) {
+			e.preventDefault()
 
-			const mode = $( this ).data( 'mode' );
+			const mode = $( this ).data( 'mode' )
 
 			$.ajax( {
 				url: rankMath.api.root + 'rankmath/v1/updateMode',
@@ -138,9 +139,7 @@ class RankMath_Dashboard {
 				beforeSend( xhr ) {
 					xhr.setRequestHeader( 'X-WP-Nonce', rankMath.api.nonce )
 				},
-				data: {
-					mode: mode,
-				},
+				data: { mode },
 			} ).done( function( response ) {
 				if ( ! response ) {
 					/*eslint no-alert: 0*/
@@ -148,14 +147,34 @@ class RankMath_Dashboard {
 					return
 				}
 
-				location.reload()
+				window.location.reload()
 			} )
 
-			return false;
+			return false
+		} )
+	}
+
+	usageTracking() {
+		$( '#rank-math-usage-tracking' ).on( 'change', function() {
+			$.ajax( {
+				url: rankMath.api.root + 'rankmath/v1/updateTracking',
+				method: 'POST',
+				beforeSend( xhr ) {
+					xhr.setRequestHeader( 'X-WP-Nonce', rankMath.api.nonce )
+				},
+				data: {
+					enable: $( this ).is( ':checked' ),
+				},
+			} ).done( function( response ) {
+				if ( ! response ) {
+					/*eslint no-alert: 0*/
+					window.alert( 'Something went wrong! Please try again.' )
+				}
+			} )
 		} )
 	}
 }
 
 jQuery( document ).ready( () => {
-	new RankMath_Dashboard()
+	new RankMathDashboard()
 } )

@@ -1,0 +1,36 @@
+// main: ../schema.scss
+
+.#{$namespace}-tab-content-schema {
+    ##{$namespace}-schema-item {
+        .#{$namespace}-schema-name {
+            font-size: 13px;
+            font-weight: normal;
+
+            i.rm-icon {
+                font-weight: normal;
+            }
+        }
+
+        .#{$namespace}-schema-item-actions {
+            button.button {
+                i {
+                    margin-right: 0;
+                }
+
+                span {
+                    display: none;
+                }
+            }
+
+            .#{$namespace}-inline-confirmation {
+                button span {
+                    display: inline;
+                }
+
+                .#{$namespace}-delete-schema span {
+                    display: none;
+                }
+            }
+        }
+    }
+}

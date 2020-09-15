@@ -81,4 +81,4 @@ import jQuery from 'jquery'
 			} )
 		} )
 	} )
-} )( jQuery )
+}( jQuery ) )

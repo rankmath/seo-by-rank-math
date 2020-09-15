@@ -15,7 +15,7 @@ export default ( score, maxScore ) => {
 	const percentage = round( ( score / maxScore ) * 100 )
 
 	if ( 100 <= percentage ) {
-		return;
+		return
 	}
 
 	if ( 49 < percentage ) {

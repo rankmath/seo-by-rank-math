@@ -33,3 +33,12 @@ export function updateSelectedKeyword( keyword ) {
 export function refreshResults() {
 	return updateAppUi( 'refreshResults', Date.now() )
 }
+
+/**
+ * Set version.
+ *
+ * @return {Object} An action for redux.
+ */
+export function setVersion() {
+	return updateAppUi( 'isPro', true )
+}

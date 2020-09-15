@@ -207,7 +207,7 @@ class Helper {
 	 * @param string $modules Modules to modify.
 	 */
 	public static function update_modules( $modules ) {
-		$stored = get_option( 'rank_math_modules' );
+		$stored = get_option( 'rank_math_modules', [] );
 
 		foreach ( $modules as $module => $action ) {
 			if ( 'off' === $action ) {

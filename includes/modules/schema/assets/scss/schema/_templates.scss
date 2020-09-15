@@ -1,0 +1,313 @@
+// main: ../schema.scss
+
+.#{$namespace} {
+    // Schema Section Title.
+    &-schema-section-title {
+        font-size: 14px;
+        font-weight: 600;
+
+        margin: 0 0 .825rem;
+
+        color: $text;
+    }
+
+    // In Use.
+    &-schema-in-use {
+        margin-bottom: 1rem;
+
+        color: #4c6875;
+
+        ##{$namespace}-schema-item {
+            border-color: $primary;
+            background: lighten($primary,52);
+
+            .button {
+                color: #4c6875;
+            }
+
+            .#{$namespace}-schema-name i {
+                font-weight: 600;
+            }
+        }
+
+        > * {
+            margin-bottom: 1rem!important;
+
+            &:last-child {
+                margin-bottom: 0!important;
+            }
+        }
+
+        .#{$namespace}-notice {
+            margin: 0 0 1rem;
+
+            strong {
+                color: $color-1;
+            }
+        }
+    }
+
+    &-schema-filter {
+        display: none;
+    }
+
+    &-schema-catalog {
+        ##{$namespace} {
+            &-schema-item {
+                &:hover {
+                    color: #4c6875;
+                }
+            }
+        }
+    }
+}
+
+// Schema Type list.
+##{$namespace} {
+    &-schema-list-wrapper {
+        display: flex;
+
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        align-items: center;
+    }
+
+    &-schema-item {
+        font-size: 14px;
+
+        position: relative;
+
+        box-sizing: border-box;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px 12px;
+
+        text-decoration: none;
+
+        color: darken($dark_gray, 8);
+        border: 1px solid $gray;
+        border-radius: 4px;
+        background: #fbfbfb;
+
+        @extend %flex;
+        justify-content: space-between;
+
+        &:hover,
+        &:focus,
+        &.in-use {
+            border-color: $primary;
+            background: lighten($primary,52);
+        }
+
+        &.in-use {
+            box-shadow: 0 0 0 1px $primary;
+        }
+
+        input[type='radio'] {
+            margin-top: 0;
+            margin-right: 8px;
+        }
+
+        .#{$namespace}-schema-name {
+            line-height: 1.4;
+
+            flex: 1;
+
+            i {
+                font-size: 12px;
+
+                margin-right: 8px;
+
+                vertical-align: -1px;
+            }
+        }
+
+        .#{$namespace}-schema-item-actions {
+            @extend %flex;
+        }
+
+        .rm-icon-circle-plus:before {
+            vertical-align: -2.4px;
+        }
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
+
+// Schema Actions.
+##{$namespace}-schema-item,
+.#{$namespace}-schema-tabs .components-panel__body .schema-group--actions {
+    .button {
+        font-size: 14px;
+        line-height: 1.4;
+
+        min-height: auto;
+        padding: 0 12px;
+
+        text-decoration: none;
+
+        border: 0;
+        border-right: 1px solid $light_gray;
+        background: transparent;
+
+        &:hover,
+        &:focus:not(:disabled),
+        &:active {
+            color: $primary;
+            border-color: $light_gray;
+            outline: none;
+            background: none;
+            box-shadow: none;
+        }
+
+        &:last-child {
+            padding-right: 0;
+
+            border-right: 0!important;
+        }
+
+        &.#{$namespace} {
+            &-edit-schema i {
+                vertical-align: 0;
+            }
+
+            &-delete-schema,
+            &-delete-group {
+                i {
+                    vertical-align: -1px;
+                }
+
+                &:hover {
+                    color: $error;
+                }
+            }
+
+            &-use-schema i {
+                font-size: 11px;
+
+                vertical-align: -1px;
+            }
+        }
+
+        i {
+            font-size: 12px;
+            line-height: 1.3;
+
+            margin-right: 5px;
+
+            vertical-align: middle;
+        }
+
+        // Remove preview button in the free version.
+        &.#{$namespace}-preview-schema {
+            display: none;
+        }
+    }
+}
+
+// Delete Confirmation.
+##{$namespace}-schema-item,
+.#{$namespace}-schema-tab-content-schemaBuilder .schema-builder {
+    .#{$namespace}-confirm-delete {
+        position: absolute;
+        top: 6px;
+        right: 10px;
+
+        width: 158px;
+        margin-left: -1px;
+        padding: 4px 10px;
+
+        border-radius: 3px;
+        background: #fff;
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .15);
+
+        .is-link {
+            display: inline-block!important;
+
+            line-height: 1.4;
+
+            padding: 0 12px;
+
+            text-decoration: none;
+
+            border-right: 1px solid $light_gray;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &:first-of-type {
+                color: $error;
+
+                &:hover,
+                &:focus {
+                    color: $status-bad;
+                }
+            }
+
+            &:last-of-type {
+                padding-right: 0;
+
+                color: $primary;
+                border-right: 0;
+
+                &:hover,
+                &:focus {
+                    color: $primary-hover;
+                }
+            }
+        }
+
+        // Custom Builder.
+        > span {
+            font-weight: 600;
+            line-height: 1.4;
+
+            margin-right: 8px;
+        }
+    }
+
+    .schema-group--actions .#{$namespace}-inline-confirmation {
+        height: 22px;
+        position: relative;
+        display: none;
+
+        .#{$namespace}-confirm-delete {
+            top: -3px;
+            right: 0;
+        }
+
+        > button {
+            margin-top: 2px;
+        }
+    }
+}
+
+// Pro Preview - Custom Schema Image
+.#{$namespace}-custom-schema-wrapper {
+    img {
+        opacity: 0.6;
+        max-width: 100%;
+    }
+}
+
+// Show/Hide Group Action buttons depending on the repeater
+.show-add-property-group > .schema-group > .schema-group-header .#{$namespace}-add-property-group,
+.show-add-property > .schema-group > .schema-group-header > .schema-group--actions {
+    display: inline-block!important;
+}
+
+.show-delete-property-group {
+    > div > .schema-group-header div.#{$namespace}-inline-confirmation {
+        display: inline-block!important;
+    }
+}
+
+.show-delete-property {
+    > div div.#{$namespace}-inline-confirmation button.button {
+        display: inline-block!important;
+    }
+}
