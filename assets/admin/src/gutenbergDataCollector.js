@@ -112,7 +112,6 @@ class GutenbergDataCollector {
 			this.metabox.setVariable( 'title', newData.title )
 			this.metabox.setVariable( 'term', newData.title )
 			this.metabox.setVariable( 'author', newData.title )
-			this.metabox.setVariable( 'name', newData.title )
 			this.metabox.updateTitlePreview()
 		}
 

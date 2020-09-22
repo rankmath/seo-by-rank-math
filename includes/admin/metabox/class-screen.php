@@ -127,6 +127,7 @@ class Screen implements IScreen {
 				'customPermalinks' => (bool) get_option( 'permalink_structure', false ),
 				'isUserRegistered' => Helper::is_site_connected(),
 				'maxTags'          => $this->do_filter( 'focus_keyword/maxtags', 5 ),
+				'trendsIcon'       => Admin_Helper::get_trends_icon_svg(),
 				'showScore'        => Helper::is_score_enabled(),
 				'canUser'          => [
 					'general'  => Helper::has_cap( 'onpage_general' ),
@@ -139,7 +140,7 @@ class Screen implements IScreen {
 					'serpData'         => $this->get_object_values(),
 					'powerWords'       => $this->power_words(),
 					'sentimentKbLink'  => KB::get( 'sentiments' ),
-					'hundredScoreLink' => KB::get( 'score-100' ),
+					'hundredScoreLink' => KB::get( 'score-100-ge' ),
 					'researchesTests'  => $this->get_analysis(),
 				],
 				'is_front_page'    => Admin_Helper::is_home_page(),

@@ -1,11 +1,12 @@
 /**
  * External dependencies
  */
-import { get, forEach, startCase } from 'lodash'
+import { get, forEach, startCase, orderBy } from 'lodash'
 
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n'
 import apiFetch from '@wordpress/api-fetch'
 import { doAction, applyFilters } from '@wordpress/hooks'
 
@@ -57,6 +58,10 @@ class MapCache {
 
 		if ( 'product' !== rankMath.postType ) {
 			delete schemaMaps.schemas.WooCommerceProduct
+		}
+
+		if ( 'download' !== rankMath.postType ) {
+			delete schemaMaps.schemas.EDDProduct
 		}
 
 		this.cache = applyFilters( 'rank_math_schema_maps', schemaMaps )
@@ -118,9 +123,11 @@ class MapCache {
 			forEach( this.cache.schemas, ( value, key ) => {
 				this.templates.push( {
 					type: key,
-					title: startCase( key ),
+					title: 'WooCommerceProduct' !== key ? __( startCase( key ), 'rank-math' ) : __( 'WooCommerce Product', 'rank-math' ),
 				} )
 			} )
+
+			this.templates = orderBy( this.templates, 'type' )
 		}
 
 		return this.templates

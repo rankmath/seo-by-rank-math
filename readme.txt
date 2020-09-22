@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.48-beta
+Stable tag: 1.0.48-beta-2
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -473,10 +473,20 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
+= 1.0.48-beta-2 [Sep 23, 2020] =
+* Changed: Default mode to 'Advanced' on new installations
+* Fixed: Some small issues in the new Schema Module
+* Fixed: [Contact shortcode](https://rankmath.com/kb/titles-and-meta/#displaying-your-contact-information) was not showing some contact info like Email & Phone number
+* Fixed: `%name%` variable was not working in the backend
+* Fixed: Variation Products were showing price mismatch warning in the Google Merchant Centre
+* Fixed: PHP warnings related to [beta testing](https://rankmath.com/kb/version-control/#beta-updates) functionality on some installations
+* Fixed: Schema markup issue when `BankOrCreditUnion` is selected in the Local SEO settings
+* Fixed: Removed non-archive CPT pages from the breadcrumb's schema markup code
+
 = 1.0.48-beta [Sep 15, 2020] =
 * Added: [HUGE] Completely revamped UI for the [Schema](https://rankmath.com/kb/rich-snippets/) module
 * Added: [NEW] [Entity Graph](https://www.w3.org/TR/json-ld/#named-graphs) for the Schema markup. Now all the nodes are connected by edges
-* Added: Code to make upcoming Pro version compatible with the free version
+* Added: Code to make [upcoming Pro version](https://rankmath.com/pro/) compatible with the free version
 * Improved: UI of the export option in the Redirections page
 * Improved: Some missing text in the translation file
 * Improved: Added a condition to check if a method exists in the `Paper` class

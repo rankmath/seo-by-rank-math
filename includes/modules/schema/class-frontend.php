@@ -43,6 +43,23 @@ class Frontend {
 	public function __construct() {
 		$this->action( 'rank_math/json_ld', 'add_schema', 10, 2 );
 		$this->action( 'rank_math/json_ld', 'connect_schema_entities', 99, 2 );
+		$this->filter( 'rank_math/snippet/rich_snippet_event_entity', 'validate_event_schema', 11, 2 );
+	}
+
+	/**
+	 * Add timezone to startDate field.
+	 *
+	 * @param array $schema Snippet Data.
+	 * @return array
+	 */
+	public function validate_event_schema( $schema ) {
+		if ( empty( $schema['startDate'] ) ) {
+			return $schema;
+		}
+
+		$schema['startDate'] = str_replace( ' ', 'T', Helper::convert_date( $schema['startDate'], true ) );
+
+		return $schema;
 	}
 
 	/**
@@ -62,7 +79,7 @@ class Frontend {
 		$schemas = array_filter(
 			DB::get_schemas( $post->ID ),
 			function( $schema ) {
-				return 'WooCommerceProduct' !== $schema['@type'];
+				return ! in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
 			}
 		);
 		$schemas = $jsonld->replace_variables( $schemas );
@@ -92,6 +109,7 @@ class Frontend {
 
 			$schema_types[] = $schema['@type'];
 			$this->connect_properties( $schema, $id, $jsonld, $schemas );
+			$this->add_main_entity_of_page( $schema, $jsonld );
 			$schemas[ $id ] = $schema;
 		}
 
@@ -126,11 +144,9 @@ class Frontend {
 			unset( $schema['image'] );
 		}
 
-		$schema['@id']              = $jsonld->parts['canonical'] . '#' . $id;
-		$schema['mainEntityOfPage'] = [ '@id' => $jsonld->parts['canonical'] . '#webpage' ];
-
-		$type  = \strtolower( $schema['@type'] );
-		$props = [
+		$schema['@id'] = $jsonld->parts['canonical'] . '#' . $id;
+		$type          = \strtolower( $schema['@type'] );
+		$props         = [
 			'is_part_of' => [
 				'key'   => 'webpage',
 				'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! Str::contains( 'event', $type ),
@@ -145,7 +161,7 @@ class Frontend {
 			],
 			'language'   => [
 				'key'   => 'inLanguage',
-				'value' => true,
+				'value' => ! in_array( $type, [ 'person', 'service', 'restaurant', 'product', 'musicgroup', 'musicalbum', 'jobposting' ], true ),
 			],
 		];
 
@@ -156,6 +172,24 @@ class Frontend {
 
 			$jsonld->add_prop( $prop, $schema, $data['key'], $schemas );
 		}
+	}
+
+	/**
+	 * Add main entity of page property.
+	 *
+	 * @param array  $schema  Schema Entity.
+	 * @param JsonLD $jsonld  JsonLD Instance.
+	 */
+	private function add_main_entity_of_page( &$schema, $jsonld ) {
+		if ( ! isset( $schema['isPrimary'] ) ) {
+			return;
+		}
+
+		if ( ! empty( $schema['isPrimary'] ) ) {
+			$schema['mainEntityOfPage'] = [ '@id' => $jsonld->parts['canonical'] . '#webpage' ];
+		}
+
+		unset( $schema['isPrimary'] );
 	}
 
 	/**

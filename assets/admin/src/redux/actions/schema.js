@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { findKey } from 'lodash'
+
+/**
  * WordPress dependencies
  */
 import { select } from '@wordpress/data'
@@ -133,10 +138,6 @@ export function deleteSchema( index ) {
 	const newSchemas = { ...schemas }
 	delete newSchemas[ index ]
 
-	if ( index.includes( 'new-' ) ) {
-		return updateAppData( 'schemas', newSchemas )
-	}
-
 	doAction( 'rank_math_schema_trash', index )
 
 	return updateAppData(
@@ -145,6 +146,23 @@ export function deleteSchema( index ) {
 		'rank_math_delete_' + index,
 		''
 	)
+}
+
+/**
+ * Update Primary Schema.
+ *
+ * @param {number} index   The index to primary schema.
+ * @param {Object} schemas The schemas.
+ *
+ * @return {Object} An action for redux.
+ */
+export function updatePrimary( index, schemas ) {
+	const newSchemas = { ...schemas }
+	const primarySchema = findKey( schemas, 'metadata.isPrimary' )
+	newSchemas[ primarySchema ].metadata.isPrimary = false
+	newSchemas[ index ].metadata.isPrimary = true
+
+	return updateSchemas( newSchemas )
 }
 
 /**

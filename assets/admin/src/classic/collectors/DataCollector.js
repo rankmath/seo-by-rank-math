@@ -169,7 +169,6 @@ class DataCollector {
 		swapVariables.setVariable( 'title', title )
 		swapVariables.setVariable( 'term', title )
 		swapVariables.setVariable( 'author', title )
-		swapVariables.setVariable( 'name', title )
 		rankMathEditor.refresh( 'title' )
 	}
 
@@ -198,7 +197,7 @@ class DataCollector {
 	}
 
 	isTinymce() {
-		return ! isUndefined( tinymce )
+		return 'undefined' !== typeof tinymce
 	}
 }
 

@@ -11,7 +11,7 @@ import { get, uniqueId, isEmpty, findKey } from 'lodash'
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
 import { Button } from '@wordpress/components'
-import { withDispatch, withSelect, select } from '@wordpress/data'
+import { withDispatch, withSelect } from '@wordpress/data'
 
 /**
  * Internal dependencies

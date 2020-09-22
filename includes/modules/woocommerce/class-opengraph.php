@@ -86,7 +86,7 @@ class Opengraph extends Sitemap {
 		 *
 		 * @param bool unsigned Defaults to true.
 		 */
-		if ( $this->do_filter( 'woocommerce/og_price', true ) ) {
+		if ( $this->do_filter( 'woocommerce/og_price', ! $product->is_type( 'variable' ) ) ) {
 			$opengraph->tag( 'product:price:amount', $product->get_price() );
 			$opengraph->tag( 'product:price:currency', get_woocommerce_currency() );
 		}

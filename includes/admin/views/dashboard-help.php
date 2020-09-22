@@ -46,17 +46,17 @@ include_once 'plugin-activation.php'; ?>
 						<a href="<?php KB::the( 'seo-import' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-import"></i>
 							<div>
-								<strong><?php esc_html_e( 'Import', 'rank-math' ); ?></strong>
+								<strong><?php esc_html_e( 'Import Data', 'rank-math' ); ?></strong>
 								<p><?php esc_html_e( 'How to Import Data from Your Previous SEO Plugin', 'rank-math' ); ?></p>
 							</div>
 						</a>
 					</li>
 
 					<li>
-						<a href="<?php KB::the( 'score-100' ); ?>" target="_blank">
+						<a href="<?php KB::the( 'score-100-dh' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-post"></i>
 							<div>
-								<strong><?php esc_html_e( 'Post Screen', 'rank-math' ); ?></strong>
+								<strong><?php esc_html_e( 'Improve SEO Score', 'rank-math' ); ?></strong>
 								<p><?php esc_html_e( 'How to Make Your Posts Pass All the Tests', 'rank-math' ); ?></p>
 							</div>
 						</a>

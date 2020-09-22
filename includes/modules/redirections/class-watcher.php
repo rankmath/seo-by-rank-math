@@ -108,7 +108,7 @@ class Watcher {
 				update_post_meta( $post_id, 'rank_math_permalink', $post->post_name );
 			}
 
-			$this->do_action( 'redirection/post_updated', $redirection_id );
+			$this->do_action( 'redirection/post_updated', $redirection_id, $post_id );
 			return;
 		}
 	}
@@ -153,7 +153,7 @@ class Watcher {
 			);
 			$this->add_notification( $message, true );
 
-			$this->do_action( 'redirection/term_updated', $redirection_id );
+			$this->do_action( 'redirection/term_updated', $redirection_id, $term_id );
 		}
 
 		return;

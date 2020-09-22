@@ -82,7 +82,7 @@ class Snippet_Shortcode {
 		$schema = $this->replace_variables( $data['schema'], $post );
 		$schema = $this->do_filter( 'schema/shortcode/filter_attributes', $schema, $atts );
 
-		return $this->do_filter( 'snippet/html', $this->get_snippet_content( $schema, $post, $atts['id'] ), $schema, $post, $this );
+		return $this->do_filter( 'snippet/html', $this->get_snippet_content( $schema, $post ), $schema, $post, $this );
 	}
 
 	/**
@@ -135,10 +135,10 @@ class Snippet_Shortcode {
 	 *
 	 * @param  array   $schema Schema to replace.
 	 * @param  WP_Post $post   Post schema attached to.
-	 * @param  int     $id     Schema ID.
+	 *
 	 * @return string Shortcode output.
 	 */
-	public function get_snippet_content( $schema, $post, $id ) {
+	public function get_snippet_content( $schema, $post ) {
 		wp_enqueue_style( 'rank-math-review-snippet', rank_math()->assets() . 'css/rank-math-snippet.css', null, rank_math()->version );
 
 		$type         = \strtolower( $schema['@type'] );
@@ -155,7 +155,7 @@ class Snippet_Shortcode {
 
 		ob_start();
 		?>
-			<div class="rank-math-rich-snippet-wrapper" id="<?php echo esc_attr( $id ); ?>">
+			<div id="rank-math-rich-snippet-wrapper">
 
 				<?php
 				$file = rank_math()->plugin_dir() . "includes/modules/schema/shortcode/$type.php";

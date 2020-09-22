@@ -27,6 +27,8 @@ class KB {
 	 * @var array
 	 */
 	private $links = [
+		'pro-general-g'               => 'https://rankmath.com/pro/?utm_source=Plugin&utm_medium=Gutenberg%20General%20Tab%20Notice&utm_campaign=WP',
+		'pro-general-ce'              => 'https://rankmath.com/pro/?utm_source=Plugin&utm_medium=CE%20General%20Tab%20Notice&utm_campaign=WP',
 		'seo-suite'                   => 'https://rankmath.com/?utm_source=Plugin&utm_campaign=WP',
 		'logo'                        => 'https://rankmath.com/wordpress/plugin/seo-suite/?utm_source=Plugin&utm_campaign=WP',
 		'rm-privacy'                  => 'https://rankmath.com/privacy-policy/?utm_source=Plugin&utm_campaign=WP',
@@ -52,7 +54,10 @@ class KB {
 		'redirections-settings'       => 'https://rankmath.com/kb/general-settings/#redirections?utm_source=Plugin&utm_campaign=WP',
 		'search-console-settings'     => 'https://rankmath.com/kb/general-settings/#search-console?utm_source=Plugin&utm_campaign=WP',
 		'other-settings'              => 'https://rankmath.com/kb/general-settings/#others?utm_source=Plugin&utm_campaign=WP',
-		'score-100'                   => 'https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_campaign=WP',
+		'score-100-sw'                => 'https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_medium=Setup%20Wizard&utm_campaign=WP',
+		'score-100-dh'                => 'https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_medium=Dashboard%20Help&utm_campaign=WP',
+		'score-100-ce'                => 'https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_medium=Classic&utm_campaign=WP',
+		'score-100-ge'                => 'https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_medium=Gutenberg&utm_campaign=WP',
 		'toc'                         => 'https://rankmath.com/kb/score-100-in-tests/#table-of-contents?utm_source=Plugin&utm_campaign=WP',
 		'content-length'              => 'https://rankmath.com/kb/score-100-in-tests/#content-length?utm_source=Plugin&utm_campaign=WP',
 		'sentiments'                  => 'https://monkeylearn.com/sentiment-analysis/?utm_campaign=Rank+Math',

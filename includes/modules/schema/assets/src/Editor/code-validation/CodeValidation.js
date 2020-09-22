@@ -9,38 +9,39 @@ import { Fragment } from '@wordpress/element'
  */
 import { prettyJSON } from '@schema/functions'
 
+const exampleCodeValidation = {
+	'@context': 'https://schema.org/',
+	'@graph': [
+		{
+			'@type': 'Article',
+			headline: 'Power Words: The Art of Writing Headlines That Get Clicked',
+			description: 'Power words are words with strong meaning that smart copywriters (as well as marketers) use to increase CTR and boost conversions.',
+			author: {
+				'@type': 'Person',
+				name: 'Rank Math',
+			},
+			datePublished: '2020-09-12GMT+000015:45:32+00:00',
+			dateModified: '2020-09-12GMT+000015:45:29+00:00',
+			'@id': 'https://rankmath.com/blog/power-words/#schema-44838',
+			mainEntityOfPage: {
+				'@id': 'https://rankmath.com/blog/power-words/#webpage',
+			},
+			isPartOf: {
+				'@id': 'https://rankmath.com/blog/power-words/#webpage',
+			},
+			publisher: {
+				'@id': '/#organization',
+			},
+			inLanguage: 'en-US',
+		},
+	],
+}
+
 /**
  * Code validation component.
  */
 const CodeValidation = () => {
-	let previewData = {
-		'@context': 'https://schema.org/',
-		'@graph': [
-			{
-				'@type': 'Article',
-				headline: 'Power Words: The Art of Writing Headlines That Get Clicked',
-				description: 'Power words are words with strong meaning that smart copywriters (as well as marketers) use to increase CTR and boost conversions.',
-				author: {
-					'@type': 'Person',
-					name: 'Rank Math',
-				},
-				datePublished: '2020-09-12GMT+000015:45:32+00:00',
-				dateModified: '2020-09-12GMT+000015:45:29+00:00',
-				'@id': 'https://rankmath.com/blog/power-words/#schema-44838',
-				mainEntityOfPage: {
-					'@id': 'https://rankmath.com/blog/power-words/#webpage',
-				},
-				isPartOf: {
-					'@id': 'https://rankmath.com/blog/power-words/#webpage',
-				},
-				publisher: {
-					'@id': '/#organization',
-				},
-				inLanguage: 'en-US',
-			},
-		],
-	}
-	previewData = JSON.stringify( previewData, null, 2 )
+	const previewData = JSON.stringify( exampleCodeValidation, null, 2 )
 
 	return (
 		<Fragment>
@@ -61,13 +62,14 @@ const CodeValidation = () => {
 					<code className="language-javascript" dangerouslySetInnerHTML={ { __html: prettyJSON( previewData ) } } />
 				</pre>
 				<div className="rank-math-pro-cta center">
-					<div className="rank-math-cta-box">
-						<h3>{ __( 'Preview & Test Schema Code', 'rank-math' ) }</h3>
+					<div className="rank-math-cta-box blue-ticks">
+						<h3>{ __( 'Preview & Validate Your Schema Markup', 'rank-math' ) }</h3>
 						<ul>
+							<li>{ __( 'Rank Math PRO is coming this fall', 'rank-math' ) }</li>
 							<li>{ __( 'Advanced Schema code viewer', 'rank-math' ) }</li>
-							<li>{ __( "Test on Google's Rich Result testing tool", 'rank-math' ) }</li>
+							<li>{ __( 'Live testing with Google', 'rank-math' ) }</li>
 						</ul>
-						<button className="button button-primary">{ __( 'Pro Coming Soon', 'rank-math' ) }</button>
+						<a className="button button-primary is-green" href="https://rankmath.com/pro/?utm_source=Plugin&utm_medium=Code+Validation&utm_campaign=WP" rel="noreferrer noopener" target="_blank">{ __( 'Notify Me!', 'rank-math' ) }</a>
 					</div>
 				</div>
 			</div>

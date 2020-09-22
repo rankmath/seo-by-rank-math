@@ -172,6 +172,6 @@ trait Conditional {
 	 * @return boolean
 	 */
 	public static function is_advanced_mode() {
-		return 'advanced' === apply_filters( 'rank_math/setup_mode', Helper::get_settings( 'general.setup_mode', 'easy' ) );
+		return 'advanced' === apply_filters( 'rank_math/setup_mode', Helper::get_settings( 'general.setup_mode', 'advanced' ) );
 	}
 }

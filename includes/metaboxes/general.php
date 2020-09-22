@@ -6,6 +6,7 @@
  * @subpackage RankMath\Metaboxes
  */
 
+use RankMath\KB;
 use RankMath\Helper;
 use MyThemeShop\Helpers\WordPress;
 use RankMath\Admin\Admin_Helper;
@@ -78,13 +79,13 @@ $cmb->add_field(
 		'type'            => 'text',
 		'name'            => esc_html__( 'Focus Keyword', 'rank-math' ),
 		/* translators: Link to kb article */
-		'desc'            => sprintf( wp_kses_post( __( 'Insert keywords you want to rank for. Try to <a href="%s" target="_blank">attain 100/100 points</a> for better chances of ranking.', 'rank-math' ) ), \RankMath\KB::get( 'score-100' ) ),
-		'after_field'     => Helper::is_site_connected() ? '' :
-			'<div class="notice notice-warning inline rank-math-notice"><p>' . sprintf(
+		'desc'            => sprintf( wp_kses_post( __( 'Insert keywords you want to rank for. Try to <a href="%s" target="_blank">attain 100/100 points</a> for better chances of ranking.', 'rank-math' ) ), \RankMath\KB::get( 'score-100-ce' ) ),
+		'after_field'     => '<div class="notice notice-warning inline rank-math-notice"><p>' . sprintf(
 				/* translators: link to connect page. */
-				__( 'Get keyword suggestions from Google by <a href="%s" target="_blank">connecting your Rank Math account</a>.', 'rank-math' ),
-				Helper::get_connect_url()
+				__( 'The future of SEO is in your hands. %s', 'rank-math' ),
+				'<a href="' . KB::get( 'pro-general-ce' ) . '" target="_blank">' . __( 'Learn more', 'rank-math' ) . '</a>'
 			) . '</p></div>',
+		'before'          => '<a href="https://rankmath.com/pro/" id="rank-math-compare-keywords-trigger" class="rank-math-compare-keywords-trigger button button-secondary" target="_blank" title="' . esc_attr__( 'Trends', 'rank-math' ) . '">' . Admin_Helper::get_trends_icon_svg() . '</a>',
 		'classes'         => 'nob',
 		'attributes'      => [
 			'placeholder' => esc_html__( 'Example: Rank Math SEO', 'rank-math' ),

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { forEach, isArray, isObject, isString, map, get } from 'lodash'
+import { forEach, isArray, isObject, isString, isUndefined, isEmpty, map, get, has, find } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -61,7 +61,9 @@ const registerDefaultHooks = () => {
 			map( schemas, ( schema, id ) => {
 				const type = get( schema, '@type' )
 				schema = applyFilters( 'rank_math_pre_schema_' + type, schema )
-				editSchemas[ id ] = generateValidSchema( schema )
+				editSchemas[ id ] = generateValidSchema(
+					applyFilters( 'rank_math_pre_schema', schema )
+				)
 			} )
 
 			dispatch( 'rank-math' ).updateEditSchemas( editSchemas )
@@ -96,7 +98,7 @@ const registerDefaultHooks = () => {
 				return check
 			}
 
-			if ( undefined === property.properties ) {
+			if ( isUndefined( property.properties ) ) {
 				return check
 			}
 
@@ -157,6 +159,21 @@ const registerDefaultHooks = () => {
 	)
 
 	addFilter(
+		'rank_math_pre_schema_Product',
+		'rank-math',
+		( schema ) => {
+			if ( has( schema, 'brand' ) && ! isObject( schema.brand ) ) {
+				schema.brand = {
+					'@type': 'Brand',
+					name: schema.brand,
+				}
+			}
+
+			return schema
+		}
+	)
+
+	addFilter(
 		'rank_math_processed_schema_Recipe',
 		'rank-math',
 		( schema ) => {
@@ -171,7 +188,7 @@ const registerDefaultHooks = () => {
 			if ( 'HowToStep' === instructionType ) {
 				if ( 1 === schema.instructionsHowToStep.length ) {
 					schema.recipeInstructions = {
-						type: 'HowToSection',
+						'@type': 'HowToSection',
 						name: schema.instructionsHowToStep[ 0 ].name,
 						itemListElement: schema.instructionsHowToStep[ 0 ].itemListElement,
 					}
@@ -214,7 +231,7 @@ const registerDefaultHooks = () => {
 					...recipeInstructions,
 					'@type': 'HowToSection',
 				}
-				delete newStep.type
+
 				schema.instructionType = 'HowToStep'
 				schema.instructionsHowToStep = []
 				schema.instructionsHowToStep.push( newStep )
@@ -226,10 +243,14 @@ const registerDefaultHooks = () => {
 	)
 
 	addFilter(
-		'rank_math_processed_schema_Event',
+		'rank_math_processed_schema',
 		'rank-math',
 		( schema ) => {
 			const { eventAttendanceMode } = schema
+			if ( isUndefined( eventAttendanceMode ) ) {
+				return schema
+			}
+
 			if ( 'MixedEventAttendanceMode' === eventAttendanceMode ) {
 				schema.location = [
 					schema.VirtualLocation,
@@ -239,9 +260,37 @@ const registerDefaultHooks = () => {
 				delete schema.VirtualLocation
 			}
 
+			if ( 'OnlineEventAttendanceMode' === eventAttendanceMode ) {
+				schema.location = schema.VirtualLocation
+				delete schema.VirtualLocation
+			}
+
 			return schema
 		},
 		20
+	)
+
+	addFilter(
+		'rank_math_pre_schema',
+		'rank-math',
+		( schema ) => {
+			const { eventAttendanceMode } = schema
+			if ( isUndefined( eventAttendanceMode ) ) {
+				return schema
+			}
+
+			if ( 'MixedEventAttendanceMode' === eventAttendanceMode ) {
+				schema.VirtualLocation = find( schema.location, [ '@type', 'VirtualLocation' ] )
+				schema.location = find( schema.location, [ '@type', 'Place' ] )
+			}
+
+			if ( 'OnlineEventAttendanceMode' === eventAttendanceMode ) {
+				schema.VirtualLocation = schema.location
+				delete schema.location
+			}
+
+			return schema
+		}
 	)
 }
 

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, map, debounce, forEach, isEmpty, isInteger, isUndefined } from 'lodash'
+import { get, map, debounce, forEach, isEmpty, isInteger, isUndefined, isEqual } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -282,7 +282,7 @@ class DataCollector {
 		}
 
 		const schemas = select( 'rank-math' ).getSchemas()
-		if ( isEmpty( schemas ) ) {
+		if ( isEmpty( schemas ) || isEqual( schemas, get( rankMath, 'schemas', {} ) ) ) {
 			return
 		}
 
@@ -452,7 +452,6 @@ class DataCollector {
 		swapVariables.setVariable( 'title', title )
 		swapVariables.setVariable( 'term', title )
 		swapVariables.setVariable( 'author', title )
-		swapVariables.setVariable( 'name', title )
 
 		dispatch( 'rank-math' ).updateSerpTitle(
 			select( 'rank-math' ).getTitle()

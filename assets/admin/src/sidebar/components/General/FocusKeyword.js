@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
 import { Fragment } from '@wordpress/element'
 import { withDispatch, withSelect } from '@wordpress/data'
-import { CheckboxControl, PanelBody, Notice } from '@wordpress/components'
+import { Dashicon, CheckboxControl, PanelBody, Notice } from '@wordpress/components'
 import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
 
 /**
@@ -44,6 +44,8 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 				</Tooltip>
 			</h2>
 
+			<a href="https://rankmath.com/pro/?utm_source=Plugin&utm_medium=General%20Tab%20Trends&utm_campaign=WP" title={ __( 'Google Trends', 'rank-math' ) } target="_blank" rel="noreferrer noopener" id="rank-math-compare-keywords-trigger" className="button button-icon rank-math-compare-keywords-trigger" dangerouslySetInnerHTML={ { __html: rankMath.trendsIcon } }></a>
+
 			<FocusKeywordField />
 
 			{ false === rankMath.isUserRegistered && (
@@ -52,7 +54,7 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 						components={ {
 							link: (
 								<a
-									href={ rankMath.assessor.registrationUrl }
+									href={ rankMath.assessor.futureSeo }
 									target="_blank"
 									rel="noopener noreferrer"
 								/>
@@ -60,7 +62,7 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 						} }
 					>
 						{ __(
-							'Get keyword suggestions from Google by {{link}}connecting your Rank Math account{{/link}}.',
+							'The future of SEO is in your hands. {{link}}Learn more{{/link}} ',
 							'rank-math'
 						) }
 					</Interpolate>

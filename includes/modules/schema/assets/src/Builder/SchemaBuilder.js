@@ -45,26 +45,28 @@ class SchemaBuilder extends Component {
 		this.isEditingTemplate = get( rankMath, 'isTemplateScreen', false )
 	}
 
-	/**
-	 * Redenr this component.
-	 *
-	 * @return {Component} Schema builder.
-	 */
-	render() {
+	getWrapperClasses() {
 		let knowledgegraphType = get( rankMath, 'knowledgegraphType', false )
 		knowledgegraphType = false === knowledgegraphType ? 'empty' : 'local-' + knowledgegraphType
 
 		let schemaType = get( this.props.data, 'property', '' )
 		schemaType = 'schema-' + schemaType.toLowerCase()
 
-		const containerClasses = classnames( 'schema-builder', schemaType, {
+		return classnames( 'schema-builder', schemaType, {
 			'schema-template-pre-defined': 'template' === this.options.type,
 			'schema-template-custom': 'custom' === this.options.type,
 			[ `${ knowledgegraphType }` ]: 'template' === this.options.type,
 		} )
+	}
 
+	/**
+	 * Redenr this component.
+	 *
+	 * @return {Component} Schema builder.
+	 */
+	render() {
 		return (
-			<form className={ containerClasses }>
+			<form className={ this.getWrapperClasses() }>
 				<SchemaGroup
 					data={ this.state.data }
 					schema={ this.state.data }
@@ -298,7 +300,7 @@ export default compose(
 				}
 
 				if ( ! isPro ) {
-					forEach( schemas, ( data, key ) => {
+					forEach( schemas, ( value, key ) => {
 						if ( id !== key ) {
 							dispatch( 'rank-math' ).deleteSchema( key )
 						}

@@ -2,6 +2,7 @@
  * External dependencies
  */
 import PropTypes from 'prop-types'
+import { has, isArray } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -45,6 +46,10 @@ const SchemaPropertyField = ( {
 	}
 
 	if ( 'select' === type ) {
+		if ( ! has( rest, 'multiple' ) && isArray( value ) ) {
+			value = value[ 0 ]
+		}
+
 		return (
 			<SelectControl
 				value={ value }

@@ -31,8 +31,8 @@ import PrimaryTermSelector from '@components/PrimaryTerm/PrimaryTermSelector'
  * Slots
  */
 import RankMathAfterEditor from '@slots/AfterEditor'
-import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
 import RankMathAdvancedTab from '@slots/AdvancedTab'
+import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
 
 class GutenbergEditor extends Editor {
 	setup( dataCollector ) {
@@ -100,7 +100,7 @@ class GutenbergEditor extends Editor {
 		)
 
 		registerPlugin( 'rank-math-post-publish', {
-			render: PostStatus
+			render: PostStatus,
 		} )
 	}
 

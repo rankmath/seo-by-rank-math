@@ -79,7 +79,7 @@ class Singular implements Snippet {
 		$schemas = DB::get_schemas( $jsonld->post_id );
 		if ( ! empty( $schemas ) ) {
 			$schema_data = current( $schemas );
-			return ! empty( $schema_data['@type'] ) && 'WooCommerceProduct' === $schema_data['@type'] ? 'product' : false;
+			return ! empty( $schema_data['@type'] ) && in_array( $schema_data['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true ) ? 'product' : false;
 		}
 
 		if ( metadata_exists( 'post', $jsonld->post_id, 'rank_math_rich_snippet' ) ) {
@@ -102,7 +102,7 @@ class Singular implements Snippet {
 	 */
 	private function get_default_schema( $jsonld ) {
 		$schema = Helper::get_settings( "titles.pt_{$jsonld->post->post_type}_default_rich_snippet" );
-		if ( ! $schema || metadata_exists( 'post', $jsonld->post_id, 'rank_math_seo_score' ) ) {
+		if ( ! $schema ) {
 			return false;
 		}
 

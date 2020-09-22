@@ -93,8 +93,6 @@ class Metabox implements Runner {
 				rank_math()->version
 			);
 
-			wp_register_script( 'rank-math-schema-classic', rank_math()->plugin_url() . 'assets/admin/js/schema-classic.js', [ 'clipboard' ], rank_math()->version, true );
-
 			wp_enqueue_script(
 				'rank-math-metabox',
 				rank_math()->plugin_url() . 'assets/admin/js/classic.js',
@@ -113,7 +111,6 @@ class Metabox implements Runner {
 					'rank-math-analyzer',
 					'rank-math-validate',
 					'tagify',
-					'rank-math-schema-classic',
 				],
 				rank_math()->version,
 				true

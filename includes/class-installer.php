@@ -131,7 +131,7 @@ class Installer {
 	 */
 	private function activate() {
 		// Init to use the common filters.
-		new \RankMath\Defaults;
+		new \RankMath\Defaults();
 
 		$current_version    = get_option( 'rank_math_version', null );
 		$current_db_version = get_option( 'rank_math_db_version', null );
@@ -371,7 +371,7 @@ class Installer {
 					'frontend_seo_score_post_types'       => [ 'post' ],
 					'frontend_seo_score_position'         => 'top',
 					'frontend_seo_score'                  => 'off',
-					'setup_mode'                          => 'easy',
+					'setup_mode'                          => 'advanced',
 				]
 			)
 		);

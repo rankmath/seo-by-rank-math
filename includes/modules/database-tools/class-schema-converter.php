@@ -2,7 +2,7 @@
 /**
  * The Schema Converter.
  *
- * @since      1.0.37
+ * @since      1.0.48
  * @package    RankMath
  * @subpackage RankMath\Status
  * @author     Rank Math <support@rankmath.com>
@@ -145,15 +145,37 @@ class Schema_Converter extends \WP_Background_Process {
 		if ( isset( $data['richSnippet'] ) ) {
 			$data             = $this->map_fields( $data['richSnippet'], $post_id );
 			$type             = $this->sanitize_type( $data['@type'] );
-			$data['metadata'] = [
-				'title'          => $type,
-				'isPrimary'      => true,
-				'type'           => 'template',
-				'reviewLocation' => get_post_meta( $post_id, 'rank_math_snippet_location', true ),
-				'unpublish'      => get_post_meta( $post_id, 'rank_math_snippet_jobposting_unpublish', true ),
-			];
+			$data['metadata'] = $this->get_metadata( $post_id, $type );
 			update_post_meta( $post_id, 'rank_math_schema_' . $type, $data );
 		}
+	}
+
+	/**
+	 * Convert post metadata.
+	 *
+	 * @param int    $post_id Post id to convert.
+	 * @param string $type    Schema type.
+	 *
+	 * @return array Return metadata.
+	 */
+	private function get_metadata( $post_id, $type ) {
+		$metadata = [
+			'title'     => $type,
+			'isPrimary' => true,
+			'type'      => 'template',
+		];
+
+		$review_location = get_post_meta( $post_id, 'rank_math_snippet_location', true );
+		if ( ! empty( $review_location ) ) {
+			$metadata['reviewLocation'] = $review_location;
+		}
+
+		$unpublish = get_post_meta( $post_id, 'rank_math_snippet_jobposting_unpublish', true );
+		if ( 'JobPosting' === $type && ! empty( $unpublish ) ) {
+			$metadata['unpublish'] = $unpublish;
+		}
+
+		return $metadata;
 	}
 
 	/**
@@ -198,15 +220,17 @@ class Schema_Converter extends \WP_Background_Process {
 			'name'        => '%seo_title%',
 			'title'       => '%seo_title%',
 			'description' => '%seo_description%',
+			'url'         => '%url%',
 		];
 		$date_variables = [
 			'datePublished' => '%date(Y-m-d\TH:i:sP)%',
 			'dateModified'  => '%modified(Y-m-d\TH:i:sP)%',
 		];
 
-		$type       = $schema_data['@type'];
-		$type       = $this->sanitize_type( $type );
-		$valid_keys = array_keys( $this->schema_map[ $type ] );
+		$type         = $schema_data['@type'];
+		$type         = $this->sanitize_type( $type );
+		$valid_keys   = array_keys( $this->schema_map[ $type ] );
+		$valid_keys[] = 'recipeInstructions';
 
 		foreach ( $schema_data as $key => $data ) {
 			if ( '@type' !== $key && ! in_array( $key, $valid_keys, true ) ) {
@@ -214,12 +238,15 @@ class Schema_Converter extends \WP_Background_Process {
 				continue;
 			}
 
-			if ( in_array( $key, array_keys( $date_variables ), true ) && in_array( $key, [ 'Article', 'Review', 'Recipe' ], true ) ) {
+			if ( in_array( $key, array_keys( $date_variables ), true ) && in_array( $type, [ 'Article', 'Review', 'Recipe' ], true ) ) {
 				$schema_data[ $key ] = $date_variables[ $key ];
 			}
 
 			if ( ! $data && in_array( $key, array_keys( $defaults ), true ) ) {
 				$schema_data[ $key ] = $defaults[ $key ];
+			}
+			if ( 'Product' === $type && 'offers' === $key && empty( $data['url'] ) ) {
+				$schema_data[ $key ]['url'] = '%url%';
 			}
 		}
 

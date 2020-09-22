@@ -41,6 +41,11 @@
         .#{$namespace}-notice {
             margin: 0 0 1rem;
 
+            a {
+                border-bottom: 1px dotted;
+                text-decoration: none;
+            }
+
             strong {
                 color: $color-1;
             }

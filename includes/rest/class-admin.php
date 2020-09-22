@@ -130,8 +130,8 @@ class Admin extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function update_redirection( WP_REST_Request $request ) {
-		$cmb     = new \stdClass;
-		$metabox = new \RankMath\Redirections\Metabox;
+		$cmb     = new \stdClass();
+		$metabox = new \RankMath\Redirections\Metabox();
 
 		$cmb->object_id    = $request->get_param( 'objectID' );
 		$cmb->data_to_save = [
@@ -186,8 +186,9 @@ class Admin extends WP_REST_Controller {
 		$sanitizer = Sanitize::get();
 		foreach ( $meta as $meta_key => $meta_value ) {
 			// Delete schema by meta id.
-			if ( Str::starts_with( 'rank_math_delete_schema-', $meta_key ) ) {
+			if ( Str::starts_with( 'rank_math_delete_', $meta_key ) ) {
 				\delete_metadata_by_mid( 'post', absint( \str_replace( 'rank_math_delete_schema-', '', $meta_key ) ) );
+				update_post_meta( $object_id, 'rank_math_rich_snippet', 'off' );
 				continue;
 			}
 

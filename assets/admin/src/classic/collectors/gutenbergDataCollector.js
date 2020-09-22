@@ -260,7 +260,6 @@ class DataCollector {
 		swapVariables.setVariable( 'title', title )
 		swapVariables.setVariable( 'term', title )
 		swapVariables.setVariable( 'author', title )
-		swapVariables.setVariable( 'name', title )
 
 		rankMathEditor.refresh( 'title' )
 	}

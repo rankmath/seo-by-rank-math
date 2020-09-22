@@ -400,4 +400,13 @@ class Admin_Helper {
 
 		return $posts_page && self::is_post_edit() && (int) Param::get( 'post' ) === $posts_page;
 	}
+
+	/**
+	 * Get Trends icon <svg> element.
+	 *
+	 * @return string
+	 */
+	public static function get_trends_icon_svg() {
+		return '<svg viewBox="0 0 610 610"><path d="M18.85,446,174.32,290.48l58.08,58.08L76.93,504a14.54,14.54,0,0,1-20.55,0L18.83,466.48a14.54,14.54,0,0,1,0-20.55Z" style="fill:#4285f4"/><path d="M242.65,242.66,377.59,377.6l-47.75,47.75a14.54,14.54,0,0,1-20.55,0L174.37,290.43l47.75-47.75A14.52,14.52,0,0,1,242.65,242.66Z" style="fill:#ea4335"/><polygon points="319.53 319.53 479.26 159.8 537.34 217.88 377.61 377.62 319.53 319.53" style="fill:#fabb05"/><path d="M594.26,262.73V118.61h0a16.94,16.94,0,0,0-16.94-16.94H433.2a16.94,16.94,0,0,0-12,28.92L565.34,274.71h0a16.94,16.94,0,0,0,28.92-12Z" style="fill:#34a853"/><rect width="610" height="610" style="fill:none"/></svg>';
+	}
 }

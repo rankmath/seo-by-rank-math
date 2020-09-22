@@ -28,15 +28,21 @@ class Publisher implements Snippet {
 	 * @return array
 	 */
 	public function process( $data, $jsonld ) {
+		$type              = Helper::get_settings( 'titles.knowledgegraph_type' );
 		$data['publisher'] = [
-			'@type' => 'person' === Helper::get_settings( 'titles.knowledgegraph_type' ) ? 'Person' : 'Organization',
-			'@id'   => home_url( '/#organization' ),
+			'@type' => 'person' === $type ? 'Person' : 'Organization',
+			'@id'   => home_url( "/#{$type}" ),
 			'name'  => $jsonld->get_website_name(),
 			'logo'  => [
 				'@type' => 'ImageObject',
 				'url'   => Helper::get_settings( 'titles.knowledgegraph_logo' ),
 			],
 		];
+
+		if ( 'person' === $type ) {
+			$data['publisher']['image'] = $data['publisher']['logo'];
+			unset( $data['publisher']['logo'] );
+		}
 
 		return $data;
 	}

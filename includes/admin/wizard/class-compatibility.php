@@ -51,7 +51,7 @@ class Compatibility implements Wizard_Step {
 					/* translators: Option Description */
 					'custom'   => '<div class="rank-math-mode-title">' . sprintf( __( 'Custom Mode %s', 'rank-math' ), '</div><p><strong>' . __( 'Coming Soon', 'rank-math' ) . '</strong></p>' ),
 				],
-				'default' => Helper::get_settings( 'general.setup_mode', 'easy' ),
+				'default' => Helper::get_settings( 'general.setup_mode', 'advanced' ),
 				'classes' => 'rank-math-setup-mode',
 				'desc'    => __( '<strong>Note</strong> You can easily switch between modes at any point.', 'rank-math' ),
 			]

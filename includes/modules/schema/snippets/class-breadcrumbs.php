@@ -42,19 +42,22 @@ class Breadcrumbs implements Snippet {
 			'itemListElement' => [],
 		];
 
-		foreach ( $crumbs as $index => $crumb ) {
-			if ( ! empty( $crumb['hide_in_schema'] ) ) {
+		$position = 1;
+		foreach ( $crumbs as $crumb ) {
+			if ( ! empty( $crumb['hide_in_schema'] ) || empty( $crumb[1] ) ) {
 				continue;
 			}
 
 			$entity['itemListElement'][] = [
 				'@type'    => 'ListItem',
-				'position' => $index + 1,
+				'position' => $position,
 				'item'     => [
 					'@id'  => $crumb[1],
 					'name' => $crumb[0],
 				],
 			];
+
+			$position++;
 		}
 
 		$data['BreadcrumbList'] = apply_filters( 'rank_math/snippet/breadcrumb', $entity );

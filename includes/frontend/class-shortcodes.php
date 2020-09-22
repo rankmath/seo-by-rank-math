@@ -94,7 +94,7 @@ class Shortcodes {
 		foreach ( $allowed as $element ) {
 			$method = 'display_' . $element;
 			if ( method_exists( $this, $method ) ) {
-				echo '<div class="rank-math-contact-section rank-math-contact-' . $element . '">';
+				echo '<div class="rank-math-contact-section rank-math-contact-' . esc_attr( $element ) . '">';
 				$this->$method();
 				echo '</div>';
 			}
@@ -114,11 +114,12 @@ class Shortcodes {
 	 * @return array
 	 */
 	private function get_allowed_info( $args ) {
-		if ( 'person' === Helper::get_settings( 'titles.knowledgegraph_type' ) ) {
-			return [ 'address' ];
-		}
+		$type = Helper::get_settings( 'titles.knowledgegraph_type' );
 
-		$allowed = [ 'address', 'hours', 'phone', 'map' ];
+		$allowed = 'person' === $type
+		? [ 'name', 'email', 'person_phone', 'address' ]
+		: [ 'name', 'email', 'address', 'hours', 'phone', 'email', 'map' ];
+
 		if ( ! empty( $args['show'] ) && 'all' !== $args['show'] ) {
 			$allowed = array_intersect( array_map( 'trim', explode( ',', $args['show'] ) ), $allowed );
 		}
@@ -280,11 +281,27 @@ class Shortcodes {
 			$label  = isset( $choices[ $phone['type'] ] ) ? $choices[ $phone['type'] ] : ''
 			?>
 			<div class="rank-math-phone-number type-<?php echo sanitize_html_class( $phone['type'] ); ?>">
-				<label><?php echo $label; ?>:</label>
+				<label><?php echo esc_html( $label ); ?>:</label>
 				<span><?php echo isset( $phone['number'] ) ? '<a href="tel://' . $number . '">' . $number . '</a>' : ''; ?></span>
 			</div>
 			<?php
 		endforeach;
+	}
+
+	/**
+	 * Output Person phone number.
+	 */
+	private function display_person_phone() {
+		$phone = Helper::get_settings( 'titles.phone' );
+		if ( empty( $phone ) ) {
+			return;
+		}
+		?>
+			<div class="rank-math-phone-numberx">
+				<label><?php echo esc_html__( 'Telephone', 'rank-math' ); ?>:</label>
+				<span><a href="tel://<?php echo esc_attr( $phone ); ?>"><?php echo esc_html( $phone ); ?></a></span>
+			</div>
+		<?php
 	}
 
 	/**
@@ -302,9 +319,42 @@ class Shortcodes {
 		 * @param string $address
 		 */
 		$address = $this->do_filter( 'shortcode/contact/map_address', implode( ' ', $address ) );
-		$address = $this->do_filter( 'shortcode/contact/map_iframe_src', '//maps.google.com/maps?q=' . urlencode( $address ) . '&z=15&output=embed&key=' . urlencode( Helper::get_settings( 'titles.maps_api_key' ) ) );
+		$address = $this->do_filter( 'shortcode/contact/map_iframe_src', '//maps.google.com/maps?q=' . rawurlencode( $address ) . '&z=15&output=embed&key=' . rawurlencode( Helper::get_settings( 'titles.maps_api_key' ) ) );
 		?>
 		<iframe src="<?php echo esc_url( $address ); ?>"></iframe>
+		<?php
+	}
+
+	/**
+	 * Output name.
+	 */
+	private function display_name() {
+		$name = Helper::get_settings( 'titles.knowledgegraph_name' );
+		if ( false === $name ) {
+			return;
+		}
+
+		$url = Helper::get_settings( 'titles.url' );
+		?>
+		<h4 class="rank-math-name">
+			<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $name ); ?></a>
+		</h3>
+		<?php
+	}
+
+	/**
+	 * Output email.
+	 */
+	private function display_email() {
+		$email = Helper::get_settings( 'titles.email' );
+		if ( false === $email ) {
+			return;
+		}
+		?>
+		<div class="rank-math-email">
+			<label><?php esc_html_e( 'Email:', 'rank-math' ); ?></label>
+			<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
+		</div>
 		<?php
 	}
 

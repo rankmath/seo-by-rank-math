@@ -34,7 +34,7 @@ use RankMath\KB;
 
 	<div class="wizard-next-steps wp-clearfix">
 		<div class="score-100">
-			<a href="<?php KB::the( 'score-100' ); ?>" target="_blank">
+			<a href="<?php KB::the( 'score-100-sw' ); ?>" target="_blank">
 				<img src="<?php echo esc_url( rank_math()->plugin_url() ); ?>/assets/admin/img/score-100.png">
 			</a>
 		</div>

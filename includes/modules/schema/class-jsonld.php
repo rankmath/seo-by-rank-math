@@ -65,11 +65,26 @@ class JsonLD {
 	public function generate_preview() {
 		global $post;
 
-		$data = \json_decode( file_get_contents( 'php://input' ), true );
-		$data = $this->replace_variables( $data );
-		$data = $this->filter( $data, $this, [] );
+		if ( is_singular() ) {
+			$this->post    = $post;
+			$this->post_id = $post->ID;
+			$this->get_parts();
+		}
 
-		echo wp_json_encode( $data['schema'] );
+		$data = $this->do_filter( 'json_ld', [], $this );
+		unset( $data['BreadcrumbList'] );
+
+		// Preview schema.
+		$schema = \json_decode( file_get_contents( 'php://input' ), true );
+		$schema = $this->replace_variables( $schema );
+		$schema = $this->filter( $schema, $this, $data );
+		$schema = wp_parse_args( $schema['schema'], array_pop( $data ) );
+
+		// Merge.
+		$data = array_merge( $data, [ 'schema' => $schema ] );
+		$data = $this->validate_schema( $data );
+
+		echo wp_json_encode( array_values( $data ) );
 	}
 
 	/**
@@ -115,13 +130,53 @@ class JsonLD {
 		 * @param JsonLD $unsigned JsonLD instance.
 		 */
 		$data = $this->do_filter( 'json_ld', [], $this );
+		$data = $this->validate_schema( $data );
 		if ( is_array( $data ) && ! empty( $data ) ) {
 			$json = [
 				'@context' => 'https://schema.org',
-				'@graph'   => array_values( array_filter( $data ) ),
+				'@graph'   => array_values( $data ),
 			];
-			echo '<script type="application/ld+json">' . wp_json_encode( $json, JSON_PRETTY_PRINT ) . '</script>' . "\n";
+			echo '<script type="application/ld+json" class="rank-math-schema">' . wp_json_encode( $json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
 		}
+	}
+
+	/**
+	 * Validate schema.
+	 *
+	 * @param array $data Array of JSON-LD data.
+	 *
+	 * @return array
+	 */
+	private function validate_schema( $data ) {
+		foreach ( $data as $id => $value ) {
+			if ( is_array( $value ) ) {
+				// Remove aline @type.
+				if ( isset( $value['@type'] ) && 1 === count( $value ) ) {
+					unset( $data[ $id ] );
+					continue;
+				}
+
+				// Remove empty review.
+				if ( 'review' === $id ) {
+					if ( ! isset( $value['reviewRating'] ) || ! isset( $value['reviewRating']['ratingValue'] ) ) {
+						unset( $data[ $id ] );
+						continue;
+					}
+				}
+
+				// Recursive.
+				$data[ $id ] = $this->validate_schema( $value );
+			}
+
+			// Remove empty values.
+			// Remove need of array_filter as this will go recursive.
+			if ( '' === $value ) {
+				unset( $data[ $id ] );
+				continue;
+			}
+		}
+
+		return $data;
 	}
 
 	/**
@@ -181,6 +236,7 @@ class JsonLD {
 
 		foreach ( $schemas as $key => $schema ) {
 			if ( 'metadata' === $key ) {
+				$new_schemas['isPrimary'] = ! empty( $schema['isPrimary'] );
 				continue;
 			}
 
@@ -190,6 +246,10 @@ class JsonLD {
 			}
 
 			$new_schemas[ $key ] = Str::contains( '%', $schema ) ? Helper::replace_vars( $schema, get_queried_object() ) : $schema;
+
+			if ( '' === $new_schemas[ $key ] ) {
+				unset( $new_schemas[ $key ] );
+			}
 		}
 
 		return $new_schemas;

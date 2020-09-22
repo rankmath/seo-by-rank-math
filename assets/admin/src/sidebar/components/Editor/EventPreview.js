@@ -46,8 +46,8 @@ const EventPreview = ( { schema } ) => {
 		return null
 	}
 
-	const max = get( reviewRating, 'worstRating', 1 )
-	const min = get( reviewRating, 'bestRating', 5 )
+	const min = get( reviewRating, 'worstRating', 1 )
+	const max = get( reviewRating, 'bestRating', 5 )
 
 	return (
 		<div className="rank-math-rating-preview">

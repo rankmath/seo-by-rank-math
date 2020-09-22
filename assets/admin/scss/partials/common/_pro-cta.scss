@@ -1,25 +1,21 @@
 // main: ../../common.scss
+.blurred {
+    filter: blur(2px);
 
-.#{$namespace}-pro-cta {
-
-    @at-root .#{$namespace}-tabs .components-tab-panel__tab-content .components-panel__body & .button-primary:not(.default) {
-        background: $color-2;
-        pointer-events: none;
-
-        &:hover, &:focus {
-            background: darken($color-2, 5);
-            border-color: darken($color-2, 5);
-        }
-
-        &:focus {
-            box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-2, 5);
-        }
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(248, 249, 250, 0.1);
     }
+}
 
-    h3 {
-        font-size: 1.25rem;
-        margin-bottom: 1.5rem;
-    }
+div.#{$namespace}-pro-cta {
+    position: relative;
+    z-index: 100;
 
     &.center {
         position: absolute;
@@ -28,16 +24,32 @@
         right: 0;
         bottom: 0;
         display: grid;
+    }
 
-        .#{$namespace}-cta-box {
-            padding: 1.5rem;
-            background: #fff;
-            width: 420px;
-            max-width: 90%;
-            align-self: center;
-            justify-self: center;
-            border-radius: 4px;
-            box-shadow: 0px 4px 14px 0px rgba(34, 36, 55, 0.28);
+    .#{$namespace}-cta-box {
+        padding: 2rem 1.5rem;
+        background: #fff;
+        width: 420px;
+        max-width: 90%;
+        align-self: center;
+        justify-self: center;
+        border-radius: 4px;
+        box-shadow: 0px 4px 14px 0px rgba(34, 36, 55, 0.28);
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        &.width-70 {
+            max-width: 70%;
+        }
+
+        &.blue-ticks {
+            ul li:before {
+                background: $primary;
+            }
         }
     }
 

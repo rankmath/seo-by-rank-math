@@ -67,6 +67,12 @@ class Classifier {
 			$url_parts = [];
 		}
 
+		// Short-circuit if filter returns non-null.
+		$filtered = apply_filters( 'rank_math/links/is_external', null, $url_parts );
+		if ( null !== $filtered ) {
+			return $filtered ? self::TYPE_EXTERNAL : self::TYPE_INTERNAL;
+		}
+
 		if ( $this->contains_protocol( $url_parts ) && $this->is_external_link( $url_parts ) ) {
 			return self::TYPE_EXTERNAL;
 		}

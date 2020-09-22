@@ -81,7 +81,7 @@ const SchemaGroup = ( props ) => {
 						return (
 							<div className="schema-property--field">
 								<TextControl
-									value={ property }
+									value={ 'WooCommerceProduct' !== property ? startCase( property ) : 'WooCommerce Product' }
 									required="required"
 									onChange={ ( newProperty ) => {
 										propertyChange( id, 'property', newProperty )

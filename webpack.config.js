@@ -1,5 +1,5 @@
 const resolve = require( 'path' ).resolve
-const UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' )
+const TerserPlugin = require( 'terser-webpack-plugin' )
 
 const externals = {
 	jquery: 'jQuery',
@@ -49,7 +49,11 @@ const alias = {
 	),
 	'@schema': resolve(
 		__dirname,
-		'./includes/modules/schema/assets/js'
+		'./includes/modules/schema/assets/src'
+	),
+	'@scShared': resolve(
+		__dirname,
+		'./includes/modules/analytics/assets/src/shared'
 	),
 	'@helpers': resolve( __dirname, './assets/admin/src/helpers' ),
 	'@slots': resolve( __dirname, './assets/admin/src/sidebar/slots' ),
@@ -57,52 +61,42 @@ const alias = {
 }
 
 const entryPoints = {
-	blocks: './assets/admin/src/blocks.js',
-	classic: './assets/admin/src/classic/classic.js',
-	gutenberg: './assets/admin/src/gutenberg/gutenberg.js',
-	'schema-classic': './includes/modules/schema/assets/js/metabox-classic.js',
-	'schema-template': './includes/modules/schema/assets/js/metabox-template.js',
-	elementor: './assets/admin/src/elementor/elementor.js',
-	'gutenberg-formats': './assets/admin/src/gutenberg/formats/index.js',
-	'gutenberg-primary-term': './assets/admin/src/gutenberg-primary-term.js',
-	'glue-custom-fields': './assets/admin/src/glue-custom-fields.js',
-	common: './assets/admin/src/common.js',
-	'custom-fields': './assets/admin/src/custom-fields.js',
-	dashboard: './assets/admin/src/dashboard.js',
-	feedback: './assets/admin/src/feedback.js',
-	'import-export': './assets/admin/src/import-export.js',
-	'option-panel': './assets/admin/src/option-panel.js',
-	'post-list': './assets/admin/src/post-list.js',
-	wizard: './assets/admin/src/wizard.js',
-	wplink: './assets/admin/src/wplink.js',
-	validate: './assets/admin/src/validate.js',
-	'acf-analysis': './includes/modules/acf/assets/index.js',
-	'product-description': './includes/modules/woocommerce/assets/js/main.js',
+	plugin: {
+		blocks: './assets/admin/src/blocks.js',
+		classic: './assets/admin/src/classic/classic.js',
+		gutenberg: './assets/admin/src/gutenberg/gutenberg.js',
+		elementor: './assets/admin/src/elementor/elementor.js',
+		'gutenberg-formats': './assets/admin/src/gutenberg/formats/index.js',
+		'gutenberg-primary-term': './assets/admin/src/gutenberg-primary-term.js',
+		'glue-custom-fields': './assets/admin/src/glue-custom-fields.js',
+		common: './assets/admin/src/common.js',
+		'custom-fields': './assets/admin/src/custom-fields.js',
+		dashboard: './assets/admin/src/dashboard.js',
+		feedback: './assets/admin/src/feedback.js',
+		'import-export': './assets/admin/src/import-export.js',
+		'option-panel': './assets/admin/src/option-panel.js',
+		'post-list': './assets/admin/src/post-list.js',
+		wizard: './assets/admin/src/wizard.js',
+		wplink: './assets/admin/src/wplink.js',
+		validate: './assets/admin/src/validate.js',
+		'acf-analysis': './includes/modules/acf/assets/index.js',
+		'product-description': './includes/modules/woocommerce/assets/js/main.js',
+	},
+	analytics: {
+		stats: './includes/modules/analytics/assets/src/index.js',
+	},
+	schema: {
+		'schema-gutenberg': './includes/modules/schema/assets/src/index.js',
+		'schema-classic': './includes/modules/schema/assets/src/metabox-classic.js',
+		'schema-template': './includes/modules/schema/assets/src/metabox-template.js',
+	},
 }
 
-// Adding our UglifyJS plugin
-const uglifyjs = new UglifyJsPlugin( {
-	uglifyOptions: {
-		mangle: true,
-		compress: {
-			pure_getters: true,
-			unsafe: true,
-			unsafe_comps: true,
-			conditionals: true,
-			unused: true,
-			comparisons: true,
-			sequences: true,
-			dead_code: true,
-			evaluate: true,
-			if_return: true,
-			join_vars: true,
-		},
-		output: {
-			beautify: false,
-			comments: false,
-		},
-	},
-} )
+const paths = {
+	plugin: './assets/admin/js',
+	analytics: './includes/modules/analytics/assets/js',
+	schema: './includes/modules/schema/assets/js',
+}
 
 module.exports = function( env, arg ) {
 	const mode =
@@ -111,12 +105,14 @@ module.exports = function( env, arg ) {
 		arg.mode ||
 		'production'
 
+	const what = arg.what || 'plugin'
+
 	return {
 		devtool:
 			mode === 'development' ? 'cheap-module-eval-source-map' : false,
-		entry: entryPoints,
+		entry: entryPoints[ what ],
 		output: {
-			path: resolve( __dirname, './assets/admin/js' ),
+			path: resolve( __dirname, paths[ what ] ),
 			filename: '[name].js',
 		},
 		resolve: {
@@ -140,6 +136,17 @@ module.exports = function( env, arg ) {
 			],
 		},
 		externals,
-		plugins: [ uglifyjs ],
+		optimization: {
+			minimize: true,
+			minimizer: [ new TerserPlugin( {
+				parallel: true,
+				extractComments: false,
+				terserOptions: {
+					output: {
+						comments: false,
+					},
+				},
+			} ) ],
+		},
 	}
 }

@@ -3,6 +3,8 @@
 @import 'tagify';
 
 .#{$namespace}-focus-keyword {
+	position: relative;
+
 	.components-panel__body-title {
 		margin-bottom: 0;
 		padding: 16px;
@@ -14,6 +16,7 @@
 	.components-notice {
 		margin: 0 0 10px;
 		color: #555d66;
+		border-radius: 4px;
 
 		&__content {
 			margin: 0;

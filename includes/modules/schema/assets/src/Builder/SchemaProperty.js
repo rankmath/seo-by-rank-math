@@ -20,6 +20,35 @@ import SchemaPropertyField from './SchemaPropertyField'
 import DeleteConfirmation from '../DeleteConfirmation'
 
 /**
+ * Get schema property value.
+ *
+ * @param {Object} props This component's props.
+ * @param {Object} field This field.
+ */
+const getSchemaPropertyValue = ( props, field ) => {
+	let { property, value } = props.data
+	const { metadata } = props.schema
+
+	if ( value === get( field, 'placeholder', '' ) ) {
+		value = ''
+	}
+
+	if ( 'reviewLocation' === property && has( metadata, 'reviewLocation' ) ) {
+		value = metadata.reviewLocation
+	}
+
+	if ( 'unpublish' === property && has( metadata, 'unpublish' ) ) {
+		value = metadata.unpublish
+	}
+
+	if ( props.isPro && '[rank_math_rich_snippet]' === value ) {
+		value = '[rank_math_rich_snippet id="' + metadata.shortcode + '"]'
+	}
+
+	return value
+}
+
+/**
  * Schema property component.
  *
  * @param {Object} props This component's props.
@@ -30,11 +59,11 @@ const SchemaProperty = ( props ) => {
 		return null
 	}
 
-	let { value } = props.data
 	const { property, id, map } = props.data
 	const { removeProperty, propertyChange, duplicateProperty } = props.actions
 	const field = get( map, 'field', { label: false } )
 	const fieldProps = { ...field }
+	const value = getSchemaPropertyValue( props, field )
 
 	if ( map.isRequired ) {
 		if ( field.label ) {
@@ -49,22 +78,6 @@ const SchemaProperty = ( props ) => {
 	if ( props.isCustom ) {
 		fieldProps.type = 'text'
 		delete fieldProps.label
-	}
-
-	if ( value === get( field, 'placeholder', '' ) ) {
-		value = ''
-	}
-
-	if ( 'reviewLocation' === property && has( props.schema.metadata, 'reviewLocation' ) ) {
-		value = props.schema.metadata.reviewLocation
-	}
-
-	if ( 'unpublish' === property && has( props.schema.metadata, 'unpublish' ) ) {
-		value = props.schema.metadata.unpublish
-	}
-
-	if ( props.isPro && '[rank_math_rich_snippet]' === value ) {
-		value = '[rank_math_rich_snippet id="' + props.schema.metadata.shortcode + '"]'
 	}
 
 	const containerClasses = classnames(

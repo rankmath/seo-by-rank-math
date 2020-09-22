@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { isUndefined } from 'lodash'
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
@@ -14,12 +9,10 @@ import { createElement, Fragment } from '@wordpress/element'
 /**
  * Internal dependencies
  */
+import TabPanel from '@components/TabPanel'
+import Social from '@components/Social/Social'
 import General from '@components/General/General'
 import Advanced from '@components/Advanced/Advanced'
-import Schema from '@schema/Schema'
-import Social from '@components/Social/Social'
-import SchemaTabIcon from '@schema/TabIcon'
-import TabPanel from '@components/TabPanel'
 
 /**
  * @description Tab on select
@@ -66,15 +59,6 @@ const getTabs = () => {
 			),
 			view: Advanced,
 			className: 'rank-math-advanced-tab',
-		} )
-	}
-
-	if ( rankMath.canUser.snippet && ! isUndefined( rankMath.schemas ) ) {
-		tabs.push( {
-			name: 'schema',
-			title: <SchemaTabIcon />,
-			view: Schema,
-			className: 'rank-math-schema-tab',
 		} )
 	}
 
