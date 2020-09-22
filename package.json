@@ -6,7 +6,7 @@
 	"license": "GPL-2.0+",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/MyThemeShopTeam/rank-math.git"
+		"url": "https://github.com/rankmath/seo-by-rank-math.git"
 	},
 	"plugin": {
 		"glotpress": "http://translate.wordpress.org",
