@@ -1,14 +1,14 @@
 {
-	"name": "mythemeshop/rank-math",
-	"description": "A complete seo package",
+	"name": "rankmath/seo-by-rank-math",
+	"description": "Rank Math is the most powerful way to get BEST WordPress SEO tools added to your website.",
 	"keywords": [ "wordpress", "plugin" ],
 	"homepage": "https://rankmath.com",
 	"type": "wordpress-plugin",
 	"license": "GPL-3.0",
 	"authors": [
 		{
-			"name": "Shakeeb Ahmed",
-			"email": "me@shakeebahmed.com"
+			"name": "Rank Math",
+			"email": "support@rankmath.com"
 		}
 	],
 	"require": {
