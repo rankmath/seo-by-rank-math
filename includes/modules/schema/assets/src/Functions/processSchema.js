@@ -41,7 +41,7 @@ const processValues = ( property ) => {
  * @return {string} Processed value.
  */
 const getValue = ( property ) => {
-	if ( ! isEmpty( property.value ) ) {
+	if ( ! isEmpty( property.value ) || 'toggle' === property.map.field.type ) {
 		return property.value
 	}
 
@@ -83,7 +83,7 @@ const processData = ( data ) => {
 		// Save to metadata.
 		if ( 'metadata' === canSave ) {
 			const value = getValue( property )
-			if ( isEmpty( value ) ) {
+			if ( isEmpty( value ) && 'toggle' !== property.map.field.type ) {
 				return
 			}
 

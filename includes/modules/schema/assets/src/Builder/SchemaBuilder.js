@@ -39,7 +39,7 @@ class SchemaBuilder extends Component {
 	constructor() {
 		super( ...arguments )
 		this.options = get( this.props.data, 'metadata', {} )
-		this.state = { data: this.props.data, loading: false, showNotice: false }
+		this.state = { data: this.props.data, loading: false, showNotice: false, postId: 0 }
 		this.setState = this.setState.bind( this )
 		this.templateSaveCount = 0
 		this.isEditingTemplate = get( rankMath, 'isTemplateScreen', false )
@@ -70,6 +70,7 @@ class SchemaBuilder extends Component {
 				<SchemaGroup
 					data={ this.state.data }
 					schema={ this.state.data }
+					isPro={ this.props.isPro }
 					parentId={ null }
 					isMain={ true }
 					isArray={ false }
@@ -117,13 +118,24 @@ class SchemaBuilder extends Component {
 							) }
 						</Fragment>
 					) }
-					<Button
-						isPrimary
-						className="button"
-						onClick={ () => this.props.saveSchema( this.props.id, this.state.data ) }
-					>
-						{ this.isEditingTemplate ? __( 'Save', 'rank-math' ) : __( 'Save for this Post', 'rank-math' ) }
-					</Button>
+					{ this.isEditingTemplate && (
+						<Button
+							isPrimary
+							className="button"
+							onClick={ () => this.props.saveTemplate( this.state.data, this.setState, this.state.postId ) }
+						>
+							{ this.state.loading ? __( 'Saving', 'rank-math' ) : ( this.state.showNotice ? __( 'Saved', 'rank-math' ) : __( 'Save', 'rank-math' ) ) }
+						</Button>
+					) }
+					{ ! this.isEditingTemplate && (
+						<Button
+							isPrimary
+							className="button"
+							onClick={ () => this.props.saveSchema( this.props.id, this.state.data ) }
+						>
+							{ __( 'Save for this Post', 'rank-math' ) }
+						</Button>
+					) }
 				</div>
 			</form>
 		)
@@ -317,8 +329,8 @@ export default compose(
 				dispatch( 'rank-math' ).toggleSchemaTemplates( false )
 				dispatch( 'rank-math' ).toggleSchemaEditor( false )
 			},
-			saveTemplate( data, setState ) {
-				dispatch( 'rank-math' ).saveTemplate( processSchema( data ), setState )
+			saveTemplate( data, setState, postId ) {
+				dispatch( 'rank-math' ).saveTemplate( processSchema( data ), setState, postId )
 			},
 		}
 	} )

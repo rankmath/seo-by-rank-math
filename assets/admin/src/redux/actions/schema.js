@@ -1,11 +1,12 @@
 /**
  * External dependencies
  */
-import { findKey } from 'lodash'
+import { findKey, get } from 'lodash'
 
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n'
 import { select } from '@wordpress/data'
 import { doAction } from '@wordpress/hooks'
 import apiFetch from '@wordpress/api-fetch'
@@ -170,17 +171,26 @@ export function updatePrimary( index, schemas ) {
  *
  * @param {Object}   schema   The selected schema.
  * @param {Function} setState Set state.
+ * @param {number}   postId   Post ID to update schema data.
  * @return {Object} An action for redux.
  */
-export function saveTemplate( schema, setState ) {
+export function saveTemplate( schema, setState, postId ) {
 	apiFetch( {
 		method: 'POST',
 		path: 'rankmath/v1/saveTemplate',
-		data: { schema },
-	} ).then( () => {
-		setState( { loading: false, showNotice: true } )
+		data: {
+			schema,
+			postId,
+		},
+	} ).then( ( response ) => {
+		setState( { loading: false, showNotice: true, postId: response.id } )
 		setTimeout( () => {
 			setState( { showNotice: false } )
+
+			if ( get( rankMath, 'isTemplateScreen', false ) ) {
+				document.title = __( 'Edit Schema', 'rank-math' )
+				window.history.pushState( null, '', response.link.replace( /&amp;/g, '&' ) )
+			}
 		}, 2000 )
 		rankMath.schemaTemplates.push( {
 			schema,

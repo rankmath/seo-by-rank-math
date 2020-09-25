@@ -143,25 +143,42 @@ class Beta_Optin {
 	 * @return string Latest beta version number.
 	 */
 	public function get_latest_beta_version() {
-		$plugin_info = Version_Control::get_plugin_info();
-		if ( ! is_array( $plugin_info ) || empty( $plugin_info['versions'] ) ) {
-			return 0;
+		$version = get_transient( 'rank_math_trunk_version' );
+		if ( ! $version ) {
+			$version = $this->fetch_trunk_version();
 		}
 
-		$versions = $plugin_info['versions'];
-
-		uksort( $versions, 'version_compare' );
-
-		$versions = array_keys( $versions );
-		$beta     = reset( $versions );
-
-		foreach ( (array) $plugin_info['versions'] as $version => $url ) {
-			if ( Str::contains( 'beta', $version ) ) {
-				$beta = $version;
-			}
+		$beta = 0;
+		if ( Str::contains( 'beta', $version ) ) {
+			$beta = $version;
 		}
 
 		return $beta;
+	}
+
+	/**
+	 * Fetch latest plugin file from public SVN and get version number.
+	 *
+	 * @return string
+	 */
+	public function fetch_trunk_version() {
+		$version = 0;
+
+		$response = wp_remote_get( 'https://plugins.svn.wordpress.org/seo-by-rank-math/trunk/rank-math.php' );
+		if ( ! is_array( $response ) || is_wp_error( $response ) ) {
+			return $version;
+		}
+
+		$plugin_file = wp_remote_retrieve_body( $response );
+
+		preg_match( '/Version:\s+([0-9a-zA-Z.-]+)\s*$/m', $plugin_file, $matches );
+		if ( empty( $matches[1] ) ) {
+			return $version;
+		}
+
+		$version = $matches[1];
+		set_transient( 'rank_math_trunk_version', $version, ( 12 * HOUR_IN_SECONDS ) );
+		return $version;
 	}
 
 	/**
@@ -203,10 +220,9 @@ class Beta_Optin {
 			$value->response = [];
 		}
 
-		$versions = self::get_available_versions( true );
 		$value->response['seo-by-rank-math/rank-math.php'] = new \stdClass();
 
-		$plugin_data = Version_Control::get_plugin_data( $beta_version, $versions[ $beta_version ] );
+		$plugin_data = Version_Control::get_plugin_data( $beta_version, 'https://downloads.wordpress.org/plugin/seo-by-rank-math.zip' );
 		foreach ( $plugin_data as $prop_key => $prop_value ) {
 			$value->response['seo-by-rank-math/rank-math.php']->{$prop_key} = $prop_value;
 		}

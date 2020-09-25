@@ -1438,7 +1438,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Article", "rank-math" ),
+                "defaultEn": "Article"
             },
             "headline": {
                 "map": {
@@ -1586,7 +1588,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Book", "rank-math" ),
+                "defaultEn": "Book"
             },
             "name": {
                 "map": {
@@ -1880,7 +1884,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Course", "rank-math" ),
+                "defaultEn": "Course"
             },
             "name": {
                 "map": {
@@ -2178,7 +2184,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Event", "rank-math" ),
+                "defaultEn": "Event"
             },
             "name": {
                 "map": {
@@ -2895,7 +2903,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Job Posting", "rank-math" ),
+                "defaultEn": "Job Posting"
             },
             "title": {
                 "map": {
@@ -3315,7 +3325,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Music", "rank-math" ),
+                "defaultEn": "Music"
             },
             "name": {
                 "map": {
@@ -3411,7 +3423,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Person", "rank-math" ),
+                "defaultEn": "Person"
             },
             "name": {
                 "map": {
@@ -3560,7 +3574,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Product", "rank-math" ),
+                "defaultEn": "Product"
             },
             "name": {
                 "map": {
@@ -4024,7 +4040,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Recipe", "rank-math" ),
+                "defaultEn": "Recipe"
             },
             "name": {
                 "map": {
@@ -4611,7 +4629,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Resturant", "rank-math" ),
+                "defaultEn": "Resturant"
             },
             "name": {
                 "map": {
@@ -4918,7 +4938,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Service", "rank-math" ),
+                "defaultEn": "Service"
             },
             "name": {
                 "map": {
@@ -5139,7 +5161,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Software", "rank-math" ),
+                "defaultEn": "Software"
             },
             "name": {
                 "map": {
@@ -5556,7 +5580,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "Video", "rank-math" ),
+                "defaultEn": "Video"
             },
             "name": {
                 "map": {
@@ -5668,7 +5694,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "WooCommerce Product", "rank-math" ),
+                "defaultEn": "WooCommerce Product"
             }
         },
         "EDDProduct": {
@@ -5676,7 +5704,9 @@ export default {
                 "isArray": false,
                 "isGroup": true,
                 "isRequired": false,
-                "isRecommended": false
+                "isRecommended": false,
+                "title": __( "EDD Product", "rank-math" ),
+                "defaultEn": "EDD Product"
             }
         }
     }

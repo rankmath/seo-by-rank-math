@@ -7,6 +7,7 @@ import classnames from 'classnames'
 /**
  * WordPress dependencies
  */
+import { applyFilters } from '@wordpress/hooks'
 import { compose } from '@wordpress/compose'
 import { withSelect } from '@wordpress/data'
 import { Fragment } from '@wordpress/element'
@@ -45,7 +46,7 @@ const getSchemaPropertyValue = ( props, field ) => {
 		value = '[rank_math_rich_snippet id="' + metadata.shortcode + '"]'
 	}
 
-	return value
+	return applyFilters( 'rank_math_schema_property_value', value, props )
 }
 
 /**
@@ -164,7 +165,7 @@ export default compose(
 	withSelect( ( select, props ) => {
 		return {
 			...props,
-			iPro: select( 'rank-math' ).isPro(),
+			isPro: select( 'rank-math' ).isPro(),
 		}
 	} )
 )( SchemaProperty )

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, forEach, isArray, isObject, isEmpty } from 'lodash'
+import { get, has, forEach, isArray, isObject, isEmpty } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -128,6 +128,14 @@ export function generateValidSchema( json ) {
 
 	// Generate schema from map.
 	let schema = 'custom' === metadata.type ? getGroupDefault() : generateSchemaFromMap( type )
+	if ( has( schema.map, 'title' ) && ! has( metadata, 'title' ) ) {
+		metadata.title = schema.map.title
+	}
+
+	if ( has( metadata, 'title' ) && metadata.title === schema.map.defaultEn ) {
+		metadata.title = schema.map.title
+	}
+
 	schema.property = get( metadata, 'title', type )
 	schema.metadata = metadata
 

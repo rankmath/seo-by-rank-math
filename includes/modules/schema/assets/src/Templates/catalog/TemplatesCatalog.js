@@ -79,7 +79,7 @@ export default compose(
 		let primarySchema = findKey( select( 'rank-math' ).getSchemas(), 'metadata.isPrimary' )
 		primarySchema = isEmpty( primarySchema ) ? {} : {
 			id: primarySchema,
-			type: schemas[ primarySchema ].property,
+			type: schemas[ primarySchema ].map.defaultEn,
 		}
 
 		return {

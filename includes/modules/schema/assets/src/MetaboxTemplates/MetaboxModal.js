@@ -21,7 +21,7 @@ const MetaboxModal = ( { isOpen = false } ) => {
 
 	return (
 		<Modal
-			title="Select Schema"
+			title={ __( 'Select Schema', 'rank-math' ) }
 			closeButtonLabel={ __( 'Close', 'rank-math' ) }
 			shouldCloseOnClickOutside={ false }
 			className="rank-math-modal rank-math-schema-generator rank-math-schema-modal"

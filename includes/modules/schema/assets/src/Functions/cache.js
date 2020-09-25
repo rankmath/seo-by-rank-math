@@ -121,9 +121,10 @@ class MapCache {
 		if ( null === this.templates ) {
 			this.templates = []
 			forEach( this.cache.schemas, ( value, key ) => {
+				const title = get( value, 'map.title', startCase( key ) )
 				this.templates.push( {
 					type: key,
-					title: 'WooCommerceProduct' !== key ? __( startCase( key ), 'rank-math' ) : __( 'WooCommerce Product', 'rank-math' ),
+					title: 'WooCommerceProduct' !== key ? title : __( 'WooCommerce Product', 'rank-math' ),
 				} )
 			} )
 

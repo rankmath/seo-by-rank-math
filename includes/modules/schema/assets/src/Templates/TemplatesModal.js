@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
-import { Modal } from '@wordpress/components'
+import { Dashicon, Modal } from '@wordpress/components'
 import { withSelect, withDispatch } from '@wordpress/data'
 
 /**
@@ -25,6 +25,15 @@ const TemplatesModal = ( { isOpen = false, toggleModal } ) => {
 			className="rank-math-modal rank-math-schema-generator rank-math-schema-template-modal"
 			overlayClassName="rank-math-modal-overlay"
 		>
+			<a
+				href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_campaign=WP"
+				rel="noopener noreferrer"
+				target="_blank"
+				title={ __( 'More Info', 'rank-math' ) }
+				className={ 'rank-math-schema-info' }
+			>
+				<Dashicon icon="info" />
+			</a>
 			<TabPanel />
 		</Modal>
 	)

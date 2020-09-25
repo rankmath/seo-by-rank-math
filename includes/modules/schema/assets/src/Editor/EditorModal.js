@@ -33,7 +33,7 @@ const EditorModal = ( { isOpen = false, toggleModal, selectedTab, isCutomSchema 
 
 	return (
 		<Modal
-			title="Schema Generator"
+			title={ __( 'Schema Generator', 'rank-math' ) }
 			closeButtonLabel={ __( 'Close', 'rank-math' ) }
 			shouldCloseOnClickOutside={ false }
 			onRequestClose={ toggleModal }

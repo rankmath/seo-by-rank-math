@@ -48,26 +48,24 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 
 			<FocusKeywordField />
 
-			{ false === rankMath.isUserRegistered && (
-				<Notice status="warning" isDismissible={ false }>
-					<Interpolate
-						components={ {
-							link: (
-								<a
-									href={ rankMath.assessor.futureSeo }
-									target="_blank"
-									rel="noopener noreferrer"
-								/>
-							),
-						} }
-					>
-						{ __(
-							'The future of SEO is in your hands. {{link}}Learn more{{/link}} ',
-							'rank-math'
-						) }
-					</Interpolate>
-				</Notice>
-			) }
+			<Notice status="warning" isDismissible={ false }>
+				<Interpolate
+					components={ {
+						link: (
+							<a
+								href={ rankMath.assessor.futureSeo }
+								target="_blank"
+								rel="noopener noreferrer"
+							/>
+						),
+					} }
+				>
+					{ __(
+						'The future of SEO is in your hands. {{link}}Learn more{{/link}} ',
+						'rank-math'
+					) }
+				</Interpolate>
+			</Notice>
 
 			<CheckboxControl
 				className="pillar-content"

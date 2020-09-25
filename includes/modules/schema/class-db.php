@@ -102,4 +102,15 @@ class DB {
 			'schema' => $schema,
 		];
 	}
+
+	/**
+	 * Delete Schema for template.
+	 *
+	 * @param int $post_id Post id.
+	 *
+	 * @return string
+	 */
+	public static function delete_schema_data( $post_id ) {
+		return self::table()->where( 'post_id', $post_id )->whereLike( 'meta_key', 'rank_math_schema_' )->delete();
+	}
 }

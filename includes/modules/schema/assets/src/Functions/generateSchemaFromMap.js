@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, merge, forEach, isString } from 'lodash'
+import { get, has, merge, forEach, isString } from 'lodash'
 
 /**
  * Internal dependencies
@@ -25,6 +25,10 @@ const getSchemaFromMap = ( parentMap ) => {
 
 	forEach( parentMap, ( value, key ) => {
 		if ( 'map' === key ) {
+			if ( has( value, 'title' ) ) {
+				schema.map.title = value.title
+				schema.map.defaultEn = value.defaultEn
+			}
 			return
 		}
 

@@ -118,7 +118,7 @@ class Shortcodes {
 
 		$allowed = 'person' === $type
 		? [ 'name', 'email', 'person_phone', 'address' ]
-		: [ 'name', 'email', 'address', 'hours', 'phone', 'email', 'map' ];
+		: [ 'name', 'email', 'address', 'hours', 'phone', 'map' ];
 
 		if ( ! empty( $args['show'] ) && 'all' !== $args['show'] ) {
 			$allowed = array_intersect( array_map( 'trim', explode( ',', $args['show'] ) ), $allowed );

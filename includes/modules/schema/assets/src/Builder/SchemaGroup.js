@@ -35,7 +35,7 @@ const SchemaGroup = ( props ) => {
 		return null
 	}
 
-	const { parentId, isCustom, isMain = false } = props
+	const { parentId, isCustom, isPro, isMain = false } = props
 	const { id, property, properties, map } = props.data
 	const { addProperty, addGroup, removeGroup, propertyChange, duplicateGroup } = props.actions
 	const field = get( map, 'field', { label: false } )
@@ -78,11 +78,12 @@ const SchemaGroup = ( props ) => {
 							)
 						}
 
+						const value = 'WooCommerceProduct' !== property ? startCase( property ) : 'WooCommerce Product'
 						return (
 							<div className="schema-property--field">
 								<TextControl
-									value={ 'WooCommerceProduct' !== property ? startCase( property ) : 'WooCommerce Product' }
-									required="required"
+									value={ value }
+									disabled={ ! isPro }
 									onChange={ ( newProperty ) => {
 										propertyChange( id, 'property', newProperty )
 									} }

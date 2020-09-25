@@ -26,7 +26,7 @@ const Selection = ( { addSchema, isOpen } ) => {
 
 	return (
 		<Modal
-			title="Schema Generator"
+			title={ __( 'Schema Generator', 'rank-math' ) }
 			closeButtonLabel={ __( 'Close', 'rank-math' ) }
 			shouldCloseOnClickOutside={ false }
 			className="rank-math-modal rank-math-schema-generator rank-math-schema-modal"

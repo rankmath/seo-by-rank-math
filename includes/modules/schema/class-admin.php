@@ -253,11 +253,10 @@ class Admin extends Base {
 			return $schemas;
 		}
 
-		$default_type        = 'article' === $default_type ? Helper::get_settings( "titles.pt_{$screen->post_type}_default_article_type" ) : ucfirst( $default_type );
 		$schemas['new-9999'] = [
-			'@type'    => $default_type,
+			'@type'    => 'article' === $default_type ? Helper::get_settings( "titles.pt_{$screen->post_type}_default_article_type" ) : ucfirst( $default_type ),
 			'metadata' => [
-				'title'     => $default_type,
+				'title'     => ucfirst( $default_type ),
 				'type'      => 'template',
 				'isPrimary' => true,
 			],

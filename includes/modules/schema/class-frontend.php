@@ -146,14 +146,19 @@ class Frontend {
 
 		$schema['@id'] = $jsonld->parts['canonical'] . '#' . $id;
 		$type          = \strtolower( $schema['@type'] );
-		$props         = [
+		$is_event      = Str::contains( 'event', $type );
+		if ( $is_event ) {
+			$jsonld->add_prop( 'publisher', $schema, 'organizer', $schemas );
+		}
+
+		$props = [
 			'is_part_of' => [
 				'key'   => 'webpage',
-				'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! Str::contains( 'event', $type ),
+				'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
 			],
 			'publisher'  => [
 				'key'   => 'publisher',
-				'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! Str::contains( 'event', $type ),
+				'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
 			],
 			'thumbnail'  => [
 				'key'   => 'image',
