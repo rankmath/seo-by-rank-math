@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.1
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.48
+Stable tag: 1.0.48.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -474,6 +474,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.48.1 [Sep 27, 2020] =
+* Added: A Filter hook in the Setup Wizard steps
+* Fixed: External Redirections were not working on some installations
+* Fixed: Content analysis was not detecting the content added in the Elementor editor
+* Fixed: Hidden Primary Category option in the Classic Editor due to small CSS bug
+* Fixed: Breaking of Rank Math metabox after using `rank_math/gutenberg/enabled` filter in the Block editor
+* Fixed: jQuery Migrate Helper deprecated warning appearing after the last update
 
 = 1.0.48 [Sep 26, 2020] =
 * Added: [HUGE] Completely revamped the UI for our [Schema](https://rankmath.com/kb/rich-snippets/) module. Introducing tree structure UI, now anyone can easily understand the Schema markup in a visual format. Comes with required field validation.

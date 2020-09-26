@@ -147,7 +147,7 @@ class Redirector {
 			$this->redirect_to .= '?' . $this->query_string;
 		}
 
-		if ( wp_safe_redirect( esc_url_raw( $this->redirect_to ), $header_code, $this->get_redirect_header() ) ) {
+		if ( wp_redirect( esc_url_raw( $this->redirect_to ), $header_code, $this->get_redirect_header() ) ) {
 			exit;
 		}
 		// @codeCoverageIgnoreEnd

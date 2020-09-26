@@ -138,22 +138,36 @@ class DataCollector {
 	 * @return {string} The post's content.
 	 */
 	getContent() {
-		if ( ! this._contentArea ) {
-			const documentType =
-				'[data-elementor-type="' + ElementorConfig.document.type + '"]'
-			this._contentArea = elementor.$preview
-				.contents()
-				.find( documentType )
-		}
-
 		const content = []
-		this._contentArea
+		this.getContentArea()
 			.find( '.elementor-widget-container' )
 			.each( function() {
 				content.push( jQuery( this ).html() )
 			} )
 
 		return content.join( '' )
+	}
+
+	/**
+	 * Get content area.
+	 *
+	 * @return {Object} jQuery node.
+	 */
+	getContentArea() {
+		if ( this._contentArea ) {
+			return this._contentArea
+		}
+
+		const contentArea = elementor.$preview
+			.contents()
+			.find( '[data-elementor-type="' + ElementorConfig.document.type + '"]' )
+
+		if ( contentArea.length < 1 ) {
+			return jQuery( '<div />' )
+		}
+
+		this._contentArea = contentArea
+		return contentArea
 	}
 
 	/**

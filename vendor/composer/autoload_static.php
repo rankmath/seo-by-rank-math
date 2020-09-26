@@ -8,8 +8,8 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
 {
     public static $files = array (
         'da5f6548f070d3d306f90eee42dd5de6' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgentParser.php',
-        '958baf679ab014f6517c26661e8969b7' => __DIR__ . '/..' . '/cmb2/cmb2/init.php',
-        'c137015539481e56a35f44f2d09649d5' => __DIR__ . '/../..' . '/includes/template-tags.php',
+        'bcb90d312f16e4ff52a76c5aa3f98ae0' => __DIR__ . '/..' . '/cmb2/cmb2/init.php',
+        '65bb6728e4ea5a6bfba27700e81f7a00' => __DIR__ . '/../..' . '/includes/template-tags.php',
     );
 
     public static $prefixLengthsPsr4 = array (

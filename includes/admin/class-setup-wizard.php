@@ -170,6 +170,16 @@ class Setup_Wizard {
 		);
 
 		$this->wizard_step->form( $this );
+
+		/**
+		 * Add setting on specific Setup Wizard steps.
+		 *
+		 * The dynamic part of the hook name. $this->step, is the step ID.
+		 *
+		 * @param CMB2 $cmb CMB2 object.
+		 */
+		$this->do_action( 'wizard/settings/' . $this->step, $this->cmb );
+		
 		CMB2::pre_init( $this->cmb );
 	}
 

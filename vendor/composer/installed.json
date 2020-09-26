@@ -97,17 +97,17 @@
     },
     {
         "name": "donatj/phpuseragentparser",
-        "version": "v1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/donatj/PhpUserAgent.git",
-            "reference": "1431382850017ac017d194f2a6f6cacb35212888"
+            "reference": "faac0bd29d564712957c19648711b87c11d79ef0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/1431382850017ac017d194f2a6f6cacb35212888",
-            "reference": "1431382850017ac017d194f2a6f6cacb35212888",
+            "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/faac0bd29d564712957c19648711b87c11d79ef0",
+            "reference": "faac0bd29d564712957c19648711b87c11d79ef0",
             "shasum": ""
         },
         "require": {
@@ -118,7 +118,7 @@
             "donatj/drop": "*",
             "phpunit/phpunit": "~4.8"
         },
-        "time": "2020-04-24T18:07:07+00:00",
+        "time": "2020-09-01T16:13:00+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -142,13 +142,23 @@
             }
         ],
         "description": "Lightning fast, minimalist PHP UserAgent string parser.",
-        "homepage": "http://donatstudios.com/PHP-Parser-HTTP_USER_AGENT",
+        "homepage": "https://donatstudios.com/PHP-Parser-HTTP_USER_AGENT",
         "keywords": [
             "browser",
             "browser detection",
             "parser",
             "user agent",
             "useragent"
+        ],
+        "funding": [
+            {
+                "url": "https://www.paypal.me/donatj/15",
+                "type": "custom"
+            },
+            {
+                "url": "https://github.com/donatj",
+                "type": "github"
+            }
         ]
     },
     {

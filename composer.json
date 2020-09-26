@@ -14,8 +14,10 @@
 	"require": {
 		"a5hleyrich/wp-background-processing": ">=1.0",
 		"mythemeshop/wordpress-helpers": ">=1.0.12",
-		"cmb2/cmb2": "^2.7",
 		"donatj/phpuseragentparser": "^1.0"
+	},
+	"require-dev": {
+		"cmb2/cmb2": "^2.7"
 	},
 	"autoload" : {
 		"psr-4" : {
@@ -26,7 +28,5 @@
 	},
 	"config": {
 		"optimize-autoloader": true
-	},
-	"require-dev": {
 	}
 }

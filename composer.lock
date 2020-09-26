@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38cf948a34224a4d2dd6a4a36a98a09b",
+    "content-hash": "04970ac83b2c26101c099cd32a8f9ca9",
     "packages": [
         {
             "name": "a5hleyrich/wp-background-processing",
@@ -45,6 +45,111 @@
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
             "time": "2020-07-31T07:00:11+00:00"
         },
+        {
+            "name": "donatj/phpuseragentparser",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/donatj/PhpUserAgent.git",
+                "reference": "faac0bd29d564712957c19648711b87c11d79ef0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/faac0bd29d564712957c19648711b87c11d79ef0",
+                "reference": "faac0bd29d564712957c19648711b87c11d79ef0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "camspiers/json-pretty": "~1.0",
+                "donatj/drop": "*",
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/UserAgentParser.php"
+                ],
+                "psr-4": {
+                    "donatj\\UserAgent\\": "src/UserAgent"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jesse G. Donat",
+                    "email": "donatj@gmail.com",
+                    "homepage": "https://donatstudios.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Lightning fast, minimalist PHP UserAgent string parser.",
+            "homepage": "https://donatstudios.com/PHP-Parser-HTTP_USER_AGENT",
+            "keywords": [
+                "browser",
+                "browser detection",
+                "parser",
+                "user agent",
+                "useragent"
+            ],
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/donatj/15",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/donatj",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-01T16:13:00+00:00"
+        },
+        {
+            "name": "mythemeshop/wordpress-helpers",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MyThemeShopTeam/wordpress-helpers.git",
+                "reference": "bbe0a23c0492698478d9bc9760c9647c5c341bb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/bbe0a23c0492698478d9bc9760c9647c5c341bb2",
+                "reference": "bbe0a23c0492698478d9bc9760c9647c5c341bb2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyThemeShop\\Helpers\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MyThemeShop",
+                    "email": "info@mythemeshop.com"
+                }
+            ],
+            "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
+            "time": "2020-05-28T21:45:09+00:00"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "cmb2/cmb2",
             "version": "v2.7.0",
@@ -97,107 +202,14 @@
                 "wordpress"
             ],
             "time": "2020-01-21T17:49:50+00:00"
-        },
-        {
-            "name": "donatj/phpuseragentparser",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/donatj/PhpUserAgent.git",
-                "reference": "1431382850017ac017d194f2a6f6cacb35212888"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/1431382850017ac017d194f2a6f6cacb35212888",
-                "reference": "1431382850017ac017d194f2a6f6cacb35212888",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "camspiers/json-pretty": "~1.0",
-                "donatj/drop": "*",
-                "phpunit/phpunit": "~4.8"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/UserAgentParser.php"
-                ],
-                "psr-4": {
-                    "donatj\\UserAgent\\": "src/UserAgent"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jesse G. Donat",
-                    "email": "donatj@gmail.com",
-                    "homepage": "https://donatstudios.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Lightning fast, minimalist PHP UserAgent string parser.",
-            "homepage": "http://donatstudios.com/PHP-Parser-HTTP_USER_AGENT",
-            "keywords": [
-                "browser",
-                "browser detection",
-                "parser",
-                "user agent",
-                "useragent"
-            ],
-            "time": "2020-04-24T18:07:07+00:00"
-        },
-        {
-            "name": "mythemeshop/wordpress-helpers",
-            "version": "1.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MyThemeShopTeam/wordpress-helpers.git",
-                "reference": "bbe0a23c0492698478d9bc9760c9647c5c341bb2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/bbe0a23c0492698478d9bc9760c9647c5c341bb2",
-                "reference": "bbe0a23c0492698478d9bc9760c9647c5c341bb2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MyThemeShop\\Helpers\\": "src/"
-                },
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "MyThemeShop",
-                    "email": "info@mythemeshop.com"
-                }
-            ],
-            "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
-            "time": "2020-05-28T21:45:09+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
