@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.1
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.48.1
+Stable tag: 1.0.48.2-beta
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -474,6 +474,15 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.48.2-beta [Sep 29, 2020] =
+* Added: Support for uploading `txt` settings file on a Multisite
+* Fixed: Event Venue fields were not showing in the right Event Mode
+* Fixed: Missing `mainEntityofPage` property in the default schema added from the Settings
+* Fixed: Added logo URL using `ImageObject` in the Publisher entity
+* Fixed: Ajax-based Dropdown options were working in the settings page
+* Fixed: `lodash` is not defined error on the Settings page
+* Fixed: Broken Redirection loader image
 
 = 1.0.48.1 [Sep 27, 2020] =
 * Added: A Filter hook in the Setup Wizard steps

@@ -41,6 +41,7 @@ class Article implements Snippet {
 				'@type' => 'Person',
 				'name'  => $jsonld->parts['author'],
 			],
+			'isPrimary'     => true,
 		];
 
 		$jsonld->add_prop( 'publisher', $entity, 'publisher', $data );

@@ -318,7 +318,6 @@ class Redirector {
 
 		require_once ABSPATH . 'wp-admin/includes/screen.php';
 
-		$assets_uri = untrailingslashit( plugin_dir_url( __FILE__ ) );
 		include_once \dirname( __FILE__ ) . '/views/debugging.php';
 		exit;
 	}

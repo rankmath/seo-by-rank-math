@@ -2329,7 +2329,7 @@ export default {
                             "OnlineEventAttendanceMode": "Online",
                             "MixedEventAttendanceMode": "Online + Offline"
                         },
-                        "default": "Offline",
+                        "default": "OfflineEventAttendanceMode",
                         "classes": "col-4"
                     }
                 }
