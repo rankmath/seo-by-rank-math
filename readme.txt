@@ -1,6 +1,6 @@
-=== WordPress SEO Plugin - Rank Math ===
+=== Rank Math - SEO Plugin for WordPress ===
 Contributors: rankmath
-Plugin link: https://s.rankmath.com/homepage
+Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.1
 Requires at least: 5.2
