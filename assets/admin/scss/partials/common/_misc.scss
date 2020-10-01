@@ -127,15 +127,16 @@ textarea.#{$namespace}-code-box, textarea.#{$namespace}-code-box:focus, div.#{$n
 	}
 }
 
-.update-message p.rank-math-beta-update-notice {
+.update-message p.#{$namespace}-beta-update-notice {
 	font-weight: bold;
 
 	&:before {
 		content: "\f534";
 	}
 }
-.updating-message p.rank-math-beta-update-notice,
-.updated-message p.rank-math-beta-update-notice {
+
+.updating-message p.#{$namespace}-beta-update-notice,
+.updated-message p.#{$namespace}-beta-update-notice {
 	display: none;
 }
 

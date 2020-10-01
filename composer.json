@@ -12,13 +12,16 @@
 		}
 	],
 	"require": {
+		"cmb2/cmb2": "^2.7",
 		"a5hleyrich/wp-background-processing": ">=1.0",
 		"mythemeshop/wordpress-helpers": ">=1.0.12",
 		"donatj/phpuseragentparser": "^1.0"
 	},
-	"require-dev": {
-		"cmb2/cmb2": "^2.7"
-	},
+	"extra": {
+        "installer-paths": {
+            "vendor/cmb2/cmb2": ["cmb2/cmb2"]
+        }
+    },
 	"autoload" : {
 		"psr-4" : {
 			"RankMath\\": "includes/"

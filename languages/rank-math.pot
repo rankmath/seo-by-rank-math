@@ -975,7 +975,10 @@ msgid "Insert keywords you want to rank for. Try to <a href=\"%s\" target=\"_bla
 msgstr ""
 
 #. translators: link to connect page.
-msgid "The future of SEO is in your hands. %s"
+msgid "Want more? PRO version is coming soon. %s"
+msgstr ""
+
+msgid "Notify me!"
 msgstr ""
 
 msgid "Trends"
@@ -3210,9 +3213,6 @@ msgid "System Info"
 msgstr ""
 
 msgid "Copy System Info to Clipboard"
-msgstr ""
-
-msgid "[WARNING] This update will install a beta version of Rank Math."
 msgstr ""
 
 msgid "This update will install a beta version of Rank Math."
