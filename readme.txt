@@ -1,11 +1,11 @@
-=== WordPress SEO Plugin - Rank Math ===
+=== Rank Math - SEO Plugin for WordPress ===
 Contributors: rankmath
-Plugin link: https://s.rankmath.com/homepage
+Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.1
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.48.1
+Stable tag: 1.0.48.2
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,37 +475,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.48.1 [Sep 27, 2020] =
-* Added: A Filter hook in the Setup Wizard steps
-* Fixed: External Redirections were not working on some installations
-* Fixed: Content analysis was not detecting the content added in the Elementor editor
-* Fixed: Hidden Primary Category option in the Classic Editor due to small CSS bug
-* Fixed: Breaking of Rank Math metabox after using `rank_math/gutenberg/enabled` filter in the Block editor
-* Fixed: jQuery Migrate Helper deprecated warning appearing after the last update
-
-= 1.0.48 [Sep 26, 2020] =
-* Added: [HUGE] Completely revamped the UI for our [Schema](https://rankmath.com/kb/rich-snippets/) module. Introducing tree structure UI, now anyone can easily understand the Schema markup in a visual format. Comes with required field validation.
-* Added: [NEW] [Entity Graph](https://www.w3.org/TR/json-ld/#named-graphs) for the Schema markup. Now all the nodes are connected by edges
-* Added: Code to make [upcoming PRO version](https://rankmath.com/pro/) compatible with the free version
-* Improved: UI of the export option in the Redirections page
-* Improved: Some missing text in the translation file
-* Improved: Added a condition to check if a method exists in the `Paper` class
-* Improved: Use `site_url()` instead of `home_url()`
-* Improved: Beta functionality now downloads [beta version](https://rankmath.com/kb/version-control/#beta-updates) from the Trunk folder of WordPress.org SVN
-* Changed: Time options in the Recipe Schema now need `PT` as a prefix, example: PT1H30M
-* Changed: Default mode to 'Advanced' on new installations
-* Fixed: [Contact shortcode](https://rankmath.com/kb/titles-and-meta/#displaying-your-contact-information) was not showing some contact info like Email & Phone number
-* Fixed: `%name%` variable was not working in the backend of single posts and pages
-* Fixed: `%name%` variable was showing the wrong user name in the profile edit page
-* Fixed: Variation Products were showing price mismatch warning in the Google Merchant Centre
-* Fixed: PHP warnings related to [beta testing](https://rankmath.com/kb/version-control/#beta-updates) functionality on some installations
-* Fixed: Schema markup issue when `BankOrCreditUnion` is selected in the Local SEO settings
-* Fixed: Removed non-archive CPT pages from the breadcrumb's schema markup code
-* Fixed: Shortcodes were not rendering on the frontend for the Category/Taxonomy description text
-* Fixed: CPTs created by some third party plugins in the [Titles & Meta](https://rankmath.com/kb/titles-and-meta/) global settings were not displaying
-* Fixed: Datepicker styling issue with the Coupon theme from PremiumPress
-* Fixed: Opening Days in the Restaurant Schema were not available for the block editor & Elementor
-* Fixed: Minimum required WordPress version notice in the Setup Wizard
-* Fixed: Icon styling in the FAQ and HowTo blocks
+= 1.0.48.2 [Oct 01, 2020] =
+* Added: Support for importing `txt` settings file on a Multisite setup
+* Fixed: Event Venue fields were not showing in the right Event Mode
+* Fixed: Missing `mainEntityofPage` property in the default schema added from the Settings
+* Fixed: Added logo URL using `ImageObject` in the Publisher entity
+* Fixed: Ajax-based Dropdown options were working in the settings page
+* Fixed: `lodash` is not defined error on the Settings page
+* Fixed: Broken Redirection loader image
+* Fixed: [Beta updates](https://rankmath.com/kb/version-control/#beta-updates) were not working
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

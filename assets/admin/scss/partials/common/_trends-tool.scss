@@ -1,26 +1,24 @@
 // main: ../../metabox.scss
-#rank-math-compare-keywords {
-	&-trigger {
-		position: absolute;
-		right: 0;
-		top: -31px;
-		height: 22px;
-		min-height: 22px;
-		width: 22px;
-		line-height: 22px;
-		padding: 0;
-		text-decoration: none;
-		text-align: center;
+##{$namespace}-compare-keywords-trigger {
+	position: absolute;
+	right: 0;
+	top: -31px;
+	height: 22px;
+	min-height: 22px;
+	width: 22px;
+	line-height: 22px;
+	padding: 0;
+	text-decoration: none;
+	text-align: center;
 
-		svg {
-			width: 16px;
-			height: 16px;
-			vertical-align: -2px;
-		}
-	
-		@at-root .rank-math-sidebar-panel & {
-			top: 15px;
-			right: 16px;
-		}
+	svg {
+		width: 16px;
+		height: 16px;
+		vertical-align: -2px;
+	}
+
+	@at-root .rank-math-sidebar-panel & {
+		top: 15px;
+		right: 16px;
 	}
 }

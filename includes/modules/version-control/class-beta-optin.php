@@ -62,7 +62,7 @@ class Beta_Optin {
 		}
 
 		$transient = get_site_transient( 'update_plugins' );
-		if ( self::is_beta_update( $transient ) ) {
+		if ( self::has_beta_update( $transient ) ) {
 			// No-js fallback.
 			echo '<html><head></head><body style="margin: 0;"><iframe src="' . esc_attr( self::BETA_CHANGELOG_URL ) . '" style="width: 100%; height: 100%;"></body></html>';
 			exit;
@@ -75,7 +75,7 @@ class Beta_Optin {
 	 * @param  mixed $transient Transient value.
 	 * @return boolean          If it is a beta update or not.
 	 */
-	public function is_beta_update( $transient ) {
+	public static function has_beta_update( $transient ) {
 		return (
 			is_object( $transient )
 			&& ! empty( $transient->response )
@@ -192,7 +192,7 @@ class Beta_Optin {
 		$beta_version = $this->get_latest_beta_version();
 		$new_version  = isset( $value->response['seo-by-rank-math/rank-math.php'] ) && ! empty( $value->response['seo-by-rank-math/rank-math.php']->new_version ) ? $value->response['seo-by-rank-math/rank-math.php']->new_version : 0;
 
-		if ( ! $beta_version || ! $new_version ) {
+		if ( ! $beta_version ) {
 			return $value;
 		}
 
@@ -228,7 +228,7 @@ class Beta_Optin {
 		}
 
 		$value->response['seo-by-rank-math/rank-math.php']->is_beta        = true;
-		$value->response['seo-by-rank-math/rank-math.php']->upgrade_notice = self::NOTICE_START_MARKER . ' ' . __( '[WARNING] This update will install a beta version of Rank Math.', 'rank-math' ) . ' ' . self::NOTICE_END_MARKER;
+		$value->response['seo-by-rank-math/rank-math.php']->upgrade_notice = self::NOTICE_START_MARKER . ' ' . __( 'This update will install a beta version of Rank Math.', 'rank-math' ) . ' ' . self::NOTICE_END_MARKER;
 
 		if ( empty( $value->no_update ) ) {
 			$value->no_update = [];
@@ -277,7 +277,7 @@ class Beta_Optin {
 		}
 
 		$transient = get_site_transient( 'update_plugins' );
-		if ( ! self::is_beta_update( $transient ) ) {
+		if ( ! self::has_beta_update( $transient ) ) {
 			return;
 		}
 		?>
@@ -301,7 +301,7 @@ class Beta_Optin {
 						var contents = $( element ).html();
 						if ( contents.indexOf( '<?php echo esc_js( html_entity_decode( self::NOTICE_START_MARKER ) ); ?>' ) !== -1 && contents.indexOf( '<?php echo esc_js( html_entity_decode( self::NOTICE_END_MARKER ) ); ?>' ) !== -1 ) {
 							contents = contents
-								.replace( '<?php echo esc_js( html_entity_decode( self::NOTICE_START_MARKER ) ); ?>', '</p><div class="update-message notice inline notice-warning notice-alt" style="margin-top: 20px;"><p>' )
+								.replace( '<?php echo esc_js( html_entity_decode( self::NOTICE_START_MARKER ) ); ?>', '</p><div class="update-message notice inline notice-warning notice-alt rank-math-beta-update-notice"><p>' )
 								.replace( '<?php echo esc_js( html_entity_decode( self::NOTICE_END_MARKER ) ); ?>', '</p></div><p style="display: none;">' );
 
 							$( element ).html( contents );
@@ -312,6 +312,15 @@ class Beta_Optin {
 				<?php } ?>
 			} );
 		</script>
+		<style>
+			.update-message.rank-math-beta-update-notice {
+				font-weight: bold;
+				margin-top: 20px;
+			}
+			.update-message.rank-math-beta-update-notice > p:before {
+				content: "\f534";
+			}
+		</style>
 		<?php
 	}
 }

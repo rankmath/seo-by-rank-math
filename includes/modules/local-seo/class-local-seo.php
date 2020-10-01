@@ -112,7 +112,13 @@ class Local_Seo {
 		$json_ld->add_prop( 'email', $entity );
 		$json_ld->add_prop( 'url', $entity );
 		$json_ld->add_prop( 'address', $entity );
-		$json_ld->add_prop( 'image', $entity );
+
+		if ( $value = Helper::get_settings( 'titles.knowledgegraph_logo' ) ) { // phpcs:ignore
+			$entity['logo'] = [
+				'@type' => 'ImageObject',
+				'url'   => $value,
+			];
+		}
 
 		switch ( Helper::get_settings( 'titles.knowledgegraph_type' ) ) {
 			case 'company':
@@ -138,6 +144,10 @@ class Local_Seo {
 		$entity['@id']   = home_url( '/#organization' );
 		$entity['name']  = $name ? $name : get_bloginfo( 'name' );
 
+		if ( is_singular() && 'Organization' !== $type ) {
+			$entity['@type'] = [ $type, 'Organization' ];
+		}
+
 		$this->add_contact_points( $entity );
 		$this->add_geo_cordinates( $entity );
 		$this->add_business_hours( $entity );
@@ -147,7 +157,7 @@ class Local_Seo {
 			$entity['priceRange'] = $price_range;
 		}
 
-		return $this->sanitize_organization_schema( $entity, $entity['@type'] );
+		return $this->sanitize_organization_schema( $entity, $type );
 	}
 
 	/**
@@ -162,7 +172,12 @@ class Local_Seo {
 			return false;
 		}
 
-		$entity['@type'] = 'Person';
+		$entity['@type'] = is_singular()
+		? [
+			'Organization',
+			'Person',
+		]
+		: 'Person';
 		$entity['@id']   = home_url( '/#person' );
 		$entity['name']  = $name;
 		$json_ld->add_prop( 'phone', $entity );
@@ -335,7 +350,6 @@ class Local_Seo {
 	private function sanitize_organization_logo( $entity ) {
 		if ( isset( $entity['logo'] ) ) {
 			$entity['image'] = $entity['logo'];
-			unset( $entity['logo'] );
 		}
 		if ( isset( $entity['contactPoint'] ) ) {
 			$entity['telephone'] = $entity['contactPoint'][0]['telephone'];

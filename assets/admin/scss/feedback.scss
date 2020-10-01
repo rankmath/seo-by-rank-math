@@ -10,6 +10,7 @@
 @import '../../vendor/bourbon/bourbon';
 @import 'variables';
 @import 'mixins';
+@import 'partials/common/misc';
 
 .rank-math-feedback-content {
 	@import 'partials/common/button';

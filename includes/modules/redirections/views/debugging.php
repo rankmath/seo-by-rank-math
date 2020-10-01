@@ -77,7 +77,7 @@ use RankMath\Helper;
 		</p>
 
 		<div class="rank-math-redirection-loading-animation">
-			<img src="<?php echo esc_url( $assets_uri . '/assets/loader.svg' ); ?>">
+			<img src="<?php echo esc_url( rank_math()->plugin_url() . 'assets/admin/img/loader.svg' ); ?>">
 		</div>
 		<div class="rank-math-redirection-loading-timer">
 			<?php /* translators: countdown seconds */ ?>

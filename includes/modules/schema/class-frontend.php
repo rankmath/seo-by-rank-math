@@ -113,21 +113,6 @@ class Frontend {
 			$schemas[ $id ] = $schema;
 		}
 
-		if (
-			! empty( $schema['publisher'] ) &&
-			'Person' === $schemas['publisher']['@type'] &&
-			! empty( array_intersect( $schema_types, [ 'Article', 'BlogPosting', 'NewsArticle' ] ) )
-		) {
-			$schemas['publisher']['@type'] = [
-				'Person',
-				'Organization',
-			];
-
-			if ( ! empty( $schemas['publisher']['image'] ) ) {
-				$schemas['publisher']['logo'] = $schemas['publisher']['image'];
-			}
-		}
-
 		return $this->change_webpage_entity( $schemas, $schema_types );
 	}
 

@@ -360,7 +360,10 @@ class Import_Export implements Runner {
 	 * @return mixed
 	 */
 	private function has_valid_file() {
-		$file = wp_handle_upload( $_FILES['import-me'] );
+		$this->filter( 'upload_mimes', 'allow_txt_upload', 10, 2 );
+		$file = wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] );
+		$this->remove_filter( 'upload_mimes', 'allow_txt_upload', 10 );
+
 		if ( is_wp_error( $file ) ) {
 			Helper::add_notification( esc_html__( 'Settings could not be imported:', 'rank-math' ) . ' ' . $file->get_error_message(), [ 'type' => 'error' ] );
 			return false;
@@ -377,6 +380,21 @@ class Import_Export implements Runner {
 		}
 
 		return $file;
+	}
+
+	/**
+	 * Allow txt & json file upload.
+	 *
+	 * @param array            $types    Mime types keyed by the file extension regex corresponding to those types.
+	 * @param int|WP_User|null $user User ID, User object or null if not provided (indicates current user).
+	 *
+	 * @return array
+	 */
+	public function allow_txt_upload( $types, $user ) {
+		$types['txt'] = 'text/plain';
+		$types['json'] = 'application/json';
+
+		return $types;
 	}
 
 	/**
