@@ -8,7 +8,7 @@ import { get, map, isEmpty } from 'lodash'
  */
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
-import { Button } from '@wordpress/components'
+import { Button, withFilters } from '@wordpress/components'
 import { withSelect, withDispatch } from '@wordpress/data'
 
 /**
@@ -22,7 +22,7 @@ import DeleteConfirmation from './DeleteConfirmation'
  *
  * @param {Object} props This component's props.
  */
-const SchemaList = ( { schemas, edit, trash, preview, showProNotice, setPrimary } ) => {
+const SchemaList = ( { schemas, edit, trash, preview, showProNotice } ) => {
 	if ( isEmpty( schemas ) ) {
 		return null
 	}
@@ -40,15 +40,6 @@ const SchemaList = ( { schemas, edit, trash, preview, showProNotice, setPrimary 
 			{ map( schemas, ( schema, id ) => {
 				return (
 					<div key={ id } id="rank-math-schema-item" className="rank-math-schema-item row">
-
-						{ ! showProNotice && (
-							<input
-								type="radio"
-								value={ id }
-								checked={ schema.metadata.isPrimary }
-								onChange={ () => setPrimary( id, schemas ) }
-							/>
-						) }
 						<strong className="rank-math-schema-name">
 							<i className={ getSnippetIcon( schema[ '@type' ] ) }></i>
 							{ get( schema, 'metadata.title', schema[ '@type' ] ) }
@@ -96,15 +87,16 @@ const SchemaList = ( { schemas, edit, trash, preview, showProNotice, setPrimary 
 	)
 }
 
+const schemaList = withFilters( 'rankMath.schema.SchemaList' )( SchemaList )
+
 export default compose(
 	withSelect( ( select ) => {
-		const isPro = select( 'rank-math' ).isPro()
 		const schemas = select( 'rank-math' ).getSchemas()
 		const count = Object.keys( schemas ).length
 
 		return {
 			schemas,
-			showProNotice: ! isPro && 1 <= count,
+			showProNotice: 1 <= count,
 		}
 	} ),
 	withDispatch( ( dispatch ) => {
@@ -121,9 +113,6 @@ export default compose(
 				dispatch( 'rank-math' ).setEditorTab( 'codeValidation' )
 				dispatch( 'rank-math' ).toggleSchemaEditor( true )
 			},
-			setPrimary( id, schemas ) {
-				dispatch( 'rank-math' ).updatePrimary( id, schemas )
-			},
 		}
 	} )
-)( SchemaList )
+)( schemaList )

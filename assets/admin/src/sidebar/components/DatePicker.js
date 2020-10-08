@@ -2,12 +2,7 @@
  * WordPress dependencies
  */
 import { Fragment } from '@wordpress/element'
-import { Dropdown, DatePicker } from '@wordpress/components'
-
-/**
- * Internal dependencies
- */
-import { IconButton } from '@helpers/deprecated'
+import { Button, Dropdown, DatePicker } from '@wordpress/components'
 
 const EnhancedDatePicker = ( {
 	position = 'middle right',
@@ -24,7 +19,7 @@ const EnhancedDatePicker = ( {
 				<Fragment>
 					{ children }
 
-					<IconButton
+					<Button
 						icon="calendar-alt"
 						onClick={ onToggle }
 						aria-expanded={ isOpen }

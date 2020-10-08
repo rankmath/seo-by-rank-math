@@ -13,6 +13,7 @@ import { createElement, render } from '@wordpress/element'
 /**
  * Internal dependencies
  */
+import './helpers'
 import { getStore } from '@root/redux/store'
 import registerDefaultHooks from './defaultFilters'
 import Metabox from '@schema/Metabox/Metabox'

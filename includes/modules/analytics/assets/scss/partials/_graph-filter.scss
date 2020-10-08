@@ -1,0 +1,247 @@
+// main: ../stats.scss
+
+.#{$namespace} {
+    &-graph-filter {
+        z-index: 1;
+
+        display: grid;
+
+        margin-bottom: 1.5rem;
+
+        border-width: 1px 0 0 1px;
+        border-style: solid;
+        border-color: $light-gray;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        &.has-3-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &.rank-math-stat-filters {
+            margin-bottom: 0;
+
+            + .graph {
+                height: 300px;
+                margin-bottom: 1.5rem;
+
+                border: 1px solid $light-gray;
+                border-top: 0;
+                background: #eee;
+                box-shadow: inset 0 0 0 10px #fff;
+            }
+        }
+
+        button.components-button {
+            position: relative;
+
+            margin: 0;
+            padding: 1.125rem;
+
+            text-align: left;
+
+            border-width: 0 1px 1px 0;
+            border-style: solid;
+            border-color: $light-gray;
+            background: #fff;
+
+            &:after {
+                position: absolute;
+                right: -1px;
+                bottom: -1px;
+                left: -1px;
+
+                height: 5px;
+
+                content: '';
+                transition: .25s all ease-in-out;
+
+                background: transparent;
+            }
+
+            &:hover,
+            &.is-active {
+                border-color: $light-gray;
+                background: rgba($gray, .05);
+                box-shadow: none;
+
+                &:after {
+                    background: $gray;
+                }
+            }
+
+            &:hover {
+                background: #fff;
+            }
+
+            &:focus {
+                border-color: $light-gray;
+                outline: 0;
+                background: #fff;
+                box-shadow: inset 0 0 0 1px $dark-gray;
+            }
+
+            &.score-filter,
+            &.stat-filter {
+                &-good {
+                    &.is-active {
+                        background: rgba($color-1, .05);
+
+                        &:after {
+                            background: $color-1;
+                        }
+                    }
+                }
+
+                &-ok {
+                    &.is-active {
+                        background: rgba($color-4, .05);
+
+                        &:after {
+                            background: $color-4;
+                        }
+                    }
+                }
+
+                &-bad {
+                    &.is-active {
+                        background: rgba($color-3, .05);
+
+                        &:after {
+                            background: $color-3;
+                        }
+                    }
+                }
+
+                &-top3 {
+                    &.is-active {
+                        &:after {
+                            background: $top-3;
+                        }
+                    }
+                }
+
+                &-top10 {
+                    &.is-active {
+                        &:after {
+                            background: $top-10;
+                        }
+                    }
+                }
+
+                &-top50 {
+                    &.is-active {
+                        &:after {
+                            background: $top-50;
+                        }
+                    }
+                }
+
+                &-top100 {
+                    &.is-active {
+                        &:after {
+                            background: $top-100;
+                        }
+                    }
+                }
+
+                &-color-1 {
+                    &.is-active {
+                        background: rgba($color-1, .05);
+
+                        &:after {
+                            background: $color-1;
+                        }
+                    }
+                }
+
+                &-color-2 {
+                    &.is-active {
+                        background: rgba($color-2, .05);
+
+                        &:after {
+                            background: $color-2;
+                        }
+                    }
+                }
+
+                &-color-3 {
+                    &.is-active {
+                        background: rgba($color-3, .05);
+
+                        &:after {
+                            background: $color-3;
+                        }
+                    }
+                }
+
+                &-color-4 {
+                    &.is-active {
+                        background: rgba($color-4, .05);
+
+                        &:after {
+                            background: $color-4;
+                        }
+                    }
+                }
+
+                &-color-5 {
+                    &.is-active {
+                        background: rgba($color-5, .05);
+
+                        &:after {
+                            background: $color-5;
+                        }
+                    }
+                }
+
+                &-color-6 {
+                    &.is-active {
+                        background: rgba($color-6, .05);
+
+                        &:after {
+                            background: $color-6;
+                        }
+                    }
+                }
+
+                &-color-7 {
+                    &.is-active {
+                        background: rgba($color-7, .05);
+
+                        &:after {
+                            background: $color-7;
+                        }
+                    }
+                }
+
+                &-color-8 {
+                    &.is-active {
+                        background: rgba($color-8, .05);
+
+                        &:before {
+                            background: $color-8;
+                        }
+                    }
+                }
+            }
+
+            h4 {
+                font-size: 1.3125rem;
+                font-weight: 400;
+
+                margin: 0;
+            }
+
+            em:before {
+                margin-left: 3px;
+
+                vertical-align: -3px;
+            }
+
+            .text-large {
+                font-size: 2.75rem;
+            }
+        }
+    }
+}

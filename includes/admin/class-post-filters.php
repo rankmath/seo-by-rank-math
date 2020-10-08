@@ -274,6 +274,26 @@ class Post_Filters implements Runner {
 			],
 		];
 
+		// Extra conditions for "SEO Score" filters.
+		$seo_score_filters = [ 'bad-seo', 'good-seo', 'great-seo' ];
+		if ( in_array( $filter, $seo_score_filters, true ) ) {
+			$query['relation'] = 'AND';
+			$query[]           = [
+				'key'     => 'rank_math_robots',
+				'value'   => 'noindex',
+				'compare' => 'NOT LIKE',
+			];
+			$query[]           = [
+				'key'     => 'rank_math_focus_keyword',
+				'compare' => 'EXISTS',
+			];
+			$query[]           = [
+				'key'     => 'rank_math_focus_keyword',
+				'value'   => '',
+				'compare' => '!=',
+			];
+		}
+
 		if ( isset( $hash[ $filter ] ) ) {
 			$query[] = $hash[ $filter ];
 		}

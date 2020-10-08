@@ -1,0 +1,11 @@
+// main: ../stats.scss
+
+.#{$namespace} {
+    &-keyword-table.keyword-manager {
+        margin-bottom: 2rem;
+
+        table tr:last-child {
+            border-bottom: 1px solid $light-gray;
+        }
+    }
+}

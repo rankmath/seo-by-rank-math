@@ -14,7 +14,7 @@ import { addFilter } from '@wordpress/hooks'
 import Schema from '@schema/Schema'
 import SchemaTabIcon from '@schema/TabIcon'
 
-addFilter( 'rank_math_sidebar_tabs', 'rank-math-pro', ( tabs ) => {
+addFilter( 'rank_math_sidebar_tabs', 'rank-math', ( tabs ) => {
 	if ( rankMath.canUser.snippet && ! isUndefined( rankMath.schemas ) ) {
 		tabs.splice( 2, 0, {
 			name: 'schema',

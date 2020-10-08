@@ -130,7 +130,8 @@ abstract class Plugin_Importer {
 				'usermeta'     => esc_html__( 'Import Author Meta', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import meta information like titles, descriptions, focus keyword, robots meta, etc., of your author archive pages.', 'rank-math' ) ),
 				'redirections' => esc_html__( 'Import Redirections', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import all the redirections you have already set up in.', 'rank-math' ) ),
 				'blocks'       => esc_html__( 'Import Blocks', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import and convert all compatible blocks in post contents.', 'rank-math' ) ),
-				'locations'    => esc_html__( 'Import Locations', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import and convert all compatible blocks in post contents.', 'rank-math' ) ),
+				'locations'    => esc_html__( 'Import Locations', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import Locations Settings from Yoast plugin.', 'rank-math' ) ),
+				'news'         => esc_html__( 'Import News Settings', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import News Settings from Yoast news', 'rank-math' ) ),
 			],
 			array_combine(
 				$this->choices,

@@ -224,7 +224,7 @@ class Post_Columns implements Runner {
 	 */
 	public function get_column_seo_details( $post_id ) {
 		if ( ! Helper::is_post_indexable( $post_id ) ) {
-			echo '<span class="rank-math-column-display seo-score no-score "><strong>—/—</strong></span>';
+			echo '<span class="rank-math-column-display seo-score no-score "><strong>N/A</strong></span>';
 			echo '<strong>' . esc_html__( 'No Index', 'rank-math' ) . '</strong>';
 			return;
 		}
@@ -235,7 +235,7 @@ class Post_Columns implements Runner {
 
 		$score = empty( $keyword ) ? false : $this->get_seo_score( $post_id );
 		$class = ! $score ? 'no-score' : $this->get_seo_score_class( $score );
-		$score = $score ? $score . ' / 100' : '—/—';
+		$score = $score ? $score . ' / 100' : 'N/A';
 
 		?>
 		<span class="rank-math-column-display seo-score <?php echo esc_attr( $class ); ?> <?php echo ! $score ? 'disabled' : ''; ?>">

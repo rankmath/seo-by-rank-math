@@ -5,6 +5,7 @@ const wpPot = require( 'gulp-wp-pot' )
 const checktextdomain = require( 'gulp-checktextdomain' )
 const sass = require( 'gulp-sass' )
 const autoprefixer = require( 'gulp-autoprefixer' )
+const rename = require( 'gulp-rename' )
 
 sass.compiler = require( 'node-sass' )
 
@@ -17,14 +18,102 @@ const paths = {
 		src: 'assets/admin/scss/**/*.scss',
 		dest: 'assets/admin/css',
 	},
-	schema: {
-		src: 'includes/modules/schema/assets/scss/**/*.scss',
-		dest: 'includes/modules/schema/assets/css',
+	modules: {
+		src: 'includes/modules/**/assets/scss/**/*.scss',
+		dest: './',
 	},
 	pot: {
 		src: [ '**/*.php', '!node_modules/**/*', '!vendor/**/*' ],
 		dest: 'languages/rank-math.pot',
 	},
+}
+
+/**
+ * Converting Front SASS into CSS
+ *  1. Applying autoprefixer
+ *  2. Creatings sourcemaps
+ *
+ * @return {Object} Gulp source.
+ */
+function frontCSS() {
+	return src( paths.front.src, { sourcemaps: false } )
+		.pipe(
+			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
+		)
+		.pipe( autoprefixer() )
+		.pipe( dest( paths.front.dest, { sourcemaps: '.' } ) )
+}
+
+/**
+ * Converting Admin SASS into CSS
+ *  1. Applying autoprefixer
+ *  2. Creatings sourcemaps
+ *
+ * @return {Object} Gulp source.
+ */
+function adminCSS() {
+	return src( paths.admin.src, { sourcemaps: false } )
+		.pipe(
+			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
+		)
+		.pipe( autoprefixer() )
+		.pipe( dest( paths.admin.dest, { sourcemaps: '.' } ) )
+}
+
+/**
+ * Converting Modules SASS into CSS
+ *  1. Applying autoprefixer
+ *  2. Creatings sourcemaps
+ *
+ * @return {Object} Gulp source.
+ */
+function modulesCSS() {
+	return src( paths.modules.src, { sourcemaps: false, base: './' } )
+		.pipe(
+			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
+		)
+		.pipe( autoprefixer() )
+		.pipe(
+			rename( ( path ) => {
+				path.dirname += '/../css'
+			} )
+		)
+		.pipe( dest( paths.modules.dest, { sourcemaps: '.' } ) )
+}
+
+/**
+ * Converting Schema Sass into css
+ *  1. Applying autoprefixer
+ *  2. Creatings sourcemaps
+ *
+ * @return {Object} Gulp source.
+ */
+function schemaCSS() {
+	return src( paths.schema.src, { sourcemaps: false } )
+		.pipe(
+			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
+		)
+		.pipe( autoprefixer() )
+		.pipe( dest( paths.schema.dest, { sourcemaps: '.' } ) )
+}
+
+function watchFiles() {
+	watch( paths.front.src, frontCSS )
+	watch( paths.admin.src, adminCSS )
+	watch( paths.modules.src, modulesCSS )
+}
+
+function pot() {
+	return src( paths.pot.src )
+		.pipe(
+			wpPot( {
+				domain: 'rank-math',
+				lastTranslator: 'Rank Math',
+				noFilePaths: true,
+				team: 'Rank Math',
+			} )
+		)
+		.pipe( dest( paths.pot.dest ) )
 }
 
 // Quality Assurance --------------------------------------
@@ -52,76 +141,10 @@ function ct() {
 	)
 }
 
-function pot() {
-	return src( paths.pot.src )
-		.pipe(
-			wpPot( {
-				domain: 'rank-math',
-				lastTranslator: 'Rank Math',
-				noFilePaths: true,
-				team: 'Rank Math',
-			} )
-		)
-		.pipe( dest( paths.pot.dest ) )
-}
-
-/**
- * Converting Front Sass into css
- *  1. Applying autoprefixer
- *  2. Creatings sourcemaps
- *
- * @return {Object} Gulp source.
- */
-function frontCSS() {
-	return src( paths.front.src, { sourcemaps: false } )
-		.pipe(
-			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
-		)
-		.pipe( autoprefixer() )
-		.pipe( dest( paths.front.dest, { sourcemaps: '.' } ) )
-}
-
-/**
- * Converting Admin Sass into css
- *  1. Applying autoprefixer
- *  2. Creatings sourcemaps
- *
- * @return {Object} Gulp source.
- */
-function adminCSS() {
-	return src( paths.admin.src, { sourcemaps: false } )
-		.pipe(
-			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
-		)
-		.pipe( autoprefixer() )
-		.pipe( dest( paths.admin.dest, { sourcemaps: '.' } ) )
-}
-
-/**
- * Converting Schema Sass into css
- *  1. Applying autoprefixer
- *  2. Creatings sourcemaps
- *
- * @return {Object} Gulp source.
- */
-function schemaCSS() {
-	return src( paths.schema.src, { sourcemaps: false } )
-		.pipe(
-			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
-		)
-		.pipe( autoprefixer() )
-		.pipe( dest( paths.schema.dest, { sourcemaps: '.' } ) )
-}
-
-function watchFiles() {
-	watch( paths.front.src, frontCSS )
-	watch( paths.admin.src, adminCSS )
-	watch( paths.schema.src, schemaCSS )
-}
-
 exports.ct = ct
 exports.pot = pot
 exports.frontCSS = frontCSS
 exports.adminCSS = adminCSS
+exports.modulesCSS = modulesCSS
 exports.schemaCSS = schemaCSS
 exports.watch = watchFiles

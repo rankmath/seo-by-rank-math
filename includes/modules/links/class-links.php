@@ -96,11 +96,11 @@ class Links {
 		?>
 		<span class="rank-math-column-display rank-math-link-count">
 			<strong><?php esc_html_e( 'Links: ', 'rank-math' ); ?></strong>
-			<span title="<?php esc_html_e( 'Internal Links', 'rank-math' ); ?>" class="dashicons dashicons-admin-links"></span> <span><?php echo isset( $counts->internal_link_count ) ? esc_html( $counts->internal_link_count ) : ''; ?></span>
+			<span title="<?php esc_attr_e( 'Internal Links', 'rank-math' ); ?>"><span class="dashicons dashicons-admin-links"></span> <span><?php echo isset( $counts->internal_link_count ) ? esc_html( $counts->internal_link_count ) : ''; ?></span></span>
 			<span class="divider"></span>
-			<span title="<?php esc_html_e( 'External Links', 'rank-math' ); ?>" class="dashicons dashicons-external"></span> <span><?php echo isset( $counts->external_link_count ) ? esc_html( $counts->external_link_count ) : ''; ?></span>
+			<span title="<?php esc_attr_e( 'External Links', 'rank-math' ); ?>"><span class="dashicons dashicons-external"></span> <span><?php echo isset( $counts->external_link_count ) ? esc_html( $counts->external_link_count ) : ''; ?></span></span>
 			<span class="divider"></span>
-			<span title="<?php esc_html_e( 'Incoming Links', 'rank-math' ); ?>" class="dashicons dashicons-external internal"></span> <span><?php echo isset( $counts->incoming_link_count ) ? esc_html( $counts->incoming_link_count ) : ''; ?></span>
+			<span title="<?php esc_attr_e( 'Incoming Links', 'rank-math' ); ?>"><span class="dashicons dashicons-external internal"></span> <span><?php echo isset( $counts->incoming_link_count ) ? esc_html( $counts->incoming_link_count ) : ''; ?></span></span>
 		</span>
 		<?php
 	}

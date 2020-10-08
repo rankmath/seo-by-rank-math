@@ -132,6 +132,11 @@ class RankMathPostList {
 				data[ postID ][ valueField.data( 'field' ) ] = valueField.text()
 			} )
 
+			if ( jQuery.isEmptyObject( data ) ) {
+				jQuery( $this.next() ).trigger( 'click' )
+				return true
+			}
+
 			self.save( data ).done( function( results ) {
 				if ( results.success ) {
 					columns.forEach( function( column ) {

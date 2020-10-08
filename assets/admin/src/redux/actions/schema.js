@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { findKey, get } from 'lodash'
+import { get } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -147,23 +147,6 @@ export function deleteSchema( index ) {
 		'rank_math_delete_' + index,
 		''
 	)
-}
-
-/**
- * Update Primary Schema.
- *
- * @param {number} index   The index to primary schema.
- * @param {Object} schemas The schemas.
- *
- * @return {Object} An action for redux.
- */
-export function updatePrimary( index, schemas ) {
-	const newSchemas = { ...schemas }
-	const primarySchema = findKey( schemas, 'metadata.isPrimary' )
-	newSchemas[ primarySchema ].metadata.isPrimary = false
-	newSchemas[ index ].metadata.isPrimary = true
-
-	return updateSchemas( newSchemas )
 }
 
 /**

@@ -120,78 +120,6 @@ class Helper {
 	}
 
 	/**
-	 * Get Search Console auth url.
-	 *
-	 * @return string
-	 */
-	public static function get_console_auth_url() {
-		return \RankMath\Search_Console\Client::get()->get_auth_url();
-	}
-
-	/**
-	 * Get or update Search Console data.
-	 *
-	 * @param  bool|array $data Data to save.
-	 * @return bool|array
-	 */
-	public static function search_console_data( $data = null ) {
-		$key          = 'rank_math_search_console_data';
-		$encrypt_keys = [
-			'access_token',
-			'refresh_token',
-			'profiles',
-		];
-
-		// Clear data.
-		if ( false === $data ) {
-			delete_option( $key );
-			return false;
-		}
-
-		$saved = get_option( $key, [] );
-		foreach ( $encrypt_keys as $enc_key ) {
-			if ( isset( $saved[ $enc_key ] ) ) {
-				$saved[ $enc_key ] = Data_Encryption::deep_decrypt( $saved[ $enc_key ] );
-			}
-		}
-
-		// Getter.
-		if ( is_null( $data ) ) {
-			return wp_parse_args(
-				$saved,
-				[
-					'authorized' => false,
-					'profiles'   => [],
-				]
-			);
-		}
-
-		// Setter.
-		foreach ( $encrypt_keys as $enc_key ) {
-			if ( isset( $saved[ $enc_key ] ) ) {
-				$saved[ $enc_key ] = Data_Encryption::deep_encrypt( $saved[ $enc_key ] );
-			}
-			if ( isset( $data[ $enc_key ] ) ) {
-				$data[ $enc_key ] = Data_Encryption::deep_encrypt( $data[ $enc_key ] );
-			}
-		}
-
-		$data = wp_parse_args( $data, $saved );
-		update_option( $key, $data );
-
-		return $data;
-	}
-
-	/**
-	 * Get search console module object.
-	 *
-	 * @return object
-	 */
-	public static function search_console() {
-		return self::get_module( 'search-console' );
-	}
-
-	/**
 	 * Get module by ID.
 	 *
 	 * @param  string $id ID to get module.
@@ -291,5 +219,21 @@ class Helper {
 				],
 			]
 		);
+	}
+
+	/**
+	 * Is localhost.
+	 *
+	 * @return boolean
+	 */
+	public static function is_localhost() {
+		$whitelist = [
+			'127.0.0.1', // IPv4 address.
+			'::1', // IPv6 address.
+		];
+
+		$ip = filter_input( INPUT_SERVER, 'REMOTE_ADDR', FILTER_VALIDATE_IP );
+
+		return in_array( $ip, $whitelist, true );
 	}
 }

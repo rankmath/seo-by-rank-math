@@ -96,6 +96,7 @@ class Head {
 
 		foreach ( $tools as $id => $name ) {
 			$content = trim( Helper::get_settings( "general.{$id}" ) );
+			$content = $this->do_filter( 'webmaster/' . $id, $content );
 			if ( empty( $content ) ) {
 				continue;
 			}

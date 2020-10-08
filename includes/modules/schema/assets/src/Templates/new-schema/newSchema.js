@@ -7,7 +7,7 @@ export default () => (
 	<div className="components-panel__body rank-math-custom-schema-wrapper">
 		<img src={ rankMath.customSchemaImage } alt="" className="custom-schema" />
 
-		<div className="rank-math-pro-cta center">
+		<div id="rank-math-pro-cta" className="center">
 			<div className="rank-math-cta-box blue-ticks">
 				<h3>{ __( 'Advanced Schema Builder', 'rank-math' ) }</h3>
 				<ul>

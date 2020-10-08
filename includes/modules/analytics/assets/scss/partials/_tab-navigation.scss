@@ -1,0 +1,117 @@
+// main: ../stats.scss
+
+.#{$namespace} {
+    &-analytics {
+        width: $container_width;
+        max-width: 100%;
+    }
+
+    &-tabs {
+        // Tab Header.
+        .#{$namespace}-tab {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 40px;
+
+            position: relative;
+
+            display: inline-block;
+
+            margin-left: 0;
+            padding: 0 15px;
+
+            transition: .25s all ease-in-out;
+            text-decoration: none;
+
+            color: #5b646c;
+            border: 1px solid $gray;
+            border-right: 0;
+            border-bottom: 0;
+            background: #f0f2f4;
+
+            &:hover,
+            &:focus,
+            &.is-active {
+                color: #1a1e22;
+                outline: none;
+                background: #f8f9fa;
+                box-shadow: none;
+            }
+
+            &.is-active:after {
+                position: absolute;
+                z-index: 1;
+                bottom: -1px;
+                left: 0;
+
+                width: 100%;
+                height: 1px;
+
+                content: '';
+
+                background: #fafafb;
+            }
+
+            &:first-child {
+                border-radius: 4px 0 0 0;
+            }
+
+            &:last-of-type {
+                border-right: 1px solid $gray;
+                border-radius: 0 4px 0 0;
+            }
+
+            .rm-icon {
+                font-size: .825rem;
+
+                margin-right: 5px;
+
+                vertical-align: -1px;
+            }
+
+            // Tab Content.
+            &-content {
+                position: relative;
+
+                margin-bottom: .5rem;
+                padding: 30px 0;
+
+                color: $dark_gray;
+                border-radius: 0 6px 6px 6px;
+                background: #f8f9fa;
+
+                &:before {
+                    position: absolute;
+                    top: 0;
+                    left: -180px;
+
+                    overflow: hidden;
+
+                    width: 100vw;
+                    height: 100%;
+                    padding-bottom: 50px;
+
+                    content: '';
+
+                    border-top: 1px solid $gray;
+                    border-bottom: 1px solid $gray;
+                    background: #f8f9fa;
+                }
+
+                > div {
+                    position: relative;
+                }
+            }
+        }
+
+        .#{$namespace}-updated {
+            font-size: 13px;
+
+            float: right;
+
+            margin-top: 10px;
+
+            opacity: .5;
+        }
+    }
+}

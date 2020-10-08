@@ -53,6 +53,26 @@ class Manager {
 
 		$this->action( 'plugins_loaded', 'load_modules', 11 );
 		add_action( 'rank_math/module_changed', [ '\RankMath\Admin\Watcher', 'module_changed' ], 10, 2 );
+		$this->action( 'rank_math/module_changed', 'watch_for_analytics', 10, 2 );
+	}
+
+	/**
+	 * Watch if analytics enabled first time.
+	 *
+	 * @param  string $module Module name.
+	 * @param  string $state  Module state.
+	 */
+	public function watch_for_analytics( $module, $state ) {
+		if ( ! ( 'analytics' === $module && 'on' === $state ) ) {
+			return;
+		}
+
+		$done = \boolval( get_option( 'rank_math_flat_posts_done' ) );
+		if ( $done ) {
+			return;
+		}
+
+		\RankMath\Analytics\Data_Fetcher::get()->flat_posts();
 	}
 
 	/**
@@ -156,13 +176,13 @@ class Manager {
 			'settings' => Helper::get_admin_url( 'role-manager' ),
 		];
 
-		$modules['search-console'] = [
-			'title'    => esc_html__( 'Search Console', 'rank-math' ),
+		$modules['analytics'] = [
+			'title'    => esc_html__( 'Analytics', 'rank-math' ),
 			'desc'     => esc_html__( 'Connect Rank Math with Google Search Console to see the most important information from Google directly in your WordPress dashboard.', 'rank-math' ),
-			'class'    => 'RankMath\Search_Console\Search_Console',
+			'class'    => 'RankMath\Analytics\Analytics',
 			'icon'     => 'search-console',
 			'only'     => 'admin',
-			'settings' => Helper::get_admin_url( 'options-general' ) . '#setting-panel-search-console',
+			'settings' => Helper::get_admin_url( 'options-general' ) . '#setting-panel-analytics',
 		];
 
 		$modules['seo-analysis'] = [

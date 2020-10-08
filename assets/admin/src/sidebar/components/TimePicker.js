@@ -11,11 +11,6 @@ import { __ } from '@wordpress/i18n'
 import { Component, Fragment } from '@wordpress/element'
 import { Button, Dropdown } from '@wordpress/components'
 
-/**
- * Internal dependencies
- */
-import { IconButton } from '@helpers/deprecated'
-
 class TimePickerOnly extends Component {
 	constructor() {
 		super( ...arguments )
@@ -215,7 +210,7 @@ const EnhancedTimePicker = ( {
 				<Fragment>
 					{ children }
 
-					<IconButton
+					<Button
 						icon="calendar-alt"
 						onClick={ onToggle }
 						aria-expanded={ isOpen }

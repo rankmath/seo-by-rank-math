@@ -61,7 +61,7 @@ const CodeValidation = () => {
 				<pre className="code-output">
 					<code className="language-javascript" dangerouslySetInnerHTML={ { __html: prettyJSON( previewData ) } } />
 				</pre>
-				<div className="rank-math-pro-cta center">
+				<div id="rank-math-pro-cta" className="center">
 					<div className="rank-math-cta-box blue-ticks">
 						<h3>{ __( 'Preview & Validate Your Schema Markup', 'rank-math' ) }</h3>
 						<ul>

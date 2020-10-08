@@ -389,7 +389,7 @@ class Block_HowTo extends Block {
 		$out[] = sprintf( '</%1$s>', $list_tag );
 		$out[] = '</div>';
 
-		return join( "\n", $out );
+		return apply_filters( 'rank_math/schema/block/howto/content', join( "\n", $out ), $out, $attributes );
 	}
 
 	/**

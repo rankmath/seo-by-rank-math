@@ -222,7 +222,7 @@ class Assets implements Runner {
 			'rank-math_page_rank-math-404-monitor',
 			'rank-math_page_rank-math-redirections',
 			'rank-math_page_rank-math-link-builder',
-			'rank-math_page_rank-math-search-console',
+			'rank-math_page_rank-math-analytics',
 			'rank-math_page_rank-math-import-export',
 			'rank-math_page_rank-math-help',
 			'user-edit',

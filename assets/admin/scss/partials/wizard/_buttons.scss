@@ -1,11 +1,6 @@
 // main: ../../setup-wizard.scss
 
 .#{$namespace}-wizard .#{$namespace}-ui {
-	.button {
-		&.button-small {
-			border-radius: 10px;
-		}
-	}
 
 	@media screen and (max-width: 782px) {
 		.button {

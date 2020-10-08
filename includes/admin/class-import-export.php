@@ -391,7 +391,7 @@ class Import_Export implements Runner {
 	 * @return array
 	 */
 	public function allow_txt_upload( $types, $user ) {
-		$types['txt'] = 'text/plain';
+		$types['txt']  = 'text/plain';
 		$types['json'] = 'application/json';
 
 		return $types;
@@ -557,7 +557,7 @@ class Import_Export implements Runner {
 	 * @return bool
 	 */
 	private function is_action_allowed( $perform ) {
-		$allowed = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks', 'deactivate', 'locations' ];
+		$allowed = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks', 'deactivate', 'locations', 'news' ];
 		return $perform && in_array( $perform, $allowed, true );
 	}
 }

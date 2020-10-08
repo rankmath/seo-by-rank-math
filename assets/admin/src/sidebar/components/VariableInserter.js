@@ -8,13 +8,12 @@ import { isUndefined } from 'lodash'
  */
 import { __ } from '@wordpress/i18n'
 import { Component, Fragment } from '@wordpress/element'
-import { TextControl } from '@wordpress/components'
+import { Button, TextControl } from '@wordpress/components'
 import { decodeEntities } from '@wordpress/html-entities'
 
 /**
  * Internal dependencies
  */
-import { IconButton } from '@helpers/deprecated'
 import Interpolate from '@components/Interpolate'
 
 class VariableInserter extends Component {
@@ -95,7 +94,7 @@ class VariableInserter extends Component {
 						}, this ) }
 					</ul>
 				</div>
-				<IconButton
+				<Button
 					icon="arrow-down-alt2"
 					onClick={ () => {
 						this.toggle()

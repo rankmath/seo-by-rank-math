@@ -55,6 +55,10 @@
 		background-color: #6c7781;
 		border-radius: 50%;
 	}
+
+	&.disabled {
+		opacity: 0.6;
+	}
 }
 
 .toggle_on, .toggle_off {

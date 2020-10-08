@@ -41,7 +41,7 @@ const processValues = ( property ) => {
  * @return {string} Processed value.
  */
 const getValue = ( property ) => {
-	if ( ! isEmpty( property.value ) || 'toggle' === property.map.field.type ) {
+	if ( ! isEmpty( property.value ) || ( ! isUndefined( property.map.field ) && 'toggle' === property.map.field.type ) ) {
 		return property.value
 	}
 

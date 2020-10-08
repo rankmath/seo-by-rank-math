@@ -15,6 +15,7 @@ import jQuery from 'jquery'
  */
 import ajax from '@helpers/ajax'
 import addNotice from '@helpers/addNotice'
+import boxTabs from '@helpers/boxTabs'
 
 /*eslint no-alert: 0*/
 ( function( $ ) {
@@ -22,6 +23,8 @@ import addNotice from '@helpers/addNotice'
 	$( function() {
 		const rankMathImportExport = {
 			init() {
+				boxTabs()
+
 				$( document.body ).on(
 					'click',
 					'.rank-math-action',
@@ -35,7 +38,6 @@ import addNotice from '@helpers/addNotice'
 					}
 				)
 				this.importConfirm()
-				this.importExportTabs()
 			},
 
 			importConfirm() {
@@ -56,16 +58,6 @@ import addNotice from '@helpers/addNotice'
 						event.preventDefault()
 					}
 				} )
-			},
-
-			importExportTabs() {
-				$( '.rank-math-box-tabs a' ).on( 'click', function( e ) {
-					e.preventDefault();
-					var $this = $( this );
-					var target = $this.attr( 'href' ).substr( 1 );
-					$this.addClass( 'active-tab' ).siblings().removeClass( 'active-tab' );
-					$( '#'+target ).addClass( 'active-tab' ).siblings().removeClass( 'active-tab' );
-				});
 			},
 
 			createBackup( event ) {

@@ -55,6 +55,23 @@ class DB {
 	}
 
 	/**
+	 * Get all schemas.
+	 *
+	 * @param int $post_id Post id.
+	 *
+	 * @return array
+	 */
+	public static function get_schema_types( $post_id ) {
+		$schemas = self::get_schemas( $post_id );
+		if ( empty( $schemas ) ) {
+			return false;
+		}
+
+		$types = wp_list_pluck( $schemas, '@type' );
+		return implode( ', ', $types );
+	}
+
+	/**
 	 * Get schema by shortcode id.
 	 *
 	 * @param  string $id Shortcode unique id.

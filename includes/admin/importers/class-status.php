@@ -106,6 +106,7 @@ class Status {
 	private function get_default_message() {
 		$hash = [
 			'settings'     => esc_html__( 'Settings imported successfully.', 'rank-math' ),
+			'news'         => esc_html__( 'News Settings imported successfully.', 'rank-math' ),
 			'deactivate'   => esc_html__( 'Plugin deactivated successfully.', 'rank-math' ),
 			/* translators: start, end, total */
 			'postmeta'     => esc_html__( 'Imported post meta for posts %1$s - %2$s out of %3$s ', 'rank-math' ),

@@ -47,7 +47,7 @@ class Base {
 	 * Admin initialize.
 	 */
 	public function admin_init() {
-		$this->table = new $this->table;
+		$this->table = new $this->table();
 	}
 
 	/**

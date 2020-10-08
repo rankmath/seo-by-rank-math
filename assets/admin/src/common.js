@@ -20,6 +20,9 @@ import { __ } from '@wordpress/i18n'
  */
 import ajax from '@helpers/ajax'
 import addNotice from '@helpers/addNotice'
+import { searchConsole } from './search-console'
+import boxTabs from '@helpers/boxTabs'
+
 ;( function( $ ) {
 	// First, checks if it isn't implemented yet.
 	if ( ! String.prototype.format ) {
@@ -48,8 +51,9 @@ import addNotice from '@helpers/addNotice'
 			init() {
 				this.misc()
 				this.tabs()
-				this.searchConsole()
 				this.dependencyManager()
+				searchConsole.events()
+				searchConsole.checkAll()
 			},
 
 			misc() {
@@ -57,38 +61,41 @@ import addNotice from '@helpers/addNotice'
 					$( '[data-s2]' ).select2()
 				}
 
-				$( '.cmb-group-text-only,.cmb-group-fix-me' ).each( function() {
-					const $this = $( this )
-					const nested = $this.find( '.cmb-repeatable-group' )
-					const th = nested.find( '> .cmb-row:eq(0) > .cmb-th' )
+				$( '.cmb-group-text-only,.cmb-group-fix-me' ).each(
+					function() {
+						const $this = $( this )
+						const nested = $this.find( '.cmb-repeatable-group' )
+						const th = nested.find( '> .cmb-row:eq(0) > .cmb-th' )
 
-					$this.prepend(
-						'<div class="cmb-th"><label>' +
-							th.find( 'h2' ).text() +
-							'</label></div>'
-					)
-					nested
-						.find( '.cmb-add-row' )
-						.append(
-							'<span class="cmb2-metabox-description">' +
-								th.find( 'p' ).text() +
-								'</span>'
+						$this.prepend(
+							'<div class="cmb-th"><label>' +
+								th.find( 'h2' ).text() +
+								'</label></div>'
 						)
+						nested
+							.find( '.cmb-add-row' )
+							.append(
+								'<span class="cmb2-metabox-description">' +
+									th.find( 'p' ).text() +
+									'</span>'
+							)
 
-					th.parent().remove()
-				} )
+						th.parent().remove()
+					}
+				)
 
-				$( '.rank-math-collapsible-trigger' ).on( 'click', function(
-					event
-				) {
-					event.preventDefault()
+				$( '.rank-math-collapsible-trigger' ).on(
+					'click',
+					function( event ) {
+						event.preventDefault()
 
-					const trigger = $( this )
-					const target = $( '#' + trigger.data( 'target' ) )
+						const trigger = $( this )
+						const target = $( '#' + trigger.data( 'target' ) )
 
-					trigger.toggleClass( 'open' )
-					target.toggleClass( 'open' )
-				} )
+						trigger.toggleClass( 'open' )
+						target.toggleClass( 'open' )
+					}
+				)
 
 				// Review Schema disabled.
 				const schemaDropdown = $( '#rank_math_rich_snippet' )
@@ -115,12 +122,10 @@ import addNotice from '@helpers/addNotice'
 				}
 			},
 
-			// Search console
-			searchConsole() {
+			searchConsole1() {
 				const consoleWrapper = $(
 					'.cmb2-id-console-authorization-code'
 				)
-				const authorizeButton = $( '.rank-math-get-authorization-code' )
 				const consoleCode = $( '#console_authorization_code' )
 				const consoleDpInfo = $( '#gsc-dp-info' )
 				const consoleProfile = $( '#console_profile' )
@@ -131,23 +136,14 @@ import addNotice from '@helpers/addNotice'
 				const consoleCodeField = consoleCode.parent()
 
 				const selector = $( 'body' ).hasClass(
-					'rank-math-wizard-body--searchconsole'
+					'rank-math-wizard-body--analytics'
 				)
 					? $( '> p:first-of-type', '.cmb-form' )
 					: $( 'h1', '.rank-math-wrap-settings' )
 
-				authorizeButton.on( 'click', function( event ) {
-					event.preventDefault()
-					consoleWrapper.addClass( 'authorizing' )
-					authorizeButton
-						.removeClass( 'button-primary' )
-						.addClass( 'button-secondary' )
-					window.open( this.href, '', 'width=800, height=600' )
-				} )
-
 				consoleCodeField.on(
 					'click',
-					'.rank-math-authorize-account',
+					'.rank-math-deauthorize-account',
 					function( event ) {
 						event.preventDefault()
 						const buttonPrimary = $( this )
@@ -161,11 +157,6 @@ import addNotice from '@helpers/addNotice'
 									consoleCode.val( '' )
 									consoleCode.show()
 									consoleCode.data( 'authorized', false )
-									consoleCodeField
-										.find(
-											'.rank-math-get-authorization-code'
-										)
-										.show()
 
 									consoleWrapper
 										.removeClass( 'authorized' )
@@ -195,11 +186,6 @@ import addNotice from '@helpers/addNotice'
 								if ( result && result.success ) {
 									consoleCode.hide()
 									consoleCode.data( 'authorized', true )
-									consoleCodeField
-										.find(
-											'.rank-math-get-authorization-code'
-										)
-										.hide()
 									buttonPrimary.html( 'De-authorize Account' )
 									buttonRefresh.trigger( 'click' )
 									consoleProfile.removeAttr( 'disabled' )
@@ -287,13 +273,11 @@ import addNotice from '@helpers/addNotice'
 
 				$( 'input, select', elem ).on( 'change', function() {
 					const fieldName = $( this ).attr( 'name' )
-					$( 'span[data-field="' + fieldName + '"]' ).each(
-						function() {
-							self.loopDependencies(
-								$( this ).closest( '.rank-math-cmb-dependency' )
-							)
-						}
-					)
+					$( 'span[data-field="' + fieldName + '"]' ).each( function() {
+						self.loopDependencies(
+							$( this ).closest( '.rank-math-cmb-dependency' )
+						)
+					} )
 				} )
 			},
 
@@ -388,6 +372,8 @@ import addNotice from '@helpers/addNotice'
 			},
 
 			tabs() {
+				boxTabs()
+
 				const tabNavigation = $( '.rank-math-tabs-navigation' )
 				if ( ! tabNavigation.length ) {
 					return
@@ -484,9 +470,7 @@ import addNotice from '@helpers/addNotice'
 					)
 
 					// Trigger Fields
-					fields.on( 'rank_math_variable_change input', function(
-						event
-					) {
+					fields.on( 'rank_math_variable_change input', function( event ) {
 						const holder = $( event.currentTarget )
 						let value = self.replaceVariables( holder.val() )
 
@@ -502,7 +486,9 @@ import addNotice from '@helpers/addNotice'
 							value = value.substring( 0, 160 ) + '...'
 						}
 
-						let htmldecoded = $( '<textarea/>' ).html( value ).val()
+						const htmldecoded = $( '<textarea/>' )
+							.html( value )
+							.val()
 
 						holder
 							.parent()
@@ -551,9 +537,7 @@ import addNotice from '@helpers/addNotice'
 				// Trigger button
 				const input = dropdown.find( 'input' )
 				const lis = dropdown.find( 'li' )
-				body.on( 'click', '.rank-math-variables-button', function(
-					event
-				) {
+				body.on( 'click', '.rank-math-variables-button', function( event ) {
 					event.preventDefault()
 
 					const dropdownCaret = $( this )
@@ -596,9 +580,7 @@ import addNotice from '@helpers/addNotice'
 				dropdown.on( 'keyup', 'input', function( event ) {
 					event.preventDefault()
 
-					const query = $( this )
-						.val()
-						.toLowerCase()
+					const query = $( this ).val().toLowerCase()
 
 					if ( 2 > query.length ) {
 						lis.show()
@@ -609,13 +591,7 @@ import addNotice from '@helpers/addNotice'
 					lis.hide().each( function() {
 						const li = $( this )
 
-						if (
-							-1 !==
-							li
-								.text()
-								.toLowerCase()
-								.indexOf( query )
-						) {
+						if ( -1 !== li.text().toLowerCase().indexOf( query ) ) {
 							li.show()
 						}
 					} )
@@ -628,7 +604,7 @@ import addNotice from '@helpers/addNotice'
 						return
 					}
 
-					currentExclude.forEach( ( variable ) => {
+					currentExclude.forEach( function( variable ) {
 						dropdown
 							.find( '[data-var="%' + variable + '%"]' )
 							.hide()

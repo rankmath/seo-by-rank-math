@@ -56,9 +56,6 @@
 .rm-icon-settings:before {
   content: "\ea60";
 }
-.rm-icon-database:before {
-  content: "\ea66";
-}
 .rm-icon-desktop:before {
   content: "\ea67";
 }
@@ -185,14 +182,23 @@
 .rm-icon-page:before {
   content: "\ec86";
 }
+.rm-icon-arrow-up:before {
+  content: "\ecbe";
+}
 .rm-icon-caret-down:before {
   content: "\ecbf";
+}
+.rm-icon-arrow-down:before {
+  content: "\ecc6";
 }
 .rm-icon-caret-up:before {
   content: "\ecc7";
 }
 .rm-icon-direction:before {
   content: "\ecc9";
+}
+.rm-icon-stories:before {
+  content: "\ece7";
 }
 .rm-icon-acf:before {
   content: "\eceb";

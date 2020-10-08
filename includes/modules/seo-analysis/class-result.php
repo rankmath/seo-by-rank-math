@@ -239,24 +239,35 @@ class Result {
 	}
 
 	/**
-	 * Render tag cloud
+	 * Render tag cloud.
 	 *
 	 * @param array $data Keywords.
 	 */
 	private function the_tag_cloud( $data ) {
+		echo $this->get_tag_cloud( $data );
+	}
+	
+	/**
+	 * Get tag cloud HTML.
+	 *
+	 * @param array $data Keywords.
+	 */
+	private function get_tag_cloud( $data ) {
 		$font_size_max = 22;
 		$font_size_min = 10;
 
 		$max = max( $data );
 
-		echo '<div class="wp-tag-cloud">';
+		$html = '<div class="wp-tag-cloud">';
 		foreach ( $data as $keyword => $occurrences ) {
 			$size = ( $occurrences / $max ) * ( $font_size_max - $font_size_min ) + $font_size_min;
 			$size = round( $size, 2 );
 
-			printf( '<span class="keyword-cloud-item" style="font-size: %.2fpx">%s</span>', $size, htmlspecialchars( $keyword, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8' ) );
+			$html .= sprintf( '<span class="keyword-cloud-item" style="font-size: %.2fpx">%s</span>', $size, htmlspecialchars( $keyword, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8' ) );
 		}
-		echo '</div>';
+		$html .= '</div>';
+
+		return apply_filters( 'rank_math/seo_analysis/tag_cloud_html', $html, $data );
 	}
 
 	/**

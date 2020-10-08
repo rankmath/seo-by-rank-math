@@ -8,6 +8,7 @@ import { isEmpty } from 'lodash'
  */
 import { __ } from '@wordpress/i18n'
 import { Fragment, Component } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks'
 import {
 	Button,
 	Dashicon,
@@ -167,6 +168,8 @@ class Edit extends Component {
 						) }
 					</div>
 				</div>
+
+				{ applyFilters( 'rank_math_block_howto_data', '', this.props ) }
 
 				<ul style={ { textAlign } }>{ this.renderSteps() }</ul>
 

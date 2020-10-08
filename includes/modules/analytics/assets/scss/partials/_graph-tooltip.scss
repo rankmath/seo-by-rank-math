@@ -1,0 +1,100 @@
+// main: ../stats.scss
+.recharts-tooltip-wrapper {
+    z-index: 999;
+}
+
+.#{$namespace} {
+    &-graph-tooltip {
+        z-index: 1;
+
+        padding: 10px;
+
+        border: 1px solid $light-gray;
+        border-radius: 5px;
+        background-color: #fff;
+
+        &.color {
+            &-good {
+                color: #fff;
+                border-color: $color-1;
+                background: $color-1;
+            }
+
+            &-fair {
+                color: #fff;
+                border-color: $color-4;
+                background: $color-4;
+            }
+
+            &-poor {
+                color: #fff;
+                border-color: $color-3;
+                background: $color-3;
+            }
+        }
+
+        p {
+            font-weight: 600;
+
+            margin-bottom: 5px!important;
+            padding-bottom: 5px;
+
+            text-align: center;
+
+            color: $text;
+            border-bottom: 1px solid $light-gray;
+
+            &:empty {
+                display: none;
+            }
+        }
+
+        .recharts-tooltip {
+            &-item {
+                display: flex!important;
+
+                padding-bottom: 7px!important;
+
+                border-bottom: 1px solid #f2f2f2;
+
+                &:before {
+                    margin-right: 5px;
+
+                    content: '\25CF';
+
+                    color: inherit;
+                }
+
+                &:last-child {
+                    padding-bottom: 0!important;
+
+                    border-bottom: 0!important;
+                }
+
+                &-name {
+                    text-transform: capitalize;
+
+                    color: $dark-gray;
+
+                    &:text(ctr) {
+                        text-transform: uppercase;
+                    }
+                }
+
+                &-separator {
+                    margin-right: 10px;
+
+                    color: $dark-gray;
+                }
+
+                &-value {
+                    font-weight: 500;
+
+                    margin-left: auto;
+
+                    color: $dark-gray;
+                }
+            }
+        }
+    }
+}

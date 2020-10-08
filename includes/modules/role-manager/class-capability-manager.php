@@ -63,7 +63,7 @@ class Capability_Manager {
 		$this->register( 'rank_math_link_builder', esc_html__( 'Link Builder', 'rank-math' ) );
 		$this->register( 'rank_math_redirections', esc_html__( 'Redirections', 'rank-math' ) );
 		$this->register( 'rank_math_role_manager', esc_html__( 'Role Manager', 'rank-math' ) );
-		$this->register( 'rank_math_search_console', esc_html__( 'Search Console', 'rank-math' ) );
+		$this->register( 'rank_math_analytics', esc_html__( 'Analytics', 'rank-math' ) );
 		$this->register( 'rank_math_site_analysis', esc_html__( 'Site-Wide Analysis', 'rank-math' ) );
 		$this->register( 'rank_math_onpage_analysis', esc_html__( 'On-Page Analysis', 'rank-math' ) );
 		$this->register( 'rank_math_onpage_general', esc_html__( 'On-Page General Settings', 'rank-math' ) );

@@ -112,6 +112,10 @@ class Admin extends Base {
 	 * @param CMB2 $cmb CMB2 instance.
 	 */
 	public function delete_schemas( $cmb ) {
+		if ( empty( $cmb->data_to_save['rank-math-schemas-delete'] ) ) {
+			return;
+		}
+
 		$schemas = \json_decode( stripslashes( $cmb->data_to_save['rank-math-schemas-delete'] ), true );
 		if ( empty( $schemas ) ) {
 			return;

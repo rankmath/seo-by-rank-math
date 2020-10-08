@@ -8,12 +8,12 @@ import classnames from 'classnames'
  */
 import { __ } from '@wordpress/i18n'
 import { Component } from '@wordpress/element'
+import { Button } from '@wordpress/components'
 import { RichText, MediaUpload } from '@wordpress/block-editor'
 
 /**
  * Internal dependencies
  */
-import { IconButton } from '@helpers/deprecated'
 import MediaUploader from '@blocks/shared/MediaUploader'
 
 /**
@@ -43,14 +43,14 @@ class Step extends Component {
 		return (
 			<div className={ wrapperClasses }>
 				<div className="rank-math-block-actions">
-					<IconButton
+					<Button
 						className="rank-math-item-visbility"
 						icon={ visible ? 'visibility' : 'hidden' }
 						onClick={ this.toggleVisibility }
 						title={ __( 'Hide Step', 'rank-math' ) }
 					/>
 
-					<IconButton
+					<Button
 						icon="trash"
 						className="rank-math-item-delete"
 						onClick={ this.deleteStep }

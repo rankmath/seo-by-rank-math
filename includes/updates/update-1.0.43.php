@@ -34,23 +34,3 @@ function rank_math_1_0_43_update_setup_mode() {
 	rank_math()->settings->reset();
 }
 rank_math_1_0_43_update_setup_mode();
-
-/**
- * Encrypt sensitive data.
- */
-function rank_math_1_0_43_encrypt_sensitive_data() {
-	// Get unencrypted Rank Math Account data.
-	$rank_math_data = get_option( 'rank_math_connect_data', false );
-	if ( $rank_math_data ) {
-		// Re-save to encrypt.
-		Admin_Helper::get_registration_data( $rank_math_data );
-	}
-
-	// Get unencrypted Search Console data.
-	$search_console_data = get_option( 'rank_math_search_console_data', false );
-	if ( $search_console_data ) {
-		// Re-save to encrypt.
-		Helper::search_console_data( $search_console_data );
-	}
-}
-rank_math_1_0_43_encrypt_sensitive_data();

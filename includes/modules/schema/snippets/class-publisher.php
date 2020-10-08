@@ -30,7 +30,7 @@ class Publisher implements Snippet {
 	public function process( $data, $jsonld ) {
 		$type              = Helper::get_settings( 'titles.knowledgegraph_type' );
 		$data['publisher'] = [
-			'@type' => 'person' === $type ? 'Person' : 'Organization',
+			'@type' => $this->get_publisher_type( $type ),
 			'@id'   => home_url( "/#{$type}" ),
 			'name'  => $jsonld->get_website_name(),
 			'logo'  => [
@@ -45,5 +45,24 @@ class Publisher implements Snippet {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Get Publisher Type.
+	 *
+	 * @param string $type Knowledgegraph type.
+	 *
+	 * @return string|array
+	 */
+	private function get_publisher_type( $type ) {
+		if ( 'company' === $type ) {
+			return 'Organization';
+		}
+
+		if ( ! is_singular() ) {
+			return 'Person';
+		}
+
+		return [ 'Person', 'Organization' ];
 	}
 }

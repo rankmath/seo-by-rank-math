@@ -202,11 +202,11 @@ class SEO_Analyzer {
 			?>
 			<div class="rank-math-result-table rank-math-result-category-<?php echo esc_attr( $category ); ?>">
 				<div class="category-title">
-					<?php echo $label; ?>
+					<?php echo $label; // phpcs:ignore ?>
 				</div>
 				<?php foreach ( $results as $result ) : ?>
 				<div class="table-row">
-					<?php echo $result; ?>
+					<?php echo $result; // phpcs:ignore ?>
 				</div>
 				<?php endforeach; ?>
 			</div>
@@ -275,7 +275,7 @@ class SEO_Analyzer {
 
 		if ( ! $this->run_api_tests() ) {
 			/* translators: API error */
-			echo '<div class="notice notice-error is-dismissible notice-seo-analysis-error rank-math-notice"><p>' . sprintf( __( '<strong>API Error:</strong> %s', 'rank-math' ), $this->api_error ) . '</p></div>';
+			echo '<div class="notice notice-error is-dismissible notice-seo-analysis-error rank-math-notice"><p>' . sprintf( __( '<strong>API Error:</strong> %s', 'rank-math' ), $this->api_error  ) . '</p></div>'; // phpcs:ignore
 			$success = false;
 			die;
 		}
@@ -289,6 +289,43 @@ class SEO_Analyzer {
 		$this->display();
 
 		die;
+	}
+
+	/**
+	 * Get page score.
+	 *
+	 * @param  string $url Url to get score for.
+	 *
+	 * @return int
+	 */
+	public function get_page_score( $url ) {
+		$this->analyse_url     = $url;
+		$this->analyse_subpage = true;
+		if ( ! $this->run_api_tests() ) {
+			error_log( $this->api_error ); // phpcs:ignore
+			return 0;
+		}
+
+		$this->build_results();
+
+		if ( empty( $this->results ) ) {
+			return 0;
+		}
+
+		$total = 0;
+		foreach ( $this->results as $id => $result ) {
+			if (
+				$result->is_hidden() ||
+				'ok' !== $result->get_status() ||
+				false === $this->can_count_result( $result )
+			) {
+				continue;
+			}
+
+			$total = $total + $result->get_score();
+		}
+
+		return $total;
 	}
 
 	/**
@@ -373,7 +410,7 @@ class SEO_Analyzer {
 
 		$request = wp_remote_get( $api_url, [ 'timeout' => 30 ] );
 		if ( is_wp_error( $request ) ) {
-			$this->api_error = strip_tags( $request->get_error_message() );
+			$this->api_error = wp_strip_all_tags( $request->get_error_message() );
 			return false;
 		}
 

@@ -165,6 +165,9 @@ class Installer {
 
 		$this->clear_rewrite_rules( true );
 		Helper::clear_cache();
+
+		// Analytics.
+		( new \RankMath\Analytics\Installer() )->install();
 		$this->do_action( 'activate' );
 	}
 
@@ -259,7 +262,7 @@ class Installer {
 			) $collate;",
 		];
 
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		foreach ( $table_schema as $table ) {
 			dbDelta( $table );
 		}
@@ -278,20 +281,12 @@ class Installer {
 	 * Create misc options.
 	 */
 	private function create_misc_options() {
-		add_option(
-			'rank_math_search_console_data',
-			[
-				'authorized' => false,
-				'profiles'   => [],
-			]
-		);
-
 		// Update "known CPTs" list, so we can send notice about new ones later.
 		add_option( 'rank_math_known_post_types', Helper::get_accessible_post_types() );
 
 		$modules = [
 			'link-counter',
-			'search-console',
+			'analytics',
 			'seo-analysis',
 			'sitemap',
 			'rich-snippet',
@@ -356,7 +351,6 @@ class Installer {
 					'404_monitor_ignore_query_parameters' => 'on',
 					'redirections_header_code'            => '301',
 					'redirections_debug'                  => 'off',
-					'console_profile'                     => '',
 					'console_caching_control'             => '90',
 					'link_builder_links_per_page'         => '7',
 					'link_builder_links_per_target'       => '1',
@@ -599,9 +593,8 @@ class Installer {
 	 */
 	private function get_cron_jobs() {
 		return [
-			'search_console/get_analytics' => 'daily',  // Add cron job for Get Search Console Analytics Data.
-			'redirection/clean_trashed'    => 'daily',  // Add cron for cleaning trashed redirects.
-			'links/internal_links'         => 'daily',  // Add cron for counting links.
+			'redirection/clean_trashed' => 'daily',  // Add cron for cleaning trashed redirects.
+			'links/internal_links'      => 'daily',  // Add cron for counting links.
 		];
 	}
 

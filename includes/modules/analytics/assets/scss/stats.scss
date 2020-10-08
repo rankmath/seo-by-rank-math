@@ -1,0 +1,29 @@
+// compileCompressed: ../css/$1.css
+
+/*!
+ * Plugin:	Rank Math
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	stats.css
+ */
+
+// Common and Vendors
+@import "../../../../../assets/vendor/bourbon/bourbon";
+@import "../../../../../assets/admin/scss/variables";
+@import "../../../../../assets/admin/scss/mixins";
+
+%flex{
+	@include flex;
+}
+
+@import "partials/common";
+@import "partials/tab-navigation";
+@import "partials/table";
+@import "partials/graph";
+@import "partials/graph-tooltip";
+@import "partials/graph-filter";
+@import "partials/overview-page";
+@import "partials/analytics-page";
+@import "partials/single-page";
+@import "partials/keywords-page";
+@import "../../../../../assets/admin/scss/partials/common/pro-cta";
+@import "partials/privacy-box";

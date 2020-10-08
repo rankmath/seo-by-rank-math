@@ -1,0 +1,63 @@
+// main: ../stats.scss
+%flex {
+    @include flex;
+}
+
+.#{$namespace} {
+    &-single-tab {
+        // Placeholder image.
+        .single-post-report {
+            position: relative;
+            z-index: 1;
+
+            max-width: 100%;
+        }
+
+        .#{$namespace} {
+            &-edit-post {
+                font-size: 1rem;
+
+                display: inline-block;
+
+                margin-left: 10px;
+
+                vertical-align: 2px;
+                text-decoration: none;
+
+                color: $primary;
+            }
+
+            &-post-link {
+                font-size: .825rem;
+                font-weight: normal;
+
+                display: inline-block;
+
+                vertical-align: top;
+                text-decoration: none;
+
+                color: $dark-gray;
+
+                &:hover,
+                &:focus {
+                    color: $primary;
+                    outline: none;
+                    box-shadow: none;
+                }
+
+                &:after {
+                    font-family: 'dashicons';
+                    font-size: 1rem;
+
+                    margin-left: 5px;
+
+                    content: '\f504';
+                    vertical-align: -3px;
+
+                    fill: #7f868d;
+                    -webkit-text-stroke: .5px white;
+                }
+            }
+        }
+    }
+}

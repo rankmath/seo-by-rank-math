@@ -58,7 +58,7 @@
 		color: $dark_gray;
 		border-bottom: 1px dotted;
 
-		&:hover {
+		&:hover, &:focus {
 			color: $primary;
 			border-color: $primary;
 		}

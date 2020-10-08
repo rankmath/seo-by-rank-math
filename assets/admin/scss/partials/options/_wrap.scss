@@ -1,23 +1,24 @@
 // main: ../../option-panel.scss
 
 .#{$namespace}-wrap-settings {
-	width: 978px;
-	max-width: 100%;
+    width: 978px;
+    max-width: 100%;
 
-	.#{$namespace}-tabs-content {
-		margin-bottom: 0;
-	}
+    .#{$namespace}-tabs-content {
+        margin-bottom: 0;
+    }
 
-	.form-footer {
-		width: calc( 100%  - 200px );
-		margin-left: 200px;
-		padding: 20px;
-	}
+    .form-footer {
+        width: calc( 100%  - 200px );
+        margin-left: 200px;
+        padding: 20px;
+    }
 
-	.#{$namespace}-address-format {
-		.#{$namespace}-variables-dropdown {
-			height: 185px;
-			top: 70px;
-		}
-	}
+    .#{$namespace}-address-format {
+        .#{$namespace}-variables-dropdown {
+            top: 70px;
+
+            height: 185px;
+        }
+    }
 }

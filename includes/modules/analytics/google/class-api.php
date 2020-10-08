@@ -1,0 +1,118 @@
+<?php
+/**
+ * Minimal Google API wrapper.
+ *
+ * @since      1.0.34
+ * @package    RankMath
+ * @subpackage RankMath\modules
+ * @author     Rank Math <support@rankmath.com>
+ */
+
+namespace RankMath\Google;
+
+use RankMath\Helpers\Security;
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Api
+ */
+class Api extends Console {
+
+	/**
+	 * Access token.
+	 *
+	 * @var array
+	 */
+	public $token = [];
+
+	/**
+	 * Main instance
+	 *
+	 * Ensure only one instance is loaded or can be loaded.
+	 *
+	 * @return Api
+	 */
+	public static function get() {
+		static $instance;
+
+		if ( is_null( $instance ) && ! ( $instance instanceof Api ) ) {
+			$instance = new Api();
+			$instance->setup();
+			$instance->refresh_token_on_login();
+		}
+
+		return $instance;
+	}
+
+	/**
+	 * Setup token.
+	 */
+	private function setup() {
+		if ( ! Authentication::is_authorized() ) {
+			return;
+		}
+
+		$tokens      = Authentication::tokens();
+		$this->token = $tokens['access_token'];
+	}
+
+	/**
+	 * Refresh access token when user login.
+	 */
+	public function refresh_token_on_login() {
+		// Bail if the user is not authenticated at all yet.
+		if ( ! Authentication::is_authorized() || ! Authentication::is_token_expired() ) {
+			return;
+		}
+
+		$tokens = Authentication::tokens();
+		if ( empty( $tokens['refresh_token'] ) ) {
+			Authentication::tokens( false );
+		}
+
+		$response = wp_remote_get( Authentication::get_auth_app_url() . '/refresh.php?code=' . $tokens['refresh_token'] );
+		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			return;
+		}
+
+		$response = wp_remote_retrieve_body( $response );
+		if ( empty( $response ) ) {
+			return;
+		}
+
+		// Save new token.
+		$this->token            = $response;
+		$tokens['expire']       = time() + 3600;
+		$tokens['access_token'] = $response;
+		Authentication::tokens( $tokens );
+	}
+
+	/**
+	 * Revoke an OAuth2 access token or refresh token. This method will revoke the current access
+	 * token, if a token isn't provided.
+	 *
+	 * @return boolean Returns True if the revocation was successful, otherwise False.
+	 */
+	public function revoke_token() {
+		$tokens = Authentication::tokens();
+		$this->http_post(
+			Security::add_query_arg_raw( [ 'token' => $tokens['access_token'] ], 'https://oauth2.googleapis.com/revoke' )
+		);
+
+		Authentication::tokens( false );
+		delete_option( 'rank_math_google_analytic_profile' );
+		delete_option( 'rank_math_google_analytic_options' );
+
+		return $this->is_success();
+	}
+
+	/**
+	 * Get row limit.
+	 *
+	 * @return int
+	 */
+	protected function get_row_limit() {
+		return apply_filters( 'rank_math/analytics/row_limit', 5000 );
+	}
+}

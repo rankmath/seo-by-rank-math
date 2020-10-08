@@ -1,0 +1,38 @@
+// main: ../stats.scss
+
+.#{$namespace} {
+    &-score-bar {
+        overflow: hidden;
+
+        height: 26px;
+        margin-bottom: 1.5em;
+
+        background: $light-gray;
+
+        > div {
+            display: inline-block;
+
+            height: 100%;
+
+            border-right: 3px solid #f0f2f4;
+
+            &[style*='width: 0%'] {
+                display: none;
+            }
+
+            &.score-bar {
+                &-good {
+                    background: $color-1;
+                }
+
+                &-ok {
+                    background: $color-4;
+                }
+
+                &-bad {
+                    background: $color-3;
+                }
+            }
+        }
+    }
+}

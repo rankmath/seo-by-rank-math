@@ -7,7 +7,6 @@ import { Button } from '@wordpress/components'
 /**
  * Internal dependencies
  */
-import { IconButton } from '@helpers/deprecated'
 import ImagePreview from '@blocks/shared/ImagePreview'
 
 /**
@@ -28,7 +27,7 @@ const MediaUploader = ( {
 				<ImagePreview imageID={ imageID } sizeSlug={ sizeSlug } />
 			) }
 			{ imageID > 0 ? (
-				<IconButton
+				<Button
 					icon="edit"
 					className="rank-math-replace-image"
 					onClick={ open }
@@ -44,7 +43,7 @@ const MediaUploader = ( {
 				</Button>
 			) }
 			{ imageID > 0 && (
-				<IconButton
+				<Button
 					icon="no-alt"
 					className="rank-math-delete-image"
 					onClick={ removeImage }

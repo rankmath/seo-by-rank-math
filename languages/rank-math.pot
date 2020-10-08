@@ -722,7 +722,7 @@ msgstr ""
 msgid "Your Site"
 msgstr ""
 
-msgid "Search Console"
+msgid "Analytics"
 msgstr ""
 
 msgid "Sitemaps"
@@ -923,6 +923,153 @@ msgid "Roadside Assistance"
 msgstr ""
 
 msgid "Package Tracking"
+msgstr ""
+
+msgid "Worldwide"
+msgstr ""
+
+msgid "Argentina"
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "Austria"
+msgstr ""
+
+msgid "Belgium"
+msgstr ""
+
+msgid "Brazil"
+msgstr ""
+
+msgid "Canada"
+msgstr ""
+
+msgid "Chile"
+msgstr ""
+
+msgid "Colombia"
+msgstr ""
+
+msgid "Czechia"
+msgstr ""
+
+msgid "Denmark"
+msgstr ""
+
+msgid "Egypt"
+msgstr ""
+
+msgid "Finland"
+msgstr ""
+
+msgid "France"
+msgstr ""
+
+msgid "Germany"
+msgstr ""
+
+msgid "Greece"
+msgstr ""
+
+msgid "Hong Kong"
+msgstr ""
+
+msgid "Hungary"
+msgstr ""
+
+msgid "India"
+msgstr ""
+
+msgid "Indonesia"
+msgstr ""
+
+msgid "Ireland"
+msgstr ""
+
+msgid "Israel"
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "Japan"
+msgstr ""
+
+msgid "Kenya"
+msgstr ""
+
+msgid "Malaysia"
+msgstr ""
+
+msgid "Mexico"
+msgstr ""
+
+msgid "Netherlands"
+msgstr ""
+
+msgid "New Zealand"
+msgstr ""
+
+msgid "Nigeria"
+msgstr ""
+
+msgid "Norway"
+msgstr ""
+
+msgid "Philippines"
+msgstr ""
+
+msgid "Poland"
+msgstr ""
+
+msgid "Portugal"
+msgstr ""
+
+msgid "Romania"
+msgstr ""
+
+msgid "Russia"
+msgstr ""
+
+msgid "Saudi Arabia"
+msgstr ""
+
+msgid "Singapore"
+msgstr ""
+
+msgid "South Africa"
+msgstr ""
+
+msgid "South Korea"
+msgstr ""
+
+msgid "Sweden"
+msgstr ""
+
+msgid "Switzerland"
+msgstr ""
+
+msgid "Taiwan"
+msgstr ""
+
+msgid "Thailand"
+msgstr ""
+
+msgid "Turkey"
+msgstr ""
+
+msgid "Ukraine"
+msgstr ""
+
+msgid "United Kingdom"
+msgstr ""
+
+msgid "United States"
+msgstr ""
+
+msgid "Vietnam"
 msgstr ""
 
 msgid "Robots Meta"
@@ -1674,6 +1821,10 @@ msgstr ""
 msgid "Error: Nonce verification failed"
 msgstr ""
 
+#. translators: placeholders are the opening and closing anchor tags.
+msgid "Thank you for updating Rank Math! We've completely revamped our Analytics module with Google Analytics & Google Search Console integrations. For a seamless experience, please re-authenticate your Google account. %1$sClick here to Connect%2$s"
+msgstr ""
+
 #. translators: %1$s: post type label, %2$s: edit redirection URL.
 #. translators: %1$s: post type label, %2$s: edit redirection URL.
 #. translators: %1$s: term name, %2$s: edit redirection URL.
@@ -1726,6 +1877,15 @@ msgstr ""
 msgid "Import Locations"
 msgstr ""
 
+msgid "Import Locations Settings from Yoast plugin."
+msgstr ""
+
+msgid "Import News Settings"
+msgstr ""
+
+msgid "Import News Settings from Yoast news"
+msgstr ""
+
 msgid "Unable to perform action this time."
 msgstr ""
 
@@ -1742,6 +1902,9 @@ msgid "Import meta information of your posts/pages like the titles, descriptions
 msgstr ""
 
 msgid "Settings imported successfully."
+msgstr ""
+
+msgid "News Settings imported successfully."
 msgstr ""
 
 msgid "Plugin deactivated successfully."
@@ -2064,51 +2227,14 @@ msgstr ""
 msgid "None (Click here to set one)"
 msgstr ""
 
-msgid "Google&trade; Search Console"
+msgid "Connect Google&trade; Services"
 msgstr ""
 
 #. translators: Link to How to Setup Google Search Console KB article
-msgid "Verify your site on Google Search Console and connect it here to see crawl error notifications, keyword statistics and other important information right in your WordPress dashboard. %s"
+msgid "Rank Math automates everything, use below button to connect your site with Google Search Console and Google Analytics. It will verify your site and submit sitemaps auotmatically. %s"
 msgstr ""
 
 msgid "Read more about it here."
-msgstr ""
-
-msgid "Domain Property: "
-msgstr ""
-
-msgid "Search Console Profile"
-msgstr ""
-
-msgid "After authenticating with Google Search Console, select your website from the dropdown list."
-msgstr ""
-
-msgid "Please note that the Sitemaps overview in the Search Console module will not be available when using a Domain Property."
-msgstr ""
-
-#. translators: Link to setting screen
-#. translators: setting url
-msgid "Is your site not listed? <a href=\"%1$s\" target=\"_blank\">Click here</a> to get your website verified."
-msgstr ""
-
-msgid "Refresh Sites"
-msgstr ""
-
-msgid "De-authorize Account"
-msgstr ""
-
-msgid "Authorize"
-msgstr ""
-
-msgid "Get Authorization Code"
-msgstr ""
-
-#. translators: Link to 'How To Create a Google API Project For Connecting Search Console' KB article
-#. translators: Link to 'How To Create a Google API Project For Connecting Search Console' KB article
-msgid "You can also create your own app and connect that instead. %s"
-msgstr ""
-
-msgid "Follow this tutorial."
 msgstr ""
 
 #. translators: Link to How to Setup Sitemap KB article
@@ -2263,6 +2389,106 @@ msgstr ""
 msgid "Access Time"
 msgstr ""
 
+msgid "Not a valid settings founds to delete cache."
+msgstr ""
+
+msgid "Google oAuth is not authorized."
+msgstr ""
+
+msgid "No Google Account setup."
+msgstr ""
+
+msgid "No Google Search Console Account selected."
+msgstr ""
+
+msgid "No Google Analytics Account selected."
+msgstr ""
+
+msgid "Review analytics and sitemaps"
+msgstr ""
+
+msgid "Analytics cache cleared."
+msgstr ""
+
+msgid "Post re-index in progress."
+msgstr ""
+
+#. translators: delete counter
+msgid "Rank Math is importing latest data from connected Google Services, %s remaining."
+msgstr ""
+
+#. translators: %s: amount of time
+msgid "%s year"
+msgid_plural "%s years"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: amount of time
+msgid "%s month"
+msgid_plural "%s months"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: amount of time
+msgid "%s week"
+msgid_plural "%s weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: amount of time
+msgid "%s day"
+msgid_plural "%s days"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: amount of time
+msgid "%s hour"
+msgid_plural "%s hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: amount of time
+msgid "%s minute"
+msgid_plural "%s minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: amount of time
+msgid "%s second"
+msgid_plural "%s seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Now!"
+msgstr ""
+
+#. translators: Link to kb article
+msgid "See your Google Search Console, Analyitcs and Adsense data without leaving your WP dashboard. %s."
+msgstr ""
+
+msgid "Purge Analytics Cache"
+msgstr ""
+
+#. translators: 1. Review Schema documentation link
+msgid "Clear analytics cache to re-calcualte all the stats again."
+msgstr ""
+
+msgid "here"
+msgstr ""
+
+msgid "Clear Cache"
+msgstr ""
+
+msgid "Re-Index Posts"
+msgstr ""
+
+#. translators: 1. Review Schema documentation link
+msgid "Clear posts cache and re-index them."
+msgstr ""
+
+msgid "ReIndex Posts"
+msgstr ""
+
 msgid "BuddyPress:"
 msgstr ""
 
@@ -2304,9 +2530,6 @@ msgstr ""
 
 #. translators: Number of posts updated
 msgid "%1$d review Posts updated. You can find the list of all converted posts %2$s."
-msgstr ""
-
-msgid "here"
 msgstr ""
 
 msgid "No posts found to convert."
@@ -2701,133 +2924,6 @@ msgstr ""
 msgid "Editor's Rating:"
 msgstr ""
 
-msgid "No data."
-msgstr ""
-
-msgid "Keywords"
-msgstr ""
-
-msgid "Pages"
-msgstr ""
-
-msgid "Clicks"
-msgstr ""
-
-msgid "Impressions"
-msgstr ""
-
-msgid "CTR"
-msgstr ""
-
-msgid "Position"
-msgstr ""
-
-#. translators: previous value
-#. translators: previous value
-msgid "Previously: %s"
-msgstr ""
-
-msgid "Bad request. Please check the code."
-msgstr ""
-
-msgid "Total clicks"
-msgstr ""
-
-msgid "Total impressions"
-msgstr ""
-
-msgid "Avg. CTR"
-msgstr ""
-
-msgid "Avg. Position"
-msgstr ""
-
-msgid "Total keywords"
-msgstr ""
-
-msgid "Total pages"
-msgstr ""
-
-msgid "Review analytics and sitemaps"
-msgstr ""
-
-msgid "Search Analytics"
-msgstr ""
-
-msgid "Keyword Tracker"
-msgstr ""
-
-msgid "Search Console Stats"
-msgstr ""
-
-msgid "Total Keywords"
-msgstr ""
-
-msgid "Total Pages"
-msgstr ""
-
-msgid "Total Clicks"
-msgstr ""
-
-msgid "Total Impressions"
-msgstr ""
-
-msgid "Average Position"
-msgstr ""
-
-msgid "Average CTR"
-msgstr ""
-
-msgid "The Search Analytics tab will give you insights about how your site performs in search engines: you can see the top search queries to find your site and your most popular landing pages."
-msgstr ""
-
-msgid "The Sitemaps tab gives you an overview of the sitemaps submitted to the Search Console."
-msgstr ""
-
-#. translators: Link to kb article
-msgid "See your Google Search data without leaving your WP dashboard. %s."
-msgstr ""
-
-msgid "No authentication code found."
-msgstr ""
-
-msgid "Not a valid settings founds to delete cache."
-msgstr ""
-
-msgid "Google oAuth is not authorized."
-msgstr ""
-
-msgid "No sitemaps submitted."
-msgstr ""
-
-msgid "News"
-msgstr ""
-
-#. translators: content: submitted and indexed
-msgid "%1$d <span class=\"indexed\">(%2$d indexed)</span><br>"
-msgstr ""
-
-msgid "Warnings"
-msgstr ""
-
-msgid "Errors"
-msgstr ""
-
-msgid "Path"
-msgstr ""
-
-msgid "Last Downloaded"
-msgstr ""
-
-msgid "Items"
-msgstr ""
-
-msgid "Refresh Sitemaps"
-msgstr ""
-
-msgid "Sitemaps list refreshed."
-msgstr ""
-
 msgid "How to fix"
 msgstr ""
 
@@ -2964,6 +3060,9 @@ msgid "HTML Page Titles play a large role in Google's ranking algorithm.  When y
 msgstr ""
 
 msgid "Fixing the issue is simple - just edit the post/page and add the focus keyword(s) to the title."
+msgstr ""
+
+msgid "Search Console"
 msgstr ""
 
 #. translators: link to plugin setting screen
@@ -4100,7 +4199,43 @@ msgstr ""
 msgid "Start Wizard"
 msgstr ""
 
+msgid "Connect Google Services"
+msgstr ""
+
+msgid "Benefits of Connecting Google Account"
+msgstr ""
+
+msgid "Verify site ownership on Google Search Console in a single click"
+msgstr ""
+
+msgid "Track page and keyword rankings with the Advanced Analytics module"
+msgstr ""
+
+msgid "Easily set up Google Analytics without using another 3rd party plugin"
+msgstr ""
+
+msgid "Automatically submit sitemaps to the Google Search Console"
+msgstr ""
+
+msgid "Learn more about the benefits of connecting your account here."
+msgstr ""
+
+msgid "We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s"
+msgstr ""
+
 msgid "Setup Wizard - Rank Math"
+msgstr ""
+
+msgid "Connect Your Rank Math Account"
+msgstr ""
+
+msgid "Benefits of Connecting Rank Math Account"
+msgstr ""
+
+msgid "Free keyword suggestions when entering a focus keyword"
+msgstr ""
+
+msgid "Use our revolutionary SEO Analyzer to scan your website for SEO errors"
 msgstr ""
 
 msgid "Your site is ready!"
@@ -4131,6 +4266,36 @@ msgid "Proceed to Help Page"
 msgstr ""
 
 msgid "Setup Advanced Options"
+msgstr ""
+
+msgid "Disconnect"
+msgstr ""
+
+msgid "Site"
+msgstr ""
+
+msgid "Property"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "Create a new View"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Install analytics code"
+msgstr ""
+
+msgid "Anonymize IP addresses"
+msgstr ""
+
+msgid "PRO"
+msgstr ""
+
+msgid "Exclude Logged-in users"
 msgstr ""
 
 #. translators: sitename
@@ -4229,6 +4394,59 @@ msgid "Ignore Query Parameters"
 msgstr ""
 
 msgid "Turn ON to ignore all query parameters (the part after a question mark in a URL) when logging 404 errors."
+msgstr ""
+
+msgid "Bad request. Please check the code."
+msgstr ""
+
+msgid "Sorry, no preference found."
+msgstr ""
+
+msgid "Sorry, no keyword found."
+msgstr ""
+
+msgid "Sorry, no post id found."
+msgstr ""
+
+msgid "Sorry, no record id found."
+msgstr ""
+
+#. translators: date
+msgid "Next data fetch on %s"
+msgstr ""
+
+msgid "Analytics Database"
+msgstr ""
+
+#. translators: Anchor text 'free version', linking to pricing page.
+msgid "Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly."
+msgstr ""
+
+msgid "free version"
+msgstr ""
+
+msgid "Delete Recent Data (last 15 days)"
+msgstr ""
+
+msgid "Delete Data"
+msgstr ""
+
+msgid "Update Data manually"
+msgstr ""
+
+msgid "Fetching in Progress"
+msgstr ""
+
+#. translators: number of days
+msgid "Storage Days: %s"
+msgstr ""
+
+#. translators: number of rows
+msgid "Data Rows: %s"
+msgstr ""
+
+#. translators: database size
+msgid "Size: %s"
 msgstr ""
 
 msgid "Group Title"
@@ -4608,6 +4826,9 @@ msgstr ""
 msgid "Cuisine"
 msgstr ""
 
+msgid "Keywords"
+msgstr ""
+
 msgid "Recipe Yield"
 msgstr ""
 
@@ -4680,66 +4901,6 @@ msgstr ""
 msgid "Views"
 msgstr ""
 
-msgid "Review sitemaps submitted to your Search Console account."
-msgstr ""
-
-msgid "After authenticating with Google Search Console, select the site from the dropdown list."
-msgstr ""
-
-#. translators: date
-msgid "The data sets are empty in your cache. You can wait for the next cronjob (%s) or <strong>Update Manually</strong>."
-msgstr ""
-
-msgid "<strong>Note:</strong> Please update your data by clicking on 'Update Manually'. Google only stores data from the last 90 days - a dataset older than that can't be updated anymore."
-msgstr ""
-
-msgid "Cache Limit <br><small>Days to keep data rows in cache</small>"
-msgstr ""
-
-msgid "Delete Recent Cache (last 90 days)"
-msgstr ""
-
-msgid "Delete Cache"
-msgstr ""
-
-msgid "Update Cache manually"
-msgstr ""
-
-msgid "Fetching in Progress"
-msgstr ""
-
-#. translators: number of days
-msgid "Cached Days: %s"
-msgstr ""
-
-#. translators: number of rows
-msgid "Data Rows: %s"
-msgstr ""
-
-#. translators: database size
-msgid "Size: %s"
-msgstr ""
-
-#. translators: admin screen link
-msgid "Please navigate to <a href=\"%s\">SEO > Settings > Search Console</a> to authorize access to Google Search Console."
-msgstr ""
-
-#. translators: admin screen link
-msgid "The data sets are empty in your cache. You can wait for the next cronjob or <strong>Update Manually</strong>. Please navigate to <a href=\"%s\">SEO > Settings > Search Console</a>."
-msgstr ""
-
-msgid "Click History"
-msgstr ""
-
-msgid "Impressions History"
-msgstr ""
-
-msgid "CTR History"
-msgstr ""
-
-msgid "Position History"
-msgstr ""
-
 msgid "Start Site-Wide Analysis"
 msgstr ""
 
@@ -4762,6 +4923,9 @@ msgid "Complete"
 msgstr ""
 
 msgid "Passed Tests"
+msgstr ""
+
+msgid "Warnings"
 msgstr ""
 
 msgid "Failed Tests"

@@ -35,11 +35,12 @@ import addNotice from '@helpers/addNotice'
 
 			searchEngine: {
 				init() {
+					$( '#setting-panel-analytics' ).addClass( 'exclude' )
 					this.form = $( '.rank-math-search-options' )
 					this.wrap = this.form.closest( '.rank-math-wrap-settings' )
 					this.input = this.form.find( 'input' )
 					this.tabs = this.wrap.find( '.rank-math-tabs' )
-					this.panels = this.wrap.find( '.rank-math-tab' )
+					this.panels = this.wrap.find( '.rank-math-tab:not(.exclude)' )
 					this.ids = [ 'general', 'titles', 'sitemap' ]
 					this.indexes = {}
 
@@ -276,7 +277,7 @@ import addNotice from '@helpers/addNotice'
 						)
 					) {
 						button.prop( 'disabled', true )
-						ajax( 'search_console_delete_cache', { days }, 'GET' )
+						ajax( 'analytics_delete_cache', { days }, 'GET' )
 							.always( function() {
 								button.prop( 'disabled', false )
 							} )
@@ -288,9 +289,9 @@ import addNotice from '@helpers/addNotice'
 										$( 'h1', '.rank-math-wrap-settings' )
 									)
 									$( '.rank-math-console-db-info' ).remove()
-									$(
-										'#console-updating-manually-progress'
-									).before( result.message )
+									button
+										.closest( '.cmb-td' )
+										.append( result.message )
 								}
 							} )
 					}
@@ -305,7 +306,7 @@ import addNotice from '@helpers/addNotice'
 						days = $( '#console_caching_control' ).val()
 
 					button.prop( 'disabled', true )
-					ajax( 'search_console_get_cache', { days }, 'GET' ).done(
+					ajax( 'analytic_start_fetching', { days }, 'GET' ).done(
 						function( result ) {
 							if ( result && result.success ) {
 								addNotice(
@@ -313,6 +314,7 @@ import addNotice from '@helpers/addNotice'
 									'success',
 									$( 'h1.page-title' )
 								)
+								button.text( 'Fetching in Progress' )
 							} else {
 								addNotice(
 									'Unable to update cache due to: ' +
@@ -479,7 +481,7 @@ import addNotice from '@helpers/addNotice'
 				$( window ).on( 'load', function() {
 					$( '.cmb-form' ).on(
 						'change',
-						'input, textarea, select',
+						'input:not(.notrack), textarea:not(.notrack), select:not(.notrack)',
 						function() {
 							saveWarn = true
 						}

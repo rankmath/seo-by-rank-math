@@ -1,0 +1,15 @@
+// main: ../stats.scss
+
+@import 'score-bar';
+
+.#{$namespace} {
+    &-analytics-tab {
+        .#{$namespace} {
+            &-card__header,
+            &-table__table,
+            &-pagination {
+                filter: blur(2px);
+            }
+        }
+    }
+}

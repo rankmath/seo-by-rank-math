@@ -1,35 +1,36 @@
 // main: ../../option-panel.scss
 
 body.rtl {
-	.rank-math-tabs-navigation:not(.rank-math-custom) {
-		a {
-			border-right-width: 1px;
-			border-left-width: 0;
+    .rank-math-tabs-navigation:not(.rank-math-custom) {
+        a {
+            border-right-width: 1px;
+            border-left-width: 0;
 
-			.rm-icon {
-				float: right;
-				margin-right: 0;
-				margin-left: 10px;
-			}
+            .rm-icon {
+                float: right;
 
-			&.active {
-				border-left: 0;
-				border-right: 3px solid;
+                margin-right: 0;
+                margin-left: 10px;
+            }
 
-				&:after {
-					right: auto;
-					left: -1px;
-				}
-			}
+            &.active {
+                border-right: 3px solid;
+                border-left: 0;
 
-			&:last-child {
-				border-radius: 0 0 6px 0;
-			}
-		}
+                &:after {
+                    right: auto;
+                    left: -1px;
+                }
+            }
 
-		.separator {
-			border-left: 0;
-			border-right: 1px solid #b5bfc9;
-		}
-	}
+            &:last-child {
+                border-radius: 0 0 6px 0;
+            }
+        }
+
+        .separator {
+            border-right: 1px solid #b5bfc9;
+            border-left: 0;
+        }
+    }
 }

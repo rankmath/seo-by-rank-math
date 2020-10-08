@@ -148,6 +148,7 @@ const SchemaGroup = ( props ) => {
 								isCustom={ isCustom }
 								schema={ props.schema }
 								actions={ props.actions }
+								isPro={ isPro }
 							/>
 						) : (
 							<SchemaProperty

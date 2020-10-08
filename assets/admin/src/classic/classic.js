@@ -13,7 +13,6 @@ import { addAction, doAction } from '@wordpress/hooks'
 /**
  * Internal dependencies
  */
-import '../helpers'
 import Assessor from '@classic/Assessor'
 import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
 import CommonFilters from '../commonFilters'

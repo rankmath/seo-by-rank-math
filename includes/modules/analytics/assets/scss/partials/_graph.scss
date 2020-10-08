@@ -1,0 +1,27 @@
+// main: ../stats.scss
+
+.#{$namespace} {
+    &-graph {
+        background: #fff;
+
+        .recharts-surface {
+            overflow: visible;
+        }
+
+        &.main-graph {
+            overflow: visible;
+
+            box-sizing: border-box;
+            height: 340px;
+            margin-top: -1px;
+            margin-bottom: 2rem;
+            padding: 1.5rem 1.5rem 2rem .3rem;
+
+            border: 1px solid $light-gray;
+
+            &.loader {
+                padding: 1.5rem;
+            }
+        }
+    }
+}

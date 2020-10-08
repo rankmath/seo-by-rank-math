@@ -108,8 +108,8 @@ class Setup_Wizard {
 				'class' => '\\RankMath\\Wizard\\Your_Site',
 			],
 
-			'searchconsole' => [
-				'name'  => esc_html__( 'Search Console', 'rank-math' ),
+			'analytics' => [
+				'name'  => esc_html__( 'Analytics', 'rank-math' ),
 				'class' => '\\RankMath\\Wizard\\Search_Console',
 			],
 
@@ -281,7 +281,7 @@ class Setup_Wizard {
 		wp_enqueue_style( 'rank-math-wizard', rank_math()->plugin_url() . 'assets/admin/css/setup-wizard.css', [ 'wp-admin', 'buttons', 'cmb2-styles', 'select2-rm', 'rank-math-common', 'rank-math-cmb2' ], rank_math()->version );
 
 		// Enqueue javascript.
-		wp_enqueue_script( 'rank-math-wizard', rank_math()->plugin_url() . 'assets/admin/js/wizard.js', [ 'media-editor', 'select2-rm', 'rank-math-common', 'rank-math-validate' ], rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-wizard', rank_math()->plugin_url() . 'assets/admin/js/wizard.js', [ 'media-editor', 'select2-rm', 'lodash', 'rank-math-common', 'rank-math-validate' ], rank_math()->version, true );
 
 		Helper::add_json( 'currentStep', $this->step );
 		Helper::add_json( 'deactivated', esc_html__( 'Deactivated', 'rank-math' ) );

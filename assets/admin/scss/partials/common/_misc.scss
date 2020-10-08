@@ -122,6 +122,15 @@ textarea.#{$namespace}-code-box, textarea.#{$namespace}-code-box:focus, div.#{$n
 .#{$namespace}-notice {
 	border-radius: 4px;
 
+	.rm-icon {
+		font-size: 18px;
+		height: 16px;
+		vertical-align: -6px;
+		margin-right: 8px;
+		opacity: 0.8;
+		display: inline-block;
+	}
+
 	.notice-info, .notice-warning, .notice-error {
 		border-radius: 4px;
 	}
@@ -148,4 +157,15 @@ textarea.#{$namespace}-code-box, textarea.#{$namespace}-code-box:focus, div.#{$n
 
 #footer-thankyou {
 	font-style: normal;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.#{$namespace}-gray-box {
+	margin-top: 2rem!important;	
+	padding: 25px 35px;
+	border-radius: 5px;
+	background: #f5f5f5;
 }

@@ -428,7 +428,7 @@ import jQuery from 'jquery'
 				} )
 			},
 
-			searchconsole() {
+			analytics() {
 				$( '#console_authorization_code' ).on( 'paste', function() {
 					const $this = $( this ).next( '.button' )
 					setTimeout( function() {

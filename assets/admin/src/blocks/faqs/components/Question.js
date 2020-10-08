@@ -6,13 +6,13 @@ import classnames from 'classnames'
 /**
  * Internal dependencies
  */
-import { IconButton } from '@helpers/deprecated'
 import MediaUploader from '@blocks/shared/MediaUploader'
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
+import { Button } from '@wordpress/components'
 import { Component } from '@wordpress/element'
 import { RichText, MediaUpload } from '@wordpress/block-editor'
 
@@ -43,14 +43,14 @@ class Question extends Component {
 		return (
 			<div className={ wrapperClasses }>
 				<div className="rank-math-block-actions">
-					<IconButton
+					<Button
 						className="rank-math-item-visbility"
 						icon={ visible ? 'visibility' : 'hidden' }
 						onClick={ this.toggleVisibility }
 						title={ __( 'Hide Question', 'rank-math' ) }
 					/>
 
-					<IconButton
+					<Button
 						icon="trash"
 						className="rank-math-item-delete"
 						onClick={ this.deleteQuestion }

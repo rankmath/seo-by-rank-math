@@ -199,34 +199,6 @@ class Admin_Helper {
 	}
 
 	/**
-	 * Compare values.
-	 *
-	 * @param integer $value1     Old value.
-	 * @param integer $value2     New Value.
-	 * @param bool    $percentage Treat as percentage.
-	 *
-	 * @return float
-	 */
-	public static function compare_values( $value1, $value2, $percentage = false ) {
-		$diff = round( ( $value2 - $value1 ), 2 );
-
-		if ( ! $percentage ) {
-			return (float) $diff;
-		}
-
-		if ( $value1 ) {
-			$diff = round( ( ( $diff / $value1 ) * 100 ), 2 );
-			if ( ! $value2 ) {
-				$diff = -100;
-			}
-		} elseif ( $value2 ) {
-			$diff = 100;
-		}
-
-		return (float) $diff;
-	}
-
-	/**
 	 * Check if current page is media list page.
 	 *
 	 * @return bool

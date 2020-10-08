@@ -38,7 +38,6 @@ class Admin_Init {
 
 		$this->load_review_reminders();
 		$this->load_setup_wizard();
-		$this->search_console_ajax();
 		$this->load_post_columns_and_filters();
 
 		$this->run(
@@ -108,21 +107,6 @@ class Admin_Init {
 	private function load_setup_wizard() {
 		if ( filter_input( INPUT_GET, 'page' ) === 'rank-math-wizard' || filter_input( INPUT_POST, 'action' ) === 'rank_math_save_wizard' ) {
 			new Setup_Wizard();
-		}
-	}
-
-	/**
-	 * Search console ajax handler.
-	 */
-	private function search_console_ajax() {
-		if ( ! Conditional::is_ajax() || class_exists( 'Search_Console' ) ) {
-			return;
-		}
-
-		$action = Param::post( 'action' );
-		if ( $action && in_array( $action, [ 'rank_math_search_console_authentication', 'rank_math_search_console_deauthentication', 'rank_math_search_console_get_profiles' ], true ) ) {
-			Helper::update_modules( [ 'search-console' => 'on' ] );
-			new Search_Console();
 		}
 	}
 }

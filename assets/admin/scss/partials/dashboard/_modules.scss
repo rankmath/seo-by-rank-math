@@ -1,4 +1,8 @@
 // main: ../../dashboard.scss
+%flex{
+	@include flex;
+}
+
 %rm-icon {
 	font-size: 20px;
 	line-height: 50px;
@@ -15,7 +19,7 @@
 
 .module-listing {
 	.grid {
-		display: flex;
+		@extend %flex;
 		flex-flow: row wrap;
 	}
 

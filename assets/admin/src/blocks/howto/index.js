@@ -3,6 +3,7 @@
  */
 import { __ } from '@wordpress/i18n'
 import { registerBlockType } from '@wordpress/blocks'
+import { addFilter, applyFilters } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -28,7 +29,7 @@ export default () => {
 		__( 'Rich Snippet', 'rank-math' ),
 	]
 
-	const attributes = {
+	const attributes = applyFilters( 'rank_math_block_howto_attributes', {
 		hasDuration: { type: 'boolean' },
 		days: { type: 'string' },
 		hours: { type: 'string' },
@@ -66,7 +67,7 @@ export default () => {
 			type: 'string',
 			default: '',
 		},
-	}
+	} )
 
 	registerBlockType( 'rank-math/howto-block', {
 		title: __( 'HowTo by Rank Math', 'rank-math' ),

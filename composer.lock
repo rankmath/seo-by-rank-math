@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "04970ac83b2c26101c099cd32a8f9ca9",
+    "content-hash": "6a6bcf47bdad71612411e9347e5762c0",
     "packages": [
         {
             "name": "a5hleyrich/wp-background-processing",
@@ -44,6 +44,59 @@
             ],
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
             "time": "2020-07-31T07:00:11+00:00"
+        },
+        {
+            "name": "cmb2/cmb2",
+            "version": "v2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CMB2/CMB2.git",
+                "reference": "438c26dda7ac110d0741448d65614b3ec6379034"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/438c26dda7ac110d0741448d65614b3ec6379034",
+                "reference": "438c26dda7ac110d0741448d65614b3ec6379034",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.2.4"
+            },
+            "require-dev": {
+                "apigen/apigen": "4.1.2",
+                "nette/utils": "2.5.3",
+                "phpunit/phpunit": "6.5.13"
+            },
+            "suggest": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Sternberg",
+                    "email": "justin@dsgnwrks.pro",
+                    "homepage": "https://dsgnwrks.pro",
+                    "role": "Developer"
+                },
+                {
+                    "name": "WebDevStudios",
+                    "email": "contact@webdevstudios.com",
+                    "homepage": "https://github.com/WebDevStudios",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
+            "homepage": "https://github.com/CMB2/CMB2",
+            "keywords": [
+                "metabox",
+                "plugin",
+                "wordpress"
+            ],
+            "time": "2020-01-21T17:49:50+00:00"
         },
         {
             "name": "donatj/phpuseragentparser",
@@ -147,63 +200,44 @@
             ],
             "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
             "time": "2020-05-28T21:45:09+00:00"
-        }
-    ],
-    "packages-dev": [
+        },
         {
-            "name": "cmb2/cmb2",
-            "version": "v2.7.0",
+            "name": "woocommerce/action-scheduler",
+            "version": "3.1.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/CMB2/CMB2.git",
-                "reference": "438c26dda7ac110d0741448d65614b3ec6379034"
+                "url": "https://github.com/woocommerce/action-scheduler.git",
+                "reference": "275d0ba54b1c263dfc62688de2fa9a25a373edf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/438c26dda7ac110d0741448d65614b3ec6379034",
-                "reference": "438c26dda7ac110d0741448d65614b3ec6379034",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/275d0ba54b1c263dfc62688de2fa9a25a373edf8",
+                "reference": "275d0ba54b1c263dfc62688de2fa9a25a373edf8",
                 "shasum": ""
             },
-            "require": {
-                "php": ">5.2.4"
-            },
             "require-dev": {
-                "apigen/apigen": "4.1.2",
-                "nette/utils": "2.5.3",
-                "phpunit/phpunit": "6.5.13"
-            },
-            "suggest": {
-                "composer/installers": "~1.0"
+                "phpunit/phpunit": "^5.6",
+                "woocommerce/woocommerce-sniffs": "0.0.8",
+                "wp-cli/wp-cli": "~1.5.1"
             },
             "type": "wordpress-plugin",
+            "extra": {
+                "scripts-description": {
+                    "test": "Run unit tests",
+                    "phpcs": "Analyze code against the WordPress coding standards with PHP_CodeSniffer",
+                    "phpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-3.0-or-later"
             ],
-            "authors": [
-                {
-                    "name": "Justin Sternberg",
-                    "email": "justin@dsgnwrks.pro",
-                    "homepage": "https://dsgnwrks.pro",
-                    "role": "Developer"
-                },
-                {
-                    "name": "WebDevStudios",
-                    "email": "contact@webdevstudios.com",
-                    "homepage": "https://github.com/WebDevStudios",
-                    "role": "Developer"
-                }
-            ],
-            "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
-            "homepage": "https://github.com/CMB2/CMB2",
-            "keywords": [
-                "metabox",
-                "plugin",
-                "wordpress"
-            ],
-            "time": "2020-01-21T17:49:50+00:00"
+            "description": "Action Scheduler for WordPress and WooCommerce",
+            "homepage": "https://actionscheduler.org/",
+            "time": "2020-05-12T16:22:33+00:00"
         }
     ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],

@@ -230,6 +230,8 @@ class Admin extends WP_REST_Controller {
 			$prev_value = update_metadata_by_mid( 'post', $db_id, $schema, $meta_key );
 		}
 
+		do_action( 'rank_math/schema/update', $object_id, $schemas );
+
 		return $new_ids;
 	}
 

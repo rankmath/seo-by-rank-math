@@ -99,12 +99,4 @@ function rank_math_0_9_8_update_tables() {
 	}
 }
 
-/**
- * De-authorized search console
- */
-function rank_math_0_9_8_clear_search_console() {
-	Helper::search_console_data( false );
-}
-
 rank_math_0_9_8_update_tables();
-rank_math_0_9_8_clear_search_console();

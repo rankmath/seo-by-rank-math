@@ -8,6 +8,7 @@ import { Button, PanelBody } from '@wordpress/components'
 /**
  * Internal dependencies
  */
+import './helpers'
 import '@schema/Functions/cache'
 import SchemaList from './SchemaList'
 import registerDefaultHooks from './defaultFilters'

@@ -5,11 +5,11 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.1
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.48.2
+Stable tag: 1.0.49-beta
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
-Rank Math is a revolutionary SEO plugin that combines the features of many SEO tools in a single package & helps you multiply your traffic.
+Rank Math is a revolutionary WordPress SEO plugin that combines the features of many SEO tools in a single package & helps you multiply your traffic.
 
 == Description ==
 
@@ -475,14 +475,25 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.48.2 [Oct 01, 2020] =
-* Added: Support for importing `txt` settings file on a Multisite setup
-* Fixed: Event Venue fields were not showing in the right Event Mode
-* Fixed: Missing `mainEntityofPage` property in the default schema added from the Settings
-* Fixed: Added logo URL using `ImageObject` in the Publisher entity
-* Fixed: Ajax-based Dropdown options were working in the settings page
-* Fixed: `lodash` is not defined error on the Settings page
-* Fixed: Broken Redirection loader image
-* Fixed: [Beta updates](https://rankmath.com/kb/version-control/#beta-updates) were not working
+= 1.0.49-beta [Oct 08, 2020] =
+* Added: [NEW!] [HUGE!] Introducing the revamped [Analytics module](https://rankmath.com/kb/search-console/)! Now you can track your site's SEO performance from one place
+* Added: [NEW!] [HUGE!] Google Analytics integration! Install Google Analytics code with a click of a button and track your unique visitors for every post/page of your website inside WordPress
+* Added: Automatically verify, add and configure your website for Google Search Console without leaving WordPress
+* Added: Automatically verify, add and configure your website for Google Analytics without leaving WordPress
+* Added: An option to exclude logged-in users from Google Analytics tracking
+* Added: Rank Math can automatically add [Sitemaps](https://rankmath.com/kb/configure-sitemaps/) into the Google Search Console. No more worrying about adding the Sitemaps manually inside Google Search Console
+* Added: New Analytics page shows your website's overall [SEO scores](https://rankmath.com/kb/score-100-in-tests/) & optimization
+* Added: Keyword Position graph shows the number of keywords ranking in the top 3, 10, 50, and 100 positions that are driving traffic to your website
+* Added: Advanced graph in the Performance tab of the Analytics module that gives you an overview of overall Site Traffic, Search Impressions, Search Clicks, CTR, & Average Position of your keywords
+* Added: An option to select the timeframe for your Analytics stats. Choose between past 7, 15, 30, or 90 days
+* Improved: "SEO Score: Bad" post-filter now shows only the posts that have a Focus keyword added to them
+* Fixed: [Auto-update](https://rankmath.com/kb/version-control/#auto-update) cannot be enabled from the plugins admin page
+* Fixed: Empty `itemList` element in the [Breadcrumbs Schema](https://rankmath.com/kb/general-settings/#bread-crumbs) for the blog page when show homepage link option was enabled in the settings
+* Fixed: An `Invalid object type` error for the "publisher" field if the [Local SEO](https://rankmath.com/kb/titles-and-meta/#local-seo) module was disabled
+* Fixed: A PHP notice appearing on some installations while saving category or a tag page
+* Fixed: `Save All` button in the bulk edit was showing a `400 Bad request` error if there were no changes in any of the posts
+* Fixed: Enable/Disable `Author Archive` toggle was not working as expected
+
+Note: We do not store or process any data on our servers. Your website's database will be used for storing and processing the data. You can read the plugin's usage policy [here](https://rankmath.com/usage-tracking/)
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**
