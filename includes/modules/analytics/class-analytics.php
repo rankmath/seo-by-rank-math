@@ -340,7 +340,7 @@ class Analytics extends Base {
 					'icon'  => 'rm-icon rm-icon-search-console',
 					'title' => esc_html__( 'Analytics', 'rank-math' ),
 					/* translators: Link to kb article */
-					'desc'  => sprintf( esc_html__( 'See your Google Search Console, Analyitcs and Adsense data without leaving your WP dashboard. %s.', 'rank-math' ), '<a href="' . KB::get( 'analytics-settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+					'desc'  => sprintf( esc_html__( 'See your Google Search Console, Analyitcs and AdSense data without leaving your WP dashboard. %s.', 'rank-math' ), '<a href="' . KB::get( 'analytics-settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
 				],
 			],
@@ -358,19 +358,24 @@ class Analytics extends Base {
 	 * @return array
 	 */
 	public function add_tools( $tools ) {
-		$tools['analytics_clear_caches'] = [
-			'title'       => __( 'Purge Analytics Cache', 'rank-math' ),
-			/* translators: 1. Review Schema documentation link */
-			'description' => sprintf( __( 'Clear analytics cache to re-calcualte all the stats again.', 'rank-math' ), '<a href="https://rankmath.com/kb/how-to-fix-review-schema-errors/" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' ),
-			'button_text' => __( 'Clear Cache', 'rank-math' ),
-		];
-
-		$tools['analytics_reindex_posts'] = [
-			'title'       => __( 'Re-Index Posts', 'rank-math' ),
-			/* translators: 1. Review Schema documentation link */
-			'description' => sprintf( __( 'Clear posts cache and re-index them.', 'rank-math' ), '<a href="https://rankmath.com/kb/how-to-fix-review-schema-errors/" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' ),
-			'button_text' => __( 'ReIndex Posts', 'rank-math' ),
-		];
+		Arr::insert(
+			$tools,
+			[
+				'analytics_clear_caches'  => [
+					'title'       => __( 'Purge Analytics Cache', 'rank-math' ),
+					/* translators: 1. Review Schema documentation link */
+					'description' => sprintf( __( 'Clear analytics cache to re-calculate all the stats again.', 'rank-math' ), '<a href="https://rankmath.com/kb/how-to-fix-review-schema-errors/" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' ),
+					'button_text' => __( 'Clear Cache', 'rank-math' ),
+				],
+				'analytics_reindex_posts' => [
+					'title'       => __( 'Rebuild Index for Analytics', 'rank-math' ),
+					/* translators: 1. Review Schema documentation link */
+					'description' => sprintf( __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' ), '<a href="https://rankmath.com/kb/how-to-fix-review-schema-errors/" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' ),
+					'button_text' => __( 'Rebuild Index', 'rank-math' ),
+				],
+			],
+			3
+		);
 
 		return $tools;
 	}

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.1
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.49-beta
+Stable tag: 1.0.49
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,8 +475,8 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.49-beta [Oct 08, 2020] =
-* Added: [NEW!] [HUGE!] Introducing the revamped [Analytics module](https://rankmath.com/kb/search-console/)! Now you can track your site's SEO performance from one place
+= 1.0.49 [Oct 10, 2020] =
+* Added: [NEW!] [HUGE!] Introducing the revamped [Analytics module](https://rankmath.com/kb/search-console/)! Now you can track your site's SEO performance from one place. Preview [https://i.rankmath.com/mk2pTt](https://i.rankmath.com/mk2pTt)
 * Added: [NEW!] [HUGE!] Google Analytics integration! Install Google Analytics code with a click of a button and track your unique visitors for every post/page of your website inside WordPress
 * Added: Automatically verify, add and configure your website for Google Search Console without leaving WordPress
 * Added: Automatically verify, add and configure your website for Google Analytics without leaving WordPress

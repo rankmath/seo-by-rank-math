@@ -67,11 +67,6 @@ class Manager {
 			return;
 		}
 
-		$done = \boolval( get_option( 'rank_math_flat_posts_done' ) );
-		if ( $done ) {
-			return;
-		}
-
 		\RankMath\Analytics\Data_Fetcher::get()->flat_posts();
 	}
 

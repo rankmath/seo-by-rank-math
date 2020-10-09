@@ -14,7 +14,7 @@ use RankMath\Google\Authentication;
 
 // phpcs:disable
 $is_authorized = Authentication::is_authorized();
-$authorize   = ! $is_authorized ? ( '<div class="connect-wrap"><a href="' . esc_url( Authentication::get_auth_url() ) . '" class="button button-primary button-animated rank-math-authorize-account">' . esc_html__( 'Connect Google Services', 'rank-math' ) . '</a></div>' ) : '';
+$authorize   = ! $is_authorized ? ( '<div class="connect-wrap" style="margin-top: 30px;"><a href="' . esc_url( Authentication::get_auth_url() ) . '" class="button button-primary button-animated rank-math-authorize-account">' . esc_html__( 'Connect Google Services', 'rank-math' ) . '</a></div>' ) : '';
 $deauthorize = $is_authorized ? '<button class="button button-primary rank-math-deauthorize-account">' . esc_html__( 'Disconnect Account', 'rank-math' ) . '</button>' : '';
 
 echo $authorize . $deauthorize;

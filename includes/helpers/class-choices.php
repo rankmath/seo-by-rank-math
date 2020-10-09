@@ -631,6 +631,18 @@ trait Choices {
 	}
 
 	/**
+	 * Function to get Default Schema type by post_type.
+	 *
+	 * @param string $post_type Post Type.
+	 *
+	 * @return string Default Schema Type.
+	 */
+	public static function get_default_schema_type( $post_type ) {
+		$schema = apply_filters( 'rank_math/schema/default_type', Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" ) );
+		return 'article' === $schema ? Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ) : $schema;
+	}
+
+	/**
 	 * Country.
 	 *
 	 * @return array

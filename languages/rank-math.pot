@@ -2463,14 +2463,14 @@ msgid "Now!"
 msgstr ""
 
 #. translators: Link to kb article
-msgid "See your Google Search Console, Analyitcs and Adsense data without leaving your WP dashboard. %s."
+msgid "See your Google Search Console, Analyitcs and AdSense data without leaving your WP dashboard. %s."
 msgstr ""
 
 msgid "Purge Analytics Cache"
 msgstr ""
 
 #. translators: 1. Review Schema documentation link
-msgid "Clear analytics cache to re-calcualte all the stats again."
+msgid "Clear analytics cache to re-calculate all the stats again."
 msgstr ""
 
 msgid "here"
@@ -2479,14 +2479,14 @@ msgstr ""
 msgid "Clear Cache"
 msgstr ""
 
-msgid "Re-Index Posts"
+msgid "Rebuild Index for Analytics"
 msgstr ""
 
 #. translators: 1. Review Schema documentation link
-msgid "Clear posts cache and re-index them."
+msgid "Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats."
 msgstr ""
 
-msgid "ReIndex Posts"
+msgid "Rebuild Index"
 msgstr ""
 
 msgid "BuddyPress:"

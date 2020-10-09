@@ -17,10 +17,10 @@ $page = Param::get( 'page' );
 $page = 'rank-math-options-general' === $page ? $page : 'rank-math-wizard&step=analytics';
 $url  = Admin_Helper::get_activate_url( admin_url( 'admin.php?analytics=1&page=' . $page ) );
 ?>
-<div class="text-center wp-core-ui rank-math-ui" style="margin-top: 30px;">
+<div class="wp-core-ui rank-math-ui connect-wrap" style="margin-top: 30px;">
 	<a href="<?php echo $url; ?>" class="button button-primary button-animated" name="rank_math_activate"><?php echo esc_attr__( 'Connect Your Rank Math Account', 'rank-math' ); ?></a>
 </div>
-<div id="rank-math-pro-cta">
+<div id="rank-math-pro-cta" class="analytics">
 	<div class="rank-math-cta-box width-100 no-shadow no-padding">
 		<h3><?php echo esc_attr__( 'Benefits of Connecting Rank Math Account', 'rank-math' ); ?></h3>
 		<ul>

@@ -21,8 +21,10 @@ class Installer {
 
 	/**
 	 * Install routine.
+	 *
+	 * @param bool $flat Flat posts or not.
 	 */
-	public function install() {
+	public function install( $flat = true ) {
 		$this->create_tables();
 
 		// Clear schedule.
@@ -31,6 +33,10 @@ class Installer {
 		// Add action for scheduler.
 		if ( false === as_next_scheduled_action( 'rank_math/analytics/daily_tasks' ) ) {
 			as_schedule_recurring_action( strtotime( 'tomorrow' ) + 180, DAY_IN_SECONDS * 7, 'rank_math/analytics/daily_tasks' );
+		}
+
+		if ( $flat ) {
+			Data_Fetcher::get()->flat_posts();
 		}
 	}
 

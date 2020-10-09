@@ -106,6 +106,7 @@ class Analytics_Common {
 	public function analytics_reindex_posts() {
 		DB::objects()->truncate();
 		DB::table( 'postmeta' )->where( 'meta_key', 'rank_math_analytic_object_id' )->delete();
+		delete_option( 'rank_math_flat_posts_done' );
 		Data_Fetcher::get()->flat_posts();
 		return __( 'Post re-index in progress.', 'rank-math' );
 	}

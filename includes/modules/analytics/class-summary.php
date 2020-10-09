@@ -53,7 +53,8 @@ class Summary extends Objects {
 			->where( 'seo_score', 0 )
 			->getVar();
 
-		$stats->total = $stats->good + $stats->ok + $stats->bad + $stats->noData; // phpcs:ignore
+		$stats->total   = $stats->good + $stats->ok + $stats->bad + $stats->noData; // phpcs:ignore
+		$stats->average = 0;
 
 		// Average.
 		$average = DB::objects()
@@ -63,8 +64,10 @@ class Summary extends Objects {
 
 		$average->total += $stats->noData; // phpcs:ignore
 
-		$stats->average = $average->score / $average->total;
-		$stats->average = \round( $stats->average, 2 );
+		if ( $average->total > 0 ) {
+			$stats->average = $average->score / $average->total;
+			$stats->average = \round( $stats->average, 2 );
+		}
 
 		return $stats;
 	}

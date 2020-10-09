@@ -168,6 +168,7 @@ class Installer {
 
 		// Analytics.
 		( new \RankMath\Analytics\Installer() )->install();
+
 		$this->do_action( 'activate' );
 	}
 

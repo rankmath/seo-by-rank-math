@@ -101,11 +101,12 @@ class Singular implements Snippet {
 	 * @return string
 	 */
 	private function get_default_schema( $jsonld ) {
-		$schema = Helper::get_settings( "titles.pt_{$jsonld->post->post_type}_default_rich_snippet" );
+		$schema = Helper::get_default_schema_type( $jsonld->post->post_type );
 		if ( ! $schema ) {
 			return false;
 		}
 
+		$schema = in_array( $schema, [ 'BlogPosting', 'NewsArticle' ], true ) ? 'article' : $schema;
 		if (
 			'article' === $schema ||
 			( Conditional::is_woocommerce_active() && is_singular( 'product' ) ) ||

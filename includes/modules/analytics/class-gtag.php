@@ -30,6 +30,20 @@ class GTag {
 	use Hooker;
 
 	/**
+	 * Primary "standard" AMP website mode.
+	 *
+	 * @var string
+	 */
+	const AMP_MODE_PRIMARY = 'primary';
+
+	/**
+	 * Secondary AMP website mode.
+	 *
+	 * @var string
+	 */
+	const AMP_MODE_SECONDARY = 'secondary';
+
+	/**
 	 * Options.
 	 *
 	 * @var array

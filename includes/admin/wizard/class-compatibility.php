@@ -74,6 +74,11 @@ class Compatibility implements Wizard_Step {
 
 		$settings['general']['setup_mode'] = ! empty( $values['setup_mode'] ) ? $values['setup_mode'] : 'easy';
 
+		if ( 'custom' === $settings['general']['setup_mode'] ) {
+			// Don't change, use custom imported value.
+			return true;
+		}
+
 		Helper::update_all_settings( $settings['general'], null, null );
 
 		return true;

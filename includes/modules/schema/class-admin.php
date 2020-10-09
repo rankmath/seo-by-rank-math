@@ -137,7 +137,7 @@ class Admin extends Base {
 		$schema = $post_id !== absint( get_option( 'page_for_posts' ) ) ? $this->get_schema_types( $post_id ) : 'CollectionPage';
 		if ( ! $schema && ! metadata_exists( 'post', $post_id, 'rank_math_rich_snippet' ) && Helper::can_use_default_schema( $post_id ) ) {
 			$post_type = get_post_type( $post_id );
-			$schema    = Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" );
+			$schema    = Helper::get_default_schema_type( $post_type );
 		}
 
 		$schema = $schema ? $schema : esc_html__( 'Off', 'rank-math' );
@@ -226,47 +226,47 @@ class Admin extends Base {
 		}
 
 		$screen       = get_current_screen();
-		$default_type = Helper::get_settings( "titles.pt_{$screen->post_type}_default_rich_snippet" );
+		$default_type = ucfirst( Helper::get_default_schema_type( $screen->post_type ) );
 		if ( ! $default_type ) {
 			return [];
 		}
 
-		if ( class_exists( 'WooCommerce' ) && 'product' === $screen->post_type ) {
-			$schemas['new-9999'] = [
-				'@type'    => 'WooCommerceProduct',
-				'metadata' => [
-					'title'     => 'WooCommerceProduct',
-					'type'      => 'template',
-					'isPrimary' => true,
-				],
-			];
-
-			return $schemas;
-		}
-
-		if ( class_exists( 'Easy_Digital_Downloads' ) && 'download' === $screen->post_type ) {
-			$schemas['new-9999'] = [
-				'@type'    => 'EDDProduct',
-				'metadata' => [
-					'title'     => 'EDDProduct',
-					'type'      => 'template',
-					'isPrimary' => true,
-				],
-			];
-
-			return $schemas;
-		}
+		$schema_title = in_array( $default_type, [ 'BlogPosting', 'NewsArticle' ], true ) ? 'Article' : $default_type;
 
 		$schemas['new-9999'] = [
-			'@type'    => 'article' === $default_type ? Helper::get_settings( "titles.pt_{$screen->post_type}_default_article_type" ) : ucfirst( $default_type ),
+			'@type'    => $default_type,
 			'metadata' => [
-				'title'     => ucfirst( $default_type ),
+				'title'     => $schema_title,
 				'type'      => 'template',
 				'isPrimary' => true,
 			],
 		];
 
 		return $schemas;
+	}
+
+	/**
+	 * Get Default Schema Type.
+	 *
+	 * @param string $post_type Post Type.
+	 *
+	 * @return string Default Scehma type.
+	 */
+	private function get_default_schema_type( $post_type ) {
+		$default_type = Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" );
+		if ( ! $default_type ) {
+			return false;
+		}
+
+		if ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) {
+			return 'WooCommerceProduct';
+		}
+
+		if ( class_exists( 'Easy_Digital_Downloads' ) && 'download' === $post_type ) {
+			return 'EDDProduct';
+		}
+
+		return 'article' === $default_type ? Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ) : ucfirst( $default_type );
 	}
 
 	/**

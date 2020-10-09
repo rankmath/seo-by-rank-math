@@ -138,6 +138,11 @@ class Data_Fetcher {
 	 * Flat posts
 	 */
 	public function flat_posts() {
+		$done = \boolval( get_option( 'rank_math_flat_posts_done' ) );
+		if ( $done ) {
+			return;
+		}
+
 		$post_types = Helper::get_accessible_post_types();
 		unset( $post_types['attachment'] );
 

@@ -308,7 +308,10 @@ class Image_Parser {
 		}
 
 		$src     = $this->get_absolute_url( $src );
-		$no_host = ! Str::contains( $this->host, $src ) || esc_url( $src ) !== $src;
+		$no_host = esc_url( $src ) !== $src;
+		if ( ! $this->do_filter( 'sitemap/include_external_image', false ) ) {
+			$no_host = ! Str::contains( $this->host, $src ) || esc_url( $src ) !== $src;
+		}
 
 		return $no_host ? false : $src;
 	}

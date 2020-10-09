@@ -14,6 +14,7 @@ use RankMath\Data_Encryption;
 use RankMath\Helpers\Security;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Param;
+use RankMath\Helper as GlobalHelper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -139,6 +140,9 @@ class Authentication {
 		if ( Str::contains( 'rank-math-options-general', $redirect ) ) {
 			$redirect .= '#setting-panel-analytics';
 		}
+
+		GlobalHelper::remove_notification( 'rank_math_analytics_reauthenticate' );
+
 		wp_safe_redirect( $redirect );
 		exit;
 	}

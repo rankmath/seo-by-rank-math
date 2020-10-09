@@ -261,7 +261,7 @@ class AJAX {
 		$ga  = get_option( 'rank_math_google_analytic_options' );
 		$gsc = get_option( 'rank_math_google_analytic_profile' );
 
-		if ( empty( $gsc['profile'] ) || empty( $gsc['view_id'] ) ) {
+		if ( empty( $gsc['profile'] ) || empty( $ga['view_id'] ) ) {
 			return;
 		}
 

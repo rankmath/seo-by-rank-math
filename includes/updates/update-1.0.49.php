@@ -1,47 +1,45 @@
 <?php
 /**
- * The Updates routine for version 1.0.50
+ * The Updates routine for version 1.0.49
  *
- * @since      1.0.50
+ * @since      1.0.49
  * @package    RankMath
  * @subpackage RankMath\Updates
  * @author     Rank Math <support@rankmath.com>
  */
 
 use RankMath\Helper;
+use MyThemeShop\Helpers\WordPress;
 
 /**
  * Enable the new Analytis module
  */
-function rank_math_1_0_50_enable_new_analytics_module() {
+function rank_math_1_0_49_enable_new_analytics_module() {
 	$active_modules = get_option( 'rank_math_modules', [] );
 	if ( is_array( $active_modules ) && in_array( 'search-console', $active_modules, true ) ) {
 		Helper::update_modules( [ 'analytics' => 'on' ] );
 		\RankMath\Analytics\Data_Fetcher::get()->flat_posts();
-		rank_math_1_0_50_reconnect_sc_notification();
+		rank_math_1_0_49_reconnect_sc_notification();
 	}
-	( new \RankMath\Analytics\Installer() )->install();
+	( new \RankMath\Analytics\Installer() )->install( false );
 }
 
 /**
  * Sync the user roles with new module.
  */
-function rank_math_1_0_50_sync_user_roles() {
-	global $wpdb;
-	$users = get_users(
-		[
-			'meta_query' => [
-				[
-					'key'     => $wpdb->get_blog_prefix() . 'capabilities',
-					'value'   => '%search_console%',
-					'compare' => 'LIKE',
-				],
-			],
-		]
-	);
+function rank_math_1_0_49_sync_user_roles() {
+	wp_roles();
 
-	foreach ( $users as $user ) {
-		$user->add_cap( 'rank_math_analytics' );
+	foreach ( WordPress::get_roles() as $slug => $role ) {
+		$role = get_role( $slug );
+		if ( ! $role ) {
+			continue;
+		}
+
+		if ( $role->has_cap( 'rank_math_search_console' ) ) {
+			$role->add_cap( 'rank_math_analytics' );
+			$role->remove_cap( 'rank_math_search_console' );
+		}
 	}
 }
 
@@ -50,7 +48,7 @@ function rank_math_1_0_50_sync_user_roles() {
  *
  * @return bool
  */
-function rank_math_1_0_50_reconnect_sc_notification() {
+function rank_math_1_0_49_reconnect_sc_notification() {
 	$key    = 'rank_math_search_console_data';
 	$option = get_option( $key, [] );
 	if ( ! is_array( $option ) || empty( $option['authorized'] ) ) {
@@ -61,7 +59,7 @@ function rank_math_1_0_50_reconnect_sc_notification() {
 		sprintf(
 			// Translators: placeholders are the opening and closing anchor tags.
 			esc_html__( 'Thank you for updating Rank Math! We\'ve completely revamped our Analytics module with Google Analytics & Google Search Console integrations. For a seamless experience, please re-authenticate your Google account. %1$sClick here to Connect%2$s', 'rank-math' ),
-			'<div style="margin-top: 10px;"><a href="' . Helper::get_admin_url( 'options-general#setting-panel-analytics' ) . '" class="button button-primary">',
+			'<div style="margin: 10px 0;"><a href="' . Helper::get_admin_url( 'options-general#setting-panel-analytics' ) . '" class="button button-primary">',
 			'</a></div>'
 		),
 		[
@@ -71,5 +69,5 @@ function rank_math_1_0_50_reconnect_sc_notification() {
 	);
 }
 
-rank_math_1_0_50_sync_user_roles();
-rank_math_1_0_50_enable_new_analytics_module();
+rank_math_1_0_49_sync_user_roles();
+rank_math_1_0_49_enable_new_analytics_module();
