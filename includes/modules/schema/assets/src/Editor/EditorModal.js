@@ -33,7 +33,7 @@ const EditorModal = ( { isOpen = false, toggleModal, selectedTab, isCutomSchema 
 
 	return (
 		<Modal
-			title={ __( 'Schema Generator', 'rank-math' ) }
+			title={ __( 'Schema Builder', 'rank-math' ) }
 			closeButtonLabel={ __( 'Close', 'rank-math' ) }
 			shouldCloseOnClickOutside={ false }
 			onRequestClose={ toggleModal }
@@ -41,7 +41,7 @@ const EditorModal = ( { isOpen = false, toggleModal, selectedTab, isCutomSchema 
 			overlayClassName="rank-math-modal-overlay"
 		>
 			<a
-				href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_campaign=WP"
+				href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_medium=Schema%20Builder%20Header&utm_campaign=WP"
 				rel="noopener noreferrer"
 				target="_blank"
 				title={ __( 'More Info', 'rank-math' ) }

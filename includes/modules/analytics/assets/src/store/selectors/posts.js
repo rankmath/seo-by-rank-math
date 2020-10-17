@@ -76,14 +76,3 @@ export function getPostsRowsByObjectsAll( state ) {
 export function getPostsRowsByObjects( state, page ) {
 	return state.appData.postsRowsByObjects[ page ]
 }
-
-/**
- * Get page speed.
- *
- * @param {Object} state The app state.
- *
- * @return {string} Return posts rows.
- */
-export function getPageSpeed( state ) {
-	return state.appData.pageSpeed
-}

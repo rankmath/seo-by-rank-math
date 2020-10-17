@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, forEach, startCase, orderBy } from 'lodash'
+import { get, forEach, orderBy } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -121,7 +121,7 @@ class MapCache {
 		if ( null === this.templates ) {
 			this.templates = []
 			forEach( this.cache.schemas, ( value, key ) => {
-				const title = get( value, 'map.title', startCase( key ) )
+				const title = get( value, 'map.title', key )
 				this.templates.push( {
 					type: key,
 					title: 'WooCommerceProduct' !== key ? title : __( 'WooCommerce Product', 'rank-math' ),

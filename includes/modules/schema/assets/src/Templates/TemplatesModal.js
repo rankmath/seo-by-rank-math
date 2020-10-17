@@ -26,7 +26,7 @@ const TemplatesModal = ( { isOpen = false, toggleModal } ) => {
 			overlayClassName="rank-math-modal-overlay"
 		>
 			<a
-				href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_campaign=WP"
+				href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_medium=Schema%20Generator%20Header&utm_campaign=WP"
 				rel="noopener noreferrer"
 				target="_blank"
 				title={ __( 'More Info', 'rank-math' ) }

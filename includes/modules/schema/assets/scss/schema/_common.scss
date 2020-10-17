@@ -18,6 +18,10 @@
 
 .#{$namespace}-modal.#{$namespace}-schema-modal.#{$namespace}-schema-modal-no-map {
     width: 80vw;
+
+    .components-notice {
+        display: none;
+    }
 }
 
 .#{$namespace}-schema-info {

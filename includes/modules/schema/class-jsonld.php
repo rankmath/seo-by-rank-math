@@ -157,7 +157,7 @@ class JsonLD {
 				}
 
 				// Remove empty review.
-				if ( 'review' === $id ) {
+				if ( 'review' === $id && isset( $value['@type'] ) ) {
 					if ( ! isset( $value['reviewRating'] ) || ! isset( $value['reviewRating']['ratingValue'] ) ) {
 						unset( $data[ $id ] );
 						continue;

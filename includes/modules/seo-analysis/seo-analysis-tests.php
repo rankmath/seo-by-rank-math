@@ -10,8 +10,8 @@
 
 use RankMath\KB;
 use RankMath\Helper;
+use RankMath\Google\Console;
 use RankMath\Google\Authentication;
-use RankMath\Google\Analytics;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -265,7 +265,7 @@ function rank_math_has_postname_in_permalink() {
  * @return array
  */
 function rank_math_analyze_search_console() {
-	$status = Authentication::is_authorized() && Analytics::get_site_url();
+	$status = Authentication::is_authorized() && Console::get_site_url();
 
 	return [
 		'status'  => $status ? 'ok' : 'fail',

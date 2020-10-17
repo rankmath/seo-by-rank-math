@@ -73,7 +73,7 @@ class Error_Log {
 				<button type="button" class="button copy-button" data-clipboard-text="<?php echo esc_attr( $this->get_error_log_rows( 100 ) ); ?>">
 					<?php esc_html_e( 'Copy Log to Clipboard', 'rank-math' ); ?>
 				</button>
-				<span class="success" aria-hidden="true"><?php esc_html_e( 'Copied!', 'rank-math' ); ?></span>
+				<span class="success hidden" aria-hidden="true"><?php esc_html_e( 'Copied!', 'rank-math' ); ?></span>
 			</div>
 		</div>
 		<?php

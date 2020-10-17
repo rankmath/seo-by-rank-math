@@ -8,12 +8,13 @@ import { get } from 'lodash'
  */
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
-import { Button, Modal, PanelBody } from '@wordpress/components'
+import { Modal, PanelBody } from '@wordpress/components'
 import { withDispatch, withSelect } from '@wordpress/data'
 
 /**
  * Internal dependencies
  */
+import { getSnippetIcon } from '@helpers/snippetIcon'
 import { generateValidSchema, mapCache } from '@schema/functions'
 
 /**
@@ -44,16 +45,17 @@ const Selection = ( { addSchema, isOpen } ) => {
 				<div className="rank-math-schema-catalog">
 					{ mapCache.getTemplates().map( ( template, index ) => (
 						<div key={ index } id="rank-math-schema-item" className="rank-math-schema-item row">
-							<strong className="rank-math-schema-name">{ template.title }</strong>
-							<span className="rank-math-schema-item-actions">
-								<Button
-									className="button rank-math-use-schema"
-									isLink
-									onClick={ () => addSchema( template ) }
-								>
-									<i className="rm-icon rm-icon-circle-plus"></i>
-									<span>{ __( 'Use', 'rank-math' ) }</span>
-								</Button>
+							<strong className="rank-math-schema-name">
+								<i className={ getSnippetIcon( template.type ) }></i>
+								{ template.title }
+							</strong>
+							<span
+								role="button"
+								className="button rank-math-schema-item-actions"
+								onClick={ () => addSchema( template ) }
+							>
+								<i className="rm-icon rm-icon-circle-plus"></i>
+								<span>{ __( 'Use', 'rank-math' ) }</span>
 							</span>
 						</div>
 					) ) }

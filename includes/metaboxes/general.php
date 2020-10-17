@@ -21,7 +21,7 @@ $cmb->add_field(
 
 $serp_footer = '<div class="serp-preview-footer wp-clearfix">
 			<div class="rank-math-ui">
-				<a href="#" class="button button-secondary rank-math-edit-snippet">' . esc_html__( 'Edit Snippet', 'rank-math' ) . '</a>
+				<a href="#" class="button button-primary rank-math-edit-snippet">' . esc_html__( 'Edit Snippet', 'rank-math' ) . '</a>
 				<a href="#" class="button button-secondary rank-math-edit-snippet hidden">' . esc_html__( 'Close Editor', 'rank-math' ) . '</a>
 			</div>
 		</div>';

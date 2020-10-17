@@ -164,7 +164,7 @@ class Admin extends WP_REST_Controller {
 	public function update_metadata( WP_REST_Request $request ) {
 		$object_id   = $request->get_param( 'objectID' );
 		$object_type = $request->get_param( 'objectType' );
-		$meta        = $request->get_param( 'meta' );
+		$meta        = apply_filters( 'rank_math/filter_metadata', $request->get_param( 'meta' ), $request );
 
 		$new_slug = true;
 		if ( isset( $meta['permalink'] ) && ! empty( $meta['permalink'] ) ) {

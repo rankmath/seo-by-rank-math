@@ -43,8 +43,8 @@ const Dashbaord = () => {
 				<KeywordsPositionOverview />
 			</div>
 
-			<TopActionablePosts />
 			<TopPosts />
+			<TopActionablePosts />
 		</Fragment>
 	)
 }

@@ -2,7 +2,7 @@
 /**
  * The Analytics Module
  *
- * @since      0.9.0
+ * @since      1.0.49
  * @package    RankMath
  * @subpackage RankMath\modules
  * @author     Rank Math <support@rankmath.com>
@@ -91,6 +91,7 @@ class Data_Fetcher {
 		$count    = 1;
 		$start    = Helper::get_midnight( time() + DAY_IN_SECONDS );
 		$interval = $this->get_data_interval();
+		$time_gap = $this->do_filter( 'analytics/schedule_gap', 30 );
 
 		if ( 1 === $interval ) {
 			for ( $current = 1; $current <= $days; $current++ ) {
@@ -98,7 +99,7 @@ class Data_Fetcher {
 				if ( ! DB::date_exists( $date ) ) {
 					$count++;
 					as_schedule_single_action(
-						time() + ( 60 * ( $count / 2 ) ),
+						time() + ( $time_gap * $count ),
 						'rank_math/analytics/get_analytics',
 						[ $date ]
 					);
@@ -111,7 +112,7 @@ class Data_Fetcher {
 					if ( ! DB::date_exists( $date ) ) {
 						$count++;
 						as_schedule_single_action(
-							time() + ( 60 * ( $count / 2 ) ),
+							time() + ( $time_gap * $count ),
 							'rank_math/analytics/get_analytics',
 							[ $date ]
 						);
@@ -192,8 +193,9 @@ class Data_Fetcher {
 		}
 
 		$this->save_query_page( $date );
-		$this->save_analytics( $date );
-		$this->save_adsense( $date );
+
+		do_action( 'rank_math/analytics/get_analytics_data', $date );
+
 		update_option( 'rank_math_analytics_last_updated', time() );
 	}
 
@@ -216,44 +218,11 @@ class Data_Fetcher {
 	}
 
 	/**
-	 * Get analytics and save it into database.
-	 *
-	 * @param string $date Date to fetch data for.
-	 */
-	public function save_analytics( $date ) {
-		$rows = Api::get()->get_analytics( $date, $date );
-		if ( empty( $rows ) ) {
-			return;
-		}
-
-		try {
-			DB::add_analytics_bulk( $date, $rows );
-		} catch ( Exception $e ) {} // phpcs:ignore
-	}
-
-	/**
-	 * Get adsense and save it into database.
-	 *
-	 * @param string $date Date to fetch data for.
-	 */
-	public function save_adsense( $date ) {
-		$rows = Api::get()->get_adsense( $date, $date );
-		if ( empty( $rows ) ) {
-			return;
-		}
-
-		try {
-			DB::add_adsense( $date, $rows );
-		} catch ( Exception $e ) {} // phpcs:ignore
-	}
-
-	/**
 	 * Delete all useless data from gsc and ga.
 	 */
 	public function delete_all_useless() {
 		global $wpdb;
 		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
-		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_ga WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
 	}
 
 	/**
@@ -293,6 +262,7 @@ class Data_Fetcher {
 	public function daily_tasks() {
 		$start = Helper::get_midnight( time() - DAY_IN_SECONDS );
 		$date  = date_i18n( 'Y-m-d', $start - DAY_IN_SECONDS * 2 );
+		Api::get()->refresh_token_on_login();
 		$this->get_analytics_data( $date );
 		$this->delete_all_useless();
 		$this->calculate_stats();
@@ -339,8 +309,6 @@ class Data_Fetcher {
 
 		foreach ( $ranges as $range ) {
 			Stats::get()->set_date_range( $range );
-			Stats::get()->get_winning_keywords();
-			Stats::get()->get_losing_keywords();
 			Stats::get()->get_top_keywords();
 		}
 	}

@@ -128,8 +128,14 @@
             }
         }
 
-        .#{$namespace}-schema-item-actions {
-            @extend %flex;
+        .#{$namespace} {
+            &-schema-item-actions {
+                @extend %flex;
+            }
+
+            &-inline-confirmation {
+                border-left: 1px solid $light_gray;
+            }
         }
 
         .rm-icon-circle-plus:before {
@@ -154,8 +160,10 @@
 
         text-decoration: none;
 
+        color: #6b7278;
+
         border: 0;
-        border-right: 1px solid $light_gray;
+        border-left: 1px solid $light_gray;
         background: transparent;
 
         &:hover,
@@ -168,10 +176,12 @@
             box-shadow: none;
         }
 
+        &:first-of-type {
+            border-left: 0!important;
+        }
+
         &:last-child {
             padding-right: 0;
-
-            border-right: 0!important;
         }
 
         &.#{$namespace} {

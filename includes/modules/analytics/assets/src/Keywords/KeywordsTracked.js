@@ -13,7 +13,6 @@ import { withFilters } from '@wordpress/components'
 /**
  * Internal dependencies
  */
-import AddKeyword from './AddKeyword'
 import TableCard from '@scShared/woocommerce/Table'
 import { processRows } from '../functions'
 
@@ -228,7 +227,7 @@ const KeywordsTracked = () => {
 				</div>
 				<TableCard
 					className="rank-math-table blurred"
-					title={ <AddKeyword /> }
+					title={ __( 'Keyword Manager', 'rank-math' ) }
 					headers={ headers }
 					rows={ processRows( rows, map( headers, 'key' ) ) }
 					rowsPerPage={ 20 }

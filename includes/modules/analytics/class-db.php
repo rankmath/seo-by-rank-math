@@ -2,7 +2,7 @@
 /**
  * The Analytics module database operations
  *
- * @since      0.9.0
+ * @since      1.0.49
  * @package    RankMath
  * @subpackage RankMath\modules
  * @author     Rank Math <support@rankmath.com>
@@ -42,24 +42,6 @@ class DB {
 	}
 
 	/**
-	 * Get traffic table.
-	 *
-	 * @return \MyThemeShop\Database\Query_Builder
-	 */
-	public static function traffic() {
-		return Database::table( 'rank_math_analytics_ga' );
-	}
-
-	/**
-	 * Get adsense table.
-	 *
-	 * @return \MyThemeShop\Database\Query_Builder
-	 */
-	public static function adsense() {
-		return Database::table( 'rank_math_analytics_adsense' );
-	}
-
-	/**
 	 * Get objects table.
 	 *
 	 * @return \MyThemeShop\Database\Query_Builder
@@ -69,37 +51,17 @@ class DB {
 	}
 
 	/**
-	 * Get links table.
-	 *
-	 * @return \MyThemeShop\Database\Query_Builder
-	 */
-	public static function links() {
-		return Database::table( 'rank_math_internal_meta' );
-	}
-
-	/**
-	 * Get keywords table.
-	 *
-	 * @return \MyThemeShop\Database\Query_Builder
-	 */
-	public static function keywords() {
-		return Database::table( 'rank_math_analytics_keyword_manager' );
-	}
-
-	/**
 	 * Delete a record.
 	 *
 	 * @param  int $days Decide whether to delete all or delete 90 days data.
 	 */
 	public static function delete_by_days( $days ) {
 		if ( -1 === $days ) {
-			self::traffic()->truncate();
 			self::analytics()->truncate();
 		} else {
 			$start = date_i18n( 'Y-m-d H:i:s', strtotime( '-1 days' ) );
 			$end   = date_i18n( 'Y-m-d H:i:s', strtotime( '-' . $days . ' days' ) );
 
-			self::traffic()->whereBetween( 'created', [ $end, $start ] )->delete();
 			self::analytics()->whereBetween( 'created', [ $end, $start ] )->delete();
 		}
 		self::purge_cache();
@@ -115,7 +77,6 @@ class DB {
 
 		$start = date_i18n( 'Y-m-d H:i:s', strtotime( '-' . ( $days * 2 ) . ' days' ) );
 
-		self::traffic()->where( 'created', '<', $start )->delete();
 		self::analytics()->where( 'created', '<', $start )->delete();
 	}
 
@@ -125,14 +86,9 @@ class DB {
 	public static function purge_cache() {
 		$table = Database::table( 'options' );
 		$table->whereLike( 'option_name', 'rank_math_analytics_data_info' )->delete();
-		$table->whereLike( 'option_name', 'tracked_keywords_summary' )->delete();
 		$table->whereLike( 'option_name', 'top_keywords' )->delete();
 		$table->whereLike( 'option_name', 'top_keywords_graph' )->delete();
-		$table->whereLike( 'option_name', 'winning_keywords' )->delete();
-		$table->whereLike( 'option_name', 'losing_keywords' )->delete();
 		$table->whereLike( 'option_name', 'posts_summary' )->delete();
-		$table->whereLike( 'option_name', 'winning_posts' )->delete();
-		$table->whereLike( 'option_name', 'losing_posts' )->delete();
 
 		wp_cache_flush();
 	}
@@ -340,69 +296,6 @@ class DB {
 	}
 
 	/**
-	 * Add analytic records.
-	 *
-	 * @param string $date Date of creation.
-	 * @param array  $rows Data rows to insert.
-	 */
-	public static function add_analytics_bulk( $date, $rows ) {
-		$chunks = array_chunk( $rows, 50 );
-
-		foreach ( $chunks as $chunk ) {
-			self::bulk_insert_analytics_data( $date . ' 00:00:00', $chunk );
-		}
-	}
-
-	/**
-	 * Bulk inserts records into a table using WPDB.  All rows must contain the same keys.
-	 *
-	 * @param  string $date        Date.
-	 * @param  array  $rows        Rows to insert.
-	 */
-	public static function bulk_insert_analytics_data( $date, $rows ) {
-		global $wpdb;
-
-		$data         = [];
-		$placeholders = [];
-		$columns      = [
-			'created',
-			'page',
-			'pageviews',
-			'visitors',
-		];
-		$columns      = '`' . implode( '`, `', $columns ) . '`';
-		$placeholder  = [
-			'%s',
-			'%s',
-			'%d',
-			'%d',
-		];
-
-		// Start building SQL, initialise data and placeholder arrays.
-		$sql = "INSERT INTO `{$wpdb->prefix}rank_math_analytics_ga` ( $columns ) VALUES\n";
-
-		// Build placeholders for each row, and add values to data array.
-		foreach ( $rows as $row ) {
-			if ( empty( $row['dimensions'][1] ) || Str::contains( '?', $row['dimensions'][1] ) ) {
-				continue;
-			}
-
-			$data[] = $date;
-			$data[] = self::remove_hash( $row['dimensions'][1] );
-			$data[] = $row['metrics'][0]['values'][0];
-			$data[] = $row['metrics'][0]['values'][1];
-
-			$placeholders[] = '(' . implode( ', ', $placeholder ) . ')';
-		}
-
-		// Stitch all rows together.
-		$sql .= implode( ",\n", $placeholders );
-
-		// Run the query.  Returns number of affected rows.
-		return $wpdb->query( $wpdb->prepare( $sql, $data ) ); // phpcs:ignore
-	}
-
-	/**
 	 * Remove hash part.
 	 *
 	 * @param  string $url Url to process.
@@ -415,32 +308,6 @@ class DB {
 
 		$url = \explode( '#', $url );
 		return $url[0];
-	}
-
-	/**
-	 * Add adsense records.
-	 *
-	 * @param string $date Date of creation.
-	 * @param array  $rows Data rows to insert.
-	 */
-	public static function add_adsense( $date, $rows ) {
-		global $wpdb;
-
-		foreach ( $rows as $row ) {
-			$earnings = floatval( $row[1] );
-			if ( empty( $earnings ) ) {
-				continue;
-			}
-
-			self::adsense()
-				->insert(
-					[
-						'created'  => $date . ' 00:00:00',
-						'earnings' => $earnings,
-					],
-					[ '%s', '%f' ]
-				);
-		}
 	}
 
 	/**

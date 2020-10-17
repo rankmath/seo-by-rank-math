@@ -2,7 +2,7 @@
 /**
  * Methods for frontend and backend in admin-only module
  *
- * @since      0.9.0
+ * @since      1.0.49
  * @package    RankMath
  * @subpackage RankMath\modules
  * @author     Rank Math <support@rankmath.com>
@@ -13,6 +13,7 @@ namespace RankMath\Analytics;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Conditional;
+use RankMath\Google\Console;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -77,10 +78,15 @@ class Analytics_Common {
 	 * @param Admin_Bar_Menu $menu Menu class instance.
 	 */
 	public function admin_bar_items( $menu ) {
+		$dot_color = '#ed5e5e';
+		if ( Console::is_console_connected() ) {
+			$dot_color = '#11ac84';
+		}
+
 		$menu->add_sub_menu(
 			'analytics',
 			[
-				'title'    => esc_html__( 'Analytics', 'rank-math' ),
+				'title'    => esc_html__( 'Analytics', 'rank-math' ) . '<span class="rm-menu-new update-plugins" style="background: ' . $dot_color . ';margin-left: 5px;min-width: 10px;height: 10px;margin-bottom: -1px;display: inline-block;border-radius: 5px;"><span class="plugin-count"></span></span>',
 				'href'     => Helper::get_admin_url( 'analytics' ),
 				'meta'     => [ 'title' => esc_html__( 'Review analytics and sitemaps', 'rank-math' ) ],
 				'priority' => 20,

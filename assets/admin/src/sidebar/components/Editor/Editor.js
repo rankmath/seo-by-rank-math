@@ -13,10 +13,10 @@ import { Button, Modal, TabPanel } from '@wordpress/components'
 import General from './General/General'
 import Social from './Social/Social'
 import Review from './ReviewTab'
+import ReportButton from './ReportButton'
 
 const SnippetEditor = ( {
 	isOpen,
-	buttonLabel = 'Edit Snippet',
 	initialTab = '',
 	toggleEditor,
 } ) => {
@@ -63,8 +63,9 @@ const SnippetEditor = ( {
 				className="rank-math-edit-snippet"
 				onClick={ toggleEditor }
 			>
-				{ buttonLabel }
+				{ __( 'Edit Snippet', 'rank-math' ) }
 			</Button>
+			<ReportButton />
 			{ isOpen && (
 				<Modal
 					title="Preview Snippet Editor"

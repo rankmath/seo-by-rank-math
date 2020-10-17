@@ -52,11 +52,6 @@ const Keywords = () => {
 					).invalidateResolutionForStoreSelector(
 						'getKeywordsSummary'
 					)
-					dispatch(
-						'rank-math'
-					).invalidateResolutionForStoreSelector(
-						'getTrackedKeywords'
-					)
 				} }
 			/>
 			<PositionFilter
@@ -67,8 +62,8 @@ const Keywords = () => {
 			<StatFilter selected={ selected } setSelection={ setSelection } />
 			<KeywordGraph selected={ selected } />
 			<KeywordsTracked />
-			<KeywordsTable />
 			<TopKeywords />
+			<KeywordsTable />
 		</Fragment>
 	)
 }

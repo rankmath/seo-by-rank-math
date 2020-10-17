@@ -166,9 +166,6 @@ class Installer {
 		$this->clear_rewrite_rules( true );
 		Helper::clear_cache();
 
-		// Analytics.
-		( new \RankMath\Analytics\Installer() )->install();
-
 		$this->do_action( 'activate' );
 	}
 
@@ -247,19 +244,6 @@ class Installer {
 				external_link_count int(10) UNSIGNED NULL DEFAULT 0,
 				incoming_link_count int(10) UNSIGNED NULL DEFAULT 0,
 				PRIMARY KEY (object_id)
-			) $collate;",
-
-			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}rank_math_sc_analytics (
-				id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-				date DATETIME NOT NULL,
-				property TEXT NOT NULL,
-				clicks mediumint(6) NOT NULL,
-				impressions mediumint(6) NOT NULL,
-				position double NOT NULL,
-				ctr double NOT NULL,
-				dimension VARCHAR(25) NOT NULL,
-				PRIMARY KEY (id),
-				KEY property (property(191))
 			) $collate;",
 		];
 

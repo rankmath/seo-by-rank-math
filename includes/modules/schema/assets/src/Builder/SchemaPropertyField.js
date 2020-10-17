@@ -2,7 +2,7 @@
  * External dependencies
  */
 import PropTypes from 'prop-types'
-import { has, isArray } from 'lodash'
+import { has, isArray, includes, remove, uniqueId } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -13,6 +13,7 @@ import {
 	TextControl,
 	TextareaControl,
 	ToggleControl,
+	CheckboxControl,
 } from '@wordpress/components'
 
 /**
@@ -26,6 +27,10 @@ import { sanitizeChoices } from '@helpers/sanitize'
  * Schema property field type component.
  *
  * @param {Object} props This component's props.
+ * @param {string|Array} props.value Field value.
+ * @param {Function} props.onChange Callback function.
+ * @param {string} props.type Field type.
+ * @param {Object} props.options Field options.
  */
 const SchemaPropertyField = ( {
 	value,
@@ -126,6 +131,36 @@ const SchemaPropertyField = ( {
 				onChange={ onChange }
 				{ ...rest }
 			/>
+		)
+	}
+
+	if ( 'checkbox' === type ) {
+		return (
+			<div className="rank-math-checkbox-component components-base-control schema-property--value">
+				<label htmlFor="checklist-label" className="components-base-control__label">{ rest.label }</label>
+				<div>
+					{ sanitizeChoices( options ).map( ( data ) => {
+						return (
+							<CheckboxControl
+								key={ uniqueId( 'checkbox-' ) }
+								label={ data.label }
+								checked={ includes( value, data.value ) }
+								onChange={ ( check ) => {
+									const newValues = [ ...value ]
+									if ( check ) {
+										newValues.push( data.value )
+									} else {
+										remove( newValues, ( n ) => ( n === data.value ) )
+									}
+
+									onChange( newValues )
+								} }
+							/>
+						)
+					} ) }
+				</div>
+				<p className="components-base-control__help"> { rest.label } </p>
+			</div>
 		)
 	}
 

@@ -694,7 +694,7 @@ export default {
                 "map": {
                     "isArray": false,
                     "isGroup": false,
-                    "isRequired": true,
+                    "isRequired": false,
                     "isRecommended": false,
                     "field": {
                         "type": "radio",
@@ -2521,7 +2521,7 @@ export default {
                     "map": {
                         "isArray": false,
                         "isGroup": false,
-                        "isRequired": true,
+                        "isRequired": false,
                         "isRecommended": false,
                         "field": {
                             "type": "radio",
@@ -2562,7 +2562,7 @@ export default {
                 "map": {
                     "isArray": false,
                     "isGroup": false,
-                    "isRequired": false,
+                    "isRequired": true,
                     "isRecommended": false,
                     "field": {
                         "type": "datetimepicker",
@@ -3073,7 +3073,7 @@ export default {
                     "isRequired": false,
                     "isRecommended": true,
                     "field": {
-                        "type": "select",
+                        "type": "checkbox",
                         "multiple": true,
                         "label": __( "Employment Type (Recommended)", "rank-math" ),
                         "help": __( "Type of employment. You can choose more than one value", "rank-math" ),

@@ -20,7 +20,7 @@ import TemplatesModal from '@schema/Templates/TemplatesModal'
 const Metabox = () => {
 	return (
 		<Fragment>
-			<p className="cmb2-metabox-description">{ __( 'Configure Schema with a lot of precision. Search Engines parse this information and use it to display rich results.', 'rank-math' ) }</p>
+			<p className="cmb2-metabox-description">{ __( 'Configure Schema Markup for your pages. Search engines, use structured data to display rich results in SERPs.', 'rank-math' ) } <a href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_medium=Schema%20G%20Tab&utm_campaign=WP" target="_blank" rel="noopener noreferrer">{ __( 'Learn more.', 'rank-math' ) }</a></p>
 			<SchemaList />
 			<Button
 				className="button button-primary"

@@ -38,17 +38,6 @@ export function getKeywordsOverview( state ) {
 }
 
 /**
- * Get keywords overview stats.
- *
- * @param {Object} state The app state.
- *
- * @return {string} Return keywords overview.
- */
-export function getTrackedKeywordsOverview( state ) {
-	return state.appData.trackedKeywordsOverview
-}
-
-/**
  * Get keywords summary.
  *
  * @param {Object} state The app state.
@@ -80,15 +69,4 @@ export function getKeywordsRowsAll( state ) {
  */
 export function getKeywordsRows( state, page, filters ) {
 	return state.appData.keywordsRows[ page ]
-}
-
-/**
- * Get tracked keywords.
- *
- * @param {Object} state The app state.
- *
- * @return {string} Return keywords rows.
- */
-export function getTrackedKeywords( state ) {
-	return state.appData.trackedKeywords
 }

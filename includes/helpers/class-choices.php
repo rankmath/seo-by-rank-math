@@ -638,7 +638,11 @@ trait Choices {
 	 * @return string Default Schema Type.
 	 */
 	public static function get_default_schema_type( $post_type ) {
-		$schema = apply_filters( 'rank_math/schema/default_type', Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" ) );
+		$schema = apply_filters(
+			'rank_math/schema/default_type',
+			Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" ),
+			$post_type
+		);
 		return 'article' === $schema ? Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ) : $schema;
 	}
 

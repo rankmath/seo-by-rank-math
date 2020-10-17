@@ -46,6 +46,7 @@ class Admin implements Runner {
 
 		// POST.
 		$this->action( 'admin_init', 'process_oauth' );
+		$this->action( 'admin_init', 'reconnect_google' );
 	}
 
 	/**
@@ -56,6 +57,30 @@ class Admin implements Runner {
 			flush_rewrite_rules();
 			delete_option( 'rank_math_flush_rewrite' );
 		}
+	}
+
+	/**
+	 * Reconnect Google.
+	 */
+	public function reconnect_google() {
+		if ( ! isset( $_GET['reconnect'] ) || 'google' !== $_GET['reconnect'] ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'rank_math_reconnect_google' ) ) {
+			wp_nonce_ays( 'rank_math_reconnect_google' );
+			die();
+		}
+
+		if ( ! Helper::has_cap( 'analytics' ) ) {
+			return;
+		}
+
+		\RankMath\Google\Api::get()->revoke_token();
+		\RankMath\Analytics\Data_Fetcher::get()->kill_process();
+
+		wp_redirect( \RankMath\Google\Authentication::get_auth_url() );
+		die();
 	}
 
 	/**

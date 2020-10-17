@@ -8,6 +8,7 @@ import { useState, Fragment } from '@wordpress/element'
 /**
  * Internal dependencies
  */
+import { isPro } from '../functions'
 import Header from '@scShared/Header'
 import StatFilter from './StatFilter'
 import PostsTable from './PostsTable'
@@ -16,8 +17,8 @@ import TopPosts from './../Dashboard/TopPosts'
 
 const Performance = ( { stats } ) => {
 	const [ selected, setSelection ] = useState( {
-		pageviews: true,
-		impressions: false,
+		pageviews: isPro(),
+		impressions: ! isPro(),
 		clicks: false,
 		keywords: false,
 		ctr: false,

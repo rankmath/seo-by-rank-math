@@ -2,7 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames'
-import { get, map as mapProperties, startCase, isUndefined } from 'lodash'
+import { get, map as mapProperties, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -65,7 +65,7 @@ const SchemaGroup = ( props ) => {
 
 							return (
 								<div className="schema-property--label">
-									{ startCase( property ) } { repeaterIndex[ parentId ] }
+									{ property } { repeaterIndex[ parentId ] }
 								</div>
 							)
 						}
@@ -78,7 +78,7 @@ const SchemaGroup = ( props ) => {
 							)
 						}
 
-						const value = 'WooCommerceProduct' !== property ? startCase( property ) : 'WooCommerce Product'
+						const value = 'WooCommerceProduct' !== property ? property : 'WooCommerce Product'
 						return (
 							<div className="schema-property--field">
 								<TextControl

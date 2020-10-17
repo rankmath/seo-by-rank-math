@@ -2,7 +2,7 @@
 /**
  *  Google Authentication wrapper.
  *
- * @since      1.0.34
+ * @since      1.0.49
  * @package    RankMath
  * @subpackage RankMath\modules
  * @author     Rank Math <support@rankmath.com>

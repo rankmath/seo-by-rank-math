@@ -11,6 +11,7 @@ import { get, uniqueId, isEmpty, findKey } from 'lodash'
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
 import { Button } from '@wordpress/components'
+import { applyFilters } from '@wordpress/hooks'
 import { withDispatch, withSelect } from '@wordpress/data'
 
 /**
@@ -29,7 +30,9 @@ const TemplatesCatalog = ( { search, templates, isPro, addSchema, editSchema, pr
 		templates = templates.filter( ( template ) => template.title.toLowerCase().includes( search ) )
 	}
 
-	const primaryType = primarySchema ? primarySchema.type : ''
+	const primaryType = primarySchema ? applyFilters( 'rank_math_schema_type', primarySchema.type ) : ''
+	console.log( primarySchema.type, primaryType )
+
 	return (
 		<div className="rank-math-schema-catalog">
 			{ templates.map( ( template, index ) => {
@@ -75,11 +78,11 @@ const TemplatesCatalog = ( { search, templates, isPro, addSchema, editSchema, pr
 export default compose(
 	withSelect( ( select, props ) => {
 		const isPro = select( 'rank-math' ).isPro()
-		const schemas = select( 'rank-math' ).getEditSchemas()
-		let primarySchema = findKey( select( 'rank-math' ).getSchemas(), 'metadata.isPrimary' )
+		const schemas = select( 'rank-math' ).getSchemas()
+		let primarySchema = findKey( schemas, 'metadata.isPrimary' )
 		primarySchema = isEmpty( primarySchema ) ? {} : {
 			id: primarySchema,
-			type: schemas[ primarySchema ].map.defaultEn,
+			type: schemas[ primarySchema ]['@type'],
 		}
 
 		return {

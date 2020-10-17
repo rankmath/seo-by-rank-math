@@ -247,12 +247,13 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'   => 'maps_api_key',
-		'type' => 'text',
-		'name' => esc_html__( 'Google Maps API Key', 'rank-math' ),
+		'id'         => 'maps_api_key',
+		'type'       => 'text',
+		'name'       => esc_html__( 'Google Maps API Key', 'rank-math' ),
 		/* translators: %s expands to "Google Maps Embed API" https://developers.google.com/maps/documentation/embed/ */
-		'desc' => sprintf( esc_html__( 'An API Key is required to display embedded Google Maps on your site. Get it here: %s', 'rank-math' ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">' . __( 'Google Maps Embed API', 'rank-math' ) . '</a>' ),
-		'dep'  => $company,
+		'desc'       => sprintf( esc_html__( 'An API Key is required to display embedded Google Maps on your site. Get it here: %s', 'rank-math' ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">' . __( 'Google Maps Embed API', 'rank-math' ) . '</a>' ),
+		'dep'        => $company,
+		'attributes' => [ 'type' => 'password' ],
 	]
 );
 

@@ -2,7 +2,7 @@
 /**
  * The Analytics Module
  *
- * @since      0.9.0
+ * @since      1.0.49
  * @package    RankMath
  * @subpackage RankMath\modules
  * @author     Rank Math <support@rankmath.com>
@@ -25,148 +25,6 @@ defined( 'ABSPATH' ) || exit;
 class Keywords extends Posts {
 
 	/**
-	 * Add tack keyword.
-	 *
-	 * @param string $keyword Keyword.
-	 */
-	public function add_track_keyword( $keyword ) {
-		DB::keywords()->insert(
-			[
-				'keyword'    => $keyword,
-				'collection' => 'uncategorized',
-				'is_active'  => true,
-			],
-			[ '%s', '%s', '%d' ]
-		);
-
-		delete_transient( $this->get_cache_key( 'tracked_keywords_summary', $this->days . 'days' ) );
-	}
-
-	/**
-	 * Remove tack keyword.
-	 *
-	 * @param string $keyword Keyword.
-	 */
-	public function remove_track_keyword( $keyword ) {
-		DB::keywords()->where( 'keyword', $keyword )
-			->delete();
-
-		delete_transient( $this->get_cache_key( 'tracked_keywords_summary', $this->days . 'days' ) );
-	}
-
-	/**
-	 * Get winning keywords.
-	 *
-	 * @return object
-	 */
-	public function get_tracked_winning_keywords() {
-		return $this->get_tracked_keywords(
-			[
-				'limit' => 'LIMIT 5',
-				'where' => 'WHERE COALESCE( ROUND( t2.position - t1.position, 0 ), 0 ) > 0',
-			]
-		);
-	}
-
-	/**
-	 * Get losing keywords.
-	 *
-	 * @return object
-	 */
-	public function get_tracked_losing_keywords() {
-		return $this->get_tracked_keywords(
-			[
-				'order' => 'ASC',
-				'limit' => 'LIMIT 5',
-				'where' => 'WHERE COALESCE( ROUND( t2.position - t1.position, 0 ), 0 ) < 0',
-			]
-		);
-	}
-
-	/**
-	 * Get keywords summary.
-	 *
-	 * @return object
-	 */
-	public function get_tracked_keywords_summary() {
-		$cache_key = $this->get_cache_key( 'tracked_keywords_summary', $this->days . 'days' );
-		$cache     = get_transient( $cache_key );
-
-		if ( false !== $cache ) {
-			return $cache;
-		}
-
-		$summary = DB::keywords()
-			->selectCount( 'id', 'used' )
-			->one();
-
-		$summary->total = 20;
-
-		set_transient( $cache_key, $summary, DAY_IN_SECONDS );
-
-		return $summary;
-	}
-
-	/**
-	 * Get tracked keywords.
-	 *
-	 * @param  array $args Array of arguments.
-	 * @return object
-	 */
-	public function get_tracked_keywords( $args = [] ) {
-		global $wpdb;
-
-		$args = wp_parse_args(
-			$args,
-			[
-				'dimension' => 'query',
-				'order'     => 'DESC',
-				'orderBy'   => 'diffPosition',
-				'limit'     => 'LIMIT 20',
-				'sub_where' => " AND query IN ( SELECT keyword from {$wpdb->prefix}rank_math_analytics_keyword_manager )",
-			]
-		);
-
-		$data    = $this->get_analytics_data( $args );
-		$data    = $this->set_query_as_key( $data );
-		$history = $this->get_graph_data_for_keywords( \array_keys( $data ) );
-		$data    = $this->set_query_position( $data, $history );
-
-		// Add remaining keywords.
-		$rows = DB::keywords()->get();
-		foreach ( $rows as $row ) {
-			if ( ! isset( $data[ $row->keyword ] ) ) {
-				$data[ $row->keyword ] = [
-					'query'       => $row->keyword,
-					'graph'       => [],
-					'clicks'      => [
-						'total'      => 0,
-						'difference' => 0,
-					],
-					'impressions' => [
-						'total'      => 0,
-						'difference' => 0,
-					],
-					'position'    => [
-						'total'      => 0,
-						'difference' => 0,
-					],
-					'ctr'         => [
-						'total'      => 0,
-						'difference' => 0,
-					],
-					'pageviews'   => [
-						'total'      => 0,
-						'difference' => 0,
-					],
-				];
-			}
-		}
-
-		return $data;
-	}
-
-	/**
 	 * Get keywords.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
@@ -186,11 +44,7 @@ class Keywords extends Posts {
 			]
 		);
 
-		$rows    = $this->set_query_as_key( $rows );
-		$history = $this->get_graph_data_for_keywords( \array_keys( $rows ) );
-		$rows    = $this->set_query_position( $rows, $history );
-
-		return $rows;
+		return $this->set_query_as_key( $rows );
 	}
 
 	/**
@@ -353,96 +207,6 @@ class Keywords extends Posts {
 		}
 
 		return $data;
-	}
-
-	/**
-	 * Get winning keywords.
-	 *
-	 * @return object
-	 */
-	public function get_winning_keywords() {
-		$cache_key = $this->get_cache_key( 'winning_keywords', $this->days . 'days' );
-		$cache     = get_transient( $cache_key );
-
-		if ( false !== $cache ) {
-			return $cache;
-		}
-
-		$data    = $this->get_analytics_data(
-			[
-				'dimension' => 'query',
-				'where'     => 'WHERE COALESCE( ROUND( t2.position - t1.position, 0 ), 0 ) > 0',
-			]
-		);
-		$data    = $this->set_query_as_key( $data );
-		$history = $this->get_graph_data_for_keywords( \array_keys( $data ) );
-		$data    = $this->set_query_position( $data, $history );
-
-		set_transient( $cache_key, $data, DAY_IN_SECONDS );
-
-		return $data;
-	}
-
-	/**
-	 * Get losing keywords.
-	 *
-	 * @return object
-	 */
-	public function get_losing_keywords() {
-		$cache_key = $this->get_cache_key( 'losing_keywords', $this->days . 'days' );
-		$cache     = get_transient( $cache_key );
-
-		if ( false !== $cache ) {
-			return $cache;
-		}
-
-		$data    = $this->get_analytics_data(
-			[
-				'order'     => 'ASC',
-				'dimension' => 'query',
-				'where'     => 'WHERE COALESCE( ROUND( t2.position - t1.position, 0 ), 0 ) < 0',
-			]
-		);
-		$data    = $this->set_query_as_key( $data );
-		$history = $this->get_graph_data_for_keywords( \array_keys( $data ) );
-		$data    = $this->set_query_position( $data, $history );
-
-		set_transient( $cache_key, $data, DAY_IN_SECONDS );
-
-		return $data;
-	}
-
-	/**
-	 * Get graph data.
-	 *
-	 * @param array $keywords Keywords to get data for.
-	 *
-	 * @return array
-	 */
-	public function get_graph_data_for_keywords( $keywords ) {
-		global $wpdb;
-
-		$interval = $this->get_sql_range( 'created' );
-		$keywords = \array_map( 'esc_sql', $keywords );
-		$keywords = '(\'' . join( '\', \'', $keywords ) . '\')';
-
-		// phpcs:disable
-		$query = $wpdb->prepare(
-			"SELECT
-				query, DATE_FORMAT( created,'%%Y-%%m-%%d') as date, ROUND( AVG(position), 0 ) as position
-			FROM
-				{$wpdb->prefix}rank_math_analytics_gsc
-			WHERE clicks > 0 AND query IN {$keywords} AND created BETWEEN %s AND %s
-			GROUP BY query, {$interval}
-			ORDER BY created ASC",
-			$this->start_date,
-			$this->end_date
-		);
-
-		$data = $wpdb->get_results( $query );
-		// phpcs:enable
-
-		return array_map( [ $this, 'normalize_graph_rows' ], $data );
 	}
 
 	/**

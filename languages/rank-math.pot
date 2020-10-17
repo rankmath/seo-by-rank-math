@@ -2489,6 +2489,9 @@ msgstr ""
 msgid "Rebuild Index"
 msgstr ""
 
+msgid "Sorry, no post found for given id."
+msgstr ""
+
 msgid "BuddyPress:"
 msgstr ""
 
@@ -4268,6 +4271,9 @@ msgstr ""
 msgid "Setup Advanced Options"
 msgstr ""
 
+msgid "Reconnect"
+msgstr ""
+
 msgid "Disconnect"
 msgstr ""
 
@@ -4280,13 +4286,10 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-msgid "Create a new View"
-msgstr ""
-
-msgid "Create"
-msgstr ""
-
 msgid "Install analytics code"
+msgstr ""
+
+msgid "Enable this option only if you are not using any other plugin/theme to install Google Analytics code."
 msgstr ""
 
 msgid "Anonymize IP addresses"
@@ -4406,9 +4409,6 @@ msgid "Sorry, no keyword found."
 msgstr ""
 
 msgid "Sorry, no post id found."
-msgstr ""
-
-msgid "Sorry, no record id found."
 msgstr ""
 
 #. translators: date

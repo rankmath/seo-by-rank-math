@@ -61,7 +61,7 @@ $cmb->add_field(
 		'type'            => 'text',
 		'name'            => __( 'Analytics Database', 'rank-math' ),
 		// translators: Anchor text 'free version', linking to pricing page.
-		'description'     => sprintf( __( 'Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly.', 'rank-math' ), '<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Analytics%20DB%20Option&utm_campaign=WP" target="_blank" rel="noopener noreferrer">' . __( 'free version', 'rank-math' ) . '</a>' ),
+		'description'     => apply_filters( 'rank_math/analytics/options/cahce_control/description', sprintf( __( 'Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly.', 'rank-math' ), '<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Analytics%20DB%20Option&utm_campaign=WP" target="_blank" rel="noopener noreferrer">' . __( 'free version', 'rank-math' ) . '</a>' ) ),
 		'default'         => 90,
 		'sanitization_cb' => function( $value ) {
 			$max   = apply_filters( 'rank_math/analytics/max_days_allowed', 90 );

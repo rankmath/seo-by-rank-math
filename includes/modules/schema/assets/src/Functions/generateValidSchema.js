@@ -73,6 +73,10 @@ export function getSchemaFromData( schema, json ) {
  * @return {Object} Processed property.
  */
 const convertValues = ( property, key, value ) => {
+	if ( ! key ) {
+		return property
+	}
+
 	let newProperty = applyFilters(
 		'rank_math_schema_convert_value',
 		false,

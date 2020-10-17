@@ -68,14 +68,3 @@ export function updatePostsRowsByObjects( page, rows ) {
 	data[ page ] = rows
 	return updateAppData( 'postsRowsByObjects', data )
 }
-
-/**
- * Update page speed.
- *
- * @param {Array} data The data.
- *
- * @return {Object} An action for redux.
- */
-export function updatePageSpeed( data ) {
-	return updateAppData( 'pageSpeed', data )
-}

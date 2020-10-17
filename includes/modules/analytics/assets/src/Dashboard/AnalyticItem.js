@@ -1,8 +1,6 @@
 /**
  * External dependencies
  */
-import moment from 'moment'
-import { get } from 'lodash'
 import {
 	AreaChart,
 	Area,

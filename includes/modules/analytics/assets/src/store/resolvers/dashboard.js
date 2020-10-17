@@ -31,18 +31,6 @@ export function getKeywordsOverview() {
 }
 
 /**
- * Get keywords overview.
- */
-export function getTrackedKeywordsOverview() {
-	apiFetch( {
-		method: 'GET',
-		path: 'rankmath/v1/analytics/trackedKeywordsOverview',
-	} ).then( ( response ) => {
-		dispatch( 'rank-math' ).updateTrackedKeywordsOverview( response )
-	} )
-}
-
-/**
  * Get keywords summary.
  */
 export function getKeywordsSummary() {
@@ -65,17 +53,5 @@ export function getKeywordsRows( page ) {
 		path: 'rankmath/v1/analytics/keywordsRows?page=' + page,
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updateKeywordsRows( page, response )
-	} )
-}
-
-/**
- * Get tracked keywords.
- */
-export function getTrackedKeywords() {
-	apiFetch( {
-		method: 'GET',
-		path: 'rankmath/v1/analytics/getTrackedKeywords',
-	} ).then( ( response ) => {
-		dispatch( 'rank-math' ).updateTrackedKeywords( response )
 	} )
 }

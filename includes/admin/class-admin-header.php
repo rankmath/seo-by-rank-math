@@ -121,7 +121,7 @@ class Admin_Header {
 			'seo-analysis'           => 'rank-math-seo-analysis' === Param::get( 'page' ),
 		];
 
-		$link = 'https://rankmath.com/kb/';
+		$link = 'https://rankmath.com/kb/?utm_source=Plugin&utm_medium=RM%20Header%20KB%20Icon&utm_campaign=WP';
 		foreach ( $links as $key => $value ) {
 			if ( $value ) {
 				$link = KB::get( $key );

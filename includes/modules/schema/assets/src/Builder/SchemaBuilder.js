@@ -4,7 +4,7 @@
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import jQuery from 'jquery'
-import { get, cloneDeep, forEach } from 'lodash'
+import { get, cloneDeep, forEach, isArray } from 'lodash'
 import { v4 as uuid } from 'uuid'
 
 /**
@@ -39,7 +39,7 @@ class SchemaBuilder extends Component {
 	constructor() {
 		super( ...arguments )
 		this.options = get( this.props.data, 'metadata', {} )
-		this.state = { data: this.props.data, loading: false, showNotice: false, postId: 0 }
+		this.state = { data: this.props.data, loading: false, showNotice: false, postId: rankMath.objectID }
 		this.setState = this.setState.bind( this )
 		this.templateSaveCount = 0
 		this.isEditingTemplate = get( rankMath, 'isTemplateScreen', false )
@@ -50,6 +50,9 @@ class SchemaBuilder extends Component {
 		knowledgegraphType = false === knowledgegraphType ? 'empty' : 'local-' + knowledgegraphType
 
 		let schemaType = get( this.props.data, 'property', '' )
+		if ( isArray( schemaType ) ) {
+			schemaType = schemaType.join( '-' )
+		}
 		schemaType = 'schema-' + schemaType.toLowerCase()
 
 		return classnames( 'schema-builder', schemaType, {

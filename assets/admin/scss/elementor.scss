@@ -146,14 +146,6 @@
 				font-weight: 700;
 				letter-spacing: 1px;
 			}
-
-			button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
-				&:hover, &:active, &:focus {
-					background: #404349;
-					color: #fff;
-					box-shadow: 0 0 0 1px #555d66;
-				}
-			}
 		}
 
 		// Tabs

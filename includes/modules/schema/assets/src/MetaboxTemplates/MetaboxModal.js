@@ -1,4 +1,10 @@
 /**
+ * External dependencies
+ */
+import { get } from 'lodash'
+import classnames from 'classnames'
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
@@ -14,17 +20,21 @@ import TabPanel from './Tabs'
 /**
  * Meabox modal popup component.
  */
-const MetaboxModal = ( { isOpen = false } ) => {
+const MetaboxModal = ( { isOpen = false, isCutomSchema } ) => {
 	if ( ! isOpen ) {
 		return null
 	}
+
+	const containerClasses = classnames( 'rank-math-modal rank-math-schema-generator rank-math-schema-modal', {
+		'rank-math-schema-modal-no-map': 'custom' === isCutomSchema,
+	} )
 
 	return (
 		<Modal
 			title={ __( 'Select Schema', 'rank-math' ) }
 			closeButtonLabel={ __( 'Close', 'rank-math' ) }
 			shouldCloseOnClickOutside={ false }
-			className="rank-math-modal rank-math-schema-generator rank-math-schema-modal"
+			className={ containerClasses }
 			onRequestClose={ () => {
 				const { origin, pathname } = window.location
 				window.location = origin + ( pathname
@@ -40,8 +50,10 @@ const MetaboxModal = ( { isOpen = false } ) => {
 
 export default compose(
 	withSelect( ( select ) => {
+		const selected = select( 'rank-math' ).getEditingSchema()
 		return {
 			isOpen: select( 'rank-math' ).isSchemaEditorOpen(),
+			isCutomSchema: get( selected, 'data.metadata.type', false ),
 		}
 	} ),
 )( MetaboxModal )

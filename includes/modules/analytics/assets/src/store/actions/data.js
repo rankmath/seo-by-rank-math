@@ -36,17 +36,6 @@ export function updateKeywordsOverview( stats ) {
 }
 
 /**
- * Update keywords.
- *
- * @param {Array} stats The new stats.
- *
- * @return {Object} An action for redux.
- */
-export function updateTrackedKeywordsOverview( stats ) {
-	return updateAppData( 'trackedKeywordsOverview', stats )
-}
-
-/**
  * Update keyword summary.
  *
  * @param {Array} summary The summary.
@@ -55,17 +44,6 @@ export function updateTrackedKeywordsOverview( stats ) {
  */
 export function updateKeywordsSummary( summary ) {
 	return updateAppData( 'keywordsSummary', summary )
-}
-
-/**
- * Update tracked keywords.
- *
- * @param {Array} keywords The keywords.
- *
- * @return {Object} An action for redux.
- */
-export function updateTrackedKeywords( keywords ) {
-	return updateAppData( 'trackedKeywords', keywords )
 }
 
 /**

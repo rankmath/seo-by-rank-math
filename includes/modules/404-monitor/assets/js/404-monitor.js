@@ -59,6 +59,7 @@
 			}
 		};
 
+
 		rankMath404Monitor.init();
 
 	});

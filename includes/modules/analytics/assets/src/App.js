@@ -17,11 +17,9 @@ import { Fragment } from '@wordpress/element'
  */
 import Analytics from './Analytics/Analytics'
 import Dashboard from './Dashboard/Dashboard'
-// import Sitemap from './Sitemap/Sitemap'
 import Performance from './Performance/Performance'
 import Keywords from './Keywords/Keywords'
 import Single from './Single/Single'
-// import CrawlErrors from './CrawlErrors/CrawlErrors'
 
 const getTabs = () => {
 	const tabs = []
@@ -97,37 +95,6 @@ const getTabs = () => {
 		view: Single,
 		className: 'rank-math-single-tab',
 	} )
-
-	/* Temporary tab disabled for styling
-	tabs.push( {
-		name: 'sitemaps',
-		title: (
-			<Fragment>
-				<i
-					className="rm-icon rm-icon-toolbox"
-					title={ __( 'Sitemap', 'rank-math' ) }
-				></i>
-				<span>{ __( 'Sitemap', 'rank-math' ) }</span>
-			</Fragment>
-		),
-		view: Sitemap,
-		className: 'rank-math-sitemaps-tab',
-	} )
-
-	tabs.push( {
-		name: 'crawlErrors',
-		title: (
-			<Fragment>
-				<i
-					className="rm-icon rm-icon-toolbox"
-					title={ __( 'Crawl Errors', 'rank-math' ) }
-				></i>
-				<span>{ __( 'Crawl Errors', 'rank-math' ) }</span>
-			</Fragment>
-		),
-		view: CrawlErrors,
-		className: 'rank-math-crawl-errors-tab',
-	} )*/
 
 	return applyFilters( 'rank_math_search_console_tabs', tabs )
 }

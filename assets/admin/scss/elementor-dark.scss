@@ -17,7 +17,7 @@
 						color: inherit;
 					}
 
-					button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+					button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
 						&.is-active {
 							color: #70d5f5;
 						}
@@ -208,6 +208,16 @@
 					&-heading {
 						color: #e0e1e3;
 					}
+
+					button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+						background: #404349;
+						color: #fff;
+						box-shadow: 0 0 0 1px #555d66;
+
+						&:hover, &:active, &:focus {
+							box-shadow: 0 0 0 1px $primary;
+						}
+					}
 				}
 			}
 
@@ -238,9 +248,13 @@
 			.field-group {
 				background: #404349;
 
-				input, textarea {
+				input[type="text"], textarea {
 					background: #34383c;
 					border-color: #64666a;
+
+					&::placeholder {
+						color: #707276;
+					}
 				}
 
 				.components-base-control__help {
@@ -426,4 +440,9 @@
 				}
 			}
 		}
+	}
+
+	#rank-math-compare-keywords-trigger {
+		background: #26292c;
+		border-color: #64666a;
 	}

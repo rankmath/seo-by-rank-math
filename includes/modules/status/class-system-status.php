@@ -43,7 +43,7 @@ class System_Status {
 					<button type="button" class="button copy-button" data-clipboard-text="<?php echo esc_attr( \WP_Debug_Data::format( $this->wp_info, 'debug' ) ); ?>">
 						<?php esc_html_e( 'Copy System Info to Clipboard', 'rank-math' ); ?>
 					</button>
-					<span class="success" aria-hidden="true"><?php esc_html_e( 'Copied!', 'rank-math' ); ?></span>
+					<span class="success hidden" aria-hidden="true"><?php esc_html_e( 'Copied!', 'rank-math' ); ?></span>
 				</div>
 			</div>
 

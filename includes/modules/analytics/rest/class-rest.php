@@ -4,7 +4,7 @@
  *
  * Defines the functionality loaded on admin.
  *
- * @since      1.0.15
+ * @since      1.0.49
  * @package    RankMath
  * @subpackage RankMath\Rest
  * @author     Rank Math <support@rankmath.com>
@@ -140,60 +140,10 @@ class Rest extends WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
-			'/getTrackedKeywords',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'get_tracked_keywords' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/addTrackKeyword',
-			[
-				'methods'             => WP_REST_Server::CREATABLE,
-				'callback'            => [ $this, 'add_track_keyword' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/removeTrackKeyword',
-			[
-				'methods'             => WP_REST_Server::CREATABLE,
-				'callback'            => [ $this, 'remove_track_keyword' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
 			'/userPreferences',
 			[
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'update_user_preferences' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/getPagespeed',
-			[
-				'methods'             => WP_REST_Server::CREATABLE,
-				'callback'            => [ $this, 'get_pagespeed' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/trackedKeywordsOverview',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'get_tracked_keywords_overview' ],
 				'permission_callback' => [ $this, 'has_permission' ],
 			]
 		);
@@ -254,26 +204,6 @@ class Rest extends WP_REST_Controller {
 	}
 
 	/**
-	 * Remove track keyword to DB.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function remove_track_keyword( WP_REST_Request $request ) {
-		$keyword = $request->get_param( 'keyword' );
-		if ( empty( $keyword ) ) {
-			return new WP_Error(
-				'param_value_empty',
-				esc_html__( 'Sorry, no keyword found.', 'rank-math' )
-			);
-		}
-
-		Stats::get()->remove_track_keyword( $keyword );
-		return true;
-	}
-
-	/**
 	 * Get dashboard.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
@@ -299,7 +229,7 @@ class Rest extends WP_REST_Controller {
 	 *
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
-	public function get_dashboard( WP_REST_Request $request ) {
+	public function get_dashboard( WP_REST_Request $request ) { // phpcs:ignore
 		return rest_ensure_response(
 			[
 				'stats'        => Stats::get()->get_analytics_summary(),
@@ -315,7 +245,7 @@ class Rest extends WP_REST_Controller {
 	 *
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
-	public function get_analytics_summary( WP_REST_Request $request ) {
+	public function get_analytics_summary( WP_REST_Request $request ) { // phpcs:ignore
 		return rest_ensure_response(
 			[
 				'summary'      => Stats::get()->get_posts_summary(),
@@ -331,11 +261,9 @@ class Rest extends WP_REST_Controller {
 	 *
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
-	public function get_keywords_overview( WP_REST_Request $request ) {
+	public function get_keywords_overview( WP_REST_Request $request ) { // phpcs:ignore
 		return rest_ensure_response(
 			[
-				'winningKeywords' => Stats::get()->get_winning_keywords(),
-				'losingKeywords'  => Stats::get()->get_losing_keywords(),
 				'topKeywords'     => Stats::get()->get_top_keywords(),
 				'positionGraph'   => Stats::get()->get_top_position_graph(),
 			]
@@ -343,127 +271,19 @@ class Rest extends WP_REST_Controller {
 	}
 
 	/**
-	 * Get keywords overview.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function get_tracked_keywords_overview( WP_REST_Request $request ) {
-		return rest_ensure_response(
-			[
-				'winningKeywords' => Stats::get()->get_tracked_winning_keywords(),
-				'losingKeywords'  => Stats::get()->get_tracked_losing_keywords(),
-			]
-		);
-	}
-
-	/**
-	 * Get keywords overview.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function get_tracked_keywords( WP_REST_Request $request ) {
-		return rest_ensure_response(
-			[
-				'summary' => Stats::get()->get_tracked_keywords_summary(),
-				'rows'    => Stats::get()->get_tracked_keywords(),
-			]
-		);
-	}
-
-	/**
 	 * Get posts overview.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
-	public function get_posts_overview( WP_REST_Request $request ) {
+	public function get_posts_overview( WP_REST_Request $request ) { // phpcs:ignore
 		return rest_ensure_response(
 			[
 				'winningPosts' => Stats::get()->get_winning_posts(),
 				'losingPosts'  => Stats::get()->get_losing_posts(),
 			]
 		);
-	}
-
-	/**
-	 * Get posts overview.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function get_pagespeed( WP_REST_Request $request ) {
-		$id = $request->get_param( 'id' );
-		if ( empty( $id ) ) {
-			return new WP_Error(
-				'param_value_empty',
-				esc_html__( 'Sorry, no record id found.', 'rank-math' )
-			);
-		}
-
-		$post_id = $request->get_param( 'objectID' );
-		if ( empty( $id ) ) {
-			return new WP_Error(
-				'param_value_empty',
-				esc_html__( 'Sorry, no post id found.', 'rank-math' )
-			);
-		}
-
-		$force = \boolval( $request->get_param( 'force' ) );
-
-		if ( Helper::is_localhost() ) {
-			return [
-				'page_score'          => 0,
-				'desktop_interactive' => 0,
-				'desktop_pagescore'   => 0,
-				'mobile_interactive'  => 0,
-				'mobile_pagescore'    => 0,
-				'pagespeed_refreshed' => current_time( 'mysql' ),
-			];
-		}
-
-		$url = get_permalink( $post_id );
-		$pre = apply_filters( 'rank_math/analytics/pre_pagespeed', false, $post_id, $force );
-		if ( false !== $pre ) {
-			return $pre;
-		}
-
-		if ( $force || $this->should_update_pagespeed( $id ) ) {
-			// Page Score.
-			$analyzer = new SEO_Analyzer();
-			$score    = $analyzer->get_page_score( $url );
-			$update   = [];
-			if ( $score > 0 ) {
-				$update['page_score'] = $score;
-			}
-
-			// PageSpeed desktop.
-			$desktop = Api::get()->get_pagespeed( $url, 'desktop' );
-			if ( ! empty( $desktop ) ) {
-				$update                        = \array_merge( $update, $desktop );
-				$update['pagespeed_refreshed'] = current_time( 'mysql' );
-			}
-
-			// PageSpeed mobile.
-			$mobile = Api::get()->get_pagespeed( $url, 'mobile' );
-			if ( ! empty( $mobile ) ) {
-				$update                        = \array_merge( $update, $mobile );
-				$update['pagespeed_refreshed'] = current_time( 'mysql' );
-			}
-		}
-
-		if ( ! empty( $update ) ) {
-			$update['id'] = $id;
-			DB::update_object( $update );
-			$update['object_id'] = $post_id;
-		}
-
-		return empty( $update ) ? false : $update;
 	}
 
 	/**

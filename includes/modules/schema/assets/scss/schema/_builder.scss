@@ -435,3 +435,11 @@
         }
     }
 }
+
+.#{$namespace}-checkbox-component {
+    > div {
+        > div {
+            margin-bottom: 5px;
+        }
+    }
+}

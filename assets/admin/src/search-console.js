@@ -16,8 +16,8 @@ class SearchConsole {
 	response = ''
 
 	checkAll() {
-		const checkAll = jQuery( '.cmb2-id-check-all-services:not(.done)' )
-		if ( checkAll.length > 0 ) {
+		const checkAll = jQuery( '.cmb2-id-check-all-services:not(.done)', '#setting-panel-analytics' )
+		if ( checkAll.length > 0 && '0' == checkAll.val() ) {
 			checkAll.addClass( 'done' )
 
 			ajax( 'google_check_all_services' ).done( ( response ) => {
@@ -35,9 +35,7 @@ class SearchConsole {
 		this.propertySelect = jQuery( '.site-analytics-property' )
 		this.viewSelect = jQuery( '.site-analytics-view' )
 		this.adsenseSelect = jQuery( '.site-adsense-account' )
-		this.createView = jQuery( '.create-view' )
 		this.accordions = jQuery( '.rank-math-accordion' )
-		this.createNewForm = jQuery( '.create-new-view', '.rank-math-accordion-content' )
 
 		this.accountSelect.on( 'change', () => {
 			const account = parseInt( this.accountSelect.val() )
@@ -72,20 +70,6 @@ class SearchConsole {
 				{}
 			)
 			this.fillViewSelect()
-		} )
-
-		this.viewSelect.on( 'change', () => {
-			const val = this.viewSelect.val()
-
-			this.createNewForm.hide()
-			if ( 'create' === val ) {
-				this.createNewForm.slideToggle()
-			}
-		} )
-
-		jQuery( '.close-create-new' ).on( 'click', ( event ) => {
-			event.preventDefault()
-			this.createNewForm.slideToggle()
 		} )
 
 		this.accordions.on( 'click', 'header', ( event ) => {
@@ -137,30 +121,6 @@ class SearchConsole {
 				return true
 			}
 		)
-
-		jQuery( '.create-view' ).on( 'click', ( event ) => {
-			event.preventDefault()
-			const accountID = this.accountSelect.val()
-			const propertyID = this.propertySelect.val()
-			const viewName = this.createNewForm.find( '.new-view' ).val()
-
-			ajax(
-				'add_analytics_view',
-				{
-					accountID,
-					propertyID,
-					viewName,
-				},
-				'post'
-			).done( ( response ) => {
-				this.response.views.push( {
-					id: response.id,
-					name: response.name,
-					type: response.type,
-				} )
-				this.fillViewSelect()
-			} )
-		} )
 
 		jQuery( '.rank-math-save-profiles' ).on( 'click', ( event ) => {
 			event.preventDefault()
@@ -410,8 +370,6 @@ class SearchConsole {
 				'<option value="' + view.id + '">' + view.name + '</option>'
 			)
 		} )
-
-		this.viewSelect.append( '<option value="create">Create new</option>' )
 
 		if ( this.viewSelect.data( 'selected' ) ) {
 			this.viewSelect.val( this.viewSelect.data( 'selected' ) )

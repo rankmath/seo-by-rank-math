@@ -10,12 +10,11 @@ import ContentLoader from 'react-content-loader'
  */
 import { __ } from '@wordpress/i18n'
 import { withSelect } from '@wordpress/data'
-import { Button } from '@wordpress/components'
+import { withFilters, Button } from '@wordpress/components'
 
 /**
  * Internal dependencies
  */
-import { isPro } from '../functions'
 import AnalyticItem from './AnalyticItem'
 
 const AnalyticsOverview = ( { stats } ) => {
@@ -53,26 +52,13 @@ const AnalyticsOverview = ( { stats } ) => {
 		difference: 0,
 	}
 
-	const isAdsenseConnected = isPro() && get( rankMath, 'isAdsenseConnected', false )
-
 	return (
 		<div className="rank-math-box rank-math-analytics-overview">
 			<div className="rank-math-box-grid">
 				<AnalyticItem
-					title={ __( 'Search Traffic', 'rank-math' ) }
-					tooltip={ __(
-						'This is the number of pageviews carried out by visitors from Google.',
-						'rank-math'
-					) }
-					stats={ get( stats, 'pageviews', defaultStat ) }
-					graph={ stats.graph.merged }
-					dataKey="pageviews"
-				/>
-
-				<AnalyticItem
 					title={ __( 'Search Impressions', 'rank-math' ) }
 					tooltip={ __(
-						'This is how many times your site showed up in the search results.',
+						'How many times your site showed up in the search results.',
 						'rank-math'
 					) }
 					stats={ get( stats, 'impressions', defaultStat ) }
@@ -83,7 +69,7 @@ const AnalyticsOverview = ( { stats } ) => {
 				<AnalyticItem
 					title={ __( 'Total Keywords', 'rank-math' ) }
 					tooltip={ __(
-						'This is the total number of keywords your site ranked for.',
+						'Total number of keywords your site ranking below 100 position.',
 						'rank-math'
 					) }
 					stats={ get(
@@ -95,31 +81,27 @@ const AnalyticsOverview = ( { stats } ) => {
 					dataKey="keywords"
 				/>
 
-				{ ! isAdsenseConnected && (
-					<AnalyticItem
-						title={ __( 'Search Clicks', 'rank-math' ) }
-						tooltip={ __(
-							'This is how many times your site was clicked on in the search results.',
-							'rank-math'
-						) }
-						stats={ get( stats, 'clicks', defaultStat ) }
-						graph={ stats.graph.merged }
-						dataKey="clicks"
-					/>
-				) }
+				<AnalyticItem
+					title={ __( 'Search Clicks', 'rank-math' ) }
+					tooltip={ __(
+						'How many times your site was clicked on in the search results.',
+						'rank-math'
+					) }
+					stats={ get( stats, 'clicks', defaultStat ) }
+					graph={ stats.graph.merged }
+					dataKey="clicks"
+				/>
 
-				{ isAdsenseConnected && (
-					<AnalyticItem
-						title={ __( 'AdSense', 'rank-math' ) }
-						tooltip={ __(
-							'This is your total AdSense earning from the time period.',
-							'rank-math'
-						) }
-						stats={ get( stats, 'adsense', defaultStat ) }
-						graph={ stats.graph.merged }
-						dataKey="earnings"
-					/>
-				) }
+				<AnalyticItem
+					title={ __( 'CTR', 'rank-math' ) }
+					tooltip={ __(
+						'Average click-through rate. Search clicks divided by search impressions.',
+						'rank-math'
+					) }
+					stats={ get( stats, 'ctr', defaultStat ) }
+					graph={ stats.graph.merged }
+					dataKey="ctr"
+				/>
 			</div>
 
 			<Button isLink onClick={ () => history.push( '/performance/1' ) }>
@@ -129,10 +111,12 @@ const AnalyticsOverview = ( { stats } ) => {
 	)
 }
 
-export default withSelect( ( select ) => {
-	return {
-		stats: select( 'rank-math' ).getDashboardStats(
-			select( 'rank-math' ).getDaysRange()
-		).stats,
-	}
-} )( AnalyticsOverview )
+export default withFilters( 'rankMath.analytics.dashboardAnalyticsOverview' )(
+	withSelect( ( select ) => {
+		return {
+			stats: select( 'rank-math' ).getDashboardStats(
+				select( 'rank-math' ).getDaysRange()
+			).stats,
+		}
+	} )( AnalyticsOverview )
+)

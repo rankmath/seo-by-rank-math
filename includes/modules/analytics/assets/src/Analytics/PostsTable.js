@@ -20,7 +20,7 @@ import TableCard from '@scShared/woocommerce/Table'
 
 const PostsTable = ( props ) => {
 	const { summary, seoScores } = props
-	if ( isUndefined( summary ) ) {
+	if ( isUndefined( summary ) || isUndefined( seoScores ) ) {
 		return 'Loading'
 	}
 
@@ -29,10 +29,6 @@ const PostsTable = ( props ) => {
 		{
 			label: __( 'Search Impressions', 'rank-math' ),
 			value: humanNumber( summary.impressions ),
-		},
-		{
-			label: __( 'Search Traffic', 'rank-math' ),
-			value: humanNumber( summary.pageviews ),
 		},
 		{
 			label: __( 'Search Clicks', 'rank-math' ),

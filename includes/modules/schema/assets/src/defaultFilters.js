@@ -74,6 +74,10 @@ const registerDefaultHooks = () => {
 		'rank_math_schema_type',
 		'rank-math',
 		( type ) => {
+			if ( isUndefined( type ) ) {
+				return type
+			}
+
 			if ( 'NewsArticle' === type || 'BlogPosting' === type ) {
 				return 'Article'
 			}
@@ -82,7 +86,7 @@ const registerDefaultHooks = () => {
 				return 'Music'
 			}
 
-			if ( type.includes( 'Event' ) ) {
+			if ( type.includes( 'Event' ) || 'Festival' === type ) {
 				return 'Event'
 			}
 

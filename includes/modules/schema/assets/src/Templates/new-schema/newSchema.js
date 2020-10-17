@@ -8,7 +8,7 @@ export default () => (
 		<img src={ rankMath.customSchemaImage } alt="" className="custom-schema" />
 
 		<div id="rank-math-pro-cta" className="center">
-			<div className="rank-math-cta-box blue-ticks">
+			<div className="rank-math-cta-box blue-ticks width-60">
 				<h3>{ __( 'Advanced Schema Builder', 'rank-math' ) }</h3>
 				<ul>
 					<li>{ __( 'Rank Math PRO is coming this fall', 'rank-math' ) }</li>

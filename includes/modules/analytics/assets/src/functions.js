@@ -16,8 +16,7 @@ import {
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { dispatch, select } from '@wordpress/data'
-import apiFetch from '@wordpress/api-fetch'
+import { select } from '@wordpress/data'
 import { Fragment } from '@wordpress/element'
 import { Button } from '@wordpress/components'
 import { applyFilters } from '@wordpress/hooks'
@@ -44,28 +43,6 @@ export function filterShownHeaders( headers, hiddenKeys ) {
 			header.required ||
 			( has( hiddenKeys, header.key ) && hiddenKeys[ header.key ] ),
 	} ) )
-}
-
-export function addKeyword( keyword, invalidate = 'getTrackedKeywords' ) {
-	apiFetch( {
-		method: 'POST',
-		path: 'rankmath/v1/analytics/addTrackKeyword',
-		data: { keyword },
-	} ).then( () => {
-		dispatch( 'rank-math' ).invalidateResolutionForStoreSelector(
-			invalidate
-		)
-	} )
-}
-
-export function removeKeyword( keyword ) {
-	apiFetch( {
-		method: 'POST',
-		path: 'rankmath/v1/analytics/removeTrackKeyword',
-		data: { keyword },
-	} ).then( () => {
-		window.location.reload()
-	} )
 }
 
 export function Capitalize( str ) {
@@ -127,7 +104,7 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 					<Button
 						className="button button-secondary button-small add-keyword delete"
 						title={ __( 'Delete from Keyword Manager', 'rank-math' ) }
-						onClick={ () => removeKeyword( row.query ) }
+						onClick={ () => {} }
 					>
 						<i className="rm-icon rm-icon-trash" />
 					</Button>
@@ -136,7 +113,7 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 				value = value || rowID
 				display = (
 					<h4>
-						<Link to={ '/single/' + get( row, 'id', '' ) }>
+						<Link to={ '/single/' + get( row, 'object_id', '' ) }>
 							{ decodeEntities( value ) }
 							<small>{ row.page }</small>
 						</Link>

@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom'
  */
 import { __ } from '@wordpress/i18n'
 import { Fragment } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks'
 import { dispatch, withSelect } from '@wordpress/data'
 
 /**
@@ -26,40 +27,43 @@ const KeywordsTable = ( props ) => {
 		return 'Loading'
 	}
 
-	const headers = [
-		{
-			key: 'sequenceAdd',
-			label: __( '#', 'rank-math' ),
-			required: true,
-			cellClassName: 'rank-math-col-index',
-		},
-		{
-			key: 'query',
-			label: __( 'Keywords', 'rank-math' ),
-			required: true,
-			cellClassName: 'rank-math-col-query',
-		},
-		{
-			key: 'impressions',
-			label: __( 'Impressions', 'rank-math' ),
-			cellClassName: 'rank-math-col-impressions',
-		},
-		{
-			key: 'clicks',
-			label: __( 'Clicks', 'rank-math' ),
-			cellClassName: 'rank-math-col-click',
-		},
-		{
-			key: 'ctr',
-			label: __( 'CTR', 'rank-math' ),
-			cellClassName: 'rank-math-col-ctr',
-		},
-		{
-			key: 'position',
-			label: __( 'Position', 'rank-math' ),
-			cellClassName: 'rank-math-col-position',
-		},
-	]
+	const headers = applyFilters(
+		'rankMath.analytics.keywordsHeaders',
+		[
+			{
+				key: 'sequenceAdd',
+				label: __( '#', 'rank-math' ),
+				required: true,
+				cellClassName: 'rank-math-col-index',
+			},
+			{
+				key: 'query',
+				label: __( 'Keywords', 'rank-math' ),
+				required: true,
+				cellClassName: 'rank-math-col-query',
+			},
+			{
+				key: 'impressions',
+				label: __( 'Impressions', 'rank-math' ),
+				cellClassName: 'rank-math-col-impressions',
+			},
+			{
+				key: 'clicks',
+				label: __( 'Clicks', 'rank-math' ),
+				cellClassName: 'rank-math-col-click',
+			},
+			{
+				key: 'ctr',
+				label: __( 'CTR', 'rank-math' ),
+				cellClassName: 'rank-math-col-ctr',
+			},
+			{
+				key: 'position',
+				label: __( 'Position', 'rank-math' ),
+				cellClassName: 'rank-math-col-position',
+			},
+		]
+	)
 
 	const tableSummary = [
 		{
@@ -90,7 +94,6 @@ const KeywordsTable = ( props ) => {
 			TABLE_PREF_KEY
 		)
 	}
-	const tracked = isEmpty( props.tracked ) ? {} : props.tracked.rows
 
 	return (
 		<Fragment>
@@ -106,8 +109,7 @@ const KeywordsTable = ( props ) => {
 					rows={ processRows(
 						rows,
 						map( headers, 'key' ),
-						getPageOffset( paged, rowsPerPage ),
-						Object.keys( tracked )
+						getPageOffset( paged, rowsPerPage )
 					) }
 					downloadable={ true }
 					query={ query }
@@ -136,7 +138,6 @@ export default withRouter(
 			history: props.history,
 			rows: select( 'rank-math' ).getKeywordsRows( paged ),
 			summary: select( 'rank-math' ).getKeywordsSummary(),
-			tracked: select( 'rank-math' ).getTrackedKeywords(),
 			userPreference: select( 'rank-math' ).getUserColumnPreference(
 				TABLE_PREF_KEY
 			),
