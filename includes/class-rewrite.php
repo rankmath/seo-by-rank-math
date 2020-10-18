@@ -217,13 +217,13 @@ class Rewrite {
 
 		foreach ( $categories as $category ) {
 			$category_nicename = $this->get_category_parents( $category ) . $category->slug;
-			$category_rewrite  = $this->add_category_rewrites($category_rewrite, $category_nicename, $blog_prefix, $wp_rewrite->pagination_base);
+			$category_rewrite  = $this->add_category_rewrites( $category_rewrite, $category_nicename, $blog_prefix, $wp_rewrite->pagination_base );
 
-			// Add rules for upper case encoded nicename
-			$category_nicename_filterd = $this->convert_encoded_to_upper($category_nicename);
+			// Add rules for upper case encoded nicename.
+			$category_nicename_filtered = $this->convert_encoded_to_upper( $category_nicename );
 
-			if($category_nicename !== $category_nicename_filterd) {
-				$category_rewrite  = $this->add_category_rewrites($category_rewrite, $category_nicename_filterd, $blog_prefix, $wp_rewrite->pagination_base);
+			if ( $category_nicename !== $category_nicename_filtered ) {
+				$category_rewrite = $this->add_category_rewrites( $category_rewrite, $category_nicename_filtered, $blog_prefix, $wp_rewrite->pagination_base );
 			}
 		}
 
