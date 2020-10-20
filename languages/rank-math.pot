@@ -4405,9 +4405,6 @@ msgstr ""
 msgid "Sorry, no preference found."
 msgstr ""
 
-msgid "Sorry, no keyword found."
-msgstr ""
-
 msgid "Sorry, no post id found."
 msgstr ""
 

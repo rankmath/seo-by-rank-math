@@ -15,7 +15,6 @@ const DEFAULT_STATE = {
 	keywordsSummary: false,
 	singlePost: false,
 	daysRange: getCookie( 'rank_math_analytics_date_range', '-30 days' ),
-	pageSpeed: {},
 	analyticsSummary: false,
 }
 

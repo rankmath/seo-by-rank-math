@@ -1,6 +1,6 @@
 <?php
 /**
- * The Updates routine for version 1.0.49.1-beta
+ * The Updates routine for version 1.0.50
  *
  * @since      1.0.50
  * @package    RankMath
@@ -15,7 +15,7 @@ use MyThemeShop\Helpers\Conditional;
 /**
  * Enable the new Analytis module
  */
-function rank_math_1_0_49_beta_1_delete_analytic_tables() {
+function rank_math_1_0_50_delete_analytic_tables() {
 	global $wpdb;
 
 	if ( defined( 'RANK_MATH_PRO_FILE' ) ) {
@@ -26,12 +26,17 @@ function rank_math_1_0_49_beta_1_delete_analytic_tables() {
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rank_math_analytics_adsense" ); // phpcs:ignore
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rank_math_analytics_object_links" ); // phpcs:ignore
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rank_math_analytics_keyword_manager" ); // phpcs:ignore
+
+	// Old tables.
+	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rank_math_links" ); // phpcs:ignore
+	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rank_math_redirections_0_9_17" ); // phpcs:ignore
+	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rank_math_redirection_sources_0_9_17" ); // phpcs:ignore
 }
 
 /**
  * Recreate table if not exits.
  */
-function rank_math_1_0_49_beta_1_recreate_as() {
+function rank_math_1_0_50_recreate_as() {
 	global $wpdb;
 
 	if ( Conditional::is_woocommerce_active() ) {
@@ -48,7 +53,7 @@ function rank_math_1_0_49_beta_1_recreate_as() {
 	$found_tables = $wpdb->get_col( "SHOW TABLES LIKE '{$wpdb->prefix}actionscheduler%'" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	foreach ( $table_list as $table_name ) {
 		if ( ! in_array( $wpdb->prefix . $table_name, $found_tables, true ) ) {
-			rank_math_1_0_49_beta_1_recreate_tables();
+			rank_math_1_0_50_recreate_tables();
 			return;
 		}
 	}
@@ -57,7 +62,7 @@ function rank_math_1_0_49_beta_1_recreate_as() {
 /**
  * Force the data store schema updates.
  */
-function rank_math_1_0_49_beta_1_recreate_tables() {
+function rank_math_1_0_50_recreate_tables() {
 	$store = new ActionScheduler_HybridStore();
 	add_action( 'action_scheduler/created_table', [ $store, 'set_autoincrement' ], 10, 2 );
 
@@ -69,5 +74,5 @@ function rank_math_1_0_49_beta_1_recreate_tables() {
 	remove_action( 'action_scheduler/created_table', [ $store, 'set_autoincrement' ], 10 );
 }
 
-rank_math_1_0_49_beta_1_recreate_as();
-rank_math_1_0_49_beta_1_delete_analytic_tables();
+rank_math_1_0_50_recreate_as();
+rank_math_1_0_50_delete_analytic_tables();

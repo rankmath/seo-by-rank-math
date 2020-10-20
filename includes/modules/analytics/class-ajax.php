@@ -138,7 +138,7 @@ class AJAX {
 			$result['hasAnalyticsProperty'] = $this->is_site_in_analytics( $result['accounts'] );
 		}
 
-		apply_filters( 'rank_math/analytics/check_all_services', $result );
+		$result = apply_filters( 'rank_math/analytics/check_all_services', $result );
 
 		update_option( 'rank_math_analytics_all_services', $result );
 
@@ -199,6 +199,8 @@ class AJAX {
 			$value['adsense_id'] = $prev['adsense_id'];
 		}
 		update_option( 'rank_math_google_analytic_options', $value );
+
+		do_action( 'rank_math/analytics/options/analytics_saved' );
 
 		$this->success();
 	}

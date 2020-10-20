@@ -17,8 +17,8 @@ $cmb->add_field(
 		'name'    => esc_html__( 'Date Archives', 'rank-math' ),
 		'desc'    => esc_html__( 'Enable or disable the date archive (_e.g: domain.com/2019/06/_). If this option is disabled, the date archives will be redirected to the homepage.', 'rank-math' ),
 		'options' => [
-			'off' => esc_html__( 'Enabled', 'rank-math' ),
-			'on'  => esc_html__( 'Disabled', 'rank-math' ),
+			'off'  => esc_html__( 'Disabled', 'rank-math' ),
+			'on' => esc_html__( 'Enabled', 'rank-math' ),
 		],
 		'default' => 'off',
 	]

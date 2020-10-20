@@ -60,16 +60,6 @@ class Rest extends WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
-			'/postsOverview',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'get_posts_overview' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
 			'/postsSummary',
 			[
 				'methods'             => WP_REST_Server::READABLE,
@@ -184,26 +174,6 @@ class Rest extends WP_REST_Controller {
 	}
 
 	/**
-	 * Add track keyword to DB.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function add_track_keyword( WP_REST_Request $request ) {
-		$keyword = $request->get_param( 'keyword' );
-		if ( empty( $keyword ) ) {
-			return new WP_Error(
-				'param_value_empty',
-				esc_html__( 'Sorry, no keyword found.', 'rank-math' )
-			);
-		}
-
-		Stats::get()->add_track_keyword( $keyword );
-		return true;
-	}
-
-	/**
 	 * Get dashboard.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
@@ -263,26 +233,13 @@ class Rest extends WP_REST_Controller {
 	 */
 	public function get_keywords_overview( WP_REST_Request $request ) { // phpcs:ignore
 		return rest_ensure_response(
-			[
-				'topKeywords'     => Stats::get()->get_top_keywords(),
-				'positionGraph'   => Stats::get()->get_top_position_graph(),
-			]
-		);
-	}
-
-	/**
-	 * Get posts overview.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function get_posts_overview( WP_REST_Request $request ) { // phpcs:ignore
-		return rest_ensure_response(
-			[
-				'winningPosts' => Stats::get()->get_winning_posts(),
-				'losingPosts'  => Stats::get()->get_losing_posts(),
-			]
+			apply_filters(
+				'rank_math/analytics/keywords_overview',
+				[
+					'topKeywords'   => Stats::get()->get_top_keywords(),
+					'positionGraph' => Stats::get()->get_top_position_graph(),
+				]
+			)
 		);
 	}
 

@@ -46,69 +46,11 @@
 	margin: 6px 0;
 }
 
-.rank-math-contact-social {
-	margin: 14px 0 6px;
-	line-height: 32px;
-
-	a {
-		display: inline-block;
-		background: #3b5998;
-		color: #fff !important;
-		font-size: 13px;
-		padding: 4px 12px;
-		line-height: 20px;
-		border-radius: 3px;
-		box-shadow: inset 0 -2px 0 0 rgba(41, 41, 41, 0.25);
-	}
-
-	.type-facebook {
-		background: #3b5998;
-	}
-	.type-twitter {
-		background: #55acee;
-	}
-	.type-gplus {
-		background: #dd4b39;
-	}
-	.type-linkedin {
-		background: #007bb5;
-	}
-	.type-instagram {
-		background: #125688;
-	}
-	.type-youtube {
-		background: #bb0000;
-	}
-	.type-pinterest {
-		background: #cb2027;
-	}
-	.type-soundcloud {
-		background: #f50;
-	}
-	.type-tumblr {
-		background: #32506d;
-	}
-	.type-myspace {
-		background: #222;
-	}
-	.type-yelp {
-		background: #d32323;
-	}
-	.type-foursquare {
-		background: #0072b1;
-	}
-	.type-flickr {
-		background: #ff0084;
-	}
-	.type-reddit {
-		background: #ff4500;
-	}
-}
-
 .rank-math-contact-map {
 	iframe {
 		width: 100%;
 		height: 300px;
+		border: 0;
 	}
 }
 

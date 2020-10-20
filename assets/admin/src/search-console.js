@@ -16,7 +16,7 @@ class SearchConsole {
 	response = ''
 
 	checkAll() {
-		const checkAll = jQuery( '.cmb2-id-check-all-services:not(.done)', '#setting-panel-analytics' )
+		const checkAll = jQuery( '#setting-panel-analytics .cmb2-id-check-all-services:not(.done), #cmb2-metabox-rank-math-wizard .cmb2-id-check-all-services:not(.done)' )
 		if ( checkAll.length > 0 && '0' == checkAll.val() ) {
 			checkAll.addClass( 'done' )
 
@@ -134,20 +134,17 @@ class SearchConsole {
 			parent.addClass( 'saving' )
 			button.text( 'Saving...' )
 
-			let days = jQuery( '#console_caching_control' )
-			if ( days.length > 0 ) {
-				days = days.val()
+			const data = {
+				profile: this.profileSelect.val(),
+				country: jQuery( '.site-console-country' ).val(),
 			}
 
-			ajax(
-				'save_analytic_profile',
-				{
-					days,
-					profile: this.profileSelect.val(),
-					country: jQuery( '.site-console-country' ).val(),
-				},
-				'post'
-			)
+			const days = jQuery( '#console_caching_control' )
+			if ( days.length > 0 ) {
+				data.days = days.val()
+			}
+
+			ajax( 'save_analytic_profile', data, 'post' )
 				.complete( () => {
 					button.text( 'Saved' )
 					parent.removeClass( 'saving' )

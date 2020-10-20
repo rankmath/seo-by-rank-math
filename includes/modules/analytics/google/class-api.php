@@ -112,7 +112,7 @@ class Api extends Console {
 	 *
 	 * @return int
 	 */
-	protected function get_row_limit() {
+	public function get_row_limit() {
 		return apply_filters( 'rank_math/analytics/row_limit', 5000 );
 	}
 }

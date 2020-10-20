@@ -122,8 +122,10 @@ class Summary {
 			'difference' => (float) \number_format( $stats->ctr - $old_stats->ctr, 2 ),
 		];
 
-		$stats->keywords  = $this->get_keywords_summary();
-		$stats->graph     = $this->get_analytics_summary_graph();
+		$stats->keywords = $this->get_keywords_summary();
+		$stats->graph    = $this->get_analytics_summary_graph();
+
+		$stats = apply_filters( 'rank_math/analytics/summary', $stats );
 
 		return array_filter( (array) $stats );
 	}
@@ -148,6 +150,8 @@ class Summary {
 			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
 			->where( 'clicks', '>', 0 )
 			->one();
+		
+		$summary = apply_filters( 'rank_math/analytics/posts_summary', $summary );
 
 		set_transient( $cache_key, $summary, DAY_IN_SECONDS );
 
@@ -277,31 +281,13 @@ class Summary {
 		// Merge for performance.
 		$data->merged = $this->get_merge_data_graph( $data->analytics, $data->merged, $intervals['map'] );
 		$data->merged = $this->get_merge_data_graph( $data->keywords, $data->merged, $intervals['map'] );
+		
+		// For developers.
+		$data = apply_filters( 'rank_math/analytics/analytics_summary_graph', $data, $intervals );
+		
 		$data->merged = $this->get_graph_data_flat( $data->merged );
 		$data->merged = array_values( $data->merged );
 
 		return $data;
-	}
-
-	/**
-	 * Sort by time.
-	 *
-	 * @param  string $date1 Date to compare.
-	 * @param  string $date2 Date to compare.
-	 * @return int
-	 */
-	protected function sort_by_time( $date1, $date2 ) {
-		$time1 = strtotime( $date1 );
-		$time2 = strtotime( $date2 );
-
-		if ( $time1 > $time2 ) {
-			return 1;
-		}
-
-		if ( $time1 < $time2 ) {
-			return -1;
-		}
-
-		return 0;
 	}
 }
