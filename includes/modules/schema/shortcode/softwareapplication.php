@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - software application
+ * Shortcode - Software Application
  *
  * @package    RankMath
  * @subpackage RankMath\Schema

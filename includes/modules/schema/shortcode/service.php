@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - service
+ * Shortcode - Service
  *
  * @package    RankMath
  * @subpackage RankMath\Schema

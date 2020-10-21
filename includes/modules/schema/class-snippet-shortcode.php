@@ -153,6 +153,10 @@ class Snippet_Shortcode {
 			$type = 'event';
 		}
 
+		if ( 'resturant' === $type ) {
+			$type = 'restaurant';
+		}
+
 		ob_start();
 		?>
 			<div id="rank-math-rich-snippet-wrapper">

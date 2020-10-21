@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - person
+ * Shortcode - Person
  *
  * @package    RankMath
  * @subpackage RankMath\Schema

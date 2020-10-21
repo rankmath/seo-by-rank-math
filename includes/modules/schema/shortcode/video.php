@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - video
+ * Shortcode - Video
  *
  * @package    RankMath
  * @subpackage RankMath\Schema

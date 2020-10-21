@@ -116,7 +116,8 @@ class ReviewTab extends Component {
 	alreadyReviewed() {
 		jQuery.ajax( {
 			url: rankMath.ajaxurl,
-			data: { action: 'rank_math_already_reviewed' },
+			data: { action: 'rank_math_already_reviewed', security: rankMath.security,
+			},
 		} )
 
 		rankMath.pluginReviewed = true

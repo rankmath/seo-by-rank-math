@@ -92,6 +92,11 @@ class Posts extends Objects {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_posts_rows_by_objects( WP_REST_Request $request ) {
+		$pre = apply_filters( 'rank_math/analytics/get_posts_rows_by_objects', false, $request );
+		if ( false !== $pre ) {
+			return $pre;
+		}
+
 		// Pagination.
 		$per_page = 25;
 		$offset   = ( $request->get_param( 'page' ) - 1 ) * $per_page;

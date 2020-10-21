@@ -31,7 +31,6 @@ const TemplatesCatalog = ( { search, templates, isPro, addSchema, editSchema, pr
 	}
 
 	const primaryType = primarySchema ? applyFilters( 'rank_math_schema_type', primarySchema.type ) : ''
-	console.log( primarySchema.type, primaryType )
 
 	return (
 		<div className="rank-math-schema-catalog">

@@ -4630,8 +4630,8 @@ export default {
                 "isGroup": true,
                 "isRequired": false,
                 "isRecommended": false,
-                "title": __( "Resturant", "rank-math" ),
-                "defaultEn": "Resturant"
+                "title": __( "Restaurant", "rank-math" ),
+                "defaultEn": "Restaurant"
             },
             "name": {
                 "map": {

@@ -208,11 +208,12 @@ class Schema_Converter extends \WP_Background_Process {
 	 */
 	private function map_fields( $schema_data, $post_id ) {
 		$post_type = get_post_type( $post_id );
-		if (
-			( Conditional::is_woocommerce_active() && 'product' === $post_type ) ||
-			( Conditional::is_edd_active() && 'download' === $post_type )
-		) {
+		if ( Conditional::is_woocommerce_active() && 'product' === $post_type ) {
 			return [ '@type' => 'WooCommerceProduct' ];
+		}
+
+		if ( Conditional::is_edd_active() && 'download' === $post_type ) {
+			return [ '@type' => 'EDDProduct' ];
 		}
 
 		$defaults       = [

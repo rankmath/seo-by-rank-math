@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - music
+ * Shortcode - Music
  *
  * @package    RankMath
  * @subpackage RankMath\Schema

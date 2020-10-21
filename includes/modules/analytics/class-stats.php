@@ -291,6 +291,10 @@ class Stats extends Keywords {
 				$row['impressions'] = \array_sum( $row['impressions'] );
 			}
 
+			if ( isset( $row['earnings'] ) ) {
+				$row['earnings'] = \array_sum( $row['earnings'] );
+			}
+
 			if ( isset( $row['pageviews'] ) ) {
 				$row['pageviews'] = \array_sum( $row['pageviews'] );
 			}

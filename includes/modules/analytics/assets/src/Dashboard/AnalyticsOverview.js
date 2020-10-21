@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { get, times, isEmpty } from 'lodash'
-import { useHistory } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import ContentLoader from 'react-content-loader'
 
 /**
@@ -17,9 +17,7 @@ import { withFilters, Button } from '@wordpress/components'
  */
 import AnalyticItem from './AnalyticItem'
 
-const AnalyticsOverview = ( { stats } ) => {
-	const history = useHistory()
-
+const AnalyticsOverview = ( { stats, history } ) => {
 	if ( isEmpty( stats ) ) {
 		return (
 			<div className="rank-math-box rank-math-score-overview">
@@ -111,12 +109,14 @@ const AnalyticsOverview = ( { stats } ) => {
 	)
 }
 
-export default withFilters( 'rankMath.analytics.dashboardAnalyticsOverview' )(
-	withSelect( ( select ) => {
-		return {
-			stats: select( 'rank-math' ).getDashboardStats(
-				select( 'rank-math' ).getDaysRange()
-			).stats,
-		}
-	} )( AnalyticsOverview )
+export default withRouter(
+	withFilters( 'rankMath.analytics.dashboardAnalyticsOverview' )(
+		withSelect( ( select ) => {
+			return {
+				stats: select( 'rank-math' ).getDashboardStats(
+					select( 'rank-math' ).getDaysRange()
+				).stats,
+			}
+		} )( AnalyticsOverview )
+	)
 )

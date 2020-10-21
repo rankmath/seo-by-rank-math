@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { withRouter } from 'react-router-dom'
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
@@ -24,4 +29,4 @@ const TopPosts = () => {
 	)
 }
 
-export default withFilters( 'rankMath.analytics.topPosts' )( TopPosts )
+export default withRouter( withFilters( 'rankMath.analytics.topPosts' )( TopPosts ) )

@@ -2921,6 +2921,12 @@ msgstr ""
 msgid "Schema"
 msgstr ""
 
+msgid "WooCommerce Product"
+msgstr ""
+
+msgid "EDD Product"
+msgstr ""
+
 msgid "No schema found."
 msgstr ""
 
@@ -4299,6 +4305,12 @@ msgid "PRO"
 msgstr ""
 
 msgid "Exclude Logged-in users"
+msgstr ""
+
+msgid "AdSense"
+msgstr ""
+
+msgid "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module."
 msgstr ""
 
 #. translators: sitename

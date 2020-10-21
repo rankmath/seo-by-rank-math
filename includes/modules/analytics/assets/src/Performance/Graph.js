@@ -18,6 +18,7 @@ import {
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
+import { withFilters } from '@wordpress/components'
 
 /**
  * Internal dependencies
@@ -53,6 +54,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 	const topLabels = {
 		ctr: __( 'CTR', 'rank-math' ),
 		clicks: __( 'Clicks', 'rank-math' ),
+		earnings: __( 'Adsense', 'rank-math' ),
 		impressions: __( 'Impressions', 'rank-math' ),
 		keywords: __( 'Keywords', 'rank-math' ),
 		pageviews: __( 'Pageviews', 'rank-math' ),
@@ -263,4 +265,4 @@ const PerformanceGraph = ( { stats, selected } ) => {
 	)
 }
 
-export default PerformanceGraph
+export default withFilters( 'rankMath.analytics.performanceGraph' )( PerformanceGraph )

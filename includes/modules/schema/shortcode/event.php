@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - event
+ * Shortcode - Event
  *
  * @package    RankMath
  * @subpackage RankMath\Schema

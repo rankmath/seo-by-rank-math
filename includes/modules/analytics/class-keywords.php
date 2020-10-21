@@ -44,7 +44,7 @@ class Keywords extends Posts {
 			]
 		);
 
-		return $this->set_query_as_key( $rows );
+		return apply_filters( 'rank_math/analytics/keywords', $this->set_query_as_key( $rows ) );
 	}
 
 	/**

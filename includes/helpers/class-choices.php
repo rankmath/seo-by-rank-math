@@ -643,6 +643,15 @@ trait Choices {
 			Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" ),
 			$post_type
 		);
+
+		if ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) {
+			return 'WooCommerceProduct';
+		}
+
+		if ( class_exists( 'Easy_Digital_Downloads' ) && 'download' === $post_type ) {
+			return 'EDDProduct';
+		}
+
 		return 'article' === $schema ? Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ) : $schema;
 	}
 

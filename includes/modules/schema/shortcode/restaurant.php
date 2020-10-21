@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - resturant
+ * Shortcode - Restaurant
  *
  * @package    RankMath
  * @subpackage RankMath\Schema

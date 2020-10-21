@@ -63,8 +63,6 @@ class Analytics extends Base {
 			$this->filter( 'rank_math/database/tools', 'add_tools' );
 			$this->filter( 'rank_math/settings/general', 'add_settings' );
 		}
-
-		$this->action( 'admin_footer', 'dequeue_cmb2' );
 	}
 
 	/**
@@ -223,67 +221,70 @@ class Analytics extends Base {
 			true
 		);
 
-		wp_dequeue_script( 'cmb2-scripts' );
+		$this->action( 'admin_footer', 'dequeue_cmb2' );
 
-		$preference = [
-			'topPosts'        => [
-				'seo_score'       => false,
-				'schemas_in_use'  => false,
-				'impressions'     => true,
-				'pageviews'       => true,
-				'clicks'          => false,
-				'position'        => true,
-				'positionHistory' => true,
-			],
-			'siteAnalytics'   => [
-				'seo_score'       => true,
-				'schemas_in_use'  => true,
-				'impressions'     => false,
-				'pageviews'       => true,
-				'links'           => true,
-				'clicks'          => false,
-				'position'        => false,
-				'positionHistory' => false,
-			],
-			'performance'     => [
-				'seo_score'       => true,
-				'schemas_in_use'  => true,
-				'impressions'     => true,
-				'pageviews'       => true,
-				'ctr'             => false,
-				'clicks'          => true,
-				'position'        => true,
-				'positionHistory' => true,
-			],
-			'keywords'        => [
-				'impressions'     => true,
-				'ctr'             => false,
-				'clicks'          => true,
-				'position'        => true,
-				'positionHistory' => true,
-			],
-			'topKeywords'     => [
-				'impressions'     => true,
-				'ctr'             => true,
-				'clicks'          => true,
-				'position'        => true,
-				'positionHistory' => true,
-			],
-			'trackKeywords'   => [
-				'impressions'     => true,
-				'ctr'             => true,
-				'clicks'          => true,
-				'position'        => true,
-				'positionHistory' => true,
-			],
-			'rankingKeywords' => [
-				'impressions'     => true,
-				'ctr'             => false,
-				'clicks'          => true,
-				'position'        => true,
-				'positionHistory' => true,
-			],
-		];
+		$preference = apply_filters(
+			'rank_math/analytics/user_preference',
+			[
+				'topPosts'        => [
+					'seo_score'       => false,
+					'schemas_in_use'  => false,
+					'impressions'     => true,
+					'pageviews'       => true,
+					'clicks'          => false,
+					'position'        => true,
+					'positionHistory' => true,
+				],
+				'siteAnalytics'   => [
+					'seo_score'       => true,
+					'schemas_in_use'  => true,
+					'impressions'     => false,
+					'pageviews'       => true,
+					'links'           => true,
+					'clicks'          => false,
+					'position'        => false,
+					'positionHistory' => false,
+				],
+				'performance'     => [
+					'seo_score'       => true,
+					'schemas_in_use'  => true,
+					'impressions'     => true,
+					'pageviews'       => true,
+					'ctr'             => false,
+					'clicks'          => true,
+					'position'        => true,
+					'positionHistory' => true,
+				],
+				'keywords'        => [
+					'impressions'     => true,
+					'ctr'             => false,
+					'clicks'          => true,
+					'position'        => true,
+					'positionHistory' => true,
+				],
+				'topKeywords'     => [
+					'impressions'     => true,
+					'ctr'             => true,
+					'clicks'          => true,
+					'position'        => true,
+					'positionHistory' => true,
+				],
+				'trackKeywords'   => [
+					'impressions'     => true,
+					'ctr'             => true,
+					'clicks'          => true,
+					'position'        => true,
+					'positionHistory' => true,
+				],
+				'rankingKeywords' => [
+					'impressions'     => true,
+					'ctr'             => false,
+					'clicks'          => true,
+					'position'        => true,
+					'positionHistory' => true,
+				],
+			]
+		);
 
 		$user_id = get_current_user_id();
 		if ( metadata_exists( 'user', $user_id, 'rank_math_analytics_table_columns' ) ) {
@@ -294,9 +295,6 @@ class Analytics extends Base {
 		}
 
 		Helper::add_json( 'userColumnPreference', $preference );
-
-		// Connection.
-		Helper::add_json( 'isAdsenseConnected', false );
 
 		// Last Updated.
 		$updated = get_option( 'rank_math_analytics_last_updated', false );

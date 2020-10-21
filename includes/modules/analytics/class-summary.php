@@ -150,7 +150,7 @@ class Summary {
 			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
 			->where( 'clicks', '>', 0 )
 			->one();
-		
+
 		$summary = apply_filters( 'rank_math/analytics/posts_summary', $summary );
 
 		set_transient( $cache_key, $summary, DAY_IN_SECONDS );
@@ -167,9 +167,9 @@ class Summary {
 		global $wpdb;
 
 		$query = $wpdb->prepare(
-			"SELECT ROUND(AVG(keywords),0) as keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr
+			"SELECT ROUND(AVG(keywords),0) as keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr, AVG(position) AS position
 			 FROM (
-			    SELECT count(DISTINCT(query)) AS keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr
+			    SELECT count(DISTINCT(query)) AS keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr, AVG(position) AS position
 				FROM {$wpdb->prefix}rank_math_analytics_gsc
 				WHERE clicks > 0 AND created BETWEEN %s AND %s
 			    GROUP BY created
@@ -180,9 +180,9 @@ class Summary {
 		$stats = $wpdb->get_row( $query ); // phpcs:ignore
 
 		$query     = $wpdb->prepare(
-			"SELECT ROUND(AVG(keywords),0) as keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr
+			"SELECT ROUND(AVG(keywords),0) as keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr, AVG(position) AS position
 			 FROM (
-				 SELECT count(DISTINCT(query)) AS keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr
+				 SELECT count(DISTINCT(query)) AS keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr, AVG(position) AS position
  				FROM {$wpdb->prefix}rank_math_analytics_gsc
  				WHERE clicks > 0 AND created BETWEEN %s AND %s
  			    GROUP BY created
@@ -215,6 +215,12 @@ class Summary {
 			'total'      => (float) \number_format( $stats->ctr, 2 ),
 			'previous'   => (float) \number_format( $old_stats->ctr, 2 ),
 			'difference' => (float) \number_format( $stats->ctr - $old_stats->ctr, 2 ),
+		];
+
+		$keywords->position = [
+			'total'      => (float) \number_format( $stats->position, 2 ),
+			'previous'   => (float) \number_format( $old_stats->position, 2 ),
+			'difference' => (float) \number_format( $stats->position - $old_stats->position, 2 ),
 		];
 
 		$keywords->graph = $this->get_analytics_summary_graph();
@@ -281,10 +287,10 @@ class Summary {
 		// Merge for performance.
 		$data->merged = $this->get_merge_data_graph( $data->analytics, $data->merged, $intervals['map'] );
 		$data->merged = $this->get_merge_data_graph( $data->keywords, $data->merged, $intervals['map'] );
-		
+
 		// For developers.
 		$data = apply_filters( 'rank_math/analytics/analytics_summary_graph', $data, $intervals );
-		
+
 		$data->merged = $this->get_graph_data_flat( $data->merged );
 		$data->merged = array_values( $data->merged );
 

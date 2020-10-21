@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - resturant
+ * Shortcode - Job Posting
  *
  * @package    RankMath
  * @subpackage RankMath\Schema

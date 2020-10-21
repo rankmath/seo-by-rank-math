@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - recipe
+ * Shortcode - Recipe
  *
  * @package    RankMath
  * @subpackage RankMath\Schema

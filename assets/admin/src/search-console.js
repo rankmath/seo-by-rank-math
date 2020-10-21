@@ -36,6 +36,8 @@ class SearchConsole {
 		this.viewSelect = jQuery( '.site-analytics-view' )
 		this.adsenseSelect = jQuery( '.site-adsense-account' )
 		this.accordions = jQuery( '.rank-math-accordion' )
+		this.countryConsole = jQuery( '#site-console-country' )
+		this.countryAnalytics = jQuery( '#site-analytics-country' )
 
 		this.accountSelect.on( 'change', () => {
 			const account = parseInt( this.accountSelect.val() )
@@ -298,6 +300,7 @@ class SearchConsole {
 			this.accountSelect.val( this.accountSelect.data( 'selected' ) )
 		} else {
 			this.accountSelect.prop( 'disabled', false )
+			this.countryAnalytics.prop( 'disabled', false )
 		}
 
 		this.accountSelect.trigger( 'change' )
@@ -357,6 +360,7 @@ class SearchConsole {
 		}
 
 		this.profileSelect.prop( 'disabled', false )
+		this.countryConsole.prop( 'disabled', false )
 	}
 
 	fillViewSelect() {

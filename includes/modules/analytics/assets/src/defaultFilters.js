@@ -4,9 +4,9 @@
 import { addFilter } from '@wordpress/hooks'
 
 import humanNumber from '@helpers/humanNumber'
-import { processRows, filterShownHeaders } from './functions'
 import getFilterQuery from './Analytics/getFilterQuery'
 import { getSnippetIcon } from '@helpers/snippetIcon'
+import { processRows, filterShownHeaders } from './functions'
 
 // Components
 import AnalyticItem from './Dashboard/AnalyticItem'

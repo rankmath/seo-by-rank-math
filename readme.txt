@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.1
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.50
+Stable tag: 1.0.50.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -474,6 +474,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.50.1 [Oct 22, 2020] =
+* Fixed: 'Add Image' button was not working in the [Social tab](https://rankmath.com/kb/meta-box-social-tab/)
+* Fixed: Typo in the Restaurant schema type
+* Fixed: Old EDD product schema converting to the `WooCommerce Product` Schema; this will not affect the frontend output
+* Fixed: `Product` Schema was set on the newly created WooCommerce products instead of `WooCommerce Product` Schema
+* Fixed: Already reviewed checkbox was not working in the Elementor Modal's Ask review tab
 
 = 1.0.50 [Oct 20, 2020] =
 * Added: Reconnect button on the Analytics settings page. This option can be used to refresh the property list

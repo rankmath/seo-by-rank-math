@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode - book
+ * Shortcode - Book
  *
  * @package    RankMath
  * @subpackage RankMath\Schema
