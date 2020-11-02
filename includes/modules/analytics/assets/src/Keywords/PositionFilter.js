@@ -38,6 +38,7 @@ const StatFilter = ( {
 				type="top3"
 				title={ __( 'Top 3 Positions', 'rank-math' ) }
 				data={ top3 }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'Your site appears in the best position for these keywords.',
 					'rank-math'
@@ -49,6 +50,7 @@ const StatFilter = ( {
 				type="top10"
 				title={ __( '4-10 Positions', 'rank-math' ) }
 				data={ top10 }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'Your site appears on the first page for these keywords, but not in the top 3 positions.',
 					'rank-math'
@@ -60,6 +62,7 @@ const StatFilter = ( {
 				type="top50"
 				title={ __( '10-50 Positions', 'rank-math' ) }
 				data={ top50 }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'Your site appears somewhere on pages 2-5 of the search results for these keywords.',
 					'rank-math'
@@ -71,6 +74,7 @@ const StatFilter = ( {
 				type="top100"
 				title={ __( '51-100 Positions', 'rank-math' ) }
 				data={ top100 }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'Your site appears in the search results for these keywords, but not on the first couple of pages.',
 					'rank-math'

@@ -66,7 +66,8 @@ class DataCollector {
 	/**
 	 * Collects the title, slug, permalink, content, featured image and excerpt of a post from Gutenberg.
 	 *
-	 * Function adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
+	 * @copyright Copyright (C) 2008-2019, Yoast BV
+	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 */
 	collectData() {
 		this._data = {

@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import moment from 'moment'
 import { get, times, isEmpty } from 'lodash'
 import { useHistory } from 'react-router-dom'
 import ContentLoader from 'react-content-loader'

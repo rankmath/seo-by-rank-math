@@ -18,6 +18,7 @@
 ##{$namespace}-pro-cta {
     position: relative;
     z-index: 100;
+
     margin-top: 2rem;
 
     &.center {
@@ -28,6 +29,7 @@
         left: 0;
 
         display: grid;
+
         margin-top: 0;
     }
 
@@ -87,30 +89,32 @@
                 margin-bottom: 1.5rem;
             }
 
-            // Widths.
-            &.width-100 {
-                width: 100%;
-                max-width: 100%;
-            }
-
-            &.width-80 {
-                max-width: 80%;
-            }
-
-            &.width-70 {
-                max-width: 70%;
-            }
-
-            &.width-60 {
-                max-width: 60%;
-
-                h3 {
-                    margin-bottom: 1rem;
+            @media screen and (min-width: 48rem) {
+                // Widths.
+                &.width-100 {
+                    width: 100%;
+                    max-width: 100%;
                 }
-            }
 
-            &.width-50 {
-                max-width: 50%;
+                &.width-80 {
+                    max-width: 80%;
+                }
+
+                &.width-70 {
+                    max-width: 70%;
+                }
+
+                &.width-60 {
+                    max-width: 60%;
+
+                    h3 {
+                        margin-bottom: 1rem;
+                    }
+                }
+
+                &.width-50 {
+                    max-width: 50%;
+                }
             }
 
             // Blue ticks.
@@ -162,10 +166,20 @@
             flex-flow: row wrap;
             justify-content: space-between;
 
-            svg {
+            svg,
+            .dashicon {
                 margin-right: 1.25rem;
 
                 fill: $color-3;
+            }
+
+            span.dashicon {
+                font-size: 50px;
+
+                width: 50px;
+                height: 50px;
+
+                color: $color-3;
             }
 
             p {
@@ -200,10 +214,11 @@
 
         li {
             font-size: 1rem;
-            color: $dark_gray;
+
             margin-bottom: 1rem;
             padding: 0;
 
+            color: $dark_gray;
             border: 0;
 
             &:before {

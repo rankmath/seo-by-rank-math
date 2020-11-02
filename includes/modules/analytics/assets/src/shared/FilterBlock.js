@@ -20,6 +20,7 @@ const FilterBlock = ( {
 	tooltip,
 	onClick,
 	selected,
+	tooltipClassName,
 } ) => {
 	const classes = classnames( 'score-filter-' + type, {
 		'is-active': selected[ type ],
@@ -37,7 +38,7 @@ const FilterBlock = ( {
 		>
 			<h4>
 				{ title }
-				<Tooltip>{ tooltip }</Tooltip>
+				<Tooltip className={ tooltipClassName }>{ tooltip }</Tooltip>
 			</h4>
 			<div className="filter-score text-large">{ score }</div>
 		</Button>

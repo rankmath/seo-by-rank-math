@@ -218,7 +218,7 @@ class CMB2 {
 	 */
 	public static function render_tab( $field_args, $field ) {
 		printf(
-			true === $field->prop( 'open' ) ? '<div id="%1$s" class="rank-math-tab ' . $field->prop( 'classes' ) . '">' : '</div><!-- /#%1$s -->',
+			true === $field->prop( 'open' ) ? '<div id="%1$s" class="rank-math-tab rank-math-options-panel-content ' . $field->prop( 'classes' ) . '">' : '</div><!-- /#%1$s -->',
 			$field->prop( 'id' )
 		);
 

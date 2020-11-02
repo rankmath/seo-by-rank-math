@@ -52,7 +52,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 
 	const graph = stats.graph.merged
 	const topLabels = {
-		ctr: __( 'CTR', 'rank-math' ),
+		ctr: __( 'Avg. CTR', 'rank-math' ),
 		clicks: __( 'Clicks', 'rank-math' ),
 		earnings: __( 'Adsense', 'rank-math' ),
 		impressions: __( 'Impressions', 'rank-math' ),

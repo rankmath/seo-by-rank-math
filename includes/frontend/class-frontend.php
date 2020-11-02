@@ -23,7 +23,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Frontend class.
  *
- * Some functionality inspired from Yoast (https://github.com/Yoast/wordpress-seo/)
+ * @copyright Copyright (C) 2008-2019, Yoast BV
+ * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
  */
 class Frontend {
 
@@ -258,7 +259,8 @@ class Frontend {
 	/**
 	 * Check if we can add the RSS footer and/or header to the RSS feed item.
 	 *
-	 * Forked from Yoast (https://github.com/Yoast/wordpress-seo/)
+	 * @copyright Copyright (C) 2008-2019, Yoast BV
+	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 *
 	 * @param string $content Feed item content.
 	 * @param string $context Feed item context, either 'excerpt' or 'full'.

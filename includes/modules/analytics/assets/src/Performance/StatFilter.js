@@ -42,6 +42,7 @@ const StatFilter = ( { stats, selected, setSelection } ) => {
 				type="impressions"
 				title={ __( 'Search Impressions', 'rank-math' ) }
 				data={ impressions }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'How many times your site showed up in the search results.',
 					'rank-math'
@@ -54,6 +55,7 @@ const StatFilter = ( { stats, selected, setSelection } ) => {
 				type="keywords"
 				title={ __( 'Total Keywords', 'rank-math' ) }
 				data={ keywords }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'Total number of keywords your site ranking below 100 position.',
 					'rank-math'
@@ -67,6 +69,7 @@ const StatFilter = ( { stats, selected, setSelection } ) => {
 				type="clicks"
 				title={ __( 'Search Clicks', 'rank-math' ) }
 				data={ clicks }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'How many times your site was clicked on in the search results.',
 					'rank-math'
@@ -77,7 +80,7 @@ const StatFilter = ( { stats, selected, setSelection } ) => {
 			<StatFilterBlock
 				className="stat-filter-color-5"
 				type="ctr"
-				title={ __( 'CTR', 'rank-math' ) }
+				title={ __( 'Avg. CTR', 'rank-math' ) }
 				data={ ctr }
 				tooltip={ __(
 					'Average click-through rate. Search clicks divided by search impressions.',

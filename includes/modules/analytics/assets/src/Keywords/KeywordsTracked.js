@@ -42,7 +42,7 @@ const KeywordsTracked = () => {
 		},
 		{
 			key: 'ctr',
-			label: __( 'CTR', 'rank-math' ),
+			label: __( 'Avg. CTR', 'rank-math' ),
 			cellClassName: 'rank-math-col-click',
 		},
 		{

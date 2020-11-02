@@ -24,6 +24,94 @@ defined( 'ABSPATH' ) || exit;
 class Summary {
 
 	/**
+	 * Get Widget.
+	 *
+	 * @return object
+	 */
+	public function get_widget() {
+		global $wpdb;
+
+		$cache_key = Stats::get()->get_cache_key( 'dashboard_stats_widget' );
+		$cache     = get_transient( $cache_key );
+
+		if ( false !== $cache ) {
+			return $cache;
+		}
+
+		$stats = DB::analytics()
+			->selectSum( 'impressions', 'impressions' )
+			->selectSum( 'clicks', 'clicks' )
+			->selectAvg( 'position', 'position' )
+			->whereBetween( 'created', [ Stats::get()->start_date, Stats::get()->end_date ] )
+			->where( 'clicks', '>', 0 )
+			->one();
+
+		$old_stats = DB::analytics()
+			->selectSum( 'impressions', 'impressions' )
+			->selectSum( 'clicks', 'clicks' )
+			->selectAvg( 'position', 'position' )
+			->whereBetween( 'created', [ Stats::get()->compare_start_date, Stats::get()->compare_end_date ] )
+			->where( 'clicks', '>', 0 )
+			->one();
+
+		$query = $wpdb->prepare(
+			"SELECT ROUND(AVG(keywords),0) as keywords
+			 FROM (
+			    SELECT count(DISTINCT(query)) AS keywords
+				FROM {$wpdb->prefix}rank_math_analytics_gsc
+				WHERE clicks > 0 AND created BETWEEN %s AND %s
+			    GROUP BY created
+			) as ks",
+			Stats::get()->start_date,
+			Stats::get()->end_date
+		);
+		$keywords = $wpdb->get_row( $query ); // phpcs:ignore
+
+		$query        = $wpdb->prepare(
+			"SELECT ROUND(AVG(keywords),0) as keywords
+			 FROM (
+				 SELECT count(DISTINCT(query)) AS keywords
+ 				FROM {$wpdb->prefix}rank_math_analytics_gsc
+ 				WHERE clicks > 0 AND created BETWEEN %s AND %s
+ 			    GROUP BY created
+			) as ks",
+			Stats::get()->compare_start_date,
+			Stats::get()->compare_end_date
+		);
+		$old_keywords = $wpdb->get_row( $query ); // phpcs:ignore
+
+		$stats->keywords = [
+			'total'      => (int) $keywords->keywords,
+			'previous'   => (int) $old_keywords->keywords,
+			'difference' => $keywords->keywords - $old_keywords->keywords,
+		];
+
+		$stats->clicks = [
+			'total'      => (int) $stats->clicks,
+			'previous'   => (int) $old_stats->clicks,
+			'difference' => $stats->clicks - $old_stats->clicks,
+		];
+
+		$stats->impressions = [
+			'total'      => (int) $stats->impressions,
+			'previous'   => (int) $old_stats->impressions,
+			'difference' => $stats->impressions - $old_stats->impressions,
+		];
+
+		$stats->position = [
+			'total'      => (float) \number_format( $stats->position, 2 ),
+			'previous'   => (float) \number_format( $old_stats->position, 2 ),
+			'difference' => (float) \number_format( $stats->position - $old_stats->position, 2 ),
+		];
+
+		$stats = apply_filters( 'rank_math/analytics/get_widget', $stats );
+
+		set_transient( $cache_key, $stats, DAY_IN_SECONDS * Stats::get()->days );
+
+		return $stats;
+	}
+
+	/**
 	 * Get Optimization stats.
 	 *
 	 * @return object
@@ -147,11 +235,23 @@ class Summary {
 			->selectCount( 'DISTINCT(page)', 'posts' )
 			->selectSum( 'impressions', 'impressions' )
 			->selectSum( 'clicks', 'clicks' )
+			->selectAvg( 'ctr', 'ctr' )
 			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
 			->where( 'clicks', '>', 0 )
 			->one();
 
 		$summary = apply_filters( 'rank_math/analytics/posts_summary', $summary );
+
+		$summary = wp_parse_args(
+			array_filter( (array) $summary ),
+			[
+				'ctr'         => 0,
+				'posts'       => 0,
+				'clicks'      => 0,
+				'pageviews'   => 0,
+				'impressions' => 0,
+			]
+		);
 
 		set_transient( $cache_key, $summary, DAY_IN_SECONDS );
 

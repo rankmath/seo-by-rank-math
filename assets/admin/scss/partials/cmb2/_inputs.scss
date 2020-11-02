@@ -10,7 +10,7 @@
 	textarea {
 		padding: 0.75em 0.6em;
 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-		border-color: $gray;
+		border-color: $dark-gray;
 		@include size(100%, 40px);
 
 		&:focus,

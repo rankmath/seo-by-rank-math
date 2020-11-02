@@ -206,6 +206,24 @@ msgstr ""
 msgid "Facebook profile URL"
 msgstr ""
 
+msgid "Rank Math Overview"
+msgstr ""
+
+msgid "Latest Blog Posts from Rank Math"
+msgstr ""
+
+msgid "Error in fetching."
+msgstr ""
+
+msgid "Blog"
+msgstr ""
+
+msgid "(opens in a new window)"
+msgstr ""
+
+msgid "Go Pro"
+msgstr ""
+
 msgid "The canonical URL you entered does not seem to be a valid URL. Please double check it in the SEO meta box &raquo; Advanced tab."
 msgstr ""
 
@@ -1883,7 +1901,13 @@ msgstr ""
 msgid "Import News Settings"
 msgstr ""
 
-msgid "Import News Settings from Yoast news"
+msgid "Import News Settings from Yoast News Add-on."
+msgstr ""
+
+msgid "Import Video Sitemap Settings"
+msgstr ""
+
+msgid "Import Video Sitemap Settings from Yoast Video Add-on."
 msgstr ""
 
 msgid "Unable to perform action this time."
@@ -2341,13 +2365,19 @@ msgstr ""
 msgid "Monitor broken pages that ruin user-experience and affect SEO. %s."
 msgstr ""
 
-msgid "404 Monitor Stats"
+msgid "View Report"
 msgstr ""
 
-msgid "404 Monitor Log Count"
+msgid "Log Count"
 msgstr ""
 
-msgid "404 URL Hits"
+msgid "Total number of 404 pages opened by the users."
+msgstr ""
+
+msgid "URL Hits"
+msgstr ""
+
+msgid "Total number visits received on all the 404 pages."
 msgstr ""
 
 msgid "Review 404 errors on your site"
@@ -2411,6 +2441,33 @@ msgid "Analytics cache cleared."
 msgstr ""
 
 msgid "Post re-index in progress."
+msgstr ""
+
+msgid "Last 30 Days"
+msgstr ""
+
+msgid "Search Traffic"
+msgstr ""
+
+msgid "This is the number of pageviews carried out by visitors from Google."
+msgstr ""
+
+msgid "Total Impressions"
+msgstr ""
+
+msgid "How many times your site showed up in the search results."
+msgstr ""
+
+msgid "Total Clicks"
+msgstr ""
+
+msgid "Total Keywords"
+msgstr ""
+
+msgid "Total number of keywords your site ranking below 100 position."
+msgstr ""
+
+msgid "Average Position"
 msgstr ""
 
 #. translators: delete counter
@@ -2683,13 +2740,16 @@ msgstr ""
 msgid "Easily create redirects without fiddling with tedious code. %s."
 msgstr ""
 
-msgid "Redirections Stats"
+msgid "Redirection Count"
 msgstr ""
 
-msgid "Redirections Count"
+msgid "Total number of Redirections created in the Rank Math."
 msgstr ""
 
-msgid "Redirections Hits"
+msgid "Redirection Hits"
+msgstr ""
+
+msgid "Total number of hits received by all the Redirections."
 msgstr ""
 
 msgid "No valid ID found."

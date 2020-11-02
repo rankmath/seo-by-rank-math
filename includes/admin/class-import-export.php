@@ -557,7 +557,7 @@ class Import_Export implements Runner {
 	 * @return bool
 	 */
 	private function is_action_allowed( $perform ) {
-		$allowed = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks', 'deactivate', 'locations', 'news' ];
+		$allowed = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks', 'deactivate', 'locations', 'news', 'video' ];
 		return $perform && in_array( $perform, $allowed, true );
 	}
 }

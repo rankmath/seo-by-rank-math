@@ -1,0 +1,237 @@
+// compileCompressed: ../css/$1.css
+
+/*!
+ * Plugin:	Rank Math
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	dashboard-widget.css
+ */
+
+// Common and Vendors
+@import '../../vendor/bourbon/bourbon';
+@import 'variables';
+@import 'mixins';
+
+%flex{
+	@include flex;
+}
+
+#screen-options-wrap {
+    .#{$namespace}-icon {
+        display: none;
+    }
+}
+
+#rank_math {
+
+    &_dashboard_widget {
+
+        @import '../scss/partials/common/tooltip';
+
+        .hndle {
+            display: inline;
+
+            .#{$namespace}-icon {
+                display: inline-block;
+                vertical-align: -5px;
+                height: 20px;
+                margin-right: 5px;
+            }
+        }
+
+        .text-large {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1;
+
+            margin-right: 5px;
+
+            color: $text;
+        }
+
+        .rank-math-item-difference {
+            color: #7f868d;
+        }
+
+        .up,
+        .down {
+            font-weight: 500;
+
+            &:before {
+                font-family: 'dashicons';
+                font-size: 18px;
+                font-weight: 900;
+
+                margin-right: 2px;
+
+                vertical-align: -3px;
+            }
+        }
+
+        .up {
+            color: $color-1;
+
+            &:before {
+                content: '\f142';
+            }
+        }
+
+        .down {
+            color: $color-3;
+
+            &:before {
+                content: '\f140';
+            }
+        }
+
+        h3 {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            @extend %flex;
+            justify-content: space-between;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+
+            a {
+                margin-top: 3px;
+                text-decoration: none;
+                line-height: 18px;
+
+                i {
+                    font-size: 24px;
+                    line-height: 18px;
+                    width: auto;
+                    height: 18px;
+                    color: $primary;
+                    padding: 0 3px;
+                    border-radius: 2px;
+                    transition: 0.25s all linear;
+                }
+
+                &:hover, &:focus {
+                    i {
+                        background: $primary;
+                        color: #fff;
+                    }
+                }
+            }
+
+            span {
+                float: right;
+                font-size: 0.825rem;
+                font-weight: normal;
+                opacity: 0.5;
+                margin: 2px auto 0 10px;
+            }
+        }
+
+        .#{$namespace} {
+            &-dashabord-block {
+                @extend %flex;
+
+                > div {
+                    flex: 0 0 50%;
+                    padding: 0.825rem 1rem;
+                    box-sizing: border-box;
+                    border: 1px solid $light-gray;
+
+                    &:first-of-type {
+                        border-radius: 6px 0 0 6px;
+                        border-width: 1px 0 1px 1px;
+                    }
+
+                    &:last-of-type {
+                        border-radius: 0 6px 6px 0;
+                    }
+
+                    h4 {
+                        font-size: 1rem;
+                        font-weight: 500;
+                        color: #5a5d70;
+                    }
+                }
+
+                &.items-4 {
+                    > div {
+                        &:first-of-type {
+                            border-radius: 6px 0 0 0;
+                            border-width: 1px 1px 0 1px;
+                        }
+
+                        &:nth-of-type(2) {
+                            border-radius: 0 6px 0 0;
+                            border-width: 1px 1px 0 0px;
+                        }
+
+                        &:nth-of-type(3) {
+                            border-radius: 0 0 0 6px;
+                        }
+
+                        &:last-of-type {
+                            border-radius: 0 0 6px 0;
+                            border-width: 1px 1px 1px 0;
+                        }
+                    }
+                }
+            }
+
+            &-blog {
+                &-title {
+                    margin: 2rem 0 1rem;
+                }
+
+                &-post {
+                    h4 {
+                        font-weight: 500;
+                        margin-bottom: 5px;
+                    }
+
+                    a {
+                        text-decoration: none;
+                        transition: 0.25s all linear;
+
+                        &:hover, &:focus {
+                            color: $primary;
+                            border-bottom: 1px dotted;
+                        }
+                    }
+
+                    p {
+                        margin: 0 0 0.825rem;
+                    }
+                }
+            }
+
+            &-widget {
+                &-footer {
+                    padding: 10px 12px;
+                    margin: 10px -12px -10px;
+                    border-top: 1px solid $light-gray;
+
+                    a { 
+                        text-decoration: none;
+                        padding: 0 10px;
+                        border-right: 1px solid $light-gray;
+
+                        &:first-child {
+                            padding-left: 0;
+                        }
+
+                        span {
+                            font-size: 17px;
+                            vertical-align: -4px;
+                        }
+
+                    }
+                }
+
+                &-go-pro {
+                    font-weight: 500;
+                    color: $color-1;
+                }
+            }
+        }
+    }
+}

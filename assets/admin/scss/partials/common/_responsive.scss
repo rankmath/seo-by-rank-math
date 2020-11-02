@@ -6,12 +6,6 @@ body .rank-math-wrap {
 		.page-title {
 			margin-right: 0;
 		}
-
-		.nav-tab {
-			margin-bottom: 10px;
-
-			border-bottom: 1px solid #ccc;
-		}
 	}
 
 	@media screen and ( max-width: 782px ) {
@@ -115,10 +109,6 @@ body .rank-math-wrap {
 		h1,
 		.page-title {
 			font-size: 30px;
-		}
-
-		h2.nav-tab-wrapper {
-			margin-bottom: 15px;
 		}
 
 		.cmb-group-text-only .cmb-field-list .cmb-field-list > .cmb-remove-field-row {

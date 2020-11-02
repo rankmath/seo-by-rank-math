@@ -113,6 +113,8 @@ class Keywords extends Posts {
 			->whereBetween( 'created', [ $this->compare_start_date, $this->compare_end_date ] )
 			->getVar();
 
+		$positions['ctr']           = empty( $positions['ctr'] ) ? 0 : $positions['ctr'];
+		$positions['ctrDifference'] = empty( $positions['ctrDifference'] ) ? 0 : $positions['ctrDifference'];
 		$positions['ctrDifference'] = $positions['ctr'] - $positions['ctrDifference'];
 
 		set_transient( $cache_key, $positions, DAY_IN_SECONDS );

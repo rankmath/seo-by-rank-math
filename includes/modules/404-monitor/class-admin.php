@@ -193,12 +193,26 @@ class Admin extends Base {
 	public function dashboard_widget() {
 		$data = DB::get_stats();
 		?>
-		<br />
-		<h3><?php esc_html_e( '404 Monitor Stats', 'rank-math' ); ?></h3>
-		<ul>
-			<li><span><?php esc_html_e( '404 Monitor Log Count', 'rank-math' ); ?></span><?php echo esc_html( Str::human_number( $data->total ) ); ?></li>
-			<li><span><?php esc_html_e( '404 URL Hits', 'rank-math' ); ?></span><?php echo esc_html( Str::human_number( $data->hits ) ); ?></li>
-		</ul>
+		<h3>
+			<?php esc_html_e( '404 Monitor', 'rank-math' ); ?>
+			<a href="<?php echo esc_url( Helper::get_admin_url( '404-monitor' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'rank-math' ); ?>"><i class="dashicons dashicons-ellipsis"></i></a>
+		</h3>
+		<div class="rank-math-dashabord-block">
+			<div>
+				<h4>
+					<?php esc_html_e( 'Log Count', 'rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of 404 pages opened by the users.', 'rank-math' ); ?></span></span>
+				</h4>
+				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->total ) ); ?></strong>
+			</div>
+			<div>
+				<h4>
+					<?php esc_html_e( 'URL Hits', 'rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number visits received on all the 404 pages.', 'rank-math' ); ?></span></span>
+				</h4>
+				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->hits ) ); ?></strong>
+			</div>
+		</div>
 		<?php
 	}
 

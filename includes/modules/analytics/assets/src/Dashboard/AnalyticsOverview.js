@@ -91,7 +91,7 @@ const AnalyticsOverview = ( { stats, history } ) => {
 				/>
 
 				<AnalyticItem
-					title={ __( 'CTR', 'rank-math' ) }
+					title={ __( 'Avg. CTR', 'rank-math' ) }
 					tooltip={ __(
 						'Average click-through rate. Search clicks divided by search impressions.',
 						'rank-math'

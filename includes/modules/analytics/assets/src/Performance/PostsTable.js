@@ -16,7 +16,7 @@ import { withSelect, dispatch } from '@wordpress/data'
  */
 import humanNumber from '@helpers/humanNumber'
 import TableCard from '@scShared/woocommerce/Table'
-import { processRows, getPageOffset, filterShownHeaders } from '../functions'
+import { isPro, processRows, getPageOffset, filterShownHeaders } from '../functions'
 
 const TABLE_PREF_KEY = 'performance'
 
@@ -53,7 +53,7 @@ const PostsTable = ( props ) => {
 			},
 			{
 				key: 'ctr',
-				label: __( 'CTR', 'rank-math' ),
+				label: __( 'Avg. CTR', 'rank-math' ),
 				cellClassName: 'rank-math-col-ctr',
 			},
 			{
@@ -126,7 +126,9 @@ export default withRouter(
 		return {
 			query,
 			history: props.history,
-			tableData: select( 'rank-math' ).getPostsRowsByObjects( paged, {} ),
+			tableData: isPro()
+				? select( 'rank-math' ).getPostsRows( paged, {} )
+				: select( 'rank-math' ).getPostsRowsByObjects( paged, {} ),
 			summary: select( 'rank-math' ).getPostsSummary(),
 			userPreference: select( 'rank-math' ).getUserColumnPreference(
 				TABLE_PREF_KEY

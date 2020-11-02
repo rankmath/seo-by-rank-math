@@ -76,6 +76,10 @@
                 }
             }
 
+            &__body {
+                position: relative;
+            }
+
             &__title-wrapper {
                 margin-right: 1rem;
 
@@ -149,6 +153,8 @@
         }
 
         .#{$namespace}-table {
+            overflow: hidden;
+
             &__header {
                 white-space: nowrap;
             }
@@ -169,6 +175,38 @@
                     max-width: 40px;
                 }
             }
+
+            &__table {
+                overflow-x: auto;
+
+                &::after,
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    width: 40px;
+                    height: 100%;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 0.3s;
+                    z-index: 1;
+                }
+
+                &::after {
+                    right: 0;
+                    background: linear-gradient(90deg, rgba($light-gray, 0), rgba($light-gray, 0.65));
+                }
+
+                &::before {
+                    left: 0;
+                    background: linear-gradient(90deg, rgba($light-gray, 0.65), rgba($light-gray, 0));
+                }
+
+                &.is-scrollable-right::after,
+                &.is-scrollable-left::before {
+                    opacity: 1;
+                }
+            }
         }
 
         button.#{$namespace}-ellipsis-menu {
@@ -180,6 +218,10 @@
                 &:hover,
                 &:focus {
                     fill: $primary;
+                }
+
+                span {
+                    margin-right: 0!important;
                 }
 
                 svg {
@@ -201,7 +243,7 @@
         }
 
         table {
-            width: 100%;
+            width: 1018px;
 
             border-collapse: collapse;
 
@@ -218,10 +260,10 @@
             }
 
             h4 {
-                font-size: .9375rem;
+                font-size: 1rem;
                 font-weight: 500;
 
-                max-width: 350px;
+                max-width: 300px;
                 margin: 0;
 
                 a {
@@ -229,10 +271,16 @@
 
                     color: inherit;
                 }
+
+                &:hover {
+                    span {
+                        border-bottom: 1px dotted;
+                    }
+                }
             }
 
             small {
-                font-size: 14px;
+                font-size: .9375rem;
                 font-weight: normal;
 
                 display: block;
@@ -335,13 +383,14 @@
                     }
                 }
 
-                svg {
+                svg, .dashicon {
                     margin-right: 3px;
 
                     vertical-align: -4px;
 
                     fill: #7f868d;
                     stroke: #fff;
+                    -webkit-text-stroke: 1px white;
                 }
             }
 
@@ -478,6 +527,10 @@
                             opacity: .5;
                         }
                     }
+
+                    &:last-child {
+                        border-right: 0;
+                    }
                 }
 
                 td {
@@ -501,7 +554,10 @@
         }
 
         .#{$namespace}-pagination {
-            padding: 2rem 1rem 1rem;
+            padding: 2rem 1rem 2rem;
+            background: #fff;
+            position: relative;
+            z-index: 1;
 
             align-items: center;
             @extend %flex;
@@ -580,16 +636,21 @@
         }
 
         .#{$namespace}-table__summary {
-            padding: 1rem;
+            padding: 2rem 1rem;
+            margin: 0;
+            background: #fff;
+            border-radius: 0 0 6px 6px;
 
             align-items: center;
             @extend %flex;
             justify-content: center;
+            position: relative;
+            z-index: 1;
 
             li {
                 display: inline-block;
 
-                margin: 0 1rem;
+                margin: 0 1rem 0.25rem;
 
                 span {
                     &:first-child {
@@ -609,9 +670,15 @@
             opacity: 0;
         }
 
-        tr:hover {
-            .delete {
-                opacity: 1;
+        tr {
+            &:hover {
+                .delete {
+                    opacity: 1;
+                }
+            }
+
+            a:hover {
+                border-bottom: 1px dotted;
             }
         }
     }

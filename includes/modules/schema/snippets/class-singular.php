@@ -106,7 +106,7 @@ class Singular implements Snippet {
 			return false;
 		}
 
-		$schema = in_array( $schema, [ 'BlogPosting', 'NewsArticle' ], true ) ? 'article' : $schema;
+		$schema = in_array( $schema, [ 'BlogPosting', 'NewsArticle', 'Article' ], true ) ? 'article' : $schema;
 		if (
 			'article' === $schema ||
 			( Conditional::is_woocommerce_active() && is_singular( 'product' ) ) ||

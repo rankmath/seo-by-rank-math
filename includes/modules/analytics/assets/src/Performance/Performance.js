@@ -45,7 +45,7 @@ const Performance = ( { stats } ) => {
 				setSelection={ setSelection }
 			/>
 			<PerformanceGraph stats={ stats } selected={ selected } />
-			<TopPosts showButton={ false } />
+			<TopPosts />
 			<PostsTable />
 		</Fragment>
 	)

@@ -323,6 +323,11 @@
 
         input[type='text'] {
             width: 100%;
+
+            &:diabled {
+                color: #444;
+                background: #eee;
+            }
         }
 
         textarea {

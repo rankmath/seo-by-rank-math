@@ -15,7 +15,7 @@ const getIcon = ( type ) => {
 	}
 
 	if ( 'external' === type ) {
-		return <Dashicon icon="external"  title={ __( 'External Links', 'rank-math' ) } />
+		return <Dashicon icon="external" title={ __( 'External Links', 'rank-math' ) } />
 	}
 
 	if ( 'incoming' === type ) {

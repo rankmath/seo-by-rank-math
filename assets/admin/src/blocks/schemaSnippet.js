@@ -1,10 +1,16 @@
 /**
+ * External dependencies
+ */
+import { startCase, forEach } from 'lodash'
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
 import { registerBlockType } from '@wordpress/blocks'
 import { InspectorControls } from '@wordpress/block-editor'
 import { ServerSideRender, TextControl } from '@wordpress/components'
+import { applyFilters } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -34,26 +40,54 @@ export default () => {
 		category: 'rank-math-blocks',
 		icon,
 		keywords,
-		attributes: {
-			id: { default: rankMath.objectID },
-		},
+		attributes: applyFilters(
+			'rank_math_block_schema_attributes',
+			{
+				post_id: { default: rankMath.objectID },
+			}
+		),
 		edit: ( props ) => {
 			const { setAttributes, attributes } = props
-			const postID = attributes.id ? attributes.id : rankMath.objectID
+			const controllers = []
+			forEach( attributes, ( attribute, slug ) => {
+				if ( 'post_id' === slug ) {
+					controllers.push(
+						<TextControl
+							key={ slug }
+							label={ __( startCase( slug ), 'rank-math' ) }
+							value={ attributes[ slug ] }
+							type="number"
+							min={ 1 }
+							step={ 1 }
+							onChange={ ( newID ) => {
+								const attrs = {}
+								attrs[ slug ] = newID ? newID : rankMath.objectID
+								setAttributes( attrs )
+							} }
+						/>
+					)
+					return
+				}
+
+				controllers.push(
+					<TextControl
+						key={ slug }
+						label={ __( startCase( slug ), 'rank-math' ) }
+						value={ attributes[ slug ] }
+						type="string"
+						onChange={ ( nextID ) => {
+							const attrs = {}
+							attrs[ slug ] = nextID
+							setAttributes( attrs )
+						} }
+					/>
+				)
+			} )
 
 			return (
 				<div>
 					<InspectorControls key={ 'inspector' }>
-						<TextControl
-							label={ __( 'Post ID', 'rank-math' ) }
-							value={ postID }
-							type="number"
-							min={ 1 }
-							step={ 1 }
-							onChange={ ( nextID ) => {
-								setAttributes( { id: nextID } )
-							} }
-						/>
+						{ controllers }
 					</InspectorControls>
 
 					<ServerSideRender

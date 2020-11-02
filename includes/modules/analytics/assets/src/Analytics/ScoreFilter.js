@@ -49,6 +49,7 @@ const ScoreFilter = ( { seoScores, params, history } ) => {
 				type="good"
 				title={ __( 'Good Score', 'rank-math' ) }
 				score={ good }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'SEO score between 80 and 100. These posts are well optimized and usually do not require further actions.',
 					'rank-math'
@@ -62,6 +63,7 @@ const ScoreFilter = ( { seoScores, params, history } ) => {
 				type="ok"
 				title={ __( 'Fair Score', 'rank-math' ) }
 				score={ ok }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'SEO score between 50 and 80. You may want to revisit these posts for further optimization.',
 					'rank-math'
@@ -75,6 +77,7 @@ const ScoreFilter = ( { seoScores, params, history } ) => {
 				type="bad"
 				title={ __( 'Poor Score', 'rank-math' ) }
 				score={ bad }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'SEO score below 50. These posts are not well optimized and require further optimization.',
 					'rank-math'
@@ -88,6 +91,7 @@ const ScoreFilter = ( { seoScores, params, history } ) => {
 				type="noData"
 				title={ __( 'No Data', 'rank-math' ) }
 				score={ noData }
+				tooltipClassName="bottom"
 				tooltip={ __(
 					'These posts have not been analyzed by Rank Math yet.',
 					'rank-math'

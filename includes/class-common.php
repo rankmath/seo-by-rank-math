@@ -121,12 +121,37 @@ class Common {
 			die();
 		}
 		$overlay_image = $choices[ $type ]['url'];
-		$image         = wp_get_attachment_image_src( $thumbnail_id, 'full' );
+		$image         = wp_get_attachment_image_src( $thumbnail_id, 'large' );
+		$position      = $this->do_filter( 'social/overlay_image_position', 'middle_center', $thumbnail_id, $type );
 
 		if ( ! empty( $image ) ) {
-			$this->create_overlay_image( $image[0], $overlay_image );
+			$this->create_overlay_image( $image[0], $overlay_image, $position );
 		}
 		die();
+	}
+
+	/**
+	 * Calculate margins based on position string.
+	 *
+	 * @param string $position Position
+	 * @return void
+	 */
+	private function get_position_margins( $position, $image, $stamp ) {
+		$margins = [
+			'middle_center' => [],
+		];
+
+		$margins['middle_center']['top']  = round( abs( imagesy( $image ) - imagesy( $stamp ) ) / 2 );
+		$margins['middle_center']['left'] = round( abs( imagesx( $image ) - imagesx( $stamp ) ) / 2 );
+
+		$default_margins = $margins['middle_center'];
+		$margins         = $this->do_filter( 'social/overlay_image_positions', $margins, $image, $stamp );
+
+		if ( ! isset( $margins[ $position ] ) ) {
+			return $default_margins;
+		}
+
+		return $margins[ $position ];
 	}
 
 	/**
@@ -252,36 +277,50 @@ class Common {
 	}
 
 	/**
-	 * Create Overlay Image.
+	 * Get correct imagecreatef based on image file.
 	 *
-	 * @param string $image_file    The permalink generated for this post by WordPress.
-	 * @param string $overlay_image The ID of the post.
+	 * @param string $image_file
+	 * @return void
 	 */
-	private function create_overlay_image( $image_file, $overlay_image ) {
+	private function get_imagecreatefrom_method( $image_file ) {
 		$image_format = pathinfo( $image_file, PATHINFO_EXTENSION );
 		if ( ! in_array( $image_format, [ 'jpg', 'jpeg', 'gif', 'png' ], true ) ) {
-			return;
+			return '';
 		}
 		if ( 'jpg' === $image_format ) {
 			$image_format = 'jpeg';
 		}
 
-		$imagecreatef = 'imagecreatefrom' . $image_format;
-		$stamp        = imagecreatefrompng( $overlay_image );
-		$image        = $imagecreatef( $image_file );
+		return 'imagecreatefrom' . $image_format;
+	}
 
-		if ( ! $image ) {
+	/**
+	 * Create Overlay Image.
+	 *
+	 * @param string $image_file    The permalink generated for this post by WordPress.
+	 * @param string $overlay_image The ID of the post.
+	 */
+	private function create_overlay_image( $image_file, $overlay_image, $position ) {
+		$imagecreatefrom         = $this->get_imagecreatefrom_method( $image_file );
+		$overlay_imagecreatefrom = $this->get_imagecreatefrom_method( $overlay_image );
+		if ( ! $imagecreatefrom || ! $overlay_imagecreatefrom ) {
+			return;
+		}
+
+		$stamp = $overlay_imagecreatefrom( $overlay_image );
+		$image = $imagecreatefrom( $image_file );
+
+		if ( ! $image || ! $stamp ) {
 			return;
 		}
 
 		// Set the margins for the stamp and get the height/width of the stamp image.
-		$img_width     = imagesx( $stamp );
-		$img_height    = imagesy( $stamp );
-		$margin_right  = round( abs( imagesx( $image ) - $img_width ) / 2 );
-		$margin_bottom = round( abs( imagesy( $image ) - $img_height ) / 2 );
+		$img_width   = imagesx( $stamp );
+		$img_height  = imagesy( $stamp );
 
+		$margins = $this->get_position_margins( $position, $image, $stamp );
 		// Copy the stamp image onto our photo using the margin offsets and the photo width to calculate positioning of the stamp.
-		imagecopy( $image, $stamp, $margin_right, $margin_bottom, 0, 0, $img_width, $img_height );
+		imagecopy( $image, $stamp, $margins['left'], $margins['top'], 0, 0, $img_width, $img_height );
 
 		// Output and free memory.
 		header( 'Content-type: image/png' );

@@ -38,6 +38,19 @@
                 box-shadow: none;
             }
 
+            &-nav {
+                display: flex;
+                overflow-x: auto;
+
+                white-space: nowrap;
+
+                flex-flow: row;
+
+                @media screen and ( min-width: 64rem ) {
+                    overflow-x: visible;
+                }
+            }
+
             &.is-active:after {
                 position: absolute;
                 z-index: 1;
@@ -83,7 +96,7 @@
                 &:before {
                     position: absolute;
                     top: 0;
-                    left: -180px;
+                    left: -20px;
 
                     overflow: hidden;
 
@@ -107,11 +120,16 @@
         .#{$namespace}-updated {
             font-size: 13px;
 
-            float: right;
+            display: inline-block;
 
             margin-top: 10px;
+            margin-left: 10px;
 
             opacity: .5;
+
+            @media screen and (min-width: 62rem) {
+                margin-left: auto;
+            }
         }
     }
 }

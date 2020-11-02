@@ -50,7 +50,7 @@ class Yoast extends Plugin_Importer {
 	 *
 	 * @var array
 	 */
-	protected $choices = [ 'settings', 'locations', 'news', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks' ];
+	protected $choices = [ 'settings', 'locations', 'news', 'video', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks' ];
 
 	/**
 	 * Table names to drop while cleaning.
@@ -479,6 +479,38 @@ class Yoast extends Plugin_Importer {
 	}
 
 	/**
+	 * Get all location IDs.
+	 *
+	 * @param bool $count If we need count only for pagination purposes.
+	 * @return int|array
+	 */
+	private function get_video_posts( $count = false ) {
+		global $wpdb;
+		$paged = $this->get_pagination_arg( 'page' );
+		$posts = get_posts(
+			[
+				'numberposts' => -1,
+				'post_type'   => 'any',
+				'post_status' => 'any',
+				'fields'      => 'ids',
+				'meta_query'  => [
+					'relation' => 'AND',
+					[
+						'key'     => '_yoast_wpseo_video_meta',
+						'compare' => 'EXISTS',
+					],
+					[
+						'key'     => '_yoast_wpseo_videositemap-disable',
+						'compare' => 'NOT EXISTS',
+					],
+				],
+			]
+		);
+
+		return $count ? count( $posts ) : $posts;
+	}
+
+	/**
 	 * Set post robots.
 	 *
 	 * @param int $post_id Post ID.
@@ -860,12 +892,69 @@ class Yoast extends Plugin_Importer {
 	}
 
 	/**
+	 * Import News Settings from Yoast News plugin.
+	 */
+	protected function video() {
+		$yoast_video = get_option( 'wpseo_video' );
+		if ( empty( $yoast_video ) ) {
+			return false;
+		}
+
+		Helper::update_modules( [ 'video-sitemap' => 'on' ] );
+
+		$this->get_settings();
+		$this->sitemap['hide_video_sitemap']       = ! empty( $yoast_video['video_cloak_sitemap'] ) ? 'on' : '';
+		$this->sitemap['video_sitemap_post_type']  = ! empty( $yoast_news['videositemap_posttypes'] ) ? array_keys( $yoast_news['videositemap_posttypes'] ) : [];
+		$this->sitemap['video_sitemap_taxonomies'] = ! empty( $yoast_news['videositemap_taxonomies'] ) ? array_keys( $yoast_news['videositemap_taxonomies'] ) : [];
+		$this->update_settings();
+
+		$this->set_pagination( $this->get_video_posts( true ) );
+		$videos = $this->get_video_posts();
+		$schema = [
+			'@type'    => 'VideoObject',
+			'metadata' => [
+				'type'      => 'template',
+				'isPrimary' => false,
+				'title'     => 'Video',
+			],
+		];
+
+		$hash = [
+			'thumbnailUrl'     => '_yoast_wpseo_videositemap-thumbnail',
+			'isFamilyFriendly' => '_yoast_wpseo_videositemap-not-family-friendly',
+			'duration'         => '_yoast_wpseo_videositemap-duration',
+		];
+		$meta = [
+			'category' => '_yoast_wpseo_videositemap-category',
+			'tags'     => '_yoast_wpseo_videositemap-tags',
+		];
+		foreach ( $videos as $video ) {
+			$yoast_video          = get_post_meta( $video, '_yoast_wpseo_video_meta', true );
+			$schema['contentUrl'] = ! empty( $yoast_video['content_loc'] ) ? $yoast_video['content_loc'] : '';
+			$schema['embedUrl']   = ! empty( $yoast_video['player_loc'] ) ? $yoast_video['player_loc'] : '';
+
+			foreach ( $hash as $key => $yoast_key ) {
+				$schema[ $key ] = get_post_meta( $video, $yoast_key, true );
+			}
+
+			foreach ( $meta as $key => $yoast_key ) {
+				$schema['metadata'][ $key ] = get_post_meta( $video, $yoast_key, true );
+			}
+
+			update_post_meta( $video, 'rank_math_schema_VideoObject', $schema );
+		}
+
+		return $this->get_pagination_arg();
+	}
+
+	/**
 	 * Deactivate plugin action.
 	 */
 	protected function deactivate() {
 		if ( is_plugin_active( $this->get_plugin_file() ) ) {
 			deactivate_plugins( $this->get_plugin_file() );
 			deactivate_plugins( 'wpseo-news/wpseo-news.php' );
+			deactivate_plugins( 'wpseo-video/video-seo.php' );
 			deactivate_plugins( 'wpseo-local/local-seo.php' );
 		}
 

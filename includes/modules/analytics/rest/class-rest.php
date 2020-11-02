@@ -70,16 +70,6 @@ class Rest extends WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
-			'/postsRows',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ Stats::get(), 'get_posts_rows_by_pageviews' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
 			'/postsRowsByObjects',
 			[
 				'methods'             => WP_REST_Server::READABLE,

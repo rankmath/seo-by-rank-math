@@ -1367,8 +1367,7 @@ export default {
                     "isRequired": false,
                     "isRecommended": false,
                     "field": {
-                        "type": "select",
-                        "multiple": true,
+                        "type": "checkbox",
                         "label": __( "Open Days", "rank-math" ),
                         "options": {
                             "monday": "Monday",
@@ -2932,6 +2931,22 @@ export default {
                     }
                 }
             },
+            "reviewLocationShortcode": {
+                "map": {
+                    "isArray": false,
+                    "isGroup": false,
+                    "isRequired": false,
+                    "isRecommended": false,
+                    "save": "metadata",
+                    "field": {
+                        "type": "text",
+                        "label": __( "Shortcode", "rank-math" ),
+                        "help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+                        "disabled": "disabled"
+                    },
+                    "value": "[rank_math_rich_snippet]"
+                }
+            },
             "baseSalary": {
                 "map": {
                     "isArray": false,
@@ -3354,6 +3369,22 @@ export default {
                     }
                 }
             },
+            "reviewLocationShortcode": {
+                "map": {
+                    "isArray": false,
+                    "isGroup": false,
+                    "isRequired": false,
+                    "isRecommended": false,
+                    "save": "metadata",
+                    "field": {
+                        "type": "text",
+                        "label": __( "Shortcode", "rank-math" ),
+                        "help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+                        "disabled": "disabled"
+                    },
+                    "value": "[rank_math_rich_snippet]"
+                }
+            },
             "url": {
                 "map": {
                     "isArray": false,
@@ -3450,6 +3481,22 @@ export default {
                         "label": __( "Description", "rank-math" ),
                         "placeholder": "%seo_description%"
                     }
+                }
+            },
+            "reviewLocationShortcode": {
+                "map": {
+                    "isArray": false,
+                    "isGroup": false,
+                    "isRequired": false,
+                    "isRecommended": false,
+                    "save": "metadata",
+                    "field": {
+                        "type": "text",
+                        "label": __( "Shortcode", "rank-math" ),
+                        "help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+                        "disabled": "disabled"
+                    },
+                    "value": "[rank_math_rich_snippet]"
                 }
             },
             "email": {
@@ -4658,6 +4705,22 @@ export default {
                     }
                 }
             },
+            "reviewLocationShortcode": {
+                "map": {
+                    "isArray": false,
+                    "isGroup": false,
+                    "isRequired": false,
+                    "isRecommended": false,
+                    "save": "metadata",
+                    "field": {
+                        "type": "text",
+                        "label": __( "Shortcode", "rank-math" ),
+                        "help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+                        "disabled": "disabled"
+                    },
+                    "value": "[rank_math_rich_snippet]"
+                }
+            },
             "telephone": {
                 "map": {
                     "isArray": false,
@@ -4829,8 +4892,7 @@ export default {
                         "isRequired": false,
                         "isRecommended": false,
                         "field": {
-                            "type": "select",
-                            "multiple": true,
+                            "type": "checkbox",
                             "label": __( "Open Days", "rank-math" ),
                             "options": {
                                 "monday": "Monday",
@@ -4965,6 +5027,22 @@ export default {
                         "label": __( "Description", "rank-math" ),
                         "placeholder": "%seo_description%"
                     }
+                }
+            },
+            "reviewLocationShortcode": {
+                "map": {
+                    "isArray": false,
+                    "isGroup": false,
+                    "isRequired": false,
+                    "isRecommended": false,
+                    "save": "metadata",
+                    "field": {
+                        "type": "text",
+                        "label": __( "Shortcode", "rank-math" ),
+                        "help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+                        "disabled": "disabled"
+                    },
+                    "value": "[rank_math_rich_snippet]"
                 }
             },
             "serviceType": {
@@ -5607,6 +5685,22 @@ export default {
                         "label": __( "Description", "rank-math" ),
                         "placeholder": "%seo_description%"
                     }
+                }
+            },
+            "reviewLocationShortcode": {
+                "map": {
+                    "isArray": false,
+                    "isGroup": false,
+                    "isRequired": false,
+                    "isRecommended": false,
+                    "save": "metadata",
+                    "field": {
+                        "type": "text",
+                        "label": __( "Shortcode", "rank-math" ),
+                        "help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+                        "disabled": "disabled"
+                    },
+                    "value": "[rank_math_rich_snippet]"
                 }
             },
             "uploadDate": {

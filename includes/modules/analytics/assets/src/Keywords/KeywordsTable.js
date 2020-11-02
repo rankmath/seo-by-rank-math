@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isUndefined, isEmpty, map, get } from 'lodash'
+import { isUndefined, map, get } from 'lodash'
 import { withRouter } from 'react-router-dom'
 
 /**
@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom'
 import { __ } from '@wordpress/i18n'
 import { Fragment } from '@wordpress/element'
 import { applyFilters } from '@wordpress/hooks'
+import { withFilters } from '@wordpress/components'
 import { dispatch, withSelect } from '@wordpress/data'
 
 /**
@@ -54,7 +55,7 @@ const KeywordsTable = ( props ) => {
 			},
 			{
 				key: 'ctr',
-				label: __( 'CTR', 'rank-math' ),
+				label: __( 'Avg. CTR', 'rank-math' ),
 				cellClassName: 'rank-math-col-ctr',
 			},
 			{
@@ -129,18 +130,20 @@ const KeywordsTable = ( props ) => {
 }
 
 export default withRouter(
-	withSelect( ( select, props ) => {
-		const query = props.match.params
-		const { paged = 1 } = query
+	withFilters( 'rankMath.analytics.keywordsTable' )(
+		withSelect( ( select, props ) => {
+			const query = props.match.params
+			const { paged = 1 } = query
 
-		return {
-			query,
-			history: props.history,
-			rows: select( 'rank-math' ).getKeywordsRows( paged ),
-			summary: select( 'rank-math' ).getKeywordsSummary(),
-			userPreference: select( 'rank-math' ).getUserColumnPreference(
-				TABLE_PREF_KEY
-			),
-		}
-	} )( KeywordsTable )
+			return {
+				query,
+				history: props.history,
+				rows: select( 'rank-math' ).getKeywordsRows( paged ),
+				summary: select( 'rank-math' ).getKeywordsSummary(),
+				userPreference: select( 'rank-math' ).getUserColumnPreference(
+					TABLE_PREF_KEY
+				),
+			}
+		} )( KeywordsTable )
+	)
 )

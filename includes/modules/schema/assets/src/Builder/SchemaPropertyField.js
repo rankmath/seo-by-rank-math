@@ -159,14 +159,12 @@ const SchemaPropertyField = ( {
 						)
 					} ) }
 				</div>
-				<p className="components-base-control__help"> { rest.label } </p>
 			</div>
 		)
 	}
 
 	return (
-		<TextareaControl
-			rows={ 1 }
+		<TextControl
 			value={ value }
 			onChange={ onChange }
 			{ ...rest }

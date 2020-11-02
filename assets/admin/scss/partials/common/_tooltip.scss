@@ -19,12 +19,12 @@
 		font-size: 11px;
 		font-weight: 400;
 		line-height: 1.5;
+		white-space: normal;
 
 		width: 200px;
 		padding: 8px 10px;
 		transition: all .3s ease-in-out;
-		-webkit-transform: translate3d(-50%, 0, 0);
-				transform: translate3d(-50%, 0, 0);
+		transform: translate3d(-50%, 0, 0);
 		text-align: center;
 		pointer-events: none;
 
@@ -37,11 +37,23 @@
 
 		&:after {
 			content: '';
-			-webkit-transform: translate3d(-50%, 0, 0);
-					transform: translate3d(-50%, 0, 0);
+			transform: translate3d(-50%, 0, 0);
 
 			@include position(absolute, 100% null null 50%);
 			@include triangle(down, 14px, 8px, #555d66);
+		}
+	}
+
+	&.bottom {
+		span {
+			top: 130%;
+			bottom: auto;
+			display: table;
+
+			&:after {
+				@include position(absolute, auto null 100% 50%);
+				transform: rotate(180deg) translate3d(50%, 0, 0);
+			}
 		}
 	}
 

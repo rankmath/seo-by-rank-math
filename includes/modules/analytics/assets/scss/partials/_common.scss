@@ -1,4 +1,12 @@
 // main: ../stats.scss
+html {
+    font-size: 14px;
+}
+
+.#{$namespace}-wrap.analytics {
+    font-size: 1rem;
+}
+
 ##{$namespace}-analytics {
     h2,
     h3,
@@ -120,14 +128,20 @@
 
             margin: 0 1rem 1rem 0;
 
-            flex: 1;
+            flex: 0 0 100%;
+
+            @media screen and (min-width: 48rem) {
+                flex: 1;
+            }
         }
 
         .#{$namespace} {
             &-suggestions-wrapper {
                 position: relative;
 
-                margin-left: auto;
+                @media screen and (min-width: 48rem) {
+                    margin-left: auto;
+                }
             }
 
             &-suggestions {
@@ -196,13 +210,24 @@
             }
 
             &-dropdown {
-                margin-left: 1.5rem;
+                width: auto;
+                margin-left: .5rem;
 
                 label {
-                    margin-right: 5px;
+                    display: none!important;
                 }
 
-                select {
+                @media screen and (min-width: 48rem) {
+                    margin-left: 1.5rem;
+
+                    label {
+                        display: inline;
+
+                        margin-right: 5px;
+                    }
+                }
+
+                select.components-select-control__input {
                     height: 34px;
 
                     color: $dark_gray;
@@ -218,19 +243,26 @@
         justify-content: space-between;
 
         > * {
-            flex: 0 0 48%;
+            flex: 0 0 100%;
         }
 
-        &.has-3-col > * {
-            flex: 0 0 32%;
-        }
+        // Responsive.
+        @media screen and (min-width: 48rem) {
+            > * {
+                flex: 0 0 48%;
+            }
 
-        &.has-4-col > * {
-            flex: 0 0 23%;
-        }
+            &.has-3-col > * {
+                flex: 0 0 32%;
+            }
 
-        &.has-5-col > * {
-            flex: 0 0 18%;
+            &.has-4-col > * {
+                flex: 0 0 23%;
+            }
+
+            &.has-5-col > * {
+                flex: 0 0 18%;
+            }
         }
     }
 
@@ -245,5 +277,18 @@
         margin-bottom: 0;
 
         opacity: .6;
+    }
+}
+
+// Responsive.
+@media screen and (min-width: 62rem) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    html {
+        font-size: 15px;
     }
 }

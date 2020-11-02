@@ -62,10 +62,11 @@ class Data_Fetcher {
 	public function start_process( $days = 90 ) {
 		global $wpdb;
 
-		$count = $this->add_data_pull( $days + 2 );
+		$count    = $this->add_data_pull( $days + 2 );
+		$time_gap = $this->do_filter( 'analytics/schedule_gap', 30 );
 
 		// Clear cache.
-		as_schedule_single_action( time() + ( 60 * ( ( $count + 1 ) / 2 ) ), 'rank_math/analytics/clear_cache' );
+		as_schedule_single_action( time() + ( $time_gap * ( $count + 1 ) ), 'rank_math/analytics/clear_cache' );
 
 		// First pull notice.
 		$first = get_option( 'rank_math_analytics_first_fetch' );

@@ -19,7 +19,7 @@ import { __ } from '@wordpress/i18n'
 import { select } from '@wordpress/data'
 import { Fragment } from '@wordpress/element'
 import { Button } from '@wordpress/components'
-import { applyFilters } from '@wordpress/hooks'
+import { applyFilters, doAction } from '@wordpress/hooks'
 import { decodeEntities } from '@wordpress/html-entities'
 
 /**
@@ -31,6 +31,7 @@ import ScoreProgress from '@scShared/ScoreProgress'
 import SchemaListing from '@scShared/SchemaListing'
 import ActionListing from '@scShared/ActionListing'
 import KeywordButton from '@scShared/KeywordButton'
+import KeywordTitle from '@scShared/KeywordTitle'
 
 export function isPro() {
 	return applyFilters( 'rank_math_is_pro', false )
@@ -104,7 +105,7 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 					<Button
 						className="button button-secondary button-small add-keyword delete"
 						title={ __( 'Delete from Keyword Manager', 'rank-math' ) }
-						onClick={ () => {} }
+						onClick={ () => doAction( 'rank_math_remove_keyword', row.query ) }
 					>
 						<i className="rm-icon rm-icon-trash" />
 					</Button>
@@ -114,13 +115,13 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 				display = (
 					<h4>
 						<Link to={ '/single/' + get( row, 'object_id', '' ) }>
-							{ decodeEntities( value ) }
+							<span>{ decodeEntities( value ) }</span>
 							<small>{ row.page }</small>
 						</Link>
 					</h4>
 				)
 			} else if ( 'query' === column ) {
-				display = <h4>{ decodeEntities( value ) }</h4>
+				display = <KeywordTitle query={ value } />
 			} else if ( 'seo_score' === column ) {
 				display = <ScoreProgress score={ value } />
 			} else if ( 'schemas_in_use' === column ) {
@@ -163,10 +164,6 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 												)
 											).format( 'D MMM, YYYY' )
 										}
-										allowEscapeViewBox={ {
-											x: true,
-											y: true,
-										} }
 									/>
 									<defs>
 										<linearGradient

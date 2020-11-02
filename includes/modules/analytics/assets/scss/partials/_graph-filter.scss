@@ -5,6 +5,7 @@
         z-index: 1;
 
         display: grid;
+        overflow-x: auto;
 
         margin-bottom: 1.5rem;
 
@@ -14,12 +15,17 @@
 
         grid-template-columns: repeat(4, 1fr);
 
+        @media screen and ( min-width: 64rem ) {
+            overflow-x: visible;
+        }
+
         &.has-3-col {
             grid-template-columns: repeat(3, 1fr);
         }
 
         &.rank-math-stat-filters {
             margin-bottom: 0;
+            white-space: nowrap;
 
             + .graph {
                 height: 300px;
@@ -34,6 +40,7 @@
 
         button.components-button {
             position: relative;
+            min-width: 200px;
 
             margin: 0;
             padding: 1.125rem;

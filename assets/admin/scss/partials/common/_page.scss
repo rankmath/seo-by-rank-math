@@ -1,274 +1,330 @@
 // main: ../../common.scss
 
 .#{$namespace}-page {
-	background: #e1e1e1;
-	overflow-x: hidden;
+    overflow-x: hidden;
 
-	div[class*="notice"]:not(.rank-math-notice):not(.settings-error):not(.cmb-type-notice), .update-nag {
-		display: none;
-	}
+    background: #e1e1e1;
 
-	.#{$namespace}-breadcrumbs {
-		color: #7f868d;
-		font-size: 13px;
-		font-weight: 500;
-		line-height: 1;
-		text-transform: uppercase;
+    div[class*='notice']:not(.rank-math-notice):not(.settings-error):not(.cmb-type-notice),
+    .update-nag {
+        display: none;
+    }
 
-		&-wrap {
-			width: $container_width;
-			max-width: 100%;
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: space-between;
-		}
+    .#{$namespace}-breadcrumbs {
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1;
 
-		.active {
-			color: $text;
-		}
+        text-transform: uppercase;
 
-		.divider {
-			margin: 0 5px;
-		}
-	}
+        color: #7f868d;
 
-	.#{$namespace}-mode-selector {
-		font-size: 14px;
-		margin: 5px 10px 0 0;
+        &-wrap {
+            display: flex;
 
-		a {
-			display: inline-block;
-			color: $dark_gray;
-			padding: 5px 0 1px;
-			text-decoration: none;
+            width: $container_width;
+            max-width: 100%;
 
-			&:hover, &.active {
-				color: $text;
-				border-bottom: 1px solid;
-			}
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
 
-			&:first-child {
-				margin-right: 7px;
-			}
-		}
-	}
+        .active {
+            color: $text;
+        }
 
-	h2.nav-tab-wrapper {
-		padding-top: 0;
-		border: 0;
-		width: 894px;
-	}
+        .divider {
+            margin: 0 5px;
+        }
+    }
 
-	.rank-math-tools-wrap h2.nav-tab-wrapper {
-		width: $container_width;
-	}
+    .#{$namespace}-mode-selector {
+        font-size: 14px;
 
-	.nav-tab {
-		font-size: 15px;
-		font-weight: 500;
-		line-height: 39px;
-		position: relative;
-		margin-left: 0;
-		padding: 0 15px;
-		color: #5b646c;
-		border: 1px solid $gray;
-		border-right: 0;
-		border-bottom: 0;
-		background: #f0f2f4;
+        margin: 5px 10px 0 0;
 
-		&:hover, &:focus, &.nav-tab-active {
-			color: #1a1e22;
-			background: #f8f9fa;
-			box-shadow: none;
-			outline: none;
-		}
+        a {
+            display: inline-block;
 
-		&.nav-tab-active:after {
-			position: absolute;
-			bottom: -1px;
-			left: 0;
-			width: 100%;
-			height: 1px;
-			content: '';
-			background: #fafafb;
-			z-index: 1;
-		}
+            padding: 5px 0 1px;
 
-		&:first-child {
-			border-radius: 4px 0 0 0;
-		}
+            text-decoration: none;
 
-		&:last-of-type {
-			border-right: 1px solid $gray;
-			border-radius: 0 4px 0 0;
-		}
-	}
+            color: $dark_gray;
 
-	#wpwrap {
-		background: #f0f2f4;
-	}
+            &:hover,
+            &.active {
+                color: $text;
+                border-bottom: 1px solid;
+            }
 
-	.dashboard-wrapper {
-		background: #f8f9fa;
-		padding: 30px 0;
-		border-radius: 0 6px 6px 6px;
-		margin-bottom: 0.5rem;
-		position: relative;
+            &:first-child {
+                margin-right: 7px;
+            }
+        }
+    }
 
-		&:before {
-			content: "";
-			position: absolute;
-			left: -180px;
-			top: 0;
-			background: #f8f9fa;
-			border-top: 1px solid $gray;
-			border-bottom: 1px solid $gray;
-			width: 200vw;
-			height: 100%;
-			padding-bottom: 50px;
-			overflow: hidden;
-		}
+    div.#{$namespace}-tab-nav {
+        position: relative;
+        z-index: 1;
 
-		> div {
-			position: relative;
+        display: flex;
+        overflow-x: auto;
 
-			> h2 {
-				color: $text;
-				margin-top: 0;
-			}
+        margin-bottom: -1px;
 
-			> .description {
-				font-size: 1rem;
-				margin-bottom: 1.5rem;
-			}
-		}
+        white-space: nowrap;
 
-		@at-root {
-			.rank-math-page.folded .dashboard-wrapper:before {
-				left: -56px;
-			}
+        flex-flow: row;
 
-			@media screen and (max-width: 782px) {
-				.rank-math-page.auto-fold .dashboard-wrapper:before {
-					left: 0;
-				}
-			}
-		}
-	}
+        @media screen and ( min-width: 64rem ) {
+            overflow-x: visible;
+        }
+    }
 
-	#wpfooter {
-		background: #fff;
-		border-top: 1px solid $gray;
-		padding: 15px 20px;
-	}
+    .#{$namespace}-tools-wrap div.#{$namespace}-tab-nav {
+        width: $container_width;
+    }
+
+    .#{$namespace}-tab:not(.rank-math-options-panel-content) {
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 39px;
+
+        position: relative;
+
+        margin: 0;
+        padding: 0 15px;
+
+        text-decoration: none;
+
+        color: #5b646c;
+        border: 1px solid $gray;
+        border-right: 0;
+        border-bottom: 0;
+        border-bottom: 1px solid $gray;
+        background: #f0f2f4;
+
+        &:hover,
+        &:focus,
+        &.is-active {
+            color: #1a1e22;
+            outline: none;
+            background: #f8f9fa;
+            box-shadow: none;
+        }
+
+        &.is-active {
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        &:first-child {
+            border-radius: 4px 0 0 0;
+        }
+
+        &:last-of-type {
+            border-right: 1px solid $gray;
+            border-radius: 0 4px 0 0;
+        }
+    }
+
+    #wpwrap {
+        overflow: hidden;
+
+        background: #f0f2f4;
+    }
+
+    .dashboard-wrapper {
+        position: relative;
+
+        margin-bottom: .5rem;
+        padding: 30px 0;
+
+        border-radius: 0 6px 6px 6px;
+        background: #f8f9fa;
+
+        &:before {
+            position: absolute;
+            top: 0;
+            left: -180px;
+
+            overflow: hidden;
+
+            width: 200vw;
+            height: 100%;
+            padding-bottom: 50px;
+
+            content: '';
+
+            border-top: 1px solid $gray;
+            border-bottom: 1px solid $gray;
+            background: #f8f9fa;
+        }
+
+        > div {
+            position: relative;
+
+            > h2 {
+                margin-top: 0;
+
+                color: $text;
+            }
+
+            > .description {
+                font-size: 1rem;
+
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @at-root {
+            .rank-math-page.folded .dashboard-wrapper:before {
+                left: -56px;
+            }
+        }
+    }
+
+    #wpfooter {
+        padding: 15px 20px;
+
+        border-top: 1px solid $gray;
+        background: #fff;
+    }
 }
 
 .#{$namespace}-wrap {
-	color: $text;
-	font-size: 15px;
-	position: relative;
-	box-sizing: border-box;
-	margin: 20px 40px 0 0;
+    font-size: 15px;
 
-	.container {
-		width: $container_width;
-		max-width: 100%;
-	}
+    position: relative;
 
-	p, .description {
-		font-size: 14px;
-		font-style: normal;
-		line-height: 1.5;
-	}
+    box-sizing: border-box;
+    margin: 20px 10px 0 0;
 
-	h1, h2, h3, h4, h5, h6 {
-		color: $text;
-	}
+    color: $text;
 
-	.page-title, h1 {
-		font-size: 2.8em;
-		font-weight: 400;
-		line-height: 1.2em;
-		margin: 0.2em 200px 0 0;
-		padding: 0;
-		color: $text;
-	}
+    @media screen and (min-width: 48rem) {
+        margin: 20px 40px 0 0;
+    }
 
-	> h2 {
-		font-size: 2.7em;
-		font-weight: 300;
-		line-height: 1.3;
-		margin: 40px 0 0.6em;
-		text-align: center;
-	}
+    .container {
+        width: $container_width;
+        max-width: 100%;
+    }
 
-	.page-title {
-		font-size: 2em;
-		font-weight: 400;
-		line-height: 1;
-		margin: 35px 0 20px;
-	}
+    p,
+    .description {
+        font-size: 14px;
+        font-style: normal;
+        line-height: 1.5;
+    }
 
-	h3 {
-		font-size: 1.375rem;
-		line-height: 1.5;
-		margin: 1.25em 0 0.6em;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: $text;
+    }
 
-		&.health-check-accordion-heading {
-			background: #f8f9fa;
-			font-size: inherit;
-			line-height: inherit;
-			margin: 0;
+    .page-title,
+    h1 {
+        font-size: 2.8em;
+        font-weight: 400;
+        line-height: 1.2em;
 
-			> button {
-				background: transparent;
-			}
-		}
-	}
+        margin: .2em 200px 0 0;
+        padding: 0;
 
-	ol li p {
-		font-size: 14px;
-		font-weight: 400;
-	}
+        color: $text;
+    }
 
-	.#{$namespace}-text {
-		font-size: 19px;
-		font-weight: 400;
-		line-height: 1.6em;
-		min-height: 40px;
-		margin: 1.4em 200px 1em 0;
-		color: #555d66;
-	}
-	@media only screen and (max-width: 500px) {
-		.#{$namespace}-text,
-		h1 {
-			margin-right: 0;
-		}
+    > h2 {
+        font-size: 2.7em;
+        font-weight: 300;
+        line-height: 1.3;
 
-		.#{$namespace}-text {
-			margin-bottom: 0.25em;
-		}
-	}
+        margin: 40px 0 .6em;
+
+        text-align: center;
+    }
+
+    .page-title {
+        font-size: 2em;
+        font-weight: 400;
+        line-height: 1;
+
+        margin: 35px 0 20px;
+    }
+
+    h3 {
+        font-size: 1.375rem;
+        line-height: 1.5;
+
+        margin: 1.25em 0 .6em;
+
+        &.health-check-accordion-heading {
+            font-size: inherit;
+            line-height: inherit;
+
+            margin: 0;
+
+            background: #f8f9fa;
+
+            > button {
+                background: transparent;
+            }
+        }
+    }
+
+    ol li p {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .#{$namespace}-text {
+        font-size: 19px;
+        font-weight: 400;
+        line-height: 1.6em;
+
+        min-height: 40px;
+        margin: 1.4em 200px 1em 0;
+
+        color: #555d66;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .#{$namespace}-text,
+        h1 {
+            margin-right: 0;
+        }
+
+        .#{$namespace}-text {
+            margin-bottom: .25em;
+        }
+    }
 }
 
 // Structure
 .two-col {
-	display: flex;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	flex-wrap: wrap;
-	justify-content: space-between;
+    display: flex;
 
-	.col {
-		width: 495px;
-		max-width: 48.53%;
-		box-sizing: border-box;
-	}
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .col {
+        max-width: 100%;
+
+        flex: 0 0 100%;
+    }
 }
 
-@media only screen and (max-width: 500px) {
-	.two-col .col {
-		min-width: 100%;
-		flex: 0 0 100%;
-	}
+@media screen and (min-width: 48rem) {
+    .two-col .col {
+        box-sizing: border-box;
+        width: 495px;
+        max-width: 48.53%;
+    }
 }

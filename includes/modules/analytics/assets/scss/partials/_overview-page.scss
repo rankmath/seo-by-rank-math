@@ -26,7 +26,11 @@
 
                 border-color: $light-gray;
 
-                flex: 0 0 49.5%;
+                flex: 0 0 100%;
+
+                @media screen and (min-width: 48rem) {
+                    flex: 0 0 49.5%;
+                }
             }
         }
 
@@ -56,9 +60,12 @@
 
                 .#{$namespace}-seo-score-graph {
                     display: block;
+                    flex: 0 0 213px;
+                    width: 213px;
+                    height: 213px;
 
                     box-sizing: border-box;
-                    margin-top: -1rem;
+                    margin: -1rem 1rem 0 0;
 
                     border: 1rem solid #fff;
                     border-radius: 50%;
@@ -69,75 +76,78 @@
 
                         opacity: .7;
                     }
+
+                    @media screen and (min-width: 48rem) {
+                        margin: -1rem 1rem 0 0;
+                    }
                 }
 
-                .#{$namespace}-list__item {
-                    margin-bottom: 0;
-                    padding: 8px 3px;
-                    //cursor: pointer;
+                .#{$namespace}-list {
+                    flex-grow: 1;
+                    flex: 1;
 
-                    transition: .25s all ease-in-out;
+                    &__item {
+                        margin-bottom: 0;
+                        padding: 8px 3px;
 
-                    border-bottom: 1px solid lighten($light-gray, 5);
+                        transition: .25s all ease-in-out;
 
-                    /* &:hover,
-                    &:focus {
-                        background: #fafafb;
-                    } */
+                        border-bottom: 1px solid lighten($light-gray, 5);
 
-                    &-text {
-                        @extend %flex;
-                        justify-content: space-between;
-                    }
-
-                    &-title {
-                        &:before {
-                            @extend %color-box;
+                        &-text {
+                            @extend %flex;
+                            justify-content: space-between;
                         }
-                    }
 
-                    &.seo-score {
-                        &-good {
-                            .#{$namespace}-list__item {
-                                &-title:before {
-                                    background: $color-1;
+                        &-title {
+                            &:before {
+                                @extend %color-box;
+                            }
+                        }
+
+                        &.seo-score {
+                            &-good {
+                                .#{$namespace}-list__item {
+                                    &-title:before {
+                                        background: $color-1;
+                                    }
+
+                                    &-content {
+                                        color: $color-1;
+                                    }
                                 }
+                            }
 
-                                &-content {
-                                    color: $color-1;
+                            &-ok {
+                                .#{$namespace}-list__item {
+                                    &-title:before {
+                                        background: $color-4;
+                                    }
+
+                                    &-content {
+                                        color: $color-4;
+                                    }
+                                }
+                            }
+
+                            &-bad {
+                                .#{$namespace}-list__item {
+                                    &-title:before {
+                                        background: $color-3;
+                                    }
+
+                                    &-content {
+                                        color: $color-3;
+                                    }
                                 }
                             }
                         }
 
-                        &-ok {
-                            .#{$namespace}-list__item {
-                                &-title:before {
-                                    background: $color-4;
-                                }
+                        &-content {
+                            font-weight: 500;
 
-                                &-content {
-                                    color: $color-4;
-                                }
-                            }
+                            color: darken($gray, 10);
                         }
-
-                        &-bad {
-                            .#{$namespace}-list__item {
-                                &-title:before {
-                                    background: $color-3;
-                                }
-
-                                &-content {
-                                    color: $color-3;
-                                }
-                            }
-                        }
-                    }
-
-                    &-content {
-                        font-weight: 500;
-
-                        color: darken($gray, 10);
                     }
                 }
 
@@ -216,7 +226,9 @@
 
                         &__tab-content {
                             margin-bottom: 0;
-                            padding: .9375rem 0;
+                            padding: 0 0 .9375rem;
+                            max-height: 310px;
+                            overflow: scroll;
 
                             background: transparent;
 
@@ -230,7 +242,7 @@
 
                             h4 {
                                 margin: 0;
-                                padding: 0 .9375rem .9375rem;
+                                padding: .9375rem;
 
                                 border-bottom: 1px solid $light-gray;
                             }
@@ -250,9 +262,12 @@
 
                             .col {
                                 box-sizing: border-box;
-                                max-width: 50%;
+                                flex: 0 0 100%;
 
-                                flex: 0 0 50%;
+                                @media screen and (min-width: 48rem) {
+                                    max-width: 50%;
+                                    flex: 0 0 50%;
+                                }
                             }
 
                             .text-large {

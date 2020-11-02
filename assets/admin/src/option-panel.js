@@ -268,12 +268,12 @@ import addNotice from '@helpers/addNotice'
 						days = button.data( 'days' ),
 						message =
 							-1 === days
-								? 'You are about to delete your whole Cache. Every dataset older than 90 days is lost forever!'
+								? 'You are about to delete all the previously imported data?'
 								: 'You are about to delete your 90 days Cache?'
 
 					if (
 						window.confirm(
-							message + ' Are you sure you want to continue?'
+							message + ' Are you sure you want to do this?'
 						)
 					) {
 						button.prop( 'disabled', true )

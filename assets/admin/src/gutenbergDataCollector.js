@@ -6,7 +6,8 @@ import { debounce } from 'lodash'
 /**
  * Gutenberg DataCollector
  *
- * Some functionality adapted from Yoast (https://github.com/Yoast/wordpress-seo/)
+ * @copyright Copyright (C) 2008-2019, Yoast BV
+ * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
  */
 class GutenbergDataCollector {
 	constructor( metabox ) {

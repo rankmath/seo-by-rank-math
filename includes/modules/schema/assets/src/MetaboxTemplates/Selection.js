@@ -1,26 +1,20 @@
 /**
- * External dependencies
- */
-import { get } from 'lodash'
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
-import { Modal, PanelBody } from '@wordpress/components'
-import { withDispatch, withSelect } from '@wordpress/data'
+import { Modal, Dashicon } from '@wordpress/components'
+import { withSelect } from '@wordpress/data'
 
 /**
  * Internal dependencies
  */
-import { getSnippetIcon } from '@helpers/snippetIcon'
-import { generateValidSchema, mapCache } from '@schema/functions'
+import TabPanel from '@schema/Templates/Tabs'
 
 /**
  * Selection form template component.
  */
-const Selection = ( { addSchema, isOpen } ) => {
+const Selection = ( { isOpen } ) => {
 	if ( ! isOpen ) {
 		return null
 	}
@@ -39,28 +33,16 @@ const Selection = ( { addSchema, isOpen } ) => {
 			} }
 			overlayClassName="rank-math-modal-overlay"
 		>
-			<PanelBody initialOpen={ true }>
-				<h4 className="rank-math-schema-section-title">{ __( 'Available Schema Types', 'rank-math' ) }</h4>
-
-				<div className="rank-math-schema-catalog">
-					{ mapCache.getTemplates().map( ( template, index ) => (
-						<div key={ index } id="rank-math-schema-item" className="rank-math-schema-item row">
-							<strong className="rank-math-schema-name">
-								<i className={ getSnippetIcon( template.type ) }></i>
-								{ template.title }
-							</strong>
-							<span
-								role="button"
-								className="button rank-math-schema-item-actions"
-								onClick={ () => addSchema( template ) }
-							>
-								<i className="rm-icon rm-icon-circle-plus"></i>
-								<span>{ __( 'Use', 'rank-math' ) }</span>
-							</span>
-						</div>
-					) ) }
-				</div>
-			</PanelBody>
+			<a
+				href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_medium=Schema%20Generator%20Header&utm_campaign=WP"
+				rel="noopener noreferrer"
+				target="_blank"
+				title={ __( 'More Info', 'rank-math' ) }
+				className={ 'rank-math-schema-info' }
+			>
+				<Dashicon icon="info" />
+			</a>
+			<TabPanel />
 		</Modal>
 	)
 }
@@ -69,20 +51,6 @@ export default compose(
 	withSelect( ( select, props ) => {
 		return {
 			...props,
-		}
-	} ),
-	withDispatch( ( dispatch ) => {
-		return {
-			addSchema( schema ) {
-				let map = get( schema, 'schema', false )
-				if ( false === map ) {
-					map = { '@type': schema.type, metadata: { type: 'template' } }
-				}
-
-				dispatch( 'rank-math' ).setEditingSchemaId( 'new-9999' )
-				dispatch( 'rank-math' ).updateEditSchema( 'new-9999', generateValidSchema( map ) )
-				dispatch( 'rank-math' ).toggleSchemaEditor( true )
-			},
 		}
 	} )
 )( Selection )

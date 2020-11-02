@@ -22,6 +22,7 @@ const StatFilterBlock = ( {
 	selected,
 	data,
 	className,
+	tooltipClassName
 } ) => {
 	const classes = classnames( 'stat-filter-' + type, className, {
 		'is-active': selected[ type ],
@@ -38,7 +39,7 @@ const StatFilterBlock = ( {
 		>
 			<h4>
 				{ title }
-				<Tooltip>{ tooltip }</Tooltip>
+				<Tooltip className={ tooltipClassName }>{ tooltip }</Tooltip>
 			</h4>
 			<ItemStat { ...data } />
 		</Button>

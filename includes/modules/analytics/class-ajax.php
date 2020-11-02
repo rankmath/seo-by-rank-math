@@ -84,6 +84,7 @@ class AJAX {
 
 		DB::delete_by_days( $days );
 		Data_Fetcher::get()->kill_process();
+		delete_transient( 'rank_math_analytics_data_info' );
 		$db_info            = DB::info();
 		$db_info['message'] = sprintf( '<div class="rank-math-console-db-info"><span class="dashicons dashicons-calendar-alt"></span> Cached Days: <strong>%s</strong></div>', $db_info['days'] ) .
 		sprintf( '<div class="rank-math-console-db-info"><span class="dashicons dashicons-editor-ul"></span> Data Rows: <strong>%s</strong></div>', Str::human_number( $db_info['rows'] ) ) .

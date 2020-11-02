@@ -3,19 +3,19 @@
  * Rank Math SEO Plugin.
  *
  * @package      RANK_MATH
- * @copyright    Copyright (C) 2019, Rank Math - support@rankmath.com
+ * @copyright    Copyright (C) 2019-2020, Rank Math - support@rankmath.com
  * @link         https://rankmath.com
  * @since        0.9.0
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.50.1
+ * Version:           1.0.51
  * Plugin URI:        https://s.rankmath.com/home
  * Description:       Rank Math is a revolutionary SEO product that combines the features of many SEO tools and lets you multiply your traffic in the easiest way possible.
  * Author:            Rank Math
  * Author URI:        https://s.rankmath.com/home
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * License:           GPL v3
+ * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:       rank-math
  * Domain Path:       /languages
  */
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.50.1';
+	public $version = '1.0.51';
 
 	/**
 	 * Rank Math database version.

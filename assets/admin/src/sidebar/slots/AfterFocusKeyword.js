@@ -1,13 +1,13 @@
 /**
  * WordPress dependencies
  */
-import { createSlotFill, PanelRow } from '@wordpress/components'
+import { createSlotFill } from '@wordpress/components'
 
 export const { Fill, Slot } = createSlotFill( 'RankMathAfterFocusKeyword' )
 
 const RankMathAfterFocusKeyword = ( { children, className } ) => (
 	<Fill>
-		<PanelRow className={ className }>{ children }</PanelRow>
+		<div className={ className }>{ children }</div>
 	</Fill>
 )
 

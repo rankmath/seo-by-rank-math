@@ -143,6 +143,7 @@ class Screen implements IScreen {
 					'hundredScoreLink' => KB::get( 'score-100-ge' ),
 					'researchesTests'  => $this->get_analysis(),
 				],
+				'isPro'            => defined( 'RANK_MATH_PRO_FILE' ),
 				'is_front_page'    => Admin_Helper::is_home_page(),
 			]
 		);
