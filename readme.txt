@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.3
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.51.1
+Stable tag: 1.0.51.1-beta
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
