@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isEmpty } from 'lodash'
+import { isEmpty, has } from 'lodash'
 
 /**
  * Find property by id.
@@ -43,6 +43,7 @@ export function findPropertyByName( name, parent ) {
 
 	for ( const property of parent.properties ) {
 		if ( property.property === name ) {
+			property.value = has( parent.metadata, name ) ? parent.metadata[ name ] : property.value
 			return property
 		}
 	}

@@ -17,6 +17,7 @@ const ItemStat = ( { total = 0, difference = 0 } ) => {
 		up: ! isNegative && difference > 0,
 		down: isNegative,
 	} )
+
 	return (
 		<div className="rank-math-item-numbers">
 			<strong className="text-large" title={ round( total, 2 ) }>

@@ -244,6 +244,8 @@ class AJAX {
 		// Analytics.
 		( new \RankMath\Analytics\Installer() )->install();
 
+		\sleep( 2 );
+
 		DB::purge_cache();
 		Data_Fetcher::get()->start_process( Param::post( 'days', 90, FILTER_VALIDATE_INT ) );
 	}

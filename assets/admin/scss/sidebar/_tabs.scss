@@ -5,7 +5,11 @@
 		background: #f8f9fa;
 		display: flex;
 		flex-flow: row wrap;
-		justify-content: left;
+		justify-content: space-between;
+
+		.#{$namespace}-extra-menu {
+			@extend %flex;
+		}
 
 		button {
 			position: relative;
@@ -16,7 +20,7 @@
 
 			font-weight: normal;
 
-			padding: 3px 15px;
+			padding: 3px 7px;
 
 			color: darken($dark_gray, 15);
 			background: none;
@@ -105,29 +109,6 @@
 		}
 	}
 
-	.components-tab-panel__tab-content {
-		.components-panel__body {
-			@import '../partials/common/button';
-
-			background: #fff;
-			border-bottom: 0;
-			margin-bottom: 0;
-		}
-
-		// Edit Snippet Button.
-		.rank-math-edit-snippet {
-			background: $primary;
-			border-color: $primary-border-color;
-			margin: 1rem 0;
-			height: 30px;
-
-			&:hover {
-				background: $primary-hover;
-				border-color: $primary-hover-border-color;
-			}
-		}
-	}
-
 	.cmb2-metabox-description {
 		font-style: normal;
 	}
@@ -157,6 +138,29 @@
 		}
 		.components-toggle-control__label {
 			margin-bottom: 0;
+		}
+	}
+}
+
+.components-tab-panel__tab-content, .#{$namespace}-modal {
+	.components-panel__body, .components-modal__content {
+		@import '../partials/common/button';
+
+		background: #fff;
+		border-bottom: 0;
+		margin-bottom: 0;
+	}
+
+	// Edit Snippet Button.
+	.rank-math-edit-snippet {
+		background: $primary;
+		border-color: $primary-border-color;
+		margin: 1rem 0;
+		height: 30px;
+
+		&:hover {
+			background: $primary-hover;
+			border-color: $primary-hover-border-color;
 		}
 	}
 }

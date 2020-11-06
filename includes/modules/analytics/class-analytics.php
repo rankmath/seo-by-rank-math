@@ -22,6 +22,7 @@ use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Conditional;
 use RankMath\Google\Console;
 use RankMath\Google\Authentication;
+use RankMath\Schema\Admin as SchemaHelper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -394,6 +395,16 @@ class Analytics extends Base {
 		Helper::add_json( 'lastUpdated', $updated );
 
 		Helper::add_json( 'singleImage', rank_math()->plugin_url() . 'includes/modules/analytics/assets/img/single-post-report.jpg' );
+
+		// Global Schema.
+		$post_types = Helper::get_accessible_post_types();
+		$global_schemas = [];
+		foreach ( $post_types as $post_type ) {
+			$global_schemas[ $post_type ] = SchemaHelper::sanitize_schema_title(
+				Helper::get_default_schema_type( $post_type )
+			);
+		}
+		Helper::add_json( 'globalSchemaTypes', array_filter( $global_schemas ) );
 	}
 
 	/**

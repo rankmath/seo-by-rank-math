@@ -67,7 +67,7 @@ class Api extends Console {
 
 		$tokens = Authentication::tokens();
 		if ( empty( $tokens['refresh_token'] ) ) {
-			Authentication::tokens( false );
+			// Authentication::tokens( false );
 			return;
 		}
 

@@ -123,6 +123,7 @@ class Registration {
 					'username'  => $auth_data['username'],
 					'email'     => $auth_data['email'],
 					'api_key'   => $auth_data['api_key'],
+					'plan'      => $auth_data['plan'],
 					'connected' => true,
 				]
 			);

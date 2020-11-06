@@ -380,10 +380,10 @@ class Stats extends Keywords {
 		$query = $wpdb->prepare(
 			"SELECT
 				t1.{$dimension} as {$dimension}, t1.clicks, t1.impressions, ROUND( t1.position, 0 ) as position, t1.ctr,
-				COALESCE( t2.clicks - t1.clicks, 0 ) as diffClicks,
-				COALESCE( t2.impressions - t1.impressions, 0 ) as diffImpressions,
-				COALESCE( ROUND( t2.position - t1.position, 0 ), 0 ) as diffPosition,
-				COALESCE( t2.ctr - t1.ctr, 0 ) as diffCtr
+				COALESCE( t1.clicks - t2.clicks, 0 ) as diffClicks,
+				COALESCE( t1.impressions - t2.impressions, 0 ) as diffImpressions,
+				COALESCE( ROUND( t1.position - t2.position, 0 ), 0 ) as diffPosition,
+				COALESCE( t1.ctr - t2.ctr, 0 ) as diffCtr
 			FROM
 				( SELECT {$created}{$dimension}, SUM( clicks ) as clicks, SUM(impressions) as impressions, AVG(position) as position, AVG(ctr) as ctr FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE clicks > 0{$dates}{$sub_where} GROUP BY {$dimension}) as t1
 			LEFT JOIN
@@ -404,7 +404,7 @@ class Stats extends Keywords {
 		$page_urls = \array_merge( \array_keys( $rows ), $args['pages'] );
 
 		$pageviews = [];
-		if ( $args['pageview'] && ! empty( $page_urls ) ) {
+		if ( \class_exists( 'RankMathPro\Analytics\Pageviews' ) && $args['pageview'] && ! empty( $page_urls ) ) {
 			$pageviews = Pageviews::get_pageviews( [ 'pages' => $page_urls ] );
 			$pageviews = $pageviews['rows'];
 		}
@@ -455,8 +455,8 @@ class Stats extends Keywords {
 				}
 
 				$rows[ $page ]['pageviews'] = [
-					'total'      => $pageview['pageviews'],
-					'difference' => $pageview['difference'],
+					'total'      => (int) $pageview['pageviews'],
+					'difference' => (int) $pageview['difference'],
 				];
 			}
 		}

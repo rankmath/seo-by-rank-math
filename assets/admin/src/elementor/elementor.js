@@ -17,9 +17,13 @@ import Editor from '../rankMathEditor'
 import DataCollector from './DataCollector'
 import ElementorAddRegion from './AddRegion'
 import UIThemeComponent from './UIThemeComponent'
+
+/**
+ * Slots
+ */
 import RankMathAfterEditor from '@slots/AfterEditor'
-import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
 import RankMathAdvancedTab from '@slots/AdvancedTab'
+import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
 
 const replaceMediaUpload = () => MediaUpload
 
@@ -27,6 +31,7 @@ class ElementorEditor extends Editor {
 	setup( dataCollector ) {
 		this.registerSlots = this.registerSlots.bind( this )
 		addAction( 'rank_math_loaded', 'rank-math', this.registerSlots, 0 )
+
 		addFilter(
 			'editor.MediaUpload',
 			'rank-math/replace-media-upload',
@@ -43,6 +48,11 @@ class ElementorEditor extends Editor {
 		this.RankMathAfterEditor = RankMathAfterEditor
 		this.RankMathAfterFocusKeyword = RankMathAfterFocusKeyword
 		this.RankMathAdvancedTab = RankMathAdvancedTab
+		this.slots = {
+			AfterEditor: RankMathAfterEditor,
+			AfterFocusKeyword: RankMathAfterFocusKeyword,
+			AdvancedTab: RankMathAdvancedTab,
+		}
 	}
 
 	updatePermalink( slug ) {

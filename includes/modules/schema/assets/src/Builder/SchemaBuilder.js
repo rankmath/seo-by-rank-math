@@ -4,7 +4,7 @@
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import jQuery from 'jquery'
-import { get, cloneDeep, forEach, isArray } from 'lodash'
+import { get, cloneDeep, forEach, isArray, isEmpty, has } from 'lodash'
 import { v4 as uuid } from 'uuid'
 
 /**
@@ -270,6 +270,9 @@ class SchemaBuilder extends Component {
 
 		Object.assign( parent, { [ property ]: value } )
 
+		if ( ! isEmpty( data.metadata ) && has( data.metadata, parent.property ) ) {
+			data.metadata[ parent.property ] = value
+		}
 		this.setState( { data } )
 	}
 }

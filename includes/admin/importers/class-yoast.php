@@ -903,9 +903,11 @@ class Yoast extends Plugin_Importer {
 		Helper::update_modules( [ 'video-sitemap' => 'on' ] );
 
 		$this->get_settings();
-		$this->sitemap['hide_video_sitemap']       = ! empty( $yoast_video['video_cloak_sitemap'] ) ? 'on' : '';
-		$this->sitemap['video_sitemap_post_type']  = ! empty( $yoast_news['videositemap_posttypes'] ) ? array_keys( $yoast_news['videositemap_posttypes'] ) : [];
-		$this->sitemap['video_sitemap_taxonomies'] = ! empty( $yoast_news['videositemap_taxonomies'] ) ? array_keys( $yoast_news['videositemap_taxonomies'] ) : [];
+		$this->sitemap['hide_video_sitemap']          = ! empty( $yoast_video['video_cloak_sitemap'] ) ? 'on' : '';
+		$this->sitemap['video_sitemap_post_type']     = ! empty( $yoast_video['videositemap_posttypes'] ) ? array_keys( $yoast_video['videositemap_posttypes'] ) : [];
+		$this->sitemap['video_sitemap_taxonomies']    = ! empty( $yoast_video['videositemap_taxonomies'] ) ? array_keys( $yoast_video['videositemap_taxonomies'] ) : [];
+		$this->sitemap['video_sitemap_custom_fields'] = ! empty( $yoast_video['video_custom_fields'] ) ? $yoast_video['video_custom_fields'] : '';
+		$this->settings['disable_media_rss']          = ! empty( $yoast_video['video_disable_rss'] ) ? $yoast_video['video_disable_rss'] : '';
 		$this->update_settings();
 
 		$this->set_pagination( $this->get_video_posts( true ) );
@@ -916,35 +918,42 @@ class Yoast extends Plugin_Importer {
 				'type'      => 'template',
 				'isPrimary' => false,
 				'title'     => 'Video',
+				'shortcode' => uniqid( 's-' ),
 			],
 		];
 
-		$hash = [
-			'thumbnailUrl'     => '_yoast_wpseo_videositemap-thumbnail',
-			'isFamilyFriendly' => '_yoast_wpseo_videositemap-not-family-friendly',
-			'duration'         => '_yoast_wpseo_videositemap-duration',
-		];
 		$meta = [
 			'category' => '_yoast_wpseo_videositemap-category',
 			'tags'     => '_yoast_wpseo_videositemap-tags',
+			'rating'   => '_yoast_wpseo_videositemap-rating',
 		];
 		foreach ( $videos as $video ) {
-			$yoast_video          = get_post_meta( $video, '_yoast_wpseo_video_meta', true );
-			$schema['contentUrl'] = ! empty( $yoast_video['content_loc'] ) ? $yoast_video['content_loc'] : '';
-			$schema['embedUrl']   = ! empty( $yoast_video['player_loc'] ) ? $yoast_video['player_loc'] : '';
-
-			foreach ( $hash as $key => $yoast_key ) {
-				$schema[ $key ] = get_post_meta( $video, $yoast_key, true );
-			}
+			$yoast_video = get_post_meta( $video, '_yoast_wpseo_video_meta', true );
+			$duration    = get_post_meta( $video, '_yoast_wpseo_videositemap-duration', true );
+			$thumbnail   = get_post_meta( $video, '_yoast_wpseo_videositemap-thumbnail', true );
+			$entity      = [
+				'name'             => '%seo_title%',
+				'description'      => '%seo_description%',
+				'thumbnailUrl'     => $thumbnail ? $thumbnail : '%post_thumbnail%',
+				'contentUrl'       => ! empty( $yoast_video['content_loc'] ) ? $yoast_video['content_loc'] : '',
+				'embedUrl'         => ! empty( $yoast_video['player_loc'] ) ? $yoast_video['player_loc'] : '',
+				'width'            => ! empty( $yoast_video['width'] ) ? $yoast_video['width'] : '',
+				'height'           => ! empty( $yoast_video['height'] ) ? $yoast_video['height'] : '',
+				'isFamilyFriendly' => ! get_post_meta( $video, '_yoast_wpseo_videositemap-not-family-friendly', true ),
+				'duration'         => $duration ? $duration . 'S' : '',
+				'uploadDate'       => '%date(Y-m-d\TH:i:sP)%',
+			];
 
 			foreach ( $meta as $key => $yoast_key ) {
 				$schema['metadata'][ $key ] = get_post_meta( $video, $yoast_key, true );
 			}
 
-			update_post_meta( $video, 'rank_math_schema_VideoObject', $schema );
+			$schema = array_merge( $schema, $entity );
+
+			update_post_meta( $video, 'rank_math_schema_VideoObject', array_merge( $schema, $entity ) );
 		}
 
-		return $this->get_pagination_arg();
+		return true;
 	}
 
 	/**

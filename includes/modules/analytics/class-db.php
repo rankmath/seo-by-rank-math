@@ -11,6 +11,7 @@
 namespace RankMath\Analytics;
 
 use RankMath\Helper;
+use RankMath\Google\Api;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Database\Database;
 
@@ -103,6 +104,10 @@ class DB {
 	 */
 	public static function info() {
 		global $wpdb;
+
+		if ( ! Api::get()->is_console_connected() ) {
+			return [];
+		}
 
 		$key  = 'rank_math_analytics_data_info';
 		$data = get_transient( $key );

@@ -102,6 +102,7 @@ class Admin_Helper {
 			'username',
 			'email',
 			'api_key',
+			'plan',
 		];
 
 		// Setter.
@@ -134,6 +135,15 @@ class Admin_Helper {
 		}
 
 		return $options;
+	}
+
+	/**
+	 * Get user plan.
+	 */
+	public static function get_user_plan() {
+		$data = self::get_registration_data();
+
+		return $data['plan'];
 	}
 
 	/**

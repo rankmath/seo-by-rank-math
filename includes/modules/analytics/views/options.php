@@ -21,6 +21,16 @@ $db_info        = DB::info();
 $is_queue_empty = empty( $actions );
 $disable        = ( ! Authentication::is_authorized() || ! $is_queue_empty ) ? true : false;
 
+if ( ! empty( $db_info ) ) {
+	$db_info = [
+		/* translators: number of days */
+		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-calendar"></i> ' . sprintf( esc_html__( 'Storage Days: %s', 'rank-math' ), '<strong>' . $db_info['days'] . '</strong>' ) . '</div>',
+		/* translators: number of rows */
+		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-faq"></i> ' . sprintf( esc_html__( 'Data Rows: %s', 'rank-math' ), '<strong>' . Str::human_number( $db_info['rows'] ) . '</strong>' ) . '</div>',
+		/* translators: database size */
+		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-database"></i> ' . sprintf( esc_html__( 'Size: %s', 'rank-math' ), '<strong>' . size_format( $db_info['size'] ) . '</strong>' ) . '</div>',
+	];
+}
 
 $actions = as_get_scheduled_actions(
 	[
@@ -76,11 +86,6 @@ $cmb->add_field(
 		'<button class="button button-small console-cache-delete"  data-days="15">' . esc_html__( 'Delete Recent Data (last 15 days)', 'rank-math' ) . '</button>' .
 		'&nbsp;&nbsp;<button class="button button-small console-cache-delete" data-days="-1">' . esc_html__( 'Delete Data', 'rank-math' ) . '</button>' .
 		'&nbsp;&nbsp;<button class="button button-small console-cache-update-manually"' . ( $disable ? ' disabled="disabled"' : '' ) . '>' . ( $is_queue_empty ? esc_html__( 'Update Data manually', 'rank-math' ) : esc_html__( 'Fetching in Progress', 'rank-math' ) ) . '</button><br>' .
-		/* translators: number of days */
-		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-calendar"></i> ' . sprintf( esc_html__( 'Storage Days: %s', 'rank-math' ), '<strong>' . $db_info['days'] . '</strong>' ) . '</div>' .
-		/* translators: number of rows */
-		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-faq"></i> ' . sprintf( esc_html__( 'Data Rows: %s', 'rank-math' ), '<strong>' . Str::human_number( $db_info['rows'] ) . '</strong>' ) . '</div>' .
-		/* translators: database size */
-		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-database"></i> ' . sprintf( esc_html__( 'Size: %s', 'rank-math' ), '<strong>' . size_format( $db_info['size'] ) . '</strong>' ) . '</div>',
+		join( '', $db_info ),
 	]
 );

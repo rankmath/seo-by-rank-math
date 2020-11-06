@@ -9,6 +9,20 @@ import { defaults, map, uniqueId } from 'lodash'
 import { Dashicon } from '@wordpress/components'
 import { __ } from '@wordpress/i18n'
 
+const getTitle = ( type ) => {
+	if ( 'internal' === type ) {
+		return __( 'Internal Links', 'rank-math' )
+	}
+
+	if ( 'external' === type ) {
+		return __( 'External Links', 'rank-math' )
+	}
+
+	if ( 'incoming' === type ) {
+		return __( 'Incoming Links', 'rank-math' )
+	}
+}
+
 const getIcon = ( type ) => {
 	if ( 'internal' === type ) {
 		return <Dashicon icon="admin-links" title={ __( 'Internal Links', 'rank-math' ) } />
@@ -34,7 +48,7 @@ const LinkListing = ( { links } ) => {
 		<div className="link-listing">
 			{ map( data, ( count, type ) => {
 				return (
-					<div className="link-item" key={ uniqueId( 'links-' ) }>
+					<div className="link-item" key={ uniqueId( 'links-' ) } title={ getTitle( type ) }>
 						{ getIcon( type ) } { count }
 					</div>
 				)

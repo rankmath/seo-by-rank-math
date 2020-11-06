@@ -161,7 +161,7 @@ const PostsTable = ( props ) => {
 			key: 'links',
 			label: __( 'Links', 'rank-math' ),
 			required: true,
-			cellClassName: 'rank-math-col-schema',
+			cellClassName: 'rank-math-col-links',
 		},
 		{
 			key: 'pageviews',

@@ -360,6 +360,27 @@ trait WordPress {
 	}
 
 	/**
+	 * Helper function to convert ISO 8601 duration to seconds.
+	 * For example "PT1H12M24S" becomes 5064.
+	 *
+	 * @param string $iso8601 Duration which need to be converted to seconds.
+	 * @return int
+	 */
+	public static function duration_to_seconds( $iso8601 ) {
+		$iso8601  = ! Str::starts_with( 'PT', $iso8601 ) ? 'PT' . $iso8601 : $iso8601;
+		$interval = new \DateInterval( $iso8601 );
+
+		return array_sum(
+			[
+				$interval->d * DAY_IN_SECONDS,
+				$interval->h * HOUR_IN_SECONDS,
+				$interval->i * MINUTE_IN_SECONDS,
+				$interval->s,
+			]
+		);
+	}
+
+	/**
 	 * Id block editor enabled.
 	 *
 	 * @return bool

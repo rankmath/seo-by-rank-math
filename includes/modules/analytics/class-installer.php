@@ -36,8 +36,9 @@ class Installer {
 		wp_clear_scheduled_hook( 'rank_math/analytics/get_analytics' );
 
 		// Add action for scheduler.
+		$fetch_gap = apply_filters( 'rank_math/analytics/fetch_gap', 7 );
 		if ( false === as_next_scheduled_action( 'rank_math/analytics/daily_tasks' ) ) {
-			as_schedule_recurring_action( strtotime( 'tomorrow' ) + 180, DAY_IN_SECONDS * 7, 'rank_math/analytics/daily_tasks' );
+			as_schedule_recurring_action( strtotime( 'tomorrow' ) + 180, DAY_IN_SECONDS * $fetch_gap, 'rank_math/analytics/daily_tasks' );
 		}
 
 		if ( $flat ) {

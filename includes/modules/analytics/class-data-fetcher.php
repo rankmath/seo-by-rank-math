@@ -59,10 +59,10 @@ class Data_Fetcher {
 	 *
 	 * @param integer $days Number of days to fetch from past.
 	 */
-	public function start_process( $days = 90 ) {
+	public function start_process( $days = 90, $action = 'get_analytics' ) {
 		global $wpdb;
 
-		$count    = $this->add_data_pull( $days + 2 );
+		$count    = $this->add_data_pull( $days + 2, $action );
 		$time_gap = $this->do_filter( 'analytics/schedule_gap', 30 );
 
 		// Clear cache.
@@ -88,7 +88,7 @@ class Data_Fetcher {
 	 *
 	 * @param integer $days Number of days to fetch from past.
 	 */
-	private function add_data_pull( $days ) {
+	private function add_data_pull( $days, $action = 'get_analytics' ) {
 		$count    = 1;
 		$start    = Helper::get_midnight( time() + DAY_IN_SECONDS );
 		$interval = $this->get_data_interval();
@@ -101,7 +101,7 @@ class Data_Fetcher {
 					$count++;
 					as_schedule_single_action(
 						time() + ( $time_gap * $count ),
-						'rank_math/analytics/get_analytics',
+						'rank_math/analytics/' . $action,
 						[ $date ]
 					);
 				}
@@ -114,7 +114,7 @@ class Data_Fetcher {
 						$count++;
 						as_schedule_single_action(
 							time() + ( $time_gap * $count ),
-							'rank_math/analytics/get_analytics',
+							'rank_math/analytics/' . $action,
 							[ $date ]
 						);
 					}

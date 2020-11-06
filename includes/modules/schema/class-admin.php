@@ -144,7 +144,7 @@ class Admin extends Base {
 		?>
 			<span class="rank-math-column-display schema-type">
 				<strong><?php esc_html_e( 'Schema', 'rank-math' ); ?>:</strong>
-				<?php echo esc_html( $this->sanitize_schema_title( $schema ) ); ?>
+				<?php echo esc_html( self::sanitize_schema_title( $schema ) ); ?>
 			</span>
 		<?php
 	}
@@ -235,7 +235,7 @@ class Admin extends Base {
 		$schemas['new-9999'] = [
 			'@type'    => $default_type,
 			'metadata' => [
-				'title'     => $this->sanitize_schema_title( $default_type ),
+				'title'     => self::sanitize_schema_title( $default_type ),
 				'type'      => 'template',
 				'isPrimary' => true,
 			],
@@ -250,7 +250,7 @@ class Admin extends Base {
 	 * @param  string $schema Schema.
 	 * @return string
 	 */
-	private function sanitize_schema_title( $schema ) {
+	public static function sanitize_schema_title( $schema ) {
 		if ( in_array( $schema, [ 'BlogPosting', 'NewsArticle' ], true ) ) {
 			return esc_html__( 'Article', 'rank-math' );
 		}
@@ -314,7 +314,7 @@ class Admin extends Base {
 
 		$types = [];
 		foreach ( $schemas as $schema ) {
-			$types[] = $this->sanitize_schema_title( $schema['@type'] );
+			$types[] = self::sanitize_schema_title( $schema['@type'] );
 		}
 
 		return implode( ', ', $types );

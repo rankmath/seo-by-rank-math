@@ -778,6 +778,9 @@ msgstr ""
 msgid "Page %s"
 msgstr ""
 
+msgid "Search Engine Optimization by Rank Math PRO - https://s.rankmath.com/home"
+msgstr ""
+
 msgid "Search Engine Optimization by Rank Math - https://s.rankmath.com/home"
 msgstr ""
 
@@ -1929,6 +1932,9 @@ msgid "Settings imported successfully."
 msgstr ""
 
 msgid "News Settings imported successfully."
+msgstr ""
+
+msgid "Video Settings imported successfully."
 msgstr ""
 
 msgid "Plugin deactivated successfully."
@@ -4480,6 +4486,18 @@ msgstr ""
 msgid "Sorry, no post id found."
 msgstr ""
 
+#. translators: number of days
+msgid "Storage Days: %s"
+msgstr ""
+
+#. translators: number of rows
+msgid "Data Rows: %s"
+msgstr ""
+
+#. translators: database size
+msgid "Size: %s"
+msgstr ""
+
 #. translators: date
 msgid "Next data fetch on %s"
 msgstr ""
@@ -4504,18 +4522,6 @@ msgid "Update Data manually"
 msgstr ""
 
 msgid "Fetching in Progress"
-msgstr ""
-
-#. translators: number of days
-msgid "Storage Days: %s"
-msgstr ""
-
-#. translators: number of rows
-msgid "Data Rows: %s"
-msgstr ""
-
-#. translators: database size
-msgid "Size: %s"
 msgstr ""
 
 msgid "Group Title"

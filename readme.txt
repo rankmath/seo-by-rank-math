@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.3
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.51
+Stable tag: 1.0.51.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,15 +475,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.51 [Nov 02, 2020] =
-* Improved: Dashboard widget completely revamped. Better stats are shown in the Rank Math widget ([https://i.rankmath.com/ZwPDM6](https://i.rankmath.com/ZwPDM6))
-* Improved: Responsiveness of the Analytics pages. Now you can check your website stats on the mobile devices
-* Improved: Replaced all the `textarea` fields in the Schema templates with the `input` field
-* Improved: Changed 'Open Days' field from `multiselect` to `checkbox` in the Restaurant Schema to improve the usability
-* Fixed: Default Article Schema type was not added in the old posts on some installations
-* Updated: Improved the comments on the files where the code was adapted from Yoast, as suggested by Joost de Valk
-* Fixed: `rank_math_rich_snippet` Shortcode was not working with all the Schema types
-* Fixed: Missing Logo Field error on the AMP pages when the Local SEO Module was disabled
-* Fixed: Styling issues related to Gutenberg v9.2.2
+= 1.0.51.1-beta [Nov 07, 2020] =
+* Improved: CSS related to block editor sidebar tabs and Analytics
+* Fixed: Analytics disconnection issue
+* Fixed: Bug related to the difference calculation for the Clicks, Impressions, CTR and Position
+
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

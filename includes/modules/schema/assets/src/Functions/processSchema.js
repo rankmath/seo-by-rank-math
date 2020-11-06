@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isEmpty, isUndefined, map, get } from 'lodash'
+import { isEmpty, isBoolean, isUndefined, map, get } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -117,7 +117,7 @@ const processData = ( data ) => {
 		}
 
 		const value = getValue( property )
-		if ( isEmpty( value ) ) {
+		if ( ( ! isBoolean( value ) && isEmpty( value ) ) || ! value ) {
 			return
 		}
 

@@ -37,6 +37,9 @@ const Performance = ( { stats } ) => {
 					dispatch(
 						'rank-math'
 					).invalidateResolutionForStoreSelector( 'getPostsRows' )
+					dispatch(
+						'rank-math'
+					).invalidateResolutionForStoreSelector( 'getPostsOverview' )
 				} }
 			/>
 			<StatFilter

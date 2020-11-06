@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { map, uniqueId, isUndefined } from 'lodash'
+import { has, map, uniqueId, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -33,7 +33,7 @@ const correctSchemaName = ( schema ) => {
 	return schema
 }
 
-const SchemaListing = ( { schemas } ) => {
+const SchemaListing = ( { schemas, type } ) => {
 	if ( isUndefined( schemas ) ) {
 		return null
 	}
@@ -43,7 +43,7 @@ const SchemaListing = ( { schemas } ) => {
 			<div className="schema-listing">
 				<div className="schema-item">
 					<i className={ getSnippetIcon( 'off' ) } />{ ' ' }
-					{ __( 'None', 'rank-math' ) }
+					{ has( rankMath.globalSchemaTypes, type ) ? rankMath.globalSchemaTypes[ type ] : __( 'None', 'rank-math' ) }
 				</div>
 			</div>
 		)

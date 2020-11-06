@@ -45,8 +45,9 @@ class Posts extends Objects {
 
 		$metrices = $this->get_analytics_data(
 			[
-				'sub_where' => " AND page = '{$post->page}'",
 				'pages'     => [ $post->page ],
+				'pageview'  => true,
+				'sub_where' => " AND page = '{$post->page}'",
 			]
 		);
 		if ( ! empty( $metrices ) ) {

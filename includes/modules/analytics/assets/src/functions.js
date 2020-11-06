@@ -125,7 +125,7 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 			} else if ( 'seo_score' === column ) {
 				display = <ScoreProgress score={ value } />
 			} else if ( 'schemas_in_use' === column ) {
-				display = <SchemaListing schemas={ value } />
+				display = <SchemaListing schemas={ value } type={ row.object_subtype } />
 				value = isArray( value ) ? value.join( ' ' ) : ''
 			} else if (
 				'impressions' === column ||
