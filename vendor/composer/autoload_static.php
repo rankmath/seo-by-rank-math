@@ -44,6 +44,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'MyThemeShop\\Admin\\List_Table' => __DIR__ . '/..' . '/mythemeshop/wordpress-helpers/src/admin/class-list-table.php',
         'MyThemeShop\\Admin\\Page' => __DIR__ . '/..' . '/mythemeshop/wordpress-helpers/src/admin/class-page.php',
         'MyThemeShop\\Database\\Clauses' => __DIR__ . '/..' . '/mythemeshop/wordpress-helpers/src/database/class-clauses.php',
@@ -76,6 +77,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Admin\\Admin_Helper' => __DIR__ . '/../..' . '/includes/admin/class-admin-helper.php',
         'RankMath\\Admin\\Admin_Init' => __DIR__ . '/../..' . '/includes/admin/class-admin-init.php',
         'RankMath\\Admin\\Admin_Menu' => __DIR__ . '/../..' . '/includes/admin/class-admin-menu.php',
+        'RankMath\\Admin\\Api' => __DIR__ . '/../..' . '/includes/admin/class-api.php',
         'RankMath\\Admin\\Ask_Review' => __DIR__ . '/../..' . '/includes/admin/class-ask-review.php',
         'RankMath\\Admin\\Assets' => __DIR__ . '/../..' . '/includes/admin/class-assets.php',
         'RankMath\\Admin\\CMB2_Fields' => __DIR__ . '/../..' . '/includes/admin/class-cmb2-fields.php',

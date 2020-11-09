@@ -100,6 +100,7 @@ class Manager {
 			'desc'     => esc_html__( 'Records the URLs on which visitors & search engines run into 404 Errors. You can also turn on Redirections to redirect the error causing URLs to other URLs.', 'rank-math' ),
 			'class'    => 'RankMath\Monitor\Monitor',
 			'icon'     => '404',
+			'probadge' => defined( 'RANK_MATH_PRO_FILE' ),
 			'settings' => Helper::get_admin_url( 'options-general' ) . '#setting-panel-404-monitor',
 		];
 
@@ -108,6 +109,7 @@ class Manager {
 			'desc'     => esc_html__( 'Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to add code related to Knowledge Graph.', 'rank-math' ),
 			'class'    => 'RankMath\Local_Seo\Local_Seo',
 			'icon'     => 'local-seo',
+			'probadge' => defined( 'RANK_MATH_PRO_FILE' ),
 			'settings' => Helper::get_admin_url( 'options-titles' ) . '#setting-panel-local',
 		];
 
@@ -116,6 +118,7 @@ class Manager {
 			'desc'     => esc_html__( 'Redirect non-existent content easily with 301 and 302 status code. This can help improve your site ranking. Also supports many other response codes.', 'rank-math' ),
 			'class'    => 'RankMath\Redirections\Redirections',
 			'icon'     => 'redirection',
+			'probadge' => defined( 'RANK_MATH_PRO_FILE' ),
 			'settings' => Helper::get_admin_url( 'options-general' ) . '#setting-panel-redirections',
 		];
 
@@ -124,6 +127,7 @@ class Manager {
 			'desc'     => esc_html__( 'Enable support for the structured data, which adds Schema code in your website, resulting in rich search results, better CTR and more traffic.', 'rank-math' ),
 			'class'    => 'RankMath\Schema\Schema',
 			'icon'     => 'schema',
+			'probadge' => defined( 'RANK_MATH_PRO_FILE' ),
 			'settings' => Helper::get_admin_url( 'options-titles' ) . '#setting-panel-post-type-post',
 		];
 
@@ -147,6 +151,7 @@ class Manager {
 			'desc'     => esc_html__( 'Advanced Image SEO options to supercharge your website. Automate the task of adding the ALT and Title tags to your images on the fly.', 'rank-math' ),
 			'class'    => 'RankMath\Image_Seo\Image_Seo',
 			'icon'     => 'images',
+			'probadge' => defined( 'RANK_MATH_PRO_FILE' ),
 			'settings' => Helper::get_admin_url( 'options-general' ) . '#setting-panel-images',
 		];
 
@@ -177,6 +182,7 @@ class Manager {
 			'class'    => 'RankMath\Analytics\Analytics',
 			'icon'     => 'search-console',
 			'only'     => 'admin',
+			'probadge' => defined( 'RANK_MATH_PRO_FILE' ),
 			'settings' => Helper::get_admin_url( 'options-general' ) . '#setting-panel-analytics',
 		];
 
@@ -242,7 +248,7 @@ class Manager {
 			'desc'  => sprintf(
 				/* translators: Link to AMP plugin */
 				esc_html__( 'Install %s to make Rank Math work with Accelerated Mobile Pages. Rank Math automatically adds required meta tags in all the AMP pages.', 'rank-math' ),
-				'<a href="' . Helper::get_admin_url( 'help#help-panel-amp' ) . '">' . esc_html__( 'AMP plugin', 'rank-math' ) . '</a>'
+				'<a href="https://wordpress.org/plugins/amp/" target="_blank">' . esc_html__( 'AMP plugin', 'rank-math' ) . '</a>'
 			),
 			'icon'  => 'mobile',
 			'only'  => 'skip',
@@ -252,6 +258,7 @@ class Manager {
 			'title'         => esc_html__( 'bbPress', 'rank-math' ),
 			'desc'          => esc_html__( 'Add proper Meta tags to your bbPress forum posts, categories, profiles, etc. Get more options to take control of what search engines see and how they see it.', 'rank-math' ),
 			'icon'          => 'users',
+			'probadge'      => defined( 'RANK_MATH_PRO_FILE' ),
 			'disabled'      => ( ! function_exists( 'is_bbpress' ) ),
 			'disabled_text' => esc_html__( 'Please activate bbPress plugin to use this module.', 'rank-math' ),
 			'only'          => 'skip',
@@ -271,6 +278,7 @@ class Manager {
 			'desc'          => esc_html__( 'Optimize WooCommerce Pages for Search Engines by adding required metadata and Product Schema which will make your site stand out in the SERPs.', 'rank-math' ),
 			'class'         => 'RankMath\WooCommerce\WooCommerce',
 			'icon'          => 'cart',
+			'probadge'      => defined( 'RANK_MATH_PRO_FILE' ),
 			'disabled'      => ( ! Conditional::is_woocommerce_active() ),
 			'disabled_text' => esc_html__( 'Please activate WooCommerce plugin to use this module.', 'rank-math' ),
 		];
@@ -329,6 +337,7 @@ class Manager {
 				$is_active   = $module->is_active();
 				$is_disabled = $module->is_disabled();
 				$is_hidden   = $module->is_hidden();
+				$is_probadge = $module->is_probadge();
 				?>
 				<div class="rank-math-box <?php echo $is_active ? 'active' : ''; ?> <?php echo $is_hidden ? 'hidden' : ''; ?>">
 
@@ -336,7 +345,12 @@ class Manager {
 
 					<header>
 
-						<h3><?php echo $module->get( 'title' ); // phpcs:ignore ?></h3>
+						<h3>
+							<?php echo $module->get( 'title' ); // phpcs:ignore ?>
+							<?php if ( $is_probadge ) { ?>
+							<span class="rank-math-pro-badge">PRO</span>
+							<?php } ?>
+						</h3>
 
 						<p><?php echo $module->get( 'desc' ); // phpcs:ignore ?></p>
 

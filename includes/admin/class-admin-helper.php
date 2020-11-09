@@ -147,41 +147,17 @@ class Admin_Helper {
 	}
 
 	/**
-	 * Authenticate user on RankMath.com.
+	 * Is user plan expire.
 	 *
-	 * @param string $username Username for registration.
-	 * @param string $password Password for registration.
-	 *
-	 * @return bool
+	 * @return boolean
 	 */
-	private static function authenticate_user( $username, $password ) {
-		$response = wp_remote_post(
-			'https://rankmath.com/wp-json/rankmath/v1/token',
-			[
-				'timeout'    => 10,
-				'user-agent' => 'RankMath/' . md5( esc_url( home_url( '/' ) ) ),
-				'body'       => [
-					'username' => $username,
-					'password' => $password,
-					'site_url' => esc_url( site_url() ),
-				],
-			]
-		);
-
-		$body = wp_remote_retrieve_body( $response );
-		$body = json_decode( $body, true );
-
-		if ( is_wp_error( $response ) || isset( $body['code'] ) ) {
-			$message = is_wp_error( $response ) ? $response->get_error_message() : $body['message'];
-
-			foreach ( (array) $message as $e ) {
-				Helper::add_notification( $e, [ 'type' => 'error' ] );
-			}
-
-			return false;
+	public static function is_plan_expired() {
+		$data = self::get_registration_data();
+		if ( ! isset( $data['plan'] ) ) {
+			return true;
 		}
 
-		return $body;
+		return 'free' === $data['plan'];
 	}
 
 	/**
@@ -190,22 +166,9 @@ class Admin_Helper {
 	public static function deregister_user() {
 		$registered = self::get_registration_data();
 		if ( $registered && isset( $registered['username'] ) && isset( $registered['api_key'] ) ) {
-			wp_remote_post(
-				'https://rankmath.com/wp-json/rankmath/v1/deactivateSite',
-				[
-					'timeout'    => defined( 'DOING_CRON' ) && DOING_CRON ? 30 : 10,
-					'user-agent' => 'RankMath/' . md5( esc_url( home_url( '/' ) ) ),
-					'blocking'   => false,
-					'body'       => [
-						'username' => $registered['username'],
-						'api_key'  => $registered['api_key'],
-						'site_url' => esc_url( site_url() ),
-					],
-				]
-			);
+			Api::get()->deactivate_site( $registered['username'], $registered['api_key'] );
 			self::get_registration_data( false );
 		}
-		return;
 	}
 
 	/**

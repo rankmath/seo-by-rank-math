@@ -1142,11 +1142,11 @@ msgstr ""
 msgid "Insert keywords you want to rank for. Try to <a href=\"%s\" target=\"_blank\">attain 100/100 points</a> for better chances of ranking."
 msgstr ""
 
-#. translators: link to connect page.
-msgid "Want more? PRO version is coming soon. %s"
+#. translators: link to pricing page.
+msgid "Want more? %s version"
 msgstr ""
 
-msgid "Notify me!"
+msgid "Upgrade today to the PRO"
 msgstr ""
 
 msgid "Trends"
@@ -2123,7 +2123,7 @@ msgstr ""
 msgid "Custom Mode %s"
 msgstr ""
 
-msgid "Coming Soon"
+msgid "Select this if you have a custom Rank Math settings file you want to use."
 msgstr ""
 
 msgid "<strong>Note</strong> You can easily switch between modes at any point."
@@ -2994,6 +2994,18 @@ msgid "EDD Product"
 msgstr ""
 
 msgid "No schema found."
+msgstr ""
+
+msgid "Opening Hours"
+msgstr ""
+
+msgid "Days"
+msgstr ""
+
+msgid "Opening Time"
+msgstr ""
+
+msgid "Closing Time"
 msgstr ""
 
 msgid "Editor's Rating:"
@@ -4566,9 +4578,6 @@ msgstr ""
 msgid "Format used when the address is displayed using the <code>[rank_math_contact_info]</code> shortcode.<br><strong>Available Tags: {address}, {locality}, {region}, {postalcode}, {country}, {gps}</strong>"
 msgstr ""
 
-msgid "Opening Hours"
-msgstr ""
-
 msgid "Select opening hours. You can add multiple sets if you have different opening or closing hours on some days or if you have a mid-day break. Times are specified using 24:00 time."
 msgstr ""
 
@@ -4648,7 +4657,7 @@ msgstr ""
 msgid "Latitude and longitude values separated by comma."
 msgstr ""
 
-msgid "*Multiple Location option is coming soon."
+msgid "Multiple Locations are available in the %s."
 msgstr ""
 
 msgid "Redirection Debugger"
@@ -4935,15 +4944,6 @@ msgid "Recipe Ingredients"
 msgstr ""
 
 msgid "Recipe Instructions"
-msgstr ""
-
-msgid "Opening Time"
-msgstr ""
-
-msgid "Closing Time"
-msgstr ""
-
-msgid "Open Days"
 msgstr ""
 
 msgid "Serves Cuisine"

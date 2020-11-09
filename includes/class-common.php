@@ -122,7 +122,7 @@ class Common {
 		}
 		$overlay_image = $choices[ $type ]['url'];
 		$image         = wp_get_attachment_image_src( $thumbnail_id, 'large' );
-		$position      = $this->do_filter( 'social/overlay_image_position', 'middle_center', $thumbnail_id, $type );
+		$position      = $choices[ $type ]['position'];
 
 		if ( ! empty( $image ) ) {
 			$this->create_overlay_image( $image[0], $overlay_image, $position );
@@ -133,8 +133,11 @@ class Common {
 	/**
 	 * Calculate margins based on position string.
 	 *
-	 * @param string $position Position
-	 * @return void
+	 * @param string   $position Position string.
+	 * @param resource $image    GD image resource identifier.
+	 * @param resource $stamp    GD image resource identifier.
+	 *
+	 * @return array
 	 */
 	private function get_position_margins( $position, $image, $stamp ) {
 		$margins = [
@@ -314,13 +317,20 @@ class Common {
 			return;
 		}
 
-		// Set the margins for the stamp and get the height/width of the stamp image.
-		$img_width   = imagesx( $stamp );
-		$img_height  = imagesy( $stamp );
+		$stamp_width  = imagesx( $stamp );
+		$stamp_height = imagesy( $stamp );
+
+		$img_width  = imagesx( $image );
+		$img_height = imagesy( $image );
+
+		if ( $stamp_width > $img_width ) {
+			$stamp = imagescale( $stamp, $img_width );
+		}
 
 		$margins = $this->get_position_margins( $position, $image, $stamp );
+
 		// Copy the stamp image onto our photo using the margin offsets and the photo width to calculate positioning of the stamp.
-		imagecopy( $image, $stamp, $margins['left'], $margins['top'], 0, 0, $img_width, $img_height );
+		imagecopy( $image, $stamp, $margins['left'], $margins['top'], 0, 0, $stamp_width, $stamp_height );
 
 		// Output and free memory.
 		header( 'Content-type: image/png' );

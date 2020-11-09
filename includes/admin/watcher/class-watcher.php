@@ -210,6 +210,9 @@ class Watcher implements Runner {
 		$plugins = [
 			'wordpress-seo/wp-seo.php'                    => 'seo',
 			'wordpress-seo-premium/wp-seo-premium.php'    => 'seo',
+			'wpseo-local/local-seo.php'                   => 'seo',
+			'wpseo-news/wpseo-news.php'                   => 'seo',
+			'wpseo-video/video-seo.php'                   => 'seo',
 			'all-in-one-seo-pack/all_in_one_seo_pack.php' => 'seo',
 			'wp-seopress/seopress.php'                    => 'seo',
 			'wp-seopress-pro/seopress-pro.php'            => 'seo',

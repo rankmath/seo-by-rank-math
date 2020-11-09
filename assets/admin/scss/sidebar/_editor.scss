@@ -105,13 +105,13 @@
 		}
 
 		input[type="text"], input[type="url"], textarea, select {
-			background: #fff;
+			background-color: #fff;
 			margin: 0;
 
 			&:hover {
 				border-color: $primary;
 			}
-	
+
 			&:focus {
 				border-color: $primary;
 				box-shadow: 0 0 0 1px #069de3;

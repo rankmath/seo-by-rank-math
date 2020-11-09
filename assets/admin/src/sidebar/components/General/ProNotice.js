@@ -23,10 +23,13 @@ const ProNotice = ( { isPro } ) => {
 								rel="noopener noreferrer"
 							/>
 						),
+						strong: (
+							<strong />
+						),
 					} }
 				>
 					{ __(
-						'Want more? PRO version is coming soon. {{link}}Notify me!{{/link}} ',
+						'Want more? {{link}}{{strong}}Upgrade today to the PRO{{/strong}}{{/link}} version.',
 						'rank-math'
 					) }
 				</Interpolate>

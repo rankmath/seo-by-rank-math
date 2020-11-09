@@ -42,7 +42,11 @@ const SocialPreview = ( props ) => {
 									rankMath.overlayImages[ props.imageOverlay ]
 										.url
 								}
-								className="rank-math-social-preview-image-overlay"
+								className={
+									'rank-math-social-preview-image-overlay'
+										+ ' overlay-position-' 
+										+ rankMath.overlayImages[ props.imageOverlay ].position
+								}
 								alt=""
 							/>
 						) }

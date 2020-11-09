@@ -69,7 +69,7 @@ const CodeValidation = () => {
 							<li>{ __( 'Advanced Schema code viewer', 'rank-math' ) }</li>
 							<li>{ __( 'Live testing with Google', 'rank-math' ) }</li>
 						</ul>
-						<a className="button button-primary is-green" href="https://rankmath.com/pro/?utm_source=Plugin&utm_medium=Code+Validation&utm_campaign=WP" rel="noreferrer noopener" target="_blank">{ __( 'Notify Me!', 'rank-math' ) }</a>
+						<a className="button button-primary is-green" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Code+Validation&utm_campaign=WP" rel="noreferrer noopener" target="_blank">{ __( 'Upgrade', 'rank-math' ) }</a>
 					</div>
 				</div>
 			</div>

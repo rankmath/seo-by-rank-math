@@ -46,7 +46,7 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 			</h2>
 
 			{ ! rankMath.isPro && (
-				<a href="https://rankmath.com/pro/?utm_source=Plugin&utm_medium=Gutenberg%20General%20Tab%20Trends&utm_campaign=WP" title={ __( 'Google Trends', 'rank-math' ) } target="_blank" rel="noreferrer noopener" id="rank-math-compare-keywords-trigger" className="button button-icon rank-math-compare-keywords-trigger" dangerouslySetInnerHTML={ { __html: rankMath.trendsIcon } }></a>
+				<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Gutenberg%20General%20Tab%20Trends&utm_campaign=WP" title={ __( 'Google Trends', 'rank-math' ) } target="_blank" rel="noreferrer noopener" id="rank-math-compare-keywords-trigger" className="button button-icon rank-math-compare-keywords-trigger" dangerouslySetInnerHTML={ { __html: rankMath.trendsIcon } }></a>
 			) }
 
 			<RankMathAfterFocusKeyword.Slot>

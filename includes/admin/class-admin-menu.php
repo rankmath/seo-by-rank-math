@@ -96,7 +96,7 @@ class Admin_Menu implements Runner {
 			return;
 		}
 
-		$submenu['rank-math'][] = [ esc_html__( 'Help &amp; Support', 'rank-math' ), 'level_1', 'https://rankmath.com/kb/wordpress/seo-suite/?utm_source=Plugin&utm_campaign=WP' ];
+		$submenu['rank-math'][] = [ esc_html__( 'Help &amp; Support', 'rank-math' ) . '<i class="dashicons dashicons-external" style="font-size:12px;vertical-align:-2px;height:10px;"></i>', 'level_1', 'https://rankmath.com/kb/wordpress/seo-suite/?utm_source=Plugin&utm_campaign=WP' ];
 
 		// Store ID of first_menu item so we can use it in the Admin menu item.
 		set_transient( 'rank_math_first_submenu_id', array_values( $submenu['rank-math'] )[0][2] );

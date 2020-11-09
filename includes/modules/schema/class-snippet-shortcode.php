@@ -81,7 +81,7 @@ class Snippet_Shortcode {
 		}
 
 		$data = $this->get_data( $atts['id'], $atts['post_id'] );
-		if ( empty( $data ) ) {
+		if ( empty( $data ) || empty( $data['schema'] ) ) {
 			return esc_html__( 'No schema found.', 'rank-math' );
 		}
 
@@ -130,8 +130,11 @@ class Snippet_Shortcode {
 	 * @return array
 	 */
 	private function replace_variables( $schemas, $post ) {
-		$new_schemas = [];
+		if ( ! is_array( $schemas ) && ! is_object( $schemas ) ) {
+			return [];
+		}
 
+		$new_schemas = [];
 		foreach ( $schemas as $key => $schema ) {
 			if ( 'metadata' === $key ) {
 				continue;
@@ -239,6 +242,50 @@ class Snippet_Shortcode {
 		}
 
 		$this->output_field( $title, $value );
+	}
+
+	/**
+	 * Get Opening hours data.
+	 *
+	 * @param string $field_id Field id to get value.
+	 */
+	public function get_opening_hours( $field_id ) {
+		$opening_hours = $this->get_field_value( $field_id );
+		if ( empty( $opening_hours ) ) {
+			return;
+		}
+
+		if ( count( array_filter( array_keys( $opening_hours ), 'is_string' ) ) > 0 ) {
+			$this->get_opening_hour( $opening_hours );
+			return;
+		}
+
+		echo '<div>';
+		echo '<strong>' . esc_html__( 'Opening Hours', 'rank-math' ) . '</strong><br />';
+		foreach ( $opening_hours as $opening_hour ) {
+			$this->get_opening_hour( $opening_hour );
+		}
+		echo '</div>';
+	}
+
+	/**
+	 * Get Opening hours.
+	 *
+	 * @param array $opening_hour Opening hours data.
+	 */
+	public function get_opening_hour( $opening_hour ) {
+		$labels = [
+			'dayOfWeek' => esc_html__( 'Days', 'rank-math' ),
+			'opens'     => esc_html__( 'Opening Time', 'rank-math' ),
+			'closes'    => esc_html__( 'Closing Time', 'rank-math' ),
+		];
+		foreach ( $labels as $key => $label ) {
+			if ( empty( $opening_hour[ $key ] ) ) {
+				continue;
+			}
+
+			$this->output_field( $label, $opening_hour[ $key ] );
+		}
 	}
 
 	/**

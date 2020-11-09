@@ -397,6 +397,10 @@ class SocialFields {
 		if ( 'on' === isOverlay ) {
 			overlay
 				.attr( 'src', rankMath.overlayImages[ iconOverlay ].url )
+				.attr( 'class', function() {
+					let current = $( this ).attr('class')
+					return current.replace( /(^| )overlay-position-[a-zA-Z0-9_-]+/, '' ) + ' overlay-position-' + rankMath.overlayImages[ iconOverlay ].position
+				} )
 				.show()
 
 			$(

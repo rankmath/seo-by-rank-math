@@ -144,13 +144,17 @@ class Admin implements Runner {
 			return;
 		endif;
 
+		echo '<ul class="rank-math-blog-list">';
 		foreach ( $posts as $post ) :
 			?>
-			<div class="rank-math-blog-post">
+			<li class="rank-math-blog-post">
 				<h4><a target="_blank" href="<?php echo esc_url( $post['link'] ); ?>?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP"><?php echo esc_html( $post['title']['rendered'] ); ?></a></h4>
-				<?php echo wp_kses_post( $post['excerpt']['rendered'] ); ?>
-			</div>
-		<?php endforeach; ?>
+			</li>
+			<?php
+		endforeach;
+		echo '</ul>';
+		?>
+
 		<div class="rank-math-widget-footer">
 			<a target="_blank" href="https://rankmath.com/blog/?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP">
 				<?php esc_html_e( 'Blog', 'rank-math' ); ?>
@@ -162,11 +166,13 @@ class Admin implements Runner {
 				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
 				<span aria-hidden="true" class="dashicons dashicons-external"></span>
 			</a>
-			<a target="_blank" href="https://rankmath.com/pro/?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP" class="rank-math-widget-go-pro">
-				<?php esc_html_e( 'Go Pro', 'rank-math' ); ?>
-				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
-				<span aria-hidden="true" class="dashicons dashicons-external"></span>
-			</a>
+			<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) { ?>
+				<a target="_blank" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP" class="rank-math-widget-go-pro">
+					<?php esc_html_e( 'Go Pro', 'rank-math' ); ?>
+					<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
+					<span aria-hidden="true" class="dashicons dashicons-external"></span>
+				</a>
+			<?php } ?>
 		</div>
 		<?php
 	}

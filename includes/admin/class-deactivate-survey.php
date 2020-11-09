@@ -50,21 +50,13 @@ class Deactivate_Survey implements Runner {
 			$this->get_uninstall_reasons()[ $reason_key ]['title']
 		);
 
-		wp_safe_remote_post(
-			'https://rankmath.com/wp-json/rankmath/v1/deactivationSurvey',
+		Api::get()->deactivate_feedback(
 			[
-				'timeout'   => 30,
-				'blocking'  => false,
-				'sslverify' => false,
-				'cookies'   => [],
-				'headers'   => [ 'user-agent' => 'RankMath/' . md5( esc_url( home_url( '/' ) ) ) . ';' ],
-				'body'      => [
-					'product_slug'    => 'rank-math-suite',
-					'product_name'    => 'Rank Math Suite',
-					'product_version' => rank_math()->version,
-					'feedback_key'    => $reason_key,
-					'feedback'        => $reason_text,
-				],
+				'product_slug'    => 'rank-math-suite',
+				'product_name'    => 'Rank Math Suite',
+				'product_version' => rank_math()->version,
+				'feedback_key'    => $reason_key,
+				'feedback'        => $reason_text,
 			]
 		);
 

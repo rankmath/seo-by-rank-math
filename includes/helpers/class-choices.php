@@ -53,6 +53,11 @@ trait Choices {
 			]
 		);
 
+		// Allow custom positions.
+		foreach ( $list as $name => $data ) {
+			$list[ $name ]['position'] = apply_filters( 'rank_math/social/overlay_image_position', 'middle_center', $name );
+		}
+
 		return 'names' === $output ? wp_list_pluck( $list, 'name' ) : $list;
 	}
 

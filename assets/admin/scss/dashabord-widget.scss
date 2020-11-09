@@ -178,8 +178,18 @@
             }
 
             &-blog {
+                &-list {
+                    list-style-type: square;
+                    margin-left: 17px;
+                    margin-bottom: 1.5rem;
+
+                    li {
+                        margin-bottom: 0.5rem;
+                    }
+                }
+
                 &-title {
-                    margin: 2rem 0 1rem;
+                    margin: 1.5rem 0 1rem;
                 }
 
                 &-post {

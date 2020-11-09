@@ -237,6 +237,7 @@ class Admin extends Base {
 			'metadata' => [
 				'title'     => self::sanitize_schema_title( $default_type ),
 				'type'      => 'template',
+				'shortcode' => uniqid( 's-' ),
 				'isPrimary' => true,
 			],
 		];

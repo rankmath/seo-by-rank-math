@@ -41,26 +41,7 @@ $this->get_image();
 	);
 	?>
 
-	<?php
-	$this->get_field(
-		esc_html__( 'Opening Time', 'rank-math' ),
-		'openingHoursSpecification.opens'
-	);
-	?>
-
-	<?php
-	$this->get_field(
-		esc_html__( 'Closing Time', 'rank-math' ),
-		'openingHoursSpecification.closes'
-	);
-	?>
-
-	<?php
-	$this->get_field(
-		esc_html__( 'Open Days', 'rank-math' ),
-		'openingHoursSpecification.dayOfWeek'
-	);
-	?>
+	<?php $this->get_opening_hours( 'openingHoursSpecification' ); ?>
 
 	<?php
 	$this->get_field(

@@ -15,7 +15,7 @@ export default () => (
 					<li>{ __( 'Import Schema from ANY website', 'rank-math' ) }</li>
 					<li>{ __( 'Create Advanced templates', 'rank-math' ) }</li>
 				</ul>
-				<a className="button button-primary is-green" href="https://rankmath.com/pro/?utm_source=Plugin&utm_medium=Custom+Builder&utm_campaign=WP" rel="noreferrer noopener" target="_blank">{ __( 'Notify Me!', 'rank-math' ) }</a>
+				<a className="button button-primary is-green" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Custom+Builder&utm_campaign=WP" rel="noreferrer noopener" target="_blank">{ __( 'Upgrade', 'rank-math' ) }</a>
 			</div>
 		</div>
 	</div>

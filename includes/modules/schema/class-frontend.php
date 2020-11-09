@@ -195,7 +195,19 @@ class Frontend {
 			$schemas['WebPage']['@type'] = 'ItemPage';
 		}
 
-		if ( in_array( 'faqs', array_keys( $schemas ), true ) ) {
+		$faq_data = array_map(
+			function( $schema ) {
+				return 'FAQPage' === $schema['@type'];
+			},
+			$schemas
+		);
+
+		$faq_key = ! empty( $faq_data ) ? key( array_filter( $faq_data ) ) : '';
+		if ( ! $faq_key ) {
+			return $schemas;
+		}
+
+		if ( in_array( $faq_key, array_keys( $schemas ), true ) ) {
 			$schemas['WebPage']['@type'] =
 				! empty( $types )
 					? [
@@ -204,9 +216,9 @@ class Frontend {
 					]
 					: 'FAQPage';
 
-			$schemas['WebPage']['mainEntity'] = $schemas['faqs']['mainEntity'];
+			$schemas['WebPage']['mainEntity'] = $schemas[ $faq_key ]['mainEntity'];
 
-			unset( $schemas['faqs'] );
+			unset( $schemas[ $faq_key ] );
 		}
 
 		return $schemas;

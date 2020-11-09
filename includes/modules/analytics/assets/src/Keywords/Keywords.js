@@ -11,7 +11,6 @@ import { useState, Fragment } from '@wordpress/element'
 import Header from '@scShared/Header'
 import StatFilter from './StatFilter'
 import PositionFilter from './PositionFilter'
-import KeywordsTracked from './KeywordsTracked'
 import KeywordsTable from './KeywordsTable'
 import PositionGraph from './PositionGraph'
 import KeywordGraph from './KeywordGraph'
@@ -61,7 +60,6 @@ const Keywords = () => {
 			<PositionGraph selected={ position } />
 			<StatFilter selected={ selected } setSelection={ setSelection } />
 			<KeywordGraph selected={ selected } />
-			<KeywordsTracked />
 			<TopKeywords />
 			<KeywordsTable />
 		</Fragment>

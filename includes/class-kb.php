@@ -27,8 +27,8 @@ class KB {
 	 * @var array
 	 */
 	private $links = [
-		'pro-general-g'               => 'https://rankmath.com/pro/?utm_source=Plugin&utm_medium=Gutenberg%20General%20Tab%20Notice&utm_campaign=WP',
-		'pro-general-ce'              => 'https://rankmath.com/pro/?utm_source=Plugin&utm_medium=CE%20General%20Tab%20Notice&utm_campaign=WP',
+		'pro-general-g'               => 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Gutenberg%20General%20Tab%20Notice&utm_campaign=WP',
+		'pro-general-ce'              => 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=CE%20General%20Tab%20Notice&utm_campaign=WP',
 		'seo-suite'                   => 'https://rankmath.com/?utm_source=Plugin&utm_campaign=WP',
 		'logo'                        => 'https://rankmath.com/wordpress/plugin/seo-suite/?utm_source=Plugin&utm_campaign=WP',
 		'rm-privacy'                  => 'https://rankmath.com/privacy-policy/?utm_source=Plugin&utm_campaign=WP',

@@ -264,6 +264,6 @@ $cmb->add_field(
 		'name'  => esc_html__( 'Geo Coordinates', 'rank-math' ),
 		'desc'  => esc_html__( 'Latitude and longitude values separated by comma.', 'rank-math' ),
 		'dep'   => $company,
-		'after' => '<strong style="margin-top:20px; display:block; text-align:right;">' . __( '*Multiple Location option is coming soon.', 'rank-math' ) . '</strong>',
+		'after' => '<strong style="margin-top:20px; display:block; text-align:right;">' . sprintf( __( 'Multiple Locations are available in the %s.', 'rank-math' ), '<a href="https://rankmath.com/prcing/?utm_source=Plugin&utm_medium=Multiple%20Location%20Notice&utm_campaign=WP" target="_blank">PRO Version</a>' ) . '</strong>',
 	]
 );

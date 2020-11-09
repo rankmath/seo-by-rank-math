@@ -20,6 +20,7 @@ import Dashboard from './Dashboard/Dashboard'
 import Performance from './Performance/Performance'
 import Keywords from './Keywords/Keywords'
 import Single from './Single/Single'
+import KeywordsTracked from './Keywords/KeywordsTracked'
 
 const getTabs = () => {
 	const tabs = []
@@ -94,6 +95,21 @@ const getTabs = () => {
 		path: '/single/:id',
 		view: Single,
 		className: 'rank-math-single-tab',
+	} )
+
+	tabs.push( {
+		path: '/tracker',
+		title: (
+			<Fragment>
+				<i
+					className="rm-icon rm-icon-acf"
+					title={ __( 'Rank Tracker', 'rank-math' ) }
+				></i>
+				<span>{ __( 'Rank Tracker', 'rank-math' ) }</span>
+			</Fragment>
+		),
+		view: KeywordsTracked,
+		className: 'rank-math-tracker-tab',
 	} )
 
 	return applyFilters( 'rank_math_search_console_tabs', tabs )

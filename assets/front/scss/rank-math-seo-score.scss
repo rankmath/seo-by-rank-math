@@ -13,7 +13,7 @@
 /**
  * Styling for Rank Math front end SEO Score
  */
-.rank-math-seo-score {
+.#{$namespace}-seo-score {
 	font-family: sans-serif;
 
 	position: relative;
@@ -208,5 +208,27 @@
 		&.after-content {
 			margin-bottom: 0;
 		}
+	}
+}
+
+// Twenty-Twenty Theme
+.theme-twentytwenty {
+
+	.#{$namespace}-seo-score {
+	    width: 96px!important;
+
+			&.template-square {
+				width: 110px !important;
+			}
+
+			&.before-content {
+			   margin: 0 auto 30px auto;
+			   display: inherit;
+			   float: none;
+			}
+			&.template-circle .score,
+			&.template-square .score {
+			    transform: translateY(22px);
+			}
 	}
 }

@@ -33,7 +33,7 @@ const SchemaList = ( { schemas, edit, trash, preview, showProNotice } ) => {
 			{ showProNotice && (
 				<div className="components-notice rank-math-notice is-warning">
 					<div className="components-notice__content">
-						{ __( 'Multiple Schemas are allowed in the', 'rank-math' ) } <a href="https://rankmath.com/pro/?utm_source=Plugin&utm_medium=Schema%20Tab%20Notice&utm_campaign=WP" rel="noreferrer noopener" target="_blank"><strong>{ __( 'PRO Version [Coming Soon]', 'rank-math' ) }</strong></a>
+						{ __( 'Multiple Schemas are allowed in the', 'rank-math' ) } <a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Schema%20Tab%20Notice&utm_campaign=WP" rel="noreferrer noopener" target="_blank"><strong>{ __( 'PRO Version', 'rank-math' ) }</strong></a>
 					</div>
 				</div>
 			) }

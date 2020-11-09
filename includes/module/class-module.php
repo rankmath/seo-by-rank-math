@@ -107,6 +107,15 @@ class Module {
 	}
 
 	/**
+	 * Does module has PRO version?
+	 *
+	 * @return bool
+	 */
+	public function is_probadge() {
+		return isset( $this->args['probadge'] ) && $this->args['probadge'] && defined( 'RANK_MATH_PRO_FILE' );
+	}
+
+	/**
 	 * Is module disabled.
 	 *
 	 * @return bool
