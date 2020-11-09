@@ -296,7 +296,23 @@ class Post_Variables extends Advanced_Variables {
 	 * @return string
 	 */
 	public function get_seo_description() {
-		return Paper::get()->get_description();
+		if ( is_singular() ) {
+			return Paper::get()->get_description();
+		}
+
+		$object = $this->args;
+
+		// Early Bail!
+		if ( empty( $object ) || empty( $object->ID ) ) {
+			return '';
+		}
+
+		$description = Post::get_meta( 'description', $object->ID );
+		if ( '' !== $description ) {
+			return $description;
+		}
+
+		return Paper::get_from_options( "pt_{$object->post_type}_description", $object, '%excerpt%' );
 	}
 
 	/**

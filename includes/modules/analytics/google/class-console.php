@@ -270,23 +270,6 @@ class Console extends Analytics {
 	 *
 	 * @return string
 	 */
-	public static function is_console_connected() {
-		$profile = wp_parse_args(
-			get_option( 'rank_math_google_analytic_profile' ),
-			[
-				'profile' => '',
-				'country' => 'all',
-			]
-		);
-
-		return ! empty( $profile['profile'] );
-	}
-
-	/**
-	 * Get site url.
-	 *
-	 * @return string
-	 */
 	public static function get_site_url() {
 		static $rank_math_site_url;
 
@@ -297,5 +280,22 @@ class Console extends Analytics {
 		}
 
 		return $rank_math_site_url;
+	}
+
+	/**
+	 * Get site url.
+	 *
+	 * @return string
+	 */
+	public static function is_console_connected() {
+		$profile = wp_parse_args(
+			get_option( 'rank_math_google_analytic_profile' ),
+			[
+				'profile' => '',
+				'country' => 'all',
+			]
+		);
+
+		return ! empty( $profile['profile'] );
 	}
 }

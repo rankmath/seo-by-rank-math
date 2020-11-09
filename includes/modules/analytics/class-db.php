@@ -160,7 +160,19 @@ class DB {
 	 * @return boolean
 	 */
 	public static function date_exists( $date ) {
-		$id = self::analytics()
+		$is_console   = \RankMath\Google\Console::is_console_connected();
+		$is_analytics = \RankMath\Google\Analytics::is_analytics_connected();
+
+		if ( ! $is_console && ! $is_analytics ) {
+			return true;
+		}
+
+		$id = self::analytics();
+		if ( ! $is_console && $is_analytics ) {
+			$id = self::table( 'rank_math_analytics_ga' );
+		}
+
+		$id = $id
 			->select( 'id' )
 			->where( 'created', $date )
 			->getVar();

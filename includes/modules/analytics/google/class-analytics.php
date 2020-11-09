@@ -63,4 +63,18 @@ class Analytics extends Request {
 
 		return $accounts;
 	}
+
+	/**
+	 * Get site url.
+	 *
+	 * @return string
+	 */
+	public static function is_analytics_connected() {
+		$account = wp_parse_args(
+			get_option( 'rank_math_google_analytic_options' ),
+			[ 'view_id' => '' ]
+		);
+
+		return ! empty( $account['view_id'] );
+	}
 }

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.3
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.52
+Stable tag: 1.0.52.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -474,6 +474,9 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.52.1 [Nov 09, 2020] =
+* Squashed a couple of small issues
 
 = 1.0.52 [Nov 09, 2020] =
 * Added: External icon in the Help & Support sidebar menu to [Rank Math's KB](https://rankmath.com/kb/)
