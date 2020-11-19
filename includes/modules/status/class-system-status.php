@@ -10,6 +10,8 @@
 
 namespace RankMath\Status;
 
+use RankMath\Google\Authentication;
+use RankMath\Admin\Admin_Helper;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\WordPress as WordPress_Helper;
 
@@ -110,17 +112,35 @@ class System_Status {
 	private function prepare_info() {
 		global $wpdb;
 
-		$tables        = [];
-		$db_index_size = 0;
-		$db_data_size  = 0;
+		$plan   = Admin_Helper::get_registration_data();
+		$tokens = Authentication::tokens();
 
-		$database_table_information = $wpdb->get_results(
+		$rankmath = [
+			'label'  => esc_html__( 'Rank Math', 'rank-math' ),
+			'fields' => [
+				'version' => [
+					'label' => esc_html__( 'Version', 'rank-math' ),
+					'value' => get_option( 'rank_math_version' ),
+				],
+				'database_version' => [
+					'label' => esc_html__( 'Database version', 'rank-math' ),
+					'value' => get_option( 'rank_math_db_version' ),
+				],
+				'plugin_plan' => [
+					'label' => esc_html__( 'Plugin subscription plan', 'rank-math' ),
+					'value' => isset( $plan['plan'] ) ? \ucwords( $plan['plan'] ) : esc_html__( 'Free', 'rank-math' ),
+				],
+				'refresh_token' => [
+					'label' => esc_html__( 'Google Refresh token', 'rank-math' ),
+					'value' => empty( $tokens['refresh_token'] ) ? esc_html__( 'No token', 'rank-math' ) : esc_html__( 'Token exists', 'rank-math' ),
+				],
+			],
+		];
+
+		$database_tables = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT
-				table_name AS 'name',
-				engine AS 'engine',
-				round( ( data_length / 1024 / 1024 ), 2 ) 'data',
-				round( ( index_length / 1024 / 1024 ), 2 ) 'index'
+				table_name AS 'name'
 				FROM information_schema.TABLES
 				WHERE table_schema = %s
 				AND table_name LIKE %s
@@ -131,25 +151,30 @@ class System_Status {
 		);
 
 		$tables = [];
-		foreach ( $database_table_information as $table ) {
-			$tables[ $table->name ] = [
-				'data'   => $table->data,
-				'index'  => $table->index,
-				'engine' => $table->engine,
-			];
-
-			$db_data_size  += $table->data;
-			$db_index_size += $table->index;
+		foreach ( $database_tables as $table ) {
+			$name = \str_replace( $wpdb->prefix, '', $table->name );
+			$tables[ $name ] = true;
 		}
 
-		$this->info = [
-			'database_version' => get_option( 'rank_math_db_version' ),
-			'table_prefix'     => $wpdb->prefix,
-			'tables'           => $tables,
-			'data_size'        => $db_data_size . 'MB',
-			'index_size'       => $db_index_size . 'MB',
-			'total_size'       => $db_data_size + $db_index_size . 'MB',
+		$should_exists = [
+			'rank_math_404_logs'                  => esc_html__( 'Databse Table: 404 Log', 'rank-math' ),
+			'rank_math_redirections'              => esc_html__( 'Databse Table: Redirection', 'rank-math' ),
+			'rank_math_redirections_cache'        => esc_html__( 'Databse Table: Redirection Cache', 'rank-math' ),
+			'rank_math_internal_links'            => esc_html__( 'Databse Table: Internal Link', 'rank-math' ),
+			'rank_math_internal_meta'             => esc_html__( 'Databse Table: Internal Link Meta', 'rank-math' ),
+			'rank_math_analytics_gsc'             => esc_html__( 'Databse Table: Google Search Console', 'rank-math' ),
+			'rank_math_analytics_objects'         => esc_html__( 'Databse Table: Flat Posts', 'rank-math' ),
+			'rank_math_analytics_ga'              => esc_html__( 'Databse Table: Google Analytics', 'rank-math' ),
+			'rank_math_analytics_adsense'         => esc_html__( 'Databse Table: Google AdSense', 'rank-math' ),
+			'rank_math_analytics_keyword_manager' => esc_html__( 'Databse Table: Keyword Manager', 'rank-math' ),
 		];
+
+		foreach ( $should_exists as $name => $label ) {
+			$rankmath['fields'][ $name ] = [
+				'label' => $label,
+				'value' => isset( $tables[ $name ] ) ? esc_html__( 'Created', 'rank-math' ) : esc_html__( 'Doesn\'t exists', 'rank-math' ),
+			];
+		}
 
 		// Core debug data.
 		if ( ! class_exists( 'WP_Debug_Data' ) ) {
@@ -157,7 +182,7 @@ class System_Status {
 		}
 		wp_enqueue_style( 'site-health' );
 		wp_enqueue_script( 'site-health' );
-		$this->wp_info = \WP_Debug_Data::debug_data();
+		$this->wp_info = [ 'rank-math' => $rankmath ] + \WP_Debug_Data::debug_data();
 		unset( $this->wp_info['wp-paths-sizes'] );
 	}
 }

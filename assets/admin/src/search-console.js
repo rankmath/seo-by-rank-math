@@ -138,7 +138,7 @@ class SearchConsole {
 
 			const data = {
 				profile: this.profileSelect.val(),
-				country: jQuery( '.site-console-country' ).val(),
+				country: this.countryConsole.val(),
 			}
 
 			const days = jQuery( '#console_caching_control' )
@@ -165,7 +165,7 @@ class SearchConsole {
 				accountID: this.accountSelect.val(),
 				propertyID: this.propertySelect.val(),
 				viewID: this.viewSelect.val(),
-				country: jQuery( '.site-analytics-country' ).val(),
+				country: this.countryAnalytics.val(),
 				installCode: jQuery( '#install-code' ).is( ':checked' ),
 				anonymizeIP: jQuery( '#anonymize-ip' ).is( ':checked' ),
 				excludeLoggedin: jQuery( '#exclude-loggedin' ).is( ':checked' ),

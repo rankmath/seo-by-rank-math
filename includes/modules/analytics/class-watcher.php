@@ -76,7 +76,7 @@ class Watcher {
 		$fk      = get_post_meta( $post_id, 'rank_math_focus_keyword', true );
 		$schemas = \RankMath\Schema\DB::get_schema_types( $post_id );
 
-		if ( 'off' === get_post_meta( $post_id, 'rank_math_rich_snippet', true ) ) {
+		if ( empty( $schemas ) && 'off' === get_post_meta( $post_id, 'rank_math_rich_snippet', true ) ) {
 			$schemas = __( 'None', 'rank-math' );
 		}
 

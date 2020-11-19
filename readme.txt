@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.3
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.52.2
+Stable tag: 1.0.52.3
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,10 +475,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.52.2 [Nov 13, 2020] =
-* Improved: Schema tab styling in the [Elementor Editor](https://rankmath.com/blog/elementor-seo/)
-* Fixed: uBlock & some other Ad Blocking browser extensions were falsely blocking Analytics page-related scripts
-* Fixed: Styling of the graph filters in the [Analytics page](https://rankmath.com/kb/analytics/) was breaking due to unnecessary CSS files loading from WooCommerce and AutomateWoo plugins
-* Fixed: [Rank Math Tools](https://rankmath.com/kb/rank-math-status-and-tools/) were not showing the notice after using them
+= 1.0.53 [Nov 19, 2020] =
+* Added: New tools are added for better debugging in [Rank Math status & tools section](https://rankmath.com/kb/rank-math-status-and-tools/)
+* Improved: [Sitemaps](https://rankmath.com/kb/configure-sitemaps/) won't throw a 404 error when there are no links inside them
+* Improved: WooCommerce Product Schema will now add the rating value only if the value is greater than 0
+* Fixed: Global [WooCommerce Product Schema](https://rankmath.com/blog/woocommerce-seo/) was not getting applied on the older posts
+* Fixed: Country selection was not working for the [Google services](https://rankmath.com/kb/analytics/)
+* Fixed: Validating the ISO 8601 duration before converting it to seconds for the [Video Schema](https://rankmath.com/kb/rich-snippets/#17-video)
+* Fixed: Recipe Instructions data was not getting ported over to the new Graph Schema. Affected users are requested to run the [Schema Converter](https://i.rankmath.com/Y2sDnX) from the Database tools section
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

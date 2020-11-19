@@ -44,6 +44,7 @@ class Analytics_Common {
 
 		$this->filter( 'rank_math/tools/analytics_clear_caches', 'analytics_clear_caches' );
 		$this->filter( 'rank_math/tools/analytics_reindex_posts', 'analytics_reindex_posts' );
+		$this->filter( 'rank_math/tools/analytics_recreate_table', 'analytics_recreate_table' );
 	}
 
 	/**
@@ -115,5 +116,20 @@ class Analytics_Common {
 		delete_option( 'rank_math_flat_posts_done' );
 		Data_Fetcher::get()->flat_posts();
 		return __( 'Post re-index in progress.', 'rank-math' );
+	}
+
+	/**
+	 * Recreate tables.
+	 */
+	public function analytics_recreate_table() {
+		delete_option( 'rank_math_analytics_installed' );
+		( new \RankMath\Analytics\Installer() )->install( false );
+
+		if ( defined( 'RANK_MATH_PRO_VERSION' ) ) {
+			delete_option( 'rank_math_analytics_pro_installed' );
+			( new \RankMathPro\Analytics\Installer() )->install();
+		}
+
+		return __( 'Tables re-created.', 'rank-math' );
 	}
 }

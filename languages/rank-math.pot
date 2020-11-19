@@ -2449,6 +2449,9 @@ msgstr ""
 msgid "Post re-index in progress."
 msgstr ""
 
+msgid "Tables re-created."
+msgstr ""
+
 msgid "Last 30 Days"
 msgstr ""
 
@@ -2550,6 +2553,16 @@ msgid "Missing some posts/pages in the Analytics data? Clear the index and build
 msgstr ""
 
 msgid "Rebuild Index"
+msgstr ""
+
+msgid "Re-create database Table"
+msgstr ""
+
+#. translators: 1. Review Schema documentation link
+msgid "Create database tables if missing."
+msgstr ""
+
+msgid "Re-create Tables"
 msgstr ""
 
 msgid "Sorry, no post found for given id."
@@ -3399,6 +3412,63 @@ msgid "System Info"
 msgstr ""
 
 msgid "Copy System Info to Clipboard"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Database version"
+msgstr ""
+
+msgid "Plugin subscription plan"
+msgstr ""
+
+msgid "Free"
+msgstr ""
+
+msgid "Google Refresh token"
+msgstr ""
+
+msgid "No token"
+msgstr ""
+
+msgid "Token exists"
+msgstr ""
+
+msgid "Databse Table: 404 Log"
+msgstr ""
+
+msgid "Databse Table: Redirection"
+msgstr ""
+
+msgid "Databse Table: Redirection Cache"
+msgstr ""
+
+msgid "Databse Table: Internal Link"
+msgstr ""
+
+msgid "Databse Table: Internal Link Meta"
+msgstr ""
+
+msgid "Databse Table: Google Search Console"
+msgstr ""
+
+msgid "Databse Table: Flat Posts"
+msgstr ""
+
+msgid "Databse Table: Google Analytics"
+msgstr ""
+
+msgid "Databse Table: Google AdSense"
+msgstr ""
+
+msgid "Databse Table: Keyword Manager"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Doesn't exists"
 msgstr ""
 
 msgid "This update will install a beta version of Rank Math."

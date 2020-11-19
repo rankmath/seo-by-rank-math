@@ -21,6 +21,7 @@ import RankMathApp from '../rankMathApp'
 /**
  * Data Collectors
  */
+import { getStore } from '@root/redux/store'
 import GutenbergDataCollector from '@classic/collectors/gutenbergDataCollector'
 import PostCollector from '@classic/collectors/PostCollector'
 import TermCollector from '@classic/collectors/TermCollector'
@@ -110,6 +111,7 @@ class ClassicEditor {
 }
 
 jQuery( document ).ready( () => {
+	getStore()
 	window.rankMathEditor = new ClassicEditor()
 	window.rankMathEditor.setup()
 	window.RankMathApp = new RankMathApp()

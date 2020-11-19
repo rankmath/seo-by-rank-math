@@ -649,6 +649,10 @@ trait Choices {
 			$post_type
 		);
 
+		if ( ! $schema ) {
+			return false;
+		}
+
 		if ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) {
 			return 'WooCommerceProduct';
 		}

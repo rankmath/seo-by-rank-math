@@ -493,6 +493,12 @@ class Analytics extends Base {
 					'description' => sprintf( __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' ), '<a href="https://rankmath.com/kb/how-to-fix-review-schema-errors/" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' ),
 					'button_text' => __( 'Rebuild Index', 'rank-math' ),
 				],
+				'analytics_recreate_table' => [
+					'title'       => __( 'Re-create database Table', 'rank-math' ),
+					/* translators: 1. Review Schema documentation link */
+					'description' => __( 'Create database tables if missing.', 'rank-math' ),
+					'button_text' => __( 'Re-create Tables', 'rank-math' ),
+				],
 			],
 			3
 		);

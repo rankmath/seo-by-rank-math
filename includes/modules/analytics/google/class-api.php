@@ -54,6 +54,7 @@ class Api extends Console {
 
 		$tokens      = Authentication::tokens();
 		$this->token = $tokens['access_token'];
+		$this->refresh_token_on_login();
 	}
 
 	/**
@@ -67,7 +68,6 @@ class Api extends Console {
 
 		$tokens = Authentication::tokens();
 		if ( empty( $tokens['refresh_token'] ) ) {
-			// Authentication::tokens( false );
 			return;
 		}
 

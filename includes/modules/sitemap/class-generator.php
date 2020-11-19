@@ -167,7 +167,7 @@ class Generator extends XML {
 			}
 
 			$links = $provider->get_sitemap_links( $type, $this->max_entries, $page );
-			return empty( $links ) ? '' : $this->get_sitemap( $links, $type, $page );
+			return $this->get_sitemap( $links, $type, $page );
 		}
 
 		return $this->do_filter( "sitemap/{$type}/content", '' );

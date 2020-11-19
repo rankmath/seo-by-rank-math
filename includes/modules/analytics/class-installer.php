@@ -68,8 +68,8 @@ class Installer {
 				position DOUBLE NOT NULL,
 				ctr DOUBLE NOT NULL,
 				PRIMARY KEY (id),
-				INDEX analytics_query (query),
-				INDEX analytics_page (page),
+				INDEX analytics_query (query(190)),
+				INDEX analytics_page (page(190)),
 				INDEX clicks (clicks),
 				INDEX position (position)
 			) $collate;",
@@ -93,7 +93,7 @@ class Installer {
 				mobile_pagescore DOUBLE DEFAULT 0,
 				pagespeed_refreshed TIMESTAMP,
 				PRIMARY KEY (id),
-				INDEX analytics_object_page (page)
+				INDEX analytics_object_page (page(190))
 			) $collate;",
 		];
 

@@ -29,7 +29,10 @@ class Recipe implements Snippet {
 	 * @return array
 	 */
 	public function process( $data, $jsonld ) {
-		$entity = [
+		$cook_time  = Helper::get_post_meta( 'snippet_recipe_cooktime' );
+		$prep_time  = Helper::get_post_meta( 'snippet_recipe_preptime' );
+		$total_time = Helper::get_post_meta( 'snippet_recipe_totaltime' );
+		$entity     = [
 			'@type'            => 'Recipe',
 			'name'             => $jsonld->parts['title'],
 			'description'      => $jsonld->parts['desc'],
@@ -38,9 +41,9 @@ class Recipe implements Snippet {
 				'@type' => 'Person',
 				'name'  => $jsonld->parts['author'],
 			],
-			'prepTime'         => 'PT' . Helper::get_post_meta( 'snippet_recipe_preptime' ),
-			'cookTime'         => 'PT' . Helper::get_post_meta( 'snippet_recipe_cooktime' ),
-			'totalTime'        => 'PT' . Helper::get_post_meta( 'snippet_recipe_totaltime' ),
+			'prepTime'         => $prep_time ? 'PT' . $prep_time : '',
+			'cookTime'         => $cook_time ? 'PT' . $cook_time : '',
+			'totalTime'        => $total_time ? 'PT' . $total_time : '',
 			'recipeCategory'   => Helper::get_post_meta( 'snippet_recipe_type' ),
 			'recipeCuisine'    => Helper::get_post_meta( 'snippet_recipe_cuisine' ),
 			'keywords'         => Helper::get_post_meta( 'snippet_recipe_keywords' ),

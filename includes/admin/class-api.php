@@ -119,7 +119,7 @@ class Api {
 			[
 				'username' => $username,
 				'api_key'  => $api_key,
-				'site_url' => esc_url( site_url() ),
+				'site_url' => esc_url( home_url() ),
 			]
 		);
 	}

@@ -147,7 +147,7 @@ class Frontend_SEO_Score {
 			<div class="rank-math-seo-score template-<?php echo sanitize_html_class( $args['template'], 'circle' ); ?> <?php echo sanitize_html_class( $rating, 'unknown' ); ?>-seo <?php echo esc_attr( $args['class'] ); ?>">
 
 				<span class="score">
-					<?php echo esc_html( $score ); ?>
+					<?php echo esc_html( absint( $score ) ); ?>
 					<span class="outof">
 						/ 100
 					</span>

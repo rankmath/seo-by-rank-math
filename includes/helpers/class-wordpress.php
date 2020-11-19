@@ -367,7 +367,11 @@ trait WordPress {
 	 * @return int
 	 */
 	public static function duration_to_seconds( $iso8601 ) {
-		$iso8601  = ! Str::starts_with( 'PT', $iso8601 ) ? 'PT' . $iso8601 : $iso8601;
+		$end = substr( $iso8601, -1 );
+		if ( ! in_array( $end, [ 'D', 'H', 'M', 'S' ], true ) ) {
+			$iso8601 = $iso8601 . 'S';
+		}
+		$iso8601  = ! Str::starts_with( 'P', $iso8601 ) ? 'PT' . $iso8601 : $iso8601;
 		$interval = new \DateInterval( $iso8601 );
 
 		return array_sum(

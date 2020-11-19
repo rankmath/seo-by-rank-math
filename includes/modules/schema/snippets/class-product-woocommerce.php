@@ -202,6 +202,11 @@ class Product_WooCommerce {
 		$permalink = $product->get_permalink();
 
 		foreach ( $comments as $comment ) {
+			$rating = intval( get_comment_meta( $comment->comment_ID, 'rating', true ) );
+			if ( ! $rating ) {
+				continue;
+			}
+
 			$entity['review'][] = [
 				'@type'         => 'Review',
 				'@id'           => $permalink . '#li-comment-' . $comment->comment_ID,
@@ -209,7 +214,9 @@ class Product_WooCommerce {
 				'datePublished' => $comment->comment_date,
 				'reviewRating'  => [
 					'@type'       => 'Rating',
-					'ratingValue' => intval( get_comment_meta( $comment->comment_ID, 'rating', true ) ),
+					'ratingValue' => $rating,
+					'bestRating'  => '5',
+					'worstRating' => '1',
 				],
 				'author'        => [
 					'@type' => 'Person',

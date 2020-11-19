@@ -223,9 +223,35 @@ const registerDefaultHooks = () => {
 				delete schema.recipeInstructions
 			}
 
+			forEach( [ 'cookTime', 'prepTime', 'totalTime' ], ( key ) => {
+				if ( ! isUndefined( schema[ key ] ) && 'PT' === schema[ key ] ) {
+					delete schema[ key ]
+				}
+			} )
+
 			// Multiple.
 			if ( isArray( recipeInstructions ) ) {
 				schema.instructionType = 'HowToStep'
+				forEach( recipeInstructions, ( instruction, key ) => {
+					if ( ! isUndefined( instruction.type ) ) {
+						instruction[ '@type' ] = instruction.type
+						delete instruction.type
+					}
+
+					if ( ! isUndefined( instruction.itemListElement ) ) {
+						if ( ! isUndefined( instruction.itemListElement.type ) ) {
+							instruction.itemListElement[ '@type' ] = instruction.itemListElement.type
+							delete instruction.itemListElement.type
+						}
+	
+						if ( ! isArray( instruction.itemListElement ) ) {
+							instruction.itemListElement = [ instruction.itemListElement ]
+						}
+					}
+
+					recipeInstructions[ key ] = instruction
+				} )
+
 				schema.instructionsHowToStep = recipeInstructions
 				delete schema.recipeInstructions
 			}
