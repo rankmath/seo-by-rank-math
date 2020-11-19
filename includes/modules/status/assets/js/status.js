@@ -9,7 +9,7 @@
 	'use strict'
 
 	$( function() {
-		const after = $( '.nav-tab-wrapper' )
+		const after = $( '.rank-math-tab-nav' )
 
 		function addNotice( msg, which, fadeout = 3000 ) {
 			which = which || 'error'

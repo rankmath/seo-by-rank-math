@@ -15,7 +15,7 @@ import { dispatch } from '@wordpress/data'
 export function getPostsOverview() {
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/postsOverview',
+		path: 'rankmath/v1/an/postsOverview',
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updatePostsOverview( response )
 	} )
@@ -27,7 +27,7 @@ export function getPostsOverview() {
 export function getAnalyticsSummary() {
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/analyticsSummary',
+		path: 'rankmath/v1/an/analyticsSummary',
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updateAnalyticsSummary( response )
 	} )
@@ -39,7 +39,7 @@ export function getAnalyticsSummary() {
 export function getPostsSummary() {
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/postsSummary',
+		path: 'rankmath/v1/an/postsSummary',
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updatePostsSummary( response )
 	} )
@@ -61,7 +61,7 @@ export function getPostsRows( page, filters ) {
 
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/postsRows?page=' + page + params,
+		path: 'rankmath/v1/an/postsRows?page=' + page + params,
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updatePostsRows( page, response )
 	} )
@@ -83,7 +83,7 @@ export function getPostsRowsByObjects( page, filters ) {
 
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/postsRowsByObjects?page=' + page + params,
+		path: 'rankmath/v1/an/postsRowsByObjects?page=' + page + params,
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updatePostsRowsByObjects( page, response )
 	} )

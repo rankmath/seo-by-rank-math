@@ -31,7 +31,7 @@ class Rest extends WP_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->namespace = \RankMath\Rest\Rest_Helper::BASE . '/analytics';
+		$this->namespace = \RankMath\Rest\Rest_Helper::BASE . '/an';
 	}
 
 	/**

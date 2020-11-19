@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.3
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.52.1
+Stable tag: 1.0.52.2
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,18 +475,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.52.1 [Nov 09, 2020] =
-* Squashed a couple of small issues
-
-= 1.0.52 [Nov 09, 2020] =
-* Added: External icon in the Help & Support sidebar menu to [Rank Math's KB](https://rankmath.com/kb/)
-* Improved: CSS related to the block editor's sidebar tabs and Analytics
-* Improved: Frontend score styling
-* Fixed: Analytics disconnection issue happening on some servers
-* Fixed: A bug causing discrepancies in Clicks, Impressions, CTR and Position in the [Analytics module](https://rankmath.com/kb/analytics/)
-* Fixed: 'Getting Invalid argument supplied for foreach' error on posts using old [Schema format](https://rankmath.com/kb/rich-snippets/)
-* Fixed: A Syntax error in PHP 7.2
-* Removed: Excerpt from the dashboard widget's blog posts section
-
+= 1.0.52.2 [Nov 13, 2020] =
+* Improved: Schema tab styling in the [Elementor Editor](https://rankmath.com/blog/elementor-seo/)
+* Fixed: uBlock & some other Ad Blocking browser extensions were falsely blocking Analytics page-related scripts
+* Fixed: Styling of the graph filters in the [Analytics page](https://rankmath.com/kb/analytics/) was breaking due to unnecessary CSS files loading from WooCommerce and AutomateWoo plugins
+* Fixed: [Rank Math Tools](https://rankmath.com/kb/rank-math-status-and-tools/) were not showing the notice after using them
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

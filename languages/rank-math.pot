@@ -2261,7 +2261,7 @@ msgid "Connect Google&trade; Services"
 msgstr ""
 
 #. translators: Link to How to Setup Google Search Console KB article
-msgid "Rank Math automates everything, use below button to connect your site with Google Search Console and Google Analytics. It will verify your site and submit sitemaps auotmatically. %s"
+msgid "Rank Math automates everything, use below button to connect your site with Google Search Console and Google Analytics. It will verify your site and submit sitemaps automatically. %s"
 msgstr ""
 
 msgid "Read more about it here."
@@ -4522,6 +4522,9 @@ msgid "Enter the number of days to keep Analytics data in your database. The max
 msgstr ""
 
 msgid "free version"
+msgstr ""
+
+msgid "Delete Recent Data (last %d days)"
 msgstr ""
 
 msgid "Delete Recent Data (last 15 days)"

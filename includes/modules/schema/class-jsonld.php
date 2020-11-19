@@ -132,11 +132,19 @@ class JsonLD {
 		$data = $this->do_filter( 'json_ld', [], $this );
 		$data = $this->validate_schema( $data );
 		if ( is_array( $data ) && ! empty( $data ) ) {
+
+			$class = 'schema';
+
+			if ( defined( 'RANK_MATH_PRO_FILE' ) ) {
+				$class = 'schema-pro';
+			}
+
 			$json = [
 				'@context' => 'https://schema.org',
 				'@graph'   => array_values( $data ),
 			];
-			echo '<script type="application/ld+json" class="rank-math-schema">' . wp_json_encode( $json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+
+			echo '<script type="application/ld+json" class="rank-math-' . esc_attr( $class ) . '">' . wp_json_encode( $json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
 		}
 	}
 

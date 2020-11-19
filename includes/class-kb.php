@@ -89,7 +89,7 @@ class KB {
 		'sitemap-product_cat'         => 'https://rankmath.com/kb/configure-sitemaps/#product-categories?utm_source=Plugin&utm_campaign=WP',
 		'sitemap-product_tag'         => 'https://rankmath.com/kb/configure-sitemaps/#product-tags?utm_source=Plugin&utm_campaign=WP',
 		'titles-meta'                 => 'https://rankmath.com/kb/titles-and-meta/?utm_source=Plugin&utm_campaign=WP',
-		'local-seo-settings'          => 'https://rankmath.com/kb/titles-and-meta/#local-seo?utm_source=Plugin&utm_campaign=WP',
+		'local-seo-settings'          => 'https://rankmath.com/kb/local-seo/?utm_source=Plugin&utm_campaign=WP',
 		'social-meta-settings'        => 'https://rankmath.com/kb/titles-and-meta/#social-meta?utm_source=Plugin&utm_campaign=WP',
 		'homepage-settings'           => 'https://rankmath.com/kb/titles-and-meta/#homepage?utm_source=Plugin&utm_campaign=WP',
 		'author-settings'             => 'https://rankmath.com/kb/titles-and-meta/#authors?utm_source=Plugin&utm_campaign=WP',

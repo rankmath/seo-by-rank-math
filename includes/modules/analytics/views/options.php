@@ -83,7 +83,7 @@ $cmb->add_field(
 			return $value;
 		},
 		'after_field'     => '<br>' .
-		'<button class="button button-small console-cache-delete"  data-days="15">' . esc_html__( 'Delete Recent Data (last 15 days)', 'rank-math' ) . '</button>' .
+		'<button class="button button-small console-cache-delete console-cache-delete-custom"  data-days="15" title="' . esc_html__( 'Delete Recent Data (last %d days)', 'rank-math' ) . '">' . esc_html__( 'Delete Recent Data (last 15 days)', 'rank-math' ) . '</button>' .
 		'&nbsp;&nbsp;<button class="button button-small console-cache-delete" data-days="-1">' . esc_html__( 'Delete Data', 'rank-math' ) . '</button>' .
 		'&nbsp;&nbsp;<button class="button button-small console-cache-update-manually"' . ( $disable ? ' disabled="disabled"' : '' ) . '>' . ( $is_queue_empty ? esc_html__( 'Update Data manually', 'rank-math' ) : esc_html__( 'Fetching in Progress', 'rank-math' ) ) . '</button><br>' .
 		join( '', $db_info ),

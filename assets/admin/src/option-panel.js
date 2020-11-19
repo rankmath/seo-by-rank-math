@@ -297,13 +297,22 @@ import addNotice from '@helpers/addNotice'
 					}
 				} )
 
+				const cacheControlDays = $( '#console_caching_control' )
+				const customDayButton = $( '.console-cache-delete-custom' )
+
+				cacheControlDays.on( 'keyup', () => {
+					const days = cacheControlDays.val()
+					customDayButton.data( 'days', days )
+					customDayButton.html( customDayButton.attr( 'title' ).replace( '%d', days ) )
+				} ).trigger( 'keyup' )
+
 				$( '.console-cache-update-manually' ).on( 'click', function(
 					event
 				) {
 					event.preventDefault()
 
 					const button = $( this ),
-						days = $( '#console_caching_control' ).val()
+						days = cacheControlDays.val()
 
 					button.prop( 'disabled', true )
 					ajax( 'analytic_start_fetching', { days }, 'GET' ).done(

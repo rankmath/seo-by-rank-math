@@ -36,7 +36,7 @@ export function updateUserPreferences( pref, key ) {
 
 	apiFetch( {
 		method: 'POST',
-		path: 'rankmath/v1/analytics/userPreferences',
+		path: 'rankmath/v1/an/userPreferences',
 		data: { preferences },
 	} )
 

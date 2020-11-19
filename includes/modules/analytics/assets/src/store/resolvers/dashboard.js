@@ -12,7 +12,7 @@ import { dispatch } from '@wordpress/data'
 export function getDashboardStats( range ) {
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/dashboard',
+		path: 'rankmath/v1/an/dashboard',
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updateStats( response, range )
 	} )
@@ -24,7 +24,7 @@ export function getDashboardStats( range ) {
 export function getKeywordsOverview() {
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/keywordsOverview',
+		path: 'rankmath/v1/an/keywordsOverview',
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updateKeywordsOverview( response )
 	} )
@@ -36,7 +36,7 @@ export function getKeywordsOverview() {
 export function getKeywordsSummary() {
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/keywordsSummary',
+		path: 'rankmath/v1/an/keywordsSummary',
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updateKeywordsSummary( response )
 	} )
@@ -50,7 +50,7 @@ export function getKeywordsSummary() {
 export function getKeywordsRows( page ) {
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/keywordsRows?page=' + page,
+		path: 'rankmath/v1/an/keywordsRows?page=' + page,
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updateKeywordsRows( page, response )
 	} )

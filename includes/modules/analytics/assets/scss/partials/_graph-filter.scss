@@ -25,6 +25,7 @@
 
         &.rank-math-stat-filters {
             margin-bottom: 0;
+
             white-space: nowrap;
 
             + .graph {
@@ -40,8 +41,11 @@
 
         button.components-button {
             position: relative;
-            min-width: 200px;
 
+            display: block;
+
+            min-width: 200px;
+            height: 100%;
             margin: 0;
             padding: 1.125rem;
 

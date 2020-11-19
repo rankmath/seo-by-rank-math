@@ -12,7 +12,7 @@ import { dispatch } from '@wordpress/data'
 export function getSinglePost( id ) {
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/analytics/post/' + id,
+		path: 'rankmath/v1/an/post/' + id,
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updateSinglePost( id, response )
 	} )

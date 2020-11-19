@@ -65,6 +65,8 @@ class DB {
 
 			self::analytics()->whereBetween( 'created', [ $end, $start ] )->delete();
 		}
+
+		do_action( 'rank_math/analytics/delete_by_days', $days );
 		self::purge_cache();
 
 		return true;
@@ -79,6 +81,8 @@ class DB {
 		$start = date_i18n( 'Y-m-d H:i:s', strtotime( '-' . ( $days * 2 ) . ' days' ) );
 
 		self::analytics()->where( 'created', '<', $start )->delete();
+
+		do_action( 'rank_math/analytics/delete_data_log', $start );
 	}
 
 	/**
