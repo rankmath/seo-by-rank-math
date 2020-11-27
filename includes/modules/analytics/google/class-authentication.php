@@ -107,7 +107,7 @@ class Authentication {
 	public static function get_auth_url() {
 
 		$page = Param::get( 'page' );
-		$page = 'rank-math-wizard' === $page ? 'rank-math-wizard&step=analytics' : 'rank-math-options-general';
+		$page = 'rank-math-wizard' === $page ? 'rank-math-wizard&step=analytics' : 'rank-math-options-general#setting-panel-analytics';
 
 		return Security::add_query_arg_raw(
 			[
