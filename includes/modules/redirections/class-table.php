@@ -290,7 +290,7 @@ class Table extends List_Table {
 		$links = [];
 		foreach ( $labels as $key => $label ) {
 			$links[ $key ] = sprintf(
-				'<a href="%1$s"%2$s>%3$s <span class="count">(%4$d)</span></a>',
+				'<a href="%1$s"%2$s>%3$s <span class="count">(%4$s)</span></a>',
 				$url . '&status=' . $key,
 				$key === $current ? ' class="current"' : '',
 				$label,
