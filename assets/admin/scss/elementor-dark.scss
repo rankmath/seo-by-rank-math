@@ -431,10 +431,10 @@
 
                 #{ $self }__tag__removebtn {
                     color: lighten( $color-bad-dark, 50% );
-                    background: desaturate( darken( $color-bad-dark, 8% ), 12% );
+                    background: desaturate( darken( $color-bad-dark, 8% ), 18% );
 
                     &:hover {
-                        background: desaturate( darken( $color-bad-dark, 12% ), 15% );
+                        background: desaturate( darken( $color-bad-dark, 12% ), 25% );
                     }
                 }
             }

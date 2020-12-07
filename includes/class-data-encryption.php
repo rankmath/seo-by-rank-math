@@ -173,7 +173,7 @@ class Data_Encryption {
 	public static function is_available() {
 		static $encryption_possible;
 		if ( null === $encryption_possible ) {
-			$encryption_possible = extension_loaded( 'openssl' ) && apply_filters( 'rank_math/admin/sensitive_data_encryption', true );
+			$encryption_possible = extension_loaded( 'openssl' ) && apply_filters( 'rank_math/admin/sensitive_data_encryption', true ) && self::get_key() && self::get_salt();
 		}
 
 		return (bool) $encryption_possible;

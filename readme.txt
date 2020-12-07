@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.3
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.53
+Stable tag: 1.0.53.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -474,6 +474,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.53.1 [Nov 29, 2020] =
+* Improved: Made plugin compatible with the PHP 8.0
+* Improved: Update-check mechanism to help show the updates properly on every server
+* Fixed: Focus Keyword field background color in the Elementor Editor's light theme
 
 = 1.0.53 [Nov 27, 2020] =
 * Improved: Google Access token for the [Analytics Module](https://rankmath.com/kb/analytics/) refreshes only when the data fetching is done via a cron job
