@@ -38,6 +38,13 @@ class Sitepress {
 	 */
 	private $has_get_terms_args = false;
 
+	/**
+	 * Has home_url filter removed.
+	 *
+	 * @var boolean
+	 */
+	private $has_home_url = false;
+
 
 	/**
 	 * Main instance
@@ -100,6 +107,33 @@ class Sitepress {
 		if ( $this->has_get_terms_args ) {
 			$this->has_get_terms_args = false;
 			add_filter( 'get_terms_args', [ $sitepress, 'get_terms_args_filter' ], 10, 2 );
+		}
+	}
+
+	/**
+	 * Remove home_url filter.
+	 */
+	public function remove_home_url_filter() {
+		if ( ! $this->is_active() ) {
+			return;
+		}
+
+		global $wpml_url_filters;
+		$this->has_home_url = remove_filter( 'home_url', [ $wpml_url_filters, 'home_url_filter' ], -10 );
+	}
+
+	/**
+	 * Restore home_url filter.
+	 */
+	public function restore_home_url_filter() {
+		if ( ! $this->is_active() ) {
+			return;
+		}
+
+		if ( $this->has_home_url ) {
+			global $wpml_url_filters;
+			$this->has_home_url = false;
+			add_filter( 'home_url', [ $wpml_url_filters, 'home_url_filter' ], -10, 4 );
 		}
 	}
 

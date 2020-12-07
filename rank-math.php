@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.52.3
+ * Version:           1.0.53.1
  * Plugin URI:        https://s.rankmath.com/home
  * Description:       Rank Math is a revolutionary SEO product that combines the features of many SEO tools and lets you multiply your traffic in the easiest way possible.
  * Author:            Rank Math
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.52.3';
+	public $version = '1.0.53.1';
 
 	/**
 	 * Rank Math database version.
@@ -306,8 +306,9 @@ final class RankMath {
 	 * Initialize WordPress action and filter hooks.
 	 */
 	private function init_actions() {
-
-		add_action( 'init', [ $this, 'localization_setup' ] );
+		//!make sure it is loaded before setup_modules and load_modules
+		add_action( 'plugins_loaded', [ $this, 'localization_setup' ], 9 );
+		add_action( 'init', [ $this, 'pass_admin_content' ] );
 		add_filter( 'cron_schedules', [ $this, 'cron_schedules' ] );
 
 		// Add plugin action links.
@@ -317,7 +318,6 @@ final class RankMath {
 		// Booting.
 		add_action( 'plugins_loaded', [ $this, 'init' ], 14 );
 		add_action( 'rest_api_init', [ $this, 'init_rest_api' ] );
-		add_action( 'wp_login', [ $this, 'on_login' ] );
 
 		// Load admin-related functionality.
 		if ( is_admin() ) {
@@ -390,13 +390,6 @@ final class RankMath {
 	}
 
 	/**
-	 * Add functionality on succeessful login.
-	 */
-	public function on_login() {
-		\RankMath\Google\Api::get()->refresh_token_on_login();
-	}
-
-	/**
 	 * Show action links on the plugin screen.
 	 *
 	 * @param  mixed $links Plugin Action links.
@@ -461,6 +454,12 @@ final class RankMath {
 		}
 		load_plugin_textdomain( 'rank-math', false, rank_math()->plugin_dir() . 'languages/' );
 
+	}
+
+	/**
+	 * localize admin content to JS
+	 */
+	public function pass_admin_content(){
 		if ( is_user_logged_in() && is_admin_bar_showing() ) {
 			$this->container['json']->add( 'version', $this->version, 'rankMath' );
 			$this->container['json']->add( 'ajaxurl', admin_url( 'admin-ajax.php' ), 'rankMath' );

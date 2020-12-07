@@ -11,6 +11,8 @@
 use RankMath\Helper;
 use MyThemeShop\Helpers\WordPress;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Enable the new Analytis module
  */

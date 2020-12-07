@@ -17,6 +17,8 @@ use RankMath\Helpers\Security;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\Conditional;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Redirections class.
  *

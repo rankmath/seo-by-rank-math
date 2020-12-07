@@ -12,6 +12,8 @@
 use RankMath\KB;
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 $assets   = plugin_dir_url( dirname( __FILE__ ) );
 $analyzer = Helper::get_module( 'seo-analysis' )->admin->analyzer;
 

@@ -13,6 +13,8 @@ namespace RankMath\Redirections;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Metabox class.
  *

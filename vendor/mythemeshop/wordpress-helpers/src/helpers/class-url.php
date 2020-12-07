@@ -46,7 +46,7 @@ class Url {
 	}
 
 	/**
-	 * Check whether a URL is relative.
+	 * Check whether a url is relative.
 	 *
 	 * @param string $url URL string to check.
 	 *
@@ -57,7 +57,7 @@ class Url {
 	}
 
 	/**
-	 * Checks whether a URL is external.
+	 * Checks whether a url is external.
 	 *
 	 * @param string $url    URL string to check. This should be a absolute URL.
 	 * @param string $domain If wants to use some other domain not home_url().
@@ -89,7 +89,7 @@ class Url {
 	}
 
 	/**
-	 * Get URL scheme.
+	 * Get url scheme.
 	 *
 	 * @return string
 	 */

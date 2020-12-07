@@ -87,16 +87,65 @@ class Admin implements Runner {
 	 * OAuth reply back
 	 */
 	public function process_oauth() {
-		if ( ! isset( $_GET['process_oauth'] ) ) {
+
+		$security      = filter_input( INPUT_GET, 'security', FILTER_SANITIZE_STRING );
+		$process_oauth = filter_input( INPUT_GET, 'process_oauth', FILTER_SANITIZE_STRING );
+		$access_token  = filter_input( INPUT_GET, 'access_token', FILTER_SANITIZE_STRING );
+
+		if ( empty( $process_oauth ) && empty( $access_token ) ) {
 			return;
 		}
 
-		if ( ! wp_verify_nonce( $_GET['security'], 'rank_math_oauth_token' ) ) {
+		if ( empty( $security ) || ! wp_verify_nonce( $security, 'rank_math_oauth_token' ) ) {
 			wp_nonce_ays( 'rank_math_oauth_token' );
 			die();
 		}
 
-		\RankMath\Google\Authentication::get_tokens_from_server();
+		if ( ! empty( $process_oauth ) ) {
+			\RankMath\Google\Authentication::get_tokens_from_server();
+		}
+
+		if ( ! empty( $access_token ) ) {
+
+			$data = [
+				'access_token'  => urldecode( filter_input( INPUT_GET, 'access_token', FILTER_SANITIZE_STRING ) ),
+				'refresh_token' => urldecode( filter_input( INPUT_GET, 'refresh_token', FILTER_SANITIZE_STRING ) ),
+				'expire'        => urldecode( filter_input( INPUT_GET, 'expire', FILTER_SANITIZE_STRING ) ),
+			];
+
+			\RankMath\Google\Authentication::tokens( $data );
+
+			$current_request = self::get_current_request();
+			$current_request = home_url( $current_request );
+			$current_request = remove_query_arg(
+				[
+					'access_token',
+					'refresh_token',
+					'expire',
+					'security',
+				],
+				$current_request
+			);
+
+			wp_safe_redirect( $current_request );
+			exit();
+
+		}
+
+	}
+
+	/**
+	 * To get current requested URL path.
+	 *
+	 * @return string current requested path.
+	 */
+	protected function get_current_request() {
+
+		$current_request = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING );
+		$current_request = sanitize_text_field( $current_request );
+
+		return $current_request;
+
 	}
 
 	/**

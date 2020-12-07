@@ -8,7 +8,8 @@
 
 use MyThemeShop\Helpers\Param;
 use RankMath\Admin\Admin_Helper;
-use RankMath\Admin\System_Info;
+
+defined( 'ABSPATH' ) || exit;
 
 $is_network_admin  = is_network_admin();
 $is_network_active = RankMath\Helper::is_plugin_active_for_network();

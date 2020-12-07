@@ -8,10 +8,11 @@
 
 namespace RankMath;
 
-use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Param;
+
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Beta_Optin class.

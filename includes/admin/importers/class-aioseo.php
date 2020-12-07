@@ -47,7 +47,7 @@ class AIOSEO extends Plugin_Importer {
 	 *
 	 * @var array
 	 */
-	protected $choices = [ 'settings', 'postmeta' ];
+	protected $choices = [ 'settings', 'postmeta', 'termmeta' ];
 
 	/**
 	 * Import settings of plugin.
@@ -151,7 +151,7 @@ class AIOSEO extends Plugin_Importer {
 			}
 
 			$this->titles[ "tax_{$taxonomy}_custom_robots" ] = 'on';
-			$this->titles[ "tax_{$taxonomy}_robots" ][]      = 'noindex';
+			$this->titles[ "tax_{$taxonomy}_robots" ]        = [ 'noindex' ];
 			$this->titles[ "tax_{$taxonomy}_robots" ]        = array_unique( $this->titles[ "tax_{$taxonomy}_robots" ] );
 		}
 
@@ -301,11 +301,11 @@ class AIOSEO extends Plugin_Importer {
 		foreach ( $post_ids as $post ) {
 			$post_id = $post->ID;
 			$this->replace_meta( $hash, null, $post_id, 'post' );
-			$this->set_post_robots( $post_id );
+			$this->set_object_robots( $post_id, 'post' );
 
 			$opengraph_meta = get_post_meta( $post_id, '_aioseop_opengraph_settings', true );
 			if ( ! empty( $opengraph_meta ) && is_array( $opengraph_meta ) ) {
-				$this->set_post_opengraph( $post_id );
+				$this->set_opengraph( $opengraph_meta, 'post', $post_id );
 			}
 		}
 
@@ -313,66 +313,111 @@ class AIOSEO extends Plugin_Importer {
 	}
 
 	/**
+	 * Import term meta of plugin.
+	 *
+	 * @return array
+	 */
+	protected function termmeta() {
+		$terms = new \WP_Term_Query(
+			[
+				'meta_key'   => '_aioseop_title',
+				'fields'     => 'ids',
+				'hide_empty' => false,
+				'get'        => 'all',
+			]
+		);
+
+		if ( empty( $terms ) || is_wp_error( $terms ) ) {
+			return false;
+		}
+
+		$hash = [
+			'_aioseop_title'       => 'rank_math_title',
+			'_aioseop_keywords'    => 'rank_math_focus_keyword',
+			'_aioseop_description' => 'rank_math_description',
+			'_aioseop_custom_link' => 'rank_math_canonical_url',
+		];
+
+		foreach ( $terms->get_terms() as $term_id ) {
+			$count++;
+
+			$this->replace_meta( $hash, null, $term_id, 'term' );
+			$this->set_object_robots( $term_id, 'term' );
+
+			$opengraph_meta = get_term_meta( $term_id, '_aioseop_opengraph_settings', true );
+			if ( ! empty( $opengraph_meta ) && is_array( $opengraph_meta ) ) {
+				$this->set_opengraph( $opengraph_meta, 'term', $term_id );
+			}
+		}
+
+		return compact( 'count' );
+	}
+
+	/**
 	 * Set OpenGraph.
 	 *
-	 * @param int $post_id Post ID.
+	 * @param array  $opengraph_meta Open Graph meta.
+	 * @param string $object_type    Current Object type.
+	 * @param int    $object_id      Object ID.
 	 */
-	private function set_post_opengraph( $post_id ) {
-		$opengraph_meta = get_post_meta( $post_id, '_aioseop_opengraph_settings', true );
+	private function set_opengraph( $opengraph_meta, $object_type, $object_id ) {
 
 		if ( ! empty( $opengraph_meta['aioseop_opengraph_settings_title'] ) ) {
-			update_post_meta( $post_id, 'rank_math_facebook_title', $opengraph_meta['aioseop_opengraph_settings_title'] );
-			update_post_meta( $post_id, 'rank_math_twitter_title', $opengraph_meta['aioseop_opengraph_settings_title'] );
+			$this->update_meta( $object_type, $object_id, 'rank_math_facebook_title', $opengraph_meta['aioseop_opengraph_settings_title'] );
+			$this->update_meta( $object_type, $object_id, 'rank_math_twitter_title', $opengraph_meta['aioseop_opengraph_settings_title'] );
 		}
 
 		if ( ! empty( $opengraph_meta['aioseop_opengraph_settings_desc'] ) ) {
-			update_post_meta( $post_id, 'rank_math_facebook_description', $opengraph_meta['aioseop_opengraph_settings_desc'] );
-			update_post_meta( $post_id, 'rank_math_twitter_description', $opengraph_meta['aioseop_opengraph_settings_desc'] );
+			$this->update_meta( $object_type, $object_id, 'rank_math_facebook_description', $opengraph_meta['aioseop_opengraph_settings_desc'] );
+			$this->update_meta( $object_type, $object_id, 'rank_math_twitter_description', $opengraph_meta['aioseop_opengraph_settings_desc'] );
 		}
 
 		$og_thumb = ! empty( $opengraph_meta['aioseop_opengraph_settings_customimg'] ) ? $opengraph_meta['aioseop_opengraph_settings_customimg'] : ( ! empty( $opengraph_meta['aioseop_opengraph_settings_image'] ) ? $opengraph_meta['aioseop_opengraph_settings_image'] : '' );
-		$this->replace_image( $og_thumb, 'post', 'rank_math_facebook_image', 'rank_math_facebook_image_id', $post_id );
+		$this->replace_image( $og_thumb, $object_type, 'rank_math_facebook_image', 'rank_math_facebook_image_id', $object_id );
 
 		if ( ! empty( $opengraph_meta['aioseop_opengraph_settings_setcard'] ) ) {
 			$twitter_card_type = 'summary' === $opengraph_meta['aioseop_opengraph_settings_setcard'] ? 'summary_card' : 'summary_large_image';
-			update_post_meta( $post_id, 'rank_math_twitter_card_type', $twitter_card_type );
+			$this->update_meta( $object_type, $object_id, 'rank_math_twitter_card_type', $twitter_card_type );
 		}
 	}
 
 	/**
-	 * Set post robots meta.
+	 * Set object robots meta.
 	 *
-	 * @param int $post_id Post ID.
+	 * @param int    $object_id   Object ID.
+	 * @param string $object_type Current Object type.
 	 */
-	private function set_post_robots( $post_id ) {
+	private function set_object_robots( $object_id, $object_type ) {
 		// Early bail if robots data is set in Rank Math plugin.
-		if ( ! empty( $this->get_meta( 'post', $post_id, 'rank_math_robots' ) ) ) {
+		if ( ! empty( $this->get_meta( $object_type, $object_id, 'rank_math_robots' ) ) ) {
 			return;
 		}
 
 		// ROBOTS.
 		$robots   = [];
 		$aioseo   = get_option( 'aioseop_options' );
-		$robots[] = $this->get_noindex_robot( $post_id, $aioseo );
-		$robots[] = $this->get_follow_robot( $post_id, $aioseo );
+		$robots[] = $this->get_noindex_robot( $object_id, $object_type, $aioseo );
+		$robots[] = $this->get_follow_robot( $object_id, $object_type, $aioseo );
 
-		update_post_meta( $post_id, 'rank_math_robots', array_unique( $robots ) );
+		$this->update_meta( $object_type, $object_id, 'rank_math_robots', array_unique( $robots ) );
 	}
 
 	/**
 	 * Get noindex robot.
 	 *
-	 * @param int   $post_id Post ID.
-	 * @param array $aioseo  Option array.
+	 * @param int    $object_id    Object ID.
+	 * @param string $object_type Current Object type.
+	 * @param array  $aioseo       Option array.
 	 *
 	 * @return string
 	 */
-	private function get_noindex_robot( $post_id, $aioseo ) {
-		$noindex         = get_post_meta( $post_id, '_aioseop_noindex', true );
-		$exclude_sitemap = $this->is_post_excluded_sitemap( $post_id );
+	private function get_noindex_robot( $object_id, $object_type, $aioseo ) {
+		$noindex         = $this->get_meta( $object_type, $object_id, '_aioseop_noindex' );
+		$exclude_sitemap = $this->is_object_excluded_sitemap( $object_id, $object_type );
 
 		if ( empty( $noindex ) ) {
-			return in_array( get_post_type( $post_id ), $aioseo['aiosp_cpostnoindex'], true ) || $exclude_sitemap ? 'noindex' : 'index';
+			$noindex = 'post' === $object_type && in_array( get_post_type( $object_id ), $aioseo['aiosp_cpostnoindex'], true ) ? 'noindex' : 'index';
+			return $exclude_sitemap ? 'noindex' : $noindex;
 		}
 
 		return 'on' === $noindex || $exclude_sitemap ? 'noindex' : 'index';
@@ -381,30 +426,32 @@ class AIOSEO extends Plugin_Importer {
 	/**
 	 * Get follow robot.
 	 *
-	 * @param int   $post_id Post ID.
-	 * @param array $aioseo  Option array.
+	 * @param int    $object_id     Object ID.
+	 * @param string $object_type Current Object type.
+	 * @param array  $aioseo      Option array.
 	 *
 	 * @return string
 	 */
-	private function get_follow_robot( $post_id, $aioseo ) {
-		$nofollow = get_post_meta( $post_id, '_aioseop_nofollow', true );
+	private function get_follow_robot( $object_id, $object_type, $aioseo ) {
+		$nofollow = $this->get_meta( $object_type, $object_id, '_aioseop_nofollow' );
 
-		if ( empty( $nofollow ) ) {
-			return in_array( get_post_type( $post_id ), $aioseo['aiosp_cpostnofollow'], true ) ? 'nofollow' : '';
+		if ( empty( $nofollow ) && 'post' === $object_type ) {
+			return in_array( get_post_type( $object_id ), $aioseo['aiosp_cpostnofollow'], true ) ? 'nofollow' : '';
 		}
 
 		return 'on' === $nofollow ? 'nofollow' : '';
 	}
 
 	/**
-	 * Is post excluded from sitemap.
+	 * Is object excluded from sitemap.
 	 *
-	 * @param int $post_id Post ID.
+	 * @param int    $object_id   Object ID.
+	 * @param string $object_type Current Object type.
 	 *
 	 * @return bool
 	 */
-	private function is_post_excluded_sitemap( $post_id ) {
-		$exclude_sitemap = get_post_meta( $post_id, '_aioseop_sitemap_exclude', true );
+	private function is_object_excluded_sitemap( $object_id, $object_type ) {
+		$exclude_sitemap = $this->get_meta( $object_type, $object_id, '_aioseop_sitemap_exclude' );
 		return 'on' === $exclude_sitemap ? true : false;
 	}
 
@@ -417,6 +464,7 @@ class AIOSEO extends Plugin_Importer {
 		return [
 			'settings' => esc_html__( 'Import Settings', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import AIO SEO plugin settings, global meta, sitemap settings, etc.', 'rank-math' ) ),
 			'postmeta' => esc_html__( 'Import Post Meta', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import meta information of your posts/pages like the titles, descriptions, robots meta, OpenGraph info, etc.', 'rank-math' ) ),
+			'termmeta' => esc_html__( 'Import Term Meta', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import meta information of your terms like the titles, descriptions, robots meta, OpenGraph info, etc.', 'rank-math' ) ),
 		];
 	}
 

@@ -8,6 +8,8 @@
  * @author     Rank Math <support@rankmath.com>
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Update Internal links.
  */

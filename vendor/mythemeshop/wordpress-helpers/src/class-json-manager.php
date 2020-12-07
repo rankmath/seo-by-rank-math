@@ -1,6 +1,6 @@
 <?php
 /**
- * The JSON manager handles JSON output to admin and frontend.
+ * The JSON manager handles json output to admin and frontend.
  *
  * @since      1.0.0
  * @package    MyThemeShop
@@ -107,7 +107,7 @@ class Json_Manager {
 	 * Encode single object.
 	 *
 	 * @param  string $object_name Object name to use as JS variable.
-	 * @param  array  $object_data Object data to JSON encode.
+	 * @param  array  $object_data Object data to json encode.
 	 * @return array
 	 */
 	private function single_object( $object_name, $object_data ) {

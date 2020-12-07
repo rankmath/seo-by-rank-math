@@ -10,6 +10,8 @@
 
 use RankMath\Tools\Schema_Converter;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Convert Existing Schema Data.
  */

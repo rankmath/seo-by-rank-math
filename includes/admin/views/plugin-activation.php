@@ -6,9 +6,10 @@
  * @subpackage RankMath\Admin
  */
 
-use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
+
+defined( 'ABSPATH' ) || exit;
 
 $is_registered = Helper::is_site_connected();
 $class         = $is_registered ? 'status-green' : 'status-red';

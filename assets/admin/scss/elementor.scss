@@ -54,6 +54,10 @@
 					line-height: 1.42857143;
 					font-family: inherit;
 				}
+
+				.#{$namespace}-focus-keyword {
+					background: #fff;
+				}
 			}
 		}
 
