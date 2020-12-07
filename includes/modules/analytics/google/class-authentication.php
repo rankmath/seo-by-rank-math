@@ -28,7 +28,7 @@ class Authentication {
 	 *
 	 * @var string
 	 */
-	protected static $api_version = '2.0';
+	protected static $api_version = '2.1';
 
 	/**
 	 * Get or update Search Console data.

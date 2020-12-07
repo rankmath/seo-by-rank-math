@@ -178,7 +178,7 @@ const App = () => {
 										return (
 											<div className={ wrapper }>
 												<Component { ...props } />
-												<p className="rank-math-footnote"><strong>{ __( 'Note:', 'rank-math' ) }</strong> { __( 'The statistics that appear in the Rank Math Analytics module won’t match with the data from the Google Search Console as we only track posts and keywords that rank in the top 100 positions and have at least 1 click in the selected timeframe. We do this to help make decision-making easier and for faster data processing since this is the data you really need to prioritize your SEO efforts.', 'rank-math' ) }</p>
+												<p className="rank-math-footnote"><strong>{ __( 'Note:', 'rank-math' ) }</strong> { __( 'The statistics that appear in the Rank Math Analytics module won’t match with the data from the Google Search Console as we only track posts and keywords that rank in the top 100 positions in the selected timeframe. We do this to help make decision-making easier and for faster data processing since this is the data you really need to prioritize your SEO efforts.', 'rank-math' ) }</p>
 											</div>
 										)
 									} }

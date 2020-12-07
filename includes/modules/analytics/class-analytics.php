@@ -65,12 +65,41 @@ class Analytics extends Base {
 		if ( is_admin() ) {
 			$this->filter( 'rank_math/database/tools', 'add_tools' );
 			$this->filter( 'rank_math/settings/general', 'add_settings' );
+			$this->action( 'admin_init', 'refres_token_missing', 25 );
 
 			// Show Analytics block in the Dashboard widget only if account is connected or user has permissions.
 			if ( Helper::has_cap( 'analytics' ) && Authentication::is_authorized() ) {
 				$this->action( 'rank_math/dashboard/widget', 'dashboard_widget', 9 );
 			}
 		}
+	}
+
+	/**
+	 * If refresh token missing add notice.
+	 */
+	public function refres_token_missing() {
+		// Bail if the user is not authenticated at all yet.
+		if ( ! Helper::is_site_connected() || ! Authentication::is_authorized() ) {
+			return;
+		}
+
+		$tokens = Authentication::tokens();
+		if ( ! empty( $tokens['refresh_token'] ) ) {
+			return;
+		}
+
+		// Show admin notification.
+		Helper::add_notification(
+			sprintf(
+				/* translators: Auth URL */
+				'<i class="rm-icon rm-icon-rank-math"></i>' . __( 'It seems like the connection with your Google account & Rank Math needs to be made again. <a href="%s" class="rank-math-reconnect-google">Please click here.</a>', 'rank-math' ),
+				esc_url( Authentication::get_auth_url() )
+			),
+			[
+				'type'    => 'error',
+				'classes' => 'rank-math-error rank-math-notice',
+			]
+		);
 	}
 
 	/**
@@ -397,7 +426,7 @@ class Analytics extends Base {
 		Helper::add_json( 'singleImage', rank_math()->plugin_url() . 'includes/modules/analytics/assets/img/single-post-report.jpg' );
 
 		// Global Schema.
-		$post_types = Helper::get_accessible_post_types();
+		$post_types     = Helper::get_accessible_post_types();
 		$global_schemas = [];
 		foreach ( $post_types as $post_type ) {
 			$global_schemas[ $post_type ] = SchemaHelper::sanitize_schema_title(
@@ -492,12 +521,6 @@ class Analytics extends Base {
 					/* translators: 1. Review Schema documentation link */
 					'description' => sprintf( __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' ), '<a href="https://rankmath.com/kb/how-to-fix-review-schema-errors/" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' ),
 					'button_text' => __( 'Rebuild Index', 'rank-math' ),
-				],
-				'analytics_recreate_table' => [
-					'title'       => __( 'Re-create database Table', 'rank-math' ),
-					/* translators: 1. Review Schema documentation link */
-					'description' => __( 'Create database tables if missing.', 'rank-math' ),
-					'button_text' => __( 'Re-create Tables', 'rank-math' ),
 				],
 			],
 			3

@@ -14,6 +14,7 @@ use RankMath\CMB2;
 use RankMath\Helper;
 use RankMath\Rewrite;
 use RankMath\Helpers\Sitepress;
+use RankMath\Schema\DB;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\WordPress;
 use MyThemeShop\Helpers\Conditional;
@@ -85,15 +86,14 @@ class Serp_Preview {
 						<span class="serp-url" data-baseurl="<?php echo trailingslashit( substr( $data['url'], 0, strrpos( $data['url'], '/' ) ) ); ?>" data-format="<?php echo esc_attr( $data['permalink_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter permalink', 'rank-math' ); ?>"><?php echo esc_url( $data['permalink'] ); ?></span>
 					</div>
 					<h5 class="serp-title" data-format="<?php echo esc_attr( $data['title_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter custom title', 'rank-math' ); ?>"></h5>
-					<?php
-					if ( 'event' !== $snippet_type ) {
-						echo $desktop_preview; // phpcs:ignore
-					}
-					?>
 
 					<p class="serp-description" data-format="<?php echo esc_attr( $data['desc_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter custom meta description', 'rank-math' ); ?>"></p>
 
 					<?php
+					if ( 'event' !== $snippet_type ) {
+						echo $desktop_preview; // phpcs:ignore
+					}
+
 					if ( 'event' === $snippet_type ) {
 						echo $desktop_preview; // phpcs:ignore
 					}
@@ -394,112 +394,129 @@ class Serp_Preview {
 		global $post;
 		setup_postdata( $post );
 
-		// Get rich snippet.
-		$snippet         = get_post_meta( $post->ID, 'rank_math_rich_snippet', true );
-		$wp_review_total = get_post_meta( $post->ID, 'wp_review_total', true );
-
-		if ( ! in_array( $snippet, [ 'book', 'course', 'event', 'product', 'recipe', 'software' ], true ) && ! $wp_review_total ) {
+		$schemas = array_filter(
+			DB::get_schemas( $post->ID ),
+			function( $schema ) {
+				return ! empty( $schema['metadata']['isPrimary'] );
+			}
+		);
+		if ( empty( $schemas ) ) {
 			return false;
 		}
 
-		$snippet_data = [ 'type' => $snippet ];
+		// Get rich snippet.
+		$schema          = current( $schemas );
+		$snippet         = strtolower( $schema['@type'] );
+		$wp_review_total = get_post_meta( $post->ID, 'wp_review_total', true );
 
-		if ( 'product' === $post->post_type && Conditional::is_woocommerce_active() ) {
-			$product              = wc_get_product( $post->ID );
-			$snippet_data['data'] = [
-				'price'    => $product->get_price(),
-				'currency' => get_woocommerce_currency_symbol(),
-				'in_stock' => 'outofstock' === $product->get_stock_status() ? esc_html__( 'Out of stock', 'rank-math' ) : __( 'In stock', 'rank-math' ),
+		if ( ! in_array( $snippet, [ 'book', 'course', 'event', 'product', 'recipe', 'softwareapplication', 'woocommerceproduct' ], true ) && ! $wp_review_total ) {
+			return false;
+		}
+
+		$method = in_array( $snippet, [ 'book', 'course', 'softwareapplication' ], true ) ? 'get_ratings_data' : "get_{$snippet}_data";
+
+		return [
+			'type' => $snippet,
+			'data' => $this->$method( $schema ),
+		];
+	}
+
+	/**
+	 * Get WooCommerce Product schema data.
+	 *
+	 * @param  array $schema Schema Data.
+	 * @return array Preview Schema Data.
+	 */
+	private function get_woocommerceproduct_data( $schema ) {
+		global $post;
+		$product = wc_get_product( $post->ID );
+		return [
+			'price'        => $product->get_price(),
+			'currency'     => get_woocommerce_currency_symbol(),
+			'in_stock'     => 'outofstock' === $product->get_stock_status() ? esc_html__( 'Out of stock', 'rank-math' ) : __( 'In stock', 'rank-math' ),
+			'rating'       => $product->get_average_rating(),
+			'rating_count' => (string) $product->get_rating_count(),
+		];
+	}
+
+	/**
+	 * Get Product schema data.
+	 *
+	 * @param  array $schema Schema Data.
+	 * @return array Preview Schema Data.
+	 */
+	private function get_product_data( $schema ) {
+		$offers = [];
+		if ( isset( $schema['offers'] ) ) {
+			$offers = [
+				'price'    => isset( $schema['offers']['price'] ) ? $schema['offers']['price'] : '',
+				'currency' => isset( $schema['offers']['priceCurrency'] ) ? $schema['offers']['priceCurrency'] : '',
+				'in_stock' => isset( $schema['offers']['availability'] ) && 'SoldOut' === $schema['offers']['availability'] ? esc_html__( 'Out of stock', 'rank-math' ) : esc_html__( 'In stock', 'rank-math' ),
 			];
-		} else {
-			if ( 'book' === $snippet ) {
-				$hash = [
-					'rating' => 'book_rating',
-					'min'    => 'book_rating_min',
-					'max'    => 'book_rating_max',
-				];
-			} elseif ( 'courses' === $snippet ) {
-				$hash = [
-					'rating' => 'course_rating',
-					'min'    => 'course_rating_min',
-					'max'    => 'course_rating_max',
-				];
-			} elseif ( 'event' === $snippet ) {
-				$hash = [
-					'event_name'  => 'name',
-					'event_date'  => 'event_startdate',
-					'event_place' => 'event_address',
-					'rating'      => 'event_rating',
-					'min'         => 'event_rating_min',
-					'max'         => 'event_rating_max',
-				];
-			} elseif ( 'product' === $snippet ) {
-				$hash = [
-					'price'    => 'product_price',
-					'currency' => 'product_currency',
-					'in_stock' => 'product_instock',
-					'rating'   => 'product_rating',
-					'min'      => 'product_rating_min',
-					'max'      => 'product_rating_max',
-				];
-			} elseif ( 'recipe' === $snippet ) {
-				$hash = [
-					'rating'   => 'recipe_rating',
-					'min'      => 'recipe_rating_min',
-					'max'      => 'recipe_rating_max',
-					'time'     => 'recipe_totaltime',
-					'calories' => 'recipe_calories',
-				];
-			} elseif ( 'software' === $snippet ) {
-				$hash = [
-					'rating' => 'software_rating',
-					'min'    => 'software_rating_min',
-					'max'    => 'software_rating_max',
-				];
-			} else {
-				$hash = [
-					'rating'       => $snippet . '_rating_value',
-					'rating_count' => $snippet . '_rating_count',
-				];
-			}
-
-			foreach ( $hash as $key => $value ) {
-				$value = get_post_meta( $post->ID, 'rank_math_snippet_' . $value, true );
-				if ( ! $value ) {
-					continue;
-				}
-
-				if ( 'event_place' === $key ) {
-					$value = implode( ', ', array_filter( $value ) );
-				}
-
-				if ( 'event_date' === $key ) {
-					$value = date_i18n( 'j M Y', $value );
-				}
-
-				if ( 'in_stock' === $key ) {
-					$value = 'off' === $value ? __( 'Out of stock', 'rank-math' ) : __( 'In stock', 'rank-math' );
-				}
-				$snippet_data['data'][ $key ] = $value;
-			}
 		}
 
-		// Get rating.
-		if ( ! isset( $snippet_data['rating'] ) && function_exists( 'wp_review_show_total' ) ) {
-			$wp_review_type_star = 'star' === get_post_meta( $post->ID, 'wp_review_type', true );
-			if ( $wp_review_total && $wp_review_type_star ) {
-				$snippet_data['data']['rating'] = $wp_review_total;
-			}
+		return \array_merge(
+			$offers,
+			$this->get_ratings_data( $schema ),
+		);
+	}
+
+	/**
+	 * Get Event schema data.
+	 *
+	 * @param  array $schema Schema Data.
+	 * @return array Preview Schema Data.
+	 */
+	private function get_event_data( $schema ) {
+		global $post;
+		$address = '';
+		if ( ! empty( $schema['location']['address'] ) ) {
+			unset( $schema['location']['address']['@type'] );
+			$address = implode( ', ', array_filter( $schema['location']['address'] ) );
 		}
 
-		if ( ! isset( $snippet_data['rating'] ) && Conditional::is_woocommerce_active() && 'product' === $post->post_type ) {
-			$product = wc_get_product( $post->ID );
-			if ( $product->get_rating_count() > 0 ) {
-				$snippet_data['data']['rating']       = $product->get_average_rating();
-				$snippet_data['data']['rating_count'] = (string) $product->get_rating_count();
-			}
+		return \array_merge(
+			[
+				'event_name'  => Helper::replace_vars( $schema['name'], $post ),
+				'event_date'  => ! empty( $schema['startDate'] ) ? date_i18n( 'j M Y', $schema['startDate'] ) : '',
+				'event_place' => $address,
+			],
+			$this->get_ratings_data( $schema ),
+		);
+	}
+
+	/**
+	 * Get Recipe schema data.
+	 *
+	 * @param  array $schema Schema Data.
+	 * @return array Preview Schema Data.
+	 */
+	private function get_recipe_data( $schema ) {
+		return \array_merge(
+			[
+				'time'     => ! empty( $schema['totalTime'] ) ? $schema['totalTime'] : '',
+				'calories' => ! empty( $schema['nutrition'] ) && ! empty( $schema['nutrition']['calories'] ) ? $schema['nutrition']['calories'] : '',
+			],
+			$this->get_ratings_data( $schema ),
+		);
+	}
+
+	/**
+	 * Get Ratings schema data.
+	 *
+	 * @param  array $schema Schema Data.
+	 * @return array Preview Schema Data.
+	 */
+	private function get_ratings_data( $schema ) {
+		$review = isset( $schema['review'] ) && isset( $schema['review']['reviewRating']['ratingValue'] ) ? $schema['review']['reviewRating'] : '';
+		if ( empty( $review ) ) {
+			return [];
 		}
 
-		return $snippet_data;
+		return [
+			'rating' => $review['ratingValue'],
+			'min'    => ! empty( $review['worstRating'] ) ? $review['worstRating'] : 1,
+			'max'    => ! empty( $review['bestRating'] ) ? $review['bestRating'] : 5,
+		];
 	}
 }

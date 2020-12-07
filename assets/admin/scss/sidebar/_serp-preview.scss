@@ -148,7 +148,7 @@ $title-height: 24px;
 	}
 	// Star Ratings.
 	.#{$namespace}-rating-preview {
-		margin-bottom: 2px;
+		margin-bottom: 4px;
 		margin-left: -1px;
 	}
 
@@ -174,7 +174,7 @@ $title-height: 24px;
 			left: 0;
 			white-space: nowrap;
 			overflow: hidden;
-			color: #e7711b;
+			color: #f9b709;
 
 			span {
 				margin-top: -1px;
@@ -415,7 +415,7 @@ $title-height: 24px;
 		}
 
 		.serp-result {
-			color: #fabb06;
+			color: #f9b709;
 		}
 
 		.serp-rating-label {

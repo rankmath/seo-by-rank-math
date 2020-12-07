@@ -282,9 +282,7 @@ class SocialFields {
 
 	updateThumbnailPreview() {
 		const thumbnail = $( '#rank_math_post_thumbnail' ).attr( 'src' ),
-			content = rankMathEditor.assessor.dataCollector.getData(
-				'content'
-			),
+			content = '<div>' + rankMathEditor.assessor.dataCollector.getData( 'content' ) + '</div>',
 			contentImage = /<img(?:[^>]+)?>/.test( content )
 				? $( content )
 					.find( 'img:first' )

@@ -60,14 +60,12 @@ class Posts extends Objects {
 			->selectCount( 'query', 'keywords' )
 			->whereLike( 'page', $post->page, '%', '' )
 			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
-			->where( 'clicks', '>', 0 )
 			->getVar();
 
 		$old_keywords = DB::analytics()
 			->distinct()
 			->selectCount( 'query', 'keywords' )
 			->whereLike( 'page', $post->page, '%', '' )
-			->where( 'clicks', '>', 0 )
 			->whereBetween( 'created', [ $this->compare_start_date, $this->compare_end_date ] )
 			->getVar();
 

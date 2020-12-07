@@ -74,9 +74,16 @@ class Helper {
 	 * @return int
 	 */
 	public static function get_midnight( $time ) {
+		$org_time = $time;
 		if ( is_numeric( $time ) ) {
 			$time = date_i18n( 'Y-m-d H:i:s', $time );
 		}
+
+		// Early bail if time format is invalid.
+		if ( false === strtotime( $time ) ) {
+			return $org_time;
+		}
+
 		$date = new \DateTime( $time );
 		$date->setTime( 0, 0, 0 );
 

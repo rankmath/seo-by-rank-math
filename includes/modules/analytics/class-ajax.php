@@ -206,6 +206,26 @@ class AJAX {
 		}
 		update_option( 'rank_math_google_analytic_options', $value );
 
+		// Remove other stored accounts from option for privacy.
+		$all_accounts = get_option( 'rank_math_analytics_all_services', [] );
+		if ( isset( $all_accounts['accounts'][ $value['account_id'] ] ) ) {
+			foreach ( $all_accounts['accounts'] as $account_id => $account_data ) {
+				if ( $account_id != $value['account_id'] ) {
+					unset( $all_accounts['accounts'][ $account_id ] );
+					continue;
+				}
+				if ( isset( $account_data['properties'][ $value['property_id'] ] ) ) {
+					foreach ( $account_data['properties'] as $property_id => $property_data ) {
+						if ( $property_id != $value['property_id'] ) {
+							unset( $all_accounts['accounts'][ $account_id ][ $property_id ] );
+							continue;
+						}
+					}
+				}
+			}
+		}
+		update_option( 'rank_math_analytics_all_services', $all_accounts );
+
 		do_action( 'rank_math/analytics/options/analytics_saved' );
 
 		$this->success();
@@ -218,12 +238,20 @@ class AJAX {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
 		$this->has_cap_ajax( 'analytics' );
 
+		$input_profile = Param::post( 'profile' );
+		$input_country = Param::post( 'country', 'all' );
+
 		$prev  = get_option( 'rank_math_google_analytic_profile' );
 		$value = [
-			'country' => Param::post( 'country', 'all' ),
-			'profile' => Param::post( 'profile' ),
+			'country' => $input_country,
+			'profile' => $input_profile,
 		];
 		update_option( 'rank_math_google_analytic_profile', $value );
+
+		// Remove other stored sites from option for privacy.
+		$all_accounts = get_option( 'rank_math_analytics_all_services', [] );
+		$all_accounts['sites'] = [ $input_profile => $input_profile ];
+		update_option( 'rank_math_analytics_all_services', $all_accounts );
 
 		if ( empty( $prev['profile'] ) ) {
 			$this->should_pull_data();

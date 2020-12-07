@@ -42,7 +42,6 @@ class KB {
 		'local-seo'                   => 'https://rankmath.com/kb/how-to-setup/#easy-and-advanced-mode?utm_source=Plugin&utm_campaign=WP',
 		'seo-tweaks'                  => 'https://rankmath.com/kb/how-to-setup/#optimization?utm_source=Plugin&utm_campaign=WP',
 		'analytics'                   => 'https://rankmath.com/kb/how-to-setup/#google-search-console?utm_source=Plugin&utm_campaign=WP',
-		'custom-gsc-project'          => 'https://rankmath.com/kb/create-a-google-api-project/?utm_source=Plugin&utm_campaign=WP',
 		'remove-category-base'        => 'https://rankmath.com/kb/general-settings/#strip-category-base?utm_source=Plugin&utm_campaign=WP',
 		'link-settings'               => 'https://rankmath.com/kb/general-settings/#links?utm_source=Plugin&utm_campaign=WP',
 		'image-settings'              => 'https://rankmath.com/kb/general-settings/#images?utm_source=Plugin&utm_campaign=WP',
@@ -104,6 +103,7 @@ class KB {
 		'product-tags-settings'       => 'https://rankmath.com/kb/titles-and-meta/#product-tags?utm_source=Plugin&utm_campaign=WP',
 		'version-control'             => 'https://rankmath.com/kb/version-control/?utm_source=Plugin&utm_campaign=WP',
 		'general-settings'            => 'https://rankmath.com/kb/general-settings/?utm_source=Plugin&utm_campaign=WP',
+		'google-api-key'              => 'https://rankmath.com/kb/how-to-get-a-google-api-key/?utm_source=Plugin&utm_campaign=WP',
 	];
 
 	/**

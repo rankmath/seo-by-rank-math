@@ -9,6 +9,7 @@
 namespace RankMath\Tools;
 
 use RankMath\Helper;
+use RankMath\Installer;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Conditional;
 
@@ -182,6 +183,82 @@ class Database_Tools {
 	}
 
 	/**
+	 * Re-create Database Tables.
+	 *
+	 * @return string
+	 */
+	public function recreate_tables() {
+		// Base.
+		Installer::create_tables();
+
+		// ActionScheduler.
+		$this->maybe_recreate_actionscheduler_tables();
+
+		// Analytics module.
+		$is_connected = ( get_option( 'rank_math_google_analytic_profile', [] ) !== [] );
+		if ( Helper::is_module_active( 'analytics' ) && $is_connected ) {
+			delete_option( 'rank_math_analytics_installed' );
+			( new \RankMath\Analytics\Installer() )->install( false );
+
+			if ( defined( 'RANK_MATH_PRO_VERSION' ) ) {
+				delete_option( 'rank_math_analytics_pro_installed' );
+				( new \RankMathPro\Analytics\Installer() )->install();
+			}
+		}
+
+		return __( 'Tables re-created.', 'rank-math' );
+	}
+
+	/**
+	 * Recreate ActionScheduler tables if missing.
+	 */
+	public function maybe_recreate_actionscheduler_tables() {
+		global $wpdb;
+
+		if ( Conditional::is_woocommerce_active() ) {
+			return;
+		}
+
+		if (
+			! class_exists( 'ActionScheduler_HybridStore' )
+			|| ! class_exists( 'ActionScheduler_StoreSchema' )
+			|| ! class_exists( 'ActionScheduler_LoggerSchema' )
+		) {
+			return;
+		}
+
+		$table_list = [
+			'actionscheduler_actions',
+			'actionscheduler_logs',
+			'actionscheduler_groups',
+			'actionscheduler_claims',
+		];
+
+		$found_tables = $wpdb->get_col( "SHOW TABLES LIKE '{$wpdb->prefix}actionscheduler%'" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		foreach ( $table_list as $table_name ) {
+			if ( ! in_array( $wpdb->prefix . $table_name, $found_tables, true ) ) {
+				$this->recreate_actionscheduler_tables();
+				return;
+			}
+		}
+	}
+
+	/**
+	 * Force the data store schema updates.
+	 */
+	function recreate_actionscheduler_tables() {
+		$store = new \ActionScheduler_HybridStore();
+		add_action( 'action_scheduler/created_table', [ $store, 'set_autoincrement' ], 10, 2 );
+
+		$store_schema  = new \ActionScheduler_StoreSchema();
+		$logger_schema = new \ActionScheduler_LoggerSchema();
+		$store_schema->register_tables( true );
+		$logger_schema->register_tables( true );
+
+		remove_action( 'action_scheduler/created_table', [ $store, 'set_autoincrement' ], 10 );
+	}
+
+	/**
 	 * Yoast Block Converter
 	 *
 	 * @return string
@@ -238,17 +315,23 @@ class Database_Tools {
 				'confirm_text' => __( 'Are you sure you want to delete the 404 log? This action is irreversible.', 'rank-math' ),
 				'button_text'  => __( 'Clear 404 Log', 'rank-math' ),
 			],
-			'yoast_blocks'        => [
-				'title'        => __( 'Yoast Block Converter', 'rank-math' ),
-				'description'  => __( 'Convert FAQ & HowTo Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
-				'confirm_text' => __( 'Are you sure you want to convert Yoast blocks into Rank Math blocks? This action is irreversible.', 'rank-math' ),
-				'button_text'  => __( 'Convert Blocks', 'rank-math' ),
+			'recreate_tables' => [
+				'title'       => __( 'Re-create Missing Database Tables', 'rank-math' ),
+				/* translators: 1. Review Schema documentation link */
+				'description' => __( 'Check if required tables exist and create them if not.', 'rank-math' ),
+				'button_text' => __( 'Re-create Tables', 'rank-math' ),
 			],
 			'convert_schema'      => [
 				'title'        => __( 'Schema Converter', 'rank-math' ),
 				'description'  => __( 'If you are using v1.0.48 or higher, and if some of the Schema data from previous versions is missing, then use this tool. Please note: Use this tool only if our support staff asked you to run it.', 'rank-math' ),
 				'confirm_text' => __( 'Are you sure you want to do this? This is not recommended until and unless you are facing any issues with the revamped Schema Generator.', 'rank-math' ),
 				'button_text'  => __( 'Convert Schema', 'rank-math' ),
+			],
+			'yoast_blocks'        => [
+				'title'        => __( 'Yoast Block Converter', 'rank-math' ),
+				'description'  => __( 'Convert FAQ & HowTo Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
+				'confirm_text' => __( 'Are you sure you want to convert Yoast blocks into Rank Math blocks? This action is irreversible.', 'rank-math' ),
+				'button_text'  => __( 'Convert Blocks', 'rank-math' ),
 			],
 			'delete_links'        => [
 				'title'        => __( 'Delete Internal Links Data', 'rank-math' ),

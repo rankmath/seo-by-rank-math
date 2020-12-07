@@ -44,8 +44,7 @@
 			line-height: 18px;
 			font-size: small;
 			font-weight: normal;
-			margin-top: -4px;
-			margin-bottom: 4px;
+			margin-top: 4px;
 
 			.serp-desktop-rating {
 				float: left;
@@ -71,11 +70,11 @@
 			}
 
 			.serp-result {
-				@include position( absolute, 0 null null 0 );
+				@include position( absolute, 1px null null 0 );
 				height: 13px;
 				overflow: hidden;
 				white-space: nowrap;
-				color: #e7711b;
+				color: #f9b709;
 			}
 		}
 
@@ -198,15 +197,15 @@
 
 	// URL
 	.serp-url {
-		font-size: 16px;
-		line-height: 1.5;
+		font-size: 14px;
+		line-height: 16px;
 
-		margin: 0 0 7px;
+		margin: 3px 0 5px;
 
 		white-space: nowrap;
 		text-overflow: ellipsis;
 
-		color: #006621;
+		color: #202124;
 
 		&:after {
 			content: "";

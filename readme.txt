@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.3
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.53.1
+Stable tag: 1.0.54
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,22 +475,17 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.53.1 [Nov 29, 2020] =
-* Improved: Made plugin compatible with the PHP 8.0
-* Improved: Update-check mechanism to help show the updates properly on every server
-* Fixed: Focus Keyword field background color in the Elementor Editor's light theme
-
-= 1.0.53 [Nov 27, 2020] =
-* Improved: Google Access token for the [Analytics Module](https://rankmath.com/kb/analytics/) refreshes only when the data fetching is done via a cron job
-* * Improved: Hardened the security in some places in the plugin
-* Improved: Restrict [Schema](https://rankmath.com/kb/rich-snippets/) output on password-protected pages
-* Improved: Moved the URL field in the desktop preview area to appear before the title
-* Improved: Clicking the preview area in the Classic Editor now opens the meta editor
-* Fixed: Modules page was not getting [translated](https://rankmath.com/kb/multiple-languages-seo-rankmath-translatepress/) completely
-* Fixed: [Import tool](https://rankmath.com/kb/import-export-settings/) was not importing the taxonomy metadata from the AIO SEO Pro plugin
-* Fixed: SERP Preview was showing the wrong permalink for the secondary language category pages of WPML plugin
-* Fixed: Redirections were not working for the secondary language of WPML plugin
-* Removed: 'Head, Footer and Post Injections' plugin from the conflicting plugin lists
-* Removed: Site Kit's developer ID from the GA tracking code as it was not required
+= 1.0.54 [Dec 08, 2020] =
+* Added: Now [Analytics](https://rankmath.com/kb/analytics/) shows Keywords even with the 0 clicks, this will help to show accurate CTR and Total Keyword count
+* Added: Show reconnect notice if the Google refresh token is missing
+* Improved: 'Re-create Missing Database Tables' tool now checks all the required tables for Rank Math
+* Improved: Keep only connected Google Accounts in the database
+* Improved: Minor UI changes
+* Fixed: PHP error in the frontend if the incorrect duration was used in the Video Schema
+* Fixed: Google preview for the WooCommerce product was not showing the Schema data
+* Fixed: Enable/Disable Date Archive Option was reverted
+* Fixed: [Content Analysis](https://rankmath.com/kb/general-tab/#content-analysis) was not working in the Classic Editor's text mode
+* Fixed: Incompatibility with the WP Parsi Date plugin
+* Fixed: Wrong Total redirection count when the number was greater than 999
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

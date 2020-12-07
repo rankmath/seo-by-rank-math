@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<p><?php esc_html_e( 'You can take part in shaping Rank Math by test-driving the newest features and letting us know what you think. Turn on the Beta Tester feature to get notified about new beta releases. The beta version will not install automatically and you always have the option to ignore it.', 'rank-math' ); ?></p>
 	<?php // translators: Warning. ?>
-	<p class="description warning"><strong><?php printf( esc_html__( '%s It is not recommended to use the beta version on live production sites.', 'rank-math' ), '<span class="rollback-warning">' . esc_html__( 'Warning: ', 'rank-math' ) . '</span>' ); ?></strong></p>
+	<p class="description warning"><strong><?php printf( esc_html__( '%s It is not recommended to use the beta version on live production sites.', 'rank-math' ), '<span class="warning">' . esc_html__( 'Warning: ', 'rank-math' ) . '</span>' ); ?></strong></p>
 
 	<table class="form-table">
 		<tbody>

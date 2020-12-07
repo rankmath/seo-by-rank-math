@@ -371,15 +371,19 @@ trait WordPress {
 		if ( ! in_array( $end, [ 'D', 'H', 'M', 'S' ], true ) ) {
 			$iso8601 = $iso8601 . 'S';
 		}
-		$iso8601  = ! Str::starts_with( 'P', $iso8601 ) ? 'PT' . $iso8601 : $iso8601;
-		$interval = new \DateInterval( $iso8601 );
+		$iso8601 = ! Str::starts_with( 'P', $iso8601 ) ? 'PT' . $iso8601 : $iso8601;
+
+		preg_match( '/^P([0-9]+D|)?T?([0-9]+H|)?([0-9]+M|)?([0-9]+S|)?$/', $iso8601, $matches );
+		if ( empty( $matches ) ) {
+			return false;
+		}
 
 		return array_sum(
 			[
-				$interval->d * DAY_IN_SECONDS,
-				$interval->h * HOUR_IN_SECONDS,
-				$interval->i * MINUTE_IN_SECONDS,
-				$interval->s,
+				absint( $matches[1] ) * DAY_IN_SECONDS,
+				absint( $matches[2] ) * HOUR_IN_SECONDS,
+				absint( $matches[3] ) * MINUTE_IN_SECONDS,
+				absint( $matches[4] ),
 			]
 		);
 	}

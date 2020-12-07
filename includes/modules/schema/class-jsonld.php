@@ -78,8 +78,14 @@ class JsonLD {
 		$schema = \json_decode( file_get_contents( 'php://input' ), true );
 		$schema = $this->replace_variables( $schema );
 		$schema = $this->filter( $schema, $this, $data );
-		$schema = wp_parse_args( $schema['schema'], array_pop( $data ) );
 
+		if ( isset( $data[ $schema['schemaID'] ] ) ) {
+			$current_data = $data[ $schema['schemaID'] ];
+			unset( $data[ $schema['schemaID'] ] );
+		} else {
+			$current_data = array_pop( $data );
+		}
+		$schema = wp_parse_args( $schema['schema'], $current_data );
 		// Merge.
 		$data = array_merge( $data, [ 'schema' => $schema ] );
 		$data = $this->validate_schema( $data );

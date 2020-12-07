@@ -226,6 +226,7 @@ class Post_Columns implements Runner {
 		if ( ! Helper::is_post_indexable( $post_id ) ) {
 			echo '<span class="rank-math-column-display seo-score no-score "><strong>N/A</strong></span>';
 			echo '<strong>' . esc_html__( 'No Index', 'rank-math' ) . '</strong>';
+			$this->do_action( 'post/column/seo_details', $post_id );
 			return;
 		}
 

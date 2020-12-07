@@ -349,7 +349,7 @@
 
 		.inner-wrapper {
 			color: #70757A;
-			flex: 1;
+			flex: 0 0 25%;
 			margin-left: 5px;
 			margin-right: 5px;
 			height: 40px;
@@ -361,6 +361,10 @@
 				margin-bottom: 4px;
 				color: #202124;
 				font-weight: 500;
+			}
+
+			&:first-of-type {
+				flex: 0 0 50%;
 			}
 
 			.serp-rating-count {

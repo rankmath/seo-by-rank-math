@@ -114,6 +114,10 @@
 				}
 			}
 		}
+
+		.serp-result {
+			@include position( absolute, -1px null null 0 );
+		}
 	}
 
 	// Tooltip

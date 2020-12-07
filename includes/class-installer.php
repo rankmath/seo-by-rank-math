@@ -137,7 +137,7 @@ class Installer {
 		$current_version    = get_option( 'rank_math_version', null );
 		$current_db_version = get_option( 'rank_math_db_version', null );
 
-		$this->create_tables();
+		self::create_tables();
 		$this->create_options();
 		$this->set_capabilities();
 		$this->create_cron_jobs();
@@ -184,7 +184,7 @@ class Installer {
 	/**
 	 * Set up the database tables.
 	 */
-	private function create_tables() {
+	public static function create_tables() {
 		global $wpdb;
 
 		$collate      = $wpdb->get_charset_collate();
@@ -388,7 +388,7 @@ class Installer {
 			'author_robots'              => [ 'noindex' ],
 			'author_archive_title'       => '%name% %sep% %sitename% %page%',
 			'author_add_meta_box'        => 'on',
-			'disable_date_archives'      => 'off',
+			'disable_date_archives'      => 'on',
 			'date_archive_title'         => '%date% %page% %sep% %sitename%',
 			'search_title'               => '%search_query% %page% %sep% %sitename%',
 			'404_title'                  => 'Page Not Found %sep% %sitename%',
