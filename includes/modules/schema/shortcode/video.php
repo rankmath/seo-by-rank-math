@@ -6,6 +6,8 @@
  * @subpackage RankMath\Schema
  */
 
+defined( 'ABSPATH' ) || exit;
+
 $this->get_title();
 $this->get_image();
 ?>

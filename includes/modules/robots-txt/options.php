@@ -9,6 +9,8 @@
 use RankMath\Robots_Txt;
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 $data       = Robots_Txt::get_robots_data();
 $attributes = [];
 if ( $data['exists'] ) {

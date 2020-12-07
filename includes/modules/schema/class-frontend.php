@@ -71,7 +71,7 @@ class Frontend {
 	 * @return array
 	 */
 	public function add_schema( $data, $jsonld ) {
-		if ( ! is_singular() ) {
+		if ( ! is_singular() || post_password_required() ) {
 			return $data;
 		}
 

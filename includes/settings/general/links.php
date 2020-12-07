@@ -9,6 +9,8 @@
 use RankMath\Helper;
 use RankMath\KB;
 
+defined( 'ABSPATH' ) || exit;
+
 $cmb->add_field(
 	[
 		'id'      => 'strip_category_base',

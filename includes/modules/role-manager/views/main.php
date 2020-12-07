@@ -6,6 +6,8 @@
  * @subpackage RankMath\Role_Manager
  */
 
+defined( 'ABSPATH' ) || exit;
+
 // Header.
 rank_math()->admin->display_admin_header();
 ?>

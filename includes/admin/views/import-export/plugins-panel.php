@@ -8,6 +8,8 @@
 
 use RankMath\Admin\Importers\Detector;
 
+defined( 'ABSPATH' ) || exit;
+
 $detector = new Detector();
 $plugins  = $detector->detect();
 $first = empty( $plugins ) ? '' : array_keys( $plugins )[0];

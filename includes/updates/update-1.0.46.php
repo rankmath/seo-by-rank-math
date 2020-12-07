@@ -10,6 +10,8 @@
 
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Enable the core auto update option if it's set in RM.
  */

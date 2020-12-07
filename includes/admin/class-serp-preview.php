@@ -13,6 +13,7 @@ namespace RankMath\Admin;
 use RankMath\CMB2;
 use RankMath\Helper;
 use RankMath\Rewrite;
+use RankMath\Helpers\Sitepress;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\WordPress;
 use MyThemeShop\Helpers\Conditional;
@@ -79,12 +80,11 @@ class Serp_Preview {
 				</div>
 
 				<div class="serp-preview-body">
-
-					<h5 class="serp-title" data-format="<?php echo esc_attr( $data['title_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter custom title', 'rank-math' ); ?>"></h5>
 					<div class="serp-url-wrapper">
 						<img src="<?php echo $favicon; // phpcs:ignore ?>" width="16" height="16" class="serp-favicon" />
 						<span class="serp-url" data-baseurl="<?php echo trailingslashit( substr( $data['url'], 0, strrpos( $data['url'], '/' ) ) ); ?>" data-format="<?php echo esc_attr( $data['permalink_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter permalink', 'rank-math' ); ?>"><?php echo esc_url( $data['permalink'] ); ?></span>
 					</div>
+					<h5 class="serp-title" data-format="<?php echo esc_attr( $data['title_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter custom title', 'rank-math' ); ?>"></h5>
 					<?php
 					if ( 'event' !== $snippet_type ) {
 						echo $desktop_preview; // phpcs:ignore
@@ -170,9 +170,11 @@ class Serp_Preview {
 		if ( empty( $termlink ) ) {
 			$permalink_format = $permalink;
 		} else {
+			Sitepress::get()->remove_home_url_filter();
 			$termlink         = str_replace( $this->get_home_url(), '', $permalink );
 			$termlink         = str_replace( $term->slug, '%postname%', $termlink );
 			$permalink_format = $this->get_home_url( user_trailingslashit( $termlink, 'category' ) );
+			Sitepress::get()->restore_home_url_filter();
 		}
 
 		$url = untrailingslashit( esc_url( $permalink ) );

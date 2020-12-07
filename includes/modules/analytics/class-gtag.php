@@ -185,12 +185,6 @@ class GTag {
 			'gtag(\'js\', new Date());'
 		);
 
-		// Site Kit developer ID.
-		wp_add_inline_script(
-			'google_gtagjs',
-			'gtag(\'set\', \'developer_id.dZTNiMT\', true);'
-		);
-
 		if ( empty( $gtag_opt ) ) {
 			wp_add_inline_script(
 				'google_gtagjs',

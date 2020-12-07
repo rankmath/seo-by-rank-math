@@ -8,6 +8,9 @@
 
 use RankMath\KB;
 use MyThemeShop\Helpers\Param;
+
+defined( 'ABSPATH' ) || exit;
+
 ?>
 <div class="header">
 	<div class="logo text-center">

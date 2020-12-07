@@ -23,6 +23,8 @@ use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\WordPress;
 use MyThemeShop\Helpers\Conditional;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Admin class.
  */

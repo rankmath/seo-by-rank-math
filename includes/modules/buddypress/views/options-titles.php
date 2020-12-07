@@ -8,6 +8,8 @@
 
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 $cmb->add_field(
 	[
 		'id'              => 'bp_group_title',

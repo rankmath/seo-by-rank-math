@@ -12,6 +12,8 @@ use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Conditional;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Database_Tools class.
  */

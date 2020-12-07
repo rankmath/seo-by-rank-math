@@ -6,6 +6,8 @@
  * @subpackage RankMath\Settings
  */
 
+defined( 'ABSPATH' ) || exit;
+
 ?>
 <div class="cmb-row rank-math-rss-variables">
 

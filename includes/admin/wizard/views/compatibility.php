@@ -6,9 +6,12 @@
  * @subpackage RankMath\Admin\Wizard
  */
 
-global $wp_version;
 use RankMath\Helper;
 use RankMath\KB;
+
+defined( 'ABSPATH' ) || exit;
+
+global $wp_version;
 
 update_option( 'rank_math_wizard_completed', true );
 

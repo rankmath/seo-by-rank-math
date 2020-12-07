@@ -54,31 +54,30 @@ class Api extends Console {
 
 		$tokens      = Authentication::tokens();
 		$this->token = $tokens['access_token'];
-		$this->refresh_token_on_login();
 	}
 
 	/**
 	 * Refresh access token when user login.
 	 */
-	public function refresh_token_on_login() {
+	public function refresh_token() {
 		// Bail if the user is not authenticated at all yet.
 		if ( ! Authentication::is_authorized() || ! Authentication::is_token_expired() ) {
-			return;
+			return true;
 		}
 
 		$tokens = Authentication::tokens();
 		if ( empty( $tokens['refresh_token'] ) ) {
-			return;
+			return false;
 		}
 
 		$response = wp_remote_get( Authentication::get_auth_app_url() . '/refresh.php?code=' . $tokens['refresh_token'] );
 		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return;
+			return false;
 		}
 
 		$response = wp_remote_retrieve_body( $response );
 		if ( empty( $response ) ) {
-			return;
+			return false;
 		}
 
 		// Save new token.
@@ -86,6 +85,8 @@ class Api extends Console {
 		$tokens['expire']       = time() + 3600;
 		$tokens['access_token'] = $response;
 		Authentication::tokens( $tokens );
+
+		return true;
 	}
 
 	/**
