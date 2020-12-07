@@ -214,13 +214,13 @@ class JsonLD {
 		$snippets        = [
 			'\\RankMath\\Schema\\Publisher'     => ! isset( $data['publisher'] ),
 			'\\RankMath\\Schema\\Website'       => true,
-			'\\RankMath\\Schema\\PrimaryImage'  => is_singular(),
+			'\\RankMath\\Schema\\PrimaryImage'  => ! post_password_required() && is_singular(),
 			'\\RankMath\\Schema\\Breadcrumbs'   => $this->can_add_breadcrumb(),
 			'\\RankMath\\Schema\\Webpage'       => true,
 			'\\RankMath\\Schema\\Author'        => is_author(),
 			'\\RankMath\\Schema\\Products_Page' => $is_product_page,
 			'\\RankMath\\Schema\\ItemListPage'  => ! $is_product_page && ( is_category() || is_tag() || is_tax() ),
-			'\\RankMath\\Schema\\Singular'      => is_singular(),
+			'\\RankMath\\Schema\\Singular'      => ! post_password_required() && is_singular(),
 		];
 
 		foreach ( $snippets as $class => $can_run ) {

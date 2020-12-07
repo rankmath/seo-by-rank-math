@@ -51,7 +51,7 @@ class Manager {
 		$this->filter( 'rank_math/modules', 'setup_internals', 1 );
 		$this->filter( 'rank_math/modules', 'setup_3rd_party', 1 );
 
-		$this->action( 'plugins_loaded', 'load_modules', 11 );
+		$this->action( 'plugins_loaded', 'load_modules' );
 		add_action( 'rank_math/module_changed', [ '\RankMath\Admin\Watcher', 'module_changed' ], 10, 2 );
 		$this->action( 'rank_math/module_changed', 'watch_for_analytics', 10, 2 );
 	}

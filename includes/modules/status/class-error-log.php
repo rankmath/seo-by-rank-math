@@ -13,6 +13,8 @@ namespace RankMath\Status;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\WordPress;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Error_Log class.
  */

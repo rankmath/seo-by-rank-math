@@ -8,9 +8,10 @@
  * @author     Rank Math <support@rankmath.com>
  */
 
-use RankMath\Helper;
 use MyThemeShop\Helpers\DB;
 use RankMath\Redirections\DB as Redirections_DB;
+
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Create and update table schema

@@ -6,6 +6,8 @@
  * @subpackage RankMath\Redirections
  */
 
+defined( 'ABSPATH' ) || exit;
+
 ?>
 <p>
 	<?php esc_html_e( 'Here you can set up custom redirections. It is important to choose the right type of redirection.', 'rank-math' ); ?>

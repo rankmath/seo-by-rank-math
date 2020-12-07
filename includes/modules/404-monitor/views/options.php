@@ -10,6 +10,8 @@
 
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 $cmb->add_field(
 	[
 		'id'      => '404_advanced_monitor',

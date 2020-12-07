@@ -10,6 +10,8 @@ namespace RankMath;
 
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 if ( Rollback_Version::should_rollback() ) {
 	$rollback = new Rollback_Version();
 	$rollback->rollback();

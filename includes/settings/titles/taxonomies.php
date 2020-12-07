@@ -8,6 +8,8 @@
 
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 $taxonomy     = $tab['taxonomy'];
 $taxonomy_obj = get_taxonomy( $taxonomy );
 $name         = $taxonomy_obj->labels->singular_name;

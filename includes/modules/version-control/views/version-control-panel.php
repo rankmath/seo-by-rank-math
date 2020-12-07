@@ -8,6 +8,8 @@
 
 namespace RankMath;
 
+defined( 'ABSPATH' ) || exit;
+
 ?>
 <form class="rank-math-rollback-form cmb2-form rank-math-box" action="" method="post">
 

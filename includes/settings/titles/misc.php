@@ -8,6 +8,8 @@
 
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 $dep = [ [ 'disable_date_archives', 'on' ] ];
 
 $cmb->add_field(

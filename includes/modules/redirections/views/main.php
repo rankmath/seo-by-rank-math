@@ -8,6 +8,8 @@
 
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 $redirections = Helper::get_module( 'redirections' )->admin;
 $redirections->table->prepare_items();
 

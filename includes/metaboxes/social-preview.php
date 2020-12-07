@@ -10,6 +10,8 @@ use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 use MyThemeShop\Helpers\Param;
 
+defined( 'ABSPATH' ) || exit;
+
 global $post;
 
 $thumbnail = has_post_thumbnail() ? absint( get_post_thumbnail_id() ) : '';

@@ -9,6 +9,8 @@
 use RankMath\Admin\Admin_Helper;
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 $data = Admin_Helper::get_htaccess_data();
 
 if ( false === $data ) {

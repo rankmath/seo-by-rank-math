@@ -12,8 +12,8 @@ namespace RankMath\Status;
 
 use RankMath\Google\Authentication;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\WordPress as WordPress_Helper;
+
+defined( 'ABSPATH' ) || exit;
 
 /**
  * System_Status class.
@@ -157,16 +157,16 @@ class System_Status {
 		}
 
 		$should_exists = [
-			'rank_math_404_logs'                  => esc_html__( 'Databse Table: 404 Log', 'rank-math' ),
-			'rank_math_redirections'              => esc_html__( 'Databse Table: Redirection', 'rank-math' ),
-			'rank_math_redirections_cache'        => esc_html__( 'Databse Table: Redirection Cache', 'rank-math' ),
-			'rank_math_internal_links'            => esc_html__( 'Databse Table: Internal Link', 'rank-math' ),
-			'rank_math_internal_meta'             => esc_html__( 'Databse Table: Internal Link Meta', 'rank-math' ),
-			'rank_math_analytics_gsc'             => esc_html__( 'Databse Table: Google Search Console', 'rank-math' ),
-			'rank_math_analytics_objects'         => esc_html__( 'Databse Table: Flat Posts', 'rank-math' ),
-			'rank_math_analytics_ga'              => esc_html__( 'Databse Table: Google Analytics', 'rank-math' ),
-			'rank_math_analytics_adsense'         => esc_html__( 'Databse Table: Google AdSense', 'rank-math' ),
-			'rank_math_analytics_keyword_manager' => esc_html__( 'Databse Table: Keyword Manager', 'rank-math' ),
+			'rank_math_404_logs'                  => esc_html__( 'Database Table: 404 Log', 'rank-math' ),
+			'rank_math_redirections'              => esc_html__( 'Database Table: Redirection', 'rank-math' ),
+			'rank_math_redirections_cache'        => esc_html__( 'Database Table: Redirection Cache', 'rank-math' ),
+			'rank_math_internal_links'            => esc_html__( 'Database Table: Internal Link', 'rank-math' ),
+			'rank_math_internal_meta'             => esc_html__( 'Database Table: Internal Link Meta', 'rank-math' ),
+			'rank_math_analytics_gsc'             => esc_html__( 'Database Table: Google Search Console', 'rank-math' ),
+			'rank_math_analytics_objects'         => esc_html__( 'Database Table: Flat Posts', 'rank-math' ),
+			'rank_math_analytics_ga'              => esc_html__( 'Database Table: Google Analytics', 'rank-math' ),
+			'rank_math_analytics_adsense'         => esc_html__( 'Database Table: Google AdSense', 'rank-math' ),
+			'rank_math_analytics_keyword_manager' => esc_html__( 'Database Table: Keyword Manager', 'rank-math' ),
 		];
 
 		foreach ( $should_exists as $name => $label ) {

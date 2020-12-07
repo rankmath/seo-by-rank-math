@@ -166,18 +166,6 @@ const SerpPreview = ( {
 						}
 					} }
 				>
-					<div className="group">
-						<h5
-							className="serp-title"
-							dangerouslySetInnerHTML={ {
-								__html: highlight(
-									keyword,
-									Helpers.sanitizeText( title ),
-									60
-								),
-							} }
-						></h5>
-					</div>
 
 					<div className="group">
 						<img
@@ -200,6 +188,18 @@ const SerpPreview = ( {
 								),
 							} }
 						></div>
+					</div>
+					<div className="group">
+						<h5
+							className="serp-title"
+							dangerouslySetInnerHTML={ {
+								__html: highlight(
+									keyword,
+									Helpers.sanitizeText( title ),
+									60
+								),
+							} }
+						></h5>
 					</div>
 
 					<RatingPreview />

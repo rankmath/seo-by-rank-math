@@ -10,6 +10,8 @@
 
 use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Change of authentication end-point notice.
  */

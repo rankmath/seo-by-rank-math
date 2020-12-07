@@ -9,7 +9,8 @@
  */
 
 use RankMath\Helper;
-use RankMath\Admin\Admin_Helper;
+
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Enable the new Image SEO module if either the "add_img_alt" or the

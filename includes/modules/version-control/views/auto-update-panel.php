@@ -6,6 +6,8 @@
  * @subpackage RankMath\Version_Control
  */
 
+defined( 'ABSPATH' ) || exit;
+
 ?>
 <form id="cmb2-metabox-rank-math-auto-update" class="rank-math-auto-update-form cmb2-form rank-math-box" action="" method="post">
 

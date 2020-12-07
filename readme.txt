@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.3
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.52.3
+Stable tag: 1.0.53
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,13 +475,17 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.53 [Nov 19, 2020] =
-* Added: New tools are added for better debugging in [Rank Math status & tools section](https://rankmath.com/kb/rank-math-status-and-tools/)
-* Improved: [Sitemaps](https://rankmath.com/kb/configure-sitemaps/) won't throw a 404 error when there are no links inside them
-* Improved: WooCommerce Product Schema will now add the rating value only if the value is greater than 0
-* Fixed: Global [WooCommerce Product Schema](https://rankmath.com/blog/woocommerce-seo/) was not getting applied on the older posts
-* Fixed: Country selection was not working for the [Google services](https://rankmath.com/kb/analytics/)
-* Fixed: Validating the ISO 8601 duration before converting it to seconds for the [Video Schema](https://rankmath.com/kb/rich-snippets/#17-video)
-* Fixed: Recipe Instructions data was not getting ported over to the new Graph Schema. Affected users are requested to run the [Schema Converter](https://i.rankmath.com/Y2sDnX) from the Database tools section
+= 1.0.53 [Nov 27, 2020] =
+* Improved: Google Access token for the [Analytics Module](https://rankmath.com/kb/analytics/) refreshes only when the data fetching is done via a cron job
+* * Improved: Hardened the security in some places in the plugin
+* Improved: Restrict [Schema](https://rankmath.com/kb/rich-snippets/) output on password-protected pages
+* Improved: Moved the URL field in the desktop preview area to appear before the title
+* Improved: Clicking the preview area in the Classic Editor now opens the meta editor
+* Fixed: Modules page was not getting [translated](https://rankmath.com/kb/multiple-languages-seo-rankmath-translatepress/) completely
+* Fixed: [Import tool](https://rankmath.com/kb/import-export-settings/) was not importing the taxonomy metadata from the AIO SEO Pro plugin
+* Fixed: SERP Preview was showing the wrong permalink for the secondary language category pages of WPML plugin
+* Fixed: Redirections were not working for the secondary language of WPML plugin
+* Removed: 'Head, Footer and Post Injections' plugin from the conflicting plugin lists
+* Removed: Site Kit's developer ID from the GA tracking code as it was not required
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

@@ -7,10 +7,9 @@
  */
 
 use RankMath\KB;
-use RankMath\Helper;
-use MyThemeShop\Helpers\Param;
-use RankMath\Admin\Admin_Helper;
 use RankMath\Google\Authentication;
+
+defined( 'ABSPATH' ) || exit;
 
 // phpcs:disable
 $is_authorized = Authentication::is_authorized();
