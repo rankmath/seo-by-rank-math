@@ -7,9 +7,6 @@
  */
 
 use RankMath\Helper;
-
-defined( 'ABSPATH' ) || exit;
-
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>

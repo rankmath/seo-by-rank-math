@@ -12,8 +12,8 @@ namespace RankMath\Redirections;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-
-defined( 'ABSPATH' ) || exit;
+use MyThemeShop\Helpers\Param;
+use RankMath\Monitor\DB as Monitor_DB;
 
 /**
  * Import_Export class.

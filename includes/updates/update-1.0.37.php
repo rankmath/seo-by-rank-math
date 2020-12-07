@@ -9,8 +9,7 @@
  */
 
 use RankMath\Helper;
-
-defined( 'ABSPATH' ) || exit;
+use RankMath\Admin\Admin_Helper;
 
 /**
  * Add Dashboard role to admins.

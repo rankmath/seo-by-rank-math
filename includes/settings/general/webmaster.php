@@ -6,8 +6,6 @@
  * @subpackage RankMath\Settings
  */
 
-defined( 'ABSPATH' ) || exit;
-
 $cmb->add_field(
 	[
 		'id'              => 'google_verify',

@@ -8,8 +8,6 @@
 
 use RankMath\KB;
 
-defined( 'ABSPATH' ) || exit;
-
 ?>
 
 <p>

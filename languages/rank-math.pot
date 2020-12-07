@@ -672,10 +672,10 @@ msgstr ""
 msgid "Mobile Preview"
 msgstr ""
 
-msgid "Click to enter permalink"
+msgid "Click to enter custom title"
 msgstr ""
 
-msgid "Click to enter custom title"
+msgid "Click to enter permalink"
 msgstr ""
 
 msgid "Click to enter custom meta description"
@@ -1926,9 +1926,6 @@ msgid "Import AIO SEO plugin settings, global meta, sitemap settings, etc."
 msgstr ""
 
 msgid "Import meta information of your posts/pages like the titles, descriptions, robots meta, OpenGraph info, etc."
-msgstr ""
-
-msgid "Import meta information of your terms like the titles, descriptions, robots meta, OpenGraph info, etc."
 msgstr ""
 
 msgid "Settings imported successfully."
@@ -3438,34 +3435,34 @@ msgstr ""
 msgid "Token exists"
 msgstr ""
 
-msgid "Database Table: 404 Log"
+msgid "Databse Table: 404 Log"
 msgstr ""
 
-msgid "Database Table: Redirection"
+msgid "Databse Table: Redirection"
 msgstr ""
 
-msgid "Database Table: Redirection Cache"
+msgid "Databse Table: Redirection Cache"
 msgstr ""
 
-msgid "Database Table: Internal Link"
+msgid "Databse Table: Internal Link"
 msgstr ""
 
-msgid "Database Table: Internal Link Meta"
+msgid "Databse Table: Internal Link Meta"
 msgstr ""
 
-msgid "Database Table: Google Search Console"
+msgid "Databse Table: Google Search Console"
 msgstr ""
 
-msgid "Database Table: Flat Posts"
+msgid "Databse Table: Flat Posts"
 msgstr ""
 
-msgid "Database Table: Google Analytics"
+msgid "Databse Table: Google Analytics"
 msgstr ""
 
-msgid "Database Table: Google AdSense"
+msgid "Databse Table: Google AdSense"
 msgstr ""
 
-msgid "Database Table: Keyword Manager"
+msgid "Databse Table: Keyword Manager"
 msgstr ""
 
 msgid "Created"
@@ -4560,10 +4557,6 @@ msgid "Ignore Query Parameters"
 msgstr ""
 
 msgid "Turn ON to ignore all query parameters (the part after a question mark in a URL) when logging 404 errors."
-msgstr ""
-
-#. translators: reconnect link
-msgid "There is no refresh token. Please <a href=\"%1$s\" class=\"button button-link rank-math-reconnect-google\">reconnect your app</a>"
 msgstr ""
 
 msgid "Bad request. Please check the code."

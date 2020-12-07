@@ -8,8 +8,6 @@
 
 use RankMath\Helper;
 
-defined( 'ABSPATH' ) || exit;
-
 if ( 'page' === get_option( 'show_on_front' ) ) {
 	$cmb->add_field(
 		[

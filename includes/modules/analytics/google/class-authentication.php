@@ -24,13 +24,6 @@ defined( 'ABSPATH' ) || exit;
 class Authentication {
 
 	/**
-	 * API version.
-	 *
-	 * @var string
-	 */
-	protected static $api_version = '2.0';
-
-	/**
 	 * Get or update Search Console data.
 	 *
 	 * @param  bool|array $data Data to save.
@@ -105,14 +98,11 @@ class Authentication {
 	 * @return string
 	 */
 	public static function get_auth_url() {
-
 		$page = Param::get( 'page' );
-		$page = 'rank-math-wizard' === $page ? 'rank-math-wizard&step=analytics' : 'rank-math-options-general#setting-panel-analytics';
-
+		$page = 'rank-math-wizard' === $page ? 'rank-math-wizard&step=analytics' : 'rank-math-options-general';
 		return Security::add_query_arg_raw(
 			[
 				'version'      => defined( 'RANK_MATH_PRO_VERSION' ) ? 'pro' : 'free',
-				'api_version'  => static::$api_version,
 				'redirect_uri' => rawurlencode( admin_url( 'admin.php?page=' . $page ) ),
 				'security'     => wp_create_nonce( 'rank_math_oauth_token' ),
 			],

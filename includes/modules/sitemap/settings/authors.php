@@ -8,8 +8,6 @@
 
 use MyThemeShop\Helpers\WordPress;
 
-defined( 'ABSPATH' ) || exit;
-
 $roles   = WordPress::get_roles();
 $default = $roles;
 unset( $default['administrator'], $default['editor'], $default['author'] );

@@ -6,8 +6,6 @@
  * @subpackage RankMath\Sitemap
  */
 
-defined( 'ABSPATH' ) || exit;
-
 $taxonomy   = $tab['taxonomy'];
 $prefix     = "tax_{$taxonomy}_";
 $is_enabled = 'category' === $taxonomy ? 'on' : 'off';

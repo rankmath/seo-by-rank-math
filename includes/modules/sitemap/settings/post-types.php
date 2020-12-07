@@ -8,8 +8,6 @@
 
 use RankMath\Helper;
 
-defined( 'ABSPATH' ) || exit;
-
 $attributes = [];
 $post_type  = $tab['post_type'];
 $prefix     = "pt_{$post_type}_";

@@ -5,11 +5,10 @@
  * @package Rank_Math
  */
 
+use RankMath\Helper;
 use RankMath\Analytics\DB;
 use MyThemeShop\Helpers\Str;
 use RankMath\Google\Authentication;
-
-defined( 'ABSPATH' ) || exit;
 
 // phpcs:disable
 $actions = \as_get_scheduled_actions(

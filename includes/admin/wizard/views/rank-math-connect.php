@@ -7,10 +7,10 @@
  */
 
 use RankMath\KB;
+use RankMath\Helper;
 use MyThemeShop\Helpers\Param;
 use RankMath\Admin\Admin_Helper;
-
-defined( 'ABSPATH' ) || exit;
+use RankMath\Google\Authentication;
 
 // phpcs:disable
 $page = Param::get( 'page' );

@@ -6,9 +6,8 @@
  * @subpackage RankMath\Settings
  */
 
+use RankMath\KB;
 use RankMath\Helper;
-
-defined( 'ABSPATH' ) || exit;
 
 $cmb->add_field(
 	[

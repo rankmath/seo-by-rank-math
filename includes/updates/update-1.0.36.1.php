@@ -8,7 +8,8 @@
  * @author     Rank Math <support@rankmath.com>
  */
 
-defined( 'ABSPATH' ) || exit;
+use RankMath\Helper;
+use RankMath\Admin\Admin_Helper;
 
 /**
  * Clear notice about disconnection.

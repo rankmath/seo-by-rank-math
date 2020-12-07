@@ -6,8 +6,6 @@
  * @subpackage RankMath\Admin
  */
 
-defined( 'ABSPATH' ) || exit;
-
 ?>
 <h2><?php esc_html_e( 'Plugin Settings', 'rank-math' ); ?></h2>
 

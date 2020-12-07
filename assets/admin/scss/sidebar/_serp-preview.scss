@@ -125,7 +125,7 @@ $title-height: 24px;
 		line-height: 16px;
 		margin: 3px 0 5px;
 		padding-right: 5px;
-		color: #202124;
+		color: #006621;
 
 		&:after {
 			position: absolute;
@@ -436,8 +436,9 @@ $title-height: 24px;
 			color: #1967d2;
 		}
 
-		.group:first-child {
+		.group:nth-of-type(2) {
 			max-width: 250px;
+			@include prefixer(order, -1, $browser);
 			@include value-prefixer(display, flex, $browser);
 		}
 

@@ -10,9 +10,6 @@
  */
 
 use RankMath\Helper;
-
-defined( 'ABSPATH' ) || exit;
-
 $analyzer = Helper::get_module( 'seo-analysis' )->admin->analyzer;
 ?>
 <div class="rank-math-seo-analysis-header <?php echo empty( $analyzer->results ) || count( $analyzer->results ) < 30 ? '' : ' hidden'; ?>">

@@ -6,9 +6,10 @@
  * @subpackage RankMath\Schema
  */
 
+use RankMath\KB;
 use RankMath\Helper;
-
-defined( 'ABSPATH' ) || exit;
+use MyThemeShop\Helpers\Param;
+use MyThemeShop\Helpers\WordPress;
 
 if ( ! Helper::has_cap( 'onpage_snippet' ) ) {
 	return;

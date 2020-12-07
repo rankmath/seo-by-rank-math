@@ -17,8 +17,6 @@ use MyThemeShop\Database\Database;
 use MyThemeShop\Helpers\Conditional;
 use MyThemeShop\Helpers\Str;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Schema_Converter class.
  */

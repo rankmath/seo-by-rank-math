@@ -11,8 +11,6 @@
 use MyThemeShop\Helpers\DB;
 use RankMath\Redirections\Redirection;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Create and update table schema
  *

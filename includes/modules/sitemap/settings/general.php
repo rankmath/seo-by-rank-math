@@ -6,8 +6,6 @@
  * @subpackage RankMath\Sitemap
  */
 
-defined( 'ABSPATH' ) || exit;
-
 if ( class_exists( 'SitePress' ) ) {
 	$cmb->add_field(
 		[

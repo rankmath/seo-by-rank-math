@@ -15,8 +15,6 @@ use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Param;
 use RankMath\Monitor\DB as Monitor_DB;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Form class.
  *

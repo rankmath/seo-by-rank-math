@@ -11,7 +11,6 @@
 namespace RankMath\Redirections;
 
 use RankMath\Helper;
-use RankMath\Helpers\Sitepress;
 use MyThemeShop\Helpers\Url;
 
 defined( 'ABSPATH' ) || exit;
@@ -445,9 +444,7 @@ class Redirection {
 	 * @return string
 	 */
 	public static function strip_subdirectory( $url ) {
-		Sitepress::get()->remove_home_url_filter();
 		$home_dir = ltrim( home_url( '', 'relative' ), '/' );
-		Sitepress::get()->restore_home_url_filter();
 
 		return $home_dir ? str_replace( trailingslashit( $home_dir ), '', $url ) : $url;
 	}

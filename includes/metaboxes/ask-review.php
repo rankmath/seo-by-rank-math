@@ -8,8 +8,6 @@
 
 use RankMath\Admin\Ask_Review;
 
-defined( 'ABSPATH' ) || exit;
-
 $cmb->add_field(
 	[
 		'id'      => 'rank_math_ask_review',

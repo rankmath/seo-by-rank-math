@@ -8,8 +8,6 @@
 
 use RankMath\Helper;
 
-defined( 'ABSPATH' ) || exit;
-
 $monitor = Helper::get_module( '404-monitor' )->admin;
 $monitor->table->prepare_items();
 ?>

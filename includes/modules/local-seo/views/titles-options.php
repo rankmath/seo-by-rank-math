@@ -8,8 +8,6 @@
 
 use RankMath\Helper;
 
-defined( 'ABSPATH' ) || exit;
-
 $company = [ [ 'knowledgegraph_type', 'company' ] ];
 $person  = [ [ 'knowledgegraph_type', 'person' ] ];
 

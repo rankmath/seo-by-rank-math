@@ -10,8 +10,6 @@
 
 use RankMath\Helper;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Set Elementor Library Add metabox value to false.
  */

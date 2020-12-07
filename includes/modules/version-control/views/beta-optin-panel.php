@@ -6,8 +6,6 @@
  * @subpackage RankMath\Version_Control
  */
 
-defined( 'ABSPATH' ) || exit;
-
 ?>
 
 <form id="cmb2-metabox-rank-math-beta-optin" class="rank-math-beta-optin-form cmb2-form rank-math-box" action="" method="post">

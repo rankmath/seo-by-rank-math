@@ -6,8 +6,6 @@
  * @subpackage RankMath\Admin\Wizard
  */
 
-defined( 'ABSPATH' ) || exit;
-
 $output_steps = $this->steps;
 $array_keys   = array_keys( $this->steps );
 $current_step = array_search( $this->step, $array_keys, true );

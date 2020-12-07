@@ -6,8 +6,6 @@
  * @subpackage RankMath\Admin\Wizard
  */
 
-defined( 'ABSPATH' ) || exit;
-
 ?>
 <br>
 <br>

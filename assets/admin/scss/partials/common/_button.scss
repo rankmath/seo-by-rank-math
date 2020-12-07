@@ -1,184 +1,165 @@
 // main: ../../common.scss
 // Button.
-.button,
-.button-secondary,
-.is-secondary {
-    font-size: 14px;
-    line-height: 38px;
+.button, .button-secondary, .is-secondary {
+	font-size: 14px;
+	line-height: 38px;
+	padding: 0 20px;
+	transition: 0.25s all linear;
+	background: #f8f9fa;
+	border: 1px solid $dark-gray;
+	color: darken($dark_gray, 8);
+	min-height: 30px;
+	height: auto;
+	box-shadow: none;
 
-    height: auto;
-    min-height: 30px;
-    padding: 0 20px;
+	&.active {
+		color: darken($dark_gray, 12);
+		background: #f8f9fa;
+		box-shadow: inset 0 2px 5px -3px #7f8292;
+		border-color: $dark_gray;
+	}
 
-    transition: .25s all linear;
+	&:focus,
+	&:hover {
+		color: darken($dark_gray, 12);
+		background: #f8f9fa;
+		border-color: $primary;
+	}
 
-    color: darken($dark_gray, 8);
-    border: 1px solid $dark-gray;
-    border-radius: 3px;
-    background: #f8f9fa;
-    box-shadow: none;
+	&:focus {
+		border-color: $primary-border-color;
+		box-shadow: 0 0 0 1px $primary-border-color;
+	}
 
-    &.active {
-        color: darken($dark_gray, 12);
-        border-color: $dark_gray;
-        background: #f8f9fa;
-        box-shadow: inset 0 2px 5px -3px #7f8292;
-    }
-
-    &:focus,
-    &:hover {
-        color: darken($dark_gray, 12);
-        border-color: $primary;
-        background: #f8f9fa;
-    }
-
-    &:focus {
-        border-color: $primary-border-color;
-        box-shadow: 0 0 0 1px $primary-border-color;
-    }
-
-    .dashicons {
-        margin: 0 3px 0 0;
-    }
+	.dashicons {
+		margin: 0 3px 0 0;
+	}
 }
 
 // Primary Button.
-.button-primary:not(.default),
-.is-primary {
-    color: #fff;
-    border-color: $primary;
-    background: $primary;
-    text-shadow: none;
+.button-primary:not(.default), .is-primary {
+	color: #fff;
+	border-color: $primary;
+	background: $primary;
+	text-shadow: none;
 
-    &:focus,
-    &:hover {
-        color: #fff;
-        border-color: $primary-hover-border-color;
-        background: $primary-hover;
-    }
+	&:focus,
+	&:hover {
+		color: #fff;
+		border-color: $primary-hover-border-color;
+		background: $primary-hover;
+	}
 
-    &:focus {
-        box-shadow: 0 0 0 1px #fff, 0 0 0 3px $primary-border-color;
-    }
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 3px $primary-border-color;
+	}
 
-    &[disabled] {
-        border-color: $primary-border-color!important;
-        background: $primary!important;
-    }
+	&[disabled] {
+		background: $primary!important;
+		border-color: $primary-border-color!important;
+	}
 }
 
 // Colored buttons.
 .is-blue:not(.default) {
-    border-color: $color-2;
-    background: $color-2;
+	background: $color-2;
+	border-color: $color-2;
 
-    &:hover,
-    &:focus {
-        border-color: darken($color-2, 5);
-        background: darken($color-2, 5);
-    }
+	&:hover, &:focus {
+		background: darken($color-2, 5);
+		border-color: darken($color-2, 5);
+	}
 
-    &:focus {
-        box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-2, 5);
-    }
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-2, 5);
+	}
 }
 
 .is-green:not(.default) {
-    border-color: $color-1;
-    background: $color-1;
+	background: $color-1;
+	border-color: $color-1;
 
-    &:hover,
-    &:focus {
-        border-color: darken( $color-1, 3 );
-        background: darken( $color-1, 3 );
-    }
+	&:hover, &:focus {
+		border-color: darken( $color-1, 3 );
+		background: darken( $color-1, 3 );
+	}
 
-    &:focus {
-        box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-1, 3);
-    }
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-1, 3);
+	}
 }
 
 // Delete Button.
 .button-link-delete {
-    color: $error;
-    border-color: $error;
+	color: $error;
+	border-color: $error;
 }
 
 // Link Button.
-.button-link,
-.is-link {
-    border: 0;
-    background: transparent;
-    box-shadow: none;
+.button-link, .is-link {
+	border: 0;
+	background: transparent;
+	box-shadow: none;
 }
 
 // Small Button.
-.button-small,
-.is-small {
-    font-size: 12px;
-    line-height: 24px;
-
-    padding: 0 8px;
+.button-small, .is-small {
+	font-size: 12px;
+	line-height: 24px;
+	padding: 0 8px;
 }
 
 // Large Button.
-.button-xlarge,
-.is-large {
-    font-size: 16px;
-    line-height: 44px;
-
-    height: 46px;
+.button-xlarge, .is-large {
+	font-size: 16px;
+	line-height: 44px;
+	height: 46px;
 }
 
 // Animated Button, used in SW.
 .button-animated {
-    font-size: 24px;
-    line-height: 82px;
+	text-align: center;
+	font-size: 24px;
+	padding: 0 40px;
+	line-height: 82px;
+	transform: perspective(1px) translateZ(0);
+	border-radius: 82px;
+	min-height: 30px;
+	height: auto;
 
-    height: auto;
-    min-height: 30px;
-    padding: 0 40px;
+	i {
+		line-height: 85px;
+	}
 
-    transform: perspective(1px) translateZ(0);
-    text-align: center;
-
-    border-radius: 82px;
-
-    i {
-        line-height: 85px;
-    }
-
-    &:before {
-        content: '';
-        -webkit-animation: hvr-ripple-out 1s linear infinite;
-                animation: hvr-ripple-out 1s linear infinite;
-
-        border: #bcdbea solid 6px;
-        border-radius: 55px;
-
-        @include position(absolute, -6px);
-    }
+	&:before {
+		content: '';
+		-webkit-animation: hvr-ripple-out 1s linear infinite;
+		animation: hvr-ripple-out 1s linear infinite;
+		border: #bcdbea solid 6px;
+		border-radius: 55px;
+		@include position(absolute, -6px);
+	}
 }
 
 /* Ripple Out */
 @-webkit-keyframes hvr-ripple-out {
-    100% {
-        opacity: 0;
+	100% {
+		opacity: 0;
 
-        @include position( null, -20px  );
-    }
+		@include position( null, -20px  );
+	}
 }
 @-webkit-keyframes hvr-ripple-out {
-    100% {
-        opacity: 0;
+	100% {
+		opacity: 0;
 
-        @include position( null, -20px  );
-    }
+		@include position( null, -20px  );
+	}
 }
 @keyframes hvr-ripple-out {
-    100% {
-        opacity: 0;
+	100% {
+		opacity: 0;
 
-        @include position( null, -20px  );
-    }
+		@include position( null, -20px  );
+	}
 }

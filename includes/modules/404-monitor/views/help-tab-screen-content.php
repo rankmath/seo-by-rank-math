@@ -6,8 +6,6 @@
  * @subpackage RankMath\Monitor
  */
 
-defined( 'ABSPATH' ) || exit;
-
 ?>
 <p>
 	<?php esc_html_e( 'You can customize the display of this screen\'s contents in a number of ways:', 'rank-math' ); ?>

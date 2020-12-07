@@ -8,8 +8,6 @@
  * @author     Rank Math <support@rankmath.com>
  */
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Clear SEO Analysis result.
  */

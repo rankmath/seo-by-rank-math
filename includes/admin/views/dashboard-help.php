@@ -7,9 +7,8 @@
  */
 
 use RankMath\KB;
-use RankMath\Helper;
 
-defined( 'ABSPATH' ) || exit;
+use RankMath\Helper;
 
 if ( ! current_user_can( 'manage_options' ) ) {
 	return;

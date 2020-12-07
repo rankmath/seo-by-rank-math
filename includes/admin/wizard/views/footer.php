@@ -6,8 +6,6 @@
  * @subpackage RankMath\Admin\Wizard
  */
 
-defined( 'ABSPATH' ) || exit;
-
 echo '</body>' . "\n";
 
 CMB2_JS::enqueue();

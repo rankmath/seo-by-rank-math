@@ -10,8 +10,6 @@
 
 namespace RankMath\Tools;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Yoast_HowTo_Converter class.
  */

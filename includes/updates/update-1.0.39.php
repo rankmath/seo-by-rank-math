@@ -10,8 +10,6 @@
 
 use RankMath\Helper;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Convert old snippet variables to new one
  */

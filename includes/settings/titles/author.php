@@ -8,8 +8,6 @@
 
 use RankMath\Helper;
 
-defined( 'ABSPATH' ) || exit;
-
 $dep = [ [ 'disable_author_archives', 'off' ] ];
 
 $cmb->add_field(

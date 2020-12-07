@@ -8,7 +8,9 @@
  * @author     Rank Math <support@rankmath.com>
  */
 
-defined( 'ABSPATH' ) || exit;
+use RankMath\Helper;
+use MyThemeShop\Helpers\WordPress;
+use MyThemeShop\Helpers\Conditional;
 
 /**
  * Enable the new Analytis module

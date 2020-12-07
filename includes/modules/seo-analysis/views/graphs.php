@@ -9,7 +9,7 @@
  * @copyright 2019 Rank Math
  */
 
-defined( 'ABSPATH' ) || exit;
+use RankMath\Helper;
 
 ?>
 <div class="rank-math-result-graphs">

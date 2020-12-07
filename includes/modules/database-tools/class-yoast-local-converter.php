@@ -12,8 +12,6 @@ namespace RankMath\Tools;
 
 use RankMath\Helper;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Yoast_Local_Converter class.
  */

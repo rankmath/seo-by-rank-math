@@ -9,8 +9,6 @@
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 
-defined( 'ABSPATH' ) || exit;
-
 $cmb->add_field(
 	[
 		'id'                => 'rank_math_robots',

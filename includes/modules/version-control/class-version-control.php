@@ -13,8 +13,6 @@ use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\Conditional;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Version_Control class.
  */

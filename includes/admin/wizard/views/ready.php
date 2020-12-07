@@ -8,9 +8,6 @@
 
 use RankMath\Helper;
 use RankMath\KB;
-
-defined( 'ABSPATH' ) || exit;
-
 ?>
 <header>
 	<h1>

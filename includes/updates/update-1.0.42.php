@@ -11,8 +11,6 @@
 use MyThemeShop\Database\Database;
 use RankMath\Redirections\DB;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Set Elementor Library Add metabox value to false.
  */

@@ -6,7 +6,7 @@
  * @subpackage RankMath\Local_Seo
  */
 
-defined( 'ABSPATH' ) || exit;
+use RankMath\Helper;
 
 $cmb->add_field(
 	[

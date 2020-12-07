@@ -14,8 +14,6 @@ use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Param;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Export class.
  *

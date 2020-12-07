@@ -82,7 +82,7 @@ class SerpPreview extends SerpHooks {
 
 		this.elemMetabox.on(
 			'click',
-			'.serp-preview-body',
+			'.serp-title, .serp-url, .serp-description',
 			( e ) => {
 				e.preventDefault()
 				snippetButton.toggleClass( 'hidden active' )

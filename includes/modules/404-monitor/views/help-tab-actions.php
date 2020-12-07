@@ -6,8 +6,6 @@
  * @subpackage RankMath\Monitor
  */
 
-defined( 'ABSPATH' ) || exit;
-
 ?>
 <p>
 	<?php esc_html_e( 'Hovering over a row in the list will display action links that allow you to manage the item. You can perform the following actions:', 'rank-math' ); ?>

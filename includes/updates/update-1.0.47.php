@@ -10,8 +10,6 @@
 
 use MyThemeShop\Helpers\DB;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * The update routine file functiont to add primary key in rank_math_internal_meta table.
  */
