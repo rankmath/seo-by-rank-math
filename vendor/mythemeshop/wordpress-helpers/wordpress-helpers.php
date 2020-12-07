@@ -9,15 +9,15 @@
  *
  * @wordpress-plugin
  * Plugin Name:       WordPress Helpers
- * Version:           1.0.3
+ * Version:           1.0.5
  * Plugin URI:        http://mythemeshop.com/wordpress-helpers/
  * Description:       Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.
  * Author:            MyThemeShop
  * Author URI:        http://mythemeshop.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Requires at least: 4.0
- * Tested up to:      4.8
+ * Requires at least: 5.0
+ * Tested up to:      5.5.3
  */
 
 defined( 'ABSPATH' ) || exit;
