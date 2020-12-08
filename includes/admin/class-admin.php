@@ -127,6 +127,10 @@ class Admin implements Runner {
 				$current_request
 			);
 
+			// Remove possible admin notice if we have new access token.
+			delete_option( 'rankmath_google_api_failed_attempts_data' );
+			delete_option( 'rankmath_google_api_reconnect' );
+
 			wp_safe_redirect( $current_request );
 			exit();
 

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.5.3
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.54
+Stable tag: 1.0.54.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -474,6 +474,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.54.1 [Dec 09, 2020] =
+* Improved: The overall data fetching process of the Analytics module from Google
+* Improved: Importing the top 1,000 keywords in the Analytics from Google
+* Fixed: The Classic Editor was not working properly on the installations where the PHP 7.2 or lower was used. Please update to at least PHP 7.4 for better security and speed
+* Fixed: Multiple reconnect notices were showing on some installations
 
 = 1.0.54 [Dec 08, 2020] =
 * Added: Now [Analytics](https://rankmath.com/kb/analytics/) shows Keywords even with the 0 clicks, this will help to show accurate CTR and Total Keyword count

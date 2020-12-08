@@ -457,7 +457,7 @@ class Serp_Preview {
 
 		return \array_merge(
 			$offers,
-			$this->get_ratings_data( $schema ),
+			$this->get_ratings_data( $schema )
 		);
 	}
 
@@ -481,7 +481,7 @@ class Serp_Preview {
 				'event_date'  => ! empty( $schema['startDate'] ) ? date_i18n( 'j M Y', $schema['startDate'] ) : '',
 				'event_place' => $address,
 			],
-			$this->get_ratings_data( $schema ),
+			$this->get_ratings_data( $schema )
 		);
 	}
 
@@ -497,7 +497,7 @@ class Serp_Preview {
 				'time'     => ! empty( $schema['totalTime'] ) ? $schema['totalTime'] : '',
 				'calories' => ! empty( $schema['nutrition'] ) && ! empty( $schema['nutrition']['calories'] ) ? $schema['nutrition']['calories'] : '',
 			],
-			$this->get_ratings_data( $schema ),
+			$this->get_ratings_data( $schema )
 		);
 	}
 

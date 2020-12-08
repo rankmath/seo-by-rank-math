@@ -570,7 +570,13 @@ class Stats extends Keywords {
 	 * @return string
 	 */
 	public static function get_relative_url( $url ) {
-		$home_url = [ 'https://creativefan.com', home_url() ];
+		$home_url = home_url();
+
+		$domain = strtolower( wp_parse_url( home_url(), PHP_URL_HOST ) );
+		$domain = str_replace( [ 'www.', '.' ], [ '', '\.' ], $domain );
+		$regex  = "/http[s]?:\/\/(www\.)?$domain/mU";
+		$url    = strtolower( trim( $url ) );
+		$url    = preg_replace( $regex, '', $url );
 
 		return \str_replace( $home_url, '', $url );
 	}

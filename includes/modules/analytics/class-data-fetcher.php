@@ -276,7 +276,7 @@ class Data_Fetcher {
 		$count = 1;
 		$start = Helper::get_midnight( time() + DAY_IN_SECONDS );
 
-		for ( $current = 1; $current <= 15; $current++ ) {
+		for ( $current = 1; $current <= 90; $current++ ) {
 			$date = date_i18n( 'Y-m-d', $start - ( DAY_IN_SECONDS * $current ) );
 			if ( ! DB::date_exists( $date ) ) {
 				$count++;

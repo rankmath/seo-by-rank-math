@@ -85,6 +85,7 @@ class Analytics extends Base {
 
 		$tokens = Authentication::tokens();
 		if ( ! empty( $tokens['refresh_token'] ) ) {
+			Helper::remove_notification( 'reconnect' );
 			return;
 		}
 
@@ -98,6 +99,7 @@ class Analytics extends Base {
 			[
 				'type'    => 'error',
 				'classes' => 'rank-math-error rank-math-notice',
+				'id'      => 'reconnect',
 			]
 		);
 	}

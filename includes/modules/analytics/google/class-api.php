@@ -104,6 +104,8 @@ class Api extends Console {
 		Authentication::tokens( false );
 		delete_option( 'rank_math_google_analytic_profile' );
 		delete_option( 'rank_math_google_analytic_options' );
+		delete_option( 'rankmath_google_api_failed_attempts_data' );
+		delete_option( 'rankmath_google_api_reconnect' );
 
 		return $this->is_success();
 	}
@@ -114,6 +116,6 @@ class Api extends Console {
 	 * @return int
 	 */
 	public function get_row_limit() {
-		return apply_filters( 'rank_math/analytics/row_limit', 5000 );
+		return apply_filters( 'rank_math/analytics/row_limit', 1000 );
 	}
 }
