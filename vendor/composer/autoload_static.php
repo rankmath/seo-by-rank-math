@@ -14,30 +14,30 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
     );
 
     public static $prefixLengthsPsr4 = array (
-        'd' => 
+        'd' =>
         array (
             'donatj\\UserAgent\\' => 17,
         ),
-        'R' => 
+        'R' =>
         array (
             'RankMath\\' => 9,
         ),
-        'M' => 
+        'M' =>
         array (
             'MyThemeShop\\Helpers\\' => 20,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'donatj\\UserAgent\\' => 
+        'donatj\\UserAgent\\' =>
         array (
             0 => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent',
         ),
-        'RankMath\\' => 
+        'RankMath\\' =>
         array (
             0 => __DIR__ . '/../..' . '/includes',
         ),
-        'MyThemeShop\\Helpers\\' => 
+        'MyThemeShop\\Helpers\\' =>
         array (
             0 => __DIR__ . '/..' . '/mythemeshop/wordpress-helpers/src',
         ),
@@ -80,7 +80,6 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Admin\\Ask_Review' => __DIR__ . '/../..' . '/includes/admin/class-ask-review.php',
         'RankMath\\Admin\\Assets' => __DIR__ . '/../..' . '/includes/admin/class-assets.php',
         'RankMath\\Admin\\CMB2_Fields' => __DIR__ . '/../..' . '/includes/admin/class-cmb2-fields.php',
-        'RankMath\\Admin\\Deactivate_Survey' => __DIR__ . '/../..' . '/includes/admin/class-deactivate-survey.php',
         'RankMath\\Admin\\Import_Export' => __DIR__ . '/../..' . '/includes/admin/class-import-export.php',
         'RankMath\\Admin\\Importers\\AIOSEO' => __DIR__ . '/../..' . '/includes/admin/importers/class-aioseo.php',
         'RankMath\\Admin\\Importers\\AIO_Rich_Snippet' => __DIR__ . '/../..' . '/includes/admin/importers/class-aio-rich-snippet.php',

@@ -48,7 +48,6 @@ class Admin_Init {
 				new Option_Center(),
 				new Notices(),
 				new CMB2_Fields(),
-				new Deactivate_Survey(),
 				new Metabox\Metabox(),
 				new Import_Export(),
 				new Updates(),
