@@ -1580,6 +1580,12 @@ msgstr ""
 msgid "Organization Logo added in Local SEO Settings."
 msgstr ""
 
+msgid "Organization URL"
+msgstr ""
+
+msgid "Organization URL added in Local SEO Settings."
+msgstr ""
+
 msgid "Variable names can only contain alphanumeric characters, underscores and dashes."
 msgstr ""
 
@@ -4927,9 +4933,6 @@ msgstr ""
 msgid "Hiring Organization "
 msgstr ""
 
-msgid "Organization URL"
-msgstr ""
-
 msgid "Gender"
 msgstr ""
 
@@ -5018,9 +5021,6 @@ msgid "Embed URL"
 msgstr ""
 
 msgid "Duration"
-msgstr ""
-
-msgid "Views"
 msgstr ""
 
 msgid "Start Site-Wide Analysis"

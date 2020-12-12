@@ -43,7 +43,6 @@ class Video implements Snippet {
 			[
 				'snippet_video_url'       => 'contentUrl',
 				'snippet_video_embed_url' => 'embedUrl',
-				'snippet_video_views'     => 'interactionCount',
 			],
 			$entity
 		);

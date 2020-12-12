@@ -205,9 +205,20 @@ class Basic_Variables extends Cache {
 				'name'        => esc_html__( 'Organization Logo', 'rank-math' ),
 				'description' => esc_html__( 'Organization Logo added in Local SEO Settings.', 'rank-math' ),
 				'variable'    => 'org_logo',
-				'example'     => $this->get_sitedesc(),
+				'example'     => $this->get_org_logo(),
 			],
 			[ $this, 'get_org_logo' ]
+		);
+
+		$this->register_replacement(
+			'org_url',
+			[
+				'name'        => esc_html__( 'Organization URL', 'rank-math' ),
+				'description' => esc_html__( 'Organization URL added in Local SEO Settings.', 'rank-math' ),
+				'variable'    => 'org_logo',
+				'example'     => $this->get_org_url(),
+			],
+			[ $this, 'get_org_url' ]
 		);
 	}
 
@@ -372,25 +383,30 @@ class Basic_Variables extends Cache {
 	}
 
 	/**
-	 * Get the current time to use as a replacement.
+	 * Get the Organization Name to use as a replacement.
 	 *
 	 * @return string
 	 */
 	public function get_org_name() {
-		$name = Helper::get_settings( 'titles.knowledgegraph_name' );
-
-		return $name ? $name : get_bloginfo( 'name' );
+		return Helper::get_settings( 'titles.knowledgegraph_name', get_bloginfo( 'name' ) );
 	}
 
 	/**
-	 * Get the current time to use as a replacement.
+	 * Get the Organization Logo to use as a replacement.
 	 *
 	 * @return string
 	 */
 	public function get_org_logo() {
-		$logo = Helper::get_settings( 'titles.knowledgegraph_logo' );
+		return Helper::get_settings( 'titles.knowledgegraph_logo', '' );
+	}
 
-		return $logo ? $logo : '';
+	/**
+	 * Get the Organization URL to use as a replacement.
+	 *
+	 * @return string
+	 */
+	public function get_org_url() {
+		return Helper::get_settings( 'titles.url', home_url() );
 	}
 
 	/**

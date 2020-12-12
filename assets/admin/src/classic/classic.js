@@ -109,14 +109,16 @@ class ClassicEditor {
 		}
 	}
 }
-window.rankMathEditor = new ClassicEditor()
 
 jQuery( () => {
 	getStore()
+	window.rankMathEditor = new ClassicEditor()
 	window.rankMathEditor.setup()
 	window.RankMathApp = new RankMathApp()
 } )
 
 jQuery( window ).on( 'load', () => {
-	doAction( 'rank_math_loaded' )
+	jQuery.when( jQuery.ready ).then( () => {
+		doAction( 'rank_math_loaded' )
+	} )
 } )
