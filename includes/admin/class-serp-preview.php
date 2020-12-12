@@ -405,19 +405,13 @@ class Serp_Preview {
 		}
 
 		// Get rich snippet.
-		$schema          = current( $schemas );
-		$snippet         = strtolower( $schema['@type'] );
-		$wp_review_total = get_post_meta( $post->ID, 'wp_review_total', true );
-
-		if ( ! in_array( $snippet, [ 'book', 'course', 'event', 'product', 'recipe', 'softwareapplication', 'woocommerceproduct' ], true ) && ! $wp_review_total ) {
-			return false;
-		}
-
-		$method = in_array( $snippet, [ 'book', 'course', 'softwareapplication' ], true ) ? 'get_ratings_data' : "get_{$snippet}_data";
+		$schema  = current( $schemas );
+		$snippet = strtolower( $schema['@type'] );
+		$method  = "get_{$snippet}_data";
 
 		return [
 			'type' => $snippet,
-			'data' => $this->$method( $schema ),
+			'data' => method_exists( $this, $method ) ? $this->$method( $schema ) : $this->get_ratings_data( $schema ),
 		];
 	}
 

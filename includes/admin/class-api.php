@@ -125,14 +125,6 @@ class Api {
 	}
 
 	/**
-	 * Send deactivation feedback to the Rank Math API.
-	 */
-	public function deactivate_feedback( $args ) {
-		$this->is_blocking = false;
-		$this->http_post( 'deactivationSurvey', $args );
-	}
-
-	/**
 	 * Make an HTTP GET request - for retrieving data.
 	 *
 	 * @param string $url     URL to do request.

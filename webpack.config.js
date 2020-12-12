@@ -72,7 +72,6 @@ const entryPoints = {
 		common: './assets/admin/src/common.js',
 		'custom-fields': './assets/admin/src/custom-fields.js',
 		dashboard: './assets/admin/src/dashboard.js',
-		feedback: './assets/admin/src/feedback.js',
 		'import-export': './assets/admin/src/import-export.js',
 		'option-panel': './assets/admin/src/option-panel.js',
 		'post-list': './assets/admin/src/post-list.js',

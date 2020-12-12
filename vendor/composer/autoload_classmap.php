@@ -42,7 +42,6 @@ return array(
     'RankMath\\Admin\\Ask_Review' => $baseDir . '/includes/admin/class-ask-review.php',
     'RankMath\\Admin\\Assets' => $baseDir . '/includes/admin/class-assets.php',
     'RankMath\\Admin\\CMB2_Fields' => $baseDir . '/includes/admin/class-cmb2-fields.php',
-    'RankMath\\Admin\\Deactivate_Survey' => $baseDir . '/includes/admin/class-deactivate-survey.php',
     'RankMath\\Admin\\Import_Export' => $baseDir . '/includes/admin/class-import-export.php',
     'RankMath\\Admin\\Importers\\AIOSEO' => $baseDir . '/includes/admin/importers/class-aioseo.php',
     'RankMath\\Admin\\Importers\\AIO_Rich_Snippet' => $baseDir . '/includes/admin/importers/class-aio-rich-snippet.php',

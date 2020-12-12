@@ -86,6 +86,12 @@ class Sitemap_XML extends XML {
 			$this->build_sitemap();
 		}
 
+		if ( empty( $this->sitemap ) ) {
+			$wp_query->set_404();
+			status_header( 404 );
+			return;
+		}
+
 		$this->send_headers();
 		echo $this->sitemap;
 		$this->output_credits();

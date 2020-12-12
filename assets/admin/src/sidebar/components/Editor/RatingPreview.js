@@ -66,7 +66,7 @@ const RatingPreview = ( { schema } ) => {
 export default withSelect( ( select ) => {
 	const schemas = select( 'rank-math' ).getSchemas()
 	const found = find( schemas, ( schema ) => {
-		return includes( [ 'Book', 'Course', 'Product', 'Recipe', 'SoftwareApplication' ], schema[ '@type' ] )
+		return ! isEmpty( schema.metadata.isPrimary )
 	} )
 
 	return { schema: found }

@@ -57,7 +57,6 @@ class Assets implements Runner {
 		wp_register_style( self::PREFIX . 'common', $css . 'common.css', null, rank_math()->version );
 		wp_register_style( self::PREFIX . 'cmb2', $css . 'cmb2.css', null, rank_math()->version );
 		wp_register_style( self::PREFIX . 'dashboard', $css . 'dashboard.css', [ 'rank-math-common' ], rank_math()->version );
-		wp_register_style( self::PREFIX . 'plugin-feedback', $css . 'feedback.css', null, rank_math()->version );
 		wp_register_style( self::PREFIX . 'dashabord-widget', $css . 'dashabord-widget.css', null, rank_math()->version );
 
 		// Scripts.
@@ -65,7 +64,6 @@ class Assets implements Runner {
 		wp_register_script( self::PREFIX . 'validate', $js . 'validate.js', [ 'jquery' ], rank_math()->version, true );
 		wp_register_script( self::PREFIX . 'common', $js . 'common.js', [ 'jquery', 'validate', 'wp-i18n', 'lodash' ], rank_math()->version, true );
 		wp_register_script( self::PREFIX . 'dashboard', $js . 'dashboard.js', [ 'jquery', 'clipboard', 'validate' ], rank_math()->version, true );
-		wp_register_script( self::PREFIX . 'plugin-feedback', $js . 'feedback.js', [ 'jquery' ], rank_math()->version, true );
 
 		// Select2.
 		wp_register_style( 'select2-rm', $vendor . 'select2/select2.min.css', null, '4.0.6-rc.1' );

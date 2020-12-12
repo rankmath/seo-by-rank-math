@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection
-Tested up to: 5.5.3
+Tested up to: 5.6
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.54.1
+Stable tag: 1.0.54.2
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -474,6 +474,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.54.2 [Dec 12, 2020] =
+* Fixed: Missing SEO tests in the Firefox & IE for the WordPress 5.6
+* Fixed: Disabled Sitemaps were showing a content error instead of showing 404 page
+* Fixed: Recipe Schema shortcode was not showing the Recipe Instructions
+* Fixed: PHP Notice appearing on the checkout page for some installations
+* Removed: Plugin deactivation Survey and code related to it
 
 = 1.0.54.1 [Dec 09, 2020] =
 * Improved: The overall data fetching process of the Analytics module from Google

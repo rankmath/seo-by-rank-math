@@ -131,6 +131,20 @@ $this->get_image();
 			);
 		}
 
+		// Single HowToSection data.
+		if ( ! empty( $instructions['itemListElement'] ) ) {
+			$this->output_field(
+				esc_html__( 'Recipe Instructions', 'rank-math' ),
+				''
+			);
+
+			$this->output_field(
+				$instructions['name'],
+				'<ul><li>' . join( '</li><li>', wp_list_pluck( $instructions['itemListElement'], 'text' ) ) . '</li></ul>'
+			);
+		}
+
+		// Multiple HowToSection data.
 		if ( isset( $instructions[0]['@type'] ) && 'HowToSection' === $instructions[0]['@type'] ) {
 			$this->output_field(
 				esc_html__( 'Recipe Instructions', 'rank-math' ),
