@@ -234,7 +234,7 @@ class Serp_Preview {
 	 */
 	private function get_snippet_html() {
 		$snippet_data = $this->get_snippet_data();
-		if ( ! $snippet_data || ! isset( $snippet_data['data'] ) ) {
+		if ( ! $snippet_data || empty( $snippet_data['data'] ) ) {
 			return false;
 		}
 
@@ -422,6 +422,10 @@ class Serp_Preview {
 	 * @return array Preview Schema Data.
 	 */
 	private function get_woocommerceproduct_data( $schema ) {
+		if ( ! Conditional::is_woocommerce_active() ) {
+			return [];
+		}
+
 		global $post;
 		$product = wc_get_product( $post->ID );
 		return [

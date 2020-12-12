@@ -36,11 +36,4 @@ $this->get_image();
 	);
 	?>
 
-	<?php
-	$this->get_field(
-		esc_html__( 'Views', 'rank-math' ),
-		'interactionCount'
-	);
-	?>
-
 </div>

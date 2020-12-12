@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.6
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.54.2
+Stable tag: 1.0.54.3
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,30 +475,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.54.2 [Dec 12, 2020] =
-* Fixed: Missing SEO tests in the Firefox & IE for the WordPress 5.6
-* Fixed: Disabled Sitemaps were showing a content error instead of showing 404 page
-* Fixed: Recipe Schema shortcode was not showing the Recipe Instructions
-* Fixed: PHP Notice appearing on the checkout page for some installations
-* Removed: Plugin deactivation Survey and code related to it
-
-= 1.0.54.1 [Dec 09, 2020] =
-* Improved: The overall data fetching process of the Analytics module from Google
-* Improved: Importing the top 1,000 keywords in the Analytics from Google
-* Fixed: The Classic Editor was not working properly on the installations where the PHP 7.2 or lower was used. Please update to at least PHP 7.4 for better security and speed
-* Fixed: Multiple reconnect notices were showing on some installations
-
-= 1.0.54 [Dec 08, 2020] =
-* Added: Now [Analytics](https://rankmath.com/kb/analytics/) shows Keywords even with the 0 clicks, this will help to show accurate CTR and Total Keyword count
-* Added: Show reconnect notice if the Google refresh token is missing
-* Improved: 'Re-create Missing Database Tables' tool now checks all the required tables for Rank Math
-* Improved: Keep only connected Google Accounts in the database
-* Improved: Minor UI changes
-* Fixed: PHP error in the frontend if the incorrect duration was used in the Video Schema
-* Fixed: Google preview for the WooCommerce product was not showing the Schema data
-* Fixed: Enable/Disable Date Archive Option was reverted
-* Fixed: [Content Analysis](https://rankmath.com/kb/general-tab/#content-analysis) was not working in the Classic Editor's text mode
-* Fixed: Incompatibility with the WP Parsi Date plugin
-* Fixed: Wrong Total redirection count when the number was greater than 999
+= 1.0.54.3 [Dec 13, 2020] =
+* Fixed: Classic Editor's [SEO tests](https://rankmath.com/kb/score-100-in-tests/) were not loading in Firefox on some installations
+* Fixed: `Call to undefined function wc_get_product()` in the Google Preview area on some installations
+* Fixed: `hiringOrganization` field in the [Job Posting Schema](https://rankmath.com/kb/rich-snippets/#8-job-posting) was showing the wrong description
+* Removed: `InteractionCount` field from [Video Schema](https://rankmath.com/kb/rich-snippets/#17-video-object) as this field is not recommended by Google
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

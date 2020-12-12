@@ -1030,6 +1030,7 @@ export default {
                     "isRecommended": false,
                     "field": {
                         "label": __( "Hiring Organization", "rank-math" ),
+                        "placeholder": "%org_name%",
                         "help": __( "The name of the company. Leave empty to use your own company information.", "rank-math" ),
                         "classes": "col-4"
                     }
@@ -1043,6 +1044,7 @@ export default {
                     "isRecommended": true,
                     "field": {
                         "label": __( "Organization URL (Recommended)", "rank-math" ),
+                        "placeholder": "%org_url%",
                         "help": __( "The URL of the organization offering the job position. Leave empty to use your own company information", "rank-math" ),
                         "classes": "col-6"
                     }
@@ -1056,6 +1058,7 @@ export default {
                     "isRecommended": true,
                     "field": {
                         "label": __( "Organization Logo (Recommended)", "rank-math" ),
+                        "placeholder": "%org_logo%",
                         "help": __( "Logo URL of the organization offering the job position. Leave empty to use your own company information", "rank-math" ),
                         "classes": "col-6"
                     }
@@ -3042,6 +3045,7 @@ export default {
                     "field": {
                         "type": "datepicker",
                         "label": __( "Date Posted", "rank-math" ),
+                        "placeholder": "%date(Y-m-d)%",
                         "help": __( "The original date on which employer posted the job. You can leave it empty to use the post publication date as job posted date", "rank-math" ),
                         "classes": "col-4"
                     }
@@ -3132,6 +3136,7 @@ export default {
                         "isRecommended": false,
                         "field": {
                             "label": __( "Hiring Organization", "rank-math" ),
+                            "placeholder": "%org_name%",
                             "help": __( "The name of the company. Leave empty to use your own company information.", "rank-math" ),
                             "classes": "col-4"
                         }
@@ -3145,6 +3150,7 @@ export default {
                         "isRecommended": true,
                         "field": {
                             "label": __( "Organization URL (Recommended)", "rank-math" ),
+                            "placeholder": "%org_url%",
                             "help": __( "The URL of the organization offering the job position. Leave empty to use your own company information", "rank-math" ),
                             "classes": "col-6"
                         }
@@ -3158,6 +3164,7 @@ export default {
                         "isRecommended": true,
                         "field": {
                             "label": __( "Organization Logo (Recommended)", "rank-math" ),
+                            "placeholder": "%org_logo%",
                             "help": __( "Logo URL of the organization offering the job position. Leave empty to use your own company information", "rank-math" ),
                             "classes": "col-6"
                         }
@@ -3172,7 +3179,7 @@ export default {
                     "isRecommended": true,
                     "field": {
                         "label": __( "Posting ID (Recommended)", "rank-math" ),
-                        "help": __( "The hiring organization's unique identifier for the job. Leave empty to use the post ID", "rank-math" ),
+                        "help": __( "The hiring organization's unique identifier for the job.", "rank-math" ),
                         "classes": "col-6"
                     }
                 }
@@ -5751,19 +5758,6 @@ export default {
                     "field": {
                         "label": __( "Duration", "rank-math" ),
                         "help": __( "ISO 8601 duration format. Example: 1H30M", "rank-math" ),
-                        "classes": "col-6"
-                    }
-                }
-            },
-            "interactionCount": {
-                "map": {
-                    "isArray": false,
-                    "isGroup": false,
-                    "isRequired": false,
-                    "isRecommended": false,
-                    "field": {
-                        "label": __( "Views", "rank-math" ),
-                        "help": __( "Number of views", "rank-math" ),
                         "classes": "col-6"
                     }
                 }
