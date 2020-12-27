@@ -76,9 +76,9 @@ class Opengraph extends Sitemap {
 			return;
 		}
 
-		$brands = WooCommerce::get_brands( get_the_ID() );
-		if ( ! empty( $brands ) ) {
-			$opengraph->tag( 'product:brand', $brands[0]->name );
+		$brand = WooCommerce::get_brands( get_the_ID() );
+		if ( ! empty( $brand ) ) {
+			$opengraph->tag( 'product:brand', $brand );
 		}
 
 		/**

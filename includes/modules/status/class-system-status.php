@@ -182,6 +182,7 @@ class System_Status {
 		}
 		wp_enqueue_style( 'site-health' );
 		wp_enqueue_script( 'site-health' );
+		$rankmath = apply_filters( 'rank_math/status/rank_math_info', $rankmath );
 		$this->wp_info = [ 'rank-math' => $rankmath ] + \WP_Debug_Data::debug_data();
 		unset( $this->wp_info['wp-paths-sizes'] );
 	}

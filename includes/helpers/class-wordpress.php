@@ -344,6 +344,30 @@ trait WordPress {
 	}
 
 	/**
+	 * Get advanced robots default.
+	 *
+	 * @return array
+	 */
+	public static function get_advanced_robots_defaults() {
+		$screen          = get_current_screen();
+		$advanced_robots = Helper::get_settings( 'titles.advanced_robots_global', [] );
+
+		if ( 'post' === $screen->base && Helper::get_settings( "titles.pt_{$screen->post_type}_custom_robots" ) ) {
+			$advanced_robots = Helper::get_settings( "titles.pt_{$screen->post_type}_advanced_robots", [] );
+		}
+
+		if ( 'term' === $screen->base && Helper::get_settings( "titles.tax_{$screen->taxonomy}_custom_robots" ) ) {
+			$advanced_robots = Helper::get_settings( "titles.tax_{$screen->taxonomy}_advanced_robots", [] );
+		}
+
+		if ( in_array( $screen->base, [ 'profile', 'user-edit' ], true ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
+			$advanced_robots = Helper::get_settings( 'titles.author_advanced_robots', [] );
+		}
+
+		return $advanced_robots;
+	}
+
+	/**
 	 * Convert timestamp and ISO to date.
 	 *
 	 * @param string  $value            Value to convert.

@@ -169,4 +169,14 @@ class Capability_Manager {
 
 		return [];
 	}
+
+	/**
+	 * Reset_capabilities
+	 *
+	 * @return void
+	 */
+	public function reset_capabilities() {
+		$this->remove_capabilities();
+		$this->create_capabilities();
+	}
 }

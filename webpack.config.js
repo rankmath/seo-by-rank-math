@@ -80,6 +80,7 @@ const entryPoints = {
 		validate: './assets/admin/src/validate.js',
 		'acf-analysis': './includes/modules/acf/assets/index.js',
 		'product-description': './includes/modules/woocommerce/assets/js/main.js',
+		'role-manager': './includes/modules/role-manager/assets/src/role-manager.js',
 	},
 	analytics: {
 		stats: './includes/modules/analytics/assets/src/index.js',

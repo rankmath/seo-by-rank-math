@@ -4799,6 +4799,9 @@ msgstr ""
 msgid "Control which user has access to which options of Rank Math. %s"
 msgstr ""
 
+msgid "Reset"
+msgstr ""
+
 msgid "Update Capabilities"
 msgstr ""
 

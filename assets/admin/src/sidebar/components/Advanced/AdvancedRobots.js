@@ -126,14 +126,28 @@ export default compose(
 		const values = { ...meta }
 		defaults( values, defaultMeta )
 
+		let isSnippet = null
+		let isImage = null
+		let isVideo = null
+
+		if ( 'max-snippet' in meta ) {
+			isSnippet = values[ 'max-snippet' ]
+		}
+		if ( 'max-image-preview' in meta ) {
+			isImage = values[ 'max-image-preview' ]
+		}
+		if ( 'max-video-preview' in meta ) {
+			isVideo = values[ 'max-video-preview' ]
+		}
+
 		return {
 			meta,
-			isSnippet: 'max-snippet' in meta,
-			isImage: 'max-image-preview' in meta,
-			isVideo: 'max-video-preview' in meta,
-			maxSnippet: values[ 'max-snippet' ],
+			isSnippet,
+			isImage,
+			isVideo,
+			maxSnippet: isSnippet ? values[ 'max-snippet' ] : -1,
 			maxImage: values[ 'max-image-preview' ],
-			maxVideo: values[ 'max-video-preview' ],
+			maxVideo: isVideo ? values[ 'max-video-preview' ] : -1,
 		}
 	} ),
 	withDispatch( ( dispatch, props ) => {
