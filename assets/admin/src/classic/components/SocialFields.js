@@ -2,7 +2,7 @@
  * External dependencies
  */
 import $ from 'jquery'
-import { isUndefined } from 'lodash'
+import { isUndefined, debounce } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -65,6 +65,7 @@ class SocialFields {
 		)
 
 		this.events()
+		this.removeImageEvent()
 
 		this.shouldUpdatePreview = true
 		this.updateTitlePreview = this.updateTitlePreview.bind( this )
@@ -195,15 +196,24 @@ class SocialFields {
 					'rank_math_twitter_image' === media.field
 				) {
 					this.updateThumbnailPreview()
+					this.removeImageEvent()
 				}
 			}
 		)
+	}
 
-		$( document ).on( 'cmb_init', ( event, cmb ) => {
-			cmb.$metabox.on( 'click', '.cmb2-remove-file-button', () => {
-				this.updateThumbnailPreview()
-			} )
-		} )
+	removeImageEvent() {
+		$( '.cmb2-remove-file-button' ).on(
+			'click',
+			debounce( ( event ) => {
+				if (
+					'rank_math_facebook_image' === event.currentTarget.rel ||
+					'rank_math_twitter_image' === event.currentTarget.rel
+				) {
+					this.updateThumbnailPreview()
+				}
+			}, 300 )
+		)
 	}
 
 	updatePreview() {
@@ -396,7 +406,7 @@ class SocialFields {
 			overlay
 				.attr( 'src', rankMath.overlayImages[ iconOverlay ].url )
 				.attr( 'class', function() {
-					let current = $( this ).attr('class')
+					let current = $( this ).attr( 'class' )
 					return current.replace( /(^| )overlay-position-[a-zA-Z0-9_-]+/, '' ) + ' overlay-position-' + rankMath.overlayImages[ iconOverlay ].position
 				} )
 				.show()

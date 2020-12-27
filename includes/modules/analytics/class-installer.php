@@ -38,7 +38,9 @@ class Installer {
 		// Add action for scheduler.
 		$fetch_gap = apply_filters( 'rank_math/analytics/fetch_gap', 7 );
 		if ( false === as_next_scheduled_action( 'rank_math/analytics/daily_tasks' ) ) {
-			as_schedule_recurring_action( strtotime( 'tomorrow' ) + 180, DAY_IN_SECONDS * $fetch_gap, 'rank_math/analytics/daily_tasks' );
+			$schedule_in_minute = rand( 3, 360 );
+			$time_to_schedule   = ( strtotime( 'tomorrow' ) + ( $schedule_in_minute * MINUTE_IN_SECONDS ) );
+			as_schedule_recurring_action( $time_to_schedule, DAY_IN_SECONDS * $fetch_gap, 'rank_math/analytics/daily_tasks' );
 		}
 
 		if ( $flat ) {

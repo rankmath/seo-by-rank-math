@@ -221,14 +221,7 @@ class Screen implements IScreen {
 		$data['robots'] = $this->normalize_robots( $this->get_meta( $object_type, $object_id, 'rank_math_robots' ) );
 
 		// Advanced Robots.
-		$data['advancedRobots'] = empty( $data['advancedRobots'] ) ? [] : $data['advancedRobots'];
-		if ( ! metadata_exists( $object_type, $object_id, 'rank_math_advanced_robots' ) ) {
-			$data['advancedRobots'] = [
-				'max-snippet'       => -1,
-				'max-video-preview' => -1,
-				'max-image-preview' => 'large',
-			];
-		}
+		$data['advancedRobots'] = $this->normalize_advanced_robots( $this->get_meta( $object_type, $object_id, 'rank_math_advanced_robots' ) );
 
 		$data['pillarContent'] = 'on' === $data['pillarContent'];
 
@@ -255,6 +248,21 @@ class Screen implements IScreen {
 		}
 
 		return array_fill_keys( $robots, true );
+	}
+
+	/**
+	 * Normalize advanced robots.
+	 *
+	 * @param array $advanced_robots Array to normalize.
+	 *
+	 * @return array
+	 */
+	private function normalize_advanced_robots( $advanced_robots ) {
+		if ( ! empty( $advanced_robots ) ) {
+			return $advanced_robots;
+		}
+
+		return Helper::get_advanced_robots_defaults();
 	}
 
 	/**

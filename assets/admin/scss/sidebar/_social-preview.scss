@@ -2,6 +2,8 @@
 
 @import '../partials/metabox/social-preview';
 
-.rank-math-social-preview-item, .rank-math-social-preview-image img {
-	display: block;
+.rank-math-modal-overlay {
+	.rank-math-social-preview-item, .rank-math-social-preview-image img {
+		display: block;
+	}
 }

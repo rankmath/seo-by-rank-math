@@ -28,14 +28,15 @@ rank_math()->admin->display_admin_header();
 				</p>
 			</header>
 
-			<input type="hidden" name="action" value="rank_math_save_capabilities">
+			<input type="hidden" name="action" value="rank_math_handle_capabilities">
 			<?php
-				wp_nonce_field( 'rank-math-save-capabilities', 'security' );
+				wp_nonce_field( 'rank-math-handle-capabilities', 'security' );
 				$cmb = cmb2_get_metabox( 'rank-math-role-manager', 'rank-math-role-manager' );
 				$cmb->show_form();
 			?>
 
 			<footer class="form-footer rank-math-ui">
+				<input type="submit" name="reset-capabilities" id="rank-math-reset-cmb" value="<?php esc_attr_e( 'Reset', 'rank-math' ); ?>" class="button button-secondary reset-options alignleft">
 				<button type="submit" class="button button-primary"><?php esc_html_e( 'Update Capabilities', 'rank-math' ); ?></button>
 			</footer>
 

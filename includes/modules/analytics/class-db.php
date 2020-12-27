@@ -312,6 +312,11 @@ class DB {
 			$placeholders[] = '(' . implode( ', ', $placeholder ) . ')';
 		}
 
+		// Don't run insert with empty dataset, return 0 since no rows affected.
+		if ( empty( $data ) ) {
+			return 0;
+		}
+
 		// Stitch all rows together.
 		$sql .= implode( ",\n", $placeholders );
 

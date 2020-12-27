@@ -37,14 +37,13 @@ class Product_WooCommerce {
 		$this->attributes = new WC_Attributes( $product );
 
 		if ( Helper::is_module_active( 'woocommerce' ) ) {
-			$brands = \RankMath\WooCommerce\Woocommerce::get_brands( $product->get_id() );
+			$brand = \RankMath\WooCommerce\Woocommerce::get_brands( $product->get_id() );
 
 			// Brand.
-			if ( ! empty( $brands ) ) {
-				$brands          = $brands[0]->name;
+			if ( ! empty( $brand ) ) {
 				$entity['brand'] = [
-					'@type' => 'Thing',
-					'name'  => $brands,
+					'@type' => 'Brand',
+					'name'  => $brand,
 				];
 			}
 		}

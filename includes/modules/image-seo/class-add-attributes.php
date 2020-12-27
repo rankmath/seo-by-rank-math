@@ -79,6 +79,8 @@ class Add_Attributes {
 				$post->filename = $attrs['data-src'];
 			} elseif ( ! empty( $attrs['data-layzr'] ) ) {
 				$post->filename = $attrs['data-layzr'];
+			} elseif ( ! empty( $attrs['nitro-lazy-srcset'] ) ) {
+				$post->filename = $attrs['nitro-lazy-srcset'];
 			}
 
 			// Pass attributes so they can be used later.

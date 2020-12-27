@@ -45,6 +45,9 @@
 		background: #f8f9fa;
 		overflow: hidden;
 		width: auto;
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
 	}
 }
 

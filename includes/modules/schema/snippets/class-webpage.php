@@ -10,6 +10,7 @@
 
 namespace RankMath\Schema;
 
+use RankMath\Helper;
 use RankMath\Paper\Paper;
 
 defined( 'ABSPATH' ) || exit;
@@ -65,10 +66,14 @@ class Webpage implements Snippet {
 	 * @return string
 	 */
 	private function get_type() {
-		$hash = [
+		$about_page   = Helper::get_settings( 'titles.local_seo_about_page' );
+		$contact_page = Helper::get_settings( 'titles.local_seo_contact_page' );
+		$hash         = [
 			'SearchResultsPage' => is_search(),
 			'ProfilePage'       => is_author(),
 			'CollectionPage'    => is_home() || is_archive(),
+			'AboutPage'         => $about_page && is_page( $about_page ),
+			'ContactPage'       => $contact_page && is_page( $contact_page ),
 		];
 
 		return ! empty( array_filter( $hash ) ) ? key( array_filter( $hash ) ) : 'WebPage';

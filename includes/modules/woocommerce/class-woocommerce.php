@@ -245,12 +245,20 @@ class WooCommerce extends WC_Vars {
 	 * @return bool|array
 	 */
 	public static function get_brands( $product_id ) {
+		$brand    = '';
 		$taxonomy = Helper::get_settings( 'general.product_brand' );
-		if ( ! $taxonomy || ! taxonomy_exists( $taxonomy ) ) {
-			return false;
+		if ( $taxonomy && taxonomy_exists( $taxonomy ) ) {
+			$brands = wp_get_post_terms(
+				$product_id,
+				$taxonomy,
+				[
+					'number' => 1,
+					'fields' => 'names',
+				]
+			);
+			$brand  = empty( $brands[0] ) || is_wp_error( $brands ) ? '' : $brands[0];
 		}
 
-		$brands = wp_get_post_terms( $product_id, $taxonomy );
-		return empty( $brands ) || is_wp_error( $brands ) ? false : $brands;
+		return apply_filters( 'rank_math/woocommerce/product_brand', $brand );
 	}
 }
