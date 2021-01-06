@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.6
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.55
+Stable tag: 1.0.56-beta
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,15 +475,31 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.55 [Dec 22, 2020] =
-* Added: Reset option in the [Role Manager](https://rankmath.com/kb/role-manager/)
-* Added: Compatibility with the Nitro CDN plugin for the [Image SEO](https://rankmath.com/kb/image-seo/)
-* Improved: Randomize [Analytics'](https://rankmath.com/kb/analytics/) cron jobs time instead of resetting on the GMT+0
-* Improved: Error reporting in the [SEO Analyzer](https://rankmath.com/kb/seo-analysis/), if the tool does not work on some installation
-* Fixed: Taxonomy pages were showing the social preview twice
-* Fixed: Conflict with [Elementor](https://rankmath.com/blog/elementor-seo/) page builder when 'Remove Product Base' option was enabled in the Rank Math's [WooCommerce Settings](https://rankmath.com/blog/woocommerce-seo/)
-* Fixed: [Advanced Robots](https://rankmath.com/kb/advanced-tab/) options were not picking the default values set in the [Global Settings](https://rankmath.com/kb/titles-and-meta/)
-* Fixed: Contact & About Page defined in the [Local setting](https://rankmath.com/kb/local-seo/) were not printing the proper [Schema codes](https://rankmath.com/kb/rich-snippets/)
-* Fixed: `Undefined index: @type` error on the Product Category pages
+= 1.0.56-beta [Jan 7, 2020] =
+* Added: [HUGE!] **[Instant Indexing for Bing!](https://rankmath.com/blog/bing-indexing-api/)** You can enable it from **WP Dashboard > Rank Math > Dashboard > Instant Indexing Module**
+* Added: [HUGE!] Revamped [Analytics Module](https://rankmath.com/kb/analytics/) functionality. All small (and big) issues like data importing, data mismatch, data importing, etc., are sorted. Please delete the old data and start a fresh data fetch by [following this guide](https://rankmath.com/kb/delete-old-analytics-data/)
+* Added: [NEW!] Improved Y-Axis behavior for all the Analytics graphs when 2 or more filters are selected. You should see much better graphs in the Analytics module
+* Added: Special Open Graph tags for the Video, Product & Local Schema types
+* Added: Warning text in the Analytics Settings about GA4 not supported yet. Please follow this [guide to create a Google Analytics property alongside GA4](https://rankmath.com/kb/using-ga4/)
+* Improved: Made [Schema Generator](https://rankmath.com/kb/rich-snippets/) modal's footer sticky, so they are visible all the time. If you have not tried the new [Schema Generator](https://www.youtube.com/watch?v=4DapQQd6ceE), then you must, to get a competitive advantage over your competitors
+* Improved: All the filters are now selected by default in the Analytics graphs to give a better overview
+* Improved: [Rebuild Indexing Tool](https://rankmath.com/kb/rank-math-status-and-tools/) now truncates the flat table before rebuilding it
+* Improved: [Status & Tools](https://rankmath.com/kb/rank-math-status-and-tools/) page now [shows](https://i.rankmath.com/b3hhxx) which Google Account permissions are given to the Analytics Module [reconnection required]
+* Improved: [SEO Analyzer's](https://rankmath.com/tools/seo-analyzer/) Page Size test now counts the compressed size of the rendered page
+* Improved: The [Redirection](https://rankmath.com/kb/setting-up-redirections/) module now prevents adding a duplicate redirection by validating the source URLs
+* Improved: As requested by several users, we changed the Dashboard widget's priority so that the vital SEO stats are seen first
+* Improved: On the Author pages, we now print `content="content"` instead of `content="profile"`
+* Improved: Minified JSON-LD Schema markup output on the frontend
+* Improved: Styling of the preview section of the Schema Content in the dark-colored themes
+* Improved: Sitemaps now honor the forward-slash conditions added to WordPress's permalink settings
+* Updated: List of [Local Business](https://rankmath.com/kb/local-seo/) types supported by Schema.org
+* Fixed: Google Drive connection redirect link was not working in the UpdraftPlus plugin
+* Fixed: Mixed content warning related to Open Graph (http://ogp.me)
+* Fixed: ["Focus keyword used previously"](https://rankmath.com/kb/score-100-in-tests/#first-step-choosing-focus-keywords) test was not working on the new pages or on the page where the keyword was added from the Quick Edit screen
+* Fixed: Notification code was causing errors on some installations
+* Fixed: Auto-Generated description in the Google preview was showing the excerpt text instead of the first paragraph from the content
+* Fixed: SQL error related to `dbDelta` after the plugin activation on some installations
+* Fixed: Remove [`BreadcrumbList` Schema](https://rankmath.com/kb/general-settings/#bread-crumbs) from the embedded Web Stories
+* Fixed: Some Analytics tables were saving the `urlencoded` values in the "page" column
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

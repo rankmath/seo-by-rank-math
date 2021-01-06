@@ -136,7 +136,8 @@ class Assessor {
 		rankMathEditor.resultManager.update( keyword, {
 			keywordNotUsed: result,
 		} )
-		if ( keyword === rankMathEditor.getSelectedKeyword() ) {
+
+		if ( keyword === rankMathEditor.getSelectedKeyword().toLowerCase() ) {
 			this.refreshResults()
 		}
 	}

@@ -298,13 +298,6 @@ import addNotice from '@helpers/addNotice'
 				} )
 
 				const cacheControlDays = $( '#console_caching_control' )
-				const customDayButton = $( '.console-cache-delete-custom' )
-
-				cacheControlDays.on( 'keyup', () => {
-					const days = cacheControlDays.val()
-					customDayButton.data( 'days', days )
-					customDayButton.html( customDayButton.attr( 'title' ).replace( '%d', days ) )
-				} ).trigger( 'keyup' )
 
 				$( '.console-cache-update-manually' ).on( 'click', function(
 					event
@@ -324,6 +317,7 @@ import addNotice from '@helpers/addNotice'
 									$( 'h1.page-title' )
 								)
 								button.text( 'Fetching in Progress' )
+								$( '.cancel-fetch' ).prop( 'disabled', false )
 							} else {
 								addNotice(
 									'Unable to update cache due to: ' +
@@ -334,6 +328,22 @@ import addNotice from '@helpers/addNotice'
 							}
 						}
 					)
+				} )
+
+				$( '.cancel-fetch' ).on( 'click', function( event ) {
+					event.preventDefault()
+
+					const button = $( this )
+
+					button.prop( 'disabled', true )
+					ajax( 'analytic_cancel_fetching', {}, 'GET' )
+						.done(
+							function( result ) {
+								if ( result && result.success ) {
+									window.location.reload()
+								}
+							}
+						)
 				} )
 			},
 
@@ -601,6 +611,7 @@ import addNotice from '@helpers/addNotice'
 					} )
 				} )
 			},
+
 		}
 
 		window.rankMathOptions.init()

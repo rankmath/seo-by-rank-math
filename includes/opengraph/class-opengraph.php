@@ -63,11 +63,6 @@ class OpenGraph {
 	public function output_tags() {
 		wp_reset_query();
 
-		if ( is_singular() && ! is_front_page() ) {
-			$this->schema = Post::get_meta( 'rich_snippet' );
-			$this->schema = $this->schema ? $this->schema : false;
-		}
-
 		/**
 		 * Hook to add all OpenGraph metadata
 		 *

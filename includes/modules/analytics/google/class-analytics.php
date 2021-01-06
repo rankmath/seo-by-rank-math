@@ -10,8 +10,6 @@
 
 namespace RankMath\Google;
 
-use RankMath\Helpers\Security;
-
 defined( 'ABSPATH' ) || exit;
 
 /**

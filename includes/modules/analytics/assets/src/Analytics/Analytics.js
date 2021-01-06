@@ -2,16 +2,16 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { Fragment } from '@wordpress/element'
 import { dispatch } from '@wordpress/data'
+import { Fragment } from '@wordpress/element'
 
 /**
  * Internal dependencies
  */
 import ScoreBar from './ScoreBar'
 import Header from '@scShared/Header'
-import ScoreFilter from './ScoreFilter'
 import PostsTable from './PostsTable'
+import ScoreFilter from './ScoreFilter'
 
 const Analytic = () => {
 	return (

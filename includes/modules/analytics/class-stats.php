@@ -10,9 +10,7 @@
 
 namespace RankMath\Analytics;
 
-use Exception;
 use RankMath\Helper;
-use RankMath\Google\Api;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Param;
 use RankMathPro\Analytics\Pageviews;
@@ -578,6 +576,11 @@ class Stats extends Keywords {
 		$url    = strtolower( trim( $url ) );
 		$url    = preg_replace( $regex, '', $url );
 
+		/**
+		 * Google API and get_permalink sends URL Encoded strings so we need
+		 * to urldecode in order to get them to match with whats saved in DB.
+		 */
+		$url = urldecode($url);
 		return \str_replace( $home_url, '', $url );
 	}
 }

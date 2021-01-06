@@ -10,12 +10,6 @@
 
 namespace RankMath\Analytics;
 
-use Exception;
-use RankMath\Helper;
-use RankMath\Google\Api;
-use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
-
 defined( 'ABSPATH' ) || exit;
 
 /**

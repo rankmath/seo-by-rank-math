@@ -9,6 +9,7 @@
 use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Google\Authentication;
+use RankMath\Google\Permissions;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -56,11 +57,26 @@ $is_pro_active          = ! defined( 'RANK_MATH_PRO_FILE' );
 	<a href="<?php echo wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ); ?>" class="button button-link rank-math-reconnect-google"><?php esc_html_e( 'Reconnect', 'rank-math' ); ?></a> <span>|</span> <button class="button button-link rank-math-disconnect-google"><?php esc_html_e( 'Disconnect', 'rank-math' ); ?></button>
 </div>
 
-<div class="rank-math-box no-padding rank-math-accordion <?php echo $is_profile_connected ? 'connected' : 'disconnected'; ?>" tabindex="0">
+<?php
+$console_classes = Helper::classnames(
+	'rank-math-box no-padding rank-math-accordion',
+	[
+		'connected'    => $is_profile_connected,
+		'disconnected' => ! $is_profile_connected,
+		'disabled'     => ! Permissions::has_console(),
+	]
+);
+?>
+<div class="<?php echo $console_classes; ?>" tabindex="0">
 	<header>
 		<h3><?php esc_html_e( 'Search Console', 'rank-math' ); ?></h3>
 	</header>
 	<div class="rank-math-accordion-content">
+
+		<?php
+		if ( ! Permissions::has_console() ) {
+			Permissions::print_warning();
+		} ?>
 
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">
@@ -73,19 +89,32 @@ $is_pro_active          = ! defined( 'RANK_MATH_PRO_FILE' );
 			</div>
 			<?php do_action( 'rank_math/analytics/options/console' ); ?>
 		</div>
-
-		<footer>
-			<button class="button button-primary rank-math-save-profiles"><?php esc_html_e( 'Save', 'rank-math' ); ?></button>
-			<button class="button button-secondary rank-math-accordion-close"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></button>
-		</footer>
 	</div>
 </div>
 
-<div class="rank-math-box no-padding rank-math-accordion is-open <?php echo $is_analytics_connected ? 'connected' : 'disconnected'; ?>" tabindex="0">
+<?php
+$analytic_classes = Helper::classnames(
+	'rank-math-box no-padding rank-math-accordion',
+	[
+		'connected'    => $is_analytics_connected,
+		'disconnected' => ! $is_analytics_connected,
+		'disabled'     => ! Permissions::has_analytics(),
+	]
+);
+?>
+<div class="<?php echo $analytic_classes; ?>" tabindex="0">
 	<header>
 		<h3><?php esc_html_e( 'Analytics', 'rank-math' ); ?></h3>
 	</header>
 	<div class="rank-math-accordion-content">
+
+		<?php
+		if ( ! Permissions::has_analytics() ) {
+			Permissions::print_warning();
+		} ?>
+
+		<p class="warning yellow"><strong class="warning"><?php echo esc_attr( 'Notice:', 'rank-math' ); ?></strong> <?php echo wp_kses_post( 'Not seeing your website that uses Google Analytics 4? <a href="https://rankmath.com/kb/using-ga4/?utm_source=Plugin&utm_campaign=WP" target="_blank">Click here to know how to fix the issue</a>.', 'rank-math' ); ?></p>
+
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">
 				<label for="site-analytics-account"><?php esc_html_e( 'Account', 'rank-math' ); ?></label>
@@ -177,19 +206,30 @@ $is_pro_active          = ! defined( 'RANK_MATH_PRO_FILE' );
 				</div>
 			</div>
 		</div>
-
-		<footer>
-			<button class="button button-primary rank-math-save-analytics"><?php esc_html_e( 'Save', 'rank-math' ); ?></button>
-			<button class="button button-secondary rank-math-accordion-close"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></button>
-		</footer>
 	</div>
 </div>
 
-<div class="rank-math-box no-padding rank-math-accordion <?php echo $is_adsense_connected ? 'connected' : 'disconnected'; ?>" tabindex="0">
+<?php
+$adsense_classes = Helper::classnames(
+	'rank-math-box no-padding rank-math-accordion',
+	[
+		'connected'    => $is_adsense_connected,
+		'disconnected' => ! $is_adsense_connected,
+		'disabled'     => ! Permissions::has_adsense(),
+	]
+);
+?>
+<div class="<?php echo $adsense_classes; ?>" tabindex="0">
 	<header>
 		<h3><?php esc_html_e( 'AdSense', 'rank-math' ); ?></h3>
 	</header>
 	<div class="rank-math-accordion-content">
+
+		<?php
+		if ( defined( 'RANK_MATH_PRO_FILE' ) && ! Permissions::has_adsense() ) {
+			Permissions::print_warning();
+		} ?>
+
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">
 				<label for="site-adsense-account"><?php esc_html_e( 'Account', 'rank-math' ); ?></label>
@@ -211,12 +251,6 @@ $is_pro_active          = ! defined( 'RANK_MATH_PRO_FILE' );
 			</div>
 		</div>
 		<?php endif; ?>
-
-		<footer>
-			<button class="button button-primary rank-math-save-adsense"><?php esc_html_e( 'Save', 'rank-math' ); ?></button>
-			<button class="button button-secondary rank-math-accordion-close"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></button>
-		</footer>
-
 	</div>
 </div>
 

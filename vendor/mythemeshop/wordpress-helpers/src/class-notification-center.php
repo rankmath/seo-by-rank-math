@@ -30,6 +30,13 @@ class Notification_Center {
 	private $notifications = [];
 
 	/**
+	 * Stores whether we need to clear storage or not.
+	 *
+	 * @var array
+	 */
+	private $should_clear_storage = true;
+
+	/**
 	 * Internal flag for whether notifications have been retrieved from storage.
 	 *
 	 * @var bool
@@ -68,6 +75,7 @@ class Notification_Center {
 
 		// Check if notifications are stored.
 		if ( empty( $notifications ) ) {
+			$this->should_clear_storage = false;
 			return;
 		}
 
@@ -152,7 +160,7 @@ class Notification_Center {
 		$notifications = apply_filters( 'wp_helpers_notifications_before_storage', $notifications );
 
 		// No notifications to store, clear storage.
-		if ( empty( $notifications ) ) {
+		if ( empty( $notifications ) && $this->should_clear_storage ) {
 			delete_option( $this->storage_key );
 			return;
 		}

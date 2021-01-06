@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 // phpcs:disable
 $actions = \as_get_scheduled_actions(
 	[
-		'hook' => 'rank_math/analytics/get_analytics',
+		'hook' => 'rank_math/analytics/clear_cache',
 		'status' => \ActionScheduler_Store::STATUS_PENDING,
 	]
 );
@@ -36,7 +36,7 @@ if ( ! empty( $db_info ) ) {
 $actions = as_get_scheduled_actions(
 	[
 		'order'  => 'DESC',
-		'hook'   => 'rank_math/analytics/daily_tasks',
+		'hook'   => 'rank_math/analytics/data_fetch',
 		'status' => \ActionScheduler_Store::STATUS_PENDING,
 	]
 );
@@ -66,6 +66,14 @@ $cmb->add_field(
 	]
 );
 
+$is_fetching = 'fetching' === get_option( 'rank_math_analytics_first_fetch' );
+$buttons     = '<br>' .
+	'<button class="button button-small console-cache-delete" data-days="-1">' . esc_html__( 'Delete Data', 'rank-math' ) . '</button>' .
+	'&nbsp;&nbsp;<button class="button button-small console-cache-update-manually"' . ( $disable ? ' disabled="disabled"' : '' ) . '>' . ( $is_queue_empty ? esc_html__( 'Update Data manually', 'rank-math' ) : esc_html__( 'Fetching in Progress', 'rank-math' ) ) . '</button>' .
+	'&nbsp;&nbsp;<button class="button button-link-delete button-small cancel-fetch"' . disabled( $is_fetching, false, false ) . '>' . esc_html__( 'Cancel Fetching', 'rank-math' ) . '</button>';
+
+$buttons  .= '<br>' . join( '', $db_info );
+
 $cmb->add_field(
 	[
 		'id'              => 'console_caching_control',
@@ -83,10 +91,6 @@ $cmb->add_field(
 
 			return $value;
 		},
-		'after_field'     => '<br>' .
-		'<button class="button button-small console-cache-delete console-cache-delete-custom"  data-days="15" title="' . esc_html__( 'Delete Recent Data (last %d days)', 'rank-math' ) . '">' . esc_html__( 'Delete Recent Data (last 15 days)', 'rank-math' ) . '</button>' .
-		'&nbsp;&nbsp;<button class="button button-small console-cache-delete" data-days="-1">' . esc_html__( 'Delete Data', 'rank-math' ) . '</button>' .
-		'&nbsp;&nbsp;<button class="button button-small console-cache-update-manually"' . ( $disable ? ' disabled="disabled"' : '' ) . '>' . ( $is_queue_empty ? esc_html__( 'Update Data manually', 'rank-math' ) : esc_html__( 'Fetching in Progress', 'rank-math' ) ) . '</button><br>' .
-		join( '', $db_info ),
+		'after_field'     => $buttons,
 	]
 );

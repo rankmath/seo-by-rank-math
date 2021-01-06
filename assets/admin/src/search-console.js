@@ -51,13 +51,21 @@ class SearchConsole {
 			this.fillPropertySelect( account )
 		} )
 
-		jQuery( '.button-primary', '.form-footer.rank-math-ui' ).on(
+		jQuery( '.button-primary', '.rank-math-wizard-body--analytics .form-footer.rank-math-ui' ).on(
 			'click',
-			( event ) => {
-				if ( this.saveChanges ) {
-					event.preventDefault()
-					alert( 'There are unsved changes' )
-				}
+			() => {
+				this.saveConsole()
+				this.saveAnalytics()
+				this.saveAdsense()
+			}
+		)
+
+		jQuery( '.button-primary', '.rank-math_page_rank-math-options-general .form-footer.rank-math-ui' ).on(
+			'click',
+			() => {
+				this.saveConsole()
+				this.saveAnalytics()
+				this.saveAdsense()
 			}
 		)
 
@@ -74,162 +82,7 @@ class SearchConsole {
 			this.fillViewSelect()
 		} )
 
-		this.accordions.on( 'click', 'header', ( event ) => {
-			if ( this.saveChanges ) {
-				return
-			}
-
-			const current = jQuery( event.currentTarget )
-			const parent = current.closest( '.rank-math-accordion' )
-			const isCurrentOpen = parent.hasClass( 'is-open' )
-
-			current.next().slideToggle()
-			this.accordions
-				.not( parent )
-				.find( '.rank-math-accordion-close' )
-				.trigger( 'click' )
-			this.accordions.removeClass( 'is-open' )
-			if ( isCurrentOpen ) {
-				return
-			}
-
-			parent.addClass( 'is-open' )
-			this.accordions.not( parent )
-		} )
-
-		jQuery( '.rank-math-accordion-close' ).on( 'click', ( event ) => {
-			event.preventDefault()
-
-			if ( this.saveChanges ) {
-				return
-			}
-
-			const button = jQuery( event.currentTarget )
-			const container = button.closest( '.rank-math-accordion-content' )
-
-			this.accordions.removeClass( 'is-open locked' )
-			container.slideUp()
-		} )
-
-		jQuery( 'select,input', '.rank-math-accordion' ).on(
-			'change',
-			( event ) => {
-				this.saveChanges = true
-				const parent = jQuery( event.currentTarget ).closest(
-					'.rank-math-accordion'
-				)
-				this.accordions.not( parent ).addClass( 'locked' )
-
-				return true
-			}
-		)
-
-		jQuery( '.rank-math-save-profiles' ).on( 'click', ( event ) => {
-			event.preventDefault()
-
-			if ( 0 === parseInt( this.profileSelect.val() ) ) {
-				return
-			}
-
-			const button = jQuery( event.currentTarget )
-			const parent = button.closest( '.rank-math-accordion' )
-			parent.addClass( 'saving' )
-			button.text( 'Saving...' )
-
-			const data = {
-				profile: this.profileSelect.val(),
-				country: this.countryConsole.val(),
-			}
-
-			const days = jQuery( '#console_caching_control' )
-			if ( days.length > 0 ) {
-				data.days = days.val()
-			}
-
-			ajax( 'save_analytic_profile', data, 'post' )
-				.complete( () => {
-					button.text( 'Saved' )
-					parent.removeClass( 'saving' )
-				} )
-				.done( () => {
-					this.removeLock( parent )
-					setTimeout( () => {
-						button.text( 'Save' )
-					}, 1500 )
-				} )
-		} )
-
-		jQuery( '.rank-math-save-analytics' ).on( 'click', ( event ) => {
-			event.preventDefault()
-			const data = {
-				accountID: this.accountSelect.val(),
-				propertyID: this.propertySelect.val(),
-				viewID: this.viewSelect.val(),
-				country: this.countryAnalytics.val(),
-				installCode: jQuery( '#install-code' ).is( ':checked' ),
-				anonymizeIP: jQuery( '#anonymize-ip' ).is( ':checked' ),
-				excludeLoggedin: jQuery( '#exclude-loggedin' ).is( ':checked' ),
-			}
-
-			if (
-				0 === parseInt( data.accountID ) ||
-				0 === parseInt( data.propertyID )
-			) {
-				return
-			}
-
-			const days = jQuery( '#console_caching_control' )
-			if ( days.length > 0 ) {
-				data.days = days.val()
-			}
-
-			const button = jQuery( event.currentTarget )
-			const parent = button.closest( '.rank-math-accordion' )
-			parent.addClass( 'saving' )
-			button.text( 'Saving' )
-
-			ajax( 'save_analytic_options', data, 'post' )
-				.complete( () => {
-					button.text( 'Saved' )
-					parent.removeClass( 'saving' )
-				} )
-				.done( () => {
-					this.removeLock( parent )
-					setTimeout( () => {
-						button.text( 'Save' )
-					}, 1500 )
-				} )
-		} )
-
-		jQuery( '.rank-math-save-adsense' ).on( 'click', ( event ) => {
-			event.preventDefault()
-			const data = {
-				accountID: this.adsenseSelect.val(),
-			}
-
-			if ( 0 === parseInt( data.accountID ) ) {
-				return
-			}
-
-			const button = jQuery( event.currentTarget )
-			const parent = button.closest( '.rank-math-accordion' )
-			parent.addClass( 'saving' )
-			button.text( 'Saving' )
-
-			ajax( 'save_adsense_account', data, 'post' )
-				.complete( () => {
-					button.text( 'Saved' )
-					parent.removeClass( 'saving' )
-				} )
-				.done( () => {
-					this.removeLock( parent )
-					setTimeout( () => {
-						button.text( 'Save' )
-					}, 1500 )
-				} )
-		} )
-
-		jQuery( '.rank-math-disconnect-google' ).on( 'click', ( event) => {
+		jQuery( '.rank-math-disconnect-google' ).on( 'click', ( event ) => {
 			event.preventDefault()
 
 			if ( confirm( 'Are you sure?' ) ) {
@@ -240,11 +93,60 @@ class SearchConsole {
 		} )
 	}
 
-	removeLock( parent ) {
-		this.saveChanges = false
-		this.accordions.removeClass( 'locked' )
-		parent.addClass( 'connected' )
-		parent.removeClass( 'disconnected' )
+	saveConsole() {
+		if ( 0 === parseInt( this.profileSelect.val() ) ) {
+			return
+		}
+
+		const data = {
+			profile: this.profileSelect.val(),
+			country: this.countryConsole.val(),
+		}
+
+		const days = jQuery( '#console_caching_control' )
+		if ( days.length > 0 ) {
+			data.days = days.val()
+		}
+
+		ajax( 'save_analytic_profile', data, 'post' )
+	}
+
+	saveAnalytics() {
+		const data = {
+			accountID: this.accountSelect.val(),
+			propertyID: this.propertySelect.val(),
+			viewID: this.viewSelect.val(),
+			country: this.countryAnalytics.val(),
+			installCode: jQuery( '#install-code' ).is( ':checked' ),
+			anonymizeIP: jQuery( '#anonymize-ip' ).is( ':checked' ),
+			excludeLoggedin: jQuery( '#exclude-loggedin' ).is( ':checked' ),
+		}
+
+		if (
+			0 === parseInt( data.accountID ) ||
+			0 === parseInt( data.propertyID )
+		) {
+			return
+		}
+
+		const days = jQuery( '#console_caching_control' )
+		if ( days.length > 0 ) {
+			data.days = days.val()
+		}
+
+		ajax( 'save_analytic_options', data, 'post' )
+	}
+
+	saveAdsense() {
+		const data = {
+			accountID: this.adsenseSelect.val(),
+		}
+
+		if ( 0 === parseInt( data.accountID ) ) {
+			return
+		}
+
+		ajax( 'save_adsense_account', data, 'post' )
 	}
 
 	fillSelect() {
@@ -268,7 +170,11 @@ class SearchConsole {
 	}
 
 	fillAdsenseSelect() {
-		const { adsenseAccounts } = this.response
+		const { adsenseAccounts = false } = this.response
+
+		if ( false === adsenseAccounts ) {
+			return
+		}
 
 		this.adsenseSelect.html( '<option value="0">Select Account</option>' )
 
@@ -336,7 +242,7 @@ class SearchConsole {
 	}
 
 	fillProfileSelect() {
-		const { sites, homeUrl, inSearchConsole } = this.response
+		const { sites, homeUrl } = this.response
 
 		this.profileSelect.html( '<option value="0">Select Profile</option>' )
 
@@ -354,7 +260,7 @@ class SearchConsole {
 			)
 		} )
 
-		if ( ! this.viewSelect.data( 'selected' ) && inSearchConsole ) {
+		if ( this.profileSelect.data( 'selected' ) ) {
 			const wrapper = this.profileSelect.closest( '.rank-math-accordion' )
 			wrapper.addClass( 'connected' )
 		}

@@ -443,11 +443,7 @@ class Post_Type implements Provider {
 			 */
 			return false;
 		}
-		unset( $canonical );
 
-		if ( 'post' !== $post->post_type ) {
-			$url['loc'] = user_trailingslashit( $url['loc'] );
-		}
 		$url['images'] = ! is_null( $this->get_image_parser() ) ? $this->get_image_parser()->get_images( $post ) : [];
 
 		return $url;

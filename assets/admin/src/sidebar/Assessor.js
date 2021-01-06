@@ -49,7 +49,7 @@ class Assessor {
 		rankMathEditor.resultManager.update( keyword, {
 			keywordNotUsed: result,
 		} )
-		if ( keyword === this.getSelectedKeyword() ) {
+		if ( keyword === this.getSelectedKeyword().toLowerCase() ) {
 			dispatch( 'rank-math' ).refreshResults()
 		}
 	}

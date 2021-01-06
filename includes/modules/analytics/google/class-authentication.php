@@ -10,11 +10,10 @@
 
 namespace RankMath\Google;
 
-use RankMath\Data_Encryption;
-use RankMath\Helpers\Security;
 use MyThemeShop\Helpers\Str;
+use RankMath\Data_Encryption;
 use MyThemeShop\Helpers\Param;
-use RankMath\Helper as GlobalHelper;
+use RankMath\Helpers\Security;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -105,9 +104,7 @@ class Authentication {
 	 * @return string
 	 */
 	public static function get_auth_url() {
-
-		$page = Param::get( 'page' );
-		$page = 'rank-math-wizard' === $page ? 'rank-math-wizard&step=analytics' : 'rank-math-options-general#setting-panel-analytics';
+		$page = self::get_page_slug();
 
 		return Security::add_query_arg_raw(
 			[
@@ -121,48 +118,30 @@ class Authentication {
 	}
 
 	/**
-	 * Get access token after redirect.
-	 */
-	public static function get_tokens_from_server() {
-		// Bail if the user is not authenticated at all yet.
-		$id = Param::get( 'process_oauth', 0, FILTER_VALIDATE_INT );
-		if ( $id < 1 ) {
-			return;
-		}
-
-		$response = wp_remote_get( self::get_auth_app_url() . '/get.php?id=' . $id );
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return;
-		}
-
-		$response = wp_remote_retrieve_body( $response );
-		if ( empty( $response ) ) {
-			return;
-		}
-
-		$response = \json_decode( $response, true );
-		unset( $response['id'] );
-
-		// Save new token.
-		self::tokens( $response );
-
-		$redirect = Security::remove_query_arg_raw( [ 'process_oauth', 'security' ] );
-		if ( Str::contains( 'rank-math-options-general', $redirect ) ) {
-			$redirect .= '#setting-panel-analytics';
-		}
-
-		GlobalHelper::remove_notification( 'rank_math_analytics_reauthenticate' );
-
-		wp_safe_redirect( $redirect );
-		exit;
-	}
-
-	/**
 	 * Google custom app.
 	 *
 	 * @return string
 	 */
 	public static function get_auth_app_url() {
 		return apply_filters( 'rank_math/analytics/app_url', 'https://oauth.rankmath.com' );
+	}
+
+	/**
+	 * Get page slug according to request.
+	 *
+	 * @return string
+	 */
+	public static function get_page_slug() {
+		$page = Param::get( 'page' );
+		if ( ! empty( $page ) ) {
+			return 'rank-math-wizard' === $page ? 'rank-math-wizard&step=analytics' : 'rank-math-options-general#setting-panel-analytics';
+		}
+
+		$page = wp_get_referer();
+		if ( ! empty( $page ) && Str::contains( 'wizard', $page ) ) {
+			return 'rank-math-wizard&step=analytics';
+		}
+
+		return 'rank-math-options-general#setting-panel-analytics';
 	}
 }

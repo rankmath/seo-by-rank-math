@@ -123,17 +123,33 @@ class DB {
 			->selectCount( 'DISTINCT(created)', 'days' )
 			->getVar();
 
-		$rows = self::analytics()
-			->selectCount( 'id' )
-			->getVar();
-
-		$size = $wpdb->get_var( 'SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema="' . $wpdb->dbname . '" AND (table_name="' . $wpdb->prefix . 'rank_math_analytics_gsc")' ); // phpcs:ignore
-
+		$rows = self::get_total_rows();
+		$size = $wpdb->get_var( 'SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema="' . $wpdb->dbname . '" AND table_name IN ( ' . '"' . $wpdb->prefix . 'rank_math_analytics_gsc", "' . $wpdb->prefix . 'rank_math_analytics_ga", "' . $wpdb->prefix . 'rank_math_analytics_adsense"' . ' )' ); // phpcs:ignore
 		$data = compact( 'days', 'rows', 'size' );
 
 		set_transient( $key, $data, DAY_IN_SECONDS );
 
 		return $data;
+	}
+
+	public static function get_total_rows() {
+		$rows = self::analytics()
+			->selectCount( 'id' )
+			->getVar();
+
+		if ( Api::get()->is_analytics_connected() ) {
+			$rows += self::table( 'rank_math_analytics_ga' )
+				->selectCount( 'id' )
+				->getVar();
+		}
+
+		if ( method_exists( '\RankMathPro\Google\Adsense', 'is_adsense_connected' ) && \RankMathPro\Google\Adsense::is_adsense_connected() ) {
+			$rows += self::table( 'rank_math_analytics_adsense' )
+				->selectCount( 'id' )
+				->getVar();
+		}
+
+		return $rows;
 	}
 
 	/**
@@ -148,9 +164,9 @@ class DB {
 		}
 
 		$id = self::objects()
-			->select( 'id' )
-			->limit( 1 )
-			->getVar();
+		->select( 'id' )
+		->limit( 1 )
+		->getVar();
 
 		$rank_math_gsc_has_data = $id > 0 ? true : false;
 		return $rank_math_gsc_has_data;
@@ -159,22 +175,42 @@ class DB {
 	/**
 	 * Check if a date exists in the sysyem.
 	 *
-	 * @param string $date Date.
-	 *
+	 * @param  string $date   Date.
+	 * @param  string $action Action.
 	 * @return boolean
 	 */
-	public static function date_exists( $date ) {
-		$is_console   = \RankMath\Google\Console::is_console_connected();
-		$is_analytics = \RankMath\Google\Analytics::is_analytics_connected();
+	public static function date_exists( $date, $action = 'console' ) {
+		$table = [
+			'console'   => 'rank_math_analytics_gsc',
+			'analytics' => 'rank_math_analytics_ga',
+			'adsense'   => 'rank_math_analytics_adsense',
+		];
 
-		if ( ! $is_console && ! $is_analytics ) {
-			return true;
-		}
+		$table = self::table( $table[ $action ] );
 
-		$id = self::analytics();
-		if ( ! $is_console && $is_analytics ) {
-			$id = self::table( 'rank_math_analytics_ga' );
-		}
+		$id = $table
+			->select( 'id' )
+			->where( 'created', $date )
+			->getVar();
+
+		return $id > 0 ? true : false;
+	}
+
+	/**
+	 * Check if a date exists in the sysyem.
+	 *
+	 * @param  string $date  Date.
+	 * @param  string $table Table name.
+	 * @return boolean
+	 */
+	public static function job_date_exists( $date, $table = 'console' ) {
+		$tables = [
+			'adsense'   => 'rank_math_analytics_adsense',
+			'analytics' => 'rank_math_analytics_ga',
+			'console'   => 'rank_math_analytics_gsc',
+		];
+		$table  = isset( $tables[ $table ] ) ? $tables [ $table ] : $table;
+		$id     = self::table( $table );
 
 		$id = $id
 			->select( 'id' )
@@ -232,9 +268,9 @@ class DB {
 			unset( $args['id'] );
 
 			$updated = self::objects()->set( $args )
-				->where( 'id', $old_id )
-				->where( 'object_id', absint( $args['object_id'] ) )
-				->update();
+			->where( 'id', $old_id )
+			->where( 'object_id', absint( $args['object_id'] ) )
+			->update();
 
 			if ( ! empty( $updated ) ) {
 				return $old_id;

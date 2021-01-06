@@ -2,7 +2,7 @@
  * External dependencies
  */
 import moment from 'moment'
-import { isEmpty } from 'lodash'
+import { get, map, isEmpty } from 'lodash'
 import ContentLoader from 'react-content-loader'
 import {
 	AreaChart,
@@ -23,6 +23,7 @@ import { withFilters } from '@wordpress/components'
 /**
  * Internal dependencies
  */
+import getColor from '@analytics/colors'
 import humanNumber from '@helpers/humanNumber'
 import CustomTooltip from '@scShared/CustomTooltip'
 import CustomizedAxisTick from '@scShared/CustomizedAxisTick'
@@ -50,6 +51,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 		)
 	}
 
+	let counter = 0
 	const graph = stats.graph.merged
 	const topLabels = {
 		ctr: __( 'Avg. CTR', 'rank-math' ),
@@ -60,6 +62,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 		pageviews: __( 'Pageviews', 'rank-math' ),
 		position: __( 'Position', 'rank-math' ),
 	}
+	const selectedCount = Object.values( selected ).filter( Boolean ).length
 
 	return (
 		<div className="rank-math-graph main-graph performance-graph">
@@ -77,13 +80,6 @@ const PerformanceGraph = ( { stats, selected } ) => {
 						axisLine={ { stroke: 'rgba(0, 0, 0, 0.15)' } }
 						domain={ [ 'dataMin', 'dataMax' ] }
 					/>
-					<YAxis
-						dx={ -10 }
-						axisLine={ false }
-						tickLine={ false }
-						tickFormatter={ ( value ) => humanNumber( value ) }
-						tick={ { fill: '#7f868d', fontSize: 14 } }
-					/>
 					<Tooltip
 						content={ <CustomTooltip /> }
 						wrapperStyle={ { zIndex: 10 } }
@@ -95,166 +91,75 @@ const PerformanceGraph = ( { stats, selected } ) => {
 					/>
 
 					<defs>
-						<linearGradient
-							id="pageviews"
-							x1="0"
-							y1="0"
-							x2="0"
-							y2="1"
-						>
-							<stop
-								offset="5%"
-								stopColor="#10AC84"
-								stopOpacity={ 0.3 }
-							/>
-							<stop
-								offset="95%"
-								stopColor="#10AC84"
-								stopOpacity={ 0 }
-							/>
-						</linearGradient>
-						<linearGradient
-							id="impressions"
-							x1="0"
-							y1="0"
-							x2="0"
-							y2="1"
-						>
-							<stop
-								offset="5%"
-								stopColor="#4e8cde"
-								stopOpacity={ 0.2 }
-							/>
-							<stop
-								offset="95%"
-								stopColor="#4e8cde"
-								stopOpacity={ 0 }
-							/>
-						</linearGradient>
-						<linearGradient id="clicks" x1="0" y1="0" x2="0" y2="1">
-							<stop
-								offset="5%"
-								stopColor="#EE5353"
-								stopOpacity={ 0.2 }
-							/>
-							<stop
-								offset="95%"
-								stopColor="#EE5353"
-								stopOpacity={ 0 }
-							/>
-						</linearGradient>
-						<linearGradient
-							id="keywords"
-							x1="0"
-							y1="0"
-							x2="0"
-							y2="1"
-						>
-							<stop
-								offset="5%"
-								stopColor="#FF9F43"
-								stopOpacity={ 0.2 }
-							/>
-							<stop
-								offset="95%"
-								stopColor="#FF9F43"
-								stopOpacity={ 0 }
-							/>
-						</linearGradient>
-						<linearGradient id="ctr" x1="0" y1="0" x2="0" y2="1">
-							<stop
-								offset="5%"
-								stopColor="#F368E0"
-								stopOpacity={ 0.2 }
-							/>
-							<stop
-								offset="95%"
-								stopColor="#F368E0"
-								stopOpacity={ 0 }
-							/>
-						</linearGradient>
-						<linearGradient
-							id="position"
-							x1="0"
-							y1="0"
-							x2="0"
-							y2="1"
-						>
-							<stop
-								offset="5%"
-								stopColor="#54A0FF"
-								stopOpacity={ 0.2 }
-							/>
-							<stop
-								offset="95%"
-								stopColor="#54A0FF"
-								stopOpacity={ 0 }
-							/>
-						</linearGradient>
+						{
+							map( selected, ( check, id ) => {
+								if ( false === check ) {
+									return null
+								}
+
+								return (
+									<linearGradient
+										id={ id }
+										x1="0"
+										y1="0"
+										x2="0"
+										y2="1"
+									>
+										<stop
+											offset="5%"
+											stopColor={ getColor( id ) }
+											stopOpacity={ 0.2 }
+										/>
+										<stop
+											offset="95%"
+											stopColor={ getColor( id ) }
+											stopOpacity={ 0 }
+										/>
+									</linearGradient>
+								)
+							} )
+						}
 					</defs>
-					{ selected.pageviews && (
-						<Area
-							connectNulls={ true }
-							dataKey="pageviews"
-							stroke="#10AC84"
-							strokeWidth={ 2 }
-							fill="url(#pageviews)"
-						/>
-					) }
-					{ selected.impressions && (
-						<Area
-							connectNulls={ true }
-							dataKey="impressions"
-							stroke="#4e8cde"
-							strokeWidth={ 2 }
-							fill="url(#impressions)"
-						/>
-					) }
-					{ selected.clicks && (
-						<Area
-							connectNulls={ true }
-							dataKey="clicks"
-							stroke="#EE5353"
-							strokeWidth={ 2 }
-							fill="url(#clicks)"
-						/>
-					) }
-					{ selected.keywords && (
-						<Area
-							connectNulls={ true }
-							dataKey="keywords"
-							stroke="#FF9F43"
-							strokeWidth={ 2 }
-							fill="url(#keywords)"
-						/>
-					) }
-					{ selected.ctr && (
-						<Area
-							connectNulls={ true }
-							dataKey="ctr"
-							stroke="#F368E0"
-							strokeWidth={ 2 }
-							fill="url(#ctr)"
-						/>
-					) }
-					{ selected.position && (
-						<Area
-							connectNulls={ true }
-							dataKey="position"
-							stroke="#54A0FF"
-							strokeWidth={ 2 }
-							fill="url(#position)"
-						/>
-					) }
-					{ selected.adsense && (
-						<Area
-							connectNulls={ true }
-							dataKey="earnings"
-							stroke="#54A0FF"
-							strokeWidth={ 2 }
-							fill="url(#position)"
-						/>
-					) }
+					{
+						selectedCount < 3 && map( selected, ( check, id ) => {
+							if ( false === check ) {
+								return null
+							}
+
+							++counter
+
+							return (
+								<YAxis
+									dx={ 1 === counter ? -10 : 10 }
+									axisLine={ false }
+									tickLine={ false }
+									tickFormatter={ ( value ) => humanNumber( value ) }
+									tick={ { fill: '#7f868d', fontSize: 14 } }
+									yAxisId={ `${ id }-yaxis` }
+									orientation={ 1 === counter ? 'left' : 'right' }
+								/>
+							)
+						} )
+					}
+					{
+						map( selected, ( check, id ) => {
+							if ( false === check ) {
+								return null
+							}
+
+							const dataKey = 'adsense' === id ? 'earnings' : id
+							return (
+								<Area
+									connectNulls={ true }
+									dataKey={ dataKey }
+									stroke={ getColor( id ) }
+									strokeWidth={ 2 }
+									fill={ `url(#${ id })` }
+									yAxisId={ `${ id }-yaxis` }
+								/>
+							)
+						} )
+					}
 					<CartesianGrid
 						stroke="rgba(0, 0, 0, 0.05)"
 						vertical={ false }

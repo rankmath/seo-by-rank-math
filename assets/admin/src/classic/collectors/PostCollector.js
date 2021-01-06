@@ -44,7 +44,7 @@ class PostCollector extends DataCollector {
 		return this.isTinymce() &&
 			tinymce.activeEditor &&
 			'content' === tinymce.activeEditor.id
-			? tinymce.activeEditor.getContent()
+			? tinymce.activeEditor.getContent( { format: 'text' } )
 			: this.elemContent.val()
 	}
 

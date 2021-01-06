@@ -10,12 +10,7 @@
 
 namespace RankMath\Analytics;
 
-use Exception;
 use WP_REST_Request;
-use RankMath\Helper;
-use RankMath\Google\Api;
-use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

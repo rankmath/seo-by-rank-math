@@ -1,232 +1,259 @@
-[
-    {
-        "name": "a5hleyrich/wp-background-processing",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/deliciousbrains/wp-background-processing.git",
-            "reference": "2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800",
-            "reference": "2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2"
-        },
-        "suggest": {
-            "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
-        },
-        "time": "2020-07-31T07:00:11+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "classes/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-2.0-or-later"
-        ],
-        "authors": [
-            {
-                "name": "Delicious Brains",
-                "email": "nom@deliciousbrains.com"
-            }
-        ],
-        "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks."
-    },
-    {
-        "name": "cmb2/cmb2",
-        "version": "v2.7.0",
-        "version_normalized": "2.7.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/CMB2/CMB2.git",
-            "reference": "438c26dda7ac110d0741448d65614b3ec6379034"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/CMB2/CMB2/zipball/438c26dda7ac110d0741448d65614b3ec6379034",
-            "reference": "438c26dda7ac110d0741448d65614b3ec6379034",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">5.2.4"
-        },
-        "require-dev": {
-            "apigen/apigen": "4.1.2",
-            "nette/utils": "2.5.3",
-            "phpunit/phpunit": "6.5.13"
-        },
-        "suggest": {
-            "composer/installers": "~1.0"
-        },
-        "time": "2020-01-21T17:49:50+00:00",
-        "type": "wordpress-plugin",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-2.0-or-later"
-        ],
-        "authors": [
-            {
-                "name": "Justin Sternberg",
-                "email": "justin@dsgnwrks.pro",
-                "homepage": "https://dsgnwrks.pro",
-                "role": "Developer"
+{
+    "packages": [
+        {
+            "name": "a5hleyrich/wp-background-processing",
+            "version": "1.0.2",
+            "version_normalized": "1.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/deliciousbrains/wp-background-processing.git",
+                "reference": "2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800"
             },
-            {
-                "name": "WebDevStudios",
-                "email": "contact@webdevstudios.com",
-                "homepage": "https://github.com/WebDevStudios",
-                "role": "Developer"
-            }
-        ],
-        "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
-        "homepage": "https://github.com/CMB2/CMB2",
-        "keywords": [
-            "metabox",
-            "plugin",
-            "wordpress"
-        ]
-    },
-    {
-        "name": "donatj/phpuseragentparser",
-        "version": "v1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/donatj/PhpUserAgent.git",
-            "reference": "faac0bd29d564712957c19648711b87c11d79ef0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/faac0bd29d564712957c19648711b87c11d79ef0",
-            "reference": "faac0bd29d564712957c19648711b87c11d79ef0",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "camspiers/json-pretty": "~1.0",
-            "donatj/drop": "*",
-            "phpunit/phpunit": "~4.8"
-        },
-        "time": "2020-09-01T16:13:00+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/UserAgentParser.php"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800",
+                "reference": "2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "suggest": {
+                "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
+            },
+            "time": "2020-07-31T07:00:11+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "classes/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
             ],
-            "psr-4": {
-                "donatj\\UserAgent\\": "src/UserAgent"
-            }
+            "authors": [
+                {
+                    "name": "Delicious Brains",
+                    "email": "nom@deliciousbrains.com"
+                }
+            ],
+            "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
+            "install-path": "../a5hleyrich/wp-background-processing"
         },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jesse G. Donat",
-                "email": "donatj@gmail.com",
-                "homepage": "https://donatstudios.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Lightning fast, minimalist PHP UserAgent string parser.",
-        "homepage": "https://donatstudios.com/PHP-Parser-HTTP_USER_AGENT",
-        "keywords": [
-            "browser",
-            "browser detection",
-            "parser",
-            "user agent",
-            "useragent"
-        ]
-    },
-    {
-        "name": "mythemeshop/wordpress-helpers",
-        "version": "1.1.5",
-        "version_normalized": "1.1.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/MyThemeShopTeam/wordpress-helpers.git",
-            "reference": "72671356bd04e3bbb97e7e21d3ce2e936909bed2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/72671356bd04e3bbb97e7e21d3ce2e936909bed2",
-            "reference": "72671356bd04e3bbb97e7e21d3ce2e936909bed2",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.6"
-        },
-        "time": "2020-11-29T13:24:47+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "MyThemeShop\\Helpers\\": "src/"
+        {
+            "name": "cmb2/cmb2",
+            "version": "v2.7.0",
+            "version_normalized": "2.7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CMB2/CMB2.git",
+                "reference": "438c26dda7ac110d0741448d65614b3ec6379034"
             },
-            "classmap": [
-                "src/"
-            ]
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/438c26dda7ac110d0741448d65614b3ec6379034",
+                "reference": "438c26dda7ac110d0741448d65614b3ec6379034",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.2.4"
+            },
+            "require-dev": {
+                "apigen/apigen": "4.1.2",
+                "nette/utils": "2.5.3",
+                "phpunit/phpunit": "6.5.13"
+            },
+            "suggest": {
+                "composer/installers": "~1.0"
+            },
+            "time": "2020-01-21T17:49:50+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Sternberg",
+                    "email": "justin@dsgnwrks.pro",
+                    "homepage": "https://dsgnwrks.pro",
+                    "role": "Developer"
+                },
+                {
+                    "name": "WebDevStudios",
+                    "email": "contact@webdevstudios.com",
+                    "homepage": "https://github.com/WebDevStudios",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
+            "homepage": "https://github.com/CMB2/CMB2",
+            "keywords": [
+                "metabox",
+                "plugin",
+                "wordpress"
+            ],
+            "install-path": "../cmb2/cmb2"
         },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "MyThemeShop",
-                "email": "info@mythemeshop.com"
-            }
-        ],
-        "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers."
-    },
-    {
-        "name": "woocommerce/action-scheduler",
-        "version": "3.1.6",
-        "version_normalized": "3.1.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/woocommerce/action-scheduler.git",
-            "reference": "275d0ba54b1c263dfc62688de2fa9a25a373edf8"
+        {
+            "name": "donatj/phpuseragentparser",
+            "version": "v1.2.0",
+            "version_normalized": "1.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/donatj/PhpUserAgent.git",
+                "reference": "978e66786bc392a09b24b152a8a695dadd230e60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/978e66786bc392a09b24b152a8a695dadd230e60",
+                "reference": "978e66786bc392a09b24b152a8a695dadd230e60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "camspiers/json-pretty": "~1.0",
+                "donatj/drop": "*",
+                "phpunit/phpunit": "~4.8|~9"
+            },
+            "time": "2020-12-29T05:36:08+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/UserAgentParser.php"
+                ],
+                "psr-4": {
+                    "donatj\\UserAgent\\": "src/UserAgent"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jesse G. Donat",
+                    "email": "donatj@gmail.com",
+                    "homepage": "https://donatstudios.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Lightning fast, minimalist PHP UserAgent string parser.",
+            "homepage": "https://donatstudios.com/PHP-Parser-HTTP_USER_AGENT",
+            "keywords": [
+                "browser",
+                "browser detection",
+                "parser",
+                "user agent",
+                "useragent"
+            ],
+            "support": {
+                "issues": "https://github.com/donatj/PhpUserAgent/issues",
+                "source": "https://github.com/donatj/PhpUserAgent/tree/v1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/donatj/15",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/donatj",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../donatj/phpuseragentparser"
         },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/275d0ba54b1c263dfc62688de2fa9a25a373edf8",
-            "reference": "275d0ba54b1c263dfc62688de2fa9a25a373edf8",
-            "shasum": ""
+        {
+            "name": "mythemeshop/wordpress-helpers",
+            "version": "1.1.6",
+            "version_normalized": "1.1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MyThemeShopTeam/wordpress-helpers.git",
+                "reference": "e0c30f4da57d4a1997f517b1e72b5d519d04c643"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/e0c30f4da57d4a1997f517b1e72b5d519d04c643",
+                "reference": "e0c30f4da57d4a1997f517b1e72b5d519d04c643",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "time": "2021-01-06T15:09:43+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "MyThemeShop\\Helpers\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MyThemeShop",
+                    "email": "info@mythemeshop.com"
+                }
+            ],
+            "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
+            "support": {
+                "issues": "https://github.com/MyThemeShopTeam/wordpress-helpers/issues",
+                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/1.1.6"
+            },
+            "install-path": "../mythemeshop/wordpress-helpers"
         },
-        "require-dev": {
-            "phpunit/phpunit": "^5.6",
-            "woocommerce/woocommerce-sniffs": "0.0.8",
-            "wp-cli/wp-cli": "~1.5.1"
-        },
-        "time": "2020-05-12T16:22:33+00:00",
-        "type": "wordpress-plugin",
-        "extra": {
-            "scripts-description": {
-                "test": "Run unit tests",
-                "phpcs": "Analyze code against the WordPress coding standards with PHP_CodeSniffer",
-                "phpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier"
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-3.0-or-later"
-        ],
-        "description": "Action Scheduler for WordPress and WooCommerce",
-        "homepage": "https://actionscheduler.org/"
-    }
-]
+        {
+            "name": "woocommerce/action-scheduler",
+            "version": "3.1.6",
+            "version_normalized": "3.1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/woocommerce/action-scheduler.git",
+                "reference": "275d0ba54b1c263dfc62688de2fa9a25a373edf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/275d0ba54b1c263dfc62688de2fa9a25a373edf8",
+                "reference": "275d0ba54b1c263dfc62688de2fa9a25a373edf8",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.6",
+                "woocommerce/woocommerce-sniffs": "0.0.8",
+                "wp-cli/wp-cli": "~1.5.1"
+            },
+            "time": "2020-05-12T16:22:33+00:00",
+            "type": "wordpress-plugin",
+            "extra": {
+                "scripts-description": {
+                    "test": "Run unit tests",
+                    "phpcs": "Analyze code against the WordPress coding standards with PHP_CodeSniffer",
+                    "phpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier"
+                }
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Action Scheduler for WordPress and WooCommerce",
+            "homepage": "https://actionscheduler.org/",
+            "install-path": "../woocommerce/action-scheduler"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
