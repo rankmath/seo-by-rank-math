@@ -10,12 +10,6 @@
 
 namespace RankMath\Analytics;
 
-use Exception;
-use RankMath\Helper;
-use RankMath\Google\Api;
-use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -52,7 +46,7 @@ class Summary {
 			->whereBetween( 'created', [ Stats::get()->compare_start_date, Stats::get()->compare_end_date ] )
 			->one();
 
-		$query = $wpdb->prepare(
+		$query    = $wpdb->prepare(
 			"SELECT ROUND(AVG(keywords),0) as keywords
 			 FROM (
 			    SELECT count(DISTINCT(query)) AS keywords

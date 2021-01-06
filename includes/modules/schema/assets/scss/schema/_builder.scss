@@ -348,14 +348,14 @@
             }
 
             button.button.is-secondary {
-                display: none;
                 line-height: 30px;
+
+                display: none;
 
                 width: 32px;
                 height: 30px;
-                padding: 0 6px;
-
                 margin-left: 10px;
+                padding: 0 6px;
 
                 text-align: center;
                 text-decoration: none;
@@ -392,16 +392,24 @@
     }
 
     &-save-as {
-        margin-top: 1.5rem;
+        position: sticky;
+        z-index: 1;
+        bottom: 0;
+
+        margin: 20px -20px -20px;
+        padding: 15px 20px;
+
+        border-top: 1px solid #b5bfc9;
+        background: #fff;
 
         @extend %flex;
     }
 }
 
 .#{$namespace}-datepicker {
-
     &__dialog {
         position: absolute;
+
         margin-top: -2px;
 
         .components-popover {
@@ -409,13 +417,15 @@
                 padding: 0;
 
                 button.is-secondary {
-                    height: 26px;
                     line-height: 26px;
+
+                    height: 26px;
                 }
 
                 .components-datetime__date {
-                    border-top: 0;
                     padding-left: 0;
+
+                    border-top: 0;
 
                     .CalendarMonth {
                         padding: 0!important;

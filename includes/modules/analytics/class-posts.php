@@ -11,14 +11,9 @@
 namespace RankMath\Analytics;
 
 use stdClass;
-use Exception;
 use WP_Error;
 use WP_REST_Request;
-use RankMath\Helper;
-use RankMath\Google\Api;
 use RankMath\Analytics\DB;
-use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

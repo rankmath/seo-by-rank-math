@@ -195,15 +195,12 @@ class Database_Tools {
 		$this->maybe_recreate_actionscheduler_tables();
 
 		// Analytics module.
-		$is_connected = ( get_option( 'rank_math_google_analytic_profile', [] ) !== [] );
-		if ( Helper::is_module_active( 'analytics' ) && $is_connected ) {
-			delete_option( 'rank_math_analytics_installed' );
-			( new \RankMath\Analytics\Installer() )->install( false );
-
-			if ( defined( 'RANK_MATH_PRO_VERSION' ) ) {
-				delete_option( 'rank_math_analytics_pro_installed' );
-				( new \RankMathPro\Analytics\Installer() )->install();
-			}
+		if ( Helper::is_module_active( 'analytics' ) ) {
+			as_enqueue_async_action(
+				'rank_math/analytics/workflow/create_tables',
+				[],
+				'workflow'
+			);
 		}
 
 		return __( 'Tables re-created.', 'rank-math' );
@@ -246,7 +243,7 @@ class Database_Tools {
 	/**
 	 * Force the data store schema updates.
 	 */
-	function recreate_actionscheduler_tables() {
+	public function recreate_actionscheduler_tables() {
 		$store = new \ActionScheduler_HybridStore();
 		add_action( 'action_scheduler/created_table', [ $store, 'set_autoincrement' ], 10, 2 );
 

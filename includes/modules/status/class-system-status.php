@@ -12,6 +12,7 @@ namespace RankMath\Status;
 
 use RankMath\Google\Authentication;
 use RankMath\Admin\Admin_Helper;
+use RankMath\Google\Permissions;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -68,7 +69,7 @@ class System_Status {
 				continue;
 			}
 
-			include( $directory . '/views/system-status-accordion.php' );
+			include $directory . '/views/system-status-accordion.php';
 		}
 	}
 
@@ -78,7 +79,7 @@ class System_Status {
 	 * @param  array $fields Fields array.
 	 * @return void
 	 */
-	private function display_system_info_fields( $fields ) {
+	protected function display_system_info_fields( $fields ) {
 		foreach ( $fields as $field_name => $field ) {
 			$values = $this->system_info_value( $field_name, $field['value'] );
 			printf( '<tr><td>%s</td><td>%s</td></tr>', esc_html( $field['label'] ), $values );
@@ -112,8 +113,8 @@ class System_Status {
 	private function prepare_info() {
 		global $wpdb;
 
-		$plan   = Admin_Helper::get_registration_data();
-		$tokens = Authentication::tokens();
+		$plan        = Admin_Helper::get_registration_data();
+		$tokens      = Authentication::tokens();
 
 		$rankmath = [
 			'label'  => esc_html__( 'Rank Math', 'rank-math' ),
@@ -133,6 +134,10 @@ class System_Status {
 				'refresh_token' => [
 					'label' => esc_html__( 'Google Refresh token', 'rank-math' ),
 					'value' => empty( $tokens['refresh_token'] ) ? esc_html__( 'No token', 'rank-math' ) : esc_html__( 'Token exists', 'rank-math' ),
+				],
+				'permissions'   => [
+					'label' => esc_html__( 'Google Permission', 'rank-math' ),
+					'value' => Permissions::get_status(),
 				],
 			],
 		];
@@ -180,10 +185,13 @@ class System_Status {
 		if ( ! class_exists( 'WP_Debug_Data' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php';
 		}
+
 		wp_enqueue_style( 'site-health' );
 		wp_enqueue_script( 'site-health' );
+
 		$rankmath = apply_filters( 'rank_math/status/rank_math_info', $rankmath );
 		$this->wp_info = [ 'rank-math' => $rankmath ] + \WP_Debug_Data::debug_data();
+
 		unset( $this->wp_info['wp-paths-sizes'] );
 	}
 }

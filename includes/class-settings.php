@@ -43,6 +43,7 @@ class Settings {
 		$this->add_options( 'titles', 'rank-math-options-titles' );
 		$this->add_options( 'general', 'rank-math-options-general' );
 		$this->add_options( 'sitemap', 'rank-math-options-sitemap' );
+		$this->add_options( 'instant_indexing', 'rank-math-options-instant-indexing' );
 	}
 
 	/**

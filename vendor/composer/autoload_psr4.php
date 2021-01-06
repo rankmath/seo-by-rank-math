@@ -7,6 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'donatj\\UserAgent\\' => array($vendorDir . '/donatj/phpuseragentparser/src/UserAgent'),
-    'RankMath\\' => array($baseDir . '/includes'),
     'MyThemeShop\\Helpers\\' => array($vendorDir . '/mythemeshop/wordpress-helpers/src'),
 );

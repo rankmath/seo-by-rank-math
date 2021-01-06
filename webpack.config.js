@@ -47,6 +47,10 @@ const alias = {
 		__dirname,
 		'./assets/admin/src/sidebar/containers'
 	),
+	'@analytics': resolve(
+		__dirname,
+		'./includes/modules/analytics/assets/src'
+	),
 	'@schema': resolve(
 		__dirname,
 		'./includes/modules/schema/assets/src'
@@ -82,6 +86,9 @@ const entryPoints = {
 		'product-description': './includes/modules/woocommerce/assets/js/main.js',
 		'role-manager': './includes/modules/role-manager/assets/src/role-manager.js',
 	},
+	'instant-indexing': {
+		'instant-indexing': './includes/modules/instant-indexing/assets/src/instant-indexing.js',
+	},
 	analytics: {
 		stats: './includes/modules/analytics/assets/src/index.js',
 	},
@@ -95,6 +102,7 @@ const entryPoints = {
 const paths = {
 	plugin: './assets/admin/js',
 	analytics: './includes/modules/analytics/assets/js',
+	'instant-indexing': './includes/modules/instant-indexing/assets/js',
 	schema: './includes/modules/schema/assets/js',
 }
 

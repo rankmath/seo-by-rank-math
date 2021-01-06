@@ -40,6 +40,10 @@
     .dashicons {
         margin: 0 3px 0 0;
     }
+
+    &.disabled {
+        pointer-events: none;
+    }
 }
 
 // Primary Button.

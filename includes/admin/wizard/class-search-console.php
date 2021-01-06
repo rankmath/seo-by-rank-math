@@ -11,9 +11,6 @@
 namespace RankMath\Wizard;
 
 use RankMath\KB;
-use RankMath\Helper;
-
-use RankMath\Search_Console\Data_Fetcher;
 
 defined( 'ABSPATH' ) || exit;
 

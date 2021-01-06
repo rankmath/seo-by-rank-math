@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "6a6bcf47bdad71612411e9347e5762c0",
@@ -43,6 +43,10 @@
                 }
             ],
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
+            "support": {
+                "issues": "https://github.com/deliciousbrains/wp-background-processing/issues",
+                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.0.2"
+            },
             "time": "2020-07-31T07:00:11+00:00"
         },
         {
@@ -96,20 +100,24 @@
                 "plugin",
                 "wordpress"
             ],
+            "support": {
+                "issues": "https://github.com/CMB2/CMB2/issues",
+                "source": "http://wordpress.org/support/plugin/cmb2"
+            },
             "time": "2020-01-21T17:49:50+00:00"
         },
         {
             "name": "donatj/phpuseragentparser",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/donatj/PhpUserAgent.git",
-                "reference": "faac0bd29d564712957c19648711b87c11d79ef0"
+                "reference": "978e66786bc392a09b24b152a8a695dadd230e60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/faac0bd29d564712957c19648711b87c11d79ef0",
-                "reference": "faac0bd29d564712957c19648711b87c11d79ef0",
+                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/978e66786bc392a09b24b152a8a695dadd230e60",
+                "reference": "978e66786bc392a09b24b152a8a695dadd230e60",
                 "shasum": ""
             },
             "require": {
@@ -118,7 +126,7 @@
             "require-dev": {
                 "camspiers/json-pretty": "~1.0",
                 "donatj/drop": "*",
-                "phpunit/phpunit": "~4.8"
+                "phpunit/phpunit": "~4.8|~9"
             },
             "type": "library",
             "autoload": {
@@ -150,20 +158,34 @@
                 "user agent",
                 "useragent"
             ],
-            "time": "2020-09-01T16:13:00+00:00"
+            "support": {
+                "issues": "https://github.com/donatj/PhpUserAgent/issues",
+                "source": "https://github.com/donatj/PhpUserAgent/tree/v1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/donatj/15",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/donatj",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-12-29T05:36:08+00:00"
         },
         {
             "name": "mythemeshop/wordpress-helpers",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MyThemeShopTeam/wordpress-helpers.git",
-                "reference": "72671356bd04e3bbb97e7e21d3ce2e936909bed2"
+                "reference": "e0c30f4da57d4a1997f517b1e72b5d519d04c643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/72671356bd04e3bbb97e7e21d3ce2e936909bed2",
-                "reference": "72671356bd04e3bbb97e7e21d3ce2e936909bed2",
+                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/e0c30f4da57d4a1997f517b1e72b5d519d04c643",
+                "reference": "e0c30f4da57d4a1997f517b1e72b5d519d04c643",
                 "shasum": ""
             },
             "require": {
@@ -189,7 +211,11 @@
                 }
             ],
             "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
-            "time": "2020-11-29T13:24:47+00:00"
+            "support": {
+                "issues": "https://github.com/MyThemeShopTeam/wordpress-helpers/issues",
+                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/1.1.6"
+            },
+            "time": "2021-01-06T15:09:43+00:00"
         },
         {
             "name": "woocommerce/action-scheduler",
@@ -224,6 +250,10 @@
             ],
             "description": "Action Scheduler for WordPress and WooCommerce",
             "homepage": "https://actionscheduler.org/",
+            "support": {
+                "issues": "https://github.com/woocommerce/action-scheduler/issues",
+                "source": "https://github.com/woocommerce/action-scheduler/tree/master"
+            },
             "time": "2020-05-12T16:22:33+00:00"
         }
     ],
@@ -234,5 +264,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

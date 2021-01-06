@@ -118,4 +118,50 @@ class Api extends Console {
 	public function get_row_limit() {
 		return apply_filters( 'rank_math/analytics/row_limit', 1000 );
 	}
+
+	/**
+	 * Log every failed API call.
+	 * And kill all next scheduled event if failed count is more then three.
+	 *
+	 * @param array  $response   Response from api.
+	 * @param string $action     Action performing.
+	 * @param string $start_date Start date fetching for.
+	 * @param array  $args       Array of arguments.
+	 */
+	public function log_failed_request( $response, $action, $start_date, $args ) {
+		if ( $this->is_success() ) {
+			return;
+		}
+
+		// Number of allowed attempt.
+		$allow_fail_attempt          = 3;
+		$option_key                  = 'rankmath_google_api_failed_attempts_data';
+		$reconnect_google_option_key = 'rankmath_google_api_reconnect';
+
+		if ( ! empty( $response['error'] ) && is_array( $response['error'] ) ) {
+
+			$failed_attempts   = get_option( $option_key, [] );
+			$failed_attempts   = ( ! empty( $failed_attempts ) && is_array( $failed_attempts ) ) ? $failed_attempts : [];
+			$failed_attempts[] = [
+				'args'  => $args,
+				'error' => $response['error'],
+			];
+
+			update_option( $option_key, $failed_attempts );
+
+			if ( $allow_fail_attempt < count( $failed_attempts ) ) {
+				update_option( $reconnect_google_option_key, 'search_analytics_query' );
+			} else {
+				as_schedule_single_action(
+					time() + 60,
+					"rank_math/analytics/get_{$action}_data",
+					[ $start_date ],
+					'rank-math'
+				);
+			}
+		} else {
+			delete_option( $option_key );
+			delete_option( $reconnect_google_option_key );
+		}
+	}
 }

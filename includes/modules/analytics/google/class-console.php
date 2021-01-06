@@ -10,8 +10,6 @@
 
 namespace RankMath\Google;
 
-use RankMath\Analytics\Data_Fetcher;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -191,54 +189,13 @@ class Console extends Analytics {
 			$args
 		);
 
-		$this->log_failed_request( $response, $start_date, func_get_args() );
+		$this->log_failed_request( $response, 'console', $start_date, func_get_args() );
 
 		if ( ! $this->is_success() || ! isset( $response['rows'] ) ) {
 			return false;
 		}
 
 		return $response['rows'];
-	}
-
-	/**
-	 * Log every failed API call.
-	 * And kill all next scheduled event if failed count is more then three.
-	 */
-	private function log_failed_request( $response, $start_date, $args ) {
-		if ( $this->is_success() ) {
-			return;
-		}
-
-		// Number of allowed attempt.
-		$allow_fail_attempt          = 3;
-		$option_key                  = 'rankmath_google_api_failed_attempts_data';
-		$reconnect_google_option_key = 'rankmath_google_api_reconnect';
-
-		if ( ! empty( $response['error'] ) && is_array( $response['error'] ) ) {
-
-			$failed_attempts   = get_option( $option_key, [] );
-			$failed_attempts   = ( ! empty( $failed_attempts ) && is_array( $failed_attempts ) ) ? $failed_attempts : [];
-			$failed_attempts[] = [
-				'args'  => $args,
-				'error' => $response['error'],
-			];
-
-			update_option( $option_key, $failed_attempts );
-
-			if ( $allow_fail_attempt < count( $failed_attempts ) ) {
-				update_option( $reconnect_google_option_key, 'search_analytics_query' );
-				Data_Fetcher::get()->kill_process();
-			} else {
-				as_schedule_single_action(
-					time() + ( 60 ),
-					'rank_math/analytics/get_analytics',
-					[ $start_date ]
-				);
-			}
-		} else {
-			delete_option( $option_key );
-			delete_option( $reconnect_google_option_key );
-		}
 	}
 
 	/**
@@ -319,7 +276,7 @@ class Console extends Analytics {
 		if ( is_null( $rank_math_site_url ) ) {
 			$default            = trailingslashit( strtolower( home_url() ) );
 			$rank_math_site_url = get_option( 'rank_math_google_analytic_profile', [ 'profile' => $default ] );
-			$rank_math_site_url = $rank_math_site_url['profile'];
+			$rank_math_site_url = empty( $rank_math_site_url['profile'] ) ? $default : $rank_math_site_url['profile'];
 		}
 
 		return $rank_math_site_url;

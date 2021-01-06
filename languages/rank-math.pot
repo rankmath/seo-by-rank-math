@@ -1,4 +1,4 @@
-# Copyright (C) 2020 rank-math
+# Copyright (C) 2021 rank-math
 # This file is distributed under the same license as the rank-math package.
 msgid ""
 msgstr ""
@@ -1337,6 +1337,12 @@ msgstr ""
 msgid "Advanced Image SEO options to supercharge your website. Automate the task of adding the ALT and Title tags to your images on the fly."
 msgstr ""
 
+msgid "Instant Indexing"
+msgstr ""
+
+msgid "Directly notify search engines(Bing) when pages are added, updated or removed."
+msgstr ""
+
 #. translators: Link to kb article
 msgid "The Role Manager allows you to use WordPress roles to control which of your site users can have edit or view access to Rank Math's settings."
 msgstr ""
@@ -2397,19 +2403,16 @@ msgstr ""
 msgid "Access Time"
 msgstr ""
 
-msgid "Not a valid settings founds to delete cache."
+msgid "Data fetching cancelled."
 msgstr ""
 
 msgid "Google oAuth is not authorized."
 msgstr ""
 
-msgid "No Google Account setup."
+msgid "Data fetching started in the background."
 msgstr ""
 
-msgid "No Google Search Console Account selected."
-msgstr ""
-
-msgid "No Google Analytics Account selected."
+msgid "Not a valid settings founds to delete cache."
 msgstr ""
 
 msgid "Review analytics and sitemaps"
@@ -2452,8 +2455,10 @@ msgstr ""
 msgid "Average Position"
 msgstr ""
 
-#. translators: delete counter
-msgid "Rank Math is importing latest data from connected Google Services, %s remaining."
+msgid "Rank Math is importing latest data from connected Google Services, %1$s remaining."
+msgstr ""
+
+msgid "Cancel Fetch"
 msgstr ""
 
 #. translators: %s: amount of time
@@ -2711,6 +2716,46 @@ msgid "Title attribute format"
 msgstr ""
 
 msgid "Format used for the new <code>title</code> attribute values."
+msgstr ""
+
+msgid "Bing URL Submission API: Insert one or more URLs."
+msgstr ""
+
+#. translators: The placeholder is the number of URLs.
+msgid "Successfully submitted %s URL to the Bing URL Submission API."
+msgid_plural "Successfully submitted %s URLs to the Bing URL Submission API."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Failed to submit post to the Bing URL Submission API."
+msgstr ""
+
+msgid "Post successfully submitted to the Bing URL Submission API."
+msgstr ""
+
+#. translators: daily quota
+msgid "Please configure the Instant Indexing module in the Settings tab first."
+msgstr ""
+
+#. translators: placeholder is the error message.
+msgid "Bing URL Submission API error: %s"
+msgstr ""
+
+#. translators: 1. the error code, 2. the error message.
+msgid "Bing URL Submission API HTTP error %1$s: %2$s"
+msgstr ""
+
+msgid "Instant Indexing: Submit to Bing"
+msgstr ""
+
+#. translators: Link to kb article
+msgid "Instant Indexing module settings. %s."
+msgstr ""
+
+msgid "URL Submission"
+msgstr ""
+
+msgid "Send URLs directly to the Bing URL Submission API."
 msgstr ""
 
 msgid "Links: "
@@ -3409,6 +3454,9 @@ msgid "No token"
 msgstr ""
 
 msgid "Token exists"
+msgstr ""
+
+msgid "Google Permission"
 msgstr ""
 
 msgid "Database Table: 404 Log"
@@ -4535,6 +4583,18 @@ msgstr ""
 msgid "Turn ON to ignore all query parameters (the part after a question mark in a URL) when logging 404 errors."
 msgstr ""
 
+msgid "Given"
+msgstr ""
+
+msgid "Not Given"
+msgstr ""
+
+msgid "Warning:"
+msgstr ""
+
+msgid "You have not given the permission to fetch this data. Please <a href=\"%s\">reconnect</a> with all required permissions."
+msgstr ""
+
 #. translators: reconnect link
 msgid "There is no refresh token. Please <a href=\"%1$s\" class=\"button button-link rank-math-reconnect-google\">reconnect your app</a>"
 msgstr ""
@@ -4564,6 +4624,18 @@ msgstr ""
 msgid "Next data fetch on %s"
 msgstr ""
 
+msgid "Delete Data"
+msgstr ""
+
+msgid "Update Data manually"
+msgstr ""
+
+msgid "Fetching in Progress"
+msgstr ""
+
+msgid "Cancel Fetching"
+msgstr ""
+
 msgid "Analytics Database"
 msgstr ""
 
@@ -4572,21 +4644,6 @@ msgid "Enter the number of days to keep Analytics data in your database. The max
 msgstr ""
 
 msgid "free version"
-msgstr ""
-
-msgid "Delete Recent Data (last %d days)"
-msgstr ""
-
-msgid "Delete Recent Data (last 15 days)"
-msgstr ""
-
-msgid "Delete Data"
-msgstr ""
-
-msgid "Update Data manually"
-msgstr ""
-
-msgid "Fetching in Progress"
 msgstr ""
 
 msgid "Group Title"
@@ -4611,6 +4668,33 @@ msgid "Custom values for robots meta tag on groups page."
 msgstr ""
 
 msgid "Group Advanced Robots Meta"
+msgstr ""
+
+#. translators: daily quota
+msgid "Insert URLs to send to the Bing URL Submission API (one per line, up to 500):"
+msgstr ""
+
+msgid "Submit URLs"
+msgstr ""
+
+#. translators: daily quota
+msgid "Quota Left Today: %s"
+msgstr ""
+
+msgid "Bing API Key"
+msgstr ""
+
+#. translators: Link to KB article
+msgid "Insert your Bing Webmaster Tools API Key. %s"
+msgstr ""
+
+msgid "How to obtain it?"
+msgstr ""
+
+msgid "Auto-Submit to Bing"
+msgstr ""
+
+msgid "Submit posts from these post types automatically to the Bing URL Submission API when a post is published or edited."
 msgstr ""
 
 msgid "Email"

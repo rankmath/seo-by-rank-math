@@ -350,6 +350,13 @@ class DB {
 			return $redirection['id'];
 		}
 
+		$existing_redirection = self::match_redirections_source( maybe_serialize( $redirection['sources'] ) );
+		if ( ! empty( $existing_redirection ) && isset( $existing_redirection[0]['id'] ) ) {
+			$redirection['id'] = $existing_redirection[0]['id'];
+			self::update( $redirection );
+			return $redirection['id'];
+		}
+
 		// Add record.
 		return self::add( $redirection );
 	}

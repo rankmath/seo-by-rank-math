@@ -10,8 +10,6 @@
 
 namespace RankMath\Google;
 
-use RankMath\Helper;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -89,7 +87,7 @@ class Request {
 	 * @param array  $args    Assoc array of arguments (usually your data).
 	 * @param int    $timeout Timeout limit for request in seconds.
 	 *
-	 * @return array|false     Assoc array of API response, decoded from JSON.
+	 * @return WP_Error|array|false     Assoc array of API response, decoded from JSON.
 	 */
 	public function http_get( $url, $args = [], $timeout = 10 ) {
 		return $this->make_request( 'GET', $url, $args, $timeout );
@@ -102,7 +100,7 @@ class Request {
 	 * @param array  $args    Assoc array of arguments (usually your data).
 	 * @param int    $timeout Timeout limit for request in seconds.
 	 *
-	 * @return array|false     Assoc array of API response, decoded from JSON.
+	 * @return WP_Error|array|false     Assoc array of API response, decoded from JSON.
 	 */
 	public function http_post( $url, $args = [], $timeout = 10 ) {
 		return $this->make_request( 'POST', $url, $args, $timeout );
@@ -115,7 +113,7 @@ class Request {
 	 * @param array  $args    Assoc array of arguments (usually your data).
 	 * @param int    $timeout Timeout limit for request in seconds.
 	 *
-	 * @return array|false     Assoc array of API response, decoded from JSON.
+	 * @return WP_Error|array|false     Assoc array of API response, decoded from JSON.
 	 */
 	public function http_put( $url, $args = [], $timeout = 10 ) {
 		return $this->make_request( 'PUT', $url, $args, $timeout );
@@ -128,7 +126,7 @@ class Request {
 	 * @param array  $args    Assoc array of arguments (usually your data).
 	 * @param int    $timeout Timeout limit for request in seconds.
 	 *
-	 * @return array|false     Assoc array of API response, decoded from JSON.
+	 * @return WP_Error|array|false     Assoc array of API response, decoded from JSON.
 	 */
 	public function http_delete( $url, $args = [], $timeout = 10 ) {
 		return $this->make_request( 'DELETE', $url, $args, $timeout );

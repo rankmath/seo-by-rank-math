@@ -51,6 +51,10 @@ All that said, there is the start of a [branch to do it](https://github.com/dona
 
 - **Brave** - Brave is simply not differentiable from Chrome. This was a design decision on their part.
 
+### Undetectable Platforms
+
+- **iPadOS 13+** - Starting with iPadOS 13 and further hardened in 14, iPadOS returns the **exact** same string as macOS. It is no longer distinguishable by UA string. (See: [#69](https://github.com/donatj/PhpUserAgent/issues/69))
+
 ## Requirements
 
 - **php**: >=5.3.0
@@ -125,6 +129,7 @@ Predefined helper constants from `donatj\UserAgent\Platforms`
 | `Platforms::PLAYSTATION_3` |  PlayStation 3 |  
 | `Platforms::PLAYSTATION_4` |  PlayStation 4 |  
 | `Platforms::PLAYSTATION_VITA` |  PlayStation Vita |  
+| `Platforms::SYMBIAN` |  Symbian |  
 | `Platforms::TIZEN` |  Tizen |  
 | `Platforms::WINDOWS_PHONE` |  Windows Phone |  
 | `Platforms::XBOX` |  Xbox |  

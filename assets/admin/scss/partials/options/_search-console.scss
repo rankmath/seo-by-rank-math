@@ -40,7 +40,8 @@
 
     text-align: right;
 
-    button.button, a.button {
+    button.button,
+    a.button {
         line-height: 1.3;
 
         padding: 0;
@@ -61,14 +62,18 @@
 
     a.button {
         line-height: 29px;
-        color: $color-4;
+
         margin: 0;
+
+        color: $color-4;
     }
 
     span {
-        margin: 0 8px;
-        color: $gray;
         line-height: 30px;
+
+        margin: 0 8px;
+
+        color: $gray;
     }
 }
 
@@ -79,33 +84,12 @@
 
     border: 1px solid $light-gray;
     border-radius: 6px;
-    background: #f8f9fa;
+    background: #fff;
 
     &:hover,
     &:focus {
         border-color: $primary;
         box-shadow: 0 0 0 1px $primary;
-    }
-
-    &.locked {
-        header {
-            pointer-events: none;
-
-            &:after {
-                display: none;
-            }
-
-            &:before {
-                font-family: 'dashicons';
-                font-size: 1.125rem;
-
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-
-                content: '\f160';
-            }
-        }
     }
 
     .cmb-row {
@@ -124,6 +108,8 @@
         padding: 1rem;
 
         cursor: pointer;
+
+        border-bottom: 1px solid $light-gray;
 
         @extend %flex;
         justify-content: space-between;
@@ -147,26 +133,6 @@
                 background: $light-gray;
             }
         }
-
-        &:after {
-            font-family: 'dashicons';
-            font-size: 16px;
-            font-weight: bold;
-
-            position: absolute;
-            top: 1.2rem;
-            right: 1rem;
-
-            display: inline-block;
-
-            width: 18px;
-            margin-left: 5px;
-
-            content: '\f347';
-
-            opacity: .7;
-            color: $dark-gray;
-        }
     }
 
     &.connected {
@@ -176,8 +142,6 @@
     }
 
     &-content {
-        display: none;
-
         padding: 1rem;
 
         .cmb-type-select {
@@ -225,31 +189,18 @@
                 }
             }
         }
-    }
 
-    &.no-padding footer {
-        margin: 2rem -1rem -1rem;
-        padding: 1rem;
+        .warning {
+            font-size: 14px;
 
-        border-top-color: $light-gray;
+            margin: 0 0 1rem;
 
-        button:first-child {
-            margin-right: 5px;
-        }
-    }
+            strong {
+                color: $color-3;
+            }
 
-    &.is-open {
-        background: #fff;
-
-        .#{$namespace}-accordion-content {
-            display: block;
-        }
-
-        header {
-            border-bottom: 1px solid $light-gray;
-
-            &:after {
-                content: '\f343';
+            &.yellow strong {
+                color: $color-ok-dark-alt;
             }
         }
 
@@ -259,6 +210,10 @@
 
         .cmb-td {
             width: 100%;
+        }
+
+        .cmb2-metabox-description {
+            text-align: left;
         }
     }
 }
@@ -283,6 +238,14 @@
     margin-top: 4px;
 
     color: $dark-gray;
+}
+
+.cancel-fetch {
+    transition: 0.25s linear all;
+
+    &:disabled {
+        opacity: 0;
+    }
 }
 
 .#{$namespace}-console-db-info {
