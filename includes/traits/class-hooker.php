@@ -16,7 +16,6 @@ defined( 'ABSPATH' ) || exit;
  * Hooker class.
  */
 trait Hooker {
-
 	/**
 	 * Hooks a function on to a specific action
 	 *
@@ -79,7 +78,7 @@ trait Hooker {
 	 * Do action with league as prefix
 	 */
 	protected function do_action( ...$args ) {
-		if ( ! isset( $args[0] ) || empty( $args[0] ) ) {
+		if ( empty( $args[0] ) ) {
 			return;
 		}
 
@@ -93,7 +92,7 @@ trait Hooker {
 	 * Do filter with league as prefix
 	 */
 	protected function do_filter( ...$args ) {
-		if ( ! isset( $args[0] ) || empty( $args[0] ) ) {
+		if ( empty( $args[0] ) ) {
 			return;
 		}
 
@@ -109,10 +108,13 @@ trait Hooker {
 	 * @param array $config Array of configuration.
 	 */
 	protected function config( $config = [] ) {
-		if ( ! empty( $config ) ) {
-			foreach ( $config as $key => $value ) {
-				$this->$key = $value;
-			}
+		// Bail early if no config.
+		if ( empty( $config ) ) {
+			return;
+		}
+		
+		foreach ( $config as $key => $value ) {
+			$this->$key = $value;
 		}
 	}
 
