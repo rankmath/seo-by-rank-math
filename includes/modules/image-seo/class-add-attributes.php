@@ -41,7 +41,7 @@ class Add_Attributes {
 
 		if ( $this->is_alt || $this->is_title ) {
 			$this->filter( 'the_content', 'add_img_attributes', 11 );
-			$this->filter( 'post_thumbnail_html', 'add_img_attributes', 11 );
+			$this->filter( 'post_thumbnail_html', 'add_img_attributes', 11, 2 );
 			$this->filter( 'woocommerce_single_product_image_thumbnail_html', 'add_img_attributes', 11 );
 		}
 	}
@@ -50,9 +50,10 @@ class Add_Attributes {
 	 * Add 'title' and 'alt' attribute to image.
 	 *
 	 * @param  string $content Post content.
+	 * @param null|int $post_id The current post id
 	 * @return string
 	 */
-	public function add_img_attributes( $content ) {
+	public function add_img_attributes( $content, $post_id = null ) {
 		if ( empty( $content ) ) {
 			return $content;
 		}
@@ -63,7 +64,7 @@ class Add_Attributes {
 			return $content;
 		}
 
-		$post = $this->get_post();
+		$post = $this->get_post( $post_id );
 		foreach ( $matches as $image ) {
 			$is_dirty = false;
 			$attrs    = HTML::extract_attributes( $image[0] );
@@ -102,10 +103,11 @@ class Add_Attributes {
 	/**
 	 * Get post object.
 	 *
+	 * @param null|int $post_id
 	 * @return object
 	 */
-	private function get_post() {
-		$post = \get_post();
+	private function get_post( $post_id = null) {
+		$post = \get_post( $post_id );
 		if ( empty( $post ) ) {
 			$post = new stdClass();
 		}
