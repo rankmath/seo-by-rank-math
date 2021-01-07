@@ -203,7 +203,7 @@ class Database_Tools {
 			);
 		}
 
-		return __( 'Tables re-created.', 'rank-math' );
+		return __( 'Table re-creation started. It might take a couple of minutes.', 'rank-math' );
 	}
 
 	/**

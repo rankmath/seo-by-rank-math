@@ -19,9 +19,8 @@ import TopKeywords from './TopKeywords'
 const Keywords = () => {
 	const [ selected, setSelection ] = useState( {
 		impressions: true,
-		clicks: false,
-		pageviews: false,
-		keywords: false,
+		clicks: true,
+		keywords: true,
 		ctr: false,
 		position: false,
 	} )

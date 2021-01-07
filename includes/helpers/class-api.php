@@ -64,6 +64,8 @@ trait Api {
 	 * @return void
 	 */
 	public static function toggle_auto_update_setting( $toggle ) {
+		do_action( 'rank_math/settings/toggle_auto_update', $toggle );
+
 		$auto_updates = (array) get_site_option( 'auto_update_plugins', [] );
 		if ( ! empty( $toggle ) && 'off' !== $toggle ) {
 			$auto_updates[] = 'seo-by-rank-math/rank-math.php';

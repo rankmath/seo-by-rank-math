@@ -2585,7 +2585,7 @@ msgstr ""
 msgid "Conversion started. A success message will be shown here once the process completes. You can close this page."
 msgstr ""
 
-msgid "Tables re-created."
+msgid "Table re-creation started. It might take a couple of minutes."
 msgstr ""
 
 msgid "Flush SEO Analysis Data"

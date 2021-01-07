@@ -232,6 +232,8 @@ class DB {
 			return false;
 		}
 
+		unset( $args['id'] );
+
 		$args = wp_parse_args(
 			$args,
 			[
