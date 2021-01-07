@@ -41,13 +41,15 @@ function rank_math_1_0_56_analytics_changes() {
 	$task_name = 'rank_math/analytics/data_fetch';
 	$fetch_gap = apply_filters( 'rank_math/analytics/fetch_gap', 7 );
 
-	as_schedule_recurring_action(
-		$time_to_schedule,
-		DAY_IN_SECONDS * $fetch_gap,
-		$task_name,
-		[],
-		'rank-math'
-	);
+	if ( false === as_next_scheduled_action( $task_name ) ) {
+		as_schedule_recurring_action(
+			$time_to_schedule,
+			DAY_IN_SECONDS * $fetch_gap,
+			$task_name,
+			[],
+			'rank-math'
+		);
+	}
 
 	// Fetch permission data.
 	Permissions::fetch();

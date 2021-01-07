@@ -18,9 +18,9 @@ import TopPosts from './../Dashboard/TopPosts'
 const Performance = ( { stats } ) => {
 	const [ selected, setSelection ] = useState( {
 		pageviews: isPro(),
-		impressions: ! isPro(),
-		clicks: false,
-		keywords: false,
+		impressions: true,
+		clicks: ! isPro(),
+		keywords: true,
 		ctr: false,
 		position: false,
 		adsense: false,

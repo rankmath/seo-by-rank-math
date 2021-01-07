@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.6
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.56-beta
+Stable tag: 1.0.56
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,7 +475,7 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.56-beta [Jan 7, 2020] =
+= 1.0.56 [Jan 8, 2020] =
 * Added: [HUGE!] **[Instant Indexing for Bing!](https://rankmath.com/blog/bing-indexing-api/)** You can enable it from **WP Dashboard > Rank Math > Dashboard > Instant Indexing Module**
 * Added: [HUGE!] Revamped [Analytics Module](https://rankmath.com/kb/analytics/) functionality. All small (and big) issues like data importing, data mismatch, data importing, etc., are sorted. Please delete the old data and start a fresh data fetch by [following this guide](https://rankmath.com/kb/delete-old-analytics-data/)
 * Added: [NEW!] Improved Y-Axis behavior for all the Analytics graphs when 2 or more filters are selected. You should see much better graphs in the Analytics module
@@ -488,7 +488,7 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 * Improved: [SEO Analyzer's](https://rankmath.com/tools/seo-analyzer/) Page Size test now counts the compressed size of the rendered page
 * Improved: The [Redirection](https://rankmath.com/kb/setting-up-redirections/) module now prevents adding a duplicate redirection by validating the source URLs
 * Improved: As requested by several users, we changed the Dashboard widget's priority so that the vital SEO stats are seen first
-* Improved: On the Author pages, we now print `content="content"` instead of `content="profile"`
+* Improved: On the Author pages, we now print `content="profile"` instead of `content="content"`
 * Improved: Minified JSON-LD Schema markup output on the frontend
 * Improved: Styling of the preview section of the Schema Content in the dark-colored themes
 * Improved: Sitemaps now honor the forward-slash conditions added to WordPress's permalink settings
