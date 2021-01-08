@@ -109,12 +109,22 @@ class Admin implements Runner {
 		endif;
 
 		echo '<ul class="rank-math-blog-list">';
+		$is_new = time() - strtotime( $posts[0]['date'] ) < 15 * DAY_IN_SECONDS;
+
 		foreach ( $posts as $post ) :
 			?>
 			<li class="rank-math-blog-post">
-				<h4><a target="_blank" href="<?php echo esc_url( $post['link'] ); ?>?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP"><?php echo esc_html( $post['title']['rendered'] ); ?></a></h4>
+				<h4>
+					<?php if ( $is_new ) : ?>
+						<span class="rank-math-new-badge"><?php esc_html_e( 'NEW', 'rank-math' ); ?></span>
+					<?php endif; ?>
+					<a target="_blank" href="<?php echo esc_url( $post['link'] ); ?>?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP">
+						<?php echo esc_html( $post['title']['rendered'] ); ?>
+					</a>
+				</h4>
 			</li>
 			<?php
+			$is_new = false;
 		endforeach;
 		echo '</ul>';
 		?>
@@ -391,7 +401,9 @@ class Admin implements Runner {
 					<span class="suggestion-title" data-fk=\'%1$s\'><a target="_blank" href="%2$s" title="%3$s">%4$s</a></span>
 				</div>',
 				esc_attr( wp_json_encode( $suggestion['focus_keywords'] ) ),
-				$suggestion['url'], $suggestion['title'], $label,
+				$suggestion['url'],
+				$suggestion['title'],
+				$label,
 				esc_attr__( 'Copy Link URL to Clipboard', 'rank-math' ),
 				esc_attr__( 'Insert Link in Content', 'rank-math' ),
 				esc_attr( $label )

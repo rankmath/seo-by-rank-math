@@ -174,6 +174,14 @@ class System_Status {
 			'rank_math_analytics_keyword_manager' => esc_html__( 'Database Table: Keyword Manager', 'rank-math' ),
 		];
 
+		if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) {
+			unset(
+				$should_exists['rank_math_analytics_ga'],
+				$should_exists['rank_math_analytics_adsense'],
+				$should_exists['rank_math_analytics_keyword_manager']
+			);
+		}
+
 		foreach ( $should_exists as $name => $label ) {
 			$rankmath['fields'][ $name ] = [
 				'label' => $label,

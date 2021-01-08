@@ -66,7 +66,7 @@ class Assessor {
 			'rank_math_keyword_refresh',
 			'rank-math',
 			this.assessKeyword,
-			11
+			12
 		)
 	}
 
