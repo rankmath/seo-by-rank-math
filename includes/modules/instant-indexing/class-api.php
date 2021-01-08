@@ -44,7 +44,7 @@ class Api extends Base {
 		}
 
 		$data   = $this->request( 'GetUrlSubmissionQuota', [ 'query' => [ 'siteUrl' => untrailingslashit( home_url() ) ] ] );
-		$result = json_decode( $data['body'], true );
+		$result = isset( $data['body'] ) ? json_decode( $data['body'], true ) : [];
 
 		if ( 'ok' === $data['status'] && is_array( $result ) && isset( $result['d']['DailyQuota'] ) ) {
 			set_transient( 'rank_math_instant_indexing_bing_daily_quota', $result['d']['DailyQuota'], 3600 );

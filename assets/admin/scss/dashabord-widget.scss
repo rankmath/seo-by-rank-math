@@ -11,8 +11,8 @@
 @import 'variables';
 @import 'mixins';
 
-%flex{
-	@include flex;
+%flex {
+    @include flex;
 }
 
 #screen-options-wrap {
@@ -22,9 +22,7 @@
 }
 
 #rank_math {
-
     &_dashboard_widget {
-
         @import '../scss/partials/common/tooltip';
 
         .hndle {
@@ -32,9 +30,11 @@
 
             .#{$namespace}-icon {
                 display: inline-block;
-                vertical-align: -5px;
+
                 height: 20px;
                 margin-right: 5px;
+
+                vertical-align: -5px;
             }
         }
 
@@ -84,9 +84,11 @@
         }
 
         h3 {
-            font-size: 0.9375rem;
+            font-size: .9375rem;
             font-weight: 500;
+
             margin-top: 1rem;
+
             @extend %flex;
             justify-content: space-between;
 
@@ -95,35 +97,44 @@
             }
 
             a {
-                margin-top: 3px;
-                text-decoration: none;
                 line-height: 18px;
+
+                margin-top: 3px;
+
+                text-decoration: none;
 
                 i {
                     font-size: 24px;
                     line-height: 18px;
+
                     width: auto;
                     height: 18px;
-                    color: $primary;
                     padding: 0 3px;
+
+                    transition: .25s all linear;
+
+                    color: $primary;
                     border-radius: 2px;
-                    transition: 0.25s all linear;
                 }
 
-                &:hover, &:focus {
+                &:hover,
+                &:focus {
                     i {
-                        background: $primary;
                         color: #fff;
+                        background: $primary;
                     }
                 }
             }
 
             span {
-                float: right;
-                font-size: 0.825rem;
+                font-size: .825rem;
                 font-weight: normal;
-                opacity: 0.5;
+
+                float: right;
+
                 margin: 2px auto 0 10px;
+
+                opacity: .5;
             }
         }
 
@@ -132,14 +143,16 @@
                 @extend %flex;
 
                 > div {
-                    flex: 0 0 50%;
-                    padding: 0.825rem 1rem;
                     box-sizing: border-box;
+                    padding: .825rem 1rem;
+
                     border: 1px solid $light-gray;
 
+                    flex: 0 0 50%;
+
                     &:first-of-type {
-                        border-radius: 6px 0 0 6px;
                         border-width: 1px 0 1px 1px;
+                        border-radius: 6px 0 0 6px;
                     }
 
                     &:last-of-type {
@@ -149,6 +162,7 @@
                     h4 {
                         font-size: 1rem;
                         font-weight: 500;
+
                         color: #5a5d70;
                     }
                 }
@@ -156,13 +170,13 @@
                 &.items-4 {
                     > div {
                         &:first-of-type {
-                            border-radius: 6px 0 0 0;
                             border-width: 1px 1px 0 1px;
+                            border-radius: 6px 0 0 0;
                         }
 
                         &:nth-of-type(2) {
+                            border-width: 1px 1px 0 0;
                             border-radius: 0 6px 0 0;
-                            border-width: 1px 1px 0 0px;
                         }
 
                         &:nth-of-type(3) {
@@ -170,8 +184,8 @@
                         }
 
                         &:last-of-type {
-                            border-radius: 0 0 6px 0;
                             border-width: 1px 1px 1px 0;
+                            border-radius: 0 0 6px 0;
                         }
                     }
                 }
@@ -179,12 +193,28 @@
 
             &-blog {
                 &-list {
-                    list-style-type: square;
-                    margin-left: 17px;
                     margin-bottom: 1.5rem;
+                    margin-left: 17px;
+
+                    list-style-type: square;
 
                     li {
-                        margin-bottom: 0.5rem;
+                        margin-bottom: .5rem;
+
+                        .#{$namespace}-new-badge {
+                            font-size: 10px;
+                            line-height: 16px;
+
+                            display: inline-block;
+
+                            padding: 0 5px;
+
+                            vertical-align: 1px;
+
+                            color: #fff;
+                            border-radius: 2px;
+                            background: #724bb7;
+                        }
                     }
                 }
 
@@ -195,34 +225,39 @@
                 &-post {
                     h4 {
                         font-weight: 500;
+
                         margin-bottom: 5px;
                     }
 
                     a {
+                        transition: .25s all linear;
                         text-decoration: none;
-                        transition: 0.25s all linear;
 
-                        &:hover, &:focus {
+                        &:hover,
+                        &:focus {
                             color: $primary;
                             border-bottom: 1px dotted;
                         }
                     }
 
                     p {
-                        margin: 0 0 0.825rem;
+                        margin: 0 0 .825rem;
                     }
                 }
             }
 
             &-widget {
                 &-footer {
-                    padding: 10px 12px;
                     margin: 10px -12px -10px;
+                    padding: 10px 12px;
+
                     border-top: 1px solid $light-gray;
 
-                    a { 
-                        text-decoration: none;
+                    a {
                         padding: 0 10px;
+
+                        text-decoration: none;
+
                         border-right: 1px solid $light-gray;
 
                         &:first-child {
@@ -231,14 +266,15 @@
 
                         span {
                             font-size: 17px;
+
                             vertical-align: -4px;
                         }
-
                     }
                 }
 
                 &-go-pro {
                     font-weight: 500;
+
                     color: $color-1;
                 }
             }

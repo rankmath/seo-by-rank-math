@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection
 Tested up to: 5.6
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.56
+Stable tag: 1.0.56.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,7 +475,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.56 [Jan 8, 2020] =
+= 1.0.56.1 [Jan 8, 2021] =
+* Added: A badge with `New` text will appear on the blog articles in the dashboard's widget
+* Fixed: Some [content analysis tests](https://rankmath.com/kb/score-100-in-tests/) were failing with the Classic Editor plugin
+* Fixed: A PHP notice in the errorlog when an incorrect key was entered in the [Bing Instant Indexing](https://rankmath.com/blog/bing-indexing-api/) API field
+
+= 1.0.56 [Jan 8, 2021] =
 * Added: [HUGE!] **[Instant Indexing for Bing!](https://rankmath.com/blog/bing-indexing-api/)** You can enable it from **WP Dashboard > Rank Math > Dashboard > Instant Indexing Module**
 * Added: [HUGE!] Revamped [Analytics Module](https://rankmath.com/kb/analytics/) functionality. All small (and big) issues like data importing, data mismatch, data importing, etc., are sorted. Please delete the old data and start a fresh data fetch by [following this guide](https://rankmath.com/kb/delete-old-analytics-data/)
 * Added: [NEW!] Improved Y-Axis behavior for all the Analytics graphs when 2 or more filters are selected. You should see much better graphs in the Analytics module

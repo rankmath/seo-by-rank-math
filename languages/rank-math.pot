@@ -215,6 +215,9 @@ msgstr ""
 msgid "Error in fetching."
 msgstr ""
 
+msgid "NEW"
+msgstr ""
+
 msgid "Blog"
 msgstr ""
 
