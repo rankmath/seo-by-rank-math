@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import {
 	AreaChart,
 	Area,
+	YAxis,
 	Tooltip as ChartTooltip,
 	ResponsiveContainer,
 } from 'recharts'
@@ -190,6 +191,9 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 										stroke="#4e8cde"
 										strokeWidth={ 2 }
 										fill="url(#gradient)"
+									/>
+									<YAxis
+										reversed={ false }
 									/>
 								</AreaChart>
 							</ResponsiveContainer>

@@ -817,7 +817,6 @@ export default {
                         "help": __( "Offer availability", "rank-math" ),
                         "classes": "col-4",
                         "options": {
-                            "": "None",
                             "InStock": "In Stock",
                             "SoldOut": "Sold Out",
                             "PreOrder": "Preorder"
@@ -2678,7 +2677,6 @@ export default {
                             "help": __( "Offer availability", "rank-math" ),
                             "classes": "col-4",
                             "options": {
-                                "": "None",
                                 "InStock": "In Stock",
                                 "SoldOut": "Sold Out",
                                 "PreOrder": "Preorder"
@@ -3899,7 +3897,6 @@ export default {
                             "help": __( "Offer availability", "rank-math" ),
                             "classes": "col-4",
                             "options": {
-                                "": "None",
                                 "InStock": "In Stock",
                                 "SoldOut": "Sold Out",
                                 "PreOrder": "Preorder"
@@ -5157,7 +5154,6 @@ export default {
                                 "hide-group"
                             ],
                             "options": {
-                                "": "None",
                                 "InStock": "In Stock",
                                 "SoldOut": "Sold Out",
                                 "PreOrder": "Preorder"
@@ -5436,7 +5432,6 @@ export default {
                                 "hide-group"
                             ],
                             "options": {
-                                "": "None",
                                 "InStock": "In Stock",
                                 "SoldOut": "Sold Out",
                                 "PreOrder": "Preorder"

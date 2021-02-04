@@ -31,9 +31,10 @@ class Product_Edd {
 		$permalink  = get_permalink();
 		$product    = new EDD_Download( $product_id );
 
-		$entity['url']      = $permalink;
-		$entity['name']     = $jsonld->post->post_title;
-		$entity['category'] = Product::get_category( $product_id, 'download_category' );
+		$entity['url']              = $permalink;
+		$entity['name']             = $jsonld->post->post_title;
+		$entity['category']         = Product::get_category( $product_id, 'download_category' );
+		$entity['mainEntityOfPage'] = [ '@id' => $jsonld->parts['canonical'] . '#webpage' ];
 
 		// SKU.
 		if ( $product->get_sku() ) {

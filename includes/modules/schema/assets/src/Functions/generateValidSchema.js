@@ -151,8 +151,10 @@ export function generateValidSchema( json ) {
 
 	// Move type to first.
 	schema = getSchemaFromData( schema, data )
-	const typeProperty = schema.properties.pop()
-	schema.properties.unshift( typeProperty )
+	if ( 'custom' !== metadata.type ) {
+		const typeProperty = schema.properties.pop()
+		schema.properties.unshift( typeProperty )
+	}
 
 	return schema
 }

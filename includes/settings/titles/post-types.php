@@ -274,7 +274,7 @@ if ( $taxonomies ) {
 			'type'    => 'select',
 			'name'    => esc_html__( 'Primary Taxonomy', 'rank-math' ),
 			/* translators: post type name */
-			'desc'    => sprintf( esc_html__( 'Select taxonomy to show in the Breadcrumbs when a single %1$s is being viewed.', 'rank-math' ), $name ),
+			'desc'    => sprintf( esc_html__( 'Choose which taxonomy you want to use with the Primary Term feature. This will also be the taxonomy shown in the Breadcrumbs when a single %1$s is being viewed.', 'rank-math' ), $name ),
 			'options' => $taxonomies,
 			'default' => isset( $primary_taxonomy_hash[ $post_type ] ) ? $primary_taxonomy_hash[ $post_type ] : 'off',
 			'classes' => 'rank-math-advanced-option',

@@ -297,9 +297,7 @@ class Generator extends XML {
 		$output  = $this->newline( '<url>', 1 );
 		$output .= $this->newline( '<loc>' . $this->encode_url_rfc3986( htmlspecialchars( $url['loc'] ) ) . '</loc>', 2 );
 		$output .= empty( $date ) ? '' : $this->newline( '<lastmod>' . htmlspecialchars( $date ) . '</lastmod>', 2 );
-		if ( ! empty( $url['images'] ) ) {
-			$output .= $this->sitemap_images( $url );
-		}
+		$output .= $this->sitemap_images( $url );
 		$output .= $this->newline( '</url>', 1 );
 
 		/**
@@ -318,6 +316,10 @@ class Generator extends XML {
 	 * @return string
 	 */
 	public function sitemap_images( $url ) {
+		if ( empty( $url['images'] ) ) {
+			return '';
+		}
+
 		$output = '';
 		foreach ( $url['images'] as $img ) {
 

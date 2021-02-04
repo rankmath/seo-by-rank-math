@@ -36,7 +36,6 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
     );
 
     public static $classMap = array (
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'MyThemeShop\\Admin\\List_Table' => __DIR__ . '/..' . '/mythemeshop/wordpress-helpers/src/admin/class-list-table.php',
         'MyThemeShop\\Admin\\Page' => __DIR__ . '/..' . '/mythemeshop/wordpress-helpers/src/admin/class-page.php',
         'MyThemeShop\\Database\\Clauses' => __DIR__ . '/..' . '/mythemeshop/wordpress-helpers/src/database/class-clauses.php',
@@ -308,6 +307,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Traits\\Meta' => __DIR__ . '/../..' . '/includes/traits/class-meta.php',
         'RankMath\\Traits\\Shortcode' => __DIR__ . '/../..' . '/includes/traits/class-shortcode.php',
         'RankMath\\Traits\\Wizard' => __DIR__ . '/../..' . '/includes/traits/class-wizard.php',
+        'RankMath\\Update_Email' => __DIR__ . '/../..' . '/includes/class-update-email.php',
         'RankMath\\Updates' => __DIR__ . '/../..' . '/includes/class-updates.php',
         'RankMath\\User' => __DIR__ . '/../..' . '/includes/class-user.php',
         'RankMath\\Version_Control' => __DIR__ . '/../..' . '/includes/modules/version-control/class-version-control.php',

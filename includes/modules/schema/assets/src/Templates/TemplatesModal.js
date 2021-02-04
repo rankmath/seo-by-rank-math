@@ -3,8 +3,9 @@
  */
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
-import { Dashicon, Modal } from '@wordpress/components'
+import { Dashicon, Modal, KeyboardShortcuts } from '@wordpress/components'
 import { withSelect, withDispatch } from '@wordpress/data'
+import { rawShortcut } from '@wordpress/keycodes';
 
 /**
  * Internal dependencies
@@ -25,16 +26,25 @@ const TemplatesModal = ( { isOpen = false, toggleModal } ) => {
 			className="rank-math-modal rank-math-schema-generator rank-math-schema-template-modal"
 			overlayClassName="rank-math-modal-overlay"
 		>
-			<a
-				href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_medium=Schema%20Generator%20Header&utm_campaign=WP"
-				rel="noopener noreferrer"
-				target="_blank"
-				title={ __( 'More Info', 'rank-math' ) }
-				className={ 'rank-math-schema-info' }
+			<KeyboardShortcuts
+				shortcuts={ {
+					[ rawShortcut.ctrl( 'z' ) ]: ( e ) => e.stopImmediatePropagation(),
+					[ rawShortcut.ctrlShift( 'z' ) ]: ( e ) => e.stopImmediatePropagation(),
+					[ rawShortcut.primary( 'z' ) ]: ( e ) => e.stopImmediatePropagation(),
+					[ rawShortcut.primaryShift( 'z' ) ]: ( e ) => e.stopImmediatePropagation(),
+				} }
 			>
-				<Dashicon icon="info" />
-			</a>
-			<TabPanel />
+				<a
+					href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_medium=Schema%20Generator%20Header&utm_campaign=WP"
+					rel="noopener noreferrer"
+					target="_blank"
+					title={ __( 'More Info', 'rank-math' ) }
+					className={ 'rank-math-schema-info' }
+				>
+					<Dashicon icon="info" />
+				</a>
+				<TabPanel />
+			</KeyboardShortcuts>
 		</Modal>
 	)
 }

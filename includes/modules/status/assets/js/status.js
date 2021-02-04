@@ -86,12 +86,5 @@
 
 			return false
 		} )
-
-		$( 'input[name="enable_auto_update"]' ).on( 'change', function() {
-			$( this )
-				.parents( 'tr' )
-				.next( 'tr.rank-math-auto-update-email' )
-				.toggle( 'on' === $( this ).attr( 'value' ) )
-		} )
 	} )
 } )( jQuery )

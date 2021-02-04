@@ -99,7 +99,7 @@ class Posts extends Objects {
 		$pages   = \array_keys( $objects['rows'] );
 		$console = $this->get_analytics_data(
 			[
-				'limit'     => "LIMIT {$offset}, {$per_page}",
+				'limit'     => "LIMIT 0, {$per_page}",
 				'sub_where' => " AND page IN ('" . join( "', '", $pages ) . "')",
 			]
 		);

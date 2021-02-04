@@ -33,7 +33,19 @@ class Rollback_Version {
 	 * @return boolean Whether it is rollback or not.
 	 */
 	public static function is_rollback_version() {
-		return boolval( get_option( self::ROLLBACK_VERSION_OPTION, false ) );
+		$is_rollback = boolval( get_option( self::ROLLBACK_VERSION_OPTION, false ) );
+		if ( ! $is_rollback ) {
+			return false;
+		}
+
+		$current_version = rank_math()->version;
+		$latest_version  = Beta_Optin::get_latest_version();
+		if ( $current_version === $latest_version ) {
+			delete_option( self::ROLLBACK_VERSION_OPTION );
+			return false;
+		}
+
+		return true;
 	}
 
 	/**

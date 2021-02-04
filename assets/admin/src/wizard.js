@@ -57,6 +57,12 @@ import jQuery from 'jquery'
 						}
 					} )
 				} )
+
+				$( '.rank-math-setup-mode.is-free ul li:last-child' ).on( 'click', function( e ) {
+					e.preventDefault();
+					window.open("//rankmath.com/pricing/?utm_source=Plugin&utm_medium=Setup%20Wizard%20Custom%20Mode&utm_campaign=WP");
+					return false;
+				} )
 			},
 
 			import() {

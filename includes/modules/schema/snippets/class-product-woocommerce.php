@@ -48,10 +48,11 @@ class Product_WooCommerce {
 			}
 		}
 
-		$entity['name']        = $jsonld->get_product_title( $product );
-		$entity['description'] = $jsonld->get_product_desc( $product );
-		$entity['sku']         = $product->get_sku() ? $product->get_sku() : '';
-		$entity['category']    = Product::get_category( $product->get_id(), 'product_cat' );
+		$entity['name']             = $jsonld->get_product_title( $product );
+		$entity['description']      = $jsonld->get_product_desc( $product );
+		$entity['sku']              = $product->get_sku() ? $product->get_sku() : '';
+		$entity['category']         = Product::get_category( $product->get_id(), 'product_cat' );
+		$entity['mainEntityOfPage'] = [ '@id' => $jsonld->parts['canonical'] . '#webpage' ];
 
 		$this->set_weight( $product, $entity );
 		$this->set_dimensions( $product, $entity );

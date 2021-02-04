@@ -103,6 +103,8 @@ class Frontend {
 			return $schemas;
 		}
 
+		$jsonld->parts['canonical'] = ! empty( $jsonld->parts['canonical'] ) ? $jsonld->parts['canonical'] : \RankMath\Paper\Paper::get()->get_canonical();
+
 		$schema_types = [];
 		foreach ( $schemas as $id => $schema ) {
 			if ( ! Str::starts_with( 'schema-', $id ) && 'richSnippet' !== $id ) {
@@ -127,42 +129,51 @@ class Frontend {
 	 * @param array  $schemas Array of json-ld data.
 	 */
 	private function connect_properties( &$schema, $id, $jsonld, $schemas ) {
+		if ( isset( $schema['isCustom'] ) ) {
+			unset( $schema['isCustom'] );
+			return;
+		}
+
 		if ( isset( $schema['image'] ) && empty( $schema['image']['url'] ) ) {
 			unset( $schema['image'] );
 		}
 
-		$schema['@id'] = $jsonld->parts['canonical'] . '#' . $id;
-		$type          = \strtolower( $schema['@type'] );
-		$is_event      = Str::contains( 'event', $type );
-		if ( $is_event ) {
-			$jsonld->add_prop( 'publisher', $schema, 'organizer', $schemas );
-		}
+		$jsonld->parts['canonical'] = ! empty( $jsonld->parts['canonical'] ) ? $jsonld->parts['canonical'] : \RankMath\Paper\Paper::get()->get_canonical();
+		$schema['@id']              = $jsonld->parts['canonical'] . '#' . $id;
 
-		$props = [
-			'is_part_of' => [
-				'key'   => 'webpage',
-				'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
-			],
-			'publisher'  => [
-				'key'   => 'publisher',
-				'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
-			],
-			'thumbnail'  => [
-				'key'   => 'image',
-				'value' => ! in_array( $type, [ 'videoobject' ], true ) || isset( $schema['image'] ),
-			],
-			'language'   => [
-				'key'   => 'inLanguage',
-				'value' => ! in_array( $type, [ 'person', 'service', 'restaurant', 'product', 'musicgroup', 'musicalbum', 'jobposting' ], true ),
-			],
-		];
-
-		foreach ( $props as $prop => $data ) {
-			if ( ! $data['value'] ) {
-				continue;
+		$types = array_map( 'strtolower', (array) $schema['@type'] );
+		foreach ( $types as $type ) {
+			$is_event = Str::contains( 'event', $type );
+			if ( $is_event ) {
+				$jsonld->add_prop( 'publisher', $schema, 'organizer', $schemas );
 			}
 
-			$jsonld->add_prop( $prop, $schema, $data['key'], $schemas );
+			$props = [
+				'is_part_of' => [
+					'key'   => 'webpage',
+					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
+				],
+				'publisher'  => [
+					'key'   => 'publisher',
+					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
+				],
+				'thumbnail'  => [
+					'key'   => 'image',
+					'value' => ! in_array( $type, [ 'videoobject' ], true ) || isset( $schema['image'] ),
+				],
+				'language'   => [
+					'key'   => 'inLanguage',
+					'value' => ! in_array( $type, [ 'person', 'service', 'restaurant', 'product', 'musicgroup', 'musicalbum', 'jobposting' ], true ),
+				],
+			];
+
+			foreach ( $props as $prop => $data ) {
+				if ( ! $data['value'] ) {
+					continue;
+				}
+
+				$jsonld->add_prop( $prop, $schema, $data['key'], $schemas );
+			}
 		}
 	}
 

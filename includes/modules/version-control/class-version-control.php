@@ -109,10 +109,17 @@ class Version_Control {
 			return false;
 		}
 
-		// Sanitize input.
 		$new_value = Param::post( 'enable_auto_update' ) === 'on' ? 'on' : 'off';
-
 		Helper::toggle_auto_update_setting( $new_value );
+
+		if ( 'off' === $new_value && Param::post( 'enable_update_notification_email' ) ) {
+			$enable_notifications = Param::post( 'enable_update_notification_email' ) === 'on' ? 'on' : 'off';
+			$settings             = get_option( 'rank-math-options-general', [] );
+
+			$settings['update_notification_email'] = $enable_notifications;
+			rank_math()->settings->set( 'general', 'update_notification_email', 'on' === $enable_notifications ? true : false );
+			update_option( 'rank-math-options-general', $settings );
+		}
 
 		return true;
 	}

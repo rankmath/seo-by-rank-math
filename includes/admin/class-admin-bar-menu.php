@@ -284,7 +284,7 @@ class Admin_Bar_Menu {
 		);
 
 		$is_pillar_content = '';
-		$dashicon_format   = '<span class="dashicons dashicons-%s" style="font-family: dashicons; font-size: 19px;"></span>';
+		$dashicon_format   = '<span class="dashicons dashicons-%s" style="font-family: dashicons; font-size: 19px; line-height: 1.5;"></span>';
 
 		if ( is_singular( Helper::get_accessible_post_types() ) ) {
 			if ( get_post_meta( get_the_ID(), 'rank_math_pillar_content', true ) === 'on' ) {

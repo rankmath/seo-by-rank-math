@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'MyThemeShop\\Admin\\List_Table' => $vendorDir . '/mythemeshop/wordpress-helpers/src/admin/class-list-table.php',
     'MyThemeShop\\Admin\\Page' => $vendorDir . '/mythemeshop/wordpress-helpers/src/admin/class-page.php',
     'MyThemeShop\\Database\\Clauses' => $vendorDir . '/mythemeshop/wordpress-helpers/src/database/class-clauses.php',
@@ -278,6 +277,7 @@ return array(
     'RankMath\\Traits\\Meta' => $baseDir . '/includes/traits/class-meta.php',
     'RankMath\\Traits\\Shortcode' => $baseDir . '/includes/traits/class-shortcode.php',
     'RankMath\\Traits\\Wizard' => $baseDir . '/includes/traits/class-wizard.php',
+    'RankMath\\Update_Email' => $baseDir . '/includes/class-update-email.php',
     'RankMath\\Updates' => $baseDir . '/includes/class-updates.php',
     'RankMath\\User' => $baseDir . '/includes/class-user.php',
     'RankMath\\Version_Control' => $baseDir . '/includes/modules/version-control/class-version-control.php',

@@ -511,8 +511,9 @@ import boxTabs from '@helpers/boxTabs'
 						'<li data-var="%' +
 							this.variable +
 							'%"' +
+							' data-example="' +
 							this.example +
-							'><strong>' +
+							'"><strong>' +
 							this.name +
 							'</strong><span>' +
 							this.description +

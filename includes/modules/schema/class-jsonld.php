@@ -86,6 +86,10 @@ class JsonLD {
 			$current_data = array_pop( $data );
 		}
 		$schema = wp_parse_args( $schema['schema'], $current_data );
+		if ( ! empty( $schema['@type'] ) && in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true ) ) {
+			$schema['@type'] = 'Product';
+		}
+
 		// Merge.
 		$data = array_merge( $data, [ 'schema' => $schema ] );
 		$data = $this->validate_schema( $data );
@@ -152,7 +156,7 @@ class JsonLD {
 
 			$options = defined( 'RANKMATH_DEBUG' ) && RANKMATH_DEBUG ? JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES : JSON_UNESCAPED_SLASHES;
 
-			echo '<script type="application/ld+json" class="rank-math-' . esc_attr( $class ) . '">' . wp_json_encode( $json, $options ) . '</script>' . "\n";
+			echo '<script type="application/ld+json" class="rank-math-' . esc_attr( $class ) . '">' . wp_kses_post( wp_json_encode( $json, $options ) ) . '</script>' . "\n";
 		}
 	}
 
@@ -253,6 +257,11 @@ class JsonLD {
 		foreach ( $schemas as $key => $schema ) {
 			if ( 'metadata' === $key ) {
 				$new_schemas['isPrimary'] = ! empty( $schema['isPrimary'] );
+
+				if ( ! empty( $schema['type'] ) && 'custom' === $schema['type'] ) {
+					$new_schemas['isCustom'] = true;
+				}
+
 				continue;
 			}
 

@@ -52,7 +52,7 @@ class Compatibility implements Wizard_Step {
 					'custom'   => '<div class="rank-math-mode-title">' . sprintf( __( 'Custom Mode %s', 'rank-math' ), '</div><p class="rank-math-mode-description">' . __( 'Select this if you have a custom Rank Math settings file you want to use.', 'rank-math' ) . '</p>' ),
 				],
 				'default' => Helper::get_settings( 'general.setup_mode', 'advanced' ),
-				'classes' => 'rank-math-setup-mode',
+				'classes' => ! defined( 'RANK_MATH_PRO_FILE' ) ? 'rank-math-setup-mode is-free' : 'rank-math-setup-mode',
 				'desc'    => __( '<strong>Note</strong> You can easily switch between modes at any point.', 'rank-math' ),
 			]
 		);

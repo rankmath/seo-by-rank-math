@@ -37,6 +37,13 @@ class Notification_Center {
 	private $should_clear_storage = true;
 
 	/**
+	 * Stores already displayed notice texts to avoid duplication.
+	 *
+	 * @var array
+	 */
+	private $displayed_notifications = [];
+
+	/**
 	 * Internal flag for whether notifications have been retrieved from storage.
 	 *
 	 * @var bool
@@ -107,8 +114,9 @@ class Notification_Center {
 		}
 
 		foreach ( $notifications as $notification ) {
-			if ( $notification->can_display() ) {
+			if ( $notification->can_display() && ! in_array( (string) $notification, $this->displayed_notifications, true ) ) {
 				echo $notification;
+				$this->displayed_notifications[] = (string) $notification;
 			}
 		}
 	}

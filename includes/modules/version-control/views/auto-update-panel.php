@@ -37,6 +37,30 @@ defined( 'ABSPATH' ) || exit;
 		</tbody>
 	</table>
 
+	<div id="control_update_notification_email">
+		<p><?php esc_html_e( 'When auto-updates are turned off, you can enable update notifications, to send an email to the site administrator when an update is available for Rank Math.', 'rank-math' ); ?></p>
+
+		<table class="form-table">
+			<tbody>
+				<tr class="cmb-row cmb-type-switch">
+					<th scope="row"><label><?php esc_html_e( 'Update Notification Email', 'rank-math' ); ?></label></th>
+					<td>
+						<ul class="cmb2-radio-list cmb2-list">
+							<li>
+								<input type="radio" class="cmb2-option" name="enable_update_notification_email" id="enable_update_notification_email1" value="off" <?php checked( ! $update_notification ); ?>>
+								<label for="enable_update_notification_email1"><?php esc_html_e( 'Off', 'rank-math' ); ?></label>
+							</li>
+							<li>
+								<input type="radio" class="cmb2-option" name="enable_update_notification_email" id="enable_update_notification_email2" value="on" <?php checked( $update_notification ); ?>>
+								<label for="enable_update_notification_email2"><?php esc_html_e( 'On', 'rank-math' ); ?></label>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
 	<?php if ( get_option( 'rank_math_rollback_version', false ) ) { ?>
 		<div class="notice notice-alt notice-warning info inline" style="border: none;">
 			<p>

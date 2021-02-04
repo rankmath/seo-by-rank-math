@@ -73,6 +73,40 @@ msgstr ""
 msgid "404 Error: page not found"
 msgstr ""
 
+#. translators: placeholder is the site title.
+msgid "[%s] An update is available for Rank Math"
+msgstr ""
+
+msgid "Hello,"
+msgstr ""
+
+#. translators: placeholder is the site URL.
+msgid "This is an automated email to let you know that there is an update available for the Rank Math SEO plugin installed on: %s"
+msgstr ""
+
+#. translators: placeholder is the new admin page URL.
+msgid "To ensure your site is always on the latest, most up-to-date version of Rank Math - we recommend logging into the admin area to update the plugin as soon as possible: %s"
+msgstr ""
+
+msgid "If you have any questions or experience any issues – our support team is at your disposal:"
+msgstr ""
+
+msgid "https://support.rankmath.com/"
+msgstr ""
+
+msgid "Rank Math Team"
+msgstr ""
+
+msgid "Rank Math Free"
+msgstr ""
+
+msgid "https://rankmath.com/changelog/#free"
+msgstr ""
+
+#. translators: placeholders are the old and new version numbers.
+msgid "%1$s: Old %2$s -> New %3$s | Changelog: %4$s"
+msgstr ""
+
 msgid "Rank Math SEO"
 msgstr ""
 
@@ -239,6 +273,29 @@ msgstr ""
 msgid "You are not authorized to perform this action."
 msgstr ""
 
+#. translators: placeholder is the plugin name.
+msgid "Hey, we noticed you've been using %s for more than two weeks now – that's awesome!"
+msgstr ""
+
+msgctxt "plugin name inside the review notice"
+msgid "Rank Math SEO"
+msgstr ""
+
+msgid "Could you please do us a BIG favor and give it a rating on WordPress.org to help us spread the word and boost our motivation?"
+msgstr ""
+
+msgid "Co-founder of Rank Math"
+msgstr ""
+
+msgid "Yes, you deserve it"
+msgstr ""
+
+msgid "No, maybe later"
+msgstr ""
+
+msgid "I already did"
+msgstr ""
+
 #. translators: placeholder is a wp.org review link
 msgid "If you like Rank Math, please take a minute to rate it on WordPress.org: %s"
 msgstr ""
@@ -246,7 +303,7 @@ msgstr ""
 msgid "Rate Rank Math SEO"
 msgstr ""
 
-msgid "Hey, we noticed you are using Rank Math SEO plugin for more than 2 weeks – <em>that's awesome!</em> <br>Could you please do us a BIG favor and give it a rating on WordPress to help us spread the word and boost our motivation?"
+msgid "Hey, we noticed you've been using Rank Math SEO for more than two weeks now – <em>that's awesome!</em> <br>Could you please do us a BIG favor and give it a rating on WordPress to help us spread the word and boost our motivation?"
 msgstr ""
 
 msgid "I already did. Please don't show this message again."
@@ -3683,11 +3740,10 @@ msgstr ""
 msgid "Automatically add <code>target=\"_blank\"</code> attribute for external links appearing in your posts, pages, and other post types to make them open in a new browser tab or window. The attribute is dynamically applied when the content is displayed, and the stored content is not changed."
 msgstr ""
 
-msgid "Show SEO Score"
+msgid "Show SEO Score to Visitors"
 msgstr ""
 
-#. translators: %s is the shortcode
-msgid "Show the calculated SEO Score as a badge on the front end for selected post types. It can be disabled for specific posts."
+msgid "Proudly display the calculated SEO Score as a badge on the front end. It can be disabled for specific posts in the post editor."
 msgstr ""
 
 msgid "SEO Score Post Types"
@@ -4124,7 +4180,7 @@ msgid "Primary Taxonomy"
 msgstr ""
 
 #. translators: post type name
-msgid "Select taxonomy to show in the Breadcrumbs when a single %1$s is being viewed."
+msgid "Choose which taxonomy you want to use with the Primary Term feature. This will also be the taxonomy shown in the Breadcrumbs when a single %1$s is being viewed."
 msgstr ""
 
 msgid "Thumbnail for Facebook"
@@ -5239,6 +5295,12 @@ msgid "Turn on auto-updates to automatically update to stable versions of Rank M
 msgstr ""
 
 msgid "Auto Update Plugin"
+msgstr ""
+
+msgid "When auto-updates are turned off, you can enable update notifications, to send an email to the site administrator when an update is available for Rank Math."
+msgstr ""
+
+msgid "Update Notification Email"
 msgstr ""
 
 msgid "Rank Math will not auto-update because you have rolled back to a previous version. Update to the latest version manually to make this option work again."

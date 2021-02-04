@@ -115,6 +115,7 @@ class Watcher {
 		// Update post.
 		$id = DB::update_object(
 			[
+				'object_id'      => $post_id,
 				'id'             => $id,
 				'schemas_in_use' => $schemas ? $schemas : '',
 			]

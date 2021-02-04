@@ -8,6 +8,7 @@ import { get, map as mapProperties, isUndefined } from 'lodash'
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
+import { applyFilters } from '@wordpress/hooks'
 import { Button, ButtonGroup, TextControl } from '@wordpress/components'
 
 /**
@@ -58,6 +59,7 @@ const SchemaGroup = ( props ) => {
 	return (
 		<div className={ containerClasses }>
 			<div className="schema-group-or-property schema-group">
+				{ applyFilters( 'rank_math_schema_before_fields', '', property ) }
 				<div className="schema-group-header">
 					{ ( () => {
 						if ( props.isArray ) {
