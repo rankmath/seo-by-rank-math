@@ -207,18 +207,20 @@ class Advanced_Variables extends Author_Variables {
 	 * @return string|null
 	 */
 	public function get_customfield( $name ) {
-		global $post;
-
-		$on_screen = is_singular() || is_admin();
-		$has_post  = is_object( $post ) && isset( $post->ID );
-		if ( Str::is_non_empty( $name ) && $on_screen && $has_post ) {
-			$name = get_post_meta( $post->ID, $name, true );
-			if ( '' !== $name ) {
-				return $name;
-			}
+		if ( Str::is_empty( $name ) ) {
+			return null;
 		}
 
-		return null;
+		global $post;
+		$object    = is_object( $post ) ? $post : $this->args;
+		$has_post  = is_object( $object ) && isset( $object->ID );
+		$on_screen = is_singular() || is_admin() || ! empty( get_query_var( 'sitemap' ) );
+		if ( ! $has_post || ! $on_screen ) {
+			return null;
+		}
+
+		$name = get_post_meta( $object->ID, $name, true );
+		return '' !== $name ? $name : null;
 	}
 
 	/**

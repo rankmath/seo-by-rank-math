@@ -68,7 +68,7 @@ class Auto_Updater {
 	/**
 	 * Check if given version is beta.
 	 *
-	 * @param string $version Version number.
+	 * @param string $item Update object.
 	 * @return boolean
 	 */
 	public function is_beta_update( $item ) {

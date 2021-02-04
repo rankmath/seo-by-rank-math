@@ -136,7 +136,7 @@ class SchemaBuilder extends Component {
 							className="button"
 							onClick={ () => this.props.saveSchema( this.props.id, this.state.data ) }
 						>
-							{ __( 'Save for this Post', 'rank-math' ) }
+							{ 'term' === rankMath.objectType ? __( 'Save for this Term', 'rank-math' ) : __( 'Save for this Post', 'rank-math' ) }
 						</Button>
 					) }
 				</div>

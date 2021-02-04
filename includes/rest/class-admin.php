@@ -227,7 +227,7 @@ class Admin extends WP_REST_Controller {
 
 			// Update old.
 			$db_id      = absint( str_replace( 'schema-', '', $meta_id ) );
-			$prev_value = update_metadata_by_mid( 'post', $db_id, $schema, $meta_key );
+			$prev_value = update_metadata_by_mid( 'post', $db_id, $sanitizer->sanitize( $meta_key, $schema ), $meta_key );
 		}
 
 		do_action( 'rank_math/schema/update', $object_id, $schemas );

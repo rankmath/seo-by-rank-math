@@ -49,6 +49,7 @@ class Common {
 		$this->filter( 'is_protected_meta', 'hide_rank_math_meta', 10, 2 );
 
 		new Auto_Updater();
+		new Update_Email();
 		new Defaults();
 		new Admin_Bar_Menu();
 	}

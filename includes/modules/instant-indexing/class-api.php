@@ -81,7 +81,7 @@ class Api extends Base {
 		);
 		if ( 'ok' === $data['status'] ) {
 			delete_transient( 'rank_math_instant_indexing_bing_daily_quota' );
-			$count = count( $url_input );
+			$count = count( (array) $url_input );
 
 			// Translators: The placeholder is the number of URLs.
 			return $this->response( 'ok', sprintf( _n( 'Successfully submitted %s URL to the Bing URL Submission API.', 'Successfully submitted %s URLs to the Bing URL Submission API.', $count, 'rank-math' ), $count ) );

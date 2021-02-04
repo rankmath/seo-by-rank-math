@@ -84,7 +84,7 @@ class Admin extends Base {
 	 * @param CMB2 $cmb CMB2 instance.
 	 */
 	public function save_schemas( $cmb ) {
-		if ( empty( $cmb->data_to_save['rank-math-schemas'] ) ) {
+		if ( 'post' !== $cmb->object_type || empty( $cmb->data_to_save['rank-math-schemas'] ) ) {
 			return;
 		}
 
@@ -102,8 +102,10 @@ class Admin extends Base {
 
 			// Update old.
 			$db_id      = absint( str_replace( 'schema-', '', $meta_id ) );
-			$prev_value = update_metadata_by_mid( 'post', $db_id, $schema, $meta_key );
+			$prev_value = update_metadata_by_mid( 'post', $db_id, $sanitizer->sanitize( $meta_key, $schema ), $meta_key );
 		}
+
+		do_action( 'rank_math/schema/update', $cmb->object_id, $schemas );
 	}
 
 	/**

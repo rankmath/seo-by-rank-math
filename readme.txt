@@ -1,19 +1,19 @@
-=== Rank Math - SEO Plugin for WordPress ===
+=== Rank Math SEO - Best SEO Plugin for WordPress ===
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
-Tags: seo, sitemap, google search console, schema, redirection
+Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.6
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.56.1
+Stable tag: 1.0.57
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
-Rank Math is a revolutionary WordPress SEO plugin that combines the features of many SEO tools in a single package & helps you multiply your traffic.
+Rank Math SEO is a revolutionary WordPress SEO plugin that combines the features of many SEO tools in a single package & helps you multiply your traffic.
 
 == Description ==
 
-**SEO Plugin For WordPress**
+**Rank Math SEO - Best SEO Plugin for WordPress**
 ★★★★★<br>
 
 **SEO is the most consistent source of traffic for any website.** We created <a href="https://rankmath.com/wordpress/plugin/seo-suite/?utm_source=LP&utm_campaign=WP" target="_blank">**Rank Math, a WordPress SEO plugin**</a>, to help every website owner get access to the SEO tools they need to improve their SEO and attract more traffic to their website.
@@ -475,36 +475,22 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.56.1 [Jan 8, 2021] =
-* Added: A badge with `New` text will appear on the blog articles in the dashboard's widget
-* Fixed: Some [content analysis tests](https://rankmath.com/kb/score-100-in-tests/) were failing with the Classic Editor plugin
-* Fixed: A PHP notice in the errorlog when an incorrect key was entered in the [Bing Instant Indexing](https://rankmath.com/blog/bing-indexing-api/) API field
-
-= 1.0.56 [Jan 8, 2021] =
-* Added: [HUGE!] **[Instant Indexing for Bing!](https://rankmath.com/blog/bing-indexing-api/)** You can enable it from **WP Dashboard > Rank Math > Dashboard > Instant Indexing Module**
-* Added: [HUGE!] Revamped [Analytics Module](https://rankmath.com/kb/analytics/) functionality. All small (and big) issues like data importing, data mismatch, data importing, etc., are sorted. Please delete the old data and start a fresh data fetch by [following this guide](https://rankmath.com/kb/delete-old-analytics-data/)
-* Added: [NEW!] Improved Y-Axis behavior for all the Analytics graphs when 2 or more filters are selected. You should see much better graphs in the Analytics module
-* Added: Special Open Graph tags for the Video, Product & Local Schema types
-* Added: Warning text in the Analytics Settings about GA4 not supported yet. Please follow this [guide to create a Google Analytics property alongside GA4](https://rankmath.com/kb/using-ga4/)
-* Improved: Made [Schema Generator](https://rankmath.com/kb/rich-snippets/) modal's footer sticky, so they are visible all the time. If you have not tried the new [Schema Generator](https://www.youtube.com/watch?v=4DapQQd6ceE), then you must, to get a competitive advantage over your competitors
-* Improved: All the filters are now selected by default in the Analytics graphs to give a better overview
-* Improved: [Rebuild Indexing Tool](https://rankmath.com/kb/rank-math-status-and-tools/) now truncates the flat table before rebuilding it
-* Improved: [Status & Tools](https://rankmath.com/kb/rank-math-status-and-tools/) page now [shows](https://i.rankmath.com/b3hhxx) which Google Account permissions are given to the Analytics Module [reconnection required]
-* Improved: [SEO Analyzer's](https://rankmath.com/tools/seo-analyzer/) Page Size test now counts the compressed size of the rendered page
-* Improved: The [Redirection](https://rankmath.com/kb/setting-up-redirections/) module now prevents adding a duplicate redirection by validating the source URLs
-* Improved: As requested by several users, we changed the Dashboard widget's priority so that the vital SEO stats are seen first
-* Improved: On the Author pages, we now print `content="profile"` instead of `content="content"`
-* Improved: Minified JSON-LD Schema markup output on the frontend
-* Improved: Styling of the preview section of the Schema Content in the dark-colored themes
-* Improved: Sitemaps now honor the forward-slash conditions added to WordPress's permalink settings
-* Updated: List of [Local Business](https://rankmath.com/kb/local-seo/) types supported by Schema.org
-* Fixed: Google Drive connection redirect link was not working in the UpdraftPlus plugin
-* Fixed: Mixed content warning related to Open Graph (http://ogp.me)
-* Fixed: ["Focus keyword used previously"](https://rankmath.com/kb/score-100-in-tests/#first-step-choosing-focus-keywords) test was not working on the new pages or on the page where the keyword was added from the Quick Edit screen
-* Fixed: Notification code was causing errors on some installations
-* Fixed: Auto-Generated description in the Google preview was showing the excerpt text instead of the first paragraph from the content
-* Fixed: SQL error related to `dbDelta` after the plugin activation on some installations
-* Fixed: Remove [`BreadcrumbList` Schema](https://rankmath.com/kb/general-settings/#bread-crumbs) from the embedded Web Stories
-* Fixed: Some Analytics tables were saving the `urlencoded` values in the "page" column
+= 1.0.57 [Feb 8, 2021] =
+* **Improved: The overall [Schema](https://rankmath.com/blog/schema-markup/) output and generation to a great level after consulting top Schema consultants**
+* Added: Undo and Redo now works like a charm inside the [Schema Generator](https://www.youtube.com/watch?v=4DapQQd6ceE) popup
+* Added: Added an option to [send an email when an update](https://rankmath.com/kb/version-control/#update-notification-email) is available for the Rank Math SEO plugin
+* Added: A way to help the users to easily leave a review, with a dismissible notice
+* Improved: The overall speed and security of the plugin
+* Improved: Sitelinks search box [Schema](https://rankmath.com/kb/rich-snippets/) now prints the data only on the homepage as recommended by Google
+* Improved: [WooCommerce Product Schema](https://rankmath.com/blog/woocommerce-seo/) now prints `mainEntityofPage` property in the Schema markup
+* Improved: The [auto-update](https://rankmath.com/kb/version-control/#auto-update) will not be disabled when installing the latest version using the [Rollback feature](https://rankmath.com/kb/version-control/#a-how-to-rollback-rank-math-to-a-previous-version)
+* Improved: The [Bing Indexing API](https://rankmath.com/blog/bing-indexing-api/) notices won't be showing up several times anymore
+* Improved: The [primary category](https://rankmath.com/kb/titles-and-meta/#primary-taxonomy) UI was showing in the Classic Editor, even if the option was disabled
+* Improved: Styling in the [top admin bar](https://rankmath.com/kb/quick-actions/) is improved for the dropdown's options
+* Removed: `None` option from the product's availability dropdown
+* Fixed: `%term_description%` was not working in the preview area of the taxonomy pages (categories & tags). Nothing was impacted on the frontend to the search engines
+* Fixed: On multisite, the Rank Math [SEO tab in the Elementor plugin](https://rankmath.com/blog/elementor-seo/) was not showing unless the plugin was activated network-wide
+* Fixed: A PHP warning with the Bing Instant Indexing module
+* Fixed: Several small issues and improve the overall code of the plugin
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

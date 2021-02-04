@@ -271,7 +271,7 @@ class Post_Variables extends Advanced_Variables {
 	 * @return string
 	 */
 	public function get_seo_title() {
-		if ( is_singular() ) {
+		if ( is_singular() || is_category() || is_tag() || is_tax() ) {
 			return Paper::get()->get_title();
 		}
 
@@ -296,7 +296,7 @@ class Post_Variables extends Advanced_Variables {
 	 * @return string
 	 */
 	public function get_seo_description() {
-		if ( is_singular() ) {
+		if ( is_singular() || is_category() || is_tag() || is_tax() ) {
 			return Paper::get()->get_description();
 		}
 

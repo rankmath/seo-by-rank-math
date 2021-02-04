@@ -34,7 +34,11 @@ class SwapVariables {
 		let token = matched.toLowerCase().slice( 1, -1 )
 
 		if ( [ 'term_description', 'user_description' ].includes( token ) ) {
-			return jQuery( '#description' ).val()
+			return 'undefined' !== typeof tinymce &&
+				tinymce.activeEditor &&
+				'rank_math_description_editor' === tinymce.activeEditor.id
+				? tinymce.activeEditor.getContent()
+				: jQuery( '#description' ).val()
 		}
 
 		if ( token.includes( 'customfield(' ) ) {

@@ -43,10 +43,6 @@
                 }
             ],
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
-            "support": {
-                "issues": "https://github.com/deliciousbrains/wp-background-processing/issues",
-                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.0.2"
-            },
             "time": "2020-07-31T07:00:11+00:00"
         },
         {
@@ -100,10 +96,6 @@
                 "plugin",
                 "wordpress"
             ],
-            "support": {
-                "issues": "https://github.com/CMB2/CMB2/issues",
-                "source": "http://wordpress.org/support/plugin/cmb2"
-            },
             "time": "2020-01-21T17:49:50+00:00"
         },
         {
@@ -162,30 +154,20 @@
                 "issues": "https://github.com/donatj/PhpUserAgent/issues",
                 "source": "https://github.com/donatj/PhpUserAgent/tree/v1.2.0"
             },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/donatj/15",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/donatj",
-                    "type": "github"
-                }
-            ],
             "time": "2020-12-29T05:36:08+00:00"
         },
         {
             "name": "mythemeshop/wordpress-helpers",
-            "version": "1.1.6",
+            "version": "1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MyThemeShopTeam/wordpress-helpers.git",
-                "reference": "e0c30f4da57d4a1997f517b1e72b5d519d04c643"
+                "reference": "12d11a823828a16c03c3c67a58bd21d151f327ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/e0c30f4da57d4a1997f517b1e72b5d519d04c643",
-                "reference": "e0c30f4da57d4a1997f517b1e72b5d519d04c643",
+                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/12d11a823828a16c03c3c67a58bd21d151f327ba",
+                "reference": "12d11a823828a16c03c3c67a58bd21d151f327ba",
                 "shasum": ""
             },
             "require": {
@@ -211,11 +193,7 @@
                 }
             ],
             "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
-            "support": {
-                "issues": "https://github.com/MyThemeShopTeam/wordpress-helpers/issues",
-                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/1.1.6"
-            },
-            "time": "2021-01-06T15:09:43+00:00"
+            "time": "2021-01-18T23:42:58+00:00"
         },
         {
             "name": "woocommerce/action-scheduler",
@@ -250,10 +228,6 @@
             ],
             "description": "Action Scheduler for WordPress and WooCommerce",
             "homepage": "https://actionscheduler.org/",
-            "support": {
-                "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/master"
-            },
             "time": "2020-05-12T16:22:33+00:00"
         }
     ],
@@ -264,6 +238,5 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "platform-dev": []
 }

@@ -8,7 +8,7 @@ class PrimaryTerm {
 	 * Class constructor
 	 */
 	constructor() {
-		if ( 'post' !== rankMath.objectType ) {
+		if ( 'post' !== rankMath.objectType || false === rankMath.assessor.primaryTaxonomy ) {
 			return
 		}
 

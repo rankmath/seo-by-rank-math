@@ -24,24 +24,28 @@ class DB {
 	/**
 	 * Get query builder object.
 	 *
+	 * @param string $table Meta table name.
+	 *
 	 * @return Query_Builder
 	 */
-	private static function table() {
-		return Database::table( 'postmeta' );
+	private static function table( $table = 'postmeta' ) {
+		return Database::table( $table );
 	}
 
 	/**
 	 * Get all schemas.
 	 *
-	 * @param int $post_id Post id.
+	 * @param int    $object_id  Object ID.
+	 * @param string $table      Meta table name.
 	 *
 	 * @return array
 	 */
-	public static function get_schemas( $post_id ) {
-		$data = self::table()
+	public static function get_schemas( $object_id, $table = 'postmeta' ) {
+		$key  = 'termmeta' === $table ? 'term_id' : 'post_id';
+		$data = self::table( $table )
 			->select( 'meta_id' )
 			->select( 'meta_value' )
-			->where( 'post_id', $post_id )
+			->where( $key, $object_id )
 			->whereLike( 'meta_key', 'rank_math_schema', '' )
 			->get();
 
