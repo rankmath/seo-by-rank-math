@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 5.6
+Tested up to: 5.6.1
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.57
+Stable tag: 1.0.57.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,7 +475,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.57 [Feb 8, 2021] =
+= 1.0.57.1 [Feb 5, 2021] =
+* Fixed: FAQ Schema markup showing error if HTML tags are used in the answer area
+
+= 1.0.57 [Feb 3, 2021] =
 * **Improved: The overall [Schema](https://rankmath.com/blog/schema-markup/) output and generation to a great level after consulting top Schema consultants**
 * Added: Undo and Redo now works like a charm inside the [Schema Generator](https://www.youtube.com/watch?v=4DapQQd6ceE) popup
 * Added: Added an option to [send an email when an update](https://rankmath.com/kb/version-control/#update-notification-email) is available for the Rank Math SEO plugin
