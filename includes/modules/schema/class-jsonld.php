@@ -156,7 +156,7 @@ class JsonLD {
 
 			$options = defined( 'RANKMATH_DEBUG' ) && RANKMATH_DEBUG ? JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES : JSON_UNESCAPED_SLASHES;
 
-			echo '<script type="application/ld+json" class="rank-math-' . esc_attr( $class ) . '">' . wp_kses_post( wp_json_encode( $json, $options ) ) . '</script>' . "\n";
+			echo '<script type="application/ld+json" class="rank-math-' . esc_attr( $class ) . '">' . wp_json_encode( wp_kses_post_deep( $json ), $options ) . '</script>' . "\n";
 		}
 	}
 

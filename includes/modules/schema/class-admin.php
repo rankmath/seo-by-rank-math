@@ -88,21 +88,20 @@ class Admin extends Base {
 			return;
 		}
 
-		$sanitizer = Sanitize::get();
-		$schemas   = \json_decode( stripslashes( $cmb->data_to_save['rank-math-schemas'] ), true );
-
+		$schemas = \json_decode( stripslashes( $cmb->data_to_save['rank-math-schemas'] ), true );
 		foreach ( $schemas as $meta_id => $schema ) {
 			$meta_key = 'rank_math_schema_' . $schema['@type'];
+			$schema   = wp_kses_post_deep( $schema );
 
 			// Add new.
 			if ( Str::starts_with( 'new-', $meta_id ) ) {
-				$new_ids[ $meta_id ] = add_post_meta( $cmb->object_id, $meta_key, $sanitizer->sanitize( $meta_key, $schema ) );
+				$new_ids[ $meta_id ] = add_post_meta( $cmb->object_id, $meta_key, $schema );
 				continue;
 			}
 
 			// Update old.
 			$db_id      = absint( str_replace( 'schema-', '', $meta_id ) );
-			$prev_value = update_metadata_by_mid( 'post', $db_id, $sanitizer->sanitize( $meta_key, $schema ), $meta_key );
+			$prev_value = update_metadata_by_mid( 'post', $db_id, $schema, $meta_key );
 		}
 
 		do_action( 'rank_math/schema/update', $cmb->object_id, $schemas );

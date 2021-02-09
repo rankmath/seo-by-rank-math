@@ -297,7 +297,7 @@ class Snippet_Shortcode {
 	public function output_field( $title, $value ) {
 		?>
 		<p>
-			<strong><?php echo $title; // phpcs:ignore ?>: </strong>
+			<strong><?php echo esc_html( $title ); // phpcs:ignore ?>: </strong>
 			<?php echo is_array( $value ) ? implode( ', ', $value ) : wp_kses_post( $value ); // phpcs:ignore ?>
 		</p>
 		<?php
@@ -314,7 +314,7 @@ class Snippet_Shortcode {
 		$title = isset( $this->schema['title'] ) ? $this->schema['title'] : $this->schema['name'];
 		$title = $title && '' !== $title ? $title : Helper::replace_vars( '%title%', $this->post );
 		?>
-		<h5 class="rank-math-title"><?php echo $title; // phpcs:ignore ?></h5>
+		<h5 class="rank-math-title"><?php echo esc_html( $title ); // phpcs:ignore ?></h5>
 		<?php
 	}
 
@@ -330,7 +330,7 @@ class Snippet_Shortcode {
 		}
 		$description = $description && '' !== $description ? $description : ( $excerpt ? $excerpt : Helper::get_post_meta( 'description', $this->post->ID ) );
 		?>
-		<p><?php echo do_shortcode( $description ); ?></p>
+		<p><?php echo wp_kses_post( do_shortcode( $description ) ); ?></p>
 		<?php
 	}
 

@@ -213,21 +213,20 @@ class Admin extends WP_REST_Controller {
 	public function update_schemas( WP_REST_Request $request ) {
 		$object_id = $request->get_param( 'objectID' );
 		$schemas   = $request->get_param( 'schemas' );
-
 		$new_ids   = [];
-		$sanitizer = Sanitize::get();
 		foreach ( $schemas as $meta_id => $schema ) {
 			$meta_key = 'rank_math_schema_' . $schema['@type'];
+			$schema   = wp_kses_post_deep( $schema );
 
 			// Add new.
 			if ( Str::starts_with( 'new-', $meta_id ) ) {
-				$new_ids[ $meta_id ] = add_post_meta( $object_id, $meta_key, $sanitizer->sanitize( $meta_key, $schema ) );
+				$new_ids[ $meta_id ] = add_post_meta( $object_id, $meta_key, $schema );
 				continue;
 			}
 
 			// Update old.
 			$db_id      = absint( str_replace( 'schema-', '', $meta_id ) );
-			$prev_value = update_metadata_by_mid( 'post', $db_id, $sanitizer->sanitize( $meta_key, $schema ), $meta_key );
+			$prev_value = update_metadata_by_mid( 'post', $db_id, $schema, $meta_key );
 		}
 
 		do_action( 'rank_math/schema/update', $object_id, $schemas );
