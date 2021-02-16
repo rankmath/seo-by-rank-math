@@ -40,14 +40,11 @@ abstract class XML {
 	 * @param array $headers Array of headers.
 	 */
 	protected function send_headers( $headers = [] ) {
-		$expires  = gmdate( 'D, d M Y H:i:s', ( time() + YEAR_IN_SECONDS ) );
 		$defaults = [
 			'X-Robots-Tag'  => 'noindex',
 			'Content-Type'  => 'text/xml; charset=' . $this->get_output_charset(),
 			'Pragma'        => 'public',
-			'Cache-Control' => 'maxage=' . YEAR_IN_SECONDS,
-			'Expires'       => $expires . ' GMT',
-			'Etag'          => md5( $expires . $this->type ),
+			'Expires'       => 0,
 		];
 
 		$headers = wp_parse_args( $headers, $defaults );
