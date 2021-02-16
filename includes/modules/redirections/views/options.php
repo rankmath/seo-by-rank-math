@@ -25,7 +25,7 @@ $cmb->add_field(
 		'id'      => 'redirections_fallback',
 		'type'    => 'radio',
 		'name'    => esc_html__( 'Fallback Behavior', 'rank-math' ),
-		'desc'    => esc_html__( 'If nothing similar is found, this behavior will be applied.', 'rank-math' ) . ' ' . esc_html__( 'Note, if nothing is not found but the requested URL ends with "/login", "/admin", or "/dashboard", WordPress will automatically redirect to these locations within the WordPress admin area.', 'rank-math' ),
+		'desc'    => esc_html__( 'If nothing similar is found, this behavior will be applied.', 'rank-math' ) . ' ' . esc_html__( 'Note, if nothing is found but the requested URL ends with "/login", "/admin", or "/dashboard", WordPress will automatically redirect to these locations within the WordPress admin area.', 'rank-math' ),
 		'options' => [
 			'default'  => esc_html__( 'Default 404', 'rank-math' ),
 			'homepage' => esc_html__( 'Redirect to Homepage', 'rank-math' ),
