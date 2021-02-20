@@ -43,20 +43,24 @@
                 }
             ],
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
+            "support": {
+                "issues": "https://github.com/deliciousbrains/wp-background-processing/issues",
+                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.0.2"
+            },
             "time": "2020-07-31T07:00:11+00:00"
         },
         {
             "name": "cmb2/cmb2",
-            "version": "v2.7.0",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CMB2/CMB2.git",
-                "reference": "438c26dda7ac110d0741448d65614b3ec6379034"
+                "reference": "8391c9ab88a564ca7c7b380e20152ca8554d5166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/438c26dda7ac110d0741448d65614b3ec6379034",
-                "reference": "438c26dda7ac110d0741448d65614b3ec6379034",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/8391c9ab88a564ca7c7b380e20152ca8554d5166",
+                "reference": "8391c9ab88a564ca7c7b380e20152ca8554d5166",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +100,11 @@
                 "plugin",
                 "wordpress"
             ],
-            "time": "2020-01-21T17:49:50+00:00"
+            "support": {
+                "issues": "https://github.com/CMB2/CMB2/issues",
+                "source": "http://wordpress.org/support/plugin/cmb2"
+            },
+            "time": "2021-02-08T16:14:33+00:00"
         },
         {
             "name": "donatj/phpuseragentparser",
@@ -154,6 +162,16 @@
                 "issues": "https://github.com/donatj/PhpUserAgent/issues",
                 "source": "https://github.com/donatj/PhpUserAgent/tree/v1.2.0"
             },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/donatj/15",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/donatj",
+                    "type": "github"
+                }
+            ],
             "time": "2020-12-29T05:36:08+00:00"
         },
         {
@@ -193,6 +211,10 @@
                 }
             ],
             "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
+            "support": {
+                "issues": "https://github.com/MyThemeShopTeam/wordpress-helpers/issues",
+                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/1.1.7"
+            },
             "time": "2021-01-18T23:42:58+00:00"
         },
         {
@@ -228,6 +250,10 @@
             ],
             "description": "Action Scheduler for WordPress and WooCommerce",
             "homepage": "https://actionscheduler.org/",
+            "support": {
+                "issues": "https://github.com/woocommerce/action-scheduler/issues",
+                "source": "https://github.com/woocommerce/action-scheduler/tree/master"
+            },
             "time": "2020-05-12T16:22:33+00:00"
         }
     ],
@@ -238,5 +264,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

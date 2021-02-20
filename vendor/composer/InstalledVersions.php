@@ -1,15 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
-
-
-
 namespace Composer;
 
 use Composer\Semver\VersionParser;
@@ -29,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '3903e4484de8741e82433eb67ee580aea97c9015',
+    'reference' => 'aa6c4524d0a8b679d3abf85e664a71fe4a0108df',
     'name' => 'rankmath/seo-by-rank-math',
   ),
   'versions' => 
@@ -45,12 +35,12 @@ private static $installed = array (
     ),
     'cmb2/cmb2' => 
     array (
-      'pretty_version' => 'v2.7.0',
-      'version' => '2.7.0.0',
+      'pretty_version' => 'v2.8.0',
+      'version' => '2.8.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '438c26dda7ac110d0741448d65614b3ec6379034',
+      'reference' => '8391c9ab88a564ca7c7b380e20152ca8554d5166',
     ),
     'donatj/phpuseragentparser' => 
     array (
@@ -63,12 +53,12 @@ private static $installed = array (
     ),
     'mythemeshop/wordpress-helpers' => 
     array (
-      'pretty_version' => '1.1.6',
-      'version' => '1.1.6.0',
+      'pretty_version' => '1.1.7',
+      'version' => '1.1.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e0c30f4da57d4a1997f517b1e72b5d519d04c643',
+      'reference' => '12d11a823828a16c03c3c67a58bd21d151f327ba',
     ),
     'rankmath/seo-by-rank-math' => 
     array (
@@ -77,7 +67,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '3903e4484de8741e82433eb67ee580aea97c9015',
+      'reference' => 'aa6c4524d0a8b679d3abf85e664a71fe4a0108df',
     ),
     'woocommerce/action-scheduler' => 
     array (

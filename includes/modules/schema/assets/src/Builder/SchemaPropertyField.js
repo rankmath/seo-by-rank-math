@@ -2,7 +2,7 @@
  * External dependencies
  */
 import PropTypes from 'prop-types'
-import { has, isArray, includes, remove, uniqueId } from 'lodash'
+import { has, isArray, includes, remove, uniqueId, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -15,6 +15,7 @@ import {
 	ToggleControl,
 	CheckboxControl,
 } from '@wordpress/components'
+import { RawHTML } from '@wordpress/element'
 
 /**
  * Internal dependencies
@@ -39,6 +40,10 @@ const SchemaPropertyField = ( {
 	options = {},
 	...rest
 } ) => {
+	if ( ! isUndefined( rest.help ) ) {
+		rest.help = RawHTML( { children: rest.help } )
+	}
+
 	if ( 'radio' === type ) {
 		return (
 			<RadioControl

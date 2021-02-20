@@ -77,7 +77,9 @@ class GTag {
 			return;
 		}
 
-		// for AMP and non-AMP.
+		$this->action( 'wp_head', 'print_tracking_opt_out', 0 ); // For non-AMP and AMP.
+		$this->action( 'web_stories_story_head', 'print_tracking_opt_out', 0 ); // For Web Stories plugin.
+
 		if ( $this->is_amp() ) {
 			$this->action( 'amp_print_analytics', 'print_amp_gtag' ); // For all AMP modes.
 			$this->action( 'wp_footer', 'print_amp_gtag', 20 ); // For AMP Standard and Transitional.
@@ -320,5 +322,26 @@ class GTag {
 		}
 
 		return $options;
+	}
+
+	/**
+	 * Print the user tracking opt-out code
+	 *
+	 * This script opts out of all Google Analytics tracking, for all measurement IDs, regardless of implementation.
+	 *
+	 * @link https://developers.google.com/analytics/devguides/collection/analyticsjs/user-opt-out
+	 */
+	public function print_tracking_opt_out() {
+		if ( ! $this->is_tracking_disabled() ) {
+			return;
+		}
+
+		if ( $this->is_amp() ) :
+			?>
+		<script type="application/ld+json" id="__gaOptOutExtension"></script>
+		<?php else : ?>
+		<script type="text/javascript">window['ga-disable-<?php echo esc_js( $this->get( 'property_id' ) ); ?>'] = true;</script>
+			<?php
+		endif;
 	}
 }

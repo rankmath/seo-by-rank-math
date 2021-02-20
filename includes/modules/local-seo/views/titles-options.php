@@ -111,6 +111,21 @@ $cmb->add_field(
 	]
 );
 
+$cmb->add_field(
+	[
+		'id'      => 'opening_hours_format',
+		'type'    => 'switch',
+		'name'    => esc_html__( 'Opening Hours Format', 'rank-math' ),
+		'options' => [
+			'off' => '24:00',
+			'on'  => '12:00',
+		],
+		'desc'    => esc_html__( 'Time format used in the contact shortcode.', 'rank-math' ),
+		'default' => 'off',
+		'dep'     => $company,
+	]
+);
+
 $opening_hours = $cmb->add_field(
 	[
 		'id'      => 'opening_hours',
@@ -146,24 +161,10 @@ $cmb->add_group_field(
 $cmb->add_group_field(
 	$opening_hours,
 	[
-		'id'         => 'time',
-		'type'       => 'text',
-		'attributes' => [ 'placeholder' => esc_html__( 'e.g. 09:00-17:00', 'rank-math' ) ],
-	]
-);
-
-$cmb->add_field(
-	[
-		'id'      => 'opening_hours_format',
-		'type'    => 'switch',
-		'name'    => esc_html__( 'Opening Hours Format', 'rank-math' ),
-		'options' => [
-			'off' => '24:00',
-			'on'  => '12:00',
-		],
-		'desc'    => esc_html__( 'Time format used in the contact shortcode.', 'rank-math' ),
-		'default' => 'off',
-		'dep'     => $company,
+		'id'          => 'time',
+		'type'        => 'text',
+		'attributes'  => [ 'placeholder' => esc_html__( 'e.g. 09:00-17:00', 'rank-math' ) ],
+		'time_format' => 'H:i',
 	]
 );
 

@@ -20,10 +20,8 @@ function rank_math_1_0_49_enable_new_analytics_module() {
 	$active_modules = get_option( 'rank_math_modules', [] );
 	if ( is_array( $active_modules ) && in_array( 'search-console', $active_modules, true ) ) {
 		Helper::update_modules( [ 'analytics' => 'on' ] );
-		\RankMath\Analytics\Data_Fetcher::get()->flat_posts();
 		rank_math_1_0_49_reconnect_sc_notification();
 	}
-	( new \RankMath\Analytics\Installer() )->install( false );
 }
 
 /**

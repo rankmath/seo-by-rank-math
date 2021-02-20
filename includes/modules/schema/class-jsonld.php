@@ -248,11 +248,14 @@ class JsonLD {
 	/**
 	 * Replace variable.
 	 *
-	 * @param  array $schemas Schema to replace.
+	 * @param array  $schemas Schema to replace.
+	 * @param object $object  Current Object.
+	 *
 	 * @return array
 	 */
-	public function replace_variables( $schemas ) {
+	public function replace_variables( $schemas, $object = [] ) {
 		$new_schemas = [];
+		$object      = empty( $object ) ? get_queried_object() : $object;
 
 		foreach ( $schemas as $key => $schema ) {
 			if ( 'metadata' === $key ) {
@@ -266,11 +269,11 @@ class JsonLD {
 			}
 
 			if ( is_array( $schema ) ) {
-				$new_schemas[ $key ] = $this->replace_variables( $schema );
+				$new_schemas[ $key ] = $this->replace_variables( $schema, $object );
 				continue;
 			}
 
-			$new_schemas[ $key ] = Str::contains( '%', $schema ) ? Helper::replace_vars( $schema, get_queried_object() ) : $schema;
+			$new_schemas[ $key ] = Str::contains( '%', $schema ) ? Helper::replace_seo_fields( $schema, $object ) : $schema;
 
 			if ( '' === $new_schemas[ $key ] ) {
 				unset( $new_schemas[ $key ] );

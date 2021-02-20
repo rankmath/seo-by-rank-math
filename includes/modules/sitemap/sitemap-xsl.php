@@ -145,7 +145,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 
 						<div id="content">
 							<p class="expl">
-								This KML file contains <xsl:value-of select="count(kml:kml/kml:Document/kml:Placemark)"/> Locations.
+								This KML file contains <xsl:value-of select="count(kml:kml/kml:Document/kml:Folder/kml:Placemark)"/> Locations.
 							</p>
 							<p class="expl">
 								<?php
@@ -169,7 +169,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 								<tbody>
 									<xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
 									<xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
-									<xsl:for-each select="kml:kml/kml:Document/kml:Placemark">
+									<xsl:for-each select="kml:kml/kml:Document/kml:Folder/kml:Placemark">
 										<tr>
 											<td>
 												<xsl:variable name="itemURL">

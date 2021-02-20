@@ -3,11 +3,11 @@ import { get } from 'lodash'
 const colors = {
 	pageviews: '#10AC84',
 	impressions: '#4e8cde',
-	clicks: '#EE5353',
-	keywords: '#FF9F43',
+	keywords: '#ed5e5e',
+	clicks: '#FF9F43',
 	ctr: '#F368E0',
-	position: '#54A0FF',
-	adsense: '#54A0FF',
+	position: '#0bbde3',
+	adsense: '#00A3A4',
 }
 
 export default ( id ) => {
