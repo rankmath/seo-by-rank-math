@@ -189,7 +189,7 @@ class Database_Tools {
 	 */
 	public function recreate_tables() {
 		// Base.
-		Installer::create_tables();
+		Installer::create_tables( get_option( 'rank_math_modules', [] ) );
 
 		// ActionScheduler.
 		$this->maybe_recreate_actionscheduler_tables();
@@ -312,7 +312,7 @@ class Database_Tools {
 				'confirm_text' => __( 'Are you sure you want to delete the 404 log? This action is irreversible.', 'rank-math' ),
 				'button_text'  => __( 'Clear 404 Log', 'rank-math' ),
 			],
-			'recreate_tables' => [
+			'recreate_tables'     => [
 				'title'       => __( 'Re-create Missing Database Tables', 'rank-math' ),
 				/* translators: 1. Review Schema documentation link */
 				'description' => __( 'Check if required tables exist and create them if not.', 'rank-math' ),

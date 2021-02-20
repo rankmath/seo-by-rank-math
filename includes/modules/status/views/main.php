@@ -12,6 +12,8 @@
 use RankMath\Helper;
 use MyThemeShop\Helpers\Param;
 
+defined( 'ABSPATH' ) || exit;
+
 $default_tab = apply_filters( 'rank_math/tools/default_tab', 'status' );
 $module      = Helper::get_module( 'status' );
 $current     = Param::get( 'view', $default_tab );

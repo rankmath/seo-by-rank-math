@@ -69,6 +69,8 @@
 
 	.cmb-row:not(:last-of-type),
 	.cmb-repeatable-group:not(:last-of-type) {
+		border-bottom: 1px solid $light-gray;
+
 		@media (max-width: $mobile-break) {
 			border-bottom: 0;
 		}

@@ -8,5 +8,7 @@
 
 use RankMath\Admin\Serp_Preview;
 
+defined( 'ABSPATH' ) || exit;
+
 $checklist = new Serp_Preview();
 $checklist->display();

@@ -28,7 +28,7 @@ class Commands extends WP_CLI_Command {
 	 *
 	 * @param array $args Arguments passed.
 	 */
-	public function sitemap_generate( $args ) {
+	public static function sitemap_generate( $args ) {
 		$sitemap = Helper::get_module( 'sitemap' );
 		if ( false === $sitemap ) {
 			WP_CLI::error( 'Sitemap module not active.' );

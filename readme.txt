@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.6.1
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.57.1
+Stable tag: 1.0.58
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,25 +475,17 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.57.1 [Feb 5, 2021] =
-* Fixed: FAQ Schema markup showing error if HTML tags are used in the answer area
-
-= 1.0.57 [Feb 3, 2021] =
-* **Improved: The overall [Schema](https://rankmath.com/blog/schema-markup/) output and generation to a great level after consulting top Schema consultants**
-* Added: Undo and Redo now works like a charm inside the [Schema Generator](https://www.youtube.com/watch?v=4DapQQd6ceE) popup
-* Added: Added an option to [send an email when an update](https://rankmath.com/kb/version-control/#update-notification-email) is available for the Rank Math SEO plugin
-* Added: A way to help the users to easily leave a review, with a dismissible notice
+= 1.0.58 [Feb 17, 2021] =
+* Improved: The [Local SEO](https://rankmath.com/kb/local-seo/) is much better with the Rank Math SEO plugin than ever
+* Improved: Query related to page search in the About & Contact page options of [local SEO settings](https://rankmath.com/kb/titles-and-meta/#local-seo)
+* Improved: Create tables related to different modules only if those modules are activated. This improves the speed of the plugin further
+* Improved: Updated CMB2 library to keep it updated to the latest version
 * Improved: The overall speed and security of the plugin
-* Improved: Sitelinks search box [Schema](https://rankmath.com/kb/rich-snippets/) now prints the data only on the homepage as recommended by Google
-* Improved: [WooCommerce Product Schema](https://rankmath.com/blog/woocommerce-seo/) now prints `mainEntityofPage` property in the Schema markup
-* Improved: The [auto-update](https://rankmath.com/kb/version-control/#auto-update) will not be disabled when installing the latest version using the [Rollback feature](https://rankmath.com/kb/version-control/#a-how-to-rollback-rank-math-to-a-previous-version)
-* Improved: The [Bing Indexing API](https://rankmath.com/blog/bing-indexing-api/) notices won't be showing up several times anymore
-* Improved: The [primary category](https://rankmath.com/kb/titles-and-meta/#primary-taxonomy) UI was showing in the Classic Editor, even if the option was disabled
-* Improved: Styling in the [top admin bar](https://rankmath.com/kb/quick-actions/) is improved for the dropdown's options
-* Removed: `None` option from the product's availability dropdown
-* Fixed: `%term_description%` was not working in the preview area of the taxonomy pages (categories & tags). Nothing was impacted on the frontend to the search engines
-* Fixed: On multisite, the Rank Math [SEO tab in the Elementor plugin](https://rankmath.com/blog/elementor-seo/) was not showing unless the plugin was activated network-wide
-* Fixed: A PHP warning with the Bing Instant Indexing module
-* Fixed: Several small issues and improve the overall code of the plugin
+* Fixed: ["Exclude Logged in Users"](https://rankmath.com/kb/connect-your-google-account/#4-connect-google-analytics-with-rank-math) option was not working in the [Analytics module](https://rankmath.com/kb/analytics/)
+* Fixed: Missing telephone & image data for the Attorney [Schema](https://rankmath.com/blog/schema-markup/)
+* Fixed: Few Business types in the Local Schema were showing invalid `hasMap` & `geo` attributes
+* Fixed: A PHP error related to analytics table after opening the analytics settings
+* Fixed: A fatal error happening on some installations when the site was [updating from Rank Math](https://rankmath.com/kb/update-rank-math-manually/) v1.0.48 or less
+* Fixed: CLI command to generate the [Sitemap](https://rankmath.com/kb/submit-sitemap-to-google/) in PHP 8 was not working
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

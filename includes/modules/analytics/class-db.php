@@ -123,33 +123,18 @@ class DB {
 			->selectCount( 'DISTINCT(created)', 'days' )
 			->getVar();
 
-		$rows = self::get_total_rows();
-		$size = $wpdb->get_var( 'SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema="' . $wpdb->dbname . '" AND table_name IN ( ' . '"' . $wpdb->prefix . 'rank_math_analytics_gsc", "' . $wpdb->prefix . 'rank_math_analytics_ga", "' . $wpdb->prefix . 'rank_math_analytics_adsense"' . ' )' ); // phpcs:ignore
-		$data = compact( 'days', 'rows', 'size' );
-
-		set_transient( $key, $data, DAY_IN_SECONDS );
-
-		return $data;
-	}
-
-	public static function get_total_rows() {
 		$rows = self::analytics()
 			->selectCount( 'id' )
 			->getVar();
 
-		if ( Api::get()->is_analytics_connected() ) {
-			$rows += self::table( 'rank_math_analytics_ga' )
-				->selectCount( 'id' )
-				->getVar();
-		}
+		$size = $wpdb->get_var( 'SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema="' . $wpdb->dbname . '" AND (table_name="' . $wpdb->prefix . 'rank_math_analytics_gsc")' ); // phpcs:ignore
+		$data = compact( 'days', 'rows', 'size' );
 
-		if ( method_exists( '\RankMathPro\Google\Adsense', 'is_adsense_connected' ) && \RankMathPro\Google\Adsense::is_adsense_connected() ) {
-			$rows += self::table( 'rank_math_analytics_adsense' )
-				->selectCount( 'id' )
-				->getVar();
-		}
+		$data = apply_filters( 'rank_math/analytics/analytics_tables_info', $data );
 
-		return $rows;
+		set_transient( $key, $data, DAY_IN_SECONDS );
+
+		return $data;
 	}
 
 	/**

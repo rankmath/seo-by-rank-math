@@ -4774,6 +4774,12 @@ msgstr ""
 msgid "Format used when the address is displayed using the <code>[rank_math_contact_info]</code> shortcode.<br><strong>Available Tags: {address}, {locality}, {region}, {postalcode}, {country}, {gps}</strong>"
 msgstr ""
 
+msgid "Opening Hours Format"
+msgstr ""
+
+msgid "Time format used in the contact shortcode."
+msgstr ""
+
 msgid "Select opening hours. You can add multiple sets if you have different opening or closing hours on some days or if you have a mid-day break. Times are specified using 24:00 time."
 msgstr ""
 
@@ -4802,12 +4808,6 @@ msgid "Sunday"
 msgstr ""
 
 msgid "e.g. 09:00-17:00"
-msgstr ""
-
-msgid "Opening Hours Format"
-msgstr ""
-
-msgid "Time format used in the contact shortcode."
 msgstr ""
 
 msgid "Phone Number"

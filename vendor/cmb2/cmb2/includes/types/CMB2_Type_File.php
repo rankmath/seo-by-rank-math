@@ -72,7 +72,7 @@ class CMB2_Type_File extends CMB2_Type_File_Base {
 		$this->args['id'] = $parts[0];
 
 		$output .= sprintf(
-			'<input class="cmb2-upload-button button button-secondary" type="button" value="%1$s" />',
+			'<input class="cmb2-upload-button button-secondary" type="button" value="%1$s" />',
 			esc_attr( $this->_text( 'add_upload_file_text', esc_html__( 'Add or Upload File', 'cmb2' ) ) )
 		);
 
