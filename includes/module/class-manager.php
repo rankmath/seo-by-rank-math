@@ -216,7 +216,7 @@ class Manager {
 	public function setup_internals( $modules ) {
 
 		$modules['robots-txt'] = [
-			'title' => esc_html__( 'Robotx Txt', 'rank-math' ),
+			'title' => esc_html__( 'Robots Txt', 'rank-math' ),
 			'only'  => 'internal',
 			'class' => 'RankMath\Robots_Txt',
 		];

@@ -39,6 +39,17 @@ export function toggleSchemaTemplates( state ) {
 }
 
 /**
+ * Toggle schema templates state.
+ *
+ * @param {boolean} state The schema templates modal state.
+ *
+ * @return {Object} An action for redux.
+ */
+ export function schemaUpdated( state ) {
+	return updateAppUi( 'schemaUpdated', state )
+}
+
+/**
  * Set current schema id.
  *
  * @param {string} id     Schema id.

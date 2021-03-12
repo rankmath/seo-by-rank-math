@@ -457,7 +457,7 @@ class Snippet_Shortcode {
 	 * @return boolean|string
 	 */
 	private function get_content_location( $schema ) {
-		$location = isset( $schema['metadata']['reviewLocation'] ) ? $schema['metadata']['reviewLocation'] : false;
+		$location = ! empty( $schema['metadata']['shortcode'] ) && isset( $schema['metadata']['reviewLocation'] ) ? $schema['metadata']['reviewLocation'] : false;
 		return $this->do_filter( 'snippet/review/location', $location );
 	}
 

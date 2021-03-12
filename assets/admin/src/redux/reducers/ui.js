@@ -33,6 +33,7 @@ const DEFAULT_STATE = {
 	editingSchemaId: '',
 	isSchemaEditorOpen: false,
 	isSchemaTemplatesOpen: false,
+	schemaUpdated: false,
 }
 
 /**
