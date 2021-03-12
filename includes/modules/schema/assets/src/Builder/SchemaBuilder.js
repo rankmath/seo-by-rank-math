@@ -332,6 +332,8 @@ export default compose(
 				if ( onSave ) {
 					onSave( id, schema )
 				}
+
+				dispatch( 'rank-math' ).schemaUpdated( true )
 				dispatch( 'rank-math' ).toggleSchemaTemplates( false )
 				dispatch( 'rank-math' ).toggleSchemaEditor( false )
 			},

@@ -27,14 +27,16 @@ class HTML {
 		preg_match_all( $regex, $elem, $attributes, PREG_SET_ORDER );
 
 		$new = [];
+		$remaining = $elem;
 		foreach ( $attributes as $attribute ) {
 			$val = substr( $attribute[2], 1, -1 );
 			$new[ $attribute[1] ] = $val;
+			$remaining = str_replace( $attribute[0], '', $remaining );
 		}
 
 		// Check for empty attributes without values.
 		$regex = '# ([^\s=]+)[ >]#';
-		preg_match_all( $regex, $elem, $attributes, PREG_SET_ORDER );
+		preg_match_all( $regex, $remaining, $attributes, PREG_SET_ORDER );
 		foreach ( $attributes as $attribute ) {
 			$new[ $attribute[1] ] = null;
 		}

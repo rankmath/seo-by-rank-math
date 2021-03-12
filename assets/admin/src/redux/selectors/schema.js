@@ -21,6 +21,17 @@ export function isSchemaTemplatesOpen( state ) {
 }
 
 /**
+ * Get schema tempaltes state.
+ *
+ * @param {Object} state The app state.
+ *
+ * @return {boolean} Return schema tempaltes state.
+ */
+ export function hasSchemaUpdated( state ) {
+	return state.appUi.schemaUpdated
+}
+
+/**
  * Get schemas.
  *
  * @param {Object} state The app state.

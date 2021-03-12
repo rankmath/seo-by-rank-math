@@ -1416,7 +1416,7 @@ msgstr ""
 msgid "Let Rank Math analyze your website and your website's content using 70+ different tests to provide tailor-made SEO Analysis to you."
 msgstr ""
 
-msgid "Robotx Txt"
+msgid "Robots Txt"
 msgstr ""
 
 msgid "Version Control"

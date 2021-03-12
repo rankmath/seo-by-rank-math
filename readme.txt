@@ -3,9 +3,9 @@ Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.7
-Requires at least: 5.2
-Requires PHP: 7.0
-Stable tag: 1.0.59
+Requires at least: 5.5
+Requires PHP: 7.2
+Stable tag: 1.0.59.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -379,7 +379,7 @@ No, you won't. When you install Rank Math, it will seamlessly import your settin
 If you setup Rank Math from scratch, then your search engine rankings will depend on how you configure it. But please be advised that Google and other search engines prefer good, useful content over anything else.
 
 = What are the technical requirements for using Rank Math? =
-Rank Math requires at least PHP 5.6, cURL lib, cron jobs, to be installed and enabled on the server. Those things are mostly installed on every good hosting server. When you initiate Rank Math's setup process, Rank Math will also perform a compatibility check to confirm if your server can run Rank Math. If your server has a lower configuration of any Software, please ask your hosting to update it to the latest version.
+Rank Math requires at least PHP 7.2, cURL lib, cron jobs, to be installed and enabled on the server. Those things are mostly installed on every good hosting server. When you initiate Rank Math's setup process, Rank Math will also perform a compatibility check to confirm if your server can run Rank Math. If your server has a lower configuration of any Software, please ask your hosting to update it to the latest version.
 
 = Can I use Rank Math on a WordPress.com website? =
 Yes, as the plugin is provided through WordPress.org, it is available on WordPress.com as well. However, you might be required to opt for the Business plan of WordPress.com
@@ -474,6 +474,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.59.1 [Mar 12, 2021] =
+* Fixed: Invalid link attributions after selecting `sponsored` & `nofollow` options
+* Fixed: Unable to change the "Unpublish When Expired" option's value from No to Yes without changing any other field in the JobPosting Schema
+* Fixed: Schema shortcode showing data in the wrong place
 
 = 1.0.59 [Mar 8, 2021] =
 * Improved: Compatibility with WordPress 5.7+ by disabling the [max-image-preview](https://rankmath.com/kb/advanced-tab/#max-image-preview) meta tag added by the core because Rank Math already has the [advanced options](https://rankmath.com/kb/advanced-tab/) related to it

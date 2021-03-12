@@ -327,7 +327,7 @@ class DataCollector {
 
 	saveSchemas() {
 		const schemas = select( 'rank-math' ).getSchemas()
-		if ( isEmpty( schemas ) || isEqual( schemas, get( rankMath, 'schemas', {} ) ) ) {
+		if ( isEmpty( schemas ) || ! select( 'rank-math' ).hasSchemaUpdated() ) {
 			return
 		}
 
@@ -351,6 +351,7 @@ class DataCollector {
 					delete newEditSchemas[ schemaId ]
 				} )
 
+				dispatch( 'rank-math' ).schemaUpdated( false )
 				dispatch( 'rank-math' ).updateSchemas( newSchemas )
 				dispatch( 'rank-math' ).updateEditSchemas( newEditSchemas )
 			}
