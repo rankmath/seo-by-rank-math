@@ -70,6 +70,8 @@ class Posts extends Objects {
 			'difference' => $keywords - $old_keywords,
 		];
 
+		$post->admin_url = admin_url();
+
 		$post = apply_filters( 'rank_math/analytics/single/report', $post, $this );
 
 		return array_merge(

@@ -86,7 +86,8 @@ class Replacer {
 			$string = preg_replace( '`' . $q_sep . '(?:\s*' . $q_sep . ')*`u', $replacements['%sep%'], $string );
 		}
 
-		return $string;
+		// Remove excess whitespace.
+		return preg_replace( '[\s\s+]', ' ', $string );
 	}
 
 	/**

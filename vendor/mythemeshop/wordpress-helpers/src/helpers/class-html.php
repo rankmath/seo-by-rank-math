@@ -28,7 +28,15 @@ class HTML {
 
 		$new = [];
 		foreach ( $attributes as $attribute ) {
-			$new[ $attribute[1] ] = substr( $attribute[2], 1, -1 );
+			$val = substr( $attribute[2], 1, -1 );
+			$new[ $attribute[1] ] = $val;
+		}
+
+		// Check for empty attributes without values.
+		$regex = '# ([^\s=]+)[ >]#';
+		preg_match_all( $regex, $elem, $attributes, PREG_SET_ORDER );
+		foreach ( $attributes as $attribute ) {
+			$new[ $attribute[1] ] = null;
 		}
 
 		return $new;
@@ -56,7 +64,10 @@ class HTML {
 			}
 
 			$out .= ' ' . esc_html( $prefix . $key );
-			$out .= empty( $value ) ? '' : sprintf( '="%s"', esc_attr( $value ) );
+			if ( null === $value ) {
+				continue;
+			}
+			$out .= sprintf( '="%s"', esc_attr( $value ) );
 		}
 
 		return $out;

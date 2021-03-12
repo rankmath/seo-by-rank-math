@@ -91,7 +91,7 @@ class KML_File {
 
 		$kml  = $this->newline( '<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">' );
 		$kml .= $this->newline( '<Document>', 1 );
-		$kml .= $this->newline( '<name>Locations for ' . $business_name . '</name>', 2 );
+		$kml .= $this->newline( '<name>Locations for ' . esc_html( $business_name ) . '</name>', 2 );
 		$kml .= $this->newline( '<open>1</open>', 2 );
 		$kml .= $this->newline( '<Folder>', 2 );
 

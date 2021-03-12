@@ -266,6 +266,10 @@ class Stats extends Keywords {
 					continue;
 				}
 
+				// trick to invert Position Graph YAxis.
+				if ( 'position' === $key ) {
+					$value = 0 - $value;
+				}
 				$data[ $date ][ $key ][] = $value;
 			}
 		}
@@ -302,7 +306,11 @@ class Stats extends Keywords {
 			}
 
 			if ( isset( $row['position'] ) ) {
-				$row['position'] = empty( $row['position'] ) ? 0 : ceil( array_sum( $row['position'] ) / count( $row['position'] ) );
+				if ( empty( $row['position'] ) ) {
+					unset( $row['position'] );
+				} else {
+					$row['position'] = ceil( array_sum( $row['position'] ) / count( $row['position'] ) );
+				}
 			}
 
 			if ( isset( $row['keywords'] ) ) {
@@ -513,6 +521,10 @@ class Stats extends Keywords {
 	 */
 	public function set_query_position( $data, $history ) {
 		foreach ( $history as $row ) {
+			if ( ! isset( $data[ $row->query ]['query'] ) ) {
+				$data[ $row->query ]['query'] = $row->query;
+			}
+
 			if ( ! isset( $data[ $row->query ]['graph'] ) ) {
 				$data[ $row->query ]['graph'] = [];
 			}

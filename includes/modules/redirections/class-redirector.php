@@ -282,7 +282,9 @@ class Redirector {
 	 * @codeCoverageIgnore
 	 */
 	private function fallback() {
-		if ( ! is_404() ) {
+		$wp_redirect_admin_locations = ['login', 'admin', 'dashboard'];
+
+		if ( ! is_404() || in_array($this->uri, $wp_redirect_admin_locations) ) {
 			return;
 		}
 

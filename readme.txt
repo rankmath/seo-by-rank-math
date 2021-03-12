@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 5.6.1
+Tested up to: 5.7
 Requires at least: 5.2
 Requires PHP: 7.0
-Stable tag: 1.0.58
+Stable tag: 1.0.59
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,17 +475,28 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.58 [Feb 17, 2021] =
-* Improved: The [Local SEO](https://rankmath.com/kb/local-seo/) is much better with the Rank Math SEO plugin than ever
-* Improved: Query related to page search in the About & Contact page options of [local SEO settings](https://rankmath.com/kb/titles-and-meta/#local-seo)
-* Improved: Create tables related to different modules only if those modules are activated. This improves the speed of the plugin further
-* Improved: Updated CMB2 library to keep it updated to the latest version
-* Improved: The overall speed and security of the plugin
-* Fixed: ["Exclude Logged in Users"](https://rankmath.com/kb/connect-your-google-account/#4-connect-google-analytics-with-rank-math) option was not working in the [Analytics module](https://rankmath.com/kb/analytics/)
-* Fixed: Missing telephone & image data for the Attorney [Schema](https://rankmath.com/blog/schema-markup/)
-* Fixed: Few Business types in the Local Schema were showing invalid `hasMap` & `geo` attributes
-* Fixed: A PHP error related to analytics table after opening the analytics settings
-* Fixed: A fatal error happening on some installations when the site was [updating from Rank Math](https://rankmath.com/kb/update-rank-math-manually/) v1.0.48 or less
-* Fixed: CLI command to generate the [Sitemap](https://rankmath.com/kb/submit-sitemap-to-google/) in PHP 8 was not working
+= 1.0.59 [Mar 8, 2021] =
+* Improved: Compatibility with WordPress 5.7+ by disabling the [max-image-preview](https://rankmath.com/kb/advanced-tab/#max-image-preview) meta tag added by the core because Rank Math already has the [advanced options](https://rankmath.com/kb/advanced-tab/) related to it
+* Improved: Inverted Y-Axis in all the position graphs of the [Analytics module](https://rankmath.com/kb/analytics/) to make the graphs more accurate
+* Improved: Replaced `Cache-Control: One year` header from the [XML Sitemap](https://rankmath.com/kb/sitemaps-seo-benefits/) files to `Cache-Control: no-cache, no-store`
+* Improved: Added active modules list to the [system status page](https://rankmath.com/kb/rank-math-status-and-tools/)
+* Improved: Removed excess whitespace from the [Schema](https://rankmath.com/blog/schema-markup/) values when the variable was returning an empty value
+* Improved: Excluded Facebook's pixel image from the [Image ALT](https://rankmath.com/kb/image-seo/) test of [SEO Analysis](https://rankmath.com/kb/seo-analysis/)
+* Removed: Unnecessary debugging data from the system status tab to improve the performance
+* Fixed: [Install Analytics Code](https://rankmath.com/kb/install-google-analytics/) option was not working with the Firefox & the Brave browser
+* Fixed: [Video Schema](https://rankmath.com/kb/video-schema/) shortcode was not outputting any data
+* Fixed: Option to delete [Recipe Instructions](https://rankmath.com/kb/recipe-schema/) text was missing
+* Fixed: Wrong category hierarchy in [WooCommerce's Product Schema](https://rankmath.com/kb/woocommerce-product-schema/)
+* Fixed: "Unpublish When Expired" option was not working in the [JobPosting Schema](https://rankmath.com/kb/jobposting-schema/)
+* Fixed: Unable to choose a category for the "[Brand](https://rankmath.com/kb/woocommerce-brand-names/)" value for [WooCommerce Product Schema](https://rankmath.com/blog/woocommerce-seo/)
+* Fixed: A bug that was stripping out empty `data-attributes` from the content links
+* Fixed: A conflict with the FDP plugin and possibly others
+* Fixed: Conflict with the other plugins if `access_token` URL param was used in them
+* Fixed: Enabling [Remove Category Base](https://rankmath.com/kb/remove-wordpress-category-base/) option was generating 404 pages on some installations
+* Fixed: Browser console was showing a `400 Bad Request` when saving the general settings
+* Fixed: After connecting the [Rank Math's account](https://rankmath.com/kb/free-account-benefits/), the page was getting redirected to the wrong page on a Multisite
+* Fixed: Fallback [redirection](https://rankmath.com/kb/setting-up-redirections/) to home or URL was deactivating the WordPress's default redirection to login and dashboard pages
+* Fixed: [KML XSL](https://rankmath.com/kb/kml-sitemap/) file fails to load when special characters were used in the Business name
+* Fixed: A JS error on some admin pages
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=LP&utm_campaign=WP)**

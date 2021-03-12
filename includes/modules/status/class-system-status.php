@@ -10,6 +10,7 @@
 
 namespace RankMath\Status;
 
+use RankMath\Helper;
 use RankMath\Google\Authentication;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Google\Permissions;
@@ -113,8 +114,9 @@ class System_Status {
 	private function prepare_info() {
 		global $wpdb;
 
-		$plan        = Admin_Helper::get_registration_data();
-		$tokens      = Authentication::tokens();
+		$plan    = Admin_Helper::get_registration_data();
+		$tokens  = Authentication::tokens();
+		$modules = Helper::get_active_modules();
 
 		$rankmath = [
 			'label'  => esc_html__( 'Rank Math', 'rank-math' ),
@@ -130,6 +132,10 @@ class System_Status {
 				'plugin_plan' => [
 					'label' => esc_html__( 'Plugin subscription plan', 'rank-math' ),
 					'value' => isset( $plan['plan'] ) ? \ucwords( $plan['plan'] ) : esc_html__( 'Free', 'rank-math' ),
+				],
+				'active_modules' => [
+					'label' => esc_html__( 'Active modules', 'rank-math' ),
+					'value' => empty( $modules ) ? esc_html__( '(none)', 'rank-math' ) : join( ', ', $modules ),
 				],
 				'refresh_token' => [
 					'label' => esc_html__( 'Google Refresh token', 'rank-math' ),
@@ -200,6 +206,11 @@ class System_Status {
 		$rankmath = apply_filters( 'rank_math/status/rank_math_info', $rankmath );
 		$this->wp_info = [ 'rank-math' => $rankmath ] + \WP_Debug_Data::debug_data();
 
-		unset( $this->wp_info['wp-paths-sizes'] );
+		unset(
+			$this->wp_info['wp-paths-sizes'],
+			$this->wp_info['wp-media'],
+			$this->wp_info['wp-themes-inactive'],
+			$this->wp_info['wp-plugins-inactive']
+		);
 	}
 }

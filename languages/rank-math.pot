@@ -3381,9 +3381,6 @@ msgstr ""
 msgid "%s archives"
 msgstr ""
 
-msgid "Special Sitemaps:"
-msgstr ""
-
 msgid "Exclude this image from sitemap"
 msgstr ""
 
@@ -3505,6 +3502,12 @@ msgid "Plugin subscription plan"
 msgstr ""
 
 msgid "Free"
+msgstr ""
+
+msgid "Active modules"
+msgstr ""
+
+msgid "(none)"
 msgstr ""
 
 msgid "Google Refresh token"
@@ -4535,6 +4538,12 @@ msgstr ""
 msgid "PRO"
 msgstr ""
 
+msgid "Enable Cookieless Tracking [No Consent Required]"
+msgstr ""
+
+msgid "Self-Hosted Analytics JS File"
+msgstr ""
+
 msgid "Exclude Logged-in users"
 msgstr ""
 
@@ -4917,7 +4926,7 @@ msgstr ""
 msgid "Fallback Behavior"
 msgstr ""
 
-msgid "If nothing similar is found, this behavior will be applied."
+msgid "If nothing similar is found, this behavior will be applied. <strong>Note</strong>: If the requested URL ends with <code>/login</code>, <code>/admin</code>, or <code>/dashboard</code>, WordPress will automatically redirect to respective locations within the WordPress admin area."
 msgstr ""
 
 msgid "Default 404"
@@ -5158,15 +5167,6 @@ msgid "Operating System"
 msgstr ""
 
 msgid "Application Category"
-msgstr ""
-
-msgid "Content URL"
-msgstr ""
-
-msgid "Embed URL"
-msgstr ""
-
-msgid "Duration"
 msgstr ""
 
 msgid "Start Site-Wide Analysis"

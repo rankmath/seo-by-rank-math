@@ -139,6 +139,11 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 				value = value.difference
 			} else if ( 'positionHistory' === column ) {
 				const graph = get( row, 'graph', false )
+				let baseValue = "dataMax";
+				if ( graph !== false ) {
+					const dataMax = Math.max( ...graph.map( item => item.position ) );
+					baseValue = Math.min( dataMax + parseInt( dataMax / 2 ), 100 );
+				}
 				display =
 					false === graph ? (
 						''
@@ -147,6 +152,7 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 							<ResponsiveContainer height={ 40 }>
 								<AreaChart
 									data={ graph }
+									baseValue={ baseValue }
 									margin={ {
 										top: 0,
 										right: 0,
@@ -193,7 +199,8 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 										fill="url(#gradient)"
 									/>
 									<YAxis
-										reversed={ false }
+										hide={ true }
+										reversed={ true }
 									/>
 								</AreaChart>
 							</ResponsiveContainer>

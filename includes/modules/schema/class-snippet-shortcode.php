@@ -397,30 +397,38 @@ class Snippet_Shortcode {
 	 * @since 1.0.12
 	 */
 	public function add_review_to_content( $content ) {
-		$location = $this->get_content_location();
-		if ( false === $location ) {
+		$schemas = $this->get_schemas();
+		if ( empty( $schemas ) ) {
 			return $content;
 		}
 
-		$review = do_shortcode( '[rank_math_review_snippet]' );
+		foreach ( $schemas as $schema ) {
+			$location = $this->get_content_location( $schema );
+			if ( false === $location || 'custom' === $location ) {
+				continue;
+			}
 
-		if ( in_array( $location, [ 'top', 'both' ], true ) ) {
-			$content = $review . $content;
-		}
+			$review = do_shortcode( '[rank_math_rich_snippet id="' . $schema['metadata']['shortcode'] . '"]' );
+			if ( in_array( $location, [ 'top', 'both' ], true ) ) {
+				$content = $review . $content;
+			}
 
-		if ( in_array( $location, [ 'bottom', 'both' ], true ) && $this->can_add_multi_page() ) {
-			$content .= $review;
+			if ( in_array( $location, [ 'bottom', 'both' ], true ) && $this->can_add_multi_page() ) {
+				$content .= $review;
+			}
 		}
 
 		return $content;
 	}
 
 	/**
-	 * Check if we can inject the review in the content.
+	 * Get schema data to show in the content.
 	 *
-	 * @return boolean|string
+	 * @return boolean|array
+	 *
+	 * @since 1.0.59
 	 */
-	private function get_content_location() {
+	private function get_schemas() {
 		/**
 		 * Filter: Allow disabling the review display.
 		 *
@@ -430,17 +438,25 @@ class Snippet_Shortcode {
 			return false;
 		}
 
-		$data = $this->get_data( false );
-		if ( empty( $data ) ) {
+		$schemas = $this->get_data( false );
+		if ( empty( $schemas ) ) {
 			return false;
 		}
 
-		$schema = current( $data['schema'] );
-		$type   = \strtolower( $schema['@type'] );
-		if ( ! in_array( $type, [ 'book', 'review', 'course', 'event', 'product', 'recipe', 'softwareapplication' ], true ) ) {
-			return false;
-		}
+		return array_filter(
+			$schemas['schema'],
+			function( $schema ) {
+				return ! empty( $schema['metadata']['reviewLocation'] );
+			}
+		);
+	}
 
+	/**
+	 * Check if we can inject the review in the content.
+	 *
+	 * @return boolean|string
+	 */
+	private function get_content_location( $schema ) {
 		$location = isset( $schema['metadata']['reviewLocation'] ) ? $schema['metadata']['reviewLocation'] : false;
 		return $this->do_filter( 'snippet/review/location', $location );
 	}

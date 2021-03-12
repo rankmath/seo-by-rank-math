@@ -93,6 +93,8 @@ class AJAX {
 			'country'          => Param::post( 'country', 'all' ),
 			'install_code'     => Param::post( 'installCode', false, FILTER_VALIDATE_BOOLEAN ),
 			'anonymize_ip'     => Param::post( 'anonymizeIP', false, FILTER_VALIDATE_BOOLEAN ),
+			'local_ga_js'      => Param::post( 'localGAJS', false, FILTER_VALIDATE_BOOLEAN ),
+			'cookieless_ga'    => Param::post( 'cookielessGA', false, FILTER_VALIDATE_BOOLEAN ),
 			'exclude_loggedin' => Param::post( 'excludeLoggedin', false, FILTER_VALIDATE_BOOLEAN ),
 		];
 

@@ -22,11 +22,12 @@ import {
 /**
  * Get schema object for builder based on data.
  *
- * @param  {Object} schema Schema builder object.
- * @param  {Object} json   Schema data.
+ * @param  {Object}  schema   Schema builder object.
+ * @param  {Object}  json     Schema data.
+ * @param  {boolean} isCustom Whether its a custom schema.
  * @return {Object} Schema for builder.
  */
-export function getSchemaFromData( schema, json ) {
+export function getSchemaFromData( schema, json, isCustom = false ) {
 	if ( isEmpty( json ) ) {
 		return schema
 	}
@@ -38,7 +39,7 @@ export function getSchemaFromData( schema, json ) {
 
 		let property = findPropertyByName( key, schema )
 		if ( property ) {
-			convertValues( property, key, value )
+			convertValues( property, key, value, isCustom )
 			return
 		}
 
@@ -49,13 +50,14 @@ export function getSchemaFromData( schema, json ) {
 		} else if ( isObject( value ) || map ) {
 			property = getSchemaFromData(
 				map ? generateSchemaFromMap( map ) : getGroupDefault(),
-				value
+				value,
+				isCustom
 			)
 		} else {
 			property = getPropertyDefault()
 		}
 
-		convertValues( property, key, value )
+		convertValues( property, key, value, isCustom )
 		property.property = key
 
 		schema.properties.push( property )
@@ -70,9 +72,10 @@ export function getSchemaFromData( schema, json ) {
  * @param  {Object}       property Property to process.
  * @param  {string}       key      Property key.
  * @param  {Array|string} value    Property value.
+ * @param  {boolean}      isCustom Whether its a custom schema.
  * @return {Object} Processed property.
  */
-const convertValues = ( property, key, value ) => {
+const convertValues = ( property, key, value, isCustom = false ) => {
 	if ( ! key ) {
 		return property
 	}
@@ -82,7 +85,8 @@ const convertValues = ( property, key, value ) => {
 		false,
 		property,
 		key,
-		value
+		value,
+		isCustom
 	)
 	if ( false !== newProperty ) {
 		return newProperty
@@ -106,12 +110,14 @@ const convertValues = ( property, key, value ) => {
 /**
  * Get schema object for builder based on data and map.
  *
- * @param  {Object} data Schema data.
- * @param  {Object} map  Schema map.
- * @return {Object} Schema for builder.
+ * @param  {Object}  data       Schema data.
+ * @param  {Object}  map        Schema map.
+ * @param  {Object}  arrayProps Schema arrayProps.
+ * @param  {boolean} isCustom   If Current schema is custom.
+ * @return {Object}             Schema for builder.
  */
-export function generateValidSchemaByMap( data, map ) {
-	const schema = generateSchemaFromMap( map )
+export function generateValidSchemaByMap( data, map, arrayProps = {}, isCustom = false ) {
+	const schema = generateSchemaFromMap( map, arrayProps, isCustom )
 
 	return getSchemaFromData( schema, data )
 }
@@ -150,7 +156,7 @@ export function generateValidSchema( json ) {
 	}
 
 	// Move type to first.
-	schema = getSchemaFromData( schema, data )
+	schema = getSchemaFromData( schema, data, 'custom' === metadata.type )
 	if ( 'custom' !== metadata.type ) {
 		const typeProperty = schema.properties.pop()
 		schema.properties.unshift( typeProperty )

@@ -4,6 +4,7 @@
 import {
 	AreaChart,
 	Area,
+	YAxis,
 	Tooltip as ChartTooltip,
 	ResponsiveContainer,
 } from 'recharts'
@@ -28,6 +29,7 @@ const AnalyticItem = ( { title, tooltip, stats, graph, dataKey } ) => {
 					<AreaChart
 						data={ graph }
 						margin={ { top: 0, right: 0, left: 0, bottom: 0 } }
+						baseValue="dataMin"
 					>
 						<ChartTooltip
 							content={ <CustomTooltip /> }
@@ -37,6 +39,19 @@ const AnalyticItem = ( { title, tooltip, stats, graph, dataKey } ) => {
 								x: true,
 								y: true,
 							} }
+							formatter={ ( value, name ) => {
+								if ( name === 'position' ) {
+									return [
+										-value,
+										name,
+									]
+								} else {
+									return [
+										value,
+										name,
+									]
+								}
+							} }	
 						/>
 						<defs>
 							<linearGradient

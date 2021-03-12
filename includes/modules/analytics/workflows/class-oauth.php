@@ -43,14 +43,14 @@ class OAuth {
 	public function process_oauth() {
 		$process_oauth = Param::get( 'process_oauth', false, FILTER_SANITIZE_STRING );
 		$access_token  = Param::get( 'access_token', false, FILTER_SANITIZE_STRING );
+		$security      = Param::get( 'rankmath_security', false, FILTER_SANITIZE_STRING );
 
 		// Early Bail!!
-		if ( $process_oauth < 1 && empty( $access_token ) ) {
+		if ( empty( $security ) || ( $process_oauth < 1 && empty( $access_token ) ) ) {
 			return;
 		}
 
-		$security = Param::get( 'rankmath_security', false, FILTER_SANITIZE_STRING );
-		if ( empty( $security ) || ! wp_verify_nonce( $security, 'rank_math_oauth_token' ) ) {
+		if ( ! wp_verify_nonce( $security, 'rank_math_oauth_token' ) ) {
 			wp_nonce_ays( 'rank_math_oauth_token' );
 			die();
 		}

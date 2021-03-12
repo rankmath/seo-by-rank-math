@@ -51,12 +51,22 @@ class Permalink_Watcher {
 		}
 
 		if ( $this->remove_category_base || $this->remove_parent_slugs ) {
+			$this->action( 'created_product_cat', 'flush_rules' );
+			$this->action( 'delete_product_cat', 'flush_rules' );
+			$this->action( 'edited_product_cat', 'flush_rules' );
+
 			$this->filter( 'term_link', 'term_link', 0, 3 );
-			add_action( 'created_product_cat', 'RankMath\\Helper::schedule_flush_rewrite' );
-			add_action( 'delete_product_cat', 'RankMath\\Helper::schedule_flush_rewrite' );
-			add_action( 'edited_product_cat', 'RankMath\\Helper::schedule_flush_rewrite' );
 			$this->filter( 'rewrite_rules_array', 'add_rewrite_rules', 99 );
 		}
+	}
+
+	/**
+	 * Flush rewrite rules (soft flush).
+	 *
+	 * @return void
+	 */
+	public function flush_rules() {
+		flush_rewrite_rules( false );
 	}
 
 	/**

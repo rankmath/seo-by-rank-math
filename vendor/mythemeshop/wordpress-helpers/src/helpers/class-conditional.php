@@ -117,7 +117,7 @@ class Conditional {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 		// @codeCoverageIgnoreEnd
-		return is_plugin_active( 'woocommerce/woocommerce.php' );
+		return is_plugin_active( 'woocommerce/woocommerce.php' ) && function_exists( 'is_woocommerce' );
 	}
 
 	/**

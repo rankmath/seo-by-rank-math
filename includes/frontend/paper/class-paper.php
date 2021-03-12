@@ -341,7 +341,8 @@ class Paper {
 	private function respect_settings_for_robots() {
 		// Force override to respect the WP settings.
 		if ( 0 === absint( get_option( 'blog_public' ) ) || isset( $_GET['replytocom'] ) ) {
-			$this->robots['index'] = 'noindex';
+			$this->robots['index']  = 'noindex';
+			$this->robots['follow'] = 'nofollow';
 		}
 
 		// Noindex for sub-pages.

@@ -52,8 +52,10 @@ import boxTabs from '@helpers/boxTabs'
 				this.misc()
 				this.tabs()
 				this.dependencyManager()
-				searchConsole.events()
-				searchConsole.checkAll()
+				if ( Object.values( window.rankMath.modules ).indexOf( 'analytics' ) !== -1 ) {
+					searchConsole.events()
+					searchConsole.checkAll()
+				}
 			},
 
 			misc() {

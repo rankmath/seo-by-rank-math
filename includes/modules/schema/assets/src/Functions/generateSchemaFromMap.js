@@ -50,12 +50,16 @@ const getSchemaFromMap = ( parentMap ) => {
 /**
  * Get schema object for builder based on map.
  *
- * @param  {string} type        Type of schema map.
- * @param  {Object} arrayProps Properties of map to override.
+ * @param  {string}  type       Type of schema map.
+ * @param  {Object}  arrayProps Properties of map to override.
+ * @param  {boolean} isCustom   Whether its a custom schema.
  * @return {Object} Schema for builder.
  */
-export function generateSchemaFromMap( type, arrayProps = {} ) {
-	const map = isString( type ) ? getMap( type ) : type
+export function generateSchemaFromMap( type, arrayProps = {}, isCustom = false ) {
+	let map = false
+	if ( ! isCustom ) {
+		map = isString( type ) ? getMap( type ) : type
+	}
 
 	let schema = getSchemaFromMap( map )
 	schema = merge( schema, arrayProps )

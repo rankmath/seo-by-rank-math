@@ -10,6 +10,7 @@ import { __ } from '@wordpress/i18n'
 import { dispatch, select, subscribe } from '@wordpress/data'
 import apiFetch from '@wordpress/api-fetch'
 import { safeDecodeURIComponent } from '@wordpress/url'
+import { doAction } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -313,6 +314,7 @@ class DataCollector {
 				dispatch( 'rank-math' ).updateEditSchemas( newEditSchemas )
 			}
 			setTimeout( () => {
+				doAction( 'rank_math_schema_changed' )
 				this.isSavingSchemas = false
 			}, 2000 )
 		} )

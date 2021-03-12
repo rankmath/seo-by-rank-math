@@ -129,6 +129,7 @@ Predefined helper constants from `donatj\UserAgent\Platforms`
 | `Platforms::PLAYSTATION_3` |  PlayStation 3 |  
 | `Platforms::PLAYSTATION_4` |  PlayStation 4 |  
 | `Platforms::PLAYSTATION_VITA` |  PlayStation Vita |  
+| `Platforms::SAILFISH` |  Sailfish |  
 | `Platforms::SYMBIAN` |  Symbian |  
 | `Platforms::TIZEN` |  Tizen |  
 | `Platforms::WINDOWS_PHONE` |  Windows Phone |  
@@ -164,6 +165,7 @@ Predefined helper constants from `donatj\UserAgent\Browsers`
 | `Browsers::KINDLE` |  Kindle |  
 | `Browsers::LYNX` |  Lynx |  
 | `Browsers::MIDORI` |  Midori |  
+| `Browsers::MIUIBROWSER` |  MiuiBrowser |  
 | `Browsers::MSIE` |  MSIE |  
 | `Browsers::MSNBOT_MEDIA` |  msnbot-media |  
 | `Browsers::NETFRONT` |  NetFront |  
@@ -172,6 +174,7 @@ Predefined helper constants from `donatj\UserAgent\Browsers`
 | `Browsers::OPERA` |  Opera |  
 | `Browsers::PUFFIN` |  Puffin |  
 | `Browsers::SAFARI` |  Safari |  
+| `Browsers::SAILFISHBROWSER` |  SailfishBrowser |  
 | `Browsers::SAMSUNGBROWSER` |  SamsungBrowser |  
 | `Browsers::SILK` |  Silk |  
 | `Browsers::TIZENBROWSER` |  TizenBrowser |  
