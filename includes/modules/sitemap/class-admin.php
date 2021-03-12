@@ -41,7 +41,6 @@ class Admin extends Base {
 		$this->action( 'init', 'register_setting_page', 999 );
 		$this->filter( 'rank_math/settings/sitemap', 'post_type_settings' );
 		$this->filter( 'rank_math/settings/sitemap', 'taxonomy_settings' );
-		$this->filter( 'rank_math/settings/sitemap', 'special_seprator' );
 
 		// Attachment.
 		$this->filter( 'media_send_to_editor', 'media_popup_html', 10, 2 );
@@ -192,24 +191,6 @@ class Admin extends Base {
 				'file'      => $this->directory . '/settings/taxonomies.php',
 				/* translators: Taxonomy Sitemap Url */
 				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Sitemap URL: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . $notice_end,
-			];
-		}
-
-		return $tabs;
-	}
-
-	/**
-	 * Add Special seprator into sitemap option panel
-	 *
-	 * @param array $tabs Hold tabs for optional panel.
-	 *
-	 * @return array
-	 */
-	public function special_seprator( $tabs ) {
-		if ( Helper::is_module_active( 'news-sitemap' ) || Helper::is_module_active( 'video-sitemap' ) ) {
-			$tabs['special'] = [
-				'title' => esc_html__( 'Special Sitemaps:', 'rank-math' ),
-				'type'  => 'seprator',
 			];
 		}
 

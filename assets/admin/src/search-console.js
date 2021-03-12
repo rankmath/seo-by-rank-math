@@ -51,23 +51,11 @@ class SearchConsole {
 			this.fillPropertySelect( account )
 		} )
 
-		jQuery( '.button-primary', '.rank-math-wizard-body--analytics .form-footer.rank-math-ui' ).on(
-			'click',
-			() => {
-				this.saveConsole()
-				this.saveAnalytics()
-				this.saveAdsense()
-			}
-		)
-
-		jQuery( '.button-primary', '.rank-math_page_rank-math-options-general .form-footer.rank-math-ui' ).on(
-			'click',
-			() => {
-				this.saveConsole()
-				this.saveAnalytics()
-				this.saveAdsense()
-			}
-		)
+		let submitSelectors = [
+			'.rank-math-wizard-body--analytics .form-footer.rank-math-ui .button-primary',
+			'.rank-math_page_rank-math-options-general .form-footer.rank-math-ui .button-primary'
+		]
+		jQuery( submitSelectors.join( ', ' ) ).on( 'click', ( e ) => { this.submitButtonHandler( e ) } )
 
 		this.propertySelect.on( 'change', () => {
 			const accountID = this.accountSelect.val()
@@ -91,6 +79,17 @@ class SearchConsole {
 				} )
 			}
 		} )
+	}
+
+	submitButtonHandler( e ) {
+		let target = jQuery( e.target )
+		e.preventDefault()
+
+		this.saveConsole()
+		this.saveAnalytics()
+		this.saveAdsense()
+
+		setTimeout( () => { target.off( 'click' ).trigger( 'click' ) }, 100 )
 	}
 
 	saveConsole() {
@@ -119,6 +118,8 @@ class SearchConsole {
 			country: this.countryAnalytics.val(),
 			installCode: jQuery( '#install-code' ).is( ':checked' ),
 			anonymizeIP: jQuery( '#anonymize-ip' ).is( ':checked' ),
+			localGAJS: jQuery( '#local-ga-js' ).is( ':checked' ),
+			cookielessGA: jQuery( '#cookieless-ga' ).is( ':checked' ),
 			excludeLoggedin: jQuery( '#exclude-loggedin' ).is( ':checked' ),
 		}
 
@@ -142,7 +143,7 @@ class SearchConsole {
 			accountID: this.adsenseSelect.val(),
 		}
 
-		if ( 0 === parseInt( data.accountID ) ) {
+		if ( ! data.accountID ) {
 			return
 		}
 

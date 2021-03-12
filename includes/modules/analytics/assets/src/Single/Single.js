@@ -28,6 +28,7 @@ const Single = ( { post } ) => {
 			<Header
 				heading={ decodeEntities( post.title ) }
 				slug={ post.page }
+				adminURL={ post.admin_url }
 			/>
 
 			<div className="rank-math-single-post-report">

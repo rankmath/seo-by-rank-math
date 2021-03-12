@@ -2,7 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames'
-import { get, map as mapProperties, isUndefined } from 'lodash'
+import { get, startCase, map as mapProperties, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -67,7 +67,7 @@ const SchemaGroup = ( props ) => {
 
 							return (
 								<div className="schema-property--label">
-									{ property } { repeaterIndex[ parentId ] }
+									{ startCase( property ) } { repeaterIndex[ parentId ] }
 								</div>
 							)
 						}

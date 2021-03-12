@@ -134,4 +134,47 @@ class DB {
 	public static function delete_schema_data( $post_id ) {
 		return self::table()->where( 'post_id', $post_id )->whereLike( 'meta_key', 'rank_math_schema_' )->delete();
 	}
+
+	/**
+	 * Unpublish job posting when expired.
+	 *
+	 * @param JsonLD $jsonld  JsonLD Instance.
+	 * @param array  $schemas Array of JSON-LD entity.
+	 */
+	public static function unpublish_jobposting_post( $jsonld, $schemas ) {
+		if ( ! is_singular() ) {
+			return;
+		}
+
+		$job_postings = array_map(
+			function( $schema ) {
+				return isset( $schema['@type'] ) && 'JobPosting' === $schema['@type'] ? $schema : false;
+			},
+			$schemas
+		);
+
+		if ( empty( $job_postings ) ) {
+			return;
+		}
+
+		foreach ( $job_postings as $job_posting ) {
+			if (
+				empty( $job_posting['metadata']['unpublish'] ) ||
+				'on' !== $job_posting['metadata']['unpublish'] ||
+				empty( $job_posting['validThrough'] ) ||
+				date_create( 'now' )->getTimestamp() < strtotime( $job_posting['validThrough'] )
+			) {
+				continue;
+			}
+
+			wp_update_post(
+				[
+					'ID'          => $jsonld->post_id,
+					'post_status' => 'draft',
+				]
+			);
+
+			break;
+		}
+	}
 }

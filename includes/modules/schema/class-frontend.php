@@ -84,6 +84,8 @@ class Frontend {
 				return ! in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
 			}
 		);
+		DB::unpublish_jobposting_post( $jsonld, $schemas );
+
 		$schemas = $jsonld->replace_variables( $schemas );
 		$schemas = $jsonld->filter( $schemas, $jsonld, $data );
 

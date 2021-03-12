@@ -148,9 +148,13 @@ class GTag {
 	 */
 	public function enqueue_gtag_js() {
 		$property_id = $this->get( 'property_id' );
+
+		$url = 'https://www.googletagmanager.com/gtag/js?id=' . esc_attr( $property_id );
+		$url = apply_filters( 'rank_math/analytics/ga_js_url', $url );
+
 		wp_enqueue_script( // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 			'google_gtagjs',
-			'https://www.googletagmanager.com/gtag/js?id=' . esc_attr( $property_id ),
+			$url,
 			false,
 			null,
 			false
@@ -167,11 +171,6 @@ class GTag {
 			$gtag_opt['linker'] = [
 				'domains' => [ $this->get_home_domain() ],
 			];
-		}
-
-		if ( $this->get( 'anonymize_ip' ) ) {
-			// See https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization.
-			$gtag_opt['anonymize_ip'] = true;
 		}
 
 		if ( ! empty( $gtag_opt['linker'] ) ) {

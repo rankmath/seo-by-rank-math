@@ -145,7 +145,7 @@ class Beta_Optin {
 	 */
 	public function get_latest_beta_version() {
 		$version = get_transient( 'rank_math_trunk_version' );
-		if ( ! $version ) {
+		if ( ! $version || $this->is_check_requested() ) {
 			$version = $this->fetch_trunk_version();
 		}
 
@@ -323,5 +323,14 @@ class Beta_Optin {
 			}
 		</style>
 		<?php
+	}
+
+	/**
+	 * If user requested check with force-check parameter.
+	 *
+	 * @return bool
+	 */
+	public function is_check_requested() {
+		return (bool) Param::get( 'force-check' );
 	}
 }

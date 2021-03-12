@@ -67,7 +67,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 	return (
 		<div className="rank-math-graph main-graph performance-graph">
 			<ResponsiveContainer>
-				<AreaChart data={ graph }>
+				<AreaChart data={ graph } margin={{ top: 10 }} baseValue="dataMin">
 					<XAxis
 						dy={ 15 }
 						dataKey="date"
@@ -84,10 +84,19 @@ const PerformanceGraph = ( { stats, selected } ) => {
 						content={ <CustomTooltip /> }
 						wrapperStyle={ { zIndex: 10 } }
 						wrapperClassName="rank-math-graph-tooltip"
-						formatter={ ( value, name ) => [
-							value,
-							topLabels[ name ],
-						] }
+						formatter={ ( value, name ) => {
+							if ( name === 'position' ) {
+								return [
+									-value,
+									topLabels[ name ],
+								]
+							} else {
+								return [
+									value,
+									topLabels[ name ],
+								]
+							}
+						} }
 					/>
 
 					<defs>
@@ -121,15 +130,18 @@ const PerformanceGraph = ( { stats, selected } ) => {
 						}
 					</defs>
 					{
-						selectedCount < 3 && map( selected, ( check, id ) => {
+						map( selected, ( check, id ) => {
 							if ( false === check ) {
 								return null
 							}
 
 							++counter
 
+							const hideYAxis = selectedCount < 3 ? false : true;
+
 							return (
 								<YAxis
+									hide={ hideYAxis }
 									dx={ 1 === counter ? -10 : 10 }
 									axisLine={ false }
 									tickLine={ false }
@@ -137,6 +149,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 									tick={ { fill: '#7f868d', fontSize: 14 } }
 									yAxisId={ `${ id }-yaxis` }
 									orientation={ 1 === counter ? 'left' : 'right' }
+									domain={ 'position' === id ? [ dataMin => ( ( parseInt( ( dataMin + 1 ) / 4 ) - 1 ) * 4 ) - 1, dataMax => - 1 ] : [ 'auto', 'auto' ] }
 								/>
 							)
 						} )

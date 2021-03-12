@@ -124,7 +124,7 @@ class Product implements Snippet {
 			return $categories[0]->name;
 		}
 
-		$ancestors = get_ancestors( $categories[0]->term_id, $taxonomy );
+		$ancestors = array_reverse( get_ancestors( $categories[0]->term_id, $taxonomy ) );
 		foreach ( $ancestors as $parent ) {
 			$term       = get_term( $parent, $taxonomy );
 			$category[] = $term->name;

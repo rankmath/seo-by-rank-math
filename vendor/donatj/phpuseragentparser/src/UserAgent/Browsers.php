@@ -29,6 +29,7 @@ interface Browsers {
 	const KINDLE              = 'Kindle';
 	const LYNX                = 'Lynx';
 	const MIDORI              = 'Midori';
+	const MIUIBROWSER         = 'MiuiBrowser';
 	const MSIE                = 'MSIE';
 	const MSNBOT_MEDIA        = 'msnbot-media';
 	const NETFRONT            = 'NetFront';
@@ -37,6 +38,7 @@ interface Browsers {
 	const OPERA               = 'Opera';
 	const PUFFIN              = 'Puffin';
 	const SAFARI              = 'Safari';
+	const SAILFISHBROWSER     = 'SailfishBrowser';
 	const SAMSUNGBROWSER      = 'SamsungBrowser';
 	const SILK                = 'Silk';
 	const TIZENBROWSER        = 'TizenBrowser';

@@ -112,9 +112,12 @@ class Product_Redirection {
 	 * @return bool
 	 */
 	private function can_redirect() {
+		global $wp_query;
+
 		if (
 			$this->do_filter( 'woocommerce/product_redirection', true ) &&
 			! isset( $_GET['elementor-preview'] ) &&
+			! isset( $wp_query->query_vars['schema-preview'] ) &&
 			( ( Helper::get_settings( 'general.wc_remove_product_base' ) && is_product() ) ||
 			( Helper::get_settings( 'general.wc_remove_category_base' ) && is_product_category() ) )
 		) {

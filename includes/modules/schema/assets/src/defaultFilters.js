@@ -2,7 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { forEach, isArray, isObject, isString, isUndefined, isEmpty, map, get, has, find } from 'lodash'
+import { forEach, isArray, isObject, isString, isUndefined, map, get, has, find } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -116,15 +116,15 @@ const registerDefaultHooks = () => {
 	addFilter(
 		'rank_math_schema_convert_value',
 		'rank-math',
-		( check, property, key, value ) => {
+		( check, property, key, value, isCustom = false ) => {
 			if ( ! property.map.isArray ) {
 				return check
 			}
 
-			const { arrayMap = false } = property.map
+			const { arrayMap = false, arrayProps = {} } = property.map
 			if ( arrayMap ) {
 				forEach( value, ( newValue ) => {
-					property.properties.push( generateValidSchemaByMap( newValue, arrayMap ) )
+					property.properties.push( generateValidSchemaByMap( newValue, arrayMap, arrayProps ) )
 				} )
 				return property
 			}
@@ -133,7 +133,7 @@ const registerDefaultHooks = () => {
 			forEach( value, ( newValue, newKey ) => {
 				const type = get( newValue, '@type', false )
 				if ( false !== type ) {
-					property.properties.push( generateValidSchemaByMap( newValue, type ) )
+					property.properties.push( generateValidSchemaByMap( newValue, type, arrayProps, isCustom ) )
 					return
 				}
 
@@ -243,7 +243,7 @@ const registerDefaultHooks = () => {
 							instruction.itemListElement[ '@type' ] = instruction.itemListElement.type
 							delete instruction.itemListElement.type
 						}
-	
+
 						if ( ! isArray( instruction.itemListElement ) ) {
 							instruction.itemListElement = [ instruction.itemListElement ]
 						}

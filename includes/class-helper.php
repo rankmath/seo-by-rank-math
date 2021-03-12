@@ -192,6 +192,28 @@ class Helper {
 	}
 
 	/**
+	 * Get list of currently active modules.
+	 *
+	 * @return array
+	 */
+	public static function get_active_modules() {
+		$registered_modules = rank_math()->manager->modules;
+		$stored             = array_values( get_option( 'rank_math_modules', [] ) );
+		foreach ( $stored as $key => $value ) {
+			if (
+				! isset( $registered_modules[ $value ] )
+				|| ! is_object( $registered_modules[ $value ] )
+				|| ! method_exists( $registered_modules[ $value ], 'is_disabled' )
+				|| $registered_modules[ $value ]->is_disabled()
+			) {
+				unset( $stored[ $key ] );
+			}
+		}
+
+		return $stored;
+	}
+
+	/**
 	 * Clear cache from:
 	 *  - WordPress Total Cache
 	 *  - W3 Total Cache

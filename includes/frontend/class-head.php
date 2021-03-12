@@ -68,6 +68,9 @@ class Head {
 			$this->action( 'get_header', 'start_ob', 0 );
 			$this->action( 'wp_head', 'rewrite_title', 9999 );
 		}
+
+		// Remove core robots data.
+		remove_all_filters( 'wp_robots' );
 	}
 
 	/**

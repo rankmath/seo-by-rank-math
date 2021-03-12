@@ -43,7 +43,7 @@ class Local_Seo {
 		if (
 			Helper::is_module_active( 'sitemap' ) &&
 			'company' === Helper::get_settings( 'titles.knowledgegraph_type' ) &&
-			$this->do_filter( 'sitemap/locations', defined( 'RANK_MATH_PRO_FILE' ) )
+			$this->do_filter( 'sitemap/locations', false )
 		) {
 			new KML_File();
 		}
