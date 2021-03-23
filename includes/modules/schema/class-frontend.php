@@ -210,6 +210,10 @@ class Frontend {
 			$schemas['WebPage']['@type'] = 'ItemPage';
 		}
 
+		if ( isset( $schemas['howto'] ) && ! empty( $schemas['WebPage'] ) ) {
+			$schemas['howto']['mainEntityOfPage'] = [ '@id' => $schemas['WebPage']['@id'] ];
+		}
+
 		$faq_data = array_map(
 			function( $schema ) {
 				return isset( $schema['@type'] ) && 'FAQPage' === $schema['@type'];

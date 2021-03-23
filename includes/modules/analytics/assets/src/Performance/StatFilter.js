@@ -30,7 +30,7 @@ const StatFilter = ( { stats, selected, setSelection } ) => {
 	const ctr = get( stats, 'ctr', 0 )
 	const clicks = get( stats, 'clicks', 0 )
 	const position = get( stats, 'position', 0 )
-	const keywords = get( stats, [ 'keywords', 'keywords' ], 0 )
+	const keywords = get( stats, 'keywords', 0 )
 	const impressions = get( stats, 'impressions', 0 )
 
 	const classes = classnames( 'rank-math-graph-filter rank-math-stat-filters has-3-col' )

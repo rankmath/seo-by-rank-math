@@ -1,13 +1,13 @@
 /**
- * External dependencies
- */
-import { map } from 'lodash'
-
-/**
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch'
 import { dispatch } from '@wordpress/data'
+
+/**
+ * Internal dependencies
+ */
+import { filtersToUrlParams } from '../../functions'
 
 /**
  * Get posts overview.
@@ -52,12 +52,7 @@ export function getPostsSummary() {
  * @param {Object} filters The filters.
  */
 export function getPostsRows( page, filters ) {
-	let params = ''
-	map( filters, ( val, key ) => {
-		if ( val ) {
-			params += '&' + key + '=1'
-		}
-	} )
+	const params = filtersToUrlParams( filters )
 
 	apiFetch( {
 		method: 'GET',
@@ -74,17 +69,12 @@ export function getPostsRows( page, filters ) {
  * @param {Object} filters The filters.
  */
 export function getPostsRowsByObjects( page, filters ) {
-	let params = ''
-	map( filters, ( val, key ) => {
-		if ( val ) {
-			params += '&' + key + '=1'
-		}
-	} )
+	const params = filtersToUrlParams( filters )
 
 	apiFetch( {
 		method: 'GET',
 		path: 'rankmath/v1/an/postsRowsByObjects?page=' + page + params,
 	} ).then( ( response ) => {
-		dispatch( 'rank-math' ).updatePostsRowsByObjects( page, response )
+		dispatch( 'rank-math' ).updatePostsRowsByObjects( page, response, '' === params ? 'all' : params )
 	} )
 }

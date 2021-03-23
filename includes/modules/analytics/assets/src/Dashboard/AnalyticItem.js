@@ -4,7 +4,6 @@
 import {
 	AreaChart,
 	Area,
-	YAxis,
 	Tooltip as ChartTooltip,
 	ResponsiveContainer,
 } from 'recharts'
@@ -17,13 +16,17 @@ import Tooltip from '@scShared/Tooltip'
 import CustomTooltip from '@scShared/CustomTooltip'
 
 const AnalyticItem = ( { title, tooltip, stats, graph, dataKey } ) => {
+	const revertStat = 'position' === dataKey ? true : false
 	return (
 		<div className="rank-math-analytic-item">
 			<h3>
 				{ title }
 				<Tooltip>{ tooltip }</Tooltip>
 			</h3>
-			<ItemStat { ...stats } />
+			<ItemStat
+				{ ...stats }
+				revert={ revertStat }
+			/>
 			<div className="rank-math-graph rank-math-analytic-graph">
 				<ResponsiveContainer height={ 50 }>
 					<AreaChart
@@ -45,13 +48,13 @@ const AnalyticItem = ( { title, tooltip, stats, graph, dataKey } ) => {
 										-value,
 										name,
 									]
-								} else {
-									return [
-										value,
-										name,
-									]
 								}
-							} }	
+
+								return [
+									value,
+									name,
+								]
+							} }
 						/>
 						<defs>
 							<linearGradient

@@ -124,6 +124,10 @@ class Manager extends Post_Variables {
 	 * @return bool
 	 */
 	private function should_we_setup() {
+		if ( Helper::is_ux_builder() ) {
+			return false;
+		}
+
 		global $wp_customize;
 		if ( isset( $wp_customize ) || $this->is_setup ) {
 			return false;

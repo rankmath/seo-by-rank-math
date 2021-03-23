@@ -118,6 +118,11 @@
                         line-height: 28px;
 
                         margin-left: 5px;
+
+                        &.adding {
+                            color: $color-good-dark;
+                            border-color: $color-good-dark;
+                        }
                     }
                 }
 

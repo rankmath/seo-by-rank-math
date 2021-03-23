@@ -13,6 +13,7 @@ import TabPanel from '@components/TabPanel'
 import Social from '@components/Social/Social'
 import General from '@components/General/General'
 import Advanced from '@components/Advanced/Advanced'
+import '@shared/css-variables'
 
 /**
  * @description Tab on select

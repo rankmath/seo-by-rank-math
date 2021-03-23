@@ -103,6 +103,10 @@ class Local_Seo {
 	 * @return array
 	 */
 	public function organization_or_person( $data, $json_ld ) {
+		if ( ! $json_ld->can_add_global_entities( $data ) ) {
+			return $data;
+		}
+
 		$entity = [
 			'@type' => '',
 			'@id'   => '',

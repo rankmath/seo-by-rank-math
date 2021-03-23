@@ -115,7 +115,7 @@ class Timezone {
 
 		$timezone = $this->determine_timezone_manually( $utc_offset );
 
-		return false !== $timezone ? $timezone : 'UTC';
+		return $timezone ? $timezone : 'UTC';
 	}
 
 	/**

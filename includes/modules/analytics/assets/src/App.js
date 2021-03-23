@@ -98,7 +98,9 @@ const getTabs = () => {
 	} )
 
 	tabs.push( {
-		path: '/tracker',
+		path: '/tracker/:paged',
+		link: '/tracker/1',
+		exact: false,
 		title: (
 			<Fragment>
 				<i
@@ -145,6 +147,10 @@ const App = () => {
 									activeClassName="is-active"
 									key={ path }
 									to={ link ? link : path }
+									isActive={ ( match, loc ) => {
+										const check = link === false ? path : link
+										return check.replace( /\/[0-9]+$/g, '' ) === loc.pathname.replace( /\/[0-9]+$/g, '' )
+									} }
 								>
 									{ title }
 								</NavLink>

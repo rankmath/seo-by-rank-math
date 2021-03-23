@@ -3,7 +3,7 @@
  */
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { find, first, isEqual, without } from 'lodash'
+import { find, first, isEqual, isUndefined, without } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -69,7 +69,7 @@ class TableCard extends Component {
 	getShowCols( headers ) {
 		return headers
 			.map( ( { key, visible } ) => {
-				if ( typeof visible === 'undefined' || visible ) {
+				if ( isUndefined( visible ) || visible ) {
 					return key
 				}
 				return false

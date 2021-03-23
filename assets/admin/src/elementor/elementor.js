@@ -68,12 +68,13 @@ class ElementorEditor extends Editor {
 jQuery( function() {
 	window.rankMathEditor = new ElementorEditor()
 	window.rankMathGutenberg = window.rankMathEditor
-	window.rankMathEditor.setup( new DataCollector() )
 	new UIThemeComponent()
 	elementor.once( 'preview:loaded', function() {
 		$e.components
 			.get( 'panel/elements' )
 			.addTab( 'rank-math', { title: 'SEO' } )
+
+		window.rankMathEditor.setup( new DataCollector() )
 		dispatch( 'rank-math' ).refreshResults()
 	} )
 } )

@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { isUndefined } from 'lodash'
+
+/**
  * WordPress dependencies
  */
 import { select } from '@wordpress/data'
@@ -60,11 +65,15 @@ export function updatePostsRows( page, rows ) {
  *
  * @param {number} page Page number.
  * @param {Array}  rows The rows.
+ * @param {string} params The filter parameter.
  *
  * @return {Object} An action for redux.
  */
-export function updatePostsRowsByObjects( page, rows ) {
+export function updatePostsRowsByObjects( page, rows, params ) {
 	const data = { ...select( 'rank-math' ).getPostsRowsByObjectsAll() }
-	data[ page ] = rows
+	if ( isUndefined( data[ page ] ) ) {
+		data[ page ] = {}
+	}
+	data[ page ][ params ] = rows
 	return updateAppData( 'postsRowsByObjects', data )
 }

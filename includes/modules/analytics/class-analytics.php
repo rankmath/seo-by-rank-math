@@ -199,7 +199,7 @@ class Analytics extends Base {
 					<?php esc_html_e( 'Average Position', 'rank-math' ); ?>
 					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'This is the number of pageviews carried out by visitors from Google.', 'rank-math' ); ?></span></span>
 				</h4>
-				<?php $this->get_analytic_block( $data->position ); ?>
+				<?php $this->get_analytic_block( $data->position, true ); ?>
 			</div>
 
 		</div>
@@ -209,18 +209,19 @@ class Analytics extends Base {
 	/**
 	 * Get analytic block
 	 *
-	 * @param object $item Item.
+	 * @param object  $item   Item.
+	 * @param boolean $revert Flag whether to revert difference icon or not.
 	 */
-	private function get_analytic_block( $item ) {
+	private function get_analytic_block( $item, $revert = false ) {
 		$is_negative = absint( $item['difference'] ) !== $item['difference'];
-		$diff_class  = $is_negative ? 'down' : 'up';
-		if ( ! $is_negative && $item['difference'] > 0 ) {
+		$diff_class  = ( ! $revert && $is_negative ) || ( $revert && ! $is_negative && $item['difference'] > 0 ) ? 'down' : 'up';
+		if ( ( ! $revert && ! $is_negative && $item['difference'] > 0 ) || ( $revert && $is_negative ) ) {
 			$diff_class = 'up';
 		}
 		?>
 		<div class="rank-math-item-numbers">
 			<strong class="text-large" title="<?php echo esc_html( Str::human_number( $item['total'] ) ); ?>"><?php echo esc_html( Str::human_number( $item['total'] ) ); ?></strong>
-			<span class="rank-math-item-difference <?php echo esc_attr( $diff_class ); ?>" title="<?php echo esc_html( Str::human_number( $item['difference'] ) ); ?>"><?php echo esc_html( Str::human_number( $item['difference'] ) ); ?></span>
+			<span class="rank-math-item-difference <?php echo esc_attr( $diff_class ); ?>" title="<?php echo esc_html( Str::human_number( abs( $item['difference'] ) ) ); ?>"><?php echo esc_html( Str::human_number( abs( $item['difference'] ) ) ); ?></span>
 		</div>
 		<?php
 	}

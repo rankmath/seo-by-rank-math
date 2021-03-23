@@ -1,0 +1,7 @@
+// CSS variables.
+// See `assets/sharded/css-variables.js` for modifications via JS.
+// NOTE: Please use the `rankmath` namespace for each var as they
+// are globally available to all stylesheets within the browser.
+:root {
+    --rankmath-wp-adminbar-height: 0;
+}

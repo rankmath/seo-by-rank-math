@@ -59,6 +59,7 @@ const alias = {
 		__dirname,
 		'./includes/modules/analytics/assets/src/shared'
 	),
+	'@shared': resolve( __dirname, './assets/shared/src' ),
 	'@helpers': resolve( __dirname, './assets/admin/src/helpers' ),
 	'@slots': resolve( __dirname, './assets/admin/src/sidebar/slots' ),
 	'@classic': resolve( __dirname, './assets/admin/src/classic' ),
@@ -92,6 +93,9 @@ const entryPoints = {
 	analytics: {
 		stats: './includes/modules/analytics/assets/src/index.js',
 	},
+	front: {
+		'rank-math': './assets/front/src/rank-math.js',
+	},
 	schema: {
 		'schema-gutenberg': './includes/modules/schema/assets/src/index.js',
 		'schema-classic': './includes/modules/schema/assets/src/metabox-classic.js',
@@ -102,6 +106,7 @@ const entryPoints = {
 const paths = {
 	plugin: './assets/admin/js',
 	analytics: './includes/modules/analytics/assets/js',
+	front: './assets/front/js',
 	'instant-indexing': './includes/modules/instant-indexing/assets/js',
 	schema: './includes/modules/schema/assets/js',
 }
