@@ -1,4 +1,14 @@
 /**
+ * External dependencies
+ */
+import { isUndefined } from 'lodash'
+
+/**
+ * Internal dependencies
+ */
+import { filtersToUrlParams } from '../../functions'
+
+/**
  * Get posts overview stats.
  *
  * @param {Object} state The app state.
@@ -70,9 +80,13 @@ export function getPostsRowsByObjectsAll( state ) {
  *
  * @param {Object} state The app state.
  * @param {number} page The page number.
+ * @param {string} filters The filter parameter.
  *
  * @return {string} Return posts rows.
  */
-export function getPostsRowsByObjects( state, page ) {
-	return state.appData.postsRowsByObjects[ page ]
+export function getPostsRowsByObjects( state, page, filters ) {
+	let params = filtersToUrlParams( filters )
+	params = '' === params ? 'all' : params
+
+	return isUndefined( state.appData.postsRowsByObjects[ page ] ) ? {} : state.appData.postsRowsByObjects[ page ][ params ]
 }

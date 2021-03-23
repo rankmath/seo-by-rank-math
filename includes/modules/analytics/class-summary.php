@@ -46,38 +46,6 @@ class Summary {
 			->whereBetween( 'created', [ Stats::get()->compare_start_date, Stats::get()->compare_end_date ] )
 			->one();
 
-		$query    = $wpdb->prepare(
-			"SELECT ROUND(AVG(keywords),0) as keywords
-			 FROM (
-			    SELECT count(DISTINCT(query)) AS keywords
-				FROM {$wpdb->prefix}rank_math_analytics_gsc
-				WHERE created BETWEEN %s AND %s
-			    GROUP BY created
-			) as ks",
-			Stats::get()->start_date,
-			Stats::get()->end_date
-		);
-		$keywords = $wpdb->get_row( $query ); // phpcs:ignore
-
-		$query        = $wpdb->prepare(
-			"SELECT ROUND(AVG(keywords),0) as keywords
-			 FROM (
-				 SELECT count(DISTINCT(query)) AS keywords
- 				FROM {$wpdb->prefix}rank_math_analytics_gsc
- 				WHERE created BETWEEN %s AND %s
- 			    GROUP BY created
-			) as ks",
-			Stats::get()->compare_start_date,
-			Stats::get()->compare_end_date
-		);
-		$old_keywords = $wpdb->get_row( $query ); // phpcs:ignore
-
-		$stats->keywords = [
-			'total'      => (int) $keywords->keywords,
-			'previous'   => (int) $old_keywords->keywords,
-			'difference' => $keywords->keywords - $old_keywords->keywords,
-		];
-
 		$stats->clicks = [
 			'total'      => (int) $stats->clicks,
 			'previous'   => (int) $old_stats->clicks,
@@ -96,6 +64,8 @@ class Summary {
 			'difference' => (float) \number_format( $stats->position - $old_stats->position, 2 ),
 		];
 
+		$stats->keywords = $this->get_keywords_summary();
+
 		$stats = apply_filters( 'rank_math/analytics/get_widget', $stats );
 
 		set_transient( $cache_key, $stats, DAY_IN_SECONDS * Stats::get()->days );
@@ -111,38 +81,45 @@ class Summary {
 	public function get_optimization_summary() {
 		global $wpdb;
 
-		$stats = new \stdClass();
+		$stats = (object) [
+			'good'    => 0,
+			'ok'      => 0,
+			'bad'     => 0,
+			'noData'  => 0,
+			'total'   => 0,
+			'average' => 0,
+		];
 
-		$stats->good = DB::objects()->selectCount( 'object_id', 'count' )
-			->where( 'is_indexable', 1 )
-			->whereBetween( 'seo_score', [ 81, 100 ] )
-			->getVar();
+		$data = $wpdb->get_results(
+			"SELECT COUNT(object_id) AS count,
+				CASE
+					WHEN seo_score BETWEEN 81 AND 100 THEN 'good'
+					WHEN seo_score BETWEEN 51 AND 80 THEN 'ok'
+					WHEN seo_score BETWEEN 1 AND 50 THEN 'bad'
+					WHEN seo_score = 0 THEN 'noData'
+					ELSE 'none'
+				END AS type
+			FROM {$wpdb->prefix}rank_math_analytics_objects
+			WHERE is_indexable = 1
+			GROUP BY type"
+		);
 
-		$stats->ok = DB::objects()->selectCount( 'object_id', 'count' )
-			->where( 'is_indexable', 1 )
-			->whereBetween( 'seo_score', [ 51, 80 ] )
-			->getVar();
-
-		$stats->bad = DB::objects()->selectCount( 'object_id', 'count' )
-			->where( 'is_indexable', 1 )
-			->whereBetween( 'seo_score', [ 1, 50 ] )
-			->getVar();
-
-		$stats->noData = DB::objects()->selectCount( 'object_id', 'count' ) // phpcs:ignore
-			->where( 'is_indexable', 1 )
-			->where( 'seo_score', 0 )
-			->getVar();
-
-		$stats->total   = $stats->good + $stats->ok + $stats->bad + $stats->noData; // phpcs:ignore
+		$total = 0;
+		foreach ( $data as $row ) {
+			$total += (int) $row->count; // phpcs:ignore
+			$stats->{$row->type} = (int) $row->count;
+		}
+		$stats->total   = $total;
 		$stats->average = 0;
 
 		// Average.
 		$average = DB::objects()
 			->selectCount( 'object_id', 'total' )
+			->where( 'is_indexable', 1 )
 			->selectSum( 'seo_score', 'score' )
 			->one();
 
-		$average->total += $stats->noData; // phpcs:ignore
+		$average->total += property_exists( $stats, 'noData' ) ? $stats->noData : 0; // phpcs:ignore
 
 		if ( $average->total > 0 ) {
 			$stats->average = $average->score / $average->total;
@@ -255,64 +232,38 @@ class Summary {
 	public function get_keywords_summary() {
 		global $wpdb;
 
-		$query = $wpdb->prepare(
-			"SELECT ROUND(AVG(keywords),0) as keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr, AVG(position) AS position
-			 FROM (
-			    SELECT count(DISTINCT(query)) AS keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr, AVG(position) AS position
+		// Get Total Keywords Counts.
+		$keywords_count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(DISTINCT(query))
 				FROM {$wpdb->prefix}rank_math_analytics_gsc
 				WHERE created BETWEEN %s AND %s
-			    GROUP BY created
-			) as ks",
-			$this->start_date,
-			$this->end_date
+				GROUP BY Date(created)
+				ORDER BY Date(created) DESC
+				LIMIT 1",
+				$this->start_date,
+				$this->end_date
+			)
 		);
-		$stats = $wpdb->get_row( $query ); // phpcs:ignore
 
-		$query     = $wpdb->prepare(
-			"SELECT ROUND(AVG(keywords),0) as keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr, AVG(position) AS position
-			 FROM (
-				 SELECT count(DISTINCT(query)) AS keywords, SUM(impressions) AS impressions, SUM(clicks) AS clicks, AVG(ctr) AS ctr, AVG(position) AS position
- 				FROM {$wpdb->prefix}rank_math_analytics_gsc
- 				WHERE created BETWEEN %s AND %s
- 			    GROUP BY created
-			) as ks",
-			$this->compare_start_date,
-			$this->compare_end_date
+		$old_keywords_count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(DISTINCT(query))
+				FROM {$wpdb->prefix}rank_math_analytics_gsc
+				WHERE created BETWEEN %s AND %s
+				GROUP BY Date(created)
+				ORDER BY Date(created) DESC
+				LIMIT 1",
+				$this->compare_start_date,
+				$this->compare_end_date
+			)
 		);
-		$old_stats = $wpdb->get_row( $query ); // phpcs:ignore
 
-		$keywords           = new \stdClass();
-		$keywords->keywords = [
-			'total'      => (int) $stats->keywords,
-			'previous'   => (int) $old_stats->keywords,
-			'difference' => $stats->keywords - $old_stats->keywords,
+		$keywords = [
+			'total'      => (int) $keywords_count,
+			'previous'   => (int) $old_keywords_count,
+			'difference' => (int) $keywords_count - (int) $old_keywords_count,
 		];
-
-		$keywords->clicks = [
-			'total'      => (int) $stats->clicks,
-			'previous'   => (int) $old_stats->clicks,
-			'difference' => $stats->clicks - $old_stats->clicks,
-		];
-
-		$keywords->impressions = [
-			'total'      => (int) $stats->impressions,
-			'previous'   => (int) $old_stats->impressions,
-			'difference' => $stats->impressions - $old_stats->impressions,
-		];
-
-		$keywords->ctr = [
-			'total'      => (float) \number_format( $stats->ctr, 2 ),
-			'previous'   => (float) \number_format( $old_stats->ctr, 2 ),
-			'difference' => (float) \number_format( $stats->ctr - $old_stats->ctr, 2 ),
-		];
-
-		$keywords->position = [
-			'total'      => (float) \number_format( $stats->position, 2 ),
-			'previous'   => (float) \number_format( $old_stats->position, 2 ),
-			'difference' => (float) \number_format( $stats->position - $old_stats->position, 2 ),
-		];
-
-		$keywords->graph = $this->get_analytics_summary_graph();
 
 		return $keywords;
 	}
@@ -325,38 +276,44 @@ class Summary {
 	public function get_analytics_summary_graph() {
 		global $wpdb;
 
-		$data     = new \stdClass();
-		$interval = $this->get_sql_range( 'created' );
-
-		$data->analytics = DB::analytics()
-			->distinct()
-			->select( 'DATE_FORMAT( created,\'%Y-%m-%d\') as date' )
-			->selectSum( 'impressions', 'impressions' )
-			->selectSum( 'clicks', 'clicks' )
-			->selectAvg( 'position', 'position' )
-			->selectAvg( 'ctr', 'ctr' )
-			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
-			->groupBy( $interval )
-			->orderBy( 'created', 'ASC' )
-			->get();
+		$data          = new \stdClass();
+		$intervals     = $this->get_intervals();
+		$sql_daterange = $this->get_sql_date_intervals( $intervals );
 
 		// phpcs:disable
 		$query = $wpdb->prepare(
-			"SELECT DATE_FORMAT( created, '%%Y-%%m-%%d') as date, ROUND(AVG(keywords),0) as keywords
-			 FROM (
-			    SELECT created, count(DISTINCT(query)) AS keywords
-				FROM {$wpdb->prefix}rank_math_analytics_gsc
-				WHERE created BETWEEN %s AND %s
-			    GROUP BY created
-			) as ka
-			GROUP BY {$interval}",
+			"SELECT DATE_FORMAT( created, '%%Y-%%m-%%d') as date, SUM(clicks) as clicks, SUM(impressions) as impressions, AVG(position) as position, AVG(ctr) as ctr, {$sql_daterange}
+			FROM {$wpdb->prefix}rank_math_analytics_gsc
+			WHERE created BETWEEN %s AND %s
+			GROUP BY range_group",
 			$this->start_date,
 			$this->end_date
 		);
-		$data->keywords = $wpdb->get_results( $query );
+		$analytics = $wpdb->get_results( $query );
+		$analytics = $this->set_dimension_as_key( $analytics, 'range_group' );
 		// phpcs:enable
 
-		$intervals    = $this->get_intervals();
+		// phpcs:disable
+		$query = $wpdb->prepare(
+			"SELECT t.range_group, MAX(CONCAT(t.range_group, ':', t.date, ':', t.keywords )) as mixed FROM
+				(SELECT COUNT(DISTINCT(query)) as keywords, Date(created) as date, {$sql_daterange}
+				FROM {$wpdb->prefix}rank_math_analytics_gsc
+				WHERE created BETWEEN %s AND %s
+				GROUP BY range_group, Date(created)) AS t
+			GROUP BY t.range_group",
+			$this->start_date,
+			$this->end_date
+		);
+		$keywords = $wpdb->get_results( $query );
+		// phpcs:enable
+
+		$keywords = $this->extract_data_from_mixed( $keywords, 'mixed', ':', [ 'keywords', 'date' ] );
+		$keywords = $this->set_dimension_as_key( $keywords, 'range_group' );
+
+		// merge metrics data.
+		$data->analytics = [];
+		$data->analytics = $this->get_merged_metrics( $analytics, $keywords, true );
+
 		$data->merged = $this->get_date_array(
 			$intervals['dates'],
 			[
@@ -374,7 +331,6 @@ class Summary {
 
 		// Merge for performance.
 		$data->merged = $this->get_merge_data_graph( $data->analytics, $data->merged, $intervals['map'] );
-		$data->merged = $this->get_merge_data_graph( $data->keywords, $data->merged, $intervals['map'] );
 
 		// For developers.
 		$data = apply_filters( 'rank_math/analytics/analytics_summary_graph', $data, $intervals );

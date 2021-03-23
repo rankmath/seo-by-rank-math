@@ -69,11 +69,13 @@
 		"build": "webpack --mode=production --progress",
 		"dev": "webpack --mode=development --watch",
 		"deva": "webpack --mode=development --what=analytics --watch",
+		"devf": "webpack --mode=development --what=front --watch",
 		"devs": "webpack --mode=development --what=schema --watch",
 		"a": "webpack --mode=production --what=analytics --progress",
+		"f": "webpack --mode=production --what=front --progress",
 		"s": "webpack --mode=production --what=schema --progress",
 		"i": "webpack --mode=production --what=instant-indexing --progress",
-		"dist": "npm run build && npm run a && npm run s && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS"
+		"dist": "npm run build && npm run a && npm run f && npm run s && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS"
 	},
 	"browserslist": [
 		"last 2 versions"

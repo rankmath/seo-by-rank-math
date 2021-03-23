@@ -70,11 +70,7 @@ const AnalyticsOverview = ( { stats, history } ) => {
 						'Total number of keywords your site ranking below 100 position.',
 						'rank-math'
 					) }
-					stats={ get(
-						stats,
-						[ 'keywords', 'keywords' ],
-						defaultStat
-					) }
+					stats={ get( stats, 'keywords', defaultStat ) }
 					graph={ stats.graph.merged }
 					dataKey="keywords"
 				/>

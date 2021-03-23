@@ -2,4 +2,4 @@
  * Plugin:	Rank Math
  * URL:	https://rankmath.com/wordpress/plugin/seo-suite/
  * Name:	rank-math-contact-info.css
- */.rank-math-contact-section{clear:left;margin:1rem 0}.rank-math-contact-section label{font-weight:bold}.rank-math-contact-hours-details .rank-math-opening-hours{margin-bottom:6px}.rank-math-contact-hours-details .rank-math-opening-hours:last-child{margin-bottom:0}.rank-math-contact-hours .rank-math-opening-days,.rank-math-contact-hours .rank-math-opening-time{display:block}.rank-math-phone-number{margin:6px 0}.rank-math-contact-map iframe{width:100%;height:300px;border:0}.clear{clear:both}
+ */:root{--rankmath-wp-adminbar-height: 0}.rank-math-contact-section{clear:left;margin:1rem 0}.rank-math-contact-section label{font-weight:bold}.rank-math-contact-hours-details .rank-math-opening-hours{margin-bottom:6px}.rank-math-contact-hours-details .rank-math-opening-hours:last-child{margin-bottom:0}.rank-math-contact-hours .rank-math-opening-days,.rank-math-contact-hours .rank-math-opening-time{display:block}.rank-math-phone-number{margin:6px 0}.rank-math-contact-map iframe{width:100%;height:300px;border:0}.clear{clear:both}

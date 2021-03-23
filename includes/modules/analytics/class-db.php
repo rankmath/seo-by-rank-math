@@ -13,6 +13,7 @@ namespace RankMath\Analytics;
 use RankMath\Helper;
 use RankMath\Google\Api;
 use MyThemeShop\Helpers\Str;
+use MyThemeShop\Helpers\DB as DB_Helper;
 use MyThemeShop\Database\Database;
 
 defined( 'ABSPATH' ) || exit;
@@ -168,8 +169,11 @@ class DB {
 		$table = [
 			'console'   => 'rank_math_analytics_gsc',
 			'analytics' => 'rank_math_analytics_ga',
-			'adsense'   => 'rank_math_analytics_adsense',
 		];
+
+		if ( DB_Helper::check_table_exists( 'rank_math_analytics_adsense' ) ) {
+			$table['adsense'] = 'rank_math_analytics_adsense';
+		}
 
 		$table = self::table( $table[ $action ] );
 
@@ -190,12 +194,16 @@ class DB {
 	 */
 	public static function job_date_exists( $date, $table = 'console' ) {
 		$tables = [
-			'adsense'   => 'rank_math_analytics_adsense',
 			'analytics' => 'rank_math_analytics_ga',
 			'console'   => 'rank_math_analytics_gsc',
 		];
-		$table  = isset( $tables[ $table ] ) ? $tables [ $table ] : $table;
-		$id     = self::table( $table );
+
+		if ( DB_Helper::check_table_exists( 'rank_math_analytics_adsense' ) ) {
+			$table['adsense'] = 'rank_math_analytics_adsense';
+		}
+
+		$table = isset( $tables[ $table ] ) ? $tables [ $table ] : $table;
+		$id    = self::table( $table );
 
 		$id = $id
 			->select( 'id' )

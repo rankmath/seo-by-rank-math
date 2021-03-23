@@ -2,7 +2,7 @@
  * External dependencies
  */
 import moment from 'moment'
-import { get, map, isEmpty } from 'lodash'
+import { map, isEmpty } from 'lodash'
 import ContentLoader from 'react-content-loader'
 import {
 	AreaChart,
@@ -63,11 +63,12 @@ const PerformanceGraph = ( { stats, selected } ) => {
 		position: __( 'Position', 'rank-math' ),
 	}
 	const selectedCount = Object.values( selected ).filter( Boolean ).length
+	const positionsCount = stats.graph.merged.reduce( ( count, obj ) => 'undefined' !== typeof obj.position ? count = count + 1 : count, 0 )
 
 	return (
 		<div className="rank-math-graph main-graph performance-graph">
 			<ResponsiveContainer>
-				<AreaChart data={ graph } margin={{ top: 10 }} baseValue="dataMin">
+				<AreaChart data={ graph } margin={ { top: 10 } } baseValue="dataMin">
 					<XAxis
 						dy={ 15 }
 						dataKey="date"
@@ -90,12 +91,12 @@ const PerformanceGraph = ( { stats, selected } ) => {
 									-value,
 									topLabels[ name ],
 								]
-							} else {
-								return [
-									value,
-									topLabels[ name ],
-								]
 							}
+
+							return [
+								value,
+								topLabels[ name ],
+							]
 						} }
 					/>
 
@@ -131,13 +132,13 @@ const PerformanceGraph = ( { stats, selected } ) => {
 					</defs>
 					{
 						map( selected, ( check, id ) => {
-							if ( false === check ) {
+							if ( false === check || ( 'position' === id && positionsCount === 0 ) ) {
 								return null
 							}
 
 							++counter
 
-							const hideYAxis = selectedCount < 3 ? false : true;
+							const hideYAxis = selectedCount < 3 ? false : true
 
 							return (
 								<YAxis
@@ -149,14 +150,14 @@ const PerformanceGraph = ( { stats, selected } ) => {
 									tick={ { fill: '#7f868d', fontSize: 14 } }
 									yAxisId={ `${ id }-yaxis` }
 									orientation={ 1 === counter ? 'left' : 'right' }
-									domain={ 'position' === id ? [ dataMin => ( ( parseInt( ( dataMin + 1 ) / 4 ) - 1 ) * 4 ) - 1, dataMax => - 1 ] : [ 'auto', 'auto' ] }
+									domain={ 'position' === id ? [ ( dataMin ) => ( ( parseInt( ( dataMin + 1 ) / 4 ) - 1 ) * 4 ) - 1, -1 ] : [ 'auto', 'auto' ] }
 								/>
 							)
 						} )
 					}
 					{
 						map( selected, ( check, id ) => {
-							if ( false === check ) {
+							if ( false === check || ( 'position' === id && positionsCount === 0 ) ) {
 								return null
 							}
 

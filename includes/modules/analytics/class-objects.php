@@ -30,6 +30,7 @@ class Objects extends Summary {
 
 		$pages = DB::objects()
 			->whereIn( 'page', \array_unique( $pages ) )
+			->where( 'is_indexable', 1 )
 			->get( ARRAY_A );
 
 		return $this->set_page_as_key( $pages );
@@ -45,51 +46,61 @@ class Objects extends Summary {
 	public function get_objects_by_score( $request ) {
 		global $wpdb;
 
-		$min = 0;
-		$max = false;
-
-		$filters = [
+		$filters    = [
 			'good'   => $request->get_param( 'good' ),
 			'ok'     => $request->get_param( 'ok' ),
 			'bad'    => $request->get_param( 'bad' ),
 			'noData' => $request->get_param( 'noData' ),
 		];
+		$field_name = 'seo_score';
+		$per_page   = 25;
+		$offset     = ( $request->get_param( 'page' ) - 1 ) * $per_page;
 
+		$conditions = [];
 		if ( $filters['good'] ) {
-			$min = 81;
-			$max = 100;
+			$conditions[] = "{$field_name} BETWEEN 81 AND 100";
 		}
 
 		if ( $filters['ok'] ) {
-			$min = 51;
-			$max = $max ? $max : 80;
+			$conditions[] = "{$field_name} BETWEEN 51 AND 80";
 		}
 
 		if ( $filters['bad'] ) {
-			$min = 1;
-			$max = $max ? $max : 50;
-		}
-
-		$per_page = 25;
-		$offset   = ( $request->get_param( 'page' ) - 1 ) * $per_page;
-		$pages    = DB::objects()
-			->found_rows()
-			->limit( $per_page, $offset )
-			->orderBy( 'created', 'DESC' );
-
-		if ( $max ) {
-			$pages->whereBetween( 'seo_score', [ $min, $max ] );
+			$conditions[] = "{$field_name} BETWEEN 1 AND 50";
 		}
 
 		if ( $filters['noData'] ) {
-			$pages->orWhere( 'seo_score', 0 );
+			$conditions[] = "{$field_name} = 0";
 		}
 
-		$pages = $pages->get( ARRAY_A );
+		$subwhere = '';
+		if ( count( $conditions ) > 0 ) {
+			$subwhere = implode( ' OR ', $conditions );
+			$subwhere = " AND ({$subwhere})";
+		}
+
+		$limit = "LIMIT {$offset}, {$per_page}";
+
+		// phpcs:disable
+		$pages = $wpdb->get_results(
+			"SELECT * FROM {$wpdb->prefix}rank_math_analytics_objects 
+			WHERE is_indexable = 1 
+			{$subwhere}
+			ORDER BY created DESC
+			{$limit}",
+			ARRAY_A
+		);
+
+		$total_rows = $wpdb->get_var(
+			"SELECT count(*) FROM {$wpdb->prefix}rank_math_analytics_objects 
+			WHERE is_indexable = 1 
+			{$subwhere}
+			ORDER BY created DESC"
+		);
 
 		return [
 			'rows'      => $this->set_page_as_key( $pages ),
-			'rowsFound' => DB::objects()->get_found_rows(),
+			'rowsFound' => $total_rows,
 		];
 	}
 }

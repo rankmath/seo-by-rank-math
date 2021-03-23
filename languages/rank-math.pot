@@ -1832,18 +1832,6 @@ msgstr ""
 msgid "The $%1$s is required for variable %2$s."
 msgstr ""
 
-msgid "Object Type i.e. post, term, user"
-msgstr ""
-
-msgid "Object unique id"
-msgstr ""
-
-msgid "Meta to add or update data."
-msgstr ""
-
-msgid "schemas to add or update data."
-msgstr ""
-
 msgid "Module slug"
 msgstr ""
 
@@ -1872,6 +1860,18 @@ msgid "Invalid post ID."
 msgstr ""
 
 msgid "Sorry, field is empty which is not allowed."
+msgstr ""
+
+msgid "Object Type i.e. post, term, user"
+msgstr ""
+
+msgid "Object unique id"
+msgstr ""
+
+msgid "Meta to add or update data."
+msgstr ""
+
+msgid "schemas to add or update data."
 msgstr ""
 
 msgid "Error: Nonce verification failed"

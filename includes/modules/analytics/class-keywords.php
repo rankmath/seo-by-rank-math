@@ -20,6 +20,29 @@ defined( 'ABSPATH' ) || exit;
 class Keywords extends Posts {
 
 	/**
+	 * Get most recent day's keywords.
+	 *
+	 * @return array
+	 */
+	public function get_recent_keywords() {
+		global $wpdb;
+
+		// phpcs:disable
+		$query = $wpdb->prepare(
+			"SELECT query
+			FROM {$wpdb->prefix}rank_math_analytics_gsc
+			WHERE DATE(created) = (SELECT MAX(DATE(created)) FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s)
+			GROUP BY query",
+			Stats::get()->start_date,
+			Stats::get()->end_date
+		);
+		$data = $wpdb->get_results( $query );
+		// phpcs:enable
+
+		return $data;
+	}
+
+	/**
 	 * Get keywords.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
@@ -29,17 +52,24 @@ class Keywords extends Posts {
 	public function get_keywords_rows( WP_REST_Request $request ) {
 		$per_page = 25;
 		$offset   = ( $request->get_param( 'page' ) - 1 ) * $per_page;
+
+		// Get most recent day's keywords only.
+		$keywords = $this->get_recent_keywords();
+		$keywords = wp_list_pluck( $keywords, 'query' );
+		$keywords = array_map( 'esc_sql', $keywords );
 		$rows     = $this->get_analytics_data(
 			[
 				'dimension' => 'query',
 				'objects'   => false,
 				'pageview'  => false,
-				'orderBy'   => 't1.impressions',
-				'limit'     => "LIMIT {$offset}, {$per_page}",
+				'orderBy'   => 'impressions',
+				'offset'    => $offset,
+				'perpage'   => $per_page,
+				'sub_where' => " AND query IN ('" . join( "', '", $keywords ) . "')",
 			]
 		);
 
-		return apply_filters( 'rank_math/analytics/keywords', $this->set_query_as_key( $rows ) );
+		return apply_filters( 'rank_math/analytics/keywords', $rows );
 	}
 
 	/**
@@ -57,21 +87,49 @@ class Keywords extends Posts {
 			return $cache;
 		}
 
-		$data = $wpdb->get_results( // phpcs:ignore
-			$wpdb->prepare(
-				"SELECT query, ROUND( AVG(position), 0 ) as position FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s GROUP BY query",
-				$this->start_date,
-				$this->end_date
-			)
+		$query = $wpdb->prepare(
+			"SELECT COUNT(t1.query) AS total,
+				CASE
+					WHEN t1.position BETWEEN 1 AND 3 THEN 'top3'
+					WHEN t1.position BETWEEN 4 AND 10 THEN 'top10'
+					WHEN t1.position BETWEEN 11 AND 50 THEN 'top50'
+					WHEN t1.position BETWEEN 51 AND 100 THEN 'top100'
+					ELSE 'none'
+				END AS position_type
+			FROM (SELECT query, ROUND( AVG(position), 0 ) AS position 
+				FROM {$wpdb->prefix}rank_math_analytics_gsc
+				WHERE created BETWEEN %s AND %s AND DATE(created) = (SELECT MAX(DATE(created)) FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s)
+				GROUP BY query 
+				ORDER BY position) as t1
+			GROUP BY position_type",
+			$this->start_date,
+			$this->end_date,
+			$this->start_date,
+			$this->end_date
 		);
+		$data  = $wpdb->get_results( $query ); // phpcs:ignore
 
-		$compare = $wpdb->get_results( // phpcs:ignore
-			$wpdb->prepare(
-				"SELECT query, ROUND( AVG(position), 0 ) as position FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s GROUP BY query",
-				$this->compare_start_date,
-				$this->compare_end_date
-			)
+		$query   = $wpdb->prepare(
+			"SELECT COUNT(t1.query) AS total,
+				CASE
+					WHEN t1.position BETWEEN 1 AND 3 THEN 'top3'
+					WHEN t1.position BETWEEN 4 AND 10 THEN 'top10'
+					WHEN t1.position BETWEEN 11 AND 50 THEN 'top50'
+					WHEN t1.position BETWEEN 51 AND 100 THEN 'top100'
+					ELSE 'none'
+				END AS position_type
+			FROM (SELECT query, ROUND( AVG(position), 0 ) AS position 
+				FROM {$wpdb->prefix}rank_math_analytics_gsc
+				WHERE created BETWEEN %s AND %s AND DATE(created) = (SELECT MAX(DATE(created)) FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s)
+				GROUP BY query 
+				ORDER BY position) as t1
+			GROUP BY position_type",
+			$this->compare_start_date,
+			$this->compare_end_date,
+			$this->compare_start_date,
+			$this->compare_end_date
 		);
+		$compare = $wpdb->get_results( $query ); // phpcs:ignore
 
 		$positions = [
 			'top3'          => [
@@ -123,6 +181,8 @@ class Keywords extends Posts {
 	 * @return array
 	 */
 	public function get_top_position_graph() {
+		global $wpdb;
+
 		$cache_key = $this->get_cache_key( 'top_keywords_graph', $this->days . 'days' );
 		$cache     = get_transient( $cache_key );
 
@@ -130,28 +190,78 @@ class Keywords extends Posts {
 			return $cache;
 		}
 
-		$intervals = $this->get_intervals();
+		$intervals     = $this->get_intervals();
+		$sql_daterange = $this->get_sql_date_intervals( $intervals );
+
+		// phpcs:disable
+		$query = $wpdb->prepare(
+			"SELECT MAX(DATE(created)) as date, {$sql_daterange}
+			FROM {$wpdb->prefix}rank_math_analytics_gsc
+			WHERE created BETWEEN %s AND %s
+			GROUP BY range_group",
+			$this->start_date,
+			$this->end_date
+		);
+		$position_dates = $wpdb->get_results( $query, ARRAY_A );
+		// phpcs:enable
+
+		if ( count( $position_dates ) === 0 ) {
+			return [];
+		}
+
+		$dates = [];
+		foreach ( $position_dates as $row ) {
+			array_push( $dates, $row['date'] );
+		}
+		$dates = '(\'' . join( '\', \'', $dates ) . '\')';
+
+		// phpcs:disable
+		$query = $wpdb->prepare(
+			"SELECT COUNT(t.query) AS total, t.date, 
+				CASE
+					WHEN t.position BETWEEN 1 AND 3 THEN 'top3'
+					WHEN t.position BETWEEN 4 AND 10 THEN 'top10'
+					WHEN t.position BETWEEN 11 AND 50 THEN 'top50'
+					WHEN t.position BETWEEN 51 AND 100 THEN 'top100'
+					ELSE 'none'
+				END AS position_type
+			FROM (
+				SELECT query, ROUND( AVG(position), 0 ) AS position, Date(created) as date
+				FROM {$wpdb->prefix}rank_math_analytics_gsc
+				WHERE created BETWEEN %s AND %s AND DATE(created) IN {$dates}
+				GROUP BY DATE(created), query) AS t
+			GROUP BY t.date, position_type",
+			$this->start_date,
+			$this->end_date
+		);
+		$position_data = $wpdb->get_results( $query );
+		// phpcs:enable
 
 		// Data.
 		$data = $this->get_date_array(
 			$intervals['dates'],
 			[
-				'top3'   => [],
-				'top10'  => [],
-				'top50'  => [],
-				'top100' => [],
+				'top3'   => 0,
+				'top10'  => 0,
+				'top50'  => 0,
+				'top100' => 0,
 			]
 		);
-		$data = $this->get_postion_graph_data( 'top3', $data, $intervals['map'] );
-		$data = $this->get_postion_graph_data( 'top10', $data, $intervals['map'] );
-		$data = $this->get_postion_graph_data( 'top50', $data, $intervals['map'] );
-		$data = $this->get_postion_graph_data( 'top100', $data, $intervals['map'] );
 
-		foreach ( $data as &$item ) {
-			$item['top3']   = empty( $item['top3'] ) ? 0 : ceil( array_sum( $item['top3'] ) / count( $item['top3'] ) );
-			$item['top10']  = empty( $item['top10'] ) ? 0 : ceil( array_sum( $item['top10'] ) / count( $item['top10'] ) );
-			$item['top50']  = empty( $item['top50'] ) ? 0 : ceil( array_sum( $item['top50'] ) / count( $item['top50'] ) );
-			$item['top100'] = empty( $item['top100'] ) ? 0 : ceil( array_sum( $item['top100'] ) / count( $item['top100'] ) );
+		foreach ( $position_data as $row ) {
+			if ( ! isset( $intervals['map'][ $row->date ] ) ) {
+				continue;
+			}
+
+			$date = $intervals['map'][ $row->date ];
+
+			if ( ! isset( $data[ $date ][ $row->position_type ] ) ) {
+				continue;
+			}
+
+			$key = $row->position_type;
+
+			$data[ $date ][ $key ] = $row->total;
 		}
 
 		$data = array_values( $data );
@@ -217,24 +327,7 @@ class Keywords extends Posts {
 	 */
 	private function get_top_position_total( $positions, $rows, $where ) {
 		foreach ( $rows as $row ) {
-			$position = $row->position;
-			if ( $position > 0 && $position <= 3 ) {
-				$key = 'top3';
-			}
-
-			if ( $position >= 4 && $position <= 10 ) {
-				$key = 'top10';
-			}
-
-			if ( $position >= 11 && $position <= 50 ) {
-				$key = 'top50';
-			}
-
-			if ( $position > 50 ) {
-				$key = 'top100';
-			}
-
-			$positions[ $key ][ $where ] += 1;
+			$positions[ $row->position_type ][ $where ] = $row->total;
 		}
 
 		if ( 'difference' === $where ) {

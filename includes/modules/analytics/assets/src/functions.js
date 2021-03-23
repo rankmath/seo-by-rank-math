@@ -131,18 +131,20 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 			} else if (
 				'impressions' === column ||
 				'pageviews' === column ||
-				'position' === column ||
 				'clicks' === column ||
 				'ctr' === column
 			) {
 				display = <ItemStat { ...value } />
 				value = value.difference
+			} else if ( 'position' === column ) {
+				display = <ItemStat { ...value } revert={ true } />
+				value = value.difference
 			} else if ( 'positionHistory' === column ) {
 				const graph = get( row, 'graph', false )
-				let baseValue = "dataMax";
+				let baseValue = 'dataMax'
 				if ( graph !== false ) {
-					const dataMax = Math.max( ...graph.map( item => item.position ) );
-					baseValue = Math.min( dataMax + parseInt( dataMax / 2 ), 100 );
+					const dataMax = Math.max( ...graph.map( ( item ) => item.position ) )
+					baseValue = Math.min( dataMax + parseInt( dataMax / 2 ), 100 )
 				}
 				display =
 					false === graph ? (
@@ -239,4 +241,14 @@ export function generateTicks( data ) {
 	ticks.push( data[ dataLength - 1 ].date )
 
 	return ticks
+}
+
+export function filtersToUrlParams( filters ) {
+	let params = ''
+	map( filters, ( val, key ) => {
+		if ( val ) {
+			params += '&' + key + '=1'
+		}
+	} )
+	return params
 }

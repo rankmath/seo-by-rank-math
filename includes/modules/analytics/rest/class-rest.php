@@ -90,7 +90,7 @@ class Rest extends WP_REST_Controller {
 			'/keywordsSummary',
 			[
 				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ Stats::get(), 'get_keywords_summary' ],
+				'callback'            => [ Stats::get(), 'get_analytics_summary' ],
 				'permission_callback' => [ $this, 'has_permission' ],
 			]
 		);

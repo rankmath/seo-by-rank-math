@@ -200,8 +200,7 @@ class Admin_Helper {
 	 */
 	public static function is_post_edit() {
 		global $pagenow;
-
-		return 'post.php' === $pagenow || 'post-new.php' === $pagenow;
+		return ! Helper::is_ux_builder() && ( 'post.php' === $pagenow || 'post-new.php' === $pagenow );
 	}
 
 	/**

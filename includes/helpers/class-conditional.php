@@ -12,6 +12,7 @@ namespace RankMath\Helpers;
 
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
+use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -161,7 +162,18 @@ trait Conditional {
 	 * @return boolean
 	 */
 	public static function is_elementor_editor() {
-		return 'elementor' === \MyThemeShop\Helpers\Param::get( 'action' );
+		return 'elementor' === Param::get( 'action' );
+	}
+
+	/**
+	 * Is UX Builder (used in Flatsome theme).
+	 *
+	 * @since 1.0.60
+	 *
+	 * @return boolean
+	 */
+	public static function is_ux_builder() {
+		return 'uxbuilder' === Param::get( 'app' ) && ! empty( Param::get( 'type' ) );
 	}
 
 	/**

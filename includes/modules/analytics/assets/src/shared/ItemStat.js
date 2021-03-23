@@ -9,13 +9,14 @@ import classnames from 'classnames'
  */
 import humanNumber from '@helpers/humanNumber'
 
-const ItemStat = ( { total = 0, difference = 0 } ) => {
+const ItemStat = ( { total = 0, difference = 0, revert = false } ) => {
 	total = isUndefined( total ) ? 0 : total
 	difference = isUndefined( difference ) ? 0 : difference
+	revert = isUndefined( revert ) ? false : revert
 	const isNegative = Math.abs( difference ) !== difference
 	const diffClass = classnames( 'rank-math-item-difference', {
-		up: ! isNegative && difference > 0,
-		down: isNegative,
+		up: ( ! revert && ! isNegative && difference > 0 ) || ( revert && isNegative ),
+		down: ( ! revert && isNegative ) || ( revert && ! isNegative && difference > 0 ),
 	} )
 
 	return (

@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'dd0fb92df546d39e69a9b485bae877afb15f075c',
+    'reference' => '3db0d9ce0b65bc132d812de8a1863b6c3bccb9bf',
     'name' => 'rankmath/seo-by-rank-math',
   ),
   'versions' => 
@@ -54,12 +54,12 @@ private static $installed = array (
     ),
     'donatj/phpuseragentparser' => 
     array (
-      'pretty_version' => 'v1.3.0',
-      'version' => '1.3.0.0',
+      'pretty_version' => 'v1.4.0',
+      'version' => '1.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f9a521726b2ce4c5173281ceaab5a02c05b691ef',
+      'reference' => '246c1cf0a44f07168c702203bf30d5f48f17bab0',
     ),
     'mythemeshop/wordpress-helpers' => 
     array (
@@ -77,7 +77,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'dd0fb92df546d39e69a9b485bae877afb15f075c',
+      'reference' => '3db0d9ce0b65bc132d812de8a1863b6c3bccb9bf',
     ),
     'woocommerce/action-scheduler' => 
     array (

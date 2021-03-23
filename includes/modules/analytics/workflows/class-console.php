@@ -91,17 +91,12 @@ class Console extends Base {
 	 * @param string  $new  New posted value.
 	 */
 	public function create_data_jobs( $days, $prev, $new ) {
-		// Fetch now!
-		if ( is_null( $prev ) && is_null( $new ) ) {
-			$this->create_jobs( $days, 'console' );
-			return;
-		}
-
 		// If saved and new profile are same.
-		if ( $prev['profile'] === $new['profile'] ) {
+		if ( ! is_null( $prev ) && ! is_null( $new ) && $prev['profile'] === $new['profile'] ) {
 			return;
 		}
 
+		// Fetch now.
 		$this->create_jobs( $days, 'console' );
 	}
 }
