@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.7
 Requires at least: 5.5
 Requires PHP: 7.2
-Stable tag: 1.0.60
+Stable tag: 1.0.60.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -474,6 +474,9 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.60.1 [Mar 21, 2021] =
+* Fixed: Fatal PHP Error after updating the plugin where very old PRO version is present
 
 = 1.0.60 [Mar 18, 2021] =
 * Updated: [Minimum required PHP](https://wordpress.org/about/requirements/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP) version is now set to 7.2. Even though the EOL is reached for PHP 7.2 as well. In a few months, we will not support any PHP version that has run out of its EOL cycle. Not only it's a security risk, but it also affects performance.
