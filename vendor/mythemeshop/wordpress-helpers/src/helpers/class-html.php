@@ -34,11 +34,13 @@ class HTML {
 			$remaining = str_replace( $attribute[0], '', $remaining );
 		}
 
+		// Chop off tag name.
+		$remaining = preg_replace( '/<[^\s]+/', '', $remaining, 1 );
 		// Check for empty attributes without values.
-		$regex = '# ([^\s=]+)[ >]#';
+		$regex = '/([^<][\w\d:_-]+)[\s>]/i';
 		preg_match_all( $regex, $remaining, $attributes, PREG_SET_ORDER );
 		foreach ( $attributes as $attribute ) {
-			$new[ $attribute[1] ] = null;
+			$new[ trim( $attribute[1] ) ] = null;
 		}
 
 		return $new;

@@ -50,7 +50,7 @@ const FacebookTab = ( props ) => (
 					'rank-math'
 				) }{ ' ' }
 				<a
-					href="https://rankmath.com/kb/meta-box-social-tab/"
+					href="https://rankmath.com/kb/meta-box-social-tab/?utm_source=Plugin&utm_medium=Gutenberg%20Social%20Tab&utm_campaign=WP"
 					target="_blank"
 					rel="noreferrer noopener"
 				>

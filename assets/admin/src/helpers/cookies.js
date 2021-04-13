@@ -33,7 +33,7 @@ const getInterval = ( val ) => {
 
 export function getCookie( key, defaultVal = false ) {
 	const cookies = document.cookie ? document.cookie.split( '; ' ) : []
-	const rdecode = /(%[0-9A-Z]{2})+/g
+	const rdecode = /(%[0-9A-Za-z]{2})+/g
 	let result = defaultVal
 
 	for ( let i = 0; i < cookies.length; i++ ) {

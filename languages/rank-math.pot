@@ -1492,6 +1492,12 @@ msgstr ""
 msgid "Focus Keyword of the current post"
 msgstr ""
 
+msgid "Focus Keywords"
+msgstr ""
+
+msgid "Focus Keywords of the current post"
+msgstr ""
+
 msgid "Custom Field (advanced)"
 msgstr ""
 
@@ -2064,6 +2070,12 @@ msgstr ""
 msgid "How to Properly Setup Rank Math"
 msgstr ""
 
+msgid "Upgrade to PRO"
+msgstr ""
+
+msgid "Advanced Schema, Analytics and much more..."
+msgstr ""
+
 msgid "Import Data"
 msgstr ""
 
@@ -2076,9 +2088,6 @@ msgstr ""
 msgid "How to Make Your Posts Pass All the Tests"
 msgstr ""
 
-msgid "Visit Knowledge Base"
-msgstr ""
-
 msgid "Product Support"
 msgstr ""
 
@@ -2088,19 +2097,16 @@ msgstr ""
 msgid "Understand all the capabilities of Rank Math"
 msgstr ""
 
-msgid "Browse FAQ's"
-msgstr ""
-
-msgid "Find answers to the most commonly asked questions."
-msgstr ""
-
 msgid "Ticket Support"
 msgstr ""
 
 msgid "Direct help from our qualified support team"
 msgstr ""
 
-msgid "Visit Support Center"
+msgid "Affiliate Program"
+msgstr ""
+
+msgid "Earn flat 30% on every sale!"
 msgstr ""
 
 msgid "Account"
@@ -2232,7 +2238,7 @@ msgid "SEO Tweaks"
 msgstr ""
 
 #. translators: Link to How to Optimization KB article
-msgid "Automate some of your SEO tasks like making external links nofollow, redirecting attachment pages, etc.. %s"
+msgid "Automate some of your SEO tasks like making external links nofollow, redirecting attachment pages, etc. %s"
 msgstr ""
 
 msgid "Noindex Empty Category and Tag Archives"
@@ -2566,6 +2572,21 @@ msgstr[1] ""
 msgid "Now!"
 msgstr ""
 
+msgid "Are you sure you want to do this?"
+msgstr ""
+
+msgid "You are about to delete all the previously imported data."
+msgstr ""
+
+msgid "You are about to delete your 90 days cache."
+msgstr ""
+
+msgid "Are you sure you want to disconnect Google services from your site?"
+msgstr ""
+
+msgid "Cache deleted."
+msgstr ""
+
 #. translators: Link to kb article
 msgid "See your Google Search Console, Analyitcs and AdSense data without leaving your WP dashboard. %s."
 msgstr ""
@@ -2617,16 +2638,34 @@ msgstr ""
 msgid "Group description of the current group"
 msgstr ""
 
-msgid "Rank Math transients cleared."
+msgid "No Rank Math transients found."
+msgstr ""
+
+#. translators: placeholder is the number of transients deleted.
+msgid "%d Rank Math transient cleared."
+msgid_plural "%d Rank Math transients cleared."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "SEO Analysis data has already been cleared."
 msgstr ""
 
 msgid "SEO Analysis data successfully deleted."
 msgstr ""
 
+msgid "No Internal Links data found."
+msgstr ""
+
 msgid "Internal Links successfully deleted."
 msgstr ""
 
+msgid "No 404 log data found."
+msgstr ""
+
 msgid "404 Log successfully deleted."
+msgstr ""
+
+msgid "No Redirections found."
 msgstr ""
 
 msgid "Redirection rules successfully deleted."
@@ -3213,9 +3252,6 @@ msgstr ""
 msgid "This looks nice for readers - and it gets your keywords into the URL (keywords in the URL is a ranking factor)."
 msgstr ""
 
-msgid "Focus Keywords"
-msgstr ""
-
 msgid "Setting focus keywords for your posts allows Rank Math to analyse the content."
 msgstr ""
 
@@ -3400,6 +3436,10 @@ msgstr ""
 
 #. translators: 1. separator, 2. blogname
 msgid "XML Sitemap %1$s %2$s"
+msgstr ""
+
+#. translators: 1. separator, 2. blogname
+msgid "Locations Sitemap %1$s %2$s"
 msgstr ""
 
 msgid "KML File"
@@ -4499,7 +4539,7 @@ msgstr ""
 msgid "Rank Math Knowledge Base"
 msgstr ""
 
-msgid "Common WordPress Errors & Fixes"
+msgid "Subscribe to Our YouTube Channel"
 msgstr ""
 
 msgid "Get 24x7 Support"
@@ -4561,7 +4601,7 @@ msgid "Let us know a few things about your site&hellip;"
 msgstr ""
 
 #. translators: help link
-msgid "If you are new to Rank Math, <a href=\"%s\" data-target=\"rank-math-wizard-tabs\" class=\"rank-math-collapsible-trigger\">click here</a> to learn more."
+msgid "If you are new to Rank Math, <a href=\"#\" data-target=\"rank-math-wizard-tabs\" class=\"rank-math-collapsible-trigger\">click here</a> to learn more."
 msgstr ""
 
 msgid "Setup Tutorial"
@@ -4664,7 +4704,7 @@ msgid "You have not given the permission to fetch this data. Please <a href=\"%s
 msgstr ""
 
 #. translators: reconnect link
-msgid "There is no refresh token. Please <a href=\"%1$s\" class=\"button button-link rank-math-reconnect-google\">reconnect your app</a>"
+msgid "There is a problem with the Google auth token. Please <a href=\"%1$s\" class=\"button button-link rank-math-reconnect-google\">reconnect your app</a>"
 msgstr ""
 
 msgid "Bad request. Please check the code."
@@ -5130,19 +5170,13 @@ msgstr ""
 msgid "Total Time"
 msgstr ""
 
-msgid "Video Content URL"
-msgstr ""
-
-msgid "Recipe Video Thumbnail"
-msgstr ""
-
 msgid "Recipe Video Name"
 msgstr ""
 
-msgid "Video Upload Date"
+msgid "Recipe Video Description"
 msgstr ""
 
-msgid "Recipe Video Description"
+msgid "Recipe Video Thumbnail"
 msgstr ""
 
 msgid "Recipe Ingredients"

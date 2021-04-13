@@ -26,7 +26,7 @@ echo $authorize . $deauthorize;
 			<li><?php echo esc_attr__( 'Track page and keyword rankings with the Advanced Analytics module', 'rank-math' ); ?></li>
 			<li><?php echo esc_attr__( 'Easily set up Google Analytics without using another 3rd party plugin', 'rank-math' ); ?></li>
 			<li><?php echo esc_attr__( 'Automatically submit sitemaps to the Google Search Console', 'rank-math' ); ?></li>
-			<li><a href="<?php echo KB::get( 'analytics' ); ?>" target="_blank"><?php echo esc_html__( 'Learn more about the benefits of connecting your account here.', 'rank-math' ); ?></a></li>
+			<li><a href="<?php echo KB::get( 'benefits-analytics-kb' ); ?>" target="_blank"><?php echo esc_html__( 'Learn more about the benefits of connecting your account here.', 'rank-math' ); ?></a></li>
 		</ul>
 	</div>
 </div>

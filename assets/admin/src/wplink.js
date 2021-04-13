@@ -70,14 +70,14 @@ import jQuery from 'jquery'
 			inputs.queryNoticeTextHint = inputs.queryNotice.find( '.query-notice-hint' )
 
 			// Bind event handlers
-			inputs.dialog.keydown( wpLink.keydown )
-			inputs.dialog.keyup( wpLink.keyup )
-			inputs.submit.click( function( event ) {
+			inputs.dialog.on( 'keydown', ( e ) => wpLink.keydown( e ) )
+			inputs.dialog.on( 'keyup', ( e ) => wpLink.keyup( e ) )
+			inputs.submit.on( 'click', function( event ) {
 				event.preventDefault()
 				wpLink.update()
 			} )
 
-			inputs.close.add( inputs.backdrop ).add( '#wp-link-cancel button' ).click( function( event ) {
+			inputs.close.add( inputs.backdrop ).add( '#wp-link-cancel button' ).on( 'click', function( event ) {
 				event.preventDefault()
 				wpLink.close()
 			} )
@@ -151,7 +151,7 @@ import jQuery from 'jquery'
 			}
 
 			if ( ! wpLink.isMCE() && document.selection ) {
-				this.textarea.focus()
+				this.textarea.trigger( 'focus' )
 				this.range = document.selection.createRange()
 			}
 
@@ -199,14 +199,14 @@ import jQuery from 'jquery'
 
 			if ( isTouch ) {
 				// Close the onscreen keyboard
-				inputs.url.focus().blur()
+				inputs.url.trigger( 'focus' ).trigger( 'blur' )
 			} else {
 				// Focus the URL field and highlight its contents.
 				// If this is moved above the selection changes,
 				// IE will show a flashing cursor over the dialog.
 				window.setTimeout( function() {
 					inputs.url[ 0 ].select()
-					inputs.url.focus()
+					inputs.url.trigger( 'focus' )
 				} )
 			}
 
@@ -304,7 +304,7 @@ import jQuery from 'jquery'
 
 			if ( 'noReset' !== reset ) {
 				if ( ! wpLink.isMCE() ) {
-					wpLink.textarea.focus()
+					wpLink.textarea.trigger( 'focus' )
 
 					if ( wpLink.range ) {
 						wpLink.range.moveToBookmark( wpLink.range.getBookmark() )
@@ -404,7 +404,7 @@ import jQuery from 'jquery'
 				// IE
 				// Note: If no text is selected, IE will not place the cursor
 				//       inside the closing tag.
-				textarea.focus()
+				textarea.trigger( 'focus' )
 				wpLink.range.text = html + ( text || wpLink.range.text ) + '</a>'
 				wpLink.range.moveToBookmark( wpLink.range.getBookmark() )
 				wpLink.range.select()
@@ -434,7 +434,7 @@ import jQuery from 'jquery'
 			}
 
 			wpLink.close()
-			textarea.focus()
+			textarea.trigger( 'focus' )
 			$( textarea ).trigger( 'change' )
 
 			// Audible confirmation message when a link has been inserted in the Editor.
@@ -606,10 +606,10 @@ import jQuery from 'jquery'
 				// wp-link-submit must always be the last focusable element in the dialog.
 				// following focusable elements will be skipped on keyboard navigation.
 				if ( 'wp-link-submit' === id && ! event.shiftKey ) {
-					inputs.close.focus()
+					inputs.close.trigger( 'focus' )
 					event.preventDefault()
 				} else if ( 'wp-link-close' === id && event.shiftKey ) {
-					inputs.submit.focus()
+					inputs.submit.trigger( 'focus' )
 					event.preventDefault()
 				}
 			}
@@ -679,7 +679,7 @@ import jQuery from 'jquery'
 		this.change( search )
 		this.refresh()
 
-		$( '#wp-link .query-results, #wp-link #link-selector' ).scroll( function() {
+		$( '#wp-link .query-results, #wp-link #link-selector' ).on( 'scroll', function() {
 			self.maybeLoad()
 		} )
 		element.on( 'click', 'li', function( event ) {

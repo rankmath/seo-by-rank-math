@@ -268,12 +268,12 @@ import addNotice from '@helpers/addNotice'
 						days = button.data( 'days' ),
 						message =
 							-1 === days
-								? 'You are about to delete all the previously imported data?'
-								: 'You are about to delete your 90 days Cache?'
+								? rankMath.confirmClearImportedData
+								: rankMath.confirmClear90DaysCache
 
 					if (
 						window.confirm(
-							message + ' Are you sure you want to do this?'
+							message + ' ' + rankMath.confirmAction
 						)
 					) {
 						button.prop( 'disabled', true )
@@ -284,7 +284,7 @@ import addNotice from '@helpers/addNotice'
 							.done( function( result ) {
 								if ( result && result.success ) {
 									addNotice(
-										'Cache deleted.',
+										rankMath.feedbackCacheDeleted,
 										'success',
 										$( 'h1', '.rank-math-wrap-settings' )
 									)
@@ -522,6 +522,17 @@ import addNotice from '@helpers/addNotice'
 						.val( input.text() )
 						.trigger( 'change' )
 				} )
+
+				// Don't submit CMB settings form on Enter.
+				$( '.cmb-form' ).on(
+					'keydown',
+					'input',
+					function( e ) {
+						if ( e.key === 'Enter' ) {
+							e.preventDefault();
+						}
+					}
+				)
 			},
 
 			preview() {

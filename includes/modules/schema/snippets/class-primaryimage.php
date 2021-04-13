@@ -42,6 +42,8 @@ class PrimaryImage implements Snippet {
 			'height' => $image[2],
 		];
 
+		$jsonld->add_prop( 'language', $data['primaryImage'] );
+
 		return $data;
 	}
 }

@@ -63,6 +63,7 @@ class Analytics extends Base {
 
 		$this->action( 'admin_notices', 'render_notice' );
 		$this->action( 'rank_math/admin/enqueue_scripts', 'enqueue' );
+		$this->action( 'admin_enqueue_scripts', 'options_panel_messages' );
 		$this->action( 'wp_helpers_notification_dismissed', 'analytic_first_fetch_dismiss' );
 
 		if ( is_admin() ) {
@@ -344,10 +345,30 @@ class Analytics extends Base {
 	}
 
 	/**
+	 * Add l18n for the Settings.
+	 *
+	 * @return void
+	 */
+	public function options_panel_messages() {
+		$screen = get_current_screen();
+
+		if ( 'rank-math_page_rank-math-options-general' !== $screen->id ) {
+			return;
+		}
+
+		Helper::add_json( 'confirmAction', esc_html__( 'Are you sure you want to do this?', 'rank-math' ) );
+		Helper::add_json( 'confirmClearImportedData', esc_html__( 'You are about to delete all the previously imported data.', 'rank-math' ) );
+		Helper::add_json( 'confirmClear90DaysCache', esc_html__( 'You are about to delete your 90 days cache.', 'rank-math' ) );
+		Helper::add_json( 'confirmDisconnect', esc_html__( 'Are you sure you want to disconnect Google services from your site?', 'rank-math' ) );
+		Helper::add_json( 'feedbackCacheDeleted', esc_html__( 'Cache deleted.', 'rank-math' ) );
+	}
+
+	/**
 	 * Enqueue scripts for the metabox.
 	 */
 	public function enqueue() {
 		$screen = get_current_screen();
+
 		if ( 'rank-math_page_rank-math-analytics' !== $screen->id ) {
 			return;
 		}

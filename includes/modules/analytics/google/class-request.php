@@ -144,14 +144,16 @@ class Request {
 	 */
 	private function make_request( $http_verb, $url, $args = [], $timeout = 10 ) {
 		// Early Bail!!
-		if ( ! $this->refresh_token() && ! $this->is_notice_added ) {
-			$this->is_notice_added = true;
-			$this->is_success      = false;
-			$this->last_error      = sprintf(
-				/* translators: reconnect link */
-				wp_kses_post( __( 'There is no refresh token. Please <a href="%1$s" class="button button-link rank-math-reconnect-google">reconnect your app</a>', 'rank-math' ) ),
-				wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' )
-			);
+		if ( ! $this->refresh_token() || ! is_scalar( $this->token ) ) {
+			if ( ! $this->is_notice_added ) {
+				$this->is_notice_added = true;
+				$this->is_success      = false;
+				$this->last_error      = sprintf(
+					/* translators: reconnect link */
+					wp_kses_post( __( 'There is a problem with the Google auth token. Please <a href="%1$s" class="button button-link rank-math-reconnect-google">reconnect your app</a>', 'rank-math' ) ),
+					wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' )
+				);
+			}
 			return;
 		}
 

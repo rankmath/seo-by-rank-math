@@ -51,10 +51,10 @@ class KML_File {
 	 * @return string $xml The sitemap index with the Local SEO Sitemap added.
 	 */
 	public function add_local_sitemap() {
-		$xml  = $this->newline( '<sitemap>' );
-		$xml .= $this->newline( '<loc>' . Router::get_base_url( 'local-sitemap.xml' ) . '</loc>' );
-		$xml .= $this->newline( '<lastmod>' . $this->get_modified_date() . '</lastmod>' );
-		$xml .= $this->newline( '</sitemap>' );
+		$xml  = $this->newline( '<sitemap>', 1 );
+		$xml .= $this->newline( '<loc>' . htmlspecialchars( Router::get_base_url( 'local-sitemap.xml' ) ) . '</loc>', 2 );
+		$xml .= $this->newline( '<lastmod>' . htmlspecialchars( $this->get_modified_date() ) . '</lastmod>', 2 );
+		$xml .= $this->newline( '</sitemap>', 1 );
 
 		return $xml;
 	}
@@ -67,8 +67,8 @@ class KML_File {
 	public function local_sitemap_content() {
 		$urlset = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 			<url>
-				<loc>' . Router::get_base_url( 'locations.kml' ) . '</loc>
-				<lastmod>' . $this->get_modified_date() . '</lastmod>
+				<loc>' . htmlspecialchars( Router::get_base_url( 'locations.kml' ) ) . '</loc>
+				<lastmod>' . htmlspecialchars( $this->get_modified_date() ) . '</lastmod>
 			</url>
 		</urlset>';
 

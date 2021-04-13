@@ -311,16 +311,6 @@ class Paper {
 	 * @return string
 	 */
 	public function get_keywords() {
-		/**
-		 * Passing a truthy value to the filter will effectively short-circuit the
-		 * set keywords process.
-		 *
-		 * @param bool $return Short-circuit return value. Either false or true.
-		 */
-		if ( ! $this->do_filter( 'frontend/show_keywords', false ) ) {
-			return false;
-		}
-
 		if ( ! is_null( $this->keywords ) ) {
 			return $this->keywords;
 		}

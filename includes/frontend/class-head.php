@@ -252,6 +252,16 @@ class Head {
 	 * Output the meta keywords value.
 	 */
 	public function metakeywords() {
+		/**
+		 * Passing a truthy value to the filter will effectively short-circuit the
+		 * set keywords process.
+		 *
+		 * @param bool $return Short-circuit return value. Either false or true.
+		 */
+		if ( ! $this->do_filter( 'frontend/show_keywords', false ) ) {
+			return;
+		}
+
 		$keywords = Paper::get()->get_keywords();
 		if ( Str::is_non_empty( $keywords ) ) {
 			echo '<meta name="keywords" content="', esc_attr( $keywords ), '"/>', "\n";

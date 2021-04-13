@@ -38,6 +38,7 @@ class Article implements Snippet {
 		$entity = [
 			'@type'         => $type,
 			'headline'      => $jsonld->parts['title'],
+			'keywords'      => Helper::replace_vars( '%keywords%', $jsonld->post ),
 			'datePublished' => $jsonld->parts['published'],
 			'dateModified'  => $jsonld->parts['modified'],
 			'author'        => [

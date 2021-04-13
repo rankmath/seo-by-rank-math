@@ -43,4 +43,6 @@ $this->get_image();
 	);
 	?>
 
+	<?php $this->show_ratings(); ?>
+
 </div>

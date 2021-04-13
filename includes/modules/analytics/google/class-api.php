@@ -141,13 +141,13 @@ class Api extends Console {
 		if ( ! empty( $response['error'] ) && is_array( $response['error'] ) ) {
 
 			$failed_attempts   = get_option( $option_key, [] );
-			$failed_attempts   = ( ! empty( $failed_attempts ) && is_array( $failed_attempts ) ) ? $failed_attempts : [];
+			$failed_attempts   = ( ! empty( $failed_attempts ) && is_array( $failed_attempts ) ) ? array_slice( $failed_attempts, -9, 9 ) : [];
 			$failed_attempts[] = [
 				'args'  => $args,
 				'error' => $response['error'],
 			];
 
-			update_option( $option_key, $failed_attempts );
+			update_option( $option_key, $failed_attempts, false );
 
 			if ( $allow_fail_attempt < count( $failed_attempts ) ) {
 				update_option( $reconnect_google_option_key, 'search_analytics_query' );

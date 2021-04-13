@@ -41,6 +41,11 @@ class DB {
 	 * @return array
 	 */
 	public static function get_schemas( $object_id, $table = 'postmeta' ) {
+		// Add exception handler.
+		if ( is_null( $object_id ) ) {
+			return [];
+		}
+
 		$key  = 'termmeta' === $table ? 'term_id' : 'post_id';
 		$data = self::table( $table )
 			->select( 'meta_id' )

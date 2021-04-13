@@ -97,6 +97,10 @@ class Block_FAQ extends Block {
 				continue;
 			}
 
+			if ( empty( $question['id'] ) ) {
+				$question['id'] = 'rm-faq-' . md5( $question['title'] );
+			}
+
 			$data['faqs']['mainEntity'][] = [
 				'@type'          => 'Question',
 				'url'            => $permalink . $question['id'],
@@ -136,6 +140,10 @@ class Block_FAQ extends Block {
 		foreach ( $attributes['questions'] as $question ) {
 			if ( empty( $question['title'] ) || empty( $question['content'] ) || empty( $question['visible'] ) ) {
 				continue;
+			}
+
+			if ( empty( $question['id'] ) ) {
+				$question['id'] = 'rm-faq-' . md5( $question['title'] );
 			}
 
 			$out[] = sprintf( '<%1$s id="%2$s" class="rank-math-list-item">', $item_tag, $question['id'] );

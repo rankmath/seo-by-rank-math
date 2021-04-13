@@ -110,15 +110,17 @@ class Admin implements Runner {
 
 		echo '<ul class="rank-math-blog-list">';
 		$is_new = time() - strtotime( $posts[0]['date'] ) < 15 * DAY_IN_SECONDS;
+		$i      = 0;
 
 		foreach ( $posts as $post ) :
+			$i++;
 			?>
 			<li class="rank-math-blog-post">
 				<h4>
 					<?php if ( $is_new ) : ?>
 						<span class="rank-math-new-badge"><?php esc_html_e( 'NEW', 'rank-math' ); ?></span>
 					<?php endif; ?>
-					<a target="_blank" href="<?php echo esc_url( $post['link'] ); ?>?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP">
+					<a target="_blank" href="<?php echo esc_url( $post['link'] ); ?>?utm_source=Plugin&utm_medium=Dashboard%20Widget%20Post%20<?php echo esc_attr( $i ); ?>&utm_campaign=WP">
 						<?php echo esc_html( $post['title']['rendered'] ); ?>
 					</a>
 				</h4>
@@ -130,18 +132,18 @@ class Admin implements Runner {
 		?>
 
 		<div class="rank-math-widget-footer">
-			<a target="_blank" href="https://rankmath.com/blog/?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP">
+			<a target="_blank" href="https://rankmath.com/blog/?utm_source=Plugin&utm_medium=Dashboard%20Widget%20Blog&utm_campaign=WP">
 				<?php esc_html_e( 'Blog', 'rank-math' ); ?>
 				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
 				<span aria-hidden="true" class="dashicons dashicons-external"></span>
 			</a>
-			<a target="_blank" href="https://rankmath.com/kb/?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP">
+			<a target="_blank" href="https://rankmath.com/kb/?utm_source=Plugin&utm_medium=Dashboard%20Widget%20Help&utm_campaign=WP">
 				<?php esc_html_e( 'Help', 'rank-math' ); ?>
 				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
 				<span aria-hidden="true" class="dashicons dashicons-external"></span>
 			</a>
 			<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) { ?>
-				<a target="_blank" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Dashboard%20Widget&utm_campaign=WP" class="rank-math-widget-go-pro">
+				<a target="_blank" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Dashboard%20Widget%20PRO&utm_campaign=WP" class="rank-math-widget-go-pro">
 					<?php esc_html_e( 'Go Pro', 'rank-math' ); ?>
 					<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
 					<span aria-hidden="true" class="dashicons dashicons-external"></span>

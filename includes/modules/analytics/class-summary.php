@@ -46,6 +46,18 @@ class Summary {
 			->whereBetween( 'created', [ Stats::get()->compare_start_date, Stats::get()->compare_end_date ] )
 			->one();
 
+		if ( is_null( $stats ) ) {
+			$stats = (object) [
+				'clicks'      => 0,
+				'impressions' => 0,
+				'postions'    => 0,
+			];
+		}
+
+		if ( is_null( $old_stats ) ) {
+			$old_stats = $stats;
+		}
+
 		$stats->clicks = [
 			'total'      => (int) $stats->clicks,
 			'previous'   => (int) $old_stats->clicks,

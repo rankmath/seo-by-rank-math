@@ -66,7 +66,7 @@ const ProNotice = ( { isPro } ) => {
 				components={ {
 					link: (
 						<a
-							href="https://rankmath.com/kb/score-100-in-tests/"
+							href="https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_medium=Gutenberg%20General%20Tab%20Score%20Notice&utm_campaign=WP"
 							target="_blank"
 							rel="noopener noreferrer"
 						/>

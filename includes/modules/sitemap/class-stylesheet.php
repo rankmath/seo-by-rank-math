@@ -46,11 +46,14 @@ class Stylesheet extends XML {
 		/* translators: 1. separator, 2. blogname */
 		$title = sprintf( __( 'XML Sitemap %1$s %2$s', 'rank-math' ), '-', get_bloginfo( 'name', 'display' ) );
 
+		/* translators: 1. separator, 2. blogname */
+		$kml_title = sprintf( __( 'Locations Sitemap %1$s %2$s', 'rank-math' ), '-', get_bloginfo( 'name', 'display' ) );
+
 		if ( 'main' !== $type ) {
 			/**
 			 * Fires for the output of XSL for XML sitemaps, other than type "main".
 			 */
-			$this->do_action( "sitemap/xsl_{$type}", $title );
+			$this->do_action( "sitemap/xsl_{$type}", $title, $kml_title );
 			die;
 		}
 

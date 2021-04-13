@@ -145,8 +145,9 @@ class Ask_Review {
 		Helper::add_notification(
 			$message,
 			[
-				'type' => 'info',
-				'id'   => 'rank_math_review_plugin_notice',
+				'type'       => 'info',
+				'id'         => 'rank_math_review_plugin_notice',
+				'capability' => 'install_plugins',
 			]
 		);
 

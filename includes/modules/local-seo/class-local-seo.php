@@ -117,13 +117,7 @@ class Local_Seo {
 		$json_ld->add_prop( 'email', $entity );
 		$json_ld->add_prop( 'url', $entity );
 		$json_ld->add_prop( 'address', $entity );
-
-		if ( $value = Helper::get_settings( 'titles.knowledgegraph_logo' ) ) { // phpcs:ignore
-			$entity['logo'] = [
-				'@type' => 'ImageObject',
-				'url'   => $value,
-			];
-		}
+		$json_ld->add_prop( 'image', $entity );
 
 		switch ( Helper::get_settings( 'titles.knowledgegraph_type' ) ) {
 			case 'company':

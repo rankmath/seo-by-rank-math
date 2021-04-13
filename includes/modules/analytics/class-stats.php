@@ -94,14 +94,14 @@ class Stats extends Keywords {
 
 		// Period.
 		$this->end_date   = date_i18n( 'Y-m-d 23:59:59', $end );
-		$this->start_date = date_i18n( 'Y-m-d 00:00:01', $start );
+		$this->start_date = date_i18n( 'Y-m-d 00:00:00', $start );
 
 		// Compare with.
 		$this->days               = ceil( abs( $end - $start ) / DAY_IN_SECONDS );
 		$this->compare_end_date   = $start - DAY_IN_SECONDS;
 		$this->compare_start_date = $this->compare_end_date - ( $this->days * DAY_IN_SECONDS );
 		$this->compare_end_date   = date_i18n( 'Y-m-d 23:59:59', $this->compare_end_date );
-		$this->compare_start_date = date_i18n( 'Y-m-d 00:00:01', $this->compare_start_date );
+		$this->compare_start_date = date_i18n( 'Y-m-d 00:00:00', $this->compare_start_date );
 	}
 
 	/**
@@ -218,7 +218,7 @@ class Stats extends Keywords {
 
 		$index = 1;
 		foreach ( $intervals['dates'] as $date_range ) {
-			$start_date = $date_range['start'] . ' 00:00:01';
+			$start_date = $date_range['start'] . ' 00:00:00';
 			$end_date   = $date_range['end'] . ' 23:59:59';
 
 			array_push( $sql_parts, sprintf( "WHEN %s BETWEEN '%s' AND '%s' THEN 'range%d'", $column, $start_date, $end_date, $index ) );
