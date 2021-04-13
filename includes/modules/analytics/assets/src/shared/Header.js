@@ -12,7 +12,7 @@ import { Button, SelectControl } from '@wordpress/components'
  */
 import Search from './Search'
 
-const Header = ( { heading, range, updateDaysRange, onChange, postID = 0, slug = false, adminURL } ) => {
+const Header = ( { heading, range, updateDaysRange, onChange, postID = 0, slug = false, adminURL, homeURL } ) => {
 	const dayRange = applyFilters( 'rank_math_analytics_day_range', [
 		{ label: '7 Days', value: '-7 days' },
 		{ label: '15 Days', value: '-15 days' },
@@ -35,7 +35,7 @@ const Header = ( { heading, range, updateDaysRange, onChange, postID = 0, slug =
 				{ slug && (
 					<a
 						className="rank-math-post-link"
-						href={ adminURL + slug }
+						href={ homeURL + slug }
 						target="_blank"
 						rel="noreferrer"
 					>
