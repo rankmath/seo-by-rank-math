@@ -44,6 +44,11 @@
 			text-align: center;
 
 			&.rm-icon {
+				&-star-filled {
+					color: #F7D070;
+					background: #253142;
+				}
+
 				&-settings {
 					color: #B8423F;
 					background: rgba( #B8423F, 0.1 );
@@ -64,7 +69,7 @@
 					background: rgba( #87a627, 0.1 );
 				}
 
-				&-comments {
+				&-sitemap {
 					color: #DBA240;
 					background: rgba( #DBA240, 0.1 );
 				}

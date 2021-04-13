@@ -10,6 +10,7 @@
 
 namespace RankMath\Replace_Variables;
 
+use RankMath\Paper\Paper;
 use MyThemeShop\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
@@ -46,6 +47,17 @@ class Advanced_Variables extends Author_Variables {
 				'example'     => \is_null( $keyword ) ? '' : $keyword,
 			],
 			[ $this, 'get_focus_keyword' ]
+		);
+
+		$this->register_replacement(
+			'keywords',
+			[
+				'name'        => esc_html__( 'Focus Keywords', 'rank-math' ),
+				'description' => esc_html__( 'Focus Keywords of the current post', 'rank-math' ),
+				'variable'    => 'keywords',
+				'example'     => $this->get_focus_keywords(),
+			],
+			[ $this, 'get_focus_keywords' ]
 		);
 
 		$this->register_replacement(
@@ -158,6 +170,28 @@ class Advanced_Variables extends Author_Variables {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Get Focus keywords.
+	 *
+	 * @return string
+	 */
+	public function get_focus_keywords() {
+		if ( is_singular() || is_category() || is_tag() || is_tax() ) {
+			return Paper::get()->get_keywords();
+		}
+
+		$keywords = '';
+		if ( ! empty( $this->args->ID ) ) {
+			$keywords = get_post_meta( $this->args->ID, 'rank_math_focus_keyword', true );
+		}
+
+		if ( ! empty( $this->args->term_id ) ) {
+			$keywords = get_term_meta( $this->args->term_id, 'rank_math_focus_keyword', true );
+		}
+
+		return $keywords;
 	}
 
 	/**

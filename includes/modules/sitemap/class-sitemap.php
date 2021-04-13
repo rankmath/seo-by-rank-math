@@ -33,6 +33,9 @@ class Sitemap {
 
 		if ( is_admin() ) {
 			new Admin();
+		}
+
+		if ( is_admin() || wp_doing_cron() ) {
 			new Cache_Watcher();
 		}
 

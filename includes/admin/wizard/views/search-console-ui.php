@@ -115,7 +115,7 @@ $analytic_classes = Helper::classnames(
 			Permissions::print_warning();
 		} ?>
 
-		<p class="warning yellow"><strong class="warning"><?php echo esc_attr( 'Notice:', 'rank-math' ); ?></strong> <?php echo wp_kses_post( 'Not seeing your website that uses Google Analytics 4? <a href="https://rankmath.com/kb/using-ga4/?utm_source=Plugin&utm_campaign=WP" target="_blank">Click here to know how to fix the issue</a>.', 'rank-math' ); ?></p>
+		<p class="warning yellow"><strong class="warning"><?php echo esc_attr( 'Notice:', 'rank-math' ); ?></strong> <?php echo wp_kses_post( 'Not seeing your website that uses Google Analytics 4? <a href="https://rankmath.com/kb/using-ga4/?utm_source=Plugin&utm_medium=Analytics%20GA4%20KB&utm_campaign=WP" target="_blank">Click here to know how to fix the issue</a>.', 'rank-math' ); ?></p>
 
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">

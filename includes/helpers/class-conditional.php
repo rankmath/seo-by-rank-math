@@ -41,13 +41,22 @@ trait Conditional {
 	 * @param  string $id Module ID.
 	 * @return boolean
 	 */
-	public static function is_module_active( $id ) {
+	public static function is_module_active( $id, $check_registered = true ) {
 		$active_modules = get_option( 'rank_math_modules', [] );
-		if ( ! is_array( $active_modules ) || ! isset( rank_math()->manager ) || is_null( rank_math()->manager ) ) {
+		if ( ! is_array( $active_modules ) || ( $check_registered && ! self::is_plugin_ready() ) ) {
 			return false;
 		}
 
-		return in_array( $id, $active_modules, true ) && array_key_exists( $id, rank_math()->manager->modules );
+		return in_array( $id, $active_modules, true ) && ( ! $check_registered || array_key_exists( $id, rank_math()->manager->modules ) );
+	}
+
+	/**
+	 * Check if Rank Math manager is ready.
+	 *
+	 * @return boolean
+	 */
+	public static function is_plugin_ready() {
+		return ( isset( rank_math()->manager ) && ! is_null( rank_math()->manager ) );
 	}
 
 	/**

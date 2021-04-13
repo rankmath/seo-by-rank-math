@@ -48,13 +48,21 @@
 		padding: 16px;
 
 		background: #f4f5f6;
+
+		#help-panel-knowledge, #help-panel-video {
+			border: 0;
+			background: transparent;
+
+			&:hover {
+				color: inherit;
+			}
+		}
 	}
 
 	.search-form:not(.media-toolbar-primary) {
 		label {
 			display: block;
 			font-size: 14px;
-			margin-bottom: 15px;
 		}
 
 		input {

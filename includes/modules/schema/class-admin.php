@@ -84,7 +84,12 @@ class Admin extends Base {
 	 * @param CMB2 $cmb CMB2 instance.
 	 */
 	public function save_schemas( $cmb ) {
-		if ( 'post' !== $cmb->object_type || empty( $cmb->data_to_save['rank-math-schemas'] ) ) {
+		if ( 'post' !== $cmb->object_type ) {
+			return;
+		}
+
+		$this->do_action( 'pre_update_metadata', $cmb->object_id );
+		if ( empty( $cmb->data_to_save['rank-math-schemas'] ) ) {
 			return;
 		}
 

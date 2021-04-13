@@ -25,7 +25,14 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 	<xsl:template match="/">
 		<html xmlns="http://www.w3.org/1999/xhtml">
 			<head>
-				<title><?php echo esc_html( $title ); ?></title>
+				<xsl:choose>
+					<xsl:when test="kml:kml">
+						<title><?php echo esc_html( $kml_title ); ?></title>
+					</xsl:when>
+					<xsl:otherwise>
+						<title><?php echo esc_html( $title ); ?></title>
+					</xsl:otherwise>
+				</xsl:choose>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<style type="text/css">
 					body {

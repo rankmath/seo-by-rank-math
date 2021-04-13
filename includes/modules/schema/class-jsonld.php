@@ -229,8 +229,8 @@ class JsonLD {
 			'\\RankMath\\Schema\\Website'       => $can_add_global,
 			'\\RankMath\\Schema\\PrimaryImage'  => ! post_password_required() && $can_add_global,
 			'\\RankMath\\Schema\\Breadcrumbs'   => $this->can_add_breadcrumb(),
+			'\\RankMath\\Schema\\Author'        => $this->can_add_author_entity( $can_add_global ),
 			'\\RankMath\\Schema\\Webpage'       => $can_add_global,
-			'\\RankMath\\Schema\\Author'        => is_author(),
 			'\\RankMath\\Schema\\Products_Page' => $is_product_page,
 			'\\RankMath\\Schema\\ItemListPage'  => ! $is_product_page && ( is_category() || is_tag() || is_tax() ),
 			'\\RankMath\\Schema\\Singular'      => ! post_password_required() && is_singular(),
@@ -251,10 +251,11 @@ class JsonLD {
 	 *
 	 * @param array  $schemas Schema to replace.
 	 * @param object $object  Current Object.
+	 * @param array  $data   Array of json-ld data.
 	 *
 	 * @return array
 	 */
-	public function replace_variables( $schemas, $object = [] ) {
+	public function replace_variables( $schemas, $object = [], $data = [] ) {
 		$new_schemas = [];
 		$object      = empty( $object ) ? get_queried_object() : $object;
 
@@ -269,18 +270,39 @@ class JsonLD {
 				continue;
 			}
 
+			$this->replace_author( $schema, $data );
 			if ( is_array( $schema ) ) {
-				$new_schemas[ $key ] = $this->replace_variables( $schema, $object );
+				$new_schemas[ $key ] = $this->replace_variables( $schema, $object, $data );
 				continue;
 			}
 
-			$new_schemas[ $key ] = Str::contains( '%', $schema ) ? Helper::replace_seo_fields( $schema, $object ) : $schema;
+			$new_schemas[ $key ] = Str::contains( '%', $schema ) ? Helper::replace_vars( $schema, $object ) : $schema;
 			if ( '' === $new_schemas[ $key ] ) {
 				unset( $new_schemas[ $key ] );
 			}
 		}
 
 		return $new_schemas;
+	}
+
+	/**
+	 * Replace author variable.
+	 *
+	 * @param array $schema Schema to replace.
+	 * @param array $data   Array of json-ld data.
+	 *
+	 * @return array
+	 */
+	private function replace_author( &$schema, $data ) {
+		if ( empty( $data['ProfilePage'] ) ) {
+			return;
+		}
+
+		if ( empty( $schema['author'] ) || ! isset( $schema['author']['name'] ) || '%name%' !== $schema['author']['name'] ) {
+			return;
+		}
+
+		$schema['author'] = [ '@id' => $data['ProfilePage']['@id'] ];
 	}
 
 	/**
@@ -325,7 +347,7 @@ class JsonLD {
 	 * @return bool
 	 */
 	public function can_add_global_entities( $data = [] ) {
-		if ( ! is_singular() || ! Helper::can_use_default_schema( $this->post_id ) || ! empty( $data ) ) {
+		if ( is_front_page() || ! is_singular() || ! Helper::can_use_default_schema( $this->post_id ) || ! empty( $data ) ) {
 			return true;
 		}
 
@@ -346,6 +368,20 @@ class JsonLD {
 		 * @param JsonLD $unsigned JsonLD instance.
 		 */
 		return $this->do_filter( 'schema/add_global_entities', $can_add, $this );
+	}
+
+	/**
+	 * Whether to add Author schema entity.
+	 *
+	 * @param bool $can_add Can add author entity in schema.
+	 * @return bool
+	 */
+	public function can_add_author_entity( $can_add ) {
+		if ( Helper::get_settings( 'titles.disable_author_archives' ) ) {
+			return false;
+		}
+
+		return is_author() || ( is_singular() && $can_add );
 	}
 
 	/**
@@ -386,7 +422,6 @@ class JsonLD {
 
 		$hash = [
 			'email' => [ 'titles.email', 'email' ],
-			'image' => [ 'titles.knowledgegraph_logo', 'logo' ],
 			'phone' => [ 'titles.phone', 'telephone' ],
 		];
 
@@ -399,6 +434,33 @@ class JsonLD {
 		if ( method_exists( $this, $perform ) ) {
 			$this->$perform( $entity, $key, $data );
 		}
+	}
+
+	/**
+	 * Add logo property to the entity.
+	 *
+	 * @param array $entity Array of JSON-LD entity.
+	 */
+	private function add_prop_image( &$entity ) {
+		$logo = Helper::get_settings( 'titles.knowledgegraph_logo' );
+		if ( ! $logo ) {
+			return;
+		}
+
+		$entity['logo'] = [
+			'@type'   => 'ImageObject',
+			'url'     => $logo,
+			'caption' => $this->get_website_name(),
+		];
+		$this->add_prop_language( $entity['logo'] );
+
+		$attachment = wp_get_attachment_metadata( Helper::get_settings( 'titles.knowledgegraph_logo_id' ), true );
+		if ( ! $attachment ) {
+			return;
+		}
+
+		$entity['logo']['width']  = $attachment['width'];
+		$entity['logo']['height'] = $attachment['height'];
 	}
 
 	/**

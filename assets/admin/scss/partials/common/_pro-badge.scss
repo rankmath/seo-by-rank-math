@@ -12,6 +12,11 @@
 	border-radius: 3px;
 	margin-left: 5px;
 
+	&.business {
+		background: #253142;
+		color: #F7D070;
+	}
+
 	a {
 		color: inherit;
 		text-decoration: none;

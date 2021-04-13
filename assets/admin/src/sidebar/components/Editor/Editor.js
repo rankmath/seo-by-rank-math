@@ -65,7 +65,7 @@ const SnippetEditor = ( {
 			>
 				{ __( 'Edit Snippet', 'rank-math' ) }
 			</Button>
-			<ReportButton />
+			{ initialTab === '' && <ReportButton /> }
 			{ isOpen && (
 				<Modal
 					title="Preview Snippet Editor"

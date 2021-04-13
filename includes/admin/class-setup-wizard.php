@@ -179,7 +179,7 @@ class Setup_Wizard {
 		 * @param CMB2 $cmb CMB2 object.
 		 */
 		$this->do_action( 'wizard/settings/' . $this->step, $this->cmb );
-		
+
 		CMB2::pre_init( $this->cmb );
 	}
 

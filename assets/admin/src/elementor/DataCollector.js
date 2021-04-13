@@ -408,9 +408,6 @@ class DataCollector {
 
 	handleTitleChange( title ) {
 		swapVariables.setVariable( 'title', title )
-		swapVariables.setVariable( 'term', title )
-		swapVariables.setVariable( 'author', title )
-
 		dispatch( 'rank-math' ).updateSerpTitle(
 			select( 'rank-math' ).getTitle()
 		)

@@ -91,20 +91,34 @@ class Database_Tools {
 		);
 
 		if ( empty( $transients ) ) {
-			return;
+			return [
+				'status'  => 'error',
+				'message' => __( 'No Rank Math transients found.', 'rank-math' ),
+			];
 		}
 
+		$count = 0;
 		foreach ( $transients as $transient ) {
 			delete_option( $transient );
+			$count++;
 		}
 
-		return __( 'Rank Math transients cleared.', 'rank-math' );
+		// Translators: placeholder is the number of transients deleted.
+		return sprintf( _n( '%d Rank Math transient cleared.', '%d Rank Math transients cleared.', $count, 'rank-math' ), $count );
 	}
 
 	/**
 	 * Function to reset SEO Analysis.
 	 */
 	public function clear_seo_analysis() {
+		$stored = get_option( 'rank_math_seo_analysis_results' );
+		if ( empty( $stored ) ) {
+			return [
+				'status'  => 'error',
+				'message' => __( 'SEO Analysis data has already been cleared.', 'rank-math' ),
+			];
+		}
+
 		delete_option( 'rank_math_seo_analysis_results' );
 
 		return __( 'SEO Analysis data successfully deleted.', 'rank-math' );
@@ -115,8 +129,17 @@ class Database_Tools {
 	 */
 	public function delete_links() {
 		global $wpdb;
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_links;" );
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_meta;" );
+
+		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_internal_links )" );
+		if ( empty( $exists ) ) {
+			return [
+				'status'  => 'error',
+				'message' => __( 'No Internal Links data found.', 'rank-math' ),
+			];
+		}
+
+		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_links" );
+		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_meta" );
 
 		return __( 'Internal Links successfully deleted.', 'rank-math' );
 	}
@@ -126,6 +149,15 @@ class Database_Tools {
 	 */
 	public function delete_log() {
 		global $wpdb;
+
+		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_404_logs )" );
+		if ( empty( $exists ) ) {
+			return [
+				'status'  => 'error',
+				'message' => __( 'No 404 log data found.', 'rank-math' ),
+			];
+		}
+
 		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_404_logs;" );
 
 		return __( '404 Log successfully deleted.', 'rank-math' );
@@ -136,6 +168,15 @@ class Database_Tools {
 	 */
 	public function delete_redirections() {
 		global $wpdb;
+
+		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_redirections )" );
+		if ( empty( $exists ) ) {
+			return [
+				'status'  => 'error',
+				'message' => __( 'No Redirections found.', 'rank-math' ),
+			];
+		}
+
 		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections;" );
 		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections_cache;" );
 
@@ -150,7 +191,10 @@ class Database_Tools {
 	public function convert_review() {
 		$posts = Helper::get_review_posts();
 		if ( empty( $posts ) ) {
-			return __( 'No review posts found.', 'rank-math' );
+			return [
+				'status'  => 'error',
+				'message' => __( 'No review posts found.', 'rank-math' ),
+			];
 		}
 
 		$count = 0;
@@ -174,7 +218,10 @@ class Database_Tools {
 	public function convert_schema() {
 		$posts = Schema_Converter::get()->find_posts();
 		if ( empty( $posts['posts'] ) ) {
-			return esc_html__( 'No posts found to convert.', 'rank-math' );
+			return [
+				'status'  => 'error',
+				'message' => __( 'No posts found to convert.', 'rank-math' ),
+			];
 		}
 
 		Schema_Converter::get()->start( $posts['posts'] );
@@ -263,7 +310,10 @@ class Database_Tools {
 	public function yoast_blocks() {
 		$posts = Yoast_Blocks::get()->find_posts();
 		if ( empty( $posts['posts'] ) ) {
-			return esc_html__( 'No posts found to convert.', 'rank-math' );
+			return [
+				'status' => 'error',
+				'message' => __( 'No posts found to convert.', 'rank-math' ),
+			];
 		}
 
 		Yoast_Blocks::get()->start( $posts['posts'] );

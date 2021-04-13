@@ -84,7 +84,7 @@ class Objects extends Base {
 	/**
 	 * Create jobs to fetch data.
 	 */
-	private function create_data_job() {
+	public function create_data_job() {
 		// Clear old schedule.
 		wp_clear_scheduled_hook( 'rank_math/analytics/get_analytics' );
 

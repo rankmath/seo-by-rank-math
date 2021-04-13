@@ -5,7 +5,7 @@
 
     background: #e1e1e1;
 
-    div[class*='notice']:not(.rank-math-notice):not(.settings-error):not(.cmb-type-notice),
+    div.notice:not(.rank-math-notice):not(.settings-error):not(.cmb-type-notice),
     .update-nag {
         display: none;
     }

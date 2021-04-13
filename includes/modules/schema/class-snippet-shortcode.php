@@ -363,6 +363,8 @@ class Snippet_Shortcode {
 		if ( empty( $rating ) ) {
 			return;
 		}
+
+		$best_rating = (int) $this->get_field_value( 'review.reviewRating.bestRating', 5 );
 		?>
 		<div class="rank-math-total-wrapper">
 
@@ -374,10 +376,10 @@ class Snippet_Shortcode {
 
 				<div class="rank-math-review-result-wrapper">
 
-					<?php echo \str_repeat( '<i class="rank-math-star"></i>', 5 ); // phpcs:ignore ?>
+					<?php echo \str_repeat( '<i class="rank-math-star"></i>', $best_rating ); // phpcs:ignore ?>
 
-					<div class="rank-math-review-result" style="width:<?php echo ( $rating * 20 ); // phpcs:ignore ?>%;">
-						<?php echo \str_repeat( '<i class="rank-math-star"></i>', 5 ); // phpcs:ignore ?>
+					<div class="rank-math-review-result" style="width:<?php echo ( $rating * ( 100 / $best_rating ) ); // phpcs:ignore ?>%;">
+						<?php echo \str_repeat( '<i class="rank-math-star"></i>', $best_rating ); // phpcs:ignore ?>
 					</div>
 
 				</div>
@@ -453,6 +455,8 @@ class Snippet_Shortcode {
 
 	/**
 	 * Check if we can inject the review in the content.
+	 *
+	 * @param array $schema Schema Data.
 	 *
 	 * @return boolean|string
 	 */

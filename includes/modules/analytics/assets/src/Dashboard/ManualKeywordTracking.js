@@ -102,7 +102,7 @@ const ManualKeywordTracking = () => {
 	return (
 		<div className="rank-math-seo-score-overview">
 			<div id="rank-math-pro-cta" className="center">
-				<div className="rank-math-cta-box blue-ticks width-70 less-padding">
+				<div className="rank-math-cta-box blue-ticks width-70 top-20 less-padding">
 					<h3>{ __( 'Track Keyword Performance', 'rank-math' ) }</h3>
 					<ul>
 						<li>{ __( 'Find winning keywords', 'rank-math' ) }</li>

@@ -73,7 +73,7 @@ class SearchConsole {
 		jQuery( '.rank-math-disconnect-google' ).on( 'click', ( event ) => {
 			event.preventDefault()
 
-			if ( confirm( 'Are you sure?' ) ) {
+			if ( confirm( rankMath.confirmDisconnect ) ) {
 				ajax( 'disconnect_google' ).done( () => {
 					window.location.reload()
 				} )

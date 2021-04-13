@@ -54,6 +54,13 @@ class Notification {
 	const SCREEN_ANY = 'any';
 
 	/**
+	 * User capability check.
+	 *
+	 * @var string
+	 */
+	const CAPABILITY_ANY = '';
+
+	/**
 	 * Contains optional arguments:
 	 *
 	 * -             type: The notification type, i.e. 'updated' or 'error'
@@ -83,10 +90,11 @@ class Notification {
 		$this->options = wp_parse_args(
 			$options,
 			[
-				'id'      => '',
-				'classes' => '',
-				'type'    => self::SUCCESS,
-				'screen'  => self::SCREEN_ANY,
+				'id'         => '',
+				'classes'    => '',
+				'type'       => self::SUCCESS,
+				'screen'     => self::SCREEN_ANY,
+				'capability' => self::CAPABILITY_ANY,
 			]
 		);
 	}
@@ -150,6 +158,10 @@ class Notification {
 		$screen = get_current_screen();
 		if ( self::SCREEN_ANY === $this->args( 'screen' ) || Str::contains( $this->args( 'screen' ), $screen->id ) ) {
 			$this->displayed = true;
+		}
+
+		if ( self::CAPABILITY_ANY !== $this->args( 'capability' ) && ! current_user_can( $this->args( 'capability' ) ) ) {
+			$this->displayed = false;
 		}
 
 		return $this->displayed;

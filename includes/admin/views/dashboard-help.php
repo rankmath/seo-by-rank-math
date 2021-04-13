@@ -34,6 +34,15 @@ include_once 'plugin-activation.php'; ?>
 				<ul class="rank-math-list-icon">
 
 					<li>
+					<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) { ?>
+						<a href="<?php KB::the( 'pro-help-tab' ); ?>" target="_blank">
+							<i class="rm-icon rm-icon-star-filled"></i>
+							<div>
+								<strong><?php esc_html_e( 'Upgrade to PRO', 'rank-math' ); ?></strong>
+								<p><?php esc_html_e( 'Advanced Schema, Analytics and much more...', 'rank-math' ); ?></p>
+							</div>
+						</a>
+					<?php } else { ?>
 						<a href="<?php KB::the( 'how-to-setup' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-settings"></i>
 							<div>
@@ -41,6 +50,7 @@ include_once 'plugin-activation.php'; ?>
 								<p><?php esc_html_e( 'How to Properly Setup Rank Math', 'rank-math' ); ?></p>
 							</div>
 						</a>
+					<?php } ?>
 					</li>
 
 					<li>
@@ -64,9 +74,6 @@ include_once 'plugin-activation.php'; ?>
 					</li>
 
 				</ul>
-
-				<a class="button button-secondary button-xlarge" href="<?php KB::the( 'rm-kb' ); ?>" target="_blank"><?php esc_html_e( 'Visit Knowledge Base', 'rank-math' ); ?></a>
-
 			</div>
 
 		</div>
@@ -92,16 +99,6 @@ include_once 'plugin-activation.php'; ?>
 					</li>
 
 					<li>
-						<a href="https://s.rankmath.com/documentation" target="_blank">
-							<i class="rm-icon rm-icon-comments"></i>
-							<div>
-								<strong><?php esc_html_e( 'Browse FAQ\'s', 'rank-math' ); ?></strong>
-								<p><?php esc_html_e( 'Find answers to the most commonly asked questions.', 'rank-math' ); ?></p>
-							</div>
-						</a>
-					</li>
-
-					<li>
 						<a href="<?php KB::the( 'rm-support' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-support"></i>
 							<div>
@@ -111,9 +108,17 @@ include_once 'plugin-activation.php'; ?>
 						</a>
 					</li>
 
-				</ul>
+					<li>
+						<a href="<?php KB::the( 'help-affiliate' ); ?>" target="_blank">
+							<i class="rm-icon rm-icon-sitemap"></i>
+							<div>
+								<strong><?php esc_html_e( 'Affiliate Program', 'rank-math' ); ?></strong>
+								<p><?php esc_html_e( 'Earn flat 30% on every sale!', 'rank-math' ); ?></p>
+							</div>
+						</a>
+					</li>
 
-				<a class="button button-secondary button-xlarge" href="<?php KB::the( 'rm-support' ); ?>" target="_blank"><?php esc_html_e( 'Visit Support Center', 'rank-math' ); ?></a>
+				</ul>
 
 			</div>
 

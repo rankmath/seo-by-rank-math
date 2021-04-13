@@ -475,23 +475,28 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.60.1 [Mar 21, 2021] =
-* Fixed: Fatal PHP Error after updating the plugin where very old PRO version is present
-
-= 1.0.60 [Mar 18, 2021] =
-* Updated: [Minimum required PHP](https://wordpress.org/about/requirements/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP) version is now set to 7.2. Even though the EOL is reached for PHP 7.2 as well. In a few months, we will not support any PHP version that has run out of its EOL cycle. Not only it's a security risk, but it also affects performance.
-* Improved: [Analytics module](https://rankmath.com/kb/analytics/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP) now shows the latest position for keywords and posts instead of the average position for a selected timeframe. You should see better stats overall in the plugin now
-* Improved: Calculation method for the difference of keywords and posts positions is updated to reflect more meaningful data
-* Improved: Formulas to calculate the [total number of keywords](https://rankmath.com/kb/analytics/#keyword-report-overview-numbers-pro/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP) for which a site is ranking currently
-* Improved: Smallest keyword position will now represent the post position out of all keywords for which that post is ranking
-* Improved: Keyword position's bar graph and filters related to it now show accurate keywords count
-* Improved: Removed `noindex` posts from the Analytics reporting for a better understanding of the overall SEO of a site
-* Improved: Remove all the [Schema](https://rankmath.com/blog/schema-markup/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP) entities from the post where Schema was not selected
-* Fixed: Active tab gets deselected in the Analytics pages when pagination is used
-* Fixed: Incompatibility with the Flatsome theme causing issues on some installations
-* Fixed: Every [WooCommerce](https://rankmath.com/blog/woocommerce-seo/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP) product gallery's images were adding as different `og:image` tags
-* Fixed: A fatal error in the [Sitemap](https://rankmath.com/kb/sitemaps-seo-benefits/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP) when the timezone was set to UTC-1
-* Fixed: Styling issue in the ["Mark page as" option of the admin bar](https://rankmath.com/kb/quick-actions/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)
-* Fixed: SEO score was changing back to a lower score in the [Elementor](https://rankmath.com/blog/elementor-seo/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP) editor after reloading the page
+= 1.0.61 [Apr 01, 2021] =
+* Added: [NEW!] Post author schema property prints gravatar, social profile URLs(`sameAs`), author archive URL(if enabled), and `worksFor` attribute
+* Added: [NEW!] Focus keywords as `keywords` attribute in the [Article Schema](https://rankmath.com/kb/article-schema/) output
+* Added: Video duration data in the [Recipe Schema](https://rankmath.com/kb/recipe-schema/) output
+* Added: Width and height data in the `ImageObject` Schema property
+* Improved: Feedback Messages related to the Rank Math's [Database tools](https://rankmath.com/kb/rank-math-status-and-tools/#tools)
+* Improved: Avoid saving General settings after hitting the enter button while editing any text field
+* Improved: Browser title for the [KML file](https://rankmath.com/kb/kml-sitemap/) in the sitemap
+* Improved: Replaced deprecated Javascript functions
+* Fixed: PHP notices showing right after installation on some installations
+* Fixed: Dashboard widget was throwing PHP errors sometimes due to cache clearing issue
+* Fixed: Rebuild Analytics Index tool was not indexing all available posts/pages
+* Fixed: `rankmath_google_api_failed_attempts_data` option was becoming too large on some websites
+* Fixed: [Star Rating](https://rankmath.com/kb/review-schema/) was not showing correctly on the frontend if a maximum value was more than 5
+* Fixed: Settings tab were hidden for a post type which has word 'Notice' in its name
+* Fixed: Remove Data fetch scheduled actions if Analytics Module is disabled
+* Fixed: [Sitemaps](https://rankmath.com/kb/configure-sitemaps/) were not working with the plain permalinks
+* Fixed: Sitemap was not updating when Scheduled posts were published
+* Fixed: Analytics Dashboard page was not loading due to console error on some setups
+* Fixed: Missing [schema markup](https://rankmath.com/kb/rich-snippets/) code on the Static Homepage
+* Fixed: Analytics Graphs were showing wrong data when the “7 Days” timeframe was Selected
+* Fixed: An error appearing in the PHP 8.0
+* Fixed: Title attribute was getting added after the ending slash in `img` tag
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

@@ -324,6 +324,10 @@ trait WordPress {
 		$screen = get_current_screen();
 		$robots = Helper::get_settings( 'titles.robots_global', [] );
 
+		if ( ! is_object( $screen ) ) {
+			return $robots;
+		}
+
 		if ( 'post' === $screen->base && Helper::get_settings( "titles.pt_{$screen->post_type}_custom_robots" ) ) {
 			$robots = Helper::get_settings( "titles.pt_{$screen->post_type}_robots", [] );
 		}

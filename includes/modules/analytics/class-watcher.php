@@ -78,8 +78,13 @@ class Watcher {
 		}
 
 		$id      = get_post_meta( $post_id, 'rank_math_analytic_object_id', true );
-		$fk      = get_post_meta( $post_id, 'rank_math_focus_keyword', true );
 		$schemas = \RankMath\Schema\DB::get_schema_types( $post_id );
+
+		$fk = get_post_meta( $post_id, 'rank_math_focus_keyword', true );
+		if ( $fk ) {
+			$fk = explode( ',', $fk );
+			$fk = trim( $fk[0] );
+		}
 
 		if ( empty( $schemas ) && 'off' === get_post_meta( $post_id, 'rank_math_rich_snippet', true ) ) {
 			$schemas = __( 'None', 'rank-math' );

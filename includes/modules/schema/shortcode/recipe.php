@@ -73,8 +73,15 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Video Content URL', 'rank-math' ),
-		'video.contentUrl'
+		esc_html__( 'Recipe Video Name', 'rank-math' ),
+		'video.name'
+	);
+	?>
+
+	<?php
+	$this->get_field(
+		esc_html__( 'Recipe Video Description', 'rank-math' ),
+		'video.description'
 	);
 	?>
 
@@ -86,24 +93,14 @@ $this->get_image();
 	?>
 
 	<?php
-	$this->get_field(
-		esc_html__( 'Recipe Video Name', 'rank-math' ),
-		'video.name'
-	);
-	?>
-
-	<?php
-	$this->get_field(
-		esc_html__( 'Video Upload Date', 'rank-math' ),
-		'video.uploadDate'
-	);
-	?>
-
-	<?php
-	$this->get_field(
-		esc_html__( 'Recipe Video Description', 'rank-math' ),
-		'video.description'
-	);
+	global $wp_embed;
+	if ( ! empty( $this->schema['video'] ) ) {
+		if ( ! empty( $this->schema['video']['embedUrl'] ) ) {
+			echo do_shortcode( $wp_embed->autoembed( $this->schema['video']['embedUrl'] ) );
+		} elseif ( ! empty( $this->schema['video']['contentUrl'] ) ) {
+			echo do_shortcode( $wp_embed->autoembed( $this->schema['video']['contentUrl'] ) );
+		}
+	}
 	?>
 
 	<?php
