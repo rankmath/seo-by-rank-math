@@ -338,7 +338,7 @@ class Shortcodes {
 		?>
 		<h4 class="rank-math-name">
 			<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $name ); ?></a>
-		</h3>
+		</h4>
 		<?php
 	}
 

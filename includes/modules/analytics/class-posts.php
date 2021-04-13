@@ -71,6 +71,7 @@ class Posts extends Objects {
 		];
 
 		$post->admin_url = admin_url();
+		$post->home_url  = home_url();
 
 		$post = apply_filters( 'rank_math/analytics/single/report', $post, $this );
 

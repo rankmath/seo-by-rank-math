@@ -705,21 +705,43 @@ class Stats extends Keywords {
 		} else {
 			// phpcs:disable
 			$query = $wpdb->prepare(
+				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
+				$this->start_date,
+				$this->end_date
+			);
+			$ids = $wpdb->get_results( $query );
+			// phpcs:enable
+
+			// Get id list from above result.
+			$ids       = wp_list_pluck( $ids, 'id' );
+			$ids_where = " AND id IN ('" . join( "', '", $ids ) . "')";
+
+			// phpcs:disable
+			$query = $wpdb->prepare(
+				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
+				$this->compare_start_date,
+				$this->compare_end_date
+			);
+			$old_ids = $wpdb->get_results( $query );
+			// phpcs:enable
+
+			// Get id list from above result.
+			$old_ids       = wp_list_pluck( $old_ids, 'id' );
+			$old_ids_where = " AND id IN ('" . join( "', '", $old_ids ) . "')";
+
+			// phpcs:disable
+			$positions = $wpdb->get_results(
 				"SELECT
 					t1.{$dimension} as {$dimension}, ROUND( t1.position, 0 ) as position,
 					COALESCE( ROUND( t1.position - COALESCE( t2.position, 100 ), 0 ), 0 ) as diffPosition
 				FROM
-					( SELECT a.{$dimension}, a.position FROM {$wpdb->prefix}rank_math_analytics_gsc AS a WHERE 1 = 1 AND id IN (SELECT MAX(id) FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension})) AS t1
+					( SELECT a.{$dimension}, a.position FROM {$wpdb->prefix}rank_math_analytics_gsc AS a WHERE 1 = 1{$ids_where}) AS t1
 				LEFT JOIN
-					( SELECT a.{$dimension}, a.position FROM {$wpdb->prefix}rank_math_analytics_gsc AS a WHERE 1 = 1 AND id IN (SELECT MAX(id) FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension})) AS t2
+					( SELECT a.{$dimension}, a.position FROM {$wpdb->prefix}rank_math_analytics_gsc AS a WHERE 1 = 1{$old_ids_where}) AS t2
 				ON t1.{$dimension} = t2.{$dimension}
 				{$where}",
-				$this->start_date,
-				$this->end_date,
-				$this->compare_start_date,
-				$this->compare_end_date
+				ARRAY_A
 			);
-			$positions = $wpdb->get_results( $query, ARRAY_A );
 			// phpcs:enable
 
 			$positions = $this->set_dimension_as_key( $positions, $dimension );
@@ -872,7 +894,7 @@ class Stats extends Keywords {
 			} else {
 				$value = $row[ $dimension ];
 			}
-			$key          = 'page' === $dimension ? $this->get_relative_url( $value ) : $value;
+			$key          = 'page' === $dimension ? $this->get_relative_url( $value ) : strtolower( $value );
 			$rows[ $key ] = $row;
 		}
 

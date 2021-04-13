@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.7
 Requires at least: 5.5
 Requires PHP: 7.2
-Stable tag: 1.0.60.1
+Stable tag: 1.0.61.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -474,6 +474,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.61 [Apr 03, 2021] =
+* Fixed: Link modal freezes when trying to add a link in the Relation field of ACF
+* Fixed: Optimized one Analytics query, which was causing high CPU usage on some setups from the last update
+* Fixed: Wrong closing H4 tag in the shortcode
 
 = 1.0.61 [Apr 01, 2021] =
 * Added: [NEW!] Post author schema property prints gravatar, social profile URLs(`sameAs`), author archive URL(if enabled), and `worksFor` attribute

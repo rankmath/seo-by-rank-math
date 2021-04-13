@@ -151,7 +151,7 @@ import jQuery from 'jquery'
 			}
 
 			if ( ! wpLink.isMCE() && document.selection ) {
-				this.textarea.trigger( 'focus' )
+				this.textarea.focus()
 				this.range = document.selection.createRange()
 			}
 
@@ -199,14 +199,14 @@ import jQuery from 'jquery'
 
 			if ( isTouch ) {
 				// Close the onscreen keyboard
-				inputs.url.trigger( 'focus' ).trigger( 'blur' )
+				inputs.url.focus().blur()
 			} else {
 				// Focus the URL field and highlight its contents.
 				// If this is moved above the selection changes,
 				// IE will show a flashing cursor over the dialog.
 				window.setTimeout( function() {
 					inputs.url[ 0 ].select()
-					inputs.url.trigger( 'focus' )
+					inputs.url.focus()
 				} )
 			}
 
@@ -304,7 +304,7 @@ import jQuery from 'jquery'
 
 			if ( 'noReset' !== reset ) {
 				if ( ! wpLink.isMCE() ) {
-					wpLink.textarea.trigger( 'focus' )
+					wpLink.textarea.focus()
 
 					if ( wpLink.range ) {
 						wpLink.range.moveToBookmark( wpLink.range.getBookmark() )
@@ -404,7 +404,7 @@ import jQuery from 'jquery'
 				// IE
 				// Note: If no text is selected, IE will not place the cursor
 				//       inside the closing tag.
-				textarea.trigger( 'focus' )
+				textarea.focus()
 				wpLink.range.text = html + ( text || wpLink.range.text ) + '</a>'
 				wpLink.range.moveToBookmark( wpLink.range.getBookmark() )
 				wpLink.range.select()
@@ -434,7 +434,7 @@ import jQuery from 'jquery'
 			}
 
 			wpLink.close()
-			textarea.trigger( 'focus' )
+			textarea.focus()
 			$( textarea ).trigger( 'change' )
 
 			// Audible confirmation message when a link has been inserted in the Editor.
@@ -606,10 +606,10 @@ import jQuery from 'jquery'
 				// wp-link-submit must always be the last focusable element in the dialog.
 				// following focusable elements will be skipped on keyboard navigation.
 				if ( 'wp-link-submit' === id && ! event.shiftKey ) {
-					inputs.close.trigger( 'focus' )
+					inputs.close.focus()
 					event.preventDefault()
 				} else if ( 'wp-link-close' === id && event.shiftKey ) {
-					inputs.submit.trigger( 'focus' )
+					inputs.submit.focus()
 					event.preventDefault()
 				}
 			}
