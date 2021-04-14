@@ -50,7 +50,7 @@ class Analytics_Common {
 	}
 
 	/**
-	 * Add site verification code.
+	 * Return site verification code.
 	 *
 	 * @param string $content If any code from setting.
 	 *
@@ -113,13 +113,16 @@ class Analytics_Common {
 	 * @return string
 	 */
 	public function analytics_reindex_posts() {
+		// Clear all objects data.
 		DB::objects()
 			->truncate();
 
+		// Clear all metadata related to object.
 		DB::table( 'postmeta' )
 			->where( 'meta_key', 'rank_math_analytic_object_id' )
 			->delete();
 
+		// Start reindexing posts.
 		( new \RankMath\Analytics\Workflow\Objects() )->flat_posts();
 
 		return __( 'Post re-index in progress.', 'rank-math' );

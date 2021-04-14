@@ -29,7 +29,7 @@ class RankMathCustomFields {
 	 * Hook into Rank Math App eco-system
 	 */
 	hooks() {
-		wp.hooks.addFilter( 'rank_math_content', 'rank-math', this.getContent )
+		wp.hooks.addFilter( 'rank_math_content', 'rank-math', this.getContent, 11 )
 	}
 
 	/**

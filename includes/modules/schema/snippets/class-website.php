@@ -18,9 +18,9 @@ defined( 'ABSPATH' ) || exit;
 class Website implements Snippet {
 
 	/**
-	 * Outputs code to allow recognition of the internal search engine.
+	 * Generate WebSite JSON-LD.
 	 *
-	 * @link https://developers.google.com/structured-data/site-name
+	 * @link https://schema.org/WebSite
 	 *
 	 * @param array  $data   Array of JSON-LD data.
 	 * @param JsonLD $jsonld JsonLD Instance.

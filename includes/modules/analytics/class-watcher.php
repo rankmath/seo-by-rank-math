@@ -12,9 +12,7 @@ namespace RankMath\Analytics;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use RankMath\Google\Console;
-use RankMath\Google\Analytics;
-use RankMathPro\Google\Adsense;
+use RankMath\Google\Authentication;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,12 +45,8 @@ class Watcher {
 	 * Hooks
 	 */
 	public function hooks() {
-		if ( Console::is_console_connected() ||
-			Analytics::is_analytics_connected() ||
-			\class_exists( 'RankMathPro\Google\Adsense' ) && method_exists( 'Adsense', 'is_adsense_connected' ) && Adsense::is_adsense_connected()
-		) {
+		if ( Authentication::is_authorized() ) {
 			$this->action( 'save_post', 'update_post_info', 99 );
-			$this->action( 'rank_math/schema/update', 'update_post_schema_info', 99 );
 		}
 	}
 
@@ -77,58 +71,53 @@ class Watcher {
 			return;
 		}
 
-		$id      = get_post_meta( $post_id, 'rank_math_analytic_object_id', true );
-		$schemas = \RankMath\Schema\DB::get_schema_types( $post_id );
-
-		$fk = get_post_meta( $post_id, 'rank_math_focus_keyword', true );
-		if ( $fk ) {
-			$fk = explode( ',', $fk );
-			$fk = trim( $fk[0] );
+		// Get primary focus keyword.
+		$primary_keyword = get_post_meta( $post_id, 'rank_math_focus_keyword', true );
+		if ( $primary_keyword ) {
+			$primary_keyword = explode( ',', $primary_keyword );
+			$primary_keyword = trim( $primary_keyword[0] );
 		}
 
-		if ( empty( $schemas ) && 'off' === get_post_meta( $post_id, 'rank_math_rich_snippet', true ) ) {
-			$schemas = __( 'None', 'rank-math' );
+		// Set argument for object row.
+		$object_args = [
+			'id'                  => get_post_meta( $post_id, 'rank_math_analytic_object_id', true ),
+			'created'             => get_the_modified_date( 'Y-m-d H:i:s', $post_id ),
+			'title'               => get_the_title( $post_id ),
+			'page'                => Stats::get_relative_url( get_permalink( $post_id ) ),
+			'object_type'         => 'post',
+			'object_subtype'      => $post_type,
+			'object_id'           => $post_id,
+			'primary_key'         => $primary_keyword,
+			'seo_score'           => $primary_keyword ? get_post_meta( $post_id, 'rank_math_seo_score', true ) : 0,
+			'schemas_in_use'      => \RankMath\Schema\DB::get_schema_types( $post_id, true ),
+			'is_indexable'        => Helper::is_post_indexable( $post_id ),
+			'pagespeed_refreshed' => 'NULL',
+		];
+
+		// Get translated object info in case multi-language plugin is installed.
+		$translated_objects = apply_filters( 'rank_math/analytics/get_translated_objects', $post_id );
+		if ( false !== $translated_objects && is_array( $translated_objects ) ) {
+			// Remove current object info from objects table.
+			DB::objects()
+				->where( 'object_id', $post_id )
+				->delete();
+
+			foreach ( $translated_objects as $obj ) {
+				$object_args['title'] = $obj['title'];
+				$object_args['page']  = $obj['url'];
+
+				DB::add_object( $object_args );
+			}
+
+			// Here we don't need to add `rank_math_analytic_object_id` post meta, because we always remove old translated objects info and add new one, in case of multi-lanauge.
+			return;
 		}
 
-		// Update post.
-		$id = DB::update_object(
-			[
-				'id'                  => $id,
-				'created'             => get_the_modified_date( 'Y-m-d H:i:s', $post_id ),
-				'title'               => get_the_title( $post_id ),
-				'page'                => Stats::get_relative_url( get_permalink( $post_id ) ),
-				'object_type'         => 'post',
-				'object_subtype'      => $post_type,
-				'object_id'           => $post_id,
-				'primary_key'         => $fk,
-				'seo_score'           => $fk ? get_post_meta( $post_id, 'rank_math_seo_score', true ) : 0,
-				'is_indexable'        => Helper::is_post_indexable( $post_id ),
-				'schemas_in_use'      => $schemas ? $schemas : '',
-				'pagespeed_refreshed' => 'NULL',
-			]
-		);
+		// Update post from objects table.
+		$id = DB::update_object( $object_args );
 
 		if ( $id > 0 ) {
 			update_post_meta( $post_id, 'rank_math_analytic_object_id', $id );
 		}
-	}
-
-	/**
-	 * Update post info for analytics.
-	 *
-	 * @param int $post_id Post id.
-	 */
-	public function update_post_schema_info( $post_id ) {
-		$id      = get_post_meta( $post_id, 'rank_math_analytic_object_id', true );
-		$schemas = \RankMath\Schema\DB::get_schema_types( $post_id );
-
-		// Update post.
-		$id = DB::update_object(
-			[
-				'object_id'      => $post_id,
-				'id'             => $id,
-				'schemas_in_use' => $schemas ? $schemas : '',
-			]
-		);
 	}
 }

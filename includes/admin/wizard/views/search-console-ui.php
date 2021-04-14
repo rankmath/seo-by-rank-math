@@ -203,7 +203,7 @@ $analytic_classes = Helper::classnames(
 					</span>
 				</label>
 				<label for="cookieless-ga">
-					<?php esc_html_e( 'Enable Cookieless Tracking [No Consent Required]', 'rank-math' ); ?>
+					<?php printf( esc_html__( 'Enable Cookieless Tracking. Want to make Analytics GDPR ready? %s', 'rank-math' ), '<a href="' . KB::get( 'settings-gdpr-analytics' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Click here.', 'rank-math' ) . '</a>' ); ?>
 					<?php if ( ! $is_pro_active ) : ?>
 					<span class="rank-math-pro-badge">
 						<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Cookieless%20IP&utm_campaign=WP" target="_blank" rel="noopener noreferrer">

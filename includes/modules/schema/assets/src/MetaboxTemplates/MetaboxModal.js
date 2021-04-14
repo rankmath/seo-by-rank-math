@@ -19,6 +19,10 @@ import TabPanel from './Tabs'
 
 /**
  * Meabox modal popup component.
+ *
+ * @param {Object}  props               The props data.
+ * @param {boolean} props.isOpen        Whether the schema modal is open.
+ * @param {string}  props.isCutomSchema Current schema type.
  */
 const MetaboxModal = ( { isOpen = false, isCutomSchema } ) => {
 	if ( ! isOpen ) {

@@ -285,6 +285,7 @@ class DataCollector {
 				objectID: rankMath.objectID,
 				objectType: rankMath.objectType,
 				meta,
+				content: this.getContent(),
 			},
 		} ).then( ( response ) => {
 			if ( isString( response ) ) {

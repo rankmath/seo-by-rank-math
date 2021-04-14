@@ -10,7 +10,6 @@
 
 namespace RankMath\Redirections;
 
-use RankMath\Helper;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Database\Database;
 
@@ -287,7 +286,7 @@ class DB {
 			]
 		);
 
-		if ( in_array( $args['header_code'], [ 410, 451 ] ) ) {
+		if ( in_array( $args['header_code'], [ 410, 451 ], true ) ) {
 			$args['url_to'] = '';
 		}
 
@@ -328,7 +327,7 @@ class DB {
 		$args['sources'] = maybe_serialize( $args['sources'] );
 		unset( $args['id'] );
 
-		if ( in_array( $args['header_code'], [ 410, 451 ] ) ) {
+		if ( in_array( $args['header_code'], [ 410, 451 ], true ) ) {
 			$args['url_to'] = '';
 		}
 

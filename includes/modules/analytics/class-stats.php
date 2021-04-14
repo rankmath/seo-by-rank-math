@@ -78,12 +78,12 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Date range.
+	 * Set date range.
 	 *
 	 * @param string $range Range of days.
 	 */
 	public function set_date_range( $range = false ) {
-		// Dates.
+		// Shift 3 days prior.
 		$subtract = DAY_IN_SECONDS * 3;
 		$start    = strtotime( false !== $range ? $range : $this->get_date_from_cookie( 'date_range', '-30 days' ) ) - $subtract;
 		$end      = strtotime( $this->do_filter( 'analytics/end_date', 'today' ) ) - $subtract;
@@ -96,7 +96,7 @@ class Stats extends Keywords {
 		$this->end_date   = date_i18n( 'Y-m-d 23:59:59', $end );
 		$this->start_date = date_i18n( 'Y-m-d 00:00:00', $start );
 
-		// Compare with.
+		// Compare date.
 		$this->days               = ceil( abs( $end - $start ) / DAY_IN_SECONDS );
 		$this->compare_end_date   = $start - DAY_IN_SECONDS;
 		$this->compare_start_date = $this->compare_end_date - ( $this->days * DAY_IN_SECONDS );
@@ -105,26 +105,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Get sql range.
-	 *
-	 * @param string $column Column name.
-	 *
-	 * @return string
-	 */
-	public function get_sql_range( $column = 'date' ) {
-		$range    = $this->get_date_from_cookie( 'date_range', '-30 days' );
-		$interval = [
-			'-30 days'  => 'WEEK(' . $column . ')',
-			'-3 months' => 'WEEK(' . $column . ')',
-			'-6 months' => 'MONTH(' . $column . ')',
-			'-1 year'   => 'MONTH(' . $column . ')',
-		];
-
-		return isset( $interval[ $range ] ) ? $interval[ $range ] : $column;
-	}
-
-	/**
-	 * Get intervals for graph.
+	 * Get date intervals for graph.
 	 *
 	 * @return array
 	 */
@@ -205,7 +186,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Get date intervals sql part.
+	 * Get date intervals for SQL query.
 	 *
 	 * @param  array  $intervals Date Intervals.
 	 * @param  string $column Column name to check.
@@ -311,6 +292,7 @@ class Stats extends Keywords {
 
 			foreach ( $keys as $key_idx => $key ) {
 				if ( 'position' === $key ) {
+					// Should subtract the position value from 100. The position data was inverted before call this function.
 					$value = 100 - (int) $mixed[ $mixed_count - $key_idx - 1 ];
 				} else {
 					$value = $mixed[ $mixed_count - $key_idx - 1 ];
@@ -335,6 +317,7 @@ class Stats extends Keywords {
 	public function get_merged_metrics( $metrics_rows1, $metrics_rows2, $has_traffic = false ) {
 		$data = [];
 
+		// Construct base data array.
 		$base_array = [
 			'position'        => 0,
 			'diffPosition'    => 0,
@@ -351,6 +334,7 @@ class Stats extends Keywords {
 			$base_array['difference'] = 0;
 		}
 
+		// Merge first array and second array into base array.
 		foreach ( $metrics_rows1 as $key => $row ) {
 			if ( isset( $metrics_rows2[ $key ] ) ) {
 				if ( is_object( $row ) ) {
@@ -364,6 +348,7 @@ class Stats extends Keywords {
 			}
 		}
 
+		// Merge remaining items from second array into base array.
 		foreach ( $metrics_rows2 as $key => $row ) {
 			if ( is_object( $row ) ) {
 				$metrics_rows2[ $key ] = (object) array_merge( $base_array, (array) $row );
@@ -376,7 +361,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * [get_merge_data_graph description]
+	 * Merge data graph by date.
 	 *
 	 * @param  array $rows Rows to merge.
 	 * @param  array $data Data array.
@@ -474,7 +459,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Get rows from analytics.
+	 * Get analytics data.
 	 *
 	 * @param  array $args Array of arguments.
 	 * @return array
@@ -659,8 +644,11 @@ class Stats extends Keywords {
 		$sub_where = $args['sub_where'];
 
 		if ( 'page' === $dimension ) {
-			// phpcs:disable
+			// In case dimension is set as 'page', position data for each page will be top position of last ranked date.
+			// That is, among all the position value from the last date of the page, the top position(smallest position value) value will be the result.
+
 			// Get current position data.
+			// phpcs:disable
 			$query = $wpdb->prepare(
 				"SELECT {$dimension}, MAX(CONCAT({$dimension}, ':', DATE(created), ':', LPAD((100 - position), 3, '0'))) as uid
 				FROM {$wpdb->prefix}rank_math_analytics_gsc 
@@ -691,7 +679,7 @@ class Stats extends Keywords {
 			$positions     = $this->set_dimension_as_key( $positions, $dimension );
 			$old_positions = $this->set_dimension_as_key( $old_positions, $dimension );
 
-			// Calculate position difference, merge old into current.
+			// Calculate position difference, merge old into current position data array.
 			foreach ( $positions as $page => &$row ) {
 				$row = (array) $row; // force to convert as array.
 				if ( ! isset( $old_positions[ $page ] ) ) {
@@ -703,6 +691,9 @@ class Stats extends Keywords {
 				$row['diffPosition'] = $row['position'] - $old_position_value;
 			}
 		} else {
+			// In case dimension is not 'page', position data for each dimension will be most recent position value.
+
+			// Step1. Get most recent row id for each dimension for current data.
 			// phpcs:disable
 			$query = $wpdb->prepare(
 				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
@@ -712,10 +703,11 @@ class Stats extends Keywords {
 			$ids = $wpdb->get_results( $query );
 			// phpcs:enable
 
-			// Get id list from above result.
+			// Step2. Get id list from above result.
 			$ids       = wp_list_pluck( $ids, 'id' );
 			$ids_where = " AND id IN ('" . join( "', '", $ids ) . "')";
 
+			// Step3. Get most recent row id for each dimension for compare data.
 			// phpcs:disable
 			$query = $wpdb->prepare(
 				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
@@ -725,10 +717,11 @@ class Stats extends Keywords {
 			$old_ids = $wpdb->get_results( $query );
 			// phpcs:enable
 
-			// Get id list from above result.
+			// Step4. Get id list from above result.
 			$old_ids       = wp_list_pluck( $old_ids, 'id' );
 			$old_ids_where = " AND id IN ('" . join( "', '", $old_ids ) . "')";
 
+			// Step5. Get position and difference data based on above id list.
 			// phpcs:disable
 			$positions = $wpdb->get_results(
 				"SELECT
@@ -770,8 +763,8 @@ class Stats extends Keywords {
 		$dimension = $args['dimension'];
 		$sub_where = $args['sub_where'];
 
-		// phpcs:disable
 		// Get metrics data like impressions, click, ctr, etc.
+		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT
 				t1.{$dimension} as {$dimension}, t1.clicks, t1.impressions, t1.ctr,
@@ -794,7 +787,6 @@ class Stats extends Keywords {
 			$this->compare_start_date,
 			$this->compare_end_date
 		);
-		
 		$metrics = $wpdb->get_results( $query, ARRAY_A );
 		// phpcs:enable
 
@@ -820,7 +812,6 @@ class Stats extends Keywords {
 
 		// Filter array by $type value.
 		$order_by_position = in_array( $order_by_field, [ 'diffPosition', 'position' ], true ) ? true : false;
-
 		if ( ( 'win' === $type && $order_by_position ) || ( 'lose' === $type && ! $order_by_position ) ) {
 			$data = array_filter(
 				$data,
@@ -858,7 +849,10 @@ class Stats extends Keywords {
 	public function set_page_as_key( $data ) {
 		$rows = [];
 		foreach ( $data as $row ) {
-			$page          = $this->get_relative_url( $row['page'] );
+			$page = $this->get_relative_url( $row['page'] );
+			if ( ! empty( $row['object_id'] ) && empty( $row['schemas_in_use'] ) ) {
+				$row['schemas_in_use'] = Helper::get_default_schema_type( $row['object_id'], true );
+			}
 			$rows[ $page ] = $row;
 		}
 
@@ -866,21 +860,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Set query as key.
-	 *
-	 * @param array $data Rows to process.
-	 * @return array
-	 */
-	public function set_query_as_key( $data ) {
-		$rows = [];
-		foreach ( $data as $row ) {
-			$rows[ $row['query'] ] = $row;
-		}
-		return $rows;
-	}
-
-	/**
-	 * Set dimension as key.
+	 * Set dimension parameter as key.
 	 *
 	 * @param array  $data      Rows to process.
 	 * @param string $dimension Dimension to set as key.

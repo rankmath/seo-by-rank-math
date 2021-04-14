@@ -21,6 +21,9 @@
 				this.explodePastedContent()
 			},
 
+			/**
+			 * Open and handle the form that creates new redirections.
+			 */
 			addNew() {
 				const self = this,
 					page = $( 'html, body' )
@@ -79,6 +82,9 @@
 				} )
 			},
 
+			/**
+			 * Set up import/export panel.
+			 */
 			importExport() {
 				const self = this,
 					page = $( 'html, body' )
@@ -99,6 +105,9 @@
 				)
 			},
 
+			/**
+			 * Validate add/edit redirection form.
+			 */
 			validateForm() {
 				const buttonPrimary = $(
 					'.rank-math-editcreate-form .button-primary'
@@ -148,6 +157,9 @@
 				)
 			},
 
+			/**
+			 * Visually separate 410 & 451 from the rest since these are different from the other redirections.
+			 */
 			separateRedirectionTypes() {
 				const row = this.wrap.find( '.cmb2-id-header-code' )
 
@@ -181,6 +193,9 @@
 				$( '[name=header_code]:checked' ).trigger( 'change' )
 			},
 
+			/**
+			 * Add multiple redirection sources when pasting mult-line content in the source fields.
+			 */
 			explodePastedContent() {
 				const group = $( '#sources_repeat' )
 
@@ -232,6 +247,9 @@
 				} )
 			},
 
+			/**
+			 * Show more redirection sources.
+			 */
 			showMore() {
 				this.wrap.on( 'click', '.rank-math-showmore', function(
 					event
@@ -254,6 +272,9 @@
 				} )
 			},
 
+			/**
+			 * Column action handlers.
+			 */
 			columnActions() {
 				const self = this
 
@@ -336,14 +357,30 @@
 				)
 			},
 
+			/**
+			 * Add one to the post filter count.
+			 *
+			 * @param string filter Filter class.
+			 */
 			filterCountAdd( filter ) {
 				this.filterCount( filter, 'add' )
 			},
 
+			/**
+			 * Substract one from the post filter count.
+			 *
+			 * @param string filter Filter class.
+			 */
 			filterCountSubstract( filter ) {
 				this.filterCount( filter, 'sub' )
 			},
 
+			/**
+			 * Add to, or substract one from the post (redirection) filter count.
+			 *
+			 * @param string filter Filter class.
+			 * @param string action Action, 'add' or 'sub'.
+			 */
 			filterCount( filter, action ) {
 				let $elem = this.wrap.find(
 						'form > ul.subsubsub > .' + filter + ' .count'

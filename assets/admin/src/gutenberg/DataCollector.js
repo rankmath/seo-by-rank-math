@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, map, debounce, forEach, isEmpty, isInteger, isUndefined, isEqual } from 'lodash'
+import { get, map, debounce, forEach, isEmpty, isInteger, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -26,21 +26,21 @@ import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
  */
 class DataCollector {
 	/**
-	 * Is plugin initialize
+	 * Is plugin initialize.
 	 *
 	 * @type {boolean}
 	 */
 	initialize = false
 
 	/**
-	 * Saving redirection
+	 * Saving redirection.
 	 *
 	 * @type {boolean}
 	 */
 	isSavingRedirection = false
 
 	/**
-	 * Saving schemas
+	 * Saving schemas.
 	 *
 	 * @type {boolean}
 	 */
@@ -264,6 +264,7 @@ class DataCollector {
 						objectID: rankMath.objectID,
 						objectType: rankMath.objectType,
 						meta,
+						content: this.getPostAttribute( 'content' ),
 					},
 				} )
 				dispatch( 'rank-math' ).resetDirtyMetadata()

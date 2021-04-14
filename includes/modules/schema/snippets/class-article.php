@@ -32,7 +32,7 @@ class Article implements Snippet {
 	 */
 	public function process( $data, $jsonld ) {
 		if ( ! $type = Helper::get_post_meta( 'snippet_article_type' ) ) { // phpcs:ignore
-			$type = Helper::get_default_schema_type( $jsonld->post->post_type );
+			$type = Helper::get_default_schema_type( $jsonld->post_id );
 		}
 
 		$entity = [

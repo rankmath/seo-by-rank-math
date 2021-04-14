@@ -1,6 +1,6 @@
 <?php
 /**
- * Instant Indexing
+ * Instant Indexing module.
  *
  * @since      1.0.56
  * @package    RankMath

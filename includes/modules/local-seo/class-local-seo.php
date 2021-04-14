@@ -1,6 +1,6 @@
 <?php
 /**
- * The Local SEO Module
+ * The Local SEO module.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -10,7 +10,6 @@
 
 namespace RankMath\Local_Seo;
 
-use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
@@ -37,7 +36,7 @@ class Local_Seo {
 	}
 
 	/**
-	 * Init Local SEO Sitemap if possible.
+	 * Init Local SEO Sitemap.
 	 */
 	public function location_sitemap() {
 		if (
@@ -50,7 +49,7 @@ class Local_Seo {
 	}
 
 	/**
-	 * Add module settings into general optional panel.
+	 * Add module settings in Titles & Meta panel.
 	 *
 	 * @param array $tabs Array of option panel tabs.
 	 *
@@ -63,7 +62,7 @@ class Local_Seo {
 	}
 
 	/**
-	 * Ajax search pages.
+	 * Ajax handler to search pages based on the searched string. Used in the Local SEO Settings.
 	 */
 	public function search_pages() {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
@@ -95,7 +94,7 @@ class Local_Seo {
 	}
 
 	/**
-	 * Output structured data for Person or Organization.
+	 * Add Person/Organization schema.
 	 *
 	 * @param array  $data    Array of JSON-LD data.
 	 * @param JsonLD $json_ld The JsonLD instance.
@@ -133,7 +132,7 @@ class Local_Seo {
 	}
 
 	/**
-	 * Add place entity to use in Organization schema.
+	 * Add place entity to use in the Organization schema.
 	 *
 	 * @param array  $data   Array of JSON-LD data.
 	 * @param JsonLD $jsonld The JsonLD instance.
@@ -142,6 +141,9 @@ class Local_Seo {
 		$properties = [];
 		$this->add_geo_cordinates( $properties );
 		$jsonld->add_prop( 'address', $properties );
+		if ( empty( $properties ) ) {
+			return;
+		}
 
 		$data['place'] = array_merge(
 			[
@@ -208,9 +210,10 @@ class Local_Seo {
 		$json_ld->add_prop( 'phone', $entity );
 
 		if ( isset( $entity['logo'] ) ) {
-			$entity['image'] = $entity['logo'];
+			$entity['image'] = [ '@id' => $entity['logo']['@id'] ];
 
 			if ( ! is_singular() ) {
+				$entity['image'] = $entity['logo'];
 				unset( $entity['logo'] );
 			}
 		}
@@ -219,7 +222,7 @@ class Local_Seo {
 	}
 
 	/**
-	 * Add Contact Points.
+	 * Add Contact points in the Organization schema.
 	 *
 	 * @param array $entity Array of JSON-LD entity.
 	 */
@@ -240,7 +243,7 @@ class Local_Seo {
 	}
 
 	/**
-	 * Add geo coordinates.
+	 * Add geo coordinates in Place entity.
 	 *
 	 * @param array $entity Array of JSON-LD entity.
 	 */
@@ -260,7 +263,7 @@ class Local_Seo {
 	}
 
 	/**
-	 * Add business hours.
+	 * Add business hours in the Organization schema.
 	 *
 	 * @param array $entity Array of JSON-LD entity.
 	 */
@@ -277,7 +280,7 @@ class Local_Seo {
 	}
 
 	/**
-	 * Get opening hours.
+	 * Get Business opening hours.
 	 *
 	 * @return bool|array
 	 */
@@ -347,7 +350,7 @@ class Local_Seo {
 	 */
 	private function sanitize_organization_logo( $entity ) {
 		if ( isset( $entity['logo'] ) ) {
-			$entity['image'] = $entity['logo'];
+			$entity['image'] = [ '@id' => $entity['logo']['@id'] ];
 		}
 		if ( isset( $entity['contactPoint'] ) ) {
 			$entity['telephone'] = $entity['contactPoint'][0]['telephone'];

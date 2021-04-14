@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
-import { applyFilters } from '@wordpress/hooks'
+import { applyFilters, doAction } from '@wordpress/hooks'
 import { withSelect, withDispatch } from '@wordpress/data'
 import { Button, SelectControl } from '@wordpress/components'
 
@@ -69,6 +69,9 @@ export default compose(
 	withDispatch( ( dispatch ) => {
 		return {
 			updateDaysRange( range ) {
+				// Should Invalidate entire store first.
+				dispatch( 'rank-math' ).invalidateResolutionForStore()
+				doAction( 'rank_math_analytics_clear_store' )
 				dispatch( 'rank-math' ).updateDaysRange( range )
 			},
 		}

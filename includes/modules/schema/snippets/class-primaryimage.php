@@ -11,7 +11,6 @@
 namespace RankMath\Schema;
 
 use RankMath\Helper;
-use RankMath\Paper\Paper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 class PrimaryImage implements Snippet {
 
 	/**
-	 * PrimaryImage rich snippet.
+	 * Add primaryImage entity in JSON-LD data.
 	 *
 	 * @param array  $data   Array of JSON-LD data.
 	 * @param JsonLD $jsonld JsonLD Instance.
@@ -35,11 +34,12 @@ class PrimaryImage implements Snippet {
 		}
 
 		$data['primaryImage'] = [
-			'@type'  => 'ImageObject',
-			'@id'    => Paper::get()->get_canonical() . '#primaryImage',
-			'url'    => $image[0],
-			'width'  => $image[1],
-			'height' => $image[2],
+			'@type'   => 'ImageObject',
+			'@id'     => $image[0],
+			'url'     => $image[0],
+			'width'   => $image[1],
+			'height'  => $image[2],
+			'caption' => isset( $image['caption'] ) ? $image['caption'] : '',
 		];
 
 		$jsonld->add_prop( 'language', $data['primaryImage'] );

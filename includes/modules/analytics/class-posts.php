@@ -13,6 +13,7 @@ namespace RankMath\Analytics;
 use stdClass;
 use WP_Error;
 use WP_REST_Request;
+use RankMath\Helper;
 use RankMath\Analytics\DB;
 
 defined( 'ABSPATH' ) || exit;
@@ -38,6 +39,12 @@ class Posts extends Objects {
 			return [ 'errorMessage' => esc_html__( 'Sorry, no post found for given id.', 'rank-math' ) ];
 		}
 
+		// In case schemas data isn't set to this post, try to get default schema info.
+		if ( empty( $post->schemas_in_use ) ) {
+			$post->schemas_in_use = Helper::get_default_schema_type( $id, true );
+		}
+
+		// Get analytics data for this post.
 		$metrices = $this->get_analytics_data(
 			[
 				'pages'     => [ $post->page ],
@@ -49,7 +56,7 @@ class Posts extends Objects {
 			$metrices = current( $metrices );
 		}
 
-		// Keywords.
+		// Get keywords info for this post.
 		$keywords = DB::analytics()
 			->distinct()
 			->selectCount( 'query', 'keywords' )
@@ -73,6 +80,7 @@ class Posts extends Objects {
 		$post->admin_url = admin_url();
 		$post->home_url  = home_url();
 
+		// Get additional report data.
 		$post = apply_filters( 'rank_math/analytics/single/report', $post, $this );
 
 		return array_merge(
@@ -98,6 +106,7 @@ class Posts extends Objects {
 		$per_page = 25;
 		$offset   = ( $request->get_param( 'page' ) - 1 ) * $per_page;
 
+		// Get objects filtered by seo score range and it's analytics data.
 		$objects = $this->get_objects_by_score( $request );
 		$pages   = \array_keys( $objects['rows'] );
 		$console = $this->get_analytics_data(
@@ -108,6 +117,7 @@ class Posts extends Objects {
 			]
 		);
 
+		// Construct return data.
 		$new_rows = [];
 		foreach ( $objects['rows'] as $object ) {
 			$page = $object['page'];

@@ -134,7 +134,7 @@ class Breadcrumbs {
 		if ( $remove_title ) {
 			array_pop( $crumbs );
 		}
-		$size = sizeof( $crumbs );
+		$size = count( $crumbs );
 
 		if ( ! empty( $this->strings['prefix'] ) ) {
 			$html .= \sprintf( '<span class="label">%s</span> ', $this->strings['prefix'] );
@@ -192,7 +192,7 @@ class Breadcrumbs {
 	 */
 	private function add_crumb( $name, $link = '', $hide_in_schema = false ) {
 		$this->crumbs[] = [
-			strip_tags( $name ),
+			wp_strip_all_tags( $name ),
 			$link,
 			'hide_in_schema' => $hide_in_schema,
 		];
@@ -337,7 +337,7 @@ class Breadcrumbs {
 		$term = $GLOBALS['wp_query']->get_queried_object();
 		$this->prepend_shop_page();
 		$this->maybe_add_term_ancestors( $term );
-		$this->add_crumb( $this->get_breadcrumb_title( 'term', $term, $term->name ) );
+		$this->add_crumb( $this->get_breadcrumb_title( 'term', $term, $term->name ), get_term_link( $term ) );
 	}
 
 	/**
@@ -347,7 +347,7 @@ class Breadcrumbs {
 		$term = $GLOBALS['wp_query']->get_queried_object();
 		$this->prepend_shop_page();
 		/* translators: %s: product tag */
-		$this->add_crumb( sprintf( __( 'Products tagged &ldquo;%s&rdquo;', 'rank-math' ), $this->get_breadcrumb_title( 'term', $term, $term->name ) ) );
+		$this->add_crumb( sprintf( __( 'Products tagged &ldquo;%s&rdquo;', 'rank-math' ), $this->get_breadcrumb_title( 'term', $term, $term->name ) ), get_term_link( $term ) );
 	}
 
 	/**
@@ -500,7 +500,6 @@ class Breadcrumbs {
 		 */
 		return $this->do_filter( 'frontend/breadcrumb/is_using_shop_base', $is_using_shop_base );
 	}
-
 	/**
 	 * Get the primary term.
 	 *

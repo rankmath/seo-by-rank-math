@@ -28,9 +28,12 @@
         bottom: 0;
         left: 0;
 
-        display: grid;
+        display: flex;
 
         margin-top: 0;
+
+        align-items: center;
+        justify-content: center;
     }
 
     &.analytics {

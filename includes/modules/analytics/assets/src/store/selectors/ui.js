@@ -10,7 +10,7 @@ export function getDaysRange( state ) {
 }
 
 /**
- * Get userColumnPreference range.
+ * Get userColumnPreference.
  *
  * @param {Object} state The app state.
  * @param {string} key Key to preference.

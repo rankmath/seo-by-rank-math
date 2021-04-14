@@ -17,7 +17,7 @@ import schemaMaps from './schemaMaps'
 import localStorage from '@helpers/localStorage'
 
 /**
- * Local storage mape cahce key.
+ * Local storage mape cache key.
  *
  * @type {string}
  */
@@ -32,7 +32,7 @@ class MapCache {
 	 *
 	 * @type {Object}
 	 */
-	cahce = null
+	cache = null
 
 	/**
 	 * Templates holder.

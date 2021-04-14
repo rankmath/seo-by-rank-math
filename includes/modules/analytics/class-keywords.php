@@ -27,7 +27,6 @@ class Keywords extends Posts {
 	public function get_recent_keywords() {
 		global $wpdb;
 
-		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT query
 			FROM {$wpdb->prefix}rank_math_analytics_gsc
@@ -36,14 +35,13 @@ class Keywords extends Posts {
 			Stats::get()->start_date,
 			Stats::get()->end_date
 		);
-		$data = $wpdb->get_results( $query );
-		// phpcs:enable
+		$data = $wpdb->get_results( $query ); // phpcs:ignore
 
 		return $data;
 	}
 
 	/**
-	 * Get keywords.
+	 * Get keywords data.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -73,7 +71,7 @@ class Keywords extends Posts {
 	}
 
 	/**
-	 * Get top 50 keywords.
+	 * Get top keywords overview filtered by keyword position range.
 	 *
 	 * @return object
 	 */
@@ -87,6 +85,7 @@ class Keywords extends Posts {
 			return $cache;
 		}
 
+		// Get current keywords count filtered by position range.
 		$query = $wpdb->prepare(
 			"SELECT COUNT(t1.query) AS total,
 				CASE
@@ -109,6 +108,7 @@ class Keywords extends Posts {
 		);
 		$data  = $wpdb->get_results( $query ); // phpcs:ignore
 
+		// Get compare keywords count filtered by position range.
 		$query   = $wpdb->prepare(
 			"SELECT COUNT(t1.query) AS total,
 				CASE
@@ -152,20 +152,23 @@ class Keywords extends Posts {
 			'ctrDifference' => 0,
 		];
 
+		// Calculate total and difference for each position range.
 		$positions = $this->get_top_position_total( $positions, $data, 'total' );
 		$positions = $this->get_top_position_total( $positions, $compare, 'difference' );
 
-		// CTR.
+		// Get CTR.
 		$positions['ctr'] = DB::analytics()
 			->selectAvg( 'ctr', 'ctr' )
 			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
 			->getVar();
 
+		// Get compare CTR.
 		$positions['ctrDifference'] = DB::analytics()
 			->selectAvg( 'ctr', 'ctr' )
 			->whereBetween( 'created', [ $this->compare_start_date, $this->compare_end_date ] )
 			->getVar();
 
+		// Calculate current CTR and CTR difference.
 		$positions['ctr']           = empty( $positions['ctr'] ) ? 0 : $positions['ctr'];
 		$positions['ctrDifference'] = empty( $positions['ctrDifference'] ) ? 0 : $positions['ctrDifference'];
 		$positions['ctrDifference'] = $positions['ctr'] - $positions['ctrDifference'];
@@ -190,9 +193,11 @@ class Keywords extends Posts {
 			return $cache;
 		}
 
+		// Step1. Get splitted date intervals for graph within selected date range.
 		$intervals     = $this->get_intervals();
 		$sql_daterange = $this->get_sql_date_intervals( $intervals );
 
+		// Step2. Get most recent days for each splitted date intervals.
 		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT MAX(DATE(created)) as date, {$sql_daterange}
@@ -215,6 +220,7 @@ class Keywords extends Posts {
 		}
 		$dates = '(\'' . join( '\', \'', $dates ) . '\')';
 
+		// Step3. Get keywords count filtered by position range group for each date.
 		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT COUNT(t.query) AS total, t.date, 
@@ -237,7 +243,7 @@ class Keywords extends Posts {
 		$position_data = $wpdb->get_results( $query );
 		// phpcs:enable
 
-		// Data.
+		// Construct return data.
 		$data = $this->get_date_array(
 			$intervals['dates'],
 			[
@@ -266,52 +272,6 @@ class Keywords extends Posts {
 
 		$data = array_values( $data );
 		set_transient( $cache_key, $data, DAY_IN_SECONDS );
-
-		return $data;
-	}
-
-	/**
-	 * Get graph data.
-	 *
-	 * @param  string $position Position for which data required.
-	 * @param  array  $data     Data array.
-	 * @param  array  $map      Interval map.
-	 * @return array
-	 */
-	private function get_postion_graph_data( $position, $data, $map ) {
-		global $wpdb;
-
-		$positions = [
-			'top3'   => '1 AND 3',
-			'top10'  => '4 AND 10',
-			'top50'  => '11 AND 50',
-			'top100' => '51 AND 100',
-		];
-		$range     = $positions[ $position ];
-
-		// phpcs:disable
-		$rows = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT DATE_FORMAT( created,'%%Y-%%m-%%d') as date, COUNT(query) as total
-				FROM {$wpdb->prefix}rank_math_analytics_gsc
-				WHERE position BETWEEN {$range} AND created BETWEEN %s AND %s
-				GROUP BY created
-				ORDER BY created ASC",
-				$this->start_date,
-				$this->end_date
-			)
-		);
-		// phpcs:enable
-
-		foreach ( $rows as $row ) {
-			if ( ! isset( $map[ $row->date ] ) ) {
-				continue;
-			}
-
-			$date = $map[ $row->date ];
-
-			$data[ $date ][ $position ][] = absint( $row->total );
-		}
 
 		return $data;
 	}

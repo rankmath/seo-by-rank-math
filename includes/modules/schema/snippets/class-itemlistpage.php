@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 class ItemListPage implements Snippet {
 
 	/**
-	 * Sets the Schema structured data for the ItemList.
+	 * Sets the Schema structured data on Category & Taxonomy pages.
 	 *
 	 * @link https://schema.org/ItemList
 	 *
@@ -35,7 +35,7 @@ class ItemListPage implements Snippet {
 		/**
 		 * Filter to remove snippet data: rank_math/snippet/remove_taxonomy_data.
 		 *
-		 * @param bool $unsigned Default: false
+		 * @param bool   $unsigned Default: false
 		 * @param string $unsigned Taxonomy Name
 		 */
 		if ( true === Helper::get_settings( 'titles.remove_' . $queried_object->taxonomy . '_snippet_data' ) || true === apply_filters( 'rank_math/snippet/remove_taxonomy_data', false, $queried_object->taxonomy ) ) {

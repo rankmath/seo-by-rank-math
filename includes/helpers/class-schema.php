@@ -1,0 +1,131 @@
+<?php
+/**
+ * The Schema helpers.
+ *
+ * @since      1.0.62
+ * @package    RankMath
+ * @subpackage RankMath\Helpers
+ * @author     Rank Math <support@rankmath.com>
+ */
+
+namespace RankMath\Helpers;
+
+use RankMath\Helper;
+use RankMath\Admin\Admin_Helper;
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Schema class.
+ */
+trait Schema {
+	/**
+	 * Function to get Default Schema type by post_type.
+	 *
+	 * @param int     $post_id  Post ID.
+	 * @param boolean $sanitize Return santized Schema type.
+	 *
+	 * @return string Default Schema Type.
+	 */
+	public static function get_default_schema_type( $post_id, $sanitize = false ) {
+		if ( metadata_exists( 'post', $post_id, 'rank_math_rich_snippet' ) || ! self::can_use_default_schema( $post_id ) ) {
+			return false;
+		}
+
+		$post_type = get_post_type( $post_id );
+		if ( ! in_array( $post_type, Helper::get_accessible_post_types(), true ) ) {
+			return false;
+		}
+
+		$schema = apply_filters(
+			'rank_math/schema/default_type',
+			Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" ),
+			$post_type
+		);
+
+		if ( ! $schema ) {
+			return false;
+		}
+
+		if ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) {
+			$schema = 'WooCommerceProduct';
+		}
+
+		if ( class_exists( 'Easy_Digital_Downloads' ) && 'download' === $post_type ) {
+			$schema = 'EDDProduct';
+		}
+
+		$schema = 'article' === $schema ? Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ) : $schema;
+		if ( $sanitize ) {
+			return in_array( $schema, [ 'Article', 'BlogPosting', 'NewsArticle', 'WooCommerceProduct', 'EDDProduct' ], true ) ? self::sanitize_schema_title( $schema ) : false;
+		}
+
+		return $schema;
+	}
+
+	/**
+	 * Sanitize schema title.
+	 *
+	 * @param  string $schema Schema.
+	 * @return string
+	 */
+	public static function sanitize_schema_title( $schema ) {
+		if ( in_array( $schema, [ 'BlogPosting', 'NewsArticle' ], true ) ) {
+			return esc_html__( 'Article', 'rank-math' );
+		}
+
+		if ( 'WooCommerceProduct' === $schema ) {
+			return esc_html__( 'WooCommerce Product', 'rank-math' );
+		}
+
+		if ( 'EDDProduct' === $schema ) {
+			return esc_html__( 'EDD Product', 'rank-math' );
+		}
+
+		if ( 'VideoObject' === $schema ) {
+			return esc_html__( 'Video', 'rank-math' );
+		}
+
+		if ( 'JobPosting' === $schema ) {
+			return esc_html__( 'Job Posting', 'rank-math' );
+		}
+
+		if ( 'MusicGroup' === $schema || 'MusicAlbum' === $schema ) {
+			return esc_html__( 'Music', 'rank-math' );
+		}
+
+		return $schema;
+	}
+
+
+
+	/**
+	 * Whether to use default schema.
+	 *
+	 * @param  int $post_id Post ID.
+	 * @return bool
+	 */
+	public static function can_use_default_schema( $post_id ) {
+		$pages = array_map(
+			'absint',
+			array_filter(
+				[
+					Helper::get_settings( 'titles.local_seo_about_page' ),
+					Helper::get_settings( 'titles.local_seo_contact_page' ),
+					get_option( 'page_for_posts' ),
+				]
+			)
+		);
+
+		return ! in_array( (int) $post_id, $pages, true );
+	}
+
+	/**
+	 * Whether to use default Product schema on WooCommerce pages.
+	 *
+	 * @return bool
+	 */
+	public static function can_use_default_product_schema() {
+		return apply_filters( 'rank_math/schema/use_default_product', true );
+	}
+}

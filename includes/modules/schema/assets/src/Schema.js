@@ -18,7 +18,7 @@ import TemplatesModal from './Templates/TemplatesModal'
 registerDefaultHooks()
 
 /**
- * Main Schema component.
+ * Schema component.
  */
 const Schema = () => {
 	return (

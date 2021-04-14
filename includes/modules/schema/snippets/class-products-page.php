@@ -20,9 +20,7 @@ defined( 'ABSPATH' ) || exit;
 class Products_Page implements Snippet {
 
 	/**
-	 * Sets the Schema structured data for the CollectionPage.
-	 *
-	 * @link https://schema.org/CollectionPage
+	 * Sets the Schema structured data on the Products Archive page.
 	 *
 	 * @param array  $data   Array of JSON-LD data.
 	 * @param JsonLD $jsonld JsonLD Instance.
@@ -57,13 +55,13 @@ class Products_Page implements Snippet {
 			$data['ProductsPage']['@graph'][] = $part;
 		}
 
-		wp_reset_query();
+		wp_reset_postdata();
 
 		return $data;
 	}
 
 	/**
-	 * Check if structured data can be added for the current taxonomy.
+	 * Check if structured data can be added on the current Product taxonomy.
 	 *
 	 * @return boolean|string
 	 */
@@ -90,7 +88,7 @@ class Products_Page implements Snippet {
 	}
 
 	/**
-	 * Check if structured data can be added for the Shop page.
+	 * Check if structured data can be added on the Shop page.
 	 *
 	 * @return boolean|string
 	 */

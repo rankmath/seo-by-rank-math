@@ -1,10 +1,10 @@
 <?php
 /**
- * The class handles adding of attributes to links and images to content.
+ * The class handles changes in image tag attributes.
  *
  * @since      1.0.15
  * @package    RankMath
- * @subpackage RankMath\Frontend
+ * @subpackage RankMath\Image_Seo
  * @author     Rank Math <support@rankmath.com>
  */
 
@@ -32,7 +32,7 @@ class Add_Attributes {
 	}
 
 	/**
-	 * Add nofollow, target, title and alt attributes to link and images.
+	 * Add nofollow, target, title and alt attributes to images.
 	 */
 	public function add_attributes() {
 		// Add image title and alt.
@@ -49,8 +49,8 @@ class Add_Attributes {
 	/**
 	 * Add 'title' and 'alt' attribute to image.
 	 *
-	 * @param  string $content Post content.
-	 * @param null|int $post_id The current post id
+	 * @param string   $content Post content.
+	 * @param null|int $post_id The current post ID.
 	 * @return string
 	 */
 	public function add_img_attributes( $content, $post_id = null ) {
@@ -103,7 +103,7 @@ class Add_Attributes {
 	/**
 	 * Get post object.
 	 *
-	 * @param null|int $post_id
+	 * @param null|int $post_id The post ID.
 	 * @return object
 	 */
 	private function get_post( $post_id = null) {

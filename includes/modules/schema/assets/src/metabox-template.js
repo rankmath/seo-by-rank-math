@@ -14,7 +14,6 @@ import { createElement, render, Fragment } from '@wordpress/element'
 /**
  * Internal dependencies
  */
-//import '@schema/Functions/cache'
 import { getStore } from '@root/redux/store'
 import registerDefaultHooks from './defaultFilters'
 import MetaboxModal from '@schema/MetaboxTemplates/MetaboxModal'

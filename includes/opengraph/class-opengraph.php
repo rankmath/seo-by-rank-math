@@ -174,7 +174,11 @@ class OpenGraph {
 		}
 
 		$tag = 'facebook' === $this->network ? 'property' : 'name';
-		printf( '<meta %1$s="%2$s" content="%3$s">' . "\n", $tag, esc_attr( $property ), esc_attr( $content ) );
+		$escaped_value = esc_attr( $content );
+		if ( false !== filter_var( $content, FILTER_VALIDATE_URL ) ) {
+			$escaped_value = esc_url_raw( $content );
+		}
+		printf( '<meta %1$s="%2$s" content="%3$s">' . "\n", $tag, esc_attr( $property ), $escaped_value );
 
 		return true;
 	}

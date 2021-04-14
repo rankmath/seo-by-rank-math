@@ -74,7 +74,7 @@ class Role_Manager extends Base {
 				'render'     => $this->directory . '/views/main.php',
 				'classes'    => [ 'rank-math-page' ],
 				'assets'     => [
-					'styles' => [
+					'styles'  => [
 						'rank-math-common'       => '',
 						'rank-math-cmb2'         => '',
 						'rank-math-role-manager' => $uri . '/assets/css/role-manager.css',
@@ -133,7 +133,7 @@ class Role_Manager extends Base {
 			exit;
 		}
 
-		if ( Param::post( 'reset-capabilities' ) ){
+		if ( Param::post( 'reset-capabilities' ) ) {
 			Capability_Manager::get()->reset_capabilities();
 		} else {
 			$cmb = cmb2_get_metabox( 'rank-math-role-manager' );

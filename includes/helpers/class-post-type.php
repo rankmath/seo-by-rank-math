@@ -180,34 +180,4 @@ trait Post_Type {
 
 		return $rank_math_allowed_post_types;
 	}
-
-	/**
-	 * Whether to use default schema.
-	 *
-	 * @param  int $post_id Post ID.
-	 * @return bool
-	 */
-	public static function can_use_default_schema( $post_id ) {
-		$pages = array_map(
-			'absint',
-			array_filter(
-				[
-					Helper::get_settings( 'titles.local_seo_about_page' ),
-					Helper::get_settings( 'titles.local_seo_contact_page' ),
-					get_option( 'page_for_posts' ),
-				]
-			)
-		);
-
-		return ! in_array( (int) $post_id, $pages, true );
-	}
-
-	/**
-	 * Whether to use default Product schema on WooCommerce pages.
-	 *
-	 * @return bool
-	 */
-	public static function can_use_default_product_schema() {
-		return apply_filters( 'rank_math/schema/use_default_product', true );
-	}
 }

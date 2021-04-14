@@ -74,12 +74,12 @@ defined( 'ABSPATH' ) || exit;
 	<div class="rank-math-redrection-debug">
 		<h1><?php esc_html_e( 'Redirection Debugger', 'rank-math' ); ?></h1>
 		<p>
-			<?php esc_html_e( 'Redirecting from ', 'rank-math' ); ?><code>/<?php echo $this->uri; ?></code>
-			<?php esc_html_e( ' To ', 'rank-math' ); ?><code><a href="<?php echo $this->redirect_to; ?>"><?php echo $this->redirect_to; ?></a></code>
+			<?php esc_html_e( 'Redirecting from ', 'rank-math' ); ?><code>/<?php echo esc_html( $this->uri ); ?></code>
+			<?php esc_html_e( ' To ', 'rank-math' ); ?><code><a href="<?php echo esc_url_raw( $this->redirect_to ); ?>"><?php echo esc_url( $this->redirect_to ); ?></a></code>
 		</p>
 
 		<div class="rank-math-redirection-loading-animation">
-			<img src="<?php echo esc_url( rank_math()->plugin_url() . 'assets/admin/img/loader.svg' ); ?>">
+			<img src="<?php echo esc_url_raw( rank_math()->plugin_url() . 'assets/admin/img/loader.svg' ); ?>">
 		</div>
 		<div class="rank-math-redirection-loading-timer">
 			<?php /* translators: countdown seconds */ ?>
@@ -87,15 +87,16 @@ defined( 'ABSPATH' ) || exit;
 			<a href="#" class="button button-secondary" id="rank-math-cancel-redirection"><?php esc_html_e( 'Stop Redirection', 'rank-math' ); ?></a>
 		</div>
 		<div class="rank-math-redirect-debug-continue" style="display: none;">
-			<a href="<?php echo $this->redirect_to; ?>"><?php esc_html_e( 'Continue redirecting', 'rank-math' ); ?></a>
+			<a href="<?php echo esc_url( $this->redirect_to ); ?>"><?php esc_html_e( 'Continue redirecting', 'rank-math' ); ?></a>
 		</div>
 
 		<p>
-			<?php $page_url = Helper::get_admin_url( 'redirections' ); ?>
+			<?php $rank_math_redirections_page_url = Helper::get_admin_url( 'redirections' ); ?>
 			<?php if ( isset( $this->matched['id'] ) ) : ?>
-			<a target="_blank" href="<?php echo $page_url . '&action=edit&redirection=' . $this->matched['id']; ?>"><?php esc_html_e( 'Manage This Redirection', 'rank-math' ); ?></a> or
+				<a target="_blank" href="<?php echo esc_url_raw( $rank_math_redirections_page_url . '&action=edit&redirection=' . absint( $this->matched['id'] ) ); ?>"><?php esc_html_e( 'Manage This Redirection', 'rank-math' ); ?></a> 
+				<?php esc_html_e( 'or', 'rank-math' ); ?>
 			<?php endif; ?>
-			<a target="_blank" href="<?php echo $page_url; ?>"><?php esc_html_e( 'Manage All Redirections', 'rank-math' ); ?></a>
+			<a target="_blank" href="<?php echo esc_url_raw( $rank_math_redirections_page_url ); ?>"><?php esc_html_e( 'Manage All Redirections', 'rank-math' ); ?></a>
 		</p>
 
 		<p class="rank-math-redirection-debug-info">
@@ -128,7 +129,7 @@ defined( 'ABSPATH' ) || exit;
 					setTimeout( updateTimer, 1000 );
 				} else {
 					$( '#redirection-timer-counter' ).text( redirectTimer );
-					window.location.href = '<?php echo $this->redirect_to; ?>';
+					window.location.href = '<?php echo esc_url_raw( $this->redirect_to ); ?>';
 				}
 			}
 

@@ -140,6 +140,7 @@ class Api extends Console {
 
 		if ( ! empty( $response['error'] ) && is_array( $response['error'] ) ) {
 
+			// Limit maximum 10 failed attempt data to log.
 			$failed_attempts   = get_option( $option_key, [] );
 			$failed_attempts   = ( ! empty( $failed_attempts ) && is_array( $failed_attempts ) ) ? array_slice( $failed_attempts, -9, 9 ) : [];
 			$failed_attempts[] = [

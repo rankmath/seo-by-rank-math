@@ -16,9 +16,9 @@ use RankMath\Traits\Hooker;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Schema_OpenGraph_Tags class.
+ * Opengraph class.
  */
-class Schema_OpenGraph_Tags {
+class Opengraph {
 
 	use Hooker;
 

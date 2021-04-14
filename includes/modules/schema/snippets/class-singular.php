@@ -65,7 +65,7 @@ class Singular implements Snippet {
 	}
 
 	/**
-	 * Get Rich Snippet type.
+	 * Get Schema type.
 	 *
 	 * @param JsonLD $jsonld JsonLD Instance.
 	 *
@@ -106,7 +106,7 @@ class Singular implements Snippet {
 	 * @return string
 	 */
 	private function get_default_schema( $jsonld ) {
-		$schema = Helper::get_default_schema_type( $jsonld->post->post_type );
+		$schema = Helper::get_default_schema_type( $jsonld->post_id );
 		if ( ! $schema ) {
 			return false;
 		}

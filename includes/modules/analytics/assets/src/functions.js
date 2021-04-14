@@ -34,10 +34,23 @@ import ActionListing from '@scShared/ActionListing'
 import KeywordButton from '@scShared/KeywordButton'
 import KeywordTitle from '@scShared/KeywordTitle'
 
+/**
+ * Check if PRO version is installed.
+ *
+ * @return {boolean} Return true if PRO version is intalled, otherwise return false.
+ */
 export function isPro() {
 	return applyFilters( 'rank_math_is_pro', false )
 }
 
+/**
+ * Filter out header items.
+ *
+ * @param {Array} headers Header Items object to be filtered.
+ * @param {Array} hiddenKeys Configration object to show/hide specific header items.
+ *
+ * @return {Array} Filtered Header Items.
+ */
 export function filterShownHeaders( headers, hiddenKeys ) {
 	return map( headers, ( header ) => ( {
 		...header,
@@ -47,14 +60,36 @@ export function filterShownHeaders( headers, hiddenKeys ) {
 	} ) )
 }
 
+/**
+ * Captialize the first letter of the input string.
+ *
+ * @param {string} str String to convert.
+ *
+ * @return {string} Converted string.
+ */
 export function Capitalize( str ) {
 	return str.charAt( 0 ).toUpperCase() + str.slice( 1 )
 }
 
+/**
+ * Get offset of the page.
+ *
+ * @param {number} page The page number.
+ * @param {number} perPage The item count per page.
+ *
+ * @return {number} Offest of the page.
+ */
 export function getPageOffset( page, perPage ) {
 	return ( page - 1 ) * perPage
 }
 
+/**
+ * Get Post Type Icon.
+ *
+ * @param {string} type Post Type.
+ *
+ * @return {string} Icon class name.
+ */
 function getPostTypeIcons( type ) {
 	const icons = {
 		post: 'rm-icon-post',
@@ -71,6 +106,14 @@ function getPostTypeIcons( type ) {
 	)
 }
 
+/**
+ * Process Table Rows Data and Render.
+ *
+ * @param {Array} rows Table Rows Data.
+ * @param {Array} columns Table Header Data.
+ * @param {number} offset Offset of Rows Data.
+ * @param {Array} trackedKeywords Tracked Keywords Data.
+ */
 export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 	let counter = 0
 
@@ -126,7 +169,7 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 			} else if ( 'seo_score' === column ) {
 				display = <ScoreProgress score={ value } />
 			} else if ( 'schemas_in_use' === column ) {
-				display = <SchemaListing schemas={ value } type={ row.object_subtype } />
+				display = <SchemaListing schemas={ value } />
 				value = isArray( value ) ? value.join( ' ' ) : ''
 			} else if (
 				'impressions' === column ||
@@ -134,12 +177,15 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 				'clicks' === column ||
 				'ctr' === column
 			) {
+				// Display difference status of Analytics Data for each table row.
 				display = <ItemStat { ...value } />
 				value = value.difference
 			} else if ( 'position' === column ) {
+				// Display difference status of Position Value for each table row.
 				display = <ItemStat { ...value } revert={ true } />
 				value = value.difference
 			} else if ( 'positionHistory' === column ) {
+				// Display Position History Graph for each table row.
 				const graph = get( row, 'graph', false )
 				let baseValue = 'dataMax'
 				if ( graph !== false ) {
@@ -243,6 +289,13 @@ export function generateTicks( data ) {
 	return ticks
 }
 
+/**
+ * Construct URL parameter.
+ *
+ * @param {Object} filters URL parameter items.
+ *
+ * @return {string} Constructed URL parameter.
+ */
 export function filtersToUrlParams( filters ) {
 	let params = ''
 	map( filters, ( val, key ) => {
@@ -251,4 +304,19 @@ export function filtersToUrlParams( filters ) {
 		}
 	} )
 	return params
+}
+
+/**
+ * Convert difference values as difference view.
+ *
+ * @param {Object} items Object to convert.
+ *
+ * @return {Object} Converted object.
+ */
+export function convertNumbers( items ) {
+	return map( items, ( item ) => {
+		item.title = item.query
+		item.content = <ItemStat { ...item.position } />
+		return item
+	} )
 }

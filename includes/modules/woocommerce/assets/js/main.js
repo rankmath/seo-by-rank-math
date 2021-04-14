@@ -1,4 +1,4 @@
-/*global rankMathEditor, tinymce, accounting*/
+/*global woocommerce_admin_meta_boxes,accounting*/
 
 /**
  * External dependencies
@@ -38,7 +38,7 @@ class RankMathProductDescription {
 		if ( undefined === this.excerpt ) {
 			return
 		}
-		addFilter( 'rank_math_content', 'rank-math', this.getContent.bind( this ) )
+		addFilter( 'rank_math_content', 'rank-math', this.getContent.bind( this ), 11 )
 	}
 
 	/**
@@ -77,11 +77,11 @@ class RankMathProductDescription {
 	getWooCommerceProductPrice() {
 		const price = this.elemPrice.val() ? this.elemPrice.val() : this.elemRegPrice.val()
 		return accounting.formatMoney( price, {
-			symbol: woocommerce_admin_meta_boxes.currency_format_symbol, // eslint-disable-line
-			decimal: woocommerce_admin_meta_boxes.currency_format_decimal_sep, // eslint-disable-line
-			thousand: woocommerce_admin_meta_boxes.currency_format_thousand_sep, // eslint-disable-line
-			precision: woocommerce_admin_meta_boxes.currency_format_num_decimals, // eslint-disable-line
-			format: woocommerce_admin_meta_boxes.currency_format // eslint-disable-line
+			symbol: woocommerce_admin_meta_boxes.currency_format_symbol,
+			decimal: woocommerce_admin_meta_boxes.currency_format_decimal_sep,
+			thousand: woocommerce_admin_meta_boxes.currency_format_thousand_sep,
+			precision: woocommerce_admin_meta_boxes.currency_format_num_decimals,
+			format: woocommerce_admin_meta_boxes.currency_format,
 		} )
 	}
 }

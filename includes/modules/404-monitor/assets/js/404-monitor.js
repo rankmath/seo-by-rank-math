@@ -19,8 +19,10 @@
 				this.events();
 			},
 
+			// Set up handlers.
 			events: function() {
 
+				// "Delete log item" handler.
 				this.wrap.on( 'click', '.rank-math-404-delete', function( event ) {
 					event.preventDefault();
 
@@ -41,6 +43,7 @@
 					});
 				});
 
+				// "Clear log" action handler.
 				this.wrap.on( 'click', '.rank-math-clear-logs', function( event ) {
 					event.preventDefault();
 
@@ -51,6 +54,7 @@
 					$( this ).closest( 'form' ).append( '<input type="hidden" name="action" value="clear_log">' ).submit();
 				});
 
+				// "Bulk action" handler.
 				$( '#doaction, #doaction2' ).on( 'click', function() {
 					if ( 'redirect' === $( '#bulk-action-selector-top' ).val() ) {
 						$( this ).closest( 'form' ).attr( 'action', rankMath.redirectionsUri );

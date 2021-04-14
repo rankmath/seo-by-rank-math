@@ -1,6 +1,6 @@
 <?php
 /**
- * The Redirections Form.
+ * The Redirection add/edit form.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -19,8 +19,6 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Form class.
- *
- * @codeCoverageIgnore
  */
 class Form {
 
@@ -28,8 +26,6 @@ class Form {
 
 	/**
 	 * The hooks.
-	 *
-	 * @codeCoverageIgnore
 	 */
 	public function hooks() {
 		$this->action( 'cmb2_admin_init', 'register_form' );
@@ -39,8 +35,6 @@ class Form {
 
 	/**
 	 * Display form.
-	 *
-	 * @codeCoverageIgnore
 	 */
 	public function display() {
 		?>
@@ -63,7 +57,7 @@ class Form {
 	}
 
 	/**
-	 * Create box
+	 * Create CMB.
 	 *
 	 * @return CMB2
 	 */
@@ -162,16 +156,19 @@ class Form {
 	 */
 	public function set_options( $opts ) {
 		// If editing previous record.
-		if ( $redirection_id = $this->is_editing() ) { // phpcs:ignore
+		$redirection_id = $this->is_editing();
+		if ( $redirection_id ) {
 			return DB::get_redirection_by_id( $redirection_id );
 		}
 
-		if ( $url = Param::get( 'url' ) ) { // phpcs:ignore
+		$url = Param::get( 'url' );
+		if ( $url ) {
 			$url = esc_attr( $url );
 			return [ 'sources' => [ [ 'pattern' => $url ] ] ];
 		}
 
-		if ( $urls = Param::get( 'urls', false, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY ) ) { // phpcs:ignore
+		$urls = Param::get( 'urls', false, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		if ( $urls ) {
 			$urls   = array_map( 'esc_attr', $urls );
 			$return = [ 'sources' => [] ];
 			foreach ( $urls as $url ) {
@@ -180,7 +177,7 @@ class Form {
 			return $return;
 		}
 
-		if ( ! empty( $_REQUEST['log'] ) && is_array( $_REQUEST['log'] ) ) {
+		if ( ! empty( Param::request( 'log' ) ) && is_array( Param::request( 'log' ) ) ) {
 			return [
 				'sources' => $this->get_sources_for_log(),
 				'url_to'  => esc_url( home_url( '/' ) ),
@@ -196,7 +193,7 @@ class Form {
 	 * @return array
 	 */
 	private function get_sources_for_log() {
-		$logs = array_map( 'absint', $_REQUEST['log'] );
+		$logs = array_map( 'absint', Param::request( 'log' ) );
 		$logs = Monitor_DB::get_logs(
 			[
 				'ids'     => $logs,

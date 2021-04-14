@@ -28,7 +28,7 @@ class Permissions {
 			return;
 		}
 
-		$url = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=' . $tokens['access_token'];
+		$url      = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=' . $tokens['access_token'];
 		$response = wp_remote_get( $url );
 		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
 			return;

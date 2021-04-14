@@ -27,7 +27,7 @@ const onSave = () => {
 	textarea.val( JSON.stringify( select( 'rank-math' ).getSchemas() ) )
 }
 
-jQuery( document ).ready( () => {
+jQuery( () => {
 	getStore()
 	registerDefaultHooks()
 

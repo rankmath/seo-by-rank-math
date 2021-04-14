@@ -56,7 +56,8 @@ if ( 0 === $data['public'] ) {
 			'classes' => 'nob nopt rank-math-notice',
 			'content' => wp_kses_post(
 				sprintf(
-					__( '<strong>Warning:</strong> your site\'s search engine visibility is set to Hidden in <a href="%1$s" target="_blank">Settings > Reading</a>. This means that the changes you make here will not take effect. Set the search engine visibility to Public to be able to change the robots.txt content.', 'rank-math' ),
+					// Translators: placeholder is the Settings page URL.
+					__( '<strong>Warning:</strong> your site\'s search engine visibility is set to Hidden in <a href="%1$s" target="_blank">Settings &gt; Reading</a>. This means that the changes you make here will not take effect. Set the search engine visibility to Public to be able to change the robots.txt content.', 'rank-math' ),
 					admin_url( 'options-reading.php' )
 				)
 			),

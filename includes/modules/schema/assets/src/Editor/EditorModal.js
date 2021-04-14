@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
 import { Dashicon, Modal, KeyboardShortcuts } from '@wordpress/components'
 import { withSelect, withDispatch } from '@wordpress/data'
-import { rawShortcut } from '@wordpress/keycodes';
+import { rawShortcut } from '@wordpress/keycodes'
 
 /**
  * Internal dependencies
@@ -21,7 +21,11 @@ import TabPanel from './Tabs'
 /**
  * Schema editor modal popup component.
  *
- * @param {Object} props This component's props.
+ * @param {Object}     props               The props data.
+ * @param {boolean}    props.isOpen        Whether the schema modal is open.
+ * @param {function()} props.toggleModal   A callback to run when clicked on the close modal button.
+ * @param {string}     props.selectedTab   The selected tab name.
+ * @param {string}     props.isCutomSchema Current schema type.
  */
 const EditorModal = ( { isOpen = false, toggleModal, selectedTab, isCutomSchema } ) => {
 	if ( ! isOpen ) {

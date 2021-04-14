@@ -1,6 +1,6 @@
 <?php
 /**
- * The BP_User Class
+ * The BuddyPress user class for the BuddyPress module.
  *
  * @since      1.0.32
  * @package    RankMath
@@ -64,7 +64,7 @@ class BP_User implements IPaper {
 	 * @return array The advanced robots for the specified user.
 	 */
 	public function advanced_robots() {
-		$robots = Paper::advanced_robots_combine( User::get_meta( 'advanced_robots',bp_displayed_user_id() ) );
+		$robots = Paper::advanced_robots_combine( User::get_meta( 'advanced_robots', bp_displayed_user_id() ) );
 
 		if ( empty( $robots ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
 			$robots = Paper::advanced_robots_combine( Helper::get_settings( 'titles.author_advanced_robots' ), true );
@@ -74,7 +74,7 @@ class BP_User implements IPaper {
 	}
 
 	/**
-	 * Retrieves the canonical URL.
+	 * Retrieves the default canonical URL.
 	 *
 	 * @return array
 	 */
@@ -83,9 +83,9 @@ class BP_User implements IPaper {
 	}
 
 	/**
-	 * Retrieves the keywords.
+	 * Retrieves the default keywords.
 	 *
-	 * @return string The focus keywords.
+	 * @return string
 	 */
 	public function keywords() {
 		return User::get_meta( 'focus_keyword', bp_displayed_user_id() );

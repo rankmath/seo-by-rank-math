@@ -1,5 +1,3 @@
-/*global rankMathEditor*/
-
 /**
  * External dependencies
  *
@@ -24,8 +22,9 @@ class App {
 		addFilter(
 			'rank_math_content',
 			'rank-math',
-			collect.append.bind( collect )
-		);
+			collect.append.bind( collect ),
+			11
+		)
 
 		jQuery( '.acf-field' ).on( 'change', () => {
 			this.refresh()

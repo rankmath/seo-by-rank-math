@@ -119,8 +119,8 @@ class Shared extends WP_REST_Controller {
 		$object_id   = $request->get_param( 'objectID' );
 		$object_type = $request->get_param( 'objectType' );
 		$meta        = apply_filters( 'rank_math/filter_metadata', $request->get_param( 'meta' ), $request );
-
-		do_action( 'rank_math/pre_update_metadata', $object_id );
+		$content     = $request->get_param( 'content' );
+		do_action( 'rank_math/pre_update_metadata', $object_id, $content );
 		$new_slug = true;
 		if ( isset( $meta['permalink'] ) && ! empty( $meta['permalink'] ) ) {
 			$post     = get_post( $object_id );

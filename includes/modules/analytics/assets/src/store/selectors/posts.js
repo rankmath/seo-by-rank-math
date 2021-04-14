@@ -42,7 +42,7 @@ export function getAnalyticsSummary( state ) {
 }
 
 /**
- * Get posts rows.
+ * Get all posts rows.
  *
  * @param {Object} state The app state.
  *
@@ -53,7 +53,7 @@ export function getPostsRowsAll( state ) {
 }
 
 /**
- * Get posts rows all.
+ * Get posts rows all filtered by page.
  *
  * @param {Object} state The app state.
  * @param {number} page The page number.
@@ -65,7 +65,7 @@ export function getPostsRows( state, page ) {
 }
 
 /**
- * Get posts rows by objects all.
+ * Get all posts rows by objects.
  *
  * @param {Object} state The app state.
  *
@@ -76,7 +76,7 @@ export function getPostsRowsByObjectsAll( state ) {
 }
 
 /**
- * Get posts rows by objects.
+ * Get posts rows by objects filtered by page and filter params.
  *
  * @param {Object} state The app state.
  * @param {number} page The page number.

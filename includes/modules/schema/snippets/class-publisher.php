@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 class Publisher implements Snippet {
 
 	/**
-	 * PrimaryImage rich snippet.
+	 * Generate Organization JSON-LD.
 	 *
 	 * @param array  $data   Array of JSON-LD data.
 	 * @param JsonLD $jsonld JsonLD Instance.
@@ -36,6 +36,10 @@ class Publisher implements Snippet {
 		];
 
 		$jsonld->add_prop( 'image', $data['publisher'] );
+		if ( empty( $data['publisher']['logo'] ) ) {
+			return $data;
+		}
+
 		if ( 'person' === $type ) {
 			$data['publisher']['image'] = $data['publisher']['logo'];
 		}

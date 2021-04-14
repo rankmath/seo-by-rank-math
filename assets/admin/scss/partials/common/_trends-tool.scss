@@ -24,3 +24,16 @@
 		right: 16px;
 	}
 }
+
+.#{$namespace}-modal.#{$namespace}-trends-cta-modal {
+	width: 930px;
+	max-height: 580px;
+
+	img {
+		max-width: 99.3%;
+	}
+
+	##{$namespace}-pro-cta {
+		z-index: initial;
+	}
+}

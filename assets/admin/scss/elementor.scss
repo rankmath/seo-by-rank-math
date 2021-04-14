@@ -58,6 +58,12 @@
 				.#{$namespace}-focus-keyword {
 					background: #fff;
 				}
+
+				.#{$namespace}-tab-content-advanced, .#{$namespace}-tab-content-schema {
+					> .components-panel__body {
+						background: #fff;
+					}
+				}
 			}
 		}
 
