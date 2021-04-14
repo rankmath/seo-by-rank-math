@@ -10,7 +10,7 @@ export function getSinglePosts( state ) {
 }
 
 /**
- * Get dashboard stats.
+ * Get single post data.
  *
  * @param {Object} state The app state.
  * @param {number} id Single post id.

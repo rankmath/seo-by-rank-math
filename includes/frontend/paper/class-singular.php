@@ -81,9 +81,9 @@ class Singular implements IPaper {
 		 * Fix paginated pages canonical, but only if the page is truly paginated.
 		 *
 		 * @copyright Copyright (C) 2008-2019, Yoast BV
- 		 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
+		 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 		 */
-		if ( get_query_var( 'page' ) > 1 ) {
+		if ( is_singular() && get_query_var( 'page' ) > 1 ) {
 			$num_pages = ( substr_count( get_queried_object()->post_content, '<!--nextpage-->' ) + 1 );
 			if ( $num_pages && get_query_var( 'page' ) <= $num_pages ) {
 				global $wp_rewrite;

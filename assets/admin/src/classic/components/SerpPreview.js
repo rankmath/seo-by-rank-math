@@ -8,11 +8,13 @@ import { debounce } from 'lodash'
  * WordPress dependencies
  */
 import { doAction } from '@wordpress/hooks'
+import { createElement, render } from '@wordpress/element'
 
 /**
  * Internal dependencies
  */
 import SerpHooks from './serp/SerpHooks'
+import TrendsPreview from '@helpers/TrendsPreview'
 
 class SerpPreview extends SerpHooks {
 	/**
@@ -54,6 +56,7 @@ class SerpPreview extends SerpHooks {
 		this.previewEvent()
 		this.updateEvents()
 		this.serpEvents()
+		this.trendEvents()
 		this.robotsEvents()
 	}
 
@@ -89,6 +92,19 @@ class SerpPreview extends SerpHooks {
 				this.serpFieldsWrapper.toggleClass( 'hidden' )
 			}
 		)
+	}
+
+	trendEvents() {
+		if ( rankMath.isPro ) {
+			return
+		}
+
+		setTimeout( () => {
+			render(
+				createElement( TrendsPreview ),
+				document.getElementById( 'rank-math-trends-tool-preview' )
+			)
+		}, 1000 )
 	}
 
 	updateEvents() {

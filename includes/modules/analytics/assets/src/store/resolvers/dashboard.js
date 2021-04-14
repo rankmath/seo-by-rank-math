@@ -5,7 +5,7 @@ import apiFetch from '@wordpress/api-fetch'
 import { dispatch } from '@wordpress/data'
 
 /**
- * Get dashboard stats.
+ * Get analytics overview.
  *
  * @param {string} range The day range.
  */

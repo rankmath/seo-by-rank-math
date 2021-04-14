@@ -23,7 +23,14 @@ import { generateValidSchema } from '@schema/functions'
 /**
  * Template list.
  *
- * @param {Object} props This component's props.
+ * @param {Object} props                The props data.
+ * @param {string} props.search         Searched string.
+ * @param {Array}  props.templates      Lists of templates.
+ * @param {boolean} props.isPro         Whether the Pro plugin is active.
+ * @param {function()} props.addSchema  A callback to run when clicked on add button.
+ * @param {function()} props.editSchema A callback to run when clicked on edit button.
+ * @param {Array} props.primarySchema   Primary Schema data.
+ *
  */
 const TemplatesCatalog = ( { search, templates, isPro, addSchema, editSchema, primarySchema } ) => {
 	if ( '' !== search ) {
@@ -81,7 +88,7 @@ export default compose(
 		let primarySchema = findKey( schemas, 'metadata.isPrimary' )
 		primarySchema = isEmpty( primarySchema ) ? {} : {
 			id: primarySchema,
-			type: schemas[ primarySchema ]['@type'],
+			type: schemas[ primarySchema ][ '@type' ],
 		}
 
 		return {

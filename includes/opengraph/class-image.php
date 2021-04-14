@@ -116,11 +116,11 @@ class Image {
 	 */
 	private function image_tag( $image_meta ) {
 		$og_image = $this->opengraph->get_overlay_image() ? admin_url( "admin-ajax.php?action=rank_math_overlay_thumb&id={$image_meta['id']}&type={$this->opengraph->get_overlay_image()}" ) : $image_meta['url'];
-		$this->opengraph->tag( 'og:image', esc_url( $og_image ) );
+		$this->opengraph->tag( 'og:image', esc_url_raw( $og_image ) );
 
 		// Add secure URL if detected. Not all services implement this, so the regular one also needs to be rendered.
 		if ( Str::starts_with( 'https://', $og_image ) ) {
-			$this->opengraph->tag( 'og:image:secure_url', esc_url( $og_image ) );
+			$this->opengraph->tag( 'og:image:secure_url', esc_url_raw( $og_image ) );
 		}
 	}
 

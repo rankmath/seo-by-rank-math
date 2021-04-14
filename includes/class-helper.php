@@ -18,6 +18,7 @@ use RankMath\Helpers\Post_Type;
 use RankMath\Helpers\Options;
 use RankMath\Helpers\Taxonomy;
 use RankMath\Helpers\WordPress;
+use RankMath\Helpers\Schema;
 use RankMath\Replace_Variables\Replacer;
 
 defined( 'ABSPATH' ) || exit;
@@ -27,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Helper {
 
-	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress;
+	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress, Schema;
 
 	/**
 	 * Replace `%variables%` with context-dependent value.

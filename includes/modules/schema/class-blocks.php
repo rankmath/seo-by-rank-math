@@ -1,6 +1,6 @@
 <?php
 /**
- * The Rich Snippet Blocks
+ * The Schema Blocks
  *
  * @since      0.9.0
  * @package    RankMath
@@ -51,7 +51,7 @@ class Blocks {
 	}
 
 	/**
-	 * Add rank math category in gutenberg.
+	 * Create a new (Rank Math) block category.
 	 *
 	 * @param array $categories Array of block categories.
 	 *

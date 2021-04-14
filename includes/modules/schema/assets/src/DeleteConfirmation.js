@@ -12,7 +12,10 @@ import { Button } from '@wordpress/components'
 /**
  * Delete confirmation component.
  *
- * @param {Object} props This component's props.
+ * @param {Object}     props           Props data.
+ * @param {function()} props.onClick   A callback to run when clicked on confirmation button.
+ * @param {string}     props.children  The item childrens data.
+ * @param {string}     props.className Class name to use in the confirmation wrapper.
  */
 const DeleteConfirmation = ( { onClick, children, className = '' } ) => {
 	const node = useRef()

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.7
 Requires at least: 5.5
 Requires PHP: 7.2
-Stable tag: 1.0.61.1
+Stable tag: 1.0.62
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,33 +475,20 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.61 [Apr 03, 2021] =
-* Fixed: Link modal freezes when trying to add a link in the Relation field of ACF
-* Fixed: Optimized one Analytics query, which was causing high CPU usage on some setups from the last update
-* Fixed: Wrong closing H4 tag in the shortcode
-
-= 1.0.61 [Apr 01, 2021] =
-* Added: [NEW!] Post author schema property prints gravatar, social profile URLs(`sameAs`), author archive URL(if enabled), and `worksFor` attribute
-* Added: [NEW!] Focus keywords as `keywords` attribute in the [Article Schema](https://rankmath.com/kb/article-schema/) output
-* Added: Video duration data in the [Recipe Schema](https://rankmath.com/kb/recipe-schema/) output
-* Added: Width and height data in the `ImageObject` Schema property
-* Improved: Feedback Messages related to the Rank Math's [Database tools](https://rankmath.com/kb/rank-math-status-and-tools/#tools)
-* Improved: Avoid saving General settings after hitting the enter button while editing any text field
-* Improved: Browser title for the [KML file](https://rankmath.com/kb/kml-sitemap/) in the sitemap
-* Improved: Replaced deprecated Javascript functions
-* Fixed: PHP notices showing right after installation on some installations
-* Fixed: Dashboard widget was throwing PHP errors sometimes due to cache clearing issue
-* Fixed: Rebuild Analytics Index tool was not indexing all available posts/pages
-* Fixed: `rankmath_google_api_failed_attempts_data` option was becoming too large on some websites
-* Fixed: [Star Rating](https://rankmath.com/kb/review-schema/) was not showing correctly on the frontend if a maximum value was more than 5
-* Fixed: Settings tab were hidden for a post type which has word 'Notice' in its name
-* Fixed: Remove Data fetch scheduled actions if Analytics Module is disabled
-* Fixed: [Sitemaps](https://rankmath.com/kb/configure-sitemaps/) were not working with the plain permalinks
-* Fixed: Sitemap was not updating when Scheduled posts were published
-* Fixed: Analytics Dashboard page was not loading due to console error on some setups
-* Fixed: Missing [schema markup](https://rankmath.com/kb/rich-snippets/) code on the Static Homepage
-* Fixed: Analytics Graphs were showing wrong data when the “7 Days” timeframe was Selected
-* Fixed: An error appearing in the PHP 8.0
-* Fixed: Title attribute was getting added after the ending slash in `img` tag
+= 1.0.62 [Apr 14, 2021] =
+* Added: Alt text as a caption property in the Primary Image, Logo, and Author Image Schema entities
+* Added: Description property in Author Schema entity
+* Added: `async` loading for the [Google Analytics tracking](https://rankmath.com/kb/install-google-analytics/) script
+* Added: Filter to add Analytics stats of different language posts into the main post, examples `abc.com/en/ or abc.com/es/`. Note: Support needs to be added by translation plugins
+* Improved: Primary image and Author image uses image URL as an ID in the Schema Markup
+* Improved: Add `Place` entity in the Schema markup only when address is added in the [Local SEO](https://rankmath.com/kb/local-seo/) Settings
+* Improved: Show [Database Tools](https://rankmath.com/kb/rank-math-status-and-tools/#tools) only if the related module is enabled
+* Fixed: [Analytics stats](https://rankmath.com/kb/analytics/) were not changing on some pages after changing the timeframe
+* Fixed: `Undefined index: logo` error if the logo was not set in the [Titles & Meta settings](https://rankmath.com/kb/titles-and-meta/)
+* Fixed: Google Search Console table creation issue with the MySQL 8.0
+* Fixed: [Breadcrumbs Schema](https://rankmath.com/kb/breadcrumbs/) was not showing on the Product category/tag archive pages
+* Fixed: Missing backgrounds in some of the tabs of [Elementor SEO](https://rankmath.com/blog/elementor-seo/)
+* Fixed: Custom field analysis was not working when the Divi theme was active
+* Fixed: Open Graph image "[Icon Overlay](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails)" feature was not working
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

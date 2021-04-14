@@ -16,11 +16,11 @@ import { Fragment } from '@wordpress/element'
 import { getSnippetIcon } from '@helpers/snippetIcon'
 
 /**
- * Richsnippet icon.
+ * SchemaTab icon.
  *
- * @param {Object} props This component's props.
+ * @param {string} type The schema type.
  */
-const RichSnippetTabIcon = ( { type } ) => {
+const SchemaTabIcon = ( { type } ) => {
 	return (
 		<Fragment>
 			<i className={ getSnippetIcon( type ) }></i>
@@ -42,4 +42,4 @@ export default withSelect( ( select ) => {
 	} )()
 
 	return { type }
-} )( RichSnippetTabIcon )
+} )( SchemaTabIcon )

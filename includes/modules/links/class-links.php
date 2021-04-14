@@ -1,6 +1,6 @@
 <?php
 /**
- * The Link Counter Module
+ * The Link Counter module.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -145,7 +145,8 @@ class Links {
 	 * @param string $content The content.
 	 */
 	private function process( $post_id, $content ) {
-		// Apply the filters to get the real content.
+		// Apply the default filters to get the real content.
+		// phpcs:ignore
 		$content = apply_filters( 'the_content', $content );
 		$content = str_replace( ']]>', ']]&gt;', $content );
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * The Schema Converter.
+ * The Schema Converter tool converts Schema meta data from the old format (<1.0.48) to the new one.
  *
  * @since      1.0.48
  * @package    RankMath
@@ -72,7 +72,7 @@ class Schema_Converter extends \WP_Background_Process {
 	/**
 	 * Start creating batches.
 	 *
-	 * @param [type] $posts [description].
+	 * @param array $posts Posts to process.
 	 */
 	public function start( $posts ) {
 		$chunks = array_chunk( $posts, 10 );
@@ -107,7 +107,7 @@ class Schema_Converter extends \WP_Background_Process {
 	/**
 	 * Task to perform
 	 *
-	 * @param string $posts Posts to process.
+	 * @param array $posts Posts to process.
 	 *
 	 * @return bool
 	 */
@@ -121,13 +121,13 @@ class Schema_Converter extends \WP_Background_Process {
 				$this->convert( $post_id );
 			}
 			return false;
-		} catch ( Exception $error ) {
+		} catch ( \Exception $error ) {
 			return true;
 		}
 	}
 
 	/**
-	 * Load schema map
+	 * Load schema map.
 	 */
 	private function get_schema_map() {
 		ob_start();
@@ -257,7 +257,7 @@ class Schema_Converter extends \WP_Background_Process {
 	}
 
 	/**
-	 * Find posts with yoast blocks.
+	 * Find posts with Yoast blocks.
 	 *
 	 * @return array
 	 */

@@ -63,9 +63,9 @@ class Analytics extends Request {
 	}
 
 	/**
-	 * Get site url.
+	 * Check if google analytics is connected.
 	 *
-	 * @return string
+	 * @return boolean Returns True if the google analytics is connected, otherwise False.
 	 */
 	public static function is_analytics_connected() {
 		$account = wp_parse_args(

@@ -14,7 +14,7 @@ import { select } from '@wordpress/data'
 import { updateAppData } from './metadata'
 
 /**
- * Update posts.
+ * Update posts overview.
  *
  * @param {Array} posts The new posts.
  *

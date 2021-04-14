@@ -11,7 +11,7 @@ export default () => (
 			<div className="rank-math-cta-box blue-ticks width-60">
 				<h3>{ __( 'Advanced Schema Builder', 'rank-math' ) }</h3>
 				<ul>
-					<li>{ __( 'Rank Math PRO is coming this fall', 'rank-math' ) }</li>
+					<li>{ __( 'Possibility to create 700+ Schema Types', 'rank-math' ) }</li>
 					<li>{ __( 'Import Schema from ANY website', 'rank-math' ) }</li>
 					<li>{ __( 'Create Advanced templates', 'rank-math' ) }</li>
 				</ul>

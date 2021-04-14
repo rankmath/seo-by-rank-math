@@ -1,6 +1,6 @@
 <?php
 /**
- * The Yoast Block Converter.
+ * The Yoast Block Converter imports editor blocks (FAQ, HowTo, Local Business) from Yoast to Rank Math.
  *
  * @since      1.0.37
  * @package    RankMath
@@ -41,7 +41,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 	protected $action = 'convert_yoast_blocks';
 
 	/**
-	 * Main instance
+	 * Main instance.
 	 *
 	 * Ensure only one instance is loaded or can be loaded.
 	 *
@@ -60,7 +60,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 	/**
 	 * Start creating batches.
 	 *
-	 * @param [type] $posts [description].
+	 * @param array $posts Posts to process.
 	 */
 	public function start( $posts ) {
 		$chunks = array_chunk( $posts, 10 );
@@ -93,7 +93,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 	}
 
 	/**
-	 * Task to perform
+	 * Task to perform.
 	 *
 	 * @param string $posts Posts to process.
 	 */
@@ -102,9 +102,9 @@ class Yoast_Blocks extends \WP_Background_Process {
 	}
 
 	/**
-	 * Task to perform
+	 * Task to perform.
 	 *
-	 * @param string $posts Posts to process.
+	 * @param array $posts Posts to process.
 	 *
 	 * @return bool
 	 */
@@ -127,7 +127,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 	/**
 	 * Convert post.
 	 *
-	 * @param [type] $post [description].
+	 * @param WP_Post $post Post object.
 	 */
 	public function convert( $post ) {
 		$dirty  = false;
@@ -156,7 +156,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 	}
 
 	/**
-	 * Find posts with yoast blocks.
+	 * Find posts with Yoast blocks.
 	 *
 	 * @return array
 	 */

@@ -38,7 +38,7 @@ class Block_Parser {
 	}
 
 	/**
-	 * Parse the blocks.
+	 * Filter function to add Blocks data in schema.
 	 *
 	 * @param array $data Array of JSON-LD data.
 	 *

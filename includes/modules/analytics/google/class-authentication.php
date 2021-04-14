@@ -30,7 +30,7 @@ class Authentication {
 	protected static $api_version = '2.1';
 
 	/**
-	 * Get or update Search Console data.
+	 * Get or update token data.
 	 *
 	 * @param  bool|array $data Data to save.
 	 * @return bool|array

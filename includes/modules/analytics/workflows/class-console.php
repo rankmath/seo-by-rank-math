@@ -25,7 +25,7 @@ class Console extends Base {
 	 * Constructor.
 	 */
 	public function __construct() {
-		// Early Bail!!
+		// If console is not connected, ignore all no need to proceed.
 		if ( ! \RankMath\Google\Console::is_console_connected() ) {
 			return;
 		}
@@ -37,7 +37,7 @@ class Console extends Base {
 	}
 
 	/**
-	 * Kill jobs.
+	 * Unschedule all console data fetch action.
 	 *
 	 * Stop processing queue items, clear cronjob and delete all batches.
 	 */
@@ -72,7 +72,7 @@ class Console extends Base {
 				INDEX analytics_query (query(190)),
 				INDEX analytics_page (page(190)),
 				INDEX clicks (clicks),
-				INDEX position (position)
+				INDEX rank_position (position)
 			) $collate;";
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -91,8 +91,8 @@ class Console extends Base {
 	 * @param string  $new  New posted value.
 	 */
 	public function create_data_jobs( $days, $prev, $new ) {
-		// If saved and new profile are same.
-		if ( ! is_null( $prev ) && ! is_null( $new ) && $prev['profile'] === $new['profile'] ) {
+		// Early bail if saved & new profile are same.
+		if ( ! $this->is_profile_updated( 'profile', $prev, $new ) ) {
 			return;
 		}
 

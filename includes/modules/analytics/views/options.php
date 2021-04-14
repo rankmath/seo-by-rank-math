@@ -72,7 +72,11 @@ $buttons     = '<br>' .
 	'&nbsp;&nbsp;<button class="button button-small console-cache-update-manually"' . ( $disable ? ' disabled="disabled"' : '' ) . '>' . ( $is_queue_empty ? esc_html__( 'Update Data manually', 'rank-math' ) : esc_html__( 'Fetching in Progress', 'rank-math' ) ) . '</button>' .
 	'&nbsp;&nbsp;<button class="button button-link-delete button-small cancel-fetch"' . disabled( $is_fetching, false, false ) . '>' . esc_html__( 'Cancel Fetching', 'rank-math' ) . '</button>';
 
-$buttons  .= '<br>' . join( '', $db_info );
+$buttons .= '<br>' . join( '', $db_info );
+
+$description = sprintf( __( 'Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly.', 'rank-math' ), '<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Analytics%20DB%20Option&utm_campaign=WP" target="_blank" rel="noopener noreferrer">' . __( 'free version', 'rank-math' ) . '</a>' );
+$description = apply_filters_deprecated( 'rank_math/analytics/options/cahce_control/description', [ $description ], '1.0.61.1', 'rank_math/analytics/options/cache_control/description' );
+$description = apply_filters( 'rank_math/analytics/options/cache_control/description', $description );
 
 $cmb->add_field(
 	[
@@ -80,7 +84,7 @@ $cmb->add_field(
 		'type'            => 'text',
 		'name'            => __( 'Analytics Database', 'rank-math' ),
 		// translators: Anchor text 'free version', linking to pricing page.
-		'description'     => apply_filters( 'rank_math/analytics/options/cahce_control/description', sprintf( __( 'Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly.', 'rank-math' ), '<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Analytics%20DB%20Option&utm_campaign=WP" target="_blank" rel="noopener noreferrer">' . __( 'free version', 'rank-math' ) . '</a>' ) ),
+		'description'     => $description,
 		'default'         => 90,
 		'sanitization_cb' => function( $value ) {
 			$max   = apply_filters( 'rank_math/analytics/max_days_allowed', 90 );

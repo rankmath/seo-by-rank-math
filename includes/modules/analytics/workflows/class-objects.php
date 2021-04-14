@@ -92,6 +92,7 @@ class Objects extends Base {
 		$task_name = 'rank_math/analytics/data_fetch';
 		$fetch_gap = apply_filters( 'rank_math/analytics/fetch_gap', 7 );
 
+		// Schedule new action only when there is no existing action.
 		if ( false === as_next_scheduled_action( $task_name ) ) {
 			$schedule_in_minute = wp_rand( 3, defined( 'RANK_MATH_PRO_FILE' ) ? 1380 : 4320 );
 			$time_to_schedule   = ( strtotime( 'tomorrow' ) + ( $schedule_in_minute * MINUTE_IN_SECONDS ) );

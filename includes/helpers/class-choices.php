@@ -616,35 +616,6 @@ trait Choices {
 	}
 
 	/**
-	 * Function to get Default Schema type by post_type.
-	 *
-	 * @param string $post_type Post Type.
-	 *
-	 * @return string Default Schema Type.
-	 */
-	public static function get_default_schema_type( $post_type ) {
-		$schema = apply_filters(
-			'rank_math/schema/default_type',
-			Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" ),
-			$post_type
-		);
-
-		if ( ! $schema ) {
-			return false;
-		}
-
-		if ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) {
-			return 'WooCommerceProduct';
-		}
-
-		if ( class_exists( 'Easy_Digital_Downloads' ) && 'download' === $post_type ) {
-			return 'EDDProduct';
-		}
-
-		return 'article' === $schema ? Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ) : $schema;
-	}
-
-	/**
 	 * Country.
 	 *
 	 * @return array

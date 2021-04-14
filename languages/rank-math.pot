@@ -1116,6 +1116,12 @@ msgstr ""
 msgid "Vietnam"
 msgstr ""
 
+msgid "WooCommerce Product"
+msgstr ""
+
+msgid "EDD Product"
+msgstr ""
+
 msgid "Robots Meta"
 msgstr ""
 
@@ -1161,6 +1167,9 @@ msgstr ""
 msgid "This is what will appear as the description when this post shows up in the search results."
 msgstr ""
 
+msgid "Trends"
+msgstr ""
+
 #. translators: Link to kb article
 msgid "Insert keywords you want to rank for. Try to <a href=\"%s\" target=\"_blank\">attain 100/100 points</a> for better chances of ranking."
 msgstr ""
@@ -1170,9 +1179,6 @@ msgid "Want more? %s version"
 msgstr ""
 
 msgid "Upgrade today to the PRO"
-msgstr ""
-
-msgid "Trends"
 msgstr ""
 
 msgid "Example: Rank Math SEO"
@@ -2436,7 +2442,7 @@ msgstr ""
 msgid "No valid id found."
 msgstr ""
 
-msgid "Log successfully deleted."
+msgid "Log item successfully deleted."
 msgstr ""
 
 msgid "The 404 error log is empty."
@@ -2717,7 +2723,6 @@ msgstr ""
 msgid "Re-create Missing Database Tables"
 msgstr ""
 
-#. translators: 1. Review Schema documentation link
 msgid "Check if required tables exist and create them if not."
 msgstr ""
 
@@ -3081,7 +3086,8 @@ msgstr ""
 msgid "Contents are locked because robots.txt file is present in the root folder."
 msgstr ""
 
-msgid "<strong>Warning:</strong> your site's search engine visibility is set to Hidden in <a href=\"%1$s\" target=\"_blank\">Settings > Reading</a>. This means that the changes you make here will not take effect. Set the search engine visibility to Public to be able to change the robots.txt content."
+#. translators: placeholder is the Settings page URL.
+msgid "<strong>Warning:</strong> your site's search engine visibility is set to Hidden in <a href=\"%1$s\" target=\"_blank\">Settings &gt; Reading</a>. This means that the changes you make here will not take effect. Set the search engine visibility to Public to be able to change the robots.txt content."
 msgstr ""
 
 msgid "Titles & Meta Settings"
@@ -3118,12 +3124,6 @@ msgid "Top Admin Bar"
 msgstr ""
 
 msgid "Schema"
-msgstr ""
-
-msgid "WooCommerce Product"
-msgstr ""
-
-msgid "EDD Product"
 msgstr ""
 
 msgid "No schema found."
@@ -4578,7 +4578,10 @@ msgstr ""
 msgid "PRO"
 msgstr ""
 
-msgid "Enable Cookieless Tracking [No Consent Required]"
+msgid "Enable Cookieless Tracking. Want to make Analytics GDPR ready? %s"
+msgstr ""
+
+msgid "Click here."
 msgstr ""
 
 msgid "Self-Hosted Analytics JS File"
@@ -4744,14 +4747,13 @@ msgstr ""
 msgid "Cancel Fetching"
 msgstr ""
 
-msgid "Analytics Database"
-msgstr ""
-
-#. translators: Anchor text 'free version', linking to pricing page.
 msgid "Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly."
 msgstr ""
 
 msgid "free version"
+msgstr ""
+
+msgid "Analytics Database"
 msgstr ""
 
 msgid "Group Title"
@@ -4902,6 +4904,7 @@ msgstr ""
 msgid "Latitude and longitude values separated by comma."
 msgstr ""
 
+#. translators: placeholder is a link to the Pro version
 msgid "Multiple Locations are available in the %s."
 msgstr ""
 
@@ -4925,6 +4928,9 @@ msgid "Continue redirecting"
 msgstr ""
 
 msgid "Manage This Redirection"
+msgstr ""
+
+msgid "or"
 msgstr ""
 
 msgid "Manage All Redirections"
@@ -4987,7 +4993,7 @@ msgstr ""
 msgid "Extend the functionality of WordPress by creating redirects in our plugin when you change the slug of a post, page, category or a CPT. You can modify the redirection further according to your needs."
 msgstr ""
 
-#. translators: %s is a Learn More link to the documentation
+#. translators: %s is a Learn More link to the documentation.
 msgid "Control which user has access to which options of Rank Math. %s"
 msgstr ""
 

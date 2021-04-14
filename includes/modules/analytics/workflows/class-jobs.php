@@ -13,6 +13,7 @@ namespace RankMath\Analytics\Workflow;
 use Exception;
 use RankMath\Helper;
 use RankMath\Google\Api;
+use RankMath\Google\Console;
 use RankMath\Analytics\DB;
 use RankMath\Traits\Hooker;
 use RankMath\Analytics\Stats;
@@ -51,18 +52,21 @@ class Jobs {
 	public function hooks() {
 		$this->action( 'rank_math/analytics/flat_posts', 'do_flat_posts' );
 		$this->action( 'rank_math/analytics/flat_posts_completed', 'flat_posts_completed' );
-		$this->action( 'rank_math/analytics/clear_cache', 'clear_cache', 99 );
 		add_action( 'rank_math/analytics/sync_sitemaps', [ Api::get(), 'sync_sitemaps' ] );
 
-		// Daily Tasks.
-		$this->action( 'rank_math/analytics/data_fetch', 'data_fetch' );
+		if ( Console::is_console_connected() ) {
+			$this->action( 'rank_math/analytics/clear_cache', 'clear_cache', 99 );
 
-		// Data Fetcher.
-		$this->action( 'rank_math/analytics/get_console_data', 'get_console_data' );
+			// Fetch missing google data action.
+			$this->action( 'rank_math/analytics/data_fetch', 'data_fetch' );
+
+			// Console data fetch.
+			$this->action( 'rank_math/analytics/get_console_data', 'get_console_data' );
+		}
 	}
 
 	/**
-	 * Perform these tasks daily.
+	 * Fetch missing console data.
 	 */
 	public function data_fetch() {
 		$this->check_for_missing_dates( 'console' );
@@ -76,7 +80,6 @@ class Jobs {
 			->selectCount( 'id' )
 			->getVar();
 
-
 		if ( ! empty( $rows ) ) {
 			return;
 		}
@@ -85,7 +88,7 @@ class Jobs {
 	}
 
 	/**
-	 * Process posts.
+	 * Add/update posts info from objects table.
 	 *
 	 * @param  array $ids Posts ids to process.
 	 */
@@ -101,7 +104,7 @@ class Jobs {
 	public function clear_cache() {
 		global $wpdb;
 
-		// Delete all useless data from gsc.
+		// Delete all useless data from console data table.
 		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
 
 		delete_transient( 'rank_math_analytics_data_info' );
@@ -113,7 +116,7 @@ class Jobs {
 	}
 
 	/**
-	 * Get analytics data.
+	 * Get console data.
 	 *
 	 * @param string $date Date to fetch data for.
 	 */
@@ -141,8 +144,9 @@ class Jobs {
 		$count = 1;
 		$hook  = "get_{$action}_data";
 		$start = Helper::get_midnight( time() + DAY_IN_SECONDS );
+		$days  = Helper::get_settings( 'general.console_caching_control', 90 );
 
-		for ( $current = 1; $current <= 90; $current++ ) {
+		for ( $current = 1; $current <= $days; $current++ ) {
 			$date = date_i18n( 'Y-m-d', $start - ( DAY_IN_SECONDS * $current ) );
 			if ( ! DB::date_exists( $date, $action ) ) {
 				$count++;

@@ -47,7 +47,7 @@ export function getKeywords( state ) {
  *
  * @param {Object} state The app state.
  *
- * @return {boolean} Return is marked as pillat content.
+ * @return {boolean} Return is marked as pillar content.
  */
 export function getPillarContent( state ) {
 	return state.appData.pillarContent

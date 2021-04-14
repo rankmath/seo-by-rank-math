@@ -1,6 +1,6 @@
 <?php
 /**
- * The 404 module database operations.
+ * The database operations for the 404 Monitor module.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -30,7 +30,7 @@ class DB {
 	}
 
 	/**
-	 * Get error logs.
+	 * Get error log items.
 	 *
 	 * @param array $args Array of arguments.
 	 *
@@ -123,7 +123,7 @@ class DB {
 	}
 
 	/**
-	 * Get total logs count.
+	 * Get total number of log items (number of rows in the DB table).
 	 *
 	 * @return int
 	 */

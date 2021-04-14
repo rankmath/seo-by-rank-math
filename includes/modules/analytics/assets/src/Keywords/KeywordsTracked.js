@@ -215,7 +215,7 @@ const KeywordsTracked = () => {
 		<Fragment>
 			<div className="rank-math-keyword-table keyword-manager">
 				<div id="rank-math-pro-cta" className="center">
-					<div className="rank-math-cta-box blue-ticks width-50 top-20">
+					<div className="rank-math-cta-box blue-ticks width-50">
 						<h3>{ __( 'Your Own Keyword Manager', 'rank-math' ) }</h3>
 						<ul>
 							<li>{ __( 'Track your performance for your target keywords', 'rank-math' ) }</li>

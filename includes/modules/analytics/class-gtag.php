@@ -89,9 +89,12 @@ class GTag {
 			// Load amp-analytics component for AMP Reader.
 			$this->filter( 'amp_post_template_data', 'amp_analytics_component_data' );
 		} else {
-			// For non-AMP.
-			$this->action( 'wp_enqueue_scripts', 'enqueue_gtag_js' );
-			$this->action( 'wp_enqueue_scripts', 'gtag_js_config', 25 );
+			// For non-AMP. If current WordPress verion is 5.7 or above, use core function introducted from WordPress 5.7 and add async loading to gtag script.
+			if ( version_compare( get_bloginfo( 'version' ), '5.7', '<' ) ) {
+				$this->action( 'wp_enqueue_scripts', 'enqueue_gtag_js' );
+			} else {
+				$this->action( 'wp_head', 'add_gtag_js' );
+			}
 		}
 	}
 
@@ -145,62 +148,44 @@ class GTag {
 	}
 
 	/**
-	 * Print gtag snippet for non-amp.
+	 * Print gtag snippet for non-amp. Used only for WordPress 5.7 or above.
 	 */
-	public function enqueue_gtag_js() {
-		$property_id = $this->get( 'property_id' );
+	public function add_gtag_js() {
+		$gtag_script_info = $this->get_gtag_info();
 
-		$url = 'https://www.googletagmanager.com/gtag/js?id=' . esc_attr( $property_id );
-		$url = $this->do_filter( 'analytics/ga_js_url', $url );
-
-		wp_enqueue_script( // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
-			'google_gtagjs',
-			$url,
-			false,
-			null,
-			false
-		);
-		wp_script_add_data( 'google_gtagjs', 'script_execution', 'async' );
-
-		wp_add_inline_script(
-			'google_gtagjs',
-			'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}'
+		wp_print_script_tag(
+			[
+				'id'    => 'google_gtagjs',
+				'src'   => $gtag_script_info['url'],
+				'async' => true,
+			]
 		);
 
-		$gtag_opt = [];
-		if ( $this->get_amp_mode() ) {
-			$gtag_opt['linker'] = [
-				'domains' => [ $this->get_home_domain() ],
-			];
-		}
-
-		if ( ! empty( $gtag_opt['linker'] ) ) {
-			wp_add_inline_script(
-				'google_gtagjs',
-				'gtag(\'set\', \'linker\', ' . wp_json_encode( $gtag_opt['linker'] ) . ' );'
-			);
-		}
-		unset( $gtag_opt['linker'] );
-
-		wp_add_inline_script(
-			'google_gtagjs',
-			'gtag(\'js\', new Date());'
+		wp_print_inline_script_tag(
+			$gtag_script_info['inline'],
+			[
+				'id' => 'google_gtagjs-inline',
+			]
 		);
 	}
 
 	/**
-	 * Add the config() call for gtag.js.
-	 *
-	 * @return void
+	 * Print gtag snippet for non-amp. Used for below WordPress 5.7.
 	 */
-	public function gtag_js_config() {
-		$property_id = $this->get( 'property_id' );
+	public function enqueue_gtag_js() {
+		$gtag_script_info = $this->get_gtag_info();
 
-		$gtag_config = [];
-		$gtag_config = $this->do_filter( 'analytics/gtag_config', $gtag_config );
+		wp_enqueue_script( // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+			'google_gtagjs',
+			$gtag_script_info['url'],
+			false,
+			null,
+			false
+		);
+
 		wp_add_inline_script(
 			'google_gtagjs',
-			'gtag(\'config\', \'' . esc_attr( $property_id ) . '\', {' . join( ', ', $gtag_config ) . '} );'
+			$gtag_script_info['inline']
 		);
 	}
 
@@ -312,6 +297,48 @@ class GTag {
 		}
 
 		return isset( $this->options[ $id ] ) ? $this->options[ $id ] : false;
+	}
+
+	/**
+	 * Get gtag script info
+	 *
+	 * @return mixed
+	 */
+	protected function get_gtag_info() {
+		// Get Google Analytics Property ID.
+		$property_id = $this->get( 'property_id' );
+
+		// Get main gtag script Url.
+		$url = 'https://www.googletagmanager.com/gtag/js?id=' . esc_attr( $property_id );
+		$url = $this->do_filter( 'analytics/ga_js_url', $url );
+
+		$gtag_opt = [];
+		if ( $this->get_amp_mode() ) {
+			$gtag_opt['linker'] = [
+				'domains' => [ $this->get_home_domain() ],
+			];
+		}
+
+		$gtag_inline_linker_script = '';
+		if ( ! empty( $gtag_opt['linker'] ) ) {
+			$gtag_inline_linker_script = 'gtag(\'set\', \'linker\', ' . wp_json_encode( $gtag_opt['linker'] ) . ' );';
+		}
+		unset( $gtag_opt['linker'] );
+
+		// Get Google Analytics Property ID.
+		$gtag_config = [];
+		$gtag_config = $this->do_filter( 'analytics/gtag_config', $gtag_config );
+
+		// Construct inline scripts.
+		$gtag_inline_script  = 'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}';
+		$gtag_inline_script .= $gtag_inline_linker_script;
+		$gtag_inline_script .= 'gtag(\'js\', new Date());';
+		$gtag_inline_script .= 'gtag(\'config\', \'' . esc_attr( $property_id ) . '\', {' . join( ', ', $gtag_config ) . '} );';
+
+		return [
+			'url'    => $url,
+			'inline' => $gtag_inline_script,
+		];
 	}
 
 	/**

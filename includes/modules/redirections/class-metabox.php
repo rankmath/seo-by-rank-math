@@ -1,6 +1,6 @@
 <?php
 /**
- * The Redirections Metabox
+ * The Redirections Metabox.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -17,8 +17,6 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Metabox class.
- *
- * @codeCoverageIgnore
  */
 class Metabox {
 

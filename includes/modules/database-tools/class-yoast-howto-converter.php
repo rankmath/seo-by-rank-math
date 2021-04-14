@@ -1,6 +1,6 @@
 <?php
 /**
- * The Yoast Block Converter.
+ * The Yoast HowTo Block Converter.
  *
  * @since      1.0.37
  * @package    RankMath
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 class Yoast_HowTo_Converter {
 
 	/**
-	 * Convert blocks to rank math
+	 * Convert HowTo blocks to Rank Math.
 	 *
 	 * @param array $block Block to convert.
 	 *
@@ -70,7 +70,7 @@ class Yoast_HowTo_Converter {
 	}
 
 	/**
-	 * Gormat steps.
+	 * Format steps.
 	 *
 	 * @param array $step Steps.
 	 *
@@ -86,9 +86,9 @@ class Yoast_HowTo_Converter {
 	}
 
 	/**
-	 * [get_html description]
+	 * Generate HTML.
 	 *
-	 * @param array $attributes [description].
+	 * @param array $attributes Block attributes.
 	 *
 	 * @return string
 	 */

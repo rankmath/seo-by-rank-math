@@ -1,6 +1,6 @@
 <?php
 /**
- * The Redirections Watcher
+ * The Redirections Watcher.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -155,8 +155,6 @@ class Watcher {
 
 			$this->do_action( 'redirection/term_updated', $redirection_id, $term_id );
 		}
-
-		return;
 	}
 
 	/**
@@ -196,7 +194,7 @@ class Watcher {
 		// Perform Cache.
 		Cache::purge_by_object_id( $object_id, $type );
 		if ( $from_url ) {
-			$from_url = parse_url( $from_url, PHP_URL_PATH );
+			$from_url = wp_parse_url( $from_url, PHP_URL_PATH );
 			$from_url = Redirection::strip_subdirectory( $from_url );
 			Cache::add(
 				[
@@ -236,8 +234,8 @@ class Watcher {
 	 * @return boolean
 	 */
 	private function has_permalink_changed( $before, $after ) {
-		$before = parse_url( $before, PHP_URL_PATH );
-		$after  = parse_url( $after, PHP_URL_PATH );
+		$before = wp_parse_url( $before, PHP_URL_PATH );
+		$after  = wp_parse_url( $after, PHP_URL_PATH );
 
 		// Do the URLs the match?
 		if ( $before === $after ) {
@@ -274,7 +272,7 @@ class Watcher {
 	 * @return string
 	 */
 	private function get_site_path() {
-		$path = parse_url( get_home_url(), PHP_URL_PATH );
+		$path = wp_parse_url( get_home_url(), PHP_URL_PATH );
 		if ( $path ) {
 			return rtrim( $path, '/' ) . '/';
 		}
@@ -345,7 +343,7 @@ class Watcher {
 	}
 
 	/**
-	 * Show Delete Post/Term notification
+	 * Show Delete Post/Term notification.
 	 *
 	 * @param url    $url  Deleted object url.
 	 * @param string $type Deleted object type.
@@ -360,7 +358,7 @@ class Watcher {
 	}
 
 	/**
-	 * Show Delete Post/Term notification
+	 * Show Delete Post/Term notification.
 	 *
 	 * @param string  $message        Notification message.
 	 * @param boolean $is_dismissible Is notification dismissible.

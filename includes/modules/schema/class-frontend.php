@@ -1,6 +1,6 @@
 <?php
 /**
- * Outputs schema code specific for Google's JSON LD stuff
+ * The frontend code of the Schema module.
  *
  * @since      1.4.3
  * @package    RankMath
@@ -46,42 +46,11 @@ class Frontend {
 		$this->filter( 'rank_math/snippet/rich_snippet_event_entity', 'validate_event_schema', 11, 2 );
 		$this->filter( 'rank_math/snippet/rich_snippet_article_entity', 'add_name_property', 11, 2 );
 
-		new Schema_OpenGraph_Tags();
+		new Opengraph();
 	}
 
 	/**
-	 * Add name property to the Article schema.
-	 *
-	 * @param array $schema Snippet Data.
-	 * @return array
-	 */
-	public function add_name_property( $schema ) {
-		if ( empty( $schema['headline'] ) ) {
-			return $schema;
-		}
-
-		$schema['name'] = $schema['headline'];
-		return $schema;
-	}
-
-	/**
-	 * Add timezone to startDate field.
-	 *
-	 * @param array $schema Snippet Data.
-	 * @return array
-	 */
-	public function validate_event_schema( $schema ) {
-		if ( empty( $schema['startDate'] ) ) {
-			return $schema;
-		}
-
-		$schema['startDate'] = str_replace( ' ', 'T', Helper::convert_date( $schema['startDate'], true ) );
-
-		return $schema;
-	}
-
-	/**
-	 * Get Default Schema Data.
+	 * Output schema data for a post.
 	 *
 	 * @param array  $data   Array of json-ld data.
 	 * @param JsonLD $jsonld Instance of jsonld.
@@ -100,6 +69,8 @@ class Frontend {
 				return ! in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
 			}
 		);
+
+		// Check & Unpublish the JobPosting post.
 		DB::unpublish_jobposting_post( $jsonld, $schemas );
 
 		$schemas = $jsonld->replace_variables( $schemas, [], $data );
@@ -109,7 +80,7 @@ class Frontend {
 	}
 
 	/**
-	 * Connect schema entities.
+	 * Connect different schema entities using isPartOf & publisher properties.
 	 *
 	 * @param array  $schemas Array of json-ld data.
 	 * @param JsonLD $jsonld  Instance of jsonld.
@@ -139,6 +110,39 @@ class Frontend {
 	}
 
 	/**
+	 * Add name property to the Article schema.
+	 *
+	 * @since 1.0.61
+	 *
+	 * @param  array $schema Snippet Data.
+	 * @return array
+	 */
+	public function add_name_property( $schema ) {
+		if ( empty( $schema['headline'] ) ) {
+			return $schema;
+		}
+
+		$schema['name'] = $schema['headline'];
+		return $schema;
+	}
+
+	/**
+	 * Add timezone to startDate field.
+	 *
+	 * @param array $schema Event schema Data.
+	 * @return array
+	 */
+	public function validate_event_schema( $schema ) {
+		if ( empty( $schema['startDate'] ) ) {
+			return $schema;
+		}
+
+		$schema['startDate'] = str_replace( ' ', 'T', Helper::convert_date( $schema['startDate'], true ) );
+
+		return $schema;
+	}
+
+	/**
 	 * Connect schema properties.
 	 *
 	 * @param array  $schema  Schema Entity.
@@ -152,6 +156,7 @@ class Frontend {
 			return;
 		}
 
+		// Remove empty ImageObject.
 		if ( isset( $schema['image'] ) && empty( $schema['image']['url'] ) ) {
 			unset( $schema['image'] );
 		}
@@ -162,6 +167,7 @@ class Frontend {
 		$types = array_map( 'strtolower', (array) $schema['@type'] );
 		foreach ( $types as $type ) {
 			$is_event = Str::contains( 'event', $type );
+			// Add publisher entity @id in the organizer property of Event schema.
 			if ( $is_event ) {
 				$jsonld->add_prop( 'publisher', $schema, 'organizer', $schemas );
 			}
@@ -196,10 +202,10 @@ class Frontend {
 	}
 
 	/**
-	 * Add main entity of page property.
+	 * Add mainEntityOfPage property to Primary schema entity.
 	 *
-	 * @param array  $schema  Schema Entity.
-	 * @param JsonLD $jsonld  JsonLD Instance.
+	 * @param array  $schema Schema Entity.
+	 * @param JsonLD $jsonld JsonLD Instance.
 	 */
 	private function add_main_entity_of_page( &$schema, $jsonld ) {
 		if ( ! isset( $schema['isPrimary'] ) ) {
@@ -214,7 +220,7 @@ class Frontend {
 	}
 
 	/**
-	 * Change WebPage properties depending on the schemas.
+	 * Change WebPage entity type depending on the schemas on the page.
 	 *
 	 * @param array $schemas Schema data.
 	 * @param array $types   Schema types.

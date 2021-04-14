@@ -1,6 +1,6 @@
 <?php
 /**
- * The KML File
+ * The KML File.
  *
  * @since      1.0.24
  * @package    RankMath
@@ -10,7 +10,6 @@
 
 namespace RankMath\Local_Seo;
 
-use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
@@ -142,7 +141,7 @@ class KML_File {
 	 * @param array $updated   Array of field IDs that were updated.
 	 *                         Will only include field IDs that had values change.
 	 */
-	public function update_sitemap( $object_id, $updated ) {
+	public function update_sitemap( $object_id, $updated ) { // phpcs:ignore
 		$local_seo_fields = [
 			'knowledgegraph_name',
 			'url',

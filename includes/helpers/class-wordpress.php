@@ -252,7 +252,11 @@ trait WordPress {
 	 */
 	public static function get_thumbnail_with_fallback( $post_id, $size = 'thumbnail' ) {
 		if ( has_post_thumbnail( $post_id ) ) {
-			return wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), $size );
+			$thumbnail_id     = get_post_thumbnail_id( $post_id );
+			$image            = wp_get_attachment_image_src( $thumbnail_id, $size );
+			$image['caption'] = get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true );
+
+			return $image;
 		}
 
 		preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
@@ -262,15 +266,15 @@ trait WordPress {
 		}
 
 		$fb_image = Helper::get_post_meta( 'facebook_image_id', $post_id );
-		$tw_image = Helper::get_post_meta( 'twitter_image_id', $post_id );
+		$tw_image = Helper::get_post_meta( 'twitter_image_id', $post_id, Helper::get_settings( 'titles.open_graph_image_id' ) );
 		$og_image = $fb_image ? $fb_image : $tw_image;
-
-		if ( $og_image ) {
-			return wp_get_attachment_image_src( $og_image, $size );
+		if ( ! $og_image ) {
+			return false;
 		}
 
-		$default_og = Helper::get_settings( 'titles.open_graph_image_id' );
-		return $default_og ? wp_get_attachment_image_src( $default_og, $size ) : false;
+		$image            = wp_get_attachment_image_src( $og_image, $size );
+		$image['caption'] = get_post_meta( $og_image, '_wp_attachment_image_alt', true );
+		return $image;
 	}
 
 	/**

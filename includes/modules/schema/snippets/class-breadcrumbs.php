@@ -25,7 +25,7 @@ class Breadcrumbs implements Snippet {
 	 *
 	 * @link https://schema.org/BreadcrumbList
 	 *
-	 * @param array  $data   Array of JSON-LD data.
+	 * @param array  $data Array of JSON-LD data.
 	 * @param JsonLD $jsonld JsonLD Instance.
 	 *
 	 * @return array

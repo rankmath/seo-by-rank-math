@@ -13,7 +13,6 @@ namespace RankMath\Monitor;
 use RankMath\Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Arr;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\Conditional;
@@ -30,8 +29,6 @@ class Monitor {
 
 	/**
 	 * The Constructor.
-	 *
-	 * @codeCoverageIgnore
 	 */
 	public function __construct() {
 		if ( is_admin() ) {
@@ -51,8 +48,6 @@ class Monitor {
 	/**
 	 * Add admin bar item.
 	 *
-	 * @codeCoverageIgnore
-	 *
 	 * @param Admin_Bar_Menu $menu Menu class instance.
 	 */
 	public function admin_bar_items( $menu ) {
@@ -68,9 +63,7 @@ class Monitor {
 	}
 
 	/**
-	 * Delete log.
-	 *
-	 * @codeCoverageIgnore
+	 * Delete a log item.
 	 */
 	public function delete_log() {
 
@@ -84,11 +77,11 @@ class Monitor {
 		}
 
 		DB::delete_log( $id );
-		$this->success( esc_html__( 'Log successfully deleted.', 'rank-math' ) );
+		$this->success( esc_html__( 'Log item successfully deleted.', 'rank-math' ) );
 	}
 
 	/**
-	 * This function logs the request details when is_404().
+	 * Log the request details when is_404() is true and WP's response code is *not* 410 or 451.
 	 */
 	public function capture_404() {
 		if ( ! is_404() || in_array( http_response_code(), [ 410, 451 ], true ) ) {
@@ -121,9 +114,9 @@ class Monitor {
 	}
 
 	/**
-	 * Check if current URL is excluded.
+	 * Check if given URL is excluded.
 	 *
-	 * @param string $uri Check this URI for exclusion.
+	 * @param string $uri The URL to check for exclusion.
 	 *
 	 * @return boolean
 	 */
@@ -143,7 +136,7 @@ class Monitor {
 	}
 
 	/**
-	 * Get user-agent.
+	 * Get user-agent header.
 	 *
 	 * @return string
 	 */

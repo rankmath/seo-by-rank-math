@@ -5,13 +5,20 @@ import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
 import { Dashicon, Modal, KeyboardShortcuts } from '@wordpress/components'
 import { withSelect, withDispatch } from '@wordpress/data'
-import { rawShortcut } from '@wordpress/keycodes';
+import { rawShortcut } from '@wordpress/keycodes'
 
 /**
  * Internal dependencies
  */
 import TabPanel from './Tabs'
 
+/**
+ * Show the lists of schemas used in the Current Post/Term.
+ *
+ * @param {Object}     props             The props data.
+ * @param {boolean}    props.isOpen      Whether the schema modal is open.
+ * @param {function()} props.toggleModal A callback to run when clicked on the close modal button.
+ */
 const TemplatesModal = ( { isOpen = false, toggleModal } ) => {
 	if ( ! isOpen ) {
 		return null

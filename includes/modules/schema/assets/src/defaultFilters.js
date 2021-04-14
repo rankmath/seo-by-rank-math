@@ -38,7 +38,7 @@ const maybeScalarValue = ( value ) => {
  * Register hooks to process values and maps.
  */
 const registerDefaultHooks = () => {
-	jQuery( document ).ready( function( $ ) {
+	jQuery( function( $ ) {
 		const clipboard = new ClipboardJS( '.structured-data-copy' )
 
 		// Debug information copy section.
@@ -70,6 +70,11 @@ const registerDefaultHooks = () => {
 		}
 	)
 
+	/**
+	 * Filter function to change schema type value to match it with the @type value from schemaMap.
+	 *
+	 * @param {string} type Schema type.
+	 */
 	addFilter(
 		'rank_math_schema_type',
 		'rank-math',
@@ -94,6 +99,13 @@ const registerDefaultHooks = () => {
 		}
 	)
 
+	/**
+	 * Filter function to convert author property to Object. This code is needed for backward compatibility where the author in some schema is stored as a string.
+	 *
+	 * @param {boolean}      check    The property value.
+	 * @param {Object}       property Property to process.
+	 * @param {Array|string} value    Property value.
+	 */
 	addFilter(
 		'rank_math_schema_convert_author',
 		'rank-math',
@@ -162,6 +174,11 @@ const registerDefaultHooks = () => {
 		20
 	)
 
+	/**
+	 * Filter function to change Brand from string to Object. This code is needed for backward compatibility where the Brand value was stored as a string.
+	 *
+	 * @param {Object} schema Product schema.
+	 */
 	addFilter(
 		'rank_math_pre_schema_Product',
 		'rank-math',
@@ -177,6 +194,11 @@ const registerDefaultHooks = () => {
 		}
 	)
 
+	/**
+	 * Filter function change the recipe instructions value before storing it in Database.
+	 *
+	 * @param {Object} schema Recipe schema.
+	 */
 	addFilter(
 		'rank_math_processed_schema_Recipe',
 		'rank-math',
@@ -210,6 +232,11 @@ const registerDefaultHooks = () => {
 		20
 	)
 
+	/**
+	 * Filter function to conver the recipe instructions data before adding it in Schema Generator.
+	 *
+	 * @param {Object} schema Recipe schema.
+	 */
 	addFilter(
 		'rank_math_pre_schema_Recipe',
 		'rank-math',
@@ -272,6 +299,11 @@ const registerDefaultHooks = () => {
 		}
 	)
 
+	/**
+	 * Filter to change event location to array.
+	 *
+	 * @param {Object} schema Event schema.
+	 */
 	addFilter(
 		'rank_math_processed_schema',
 		'rank-math',
@@ -300,6 +332,11 @@ const registerDefaultHooks = () => {
 		20
 	)
 
+	/**
+	 * Filter to change event location to string.
+	 *
+	 * @param {Object} schema Event schema.
+	 */
 	addFilter(
 		'rank_math_pre_schema',
 		'rank-math',

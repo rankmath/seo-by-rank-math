@@ -1,6 +1,6 @@
 <?php
 /**
- * On-Screen help tab.
+ * On-Screen help tab: Screen Content.
  *
  * @package    RankMath
  * @subpackage RankMath\Redirections

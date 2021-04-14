@@ -5,7 +5,7 @@ import apiFetch from '@wordpress/api-fetch'
 import { dispatch } from '@wordpress/data'
 
 /**
- * Get posts rows.
+ * Get post data.
  *
  * @param {number} id Single post id.
  */

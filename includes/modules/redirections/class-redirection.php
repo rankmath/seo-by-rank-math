@@ -126,8 +126,6 @@ class Redirection {
 	/**
 	 * Getter.
 	 *
-	 * @codeCoverageIgnore
-	 *
 	 * @param string $key Key to get.
 	 *
 	 * @return mixed
@@ -160,8 +158,6 @@ class Redirection {
 
 	/**
 	 * Set cache setting.
-	 *
-	 * @codeCoverageIgnore
 	 *
 	 * @param bool $nocache Can save cache or not.
 	 */
@@ -438,7 +434,7 @@ class Redirection {
 	}
 
 	/**
-	 * Strip home directory when WP is installed in subdirectory
+	 * Strip home directory when WP is installed in subdirectory.
 	 *
 	 * @param string $url URL to strip from.
 	 *

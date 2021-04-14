@@ -105,7 +105,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * HowTo Structured Data.
+	 * Add HowTO schema data in JSON-LD array..
 	 *
 	 * @param array $data  Array of JSON-LD data.
 	 * @param array $block JsonLD Instance.
@@ -146,6 +146,72 @@ class Block_HowTo extends Block {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Render block content.
+	 *
+	 * @param array $attributes Array of atributes.
+	 *
+	 * @return string
+	 */
+	public function render( $attributes ) {
+		// Early bail.
+		if ( ! $this->has_steps( $attributes ) ) {
+			return '';
+		}
+
+		$list_tag = $this->get_list_style( $attributes['listStyle'] );
+		$item_tag = $this->get_list_item_style( $attributes['listStyle'] );
+
+		// HTML.
+		$out   = [];
+		$out[] = sprintf( '<div id="rank-math-howto" class="rank-math-block"%s>', $this->get_styles( $attributes ) );
+
+		// HeaderContent.
+		$out[] = '<div class="rank-math-howto-description">';
+		$out[] = $this->get_image( $attributes, $attributes['mainSizeSlug'], '' );
+		$out[] = wpautop( $attributes['description'] );
+		$out[] = '</div>';
+
+		$out[] = $this->build_duration( $attributes );
+
+		$out[] = sprintf( '<%1$s class="rank-math-steps %2$s">', $list_tag, $attributes['listCssClasses'] );
+
+		// Steps.
+		foreach ( $attributes['steps'] as $index => $step ) {
+			if ( empty( $step['visible'] ) ) {
+				continue;
+			}
+
+			$out[] = sprintf( '<%1$s id="%2$s" class="rank-math-step">', $item_tag, $step['id'] );
+
+			if ( ! empty( $step['title'] ) ) {
+				$out[] = sprintf(
+					'<%1$s class="rank-math-step-title %2$s">%3$s</%1$s>',
+					$attributes['titleWrapper'],
+					$attributes['titleCssClasses'],
+					$step['title']
+				);
+			}
+
+			if ( ! empty( $step['content'] ) ) {
+				$out[] = sprintf(
+					'<div class="rank-math-step-content %2$s">%4$s%3$s</div>',
+					$attributes['titleWrapper'],
+					$attributes['contentCssClasses'],
+					wpautop( $step['content'] ),
+					$this->get_image( $step, $attributes['sizeSlug'], '' )
+				);
+			}
+
+			$out[] = sprintf( '</%1$s>', $item_tag );
+		}
+
+		$out[] = sprintf( '</%1$s>', $list_tag );
+		$out[] = '</div>';
+
+		return apply_filters( 'rank_math/schema/block/howto/content', join( "\n", $out ), $out, $attributes );
 	}
 
 	/**
@@ -275,7 +341,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * Add Caption
+	 * Add Caption.
 	 *
 	 * @param [type] $schema_image [description].
 	 * @param [type] $image_id     [description].
@@ -294,7 +360,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * Add Image Size
+	 * Add Image Size.
 	 *
 	 * @param [type] $schema_image [description].
 	 * @param [type] $image_id     [description].
@@ -325,72 +391,6 @@ class Block_HowTo extends Block {
 				$data['totalTime'] = esc_attr( 'P' . $days . 'DT' . $hours . 'H' . $minutes . 'M' );
 			}
 		}
-	}
-
-	/**
-	 * Render block content
-	 *
-	 * @param array $attributes Array of atributes.
-	 *
-	 * @return string
-	 */
-	public function render( $attributes ) {
-		// Early bail.
-		if ( ! $this->has_steps( $attributes ) ) {
-			return '';
-		}
-
-		$list_tag = $this->get_list_style( $attributes['listStyle'] );
-		$item_tag = $this->get_list_item_style( $attributes['listStyle'] );
-
-		// HTML.
-		$out   = [];
-		$out[] = sprintf( '<div id="rank-math-howto" class="rank-math-block"%s>', $this->get_styles( $attributes ) );
-
-		// HeaderContent.
-		$out[] = '<div class="rank-math-howto-description">';
-		$out[] = $this->get_image( $attributes, $attributes['mainSizeSlug'], '' );
-		$out[] = wpautop( $attributes['description'] );
-		$out[] = '</div>';
-
-		$out[] = $this->build_duration( $attributes );
-
-		$out[] = sprintf( '<%1$s class="rank-math-steps %2$s">', $list_tag, $attributes['listCssClasses'] );
-
-		// Steps.
-		foreach ( $attributes['steps'] as $index => $step ) {
-			if ( empty( $step['visible'] ) ) {
-				continue;
-			}
-
-			$out[] = sprintf( '<%1$s id="%2$s" class="rank-math-step">', $item_tag, $step['id'] );
-
-			if ( ! empty( $step['title'] ) ) {
-				$out[] = sprintf(
-					'<%1$s class="rank-math-step-title %2$s">%3$s</%1$s>',
-					$attributes['titleWrapper'],
-					$attributes['titleCssClasses'],
-					$step['title']
-				);
-			}
-
-			if ( ! empty( $step['content'] ) ) {
-				$out[] = sprintf(
-					'<div class="rank-math-step-content %2$s">%4$s%3$s</div>',
-					$attributes['titleWrapper'],
-					$attributes['contentCssClasses'],
-					wpautop( $step['content'] ),
-					$this->get_image( $step, $attributes['sizeSlug'], '' )
-				);
-			}
-
-			$out[] = sprintf( '</%1$s>', $item_tag );
-		}
-
-		$out[] = sprintf( '</%1$s>', $list_tag );
-		$out[] = '</div>';
-
-		return apply_filters( 'rank_math/schema/block/howto/content', join( "\n", $out ), $out, $attributes );
 	}
 
 	/**
@@ -442,7 +442,7 @@ class Block_HowTo extends Block {
 	}
 
 	/**
-	 * Has steps.
+	 * Function to check the HowTo block have steps data.
 	 *
 	 * @param array $attributes Array of attributes.
 	 *

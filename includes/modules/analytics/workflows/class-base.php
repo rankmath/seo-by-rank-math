@@ -109,4 +109,27 @@ abstract class Base {
 	private function get_schedule_gap() {
 		return $this->do_filter( 'analytics/schedule_gap', 30 );
 	}
+
+	/**
+	 * Check if google profile is updated.
+	 *
+	 * @param string $param Google profile param name.
+	 * @param string $prev Previous profile data.
+	 * @param string $new  New posted profile data.
+	 *
+	 * @return boolean
+	 */
+	public function is_profile_updated( $param, $prev, $new ) {
+		if (
+			! is_null( $prev ) &&
+			! is_null( $new ) &&
+			isset( $prev[ $param ] ) &&
+			isset( $new[ $param ] ) &&
+			$prev[ $param ] === $new[ $param ]
+		) {
+			return false;
+		}
+
+		return true;
+	}
 }

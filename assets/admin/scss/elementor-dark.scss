@@ -120,6 +120,12 @@
                         }
                     }
                 }
+
+                .#{$namespace}-tab-content-advanced, .#{$namespace}-tab-content-schema {
+                    > .components-panel__body {
+                        background: #404349;
+                    }
+                }
             }
         }
 
@@ -343,7 +349,7 @@
 
         // Social Preview.
         .rank-math-social-preview {
-            &-twitter {
+            &-twitter, &-facebook {
                 .rank-math-social-preview {
                     &-meta {
                         .social-name {
@@ -374,6 +380,13 @@
                             color: #d9d9d9;
                         }
                     }
+                }
+            }
+
+            &-facebook {
+                .rank-math-social-preview-meta {
+                    border-color: #2f3336;
+                    background: #1d2022;
                 }
             }
         }

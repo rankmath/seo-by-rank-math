@@ -1,6 +1,6 @@
 <?php
 /**
- * The 404 Monitor Module
+ * The admin-side code for the 404 Monitor module.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -28,8 +28,6 @@ class Admin extends Base {
 
 	/**
 	 * The Constructor.
-	 *
-	 * @codeCoverageIgnore
 	 */
 	public function __construct() {
 		$directory = dirname( __FILE__ );
@@ -58,8 +56,6 @@ class Admin extends Base {
 
 	/**
 	 * Initialize.
-	 *
-	 * @codeCoverageIgnore
 	 */
 	public function init() {
 		$action = WordPress::get_request_action();
@@ -95,7 +91,8 @@ class Admin extends Base {
 	}
 
 	/**
-	 * Clear logs.
+	 * Clears all 404 logs, by truncating the log table.
+	 * Fired with the `$this->$action();` line inside the `init()` method.
 	 */
 	protected function do_clear_log() {
 		$count = DB::get_count();
@@ -109,9 +106,7 @@ class Admin extends Base {
 	}
 
 	/**
-	 * Register admin page.
-	 *
-	 * @codeCoverageIgnore
+	 * Register the 404 Monitor admin page.
 	 */
 	public function register_admin_page() {
 
@@ -158,9 +153,7 @@ class Admin extends Base {
 	}
 
 	/**
-	 * Add module settings into general optional panel.
-	 *
-	 * @codeCoverageIgnore
+	 * Add module settings tab in the General Settings.
 	 *
 	 * @param array $tabs Array of option panel tabs.
 	 *
@@ -186,9 +179,7 @@ class Admin extends Base {
 	}
 
 	/**
-	 * Add stats into admin dashboard.
-	 *
-	 * @codeCoverageIgnore
+	 * Add stats in the admin dashboard widget.
 	 */
 	public function dashboard_widget() {
 		$data = DB::get_stats();
@@ -219,7 +210,6 @@ class Admin extends Base {
 	/**
 	 * Output page title actions.
 	 *
-	 * @param bool $is_editing User is editing a redirection.
 	 * @return void
 	 */
 	public function page_title_actions() {
@@ -235,6 +225,12 @@ class Admin extends Base {
 				'label' => __( 'Learn More', 'rank-math' ),
 			],
 		];
+
+		/**
+		 * Filters the title actions available on the 404 Monitor page.
+		 *
+		 * @param array $actions Multidimensional array of actions to show.
+		 */
 		$actions = $this->do_filter( '404_monitor/page_title_actions', $actions );
 
 		foreach ( $actions as $action_name => $action ) {

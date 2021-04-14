@@ -47,7 +47,8 @@ const getTabs = () => {
 /**
  * Editor tab panel component.
  *
- * @param {Object} props This component's props.
+ * @param {Object} props             The props data.
+ * @param {string} props.selectedTab The selected tab name.
  */
 const EditorTabPanel = ( { selectedTab } ) => {
 	return (

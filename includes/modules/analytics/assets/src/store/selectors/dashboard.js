@@ -49,7 +49,7 @@ export function getKeywordsSummary( state ) {
 }
 
 /**
- * Get keywords rows.
+ * Get all keywords rows.
  *
  * @param {Object} state The app state.
  *
@@ -60,13 +60,13 @@ export function getKeywordsRowsAll( state ) {
 }
 
 /**
- * Get keywords rows.
+ * Get keywords rows filtered by page.
  *
  * @param {Object} state   The app state.
  * @param {number} page    The page number.
- * @param {Object} filters The filters.
- * @return {string} Return keywords rows.
+ * 
+ * @return {string} Return filtered keywords rows.
  */
-export function getKeywordsRows( state, page, filters ) {
+export function getKeywordsRows( state, page ) {
 	return state.appData.keywordsRows[ page ]
 }

@@ -18,9 +18,14 @@ import { getSnippetIcon } from '@helpers/snippetIcon'
 import DeleteConfirmation from './DeleteConfirmation'
 
 /**
- * Schema list component.
+ * Show the lists of schemas used in the Current Post/Term.
  *
- * @param {Object} props This component's props.
+ * @param {Object}     props               The props data.
+ * @param {Object}     props.schemas       Schema data.
+ * @param {function()} props.edit          A callback to run when clicked on Edit button.
+ * @param {function()} props.trash         A callback to run when clicked on Trash button.
+ * @param {function()} props.preview       A callback to run when clicked on Preview button.
+ * @param {boolean}    props.showProNotice Whether to show Pro notice.
  */
 const SchemaList = ( { schemas, edit, trash, preview, showProNotice } ) => {
 	if ( isEmpty( schemas ) ) {

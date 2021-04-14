@@ -65,9 +65,9 @@ const CodeValidation = () => {
 					<div className="rank-math-cta-box blue-ticks width-70">
 						<h3>{ __( 'Preview & Validate Your Schema Markup', 'rank-math' ) }</h3>
 						<ul>
-							<li>{ __( 'Rank Math PRO is coming this fall', 'rank-math' ) }</li>
-							<li>{ __( 'Advanced Schema code viewer', 'rank-math' ) }</li>
+							<li>{ __( 'Advanced Schema markup viewer', 'rank-math' ) }</li>
 							<li>{ __( 'Live testing with Google', 'rank-math' ) }</li>
+							<li>{ __( 'No other SEO plugin offers this feature', 'rank-math' ) }</li>
 						</ul>
 						<a className="button button-primary is-green" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Code+Validation&utm_campaign=WP" rel="noreferrer noopener" target="_blank">{ __( 'Upgrade', 'rank-math' ) }</a>
 					</div>

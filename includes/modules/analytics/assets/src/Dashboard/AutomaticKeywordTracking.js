@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { map } from 'lodash'
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
@@ -12,16 +7,8 @@ import { withFilters } from '@wordpress/components'
 /**
  * Internal dependencies
  */
-import ItemStat from '@scShared/ItemStat'
 import List from '@scShared/woocommerce/List'
-
-const convertNumbers = ( items ) => {
-	return map( items, ( item ) => {
-		item.title = item.query
-		item.content = <ItemStat { ...item.position } />
-		return item
-	} )
-}
+import { convertNumbers } from '../functions'
 
 const AutomaticKeywordTracking = () => {
 	const losingKeywords = {

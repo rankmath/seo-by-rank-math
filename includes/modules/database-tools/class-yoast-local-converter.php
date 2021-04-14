@@ -1,6 +1,6 @@
 <?php
 /**
- * The Yoast Block Converter.
+ * The Yoast Local Business Block Converter.
  *
  * @since      1.0.48
  * @package    RankMath
@@ -32,7 +32,7 @@ class Yoast_Local_Converter {
 	];
 
 	/**
-	 * Convert blocks to rank math
+	 * Convert Local Business blocks to Rank Math.
 	 *
 	 * @param array $block Block to convert.
 	 *

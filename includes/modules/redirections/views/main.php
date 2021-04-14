@@ -7,16 +7,17 @@
  */
 
 use RankMath\Helper;
+use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
 $redirections = Helper::get_module( 'redirections' )->admin;
 $redirections->table->prepare_items();
 
-$is_new     = isset( $_GET['new'] );
-$is_editing = ! empty( $_GET['url'] ) || ! empty( $_GET['urls'] ) || ! empty( $_REQUEST['log'] ) || ! empty( $_REQUEST['redirect_uri'] ) || $redirections->form->is_editing();
+$is_new     = (bool) Param::get( 'new' );
+$is_editing = ! empty( Param::get( 'url' ) ) || ! empty( Param::get( 'urls' ) ) || ! empty( Param::request( 'log' ) ) || ! empty( Param::request( 'redirect_uri' ) ) || $redirections->form->is_editing();
 
-$is_importexport = ! empty( $_GET['importexport'] );
+$is_importexport = ! empty( Param::get( 'importexport' ) );
 ?>
 <div class="wrap rank-math-redirections-wrap">
 
