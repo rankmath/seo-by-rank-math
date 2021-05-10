@@ -50,7 +50,7 @@ class Summary {
 			$stats = (object) [
 				'clicks'      => 0,
 				'impressions' => 0,
-				'postions'    => 0,
+				'position'    => 0,
 			];
 		}
 
