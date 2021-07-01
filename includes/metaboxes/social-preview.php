@@ -30,7 +30,7 @@ if ( Admin_Helper::is_post_edit() ) {
 $fb_thumbnail = $fb_thumbnail ? absint( $fb_thumbnail ) : $thumbnail;
 if ( ! is_string( $fb_thumbnail ) ) {
 	$image_src    = wp_get_attachment_image_src( $fb_thumbnail, 'full' );
-	$fb_thumbnail = $image_src[0];
+	$fb_thumbnail = is_array( $image_src ) && ! empty( $image_src[0] ) ? $image_src[0] : '';
 }
 
 // Twitter Image.
@@ -47,11 +47,11 @@ if ( Admin_Helper::is_post_edit() ) {
 $tw_thumbnail = $tw_thumbnail ? absint( $tw_thumbnail ) : $thumbnail;
 if ( ! is_string( $tw_thumbnail ) ) {
 	$image_src    = wp_get_attachment_image_src( $tw_thumbnail, 'full' );
-	$tw_thumbnail = $image_src[0];
+	$tw_thumbnail = is_array( $image_src ) && ! empty( $image_src[0] ) ? $image_src[0] : '';
 }
 
 // Publisher URL.
-$publisher_url = str_replace( array( 'http://', 'https://' ), '', get_bloginfo( 'url' ) );
+$publisher_url = str_replace( [ 'http://', 'https://' ], '', get_bloginfo( 'url' ) );
 $publisher_url = explode( '/', $publisher_url );
 $publisher_url = isset( $publisher_url[0] ) ? $publisher_url[0] : '';
 
