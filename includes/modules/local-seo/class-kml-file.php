@@ -42,7 +42,7 @@ class KML_File {
 	 * Set up rewrite rules.
 	 */
 	public function init() {
-		add_rewrite_rule( 'locations\.kml$', 'index.php?sitemap=locations', 'top' );
+		add_rewrite_rule( Router::get_sitemap_base() . 'locations\.kml$', 'index.php?sitemap=locations', 'top' );
 	}
 
 	/**
@@ -51,7 +51,12 @@ class KML_File {
 	 * @param array $headers HTTP headers.
 	 */
 	public function remove_x_robots_tag( $headers ) {
-		if ( ! isset( $headers['X-Robots-Tag'] ) || '/locations.kml' !== Param::server( 'REQUEST_URI' ) ) {
+		if ( ! isset( $headers['X-Robots-Tag'] ) ) {
+			return $headers;
+		}
+
+		$url = array_filter( explode( '/', Param::server( 'REQUEST_URI' ) ) );
+		if ( 'locations.kml' !== end( $url ) ) {
 			return $headers;
 		}
 

@@ -69,19 +69,21 @@ export default () => {
 					return
 				}
 
-				controllers.push(
-					<TextControl
-						key={ slug }
-						label={ __( startCase( slug ), 'rank-math' ) }
-						value={ attributes[ slug ] }
-						type="string"
-						onChange={ ( nextID ) => {
-							const attrs = {}
-							attrs[ slug ] = nextID
-							setAttributes( attrs )
-						} }
-					/>
-				)
+				if ( 'className' !== slug ) {
+					controllers.push(
+						<TextControl
+							key={ slug }
+							label={ __( startCase( slug ), 'rank-math' ) }
+							value={ attributes[ slug ] }
+							type="string"
+							onChange={ ( nextID ) => {
+								const attrs = {}
+								attrs[ slug ] = nextID
+								setAttributes( attrs )
+							} }
+						/>
+					)
+				}
 			} )
 
 			return (

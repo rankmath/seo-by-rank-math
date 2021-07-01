@@ -163,10 +163,14 @@ class Block_HowTo extends Block {
 
 		$list_tag = $this->get_list_style( $attributes['listStyle'] );
 		$item_tag = $this->get_list_item_style( $attributes['listStyle'] );
+		$class    = 'rank-math-block';
+		if ( ! empty( $attributes['className'] ) ) {
+			$class .= ' ' . esc_attr( $attributes['className'] );
+		}
 
 		// HTML.
 		$out   = [];
-		$out[] = sprintf( '<div id="rank-math-howto" class="rank-math-block"%s>', $this->get_styles( $attributes ) );
+		$out[] = sprintf( '<div id="rank-math-howto" class="%1$s" %2$s>', $class, $this->get_styles( $attributes ) );
 
 		// HeaderContent.
 		$out[] = '<div class="rank-math-howto-description">';

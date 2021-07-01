@@ -15,7 +15,7 @@ export const link = {
 	name: 'rankmath/link',
 	title: __( 'Link', 'rank-math' ),
 	tagName: 'a',
-	className: 'rank-math-link',
+	className: null,
 	attributes: {
 		url: 'href',
 		type: 'data-type',

@@ -11,19 +11,19 @@
 		}
 
 		&.nob {
-			border: 0;
+			border: 0 !important;
 		}
 
 		&.nop {
-			padding: 0;
+			padding: 0 !important;
 		}
 
 		&.nopt {
-			padding-top: 0;
+			padding-top: 0 !important;
 		}
 
 		&.nopb {
-			padding-bottom: 0;
+			padding-bottom: 0 !important;
 		}
 
 		&:not(.cmb-type-title) {

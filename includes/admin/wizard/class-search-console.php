@@ -11,6 +11,8 @@
 namespace RankMath\Wizard;
 
 use RankMath\KB;
+use RankMath\Helper;
+use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -73,6 +75,12 @@ class Search_Console implements Wizard_Step {
 	 * @return bool
 	 */
 	public function save( $values, $wizard ) {
+		$settings = rank_math()->settings->all_raw();
+
+		$settings['general']['console_email_reports'] = Param::post( 'console_email_reports' );
+
+		Helper::update_all_settings( $settings['general'], null, null );
+
 		return true;
 	}
 }

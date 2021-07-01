@@ -25,7 +25,19 @@ trait Api {
 	 */
 	public static function add_notification( $message, $options = [] ) {
 		$options['classes'] = ! empty( $options['classes'] ) ? $options['classes'] . ' rank-math-notice' : 'rank-math-notice';
-		rank_math()->notification->add( $message, $options );
+		$notification       = compact( 'message', 'options' );
+
+		/**
+		 * Filter notification message & arguments before adding.
+		 * Pass a falsy value to stop the notification from getting added.
+		 */
+		apply_filters( 'rank_math/admin/add_notification', $notification );
+
+		if ( empty( $notification ) || ! is_array( $notification ) ) {
+			return;
+		}
+
+		rank_math()->notification->add( $notification['message'], $notification['options'] );
 	}
 
 	/**

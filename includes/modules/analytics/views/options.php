@@ -76,6 +76,7 @@ $buttons     = '<br>' .
 
 $buttons .= '<br>' . join( '', $db_info );
 
+// Translators: placeholder is a link to rankmath.com, with "free version" as the anchor text.
 $description = sprintf( __( 'Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly.', 'rank-math' ), '<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Analytics%20DB%20Option&utm_campaign=WP" target="_blank" rel="noopener noreferrer">' . __( 'free version', 'rank-math' ) . '</a>' );
 $description = apply_filters_deprecated( 'rank_math/analytics/options/cahce_control/description', [ $description ], '1.0.61.1', 'rank_math/analytics/options/cache_control/description' );
 $description = apply_filters( 'rank_math/analytics/options/cache_control/description', $description );
@@ -100,3 +101,46 @@ $cmb->add_field(
 		'after_field'     => $buttons,
 	]
 );
+
+$preview_url = home_url( '?rank_math_analytics_report_preview=1' );
+$title       = esc_html__( 'Email Reports', 'rank-math' );
+// Translators: Placeholders are the opening and closing tag for the link.
+$description = sprintf( esc_html__( 'Receive periodic SEO Performance reports via email. Once enabled and options are saved, you can see %1$s the preview here%2$s.', 'rank-math' ), '<a href="' . esc_url_raw( $preview_url ) . '" target="_blank">', '</a>' );
+$cmb->add_field(
+	[
+		'id'      => 'email_reports_title',
+		'type'    => 'raw',
+		'content' => sprintf( '<div class="cmb-form cmb-row nopb"><header class="email-reports-title"><h3>%1$s</h3><p class="description">%2$s</p></header></div>', $title, $description ),
+	]
+);
+
+$cmb->add_field(
+	[
+		'id'          => 'console_email_reports',
+		'type'        => 'toggle',
+		'name'        => __( 'Email Reports', 'rank-math' ),
+		'description' => __( 'Turn on email reports.', 'rank-math' ),
+		'default'     => 'on',
+		'classes'     => 'nob',
+	]
+);
+
+$is_pro_active = defined( 'RANK_MATH_PRO_FILE' );
+$pro_badge     = '<span class="rank-math-pro-badge"><a href="https://rankmath.com/kb/seo-email-reporting/?utm_source=Plugin&utm_medium=Email%20Frequency%20Toggle&utm_campaign=WP" target="_blank" rel="noopener noreferrer">' . __( 'PRO', 'rank-math' ) . '</a></span>';
+$args          = [
+	'id'         => 'console_email_frequency',
+	'type'       => 'select',
+	'name'       => esc_html__( 'Email Frequency', 'rank-math' ) . ( ! $is_pro_active ? $pro_badge : '' ),
+	'desc'       => wp_kses_post( __( 'Email report frequency.', 'rank-math' ) ),
+	'default'    => 'monthly',
+	'options'    => [
+		'monthly' => esc_html__( 'Every 30 days', 'rank-math' ),
+	],
+	'dep'        => [ [ 'console_email_reports', 'on' ] ],
+	'attributes' => ! $is_pro_active ? [ 'disabled' => 'disabled' ] : [],
+];
+
+if ( ! $is_pro_active ) {
+	$args['after_row'] = '<script type="text/javascript">jQuery( function() { jQuery( ".cmb2-id-console-email-frequency" ).css( "cursor", "pointer" ).on( "click", function(e) { var $target = jQuery( e.target ); if ( $target.is("a") || $target.closest("a").length ) { return true; } window.open( jQuery( ".rank-math-pro-badge a", this ).attr( "href" ), "_blank" ); } ); return false; } );</script>';
+}
+$cmb->add_field( $args );

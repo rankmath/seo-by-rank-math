@@ -101,7 +101,7 @@ class Admin_Init {
 	 * Load setup wizard.
 	 */
 	private function load_setup_wizard() {
-		if ( filter_input( INPUT_GET, 'page' ) === 'rank-math-wizard' || filter_input( INPUT_POST, 'action' ) === 'rank_math_save_wizard' ) {
+		if ( Helper::is_wizard() ) {
 			new Setup_Wizard();
 		}
 	}

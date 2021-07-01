@@ -308,6 +308,11 @@ class Shortcodes {
 	 * Output google map.
 	 */
 	private function display_map() {
+		$api_key = Helper::get_settings( 'titles.maps_api_key' );
+		if ( ! $api_key ) {
+			return;
+		}
+
 		$address = Helper::get_settings( 'titles.local_address' );
 		if ( false === $address ) {
 			return;
@@ -319,7 +324,7 @@ class Shortcodes {
 		 * @param string $address
 		 */
 		$address = $this->do_filter( 'shortcode/contact/map_address', implode( ' ', $address ) );
-		$address = $this->do_filter( 'shortcode/contact/map_iframe_src', '//maps.google.com/maps?q=' . rawurlencode( $address ) . '&z=15&output=embed&key=' . rawurlencode( Helper::get_settings( 'titles.maps_api_key' ) ) );
+		$address = $this->do_filter( 'shortcode/contact/map_iframe_src', '//maps.google.com/maps?q=' . rawurlencode( $address ) . '&z=15&output=embed&key=' . rawurlencode( $api_key ) );
 		?>
 		<iframe src="<?php echo esc_url( $address ); ?>"></iframe>
 		<?php

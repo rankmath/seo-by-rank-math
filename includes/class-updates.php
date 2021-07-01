@@ -55,6 +55,7 @@ class Updates implements Runner {
 		'1.0.56'   => 'updates/update-1.0.56.php',
 		'1.0.62'   => 'updates/update-1.0.62.php',
 		'1.0.63'   => 'updates/update-1.0.63.php',
+		'1.0.65'   => 'updates/update-1.0.65.php',
 	];
 
 	/**
@@ -95,7 +96,7 @@ class Updates implements Runner {
 
 		// Save install date.
 		if ( false === boolval( get_option( 'rank_math_install_date' ) ) ) {
-			update_option( 'rank_math_install_date', current_time( 'timestamp' ) );
+			update_option( 'rank_math_install_date', current_time( 'timestamp' ) ); // phpcs:ignore
 		}
 
 		// Clear rollback option if necessary.

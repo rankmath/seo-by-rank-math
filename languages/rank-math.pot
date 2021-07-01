@@ -1897,6 +1897,10 @@ msgstr ""
 msgid "Thank you for updating Rank Math! We've completely revamped our Analytics module with Google Analytics & Google Search Console integrations. For a seamless experience, please re-authenticate your Google account. %1$sClick here to Connect%2$s"
 msgstr ""
 
+#. translators: placeholders are the opening and closing anchor tags.
+msgid "Rank Math: Introducing SEO Performance Reports via Email. %1$sClick here to enable it%2$s."
+msgstr ""
+
 #. translators: %1$s: post type label, %2$s: edit redirection URL.
 #. translators: %1$s: post type label, %2$s: edit redirection URL.
 #. translators: %1$s: term name, %2$s: edit redirection URL.
@@ -2622,6 +2626,21 @@ msgid "Missing some posts/pages in the Analytics data? Clear the index and build
 msgstr ""
 
 msgid "Rebuild Index"
+msgstr ""
+
+#. translators: placeholder is "rankmath.com" as a link.
+msgid "This email was sent to you as a registered member of %s."
+msgstr ""
+
+#. translators: placeholder is "click here" as a link.
+msgid "To update your email preferences, %s."
+msgstr ""
+
+msgid "click here"
+msgstr ""
+
+#. translators: placeholder is the site URL.
+msgid "Rank Math [SEO Report] - %s"
 msgstr ""
 
 msgid "Sorry, no post found for given id."
@@ -4612,6 +4631,15 @@ msgstr ""
 msgid "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module."
 msgstr ""
 
+msgid "Email Reports"
+msgstr ""
+
+msgid "Receive Analytics reports periodically in email."
+msgstr ""
+
+msgid "Learn more about Email Reports."
+msgstr ""
+
 #. translators: sitename
 msgid "Your Website: %s"
 msgstr ""
@@ -4763,6 +4791,7 @@ msgstr ""
 msgid "Cancel Fetching"
 msgstr ""
 
+#. translators: placeholder is a link to rankmath.com, with "free version" as the anchor text.
 msgid "Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly."
 msgstr ""
 
@@ -4770,6 +4799,22 @@ msgid "free version"
 msgstr ""
 
 msgid "Analytics Database"
+msgstr ""
+
+#. translators: Placeholders are the opening and closing tag for the link.
+msgid "Receive periodic SEO Performance reports via email. Once enabled and options are saved, you can see %1$s the preview here%2$s."
+msgstr ""
+
+msgid "Turn on email reports."
+msgstr ""
+
+msgid "Email Frequency"
+msgstr ""
+
+msgid "Email report frequency."
+msgstr ""
+
+msgid "Every 30 days"
 msgstr ""
 
 msgid "Group Title"
@@ -5473,4 +5518,32 @@ msgid "Brand"
 msgstr ""
 
 msgid "Select Product Brand Taxonomy to use in Schema.org & OpenGraph markup."
+msgstr ""
+
+msgid "Rank Math PRO"
+msgstr ""
+
+msgid "SEO Report of Your Website"
+msgstr ""
+
+msgid "FULL REPORT"
+msgstr ""
+
+msgid "External Link Icon"
+msgstr ""
+
+#. translators: don't translate the variable names between the #hashes#.
+msgid "Last ###PERIOD_DAYS### Days"
+msgstr ""
+
+msgid "Data Chart"
+msgstr ""
+
+msgid "Top 3 Positions"
+msgstr ""
+
+msgid "4-10 Positions"
+msgstr ""
+
+msgid "11-50 Positions"
 msgstr ""
