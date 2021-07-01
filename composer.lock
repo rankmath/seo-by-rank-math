@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a6bcf47bdad71612411e9347e5762c0",
+    "content-hash": "20a67d5f76aa11a423c5a0f0cb7edf3d",
     "packages": [
         {
             "name": "a5hleyrich/wp-background-processing",
@@ -187,7 +187,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/5f291a421ecb7b258f522b53427fc4ce552d8851",
                 "reference": "5f291a421ecb7b258f522b53427fc4ce552d8851",
-
                 "shasum": ""
             },
             "require": {

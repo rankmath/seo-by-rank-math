@@ -9,7 +9,7 @@ import { truncate, isUndefined } from 'lodash'
 import escapeRegex from '@helpers/escapeRegex'
 
 export default function( keyword, text, length, separator ) {
-	if ( '' === keyword || isUndefined( text ) ) {
+	if ( isUndefined( text ) ) {
 		return text
 	}
 
@@ -18,6 +18,10 @@ export default function( keyword, text, length, separator ) {
 		length,
 		separator: separator || ' ',
 	} )
+
+	if ( '' === keyword ) {
+		return text
+	}
 
 	return text.replace(
 		new RegExp( escapeRegex( keyword ), 'gi' ),

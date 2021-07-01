@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom'
  */
 import { __ } from '@wordpress/i18n'
 import { applyFilters } from '@wordpress/hooks'
+import { withFilters } from '@wordpress/components'
 import { withSelect, dispatch } from '@wordpress/data'
 
 /**
@@ -16,7 +17,7 @@ import { withSelect, dispatch } from '@wordpress/data'
  */
 import humanNumber from '@helpers/humanNumber'
 import TableCard from '@scShared/woocommerce/Table'
-import { isPro, processRows, getPageOffset, filterShownHeaders } from '../functions'
+import { processRows, getPageOffset, filterShownHeaders } from '../functions'
 
 const TABLE_PREF_KEY = 'performance'
 
@@ -119,20 +120,20 @@ const PostsTable = ( props ) => {
 }
 
 export default withRouter(
-	withSelect( ( select, props ) => {
-		const query = props.match.params
-		const { paged = 1 } = query
+	withFilters( 'rankMath.analytics.postsTable' )(
+		withSelect( ( select, props ) => {
+			const query = props.match.params
+			const { paged = 1 } = query
 
-		return {
-			query,
-			history: props.history,
-			tableData: isPro()
-				? select( 'rank-math' ).getPostsRows( paged, {} )
-				: select( 'rank-math' ).getPostsRowsByObjects( paged, {} ),
-			summary: select( 'rank-math' ).getPostsSummary(),
-			userPreference: select( 'rank-math' ).getUserColumnPreference(
-				TABLE_PREF_KEY
-			),
-		}
-	} )( PostsTable )
+			return {
+				query,
+				history: props.history,
+				tableData: select( 'rank-math' ).getPostsRowsByObjects( paged, {} ),
+				summary: select( 'rank-math' ).getPostsSummary(),
+				userPreference: select( 'rank-math' ).getUserColumnPreference(
+					TABLE_PREF_KEY
+				),
+			}
+		} )( PostsTable )
+	)
 )

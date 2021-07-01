@@ -167,7 +167,7 @@ class Options {
 
 			include $located;
 
-			$this->do_filter( "admin/settings/{$id}", $cmb, $tab );
+			$this->do_action( "admin/settings/{$id}", $cmb, $tab );
 
 			$cmb->add_field(
 				[

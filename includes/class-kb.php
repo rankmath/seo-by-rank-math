@@ -139,7 +139,7 @@ class KB {
 		static $manager = null;
 
 		if ( null === $manager ) {
-			$manager = new self;
+			$manager = new self();
 			$manager->register();
 		}
 

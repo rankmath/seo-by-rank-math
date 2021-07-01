@@ -26,11 +26,12 @@ class Posts extends Objects {
 	/**
 	 * Get post data.
 	 *
-	 * @param int $id Post id.
+	 * @param  WP_REST_Request $request post object.
 	 *
 	 * @return object
 	 */
-	public function get_post( $id ) {
+	public function get_post( $request ) {
+		$id   = $request->get_param( 'id' );
 		$post = DB::objects()
 			->where( 'object_id', $id )
 			->one();
@@ -82,13 +83,14 @@ class Posts extends Objects {
 
 		// Get additional report data.
 		$post = apply_filters( 'rank_math/analytics/single/report', $post, $this );
-
-		return array_merge(
+		$data = array_merge(
 			(array) $post,
 			(array) $metrices
 		);
-	}
 
+		return apply_filters( 'rank_math/analytics/post_data', $data, $request );
+
+	}
 	/**
 	 * Get posts by objects.
 	 *
@@ -112,7 +114,7 @@ class Posts extends Objects {
 		$console = $this->get_analytics_data(
 			[
 				'offset'    => 0, // Here offset should always zero.
-				'perpage'   => $per_page,
+				'perpage'   => $objects['rowsFound'],
 				'sub_where' => " AND page IN ('" . join( "', '", $pages ) . "')",
 			]
 		);
@@ -131,6 +133,16 @@ class Posts extends Objects {
 			}
 
 			$new_rows[ $page ] = $object;
+		}
+
+		$count    = count( $new_rows );
+
+		if ( $offset + 25 <= $count ) {
+			$new_rows = array_slice( $new_rows, $offset, 25 );
+
+		} else {
+			$rest     = $count - $offset;
+			$new_rows = array_slice( $new_rows, $offset, $rest );
 		}
 
 		return [

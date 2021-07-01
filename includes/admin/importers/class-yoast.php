@@ -217,18 +217,16 @@ class Yoast extends Plugin_Importer {
 		$this->set_primary_term( $post_ids );
 
 		$hash = [
-			'_yoast_wpseo_title'                    => 'rank_math_title',
-			'_yoast_wpseo_metadesc'                 => 'rank_math_description',
-			'_yoast_wpseo_focuskw'                  => 'rank_math_focus_keyword',
-			'_yoast_wpseo_canonical'                => 'rank_math_canonical_url',
-			'_yoast_wpseo_opengraph-title'          => 'rank_math_facebook_title',
-			'_yoast_wpseo_opengraph-description'    => 'rank_math_facebook_description',
-			'_yoast_wpseo_twitter-title'            => 'rank_math_twitter_title',
-			'_yoast_wpseo_twitter-description'      => 'rank_math_twitter_description',
-			'_yoast_wpseo_bctitle'                  => 'rank_math_breadcrumb_title',
-			'_yoast_wpseo_newssitemap-stocktickers' => 'rank_math_news_sitemap_stock_tickers',
-			'_yoast_wpseo_newssitemap-genre'        => 'rank_math_news_sitemap_genres',
-			'_yoast_wpseo_newssitemap-exclude'      => 'rank_math_news_sitemap_exclude',
+			'_yoast_wpseo_title'                 => 'rank_math_title',
+			'_yoast_wpseo_metadesc'              => 'rank_math_description',
+			'_yoast_wpseo_focuskw'               => 'rank_math_focus_keyword',
+			'_yoast_wpseo_canonical'             => 'rank_math_canonical_url',
+			'_yoast_wpseo_opengraph-title'       => 'rank_math_facebook_title',
+			'_yoast_wpseo_opengraph-description' => 'rank_math_facebook_description',
+			'_yoast_wpseo_twitter-title'         => 'rank_math_twitter_title',
+			'_yoast_wpseo_twitter-description'   => 'rank_math_twitter_description',
+			'_yoast_wpseo_bctitle'               => 'rank_math_breadcrumb_title',
+			'_yoast_wpseo_newssitemap-exclude'   => 'rank_math_news_sitemap_exclude',
 		];
 
 		foreach ( $post_ids as $post ) {
@@ -881,7 +879,6 @@ class Yoast extends Plugin_Importer {
 
 		$this->get_settings();
 		$this->sitemap['news_sitemap_publication_name'] = ! empty( $yoast_news['news_sitemap_name'] ) ? $yoast_news['news_sitemap_name'] : '';
-		$this->sitemap['news_sitemap_default_genres']   = ! empty( $yoast_news['news_sitemap_default_genre'] ) ? [ $yoast_news['news_sitemap_default_genre'] ] : [];
 		if ( ! empty( $yoast_news['news_sitemap_include_post_types'] ) ) {
 			$this->sitemap['news_sitemap_post_type'] = array_keys( $yoast_news['news_sitemap_include_post_types'] );
 			$this->add_excluded_news_terms( $yoast_news );

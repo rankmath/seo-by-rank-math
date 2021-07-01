@@ -83,7 +83,7 @@ class Watcher {
 			'id'                  => get_post_meta( $post_id, 'rank_math_analytic_object_id', true ),
 			'created'             => get_the_modified_date( 'Y-m-d H:i:s', $post_id ),
 			'title'               => get_the_title( $post_id ),
-			'page'                => Stats::get_relative_url( get_permalink( $post_id ) ),
+			'page'                => str_replace( home_url(), '', get_permalink( $post_id ) ),
 			'object_type'         => 'post',
 			'object_subtype'      => $post_type,
 			'object_id'           => $post_id,

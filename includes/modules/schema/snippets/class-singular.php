@@ -54,10 +54,6 @@ class Singular implements Snippet {
 		}
 
 		$entity = $object->process( $data, $jsonld );
-		if ( ! empty( $entity['image'] ) && 'video' === $schema ) {
-			$entity['thumbnailUrl'] = $entity['image']['url'];
-			unset( $entity['image'] );
-		}
 
 		$data['richSnippet'] = $this->do_filter( $hook . '_entity', $entity );
 
@@ -133,20 +129,8 @@ class Singular implements Snippet {
 	 */
 	private function get_schema_class( $schema ) {
 		$data = [
-			'article'    => '\\RankMath\\Schema\\Article',
-			'book'       => '\\RankMath\\Schema\\Book',
-			'course'     => '\\RankMath\\Schema\\Course',
-			'event'      => '\\RankMath\\Schema\\Event',
-			'jobposting' => '\\RankMath\\Schema\\JobPosting',
-			'music'      => '\\RankMath\\Schema\\Music',
-			'recipe'     => '\\RankMath\\Schema\\Recipe',
-			'restaurant' => '\\RankMath\\Schema\\Restaurant',
-			'video'      => '\\RankMath\\Schema\\Video',
-			'person'     => '\\RankMath\\Schema\\Person',
-			'review'     => '\\RankMath\\Schema\\Review',
-			'service'    => '\\RankMath\\Schema\\Service',
-			'software'   => '\\RankMath\\Schema\\Software',
-			'product'    => '\\RankMath\\Schema\\Product',
+			'article' => '\\RankMath\\Schema\\Article',
+			'product' => '\\RankMath\\Schema\\Product',
 		];
 
 		if ( isset( $data[ $schema ] ) && class_exists( $data[ $schema ] ) ) {

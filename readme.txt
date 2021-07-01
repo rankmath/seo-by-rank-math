@@ -5,11 +5,11 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.7
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.65
+Stable tag: 1.0.66
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
-Rank Math SEO is a revolutionary WordPress SEO plugin that combines the features of many SEO tools in a single package & helps you multiply your traffic.
+Rank Math SEO is the Best WordPress SEO plugin combines the features of many SEO tools in a single package & helps you multiply your SEO traffic.
 
 == Description ==
 
@@ -565,20 +565,18 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.65 [Jun 3, 2021] =
-* Added: [NEW!] [HUGE!] *[Introducing SEO Performance Reports via Email](https://rankmath.com/kb/seo-email-reporting/)*. Track monthly changes related to [website traffic](https://rankmath.com/kb/analytics/), impressions, total [keywords](https://rankmath.com/kb/how-to-find-keywords-your-website-ranks-for/) & average position
-* Added: Some new [Power Words](https://rankmath.com/blog/power-words/) for German
-* Improved: The [filter](https://rankmath.com/kb/filters-hooks-api-developer/#sitemap-credit) to remove [Sitemap](https://rankmath.com/kb/custom-sitemaps/) credits now also remove the Rank Math SEO copyright reference from the page's source
-* Improved: [Opengraph](https://rankmath.com/kb/open-graph-image-not-displaying/) tags are self-closing now
-* Improved: [Contact Shortcode](https://rankmath.com/kb/local-seo/#contact-info-shortcode) should display Google map only when the map API key is added in the [Local SEO](https://rankmath.com/kb/local-seo/) Settings
-* Removed: Duplicate Power Words from the list
-* Fixed: The [locations.kml](https://rankmath.com/kb/kml-sitemap/) file shows a [404 error](https://rankmath.com/kb/monitor-404-errors/) when the [Sitemap](https://rankmath.com/kb/sitemaps-seo-benefits/) base was changed using the filter
-* Fixed: Removed `x-robots` from `locations.kml` file as it was causing warnings inside Google Search Console
-* Fixed: The option to [open links in a new tab](https://rankmath.com/kb/open-links-in-new-window/) was not working with the IDN domains (Cyrillic)
-* Fixed: Kadence Blocks were showing the incorrect size of the link icon
-* Fixed: Rank Math SEO was adding click handler to other plugin notices
-* Fixed: The [Product](https://rankmath.com/blog/woocommerce-seo/) [redirection](https://rankmath.com/kb/setting-up-redirections/) was not working when the Product permalink was set to `/shop/%product_cat%`
-* Fixed: Text copied with the link was not showing the Link option modal inside Block Editor
-* Fixed: The core `additionalClass` field value was not getting added to the Rank Math Blocks and was causing trouble with the [HowTo Schema](https://rankmath.com/blog/howto-schema/) block
+= 1.0.66 [Jun 16, 2021] =
+* Improved: [HUGE!] Made several *significant code improvements* that have made the plugin even FASTER. Now, Rank Math is one of the most *[FASTEST SEO PLUGINS](https://rankmath.com/)*.
+* Added: New Database Tool to remove the old [Schema](https://rankmath.com/blog/schema-markup/) code from the database. The plugin is not using that data anymore after introducing the revamped [Schema Generator](https://rankmath.com/kb/schema-generator/) in version 1.0.48
+* Added: Warning notice on the plugins page when the [filter to remove everything related to Rank Math](https://rankmath.com/kb/filters-hooks-api-developer/#clear-rm-data) from the database is used
+* Added: [Filter to hide Email Reporting options](https://rankmath.com/kb/filters-hooks-api-developer/#hide-email-reporting-options)
+* Improved: [Schema Module](https://rankmath.com/kb/rich-snippets/) performance by optimizing and removing redundant code
+* Improved: Hide [Analytics](https://rankmath.com/kb/install-google-analytics/) options if Google Services are not connected
+* Improved: [Redirection](https://rankmath.com/kb/setting-up-redirections/) flow after connecting [Google Services](https://rankmath.com/kb/connect-your-google-account/) from various setting pages
+* Improved: [Description length](https://rankmath.com/kb/ideal-meta-description-length/) indicator behavior to monitor 160 character limit
+* Improved: File structure by moving assets in their respective module folders
+* Fixed: Disabling [Images in Sitemaps](https://rankmath.com/kb/configure-sitemaps/#images-in-sitemaps) option was not working
+* Fixed: Incorrect display of single post URL in the Single Post [Analytics reports](https://rankmath.com/kb/analytics/) if WordPress was installed in the subfolder. This was visible only to the admins and did not impact anything on the frontend
+* Fixed: Added missing condition to check if [WooCommerce](https://rankmath.com/blog/woocommerce-seo/) function exists in [breadcrumbs](https://rankmath.com/kb/breadcrumbs/)
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

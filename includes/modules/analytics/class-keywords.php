@@ -11,6 +11,7 @@
 namespace RankMath\Analytics;
 
 use WP_REST_Request;
+use RankMath\Analytics\Stats;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,20 +49,21 @@ class Keywords extends Posts {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_keywords_rows( WP_REST_Request $request ) {
-		$per_page = 25;
-		$offset   = ( $request->get_param( 'page' ) - 1 ) * $per_page;
-
 		// Get most recent day's keywords only.
 		$keywords = $this->get_recent_keywords();
 		$keywords = wp_list_pluck( $keywords, 'query' );
 		$keywords = array_map( 'esc_sql', $keywords );
-		$rows     = $this->get_analytics_data(
+		$keywords = array_map( 'strtolower', $keywords );
+		$per_page = 25;
+
+		$rows = $this->get_analytics_data(
 			[
 				'dimension' => 'query',
 				'objects'   => false,
 				'pageview'  => false,
-				'orderBy'   => 'impressions',
-				'offset'    => $offset,
+				'orderBy'   => ! empty( $request->get_param( 'orderby' ) ) ? $request->get_param( 'orderby' ) : 'impressions',
+				'order'     => in_array( $request->get_param( 'order' ), [ 'asc', 'desc' ], true ) ? strtoupper( $request->get_param( 'order' ) ) : 'DESC',
+				'offset'    => ( $request->get_param( 'page' ) - 1 ) * $per_page,
 				'perpage'   => $per_page,
 				'sub_where' => " AND query IN ('" . join( "', '", $keywords ) . "')",
 			]

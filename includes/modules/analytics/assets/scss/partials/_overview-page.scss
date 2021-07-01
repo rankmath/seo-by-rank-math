@@ -60,15 +60,16 @@
 
                 .#{$namespace}-seo-score-graph {
                     display: block;
-                    flex: 0 0 213px;
-                    width: 213px;
-                    height: 213px;
 
                     box-sizing: border-box;
+                    width: 213px;
+                    height: 213px;
                     margin: -1rem 1rem 0 0;
 
                     border: 1rem solid #fff;
                     border-radius: 50%;
+
+                    flex: 0 0 213px;
 
                     .recharts-label {
                         font-size: 3rem;
@@ -83,8 +84,8 @@
                 }
 
                 .#{$namespace}-list {
-                    flex-grow: 1;
                     flex: 1;
+                    flex-grow: 1;
 
                     &__item {
                         margin-bottom: 0;
@@ -225,10 +226,11 @@
                         }
 
                         &__tab-content {
+                            overflow: scroll;
+
+                            max-height: 310px;
                             margin-bottom: 0;
                             padding: 0 0 .9375rem;
-                            max-height: 310px;
-                            overflow: scroll;
 
                             background: transparent;
 
@@ -262,10 +264,12 @@
 
                             .col {
                                 box-sizing: border-box;
+
                                 flex: 0 0 100%;
 
                                 @media screen and (min-width: 48rem) {
                                     max-width: 50%;
+
                                     flex: 0 0 50%;
                                 }
                             }
@@ -275,6 +279,22 @@
                                 font-weight: 500;
                             }
                         }
+                    }
+
+                    &-tooltip {
+                        position: absolute;
+                        z-index: 999;
+                        top: 10px;
+                        right: 10px;
+                    }
+                }
+
+                &-tooltip {
+                    .analytics-dashicon {
+                        position: absolute;
+                        z-index: 999;
+                        top: 10px;
+                        right: 10px;
                     }
                 }
 
@@ -291,9 +311,9 @@
 
                     &-title {
                         overflow: hidden;
-                        max-width: 300px;
 
                         box-sizing: border-box;
+                        max-width: 300px;
                         margin-right: 10px;
 
                         white-space: nowrap;

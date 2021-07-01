@@ -5,6 +5,11 @@ import apiFetch from '@wordpress/api-fetch'
 import { dispatch } from '@wordpress/data'
 
 /**
+ * Internal dependencies
+ */
+import { filtersToUrlParams } from '../../functions'
+
+/**
  * Get analytics overview.
  *
  * @param {string} range The day range.
@@ -45,13 +50,15 @@ export function getKeywordsSummary() {
 /**
  * Get keywords rows.
  *
- * @param  {number} page Page number.
+ * @param {number} page Page number.
+ * @param {Object} filters The filters.
  */
-export function getKeywordsRows( page ) {
+export function getKeywordsRows( page, filters ) {
+	const params = filtersToUrlParams( filters, false )
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/an/keywordsRows?page=' + page,
+		path: 'rankmath/v1/an/keywordsRows?page=' + page + params,
 	} ).then( ( response ) => {
-		dispatch( 'rank-math' ).updateKeywordsRows( page, response )
+		dispatch( 'rank-math' ).updateKeywordsRows( page, response, '' === params ? 'all' : params )
 	} )
 }

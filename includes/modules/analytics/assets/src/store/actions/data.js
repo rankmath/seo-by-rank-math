@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { isUndefined } from 'lodash'
+
+/**
  * WordPress dependencies
  */
 import { select } from '@wordpress/data'
@@ -51,11 +56,15 @@ export function updateKeywordsSummary( summary ) {
  *
  * @param {number} page Page number.
  * @param {Array} rows The rows.
+ * @param {string} params The filter parameter.
  *
  * @return {Object} An action for redux.
  */
-export function updateKeywordsRows( page, rows ) {
+export function updateKeywordsRows( page, rows, params ) {
 	const data = { ...select( 'rank-math' ).getKeywordsRowsAll() }
-	data[ page ] = rows
+
+	data[ page ] = ! isUndefined( data[ page ] ) ? data[ page ] : {}
+	data[ page ][ params ] = rows
+
 	return updateAppData( 'keywordsRows', data )
 }

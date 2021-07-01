@@ -68,6 +68,10 @@ $cmb->add_field(
 	]
 );
 
+if ( ! Authentication::is_authorized() ) {
+	return;
+}
+
 $is_fetching = 'fetching' === get_option( 'rank_math_analytics_first_fetch' );
 $buttons     = '<br>' .
 	'<button class="button button-small console-cache-delete" data-days="-1">' . esc_html__( 'Delete Data', 'rank-math' ) . '</button>' .
@@ -101,6 +105,10 @@ $cmb->add_field(
 		'after_field'     => $buttons,
 	]
 );
+
+if ( RankMath\Analytics\Email_Reports::are_fields_hidden() ) {
+	return;
+}
 
 $preview_url = home_url( '?rank_math_analytics_report_preview=1' );
 $title       = esc_html__( 'Email Reports', 'rank-math' );
@@ -138,9 +146,8 @@ $args          = [
 	],
 	'dep'        => [ [ 'console_email_reports', 'on' ] ],
 	'attributes' => ! $is_pro_active ? [ 'disabled' => 'disabled' ] : [],
+	'before_row' => ! $is_pro_active ? '<div class="cmb-redirector-element" data-url="https://rankmath.com/kb/seo-email-reporting/?utm_source=Plugin&utm_medium=Email%20Frequency%20Toggle&utm_campaign=WP">' : '',
+	'after_row'  => ! $is_pro_active ? '</div>' : '',
 ];
 
-if ( ! $is_pro_active ) {
-	$args['after_row'] = '<script type="text/javascript">jQuery( function() { jQuery( ".cmb2-id-console-email-frequency" ).css( "cursor", "pointer" ).on( "click", function(e) { var $target = jQuery( e.target ); if ( $target.is("a") || $target.closest("a").length ) { return true; } window.open( jQuery( ".rank-math-pro-badge a", this ).attr( "href" ), "_blank" ); } ); return false; } );</script>';
-}
 $cmb->add_field( $args );

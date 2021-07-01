@@ -1,6 +1,6 @@
 <?php
 /**
- * Search console ui.
+ * Search console UI.
  *
  * @package    RankMath
  * @subpackage RankMath\Admin\Wizard
@@ -168,7 +168,7 @@ $analytic_classes = Helper::classnames(
 			</div>
 		</div>
 
-		<div class="cmb-row cmb-type-toggle">
+		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="https://rankmath.com/free-vs-pro/?utm_source=Plugin&utm_medium=Anonymize%20IP&utm_campaign=WP"' : ''; ?>>
 			<div class="cmb-td">
 				<label class="cmb2-toggle">
 					<input type="checkbox" class="regular-text notrack" name="anonymize-ip" id="anonymize-ip" value="on"<?php checked( $analytics['anonymize_ip'] ); ?><?php disabled( ! $is_pro_active ); ?>>
@@ -193,7 +193,7 @@ $analytic_classes = Helper::classnames(
 			</div>
 		</div>
 
-		<div class="cmb-row cmb-type-toggle">
+		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Cookieless%20IP&utm_campaign=WP"' : ''; ?>>
 			<div class="cmb-td">
 				<label class="cmb2-toggle">
 					<input type="checkbox" class="regular-text notrack" name="cookieless-ga" id="cookieless-ga" value="on"<?php checked( $analytics['cookieless_ga'] ); ?><?php disabled( ! $is_pro_active ); ?>>
@@ -218,7 +218,7 @@ $analytic_classes = Helper::classnames(
 			</div>
 		</div>
 
-		<div class="cmb-row cmb-type-toggle">
+		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Localjs%20IP&utm_campaign=WP"' : ''; ?>>
 			<div class="cmb-td">
 				<label class="cmb2-toggle">
 					<input type="checkbox" class="regular-text notrack" name="local-ga-js" id="local-ga-js" value="on"<?php checked( $analytics['local_ga_js'] ); ?><?php disabled( ! $is_pro_active ); ?>>
@@ -317,7 +317,7 @@ $adsense_classes = Helper::classnames(
 <?php
 // phpcs:enable
 
-if ( Helper::is_wizard() ) {
+if ( Helper::is_wizard() && ! RankMath\Analytics\Email_Reports::are_fields_hidden() ) {
 	?>
 	<div class="cmb-row email-reports-header text-center" style="border-top:0;">
 		<h1><?php esc_html_e( 'Email Reports', 'rank-math' ); ?></h1>

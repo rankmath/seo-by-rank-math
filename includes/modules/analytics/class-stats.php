@@ -878,13 +878,10 @@ class Stats extends Keywords {
 	 */
 	public function set_query_position( $data, $history ) {
 		foreach ( $history as $row ) {
-			if ( ! isset( $data[ $row->query ]['query'] ) ) {
-				$data[ $row->query ]['query'] = $row->query;
-			}
+			$key = strtolower( $row->query );
 
-			if ( ! isset( $data[ $row->query ]['graph'] ) ) {
-				$data[ $row->query ]['graph'] = [];
-			}
+			$data[ $key ]['query'] = isset( $data[ $key ]['query'] ) ? $data[ $key ]['query'] : $key;
+			$data[ $key ]['graph'] = isset( $data[ $key ]['graph'] ) ? $data[ $key ]['graph'] : [];
 
 			if ( ! isset( $row->formatted_date ) ) {
 				$formatted_date      = Helper::get_date( 'd M, Y', strtotime( $row->date ) );
@@ -907,16 +904,14 @@ class Stats extends Keywords {
 	 */
 	public function set_page_position_graph( $data, $history ) {
 		foreach ( $history as $row ) {
-			if ( ! isset( $data[ $row->page ]['graph'] ) ) {
-				$data[ $row->page ]['graph'] = [];
-			}
+			$data[ $row->page ]['graph'] = isset( $data[ $row->page ]['graph'] ) ? $data[ $row->page ]['graph'] : [];
 
 			if ( ! isset( $row->formatted_date ) ) {
 				$formatted_date      = Helper::get_date( 'd M, Y', strtotime( $row->date ) );
 				$row->formatted_date = $formatted_date;
 			}
-
 			$data[ $row->page ]['graph'][] = $row;
+
 		}
 
 		return $data;

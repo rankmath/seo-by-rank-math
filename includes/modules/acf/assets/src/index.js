@@ -10,7 +10,7 @@ import { debounce } from 'lodash'
 /**
  * Internal dependencies
  */
-import { collect } from './src/collector'
+import { collect } from './collector'
 import { addFilter } from '@wordpress/hooks'
 
 class App {

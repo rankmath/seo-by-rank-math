@@ -48,17 +48,17 @@ export function getPostsSummary() {
 /**
  * Get posts rows.
  *
- * @param  {number} page Page number.
+ * @param {number} page Page number.
  * @param {Object} filters The filters.
  */
 export function getPostsRows( page, filters ) {
-	const params = filtersToUrlParams( filters )
+	const params = filtersToUrlParams( filters, false )
 
 	apiFetch( {
 		method: 'GET',
 		path: 'rankmath/v1/an/postsRows?page=' + page + params,
 	} ).then( ( response ) => {
-		dispatch( 'rank-math' ).updatePostsRows( page, response )
+		dispatch( 'rank-math' ).updatePostsRows( page, response, '' === params ? 'all' : params )
 	} )
 }
 
@@ -66,10 +66,11 @@ export function getPostsRows( page, filters ) {
  * Get posts rows by objects.
  *
  * @param {number} page    Page number.
- * @param {Object} filters The filters.
+ * @param {Object} filters The filters parameter.
+ * @param {Object} orders The orders parameter.
  */
-export function getPostsRowsByObjects( page, filters ) {
-	const params = filtersToUrlParams( filters )
+export function getPostsRowsByObjects( page, filters, orders ) {
+	const params = filtersToUrlParams( filters ) + filtersToUrlParams( orders, false )
 
 	apiFetch( {
 		method: 'GET',

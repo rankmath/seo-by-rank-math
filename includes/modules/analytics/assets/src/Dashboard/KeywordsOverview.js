@@ -35,6 +35,9 @@ const KeywordsOverview = () => {
 
 	return (
 		<div className="rank-math-box no-padding rank-math-keywords-overview">
+			<a href="https://rankmath.com/kb/analytics/?utm_source=Plugin&utm_medium=Keywords%20Tab%20Dashboard%20KB&utm_campaign=WP#top-5-winning-and-losing-posts-pro" target="_blank" rel="noopener noreferrer" className="rank-math-tooltip">
+				<em className="dashicons-before dashicons-editor-help analytics-dashicon"></em>
+			</a>
 			<TabPanel
 				className="rank-math-tabs"
 				activeClass="is-active"

@@ -29,6 +29,16 @@ msgstr ""
 msgid "Setup Wizard"
 msgstr ""
 
+#. translators: 1. Bold text 2. Bold text
+msgid "%1$s A filter to remove the Rank Math data from the database is present. Deactivating & Deleting this plugin will remove everything related to the Rank Math plugin. %2$s"
+msgstr ""
+
+msgid "CAUTION:"
+msgstr ""
+
+msgid "This action is IRREVERSIBLE."
+msgstr ""
+
 msgid "Getting Started"
 msgstr ""
 
@@ -2700,11 +2710,7 @@ msgstr ""
 msgid "Redirection rules successfully deleted."
 msgstr ""
 
-msgid "No review posts found."
-msgstr ""
-
-#. translators: Number of posts updated
-msgid "%1$d review Posts updated. You can find the list of all converted posts %2$s."
+msgid "Table re-creation started. It might take a couple of minutes."
 msgstr ""
 
 msgid "No posts found to convert."
@@ -2713,7 +2719,10 @@ msgstr ""
 msgid "Conversion started. A success message will be shown here once the process completes. You can close this page."
 msgstr ""
 
-msgid "Table re-creation started. It might take a couple of minutes."
+msgid "No data found to delete."
+msgstr ""
+
+msgid "Deletion started. A success message will be shown here once the process completes. You can close this page."
 msgstr ""
 
 msgid "Flush SEO Analysis Data"
@@ -2752,18 +2761,6 @@ msgstr ""
 msgid "Re-create Tables"
 msgstr ""
 
-msgid "Schema Converter"
-msgstr ""
-
-msgid "If you are using v1.0.48 or higher, and if some of the Schema data from previous versions is missing, then use this tool. Please note: Use this tool only if our support staff asked you to run it."
-msgstr ""
-
-msgid "Are you sure you want to do this? This is not recommended until and unless you are facing any issues with the revamped Schema Generator."
-msgstr ""
-
-msgid "Convert Schema"
-msgstr ""
-
 msgid "Yoast Block Converter"
 msgstr ""
 
@@ -2800,18 +2797,13 @@ msgstr ""
 msgid "Delete Redirections"
 msgstr ""
 
-msgid "Convert Review Schema into Article"
+msgid "Delete Old Schema Data"
 msgstr ""
 
-#. translators: 1. Review Schema documentation link
-msgid "Before using this converter, please read our Knowledge Base Article from %s."
+msgid "Delete the schema data from the old format (<1.0.48). Note: This process is irreversible and will delete all the metadata prefixed with rank_math_snippet."
 msgstr ""
 
-#. translators: Number of posts to update
-msgid "Are you sure you want to convert %d posts with review schema into new schema type? This action is irreversible."
-msgstr ""
-
-msgid "Convert"
+msgid "Are you sure you want to delete the old schema data? This action is irreversible."
 msgstr ""
 
 msgid "Images"

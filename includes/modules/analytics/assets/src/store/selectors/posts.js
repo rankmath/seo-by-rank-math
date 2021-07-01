@@ -57,11 +57,15 @@ export function getPostsRowsAll( state ) {
  *
  * @param {Object} state The app state.
  * @param {number} page The page number.
+ * @param {string} filters The filter parameter.
  *
  * @return {string} Return posts rows.
  */
-export function getPostsRows( state, page ) {
-	return state.appData.postsRows[ page ]
+export function getPostsRows( state, page, filters ) {
+	let params = filtersToUrlParams( filters, false )
+	params = '' === params ? 'all' : params
+
+	return isUndefined( state.appData.postsRows[ page ] ) ? {} : state.appData.postsRows[ page ][ params ]
 }
 
 /**
@@ -81,11 +85,12 @@ export function getPostsRowsByObjectsAll( state ) {
  * @param {Object} state The app state.
  * @param {number} page The page number.
  * @param {string} filters The filter parameter.
+ * @param {string} orders The order parameter.
  *
  * @return {string} Return posts rows.
  */
-export function getPostsRowsByObjects( state, page, filters ) {
-	let params = filtersToUrlParams( filters )
+export function getPostsRowsByObjects( state, page, filters, orders ) {
+	let params = filtersToUrlParams( filters ) + filtersToUrlParams( orders, false )
 	params = '' === params ? 'all' : params
 
 	return isUndefined( state.appData.postsRowsByObjects[ page ] ) ? {} : state.appData.postsRowsByObjects[ page ][ params ]

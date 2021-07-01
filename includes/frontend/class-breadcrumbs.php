@@ -354,7 +354,7 @@ class Breadcrumbs {
 	 * Shop trail.
 	 */
 	private function add_crumbs_shop() {
-		$shop_page_id = wc_get_page_id( 'shop' );
+		$shop_page_id = function_exists( 'wc_get_page_id' ) ? wc_get_page_id( 'shop' ) : false;
 		if ( intval( get_option( 'page_on_front' ) ) === $shop_page_id ) {
 			return;
 		}
@@ -473,7 +473,7 @@ class Breadcrumbs {
 	 * Prepend the shop page to the shop trail.
 	 */
 	private function prepend_shop_page() {
-		$shop_page_id = wc_get_page_id( 'shop' );
+		$shop_page_id = function_exists( 'wc_get_page_id' ) ? wc_get_page_id( 'shop' ) : false;
 		$shop_page    = get_post( $shop_page_id );
 
 		// If permalinks contain the shop page in the URI prepend the breadcrumb with shop.
