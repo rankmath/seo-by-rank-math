@@ -186,6 +186,17 @@ trait Conditional {
 	}
 
 	/**
+	 * Is on Divi frontend editor.
+	 *
+	 * @since TODO: Add version.
+	 *
+	 * @return boolean
+	 */
+	public static function is_divi_frontend_editor() {
+		return function_exists( 'et_core_is_fb_enabled' ) && et_core_is_fb_enabled();
+	}
+
+	/**
 	 * Is Advanced Mode.
 	 *
 	 * @since 1.0.43

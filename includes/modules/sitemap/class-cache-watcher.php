@@ -1,6 +1,6 @@
 <?php
 /**
- * The Cache Watcher.
+ * The sitemap cache watcher.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -69,7 +69,7 @@ class Cache_Watcher {
 		add_action( 'update_option', [ __CLASS__, 'clear_on_option_update' ] );
 		add_action( 'deleted_term_relationships', [ __CLASS__, 'invalidate' ] );
 
-		// Option on updatation of which clear cache.
+		// Clear cache when user updates any of these options.
 		self::register_clear_on_option_update( 'home' );
 		self::register_clear_on_option_update( 'permalink_structure' );
 		self::register_clear_on_option_update( 'rank_math_modules' );
@@ -145,7 +145,7 @@ class Cache_Watcher {
 		$post_type = get_post_type( $post );
 		wp_cache_delete( 'lastpostmodified:gmt:' . $post_type, 'timeinfo' );
 
-		// None of our interest..
+		// None of our interest.
 		// If the post type is excluded in options, we can stop.
 		return 'nav_menu_item' === $post_type || ! Sitemap::is_object_indexable( $post->ID );
 	}
@@ -209,7 +209,7 @@ class Cache_Watcher {
 	 * @param int    $unused    Unused term ID value.
 	 * @param string $taxonomy  Taxonomy to invalidate.
 	 */
-	public function invalidate_term( $unused, $taxonomy ) {
+	public static function invalidate_term( $unused, $taxonomy ) {
 		if ( false !== Helper::get_settings( 'sitemap.tax_' . $taxonomy . '_sitemap' ) ) {
 			self::invalidate( $taxonomy );
 		}

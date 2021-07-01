@@ -1,102 +1,108 @@
 // main: ../sidebar.scss
 
 .variable-group {
-	position: relative;
+    position: relative;
 
-	.components-button {
-		color: inherit;
-		padding: 3px;
-		height: 26px;
+    .components-button {
+        height: 26px;
+        padding: 3px;
 
-		@include position( absolute, 2px 2px null null );
+        color: inherit;
 
-		&:not(.is-default):hover {
-			background: transparent;
-			box-shadow: none;
-		}
-	}
+        @include position( absolute, 2px 2px null null );
 
-	input,
-	textarea {
-		padding-right: 40px !important;
-		margin: 0;
-	}
+        &:not(.is-default):hover {
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .dashicon {
+            margin-right: 0;
+        }
+    }
+
+    input,
+    textarea {
+        margin: 0;
+        padding-right: 40px !important;
+    }
 }
 
 .#{$namespace}-variables-dropdown {
-	z-index: 999;
+    z-index: 999;
 
-	display: none;
-	overflow: auto;
+    display: none;
+    overflow: auto;
 
-	box-sizing: border-box;
-	width: 80%;
-	max-width: 450px;
-	max-height: 290px;
+    box-sizing: border-box;
+    width: 80%;
+    max-width: 450px;
+    max-height: 290px;
 
-	border: 1px solid $gray;
-	border-radius: 4px;
-	background: #fff;
+    border: 1px solid $gray;
+    border-radius: 4px;
+    background: #fff;
 
-	@include position( absolute, 38px 0 null null );
+    @include position( absolute, 38px 0 null null );
 
-	@at-root body.rtl {
-		right: auto;
-		left: 38px;
-	}
+    @at-root body.rtl {
+        right: auto;
+        left: 38px;
+    }
 
-	.components-base-control {
-		padding: 10px 10px 0;
-	}
+    .components-base-control {
+        padding: 10px 10px 0;
+    }
 
-	input[type='text'].components-text-control__input {
-		border-color: $gray;
-		box-shadow: none !important;
+    input[type='text'].components-text-control__input {
+        border-color: $gray;
+        box-shadow: none !important;
 
-		@include size( 100%, 34px );
-	}
+        @include size( 100%, 34px );
+    }
 
-	ul {
-		margin: 0;
-	}
+    ul {
+        margin: 0;
+    }
 
-	li {
-		font-size: 12px;
+    li {
+        font-size: 12px;
 
-		position: relative;
+        position: relative;
 
-		margin: 0;
-		padding: 10px;
+        margin: 0;
+        padding: 10px;
 
-		cursor: pointer;
+        cursor: pointer;
 
-		border-bottom: 1px solid $gray;
+        border-bottom: 1px solid $gray;
 
-		span {
-			line-height: 1.3;
-			font-style: italic;
-			display: block;
+        span {
+            font-style: italic;
+            line-height: 1.3;
 
-			padding-top: .5em;
+            display: block;
 
-			opacity: 0.6;
-		}
+            padding-top: .5em;
 
-		&:hover {
-			background: #f8f9fa;
-		}
+            opacity: .6;
+        }
 
-		&:after {
-			display: inline-block;
+        &:hover {
+            background: #f8f9fa;
+        }
 
-			margin-top: 5px;
-			padding: .25em .4em;
+        &:after {
+            display: inline-block;
 
-			content: attr(data-var);
-			white-space: nowrap;
+            margin-top: 5px;
+            padding: .25em .4em;
 
-			border-radius: .25rem;
-			background-color: #f0f2f4;
-		}
-	}
+            content: attr(data-var);
+            white-space: nowrap;
+
+            border-radius: .25rem;
+            background-color: #f0f2f4;
+        }
+    }
 }

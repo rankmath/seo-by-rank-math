@@ -97,7 +97,8 @@ class Installer {
 		$tables[] = $wpdb->prefix . 'rank_math_redirections_cache';
 		$tables[] = $wpdb->prefix . 'rank_math_internal_links';
 		$tables[] = $wpdb->prefix . 'rank_math_internal_meta';
-		$tables[] = $wpdb->prefix . 'rank_math_sc_analytics';
+		$tables[] = $wpdb->prefix . 'rank_math_analytics_gsc';
+		$tables[] = $wpdb->prefix . 'rank_math_analytics_objects';
 
 		return $tables;
 	}

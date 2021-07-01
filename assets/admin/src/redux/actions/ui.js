@@ -42,3 +42,25 @@ export function refreshResults() {
 export function setVersion() {
 	return updateAppUi( 'isPro', true )
 }
+
+/**
+ * Update Divi settings bar active within Divi frontend builder.
+ *
+ * @param {boolean} active The state.
+ *
+ * @return {Object} An action for redux.
+ */
+export function toggleIsDiviPageSettingsBarActive( active ) {
+	return updateAppUi( 'isDiviPageSettingsBarActive', active )
+}
+
+/**
+ * Update RankMath sidebar active within Divi frontend builder.
+ *
+ * @param {boolean} active The state.
+ *
+ * @return {Object} An action for redux.
+ */
+export function toggleIsDiviRankMathModalActive( active ) {
+	return updateAppUi( 'isDiviRankMathModalActive', active )
+}

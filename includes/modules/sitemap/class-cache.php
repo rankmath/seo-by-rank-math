@@ -45,7 +45,7 @@ class Cache {
 	const STORAGE_KEY_PREFIX = 'rank_math_';
 
 	/**
-	 * The Constructor
+	 * The constructor.
 	 */
 	public function __construct() {
 		$this->wp_filesystem = WordPress::get_filesystem();
@@ -130,7 +130,7 @@ class Cache {
 	}
 
 	/**
-	 * Get filename for sitemap
+	 * Get filename for sitemap.
 	 *
 	 * @param  null|string $type The type to get the key for. Null or '1' for index cache.
 	 * @param  int         $page The page of cache to get the key for.
@@ -145,7 +145,7 @@ class Cache {
 	}
 
 	/**
-	 * Get cache directory
+	 * Get cache directory.
 	 *
 	 * @return string
 	 */

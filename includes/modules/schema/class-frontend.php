@@ -41,6 +41,9 @@ class Frontend {
 	 * The Constructor.
 	 */
 	public function __construct() {
+		if ( Helper::is_divi_frontend_editor() ) {
+			return;
+		}
 		$this->action( 'rank_math/json_ld', 'add_schema', 10, 2 );
 		$this->action( 'rank_math/json_ld', 'connect_schema_entities', 99, 2 );
 		$this->filter( 'rank_math/snippet/rich_snippet_event_entity', 'validate_event_schema', 11, 2 );

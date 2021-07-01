@@ -1,6 +1,6 @@
 <?php
 /**
- * Sitemap stylesheet.
+ * The XSL stylesheet output.
  *
  * @package    RankMath
  * @subpackage RankMath\Sitemap
@@ -158,7 +158,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 								<?php
 								printf(
 									/* translators: xsl value count */
-									__( '<a href="%s">&#8592; Sitemap Index</a>', 'rank-math' ),
+									wp_kses_post( __( '<a href="%s">&#8592; Sitemap Index</a>', 'rank-math' ) ),
 									esc_url( Router::get_base_url( 'sitemap_index.xml' ) )
 								);
 								?>
@@ -245,7 +245,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 									<?php
 									printf(
 										/* translators: xsl value count */
-										__( 'This XML Sitemap Index file contains <strong>%s</strong> sitemaps.', 'rank-math' ),
+										wp_kses_post( __( 'This XML Sitemap Index file contains <strong>%s</strong> sitemaps.', 'rank-math' ) ),
 										'<xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/>'
 									);
 									?>
@@ -284,7 +284,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 									<?php
 									printf(
 										/* translators: xsl value count */
-										__( 'This XML Sitemap contains <strong>%s</strong> URLs.', 'rank-math' ),
+										wp_kses_post( __( 'This XML Sitemap contains <strong>%s</strong> URLs.', 'rank-math' ) ),
 										'<xsl:value-of select="count(sitemap:urlset/sitemap:url)"/>'
 									);
 									?>
@@ -294,7 +294,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 									<?php
 									printf(
 										/* translators: xsl value count */
-										__( '<a href="%s">&#8592; Sitemap Index</a>', 'rank-math' ),
+										wp_kses_post( __( '<a href="%s">&#8592; Sitemap Index</a>', 'rank-math' ) ),
 										esc_url( Router::get_base_url( 'sitemap_index.xml' ) )
 									);
 									?>

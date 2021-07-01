@@ -101,10 +101,16 @@ const entryPoints = {
 		'schema-classic': './includes/modules/schema/assets/src/metabox-classic.js',
 		'schema-template': './includes/modules/schema/assets/src/metabox-template.js',
 	},
+	divi: {
+		divi: './assets/admin/src/divi/divi.js',
+		'divi-iframe': './assets/admin/src/divi/divi-iframe.js',
+		'divi-admin': './assets/admin/src/divi/divi-admin.js',
+	},
 }
 
 const paths = {
 	plugin: './assets/admin/js',
+	divi: './assets/admin/js',
 	analytics: './includes/modules/analytics/assets/js',
 	front: './assets/front/js',
 	'instant-indexing': './includes/modules/instant-indexing/assets/js',

@@ -127,6 +127,8 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Compatibility' => __DIR__ . '/../..' . '/includes/class-compatibility.php',
         'RankMath\\Data_Encryption' => __DIR__ . '/../..' . '/includes/class-data-encryption.php',
         'RankMath\\Defaults' => __DIR__ . '/../..' . '/includes/class-defaults.php',
+        'RankMath\\Divi\\Divi' => __DIR__ . '/../..' . '/includes/3rdparty/divi/class-divi.php',
+        'RankMath\\Divi\\Divi_Admin' => __DIR__ . '/../..' . '/includes/3rdparty/divi/class-divi-admin.php',
         'RankMath\\Elementor\\Elementor' => __DIR__ . '/../..' . '/includes/3rdparty/elementor/class-elementor.php',
         'RankMath\\Frontend\\Breadcrumbs' => __DIR__ . '/../..' . '/includes/frontend/class-breadcrumbs.php',
         'RankMath\\Frontend\\Comments' => __DIR__ . '/../..' . '/includes/frontend/class-comments.php',

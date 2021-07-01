@@ -35,6 +35,10 @@ const DEFAULT_STATE = {
 	isSchemaEditorOpen: false,
 	isSchemaTemplatesOpen: false,
 	schemaUpdated: false,
+
+	// Divi Frontend Builder.
+	isDiviRankMathModalActive: false,
+	isDiviPageSettingsBarActive: false,
 }
 
 /**

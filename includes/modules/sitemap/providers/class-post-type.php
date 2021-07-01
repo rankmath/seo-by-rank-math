@@ -1,6 +1,6 @@
 <?php
 /**
- * The Sitemap provider for post type.
+ * The sitemap provider for post types.
  *
  * @since      0.9.0
  * @package    RankMath

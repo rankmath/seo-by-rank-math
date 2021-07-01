@@ -103,7 +103,8 @@ class Screen implements IScreen {
 	 * Get values for localize.
 	 */
 	public function localize() {
-		foreach ( $this->get_values() as $key => $value ) {
+		$values = $this->get_values();
+		foreach ( $values as $key => $value ) {
 			Helper::add_json( $key, $value );
 		}
 	}
@@ -271,13 +272,13 @@ class Screen implements IScreen {
 	 * @return array
 	 */
 	private function power_words() {
+		static $words;
 		$locale = Locale::get_site_language();
 		$file   = rank_math()->plugin_dir() . 'assets/vendor/powerwords/' . $locale . '.php';
 		if ( ! file_exists( $file ) ) {
 			return false;
 		}
-
-		$words = include_once $file;
+		$words = $words ? $words : include $file;
 		return $this->do_filter( 'metabox/power_words', array_map( 'strtolower', $words ), $locale );
 	}
 
@@ -286,7 +287,7 @@ class Screen implements IScreen {
 	 *
 	 * @param string $manual To load any screen manually.
 	 */
-	private function load_screen( $manual = '' ) {
+	public function load_screen( $manual = '' ) {
 		if ( Admin_Helper::is_post_edit() || 'post' === $manual ) {
 			$this->screen = new Post_Screen();
 			return;

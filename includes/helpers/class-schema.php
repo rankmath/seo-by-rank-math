@@ -22,12 +22,13 @@ trait Schema {
 	/**
 	 * Function to get Default Schema type by post_type.
 	 *
-	 * @param int     $post_id  Post ID.
-	 * @param boolean $sanitize Return santized Schema type.
+	 * @param int     $post_id      Post ID.
+	 * @param boolean $return_valid Whether to return valid schema type which can be used on the frontend.
+	 * @param boolean $sanitize     Return santized Schema type.
 	 *
 	 * @return string Default Schema Type.
 	 */
-	public static function get_default_schema_type( $post_id, $sanitize = false ) {
+	public static function get_default_schema_type( $post_id, $return_valid = false, $sanitize = false ) {
 		if ( metadata_exists( 'post', $post_id, 'rank_math_rich_snippet' ) || ! self::can_use_default_schema( $post_id ) ) {
 			return false;
 		}
@@ -55,12 +56,12 @@ trait Schema {
 			$schema = 'EDDProduct';
 		}
 
-		$schema = 'article' === $schema ? Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ) : $schema;
-		if ( $sanitize ) {
-			return in_array( $schema, [ 'Article', 'BlogPosting', 'NewsArticle', 'WooCommerceProduct', 'EDDProduct' ], true ) ? self::sanitize_schema_title( $schema ) : false;
+		if ( $return_valid && ! in_array( $schema, [ 'article', 'WooCommerceProduct', 'EDDProduct' ], true ) ) {
+			return false;
 		}
 
-		return $schema;
+		$schema = 'article' === $schema ? Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ) : $schema;
+		return $sanitize ? self::sanitize_schema_title( $schema ) : $schema;
 	}
 
 	/**

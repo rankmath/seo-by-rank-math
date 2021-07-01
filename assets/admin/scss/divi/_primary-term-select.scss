@@ -1,0 +1,52 @@
+
+// NOTE: High specificity needed to overwrite WP component styles.
+#rank-math-primary-term-input {
+	.rank-math-primary-term-select {
+		margin-bottom: 20px;
+
+		/* Label */
+		.components-input-control__label {
+			display: inline-block;
+			font-family: "Open Sans", Helvetica, Roboto, Arial, sans-serif;
+			color: #32373c;
+			font-weight: 600;
+			line-height: 20px;
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 14px;
+			white-space: normal;
+			user-select: none;
+		}
+
+		/* Select */
+		.components-select-control__input {
+			background-color: #f1f5f9;
+			border-radius: 3px;
+			font-family: "Open Sans", Helvetica, Roboto, Arial, sans-serif;
+			padding-left: 10px;
+			outline: 0;
+			color: #4c5866;
+			font-size: 13px;
+			font-weight: 600;
+			cursor: pointer;
+			user-select: none;
+		}
+
+		/* Dropdown Icon */
+		.components-input-control__suffix {
+			div {}
+			svg {
+				path {
+					fill: #4c5866;
+				}
+			}
+		}
+
+		/* Backdrop */
+		.components-input-control__backdrop {
+			border: 0;
+			box-shadow: none;
+		}
+	}
+}

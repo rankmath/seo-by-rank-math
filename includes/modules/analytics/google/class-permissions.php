@@ -103,13 +103,9 @@ class Permissions {
 	 * @return string
 	 */
 	public static function get_status() {
-		$list = [
-			esc_html__( 'AdSense', 'rank-math' )        => self::get_status_text( self::has_adsense() ),
-			esc_html__( 'Analytics', 'rank-math' )      => self::get_status_text( self::has_analytics() ),
+		return [
 			esc_html__( 'Search Console', 'rank-math' ) => self::get_status_text( self::has_console() ),
 		];
-
-		return $list;
 	}
 
 	/**

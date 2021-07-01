@@ -1,6 +1,6 @@
 <?php
 /**
- * The SEO Analyzer
+ * The SEO Analyzer class runs the tests and handles the results.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -33,14 +33,14 @@ class SEO_Analyzer {
 	private $api_url = '';
 
 	/**
-	 * Url to analyze.
+	 * URL to analyze.
 	 *
 	 * @var string
 	 */
 	public $analyse_url = '';
 
 	/**
-	 * Sub-page url to analyze.
+	 * Sub-page URL to analyze.
 	 *
 	 * @var string
 	 */
@@ -68,13 +68,13 @@ class SEO_Analyzer {
 	private $local_tests = [];
 
 	/**
-	 * The Constructor.
+	 * The constructor.
 	 */
 	public function __construct() {
 		$this->api_url     = $this->do_filter( 'seo_analysis/api_endpoint', 'https://rankmath.com/analyze/v2/json/' );
 		$this->analyse_url = get_home_url();
 
-		if ( ! empty( $_REQUEST['u'] ) && $this->is_allowed_url( Param::request( 'u' ) ) ) {
+		if ( ! empty( $_REQUEST['u'] ) && $this->is_allowed_url( Param::request( 'u' ) ) ) { // phpcs:ignore
 			$this->analyse_url     = Param::request( 'u' );
 			$this->analyse_subpage = true;
 		}
@@ -111,7 +111,7 @@ class SEO_Analyzer {
 	}
 
 	/**
-	 * Output graphs
+	 * Output graphs.
 	 */
 	private function display_graphs() {
 		$data = $this->get_graph_metrices();
@@ -302,7 +302,7 @@ class SEO_Analyzer {
 		$this->analyse_url     = $url;
 		$this->analyse_subpage = true;
 		if ( ! $this->run_api_tests() ) {
-			error_log( $this->api_error ); // phpcs:ignore
+			error_log( __( 'Rank Math SEO Analysis error: ', 'rank-math' ) . $this->api_error ); // phpcs:ignore
 			return 0;
 		}
 
@@ -329,7 +329,7 @@ class SEO_Analyzer {
 	}
 
 	/**
-	 * Enable auto update ajax handler.
+	 * Ajax handler for the Enable auto update button.
 	 */
 	public function enable_auto_update() {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
@@ -343,7 +343,7 @@ class SEO_Analyzer {
 	}
 
 	/**
-	 * Edit SEO analysis stored data.
+	 * Update the auto update value in the stored results.
 	 */
 	public function enable_auto_update_in_stored_data() {
 		$results = get_option( 'rank_math_seo_analysis_results' );
@@ -357,7 +357,7 @@ class SEO_Analyzer {
 	}
 
 	/**
-	 * Run test through rank math api.
+	 * Run test through the Rank Math Analysis API.
 	 *
 	 * @return boolean
 	 */

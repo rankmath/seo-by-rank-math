@@ -1,12 +1,18 @@
 <?php
 /**
- * Redirect Core Sitemap class.
+ * Redirect core sitemaps.
+ * 
+ * Disable WP core sitemap feature added in version 5.5 and
+ * use Rank Math's sitemaps instead.
  *
  * @since      1.0.47
  * @package    RankMath
  * @subpackage RankMath\Sitemap
  * @author     Rank Math <support@rankmath.com>
- */
+ 
+ * @copyright Copyright (C) 2008-2019, Yoast BV
+ * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
+*/
 
 namespace RankMath\Sitemap;
 
@@ -16,10 +22,7 @@ use MyThemeShop\Helpers\Str;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Redirect Core Sitemaps class
- *
- * @copyright Copyright (C) 2008-2019, Yoast BV
- * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
+ * Redirect Core Sitemaps class.
  */
 class Redirect_Core_Sitemaps {
 

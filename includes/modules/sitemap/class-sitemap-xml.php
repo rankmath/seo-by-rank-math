@@ -13,7 +13,6 @@
 
 namespace RankMath\Sitemap;
 
-use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -93,7 +92,7 @@ class Sitemap_XML extends XML {
 		}
 
 		$this->send_headers();
-		echo $this->sitemap;
+		echo $this->sitemap; // phpcs:ignore
 		$this->output_credits();
 		remove_all_actions( 'wp_footer' );
 		die;
@@ -114,12 +113,12 @@ class Sitemap_XML extends XML {
 		$memory   = size_format( memory_get_usage() - $this->stats['memory'], 2 );
 		$template = $this->transient ? 'Served from cache in %s second(s) (Memory usage: %s)' : 'This sitemap was originally generated in %s second(s). (Memory usage: %s) - %s queries';
 		$template = sprintf( $template, $time, $memory, $sql );
-		echo "\n<!-- {$template} -->";
+		echo "\n<!-- {$template} -->"; // phpcs:ignore
 
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
 
-			$queries = print_r( $GLOBALS['wpdb']->queries, true );
-			echo "\n<!-- {$queries} -->";
+			$queries = print_r( $GLOBALS['wpdb']->queries, true ); // phpcs:ignore
+			echo "\n<!-- {$queries} -->"; // phpcs:ignore
 		}
 	}
 

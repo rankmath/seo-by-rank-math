@@ -3,9 +3,9 @@ Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.7
-Requires at least: 5.5
+Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.62
+Stable tag: 1.0.63
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -475,20 +475,15 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.62 [Apr 14, 2021] =
-* Added: Alt text as a caption property in the Primary Image, Logo, and Author Image Schema entities
-* Added: Description property in Author Schema entity
-* Added: `async` loading for the [Google Analytics tracking](https://rankmath.com/kb/install-google-analytics/) script
-* Added: Filter to add Analytics stats of different language posts into the main post, examples `abc.com/en/ or abc.com/es/`. Note: Support needs to be added by translation plugins
-* Improved: Primary image and Author image uses image URL as an ID in the Schema Markup
-* Improved: Add `Place` entity in the Schema markup only when address is added in the [Local SEO](https://rankmath.com/kb/local-seo/) Settings
-* Improved: Show [Database Tools](https://rankmath.com/kb/rank-math-status-and-tools/#tools) only if the related module is enabled
-* Fixed: [Analytics stats](https://rankmath.com/kb/analytics/) were not changing on some pages after changing the timeframe
-* Fixed: `Undefined index: logo` error if the logo was not set in the [Titles & Meta settings](https://rankmath.com/kb/titles-and-meta/)
-* Fixed: Google Search Console table creation issue with the MySQL 8.0
-* Fixed: [Breadcrumbs Schema](https://rankmath.com/kb/breadcrumbs/) was not showing on the Product category/tag archive pages
-* Fixed: Missing backgrounds in some of the tabs of [Elementor SEO](https://rankmath.com/blog/elementor-seo/)
-* Fixed: Custom field analysis was not working when the Divi theme was active
-* Fixed: Open Graph image "[Icon Overlay](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails)" feature was not working
+= 1.0.63 [Apr 28, 2021] =
+* Added: [HUGE!] [Divi SEO](https://rankmath.com/blog/divi-seo/) is HERE! Complete Divi Page Builder/Theme integration. Now you can configure all the [SEO](https://rankmath.com/kb/general-settings/) settings from the frontend
+* Improved: [Elementor SEO](https://rankmath.com/blog/elementor-seo/) is made better by improving the update button behavior
+* Improved: Removed old [analytics](https://rankmath.com/kb/analytics/) table as it was not required anymore after we revamped [Google Analytics](https://rankmath.com/kb/install-google-analytics/) integration in [Rank Math SEO](https://rankmath.com/wordpress/plugin/seo-suite/)
+* Fixed: Fatal error happening on some installations when `action_schedular` tables were missing
+* Fixed: [Star rating](https://rankmath.com/kb/review-schema/) showing two times in the preview area for the [Event Schema](https://rankmath.com/kb/event-schema/)
+* Fixed: Missing line break in [robots.txt](https://rankmath.com/kb/how-to-edit-robots-txt-with-rank-math/) after `Sitemap:` rule
+* Fixed: `Undefined offset: 0` warning when the [featured thumbnail](https://rankmath.com/kb/watermark-for-social-sharing/) didn't exist
+* Fixed: Analytics-related database table was not getting removed after the [complete uninstallation](https://rankmath.com/kb/uninstall/)
+* Fixed: The [filter to change the Sitemap `http_headers`](http://rankmath.com/kb/filters-hooks-api-developer/#sitemap-headers) was not working
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

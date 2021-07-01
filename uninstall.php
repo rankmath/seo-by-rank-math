@@ -64,12 +64,13 @@ function rank_math_remove_data() {
 	rank_math_delete_meta( 'term' );
 
 	// Drop Tables.
-	rank_math_drop_table( 'rank_math_404_logs' );
-	rank_math_drop_table( 'rank_math_redirections' );
-	rank_math_drop_table( 'rank_math_redirections_cache' );
-	rank_math_drop_table( 'rank_math_internal_links' );
-	rank_math_drop_table( 'rank_math_internal_meta' );
-	rank_math_drop_table( 'rank_math_sc_analytics' );
+	rank_math_drop_table( '404_logs' );
+	rank_math_drop_table( 'redirections' );
+	rank_math_drop_table( 'redirections_cache' );
+	rank_math_drop_table( 'internal_links' );
+	rank_math_drop_table( 'internal_meta' );
+	rank_math_drop_table( 'analytics_gsc' );
+	rank_math_drop_table( 'analytics_objects' );
 
 	// Remove Capabilities.
 	/**
@@ -117,5 +118,5 @@ function rank_math_delete_meta( $table = 'post' ) {
 function rank_math_drop_table( $name ) {
 	global $wpdb;
 
-	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}{$name}" ); // phpcs:ignore
+	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rank_math_{$name}" ); // phpcs:ignore
 }

@@ -97,6 +97,8 @@ return array(
     'RankMath\\Compatibility' => $baseDir . '/includes/class-compatibility.php',
     'RankMath\\Data_Encryption' => $baseDir . '/includes/class-data-encryption.php',
     'RankMath\\Defaults' => $baseDir . '/includes/class-defaults.php',
+    'RankMath\\Divi\\Divi' => $baseDir . '/includes/3rdparty/divi/class-divi.php',
+    'RankMath\\Divi\\Divi_Admin' => $baseDir . '/includes/3rdparty/divi/class-divi-admin.php',
     'RankMath\\Elementor\\Elementor' => $baseDir . '/includes/3rdparty/elementor/class-elementor.php',
     'RankMath\\Frontend\\Breadcrumbs' => $baseDir . '/includes/frontend/class-breadcrumbs.php',
     'RankMath\\Frontend\\Comments' => $baseDir . '/includes/frontend/class-comments.php',

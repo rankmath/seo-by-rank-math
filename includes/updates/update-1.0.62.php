@@ -52,6 +52,7 @@ function rank_math_1_0_62_remove_duplicated_data_fetch_tasks() {
 		);
 	}
 }
+rank_math_1_0_62_remove_duplicated_data_fetch_tasks();
 
 /**
  * Reindex all posts to apply new schemas title feature.
@@ -59,6 +60,4 @@ function rank_math_1_0_62_remove_duplicated_data_fetch_tasks() {
 function rank_math_1_0_62_reindex_all_posts() {
 	apply_filters( 'rank_math/tools/analytics_reindex_posts', 'Something went wrong.' );
 }
-
-rank_math_1_0_62_remove_duplicated_data_fetch_tasks();
 rank_math_1_0_62_reindex_all_posts();

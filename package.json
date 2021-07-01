@@ -18,7 +18,7 @@
 		"lasttranslator": "Rank Math <support@rankmath.com>"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.13.15",
+		"@babel/core": "^7.13.16",
 		"@babel/plugin-proposal-class-properties": "^7.13.0",
 		"@babel/plugin-proposal-decorators": "^7.13.15",
 		"@babel/plugin-proposal-export-namespace-from": "^7.12.13",
@@ -33,11 +33,11 @@
 		"@babel/plugin-transform-runtime": "^7.13.15",
 		"@babel/preset-env": "^7.13.15",
 		"@wordpress/eslint-plugin": "^7.4.0",
-		"@wordpress/icons": "^2.10.1",
+		"@wordpress/icons": "^2.10.2",
 		"ajv": "6.12.0",
 		"babel-loader": "^8.2.2",
 		"classnames": "^2.3.1",
-		"eslint": "^7.24.0",
+		"eslint": "^7.25.0",
 		"eslint-plugin-eslint-comments": "^3.2.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^7.0.1",
@@ -55,8 +55,8 @@
 		"webpack-dev-server": "^3.11.2"
 	},
 	"dependencies": {
-		"@wordpress/autop": "^2.12.1",
-		"@wordpress/keycodes": "^2.19.1",
+		"@wordpress/autop": "^2.12.2",
+		"@wordpress/keycodes": "^2.19.2",
 		"interpolate-components": "^1.1.1",
 		"lodash": "^4.17.21",
 		"modclean": "^3.0.0-beta.1",
@@ -73,11 +73,13 @@
 		"deva": "webpack --mode=development --what=analytics --watch",
 		"devf": "webpack --mode=development --what=front --watch",
 		"devs": "webpack --mode=development --what=schema --watch",
+		"devdivi": "webpack --mode=development --what=divi --progress --watch",
 		"a": "webpack --mode=production --what=analytics --progress",
 		"f": "webpack --mode=production --what=front --progress",
 		"s": "webpack --mode=production --what=schema --progress",
 		"i": "webpack --mode=production --what=instant-indexing --progress",
-		"dist": "npm run build && npm run a && npm run f && npm run s && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS"
+		"divi": "webpack --mode=production --what=divi --progress",
+		"dist": "npm run build && npm run a && npm run f && npm run s && npm run divi && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS"
 	},
 	"browserslist": [
 		"last 2 versions"

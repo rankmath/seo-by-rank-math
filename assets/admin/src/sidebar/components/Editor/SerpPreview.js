@@ -18,7 +18,6 @@ import PreviewDevices from './PreviewDevices'
 import AnalysisScore from '@components/AnalysisScore'
 import highlight from '@helpers/highlight'
 import RatingPreview from './RatingPreview'
-import EventPreview from './EventPreview'
 
 const SerpPreview = ( {
 	title,
@@ -216,8 +215,6 @@ const SerpPreview = ( {
 							} }
 						></div>
 					</div>
-
-					<EventPreview />
 
 				</div>
 

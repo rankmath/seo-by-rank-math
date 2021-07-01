@@ -15,6 +15,7 @@ namespace RankMath\Rest;
 use WP_Error;
 use WP_REST_Server;
 use WP_REST_Request;
+use WP_REST_Response;
 use WP_REST_Controller;
 use RankMath\Admin\Admin_Helper;
 
@@ -45,6 +46,16 @@ class Front extends WP_REST_Controller {
 				'callback'            => [ $this, 'disconnect_site' ],
 				'permission_callback' => [ $this, 'check_api_key' ],
 				'args'                => $this->get_disconnect_site_args(),
+			]
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/getFeaturedImageId',
+			[
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => [ $this, 'get_featured_image_id' ],
+				'permission_callback' => 'is_user_logged_in',
 			]
 		);
 	}
@@ -78,6 +89,53 @@ class Front extends WP_REST_Controller {
 		];
 	}
 
+	/**
+	 * Get featured image ID.
+	 *
+	 * @param WP_REST_Request $request Should include a postId parameter.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function get_featured_image_id( WP_REST_Request $request ) {
+
+		$resp = new WP_REST_Response();
+
+		if ( ! current_theme_supports( 'post-thumbnails' ) ) {
+			$resp->set_status( 200 );
+			$resp->set_data(
+				[
+					'success'   => false,
+					'message'   => 'The current theme does not have "post-thumbnails" support.',
+					'featImgId' => 0,
+				]
+			);
+			return $resp;
+		}
+
+		$post_id     = $request->get_param( 'postId' );
+		$feat_img_id = get_post_thumbnail_id( $post_id ? $post_id : null );
+
+		if ( false === $feat_img_id ) {
+			$resp->set_status( 404 );
+			$resp->set_data(
+				[
+					'success'   => false,
+					'message'   => 'The post could not be found.',
+					'featImgId' => false,
+				]
+			);
+			return $resp->as_error();
+		}
+
+		$resp->set_status( 200 );
+		$resp->set_data(
+			[
+				'success'   => true,
+				'featImgId' => $feat_img_id,
+			]
+		);
+		return $resp;
+	}
 
 	/**
 	 * Get disconnect site endpoint arguments.

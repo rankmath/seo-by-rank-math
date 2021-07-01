@@ -1,6 +1,6 @@
 <?php
 /**
- * The Sitemap rewrite setup and handling functionality.
+ * The sitemap URL rewrite setup and handling functionality.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -20,7 +20,7 @@ use MyThemeShop\Helpers\Url;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Router class
+ * Router class.
  */
 class Router {
 
@@ -142,7 +142,7 @@ class Router {
 		$base = $wp_rewrite->using_index_permalinks() ? $wp_rewrite->index . '/' : '';
 
 		/**
-		 * Filter the base URL of the sitemaps
+		 * Filter the base URL of the sitemaps.
 		 *
 		 * @param string $base The string that should be added to home_url() to make the full base URL.
 		 */

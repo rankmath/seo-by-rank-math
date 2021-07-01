@@ -1,6 +1,6 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
- * The Sitemap xml and stylesheet contract
+ * The Sitemap xml and stylesheet abstract class.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -35,7 +35,7 @@ abstract class XML {
 	protected $output_charset = 'UTF-8';
 
 	/**
-	 * Send file headers
+	 * Send file headers.
 	 *
 	 * @param array $headers Array of headers.
 	 * @param bool  $is_xsl True if sending headers are for XSL.
@@ -57,7 +57,7 @@ abstract class XML {
 		 * @param array $headers HTTP headers.
 		 * @param bool  $is_xsl Whether these headers are for XSL.
 		 */
-		$this->do_filter( 'sitemap/http_headers', $headers, $is_xsl );
+		$headers = $this->do_filter( 'sitemap/http_headers', $headers, $is_xsl );
 
 		header( $this->get_protocol() . ' 200 OK', true, 200 );
 
@@ -67,7 +67,7 @@ abstract class XML {
 	}
 
 	/**
-	 * Get HTTP protocol
+	 * Get HTTP protocol.
 	 *
 	 * @return string
 	 */

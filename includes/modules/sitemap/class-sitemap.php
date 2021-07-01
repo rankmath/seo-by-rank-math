@@ -1,6 +1,6 @@
 <?php
 /**
- * The Sitemap Module
+ * The Sitemap module.
  *
  * @since      0.9.0
  * @package    RankMath
