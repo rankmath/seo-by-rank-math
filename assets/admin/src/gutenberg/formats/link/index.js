@@ -12,7 +12,7 @@ import { applyFormat, isCollapsed } from '@wordpress/rich-text'
 import Edit from './components/edit'
 
 export const link = {
-	name: 'rankmath/link',
+	name: 'core/link',
 	title: __( 'Link', 'rank-math' ),
 	tagName: 'a',
 	className: null,
@@ -41,7 +41,7 @@ export const link = {
 		window.console.log( 'Created link:\n\n', pastedText )
 
 		return applyFormat( value, {
-			type: 'rankmath/link',
+			type: 'core/link',
 			attributes: {
 				url: decodeEntities( pastedText ),
 			},

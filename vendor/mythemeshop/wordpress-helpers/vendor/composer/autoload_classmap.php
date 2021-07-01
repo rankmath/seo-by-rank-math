@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'MyThemeShop\\Admin\\List_Table' => $baseDir . '/src/admin/class-list-table.php',
     'MyThemeShop\\Admin\\Page' => $baseDir . '/src/admin/class-page.php',
     'MyThemeShop\\Database\\Clauses' => $baseDir . '/src/database/class-clauses.php',

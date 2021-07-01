@@ -38,7 +38,7 @@ $cmb->add_field(
 		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
 		'attributes'      => [
 			'class'                  => 'regular-text wp-exclude-emoji',
-			'data-gramm_editor'      => 'false',
+			'data-gramm'             => 'false',
 			'data-exclude-variables' => 'seo_title,seo_description',
 		],
 		'before_row'      => '<div class="rank-math-serp-fields-wrapper hidden">',
@@ -68,7 +68,7 @@ $cmb->add_field(
 			'class'                  => 'cmb2_textarea wp-exclude-emoji',
 			'rows'                   => 2,
 			'data-autoresize'        => true,
-			'data-gramm_editor'      => 'false',
+			'data-gramm'             => 'false',
 			'data-exclude-variables' => 'seo_title,seo_description',
 		],
 		'after_row'  => '</div>' . $serp_footer,

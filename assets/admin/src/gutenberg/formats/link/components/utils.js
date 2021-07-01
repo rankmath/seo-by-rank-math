@@ -110,7 +110,7 @@ export function createLinkFormat( {
 	id,
 } ) {
 	const format = {
-		type: 'rankmath/link',
+		type: 'core/link',
 		attributes: {
 			url,
 		},

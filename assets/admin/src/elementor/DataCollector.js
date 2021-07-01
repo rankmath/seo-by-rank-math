@@ -17,7 +17,7 @@ import {
 /**
  * WordPress dependencies
  */
-import { addAction } from '@wordpress/hooks'
+import { addAction, doAction } from '@wordpress/hooks'
 import apiFetch from '@wordpress/api-fetch'
 import { dispatch, select, subscribe } from '@wordpress/data'
 import { safeDecodeURIComponent } from '@wordpress/url'
@@ -285,9 +285,11 @@ class DataCollector {
 				content: this.getContent(),
 			},
 		} ).then( ( response ) => {
-			if ( isString( response ) ) {
-				dispatch( 'rank-math' ).updatePermalink( response )
+			if ( isString( response.slug ) ) {
+				dispatch( 'rank-math' ).updatePermalink( response.slug )
 			}
+
+			doAction( 'rank_math_metadata_updated', response )
 		} )
 
 		dispatch( 'rank-math' ).resetDirtyMetadata()

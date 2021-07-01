@@ -35,8 +35,11 @@ class Admin_Helper {
 			require_once ABSPATH . 'wp-admin/includes/file.php';
 		}
 		$wp_filesystem = WordPress::get_filesystem();
-		$htaccess_file = get_home_path() . '.htaccess';
+		if ( empty( $wp_filesystem ) ) {
+			return;
+		}
 
+		$htaccess_file = get_home_path() . '.htaccess';
 		return ! $wp_filesystem->exists( $htaccess_file ) ? false : [
 			'content'  => $wp_filesystem->get_contents( $htaccess_file ),
 			'writable' => $wp_filesystem->is_writable( $htaccess_file ),

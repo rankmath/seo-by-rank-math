@@ -5756,19 +5756,6 @@ export default {
 					}
 				}
 			},
-			"contentUrl": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": false,
-					"field": {
-						"label": __( "Content URL", "rank-math" ),
-						"help": __( "A URL pointing to the actual video media file", "rank-math" ),
-						"classes": "col-6"
-					}
-				}
-			},
 			"embedUrl": {
 				"map": {
 					"isArray": false,
@@ -5777,7 +5764,20 @@ export default {
 					"isRecommended": false,
 					"field": {
 						"label": __( "Embed URL", "rank-math" ),
-						"help": __( "A URL pointing to the embeddable player for the video", "rank-math" ),
+						"help": __( "A URL pointing to the embeddable player for the video. Example: <code>https://www.youtube.com/embed/VIDEOID</code>", "rank-math" ),
+						"classes": "col-6"
+					}
+				}
+			},
+			"contentUrl": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": false,
+					"field": {
+						"label": __( "Content URL", "rank-math" ),
+						"help": __( "A URL pointing to the actual video media file like MP4, MOV, etc. Please leave it empty if you don't know the URL.", "rank-math" ),
 						"classes": "col-6"
 					}
 				}

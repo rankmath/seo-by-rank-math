@@ -18,6 +18,7 @@ use RankMath\Redirections\Metabox;
 use RankMath\Rest\Rest_Helper;
 use RankMath\Rest\Sanitize;
 use RankMath\Traits\Meta;
+use RankMath\Schema\DB;
 use WP_REST_Controller;
 use WP_REST_Request;
 use WP_REST_Server;
@@ -121,6 +122,7 @@ class Shared extends WP_REST_Controller {
 		$meta        = apply_filters( 'rank_math/filter_metadata', $request->get_param( 'meta' ), $request );
 		$content     = $request->get_param( 'content' );
 		do_action( 'rank_math/pre_update_metadata', $object_id, $content );
+
 		$new_slug = true;
 		if ( isset( $meta['permalink'] ) && ! empty( $meta['permalink'] ) ) {
 			$post     = get_post( $object_id );
@@ -155,7 +157,10 @@ class Shared extends WP_REST_Controller {
 			$this->update_meta( $object_type, $object_id, $meta_key, $sanitizer->sanitize( $meta_key, $meta_value ) );
 		}
 
-		return $new_slug;
+		return [
+			'slug'    => $new_slug,
+			'schemas' => DB::get_schemas( $object_id ),
+		];
 	}
 
 	/**

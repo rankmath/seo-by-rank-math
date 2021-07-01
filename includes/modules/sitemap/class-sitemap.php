@@ -51,7 +51,7 @@ class Sitemap {
 
 		if ( class_exists( 'SitePress' ) ) {
 			$this->filter( 'rank_math/sitemap/build_type', 'rank_math_build_sitemap_filter' );
-			$this->filter( 'rank_math/sitemap/xml_post_url', 'exclude_hidden_language_posts', 10, 2 );
+			$this->filter( 'rank_math/sitemap/entry', 'exclude_hidden_language_posts', 10, 3 );
 		}
 	}
 
@@ -61,11 +61,16 @@ class Sitemap {
 	 * @since 1.0.5
 	 *
 	 * @param string $url  Post URL.
+	 * @param string $type URL type.
 	 * @param object $post Object with some post information.
 	 *
 	 * @return string
 	 */
-	public function exclude_hidden_language_posts( $url, $post ) {
+	public function exclude_hidden_language_posts( $url, $type, $post ) {
+		if ( 'post' !== $type ) {
+			return $url;
+		}
+
 		global $sitepress;
 		// Check that at least ID is set in post object.
 		if ( ! isset( $post->ID ) ) {
@@ -117,6 +122,7 @@ class Sitemap {
 	 * Add new CPT notice.
 	 *
 	 * @param  string $notice New CPT notice.
+	 * @param  int    $count  Count of new post types detected.
 	 * @return string
 	 */
 	public function new_post_type_notice( $notice, $count ) {

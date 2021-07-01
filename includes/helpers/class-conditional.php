@@ -198,6 +198,37 @@ trait Conditional {
 	}
 
 	/**
+	 * Get current editor, or false if we're not editing.
+	 *
+	 * @since 1.0.67
+	 *
+	 * @return mixed
+	 */
+	public static function get_current_editor() {
+		if ( self::is_elementor_editor() ) {
+			return 'elementor';
+		}
+
+		if ( self::is_divi_frontend_editor() ) {
+			return 'divi';
+		}
+
+		if ( self::is_block_editor() && \rank_math_is_gutenberg() ) {
+			return 'gutenberg';
+		}
+
+		if ( self::is_ux_builder() ) {
+			return 'uxbuilder';
+		}
+
+		if ( Admin_Helper::is_post_edit() ) {
+			return 'classic';
+		}
+
+		return false;
+	}
+
+	/**
 	 * Is Advanced Mode.
 	 *
 	 * @since 1.0.43
