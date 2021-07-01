@@ -226,7 +226,7 @@ class JsonLD {
 	 */
 	public function add_context_data( $data ) {
 		$is_product_archive = $this->is_product_archive_page();
-		$can_add_global     = $this->can_add_global_entities( $data );
+		$can_add_global     = $this->can_add_global_entities( $data, $is_product_archive );
 		$snippets           = [
 			'\\RankMath\\Schema\\Publisher'     => ! isset( $data['publisher'] ) && $can_add_global,
 			'\\RankMath\\Schema\\Website'       => $can_add_global,
@@ -235,7 +235,6 @@ class JsonLD {
 			'\\RankMath\\Schema\\Author'        => is_author() || ( is_singular() && $can_add_global ),
 			'\\RankMath\\Schema\\Webpage'       => $can_add_global,
 			'\\RankMath\\Schema\\Products_Page' => $is_product_archive,
-			'\\RankMath\\Schema\\ItemListPage'  => ! $is_product_archive && ( is_category() || is_tag() || is_tax() ),
 			'\\RankMath\\Schema\\Singular'      => ! post_password_required() && is_singular(),
 		];
 
@@ -346,10 +345,16 @@ class JsonLD {
 	/**
 	 * Whether to add global schema entities.
 	 *
-	 * @param array $data Array of json-ld data.
+	 * @param array $data               Array of json-ld data.
+	 * @param bool  $is_product_archive Whether the current page is a Product archive.
 	 * @return bool
 	 */
-	public function can_add_global_entities( $data = [] ) {
+	public function can_add_global_entities( $data = [], $is_product_archive = false ) {
+		if ( ! $is_product_archive && ( is_category() || is_tag() || is_tax() ) ) {
+			$queried_object = get_queried_object();
+			return ! Helper::get_settings( 'titles.remove_' . $queried_object->taxonomy . '_snippet_data' ) && ! $this->do_filter( 'snippet/remove_taxonomy_data', false, $queried_object->taxonomy );
+		}
+
 		if ( is_front_page() || ! is_singular() || ! Helper::can_use_default_schema( $this->post_id ) || ! empty( $data ) ) {
 			return true;
 		}
@@ -379,7 +384,7 @@ class JsonLD {
 		 *
 		 * @param bool $unsigned Default: true
 		 */
-		return ! is_front_page() && Helper::get_settings( 'general.breadcrumbs' ) && $this->do_filter( 'json_ld/breadcrumbs_enabled', true );
+		return ! is_front_page() && Helper::is_breadcrumbs_enabled() && $this->do_filter( 'json_ld/breadcrumbs_enabled', true );
 	}
 
 	/**

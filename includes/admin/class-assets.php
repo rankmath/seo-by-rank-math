@@ -72,6 +72,10 @@ class Assets implements Runner {
 		// Tagify.
 		wp_register_script( 'tagify', $vendor . 'tagify/tagify.min.js', null, '2.31.6', true );
 
+		// Inline script for core admin page Settings > Permalinks.
+		wp_register_script( self::PREFIX . 'core-permalink-settings', '' ); // phpcs:ignore
+		wp_add_inline_script( self::PREFIX . 'core-permalink-settings', $this->get_permalinks_inline_script() );
+
 		if ( ! wp_script_is( 'wp-hooks', 'registered' ) ) {
 			wp_register_script( 'wp-hooks', rank_math()->plugin_url() . 'assets/vendor/hooks.js', [], rank_math()->version, true );
 		}
@@ -234,5 +238,32 @@ class Assets implements Runner {
 		];
 
 		return array_merge( $pages, Helper::get_allowed_post_types() );
+	}
+
+	/**
+	 * Inline script to warn the user about the risks of changing the permalinks on a live site.
+	 *
+	 * @return string
+	 */
+	public function get_permalinks_inline_script() {
+		// Don't add the script if site is set to noindex.
+		if ( ! get_option( 'blog_public' ) ) {
+			return '';
+		}
+
+		return "jQuery( window ).load( function() {
+			var noticeShown = false;
+			var showNotice = function() {
+				if ( noticeShown ) {
+					return true;
+				}
+				jQuery( '.rank-math-notice-permalinks-warning' ).removeClass( 'hidden' ).insertBefore( 'p.submit' );
+				noticeShown = true;	
+				return true;
+			}
+
+			jQuery( '.available-structure-tags button' ).on( 'click', showNotice );
+			jQuery( 'input[type=text], input[type=radio]' ).on( 'focus change', showNotice );
+		} );";
 	}
 }

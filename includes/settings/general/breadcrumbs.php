@@ -10,15 +10,24 @@ use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-$cmb->add_field(
-	[
-		'id'      => 'breadcrumbs',
-		'type'    => 'toggle',
-		'name'    => esc_html__( 'Enable breadcrumbs function', 'rank-math' ),
-		'desc'    => esc_html__( 'Turning off breadcrumbs will hide breadcrumbs inserted in template files too.', 'rank-math' ),
-		'default' => 'off',
-	]
-);
+$args = [
+	'id'      => 'breadcrumbs',
+	'type'    => 'toggle',
+	'name'    => esc_html__( 'Enable breadcrumbs function', 'rank-math' ),
+	'desc'    => esc_html__( 'Turning off breadcrumbs will hide breadcrumbs inserted in template files too.', 'rank-math' ),
+	'default' => 'on',
+];
+
+if ( current_theme_supports( 'rank-math-breadcrumbs' ) ) {
+	$args['force_enable'] = true;
+	$args['disabled']     = true;
+	$args['desc']         = sprintf(
+		// Translators: Code to add support for Rank Math Breadcrumbs.
+		esc_html__( 'This option cannot be changed since your theme has added the support for Rank Math Breadcrumbs using: %s', 'rank-math' ),
+		"<br /><code>add_theme_support( 'rank-math-breadcrumbs' );</code>"
+	);
+}
+$cmb->add_field( $args );
 
 $dependency = [ [ 'breadcrumbs', 'on' ] ];
 $cmb->add_field(

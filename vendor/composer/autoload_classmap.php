@@ -222,7 +222,6 @@ return array(
     'RankMath\\Schema\\DB' => $baseDir . '/includes/modules/schema/class-db.php',
     'RankMath\\Schema\\Event' => $baseDir . '/includes/modules/schema/snippets/class-event.php',
     'RankMath\\Schema\\Frontend' => $baseDir . '/includes/modules/schema/class-frontend.php',
-    'RankMath\\Schema\\ItemListPage' => $baseDir . '/includes/modules/schema/snippets/class-itemlistpage.php',
     'RankMath\\Schema\\JobPosting' => $baseDir . '/includes/modules/schema/snippets/class-jobposting.php',
     'RankMath\\Schema\\JsonLD' => $baseDir . '/includes/modules/schema/class-jsonld.php',
     'RankMath\\Schema\\Local' => $baseDir . '/includes/modules/schema/snippets/class-local.php',

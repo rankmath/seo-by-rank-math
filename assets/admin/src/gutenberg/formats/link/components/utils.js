@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { startsWith } from 'lodash'
+import { startsWith, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -95,6 +95,8 @@ export function isValidHref( href ) {
  * @param {boolean} options.noFollow         Whether this link will have nofollow rel.
  * @param {boolean} options.sponsored        Whether this link will have sponsored rel.
  * @param {Object}  options.text             The text that is being hyperlinked.
+ * @param {Object}  options.type             The link type.
+ * @param {Object}  options.id               The referenced link ID.
  *
  * @return {Object} The final format object.
  */
@@ -104,6 +106,8 @@ export function createLinkFormat( {
 	noFollow,
 	sponsored,
 	text,
+	type,
+	id,
 } ) {
 	const format = {
 		type: 'rankmath/link',
@@ -115,16 +119,27 @@ export function createLinkFormat( {
 	const relAttributes = []
 
 	if ( opensInNewWindow ) {
-		const label = sprintf(
-			// translators: accessibility label for external links, where the argument is the link text
-			__( '%s (opens in a new tab)', 'rank-math' ),
-			text
-		)
-
 		format.attributes.target = '_blank'
-		format.attributes[ 'aria-label' ] = label
+
+		if ( ! isUndefined( text ) ) {
+			const label = sprintf(
+				// translators: accessibility label for external links, where the argument is the link text
+				__( '%s (opens in a new tab)', 'rank-math' ),
+				text
+			)
+
+			format.attributes[ 'aria-label' ] = label
+		}
 
 		relAttributes.push( 'noreferrer noopener' )
+	}
+
+	if ( type ) {
+		format.attributes.type = type
+	}
+
+	if ( id ) {
+		format.attributes.id = id
 	}
 
 	if ( noFollow ) {

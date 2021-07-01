@@ -13,6 +13,7 @@
 
 namespace RankMath\Replace_Variables;
 
+use RankMath\Paper\Paper;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\WordPress;
 
@@ -100,10 +101,10 @@ class Replacer {
 		// Setup arguments.
 		$this->args = (object) wp_parse_args( $args, self::$defaults );
 		if ( ! empty( $this->args->post_content ) ) {
-			$this->args->post_content = WordPress::strip_shortcodes( $this->args->post_content );
+			$this->args->post_content = Paper::should_apply_shortcode() ? do_shortcode( $this->args->post_content ) : WordPress::strip_shortcodes( $this->args->post_content );
 		}
 		if ( ! empty( $this->args->post_excerpt ) ) {
-			$this->args->post_excerpt = WordPress::strip_shortcodes( $this->args->post_excerpt );
+			$this->args->post_excerpt = Paper::should_apply_shortcode() ? do_shortcode( $this->args->post_excerpt ) : WordPress::strip_shortcodes( $this->args->post_excerpt );
 		}
 
 		// Setup exlucusion.

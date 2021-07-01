@@ -54,7 +54,7 @@ class Frontend {
 
 		rank_math()->shortcodes = new Shortcodes();
 
-		if ( Helper::get_settings( 'general.breadcrumbs' ) ) {
+		if ( Helper::is_breadcrumbs_enabled() ) {
 			/**
 			 * If RM's breadcrumbs are enabled then we can remove the bbPress breadcrumbs.
 			 */

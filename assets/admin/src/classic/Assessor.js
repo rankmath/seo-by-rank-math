@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { debounce, isUndefined, intersection } from 'lodash'
+import { debounce, isUndefined, filter, intersection } from 'lodash'
 import { Analyzer, Paper, Helpers } from '@rankMath/analyzer'
 
 /**
@@ -80,6 +80,7 @@ class Assessor {
 		paper.setUrl( data.permalink )
 		paper.setText( applyFilters( 'rank_math_content', data.content ) )
 		paper.setKeyword( Helpers.removeDiacritics( keyword ) )
+		paper.setKeywords( rankMathEditor.components.focusKeywords.getFocusKeywords() )
 
 		if ( ! isUndefined( data.featuredImage ) ) {
 			paper.setThumbnail( data.featuredImage.source_url )

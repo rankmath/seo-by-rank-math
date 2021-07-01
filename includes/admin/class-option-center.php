@@ -60,7 +60,7 @@ class Option_Center implements Runner {
 				'classes'   => 'rank-math-advanced-option',
 				/* translators: Link to kb article */
 				'desc'      => sprintf( esc_html__( 'Here you can set up the breadcrumbs function. %s', 'rank-math' ), '<a href="' . KB::get( 'breadcrumbs' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>. <br/>' ),
-				'after_row' => '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>' . esc_html__( 'Use the following code in your theme template files to display breadcrumbs:', 'rank-math' ) . '<br /><code>&lt;?php if (function_exists(\'rank_math_the_breadcrumbs\')) rank_math_the_breadcrumbs(); ?&gt;</code><br /> OR <br /><code>[rank_math_breadcrumb]</code></p></div>',
+				'after_row' => current_theme_supports( 'rank-math-breadcrumbs' ) ? '' : '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>' . esc_html__( 'Use the following code in your theme template files to display breadcrumbs.', 'rank-math' ) . ' <a href="' . KB::get( 'breadcrumbs-install' ) . '" target="_blank">' . esc_html__( 'Learn More', 'rank-math' ) . '</a><br /><code>&lt;?php if (function_exists(\'rank_math_the_breadcrumbs\')) rank_math_the_breadcrumbs(); ?&gt;</code> OR <code>[rank_math_breadcrumb]</code></p></div>',
 			],
 			'webmaster'   => [
 				'icon'  => 'rm-icon rm-icon-toolbox',
@@ -270,26 +270,33 @@ class Option_Center implements Runner {
 			'product_tag' => '<a href="' . KB::get( 'product-tags-settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.',
 		];
 
+		$taxonomies_data = [];
 		foreach ( Helper::get_accessible_taxonomies() as $taxonomy ) {
 			$attached = implode( ' + ', $taxonomy->object_type );
 
+			$taxonomies_data[ $attached ][ $taxonomy->name ] = $taxonomy;
+		}
+
+		foreach ( $taxonomies_data as $attached => $taxonomies ) {
 			// Seprator.
 			$tabs[ $attached ] = [
 				'title' => ucwords( $attached ) . ':',
 				'type'  => 'seprator',
 			];
 
-			$link          = isset( $hash_link[ $taxonomy->name ] ) ? $hash_link[ $taxonomy->name ] : '';
-			$taxonomy_name = isset( $hash_name[ $taxonomy->name ] ) ? $hash_name[ $taxonomy->name ] : $taxonomy->label;
+			foreach ( $taxonomies as $taxonomy ) {
+				$link          = isset( $hash_link[ $taxonomy->name ] ) ? $hash_link[ $taxonomy->name ] : '';
+				$taxonomy_name = isset( $hash_name[ $taxonomy->name ] ) ? $hash_name[ $taxonomy->name ] : $taxonomy->label;
 
-			$tabs[ 'taxonomy-' . $taxonomy->name ] = [
-				'icon'     => isset( $icons[ $taxonomy->name ] ) ? $icons[ $taxonomy->name ] : $icons['default'],
-				'title'    => $taxonomy->label,
-				/* translators: 1. taxonomy name 2. link */
-				'desc'     => sprintf( esc_html__( 'Change Global SEO, Schema, and other settings for %1$s. %2$s', 'rank-math' ), $taxonomy_name, $link ),
-				'taxonomy' => $taxonomy->name,
-				'file'     => rank_math()->includes_dir() . 'settings/titles/taxonomies.php',
-			];
+				$tabs[ 'taxonomy-' . $taxonomy->name ] = [
+					'icon'     => isset( $icons[ $taxonomy->name ] ) ? $icons[ $taxonomy->name ] : $icons['default'],
+					'title'    => $taxonomy->label,
+					/* translators: 1. taxonomy name 2. link */
+					'desc'     => sprintf( esc_html__( 'Change Global SEO, Schema, and other settings for %1$s. %2$s', 'rank-math' ), $taxonomy_name, $link ),
+					'taxonomy' => $taxonomy->name,
+					'file'     => rank_math()->includes_dir() . 'settings/titles/taxonomies.php',
+				];
+			}
 		}
 
 		if ( isset( $tabs['taxonomy-post_format'] ) ) {

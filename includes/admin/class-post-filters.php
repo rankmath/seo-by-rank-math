@@ -165,7 +165,7 @@ class Post_Filters implements Runner {
 		}
 
 		$options = [
-			''          => esc_html__( 'All Posts', 'rank-math' ),
+			''          => esc_html__( 'Rank Math', 'rank-math' ),
 			'great-seo' => esc_html__( 'SEO Score: Good', 'rank-math' ),
 			'good-seo'  => esc_html__( 'SEO Score: Ok', 'rank-math' ),
 			'bad-seo'   => esc_html__( 'SEO Score: Bad', 'rank-math' ),

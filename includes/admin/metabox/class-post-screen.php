@@ -146,7 +146,7 @@ class Post_Screen implements IScreen {
 				'sentimentKbLink'  => KB::get( 'sentiments' ),
 				'focusKeywordLink' => admin_url( 'edit.php?focus_keyword=%focus_keyword%&post_type=%post_type%' ),
 				'futureSeo'        => KB::get( 'pro-general-g' ),
-				'hasBreadcrumb'    => Helper::get_settings( 'general.breadcrumbs' ),
+				'hasBreadcrumb'    => Helper::is_breadcrumbs_enabled(),
 				'hasRedirection'   => Helper::is_module_active( 'redirections' ),
 				'isUserEdit'       => Admin_Helper::is_user_edit(),
 				'socialPanelLink'  => Helper::get_admin_url( 'options-titles#setting-panel-social' ),

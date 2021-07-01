@@ -1,6 +1,6 @@
 <?php
 /**
- * The System_Status Class.
+ * This class handles the content in Status & Tools > System Status.
  *
  * @since      1.0.33
  * @package    RankMath
@@ -29,7 +29,7 @@ class System_Status {
 		$this->prepare_info();
 
 		$this->display_system_info();
-		( new Error_Log() )->display();
+		( new Error_Log() )->display(); // phpcs:ignore
 	}
 
 	/**
@@ -83,7 +83,7 @@ class System_Status {
 	protected function display_system_info_fields( $fields ) {
 		foreach ( $fields as $field_name => $field ) {
 			$values = $this->system_info_value( $field_name, $field['value'] );
-			printf( '<tr><td>%s</td><td>%s</td></tr>', esc_html( $field['label'] ), $values );
+			printf( '<tr><td>%s</td><td>%s</td></tr>', esc_html( $field['label'] ), wp_kses_post( $values ) );
 		}
 	}
 
@@ -121,7 +121,7 @@ class System_Status {
 		$rankmath = [
 			'label'  => esc_html__( 'Rank Math', 'rank-math' ),
 			'fields' => [
-				'version' => [
+				'version'          => [
 					'label' => esc_html__( 'Version', 'rank-math' ),
 					'value' => get_option( 'rank_math_version' ),
 				],
@@ -129,19 +129,19 @@ class System_Status {
 					'label' => esc_html__( 'Database version', 'rank-math' ),
 					'value' => get_option( 'rank_math_db_version' ),
 				],
-				'plugin_plan' => [
+				'plugin_plan'      => [
 					'label' => esc_html__( 'Plugin subscription plan', 'rank-math' ),
 					'value' => isset( $plan['plan'] ) ? \ucwords( $plan['plan'] ) : esc_html__( 'Free', 'rank-math' ),
 				],
-				'active_modules' => [
+				'active_modules'   => [
 					'label' => esc_html__( 'Active modules', 'rank-math' ),
 					'value' => empty( $modules ) ? esc_html__( '(none)', 'rank-math' ) : join( ', ', $modules ),
 				],
-				'refresh_token' => [
+				'refresh_token'    => [
 					'label' => esc_html__( 'Google Refresh token', 'rank-math' ),
 					'value' => empty( $tokens['refresh_token'] ) ? esc_html__( 'No token', 'rank-math' ) : esc_html__( 'Token exists', 'rank-math' ),
 				],
-				'permissions'   => [
+				'permissions'      => [
 					'label' => esc_html__( 'Google Permission', 'rank-math' ),
 					'value' => Permissions::get_status(),
 				],
@@ -163,7 +163,7 @@ class System_Status {
 
 		$tables = [];
 		foreach ( $database_tables as $table ) {
-			$name = \str_replace( $wpdb->prefix, '', $table->name );
+			$name            = \str_replace( $wpdb->prefix, '', $table->name );
 			$tables[ $name ] = true;
 		}
 
@@ -203,9 +203,10 @@ class System_Status {
 		wp_enqueue_style( 'site-health' );
 		wp_enqueue_script( 'site-health' );
 
-		$rankmath = apply_filters( 'rank_math/status/rank_math_info', $rankmath );
+		$rankmath      = apply_filters( 'rank_math/status/rank_math_info', $rankmath );
 		$this->wp_info = [ 'rank-math' => $rankmath ] + \WP_Debug_Data::debug_data();
 
+		// Remove irrelevant data.
 		unset(
 			$this->wp_info['wp-paths-sizes'],
 			$this->wp_info['wp-media'],

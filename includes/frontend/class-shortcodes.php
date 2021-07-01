@@ -61,7 +61,7 @@ class Shortcodes {
 	 * @return string
 	 */
 	public function breadcrumb( $args ) {
-		if ( ! Helper::get_settings( 'general.breadcrumbs' ) ) {
+		if ( ! Helper::is_breadcrumbs_enabled() ) {
 			return;
 		}
 		return Breadcrumbs::get()->get_breadcrumb( $args );

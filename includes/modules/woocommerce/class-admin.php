@@ -1,6 +1,6 @@
 <?php
 /**
- * The WooCommerce Module
+ * The WooCommerce module - admin side functionality.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -11,7 +11,6 @@
 namespace RankMath\WooCommerce;
 
 use RankMath\KB;
-use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Module\Base;
 use RankMath\Traits\Hooker;

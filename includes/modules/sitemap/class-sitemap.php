@@ -47,7 +47,7 @@ class Sitemap {
 		add_action( 'rank_math/sitemap/hit_index', [ __CLASS__, 'hit_sitemap_index' ] );
 		add_action( 'rank_math/sitemap/ping_search_engines', [ __CLASS__, 'ping_search_engines' ] );
 
-		$this->filter( 'rank_math/admin/notice/new_post_type', 'new_post_type_notice' );
+		$this->filter( 'rank_math/admin/notice/new_post_type', 'new_post_type_notice', 10, 2 );
 
 		if ( class_exists( 'SitePress' ) ) {
 			$this->filter( 'rank_math/sitemap/build_type', 'rank_math_build_sitemap_filter' );
@@ -119,9 +119,14 @@ class Sitemap {
 	 * @param  string $notice New CPT notice.
 	 * @return string
 	 */
-	public function new_post_type_notice( $notice ) {
-		/* translators: post names */
-		$notice = __( 'We detected new post type(s) (%1$s), and you would want to check the settings of <a href="%2$s">Titles &amp; Meta page</a> and <a href="%3$s">the Sitemap</a>.', 'rank-math' );
+	public function new_post_type_notice( $notice, $count ) {
+		/* Translators: placeholder is the post type name. */
+		$notice = __( 'Rank Math has detected a new post type: %1$s. You may want to check the settings of the <a href="%2$s">Titles &amp; Meta page</a> and <a href="%3$s">the Sitemap</a>.', 'rank-math' );
+
+		if ( $count > 1 ) {
+			/* Translators: placeholder is the post type names separated with commas. */
+			$notice = __( 'Rank Math has detected new post types: %1$s. You may want to check the settings of the <a href="%2$s">Titles &amp; Meta page</a> and <a href="%3$s">the Sitemap</a>.', 'rank-math' );
+		}
 
 		return $notice;
 	}

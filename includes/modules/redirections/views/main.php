@@ -15,7 +15,7 @@ $redirections = Helper::get_module( 'redirections' )->admin;
 $redirections->table->prepare_items();
 
 $is_new     = (bool) Param::get( 'new' );
-$is_editing = ! empty( Param::get( 'url' ) ) || ! empty( Param::get( 'urls' ) ) || ! empty( Param::request( 'log' ) ) || ! empty( Param::request( 'redirect_uri' ) ) || $redirections->form->is_editing();
+$is_editing = ! empty( Param::get( 'url' ) ) || ! empty( Param::get( 'urls' ) ) || ! empty( $_REQUEST['log'] ) || ! empty( Param::request( 'redirect_uri' ) ) || $redirections->form->is_editing();
 
 $is_importexport = ! empty( Param::get( 'importexport' ) );
 ?>

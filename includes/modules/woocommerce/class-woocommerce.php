@@ -1,6 +1,6 @@
 <?php
 /**
- * The WooCommerce Module
+ * The WooCommerce module.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -25,7 +25,7 @@ class WooCommerce extends WC_Vars {
 	use Hooker;
 
 	/**
-	 * Hold product.
+	 * Holds the product object.
 	 *
 	 * @var WC_Product
 	 */
@@ -78,7 +78,7 @@ class WooCommerce extends WC_Vars {
 	}
 
 	/**
-	 * Replace request if product found.
+	 * Replace request if product was found.
 	 *
 	 * @param array $request Current request.
 	 *
@@ -131,7 +131,7 @@ class WooCommerce extends WC_Vars {
 	}
 
 	/**
-	 * Change robots for WooCommerce pages according to settings
+	 * Change robots for WooCommerce pages according to the settings.
 	 *
 	 * @param array $robots Array of robots to sanitize.
 	 *

@@ -1,6 +1,6 @@
 <?php
 /**
- * The WooCommerce register opengraph.
+ * Add Open Graph data for the WooCommerce module.
  *
  * @since      1.0.32
  * @package    RankMath

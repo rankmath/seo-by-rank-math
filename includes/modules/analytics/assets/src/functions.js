@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import moment from 'moment'
 import classnames from 'classnames'
 import { get, has, map, isArray } from 'lodash'
 import { Link } from 'react-router-dom'
@@ -211,13 +210,11 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 									<ChartTooltip
 										wrapperClassName="rank-math-graph-tooltip"
 										labelFormatter={ ( index ) =>
-											moment(
-												get(
-													graph,
-													[ index, 'date' ],
-													''
-												)
-											).format( 'D MMM, YYYY' )
+											get(
+												graph,
+												[ index, 'formatted_date' ],
+												''
+											)
 										}
 									/>
 									<defs>

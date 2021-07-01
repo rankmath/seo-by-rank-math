@@ -85,6 +85,7 @@ const SchemaPropertyField = ( {
 			<TextControl
 				type="number"
 				autoComplete="off"
+				step="0.01"
 				value={ value }
 				onChange={ onChange }
 				{ ...rest }

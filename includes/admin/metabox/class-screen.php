@@ -141,6 +141,7 @@ class Screen implements IScreen {
 				'assessor'         => [
 					'serpData'         => $this->get_object_values(),
 					'powerWords'       => $this->power_words(),
+					'diacritics'       => $this->diacritics(),
 					'sentimentKbLink'  => KB::get( 'sentiments' ),
 					'hundredScoreLink' => KB::get( 'score-100-ge' ),
 					'researchesTests'  => $this->get_analysis(),
@@ -280,6 +281,23 @@ class Screen implements IScreen {
 		}
 		$words = $words ? $words : include $file;
 		return $this->do_filter( 'metabox/power_words', array_map( 'strtolower', $words ), $locale );
+	}
+
+	/**
+	 * Get diacritics (accents).
+	 *
+	 * @return array
+	 */
+	private function diacritics() {
+		$locale = Locale::get_site_language();
+		$locale = in_array( $locale, [ 'en', 'de' ], true ) ? $locale : 'en';
+		$file   = rank_math()->plugin_dir() . 'assets/vendor/diacritics/' . $locale . '.php';
+		if ( ! file_exists( $file ) ) {
+			return false;
+		}
+
+		$diacritics = include_once $file;
+		return $this->do_filter( 'metabox/diacritics', $diacritics, $locale );
 	}
 
 	/**

@@ -1,10 +1,10 @@
 <?php
 /**
- * The Status module.
+ * The Status & Tools internal module.
  *
  * @since      1.0.33
  * @package    RankMath
- * @subpackage RankMath
+ * @subpackage RankMath\Status
  * @author     Rank Math <support@rankmath.com>
  */
 

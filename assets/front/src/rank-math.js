@@ -23,7 +23,7 @@ import jQuery from 'jquery'
 			adminMenu() {
 				const menu = $( '#wp-admin-bar-rank-math-mark-me' ),
 					self = this,
-					icon = '<span class="dashicons dashicons-yes" style="font-family: dashicons; font-size: 19px;"></span>'
+					icon = '<span class="dashicons dashicons-yes" style="font-family:dashicons;font-size:19px;line-height:28px;margin:0 3px 0 -4px;"></span>'
 
 				menu.on( 'click', '.mark-page-as a', function( event ) {
 					event.preventDefault()

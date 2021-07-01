@@ -352,7 +352,7 @@ class Watcher {
 		$admin_url = Helper::get_admin_url( 'redirections', [ 'url' => trim( set_url_scheme( $url, 'relative' ), '/' ) ] );
 
 		/* translators: 1. url to new screen, 2. old trashed post permalink */
-		$message = sprintf( wp_kses_post( __( '<strong>SEO Notice:</strong> A previously published %1$s has been moved to trash. You may redirect it <code>%2$s</code> to <a href="%3$s">new url</a>.', 'rank-math' ) ), $type, $url, $admin_url );
+		$message = sprintf( wp_kses_post( __( '<strong>SEO Notice:</strong> A previously published %1$s has been moved to trash. You may redirect <code>%2$s</code> to <a href="%3$s">a new url</a>.', 'rank-math' ) ), $type, $url, $admin_url );
 
 		$this->add_notification( $message, true );
 	}

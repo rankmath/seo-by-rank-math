@@ -93,15 +93,15 @@ class Stats extends Keywords {
 		$this->start = Helper::get_midnight( $start );
 
 		// Period.
-		$this->end_date   = date_i18n( 'Y-m-d 23:59:59', $end );
-		$this->start_date = date_i18n( 'Y-m-d 00:00:00', $start );
+		$this->end_date   = Helper::get_date( 'Y-m-d 23:59:59', $end, false, true );
+		$this->start_date = Helper::get_date( 'Y-m-d 00:00:00', $start, false, true );
 
 		// Compare date.
 		$this->days               = ceil( abs( $end - $start ) / DAY_IN_SECONDS );
 		$this->compare_end_date   = $start - DAY_IN_SECONDS;
 		$this->compare_start_date = $this->compare_end_date - ( $this->days * DAY_IN_SECONDS );
-		$this->compare_end_date   = date_i18n( 'Y-m-d 23:59:59', $this->compare_end_date );
-		$this->compare_start_date = date_i18n( 'Y-m-d 00:00:00', $this->compare_start_date );
+		$this->compare_end_date   = Helper::get_date( 'Y-m-d 23:59:59', $this->compare_end_date, false, true );
+		$this->compare_start_date = Helper::get_date( 'Y-m-d 00:00:00', $this->compare_start_date, false, true );
 	}
 
 	/**
@@ -149,20 +149,19 @@ class Stats extends Keywords {
 		$start = strtotime( $interval, $end );
 
 		for ( $i = 0; $i < $ticks; $i++ ) {
-			$end_date   = date_i18n( 'Y-m-d', $end );
-			$start_date = date_i18n( 'Y-m-d', $start );
+			$end_date   = Helper::get_date( 'Y-m-d', $end, false, true );
+			$start_date = Helper::get_date( 'Y-m-d', $start, false, true );
 
 			$dates[ $end_date ] = [
-				'start'     => $start_date,
-				'end'       => $end_date,
-				'formatted' => $start_date === $end_date ?
-					date_i18n( 'd M, Y', $end ) :
-					date_i18n( 'd M', $start ) . ' - ' . date_i18n( 'd M, Y', $end ),
+				'start'            => $start_date,
+				'end'              => $end_date,
+				'formatted_date'   => Helper::get_date( 'd M, Y', $end ),
+				'formatted_period' => Helper::get_date( 'd M', $start ) . ' - ' . Helper::get_date( 'd M, Y', $end ),
 			];
 
 			$map[ $start_date ] = $end_date;
 			for ( $j = 1; $j < 32; $j++ ) {
-				$date = date_i18n( 'Y-m-d', strtotime( $j . ' days', $start ) );
+				$date = Helper::get_date( 'Y-m-d', strtotime( $j . ' days', $start ), false, true );
 				if ( $start_date === $end_date ) {
 					break;
 				}
@@ -178,7 +177,6 @@ class Stats extends Keywords {
 			$end   = \strtotime( '-1 days', $start );
 			$start = \strtotime( $interval, $end + $addition );
 		}
-
 		return [
 			'map'   => $map,
 			'dates' => \array_reverse( $dates ),
@@ -225,7 +223,8 @@ class Stats extends Keywords {
 		foreach ( $dates as $date => $d ) {
 			$data[ $date ]                  = $default;
 			$data[ $date ]['date']          = $date;
-			$data[ $date ]['dateFormatted'] = $d['formatted'];
+			$data[ $date ]['dateFormatted'] = $d['start'] === $d['end'] ? $d['formatted_date'] : $d['formatted_period'];
+			$data[ $date ]['formattedDate'] = $d['formatted_date'];
 		}
 
 		return $data;
@@ -803,29 +802,17 @@ class Stats extends Keywords {
 	 * @return array
 	 */
 	public function filter_analytics_data( $data, $args ) {
-		$order_position_fields = [ 'position', 'diffPosition' ];
-		$dimension             = $args['dimension'];
-		$type                  = $args['type'];
-		$offset                = $args['offset'];
-		$perpage               = $args['perpage'];
-		$order_by_field        = $args['orderBy'];
+		$dimension      = $args['dimension'];
+		$offset         = $args['offset'];
+		$perpage        = $args['perpage'];
+		$order_by_field = $args['orderBy'];
 
-		// Filter array by $type value.
-		$order_by_position = in_array( $order_by_field, [ 'diffPosition', 'position' ], true ) ? true : false;
-		if ( ( 'win' === $type && $order_by_position ) || ( 'lose' === $type && ! $order_by_position ) ) {
-			$data = array_filter(
-				$data,
-				function( $row ) use ( $order_by_field ) {
-					return $row[ $order_by_field ] < 0;
-				}
-			);
-		} elseif ( ( 'lose' === $type && $order_by_position ) || ( 'win' === $type && ! $order_by_position ) ) {
-			$data = array_filter(
-				$data,
-				function( $row ) use ( $order_by_field ) {
-					return $row[ $order_by_field ] > 0;
-				}
-			);
+		/**
+		 * Short-circuit to filter the data.
+		 */
+		$pre = $this->do_filter( 'analytics/pre_filter_data', null, $data, $args );
+		if ( is_array( $pre ) ) {
+			return $pre;
 		}
 
 		// Sort array by $args['order'], $order_by_field value.
@@ -899,6 +886,11 @@ class Stats extends Keywords {
 				$data[ $row->query ]['graph'] = [];
 			}
 
+			if ( ! isset( $row->formatted_date ) ) {
+				$formatted_date      = Helper::get_date( 'd M, Y', strtotime( $row->date ) );
+				$row->formatted_date = $formatted_date;
+			}
+
 			$data[ $row->query ]['graph'][] = $row;
 		}
 
@@ -917,6 +909,11 @@ class Stats extends Keywords {
 		foreach ( $history as $row ) {
 			if ( ! isset( $data[ $row->page ]['graph'] ) ) {
 				$data[ $row->page ]['graph'] = [];
+			}
+
+			if ( ! isset( $row->formatted_date ) ) {
+				$formatted_date      = Helper::get_date( 'd M, Y', strtotime( $row->date ) );
+				$row->formatted_date = $formatted_date;
 			}
 
 			$data[ $row->page ]['graph'][] = $row;
