@@ -69,8 +69,9 @@ class Snippet_Shortcode {
 	public function rich_snippet( $atts ) {
 		$atts = shortcode_atts(
 			[
-				'id'      => false,
-				'post_id' => Param::get( 'post_id' ) ? Param::get( 'post_id' ) : get_the_ID(),
+				'id'        => false,
+				'post_id'   => Param::get( 'post_id' ) ? Param::get( 'post_id' ) : get_the_ID(),
+				'className' => '',
 			],
 			$atts,
 			'rank_math_rich_snippet'
@@ -101,7 +102,7 @@ class Snippet_Shortcode {
 			 * @param WP_Post           $post     The post instance.
 			 * @param Snippet_Shortcode $this     Snippet_Shortcode instance.
 			 */
-			$html .= $this->do_filter( 'snippet/html', $this->get_snippet_content( $schema, $post ), $schema, $post, $this );
+			$html .= $this->do_filter( 'snippet/html', $this->get_snippet_content( $schema, $post, $atts ), $schema, $post, $this );
 		}
 
 		return $html;
@@ -112,10 +113,12 @@ class Snippet_Shortcode {
 	 *
 	 * @param  array   $schema Schema to replace.
 	 * @param  WP_Post $post   Post schema attached to.
+	 * @param  array   $atts   Optional. Shortcode arguments - currently only 'show'
+	 *                     parameter, which is a comma-separated list of elements to show.
 	 *
 	 * @return string Shortcode output.
 	 */
-	public function get_snippet_content( $schema, $post ) {
+	public function get_snippet_content( $schema, $post, $atts ) {
 		wp_enqueue_style( 'rank-math-review-snippet', rank_math()->assets() . 'css/rank-math-snippet.css', null, rank_math()->version );
 
 		$type         = \strtolower( $schema['@type'] );
@@ -134,9 +137,11 @@ class Snippet_Shortcode {
 			$type = 'restaurant';
 		}
 
+		$class = ! empty( $atts['className'] ) ? $atts['className'] : '';
+
 		ob_start();
 		?>
-			<div id="rank-math-rich-snippet-wrapper">
+			<div id="rank-math-rich-snippet-wrapper" class="<?php echo esc_attr( $class ); ?>">
 
 				<?php
 				$file = rank_math()->plugin_dir() . "includes/modules/schema/shortcode/$type.php";

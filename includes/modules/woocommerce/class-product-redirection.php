@@ -103,7 +103,8 @@ class Product_Redirection {
 			$new_link = preg_replace( "#{$remove}/#i", '', $new_link, 1 );
 		}
 
-		return $new_link === $uri ? false : trailingslashit( home_url( strtolower( rawurlencode( $new_link ) ) ) );
+		$new_link = implode( '/', array_map( 'rawurlencode', explode( '/', $new_link ) ) ); // encode everything but slashes.
+		return $new_link === $uri ? false : trailingslashit( home_url( strtolower( $new_link ) ) );
 	}
 
 	/**

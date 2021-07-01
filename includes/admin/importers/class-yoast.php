@@ -983,8 +983,8 @@ class Yoast extends Plugin_Importer {
 
 		$post_types = array_keys( $yoast_news['news_sitemap_include_post_types'] );
 		foreach ( $post_types as $post_type ) {
-			$taxonomies = get_object_taxonomies( $post_type, 'objects' );
-
+			$taxonomies   = get_object_taxonomies( $post_type, 'objects' );
+			$exclude_data = [];
 			foreach ( $taxonomies as $taxonomy ) {
 				if ( ! $taxonomy->show_ui ) {
 					continue;
@@ -1006,9 +1006,13 @@ class Yoast extends Plugin_Importer {
 					$field = "{$taxonomy->name}_{$term}_for_{$post_type}";
 					$key   = "news_sitemap_exclude_{$post_type}_terms";
 					if ( isset( $exclude_terms[ $field ] ) && 'on' === $exclude_terms[ $field ] ) {
-						$this->sitemap[ $key ][] = $term_id;
+						$exclude_data[ $taxonomy->name ][] = $term_id;
 					}
 				}
+			}
+
+			if ( ! empty( $exclude_data ) ) {
+				$this->sitemap[ "news_sitemap_exclude_{$post_type}_terms" ] = [ $exclude_data ];
 			}
 		}
 	}

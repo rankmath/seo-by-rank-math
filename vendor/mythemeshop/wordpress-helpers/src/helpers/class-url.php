@@ -146,7 +146,7 @@ class Url {
 			return 'localhost';
 		}
 
-		if ( preg_match( '/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,15})$/i', $domain, $regs ) ) {
+		if ( preg_match( '/(?P<domain>[a-zÀ-ž0-9][a-zÀ-ž0-9\-]{1,63}\.[a-zÀ-ž\.]{2,15})$/ui', $domain, $regs ) ) {
 			return $regs['domain'];
 		}
 

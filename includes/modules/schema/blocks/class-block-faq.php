@@ -130,10 +130,14 @@ class Block_FAQ extends Block {
 
 		$list_tag = $this->get_list_style( $attributes['listStyle'] );
 		$item_tag = $this->get_list_item_style( $attributes['listStyle'] );
+		$class    = 'rank-math-block';
+		if ( ! empty( $attributes['className'] ) ) {
+			$class .= ' ' . esc_attr( $attributes['className'] );
+		}
 
 		// HTML.
 		$out   = [];
-		$out[] = sprintf( '<div id="rank-math-faq" class="rank-math-block"%s>', $this->get_styles( $attributes ) );
+		$out[] = sprintf( '<div id="rank-math-faq" class="%1$s"%2$s>', $class, $this->get_styles( $attributes ) );
 		$out[] = sprintf( '<%1$s class="rank-math-list %2$s">', $list_tag, $attributes['listCssClasses'] );
 
 		// Questions.

@@ -117,6 +117,7 @@ class KB {
 		'google-api-key'              => 'https://rankmath.com/kb/how-to-get-a-google-api-key/?utm_source=Plugin&utm_campaign=WP',
 		'instant-indexing'            => 'https://rankmath.com/blog/google-indexing-api/?utm_source=Plugin&utm_campaign=WP',
 		'bing-instant-indexing'       => 'https://rankmath.com/blog/bing-indexing-api/?utm_source=Plugin&utm_campaign=WP',
+		'email-reports-logo'          => 'https://rankmath.com/kb/seo-email-reporting/?utm_source=Plugin&utm_medium=Email%20Report%20Logo&utm_campaign=WP',
 	];
 
 	/**

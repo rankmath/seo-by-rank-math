@@ -103,6 +103,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Analytics\\Analytics' => __DIR__ . '/../..' . '/includes/modules/analytics/class-analytics.php',
         'RankMath\\Analytics\\Analytics_Common' => __DIR__ . '/../..' . '/includes/modules/analytics/class-analytics-common.php',
         'RankMath\\Analytics\\DB' => __DIR__ . '/../..' . '/includes/modules/analytics/class-db.php',
+        'RankMath\\Analytics\\Email_Reports' => __DIR__ . '/../..' . '/includes/modules/analytics/class-email-reports.php',
         'RankMath\\Analytics\\GTag' => __DIR__ . '/../..' . '/includes/modules/analytics/class-gtag.php',
         'RankMath\\Analytics\\Keywords' => __DIR__ . '/../..' . '/includes/modules/analytics/class-keywords.php',
         'RankMath\\Analytics\\Objects' => __DIR__ . '/../..' . '/includes/modules/analytics/class-objects.php',

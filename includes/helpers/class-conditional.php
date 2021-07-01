@@ -38,7 +38,8 @@ trait Conditional {
 	/**
 	 * Check if module is active.
 	 *
-	 * @param  string $id Module ID.
+	 * @param  string  $id               Module ID.
+	 * @param  boolean $check_registered Whether to check if module is among registered modules or not.
 	 * @return boolean
 	 */
 	public static function is_module_active( $id, $check_registered = true ) {
@@ -188,7 +189,7 @@ trait Conditional {
 	/**
 	 * Is on Divi frontend editor.
 	 *
-	 * @since TODO: Add version.
+	 * @since 1.0.63
 	 *
 	 * @return boolean
 	 */
@@ -216,5 +217,16 @@ trait Conditional {
 	 */
 	public static function is_breadcrumbs_enabled() {
 		return \current_theme_supports( 'rank-math-breadcrumbs' ) || Helper::get_settings( 'general.breadcrumbs' );
+	}
+
+	/**
+	 * Is Wizard page.
+	 *
+	 * @since 1.0.64
+	 *
+	 * @return boolean
+	 */
+	public static function is_wizard() {
+		return ( filter_input( INPUT_GET, 'page' ) === 'rank-math-wizard' || filter_input( INPUT_POST, 'action' ) === 'rank_math_save_wizard' );
 	}
 }

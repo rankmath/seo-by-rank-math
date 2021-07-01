@@ -147,7 +147,7 @@ class Admin_Helper {
 	}
 
 	/**
-	 * Is user plan expire.
+	 * Is user plan expired.
 	 *
 	 * @return boolean
 	 */
