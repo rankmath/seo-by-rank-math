@@ -12,7 +12,7 @@ use RankMath\Helper;
 defined( 'ABSPATH' ) || exit;
 
 $data       = Robots_Txt::get_robots_data();
-$attributes = [];
+$attributes = [ 'data-gramm' => 'false' ];
 if ( $data['exists'] ) {
 	$attributes['readonly'] = 'readonly';
 	$attributes['value']    = $data['default'];

@@ -86,8 +86,11 @@ class Robots_Txt {
 	 */
 	public static function get_robots_data() {
 		$wp_filesystem = WordPress::get_filesystem();
-		$public        = absint( get_option( 'blog_public' ) );
+		if ( empty( $wp_filesystem ) ) {
+			return;
+		}
 
+		$public = absint( get_option( 'blog_public' ) );
 		if ( $wp_filesystem->exists( ABSPATH . 'robots.txt' ) ) {
 			return [
 				'exists'  => true,

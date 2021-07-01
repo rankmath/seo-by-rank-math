@@ -71,10 +71,6 @@ class WordPress {
 	public static function get_filesystem() {
 		global $wp_filesystem;
 
-		if ( ! defined( 'FS_METHOD' ) ) {
-			define( 'FS_METHOD', 'direct' );
-		}
-
 		if ( empty( $wp_filesystem ) ) {
 			require_once ABSPATH . '/wp-admin/includes/file.php';
 			WP_Filesystem();

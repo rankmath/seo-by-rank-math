@@ -15,6 +15,7 @@ import { compose } from '@wordpress/compose'
 import { Fragment, Component } from '@wordpress/element'
 import { Button } from '@wordpress/components'
 import { withSelect, withDispatch } from '@wordpress/data'
+import { doAction } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -267,13 +268,14 @@ class SchemaBuilder extends Component {
 	propertyChange = ( propertyId, property, value ) => {
 		const data = { ...this.state.data }
 		const parent = findProperty( propertyId, data )
-
 		Object.assign( parent, { [ property ]: value } )
-
 		if ( ! isEmpty( data.metadata ) && has( data.metadata, parent.property ) ) {
 			data.metadata[ parent.property ] = value
 		}
+
 		this.setState( { data } )
+
+		doAction( 'rank_math_property_changed', data, parent, this.setState )
 	}
 }
 

@@ -26,8 +26,9 @@ if ( false === $data ) {
 }
 
 $attrs = [
-	'value'    => $data['content'],
-	'readonly' => 'readonly',
+	'value'      => $data['content'],
+	'readonly'   => 'readonly',
+	'data-gramm' => 'false',
 ];
 
 if ( ! $data['writable'] || ! Helper::is_edit_allowed() ) {

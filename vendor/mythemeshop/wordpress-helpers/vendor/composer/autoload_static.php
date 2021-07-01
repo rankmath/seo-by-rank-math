@@ -21,6 +21,7 @@ class ComposerStaticInit65a0993a63c917989297698ea08a315e
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'MyThemeShop\\Admin\\List_Table' => __DIR__ . '/../..' . '/src/admin/class-list-table.php',
         'MyThemeShop\\Admin\\Page' => __DIR__ . '/../..' . '/src/admin/class-page.php',
         'MyThemeShop\\Database\\Clauses' => __DIR__ . '/../..' . '/src/database/class-clauses.php',

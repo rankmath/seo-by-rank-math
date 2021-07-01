@@ -13,6 +13,7 @@
 
 namespace RankMath\Sitemap;
 
+use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -162,7 +163,8 @@ class Sitemap_XML extends XML {
 	 * @param integer $current_page The part that should be generated.
 	 */
 	public function set_n( $current_page ) {
-		if ( is_scalar( $current_page ) && intval( $current_page ) > 0 ) {
+		if ( is_scalar( $current_page ) ) {
+			$this->maybe_redirect( $current_page );
 			$this->current_page = intval( $current_page );
 		}
 	}
@@ -174,5 +176,26 @@ class Sitemap_XML extends XML {
 		timer_start();
 		$this->stats['query']  = get_num_queries();
 		$this->stats['memory'] = memory_get_usage();
+	}
+
+	/**
+	 * Redirect page if $current_page has leading zeros.
+	 *
+	 * @param  mixed $current_page The page number.
+	 * @return void
+	 */
+	private function maybe_redirect( $current_page ) {
+		// Redirect when there are only zeros.
+		if ( '' !== $current_page && intval( $current_page ) < 1 ) {
+			wp_safe_redirect( preg_replace( '/0+\.xml$/', '.xml', Helper::get_current_page_url() ) );
+			die();
+		}
+
+		// Redirect when there are leading zeros.
+		$zeros_stripped = ltrim( $current_page, '0' );
+		if ( (string) $zeros_stripped !== (string) $current_page ) {
+			wp_safe_redirect( preg_replace( '/' . preg_quote( $current_page ) . '\.xml$/', $zeros_stripped . '.xml', Helper::get_current_page_url() ) );
+			die();
+		}
 	}
 }

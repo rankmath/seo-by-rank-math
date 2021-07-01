@@ -26,7 +26,7 @@ import {
  */
 import InlineLinkUI from './inline'
 
-const name = 'rankmath/link'
+const name = 'core/link'
 
 function Edit( {
 	isActive,
@@ -37,7 +37,6 @@ function Edit( {
 	contentRef,
 } ) {
 	const [ addingLink, setAddingLink ] = useState( false )
-
 	function addLink() {
 		const text = getTextContent( slice( value ) )
 
@@ -67,9 +66,7 @@ function Edit( {
 
 	function onRemoveFormat() {
 		let newValue = value
-		map( [ 'core/link', 'rankmath/link' ], ( linkFormat ) => {
-			newValue = removeFormat( newValue, linkFormat )
-		} )
+		newValue = removeFormat( newValue, 'core/link' )
 
 		onChange( { ...newValue } )
 	}

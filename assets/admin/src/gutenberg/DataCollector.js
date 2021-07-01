@@ -266,6 +266,8 @@ class DataCollector {
 						meta,
 						content: this.getPostAttribute( 'content' ),
 					},
+				} ).then( ( response ) => {
+					doAction( 'rank_math_metadata_updated', response )
 				} )
 				dispatch( 'rank-math' ).resetDirtyMetadata()
 			}

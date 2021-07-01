@@ -53,7 +53,7 @@ $cmb->add_field(
 		'classes'    => 'rank-math-supports-variables rank-math-description',
 		'attributes' => [
 			'class'                  => 'cmb2-textarea-small wp-exclude-emoji',
-			'data-gramm_editor'      => 'false',
+			'data-gramm'             => 'false',
 			'rows'                   => 2,
 			'data-exclude-variables' => 'seo_title,seo_description',
 		],

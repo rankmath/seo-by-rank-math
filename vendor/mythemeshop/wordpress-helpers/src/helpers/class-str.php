@@ -160,11 +160,12 @@ class Str {
 	/**
 	 * Convert a number to K, M, B, etc.
 	 *
-	 * @param int|double $number Number which to convert to pretty string.
+	 * @param int|double $number    Number which to convert to pretty string.
+	 * @param int        $precision Decimal places in the human-readable format.
 	 *
 	 * @return string
 	 */
-	public static function human_number( $number ) {
+	public static function human_number( $number, $precision = 1 ) {
 
 		if ( ! is_numeric( $number ) ) {
 			return 0;
@@ -184,7 +185,7 @@ class Str {
 		$units = array( '', 'K', 'M', 'B', 'T', 'Q' );
 
 		if ( array_key_exists( $unit, $units ) ) {
-			return sprintf( '%s%s%s', $negative, rtrim( number_format( $number / pow( 1000, $unit ), 1 ), '.0' ), $units[ $unit ] );
+			return sprintf( '%s%s%s', $negative, rtrim( number_format( $number / pow( 1000, $unit ), $precision ), '.0' ), $units[ $unit ] );
 		}
 
 		return $number;
