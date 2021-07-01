@@ -56,7 +56,7 @@ class Breadcrumbs {
 		static $instance;
 
 		$instance = false;
-		if ( Helper::get_settings( 'general.breadcrumbs' ) && false === $instance ) {
+		if ( Helper::is_breadcrumbs_enabled() && false === $instance ) {
 			$instance = new Breadcrumbs();
 		}
 

@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import moment from 'moment'
 import { get, isEmpty } from 'lodash'
 import ContentLoader from 'react-content-loader'
 import {
@@ -66,13 +65,11 @@ const PositionGraph = ( { graph, selected } ) => {
 				>
 					<XAxis
 						dy={ 15 }
-						dataKey="date"
+						dataKey="formattedDate"
 						interval="preserveStartEnd"
 						minTickGap={ 15 }
 						tickLine={ false }
-						tickFormatter={ ( value ) =>
-							moment( value ).format( 'D MMM, YYYY' )
-						}
+						tickFormatter={ ( value ) => value }
 						tick={ { fill: '#7f868d', fontSize: 14 } }
 						axisLine={ { stroke: 'rgba(0, 0, 0, 0.15)' } }
 					/>

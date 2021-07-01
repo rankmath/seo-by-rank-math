@@ -258,7 +258,7 @@ trait WordPress {
 			$image            = wp_get_attachment_image_src( $thumbnail_id, $size );
 			$image['caption'] = $image ? get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true ) : '';
 
-			return array_filter( $image );
+			return self::validate_image_data( $image );
 		}
 
 		preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
@@ -276,7 +276,7 @@ trait WordPress {
 
 		$image            = wp_get_attachment_image_src( $og_image, $size );
 		$image['caption'] = $image ? get_post_meta( $og_image, '_wp_attachment_image_alt', true ) : '';
-		return array_filter( $image );
+		return self::validate_image_data( $image );
 	}
 
 	/**
@@ -450,6 +450,26 @@ trait WordPress {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Validate Image data. Remove empty values and add default height and width to image
+	 *
+	 * @param  array $image The Image data.
+	 * @return array Array of image data
+	 *
+	 * @since 1.0.64
+	 */
+	private static function validate_image_data( $image ) {
+		$image = array_filter( $image );
+		if ( empty( $image ) ) {
+			return [];
+		}
+
+		$image[1] = isset( $image[1] ) ? $image[1] : 200;
+		$image[2] = isset( $image[2] ) ? $image[2] : 200;
+
+		return $image;
 	}
 
 	/**

@@ -146,7 +146,7 @@ class Import_Export implements Runner {
 		Helper::add_json( 'importConfirm', esc_html__( 'Are you sure you want to import settings into Rank Math? Don\'t worry, your current configuration will be saved as a backup.', 'rank-math' ) );
 		Helper::add_json( 'restoreConfirm', esc_html__( 'Are you sure you want to restore this backup? Your current configuration will be overwritten.', 'rank-math' ) );
 		Helper::add_json( 'deleteBackupConfirm', esc_html__( 'Are you sure you want to delete this backup?', 'rank-math' ) );
-		Helper::add_json( 'cleanPluginConfirm', esc_html__( 'Are you sure you want erase traces of plugin?', 'rank-math' ) );
+		Helper::add_json( 'cleanPluginConfirm', esc_html__( 'Are you sure you want erase all traces of this plugin?', 'rank-math' ) );
 	}
 
 	/**

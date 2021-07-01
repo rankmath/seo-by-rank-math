@@ -75,7 +75,7 @@ if ( $all_good ) :
 		<tr class="check-yes">
 			<th>
 				<?php
-				echo esc_html__( 'You are using minimum recommended WordPress version.', 'rank-math' );
+				echo esc_html__( 'You are using the recommended WordPress version.', 'rank-math' );
 				?>
 			</th>
 			<td><span class="dashicons dashicons-yes"></span></td>

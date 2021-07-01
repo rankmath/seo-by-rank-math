@@ -41,6 +41,7 @@ class Notices implements Runner {
 		$this->is_plugin_configured();
 		$this->new_post_type();
 		$this->convert_wpml_settings();
+		$this->permalink_changes_warning();
 	}
 
 	/**
@@ -99,9 +100,16 @@ class Notices implements Runner {
 			return;
 		}
 
-		$list = implode( ', ', $new );
-		/* translators: post names */
-		$message = $this->do_filter( 'admin/notice/new_post_type', __( 'We detected new post type(s) (%1$s), and you would want to check the settings of <a href="%2$s">Titles &amp; Meta page</a>.', 'rank-math' ) );
+		$list = '<code>' . implode( '</code>, <code>', $new ) . '</code>';
+		/* Translators: placeholder is the post type name. */
+		$message = __( 'Rank Math has detected a new post type: %1$s. You may want to check the settings of the <a href="%2$s">Titles &amp; Meta page</a>.', 'rank-math' );
+		$count   = count( $new );
+		if ( $count > 1 ) {
+			/* Translators: placeholder is the post type names separated with commas. */
+			$message = __( 'Rank Math has detected new post types: %1$s. You may want to check the settings of the <a href="%2$s">Titles &amp; Meta page</a>.', 'rank-math' );
+		}
+
+		$message = $this->do_filter( 'admin/notice/new_post_type', $message, $count );
 		$message = sprintf( wp_kses_post( $message ), $list, Helper::get_admin_url( 'options-titles#setting-panel-post-type-' . key( $new ) ), Helper::get_admin_url( 'options-sitemap#setting-panel-sitemap-post-type-' . key( $new ) ) );
 		Helper::add_notification(
 			$message,
@@ -216,5 +224,37 @@ class Notices implements Runner {
 		}
 
 		return $options;
+	}
+
+	/**
+	 * Maybe add notice on Permalinks page about the risks of changing the permalinks on a live site.
+	 *
+	 * @return void
+	 */
+	public function permalink_changes_warning() {
+		global $pagenow;
+		if ( 'options-permalink.php' !== $pagenow ) {
+			return;
+		}
+
+		$this->action( 'admin_enqueue_scripts', 'add_permalink_changes_warning', 12 );
+	}
+
+	/**
+	 * Add the notice for the Permalinks page.
+	 *
+	 * @return void
+	 */
+	public function add_permalink_changes_warning() {
+		wp_enqueue_script( 'rank-math-core-permalink-settings' );
+		$message = __( '<b>Rank Math Warning:</b> Changing the permalinks on a live, indexed site may result in serious loss of traffic if done incorrectly. Consider adding a new redirection from the old URL format to the new one.', 'rank-math' );
+		Helper::add_notification(
+			$message,
+			[
+				'type'    => 'warning',
+				'screen'  => 'options-permalink',
+				'classes' => 'hidden rank-math-notice-permalinks-warning is-dismissible',
+			]
+		);
 	}
 }

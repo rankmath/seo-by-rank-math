@@ -147,7 +147,7 @@ class Jobs {
 		$days  = Helper::get_settings( 'general.console_caching_control', 90 );
 
 		for ( $current = 1; $current <= $days; $current++ ) {
-			$date = date_i18n( 'Y-m-d', $start - ( DAY_IN_SECONDS * $current ) );
+			$date = Helper::get_date( 'Y-m-d', $start - ( DAY_IN_SECONDS * $current ), false, true );
 			if ( ! DB::date_exists( $date, $action ) ) {
 				$count++;
 				as_schedule_single_action(

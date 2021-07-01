@@ -1,6 +1,6 @@
 <?php
 /**
- * The Version Control Class.
+ * The Version Control internal module.
  *
  * @package    RankMath
  * @subpackage RankMath\Version_Control
@@ -30,7 +30,7 @@ class Version_Control {
 	const TRANSIENT = 'rank_math_wporg_plugin_info';
 
 	/**
-	 * Wp.org plugins api URL.
+	 * WordPress.org plugins API URL.
 	 *
 	 * @var string
 	 */

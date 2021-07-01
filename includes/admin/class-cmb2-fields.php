@@ -77,15 +77,17 @@ class CMB2_Fields implements Runner {
 	 * @param object $field_type_object This `CMB2_Types` object.
 	 */
 	public function render_toggle( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
-		$field_name   = $field->_name();
-		$active_value = ! empty( $field->args( 'active_value' ) ) ? $field->args( 'active_value' ) : 'on';
+		$field_name    = $field->_name();
+		$active_value  = ! empty( $field->args( 'active_value' ) ) ? $field->args( 'active_value' ) : 'on';
+		$escaped_value = ! empty( $field->args( 'force_enable' ) ) ? 'on' : $escaped_value;
 
 		$args = [
-			'type'  => 'checkbox',
-			'id'    => $field_name,
-			'name'  => $field_name,
-			'desc'  => '',
-			'value' => $active_value,
+			'type'     => 'checkbox',
+			'id'       => $field_name,
+			'name'     => $field_name,
+			'desc'     => '',
+			'value'    => $active_value,
+			'disabled' => isset( $field->args['disabled'] ) ? $field->args['disabled'] : false,
 		];
 
 		if ( $escaped_value === $active_value ) {

@@ -39,7 +39,8 @@ class Monitor {
 			$this->ajax( 'delete_log', 'delete_log' );
 		}
 
-		$this->action( 'get_header', 'capture_404' );
+		$hook = defined( 'CT_VERSION' ) ? 'oxygen_enqueue_frontend_scripts' : 'get_header';
+		$this->action( $hook, 'capture_404' );
 		if ( Helper::has_cap( '404_monitor' ) ) {
 			$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
 		}
@@ -147,14 +148,15 @@ class Monitor {
 		}
 
 		$parsed = $this->parse_user_agent( $u_agent );
+		$nice_ua = '';
 		if ( ! empty( $parsed['browser'] ) ) {
-			$u_agent .= $parsed['browser'];
+			$nice_ua .= $parsed['browser'];
 		}
 		if ( ! empty( $parsed['version'] ) ) {
-			$u_agent .= ' ' . $parsed['version'];
+			$nice_ua .= ' ' . $parsed['version'];
 		}
 
-		return $u_agent;
+		return $nice_ua . ' | ' . $u_agent;
 	}
 
 	/**

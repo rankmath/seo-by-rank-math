@@ -9,7 +9,7 @@ import { applyFormat, isCollapsed } from '@wordpress/rich-text'
 /**
  * Internal dependencies
  */
-import edit from './components/edit'
+import Edit from './components/edit'
 
 export const link = {
 	name: 'rankmath/link',
@@ -18,6 +18,8 @@ export const link = {
 	className: 'rank-math-link',
 	attributes: {
 		url: 'href',
+		type: 'data-type',
+		id: 'data-id',
 		target: 'target',
 		rel: 'rel',
 	},
@@ -35,6 +37,9 @@ export const link = {
 			return value
 		}
 
+		// Allows us to ask for this information when we get a report.
+		window.console.log( 'Created link:\n\n', pastedText )
+
 		return applyFormat( value, {
 			type: 'rankmath/link',
 			attributes: {
@@ -42,5 +47,5 @@ export const link = {
 			},
 		} )
 	},
-	edit,
+	edit: Edit,
 }

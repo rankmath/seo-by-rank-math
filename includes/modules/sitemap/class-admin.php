@@ -281,10 +281,15 @@ class Admin extends Base {
 
 		$sitemap_base = Router::get_sitemap_base() ? Router::get_sitemap_base() : '';
 
-		/* translators: sitemap base url */
-		return '<div class="sitemap-nginx-notice notice notice-alt notice-warning rank-math-notice">
-		 <p>' . sprintf( __( 'Since you are using NGINX, add this code to your NGINX %s <strong>if your Sitemap pages are not loading</strong> or you can ask your hosting support to add it.', 'rank-math' ), '<a href="https://help.dreamhost.com/hc/en-us/articles/216455077-Nginx-configuration-file-locations/?utm_campaign=Rank+Math" target="_blank">' . __( 'configuration file', 'rank-math' ) . '</a>' ) . '
-		 <a href="#"><span class="show">' . __( 'Click here to see the code.', 'rank-math' ) . '</span><span class="hide">' . __( 'Hide', 'rank-math' ) . '</span></a></p>
+		$message = sprintf(
+			/* Translators: the placeholder is for the sitemap base url. */
+			__( 'Since you are using an NGINX server, you may need to add the following code to your %s <strong>if your Sitemap pages are not loading</strong>. If you are unsure how to do it, please contact your hosting provider.', 'rank-math' ),
+			'<a href="https://help.dreamhost.com/hc/en-us/articles/216455077-Nginx-configuration-file-locations/?utm_campaign=Rank+Math" target="_blank">' . __( 'configuration file', 'rank-math' ) . '</a>'
+		);
+
+		return '<div class="sitemap-nginx-notice notice notice-alt notice-warning rank-math-notice">' .
+		'<p>' . $message .
+		' <a href="#"><span class="show">' . __( 'Click here to see the code.', 'rank-math' ) . '</span><span class="hide">' . __( 'Hide', 'rank-math' ) . '</span></a></p>
  <pre>
  # START Nginx Rewrites for Rank Math Sitemaps
  rewrite ^/' . $sitemap_base . 'sitemap_index.xml$ /index.php?sitemap=1 last;

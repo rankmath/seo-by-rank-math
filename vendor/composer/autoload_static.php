@@ -252,7 +252,6 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Schema\\DB' => __DIR__ . '/../..' . '/includes/modules/schema/class-db.php',
         'RankMath\\Schema\\Event' => __DIR__ . '/../..' . '/includes/modules/schema/snippets/class-event.php',
         'RankMath\\Schema\\Frontend' => __DIR__ . '/../..' . '/includes/modules/schema/class-frontend.php',
-        'RankMath\\Schema\\ItemListPage' => __DIR__ . '/../..' . '/includes/modules/schema/snippets/class-itemlistpage.php',
         'RankMath\\Schema\\JobPosting' => __DIR__ . '/../..' . '/includes/modules/schema/snippets/class-jobposting.php',
         'RankMath\\Schema\\JsonLD' => __DIR__ . '/../..' . '/includes/modules/schema/class-jsonld.php',
         'RankMath\\Schema\\Local' => __DIR__ . '/../..' . '/includes/modules/schema/snippets/class-local.php',

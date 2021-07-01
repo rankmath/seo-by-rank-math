@@ -206,4 +206,15 @@ trait Conditional {
 	public static function is_advanced_mode() {
 		return 'advanced' === apply_filters( 'rank_math/setup_mode', Helper::get_settings( 'general.setup_mode', 'advanced' ) );
 	}
+
+	/**
+	 * Is Breadcrumbs Enabled.
+	 *
+	 * @since 1.0.64
+	 *
+	 * @return boolean
+	 */
+	public static function is_breadcrumbs_enabled() {
+		return \current_theme_supports( 'rank-math-breadcrumbs' ) || Helper::get_settings( 'general.breadcrumbs' );
+	}
 }

@@ -63,7 +63,7 @@ class Assessor {
 		return isEmpty( value ) ? value : Helpers.sanitizeAppData( value )
 	}
 
-	getPaper( keyword ) {
+	getPaper( keyword, keywords ) {
 		const store = getStore().getState()
 		const gutenbergData = this.dataCollector.getData()
 		const paper = new Paper( '', { locale: rankMath.localeFull } )
@@ -76,6 +76,7 @@ class Assessor {
 			applyFilters( 'rank_math_content', gutenbergData.content )
 		)
 		paper.setKeyword( keyword )
+		paper.setKeywords( keywords )
 
 		if ( ! isUndefined( gutenbergData.featuredImage ) ) {
 			paper.setThumbnail( gutenbergData.featuredImage.source_url )
@@ -103,7 +104,8 @@ class Assessor {
 			/*eslint array-callback-return: 0*/
 			keywords.map( ( keyword, index ) => {
 				const paper = this.getPaper(
-					Helpers.removeDiacritics( keyword )
+					Helpers.removeDiacritics( keyword ),
+					keywords
 				)
 				const researches =
 					0 === index

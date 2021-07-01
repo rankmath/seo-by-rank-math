@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import moment from 'moment'
 import { map, isEmpty } from 'lodash'
 import ContentLoader from 'react-content-loader'
 import {
@@ -71,13 +70,11 @@ const PerformanceGraph = ( { stats, selected } ) => {
 				<AreaChart data={ graph } margin={ { top: 10 } } baseValue="dataMin">
 					<XAxis
 						dy={ 15 }
-						dataKey="date"
+						dataKey="formattedDate"
 						interval={ 1 }
 						tickLine={ false }
-						tickFormatter={ ( value ) =>
-							moment( value ).format( 'D MMM, YYYY' )
-						}
-						tick={ <CustomizedAxisTick /> }
+						tickFormatter={ ( value ) => value }
+						tick={ <CustomizedAxisTick isFormat={ false } /> }
 						axisLine={ { stroke: 'rgba(0, 0, 0, 0.15)' } }
 						domain={ [ 'dataMin', 'dataMax' ] }
 					/>

@@ -54,6 +54,7 @@ class KB {
 		'link-settings'               => 'https://rankmath.com/kb/general-settings/?utm_source=Plugin&utm_campaign=WP#links',
 		'image-settings'              => 'https://rankmath.com/kb/general-settings/?utm_source=Plugin&utm_campaign=WP#images',
 		'breadcrumbs'                 => 'https://rankmath.com/kb/general-settings/?utm_source=Plugin&utm_campaign=WP#breadcrumbs',
+		'breadcrumbs-install'         => 'https://rankmath.com/kb/breadcrumbs/?utm_source=Plugin&utm_campaign=WP#add-breadcrumbs-theme',
 		'webmaster-tools'             => 'https://rankmath.com/kb/general-settings/?utm_source=Plugin&utm_campaign=WP#webmaster-tools',
 		'edit-robotstxt'              => 'https://rankmath.com/kb/general-settings/?utm_source=Plugin&utm_campaign=WP#edit-robotstxt',
 		'edit-htaccess'               => 'https://rankmath.com/kb/general-settings/?utm_source=Plugin&utm_campaign=WP#edit-htaccess',

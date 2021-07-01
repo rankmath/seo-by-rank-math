@@ -1,6 +1,6 @@
 <?php
 /**
- * The Error_Log Class.
+ * Locate, retrieve, and display the server's error log.
  *
  * @since      1.0.33
  * @package    RankMath
@@ -30,7 +30,7 @@ class Error_Log {
 	/**
 	 * File content.
 	 *
-	 * @var string
+	 * @var array
 	 */
 	private $contents = null;
 
@@ -88,7 +88,7 @@ class Error_Log {
 		?>
 		<div class="error-log-info" style="margin-top: 1rem;">
 			<code><?php echo esc_html( basename( $this->get_log_path() ) ); ?></code>
-			<em>(<?php echo Str::human_number( strlen( join( '', $this->contents ) ) ); ?>)</em>
+			<em>(<?php echo esc_html( Str::human_number( strlen( join( '', $this->contents ) ) ) ); ?>)</em>
 		</div>
 		<?php
 	}
@@ -99,7 +99,8 @@ class Error_Log {
 	private function display_textarea() {
 		?>
 		<div id="error-log-wrapper">
-			<textarea name="name" rows="16" cols="80" class="code large-text rank-math-code-box" disabled="disabled"><?php echo esc_textarea( $this->get_error_log_rows( 100 ) ); ?></textarea>
+			<textarea name="name" rows="16" cols="80" class="code large-text rank-math-code-box" disabled="disabled" id="rank-math-status-error-log"><?php echo esc_textarea( $this->get_error_log_rows( 100 ) ); ?></textarea>
+			<script>var textarea = document.getElementById('rank-math-status-error-log'); textarea.scrollTop = textarea.scrollHeight;</script>
 		</div>
 		<?php
 	}
@@ -121,7 +122,7 @@ class Error_Log {
 			return join( '', $this->contents );
 		}
 
-		return join( '', array_reverse( array_slice( $this->contents, -$limit ) ) );
+		return join( '', array_slice( $this->contents, -$limit ) );
 	}
 
 	/**

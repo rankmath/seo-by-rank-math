@@ -1,12 +1,13 @@
 <?php
 /**
- * SEO Analysis admin page contents.
+ * System Status - debug data accordion section.
  *
- * @package   RANK_MATH
- * @author    Rank Math <support@rankmath.com>
- * @license   GPL-2.0+
- * @link      https://rankmath.com/wordpress/plugin/seo-suite/
- * @copyright 2019 Rank Math
+ * @package    RankMath
+ * @subpackage RankMath\Status
+ * @author     Rank Math <support@rankmath.com>
+ * @license    GPL-2.0+
+ * @link       https://rankmath.com/wordpress/plugin/seo-suite/
+ * @copyright  2019 Rank Math
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -32,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 	<?php
 
 	if ( isset( $details['description'] ) && ! empty( $details['description'] ) ) {
-		printf( '<p>%s</p>', $details['description'] );
+		printf( '<p>%s</p>', esc_html( $details['description'] ) );
 	}
 
 	?>

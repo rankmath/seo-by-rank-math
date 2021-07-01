@@ -27,6 +27,6 @@ $current_version     = rank_math()->version;
 $latest_version      = Beta_Optin::get_latest_version();
 array_splice( $versions, 10 );
 
-include_once( $directory . '/views/version-control-panel.php' );
-include_once( $directory . '/views/beta-optin-panel.php' );
-include_once( $directory . '/views/auto-update-panel.php' );
+require_once $directory . '/views/version-control-panel.php';
+require_once $directory . '/views/beta-optin-panel.php';
+require_once $directory . '/views/auto-update-panel.php';

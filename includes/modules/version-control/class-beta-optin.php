@@ -1,6 +1,6 @@
 <?php
 /**
- * The Beta Opt-in Class.
+ * The Beta Opt-in functionality.
  *
  * @package    RankMath
  * @subpackage RankMath\Version_Control
@@ -284,7 +284,7 @@ class Beta_Optin {
 			'plugins-network',
 		];
 
-		if ( ! in_array( $screen->base, $applicable_screens ) ) {
+		if ( ! in_array( $screen->base, $applicable_screens, true ) ) {
 			return;
 		}
 

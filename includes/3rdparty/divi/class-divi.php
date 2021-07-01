@@ -59,13 +59,30 @@ class Divi {
 	 * Set the global lodash variable.
 	 *
 	 * Lodash's `noConflict` would prevent UnderscoreJS from taking over the underscore (_)
-	 * global variable. Because Underscore.js will later also be assigned to the underscore
+	 * global variable. Because Underscore.js will later also be assigned to the underscore (_)
 	 * global this function should run as early as possible.
 	 */
 	public function set_window_lodash() {
 		wp_register_script( 'rm-set-window-lodash', '', [ 'lodash' ], rank_math()->version, false );
 		wp_enqueue_script( 'rm-set-window-lodash' );
-		wp_add_inline_script( 'rm-set-window-lodash', 'window.lodash = window._;' );
+		wp_add_inline_script( 'rm-set-window-lodash', join( "\r\n ", [
+			"window.isLodash = function() {",
+				"if ( typeof window._ !== 'function' || typeof window._.forEach !== 'function' ) {",
+					"return false;",
+				"}",
+				"var isLodash = true;",
+				"window._.forEach(",
+					"[ 'cloneDeep', 'at', 'add', 'ary', 'attempt' ],",
+					"function( fn ) {",
+						"if ( isLodash && typeof window._[ fn ] !== 'function' ) {",
+							"isLodash = false;",
+						"}",
+					"}",
+				");",
+				"return isLodash;",
+			"}",
+			'if ( window.isLodash() ) { window.lodash = window._.noConflict(); }'
+		] ) );
 	}
 
 	/**
@@ -256,7 +273,7 @@ class Divi {
 		/**
 		 * Filter to show/hide SEO Tab in Divi Editor.
 		 */
-		if ( ! $this->do_filter( 'divi/add_seo', true ) ) {
+		if ( ! $this->do_filter( 'divi/add_seo_tab', true ) ) {
 			return false;
 		}
 

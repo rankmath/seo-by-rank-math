@@ -38,14 +38,17 @@ trait Schema {
 			return false;
 		}
 
-		$schema = apply_filters(
-			'rank_math/schema/default_type',
-			Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" ),
-			$post_type
-		);
-
+		$schema = Helper::get_settings( "titles.pt_{$post_type}_default_rich_snippet" );
 		if ( ! $schema ) {
 			return false;
+		}
+
+		if ( 'article' === $schema ) {
+			$schema = apply_filters(
+				'rank_math/schema/default_type',
+				Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ),
+				$post_type
+			);
 		}
 
 		if ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) {
@@ -56,11 +59,10 @@ trait Schema {
 			$schema = 'EDDProduct';
 		}
 
-		if ( $return_valid && ! in_array( $schema, [ 'article', 'WooCommerceProduct', 'EDDProduct' ], true ) ) {
+		if ( $return_valid && ! in_array( $schema, [ 'Article', 'NewsArticle', 'BlogPosting', 'WooCommerceProduct', 'EDDProduct' ], true ) ) {
 			return false;
 		}
 
-		$schema = 'article' === $schema ? Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ) : $schema;
 		return $sanitize ? self::sanitize_schema_title( $schema ) : $schema;
 	}
 
@@ -89,6 +91,10 @@ trait Schema {
 
 		if ( 'JobPosting' === $schema ) {
 			return esc_html__( 'Job Posting', 'rank-math' );
+		}
+
+		if ( 'SoftwareApplication' === $schema ) {
+			return esc_html__( 'Software Application', 'rank-math' );
 		}
 
 		if ( 'MusicGroup' === $schema || 'MusicAlbum' === $schema ) {

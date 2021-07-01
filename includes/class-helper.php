@@ -107,7 +107,7 @@ class Helper {
 	public static function get_midnight( $time ) {
 		$org_time = $time;
 		if ( is_numeric( $time ) ) {
-			$time = date_i18n( 'Y-m-d H:i:s', $time );
+			$time = self::get_date( 'Y-m-d H:i:s', $time, false, true );
 		}
 
 		// Early bail if time format is invalid.
@@ -298,5 +298,21 @@ class Helper {
 		$ip = filter_input( INPUT_SERVER, 'REMOTE_ADDR', FILTER_VALIDATE_IP );
 
 		return in_array( $ip, $whitelist, true );
+	}
+
+	/**
+	 * Get date using date_i18n() or date().
+	 *
+	 * @param string      $format Format to display the date.
+	 * @param int|boolean $timestamp_with_offset A sum of Unix timestamp and timezone offset in seconds.
+	 * @param boolean     $gmt Whether to use GMT timezone. Only applies if timestamp is not provided.
+	 * @param boolean     $mode Whether to use date() or date_i18n().
+	 * @return mixin
+	 */
+	public static function get_date( $format, $timestamp_with_offset = false, $gmt = false, $mode = false ) {
+		if ( true === $mode ) {
+			return date( $format, $timestamp_with_offset ); // phpcs:ignore
+		}
+		return date_i18n( $format, $timestamp_with_offset, $gmt );
 	}
 }
