@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { includes, get, isEmpty, find } from 'lodash'
+import { get, isEmpty, find } from 'lodash'
 import { __ } from '@wordpress/i18n'
 
 /**

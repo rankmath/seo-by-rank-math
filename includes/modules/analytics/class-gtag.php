@@ -310,7 +310,6 @@ class GTag {
 
 		// Get main gtag script Url.
 		$url = 'https://www.googletagmanager.com/gtag/js?id=' . esc_attr( $property_id );
-		$url = $this->do_filter( 'analytics/ga_js_url', $url );
 
 		$gtag_opt = [];
 		if ( $this->get_amp_mode() ) {
@@ -335,10 +334,15 @@ class GTag {
 		$gtag_inline_script .= 'gtag(\'js\', new Date());';
 		$gtag_inline_script .= 'gtag(\'config\', \'' . esc_attr( $property_id ) . '\', {' . join( ', ', $gtag_config ) . '} );';
 
-		return [
-			'url'    => $url,
-			'inline' => $gtag_inline_script,
-		];
+		$gtag = $this->do_filter(
+			'analytics/gtag',
+			[
+				'url'    => $url,
+				'inline' => $gtag_inline_script,
+			]
+		);
+
+		return $gtag;
 	}
 
 	/**

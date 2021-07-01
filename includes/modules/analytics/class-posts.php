@@ -41,7 +41,7 @@ class Posts extends Objects {
 
 		// In case schemas data isn't set to this post, try to get default schema info.
 		if ( empty( $post->schemas_in_use ) ) {
-			$post->schemas_in_use = Helper::get_default_schema_type( $id, true );
+			$post->schemas_in_use = Helper::get_default_schema_type( $id, true, true );
 		}
 
 		// Get analytics data for this post.

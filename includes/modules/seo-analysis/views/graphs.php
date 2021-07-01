@@ -17,9 +17,9 @@ defined( 'ABSPATH' ) || exit;
 	<div class="two-col">
 
 		<div class="graphs-main">
-			<div id="rank-math-circle-progress" data-result="<?php echo ( $percent / 100 ); ?>"><strong class="score-<?php echo $grade; ?>"><?php echo $percent; ?></strong></div>
+			<div id="rank-math-circle-progress" data-result="<?php echo floatval( $percent / 100 ); ?>"><strong class="score-<?php echo absint( $grade ); ?>"><?php echo absint( $percent ); ?></strong></div>
 			<div class="result-score">
-				<strong><?php echo $percent; ?>/100</strong>
+				<strong><?php echo absint( $percent ); ?>/100</strong>
 				<label><?php esc_html_e( 'SEO Score', 'rank-math' ); ?></label>
 			</div>
 		</div>
@@ -27,23 +27,23 @@ defined( 'ABSPATH' ) || exit;
 		<div class="graphs-side">
 			<ul class="chart">
 				<li class="chart-bar-good">
-					<span style="height:<?php echo round( $statuses['ok'] / $max * 100 ); ?>%"></span>
+					<span style="height:<?php echo absint( round( $statuses['ok'] / $max * 100 ) ); ?>%"></span>
 					<div class="result-score">
-						<strong><?php echo $statuses['ok'] . '/' . $total; ?></strong>
+						<strong><?php echo absint( $statuses['ok'] ) . '/' . absint( $total ); ?></strong>
 						<label><?php esc_html_e( 'Passed Tests', 'rank-math' ); ?></label>
 					</div>
 				</li>
 				<li class="chart-bar-average">
-					<span style="height:<?php echo round( $statuses['warning'] / $max * 100 ); ?>%"></span>
+					<span style="height:<?php echo absint( round( $statuses['warning'] / $max * 100 ) ); ?>%"></span>
 					<div class="result-score">
-						<strong><?php echo $statuses['warning'] . '/' . $total; ?></strong>
+						<strong><?php echo absint( $statuses['warning'] ) . '/' . absint( $total ); ?></strong>
 						<label><?php esc_html_e( 'Warnings', 'rank-math' ); ?></label>
 					</div>
 				</li>
 				<li class="chart-bar-bad">
-					<span style="height:<?php echo round( $statuses['fail'] / $max * 100 ); ?>%"></span>
+					<span style="height:<?php echo absint( round( $statuses['fail'] / $max * 100 ) ); ?>%"></span>
 					<div class="result-score">
-						<strong><?php echo $statuses['fail'] . '/' . $total; ?></strong>
+						<strong><?php echo absint( $statuses['fail'] ) . '/' . absint( $total ); ?></strong>
 						<label><?php esc_html_e( 'Failed Tests', 'rank-math' ); ?></label>
 					</div>
 				</li>

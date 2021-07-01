@@ -1,6 +1,6 @@
 <?php
 /**
- * The SEO Analysis Result
+ * The SEO Analysis result of each test.
  *
  * @since      1.0.24
  * @package    RankMath
@@ -44,7 +44,7 @@ class Result {
 	 * The Constructor.
 	 *
 	 * @param string $id         Result id.
-	 * @param array  $data       Result data.
+	 * @param object $data       Result data.
 	 * @param bool   $is_subpage Is sub-page result.
 	 */
 	public function __construct( $id, $data, $is_subpage ) {
@@ -57,17 +57,17 @@ class Result {
 	}
 
 	/**
-	 * Magic method.
+	 * Magic method: convert object to string.
 	 */
 	public function __toString() {
 		ob_start();
 		?>
 		<div class="row-title">
 
-			<h3><?php echo $this->result['title']; ?></h3>
+			<h3><?php echo esc_html( $this->result['title'] ); ?></h3>
 
 			<?php if ( ! empty( $this->result['tooltip'] ) ) : ?>
-			<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php echo $this->result['tooltip']; ?></span></span>
+			<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php echo esc_html( $this->result['tooltip'] ); ?></span></span>
 			<?php endif; ?>
 
 		</div>
@@ -94,7 +94,7 @@ class Result {
 
 				<?php if ( $this->has_fix() ) : ?>
 				<div class="how-to-fix-wrapper">
-					<div class="analysis-test-how-to-fix"><?php echo $this->result['fix']; ?></div>
+					<div class="analysis-test-how-to-fix"><?php echo wp_kses_post( $this->result['fix'] ); ?></div>
 				</div>
 				<?php endif; ?>
 
@@ -106,7 +106,7 @@ class Result {
 	}
 
 	/**
-	 * Get result id.
+	 * Get result ID.
 	 *
 	 * @return string
 	 */
@@ -115,7 +115,7 @@ class Result {
 	}
 
 	/**
-	 * Get category
+	 * Get result category.
 	 *
 	 * @return string
 	 */
@@ -124,7 +124,7 @@ class Result {
 	}
 
 	/**
-	 * Get status
+	 * Get result status.
 	 *
 	 * @return string
 	 */
@@ -133,7 +133,7 @@ class Result {
 	}
 
 	/**
-	 * Has fix content.
+	 * Has "how to fix" content.
 	 *
 	 * @return bool
 	 */
@@ -170,14 +170,14 @@ class Result {
 
 		printf(
 			'<div class="status-icon status-%1$s %3$s" title="%2$s"></div>',
-			$status,
+			sanitize_html_class( $status ),
 			esc_attr( $labels[ $status ] ),
 			esc_attr( $icons[ $status ] )
 		);
 	}
 
 	/**
-	 * Output test data
+	 * Output test data.
 	 */
 	private function the_content() {
 		if ( ! is_array( $this->result ) ) {
@@ -198,13 +198,13 @@ class Result {
 
 		$explode = [ 'h1_heading', 'h2_headings', 'title_length', 'description_length', 'canonical' ];
 		if ( in_array( $this->id, $explode, true ) ) {
-			echo '<code class="full-width">' . join( ', ', (array) $data ) . '</code>';
+			echo '<code class="full-width">' . wp_kses_post( join( ', ', (array) $data ) ) . '</code>';
 			return;
 		}
 	}
 
 	/**
-	 * Render list
+	 * Render results list.
 	 *
 	 * @param array $data Keywords.
 	 */
@@ -217,11 +217,11 @@ class Result {
 			$html .= $is_reverse_heading ? '<li><strong>' . $label . ': </strong> ' . esc_html( $text ) . '</li>' :
 				'<li>' . esc_html( ( is_string( $label ) ? $label . ' (' . $text . ')' : $text ) ) . '</li>';
 		}
-		echo $html . '</ul>';
+		echo wp_kses_post( $html ) . '</ul>';
 	}
 
 	/**
-	 * Is data to be render as list.
+	 * Check if result data should be rendered as a list or not.
 	 *
 	 * @return bool
 	 */
@@ -230,7 +230,7 @@ class Result {
 	}
 
 	/**
-	 * Is data to be render as reverse heading.
+	 * Check if result data should be rendered with reversed heading or not.
 	 *
 	 * @return bool
 	 */
@@ -244,9 +244,9 @@ class Result {
 	 * @param array $data Keywords.
 	 */
 	private function the_tag_cloud( $data ) {
-		echo $this->get_tag_cloud( $data );
+		echo wp_kses_post( $this->get_tag_cloud( $data ) );
 	}
-	
+
 	/**
 	 * Get tag cloud HTML.
 	 *
@@ -325,7 +325,7 @@ class Result {
 	}
 
 	/**
-	 * Get tests score.
+	 * Get test score.
 	 *
 	 * @return int
 	 */

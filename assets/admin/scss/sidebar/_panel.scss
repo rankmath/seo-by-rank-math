@@ -1,201 +1,219 @@
 // main: ../sidebar.scss
 
 .#{$namespace}-sidebar-panel {
-	.components-base-control__label {
-		font-weight: 600;
-		margin-bottom: 10px;
-		display: block;
-	}
+    .components-base-control__label {
+        font-weight: 600;
 
-	.components-toggle-control__label {
-		font-weight: 600;
-	}
+        display: block;
 
-	.components-base-control__help {
-		margin-top: 0;
+        margin-bottom: 10px;
+    }
 
-		&.#{$namespace}-notice {
-			margin: 1rem 0;
-			border-width: 0 0 0 4px;
-			border-radius: 4px;
-		}
-	}
+    .components-toggle-control__label {
+        font-weight: 600;
+    }
+
+    .components-base-control__help {
+        font-weight: normal;
+
+        margin-top: 0;
+
+        &.#{$namespace}-notice {
+            margin: 1rem 0;
+
+            border-width: 0 0 0 4px;
+            border-radius: 4px;
+        }
+    }
 }
 
 // Common core styling where wer are not using common.min.css file from the core.
-.#{$namespace}-sidebar-panel, .#{$namespace}-modal-overlay {
-	line-height: 1.4em;
+.#{$namespace}-sidebar-panel,
+.#{$namespace}-modal-overlay {
+    line-height: 1.4em;
 
-	.hidden {
-		display: none;
-	}
+    .hidden {
+        display: none;
+    }
 
-	p {
-		line-height: 1.5;
-	}
+    p {
+        line-height: 1.5;
+    }
 
-	strong {
-		font-weight: 600;
-	}
+    strong {
+        font-weight: 600;
+    }
 
-	> div {
-		outline: 0;
-	}
+    > div {
+        outline: 0;
+    }
 
-	.notice, div.error, div.updated {
-		color: #444;
-		background: #fff;
-		border: 1px solid #ccd0d4;
-		border-left-width: 4px;
-		box-shadow: 0 1px 1px rgba(0,0,0,.04);
-		margin: 5px 15px 2px;
-		padding: 1px 12px;
+    .notice,
+    div.error,
+    div.updated {
+        margin: 5px 15px 2px;
+        padding: 1px 12px;
 
-		p {
-			margin: .5em 0;
-			padding: 2px;
-		}
-	}
+        color: #444;
+        border: 1px solid #ccd0d4;
+        border-left-width: 4px;
+        background: #fff;
+        box-shadow: 0 1px 1px rgba(0,0,0,.04);
 
-	.notice-info {
-		border-left-color: #00a0d2;
-	}
+        p {
+            margin: .5em 0;
+            padding: 2px;
+        }
+    }
 
-	.notice-info.notice-alt {
-		background-color: #e5f5fa;
-	}
+    .notice-info {
+        border-left-color: #00a0d2;
+    }
 
-	.notice-warning.notice-alt {
-		background-color: #fff8e5;
-		border-left-color: #ffb900
-	}
+    .notice-info.notice-alt {
+        background-color: #e5f5fa;
+    }
 
-	.notice-error.notice-alt {
-		background-color: #fbeaea;
-		border-left-color: #dc3232;
-	}
+    .notice-warning.notice-alt {
+        border-left-color: #ffb900;;
+        background-color: #fff8e5;
+    }
 
-	.notice-success.notice-alt {
-		background-color: #e5f5fa;
-		border-left-color: #00a0d2;
-	}
+    .notice-error.notice-alt {
+        border-left-color: #dc3232;
+        background-color: #fbeaea;
+    }
+
+    .notice-success.notice-alt {
+        border-left-color: #00a0d2;
+        background-color: #e5f5fa;
+    }
 }
 
 // Schema Tab.
 .#{$namespace}-tab-content-schema {
-	.variable-group {
-		.components-button {
-			top: 30px;
-		}
+    .variable-group {
+        .components-button {
+            top: 30px;
+        }
 
-		.#{$namespace}-variables-dropdown {
-			width: 100%;
-			top: 59px;
-		}
-	}
+        .#{$namespace}-variables-dropdown {
+            top: 59px;
+
+            width: 100%;
+        }
+    }
 }
 
 // Social Tab.
 .#{$namespace}-tab-content-social {
-	p:last-of-type {
-		margin-bottom: 0;
-	}
+    p:last-of-type {
+        margin-bottom: 0;
+    }
 }
 
 .#{$namespace}-tab-content-advanced {
-	.#{$namespace}-redirect {
-		.components-toggle-control.is-close {
-			.components-base-control__field {
-				margin-bottom: 0;
-			}
-		}
-	}
+    .#{$namespace}-redirect {
+        .components-toggle-control.is-close {
+            .components-base-control__field {
+                margin-bottom: 0;
+            }
+        }
+    }
 }
 
 .#{$namespace}-robots-list {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
+    display: flex;
 
-	.components-base-control {
-		flex: 0 0 55%;
-		margin-bottom: 5px;
+    flex-flow: row wrap;
+    justify-content: space-between;
 
-		&__field {
-			margin-bottom: 0;
+    .components-base-control {
+        margin-bottom: 5px;
 
-			label {
-				cursor: pointer;
-			}
-		}
+        flex: 0 0 55%;
 
-		&:nth-child(even) {
-			flex: 0 0 44%;
+        &__field {
+            margin-bottom: 0;
 
-			.rank-math-tooltip-content {
-				float: right;
-				width: 227%;
-			}
-		}
-	}
+            label {
+                cursor: pointer;
+            }
+        }
 
-	&.advanced-robots {
-		.components-base-control {
-			flex: 0 0 62%;
-			margin-top: 6px;
+        &:nth-child(even) {
+            flex: 0 0 44%;
 
-			&:nth-child(even) {
-				flex: 0 0 33%;
-				margin-top: 0;
-			}
-		}
+            .rank-math-tooltip-content {
+                float: right;
 
-		.rank-math-tooltip-content {
-			width: 162%;
-		}
-	}
+                width: 227%;
+            }
+        }
+    }
 
-	.rank-math-tooltip-content {
-		width: 182%;
-	}
+    &.advanced-robots {
+        .components-base-control {
+            margin-top: 6px;
+
+            flex: 0 0 62%;
+
+            &:nth-child(even) {
+                margin-top: 0;
+
+                flex: 0 0 33%;
+            }
+        }
+
+        .rank-math-tooltip-content {
+            width: 162%;
+        }
+    }
+
+    .rank-math-tooltip-content {
+        width: 182%;
+    }
 }
 
 .#{$namespace}-primary-term-picker {
-	border-top: 1px solid #e2e4e7;
-	border-bottom: 1px solid #e2e4e7;
-	padding: 16px;
-	margin: 20px -16px -17px;
-	padding-bottom: 24px;
+    margin: 20px -16px -17px;
+    padding: 16px;
+    padding-bottom: 24px;
 
-	label {
-		font-weight: 600;
-		color: #191e23;
-		margin-bottom: 8px !important;
-	}
+    border-top: 1px solid #e2e4e7;
+    border-bottom: 1px solid #e2e4e7;
+
+    label {
+        font-weight: 600;
+
+        margin-bottom: 8px !important;
+
+        color: #191e23;
+    }
 }
 
 // Responsive
 @media (min-width: 782px) {
-	body {
-		.edit-post-layout.is-sidebar-opened {
-			.edit-post-layout__content {
-				margin-right: 300px;
-			}
+    body {
+        .edit-post-layout.is-sidebar-opened {
+            .edit-post-layout__content {
+                margin-right: 300px;
+            }
 
-			.edit-post-plugin-sidebar__sidebar-layout,
-			.edit-post-sidebar {
-				width: 300px;
-			}
-		}
-	}
+            .edit-post-plugin-sidebar__sidebar-layout,
+            .edit-post-sidebar {
+                width: 300px;
+            }
+        }
+    }
 }
 
 .#{$namespace}-datepicker__dialog {
-	.components-popover__content {
-		padding: 10px;
+    .components-popover__content {
+        padding: 10px;
 
-		@media (min-width: 782px) {
-			width: 270px;
-		}
-	}
+        @media (min-width: 782px) {
+            width: 270px;
+        }
+    }
 }

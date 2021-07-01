@@ -29,9 +29,10 @@ class Publisher implements Snippet {
 	 */
 	public function process( $data, $jsonld ) {
 		$type              = Helper::get_settings( 'titles.knowledgegraph_type' );
+		$id                = 'company' === $type ? 'organization' : 'person';
 		$data['publisher'] = [
 			'@type' => $this->get_publisher_type( $type ),
-			'@id'   => home_url( "/#{$type}" ),
+			'@id'   => home_url( "/#{$id}" ),
 			'name'  => $jsonld->get_website_name(),
 		];
 

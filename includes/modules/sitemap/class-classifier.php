@@ -1,6 +1,6 @@
 <?php
 /**
- * The Link Classifier.
+ * The link classifier.
  *
  * Determines of a link is an outbound or internal one.
  *
@@ -39,7 +39,7 @@ class Classifier {
 	protected $base_path = '';
 
 	/**
-	 * Constructor setting the base url
+	 * Constructor setting the base url.
 	 *
 	 * @param string $base_url The base url to set.
 	 */
@@ -81,7 +81,7 @@ class Classifier {
 	}
 
 	/**
-	 * Returns true when the link starts with https:// or http://
+	 * Returns true when the link starts with `https://` or `http://`.
 	 *
 	 * @param  array $url_parts The URL parts to use.
 	 * @return bool True if the URL starts with a protocol.
@@ -115,7 +115,7 @@ class Classifier {
 	}
 
 	/**
-	 * Checks if the link contains valid scheme
+	 * Checks if the link contains valid scheme.
 	 *
 	 * @param  array $url_parts The URL parts to use.
 	 * @return bool
@@ -125,7 +125,7 @@ class Classifier {
 	}
 
 	/**
-	 * Checks if the base host is equal to the host
+	 * Checks if the base host is equal to the host.
 	 *
 	 * @param  array $url_parts The URL parts to use.
 	 * @return bool

@@ -1,6 +1,6 @@
 <?php
 /**
- * Sitemap - Taxonomies
+ * Sitemap settings - taxonomy tabs.
  *
  * @package    RankMath
  * @subpackage RankMath\Sitemap

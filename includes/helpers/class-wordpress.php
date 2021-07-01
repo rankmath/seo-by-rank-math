@@ -18,6 +18,8 @@ use MyThemeShop\Helpers\Str;
 use RankMath\Helpers\Security;
 use MyThemeShop\Helpers\WordPress as WP_Helper;
 use RankMath\Role_Manager\Capability_Manager;
+use stdClass;
+use WP_Screen;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -254,9 +256,9 @@ trait WordPress {
 		if ( has_post_thumbnail( $post_id ) ) {
 			$thumbnail_id     = get_post_thumbnail_id( $post_id );
 			$image            = wp_get_attachment_image_src( $thumbnail_id, $size );
-			$image['caption'] = get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true );
+			$image['caption'] = $image ? get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true ) : '';
 
-			return $image;
+			return array_filter( $image );
 		}
 
 		preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
@@ -273,8 +275,8 @@ trait WordPress {
 		}
 
 		$image            = wp_get_attachment_image_src( $og_image, $size );
-		$image['caption'] = get_post_meta( $og_image, '_wp_attachment_image_alt', true );
-		return $image;
+		$image['caption'] = $image ? get_post_meta( $og_image, '_wp_attachment_image_alt', true ) : '';
+		return array_filter( $image );
 	}
 
 	/**
@@ -325,23 +327,22 @@ trait WordPress {
 	 * @return array
 	 */
 	public static function get_robots_defaults() {
-		$screen = get_current_screen();
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : new stdClass();
 		$robots = Helper::get_settings( 'titles.robots_global', [] );
 
-		if ( ! is_object( $screen ) ) {
-			return $robots;
-		}
+		if ( $screen instanceof WP_Screen ) {
 
-		if ( 'post' === $screen->base && Helper::get_settings( "titles.pt_{$screen->post_type}_custom_robots" ) ) {
-			$robots = Helper::get_settings( "titles.pt_{$screen->post_type}_robots", [] );
-		}
+			if ( 'post' === $screen->base && Helper::get_settings( "titles.pt_{$screen->post_type}_custom_robots" ) ) {
+				$robots = Helper::get_settings( "titles.pt_{$screen->post_type}_robots", [] );
+			}
 
-		if ( 'term' === $screen->base && Helper::get_settings( "titles.tax_{$screen->taxonomy}_custom_robots" ) ) {
-			$robots = Helper::get_settings( "titles.tax_{$screen->taxonomy}_robots", [] );
-		}
+			if ( 'term' === $screen->base && Helper::get_settings( "titles.tax_{$screen->taxonomy}_custom_robots" ) ) {
+				$robots = Helper::get_settings( "titles.tax_{$screen->taxonomy}_robots", [] );
+			}
 
-		if ( in_array( $screen->base, [ 'profile', 'user-edit' ], true ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
-			$robots = Helper::get_settings( 'titles.author_robots', [] );
+			if ( in_array( $screen->base, [ 'profile', 'user-edit' ], true ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
+				$robots = Helper::get_settings( 'titles.author_robots', [] );
+			}
 		}
 
 		if ( is_array( $robots ) && ! in_array( 'noindex', $robots, true ) ) {
@@ -357,19 +358,22 @@ trait WordPress {
 	 * @return array
 	 */
 	public static function get_advanced_robots_defaults() {
-		$screen          = get_current_screen();
+		$screen          = function_exists( 'get_current_screen' ) ? get_current_screen() : new stdClass();
 		$advanced_robots = Helper::get_settings( 'titles.advanced_robots_global', [] );
 
-		if ( 'post' === $screen->base && Helper::get_settings( "titles.pt_{$screen->post_type}_custom_robots" ) ) {
-			$advanced_robots = Helper::get_settings( "titles.pt_{$screen->post_type}_advanced_robots", [] );
-		}
+		if ( $screen instanceof WP_Screen ) {
 
-		if ( 'term' === $screen->base && Helper::get_settings( "titles.tax_{$screen->taxonomy}_custom_robots" ) ) {
-			$advanced_robots = Helper::get_settings( "titles.tax_{$screen->taxonomy}_advanced_robots", [] );
-		}
+			if ( 'post' === $screen->base && Helper::get_settings( "titles.pt_{$screen->post_type}_custom_robots" ) ) {
+				$advanced_robots = Helper::get_settings( "titles.pt_{$screen->post_type}_advanced_robots", [] );
+			}
 
-		if ( in_array( $screen->base, [ 'profile', 'user-edit' ], true ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
-			$advanced_robots = Helper::get_settings( 'titles.author_advanced_robots', [] );
+			if ( 'term' === $screen->base && Helper::get_settings( "titles.tax_{$screen->taxonomy}_custom_robots" ) ) {
+				$advanced_robots = Helper::get_settings( "titles.tax_{$screen->taxonomy}_advanced_robots", [] );
+			}
+
+			if ( in_array( $screen->base, [ 'profile', 'user-edit' ], true ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
+				$advanced_robots = Helper::get_settings( 'titles.author_advanced_robots', [] );
+			}
 		}
 
 		return $advanced_robots;
@@ -431,7 +435,12 @@ trait WordPress {
 			return false;
 		}
 
-		$screen = get_current_screen();
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : false;
+
+		if ( ! $screen instanceof WP_Screen ) {
+			return false;
+		}
+
 		if ( method_exists( $screen, 'is_block_editor' ) ) {
 			return $screen->is_block_editor();
 		}

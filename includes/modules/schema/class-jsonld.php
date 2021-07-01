@@ -75,24 +75,32 @@ class JsonLD {
 		unset( $data['BreadcrumbList'] );
 
 		// Preview schema.
-		$schema = \json_decode( file_get_contents( 'php://input' ), true );
-		$schema = $this->replace_variables( $schema );
-		$schema = $this->filter( $schema, $this, $data );
-
-		if ( isset( $data[ $schema['schemaID'] ] ) ) {
-			$current_data = $data[ $schema['schemaID'] ];
-			unset( $data[ $schema['schemaID'] ] );
+		$schema    = \json_decode( file_get_contents( 'php://input' ), true );
+		$schema_id = $schema['schemaID'];
+		if ( isset( $data[ $schema_id ] ) ) {
+			$current_data = $data[ $schema_id ];
+			unset( $data[ $schema_id ] );
 		} else {
 			$current_data = array_pop( $data );
 		}
+		unset( $schema['schemaID'] );
+
+		$schema = $this->replace_variables( $schema );
+		$schema = $this->filter( $schema, $this, $data );
 		$schema = wp_parse_args( $schema['schema'], $current_data );
 		if ( ! empty( $schema['@type'] ) && in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true ) ) {
 			$schema['@type'] = 'Product';
 		}
 
 		// Merge.
-		$data = array_merge( $data, [ 'schema' => $schema ] );
-		$data = $this->validate_schema( $data );
+		$data = array_merge( $data, [ $schema_id => $schema ] );
+
+		/**
+		 * Filter to change the Code validation data..
+		 *
+		 * @param array $unsigned An array of data to output in JSON-LD.
+		 */
+		$data = $this->do_filter( 'schema/preview/validate', $this->validate_schema( $data ) );
 
 		echo wp_json_encode( array_values( $data ) );
 	}
@@ -351,18 +359,13 @@ class JsonLD {
 			return true;
 		}
 
-		$can_add = Helper::get_default_schema_type( $this->post_id );
-		if ( metadata_exists( 'post', $this->post_id, 'rank_math_rich_snippet' ) ) {
-			$can_add = Helper::get_post_meta( 'rich_snippet', $this->post_id );
-		}
-
 		/**
 		 * Allow developer to remove global schema entities.
 		 *
 		 * @param bool   $can_add
 		 * @param JsonLD $unsigned JsonLD instance.
 		 */
-		return $this->do_filter( 'schema/add_global_entities', $can_add, $this );
+		return $this->do_filter( 'schema/add_global_entities', Helper::get_default_schema_type( $this->post_id, true ), $this );
 	}
 
 	/**

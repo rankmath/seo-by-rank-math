@@ -1,6 +1,6 @@
 <?php
 /**
- * The Sitemap Module
+ * The sitemap index runner class.
  *
  * @since      1.0.42
  * @package    RankMath
@@ -10,7 +10,6 @@
 
 namespace RankMath\Sitemap;
 
-use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Str;
@@ -49,7 +48,8 @@ class Sitemap_Index implements Runner {
 			return $output;
 		}
 
-		return $output . "\nSitemap: " . esc_url( Router::get_base_url( 'sitemap_index.xml' ) );
+		$sitemap_url = esc_url( Router::get_base_url( 'sitemap_index.xml' ) );
+		return $output . "\nSitemap: {$sitemap_url}\n";
 	}
 
 	/**

@@ -152,7 +152,7 @@ class Admin extends Base {
 	 */
 	public function display_schema_type( $post_id ) {
 		$schema = absint( get_option( 'page_for_posts' ) ) !== $post_id ? $this->get_schema_types( $post_id ) : 'CollectionPage';
-		$schema = ! empty( $schema ) ? $schema : Helper::get_default_schema_type( $post_id, true );
+		$schema = ! empty( $schema ) ? $schema : Helper::get_default_schema_type( $post_id, true, true );
 		$schema = $schema ? $schema : esc_html__( 'Off', 'rank-math' );
 		?>
 			<span class="rank-math-column-display schema-type">

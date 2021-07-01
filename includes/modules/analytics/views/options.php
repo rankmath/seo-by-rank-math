@@ -41,20 +41,22 @@ $actions = as_get_scheduled_actions(
 	]
 );
 if ( Authentication::is_authorized() && ! empty( $actions ) ) {
-	$action         = current( $actions );
-	$schedule       = $action->get_schedule();
-	$next_timestamp = $schedule->get_date()->getTimestamp();
-	$cmb->add_field(
-		[
-			'id'      => 'console_data_empty',
-			'type'    => 'raw',
-			/* translators: date */
-			'content' => sprintf(
-				'<span class="next-fetch">' . __( 'Next data fetch on %s', 'rank-math' ),
-				date_i18n( 'd M, Y H:m:i', $next_timestamp ) . '</span>'
-			),
-		]
-	);
+	$action    = current( $actions );
+	$schedule  = $action->get_schedule();
+	$next_date = $schedule->get_date();
+	if ( $next_date ) {
+		$cmb->add_field(
+			[
+				'id'      => 'console_data_empty',
+				'type'    => 'raw',
+				/* translators: date */
+				'content' => sprintf(
+					'<span class="next-fetch">' . __( 'Next data fetch on %s', 'rank-math' ),
+					date_i18n( 'd M, Y H:m:i', $next_date->getTimestamp() ) . '</span>'
+				),
+			]
+		);
+	}
 }
 // phpcs:enable
 

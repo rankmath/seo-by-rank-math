@@ -1,0 +1,20 @@
+.#{$namespace}-rm-modal-button {
+	display: block;
+	height: auto;
+	max-width: 100%;
+	margin: 0;
+	text-align: center;
+	text-decoration: none;
+	line-height: 1;
+	color: inherit;
+	background-color: transparent;
+	border: 0;
+	user-select: none;
+	appearance: none;
+	white-space: nowrap;
+	cursor: pointer;
+	&::-moz-focus-inner {
+		border-style: none;
+		padding: 0;
+	}
+}

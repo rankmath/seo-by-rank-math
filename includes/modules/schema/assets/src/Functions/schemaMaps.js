@@ -834,7 +834,7 @@ export default {
 					"field": {
 						"type": "datepicker",
 						"label": __( "Price Valid From", "rank-math" ),
-						"help": __( "The date after which the price will no longer be available", "rank-math" )
+						"help": __( "The date when the item becomes valid.", "rank-math" )
 					}
 				}
 			},
@@ -1661,7 +1661,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]",
@@ -1957,7 +1957,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]",
@@ -2257,7 +2257,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]",
@@ -2719,7 +2719,7 @@ export default {
 						"field": {
 							"type": "datepicker",
 							"label": __( "Price Valid From", "rank-math" ),
-							"help": __( "The date after which the price will no longer be available", "rank-math" )
+							"help": __( "The date when the item becomes valid.", "rank-math" )
 						}
 					}
 				},
@@ -2967,7 +2967,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]"
@@ -3409,7 +3409,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]"
@@ -3523,7 +3523,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]"
@@ -3698,7 +3698,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]",
@@ -3939,7 +3939,7 @@ export default {
 						"field": {
 							"type": "datepicker",
 							"label": __( "Price Valid From", "rank-math" ),
-							"help": __( "The date after which the price will no longer be available", "rank-math" ),
+							"help": __( "The date when the item becomes valid.", "rank-math" ),
 							"classes": "hide-group"
 						}
 					}
@@ -4163,7 +4163,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]",
@@ -4757,7 +4757,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]"
@@ -5081,7 +5081,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]"
@@ -5209,7 +5209,7 @@ export default {
 						"field": {
 							"type": "datepicker",
 							"label": __( "Price Valid From", "rank-math" ),
-							"help": __( "The date after which the price will no longer be available", "rank-math" ),
+							"help": __( "The date when the item becomes valid.", "rank-math" ),
 							"classes": "hide-group"
 						}
 					}
@@ -5327,7 +5327,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]",
@@ -5487,7 +5487,7 @@ export default {
 						"field": {
 							"type": "datepicker",
 							"label": __( "Price Valid From", "rank-math" ),
-							"help": __( "The date after which the price will no longer be available", "rank-math" ),
+							"help": __( "The date when the item becomes valid.", "rank-math" ),
 							"classes": "hide-group"
 						}
 					}
@@ -5737,7 +5737,7 @@ export default {
 					"field": {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
-						"help": __( "You can use the Schema Block in the block editor, or copy and paste this in the content. This shortcode will work on this page only.", "rank-math" ),
+						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
 						"disabled": "disabled"
 					},
 					"value": "[rank_math_rich_snippet]"

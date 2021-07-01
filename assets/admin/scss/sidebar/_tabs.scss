@@ -1,207 +1,218 @@
 // main: ../sidebar.scss
 
 %rank-math-tabs {
-	> .components-tab-panel__tabs {
-		background: #f8f9fa;
-		display: flex;
-		flex-flow: row wrap;
-		justify-content: space-between;
+    > .components-tab-panel__tabs {
+        display: flex;
 
-		.#{$namespace}-extra-menu {
-			@extend %flex;
-		}
+        background: #f8f9fa;
 
-		button {
-			position: relative;
-			overflow: visible;
-			box-shadow: none;
+        flex-flow: row wrap;
+        justify-content: space-between;
 
-			display: block;
+        .#{$namespace}-extra-menu {
+            @extend %flex;
+        }
 
-			font-weight: normal;
+        button {
+            font-weight: normal;
 
-			padding: 3px 7px;
+            position: relative;
 
-			color: darken($dark_gray, 15);
-			background: none;
+            display: block;
+            overflow: visible;
 
-			border-radius: 0;
+            padding: 3px 7px;
 
-			@include size( 48px, 50px );
+            color: darken($dark_gray, 15);
+            border-radius: 0;
+            background: none;
+            box-shadow: none;
 
-			&:hover {
-				color: inherit;
-			}
+            @include size( 48px, 50px );
 
-			&:focus {
-				background: transparent;
-				box-shadow: none;
-				font-weight: normal;
-				outline: none;
-			}
+            &:hover {
+                color: inherit;
+            }
 
-			&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
-				background: transparent;
-				box-shadow: none;
+            &:focus {
+                font-weight: normal;
 
-				i {
-					border-radius: 20em;
-					background: #d9e9ed;
-					box-shadow: 0 0 0 8px #d9e9ed;
-				}
-			}
+                outline: none;
+                background: transparent;
+                box-shadow: none;
+            }
 
-			i {
-				font-size: 12px;
+            &:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
+                background: transparent;
+                box-shadow: none;
 
-				vertical-align: -1px;
-				@include margin( null 7px null 0 );
+                i {
+                    border-radius: 20em;
+                    background: #d9e9ed;
+                    box-shadow: 0 0 0 8px #d9e9ed;
+                }
+            }
 
-				@include size( 16px );
+            i {
+                font-size: 12px;
 
-				&.rm-icon-schema {
-					font-size: 13px;
-					vertical-align: -3px;
-				}
-			}
+                vertical-align: -1px;
 
-			span {
-				display: none;
-			}
+                @include margin( null 7px null 0 );
+                @include size( 16px );
 
-			&.is-active {
+                &.rm-icon-schema {
+                    font-size: 13px;
 
-				width: auto;
+                    vertical-align: -3px;
+                }
+            }
 
-				color: $text;
+            span {
+                display: none;
+            }
 
-				margin-bottom: -1px;
+            &.is-active {
+                width: auto;
+                margin-bottom: -1px;
 
-				&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
-					i {
-						background: transparent;
-						box-shadow: none;
-					}
-				}
+                color: $text;
 
-				i {
-					@include margin( null 7px null 0 );
-					box-shadow: none;
-				}
+                &:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
+                    i {
+                        background: transparent;
+                        box-shadow: none;
+                    }
+                }
 
-				span {
-					display: inline-block;
-				}
+                i {
+                    box-shadow: none;
 
-				&:after {
-					visibility: visible;
-					width: 100%;
-					height: 3px;
+                    @include margin( null 7px null 0 );
+                }
 
-					content: '';
+                span {
+                    display: inline-block;
+                }
 
-					background: #0095cd;
-					box-shadow: none;
+                &:after {
+                    visibility: visible;
 
-					@include position( absolute, null null -1px 0 );
-				}
-			}
-		}
-	}
+                    width: 100%;
+                    height: 3px;
 
-	.cmb2-metabox-description {
-		font-style: normal;
-	}
+                    content: '';
 
-	// Date Control
-	.rank-math-datepicker {
-		position: relative;
+                    background: #0095cd;
+                    box-shadow: none;
 
-		> button {
-			position: absolute;
-			top: 31px;
-			right: 2px;
-			height: 24px;
-			padding: 0 3px;
+                    @include position( absolute, null null -1px 0 );
+                }
+            }
+        }
+    }
 
-			&:not(.is-default):hover {
-				background: transparent;
-				box-shadow: none;
-			}
-		}
-	}
+    .cmb2-metabox-description {
+        font-style: normal;
+    }
 
-	// SEO Score Toggle Control
-	.rank-math-frontend-score {
-		.components-base-control__field {
-			margin-bottom: 0;
-		}
-		.components-toggle-control__label {
-			margin-bottom: 0;
-		}
-	}
+    // Date Control
+    .rank-math-datepicker {
+        position: relative;
+
+        > button {
+            position: absolute;
+            top: 31px;
+            right: 2px;
+
+            height: 24px;
+            padding: 0 3px;
+
+            &:not(.is-default):hover {
+                background: transparent;
+                box-shadow: none;
+            }
+        }
+    }
+
+    // SEO Score Toggle Control
+    .rank-math-frontend-score {
+        .components-base-control__field {
+            margin-bottom: 0;
+        }
+        .components-toggle-control__label {
+            margin-bottom: 0;
+        }
+    }
 }
 
-.components-tab-panel__tab-content, .#{$namespace}-modal {
-	.components-panel__body, .components-modal__content {
-		@import '../partials/common/button';
+.components-tab-panel__tab-content,
+.#{$namespace}-modal {
+    .components-panel__body,
+    .components-modal__content {
+        margin-bottom: 0;
 
-		border-bottom: 0;
-		margin-bottom: 0;
-	}
+        border-bottom: 0;
 
-	// Edit Snippet Button.
-	.rank-math-edit-snippet {
-		background: $primary;
-		border-color: $primary-border-color;
-		margin: 1rem 0;
-		height: 30px;
+        @import '../partials/common/button';
+    }
 
-		&:hover {
-			background: $primary-hover;
-			border-color: $primary-hover-border-color;
-		}
-	}
+    // Edit Snippet Button.
+    .rank-math-edit-snippet {
+        height: 30px;
+        margin: 1rem 0;
+
+        border-color: $primary-border-color;
+        background: $primary;
+
+        &:hover {
+            border-color: $primary-hover-border-color;
+            background: $primary-hover;
+        }
+    }
 }
 
 .#{$namespace}-tabs {
-	@extend %rank-math-tabs;
+    @extend %rank-math-tabs;
 
-	@media (min-width: 600px) {
-		.components-checkbox-control {
-			&__input-container {
-				width: 16px;
-				height: 16px;
-				margin-right: 8px;
-			}
-	
-			&__input[type=checkbox] {
-				width: 16px;
-				height: 16px;
-			}
-		}
-	
-		svg.components-checkbox-control__checked {
-			width: 16px;
-			height: 16px;
-			left: 0;
-			top: 0;
-		}
-	}
+    @media (min-width: 600px) {
+        .components-checkbox-control {
+            &__input-container {
+                width: 16px;
+                height: 16px;
+                margin-top: -3px;
+                margin-right: 8px;
+            }
+
+            &__input[type=checkbox] {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        svg.components-checkbox-control__checked {
+            top: 0;
+            left: 0;
+
+            width: 16px;
+            height: 16px;
+        }
+    }
 }
 
 body.rtl {
-	.rank-math-tabs>.components-tab-panel__tabs {
-		button {
-			&.is-active i, i {
-				margin-right: 0;
-				margin-left: 5px;
-			}
+    .rank-math-tabs > .components-tab-panel__tabs {
+        button {
+            &.is-active i,
+            i {
+                margin-right: 0;
+                margin-left: 5px;
+            }
 
-			&[id='1-review'] {
-				margin-left: 0;
-				margin-right: auto;
-			}
-		}
-	}
+            &[id='1-review'] {
+                margin-right: auto;
+                margin-left: 0;
+            }
+        }
+    }
 }

@@ -12,7 +12,7 @@ const KeywordButton = ( props ) => {
 			{ sequence }
 			<Button
 				className="button button-secondary button-small add-keyword"
-				href="https://rankmath.com/prcing/?utm_source=Plugin&utm_medium=Add%20KW%20Button&utm_campaign=WP"
+				href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Add%20KW%20Button&utm_campaign=WP"
 				target="_blank"
 			>
 				<div className="rank-math-tooltip">

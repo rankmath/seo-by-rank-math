@@ -1,42 +1,46 @@
 // main: ../sidebar.scss
 .#{$namespace}-modal {
-	width: 640px;
-	max-width: 100%;
-	height: 94vh;
-	max-height: 735px;
-	overflow-y: scroll;
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;
 
-	border: 0;
-	box-shadow: 0 5px 30px 0 rgba( #000, .2 );
+    overflow-y: scroll;
 
-	.components-modal__content {
-		padding: 0;
-	}
-	
-	.components-panel__body {
-		border: 0;
-	}
+    width: 640px;
+    max-width: 100%;
+    height: 94vh;
+    max-height: 735px;
 
-	.components-modal__header {
-		height: 51px;
-		margin: 0;
-		padding: 0 17px;
-		border-bottom: 1px solid $light_gray;
+    border: 0;
+    box-shadow: 0 5px 30px 0 rgba( #000, .2 );
 
-		.components-modal__header-heading {
-			font-size: 14px;
-		}
+    .components-modal__content {
+        padding: 0;
+    }
 
-		button {
-			padding: 0 10px;
-		}
-	}
+    .components-panel__body {
+        border: 0;
+    }
+
+    .components-modal__header {
+        height: 51px;
+        margin: 0;
+        padding: 0 17px;
+
+        border-bottom: 1px solid $light_gray;
+
+        .components-modal__header-heading {
+            font-size: 14px;
+        }
+
+        button {
+            padding: 0 10px;
+        }
+    }
 }
 
 @media (max-width: 782px) {
-	.#{$namespace}-modal {
-		width: 100%;
-		height: 100%;
-		max-height: 100%;
-	}
+    .#{$namespace}-modal {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+    }
 }

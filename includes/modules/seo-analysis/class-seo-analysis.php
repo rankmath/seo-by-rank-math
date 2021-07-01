@@ -1,6 +1,6 @@
 <?php
 /**
- * The SEO Analysis
+ * The SEO Analysis module.
  *
  * @since      0.9.0
  * @package    RankMath

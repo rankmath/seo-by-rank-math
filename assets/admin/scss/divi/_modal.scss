@@ -1,0 +1,150 @@
+body.#{$namespace}-et-settings-bar-is {
+	&-top,
+	&-top-left,
+	&-top-right {
+		.#{$namespace}-rm-modal {
+			top: calc(
+			var(--rankmath-wp-adminbar-height)
+			+ var(--rankmath-et-seetings-bar-height)
+			);
+		}
+	}
+	&-top,
+	&-top-right,
+	&-right,
+	&-bottom-right,
+	&-bottom {
+		.#{$namespace}-rm-modal {
+			left: var(--rankmath-rm-modal-spacing);
+		}
+	}
+	&-top-left,
+	&-left,
+	&-bottom-left {
+		.#{$namespace}-rm-modal {
+			left: calc(
+			100vw
+			- var(--rankmath-rm-modal-width)
+			- var(--rankmath-rm-modal-spacing)
+			);
+		}
+	}
+}
+
+.#{$namespace}-rm {
+	&-modal {
+		font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;
+		font-weight: normal;
+
+		position: relative;
+		top: calc( var(--rankmath-rm-modal-spacing) + var(--rankmath-wp-adminbar-height) );
+
+		display: flex;
+		overflow: hidden;
+		flex-direction: column;
+
+		width: var(--rankmath-rm-modal-width);
+		padding: {
+			top: var(--rankmath-rm-modal-header-height);
+		};
+
+		background: #fff;
+		box-shadow: 0 5px 30px rgba($et-builder-blue, .2);
+
+		-webkit-font-smoothing: subpixel-antialiased;
+		&-is-hidden {
+			display: none;
+		}
+	}
+
+	&-modal-content {
+		position: relative;
+		z-index: 0;
+
+		overflow: hidden;
+		overflow-y: auto;
+
+		max-height: calc(
+		100vh
+		- var(--rankmath-wp-adminbar-height)
+		- var(--rankmath-et-seetings-bar-height)
+		- var(--rankmath-rm-modal-spacing)
+		- var(--rankmath-rm-modal-header-height)
+		);
+		@at-root
+		body.#{$namespace}-et-settings-bar-is-left &,
+		body.#{$namespace}-et-settings-bar-is-right & {
+			max-height: calc(
+			100vh
+			- var(--rankmath-wp-adminbar-height)
+			- (var(--rankmath-rm-modal-spacing) * 2)
+			- var(--rankmath-rm-modal-header-height)
+			);
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			padding-bottom: 0;
+		}
+	}
+
+	&-modal-header {
+		position: absolute;
+		z-index: 1;
+		top: 0;
+		left: 0;
+
+		display: flex;
+
+		width: 100%;
+		height: var(--rankmath-rm-modal-header-height);
+		padding: {
+			right: 21px;
+			left: 26px;
+		};
+
+		color: #fff;
+		background-color: $et-builder-purple-dark;
+
+		align-items: center;
+		justify-content: space-between;
+		&-title {
+			font-family: 'Open Sans', Helvetica, Roboto, Arial, sans-serif;
+			font-size: 18px;
+			font-weight: 600;
+			font-style: normal;
+			line-height: 16px;
+
+			cursor: default;
+			user-select: none;
+			text-decoration: none;
+			letter-spacing: 0;
+			text-transform: none;
+
+			color: #fff;
+		}
+		&-options {
+			display: flex;
+
+			align-items: center;
+			justify-content: space-between;
+		}
+		&-option {
+			display: block;
+		}
+	}
+
+	&-modal-header-discard-button {
+		width: 100%;
+		height: 100%;
+		padding: 4px;
+		svg {
+			position: relative;
+			top: 2px;
+
+			width: 26px;
+			height: 26px;
+
+			fill: #fff;
+		}
+	}
+}

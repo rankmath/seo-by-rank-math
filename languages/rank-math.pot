@@ -3172,6 +3172,9 @@ msgstr ""
 msgid "<strong>API Error:</strong> %s"
 msgstr ""
 
+msgid "Rank Math SEO Analysis error: "
+msgstr ""
+
 msgid "Rank Math auto-update option is enabled on your site."
 msgstr ""
 

@@ -851,7 +851,7 @@ class Stats extends Keywords {
 		foreach ( $data as $row ) {
 			$page = $this->get_relative_url( $row['page'] );
 			if ( ! empty( $row['object_id'] ) && empty( $row['schemas_in_use'] ) ) {
-				$row['schemas_in_use'] = Helper::get_default_schema_type( $row['object_id'], true );
+				$row['schemas_in_use'] = Helper::get_default_schema_type( $row['object_id'], true, true );
 			}
 			$rows[ $page ] = $row;
 		}

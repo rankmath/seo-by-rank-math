@@ -1,0 +1,62 @@
+##{$namespace}-rm-settings-bar-root {
+	position: absolute;
+}
+
+body.#{$namespace}-et-settings-bar-is-inactive {
+	##{$namespace}-rm-settings-bar-root {
+		&, * {
+			pointer-events: auto;
+		}
+		&.#{$namespace}-rm-settings-bar-root {
+			&-top,
+			&-bottom,
+			&-top-left,
+			&-bottom-left {
+				left: calc(50% + 45px);
+			}
+			&-top-right,
+			&-bottom-right {
+				right: calc(50% + 45px);
+			}
+			&-left,
+			&-right {
+				top: calc(50% + 45px);
+			}
+		}
+	}
+}
+
+body.#{$namespace}-et-settings-bar-is-active {
+	##{$namespace}-rm-settings-bar-root {
+		&.#{$namespace}-rm-settings-bar-root-is-mobile {
+			&-top-left,
+			&-top-right {
+				top: calc(100% + 24px);
+			}
+			&-bottom-left,
+			&-bottom-right {
+				bottom: calc(100% + 24px);
+			}
+			&-left,
+			&-right {
+				top: calc(100% + 24px);
+			}
+		}
+		&.#{$namespace}-rm-settings-bar-root-is-desktop {
+			&-top,
+			&-bottom,
+			&-top-left,
+			&-bottom-left {
+				left: calc(100% + 24px);
+			}
+			&-top-right,
+			&-bottom-right {
+				right: calc(100% + 24px);
+			}
+			&-left,
+			&-right {
+				top: calc(100% + 24px);
+			}
+		}
+	}
+}

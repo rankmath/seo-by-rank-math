@@ -1,6 +1,6 @@
 <?php
 /**
- * The SEO Analyzer Local Tests
+ * The local tests for the SEO Analysis.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -16,8 +16,9 @@ use RankMath\Google\Authentication;
 defined( 'ABSPATH' ) || exit;
 
 add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_basic_tests' );
+
 /**
- * Register local SEO analysis basic tests.
+ * Register basic local tests for the SEO Analysis.
  *
  * @param array $tests Array of tests.
  *
@@ -86,15 +87,16 @@ function rank_math_register_seo_analysis_basic_tests( $tests ) {
 	return $tests;
 }
 
-add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_advance_tests' );
+add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_advanced_tests' );
+
 /**
- * Register local SEO analysis basic tests.
+ * Register advanced local tests for the SEO Analysis.
  *
  * @param array $tests Array of tests.
  *
  * @return array
  */
-function rank_math_register_seo_analysis_advance_tests( $tests ) {
+function rank_math_register_seo_analysis_advanced_tests( $tests ) {
 	$tests['search_console'] = [
 		'category'    => 'advanced',
 		'title'       => esc_html__( 'Search Console', 'rank-math' ),
@@ -124,8 +126,9 @@ function rank_math_register_seo_analysis_advance_tests( $tests ) {
 }
 
 add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_auto_update_test', 20 );
+
 /**
- * Register test for auto update option.
+ * Register test for the auto update option.
  *
  * @param array $tests Array of tests.
  *
@@ -207,7 +210,7 @@ function rank_math_analyze_site_description() {
 }
 
 /**
- * Returns whether or not the site has the default tagline
+ * Returns whether or not the site has the default tagline.
  *
  * @return bool
  */
@@ -251,7 +254,7 @@ function rank_math_analyze_permalink_structure() {
 }
 
 /**
- * Check if the permalink uses %postname%
+ * Check if the permalink uses %postname%.
  *
  * @return bool
  */
@@ -322,7 +325,8 @@ function rank_math_analyze_focus_keywords() {
 	foreach ( $rows as $post_type => $row ) {
 		$post_type = get_post_type_object( $post_type );
 		$count     = count( $row );
-		$links[]   = sprintf( '<a href="%1$s&focus_keyword=1" target="_blank">%2$s %3$s</a>',
+		$links[]   = sprintf(
+			'<a href="%1$s&focus_keyword=1" target="_blank">%2$d %3$s</a>',
 			esc_url( admin_url( 'edit.php?post_type=' . $post_type->name ) ),
 			$count,
 			$count > 1 ? $post_type->label : $post_type->labels->singular_name
@@ -337,7 +341,7 @@ function rank_math_analyze_focus_keywords() {
 }
 
 /**
- * Checks for posts without a focus keyword.
+ * Checks for posts where the focus keyword doesn't appear in the title.
  *
  * @return array
  */
@@ -391,7 +395,8 @@ function rank_math_get_post_type_links( $rows ) {
 	foreach ( $rows as $post_type => $row ) {
 		$post_type = get_post_type_object( $post_type );
 		$count     = count( $row );
-		$links[]   = sprintf( '<a href="%1$s&fk_in_title=1" target="_blank">%2$s %3$s</a>',
+		$links[]   = sprintf(
+			'<a href="%1$s&fk_in_title=1" target="_blank">%2$s %3$s</a>',
 			esc_url( admin_url( 'edit.php?post_type=' . $post_type->name ) ),
 			$count,
 			$count > 1 ? $post_type->label : $post_type->labels->singular_name
@@ -402,7 +407,7 @@ function rank_math_get_post_type_links( $rows ) {
 }
 
 /**
- * Get posts.
+ * Get posts not set to noindex where the Focus Keyword has been added.
  *
  * @return mixed
  */
@@ -495,7 +500,7 @@ function rank_math_analyze_blog_public() {
 }
 
 /**
- * Check if the site is set to be publicly visible
+ * Check if the site is set to be publicly visible.
  *
  * @return bool
  */

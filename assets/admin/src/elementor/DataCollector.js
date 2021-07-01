@@ -57,10 +57,7 @@ class DataCollector {
 		this.saveSchemas = this.saveSchemas.bind( this )
 		this.subscribeToElementor()
 
-		elementor.once(
-			'preview:loaded',
-			debounce( this.elementorPreviewLoaded.bind( this ), 5000 )
-		)
+		setTimeout( this.elementorPreviewLoaded.bind( this ), 5000 )
 	}
 
 	/**

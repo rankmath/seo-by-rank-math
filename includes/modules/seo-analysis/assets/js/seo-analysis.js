@@ -20,9 +20,15 @@
 				this.single()
 			},
 
+			/**
+			 * Set up event handlers.
+			 */
 			events: function() {
 				var self = this
 
+				/**
+				 * Start Analysis Again button.
+				 */
 				this.wrap.on( 'click', '.rank-math-recheck', function( event ) {
 					var recheck_button = $( this )
 					event.preventDefault()
@@ -80,11 +86,17 @@
 					})
 				})
 
+				/**
+				 * How to Fix toggle button.
+				 */
 				self.wrap.on( 'click', '.result-action', function( event ) {
 					event.preventDefault()
 					$( this ).parent( 'div' ).toggleClass( 'expanded' )
 				})
 
+				/**
+				 * Enable Auto Updates button.
+				 */
 				self.wrap.on( 'click', '.enable-auto-update', function( event ) {
 					event.preventDefault()
 					$.ajax({
@@ -106,6 +118,9 @@
 				})
 			},
 
+			/**
+			 * Analysis Progress Bar.
+			 */
 			renderProgressBar: function() {
 				var self = this,
 					width = 0
@@ -123,6 +138,9 @@
 				}, 30 )
 			},
 
+			/**
+			 * Circular progress bar for total result score.
+			 */
 			graphs: function() {
 
 				var circle = $( '#rank-math-circle-progress' )
@@ -132,12 +150,12 @@
 				}
 
 				var val = circle.data( 'result' ),
-					resultcolors = [ '#58bb58', '#58bb58' ] // greens
+					resultcolors = [ '#58bb58', '#58bb58' ] // Green.
 
 				if ( 0.5 > val ) {
-					resultcolors = [ '#ed6a5e', '#ed6a5e' ] // red
+					resultcolors = [ '#ed6a5e', '#ed6a5e' ] // Red.
 				} else if ( 0.7 > val ) {
-					resultcolors = [ '#f7ca63', '#f7ca63' ] // yellow
+					resultcolors = [ '#f7ca63', '#f7ca63' ] // Yellow.
 				}
 
 				circle.circleProgress({
@@ -150,6 +168,9 @@
 				})
 			},
 
+			/**
+			 * Single page analysis event handlers.
+			 */
 			single: function() {
 
 				var self    = this,
@@ -165,11 +186,11 @@
 
 				change.on( 'click', function() {
 
-					// Hide
+					// Hide.
 					current.hide()
 					change.hide()
 
-					// Show
+					// Show.
 					url.show()
 					ok.show()
 
@@ -178,15 +199,15 @@
 
 				ok.on( 'click', function() {
 
-					// Hide
+					// Hide.
 					url.hide()
 					ok.hide()
 
-					// Show
+					// Show.
 					current.show()
 					change.show()
 
-					// Change url
+					// Change url.
 					current.html( url.val() )
 
 					recheck.trigger( 'click' )
@@ -194,13 +215,16 @@
 					return false
 				})
 
+				/**
+				 * Start the analysis when the user hits Enter.
+				 */
 				url.on( 'keypress', function( event ) {
 					if ( 13 === event.keyCode ) {
 						ok.trigger( 'click' )
 					}
 				})
 
-				// Auto-run single page analysis
+				// Auto-run single page analysis.
 				recheck.trigger( 'click' )
 			}
 		}

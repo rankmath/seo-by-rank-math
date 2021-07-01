@@ -1,208 +1,210 @@
 // main: ../../common.scss
 
 %var-preview {
-	font-family: arial, sans-serif;
+    font-family: arial, sans-serif;
 
-	max-width: 600px;
-	margin-top: 15px;
+    max-width: 600px;
+    margin-top: 15px;
 
-	color: #1a0dab;
-	border-radius: 4px;
+    color: #1a0dab;
+    border-radius: 4px;
 
-	&:empty {
-		display: none;
-	}
+    &:empty {
+        display: none;
+    }
 
-	&:before {
-		font-size: 10px;
-		font-weight: 600;
+    &:before {
+        font-size: 10px;
+        font-weight: 600;
 
-		display: block;
+        display: block;
 
-		margin: 0 0 8px;
+        margin: 0 0 8px;
 
-		content: attr(data-title);
-		letter-spacing: .15em;
-		text-transform: uppercase;
+        content: attr(data-title);
+        letter-spacing: .15em;
+        text-transform: uppercase;
 
-		color: #aaa;
-	}
+        color: #aaa;
+    }
 }
 
 .#{$namespace}-variables {
-	&-wrap {
-		position: relative;
+    &-wrap {
+        position: relative;
 
-		input,
-		textarea {
-			padding-right: 50px !important;
-		}
-	}
+        input,
+        textarea {
+            padding-right: 50px !important;
+        }
+    }
 
-	@at-root .cmb2-wrap {
-		.cmb-type-textarea,
-		.cmb-type-textarea-small {
-			.button.button-secondary {
-				top: auto;
-				right: 1px;
-				bottom: 1px;
+    @at-root .cmb2-wrap {
+        .cmb-type-textarea,
+        .cmb-type-textarea-small {
+            .button.button-secondary {
+                top: auto;
+                right: 1px;
+                bottom: 1px;
 
-				border-width: 1px 0 0 1px;
-				border-radius: 3px 0 3px 0;
+                border-width: 1px 0 0 1px;
+                border-radius: 3px 0 3px 0;
 
-				& + .rank-math-variables-dropdown {
-					top: 70px;
-					right: 0;
-				}
-			}
+                & + .rank-math-variables-dropdown {
+                    top: 70px;
+                    right: 0;
+                }
+            }
 
-			textarea {
-				display: block;
+            textarea {
+                display: block;
 
-				resize: none;
-			}
-		}
-	}
+                resize: none;
+            }
+        }
+    }
 
-	@at-root a.#{$namespace}-variables-button.button-secondary {
-		color: #858b90;
-		line-height: 40px;
+    @at-root a.#{$namespace}-variables-button.button-secondary {
+        line-height: 40px;
 
-		height: auto;
-		padding: 0 10px;
+        height: auto;
+        padding: 0 10px;
 
-		border-width: 0 0 0 1px;
-		border-radius: 0 3px 3px 0;
-		box-shadow: none;
+        color: #858b90;
+        border-width: 0 0 0 1px;
+        border-radius: 0 3px 3px 0;
+        box-shadow: none;
 
-		@include position( absolute, 1px 0 1px null );
+        @include position( absolute, 1px 0 1px null );
 
-		.dashicons {
-			font-size: 20px;
-			line-height: 40px;
+        .dashicons {
+            font-size: 20px;
+            line-height: 40px;
 
-			height: auto;
-			margin-right: 0;
-		}
+            height: auto;
+            margin-right: 0;
+        }
 
-		&:hover {
-			background: #f8f9fa;
-			border-color: $gray;
-		}
-	}
+        &:hover {
+            border-color: $gray;
+            background: #f8f9fa;
+        }
+    }
 
-	&-dropdown {
-		z-index: 999;
+    &-dropdown {
+        z-index: 999;
 
-		display: none;
-		overflow: auto;
+        display: none;
+        overflow: auto;
 
-		max-width: 450px;
+        max-width: 450px;
 
-		border: 1px solid $gray;
-		background: #fff;
-		border-radius: 6px;
+        border: 1px solid $gray;
+        border-radius: 6px;
+        background: #fff;
 
-		@include position( absolute, 48px 0 null null );
-		@include size( 80%, 220px );
+        @include position( absolute, 48px 0 null null );
+        @include size( 80%, 220px );
 
-		input[type='text'] {
-			background: #fff;
-			margin: 10px;
-			border-color: $gray;
+        input[type='text'] {
+            margin: 10px;
 
-			@include size( calc(100% - 20px), 34px );
+            border-color: $gray;
+            background: #fff;
 
-			&:focus {
-				box-shadow: 0 0 0 1px $primary;
-				border-color: $primary;
-			}
-		}
+            @include size( calc(100% - 20px), 34px );
 
-		ul {
-			margin: 0;
-		}
+            &:focus {
+                border-color: $primary;
+                box-shadow: 0 0 0 1px $primary;
+            }
+        }
 
-		li {
-			font-size: 12px;
+        ul {
+            margin: 0;
+        }
 
-			position: relative;
+        li {
+            font-size: 12px;
 
-			margin: 0;
-			padding: 10px;
+            position: relative;
 
-			cursor: pointer;
+            margin: 0;
+            padding: 10px;
 
-			border-bottom: 1px solid $gray;
+            cursor: pointer;
 
-			&:last-of-type {
-				border-bottom: 0;
-			}
+            border-bottom: 1px solid $gray;
 
-			span {
-				font-style: italic;
+            &:last-of-type {
+                border-bottom: 0;
+            }
 
-				display: block;
+            span {
+                font-style: italic;
 
-				padding-top: .2em;
+                display: block;
 
-				color: #888;
-			}
+                padding-top: .2em;
 
-			&:hover {
-				background: #f8f9fa;
-			}
+                color: #888;
+            }
 
-			&:after {
-				display: inline-block;
+            &:hover {
+                background: #f8f9fa;
+            }
 
-				margin-top: 3px;
-				padding: .25em .4em;
+            &:after {
+                display: inline-block;
 
-				content: attr(data-var);
-				white-space: nowrap;
+                margin-top: 3px;
+                padding: .25em .4em;
 
-				border-radius: .25rem;
-				background-color: #f0f2f4;
+                content: attr(data-var);
+                white-space: nowrap;
 
-				@include position( absolute, 4px 10px null null );
-			}
-		}
+                border-radius: .25rem;
+                background-color: #f0f2f4;
 
-		@at-root .dropdown-up & {
-			top: auto;
-			bottom: 100%;
-		}
-	}
+                @include position( absolute, 4px 10px null null );
+            }
+        }
 
-	&-preview {
-		@extend %var-preview;
-	}
+        @at-root .dropdown-up & {
+            top: auto;
+            bottom: 100%;
+        }
+    }
+
+    &-preview {
+        @extend %var-preview;
+    }
 }
 
 .#{$namespace}-preview-title {
-	@extend %var-preview;
+    @extend %var-preview;
 
-	> div {
-		display: inline-block;
+    > div {
+        display: inline-block;
 
-		min-width: 400px;
-	}
+        min-width: 400px;
+    }
 
-	h5 {
-		color: #1a0dab;
-		font-size: 18px;
-		font-weight: normal;
-		line-height: 22px;
+    h5 {
+        font-size: 18px;
+        font-weight: normal;
+        line-height: 22px;
 
-		margin: 0;
-	}
+        margin: 0;
 
-	span {
-		line-height: 16px;
+        color: #1a0dab;
+    }
 
-		height: 17px;
+    span {
+        line-height: 16px;
 
-		color: #006621;
-	}
+        height: 17px;
+
+        color: #006621;
+    }
 }
