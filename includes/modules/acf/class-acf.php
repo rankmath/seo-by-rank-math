@@ -45,7 +45,7 @@ class ACF {
 			return;
 		}
 
-		wp_enqueue_script( 'rank-math-acf-post-analysis', rank_math()->plugin_url() . 'assets/admin/js/acf-analysis.js', [ 'wp-hooks', 'rank-math-analyzer' ], rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-acf-post-analysis', rank_math()->plugin_url() . 'includes/modules/acf/assets/js/acf.js', [ 'wp-hooks', 'rank-math-analyzer' ], rank_math()->version, true );
 
 		Helper::add_json( 'acf', $this->get_config() );
 	}

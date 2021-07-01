@@ -404,9 +404,7 @@
             }
 
             .#{$namespace} {
-                &-col-impressions,
-                &-col-pageviews,
-                &-col-schema {
+                &-col-links {
                     min-width: 140px;
                 }
             }
@@ -424,12 +422,6 @@
 
                 border-radius: 3px;
                 background: $light-gray;
-            }
-
-            .rank-math-item-numbers {
-                align-items: center;
-                @extend %flex;
-                justify-content: center;
             }
 
             tr {

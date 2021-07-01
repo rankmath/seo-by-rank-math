@@ -14,7 +14,7 @@
 	"require": {
 		"cmb2/cmb2": "^2.7",
 		"donatj/phpuseragentparser": "^1.0",
-		"woocommerce/action-scheduler": "^3.1",
+		"woocommerce/action-scheduler": "3.1.6",
 		"a5hleyrich/wp-background-processing": ">=1.0",
 		"mythemeshop/wordpress-helpers": ">=1.0.12"
 	},

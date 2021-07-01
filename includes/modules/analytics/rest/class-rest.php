@@ -176,7 +176,7 @@ class Rest extends WP_REST_Controller {
 			);
 		}
 
-		return rest_ensure_response( Stats::get()->get_post( $id ) );
+		return rest_ensure_response( Stats::get()->get_post( $request ) );
 	}
 
 	/**

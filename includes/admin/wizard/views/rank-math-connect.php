@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 
 // phpcs:disable
 $page = Param::get( 'page' );
-$page = 'rank-math-options-general' === $page ? $page : 'rank-math-wizard&step=analytics';
+$page = in_array( $page, [ 'rank-math-options-general', 'rank-math-analytics' ], true ) ? $page : 'rank-math-wizard&step=analytics';
 $url  = Admin_Helper::get_activate_url( admin_url( 'admin.php?analytics=1&page=' . $page ) );
 ?>
 <div class="wp-core-ui rank-math-ui connect-wrap" style="margin-top: 30px;">

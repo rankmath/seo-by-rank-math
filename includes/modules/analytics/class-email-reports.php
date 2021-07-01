@@ -616,4 +616,13 @@ class Email_Reports {
 
 		return 'https://charts.rankmath.com/chart?' . $query_string . '&ichm=' . $signature;
 	}
+
+	/**
+	 * Check if fields should be hidden.
+	 *
+	 * @return bool
+	 */
+	public static function are_fields_hidden() {
+		return apply_filters( 'rank_math/analytics/hide_email_report_options', false );
+	}
 }

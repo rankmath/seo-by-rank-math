@@ -121,7 +121,7 @@ const KeywordsTable = ( props ) => {
 					onPageChange={ ( newPage ) => {
 						history.push( '/keywords/' + newPage )
 					} }
-					onQueryChange={ () => {} }
+					onQueryChange={ () => () => {} }
 					onColumnsChange={ onColumnsChange }
 				/>
 			</div>

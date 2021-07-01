@@ -79,7 +79,7 @@ class Role_Manager extends Base {
 						'rank-math-cmb2'         => '',
 						'rank-math-role-manager' => $uri . '/assets/css/role-manager.css',
 					],
-					'scripts' => [ 'rank-math-role-manager-script' => rank_math()->plugin_url() . 'assets/admin/js/role-manager.js' ],
+					'scripts' => [ 'rank-math-role-manager-script' => $uri . '/assets/js/role-manager.js' ],
 				],
 			]
 		);

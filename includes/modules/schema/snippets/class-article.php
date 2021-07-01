@@ -31,14 +31,9 @@ class Article implements Snippet {
 	 * @return array
 	 */
 	public function process( $data, $jsonld ) {
-		if ( ! $type = Helper::get_post_meta( 'snippet_article_type' ) ) { // phpcs:ignore
-			$type = Helper::get_default_schema_type( $jsonld->post_id );
-		}
-
 		$entity = [
-			'@type'         => $type,
+			'@type'         => Helper::get_default_schema_type( $jsonld->post->post_type ),
 			'headline'      => $jsonld->parts['title'],
-			'keywords'      => Helper::replace_vars( '%keywords%', $jsonld->post ),
 			'datePublished' => $jsonld->parts['published'],
 			'dateModified'  => $jsonld->parts['modified'],
 			'author'        => [

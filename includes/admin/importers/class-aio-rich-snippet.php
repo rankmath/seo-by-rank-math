@@ -10,10 +10,10 @@
 
 namespace RankMath\Admin\Importers;
 
+use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 use MyThemeShop\Helpers\DB;
-use RankMath\Schema\JsonLD;
-use RankMath\Schema\Singular;
+use MyThemeShop\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,20 +51,6 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	protected $choices = [ 'postmeta' ];
 
 	/**
-	 * JsonLD.
-	 *
-	 * @var JsonLD
-	 */
-	private $json_ld;
-
-	/**
-	 * Singular.
-	 *
-	 * @var Singular
-	 */
-	private $single;
-
-	/**
 	 * Import post meta of plugin.
 	 *
 	 * @return array
@@ -73,9 +59,6 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 		$this->set_pagination( $this->get_post_ids( true ) );
 
 		// Set Converter.
-		$this->json_ld = new JsonLD();
-		$this->single  = new Singular();
-
 		foreach ( $this->get_post_ids() as $snippet_post ) {
 			$type      = $this->is_allowed_type( $snippet_post->meta_value );
 			$meta_keys = $this->get_metakeys( $type );
@@ -84,7 +67,6 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 			}
 
 			$this->set_postmeta( $snippet_post->post_id, $type, $meta_keys );
-			update_post_meta( $snippet_post->post_id, 'rank_math_rich_snippet', $type );
 		}
 
 		return $this->get_pagination_arg();
@@ -98,45 +80,106 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	 * @param array  $meta_keys Array of meta keys to save.
 	 */
 	private function set_postmeta( $post_id, $type, $meta_keys ) {
-
+		$data = [];
 		foreach ( $meta_keys as $snippet_key => $snippet_value ) {
 			$value = get_post_meta( $post_id, '_bsf_' . $snippet_key, true );
-			$value = in_array( $snippet_key, [ 'event_start_date', 'event_end_date' ], true ) ? strtotime( $value ) : $value;
-			if ( $this->has_address( $type, $snippet_key ) ) {
-				$address[ $snippet_value ] = $value;
-				$value                     = $address;
-				$snippet_value             = "{$type}_address";
-			}
-
-			update_post_meta( $post_id, 'rank_math_snippet_' . $snippet_value, $value );
+			$this->validate_schema_data( $data, $value, $snippet_value );
 		}
+
+		if ( empty( $data ) ) {
+			return;
+		}
+
 		// Convert post now.
-		$data = $this->json_ld->get_old_schema( $post_id, $this->single );
-		if ( isset( $data['richSnippet'] ) ) {
-			$data             = $data['richSnippet'];
-			$type             = $data['@type'];
-			$data['metadata'] = [
-				'title' => $type,
-				'type'  => 'template',
-			];
-			update_post_meta( $post_id, 'rank_math_schema_' . $type, $data );
+		$data['@type']    = $this->validate_type( $type );
+		$data['metadata'] = [
+			'title'     => Helper::sanitize_schema_title( $data['@type'] ),
+			'type'      => 'template',
+			'isPrimary' => 1,
+			'shortcode' => uniqid( 's-' ),
+		];
+
+		update_post_meta( $post_id, 'rank_math_schema_' . $data['@type'], $data );
+	}
+
+	/**
+	 * Validate schema type.
+	 *
+	 * @param string $type Schema Type.
+	 */
+	private function validate_type( $type ) {
+		if ( 'software' === $type ) {
+			return 'SoftwareApplication';
+		}
+
+		if ( 'video' === $type ) {
+			return 'VideoObject';
+		}
+
+		return ucfirst( $type );
+	}
+
+	/**
+	 * Validate schema data.
+	 *
+	 * @param array  $data  Schema entity data.
+	 * @param string $value Entity value.
+	 * @param string $key   Entity key.
+	 */
+	private function validate_schema_data( &$data, $value, $key ) {
+		if ( ! Str::contains( '.', $key ) ) {
+			$data[ $key ] = $value;
+			return;
+		}
+
+		$element = explode( '.', $key );
+		if ( 2 === count( $element ) ) {
+			$this->add_type( $data[ $element[0] ], $element[0] );
+			$data[ $element[0] ][ $element[1] ] = $value;
+			return;
+		}
+
+		if ( count( $element ) > 2 ) {
+			$this->add_type( $data[ $element[0] ], $element[0] );
+			$this->add_type( $data[ $element[0] ][ $element[1] ], $element[1] );
+			$data[ $element[0] ][ $element[1] ][ $element[2] ] = $value;
 		}
 	}
 
 	/**
-	 * Check if the snippet has address field.
+	 * Add property type.
 	 *
-	 * @param string $type        Snippet type.
-	 * @param string $snippet_key Snippet meta key.
-	 *
-	 * @return bool
+	 * @param array  $data Schema entity data.
+	 * @param string $key  Entity key.
 	 */
-	private function has_address( $type, $snippet_key ) {
-		$event_array  = [ 'event_organization', 'event_street', 'event_local', 'event_region', 'event_postal_code' ];
-		$person_array = [ 'people_street', 'people_local', 'people_local', 'people_region', 'people_postal' ];
+	private function add_type( &$data, $key ) {
+		if ( 'location' === $key ) {
+			$data['@type'] = 'Place';
+		}
 
-		return ( 'event' === $type && in_array( $snippet_key, $event_array, true ) ) ||
-			( 'person' === $type && in_array( $snippet_key, $person_array, true ) );
+		if ( 'address' === $key ) {
+			$data['@type'] = 'PostalAddress';
+		}
+
+		if ( 'offers' === $key ) {
+			$data['@type'] = 'Offer';
+		}
+
+		if ( 'brand' === $key ) {
+			$data['@type'] = 'Brand';
+		}
+
+		if ( 'review' === $key ) {
+			$data['@type'] = 'Review';
+		}
+
+		if ( 'reviewRating' === $key ) {
+			$data['@type'] = 'Rating';
+		}
+
+		if ( 'nutrition' === $key ) {
+			$data['@type'] = 'NutritionInformation';
+		}
 	}
 
 	/**
@@ -171,7 +214,6 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	 */
 	private function get_types() {
 		return [
-			'1'  => 'review',
 			'2'  => 'event',
 			'5'  => 'person',
 			'6'  => 'product',
@@ -210,26 +252,21 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 			'software' => $this->get_software_fields(),
 			'video'    => $this->get_video_fields(),
 			'article'  => [
-				'article_name' => 'name',
-				'article_desc' => 'desc',
+				'article_name' => 'headline',
+				'article_desc' => 'description',
 			],
 			'person'   => [
 				'people_fn'        => 'name',
-				'people_nickname'  => 'desc',
-				'people_job_title' => 'job_title',
-				'people_street'    => 'streetAddress',
-				'people_local'     => 'addressLocality',
-				'people_region'    => 'addressRegion',
-				'people_postal'    => 'postalCode',
-			],
-			'review'   => [
-				'item_reviewer' => 'name',
-				'item_name'     => 'desc',
-				'rating'        => 'review_rating_value',
+				'people_nickname'  => 'description',
+				'people_job_title' => 'jobTitle',
+				'people_street'    => 'address.streetAddress',
+				'people_local'     => 'address.addressLocality',
+				'people_region'    => 'address.addressRegion',
+				'people_postal'    => 'address.postalCode',
 			],
 			'service'  => [
-				'service_type' => 'service_type',
-				'service_desc' => 'desc',
+				'service_type' => 'serviceType',
+				'service_desc' => 'description',
 			],
 		];
 
@@ -244,17 +281,17 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	private function get_event_fields() {
 		return [
 			'event_title'        => 'name',
-			'event_organization' => 'addressCountry',
-			'event_street'       => 'streetAddress',
-			'event_local'        => 'addressLocality',
-			'event_region'       => 'addressRegion',
-			'event_postal_code'  => 'postalCode',
-			'event_desc'         => 'desc',
-			'event_start_date'   => 'event_startdate',
-			'event_end_date'     => 'event_enddate',
-			'event_price'        => 'event_price',
-			'event_cur'          => 'event_currency',
-			'event_ticket_url'   => 'event_ticketurl',
+			'event_desc'         => 'description',
+			'event_organization' => 'location.name',
+			'event_street'       => 'location.address.streetAddress',
+			'event_local'        => 'location.address.addressLocality',
+			'event_region'       => 'location.address.addressRegion',
+			'event_postal_code'  => 'location.address.postalCode',
+			'event_start_date'   => 'startDate',
+			'event_end_date'     => 'endDate',
+			'event_price'        => 'offers.price',
+			'event_cur'          => 'offers.priceCurrency',
+			'event_ticket_url'   => 'offers.url',
 		];
 	}
 
@@ -265,10 +302,11 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	 */
 	private function get_product_fields() {
 		return [
-			'product_brand' => 'product_brand',
-			'product_name'  => 'name',
-			'product_price' => 'product_price',
-			'product_cur'   => 'product_currency',
+			'product_brand'  => 'brand.name',
+			'product_name'   => 'name',
+			'product_price'  => 'offers.price',
+			'product_cur'    => 'offers.priceCurrency',
+			'product_status' => 'offers.availability',
 		];
 	}
 
@@ -280,11 +318,12 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	private function get_recipe_fields() {
 		return [
 			'recipes_name'       => 'name',
-			'recipes_preptime'   => 'recipe_preptime',
-			'recipes_cooktime'   => 'recipe_cooktime',
-			'recipes_totaltime'  => 'recipe_totaltime',
-			'recipes_desc'       => 'desc',
-			'recipes_ingredient' => 'recipe_ingredients',
+			'recipes_desc'       => 'description',
+			'recipes_preptime'   => 'prepTime',
+			'recipes_cooktime'   => 'cookTime',
+			'recipes_totaltime'  => 'totalTime',
+			'recipes_ingredient' => 'recipeIngredient',
+			'recipes_nutrition'  => 'nutrition.calories',
 		];
 	}
 
@@ -295,12 +334,12 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	 */
 	private function get_software_fields() {
 		return [
-			'software_rating' => 'software_rating_value',
-			'software_price'  => 'software_price',
-			'software_cur'    => 'software_price_currency',
+			'software_rating' => 'review.reviewRating.ratingValue',
+			'software_price'  => 'offers.price',
+			'software_cur'    => 'offers.priceCurrency',
 			'software_name'   => 'name',
-			'software_os'     => 'software_operating_system',
-			'software_cat'    => 'software_application_category',
+			'software_os'     => 'operatingSystem',
+			'software_cat'    => 'applicationCategory',
 		];
 	}
 
@@ -312,11 +351,11 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	private function get_video_fields() {
 		return [
 			'video_title'    => 'name',
-			'video_desc'     => 'desc',
-			'video_thumb'    => 'rank_math_twitter_title',
-			'video_url'      => 'video_url',
-			'video_emb_url'  => 'video_embed_url',
-			'video_duration' => 'video_duration',
+			'video_desc'     => 'description',
+			'video_thumb'    => 'thumbnailUrl',
+			'video_url'      => 'contentUrl',
+			'video_emb_url'  => 'embedUrl',
+			'video_duration' => 'duration',
 		];
 	}
 }

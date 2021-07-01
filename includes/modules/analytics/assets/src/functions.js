@@ -187,7 +187,7 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 				// Display Position History Graph for each table row.
 				const graph = get( row, 'graph', false )
 				let baseValue = 'dataMax'
-				if ( graph !== false ) {
+				if ( graph !== false && isArray( graph ) ) {
 					const dataMax = Math.max( ...graph.map( ( item ) => item.position ) )
 					baseValue = Math.min( dataMax + parseInt( dataMax / 2 ), 100 )
 				}
@@ -290,14 +290,15 @@ export function generateTicks( data ) {
  * Construct URL parameter.
  *
  * @param {Object} filters URL parameter items.
+ * @param {boolean} booleanMode Mode to set parameter value as boolean type.
  *
  * @return {string} Constructed URL parameter.
  */
-export function filtersToUrlParams( filters ) {
+export function filtersToUrlParams( filters, booleanMode = true ) {
 	let params = ''
 	map( filters, ( val, key ) => {
 		if ( val ) {
-			params += '&' + key + '=1'
+			params += '&' + key + '=' + ( true === booleanMode ? '1' : val )
 		}
 	} )
 	return params

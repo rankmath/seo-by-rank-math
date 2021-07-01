@@ -31,6 +31,7 @@ import addNotice from '@helpers/addNotice'
 				this.addressFormat()
 				this.siteMap()
 				this.robotsEvents()
+				this.proRedirect()
 			},
 
 			searchEngine: {
@@ -124,6 +125,13 @@ import addNotice from '@helpers/addNotice'
 						return
 					}
 
+					dropdown.find( '.dropdown-tab' ).each( function() {
+						const hiddenRow = $( this )
+						if ( 'setting-panel-analytics' === hiddenRow.attr( 'data-id' ) ) {
+							hiddenRow.css( 'display', 'none' )
+						}
+					} )
+
 					const rows = dropdown.find( '.cmb-row' )
 					let found = 0
 
@@ -186,7 +194,6 @@ import addNotice from '@helpers/addNotice'
 
 				getIndex( id, force ) {
 					const self = this
-
 					if ( ! force ) {
 						self.indexes[ id ] = $(
 							window.localStorage.getItem(
@@ -529,7 +536,7 @@ import addNotice from '@helpers/addNotice'
 					'input',
 					function( e ) {
 						if ( e.key === 'Enter' ) {
-							e.preventDefault();
+							e.preventDefault()
 						}
 					}
 				)
@@ -623,7 +630,24 @@ import addNotice from '@helpers/addNotice'
 				} )
 			},
 
-		}
+			proRedirect() {
+				$( '.cmb-redirector-element' ).on( 'click', function( e ) {
+					let $target = $( e.target )
+					if ( $target.is( 'a' ) || $target.closest( 'a' ).length ) {
+						return true
+					}
+
+					let $this = $( this )
+					let url = $this.data( 'url' )
+					if ( ! url ) {
+						return true
+					}
+
+					e.preventDefault()
+					$this.css( 'cursor', 'pointer' )
+					window.open( url )
+				});				
+			} }
 
 		window.rankMathOptions.init()
 	} )

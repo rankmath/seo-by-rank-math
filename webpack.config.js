@@ -83,15 +83,36 @@ const entryPoints = {
 		wizard: './assets/admin/src/wizard.js',
 		wplink: './assets/admin/src/wplink.js',
 		validate: './assets/admin/src/validate.js',
-		'acf-analysis': './includes/modules/acf/assets/index.js',
-		'product-description': './includes/modules/woocommerce/assets/js/main.js',
-		'role-manager': './includes/modules/role-manager/assets/src/role-manager.js',
 	},
 	'instant-indexing': {
 		'instant-indexing': './includes/modules/instant-indexing/assets/src/instant-indexing.js',
 	},
+	'404-monitor': {
+		'404-monitor': './includes/modules/404-monitor/assets/src/404-monitor.js',
+	},
+	redirections: {
+		redirections: './includes/modules/redirections/assets/src/redirections.js',
+	},
+	acf: {
+		acf: './includes/modules/acf/assets/src/index.js',
+	},
+	woocommerce: {
+		woocommerce: './includes/modules/woocommerce/assets/src/woocommerce.js',
+	},
+	'role-manager': {
+		'role-manager': './includes/modules/role-manager/assets/src/role-manager.js',
+	},
+	'seo-analysis': {
+		'seo-analysis': './includes/modules/seo-analysis/assets/src/seo-analysis.js',
+	},
+	'version-control': {
+		'version-control': './includes/modules/version-control/assets/src/version-control.js',
+	},
 	analytics: {
 		stats: './includes/modules/analytics/assets/src/index.js',
+	},
+	status: {
+		status: './includes/modules/status/assets/src/status.js',
 	},
 	front: {
 		'rank-math': './assets/front/src/rank-math.js',
@@ -115,6 +136,14 @@ const paths = {
 	front: './assets/front/js',
 	'instant-indexing': './includes/modules/instant-indexing/assets/js',
 	schema: './includes/modules/schema/assets/js',
+	'404-monitor': './includes/modules/404-monitor/assets/js',
+	redirections: './includes/modules/redirections/assets/js',
+	acf: './includes/modules/acf/assets/js',
+	woocommerce: './includes/modules/woocommerce/assets/js',
+	'role-manager': './includes/modules/role-manager/assets/js',
+	'seo-analysis': './includes/modules/seo-analysis/assets/js',
+	status: './includes/modules/status/assets/js',
+	'version-control': './includes/modules/version-control/assets/js',
 }
 
 module.exports = function( env, arg ) {

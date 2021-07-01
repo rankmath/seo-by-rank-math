@@ -51,12 +51,15 @@ export function updateAnalyticsSummary( summary ) {
  *
  * @param {number} page Page number.
  * @param {Array} rows The rows.
+ * @param {string} params The filter parameter.
  *
  * @return {Object} An action for redux.
  */
-export function updatePostsRows( page, rows ) {
+export function updatePostsRows( page, rows, params ) {
 	const data = { ...select( 'rank-math' ).getPostsRowsAll() }
-	data[ page ] = rows
+
+	data[ page ] = ! isUndefined( data[ page ] ) ? data[ page ] : {}
+	data[ page ][ params ] = rows
 	return updateAppData( 'postsRows', data )
 }
 
@@ -71,9 +74,8 @@ export function updatePostsRows( page, rows ) {
  */
 export function updatePostsRowsByObjects( page, rows, params ) {
 	const data = { ...select( 'rank-math' ).getPostsRowsByObjectsAll() }
-	if ( isUndefined( data[ page ] ) ) {
-		data[ page ] = {}
-	}
+
+	data[ page ] = ! isUndefined( data[ page ] ) ? data[ page ] : {}
 	data[ page ][ params ] = rows
 	return updateAppData( 'postsRowsByObjects', data )
 }

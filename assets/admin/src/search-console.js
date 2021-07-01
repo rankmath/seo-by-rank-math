@@ -17,7 +17,7 @@ class SearchConsole {
 
 	checkAll() {
 		const checkAll = jQuery( '#setting-panel-analytics .cmb2-id-check-all-services:not(.done), #cmb2-metabox-rank-math-wizard .cmb2-id-check-all-services:not(.done)' )
-		if ( checkAll.length > 0 && '0' == checkAll.val() ) {
+		if ( checkAll.length > 0 && '0' === checkAll.val() ) {
 			checkAll.addClass( 'done' )
 
 			ajax( 'google_check_all_services' ).done( ( response ) => {

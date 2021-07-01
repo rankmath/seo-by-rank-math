@@ -31,12 +31,12 @@ class Database_Tools {
 		}
 
 		Yoast_Blocks::get();
-		Schema_Converter::get();
+		Remove_Schema::get();
 		$this->hooks();
 	}
 
 	/**
-	 * Register hooks.
+	 * Register version control hooks.
 	 */
 	public function hooks() {
 		if ( ! Helper::is_plugin_active_for_network() || current_user_can( 'manage_options' ) ) {
@@ -184,66 +184,7 @@ class Database_Tools {
 	}
 
 	/**
-	 * Function to convert the Review schema type.
-	 *
-	 * @return string
-	 */
-	public function convert_review() {
-		$posts = Helper::get_review_posts();
-		if ( empty( $posts ) ) {
-			return [
-				'status'  => 'error',
-				'message' => __( 'No review posts found.', 'rank-math' ),
-			];
-		}
-
-		$count = 0;
-		foreach ( $posts as $post_id ) {
-			/**
-			 * Filters the Schema type applied to converted reviews.
-			 *
-			 * @param string $new_type The new Schema type, e.g. "article".
-			 */
-			$new_type = $this->do_filter( 'convert_review/type', 'article', $post_id );
-			update_post_meta( $post_id, 'rank_math_rich_snippet', $new_type );
-
-			/**
-			 * Filters the Schema Article sub-type applied to converted reviews.
-			 *
-			 * @param string $new_type The new Schema Article type, e.g. "BlogPosting".
-			 */
-			$new_article_type = $this->do_filter( 'convert_review/article_type', 'BlogPosting', $post_id );
-			update_post_meta( $post_id, 'rank_math_snippet_article_type', $new_article_type );
-			$count++;
-		}
-
-		update_option( 'rank_math_review_posts_converted', true );
-
-		/* translators: Number of posts updated */
-		return sprintf( __( '%1$d review Posts updated. You can find the list of all converted posts %2$s.', 'rank-math' ), $count, '<a href="' . esc_url( admin_url( 'edit.php?post_type=post&review_posts=1' ) ) . '" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' );
-	}
-
-	/**
-	 * Function convert post Schema data from old format (<1.0.48) to new format.
-	 *
-	 * @return string
-	 */
-	public function convert_schema() {
-		$posts = Schema_Converter::get()->find_posts();
-		if ( empty( $posts['posts'] ) ) {
-			return [
-				'status'  => 'error',
-				'message' => __( 'No posts found to convert.', 'rank-math' ),
-			];
-		}
-
-		Schema_Converter::get()->start( $posts['posts'] );
-
-		return __( 'Conversion started. A success message will be shown here once the process completes. You can close this page.', 'rank-math' );
-	}
-
-	/**
-	 * Re-create database tables.
+	 * Re-create Database Tables.
 	 *
 	 * @return string
 	 */
@@ -335,6 +276,25 @@ class Database_Tools {
 	}
 
 	/**
+	 * Function to delete old schema data.
+	 *
+	 * @return string
+	 */
+	public function delete_old_schema() {
+		$meta = Remove_Schema::get()->find();
+		if ( empty( $meta ) ) {
+			return [
+				'status'  => 'error',
+				'message' => __( 'No data found to delete.', 'rank-math' ),
+			];
+		}
+
+		Remove_Schema::get()->start( $meta );
+
+		return __( 'Deletion started. A success message will be shown here once the process completes. You can close this page.', 'rank-math' );
+	}
+
+	/**
 	 * Add subpage to Status & Tools screen.
 	 *
 	 * @param array $pages Pages.
@@ -389,15 +349,6 @@ class Database_Tools {
 			'button_text' => __( 'Re-create Tables', 'rank-math' ),
 		];
 
-		if ( Helper::is_module_active( 'rich-snippet' ) ) {
-			$tools['convert_schema'] = [
-				'title'        => __( 'Schema Converter', 'rank-math' ),
-				'description'  => __( 'If you are using v1.0.48 or higher, and if some of the Schema data from previous versions is missing, then use this tool. Please note: Use this tool only if our support staff asked you to run it.', 'rank-math' ),
-				'confirm_text' => __( 'Are you sure you want to do this? This is not recommended until and unless you are facing any issues with the revamped Schema Generator.', 'rank-math' ),
-				'button_text'  => __( 'Convert Schema', 'rank-math' ),
-			];
-		}
-
 		$tools['yoast_blocks'] = [
 			'title'        => __( 'Yoast Block Converter', 'rank-math' ),
 			'description'  => __( 'Convert FAQ & HowTo Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
@@ -423,14 +374,12 @@ class Database_Tools {
 			];
 		}
 
-		if ( Helper::is_module_active( 'rich-snippet' ) && ! empty( Helper::get_review_posts() ) ) {
-			$tools['convert_review'] = [
-				'title'        => __( 'Convert Review Schema into Article', 'rank-math' ),
-				/* translators: 1. Review Schema documentation link */
-				'description'  => sprintf( __( 'Before using this converter, please read our Knowledge Base Article from %s.', 'rank-math' ), '<a href="https://rankmath.com/kb/how-to-fix-review-schema-errors/" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' ),
-				/* translators: Number of posts to update */
-				'confirm_text' => sprintf( __( 'Are you sure you want to convert %d posts with review schema into new schema type? This action is irreversible.', 'rank-math' ), count( Helper::get_review_posts() ) ),
-				'button_text'  => __( 'Convert', 'rank-math' ),
+		if ( Helper::is_module_active( 'rich-snippet' ) && ! empty( Remove_Schema::get()->find() ) ) {
+			$tools['delete_old_schema'] = [
+				'title'        => __( 'Delete Old Schema Data', 'rank-math' ),
+				'description'  => __( 'Delete the schema data from the old format (<1.0.48). Note: This process is irreversible and will delete all the metadata prefixed with rank_math_snippet.', 'rank-math' ),
+				'confirm_text' => __( 'Are you sure you want to delete the old schema data? This action is irreversible.', 'rank-math' ),
+				'button_text'  => __( 'Delete', 'rank-math' ),
 			];
 		}
 

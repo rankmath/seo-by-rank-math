@@ -56,6 +56,7 @@ export default withRouter( withFilters( 'rankMath.analytics.single' )(
 		const { id = 0 } = props.match.params
 
 		return {
+			...props,
 			post: select( 'rank-math' ).getSinglePost( id ),
 		}
 	} )( Single )

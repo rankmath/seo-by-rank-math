@@ -1,7 +1,12 @@
 /**
  * External dependencies
  */
-import { get } from 'lodash'
+import { get, isUndefined } from 'lodash'
+
+/**
+ * Internal dependencies
+ */
+import { filtersToUrlParams } from '../../functions'
 
 /**
  * Get app data.
@@ -64,9 +69,13 @@ export function getKeywordsRowsAll( state ) {
  *
  * @param {Object} state   The app state.
  * @param {number} page    The page number.
- * 
+ * @param {string} filters The filter parameter.
+ *
  * @return {string} Return filtered keywords rows.
  */
-export function getKeywordsRows( state, page ) {
-	return state.appData.keywordsRows[ page ]
+export function getKeywordsRows( state, page, filters ) {
+	let params = filtersToUrlParams( filters, false )
+	params = '' === params ? 'all' : params
+
+	return isUndefined( state.appData.keywordsRows[ page ] ) ? {} : state.appData.keywordsRows[ page ][ params ]
 }

@@ -55,7 +55,7 @@ class Admin extends Base {
 			return;
 		}
 
-		wp_enqueue_script( 'rank-math-description-analysis', rank_math()->plugin_url() . 'assets/admin/js/product-description.js', [ 'rank-math-metabox' ], rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-description-analysis', rank_math()->plugin_url() . 'includes/modules/woocommerce/assets/js/woocommerce.js', [ 'rank-math-metabox' ], rank_math()->version, true );
 	}
 
 	/**

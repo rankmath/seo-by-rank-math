@@ -248,9 +248,9 @@ class ActionScheduler_HybridStore extends Store {
 	 * @param int $action_id Action ID.
 	 */
 	public function fetch_action( $action_id ) {
-		[ $store, $action ] = $this->get_store_and_action_from_action_id( $action_id, true );
+		$store = $this->get_store_from_action_id( $action_id, true );
 		if ( $store ) {
-			return $action;
+			return $store->fetch_action( $action_id );
 		} else {
 			return new ActionScheduler_NullAction();
 		}
@@ -262,7 +262,7 @@ class ActionScheduler_HybridStore extends Store {
 	 * @param int $action_id Action ID.
 	 */
 	public function cancel_action( $action_id ) {
-		[ $store, $action ] = $this->get_store_and_action_from_action_id( $action_id );
+		$store = $this->get_store_from_action_id( $action_id );
 		if ( $store ) {
 			$store->cancel_action( $action_id );
 		}
@@ -274,7 +274,7 @@ class ActionScheduler_HybridStore extends Store {
 	 * @param int $action_id Action ID.
 	 */
 	public function delete_action( $action_id ) {
-		[ $store, $action ] = $this->get_store_and_action_from_action_id( $action_id );
+		$store = $this->get_store_from_action_id( $action_id );
 		if ( $store ) {
 			$store->delete_action( $action_id );
 		}
@@ -286,7 +286,7 @@ class ActionScheduler_HybridStore extends Store {
 	 * @param int $action_id Action ID.
 	 */
 	public function get_date( $action_id ) {
-		[ $store, $action ] = $this->get_store_and_action_from_action_id( $action_id );
+		$store = $this->get_store_from_action_id( $action_id );
 		if ( $store ) {
 			return $store->get_date( $action_id );
 		} else {
@@ -300,7 +300,7 @@ class ActionScheduler_HybridStore extends Store {
 	 * @param int $action_id Action ID.
 	 */
 	public function mark_failure( $action_id ) {
-		[ $store, $action ] = $this->get_store_and_action_from_action_id( $action_id );
+		$store = $this->get_store_from_action_id( $action_id );
 		if ( $store ) {
 			$store->mark_failure( $action_id );
 		}
@@ -312,7 +312,7 @@ class ActionScheduler_HybridStore extends Store {
 	 * @param int $action_id Action ID.
 	 */
 	public function log_execution( $action_id ) {
-		[ $store, $action ] = $this->get_store_and_action_from_action_id( $action_id );
+		$store = $this->get_store_from_action_id( $action_id );
 		if ( $store ) {
 			$store->log_execution( $action_id );
 		}
@@ -324,7 +324,7 @@ class ActionScheduler_HybridStore extends Store {
 	 * @param int $action_id Action ID.
 	 */
 	public function mark_complete( $action_id ) {
-		[ $store, $action ] = $this->get_store_and_action_from_action_id( $action_id );
+		$store = $this->get_store_from_action_id( $action_id );
 		if ( $store ) {
 			$store->mark_complete( $action_id );
 		}
@@ -336,7 +336,7 @@ class ActionScheduler_HybridStore extends Store {
 	 * @param int $action_id Action ID.
 	 */
 	public function get_status( $action_id ) {
-		[ $store, $action ]= $this->get_store_and_action_from_action_id( $action_id );
+		$store = $this->get_store_from_action_id( $action_id );
 		if ( $store ) {
 			return $store->get_status( $action_id );
 		}
@@ -350,7 +350,7 @@ class ActionScheduler_HybridStore extends Store {
 	 * @param bool $primary_first Optional flag indicating search the primary store first.
 	 * @return ActionScheduler_Store
 	 */
-	protected function get_store_and_action_from_action_id( $action_id, $primary_first = false ) {
+	protected function get_store_from_action_id( $action_id, $primary_first = false ) {
 		if ( $primary_first ) {
 			$stores = [
 				$this->primary_store,
@@ -370,10 +370,10 @@ class ActionScheduler_HybridStore extends Store {
 		foreach ( $stores as $store ) {
 			$action = $store->fetch_action( $action_id );
 			if ( ! is_a( $action, 'ActionScheduler_NullAction' ) ) {
-				return [ $store, $action ];
+				return $store;
 			}
 		}
-		return [ null, null ];
+		return null;
 	}
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * *
