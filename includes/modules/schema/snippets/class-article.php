@@ -32,7 +32,7 @@ class Article implements Snippet {
 	 */
 	public function process( $data, $jsonld ) {
 		$entity = [
-			'@type'         => Helper::get_default_schema_type( $jsonld->post->post_type ),
+			'@type'         => Helper::get_default_schema_type( $jsonld->post->ID ),
 			'headline'      => $jsonld->parts['title'],
 			'datePublished' => $jsonld->parts['published'],
 			'dateModified'  => $jsonld->parts['modified'],
