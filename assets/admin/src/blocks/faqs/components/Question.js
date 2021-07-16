@@ -42,68 +42,72 @@ class Question extends Component {
 
 		return (
 			<div className={ wrapperClasses }>
-				<div className="rank-math-block-actions">
-					<Button
-						className="rank-math-item-visbility"
-						icon={ visible ? 'visibility' : 'hidden' }
-						onClick={ this.toggleVisibility }
-						title={ __( 'Hide Question', 'rank-math' ) }
+				<div className="rank-math-item-header">
+					<RichText
+						tagName={ titleWrapper }
+						className={
+							'rank-math-faq-question rank-math-block-title' +
+							titleCssClasses
+						}
+						value={ title }
+						onChange={ ( newTitle ) => {
+							this.setQuestionProp( 'title', newTitle )
+						} }
+						keepPlaceholderOnFocus={ true }
+						placeholder={ __( 'Question…', 'rank-math' ) }
 					/>
 
-					<Button
-						icon="trash"
-						className="rank-math-item-delete"
-						onClick={ this.deleteQuestion }
-						title={ __( 'Delete Question', 'rank-math' ) }
-					/>
+					<div className="rank-math-block-actions">
+						<Button
+							className="rank-math-item-visbility"
+							icon={ visible ? 'visibility' : 'hidden' }
+							onClick={ this.toggleVisibility }
+							title={ __( 'Hide Question', 'rank-math' ) }
+						/>
+
+						<Button
+							icon="trash"
+							className="rank-math-item-delete"
+							onClick={ this.deleteQuestion }
+							title={ __( 'Delete Question', 'rank-math' ) }
+						/>
+					</div>
 				</div>
 
-				<RichText
-					tagName={ titleWrapper }
-					className={
-						'rank-math-faq-question rank-math-block-title' +
-						titleCssClasses
-					}
-					value={ title }
-					onChange={ ( newTitle ) => {
-						this.setQuestionProp( 'title', newTitle )
-					} }
-					keepPlaceholderOnFocus={ true }
-					placeholder={ __( 'Question…', 'rank-math' ) }
-				/>
+				<div className="rank-math-item-content">
+					<RichText
+						tagName="div"
+						className={ 'rank-math-faq-answer ' + contentCssClasses }
+						value={ content }
+						onChange={ ( newContent ) => {
+							this.setQuestionProp( 'content', newContent )
+						} }
+						keepPlaceholderOnFocus={ true }
+						placeholder={ __(
+							'Enter the answer to the question',
+							'rank-math'
+						) }
+					/>
 
-				<MediaUpload
-					allowedTypes={ [ 'image' ] }
-					multiple={ false }
-					value={ imageID }
-					render={ ( { open } ) => (
-						<MediaUploader
-							imageID={ imageID }
-							sizeSlug={ sizeSlug }
-							open={ open }
-							removeImage={ () => {
-								this.setQuestionProp( 'imageID', 0 )
-							} }
-						/>
-					) }
-					onSelect={ ( image ) => {
-						this.setQuestionProp( 'imageID', image.id )
-					} }
-				/>
-
-				<RichText
-					tagName="div"
-					className={ 'rank-math-faq-answer ' + contentCssClasses }
-					value={ content }
-					onChange={ ( newContent ) => {
-						this.setQuestionProp( 'content', newContent )
-					} }
-					keepPlaceholderOnFocus={ true }
-					placeholder={ __(
-						'Enter the answer to the question',
-						'rank-math'
-					) }
-				/>
+					<MediaUpload
+						allowedTypes={ [ 'image' ] }
+						multiple={ false }
+						value={ imageID }
+						render={ ( { open } ) => (
+							<MediaUploader
+								imageID={ imageID }
+								sizeSlug={ sizeSlug }
+								open={ open }
+								removeImage={ () => {
+									this.setQuestionProp( 'imageID', 0 )
+								} }
+							/>
+						) }
+						onSelect={ ( image ) => {
+							this.setQuestionProp( 'imageID', image.id )
+						} }
+					/>
+				</div>
 			</div>
 		)
 	}

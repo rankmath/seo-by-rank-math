@@ -134,6 +134,7 @@ class Error_Log {
 
 		if (
 			empty( $log_file ) ||
+			is_null( $wp_filesystem ) ||
 			! $wp_filesystem->exists( $log_file ) ||
 			! $wp_filesystem->is_readable( $log_file )
 		) {

@@ -42,35 +42,37 @@ class Step extends Component {
 
 		return (
 			<div className={ wrapperClasses }>
-				<div className="rank-math-block-actions">
-					<Button
-						className="rank-math-item-visbility"
-						icon={ visible ? 'visibility' : 'hidden' }
-						onClick={ this.toggleVisibility }
-						title={ __( 'Hide Step', 'rank-math' ) }
+				<div className="rank-math-item-header">
+					<RichText
+						tagName={ titleWrapper }
+						className={
+							'rank-math-howto-step-title rank-math-block-title' +
+							titleCssClasses
+						}
+						value={ title }
+						onChange={ ( newTitle ) => {
+							this.setStepProp( 'title', newTitle )
+						} }
+						keepPlaceholderOnFocus={ true }
+						placeholder={ __( 'Enter a step title', 'rank-math' ) }
 					/>
 
-					<Button
-						icon="trash"
-						className="rank-math-item-delete"
-						onClick={ this.deleteStep }
-						title={ __( 'Delete Step', 'rank-math' ) }
-					/>
+					<div className="rank-math-block-actions">
+						<Button
+							className="rank-math-item-visbility"
+							icon={ visible ? 'visibility' : 'hidden' }
+							onClick={ this.toggleVisibility }
+							title={ __( 'Hide Step', 'rank-math' ) }
+						/>
+
+						<Button
+							icon="trash"
+							className="rank-math-item-delete"
+							onClick={ this.deleteStep }
+							title={ __( 'Delete Step', 'rank-math' ) }
+						/>
+					</div>
 				</div>
-
-				<RichText
-					tagName={ titleWrapper }
-					className={
-						'rank-math-howto-step-title rank-math-block-title' +
-						titleCssClasses
-					}
-					value={ title }
-					onChange={ ( newTitle ) => {
-						this.setStepProp( 'title', newTitle )
-					} }
-					keepPlaceholderOnFocus={ true }
-					placeholder={ __( 'Enter a step title', 'rank-math' ) }
-				/>
 
 				<MediaUpload
 					allowedTypes={ [ 'image' ] }

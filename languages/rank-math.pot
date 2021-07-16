@@ -4560,13 +4560,16 @@ msgstr ""
 msgid "Proceed to Settings"
 msgstr ""
 
+msgid "Subscribe to Our YouTube Channel"
+msgstr ""
+
+msgid "Know more about the PRO version"
+msgstr ""
+
 msgid "Join FREE Facebook Group"
 msgstr ""
 
 msgid "Rank Math Knowledge Base"
-msgstr ""
-
-msgid "Subscribe to Our YouTube Channel"
 msgstr ""
 
 msgid "Get 24x7 Support"

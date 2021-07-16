@@ -199,7 +199,6 @@ class Installer {
 				uri VARCHAR(255) NOT NULL,
 				accessed DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 				times_accessed BIGINT(20) unsigned NOT NULL DEFAULT 1,
-				ip VARCHAR(50) NOT NULL DEFAULT '',
 				referer VARCHAR(255) NOT NULL DEFAULT '',
 				user_agent VARCHAR(255) NOT NULL DEFAULT '',
 				PRIMARY KEY id (id),

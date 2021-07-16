@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.7
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.66.1
+Stable tag: 1.0.68
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -565,22 +565,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.66.1 [Jun 18, 2021] =
-* Fixed: Missing `@type` in the default schema
-* Fixed: Warning shown in the Social Preview tab on some setups
-
-= 1.0.66 [Jun 16, 2021] =
-* Improved: [HUGE!] Made several *significant code improvements* that have made the plugin even FASTER. Now, Rank Math is one of the most *[FASTEST SEO PLUGINS](https://rankmath.com/)*.
-* Added: New Database Tool to remove the old [Schema](https://rankmath.com/blog/schema-markup/) code from the database. The plugin is not using that data anymore after introducing the revamped [Schema Generator](https://rankmath.com/kb/schema-generator/) in version 1.0.48
-* Added: Warning notice on the plugins page when the [filter to remove everything related to Rank Math](https://rankmath.com/kb/filters-hooks-api-developer/#clear-rm-data) from the database is used
-* Added: [Filter to hide Email Reporting options](https://rankmath.com/kb/filters-hooks-api-developer/#hide-email-reporting-options)
-* Improved: [Schema Module](https://rankmath.com/kb/rich-snippets/) performance by optimizing and removing redundant code
-* Improved: Hide [Analytics](https://rankmath.com/kb/install-google-analytics/) options if Google Services are not connected
-* Improved: [Redirection](https://rankmath.com/kb/setting-up-redirections/) flow after connecting [Google Services](https://rankmath.com/kb/connect-your-google-account/) from various setting pages
-* Improved: [Description length](https://rankmath.com/kb/ideal-meta-description-length/) indicator behavior to monitor 160 character limit
-* Improved: File structure by moving assets in their respective module folders
-* Fixed: Disabling [Images in Sitemaps](https://rankmath.com/kb/configure-sitemaps/#images-in-sitemaps) option was not working
-* Fixed: Incorrect display of single post URL in the Single Post [Analytics reports](https://rankmath.com/kb/analytics/) if WordPress was installed in the subfolder. This was visible only to the admins and did not impact anything on the frontend
-* Fixed: Added missing condition to check if [WooCommerce](https://rankmath.com/blog/woocommerce-seo/) function exists in [breadcrumbs](https://rankmath.com/kb/breadcrumbs/)
+= 1.0.68 [Jul 15, 2021] =
+* Improved: [HUGE!] Improved performance of the plugin even further.
+* Improved: Keywords property in [Article Schema](https://rankmath.com/kb/article-schema/) is now added to all the existing posts
+* Improved: Styling of [FAQ](https://rankmath.com/blog/faq-schema/) & [HowTo](https://rankmath.com/blog/howto-schema/) block UI in the backend
+* Fixed: [Sitemap](https://rankmath.com/kb/sitemaps-seo-benefits/) showing an error on sites where `FS_METHOD` was FTP
+* Fixed: [Author sitemap](https://rankmath.com/kb/configure-sitemaps/) was throwing an MySQL error on some installations
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

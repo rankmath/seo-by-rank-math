@@ -164,12 +164,12 @@ const registerDefaultHooks = () => {
 	addFilter(
 		'rank_math_schema_convert_value',
 		'rank-math',
-		( check, property, key, value ) => {
-			if ( property.map.isArray || ! property.map.isGroup ) {
+		( check, property, key, value, isCustom = false ) => {
+			if ( property.map.isArray || ! property.map.isGroup || isCustom ) {
 				return check
 			}
 
-			return getSchemaFromData( property, value )
+			return getSchemaFromData( property, value, isCustom )
 		},
 		20
 	)

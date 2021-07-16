@@ -14,6 +14,7 @@
 namespace RankMath\OpenGraph;
 
 use RankMath\Helper;
+use RankMath\Post;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Url;
@@ -283,7 +284,7 @@ class Image {
 			case is_attachment():
 				$this->set_attachment_page_image();
 				break;
-			case is_singular():
+			case is_singular() || Post::is_shop_page():
 				$this->set_singular_image();
 				break;
 			case is_post_type_archive():
@@ -429,8 +430,12 @@ class Image {
 	 * @param null|int $post_id The post ID to get the images for.
 	 */
 	private function set_singular_image( $post_id = null ) {
-		$post_id = is_null( $post_id ) ? get_queried_object_id() : $post_id;
+		$is_shop_page = Post::is_shop_page();
+		if ( $is_shop_page ) {
+			$post_id = Post::get_shop_page_id();
+		}
 
+		$post_id = is_null( $post_id ) ? get_queried_object_id() : $post_id;
 		$this->set_user_defined_image( $post_id );
 
 		if ( $this->has_images() ) {
@@ -445,9 +450,17 @@ class Image {
 		 * @param int  $post_id Post ID for the current post.
 		 */
 		if ( false !== $this->do_filter( 'opengraph/pre_set_content_image', false, $post_id ) ) {
+			if ( $is_shop_page ) {
+				$this->set_archive_image();
+			}
+
 			return;
 		}
 		$this->set_content_image( get_post( $post_id ) );
+
+		if ( ! $this->has_images() && $is_shop_page ) {
+			$this->set_archive_image();
+		}
 	}
 
 	/**

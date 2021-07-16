@@ -121,8 +121,6 @@ class Table extends List_Table {
 		if ( in_array( $column_name, [ 'times_accessed', 'accessed', 'user_agent' ], true ) ) {
 			return esc_html( $item[ $column_name ] );
 		}
-
-		return print_r( $item, true );
 	}
 
 	/**
