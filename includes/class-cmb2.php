@@ -233,7 +233,7 @@ class CMB2 {
 	 * @return mixed Sanitized value to be stored.
 	 */
 	public static function sanitize_htmlentities( $value ) {
-		return htmlentities( $value );
+		return htmlentities( $value, ENT_COMPAT, get_option( 'blog_charset' ) );
 	}
 
 	/**

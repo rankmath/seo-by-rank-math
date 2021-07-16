@@ -75,6 +75,10 @@ const processData = ( data ) => {
 		const canSave = get( property, 'map.save', true )
 		const isHidden = get( property, 'map.isHidden', false )
 
+		if ( ! isEmpty( property.properties ) && ! isEmpty( property.properties[ 0 ] ) && ! isEmpty( property.properties[ 0 ].properties ) ) {
+			property.map.isArray = true
+		}
+
 		// Don't save.
 		if ( false === canSave || isHidden ) {
 			return
