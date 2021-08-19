@@ -126,8 +126,23 @@ class PostCollector extends DataCollector {
 			}
 		} )
 
-		jQuery( '#save-post' ).on( 'click', () => {
-			rankMathEditor.assessor.saveData()
+		let saveData = true
+		const saveDraft = jQuery( '#save-post' )
+		saveDraft.on( 'click', ( e ) => {
+			if ( ! saveData ) {
+				return
+			}
+
+			e.preventDefault()
+			saveData = false
+			const promise1 = rankMathEditor.assessor.saveMeta()
+			const promise2 = rankMathEditor.assessor.saveSchemas( promise1 )
+
+			Promise.all( [ promise1, promise2 ] ).then( () => {
+				saveDraft.trigger( 'click' )
+			} ).catch( () => {
+				saveDraft.trigger( 'click' )
+			} )
 		} )
 	}
 

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.8
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.69.1
+Stable tag: 1.0.69.2
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -564,6 +564,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math SEO Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.69.2 [Aug 05, 2021] =
+* Fixed: SEO data was not updating in the Classic editor on some setups. Please go through this [KB article](https://rankmath.com/kb/meta-data-not-saving) to confirm the `REST` requests are not blocked on your website
+* Fixed: Prevent adding more than 1 keyword on the Taxonomy & User Edit pages
+* Fixed: Trailing slash was missing in the SERP preview of Classic Editor.
+* Fixed: Firefox was showing big link icon in the block editor
+* Fixed: Classic editor was not honoring the permalink structure
+* Fixed: Upon adding the [Disable Sidebar Integration filter](https://rankmath.com/kb/filters-hooks-api-developer/#disable-gutenberg-sidebar) (for Gutenberg), the Meta Box was not consuming the entire width
 
 = 1.0.69.1 [Jul 31, 2021] =
 * Fixed: SEO details were not saving in the Classic Editor draft post

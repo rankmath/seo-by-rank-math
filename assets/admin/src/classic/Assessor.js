@@ -263,17 +263,38 @@ class Assessor {
 		if ( isUndefined( this.dataCollector.updateBtn ) ) {
 			return
 		}
+		let saveData = true
+		this.dataCollector.updateBtn.on( 'click', ( e ) => {
+			if ( ! saveData ) {
+				return
+			}
 
-		this.dataCollector.updateBtn.on( 'click', () => {
-			this.saveData()
+			e.preventDefault()
+			this.dataCollector.updateBtn.addClass( 'disabled' ).parent().find( '.spinner' ).addClass( 'is-active' )
+			saveData = false
+			const promise1 = this.saveMeta()
+			const promise2 = this.saveSchemas( promise1 )
+			const promise3 = this.saveRedirection( promise2 )
+
+			Promise.all( [ promise1, promise2, promise3 ] ).then( () => {
+				this.dataCollector.updateBtn.removeClass( 'disabled' ).trigger( 'click' )
+			} ).catch( () => {
+				this.dataCollector.updateBtn.removeClass( 'disabled' ).trigger( 'click' )
+			} )
+
+			return false
 		} )
 	}
 
-	saveData() {
-		const repo = select( 'rank-math' )
-		const meta = repo.getDirtyMetadata()
+	saveMeta() {
+		return new Promise( ( resolve ) => {
+			const repo = select( 'rank-math' )
+			const meta = repo.getDirtyMetadata()
+			if ( isEmpty( meta ) ) {
+				resolve( true )
+				return
+			}
 
-		if ( ! isEmpty( meta ) ) {
 			apiFetch( {
 				method: 'POST',
 				path: 'rankmath/v1/updateMeta',
@@ -285,73 +306,88 @@ class Assessor {
 				},
 			} ).then( ( response ) => {
 				doAction( 'rank_math_metadata_updated', response )
+				resolve( true )
+			} ).catch( () => {
+				resolve( true )
 			} )
 			dispatch( 'rank-math' ).resetDirtyMetadata()
-		}
-
-		this.saveSchemas()
-		this.saveRedirection()
+		} )
 	}
 
 	/**
 	 * Save redirection item.
 	 */
-	saveRedirection() {
-		const redirection = select( 'rank-math' ).getRedirectionItem()
-		if ( isEmpty( redirection ) ) {
-			return
-		}
-
-		redirection.objectID = window.rankMath.objectID
-		redirection.objectType = window.rankMath.objectType
-		redirection.redirectionSources = rankMathEditor.assessor.dataCollector.getData( 'permalink' )
-
-		const rankMath = dispatch( 'rank-math' )
-		const notices = dispatch( 'core/notices' )
-
-		rankMath.resetRedirection()
-
-		apiFetch( {
-			method: 'POST',
-			path: 'rankmath/v1/updateRedirection',
-			data: redirection,
-		} ).then( ( response ) => {
-			if ( 'delete' === response.action ) {
-				notices.createInfoNotice( response.message, {
-					id: 'redirectionNotice',
-				} )
-				rankMath.updateRedirection( 'redirectionID', 0 )
-			} else if ( 'update' === response.action ) {
-				notices.createInfoNotice( response.message, {
-					id: 'redirectionNotice',
-				} )
-			} else if ( 'new' === response.action ) {
-				rankMath.updateRedirection( 'redirectionID', response.id )
-				notices.createSuccessNotice( response.message, {
-					id: 'redirectionNotice',
-				} )
+	saveRedirection( promise2 ) {
+		return new Promise( async ( resolve ) => {
+			await promise2
+			const redirection = select( 'rank-math' ).getRedirectionItem()
+			if ( isEmpty( redirection ) ) {
+				resolve( true )
+				return
 			}
 
-			setTimeout( () => {
-				notices.removeNotice( 'redirectionNotice' )
-			}, 2000 )
+			redirection.objectID = window.rankMath.objectID
+			redirection.objectType = window.rankMath.objectType
+			redirection.redirectionSources = rankMathEditor.assessor.dataCollector.getData( 'permalink' )
+
+			const rankMath = dispatch( 'rank-math' )
+			const notices = dispatch( 'core/notices' )
+
+			rankMath.resetRedirection()
+
+			apiFetch( {
+				method: 'POST',
+				path: 'rankmath/v1/updateRedirection',
+				data: redirection,
+			} ).then( ( response ) => {
+				if ( 'delete' === response.action ) {
+					notices.createInfoNotice( response.message, {
+						id: 'redirectionNotice',
+					} )
+					rankMath.updateRedirection( 'redirectionID', 0 )
+				} else if ( 'update' === response.action ) {
+					notices.createInfoNotice( response.message, {
+						id: 'redirectionNotice',
+					} )
+				} else if ( 'new' === response.action ) {
+					rankMath.updateRedirection( 'redirectionID', response.id )
+					notices.createSuccessNotice( response.message, {
+						id: 'redirectionNotice',
+					} )
+				}
+
+				setTimeout( () => {
+					notices.removeNotice( 'redirectionNotice' )
+				}, 2000 )
+				resolve( true )
+			} ).catch( () => {
+				resolve( true )
+			} )
 		} )
 	}
 
-	saveSchemas() {
-		const schemas = select( 'rank-math' ).getSchemas()
-		if ( isEmpty( schemas ) || ! select( 'rank-math' ).hasSchemaUpdated() ) {
-			return
-		}
+	saveSchemas( promise1 ) {
+		return new Promise( async ( resolve ) => {
+			await promise1
+			const schemas = select( 'rank-math' ).getSchemas()
+			if ( isEmpty( schemas ) || ! select( 'rank-math' ).hasSchemaUpdated() ) {
+				resolve( true )
+				return
+			}
 
-		apiFetch( {
-			method: 'POST',
-			path: 'rankmath/v1/updateSchemas',
-			data: {
-				objectID: rankMath.objectID,
-				objectType: rankMath.objectType,
-				schemas,
-			},
+			apiFetch( {
+				method: 'POST',
+				path: 'rankmath/v1/updateSchemas',
+				data: {
+					objectID: rankMath.objectID,
+					objectType: rankMath.objectType,
+					schemas,
+				},
+			} ).then( () => {
+				resolve( true )
+			} ).catch( () => {
+				resolve( true )
+			} )
 		} )
 	}
 }

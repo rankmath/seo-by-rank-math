@@ -125,7 +125,7 @@ class Shared extends WP_REST_Controller {
 		do_action( 'rank_math/pre_update_metadata', $object_id, $content );
 
 		$new_slug = true;
-		if ( isset( $meta['permalink'] ) && ! empty( $meta['permalink'] ) ) {
+		if ( isset( $meta['permalink'] ) && ! empty( $meta['permalink'] ) && 'post' === $object_type ) {
 			$post     = get_post( $object_id );
 			$new_slug = wp_unique_post_slug( $meta['permalink'], $post->ID, $post->post_status, $post->post_type, $post->post_parent );
 			wp_update_post(

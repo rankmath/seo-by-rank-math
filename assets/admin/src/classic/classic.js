@@ -91,13 +91,13 @@ class ClassicEditor {
 	}
 
 	updatePermalink( slug ) {
-		slug = this.assessor.getResearch( 'slugify' )( slug )
 		this.assessor.dataCollector.handleSlugChange( slug )
 		dispatch( 'rank-math' ).updatePermalink( slug )
 	}
 
 	updatePermalinkSanitize( slug ) {
-		this.updatePermalink( slug )
+		slug = this.assessor.getResearch( 'slugify' )( slug )
+		dispatch( 'rank-math' ).updatePermalink( slug )
 	}
 
 	getPrimaryKeyword() {

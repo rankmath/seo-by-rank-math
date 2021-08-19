@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { map } from 'lodash'
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
@@ -82,6 +77,7 @@ function Edit( {
 			{ isActive && (
 				<RichTextToolbarButton
 					name="link"
+					className="rank-math-link-control"
 					icon={ linkOff }
 					title={ __( 'Unlink', 'rank-math' ) }
 					onClick={ onRemoveFormat }
@@ -94,6 +90,7 @@ function Edit( {
 				<RichTextToolbarButton
 					name="link"
 					icon={ linkIcon }
+					className="rank-math-link-control"
 					title={ __( 'Link', 'rank-math' ) }
 					onClick={ addLink }
 					isActive={ isActive }

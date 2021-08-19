@@ -79,7 +79,7 @@ class FocusKeywordField extends Component {
 
 		const settings = {
 			addTagOnBlur: true,
-			maxTags: rankMath.maxTags,
+			maxTags: 'post' === rankMath.objectType ? rankMath.maxTags : 1,
 			whitelist: this.state.whitelist || [],
 			transformTag: ( tagData ) => {
 				tagData.value = this.stripTags( tagData.value )

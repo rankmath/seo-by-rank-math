@@ -122,8 +122,7 @@ class Post_Screen implements IScreen {
 	 * @return array
 	 */
 	public function get_values() {
-		$post_type        = $this->get_current_post_type();
-		$sample_permalink = get_sample_permalink( $this->get_object_id(), null, null );
+		$post_type = $this->get_current_post_type();
 
 		return [
 			'parentDomain'           => Url::get_domain( home_url() ),
@@ -138,7 +137,7 @@ class Post_Screen implements IScreen {
 			],
 			'frontEndScore'          => Frontend_SEO_Score::show_on(),
 			'postName'               => get_post_field( 'post_name', get_post() ),
-			'permalinkFormat'        => isset( $sample_permalink[0] ) ? $sample_permalink[0] : home_url(),
+			'permalinkFormat'        => $this->get_permalink_format(),
 			'assessor'               => [
 				'hasTOCPlugin'     => $this->has_toc_plugin(),
 				'sentimentKbLink'  => KB::get( 'sentiments' ),
@@ -162,7 +161,7 @@ class Post_Screen implements IScreen {
 		return [
 			'primaryTerm'         => $this->get_primary_term_id(),
 			'authorName'          => get_the_author_meta( 'display_name', $post->post_author ),
-			'titleTemplate'       => Helper::get_settings( "titles.pt_{$post->post_type}_title", '%%title%% %%sep%% %%sitename%%' ),
+			'titleTemplate'       => Helper::get_settings( "titles.pt_{$post->post_type}_title", '%title% %sep% %sitename%' ),
 			'descriptionTemplate' => Helper::get_settings( "titles.pt_{$post->post_type}_description", '' ),
 			'showScoreFrontend'   => ! Helper::get_post_meta( 'dont_show_seo_score', $this->get_object_id() ),
 		];
@@ -215,6 +214,24 @@ class Post_Screen implements IScreen {
 		}
 
 		return array_diff_assoc( $tests, $this->exclude_tests() );
+	}
+
+	/**
+	 * Function to get the permalink format.
+	 *
+	 * @since 1.0.69.2
+	 */
+	private function get_permalink_format() {
+		$post_id = $this->get_object_id();
+		$post    = get_post( $post_id );
+		if ( 'auto-draft' !== $post->post_status || 'post' !== $post->post_type ) {
+			$sample_permalink = get_sample_permalink( $post_id, null, null );
+			return isset( $sample_permalink[0] ) ? $sample_permalink[0] : home_url();
+		}
+
+		$post_temp              = $post;
+		$post_temp->post_status = 'publish';
+		return get_permalink( $post_temp, true );
 	}
 
 	/**
