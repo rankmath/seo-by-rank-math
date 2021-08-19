@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.7
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.68
+Stable tag: 1.0.68.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -564,6 +564,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 12. Rank Math SEO Comes with 15+ FREE Module.
 
 == Changelog ==
+
+= 1.0.68.1 [Jul 22, 2021] =
+* Fixed: Firefox was showing a big Link icon in the block editor
+* Fixed: Deprecated `block_categories` notice appearing after WordPress 5.8 update
 
 = 1.0.68 [Jul 15, 2021] =
 * Improved: [HUGE!] Improved performance of the plugin even further.

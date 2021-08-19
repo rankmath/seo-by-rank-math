@@ -27,7 +27,9 @@ class Blocks {
 	 */
 	public function __construct() {
 		$this->action( 'init', 'init' );
-		$this->filter( 'block_categories', 'block_categories' );
+
+		$filter = version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ? 'block_categories_all' : 'block_categories';
+		$this->filter( $filter, 'block_categories' );
 		$this->action( 'enqueue_block_editor_assets', 'editor_assets' ); // Backend.
 	}
 
