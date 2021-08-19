@@ -269,9 +269,11 @@ class DataCollector {
 		jQuery( '.et-fb-page-settings-bar' )
 			.find( '.et-fb-button--save-draft, .et-fb-button--publish' )
 			.on( 'click', () => {
-				this.savePost()
-				this.saveRedirection()
-				this.saveSchemas()
+				setTimeout( () => {
+					this.savePost()
+					this.saveRedirection()
+					this.saveSchemas()
+				}, 500 )
 			} )
 
 		addFilter(

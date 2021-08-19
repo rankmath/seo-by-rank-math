@@ -81,7 +81,8 @@ class Yoast_Blocks extends \WP_Background_Process {
 		$posts = get_option( 'rank_math_yoast_block_posts' );
 		delete_option( 'rank_math_yoast_block_posts' );
 		Helper::add_notification(
-			sprintf( 'Converted %d posts successfully.', $posts['count'] ),
+			// Translators: placeholder is the number of modified posts.
+			sprintf( _n( 'Blocks successfully converted in %d post.', 'Blocks successfully converted in %d posts.', $posts['count'], 'rank-math' ), $posts['count'] ),
 			[
 				'type'    => 'success',
 				'id'      => 'rank_math_yoast_block_posts',

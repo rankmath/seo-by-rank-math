@@ -151,6 +151,10 @@ class GTag {
 	 * Print gtag snippet for non-amp. Used only for WordPress 5.7 or above.
 	 */
 	public function add_gtag_js() {
+		if ( $this->is_tracking_disabled() ) {
+			return;
+		}
+
 		$gtag_script_info = $this->get_gtag_info();
 
 		wp_print_script_tag(
@@ -173,6 +177,10 @@ class GTag {
 	 * Print gtag snippet for non-amp. Used for below WordPress 5.7.
 	 */
 	public function enqueue_gtag_js() {
+		if ( $this->is_tracking_disabled() ) {
+			return;
+		}
+
 		$gtag_script_info = $this->get_gtag_info();
 
 		wp_enqueue_script( // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
@@ -272,7 +280,24 @@ class GTag {
 	 * @return bool
 	 */
 	protected function is_tracking_disabled() {
-		return $this->get( 'exclude_loggedin' ) && is_user_logged_in();
+		if ( ! $this->get( 'exclude_loggedin' ) ) {
+			return false;
+		}
+
+		$logged_in    = is_user_logged_in();
+		$filter_match = false;
+		if ( $logged_in ) {
+			if ( ! function_exists( 'get_editable_roles' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/user.php';
+			}
+
+			$all_roles    = array_keys( get_editable_roles() );
+			$all_roles    = array_combine( $all_roles, $all_roles ); // Copy values to keys for easier filtering.
+			$user_roles   = array_flip( get_userdata( get_current_user_id() )->roles );
+			$filter_match = count( array_intersect_key( (array) $this->do_filter( 'analytics/gtag_exclude_loggedin_roles', $all_roles ), $user_roles ) );
+		}
+
+		return $filter_match;
 	}
 
 	/**

@@ -15,7 +15,7 @@ const LengthIndicator = ( props ) => {
 	return (
 		<span
 			className={ classnames( 'length-indicator-wrapper', {
-				invalid: lengthData.isInvalid,
+				invalid: lengthData.isInvalid || lengthData.isInvalidWidth,
 			} ) }
 		>
 			<span className="length-count">

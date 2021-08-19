@@ -37,8 +37,7 @@ trait WordPress {
 	 * @param int    $status   Status code to use.
 	 */
 	public static function redirect( $location, $status = 302 ) {
-		header( 'X-Redirect-By: Rank Math' );
-		wp_safe_redirect( $location, $status );
+		wp_safe_redirect( $location, $status, 'Rank Math' );
 		exit;
 	}
 

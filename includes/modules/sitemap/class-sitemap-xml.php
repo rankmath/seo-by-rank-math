@@ -187,14 +187,14 @@ class Sitemap_XML extends XML {
 	private function maybe_redirect( $current_page ) {
 		// Redirect when there are only zeros.
 		if ( '' !== $current_page && intval( $current_page ) < 1 ) {
-			wp_safe_redirect( preg_replace( '/0+\.xml$/', '.xml', Helper::get_current_page_url() ) );
+			Helper::redirect( preg_replace( '/0+\.xml$/', '.xml', Helper::get_current_page_url() ) );
 			die();
 		}
 
 		// Redirect when there are leading zeros.
 		$zeros_stripped = ltrim( $current_page, '0' );
 		if ( (string) $zeros_stripped !== (string) $current_page ) {
-			wp_safe_redirect( preg_replace( '/' . preg_quote( $current_page ) . '\.xml$/', $zeros_stripped . '.xml', Helper::get_current_page_url() ) );
+			Helper::redirect( preg_replace( '/' . preg_quote( $current_page ) . '\.xml$/', $zeros_stripped . '.xml', Helper::get_current_page_url() ) );
 			die();
 		}
 	}

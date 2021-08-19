@@ -222,7 +222,7 @@ class Options {
 
 		if ( filter_has_var( INPUT_POST, 'reset-cmb' ) && Param::post( 'action' ) === $this->key ) {
 			delete_option( $this->key );
-			wp_safe_redirect( esc_url_raw( $url ), WP_Http::SEE_OTHER );
+			Helper::redirect( esc_url_raw( $url ), WP_Http::SEE_OTHER );
 			exit;
 		}
 	}

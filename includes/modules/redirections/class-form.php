@@ -233,12 +233,12 @@ class Form {
 		$redirection = Redirection::from( $values );
 		if ( false === $redirection->save() ) {
 			Helper::add_notification( __( 'Please add at least one valid source URL.', 'rank-math' ), [ 'type' => 'error' ] );
-			wp_safe_redirect( Param::post( '_wp_http_referer' ) );
+			Helper::redirect( Param::post( '_wp_http_referer' ) );
 			exit;
 		}
 
 		$this->do_action( 'redirection/saved', $redirection );
-		wp_safe_redirect( Helper::get_admin_url( 'redirections' ) );
+		Helper::redirect( Helper::get_admin_url( 'redirections' ) );
 		exit;
 	}
 

@@ -1047,6 +1047,9 @@ msgstr ""
 msgid "Egypt"
 msgstr ""
 
+msgid "Spain"
+msgstr ""
+
 msgid "Finland"
 msgstr ""
 
@@ -2598,6 +2601,12 @@ msgstr ""
 msgid "Are you sure you want to delete the old schema data? This action is irreversible."
 msgstr ""
 
+#. translators: placeholder is the number of modified posts.
+msgid "Blocks successfully converted in %d post."
+msgid_plural "Blocks successfully converted in %d posts."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Images"
 msgstr ""
 
@@ -3138,6 +3147,9 @@ msgid "Google Search Console has been linked."
 msgstr ""
 
 msgid "You have not linked Google Search Console yet."
+msgstr ""
+
+msgid "Could not check Focus Keywords in posts - the post meta table exceeds the size limit."
 msgstr ""
 
 msgid "All published posts have focus keywords set."
@@ -4852,6 +4864,9 @@ msgid "Reset"
 msgstr ""
 
 msgid "Update Capabilities"
+msgstr ""
+
+msgid "Toggle All"
 msgstr ""
 
 #. translators: %s expands to a unit of time (e.g. 1 day).

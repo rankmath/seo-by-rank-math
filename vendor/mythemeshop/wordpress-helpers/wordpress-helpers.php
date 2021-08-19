@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       WordPress Helpers
- * Version:           1.1.15
+ * Version:           1.1.16
  * Plugin URI:        http://mythemeshop.com/wordpress-helpers/
  * Description:       Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.
  * Author:            MyThemeShop

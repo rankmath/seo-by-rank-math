@@ -232,6 +232,12 @@ html {
 
                     color: $dark_gray;
                     background-color: #fdfdfd;
+
+                    border: 1px solid $gray;
+
+                    + span + .components-input-control__backdrop {
+                        display: none;
+                    }
                 }
             }
         }

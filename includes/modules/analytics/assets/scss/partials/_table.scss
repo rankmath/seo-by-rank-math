@@ -34,6 +34,10 @@
                 @extend %flex;
                 justify-content: space-between;
 
+                .button {
+                    border-color: $gray;
+                }
+
                 .components-dropdown {
                     position: relative;
 
@@ -43,7 +47,7 @@
                         top: 35px;
                         right: 0;
 
-                        width: 182px;
+                        width: 200px;
                         padding: 1rem;
 
                         border: 1px solid $light-gray;
@@ -86,7 +90,7 @@
                 flex: 1;
                 flex-grow: 1;
 
-                button:not(.is-link):not(.add-keyword):not(.cancel-keyword) {
+                button:not(.is-link):not(.add-keyword):not(.cancel-keyword):not(.add-focus-keyword):not(.button-auto-add-focus-keyword) {
                     font-size: 1.125rem;
                     font-weight: 600;
                     line-height: 1;
@@ -221,7 +225,6 @@
         button.#{$namespace}-ellipsis-menu {
             &__toggle {
                 height: 30px;
-                margin-top: 3px;
                 padding: 4px 10px 0;
 
                 &:hover,

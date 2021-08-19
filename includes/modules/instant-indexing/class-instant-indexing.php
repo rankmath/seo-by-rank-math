@@ -139,7 +139,7 @@ class Instant_Indexing extends Base {
 			Helper::add_notification( $data['message'], [ 'type' => $notification_type ] );
 		}
 
-		wp_safe_redirect( remove_query_arg( [ 'action', 'index_post_id', 'method', '_wpnonce' ] ) );
+		Helper::redirect( remove_query_arg( [ 'action', 'index_post_id', 'method', '_wpnonce' ] ) );
 		exit;
 	}
 

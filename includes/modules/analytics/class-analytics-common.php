@@ -170,7 +170,7 @@ class Analytics_Common {
 			$this->schedule_email_reporting();
 
 			Helper::remove_notification( 'rank_math_analytics_new_email_reports' );
-			wp_safe_redirect( remove_query_arg( 'enable_email_reports' ) );
+			Helper::redirect( remove_query_arg( 'enable_email_reports' ) );
 			die();
 		}
 	}

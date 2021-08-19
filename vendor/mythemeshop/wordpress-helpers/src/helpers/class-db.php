@@ -44,4 +44,24 @@ class DB {
 
 		return false;
 	}
+
+	/**
+	 * Check if table has more rows than X.
+	 *
+ 	 * @since      1.1.16
+	 *
+	 * @param string $table_name Table name to check.
+	 * @param int    $limit      Number of rows to check against.
+	 *
+	 * @return bool
+	 */
+	public static function table_size_exceeds( $table_name, $limit ) {
+		global $wpdb;
+
+		$check_table = $wpdb->query( "SELECT 1 FROM {$table_name} LIMIT {$limit}, 1" );
+
+		return ! empty( $check_table );
+	}
+
+	
 }

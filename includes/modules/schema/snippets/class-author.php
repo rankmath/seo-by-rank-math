@@ -38,7 +38,7 @@ class Author implements Snippet {
 		$author_url          = get_author_posts_url( $author_id );
 		$data['ProfilePage'] = [
 			'@type'       => 'Person',
-			'@id'         => $author_url,
+			'@id'         => ! $is_archive_disabled ? $author_url : $jsonld->parts['url'] . '#author',
 			'name'        => $author_name,
 			'description' => wp_strip_all_tags( stripslashes( $this->get_description( $author_id ) ), true ),
 			'url'         => $is_archive_disabled ? '' : $author_url,

@@ -12,7 +12,8 @@ namespace RankMath\Monitor;
 
 use RankMath\Helper;
 use MyThemeShop\Admin\List_Table;
-use RankMath\Redirections\Cache;
+use RankMath\Redirections\DB as RedirectionsDB;
+use RankMath\Redirections\Cache as RedirectionsCache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -157,15 +158,21 @@ class Table extends List_Table {
 	 * @param array  $actions Array of actions.
 	 */
 	private function add_redirection_actions( $item, &$actions ) {
-		$redirection = Cache::get_by_url( $item['uri_decoded'] );
+		$redirection = RedirectionsCache::get_by_url( $item['uri_decoded'] );
+
+		if ( ! $redirection ) {
+			$redirection = RedirectionsDB::match_redirections( $item['uri_decoded'] );
+		}
 
 		if ( $redirection ) {
+			$redirection_array = (array) $redirection;
 			$url = esc_url(
 				Helper::get_admin_url(
 					'redirections',
 					[
-						'redirection' => $redirection->redirection_id,
+						'redirection' => isset( $redirection_array['redirection_id'] ) ? $redirection_array['redirection_id'] : $redirection_array['id'],
 						'security'    => wp_create_nonce( 'redirection_list_action' ),
+						'action'      => 'edit',
 					]
 				)
 			);

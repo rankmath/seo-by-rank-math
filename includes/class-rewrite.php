@@ -145,7 +145,7 @@ class Rewrite {
 	public function request( $query_vars ) {
 		if ( isset( $query_vars['rank_math_category_redirect'] ) ) {
 			$catlink = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $query_vars['rank_math_category_redirect'], 'category' );
-			wp_redirect( $catlink, 301 );
+			Helper::redirect( $catlink, 301 );
 			exit;
 		}
 

@@ -94,7 +94,7 @@ class Registration {
 
 		$status = Param::get( 'rankmath_connect' );
 		if ( $status && $redirect_to = $this->get_registration_url( $status ) ) { //phpcs:ignore
-			\wp_safe_redirect( $redirect_to );
+			Helper::redirect( $redirect_to );
 			exit;
 		}
 	}
@@ -186,7 +186,7 @@ class Registration {
 			$url = 'wizard';
 		}
 
-		wp_redirect( Helper::get_admin_url( $url ) );
+		Helper::redirect( Helper::get_admin_url( $url ) );
 		exit;
 	}
 
@@ -306,12 +306,12 @@ class Registration {
 		// If no form submission, bail.
 		$referer = Param::post( '_wp_http_referer', get_dashboard_url() );
 		if ( Param::post( 'step' ) !== 'register' ) {
-			return wp_safe_redirect( $referer );
+			return Helper::redirect( $referer );
 		}
 
 		check_admin_referer( 'rank-math-wizard', 'security' );
 		if ( ! Helper::has_cap( 'general' ) ) {
-			return wp_safe_redirect( $referer );
+			return Helper::redirect( $referer );
 		}
 
 		$this->redirect_to_connect( $_POST );
@@ -326,7 +326,7 @@ class Registration {
 			exit;
 		}
 		add_option( 'rank_math_registration_skip', true );
-		wp_safe_redirect( Helper::get_admin_url( 'wizard' ) );
+		Helper::redirect( Helper::get_admin_url( 'wizard' ) );
 		exit;
 	}
 

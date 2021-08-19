@@ -349,12 +349,15 @@ class Database_Tools {
 			'button_text' => __( 'Re-create Tables', 'rank-math' ),
 		];
 
-		$tools['yoast_blocks'] = [
-			'title'        => __( 'Yoast Block Converter', 'rank-math' ),
-			'description'  => __( 'Convert FAQ & HowTo Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
-			'confirm_text' => __( 'Are you sure you want to convert Yoast blocks into Rank Math blocks? This action is irreversible.', 'rank-math' ),
-			'button_text'  => __( 'Convert Blocks', 'rank-math' ),
-		];
+		$block_posts = Yoast_Blocks::get()->find_posts();
+		if ( is_array( $block_posts ) && ! empty( $block_posts['count'] ) ) {
+			$tools['yoast_blocks'] = [
+				'title'        => __( 'Yoast Block Converter', 'rank-math' ),
+				'description'  => __( 'Convert FAQ & HowTo Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
+				'confirm_text' => __( 'Are you sure you want to convert Yoast blocks into Rank Math blocks? This action is irreversible.', 'rank-math' ),
+				'button_text'  => __( 'Convert Blocks', 'rank-math' ),
+			];
+		}
 
 		if ( Helper::is_module_active( 'link-counter' ) ) {
 			$tools['delete_links'] = [

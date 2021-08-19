@@ -142,7 +142,6 @@ class Post_Screen implements IScreen {
 				'hasTOCPlugin'     => $this->has_toc_plugin(),
 				'sentimentKbLink'  => KB::get( 'sentiments' ),
 				'focusKeywordLink' => admin_url( 'edit.php?focus_keyword=%focus_keyword%&post_type=%post_type%' ),
-				'hasBreadcrumb'    => Helper::is_breadcrumbs_enabled(),
 				'isUserEdit'       => Admin_Helper::is_user_edit(),
 				'socialPanelLink'  => Helper::get_admin_url( 'options-titles#setting-panel-social' ),
 				'primaryTaxonomy'  => $this->get_primary_taxonomy(),

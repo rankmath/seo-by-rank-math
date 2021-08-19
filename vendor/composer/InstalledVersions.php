@@ -25,12 +25,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.69.2-dev',
-    'version' => '1.0.69.2-dev',
+    'pretty_version' => 'dev-develop',
+    'version' => 'dev-develop',
     'aliases' => 
     array (
     ),
-    'reference' => '16833724df561ed0e9a5a96ce931322728d2fe49',
+    'reference' => '9dd4401c6addca2981bc4b79e5ce67918f8a205b',
     'name' => 'rankmath/seo-by-rank-math',
   ),
   'versions' => 
@@ -64,21 +64,21 @@ private static $installed = array (
     ),
     'mythemeshop/wordpress-helpers' => 
     array (
-      'pretty_version' => 'v1.1.15',
-      'version' => '1.1.15.0',
+      'pretty_version' => 'v1.1.16',
+      'version' => '1.1.16.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a84ec8fcdf55ff46910d3803f336a477abeb3a47',
+      'reference' => '2d9bddc0995fe1d2e81c42ac80fd115ff15dd560',
     ),
     'rankmath/seo-by-rank-math' => 
     array (
-      'pretty_version' => '1.0.69.2-dev',
-      'version' => '1.0.69.2-dev',
+      'pretty_version' => 'dev-develop',
+      'version' => 'dev-develop',
       'aliases' => 
       array (
       ),
-      'reference' => '16833724df561ed0e9a5a96ce931322728d2fe49',
+      'reference' => '9dd4401c6addca2981bc4b79e5ce67918f8a205b',
     ),
     'woocommerce/action-scheduler' => 
     array (

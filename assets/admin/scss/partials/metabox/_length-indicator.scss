@@ -31,10 +31,10 @@
 
 			@include size(100%);
 		}
+	}
 
-		&.invalid {
-			background: linear-gradient(to right, #e33d2a 0%, #e33d2a 18%, #fff 19%, #fff 19%, #e33d2a 20%, #e33d2a 38%, #fff 39%, #fff 39%, #e33d2a 40%, #e33d2a 58%, #fff 59%, #fff 59%, #e33d2a 60%, #e33d2a 78%, #fff 79%, #fff 79%, #e33d2a 80%, #e33d2a 100%);
-		}
+	&.invalid .length-indicator {
+		background: linear-gradient(to right, #e33d2a 0%, #e33d2a 18%, #fff 19%, #fff 19%, #e33d2a 20%, #e33d2a 38%, #fff 39%, #fff 39%, #e33d2a 40%, #e33d2a 58%, #fff 59%, #fff 59%, #e33d2a 60%, #e33d2a 78%, #fff 79%, #fff 79%, #e33d2a 80%, #e33d2a 100%);
 	}
 
 	input:focus + .length-indicator,

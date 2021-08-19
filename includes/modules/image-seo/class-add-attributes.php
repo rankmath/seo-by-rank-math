@@ -29,6 +29,7 @@ class Add_Attributes {
 	 */
 	public function __construct() {
 		$this->action( 'wp', 'add_attributes', 9999 );
+		$this->action( 'rest_api_init', 'add_attributes' );
 	}
 
 	/**

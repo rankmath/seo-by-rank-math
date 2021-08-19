@@ -129,6 +129,10 @@ class Admin_Menu implements Runner {
 				fill-rule: evenodd;
 				fill: #00b9eb;
 			}
+
+			#toplevel_page_rank-math:not(.wp-has-submenu) {
+				display: none;
+			}
 		</style>
 		<?php
 	}
