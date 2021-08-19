@@ -57,7 +57,7 @@ class Notification_Center {
 	 */
 	public function __construct( $storage_key = 'mythemeshop_notifications' ) {
 		$this->storage_key = $storage_key;
-		add_action( 'init', array( $this, 'get_from_storage' ) );
+		add_action( 'plugins_loaded', array( $this, 'get_from_storage' ), 5 );
 		add_action( 'all_admin_notices', array( $this, 'display' ) );
 		add_action( 'shutdown', array( $this, 'update_storage' ) );
 		add_action( 'admin_footer', array( $this, 'print_javascript' ) );
@@ -337,5 +337,21 @@ class Notification_Center {
 	 */
 	private function is_network_admin() {
 		return function_exists( 'is_network_admin' ) && is_network_admin();
+	}
+
+	/**
+	 * Check if a notification with the given ID exists.
+	 *
+	 * @param string $id Notification ID.
+	 * @return boolean
+	 */
+	public function has_notification( $id ) {
+		$notifications = $this->get_notifications();
+		foreach ( $notifications as $notification ) {
+			if ( isset( $notification->options['id'] ) && $notification->options['id'] === $id ) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -313,8 +313,8 @@ if ( 'attachment' === $post_type ) {
 		[
 			'id'      => 'pt_' . $post_type . '_add_meta_box',
 			'type'    => 'toggle',
-			'name'    => esc_html__( 'Add SEO Meta Box', 'rank-math' ),
-			'desc'    => esc_html__( 'Add the SEO Meta Box for the editor screen to customize SEO options for posts in this post type.', 'rank-math' ),
+			'name'    => esc_html__( 'Add SEO Controls', 'rank-math' ),
+			'desc'    => esc_html__( 'Add SEO controls for the editor screen to customize SEO options for posts in this post type.', 'rank-math' ),
 			'default' => 'on',
 			'classes' => 'rank-math-advanced-option',
 		]

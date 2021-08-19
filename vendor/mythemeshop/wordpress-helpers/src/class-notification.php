@@ -70,7 +70,7 @@ class Notification {
 	 *
 	 * @var array Options of this Notification.
 	 */
-	private $options = [];
+	public $options = [];
 
 	/**
 	 * Internal flag for whether notifications has been displayed.

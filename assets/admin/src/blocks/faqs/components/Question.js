@@ -12,6 +12,7 @@ import MediaUploader from '@blocks/shared/MediaUploader'
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
+import { applyFilters } from '@wordpress/hooks'
 import { Button } from '@wordpress/components'
 import { Component } from '@wordpress/element'
 import { RichText, MediaUpload } from '@wordpress/block-editor'
@@ -53,11 +54,12 @@ class Question extends Component {
 						onChange={ ( newTitle ) => {
 							this.setQuestionProp( 'title', newTitle )
 						} }
-						keepPlaceholderOnFocus={ true }
 						placeholder={ __( 'Question…', 'rank-math' ) }
 					/>
 
 					<div className="rank-math-block-actions">
+						{ applyFilters( 'rank_math_block_faq_actions', '', this.props ) }
+
 						<Button
 							className="rank-math-item-visbility"
 							icon={ visible ? 'visibility' : 'hidden' }
@@ -82,7 +84,6 @@ class Question extends Component {
 						onChange={ ( newContent ) => {
 							this.setQuestionProp( 'content', newContent )
 						} }
-						keepPlaceholderOnFocus={ true }
 						placeholder={ __(
 							'Enter the answer to the question',
 							'rank-math'

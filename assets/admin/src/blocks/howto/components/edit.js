@@ -93,7 +93,6 @@ class Edit extends Component {
 					onChange={ ( description ) => {
 						setAttributes( { description } )
 					} }
-					keepPlaceholderOnFocus={ true }
 					placeholder={ __(
 						'Enter a main description',
 						'rank-math'
@@ -175,7 +174,6 @@ class Edit extends Component {
 
 				<Button
 					isPrimary={ true }
-					isLarge={ true }
 					onClick={ this.addNew }
 				>
 					{ __( 'Add New Step', 'rank-math' ) }

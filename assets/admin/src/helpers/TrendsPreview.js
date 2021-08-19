@@ -4,7 +4,7 @@
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
 import { Fragment } from '@wordpress/element'
-import { Modal } from '@wordpress/components'
+import { Modal, withFilters } from '@wordpress/components'
 import { withDispatch, withSelect } from '@wordpress/data'
 
 /**
@@ -45,18 +45,20 @@ const TrendsPreview = ( { isTrendsCtaOpen, toggleTrendsCta } ) => {
 	)
 }
 
-export default compose(
-	withSelect( ( select ) => {
-		const repo = select( 'rank-math' )
-		return {
-			isTrendsCtaOpen: repo.isTrendsCtaOpen(),
-		}
-	} ),
-	withDispatch( ( dispatch, props ) => {
-		return {
-			toggleTrendsCta() {
-				dispatch( 'rank-math' ).toggleTrendsCta( ! props.isTrendsCtaOpen )
-			},
-		}
-	} )
-)( TrendsPreview )
+export default withFilters( 'rankMath.focusKeywords.Trends' )(
+	compose(
+		withSelect( ( select ) => {
+			const repo = select( 'rank-math' )
+			return {
+				isTrendsCtaOpen: repo.isTrendsCtaOpen(),
+			}
+		} ),
+		withDispatch( ( dispatch, props ) => {
+			return {
+				toggleTrendsCta() {
+					dispatch( 'rank-math' ).toggleTrendsCta( ! props.isTrendsCtaOpen )
+				},
+			}
+		} )
+	)( TrendsPreview )
+)

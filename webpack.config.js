@@ -119,7 +119,6 @@ const entryPoints = {
 	},
 	schema: {
 		'schema-gutenberg': './includes/modules/schema/assets/src/index.js',
-		'schema-classic': './includes/modules/schema/assets/src/metabox-classic.js',
 		'schema-template': './includes/modules/schema/assets/src/metabox-template.js',
 	},
 	divi: {

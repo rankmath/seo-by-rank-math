@@ -54,7 +54,6 @@ class CheckLists extends Component {
 	renderGroup( index ) {
 		this.errors = 0
 		const listItems = this.renderGroupItems( index )
-
 		return (
 			<PanelBody
 				key={ 'panel-' + index }
@@ -129,36 +128,52 @@ class CheckLists extends Component {
 	}
 
 	getGroupItems( group ) {
-		const hash = {
-			basic: {
-				keywordInTitle: true,
-				keywordInMetaDescription: true,
-				keywordInPermalink: true,
-				keywordIn10Percent: true,
-				keywordInContent: false,
-				lengthContent: false,
-			},
-			advanced: {
-				keywordInSubheadings: false,
-				keywordInImageAlt: true,
-				keywordDensity: false,
-				lengthPermalink: false,
-				linksHasExternals: false,
-				linksNotAllExternals: false,
-				linksHasInternal: false,
-				keywordNotUsed: true,
-			},
-			'title-readability': {
-				titleStartWithKeyword: true,
-				titleSentiment: false,
-				titleHasPowerWords: false,
-				titleHasNumber: false,
-			},
-			'content-readability': {
-				contentHasTOC: false,
-				contentHasShortParagraphs: false,
-				contentHasAssets: false,
-			},
+		let hash = ''
+
+		if ( 'post' === rankMath.objectType ) {
+			hash = {
+				basic: {
+					keywordInTitle: true,
+					keywordInMetaDescription: true,
+					keywordInPermalink: true,
+					keywordIn10Percent: true,
+					keywordInContent: false,
+					lengthContent: false,
+				},
+				advanced: {
+					keywordInSubheadings: false,
+					keywordInImageAlt: true,
+					keywordDensity: false,
+					lengthPermalink: false,
+					linksHasExternals: false,
+					linksNotAllExternals: false,
+					linksHasInternal: false,
+					keywordNotUsed: true,
+				},
+				'title-readability': {
+					titleStartWithKeyword: true,
+					titleSentiment: false,
+					titleHasPowerWords: false,
+					titleHasNumber: false,
+				},
+				'content-readability': {
+					contentHasTOC: false,
+					contentHasShortParagraphs: false,
+					contentHasAssets: false,
+				},
+			}
+		} else {
+			hash = {
+				basic: {
+					keywordInTitle: true,
+					keywordInMetaDescription: true,
+					keywordInPermalink: true,
+				},
+				advanced: {
+					titleStartWithKeyword: true,
+					keywordNotUsed: true,
+				},
+			}
 		}
 
 		return hash[ group ]
@@ -169,11 +184,18 @@ class CheckLists extends Component {
 	}
 
 	getGroups() {
+		if ( 'post' === rankMath.objectType ) {
+			return {
+				basic: __( 'Basic SEO', 'rank-math' ),
+				advanced: __( 'Additional', 'rank-math' ),
+				'title-readability': __( 'Title Readability', 'rank-math' ),
+				'content-readability': __( 'Content Readability', 'rank-math' ),
+			}
+		}
+
 		return {
 			basic: __( 'Basic SEO', 'rank-math' ),
 			advanced: __( 'Additional', 'rank-math' ),
-			'title-readability': __( 'Title Readability', 'rank-math' ),
-			'content-readability': __( 'Content Readability', 'rank-math' ),
 		}
 	}
 }

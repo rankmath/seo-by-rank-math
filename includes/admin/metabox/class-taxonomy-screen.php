@@ -27,7 +27,6 @@ class Taxonomy_Screen implements IScreen {
 	 * Class construct
 	 */
 	public function __construct() {
-		$this->action( 'rank_math/metabox/process_fields', 'save_general_meta' );
 	}
 
 	/**
@@ -104,20 +103,10 @@ class Taxonomy_Screen implements IScreen {
 	 * @return array
 	 */
 	public function get_object_values() {
-		return [];
-	}
-
-	/**
-	 * Save handler for metadata.
-	 *
-	 * @param CMB2 $cmb CMB2 instance.
-	 */
-	public function save_general_meta( $cmb ) {
-		if ( Helper::get_settings( "titles.tax_{$cmb->data_to_save['taxonomy']}_title" ) === $cmb->data_to_save['rank_math_title'] ) {
-			$cmb->data_to_save['rank_math_title'] = '';
-		}
-
-		return $cmb;
+		return [
+			'titleTemplate'       => '%term% %sep% %sitename%',
+			'descriptionTemplate' => '%term_description%',
+		];
 	}
 
 	/**

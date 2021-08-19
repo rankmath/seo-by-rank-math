@@ -58,15 +58,6 @@ msgstr ""
 msgid "SEO Score"
 msgstr ""
 
-msgid "Show SEO Score on Front-end"
-msgstr ""
-
-msgid "Off"
-msgstr ""
-
-msgid "On"
-msgstr ""
-
 msgid "Home"
 msgstr ""
 
@@ -306,19 +297,6 @@ msgstr ""
 msgid "I already did"
 msgstr ""
 
-#. translators: placeholder is a wp.org review link
-msgid "If you like Rank Math, please take a minute to rate it on WordPress.org: %s"
-msgstr ""
-
-msgid "Rate Rank Math SEO"
-msgstr ""
-
-msgid "Hey, we noticed you've been using Rank Math SEO for more than two weeks now – <em>that's awesome!</em> <br>Could you please do us a BIG favor and give it a rating on WordPress to help us spread the word and boost our motivation?"
-msgstr ""
-
-msgid "I already did. Please don't show this message again."
-msgstr ""
-
 msgid "Please use the correct format."
 msgstr ""
 
@@ -363,6 +341,12 @@ msgid "Add <code>rel=\"sponsored\"</code>"
 msgstr ""
 
 msgid "Link Title"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "On"
 msgstr ""
 
 msgid "Snippet"
@@ -1136,242 +1120,6 @@ msgstr ""
 msgid "EDD Product"
 msgstr ""
 
-msgid "Robots Meta"
-msgstr ""
-
-msgid "Custom values for robots meta tag."
-msgstr ""
-
-msgid "Advanced Robots Meta"
-msgstr ""
-
-msgid "Canonical URL"
-msgstr ""
-
-msgid "The canonical URL informs search crawlers which page is the main page if you have double content."
-msgstr ""
-
-msgid "Breadcrumb Title"
-msgstr ""
-
-msgid "Breadcrumb Title to use for this post"
-msgstr ""
-
-msgid "Edit Snippet"
-msgstr ""
-
-msgid "Close Editor"
-msgstr ""
-
-msgid "This is what will appear in the first line when this post shows up in the search results."
-msgstr ""
-
-msgid "Permalink"
-msgstr ""
-
-msgid "Editing Homepage permalink is not possible."
-msgstr ""
-
-msgid "This is the unique URL of this page, displayed below the post title in the search results."
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "This is what will appear as the description when this post shows up in the search results."
-msgstr ""
-
-msgid "Trends"
-msgstr ""
-
-#. translators: Link to kb article
-msgid "Insert keywords you want to rank for. Try to <a href=\"%s\" target=\"_blank\">attain 100/100 points</a> for better chances of ranking."
-msgstr ""
-
-#. translators: link to pricing page.
-msgid "Want more? %s version"
-msgstr ""
-
-msgid "Upgrade today to the PRO"
-msgstr ""
-
-msgid "Example: Rank Math SEO"
-msgstr ""
-
-msgid "This post is Pillar Content"
-msgstr ""
-
-msgid "Select one or more Pillar Content posts for each post tag or category to show them in the Link Suggestions meta box."
-msgstr ""
-
-msgid "Facebook"
-msgstr ""
-
-msgid "Twitter"
-msgstr ""
-
-msgid "Facebook Preview"
-msgstr ""
-
-msgid "Twitter Preview"
-msgstr ""
-
-msgid "2 hrs"
-msgstr ""
-
-msgid "2h"
-msgstr ""
-
-#. translators: Link to global title setting
-msgid "Set your default image for Facebook & Twitter by adding <a href=\"%s\" target=\"_blank\">OpenGraph Thumbnail</a>"
-msgstr ""
-
-#. translators: link to title setting screen
-msgid "Customize the title, description and images of your post used while sharing on Facebook and Twitter. <a href=\"%s\" target=\"_blank\">Read more</a>"
-msgstr ""
-
-msgid "Image"
-msgstr ""
-
-msgid "Add Image"
-msgstr ""
-
-msgid "Upload at least 600x315px image. Recommended size is 1200x630px."
-msgstr ""
-
-msgid "Image is smaller than the minimum size, please select a different image."
-msgstr ""
-
-msgid "Add icon overlay to thumbnail"
-msgstr ""
-
-msgid "Please be careful with this option. Although this option will help increase CTR on Facebook, it might get you penalised if over-used."
-msgstr ""
-
-msgid "Icon overlay"
-msgstr ""
-
-msgid "Author Profile URL"
-msgstr ""
-
-#. translators: option page link
-msgid "Insert a Facebook profile URL to display author name when the page is shared on Facebook.<br>The author name will be clickable if the profile is set to allow public followers.<br>You can set up default URL for fallback in <a href=\"%s\" target=\"_blank\">SEO &raquo; Titles &amp; Meta &raquo; Social</a>."
-msgstr ""
-
-msgid "Use Data from Facebook Tab"
-msgstr ""
-
-msgid "Summary Card with Large Image"
-msgstr ""
-
-msgid "Summary Card"
-msgstr ""
-
-msgid "App Card"
-msgstr ""
-
-msgid "Player Card"
-msgstr ""
-
-msgid "Card type"
-msgstr ""
-
-#. translators: Link to twitter player card doc
-msgid "Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. Player Cards must be submitted for approval before they can be used. More information: %s"
-msgstr ""
-
-#. translators: Link to twitter app card doc
-msgid "The App Card is a great way to represent mobile applications on Twitter and to drive installs. More information: %s"
-msgstr ""
-
-msgid "Images for this Card support an aspect ratio of 2:1 with minimum dimensions of 300x157 or maximum of 4096x4096 pixels. Images must be less than 5MB in size."
-msgstr ""
-
-msgid "Please be careful with this option. Although this option will help increace CTR on Facebook, it might get you penalised if over-used."
-msgstr ""
-
-msgid "Author Twitter Username"
-msgstr ""
-
-#. translators: option page link
-msgid "Insert Twitter username to add twitter:creator tag to posts when the page is shared on Twitter.<br>You can set up default username for fallback in <a href=\"%s\" target=\"_blank\">SEO &raquo; Titles &amp; Meta &raquo; Social</a>."
-msgstr ""
-
-msgid "Player URL"
-msgstr ""
-
-msgid "HTTPS URL to iFrame player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser. The audio or video player must not require plugins such as Adobe Flash."
-msgstr ""
-
-msgid "Player Size"
-msgstr ""
-
-msgid "iFrame width and height, specified in pixels in the following format: 600x400."
-msgstr ""
-
-msgid "Stream URL"
-msgstr ""
-
-msgid "Optional URL to raw stream that will be rendered in Twitter’s mobile applications directly. If provided, the stream must be delivered in the MPEG-4 container format (the .mp4 extension). The container can store a mix of audio and video with the following codecs: Video: H.264, Baseline Profile (BP), Level 3.0, up to 640 x 480 at 30 fps. Audio: AAC, Low Complexity Profile (LC)."
-msgstr ""
-
-msgid "Stream Content Type"
-msgstr ""
-
-msgid "The MIME type/subtype combination that describes the content contained in twitter:player:stream. Takes the form specified in RFC 6381. Currently supported content_type values are those defined in RFC 4337 (MIME Type Registration for MP4)."
-msgstr ""
-
-msgid "App Description"
-msgstr ""
-
-msgid "You can use this as a more concise description than what you may have on the app store. This field has a maximum of 200 characters. (optional)"
-msgstr ""
-
-msgid "iPhone App Name"
-msgstr ""
-
-msgid "The name of your app to show."
-msgstr ""
-
-msgid "iPhone App ID"
-msgstr ""
-
-msgid "The numeric representation of your app ID in the App Store."
-msgstr ""
-
-msgid "iPhone App URL"
-msgstr ""
-
-msgid "Your app's custom URL scheme (must include \"://\")."
-msgstr ""
-
-msgid "iPad App Name"
-msgstr ""
-
-msgid "iPad App ID"
-msgstr ""
-
-msgid "iPad App URL"
-msgstr ""
-
-msgid "Google Play App Name"
-msgstr ""
-
-msgid "Google Play App ID"
-msgstr ""
-
-msgid "Your app ID in the Google Play (.i.e. \"com.android.app\")"
-msgstr ""
-
-msgid "Google Play App URL"
-msgstr ""
-
-msgid "App Country"
-msgstr ""
-
-msgid "If your application is not available in the US App Store, you must set this value to the two-letter country code for the App Store that contains your application."
-msgstr ""
-
 msgid "Items per page"
 msgstr ""
 
@@ -1885,6 +1633,12 @@ msgstr ""
 msgid "Invalid post ID."
 msgstr ""
 
+msgid "Sorry, you are not allowed to edit this term."
+msgstr ""
+
+msgid "Invalid term ID."
+msgstr ""
+
 msgid "Sorry, field is empty which is not allowed."
 msgstr ""
 
@@ -1996,6 +1750,12 @@ msgstr ""
 msgid "Import meta information of your terms like the titles, descriptions, robots meta, OpenGraph info, etc."
 msgstr ""
 
+msgid "Import all the redirections you have already set up in AIO SEO Premium."
+msgstr ""
+
+msgid "Import Locations Settings."
+msgstr ""
+
 msgid "Settings imported successfully."
 msgstr ""
 
@@ -2061,28 +1821,13 @@ msgstr ""
 msgid "We can't show any link suggestions for this post. Try selecting categories and tags for this post, and mark other posts as Pillar Content to make them show up here."
 msgstr ""
 
-msgid "General"
-msgstr ""
-
-msgid "This tab contains general options."
-msgstr ""
-
-msgid "Advanced"
-msgstr ""
-
-msgid "This tab contains advance options."
-msgstr ""
-
-msgid "Social"
-msgstr ""
-
-msgid "This tab contains social options."
-msgstr ""
-
 msgid "The featured image should be at least 200 by 200 pixels to be picked up by Facebook and other social media sites."
 msgstr ""
 
 msgid "username"
+msgstr ""
+
+msgid "Description"
 msgstr ""
 
 msgid "Next steps&hellip;"
@@ -2545,6 +2290,9 @@ msgstr ""
 msgid "Average Position"
 msgstr ""
 
+msgid "Average position of all the ranking keywords below 100 position."
+msgstr ""
+
 msgid "Rank Math is importing latest data from connected Google Services, %1$s remaining."
 msgstr ""
 
@@ -2984,18 +2732,6 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-msgid "Edit redirection for the URL of this post."
-msgstr ""
-
-msgid "Create new redirection for the URL of this post."
-msgstr ""
-
-msgid "Redirection"
-msgstr ""
-
-msgid "Publish or update the post to save the redirection."
-msgstr ""
-
 msgid "Redirection successfully deleted."
 msgstr ""
 
@@ -3388,6 +3124,9 @@ msgid "Attention: Search Engines can't see your website."
 msgstr ""
 
 msgid "Your site is accessible by search engine."
+msgstr ""
+
+msgid "General"
 msgstr ""
 
 msgid "This tab contains General settings related to the XML sitemaps."
@@ -4008,13 +3747,19 @@ msgstr ""
 msgid "Author archive meta description. SEO options for specific author archives can be set with the meta box in the user profiles."
 msgstr ""
 
-msgid "Add SEO Meta Box for Users"
+msgid "Add SEO Controls"
 msgstr ""
 
-msgid "Add SEO Meta Box for user profile pages. Access to the Meta Box can be fine tuned with code, using a special filter hook."
+msgid "Add SEO Controls for user profile pages. Access to the Meta Box can be fine tuned with code, using a special filter hook."
+msgstr ""
+
+msgid "Robots Meta"
 msgstr ""
 
 msgid "Default values for robots meta tag. These can be changed for individual posts, taxonomies, etc."
+msgstr ""
+
+msgid "Advanced Robots Meta"
 msgstr ""
 
 msgid "You can use the separator character in titles by inserting <code>%separator%</code> or <code>%sep%</code> in the title fields."
@@ -4042,6 +3787,12 @@ msgid "Twitter Card Type"
 msgstr ""
 
 msgid "Card type selected when creating a new post. This will also be applied for posts without a card type selected."
+msgstr ""
+
+msgid "Summary Card with Large Image"
+msgstr ""
+
+msgid "Summary Card"
 msgstr ""
 
 #. translators: something
@@ -4259,10 +4010,7 @@ msgstr ""
 msgid "Image displayed when your page is shared on Facebook and other social networks. Use images that are at least 1200 x 630 pixels for the best display on high resolution devices."
 msgstr ""
 
-msgid "Add SEO Meta Box"
-msgstr ""
-
-msgid "Add the SEO Meta Box for the editor screen to customize SEO options for posts in this post type."
+msgid "Add SEO controls for the editor screen to customize SEO options for posts in this post type."
 msgstr ""
 
 msgid "Bulk Editing"
@@ -4352,7 +4100,7 @@ msgstr ""
 msgid "%s Archives Advanced Robots Meta"
 msgstr ""
 
-msgid "Add the SEO Meta Box for the term editor screen to customize SEO options for individual terms in this taxonomy."
+msgid "Add the SEO Controls for the term editor screen to customize SEO options for individual terms in this taxonomy."
 msgstr ""
 
 msgid "Remove Snippet Data"
@@ -4713,6 +4461,9 @@ msgid "The Simple mode only logs URI and access time, while the Advanced mode cr
 msgstr ""
 
 msgid "Simple"
+msgstr ""
+
+msgid "Advanced"
 msgstr ""
 
 msgid "Log Limit"

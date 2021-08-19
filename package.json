@@ -18,7 +18,7 @@
 		"lasttranslator": "Rank Math <support@rankmath.com>"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.14.6",
+		"@babel/core": "^7.14.8",
 		"@babel/plugin-proposal-class-properties": "^7.14.5",
 		"@babel/plugin-proposal-decorators": "^7.14.5",
 		"@babel/plugin-proposal-export-namespace-from": "^7.14.5",
@@ -31,13 +31,13 @@
 		"@babel/plugin-syntax-import-meta": "^7.10.4",
 		"@babel/plugin-transform-react-jsx": "^7.14.5",
 		"@babel/plugin-transform-runtime": "^7.14.5",
-		"@babel/preset-env": "^7.14.7",
+		"@babel/preset-env": "^7.14.8",
 		"@wordpress/eslint-plugin": "^7.4.0",
 		"@wordpress/icons": "^2.10.3",
 		"ajv": "6.12.0",
 		"babel-loader": "^8.2.2",
 		"classnames": "^2.3.1",
-		"eslint": "^7.29.0",
+		"eslint": "^7.31.0",
 		"eslint-plugin-eslint-comments": "^3.2.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^7.0.1",
@@ -60,12 +60,12 @@
 		"interpolate-components": "^1.1.1",
 		"lodash": "^4.17.21",
 		"modclean": "^3.0.0-beta.1",
-		"npm": "^6.14.13",
+		"npm": "^6.14.14",
 		"parse-english": "^4.1.1",
 		"prettier": "^2.3.2",
 		"react-content-loader": "^5.1.2",
 		"recharts": "^1.8.5",
-		"typescript": "^4.3.4"
+		"typescript": "^4.3.5"
 	},
 	"scripts": {
 		"build": "webpack --mode=production --progress",

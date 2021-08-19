@@ -203,15 +203,28 @@ class System_Status {
 		wp_enqueue_style( 'site-health' );
 		wp_enqueue_script( 'site-health' );
 
-		$rankmath      = apply_filters( 'rank_math/status/rank_math_info', $rankmath );
-		$this->wp_info = [ 'rank-math' => $rankmath ] + \WP_Debug_Data::debug_data();
+		$rankmath_data = apply_filters( 'rank_math/status/rank_math_info', $rankmath );
+		$core_data     = \WP_Debug_Data::debug_data();
 
-		// Remove irrelevant data.
-		unset(
-			$this->wp_info['wp-paths-sizes'],
-			$this->wp_info['wp-media'],
-			$this->wp_info['wp-themes-inactive'],
-			$this->wp_info['wp-plugins-inactive']
+		// Keep only relevant data.
+		$core_data = array_intersect_key(
+			$core_data,
+			array_flip(
+				[
+					'wp-core',
+					'wp-dropins',
+					'wp-active-theme',
+					'wp-parent-theme',
+					'wp-mu-plugins',
+					'wp-plugins-active',
+					'wp-server',
+					'wp-database',
+					'wp-constants',
+					'wp-filesystem',
+				]
+			)
 		);
+
+		$this->wp_info = [ 'rank-math' => $rankmath_data ] + $core_data;
 	}
 }

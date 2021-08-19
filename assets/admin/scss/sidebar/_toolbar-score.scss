@@ -1,92 +1,101 @@
 // main: ../sidebar.scss
 
-.edit-post-pinned-plugins .components-button, .interface-pinned-items .components-button {
-	.#{$namespace}-toolbar-score {
-		margin: -7px;
-		padding: 9px 9px 8px;
+div.interface-pinned-items {
+    button.components-button[aria-label='Rank Math'] {
+        padding: 0;
 
-		color: #fff;
-		fill: #fff;
-		border-radius: 2px;
-		background: #d9e9ed;
+        background: transparent;
 
-		.rank-math-icon {
-			float: left;
-			height: 17px;
-			margin-right: 5px;
+        &:hover {
+            background: transparent;
+        }
 
-			&,
-			*,
-			&:hover,
-			&:hover * {
-				fill: inherit !important;
-				stroke: inherit !important;
-			}
-		}
+        .#{$namespace}-toolbar-score {
+            padding: 8.5px 9px;
 
-		.seo-score {
-			font-weight: 600;
+            color: $color-8;
+            border-radius: 2px;
+            background: $light_gray;
+			border: 1px solid darken( $gray, 5% );
 
-			display: inline-block;
-		}
+            .rank-math-icon {
+                float: left;
 
-		&.loading {
-			pointer-events: none;
-		}
+                height: 17px;
+                margin-right: 4px;
 
-		&.bad-fk {
-			color: darken( $color-bad, 5% );
-			fill: darken( $color-bad, 5% );
-			background: lighten( $color-bad, 18% );
-		}
+                &,
+                *,
+                &:hover,
+                &:hover * {
+                    fill: inherit !important;
+                    stroke: inherit !important;
+                }
+            }
 
-		&.ok-fk {
-			color: darken( $color-ok, 15% );
-			fill: darken( $color-ok, 15% );
-			background: lighten( $color-ok, 22% );
-		}
+            .seo-score {
+                font-weight: 600;
 
-		&.good-fk {
-			color: darken( $color-good, 5% );
-			fill: darken( $color-good, 5% );
-			background: lighten( $color-good, 28% );
-		}
-	}
+                display: inline-block;
+            }
 
-	&.is-toggled, &.is-pressed, &.is-pressed:focus, &.is-pressed:hover {
-		height: 36px;
-		padding: 8px;
-	}
+            &.loading {
+                pointer-events: none;
+            }
 
-	&.components-button {
-		.#{$namespace}-toolbar-score {
-			border-radius: 3px;
-		}
-	}
+            &.bad-fk {
+                color: darken( $color-bad, 5% );
+                background: lighten( $color-bad, 18% );
 
-	&.is-toggled, &.is-pressed {
-		.#{$namespace}-toolbar-score {
-			background: transparent;
+                fill: darken( $color-bad, 5% );
+				border-color: darken( $color-bad, 5% );
+            }
 
-			&.bad-fk {
-				color: lighten( $color-bad, 40% );
-				fill: lighten( $color-bad, 40% );
-				background: $color-bad;
-			}
+            &.ok-fk {
+                color: darken( $color-ok, 15% );
+                background: lighten( $color-ok, 22% );
 
-			&.ok-fk {
-				color: lighten( $color-ok, 40% );
-				fill: lighten( $color-ok, 40% );
-				background: $color-ok;
-			}
+                fill: darken( $color-ok, 15% );
+				border-color: darken( $color-ok, 5% );
+            }
 
-			&.good-fk {
-				color: lighten( $color-good, 40% );
-				fill: lighten( $color-good, 40% );
-				background: $color-good;
-			}
-		}
-	}
+            &.good-fk {
+                color: darken( $color-good, 5% );
+                background: lighten( $color-good, 28% );
+
+                fill: darken( $color-good, 5% );
+				border-color: darken( $color-good, 5% );
+            }
+        }
+
+        &.is-toggled,
+        &.is-pressed {
+            .#{$namespace}-toolbar-score {
+                background: $gray;
+
+                &.bad-fk {
+                    color: lighten( $color-bad, 40% );
+                    background: $color-bad;
+
+                    fill: lighten( $color-bad, 40% );
+                }
+
+                &.ok-fk {
+                    color: lighten( $color-ok, 40% );
+                    background: $color-ok;
+
+                    fill: lighten( $color-ok, 40% );
+                }
+
+                &.good-fk {
+                    color: lighten( $color-good, 40% );
+                    background: $color-good;
+
+                    fill: lighten( $color-good, 40% );
+                }
+            }
+        }
+    }
 }
 
 .components-menu-group .rank-math-toolbar-score {
@@ -95,15 +104,8 @@
 	}
 
 	.rank-math-icon {
-		color: inherit;
-
 		g {
 			fill: inherit!important;
-		}
-
-		path {
-			fill: inherit;
-			stroke: inherit;
 		}
 	}
 }

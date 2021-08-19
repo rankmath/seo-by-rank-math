@@ -121,7 +121,7 @@ class Console extends Analytics {
 		$with_index = $with_index ? '?sitemapIndex=' . rawurlencode( $url . 'sitemap_index.xml' ) : '';
 		$response   = $this->http_get( 'https://www.googleapis.com/webmasters/v3/sites/' . rawurlencode( $url ) . '/sitemaps' . $with_index );
 
-		if ( ! $this->is_success() ) {
+		if ( ! $this->is_success() || empty( $response['sitemap'] ) ) {
 			return [];
 		}
 

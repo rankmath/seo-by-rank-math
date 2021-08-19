@@ -171,7 +171,7 @@ class CMB2 {
 	 * @return CMB2_Field
 	 */
 	public static function render_meta_tab_container_open( $field_args, $field ) {
-		echo '<div id="' . $field->prop( 'id' ) . '" class="rank-math-tabs">';
+		echo '<div id="' . esc_attr( $field->prop( 'id' ) ) . '" class="rank-math-sidebar-panel rank-math-tabs">';
 		if ( Admin_Helper::is_term_profile_page() ) :
 			?>
 			<h2 class="rank-math-metabox-frame-title"><?php esc_html_e( 'Rank Math', 'rank-math' ); ?></h2>
@@ -184,11 +184,14 @@ class CMB2 {
 					continue;
 				}
 				?>
-				<a href="#setting-panel-<?php echo $id; ?>"><span class="<?php echo esc_attr( $tab['icon'] ); ?>"></span><span class="rank-math-tab-text"><?php echo $tab['title']; ?></span></a>
+				<a href="#setting-panel-<?php echo esc_attr( $id ); ?>">
+					<span class="<?php echo esc_attr( $tab['icon'] ); ?>"></span>
+					<span class="rank-math-tab-text"><?php echo esc_html( $tab['title'] ); ?></span>
+				</a>
 			<?php endforeach; ?>
 		</div>
 
-		<div class="rank-math-tabs-content rank-math-custom">
+		<div class="rank-math-tabs-content rank-math-custom components-tab-panel__tab-content interface-complementary-area">
 		<?php
 		return $field;
 	}

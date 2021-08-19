@@ -59,9 +59,9 @@ div.rank-math-block {
         position: relative;
         z-index: 1;
 
-        float: right;
+        margin-left: 1rem;
 
-        .components-button {
+        .components-button.has-icon {
             line-height: 40px;
 
             display: inline-block;
@@ -69,32 +69,57 @@ div.rank-math-block {
             width: 30px;
             min-width: 30px;
             height: 30px;
+            margin-right: 5px;
             padding: 0;
 
             opacity: .7;
-            color: #6a1b1a;
-            background: #f1dada;
+            border-radius: 2px;
 
-            &:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
-                &:active,
-                &:focus,
-                &:hover {
-                    opacity: 1;
-                    color: darken(#6a1b1a, 5%);
-                    background: #f1dada;
-                    box-shadow: none;
-                }
+            &:last-child {
+                margin-right: 0;
             }
 
             span.dashicon {
                 margin: 0;
 
-                vertical-align: 5px;
+                vertical-align: 0;
+            }
+
+            &.rank-math-item {
+                &-move {
+                    color: #333;
+                    background: darken(#f3f4f5, 5%);
+
+                    > span {
+                        margin-left: -2px;
+                    }
+
+                    &:hover {
+                        color: darken(#333, 5%);
+                        background: darken(#f3f4f5, 10%);
+                    }
+
+                    &.move-up {
+                        margin-right: 1px;
+
+                        border-radius: 2px 0 0 2px;
+                    }
+
+                    &.move-down {
+                        border-radius: 0 2px 2px 0;
+                    }
+
+                    &.rank-math-item-disabled {
+                        color: #999;
+
+                        &:hover {
+                            color: #999;
+                        }
+                    }
+                }
             }
 
             &.rank-math-item-visbility {
-                margin-right: 10px;
-
                 color: #2f7a36;
                 background: #d0ecd3;
 
@@ -102,10 +127,43 @@ div.rank-math-block {
                     &:active,
                     &:focus,
                     &:hover {
+                        opacity: 1;
                         color: darken(#2f7a36, 5%);
                         background: #d0ecd3;
                         box-shadow: none;
                     }
+                }
+            }
+
+            &.rank-math-item-delete {
+                color: #6a1b1a;
+                background: #f1dada;
+
+                &:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+                    &:active,
+                    &:focus,
+                    &:hover {
+                        opacity: 1;
+                        color: darken(#6a1b1a, 5%);
+                        background: #f1dada;
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            &.rank-math-item-disabled {
+                cursor: no-drop;
+
+                opacity: .5;
+                color: #333;
+                background: #eee;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    opacity: .5;
+                    color: #333;
+                    background: #eee;
                 }
             }
         }
@@ -116,6 +174,7 @@ div.rank-math-block {
 
         border-color: $primary-border-color;
         background: $primary;
+        border-radius: 2px;
 
         &:hover:not(:disabled) {
             border-color: $primary-hover-border-color;
@@ -126,6 +185,7 @@ div.rank-math-block {
     // FAQ Question Title & Step Title.
     .rank-math-block-title {
         font-weight: 600;
+        line-height: 1.4;
 
         margin: 0 0 .5em;
 
@@ -176,6 +236,7 @@ div.rank-math-block {
     // Image buttons.
     .rank-math {
         &-add-image {
+            box-sizing: border-box;
             margin: 0 0 5px;
         }
 
@@ -186,6 +247,7 @@ div.rank-math-block {
             top: 5px;
             right: 5px;
 
+            box-sizing: border-box;
             width: 20px;
             min-width: 20px;
             height: 20px;
@@ -259,19 +321,21 @@ div.rank-math-block {
 
     .components-text-control__input,
     .components-textarea-control__input {
+        font-size: 1rem;
+
         margin-bottom: 0;
-		font-size: 1rem;
-		color: #3a3a3a;
+
+        color: #3a3a3a;
         border-color: $gray;
     }
 
     .rank-math-howto {
         &-duration {
-
             &-label {
                 // Toggle Control.
                 .components-toggle-control {
                     display: inline-block;
+
                     margin-left: 8px;
                 }
             }

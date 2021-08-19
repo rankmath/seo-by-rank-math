@@ -66,8 +66,9 @@ class Rest_Helper {
 		$object_id   = $request->get_param( 'objectID' );
 		$object_type = $request->get_param( 'objectType' );
 
-		if ( 'post' === $object_type ) {
-			return self::get_post_permissions_check( $request );
+		if ( in_array( $object_type, [ 'post', 'term', 'user' ], true ) ) {
+			$method = "get_{$object_type}_permissions_check";
+			return self::$method( $request );
 		}
 
 		return false;
@@ -138,6 +139,68 @@ class Rest_Helper {
 		}
 
 		return $post;
+	}
+
+	/**
+	 * Checks whether a given request has permission to read term.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return true|WP_Error True if the request has read access, WP_Error object otherwise.
+	 */
+	public static function get_term_permissions_check( $request ) {
+		$term = self::get_term( $request->get_param( 'objectID' ) );
+		if ( is_wp_error( $term ) ) {
+			return $term;
+		}
+
+		if ( ! in_array( $term->taxonomy, array_keys( Helper::get_accessible_taxonomies() ), true ) ) {
+			return new WP_Error(
+				'rest_cannot_edit',
+				__( 'Sorry, you are not allowed to edit this term.', 'rank-math' ),
+				[ 'status' => rest_authorization_required_code() ]
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Get the term, if the ID is valid.
+	 *
+	 * @param int $id Supplied ID.
+	 *
+	 * @return WP_Term|WP_Error Term object if ID is valid, WP_Error otherwise.
+	 */
+	public static function get_term( $id ) {
+		$error = new WP_Error(
+			'rest_term_invalid_id',
+			__( 'Invalid term ID.', 'rank-math' ),
+			[ 'status' => 404 ]
+		);
+
+		if ( (int) $id <= 0 ) {
+			return $error;
+		}
+
+		global $wpdb;
+		$term = $wpdb->get_row( $wpdb->prepare( "SELECT t.* FROM $wpdb->term_taxonomy AS t WHERE t.term_id = %d LIMIT 1", $id ) );
+		if ( empty( $term ) || empty( $term->term_id ) ) {
+			return $error;
+		}
+
+		return $term;
+	}
+
+	/**
+	 * Checks whether a given request has permission to read user.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return true|WP_Error True if the request has read access, WP_Error object otherwise.
+	 */
+	public static function get_user_permissions_check( $request ) {
+		return Helper::get_settings( 'titles.author_add_meta_box' );
 	}
 
 	/**

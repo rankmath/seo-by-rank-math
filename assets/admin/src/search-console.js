@@ -51,11 +51,13 @@ class SearchConsole {
 			this.fillPropertySelect( account )
 		} )
 
-		let submitSelectors = [
+		const submitSelectors = [
 			'.rank-math-wizard-body--analytics .form-footer.rank-math-ui .button-primary',
-			'.rank-math_page_rank-math-options-general .form-footer.rank-math-ui .button-primary'
+			'.rank-math_page_rank-math-options-general .form-footer.rank-math-ui .button-primary',
 		]
-		jQuery( submitSelectors.join( ', ' ) ).on( 'click', ( e ) => { this.submitButtonHandler( e ) } )
+		jQuery( submitSelectors.join( ', ' ) ).on( 'click', ( e ) => {
+			this.submitButtonHandler( e )
+		} )
 
 		this.propertySelect.on( 'change', () => {
 			const accountID = this.accountSelect.val()
@@ -82,14 +84,16 @@ class SearchConsole {
 	}
 
 	submitButtonHandler( e ) {
-		let target = jQuery( e.target )
+		const target = jQuery( e.target )
 		e.preventDefault()
 
 		this.saveConsole()
 		this.saveAnalytics()
 		this.saveAdsense()
 
-		setTimeout( () => { target.off( 'click' ).trigger( 'click' ) }, 100 )
+		setTimeout( () => {
+			target.off( 'click' ).trigger( 'click' )
+		}, 100 )
 	}
 
 	saveConsole() {

@@ -2,12 +2,13 @@
  * External dependencies
  */
 import $ from 'jquery'
-import { debounce, isUndefined } from 'lodash'
+import { debounce } from 'lodash'
 
 /**
  * WordPress dependencies
  */
 import { addAction } from '@wordpress/hooks'
+import { dispatch, select } from '@wordpress/data'
 
 /**
  * Internal dependencies
@@ -22,6 +23,7 @@ class DataCollector {
 	 * Class constructor
 	 */
 	constructor() {
+		this.updateBtn = $( '#publish' )
 		this._data = {
 			id: false,
 			slug: false,
@@ -46,21 +48,21 @@ class DataCollector {
 			debounce( () => {
 				this.handleTitleChange( this.elemTitle.val() )
 			}, 500 )
-		)
+		).trigger( 'input' )
 
 		this.elemDescription.on(
 			'input',
 			debounce( () => {
 				this.handleExcerptChange( this.elemDescription.val() )
 			}, 500 )
-		)
+		).trigger( 'input' )
 
 		this.elemSlug.on(
 			'input',
 			debounce( () => {
 				rankMathEditor.updatePermalink( this.elemSlug.val() )
 			}, 500 )
-		)
+		).trigger( 'input' )
 	}
 
 	/**
@@ -148,21 +150,18 @@ class DataCollector {
 	 */
 	refresh() {
 		this.collectData()
+		dispatch( 'rank-math' ).toggleLoaded( true )
 		rankMathEditor.refresh( 'init' )
 	}
 
 	handleSlugChange( slug ) {
-		const { SerpPreview } = rankMathEditor.components
 		this.elemSlug.val( slug )
 		$( '#editable-post-name' ).text( slug )
 		$( '#editable-post-name-full' ).text( slug )
 
-		if ( ! isUndefined( SerpPreview.serpPermalinkField ) ) {
-			SerpPreview.serpPermalinkField.val( slug )
-		}
-
 		this._data.slug = this.getSlug()
 		this._data.permalink = this.getPermalink()
+		dispatch( 'rank-math' ).updateSerpSlug( slug )
 		rankMathEditor.refresh( 'permalink' )
 	}
 
@@ -170,22 +169,32 @@ class DataCollector {
 		swapVariables.setVariable( 'title', title )
 		swapVariables.setVariable( 'term', title )
 		swapVariables.setVariable( 'author', title )
+		dispatch( 'rank-math' ).updateSerpTitle(
+			select( 'rank-math' ).getTitle()
+		)
 		rankMathEditor.refresh( 'title' )
 	}
 
 	handleExcerptChange() {
 		this._data.excerpt = this.getExcerpt()
+		dispatch( 'rank-math' ).updateSerpDescription(
+			select( 'rank-math' ).getDescription()
+		)
 		rankMathEditor.refresh( 'content' )
 	}
 
 	handleFeaturedImageChange() {
 		this._data.featuredImage = this.getFeaturedImage()
+		dispatch( 'rank-math' ).updateFeaturedImage( this.getFeaturedImage() )
 		rankMathEditor.refresh( 'featuredImage' )
 	}
 
 	handleContentChange() {
 		this._data.excerpt = this.getExcerpt()
 		this._data.content = this.getContent()
+		dispatch( 'rank-math' ).updateSerpDescription(
+			select( 'rank-math' ).getDescription()
+		)
 		rankMathEditor.refresh( 'content' )
 	}
 

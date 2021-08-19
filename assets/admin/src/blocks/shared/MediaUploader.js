@@ -37,7 +37,6 @@ const MediaUploader = ( {
 					onClick={ open }
 					className="rank-math-add-image"
 					isPrimary
-					isLarge
 				>
 					{ addButtonLabel }
 				</Button>

@@ -1,3 +1,4 @@
+import { safeDecodeURIComponent } from '@wordpress/url'
 import decodeEntities from '@helpers/decodeEntities'
 
 /**
@@ -9,6 +10,17 @@ import decodeEntities from '@helpers/decodeEntities'
  */
 export function getSerpTitle( state ) {
 	return decodeEntities( state.appUi.serpTitle )
+}
+
+/**
+ * Get serp title.
+ *
+ * @param {Object} state The app state.
+ *
+ * @return {string} Return post serp title.
+ */
+export function getSerpSlug( state ) {
+	return safeDecodeURIComponent( state.appUi.serpSlug )
 }
 
 /**
@@ -51,6 +63,6 @@ export function getSnippetPreviewType( state ) {
  *
  * @return {boolean} Return modal state.
  */
- export function isTrendsCtaOpen( state ) {
+export function isTrendsCtaOpen( state ) {
 	return state.appUi.isTrendsCtaOpen
 }

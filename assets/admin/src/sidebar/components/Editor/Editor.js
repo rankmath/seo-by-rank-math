@@ -68,7 +68,7 @@ const SnippetEditor = ( {
 			{ initialTab === '' && <ReportButton /> }
 			{ isOpen && (
 				<Modal
-					title="Preview Snippet Editor"
+					title={ __( 'Preview Snippet Editor', 'rank-math' ) }
 					closeButtonLabel={ __( 'Close', 'rank-math' ) }
 					shouldCloseOnClickOutside={ false }
 					onRequestClose={ toggleEditor }

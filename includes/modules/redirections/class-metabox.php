@@ -26,102 +26,40 @@ class Metabox {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		$this->action( 'rank_math/metabox/settings/advanced', 'metabox_settings_advanced' );
 		$this->action( 'rank_math/metabox/process_fields', 'save_advanced_meta' );
+		$this->action( 'rank_math/metabox/values', 'add_json_data' );
 	}
 
 	/**
 	 * Add settings in the Advanced tab of the metabox.
 	 *
-	 * @param CMB2 $cmb The CMB2 metabox object.
+	 * @param array $values Localized data.
 	 */
-	public function metabox_settings_advanced( $cmb ) {
-		// Early Bai!!
-		if ( ! $this->can_add_setting( $cmb ) ) {
-			return;
+	public function add_json_data( $values ) {
+		if ( ! $this->can_add_setting( $values ) ) {
+			return $values;
 		}
 
-		$url = 'term' === $cmb->object_type() ? get_term_link( (int) $cmb->object_id ) : get_permalink( $cmb->object_id );
+		$object_type = $values['objectType'];
+		$object_id   = (int) $values['objectID'];
+		$url         = 'term' === $object_type ? get_term_link( $object_id ) : get_permalink( $object_id );
 		if ( is_wp_error( $url ) ) {
-			return;
+			return $values;
 		}
 
 		$url = wp_parse_url( $url, PHP_URL_PATH );
 		$url = trim( $url, '/' );
 
-		$redirection = Cache::get_by_object_id( $cmb->object_id, $cmb->object_type() );
-		$redirection = $redirection ? DB::get_redirection_by_id( $redirection->redirection_id, 'active' ) : [
+		$redirection                       = Cache::get_by_object_id( $object_id, $object_type );
+		$values['assessor']['redirection'] = $redirection ? DB::get_redirection_by_id( $redirection->redirection_id, 'active' ) : [
 			'id'          => '',
 			'url_to'      => '',
 			'header_code' => Helper::get_settings( 'general.redirections_header_code' ),
 		];
 
-		$message = ! empty( $redirection['id'] ) ? esc_html__( 'Edit redirection for the URL of this post.', 'rank-math' ) :
-			esc_html__( 'Create new redirection for the URL of this post.', 'rank-math' );
+		$values['assessor']['autoCreateRedirection'] = Helper::get_settings( 'general.redirections_post_redirect' );
 
-		$cmb->add_field(
-			[
-				'id'         => 'rank_math_enable_redirection',
-				'type'       => 'toggle',
-				'name'       => esc_html__( 'Redirection', 'rank-math' ),
-				'desc'       => $message . ' ' . esc_html__( 'Publish or update the post to save the redirection.', 'rank-math' ),
-				'default'    => empty( $redirection['id'] ) ? 'off' : 'on',
-				'save_field' => false,
-			]
-		);
-
-		$cmb->add_field(
-			[
-				'id'         => 'redirection_header_code',
-				'type'       => 'select',
-				'name'       => esc_html__( 'Redirection Type', 'rank-math' ),
-				'options'    => Helper::choices_redirection_types(),
-				'default'    => isset( $redirection['header_code'] ) ? $redirection['header_code'] : '',
-				'save_field' => false,
-				'dep'        => [ [ 'rank_math_enable_redirection', 'on' ] ],
-			]
-		);
-
-		$cmb->add_field(
-			[
-				'id'         => 'redirection_url_to',
-				'type'       => 'text',
-				'name'       => esc_html__( 'Destination URL', 'rank-math' ),
-				'save_field' => false,
-				'dep'        => [
-					'relation' => 'and',
-					[ 'rank_math_enable_redirection', 'on' ],
-					[ 'redirection_header_code', '410,451', '!=' ],
-				],
-				'default'    => isset( $redirection['url_to'] ) ? $redirection['url_to'] : '',
-			]
-		);
-
-		$cmb->add_field(
-			[
-				'id'         => 'redirection_id',
-				'type'       => 'hidden',
-				'save_field' => false,
-				'default'    => isset( $redirection['id'] ) ? $redirection['id'] : '',
-			]
-		);
-
-		$cmb->add_field(
-			[
-				'id'         => 'redirection_sources',
-				'type'       => 'hidden',
-				'save_field' => false,
-				'default'    => $url,
-			]
-		);
-
-		Helper::add_json(
-			'assessor',
-			[
-				'redirection'           => $redirection,
-				'autoCreateRedirection' => Helper::get_settings( 'general.redirections_post_redirect' ),
-			]
-		);
+		return $values;
 	}
 
 	/**
@@ -195,14 +133,14 @@ class Metabox {
 	/**
 	 * Whether to add Redirection Settings.
 	 *
-	 * @param CMB2 $cmb The CMB2 metabox object.
+	 * @param array $values Localized data.
 	 */
-	private function can_add_setting( $cmb ) {
-		if ( 'post' !== $cmb->object_type ) {
+	private function can_add_setting( $values ) {
+		if ( 'post' !== $values['objectType'] ) {
 			return true;
 		}
 
-		$post = get_post( $cmb->object_id );
+		$post = get_post( $values['objectID'] );
 		if ( empty( $post ) || 'publish' !== $post->post_status ) {
 			return false;
 		}

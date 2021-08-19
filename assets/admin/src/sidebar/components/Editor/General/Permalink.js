@@ -57,11 +57,11 @@ const EditorPermalink = ( { permalink, serpPermalink, updatePermalink, updatePer
 )
 
 export default compose(
-	withSelect( () => {
+	withSelect( ( select ) => {
 		const editor = rankMathEditor.assessor.dataCollector
-
+		const slug = select( 'rank-math' ).getSerpSlug()
 		return {
-			permalink: editor.getSlug(),
+			permalink: slug ? slug : editor.getSlug(),
 			serpPermalink: editor.getPermalink(),
 		}
 	} ),

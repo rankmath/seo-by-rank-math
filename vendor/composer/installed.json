@@ -176,23 +176,23 @@
         },
         {
             "name": "mythemeshop/wordpress-helpers",
-            "version": "v1.1.14",
-            "version_normalized": "1.1.14.0",
+            "version": "v1.1.15",
+            "version_normalized": "1.1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MyThemeShopTeam/wordpress-helpers.git",
-                "reference": "c177946869a6066f708ee86097108e55ca564328"
+                "reference": "a84ec8fcdf55ff46910d3803f336a477abeb3a47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/c177946869a6066f708ee86097108e55ca564328",
-                "reference": "c177946869a6066f708ee86097108e55ca564328",
+                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/a84ec8fcdf55ff46910d3803f336a477abeb3a47",
+                "reference": "a84ec8fcdf55ff46910d3803f336a477abeb3a47",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6"
             },
-            "time": "2021-06-28T18:21:45+00:00",
+            "time": "2021-07-29T19:53:25+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -216,7 +216,7 @@
             "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
             "support": {
                 "issues": "https://github.com/MyThemeShopTeam/wordpress-helpers/issues",
-                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/v1.1.14"
+                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/v1.1.15"
             },
             "install-path": "../mythemeshop/wordpress-helpers"
         },

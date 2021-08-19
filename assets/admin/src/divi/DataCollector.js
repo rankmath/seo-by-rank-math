@@ -21,6 +21,7 @@ import {
 import apiFetch from '@wordpress/api-fetch'
 import { dispatch, select, subscribe } from '@wordpress/data'
 import { addFilter, doAction } from '@wordpress/hooks'
+import { safeDecodeURIComponent } from '@wordpress/url'
 
 /**
  * Internal dependencies
@@ -182,7 +183,7 @@ class DataCollector {
 	getPermalink() {
 		return rankMath.is_front_page
 			? rankMath.homeUrl + '/'
-			: rankMath.homeUrl + '/' + select( 'rank-math' ).getPermalink()
+			: rankMath.homeUrl + '/' + this.getSlug()
 	}
 
 	/**
@@ -191,15 +192,7 @@ class DataCollector {
 	 * @return {string} The post's slug.
 	 */
 	getSlug() {
-		const $permalinkInput = jQuery( document ).find( '#rank-math-editor-permalink' )
-		if ( $permalinkInput.length ) {
-			return $permalinkInput.val()
-		}
-		return get(
-			ETBuilderBackendDynamic,
-			'postMeta.post_name',
-			this.getPermalink().replace( rankMath.homeUrl, '' ).replace( /\//g, '' )
-		)
+		return safeDecodeURIComponent( select( 'rank-math' ).getPermalink() )
 	}
 
 	/**

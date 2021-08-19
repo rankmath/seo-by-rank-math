@@ -1,14 +1,18 @@
 /**
  * External dependencies
  */
-import { debounce, isUndefined, filter, intersection } from 'lodash'
+import jQuery from 'jquery'
+import { debounce, isUndefined, intersection, isObject, isEmpty } from 'lodash'
 import { Analyzer, Paper, Helpers } from '@rankMath/analyzer'
 
 /**
  * WordPress dependencies
  */
 import * as i18n from '@wordpress/i18n'
-import { doAction, addAction, applyFilters } from '@wordpress/hooks'
+import { dispatch, select } from '@wordpress/data'
+import { doAction, addAction, applyFilters, addFilter } from '@wordpress/hooks'
+import getClassByScore from '@helpers/getClassByScore'
+import apiFetch from '@wordpress/api-fetch'
 
 class Assessor {
 	/**
@@ -26,66 +30,107 @@ class Assessor {
 
 		this.hooks()
 		this.registerRefresh()
+		this.saveData()
 	}
 
 	hooks() {
-		this.assessAll = this.assessAll.bind( this )
-		this.assessTitle = this.assessTitle.bind( this )
-		this.assessContent = this.assessContent.bind( this )
-		this.assessPermalink = this.assessPermalink.bind( this )
 		this.updateKeywordResult = this.updateKeywordResult.bind( this )
-		this.assessKeyword = this.assessKeyword.bind( this )
-		this.assessThumbnail = this.assessThumbnail.bind( this )
+		this.sanitizeData = this.sanitizeData.bind( this )
+		this.addScoreElem = this.addScoreElem.bind( this )
 
 		addAction(
 			'rankMath_analysis_keywordUsage_updated',
 			'rank-math',
 			this.updateKeywordResult
 		)
-		addAction( 'rank_math_init_refresh', 'rank-math', this.assessAll )
-		addAction( 'rank_math_title_refresh', 'rank-math', this.assessTitle )
-		addAction(
-			'rank_math_content_refresh',
+
+		addFilter(
+			'rank_math_sanitize_meta_value',
 			'rank-math',
-			this.assessContent,
-			11
+			this.sanitizeData
 		)
-		addAction(
-			'rank_math_permalink_refresh',
+
+		addFilter(
+			'rank_math_sanitize_data',
 			'rank-math',
-			this.assessPermalink,
-			11
+			this.sanitizeData
 		)
-		addAction(
-			'rank_math_featuredImage_refresh',
-			'rank-math',
-			this.assessThumbnail,
-			11
-		)
-		addAction(
-			'rank_math_keyword_refresh',
-			'rank-math',
-			this.assessKeyword,
-			12
-		)
+
+		addAction( 'rank_math_loaded', 'rank-math', this.addScoreElem, 11 )
 	}
 
-	getPaper( keyword ) {
-		const data = this.dataCollector.getData()
+	addScoreElem() {
+		if ( ! rankMath.showScore ) {
+			return
+		}
+
+		setTimeout( () => {
+			this.scoreText = '<span class="score-text"><span class="score-icon"><svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" width="20"><g><path d="m462 234.84-76.17 3.43 13.43 21-127 81.18-126-52.93-146.26 60.97 10.14 24.34 136.1-56.71 128.57 54 138.69-88.61 13.43 21z"/><path d="m54.1 312.78 92.18-38.41 4.49 1.89v-54.58h-96.67zm210.9-223.57v235.05l7.26 3 89.43-57.05v-181zm-105.44 190.79 96.67 40.62v-165.19h-96.67z"/></g></svg></span> SEO: <strong>Not available</strong></span>'
+			this.scoreElem = jQuery(
+				'<div class="misc-pub-section rank-math-seo-score">' +
+					this.scoreText +
+					'</div>'
+			)
+			this.scoreText = this.scoreElem.find( 'strong' )
+			jQuery( '#misc-publishing-actions' ).append( this.scoreElem )
+
+			this.fkScoreText = '<span class="score-text">Not available</span>'
+			this.fkScoreElem = jQuery(
+				'<div class="rank-math-seo-score below-focus-keyword">' +
+					this.fkScoreText +
+					'</div>'
+			)
+			this.fkScoreText = this.fkScoreElem.find( 'span' )
+			jQuery( '#rank-math-metabox-wrapper .rank-math-focus-keyword' ).find( 'tags' ).parent( 'div' ).append( this.fkScoreElem )
+
+			this.updateScore = this.updateScore.bind( this )
+
+			this.updateScore()
+			addAction( 'rank_math_refresh_results', 'rank-math', this.updateScore )
+		}, 1500 )
+	}
+
+	updateScore() {
+		const count = rankMathEditor.resultManager.getScore(
+			rankMathEditor.getPrimaryKeyword()
+		)
+		const status = getClassByScore( count )
+
+		this.scoreElem.removeClass( 'loading bad-fk ok-fk good-fk' )
+		this.fkScoreElem.removeClass( 'loading bad-fk ok-fk good-fk' )
+		this.scoreElem.addClass( status )
+		this.fkScoreElem.addClass( status )
+		this.scoreText.html( count + ' / 100' )
+		this.fkScoreText.html( count + ' / 100' )
+	}
+
+	sanitizeData( value, key ) {
+		// TODO: move it to helper itself
+		if ( 'schemas' === key || isObject( value ) ) {
+			return value
+		}
+
+		return isEmpty( value ) ? value : Helpers.sanitizeAppData( value )
+	}
+
+	getPaper( keyword, keywords ) {
+		const gutenbergData = this.dataCollector.getData()
 		const paper = new Paper( '', { locale: rankMath.localeFull } )
 
-		paper.setTitle( data.title )
-		paper.setPermalink( data.slug )
-		paper.setDescription( data.description )
-		paper.setUrl( data.permalink )
-		paper.setText( applyFilters( 'rank_math_content', data.content ) )
-		paper.setKeyword( Helpers.removeDiacritics( keyword ) )
-		paper.setKeywords( rankMathEditor.components.focusKeywords.getFocusKeywords() )
+		paper.setTitle( select( 'rank-math' ).getSerpTitle() )
+		paper.setPermalink( gutenbergData.slug )
+		paper.setDescription( select( 'rank-math' ).getSerpDescription() )
+		paper.setUrl( gutenbergData.permalink )
+		paper.setText(
+			applyFilters( 'rank_math_content', gutenbergData.content )
+		)
+		paper.setKeyword( keyword )
+		paper.setKeywords( keywords )
 
-		if ( ! isUndefined( data.featuredImage ) ) {
-			paper.setThumbnail( data.featuredImage.source_url )
+		if ( ! isUndefined( gutenbergData.featuredImage ) ) {
+			paper.setThumbnail( gutenbergData.featuredImage.source_url )
 			paper.setThumbnailAltText(
-				Helpers.removeDiacritics( data.featuredImage.alt_text )
+				Helpers.removeDiacritics( gutenbergData.featuredImage.alt_text )
 			)
 		}
 
@@ -94,43 +139,52 @@ class Assessor {
 
 	registerRefresh() {
 		this.refresh = debounce( ( what ) => {
-			this.promises = []
+			if ( false === select( 'rank-math' ).isLoaded() ) {
+				return
+			}
+
+			const keywords = select( 'rank-math' ).getKeywords().split( ',' )
+			const promises = []
 			doAction( 'rank_math_' + what + '_refresh' )
 
-			Promise.all( this.promises ).then( () => {
-				this.refreshResults()
+			/*eslint array-callback-return: 0*/
+			keywords.map( ( keyword, index ) => {
+				const paper = this.getPaper(
+					Helpers.removeDiacritics( keyword ),
+					keywords
+				)
+
+				const researches =
+					0 === index
+						? rankMath.assessor.researchesTests
+						: this.getSecondaryKeywordTests()
+
+				promises.push(
+					this.analyzer
+						.analyzeSome( researches, paper )
+						.then( ( results ) => {
+							rankMathEditor.resultManager.update(
+								paper.getKeyword(),
+								results,
+								0 === index
+							)
+
+							if ( 0 === index ) {
+								dispatch( 'rank-math' ).updateAnalysisScore(
+									rankMathEditor.resultManager.getScore(
+										paper.getKeyword()
+									)
+								)
+							}
+						} )
+				)
+
+				Promise.all( promises ).then( () => {
+					dispatch( 'rank-math' ).refreshResults()
+					this.refreshResults()
+				} )
 			} )
 		}, 500 )
-	}
-
-	assessAll() {
-		const keywords = rankMathEditor.components.focusKeywords.getFocusKeywords()
-		/*eslint array-callback-return: 0*/
-		keywords.map( ( keyword, index ) => {
-			this.run(
-				0 === index
-					? rankMath.assessor.researchesTests
-					: this.getSecondaryKeywordTests(),
-				keyword,
-				0 === index
-			)
-		} )
-	}
-
-	run( researches, keyword = '', isPrimary = false ) {
-		keyword = keyword ? keyword : rankMathEditor.getSelectedKeyword()
-		const paper = this.getPaper( keyword )
-		this.promises.push(
-			this.analyzer
-				.analyzeSome( this.filterTests( researches ), paper )
-				.then( ( results ) => {
-					rankMathEditor.resultManager.update(
-						paper.getKeyword(),
-						results,
-						isPrimary
-					)
-				} )
-		)
 	}
 
 	updateKeywordResult( keyword, result ) {
@@ -139,23 +193,8 @@ class Assessor {
 		} )
 
 		if ( keyword === rankMathEditor.getSelectedKeyword().toLowerCase() ) {
-			this.refreshResults()
+			dispatch( 'rank-math' ).refreshResults()
 		}
-	}
-
-	assessThumbnail() {
-		this.run( [ 'keywordInImageAlt', 'contentHasAssets' ] )
-	}
-
-	assessKeyword() {
-		const isPrimary =
-			rankMathEditor.getSelectedKeyword() ===
-			rankMathEditor.getPrimaryKeyword()
-		this.run(
-			isPrimary
-				? rankMath.assessor.researchesTests
-				: this.getSecondaryKeywordTests()
-		)
 	}
 
 	getSecondaryKeywordTests() {
@@ -177,44 +216,21 @@ class Assessor {
 		]
 	}
 
-	assessTitle() {
-		this.run( [
-			'keywordInTitle',
-			'titleHasPowerWords',
-			'titleHasNumber',
-			'titleSentiment',
-			'titleStartWithKeyword',
-		] )
-	}
-
-	assessContent() {
-		return this.run( [
-			'contentHasShortParagraphs',
-			'contentHasTOC',
-			'contentHasAssets',
-			'keywordDensity',
-			'keywordIn10Percent',
-			'keywordInContent',
-			'keywordInImageAlt',
-			'keywordInMetaDescription',
-			'keywordInSubheadings',
-			'lengthContent',
-			'linksHasExternals',
-			'linksHasInternal',
-			'linksNotAllExternals',
-		] )
-	}
-
-	assessPermalink() {
-		return this.run( [ 'keywordInPermalink', 'lengthPermalink' ] )
-	}
-
 	getPrimaryKeyword() {
-		return rankMathEditor.components.focusKeywords.getPrimaryKeyword()
+		const keywords = select( 'rank-math' ).getKeywords()
+
+		return Helpers.removeDiacritics( keywords.split( ',' )[ 0 ] )
 	}
 
 	getSelectedKeyword() {
-		return rankMathEditor.components.focusKeywords.getSelectedKeyword()
+		const keywords = select( 'rank-math' ).getKeywords()
+		const selectedKeyword = select( 'rank-math' ).getSelectedKeyword()
+		const keyword =
+			'' !== selectedKeyword.data.value
+				? selectedKeyword.data.value
+				: keywords.split( ',' )[ 0 ]
+
+		return Helpers.removeDiacritics( keyword )
 	}
 
 	/**
@@ -241,6 +257,98 @@ class Assessor {
 	 */
 	filterTests( tests ) {
 		return intersection( tests, rankMath.assessor.researchesTests )
+	}
+
+	saveData() {
+		if ( isUndefined( this.dataCollector.updateBtn ) ) {
+			return
+		}
+
+		this.dataCollector.updateBtn.on( 'click', () => {
+			const repo = select( 'rank-math' )
+			const meta = repo.getDirtyMetadata()
+
+			if ( ! isEmpty( meta ) ) {
+				apiFetch( {
+					method: 'POST',
+					path: 'rankmath/v1/updateMeta',
+					data: {
+						objectID: rankMath.objectID,
+						objectType: rankMath.objectType,
+						meta,
+						content: rankMathEditor.assessor.dataCollector.getContent(),
+					},
+				} ).then( ( response ) => {
+					doAction( 'rank_math_metadata_updated', response )
+				} )
+				dispatch( 'rank-math' ).resetDirtyMetadata()
+			}
+
+			this.saveSchemas()
+			this.saveRedirection()
+		} )
+	}
+
+	/**
+	 * Save redirection item.
+	 */
+	saveRedirection() {
+		const redirection = select( 'rank-math' ).getRedirectionItem()
+		if ( isEmpty( redirection ) ) {
+			return
+		}
+
+		redirection.objectID = window.rankMath.objectID
+		redirection.objectType = window.rankMath.objectType
+		redirection.redirectionSources = rankMathEditor.assessor.dataCollector.getData( 'permalink' )
+
+		const rankMath = dispatch( 'rank-math' )
+		const notices = dispatch( 'core/notices' )
+
+		rankMath.resetRedirection()
+
+		apiFetch( {
+			method: 'POST',
+			path: 'rankmath/v1/updateRedirection',
+			data: redirection,
+		} ).then( ( response ) => {
+			if ( 'delete' === response.action ) {
+				notices.createInfoNotice( response.message, {
+					id: 'redirectionNotice',
+				} )
+				rankMath.updateRedirection( 'redirectionID', 0 )
+			} else if ( 'update' === response.action ) {
+				notices.createInfoNotice( response.message, {
+					id: 'redirectionNotice',
+				} )
+			} else if ( 'new' === response.action ) {
+				rankMath.updateRedirection( 'redirectionID', response.id )
+				notices.createSuccessNotice( response.message, {
+					id: 'redirectionNotice',
+				} )
+			}
+
+			setTimeout( () => {
+				notices.removeNotice( 'redirectionNotice' )
+			}, 2000 )
+		} )
+	}
+
+	saveSchemas() {
+		const schemas = select( 'rank-math' ).getSchemas()
+		if ( isEmpty( schemas ) || ! select( 'rank-math' ).hasSchemaUpdated() ) {
+			return
+		}
+
+		apiFetch( {
+			method: 'POST',
+			path: 'rankmath/v1/updateSchemas',
+			data: {
+				objectID: rankMath.objectID,
+				objectType: rankMath.objectType,
+				schemas,
+			},
+		} )
 	}
 }
 

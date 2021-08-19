@@ -41,7 +41,6 @@ class Post_Screen implements IScreen {
 	 */
 	public function __construct() {
 		$this->filter( 'rank_math/researches/tests', 'remove_tests', 10, 2 );
-		$this->action( 'rank_math/metabox/process_fields', 'save_general_meta' );
 	}
 
 	/**
@@ -137,7 +136,6 @@ class Post_Screen implements IScreen {
 				'linkSuggestions' => Helper::get_settings( 'titles.pt_' . $post_type . '_link_suggestions' ),
 				'useFocusKeyword' => 'focus_keywords' === Helper::get_settings( 'titles.pt_' . $post_type . '_ls_use_fk' ),
 			],
-			'siteFavIcon'            => $this->get_site_icon(),
 			'frontEndScore'          => Frontend_SEO_Score::show_on(),
 			'postName'               => get_post_field( 'post_name', get_post() ),
 			'permalinkFormat'        => isset( $sample_permalink[0] ) ? $sample_permalink[0] : home_url(),
@@ -145,9 +143,7 @@ class Post_Screen implements IScreen {
 				'hasTOCPlugin'     => $this->has_toc_plugin(),
 				'sentimentKbLink'  => KB::get( 'sentiments' ),
 				'focusKeywordLink' => admin_url( 'edit.php?focus_keyword=%focus_keyword%&post_type=%post_type%' ),
-				'futureSeo'        => KB::get( 'pro-general-g' ),
 				'hasBreadcrumb'    => Helper::is_breadcrumbs_enabled(),
-				'hasRedirection'   => Helper::is_module_active( 'redirections' ),
 				'isUserEdit'       => Admin_Helper::is_user_edit(),
 				'socialPanelLink'  => Helper::get_admin_url( 'options-titles#setting-panel-social' ),
 				'primaryTaxonomy'  => $this->get_primary_taxonomy(),
@@ -222,19 +218,6 @@ class Post_Screen implements IScreen {
 	}
 
 	/**
-	 * Save handler for metadata.
-	 *
-	 * @param CMB2 $cmb CMB2 instance.
-	 */
-	public function save_general_meta( $cmb ) {
-		if ( Helper::get_settings( "titles.pt_{$cmb->data_to_save['post_type']}_title" ) === $cmb->data_to_save['rank_math_title'] ) {
-			$cmb->data_to_save['rank_math_title'] = '';
-		}
-
-		return $cmb;
-	}
-
-	/**
 	 * Tests to exclude on Homepage and Blog page.
 	 *
 	 * @since 1.0.43
@@ -267,17 +250,6 @@ class Post_Screen implements IScreen {
 			'linksHasExternals'         => true,
 			'linksNotAllExternals'      => true,
 		];
-	}
-
-	/**
-	 * Get site fav icon.
-	 *
-	 * @return string
-	 */
-	private function get_site_icon() {
-		$favicon = get_site_icon_url( 16 );
-
-		return ! empty( $favicon ) ? $favicon : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC';
 	}
 
 	/**

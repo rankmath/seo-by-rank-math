@@ -104,6 +104,10 @@ class Screen implements IScreen {
 	 */
 	public function localize() {
 		$values = $this->get_values();
+		if ( empty( $values ) ) {
+			return;
+		}
+
 		foreach ( $values as $key => $value ) {
 			Helper::add_json( $key, $value );
 		}
@@ -115,22 +119,31 @@ class Screen implements IScreen {
 	 * @return array
 	 */
 	public function get_values() {
+		$editor      = Helper::get_current_editor();
+		$trends_link = 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=CE%20General%20Tab%20Trends&utm_campaign=WP';
+		if ( 'gutenberg' === $editor ) {
+			$trends_link = 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Gutenberg%20General%20Tab%20Trends&utm_campaign=WP';
+		} elseif ( 'elementor' === $editor ) {
+			$trends_link = 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Elementor%20General%20Tab%20Trends&utm_campaign=WP';
+		}
+
 		$values = array_merge_recursive(
 			$this->screen->get_values(),
 			[
-				'homeUrl'          => home_url(),
-				'objectID'         => $this->get_object_id(),
-				'objectType'       => $this->get_object_type(),
-				'locale'           => Locale::get_site_language(),
-				'localeFull'       => get_locale(),
-				'overlayImages'    => Helper::choices_overlay_images(),
-				'defautOgImage'    => Helper::get_settings( 'titles.open_graph_image', rank_math()->plugin_url() . 'assets/admin/img/social-placeholder.jpg' ),
-				'customPermalinks' => (bool) get_option( 'permalink_structure', false ),
-				'isUserRegistered' => Helper::is_site_connected(),
-				'maxTags'          => $this->do_filter( 'focus_keyword/maxtags', 5 ),
-				'trendsIcon'       => Admin_Helper::get_trends_icon_svg(),
-				'showScore'        => Helper::is_score_enabled(),
-				'canUser'          => [
+				'homeUrl'            => home_url(),
+				'objectID'           => $this->get_object_id(),
+				'objectType'         => $this->get_object_type(),
+				'locale'             => Locale::get_site_language(),
+				'localeFull'         => get_locale(),
+				'overlayImages'      => Helper::choices_overlay_images(),
+				'defautOgImage'      => Helper::get_settings( 'titles.open_graph_image', rank_math()->plugin_url() . 'assets/admin/img/social-placeholder.jpg' ),
+				'customPermalinks'   => (bool) get_option( 'permalink_structure', false ),
+				'isUserRegistered'   => Helper::is_site_connected(),
+				'maxTags'            => $this->do_filter( 'focus_keyword/maxtags', 5 ),
+				'trendsIcon'         => Admin_Helper::get_trends_icon_svg(),
+				'showScore'          => Helper::is_score_enabled(),
+				'siteFavIcon'        => $this->get_site_icon(),
+				'canUser'            => [
 					'general'   => Helper::has_cap( 'onpage_general' ),
 					'advanced'  => Helper::has_cap( 'onpage_advanced' ) && Helper::is_advanced_mode(),
 					'snippet'   => Helper::has_cap( 'onpage_snippet' ),
@@ -138,19 +151,24 @@ class Screen implements IScreen {
 					'analysis'  => Helper::has_cap( 'onpage_analysis' ),
 					'analytics' => Helper::has_cap( 'analytics' ),
 				],
-				'assessor'         => [
+				'assessor'           => [
 					'serpData'         => $this->get_object_values(),
 					'powerWords'       => $this->power_words(),
 					'diacritics'       => $this->diacritics(),
 					'sentimentKbLink'  => KB::get( 'sentiments' ),
 					'hundredScoreLink' => KB::get( 'score-100-ge' ),
+					'futureSeo'        => KB::get( 'pro-general-g' ),
 					'researchesTests'  => $this->get_analysis(),
+					'hasRedirection'   => Helper::is_module_active( 'redirections' ),
 				],
-				'isPro'            => defined( 'RANK_MATH_PRO_FILE' ),
-				'is_front_page'    => Admin_Helper::is_home_page(),
+				'isPro'              => defined( 'RANK_MATH_PRO_FILE' ),
+				'is_front_page'      => Admin_Helper::is_home_page(),
+				'trendsUpgradeLink'  => esc_url_raw( $trends_link ),
+				'trendsPreviewImage' => esc_url( rank_math()->plugin_url() . 'assets/admin/img/trends-preview.jpg' ),
 			]
 		);
 
+		$values = $this->do_filter( 'metabox/values', $values, $this );
 		return $this->do_filter( 'metabox/' . $this->get_object_type() . '/values', $values, $this );
 	}
 
@@ -235,6 +253,17 @@ class Screen implements IScreen {
 		$data['twitterHasOverlay']  = empty( $data['twitterHasOverlay'] ) || 'off' === $data['twitterHasOverlay'] ? false : true;
 
 		return wp_parse_args( $this->screen->get_object_values(), $data );
+	}
+
+	/**
+	 * Get site fav icon.
+	 *
+	 * @return string
+	 */
+	private function get_site_icon() {
+		$favicon = get_site_icon_url( 16 );
+
+		return ! empty( $favicon ) ? $favicon : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC';
 	}
 
 	/**

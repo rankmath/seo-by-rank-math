@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { Fragment } from '@wordpress/element'
-import { PanelBody } from '@wordpress/components'
+import { PanelBody, withFilters } from '@wordpress/components'
 
 /**
  * Internal dependencies
@@ -15,6 +15,7 @@ import AdvancedRobots from './AdvancedRobots'
 import FrontEndScore from './FrontEndScore'
 import RankMathAdvancedTab from '@slots/AdvancedTab'
 
+const NewsSitemap = withFilters( 'rankMath.advanced.newsSitemap' )( () => null )
 const AdvancedTab = () => (
 	<Fragment>
 		<PanelBody initialOpen={ true }>
@@ -24,6 +25,8 @@ const AdvancedTab = () => (
 		<PanelBody initialOpen={ true }>
 			<AdvancedRobots />
 		</PanelBody>
+
+		<NewsSitemap />
 
 		<PanelBody initialOpen={ true }>
 			<Canonical />
