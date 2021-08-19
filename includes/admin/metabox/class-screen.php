@@ -274,7 +274,7 @@ class Screen implements IScreen {
 	 * @return array
 	 */
 	private function normalize_robots( $robots ) {
-		if ( empty( $robots ) ) {
+		if ( ! is_array( $robots ) || empty( $robots ) ) {
 			$robots = Helper::get_robots_defaults();
 		}
 

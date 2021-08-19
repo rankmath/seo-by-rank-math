@@ -85,7 +85,10 @@ class User_Screen implements IScreen {
 	 * @return array
 	 */
 	public function get_values() {
-		return [];
+		global $wp_rewrite;
+		return [
+			'permalinkFormat' => ! empty( $wp_rewrite->author_structure ) ? home_url( $wp_rewrite->author_structure ) : home_url(),
+		];
 	}
 
 	/**

@@ -122,7 +122,10 @@ class DataCollector {
 	 * @return {string} The post's permalink.
 	 */
 	getPermalink() {
-		return rankMath.homeUrl + '/' + this.getSlug()
+		return this.getSlug()
+			? rankMath.permalinkFormat
+				.replace( /%(postname|pagename|term|author)%/, this.getSlug() )
+			: ''
 	}
 
 	/**

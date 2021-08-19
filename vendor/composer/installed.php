@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'dev-develop',
-    'version' => 'dev-develop',
+    'pretty_version' => '1.0.69.2-dev',
+    'version' => '1.0.69.2-dev',
     'aliases' => 
     array (
     ),
-    'reference' => '40b260ecb6831baab6328c8f1dc618e1292c5d5d',
+    'reference' => '16833724df561ed0e9a5a96ce931322728d2fe49',
     'name' => 'rankmath/seo-by-rank-math',
   ),
   'versions' => 
@@ -49,12 +49,12 @@
     ),
     'rankmath/seo-by-rank-math' => 
     array (
-      'pretty_version' => 'dev-develop',
-      'version' => 'dev-develop',
+      'pretty_version' => '1.0.69.2-dev',
+      'version' => '1.0.69.2-dev',
       'aliases' => 
       array (
       ),
-      'reference' => '40b260ecb6831baab6328c8f1dc618e1292c5d5d',
+      'reference' => '16833724df561ed0e9a5a96ce931322728d2fe49',
     ),
     'woocommerce/action-scheduler' => 
     array (

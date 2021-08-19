@@ -94,7 +94,16 @@ class Taxonomy_Screen implements IScreen {
 	 * @return array
 	 */
 	public function get_values() {
-		return [];
+		$url = '';
+		if ( $this->get_object_id() ) {
+			$url  = get_term_link( $this->get_object_id() );
+			$data = array_filter( explode( '/', $url ) );
+			$url  = ! empty( $data ) ? str_replace( array_pop( $data ), '%term%', $url ) : '';
+		}
+
+		return [
+			'permalinkFormat' => $url ? $url : home_url(),
+		];
 	}
 
 	/**
