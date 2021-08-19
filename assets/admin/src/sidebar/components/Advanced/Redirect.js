@@ -20,39 +20,41 @@ const Redirect = ( props ) => (
 			onChange={ () => props.toggle() }
 		/>
 
-		<SelectControl
-			label={ __( 'Redirection Type', 'rank-math' ) }
-			className={ props.hasRedirect ? '' : 'hidden' }
-			value={ props.redirectionType }
-			onChange={ ( value ) =>
-				props.updateRedirection( 'redirectionType', value )
-			}
-			options={ [
-				{
-					value: '301',
-					label: __( '301 Permanent Move', 'rank-math' ),
-				},
-				{
-					value: '302',
-					label: __( '302 Temporary Move', 'rank-math' ),
-				},
-				{
-					value: '307',
-					label: __( '307 Temporary Redirect', 'rank-math' ),
-				},
-				{
-					value: '410',
-					label: __( '410 Content Deleted', 'rank-math' ),
-				},
-				{
-					value: '451',
-					label: __(
-						'451 Content Unavailable for Legal Reasons',
-						'rank-math'
-					),
-				},
-			] }
-		/>
+		{ props.hasRedirect &&
+			<SelectControl
+				label={ __( 'Redirection Type', 'rank-math' ) }
+				className={ props.hasRedirect ? '' : 'hidden' }
+				value={ props.redirectionType }
+				onChange={ ( value ) =>
+					props.updateRedirection( 'redirectionType', value )
+				}
+				options={ [
+					{
+						value: '301',
+						label: __( '301 Permanent Move', 'rank-math' ),
+					},
+					{
+						value: '302',
+						label: __( '302 Temporary Move', 'rank-math' ),
+					},
+					{
+						value: '307',
+						label: __( '307 Temporary Redirect', 'rank-math' ),
+					},
+					{
+						value: '410',
+						label: __( '410 Content Deleted', 'rank-math' ),
+					},
+					{
+						value: '451',
+						label: __(
+							'451 Content Unavailable for Legal Reasons',
+							'rank-math'
+						),
+					},
+				] }
+			/>
+		}
 
 		{ false === [ '410', '451' ].includes( props.redirectionType ) && (
 			<TextControl

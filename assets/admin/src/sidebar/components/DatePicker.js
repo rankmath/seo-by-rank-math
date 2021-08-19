@@ -1,3 +1,5 @@
+import { noop } from 'lodash';
+
 /**
  * WordPress dependencies
  */
@@ -29,6 +31,7 @@ const EnhancedDatePicker = ( {
 			renderContent={ () => (
 				<DatePicker
 					currentDate={ value.split( 'T' )[ 0 ] }
+					onMonthPreviewed={ noop }
 					onChange={ ( date ) => {
 						onChange( date.split( 'T' )[ 0 ] )
 					} }

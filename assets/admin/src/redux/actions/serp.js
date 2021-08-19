@@ -21,6 +21,19 @@ export function updateSerpTitle( title ) {
 }
 
 /**
+ * Update title.
+ *
+ * @param {string} slug Title to update.
+ *
+ * @return {Object} An action for redux.
+ */
+export function updateSerpSlug( slug ) {
+	slug = '' !== slug ? slug : rankMathEditor.assessor.dataCollector.getSlug()
+	rankMathEditor.refresh( 'permalink' )
+	return updateAppUi( 'serpSlug', slug )
+}
+
+/**
  * Update description.
  *
  * @param {string} description Description to update.
@@ -62,6 +75,6 @@ export function updateSnippetPreviewType( type ) {
  *
  * @return {Object} An action for redux.
  */
- export function toggleTrendsCta( state ) {
+export function toggleTrendsCta( state ) {
 	return updateAppUi( 'isTrendsCtaOpen', state )
 }

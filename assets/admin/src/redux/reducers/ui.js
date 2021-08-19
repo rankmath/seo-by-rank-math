@@ -20,6 +20,7 @@ const DEFAULT_STATE = {
 
 	// Serp Preview.
 	serpTitle: '',
+	serpSlug: '',
 	serpDescription: '',
 	isSnippetEditorOpen: false,
 	snippetPreviewType: '',

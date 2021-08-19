@@ -10,7 +10,8 @@ import DataCollector from './DataCollector'
 
 class UserCollector extends DataCollector {
 	setup() {
-		this.elemSlug = jQuery( '#rank_math_permalink' )
+		this.updateBtn = jQuery( '#submit' )
+		this.elemSlug = jQuery( '#user_login' )
 		this.elemTitle = jQuery( '#display_name' )
 		this.elemDescription = jQuery( '#description' )
 	}

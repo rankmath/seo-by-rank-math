@@ -56,7 +56,6 @@ class Edit extends Component {
 
 				<Button
 					isPrimary={ true }
-					isLarge={ true }
 					onClick={ this.addNew }
 				>
 					{ __( 'Add New FAQ', 'rank-math' ) }

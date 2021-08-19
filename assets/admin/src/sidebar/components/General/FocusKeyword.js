@@ -46,9 +46,7 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 				</Tooltip>
 			</h2>
 
-			{ ! rankMath.isPro && (
-				<TrendsPreview></TrendsPreview>
-			) }
+			<TrendsPreview></TrendsPreview>
 
 			<RankMathAfterFocusKeyword.Slot>
 				{ ( fills ) => {
@@ -66,24 +64,26 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 
 			<ProNotice />
 
-			<CheckboxControl
-				className="pillar-content"
-				label={
-					<Fragment>
-						<strong>
-							{ __( 'This post is Pillar Content', 'rank-math' ) }
-						</strong>
-						<Tooltip>
-							{ __(
-								'Select one or more Pillar Content posts for each post tag or category to show them in the Link Suggestions meta box.',
-								'rank-math'
-							) }
-						</Tooltip>
-					</Fragment>
-				}
-				checked={ isPillarContent }
-				onChange={ togglePillarContent }
-			/>
+			{
+				'post' === rankMath.objectType && <CheckboxControl
+					className="pillar-content"
+					label={
+						<Fragment>
+							<strong>
+								{ __( 'This post is Pillar Content', 'rank-math' ) }
+							</strong>
+							<Tooltip>
+								{ __(
+									'Select one or more Pillar Content posts for each post tag or category to show them in the Link Suggestions meta box.',
+									'rank-math'
+								) }
+							</Tooltip>
+						</Fragment>
+					}
+					checked={ isPillarContent }
+					onChange={ togglePillarContent }
+				/>
+			}
 		</PanelBody>
 	)
 }

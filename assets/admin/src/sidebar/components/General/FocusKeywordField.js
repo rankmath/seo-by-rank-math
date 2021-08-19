@@ -208,7 +208,6 @@ class FocusKeywordField extends Component {
 		if ( 0 === event.detail.index ) {
 			this.onSetup()
 		}
-
 		rankMathEditor.resultManager.deleteResult( event.detail.data.value )
 		this.selectFirstKeyword()
 		this.updateKeywords()

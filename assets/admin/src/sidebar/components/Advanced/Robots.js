@@ -108,7 +108,7 @@ const Robots = ( props ) => (
 						{ __( 'No Image Index', 'rank-math' ) }
 						<Tooltip>
 							{ __(
-								'Lets you specify that you do not want your pages to appear as the referring page for images that appear in image search results',
+								'This option prevents images on a page from being indexed by Google and other search engines',
 								'rank-math'
 							) }
 						</Tooltip>

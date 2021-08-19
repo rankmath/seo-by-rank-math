@@ -13,16 +13,17 @@
 
 .wp-list-table {
 	th {
-		> span:nth-child(2) {
-			display: none;
+		&#rank_math_seo_details, &#rank_math_title, &#rank_math_description {
+			span:nth-child(2) {
+				display: none;
+			}
 		}
-
 		&.bulk-editing {
 			span:nth-child(1) {
 				display: none;
 			}
 			span:nth-child(2) {
-				display: inline-block;
+				display: inline-block !important;
 
 				a {
 					display: inline-block;

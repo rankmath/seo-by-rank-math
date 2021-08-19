@@ -53,7 +53,6 @@ class Step extends Component {
 						onChange={ ( newTitle ) => {
 							this.setStepProp( 'title', newTitle )
 						} }
-						keepPlaceholderOnFocus={ true }
 						placeholder={ __( 'Enter a step title', 'rank-math' ) }
 					/>
 
@@ -106,7 +105,6 @@ class Step extends Component {
 					onChange={ ( newContent ) => {
 						this.setStepProp( 'content', newContent )
 					} }
-					keepPlaceholderOnFocus={ true }
 					placeholder={ __(
 						'Enter a step description',
 						'rank-math'

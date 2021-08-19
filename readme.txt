@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 5.7
+Tested up to: 5.8
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.68.1
+Stable tag: 1.0.69
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -565,15 +565,21 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.68.1 [Jul 22, 2021] =
-* Fixed: Firefox was showing a big Link icon in the block editor
-* Fixed: Deprecated `block_categories` notice appearing after WordPress 5.8 update
-
-= 1.0.68 [Jul 15, 2021] =
-* Improved: [HUGE!] Improved performance of the plugin even further.
-* Improved: Keywords property in [Article Schema](https://rankmath.com/kb/article-schema/) is now added to all the existing posts
-* Improved: Styling of [FAQ](https://rankmath.com/blog/faq-schema/) & [HowTo](https://rankmath.com/blog/howto-schema/) block UI in the backend
-* Fixed: [Sitemap](https://rankmath.com/kb/sitemaps-seo-benefits/) showing an error on sites where `FS_METHOD` was FTP
-* Fixed: [Author sitemap](https://rankmath.com/kb/configure-sitemaps/) was throwing an MySQL error on some installations
+= 1.0.69 [Jul 28, 2021] =
+* Improved: [HUGE!] Converted the Classic Editor metabox into React for better performance and code optimization, removed more than 5,000 lines of code from the plugin!
+* Improved: Removed tabs registered by other plugins from Rank Math's Status & Tools page
+* Improved: CSS rules by using `rank_math` prefix so it won't conflict with other plugins
+* Improved: Styling of Toolbar button in Block editor
+* Changed: Name & Description of the 'Add SEO Meta Box' option in the Options Panel
+* Fixed: Styling of Google trends modal was broken when the Schema module was not enabled
+* Fixed: Permalink changed from the SERP modal of Divi builder was not updating the slug value
+* Fixed: Undefined index notice in `class-console.php` file
+* Fixed: Hook to add extra URL in Sitemap was not working
+* Fixed: Analytics related options UI was showing in the Options Panel's search form
+* Fixed: Tooltip for the Average Position was wrong
+* Fixed: Text in the 'No Image Index' robots description
+* Fixed: Changing month in Job Posting Schema was crashing the block editor on WordPress v5.8
+* Fixed: Import from the AIO SEO plugin was not working
+* Fixed: Share button styling in publish flow was broken
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

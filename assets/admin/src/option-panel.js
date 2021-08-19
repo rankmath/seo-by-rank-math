@@ -229,8 +229,8 @@ import addNotice from '@helpers/addNotice'
 
 							tabs.find( '.cmb-row' ).each( function() {
 								const row = $( this )
-								row.attr( 'data-settings-id', id )
 
+								row.attr( 'data-settings-id', id )
 								if (
 									row.hasClass( 'cmb-type-title' ) ||
 									row.hasClass( 'cmb-type-notice' ) ||
@@ -632,13 +632,13 @@ import addNotice from '@helpers/addNotice'
 
 			proRedirect() {
 				$( '.cmb-redirector-element' ).on( 'click', function( e ) {
-					let $target = $( e.target )
+					const $target = $( e.target )
 					if ( $target.is( 'a' ) || $target.closest( 'a' ).length ) {
 						return true
 					}
 
-					let $this = $( this )
-					let url = $this.data( 'url' )
+					const $this = $( this )
+					const url = $this.data( 'url' )
 					if ( ! url ) {
 						return true
 					}
@@ -646,7 +646,7 @@ import addNotice from '@helpers/addNotice'
 					e.preventDefault()
 					$this.css( 'cursor', 'pointer' )
 					window.open( url )
-				});				
+				} )
 			} }
 
 		window.rankMathOptions.init()

@@ -1,20 +1,9 @@
 // main: ../sidebar.scss
-%flex{
-	@include flex;
+%flex {
+    @include flex;
 }
 
 .#{$namespace}-post-publish {
-    h2 button.components-button {
-        -webkit-text-fill-color: transparent;
-        background: linear-gradient(to right, #414ea7 0%, #bb3eb1 40%);
-       -webkit-background-clip: text;
-
-       &:hover {
-        -webkit-text-fill-color: initial;
-        -webkit-background-clip: initial;
-       }
-    }
-
     p {
         margin-top: 0;
     }
@@ -25,44 +14,50 @@
 
     .#{$namespace}-share-button {
         font-size: 22px;
-        flex-grow: 1;
         line-height: 30px;
-        text-align: center;
-        color: #fff;
-        background: #D14836;
+
         margin-right: 5px;
-        border-radius: 30px;
         padding: 0;
 
-		transition: 0.2s all linear;
+        transition: .2s all linear;
+        text-align: center;
+
+        color: #fff;
+        border-radius: 30px;
+        background: #d14836;
+
+        flex-grow: 1;
 
         &:last-of-type {
             margin-right: 0;
         }
 
         &:hover {
-            opacity: 0.9;
+            opacity: .9;
         }
 
         a {
-            color: inherit;
             display: block;
+
+            text-decoration: none;
+
+            color: inherit;
 
             &:focus {
                 box-shadow: none;
             }
         }
 
-        svg {
+        .dashicon {
             vertical-align: -2px;
         }
 
         &.rm-facebook {
-            background: #1877F2;
+            background: #1877f2;
         }
 
         &.rm-twitter {
-            background: #1DA1F2;
+            background: #1da1f2;
         }
     }
 }

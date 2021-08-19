@@ -165,7 +165,7 @@ class Sitemap_XML extends XML {
 	public function set_n( $current_page ) {
 		if ( is_scalar( $current_page ) ) {
 			$this->maybe_redirect( $current_page );
-			$this->current_page = intval( $current_page );
+			$this->current_page = max( intval( $current_page ), 1 );
 		}
 	}
 

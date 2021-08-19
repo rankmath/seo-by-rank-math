@@ -256,7 +256,7 @@
 
             border-collapse: collapse;
 
-            color: #7f868d;
+            color: $dark_gray;
             border-bottom: 1px solid $light-gray;
 
             .text-large {
@@ -296,7 +296,7 @@
 
                 margin-top: 5px;
 
-                color: #7f868d;
+                color: $dark_gray;
             }
 
             .schema-item {
@@ -397,7 +397,7 @@
 
                     vertical-align: -4px;
 
-                    fill: #7f868d;
+                    fill: $dark_gray;
                     stroke: #fff;
                     -webkit-text-stroke: 1px white;
                 }

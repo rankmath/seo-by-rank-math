@@ -21,13 +21,6 @@ $color-bad-dark: #f0776f;
 $browser: ( "webkit" );
 $all-browser: ( "webkit", "moz", "ms" );
 
-@import "partials/metabox/frame";
-@import "partials/metabox/tabs";
-@import "partials/metabox/serp-preview";
-@import "partials/metabox/serp-noindex";
-@import "partials/metabox/rich-snippet";
-@import "partials/metabox/suggestion";
+@import 'partials/metabox/frame';
+@import 'partials/metabox/primary-term';
 @import "partials/metabox/rtl";
-@import "partials/metabox/askreview";
-@import "partials/common/trends-tool";
-@import 'sidebar/tagify';

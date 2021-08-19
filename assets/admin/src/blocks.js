@@ -36,6 +36,11 @@ blockHowTo()
 /**
  * Register Schema block.
  */
-if ( rankMath.canUser.snippet && ! isUndefined( rankMath.schemas ) ) {
+if (
+	'undefined' !== typeof rankMath &&
+	! isUndefined( rankMath.canUser ) &&
+	rankMath.canUser.snippet &&
+	! isUndefined( rankMath.schemas )
+) {
 	schemaSnippet()
 }

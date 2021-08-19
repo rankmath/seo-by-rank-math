@@ -1,6 +1,7 @@
 // main: ../sidebar.scss
 .#{$namespace}-sidebar-panel {
 	.#{$namespace}-tooltip {
+		display: inline;
 		label {
 			position: relative;
 	

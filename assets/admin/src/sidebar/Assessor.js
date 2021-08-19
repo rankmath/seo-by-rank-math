@@ -166,7 +166,6 @@ class Assessor {
 	getPrimaryKeyword() {
 		const data = getStore().getState()
 		const keywords = data.appData.keywords
-
 		return Helpers.removeDiacritics( keywords.split( ',' )[ 0 ] )
 	}
 

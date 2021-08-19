@@ -18,6 +18,7 @@ use RankMath\Admin\Admin_Helper;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Conditional;
+use MyThemeShop\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -89,6 +90,8 @@ class Metabox implements Runner {
 				[
 					'rank-math-common',
 					'rank-math-cmb2',
+					'rank-math-post-metabox',
+					'wp-components',
 				],
 				rank_math()->version
 			);
@@ -107,10 +110,12 @@ class Metabox implements Runner {
 					'wp-element',
 					'wp-i18n',
 					'wp-url',
+					'wp-media-utils',
 					'rank-math-common',
 					'rank-math-analyzer',
 					'rank-math-validate',
 					'tagify',
+					'wp-block-editor',
 				],
 				rank_math()->version,
 				true
@@ -124,7 +129,7 @@ class Metabox implements Runner {
 	 * Enqueque scripts common for all builders.
 	 */
 	private function enqueue_commons() {
-		wp_register_style( 'rank-math-post-metabox', rank_math()->plugin_url() . 'assets/admin/css/gutenberg.css', [], rank_math()->version );
+		wp_register_style( 'rank-math-post-metabox', rank_math()->plugin_url() . 'assets/admin/css/gutenberg.css', [ 'rank-math-common' ], rank_math()->version );
 		wp_register_script( 'rank-math-analyzer', rank_math()->plugin_url() . 'assets/admin/js/analyzer.js', [ 'lodash', 'wp-autop', 'wp-wordcount' ], rank_math()->version, true );
 	}
 
@@ -164,46 +169,44 @@ class Metabox implements Runner {
 			return;
 		}
 
-		$cmb  = $this->create_metabox();
-		$tabs = $this->get_tabs();
+		$cmb = $this->create_metabox();
 		$cmb->add_field(
 			[
 				'id'   => 'setting-panel-container-' . $this->metabox_id,
 				'type' => 'meta_tab_container_open',
-				'tabs' => $tabs,
+				'tabs' => [],
+			]
+		);
+		$cmb->add_field(
+			[
+				'id'         => 'rank_math_metabox_wrapper',
+				'type'       => 'raw',
+				'content'    => '<div id="rank-math-metabox-wrapper"></div>',
+				'save_field' => false,
 			]
 		);
 
-		foreach ( $tabs as $id => $tab ) {
-			if ( ! Helper::has_cap( $tab['capability'] ) ) {
-				continue;
+		/**
+		 * Allow disabling the primary term feature.
+		 *
+		 * @param bool $return True to disable.
+		 */
+		if ( false === apply_filters_deprecated( 'rank_math/primary_term', [ false ], '1.0.43', 'rank_math/admin/disable_primary_term' )
+		&& false === $this->do_filter( 'admin/disable_primary_term', false ) ) {
+			$taxonomies = Helper::get_object_taxonomies( WordPress::get_post_type(), 'objects' );
+			$taxonomies = wp_filter_object_list( $taxonomies, [ 'hierarchical' => true ], 'and', 'name' );
+			foreach ( $taxonomies as $taxonomy ) {
+				$cmb->add_field(
+					[
+						'id'         => 'rank_math_primary_' . $taxonomy,
+						'type'       => 'hidden',
+						'default'    => 0,
+						'attributes' => [
+							'data-primary-term' => $taxonomy,
+						],
+					]
+				);
 			}
-
-			$cmb->add_field(
-				[
-					'id'   => 'setting-panel-' . $id,
-					'type' => 'tab',
-					'open' => true,
-				]
-			);
-
-			include_once $tab['file'];
-
-			/**
-			 * Add setting into specific tab of main metabox.
-			 *
-			 * The dynamic part of the hook name. $id, is the tab id.
-			 *
-			 * @param CMB2 $cmb CMB2 object.
-			 */
-			$this->do_action( 'metabox/settings/' . $id, $cmb );
-
-			$cmb->add_field(
-				[
-					'id'   => 'setting-panel-' . $id . '-close',
-					'type' => 'tab',
-				]
-			);
 		}
 
 		$cmb->add_field(
@@ -329,7 +332,7 @@ class Metabox implements Runner {
 				'context'          => 'normal',
 				'priority'         => $this->get_priority(),
 				'cmb_styles'       => false,
-				'classes'          => 'rank-math-metabox-wrap' . ( Admin_Helper::is_term_profile_page() ? ' rank-math-metabox-frame' : '' ),
+				'classes'          => 'rank-math-metabox-wrap' . ( Admin_Helper::is_term_profile_page() ? ' rank-math-metabox-frame postbox' : '' ),
 				'mb_callback_args' => [ '__back_compat_meta_box' => \rank_math_is_gutenberg() ],
 			]
 		);
@@ -352,48 +355,6 @@ class Metabox implements Runner {
 		 * Filter: Change metabox priority.
 		 */
 		return $this->do_filter( 'metabox/priority', $priority );
-	}
-
-	/**
-	 * Get tabs.
-	 *
-	 * @return array
-	 */
-	private function get_tabs() {
-		$tabs = [
-			'general'  => [
-				'icon'       => 'rm-icon rm-icon-settings',
-				'title'      => esc_html__( 'General', 'rank-math' ),
-				'desc'       => esc_html__( 'This tab contains general options.', 'rank-math' ),
-				'file'       => rank_math()->includes_dir() . 'metaboxes/general.php',
-				'capability' => 'onpage_general',
-			],
-			'advanced' => [
-				'icon'       => 'rm-icon rm-icon-toolbox',
-				'title'      => esc_html__( 'Advanced', 'rank-math' ),
-				'desc'       => esc_html__( 'This tab contains advance options.', 'rank-math' ),
-				'file'       => rank_math()->includes_dir() . 'metaboxes/advanced.php',
-				'capability' => 'onpage_advanced',
-			],
-			'social'   => [
-				'icon'       => 'rm-icon rm-icon-social',
-				'title'      => esc_html__( 'Social', 'rank-math' ),
-				'desc'       => esc_html__( 'This tab contains social options.', 'rank-math' ),
-				'file'       => rank_math()->includes_dir() . 'metaboxes/social.php',
-				'capability' => 'onpage_social',
-			],
-		];
-
-		if ( ! Helper::is_advanced_mode() ) {
-			unset( $tabs['advanced'] );
-		}
-
-		/**
-		 * Allow developers to add new tabs in the main metabox.
-		 *
-		 * @param array $tabs Array of tabs.
-		 */
-		return $this->do_filter( 'metabox/tabs', $tabs );
 	}
 
 	/**

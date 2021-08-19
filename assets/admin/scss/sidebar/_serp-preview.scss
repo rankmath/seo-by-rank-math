@@ -93,12 +93,14 @@ $title-height: 24px;
         cursor: pointer;
         transition: width .2s ease, padding .2s ease, margin .2s ease;
     }
+
     // Field Wrapper
     .group {
         position: relative;
 
         width: 100%;
     }
+
     // Preview fields
     .serp-description,
     .serp-title,
@@ -128,6 +130,7 @@ $title-height: 24px;
             background-color: transparent;
         }
     }
+
     // Title
     .serp-title {
         font-size: 16px;
@@ -139,6 +142,7 @@ $title-height: 24px;
 
         color: #1a0dab;
     }
+
     // URL
     .serp-url {
         font-size: 14px;
@@ -164,6 +168,7 @@ $title-height: 24px;
             @include size(0);
         }
     }
+
     // Description
     .serp-description {
         line-height: 1.4;
@@ -174,6 +179,7 @@ $title-height: 24px;
 
         color: #555d66;
     }
+
     // Star Ratings.
     .#{$namespace}-rating-preview {
         margin-bottom: 4px;
@@ -224,14 +230,16 @@ $title-height: 24px;
         }
     }
 }
+
 // Modal Preivew Title
-.rank-math-editor-general .serp-preview-title {
+.#{$namespace}-editor-general .serp-preview-title {
     margin-bottom: 0;
 
     &:before {
         line-height: 36px;
     }
 }
+
 // Google Preview
 .serp-preview {
     &-favicon {
@@ -248,6 +256,7 @@ $title-height: 24px;
 
         @include prefixer(user-select, none, $all-browser);
     }
+
     // Search Form
     @at-root .#{$namespace}-editor &-input {
         position: relative;
@@ -256,7 +265,7 @@ $title-height: 24px;
 
         pointer-events: none;
 
-        input {
+        input[disabled] {
             font: 16px arial,sans-serif;
 
             padding: 5px 16px;
@@ -384,7 +393,7 @@ $title-height: 24px;
         &-input {
             max-width: 399px;
 
-            input {
+            input[disabled] {
                 height: 41px;
             }
 
@@ -469,7 +478,7 @@ $title-height: 24px;
         }
     }
 
-    .rank-math-rating-preview {
+    .#{$namespace}-rating-preview {
         display: flex;
 
         margin-top: 10px;
@@ -523,7 +532,7 @@ $title-height: 24px;
 
             height: 16px;
             margin-top: 7px;
-            margin-right: 12px;
+            margin-right: 7px;
         }
 
         .serp-url {
@@ -535,6 +544,7 @@ $title-height: 24px;
         }
     }
 }
+
 // Expanded
 .expanded-preview {
     // Desktop
@@ -545,6 +555,7 @@ $title-height: 24px;
             }
         }
     }
+
     // Mobile
     &.mobile-preview {
         .serp-preview-bg {
@@ -560,9 +571,10 @@ $title-height: 24px;
         }
     }
 }
+
 // RTL
 body.rtl {
-    .rank-math-button-devices {
+    .#{$namespace}-button-devices {
         float: left;
 
         .button.button-small:first-child {

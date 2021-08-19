@@ -32,6 +32,14 @@
 
             &:hover {
                 color: inherit;
+                background: transparent;
+                box-shadow: none;
+                
+                i {
+                    border-radius: 20em;
+                    background: #d9e9ed;
+                    box-shadow: 0 0 0 8px #d9e9ed;
+                }
             }
 
             &:focus {
@@ -40,17 +48,6 @@
                 outline: none;
                 background: transparent;
                 box-shadow: none;
-            }
-
-            &:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
-                background: transparent;
-                box-shadow: none;
-
-                i {
-                    border-radius: 20em;
-                    background: #d9e9ed;
-                    box-shadow: 0 0 0 8px #d9e9ed;
-                }
             }
 
             i {

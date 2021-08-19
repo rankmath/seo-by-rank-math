@@ -45,7 +45,6 @@ const EditorTitle = ( { title, serpTitle, updateTitle } ) => (
 export default compose(
 	withSelect( ( select ) => {
 		const repo = select( 'rank-math' )
-
 		return {
 			title: repo.getTitle(),
 			serpTitle: repo.getSerpTitle(),

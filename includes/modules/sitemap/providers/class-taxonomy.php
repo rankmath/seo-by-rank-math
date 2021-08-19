@@ -167,7 +167,12 @@ class Taxonomy implements Provider {
 				continue;
 			}
 
-			$url['loc']    = $this->get_term_link( $term );
+			$link = $this->get_term_link( $term );
+			if ( ! $link ) {
+				continue;
+			}
+
+			$url['loc']    = $link;
 			$url['mod']    = $term->lastmod;
 			$url['images'] = ! is_null( $this->get_image_parser() ) ? $this->get_image_parser()->get_term_images( $term ) : [];
 
@@ -267,7 +272,17 @@ class Taxonomy implements Provider {
 	 * @return string
 	 */
 	private function get_term_link( $term ) {
-		$url = Helper::get_term_meta( 'canonical', $term, $term->taxonomy );
-		return Str::is_non_empty( $url ) ? $url : get_term_link( $term, $term->taxonomy );
+		$url       = get_term_link( $term, $term->taxonomy );
+		$canonical = Helper::get_term_meta( 'canonical_url', $term, $term->taxonomy );
+		if ( $canonical && $canonical !== $url ) {
+			/*
+			 * Let's assume that if a canonical is set for this term and it's different from
+			 * the URL of this term, that page is either already in the XML sitemap OR is on
+			 * an external site, either way, we shouldn't include it here.
+			 */
+			return false;
+		}
+
+		return $url;
 	}
 }

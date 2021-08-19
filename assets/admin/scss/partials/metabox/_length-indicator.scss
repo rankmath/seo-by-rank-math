@@ -7,6 +7,9 @@
 
 	@include position(absolute, 22px 15px null null);
 
+	background-color: transparent !important;
+	border: none !important;
+
 	.length-indicator {
 		position: relative;
 		display: inline-block;

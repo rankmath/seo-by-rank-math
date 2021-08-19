@@ -4,7 +4,7 @@
 import { __ } from '@wordpress/i18n'
 import { Fragment } from '@wordpress/element'
 import { Button } from '@wordpress/components'
-import { MediaUpload } from '@wordpress/block-editor'
+import { MediaUpload } from '@wordpress/media-utils'
 
 const SocialMediaUpload = ( props ) => (
 	<div className="components-base-control field-group">

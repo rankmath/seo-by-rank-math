@@ -23,8 +23,8 @@ const RankMathIcon = ( { isLoaded, score } ) => {
 
 	return (
 		<div className={ classes }>
-			<AnalysisScore />
 			<SVGIcon />
+			<AnalysisScore />
 		</div>
 	)
 }
