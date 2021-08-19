@@ -13,8 +13,6 @@ namespace RankMath\Admin;
 use RankMath\Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Arr;
-use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -65,22 +63,22 @@ class Ask_Review {
 		$this->ajax( 'already_reviewed', 'already_reviewed' );
 
 		// Post editor tab.
-		if ( $this->current_time > $this->install_date + ( 2 * WEEK_IN_SECONDS ) ) {
+		if ( $this->current_time > $this->install_date + ( 10 * DAY_IN_SECONDS ) ) {
 			Helper::add_json( 'showReviewTab', true );
 		}
 
 		// Admin notice.
 		$review_notice_date = $this->get_review_notice_date();
 		if ( $this->current_time > $review_notice_date ) {
-			if ( get_option( 'rank_math_review_notice_added' ) === false ) {
+			if ( get_option( 'rank_math_review_notice_added' ) === false && ! Helper::has_notification( 'rank_math_pro_notice' ) ) {
 				$this->add_notice();
 			}
 
 			// Make dismiss button work like the "Maybe later" link.
 			$this->action( 'wp_helpers_notification_dismissed', 'review_notice_after_dismiss' );
-
-			$this->action( 'admin_footer', 'review_notice_js', 15 );
 		}
+
+		$this->action( 'admin_footer', 'review_notice_js', 15 );
 	}
 
 	/**
@@ -89,6 +87,12 @@ class Ask_Review {
 	 * @return void
 	 */
 	public function review_notice_js() {
+		if (
+			! Helper::has_notification( 'rank_math_review_plugin_notice' ) &&
+			! Helper::has_notification( 'rank_math_pro_notice' )
+		) {
+			return;
+		}
 		?>
 		<script>
 			(function( $ ) {
@@ -116,6 +120,45 @@ class Ask_Review {
 				});
 			})(jQuery);
 		</script>
+		<style>
+			#rank_math_review_plugin_notice .rank-math-notice.is-dismissible a,
+			#rank_math_pro_notice .rank-math-notice.is-dismissible a {
+				color: #4f52d4;
+			}
+			#rank_math_review_plugin_notice.is-dismissible,
+			#rank_math_pro_notice.is-dismissible {
+				border-width: 0 0 0 4px;
+				border-left-color: #6668BD;
+				box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+				padding: 5px 10px 5px 65px;
+			}
+			#rank_math_review_plugin_notice.is-dismissible:before,
+			#rank_math_pro_notice.is-dismissible:before {
+				content: '';
+				width: 50px;
+				height: 100%;
+				background: rgba(102, 104, 189, 0.09);
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			#rank_math_review_plugin_notice.is-dismissible:after,
+			#rank_math_pro_notice.is-dismissible:after {
+				content: url('data:image/svg+xml;charset=UTF-8, <svg viewBox="0 0 462.03 462.03" xmlns="http://www.w3.org/2000/svg" width="20"><g fill="white"><path d="m462 234.84-76.17 3.43 13.43 21-127 81.18-126-52.93-146.26 60.97 10.14 24.34 136.1-56.71 128.57 54 138.69-88.61 13.43 21z"></path><path d="m54.1 312.78 92.18-38.41 4.49 1.89v-54.58h-96.67zm210.9-223.57v235.05l7.26 3 89.43-57.05v-181zm-105.44 190.79 96.67 40.62v-165.19h-96.67z"></path></g></svg>' );
+				padding: 3px;
+				border-radius: 3px;
+				position: absolute;
+				left: 12px;
+				top: 18px;
+				background: linear-gradient(-135deg, #2488e1, #724bb7);
+				width: 23px;
+				height: 23px;
+				display: flex;
+				justify-content: center;
+				line-height: 1;
+				align-items: center;
+			}
+		</style>
 		<?php
 	}
 
@@ -128,7 +171,7 @@ class Ask_Review {
 		$message = '<p>';
 
 		// Translators: placeholder is the plugin name.
-		$message .= sprintf( esc_html__( 'Hey, we noticed you\'ve been using %s for more than two weeks now – that\'s awesome!', 'rank-math' ), '<strong>' . _x( 'Rank Math SEO', 'plugin name inside the review notice', 'rank-math' ) . '</strong>' );
+		$message .= sprintf( esc_html__( 'Hey, we noticed you\'ve been using %s for more than a week now – that\'s awesome!', 'rank-math' ), '<strong>' . _x( 'Rank Math SEO', 'plugin name inside the review notice', 'rank-math' ) . '</strong>' );
 		$message .= '<br>';
 
 		$message .= esc_html__( 'Could you please do us a BIG favor and give it a rating on WordPress.org to help us spread the word and boost our motivation?', 'rank-math' ) . '</p>

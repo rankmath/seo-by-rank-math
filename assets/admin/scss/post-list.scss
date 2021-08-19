@@ -13,7 +13,8 @@
 
 .wp-list-table {
 	th {
-		&#rank_math_seo_details, &#rank_math_title, &#rank_math_description {
+		&#rank_math_seo_details, &#rank_math_title, &#rank_math_description,
+		&#rank_math_image_title, &#rank_math_image_alt {
 			span:nth-child(2) {
 				display: none;
 			}

@@ -161,7 +161,7 @@ class Post_Screen implements IScreen {
 
 		return [
 			'primaryTerm'         => $this->get_primary_term_id(),
-			'authorName'          => get_the_author_meta( 'display_name' ),
+			'authorName'          => get_the_author_meta( 'display_name', $post->post_author ),
 			'titleTemplate'       => Helper::get_settings( "titles.pt_{$post->post_type}_title", '%%title%% %%sep%% %%sitename%%' ),
 			'descriptionTemplate' => Helper::get_settings( "titles.pt_{$post->post_type}_description", '' ),
 			'showScoreFrontend'   => ! Helper::get_post_meta( 'dont_show_seo_score', $this->get_object_id() ),

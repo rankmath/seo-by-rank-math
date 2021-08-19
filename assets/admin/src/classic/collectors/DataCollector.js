@@ -62,7 +62,7 @@ class DataCollector {
 			debounce( () => {
 				rankMathEditor.updatePermalink( this.elemSlug.val() )
 			}, 500 )
-		).trigger( 'input' )
+		)
 	}
 
 	/**

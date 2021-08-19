@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '00942670e3b7ab0b1fc829a57d42599fb0f04bf6',
+    'reference' => '40b260ecb6831baab6328c8f1dc618e1292c5d5d',
     'name' => 'rankmath/seo-by-rank-math',
   ),
   'versions' => 
@@ -54,7 +54,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '00942670e3b7ab0b1fc829a57d42599fb0f04bf6',
+      'reference' => '40b260ecb6831baab6328c8f1dc618e1292c5d5d',
     ),
     'woocommerce/action-scheduler' => 
     array (

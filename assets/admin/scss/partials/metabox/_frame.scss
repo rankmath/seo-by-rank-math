@@ -124,6 +124,16 @@
 				}
 			}
 
+			.components-checkbox-control {
+				input[type=checkbox] {
+					&:checked, &:checked:focus {
+						&:before {
+							display: none;
+						}
+					}
+				}
+			}
+
 			.components-radio-control__option {
 				margin-right: 10px;
 			}

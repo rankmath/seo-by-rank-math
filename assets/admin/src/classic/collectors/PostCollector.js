@@ -68,7 +68,7 @@ class PostCollector extends DataCollector {
 			debounce( () => {
 				this.handleContentChange()
 			}, 500 )
-		)
+		).trigger( 'change' )
 
 		jQuery( window ).on( 'load', () => {
 			if ( ! this.isTinymce() ) {
@@ -124,6 +124,10 @@ class PostCollector extends DataCollector {
 
 				rankMathEditor.updatePermalink( slug )
 			}
+		} )
+
+		jQuery( '#save-post' ).on( 'click', () => {
+			rankMathEditor.assessor.saveData()
 		} )
 	}
 

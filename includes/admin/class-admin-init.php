@@ -37,6 +37,7 @@ class Admin_Init {
 		rank_math()->admin_assets = new Assets();
 
 		$this->load_review_reminders();
+		$this->load_pro_notice();
 		$this->load_setup_wizard();
 		$this->load_post_columns_and_filters();
 
@@ -84,6 +85,17 @@ class Admin_Init {
 		}
 
 		$this->run( [ new Ask_Review() ] );
+	}
+
+	/**
+	 * Load Pro reminder notice.
+	 */
+	private function load_pro_notice() {
+		if ( defined( 'RANK_MATH_PRO_FILE' ) || get_option( 'rank_math_already_upgraded' ) ) {
+			return;
+		}
+
+		$this->run( [ new Pro_Notice() ] );
 	}
 
 	/**

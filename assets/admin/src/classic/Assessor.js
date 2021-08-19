@@ -30,7 +30,7 @@ class Assessor {
 
 		this.hooks()
 		this.registerRefresh()
-		this.saveData()
+		this.saveEvent()
 	}
 
 	hooks() {
@@ -259,34 +259,38 @@ class Assessor {
 		return intersection( tests, rankMath.assessor.researchesTests )
 	}
 
-	saveData() {
+	saveEvent() {
 		if ( isUndefined( this.dataCollector.updateBtn ) ) {
 			return
 		}
 
 		this.dataCollector.updateBtn.on( 'click', () => {
-			const repo = select( 'rank-math' )
-			const meta = repo.getDirtyMetadata()
-
-			if ( ! isEmpty( meta ) ) {
-				apiFetch( {
-					method: 'POST',
-					path: 'rankmath/v1/updateMeta',
-					data: {
-						objectID: rankMath.objectID,
-						objectType: rankMath.objectType,
-						meta,
-						content: rankMathEditor.assessor.dataCollector.getContent(),
-					},
-				} ).then( ( response ) => {
-					doAction( 'rank_math_metadata_updated', response )
-				} )
-				dispatch( 'rank-math' ).resetDirtyMetadata()
-			}
-
-			this.saveSchemas()
-			this.saveRedirection()
+			this.saveData()
 		} )
+	}
+
+	saveData() {
+		const repo = select( 'rank-math' )
+		const meta = repo.getDirtyMetadata()
+
+		if ( ! isEmpty( meta ) ) {
+			apiFetch( {
+				method: 'POST',
+				path: 'rankmath/v1/updateMeta',
+				data: {
+					objectID: rankMath.objectID,
+					objectType: rankMath.objectType,
+					meta,
+					content: rankMathEditor.assessor.dataCollector.getContent(),
+				},
+			} ).then( ( response ) => {
+				doAction( 'rank_math_metadata_updated', response )
+			} )
+			dispatch( 'rank-math' ).resetDirtyMetadata()
+		}
+
+		this.saveSchemas()
+		this.saveRedirection()
 	}
 
 	/**
