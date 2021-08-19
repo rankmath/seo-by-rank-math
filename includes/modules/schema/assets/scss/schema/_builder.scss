@@ -452,6 +452,12 @@
 }
 
 .#{$namespace}-checkbox-component {
+    > label {
+        display: block;
+
+        margin-bottom: 1rem;
+    }
+
     > div {
         > div {
             margin-bottom: 5px;

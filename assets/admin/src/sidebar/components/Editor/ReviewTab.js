@@ -76,7 +76,7 @@ class ReviewTab extends Component {
 				<p>
 					<Interpolate tags="em">
 						{ __(
-							"Hey, we noticed you are using Rank Math SEO plugin for more than 2 weeks –{{em}}that's awesome!{{/em}} Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?",
+							"Hey, we noticed you are using Rank Math SEO plugin for more than a week now –{{em}}that's awesome!{{/em}} Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?",
 							'rank-math'
 						) }
 					</Interpolate>

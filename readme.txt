@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 5.8
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.69
+Stable tag: 1.0.69.1
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -565,21 +565,31 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.69 [Jul 28, 2021] =
+= 1.0.69.1 [Jul 31, 2021] =
+* Fixed: SEO details were not saving in the Classic Editor draft post
+* Fixed: Media library page was showing Save & Cancel button even without clicking on the Bulk edit option
+* Fixed: On new posts, permalink was not showing any value in the Classic Editor
+* Fixed: Author name was missing in Facebook Preview of Classic Editor
+
+= 1.0.69 [Jul 30, 2021] =
 * Improved: [HUGE!] Converted the Classic Editor metabox into React for better performance and code optimization, removed more than 5,000 lines of code from the plugin!
-* Improved: Removed tabs registered by other plugins from Rank Math's Status & Tools page
+* Improved: Styling of toolbar button in the [Block editor](https://rankmath.com/kb/on-page-seo/#num-1-meta-box-in-block-editor)
+* Improved: Removed tabs registered by other plugins from Rank Math's [Status & Tools page](https://rankmath.com/kb/rank-math-status-and-tools/)
 * Improved: CSS rules by using `rank_math` prefix so it won't conflict with other plugins
-* Improved: Styling of Toolbar button in Block editor
-* Changed: Name & Description of the 'Add SEO Meta Box' option in the Options Panel
-* Fixed: Styling of Google trends modal was broken when the Schema module was not enabled
-* Fixed: Permalink changed from the SERP modal of Divi builder was not updating the slug value
+* Improved: Styling of admin notices
+* Changed: Name & Description of the '[Add SEO Meta Box](https://rankmath.com/kb/titles-and-meta/#add-seo-meta-box)' option in the Options Panel
+* Fixed: Incompatibility with WP Real Estate plugin causing issues on some installations
+* Fixed: Terms with custom [canonical URL](https://rankmath.com/kb/how-to-change-canonical-url/) were showing in the Sitemap
+* Fixed: Console errors on the Widgets page in WordPress v5.8 
+* Fixed: Styling of [Google trends](https://rankmath.com/kb/keyword-research-with-rank-math/#google-trends) modal was broken when the Schema module was disabled
+* Fixed: Permalink changed from the SERP modal of [Divi builder](https://rankmath.com/blog/divi-seo/) was not updating the slug value
 * Fixed: Undefined index notice in `class-console.php` file
-* Fixed: Hook to add extra URL in Sitemap was not working
+* Fixed: Hook to [add extra URL in Sitemap](https://rankmath.com/kb/filters-hooks-api-developer/#add-extra-urls-in-sitemap) was not working
 * Fixed: Analytics related options UI was showing in the Options Panel's search form
-* Fixed: Tooltip for the Average Position was wrong
-* Fixed: Text in the 'No Image Index' robots description
-* Fixed: Changing month in Job Posting Schema was crashing the block editor on WordPress v5.8
-* Fixed: Import from the AIO SEO plugin was not working
-* Fixed: Share button styling in publish flow was broken
+* Fixed: Tooltip for the [Average Position](https://rankmath.com/kb/google-algorithm-updates/#num-4-3-total-keywords-and-average-position) was wrong in the Analytics Pages
+* Fixed: Wrong text in the '[No Image Index](https://rankmath.com/kb/advanced-tab/#no-image-index)' robots description
+* Fixed: Changing month in [Job Posting Schema](https://rankmath.com/kb/jobposting-schema/) was crashing the block editor on WordPress v5.8
+* Fixed: [AIO SEO importer](https://rankmath.com/kb/migrate-to-all-in-one-seo-pack/) was not working
+* Fixed: Share button styling in the publish flow was broken
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

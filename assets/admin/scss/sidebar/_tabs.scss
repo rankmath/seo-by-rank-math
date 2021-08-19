@@ -177,22 +177,24 @@
             &__input-container {
                 width: 16px;
                 height: 16px;
-                margin-top: -3px;
+                margin-top: -1px;
                 margin-right: 8px;
+
+                svg {
+                    width: 20px;
+                    height: 18px;
+                }
             }
 
             &__input[type=checkbox] {
                 width: 16px;
                 height: 16px;
+
+                &:checked, &:checked:focus {
+                    border-color: $primary;
+                    background: $primary;
+                }
             }
-        }
-
-        svg.components-checkbox-control__checked {
-            top: 0;
-            left: 0;
-
-            width: 16px;
-            height: 16px;
         }
     }
 }

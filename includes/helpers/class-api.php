@@ -50,6 +50,15 @@ trait Api {
 	}
 
 	/**
+	 * Check if notification exists.
+	 *
+	 * @param string $notification_id Notification id.
+	 */
+	public static function has_notification( $notification_id ) {
+		return rank_math()->notification->has_notification( $notification_id );
+	}
+
+	/**
 	 * Get Setting.
 	 *
 	 * @param  string $field_id The field id to get value for.

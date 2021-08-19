@@ -94,6 +94,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Admin\\Options' => __DIR__ . '/../..' . '/includes/admin/class-options.php',
         'RankMath\\Admin\\Post_Columns' => __DIR__ . '/../..' . '/includes/admin/class-post-columns.php',
         'RankMath\\Admin\\Post_Filters' => __DIR__ . '/../..' . '/includes/admin/class-post-filters.php',
+        'RankMath\\Admin\\Pro_Notice' => __DIR__ . '/../..' . '/includes/admin/class-pro-notice.php',
         'RankMath\\Admin\\Registration' => __DIR__ . '/../..' . '/includes/admin/class-registration.php',
         'RankMath\\Admin\\Serp_Preview' => __DIR__ . '/../..' . '/includes/admin/class-serp-preview.php',
         'RankMath\\Admin\\Setup_Wizard' => __DIR__ . '/../..' . '/includes/admin/class-setup-wizard.php',

@@ -275,7 +275,7 @@ msgid "You are not authorized to perform this action."
 msgstr ""
 
 #. translators: placeholder is the plugin name.
-msgid "Hey, we noticed you've been using %s for more than two weeks now – that's awesome!"
+msgid "Hey, we noticed you've been using %s for more than a week now – that's awesome!"
 msgstr ""
 
 msgctxt "plugin name inside the review notice"
@@ -645,6 +645,50 @@ msgid "Articles noindexed"
 msgstr ""
 
 msgid "Pillar Content"
+msgstr ""
+
+#. translators: placeholders are the opening and closing strong tags.
+msgid "Hey, you know the %1$s secret of success of Rank Math? It's your success! %2$s When you succeed, we succeed as well."
+msgstr ""
+
+#. translators: placeholder is the words "check here".
+msgid "You are missing on the easy SEO traffic to your website. %s why Rank Math PRO is the last SEO tool that you'll ever buy!"
+msgstr ""
+
+msgid "CHECK HERE"
+msgstr ""
+
+msgid "It has everything that is needed to optimize your website for more traffic from the search engines."
+msgstr ""
+
+msgid "Yes, I want to learn more"
+msgstr ""
+
+msgid "No, I don't want it"
+msgstr ""
+
+msgid "I already upgraded"
+msgstr ""
+
+#. translators: placeholder is the plugin name.
+msgid "Hey, did you know that with %1$s, %2$syou can drive more traffic%3$s by easily automating your SEO tasks?"
+msgstr ""
+
+msgctxt "Pro plugin name inside the admin notice"
+msgid "Rank Math PRO"
+msgstr ""
+
+#. translators: placeholder is the words "buy here".
+msgid "%s at a discounted price."
+msgstr ""
+
+msgid "BUY HERE"
+msgstr ""
+
+msgid "Yes, I want better SEO"
+msgstr ""
+
+msgid "I already purchased"
 msgstr ""
 
 msgid "Rank Math Product Registration"
