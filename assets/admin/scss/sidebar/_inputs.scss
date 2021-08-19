@@ -24,8 +24,7 @@
 	}
 }
 
-// Temporary fix for Kendence Theme issue (#714)
-.components-accessible-toolbar .components-toolbar-group > .components-button.components-button.has-icon svg,
-.components-toolbar div > .components-button.components-button.has-icon svg {
-    max-width: 24px;
+// Temporary fix for Firefox Link issue (#859)
+.components-accessible-toolbar .components-toolbar-group .components-button.components-button.has-icon svg{
+	max-width: 24px;
 }

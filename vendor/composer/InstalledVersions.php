@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '08c5fbaee5698fbe60357844ec94771f12bbd396',
+    'reference' => 'b25048790c85bc52bb1b07887d38d82ffb3bd2cb',
     'name' => 'rankmath/seo-by-rank-math',
   ),
   'versions' => 
@@ -78,7 +78,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '08c5fbaee5698fbe60357844ec94771f12bbd396',
+      'reference' => 'b25048790c85bc52bb1b07887d38d82ffb3bd2cb',
     ),
     'woocommerce/action-scheduler' => 
     array (
