@@ -307,7 +307,7 @@ class Import_Export implements Runner {
 			unset( $backups[ $key ] );
 		}
 
-		update_option( 'rank_math_backups', $backups );
+		update_option( 'rank_math_backups', $backups, false );
 
 		return $key;
 	}

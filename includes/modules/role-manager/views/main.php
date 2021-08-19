@@ -45,3 +45,23 @@ rank_math()->admin->display_admin_header();
 	</div>
 
 </div>
+
+<script>
+	jQuery( function( $ ) {
+		var toggle = '<p><button class="button button-small toggle-all-capabilities"><?php echo esc_js( __( 'Toggle All', 'rank-math' ) ); ?></button></p>',
+			$table = $( '#cmb2-metabox-rank-math-role-manager' );
+
+		$( '.cmb-th', $table ).each( function( index, elem ) {
+			$( elem ).append( toggle );
+		} );
+
+		$( '.toggle-all-capabilities' ).on( 'click', function( e ) {
+			e.preventDefault();
+
+			var $checkboxes = $( this ).closest( '.cmb-row' ).find( 'input.cmb2-option' ),
+				should_check = ! $checkboxes.filter(':checked').length;
+
+			$checkboxes.prop( 'checked', should_check );
+		} );
+	} );
+</script>

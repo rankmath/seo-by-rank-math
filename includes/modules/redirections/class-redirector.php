@@ -408,7 +408,7 @@ class Redirector {
 	 * @return string
 	 */
 	private function get_redirect_header() {
-		return true === $this->do_filter( 'redirection/add_redirect_header', true ) ? 'Rank Math SEO' : 'WordPress';
+		return true === $this->do_filter( 'redirection/add_redirect_header', true ) ? 'Rank Math' : 'WordPress';
 	}
 
 	/**

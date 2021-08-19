@@ -304,8 +304,7 @@ class Assessor {
 					meta,
 					content: rankMathEditor.assessor.dataCollector.getContent(),
 				},
-			} ).then( ( response ) => {
-				doAction( 'rank_math_metadata_updated', response )
+			} ).then( () => {
 				resolve( true )
 			} ).catch( () => {
 				resolve( true )

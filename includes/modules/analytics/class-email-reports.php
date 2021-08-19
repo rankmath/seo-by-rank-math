@@ -420,7 +420,7 @@ class Email_Reports {
 					'values',
 				]
 			);
-			wp_safe_redirect( $url );
+			Helper::redirect( $url );
 			exit;
 		}
 

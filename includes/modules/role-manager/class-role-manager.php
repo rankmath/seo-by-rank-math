@@ -129,7 +129,7 @@ class Role_Manager extends Base {
 
 		if ( ! Helper::has_cap( 'role_manager' ) ) {
 			Helper::add_notification( esc_html__( 'You are not authorized to perform this action.', 'rank-math' ), [ 'type' => 'error' ] );
-			wp_safe_redirect( Helper::get_admin_url( 'role-manager' ) );
+			Helper::redirect( Helper::get_admin_url( 'role-manager' ) );
 			exit;
 		}
 
@@ -140,7 +140,7 @@ class Role_Manager extends Base {
 			Helper::set_capabilities( $cmb->get_sanitized_values( $_POST ) );
 		}
 
-		wp_safe_redirect( Helper::get_admin_url( 'role-manager' ) );
+		Helper::redirect( Helper::get_admin_url( 'role-manager' ) );
 		exit;
 	}
 }

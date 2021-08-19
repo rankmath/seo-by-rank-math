@@ -61,7 +61,7 @@ class Product_Redirection {
 		global $wp;
 
 		if ( $link = $this->get_redirection_url( $wp->request ) ) { // phpcs:ignore
-			wp_safe_redirect( $link, 301 );
+			Helper::redirect( $link, 301 );
 			exit;
 		}
 	}

@@ -73,7 +73,7 @@ class OAuth {
 		Permissions::fetch();
 
 		if ( ! empty( $redirect ) ) {
-			wp_safe_redirect( $redirect );
+			Helper::redirect( $redirect );
 			exit;
 		}
 	}

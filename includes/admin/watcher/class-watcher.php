@@ -32,6 +32,8 @@ class Watcher implements Runner {
 		$this->action( 'init', 'maybe_deactivate_plugins' );
 		$this->action( 'activated_plugin', 'check_activated_plugin' );
 		$this->action( 'deactivated_plugin', 'check_deactivated_plugin' );
+
+		$this->filter( 'wp_helpers_notifications_render', 'deactivate_plugins_link', 10, 3 );
 	}
 
 	/**
@@ -134,7 +136,7 @@ class Watcher implements Runner {
 			}
 		}
 
-		wp_redirect( Security::remove_query_arg_raw( [ 'rank_math_deactivate_plugins', 'plugin_type', '_wpnonce' ] ) );
+		Helper::redirect( Security::remove_query_arg_raw( [ 'rank_math_deactivate_plugins', 'plugin_type', '_wpnonce' ] ) );
 	}
 
 	/**
@@ -143,35 +145,17 @@ class Watcher implements Runner {
 	 * @param string $type Plugin type.
 	 */
 	private static function set_notification( $type ) {
-		$deactivate_url = Security::add_query_arg(
-			[
-				'rank_math_deactivate_plugins' => '1',
-				'plugin_type'                  => 'seo',
-				'_wpnonce'                     => wp_create_nonce( 'rank_math_deactivate_plugins' ),
-			],
-			admin_url( 'plugins.php' )
-		);
-
 		$message = sprintf(
 			/* translators: deactivation link */
 			esc_html__( 'Please keep only one SEO plugin active, otherwise, you might lose your rankings and traffic. %s.', 'rank-math' ),
-			'<a href="' . $deactivate_url . '">' . __( 'Click here to Deactivate', 'rank-math' ) . '</a>'
+			'<a href="###DEACTIVATE_SEO_PLUGINS###">' . __( 'Click here to Deactivate', 'rank-math' ) . '</a>'
 		);
 
 		if ( 'sitemap' === $type ) {
-			$deactivate_url = Security::add_query_arg(
-				[
-					'rank_math_deactivate_plugins' => '1',
-					'plugin_type'                  => 'sitemap',
-					'_wpnonce'                     => wp_create_nonce( 'rank_math_deactivate_plugins' ),
-				],
-				admin_url( 'plugins.php' )
-			);
-
 			$message = sprintf(
 				/* translators: deactivation link */
 				esc_html__( 'Please keep only one Sitemap plugin active, otherwise, you might lose your rankings and traffic. %s.', 'rank-math' ),
-				'<a href="' . $deactivate_url . '">' . __( 'Click here to Deactivate', 'rank-math' ) . '</a>'
+				'<a href="###DEACTIVATE_SITEMAP_PLUGINS###">' . __( 'Click here to Deactivate', 'rank-math' ) . '</a>'
 			);
 		}
 
@@ -231,5 +215,44 @@ class Watcher implements Runner {
 			$plugins['all-in-one-schemaorg-rich-snippets/index.php'] = 'seo';
 		}
 		return $plugins;
+	}
+
+	/**
+	 * Replace link inside notice dynamically to avoid issues with the nonce.
+	 *
+	 * @param string $output  Notice output.
+	 * @param string $message Notice message.
+	 * @param array  $options Notice options.
+	 *
+	 * @return string
+	 */
+	public function deactivate_plugins_link( $output, $message, $options ) {
+		if ( ! isset( $options['id'] ) || ! preg_match( '/conflicting_.*_plugins/', $options['id'] ) ) {
+			return $output;
+		}
+
+		$deactivate_url = Security::add_query_arg(
+			[
+				'rank_math_deactivate_plugins' => '1',
+				'plugin_type'                  => 'seo',
+				'_wpnonce'                     => wp_create_nonce( 'rank_math_deactivate_plugins' ),
+			],
+			admin_url( 'plugins.php' )
+		);
+
+		$output = str_replace( '###DEACTIVATE_SEO_PLUGINS###', $deactivate_url, $output );
+
+		$deactivate_sitemap_plugins_url = Security::add_query_arg(
+			[
+				'rank_math_deactivate_plugins' => '1',
+				'plugin_type'                  => 'sitemap',
+				'_wpnonce'                     => wp_create_nonce( 'rank_math_deactivate_plugins' ),
+			],
+			admin_url( 'plugins.php' )
+		);
+
+		$output = str_replace( '###DEACTIVATE_SITEMAP_PLUGINS###', $deactivate_sitemap_plugins_url, $output );
+
+		return $output;
 	}
 }

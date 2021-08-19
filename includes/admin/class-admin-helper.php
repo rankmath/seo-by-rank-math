@@ -69,7 +69,7 @@ class Admin_Helper {
 		$view = rank_math()->admin_dir() . "views/{$view}.php";
 
 		if ( ! file_exists( $view ) ) {
-			wp_redirect( Helper::get_admin_url() );
+			Helper::redirect( Helper::get_admin_url() );
 			exit;
 		}
 

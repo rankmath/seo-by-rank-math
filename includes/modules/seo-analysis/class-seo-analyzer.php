@@ -228,7 +228,7 @@ class SEO_Analyzer {
 	private function maybe_clear_storage() {
 		if ( '1' === Param::request( 'clear_results' ) ) {
 			delete_option( 'rank_math_seo_analysis_results' );
-			wp_safe_redirect( Security::remove_query_arg_raw( 'clear_results' ) );
+			Helper::redirect( Security::remove_query_arg_raw( 'clear_results' ) );
 			exit;
 		}
 	}

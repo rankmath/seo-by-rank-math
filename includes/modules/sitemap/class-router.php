@@ -13,6 +13,7 @@
 
 namespace RankMath\Sitemap;
 
+use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Url;
@@ -100,8 +101,7 @@ class Router {
 			return;
 		}
 
-		header( 'X-Redirect-By: Rank Math' );
-		wp_redirect( home_url( '/sitemap_index.xml' ), 301 );
+		Helper::redirect( home_url( '/sitemap_index.xml' ), 301 );
 		exit;
 	}
 

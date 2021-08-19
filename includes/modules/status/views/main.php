@@ -20,7 +20,7 @@ $module      = Helper::get_module( 'status' );
 $current     = Param::get( 'view', $default_tab );
 
 if ( ! in_array( $current, array_keys( apply_filters( 'rank_math/tools/pages', [] ) ), true ) ) {
-	wp_safe_redirect( Helper::get_admin_url( 'status' ) );
+	Helper::redirect( Helper::get_admin_url( 'status' ) );
 	exit;
 }
 

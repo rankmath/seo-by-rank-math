@@ -37,11 +37,13 @@ class Article implements Snippet {
 			'keywords'      => Helper::replace_vars( '%keywords%', $jsonld->post ),
 			'datePublished' => $jsonld->parts['published'],
 			'dateModified'  => $jsonld->parts['modified'],
-			'author'        => [
-				'@type' => 'Person',
-				'name'  => $jsonld->parts['author'],
-			],
 			'isPrimary'     => true,
+			'author'        => ! empty( $data['ProfilePage'] ) ?
+				[ '@id' => $data['ProfilePage']['@id'] ] :
+				[
+					'@type' => 'Person',
+					'name'  => $jsonld->parts['author'],
+				],
 		];
 
 		$jsonld->add_prop( 'publisher', $entity, 'publisher', $data );

@@ -13,6 +13,8 @@ use RankMath\Helper;
 use RankMath\Google\Console;
 use RankMath\Google\Authentication;
 
+use MyThemeShop\Helpers\DB;
+
 defined( 'ABSPATH' ) || exit;
 
 add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_basic_tests' );
@@ -284,6 +286,13 @@ function rank_math_analyze_search_console() {
 function rank_math_analyze_focus_keywords() {
 	global $wpdb;
 
+	if ( DB::table_size_exceeds( $wpdb->postmeta, 100000 ) ) {
+		return [
+			'status'  => 'warning',
+			'message' => esc_html__( 'Could not check Focus Keywords in posts - the post meta table exceeds the size limit.', 'rank-math' ),
+		];
+	}
+
 	$in_search_post_types = get_post_types( [ 'exclude_from_search' => false ] );
 	$in_search_post_types = empty( $in_search_post_types ) ? '' : " AND {$wpdb->posts}.post_type IN ('" . join( "', '", array_map( 'esc_sql', $in_search_post_types ) ) . "')";
 
@@ -321,17 +330,8 @@ function rank_math_analyze_focus_keywords() {
 		];
 	}
 
-	$rows = rank_math_analyze_group_result( $data );
-	foreach ( $rows as $post_type => $row ) {
-		$post_type = get_post_type_object( $post_type );
-		$count     = count( $row );
-		$links[]   = sprintf(
-			'<a href="%1$s&focus_keyword=1" target="_blank">%2$d %3$s</a>',
-			esc_url( admin_url( 'edit.php?post_type=' . $post_type->name ) ),
-			$count,
-			$count > 1 ? $post_type->label : $post_type->labels->singular_name
-		);
-	}
+	$rows  = rank_math_analyze_group_result( $data );
+	$links = rank_math_get_post_type_links( $rows, '&focus_keyword=1' );
 
 	return [
 		'status'  => 'fail',
@@ -362,7 +362,7 @@ function rank_math_analyze_post_titles() {
 	}
 
 	$rows  = rank_math_analyze_group_result( $data );
-	$links = rank_math_get_post_type_links( $rows );
+	$links = rank_math_get_post_type_links( $rows, '&fk_in_title=1' );
 
 	$post_ids     = wp_list_pluck( $data, 'ID' );
 	$post_ids_max = array_slice( $post_ids, 0, 20 );
@@ -390,14 +390,15 @@ function rank_math_analyze_post_titles() {
  *
  * @return array
  */
-function rank_math_get_post_type_links( $rows ) {
+function rank_math_get_post_type_links( $rows, $extra_params ) {
 	$links = [];
 	foreach ( $rows as $post_type => $row ) {
 		$post_type = get_post_type_object( $post_type );
 		$count     = count( $row );
 		$links[]   = sprintf(
-			'<a href="%1$s&fk_in_title=1" target="_blank">%2$s %3$s</a>',
+			'<a href="%1$s%2$s" target="_blank">%3$d %4$s</a>',
 			esc_url( admin_url( 'edit.php?post_type=' . $post_type->name ) ),
+			$extra_params,
 			$count,
 			$count > 1 ? $post_type->label : $post_type->labels->singular_name
 		);
