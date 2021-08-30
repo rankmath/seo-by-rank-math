@@ -225,8 +225,14 @@ class Helper {
 	 */
 	public static function clear_cache() {
 		// Clean WordPress cache.
-		if ( function_exists( 'wp_cache_clear_cache' ) ) {
-			wp_cache_clear_cache();
+    if ( function_exists( 'wp_cache_clear_cache' ) ) {
+      if (is_multisite()) {
+			  wp_cache_clear_cache(get_current_blog_id());
+      }
+      else
+      {
+			  wp_cache_clear_cache();
+      }
 		}
 
 		// If W3 Total Cache is being used, clear the cache.
