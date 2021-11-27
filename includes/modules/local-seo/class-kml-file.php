@@ -39,6 +39,15 @@ class KML_File {
 	}
 
 	/**
+	 * Date and time of saved location.
+	 */
+	public function localseo_datec() {
+	$localsdt = new \DateTime("now", new \DateTimeZone(get_option('timezone_string')));
+	$localsdt->setTimestamp(time());
+	return $localsdt->format( 'c' );
+	}
+	
+	/**
 	 * Set up rewrite rules.
 	 */
 	public function init() {
@@ -175,7 +184,7 @@ class KML_File {
 		];
 
 		if ( count( array_intersect( $local_seo_fields, $updated ) ) ) {
-			update_option( 'rank_math_local_seo_update', date_i18n( 'c' ) );
+			update_option( 'rank_math_local_seo_update', $this->localseo_datec() );
 			\RankMath\Sitemap\Sitemap::ping_search_engines( Router::get_base_url( 'local-sitemap.xml' ) );
 		}
 	}
@@ -218,7 +227,7 @@ class KML_File {
 	 */
 	private function get_modified_date() {
 		if ( ! $date = get_option( 'rank_math_local_seo_update' ) ) { // phpcs:ignore
-			$date = date_i18n( 'c' );
+			$date = $this->localseo_datec();
 		}
 
 		return $date;
