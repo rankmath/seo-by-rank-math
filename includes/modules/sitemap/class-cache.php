@@ -49,7 +49,7 @@ class Cache {
 	 */
 	public function __construct() {
 		$this->wp_filesystem = WordPress::get_filesystem();
-		$this->mode          = $this->is_writable() ? 'file' : 'db';
+		$this->mode          = apply_filters( 'rank_math/sitemap/cache_mode', $this->is_writable() ? 'file' : 'db' );
 	}
 
 	/**
