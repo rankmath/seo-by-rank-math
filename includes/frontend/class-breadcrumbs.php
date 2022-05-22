@@ -50,7 +50,7 @@ class Breadcrumbs {
 	/**
 	 * Get an instance of the class.
 	 *
-	 * @return Breadcrumb The instancec.
+	 * @return Breadcrumbs The instancec.
 	 */
 	public static function get() {
 		static $instance;
