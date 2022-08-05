@@ -43,7 +43,7 @@ export function getSchemaFromData( schema, json, isCustom = false ) {
 			return
 		}
 
-		const map = getMap( key )
+		const map = ! isCustom ? getMap( key ) : false
 		if ( isArray( value ) ) {
 			property = getGroupDefault()
 			property.map.isArray = true
@@ -119,7 +119,7 @@ const convertValues = ( property, key, value, isCustom = false ) => {
 export function generateValidSchemaByMap( data, map, arrayProps = {}, isCustom = false ) {
 	const schema = generateSchemaFromMap( map, arrayProps, isCustom )
 
-	return getSchemaFromData( schema, data )
+	return getSchemaFromData( schema, data, isCustom )
 }
 
 /**

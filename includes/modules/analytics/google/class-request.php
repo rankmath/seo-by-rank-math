@@ -10,6 +10,8 @@
 
 namespace RankMath\Google;
 
+use RankMath\Helpers\Security;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -205,7 +207,7 @@ class Request {
 	/**
 	 * Check if the response was successful or a failure. If it failed, store the error.
 	 *
-	 * @param array       $response           The response from the curl request.
+	 * @param object      $response           The response from the curl request.
 	 * @param array|false $formatted_response The response body payload from the curl request.
 	 */
 	private function determine_success( $response, $formatted_response ) {
@@ -226,7 +228,7 @@ class Request {
 			return;
 		}
 
-		$this->last_error = 'Unknown error, call getLastResponse() to find out what happened.';
+		$this->last_error = esc_html__( 'Unknown error, call get_response() to find out what happened.', 'rank-math' );
 	}
 
 	/**
@@ -240,5 +242,121 @@ class Request {
 			'body'    => null,
 			'headers' => null,
 		];
+	}
+
+	/**
+	 * Refresh access token when user login.
+	 */
+	public function refresh_token() {
+		// Bail if the user is not authenticated at all yet.
+		if ( ! Authentication::is_authorized() || ! Authentication::is_token_expired() ) {
+			return true;
+		}
+
+		$token = $this->get_refresh_token();
+		if ( ! $token ) {
+			return false;
+		}
+
+		$tokens = Authentication::tokens();
+
+		// Save new token.
+		$this->token            = $token;
+		$tokens['expire']       = time() + 3600;
+		$tokens['access_token'] = $token;
+		Authentication::tokens( $tokens );
+
+		return true;
+	}
+
+	/**
+	 * Get the new refresh token.
+	 *
+	 * @return mixed
+	 */
+	protected function get_refresh_token() {
+		$tokens = Authentication::tokens();
+		if ( empty( $tokens['refresh_token'] ) ) {
+			return false;
+		}
+
+		$response = wp_remote_get( Authentication::get_auth_app_url() . '/refresh.php?code=' . $tokens['refresh_token'] );
+		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			return false;
+		}
+
+		$response = wp_remote_retrieve_body( $response );
+		if ( empty( $response ) ) {
+			return false;
+		}
+
+		return $response;
+	}
+
+	/**
+	 * Revoke an OAuth2 token.
+	 *
+	 * @return boolean Whether the token was revoked successfully.
+	 */
+	public function revoke_token() {
+		$tokens = Authentication::tokens();
+		$this->http_post(
+			Security::add_query_arg_raw( [ 'token' => $tokens['access_token'] ], 'https://oauth2.googleapis.com/revoke' )
+		);
+
+		Authentication::tokens( false );
+		delete_option( 'rank_math_google_analytic_profile' );
+		delete_option( 'rank_math_google_analytic_options' );
+		delete_option( 'rankmath_google_api_failed_attempts_data' );
+		delete_option( 'rankmath_google_api_reconnect' );
+
+		return $this->is_success();
+	}
+
+	/**
+	 * Log every failed API call.
+	 * And kill all next scheduled event if failed count is more then three.
+	 *
+	 * @param array  $response   Response from api.
+	 * @param string $action     Action performing.
+	 * @param string $start_date Start date fetching for (or page URI for inspections).
+	 * @param array  $args       Array of arguments.
+	 */
+	public function log_failed_request( $response, $action, $start_date, $args ) {
+		if ( $this->is_success() ) {
+			return;
+		}
+
+		$option_key                  = 'rankmath_google_api_failed_attempts_data';
+		$reconnect_google_option_key = 'rankmath_google_api_reconnect';
+		if ( empty( $response['error'] ) || ! is_array( $response['error'] ) ) {
+			delete_option( $option_key );
+			delete_option( $reconnect_google_option_key );
+			return;
+		}
+
+		// Limit maximum 10 failed attempt data to log.
+		$failed_attempts   = get_option( $option_key, [] );
+		$failed_attempts   = ( ! empty( $failed_attempts ) && is_array( $failed_attempts ) ) ? array_slice( $failed_attempts, -9, 9 ) : [];
+		$failed_attempts[] = [
+			'action' => $action,
+			'args'   => $args,
+			'error'  => $response['error'],
+		];
+
+		update_option( $option_key, $failed_attempts, false );
+
+		// Number of allowed attempt.
+		if ( 3 < count( $failed_attempts ) ) {
+			update_option( $reconnect_google_option_key, 'search_analytics_query' );
+			return;
+		}
+
+		as_schedule_single_action(
+			time() + 60,
+			"rank_math/analytics/get_{$action}_data",
+			[ $start_date ],
+			'rank-math'
+		);
 	}
 }

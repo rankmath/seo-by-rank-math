@@ -1,0 +1,5 @@
+/*!
+  * Plugin:	Rank Math
+  * URL:	https://rankmath.com/wordpress/plugin/seo-suite/
+  * Name:	rank-math.css
+  */:root{--rankmath-wp-adminbar-height:0}#wp-admin-bar-rank-math .rank-math-icon{display:inline-block;top:6px;position:relative;padding-right:10px;line-height:1}#wp-admin-bar-rank-math .rank-math-icon svg{fill-rule:evenodd;fill:#dedede;height:21px;vertical-align:inherit}#wp-admin-bar-rank-math:hover .rank-math-icon svg{fill-rule:evenodd;fill:#00b9eb}#wp-admin-bar-rank-math span.rm-mark-page-icon{font-family:dashicons;font-size:19px;line-height:28px;margin:0 3px 0 -4px}

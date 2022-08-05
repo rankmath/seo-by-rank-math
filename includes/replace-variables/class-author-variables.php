@@ -63,6 +63,17 @@ class Author_Variables extends Term_Variables {
 		);
 
 		$this->register_replacement(
+			'post_author',
+			[
+				'name'        => esc_html__( 'Post Author', 'rank-math' ),
+				'description' => esc_html__( 'Display author\'s nicename of the current post, page or author archive.', 'rank-math' ),
+				'variable'    => 'post_author',
+				'example'     => $this->is_post_edit && $author ? $author->display_name : get_the_author_meta( 'display_name', $user_id ),
+			],
+			[ $this, 'get_name' ]
+		);
+
+		$this->register_replacement(
 			'user_description',
 			[
 				'name'        => esc_html__( 'Author Description', 'rank-math' ),
@@ -80,7 +91,12 @@ class Author_Variables extends Term_Variables {
 	 * @return string
 	 */
 	public function get_userid() {
-		return ! empty( $this->args->post_author ) ? $this->args->post_author : get_query_var( 'author' );
+		$user_id = ! empty( $this->args->post_author ) ? $this->args->post_author : get_query_var( 'author' );
+		if ( $user_id ) {
+			return $user_id;
+		}
+
+		return get_query_var( 'bbp_user_id' );
 	}
 
 	/**

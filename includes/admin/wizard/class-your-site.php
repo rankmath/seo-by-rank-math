@@ -94,7 +94,7 @@ class Your_Site implements Wizard_Step {
 				'id'      => 'open_graph_image',
 				'type'    => 'file',
 				'name'    => esc_html__( 'Default Social Share Image', 'rank-math' ),
-				'desc'    => __( 'When a featured image is not set, this image will be used as a thumbnail when your post is shared on Facebook. <strong>Recommended image size 1200 x 630 pixels.</strong>', 'rank-math' ),
+				'desc'    => __( 'When a featured image or an OpenGraph Image is not set for individual posts/pages/CPTs, this image will be used as a fallback thumbnail when your post is shared on Facebook. <strong>The recommended image size is 1200 x 630 pixels.</strong>', 'rank-math' ),
 				'options' => [ 'url' => false ],
 				'default' => Helper::get_settings( 'titles.open_graph_image' ),
 			]

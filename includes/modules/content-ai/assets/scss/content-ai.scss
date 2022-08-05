@@ -1,0 +1,14 @@
+// Common and Vendors
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/variables';
+@import '../../../../../assets/admin/scss/mixins';
+
+@import 'tabs';
+@import 'focus_keywords';
+@import 'score';
+@import 'recommendations';
+@import 'keywords';
+@import 'questions';
+@import 'links';
+@import 'metabox';
+@import 'rtl';

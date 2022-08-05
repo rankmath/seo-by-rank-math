@@ -10,6 +10,11 @@
  */
 import $ from 'jquery'
 
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n'
+
 class RankMathDashboard {
 	/**
 	 * Class constructor
@@ -19,7 +24,7 @@ class RankMathDashboard {
 		this.updateModules()
 		this.initializeClipBoard()
 		this.modeSelector()
-		this.usageTracking()
+		this.dashboardWidget()
 	}
 
 	deactivatePlugins() {
@@ -154,27 +159,29 @@ class RankMathDashboard {
 		} )
 	}
 
-	usageTracking() {
-		$( '#rank-math-usage-tracking' ).on( 'change', function() {
-			$.ajax( {
-				url: rankMath.api.root + 'rankmath/v1/updateTracking',
-				method: 'POST',
-				beforeSend( xhr ) {
-					xhr.setRequestHeader( 'X-WP-Nonce', rankMath.api.nonce )
-				},
-				data: {
-					enable: $( this ).is( ':checked' ),
-				},
-			} ).done( function( response ) {
-				if ( ! response ) {
-					/*eslint no-alert: 0*/
-					window.alert( 'Something went wrong! Please try again.' )
-				}
-			} )
+	dashboardWidget() {
+		const dashboardWrapper = $( '#rank-math-dashboard-widget' )
+		if ( ! dashboardWrapper.length ) {
+			return
+		}
+
+		$.ajax( {
+			url: rankMath.api.root + 'rankmath/v1/dashboardWidget',
+			method: 'GET',
+			beforeSend( xhr ) {
+				xhr.setRequestHeader( 'X-WP-Nonce', rankMath.api.nonce )
+			},
+		} ).done( function( response ) {
+			if ( ! response ) {
+				dashboardWrapper.removeClass( 'rank-math-loading' ).html( __( 'Something went wrong! Please try again.', 'rank-math' ) )
+				return
+			}
+
+			dashboardWrapper.removeClass( 'rank-math-loading' ).html( response )
 		} )
 	}
 }
 
-jQuery( document ).ready( () => {
+$( function() {
 	new RankMathDashboard()
 } )

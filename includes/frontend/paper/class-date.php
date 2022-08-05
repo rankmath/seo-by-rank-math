@@ -20,27 +20,27 @@ defined( 'ABSPATH' ) || exit;
 class Date implements IPaper {
 
 	/**
-	 * Builds the title for a date archive
+	 * Get the SEO title for a date archive.
 	 *
-	 * @return string The title to use on a date archive.
+	 * @return string
 	 */
 	public function title() {
 		return Paper::get_from_options( 'date_archive_title' );
 	}
 
 	/**
-	 * Builds the description for a date archive
+	 * Get the SEO description for a date archive.
 	 *
-	 * @return string The description to use on a date archive.
+	 * @return string
 	 */
 	public function description() {
 		return Paper::get_from_options( 'date_archive_description' );
 	}
 
 	/**
-	 * Retrieves the robots for a date archive.
+	 * Get the robots meta for a date archive.
 	 *
-	 * @return string The robots to use on a date archive.
+	 * @return string
 	 */
 	public function robots() {
 		$robots = [];
@@ -53,17 +53,16 @@ class Date implements IPaper {
 	}
 
 	/**
-	 * Retrieves the advanced robots for a date archive.
+	 * Get the advanced robots meta for a date archive.
 	 *
-	 * @return array The advanced robots to use on a date archive.
+	 * @return array
 	 */
 	public function advanced_robots() {
 		return Paper::advanced_robots_combine( Helper::get_settings( 'titles.date_advanced_robots' ) );
 	}
 
 	/**
-	 * This function normally outputs the canonical but is also used in other places to retrieve
-	 * the canonical URL for the current page.
+	 * Get the canonical URL for the current page.
 	 *
 	 * @return array
 	 */
@@ -81,7 +80,7 @@ class Date implements IPaper {
 	}
 
 	/**
-	 * Retrieves meta keywords.
+	 * Get the meta keywords.
 	 *
 	 * @return string
 	 */

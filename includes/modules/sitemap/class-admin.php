@@ -12,6 +12,7 @@ namespace RankMath\Sitemap;
 
 use RankMath\KB;
 use RankMath\Helper;
+use RankMath\Traits\Ajax;
 use RankMath\Module\Base;
 use RankMath\Admin\Options;
 use MyThemeShop\Helpers\Str;
@@ -23,6 +24,8 @@ defined( 'ABSPATH' ) || exit;
  * Admin class.
  */
 class Admin extends Base {
+
+	use Ajax;
 
 	/**
 	 * The Constructor.
@@ -44,8 +47,13 @@ class Admin extends Base {
 
 		// Attachment.
 		$this->filter( 'media_send_to_editor', 'media_popup_html', 10, 2 );
-		$this->filter( 'attachment_fields_to_edit', 'media_popup_fields', 20, 2 );
-		$this->filter( 'attachment_fields_to_save', 'media_popup_fields_save', 20, 2 );
+
+		if ( Helper::has_cap( 'sitemap' ) ) {
+			$this->filter( 'attachment_fields_to_edit', 'media_popup_fields', 20, 2 );
+			$this->filter( 'attachment_fields_to_save', 'media_popup_fields_save', 20, 2 );
+		}
+
+		$this->ajax( 'remove_nginx_notice', 'remove_nginx_notice' );
 	}
 
 	/**
@@ -208,7 +216,7 @@ class Admin extends Base {
 	public function media_popup_fields( $form_fields, $post ) {
 		$exclude   = get_post_meta( $post->ID, 'rank_math_exclude_sitemap', true );
 		$checkbox  = '<label><input type="checkbox" name="attachments[' . $post->ID . '][rank_math_media_exclude_sitemap]" ' . checked( $exclude, true, 0 ) . ' /> ';
-		$checkbox .= esc_html__( 'Exclude this image from sitemap', 'rank-math' ) . '</label>';
+		$checkbox .= esc_html__( 'Exclude this attachment from sitemap', 'rank-math' ) . '</label>';
 
 		$form_fields['rank_math_exclude_sitemap'] = [ 'tr' => "\t\t<tr><td></td><td>$checkbox</td></tr>\n" ];
 
@@ -254,6 +262,18 @@ class Admin extends Base {
 	}
 
 	/**
+	 * Remove Sitemap nginx notice.
+	 *
+	 * @since 1.0.73
+	 */
+	public function remove_nginx_notice() {
+		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
+		$this->has_cap_ajax( 'sitemap' );
+		update_option( 'rank_math_remove_nginx_notice', true, false );
+		$this->success();
+	}
+
+	/**
 	 * Get opening tags for the notice HTML.
 	 *
 	 * @return string
@@ -270,7 +290,7 @@ class Admin extends Base {
 	 * @return string
 	 */
 	private function get_nginx_notice() {
-		if ( empty( Param::server( 'SERVER_SOFTWARE' ) ) ) {
+		if ( 'rank-math-options-sitemap' !== Param::get( 'page' ) || empty( Param::server( 'SERVER_SOFTWARE' ) ) || get_option( 'rank_math_remove_nginx_notice' ) ) {
 			return '';
 		}
 
@@ -289,7 +309,9 @@ class Admin extends Base {
 
 		return '<div class="sitemap-nginx-notice notice notice-alt notice-warning rank-math-notice">' .
 		'<p>' . $message .
-		' <a href="#"><span class="show">' . __( 'Click here to see the code.', 'rank-math' ) . '</span><span class="hide">' . __( 'Hide', 'rank-math' ) . '</span></a></p>
+			' <a href="#"><span class="show">' . __( 'Click here to see the code.', 'rank-math' ) . '</span><span class="hide">' . __( 'Hide', 'rank-math' ) . '</span></a>
+			<a href="#" class="sitemap-close-notice">' . __( 'I already added', 'rank-math' ) . '</a>
+		</p>
  <pre>
  # START Nginx Rewrites for Rank Math Sitemaps
  rewrite ^/' . $sitemap_base . 'sitemap_index.xml$ /index.php?sitemap=1 last;

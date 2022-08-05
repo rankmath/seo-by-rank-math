@@ -39,13 +39,7 @@ class Opengraph {
 			return;
 		}
 
-		global $post;
-		$schemas = array_filter(
-			DB::get_schemas( $post->ID ),
-			function( $schema ) {
-				return in_array( $schema['@type'], [ 'Article', 'NewsArticle', 'BlogPosting', 'Product', 'VideoObject' ], true );
-			}
-		);
+		$schemas = $this->get_schemas();
 		if ( empty( $schemas ) ) {
 			return;
 		}
@@ -62,6 +56,36 @@ class Opengraph {
 			$method = $hash[ $schema['@type'] ];
 			$this->$method( $schema, $opengraph );
 		}
+	}
+
+	/**
+	 * Function to get schema data.
+	 */
+	private function get_schemas() {
+		global $post;
+		$schemas = array_filter(
+			DB::get_schemas( $post->ID ),
+			function( $schema ) {
+				return ! empty( $schema['@type'] ) && in_array( $schema['@type'], [ 'Article', 'NewsArticle', 'BlogPosting', 'Product', 'VideoObject' ], true );
+			}
+		);
+
+		if ( ! empty( $schemas ) ) {
+			return $schemas;
+		}
+
+		$default_schema = Helper::get_default_schema_type( $post->ID, true, false );
+		if ( ! in_array( $default_schema, [ 'Article', 'BlogPosting', 'NewsArticle' ], true ) ) {
+			return false;
+		}
+
+		return [
+			[
+				'@type'         => $default_schema,
+				'datePublished' => '%date(Y-m-d\TH:i:sP)%',
+				'dateModified'  => '%modified(Y-m-d\TH:i:sP)%',
+			],
+		];
 	}
 
 	/**
@@ -116,8 +140,10 @@ class Opengraph {
 		}
 
 		global $post;
-		$pub = Helper::replace_vars( $schema['datePublished'], $post );
-		$mod = Helper::replace_vars( $schema['dateModified'], $post );
+		$pub = '%date(Y-m-dTH:i:sP)%' === $schema['datePublished'] ? '%date(Y-m-d\TH:i:sP)%' : $schema['datePublished'];
+		$mod = '%modified(Y-m-dTH:i:sP)%' === $schema['dateModified'] ? '%modified(Y-m-d\TH:i:sP)%' : $schema['dateModified'];
+		$pub = Helper::replace_vars( $pub, $post );
+		$mod = Helper::replace_vars( $mod, $post );
 		$opengraph->tag( 'article:published_time', $pub );
 		if ( $mod !== $pub ) {
 			$opengraph->tag( 'article:modified_time', $mod );

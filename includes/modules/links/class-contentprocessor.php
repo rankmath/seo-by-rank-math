@@ -149,10 +149,18 @@ class ContentProcessor {
 	 * @return boolean
 	 */
 	private function is_valid_link_type( $link ) {
-		if ( empty( $link ) || '#' === $link[0] ) {
-			return false;
+		$type = false;
+		if ( ! empty( $link ) && '#' !== $link[0] ) {
+			$type = $this->classifier->classify( $link );
 		}
 
-		return $this->classifier->classify( $link );
+		if ( Classifier::TYPE_INTERNAL === $type && preg_match( '/\.(jpg|jpeg|png|gif|bmp|pdf|mp3|zip)$/i', $link ) ) {
+			$type = false;
+		}
+
+		/**
+		 * Filter: 'rank_math/links/link_type' - Allow developers to filter the link type.
+		 */
+		return apply_filters( 'rank_math/links/link_type', $type, $link );
 	}
 }

@@ -71,7 +71,7 @@ $cmb->add_field(
 		'options'           => Helper::choices_robots(),
 		'select_all_button' => false,
 		'dep'               => $dep,
-		'classes'           => 'rank-math-advanced-option',
+		'classes'           => 'rank-math-advanced-option rank-math-robots-data',
 	]
 );
 
@@ -125,10 +125,10 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'      => 'noindex_paginated_pages',
+		'id'      => 'noindex_archive_subpages',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Noindex Paginated Pages', 'rank-math' ),
-		'desc'    => wp_kses_post( __( 'Set this to on to prevent /page/2 and further of any archive to show up in the search results.', 'rank-math' ) ),
+		'name'    => esc_html__( 'Noindex Subpages', 'rank-math' ),
+		'desc'    => esc_html__( 'Prevent all paginated pages from getting indexed by search engines.', 'rank-math' ),
 		'default' => 'off',
 		'classes' => 'rank-math-advanced-option',
 	]
@@ -136,10 +136,10 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'      => 'noindex_archive_subpages',
+		'id'      => 'noindex_paginated_pages',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Noindex Archive Subpages', 'rank-math' ),
-		'desc'    => esc_html__( 'Prevent paginated archive pages from getting indexed by search engines.', 'rank-math' ),
+		'name'    => esc_html__( 'Noindex Paginated Single Pages', 'rank-math' ),
+		'desc'    => esc_html__( 'Prevent paginated pages of single pages and posts to show up in the search results. This also applies for the Blog page.', 'rank-math' ),
 		'default' => 'off',
 		'classes' => 'rank-math-advanced-option',
 	]

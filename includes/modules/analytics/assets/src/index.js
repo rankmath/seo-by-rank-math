@@ -14,6 +14,7 @@ import { createElement, render } from '@wordpress/element'
 import App from './App'
 import { getStore } from './store'
 import './defaultFilters'
+import './helpers'
 
 class Analytics {
 	setup() {

@@ -54,7 +54,7 @@ import boxTabs from '@helpers/boxTabs'
 						return
 					}
 
-					if ( ! window.confirm( rankMath.importConfirm ) ) {
+					if ( ! window.confirm( rankMath.importSettingsConfirm ) ) {
 						event.preventDefault()
 					}
 				} )
@@ -176,12 +176,12 @@ import boxTabs from '@helpers/boxTabs'
 			},
 
 			importPlugin( event ) {
-				if ( ! window.confirm( rankMath.importConfirm ) ) {
+				const button = $( event.currentTarget )
+
+				const selectedPlugin = button.closest( 'form' ).find( '.rank-math-box-tabs > .active-tab' ).text().trim()
+				if ( ! window.confirm( rankMath.importPluginConfirm.replace( '%s', selectedPlugin ) ) ) {
 					return
 				}
-
-				const button = $( event.currentTarget )
-				button.prop( 'disabled', true )
 
 				const actions = $.map(
 					button
@@ -194,13 +194,16 @@ import boxTabs from '@helpers/boxTabs'
 				)
 				if ( 1 > actions.length ) {
 					addNotice(
-						'Select data to import.',
+						rankMath.importPluginSelectAction,
 						'error',
 						$( '.wp-header-end' ),
-						2000
+						5000
 					)
 					return
 				}
+
+				button.prop( 'disabled', true )
+
 				if ( button.data( 'active' ) ) {
 					actions.push( 'deactivate' )
 				}
@@ -301,11 +304,13 @@ import boxTabs from '@helpers/boxTabs'
 			},
 
 			cleanPlugin( event ) {
-				if ( ! window.confirm( rankMath.cleanPluginConfirm ) ) {
+				const button = $( event.currentTarget )
+
+				const selectedPlugin = button.closest( 'form' ).find( '.rank-math-box-tabs > .active-tab' ).text().trim()
+				if ( ! window.confirm( rankMath.cleanPluginConfirm.replace( '%s', selectedPlugin ) ) ) {
 					return
 				}
 
-				const button = $( event.currentTarget )
 				button.prop( 'disabled', true )
 
 				ajax( 'clean_plugin', { pluginSlug: button.data( 'slug' ) } )

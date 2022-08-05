@@ -46,7 +46,7 @@ class Url {
 	}
 
 	/**
-	 * Check whether a url is relative.
+	 * Check if a URL doesn't start with "http" or "//", which means it's relative.
 	 *
 	 * @param string $url URL string to check.
 	 *
@@ -65,7 +65,15 @@ class Url {
 	 * @return bool
 	 */
 	public static function is_external( $url, $domain = false ) {
-		if ( empty( $url ) || '#' === $url[0] || '/' === $url[0] ) { // Link to current page or relative link.
+		if ( empty( $url ) || '#' === $url[0] ) { // Link to current page.
+			return false;
+		}
+
+		if ( self::is_affiliate( $url ) ) {
+			return true;
+		}
+
+		if ( '/' === $url[0] ) { // Link to current page or relative link.
 			return false;
 		}
 
@@ -75,6 +83,27 @@ class Url {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Checks whether a link is an affiliate link.
+	 *
+	 * @param string $url URL string to check. This should be a absolute URL.
+	 *
+	 * @return bool
+	 */
+	public static function is_affiliate( $url ) {
+		if ( empty( $url ) ) {
+			return false;
+		}
+
+		/**
+		 * Filter: 'wp_helpers_is_affiliate_link' - Allows developer to consider a link as affiliate.
+		 *
+		 * @param bool   $value Default false.
+		 * @param string $url URL.
+		 */
+		return apply_filters( 'wp_helpers_is_affiliate_link', false, $url );
 	}
 
 	/**

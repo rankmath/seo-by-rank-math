@@ -136,7 +136,7 @@ const registerDefaultHooks = () => {
 			const { arrayMap = false, arrayProps = {} } = property.map
 			if ( arrayMap ) {
 				forEach( value, ( newValue ) => {
-					property.properties.push( generateValidSchemaByMap( newValue, arrayMap, arrayProps ) )
+					property.properties.push( generateValidSchemaByMap( newValue, arrayMap, arrayProps, isCustom ) )
 				} )
 				return property
 			}

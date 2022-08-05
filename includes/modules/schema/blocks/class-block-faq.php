@@ -10,8 +10,7 @@
 
 namespace RankMath\Schema;
 
-use RankMath\Helper;
-use RankMath\Traits\Hooker;
+use WP_Block_Type_Registry;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,11 +20,45 @@ defined( 'ABSPATH' ) || exit;
 class Block_FAQ extends Block {
 
 	/**
+	 * Block type name.
+	 *
+	 * @var string
+	 */
+	private $block_type = 'rank-math/faq-block';
+
+	/**
+	 * The single instance of the class.
+	 *
+	 * @var Block_FAQ
+	 */
+	protected static $instance = null;
+
+	/**
+	 * Retrieve main Block_FAQ instance.
+	 *
+	 * Ensure only one instance is loaded or can be loaded.
+	 *
+	 * @return Block_FAQ
+	 */
+	public static function get() {
+		if ( is_null( self::$instance ) && ! ( self::$instance instanceof Block_FAQ ) ) {
+			self::$instance = new Block_FAQ();
+		}
+
+		return self::$instance;
+	}
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
+
+		if ( WP_Block_Type_Registry::get_instance()->is_registered( $this->block_type ) ) {
+			return;
+		}
+
 		register_block_type(
-			'rank-math/faq-block',
+			$this->block_type,
 			[
 				'render_callback' => [ $this, 'render' ],
 				'editor_style'    => 'rank-math-block-admin',
@@ -97,6 +130,9 @@ class Block_FAQ extends Block {
 				continue;
 			}
 
+			$question['title']   = do_shortcode( $question['title'] );
+			$question['content'] = do_shortcode( $question['content'] );
+
 			if ( empty( $question['id'] ) ) {
 				$question['id'] = 'rm-faq-' . md5( $question['title'] );
 			}
@@ -116,20 +152,14 @@ class Block_FAQ extends Block {
 	}
 
 	/**
-	 * Render block content
+	 * Render block content.
 	 *
 	 * @param array $attributes Array of atributes.
-	 *
 	 * @return string
 	 */
-	public function render( $attributes ) {
-		// Early bail.
-		if ( ! $this->has_questions( $attributes ) ) {
-			return '';
-		}
-
-		$list_tag = $this->get_list_style( $attributes['listStyle'] );
-		$item_tag = $this->get_list_item_style( $attributes['listStyle'] );
+	public static function markup( $attributes = [] ) {
+		$list_tag = self::get()->get_list_style( $attributes['listStyle'] );
+		$item_tag = self::get()->get_list_item_style( $attributes['listStyle'] );
 		$class    = 'rank-math-block';
 		if ( ! empty( $attributes['className'] ) ) {
 			$class .= ' ' . esc_attr( $attributes['className'] );
@@ -137,7 +167,7 @@ class Block_FAQ extends Block {
 
 		// HTML.
 		$out   = [];
-		$out[] = sprintf( '<div id="rank-math-faq" class="%1$s"%2$s>', $class, $this->get_styles( $attributes ) );
+		$out[] = sprintf( '<div id="rank-math-faq" class="%1$s"%2$s>', $class, self::get()->get_styles( $attributes ) );
 		$out[] = sprintf( '<%1$s class="rank-math-list %2$s">', $list_tag, $attributes['listCssClasses'] );
 
 		// Questions.
@@ -159,12 +189,16 @@ class Block_FAQ extends Block {
 				$question['title']
 			);
 
-			$out[] = sprintf(
-				'<div class="rank-math-answer %1$s">%3$s%2$s</div>',
-				$attributes['contentCssClasses'],
-				wpautop( $question['content'] ),
-				$this->get_image( $question, $attributes['sizeSlug'] )
-			);
+			$out[] = '<div class="rank-math-answer ' . esc_attr( $attributes['contentCssClasses'] ) . '">';
+
+			if ( ! empty( $question['imageUrl'] ) ) {
+				$out[] = '<img src="' . esc_url( $question['imageUrl'] ) . '" />';
+			} else {
+				$out[] = self::get()->get_image( $question, $attributes['sizeSlug'] );
+			}
+
+			$out[] = self::get()->normalize_text( $question['content'], 'faq' );
+			$out[] = '</div>';
 
 			$out[] = sprintf( '</%1$s>', $item_tag );
 		}
@@ -173,6 +207,22 @@ class Block_FAQ extends Block {
 		$out[] = '</div>';
 
 		return join( "\n", $out );
+	}
+
+	/**
+	 * Render block content
+	 *
+	 * @param array $attributes Array of atributes.
+	 *
+	 * @return string
+	 */
+	public function render( $attributes ) {
+		// Early bail.
+		if ( ! $this->has_questions( $attributes ) ) {
+			return '';
+		}
+
+		return self::markup( $attributes );
 	}
 
 	/**

@@ -28,3 +28,52 @@
 
 	 -khtml-user-select: none;
 }
+
+@mixin tooltipicon {
+	font-size: 13px;
+	line-height: 12px;
+
+	display: inline-block;
+
+	width: 12px;
+	height: 12px;
+	margin: 0 5px 0 4px;
+
+	text-align: center;
+
+	color: #fff;
+	border-radius: 50%;
+	background-color: $dark_gray;
+
+	&:hover {
+		background-color: $primary;
+	}
+}
+
+@-webkit-keyframes spin {
+	0%   {-webkit-transform: rotate(0deg)}
+	100% {-webkit-transform: rotate(-360deg)}
+}
+
+@keyframes spin {
+	0%   {-webkit-transform: rotate(0deg)}
+	100% {-webkit-transform: rotate(-360deg)}
+}
+
+@keyframes bounce {
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(-5px);
+	}
+}
+
+@-webkit-keyframes bounce {
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(-5px);
+	}
+}

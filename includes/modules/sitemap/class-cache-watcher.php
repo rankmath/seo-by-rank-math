@@ -48,7 +48,7 @@ class Cache_Watcher {
 	protected static $clear_types = [];
 
 	/**
-	 * Hook methods for invalidation on necessary events.
+	 * The constructor.
 	 */
 	public function __construct() {
 		$this->action( 'save_post', 'save_post' );
@@ -181,7 +181,7 @@ class Cache_Watcher {
 			do_action( 'rank_math/sitemap/hit_index' );
 		}
 
-		Sitemap::ping_search_engines();
+		Sitemap::ping_google();
 	}
 
 	/**
@@ -190,13 +190,14 @@ class Cache_Watcher {
 	 * @return bool
 	 */
 	private function maybe_ping_search_engines() {
-		$ping = false;
+		$ping                  = false;
+		$accessible_post_types = Helper::get_accessible_post_types();
+
 		foreach ( $this->importing_post_types as $post_type ) {
 			wp_cache_delete( 'lastpostmodified:gmt:' . $post_type, 'timeinfo' );
 
-			// Just have the cache deleted for nav_menu_item.
-			if ( 'nav_menu_item' === $post_type ) {
-				continue;
+			if ( in_array( $post_type, $accessible_post_types, true ) ) {
+				$ping = true;
 			}
 		}
 

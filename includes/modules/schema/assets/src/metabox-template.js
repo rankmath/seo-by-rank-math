@@ -19,7 +19,7 @@ import registerDefaultHooks from './defaultFilters'
 import MetaboxModal from '@schema/MetaboxTemplates/MetaboxModal'
 import SelectionModal from '@schema/MetaboxTemplates/Selection'
 
-jQuery( document ).on( 'ready', () => {
+jQuery( () => {
 	const schemaID = Object.keys( rankMath.schemas )
 	const metaID = jQuery( '.rank-math-schema-meta-id' )
 

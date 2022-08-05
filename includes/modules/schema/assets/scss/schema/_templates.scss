@@ -19,32 +19,30 @@
 
         ##{$namespace}-schema-item {
             border-color: $primary;
-            background: lighten($primary,52);
+            background: lighten($primary, 52);
 
             .button {
                 color: #4c6875;
             }
-
-            .#{$namespace}-schema-name i {
-                font-weight: 600;
-            }
         }
 
         > * {
-            margin-bottom: 1rem!important;
+            margin-bottom: 1rem !important;
 
             &:last-child {
-                margin-bottom: 0!important;
+                margin-bottom: 0 !important;
             }
         }
 
         .#{$namespace}-notice {
             margin: 0 0 1rem;
+
             color: $text;
 
             a {
-                border-bottom: 1px dotted;
                 text-decoration: none;
+
+                border-bottom: 1px dotted;
             }
         }
     }
@@ -54,6 +52,11 @@
     }
 
     &-schema-catalog {
+        display: flex;
+
+        flex-flow: row wrap;
+        justify-content: space-between;
+
         ##{$namespace} {
             &-schema-item {
                 &:hover {
@@ -73,10 +76,12 @@
         margin-bottom: 10px;
 
         align-items: center;
+        flex: 0 0 48.5%;
     }
 
     &-schema-item {
         font-size: 14px;
+        font-weight: normal;
 
         position: relative;
 
@@ -99,11 +104,39 @@
         &:focus,
         &.in-use {
             border-color: $primary;
-            background: lighten($primary,52);
+            background: lighten($primary, 52);
         }
 
         &.in-use {
             box-shadow: 0 0 0 1px $primary;
+        }
+
+        &.schema-pro {
+            color: lighten($dark_gray, 8);
+            border-color: $light-gray;
+
+            .button,
+            .button:hover {
+                color: lighten($dark_gray, 8);
+            }
+
+            &:hover {
+                color: $dark_gray;
+                border-color: $gray;
+                background: lighten($light-gray, 8);
+
+                .rank-math-pro-badge {
+                    opacity: 1;
+                }
+            }
+
+            .rank-math-pro-badge {
+                padding: 2px 5px;
+
+                opacity: 0.7;
+
+                vertical-align: 1px;
+            }
         }
 
         input[type='radio'] {
@@ -117,11 +150,11 @@
             flex: 1;
 
             i {
-                font-size: 12px;
+                font-size: 18px;
 
                 margin-right: 8px;
 
-                vertical-align: -1px;
+                vertical-align: -4px;
             }
         }
 
@@ -158,9 +191,9 @@
         text-decoration: none;
 
         color: #6b7278;
-
         border: 0;
         border-left: 1px solid $light_gray;
+        border-radius: 0;
         background: transparent;
 
         &:hover,
@@ -174,7 +207,7 @@
         }
 
         &:first-of-type {
-            border-left: 0!important;
+            border-left: 0 !important;
         }
 
         &:last-child {
@@ -183,13 +216,13 @@
 
         &.#{$namespace} {
             &-edit-schema i {
-                vertical-align: 0;
+                vertical-align: -1px;
             }
 
             &-delete-schema,
             &-delete-group {
                 i {
-                    vertical-align: -1px;
+                    vertical-align: -2px;
                 }
 
                 &:hover {
@@ -205,12 +238,12 @@
         }
 
         i {
-            font-size: 12px;
-            line-height: 1.3;
+            font-size: 15px;
+            line-height: 1;
 
             margin-right: 5px;
 
-            vertical-align: middle;
+            vertical-align: -2px;
         }
 
         // Remove preview button in the free version.
@@ -237,9 +270,9 @@
         box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .15);
 
         .is-link {
-            display: inline-block!important;
-
             line-height: 1.4;
+
+            display: inline-block !important;
 
             padding: 0 12px;
 
@@ -283,17 +316,23 @@
     }
 
     .schema-group--actions .#{$namespace}-inline-confirmation {
-        height: 22px;
         position: relative;
+
         display: none;
 
+        width: 74px;
+        height: 22px;
+
+        border-left: 1px solid $light_gray;
+
         .#{$namespace}-confirm-delete {
+            position: absolute;
             top: -3px;
             right: 0;
         }
 
         > button {
-            margin-top: 2px;
+            margin-top: 1px;
         }
     }
 }
@@ -301,25 +340,26 @@
 // Pro Preview - Custom Schema Image
 .#{$namespace}-custom-schema-wrapper {
     img {
-        opacity: 0.6;
         max-width: 100%;
+
+        opacity: .6;
     }
 }
 
 // Show/Hide Group Action buttons depending on the repeater
 .show-add-property-group > .schema-group > .schema-group-header .#{$namespace}-add-property-group,
 .show-add-property > .schema-group > .schema-group-header > .schema-group--actions {
-    display: inline-block!important;
+    display: inline-block !important;
 }
 
 .show-delete-property-group {
     > div > .schema-group-header div.#{$namespace}-inline-confirmation {
-        display: inline-block!important;
+        display: inline-block !important;
     }
 }
 
 .show-delete-property {
     > div div.#{$namespace}-inline-confirmation button.button {
-        display: inline-block!important;
+        display: inline-block !important;
     }
 }

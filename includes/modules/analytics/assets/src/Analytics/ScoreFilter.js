@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { map, isEmpty } from 'lodash'
-import { withRouter } from 'react-router-dom'
 
 /**
  * WordPress dependencies
@@ -16,9 +15,9 @@ import { withSelect } from '@wordpress/data'
 import getFilterQuery from './getFilterQuery'
 import FilterBlock from '@scShared/FilterBlock'
 import LoaderFilter from '@scShared/LoaderFilter'
-import { isPro } from '../functions'
+import { isPro, withRouter } from '../functions'
 
-const scoreRedirect = ( selection, history ) => {
+const scoreRedirect = ( selection, navigate ) => {
 	if ( ! isPro() ) {
 		return
 	}
@@ -30,10 +29,10 @@ const scoreRedirect = ( selection, history ) => {
 		}
 	} )
 
-	history.push( '/analytics/1' + params )
+	navigate( '/analytics/1' + params )
 }
 
-const ScoreFilter = ( { seoScores, params, history } ) => {
+const ScoreFilter = ( { seoScores, params, navigate } ) => {
 	if ( isEmpty( seoScores ) ) {
 		return (
 			<LoaderFilter className="rank-math-graph-filter rank-math-score-filters" />
@@ -56,7 +55,7 @@ const ScoreFilter = ( { seoScores, params, history } ) => {
 				) }
 				selected={ selected }
 				onClick={ ( selection ) => {
-					scoreRedirect( selection, history )
+					scoreRedirect( selection, navigate )
 				} }
 			/>
 			<FilterBlock
@@ -70,7 +69,7 @@ const ScoreFilter = ( { seoScores, params, history } ) => {
 				) }
 				selected={ selected }
 				onClick={ ( selection ) => {
-					scoreRedirect( selection, history )
+					scoreRedirect( selection, navigate )
 				} }
 			/>
 			<FilterBlock
@@ -84,7 +83,7 @@ const ScoreFilter = ( { seoScores, params, history } ) => {
 				) }
 				selected={ selected }
 				onClick={ ( selection ) => {
-					scoreRedirect( selection, history )
+					scoreRedirect( selection, navigate )
 				} }
 			/>
 			<FilterBlock
@@ -98,7 +97,7 @@ const ScoreFilter = ( { seoScores, params, history } ) => {
 				) }
 				selected={ selected }
 				onClick={ ( selection ) => {
-					scoreRedirect( selection, history )
+					scoreRedirect( selection, navigate )
 				} }
 			/>
 		</div>
@@ -111,7 +110,7 @@ export default withRouter(
 
 		return {
 			params,
-			history: props.history,
+			navigate: props.navigate,
 			seoScores: select( 'rank-math' ).getAnalyticsSummary().optimization,
 		}
 	} )( ScoreFilter )

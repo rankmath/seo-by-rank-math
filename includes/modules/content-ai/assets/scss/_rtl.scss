@@ -1,0 +1,30 @@
+body.rtl {
+	#wpwrap, #rank-math-rm-app-root, #elementor-editor-wrapper {
+		button.rank-math-content-ai {
+			left: 42px;
+			right: auto;
+
+			i {
+				margin-right: 0;
+				margin-left: 5px;
+			}
+		}
+
+		div.rank-math-ca-keywords-wrapper .rank-math-ca-credits-wrapper {
+			.rank-math-ca-credits {
+				right: auto;
+				left: 0;
+				
+				.update-credits {
+					left: auto;
+					right: -22px;
+				}
+			}
+
+			button.rank-math-ca-force-update {
+				left: 1px;
+				right: auto;
+			}
+		}
+	}
+}

@@ -30,7 +30,7 @@ class ACF {
 			return;
 		}
 
-		$this->action( 'rank_math/admin/enqueue_scripts', 'enqueue' );
+		$this->action( 'rank_math/admin/editor_scripts', 'enqueue' );
 	}
 
 	/**

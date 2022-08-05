@@ -110,7 +110,7 @@ class Paper {
 		if ( Post::is_home_static_page() ) {
 			$this->paper->set_object( get_queried_object() );
 		} elseif ( Post::is_simple_page() ) {
-			$post = Post::get( Post::get_simple_page_id() );
+			$post = Post::get( Post::get_page_id() );
 			$this->paper->set_object( $post->get_object() );
 		}
 	}
@@ -329,13 +329,13 @@ class Paper {
 	 * Respect some robots settings.
 	 */
 	private function respect_settings_for_robots() {
-		// Force override to respect the WP settings.
+		// If blog is not public or replytocom is set, then force noindex.
 		if ( 0 === absint( get_option( 'blog_public' ) ) || isset( $_GET['replytocom'] ) ) {
 			$this->robots['index']  = 'noindex';
 			$this->robots['follow'] = 'nofollow';
 		}
 
-		// Noindex for sub-pages.
+		// Force noindex for sub-pages.
 		if ( is_paged() && Helper::get_settings( 'titles.noindex_archive_subpages' ) ) {
 			$this->robots['index'] = 'noindex';
 		}
@@ -391,12 +391,12 @@ class Paper {
 		$this->canonical['canonical_unpaged']     = $canonical_unpaged;
 		$this->canonical['canonical_no_override'] = $canonical;
 
-		// Force canonical links to be absolute, relative is NOT an option.
+		// Force absolute URLs for canonicals.
 		$canonical = Str::is_non_empty( $canonical ) && true === Url::is_relative( $canonical ) ? $this->base_url( $canonical ) : $canonical;
 		$canonical = Str::is_non_empty( $canonical_override ) ? $canonical_override : $canonical;
 
 		/**
-		 * Allow filtering of the canonical URL.
+		 * Filter the canonical URL.
 		 *
 		 * @param string $canonical The canonical URL.
 		 */
@@ -404,9 +404,9 @@ class Paper {
 	}
 
 	/**
-	 * Get canonical paged
+	 * Get the paged version of the canonical URL if needed.
 	 *
-	 * @param string $canonical Canonical URL.
+	 * @param string $canonical The canonical URL.
 	 *
 	 * @return string
 	 */
@@ -433,7 +433,10 @@ class Paper {
 	}
 
 	/**
-	 * Parse the home URL setting to find the base URL for relative URLs.
+	 * Get the base URL for relative URLs by parsing the home URL.
+	 *
+	 * @copyright Copyright (C) 2008-2019, Yoast BV
+	 * The following code is a derivative work of the code from the Yoast (https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 *
 	 * @param  string $path Optional path string.
 	 * @return string
@@ -450,17 +453,16 @@ class Paper {
 	}
 
 	/**
-	 * Simple function to use to pull data from $options.
+	 * Get title or description option from the settings.
+	 * The results will be run through the Helper::replace_vars() function.
 	 *
-	 * All titles pulled from options will be run through the Helper::replace_vars function.
-	 *
-	 * @param string       $id      Name of the page to get the title from the settings for.
-	 * @param object|array $source  Possible object to pull variables from.
+	 * @param string       $id      Name of the option we are looking for.
+	 * @param object|array $object  Object to pass to the replace_vars function.
 	 * @param string       $default Default value if nothing found.
 	 *
 	 * @return string
 	 */
-	public static function get_from_options( $id, $source = [], $default = '' ) {
+	public static function get_from_options( $id, $object = [], $default = '' ) {
 		$value = Helper::get_settings( "titles.$id" );
 
 		// Break loop.
@@ -472,7 +474,7 @@ class Paper {
 			);
 		}
 
-		return Helper::replace_vars( '' !== $value ? $value : $default, $source );
+		return Helper::replace_vars( '' !== $value ? $value : $default, $object );
 	}
 
 	/**
@@ -543,5 +545,13 @@ class Paper {
 		}
 
 		return apply_filters( 'rank_math/paper/auto_generated_description/apply_shortcode', false );
+	}
+
+	/**
+	 * Clears and reinitializes the object.
+	 */
+	public static function reset() {
+		self::$instance = null;
+		return self::get();
 	}
 }

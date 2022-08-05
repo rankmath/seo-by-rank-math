@@ -108,7 +108,11 @@ class Sitemap {
 			$attachments     = array_filter( explode( ',', $product_gallery ) );
 			foreach ( $attachments as $attachment_id ) {
 				$image_src = wp_get_attachment_image_src( $attachment_id, 'full' );
-				$image     = [
+				if ( empty( $image_src ) ) {
+					continue;
+				}
+
+				$image = [
 					'src'   => $this->do_filter( 'sitemap/xml_img_src', $image_src[0], $post_id ),
 					'title' => get_the_title( $attachment_id ),
 					'alt'   => Attachment::get_alt_tag( $attachment_id ),

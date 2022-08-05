@@ -3,187 +3,208 @@
 .button,
 .button-secondary,
 .is-secondary {
-    font-size: 14px;
-    line-height: 38px;
+	font-size: 14px;
+	line-height: 38px;
 
-    height: auto;
-    min-height: 30px;
-    padding: 0 20px;
+	height: auto;
+	min-height: 30px;
+	padding: 0 20px;
 
-    transition: .25s all linear;
+	color: darken($dark_gray, 8);
+	border: 1px solid $dark-gray;
+	border-radius: 3px;
+	background: #f8f9fa;
+	box-shadow: none;
 
-    color: darken($dark_gray, 8);
-    border: 1px solid $dark-gray;
-    border-radius: 3px;
-    background: #f8f9fa;
-    box-shadow: none;
+	&.active {
+		color: darken($dark_gray, 12);
+		border-color: $dark_gray;
+		background: #f8f9fa;
+		box-shadow: inset 0 2px 5px -3px #7f8292;
+	}
 
-    &.active {
-        color: darken($dark_gray, 12);
-        border-color: $dark_gray;
-        background: #f8f9fa;
-        box-shadow: inset 0 2px 5px -3px #7f8292;
-    }
+	&:focus,
+	&:hover {
+		color: $primary;
+		border-color: $primary;
+		background: #f8f9fa;
+	}
 
-    &:focus,
-    &:hover {
-        color: darken($dark_gray, 12);
-        border-color: $primary;
-        background: #f8f9fa;
-    }
+	&:focus {
+		border-color: $primary-border-color;
+		box-shadow: 0 0 0 1px $primary-border-color;
+	}
 
-    &:focus {
-        border-color: $primary-border-color;
-        box-shadow: 0 0 0 1px $primary-border-color;
-    }
+	.dashicons {
+		margin: 0 3px 0 0;
+	}
 
-    .dashicons {
-        margin: 0 3px 0 0;
-    }
-
-    &.disabled {
-        pointer-events: none;
-    }
+	&.disabled {
+		pointer-events: none;
+	}
 }
 
 // Primary Button.
-.button-primary:not(.default),
+.button-primary,
 .is-primary {
-    color: #fff;
-    border-color: $primary;
-    background: $primary;
-    text-shadow: none;
+	color: #fff;
+	border-color: $primary;
+	background: $primary;
+	text-shadow: none;
 
-    &:focus,
-    &:hover {
-        color: #fff;
-        border-color: $primary-hover-border-color;
-        background: $primary-hover;
-    }
+	&:focus,
+	&:hover {
+		color: #fff;
+		border-color: $primary-hover-border-color;
+		background: $primary-hover;
+	}
 
-    &:focus {
-        box-shadow: 0 0 0 1px #fff, 0 0 0 3px $primary-border-color;
-    }
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 3px $primary-border-color;
+	}
 
-    &[disabled] {
-        border-color: $primary-border-color!important;
-        background: $primary!important;
-    }
+	&[disabled] {
+		border-color: $primary-border-color!important;
+		background: $primary!important;
+	}
 }
 
 // Colored buttons.
 .is-blue:not(.default) {
-    border-color: $color-2;
-    background: $color-2;
+	border-color: $color-2;
+	background: $color-2;
 
-    &:hover,
-    &:focus {
-        border-color: darken($color-2, 5);
-        background: darken($color-2, 5);
-    }
+	&:hover,
+	&:focus {
+		border-color: darken($color-2, 5);
+		background: darken($color-2, 5);
+	}
 
-    &:focus {
-        box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-2, 5);
-    }
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-2, 5);
+	}
 }
 
 .is-green:not(.default) {
-    border-color: $color-1;
-    background: $color-1;
+	border-color: $color-1;
+	background: $color-1;
 
-    &:hover,
-    &:focus {
-        border-color: darken( $color-1, 3 );
-        background: darken( $color-1, 3 );
-    }
+	&:hover,
+	&:focus {
+		border-color: darken( $color-1, 3 );
+		background: darken( $color-1, 3 );
+	}
 
-    &:focus {
-        box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-1, 3);
-    }
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-1, 3);
+	}
 }
 
 // Delete Button.
 .button-link-delete {
-    color: $error;
-    border-color: $error;
+	color: $error;
+	border-color: $error;
+	background: transparent;
+
+	&:hover,
+	&:focus {
+		color: #fff;
+		border-color: $error;
+		background: $error;
+		box-shadow: 0 0 0 1px $error;
+	}
 }
 
 // Link Button.
 .button-link,
 .is-link {
-    border: 0;
-    background: transparent;
-    box-shadow: none;
+	border: 0;
+	background: transparent;
+	box-shadow: none;
 }
 
 // Small Button.
 .button-small,
 .is-small {
-    font-size: 12px;
-    line-height: 24px;
-    min-height: 24px;
+	font-size: 12px;
+	line-height: 24px;
 
-    padding: 0 8px;
+	min-height: 24px;
+	padding: 0 8px;
 }
 
 // Large Button.
 .button-xlarge,
 .is-large {
-    font-size: 16px;
-    line-height: 44px;
+	font-size: 16px;
+	line-height: 44px;
 
-    height: 46px;
+	height: 46px;
 }
 
 // Animated Button, used in SW.
 .button-animated {
-    font-size: 24px;
-    line-height: 82px;
+	font-size: 24px;
+	line-height: 82px;
 
-    height: auto;
-    min-height: 30px;
-    padding: 0 40px;
+	height: auto;
+	min-height: 30px;
+	padding: 0 40px;
 
-    transform: perspective(1px) translateZ(0);
-    text-align: center;
+	transform: perspective(1px) translateZ(0);
+	text-align: center;
 
-    border-radius: 82px;
+	border-radius: 82px;
 
-    i {
-        line-height: 85px;
-    }
+	i {
+		line-height: 85px;
+	}
 
-    &:before {
-        content: '';
-        -webkit-animation: hvr-ripple-out 1s linear infinite;
-                animation: hvr-ripple-out 1s linear infinite;
+	&:before {
+		content: '';
+		-webkit-animation: hvr-ripple-out 1s linear infinite;
+				animation: hvr-ripple-out 1s linear infinite;
 
-        border: #bcdbea solid 6px;
-        border-radius: 55px;
+		border: #bcdbea solid 6px;
+		border-radius: 55px;
 
-        @include position(absolute, -6px);
-    }
+		@include position(absolute, -6px);
+	}
+}
+
+.#{$namespace}-help-icon {
+	margin: 0 4px;
+
+	vertical-align: .5px;
+	text-decoration: none;
+
+	color: $gray;
+	box-shadow: none;
+
+	&:hover {
+		color: $primary;
+	}
 }
 
 /* Ripple Out */
 @-webkit-keyframes hvr-ripple-out {
-    100% {
-        opacity: 0;
+	100% {
+		opacity: 0;
 
-        @include position( null, -20px  );
-    }
+		@include position( null, -20px  );
+	}
 }
 @-webkit-keyframes hvr-ripple-out {
-    100% {
-        opacity: 0;
+	100% {
+		opacity: 0;
 
-        @include position( null, -20px  );
-    }
+		@include position( null, -20px  );
+	}
 }
 @keyframes hvr-ripple-out {
-    100% {
-        opacity: 0;
+	100% {
+		opacity: 0;
 
-        @include position( null, -20px  );
-    }
+		@include position( null, -20px  );
+	}
 }

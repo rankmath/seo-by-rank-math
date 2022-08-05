@@ -233,7 +233,7 @@ class Form {
 		$redirection = Redirection::from( $values );
 		if ( false === $redirection->save() ) {
 			Helper::add_notification( __( 'Please add at least one valid source URL.', 'rank-math' ), [ 'type' => 'error' ] );
-			Helper::redirect( Param::post( '_wp_http_referer' ) );
+			Helper::redirect( Param::post( '_wp_http_referer', false ) );
 			exit;
 		}
 
@@ -248,7 +248,6 @@ class Form {
 	 * @return int|boolean
 	 */
 	public function is_editing() {
-
 		if ( 'edit' !== Param::get( 'action' ) ) {
 			return false;
 		}

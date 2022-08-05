@@ -3,8 +3,8 @@
 .#{$namespace}-pro-badge {
 	vertical-align: middle;
 	color: #fff;
-	background: #4CAF50;
-	background: linear-gradient(100deg, #4CAF50 0%, #8baf4c 100%);
+	background: #00af80;
+	background: linear-gradient(335deg, #00af80, #1cb076, #2db06c, #3cb061, #49b156, #56b04a, #63b03d, #6faf2e);
 	font-size: 11px;
 	font-weight: normal;
 	text-transform: uppercase;
@@ -12,8 +12,18 @@
 	border-radius: 3px;
 	margin-left: 5px;
 
+	&.pro {
+		background: linear-gradient(335deg, #008360, #108a5d, #209158, #2f9752, #3f9e4c, #4ea443, #5eaa3a, #6faf2e);
+		color: #fff;
+	}
+
 	&.business {
-		background: #253142;
+		background: linear-gradient(335deg, #854cff, #765fff, #696eff, #5f7cff, #5887ff, #5892ff, #5c9cff, #66a5fa);
+		color: #fff;
+	}
+
+	&.agency {
+		background: linear-gradient(335deg, #253142, #26364c, #263a56, #263f61, #27446b, #274976, #274d81, #28528c);
 		color: #F7D070;
 	}
 

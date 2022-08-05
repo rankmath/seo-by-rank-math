@@ -3,6 +3,7 @@
 $namespace: 'rank-math';
 
 $container_width: 1020px;
+$analytics_container_width: 1200px;
 
 // Primary Pelette
 $primary:   #069de3;
@@ -42,6 +43,16 @@ $color-bad: #f29c96;
 $color-bad-dark: #f0776f;
 $browser: ( "webkit" );
 $all-browser: ( "webkit", "moz", "ms" );
+
+// Elementor's Dark Mode
+$el-text-color: #E0E1E3;
+$el-input-color: #a4afb7;
+$el-placeholder-color: #64666A;
+$el-dark-bg-color: #26292C;
+$el-border-color: #7D7E82;
+$el-light-bg-color: #34383C;
+$el-light-text-color: #c2cbd2;
+$el-btn-secondary-color: #4C4F56;
 
 // Divi's ETBuilder colors
 // NOTE: See `divi/variables` for more vars.

@@ -27,9 +27,8 @@ const replaceMediaUpload = () => MediaUpload
 
 class DiviEditor extends Editor {
 	setup( dataCollector ) {
-		apiFetch.use(
-			apiFetch.createNonceMiddleware( rankMath.restNonce )
-		)
+		apiFetch.use( apiFetch.createRootURLMiddleware( rankMath.api.root ) )
+		apiFetch.use( apiFetch.createNonceMiddleware( rankMath.restNonce ) )
 		this.registerSlots = this.registerSlots.bind( this )
 		addAction( 'rank_math_loaded', 'rank-math', this.registerSlots, 0 )
 		addFilter(

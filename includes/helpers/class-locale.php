@@ -18,19 +18,6 @@ defined( 'ABSPATH' ) || exit;
 class Locale {
 
 	/**
-	 * Returns the user locale for the language to be used in the admin.
-	 *
-	 * @return string The locale.
-	 */
-	public static function get_user_locale() {
-		if ( function_exists( 'get_user_locale' ) ) {
-			return get_user_locale();
-		}
-
-		return get_locale();
-	}
-
-	/**
 	 * Get site language.
 	 *
 	 * @return string

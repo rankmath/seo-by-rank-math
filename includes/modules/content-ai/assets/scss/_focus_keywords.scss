@@ -1,0 +1,171 @@
+#wpwrap,
+#elementor-editor-wrapper,
+#rank-math-rm-app-root {
+	div.rank-math-ca-top-section {
+		display: flex;
+
+		padding: 10px 16px;
+
+		align-items: flex-start;
+		justify-content: space-between;
+
+		button {
+			height: 30px;
+			padding: 0;
+
+			color: $primary;
+
+			i {
+				font-size: 12px;
+
+				display: flex;
+
+				width: auto;
+				margin-right: 5px;
+
+				align-items: center;
+			}
+		}
+
+		.components-select-control {
+			border-radius: 4px;
+
+			select {
+				max-width: 136px;
+				height: 30px;
+				padding-left: 8px;
+
+				color: $dark_gray;
+			}
+
+			.components-input-control__backdrop {
+				border-color: $gray;
+			}
+		}
+
+		.components-base-control__field {
+			margin-bottom: 0;
+		}
+	}
+}
+
+button.rank-math-ca-force-update {
+	position: absolute;
+	z-index: 1;
+	right: 1px;
+	bottom: 27px;
+
+	display: block;
+
+	width: 34px;
+	height: 34px;
+	padding: 0;
+
+	transform: scaleX(-1);
+	text-align: center;
+
+	color: #606060;
+	background: #fff;
+
+	i {
+		font-size: 1rem;
+		line-height: 20px;
+	}
+
+	&.left span {
+		transform: scaleX(-1) translate3d(10%, 0, 0);
+	}
+}
+
+div.rank-math-ca-keywords-wrapper {
+	padding: 10px 16px;
+
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	background-color: lighten($light_gray, 10);
+
+	.rank-math-ca-credits-wrapper {
+		position: relative;
+
+		color: #606060;
+
+		label {
+			font-weight: 600;
+
+			margin-bottom: 35px;
+		}
+
+		.components-base-control__help {
+			color: inherit;
+		}
+
+		.help-text {
+			position: absolute;
+			top: 23px;
+		}
+
+		.rank-math-ca-credits {
+			position: absolute;
+			top: 0;
+			right: 0;
+
+			.update-credits {
+				position: absolute;
+				z-index: inherit;
+				left: -22px;
+
+				display: none;
+
+				margin: 0;
+				padding: 0;
+
+				box-shadow: none;
+
+				i {
+					font-size: 12px;
+
+					display: flex;
+
+					transform: scaleX(-1);
+
+					align-items: center;
+
+					&:before {
+						margin-bottom: 2px;
+						margin-left: 3px;
+					}
+				}
+
+				&.loading i:before {
+					animation: spin 1s infinite linear;
+				}
+			}
+		}
+
+		input {
+			font-size: 1rem;
+			font-weight: 600;
+
+			height: 36px;
+
+			background: #fff;
+		}
+
+		.components-base-control__help {
+			margin-bottom: 0;
+		}
+	}
+
+	button:not(.rank-math-ca-force-update) {
+		margin-top: 7px;
+		padding: 10px 22px;
+
+		&[disabled] {
+			opacity: .5!important;
+		}
+	}
+
+	&:hover .rank-math-ca-credits-wrapper .update-credits {
+		display: inline;
+	}
+}

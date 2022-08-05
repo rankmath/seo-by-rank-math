@@ -46,17 +46,24 @@ class DB {
 				'paged'   => 1,
 				'search'  => '',
 				'ids'     => [],
+				'uri'     => '',
 			]
 		);
+
+		$args = apply_filters( 'rank_math/404_monitor/get_logs_args', $args );
 
 		$table = self::table()->found_rows()->page( $args['paged'] - 1, $args['limit'] );
 
 		if ( ! empty( $args['search'] ) ) {
-			$table->whereLike( 'uri', $args['search'] );
+			$table->whereLike( 'uri', rawurlencode( $args['search'] ) );
 		}
 
 		if ( ! empty( $args['ids'] ) ) {
 			$table->whereIn( 'id', (array) $args['ids'] );
+		}
+
+		if ( ! empty( $args['uri'] ) ) {
+			$table->where( 'uri', $args['uri'] );
 		}
 
 		if ( ! empty( $args['orderby'] ) && in_array( $args['orderby'], [ 'id', 'uri', 'accessed', 'times_accessed' ], true ) ) {

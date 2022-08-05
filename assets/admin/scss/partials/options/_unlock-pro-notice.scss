@@ -1,0 +1,44 @@
+#rank-math-unlock-pro-notice {
+	position: relative;
+
+	display: block;
+
+	box-sizing: border-box;
+	width: 978px;
+	max-width: 100%;
+	margin-top: 15px;
+
+	border: 3px solid #161e28;
+	border-radius: 4px;
+	background: #253142;
+
+	a {
+		display: block;
+
+		padding: 10px 14px;
+
+		text-decoration: none;
+
+		color: #e4e5e7;
+
+		&:focus {
+			box-shadow: none;
+		}
+	}
+
+	p {
+		font-size: 1rem;
+
+		margin: 0;
+
+		span {
+			text-decoration: underline;
+
+			color: #f7d070;
+		}
+	}
+
+	.close-notice {
+		display: none;
+	}
+}

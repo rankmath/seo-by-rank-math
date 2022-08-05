@@ -55,7 +55,6 @@ class Export {
 
 		$items = DB::get_redirections(
 			[
-				'limit'  => 1000,
 				'status' => 'active',
 			]
 		);

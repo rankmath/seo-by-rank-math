@@ -15,7 +15,7 @@ const DEFAULT_STATE = {
 	},
 	hasRedirect:
 		hasRedirection &&
-		( ! isEmpty( get( rankMath.assessor, 'redirection.id', '' ) ) ||
+		( ! isEmpty( get( rankMath.assessor, 'redirection.id', '' ) ) &&
 			! isEmpty( get( rankMath.assessor, 'redirection.url_to', '' ) ) ),
 
 	// Serp Preview.
@@ -40,6 +40,8 @@ const DEFAULT_STATE = {
 	// Divi Frontend Builder.
 	isDiviRankMathModalActive: false,
 	isDiviPageSettingsBarActive: false,
+
+	keywordsData: get( rankMath, 'ca_data', [] ),
 }
 
 /**

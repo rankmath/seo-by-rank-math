@@ -136,7 +136,7 @@ class WordPress {
 			return sanitize_key( $post_type );
 		}
 
-		if ( $post_id = Param::request( 'post_ID' ) ) { // phpcs:ignore
+		if ( $post_id = Param::request( 'post_ID', 0, FILTER_VALIDATE_INT ) ) { // phpcs:ignore
 			return get_post_type( $post_id );
 		}
 

@@ -163,18 +163,29 @@ class Schema_Markup implements Wizard_Step {
 				],
 				'default' => Helper::get_settings( 'titles.pt_' . $post_type . '_default_rich_snippet', ( isset( $richsnp_default[ $post_type ] ) ? $richsnp_default[ $post_type ] : 'product' ) ),
 			];
-
 		}
 
+		$schema_types = Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ), $post_type );
+		$type         = 'select';
+		$attributes   = [ 'data-s2' => '' ];
+		$default      = isset( $richsnp_default[ $post_type ] ) ? $richsnp_default[ $post_type ] : 'off';
+
+		if ( 2 === count( $schema_types ) ) {
+			$type       = 'radio_inline';
+			$attributes = '';
+			$default    = array_key_last( $schema_types );
+		}
+
+		$default = Helper::get_settings( 'titles.pt_' . $post_type . '_default_rich_snippet', $default );
 		return [
 			'id'         => $field_id,
-			'type'       => 'select',
+			'type'       => $type,
 			'name'       => $field_name,
 			'desc'       => esc_html__( 'Default rich snippet selected when creating a new post of this type. ', 'rank-math' ),
-			'options'    => Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ) ),
+			'options'    => $schema_types,
 			'dep'        => [ [ 'rich_snippet', 'on' ] ],
-			'default'    => Helper::get_settings( 'titles.pt_' . $post_type . '_default_rich_snippet', ( isset( $richsnp_default[ $post_type ] ) ? $richsnp_default[ $post_type ] : 'none' ) ),
-			'attributes' => [ 'data-s2' => '' ],
+			'default'    => $default ? $default : 'off',
+			'attributes' => $attributes,
 		];
 	}
 }

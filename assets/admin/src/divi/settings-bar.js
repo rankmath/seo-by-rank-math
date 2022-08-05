@@ -221,11 +221,15 @@ export default {
 		if ( ! select( 'rank-math' ).isDiviRankMathModalActive() ) {
 			return
 		}
+
 		const seoModalSelector = '.rank-math-rm-modal',
-			previewModalSelector = '.components-modal__screen-overlay.rank-math-modal-overlay'
+			previewModalSelector = '.components-modal__screen-overlay.rank-math-modal-overlay',
+			modalToggle = '.rank-math-rm-modal-toggle-button'
+
 		if (
-			! elem.closest( seoModalSelector ) &&
+			! jQuery( elem ).parents( seoModalSelector ) &&
 			! elem.closest( previewModalSelector ) &&
+			! elem.closest( modalToggle ) &&
 			! elem.contains( document.querySelector( seoModalSelector ) )
 		) {
 			dispatch( 'rank-math' ).toggleIsDiviRankMathModalActive( false )

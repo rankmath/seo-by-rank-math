@@ -26,17 +26,17 @@ class Web_Stories {
 	public function __construct() {
 		$this->action( 'web_stories_story_head', 'remove_web_stories_meta_tags', 0 );
 		$this->action( 'web_stories_story_head', 'add_rank_math_tags' );
+		$this->action( 'rank_math/json_ld', 'change_publisher_logo', 99, 2 );
 	}
 
 	/**
 	 * Remove all meta tags added by the Web Stories plugin.
 	 */
 	public function remove_web_stories_meta_tags() {
-		$instance = \Google\Web_Stories\get_plugin_instance()->discovery;
-		remove_action( 'web_stories_story_head', [ $instance, 'print_metadata' ] );
-		remove_action( 'web_stories_story_head', [ $instance, 'print_schemaorg_metadata' ] );
-		remove_action( 'web_stories_story_head', [ $instance, 'print_open_graph_metadata' ] );
-		remove_action( 'web_stories_story_head', [ $instance, 'print_twitter_metadata' ] );
+		add_filter( 'web_stories_enable_metadata', '__return_false' );
+		add_filter( 'web_stories_enable_schemaorg_metadata', '__return_false' );
+		add_filter( 'web_stories_enable_open_graph_metadata', '__return_false' );
+		add_filter( 'web_stories_enable_twitter_metadata', '__return_false' );
 		remove_action( 'web_stories_story_head', 'rel_canonical' );
 	}
 
@@ -44,10 +44,40 @@ class Web_Stories {
 	 * Add Rank Math meta tags.
 	 */
 	public function add_rank_math_tags() {
-		add_filter( 'rank_math/frontend/description', '__return_false' );
-		add_filter( 'rank_math/opengraph/facebook/og_description', '__return_false' );
-		add_filter( 'rank_math/opengraph/twitter/twitter_description', '__return_false' );
-		add_filter( 'rank_math/json_ld/breadcrumbs_enabled', '__return_false' );
 		do_action( 'rank_math/head' );
+	}
+
+	/**
+	 * Change Publisher logo on Web Stories posts.
+	 *
+	 * @param array  $data    Array of JSON-LD data.
+	 * @param JsonLD $json_ld The JsonLD instance.
+	 *
+	 * @return array
+	 */
+	public function change_publisher_logo( $data, $json_ld ) {
+		if ( ! is_singular( 'web-story' ) || ! $json_ld->can_add_global_entities( $data ) || ! isset( $data['publisher'] ) ) {
+			return $data;
+		}
+
+		global $post;
+		$story = new \Google\Web_Stories\Model\Story();
+		$story->load_from_post( $post );
+
+		$url = $story->get_publisher_logo_url();
+		if ( ! $url ) {
+			return $data;
+		}
+
+		$size                      = $story->get_publisher_logo_size();
+		$data['publisher']['logo'] = [
+			'@type'  => 'ImageObject',
+			'@id'    => home_url( '/#logo' ),
+			'url'    => $url,
+			'width'  => $size[0],
+			'height' => $size[1],
+		];
+
+		return $data;
 	}
 }

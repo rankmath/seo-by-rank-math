@@ -1,0 +1,47 @@
+div.rank-math-contentai-tab-content-links {
+    div.rank-math-section-heading {
+        align-items: flex-start;
+        flex-flow: column wrap;
+
+        h2 {
+            font-size: 15px;
+
+            width: 100%;
+            margin-bottom: 10px!important;
+            padding: 0;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    ul {
+        margin-left: 15px;
+
+        list-style: disclosure-closed;
+
+        word-wrap: break-word;
+
+        li {
+            font-weight: normal;
+
+            list-style: disclosure-closed;
+            line-height: 1.4;
+
+            margin-bottom: 7px;
+
+            a {
+                text-decoration: none;
+
+                color: inherit;
+                border-bottom: 1px dotted;
+
+                &:hover,
+                &:focus {
+                    color: $primary;
+                }
+            }
+        }
+    }
+}

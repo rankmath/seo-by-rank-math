@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { List } from '@woocommerce/components'
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
@@ -7,7 +12,6 @@ import { withFilters } from '@wordpress/components'
 /**
  * Internal dependencies
  */
-import List from '@scShared/woocommerce/List'
 import { convertNumbers } from '../functions'
 
 const ManualKeywordTracking = () => {
@@ -103,14 +107,14 @@ const ManualKeywordTracking = () => {
 				<div className="col">
 					<h4>{ __( 'Top Winning Keywords', 'rank-math' ) }</h4>
 					<List
-						className="rank-math-keywords-list keywords-winning"
+						className="rank-math-list rank-math-keywords-list keywords-winning"
 						items={ convertNumbers( winningKeywords ) }
 					/>
 				</div>
 				<div className="col">
 					<h4>{ __( 'Top Losing Keywords', 'rank-math' ) }</h4>
 					<List
-						className="rank-math-keywords-list keywords-losing"
+						className="rank-math-list rank-math-keywords-list keywords-losing"
 						items={ convertNumbers( losingKeywords ) }
 					/>
 				</div>

@@ -15,6 +15,7 @@ namespace RankMath\Sitemap\Providers;
 
 use RankMath\Helper;
 use RankMath\Sitemap\Router;
+use RankMath\Sitemap\Sitemap;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -105,6 +106,7 @@ class Author implements Provider {
 			return $links;
 		}
 
+		Sitemap::maybe_redirect( count( $users ), $max_entries );
 		foreach ( $users as $user ) {
 			$url = $this->get_sitemap_url( $user );
 			if ( ! empty( $url ) ) {

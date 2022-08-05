@@ -46,9 +46,9 @@ class Objects extends Summary {
 	public function get_objects_by_score( $request ) {
 		global $wpdb;
 
-		$orderby = in_array( $request->get_param( 'orderby' ), [ 'title', 'seo_score', 'created' ], true ) ? $request->get_param( 'orderby' ) : 'created';
-		$order   = in_array( $request->get_param( 'order' ), [ 'asc', 'desc' ], true ) ? strtoupper( $request->get_param( 'order' ) ) : 'DESC';
-
+		$orderby   = in_array( $request->get_param( 'orderby' ), [ 'title', 'seo_score', 'created' ], true ) ? $request->get_param( 'orderby' ) : 'created';
+		$order     = in_array( $request->get_param( 'order' ), [ 'asc', 'desc' ], true ) ? strtoupper( $request->get_param( 'order' ) ) : 'DESC';
+		$post_type = sanitize_key( $request->get_param( 'postType' ) );
 		// Construct filters from request parameters.
 		$filters    = [
 			'good'   => $request->get_param( 'good' ),
@@ -82,6 +82,10 @@ class Objects extends Summary {
 		if ( count( $conditions ) > 0 ) {
 			$subwhere = implode( ' OR ', $conditions );
 			$subwhere = " AND ({$subwhere})";
+		}
+
+		if ( $post_type ) {
+			$subwhere = $subwhere . ' AND object_subtype = "' . $post_type . '"';
 		}
 
 		// Get filtered objects data limited by page param.

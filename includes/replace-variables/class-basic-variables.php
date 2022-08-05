@@ -60,6 +60,7 @@ class Basic_Variables extends Cache {
 				'description' => esc_html__( 'Starts at 1 and increments by 1.', 'rank-math' ),
 				'variable'    => 'count(varname)',
 				'example'     => '2',
+				'nocache'     => true,
 			],
 			[ $this, 'get_count' ]
 		);
@@ -71,6 +72,7 @@ class Basic_Variables extends Cache {
 				'description' => esc_html__( 'File Name of the attachment', 'rank-math' ),
 				'variable'    => 'filename',
 				'example'     => 'Sunrise at Maldives',
+				'nocache'     => true,
 			],
 			[ $this, 'get_filename' ]
 		);
@@ -215,7 +217,7 @@ class Basic_Variables extends Cache {
 			[
 				'name'        => esc_html__( 'Organization URL', 'rank-math' ),
 				'description' => esc_html__( 'Organization URL added in Local SEO Settings.', 'rank-math' ),
-				'variable'    => 'org_logo',
+				'variable'    => 'org_url',
 				'example'     => $this->get_org_url(),
 			],
 			[ $this, 'get_org_url' ]

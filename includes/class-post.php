@@ -99,9 +99,9 @@ class Post extends Metadata {
 	 *
 	 * @return int The ID of the page.
 	 */
-	public static function get_simple_page_id() {
+	public static function get_page_id() {
 		/**
-		 * Filter: Allow changing the default page ID. Short-circuit if 3rd party set page ID.
+		 * Filter: Allow changing the page ID before we process anything.
 		 *
 		 * @param unsigned int $page_id The default page ID.
 		 */
@@ -123,9 +123,9 @@ class Post extends Metadata {
 		}
 
 		/**
-		 * Filter: Allow changing the default page ID.
+		 * Filter: Allow changing the page ID.
 		 *
-		 * @param unsigned int $page_id The default page ID.
+		 * @param unsigned int $page_id The page ID.
 		 */
 		return apply_filters( 'rank_math/simple_page_id', 0 );
 	}
@@ -150,7 +150,7 @@ class Post extends Metadata {
 	 * @return bool Whether the current page is a simple page.
 	 */
 	public static function is_simple_page() {
-		return self::get_simple_page_id() > 0;
+		return self::get_page_id() > 0;
 	}
 
 	/**

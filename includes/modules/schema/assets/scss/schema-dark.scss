@@ -1,0 +1,227 @@
+// compileCompressed: ../css/$1.css
+
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/variables';
+
+.#{$namespace}-schema-in-use ##{$namespace}-schema-item {
+    border-color: $el-dark-bg-color;
+    background: $el-dark-bg-color;
+    color: $el-text-color;
+
+    .button {
+        color: $el-light-text-color;
+    }
+}
+
+.#{$namespace}-schema-generator {
+
+    .components-popover__content {
+        border-color: $el-placeholder-color;
+        background: $el-placeholder-color;
+
+        .CalendarMonth {
+            background: $el-placeholder-color;
+
+            &_caption {
+                color: $el-text-color;
+            }
+            
+            &Grid {
+                background: $el-placeholder-color;
+            }
+        }
+        
+        .DayPicker {
+            &__horizontal {
+                background: $el-placeholder-color;
+            }
+
+            &_weekHeader {
+                color: $el-text-color;
+            }
+            
+            &Navigation_button {
+                svg {
+                    fill: $el-text-color;
+                }
+
+                &__default {
+                    &,
+                    &:hover {
+                        background: $el-placeholder-color;
+                        border-color: $el-placeholder-color;
+                    }
+                }
+            }
+        }
+
+        .CalendarDay {
+            &__default {
+                background: transparent;
+                color: $el-text-color;
+
+                &:hover {
+                    background: $el-dark-bg-color;
+                }
+
+                &.CalendarDay__selected {
+                    &,
+                    &:active,
+                    &:hover {
+                        background: $primary;
+                        border-color: $primary;
+                        color: $white;
+                    }
+                }
+            }
+        }
+        
+        .components-button.is-link {
+            color: $el-text-color;
+        }
+    }
+
+    ##{$namespace}-schema-item .#{$namespace}-inline-confirmation {
+        border-color: $el-border-color;
+    }
+
+    .#{$namespace}-schema-tab-content-schemaBuilder .schema-builder .#{$namespace}-confirm-delete {
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .#{$namespace}-schema-tabs .components-panel__body .schema-group--actions .button {
+        color: $el-text-color;
+
+        &,
+        &:hover {
+            border-color: $el-border-color;
+        }
+    }
+
+    .components-modal__content .is-secondary {
+        color: $el-text-color;
+        background: $el-placeholder-color;
+        border-color: $el-placeholder-color;
+        transition: none;
+
+        &:hover,
+        &:focus {
+            outline: none;
+            box-shadow: none;
+            color: $el-text-color;
+            border-color: $el-btn-secondary-color;
+            background-color: $el-btn-secondary-color;
+        }
+    }
+
+    .schema-builder {
+        .schema-property--header button.button.is-secondary {
+            color: $el-text-color;
+            background: $el-placeholder-color;
+            border-color: $el-placeholder-color;
+
+            &:hover,
+            &:focus {
+                color: $el-text-color;
+                border-color: $el-btn-secondary-color;
+                background-color: $el-btn-secondary-color;
+            }
+        }
+    
+        &-save-as {
+            background: $el-light-bg-color;
+            border-color: $el-light-bg-color;
+        }
+    }
+
+    #tab-panel-2-schemaBuilder-view select {
+        background: $el-light-bg-color;
+        color: $el-light-text-color;
+    }
+
+    .components-notice.is-warning {
+        background: $el-dark-bg-color;
+    } 
+
+    .#{$namespace}-modal .components-modal__content .is-secondary {
+        background: $el-dark-bg-color;
+        color: $el-input-color;
+    }
+
+    .#{$namespace}-tabs {
+        &.#{$namespace}-editor.#{$namespace}-schema-tabs select {
+            background: $el-light-bg-color;
+            color: $el-light-text-color;
+        }
+
+        & > .components-tab-panel__tab-content .components-panel__body button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+            color: $el-text-color;
+            background: $el-placeholder-color;
+            border-color: $el-placeholder-color;
+            cursor: pointer;
+    
+            &:hover,
+            &:focus {
+                color: $el-text-color;
+                border-color: $el-btn-secondary-color;
+                background-color: $el-btn-secondary-color;
+            }
+        }
+    }
+
+    .components-radio-control__input[type=radio] {
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+}
+
+##{$namespace} {
+    &-schema-item {
+        background: $el-light-bg-color;
+        border-color: $el-border-color;
+        color: $el-text-color;
+
+        &:hover,
+        &:focus,
+        &.in-use {
+            background-color: $el-light-bg-color;
+            border-color: $el-border-color;
+            box-shadow: none;
+        }
+
+        .button {
+            color: $el-text-color;
+            border-color: $el-border-color;
+
+            &:hover,
+            &:focus:not(:disabled),
+            &:active {
+                color: $el-text-color;
+            }
+        }
+    }
+}
+
+.#{$namespace}-schema-catalog {
+    ##{$namespace}-schema-item {
+        &:hover {
+            color: $el-text-color;
+            background: $el-dark-bg-color;
+            border-color: $el-border-color;
+        }
+    }
+} 
+
+.#{$namespace}-schema-filter {
+    .#{$namespace}-schema-search input {
+        &:focus {
+            box-shadow: none;
+            border-color: transparent;
+        }
+    }
+}
+

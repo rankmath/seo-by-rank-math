@@ -3,13 +3,17 @@
 .#{$namespace}-wizard-body--requirements {
 	h2 {
 		> .dashicons {
-			opacity: 0.5;
-			width: 18px;
-			height: 18px;
 			font-size: 16px;
 			line-height: 18px;
+
+			width: 18px;
+			height: 18px;
 			padding: 0;
+
 			vertical-align: -2px;
+
+			opacity: .5;
+
 			@extend %header-icon;
 		}
 
@@ -45,8 +49,9 @@
 		}
 
 		th {
-			color: $text;
 			width: auto;
+
+			color: $text;
 
 			.description {
 				font-size: 12px;
@@ -121,6 +126,7 @@
 
 		td {
 			padding: 8px 10px;
+
 			vertical-align: middle;
 
 			&:first-child {
@@ -146,6 +152,7 @@
 
 	.#{$namespace}-collapsible-trigger {
 		margin-left: 10px;
+
 		color: inherit;
 
 		&:hover {
@@ -158,40 +165,47 @@
 		border: none;
 
 		.rank-math-setup-mode {
-			margin: 0 auto;
 			width: 770px;
 			max-width: 100%;
+			margin: 0 auto;
 			margin-top: 3rem;
 
 			.cmb-td {
 				display: block;
+
 				width: 100%;
 
 				ul {
 					display: block;
+
 					width: 100%;
-					border: none;
 					padding: 0;
 
+					border: none;
+
 					li {
-						float: none;
-						width: 100%;
 						position: relative;
 
+						float: none;
+
+						width: 100%;
+
 						input {
-							display: inline-block;
-							margin-top: 3px;
-							margin-right: 16px;
 							position: absolute;
 							top: 20px;
 							left: 20px;
+
+							display: inline-block;
+
+							margin-top: 3px;
+							margin-right: 16px;
 
 							&:checked + label {
 								border-color: $primary;
 								box-shadow: 0 0 0 1px $primary;
 							}
 
-							&:focus+ label {
+							&:focus + label {
 								border-color: $dark_gray;
 							}
 						}
@@ -201,33 +215,39 @@
 						}
 
 						label {
-							display: block;
-							width: 100%;
-							color: $text;
 							font-size: 17px;
 							font-weight: 600;
-							height: auto;
-							white-space: normal;
 							line-height: 1;
 
-							padding: 20px 20px 20px 50px;
-							background: #f8f9fa;
-							border: 1px solid $light_gray;
-							margin: 0 0 16px 0;
-							border-radius: 6px;
-							transition: 0.25s all linear;
+							display: block;
+
 							box-sizing: border-box;
+							width: 100%;
+							height: auto;
+							margin: 0 0 16px 0;
+							padding: 20px 20px 20px 50px;
+
+							transition: .25s all linear;
+							white-space: normal;
+
+							color: $text;
+							border: 1px solid $light_gray;
+							border-radius: 6px;
+							background: #f8f9fa;
 
 							p {
+								font-size: 14px;
+								font-weight: normal;
+								font-style: normal;
+								line-height: 1.5;
+
 								display: block;
 								clear: both;
-								font-weight: normal;
-								font-size: 14px;
-								line-height: 1.5;
-								font-style: normal;
-								padding: 0;
+
 								margin: 0;
+								padding: 0;
 								padding-top: 10px;
+
 								color: $dark_gray;
 
 								strong {
@@ -237,8 +257,8 @@
 						}
 
 						&:last-child {
-							input{
-								opacity: 0.5;
+							input {
+								opacity: .5;
 							}
 
 							label {
@@ -246,34 +266,28 @@
 							}
 
 							.#{$namespace}-mode-title {
-								color: rgba( $text, 0.5 );
+								color: rgba( $text, .5 );
 
 								&:after {
-									content: 'Pro';
-									margin-left: 10px;
-									vertical-align: 1px;
-									opacity: 1;
-									color: #fff;
-									background: #4CAF50;
-									background: linear-gradient(100deg, #4CAF50 0%, #8baf4c 100%);
 									font-size: 11px;
 									font-weight: normal;
-									text-transform: uppercase;
-									padding: 5px 10px;
-									border-radius: 3px;
+
+									margin-left: 10px;
 									margin-left: 5px;
+									padding: 5px 10px;
+
+									content: 'Pro';
+									vertical-align: 2px;
+									text-transform: uppercase;
+
+									opacity: 1;
+									color: #fff;
+									border-radius: 3px;
+									background: #00af80;
+									background: linear-gradient(335deg, #00af80, #1cb076, #2db06c, #3cb061, #49b156, #56b04a, #63b03d, #6faf2e);
 								}
 							}
 						}
-					}
-				}
-
-				.cmb2-metabox-description {
-					strong {
-						padding: 2px 6px;
-						color: #977d30;
-						background: #ffe8a5;
-						border-radius: 3px;
 					}
 				}
 			}
@@ -282,118 +296,8 @@
 
 	&.#{$namespace}-mode-basic {
 		.wizard-navigation a {
-			pointer-events: none;
 			cursor: default;
-		}
-	}
-
-	// Mode
-	.rank-math-ui {
-		border: none;
-
-		.rank-math-setup-mode {
-			margin: 0 auto;
-			width: 770px;
-			max-width: 100%;
-			margin-top: 3rem;
-
-			.cmb-td {
-				display: block;
-				width: 100%;
-
-				ul {
-					display: block;
-					width: 100%;
-					border: none;
-					padding: 0;
-
-					li {
-						float: none;
-						width: 100%;
-						position: relative;
-
-						input {
-							display: inline-block;
-							margin-top: 3px;
-							margin-right: 16px;
-							position: absolute;
-							top: 20px;
-							left: 20px;
-
-							&:checked + label {
-								border-color: $primary;
-								box-shadow: 0 0 0 1px $primary;
-							}
-
-							&:focus+ label {
-								border-color: $dark_gray;
-							}
-						}
-
-						&:hover label {
-							border-color: $dark_gray;
-						}
-
-						label {
-							display: block;
-							width: 100%;
-							color: $text;
-							font-size: 17px;
-							font-weight: 600;
-							height: auto;
-							white-space: normal;
-							line-height: 1;
-
-							padding: 20px 20px 20px 50px;
-							background: #fafafa;
-							border: 1px solid $light_gray;
-							margin-bottom: 16px;
-							border-radius: 6px;
-							transition: 0.25s all linear;
-							box-sizing: border-box;
-
-							p {
-								display: block;
-								clear: both;
-								font-weight: normal;
-								font-size: 14px;
-								line-height: 1.5;
-								font-style: normal;
-								padding: 0;
-								margin: 0;
-								padding-top: 10px;
-								color: $dark_gray;
-							}
-						}
-
-						&:last-child {
-							input{
-								opacity: 0.5;
-							}
-
-							.#{$namespace}-mode-title {
-								color: rgba( $text, 0.5 );
-
-								&:after {
-									content: 'Pro';
-									margin-left: 10px;
-									vertical-align: 1px;
-									opacity: 1;
-									color: #fff;
-									background: #4CAF50;
-									background: linear-gradient(100deg, #4CAF50 0%, #8baf4c 100%);
-									font-size: 11px;
-									font-weight: normal;
-									text-transform: uppercase;
-									padding: 5px 10px;
-									border-radius: 3px;
-									margin-left: 5px;
-								}
-							}
-						}
-					}
-				}
-			}
+			pointer-events: none;
 		}
 	}
 }

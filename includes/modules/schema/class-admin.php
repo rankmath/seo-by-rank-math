@@ -40,18 +40,18 @@ class Admin extends Base {
 		parent::__construct();
 
 		$this->action( 'cmb2_admin_init', 'add_kb_links', 50 );
-		$this->action( 'rank_math/admin/enqueue_scripts', 'enqueue' );
-		$this->action( 'rank_math/post/column/seo_details', 'display_schema_type' );
-		$this->action( 'elementor/editor/before_enqueue_scripts', 'elementor_enqueue', 9 );
+		$this->action( 'rank_math/admin/editor_scripts', 'enqueue' );
+		$this->action( 'rank_math/post/column/seo_details', 'display_schema_type', 10, 2 );
 	}
 
 	/**
 	 * Display schema type in the `seo_details` column on the posts.
 	 *
-	 * @param int $post_id The current post ID.
+	 * @param int   $post_id The current post ID.
+	 * @param array $data    SEO data of current post.
 	 */
-	public function display_schema_type( $post_id ) {
-		$schema = absint( get_option( 'page_for_posts' ) ) !== $post_id ? $this->get_schema_types( $post_id ) : 'CollectionPage';
+	public function display_schema_type( $post_id, $data ) {
+		$schema = absint( get_option( 'page_for_posts' ) ) !== $post_id ? $this->get_schema_types( $data, $post_id ) : 'CollectionPage';
 		$schema = ! empty( $schema ) ? $schema : Helper::get_default_schema_type( $post_id, true, true );
 		$schema = $schema ? $schema : esc_html__( 'Off', 'rank-math' );
 		?>
@@ -79,47 +79,13 @@ class Admin extends Base {
 		Helper::add_json( 'schemas', $this->get_schema_data( $cmb->object_id() ) );
 		Helper::add_json( 'customSchemaImage', esc_url( rank_math()->plugin_url() . 'includes/modules/schema/assets/img/custom-schema-builder.jpg' ) );
 
-		$is_gutenberg = Helper::is_block_editor() && \rank_math_is_gutenberg();
-		$is_elementor = Helper::is_elementor_editor();
-
-		if ( ! $is_elementor ) {
-			wp_enqueue_style( 'rank-math-schema', rank_math()->plugin_url() . 'includes/modules/schema/assets/css/schema.css', [ 'wp-components', 'rank-math-post-metabox' ], rank_math()->version );
-			$this->enqueue_translation();
-		}
+		wp_enqueue_style( 'rank-math-schema', rank_math()->plugin_url() . 'includes/modules/schema/assets/css/schema.css', [ 'wp-components', 'rank-math-editor' ], rank_math()->version );
+		$this->enqueue_translation();
 
 		$screen = get_current_screen();
 		if ( 'rank_math_schema' !== $screen->post_type ) {
-			$dep = $is_gutenberg ? [ 'rank-math-gutenberg' ] : [ 'rank-math-metabox' ];
-			wp_enqueue_script( 'rank-math-schema', rank_math()->plugin_url() . 'includes/modules/schema/assets/js/schema-gutenberg.js', $dep, rank_math()->version, true );
+			wp_enqueue_script( 'rank-math-schema', rank_math()->plugin_url() . 'includes/modules/schema/assets/js/schema-gutenberg.js', [ 'rank-math-editor' ], rank_math()->version, true );
 		}
-	}
-
-	/**
-	 * Enqueue Styles and Scripts required for the metabox in Elementor editor.
-	 */
-	public function elementor_enqueue() {
-		if ( ! Helper::has_cap( 'onpage_snippet' ) || Admin_Helper::is_posts_page() ) {
-			return;
-		}
-
-		$deps = [
-			'tagify',
-			'wp-core-data',
-			'wp-components',
-			'wp-block-editor',
-			'wp-element',
-			'wp-data',
-			'wp-api-fetch',
-			'wp-media-utils',
-			'site-health',
-			'rank-math-analyzer',
-			'backbone-marionette',
-			'elementor-common-modules',
-		];
-
-		wp_enqueue_style( 'rank-math-elementor-schema', rank_math()->plugin_url() . 'includes/modules/schema/assets/css/schema.css', [], rank_math()->version );
-		wp_enqueue_script( 'rank-math-schema', rank_math()->plugin_url() . 'includes/modules/schema/assets/js/schema-gutenberg.js', $deps, rank_math()->version, true );
-		$this->enqueue_translation();
 	}
 
 	/**
@@ -162,6 +128,21 @@ class Admin extends Base {
 				'shortcode' => uniqid( 's-' ),
 				'isPrimary' => true,
 			],
+		];
+
+		if ( ! in_array( $default_type, [ 'Article', 'NewsArticle', 'BlogPosting' ], true ) ) {
+			return $schemas;
+		}
+
+		$post_type   = get_post_type( $post_id );
+		$name        = Helper::get_settings( "titles.pt_{$post_type}_default_snippet_name" );
+		$description = Helper::get_settings( "titles.pt_{$post_type}_default_snippet_desc" );
+
+		$schemas['new-9999']['headline']    = $name ? $name : '';
+		$schemas['new-9999']['description'] = $description ? $description : '';
+		$schemas['new-9999']['author']      = [
+			'@type' => 'Person',
+			'name'  => '%name%',
 		];
 
 		return $schemas;
@@ -207,22 +188,56 @@ class Admin extends Base {
 	/**
 	 * Get schema types for current post.
 	 *
-	 * @param int $post_id The current post ID.
+	 * @param array $data    Current post SEO data.
+	 * @param int   $post_id Current post ID.
 	 *
 	 * @return string Comma separated schema types.
 	 */
-	private function get_schema_types( $post_id ) {
-		$schemas = DB::get_schemas( $post_id );
-		if ( empty( $schemas ) ) {
+	private function get_schema_types( $data, $post_id ) {
+		if ( empty( $data ) ) {
 			return false;
 		}
 
 		$types = [];
-		foreach ( $schemas as $schema ) {
-			$types[] = Helper::sanitize_schema_title( $schema['@type'] );
+		foreach ( $data as $key => $value ) {
+			if ( ! Str::starts_with( 'rank_math_schema_', $key ) ) {
+				continue;
+			}
+
+			$schema = maybe_unserialize( $value );
+			if ( empty( $schema['@type'] ) ) {
+				continue;
+			}
+
+			if ( ! is_array( $schema['@type'] ) ) {
+				$types[] = Helper::sanitize_schema_title( $schema['@type'] );
+				continue;
+			}
+
+			$types = array_merge(
+				$types,
+				array_map(
+					function( $type ) {
+						return Helper::sanitize_schema_title( $type );
+					},
+					$schema['@type']
+				)
+			);
 		}
 
-		return implode( ', ', $types );
+		if ( empty( $types ) && Helper::get_default_schema_type( $post_id ) ) {
+			$types[] = ucfirst( Helper::get_default_schema_type( $post_id ) );
+		}
+
+		if ( has_block( 'rank-math/faq-block', $post_id ) ) {
+			$types[] = 'FAQPage';
+		}
+
+		if ( has_block( 'rank-math/howto-block', $post_id ) ) {
+			$types[] = 'HowTo';
+		}
+
+		return empty( $types ) ? false : implode( ', ', $types );
 	}
 
 	/**

@@ -1,0 +1,15 @@
+.#{$namespace}-schema-template-modal {
+    width: 930px;
+    max-height: 580px;
+
+    .#{$namespace}-custom-schema-wrapper {
+        background-size: contain;
+        display: block;
+        height: calc( 100vh - 350px );
+    }
+
+    ##{$namespace}-pro-cta {
+        top: 100px;
+        bottom: auto;
+    }
+}

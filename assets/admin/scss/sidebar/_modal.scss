@@ -1,10 +1,10 @@
 // main: ../sidebar.scss
-.#{$namespace}-modal {
+div.#{$namespace}-modal {
     font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;
 
     overflow-y: scroll;
 
-    width: 640px;
+    width: 665px;
     max-width: 100%;
     height: 94vh;
     max-height: 735px;
@@ -14,6 +14,11 @@
 
     .components-modal__content {
         padding: 0;
+        margin-top: 50px;
+
+        &:before {
+            margin: 0;
+        }
     }
 
     .components-panel__body {

@@ -12,6 +12,9 @@ namespace RankMath\WooCommerce;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
+use RankMath\Helpers\Sitepress;
+use MyThemeShop\Helpers\Param;
+use RankMath\Redirections\Redirection;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -44,7 +47,7 @@ class Product_Redirection {
 	 * @return string|array
 	 */
 	public function pre_redirection( $check, $uri, $full_uri ) {
-		if ( $new_link = $this->get_redirection_url( $uri ) ) { // phpcs:ignore
+		if ( $new_link = $this->get_redirection_url() ) { // phpcs:ignore
 			return [
 				'url_to'      => $new_link,
 				'header_code' => 301,
@@ -58,9 +61,7 @@ class Product_Redirection {
 	 * Redirect product with base to the new link.
 	 */
 	public function redirect() {
-		global $wp;
-
-		if ( $link = $this->get_redirection_url( $wp->request ) ) { // phpcs:ignore
+		if ( $link = $this->get_redirection_url() ) { // phpcs:ignore
 			Helper::redirect( $link, 301 );
 			exit;
 		}
@@ -69,21 +70,20 @@ class Product_Redirection {
 	/**
 	 * Get Product URL.
 	 *
-	 * @param string $uri Current URL.
-	 *
 	 * @return string Modified URL
 	 */
-	private function get_redirection_url( $uri ) {
+	private function get_redirection_url() {
 		if ( ! $this->can_redirect() ) {
 			return false;
 		}
 
+		$url                 = $this->get_source_url();
 		$is_product          = is_product();
 		$permalink_structure = wc_get_permalink_structure();
 		$base                = $is_product ? $permalink_structure['product_base'] : $permalink_structure['category_base'];
 
 		$base     = explode( '/', ltrim( $base, '/' ) );
-		$new_link = $uri;
+		$new_link = $url;
 
 		// Early Bail if new_link length is less then the base.
 		if ( count( explode( '/', $new_link ) ) <= count( $base ) ) {
@@ -94,6 +94,7 @@ class Product_Redirection {
 		if ( $is_product ) {
 			$base[] = 'product';
 			$base[] = 'shop';
+			$new_link = $this->remove_base_from_url( $new_link );
 		}
 
 		foreach ( array_unique( $base ) as $remove ) {
@@ -104,7 +105,88 @@ class Product_Redirection {
 		}
 
 		$new_link = implode( '/', array_map( 'rawurlencode', explode( '/', $new_link ) ) ); // encode everything but slashes.
-		return $new_link === $uri ? false : trailingslashit( home_url( strtolower( $new_link ) ) );
+
+		return $new_link === $this->strip_ignored_parts( $url ) ? false : trailingslashit( home_url( strtolower( $new_link ) ) );
+	}
+
+	/**
+	 * Remove all bases from the product link.
+	 *
+	 * @param  string $link Product link.
+	 * @return string Modified URL
+	 */
+	private function remove_base_from_url( $link ) {
+		if ( is_feed() ) {
+			return $link;
+		}
+
+		if ( Sitepress::get()->is_active() ) {
+			global $sitepress_settings;
+
+			// Early bail if auto-translation is enabled in WPML.
+			if (
+				isset( $sitepress_settings['custom_posts_sync_option'] ) &&
+				isset( $sitepress_settings['custom_posts_sync_option']['product'] ) &&
+				2 === (int) $sitepress_settings['custom_posts_sync_option']['product']
+			) {
+				return $link;
+			}
+		}
+
+		$link = trim( str_replace( Helper::get_home_url(), '', get_permalink() ), '/' );
+
+		return $link;
+	}
+
+	/**
+	 * Get source URL.
+	 *
+	 * @return string
+	 */
+	private function get_source_url() {
+		global $wp;
+		$url = defined( 'TRP_PLUGIN_DIR' ) ? $wp->request : Param::server( 'REQUEST_URI' );
+		$url = str_replace( home_url( '/' ), '', $url );
+		$url = urldecode( $url );
+		$url = trim( Redirection::strip_subdirectory( $url ), '/' );
+
+		$url = explode( '?', $url );
+		$url = trim( $url[0], '/' );
+
+		if ( $this->is_amp_endpoint() ) {
+			$url = \str_replace( '/' . \amp_get_slug(), '', $url );
+		}
+
+		return $url;
+	}
+
+	/**
+	 * Is AMP url.
+	 *
+	 * @return bool
+	 */
+	private function is_amp_endpoint() {
+		return \function_exists( 'is_amp_endpoint' ) && \function_exists( 'amp_is_canonical' ) && is_amp_endpoint() && ! amp_is_canonical();
+	}
+
+	/**
+	 * Remove unneeded parts from the URI.
+	 *
+	 * @param string $uri Original URI.
+	 *
+	 * @return string
+	 */
+	private function strip_ignored_parts( $uri ) {
+		$ignore_url_parts = [
+			'#/comment-page-([0-9]{1,})$#',
+		];
+
+		$ignore_url_parts = $this->do_filter( 'woocommerce/product_redirection_ignore_url_parts', $ignore_url_parts );
+		foreach ( $ignore_url_parts as $pattern ) {
+			$uri = preg_replace( $pattern, '', $uri );
+		}
+
+		return implode( '/', array_map( 'rawurlencode', explode( '/', $uri ) ) );
 	}
 
 	/**

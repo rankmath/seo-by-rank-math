@@ -44,8 +44,8 @@ class Sitemap {
 		$this->index->hooks();
 		new Redirect_Core_Sitemaps();
 
-		add_action( 'rank_math/sitemap/hit_index', [ __CLASS__, 'hit_sitemap_index' ] );
-		add_action( 'rank_math/sitemap/ping_search_engines', [ __CLASS__, 'ping_search_engines' ] );
+		add_action( 'rank_math/sitemap/hit_index', [ __CLASS__, 'hit_index' ] );
+		add_action( 'rank_math/sitemap/ping_search_engines', [ __CLASS__, 'ping_google' ] );
 
 		$this->filter( 'rank_math/admin/notice/new_post_type', 'new_post_type_notice', 10, 2 );
 
@@ -138,19 +138,18 @@ class Sitemap {
 	}
 
 	/**
-	 * Make a request for the sitemap index so as to cache it before the arrival of the search engines.
+	 * Hit sitemap index to pre-generate the cache.
 	 */
-	public static function hit_sitemap_index() {
+	public static function hit_index() {
 		wp_remote_get( Router::get_base_url( 'sitemap_index.xml' ) );
 	}
 
 	/**
-	 * Notify Search Engines of the updated sitemap.
+	 * Ping Google & Bing about sitemap changes.
 	 *
-	 * @param string|null $url Optional URL to make the ping for.
+	 * @param string|null $url Optional sitemap URL. Falls back to sitemap index URL.
 	 */
-	public static function ping_search_engines( $url = null ) {
-
+	public static function ping_google( $url = null ) {
 		if ( ! self::can_ping() ) {
 			return;
 		}
@@ -159,13 +158,7 @@ class Sitemap {
 			$url = rawurlencode( Router::get_base_url( 'sitemap_index.xml' ) );
 		}
 
-		// Ping Google and Bing.
 		wp_remote_get( 'http://www.google.com/webmasters/tools/ping?sitemap=' . $url, [ 'blocking' => false ] );
-
-		if ( Router::get_base_url( 'geo-sitemap.xml' ) !== $url ) {
-			wp_remote_get( 'http://www.google.com/ping?sitemap=' . $url, [ 'blocking' => false ] );
-			wp_remote_get( 'http://www.bing.com/ping?sitemap=' . $url, [ 'blocking' => false ] );
-		}
 	}
 
 	/**
@@ -178,7 +171,6 @@ class Sitemap {
 			return false;
 		}
 
-		// Don't ping if blog is not public.
 		if ( '0' === get_option( 'blog_public' ) ) {
 			return false;
 		}
@@ -225,6 +217,9 @@ class Sitemap {
 	 * @param  string|array $post_types Post type or array of types.
 	 * @param  boolean      $return_all Flag to return array of values.
 	 * @return string|array|false
+	 * 
+	 * @copyright Copyright (C) 2008-2019, Yoast BV
+	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 */
 	public static function get_last_modified_gmt( $post_types, $return_all = false ) {
 		global $wpdb;
@@ -273,7 +268,7 @@ class Sitemap {
 	}
 
 	/**
-	 * If cache is enabled.
+	 * Check if cache is enabled.
 	 *
 	 * @return boolean
 	 */
@@ -284,9 +279,9 @@ class Sitemap {
 		}
 
 		/**
-		 * Filter if XML sitemap transient cache is enabled.
+		 * Filter to enable/disable XML sitemap caching.
 		 *
-		 * @param boolean $unsigned Enable cache or not, defaults to true
+		 * @param boolean $true Enable or disable caching.
 		 */
 		$xml_sitemap_caching = apply_filters( 'rank_math/sitemap/enable_caching', true );
 		return $xml_sitemap_caching;
@@ -316,5 +311,24 @@ class Sitemap {
 		$method = 'post' === $type ? 'is_post_indexable' : 'is_term_indexable';
 
 		return Helper::$method( $object );
+	}
+
+	/**
+	 * Redirect duplicate sitemaps.
+	 *
+	 * @param int $count       Total number of entries.
+	 * @param int $max_entries Entries per sitemap.
+	 */
+	public static function maybe_redirect( $count, $max_entries ) {
+		$current_page = (int) get_query_var( 'sitemap_n' );
+		if ( ! $current_page && $count > $max_entries ) {
+			Helper::redirect( preg_replace( '/\.xml$/', '1.xml', Helper::get_current_page_url() ) );
+			die();
+		}
+
+		if ( $count < $max_entries && $current_page ) {
+			Helper::redirect( preg_replace( '/' . preg_quote( $current_page ) . '\.xml$/', '.xml', Helper::get_current_page_url() ) );
+			die();
+		}
 	}
 }

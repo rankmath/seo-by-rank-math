@@ -10,6 +10,7 @@
 	display: inline-block;
 	line-height: 20px;
 	height: 20px;
+	z-index: 1;
 
 	em {
 		line-height: 20px;
@@ -53,6 +54,17 @@
 			&:after {
 				@include position(absolute, auto null 100% 50%);
 				transform: rotate(180deg) translate3d(50%, 0, 0);
+			}
+		}
+	}
+
+	&.left {
+		span {
+			right: 0%;
+			transform: translate3d(-90%, 0, 0);
+
+			&:after {
+				left: 90%;
 			}
 		}
 	}

@@ -1,0 +1,49 @@
+#indexnow_show_response_codes .dashicons {
+    text-decoration: none;
+}
+
+#indexnow_show_response_codes.active .dashicons:before {
+    content: "\f142";
+}
+
+#indexnow_show_response_codes {
+    margin: 20px 0;
+    display: inline-block;
+}
+
+#indexnow_response_codes th,
+#indexnow_history th {
+    padding: 15px 10px;
+}
+
+#indexnow_clear_history {
+    margin: 20px 0;
+}
+
+#indexnow_history_filters {
+    float: left;
+    margin-top: 32px;
+}
+
+#indexnow_history_filters a.current {
+    font-weight: bold;
+}
+
+#setting-panel-url-submission .cmb2-id-indexnow-urls {
+    padding-top: 0;
+}
+
+#indexnow_clear_history.hidden, #indexnow_history_filters.hidden {
+    display: none;
+}
+
+#indexnow_reset_key,
+#indexnow_check_key {
+    padding-left: 15px;
+    margin-top: 20px;
+}
+
+#indexnow_reset_key .dashicons,
+#indexnow_check_key .dashicons {
+    line-height: 1.8;
+}

@@ -14,19 +14,25 @@
 	header {
 		.button {
 			font-weight: 500;
-
-			@include position( absolute, 1.875rem 1.875rem null null );
+			line-height: 32px;
 
 			color: #fff;
 			border: 0;
 			border-radius: 4px;
 			box-shadow: none;
 
+			@include position( absolute, 1.875rem 1.875rem null null );
+
 			i {
+				font-size: 14px;
 				font-weight: 600;
+
+				display: inline-block;
+
+				margin-top: -4px;
 				margin-right: 5px;
-				font-size: 10px;
-				text-shadow: 1px 0px 0px #fff;
+
+				vertical-align: middle;
 			}
 		}
 	}
@@ -73,6 +79,7 @@
 	form {
 		p {
 			font-size: 1.125rem;
+
 			margin-bottom: 0;
 		}
 
@@ -80,12 +87,24 @@
 			margin-top: 25px;
 		}
 
-		.button-animated {
-			margin: 25px auto 0;
+		.button-connect {
+			font-size: 24px;
+			line-height: 82px;
+
 			display: table;
+
+			height: auto;
+			min-height: 30px;
+			margin: 25px auto 0;
+			padding: 0 40px;
+
+			transform: perspective(1px) translateZ(0);
+			text-align: center;
+
+			border-radius: 82px;
 		}
 	}
 }
 
 // Toggle.
-@import "../cmb2/checkbox";
+@import '../cmb2/checkbox';

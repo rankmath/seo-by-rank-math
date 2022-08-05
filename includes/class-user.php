@@ -59,15 +59,16 @@ class User extends Metadata {
 	 *
 	 * @param string $key  Meta key.
 	 * @param mixed  $user User ID or user object.
+	 * @param string $default Default value to use when metadata does not exists.
 	 * @return mixed
 	 */
-	public static function get_meta( $key, $user = 0 ) {
+	public static function get_meta( $key, $user = 0, $default = '' ) {
 		$user = self::get( $user );
 
 		if ( is_null( $user ) || ! $user->is_found() ) {
-			return '';
+			return $default;
 		}
 
-		return $user->get_metadata( $key );
+		return $user->get_metadata( $key, $default );
 	}
 }

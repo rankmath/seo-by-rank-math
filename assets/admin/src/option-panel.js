@@ -23,8 +23,8 @@ import addNotice from '@helpers/addNotice'
 	$( function() {
 		window.rankMathOptions = {
 			init() {
-				this.misc()
 				this.preview()
+				this.misc()
 				this.scCache()
 				rankMathAdmin.variableInserter()
 				this.searchEngine.init()
@@ -32,6 +32,7 @@ import addNotice from '@helpers/addNotice'
 				this.siteMap()
 				this.robotsEvents()
 				this.proRedirect()
+				this.contentAI()
 			},
 
 			searchEngine: {
@@ -182,6 +183,11 @@ import addNotice from '@helpers/addNotice'
 
 					this.ids.forEach( function( id ) {
 						this.getIndex( id, force )
+						this.indexes[ id ] = $(
+							window.localStorage.getItem(
+								'rank-math-option-' + id + '-index'
+							)
+						)
 					}, this )
 
 					if ( force ) {
@@ -195,11 +201,6 @@ import addNotice from '@helpers/addNotice'
 				getIndex( id, force ) {
 					const self = this
 					if ( ! force ) {
-						self.indexes[ id ] = $(
-							window.localStorage.getItem(
-								'rank-math-option-' + id + '-index'
-							)
-						)
 						return
 					}
 
@@ -235,7 +236,8 @@ import addNotice from '@helpers/addNotice'
 									row.hasClass( 'cmb-type-title' ) ||
 									row.hasClass( 'cmb-type-notice' ) ||
 									row.hasClass( 'rank-math-notice' ) ||
-									row.hasClass( 'rank-math-desc' )
+									row.hasClass( 'rank-math-desc' ) ||
+									row.hasClass( 'rank-math-exclude-from-search' )
 								) {
 									row.remove()
 								}
@@ -257,7 +259,6 @@ import addNotice from '@helpers/addNotice'
 								.html()
 								.replace( /(\r\n\t|\n|\r\t)/gm, '' )
 
-							self.indexes[ id ] = $( tabs )
 							window.localStorage.setItem(
 								'rank-math-option-' + id + '-index',
 								tabs
@@ -462,7 +463,7 @@ import addNotice from '@helpers/addNotice'
 							delay: 250,
 						},
 						width: '100%',
-						minimumInputLength: 3,
+						minimumInputLength: 2,
 					} )
 				}
 
@@ -504,15 +505,13 @@ import addNotice from '@helpers/addNotice'
 				} )
 
 				let saveWarn = false
-				$( window ).on( 'load', function() {
-					$( '.cmb-form' ).on(
-						'change',
-						'input:not(.notrack), textarea:not(.notrack), select:not(.notrack)',
-						function() {
-							saveWarn = true
-						}
-					)
-				} )
+				$( '.cmb-form' ).on(
+					'change',
+					'input:not(.notrack), textarea:not(.notrack), select:not(.notrack)',
+					function() {
+						saveWarn = true
+					}
+				)
 
 				$( window ).on( 'beforeunload', function() {
 					if ( saveWarn ) {
@@ -604,6 +603,15 @@ import addNotice from '@helpers/addNotice'
 					nginxNotice.toggleClass( 'active' )
 					return false
 				} )
+
+				nginxNotice.on( 'click', 'a.sitemap-close-notice', function( e ) {
+					e.preventDefault()
+					ajax( 'remove_nginx_notice', {}, 'GET' )
+						.done( () => {
+							nginxNotice.remove()
+						} )
+					return false
+				} )
 			},
 
 			robotsEvents() {
@@ -647,7 +655,30 @@ import addNotice from '@helpers/addNotice'
 					$this.css( 'cursor', 'pointer' )
 					window.open( url )
 				} )
-			} }
+			},
+
+			contentAI() {
+				const updateCredit = $( '.buy-more-credits .update-credit' )
+				if ( ! updateCredit.length ) {
+					return
+				}
+
+				updateCredit.on( 'click', ( e ) => {
+					e.preventDefault()
+					updateCredit.addClass( 'loading' )
+					ajax( 'get_content_ai_credits' )
+						.done( function( resp ) {
+							if ( resp.error ) {
+								alert( resp.error )
+								return
+							}
+
+							updateCredit.removeClass( 'loading' ).next( 'strong' ).text( resp.credits )
+						} )
+					return false
+				} )
+			},
+		}
 
 		window.rankMathOptions.init()
 	} )

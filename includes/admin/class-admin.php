@@ -36,7 +36,6 @@ class Admin implements Runner {
 		$this->action( 'init', 'flush', 999 );
 		$this->filter( 'user_contactmethods', 'update_user_contactmethods' );
 		$this->action( 'save_post', 'canonical_check_notice' );
-		$this->action( 'wp_dashboard_setup', 'add_dashboard_widgets' );
 		$this->action( 'cmb2_save_options-page_fields', 'update_is_configured_value', 10, 2 );
 
 		// AJAX.
@@ -69,119 +68,6 @@ class Admin implements Runner {
 		$contactmethods['facebook'] = esc_html__( 'Facebook profile URL', 'rank-math' );
 
 		return $contactmethods;
-	}
-
-	/**
-	 * Register dashboard widget.
-	 */
-	public function add_dashboard_widgets() {
-		// Early Bail if action is not registered for the dashboard widget hook.
-		if ( ! has_action( 'rank_math/dashboard/widget' ) ) {
-			return;
-		}
-
-		$icon = '<span class="rank-math-icon"><svg viewBox="0 0 462.03 462.03" xmlns="http://www.w3.org/2000/svg" width="20"><g><path d="m462 234.84-76.17 3.43 13.43 21-127 81.18-126-52.93-146.26 60.97 10.14 24.34 136.1-56.71 128.57 54 138.69-88.61 13.43 21z"></path><path d="m54.1 312.78 92.18-38.41 4.49 1.89v-54.58h-96.67zm210.9-223.57v235.05l7.26 3 89.43-57.05v-181zm-105.44 190.79 96.67 40.62v-165.19h-96.67z"></path></g></svg></span>';
-
-		wp_add_dashboard_widget(
-			'rank_math_dashboard_widget',
-			$icon . esc_html__( 'Rank Math Overview', 'rank-math' ),
-			[ $this, 'render_dashboard_widget' ],
-			null,
-			null,
-			'normal',
-			'high'
-		);
-	}
-
-	/**
-	 * Render dashboard widget.
-	 */
-	public function render_dashboard_widget() {
-		$this->do_action( 'dashboard/widget' );
-
-		$posts = $this->get_feed();
-		?>
-		<h3 class="rank-math-blog-title"><?php esc_html_e( 'Latest Blog Posts from Rank Math', 'rank-math' ); ?></h3>
-		<?php if ( false === $posts ) : ?>
-			<p><?php esc_html_e( 'Error in fetching.', 'rank-math' ); ?></p>
-			<?php
-			return;
-		endif;
-
-		echo '<ul class="rank-math-blog-list">';
-		$is_new = time() - strtotime( $posts[0]['date'] ) < 15 * DAY_IN_SECONDS;
-		$i      = 0;
-
-		foreach ( $posts as $post ) :
-			$i++;
-			?>
-			<li class="rank-math-blog-post">
-				<h4>
-					<?php if ( $is_new ) : ?>
-						<span class="rank-math-new-badge"><?php esc_html_e( 'NEW', 'rank-math' ); ?></span>
-					<?php endif; ?>
-					<a target="_blank" href="<?php echo esc_url( $post['link'] ); ?>?utm_source=Plugin&utm_medium=Dashboard%20Widget%20Post%20<?php echo esc_attr( $i ); ?>&utm_campaign=WP">
-						<?php echo esc_html( $post['title']['rendered'] ); ?>
-					</a>
-				</h4>
-			</li>
-			<?php
-			$is_new = false;
-		endforeach;
-		echo '</ul>';
-		?>
-
-		<div class="rank-math-widget-footer">
-			<a target="_blank" href="https://rankmath.com/blog/?utm_source=Plugin&utm_medium=Dashboard%20Widget%20Blog&utm_campaign=WP">
-				<?php esc_html_e( 'Blog', 'rank-math' ); ?>
-				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
-				<span aria-hidden="true" class="dashicons dashicons-external"></span>
-			</a>
-			<a target="_blank" href="https://rankmath.com/kb/?utm_source=Plugin&utm_medium=Dashboard%20Widget%20Help&utm_campaign=WP">
-				<?php esc_html_e( 'Help', 'rank-math' ); ?>
-				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
-				<span aria-hidden="true" class="dashicons dashicons-external"></span>
-			</a>
-			<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) { ?>
-				<a target="_blank" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Dashboard%20Widget%20PRO&utm_campaign=WP" class="rank-math-widget-go-pro">
-					<?php esc_html_e( 'Go Pro', 'rank-math' ); ?>
-					<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
-					<span aria-hidden="true" class="dashicons dashicons-external"></span>
-				</a>
-			<?php } ?>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Get posts.
-	 */
-	private function get_feed() {
-		$cache_key = 'rank_math_feed_posts';
-		$cache     = get_transient( $cache_key );
-		if ( false !== $cache ) {
-			return $cache;
-		}
-
-		$response = wp_remote_get( 'https://rankmath.com/wp-json/wp/v2/posts?per_page=3' );
-
-		if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
-			set_transient( $cache_key, [], 2 * HOUR_IN_SECONDS );
-
-			return false;
-		}
-
-		$posts = json_decode( wp_remote_retrieve_body( $response ), true );
-
-		if ( empty( $posts ) || ! is_array( $posts ) ) {
-			set_transient( $cache_key, [], 2 * HOUR_IN_SECONDS );
-
-			return false;
-		}
-
-		set_transient( $cache_key, $posts, DAY_IN_SECONDS * 15 );
-
-		return $posts;
 	}
 
 	/**
@@ -266,9 +152,9 @@ class Admin implements Runner {
 			$this->success( $result );
 		}
 
-		$keyword     = Param::get( 'keyword' );
-		$object_id   = Param::get( 'objectID' );
-		$object_type = Param::get( 'objectType' );
+		$keyword     = Param::get( 'keyword', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_BACKTICK );
+		$object_id   = Param::get( 'objectID', 0, FILTER_VALIDATE_INT );
+		$object_type = Param::get( 'objectType', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 		$column_ids  = [
 			'post' => 'ID',
 			'term' => 'term_id',
@@ -397,8 +283,8 @@ class Admin implements Runner {
 			$output .= sprintf(
 				'<div class="suggestion-item">
 					<div class="suggestion-actions">
-						<span class="dashicons dashicons-clipboard suggestion-copy" title="%5$s" data-clipboard-text="%2$s"></span>
-						<span class="dashicons dashicons-admin-links suggestion-insert" title="%6$s" data-url="%2$s" data-text="%7$s"></span>
+						<button class="dashicons dashicons-clipboard suggestion-copy" title="%5$s" data-clipboard-text="%2$s"></button>
+						<button class="dashicons dashicons-admin-links suggestion-insert" title="%6$s" data-url="%2$s" data-text="%7$s"></button>
 					</div>
 					<span class="suggestion-title" data-fk=\'%1$s\'><a target="_blank" href="%2$s" title="%3$s">%4$s</a></span>
 				</div>',
@@ -439,7 +325,7 @@ class Admin implements Runner {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
 			$this->error( esc_html__( 'You are not authorized to perform this action.', 'rank-math' ) );
 		}
-		$plugin = Param::post( 'plugin' );
+		$plugin = Param::post( 'plugin', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 		if ( 'all' !== $plugin ) {
 			deactivate_plugins( $plugin );
 			die( '1' );

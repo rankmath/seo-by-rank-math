@@ -46,6 +46,6 @@ class Admin_Breadcrumbs {
 			$base = __( 'Help', 'rank-math' );
 		}
 		$default = 'rank-math' === Param::get( 'page' ) ? $base : get_admin_page_title();
-		return str_replace( '_', ' ', Param::get( 'view', $default ) );
+		return str_replace( '_', ' ', Param::get( 'view', $default, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_BACKTICK ) );
 	}
 }

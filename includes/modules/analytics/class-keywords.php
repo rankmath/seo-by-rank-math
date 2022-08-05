@@ -53,7 +53,7 @@ class Keywords extends Posts {
 		$keywords = $this->get_recent_keywords();
 		$keywords = wp_list_pluck( $keywords, 'query' );
 		$keywords = array_map( 'esc_sql', $keywords );
-		$keywords = array_map( 'strtolower', $keywords );
+		$keywords = array_map( 'mb_strtolower', $keywords );
 		$per_page = 25;
 
 		$rows = $this->get_analytics_data(
@@ -68,8 +68,11 @@ class Keywords extends Posts {
 				'sub_where' => " AND query IN ('" . join( "', '", $keywords ) . "')",
 			]
 		);
-
-		return apply_filters( 'rank_math/analytics/keywords', $rows );
+		$rows = apply_filters( 'rank_math/analytics/keywords', $rows );
+		if ( empty( $rows ) ) {
+			$rows['response'] = 'No Data';
+		}
+		return $rows;
 	}
 
 	/**

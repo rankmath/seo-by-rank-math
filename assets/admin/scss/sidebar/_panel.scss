@@ -124,30 +124,39 @@
 
 .#{$namespace}-robots-list {
     display: flex;
-
     flex-flow: row wrap;
     justify-content: space-between;
 
     .components-base-control {
         margin-bottom: 5px;
-
         flex: 0 0 55%;
+
+        @at-root #side-sortables & {
+            flex: 0 0 100%;
+        }
 
         &__field {
             margin-bottom: 0;
 
             label {
                 cursor: pointer;
+
+                @at-root #side-sortables & {
+                    display: inline-flex;
+                }
             }
         }
 
         &:nth-child(even) {
             flex: 0 0 44%;
 
+            @at-root #side-sortables & {
+                flex: 0 0 100%;
+            }
+
             .rank-math-tooltip-content {
                 float: right;
-
-                width: 227%;
+                width: 227%!important;
             }
         }
     }
@@ -171,7 +180,7 @@
     }
 
     .rank-math-tooltip-content {
-        width: 182%;
+        width: 182%!important;
     }
 }
 
@@ -185,9 +194,7 @@
 
     label {
         font-weight: 600;
-
         margin-bottom: 8px !important;
-
         color: #191e23;
     }
 }

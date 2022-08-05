@@ -106,12 +106,12 @@ class VariableInserter extends Component {
 
 	toggle() {
 		if ( ! this.state.isOpen ) {
-			document.addEventListener( 'click', this.handleOutsideClick, false )
+			document.addEventListener( 'click', this.handleOutsideClick, true )
 		} else {
 			document.removeEventListener(
 				'click',
 				this.handleOutsideClick,
-				false
+				true
 			)
 		}
 

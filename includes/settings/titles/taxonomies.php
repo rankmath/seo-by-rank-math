@@ -108,6 +108,17 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
+		'id'      => 'tax_' . $taxonomy . '_slack_enhanced_sharing',
+		'type'    => 'toggle',
+		'name'    => esc_html__( 'Slack Enhanced Sharing', 'rank-math' ),
+		'desc'    => esc_html__( 'When the option is enabled and a term from this taxonomy is shared on Slack, additional information will be shown (the total number of items with this term).', 'rank-math' ),
+		'default' => 'on',
+		'classes' => 'rank-math-advanced-option',
+	]
+);
+
+$cmb->add_field(
+	[
 		'id'      => 'tax_' . $taxonomy . '_add_meta_box',
 		'type'    => 'toggle',
 		'name'    => esc_html__( 'Add SEO Controls', 'rank-math' ),

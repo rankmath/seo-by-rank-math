@@ -14,6 +14,7 @@ use RankMath\Helper;
 use RankMath\Paper\Paper;
 use RankMath\Traits\Hooker;
 use RankMath\Traits\Shortcode;
+use MyThemeShop\Helpers\Arr;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -121,7 +122,7 @@ class Shortcodes {
 		: [ 'name', 'email', 'address', 'hours', 'phone', 'map' ];
 
 		if ( ! empty( $args['show'] ) && 'all' !== $args['show'] ) {
-			$allowed = array_intersect( array_map( 'trim', explode( ',', $args['show'] ) ), $allowed );
+			$allowed = array_intersect( Arr::from_string( $args['show'] ), $allowed );
 		}
 
 		return $allowed;
@@ -270,13 +271,16 @@ class Shortcodes {
 	 */
 	private function display_phone() {
 		$phones = Helper::get_settings( 'titles.phone_numbers' );
-		if ( ! isset( $phones[0]['number'] ) ) {
+		if ( empty( $phones ) ) {
 			return;
 		}
 
 		$choices = Helper::choices_phone_types();
-
 		foreach ( $phones as $phone ) :
+			if ( empty( $phone['number'] ) ) {
+				continue;
+			}
+
 			$number = esc_html( $phone['number'] );
 			$label  = isset( $choices[ $phone['type'] ] ) ? $choices[ $phone['type'] ] : ''
 			?>

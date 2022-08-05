@@ -1,0 +1,89 @@
+.rank-math {
+    &-tabs {
+        button.rank-math-content-ai {
+            background-color: transparent !important;
+        }
+
+        .rank-math-ca-keywords-wrapper {
+            background-color: rgba(0, 0, 0, .15);
+
+            .rank-math-ca-credits-wrapper {
+                color: #e0e1e3;
+
+                input {
+                    background-color: rgba(0, 0, 0, .1);
+                }
+
+                .rank-math-ca-force-update {
+                    background: #33363b;
+                }
+            }
+        }
+
+        div.rank-math-contentai-tab-content-questions h3 {
+            color: #e0e1e3;
+            background-color: rgba(0, 0, 0, .15);
+        }
+
+        .rank-math-ca-recommendations {
+            > div {
+                h4,
+                strong,
+                span {
+                    color: #e0e1e3;
+                }
+
+                &.has-children .submenu div h4 {
+                    color: #26292c;
+                }
+            }
+        }
+
+        .rank-math-contentai-tab-content-questions,
+        .rank-math-contentai-tab-content-related-searches {
+            .rank-math-section-heading h2,
+            button i {
+                color: #e0e1e3;
+            }
+
+            button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+                background: #26292c;
+            }
+        }
+    }
+}
+
+div.rank-math-content-ai-wrapper {
+    .rank-math-content-ai-data.loading:after {
+        background-color: rgba( 0, 0, 0, .85 );
+    }
+    .rank-math-ca-keywords-wrapper,
+    .rank-math-content-ai-data h3.rank-math-ca-section-title,
+    .rank-math-ca-recommendations > div,
+    .rank-math-contentai-tabs .components-tab-panel__tabs {
+        border-color: #34383c;
+
+        .rank-math-ca-keywords-wrapper {
+            border-color: transparent;
+            background-color: transparent;
+        }
+
+        &.has-children {
+            .submenu {
+                background-color: #26292c;
+
+                div h4 {
+                    color: #e0e1e3;
+                }
+            }
+
+            &.show .submenu:before {
+                border-color: transparent transparent #26292c transparent;
+            }
+        }
+    }
+
+    .rank-math-ca-score .score-dot {
+        border-color: #404349;
+    }
+}

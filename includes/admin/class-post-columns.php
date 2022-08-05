@@ -15,6 +15,7 @@ use RankMath\Runner;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Param;
+use MyThemeShop\Database\Database;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,6 +25,13 @@ defined( 'ABSPATH' ) || exit;
 class Post_Columns implements Runner {
 
 	use Hooker;
+
+	/**
+	 * SEO data.
+	 *
+	 * @var array
+	 */
+	private $data = [];
 
 	/**
 	 * Register hooks.
@@ -123,10 +131,14 @@ class Post_Columns implements Runner {
 	 */
 	public function add_columns( $columns ) {
 		global $post_type;
-
+		$current_pt = $post_type;
+		if ( ! $post_type && 'inline-save' === Param::post( 'action' ) ) {
+			$post_id    = Param::post( 'post_ID', 0, FILTER_VALIDATE_INT );
+			$current_pt = get_post_type( $post_id );
+		}
 		$columns['rank_math_seo_details'] = esc_html__( 'SEO Details', 'rank-math' );
 
-		if ( Helper::get_settings( 'titles.pt_' . $post_type . '_bulk_editing', true ) ) {
+		if ( Helper::get_settings( 'titles.pt_' . $current_pt . '_bulk_editing', true ) ) {
 			$columns['rank_math_title']       = esc_html__( 'SEO Title', 'rank-math' );
 			$columns['rank_math_description'] = esc_html__( 'SEO Desc', 'rank-math' );
 		}
@@ -179,11 +191,10 @@ class Post_Columns implements Runner {
 	 * @param int $post_id The current post ID.
 	 */
 	public function get_column_title( $post_id ) {
-		$title     = get_post_meta( $post_id, 'rank_math_title', true );
-		$post_type = get_post_type( $post_id );
-
+		$title = ! empty( $this->data[ $post_id ]['rank_math_title'] ) ? $this->data[ $post_id ]['rank_math_title'] : '';
 		if ( ! $title ) {
-			$title = Helper::get_settings( "titles.pt_{$post_type}_title" );
+			$post_type = get_post_type( $post_id );
+			$title     = Helper::get_settings( "titles.pt_{$post_type}_title" );
 		}
 		?>
 		<span class="rank-math-column-display"><?php echo esc_html( $title ); ?></span>
@@ -201,11 +212,10 @@ class Post_Columns implements Runner {
 	 * @param int $post_id The current post ID.
 	 */
 	public function get_column_description( $post_id ) {
-		$post_type   = get_post_type( $post_id );
-		$description = get_post_meta( $post_id, 'rank_math_description', true );
-
+		$description = ! empty( $this->data[ $post_id ]['rank_math_description'] ) ? $this->data[ $post_id ]['rank_math_description'] : '';
 		if ( ! $description ) {
-			$description = Helper::get_settings( "titles.pt_{$post_type}_description" );
+			$post_type   = get_post_type( $post_id );
+			$description = has_excerpt( $post_id ) ? '%excerpt%' : Helper::get_settings( "titles.pt_{$post_type}_description" );
 		}
 		?>
 		<span class="rank-math-column-display"><?php echo esc_html( $description ); ?></span>
@@ -223,25 +233,30 @@ class Post_Columns implements Runner {
 	 * @param int $post_id The current post ID.
 	 */
 	public function get_column_seo_details( $post_id ) {
-		if ( ! Helper::is_post_indexable( $post_id ) ) {
+		if ( empty( $this->data ) ) {
+			$this->get_seo_data();
+		}
+
+		$data = isset( $this->data[ $post_id ] ) ? $this->data[ $post_id ] : [];
+		if ( ! self::is_post_indexable( $post_id ) ) {
 			echo '<span class="rank-math-column-display seo-score no-score "><strong>N/A</strong></span>';
 			echo '<strong>' . esc_html__( 'No Index', 'rank-math' ) . '</strong>';
-			$this->do_action( 'post/column/seo_details', $post_id );
+			$this->do_action( 'post/column/seo_details', $post_id, $data, $this->data );
 			return;
 		}
 
-		$keyword   = get_post_meta( $post_id, 'rank_math_focus_keyword', true );
+		$keyword   = ! empty( $data['rank_math_focus_keyword'] ) ? $data['rank_math_focus_keyword'] : '';
 		$keyword   = explode( ',', $keyword )[0];
-		$is_pillar = get_post_meta( $post_id, 'rank_math_pillar_content', true );
+		$is_pillar = ! empty( $data['rank_math_pillar_content'] ) && 'on' === $data['rank_math_pillar_content'] ? true : false;
 
-		$score = empty( $keyword ) ? false : $this->get_seo_score( $post_id );
+		$score = empty( $keyword ) ? false : $this->get_seo_score( $data );
 		$class = ! $score ? 'no-score' : $this->get_seo_score_class( $score );
 		$score = $score ? $score . ' / 100' : 'N/A';
 
 		?>
 		<span class="rank-math-column-display seo-score <?php echo esc_attr( $class ); ?> <?php echo ! $score ? 'disabled' : ''; ?>">
 			<strong><?php echo esc_html( $score ); ?></strong>
-			<?php if ( 'on' === $is_pillar ) { ?>
+			<?php if ( $is_pillar ) { ?>
 				<img class="is-pillar" src="<?php echo esc_url( rank_math()->plugin_url() . 'assets/admin/img/pillar.svg' ); ?>" alt="<?php esc_html_e( 'Is Pillar', 'rank-math' ); ?>" title="<?php esc_html_e( 'Is Pillar', 'rank-math' ); ?>" width="25" />
 			<?php } ?>
 		</span>
@@ -256,7 +271,7 @@ class Post_Columns implements Runner {
 				<span><?php echo esc_html( $keyword ); ?></span>
 			</span>
 
-			<?php $this->do_action( 'post/column/seo_details', $post_id ); ?>
+			<?php $this->do_action( 'post/column/seo_details', $post_id, $data, $this->data ); ?>
 
 			<div class="rank-math-column-edit">
 				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
@@ -301,14 +316,51 @@ class Post_Columns implements Runner {
 	}
 
 	/**
+	 * Get SEO data.
+	 */
+	private function get_seo_data() {
+		global $wp_query;
+		$post_ids = [];
+
+		if ( $wp_query->posts ) {
+			$post_ids = array_filter(
+				array_map(
+					function( $post ) {
+						return isset( $post->ID ) ? $post->ID : '';
+					},
+					$wp_query->posts
+				)
+			);
+		}
+
+		$post_id = (int) Param::post( 'post_ID' );
+		if ( $post_id ) {
+			$post_ids[] = $post_id;
+		}
+
+		if ( empty( $post_ids ) ) {
+			return false;
+		}
+
+		$results = Database::table( 'postmeta' )->select( [ 'post_id', 'meta_key', 'meta_value' ] )->whereIn( 'post_id', $post_ids )->whereLike( 'meta_key', 'rank_math' )->get( ARRAY_A );
+		if ( empty( $results ) ) {
+			return false;
+		}
+
+		foreach ( $results as $result ) {
+			$this->data[ $result['post_id'] ][ $result['meta_key'] ] = $result['meta_value'];
+		}
+	}
+
+	/**
 	 * Get SEO score.
 	 *
-	 * @param int $post_id Post ID.
+	 * @param array $data SEO data of current post.
 	 *
 	 * @return string
 	 */
-	private function get_seo_score( $post_id ) {
-		if ( ! metadata_exists( 'post', $post_id, 'rank_math_seo_score' ) ) {
+	private function get_seo_score( $data ) {
+		if ( ! isset( $data['rank_math_seo_score'] ) ) {
 			return false;
 		}
 
@@ -316,8 +368,7 @@ class Post_Columns implements Runner {
 			return false;
 		}
 
-		$score = get_post_meta( $post_id, 'rank_math_seo_score', true );
-		return $score ? $score : 0;
+		return $data['rank_math_seo_score'] ? $data['rank_math_seo_score'] : 0;
 	}
 
 	/**
@@ -337,5 +388,19 @@ class Post_Columns implements Runner {
 		}
 
 		return 'bad';
+	}
+
+	/**
+	 * Check post indexable status.
+	 *
+	 * @param int $post_id Post ID.
+	 */
+	public static function is_post_indexable( $post_id ) {
+		$robots = Param::post( 'rank_math_robots', false, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		if ( ! empty( $robots ) ) {
+			return in_array( 'index', $robots, true ) ? true : false;
+		}
+
+		return Helper::is_post_indexable( $post_id );
 	}
 }

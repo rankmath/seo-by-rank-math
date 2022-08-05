@@ -33,7 +33,7 @@ abstract class Base {
 	 * @return integer
 	 */
 	public function create_jobs( $days = 90, $action = 'console' ) {
-		$count    = $this->add_data_pull( $days + 2, $action );
+		$count    = $this->add_data_pull( $days + 3, $action );
 		$time_gap = $this->get_schedule_gap();
 
 		Workflow::add_clear_cache( time() + ( $time_gap * ( $count + 1 ) ) );

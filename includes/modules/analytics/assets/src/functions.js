@@ -2,8 +2,13 @@
  * External dependencies
  */
 import classnames from 'classnames'
-import { get, has, map, isArray } from 'lodash'
-import { Link } from 'react-router-dom'
+import { get, has, map, isArray, kebabCase, startCase, capitalize, isUndefined } from 'lodash'
+import {
+	Link,
+	useLocation,
+	useNavigate,
+	useParams,
+} from 'react-router-dom'
 import {
 	AreaChart,
 	Area,
@@ -15,11 +20,8 @@ import {
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n'
-import { select } from '@wordpress/data'
 import { Fragment } from '@wordpress/element'
-import { Button } from '@wordpress/components'
-import { applyFilters, doAction } from '@wordpress/hooks'
+import { applyFilters } from '@wordpress/hooks'
 import { decodeEntities } from '@wordpress/html-entities'
 
 /**
@@ -32,6 +34,9 @@ import SchemaListing from '@scShared/SchemaListing'
 import ActionListing from '@scShared/ActionListing'
 import KeywordButton from '@scShared/KeywordButton'
 import KeywordTitle from '@scShared/KeywordTitle'
+import KeywordDelete from '@scShared/KeywordDelete'
+import IndexingRow from './URLInspection/IndexingRow'
+import { translateText } from './helpers'
 
 /**
  * Check if PRO version is installed.
@@ -45,7 +50,7 @@ export function isPro() {
 /**
  * Filter out header items.
  *
- * @param {Array} headers Header Items object to be filtered.
+ * @param {Array} headers    Header Items object to be filtered.
  * @param {Array} hiddenKeys Configration object to show/hide specific header items.
  *
  * @return {Array} Filtered Header Items.
@@ -73,7 +78,7 @@ export function Capitalize( str ) {
 /**
  * Get offset of the page.
  *
- * @param {number} page The page number.
+ * @param {number} page    The page number.
  * @param {number} perPage The item count per page.
  *
  * @return {number} Offest of the page.
@@ -108,12 +113,13 @@ function getPostTypeIcons( type ) {
 /**
  * Process Table Rows Data and Render.
  *
- * @param {Array} rows Table Rows Data.
- * @param {Array} columns Table Header Data.
- * @param {number} offset Offset of Rows Data.
- * @param {Array} trackedKeywords Tracked Keywords Data.
+ * @param {Array}  rows            Table Rows Data.
+ * @param {Array}  columns         Table Header Data.
+ * @param {number} offset          Offset of Rows Data.
+ * @param {Array}  trackedKeywords Tracked Keywords Data.
+ * @param {Array}  graphKeywords   Seleected tracked keywords to show in graph.
  */
-export function processRows( rows, columns, offset = 0, trackedKeywords ) {
+export function processRows( rows, columns, offset = 0, trackedKeywords, graphKeywords = [] ) {
 	let counter = 0
 
 	return map( rows, ( row, rowID ) =>
@@ -143,26 +149,27 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 					query={ row.query }
 				/>
 			} else if ( 'sequenceDelete' === column ) {
-				display = <Fragment>
-					{ ++counter + offset }
-					<Button
-						className="button button-secondary button-small add-keyword delete"
-						title={ __( 'Delete from Keyword Manager', 'rank-math' ) }
-						onClick={ () => doAction( 'rank_math_remove_keyword', row.query ) }
-					>
-						<i className="rm-icon rm-icon-trash" />
-					</Button>
-				</Fragment>
+				display = <KeywordDelete
+					sequence={ ++counter + offset }
+					query={ row.query }
+					rowID={ rowID }
+					rows={ rows }
+					graphKeywords={ graphKeywords }
+				/>
 			} else if ( 'title' === column ) {
 				value = value || rowID
-				display = (
-					<h4>
-						<Link to={ '/single/' + get( row, 'object_id', '' ) }>
-							<span>{ decodeEntities( value ) }</span>
-							<small>{ row.page }</small>
-						</Link>
-					</h4>
-				)
+				if ( ! isUndefined( row.index_verdict ) ) {
+					display = <IndexingRow row={ row } />
+				} else {
+					display = (
+						<h4>
+							<Link to={ '/single/' + get( row, 'object_id', '' ) }>
+								<span>{ decodeEntities( value ) }</span>
+								<small>{ row.page }</small>
+							</Link>
+						</h4>
+					)
+				}
 			} else if ( 'query' === column ) {
 				display = <KeywordTitle query={ value } />
 			} else if ( 'seo_score' === column ) {
@@ -257,6 +264,12 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 			} else if ( 'actions' === column ) {
 				display = <ActionListing actions={ value } />
 				value = value.join( ' ' )
+			} else {
+				display = (
+					<span className={ column + ' ' + kebabCase( value ) }>{ capitalize( startCase( translateText( value, column ) ) ) }</span>
+				)
+
+				return applyFilters( 'rank_math_table_column_value', { display, value }, display, value, column )
 			}
 
 			return { display, value }
@@ -267,18 +280,6 @@ export function processRows( rows, columns, offset = 0, trackedKeywords ) {
 export function generateTicks( data ) {
 	const ticks = []
 	const dataLength = data.length
-	const days = select( 'rank-math' ).getDaysRange()
-	const tickCount = {
-		'-7 days': 5,
-		'-15 days': 3,
-		'-30 days': 3,
-		'-3 months': 11,
-		'-6 months': 4,
-		'-1 year': 10,
-	}
-
-	for ( let i = 1; i <= tickCount[ days ]; i++ ) {
-	}
 
 	ticks.push( data[ 0 ].date )
 	ticks.push( data[ dataLength - 1 ].date )
@@ -289,7 +290,7 @@ export function generateTicks( data ) {
 /**
  * Construct URL parameter.
  *
- * @param {Object} filters URL parameter items.
+ * @param {Object}  filters     URL parameter items.
  * @param {boolean} booleanMode Mode to set parameter value as boolean type.
  *
  * @return {string} Constructed URL parameter.
@@ -317,4 +318,20 @@ export function convertNumbers( items ) {
 		item.content = <ItemStat { ...item.position } />
 		return item
 	} )
+}
+
+export function withRouter( Component ) {
+	function ComponentWithRouterProp( props ) {
+		const navigate = useNavigate()
+		const location = useLocation()
+		const params = useParams()
+		props = { ...props, location, navigate, params }
+		return (
+			<Component
+				{ ...props }
+			/>
+		)
+	}
+
+	return ComponentWithRouterProp;
 }

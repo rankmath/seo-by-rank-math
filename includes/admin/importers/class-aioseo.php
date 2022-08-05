@@ -95,6 +95,7 @@ class AIOSEO extends Plugin_Importer {
 		$string = str_replace( '#taxonomy_title', '%term%', $string );
 		$string = str_replace( '#category', '%term%', $string );
 		$string = str_replace( '#author_first_name #author_last_name', '%name%', $string );
+		$string = str_replace( '#current_year', '%currentyear%', $string );
 		$string = str_replace( '#current_date', '%currentdate%', $string );
 		$string = str_replace( '#current_day', '%currentday%', $string );
 		$string = str_replace( '#current_month', '%currentmonth%', $string );

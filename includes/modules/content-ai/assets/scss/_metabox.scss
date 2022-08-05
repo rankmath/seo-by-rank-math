@@ -1,0 +1,49 @@
+#rank_math_metabox_content_ai {
+	.inside {
+		margin: 0;
+		padding: 0;
+
+		.error.inline {
+			display: none;
+		}
+
+		.rank-math-ca-top-section .components-button {
+			visibility: hidden;
+		}
+
+		.components-panel__body {
+			border-top: none;
+
+			.rank-math-ca-top-section,
+			.rank-math-ca-keywords-wrapper,
+			.rank-math-content-ai-data h3.rank-math-ca-section-title,
+			.rank-math-ca-score,
+			.rank-math-ca-recommendations > div,
+			.rank-math-contentai-tabs .components-tab-panel__tabs,
+			.components-panel__body {
+				padding-right: 12px;
+				padding-left: 12px;
+			}
+
+			.rank-math-contentai-tabs {
+				.components-tab-panel__tab-content {
+					max-height: 500px;
+					overflow-y: scroll;
+				}
+
+				.rank-math-section-heading h2 {
+					padding: 0;
+					margin: 0!important;
+				}
+			}
+
+			.rank-math-ca-force-update {
+				bottom: 31px;
+			}
+		}
+	}
+}
+
+.block-editor__container #rank_math_metabox_content_ai {
+	display: none !important;
+}

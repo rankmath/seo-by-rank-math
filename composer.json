@@ -13,10 +13,10 @@
 	],
 	"require": {
 		"cmb2/cmb2": "^2.7",
-		"donatj/phpuseragentparser": "^1.0",
-		"woocommerce/action-scheduler": "^3.2",
-		"a5hleyrich/wp-background-processing": ">=1.0",
-		"mythemeshop/wordpress-helpers": ">=1.0.12"
+		"donatj/phpuseragentparser": "^1.6.1",
+		"woocommerce/action-scheduler": "^3.4.2",
+		"a5hleyrich/wp-background-processing": "^1.0.2",
+		"mythemeshop/wordpress-helpers": "^1.0.18"
 	},
 	"extra": {
         "installer-paths": {

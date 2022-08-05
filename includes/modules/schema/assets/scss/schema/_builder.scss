@@ -315,7 +315,7 @@
                 font-style: normal;
 
                 margin: 0;
-                padding-top: 10px;
+                padding-top: 5px;
 
                 color: $dark_gray;
             }
@@ -366,10 +366,14 @@
 
                 &:hover,
                 &:focus {
+                    box-shadow: none;
+                }
+
+                &.rank-math-delete-group:hover,
+                &.rank-math-delete-group:focus {
                     color: $error;
                     border-color: $error;
                     background: #fff;
-                    box-shadow: none;
                 }
             }
 
@@ -379,7 +383,7 @@
                 i {
                     font-size: 16px;
 
-                    vertical-align: middle;
+                    line-height: 29px;
                 }
 
                 &:hover,
@@ -387,6 +391,16 @@
                     color: $primary;
                     border-color: $primary;
                 }
+            }
+
+            .rank-math-inline-confirmation {
+                width: 42px;
+                position: relative;
+            }
+
+            button.rank-math-delete-group i {
+                font-size: 15px;
+                line-height: 29px;
             }
         }
     }
@@ -415,6 +429,10 @@
         .components-popover {
             &__content {
                 padding: 0;
+
+                &:before {
+                    margin: 0;
+                }
 
                 button.is-secondary {
                     line-height: 26px;

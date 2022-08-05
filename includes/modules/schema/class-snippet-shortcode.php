@@ -67,6 +67,7 @@ class Snippet_Shortcode {
 	 * @return string Shortcode output.
 	 */
 	public function rich_snippet( $atts ) {
+
 		$atts = shortcode_atts(
 			[
 				'id'        => false,
@@ -90,7 +91,9 @@ class Snippet_Shortcode {
 		$schemas = ! empty( $atts['id'] ) ? [ $data['schema'] ] : $data['schema'];
 
 		$html = '';
+
 		foreach ( $schemas as $schema ) {
+
 			$schema = $this->replace_variables( $schema, $post );
 			$schema = $this->do_filter( 'schema/shortcode/filter_attributes', $schema, $atts );
 

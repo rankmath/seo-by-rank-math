@@ -56,9 +56,9 @@ class Admin_Bar_Menu {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
 		$this->has_cap_ajax( 'onpage_general' );
 
-		$what        = Param::post( 'what' );
-		$object_id   = Param::post( 'objectID' );
-		$object_type = Param::post( 'objectType' );
+		$what        = Param::post( 'what', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
+		$object_id   = Param::post( 'objectID', 0, FILTER_VALIDATE_INT );
+		$object_type = Param::post( 'objectType', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 
 		if ( ! $what || ! $object_id || ! $object_type ) {
 			return 0;
@@ -76,7 +76,7 @@ class Admin_Bar_Menu {
 			$robots = array_filter( $robots );
 
 			Arr::add_delete_value( $robots, $what );
-			$robots = array_unique( $robots );
+			$robots = $this->normalize_robots( $what, array_unique( $robots ) );
 
 			$this->update_meta( $object_type, $object_id, 'rank_math_robots', $robots );
 
@@ -127,6 +127,31 @@ class Admin_Bar_Menu {
 	}
 
 	/**
+	 * Normalize robots.
+	 *
+	 * @param string $what   Current admin menu process.
+	 * @param array  $robots Array to normalize.
+	 *
+	 * @return array
+	 */
+	private function normalize_robots( $what, $robots ) {
+		if ( 'noindex' !== $what ) {
+			return $robots;
+		}
+
+		if ( ! in_array( 'noindex', $robots, true ) ) {
+			$robots[] = ! in_array( 'index', $robots, true ) ? 'index' : '';
+			return $robots;
+		}
+
+		if ( false !== ( $key = array_search( 'index', $robots ) ) ) { // @codingStandardsIgnoreLine
+			unset( $robots[ $key ] );
+		}
+
+		return $robots;
+	}
+
+	/**
 	 * Keep original order when uasort() deals with equal "priority" values.
 	 */
 	private function add_order() {
@@ -169,8 +194,8 @@ class Admin_Bar_Menu {
 	 */
 	private function add_page_menu() {
 		$hash = [
-			'add_home_menu'      => is_home(),
-			'add_post_type_menu' => is_singular( Helper::get_accessible_post_types() ),
+			'add_home_menu'      => is_front_page(),
+			'add_post_type_menu' => is_singular( Helper::get_accessible_post_types() ) || is_home(),
 			'add_date_menu'      => is_date(),
 			'add_taxonomy_menu'  => is_archive() && ! is_post_type_archive() && ! is_author(),
 			'add_search_menu'    => is_search(),
@@ -205,12 +230,22 @@ class Admin_Bar_Menu {
 	 */
 	private function add_post_type_menu() {
 		$post_type = get_post_type();
-		$object    = get_post_type_object( $post_type );
+		if ( ! $post_type ) {
+			return;
+		}
+
+		$name = get_post_type_object( $post_type )->labels->name;
+
+		if ( is_home() ) {
+			$post_type = 'page';
+			$name      = esc_html__( 'Pages', 'rank-math' );
+		}
+
 		$this->add_sub_menu(
 			'posttype',
 			[
 				/* translators: Post Type Singular Name */
-				'title'    => sprintf( esc_html__( 'SEO Settings for %s', 'rank-math' ), $object->labels->name ),
+				'title'    => sprintf( esc_html__( 'SEO Settings for %s', 'rank-math' ), $name ),
 				'href'     => Helper::get_admin_url( 'options-titles#setting-panel-post-type-' . $post_type ),
 				'meta'     => [ 'title' => esc_html__( 'Edit default SEO settings for this post type', 'rank-math' ) ],
 				'priority' => 35,
@@ -223,7 +258,8 @@ class Admin_Bar_Menu {
 	 */
 	private function add_taxonomy_menu() {
 		$term = get_queried_object();
-		if ( empty( $term ) ) {
+
+		if ( empty( $term ) || ! ( $term instanceof \WP_Term ) ) {
 			return;
 		}
 

@@ -19,6 +19,8 @@ use RankMath\Helpers\Options;
 use RankMath\Helpers\Taxonomy;
 use RankMath\Helpers\WordPress;
 use RankMath\Helpers\Schema;
+use RankMath\Helpers\Analytics;
+use RankMath\Helpers\DB;
 use RankMath\Replace_Variables\Replacer;
 
 defined( 'ABSPATH' ) || exit;
@@ -28,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Helper {
 
-	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress, Schema;
+	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress, Schema, DB, Analytics;
 
 	/**
 	 * Replace `%variables%` with context-dependent value.
@@ -37,21 +39,17 @@ class Helper {
 	 * @param array  $args    Context object, can be post, taxonomy or term.
 	 * @param array  $exclude Excluded variables won't be replaced.
 	 *
-	 * @copyright Copyright (C) 2008-2019, Yoast BV
-	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
-	 *
 	 * @return string
 	 */
 	public static function replace_vars( $content, $args = [], $exclude = [] ) {
-		$replace = new Replacer();
-		return $replace->replace( $content, $args, $exclude );
+		return ( new Replacer() )->replace( $content, $args, $exclude );
 	}
 
 	/**
-	 * Replace `%variables%` with context-dependent value.
+	 * Replace `%variables%` with context-dependent value in SEO fields.
 	 *
 	 * @param string $content The string containing the %variables%.
-	 * @param array  $post    Context object, can be post, taxonomy or term.
+	 * @param object $post    Context object, can be post, taxonomy or term.
 	 *
 	 * @return string
 	 */
@@ -126,25 +124,20 @@ class Helper {
 	 *
 	 * @param  string $url  The URL to parse.
 	 * @param  string $part The URL part to retrieve.
-	 * @return string The extracted URL part.
 	 *
-	 * @copyright Copyright (C) 2008-2019, Yoast BV
-	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
+	 * @return string The extracted URL part.
 	 */
 	public static function get_url_part( $url, $part ) {
 		$url_parts = wp_parse_url( $url );
 
-		if ( isset( $url_parts[ $part ] ) ) {
-			return $url_parts[ $part ];
-		}
-
-		return '';
+		return $url_parts[ $part ] ?? '';
 	}
 
 	/**
 	 * Get current page URL.
 	 *
 	 * @param  bool $ignore_qs Ignore query string.
+	 *
 	 * @return string
 	 */
 	public static function get_current_page_url( $ignore_qs = false ) {
@@ -163,6 +156,7 @@ class Helper {
 	 * Get module by ID.
 	 *
 	 * @param  string $id ID to get module.
+	 *
 	 * @return object Module class object.
 	 */
 	public static function get_module( $id ) {
@@ -222,8 +216,19 @@ class Helper {
 	 *  - SG CachePress
 	 *  - WPEngine
 	 *  - Varnish
+	 *
+	 * @param string $context Context for cache to clear.
 	 */
-	public static function clear_cache() {
+	public static function clear_cache( $context = '' ) {
+
+		/**
+		 * Filter: 'rank_math/pre_clear_cache' - Allow developers to extend/override cache clearing.
+		 * Pass a truthy value to override the cache clearing.
+		 */
+		if ( apply_filters( 'rank_math/pre_clear_cache', false, $context ) ) {
+			return;
+		}
+
 		// Clean WordPress cache.
 		if ( function_exists( 'wp_cache_clear_cache' ) ) {
 			wp_cache_clear_cache();
@@ -275,8 +280,9 @@ class Helper {
 		wp_remote_request(
 			'http://' . $purgeme,
 			[
-				'method'  => 'PURGE',
-				'headers' => [
+				'method'   => 'PURGE',
+				'blocking' => false,
+				'headers'  => [
 					'host'           => $parsed_url['host'],
 					'X-Purge-Method' => 'default',
 				],
@@ -285,7 +291,7 @@ class Helper {
 	}
 
 	/**
-	 * Is localhost.
+	 * Check if current environment is a localhost.
 	 *
 	 * @return boolean
 	 */

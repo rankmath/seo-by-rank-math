@@ -8,9 +8,12 @@
 	input.cmb2-timepicker,
 	select,
 	textarea {
-		padding: 0.75em 0.6em;
-		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+		padding: .75em .6em;
+
+		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
 		border-color: $dark-gray;
+
 		@include size(100%, 40px);
 
 		&:focus,
@@ -33,6 +36,7 @@
 		margin-top: 0;
 		padding-top: 0;
 		padding-bottom: 0;
+
 		vertical-align: baseline;
 	}
 
@@ -41,6 +45,7 @@
 
 		&[data-autoresize] {
 			overflow: hidden;
+
 			resize: none;
 		}
 	}
@@ -76,25 +81,14 @@
 			.select2-selection {
 				&__rendered {
 					line-height: 18px;
+
 					padding: 0;
 				}
 
 				&__arrow {
 					top: 0;
+
 					height: 40px;
-
-					b {
-						font-family: 'Rank-Math' !important;
-						font-size: 11px;
-						border-color: transparent!important;
-
-						&:after {
-							position: absolute;
-							top: -8px;
-							left: -12px;
-							content: '\ecbf';
-						}
-					}
 				}
 			}
 		}
@@ -102,13 +96,6 @@
 
 	// Open.
 	@at-root .select2-container--default.select2-container--open {
-		.select2-selection--single .select2-selection__arrow b {
-			&:after {
-				top: -4px;
-				content: '\ecc7';
-			}
-		}
-
 		.select2-dropdown,
 		.select2-search__field {
 			border-color: $dark_gray;
@@ -133,8 +120,11 @@
 	// Radio Button
 	.cmb2-radio-list {
 		position: relative;
+
 		display: inline-block;
+
 		padding: 5px 5px 0;
+
 		color: darken($dark_gray, 10);
 		border: 1px solid $gray;
 		border-radius: 4px;
@@ -142,6 +132,7 @@
 
 		li {
 			float: left;
+
 			margin: 0;
 			padding: 0;
 
@@ -159,18 +150,26 @@
 		label {
 			font-weight: 500;
 			line-height: 34px;
+
 			display: inline-block;
+
 			box-sizing: border-box;
 			height: 36px;
 			margin-right: 5px;
 			margin-bottom: 5px;
 			padding: 0 15px;
+
 			white-space: nowrap;
+
 			border: 1px solid $light_gray;
 			border-radius: 4px;
 
-			&:hover {
+			&:hover,
+			&:focus {
 				cursor: pointer;
+
+				color: $primary;
+				border-color: $primary;
 			}
 		}
 
@@ -188,12 +187,16 @@
 	.cmb-row.cmb-type-file {
 		.regular-text {
 			display: inline-block;
+
 			margin-right: 0;
+
 			border-radius: 3px 0 0 3px;
 
 			&:not([type='hidden']) + .cmb2-upload-button {
 				line-height: 38px;
+
 				margin: 0 0 0 -1px;
+
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
 				box-shadow: none;
@@ -210,14 +213,18 @@
 		.img-status .cmb2-remove-file-button {
 			font-size: 0;
 			line-height: 38px;
+
 			top: 16px;
 			right: 1px;
 			left: auto;
+
 			text-align: center;
 			text-indent: 0;
+
 			color: #fff;
 			border: 0;
 			background: none;
+
 			@include size(38px);
 		}
 
@@ -229,6 +236,7 @@
 
 			.cmb2-remove-file-button {
 				font-size: 0;
+
 				background: #fc948b;
 
 				&:before {
@@ -236,13 +244,17 @@
 					font-size: 20px;
 					font-weight: normal;
 					font-style: normal;
+
 					display: inline-block;
+
 					content: '\f335';
-					transition: color 0.1s ease-in 0;
+					transition: color .1s ease-in 0;
 					text-align: center;
 					vertical-align: top;
 					text-decoration: none;
+
 					color: #fff;
+
 					-webkit-font-smoothing: antialiased;
 					-moz-osx-font-smoothing: grayscale;
 				}
@@ -262,6 +274,7 @@
 		.cmb-td {
 			margin: 0;
 			padding: 0;
+
 			border: 0;
 			box-shadow: none;
 		}
@@ -280,6 +293,7 @@
 			.cmb-field-list {
 				> .cmb-row {
 					display: inline-block;
+
 					width: 43%;
 					width: calc(43% - 10px);
 
@@ -294,7 +308,9 @@
 
 				> .cmb-remove-field-row {
 					position: relative;
+
 					width: auto;
+
 					vertical-align: top;
 				}
 			}
@@ -314,6 +330,7 @@
 
 			.cmb2-metabox-description {
 				display: block;
+
 				margin: 4px 0 0;
 				padding: 0;
 			}
@@ -327,6 +344,7 @@
 
 		.cmb2-metabox-title {
 			font-size: 25px;
+
 			margin: 0;
 			padding: 0;
 		}
@@ -337,13 +355,15 @@
 	}
 
 	.cmb-remove-group-row-button {
+		padding: 0 10px;
+
 		color: #a00;
 		border: 0;
 		background: transparent;
 		box-shadow: none;
-		padding: 0 10px;
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			color: #dc3232;
 			background: 0 0;
 			box-shadow: 0 0 0 1px #dc3232;
@@ -366,6 +386,7 @@
 		.cmb-group-title {
 			margin: 0 !important;
 			padding-left: 1.1em !important;
+
 			cursor: pointer;
 		}
 
@@ -402,6 +423,7 @@
 		.cmb-add-row {
 			span {
 				display: block;
+
 				margin: 4px 0 0;
 				padding: 0;
 			}
@@ -411,11 +433,14 @@
 	.cmb-big-labels {
 		.cmb2-checkbox-list {
 			padding: 0;
+
 			@include clearfix();
 
 			li {
 				position: relative;
+
 				float: left;
+
 				box-sizing: border-box;
 				width: 50%;
 				margin: 0 0 15px;
@@ -423,7 +448,9 @@
 
 				label {
 					display: block;
+
 					padding: 10px 12px 10px 40px;
+
 					border: 1px solid $gray;
 					border-radius: 3px;
 					background: #f8f9fa;
@@ -435,10 +462,12 @@
 
 				input {
 					transform: translateY(-50%);
+
 					@include position(absolute, 50% null null 21px);
 
 					&:checked + label {
 						padding-left: 38px;
+
 						background: #f8f9fa;
 					}
 				}

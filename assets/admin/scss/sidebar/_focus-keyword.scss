@@ -27,3 +27,20 @@
 		}
 	}
 }
+
+.#{$namespace}-modal.#{$namespace}-focus-keywords-cta-modal {
+	height: auto;
+
+	##{$namespace}-pro-cta {
+		position: relative;
+
+		.#{$namespace}-cta-box {
+			box-shadow: none;
+			padding: 0 0 1rem 0;
+		}
+	}
+
+	.components-modal__content::before {
+		margin-bottom: 0;
+	}
+}

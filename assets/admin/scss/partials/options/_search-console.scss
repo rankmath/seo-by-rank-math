@@ -1,346 +1,343 @@
 // main: ../../option-panel.scss
 
 %flex {
-    @include flex;
+	@include flex;
 }
 
 // Wizard
 .wizard-content--analytics {
-    .connect-wrap {
-        display: grid;
+	.connect-wrap {
+		display: grid;
 
-        margin-bottom: 4rem;
+		margin-bottom: 4rem;
 
-        place-items: center;
-    }
+		place-items: center;
+	}
 
-    .cmb2-metabox-description {
-        text-align: center;
-    }
+	.cmb2-metabox-description {
+		text-align: center;
+	}
 }
 
 // Options Panel.
 #setting-panel-analyitcs .connect-wrap {
-    margin-bottom: 1rem;
+	margin-bottom: 1rem;
 
-    .button {
-        font-size: 16px;
-        line-height: 40px;
+	.button {
+		font-size: 16px;
+		line-height: 40px;
 
-        padding: 0 20px;
+		padding: 0 20px;
 
-        &:before {
-            display: none;
-        }
-    }
+		&:before {
+			display: none;
+		}
+	}
 }
 
 .disconnect-wrap {
-    margin-bottom: .5rem;
+	margin-bottom: .5rem;
 
-    text-align: right;
+	text-align: right;
 
-    button.button,
-    a.button {
-        line-height: 1.3;
+	button.button,
+	a.button {
+		line-height: 1.3;
 
-        padding: 0;
+		padding: 0;
 
-        text-decoration: none;
+		text-decoration: none;
 
-        color: $error;
-        border-bottom: 1px dotted #fff;
+		color: $error;
+		border-bottom: 1px dotted #fff;
 
-        &:hover,
-        &:focus {
-            color: $error;
-            border-bottom-color: $error;
-            background: transparent;
-            box-shadow: none;
-        }
-    }
+		&:hover,
+		&:focus {
+			color: $error;
+			border-bottom-color: $error;
+			background: transparent;
+			box-shadow: none;
+		}
+	}
 
-    a.button {
-        line-height: 29px;
+	a.button {
+		line-height: 29px;
 
-        margin: 0;
+		margin: 0;
 
-        color: $color-4;
-    }
+		color: $color-4;
+	}
 
-    span {
-        line-height: 30px;
+	span {
+		line-height: 30px;
 
-        margin: 0 8px;
+		margin: 0 8px;
 
-        color: $gray;
-    }
+		color: $gray;
+	}
 }
 
 .#{$namespace}-accordion {
-    margin-bottom: 1rem;
+	margin-bottom: 1rem;
 
-    transition: .25s all ease-in-out;
+	transition: .25s all ease-in-out;
 
-    border: 1px solid $light-gray;
-    border-radius: 6px;
-    background: #fff;
+	border: 1px solid $light-gray;
+	border-radius: 6px;
+	background: #fff;
 
-    &:hover,
-    &:focus {
-        border-color: $primary;
-        box-shadow: 0 0 0 1px $primary;
-    }
+	&:hover,
+	&:focus {
+		border-color: $primary;
+		box-shadow: 0 0 0 1px $primary;
+	}
 
-    .cmb-row {
-        padding: 1rem 0;
+	.cmb-row {
+		padding: 1rem 0;
 
-        border-top: 0!important;
+		border-top: 0!important;
 
-        .cmb-td {
-            width: 100%;
-        }
-    }
+		.cmb-td {
+			width: 100%;
+		}
+	}
 
-    .cmb2-toggle {
-        margin-right: 5px;
-    }
+	.cmb2-toggle {
+		margin-right: 5px;
+	}
 
-    header {
-        line-height: 1;
+	header {
+		line-height: 1;
 
-        padding: 1rem;
+		padding: 1rem;
 
-        cursor: pointer;
+		cursor: pointer;
 
-        border-bottom: 1px solid $light-gray;
+		border-bottom: 1px solid $light-gray;
+		border-radius: 6px 6px 0 0;
+		background: #f8f9fa;
 
-        @extend %flex;
-        justify-content: space-between;
+		@extend %flex;
+		justify-content: space-between;
 
-        h3 {
-            font-size: 1.25rem;
-            line-height: 1;
+		h3 {
+			font-size: 1.25rem;
+			line-height: 1;
 
-            margin: 0;
+			margin: 0;
 
-            &:before {
-                display: inline-block;
+			&:before {
+				display: inline-block;
 
-                width: 14px;
-                height: 14px;
-                margin-right: .825rem;
+				width: 14px;
+				height: 14px;
+				margin-right: .825rem;
 
-                content: '';
+				content: '';
 
-                border-radius: 50%;
-                background: $light-gray;
-            }
-        }
-    }
+				border-radius: 50%;
+				background: $light-gray;
+			}
+		}
+	}
 
-    &.connected {
-        h3:before {
-            background: $color-good;
-        }
-    }
+	&.connected {
+		h3:before {
+			background: $color-good;
+		}
+	}
 
-    &-content {
-        padding: 1rem;
+	&-content {
+		padding: 1rem;
 
-        .cmb-type-select {
-            label {
-                display: block;
+		.cmb-type-select {
+			label {
+				display: block;
 
-                margin-bottom: .5rem;
-            }
+				margin-bottom: .5rem;
+			}
 
-            &:not(.no-flex) {
-                @extend %flex;
+			&:not(.no-flex) {
+				@extend %flex;
 
-                .cmb-row-col {
-                    margin-right: 3%;
+				.cmb-row-col {
+					margin-right: 3%;
 
-                    flex: 0 0 31.3333333%;
+					flex: 0 0 31.3333333%;
 
-                    &:nth-of-type(3),
-                    &:last-of-type {
-                        margin-right: 0;
-                    }
+					&:nth-of-type(3),
+					&:last-of-type {
+						margin-right: 0;
+					}
 
-                    &.create-new-view {
-                        margin-top: 1rem;
+					&.create-new-view {
+						margin-top: 1rem;
 
-                        @extend %flex;
-                        flex: 0 0 100%;
+						@extend %flex;
+						flex: 0 0 100%;
 
-                        > * {
-                            margin-right: .5rem;
-                        }
+						> * {
+							margin-right: .5rem;
+						}
 
-                        label {
-                            flex: 0 0 100%;
-                        }
+						label {
+							flex: 0 0 100%;
+						}
 
-                        input {
-                            width: auto;
-                        }
+						input {
+							width: auto;
+						}
 
-                        input:not(:hover):not(:focus) {
-                            border-color: $gray;
-                        }
-                    }
-                }
-            }
-        }
+						input:not(:hover):not(:focus) {
+							border-color: $gray;
+						}
+					}
+				}
+			}
+		}
 
-        .warning {
-            font-size: 14px;
+		.warning {
+			font-size: 14px;
 
-            margin: 0 0 1rem;
+			margin: 0 0 1rem;
+		}
 
-            strong {
-                color: $color-3;
-            }
+		&.rank-math-analytics-content {
+			.cmb-type-select .cmb-row-col {
+				margin-top: .5rem;
+				margin-bottom: .5rem;
+			}
+		}
 
-            &.yellow strong {
-                color: $color-ok-dark-alt;
-            }
-        }
+		.cmb-td {
+			width: 100%;
+		}
 
-        .country-option {
-            margin-top: 1rem;
-        }
-
-        .cmb-td {
-            width: 100%;
-        }
-
-        .cmb2-metabox-description {
-            text-align: left;
-        }
-    }
+		.cmb2-metabox-description {
+			text-align: left;
+		}
+	}
 }
 
 // Privacy box.
 @import '../../../../../includes/modules/analytics/assets/scss/partials/_privacy-box.scss';
 ##{$namespace}-pro-cta.#{$namespace}-privacy-box {
-    width: 630px;
-    max-width: 100%;
-    margin: 3rem auto 0;
+	width: 630px;
+	max-width: 100%;
+	margin: 3rem auto 0;
 }
 
 .#{$namespace}-tabs-content {
-    ##{$namespace}-pro-cta.#{$namespace}-privacy-box {
-        width: 100%;
-    }
+	##{$namespace}-pro-cta.#{$namespace}-privacy-box {
+		width: 100%;
+	}
 }
 
 .next-fetch {
-    float: left;
+	float: left;
 
-    margin-top: 4px;
+	margin-top: 4px;
 
-    color: $dark-gray;
+	color: $dark-gray;
 }
 
 .cancel-fetch {
-    transition: 0.25s linear all;
+	transition: .25s linear all;
 
-    &:disabled {
-        opacity: 0;
-    }
+	&:disabled {
+		opacity: 0;
+	}
 }
 
 .#{$namespace}-console-db-info {
-    display: inline-block;
+	display: inline-block;
 
-    margin: 8px 8px 0 0;
-    padding: 5px 8px;
+	margin: 8px 8px 0 0;
+	padding: 5px 8px;
 
-    border-radius: 4px;
-    background: #f6f6f6;
+	border-radius: 4px;
+	background: #f6f6f6;
 
-    i {
-        font-size: 12px;
+	i {
+		font-size: 12px;
 
-        margin-right: 3px;
+		margin-right: 3px;
 
-        vertical-align: -1px;
-    }
+		vertical-align: -1px;
+	}
 }
 
 #console_caching_control {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 #console-updating-manually-progress {
-    position: relative;
+	position: relative;
 
-    display: none;
-    overflow: hidden;
+	display: none;
+	overflow: hidden;
 
-    margin: 10px 0;
-    padding: 8px;
+	margin: 10px 0;
+	padding: 8px;
 
-    border-radius: 4px;
-    background: #f6f6f6;
+	border-radius: 4px;
+	background: #f6f6f6;
 
-    .progress {
-        overflow: hidden;
+	.progress {
+		overflow: hidden;
 
-        height: 100%;
-        padding: 8px;
+		height: 100%;
+		padding: 8px;
 
-        transition: width 2s ease-in-out;
-        white-space: nowrap;
+		transition: width 2s ease-in-out;
+		white-space: nowrap;
 
-        color: #fff;
-        border-radius: 3px;
-        background: #008ec2;
+		color: #fff;
+		border-radius: 3px;
+		background: #008ec2;
 
-        @include position( absolute, 0 null null 0 );
-    }
+		@include position( absolute, 0 null null 0 );
+	}
 }
 
-#setting-panel-search-console {
-    .select2-container {
-        min-width: 65%;
-    }
+#setting-panel-analytics {
+	.select2-container {
+		width: 100%!important;
+	}
 }
 
 .cmb2-id-console-authorization-code {
-    &.unauthorized {
-        ~ div {
-            display: none;
-        }
+	&.unauthorized {
+		~ div {
+			display: none;
+		}
 
-        input,
-        button {
-            display: none !important;
-        }
-    }
+		input,
+		button {
+			display: none !important;
+		}
+	}
 
-    &.authorizing {
-        input,
-        button {
-            display: inline-block !important;
-        }
+	&.authorizing {
+		input,
+		button {
+			display: inline-block !important;
+		}
 
-        .rank-math-get-authorization-code {
-            margin-top: 10px;
-        }
-    }
+		.rank-math-get-authorization-code {
+			margin-top: 10px;
+		}
+	}
 
-    &.authorized {
-        #console_authorization_code {
-            display: none;
-        }
-    }
+	&.authorized {
+		#console_authorization_code {
+			display: none;
+		}
+	}
 }
 
 .cmb2-id-console-profile {
-    .rank-math-refresh {
-        margin-right: 10px;
-    }
+	.rank-math-refresh {
+		margin-right: 10px;
+	}
 }

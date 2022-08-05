@@ -4,10 +4,10 @@
 
 .#{$namespace} {
     &-analytics-tab {
-        .#{$namespace} {
-            &-card__header,
-            &-table__table,
-            &-pagination {
+        .woocommerce-table {
+            .components-card__header,
+            .components-card__body,
+            .woocommerce-pagination {
                 filter: blur(2px);
             }
         }

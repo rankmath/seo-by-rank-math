@@ -37,13 +37,21 @@ class DB {
 	 *
 	 * @param int    $object_id  Object ID.
 	 * @param string $table      Meta table name.
+	 * @param bool   $from_db    If set to true, the schema will be retrieved from the database.
 	 *
 	 * @return array
 	 */
-	public static function get_schemas( $object_id, $table = 'postmeta' ) {
+	public static function get_schemas( $object_id, $table = 'postmeta', $from_db = false ) {
+		static $schema_cache = [];
+
 		// Add exception handler.
 		if ( is_null( $object_id ) ) {
 			return [];
+		}
+
+		// Get from cache.
+		if ( ! $from_db && isset( $schema_cache[ $table . '_' . $object_id ] ) ) {
+			return $schema_cache[ $table . '_' . $object_id ];
 		}
 
 		$key  = 'termmeta' === $table ? 'term_id' : 'post_id';
@@ -60,6 +68,9 @@ class DB {
 			$schemas[ $id ] = maybe_unserialize( $schema->meta_value );
 		}
 
+		// Add to cache.
+		$schema_cache[ $table . '_' . $object_id ] = $schemas;
+
 		return $schemas;
 	}
 
@@ -68,20 +79,48 @@ class DB {
 	 *
 	 * @param int  $object_id Object ID.
 	 * @param bool $sanitize  Sanitize schema types.
+	 * @param bool $translate Whether to get the schema name.
 	 *
 	 * @return array
 	 */
-	public static function get_schema_types( $object_id, $sanitize = false ) {
+	public static function get_schema_types( $object_id, $sanitize = false, $translate = true ) {
 		$schemas = self::get_schemas( $object_id );
+
+		if ( empty( $schemas ) && Helper::get_default_schema_type( $object_id ) ) {
+			$schemas[] = [ '@type' => ucfirst( Helper::get_default_schema_type( $object_id ) ) ];
+		}
+
+		if ( has_block( 'rank-math/faq-block', $object_id ) ) {
+			$schemas[] = [ '@type' => 'FAQPage' ];
+		}
+
+		if ( has_block( 'rank-math/howto-block', $object_id ) ) {
+			$schemas[] = [ '@type' => 'HowTo' ];
+		}
+
 		if ( empty( $schemas ) ) {
 			return false;
 		}
 
-		$types = wp_list_pluck( $schemas, '@type' );
+		$types = array_reduce(
+			wp_list_pluck( $schemas, '@type' ),
+			function( $carry, $type ) {
+				if ( is_array( $type ) ) {
+					return array_merge( $carry, $type );
+				}
+
+				$carry[] = $type;
+				return $carry;
+			},
+			[]
+		);
+
+		$types = array_unique( $types );
+
 		if ( $sanitize ) {
 			$types = array_map(
-				function ( $type ) {
-					return Helper::sanitize_schema_title( $type );
+				function ( $type ) use ( $translate ) {
+					return Helper::sanitize_schema_title( $type, $translate );
 				},
 				$types
 			);
@@ -99,7 +138,7 @@ class DB {
 		$data = self::table()
 			->select( 'post_id' )
 			->select( 'meta_value' )
-			->whereLike( 'meta_value', $id )
+			->whereLike( 'meta_value', $id, '%:"' )
 			->one();
 
 		if ( ! empty( $data ) ) {

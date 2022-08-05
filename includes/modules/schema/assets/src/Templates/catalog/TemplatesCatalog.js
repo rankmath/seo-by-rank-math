@@ -45,7 +45,10 @@ const TemplatesCatalog = ( { search, templates, isPro, addSchema, editSchema, pr
 				const isPrimary = ! isPro && primaryType === template.type
 				const classes = classnames(
 					'rank-math-schema-item rank-math-use-schema row button',
-					{ 'in-use': isPrimary }
+					{
+						'in-use': isPrimary,
+						'schema-pro': template.isPro,
+					}
 				)
 
 				return (
@@ -54,9 +57,18 @@ const TemplatesCatalog = ( { search, templates, isPro, addSchema, editSchema, pr
 							key={ index }
 							id="rank-math-schema-item"
 							className={ classes }
-							href="#"
+							href={ template.isPro ? 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=PRO%20Schema%20Type&utm_campaign=WP' : '#' }
+							target={ template.isPro ? '_blank' : '' }
 							isLink
-							onClick={ () => isPrimary ? editSchema( primarySchema.id ) : addSchema( template ) }
+							onClick={ () => {
+								if ( template.isPro ) {
+									return
+								}
+
+								return (
+									isPrimary ? editSchema( primarySchema.id ) : addSchema( template )
+								)
+							} }
 						>
 							<input
 								type="radio"
@@ -64,10 +76,17 @@ const TemplatesCatalog = ( { search, templates, isPro, addSchema, editSchema, pr
 								value={ template.type }
 								checked={ primaryType === template.type }
 								onChange={ () => addSchema( template ) }
+								disabled={ template.isPro }
 							/>
 							<span className="rank-math-schema-name">
 								<i className={ getSnippetIcon( template.type ) }></i>
 								{ template.title }
+								{
+									template.isPro &&
+									<span className="rank-math-pro-badge">
+										{ __( 'Pro', 'rank-math' ) }
+									</span>
+								}
 							</span>
 							<span className="button rank-math-schema-item-actions">
 								<i className="rm-icon rm-icon-circle-plus"></i>

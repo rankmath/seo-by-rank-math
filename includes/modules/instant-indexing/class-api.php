@@ -1,6 +1,6 @@
 <?php
 /**
- * Instant Indexing API
+ * IndexNow API
  *
  * @since      1.0.56
  * @package    RankMath
@@ -10,7 +10,6 @@
 namespace RankMath\Instant_Indexing;
 
 use RankMath\Helper;
-use RankMath\Module\Base;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -20,164 +19,354 @@ defined( 'ABSPATH' ) || exit;
  *
  * @codeCoverageIgnore
  */
-class Api extends Base {
+class Api {
 
 	use Hooker;
 
 	/**
-	 * Bing URL Submission API URL.
+	 * IndexNow API URL.
 	 *
 	 * @var string
 	 */
-	private $bing_api = 'https://ssl.bing.com/webmaster/api.svc/json/';
+	private $api_url = 'https://api.indexnow.org/indexnow/';
 
 	/**
-	 * Get Daily Quota left value.
+	 * IndexNow API key.
 	 *
-	 * @param bool $force_update Force Update.
-	 * @return string
+	 * @var string
 	 */
-	public function get_daily_quota( $force_update = false ) {
-		$stored = get_transient( 'rank_math_instant_indexing_bing_daily_quota' );
-		if ( $stored && ! $force_update ) {
-			return $this->response( 'ok', '', [ 'daily_quota' => $stored ] );
+	protected $api_key = '';
+
+	/**
+	 * Was the last request successful.
+	 *
+	 * @var bool
+	 */
+	protected $is_success = false;
+
+	/**
+	 * Last error.
+	 *
+	 * @var string
+	 */
+	protected $last_error = '';
+
+	/**
+	 * Last response.
+	 *
+	 * @var array
+	 */
+	protected $last_response = '';
+
+	/**
+	 * Last response header code.
+	 *
+	 * @var int
+	 */
+	protected $last_code = 0;
+
+	/**
+	 * Next submission is a manual submission.
+	 *
+	 * @var bool
+	 */
+	public $is_manual = true;
+
+	/**
+	 * User agent used for the API requests.
+	 *
+	 * @var string
+	 */
+	protected $user_agent = '';
+
+	/**
+	 * User agent used for the API requests.
+	 *
+	 * @var string
+	 */
+	protected $version = '';
+
+	/**
+	 * Main instance
+	 *
+	 * Ensure only one instance is loaded or can be loaded.
+	 *
+	 * @return Api
+	 */
+	public static function get() {
+		static $instance;
+
+		if ( is_null( $instance ) && ! ( $instance instanceof Api ) ) {
+			$instance             = new Api();
+			$instance->user_agent = 'RankMath/' . md5( esc_url( home_url( '/' ) ) );
+			$instance->version    = rank_math()->version;
 		}
 
-		$data   = $this->request( 'GetUrlSubmissionQuota', [ 'query' => [ 'siteUrl' => untrailingslashit( home_url() ) ] ] );
-		$result = isset( $data['body'] ) ? json_decode( $data['body'], true ) : [];
-
-		if ( 'ok' === $data['status'] && is_array( $result ) && isset( $result['d']['DailyQuota'] ) ) {
-			set_transient( 'rank_math_instant_indexing_bing_daily_quota', $result['d']['DailyQuota'], 3600 );
-
-			// Translators: The placeholder is the number of URLs.
-			return $this->response( 'ok', '', [ 'daily_quota' => $result['d']['DailyQuota'] ] );
-		}
-
-		return $this->response( 'error', $data['message'] );
+		return $instance;
 	}
 
 	/**
-	 * Submit one or more URLs to Bing's API.
+	 * Make request to the IndexNow API.
 	 *
-	 * @param  array $url_input URLs.
-	 * @return bool  $blocking  Result of the API call.
+	 * @param array $urls URLs to submit.
+	 * @param bool  $manual Whether the request is manual or not.
+	 *
+	 * @return bool
 	 */
-	public function batch_submit_urls( $url_input ) {
-		if ( empty( $url_input ) ) {
-			return $this->response( 'error', __( 'Bing URL Submission API: Insert one or more URLs.', 'rank-math' ) );
+	public function submit( $urls, $manual = null ) {
+		$this->reset();
+
+		if ( ! is_null( $manual ) ) {
+			$this->is_manual = (bool) $manual;
 		}
 
-		$body = [
-			'siteUrl' => untrailingslashit( home_url() ),
-			'urlList' => (array) $url_input,
-		];
+		$data = $this->get_payload( $urls );
 
-		$data = $this->request(
-			'SubmitUrlBatch',
+		$response = wp_remote_post(
+			'https://api.indexnow.org/indexnow/',
 			[
-				'method' => 'POST',
-				'body'   => wp_json_encode( $body ),
+				'body'    => $data,
+				'headers' => [
+					'Content-Type'  => 'application/json',
+					'User-Agent'    => $this->user_agent,
+					'X-Source-Info' => 'https://rankmath.com/' . $this->version . '/' . ( $this->is_manual ? '1' : '' ),
+				],
 			]
 		);
-		if ( 'ok' === $data['status'] ) {
-			delete_transient( 'rank_math_instant_indexing_bing_daily_quota' );
-			$count = count( (array) $url_input );
 
-			// Translators: The placeholder is the number of URLs.
-			return $this->response( 'ok', sprintf( _n( 'Successfully submitted %s URL to the Bing URL Submission API.', 'Successfully submitted %s URLs to the Bing URL Submission API.', $count, 'rank-math' ), $count ) );
+		if ( is_wp_error( $response ) ) {
+			$this->last_error = 'WP_Error: ' . $response->get_error_message();
+			$this->log( (array) $urls, 0, $this->last_error );
+			return false;
 		}
 
-		return $this->response( 'error', $data['message'] );
+		$this->last_code     = wp_remote_retrieve_response_code( $response );
+		$this->last_response = wp_remote_retrieve_body( $response );
+		if ( in_array( $this->last_code, [ 200, 202, 204 ], true ) ) {
+			$this->is_success = true;
+			$this->log( (array) $urls, $this->last_code, 'OK' );
+			return true;
+		}
+
+		$message = wp_remote_retrieve_response_message( $response );
+		$this->set_error_message( $message );
+
+		$this->log( (array) $urls, $this->last_code, $this->last_error );
+		return false;
 	}
 
 	/**
-	 * Batch submit single URL.
+	 * Get the last error message.
 	 *
-	 * @param string $url URL to submit.
-	 * @return array
-	 */
-	public function submit_url( $url ) {
-		$data = $this->batch_submit_urls( $url );
-
-		$message = __( 'Failed to submit post to the Bing URL Submission API.', 'rank-math' );
-		if ( 'ok' === $data['status'] ) {
-			$message = __( 'Post successfully submitted to the Bing URL Submission API.', 'rank-math' );
-		}
-
-		return $this->response( $data['status'], $message );
-	}
-
-	/**
-	 * Get API URL.
-	 *
-	 * @param string $method API Method.
-	 * @param array  $args   Additional query parameters.
 	 * @return string
 	 */
-	private function get_api_url( $method, $args = [] ) {
-		$args = array_merge( [ 'apiKey' => Helper::get_settings( 'instant_indexing.bing_api_key' ) ], $args );
-		$url  = add_query_arg( $args, $this->bing_api . $method );
+	public function get_error() {
+		return $this->last_error;
+	}
+
+	/**
+	 * Get the last response code.
+	 *
+	 * @return int
+	 */
+	public function get_response_code() {
+		return $this->last_code;
+	}
+
+	/**
+	 * Get the last response.
+	 *
+	 * @return string
+	 */
+	public function get_response() {
+		return $this->last_response;
+	}
+
+	/**
+	 * Get the host parameter value to send to the API.
+	 *
+	 * @return string
+	 */
+	public function get_host() {
+		$host = wp_parse_url( home_url(), PHP_URL_HOST );
+		if ( empty( $host ) ) {
+			$host = 'localhost';
+		}
+
+		return $host;
+	}
+
+	/**
+	 * Get the API key.
+	 *
+	 * @return string
+	 */
+	public function get_key() {
+		if ( ! empty( $this->api_key ) ) {
+			return $this->api_key;
+		}
+
+		$this->api_key = Helper::get_settings( 'instant_indexing.indexnow_api_key' );
+		return $this->api_key;
+	}
+
+	/**
+	 * Alias for get_key().
+	 */
+	public function get_api_key() {
+		return $this->get_key();
+	}
+
+	/**
+	 * Get the API key location.
+	 *
+	 * @return string
+	 */
+	public function get_key_location( $context = '' ) {
+		return $this->do_filter( 'instant_indexing/indexnow_key_location', trailingslashit( home_url() ) . $this->get_key() . '.txt', $context );
+	}
+
+	/**
+	 * Log the request.
+	 *
+	 * @param array  $urls    URLs to submit.
+	 * @param int    $status  Response code.
+	 * @param string $message Response message.
+	 */
+	public function log( $urls, $status, $message = '' ) {
+		$log = get_option( 'rank_math_indexnow_log', [] );
+		$url = $this->get_loggable_url( $urls );
+
+		if ( ! $url ) {
+			return;
+		}
+
+		$log[] = [
+			'url'               => $url,
+			'status'            => (int) $status,
+			'manual_submission' => (bool) $this->is_manual,
+			'message'           => $message,
+			'time'              => time(),
+		];
+
+		// Only keep the last 100 entries.
+		$log = array_slice( $log, -100 );
+
+		update_option( 'rank_math_indexnow_log', $log, false );
+	}
+
+	/**
+	 * Get the loggable URL from an array of URLs.
+	 * If multiple URLs are submitted, return the first one and [+12]
+	 *
+	 * @param array $urls URLs to submit.
+	 *
+	 * @return string
+	 */
+	public function get_loggable_url( $urls ) {
+		$urls       = array_values( (array) $urls );
+		$count_urls = count( $urls );
+		if ( ! $count_urls ) {
+			return '';
+		}
+
+		$url = $urls[0];
+		if ( $count_urls > 1 ) {
+			$url .= ' [+' . ( $count_urls - 1 ) . ']';
+		}
 
 		return $url;
 	}
 
 	/**
-	 * Make request to the Bing API.
+	 * Get the log.
 	 *
-	 * @param string $method HTTP method.
-	 * @param array  $args   Additional request arguments.
+	 * @return array
 	 */
-	private function request( $method, $args ) {
-		if ( ! Helper::get_settings( 'instant_indexing.bing_api_key' ) ) {
-			return $this->response( 'error', __( 'Please configure the Instant Indexing module in the Settings tab first.', 'rank-math' ) );
-		}
-
-		$default_args = [
-			'method'   => 'GET',
-			'headers'  => [
-				'Content-Type' => 'application/json',
-				'charset'      => 'utf-8',
-			],
-			'timeout'  => 15,
-			'blocking' => true,
-			'query'    => [],
-		];
-
-		$args = wp_parse_args( $args, $default_args );
-		$url  = $this->get_api_url( $method, $args['query'] );
-		unset( $args['query'] );
-
-		$response = wp_remote_request( $url, $args );
-		if ( is_wp_error( $response ) ) {
-			// Translators: placeholder is the error message.
-			return $this->response( 'error', sprintf( __( 'Bing URL Submission API error: %s', 'rank-math' ), $response->get_error_message() ) );
-		}
-
-		$code = wp_remote_retrieve_response_code( $response );
-		$body = wp_remote_retrieve_body( $response );
-		if ( 200 !== $code ) {
-			// Translators: 1. the error code, 2. the error message.
-			return $this->response( 'error', sprintf( __( 'Bing URL Submission API HTTP error %1$s: %2$s', 'rank-math' ), $code, $body ) );
-		}
-
-		return $this->response( 'ok', '', [ 'body' => $body ] );
+	public function get_log() {
+		return get_option( 'rank_math_indexnow_log', [] );
 	}
 
 	/**
-	 * A consistent response format.
+	 * Clear the log.
+	 */
+	public function clear_log() {
+		delete_option( 'rank_math_indexnow_log' );
+	}
+
+	/**
+	 * Reset object properties.
+	 */
+	private function reset() {
+		$this->last_error    = '';
+		$this->last_code     = 0;
+		$this->last_response = '';
+		$this->is_success    = false;
+	}
+
+	/**
+	 * Get the additional data to send to the API.
 	 *
-	 * @param string $status  Response status keyword.
-	 * @param string $message Response message.
-	 * @param array  $details Additional details.
+	 * @param array $urls URLs to submit.
+	 *
 	 * @return array
 	 */
-	private function response( $status, $message = '', $details = [] ) {
-		return array_merge(
+	private function get_payload( $urls ) {
+		return wp_json_encode(
 			[
-				'status'  => $status,
-				'message' => esc_html( $message ),
-			],
-			$details
+				'host'        => $this->get_host(),
+				'key'         => $this->get_key(),
+				'keyLocation' => $this->get_key_location( 'request_payload' ),
+				'urlList'     => (array) $urls,
+			]
 		);
+	}
+
+	/**
+	 * Get the error message from the response message.
+	 *
+	 * @param string $message Response message.
+	 */
+	private function set_error_message( $message ) {
+		if ( ! empty( $message ) ) {
+			$this->last_error = $message;
+			return;
+		}
+
+		$message     = __( 'Unknown error.', 'rank-math' );
+		$message_map = [
+			400 => __( 'Invalid request.', 'rank-math' ),
+			403 => __( 'Invalid API key.', 'rank-math' ),
+			422 => __( 'Invalid URL.', 'rank-math' ),
+			429 => __( 'Too many requests.', 'rank-math' ),
+			500 => __( 'Internal server error.', 'rank-math' ),
+		];
+
+		if ( isset( $message_map[ $this->last_code ] ) ) {
+			$message = $message_map[ $this->last_code ];
+		}
+
+		$this->last_error = $message;
+	}
+
+
+	/**
+	 * Generate and save a new API key.
+	 */
+	public function reset_key() {
+		$settings = Helper::get_settings( 'instant_indexing', [] );
+		$settings['indexnow_api_key'] = $this->generate_api_key();
+		$this->api_key = $settings['indexnow_api_key'];
+		update_option( 'rank-math-options-instant-indexing', $settings );
+	}
+
+	/**
+	 * Generate new random API key.
+	 */
+	private function generate_api_key() {
+		$api_key = wp_generate_uuid4();
+		$api_key = preg_replace( '[-]', '', $api_key );
+
+		return $api_key;
 	}
 }

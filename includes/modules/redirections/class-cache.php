@@ -32,7 +32,7 @@ class Cache {
 	 * Get redirection by object ID.
 	 *
 	 * @param  integer $object_id   Object ID to look for.
-	 * @param  string  $object_type Current objcect type.
+	 * @param  string  $object_type Current object type.
 	 * @return object
 	 */
 	public static function get_by_object_id( $object_id, $object_type ) {
@@ -47,6 +47,24 @@ class Cache {
 	 */
 	public static function get_by_url( $url ) {
 		return empty( $url ) ? false : self::table()->where( 'BINARY from_url', $url )->one();
+	}
+
+	/**
+	 * Get redirections by object ID or URL.
+	 *
+	 * @param integer $object_id   Object ID to look for.
+	 * @param string  $object_type Current object type.
+	 * @param string  $url         URL to look for.
+	 * @return array
+	 */
+	public static function get_by_object_id_or_url( $object_id, $object_type, $url ) {
+		$query = self::table()->where( [ [ 'object_id', '=', $object_id ], [ 'object_type', '=', $object_type ] ], 'and' );
+
+		if ( '' !== (string) $url ) {
+			$query->orWhere( 'BINARY from_url', $url );
+		}
+
+		return $query->orderBy( 'object_id', 'desc' )->get();
 	}
 
 	/**
@@ -69,6 +87,22 @@ class Cache {
 				'is_redirected'  => '1',
 			]
 		);
+
+		// Check if already exists.
+		$exists = self::table()->where(
+			[
+				[ 'from_url', '=', $args['from_url'] ],
+				[ 'redirection_id', '=', $args['redirection_id'] ],
+				[ 'object_id', '=', $args['object_id'] ],
+				[ 'object_type', '=', $args['object_type'] ],
+				[ 'is_redirected', '=', $args['is_redirected'] ],
+			],
+			'and'
+		)->one();
+
+		if ( ! empty( $exists ) ) {
+			return false;
+		}
 
 		return self::table()->insert( $args, [ '%s', '%d', '%d', '%s', '%d' ] );
 	}

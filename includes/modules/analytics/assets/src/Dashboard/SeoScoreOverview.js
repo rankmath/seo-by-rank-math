@@ -3,7 +3,7 @@
  */
 import classnames from 'classnames'
 import { map, round, isEmpty } from 'lodash'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Facebook } from 'react-content-loader'
 import {
 	ResponsiveContainer,
@@ -14,6 +14,7 @@ import {
 	Tooltip,
 	Label,
 } from 'recharts'
+import { List } from '@woocommerce/components'
 
 /**
  * WordPress dependencies
@@ -27,7 +28,6 @@ import { Button } from '@wordpress/components'
  * Internal dependencies
  */
 import { isPro } from '../functions'
-import List from '@scShared/woocommerce/List'
 
 const renderActiveShape = ( props ) => {
 	const {
@@ -85,7 +85,7 @@ const RankMathTooltip = ( props ) => {
 }
 
 const SeoScoreOverview = ( { seoScores } ) => {
-	const history = useHistory()
+	const navigate = useNavigate()
 	const [ selected, setSelection ] = useState( 0 )
 	if ( isEmpty( seoScores ) ) {
 		return (
@@ -105,28 +105,28 @@ const SeoScoreOverview = ( { seoScores } ) => {
 			color: '#10AC84',
 			content: seoScores.good,
 			className: 'seo-score-good',
-			onClick: () => isPro() ? history.push( '/analytics/1?filter=good' ) : null,
+			onClick: () => isPro() ? navigate( '/analytics/1?filter=good' ) : null,
 		},
 		{
 			title: __( 'Fair', 'rank-math' ),
 			color: '#FF9F43',
 			content: seoScores.ok,
 			className: 'seo-score-ok',
-			onClick: () => isPro() ? history.push( '/analytics/1?filter=ok' ) : null,
+			onClick: () => isPro() ? navigate( '/analytics/1?filter=ok' ) : null,
 		},
 		{
 			title: __( 'Poor', 'rank-math' ),
 			color: '#ed5e5e',
 			content: seoScores.bad,
 			className: 'seo-score-bad',
-			onClick: () => isPro() ? history.push( '/analytics/1?filter=bad' ) : null,
+			onClick: () => isPro() ? navigate( '/analytics/1?filter=bad' ) : null,
 		},
 		{
 			title: __( 'No Data', 'rank-math' ),
 			color: '#dadfe4',
 			content: seoScores.noData,
 			className: 'seo-score-no-data',
-			onClick: () => isPro() ? history.push( '/analytics/1?filter=noData' ) : null,
+			onClick: () => isPro() ? navigate( '/analytics/1?filter=noData' ) : null,
 		},
 	]
 
@@ -194,7 +194,7 @@ const SeoScoreOverview = ( { seoScores } ) => {
 				) }
 			</p>
 
-			<Button isLink onClick={ () => history.push( '/analytics/1' ) }>
+			<Button isLink onClick={ () => navigate( '/analytics/1' ) }>
 				{ __( 'Open Report', 'rank-math' ) }
 			</Button>
 		</div>

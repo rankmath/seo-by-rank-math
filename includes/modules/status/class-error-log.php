@@ -10,6 +10,7 @@
 
 namespace RankMath\Status;
 
+use RankMath\Helper;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\WordPress;
 
@@ -135,6 +136,7 @@ class Error_Log {
 		if (
 			empty( $log_file ) ||
 			is_null( $wp_filesystem ) ||
+			! Helper::is_filesystem_direct() ||
 			! $wp_filesystem->exists( $log_file ) ||
 			! $wp_filesystem->is_readable( $log_file )
 		) {

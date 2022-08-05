@@ -16,6 +16,7 @@ use WP_Error;
 use WP_REST_Server;
 use WP_REST_Request;
 use WP_REST_Controller;
+use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -35,95 +36,64 @@ class Rest extends WP_REST_Controller {
 	 * Registers the routes for the objects of the controller.
 	 */
 	public function register_routes() {
-		register_rest_route(
-			$this->namespace,
-			'/dashboard',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'get_dashboard' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
+		$routes = [
+			'dashboard'          => [
+				'callback' => [ $this, 'get_dashboard' ],
+			],
+			'keywordsOverview'   => [
+				'callback' => [ $this, 'get_keywords_overview' ],
+			],
+			'postsSummary'       => [
+				'callback' => [ Stats::get(), 'get_posts_summary' ],
+			],
+			'postsRowsByObjects' => [
+				'callback' => [ Stats::get(), 'get_posts_rows_by_objects' ],
+			],
+			'post/(?P<id>\d+)'   => [
+				'callback' => [ $this, 'get_post' ],
+			],
+			'keywordsSummary'    => [
+				'callback' => [ Stats::get(), 'get_analytics_summary' ],
+			],
+			'analyticsSummary'   => [
+				'callback' => [ $this, 'get_analytics_summary' ],
+			],
+			'keywordsRows'       => [
+				'callback' => [ Stats::get(), 'get_keywords_rows' ],
+			],
+			'userPreferences'    => [
+				'callback' => [ $this, 'update_user_preferences' ],
+				'methods'  => WP_REST_Server::CREATABLE,
+			],
+			'inspectionResults'  => [
+				'callback' => [ $this, 'get_inspection_results' ],
+			],
+			'removeFrontendStats'  => [
+				'callback' => [ $this, 'remove_frontend_stats' ],
+				'methods'  => WP_REST_Server::CREATABLE,
+			],
+		];
 
-		register_rest_route(
-			$this->namespace,
-			'/keywordsOverview',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'get_keywords_overview' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
+		foreach ( $routes as $route => $args ) {
+			$this->register_route( $route, $args );
+		}
+	}
 
-		register_rest_route(
-			$this->namespace,
-			'/postsSummary',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ Stats::get(), 'get_posts_summary' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
+	/**
+	 * Register a route.
+	 *
+	 * @param string $route  Route.
+	 * @param array  $args   Arguments.
+	 */
+	private function register_route( $route, $args ) {
+		$route_defaults = [
+			'methods'             => WP_REST_Server::READABLE,
+			'permission_callback' => [ $this, 'has_permission' ],
+		];
 
-		register_rest_route(
-			$this->namespace,
-			'/postsRowsByObjects',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ Stats::get(), 'get_posts_rows_by_objects' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
+		$route_args = wp_parse_args( $args, $route_defaults );
 
-		register_rest_route(
-			$this->namespace,
-			'/post/(?P<id>\d+)',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'get_post' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/keywordsSummary',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ Stats::get(), 'get_analytics_summary' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/analyticsSummary',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'get_analytics_summary' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/keywordsRows',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ Stats::get(), 'get_keywords_rows' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/userPreferences',
-			[
-				'methods'             => WP_REST_Server::CREATABLE,
-				'callback'            => [ $this, 'update_user_preferences' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
+		register_rest_route( $this->namespace, '/' . $route, $route_args );
 	}
 
 	/**
@@ -203,10 +173,11 @@ class Rest extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_analytics_summary( WP_REST_Request $request ) { // phpcs:ignore
+		$post_type = sanitize_key( $request->get_param( 'postType' ) );
 		return rest_ensure_response(
 			[
-				'summary'      => Stats::get()->get_posts_summary(),
-				'optimization' => Stats::get()->get_optimization_summary(),
+				'summary'      => Stats::get()->get_posts_summary( $post_type ),
+				'optimization' => Stats::get()->get_optimization_summary( $post_type ),
 			]
 		);
 	}
@@ -228,6 +199,59 @@ class Rest extends WP_REST_Controller {
 				]
 			)
 		);
+	}
+
+	/**
+	 * Get inspection results: latest result for each post.
+	 *
+	 * @param WP_REST_Request $request Rest request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function get_inspection_results( WP_REST_Request $request ) {
+		$per_page = 25;
+		$rows     = Url_Inspection::get()->get_inspections( $request->get_params(), $per_page );
+
+		if ( empty( $rows ) ) {
+			return [
+				'rows'      => [ 'response' => 'No Data' ],
+				'rowsFound' => 0,
+			];
+		}
+
+		return rest_ensure_response(
+			[
+				'rows'      => $rows,
+				'rowsFound' => DB::get_inspections_count( $request->get_params() ),
+			]
+		);
+	}
+
+	/**
+	 * Remove frontend stats.
+	 *
+	 * @param WP_REST_Request $request Rest request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function remove_frontend_stats( WP_REST_Request $request ) {
+		if ( (bool) $request->get_param( 'toggleBar' ) ) {
+			$hide_bar = (bool) $request->get_param( 'hide' );
+			$user_id  = get_current_user_id();
+			if ( $hide_bar ) {
+				return update_user_meta( $user_id, 'rank_math_hide_frontend_stats', true );
+			}
+
+			return delete_user_meta( $user_id, 'rank_math_hide_frontend_stats' );
+		}
+		
+		$all_opts                   = rank_math()->settings->all_raw();
+		$general                    = $all_opts['general'];
+		$general['analytics_stats'] = 'off';
+
+		Helper::update_all_settings( $general, null, null );
+
+		return true;
 	}
 
 	/**

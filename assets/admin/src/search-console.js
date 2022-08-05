@@ -1,13 +1,16 @@
+/* global confirm, alert */
+
 /**
  * External Dependencies
  */
 import jQuery from 'jquery'
-import { get, map } from 'lodash'
+import { get, map, isEmpty, isUndefined } from 'lodash'
 
 /**
  * Internal Dependencies
  */
 import ajax from '@helpers/ajax'
+import { __ } from '@wordpress/i18n'
 
 class SearchConsole {
 	/**
@@ -39,6 +42,10 @@ class SearchConsole {
 		this.countryConsole = jQuery( '#site-console-country' )
 		this.countryAnalytics = jQuery( '#site-analytics-country' )
 
+		jQuery( '.cmb2_select' ).on( 'select2:open', function() {
+			document.querySelector( '.select2-search__field' ).focus()
+		} )
+
 		this.accountSelect.on( 'change', () => {
 			const account = parseInt( this.accountSelect.val() )
 			if ( 0 === account ) {
@@ -51,6 +58,12 @@ class SearchConsole {
 			this.fillPropertySelect( account )
 		} )
 
+		this.profileSelect.on( 'change', () => {
+			if ( 0 !== parseInt( this.profileSelect.val() ) ) {
+				document.getElementById( 'enable-index-status' ).removeAttribute( 'disabled' )
+			}
+		} )
+
 		const submitSelectors = [
 			'.rank-math-wizard-body--analytics .form-footer.rank-math-ui .button-primary',
 			'.rank-math_page_rank-math-options-general .form-footer.rank-math-ui .button-primary',
@@ -60,16 +73,41 @@ class SearchConsole {
 		} )
 
 		this.propertySelect.on( 'change', () => {
-			const accountID = this.accountSelect.val()
-			const propertyID = this.propertySelect.val()
-			const { accounts } = this.response
+			if ( 'create-ga4-property' === this.propertySelect.val() ) {
+				this.createNewProperty()
+				return
+			}
 
-			this.response.views = get(
-				accounts,
-				[ accountID, 'properties', propertyID, 'profiles' ],
+			this.response.type = get(
+				this.response.accounts,
+				[ this.accountSelect.val(), 'properties', this.propertySelect.val(), 'type' ],
 				{}
 			)
-			this.fillViewSelect()
+
+			if ( 'GA4' !== this.response.type ) {
+				this.response.type = 'GA3'
+
+				this.response.views = get(
+					this.response.accounts,
+					[ this.accountSelect.val(), 'properties', this.propertySelect.val(), 'profiles' ],
+					{}
+				)
+			}
+
+			if ( 'GA4' !== this.response.type ) {
+				this.fillViewSelect()
+				return
+			}
+
+			this.createNewDataStream()
+		} )
+
+		this.viewSelect.on( 'change', ( e ) => {
+			const selected = jQuery( e.target ).find( ':selected' )
+			if ( selected.data( 'measurement-id' ) ) {
+				jQuery( '#rank-math-analytics-measurement-id' ).val( selected.data( 'measurement-id' ) )
+				jQuery( '#rank-math-analytics-stream-name' ).val( selected.text() )
+			}
 		} )
 
 		jQuery( '.rank-math-disconnect-google' ).on( 'click', ( event ) => {
@@ -80,6 +118,55 @@ class SearchConsole {
 					window.location.reload()
 				} )
 			}
+		} )
+	}
+
+	createNewProperty() {
+		if ( confirm( __( 'Are you sure, you want to create a new GA4 Property?', 'rank-math' ) ) ) {
+			ajax(
+				'create_ga4_property',
+				{
+					accountID: this.accountSelect.val(),
+				},
+				'post'
+			).done( ( response ) => {
+				if ( response.error ) {
+					this.propertySelect.val( this.propertySelect.find( 'option:first' ).val() )
+					alert( response.error )
+					return
+				}
+
+				this.propertySelect.append(
+					'<option value="' + response.id + '">' + response.name + '</option>'
+				)
+
+				this.propertySelect.val( response.id )
+				this.createNewDataStream()
+				this.response.type = 'GA4'
+			} )
+		} else {
+			this.propertySelect.val( this.propertySelect.find( 'option:first' ).val() )
+		}
+	}
+
+	createNewDataStream() {
+		this.viewSelect.html( '' )
+		this.viewSelect.prop( 'disabled', true )
+		ajax(
+			'get_ga4_data_streams',
+			{
+				propertyID: this.propertySelect.val(),
+			},
+			'post'
+		).done( ( response ) => {
+			if ( response.error ) {
+				console.error( response.error )
+				return
+			}
+
+			this.response.views = response.streams
+			this.fillViewSelect()
+			this.viewSelect.trigger( 'change' )
 		} )
 	}
 
@@ -104,6 +191,7 @@ class SearchConsole {
 		const data = {
 			profile: this.profileSelect.val(),
 			country: this.countryConsole.val(),
+			enableIndexStatus: jQuery( '#enable-index-status' ).is( ':checked' ),
 		}
 
 		const days = jQuery( '#console_caching_control' )
@@ -123,8 +211,9 @@ class SearchConsole {
 			installCode: jQuery( '#install-code' ).is( ':checked' ),
 			anonymizeIP: jQuery( '#anonymize-ip' ).is( ':checked' ),
 			localGAJS: jQuery( '#local-ga-js' ).is( ':checked' ),
-			cookielessGA: jQuery( '#cookieless-ga' ).is( ':checked' ),
 			excludeLoggedin: jQuery( '#exclude-loggedin' ).is( ':checked' ),
+			measurementID: jQuery( '#rank-math-analytics-measurement-id' ).val(),
+			streamName: jQuery( '#rank-math-analytics-stream-name' ).val(),
 		}
 
 		if (
@@ -181,8 +270,6 @@ class SearchConsole {
 			return
 		}
 
-		this.adsenseSelect.html( '<option value="0">Select Account</option>' )
-
 		map( adsenseAccounts, ( account, id ) => {
 			this.adsenseSelect.append(
 				'<option value="' + id + '">' + account.name + '</option>'
@@ -194,12 +281,11 @@ class SearchConsole {
 		}
 
 		this.adsenseSelect.prop( 'disabled', false )
+		this.adsenseSelect.select2()
 	}
 
 	fillAccountSelect() {
 		const { accounts } = this.response
-
-		this.accountSelect.html( '<option value="0">Select Account</option>' )
 
 		map( accounts, ( account, id ) => {
 			this.accountSelect.append(
@@ -212,6 +298,8 @@ class SearchConsole {
 		} else {
 			this.accountSelect.prop( 'disabled', false )
 			this.countryAnalytics.prop( 'disabled', false )
+			this.accountSelect.select2()
+			this.countryAnalytics.select2()
 		}
 
 		this.accountSelect.trigger( 'change' )
@@ -222,6 +310,9 @@ class SearchConsole {
 
 		const { properties } = accounts[ account ]
 		this.propertySelect.html( '<option value="0">Select Property</option>' )
+		this.propertySelect.append(
+			'<option value="create-ga4-property">' + __( 'Create new GA4 Property', 'rank-math' ) + '</option>'
+		)
 
 		map( properties, ( property ) => {
 			const selected =
@@ -241,6 +332,7 @@ class SearchConsole {
 			this.propertySelect.val( this.propertySelect.data( 'selected' ) )
 		} else {
 			this.propertySelect.prop( 'disabled', false )
+			this.propertySelect.select2()
 		}
 
 		this.propertySelect.trigger( 'change' )
@@ -248,8 +340,6 @@ class SearchConsole {
 
 	fillProfileSelect() {
 		const { sites, homeUrl } = this.response
-
-		this.profileSelect.html( '<option value="0">Select Profile</option>' )
 
 		let selected = false
 		map( sites, ( val, key ) => {
@@ -272,22 +362,27 @@ class SearchConsole {
 
 		this.profileSelect.prop( 'disabled', false )
 		this.countryConsole.prop( 'disabled', false )
+		this.profileSelect.select2()
+		this.countryConsole.select2()
 	}
 
 	fillViewSelect() {
-		this.viewSelect.html( '<option value="0">Select Web View</option>' )
-		const { views } = this.response
+		const { views, type } = this.response
+		const label = 'GA4' === type ? __( 'Data Stream', 'rank-math' ) : __( 'View', 'rank-math' )
+		this.viewSelect.prev( 'label' ).text( label )
 		map( views, ( view ) => {
+			const measurementId = ! isUndefined( view.measurementId ) ? view.measurementId : ''
 			this.viewSelect.append(
-				'<option value="' + view.id + '">' + view.name + '</option>'
+				'<option value="' + view.id + '" data-measurement-id="' + measurementId + '">' + view.name + '</option>'
 			)
 		} )
 
 		if ( this.viewSelect.data( 'selected' ) ) {
 			this.viewSelect.val( this.viewSelect.data( 'selected' ) )
 		}
-
 		this.viewSelect.prop( 'disabled', false )
+
+		this.viewSelect.select2()
 	}
 }
 

@@ -31,7 +31,10 @@ const SnippetEditor = ( {
 			),
 			view: General,
 		},
-		{
+	]
+
+	if ( rankMath.canUser.social ) {
+		tabs.push( {
 			name: 'social',
 			title: (
 				<Fragment>
@@ -40,8 +43,8 @@ const SnippetEditor = ( {
 				</Fragment>
 			),
 			view: Social,
-		},
-	]
+		} )
+	}
 
 	if ( rankMath.showReviewTab && false === rankMath.pluginReviewed ) {
 		tabs.push( {

@@ -71,6 +71,7 @@ function rank_math_remove_data() {
 	rank_math_drop_table( 'internal_meta' );
 	rank_math_drop_table( 'analytics_gsc' );
 	rank_math_drop_table( 'analytics_objects' );
+	rank_math_drop_table( 'analytics_inspections' );
 
 	// Remove Capabilities.
 	/**

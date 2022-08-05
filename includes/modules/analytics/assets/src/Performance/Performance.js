@@ -36,9 +36,6 @@ const Performance = ( { stats } ) => {
 					).invalidateResolutionForStoreSelector( 'getPostsSummary' )
 					dispatch(
 						'rank-math'
-					).invalidateResolutionForStoreSelector( 'getPostsRows' )
-					dispatch(
-						'rank-math'
 					).invalidateResolutionForStoreSelector( 'getPostsOverview' )
 				} }
 			/>

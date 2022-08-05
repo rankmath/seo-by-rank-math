@@ -2,9 +2,16 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { get } from 'lodash'
+import { get, forEach } from 'lodash'
 
 class UIThemeComponent {
+	/**
+	 * Links
+	 *
+	 * @type {Object}
+	 */
+	links = {}
+
 	constructor() {
 		this.onThemeChange = this.onThemeChange.bind( this )
 		elementor.settings.editorPreferences.model.on(
@@ -26,46 +33,47 @@ class UIThemeComponent {
 			return
 		}
 
-		const link = this.getThemeLink()
-		if ( 'light' === mode ) {
-			link.remove()
-			return
-		}
+		forEach( rankMath.elementorDarkMode, ( url, key ) => {
+			const link = this.getLink( key + '-css', url )
+			if ( 'light' === mode ) {
+				link.remove()
+				return
+			}
 
-		link.attr(
-			'media',
-			'auto' === mode ? '(prefers-color-scheme: dark)' : ''
-		).appendTo( elementorCommon.elements.$body )
+			link.attr( 'media', 'auto' === mode ? '(prefers-color-scheme: dark)' : '' ).appendTo( elementorCommon.elements.$body )
+		} )
 	}
 
 	/**
 	 * Function to get dark mode CSS link.
 	 *
+	 * @param {string} key The dark mode key
+	 * @param {string} url The dark mode URL
 	 * @return {string} url Dark Mode CSS link
 	 */
-	getThemeLink() {
-		if ( ! this.link ) {
-			this.createThemeLink()
+	getLink( key, url ) {
+		if ( ! this.links[ key ] ) {
+			this.createLink( key, url )
 		}
 
-		return this.link
+		return this.links[ key ]
 	}
 
 	/**
 	 * Function to create link tag to support Elementor Dark mode.
 	 *
+	 * @param {string} key The dark mode key
+	 * @param {string} url The dark mode URL
 	 * @return {void}
 	 */
-	createThemeLink() {
-		const darkModeLinkID = 'rank-math-elementor-dark-css'
+	createLink( key, url ) {
+		this.links[ key ] = jQuery( '#' + key ).length ? jQuery( '#' + key ) : null
 
-		this.link = jQuery( '#' + darkModeLinkID )
-
-		if ( ! this.link.length ) {
-			this.link = jQuery( '<link>', {
-				id: darkModeLinkID,
+		if ( ! this.links[ key ] ) {
+			this.links[ key ] = jQuery( '<link>', {
+				id: key,
 				rel: 'stylesheet',
-				href: rankMath.elementorDarkMode,
+				href: url,
 			} )
 		}
 	}

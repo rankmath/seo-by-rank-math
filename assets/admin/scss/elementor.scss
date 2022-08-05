@@ -6,6 +6,8 @@
 
 @import "sidebar";
 
+@import "./partials/common/pro-cta";
+
 .#{$namespace} {
 	// Main RM Tabs
 	&-tabs {
@@ -150,17 +152,6 @@
 	&-modal {
 		max-height: 763px;
 		border-radius: 3px;
-
-		.components-modal__header {
-			border-bottom: 0;
-
-			&-heading {
-				color: #495157;
-				text-transform: uppercase;
-				font-weight: 700;
-				letter-spacing: 1px;
-			}
-		}
 
 		// Tabs
 		.rank-math-tabs > .components-tab-panel {

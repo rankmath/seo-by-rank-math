@@ -149,6 +149,7 @@ class Email_Reports {
 			'stats_top_10_positions_diff' => $stats['top_10_positions_diff'],
 			'stats_top_50_positions'      => $stats['top_50_positions'],
 			'stats_top_50_positions_diff' => $stats['top_50_positions_diff'],
+			'stats_invalid_data'          => $stats['invalid_data'],
 			'footer_html'                 => $footer_text,
 		];
 
@@ -196,7 +197,7 @@ class Email_Reports {
 
 		$out['traffic']      = 0;
 		$out['traffic_diff'] = 0;
-		if ( $is_analytics_connected && defined( 'RANK_MATH_PRO_FILE' ) ) {
+		if ( $is_analytics_connected && defined( 'RANK_MATH_PRO_FILE' ) && isset( $data['pageviews'] ) ) {
 			$out['traffic']      = $data['pageviews']['total'];
 			$out['traffic_diff'] = $data['pageviews']['difference'];
 		}
@@ -225,6 +226,11 @@ class Email_Reports {
 
 		$out['top_50_positions']      = $kw_data['top50']['total'];
 		$out['top_50_positions_diff'] = $kw_data['top50']['difference'];
+
+		$out['invalid_data'] = false;
+		if ( ! count( array_filter( $out ) ) ) {
+			$out['invalid_data'] = true;
+		}
 
 		return $out;
 	}

@@ -7,11 +7,11 @@ import classNames from 'classnames'
  * WordPress dependencies
  */
 import { dispatch, withSelect } from '@wordpress/data'
+import { applyFilters } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
  */
-import App from '../../sidebar/App'
 import ModalButton from './ModalButton'
 
 const DiscardIcon = () => (
@@ -102,7 +102,10 @@ const Modal = ( { rmUiActive } ) => {
 			<div className={ innerClasses }>
 				<Header />
 				<Content>
-					<App />
+					{
+						/* Filter to include components from the common editor file */
+						applyFilters( 'rank_math_app', {} )()
+					}
 				</Content>
 			</div>
 		</div>

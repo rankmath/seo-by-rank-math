@@ -6,9 +6,21 @@
  * @subpackage RankMath\Settings
  */
 
+use RankMath\KB;
 use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
+
+$cmb->add_field(
+	[
+		'id'      => 'headless_support',
+		'type'    => 'toggle',
+		'name'    => esc_html__( 'Headless CMS Support', 'rank-math' ),
+		// Translators: placeholder is a link to "Read more".
+		'desc'    => sprintf( esc_html__( 'Enable this option to register a REST API endpoint that returns the HTML meta tags for a given URL. %s', 'rank-math' ), '<a href="' . KB::get( 'headless-support' ) . '">' . esc_html__( 'Read more', 'rank-math' ) . '</a>' ),
+		'default' => 'off',
+	]
+);
 
 $cmb->add_field(
 	[
@@ -101,7 +113,7 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'   => 'rank_math_serp_preview',
+		'id'   => 'rank_math_rss_vars',
 		'type' => 'raw',
 		'file' => rank_math()->includes_dir() . 'settings/general/rss-vars-table.php',
 	]

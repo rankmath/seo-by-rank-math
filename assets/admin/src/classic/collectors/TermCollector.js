@@ -12,6 +12,7 @@ import DataCollector from './DataCollector'
 class TermCollector extends DataCollector {
 	setup() {
 		this.updateBtn = jQuery( '.edit-tag-actions input[type="submit"]' )
+		this.form = jQuery( '#edittag' )
 		this.elemSlug = jQuery( '#slug' )
 		this.elemTitle = jQuery( '#name' )
 		this.elemDescription = jQuery( '#rank_math_description_editor' )

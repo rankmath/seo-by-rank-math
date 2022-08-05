@@ -7,6 +7,7 @@ import Tagify from '@yaireo/tagify'
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element'
+import { doAction } from '@wordpress/hooks'
 
 class TagifyField extends Component {
 	constructor( props ) {
@@ -26,6 +27,12 @@ class TagifyField extends Component {
 				)
 			}, 100 )
 		}
+
+		if ( this.props.settings.callbacks.dragEnd ) {
+			this.tagify.DOM.scope.addEventListener( 'dragend', this.props.settings.callbacks.dragEnd )
+		}
+
+		doAction( 'rank_math_tagify_init', this )
 	}
 
 	shouldComponentUpdate( nextProps ) {
@@ -54,11 +61,9 @@ class TagifyField extends Component {
 		const attrs = {
 			ref: this._handleRef,
 			name: this.props.name,
-			autoFocus: this.props.autofocus,
 			className: this.props.className,
 			placeholder: this.props.placeholder,
 		}
-
 		return this.props.mode === 'textarea' ? (
 			<textarea
 				{ ...attrs }

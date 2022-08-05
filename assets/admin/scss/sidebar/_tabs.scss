@@ -9,6 +9,10 @@
         flex-flow: row wrap;
         justify-content: space-between;
 
+        &.contentAI {
+            display: none;
+        }
+
         .#{$namespace}-extra-menu {
             @extend %flex;
         }
@@ -51,17 +55,16 @@
             }
 
             i {
-                font-size: 12px;
+                font-size: 17px;
 
-                vertical-align: -1px;
+                vertical-align: -4px;
 
                 @include margin( null 7px null 0 );
-                @include size( 16px );
 
                 &.rm-icon-schema {
-                    font-size: 13px;
+                    font-size: 18px;
 
-                    vertical-align: -3px;
+                    vertical-align: -4px;
                 }
             }
 
@@ -100,11 +103,15 @@
 
                     content: '';
 
-                    background: #0095cd;
+                    background: $color-blue;
                     box-shadow: none;
 
                     @include position( absolute, null null -1px 0 );
                 }
+            }
+
+            &.hidden {
+                display: none !important;
             }
         }
     }
@@ -177,7 +184,6 @@
             &__input-container {
                 width: 16px;
                 height: 16px;
-                margin-top: -1px;
                 margin-right: 8px;
 
                 svg {

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * WordPress dependencies
@@ -17,7 +17,7 @@ import AutomaticKeywordTracking from './AutomaticKeywordTracking'
 import ManualKeywordTracking from './ManualKeywordTracking'
 
 const KeywordsOverview = () => {
-	const history = useHistory()
+	const navigate = useNavigate()
 	const tabs = [
 		{
 			name: 'manualKeywordTracking',
@@ -49,7 +49,7 @@ const KeywordsOverview = () => {
 					</div>
 				) }
 			</TabPanel>
-			<Button isLink onClick={ () => history.push( '/keywords/1' ) }>
+			<Button isLink onClick={ () => navigate( '/keywords/1' ) }>
 				{ __( 'Open Report', 'rank-math' ) }
 			</Button>
 		</div>

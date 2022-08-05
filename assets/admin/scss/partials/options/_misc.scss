@@ -6,7 +6,6 @@
         li label {
             margin: 0 5px 5px 0;
 
-            border: 1px solid #e5e5e5!important;
             border-radius: 3px;
             box-shadow: none;
 
@@ -60,6 +59,10 @@
     .#{$namespace}-variables-preview {
         font-size: 18px;
         font-weight: normal;
+
+        &.capitalize {
+            text-transform: capitalize;
+        }
     }
 }
 
@@ -97,6 +100,11 @@
         display: inline-block;
 
         box-shadow: none;
+
+        &.sitemap-close-notice {
+            float: right;
+            margin-top: 5px;
+        }
     }
 
     &.active {

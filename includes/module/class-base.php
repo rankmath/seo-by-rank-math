@@ -25,17 +25,38 @@ class Base {
 	use Hooker;
 
 	/**
+	 * Screen
+	 *
+	 * @var string
+	 */
+	public static $screen = '';
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
 		$this->register_admin_page();
 
 		if ( isset( $this->page ) && $this->page->is_current_page() ) {
+
+			// Store the current screen ID.
+			self::$screen = $this->page->parent . '_page_' . $this->page->id;
+
+			// Register screen options.
 			$this->register_screen_options();
+
+			// Register the table if it exists.
 			if ( isset( $this->table ) ) {
 				$this->action( 'admin_init', 'admin_init' );
 			}
 		}
+	}
+
+	/**
+	 * Get the current screen.
+	 */
+	public static function get_screen() {
+		return self::$screen;
 	}
 
 	/**

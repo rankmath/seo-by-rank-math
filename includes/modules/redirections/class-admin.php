@@ -54,7 +54,6 @@ class Admin extends Base {
 		$this->load_metabox();
 
 		if ( Helper::has_cap( 'redirections' ) ) {
-			$this->action( 'rank_math/dashboard/widget', 'dashboard_widget', 12 );
 			$this->filter( 'rank_math/settings/general', 'add_settings' );
 		}
 
@@ -180,35 +179,6 @@ class Admin extends Base {
 		);
 
 		return $tabs;
-	}
-
-	/**
-	 * Add stats in the Rank Math admin dashboard widget.
-	 */
-	public function dashboard_widget() {
-		$data = DB::get_stats();
-		?>
-		<h3>
-			<?php esc_html_e( 'Redirections', 'rank-math' ); ?>
-			<a href="<?php echo esc_url( Helper::get_admin_url( 'redirections' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'rank-math' ); ?>"><i class="dashicons dashicons-ellipsis"></i></a>
-		</h3>
-		<div class="rank-math-dashabord-block">
-			<div>
-				<h4>
-					<?php esc_html_e( 'Redirection Count', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of Redirections created in the Rank Math.', 'rank-math' ); ?></span></span>
-				</h4>
-				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->total ) ); ?></strong>
-			</div>
-			<div>
-				<h4>
-					<?php esc_html_e( 'Redirection Hits', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of hits received by all the Redirections.', 'rank-math' ); ?></span></span>
-				</h4>
-				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->hits ) ); ?></strong>
-			</div>
-		</div>
-		<?php
 	}
 
 	/**

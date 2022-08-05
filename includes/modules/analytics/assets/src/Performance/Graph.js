@@ -106,6 +106,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 
 								return (
 									<linearGradient
+										key={ id }
 										id={ id }
 										x1="0"
 										y1="0"
@@ -139,6 +140,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 
 							return (
 								<YAxis
+									key={ id }
 									hide={ hideYAxis }
 									dx={ 1 === counter ? -10 : 10 }
 									axisLine={ false }
@@ -161,6 +163,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 							const dataKey = 'adsense' === id ? 'earnings' : id
 							return (
 								<Area
+									key={ id }
 									connectNulls={ true }
 									dataKey={ dataKey }
 									stroke={ getColor( id ) }

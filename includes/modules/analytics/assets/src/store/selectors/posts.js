@@ -4,6 +4,11 @@
 import { isUndefined } from 'lodash'
 
 /**
+ * WordPress dependencies
+ */
+import { applyFilters } from '@wordpress/hooks'
+
+/**
  * Internal dependencies
  */
 import { filtersToUrlParams } from '../../functions'
@@ -33,39 +38,14 @@ export function getPostsSummary( state ) {
 /**
  * Get analytics summary.
  *
- * @param {Object} state The app state.
+ * @param {Object} state    The app state.
+ * @param {string} postType Selected post type.
  *
  * @return {string} Return analytics summary.
  */
-export function getAnalyticsSummary( state ) {
-	return state.appData.analyticsSummary
-}
-
-/**
- * Get all posts rows.
- *
- * @param {Object} state The app state.
- *
- * @return {string} Return posts rows.
- */
-export function getPostsRowsAll( state ) {
-	return state.appData.postsRows
-}
-
-/**
- * Get posts rows all filtered by page.
- *
- * @param {Object} state The app state.
- * @param {number} page The page number.
- * @param {string} filters The filter parameter.
- *
- * @return {string} Return posts rows.
- */
-export function getPostsRows( state, page, filters ) {
-	let params = filtersToUrlParams( filters, false )
-	params = '' === params ? 'all' : params
-
-	return isUndefined( state.appData.postsRows[ page ] ) ? {} : state.appData.postsRows[ page ][ params ]
+export function getAnalyticsSummary( state, postType = '' ) {
+	const summary = ! isUndefined( state.appData.analyticsSummary[ postType ] ) ? state.appData.analyticsSummary[ postType ] : state.appData.analyticsSummary
+	return applyFilters( 'rankMath.analytics.analyticsSummary', summary, state.appData.analyticsSummary )
 }
 
 /**
@@ -82,16 +62,18 @@ export function getPostsRowsByObjectsAll( state ) {
 /**
  * Get posts rows by objects filtered by page and filter params.
  *
- * @param {Object} state The app state.
- * @param {number} page The page number.
- * @param {string} filters The filter parameter.
- * @param {string} orders The order parameter.
+ * @param {Object} state    The app state.
+ * @param {number} page     The page number.
+ * @param {string} filters  The filter parameter.
+ * @param {string} orders   The order parameter.
+ * @param {string} postType Selected Post type.
  *
  * @return {string} Return posts rows.
  */
-export function getPostsRowsByObjects( state, page, filters, orders ) {
+export function getPostsRowsByObjects( state, page, filters, orders, postType = '' ) {
 	let params = filtersToUrlParams( filters ) + filtersToUrlParams( orders, false )
 	params = '' === params ? 'all' : params
+	params = postType ? params + '&postType=' + postType : params
 
 	return isUndefined( state.appData.postsRowsByObjects[ page ] ) ? {} : state.appData.postsRowsByObjects[ page ][ params ]
 }

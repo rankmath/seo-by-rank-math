@@ -8,11 +8,7 @@ import Marionette from 'Marionette'
  * WordPress dependencies
  */
 import { createElement, render } from '@wordpress/element'
-
-/**
- * Internal dependencies
- */
-import App from '../sidebar/App'
+import { applyFilters } from '@wordpress/hooks'
 
 export default Marionette.ItemView.extend( {
 	template: false,
@@ -27,7 +23,8 @@ export default Marionette.ItemView.extend( {
 
 	onShow() {
 		render(
-			createElement( App ),
+			/* Filter to include components from the common editor file */
+			createElement( applyFilters( 'rank_math_app', {} ) ),
 			document.getElementById( 'elementor-panel-rank-math' )
 		)
 	},

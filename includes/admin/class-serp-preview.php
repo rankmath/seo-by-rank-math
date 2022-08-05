@@ -13,7 +13,6 @@ namespace RankMath\Admin;
 use RankMath\CMB2;
 use RankMath\Helper;
 use RankMath\Rewrite;
-use RankMath\Helpers\Sitepress;
 use RankMath\Schema\DB;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\WordPress;
@@ -171,11 +170,9 @@ class Serp_Preview {
 		if ( empty( $termlink ) ) {
 			$permalink_format = $permalink;
 		} else {
-			Sitepress::get()->remove_home_url_filter();
 			$termlink         = str_replace( $this->get_home_url(), '', $permalink );
 			$termlink         = str_replace( $term->slug, '%postname%', $termlink );
 			$permalink_format = $this->get_home_url( user_trailingslashit( $termlink, 'category' ) );
-			Sitepress::get()->restore_home_url_filter();
 		}
 
 		$url = untrailingslashit( esc_url( $permalink ) );
@@ -192,7 +189,7 @@ class Serp_Preview {
 	 */
 	private function get_home_url( $path = '' ) {
 		if ( ! function_exists( 'pll_home_url' ) ) {
-			return home_url( $path );
+			return Helper::get_home_url( $path );
 		}
 
 		return trailingslashit( pll_home_url() ) . $path;

@@ -17,6 +17,7 @@ use WP_REST_Server;
 use WP_REST_Request;
 use WP_REST_Controller;
 use RankMath\Helper;
+use RankMath\Traits\Hooker;
 use RankMath\Traits\Meta;
 use MyThemeShop\Helpers\Str;
 
@@ -27,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Admin extends WP_REST_Controller {
 
-	use Meta;
+	use Meta, Hooker;
 
 	/**
 	 * Constructor.
@@ -81,6 +82,16 @@ class Admin extends WP_REST_Controller {
 				'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
 			]
 		);
+
+		register_rest_route(
+			\RankMath\Rest\Rest_Helper::BASE,
+			'/dashboardWidget',
+			[
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => [ $this, 'dashboard_widget_items' ],
+				'permission_callback' => function() { return current_user_can( 'read' ); },
+			]
+		);
 	}
 
 	/**
@@ -117,6 +128,15 @@ class Admin extends WP_REST_Controller {
 		Helper::toggle_auto_update_setting( $value );
 
 		return true;
+	}
+
+	/**
+	 * Function to get the dashboard widget content.
+	 */
+	public function dashboard_widget_items() {
+		ob_start();
+		$this->do_action( 'dashboard/widget' );
+		return ob_get_clean();
 	}
 
 	/**

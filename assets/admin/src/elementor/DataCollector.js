@@ -138,11 +138,26 @@ class DataCollector {
 		const content = []
 		this.getContentArea()
 			.find( '.elementor-widget-container' )
-			.each( function() {
-				content.push( jQuery( this ).html() )
+			.each( ( index, element ) => {
+				content.push( this.decodeEntities( jQuery( element ).html() ) )
 			} )
 
 		return content.join( '' )
+	}
+
+	/**
+	 * Decode the HTML entities in the given string.
+	 *
+	 * @param {string} html The string to decode.
+	 * @return {string} The decoded string.
+	 */
+	decodeEntities( html ) {
+		if ( ! html ) {
+			return ''
+		}
+
+		html = html.replace( '–', '-' )
+		return html
 	}
 
 	/**
@@ -354,6 +369,8 @@ class DataCollector {
 				dispatch( 'rank-math' ).schemaUpdated( false )
 				dispatch( 'rank-math' ).updateSchemas( newSchemas )
 				dispatch( 'rank-math' ).updateEditSchemas( newEditSchemas )
+			} else {
+				dispatch( 'rank-math' ).updateSchemas( schemas )
 			}
 		} )
 	}

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import $ from 'jquery'
-import { debounce } from 'lodash'
+import { debounce, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -24,6 +24,7 @@ class DataCollector {
 	 */
 	constructor() {
 		this.updateBtn = $( '#publish' )
+		this.form = $( '#post' )
 		this._data = {
 			id: false,
 			slug: false,
@@ -157,8 +158,11 @@ class DataCollector {
 		rankMathEditor.refresh( 'init' )
 	}
 
-	handleSlugChange( slug ) {
-		this.elemSlug.val( slug )
+	handleSlugChange( slug, force = false ) {
+		if ( 'auto-draft' !== this.getStatus() || force ) {
+			this.elemSlug.val( slug )
+		}
+
 		$( '#editable-post-name' ).text( slug )
 		$( '#editable-post-name-full' ).text( slug )
 
@@ -211,6 +215,12 @@ class DataCollector {
 
 	isTinymce() {
 		return 'undefined' !== typeof tinymce
+	}
+
+	getStatus() {
+		const status = ! isUndefined( this.postStatus ) && this.postStatus.length ? this.postStatus.val() : ''
+
+		return isUndefined( status ) ? '' : status
 	}
 }
 

@@ -74,7 +74,7 @@ $cmb->add_field(
 		'id'      => 'capitalize_titles',
 		'type'    => 'toggle',
 		'name'    => esc_html__( 'Capitalize Titles', 'rank-math' ),
-		'desc'    => esc_html__( 'Automatically capitalize the first character of all title tags.', 'rank-math' ),
+		'desc'    => esc_html__( 'Automatically capitalize the first character of each word in the titles.', 'rank-math' ),
 		'default' => 'off',
 	]
 );
@@ -84,7 +84,7 @@ $cmb->add_field(
 		'id'      => 'open_graph_image',
 		'type'    => 'file',
 		'name'    => esc_html__( 'OpenGraph Thumbnail', 'rank-math' ),
-		'desc'    => esc_html__( 'When a featured image is not set, this image will be used as a thumbnail when your post is shared on Facebook. Recommended image size 1200 x 630 pixels.', 'rank-math' ),
+		'desc'    => esc_html__( 'When a featured image or an OpenGraph Image is not set for individual posts/pages/CPTs, this image will be used as a fallback thumbnail when your post is shared on Facebook. The recommended image size is 1200 x 630 pixels.', 'rank-math' ),
 		'options' => [ 'url' => false ],
 		'class'   => 'button-primary',
 	]

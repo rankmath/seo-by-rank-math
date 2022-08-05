@@ -138,7 +138,6 @@ class Redirector {
 			return;
 		}
 
-		// Debug if on.
 		$this->do_debugging();
 
 		if ( true === $this->do_filter( 'redirection/add_query_string', true ) && Str::is_non_empty( $this->query_string ) ) {
@@ -227,22 +226,19 @@ class Redirector {
 	 * Search from cache.
 	 */
 	private function from_cache() {
-		// If there is a queried object.
-		$object_id = get_queried_object_id();
-		if ( $object_id ) {
-			$redirection = Cache::get_by_object_id( $object_id, $this->get_current_object_type() );
-			if ( $redirection && trim( $redirection->from_url, '/' ) === $this->uri ) {
+		$redirections = Cache::get_by_object_id_or_url( (int) get_queried_object_id(), $this->get_current_object_type(), $this->uri );
+		foreach ( $redirections as $redirection ) {
+			if ( empty( $redirection->object_id ) ) {
 				$this->cache = true;
 				$this->set_redirection( $redirection->redirection_id );
 				return;
 			}
-		}
 
-		$redirection = Cache::get_by_url( $this->uri );
-		if ( $redirection ) {
-			$this->cache = true;
-			$this->set_redirection( $redirection->redirection_id );
-			return;
+			if ( trim( $redirection->from_url, '/' ) === $this->uri ) {
+				$this->cache = true;
+				$this->set_redirection( $redirection->redirection_id );
+				return;
+			}
 		}
 	}
 
@@ -273,9 +269,8 @@ class Redirector {
 	 * Do the fallback strategy here.
 	 */
 	private function fallback() {
-		$wp_redirect_admin_locations = [ 'login', 'admin', 'dashboard' ];
-
-		if ( ! is_404() || in_array( $this->uri, $wp_redirect_admin_locations, true ) ) {
+		$wp_redirect_admin_locations = $this->do_filter( 'redirection/fallback_exclude_locations', [ 'login', 'admin', 'dashboard' ] );
+		if ( ! is_404() || ! $this->uri || in_array( $this->uri, $wp_redirect_admin_locations, true ) ) {
 			return;
 		}
 
@@ -305,12 +300,7 @@ class Redirector {
 			return;
 		}
 
-		$this->filter( 'user_has_cap', 'filter_user_has_cap' );
-
-		require_once ABSPATH . 'wp-admin/includes/screen.php';
-
-		include_once \dirname( __FILE__ ) . '/views/debugging.php';
-		exit;
+		new Debugger( get_object_vars( $this ) );
 	}
 
 	/**
@@ -385,9 +375,12 @@ class Redirector {
 			'WP_User' => 'user',
 		];
 		$object = get_queried_object();
-		$object = get_class( $object );
+		if ( ! $object ) {
+			return 'none';
+		}
 
-		return isset( $hash[ $object ] ) ? $hash[ $object ] : 'any';
+		$object = get_class( $object );
+		return isset( $hash[ $object ] ) ? $hash[ $object ] : 'none';
 	}
 
 	/**

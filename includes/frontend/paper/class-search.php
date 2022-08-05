@@ -25,7 +25,7 @@ class Search implements IPaper {
 	 * @return string
 	 */
 	public function title() {
-		return Paper::get_from_options( 'search_title', [], 'Searched for %searchphrase% %page% %sep% %sitename%' );
+		return Paper::get_from_options( 'search_title', [], 'Searched for %search_query% %page% %sep% %sitename%' );
 	}
 
 	/**

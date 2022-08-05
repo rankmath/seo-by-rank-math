@@ -125,6 +125,10 @@
 
         letter-spacing: normal;
         word-wrap: break-word;
+
+        &.capitalize {
+            text-transform: capitalize;
+        }
     }
 
     &-description,

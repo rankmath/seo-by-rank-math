@@ -1,4 +1,4 @@
-# Copyright (C) 2021 rank-math
+# Copyright (C) 2022 rank-math
 # This file is distributed under the same license as the rank-math package.
 msgid ""
 msgstr ""
@@ -8,6 +8,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
+"POT-Creation-Date: 2022-07-28 11:19+0000\n"
+"Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -101,7 +103,7 @@ msgstr ""
 msgid "Rank Math Free"
 msgstr ""
 
-msgid "https://rankmath.com/changelog/#free"
+msgid "https://rankmath.com/changelog/free"
 msgstr ""
 
 #. translators: placeholders are the old and new version numbers.
@@ -121,6 +123,9 @@ msgid "Homepage SEO"
 msgstr ""
 
 msgid "Edit Homepage SEO Settings"
+msgstr ""
+
+msgid "Pages"
 msgstr ""
 
 #. translators: Post Type Singular Name
@@ -203,6 +208,9 @@ msgstr ""
 msgid "Import &amp; Export"
 msgstr ""
 
+msgid "Rank Math Knowledge Base"
+msgstr ""
+
 msgid "Search Options"
 msgstr ""
 
@@ -213,6 +221,25 @@ msgid "Advanced Mode"
 msgstr ""
 
 msgid "None"
+msgstr ""
+
+msgid "Unable to validate Rank Math SEO registration data."
+msgstr ""
+
+msgid "Please try reconnecting."
+msgstr ""
+
+#. translators: KB Link
+msgid "If the issue persists, please try the solution described in our Knowledge Base article: %s"
+msgstr ""
+
+msgid "[3. Unable to Encrypt]"
+msgstr ""
+
+msgid "Seems like your site URL has changed since you connected to Rank Math."
+msgstr ""
+
+msgid "Click here to reconnect."
 msgstr ""
 
 #. translators: sitename
@@ -232,6 +259,19 @@ msgstr ""
 msgid "Share"
 msgstr ""
 
+#. translators: 1 is "WordPress Address (URL)", 2 is "Site Address (URL)", 3 is a link to the General Settings, with "WordPress General Settings" as anchor text.
+msgid "Rank Math cannot be connected because your site URL doesn't appear to be a valid URL. If the domain name contains special characters, please make sure to use the encoded version in the %1$s &amp; %2$s fields on the %3$s page."
+msgstr ""
+
+msgid "WordPress Address (URL)"
+msgstr ""
+
+msgid "Site Address (URL)"
+msgstr ""
+
+msgid "WordPress General Settings"
+msgstr ""
+
 msgid "Help &amp; Support"
 msgstr ""
 
@@ -239,27 +279,6 @@ msgid "Twitter username (without @)"
 msgstr ""
 
 msgid "Facebook profile URL"
-msgstr ""
-
-msgid "Rank Math Overview"
-msgstr ""
-
-msgid "Latest Blog Posts from Rank Math"
-msgstr ""
-
-msgid "Error in fetching."
-msgstr ""
-
-msgid "NEW"
-msgstr ""
-
-msgid "Blog"
-msgstr ""
-
-msgid "(opens in a new window)"
-msgstr ""
-
-msgid "Go Pro"
 msgstr ""
 
 msgid "The canonical URL you entered does not seem to be a valid URL. Please double check it in the SEO meta box &raquo; Advanced tab."
@@ -373,10 +392,38 @@ msgstr ""
 msgid "Standard"
 msgstr ""
 
+msgid "Rank Math Overview"
+msgstr ""
+
+msgid "Latest Blog Posts from Rank Math"
+msgstr ""
+
+msgid "Error: the Rank Math blog feed could not be downloaded."
+msgstr ""
+
+msgid "NEW"
+msgstr ""
+
+msgid "Blog"
+msgstr ""
+
+msgid "(opens in a new window)"
+msgstr ""
+
+msgid "Go Pro"
+msgstr ""
+
 msgid "Import & Export"
 msgstr ""
 
 msgid "Are you sure you want to import settings into Rank Math? Don't worry, your current configuration will be saved as a backup."
+msgstr ""
+
+#. translators: %s is the plugin name.
+msgid "Are you sure you want to import data from %s?"
+msgstr ""
+
+msgid "Select data to import."
 msgstr ""
 
 msgid "Are you sure you want to restore this backup? Your current configuration will be overwritten."
@@ -385,7 +432,8 @@ msgstr ""
 msgid "Are you sure you want to delete this backup?"
 msgstr ""
 
-msgid "Are you sure you want erase all traces of this plugin?"
+#. translators: %s is the plugin name.
+msgid "Are you sure you want erase all traces of %s?"
 msgstr ""
 
 #. translators: Plugin name
@@ -423,6 +471,9 @@ msgid "Backup does not exist."
 msgstr ""
 
 msgid "Backup restored successfully."
+msgstr ""
+
+msgid "Uploaded file could not be read."
 msgstr ""
 
 msgid "Settings successfully imported. Your old configuration has been saved as a backup."
@@ -581,6 +632,15 @@ msgstr ""
 msgid "Panel"
 msgstr ""
 
+msgid "Take your SEO to the Next Level!"
+msgstr ""
+
+msgid "Get Rank Math PRO!"
+msgstr ""
+
+msgid "Click here to see all the exciting features."
+msgstr ""
+
 msgid "Save Changes"
 msgstr ""
 
@@ -647,18 +707,28 @@ msgstr ""
 msgid "Pillar Content"
 msgstr ""
 
-#. translators: placeholders are the opening and closing strong tags.
-msgid "Hey, you know the %1$s secret of success of Rank Math? It's your success! %2$s When you succeed, we succeed as well."
+msgid "Rank Your Content With the Power of PRO & A.I."
 msgstr ""
 
-#. translators: placeholder is the words "check here".
-msgid "You are missing on the easy SEO traffic to your website. %s why Rank Math PRO is the last SEO tool that you'll ever buy!"
+msgid "Unlimited Websites"
 msgstr ""
 
-msgid "CHECK HERE"
+msgid "Content A.I. (Artificial Intelligence)"
 msgstr ""
 
-msgid "It has everything that is needed to optimize your website for more traffic from the search engines."
+msgid "Keyword Rank Tracker"
+msgstr ""
+
+msgid "Powerful Schema Generator"
+msgstr ""
+
+msgid "24x7 Premium Support"
+msgstr ""
+
+msgid "SEO Email Reports"
+msgstr ""
+
+msgid "and Many More…"
 msgstr ""
 
 msgid "Yes, I want to learn more"
@@ -668,21 +738,6 @@ msgid "No, I don't want it"
 msgstr ""
 
 msgid "I already upgraded"
-msgstr ""
-
-#. translators: placeholder is the plugin name.
-msgid "Hey, did you know that with %1$s, %2$syou can drive more traffic%3$s by easily automating your SEO tasks?"
-msgstr ""
-
-msgctxt "Pro plugin name inside the admin notice"
-msgid "Rank Math PRO"
-msgstr ""
-
-#. translators: placeholder is the words "buy here".
-msgid "%s at a discounted price."
-msgstr ""
-
-msgid "BUY HERE"
 msgstr ""
 
 msgid "Yes, I want better SEO"
@@ -826,7 +881,7 @@ msgstr ""
 msgid "Schema Markup"
 msgstr ""
 
-msgid "Advance Options"
+msgid "Advanced Options"
 msgstr ""
 
 msgid "Deactivated"
@@ -894,7 +949,7 @@ msgstr ""
 msgid "No Image Index"
 msgstr ""
 
-msgid "Lets you specify that you do not want your pages to appear as the referring page for images that appear in image search results"
+msgid "Prevents images on a page from being indexed by Google and other search engines"
 msgstr ""
 
 msgid "No Snippet"
@@ -1047,9 +1102,6 @@ msgstr ""
 msgid "Egypt"
 msgstr ""
 
-msgid "Spain"
-msgstr ""
-
 msgid "Finland"
 msgstr ""
 
@@ -1134,6 +1186,9 @@ msgstr ""
 msgid "South Korea"
 msgstr ""
 
+msgid "Spain"
+msgstr ""
+
 msgid "Sweden"
 msgstr ""
 
@@ -1159,6 +1214,132 @@ msgid "United States"
 msgstr ""
 
 msgid "Vietnam"
+msgstr ""
+
+msgid "Algeria"
+msgstr ""
+
+msgid "Armenia"
+msgstr ""
+
+msgid "Azerbaijan"
+msgstr ""
+
+msgid "Bahrain"
+msgstr ""
+
+msgid "Bangladesh"
+msgstr ""
+
+msgid "Belarus"
+msgstr ""
+
+msgid "Bolivia, Plurinational State Of"
+msgstr ""
+
+msgid "Bulgaria"
+msgstr ""
+
+msgid "Cambodia"
+msgstr ""
+
+msgid "Costa Rica"
+msgstr ""
+
+msgid "Croatia"
+msgstr ""
+
+msgid "Cyprus"
+msgstr ""
+
+msgid "Ecuador"
+msgstr ""
+
+msgid "El Salvador"
+msgstr ""
+
+msgid "Estonia"
+msgstr ""
+
+msgid "Ghana"
+msgstr ""
+
+msgid "Guatemala"
+msgstr ""
+
+msgid "Jordan"
+msgstr ""
+
+msgid "Kazakhstan"
+msgstr ""
+
+msgid "Korea, Republic Of"
+msgstr ""
+
+msgid "Latvia"
+msgstr ""
+
+msgid "Lithuania"
+msgstr ""
+
+msgid "Macedonia, The Former Yugoslav Republic Of"
+msgstr ""
+
+msgid "Malta"
+msgstr ""
+
+msgid "Morocco"
+msgstr ""
+
+msgid "Myanmar"
+msgstr ""
+
+msgid "Nicaragua"
+msgstr ""
+
+msgid "Pakistan"
+msgstr ""
+
+msgid "Paraguay"
+msgstr ""
+
+msgid "Peru"
+msgstr ""
+
+msgid "Russian Federation"
+msgstr ""
+
+msgid "Senegal"
+msgstr ""
+
+msgid "Serbia"
+msgstr ""
+
+msgid "Slovakia"
+msgstr ""
+
+msgid "Slovenia"
+msgstr ""
+
+msgid "Sri Lanka"
+msgstr ""
+
+msgid "Tunisia"
+msgstr ""
+
+msgid "United Arab Emirates"
+msgstr ""
+
+msgid "United States Of America"
+msgstr ""
+
+msgid "Uruguay"
+msgstr ""
+
+msgid "Venezuela, Bolivarian Republic Of"
+msgstr ""
+
+msgid "Viet Nam"
 msgstr ""
 
 msgid "WooCommerce Product"
@@ -1215,7 +1396,17 @@ msgstr ""
 msgid "Instant Indexing"
 msgstr ""
 
-msgid "Directly notify search engines(Bing) when pages are added, updated or removed."
+#. translators: placeholder is "IndexNow API".
+msgid "Directly notify search engines like Bing & Yandex using the %s when pages are added, updated and removed, or submit URLs manually."
+msgstr ""
+
+msgid "IndexNow API"
+msgstr ""
+
+msgid "Content AI"
+msgstr ""
+
+msgid "Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. Supports 80+ Countries."
 msgstr ""
 
 #. translators: Link to kb article
@@ -1298,6 +1489,46 @@ msgstr ""
 msgid "Please activate Web Stories plugin to use this module."
 msgstr ""
 
+msgid "You cant access this page."
+msgstr ""
+
+msgid "PRO"
+msgstr ""
+
+msgid "NEW!"
+msgstr ""
+
+msgid "Take SEO to the Next Level!"
+msgstr ""
+
+msgid "Unlimited personal websites"
+msgstr ""
+
+msgid "Free 15 Content AI Credits"
+msgstr ""
+
+msgid "Track 500 Keywords"
+msgstr ""
+
+msgid "24/7 Support"
+msgstr ""
+
+msgid "Buy"
+msgstr ""
+
+#. translators: %d: minutes
+#. translators: %d is the number of minutes.
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Less than a minute"
+msgstr ""
+
+msgid "Items"
+msgstr ""
+
 msgid "Post ID"
 msgstr ""
 
@@ -1355,7 +1586,7 @@ msgstr ""
 msgid "Products"
 msgstr ""
 
-#. translators: 1: current page number, 2: total number of pages.
+#. translators: %1$d: current page number, %2$d: max pages.
 msgid "Page %1$d of %2$d"
 msgstr ""
 
@@ -1665,6 +1896,9 @@ msgstr ""
 msgid "Site token"
 msgstr ""
 
+msgid "URL to get HTML tags for."
+msgstr ""
+
 msgid "No meta rows found to update."
 msgstr ""
 
@@ -1712,7 +1946,6 @@ msgstr ""
 msgid "Rank Math: Introducing SEO Performance Reports via Email. %1$sClick here to enable it%2$s."
 msgstr ""
 
-#. translators: %1$s: post type label, %2$s: edit redirection URL.
 #. translators: %1$s: post type label, %2$s: edit redirection URL.
 #. translators: %1$s: term name, %2$s: edit redirection URL.
 msgid "SEO Notice: you just changed the slug of a %1$s and Rank Math has automatically created a redirection. You can edit the redirection by <a href=\"%2$s\">clicking here</a>."
@@ -1871,6 +2104,9 @@ msgstr ""
 msgid "The featured image should be at least 200 by 200 pixels to be picked up by Facebook and other social media sites."
 msgstr ""
 
+msgid "Upgrade"
+msgstr ""
+
 msgid "username"
 msgstr ""
 
@@ -1986,7 +2222,10 @@ msgstr ""
 msgid "Select this if you have a custom Rank Math settings file you want to use."
 msgstr ""
 
-msgid "<strong>Note</strong> You can easily switch between modes at any point."
+msgid "Note"
+msgstr ""
+
+msgid "You can easily switch between modes at any point."
 msgstr ""
 
 msgid "Import SEO Settings"
@@ -2091,7 +2330,6 @@ msgid "Use automatic structured data to mark up content, to help Google better u
 msgstr ""
 
 #. translators: Google article snippet doc link
-#. translators: Google article snippet doc link
 msgid "Google does not allow Person as the Publisher for articles. Organization will be used instead. You can read more about this <a href=\"%s\" target=\"_blank\">here</a>."
 msgstr ""
 
@@ -2111,10 +2349,10 @@ msgstr ""
 msgid "Default rich snippet selected when creating a new product."
 msgstr ""
 
-msgid "Default rich snippet selected when creating a new post of this type. "
+msgid "None (Click here to set one)"
 msgstr ""
 
-msgid "None (Click here to set one)"
+msgid "Default rich snippet selected when creating a new post of this type. "
 msgstr ""
 
 msgid "Connect Google&trade; Services"
@@ -2177,7 +2415,7 @@ msgstr ""
 msgid "Default Social Share Image"
 msgstr ""
 
-msgid "When a featured image is not set, this image will be used as a thumbnail when your post is shared on Facebook. <strong>Recommended image size 1200 x 630 pixels.</strong>"
+msgid "When a featured image or an OpenGraph Image is not set for individual posts/pages/CPTs, this image will be used as a fallback thumbnail when your post is shared on Facebook. <strong>The recommended image size is 1200 x 630 pixels.</strong>"
 msgstr ""
 
 msgid "Personal Blog"
@@ -2297,6 +2535,9 @@ msgstr ""
 msgid "Not a valid settings founds to delete cache."
 msgstr ""
 
+msgid "Last 30 Days"
+msgstr ""
+
 msgid "Review analytics and sitemaps"
 msgstr ""
 
@@ -2306,11 +2547,13 @@ msgstr ""
 msgid "Post re-index in progress."
 msgstr ""
 
-#. translators: Auth URL
-msgid "It seems like the connection with your Google account & Rank Math needs to be made again. <a href=\"%s\" class=\"rank-math-reconnect-google\">Please click here.</a>"
-msgstr ""
+#. translators: %1$d: number of changes, %2$s: new collation.
+msgid "%1$d collation changed to %2$s."
+msgid_plural "%1$d collations changed to %2$s."
+msgstr[0] ""
+msgstr[1] ""
 
-msgid "Last 30 Days"
+msgid "No collation mismatch to fix."
 msgstr ""
 
 msgid "Search Traffic"
@@ -2338,6 +2581,10 @@ msgid "Average Position"
 msgstr ""
 
 msgid "Average position of all the ranking keywords below 100 position."
+msgstr ""
+
+#. translators: Auth URL
+msgid "It seems like the connection with your Google account & Rank Math needs to be made again. <a href=\"%s\" class=\"rank-math-reconnect-google\">Please click here.</a>"
 msgstr ""
 
 msgid "Rank Math is importing latest data from connected Google Services, %1$s remaining."
@@ -2413,11 +2660,7 @@ msgstr ""
 msgid "Purge Analytics Cache"
 msgstr ""
 
-#. translators: 1. Review Schema documentation link
 msgid "Clear analytics cache to re-calculate all the stats again."
-msgstr ""
-
-msgid "here"
 msgstr ""
 
 msgid "Clear Cache"
@@ -2426,7 +2669,6 @@ msgstr ""
 msgid "Rebuild Index for Analytics"
 msgstr ""
 
-#. translators: 1. Review Schema documentation link
 msgid "Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats."
 msgstr ""
 
@@ -2470,6 +2712,28 @@ msgid "Group Description."
 msgstr ""
 
 msgid "Group description of the current group"
+msgstr ""
+
+#. translators: Link to kb article
+msgid "Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. %s."
+msgstr ""
+
+msgid "Rank Math Content AI"
+msgstr ""
+
+msgid "Sorry, only authenticated users can research the keyword."
+msgstr ""
+
+msgid "Content AI is not enabled on this Post type."
+msgstr ""
+
+msgid "No data found for the researched keyword."
+msgstr ""
+
+msgid "This feature is not available on the localhost."
+msgstr ""
+
+msgid "You have used all the free credits which are allowed to this domain."
 msgstr ""
 
 msgid "No Rank Math transients found."
@@ -2556,6 +2820,15 @@ msgstr ""
 msgid "Re-create Tables"
 msgstr ""
 
+msgid "Fix Analytics table collations"
+msgstr ""
+
+msgid "In some cases, the Analytics database tables or columns don't match with each other, which can cause database errors. This tool can fix that issue."
+msgstr ""
+
+msgid "Fix Collations"
+msgstr ""
+
 msgid "Yoast Block Converter"
 msgstr ""
 
@@ -2638,44 +2911,84 @@ msgstr ""
 msgid "Format used for the new <code>title</code> attribute values."
 msgstr ""
 
-msgid "Bing URL Submission API: Insert one or more URLs."
+msgid "Unknown error."
 msgstr ""
 
-#. translators: The placeholder is the number of URLs.
-msgid "Successfully submitted %s URL to the Bing URL Submission API."
-msgid_plural "Successfully submitted %s URLs to the Bing URL Submission API."
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Failed to submit post to the Bing URL Submission API."
+msgid "Invalid request."
 msgstr ""
 
-msgid "Post successfully submitted to the Bing URL Submission API."
+msgid "Invalid API key."
 msgstr ""
 
-#. translators: daily quota
-msgid "Please configure the Instant Indexing module in the Settings tab first."
+msgid "Invalid URL."
 msgstr ""
 
-#. translators: placeholder is the error message.
-msgid "Bing URL Submission API error: %s"
+msgid "Too many requests."
 msgstr ""
 
-#. translators: 1. the error code, 2. the error message.
-msgid "Bing URL Submission API HTTP error %1$s: %2$s"
+msgid "Internal server error."
 msgstr ""
 
-msgid "Instant Indexing: Submit to Bing"
+msgid "Instant Indexing: Submit Pages"
+msgstr ""
+
+msgid "Instant Indexing: Submit Page"
+msgstr ""
+
+msgid "Submit URLs"
+msgstr ""
+
+msgid "Send URLs directly to the IndexNow API."
 msgstr ""
 
 #. translators: Link to kb article
 msgid "Instant Indexing module settings. %s."
 msgstr ""
 
-msgid "URL Submission"
+msgid "History"
 msgstr ""
 
-msgid "Send URLs directly to the Bing URL Submission API."
+msgid "The last 100 IndexNow API requests."
+msgstr ""
+
+msgid "An error occurred while submitting the URL."
+msgstr ""
+
+msgid "Error: could not clear history."
+msgstr ""
+
+msgid "Error: could not get history."
+msgstr ""
+
+msgid "No submissions yet."
+msgstr ""
+
+msgid "Error submitting page to IndexNow."
+msgstr ""
+
+#. translators: %s: Number of pages submitted.
+msgid "%s page submitted to IndexNow."
+msgid_plural "%s pages submitted to IndexNow."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No URLs provided."
+msgstr ""
+
+msgid "Invalid URLs provided."
+msgstr ""
+
+msgid "Failed to submit URLs. See details in the History tab."
+msgstr ""
+
+#. translators: %s is the number of URLs submitted.
+msgid "Successfully submitted %s URL."
+msgid_plural "Successfully submitted %s URLs."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: placeholder is human-readable time, e.g. "1 hour".
+msgid "%s ago"
 msgstr ""
 
 msgid "Links: "
@@ -2698,18 +3011,6 @@ msgstr ""
 
 #. translators: Link to kb article
 msgid "Easily create redirects without fiddling with tedious code. %s."
-msgstr ""
-
-msgid "Redirection Count"
-msgstr ""
-
-msgid "Total number of Redirections created in the Rank Math."
-msgstr ""
-
-msgid "Redirection Hits"
-msgstr ""
-
-msgid "Total number of hits received by all the Redirections."
 msgstr ""
 
 msgid "No valid ID found."
@@ -2776,6 +3077,10 @@ msgstr ""
 msgid "Please add at least one valid source URL."
 msgstr ""
 
+#. translators: Placeholder expands to number of redirections.
+msgid "Warning: you have more than %d active redirections. Exporting them to your .htaccess file may cause performance issues."
+msgstr ""
+
 msgid "Export to .htaccess"
 msgstr ""
 
@@ -2799,6 +3104,18 @@ msgstr ""
 
 #. translators: source pattern
 msgid "Invalid regex pattern: %s"
+msgstr ""
+
+msgid "Redirection Count"
+msgstr ""
+
+msgid "Total number of Redirections created in the Rank Math."
+msgstr ""
+
+msgid "Redirection Hits"
+msgstr ""
+
+msgid "Total number of hits received by all the Redirections."
 msgstr ""
 
 msgid "Create and edit redirections"
@@ -2843,6 +3160,9 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
+msgid "View"
+msgstr ""
+
 msgid "From"
 msgstr ""
 
@@ -2850,6 +3170,9 @@ msgid "To"
 msgstr ""
 
 msgid "Type"
+msgstr ""
+
+msgid "Created"
 msgstr ""
 
 msgid "Last Accessed"
@@ -2884,10 +3207,13 @@ msgstr ""
 msgid "Leave the field empty to let WordPress handle the contents dynamically. If an actual robots.txt file is present in the root folder of your site, this option won't take effect and you have to edit the file directly, or delete it and then edit from here."
 msgstr ""
 
-msgid "robots.txt file is not writable."
+msgid "Contents are locked because a robots.txt file is present in the root folder."
 msgstr ""
 
-msgid "Contents are locked because robots.txt file is present in the root folder."
+msgid "Rank Math could not detect if a robots.txt file exists or not because of a filesystem issue. The file contents entered here may not be applied."
+msgstr ""
+
+msgid "robots.txt file is not writable."
 msgstr ""
 
 #. translators: placeholder is the Settings page URL.
@@ -2972,6 +3298,15 @@ msgstr ""
 msgid "SEO Analysis for this page"
 msgstr ""
 
+msgid "API Error:"
+msgstr ""
+
+msgid "The Site-Wide Analysis is unavailable on localhost."
+msgstr ""
+
+msgid "Click here to learn more"
+msgstr ""
+
 #. translators: API error
 msgid "<strong>API Error:</strong> %s"
 msgstr ""
@@ -3032,7 +3367,6 @@ msgid "Your site may not be visible to search engine."
 msgstr ""
 
 #. translators: %1$s link to the reading settings, %2$s closing tag for the link
-#. translators: %1$s resolves to the opening tag of the link to the reading settings, %1$s resolves to the closing tag for the link
 msgid "You must %1$sgo to your Reading Settings%2$s and uncheck the box for Search Engine Visibility."
 msgstr ""
 
@@ -3167,7 +3501,7 @@ msgid "+%d More..."
 msgstr ""
 
 #. translators: post type links
-msgid "There are %s published posts where the focus keyword does not appear in the post title."
+msgid "There are %s published posts where the primary focus keyword does not appear in the post title."
 msgstr ""
 
 msgid "Your site has one or more sitemaps."
@@ -3177,6 +3511,10 @@ msgid "No sitemaps found."
 msgstr ""
 
 msgid "Attention: Search Engines can't see your website."
+msgstr ""
+
+#. translators: %1$s: opening tag of the link, %2$s: the closing tag
+msgid "Navigate to %1$sSettings > Reading%2$s and turn off this option: \"Discourage search engines from indexing this site\"."
 msgstr ""
 
 msgid "Your site is accessible by search engine."
@@ -3207,7 +3545,6 @@ msgid "single %s"
 msgstr ""
 
 #. translators: %1$s: thing, %2$s: Learn more link.
-#. translators: %1$s: thing, %2$s: Learn more link.
 msgid "Change Sitemap settings of %1$s. %2$s."
 msgstr ""
 
@@ -3230,7 +3567,7 @@ msgstr ""
 msgid "%s archives"
 msgstr ""
 
-msgid "Exclude this image from sitemap"
+msgid "Exclude this attachment from sitemap"
 msgstr ""
 
 #. translators: the placeholder is for the sitemap base url.
@@ -3241,6 +3578,9 @@ msgid "configuration file"
 msgstr ""
 
 msgid "Click here to see the code."
+msgstr ""
+
+msgid "I already added"
 msgstr ""
 
 #. translators: placeholder is the post type name.
@@ -3270,7 +3610,6 @@ msgstr ""
 msgid "Learn more about <a href=\"%s\" target=\"_blank\">KML File</a>."
 msgstr ""
 
-#. translators: xsl value count
 #. translators: xsl value count
 msgid "<a href=\"%s\">&#8592; Sitemap Index</a>"
 msgstr ""
@@ -3409,10 +3748,10 @@ msgstr ""
 msgid "Database Table: Keyword Manager"
 msgstr ""
 
-msgid "Created"
+msgid "Database Table: Inspections"
 msgstr ""
 
-msgid "Doesn't exists"
+msgid "Not found"
 msgstr ""
 
 msgid "This update will install a beta version of Rank Math."
@@ -3604,6 +3943,16 @@ msgstr ""
 msgid "Automatically add <code>target=\"_blank\"</code> attribute for external links appearing in your posts, pages, and other post types to make them open in a new browser tab or window. The attribute is dynamically applied when the content is displayed, and the stored content is not changed."
 msgstr ""
 
+msgid "Headless CMS Support"
+msgstr ""
+
+#. translators: placeholder is a link to "Read more".
+msgid "Enable this option to register a REST API endpoint that returns the HTML meta tags for a given URL. %s"
+msgstr ""
+
+msgid "Read more"
+msgstr ""
+
 msgid "Show SEO Score to Visitors"
 msgstr ""
 
@@ -3714,16 +4063,6 @@ msgstr ""
 msgid "Enter your Baidu Webmaster Tools verification HTML code or ID. Get it from here: %s"
 msgstr ""
 
-msgid "Alexa Verification ID"
-msgstr ""
-
-#. translators: Alexa webmaster link
-msgid "Enter your Alexa verification HTML code or ID. Get it from here: %s"
-msgstr ""
-
-msgid "Alexa Account"
-msgstr ""
-
 msgid "Yandex Verification ID"
 msgstr ""
 
@@ -3803,6 +4142,12 @@ msgstr ""
 msgid "Author archive meta description. SEO options for specific author archives can be set with the meta box in the user profiles."
 msgstr ""
 
+msgid "Slack Enhanced Sharing"
+msgstr ""
+
+msgid "When the option is enabled and an author archive is shared on Slack, additional information will be shown (name & total number of posts)."
+msgstr ""
+
 msgid "Add SEO Controls"
 msgstr ""
 
@@ -3830,13 +4175,13 @@ msgstr ""
 msgid "Capitalize Titles"
 msgstr ""
 
-msgid "Automatically capitalize the first character of all title tags."
+msgid "Automatically capitalize the first character of each word in the titles."
 msgstr ""
 
 msgid "OpenGraph Thumbnail"
 msgstr ""
 
-msgid "When a featured image is not set, this image will be used as a thumbnail when your post is shared on Facebook. Recommended image size 1200 x 630 pixels."
+msgid "When a featured image or an OpenGraph Image is not set for individual posts/pages/CPTs, this image will be used as a fallback thumbnail when your post is shared on Facebook. The recommended image size is 1200 x 630 pixels."
 msgstr ""
 
 msgid "Twitter Card Type"
@@ -3968,16 +4313,16 @@ msgstr ""
 msgid "Prevent search results pages from getting indexed by search engines. Search results could be considered to be thin content and prone to duplicate content issues."
 msgstr ""
 
-msgid "Noindex Paginated Pages"
+msgid "Noindex Subpages"
 msgstr ""
 
-msgid "Set this to on to prevent /page/2 and further of any archive to show up in the search results."
+msgid "Prevent all paginated pages from getting indexed by search engines."
 msgstr ""
 
-msgid "Noindex Archive Subpages"
+msgid "Noindex Paginated Single Pages"
 msgstr ""
 
-msgid "Prevent paginated archive pages from getting indexed by search engines."
+msgid "Prevent paginated pages of single pages and posts to show up in the search results. This also applies for the Blog page."
 msgstr ""
 
 msgid "Noindex Password Protected Pages"
@@ -3986,7 +4331,24 @@ msgstr ""
 msgid "Prevent password protected pages & posts from getting indexed by search engines."
 msgstr ""
 
-msgid "To configure attachment-related meta tags disable attachment redirection to parent."
+#. translators: The settings page link
+msgid "To configure meta tags for your media attachment pages, you need to first %s to parent."
+msgstr ""
+
+msgid "disable redirect attachments"
+msgstr ""
+
+#. translators: Post type name.
+msgid "When the option is enabled and a %s is shared on Slack, additional information will be shown (estimated time to read and author)."
+msgstr ""
+
+msgid "When the option is enabled and a product is shared on Slack, additional information will be shown (price)."
+msgstr ""
+
+msgid "When the option is enabled and a product is shared on Slack, additional information will be shown (price & availability)."
+msgstr ""
+
+msgid "When the option is enabled and a page is shared on Slack, additional information will be shown (estimated time to read)."
 msgstr ""
 
 #. translators: post type name
@@ -4021,10 +4383,17 @@ msgstr ""
 msgid "Description for %s archive pages."
 msgstr ""
 
+#. translators: %s is "Article" inside a <code> tag.
+msgid "Default rich snippet selected when creating a new post of this type. If %s is selected, it will be applied for all existing posts with no Schema selected."
+msgstr ""
+
+msgctxt "Schema type name in a field description"
+msgid "Article"
+msgstr ""
+
 msgid "Headline"
 msgstr ""
 
-#. translators: post type name
 #. translators: post type name
 msgid "%s Robots Meta"
 msgstr ""
@@ -4140,7 +4509,6 @@ msgid "Description for %s archives"
 msgstr ""
 
 #. translators: taxonomy name
-#. translators: taxonomy name
 msgid "%s Archives Robots Meta"
 msgstr ""
 
@@ -4154,6 +4522,9 @@ msgstr ""
 
 #. translators: taxonomy name
 msgid "%s Archives Advanced Robots Meta"
+msgstr ""
+
+msgid "When the option is enabled and a term from this taxonomy is shared on Slack, additional information will be shown (the total number of items with this term)."
 msgstr ""
 
 msgid "Add the SEO Controls for the term editor screen to customize SEO options for individual terms in this taxonomy."
@@ -4232,13 +4603,13 @@ msgid "Less"
 msgstr ""
 
 #. translators: php version
-msgid "Your PHP Version: %s | Recommended version: 7.2 | Minimal required: 5.4"
+msgid "Your PHP Version: %s | Recommended version: 7.4 | Minimal required: 7.2"
 msgstr ""
 
 msgid "Your PHP Version: %s"
 msgstr ""
 
-msgid "Recommended: PHP 7.2 or later"
+msgid "Recommended: PHP 7.4 or later"
 msgstr ""
 
 msgid "Rank Math is compatible with your PHP version but we recommend updating to PHP 7.2 for increased speed and security."
@@ -4265,10 +4636,10 @@ msgstr ""
 msgid "PHP SimpleXML Extension missing"
 msgstr ""
 
-msgid "PHP GD Extension installed"
+msgid "PHP GD or Imagick Extension installed"
 msgstr ""
 
-msgid "PHP GD Extension missing"
+msgid "PHP GD or Imagick Extension missing"
 msgstr ""
 
 msgid "PHP MBstring Extension installed"
@@ -4281,6 +4652,12 @@ msgid "PHP OpenSSL Extension installed"
 msgstr ""
 
 msgid "PHP OpenSSL Extension missing"
+msgstr ""
+
+msgid "Base64 encode &amp; decode functions available"
+msgstr ""
+
+msgid "Base64 encode &amp; decode functions missing"
 msgstr ""
 
 msgid "Please resolve the issues above to be able to use all features of Rank Math plugin. If you are not sure how to do it, please contact your hosting provider."
@@ -4373,9 +4750,6 @@ msgstr ""
 msgid "Join FREE Facebook Group"
 msgstr ""
 
-msgid "Rank Math Knowledge Base"
-msgstr ""
-
 msgid "Get 24x7 Support"
 msgstr ""
 
@@ -4394,10 +4768,23 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
+msgid "Enable the Index Status tab"
+msgstr ""
+
+msgid "Enable this option to show the Index Status tab in the Analytics module."
+msgstr ""
+
+#. translators: GA4 KB link
+msgid "Ready to switch to Google Analytics 4? %s"
+msgstr ""
+
+msgid "Click here to know how"
+msgstr ""
+
 msgid "Property"
 msgstr ""
 
-msgid "View"
+msgid "Data Stream"
 msgstr ""
 
 msgid "Install analytics code"
@@ -4407,15 +4794,6 @@ msgid "Enable this option only if you are not using any other plugin/theme to in
 msgstr ""
 
 msgid "Anonymize IP addresses"
-msgstr ""
-
-msgid "PRO"
-msgstr ""
-
-msgid "Enable Cookieless Tracking. Want to make Analytics GDPR ready? %s"
-msgstr ""
-
-msgid "Click here."
 msgstr ""
 
 msgid "Self-Hosted Analytics JS File"
@@ -4447,7 +4825,7 @@ msgid "Let us know a few things about your site&hellip;"
 msgstr ""
 
 #. translators: help link
-msgid "If you are new to Rank Math, <a href=\"#\" data-target=\"rank-math-wizard-tabs\" class=\"rank-math-collapsible-trigger\">click here</a> to learn more."
+msgid "If you are new to Rank Math, %s to learn more."
 msgstr ""
 
 msgid "Setup Tutorial"
@@ -4559,6 +4937,9 @@ msgstr ""
 msgid "Bad request. Please check the code."
 msgstr ""
 
+msgid "Unknown error, call get_response() to find out what happened."
+msgstr ""
+
 msgid "Sorry, no preference found."
 msgstr ""
 
@@ -4581,10 +4962,10 @@ msgstr ""
 msgid "Next data fetch on %s"
 msgstr ""
 
-msgid "Delete Data"
+msgid "Delete data"
 msgstr ""
 
-msgid "Update Data manually"
+msgid "Update data manually"
 msgstr ""
 
 msgid "Fetching in Progress"
@@ -4601,6 +4982,12 @@ msgid "free version"
 msgstr ""
 
 msgid "Analytics Database"
+msgstr ""
+
+msgid "Frontend Stats Bar"
+msgstr ""
+
+msgid "Enable this option to show Analytics Stats on the front just after the admin bar."
 msgstr ""
 
 #. translators: Placeholders are the opening and closing tag for the link.
@@ -4643,31 +5030,115 @@ msgstr ""
 msgid "Group Advanced Robots Meta"
 msgstr ""
 
-#. translators: daily quota
-msgid "Insert URLs to send to the Bing URL Submission API (one per line, up to 500):"
+msgid "Default Country"
 msgstr ""
 
-msgid "Submit URLs"
+msgid "Select Post Type"
 msgstr ""
 
-#. translators: daily quota
-msgid "Quota Left Today: %s"
+msgid "Select the post type you use for Content AI."
 msgstr ""
 
-msgid "Bing API Key"
+msgid "Click to refresh the available credits."
 msgstr ""
 
-#. translators: Link to KB article
-msgid "Insert your Bing Webmaster Tools API Key. %s"
+#. translators: 1. Credits left 2. Buy more credits link
+msgid "%1$s credits left. Upgrade to get more credits from %2$s."
 msgstr ""
 
-msgid "How to obtain it?"
+msgid "here"
 msgstr ""
 
-msgid "Auto-Submit to Bing"
+msgid "Insert URLs to send to the IndexNow API (one per line, up to 10,000):"
 msgstr ""
 
-msgid "Submit posts from these post types automatically to the Bing URL Submission API when a post is published or edited."
+msgctxt "URL slug placeholder"
+msgid "hello-world"
+msgstr ""
+
+msgid "Clear History"
+msgstr ""
+
+msgid "Manual"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "Response"
+msgstr ""
+
+msgid "Response Code Help"
+msgstr ""
+
+msgid "Response Code"
+msgstr ""
+
+msgid "Response Message"
+msgstr ""
+
+msgid "Reasons"
+msgstr ""
+
+msgid "The URL was successfully submitted to the IndexNow API."
+msgstr ""
+
+msgid "Accepted"
+msgstr ""
+
+msgid "The URL was successfully submitted to the IndexNow API, but the API key will be checked later."
+msgstr ""
+
+msgid "Bad Request"
+msgstr ""
+
+msgid "The request was invalid."
+msgstr ""
+
+msgid "Forbidden"
+msgstr ""
+
+msgid "The key was invalid (e.g. key not found, file found but key not in the file)."
+msgstr ""
+
+msgid "Unprocessable Entity"
+msgstr ""
+
+msgid "The URLs don't belong to the host or the key is not matching the schema in the protocol."
+msgstr ""
+
+msgid "Too Many Requests"
+msgstr ""
+
+msgid "Too Many Requests (potential Spam)."
+msgstr ""
+
+msgid "Auto-Submit Post Types"
+msgstr ""
+
+msgid "Submit posts from these post types automatically to the IndexNow API when a post is published, updated, or trashed."
+msgstr ""
+
+msgid "API Key"
+msgstr ""
+
+msgid "The IndexNow API key proves the ownership of the site. It is generated automatically. You can change the key if it becomes known to third parties."
+msgstr ""
+
+msgid "Change Key"
+msgstr ""
+
+msgid "API Key Location"
+msgstr ""
+
+msgid "Check Key"
+msgstr ""
+
+#. translators: %s is the words "Check Key".
+msgid "Use the %1$s button to verify that the key is accessible for search engines. Clicking on it should open the key file in your browser and show the API key."
 msgstr ""
 
 msgid "Email"
@@ -4771,6 +5242,9 @@ msgstr ""
 msgid "Multiple Locations are available in the %s."
 msgstr ""
 
+msgid "Rank Math SEO Redirection Debugger"
+msgstr ""
+
 msgid "Redirection Debugger"
 msgstr ""
 
@@ -4800,6 +5274,9 @@ msgid "Manage All Redirections"
 msgstr ""
 
 msgid "<strong>Note:</strong> This interstitial page is displayed only to administrators. Site visitors are redirected without delay."
+msgstr ""
+
+msgid "Served from cache"
 msgstr ""
 
 msgid "<strong>Edit</strong> redirection details: from/to URLs and the redirection type."
@@ -4869,29 +5346,23 @@ msgstr ""
 msgid "Toggle All"
 msgstr ""
 
-#. translators: %s expands to a unit of time (e.g. 1 day).
+#. translators: %d is the number of days.
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#. translators: %s expands to a unit of time (e.g. 1 hour).
+#. translators: %d is the number of hours.
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#. translators: %s expands to a unit of time (e.g. 1 minute).
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#. translators: %s expands to a unit of time (e.g. 1 day).
+#. translators: placeholders are units of time, e.g. '1 hour and 30 minutes'
 msgid "%1$s and %2$s"
 msgstr ""
 
-#. translators: %s expands to a unit of time (e.g. 1 day).
+#. translators: placeholders are units of time, e.g. '1 day, 8 hours and 30 minutes'
 msgid "%1$s, %2$s and %3$s"
 msgstr ""
 
@@ -5167,10 +5638,7 @@ msgstr ""
 msgid "Ping Search Engines"
 msgstr ""
 
-msgid "Automatically notify Google &amp; Bing when a sitemap gets updated."
-msgstr ""
-
-msgid "To generate attachment sitemap disable attachment redirection to parent."
+msgid "Automatically notify Google when a sitemap gets updated."
 msgstr ""
 
 msgid "Include in Sitemap"
@@ -5335,6 +5803,16 @@ msgid "FULL REPORT"
 msgstr ""
 
 msgid "External Link Icon"
+msgstr ""
+
+msgid "Uh-oh"
+msgstr ""
+
+msgid "It seems that there are no stats to show right now."
+msgstr ""
+
+#. translators: placeholders are anchor opening and closing tags.
+msgid "If you can see the site data in your Search Console and Analytics accounts, but not here, then %1$s try reconnecting your account %2$s and make sure that the correct properties are selected in the %1$s Analytics Settings%2$s."
 msgstr ""
 
 #. translators: don't translate the variable names between the #hashes#.

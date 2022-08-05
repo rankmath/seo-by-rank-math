@@ -103,7 +103,7 @@ class MapCache {
 	/**
 	 * Get schema map by id.
 	 *
-	 * @param  {string} mapId Map id.
+	 * @param {string} mapId Map id.
 	 * @return {Object|boolean} Map object if available or False.
 	 */
 	getMap( mapId ) {
@@ -115,9 +115,10 @@ class MapCache {
 	/**
 	 * Get pre-defined tempaltes.
 	 *
-	 * @return {Array} Array of templates.
+	 * @param {boolean} isPro Whether the PRO plugin is active.
+	 * @return {Array}   Array of templates.
 	 */
-	getTemplates() {
+	getTemplates( isPro = false ) {
 		if ( null === this.templates ) {
 			this.templates = []
 			forEach( this.cache.schemas, ( value, key ) => {
@@ -127,6 +128,31 @@ class MapCache {
 					title: 'WooCommerceProduct' !== key ? title : __( 'WooCommerce Product', 'rank-math' ),
 				} )
 			} )
+
+			if ( ! isPro ) {
+				this.templates.push(
+					{
+						type: 'PodcastEpisode',
+						title: __( 'Podcast Episode', 'rank-math' ),
+						isPro: true,
+					},
+					{
+						type: 'Dataset',
+						title: __( 'Dataset', 'rank-math' ),
+						isPro: true,
+					},
+					{
+						type: 'FactCheck',
+						title: __( 'Fact Check', 'rank-math' ),
+						isPro: true,
+					},
+					{
+						type: 'Movie',
+						title: __( 'Movie', 'rank-math' ),
+						isPro: true,
+					}
+				)
+			}
 
 			this.templates = orderBy( this.templates, 'type' )
 		}
@@ -145,7 +171,7 @@ export const mapCache = new MapCache()
 /**
  * Get schema map by id.
  *
- * @param  {string} mapId Map id.
+ * @param {string} mapId Map id.
  * @return {Object|boolean} Map object if available or False.
  */
 export function getMap( mapId ) {

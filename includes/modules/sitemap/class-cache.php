@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles sitemaps caching and invalidation.
+ * Handle sitemap caching and invalidation.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -50,6 +50,11 @@ class Cache {
 	public function __construct() {
 		$this->wp_filesystem = WordPress::get_filesystem();
 		$this->mode          = $this->is_writable() ? 'file' : 'db';
+
+		/**
+		 * Change sitemap caching mode (can be "file" or "db").
+		 */
+		$this->mode = apply_filters( 'rank_math/sitemap/cache_mode', $this->mode );
 	}
 
 	/**
@@ -58,7 +63,7 @@ class Cache {
 	 * @return bool
 	 */
 	public function is_writable() {
-		if ( is_null( $this->wp_filesystem ) ) {
+		if ( is_null( $this->wp_filesystem ) || ! Helper::is_filesystem_direct() ) {
 			return false;
 		}
 
@@ -196,6 +201,13 @@ class Cache {
 	 * @param null|string $type The type to get the key for. Null for all caches.
 	 */
 	public static function invalidate_storage( $type = null ) {
+		/**
+		 * Filter: 'rank_math/sitemap/invalidate_storage' - Allow developers to disable sitemap cache invalidation.
+		 */
+		if ( ! apply_filters( 'rank_math/sitemap/invalidate_storage', true, $type ) ) {
+			return;
+		}
+
 		$wp_filesystem = WordPress::get_filesystem();
 		if ( is_null( $wp_filesystem ) ) {
 			return;
@@ -208,7 +220,7 @@ class Cache {
 			wp_mkdir_p( $directory );
 			self::clear_transients();
 			self::cached_files( false );
-			Helper::clear_cache();
+			Helper::clear_cache( 'sitemap' );
 			return;
 		}
 
@@ -225,7 +237,12 @@ class Cache {
 
 		self::clear_transients( $type );
 		self::cached_files( $data );
-		Helper::clear_cache();
+		Helper::clear_cache( 'sitemap/' . $type );
+
+		/**
+		 * Action: 'rank_math/sitemap/invalidated_storage' - Runs after sitemap cache invalidation.
+		 */
+		do_action( 'rank_math/sitemap/invalidated_storage', $type );
 	}
 
 	/**

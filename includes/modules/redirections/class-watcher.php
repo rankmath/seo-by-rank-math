@@ -13,6 +13,7 @@ namespace RankMath\Redirections;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Sitepress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -38,12 +39,12 @@ class Watcher {
 	private $updated_terms = [];
 
 	/**
-	 * Hook methods for invalidation on necessary events.
+	 * The constructor.
 	 */
 	public function __construct() {
 
 		// Post.
-		// Only monitor if permalinks enabled.
+		// Only monitor if pretty permalinks are enabled.
 		if ( get_option( 'permalink_structure' ) ) {
 			if ( Helper::get_settings( 'general.redirections_post_redirect' ) ) {
 				$this->action( 'pre_post_update', 'pre_post_update' );
@@ -136,6 +137,8 @@ class Watcher {
 		if ( ! in_array( $taxonomy, array_keys( Helper::get_accessible_taxonomies() ), true ) ) {
 			return;
 		}
+
+		Sitepress::get()->delete_cached_tax_permalink( $term_id, $taxonomy );
 
 		// Both state permalink.
 		$before_permalink = isset( $this->updated_terms[ $term_id ] ) ? $this->updated_terms[ $term_id ] : false;

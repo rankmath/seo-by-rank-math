@@ -1,5 +1,6 @@
 const resolve = require( 'path' ).resolve
 const TerserPlugin = require( 'terser-webpack-plugin' )
+const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
 
 const externals = {
 	jquery: 'jQuery',
@@ -7,7 +8,6 @@ const externals = {
 	react: 'React',
 	moment: 'moment',
 	'react-dom': 'ReactDOM',
-	'@yaireo/tagify': 'Tagify',
 	'@rankMath/analyzer': 'rankMathAnalyzer',
 
 	// WordPress Packages.
@@ -55,14 +55,15 @@ const alias = {
 		__dirname,
 		'./includes/modules/schema/assets/src'
 	),
-	'@scShared': resolve(
-		__dirname,
-		'./includes/modules/analytics/assets/src/shared'
-	),
+	'@scShared': resolve( __dirname, './includes/modules/analytics/assets/src/shared' ),
 	'@shared': resolve( __dirname, './assets/shared/src' ),
 	'@helpers': resolve( __dirname, './assets/admin/src/helpers' ),
 	'@slots': resolve( __dirname, './assets/admin/src/sidebar/slots' ),
 	'@classic': resolve( __dirname, './assets/admin/src/classic' ),
+	'content-ai': resolve(
+		__dirname,
+		'./includes/modules/content-ai/assets/src'
+	),
 }
 
 const entryPoints = {
@@ -71,6 +72,7 @@ const entryPoints = {
 		classic: './assets/admin/src/classic/classic.js',
 		gutenberg: './assets/admin/src/gutenberg/gutenberg.js',
 		elementor: './assets/admin/src/elementor/elementor.js',
+		'rank-math-app': './assets/admin/src/app.js',
 		'gutenberg-formats': './assets/admin/src/gutenberg/formats/index.js',
 		'gutenberg-primary-term': './assets/admin/src/gutenberg-primary-term.js',
 		'glue-custom-fields': './assets/admin/src/glue-custom-fields.js',
@@ -110,6 +112,7 @@ const entryPoints = {
 	},
 	analytics: {
 		stats: './includes/modules/analytics/assets/src/index.js',
+		'admin-bar': './includes/modules/analytics/assets/src/admin-bar.js',
 	},
 	status: {
 		status: './includes/modules/status/assets/src/status.js',
@@ -125,6 +128,9 @@ const entryPoints = {
 		divi: './assets/admin/src/divi/divi.js',
 		'divi-iframe': './assets/admin/src/divi/divi-iframe.js',
 		'divi-admin': './assets/admin/src/divi/divi-admin.js',
+	},
+	'content-ai': {
+		'content-ai': './includes/modules/content-ai/assets/src/index.js',
 	},
 }
 
@@ -143,16 +149,15 @@ const paths = {
 	'seo-analysis': './includes/modules/seo-analysis/assets/js',
 	status: './includes/modules/status/assets/js',
 	'version-control': './includes/modules/version-control/assets/js',
+	'content-ai': './includes/modules/content-ai/assets/js',
 }
 
-module.exports = function( env, arg ) {
-	const mode =
-		( env && env.environment ) ||
-		process.env.NODE_ENV ||
-		arg.mode ||
-		'production'
+module.exports = ( env ) => {
+	const mode = process.env.npm_config_mode || 'production'
 
-	const what = arg.what || 'plugin'
+	const what = env.what || 'plugin'
+
+	const withreport = process.env.npm_config_withReport || false
 
 	return {
 		devtool:
@@ -164,6 +169,10 @@ module.exports = function( env, arg ) {
 		},
 		resolve: {
 			alias,
+			fallback: {
+				fs: false,
+				path: false,
+			},
 		},
 		module: {
 			rules: [
@@ -175,6 +184,17 @@ module.exports = function( env, arg ) {
 						cacheDirectory: true,
 						presets: [ '@babel/preset-env' ],
 					},
+				},
+				{
+					test: /\.s[ac]ss$/i,
+					use: [
+						// Creates `style` nodes from JS strings
+						'style-loader',
+						// Translates CSS into CommonJS
+						'css-loader',
+						// Compiles Sass to CSS
+						'sass-loader',
+					],
 				},
 				{
 					test: /.svg$/,
@@ -195,5 +215,6 @@ module.exports = function( env, arg ) {
 				},
 			} ) ],
 		},
+		plugins: withreport ? [ new BundleAnalyzerPlugin() ] : [],
 	}
 }

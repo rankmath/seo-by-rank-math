@@ -29,6 +29,7 @@ class Elementor {
 	public function __construct() {
 		$this->action( 'init', 'init' );
 		$this->filter( 'rank_math/frontend/robots', 'robots' );
+		$this->filter( 'rank_math/frontend/disable_integration', 'disable_frontend_integration' );
 	}
 
 	/**
@@ -44,6 +45,45 @@ class Elementor {
 		$this->action( 'elementor/editor/footer', 'start_capturing', 0 );
 		$this->action( 'elementor/editor/footer', 'end_capturing', 999 );
 		$this->filter( 'rank_math/sitemap/content_before_parse_html_images', 'apply_builder_in_content', 10, 2 );
+	}
+
+	/**
+	 * Disable frontend integration on Elementor Maintenance page.
+	 *
+	 * @since 1.0.91
+	 *
+	 * @param boolean $value Whether to run the frontend integration.
+	 */
+	public function disable_frontend_integration( $value ) {
+		$mode = get_option( 'elementor_maintenance_mode_mode' );
+		if ( ! in_array( $mode, [ 'maintenance', 'coming_soon' ], true ) ) {
+			return $value;
+		}
+
+		if ( ! get_option( 'elementor_maintenance_mode_template_id' ) ) {
+			return $value;
+		}
+
+		$exclude_mode = get_option( 'elementor_maintenance_mode_exclude_mode', [] );
+		if ( 'logged_in' === $exclude_mode && is_user_logged_in() ) {
+			return $value;
+		}
+
+		if ( 'custom' !== $exclude_mode ) {
+			return true;
+		}
+
+		$exclude_roles = get_option( 'elementor_maintenance_mode_exclude_roles', [] );
+		$user          = wp_get_current_user();
+		$user_roles    = $user->roles;
+
+		if ( is_multisite() && is_super_admin() ) {
+			$user_roles[] = 'super_admin';
+		}
+
+		$compare_roles = array_intersect( $user_roles, $exclude_roles );
+
+		return ! empty( $compare_roles ) ? $value : true;
 	}
 
 	/**
@@ -72,7 +112,6 @@ class Elementor {
 	 */
 	public function enqueue() {
 		$deps = [
-			'tagify',
 			'wp-core-data',
 			'wp-components',
 			'wp-block-editor',
@@ -84,23 +123,34 @@ class Elementor {
 			'rank-math-analyzer',
 			'backbone-marionette',
 			'elementor-common-modules',
+			'rank-math-app',
 		];
 
 		$mode = \Elementor\Core\Settings\Manager::get_settings_managers( 'editorPreferences' )->get_model()->get_settings( 'ui_theme' );
-		wp_deregister_style( 'rank-math-post-metabox' );
+		wp_deregister_style( 'rank-math-editor' );
 
 		wp_enqueue_style( 'wp-components' );
 		wp_enqueue_style( 'site-health' );
-		wp_enqueue_style( 'rank-math-elementor', rank_math()->plugin_url() . 'assets/admin/css/elementor.css', [], rank_math()->version );
+		wp_enqueue_style( 'rank-math-editor', rank_math()->plugin_url() . 'assets/admin/css/elementor.css', [], rank_math()->version );
+		$media_query = '';
+
+		$dark_styles = $this->do_filter(
+			'elementor/dark_styles',
+			[
+				'rank-math-elementor-dark' => rank_math()->plugin_url() . 'assets/admin/css/elementor-dark.css',
+			]
+		);
 
 		if ( 'light' !== $mode ) {
 			$media_query = 'auto' === $mode ? '(prefers-color-scheme: dark)' : 'all';
-			wp_enqueue_style( 'rank-math-elementor-dark', rank_math()->plugin_url() . 'assets/admin/css/elementor-dark.css', [], rank_math()->version, $media_query );
+			foreach ( $dark_styles as $handle => $src ) {
+				wp_enqueue_style( $handle, $src, [], rank_math()->version, $media_query );
+			}
 		}
 
-		Helper::add_json( 'elementorDarkMode', rank_math()->plugin_url() . 'assets/admin/css/elementor-dark.css' );
+		Helper::add_json( 'elementorDarkMode', $dark_styles );
 
-		wp_enqueue_script( 'rank-math-elementor', rank_math()->plugin_url() . 'assets/admin/js/elementor.js', $deps, rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-editor', rank_math()->plugin_url() . 'assets/admin/js/elementor.js', $deps, rank_math()->version, true );
 		rank_math()->variables->setup();
 		rank_math()->variables->setup_json();
 	}

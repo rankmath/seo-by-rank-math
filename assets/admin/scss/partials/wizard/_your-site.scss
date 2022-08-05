@@ -6,10 +6,11 @@
 
 		header {
 			font-size: 14px;
+
 			padding: 12px 16px;
 
-			background: #f0f2f4;
 			border-radius: 3px;
+			background: #f0f2f4;
 
 			a {
 				color: $primary;
@@ -38,8 +39,12 @@
 				border-bottom: 2px solid $primary;
 			}
 
-			.dashicons {
-				margin-right: 15px;
+			.rm-icon {
+				font-size: 18px;
+
+				margin-right: 10px;
+
+				vertical-align: -3px;
 			}
 		}
 	}
@@ -49,36 +54,43 @@
 
 		background: #f4f5f6;
 
-		#help-panel-knowledge, #help-panel-video {
+		#help-panel-knowledge,
+		#help-panel-video {
 			border: 0;
 			background: transparent;
-
-			&:hover {
-				color: inherit;
-			}
 		}
 	}
 
 	.search-form:not(.media-toolbar-primary) {
 		label {
-			display: block;
 			font-size: 14px;
+
+			display: block;
+
+			opacity: .8;
 		}
 
 		input {
 			font-size: 1.3em;
 
 			margin-right: 15px;
-			padding: 0 8px 0 15px;
+			padding: 0 2% 0 15px;
 
 			border-color: $gray;
 
-			@include size( 77.5%, 40px );
+			@include size( 77%, 40px );
+
+			&:hover,
+			&:focus {
+				border-color: $primary;
+				box-shadow: 0 0 0 1px $primary;
+			}
 		}
 
-		button.button {
+		a.button {
 			width: 20%;
 
+			text-align: center;
 			letter-spacing: .05em;
 		}
 	}

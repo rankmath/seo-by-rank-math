@@ -36,12 +36,8 @@ const AnalyticItem = ( { title, tooltip, stats, graph, dataKey } ) => {
 					>
 						<ChartTooltip
 							content={ <CustomTooltip /> }
-							wrapperStyle={ { zIndex: 10 } }
+							wrapperStyle={ { zIndex: 10, marginTop: 50 } }
 							wrapperClassName="rank-math-graph-tooltip"
-							allowEscapeViewBox={ {
-								x: true,
-								y: true,
-							} }
 							formatter={ ( value, name ) => {
 								if ( name === 'position' ) {
 									return [

@@ -23,7 +23,7 @@
 
     .#{$namespace}-box {
         &-content {
-            padding: 1.875rem;
+            padding: 0.875rem;
 
             p:first-child {
                 margin-top: 0;
@@ -34,7 +34,8 @@
             }
 
             footer {
-                margin: 1.875rem -1.875rem -1.875rem;
+                margin: 0.875rem -0.875rem -0.875rem;
+                padding: 0.875rem;
             }
         }
     }
@@ -116,8 +117,10 @@
             }
 
             .rm-icon {
-                vertical-align: -1px;
+                vertical-align: -4px;
                 margin-right: 3px;
+                font-size: 18px;
+                font-weight: 600;
             }
         }
     }

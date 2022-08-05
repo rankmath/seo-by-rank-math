@@ -43,7 +43,7 @@ class Admin extends Base {
 		$this->filter( 'rank_math/settings/general', 'add_general_settings' );
 		$this->filter( 'rank_math/flush_fields', 'flush_fields' );
 
-		$this->action( 'rank_math/admin/enqueue_scripts', 'enqueue' );
+		$this->action( 'rank_math/admin/editor_scripts', 'enqueue' );
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Admin extends Base {
 			return;
 		}
 
-		wp_enqueue_script( 'rank-math-description-analysis', rank_math()->plugin_url() . 'includes/modules/woocommerce/assets/js/woocommerce.js', [ 'rank-math-metabox' ], rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-description-analysis', rank_math()->plugin_url() . 'includes/modules/woocommerce/assets/js/woocommerce.js', [ 'rank-math-editor' ], rank_math()->version, true );
 	}
 
 	/**

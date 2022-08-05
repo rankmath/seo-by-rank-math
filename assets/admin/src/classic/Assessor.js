@@ -14,6 +14,11 @@ import { doAction, addAction, applyFilters, addFilter } from '@wordpress/hooks'
 import getClassByScore from '@helpers/getClassByScore'
 import apiFetch from '@wordpress/api-fetch'
 
+/**
+ * Internal dependencies
+ */
+import unescape from '@helpers/unescape'
+
 class Assessor {
 	/**
 	 * Class constructor
@@ -65,7 +70,7 @@ class Assessor {
 		}
 
 		setTimeout( () => {
-			this.scoreText = '<span class="score-text"><span class="score-icon"><svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" width="20"><g><path d="m462 234.84-76.17 3.43 13.43 21-127 81.18-126-52.93-146.26 60.97 10.14 24.34 136.1-56.71 128.57 54 138.69-88.61 13.43 21z"/><path d="m54.1 312.78 92.18-38.41 4.49 1.89v-54.58h-96.67zm210.9-223.57v235.05l7.26 3 89.43-57.05v-181zm-105.44 190.79 96.67 40.62v-165.19h-96.67z"/></g></svg></span> SEO: <strong>Not available</strong></span>'
+			this.scoreText = '<span class="score-text"><span class="score-icon"><i class="rm-icon-rank-math"></i></span> SEO: <strong>Not available</strong></span>'
 			this.scoreElem = jQuery(
 				'<div class="misc-pub-section rank-math-seo-score">' +
 					this.scoreText +
@@ -122,16 +127,21 @@ class Assessor {
 		paper.setDescription( select( 'rank-math' ).getSerpDescription() )
 		paper.setUrl( gutenbergData.permalink )
 		paper.setText(
-			applyFilters( 'rank_math_content', gutenbergData.content )
+			unescape( applyFilters( 'rank_math_content', gutenbergData.content ) )
 		)
 		paper.setKeyword( keyword )
 		paper.setKeywords( keywords )
+		paper.setSchema( select( 'rank-math' ).getSchemas() )
 
 		if ( ! isUndefined( gutenbergData.featuredImage ) ) {
 			paper.setThumbnail( gutenbergData.featuredImage.source_url )
 			paper.setThumbnailAltText(
 				Helpers.removeDiacritics( gutenbergData.featuredImage.alt_text )
 			)
+		}
+
+		if ( ! isEmpty( select( 'rank-math' ).getContentAIScore() ) || ! isEmpty( rankMath.ca_keyword ) ) {
+			paper.setContentAI( true )
 		}
 
 		return paper
@@ -157,7 +167,7 @@ class Assessor {
 				const researches =
 					0 === index
 						? rankMath.assessor.researchesTests
-						: this.getSecondaryKeywordTests()
+						: this.filterTests( this.getSecondaryKeywordTests() )
 
 				promises.push(
 					this.analyzer
@@ -260,26 +270,32 @@ class Assessor {
 	}
 
 	saveEvent() {
-		if ( isUndefined( this.dataCollector.updateBtn ) ) {
+		if ( isUndefined( this.dataCollector.form ) || isUndefined( this.dataCollector.updateBtn ) ) {
 			return
 		}
 		let saveData = true
-		this.dataCollector.updateBtn.on( 'click', ( e ) => {
+		this.dataCollector.form.on( 'submit', ( e ) => {
 			if ( ! saveData ) {
 				return
 			}
 
+			// The e.originalEvent is undefined when the "Preview Changes" button is clicked.
+			if ( isUndefined( e.originalEvent ) ) {
+				return
+			}
+
 			e.preventDefault()
-			this.dataCollector.updateBtn.addClass( 'disabled' ).parent().find( '.spinner' ).addClass( 'is-active' )
+			const saveBtn = this.dataCollector.updateBtn.data( 'disable' ) && this.dataCollector.saveDraft.length ? this.dataCollector.saveDraft : this.dataCollector.updateBtn
+			saveBtn.addClass( 'disabled' ).parent().find( '.spinner' ).addClass( 'is-active' )
 			saveData = false
 			const promise1 = this.saveMeta()
 			const promise2 = this.saveSchemas( promise1 )
 			const promise3 = this.saveRedirection( promise2 )
 
 			Promise.all( [ promise1, promise2, promise3 ] ).then( () => {
-				this.dataCollector.updateBtn.removeClass( 'disabled' ).trigger( 'click' )
+				saveBtn.removeClass( 'disabled' ).trigger( 'click' )
 			} ).catch( () => {
-				this.dataCollector.updateBtn.removeClass( 'disabled' ).trigger( 'click' )
+				saveBtn.removeClass( 'disabled' ).trigger( 'click' )
 			} )
 
 			return false
@@ -315,6 +331,8 @@ class Assessor {
 
 	/**
 	 * Save redirection item.
+	 *
+	 * @param {Object} promise2
 	 */
 	saveRedirection( promise2 ) {
 		return new Promise( async ( resolve ) => {
@@ -365,6 +383,11 @@ class Assessor {
 		} )
 	}
 
+	/**
+	 * Save schema data.
+	 *
+	 * @param {Object} promise1
+	 */
 	saveSchemas( promise1 ) {
 		return new Promise( async ( resolve ) => {
 			await promise1

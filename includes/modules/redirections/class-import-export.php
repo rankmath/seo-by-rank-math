@@ -35,6 +35,28 @@ class Import_Export {
 	 * @return void
 	 */
 	public function export_tab() {
+		// Show a notice if the number of redirections is too high.
+		$limit = $this->do_filter( 'redirections/export_notice_limit', 1000 );
+		$count = DB::get_redirections(
+			[
+				'limit'  => $limit,
+				'status' => 'active',
+			]
+		);
+
+		if ( $count['count'] >= $limit ) {
+			?>
+			<div class="inline notice notice-warning notice-alt rank-math-notice" style="margin: 10px 10px 0;">
+				<p>
+					<?php
+					// Translators: Placeholder expands to number of redirections.
+					printf( esc_html__( 'Warning: you have more than %d active redirections. Exporting them to your .htaccess file may cause performance issues.', 'rank-math' ), $limit );
+					?>
+				</p>
+			</div>
+			<?php
+		}
+
 		?>
 		<div class="rank-math-redirections-export-options">
 			<a class="button button-primary" href="<?php echo esc_url( wp_nonce_url( Helper::get_admin_url( 'redirections', 'export=apache' ), 'rank-math-export-redirections' ) ); ?>"><?php esc_html_e( 'Export to .htaccess', 'rank-math' ); ?></a>

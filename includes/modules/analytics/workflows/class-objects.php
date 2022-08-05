@@ -52,25 +52,25 @@ class Objects extends Base {
 		}
 
 		$schema = "CREATE TABLE {$wpdb->prefix}{$table} (
-				id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-				created TIMESTAMP NOT NULL,
-				title TEXT NOT NULL,
-				page VARCHAR(500) NOT NULL,
-				object_type VARCHAR(100) NOT NULL,
-				object_subtype VARCHAR(100) NOT NULL,
-				object_id BIGINT(20) UNSIGNED NOT NULL,
-				primary_key VARCHAR(255) NOT NULL,
-				seo_score TINYINT NOT NULL DEFAULT 0,
-				page_score TINYINT NOT NULL DEFAULT 0,
-				is_indexable TINYINT(1) NOT NULL DEFAULT 1,
-				schemas_in_use VARCHAR(500),
-				desktop_interactive DOUBLE DEFAULT 0,
-				desktop_pagescore DOUBLE DEFAULT 0,
-				mobile_interactive DOUBLE DEFAULT 0,
-				mobile_pagescore DOUBLE DEFAULT 0,
-				pagespeed_refreshed TIMESTAMP,
-				PRIMARY KEY (id),
-				INDEX analytics_object_page (page(190))
+				id bigint(20) unsigned NOT NULL auto_increment,
+				created timestamp NOT NULL,
+				title text NOT NULL,
+				page varchar(500) NOT NULL,
+				object_type varchar(100) NOT NULL,
+				object_subtype varchar(100) NOT NULL,
+				object_id bigint(20) unsigned NOT NULL,
+				primary_key varchar(255) NOT NULL,
+				seo_score tinyint NOT NULL default 0,
+				page_score tinyint NOT NULL default 0,
+				is_indexable tinyint(1) NOT NULL default 1,
+				schemas_in_use varchar(500),
+				desktop_interactive double default 0,
+				desktop_pagescore double default 0,
+				mobile_interactive double default 0,
+				mobile_pagescore double default 0,
+				pagespeed_refreshed timestamp,
+				PRIMARY KEY  (id),
+				KEY analytics_object_page (page(190))
 			) $collate;";
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -79,6 +79,7 @@ class Objects extends Base {
 		} catch ( Exception $e ) { // phpcs:ignore
 			// Will log.
 		}
+
 	}
 
 	/**
@@ -90,7 +91,7 @@ class Objects extends Base {
 
 		// Add action for scheduler.
 		$task_name = 'rank_math/analytics/data_fetch';
-		$fetch_gap = apply_filters( 'rank_math/analytics/fetch_gap', 7 );
+		$fetch_gap = apply_filters( 'rank_math/analytics/fetch_gap', 7, 'objects' );
 
 		// Schedule new action only when there is no existing action.
 		if ( false === as_next_scheduled_action( $task_name ) ) {

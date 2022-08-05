@@ -228,17 +228,25 @@ class Local_Seo {
 	 */
 	private function add_contact_points( &$entity ) {
 		$phone_numbers = Helper::get_settings( 'titles.phone_numbers' );
-		if ( ! isset( $phone_numbers[0]['number'] ) ) {
+		if ( empty( $phone_numbers ) ) {
 			return;
 		}
 
-		$entity['contactPoint'] = [];
+		$numbers = [];
 		foreach ( $phone_numbers as $number ) {
-			$entity['contactPoint'][] = [
+			if ( empty( $number['number'] ) ) {
+				continue;
+			}
+
+			$numbers[] = [
 				'@type'       => 'ContactPoint',
 				'telephone'   => $number['number'],
 				'contactType' => $number['type'],
 			];
+		}
+
+		if ( ! empty( $numbers ) ) {
+			$entity['contactPoint'] = $numbers;
 		}
 	}
 

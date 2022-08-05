@@ -24,6 +24,8 @@ import {
 import Preview from './Preview'
 import SocialMediaUpload from './MediaUpload'
 import { getOverlayChoices } from '@helpers/overlayImages'
+import VariableInserter from '@components/VariableInserter'
+import Interpolate from '@components/Interpolate'
 
 const FacebookTab = ( props ) => (
 	<Fragment>
@@ -62,21 +64,44 @@ const FacebookTab = ( props ) => (
 		<SocialMediaUpload { ...props } />
 
 		<div className="field-group">
-			<TextControl
-				label={ __( 'Title', 'rank-math' ) }
-				value={ props.title }
-				placeholder={ props.serpTitle }
-				onChange={ props.updateTitle }
-			/>
+			<label htmlFor="rank-math-facebook-title">
+				{ __( 'Title', 'rank-math' ) }
+			</label>
+			<div className="variable-group">
+				<TextControl
+					id="rank-math-facebook-title"
+					value={ props.title }
+					placeholder={ props.serpTitle }
+					onChange={ props.updateTitle }
+				/>
+
+				<VariableInserter
+					onClick={ ( variable ) =>
+						props.updateTitle( props.title + ' %' + variable.variable + '%' )
+					}
+				/>
+			</div>
 		</div>
 
 		<div className="field-group">
-			<TextareaControl
-				label={ __( 'Description', 'rank-math' ) }
-				value={ props.description }
-				placeholder={ props.serpDescription }
-				onChange={ props.updateDescription }
-			/>
+			<label htmlFor="rank-math-facebook-description">
+				{ __( 'Description', 'rank-math' ) }
+			</label>
+
+			<div className="variable-group">
+				<TextareaControl
+					id="rank-math-facebook-description"
+					value={ props.description }
+					placeholder={ props.serpDescription }
+					onChange={ props.updateDescription }
+				/>
+
+				<VariableInserter
+					onClick={ ( variable ) =>
+						props.updateDescription( props.description + ' %' + variable.variable + '%' )
+					}
+				/>
+			</div>
 		</div>
 
 		<div className="field-group">
@@ -98,14 +123,27 @@ const FacebookTab = ( props ) => (
 					onChange={ props.updateImageOverlay }
 				/>
 
-				<div className="notice notice-alt notice-warning">
-					<p>
-						{ __(
-							'Please be careful with this option. Although this option will help increase CTR on Facebook, it might get you penalised if over-used.',
-							'rank-math'
-						) }
-					</p>
-				</div>
+				{ ! rankMath.isPro && (
+					<div className="notice notice-alt notice-warning">
+						<p>
+							<Interpolate
+								components={ {
+									link: (
+										<a
+											href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Gutenberg%20Social%20Tab&utm_campaign=WP"
+											target="_blank"
+											rel="noopener noreferrer"
+										/>
+									),
+								} }>
+								{ __(
+									'You can add custom thumbnail overlays with {{link}}Rank Math Pro{{/link}}.',
+									'rank-math'
+								) }
+							</Interpolate>
+						</p>
+					</div>
+				) }
 			</div>
 		</div>
 	</Fragment>

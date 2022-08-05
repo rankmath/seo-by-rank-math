@@ -167,6 +167,7 @@ class Post_Type implements Provider {
 		$total     = ( $offset + $max_entries );
 		$typecount = $this->get_post_type_count( $type );
 
+		Sitemap::maybe_redirect( $typecount, $max_entries );
 		if ( $total > $typecount ) {
 			$total = $typecount;
 		}

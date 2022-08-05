@@ -18,6 +18,10 @@
 	display: none;
 }
 
+.metabox-prefs legend + label {
+	@extend %hide;
+}
+
 .rank-math-redirections-form {
 	box-sizing: border-box;
 	width: 808px;

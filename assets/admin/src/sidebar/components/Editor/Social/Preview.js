@@ -21,6 +21,10 @@ const SocialPreview = ( props ) => {
 		props.cardType
 	)
 
+	const titleClasses = classnames( 'rank-math-social-preview-title', {
+		capitalize: rankMath.capitalizeTitle,
+	} )
+
 	return (
 		<div className={ classes }>
 			<div className="rank-math-social-preview-item">
@@ -36,7 +40,7 @@ const SocialPreview = ( props ) => {
 							src={ props.image }
 							alt=""
 						/>
-						{ props.hasOverlay && props.imageOverlay && (
+						{ props.hasOverlay && props.imageOverlay && typeof rankMath.overlayImages[ props.imageOverlay ] === 'object' && (
 							<img
 								src={
 									rankMath.overlayImages[ props.imageOverlay ]
@@ -58,7 +62,7 @@ const SocialPreview = ( props ) => {
 								{ props.siteurl }
 							</h4>
 						) }
-						<h3 className="rank-math-social-preview-title">
+						<h3 className={ titleClasses }>
 							{ props.title
 								? swapVariables.swap( props.title )
 								: props.serpTitle }

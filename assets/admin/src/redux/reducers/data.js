@@ -77,6 +77,7 @@ const DEFAULT_STATE = {
 
 	// Misc.
 	score: 0,
+	contentAIScore: {},
 	dirtyMetadata: {},
 }
 

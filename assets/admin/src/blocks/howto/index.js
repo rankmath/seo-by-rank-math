@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n'
 import { registerBlockType } from '@wordpress/blocks'
-import { addFilter, applyFilters } from '@wordpress/hooks'
+import { applyFilters } from '@wordpress/hooks'
 
 /**
  * Internal dependencies

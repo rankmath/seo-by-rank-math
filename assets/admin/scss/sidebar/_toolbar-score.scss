@@ -1,102 +1,95 @@
 // main: ../sidebar.scss
 
-div.interface-pinned-items {
-    button.components-button[aria-label='Rank Math'] {
-        padding: 0;
-
-        background: transparent;
-
-        &:hover {
+.edit-post-layout:not(.show-icon-labels) {
+    .interface-pinned-items {
+        button.components-button[aria-label='Rank Math'] {
+            padding: 0;
             background: transparent;
-        }
-
-        .#{$namespace}-toolbar-score {
-            padding: 8.5px 9px;
-
-            color: $color-8;
-            border-radius: 2px;
-            background: $light_gray;
-			border: 1px solid darken( $gray, 5% );
-
-            .rank-math-icon {
-                float: left;
-
-                height: 17px;
-                margin-right: 4px;
-
-                &,
-                *,
-                &:hover,
-                &:hover * {
-                    fill: inherit !important;
-                    stroke: inherit !important;
-                }
+    
+            &:hover {
+                background: transparent;
             }
-
-            .seo-score {
-                font-weight: 600;
-
-                display: inline-block;
-            }
-
-            &.loading {
-                pointer-events: none;
-            }
-
-            &.bad-fk {
-                color: darken( $color-bad, 5% );
-                background: lighten( $color-bad, 18% );
-
-                fill: darken( $color-bad, 5% );
-				border-color: darken( $color-bad, 5% );
-            }
-
-            &.ok-fk {
-                color: darken( $color-ok, 15% );
-                background: lighten( $color-ok, 22% );
-
-                fill: darken( $color-ok, 15% );
-				border-color: darken( $color-ok, 5% );
-            }
-
-            &.good-fk {
-                color: darken( $color-good, 5% );
-                background: lighten( $color-good, 28% );
-
-                fill: darken( $color-good, 5% );
-				border-color: darken( $color-good, 5% );
-            }
-        }
-
-        &.is-toggled,
-        &.is-pressed {
+    
             .#{$namespace}-toolbar-score {
-                background: $gray;
-
+                padding: 8.5px 9px;
+                color: $color-8;
+                border-radius: 2px;
+                background: $light_gray;
+                border: 1px solid darken( $gray, 5% );
+    
+                .rank-math-icon {
+                    float: left;
+                    height: 17px;
+                    margin-right: 4px;
+    
+                    &,
+                    *,
+                    &:hover,
+                    &:hover * {
+                        fill: inherit !important;
+                        stroke: inherit !important;
+                    }
+                }
+    
+                .seo-score {
+                    font-weight: 600;
+                    display: inline-block;
+                }
+    
+                &.loading {
+                    pointer-events: none;
+                }
+    
                 &.bad-fk {
-                    color: lighten( $color-bad, 40% );
-                    background: $color-bad;
-
-                    fill: lighten( $color-bad, 40% );
+                    color: darken( $color-bad, 5% );
+                    background: lighten( $color-bad, 18% );
+                    fill: darken( $color-bad, 5% );
+                    border-color: darken( $color-bad, 5% );
                 }
-
+    
                 &.ok-fk {
-                    color: lighten( $color-ok, 40% );
-                    background: $color-ok;
-
-                    fill: lighten( $color-ok, 40% );
+                    color: darken( $color-ok, 15% );
+                    background: lighten( $color-ok, 22% );
+                    fill: darken( $color-ok, 15% );
+                    border-color: darken( $color-ok, 5% );
                 }
-
+    
                 &.good-fk {
-                    color: lighten( $color-good, 40% );
-                    background: $color-good;
-
-                    fill: lighten( $color-good, 40% );
+                    color: darken( $color-good, 5% );
+                    background: lighten( $color-good, 28% );
+                    fill: darken( $color-good, 5% );
+                    border-color: darken( $color-good, 5% );
+                }
+            }
+    
+            &.is-toggled,
+            &.is-pressed {
+                .#{$namespace}-toolbar-score {
+                    background: $gray;
+    
+                    &.bad-fk {
+                        color: lighten( $color-bad, 40% );
+                        background: $color-bad;
+                        fill: lighten( $color-bad, 40% );
+                    }
+    
+                    &.ok-fk {
+                        color: lighten( $color-ok, 40% );
+                        background: $color-ok;
+                        fill: lighten( $color-ok, 40% );
+                    }
+    
+                    &.good-fk {
+                        color: lighten( $color-good, 40% );
+                        background: $color-good;
+                        fill: lighten( $color-good, 40% );
+                    }
                 }
             }
         }
     }
-}
+} 
+
 
 .components-menu-group .rank-math-toolbar-score {
 	.seo-score {

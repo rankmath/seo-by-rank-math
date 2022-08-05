@@ -44,16 +44,28 @@
 			h2 {
 				font-weight: 600;
 				padding-left: 0;
+
+				@at-root #side-sortables & {
+					display: flex;
+				}
 			}
 
 			> .components-base-control > .components-base-control__field {
 				display: flex;
+
+				@at-root #side-sortables & {
+					flex-wrap: wrap;
+				}
 
 				> .components-base-control__label {
 					color: #242628;
 					width: 25%;
 					max-width: 200px;
 					min-width: 200px;
+
+					@at-root #side-sortables & {
+						display: flex;
+					}
 				}
 
 				> .components-base-control {
@@ -68,7 +80,7 @@
 			}
 
 			.components-toggle-control {
-				.components-base-control__field {
+				#postbox-container-2 & .components-base-control__field {
 					flex-direction: row-reverse;
 
 					label {
@@ -89,7 +101,7 @@
 					color: #242628;
 				}
 
-				.components-select-control {
+				#postbox-container-2 & .components-select-control {
 					width: 100%;
 					flex-direction: row;
 
@@ -117,6 +129,9 @@
 				justify-content: flex-start;
 				.components-base-control {
 					flex-basis: 65%;
+					@at-root #side-sortables & {
+						flex-basis: 100%;
+					}
 
 					input, .components-input-control__container {
 						width: 165px;
@@ -124,6 +139,9 @@
 
 					&.components-checkbox-control {
 						flex-basis: 32%;
+						@at-root #side-sortables & {
+							flex-basis: 100%;
+						}
 					}
 				}
 			}
@@ -233,13 +251,14 @@
 	box-sizing: border-box;
 	width: 105px;
 	padding: 13.5px 15px;
-
 	text-align: center;
-
 	border-radius: 0 3px 3px 0;
 	background: #f1f1f1;
-
 	height: 47px;
+
+	@at-root #side-sortables .rank-math-tab-content-general & {
+		display: none;
+	}
 
 	.score-text {
 		vertical-align: middle;
@@ -255,13 +274,9 @@
 
 		border-radius: 0;
 
-		.dashicons {
+		i {
 			font-size: 18px;
-
-			margin-right: 2px;
-		}
-
-		.score-icon {
+			line-height: 22px;
 			float: left;
 			margin-right: 4px;
 		}
@@ -270,28 +285,16 @@
 	&.good-fk {
 		color: $status-good;
 		background: lighten( $status-good, 40% );
-
-		.score-icon g {
-			fill: $status-good;
-		}
 	}
 
 	&.ok-fk {
 		color: #bf890d;
 		background: #fdf0c4;
-
-		.score-icon g {
-			fill: #bf890d;
-		}
 	}
 
 	&.bad-fk {
 		color: $status-bad;
 		background: lighten( $status-bad, 40% );
-
-		.score-icon g {
-			fill: $status-bad;
-		}
 	}
 
 	&.loading {

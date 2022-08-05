@@ -52,28 +52,39 @@ class Workflow {
 
 		// Console.
 		$this->action( 'rank_math/analytics/workflow/console', 'init_console_workflow', 5, 0 );
+
+		// Inspections.
+		$this->action( 'rank_math/analytics/workflow/inspections', 'init_inspections_workflow', 5, 0 );
 	}
 
 	/**
 	 * Maybe first install.
 	 */
 	public function maybe_first_install() {
-		new \RankMath\Analytics\Workflow\Objects();
+		new Objects();
 	}
 
 	/**
 	 * Init Console workflow
 	 */
 	public function init_console_workflow() {
-		new \RankMath\Analytics\Workflow\Console();
+		new Console();
+	}
+
+	/**
+	 * Init Inspections workflow.
+	 */
+	public function init_inspections_workflow() {
+		new Inspections();
 	}
 
 	/**
 	 * Create tables only.
 	 */
 	public function create_tables_only() {
-		( new \RankMath\Analytics\Workflow\Objects() )->create_tables();
-		new \RankMath\Analytics\Workflow\Console();
+		( new Objects() )->create_tables();
+		( new Inspections() )->create_tables();
+		new Console();
 	}
 
 	/**
@@ -84,7 +95,7 @@ class Workflow {
 	 * @param string  $prev   Previous saved value.
 	 * @param string  $new    New posted value.
 	 */
-	public function start_workflow( $action, $days, $prev, $new ) {
+	public function start_workflow( $action, $days = 0, $prev = null, $new = null ) {
 		do_action(
 			'rank_math/analytics/workflow/' . $action,
 			$days,
@@ -101,14 +112,14 @@ class Workflow {
 	 * @param string  $prev   Previous saved value.
 	 * @param string  $new    New posted value.
 	 */
-	public static function do_workflow( $action, $days, $prev = null, $new = null ) {
+	public static function do_workflow( $action, $days = 0, $prev = null, $new = null ) {
 		as_enqueue_async_action(
 			'rank_math/analytics/workflow',
 			[
-				'action' => $action,
-				'days'   => $days,
-				'prev'   => $prev,
-				'new'    => $new,
+				$action,
+				$days,
+				$prev,
+				$new,
 			],
 			'workflow'
 		);
@@ -125,6 +136,7 @@ class Workflow {
 		as_unschedule_all_actions( 'rank_math/analytics/get_console_data' );
 		as_unschedule_all_actions( 'rank_math/analytics/get_analytics_data' );
 		as_unschedule_all_actions( 'rank_math/analytics/get_adsense_data' );
+		as_unschedule_all_actions( 'rank_math/analytics/get_inspections_data' );
 
 		do_action( 'rank_math/analytics/clear_cache' );
 	}

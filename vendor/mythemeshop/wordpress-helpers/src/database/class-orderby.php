@@ -10,6 +10,8 @@
 
 namespace MyThemeShop\Database;
 
+use MyThemeShop\Helpers\Arr;
+
 /**
  * OrderBy class.
  */
@@ -76,7 +78,7 @@ trait OrderBy {
 	 */
 	protected function argument_to_array( $argument ) {
 		if ( false !== strpos( $argument, ',' ) ) {
-			return array_map( 'trim', explode( ',', $argument ) );
+			return Arr::from_string( $argument );
 		}
 
 		return array( $argument );

@@ -1,12 +1,12 @@
 /**
- * Extenal dependencies
- */
-import { withRouter } from 'react-router-dom'
-
-/**
  * WordPress dependencies
  */
 import { withFilters } from '@wordpress/components'
+
+/**
+ * Internal dependencies
+ */
+import { withRouter } from '../functions'
 
 const Search = () => null
 

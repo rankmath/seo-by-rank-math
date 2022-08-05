@@ -10,8 +10,6 @@
 
 namespace RankMath\Admin\Importers;
 
-use RankMath\Traits\Hooker;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -34,7 +32,7 @@ class Status {
 	private $message = '';
 
 	/**
-	 * The type of action performed.
+	 * The action being performed.
 	 *
 	 * @var string
 	 */
