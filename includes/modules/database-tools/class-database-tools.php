@@ -45,6 +45,10 @@ class Database_Tools {
 
 		if ( Conditional::is_rest() ) {
 			foreach ( $this->get_tools() as $id => $tool ) {
+				if ( ! method_exists( $this, $id ) ) {
+					continue;
+				}
+
 				add_filter( 'rank_math/tools/' . $id, [ $this, $id ] );
 			}
 		}
@@ -86,7 +90,7 @@ class Database_Tools {
 		$transients = $wpdb->get_col(
 			"SELECT `option_name` AS `name`
 			FROM  $wpdb->options
-			WHERE `option_name` LIKE '%_transient_rank_math%'
+			WHERE `option_name` LIKE '%\\_transient\\_rank_math%'
 			ORDER BY `option_name`"
 		);
 
@@ -348,6 +352,14 @@ class Database_Tools {
 			'description' => __( 'Check if required tables exist and create them if not.', 'rank-math' ),
 			'button_text' => __( 'Re-create Tables', 'rank-math' ),
 		];
+
+		if ( Helper::is_module_active( 'analytics' ) ) {
+			$tools['analytics_fix_collations'] = [
+				'title'       => __( 'Fix Analytics table collations', 'rank-math' ),
+				'description' => __( 'In some cases, the Analytics database tables or columns don\'t match with each other, which can cause database errors. This tool can fix that issue.', 'rank-math' ),
+				'button_text' => __( 'Fix Collations', 'rank-math' ),
+			];
+		}
 
 		$block_posts = Yoast_Blocks::get()->find_posts();
 		if ( is_array( $block_posts ) && ! empty( $block_posts['count'] ) ) {

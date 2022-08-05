@@ -10,6 +10,7 @@ const DEFAULT_STATE = {
 	postsOverview: false,
 	postsRows: {},
 	postsRowsByObjects: {},
+	indexingReport: {},
 	postsSummary: false,
 	keywordsRows: {},
 	keywordsSummary: false,

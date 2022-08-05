@@ -1,14 +1,14 @@
 /**
- * External dependencies
- */
-import { withRouter } from 'react-router-dom'
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
 import { Fragment } from '@wordpress/element'
 import { Dashicon, withFilters } from '@wordpress/components'
+
+/**
+ * Internal dependencies
+ */
+import { withRouter } from '../functions'
 
 const TopPosts = () => {
 	return (

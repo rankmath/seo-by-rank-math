@@ -115,7 +115,11 @@ const processData = ( data ) => {
 
 		if ( property.map.isGroup ) {
 			const subProperty = processSchema( property )
-			subProperty[ '@type' ] = get( subProperty, '@type', property.property )
+			const type = get( subProperty, '@type', ! isUndefined( subProperty[ '@id' ] ) ? '' : property.property )
+			if ( type ) {
+				subProperty[ '@type' ] = type
+			}
+
 			schema[ property.property ] = subProperty
 			return
 		}

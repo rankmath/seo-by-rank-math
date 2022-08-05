@@ -1,54 +1,54 @@
 // main: ../schema.scss
 
 %noselect {
-    @include noselect;
+	@include noselect;
 }
 
 %clearfix {
-    @include clearfix;
+	@include clearfix;
 }
 
 %flex {
-    @include flex;
+	@include flex;
 }
 
 .#{$namespace}-schema-tabs {
-    overflow: visible;
+	overflow: visible;
 }
 
 .#{$namespace}-modal.#{$namespace}-schema-modal.#{$namespace}-schema-modal-no-map {
-    width: 80vw;
+	width: 80vw;
 
-    .components-notice {
-        display: none;
-    }
+	.components-notice {
+		display: none;
+	}
 }
 
 .#{$namespace}-schema-info {
-    font-size: 14px;
-    line-height: 30px;
+	font-size: 14px;
 
-    position: absolute;
-    top: 62px;
-    right: 20px;
+	position: absolute;
+	top: 62px;
+	right: 20px;
 
-    padding: 0 5px;
+	padding: 5px;
 
-    text-decoration: none;
+	text-decoration: none;
 
-    color: inherit;
-    color: #78797a;
-    border-radius: 16px;
-    background: #ebeced;
-    -webkit-box-shadow: none;
-            box-shadow: none;
+	color: inherit;
+	color: #78797a;
+	border-radius: 16px;
+	background: #ebeced;
+	-webkit-box-shadow: none;
+			box-shadow: none;
 
-    svg, .dashicon {
-        vertical-align: -5px;
-    }
+	svg,
+	.dashicon {
+		vertical-align: -5px;
+	}
 
-    &:hover {
-        color: $text;
-        background: #dfe0e1;
-    }
+	&:hover {
+		color: $text;
+		background: #dfe0e1;
+	}
 }

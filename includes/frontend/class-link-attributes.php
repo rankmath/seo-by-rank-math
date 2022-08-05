@@ -46,7 +46,10 @@ class Link_Attributes {
 		$this->remove_class    = $this->do_filter( 'link/remove_class', false );
 		$this->is_dirty        = false;
 
-		if ( $this->nofollow_link || $this->new_window_link || $this->nofollow_image || $this->add_noopener || $this->remove_class ) {
+		// Filter to run the link attributes function even when Link options are disabled.
+		$this->add_attributes = $this->do_filter( 'link/add_attributes', $this->nofollow_link || $this->new_window_link || $this->nofollow_image || $this->add_noopener );
+
+		if ( $this->add_attributes || $this->remove_class ) {
 			$this->filter( 'the_content', 'add_link_attributes', 11 );
 		}
 	}
@@ -109,7 +112,11 @@ class Link_Attributes {
 	 */
 	private function can_add_attributes( $attrs ) {
 		// If link has no href attribute or if the link is not valid then we don't need to do anything.
-		if ( empty( $attrs['href'] ) || empty( wp_parse_url( $attrs['href'], PHP_URL_HOST ) ) || ( isset( $attrs['role'] ) && 'button' === $attrs['role'] ) ) {
+		if (
+			empty( $attrs['href'] ) ||
+			( empty( wp_parse_url( $attrs['href'], PHP_URL_HOST ) ) && ! Url::is_affiliate( $attrs['href'] ) ) ||
+			( isset( $attrs['role'] ) && 'button' === $attrs['role'] )
+		) {
 			return false;
 		}
 
@@ -150,7 +157,7 @@ class Link_Attributes {
 	 * @return array $attrs
 	 */
 	private function set_external_attrs( $attrs ) {
-		if ( ! $this->nofollow_link && ! $this->new_window_link && ! $this->nofollow_image && ! $this->add_noopener ) {
+		if ( ! $this->add_attributes ) {
 			return $attrs;
 		}
 
@@ -178,6 +185,11 @@ class Link_Attributes {
 			$this->set_rel_attribute( $attrs, 'noopener', ( isset( $attrs['rel'] ) && ! Str::contains( 'noopener', $attrs['rel'] ) ) );
 		}
 
+		if ( Url::is_affiliate( $attrs['href'] ) ) {
+			$this->is_dirty = true;
+			$this->set_rel_attribute( $attrs, 'sponsored', ( isset( $attrs['rel'] ) && ! Str::contains( 'sponsored', $attrs['rel'] ) ) );
+		}
+
 		return $attrs;
 	}
 
@@ -195,14 +207,15 @@ class Link_Attributes {
 		$include_domains = $this->get_nofollow_domains( 'include' );
 		$exclude_domains = $this->get_nofollow_domains( 'exclude' );
 		$parent_domain   = Url::get_domain( $url );
+		$parent_domain   = preg_replace( '/^www\./', '', $parent_domain );
 
 		// Check if domain is in list.
 		if ( ! empty( $include_domains ) ) {
-			return Str::contains( $parent_domain, $include_domains );
+			return in_array( $parent_domain, $include_domains, true );
 		}
 
-		// Check if domains is NOT in list.
-		if ( ! empty( $exclude_domains ) && Str::contains( $parent_domain, $exclude_domains ) ) {
+		// Check if domain is NOT in list.
+		if ( ! empty( $exclude_domains ) && in_array( $parent_domain, $exclude_domains, true ) ) {
 			return false;
 		}
 
@@ -226,7 +239,16 @@ class Link_Attributes {
 		$domains = Helper::get_settings( "general.{$setting}" );
 		$domains = Str::to_arr_no_empty( $domains );
 
-		$rank_math_nofollow_domains[ $type ] = empty( $domains ) ? false : join( ';', $domains );
+		// Strip off www. prefixes.
+		$domains = array_map(
+			function( $domain ) {
+				$domain = preg_replace( '#^http(s)?://#', '', trim( $domain, '/' ) );
+				return preg_replace( '/^www\./', '', $domain );
+			},
+			$domains
+		);
+
+		$rank_math_nofollow_domains[ $type ] = $domains;
 
 		return $rank_math_nofollow_domains[ $type ];
 	}

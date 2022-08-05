@@ -30,20 +30,18 @@ class Opengraph extends Sitemap {
 	}
 
 	/**
-	 * Filter for the namespace, adding the OpenGraph namespace.
+	 * Add the OpenGraph namespace.
 	 *
-	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/product/
-	 *
-	 * @param string $input The input namespace string.
+	 * @param string $namespace The original namespace.
 	 *
 	 * @return string
 	 */
-	public function og_product_namespace( $input ) {
+	public function og_product_namespace( $namespace ) {
 		if ( is_singular( 'product' ) ) {
-			$input = preg_replace( '/prefix="([^"]+)"/', 'prefix="$1 product: https://ogp.me/ns/product#"', $input );
+			$namespace = preg_replace( '/prefix="([^"]+)"/', 'prefix="$1 product: https://ogp.me/ns/product#"', $namespace );
 		}
 
-		return $input;
+		return $namespace;
 	}
 
 	/**

@@ -143,10 +143,16 @@ class Import_Export implements Runner {
 		wp_enqueue_style( 'rank-math-common' );
 		wp_enqueue_style( 'rank-math-cmb2' );
 
-		Helper::add_json( 'importConfirm', esc_html__( 'Are you sure you want to import settings into Rank Math? Don\'t worry, your current configuration will be saved as a backup.', 'rank-math' ) );
+		Helper::add_json( 'importSettingsConfirm', esc_html__( 'Are you sure you want to import settings into Rank Math? Don\'t worry, your current configuration will be saved as a backup.', 'rank-math' ) );
+
+		// Translators: %s is the plugin name.
+		Helper::add_json( 'importPluginConfirm', esc_html__( 'Are you sure you want to import data from %s?', 'rank-math' ) );
+		Helper::add_json( 'importPluginSelectAction', esc_html__( 'Select data to import.', 'rank-math' ) );
 		Helper::add_json( 'restoreConfirm', esc_html__( 'Are you sure you want to restore this backup? Your current configuration will be overwritten.', 'rank-math' ) );
 		Helper::add_json( 'deleteBackupConfirm', esc_html__( 'Are you sure you want to delete this backup?', 'rank-math' ) );
-		Helper::add_json( 'cleanPluginConfirm', esc_html__( 'Are you sure you want erase all traces of this plugin?', 'rank-math' ) );
+
+		// Translators: %s is the plugin name.
+		Helper::add_json( 'cleanPluginConfirm', esc_html__( 'Are you sure you want erase all traces of %s?', 'rank-math' ) );
 	}
 
 	/**
@@ -205,7 +211,7 @@ class Import_Export implements Runner {
 		$this->verify_nonce( 'rank-math-ajax-nonce' );
 		$this->has_cap_ajax( 'general' );
 
-		$perform = Param::post( 'perform' );
+		$perform = Param::post( 'perform', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 		if ( ! $this->is_action_allowed( $perform ) ) {
 			$this->error( esc_html__( 'Action not allowed.', 'rank-math' ) );
 		}
@@ -247,7 +253,7 @@ class Import_Export implements Runner {
 		$this->verify_nonce( 'rank-math-ajax-nonce' );
 		$this->has_cap_ajax( 'general' );
 
-		$key = Param::post( 'key' );
+		$key = Param::post( 'key', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 		if ( ! $key ) {
 			$this->error( esc_html__( 'No backup key found to delete.', 'rank-math' ) );
 		}
@@ -263,7 +269,7 @@ class Import_Export implements Runner {
 		$this->verify_nonce( 'rank-math-ajax-nonce' );
 		$this->has_cap_ajax( 'general' );
 
-		$key = Param::post( 'key' );
+		$key = Param::post( 'key', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 		if ( ! $key ) {
 			$this->error( esc_html__( 'No backup key found to restore.', 'rank-math' ) );
 		}
@@ -318,9 +324,9 @@ class Import_Export implements Runner {
 	private function export() {
 		$panels   = Param::post( 'panels', [], FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		$data     = $this->get_export_data( $panels );
-		$filename = 'rank-math-settings-' . date_i18n( 'Y-m-d-H-i-s' ) . '.txt';
+		$filename = 'rank-math-settings-' . date_i18n( 'Y-m-d-H-i-s' ) . '.json';
 
-		header( 'Content-Type: application/txt' );
+		header( 'Content-Type: application/json' );
 		header( 'Content-Disposition: attachment; filename=' . $filename );
 		header( 'Cache-Control: no-cache, no-store, must-revalidate' );
 		header( 'Pragma: no-cache' );
@@ -341,7 +347,8 @@ class Import_Export implements Runner {
 
 		// Parse Options.
 		$wp_filesystem = WordPress::get_filesystem();
-		if ( is_null( $wp_filesystem ) ) {
+		if ( is_null( $wp_filesystem ) || ! Helper::is_filesystem_direct() ) {
+			Helper::add_notification( esc_html__( 'Uploaded file could not be read.', 'rank-math' ), [ 'type' => 'error' ] );
 			return false;
 		}
 
@@ -364,9 +371,16 @@ class Import_Export implements Runner {
 	 * @return mixed
 	 */
 	private function has_valid_file() {
+		// Add upload hooks.
 		$this->filter( 'upload_mimes', 'allow_txt_upload', 10, 2 );
+		$this->filter( 'wp_check_filetype_and_ext', 'filetype_and_ext', 10, 4 );
+
+		// Do the upload.
 		$file = wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] );
+
+		// Remove upload hooks.
 		$this->remove_filter( 'upload_mimes', 'allow_txt_upload', 10 );
+		$this->remove_filter( 'wp_check_filetype_and_ext', 'filetype_and_ext', 10 );
 
 		if ( is_wp_error( $file ) ) {
 			Helper::add_notification( esc_html__( 'Settings could not be imported:', 'rank-math' ) . ' ' . $file->get_error_message(), [ 'type' => 'error' ] );
@@ -387,6 +401,35 @@ class Import_Export implements Runner {
 	}
 
 	/**
+	 * Filters the "real" file type of the given file.
+	 *
+	 * @param array    $types {
+	 *     Values for the extension, mime type, and corrected filename.
+	 *
+	 *     @type string|false $ext             File extension, or false if the file doesn't match a mime type.
+	 *     @type string|false $type            File mime type, or false if the file doesn't match a mime type.
+	 *     @type string|false $proper_filename File name with its correct extension, or false if it cannot be determined.
+	 * }
+	 * @param string   $file                      Full path to the file.
+	 * @param string   $filename                  The name of the file (may differ from $file due to
+	 *                                                $file being in a tmp directory).
+	 * @param string[] $mimes                     Array of mime types keyed by their file extension regex.
+	 *
+	 * @return array
+	 */
+	public function filetype_and_ext( $types, $file, $filename, $mimes ) {
+		if ( false !== strpos( $filename, '.json' ) ) {
+			$types['ext']  = 'json';
+			$types['type'] = 'application/json';
+		} elseif ( false !== strpos( $filename, '.txt' ) ) {
+			$types['ext']  = 'txt';
+			$types['type'] = 'text/plain';
+		}
+
+		return $types;
+	}
+
+	/**
 	 * Allow txt & json file upload.
 	 *
 	 * @param array            $types    Mime types keyed by the file extension regex corresponding to those types.
@@ -395,8 +438,8 @@ class Import_Export implements Runner {
 	 * @return array
 	 */
 	public function allow_txt_upload( $types, $user ) {
-		$types['txt']  = 'text/plain';
 		$types['json'] = 'application/json';
+		$types['txt']  = 'text/plain';
 
 		return $types;
 	}

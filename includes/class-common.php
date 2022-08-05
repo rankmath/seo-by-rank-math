@@ -12,14 +12,10 @@
 
 namespace RankMath;
 
-use RankMath\Paper\Paper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Meta;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Arr;
 use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Url;
-use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -44,14 +40,28 @@ class Common {
 		// Reorder categories listing: put primary at the beginning.
 		$this->filter( 'get_the_terms', 'reorder_the_terms', 10, 3 );
 
-		add_action( 'wp_ajax_nopriv_rank_math_overlay_thumb', [ $this, 'generate_overlay_thumbnail' ] );
-
 		$this->filter( 'is_protected_meta', 'hide_rank_math_meta', 10, 2 );
+		$this->action( 'rank_math/admin/before_editor_scripts', 'editor_script' );
 
 		new Auto_Updater();
 		new Update_Email();
 		new Defaults();
 		new Admin_Bar_Menu();
+		new Dashboard_Widget();
+		new Thumbnail_Overlay();
+	}
+
+	/**
+	 * Enqueue common editor script to use in all editors.
+	 */
+	public function editor_script() {
+		wp_register_script(
+			'rank-math-app',
+			rank_math()->plugin_url() . 'assets/admin/js/rank-math-app.js',
+			[],
+			rank_math()->version,
+			true
+		);
 	}
 
 	/**
@@ -112,53 +122,6 @@ class Common {
 	}
 
 	/**
-	 * AJAX function to generate overlay image. Used in social thumbnails.
-	 */
-	public function generate_overlay_thumbnail() {
-		$thumbnail_id = Param::request( 'id', 0, FILTER_VALIDATE_INT );
-		$type         = Param::request( 'type', 'play' );
-		$choices      = Helper::choices_overlay_images();
-		if ( ! isset( $choices[ $type ] ) ) {
-			die();
-		}
-		$overlay_image = $choices[ $type ]['url'];
-		$image         = wp_get_attachment_image_src( $thumbnail_id, 'large' );
-		$position      = $choices[ $type ]['position'];
-
-		if ( ! empty( $image ) ) {
-			$this->create_overlay_image( $image[0], $overlay_image, $position );
-		}
-		die();
-	}
-
-	/**
-	 * Calculate margins based on position string.
-	 *
-	 * @param string   $position Position string.
-	 * @param resource $image    GD image resource identifier.
-	 * @param resource $stamp    GD image resource identifier.
-	 *
-	 * @return array
-	 */
-	private function get_position_margins( $position, $image, $stamp ) {
-		$margins = [
-			'middle_center' => [],
-		];
-
-		$margins['middle_center']['top']  = round( abs( imagesy( $image ) - imagesy( $stamp ) ) / 2 );
-		$margins['middle_center']['left'] = round( abs( imagesx( $image ) - imagesx( $stamp ) ) / 2 );
-
-		$default_margins = $margins['middle_center'];
-		$margins         = $this->do_filter( 'social/overlay_image_positions', $margins, $image, $stamp );
-
-		if ( ! isset( $margins[ $position ] ) ) {
-			return $default_margins;
-		}
-
-		return $margins[ $position ];
-	}
-
-	/**
 	 * Reorder terms for a post to put primary category to the beginning.
 	 *
 	 * @param array|WP_Error $terms    List of attached terms, or WP_Error on failure.
@@ -168,6 +131,10 @@ class Common {
 	 * @return array
 	 */
 	public function reorder_the_terms( $terms, $post_id, $taxonomy ) {
+		if ( empty( $terms ) || is_wp_error( $terms ) ) {
+			return $terms;
+		}
+
 		/**
 		 * Filter: Allow disabling the primary term feature.
 		 * 'rank_math/primary_term' is deprecated,
@@ -186,10 +153,6 @@ class Common {
 		$primary = absint( Helper::get_post_meta( "primary_{$taxonomy}", $post_id ) );
 		if ( ! $primary ) {
 			return $terms;
-		}
-
-		if ( empty( $terms ) || is_wp_error( $terms ) ) {
-			return [ $primary ];
 		}
 
 		$primary_term = null;
@@ -278,64 +241,5 @@ class Common {
 
 		$primary = get_term( $primary, $taxonomy );
 		return is_wp_error( $primary ) || empty( $primary ) ? false : $primary;
-	}
-
-	/**
-	 * Get correct imagecreatef based on image file.
-	 *
-	 * @param string $image_file
-	 * @return void
-	 */
-	private function get_imagecreatefrom_method( $image_file ) {
-		$image_format = pathinfo( $image_file, PATHINFO_EXTENSION );
-		if ( ! in_array( $image_format, [ 'jpg', 'jpeg', 'gif', 'png' ], true ) ) {
-			return '';
-		}
-		if ( 'jpg' === $image_format ) {
-			$image_format = 'jpeg';
-		}
-
-		return 'imagecreatefrom' . $image_format;
-	}
-
-	/**
-	 * Create Overlay Image.
-	 *
-	 * @param string $image_file    The permalink generated for this post by WordPress.
-	 * @param string $overlay_image The ID of the post.
-	 */
-	private function create_overlay_image( $image_file, $overlay_image, $position ) {
-		$imagecreatefrom         = $this->get_imagecreatefrom_method( $image_file );
-		$overlay_imagecreatefrom = $this->get_imagecreatefrom_method( $overlay_image );
-		if ( ! $imagecreatefrom || ! $overlay_imagecreatefrom ) {
-			return;
-		}
-
-		$stamp = $overlay_imagecreatefrom( $overlay_image );
-		$image = $imagecreatefrom( $image_file );
-
-		if ( ! $image || ! $stamp ) {
-			return;
-		}
-
-		$stamp_width  = imagesx( $stamp );
-		$stamp_height = imagesy( $stamp );
-
-		$img_width  = imagesx( $image );
-		$img_height = imagesy( $image );
-
-		if ( $stamp_width > $img_width ) {
-			$stamp = imagescale( $stamp, $img_width );
-		}
-
-		$margins = $this->get_position_margins( $position, $image, $stamp );
-
-		// Copy the stamp image onto our photo using the margin offsets and the photo width to calculate positioning of the stamp.
-		imagecopy( $image, $stamp, $margins['left'], $margins['top'], 0, 0, $stamp_width, $stamp_height );
-
-		// Output and free memory.
-		header( 'Content-type: image/png' );
-		imagepng( $image );
-		imagedestroy( $image );
 	}
 }

@@ -192,7 +192,7 @@ class Setup_Wizard {
 	 */
 	public function change_label( $label ) {
 		if ( $this->is_advance() ) {
-			return esc_html__( 'Advance Options', 'rank-math' );
+			return esc_html__( 'Advanced Options', 'rank-math' );
 		}
 
 		return $label;

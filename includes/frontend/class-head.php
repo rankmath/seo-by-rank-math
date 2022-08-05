@@ -45,10 +45,9 @@ class Head {
 			remove_action( 'better-amp/template/head', 'better_amp_print_rel_canonical' );
 		}
 
-		$this->action( 'wp_head', 'front_page_specific_init', 0 );
+		$this->action( 'wp_head', 'front_page_init', 0 );
 		$this->filter( 'language_attributes', 'search_results_schema' );
 
-		// The head function here calls action rank_math/head, to which we hook all our functionality.
 		$this->action( 'rank_math/head', 'metadesc', 6 );
 		$this->action( 'rank_math/head', 'robots', 10 );
 		$this->action( 'rank_math/head', 'canonical', 20 );
@@ -70,13 +69,15 @@ class Head {
 		}
 
 		// Remove core robots data.
-		remove_all_filters( 'wp_robots' );
+		if ( ! is_embed() ) {
+			remove_all_filters( 'wp_robots' );
+		}
 	}
 
 	/**
-	 * Initialize the functions that only need to run on the frontpage.
+	 * Initialize front page related stuff.
 	 */
-	public function front_page_specific_init() {
+	public function front_page_init() {
 		if ( ! is_front_page() ) {
 			return;
 		}
@@ -92,7 +93,6 @@ class Head {
 			'google_verify'    => 'google-site-verification',
 			'bing_verify'      => 'msvalidate.01',
 			'baidu_verify'     => 'baidu-site-verification',
-			'alexa_verify'     => 'alexaVerifyID',
 			'yandex_verify'    => 'yandex-verification',
 			'pinterest_verify' => 'p:domain_verify',
 			'norton_verify'    => 'norton-safeweb-site-verification',

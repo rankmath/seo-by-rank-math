@@ -69,9 +69,6 @@ class Assets implements Runner {
 		wp_register_style( 'select2-rm', $vendor . 'select2/select2.min.css', null, '4.0.6-rc.1' );
 		wp_register_script( 'select2-rm', $vendor . 'select2/select2.min.js', null, '4.0.6-rc.1', true );
 
-		// Tagify.
-		wp_register_script( 'tagify', $vendor . 'tagify/tagify.min.js', null, '2.31.6', true );
-
 		// Inline script for core admin page Settings > Permalinks.
 		wp_register_script( self::PREFIX . 'core-permalink-settings', '' ); // phpcs:ignore
 		wp_add_inline_script( self::PREFIX . 'core-permalink-settings', $this->get_permalinks_inline_script() );
@@ -130,6 +127,8 @@ class Assets implements Runner {
 			]
 		);
 
+		Helper::add_json( 'capitalizeTitle', Helper::get_settings( 'titles.capitalize_titles' ) );
+
 		/**
 		 * Allow other plugins to register/deregister admin styles or scripts after plugin assets.
 		 */
@@ -144,6 +143,7 @@ class Assets implements Runner {
 
 		if ( 'dashboard' === $screen->id ) {
 			wp_enqueue_style( self::PREFIX . 'dashabord-widget' );
+			wp_enqueue_script( self::PREFIX . 'dashboard' );
 		}
 
 		// Our screens only.

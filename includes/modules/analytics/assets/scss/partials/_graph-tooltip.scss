@@ -1,6 +1,7 @@
 // main: ../stats.scss
 .recharts-tooltip-wrapper {
     z-index: 999;
+    left: 0px;
 }
 
 .#{$namespace} {
@@ -93,6 +94,31 @@
                     margin-left: auto;
 
                     color: $dark-gray;
+                }
+            }
+        }
+    }
+}
+
+body.rtl {
+    .#{$namespace} {
+        &-graph-tooltip {
+            .recharts-tooltip {
+                &-item {
+                    &:before {
+                        margin-left: 5px;
+                        margin-right: 0;
+                    }
+
+                    &-separator {
+                        margin-right: 0;
+                        margin-left: 10px;
+                    }
+
+                    &-value {
+                        margin-right: auto;
+                        margin-left: 0;
+                    }
                 }
             }
         }

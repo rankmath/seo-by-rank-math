@@ -141,7 +141,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the numeric post ID to use as a replacement.
+	 * Get the numeric post ID.
 	 *
 	 * @return string|null
 	 */
@@ -150,7 +150,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the focus keyword to use as a replacement.
+	 * Get the focus keyword.
 	 *
 	 * @return string|null
 	 */
@@ -195,7 +195,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the current page number (i.e. "page 2 of 4") to use as a replacement.
+	 * Get the current page number as a string (i.e. "page 1 of 5").
 	 *
 	 * @return string
 	 */
@@ -205,7 +205,7 @@ class Advanced_Variables extends Author_Variables {
 		$page = $this->determine_page_number();
 
 		if ( $max > 1 && $page > 1 ) {
-			/* translators: 1: current page number, 2: total number of pages. */
+			/* translators: %1$d: current page number, %2$d: max pages. */
 			return sprintf( $sep . ' ' . __( 'Page %1$d of %2$d', 'rank-math' ), $page, $max );
 		}
 
@@ -213,7 +213,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get only the page number (without context) to use as a replacement.
+	 * Get only the page number (without context).
 	 *
 	 * @return string|null
 	 */
@@ -224,7 +224,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the may page number to use as a replacement.
+	 * Get the max page number.
 	 *
 	 * @return string|null
 	 */
@@ -235,7 +235,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get a specific custom field value to use as a replacement.
+	 * Get a specific custom field value.
 	 *
 	 * @param  string $name The name of the custom field to retrieve.
 	 * @return string|null
@@ -258,7 +258,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the post type "single" label to use as a replacement.
+	 * Get the post type "single" label.
 	 *
 	 * @return string|null
 	 */
@@ -269,7 +269,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the post type "plural" label to use as a replacement.
+	 * Get the post type "plural" label.
 	 *
 	 * @return string|null
 	 */

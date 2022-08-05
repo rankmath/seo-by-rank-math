@@ -82,7 +82,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 						max-width: 75%;
 						margin: 0 auto;
 					}
-
 					table {
 						border: none;
 						border-collapse: collapse;
@@ -93,7 +92,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 						background-color: #4275f4;
 						color: #fff;
 						text-align: left;
-						padding: 15px;
+						padding: 15px 10px;
 						font-size: 14px;
 						cursor: pointer;
 					}
@@ -304,9 +303,9 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 
 									<thead>
 										<tr>
-											<th width="80%"><?php esc_html_e( 'URL', 'rank-math' ); ?></th>
+											<th width="75%"><?php esc_html_e( 'URL', 'rank-math' ); ?></th>
 											<?php if ( Helper::get_settings( 'sitemap.include_images' ) ) : // phpcs:ignore ?><th width="5%"><?php esc_html_e( 'Images', 'rank-math' ); ?></th><?php endif; ?>
-											<th title="Last Modification Time" width="15%"><?php esc_html_e( 'Last Mod.', 'rank-math' ); ?></th>
+											<th title="Last Modification Time" width="20%"><?php esc_html_e( 'Last Mod.', 'rank-math' ); ?></th>
 										</tr>
 									</thead>
 

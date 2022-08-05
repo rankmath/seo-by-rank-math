@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { debounce, isEmpty, isUndefined, isObject } from 'lodash'
+import { debounce, isEmpty, isUndefined, isObject, intersection } from 'lodash'
 import { Analyzer, Paper, Helpers } from '@rankMath/analyzer'
 
 /**
@@ -15,6 +15,7 @@ import { addAction, addFilter, doAction, applyFilters } from '@wordpress/hooks'
  * Internal dependencies
  */
 import { getStore } from '../redux/store'
+import unescape from '@helpers/unescape'
 
 class Assessor {
 	/**
@@ -73,16 +74,21 @@ class Assessor {
 		paper.setDescription( store.appUi.serpDescription )
 		paper.setUrl( gutenbergData.permalink )
 		paper.setText(
-			applyFilters( 'rank_math_content', gutenbergData.content )
+			unescape( applyFilters( 'rank_math_content', gutenbergData.content ) )
 		)
 		paper.setKeyword( keyword )
 		paper.setKeywords( keywords )
+		paper.setSchema( store.appData.schemas )
 
 		if ( ! isUndefined( gutenbergData.featuredImage ) ) {
 			paper.setThumbnail( gutenbergData.featuredImage.source_url )
 			paper.setThumbnailAltText(
 				Helpers.removeDiacritics( gutenbergData.featuredImage.alt_text )
 			)
+		}
+
+		if ( ! isEmpty( store.appData.contentAIScore ) || ! isEmpty( rankMath.ca_keyword ) ) {
+			paper.setContentAI( true )
 		}
 
 		return paper
@@ -110,8 +116,7 @@ class Assessor {
 				const researches =
 					0 === index
 						? rankMath.assessor.researchesTests
-						: this.getSecondaryKeywordTests()
-
+						: this.filterTests( this.getSecondaryKeywordTests() )
 				promises.push(
 					this.analyzer
 						.analyzeSome( researches, paper )
@@ -194,6 +199,17 @@ class Assessor {
 	 */
 	getResearch( name ) {
 		return this.analyzer.researcher.getResearch( name )
+	}
+
+	/**
+	 * Filter the Researcher tests.
+	 *
+	 * @param { Array } tests Tests.
+	 *
+	 * @return {Array} Filter Researches tests.
+	 */
+	filterTests( tests ) {
+		return intersection( tests, rankMath.assessor.researchesTests )
 	}
 }
 

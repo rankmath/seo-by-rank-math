@@ -58,7 +58,7 @@ export default class PrimaryTerm {
 		const primaryTaxSlug = get( rankMath, 'assessor.primaryTaxonomy.name' ) || '',
 			currentPostTaxonomies = get( ETBuilderBackendDynamic, 'getTaxonomies', {} )
 		this.primaryTaxonomyTerms = currentPostTaxonomies[ primaryTaxSlug ] || []
-		await apiFetch( { path: '/wp-json/wp/v2/taxonomies' } )
+		await apiFetch( { path: '/wp/v2/taxonomies' } )
 			.then( ( resp ) => {
 				this.primaryTaxonomy = Object.keys( currentPostTaxonomies )
 					.includes( primaryTaxSlug ) && resp[ primaryTaxSlug ]

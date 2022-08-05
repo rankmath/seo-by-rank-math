@@ -14,6 +14,7 @@ use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Param;
 use RankMathPro\Analytics\Pageviews;
+use RankMath\Google\Console as Google_Analytics;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -85,8 +86,8 @@ class Stats extends Keywords {
 	public function set_date_range( $range = false ) {
 		// Shift 3 days prior.
 		$subtract = DAY_IN_SECONDS * 3;
-		$start    = strtotime( false !== $range ? $range : $this->get_date_from_cookie( 'date_range', '-30 days' ) ) - $subtract;
 		$end      = strtotime( $this->do_filter( 'analytics/end_date', 'today' ) ) - $subtract;
+		$start    = strtotime( false !== $range ? $range : $this->get_date_from_cookie( 'date_range', '-30 days' ), $end ) - $subtract;
 
 		// Timestamp.
 		$this->end   = Helper::get_midnight( $end );
@@ -942,9 +943,9 @@ class Stats extends Keywords {
 	 * @return string
 	 */
 	public static function get_relative_url( $url ) {
-		$home_url = home_url();
+		$home_url = Google_Analytics::get_site_url();
 
-		$domain = strtolower( wp_parse_url( home_url(), PHP_URL_HOST ) );
+		$domain = strtolower( wp_parse_url( $home_url, PHP_URL_HOST ) );
 		$domain = str_replace( [ 'www.', '.' ], [ '', '\.' ], $domain );
 		$regex  = "/http[s]?:\/\/(www\.)?$domain/mU";
 		$url    = strtolower( trim( $url ) );

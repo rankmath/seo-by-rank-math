@@ -106,7 +106,7 @@ class Post_Filters implements Runner {
 			return;
 		}
 
-		$focus_keyword = Param::get( 'focus_keyword', '' );
+		$focus_keyword = Param::get( 'focus_keyword', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_BACKTICK );
 		if ( 1 === absint( $focus_keyword ) ) {
 			$query->set(
 				'meta_query',
@@ -363,7 +363,7 @@ class Post_Filters implements Runner {
 		);
 
 		$meta_query = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
-		return $wpdb->get_col( "SELECT {$wpdb->posts}.ID FROM $wpdb->posts {$meta_query['join']} WHERE 1=1 {$meta_query['where']} AND {$wpdb->posts}.post_type = '$screen->post_type' AND ({$wpdb->posts}.post_status = 'publish') AND {$wpdb->posts}.post_title NOT REGEXP REPLACE({$wpdb->postmeta}.meta_value, ',', '|')" ); // phpcs:ignore
+		return $wpdb->get_col( "SELECT {$wpdb->posts}.ID FROM $wpdb->posts {$meta_query['join']} WHERE 1=1 {$meta_query['where']} AND {$wpdb->posts}.post_type = '$screen->post_type' AND ({$wpdb->posts}.post_status = 'publish') AND {$wpdb->posts}.post_title NOT LIKE CONCAT( '%', SUBSTRING_INDEX( {$wpdb->postmeta}.meta_value, ',', 1 ), '%' )" ); // phpcs:ignore
 	}
 
 	/**

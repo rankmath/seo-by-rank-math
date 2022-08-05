@@ -82,12 +82,20 @@
 			font-weight: 600;
 		}
 
+		.components-base-control__field {
+			margin-bottom: 0!important;
+		}
+
+		.components-textarea-control__input {
+			display: block;
+		}
+
 		.components-base-control__help {
 			margin: 0;
 
-			opacity: 0.7;
+			color: $dark-gray;
 
-			@include padding( 8px null null null );
+			@include padding( 5px null null null );
 		}
 
 		.notice {
@@ -117,6 +125,11 @@
 				box-shadow: 0 0 0 1px #069de3;
 			}
 		}
+
+		.#{$namespace}-description-variables .#{$namespace}-variables-dropdown {
+			bottom: 100%;
+			top: auto;
+		}
 	}
 
 	.serp-preview-wrapper {
@@ -130,7 +143,7 @@
 	}
 
 	.serp-url {
-		margin: 7px 0 5px;
+		margin: 7px 0 7px;
 	}
 
 	.serp-description {
@@ -190,6 +203,8 @@
 			margin-right: 5px;
 
 			vertical-align: -4px;
+
+			transition: none;
 		}
 	}
 

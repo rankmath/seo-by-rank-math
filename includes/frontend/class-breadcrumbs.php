@@ -64,7 +64,7 @@ class Breadcrumbs {
 	}
 
 	/**
-	 * Magic method to use in case the class would be send to string.
+	 * Convenience method to output as string.
 	 *
 	 * @return string
 	 */
@@ -447,6 +447,9 @@ class Breadcrumbs {
 
 	/**
 	 * Single post trail.
+	 * 
+	 * @copyright Copyright (C) 2008-2019, Yoast BV
+	 * The following code is a derivative work of the code from the Yoast (https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 *
 	 * @param WP_Post $post Post object.
 	 */
@@ -462,7 +465,6 @@ class Breadcrumbs {
 			return;
 		}
 
-		// Reverse the order so it's oldest to newest.
 		$ancestors = array_reverse( $ancestors );
 		foreach ( $ancestors as $ancestor ) {
 			$this->add_crumb( $this->get_breadcrumb_title( 'post', $ancestor, get_the_title( $ancestor ) ), get_permalink( $ancestor ) );

@@ -107,6 +107,15 @@ class Module {
 	}
 
 	/**
+	 * Does module has BETA version?
+	 *
+	 * @return bool
+	 */
+	public function is_betabadge() {
+		return isset( $this->args['betabadge'] ) && $this->args['betabadge'];
+	}
+
+	/**
 	 * Does module has PRO version?
 	 *
 	 * @return bool

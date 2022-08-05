@@ -1,0 +1,20 @@
+body.rtl {
+    #rank-math-rm-app-root {
+        left: auto;
+        right: 0;
+
+        .#{$namespace}-rm-modal {
+            left: auto;
+			right: var(--rankmath-rm-modal-spacing);
+
+            .serp-preview-title .seo-score {
+                float: left;
+            }
+
+            #rank-math-compare-keywords-trigger {
+                left: 16px;
+                right: auto;
+            }
+		}
+    }
+}

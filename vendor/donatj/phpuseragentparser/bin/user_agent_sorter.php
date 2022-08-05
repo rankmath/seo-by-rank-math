@@ -20,7 +20,7 @@ uasort($uas, function ( $a, $b ) {
 		return -1;
 	}
 
-	$desktop = array( 'Windows', 'Linux', 'Macintosh', 'Chrome OS' );
+	$desktop = [ 'Windows', 'Linux', 'Macintosh', 'Chrome OS' ];
 
 	$ad = in_array($a['platform'], $desktop, true);
 	$bd = in_array($b['platform'], $desktop, true);
@@ -34,29 +34,29 @@ uasort($uas, function ( $a, $b ) {
 	}
 
 	if( $ad ) {
-		$result = strnatcasecmp($a['browser'], $b['browser']);
+		$result = strnatcasecmp((string)$a['browser'], (string)$b['browser']);
 		if( $result == 0 ) {
 
-			$result = strnatcasecmp($a['platform'], $b['platform']);
+			$result = strnatcasecmp((string)$a['platform'], (string)$b['platform']);
 
 			if( $result == 0 ) {
-				$result = compare_version($a['version'], $b['version']);
+				$result = compare_version((string)$a['version'], (string)$b['version']);
 			}
 		}
 	} else {
-		$result = strnatcasecmp($a['platform'], $b['platform']);
+		$result = strnatcasecmp((string)$a['platform'], (string)$b['platform']);
 		if( $result == 0 ) {
 
-			$result = strnatcasecmp($a['browser'], $b['browser']);
+			$result = strnatcasecmp((string)$a['browser'], (string)$b['browser']);
 
 			if( $result == 0 ) {
-				$result = compare_version($a['version'], $b['version']);
+				$result = compare_version((string)$a['version'], (string)$b['version']);
 			}
 		}
 	}
 
 	if( $result == 0 ) {
-		$result = strnatcasecmp($a['key'], $b['key']);
+		$result = strnatcasecmp((string)$a['key'], (string)$b['key']);
 	}
 
 	return $result;

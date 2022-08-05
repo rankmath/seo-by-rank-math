@@ -88,9 +88,11 @@ class Summary {
 	/**
 	 * Get Optimization stats.
 	 *
+	 * @param string $post_type Selected Post Type.
+	 *
 	 * @return object
 	 */
-	public function get_optimization_summary() {
+	public function get_optimization_summary( $post_type = '' ) {
 		global $wpdb;
 
 		$stats = (object) [
@@ -102,7 +104,8 @@ class Summary {
 			'average' => 0,
 		];
 
-		$data = $wpdb->get_results(
+		$object_type_sql = $post_type ? ' AND object_subtype = "' . $post_type . '"' : '';
+		$data            = $wpdb->get_results(
 			"SELECT COUNT(object_id) AS count,
 				CASE
 					WHEN seo_score BETWEEN 81 AND 100 THEN 'good'
@@ -113,6 +116,7 @@ class Summary {
 				END AS type
 			FROM {$wpdb->prefix}rank_math_analytics_objects
 			WHERE is_indexable = 1
+			{$object_type_sql}
 			GROUP BY type"
 		);
 
@@ -125,19 +129,19 @@ class Summary {
 		$stats->average = 0;
 
 		// Average.
-		$average = DB::objects()
-			->selectCount( 'object_id', 'total' )
-			->where( 'is_indexable', 1 )
-			->selectSum( 'seo_score', 'score' )
-			->one();
-
-		$average->total += property_exists( $stats, 'noData' ) ? $stats->noData : 0; // phpcs:ignore
-
-		if ( $average->total > 0 ) {
-			$stats->average = $average->score / $average->total;
-			$stats->average = \round( $stats->average, 2 );
+		$query = DB::objects()
+		->selectCount( 'object_id', 'total' )
+		->where( 'is_indexable', 1 )
+		->selectSum( 'seo_score', 'score' );
+		if ( $object_type_sql ) {
+			$query->where( 'object_subtype', $post_type );
 		}
 
+		$average         = $query->one();
+		$average->total += property_exists( $stats, 'noData' ) ? $stats->noData : 0; // phpcs:ignore
+		if ( $average->total > 0 ) {
+			$stats->average = \round( $average->score / $average->total, 2 );
+		}
 		return $stats;
 	}
 
@@ -155,6 +159,11 @@ class Summary {
 			->selectAvg( 'ctr', 'ctr' )
 			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
 			->one();
+		// Check validation.
+		$stats->clicks      = empty( $stats->clicks ) ? 0 : $stats->clicks;
+		$stats->impressions = empty( $stats->impressions ) ? 0 : $stats->impressions;
+		$stats->position    = empty( $stats->position ) ? 0 : $stats->position;
+		$stats->ctr         = empty( $stats->ctr ) ? 0 : $stats->ctr;
 
 		$old_stats = DB::analytics()
 			->selectCount( 'DISTINCT(page)', 'posts' )
@@ -164,6 +173,26 @@ class Summary {
 			->selectAvg( 'ctr', 'ctr' )
 			->whereBetween( 'created', [ $this->compare_start_date, $this->compare_end_date ] )
 			->one();
+
+		// Check validation.
+		$old_stats->clicks      = empty( $old_stats->clicks ) ? 0 : $old_stats->clicks;
+		$old_stats->impressions = empty( $old_stats->impressions ) ? 0 : $old_stats->impressions;
+		$old_stats->position    = empty( $old_stats->position ) ? 0 : $old_stats->position;
+		$old_stats->ctr         = empty( $old_stats->ctr ) ? 0 : $old_stats->ctr;
+
+		$stats->ctr = [
+			'total'    => 0,
+			'previous' => 0,
+		];
+
+		if ( 0 !== $stats->impressions ) {
+			$stats->ctr['total'] = round( ( $stats->clicks / $stats->impressions ) * 100, 2 );
+		}
+		if ( 0 !== $old_stats->impressions ) {
+			$stats->ctr['previous'] = round( ( $old_stats->clicks / $old_stats->impressions ) * 100, 2 );
+		}
+
+		$stats->ctr['difference'] = $stats->ctr['total'] - $stats->ctr['previous'];
 
 		$stats->clicks = [
 			'total'      => (int) $stats->clicks,
@@ -182,44 +211,36 @@ class Summary {
 			'previous'   => (float) \number_format( $old_stats->position, 2 ),
 			'difference' => (float) \number_format( $stats->position - $old_stats->position, 2 ),
 		];
-
-		$stats->ctr = [
-			'total'      => (float) \number_format( $stats->ctr, 2 ),
-			'previous'   => (float) \number_format( $old_stats->ctr, 2 ),
-			'difference' => (float) \number_format( $stats->ctr - $old_stats->ctr, 2 ),
-		];
-
 		$stats->keywords = $this->get_keywords_summary();
 		$stats->graph    = $this->get_analytics_summary_graph();
 
 		$stats = apply_filters( 'rank_math/analytics/summary', $stats );
-
 		return array_filter( (array) $stats );
 	}
-
 	/**
 	 * Get posts summary.
 	 *
+	 * @param string $post_type Selected Post Type.
+	 *
 	 * @return object
 	 */
-	public function get_posts_summary() {
+	public function get_posts_summary( $post_type = '' ) {
 		$cache_key = $this->get_cache_key( 'posts_summary', $this->days . 'days' );
-		$cache     = get_transient( $cache_key );
+		$cache     = ! $post_type ? get_transient( $cache_key ) : false;
 
 		if ( false !== $cache ) {
 			return $cache;
 		}
 
-		$summary = DB::analytics()
-			->selectCount( 'DISTINCT(page)', 'posts' )
+		global $wpdb;
+		$query   = DB::analytics()
+			->selectCount( 'DISTINCT(' . $wpdb->prefix . 'rank_math_analytics_gsc.page' . ')', 'posts' )
 			->selectSum( 'impressions', 'impressions' )
 			->selectSum( 'clicks', 'clicks' )
 			->selectAvg( 'ctr', 'ctr' )
-			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
-			->one();
-
-		$summary = apply_filters( 'rank_math/analytics/posts_summary', $summary );
-
+			->whereBetween( $wpdb->prefix . 'rank_math_analytics_gsc.created', [ $this->start_date, $this->end_date ] );
+		$summary = $query->one();
+		$summary = apply_filters( 'rank_math/analytics/posts_summary', $summary, $post_type, $query );
 		$summary = wp_parse_args(
 			array_filter( (array) $summary ),
 			[

@@ -10,7 +10,7 @@ import * as i18n from '@wordpress/i18n'
 import { dispatch } from '@wordpress/data'
 import { Fragment } from '@wordpress/element'
 import { registerPlugin } from '@wordpress/plugins'
-import { addAction, addFilter } from '@wordpress/hooks'
+import { addAction, addFilter, applyFilters } from '@wordpress/hooks'
 import {
 	PluginSidebar,
 	PluginSidebarMoreMenuItem,
@@ -20,12 +20,14 @@ import {
 /**
  * Internal dependencies
  */
-import App from '../sidebar/App'
+import { getStore } from '@root/redux/store'
 import Editor from '../rankMathEditor'
 import DataCollector from './DataCollector'
+import ReusableBlockAnalysis from './ReusableBlockAnalysis'
 import RankMathIcon from '@components/AppIcon'
 import PostPublish from '../sidebar/PostPublish'
 import PrimaryTermSelector from '@components/PrimaryTerm/PrimaryTermSelector'
+import LinkSuggestions from '@components/LinkSuggestions'
 
 /**
  * Slots
@@ -36,6 +38,7 @@ import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
 
 class GutenbergEditor extends Editor {
 	setup( dataCollector ) {
+		getStore()
 		this.registerSlots = this.registerSlots.bind( this )
 		addAction( 'rank_math_loaded', 'rank-math', this.registerSlots, 0 )
 
@@ -43,6 +46,8 @@ class GutenbergEditor extends Editor {
 		this.registerSidebar()
 		this.registerPostPublish()
 		this.registerPrimaryTermSelector()
+		new LinkSuggestions()
+		new ReusableBlockAnalysis()
 	}
 
 	/**
@@ -76,7 +81,10 @@ class GutenbergEditor extends Editor {
 					title={ i18n.__( 'Rank Math', 'rank-math' ) }
 					className="rank-math-sidebar-panel"
 				>
-					<App />
+					{
+						/* Filter to include components from the common editor file */
+						applyFilters( 'rank_math_app', {} )()
+					}
 				</PluginSidebar>
 			</Fragment>
 		)
@@ -116,7 +124,6 @@ class GutenbergEditor extends Editor {
 			)
 		)
 	}
-
 	updatePermalink( slug ) {
 		dispatch( 'core/editor' ).editPost( { slug } )
 	}

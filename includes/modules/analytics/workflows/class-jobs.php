@@ -14,6 +14,7 @@ use Exception;
 use RankMath\Helper;
 use RankMath\Google\Api;
 use RankMath\Google\Console;
+use RankMath\Google\Url_Inspection;
 use RankMath\Analytics\DB;
 use RankMath\Traits\Hooker;
 use RankMath\Analytics\Stats;
@@ -62,6 +63,9 @@ class Jobs {
 
 			// Console data fetch.
 			$this->action( 'rank_math/analytics/get_console_data', 'get_console_data' );
+
+			// Inspections data fetch.
+			$this->action( 'rank_math/analytics/get_inspections_data', 'get_inspections_data' );
 		}
 	}
 
@@ -80,10 +84,6 @@ class Jobs {
 			->selectCount( 'id' )
 			->getVar();
 
-		if ( ! empty( $rows ) ) {
-			return;
-		}
-
 		Workflow::kill_workflows();
 	}
 
@@ -93,6 +93,8 @@ class Jobs {
 	 * @param  array $ids Posts ids to process.
 	 */
 	public function do_flat_posts( $ids ) {
+		Inspections::kill_jobs();
+
 		foreach ( $ids as $id ) {
 			Watcher::get()->update_post_info( $id );
 		}
@@ -107,12 +109,17 @@ class Jobs {
 		// Delete all useless data from console data table.
 		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
 
+		// Delete useless data from inspections table too.
+		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_inspections WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
+
 		delete_transient( 'rank_math_analytics_data_info' );
 		DB::purge_cache();
 		DB::delete_data_log();
 		$this->calculate_stats();
 
 		update_option( 'rank_math_analytics_last_updated', time() );
+
+		Workflow::do_workflow( 'inspections' );
 	}
 
 	/**
@@ -132,6 +139,28 @@ class Jobs {
 
 		try {
 			DB::add_query_page_bulk( $date, $rows );
+		} catch ( Exception $e ) {} // phpcs:ignore
+	}
+
+	/**
+	 * Get inspection results from the API and store them in the database.
+	 *
+	 * @param string $page URI to fetch data for.
+	 */
+	public function get_inspections_data( $page ) {
+
+		// If the option is disabled, don't fetch data.
+		if ( ! \RankMath\Analytics\Url_Inspection::is_enabled() ) {
+			return;
+		}
+
+		$inspection = Url_Inspection::get()->get_inspection_data( $page );
+		if ( empty( $inspection ) ) {
+			return;
+		}
+
+		try {
+			DB::store_inspection( $inspection );
 		} catch ( Exception $e ) {} // phpcs:ignore
 	}
 

@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { List } from '@woocommerce/components'
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
@@ -7,7 +12,6 @@ import { withFilters } from '@wordpress/components'
 /**
  * Internal dependencies
  */
-import List from '@scShared/woocommerce/List'
 import { convertNumbers } from '../functions'
 
 const AutomaticKeywordTracking = () => {

@@ -6,7 +6,7 @@ import { truncate, isUndefined } from 'lodash'
 /**
  * WordPress dependencies
  */
-import { __, sprintf } from '@wordpress/i18n'
+import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
 import { Fragment } from '@wordpress/element'
 import { withDispatch, withSelect } from '@wordpress/data'
@@ -25,6 +25,8 @@ import TwitterApp from './TwitterApp'
 import TwitterPlayer from './TwitterPlayer'
 import { getOverlayChoices } from '@helpers/overlayImages'
 import SocialMediaUpload from './MediaUpload'
+import VariableInserter from '@components/VariableInserter'
+import Interpolate from '@components/Interpolate'
 
 const TwitterTab = ( props ) => (
 	<Fragment>
@@ -91,13 +93,12 @@ const TwitterTab = ( props ) => (
 		{ 'player' === props.cardType && (
 			<div className="notice notice-alt notice-info">
 				<p>
-					{ sprintf(
-						// translators: link to twitter doc
+					{
 						__(
 							'Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. Player Cards must be submitted for approval before they can be used. More information: ',
 							'rank-math'
-						),
-					) }{ ' ' }
+						)
+					}
 					<a href="https://dev.twitter.com/cards/types/player" target="blank">https://dev.twitter.com/cards/types/player</a>
 				</p>
 			</div>
@@ -106,13 +107,12 @@ const TwitterTab = ( props ) => (
 		{ 'app' === props.cardType && (
 			<div className="notice notice-alt notice-info">
 				<p>
-					{ sprintf(
-						// translators: link to twitter doc
+					{
 						__(
 							'The App Card is a great way to represent mobile applications on Twitter and to drive installs. More information: ',
 							'rank-math'
-						),
-					) }{ ' ' }
+						)
+					}
 					<a href="https://dev.twitter.com/cards/types/app" target="blank"> https://dev.twitter.com/cards/types/app</a>
 				</p>
 			</div>
@@ -124,23 +124,47 @@ const TwitterTab = ( props ) => (
 
 		{ ! props.useFacebook && 'app' !== props.cardType && (
 			<div className="field-group">
-				<TextControl
-					label={ __( 'Title', 'rank-math' ) }
-					value={ props.title }
-					placeholder={ props.serpTitle }
-					onChange={ props.updateTitle }
-				/>
+				<label htmlFor="rank-math-twitter-title">
+					{ __( 'Title', 'rank-math' ) }
+				</label>
+
+				<div className="variable-group">
+					<TextControl
+						id="rank-math-twitter-title"
+						value={ props.title }
+						placeholder={ props.serpTitle }
+						onChange={ props.updateTitle }
+					/>
+
+					<VariableInserter
+						onClick={ ( variable ) =>
+							props.updateTitle( props.title + ' %' + variable.variable + '%' )
+						}
+					/>
+				</div>
 			</div>
 		) }
 
 		{ ! props.useFacebook && 'app' !== props.cardType && (
 			<div className="field-group">
-				<TextareaControl
-					label={ __( 'Description', 'rank-math' ) }
-					value={ props.description }
-					placeholder={ props.serpDescription }
-					onChange={ props.updateDescription }
-				/>
+				<label htmlFor="rank-math-twitter-description">
+					{ __( 'Description', 'rank-math' ) }
+				</label>
+
+				<div className="variable-group">
+					<TextareaControl
+						id="rank-math-twitter-description"
+						value={ props.description }
+						placeholder={ props.serpDescription }
+						onChange={ props.updateDescription }
+					/>
+
+					<VariableInserter
+						onClick={ ( variable ) =>
+							props.updateDescription( props.description + ' %' + variable.variable + '%' )
+						}
+					/>
+				</div>
 			</div>
 		) }
 
@@ -164,14 +188,27 @@ const TwitterTab = ( props ) => (
 						onChange={ props.updateImageOverlay }
 					/>
 
-					<div className="notice notice-alt notice-warning">
-						<p>
-							{ __(
-								'Please be careful with this option. Although this option will help increase CTR on Twitter, it might get you penalised if over-used.',
-								'rank-math'
-							) }
-						</p>
-					</div>
+					{ ! rankMath.isPro && (
+						<div className="notice notice-alt notice-warning">
+							<p>
+								<Interpolate
+									components={ {
+										link: (
+											<a
+												href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Gutenberg%20Social%20Tab&utm_campaign=WP"
+												target="_blank"
+												rel="noopener noreferrer"
+											/>
+										),
+									} }>
+									{ __(
+										'You can add custom thumbnail overlays with {{link}}Rank Math Pro{{/link}}.',
+										'rank-math'
+									) }
+								</Interpolate>
+							</p>
+						</div>
+					) }
 				</div>
 			</div>
 		) }

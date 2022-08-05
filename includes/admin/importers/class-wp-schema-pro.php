@@ -162,6 +162,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 			'steps'        => 'get_howto_steps',
 			'tool'         => 'get_howto_tools',
 			'supply'       => 'get_howto_supplies',
+			'rating'       => 'get_rating',
 		];
 
 		$data = [];
@@ -285,6 +286,20 @@ class WP_Schema_Pro extends Plugin_Importer {
 		if ( 'provider' === $key || 'hiringOrganization' === $key ) {
 			$data['@type'] = 'Organization';
 		}
+	}
+
+	/**
+	 * Get ratings value.
+	 *
+	 * @param  array  $details       Array of details.
+	 * @param  string $snippet_key   Snippet key.
+	 * @param  string $post_id       Post ID.
+	 * @param  array  $snippet       Snippet data.
+	 * @param  string $snippet_value Snippet value.
+	 * @return string
+	 */
+	private function get_rating( $details, $snippet_key, $post_id, $snippet, $snippet_value ) {
+		return get_post_meta( $post_id, 'bsf-schema-pro-rating-' . $snippet['id'], true );
 	}
 
 	/**
@@ -545,7 +560,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 	private function get_snippet_details( $post_id ) {
 		global $wpdb;
 
-		$post_type = get_post_type( $post_id );
+		$post_type = addcslashes( get_post_type( $post_id ), '_' );
 		$query     = "SELECT p.ID, pm.meta_value FROM {$wpdb->postmeta} as pm
 		INNER JOIN {$wpdb->posts} as p ON pm.post_id = p.ID
 		WHERE pm.meta_key = 'bsf-aiosrs-schema-location'
@@ -610,6 +625,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 				'url'          => 'url',
 				'author'       => 'author.name',
 				'work-example' => 'book_editions',
+				'rating'       => 'review.reviewRating.ratingValue',
 			],
 			'course'               => [
 				'name'             => 'name',
@@ -674,6 +690,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 			'currency'              => 'offers.priceCurrency',
 			'avail'                 => 'offers.availability',
 			'performer'             => 'performer.name',
+			'rating'                => 'review.reviewRating.ratingValue',
 		];
 	}
 
@@ -718,6 +735,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 			'currency'          => 'offers.priceCurrency',
 			'avail'             => 'offers.availability',
 			'price-valid-until' => 'offers.priceValidUntil',
+			'rating'            => 'review.reviewRating.ratingValue',
 		];
 	}
 
@@ -738,6 +756,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 			'preperation-time' => 'prepTime',
 			'cook-time'        => 'cookTime',
 			'ingredients'      => 'recipeIngredient',
+			'rating'           => 'review.reviewRating.ratingValue',
 		];
 	}
 
@@ -769,6 +788,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 			'content-url' => 'contentUrl',
 			'embed-url'   => 'embedUrl',
 			'duration'    => 'duration',
+			'rating'      => 'review.reviewRating.ratingValue',
 		];
 	}
 }

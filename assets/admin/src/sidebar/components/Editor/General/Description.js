@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { unescape } from 'lodash'
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
@@ -25,14 +30,14 @@ const EditorDescription = ( {
 
 		<LengthIndicator source={ serpDescription } min={ 80 } max={ 160 } pixelWidth={ 920 } widthCheckerClass={ 'description' } />
 
-		<div className="variable-group">
+		<div className="variable-group rank-math-description-variables">
 			<TextareaControl
 				id="rank-math-editor-description"
 				value={ decodeEntities( description ) }
 				placeholder={
 					serpDescription
 						? serpDescription
-						: rankMath.assessor.serpData.descriptionTemplate
+						: unescape( rankMath.assessor.serpData.descriptionTemplate )
 				}
 				help={ __(
 					'This is what will appear as the description when this post shows up in the search results.',

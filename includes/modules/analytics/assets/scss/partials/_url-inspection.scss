@@ -1,0 +1,545 @@
+// main: ../stats.scss
+
+.#{$namespace} {
+    &-indexing-tab {
+        @import '../../../../../../assets/admin/scss/partials/options/unlock-pro-notice';
+        // PRO CTA.
+        #rank-math-pro-cta {
+            margin-top: 0;
+        }
+
+        // Status Column.
+        td.rank-math-col-status {
+            filter: blur(2px);
+
+            .rank-math-tooltip:hover span {
+                opacity: 0;
+            }
+        }
+
+        // Rich Results Column.
+        .rank-math-col-rich-results {
+            min-width: 170px;
+
+            .schema-item {
+                display: block;
+
+
+                i {
+                    padding: 5px;
+
+                    color: $color-1;
+                    border-radius: 3px;
+                    background: rgba($color-1, .15);
+                }
+
+                &.none i {
+                    color: $dark-gray;
+                    background: rgba($gray, .15);
+                }
+
+                &.error i {
+                    color: $color-3;
+                    background: rgba($color-3, .15);
+                }
+
+                &.warning i {
+                    color: $color-4;
+                    background: rgba($color-4, .15);
+                }
+            }
+        }
+
+        .rank-math-col-status,
+        .rank-math-col-indexing-allowed,
+        .rank-math-col-mobile-usability,
+        .rank-math-col-crawled-as,
+        .rank-math-col-robots-state {
+            text-align: center;
+        }
+
+        // Verdict Icons.
+        .verdict {
+            font-style: normal;
+
+            position: relative;
+
+            display: block;
+
+            width: 100%;
+
+            text-align: center;
+
+            &:before {
+                font-family: 'Dashicons';
+                font-size: 16px;
+                line-height: 20px;
+
+                display: inline-block;
+
+                width: 20px;
+
+                content: '\f460';
+                transition: all .2s ease-in-out;
+
+                color: #fff;
+                border-radius: 50%;
+                background-color: $color-4;
+            }
+
+            &:hover:before {
+                box-shadow: 0 0 0 4px rgba( $color-4, .25 );
+            }
+
+            &.neutral {
+                &:before {
+                    background: $gray;
+                }
+
+                &:hover:before {
+                    box-shadow: 0 0 0 4px rgba( $gray, .25 );
+                }
+            }
+
+            &.unspecified {
+                &:before {
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+
+                    content: '?';
+
+                    background: $dark-gray;
+                }
+
+                &:hover:before {
+                    box-shadow: 0 0 0 4px rgba( $dark-gray, .25 );
+                }
+            }
+
+            &.pass {
+                &:before {
+                    content: '\f15e';
+
+                    background: $color-1;
+                }
+
+                &:hover:before {
+                    box-shadow: 0 0 0 4px rgba( $color-1, .25 );
+                }
+            }
+
+            &.fail {
+                &:before {
+                    content: '\f335';
+
+                    background: $color-3;
+                }
+
+                &:hover:before {
+                    box-shadow: 0 0 0 4px rgba( $color-3, .25 );
+                }
+            }
+
+            &.partial {
+                &:before {
+                    content: '\f15e';
+                }
+            }
+        }
+
+        // Verdict Tooltip.
+        .rank-math-tooltip span {
+            width: 100px;
+        }
+
+        // Secondary Column Verdict Icons.
+        .rank-math-col {
+            &-indexing-allowed,
+            &-mobile-usability,
+            &-robots-state {
+                .verdict {
+                    &:before {
+                        background-color: $light-gray;
+                    }
+
+                    &:hover:before {
+                        box-shadow: 0 0 0 4px rgba( $dark-gray, .1 );
+                    }
+
+                    &.unspecified,
+                    &.neutral {
+                        &:hover:before {
+                            box-shadow: 0 0 0 4px rgba( $dark-gray, .1 );
+                        }
+                    }
+
+                    &.pass {
+                        &:before {
+                            content: '\f15e';
+
+                            color: $color-1;
+                            background: rgba($color-1, .25);
+                        }
+
+                        &:hover:before {
+                            box-shadow: 0 0 0 4px rgba( $color-1, .1 );
+                        }
+                    }
+
+                    &.fail {
+                        &:before {
+                            content: '\f335';
+
+                            color: $color-3;
+                            background: rgba($color-3, .25);
+                        }
+
+                        &:hover:before {
+                            box-shadow: 0 0 0 4px rgba( $color-3, .1 );
+                        }
+                    }
+
+                    &.partial {
+                        &:before {
+                            content: '\f15e';
+
+                            color: $color-4;
+                            background: rgba($color-4, .25);
+                        }
+
+                        &:hover:before {
+                            box-shadow: 0 0 0 4px rgba( $color-4, .1 );
+                        }
+                    }
+                }
+            }
+        }
+
+        // Row Footer.
+        .row-footer {
+            background: rgba(#f8f9fa, .5);
+            cursor: pointer;
+
+            td {
+                padding: .825rem .825rem;
+            }
+        }
+
+        .last-crawl-data {
+            display: flex;
+
+            flex-flow: row wrap;
+            justify-content: space-between;
+
+            div {
+                &:first-child {
+                    margin-right: 1rem;
+                }
+            }
+        }
+
+        // Toggle.
+        .inner-elements {
+            > td {
+                border-bottom: 1px solid $light_gray;
+
+                &:first-child:empty {
+                    background: #efeff1;
+                }
+            }
+
+            td {
+                padding: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+
+                &:first-child {
+                    border-right: 1px solid $light_gray;
+                    background-color: #fafafb;
+                }
+
+                .indexing-data-wrapper {
+                    position: relative;
+
+                    .indexing-data {
+                        filter: blur( 2px );
+                    }
+                }
+
+                .indexing-data {
+                    h4 {
+                        display: block;
+
+                        box-sizing: border-box;
+                        width: inherit;
+                        padding: 1rem .825rem;
+
+                        border-bottom: 1px solid $light_gray;
+                        background-color: #efeff1;
+
+                        .rank-math-tooltip {
+                            color: $primary;
+                            margin-left: 3px;
+
+                            &:hover em:before {
+                                color: darken( $primary, 10 );
+                            }
+                        }
+                    }
+
+                    &.status {
+                        div {
+                            display: flex;
+
+                            border-bottom: 1px solid $light_gray;
+
+                            span {
+                                box-sizing: border-box;
+                                padding: 1rem .825rem;
+
+                                &:first-child {
+                                    font-weight: 500;
+
+                                    width: 30%;
+
+                                    color: #5a5d70;
+                                    border-right: 1px solid $light_gray;
+                                    background-color: #fafafb;
+                                }
+                            }
+                        }
+                    }
+
+                    &.detected-items {
+                        > h4 {
+                            display: none;
+                        }
+                    }
+
+                    &.referring-urls {
+                        ul {
+                            margin: 0.825rem 0.825rem 0.825rem 1.75rem;
+                            list-style-type: square;
+                            max-width: 900px;
+                            word-break: break-all;
+
+                            li {
+                                margin-bottom: 0.825rem;
+                            }
+                        }
+                    }
+
+                    &.crawled div {
+                        padding: 1rem .825rem;
+                        border-bottom: 1px solid $light_gray;
+
+                        i {
+                            vertical-align: middle;
+                            margin-right: 5px;
+                        }
+                    }
+
+                    .rich-results-wrapper {
+                        .rich-results-header {
+                            display: flex;
+
+                            width: 100%;
+
+                            h4 {
+                                font-size: 1rem;
+                                font-weight: 500;
+
+                                display: block;
+
+                                width: inherit;
+                                width: 30%;
+                                margin: 0;
+                                padding: 1rem .825rem;
+
+                                &:first-child {
+                                    border-right: 1px solid $light-gray;
+                                }
+
+                                &:last-child {
+                                    width: 70%;
+                                }
+                            }
+                        }
+
+                        .rich-results-data {
+                            .inner-wrapper {
+                                display: flex;
+
+                                &:last-of-type {
+                                    h4 {
+                                        border-bottom: 0;
+                                    }
+
+                                    .schema-data:last-of-type {
+                                        > span, > strong {
+                                            border-bottom: 0;
+                                        }
+
+                                        > span + .sub-issues {
+                                            border-top: 1px solid $light-gray;
+                                        }
+                                    }
+
+                                    .sub-issues:last-of-type {
+                                        border-bottom: 0;
+                                    }
+                                }
+
+                                h4 {
+                                    width: 30%;
+
+                                    border-right: 1px solid $light-gray;
+                                }
+
+                                .schema-data {
+                                    display: flex;
+
+                                    width: 70%;
+
+                                    flex-grow: 1;
+                                    flex-wrap: wrap;
+
+                                    > span {
+                                        width: 70%;
+                                    }
+
+                                    strong {
+                                        box-sizing: border-box;
+                                        width: 30%;
+                                        padding: 1rem .825rem;
+
+                                        border-right: 1px solid $light-gray;
+                                        border-bottom: 1px solid $light-gray;
+                                    }
+
+                                    > span {
+                                        box-sizing: border-box;
+                                        padding: 1rem .825rem;
+
+                                        border-bottom: 1px solid $light-gray;
+
+                                        flex-grow: 1;
+                                    }
+
+                                    .sub-issues {
+                                        display: inline-flex;
+
+                                        width: 100%;
+
+                                        align-items: center;
+
+                                        border-bottom: 1px solid $light-gray;
+
+                                        > span {
+                                            &:first-child {
+                                                font-weight: 500;
+
+                                                box-sizing: border-box;
+                                                width: 30%;
+                                                margin-left: -1px;
+                                                padding: 1rem .825rem;
+                                            }
+
+                                            &:last-child {
+                                                display: flex;
+
+                                                width: 70%;
+
+                                                border-left: 1px solid $light-gray;
+
+                                                flex-wrap: wrap;
+                                            }
+                                        }
+
+                                        .schema-issues {
+                                            strong {
+                                                width: 30%;
+
+                                                &:first-child {
+                                                    width: 70%;
+                                                }
+                                            }
+
+                                            .issue-details {
+                                                display: flex;
+                                                flex-direction: column;
+
+                                                width: 100%;
+
+                                                > span {
+                                                    display: flex;
+
+                                                    border-bottom: 1px solid $light-gray;
+
+                                                    &:last-of-type {
+                                                        border-bottom: 0;
+                                                    }
+
+                                                    span {
+                                                        box-sizing: border-box;
+                                                        padding: 1rem .825rem;
+
+                                                        &:first-child {
+                                                            width: 70%;
+
+                                                            border-right: 1px solid $light-gray;
+                                                        }
+
+                                                        &:last-child {
+                                                            width: 30%;
+                                                        }
+                                                    }
+
+                                                    &.error {
+                                                        span:last-of-type {
+                                                            color: $color-3;
+                                                        }
+                                                    }
+
+                                                    &.warning {
+                                                        span:last-of-type {
+                                                            color: $color-4;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #rank-math-unlock-pro-notice {
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        .rank-math-child-row {
+            > td {
+                padding: 0;
+
+                table {
+                    width: 100%;
+                }
+            }
+        }
+
+        .woocommerce-ellipsis-menu__content {
+            .woocommerce-ellipsis-menu__item {
+                &:last-child, &:nth-last-child(2) {
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+}

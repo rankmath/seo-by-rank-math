@@ -105,4 +105,22 @@ class Block {
 
 		return 'div';
 	}
+
+	/**
+	 * Normalize the block text.
+	 *
+	 * @param string $text  Text.
+	 * @param string $block Block name.
+	 *
+	 * @return string
+	 */
+	protected function normalize_text( $text, $block ) {
+		/**
+		 * Filter: Allow developers to preserve line breaks.
+		 *
+		 * @param bool   $return If set, this will convert all remaining line breaks after paragraphing.
+		 * @param string $block  Block name.
+		 */
+		return wpautop( $text, apply_filters( 'rank_math/block/preserve_line_breaks', true, $block ) );
+	}
 }

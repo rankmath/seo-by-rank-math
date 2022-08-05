@@ -160,6 +160,7 @@ class Taxonomy implements Provider {
 		$links    = [];
 		$taxonomy = get_taxonomy( $type );
 		$terms    = $this->get_terms( $taxonomy, $max_entries, $current_page );
+		Sitemap::maybe_redirect( count( $this->get_terms( $taxonomy, 0, $current_page ) ), $max_entries );
 
 		foreach ( $terms as $term ) {
 			$url = [];

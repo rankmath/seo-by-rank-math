@@ -20,9 +20,9 @@ defined( 'ABSPATH' ) || exit;
 class Archive implements IPaper {
 
 	/**
-	 * Builds the title for a post type archive
+	 * Build the title for a post type archive.
 	 *
-	 * @return string The title to use on a post type archive.
+	 * @return string
 	 */
 	public function title() {
 		$post_type = $this->get_queried_post_type();
@@ -31,9 +31,9 @@ class Archive implements IPaper {
 	}
 
 	/**
-	 * Builds the description for a post type archive
+	 * Build the description for a post type archive.
 	 *
-	 * @return string The description to use on a post type archive.
+	 * @return string
 	 */
 	public function description() {
 		$post_type = $this->get_queried_post_type();
@@ -74,7 +74,7 @@ class Archive implements IPaper {
 	}
 
 	/**
-	 * Retrieves the canonical URL.
+	 * Get the canonical URL.
 	 *
 	 * @return array
 	 */
@@ -83,7 +83,7 @@ class Archive implements IPaper {
 	}
 
 	/**
-	 * Retrieves meta keywords.
+	 * Get the meta keywords.
 	 *
 	 * @return string
 	 */
@@ -92,9 +92,9 @@ class Archive implements IPaper {
 	}
 
 	/**
-	 * Retrieves the queried post type
+	 * Get the queried post type.
 	 *
-	 * @return string The queried post type.
+	 * @return string
 	 */
 	private function get_queried_post_type() {
 		$post_type = get_query_var( 'post_type' );

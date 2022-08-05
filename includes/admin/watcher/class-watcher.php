@@ -50,11 +50,12 @@ class Watcher implements Runner {
 
 		check_admin_referer( 'rank_math_deactivate_plugins' );
 
-		$type    = Param::get( 'plugin_type', 'seo', FILTER_SANITIZE_STRING );
+		$type    = Param::get( 'plugin_type', 'seo', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 		$allowed = [ 'seo', 'sitemap' ];
 		if ( ! in_array( $type, $allowed, true ) ) {
 			return;
 		}
+
 		$this->deactivate_conflicting_plugins( $type );
 	}
 
@@ -136,7 +137,7 @@ class Watcher implements Runner {
 			}
 		}
 
-		Helper::redirect( Security::remove_query_arg_raw( [ 'rank_math_deactivate_plugins', 'plugin_type', '_wpnonce' ] ) );
+		GlobalHelper::redirect( Security::remove_query_arg_raw( [ 'rank_math_deactivate_plugins', 'plugin_type', '_wpnonce' ] ) );
 	}
 
 	/**

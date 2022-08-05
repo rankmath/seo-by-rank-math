@@ -1,0 +1,64 @@
+div.rank-math-contentai-tab-content-questions {
+    .rank-math-section-heading {
+        h2 {
+            font-weight: 600;
+        }
+
+        button {
+            width: 32px;
+            height: 32px;
+            padding: 0!important;
+
+            justify-content: center;
+
+            &:hover {
+                color: $primary;
+
+                &:after {
+                    display: none;
+                }
+            }
+
+            i {
+                font-size: 15px;
+
+                height: auto;
+
+                &.rm-icon-tick {
+                    font-size: 10px;
+                    font-weight: bold;
+
+                    vertical-align: 0;
+
+                    color: $color-good-dark;
+                }
+            }
+        }
+    }
+
+    .components-form-token-field__help {
+        display: block;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+
+    h3.rank-math-tooltip {
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.2;
+
+        position: relative;
+
+        display: flex;
+
+        margin: 0 0 7px;
+        padding: 12px;
+
+        border-radius: 5px;
+        background-color: lighten($light_gray, 10);
+        color: $text;
+
+        align-items: center;
+        height: auto;
+    }
+}

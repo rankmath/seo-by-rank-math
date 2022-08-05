@@ -2,7 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames'
-import { partial, noop, find, isEmpty } from 'lodash'
+import { partial, noop, find } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -30,7 +30,6 @@ class TabPanel extends Component {
 		const { tabs, initialTabName } = this.props
 
 		this.state = {
-			isOpen: false,
 			selected:
 				initialTabName || ( tabs.length > 0 ? tabs[ 0 ].name : null ),
 		}
@@ -48,12 +47,6 @@ class TabPanel extends Component {
 		child.click()
 	}
 
-	toggle = () => {
-		this.setState( ( state ) => ( {
-			isOpen: ! state.isOpen,
-		} ) )
-	}
-
 	render() {
 		const { selected } = this.state
 		const {
@@ -67,14 +60,13 @@ class TabPanel extends Component {
 		const selectedTab = find( tabs, { name: selected } )
 		const selectedId = instanceId + '-' + selectedTab.name
 		const remaining = tabs.slice( 4 )
-
 		return (
 			<div className={ className }>
 				<NavigableMenu
 					role="tablist"
 					orientation={ orientation }
 					onNavigate={ this.onNavigate }
-					className="components-tab-panel__tabs"
+					className={ 'components-tab-panel__tabs ' + selected }
 				>
 					{ tabs.slice( 0, 4 ).map( ( tab ) => (
 						<TabButton
@@ -97,41 +89,26 @@ class TabPanel extends Component {
 						</TabButton>
 					) ) }
 
-					{ ! isEmpty( remaining ) && (
-						<Button
-							onClick={ this.toggle }
-							aria-expanded={ this.state.isOpen }
-							className={ classnames( 'components-tab-panel__tabs-item', { active: this.state.isOpen } ) }
+					{ remaining.map( ( tab ) => (
+						<TabButton
+							className={ classnames(
+								'components-tab-panel__tabs-item',
+								tab.className,
+								{
+									[ activeClass ]: tab.name === selected,
+								}
+							) }
+							tabId={ instanceId + '-' + tab.name }
+							aria-controls={
+								instanceId + '-' + tab.name + '-view'
+							}
+							selected={ tab.name === selected }
+							key={ tab.name }
+							onClick={ partial( this.handleClick, tab.name ) }
 						>
-							<i className="rm-icon rm-icon-plus"></i>
-							<span>More</span>
-						</Button>
-					) }
-
-					{ this.state.isOpen && (
-						<div className="rank-math-extra-menu">
-							{ remaining.map( ( tab ) => (
-								<TabButton
-									className={ classnames(
-										'components-tab-panel__tabs-item',
-										tab.className,
-										{
-											[ activeClass ]: tab.name === selected,
-										}
-									) }
-									tabId={ instanceId + '-' + tab.name }
-									aria-controls={
-										instanceId + '-' + tab.name + '-view'
-									}
-									selected={ tab.name === selected }
-									key={ tab.name }
-									onClick={ partial( this.handleClick, tab.name ) }
-								>
-									{ tab.title }
-								</TabButton>
-							) ) }
-						</div>
-					) }
+							{ tab.title }
+						</TabButton>
+					) ) }
 				</NavigableMenu>
 				{ selectedTab && (
 					<div

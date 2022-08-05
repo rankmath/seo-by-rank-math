@@ -34,4 +34,30 @@ trait Attachment {
 
 		return empty( $exclude_sitemap );
 	}
+
+	/**
+	 * Generate local path for an attachment image.
+	 * Credit: https://wordpress.stackexchange.com/a/182519
+	 *
+	 * @param int    $attachment_id  Attachment ID.
+	 * @param string $size Size.
+	 */
+	public static function get_scaled_image_path( $attachment_id, $size = 'thumbnail' ) {
+		$file = get_attached_file( $attachment_id, true );
+		if ( empty( $size ) || $size === 'full' ) {
+			// For the original size get_attached_file is fine.
+			return realpath( $file );
+		}
+
+		if ( ! wp_attachment_is_image( $attachment_id ) ) {
+			return false; // the ID is not referring to a media.
+		}
+
+		$info = image_get_intermediate_size( $attachment_id, $size );
+		if ( ! is_array( $info ) || ! isset( $info['file'] ) ) {
+			return false; // Probably a bad size argument.
+		}
+
+		return realpath( str_replace( wp_basename( $file ), $info['file'], $file ) );
+	}
 }

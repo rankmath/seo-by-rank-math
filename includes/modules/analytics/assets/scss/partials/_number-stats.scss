@@ -1,0 +1,44 @@
+.text-large {
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    margin-right: 5px;
+
+    color: $text;
+}
+
+.rank-math-item-difference {
+    color: $dark_gray;
+    font-size: 1rem;
+}
+
+.up,
+.down {
+    font-weight: 500;
+
+    &:before {
+        font-family: 'dashicons';
+        font-size: 18px;
+        font-weight: 900;
+
+        margin-right: 2px;
+
+        vertical-align: -3px;
+    }
+}
+
+.up {
+    color: $color-1;
+
+    &:before {
+        content: '\f142';
+    }
+}
+
+.down {
+    color: $color-3;
+
+    &:before {
+        content: '\f140';
+    }
+}

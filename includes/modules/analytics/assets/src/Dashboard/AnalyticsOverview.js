@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { get, times, isEmpty } from 'lodash'
-import { withRouter } from 'react-router-dom'
 import ContentLoader from 'react-content-loader'
 
 /**
@@ -16,8 +15,9 @@ import { withFilters, Button } from '@wordpress/components'
  * Internal dependencies
  */
 import AnalyticItem from './AnalyticItem'
+import { withRouter } from '../functions'
 
-const AnalyticsOverview = ( { stats, history } ) => {
+const AnalyticsOverview = ( { stats, navigate } ) => {
 	if ( isEmpty( stats ) ) {
 		return (
 			<div className="rank-math-box rank-math-score-overview">
@@ -98,7 +98,7 @@ const AnalyticsOverview = ( { stats, history } ) => {
 				/>
 			</div>
 
-			<Button isLink onClick={ () => history.push( '/performance/1' ) }>
+			<Button isLink onClick={ () => navigate( '/performance/1' ) }>
 				{ __( 'Open Report', 'rank-math' ) }
 			</Button>
 		</div>

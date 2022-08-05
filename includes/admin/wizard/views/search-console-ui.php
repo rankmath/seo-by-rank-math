@@ -10,6 +10,8 @@ use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Google\Authentication;
 use RankMath\Google\Permissions;
+use RankMath\Analytics\Url_Inspection;
+use MyThemeShop\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -39,19 +41,23 @@ $analytics = wp_parse_args(
 		'account_id'       => '',
 		'property_id'      => '',
 		'view_id'          => '',
+		'measurement_id'   => '',
+		'stream_name'      => '',
 		'country'          => 'all',
 		'install_code'     => false,
 		'anonymize_ip'     => false,
 		'local_ga_js'      => false,
-		'cookieless_ga'    => false,
 		'exclude_loggedin' => false,
 	]
 );
-$is_profile_connected   = ! empty( $profile['profile'] );
-$is_adsense_connected   = ! empty( $analytics['adsense_id'] );
-$is_analytics_connected = ! empty( $analytics['view_id'] );
-$all_services           = get_option( 'rank_math_analytics_all_services' );
-$is_pro_active          = defined( 'RANK_MATH_PRO_FILE' );
+
+$is_profile_connected    = ! empty( $profile['profile'] );
+$is_adsense_connected    = ! empty( $analytics['adsense_id'] );
+$is_analytics_connected  = ! empty( $analytics['view_id'] );
+$is_index_status_enabled = Url_Inspection::is_enabled() || ! $is_profile_connected;
+$all_services            = get_option( 'rank_math_analytics_all_services' );
+$is_pro_active           = defined( 'RANK_MATH_PRO_FILE' );
+$is_ga4                  = ! Str::starts_with( 'UA-', $analytics['property_id'] );
 ?>
 <input type="hidden" class="cmb2-id-check-all-services" value="<?php echo $is_profile_connected && $is_analytics_connected ? '1' : '0'; ?>" />
 
@@ -91,6 +97,21 @@ $console_classes = Helper::classnames(
 			</div>
 			<?php do_action( 'rank_math/analytics/options/console' ); ?>
 		</div>
+
+
+		<div class="cmb-row cmb-type-toggle">
+			<div class="cmb-td">
+				<label class="cmb2-toggle">
+					<input type="checkbox" class="regular-text notrack" name="enable-index-status" id="enable-index-status" value="on"<?php checked( $is_index_status_enabled ); ?> <?php echo disabled( ! $is_profile_connected ) ?>>
+					<span class="cmb2-slider">
+						<svg width="3" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 6" class="toggle_on" role="img" aria-hidden="true" focusable="false"><path d="M0 0h2v6H0z"></path></svg>
+						<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg>
+					</span>
+				</label>
+				<label for="enable-index-status"><?php esc_html_e( 'Enable the Index Status tab', 'rank-math' ); ?></label>
+				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option to show the Index Status tab in the Analytics module.', 'rank-math' ); ?> <a href="<?php echo KB::get( 'url-inspection-api' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more.', 'rank-math' ); ?></a></div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -108,14 +129,23 @@ $analytic_classes = Helper::classnames(
 	<header>
 		<h3><?php esc_html_e( 'Analytics', 'rank-math' ); ?></h3>
 	</header>
-	<div class="rank-math-accordion-content">
+	<div class="rank-math-accordion-content rank-math-analytics-content">
 
 		<?php
 		if ( ! Permissions::has_analytics() ) {
 			Permissions::print_warning();
 		} ?>
 
-		<p class="warning yellow"><strong class="warning"><?php echo esc_attr( 'Notice:', 'rank-math' ); ?></strong> <?php echo wp_kses_post( 'Not seeing your website that uses Google Analytics 4? <a href="https://rankmath.com/kb/using-ga4/?utm_source=Plugin&utm_medium=Analytics%20GA4%20KB&utm_campaign=WP" target="_blank">Click here to know how to fix the issue</a>.', 'rank-math' ); ?></p>
+		<p class="warning yellow">
+			<strong class="note"><?php echo esc_attr( 'Note', 'rank-math' ); ?></strong>
+			<?php
+			/* translators: GA4 KB link */
+			echo sprintf(
+				esc_html__( 'Ready to switch to Google Analytics 4? %s', 'rank-math' ),
+				'<a href="https://rankmath.com/kb/using-ga4/?utm_source=Plugin&utm_medium=Analytics%20GA4%20KB&utm_campaign=WP" target="_blank">' . esc_html__( 'Click here to know how', 'rank-math' ) . '</a>.'
+			);
+			?>
+		</p>
 
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">
@@ -134,23 +164,30 @@ $analytic_classes = Helper::classnames(
 				<select class="cmb2_select site-analytics-property notrack" name="site-analytics-property" id="site-analytics-property" data-selected="<?php echo esc_attr( $analytics['property_id'] ); ?>" disabled="disabled">
 					<?php
 					if ( $is_analytics_connected ) :
-						$analytic_property = $all_services['accounts'][ $analytics['account_id'] ]['properties'][ $analytics['property_id'] ];
-						?>
-					<option value="<?php echo $analytics['property_id']; ?>"><?php echo $analytic_property['name']; ?></option>
+						$analytic_property = $all_services['accounts'][ $analytics['account_id'] ]['properties'][ $analytics['property_id'] ]['name'];
+					?>
+					<option value="<?php echo $analytics['property_id']; ?>"><?php echo $analytic_property; ?></option>
 					<?php endif; ?>
 				</select>
 			</div>
 			<div class="cmb-row-col">
-				<label for="site-analytics-view"><?php esc_html_e( 'View', 'rank-math' ); ?></label>
+				<label for="site-analytics-view">
+					<?php echo $is_ga4 ? esc_html__( 'Data Stream', 'rank-math' ) : esc_html__( 'View', 'rank-math' ); ?>
+				</label>
 				<select class="cmb2_select site-analytics-view notrack" name="site-analytics-view" id="site-analytics-view" data-selected="<?php echo esc_attr( $analytics['view_id'] ); ?>" disabled="disabled">
 					<?php
 					if ( $is_analytics_connected ) :
-						$analytic_view = $all_services['accounts'][ $analytics['account_id'] ]['properties'][ $analytics['property_id'] ]['profiles'][ $analytics['view_id'] ];
-						?>
-					<option value="<?php echo $analytics['view_id']; ?>"><?php echo $analytic_view['name']; ?></option>
-					<?php endif; ?>
+						$analytic_view = $is_ga4 ? $analytics['stream_name'] : $all_services['accounts'][ $analytics['account_id'] ]['properties'][ $analytics['property_id'] ]['profiles'][ $analytics['view_id'] ]['name'];
+						$analytic_view = $is_ga4 && ! $analytic_view && ! empty( $analytics['view_id'] ) ? 'Website' : $analytic_view;
+					?>
+						<option value="<?php echo esc_attr( $analytics['view_id'] ); ?>"><?php echo esc_attr( $analytic_view ); ?></option>
+					<?php
+					endif;
+					?>
 				</select>
 			</div>
+			<input type="hidden" id="rank-math-analytics-measurement-id" name="measurementID" value="<?php echo esc_attr( $analytics['measurement_id'] ) ?>" />
+			<input type="hidden" id="rank-math-analytics-stream-name" name="streamName" value="<?php echo esc_attr( $analytics['stream_name'] ) ?>" />
 			<?php do_action( 'rank_math/analytics/options/analytics' ); ?>
 		</div>
 
@@ -182,31 +219,6 @@ $analytic_classes = Helper::classnames(
 					<?php if ( ! $is_pro_active ) : ?>
 					<span class="rank-math-pro-badge">
 						<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Anonymize%20IP&utm_campaign=WP" target="_blank" rel="noopener noreferrer">
-							<?php esc_html_e( 'PRO', 'rank-math' ); ?>
-						</a>
-					</span>
-					<?php endif; ?>
-				</label>
-				<div class="rank-math-cmb-dependency hidden" data-relation="or">
-					<span class="hidden" data-field="install-code" data-comparison="=" data-value="on"></span>
-				</div>
-			</div>
-		</div>
-
-		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Cookieless%20IP&utm_campaign=WP"' : ''; ?>>
-			<div class="cmb-td">
-				<label class="cmb2-toggle">
-					<input type="checkbox" class="regular-text notrack" name="cookieless-ga" id="cookieless-ga" value="on"<?php checked( $analytics['cookieless_ga'] ); ?><?php disabled( ! $is_pro_active ); ?>>
-					<span class="cmb2-slider<?php echo ! $is_pro_active ? ' disabled' : ''; ?> ">
-						<svg width="3" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 6" class="toggle_on" role="img" aria-hidden="true" focusable="false"><path d="M0 0h2v6H0z"></path></svg>
-						<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg>
-					</span>
-				</label>
-				<label for="cookieless-ga">
-					<?php printf( esc_html__( 'Enable Cookieless Tracking. Want to make Analytics GDPR ready? %s', 'rank-math' ), '<a href="' . KB::get( 'settings-gdpr-analytics' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Click here.', 'rank-math' ) . '</a>' ); ?>
-					<?php if ( ! $is_pro_active ) : ?>
-					<span class="rank-math-pro-badge">
-						<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Cookieless%20IP&utm_campaign=WP" target="_blank" rel="noopener noreferrer">
 							<?php esc_html_e( 'PRO', 'rank-math' ); ?>
 						</a>
 					</span>

@@ -16,6 +16,7 @@ import { safeDecodeURIComponent } from '@wordpress/url'
  * Internal dependencies
  */
 import LengthIndicator from '@components/LengthIndicator'
+import { sanitizePermalink } from '@helpers/sanitize'
 
 const EditorPermalink = ( { permalink, serpPermalink, updatePermalink, updatePermalinkSanitize } ) => (
 	<div className="field-group">
@@ -68,10 +69,10 @@ export default compose(
 	withDispatch( () => {
 		return {
 			updatePermalink( slug ) {
-				rankMathEditor.updatePermalink( Helpers.sanitizeText( slug ) )
+				rankMathEditor.updatePermalink( Helpers.sanitizeText( slug ), true )
 			},
 			updatePermalinkSanitize( slug ) {
-				rankMathEditor.updatePermalinkSanitize( Helpers.sanitizeText( slug ) )
+				rankMathEditor.updatePermalinkSanitize( sanitizePermalink( slug ) )
 			},
 		}
 	} )

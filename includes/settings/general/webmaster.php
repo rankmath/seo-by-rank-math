@@ -46,19 +46,6 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'              => 'alexa_verify',
-		'type'            => 'text',
-		'name'            => esc_html__( 'Alexa Verification ID', 'rank-math' ),
-		/* translators: Alexa webmaster link */
-		'desc'            => sprintf( esc_html__( 'Enter your Alexa verification HTML code or ID. Get it from here: %s', 'rank-math' ), '<a href="https://www.alexa.com/account/" target="_blank">' . esc_html__( 'Alexa Account', 'rank-math' ) . '</a>' ) .
-			'<br><code>' . htmlspecialchars( '<meta name="alexaVerifyID" content="your-id" />' ) . '</code>',
-		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_webmaster_tags' ],
-		'classes'         => 'rank-math-advanced-option',
-	]
-);
-
-$cmb->add_field(
-	[
 		'id'              => 'yandex_verify',
 		'type'            => 'text',
 		'name'            => esc_html__( 'Yandex Verification ID', 'rank-math' ),

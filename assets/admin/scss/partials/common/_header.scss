@@ -3,15 +3,19 @@
 .#{$namespace} {
 	&-header {
 		display: flex;
+
 		margin-bottom: 20px;
 		margin-left: -20px;
 		padding: 13px 15px;
+
 		border-bottom: 1px solid $gray;
 		background: #fff;
+
 		flex-flow: row wrap;
 
 		.#{$namespace}-logo {
 			position: relative;
+
 			margin-right: 15px;
 			padding-right: 15px;
 
@@ -19,10 +23,13 @@
 				position: absolute;
 				top: 0;
 				right: 0;
+
 				width: 1px;
 				height: 66px;
 				margin: -12px 0;
+
 				content: '';
+
 				background: $gray;
 			}
 
@@ -36,16 +43,21 @@
 
 			i {
 				font-size: 28px;
-				line-height: 48px;
+				line-height: 40px;
+
+				position: relative;
+
 				display: block;
+
 				width: 40px;
 				height: 40px;
+
 				text-align: center;
+
 				color: #fff;
 				border-radius: 5px;
-				background: linear-gradient(-135deg,#ff4492,#434e8f);
+				background: linear-gradient(-135deg, #f080f3, #202687);
 				text-shadow: 0 1px 3px rgba(0, 0, 0, .1);
-				position: relative;
 			}
 
 			@supports (-moz-appearance:none) {
@@ -57,6 +69,7 @@
 			&-text {
 				font-size: 22px;
 				font-weight: 500;
+
 				margin: 11px auto 0 0;
 
 				span {
@@ -66,32 +79,30 @@
 		}
 
 		a.#{$namespace}-help {
-			font-size: 18px;
-			line-height: 36px;
+			font-size: 24px;
+
 			display: flex;
+
 			margin-left: 5px;
-			padding: 0 10px;
+			padding: 0 3px;
+
 			color: #858b90;
+			border: 0;
+			background: transparent;
+
 			flex-flow: column wrap;
 			justify-content: space-around;
 
 			&:focus,
 			&:hover {
-				color: $primary;
-				border-color: $primary;
-			}
-
-			&:focus {
-				box-shadow: 0 0 0 1px $primary;
+				background: transparent;
 			}
 
 			i {
-				height: 24px;
-
-				&:before {
-					vertical-align: -3px;
-				}
-
+				font-size: 2rem;
+				width: auto;
+				height: auto;
+				margin: 0!important;
 				@supports (-moz-appearance:none) {
 					&:before {
 						vertical-align: initial;

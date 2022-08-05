@@ -17,10 +17,11 @@ if ( 'attachment' === $post_type && Helper::get_settings( 'general.attachment_re
 			'id'      => 'redirect_attachment_notice',
 			'type'    => 'notice',
 			'what'    => 'warning',
-			'content' => esc_html__( 'To configure attachment-related meta tags disable attachment redirection to parent.', 'rank-math' ),
+			/* translators: The settings page link */
+			'content' => sprintf( __( 'To configure meta tags for your media attachment pages, you need to first %s to parent.', 'rank-math' ), '<a href="' . esc_url( Helper::get_admin_url( 'options-general#setting-panel-links' ) ) . '">' . esc_html__( 'disable redirect attachments', 'rank-math' ) . '</a>' ),
 		]
 	);
-	return;
+		return;
 }
 
 $post_type_obj = get_post_type_object( $post_type );
@@ -44,6 +45,16 @@ $primary_taxonomy_hash = [
 ];
 
 $is_stories_post_type = defined( 'WEBSTORIES_VERSION' ) && 'web-story' === $post_type;
+
+// Translators: Post type name.
+$slack_enhanced_sharing_description = sprintf( __( 'When the option is enabled and a %s is shared on Slack, additional information will be shown (estimated time to read and author).', 'rank-math' ), $name );
+if ( 'page' === $post_type ) {
+	$slack_enhanced_sharing_description = __( 'When the option is enabled and a page is shared on Slack, additional information will be shown (estimated time to read).', 'rank-math' );
+} elseif ( 'product' === $post_type ) {
+	$slack_enhanced_sharing_description = __( 'When the option is enabled and a product is shared on Slack, additional information will be shown (price & availability).', 'rank-math' );
+} elseif ( 'download' === $post_type ) {
+	$slack_enhanced_sharing_description = __( 'When the option is enabled and a product is shared on Slack, additional information will be shown (price).', 'rank-math' );
+}
 
 $cmb->add_field(
 	[
@@ -129,18 +140,33 @@ if ( ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) || ( class_ex
 
 } else {
 
+	$schema_types = Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ), $post_type );
+	$type         = 'select';
+	$attributes   = ! $is_stories_post_type ? [ 'data-s2' => '' ] : '';
+	$default      = isset( $richsnp_default[ $post_type ] ) ? $richsnp_default[ $post_type ] : 'off';
+
+	if ( 2 === count( $schema_types ) ) {
+		$type       = 'radio_inline';
+		$attributes = '';
+		$default    = array_key_last( $schema_types );
+	}
+
 	$cmb->add_field(
 		[
 			'id'         => 'pt_' . $post_type . '_default_rich_snippet',
-			'type'       => 'select',
+			'type'       => $type,
 			'name'       => esc_html__( 'Schema Type', 'rank-math' ),
-			'desc'       => esc_html__( 'Default rich snippet selected when creating a new post of this type. ', 'rank-math' ),
+			'desc'       => sprintf( 
+				// Translators: %s is "Article" inside a <code> tag.
+				esc_html__( 'Default rich snippet selected when creating a new post of this type. If %s is selected, it will be applied for all existing posts with no Schema selected.', 'rank-math' ),
+				'<code>' . esc_html_x( 'Article', 'Schema type name in a field description', 'rank-math' ) . '</code>'
+			),
 			'options'    => $is_stories_post_type ? [
 				'off'     => esc_html__( 'None', 'rank-math' ),
 				'article' => esc_html__( 'Article', 'rank-math' ),
-			] : Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ) ),
-			'default'    => $this->do_filter( 'settings/snippet/type', isset( $richsnp_default[ $post_type ] ) ? $richsnp_default[ $post_type ] : 'off', $post_type ),
-			'attributes' => ! $is_stories_post_type ? [ 'data-s2' => '' ] : '',
+			] : $schema_types,
+			'default'    => $this->do_filter( 'settings/snippet/type', $default, $post_type ),
+			'attributes' => $attributes,
 		]
 	);
 
@@ -309,6 +335,17 @@ if ( 'attachment' === $post_type ) {
 		]
 	);
 } else {
+	$cmb->add_field(
+		[
+			'id'      => 'pt_' . $post_type . '_slack_enhanced_sharing',
+			'type'    => 'toggle',
+			'name'    => esc_html__( 'Slack Enhanced Sharing', 'rank-math' ),
+			'desc'    => esc_html( $slack_enhanced_sharing_description ),
+			'default' => in_array( $post_type, [ 'post', 'page', 'product', 'download' ], true ) ? 'on' : 'off',
+			'classes' => 'rank-math-advanced-option',
+		]
+	);
+
 	$cmb->add_field(
 		[
 			'id'      => 'pt_' . $post_type . '_add_meta_box',

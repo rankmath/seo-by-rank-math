@@ -39,7 +39,7 @@ class Frontend_SEO_Score {
 	private $css_added = false;
 
 	/**
-	 * Magic method to use in case the class would be sent to string.
+	 * Convenience method to output as string.
 	 *
 	 * @return string
 	 */

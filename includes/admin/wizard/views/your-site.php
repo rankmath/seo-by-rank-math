@@ -26,22 +26,18 @@ defined( 'ABSPATH' ) || exit;
 	<div class="rank-math-wizard-tutorial">
 		<header>
 			<?php
-			$allowed_html = [
-				'a' => [
-					'href'        => [],
-					'class'       => [],
-					'data-target' => [],
-				],
-			];
-			/* translators: help link */
-			printf( wp_kses( __( 'If you are new to Rank Math, <a href="#" data-target="rank-math-wizard-tabs" class="rank-math-collapsible-trigger">click here</a> to learn more.', 'rank-math' ), $allowed_html ) );
+			printf(
+				/* translators: help link */
+				esc_html__( 'If you are new to Rank Math, %s to learn more.', 'rank-math' ),
+				'<a href="#" data-target="rank-math-wizard-tabs" class="rank-math-collapsible-trigger">' . esc_html__( 'click here', 'rank-math' ) . '</a>'
+			);
 			?>
 		</header>
 
 		<div id="rank-math-wizard-tabs" class="rank-math-collapsible-content rank-math-tabs">
 			<div class="rank-math-tabs-navigation rank-math-custom wp-clearfix">
-				<a href="#help-panel-video" class="active"><span class="dashicons dashicons-editor-video"></span><?php esc_html_e( 'Setup Tutorial', 'rank-math' ); ?></a>
-				<a href="#help-panel-knowledge"><span class="dashicons dashicons-book-alt"></span><?php esc_html_e( 'Knowledge Base', 'rank-math' ); ?></a>
+				<a href="#help-panel-video" class="active"><span class="rm-icon rm-icon-video"></span><?php esc_html_e( 'Setup Tutorial', 'rank-math' ); ?></a>
+				<a href="#help-panel-knowledge"><span class="rm-icon rm-icon-post"></span><?php esc_html_e( 'Knowledge Base', 'rank-math' ); ?></a>
 			</div>
 			<div class="rank-math-tabs-content rank-math-custom">
 				<div id="help-panel-video" class="rank-math-tab">

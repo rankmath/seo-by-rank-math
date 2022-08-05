@@ -91,6 +91,10 @@ class Admin_Init {
 	 * Load Pro reminder notice.
 	 */
 	private function load_pro_notice() {
+		if ( ! is_main_site() ) {
+			return;
+		}
+
 		if ( defined( 'RANK_MATH_PRO_FILE' ) || get_option( 'rank_math_already_upgraded' ) ) {
 			return;
 		}

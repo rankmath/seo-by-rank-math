@@ -6,7 +6,6 @@ import { __ } from '@wordpress/i18n'
 export default () => (
 	<div className="components-panel__body rank-math-custom-schema-wrapper">
 		<img src={ rankMath.customSchemaImage } alt="" className="custom-schema" />
-
 		<div id="rank-math-pro-cta" className="center">
 			<div className="rank-math-cta-box blue-ticks width-60">
 				<h3>{ __( 'Advanced Schema Builder', 'rank-math' ) }</h3>

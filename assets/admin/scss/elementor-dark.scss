@@ -23,7 +23,7 @@
                     }
 
                     &:not(.is-active):hover i {
-                        color: #fff;
+                        color: $white;
                         background: #70d5f5;
                         box-shadow: 0 0 0 4px #70d5f5;
                     }
@@ -32,12 +32,10 @@
                     &:hover {
                         font-weight: normal;
                     }
-				}
+                }
             }
 
             &__tab-content {
-                //background: #404349;
-
                 .serp-preview-title {
                     color: #6d7882;
                 }
@@ -48,7 +46,6 @@
 
                 input[type=checkbox] {
                     cursor: pointer;
-
                     border-color: #64666a;
                     background: #34383c;
 
@@ -56,35 +53,35 @@
                         border-color: #11a0d2;
                         background: #11a0d2;
                     }
-				}
-				
-				.components-form-toggle {
-					&__track {
-						border-color: #e0e1e3;
-						background: transparent;
-					}
-				
-					&__thumb {
-						background: #e0e1e3;
-						border-color: #e0e1e3;
-					}
-				}
+                }
+
+                .components-form-toggle {
+                    &__track {
+                        border-color: #e0e1e3;
+                        background: transparent;
+                    }
+
+                    &__thumb {
+                        border-color: #e0e1e3;
+                        background: #e0e1e3;
+                    }
+                }
 
                 .is-checked span.components-form-toggle {
-					&__track {
-						border-color: #11a0d2;
-						background: #11a0d2;
-					}
+                    &__track {
+                        border-color: #11a0d2;
+                        background: #11a0d2;
+                    }
 
-					&__thumb {
-						background: #fff;
-						border-color: #fff;
-					}
+                    &__thumb {
+                        border-color: $white;
+                        background: $white;
+                    }
                 }
 
                 .components-panel__body {
                     border-color: #34383c;
-                    background: #404349;
+                    background: #404349 !important;
 
                     button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
                         color: #e0e1e3;
@@ -100,7 +97,7 @@
                         &:not(.is-default):hover,
                         &:focus:not(:disabled) {
                             opacity: .9;
-                            color: #fff;
+                            color: $white;
                             background: transparent;
                             box-shadow: none;
                         }
@@ -114,18 +111,20 @@
                         &:not(.is-default):hover,
                         &:focus:not(:disabled) {
                             opacity: .9;
-                            color: #fff;
+                            color: $white;
                             background: transparent;
                             box-shadow: none;
                         }
                     }
                 }
 
-                .#{$namespace}-tab-content-advanced, .#{$namespace}-tab-content-schema {
+                .#{$namespace}-tab-content-advanced,
+                .#{$namespace}-tab-content-schema {
                     > .components-panel__body {
                         background: #404349;
                     }
                 }
+
             }
         }
 
@@ -141,50 +140,50 @@
             .components-panel__arrow {
                 color: inherit;
             }
-		}
+        }
 
-		input[type="text"],
-		input[type="number"],
-		input[type="url"],
-		textarea,
-		select {
-			color: #e0e1e3;
-			border-color: #64666a;
-			background: #34383c;
+        input[type='text'],
+        input[type='number'],
+        input[type='url'],
+        textarea,
+        select {
+            color: #e0e1e3;
+            border-color: #64666a;
+            background: #34383c;
 
-			&:focus {
-				background: #34383c;
-				color: #e0e1e3;
-			}
-		}
+            &:focus {
+                color: #e0e1e3;
+                background: #34383c;
+            }
+        }
 
-		::placeholder {
-			color: #a4afb7!important;
-		}
-	}
-	
-	// Schema Tab.
-	&-schema {
-		&-in-use {
-			color: #e0e1e3;
-		}
+        ::placeholder {
+            color: #a4afb7!important;
+        }
+    }
 
-		&-section-title {
-			font-weight: 600!important;
-			color: #e0e1e3;
-		}
+    // Schema Tab.
+    &-schema {
+        &-in-use {
+            color: #e0e1e3;
+        }
 
-		&-tabs {
-			.components-panel__body {
-				background: transparent!important;
-			}
+        &-section-title {
+            font-weight: 600!important;
+            color: #e0e1e3;
+        }
 
-			.schema-group--children > .schema-group-or-property-container > .schema-group-or-property {
-				background: #404349;
-				border-color: #404349;
-			}
-		}
-	}
+        &-tabs {
+            .components-panel__body {
+                background: transparent!important;
+            }
+
+            .schema-group--children > .schema-group-or-property-container > .schema-group-or-property {
+                border-color: #404349;
+                background: #404349;
+            }
+        }
+    }
 
     &-tooltip {
         label {
@@ -270,28 +269,76 @@
     }
 
     // Modal
-    &-modal {
+    &-modal,
+    &-modal.#{$namespace}-modal-trends-tool {
         background: #26292c;
 
-        .components-modal {
-            &__header {
-                background: #26292c;
+        .trends-tool-frame-sidebar {
+            background-color: transparent;
+            border-color: #404349;
 
-                &-heading {
-                    color: #e0e1e3;
-                }
+            .remove-keyword {
+                border-color: $dark_gray;
+            }
 
-                button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
-                    color: #fff;
-                    background: #404349;
-                    box-shadow: 0 0 0 1px #555d66;
+            .keyword-field input {
+                color: white;
+            }
+        }
+        
+        .components-text-control__input::-webkit-input-placeholder {
+            color: white;
+        }
 
-                    &:hover,
-                    &:active,
-                    &:focus {
-                        box-shadow: 0 0 0 1px $primary;
+        .trends-tool-frame-sidebar .compare-keyword-bar,
+        .components-text-control__input,
+        .components-select-control__input {
+            background: #404349;
+            border: none;
+            color: white;
+        }
+
+        .#{$namespace}-trends-cta-wrapper:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: #26292c66;
+            z-index: 1;
+        }       
+
+        .components-modal__content {
+            .components-modal {
+                &__header {
+                    background-color: #26292C;
+                    color: #E0E1E3;
+                    -webkit-box-shadow: 0 0 8px #0000004d;
+                    box-shadow: 0 0 8px #0000004d;
+                    border: none;
+    
+                    &-heading {
+                        color: #e0e1e3;
+                    }
+    
+                    button {
+                        color: $white;
                     }
                 }
+            }
+        }
+
+        ##{$namespace}-pro-cta .#{$namespace}-cta-box {
+            background-color: #404349;
+            z-index: 1;
+
+            h3 {
+                color: #e0e1e3;
+            }
+
+            ul li {
+                color: $white;
             }
         }
 
@@ -318,7 +365,7 @@
                         background: #70d5f5;
                     }
                 }
-			}
+            }
         }
 
         .field-group {
@@ -340,20 +387,24 @@
                 &.invalid .length-indicator {
                     background: linear-gradient(to right, #e33d2a 0%, #e33d2a 18%, #34383c 19%, #34383c 19%, #e33d2a 20%, #e33d2a 38%, #34383c 39%, #34383c 39%, #e33d2a 40%, #e33d2a 58%, #34383c 59%, #34383c 59%, #e33d2a 60%, #e33d2a 78%, #34383c 79%, #34383c 79%, #e33d2a 80%, #e33d2a 100%);
                 }
-			}
-			
-			input[type="text"], input[type="url"], textarea, select {
-				background: #34383c;
-			}
+            }
+
+            input[type='text'],
+            input[type='url'],
+            textarea,
+            select {
+                background: #34383c;
+            }
         }
 
         // Social Preview.
-        .rank-math-social-preview {
-            &-twitter, &-facebook {
-                .rank-math-social-preview {
+        .#{$namespace}-social-preview {
+            &-twitter,
+            &-facebook {
+                .#{$namespace}-social-preview {
                     &-meta {
                         .social-name {
-                            color: #fff;
+                            color: $white;
                         }
 
                         .social-time {
@@ -366,7 +417,7 @@
                         background: #1d2022;
 
                         &:hover {
-                            .rank-math-social-preview-caption {
+                            .#{$namespace}-social-preview-caption {
                                 background: #1a1c1e;
                             }
                         }
@@ -376,7 +427,7 @@
                         color: #6e767d;
                         background: #1d2022;
 
-                        .rank-math-social-preview-title {
+                        .#{$namespace}-social-preview-title {
                             color: #d9d9d9;
                         }
                     }
@@ -384,14 +435,14 @@
             }
 
             &-facebook {
-                .rank-math-social-preview-meta {
+                .#{$namespace}-social-preview-meta {
                     border-color: #2f3336;
                     background: #1d2022;
                 }
             }
         }
 
-        .rank-math-editor-social {
+        .#{$namespace}-editor-social {
             button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
                 background: #404349;
 
@@ -520,7 +571,7 @@
     }
 }
 
-#rank-math-compare-keywords-trigger {
+##{$namespace}-compare-keywords-trigger {
     border-color: #64666a;
     background: #26292c;
 }

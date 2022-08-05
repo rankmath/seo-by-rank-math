@@ -23,55 +23,45 @@ export function getPostsOverview() {
 
 /**
  * Get analytics summary.
+ *
+ * @param {string} postType Selected Analytics Post type.
  */
-export function getAnalyticsSummary() {
+export function getAnalyticsSummary( postType = '' ) {
+	const param = postType ? `?postType=${ postType }` : ''
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/an/analyticsSummary',
+		path: 'rankmath/v1/an/analyticsSummary' + param,
 	} ).then( ( response ) => {
-		dispatch( 'rank-math' ).updateAnalyticsSummary( response )
+		dispatch( 'rank-math' ).updateAnalyticsSummary( response, postType )
 	} )
 }
 
 /**
  * Get posts summary.
+ *
+ * @param {string} postType Selected Analytics Post type.
  */
-export function getPostsSummary() {
+export function getPostsSummary( postType ) {
+	const param = postType ? `?postType=${ postType }` : ''
 	apiFetch( {
 		method: 'GET',
-		path: 'rankmath/v1/an/postsSummary',
+		path: 'rankmath/v1/an/postsSummary' + param,
 	} ).then( ( response ) => {
 		dispatch( 'rank-math' ).updatePostsSummary( response )
 	} )
 }
 
 /**
- * Get posts rows.
- *
- * @param {number} page Page number.
- * @param {Object} filters The filters.
- */
-export function getPostsRows( page, filters ) {
-	const params = filtersToUrlParams( filters, false )
-
-	apiFetch( {
-		method: 'GET',
-		path: 'rankmath/v1/an/postsRows?page=' + page + params,
-	} ).then( ( response ) => {
-		dispatch( 'rank-math' ).updatePostsRows( page, response, '' === params ? 'all' : params )
-	} )
-}
-
-/**
  * Get posts rows by objects.
  *
- * @param {number} page    Page number.
- * @param {Object} filters The filters parameter.
- * @param {Object} orders The orders parameter.
+ * @param {number} page     Page number.
+ * @param {Object} filters  The filters parameter.
+ * @param {Object} orders   The orders parameter.
+ * @param {string} postType Selected Analytics Post type.
  */
-export function getPostsRowsByObjects( page, filters, orders ) {
-	const params = filtersToUrlParams( filters ) + filtersToUrlParams( orders, false )
-
+export function getPostsRowsByObjects( page, filters, orders, postType = '' ) {
+	let params = filtersToUrlParams( filters ) + filtersToUrlParams( orders, false )
+	params += postType ? `&postType=${ postType }` : ''
 	apiFetch( {
 		method: 'GET',
 		path: 'rankmath/v1/an/postsRowsByObjects?page=' + page + params,

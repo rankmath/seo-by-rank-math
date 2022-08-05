@@ -1,0 +1,143 @@
+div.rank-math-contentai-tab-content-keywords {
+	.components-panel__body {
+		padding: 20px 16px 16px;
+	}
+
+	.components-flex {
+		flex-direction: row;
+		align-items: center;
+
+		label {
+			padding-bottom: 0;
+			font-weight: 600;
+			font-size: 14px;
+		}
+
+		.components-form-token-field__help {
+			margin-top: 10px;
+		}
+
+		.components-input-control__container {
+			max-width: 135px;
+			border-radius: 4px;
+
+			select {
+				height: 30px;
+				font-size: 13px;
+				color: #7f868d;
+			}
+
+			.components-input-control__backdrop {
+				border-color: $gray;
+			}
+		}
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		margin: 20px -3px 0;
+
+		li.rank-math-tooltip {
+			display: none;
+			align-items: center;
+
+			background: lighten( $color-bad, 18% );
+			border-radius: 50px;
+
+			margin-right: 3px;
+			margin-left: 2px;
+			margin-bottom: 7px;
+			padding: 5px 8px 5px 10px;
+			height: auto;
+			min-height: 32px;
+			box-sizing: border-box;
+
+			&.show {
+				display: flex;
+			}
+
+			> span {
+				display: flex;
+				flex-direction: column;
+				width: 130px;
+			}
+
+			strong {
+				display: flex;
+				align-items: center;
+
+				color: darken( $color-bad-dark, 10% );
+
+				font-size: 13px;
+				font-weight: 500;
+				line-height: 1.4;
+
+				color: $color-3;
+
+				span {
+					font-size: 11px;
+					line-height: 22px;
+					margin-left: 5px;
+					padding: 0 8px;
+
+					background: lighten( $color-bad, 21.5% );
+					border-radius: 11px;
+
+					text-align: center;
+					flex: 0 0 auto;
+				}
+			}
+
+			&.ok-fk {
+				background: lighten( $color-ok, 22% );
+
+				strong {
+					color: darken( $color-ok-dark, 10% );
+
+					span {
+						background-color: lighten( $color-ok, 30% );
+					}
+				}
+			}
+
+			&.good-fk {
+				background: lighten( $color-good, 28% );
+
+				strong {
+					color: darken( $color-good-dark, 10% );
+
+					span {
+						background-color: lighten( $color-good, 35% );
+					}
+				}
+			}
+
+			&.dark {
+				background: darken( $color-bad, 10% );
+
+				strong {
+					color: lighten( $color-bad-dark, 30% );
+
+					span {
+						color: darken( $color-bad, 18% );
+						background: lighten( $color-bad, 14% );
+					}
+				}
+			}
+		}
+	}
+
+	// Related Keywords.
+	.rank-math-related-keywords {
+		margin-top: 1.5rem;
+
+		ul li {
+			background: lighten($light_gray, 10);
+
+			strong {
+				color: $text;
+			}
+		}
+	}
+}

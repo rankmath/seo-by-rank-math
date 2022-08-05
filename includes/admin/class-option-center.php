@@ -391,6 +391,10 @@ class Option_Center implements Runner {
 	 * @return bool
 	 */
 	private function do_htaccess_backup() {
+		if ( ! Helper::is_filesystem_direct() ) {
+			return false;
+		}
+
 		$wp_filesystem = WordPress::get_filesystem();
 
 		$path = get_home_path();
@@ -410,7 +414,7 @@ class Option_Center implements Runner {
 	 * @return string|bool
 	 */
 	private function do_htaccess_update( $content ) {
-		if ( empty( $content ) ) {
+		if ( empty( $content ) || ! Helper::is_filesystem_direct() ) {
 			return false;
 		}
 

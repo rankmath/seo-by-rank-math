@@ -53,7 +53,7 @@ class Compatibility implements Wizard_Step {
 				],
 				'default' => Helper::get_settings( 'general.setup_mode', 'advanced' ),
 				'classes' => ! defined( 'RANK_MATH_PRO_FILE' ) ? 'rank-math-setup-mode is-free' : 'rank-math-setup-mode',
-				'desc'    => __( '<strong>Note</strong> You can easily switch between modes at any point.', 'rank-math' ),
+				'desc'    => '<strong class="note">' . __( 'Note', 'rank-math' ) . '</strong>' . __( 'You can easily switch between modes at any point.', 'rank-math' ),
 			]
 		);
 	}

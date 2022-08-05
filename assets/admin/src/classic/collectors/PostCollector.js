@@ -20,7 +20,8 @@ class PostCollector extends DataCollector {
 		this.elemTitle = jQuery( '#title' )
 		this.elemDescription = jQuery( '#excerpt' )
 		this.elemContent = jQuery( '#content' )
-		this.editableName = jQuery( '#editable-post-name-full' )
+		this.saveDraft = jQuery( '#save-post' )
+		this.postStatus = jQuery( '#original_post_status' )
 
 		this.assessThumbnail = this.assessThumbnail.bind( this )
 		addAction(
@@ -55,8 +56,8 @@ class PostCollector extends DataCollector {
 	 */
 	getSlug() {
 		const slug =
-			'' === this.elemSlug.val() && this.editableName.length
-				? this.editableName.text()
+			'' === this.elemSlug.val() && jQuery( '#editable-post-name-full' ).length
+				? jQuery( '#editable-post-name-full' ).text()
 				: this.elemSlug.val()
 
 		return isUndefined( slug ) ? '' : slug
@@ -101,6 +102,7 @@ class PostCollector extends DataCollector {
 		// Update Permalink.
 		jQuery( document ).on( 'ajaxComplete', ( event, response, ajaxOptions ) => {
 			const ajaxEndPoint = '/admin-ajax.php'
+
 			if (
 				ajaxEndPoint !==
 				ajaxOptions.url.substr( 0 - ajaxEndPoint.length )
@@ -126,23 +128,8 @@ class PostCollector extends DataCollector {
 			}
 		} )
 
-		let saveData = true
-		const saveDraft = jQuery( '#save-post' )
-		saveDraft.on( 'click', ( e ) => {
-			if ( ! saveData ) {
-				return
-			}
-
-			e.preventDefault()
-			saveData = false
-			const promise1 = rankMathEditor.assessor.saveMeta()
-			const promise2 = rankMathEditor.assessor.saveSchemas( promise1 )
-
-			Promise.all( [ promise1, promise2 ] ).then( () => {
-				saveDraft.trigger( 'click' )
-			} ).catch( () => {
-				saveDraft.trigger( 'click' )
-			} )
+		this.saveDraft.on( 'click', () => {
+			this.updateBtn.attr( 'data-disable', 'true' )
 		} )
 	}
 

@@ -11,9 +11,11 @@ use RankMath\Admin\Admin_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-$is_registered = Helper::is_site_connected();
-$class         = $is_registered ? 'status-green' : 'status-red';
-$activate_url  = Admin_Helper::get_activate_url();
+$is_registered  = Helper::is_site_connected();
+$class          = $is_registered ? 'status-green' : 'status-red';
+$activate_url   = Admin_Helper::get_activate_url();
+$site_url_valid = Admin_Helper::is_site_url_valid();
+$button_class   = 'button button-primary button-connect' . ( $site_url_valid ? ' button-animated' : ' disabled' );
 ?>
 <div class="rank-math-ui dashboard-wrapper container help">
 	<div class="rank-math-box <?php echo esc_attr( $class ); ?>">
@@ -36,12 +38,13 @@ $activate_url  = Admin_Helper::get_activate_url();
 				<?php if ( ! $is_registered ) : ?>
 					<?php // translators: variables used to wrap the text in the strong tag. ?>
 					<p><?php printf( wp_kses_post( __( 'The plugin is currently not connected with your Rank Math account. Click on the button below to login or register for FREE using your %1$sGoogle account, Facebook account%2$s or %1$syour email account%2$s.', 'rank-math' ) ), '<strong>', '</strong>' ); ?></p>
-					<a href="<?php echo esc_url( $activate_url ); ?>" class="button button-primary button-animated" ><?php esc_html_e( 'Connect Now', 'rank-math' ); ?></a>
+					<?php Admin_Helper::maybe_show_invalid_siteurl_notice(); ?>
+					<a href="<?php echo esc_url( $activate_url ); ?>" class="<?php echo esc_attr( $button_class ); ?>" ><?php esc_html_e( 'Connect Now', 'rank-math' ); ?></a>
 				<?php else : ?>
 					<?php // translators: variables used to wrap the text in the strong tag. ?>
 					<p><?php printf( wp_kses_post( __( 'You have successfully activated Rank Math. If you find the plugin useful, %1$s feel free to recommend it to your friends or colleagues %2$s.', 'rank-math' ) ), '<strong>', '</strong>' ); ?><?php Admin_Helper::get_social_share(); ?></p>
 					<div class="frm-submit">
-						<button type="submit" class="button button-primary button-xlarge" name="button"><?php echo esc_html__( 'Disconnect Account', 'rank-math' ); ?></button>
+						<button type="submit" class="button button-link-delete button-xlarge" name="button"><?php echo esc_html__( 'Disconnect Account', 'rank-math' ); ?></button>
 					</div>
 				<?php endif; ?>
 			</form>

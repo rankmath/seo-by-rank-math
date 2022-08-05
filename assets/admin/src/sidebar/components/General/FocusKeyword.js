@@ -16,6 +16,7 @@ import Tooltip from '@components/Tooltip'
 import Interpolate from '@components/Interpolate'
 import FocusKeywordField from './FocusKeywordField'
 import TrendsPreview from '@helpers/TrendsPreview'
+import ContentAI from './ContentAI'
 
 const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 	if ( ! isLoaded ) {
@@ -34,7 +35,8 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 									href={ rankMath.assessor.hundredScoreLink }
 									target="_blank"
 									rel="noopener noreferrer"
-								/>
+								>
+								</a>
 							),
 						} }
 					>
@@ -47,7 +49,7 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 			</h2>
 
 			<TrendsPreview></TrendsPreview>
-
+			{ rankMath.currentEditor && 'classic' !== rankMath.currentEditor && <ContentAI></ContentAI> }
 			<RankMathAfterFocusKeyword.Slot>
 				{ ( fills ) => {
 					if ( fills.length > 0 ) {
@@ -72,12 +74,13 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 							<strong>
 								{ __( 'This post is Pillar Content', 'rank-math' ) }
 							</strong>
-							<Tooltip>
-								{ __(
-									'Select one or more Pillar Content posts for each post tag or category to show them in the Link Suggestions meta box.',
-									'rank-math'
-								) }
-							</Tooltip>
+							<a
+								href="https://rankmath.com/kb/pillar-content-internal-linking/"
+								rel="noreferrer"
+								target="_blank"
+								className="dashicons-before dashicons-editor-help rank-math-help-icon"
+							>
+							</a>
 						</Fragment>
 					}
 					checked={ isPillarContent }
@@ -96,7 +99,7 @@ export default compose(
 			isPillarContent: repo.getPillarContent(),
 		}
 	} ),
-	withDispatch( ( dispatch, props ) => {
+	withDispatch( ( dispatch ) => {
 		return {
 			togglePillarContent( value ) {
 				dispatch( 'rank-math' ).updatePillarContent( value )

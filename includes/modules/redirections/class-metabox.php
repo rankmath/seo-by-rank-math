@@ -47,16 +47,18 @@ class Metabox {
 			return $values;
 		}
 
-		$url = wp_parse_url( $url, PHP_URL_PATH );
-		$url = trim( $url, '/' );
-
-		$redirection                       = Cache::get_by_object_id( $object_id, $object_type );
-		$values['assessor']['redirection'] = $redirection ? DB::get_redirection_by_id( $redirection->redirection_id, 'active' ) : [
+		$redirection = Cache::get_by_object_id( $object_id, $object_type );
+		$redirection = $redirection ? DB::get_redirection_by_id( $redirection->redirection_id, 'active' ) : [
 			'id'          => '',
 			'url_to'      => '',
 			'header_code' => Helper::get_settings( 'general.redirections_header_code' ),
 		];
 
+		if ( ! empty( $redirection['url_to'] ) && $url === $redirection['url_to'] ) {
+			$redirection['url_to'] = '';
+		}
+
+		$values['assessor']['redirection']           = $redirection;
 		$values['assessor']['autoCreateRedirection'] = Helper::get_settings( 'general.redirections_post_redirect' );
 
 		return $values;

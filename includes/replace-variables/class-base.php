@@ -208,12 +208,9 @@ class Base {
 	}
 
 	/**
-	 * Determine the post type names for the current post/page/CPT.
+	 * Get the appropriate post type label for the current request.
 	 *
-	 * @copyright Copyright (C) 2008-2019, Yoast BV
-	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
-	 *
-	 * @param string $request Either 'single'|'plural' - whether to return the single or plural form.
+	 * @param string $request Requested label type, "singular" or "plural".
 	 *
 	 * @return string|null
 	 */

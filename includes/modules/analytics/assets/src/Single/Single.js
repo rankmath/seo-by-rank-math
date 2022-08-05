@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { isEmpty } from 'lodash'
-import { withRouter } from 'react-router-dom'
 
 /**
  * WordPress dependencies
@@ -17,6 +16,7 @@ import { decodeEntities } from '@wordpress/html-entities'
  * Internal dependencies
  */
 import Header from '@scShared/Header'
+import { withRouter } from '../functions'
 
 const Single = ( { post } ) => {
 	if ( isEmpty( post ) ) {
@@ -53,7 +53,7 @@ const Single = ( { post } ) => {
 
 export default withRouter( withFilters( 'rankMath.analytics.single' )(
 	withSelect( ( select, props ) => {
-		const { id = 0 } = props.match.params
+		const { id = 0 } = props.params
 
 		return {
 			...props,

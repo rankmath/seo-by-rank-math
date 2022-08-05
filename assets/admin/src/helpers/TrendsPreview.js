@@ -35,7 +35,7 @@ const TrendsPreview = ( { isTrendsCtaOpen, toggleTrendsCta } ) => {
 									<li>{ __( 'Analyze search trends and compare keywords', 'rank-math' ) }</li>
 									<li>{ __( 'See data from a particular Country or timeframe', 'rank-math' ) }</li>
 								</ul>
-								<a className="button button-primary is-green" href={ rankMath.trendsUpgradeLink } rel="noreferrer noopener" target="_blank">{ __( 'Upgrade', 'rank-math' ) }</a>
+								<a className="button button-primary is-green" href={ rankMath.trendsUpgradeLink } rel="noreferrer noopener" target="_blank">{ rankMath.trendsUpgradeLabel }</a>
 							</div>
 						</div>
 					</div>

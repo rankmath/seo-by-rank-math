@@ -227,6 +227,15 @@ defined( 'ABSPATH' ) || exit;
 		margin-left: 2px;
 	}
 
+	table.report-error {
+		border: 2px solid #f1d400;
+		background: #fffdec;
+		margin: 10px 0;
+	}
+
+	table.report-error td {
+		padding: 5px 10px;
+	}
 	table.stats {
 		border-collapse: separate;
 		margin-top: 10px;

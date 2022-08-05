@@ -10,6 +10,8 @@
 
 namespace RankMath\Google;
 
+use MyThemeShop\Helpers\Str;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -98,7 +100,7 @@ class Console extends Analytics {
 
 		$rank_math_google_sites = [];
 		$response               = $this->http_get( 'https://www.googleapis.com/webmasters/v3/sites' );
-		if ( ! $this->is_success() ) {
+		if ( ! $this->is_success() || empty( $response['siteEntry'] ) ) {
 			return $rank_math_google_sites;
 		}
 
@@ -184,8 +186,12 @@ class Console extends Analytics {
 			];
 		}
 
+		$default            = trailingslashit( strtolower( home_url() ) );
+		$rank_math_site_url = get_option( 'rank_math_google_analytic_profile', [ 'profile' => $default ] );
+		$rank_math_site_url = empty( $rank_math_site_url['profile'] ) ? $default : $rank_math_site_url['profile'];
+
 		$response = $this->http_post(
-			'https://www.googleapis.com/webmasters/v3/sites/' . rawurlencode( self::get_site_url() ) . '/searchAnalytics/query',
+			'https://www.googleapis.com/webmasters/v3/sites/' . rawurlencode( $rank_math_site_url ) . '/searchAnalytics/query',
 			$args
 		);
 
@@ -277,6 +283,11 @@ class Console extends Analytics {
 			$default            = trailingslashit( strtolower( home_url() ) );
 			$rank_math_site_url = get_option( 'rank_math_google_analytic_profile', [ 'profile' => $default ] );
 			$rank_math_site_url = empty( $rank_math_site_url['profile'] ) ? $default : $rank_math_site_url['profile'];
+
+			if ( Str::contains( 'sc-domain:', $rank_math_site_url ) ) {
+				$rank_math_site_url = str_replace( 'sc-domain:', '', $rank_math_site_url );
+				$rank_math_site_url = ( is_ssl() ? 'https://' : 'http://' ) . $rank_math_site_url;
+			}
 		}
 
 		return $rank_math_site_url;

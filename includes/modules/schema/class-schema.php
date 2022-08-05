@@ -30,9 +30,21 @@ class Schema {
 			new Admin();
 		}
 		$this->action( 'wp', 'integrations' );
+		$this->filter( 'rank_math/elementor/dark_styles', 'add_dark_style' );
 
 		new Blocks();
 		new Snippet_Shortcode();
+	}
+
+	/**
+	 * Add dark style
+	 *
+	 * @param array $styles The dark mode styles.
+	 */
+	public function add_dark_style( $styles = [] ) {
+		$styles['rank-math-schema-dark'] = rank_math()->plugin_url() . 'includes/modules/schema/assets/css/schema-dark.css';
+
+		return $styles;
 	}
 
 	/**

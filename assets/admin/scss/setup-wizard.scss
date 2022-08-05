@@ -7,9 +7,9 @@
  */
 
 // Common and Vendors
-@import "../../vendor/bourbon/bourbon";
-@import "variables";
-@import "mixins";
+@import '../../vendor/bourbon/bourbon';
+@import 'variables';
+@import 'mixins';
 
 %header-icon {
 	margin-right: 5px;
@@ -22,17 +22,17 @@
 	background: $success;
 }
 
-@import "partials/wizard/page";
-@import "partials/wizard/common";
+@import 'partials/wizard/page';
+@import 'partials/wizard/common';
 @import 'partials/wizard/buttons';
-@import "partials/wizard/navigation";
+@import 'partials/wizard/navigation';
 @import 'partials/wizard/requirements';
 @import 'partials/wizard/import';
 @import 'partials/wizard/your-site';
 @import 'partials/options/search-console';
 @import 'partials/wizard/optimization';
 @import 'partials/wizard/ready';
-@import "partials/wizard/register";
+@import 'partials/wizard/register';
 @import 'partials/wizard/responsive';
 @import 'partials/wizard/rtl';
 @import 'partials/common/pro-cta';

@@ -157,7 +157,7 @@ class System_Status {
 				AND table_name LIKE %s
 				ORDER BY name ASC;",
 				DB_NAME,
-				'%rank_math%'
+				'%rank\\_math%'
 			)
 		);
 
@@ -167,7 +167,7 @@ class System_Status {
 			$tables[ $name ] = true;
 		}
 
-		$should_exists = [
+		$should_exist = [
 			'rank_math_404_logs'                  => esc_html__( 'Database Table: 404 Log', 'rank-math' ),
 			'rank_math_redirections'              => esc_html__( 'Database Table: Redirection', 'rank-math' ),
 			'rank_math_redirections_cache'        => esc_html__( 'Database Table: Redirection Cache', 'rank-math' ),
@@ -178,20 +178,21 @@ class System_Status {
 			'rank_math_analytics_ga'              => esc_html__( 'Database Table: Google Analytics', 'rank-math' ),
 			'rank_math_analytics_adsense'         => esc_html__( 'Database Table: Google AdSense', 'rank-math' ),
 			'rank_math_analytics_keyword_manager' => esc_html__( 'Database Table: Keyword Manager', 'rank-math' ),
+			'rank_math_analytics_inspections'     => esc_html__( 'Database Table: Inspections', 'rank-math' ),
 		];
 
 		if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) {
 			unset(
-				$should_exists['rank_math_analytics_ga'],
-				$should_exists['rank_math_analytics_adsense'],
-				$should_exists['rank_math_analytics_keyword_manager']
+				$should_exist['rank_math_analytics_ga'],
+				$should_exist['rank_math_analytics_adsense'],
+				$should_exist['rank_math_analytics_keyword_manager']
 			);
 		}
 
-		foreach ( $should_exists as $name => $label ) {
+		foreach ( $should_exist as $name => $label ) {
 			$rankmath['fields'][ $name ] = [
 				'label' => $label,
-				'value' => isset( $tables[ $name ] ) ? esc_html__( 'Created', 'rank-math' ) : esc_html__( 'Doesn\'t exists', 'rank-math' ),
+				'value' => isset( $tables[ $name ] ) ? $this->get_table_size( $name ) : esc_html__( 'Not found', 'rank-math' ),
 			];
 		}
 
@@ -226,5 +227,19 @@ class System_Status {
 		);
 
 		$this->wp_info = [ 'rank-math' => $rankmath_data ] + $core_data;
+	}
+
+	/**
+	 * Get Table size.
+	 *
+	 * @param string $table Table name.
+	 *
+	 * @return int Table size.
+	 */
+	public function get_table_size( $table ) {
+		global $wpdb;
+		$size = (int) $wpdb->get_var( 'SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema="' . $wpdb->dbname . '" AND (table_name="' . $wpdb->prefix . $table . '")' ); // phpcs:ignore
+
+		return size_format( $size );
 	}
 }

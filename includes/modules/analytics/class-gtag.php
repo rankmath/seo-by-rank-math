@@ -15,6 +15,7 @@ namespace RankMath\Analytics;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
+use MyThemeShop\Helpers\Str;
 use AMP_Theme_Support;
 use AMP_Options_Manager;
 
@@ -321,7 +322,12 @@ class GTag {
 			$this->options = $this->normalize_it( get_option( 'rank_math_google_analytic_options', [] ) );
 		}
 
-		return isset( $this->options[ $id ] ) ? $this->options[ $id ] : false;
+		$value = isset( $this->options[ $id ] ) ? $this->options[ $id ] : false;
+		if ( $value && 'property_id' === $id && ! Str::starts_with( 'UA-', $value ) ) {
+			$value = $this->get( 'measurement_id' );
+		}
+
+		return $value;
 	}
 
 	/**

@@ -9,6 +9,7 @@ import {
 	forEach,
 	isString,
 	isEmpty,
+	isNull,
 	isInteger,
 	isEqual,
 	get,
@@ -129,10 +130,6 @@ class DataCollector {
 	 * @return {Object} jQuery node.
 	 */
 	getContentArea() {
-		if ( this._contentArea ) {
-			return this._contentArea
-		}
-
 		if ( ! this._etAppFrameElem ) {
 			this._etAppFrameElem = get(
 				ET_Builder,
@@ -145,15 +142,17 @@ class DataCollector {
 			return jQuery( '<div />' )
 		}
 
+		const contentDocument = this._etAppFrameElem.contentWindow.document
 		const contentArea = jQuery(
-			this._etAppFrameElem.contentWindow.document.querySelector( '#et-fb-app' )
+			! isNull( contentDocument.querySelector( '#theme-builder-area--post_content' ) )
+				? contentDocument.querySelector( '#theme-builder-area--post_content' )
+				: contentDocument.querySelector( 'body' )
 		)
 
 		if ( contentArea.length < 1 ) {
 			return jQuery( '<div />' )
 		}
 
-		this._contentArea = contentArea
 		return contentArea
 	}
 
@@ -181,9 +180,15 @@ class DataCollector {
 	 * @return {string} The post's permalink.
 	 */
 	getPermalink() {
-		return rankMath.is_front_page
-			? rankMath.homeUrl + '/'
-			: rankMath.homeUrl + '/' + this.getSlug()
+		if ( rankMath.is_front_page ) {
+			return rankMath.homeUrl + '/'
+		}
+
+		return this.getSlug()
+			? rankMath.permalinkFormat
+				.replace( /%(postname|pagename)%/, this.getSlug() )
+				.trimRight( '/' )
+			: ''
 	}
 
 	/**
@@ -221,7 +226,7 @@ class DataCollector {
 	async fetchFeaturedImageId() {
 		let id = null
 		await apiFetch( {
-			path: `/wp-json/rankmath/v1/getFeaturedImageId`,
+			path: `/rankmath/v1/getFeaturedImageId`,
 			method: 'POST',
 			data: {
 				postId: get( ETBuilderBackendDynamic, 'postId', 0 ),
@@ -233,7 +238,7 @@ class DataCollector {
 	async fetchWpMedia( mediaId ) {
 		let media = {}
 		await apiFetch( {
-			path: `/wp-json/wp/v2/media/${ mediaId }`,
+			path: `/wp/v2/media/${ mediaId }`,
 			method: 'GET',
 		} )
 			.then( ( resp ) => media = resp )
@@ -331,7 +336,7 @@ class DataCollector {
 		apiFetch(
 			{
 				method: 'POST',
-				path: '/wp-json/rankmath/v1/updateMeta',
+				path: '/rankmath/v1/updateMeta',
 				data: {
 					objectID: rankMath.objectID,
 					objectType: rankMath.objectType,
@@ -363,7 +368,7 @@ class DataCollector {
 
 		apiFetch( {
 			method: 'POST',
-			path: '/wp-json/rankmath/v1/updateRedirection',
+			path: '/rankmath/v1/updateRedirection',
 			data: redirection,
 		} ).then( ( response ) => {
 			if ( 'delete' === response.action ) {
@@ -385,7 +390,7 @@ class DataCollector {
 		const editSchemas = select( 'rank-math' ).getEditSchemas()
 		apiFetch( {
 			method: 'POST',
-			path: '/wp-json/rankmath/v1/updateSchemas',
+			path: '/rankmath/v1/updateSchemas',
 			data: {
 				objectID: rankMath.objectID,
 				objectType: rankMath.objectType,
@@ -404,6 +409,8 @@ class DataCollector {
 
 				dispatch( 'rank-math' ).updateSchemas( newSchemas )
 				dispatch( 'rank-math' ).updateEditSchemas( newEditSchemas )
+			} else {
+				dispatch( 'rank-math' ).updateSchemas( schemas )
 			}
 		} )
 	}

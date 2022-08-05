@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || exit;
 </a>
 	</li>
 	<li>
-		<a href="<?php echo KB::get( '404-monitor-settings' ); ?>" target="_blank">
+		<a href="<?php echo KB::get( '404-monitor-help' ); ?>" target="_blank">
 			<?php esc_html_e( '404 Monitor Settings', 'rank-math' ); ?>
 </a>
 	</li>

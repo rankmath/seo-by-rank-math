@@ -34,6 +34,15 @@ import MediaUploader from '@blocks/shared/MediaUploader'
  * HowTo block edit component.
  */
 class Edit extends Component {
+	constructor() {
+		super( ...arguments )
+
+		const { steps } = this.props.attributes
+		if ( isEmpty( steps ) ) {
+			this.addNew()
+		}
+	}
+
 	/**
 	 * Renders the component.
 	 *
@@ -206,7 +215,6 @@ class Edit extends Component {
 			contentCssClasses,
 		} = this.props.attributes
 		if ( isEmpty( steps ) ) {
-			this.addNew()
 			return null
 		}
 

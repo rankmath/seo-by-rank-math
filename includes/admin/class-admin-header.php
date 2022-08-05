@@ -47,7 +47,7 @@ class Admin_Header {
 			</h1>
 			<?php $this->get_search_options(); ?>
 			<?php $this->get_mode_selector(); ?>
-			<a href="<?php echo esc_url( $this->get_help_link() ); ?>" target="_blank" class="button rank-math-help"><i class="rm-icon rm-icon-help"></i></a>
+			<a href="<?php echo esc_url( $this->get_help_link() ); ?>" title="<?php esc_attr_e( 'Rank Math Knowledge Base', 'rank-math' ); ?>" target="_blank" class="button rank-math-help"><i class="dashicons dashicons-editor-help"></i></a>
 		</div>
 		<?php
 

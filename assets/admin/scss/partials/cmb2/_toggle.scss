@@ -2,21 +2,24 @@
 
 .cmb2-toggle {
 	position: relative;
+
 	display: inline-block;
+
 	width: 50px;
 	height: 24px;
 
 	input {
-		display:none;
+		display: none;
 
 		&:checked {
 			+ .cmb2-slider {
-			  background-color: $primary;
 				border-color: $primary;
+				background-color: $primary;
 
 				&:before {
-					background: #fff;
 					transform: translateX(24px);
+
+					background: #fff;
 				}
 
 				.toggle_off {
@@ -32,57 +35,90 @@
 		+ .cmb2-slider:focus {
 			box-shadow: 0 0 0 2px #fff, 0 0 0 3px #555d66;
 		}
+
+		&:disabled {
+			+ .cmb2-slider {
+				border-color: $gray;
+				background: transparent;
+
+				&:before {
+					background: $gray;
+				}
+
+				.toggle_on {
+					border-color: $gray;
+					background: $gray;
+
+					fill: $gray;
+				}
+
+				.toggle_off {
+					color: $gray;
+				}
+			}
+		}
 	}
 }
 
 .cmb2-slider {
 	position: absolute;
-	cursor: pointer;
 	top: 0;
-	left: 0;
 	right: 0;
 	bottom: 0;
+	left: 0;
+
+	cursor: pointer;
+
 	border: 2px solid #6c7781;
 	border-radius: 34px;
 
 	&:before {
 		position: absolute;
-		content: "";
-		height: 14px;
-		width: 14px;
-		left: 4px;
 		bottom: 3px;
-		background-color: #6c7781;
+		left: 4px;
+
+		width: 14px;
+		height: 14px;
+
+		content: '';
+
 		border-radius: 50%;
+		background-color: #6c7781;
 	}
 
 	&.disabled {
-		opacity: 0.6;
+		opacity: .6;
 	}
 }
 
-.toggle_on, .toggle_off {
+.toggle_on,
+.toggle_off {
 	position: absolute;
 	top: 6px;
 	left: 10px;
+
 	box-sizing: border-box;
 }
 
 .toggle_on {
 	display: none;
+
+	border: 1px solid #fff;
+	border-radius: 2px;
 	outline: 1px solid transparent;
 	outline-offset: -1px;
 	background: #fff;
+
 	fill: #fff;
-	border: 1px solid #fff;
-	border-radius: 2px;
 }
 
 .toggle_off {
-	color: #6c7781;
-	fill: currentColor;
 	right: 6px;
 	left: auto;
+
+	color: #6c7781;
+
+	fill: currentColor;
 }
 
 #side-sortables .cmb-row .cmb2-toggle + .cmb2-metabox-description {

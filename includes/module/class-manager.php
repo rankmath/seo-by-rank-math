@@ -10,6 +10,7 @@
 
 namespace RankMath\Module;
 
+use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Conditional;
@@ -164,10 +165,20 @@ class Manager {
 
 		$modules['instant-indexing'] = [
 			'title'    => esc_html__( 'Instant Indexing', 'rank-math' ),
-			'desc'     => esc_html__( 'Directly notify search engines(Bing) when pages are added, updated or removed.', 'rank-math' ),
+			// Translators: placeholder is "IndexNow API".
+			'desc'     => sprintf( esc_html__( 'Directly notify search engines like Bing & Yandex using the %s when pages are added, updated and removed, or submit URLs manually.', 'rank-math' ), '<a href="' . KB::get( 'instant-indexing' ) . '" target="_blank">' . __( 'IndexNow API', 'rank-math' ) . '</a>' ),
 			'class'    => 'RankMath\Instant_Indexing\Instant_Indexing',
 			'icon'     => 'instant-indexing',
 			'settings' => Helper::get_admin_url( 'options-instant-indexing' ),
+		];
+
+		$modules['content-ai'] = [
+			'title'     => esc_html__( 'Content AI', 'rank-math' ),
+			'desc'      => esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. Supports 80+ Countries.', 'rank-math' ),
+			'class'     => 'RankMath\ContentAI\Content_AI',
+			'icon'      => 'target',
+			'settings'  => Helper::get_admin_url( 'options-general' ) . '#setting-panel-content-ai',
+			'betabadge' => true,
 		];
 
 		return $modules;
@@ -336,23 +347,27 @@ class Manager {
 	 */
 	public function display_form() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			echo 'You cant access this page.';
+			echo esc_html__( 'You cant access this page.', 'rank-math' );
 			return;
 		}
 		?>
 		<div class="rank-math-ui module-listing dashboard-wrapper">
 
 			<div class="grid">
+
+			<?php $this->cta(); ?>
+
 			<?php
 			foreach ( $this->modules as $module ) :
 				if ( ! $module->can_display() ) {
 					continue;
 				}
 
-				$is_active   = $module->is_active();
-				$is_disabled = $module->is_disabled();
-				$is_hidden   = $module->is_hidden();
-				$is_probadge = $module->is_probadge();
+				$is_active    = $module->is_active();
+				$is_disabled  = $module->is_disabled();
+				$is_hidden    = $module->is_hidden();
+				$is_betabadge = $module->is_betabadge();
+				$is_probadge  = $module->is_probadge();
 				?>
 				<div class="rank-math-box <?php echo $is_active ? 'active' : ''; ?> <?php echo $is_hidden ? 'hidden' : ''; ?>">
 
@@ -361,9 +376,11 @@ class Manager {
 					<header>
 
 						<h3>
-							<?php echo $module->get( 'title' ); // phpcs:ignore ?>
-							<?php if ( $is_probadge ) { ?>
-							<span class="rank-math-pro-badge">PRO</span>
+							<?php echo esc_html( $module->get( 'title' ) ); ?>
+							<?php if ( $is_betabadge ) { ?>
+								<span class="rank-math-pro-badge beta"><?php echo esc_html__( 'NEW!', 'rank-math' ); ?></span>
+							<?php } elseif ( $is_probadge ) { ?>
+								<span class="rank-math-pro-badge"><?php echo esc_html__( 'PRO', 'rank-math' ); ?></span>
 							<?php } ?>
 						</h3>
 
@@ -424,7 +441,7 @@ class Manager {
 		}
 
 		if ( class_exists( $object_class ) ) {
-			$this->controls[ $id ] = new $object_class;
+			$this->controls[ $id ] = new $object_class();
 		}
 	}
 
@@ -437,7 +454,7 @@ class Manager {
 		$object_class = $module->get( 'class' );
 		if ( class_exists( $object_class . '_Common' ) ) {
 			$module_common_class                             = $object_class . '_Common';
-			$this->controls[ $module->get_id() . '_common' ] = new $module_common_class;
+			$this->controls[ $module->get_id() . '_common' ] = new $module_common_class();
 		}
 	}
 
@@ -450,5 +467,37 @@ class Manager {
 	 */
 	public function get_module( $id ) {
 		return isset( $this->controls[ $id ] ) ? $this->controls[ $id ] : false;
+	}
+
+	/**
+	 * Show CTA if Rank Math Pro is not active.
+	 *
+	 * @return void
+	 */
+	private function cta() {
+		if ( defined( 'RANK_MATH_PRO_FILE' ) ) {
+			return;
+		}
+
+		?>
+			<div class="rank-math-box rank-math-unlock-pro-box">
+				<i class="rm-icon rm-icon-software"></i>
+				<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Unlock%20PRO%20Module%20Box&utm_campaign=WP" target="_blank" class="pro-link">
+					<header>
+						<h3><?php esc_html_e( 'Take SEO to the Next Level!', 'rank-math' ); ?></h3>
+						<ul>
+							<li><?php esc_html_e( 'Unlimited personal websites', 'rank-math' ); ?></li>
+							<li><?php esc_html_e( 'Free 15 Content AI Credits', 'rank-math' ); ?></li>
+							<li><?php esc_html_e( 'Track 500 Keywords', 'rank-math' ); ?></li>
+							<li><?php esc_html_e( 'Powerful Schema Generator', 'rank-math' ); ?></li>
+							<li><?php esc_html_e( '24/7 Support', 'rank-math' ); ?></li>
+						</ul>
+					</header>
+					<div class="status wp-clearfix">
+						<button class="button button-secondary"><?php esc_html_e( 'Buy', 'rank-math' ); ?></button>
+					</div>
+				</a>
+			</div>
+		<?php
 	}
 }

@@ -33,6 +33,7 @@ class Product_Edd {
 
 		$entity['url']              = $permalink;
 		$entity['name']             = $jsonld->post->post_title;
+		$entity['description']      = Helper::replace_vars( '%seo_description%' );
 		$entity['category']         = Product::get_category( $product_id, 'download_category' );
 		$entity['mainEntityOfPage'] = [ '@id' => $jsonld->parts['canonical'] . '#webpage' ];
 
@@ -48,12 +49,13 @@ class Product_Edd {
 			$entity['offers'] = [];
 			foreach ( $variations as $variation ) {
 				$offer = [
-					'@type'         => 'Offer',
-					'description'   => $variation['name'],
-					'price'         => $variation['amount'],
-					'priceCurrency' => edd_get_currency(),
-					'url'           => $permalink,
-					'seller'        => $seller,
+					'@type'           => 'Offer',
+					'description'     => $variation['name'],
+					'price'           => $variation['amount'],
+					'priceCurrency'   => edd_get_currency(),
+					'priceValidUntil' => date( 'Y-12-31', time() + YEAR_IN_SECONDS ),
+					'url'             => $permalink,
+					'seller'          => $seller,
 				];
 
 				// Set Price Specification.
@@ -66,11 +68,12 @@ class Product_Edd {
 
 		// Single offer.
 		$entity['offers'] = [
-			'@type'         => 'Offer',
-			'price'         => $product->get_price() ? $product->get_price() : '0',
-			'priceCurrency' => edd_get_currency(),
-			'seller'        => $seller,
-			'url'           => $permalink,
+			'@type'           => 'Offer',
+			'price'           => $product->get_price() ? $product->get_price() : '0',
+			'priceCurrency'   => edd_get_currency(),
+			'priceValidUntil' => date( 'Y-12-31', time() + YEAR_IN_SECONDS ),
+			'seller'          => $seller,
+			'url'             => $permalink,
 		];
 
 		// Set Price Specification.

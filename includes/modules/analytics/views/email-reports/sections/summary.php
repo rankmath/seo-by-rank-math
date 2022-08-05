@@ -10,6 +10,10 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
+<?php if ( $this->get_variable( 'stats_invalid_data' ) ) { ?>
+	<?php return; ?>
+<?php } ?>
+
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="stats">
 	<tr>
 		<td class="col-1">

@@ -125,6 +125,7 @@ class Registration {
 					'api_key'   => $auth_data['api_key'],
 					'plan'      => $auth_data['plan'],
 					'connected' => true,
+					'site_url'  => Helper::get_home_url(),
 				]
 			);
 
@@ -268,9 +269,10 @@ class Registration {
 	 * Output connect button (instead of the old connect form).
 	 */
 	private function show_connect_button() {
+		Admin_Helper::maybe_show_invalid_siteurl_notice();
 		?>
 		<div class="text-center wp-core-ui rank-math-ui" style="margin-top: 30px;">
-			<button type="submit" class="button button-primary button-animated" name="rank_math_activate"><?php echo esc_attr__( 'Connect Your Account', 'rank-math' ); ?></button>
+			<button type="submit" class="button button-primary button-connect <?php echo Admin_Helper::is_site_url_valid() ? 'button-animated' : 'disabled'; ?>" name="rank_math_activate"><?php echo esc_attr__( 'Connect Your Account', 'rank-math' ); ?></button>
 		</div>
 		<?php
 	}

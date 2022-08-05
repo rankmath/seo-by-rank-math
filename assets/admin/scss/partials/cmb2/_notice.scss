@@ -30,3 +30,13 @@
 		}
 	}
 }
+
+.cmb2-metabox {
+	.note {
+		padding: 2px 6px;
+		color: darken( $color-ok, 45 );
+		background: rgba( $color-ok, 0.5 );
+		border-radius: 3px;
+		margin-right: 5px;
+	}
+}

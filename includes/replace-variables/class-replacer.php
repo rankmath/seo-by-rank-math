@@ -25,6 +25,20 @@ defined( 'ABSPATH' ) || exit;
 class Replacer {
 
 	/**
+	 * Do not process the same string over and over again.
+	 *
+	 * @var array
+	 */
+	public static $replacements_cache = [];
+
+	/**
+	 * Non-cacheable replacements.
+	 *
+	 * @var array
+	 */
+	public static $non_cacheable_replacements;
+
+	/**
 	 * Default post data.
 	 *
 	 * @var array
@@ -43,6 +57,20 @@ class Replacer {
 		'term404'       => '',
 		'filename'      => '',
 	];
+
+	/**
+	 * Arguments.
+	 *
+	 * @var object
+	 */
+	public static $args;
+
+	/**
+	 * Process post content once.
+	 *
+	 * @var array
+	 */
+	public static $content_processed = [];
 
 	/**
 	 *  Replace `%variables%` with context-dependent value.
@@ -75,7 +103,7 @@ class Replacer {
 		 * @param array $args The object some of the replacement values might come from,
 		 *                    could be a post, taxonomy or term.
 		 */
-		$replacements = apply_filters( 'rank_math/replacements', $replacements, $this->args );
+		$replacements = apply_filters( 'rank_math/replacements', $replacements, self::$args );
 
 		// Do the replacements.
 		if ( is_array( $replacements ) && [] !== $replacements ) {
@@ -98,19 +126,27 @@ class Replacer {
 	 * @param array $exclude Excluded variables won't be replaced.
 	 */
 	private function pre_replace( $args, $exclude ) {
-		// Setup arguments.
-		$this->args = (object) wp_parse_args( $args, self::$defaults );
-		if ( ! empty( $this->args->post_content ) ) {
-			$this->args->post_content = Paper::should_apply_shortcode() ? do_shortcode( $this->args->post_content ) : WordPress::strip_shortcodes( $this->args->post_content );
-		}
-		if ( ! empty( $this->args->post_excerpt ) ) {
-			$this->args->post_excerpt = Paper::should_apply_shortcode() ? do_shortcode( $this->args->post_excerpt ) : WordPress::strip_shortcodes( $this->args->post_excerpt );
-		}
-
-		// Setup exlucusion.
 		if ( is_array( $exclude ) ) {
 			$this->exclude = $exclude;
 		}
+
+		self::$args = (object) wp_parse_args( $args, self::$defaults );
+		$this->process_content();
+	}
+
+	/**
+	 * Process content only once, because it's expensive.
+	 *
+	 * @return void
+	 */
+	private function process_content() {
+		if ( ! isset( self::$content_processed['post_content'] ) ) {
+			self::$content_processed['post_content'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_content ) : WordPress::strip_shortcodes( self::$args->post_content );
+			self::$content_processed['post_excerpt'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_excerpt ) : WordPress::strip_shortcodes( self::$args->post_excerpt );
+		}
+
+		self::$args->post_content = self::$content_processed['post_content'];
+		self::$args->post_excerpt = self::$content_processed['post_excerpt'];
 	}
 
 	/**
@@ -121,8 +157,13 @@ class Replacer {
 	 * @return array Retrieved replacements.
 	 */
 	private function set_up_replacements( $string ) {
+		if ( $this->has_cache( $string ) ) {
+			return $this->get_cache( $string );
+		}
+
 		$replacements = [];
 		if ( ! preg_match_all( '/%(([a-z0-9_-]+)\(([^)]*)\)|[^\s]+)%/iu', $string, $matches ) ) {
+			$this->set_cache( $string, $replacements );
 			return $replacements;
 		}
 
@@ -135,7 +176,89 @@ class Replacer {
 			unset( $variable );
 		}
 
+		$this->set_cache( $string, $replacements );
 		return $replacements;
+	}
+
+	/**
+	 * Get non-cacheable variables.
+	 *
+	 * @return array
+	 */
+	private function get_non_cacheable_variables() {
+		if ( ! is_null( self::$non_cacheable_replacements ) ) {
+			return self::$non_cacheable_replacements;
+		}
+
+		$non_cacheable = [];
+		foreach ( rank_math()->variables->get_replacements() as $variable ) {
+			if ( ! $variable->is_cacheable() ) {
+				$non_cacheable[] = $variable->get_id();
+			}
+		}
+
+		/**
+		 * Filter: Allow changing the non-cacheable variables.
+		 *
+		 * @param array $non_cacheable The non-cacheable variable IDs.
+		 */
+		self::$non_cacheable_replacements = apply_filters( 'rank_math/replacements/non_cacheable', $non_cacheable );
+
+		return self::$non_cacheable_replacements;
+	}
+
+	/**
+	 * Check if we have cache for a string.
+	 *
+	 * @param string $string String to check.
+	 *
+	 * @return bool
+	 */
+	private function has_cache( $string ) {
+		return isset( self::$replacements_cache[ md5( $string ) ] );
+	}
+
+	/**
+	 * Get cache for a string. Handles non-cacheable variables.
+	 *
+	 * @param string $string String to get cache for.
+	 *
+	 * @return array
+	 */
+	private function get_cache( $string ) {
+		$non_cacheable = $this->get_non_cacheable_variables();
+		$replacements  = self::$replacements_cache[ md5( $string ) ];
+		if ( empty( $non_cacheable ) ) {
+			return $replacements;
+		}
+
+		foreach ( $replacements as $key => $value ) {
+			$id = explode( '(', trim( $key, '%' ) )[0];
+			if ( ! in_array( $id, $non_cacheable, true ) ) {
+				continue;
+			}
+
+			$var_args = '';
+			$parts    = explode( '(', trim( $key, '%)' ) );
+			if ( isset( $parts[1] ) ) {
+				$var_args = $this->normalize_args( $parts[1] );
+			}
+
+			$replacements[ $key ] = $this->get_variable_by_id( $id, $var_args )->run_callback( $var_args, self::$args );
+		}
+
+		return $replacements;
+	}
+
+	/**
+	 * Set cache for a string.
+	 *
+	 * @param string $string String to set cache for.
+	 *
+	 * @param array  $cache  Cache to set.
+	 */
+	private function set_cache( $string, $cache ) {
+		self::$replacements_cache[ md5( $string ) ] = $cache;
 	}
 
 	/**
@@ -149,7 +272,7 @@ class Replacer {
 	 */
 	private function get_variable_value( $matches, $index, $id ) {
 		// Don't set up excluded replacements.
-		if ( in_array( $matches[0][ $index ], $this->exclude, true ) ) {
+		if ( isset( $matches[0][ $index ] ) && in_array( $matches[0][ $index ], $this->exclude, true ) ) {
 			return false;
 		}
 
@@ -162,7 +285,7 @@ class Replacer {
 			return rank_math()->variables->remove_non_replaced ? '' : false;
 		}
 
-		return $variable->run_callback( $var_args, $this->args );
+		return $variable->run_callback( $var_args, self::$args );
 	}
 
 	/**
@@ -198,6 +321,7 @@ class Replacer {
 	 * @return array
 	 */
 	private function normalize_args( $string ) {
+		$string = wp_specialchars_decode( $string );
 		if ( ! Str::contains( '=', $string ) ) {
 			return $string;
 		}

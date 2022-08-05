@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { map, uniqueId, isUndefined } from 'lodash'
+import { map, uniqueId, isUndefined, lowerCase } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -25,8 +25,9 @@ const SchemaListing = ( { schemas } ) => {
 		<div className="schema-listing">
 			{ map( schemas, ( schema ) => {
 				const icon = schema.replace( / /g, '' )
+				const className = 'schema-item ' + lowerCase( icon )
 				return (
-					<div className="schema-item" key={ uniqueId( 'schema-' ) }>
+					<div className={ className } key={ uniqueId( 'schema-' ) }>
 						<i className={ getSnippetIcon( icon ) } /> { schema }
 					</div>
 				)

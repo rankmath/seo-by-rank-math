@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { map, isUndefined } from 'lodash'
-import { withRouter } from 'react-router-dom'
+import { TableCard } from '@woocommerce/components'
 
 /**
  * WordPress dependencies
@@ -14,9 +14,8 @@ import { withFilters } from '@wordpress/components'
 /**
  * Internal dependencies
  */
-import { processRows } from '../functions'
+import { processRows, withRouter } from '../functions'
 import humanNumber from '@helpers/humanNumber'
-import TableCard from '@scShared/woocommerce/Table'
 
 const PostsTable = ( props ) => {
 	const { summary, seoScores } = props

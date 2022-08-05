@@ -112,7 +112,7 @@ trait Hooker {
 		if ( empty( $config ) ) {
 			return;
 		}
-		
+
 		foreach ( $config as $key => $value ) {
 			$this->$key = $value;
 		}

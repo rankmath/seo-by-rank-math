@@ -290,7 +290,6 @@ class DataCollector {
 		if ( isEmpty( schemas ) || ! select( 'rank-math' ).hasSchemaUpdated() ) {
 			return
 		}
-
 		this.isSavingSchemas = true
 
 		const editSchemas = select( 'rank-math' ).getEditSchemas()
@@ -303,19 +302,20 @@ class DataCollector {
 				schemas,
 			},
 		} ).then( ( response ) => {
+			const newSchemas = { ...schemas }
+			const newEditSchemas = { ...editSchemas }
 			if ( ! isEmpty( response ) ) {
-				const newSchemas = { ...schemas }
-				const newEditSchemas = { ...editSchemas }
 				map( response, ( metaId, schemaId ) => {
 					newSchemas[ 'schema-' + metaId ] = { ...newSchemas[ schemaId ] }
 					newEditSchemas[ 'schema-' + metaId ] = { ...newEditSchemas[ schemaId ] }
 					delete newSchemas[ schemaId ]
 					delete newEditSchemas[ schemaId ]
 				} )
-
-				dispatch( 'rank-math' ).updateSchemas( newSchemas )
-				dispatch( 'rank-math' ).updateEditSchemas( newEditSchemas )
 			}
+
+			dispatch( 'rank-math' ).updateSchemas( newSchemas )
+			dispatch( 'rank-math' ).updateEditSchemas( newEditSchemas )
+
 			setTimeout( () => {
 				dispatch( 'rank-math' ).schemaUpdated( false )
 				doAction( 'rank_math_schema_changed' )

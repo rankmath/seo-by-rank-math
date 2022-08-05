@@ -123,6 +123,7 @@ class Yoast extends Plugin_Importer {
 		$this->social_webmaster_settings( $yoast_main, $yoast_social );
 		$this->breadcrumb_settings( $yoast_titles, $yoast_internallinks );
 		$this->misc_settings( $yoast_titles, $yoast_social );
+		$this->slack_settings( $yoast_main );
 		$this->update_settings();
 
 		return true;
@@ -571,19 +572,9 @@ class Yoast extends Plugin_Importer {
 			return;
 		}
 
-		$extra_fks = implode( ', ', array_map( [ $this, 'map_focus_keyword' ], $extra_fks ) );
+		$extra_fks = implode( ', ', array_column( $extra_fks, 'keyword' ) );
 		$main_fk   = get_post_meta( $post_id, 'rank_math_focus_keyword', true );
 		update_post_meta( $post_id, 'rank_math_focus_keyword', $main_fk . ', ' . $extra_fks );
-	}
-
-	/**
-	 * Return Focus Keyword from entry.
-	 *
-	 * @param  array $entry Yoast focus keyword entry.
-	 * @return string
-	 */
-	public function map_focus_keyword( $entry ) {
-		return $entry['keyword'];
 	}
 
 	/**
@@ -839,6 +830,26 @@ class Yoast extends Plugin_Importer {
 
 		if ( ! empty( $yoast_titles['disable-attachment'] ) ) {
 			$this->titles['pt_attachment_robots'][] = 'noindex';
+		}
+	}
+
+	/**
+	 * Slack enhanced sharing.
+	 *
+	 * @param array $yoast_main Settings.
+	 */
+	private function slack_settings( $yoast_main ) {
+		$slack_enhanced_sharing = 'off';
+		if ( ! empty( $yoast_main['enable_enhanced_slack_sharing'] ) ) {
+			$slack_enhanced_sharing = 'on';
+		}
+		$this->titles['pt_post_slack_enhanced_sharing']     = $slack_enhanced_sharing;
+		$this->titles['pt_page_slack_enhanced_sharing']     = $slack_enhanced_sharing;
+		$this->titles['pt_product_slack_enhanced_sharing']  = $slack_enhanced_sharing;
+		$this->titles['pt_download_slack_enhanced_sharing'] = $slack_enhanced_sharing;
+		$this->titles['author_slack_enhanced_sharing']      = $slack_enhanced_sharing;
+		foreach ( Helper::get_accessible_taxonomies() as $taxonomy => $object ) {
+			$this->titles[ 'tax_' . $taxonomy . '_slack_enhanced_sharing' ] = $slack_enhanced_sharing;
 		}
 	}
 
@@ -1125,7 +1136,6 @@ class Yoast extends Plugin_Importer {
 	private function social_webmaster_settings( $yoast_main, $yoast_social ) {
 		$hash = [
 			'baiduverify'     => 'baidu_verify',
-			'alexaverify'     => 'alexa_verify',
 			'googleverify'    => 'google_verify',
 			'msverify'        => 'bing_verify',
 			'pinterestverify' => 'pinterest_verify',
@@ -1164,12 +1174,11 @@ class Yoast extends Plugin_Importer {
 		$this->replace( $hash, $yoast_internallinks, $this->settings, 'convert_bool' );
 
 		// RSS.
-		$yoast_rss = get_option( 'wpseo_rss' );
 		$hash      = [
 			'rssbefore' => 'rss_before_content',
 			'rssafter'  => 'rss_after_content',
 		];
-		$this->replace( $hash, $yoast_rss, $this->settings, 'convert_variables' );
+		$this->replace( $hash, $yoast_titles, $this->settings, 'convert_variables' );
 	}
 
 	/**

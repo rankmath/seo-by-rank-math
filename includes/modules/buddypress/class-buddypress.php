@@ -32,6 +32,20 @@ class BuddyPress {
 		$this->filter( 'rank_math/paper/hash', 'paper' );
 		$this->action( 'rank_math/vars/register_extra_replacements', 'register_replacements' );
 		$this->filter( 'rank_math/json_ld', 'json_ld', 11 );
+		$this->filter( 'rank_math/frontend/title', 'change_activate_title' );
+	}
+
+	/**
+	 * Filter to change the Activate page title.
+	 *
+	 * @param string $title Page title.
+	 */
+	public function change_activate_title( $title ) {
+		if ( function_exists( 'bp_is_current_component' ) && bp_is_current_component( 'activate' ) ) {
+			return false;
+		}
+
+		return $title;
 	}
 
 	/**
@@ -51,7 +65,7 @@ class BuddyPress {
 	/**
 	 * Collect data to output in JSON-LD.
 	 *
-	 * @param array  $data An array of data to output in JSON-LD.
+	 * @param array $data An array of data to output in JSON-LD.
 	 */
 	public function json_ld( $data ) {
 		if ( ! bp_is_user() ) {

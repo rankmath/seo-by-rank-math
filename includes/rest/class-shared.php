@@ -122,7 +122,7 @@ class Shared extends WP_REST_Controller {
 		$object_type = $request->get_param( 'objectType' );
 		$meta        = apply_filters( 'rank_math/filter_metadata', $request->get_param( 'meta' ), $request );
 		$content     = $request->get_param( 'content' );
-		do_action( 'rank_math/pre_update_metadata', $object_id, $content );
+		do_action( 'rank_math/pre_update_metadata', $object_id, $object_type, $content );
 
 		$new_slug = true;
 		if ( isset( $meta['permalink'] ) && ! empty( $meta['permalink'] ) && 'post' === $object_type ) {
@@ -203,13 +203,16 @@ class Shared extends WP_REST_Controller {
 		$object_type = $request->get_param( 'objectType' );
 		$schemas     = $request->get_param( 'schemas' );
 		$new_ids     = [];
+
+		do_action( 'rank_math/pre_update_schema', $object_id, $object_type );
 		foreach ( $schemas as $meta_id => $schema ) {
-			$meta_key = 'rank_math_schema_' . $schema['@type'];
+			$type     = is_array( $schema['@type'] ) ? $schema['@type'][0] : $schema['@type'];
+			$meta_key = 'rank_math_schema_' . $type;
 			$schema   = wp_kses_post_deep( $schema );
 
 			// Add new.
 			if ( Str::starts_with( 'new-', $meta_id ) ) {
-				$new_ids[ $meta_id ] = update_metadata( $object_type, $object_id, $meta_key, $schema );
+				$new_ids[ $meta_id ] = add_metadata( $object_type, $object_id, $meta_key, $schema );
 				continue;
 			}
 

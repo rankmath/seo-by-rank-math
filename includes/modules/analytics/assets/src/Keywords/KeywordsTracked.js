@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { map } from 'lodash'
+import { TableCard } from '@woocommerce/components'
 
 /**
  * WordPress dependencies
@@ -13,8 +14,7 @@ import { withFilters } from '@wordpress/components'
 /**
  * Internal dependencies
  */
-import TableCard from '@scShared/woocommerce/Table'
-import { processRows } from '../functions'
+import { processRows, withRouter } from '../functions'
 
 const KeywordsTracked = () => {
 	const headers = [
@@ -239,4 +239,6 @@ const KeywordsTracked = () => {
 	)
 }
 
-export default withFilters( 'rankMath.analytics.keywordManager' )( KeywordsTracked )
+export default withRouter(
+	withFilters( 'rankMath.analytics.keywordManager' )( KeywordsTracked )
+)

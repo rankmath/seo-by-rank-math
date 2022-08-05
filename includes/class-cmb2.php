@@ -267,7 +267,8 @@ class CMB2 {
 
 		if ( strpos( $filtered, '<' ) !== false ) {
 			$filtered = wp_pre_kses_less_than( $filtered );
-			// This will strip extra whitespace for us.
+
+			// Strip extra whitespace.
 			$filtered = wp_strip_all_tags( $filtered, false );
 
 			// Use html entities in a special case to make sure no later

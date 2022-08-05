@@ -25,7 +25,7 @@ class Stylesheet extends XML {
 	use Hooker;
 
 	/**
-	 * Spits out the XSL for the XML sitemap.
+	 * Output the XSL for the XML sitemap.
 	 *
 	 * @param string $type Sitemap type.
 	 */

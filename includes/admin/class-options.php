@@ -269,6 +269,22 @@ class Options {
 		// Header.
 		rank_math()->admin->display_admin_header();
 		?>
+
+		<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) : ?>
+			<div class="rank-math-unlock-pro-notice" id="rank-math-unlock-pro-notice">
+				<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Unlock%20PRO%20Options%20Panel%20Notice&utm_campaign=WP" target="_blank" class="pro-link">
+					<p>
+						<?php esc_html_e( 'Take your SEO to the Next Level!', 'rank-math' ); ?>
+						<strong><?php esc_html_e( 'Get Rank Math PRO!', 'rank-math' ); ?></strong>
+						<span><?php esc_html_e( 'Click here to see all the exciting features.', 'rank-math' ); ?></span>
+					</p>
+					<div class="close-notice">
+						<span class="dashicons dashicons-dismiss"></span>
+					</div>
+				</a>
+			</div>
+		<?php endif; ?>
+
 		<div class="wrap rank-math-wrap rank-math-wrap-settings">
 
 			<span class="wp-header-end"></span>

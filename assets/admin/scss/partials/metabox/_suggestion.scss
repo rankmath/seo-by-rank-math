@@ -1,7 +1,6 @@
 // main: ../../metabox.scss
 .suggestion-item {
 	overflow: hidden;
-
 	margin-bottom: 5px;
 	padding-bottom: 5px;
 
@@ -19,9 +18,28 @@
 	}
 
 	.dashicons {
-		margin-top: 5px;
-
 		cursor: pointer;
+		background: none;
+		box-shadow: none;
+		border: 0;
+		position: relative;
+		width: 20px;
+		height: 20px;
+		margin-top: 5px;
+		margin-left: 2px;
+		margin-right: 2px;
+		padding: 0px;
+		display: inline-block;
+	}
+	.dashicons-admin-links::before {
+		position: absolute;
+		top:0px;
+		left:0px;
+	}
+	.dashicons-clipboard::before {
+		position: absolute;
+		top:0px;
+		left:0px;
 	}
 }
 
@@ -58,5 +76,10 @@
 		.inner-wrapper {
 			display: none;
 		}
+	}
+}
+#rank_math_metabox_link_suggestions {
+	.postbox-header .hndle{
+		justify-content:normal;
 	}
 }

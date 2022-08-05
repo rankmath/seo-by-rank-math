@@ -11,6 +11,11 @@ use RankMath\Helper;
 defined( 'ABSPATH' ) || exit;
 
 if ( 'page' === get_option( 'show_on_front' ) ) {
+	$home_page_id = get_option( 'page_on_front' );
+	if ( ! $home_page_id ) {
+		$home_page_id = get_option( 'page_for_posts' );
+	}
+
 	$cmb->add_field(
 		[
 			'id'      => 'static_homepage_notice',
@@ -19,7 +24,7 @@ if ( 'page' === get_option( 'show_on_front' ) ) {
 			'content' => sprintf(
 				/* translators: something */
 				esc_html__( 'Static page is set as the front page (WP Dashboard > Settings > Reading). To add SEO title, description, and meta for the homepage, please click here: %s', 'rank-math' ),
-				'<a href="' . admin_url( 'post.php?post=' . get_option( 'page_on_front' ) ) . '&action=edit' . '">' . esc_html__( 'Edit Page: ', 'rank-math' ) . get_the_title( get_option( 'page_on_front' ) ) . '</a>'
+				'<a href="' . admin_url( 'post.php?post=' . $home_page_id . '&action=edit' ) . '">' . esc_html__( 'Edit Page: ', 'rank-math' ) . get_the_title( $home_page_id ) . '</a>'
 			),
 		]
 	);

@@ -48,6 +48,7 @@ class Frontend {
 		$this->action( 'rank_math/json_ld', 'connect_schema_entities', 99, 2 );
 		$this->filter( 'rank_math/snippet/rich_snippet_event_entity', 'validate_event_schema', 11, 2 );
 		$this->filter( 'rank_math/snippet/rich_snippet_article_entity', 'add_name_property', 11, 2 );
+		$this->action( 'rank_math/schema/validated_data', 'remove_person_entity', 999 );
 
 		new Opengraph();
 	}
@@ -136,11 +137,15 @@ class Frontend {
 	 * @return array
 	 */
 	public function validate_event_schema( $schema ) {
-		if ( empty( $schema['startDate'] ) ) {
-			return $schema;
+		if ( ! empty( $schema['startDate'] ) ) {
+			$start_date          = Helper::convert_date( strtotime( $schema['startDate'] ), true );
+			$schema['startDate'] = str_replace( ' ', 'T', $start_date );
 		}
 
-		$schema['startDate'] = str_replace( ' ', 'T', Helper::convert_date( $schema['startDate'], true ) );
+		if ( ! empty( $schema['endDate'] ) ) {
+			$end_date          = Helper::convert_date( strtotime( $schema['endDate'] ), true );
+			$schema['endDate'] = str_replace( ' ', 'T', $end_date );
+		}
 
 		return $schema;
 	}
@@ -223,6 +228,39 @@ class Frontend {
 	}
 
 	/**
+	 * Remove Person entity if it is not referenced in any other entities.
+	 *
+	 * @param array $data Array of json-ld data.
+	 *
+	 * @return array
+	 */
+	public function remove_person_entity( $data ) {
+		if ( empty( $data['ProfilePage'] ) || ! is_singular() ) {
+			return $data;
+		}
+
+		$temp_data = $data;
+		$id        = $temp_data['ProfilePage']['@id'];
+		$ids       = [];
+
+		unset( $temp_data['ProfilePage'] );
+		array_walk_recursive(
+			$temp_data,
+			function( $value, $key ) use ( &$ids, $id ) {
+				if ( '@id' === $key && $value === $id ) {
+					$ids[] = $value;
+				}
+			}
+		);
+
+		if ( empty( $ids ) ) {
+			unset( $data['ProfilePage'] );
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Change WebPage entity type depending on the schemas on the page.
 	 *
 	 * @param array $schemas Schema data.
@@ -246,7 +284,7 @@ class Frontend {
 			$schemas
 		);
 
-		$faq_key = ! empty( $faq_data ) ? key( array_filter( $faq_data ) ) : '';
+		$faq_key = is_array( $faq_data ) && ! empty( $faq_data ) ? key( array_filter( $faq_data ) ) : '';
 		if ( ! $faq_key ) {
 			return $schemas;
 		}
@@ -254,11 +292,8 @@ class Frontend {
 		if ( in_array( $faq_key, array_keys( $schemas ), true ) ) {
 			$schemas['WebPage']['@type'] =
 				! empty( $types )
-					? [
-						$schemas['WebPage']['@type'],
-						'FAQPage',
-					]
-					: 'FAQPage';
+				? array_merge( (array) $schemas['WebPage']['@type'], [ 'FAQPage' ] )
+				: 'FAQPage';
 
 			$schemas['WebPage']['mainEntity'] = $schemas[ $faq_key ]['mainEntity'];
 

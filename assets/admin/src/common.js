@@ -464,9 +464,10 @@ import boxTabs from '@helpers/boxTabs'
 					'<a href="#" class="rank-math-variables-button button button-secondary"><span class="dashicons dashicons-arrow-down-alt2"></span></a>'
 				)
 				if ( isPreview ) {
+					const classes = rankMath.capitalizeTitle ? 'capitalize' : ''
 					// Add trigger button
 					$( '.rank-math-variables-wrap' ).after(
-						'<div class="rank-math-variables-preview" data-title="' +
+						'<div class="rank-math-variables-preview ' + classes + '" data-title="' +
 							__( 'Example', 'rank-math' ) +
 							'"/>'
 					)

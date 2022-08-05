@@ -167,6 +167,10 @@ class Generator extends XML {
 			}
 
 			$links = $provider->get_sitemap_links( $type, $this->max_entries, $page );
+			if ( empty( $links ) && ( empty( $provider->should_show_empty ) || $page > 1 ) ) {
+				continue;
+			}
+
 			return $this->get_sitemap( $links, $type, $page );
 		}
 
@@ -329,14 +333,6 @@ class Generator extends XML {
 
 			$output .= $this->newline( '<image:image>', 2 );
 			$output .= $this->newline( '<image:loc>' . esc_html( $this->encode_url_rfc3986( $img['src'] ) ) . '</image:loc>', 3 );
-
-			if ( ! empty( $img['title'] ) ) {
-				$output .= $this->add_cdata( $img['title'], 'image:title', 3 );
-			}
-			if ( ! empty( $img['alt'] ) ) {
-				$output .= $this->add_cdata( $img['alt'], 'image:caption', 3 );
-			}
-
 			$output .= $this->newline( '</image:image>', 2 );
 		}
 

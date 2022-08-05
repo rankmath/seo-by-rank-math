@@ -1,0 +1,62 @@
+.rank-math-ca-score {
+    position: relative;
+
+    padding: 20px 18px;
+
+    .score-wrapper {
+        position: relative;
+
+        overflow: hidden;
+
+        width: 100%;
+        height: 10px;
+
+        border-radius: 10px;
+        background: linear-gradient(90deg, $status-bad 0%, $status-ok 50%, $status-good 100%);
+    }
+
+    .score-dot {
+        position: absolute;
+        top: -2px;
+        left: 0;
+
+        box-sizing: border-box;
+        width: 14px;
+        height: 14px;
+        margin-left: -14px;
+
+        transition: 1s left linear;
+
+        border: 2px solid #fff;
+        border-radius: 50%;
+        background: transparent;
+
+        &:before {
+            position: absolute;
+
+            box-sizing: border-box;
+            width: 10px;
+            height: 10px;
+
+            content: '';
+
+            border: 1px solid rgba(0, 0, 0, .1);
+            border-radius: 10px;
+        }
+    }
+
+    .score-text {
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1;
+
+        margin-bottom: 10px;
+
+        text-align: center;
+
+        span {
+            font-size: .75rem;
+            font-weight: normal;
+        }
+    }
+}

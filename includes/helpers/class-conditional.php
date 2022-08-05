@@ -260,4 +260,19 @@ trait Conditional {
 	public static function is_wizard() {
 		return ( filter_input( INPUT_GET, 'page' ) === 'rank-math-wizard' || filter_input( INPUT_POST, 'action' ) === 'rank_math_save_wizard' );
 	}
+
+	/**
+	 * Is filesystem method direct.
+	 *
+	 * @since 1.0.71.1
+	 *
+	 * @return boolean
+	 */
+	public static function is_filesystem_direct() {
+		if ( ! function_exists( 'get_filesystem_method' ) ) {
+			require_once ABSPATH . '/wp-admin/includes/file.php';
+		}
+
+		return 'direct' === get_filesystem_method();
+	}
 }

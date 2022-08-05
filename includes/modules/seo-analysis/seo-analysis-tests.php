@@ -198,7 +198,7 @@ function rank_math_analyze_site_description() {
 		];
 	}
 
-	if ( rank_math_has_default_tagline() ) { // phpcs:ignore
+	if ( rank_math_is_default_tagline() ) { // phpcs:ignore
 		return [
 			'status'  => 'fail',
 			'message' => wp_kses_post( __( 'Your Site Tagline is set to the default value <em>Just another WordPress site</em>.', 'rank-math' ) ),
@@ -212,18 +212,20 @@ function rank_math_analyze_site_description() {
 }
 
 /**
- * Returns whether or not the site has the default tagline.
+ * Check if the site uses the default WP tagline.
  *
  * @return bool
  */
-function rank_math_has_default_tagline() {
-	$description         = get_bloginfo( 'description' );
-	$default_description = 'Just another WordPress site';
-
-	// We are checking against the WordPress internal translation.
+function rank_math_is_default_tagline() {
+	$description            = get_bloginfo( 'description' );
 	$translated_description = translate( 'Just another WordPress site' ); // phpcs:ignore
 
-	return $translated_description === $description || $default_description === $description;
+	if ( $description === $translated_description ) {
+		return true;
+	}
+
+	// Also check untranslated version.
+	return $description === 'Just another WordPress site';
 }
 
 /**
@@ -241,7 +243,7 @@ function rank_math_analyze_permalink_structure() {
 		];
 	}
 
-	if ( ! rank_math_has_postname_in_permalink() ) {
+	if ( ! rank_math_is_postname_in_permalink() ) {
 		return [
 			'status'  => 'fail',
 			'message' => wp_kses_post( __( 'Permalinks are set to a custom structure but the post titles do not appear in the permalinks.', 'rank-math' ) ),
@@ -256,11 +258,11 @@ function rank_math_analyze_permalink_structure() {
 }
 
 /**
- * Check if the permalink uses %postname%.
+ * Check if the post permalink includes %postname%.
  *
  * @return bool
  */
-function rank_math_has_postname_in_permalink() {
+function rank_math_is_postname_in_permalink() {
 	return ( false !== strpos( get_option( 'permalink_structure' ), '%postname%' ) );
 }
 
@@ -286,7 +288,8 @@ function rank_math_analyze_search_console() {
 function rank_math_analyze_focus_keywords() {
 	global $wpdb;
 
-	if ( DB::table_size_exceeds( $wpdb->postmeta, 100000 ) ) {
+	$postmeta_table_limit = apply_filters( 'rank_math/seo_analysis/postmeta_table_limit', 200000 );
+	if ( DB::table_size_exceeds( $wpdb->postmeta, $postmeta_table_limit ) ) {
 		return [
 			'status'  => 'warning',
 			'message' => esc_html__( 'Could not check Focus Keywords in posts - the post meta table exceeds the size limit.', 'rank-math' ),
@@ -346,12 +349,8 @@ function rank_math_analyze_focus_keywords() {
  * @return array
  */
 function rank_math_analyze_post_titles() {
-	global $wpdb;
-
-	$message = '';
-	$result  = 'fail';
-	$info    = [];
-	$data    = rank_math_get_posts_with_titles();
+	$info = [];
+	$data = rank_math_get_posts_with_titles();
 
 	// Early Bail!
 	if ( empty( $data ) ) {
@@ -378,7 +377,7 @@ function rank_math_analyze_post_titles() {
 	return [
 		'status'  => 'fail',
 		/* translators: post type links */
-		'message' => sprintf( esc_html__( 'There are %s published posts where the focus keyword does not appear in the post title.', 'rank-math' ), join( ', ', $links ) ),
+		'message' => sprintf( esc_html__( 'There are %s published posts where the primary focus keyword does not appear in the post title.', 'rank-math' ), join( ', ', $links ) ),
 		'info'    => $info,
 	];
 }
@@ -440,7 +439,7 @@ function rank_math_get_posts_with_titles() {
 	);
 
 	$mq_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
-	$query  = "SELECT {$wpdb->posts}.ID, {$wpdb->posts}.post_type FROM $wpdb->posts {$mq_sql['join']} WHERE 1=1 {$mq_sql['where']}{$in_post_types} AND ({$wpdb->posts}.post_status = 'publish') AND {$wpdb->posts}.post_title NOT REGEXP REPLACE({$wpdb->postmeta}.meta_value, ',', '|') GROUP BY {$wpdb->posts}.ID";
+	$query  = "SELECT {$wpdb->posts}.ID, {$wpdb->posts}.post_type FROM $wpdb->posts {$mq_sql['join']} WHERE 1=1 {$mq_sql['where']}{$in_post_types} AND ({$wpdb->posts}.post_status = 'publish') AND {$wpdb->posts}.post_title NOT LIKE CONCAT( '%', SUBSTRING_INDEX( {$wpdb->postmeta}.meta_value, ',', 1 ), '%' ) GROUP BY {$wpdb->posts}.ID";
 
 	return $wpdb->get_results( $query, ARRAY_A ); // phpcs:ignore
 }
@@ -482,29 +481,20 @@ function rank_math_analyze_sitemap( $analyzer ) {
 
 
 /**
- * Add an alert if the blog is not publicly visible
+ * Check if the site is globally set to noindex.
  */
 function rank_math_analyze_blog_public() {
 	$info_message  = '<strong>' . esc_html__( 'Attention: Search Engines can\'t see your website.', 'rank-math' ) . '</strong> ';
 	$info_message .= sprintf(
-		/* translators: %1$s resolves to the opening tag of the link to the reading settings, %1$s resolves to the closing tag for the link */
-		esc_html__( 'You must %1$sgo to your Reading Settings%2$s and uncheck the box for Search Engine Visibility.', 'rank-math' ),
+		/* translators: %1$s: opening tag of the link, %2$s: the closing tag */
+		esc_html__( 'Navigate to %1$sSettings > Reading%2$s and turn off this option: "Discourage search engines from indexing this site".', 'rank-math' ),
 		'<a href="' . esc_url( admin_url( 'options-reading.php' ) ) . '">',
 		'</a>'
 	);
 
-	$public = rank_math_is_blog_public();
+	$public = (bool) get_option( 'blog_public' );
 	return [
 		'status'  => $public ? 'ok' : 'fail',
 		'message' => $public ? esc_html__( 'Your site is accessible by search engine.', 'rank-math' ) : $info_message,
 	];
-}
-
-/**
- * Check if the site is set to be publicly visible.
- *
- * @return bool
- */
-function rank_math_is_blog_public() {
-	return '1' === (string) get_option( 'blog_public' );
 }

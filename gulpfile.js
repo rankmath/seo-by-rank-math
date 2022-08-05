@@ -3,7 +3,7 @@
 const { src, dest, watch } = require( 'gulp' )
 const wpPot = require( 'gulp-wp-pot' )
 const checktextdomain = require( 'gulp-checktextdomain' )
-const sass = require( 'gulp-sass' )
+const sass = require( 'gulp-sass' )( require( 'sass' ) )
 const autoprefixer = require( 'gulp-autoprefixer' )
 const rename = require( 'gulp-rename' )
 

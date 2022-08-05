@@ -108,4 +108,15 @@ body.rtl {
 	.#{$namespace}-ui .button .dashicons {
 		margin: 0 0 0 3px;
 	}
+
+	.components-modal__header-heading-container {
+		justify-content: right;
+	}
+
+	##{$namespace}-pro-cta {
+		ul li:before {
+			margin-right: 0;
+			margin-left: 8px;
+		}
+	}
 }

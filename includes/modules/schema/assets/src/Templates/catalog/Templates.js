@@ -35,11 +35,12 @@ const getTemplateSources = () => {
  * Get templates by source.
  *
  * @param  {string} source Source name.
+ * @param  {boolean} isPro  Whether the Pro plugin is active.
  * @return {Array} Template by source.
  */
-const getTemplateBySource = ( source ) => {
+const getTemplateBySource = ( source, isPro = false ) => {
 	if ( 'global' === source ) {
-		return mapCache.getTemplates()
+		return mapCache.getTemplates( isPro )
 	}
 
 	return applyFilters( 'rank_math_schema_templates_by_source', [], source )
@@ -71,7 +72,7 @@ const TemplatesPanel = ( props ) => {
 					/>
 				</div>
 			</div>
-			<TemplatesCatalog templates={ getTemplateBySource( current ) } search={ search.toLowerCase() } />
+			<TemplatesCatalog templates={ getTemplateBySource( current, props.isPro ) } search={ search.toLowerCase() } />
 		</Fragment>
 	)
 }

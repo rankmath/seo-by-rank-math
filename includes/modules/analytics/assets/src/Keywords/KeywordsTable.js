@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import { isUndefined, map, get } from 'lodash'
-import { withRouter } from 'react-router-dom'
+import { isUndefined, isEmpty, map, get } from 'lodash'
+import { TableCard } from '@woocommerce/components'
 
 /**
  * WordPress dependencies
@@ -17,15 +17,19 @@ import { dispatch, withSelect } from '@wordpress/data'
  * Internal dependencies
  */
 import humanNumber from '@helpers/humanNumber'
-import TableCard from '@scShared/woocommerce/Table'
-import { processRows, getPageOffset, filterShownHeaders } from '../functions'
+import { processRows, getPageOffset, filterShownHeaders, withRouter } from '../functions'
+import { noDataMessage } from '../helpers'
 
 const TABLE_PREF_KEY = 'keywords'
 
 const KeywordsTable = ( props ) => {
-	const { rows, summary, query, history, userPreference } = props
+	const { rows, summary, query, navigate, userPreference } = props
 	if ( isUndefined( rows ) || isUndefined( summary ) ) {
 		return 'Loading'
+	}
+	const keywordRows = 'No Data' === rows.response ? [] : rows
+	if ( isEmpty( keywordRows ) ) {
+		return noDataMessage( __( 'Rest of the Keywords', 'rank-math' ) )
 	}
 
 	const headers = applyFilters(
@@ -100,15 +104,11 @@ const KeywordsTable = ( props ) => {
 		<Fragment>
 			<div className="rank-math-keyword-table">
 				<TableCard
-					className="rank-math-table"
-					title={
-						<Fragment>
-							{ __( 'Rest of the Keywords', 'rank-math' ) }
-						</Fragment>
-					}
+					className="rank-math-table rank-math-analytics__card"
+					title={ __( 'Rest of the Keywords', 'rank-math' ) }
 					headers={ filteredHeaders }
 					rows={ processRows(
-						rows,
+						keywordRows,
 						map( headers, 'key' ),
 						getPageOffset( paged, rowsPerPage )
 					) }
@@ -117,9 +117,10 @@ const KeywordsTable = ( props ) => {
 					rowsPerPage={ rowsPerPage }
 					totalRows={ parseInt( get( summary, [ 'keywords', 'total' ], 0 ) ) }
 					summary={ tableSummary }
+					isLoading={ isEmpty( rows ) }
 					showPageArrowsLabel={ false }
 					onPageChange={ ( newPage ) => {
-						history.push( '/keywords/' + newPage )
+						navigate( '/keywords/' + newPage )
 					} }
 					onQueryChange={ () => () => {} }
 					onColumnsChange={ onColumnsChange }
@@ -132,12 +133,12 @@ const KeywordsTable = ( props ) => {
 export default withRouter(
 	withFilters( 'rankMath.analytics.keywordsTable' )(
 		withSelect( ( select, props ) => {
-			const query = props.match.params
+			const query = props.params
 			const { paged = 1 } = query
 
 			return {
 				query,
-				history: props.history,
+				navigate: props.navigate,
 				rows: select( 'rank-math' ).getKeywordsRows( paged ),
 				summary: select( 'rank-math' ).getKeywordsSummary(),
 				userPreference: select( 'rank-math' ).getUserColumnPreference(

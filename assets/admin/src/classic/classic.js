@@ -8,7 +8,7 @@ import { ResultManager, Helpers } from '@rankMath/analyzer'
 /**
  * WordPress dependencies
  */
-import { addAction, doAction } from '@wordpress/hooks'
+import { addAction, doAction, applyFilters } from '@wordpress/hooks'
 import { dispatch } from '@wordpress/data'
 import { createElement, render } from '@wordpress/element'
 
@@ -32,11 +32,9 @@ import GutenbergDataCollector from './../gutenberg/DataCollector'
 /**
  * Components
  */
-import LinkSuggestions from '@classic/components/LinkSuggestions'
+import LinkSuggestions from '@components/LinkSuggestions'
 import PrimaryTerm from '@classic/components/PrimaryTerm'
 import FeaturedImage from '@classic/components/FeaturedImage'
-
-import App from '../sidebar/App'
 
 import RankMathAfterEditor from '@slots/AfterEditor'
 import RankMathAdvancedTab from '@slots/AdvancedTab'
@@ -80,7 +78,8 @@ class ClassicEditor {
 		rankMathAdmin.variableInserter( false )
 		setTimeout( () => {
 			render(
-				createElement( App ),
+				/* Filter to include components from the common editor file */
+				createElement( applyFilters( 'rank_math_app', {} ) ),
 				document.getElementById( 'rank-math-metabox-wrapper' )
 			)
 		}, 1000 )
@@ -90,8 +89,8 @@ class ClassicEditor {
 		this.assessor.refresh( what )
 	}
 
-	updatePermalink( slug ) {
-		this.assessor.dataCollector.handleSlugChange( slug )
+	updatePermalink( slug, force = false ) {
+		this.assessor.dataCollector.handleSlugChange( slug, force )
 		dispatch( 'rank-math' ).updatePermalink( slug )
 	}
 

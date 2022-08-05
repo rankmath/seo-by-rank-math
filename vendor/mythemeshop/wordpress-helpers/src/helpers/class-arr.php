@@ -135,4 +135,16 @@ class Arr {
 
 		$array[] = $value;
 	}
+
+	/**
+	 * Create an array from string.
+	 *
+	 * @param string $string    The string to split.
+	 * @param string $separator Specifies where to break the string.
+	 *
+	 * @return array Returns an array after applying the function to each one.
+	 */
+	public static function from_string( $string, $separator = ',' ) {
+		return array_values( array_filter( array_map( 'trim', explode( $separator, $string ) ) ) );
+	}
 }

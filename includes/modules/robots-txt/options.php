@@ -13,15 +13,24 @@ defined( 'ABSPATH' ) || exit;
 
 $data       = Robots_Txt::get_robots_data();
 $attributes = [ 'data-gramm' => 'false' ];
+$desc       = '';
 if ( $data['exists'] ) {
 	$attributes['readonly'] = 'readonly';
 	$attributes['value']    = $data['default'];
+	$desc                   = esc_html__( 'Contents are locked because a robots.txt file is present in the root folder.', 'rank-math' );
 } else {
 	$attributes['placeholder'] = $data['default'];
 }
 
+if ( isset( $data['writable'] ) && false === $data['writable'] ) {
+	$attributes['placeholder'] = $data['default'];
+	$desc                      = esc_html__( 'Rank Math could not detect if a robots.txt file exists or not because of a filesystem issue. The file contents entered here may not be applied.', 'rank-math' );
+
+	unset( $attributes['readonly'], $attributes['value'] );
+}
+
 if ( 0 === $data['public'] ) {
-	$attributes['disabled'] = 'disabled';
+	$attributes['readonly'] = 'readonly';
 }
 
 if ( ! Helper::is_edit_allowed() ) {
@@ -40,14 +49,24 @@ $cmb->add_field(
 	[
 		'id'              => 'robots_txt_content',
 		'type'            => 'textarea',
-		'desc'            => ! $data['exists'] ? '' : esc_html__( 'Contents are locked because robots.txt file is present in the root folder.', 'rank-math' ),
 		'attributes'      => $attributes,
 		'classes'         => 'nob rank-math-code-box',
 		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_robots_text' ],
 	]
 );
 
-if ( 0 === $data['public'] ) {
+if ( $desc ) {
+	$cmb->add_field(
+		[
+			'id'      => 'robots_locked',
+			'type'    => 'notice',
+			'what'    => 'warning',
+			'classes' => 'nob nopt rank-math-notice',
+			'content' => wp_kses_post( $desc ),
+		]
+	);
+	return;
+} elseif ( 0 === $data['public'] ) {
 	$cmb->add_field(
 		[
 			'id'      => 'site_not_public',

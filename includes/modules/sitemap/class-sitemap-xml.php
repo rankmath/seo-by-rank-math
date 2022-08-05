@@ -1,6 +1,6 @@
 <?php
 /**
- * Renders XML output for sitemaps.
+ * Render XML output for sitemaps.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -119,7 +119,6 @@ class Sitemap_XML extends XML {
 		echo "\n<!-- {$template} -->"; // phpcs:ignore
 
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
-
 			$queries = print_r( $GLOBALS['wpdb']->queries, true ); // phpcs:ignore
 			echo "\n<!-- {$queries} -->"; // phpcs:ignore
 		}
@@ -145,7 +144,11 @@ class Sitemap_XML extends XML {
 
 		// No cache was found, refresh it because cache is enabled.
 		$this->build_sitemap();
-		return $this->cache->store_sitemap( $this->type, $this->current_page, $this->sitemap );
+		if ( ! empty( $this->sitemap ) ) {
+			return $this->cache->store_sitemap( $this->type, $this->current_page, $this->sitemap );
+		}
+
+		return false;
 	}
 
 	/**

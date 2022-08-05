@@ -10,7 +10,7 @@ import classnames from 'classnames'
 import { applyFilters } from '@wordpress/hooks'
 import { compose } from '@wordpress/compose'
 import { withSelect } from '@wordpress/data'
-import { Fragment } from '@wordpress/element'
+import { Fragment, useState } from '@wordpress/element'
 import { Button, TextControl, Notice } from '@wordpress/components'
 
 /**
@@ -64,7 +64,7 @@ const SchemaProperty = ( props ) => {
 	const { removeProperty, propertyChange, duplicateProperty } = props.actions
 	const field = get( map, 'field', { label: false } )
 	const fieldProps = { ...field }
-	const value = getSchemaPropertyValue( props, field )
+	const [ value, setValue ] = useState( getSchemaPropertyValue( props, field ) )
 
 	if ( map.isRequired ) {
 		if ( field.label ) {
@@ -118,6 +118,7 @@ const SchemaProperty = ( props ) => {
 							value={ value }
 							{ ...fieldProps }
 							onChange={ ( newValue ) => {
+								setValue( newValue )
 								propertyChange( id, 'value', newValue )
 							} }
 						/>

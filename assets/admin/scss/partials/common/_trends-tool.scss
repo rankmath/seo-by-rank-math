@@ -13,6 +13,10 @@
 	border-radius: 3px;
 	box-shadow: none;
 
+	.button-icon {
+		margin: 0 auto;
+	}
+
 	svg {
 		width: 16px;
 		height: 16px;
@@ -22,6 +26,10 @@
 	@at-root .rank-math-sidebar-panel & {
 		top: 15px;
 		right: 16px;
+	}
+
+	@at-root #side-sortables & {
+		top: 23px;
 	}
 }
 
@@ -35,5 +43,12 @@
 
 	##{$namespace}-pro-cta {
 		z-index: initial;
+	}
+}
+
+body.rtl {
+	#rank-math-compare-keywords-trigger {
+		left: 16px;
+		right: auto;
 	}
 }

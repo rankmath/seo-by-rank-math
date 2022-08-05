@@ -67,6 +67,7 @@ class Capability_Manager {
 		$this->register( 'rank_math_onpage_advanced', esc_html__( 'On-Page Advanced Settings', 'rank-math' ) );
 		$this->register( 'rank_math_onpage_snippet', esc_html__( 'On-Page Schema Settings', 'rank-math' ) );
 		$this->register( 'rank_math_onpage_social', esc_html__( 'On-Page Social Settings', 'rank-math' ) );
+		$this->register( 'rank_math_content_ai', esc_html__( 'Content AI', 'rank-math' ) );
 		$this->register( 'rank_math_admin_bar', esc_html__( 'Top Admin Bar', 'rank-math' ) );
 	}
 
@@ -81,7 +82,7 @@ class Capability_Manager {
 	}
 
 	/**
-	 * Returns the list of registered capabilitities.
+	 * Get all registered capabilitities.
 	 *
 	 * @param bool $caps Capabilities as keys.
 	 *

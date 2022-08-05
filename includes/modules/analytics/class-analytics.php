@@ -16,7 +16,6 @@ use RankMath\Google\Api;
 use RankMath\Module\Base;
 use MyThemeShop\Admin\Page;
 use MyThemeShop\Helpers\Arr;
-use MyThemeShop\Helpers\Str;
 use RankMath\Google\Console;
 use RankMath\Google\Authentication;
 use MyThemeShop\Helpers\Conditional;
@@ -68,13 +67,8 @@ class Analytics extends Base {
 		if ( is_admin() ) {
 			$this->filter( 'rank_math/database/tools', 'add_tools' );
 			$this->filter( 'rank_math/settings/general', 'add_settings' );
-			$this->action( 'admin_init', 'refres_token_missing', 25 );
+			$this->action( 'admin_init', 'refresh_token_missing', 25 );
 			$this->action( 'admin_init', 'cancel_fetch', 5 );
-
-			// Show Analytics block in the Dashboard widget only if account is connected or user has permissions.
-			if ( Helper::has_cap( 'analytics' ) && Authentication::is_authorized() ) {
-				$this->action( 'rank_math/dashboard/widget', 'dashboard_widget', 9 );
-			}
 
 			new OAuth();
 		}
@@ -100,7 +94,7 @@ class Analytics extends Base {
 	/**
 	 * If refresh token missing add notice.
 	 */
-	public function refres_token_missing() {
+	public function refresh_token_missing() {
 		// Bail if the user is not authenticated at all yet.
 		if ( ! Helper::is_site_connected() || ! Authentication::is_authorized() ) {
 			return;
@@ -141,91 +135,6 @@ class Analytics extends Base {
 	}
 
 	/**
-	 * Add stats widget into admin dashboard.
-	 */
-	public function dashboard_widget() {
-		// Get stats info within last 30 days.
-		Stats::get()->set_date_range( '-30 days' );
-		$data                   = Stats::get()->get_widget();
-		$analytics              = get_option( 'rank_math_google_analytic_options' );
-		$is_analytics_connected = ! empty( $analytics ) && ! empty( $analytics['view_id'] );
-		?>
-		<h3>
-			<?php esc_html_e( 'Analytics', 'rank-math' ); ?>
-			<span><?php esc_html_e( 'Last 30 Days', 'rank-math' ); ?></span>
-			<a href="<?php echo esc_url( Helper::get_admin_url( 'analytics' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'rank-math' ); ?>"><i class="dashicons dashicons-ellipsis"></i></a>
-		</h3>
-		<div class="rank-math-dashabord-block items-4">
-
-			<?php if ( $is_analytics_connected && defined( 'RANK_MATH_PRO_FILE' ) ) : ?>
-			<div>
-				<h4>
-					<?php esc_html_e( 'Search Traffic', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'This is the number of pageviews carried out by visitors from Google.', 'rank-math' ); ?></span></span>
-				</h4>
-				<?php $this->get_analytic_block( $data->pageviews ); ?>
-			</div>
-			<?php endif; ?>
-
-			<div>
-				<h4>
-					<?php esc_html_e( 'Total Impressions', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'How many times your site showed up in the search results.', 'rank-math' ); ?></span></span>
-				</h4>
-				<?php $this->get_analytic_block( $data->impressions ); ?>
-			</div>
-
-			<?php if ( ! $is_analytics_connected || ( $is_analytics_connected && ! defined( 'RANK_MATH_PRO_FILE' ) ) ) : ?>
-			<div>
-				<h4>
-					<?php esc_html_e( 'Total Clicks', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'This is the number of pageviews carried out by visitors from Google.', 'rank-math' ); ?></span></span>
-				</h4>
-				<?php $this->get_analytic_block( $data->clicks ); ?>
-			</div>
-			<?php endif; ?>
-
-			<div>
-				<h4>
-					<?php esc_html_e( 'Total Keywords', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of keywords your site ranking below 100 position.', 'rank-math' ); ?></span></span>
-				</h4>
-				<?php $this->get_analytic_block( $data->keywords ); ?>
-			</div>
-
-			<div>
-				<h4>
-					<?php esc_html_e( 'Average Position', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Average position of all the ranking keywords below 100 position.', 'rank-math' ); ?></span></span>
-				</h4>
-				<?php $this->get_analytic_block( $data->position, true ); ?>
-			</div>
-
-		</div>
-		<?php
-	}
-
-	/**
-	 * Get analytic block
-	 *
-	 * @param object  $item   Item.
-	 * @param boolean $revert Flag whether to revert difference icon or not.
-	 */
-	private function get_analytic_block( $item, $revert = false ) {
-		$is_negative = absint( $item['difference'] ) !== $item['difference'];
-		$diff_class  = ( ! $revert && $is_negative ) || ( $revert && ! $is_negative && $item['difference'] > 0 ) ? 'down' : 'up';
-		if ( ( ! $revert && ! $is_negative && $item['difference'] > 0 ) || ( $revert && $is_negative ) ) {
-			$diff_class = 'up';
-		}
-		?>
-		<div class="rank-math-item-numbers">
-			<strong class="text-large" title="<?php echo esc_html( Str::human_number( $item['total'] ) ); ?>"><?php echo esc_html( Str::human_number( $item['total'] ) ); ?></strong>
-			<span class="rank-math-item-difference <?php echo esc_attr( $diff_class ); ?>" title="<?php echo esc_html( Str::human_number( abs( $item['difference'] ) ) ); ?>"><?php echo esc_html( Str::human_number( abs( $item['difference'] ) ) ); ?></span>
-		</div>
-		<?php
-	}
-
-	/**
 	 * Admin init.
 	 */
 	public function render_notice() {
@@ -247,6 +156,16 @@ class Analytics extends Base {
 			$action         = current( $actions );
 			$schedule       = $action->get_schedule();
 			$next_timestamp = $schedule->get_date()->getTimestamp();
+
+			// Calculate extra time needed for the inspections.
+			$objects_count   = DB::objects()->selectCount( 'id' )->getVar();
+			$daily_api_limit = \RankMath\Analytics\Workflow\Inspections::API_LIMIT;
+			$time_gap        = \RankMath\Analytics\Workflow\Inspections::REQUEST_GAP_SECONDS;
+			$extra_time      = $objects_count * $time_gap;
+			if ( $objects_count > $daily_api_limit ) {
+				$extra_time += DAY_IN_SECONDS * floor( $objects_count / $daily_api_limit );
+			}
+
 			// phpcs:disable
 			$notification   = new \MyThemeShop\Notification(
 				/* translators: delete counter */
@@ -254,7 +173,7 @@ class Analytics extends Base {
 					'<svg style="vertical-align: middle; margin-right: 5px" viewBox="0 0 462.03 462.03" xmlns="http://www.w3.org/2000/svg" width="20"><g><path d="m462 234.84-76.17 3.43 13.43 21-127 81.18-126-52.93-146.26 60.97 10.14 24.34 136.1-56.71 128.57 54 138.69-88.61 13.43 21z"></path><path d="m54.1 312.78 92.18-38.41 4.49 1.89v-54.58h-96.67zm210.9-223.57v235.05l7.26 3 89.43-57.05v-181zm-105.44 190.79 96.67 40.62v-165.19h-96.67z"></path></g></svg>' .
 					esc_html__( 'Rank Math is importing latest data from connected Google Services, %1$s remaining.', 'rank-math' ) .
 					'&nbsp;<a href="%2$s">' . esc_html__( 'Cancel Fetch', 'rank-math' ) . '</a>',
-					$this->human_interval( $next_timestamp - gmdate( 'U' ) ),
+					$this->human_interval( $next_timestamp - gmdate( 'U' ) + $extra_time ),
 					esc_url( wp_nonce_url( add_query_arg( 'cancel-fetch', 1 ), 'rank_math_cancel_fetch' ) )
 				),
 				[
@@ -458,6 +377,13 @@ class Analytics extends Base {
 					'position'        => true,
 					'positionHistory' => true,
 				],
+				'indexing' => [
+					'index_verdict'            => true,
+					'indexing_state'           => true,
+					'mobile_usability_verdict' => true,
+					'rich_results_items'       => true,
+					'page_fetch_state'         => false,
+				],
 			]
 		);
 
@@ -477,6 +403,15 @@ class Analytics extends Base {
 		Helper::add_json( 'lastUpdated', $updated );
 
 		Helper::add_json( 'singleImage', rank_math()->plugin_url() . 'includes/modules/analytics/assets/img/single-post-report.jpg' );
+
+		// Index Status tab.
+		$enable_index_status = Helper::can_add_index_status();
+		Helper::add_json( 'enableIndexStatus', $enable_index_status );
+		Helper::add_json( 'viewedIndexStatus', get_option( 'rank_math_viewed_index_status', false ) );
+
+		if ( $enable_index_status ) {
+			update_option( 'rank_math_viewed_index_status', true );
+		}
 	}
 
 	/**
@@ -555,14 +490,12 @@ class Analytics extends Base {
 			[
 				'analytics_clear_caches'  => [
 					'title'       => __( 'Purge Analytics Cache', 'rank-math' ),
-					/* translators: 1. Review Schema documentation link */
-					'description' => sprintf( __( 'Clear analytics cache to re-calculate all the stats again.', 'rank-math' ), '<a href="https://rankmath.com/kb/how-to-fix-review-schema-errors/" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' ),
+					'description' => __( 'Clear analytics cache to re-calculate all the stats again.', 'rank-math' ),
 					'button_text' => __( 'Clear Cache', 'rank-math' ),
 				],
 				'analytics_reindex_posts' => [
 					'title'       => __( 'Rebuild Index for Analytics', 'rank-math' ),
-					/* translators: 1. Review Schema documentation link */
-					'description' => sprintf( __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' ), '<a href="https://rankmath.com/kb/how-to-fix-review-schema-errors/" target="_blank">' . esc_attr__( 'here', 'rank-math' ) . '</a>' ),
+					'description' => __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' ),
 					'button_text' => __( 'Rebuild Index', 'rank-math' ),
 				],
 			],

@@ -69,6 +69,13 @@ class Variable {
 	protected $callback;
 
 	/**
+	 * The variable is cacheable or not.
+	 *
+	 * @var bool
+	 */
+	protected $cacheable = true;
+
+	/**
 	 * Create variable from array.
 	 *
 	 * @throws \InvalidArgumentException If `$id` is empty.
@@ -94,6 +101,10 @@ class Variable {
 			}
 
 			$variable->$key = $args[ $key ];
+		}
+
+		if ( isset( $args['nocache'] ) && $args['nocache'] ) {
+			$variable->cacheable = false;
 		}
 
 		return $variable;
@@ -194,5 +205,14 @@ class Variable {
 		}
 
 		return $arr;
+	}
+
+	/**
+	 * Returns the variable is cacheable or not.
+	 *
+	 * @return bool
+	 */
+	public function is_cacheable() {
+		return $this->cacheable;
 	}
 }

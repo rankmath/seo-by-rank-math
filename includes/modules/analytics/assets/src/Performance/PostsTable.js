@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import { map, isUndefined } from 'lodash'
-import { withRouter } from 'react-router-dom'
+import { map, isUndefined, isEmpty } from 'lodash'
+import { TableCard } from '@woocommerce/components'
 
 /**
  * WordPress dependencies
@@ -16,15 +16,24 @@ import { withSelect, dispatch } from '@wordpress/data'
  * Internal dependencies
  */
 import humanNumber from '@helpers/humanNumber'
-import TableCard from '@scShared/woocommerce/Table'
-import { processRows, getPageOffset, filterShownHeaders } from '../functions'
+import { processRows, getPageOffset, filterShownHeaders, withRouter } from '../functions'
+import { noDataMessage } from '../helpers'
 
 const TABLE_PREF_KEY = 'performance'
 
 const PostsTable = ( props ) => {
-	const { tableData, summary, query, history, userPreference } = props
+	const { tableData, summary, query, navigate, userPreference } = props
 	if ( isUndefined( tableData ) || isUndefined( summary ) ) {
 		return 'Loading'
+	}
+
+	let postsRows = []
+	if ( ! isUndefined( tableData.rows ) ) {
+		postsRows = 'No Data' === tableData.rows.response ? [] : tableData.rows
+
+		if ( isEmpty( postsRows ) ) {
+			return noDataMessage( __( 'Content', 'rank-math' ) )
+		}
 	}
 
 	const headers = applyFilters(
@@ -101,16 +110,18 @@ const PostsTable = ( props ) => {
 				downloadable={ true }
 				rowsPerPage={ rowsPerPage }
 				rows={ processRows(
-					tableData.rows,
+					postsRows,
 					map( headers, 'key' ),
 					getPageOffset( paged, rowsPerPage )
 				) }
+				isLoading={ isEmpty( tableData.rows ) }
+
 				query={ query }
 				totalRows={ parseInt( tableData.rowsFound ) }
 				summary={ tableSummary }
 				showPageArrowsLabel={ false }
 				onPageChange={ ( newPage ) => {
-					history.push( '/performance/' + newPage )
+					navigate( '/performance/' + newPage )
 				} }
 				onQueryChange={ () => () => {} }
 				onColumnsChange={ onColumnsChange }
@@ -122,12 +133,12 @@ const PostsTable = ( props ) => {
 export default withRouter(
 	withFilters( 'rankMath.analytics.postsTable' )(
 		withSelect( ( select, props ) => {
-			const query = props.match.params
+			const query = props.params
 			const { paged = 1 } = query
 
 			return {
 				query,
-				history: props.history,
+				navigate: props.navigate,
 				tableData: select( 'rank-math' ).getPostsRowsByObjects( paged, {} ),
 				summary: select( 'rank-math' ).getPostsSummary(),
 				userPreference: select( 'rank-math' ).getUserColumnPreference(

@@ -1,0 +1,619 @@
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/variables';
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/font-icons';
+@import '../../../../../assets/admin/scss/partials/common/tooltip';
+
+@font-face {
+	font-family: 'Rank-Math';
+	font-weight: normal;
+	font-style: normal;
+
+	font-display: block;
+	src: url('../../../../../assets/admin/fonts/Rank-Math.ttf?v1.0.76') format('truetype'),
+	url('../../../../../assets/admin/fonts/Rank-Math.woff?v1.0.76') format('woff'),
+	url('../../../../../assets/admin/fonts/Rank-Math.svg?v1.0.76#Rank-Math') format('svg');
+}
+
+#rank-math-analytics-stats-wrapper {
+	line-height: 1.3;
+
+	position: relative;
+	z-index: 99999;
+
+	color: $text;
+	box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+
+	-webkit-font-smoothing: auto;
+
+	* {
+		letter-spacing: initial;
+	}
+
+	a.rank-math-analytics-close-stats {
+		position: absolute;
+		z-index: 1;
+		top: auto;
+		right: 20px;
+		bottom: 0;
+
+		display: inline-block;
+
+		box-sizing: border-box;
+		width: 34px;
+		height: 34px;
+		padding: 4px;
+
+		text-align: center;
+		text-decoration: none;
+
+		border-radius: 4px 4px 0 0;
+		background: rgba($light-gray, .7);
+
+		.dashicons {
+			line-height: 28px;
+
+			color: $dark-gray;
+		}
+
+		&:hover {
+			.dashicons {
+				color: $text;
+			}
+		}
+
+		svg {
+			display: none;
+
+			fill: #6666c3;
+		}
+	}
+
+	.top-icons {
+		position: absolute;
+		z-index: 1;
+		top: 5px;
+		right: 20px;
+
+		a {
+			line-height: 20px;
+
+			display: inline-block;
+
+			width: 20px;
+
+			text-decoration: none;
+
+			opacity: .5;
+			color: $dark_gray;
+
+			&:hover {
+				opacity: 1;
+				color: $primary;
+			}
+
+			&.rank-math-analytics-disable-stats {
+				opacity: .7;
+				&:hover {
+					color: $color-3;
+				}
+
+				span {
+					vertical-align: -5px;
+				}
+			}
+		}
+	}
+
+	&.hide-stats {
+		a.rank-math-analytics-close-stats {
+			top: 20px;
+
+			border-radius: 4px;
+			background: #fff;
+			box-shadow: 0 0 3px rgba(68, 68, 68, .5);
+
+			.dashicons-arrow-up-alt2 {
+				display: none;
+			}
+
+			svg {
+				display: block;
+			}
+		}
+
+		.top-icons,
+		.rank-math-stats-bar-help,
+		.rank-math-analytics-disable-stats,
+		#rank-math-analytics-stats-content {
+			display: none;
+		}
+	}
+}
+
+#rank-math-analytics-stats {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+	display: flex;
+
+	width: 100%;
+
+	background-color: #fff;
+
+	justify-content: center;
+
+	.rank-math-analytics-wrapper {
+		position: relative;
+
+		display: flex;
+
+		max-width: 96%;
+
+		flex-flow: row wrap;
+		justify-content: center;
+
+		.rank-math-tooltip {
+			text-transform: none;
+
+			span {
+				top: 108% !important;
+				bottom: auto !important;
+			}
+
+			> span:after {
+				top: -5px;
+				left: 46%;
+
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	.rank-math-item {
+		display: flex;
+		flex-direction: column;
+
+		padding: 1rem 1.5rem;
+
+		@import './partials/number-stats';
+		justify-content: space-between;
+
+		&.blur {
+			filter: blur(2px);
+		}
+
+		&.content-ai-score {
+			strong {
+				font-size: 1rem;
+			}
+		}
+
+		&.seo-score {
+			margin-right: 0;
+
+			.score {
+				display: block;
+
+				span {
+					position: relative;
+					z-index: 0;
+				}
+
+				strong {
+					font-size: 14px;
+					line-height: 22px;
+
+					position: relative;
+
+					display: inline-block;
+
+					min-width: 52px;
+					height: 22px;
+
+					text-align: center;
+
+					color: darken( $color-bad, 5% );
+					border: 1px solid darken( $color-bad, 5% );
+					border-radius: 5px;
+
+					&:before {
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: 0;
+
+						width: 20px;
+
+						content: '';
+
+						border-radius: 5px;
+						background: lighten( $color-bad, 18% );
+					}
+				}
+			}
+
+			&.good strong {
+				color: darken( $color-ok, 15% );
+				border-color: darken( $color-ok, 15% );
+
+				&:before {
+					background: lighten( $color-ok, 22% );
+				}
+			}
+
+			&.great strong {
+				color: darken( $color-good, 5% );
+				border-color: darken( $color-good, 5% );
+
+				&:before {
+					background: lighten( $color-good, 28% );
+				}
+			}
+		}
+
+		h3 {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-size: 13px;
+			font-weight: 500;
+			line-height: 1;
+
+			margin: 0;
+
+			text-transform: uppercase;
+		}
+
+		.score {
+			line-height: 1;
+
+			display: flex;
+
+			align-items: center;
+
+			strong {
+				margin-right: 10px;
+
+				flex-basis: 100%;
+			}
+
+			.score-wrapper {
+				position: relative;
+
+				overflow: hidden;
+
+				width: 100%;
+				min-width: 130px;
+				height: 10px;
+
+				border-radius: 10px;
+				background: linear-gradient(90deg, $status-bad 0%, $status-ok 50%, $status-good 100%);
+
+				.score-dot {
+					position: absolute;
+					top: -2px;
+					left: 0;
+
+					box-sizing: border-box;
+					width: 14px;
+					height: 14px;
+					margin-left: -14px;
+
+					transition: 1s left linear;
+
+					border: 2px solid #fff;
+					border-radius: 50%;
+					background: transparent;
+
+					&:before {
+						position: absolute;
+
+						box-sizing: border-box;
+						width: 10px;
+						height: 10px;
+
+						content: '';
+
+						border: 1px solid rgba(0, 0, 0, .1);
+						border-radius: 10px;
+					}
+				}
+			}
+		}
+
+		&#rank-math-analytics-stats-pagespeed {
+			.rank-math-pagespeed-box {
+				padding: 0;
+
+				.col {
+					line-height: 1;
+
+					margin: 0;
+
+					flex: 0 0 auto;
+
+					.rm-icon {
+						font-size: 13px;
+					}
+
+					&.pagespeed-desktop {
+						margin-right: 10px;
+					}
+				}
+			}
+
+			.rank-math-pagespeed-header {
+				margin-bottom: 10px;
+
+				h3 {
+					display: inline-block;
+
+					margin-right: 2.5rem;
+				}
+
+				> span {
+					font-size: 12px;
+					font-weight: normal;
+					line-height: 1;
+
+					vertical-align: 4px;
+
+					opacity: .6;
+				}
+
+				button {
+					line-height: .5;
+
+					width: 15px;
+					height: 15px;
+					margin: 0 0 0 5px;
+
+					vertical-align: 2px;
+
+					background-color: transparent;
+
+					-webkit-text-stroke: 0;
+
+					span {
+						font-size: 14px;
+
+						width: inherit;
+						height: inherit;
+
+						vertical-align: 0;
+					}
+				}
+
+				.rank-math-tooltip {
+					height: 15px;;
+
+					em {
+						vertical-align: 0;
+					}
+				}
+			}
+
+			.grid {
+				display: flex;
+
+				margin-top: .2rem;
+
+				justify-content: space-between;
+			}
+		}
+
+		&.index-status {
+			.verdict {
+				span {
+					font-size: 1rem;
+					font-weight: 500;
+
+					vertical-align: top;
+					text-transform: capitalize;
+				}
+
+				i {
+					font-style: normal;
+
+					position: relative;
+
+					margin-right: 5px;
+
+					text-align: center;
+
+					&:before {
+						font-family: 'Dashicons';
+						font-size: 16px;
+						line-height: 20px;
+
+						display: inline-block;
+
+						width: 20px;
+
+						content: '\f460';
+						transition: all .2s ease-in-out;
+
+						color: #fff;
+						border-radius: 50%;
+						background-color: $color-4;
+					}
+
+					&:hover:before {
+						box-shadow: 0 0 0 4px rgba( $color-4, .25 );
+					}
+
+					&.neutral {
+						&:before {
+							background: $gray;
+						}
+
+						&:hover:before {
+							box-shadow: 0 0 0 4px rgba( $gray, .25 );
+						}
+					}
+
+					&.unspecified {
+						&:before {
+							font-family: Arial, Helvetica, sans-serif;
+							font-size: 14px;
+							font-weight: 500;
+
+							content: '?';
+
+							background: $dark-gray;
+						}
+
+						&:hover:before {
+							box-shadow: 0 0 0 4px rgba( $dark-gray, .25 );
+						}
+					}
+
+					&.pass {
+						&:before {
+							content: '\f15e';
+
+							background: $color-1;
+						}
+
+						&:hover:before {
+							box-shadow: 0 0 0 4px rgba( $color-1, .25 );
+						}
+					}
+
+					&.fail {
+						&:before {
+							content: '\f335';
+
+							background: $color-3;
+						}
+
+						&:hover:before {
+							box-shadow: 0 0 0 4px rgba( $color-3, .25 );
+						}
+					}
+
+					&.partial {
+						&:before {
+							content: '\f15e';
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Pagespeed box.
+	.rank-math-pagespeed-box {
+		.#{$namespace} {
+			&-pagespeed-header {
+				display: flex;
+
+				align-items: center;
+
+				span {
+					margin-left: auto;
+				}
+			}
+		}
+
+		.col {
+			margin-top: .825rem;
+
+			flex: 0 0 50%;
+
+			.rm-icon {
+				font-size: 1.25rem;
+
+				margin-right: 8px;
+
+				vertical-align: middle;
+			}
+
+			strong {
+				font-size: 1rem;
+				font-weight: 500;
+
+				margin-right: 10px;
+
+				vertical-align: middle;
+
+				&.interactive-good {
+					color: $color-good-dark;
+				}
+			}
+
+			small {
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 24px;
+
+				display: inline-block;
+
+				width: 42px;
+
+				text-align: center;
+
+				border-radius: 5px;
+
+				&.score-bad {
+					color: $color-bad-dark;
+					background: lighten($color-bad-dark, 27);
+				}
+			}
+		}
+	}
+}
+
+.rank-math-analytics-stats-footer {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-size: 1rem;
+
+	padding: .75rem 1.5rem;
+
+	text-align: center;
+
+	border-top: 1px solid rgba($light-gray, .7);
+	background-color: #fff;
+
+	> a {
+		font-size: 12px;
+		font-weight: 600;
+
+		margin-left: 3px;
+		padding: 4px 15px;
+
+		text-decoration: none;
+		text-transform: uppercase;
+
+		color: #fff;
+		border-radius: 4px;
+		background-color: $color-2;
+
+		&:hover {
+			color: #fff;
+		}
+	}
+
+	p {
+		font-size: 14px;
+		line-height: 1;
+
+		display: inline-block;
+
+		margin: 0;
+
+		a.button {
+			font-size: inherit;
+			line-height: 1;
+
+			display: inline-block;
+
+			padding: 0;
+
+			color: $color-2;
+			background-color: transparent;
+		}
+	}
+}
+
+body.et_fixed_nav #rank-math-analytics-stats-wrapper {
+	z-index: 999999;
+}

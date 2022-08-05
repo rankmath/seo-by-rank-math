@@ -45,7 +45,7 @@ export function toggleSchemaTemplates( state ) {
  *
  * @return {Object} An action for redux.
  */
- export function schemaUpdated( state ) {
+export function schemaUpdated( state ) {
 	return updateAppUi( 'schemaUpdated', state )
 }
 

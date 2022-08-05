@@ -43,11 +43,7 @@ class Webpage implements Snippet {
 			$entity['dateModified']  = $jsonld->parts['modified'];
 		}
 
-		if ( ! empty( $data['ProfilePage'] ) ) {
-			$entity['author'] = [ '@id' => $data['ProfilePage']['@id'] ];
-		}
-
-		if ( is_home() ) {
+		if ( is_front_page() ) {
 			$jsonld->add_prop( 'publisher', $entity, 'about', $data );
 		}
 

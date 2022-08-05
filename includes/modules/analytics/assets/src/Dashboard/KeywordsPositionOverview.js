@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { get, times, isEmpty } from 'lodash'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ContentLoader from 'react-content-loader'
 import {
 	BarChart,
@@ -42,7 +42,7 @@ const KeywordsPositionOverview = ( {
 	ctrDifference,
 	graph,
 } ) => {
-	const history = useHistory()
+	const navigate = useNavigate()
 
 	if ( isEmpty( top3 ) ) {
 		return (
@@ -175,7 +175,7 @@ const KeywordsPositionOverview = ( {
 				/>
 			</div>
 
-			<Button isLink onClick={ () => history.push( '/keywords/1' ) }>
+			<Button isLink onClick={ () => navigate( '/keywords/1' ) }>
 				{ __( 'Open Report', 'rank-math' ) }
 			</Button>
 		</div>

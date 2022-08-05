@@ -16,6 +16,8 @@ namespace RankMath\Links;
 use WP_Post;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
+use MyThemeShop\Database\Database;
+use RankMath\Admin\Post_Columns;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,16 +29,19 @@ class Links {
 	use Hooker;
 
 	/**
+	 * Links data.
+	 *
+	 * @var array
+	 */
+	private $links_data = [];
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
-
-		if ( is_admin() ) {
-			$this->action( 'save_post', 'save_post', 10, 2 );
-			$this->action( 'delete_post', 'delete_post' );
-			$this->action( 'rank_math_seo_details', 'post_column_content' );
-		}
-
+		$this->action( 'save_post', 'save_post', 10, 2 );
+		$this->action( 'delete_post', 'delete_post' );
+		$this->action( 'rank_math/post/column/seo_details', 'post_column_content', 11, 3 );
 		$this->action( 'rank_math/links/internal_links', 'cron_job' );
 	}
 
@@ -79,17 +84,20 @@ class Links {
 	/**
 	 * Post column content.
 	 *
-	 * @param int $post_id Post ID.
+	 * @param int   $post_id   Post ID.
+	 * @param array $post_data Current post SEO data.
+	 * @param array $data      All posts SEO data.
 	 */
-	public function post_column_content( $post_id ) {
-		if ( ! Helper::is_post_indexable( $post_id ) ) {
+	public function post_column_content( $post_id, $post_data, $data ) {
+		if ( ! Post_Columns::is_post_indexable( $post_id ) || empty( $data ) ) {
 			return;
 		}
 
-		global $wpdb;
+		if ( empty( $this->links_data ) ) {
+			$this->get_links_data( array_keys( $data ) );
+		}
 
-		$counts = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}rank_math_internal_meta WHERE object_id = {$post_id}" ); // phpcs:ignore
-		$counts = ! empty( $counts ) ? $counts : (object) [
+		$counts = ! empty( $this->links_data[ $post_id ] ) ? $this->links_data[ $post_id ] : (object) [
 			'internal_link_count' => 0,
 			'external_link_count' => 0,
 			'incoming_link_count' => 0,
@@ -97,11 +105,20 @@ class Links {
 		?>
 		<span class="rank-math-column-display rank-math-link-count">
 			<strong><?php esc_html_e( 'Links: ', 'rank-math' ); ?></strong>
-			<span title="<?php esc_attr_e( 'Internal Links', 'rank-math' ); ?>"><span class="dashicons dashicons-admin-links"></span> <span><?php echo isset( $counts->internal_link_count ) ? esc_html( $counts->internal_link_count ) : ''; ?></span></span>
+			<span title="<?php esc_attr_e( 'Internal Links', 'rank-math' ); ?>">
+				<span class="dashicons dashicons-admin-links"></span>
+				<span><?php echo isset( $counts->internal_link_count ) ? esc_html( $counts->internal_link_count ) : ''; ?></span>
+			</span>
 			<span class="divider"></span>
-			<span title="<?php esc_attr_e( 'External Links', 'rank-math' ); ?>"><span class="dashicons dashicons-external"></span> <span><?php echo isset( $counts->external_link_count ) ? esc_html( $counts->external_link_count ) : ''; ?></span></span>
+			<span title="<?php esc_attr_e( 'External Links', 'rank-math' ); ?>">
+				<span class="dashicons dashicons-external"></span>
+				<span><?php echo isset( $counts->external_link_count ) ? esc_html( $counts->external_link_count ) : ''; ?></span>
+			</span>
 			<span class="divider"></span>
-			<span title="<?php esc_attr_e( 'Incoming Links', 'rank-math' ); ?>"><span class="dashicons dashicons-external internal"></span> <span><?php echo isset( $counts->incoming_link_count ) ? esc_html( $counts->incoming_link_count ) : ''; ?></span></span>
+			<span title="<?php esc_attr_e( 'Incoming Links', 'rank-math' ); ?>">
+				<span class="dashicons dashicons-external internal"></span>
+				<span><?php echo isset( $counts->incoming_link_count ) ? esc_html( $counts->incoming_link_count ) : ''; ?></span>
+			</span>
 		</span>
 		<?php
 	}
@@ -176,5 +193,15 @@ class Links {
 		unset( $post_types['attachment'] );
 
 		return isset( $post_types[ $post->post_type ] );
+	}
+
+	/**
+	 * Get links data by post id.
+	 *
+	 * @param array $post_ids The post ids.
+	 */
+	private function get_links_data( $post_ids ) {
+		$results          = Database::table( 'rank_math_internal_meta' )->select( '*' )->whereIn( 'object_id', $post_ids )->groupBy( 'object_id' )->get();
+		$this->links_data = array_combine( array_column( $results, 'object_id' ), $results );
 	}
 }

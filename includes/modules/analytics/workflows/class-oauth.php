@@ -41,9 +41,9 @@ class OAuth {
 	 * OAuth reply back
 	 */
 	public function process_oauth() {
-		$process_oauth = Param::get( 'process_oauth', false, FILTER_SANITIZE_STRING );
-		$access_token  = Param::get( 'access_token', false, FILTER_SANITIZE_STRING );
-		$security      = Param::get( 'rankmath_security', false, FILTER_SANITIZE_STRING );
+		$process_oauth = Param::get( 'process_oauth', 0, FILTER_VALIDATE_INT );
+		$access_token  = Param::get( 'access_token', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
+		$security      = Param::get( 'rankmath_security', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 
 		// Early Bail!!
 		if ( empty( $security ) || ( $process_oauth < 1 && empty( $access_token ) ) ) {
@@ -117,9 +117,9 @@ class OAuth {
 	 */
 	private function get_tokens_from_url() {
 		$data = [
-			'access_token'  => urldecode( Param::get( 'access_token', '', FILTER_SANITIZE_STRING ) ),
-			'refresh_token' => urldecode( Param::get( 'refresh_token', '', FILTER_SANITIZE_STRING ) ),
-			'expire'        => urldecode( Param::get( 'expire', '', FILTER_SANITIZE_STRING ) ),
+			'access_token'  => urldecode( Param::get( 'access_token', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK ) ),
+			'refresh_token' => urldecode( Param::get( 'refresh_token', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK ) ),
+			'expire'        => urldecode( Param::get( 'expire', 0, FILTER_VALIDATE_INT ) ),
 		];
 
 		Authentication::tokens( $data );

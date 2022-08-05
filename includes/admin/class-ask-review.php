@@ -87,10 +87,7 @@ class Ask_Review {
 	 * @return void
 	 */
 	public function review_notice_js() {
-		if (
-			! Helper::has_notification( 'rank_math_review_plugin_notice' ) &&
-			! Helper::has_notification( 'rank_math_pro_notice' )
-		) {
+		if ( ! Helper::has_notification( 'rank_math_review_plugin_notice' ) ) {
 			return;
 		}
 		?>

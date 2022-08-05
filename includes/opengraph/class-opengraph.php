@@ -1,6 +1,6 @@
 <?php
 /**
- * This code adds the OpenGraph output.
+ * Add the OpenGraph tags to the header.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -96,7 +96,7 @@ class OpenGraph {
 		$key = $this->prefix . '_title';
 
 		if ( Post::is_simple_page() ) {
-			return Post::get_meta( $key, Post::get_simple_page_id() );
+			return Post::get_meta( $key, Post::get_page_id() );
 		}
 
 		if ( is_front_page() ) {
@@ -120,7 +120,7 @@ class OpenGraph {
 		$key  = $this->prefix . '_description';
 
 		if ( Post::is_simple_page() ) {
-			$desc = Post::get_meta( $key, Post::get_simple_page_id() );
+			$desc = Post::get_meta( $key, Post::get_page_id() );
 			$desc = '' !== $desc ? $desc : $this->fallback_description( 'get_the_excerpt' );
 		} elseif ( is_front_page() ) {
 			$desc = Helper::get_settings( 'titles.homepage_facebook_description' );
@@ -192,11 +192,14 @@ class OpenGraph {
 	 */
 	public function get_overlay_image( $network = 'facebook' ) {
 		if ( is_singular() ) {
-			return Helper::get_post_meta( "{$network}_enable_image_overlay" ) ? Helper::get_post_meta( "{$network}_image_overlay" ) : '';
+			return Helper::get_post_meta( "{$network}_enable_image_overlay" ) ? Helper::get_post_meta( "{$network}_image_overlay", '', 'play' ) : '';
+		}
+		if ( is_category() || is_tag() || is_tax() ) {
+			return Helper::get_term_meta( "{$network}_enable_image_overlay" ) ? Helper::get_term_meta( "{$network}_image_overlay", 0, '', 'play' ) : '';
 		}
 
-		if ( is_category() || is_tag() || is_tax() ) {
-			return Helper::get_term_meta( "{$network}_enable_image_overlay" ) ? Helper::get_term_meta( "{$network}_image_overlay" ) : '';
+		if ( is_author() ) {
+			return Helper::get_user_meta( "{$network}_enable_image_overlay" ) ? Helper::get_user_meta( "{$network}_image_overlay", 0, 'play' ) : '';
 		}
 
 		return '';

@@ -83,7 +83,7 @@ class DB {
 			$table->orWhereLike( 'url_to', $args['search'] );
 		}
 
-		if ( ! empty( $args['orderby'] ) && in_array( $args['orderby'], [ 'id', 'url_to', 'header_code', 'hits', 'last_accessed' ], true ) ) {
+		if ( ! empty( $args['orderby'] ) && in_array( $args['orderby'], [ 'id', 'url_to', 'header_code', 'hits', 'created', 'last_accessed' ], true ) ) {
 			$table->orderBy( $args['orderby'], $args['order'] );
 		}
 
@@ -181,11 +181,16 @@ class DB {
 		}
 
 		foreach ( $sources as $source ) {
-			if ( 'exact' === $source['comparison'] && isset( $source['ignore'] ) && 'case' === $source['ignore'] && strtolower( $source['pattern'] ) === strtolower( $uri ) ) {
+			$compare_uri = $uri;
+			if ( 'exact' === $source['comparison'] ) {
+				$compare_uri = untrailingslashit( $compare_uri );
+			}
+
+			if ( 'exact' === $source['comparison'] && isset( $source['ignore'] ) && 'case' === $source['ignore'] && strtolower( $source['pattern'] ) === strtolower( $compare_uri ) ) {
 				return true;
 			}
 
-			if ( Str::comparison( self::get_clean_pattern( $source['pattern'], $source['comparison'] ), $uri, $source['comparison'] ) ) {
+			if ( Str::comparison( self::get_clean_pattern( $source['pattern'], $source['comparison'] ), $compare_uri, $source['comparison'] ) ) {
 				return true;
 			}
 		}
@@ -224,8 +229,13 @@ class DB {
 	 * @return string
 	 */
 	public static function get_clean_pattern( $pattern, $comparison ) {
-		$pattern = trim( $pattern, '/' );
-		return 'regex' === $comparison ? ( '@' . stripslashes( $pattern ) . '@' ) : $pattern;
+		if ( 'exact' === $comparison ) {
+			$pattern = trim( $pattern, '/' );
+		}
+
+		$cleaned = 'regex' === $comparison ? ( '@' . stripslashes( $pattern ) . '@' ) : $pattern;
+
+		return apply_filters( 'rank_math/redirection/get_clean_pattern', $cleaned, $pattern, $comparison );
 	}
 
 	/**

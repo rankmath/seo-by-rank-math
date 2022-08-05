@@ -263,8 +263,9 @@ class Result {
 			$size = ( $occurrences / $max ) * ( $font_size_max - $font_size_min ) + $font_size_min;
 			$size = round( $size, 2 );
 
-			$html .= sprintf( '<span class="keyword-cloud-item" style="font-size: %.2fpx">%s</span>', $size, htmlspecialchars( $keyword, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8' ) );
+			$html .= sprintf( '<span class="keyword-cloud-item" style="font-size: %.2fpx">%s</span> ', $size, htmlspecialchars( $keyword, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8' ) );
 		}
+		$html  = rtrim( $html );
 		$html .= '</div>';
 
 		return apply_filters( 'rank_math/seo_analysis/tag_cloud_html', $html, $data );

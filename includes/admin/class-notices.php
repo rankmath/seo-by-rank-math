@@ -63,6 +63,10 @@ class Notices implements Runner {
 		if ( 'convert_wpml_settings' === $notification_id ) {
 			update_option( 'rank_math_wpml_notice_dismissed', true );
 		}
+
+		if ( 'rank-math-site-url-mismatch' === $notification_id ) {
+			update_option( 'rank_math_siteurl_mismatch_notice_dismissed', true );
+		}
 	}
 
 	/**
