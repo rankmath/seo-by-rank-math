@@ -77,13 +77,13 @@ class Comments {
 	 */
 	public function replytocom_redirect() {
 
-		if ( isset( $_GET['replytocom'] ) && is_singular() ) {
+		if ( isset( $_GET['replytocom'] ) && is_singular() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- No action, nonce is not required.
 			$url          = get_permalink( $GLOBALS['post']->ID );
-			$query_string = Security::remove_query_arg_raw( 'replytocom', sanitize_text_field( $_SERVER['QUERY_STRING'] ) );
+			$query_string = isset( $_SERVER['QUERY_STRING'] ) ? Security::remove_query_arg_raw( 'replytocom', sanitize_text_field( $_SERVER['QUERY_STRING'] ) ) : '';
 			if ( ! empty( $query_string ) ) {
 				$url .= '?' . $query_string;
 			}
-			$url .= '#comment-' . sanitize_text_field( $_GET['replytocom'] );
+			$url .= '#comment-' . sanitize_text_field( $_GET['replytocom'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- No action, nonce is not required.
 			Helper::redirect( $url, 301 );
 			return true;
 		}

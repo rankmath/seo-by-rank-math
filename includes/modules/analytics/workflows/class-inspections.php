@@ -71,7 +71,7 @@ class Inspections {
 		$collate = $wpdb->get_charset_collate();
 		$table   = 'rank_math_analytics_inspections';
 
-		// Early Bail!!
+		// Early bail.
 		if ( DB::check_table_exists( $table ) ) {
 			return;
 		}

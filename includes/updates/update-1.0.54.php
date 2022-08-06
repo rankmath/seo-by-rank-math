@@ -33,13 +33,13 @@ function rank_math_1_0_54_delete_unneeded_analytics_accounts() {
 		$all_accounts = get_option( 'rank_math_analytics_all_services', [] );
 		if ( isset( $all_accounts['accounts'][ $ga_options['account_id'] ] ) ) {
 			foreach ( $all_accounts['accounts'] as $account_id => $account_data ) {
-				if ( $account_id != $ga_options['account_id'] ) {
+				if ( $account_id !== $ga_options['account_id'] ) {
 					unset( $all_accounts['accounts'][ $account_id ] );
 					continue;
 				}
 				if ( isset( $account_data['properties'][ $ga_options['property_id'] ] ) ) {
 					foreach ( $account_data['properties'] as $property_id => $property_data ) {
-						if ( $property_id != $ga_options['property_id'] ) {
+						if ( $property_id !== $ga_options['property_id'] ) {
 							unset( $all_accounts['accounts'][ $account_id ]['properties'][ $property_id ] );
 							continue;
 						}

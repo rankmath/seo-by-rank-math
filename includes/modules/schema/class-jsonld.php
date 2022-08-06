@@ -75,7 +75,7 @@ class JsonLD {
 		unset( $data['BreadcrumbList'] );
 
 		// Preview schema.
-		$schema    = \json_decode( file_get_contents( 'php://input' ), true );
+		$schema    = \json_decode( file_get_contents( 'php://input' ), true ); // phpcs:ignore WordPressVIPMinimum.Performance.FetchingRemoteData.FileGetContentsRemoteFile -- We need the read raw request body here.
 		$schema_id = $schema['schemaID'];
 		if ( isset( $data[ $schema_id ] ) ) {
 			$current_data = $data[ $schema_id ];
@@ -554,7 +554,7 @@ class JsonLD {
 	public function add_ratings( $schema, &$entity ) {
 		$rating = Helper::get_post_meta( "snippet_{$schema}_rating" );
 
-		// Early Bail!
+		// Early bail.
 		if ( ! $rating ) {
 			return;
 		}
@@ -616,7 +616,7 @@ class JsonLD {
 	public function set_address( $schema, &$entity ) {
 		$address = Helper::get_post_meta( "snippet_{$schema}_address" );
 
-		// Early Bail!
+		// Early bail.
 		if ( ! is_array( $address ) || empty( $address ) ) {
 			return;
 		}

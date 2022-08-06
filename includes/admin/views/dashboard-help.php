@@ -16,10 +16,10 @@ if ( ! current_user_can( 'manage_options' ) ) {
 }
 
 if ( Helper::has_cap( 'general' ) ) {
-	include_once 'plugin-activation.php';
+	include_once rank_math()->plugin_dir() . 'includes/admin/views/plugin-activation.php';
 }
 
-include_once 'plugin-activation.php'; ?>
+include_once rank_math()->plugin_dir() . 'includes/admin/views/plugin-activation.php'; ?>
 
 	<div class="two-col rank-math-box-help">
 

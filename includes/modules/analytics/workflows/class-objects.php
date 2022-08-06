@@ -46,7 +46,7 @@ class Objects extends Base {
 		$collate = $wpdb->get_charset_collate();
 		$table   = 'rank_math_analytics_objects';
 
-		// Early Bail!!
+		// Early bail.
 		if ( DB::check_table_exists( $table ) ) {
 			return;
 		}
@@ -114,12 +114,13 @@ class Objects extends Base {
 		$post_types = Helper::get_accessible_post_types();
 		unset( $post_types['attachment'] );
 
-		$ids = get_posts(
+		$ids = get_posts( // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts -- "suppress_filters" is set to false.
 			[
-				'post_type'      => array_keys( $post_types ),
-				'post_status'    => 'publish',
-				'fields'         => 'ids',
-				'posts_per_page' => -1,
+				'post_type'        => array_keys( $post_types ),
+				'post_status'      => 'publish',
+				'fields'           => 'ids',
+				'posts_per_page'   => -1,
+				'suppress_filters' => false,
 			]
 		);
 

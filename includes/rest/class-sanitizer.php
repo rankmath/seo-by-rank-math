@@ -17,27 +17,27 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Admin class.
  */
-class Sanitize {
+class Sanitizer {
 
 	/**
 	 * Main instance
 	 *
 	 * Ensure only one instance is loaded or can be loaded.
 	 *
-	 * @return Sanitize
+	 * @return Sanitizer
 	 */
 	public static function get() {
 		static $instance;
 
 		if ( is_null( $instance ) && ! ( $instance instanceof Sanitize ) ) {
-			$instance = new Sanitize();
+			$instance = new Sanitizer();
 		}
 
 		return $instance;
 	}
 
 	/**
-	 * Sanitize value
+	 * Sanitize value.
 	 *
 	 * @param string $field_id Field id to sanitize.
 	 * @param mixed  $value    Field value.
@@ -45,28 +45,38 @@ class Sanitize {
 	 * @return mixed  Sanitized value.
 	 */
 	public function sanitize( $field_id, $value ) {
-		$sanitized_value = '';
-		switch ( $field_id ) {
-			case 'rank_math_title':
-			case 'rank_math_description':
-			case 'rank_math_snippet_name':
-			case 'rank_math_snippet_desc':
-			case 'rank_math_facebook_title':
-			case 'rank_math_facebook_description':
-			case 'rank_math_twitter_title':
-			case 'rank_math_twitter_description':
-				$sanitized_value = wp_filter_nohtml_kses( $value );
-				break;
-			case 'rank_math_snippet_recipe_ingredients':
-			case 'rank_math_snippet_recipe_instructions':
-			case 'rank_math_snippet_recipe_single_instructions':
-				$sanitized_value = $this->sanitize_textarea( $field_id, $value );
-				break;
-			default:
-				$sanitized_value = is_array( $value ) ? $this->loop_sanitize( $value ) : \RankMath\CMB2::sanitize_textfield( $value );
+		$sanitize_kses = [
+			'wp_filter_nohtml_kses',
+			[ $value ],
+		];
+
+		$sanitize_textarea = [
+			[
+				$this,
+				'sanitize_textarea',
+			],
+			[ $field_id, $value ],
+		];
+
+		$sanitize_map = [
+			'rank_math_title'                              => $sanitize_kses,
+			'rank_math_description'                        => $sanitize_kses,
+			'rank_math_snippet_name'                       => $sanitize_kses,
+			'rank_math_snippet_desc'                       => $sanitize_kses,
+			'rank_math_facebook_title'                     => $sanitize_kses,
+			'rank_math_facebook_description'               => $sanitize_kses,
+			'rank_math_twitter_title'                      => $sanitize_kses,
+			'rank_math_twitter_description'                => $sanitize_kses,
+			'rank_math_snippet_recipe_ingredients'         => $sanitize_textarea,
+			'rank_math_snippet_recipe_instructions'        => $sanitize_textarea,
+			'rank_math_snippet_recipe_single_instructions' => $sanitize_textarea,
+		];
+
+		if ( isset( $sanitize_map[ $field_id ] ) ) {
+			return call_user_func_array( $sanitize_map[ $field_id ][0], $sanitize_map[ $field_id ][1] );
 		}
 
-		return $sanitized_value;
+		return is_array( $value ) ? $this->loop_sanitize( $value ) : \RankMath\CMB2::sanitize_textfield( $value );
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 /**
- * The Redirections Import Class
+ * Import from the Redirection plugin.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -11,15 +11,14 @@
 namespace RankMath\Admin\Importers;
 
 use RankMath\Helper;
-use RankMath\Admin\Admin_Helper;
-use RankMath\Redirections\Redirection;
+use RankMath\Redirections\Redirection as RankMath_Redirection;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Redirections class.
+ * Redirection class.
  */
-class Redirections extends Plugin_Importer {
+class Redirection extends Plugin_Importer {
 
 	/**
 	 * The plugin name.
@@ -51,14 +50,14 @@ class Redirections extends Plugin_Importer {
 		global $wpdb;
 
 		$count = 0;
-		$rows  = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}redirection_items" );
+		$rows  = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}redirection_items" ); // phpcs:ignore -- Direct DB query ok, cache not needed.
 
 		if ( empty( $rows ) ) {
 			return false;
 		}
 
 		foreach ( (array) $rows as $row ) {
-			$item = Redirection::from(
+			$item = RankMath_Redirection::from(
 				[
 					'sources'     => [
 						[

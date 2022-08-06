@@ -611,7 +611,7 @@ class Image {
 	private function get_attachment_image( $attachment_id, $size = 'thumbnail' ) {
 		$image = wp_get_attachment_image_src( $attachment_id, $size );
 
-		// Early Bail!
+		// Early bail.
 		if ( ! $image ) {
 			return false;
 		}

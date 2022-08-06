@@ -21,3 +21,5 @@ $this->template_part( 'header' );
 <?php $this->template_part( 'cta' ); ?>
 
 <?php $this->template_part( 'footer' ); ?>
+
+<?php

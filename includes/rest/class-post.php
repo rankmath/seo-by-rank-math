@@ -101,7 +101,7 @@ class Post extends WP_REST_Controller {
 			return;
 		}
 
-		$sanitizer = Sanitize::get();
+		$sanitizer = Sanitizer::get();
 		if ( 'image_title' === $column ) {
 			wp_update_post(
 				[

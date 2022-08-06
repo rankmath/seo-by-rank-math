@@ -196,7 +196,7 @@ class Rest extends WP_REST_Controller {
 		$data = wp_remote_get(
 			$url,
 			[
-				'timeout' => 60,
+				'timeout' => 60, // phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout -- This takes time, and the user is informed about it.
 			]
 		);
 

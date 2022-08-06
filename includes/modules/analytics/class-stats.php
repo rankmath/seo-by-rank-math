@@ -447,12 +447,12 @@ class Stats extends Keywords {
 		$cookie_key = 'rank_math_analytics_' . $filter;
 		$new_value  = sanitize_title( Param::post( $filter ) );
 		if ( $new_value ) {
-			setcookie( $cookie_key, $new_value, time() + ( HOUR_IN_SECONDS * 30 ), COOKIEPATH, COOKIE_DOMAIN, false, true );
+			setcookie( $cookie_key, $new_value, time() + ( HOUR_IN_SECONDS * 30 ), COOKIEPATH, COOKIE_DOMAIN, false, true ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.cookies_setcookie -- Admin side is not cached.
 			return $new_value;
 		}
 
 		if ( ! empty( $_COOKIE[ $cookie_key ] ) ) {
-			return $_COOKIE[ $cookie_key ];
+			return sanitize_text_field( $_COOKIE[ $cookie_key ] ); // phpcs:ignore WordPressVIPMinimum.Variables.RestrictedVariables.cache_constraints___COOKIE -- Admin side is not cached.
 		}
 
 		return $default;
@@ -816,7 +816,7 @@ class Stats extends Keywords {
 			return $pre;
 		}
 
-		// Sort array by $args['order'], $order_by_field value.
+		// Sort array by order_by_field value.
 		if ( ! empty( $args['order'] ) ) {
 			$sort_base_arr = array_column( $data, $order_by_field, $dimension );
 			array_multisort( $sort_base_arr, 'ASC' === $args['order'] ? SORT_ASC : SORT_DESC, $data );

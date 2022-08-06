@@ -76,7 +76,7 @@ class Version_Control {
 			return false;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'rank-math-beta-optin' ) ) {
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_POST['_wpnonce'] ), 'rank-math-beta-optin' ) ) {
 			return false;
 		}
 
@@ -97,15 +97,7 @@ class Version_Control {
 	 * @return bool Change successful.
 	 */
 	public function maybe_save_auto_update() {
-		if ( ! Param::post( 'enable_auto_update' ) || ! Param::post( '_wpnonce' ) ) {
-			return false;
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return false;
-		}
-
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'rank-math-auto-update' ) ) {
+		if ( ! $this->should_save_auto_update() ) {
 			return false;
 		}
 
@@ -121,6 +113,27 @@ class Version_Control {
 			update_option( 'rank-math-options-general', $settings );
 		}
 
+		return true;
+	}
+
+	/**
+	 * Check if we should save auto update setting.
+	 *
+	 * @return bool
+	 */
+	private function should_save_auto_update() {
+		if ( ! Param::post( 'enable_auto_update' ) || ! Param::post( '_wpnonce' ) ) {
+			return false;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_POST['_wpnonce'] ), 'rank-math-auto-update' ) ) {
+			return false;
+		}
+		
 		return true;
 	}
 
@@ -290,7 +303,7 @@ class Version_Control {
 			return $cache;
 		}
 
-		$request = wp_remote_get( self::API_URL, [ 'timeout' => 20 ] );
+		$request = wp_remote_get( self::API_URL, [ 'timeout' => 20 ] ); // phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout -- This takes time.
 		if ( ! is_wp_error( $request ) && is_array( $request ) ) {
 			$response = json_decode( $request['body'], true );
 			set_transient( self::TRANSIENT, $response, ( 12 * HOUR_IN_SECONDS ) );
@@ -335,7 +348,7 @@ class Version_Control {
 	 */
 	public function display() {
 		$directory = dirname( __FILE__ );
-		include_once $directory . '/display.php';
+		include_once $directory . '/display.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 	}
 
 }

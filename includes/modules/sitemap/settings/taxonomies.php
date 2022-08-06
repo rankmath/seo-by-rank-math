@@ -8,9 +8,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$taxonomy   = $tab['taxonomy'];
-$prefix     = "tax_{$taxonomy}_";
-$is_enabled = 'category' === $taxonomy ? 'on' : 'off';
+$current_taxonomy = $tab['taxonomy'];
+$prefix           = "tax_{$current_taxonomy}_";
+$is_enabled       = 'category' === $current_taxonomy ? 'on' : 'off';
 
 $cmb->add_field(
 	[

@@ -141,7 +141,11 @@ class Helper {
 	 * @return string
 	 */
 	public static function get_current_page_url( $ignore_qs = false ) {
-		$link = '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		if ( ! isset( $_SERVER['HTTP_HOST'] ) || ! isset( $_SERVER['REQUEST_URI'] ) ) {
+			return '';
+		}
+
+		$link = '://' . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . esc_url_raw( $_SERVER['REQUEST_URI'] );
 		$link = ( is_ssl() ? 'https' : 'http' ) . $link;
 
 		if ( $ignore_qs ) {

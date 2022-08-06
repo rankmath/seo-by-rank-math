@@ -355,7 +355,7 @@ class Slack extends OpenGraph {
 		}
 
 		$data[ __( 'Name', 'rank-math' ) ]  = $author->display_name;
-		$data[ __( 'Posts', 'rank-math' ) ] = count_user_posts( $author->ID );
+		$data[ __( 'Posts', 'rank-math' ) ] = function_exists( 'wpcom_vip_count_user_posts' ) ? \wpcom_vip_count_user_posts( $author->ID ) : count_user_posts( $author->ID ); // phpcs:ignore
 
 		return $data;
 	}

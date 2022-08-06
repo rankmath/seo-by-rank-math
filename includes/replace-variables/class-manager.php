@@ -106,12 +106,14 @@ class Manager extends Post_Variables {
 	 */
 	private function is_unique_id( $id ) {
 		if ( false === preg_match( '`^[A-Z0-9_-]+$`i', $id ) ) {
-			trigger_error( esc_html__( 'Variable names can only contain alphanumeric characters, underscores and dashes.', 'rank-math' ), E_USER_WARNING );
+			// Translators: Variable ID.
+			trigger_error( sprintf( esc_html__( 'Rank Math: Invalid variable "%s". Variable names can only contain alphanumeric characters, underscores and dashes.', 'rank-math' ), esc_html( $id ) ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- This helps in debugging when extra variables are added via custom code.
 			return false;
 		}
 
 		if ( isset( $this->replacements[ $id ] ) ) {
-			trigger_error( esc_html__( 'The variable has already been registered.', 'rank-math' ), E_USER_WARNING );
+			// Translators: Variable ID.
+			trigger_error( sprintf( esc_html__( 'Rank Math: The variable "%s" has already been registered.', 'rank-math' ), esc_html( $id ) ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- This helps in debugging when extra variables are added via custom code.
 			return false;
 		}
 

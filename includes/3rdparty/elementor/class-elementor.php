@@ -100,7 +100,7 @@ class Elementor {
 		$output  = \ob_get_clean();
 		$search  = '/(<div class="elementor-component-tab elementor-panel-navigation-tab" data-tab="global">.*<\/div>)/m';
 		$replace = '${1}<div class="elementor-component-tab elementor-panel-navigation-tab" data-tab="rank-math">SEO</div>';
-		echo \preg_replace(
+		echo \preg_replace( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- This comes from the output buffer, escaping it would break the output.
 			$search,
 			$replace,
 			$output
@@ -187,7 +187,7 @@ class Elementor {
 			return false;
 		}
 
-		$post_type = isset( $_GET['post'] ) ? get_post_type( $_GET['post'] ) : '';
+		$post_type = isset( $_GET['post'] ) ? get_post_type( absint( $_GET['post'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- No action, nonce is not required.
 		if ( $post_type && ! Helper::get_settings( 'titles.pt_' . $post_type . '_add_meta_box' ) ) {
 			return false;
 		}

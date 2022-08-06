@@ -167,15 +167,15 @@ class Storage {
 		global $wpdb;
 
 		$where  = [ 'object_id' => $post_id ];
-		$exists = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}rank_math_internal_meta WHERE object_id = %d", $post_id ) );
+		$exists = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}rank_math_internal_meta WHERE object_id = %d", $post_id ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 
 		if ( $exists ) {
-			$result = $wpdb->update( $wpdb->prefix . 'rank_math_internal_meta', $meta_data, $where );
+			$result = $wpdb->update( $wpdb->prefix . 'rank_math_internal_meta', $meta_data, $where ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 			return $result;
 		}
 
 		$data   = array_merge( $where, $meta_data );
-		$result = $wpdb->insert( $wpdb->prefix . 'rank_math_internal_meta', $data );
+		$result = $wpdb->insert( $wpdb->prefix . 'rank_math_internal_meta', $data ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 		return $result;
 	}
 }

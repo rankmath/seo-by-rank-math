@@ -71,8 +71,8 @@ class Analytics_Common {
 		<h3>
 			<?php esc_html_e( 'Analytics', 'rank-math' ); ?>
 			<span><?php esc_html_e( 'Last 30 Days', 'rank-math' ); ?></span>
-			<a href="<?php echo esc_url( Helper::get_admin_url( 'analytics' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'rank-math' ); ?>">
-				<i class="dashicons dashicons-ellipsis"></i>
+			<a href="<?php echo esc_url( Helper::get_admin_url( 'analytics' ) ); ?>" class="rank-math-view-report" title="<?php esc_attr_e( 'View Report', 'rank-math' ); ?>">
+				<i class="dashicons dashicons-chart-bar"></i>
 			</a>
 		</h3>
 		<div class="rank-math-dashabord-block items-4">
@@ -227,7 +227,7 @@ class Analytics_Common {
 			return;
 		}
 
-		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'enable_email_reports' ) ) {
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ), 'enable_email_reports' ) ) {
 			return;
 		}
 
@@ -344,8 +344,8 @@ class Analytics_Common {
 		}
 		?>
 		<div class="rank-math-item-numbers">
-			<strong class="text-large" title="<?php echo esc_html( Str::human_number( $item['total'] ) ); ?>"><?php echo esc_html( Str::human_number( $item['total'] ) ); ?></strong>
-			<span class="rank-math-item-difference <?php echo esc_attr( $diff_class ); ?>" title="<?php echo esc_html( Str::human_number( abs( $item['difference'] ) ) ); ?>"><?php echo esc_html( Str::human_number( abs( $item['difference'] ) ) ); ?></span>
+			<strong class="text-large" title="<?php echo esc_attr( Str::human_number( $item['total'] ) ); ?>"><?php echo esc_html( Str::human_number( $item['total'] ) ); ?></strong>
+			<span class="rank-math-item-difference <?php echo esc_attr( $diff_class ); ?>" title="<?php echo esc_attr( Str::human_number( abs( $item['difference'] ) ) ); ?>"><?php echo esc_html( Str::human_number( abs( $item['difference'] ) ) ); ?></span>
 		</div>
 		<?php
 	}

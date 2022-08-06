@@ -212,7 +212,6 @@ class Setup_Wizard {
 		}
 
 		return $url;
-		return rank_math()->admin_dir() . "wizard/views/{$view}.php";
 	}
 
 	/**
@@ -293,9 +292,9 @@ class Setup_Wizard {
 		/**
 		 * Start the actual page content.
 		 */
-		include_once $this->get_view( 'header' );
-		include_once $this->get_view( 'content' );
-		include_once $this->get_view( 'footer' );
+		include_once $this->get_view( 'header' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The parameter is sanitized and the include is safe.
+		include_once $this->get_view( 'content' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The parameter is sanitized and the include is safe.
+		include_once $this->get_view( 'footer' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The parameter is sanitized and the include is safe.
 		exit;
 	}
 
@@ -324,6 +323,7 @@ class Setup_Wizard {
 	 * @return string
 	 */
 	public function get_view( $view ) {
+		$view = sanitize_key( $view );
 		return rank_math()->admin_dir() . "wizard/views/{$view}.php";
 	}
 

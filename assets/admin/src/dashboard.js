@@ -52,6 +52,12 @@ class RankMathDashboard {
 
 	// Enable/Disable Modules
 	updateModules() {
+		$( '.rank-math-box.is-pro' ).on( 'click', function( e ) {
+			e.preventDefault()
+			window.open( '//rankmath.com/pricing/?utm_source=Plugin&utm_medium=Unlock%20PRO%20Module%20Box&utm_campaign=WP' )
+			return false
+		} )
+
 		$( '.rank-math-modules' ).on( 'change', function() {
 			const button = $( this ),
 				box = button.closest( '.rank-math-box' ),
@@ -76,6 +82,8 @@ class RankMathDashboard {
 					return
 				}
 
+				const data = this.data
+
 				box.removeClass( 'saving' )
 				box.toggleClass( 'active', isChecked )
 
@@ -84,6 +92,7 @@ class RankMathDashboard {
 					url: window.location.pathname + window.location.search,
 					method: 'GET',
 				} ).done( function( responseMenu ) {
+					const data = this.data
 					if ( responseMenu ) {
 						const incoming = $( responseMenu ).find(
 							'#toplevel_page_rank-math'
@@ -109,6 +118,26 @@ class RankMathDashboard {
 						}
 					}
 				} )
+
+				// Check module dependencies.
+				$( '.rank-math-modules' ).each( function( i, el ) {
+					const $this = $(this);
+					const deps = $this.data( 'depmodules' );
+
+					if ( typeof deps === 'object' && deps.length ) {
+						const depsEnabled = deps.filter( function( dep ) {
+							return ! $( '#module-' + dep ).is( ':checked' );
+						})
+
+						const disabled = depsEnabled.length > 0;
+						$this.prop( 'disabled', disabled );
+						if ( disabled ) {
+							$this.closest( '.rank-math-box' ).removeClass( 'active' );
+						} else if ( $this.is( ':checked' ) ) {
+							$this.closest( '.rank-math-box' ).addClass( 'active' );
+						}
+					}
+				} )
 			} )
 		} )
 	}
@@ -122,8 +151,8 @@ class RankMathDashboard {
 		$( '.get-debug-report' ).on( 'click', function() {
 			$( '#debug-report' ).slideDown()
 			$( '#debug-report textarea' )
-				.focus()
-				.select()
+				.trigger( 'focus' )
+				.trigger( 'select' )
 			$( this )
 				.parent()
 				.fadeOut()

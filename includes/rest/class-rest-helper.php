@@ -183,8 +183,14 @@ class Rest_Helper {
 			return $error;
 		}
 
-		global $wpdb;
-		$term = $wpdb->get_row( $wpdb->prepare( "SELECT t.* FROM $wpdb->term_taxonomy AS t WHERE t.term_id = %d LIMIT 1", $id ) );
+		$term = wp_cache_get( $id, 'rank_math_get_term' );
+		if ( false === $term ) {
+			global $wpdb;
+			$term = $wpdb->get_row( $wpdb->prepare( "SELECT t.* FROM $wpdb->term_taxonomy AS t WHERE t.term_id = %d LIMIT 1", $id ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct database query ok.
+
+			wp_cache_set( $id, $term, 'rank_math_get_term' );
+		}
+
 		if ( empty( $term ) || empty( $term->term_id ) ) {
 			return $error;
 		}

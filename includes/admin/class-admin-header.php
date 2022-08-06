@@ -103,8 +103,8 @@ class Admin_Header {
 		$is_advanced_mode = Helper::is_advanced_mode();
 		?>
 		<div class="rank-math-mode-selector">
-			<a href="#" class="<?php echo ! $is_advanced_mode ? 'active' : ''; ?>" data-mode="easy"><?php esc_attr_e( 'Easy Mode', 'rank-math' ); ?></a>
-			<a href="#" class="<?php echo $is_advanced_mode ? 'active' : ''; ?>" data-mode="advanced"><?php esc_attr_e( 'Advanced Mode', 'rank-math' ); ?></a>
+			<a href="#" class="<?php echo ! $is_advanced_mode ? 'active' : ''; ?>" data-mode="easy"><?php esc_html_e( 'Easy Mode', 'rank-math' ); ?></a>
+			<a href="#" class="<?php echo $is_advanced_mode ? 'active' : ''; ?>" data-mode="advanced"><?php esc_html_e( 'Advanced Mode', 'rank-math' ); ?></a>
 		</div>
 		<?php
 	}

@@ -149,7 +149,7 @@ class Snippet_Shortcode {
 				<?php
 				$file = rank_math()->plugin_dir() . "includes/modules/schema/shortcode/$type.php";
 				if ( file_exists( $file ) ) {
-					include $file;
+					include $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 				}
 				?>
 

@@ -22,18 +22,18 @@ $button_class   = 'button button-primary button-connect' . ( $site_url_valid ? '
 <?php Admin_Helper::maybe_show_invalid_siteurl_notice(); ?>
 
 <div class="wp-core-ui rank-math-ui connect-wrap" style="margin-top: 30px;">
-	<a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $button_class ); ?>" name="rank_math_activate"><?php echo esc_attr__( 'Connect Your Rank Math Account', 'rank-math' ); ?></a>
+	<a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $button_class ); ?>" name="rank_math_activate"><?php esc_html_e( 'Connect Your Rank Math Account', 'rank-math' ); ?></a>
 </div>
 <div id="rank-math-pro-cta" class="analytics">
 	<div class="rank-math-cta-box width-100 no-shadow no-padding">
-		<h3><?php echo esc_attr__( 'Benefits of Connecting Rank Math Account', 'rank-math' ); ?></h3>
+		<h3><?php esc_html_e( 'Benefits of Connecting Rank Math Account', 'rank-math' ); ?></h3>
 		<ul>
-			<li><?php echo esc_attr__( 'Verify site ownership on Google Search Console in a single click', 'rank-math' ); ?></li>
-			<li><?php echo esc_attr__( 'Track page and keyword rankings with the Advanced Analytics module', 'rank-math' ); ?></li>
-			<li><?php echo esc_attr__( 'Easily set up Google Analytics without using another 3rd party plugin', 'rank-math' ); ?></li>
-			<li><?php echo esc_attr__( 'Automatically submit sitemaps to the Google Search Console', 'rank-math' ); ?></li>
-			<li><?php echo esc_attr__( 'Free keyword suggestions when entering a focus keyword', 'rank-math' ); ?></li>
-			<li><?php echo esc_attr__( 'Use our revolutionary SEO Analyzer to scan your website for SEO errors', 'rank-math' ); ?></li>
+			<li><?php esc_html_e( 'Verify site ownership on Google Search Console in a single click', 'rank-math' ); ?></li>
+			<li><?php esc_html_e( 'Track page and keyword rankings with the Advanced Analytics module', 'rank-math' ); ?></li>
+			<li><?php esc_html_e( 'Easily set up Google Analytics without using another 3rd party plugin', 'rank-math' ); ?></li>
+			<li><?php esc_html_e( 'Automatically submit sitemaps to the Google Search Console', 'rank-math' ); ?></li>
+			<li><?php esc_html_e( 'Free keyword suggestions when entering a focus keyword', 'rank-math' ); ?></li>
+			<li><?php esc_html_e( 'Use our revolutionary SEO Analyzer to scan your website for SEO errors', 'rank-math' ); ?></li>
 			<li><a href="<?php echo esc_url( KB::get( 'free-account-benefits' ) ); ?>" target="_blank"><?php echo esc_html__( 'Learn more about the benefits of connecting your account here.', 'rank-math' ); ?></a></li>
 		</ul>
 	</div>

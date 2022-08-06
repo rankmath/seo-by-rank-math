@@ -145,7 +145,7 @@ class Request {
 	 * @return array|false Assoc array of decoded result.
 	 */
 	private function make_request( $http_verb, $url, $args = [], $timeout = 10 ) {
-		// Early Bail!!
+		// Early bail.
 		if ( ! $this->refresh_token() || ! is_scalar( $this->token ) ) {
 			if ( ! $this->is_notice_added ) {
 				$this->is_notice_added = true;

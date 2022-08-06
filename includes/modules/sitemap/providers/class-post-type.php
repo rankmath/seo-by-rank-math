@@ -162,7 +162,7 @@ class Post_Type implements Provider {
 	 */
 	public function get_sitemap_links( $type, $max_entries, $current_page ) {
 		$links     = [];
-		$steps     = min( 100, $max_entries );
+		$steps     = $max_entries;
 		$offset    = ( $current_page > 1 ) ? ( ( $current_page - 1 ) * $max_entries ) : 0;
 		$total     = ( $offset + $max_entries );
 		$typecount = $this->get_post_type_count( $type );

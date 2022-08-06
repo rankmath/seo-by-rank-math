@@ -89,7 +89,7 @@ class Updates implements Runner {
 
 		foreach ( self::$updates as $version => $path ) {
 			if ( version_compare( $installed_version, $version, '<' ) ) {
-				include $path;
+				include $path; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 				update_option( 'rank_math_version', $version );
 			}
 		}

@@ -107,10 +107,10 @@ class Jobs {
 		global $wpdb;
 
 		// Delete all useless data from console data table.
-		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
+		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Direct database query ok, can't cache DELETE query.
 
 		// Delete useless data from inspections table too.
-		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_inspections WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
+		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_inspections WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Direct database query ok, can't cache DELETE query.
 
 		delete_transient( 'rank_math_analytics_data_info' );
 		DB::purge_cache();

@@ -86,7 +86,7 @@ class Url_Inspection {
 	 * @param int   $per_page Number of items per page.
 	 */
 	public function get_inspections( $params, $per_page ) {
-		// Early Bail!!
+		// Early bail.
 		if ( ! DB_Helper::check_table_exists( 'rank_math_analytics_inspections' ) ) {
 			return;
 		}

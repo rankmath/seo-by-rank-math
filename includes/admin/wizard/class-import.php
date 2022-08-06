@@ -46,7 +46,7 @@ class Import implements Wizard_Step {
 		</div>
 		<textarea id="import-progress" class="import-progress-area large-text" disabled="disabled" rows="8"></textarea>
 		<footer class="form-footer wp-core-ui rank-math-ui">
-			<button type="submit" class="button button-secondary button-deactivate-plugins" data-deactivate-message="<?php esc_html_e( 'Deactivating Plugins...', 'rank-math' ); ?>"><?php esc_html_e( 'Skip, Don\'t Import Now', 'rank-math' ); ?></button>
+			<button type="submit" class="button button-secondary button-deactivate-plugins" data-deactivate-message="<?php esc_attr_e( 'Deactivating Plugins...', 'rank-math' ); ?>"><?php esc_html_e( 'Skip, Don\'t Import Now', 'rank-math' ); ?></button>
 			<button type="submit" class="button button-primary button-continue" style="display:none"><?php esc_html_e( 'Continue', 'rank-math' ); ?></button>
 			<button type="submit" class="button button-primary button-import"><?php esc_html_e( 'Start Import', 'rank-math' ); ?></button>
 		</footer>

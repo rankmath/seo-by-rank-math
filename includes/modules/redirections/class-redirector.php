@@ -359,7 +359,7 @@ class Redirector {
 	private function set_404() {
 		global $wp_query;
 
-		$wp_query         = is_object( $wp_query ) ? $wp_query : new WP_Query();
+		$wp_query         = is_object( $wp_query ) ? $wp_query : new WP_Query(); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- We need to set this global here.
 		$wp_query->is_404 = true;
 	}
 

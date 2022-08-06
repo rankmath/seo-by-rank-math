@@ -29,7 +29,7 @@ class Your_Site implements Wizard_Step {
 	 * @return void
 	 */
 	public function render( $wizard ) {
-		include_once $wizard->get_view( 'your-site' );
+		include_once $wizard->get_view( 'your-site' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 	}
 
 	/**

@@ -82,7 +82,7 @@ class Serp_Preview {
 				<div class="serp-preview-body">
 					<div class="serp-url-wrapper">
 						<img src="<?php echo $favicon; // phpcs:ignore ?>" width="16" height="16" class="serp-favicon" />
-						<span class="serp-url" data-baseurl="<?php echo trailingslashit( substr( $data['url'], 0, strrpos( $data['url'], '/' ) ) ); ?>" data-format="<?php echo esc_attr( $data['permalink_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter permalink', 'rank-math' ); ?>"><?php echo esc_url( $data['permalink'] ); ?></span>
+						<span class="serp-url" data-baseurl="<?php echo esc_attr( trailingslashit( substr( $data['url'], 0, strrpos( $data['url'], '/' ) ) ) ); ?>" data-format="<?php echo esc_attr( $data['permalink_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter permalink', 'rank-math' ); ?>"><?php echo esc_url( $data['permalink'] ); ?></span>
 					</div>
 					<h5 class="serp-title" data-format="<?php echo esc_attr( $data['title_format'] ); ?>" data-empty-title="<?php esc_attr_e( 'Click to enter custom title', 'rank-math' ); ?>"></h5>
 
@@ -163,7 +163,11 @@ class Serp_Preview {
 		$title_format = $title_format ? $title_format : '%term%';
 
 		// Get the permalink.
-		$permalink = untrailingslashit( esc_url( get_term_link( $term_id, $term->taxonomy ) ) );
+		$term_link = get_term_link( $term_id, $term->taxonomy );
+		if ( ! is_string( $term_link ) ) {
+			$term_link = '';
+		}
+		$permalink = untrailingslashit( esc_url( $term_link ) );
 		$termlink  = $wp_rewrite->get_extra_permastruct( $term->taxonomy );
 
 		// Pretty permalinks disabled.

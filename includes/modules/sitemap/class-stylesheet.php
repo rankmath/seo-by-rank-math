@@ -56,7 +56,7 @@ class Stylesheet extends XML {
 			die;
 		}
 
-		require_once 'sitemap-xsl.php';
+		require_once rank_math()->plugin_dir() . 'includes/modules/sitemap/sitemap-xsl.php';
 		die;
 	}
 }

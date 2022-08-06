@@ -27,13 +27,13 @@ function rank_math_1_0_67_alter_404_logs_table() {
 		return;
 	}
 
-	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" );
+	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not needed.
 	if ( empty( $blog_ids ) ) {
 		return;
 	}
 
 	foreach ( $blog_ids as $blog_id ) {
-		switch_to_blog( $blog_id );
+		switch_to_blog( $blog_id ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.switch_to_blog_switch_to_blog
 
 		if ( DB::check_table_exists( 'rank_math_404_logs' ) ) {
 			$wpdb->query( $table_schema ); // phpcs:ignore

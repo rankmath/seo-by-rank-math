@@ -251,9 +251,9 @@ class Product_WooCommerce {
 
 		$offer = [
 			'@type'           => 'Offer',
-			'price'           => $product->get_price() ? wc_format_decimal( $product->get_price(), wc_get_price_decimals() ) : '0',
-			'priceCurrency'   => get_woocommerce_currency(),
-			'priceValidUntil' => $product->is_on_sale() && ! empty( $product->get_date_on_sale_to() ) ? date_i18n( 'Y-m-d', strtotime( $product->get_date_on_sale_to() ) ) : date( 'Y-12-31', time() + YEAR_IN_SECONDS ),
+			'price'           => $product->get_price() ? \wc_format_decimal( $product->get_price(), \wc_get_price_decimals() ) : '0',
+			'priceCurrency'   => \get_woocommerce_currency(),
+			'priceValidUntil' => $product->is_on_sale() && ! empty( $product->get_date_on_sale_to() ) ? date_i18n( 'Y-m-d', strtotime( $product->get_date_on_sale_to() ) ) : gmdate( 'Y-12-31', time() + YEAR_IN_SECONDS ),
 			'availability'    => $product->is_in_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
 			'itemCondition'   => 'NewCondition',
 			'url'             => $product->get_permalink(),
@@ -291,7 +291,7 @@ class Product_WooCommerce {
 			$offer = [
 				'@type'           => 'Offer',
 				'price'           => $lowest,
-				'priceValidUntil' => date( 'Y-12-31', time() + YEAR_IN_SECONDS ),
+				'priceValidUntil' => date( 'Y-12-31', gmtime() + YEAR_IN_SECONDS ),
 			];
 
 			// Set Price Specification.

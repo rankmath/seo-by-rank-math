@@ -737,7 +737,7 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 				'before'    => $date->format( 'Y-m-d H:i' ),
 				'inclusive' => true,
 			),
-			'tax_query'        => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+			'tax_query'        => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 				array(
 					'taxonomy'         => self::GROUP_TAXONOMY,
 					'field'            => 'slug',

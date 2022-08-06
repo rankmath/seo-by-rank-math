@@ -66,14 +66,14 @@ class Post_Filters implements Runner {
 			$query->set( 'meta_type', 'numeric' );
 		}
 
-		if ( empty( $_GET['pillar_content'] ) && empty( $_GET['seo-filter'] ) ) {
+		if ( empty( $_GET['pillar_content'] ) && empty( $_GET['seo-filter'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- No action, nonce is not required.
 			return;
 		}
 
 		$meta_query = [];
 
 		// Check for Pillar Content filter.
-		if ( ! empty( $_GET['pillar_content'] ) ) {
+		if ( ! empty( $_GET['pillar_content'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- No action, nonce is not required.
 			$meta_query[] = [
 				'key'   => 'rank_math_pillar_content',
 				'value' => 'on',
@@ -192,14 +192,15 @@ class Post_Filters implements Runner {
 	public function add_pillar_content_filter_link( $views ) {
 		global $typenow;
 
-		$current = empty( $_GET['pillar_content'] ) ? '' : ' class="current" aria-current="page"';
-		$pillars = get_posts(
+		$current = empty( $_GET['pillar_content'] ) ? '' : ' class="current" aria-current="page"'; // phpcs:ignore WordPress.Security.NonceVerification -- No action, nonce is not required.
+		$pillars = get_posts( // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts -- "suppress_filters" is set to false.
 			[
-				'post_type'      => $typenow,
-				'fields'         => 'ids',
-				'posts_per_page' => -1,
-				'meta_key'       => 'rank_math_pillar_content',
-				'meta_value'     => 'on',
+				'post_type'        => $typenow,
+				'fields'           => 'ids',
+				'posts_per_page'   => -1,
+				'meta_key'         => 'rank_math_pillar_content',
+				'meta_value'       => 'on',                         // phpcs:ignore WordPress.DB.SlowDBQuery -- We need to use meta_value to get the Pillar Content posts.
+				'suppress_filters' => false,
 			]
 		);
 
@@ -317,9 +318,9 @@ class Post_Filters implements Runner {
 			is_null( $screen ) ||
 			'edit' !== $screen->base ||
 			(
-				! isset( $_GET['focus_keyword'] ) &&
-				! isset( $_GET['fk_in_title'] ) &&
-				! isset( $_GET['review_posts'] )
+				! isset( $_GET['focus_keyword'] ) && // phpcs:ignore WordPress.Security.NonceVerification -- No action, nonce is not required.
+				! isset( $_GET['fk_in_title'] ) && // phpcs:ignore WordPress.Security.NonceVerification -- No action, nonce is not required.
+				! isset( $_GET['review_posts'] ) // phpcs:ignore WordPress.Security.NonceVerification -- No action, nonce is not required.
 			)
 		) {
 			return false;

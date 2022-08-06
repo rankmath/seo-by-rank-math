@@ -505,7 +505,7 @@ abstract class Plugin_Importer {
 		}
 
 		foreach ( $this->table_names as $table ) {
-			$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}{$table}" );
+			$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}{$table}" ); // phpcs:ignore -- Direct DB call OK, schema change OK, cache not applicable.
 		}
 
 		return true;

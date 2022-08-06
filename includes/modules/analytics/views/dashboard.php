@@ -21,9 +21,9 @@ $path = rank_math()->admin_dir() . 'wizard/views/'; // phpcs:ignore
 
 	<?php
 	if ( ! Helper::is_site_connected() ) {
-		require_once $path . 'rank-math-connect.php';
+		require_once $path . 'rank-math-connect.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 	} elseif ( ! Authentication::is_authorized() ) {
-		require_once $path . 'google-connect.php';
+		require_once $path . 'google-connect.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 	} else {
 		echo '<div class="rank-math-analytics" id="rank-math-analytics"></div>';
 	}

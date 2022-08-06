@@ -165,7 +165,7 @@ class Options {
 				]
 			);
 
-			include $located;
+			include $located; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable -- $located is always safe.
 
 			$this->do_action( "admin/settings/{$id}", $cmb, $tab );
 
@@ -193,6 +193,7 @@ class Options {
 	 * @param CMB2 $cmb The CMB2 object to hookup.
 	 */
 	public function set_defaults( $cmb ) {
+		$defaults = [];
 		foreach ( $cmb->prop( 'fields' ) as $id => $field_args ) {
 			$field = $cmb->get_field( $id );
 			if ( isset( $field_args['default'] ) || isset( $field_args['default_cb'] ) ) {
@@ -346,6 +347,7 @@ class Options {
 			return false;
 		}
 
+		$id   = sanitize_key( $id );
 		$file = isset( $tab['file'] ) && ! empty( $tab['file'] ) ? $tab['file'] : rank_math()->includes_dir() . "settings/{$this->folder}/{$id}.php";
 
 		return file_exists( $file ) ? $file : false;

@@ -406,7 +406,7 @@ class AJAX {
 	 * @return boolean
 	 */
 	private function is_site_in_search_console() {
-		// Early Bail!!
+		// Early bail.
 		if ( Helper::is_localhost() ) {
 			return true;
 		}

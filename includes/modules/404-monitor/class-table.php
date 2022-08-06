@@ -46,7 +46,7 @@ class Table extends List_Table {
 	public function prepare_items() {
 		global $per_page;
 
-		$per_page = $this->get_items_per_page( 'rank_math_404_monitor_per_page', 100 );
+		$per_page = $this->get_items_per_page( 'rank_math_404_monitor_per_page', 100 ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Need to set it for pagination.
 		$search   = $this->get_search();
 
 		$data = DB::get_logs(

@@ -67,7 +67,7 @@ class GTag {
 	 * Add analytics tag.
 	 */
 	public function add_analytics_tag() {
-		// Early Bail!!
+		// Early bail.
 		$use_snippet = $this->get( 'install_code' );
 		if ( ! $use_snippet ) {
 			return;

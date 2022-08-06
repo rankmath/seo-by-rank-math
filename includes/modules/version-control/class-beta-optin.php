@@ -72,7 +72,7 @@ class Beta_Optin {
 		$transient = get_site_transient( 'update_plugins' );
 		if ( self::has_beta_update( $transient ) ) {
 			// No-js fallback.
-			echo '<html><head></head><body style="margin: 0;"><iframe src="' . esc_attr( self::BETA_CHANGELOG_URL ) . '" style="width: 100%; height: 100%;"></body></html>';
+			echo '<html><head></head><body style="margin: 0;"><iframe src="' . esc_url( self::BETA_CHANGELOG_URL ) . '" style="width: 100%; height: 100%;"></body></html>';
 			exit;
 		}
 	}

@@ -46,11 +46,7 @@ class Compatibility {
 	 */
 	public function subscribe_to_comments_reloaded( $page_id ) {
 		if ( is_plugin_active( 'subscribe-to-comments-reloaded/subscribe-to-comments-reloaded.php' ) ) {
-			$page_permalink = get_option( 'subscribe_reloaded_manager_page', '/comment-subscriptions/' );
-			if ( function_exists( 'qtrans_convertURL' ) ) {
-				$page_permalink = qtrans_convertURL( $page_permalink );
-			}
-			if ( ( strpos( $_SERVER['REQUEST_URI'], $page_permalink ) !== false ) ) {
+			if ( isset( $_SERVER['REQUEST_URI'] ) && strpos( esc_url_raw( $_SERVER['REQUEST_URI'] ), $this->subscribe_to_comments_reloaded_get_page_permalink() ) !== false ) {
 				$this->action( 'rank_math/head', 'subscribe_to_comments_reloaded_remove_robots', 1 );
 				return get_queried_object_id();
 			}
@@ -64,6 +60,18 @@ class Compatibility {
 	 */
 	public function subscribe_to_comments_reloaded_remove_robots() {
 		remove_action( 'rank_math/frontend/robots', '__return_empty_array' );
+	}
+
+	/**
+	 * Get the page permalink for Subscribe to Comments Reloaded.
+	 */
+	private function subscribe_to_comments_reloaded_get_page_permalink() {
+		$page_permalink = get_option( 'subscribe_reloaded_manager_page', '/comment-subscriptions/' );
+		if ( function_exists( 'qtrans_convertURL' ) ) {
+			$page_permalink = qtrans_convertURL( $page_permalink );
+		}
+
+		return $page_permalink;
 	}
 
 	/**

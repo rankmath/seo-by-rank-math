@@ -265,10 +265,11 @@ class SEOPress extends Plugin_Importer {
 	 * @return array
 	 */
 	protected function redirections() {
-		$redirections = get_posts(
+		$redirections = get_posts( // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts -- "suppress_filters" is set to false.
 			[
-				'posts_per_page' => -1,
-				'post_type'      => 'seopress_404',
+				'posts_per_page'   => -1,
+				'post_type'        => 'seopress_404',
+				'suppress_filters' => false,
 			]
 		);
 
@@ -631,7 +632,7 @@ class SEOPress extends Plugin_Importer {
 		$this->replace_meta( $hash, null, $object_id, $object_type, 'convert_variables' );
 
 		$redirection = [
-			'source'      => trim( parse_url( $source_url, PHP_URL_PATH ), '/' ),
+			'source'      => trim( wp_parse_url( $source_url, PHP_URL_PATH ), '/' ),
 			'destination' => $this->get_meta( $object_type, $object_id, '_seopress_redirections_value' ),
 			'code'        => $this->get_meta( $object_type, $object_id, '_seopress_redirections_type' ),
 			'status'      => $this->get_meta( $object_type, $object_id, '_seopress_redirections_enabled' ),

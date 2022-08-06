@@ -27,6 +27,8 @@ add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_bas
  * @return array
  */
 function rank_math_register_seo_analysis_basic_tests( $tests ) {
+	$new_tests = [];
+
 	$new_tests['site_description'] = [
 		'title'       => esc_html__( 'Site Tagline', 'rank-math' ),
 		/* translators: link to general setting screen */
@@ -296,7 +298,7 @@ function rank_math_analyze_focus_keywords() {
 		];
 	}
 
-	$in_search_post_types = get_post_types( [ 'exclude_from_search' => false ] );
+	$in_search_post_types = Helper::get_allowed_post_types();
 	$in_search_post_types = empty( $in_search_post_types ) ? '' : " AND {$wpdb->posts}.post_type IN ('" . join( "', '", array_map( 'esc_sql', $in_search_post_types ) ) . "')";
 
 	$meta_query = new WP_Meta_Query(
@@ -325,7 +327,7 @@ function rank_math_analyze_focus_keywords() {
 	$query  = "SELECT {$wpdb->posts}.ID, {$wpdb->posts}.post_type FROM $wpdb->posts {$mq_sql['join']} WHERE 1 = 1 {$mq_sql['where']}{$in_search_post_types} AND ({$wpdb->posts}.post_status = 'publish') GROUP BY {$wpdb->posts}.ID";
 	$data   = $wpdb->get_results( $query, ARRAY_A ); // phpcs:ignore
 
-	// Early Bail!
+	// Early bail.
 	if ( empty( $data ) ) {
 		return [
 			'status'  => 'ok',
@@ -352,7 +354,7 @@ function rank_math_analyze_post_titles() {
 	$info = [];
 	$data = rank_math_get_posts_with_titles();
 
-	// Early Bail!
+	// Early bail.
 	if ( empty( $data ) ) {
 		return [
 			'status'  => 'ok',
@@ -414,7 +416,7 @@ function rank_math_get_post_type_links( $rows, $extra_params ) {
 function rank_math_get_posts_with_titles() {
 	global $wpdb;
 
-	$in_post_types = get_post_types( [ 'exclude_from_search' => false ] );
+	$in_post_types = Helper::get_allowed_post_types();
 	$in_post_types = empty( $in_post_types ) ? '' : " AND {$wpdb->posts}.post_type IN ('" . join( "', '", array_map( 'esc_sql', $in_post_types ) ) . "')";
 	$meta_query    = new WP_Meta_Query(
 		[
@@ -452,10 +454,13 @@ function rank_math_get_posts_with_titles() {
  * @return array
  */
 function rank_math_analyze_group_result( $data ) {
+	$rows = [];
+
 	foreach ( $data as $val ) {
 		$key            = array_key_exists( 'post_type', $val ) ? $val['post_type'] : '';
 		$rows[ $key ][] = $val;
 	}
+
 	return $rows;
 }
 

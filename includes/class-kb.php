@@ -130,7 +130,7 @@ class KB {
 	 * @param string $id Id of the link to get.
 	 */
 	public static function the( $id ) {
-		echo self::get( $id );
+		echo esc_url( self::get( $id ) );
 	}
 
 	/**

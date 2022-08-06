@@ -15,9 +15,9 @@ use RankMath\OpenGraph\Image as OpenGraph_Image;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * WC Opengraph class.
+ * WC Opengraph_Data class.
  */
-class Opengraph extends Sitemap {
+class Opengraph_Data extends Sitemap_Integration {
 
 	/**
 	 * Register hooks.

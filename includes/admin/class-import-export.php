@@ -70,7 +70,7 @@ class Import_Export implements Runner {
 	 * @return void
 	 */
 	public function display() {
-		include $this->get_view( 'main' );
+		include $this->get_view( 'main' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable -- Method parameter is sanitized.
 	}
 
 	/**
@@ -85,7 +85,7 @@ class Import_Export implements Runner {
 			}
 
 			echo '<div class="' . ( isset( $panel['class'] ) ? esc_attr( $panel['class'] ) : '' ) . '">';
-			include $panel['view'];
+			include $panel['view']; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable -- The $panel['view'] is always safe and does not come from user input.
 			echo '</div>';
 		}
 	}
@@ -355,7 +355,7 @@ class Import_Export implements Runner {
 		$settings = $wp_filesystem->get_contents( $file['file'] );
 		$settings = json_decode( $settings, true );
 
-		\unlink( $file['file'] );
+		\unlink( $file['file'] ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink -- no need for helper function here to get the directory path.
 
 		if ( is_array( $settings ) && $this->do_import_data( $settings ) ) {
 			Helper::add_notification( esc_html__( 'Settings successfully imported. Your old configuration has been saved as a backup.', 'rank-math' ), [ 'type' => 'success' ] );
@@ -376,7 +376,7 @@ class Import_Export implements Runner {
 		$this->filter( 'wp_check_filetype_and_ext', 'filetype_and_ext', 10, 4 );
 
 		// Do the upload.
-		$file = wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] );
+		$file = wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated -- isset() is checked in the handler() method, before calling import(), which calls this method.
 
 		// Remove upload hooks.
 		$this->remove_filter( 'upload_mimes', 'allow_txt_upload', 10 );
@@ -559,6 +559,7 @@ class Import_Export implements Runner {
 			$panels = [ 'general', 'titles', 'sitemap', 'role-manager', 'redirections' ];
 		}
 
+		$data     = [];
 		$settings = rank_math()->settings->all_raw();
 		foreach ( $panels as $panel ) {
 			if ( isset( $settings[ $panel ] ) ) {

@@ -150,7 +150,7 @@ trait Api {
 		$data = wp_remote_get(
 			$url,
 			[
-				'timeout' => 60,
+				'timeout' => 60, // phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout -- The request might take long, but it runs in an ajax request anyway.
 			]
 		);
 

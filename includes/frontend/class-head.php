@@ -158,7 +158,7 @@ class Head {
 		$this->credits( true );
 
 		if ( ! empty( $old_wp_query ) ) {
-			$GLOBALS['wp_query'] = $old_wp_query;
+			$GLOBALS['wp_query'] = $old_wp_query; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Resetting global variables.
 			unset( $old_wp_query );
 		}
 	}
@@ -185,7 +185,7 @@ class Head {
 		$generated = Paper::get()->get_description();
 
 		if ( Str::is_non_empty( $generated ) ) {
-			echo '<meta name="description" content="' . $generated . '"/>', "\n";
+			echo '<meta name="description" content="' . esc_attr( $generated ) . '"/>', "\n";
 		}
 	}
 
@@ -346,7 +346,14 @@ class Head {
 		 */
 		$link = $this->do_filter( "frontend/{$rel}_rel_link", '<link rel="' . esc_attr( $rel ) . '" href="' . esc_url( $url ) . "\" />\n" );
 		if ( Str::is_non_empty( $link ) ) {
-			echo $link;
+			$allowed_tags = [
+				'a' => [
+					'href' => [],
+					'title' => [],
+					'rel' => [],
+				],
+			];
+			echo wp_kses( $link, $allowed_tags );
 		}
 	}
 
@@ -416,16 +423,16 @@ class Head {
 		$content = ob_get_clean();
 		$title   = Paper::get()->get_title();
 		if ( empty( $title ) ) {
-			echo $content;
+			echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- This is the output buffer, escaping is unnecessary.
 		}
 
 		// Find all title tags, remove them, and add the new one.
 		$content = preg_replace( '/<title.*?\/title>/i', '', $content );
 		$content = str_replace( '<head>', '<head>' . "\n" . '<title>' . esc_html( $title ) . '</title>', $content );
 		if ( ! empty( $old_wp_query ) ) {
-			$GLOBALS['wp_query'] = $old_wp_query;
+			$GLOBALS['wp_query'] = $old_wp_query; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited -- Reset the global query.
 		}
 
-		echo $content;
+		echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- This is the output buffer, escaping is unnecessary.
 	}
 }

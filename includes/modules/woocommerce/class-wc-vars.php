@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * WC Variables class.
  */
-class WC_Vars extends Opengraph {
+class WC_Vars extends Opengraph_Data {
 
 	/**
 	 * The Constructor.

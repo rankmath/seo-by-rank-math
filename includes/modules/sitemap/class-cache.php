@@ -253,14 +253,14 @@ class Cache {
 	private static function clear_transients( $type = null ) {
 		global $wpdb;
 		if ( is_null( $type ) ) {
-			return $wpdb->delete(
+			return $wpdb->delete( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 				$wpdb->options,
 				[ 'option_name' => $wpdb->esc_like( '_transient_sitemap_' ) . '%' ],
 				[ '%s' ]
 			);
 		}
 
-		return $wpdb->delete(
+		return $wpdb->delete( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 			$wpdb->options,
 			[ 'option_name' => $wpdb->esc_like( '_transient_sitemap_' . $type ) . '%' ],
 			[ '%s' ]

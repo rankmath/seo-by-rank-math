@@ -30,14 +30,14 @@ class Notices implements Runner {
 	 * Register hooks.
 	 */
 	public function hooks() {
-		$this->action( 'admin_init', 'notices' );
+		$this->action( 'admin_init', 'show_notices' );
 		$this->action( 'wp_helpers_notification_dismissed', 'notice_dismissible' );
 	}
 
 	/**
 	 * Run all notices routine.
 	 */
-	public function notices() {
+	public function show_notices() {
 		$this->is_plugin_configured();
 		$this->new_post_type();
 		$this->convert_wpml_settings();

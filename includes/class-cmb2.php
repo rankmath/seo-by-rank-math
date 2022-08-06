@@ -116,9 +116,9 @@ class CMB2 {
 	 */
 	public static function render_raw( $field_args, $field ) {
 		if ( $field->args( 'file' ) ) {
-			include $field->args( 'file' );
+			include $field->args( 'file' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 		} elseif ( $field->args( 'content' ) ) {
-			echo $field->args( 'content' );
+			echo wp_kses_post( $field->args( 'content' ) );
 		}
 
 		return $field;
@@ -134,9 +134,9 @@ class CMB2 {
 	 */
 	public static function render_tab_container_open( $field_args, $field ) {
 		$active = Param::get( 'rank-math-tab', 'general' );
-		echo '<div id="' . $field->prop( 'id' ) . '" class="rank-math-tabs">';
+		echo '<div id="' . esc_attr( $field->prop( 'id' ) ) . '" class="rank-math-tabs">';
 		?>
-		<div class="rank-math-tabs-navigation <?php echo $field->prop( 'classes' ); ?>">
+		<div class="rank-math-tabs-navigation <?php echo esc_attr( $field->prop( 'classes' ) ); ?>">
 
 			<?php
 			foreach ( $field->args( 'tabs' ) as $id => $tab ) :
@@ -145,14 +145,14 @@ class CMB2 {
 				}
 
 				if ( isset( $tab['type'] ) && 'seprator' === $tab['type'] ) {
-					printf( '<span class="separator">%s</span>', $tab['title'] );
+					printf( '<span class="separator">%s</span>', esc_html( $tab['title'] ) );
 					continue;
 				}
 
 				$class  = isset( $tab['classes'] ) ? $tab['classes'] : '';
 				$class .= $id === $active ? ' active' : '';
 				?>
-				<a href="#setting-panel-<?php echo $id; ?>" class="<?php echo $class; ?>"><span class="<?php echo esc_attr( $tab['icon'] ); ?>"></span><?php echo $tab['title']; ?></a>
+				<a href="#setting-panel-<?php echo esc_attr( $id ); ?>" class="<?php echo esc_attr( $class ); ?>"><span class="<?php echo esc_attr( $tab['icon'] ); ?>"></span><?php echo esc_html( $tab['title'] ); ?></a>
 			<?php endforeach; ?>
 
 		</div>
@@ -206,7 +206,7 @@ class CMB2 {
 	 */
 	public static function render_tab_container_close( $field_args, $field ) {
 		echo '</div><!-- /.rank-math-tabs-content -->';
-		echo '</div><!-- /#' . $field->prop( 'id' ) . ' -->';
+		echo '</div><!-- /#' . esc_html( $field->prop( 'id' ) ) . ' -->';
 
 		return $field;
 	}
@@ -221,8 +221,8 @@ class CMB2 {
 	 */
 	public static function render_tab( $field_args, $field ) {
 		printf(
-			true === $field->prop( 'open' ) ? '<div id="%1$s" class="rank-math-tab rank-math-options-panel-content ' . $field->prop( 'classes' ) . '">' : '</div><!-- /#%1$s -->',
-			$field->prop( 'id' )
+			true === $field->prop( 'open' ) ? '<div id="%1$s" class="rank-math-tab rank-math-options-panel-content ' . esc_attr( $field->prop( 'classes' ) ) . '">' : '</div><!-- /#%1$s -->', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- This is a false positive.
+			esc_attr( $field->prop( 'id' ) )
 		);
 
 		return $field;
@@ -369,7 +369,7 @@ class CMB2 {
 
 		$advanced_robots = [];
 		foreach ( $robots as $key => $robot ) {
-			$advanced_robots[ $key ] = ! empty( $robot['enable'] ) ? $robot['length'] : false;
+			$advanced_robots[ $key ] = ! empty( $robot['enable'] ) && isset( $robot['length'] ) ? $robot['length'] : false;
 		}
 
 		return $advanced_robots;

@@ -50,7 +50,7 @@ function rank_math_1_0_50_recreate_as() {
 		'actionscheduler_claims',
 	];
 
-	$found_tables = $wpdb->get_col( "SHOW TABLES LIKE '{$wpdb->prefix}actionscheduler%'" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+	$found_tables = $wpdb->get_col( "SHOW TABLES LIKE '{$wpdb->prefix}actionscheduler%'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not needed.
 	foreach ( $table_list as $table_name ) {
 		if ( ! in_array( $wpdb->prefix . $table_name, $found_tables, true ) ) {
 			rank_math_1_0_50_recreate_tables();

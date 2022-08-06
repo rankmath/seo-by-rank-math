@@ -208,7 +208,7 @@ class Post_Variables extends Advanced_Variables {
 			[
 				'name'        => esc_html__( 'Categories (advanced)', 'rank-math' ),
 				'description' => esc_html__( 'Output list of categories associated to the current post, with customization options.', 'rank-math' ),
-				'variable'    => 'categories(limit=3&separator= | &exclude=12,23)',
+				'variable'    => 'categories(limit=3&separator= | &exclude=12,23)', // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- False positive.
 				'example'     => $categories ? $categories : esc_html__( 'Example Category 1, Example Category 2', 'rank-math' ),
 			],
 			[ $this, 'get_categories' ]
@@ -250,7 +250,7 @@ class Post_Variables extends Advanced_Variables {
 			[
 				'name'        => esc_html__( 'Tags (advanced)', 'rank-math' ),
 				'description' => esc_html__( 'Output list of tags associated to the current post, with customization options.', 'rank-math' ),
-				'variable'    => 'tags(limit=3&separator= | &exclude=12,23)',
+				'variable'    => 'tags(limit=3&separator= | &exclude=12,23)', // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- False positive.
 				'example'     => $tags ? $tags : esc_html__( 'Example Tag 1 | Example Tag 2', 'rank-math' ),
 				'nocache'     => true,
 			],
@@ -285,7 +285,7 @@ class Post_Variables extends Advanced_Variables {
 
 		$object = $this->args;
 
-		// Early Bail!
+		// Early bail.
 		if ( empty( $object ) || empty( $object->ID ) ) {
 			return '';
 		}
@@ -310,7 +310,7 @@ class Post_Variables extends Advanced_Variables {
 
 		$object = $this->args;
 
-		// Early Bail!
+		// Early bail.
 		if ( empty( $object ) || empty( $object->ID ) ) {
 			return '';
 		}
@@ -343,7 +343,7 @@ class Post_Variables extends Advanced_Variables {
 	public function get_excerpt() {
 		$object = $this->args;
 
-		// Early Bail!
+		// Early bail.
 		if ( empty( $object ) ) {
 			return '';
 		}

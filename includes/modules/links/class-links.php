@@ -132,9 +132,10 @@ class Links {
 
 		$posts = get_posts(
 			[
-				'post_type'   => array_keys( $post_types ),
-				'post_status' => [ 'publish', 'future' ],
-				'meta_query'  => [
+				'suppress_filters' => false,
+				'post_type'        => array_keys( $post_types ),
+				'post_status'      => [ 'publish', 'future' ],
+				'meta_query'       => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Slow query is ok in cron.
 					[
 						'key'     => 'rank_math_internal_links_processed',
 						'compare' => 'NOT EXISTS',

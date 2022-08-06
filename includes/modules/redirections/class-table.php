@@ -42,7 +42,7 @@ class Table extends List_Table {
 	public function prepare_items() {
 		global $per_page;
 
-		$per_page = $this->get_items_per_page( 'rank_math_redirections_per_page', 100 );
+		$per_page = $this->get_items_per_page( 'rank_math_redirections_per_page', 100 ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Need to set it for pagination.
 
 		$data = DB::get_redirections(
 			[
@@ -154,7 +154,7 @@ class Table extends List_Table {
 		}
 
 		// Show more button.
-		$html .= ' <a href="#" class="rank-math-showmore" title="' . esc_html__( 'Show more', 'rank-math' ) . '">[&hellip;]</a>';
+		$html .= ' <a href="#" class="rank-math-showmore" title="' . esc_attr__( 'Show more', 'rank-math' ) . '">[&hellip;]</a>';
 		$html .= '<div class="rank-math-more">';
 
 		// Loop remaining.
@@ -164,7 +164,7 @@ class Table extends List_Table {
 		}
 
 		$html .= join( '<br>', $parts );
-		$html .= '<br><a href="#" class="rank-math-hidemore" title="' . esc_html__( 'Hide details', 'rank-math' ) . '">[' . esc_html__( 'Hide', 'rank-math' ) . ']</a>';
+		$html .= '<br><a href="#" class="rank-math-hidemore" title="' . esc_attr__( 'Hide details', 'rank-math' ) . '">[' . esc_html__( 'Hide', 'rank-math' ) . ']</a>';
 		$html .= '</div>';
 
 		return $html;

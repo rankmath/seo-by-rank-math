@@ -146,20 +146,19 @@ class Frontend_SEO_Score {
 			<div class="rank-math-seo-score template-<?php echo sanitize_html_class( $args['template'], 'circle' ); ?> <?php echo sanitize_html_class( $rating, 'unknown' ); ?>-seo <?php echo esc_attr( $args['class'] ); ?>">
 
 				<span class="score">
-					<?php echo esc_html( absint( $score ) ); ?>
-					<span class="outof">
-						/ 100
-					</span>
+					<?php echo esc_html( absint( $score ) ); ?><span class="outof">/ 100</span>
 				</span>
 
 				<?php if ( $args['backlink'] ) : ?>
 					<div class="backlink">
 						<span class="poweredby">
 							<?php
-							printf(
-								/* translators: %s is a Rank Math link. */
-								__( 'Powered by %s', 'rank-math' ),
-								$this->do_filter( 'frontend/seo_score/backlink', $backlink )
+							echo wp_kses_post(
+								sprintf(
+									/* translators: %s is a Rank Math link. */
+									__( 'Powered by %s', 'rank-math' ),
+									$this->do_filter( 'frontend/seo_score/backlink', $backlink )
+								)
 							);
 							?>
 						</span>

@@ -382,6 +382,8 @@ class DB {
 			return false;
 		}
 
+		$args = [];
+
 		$args['hits']          = absint( $redirection['hits'] ) + 1;
 		$args['last_accessed'] = current_time( 'mysql' );
 

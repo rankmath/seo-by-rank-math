@@ -38,7 +38,7 @@ trait Wizard {
 			return;
 		}
 
-		include_once $this->steps[ $this->step ]['view'];
+		include_once $this->steps[ $this->step ]['view']; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 	}
 
 	/**
@@ -61,7 +61,7 @@ trait Wizard {
 	 * @return boolean
 	 */
 	public function is_current_page() {
-		$page = isset( $_GET['page'] ) && ! empty( $_GET['page'] ) ? filter_input( INPUT_GET, 'page' ) : false;
+		$page = ! empty( $_GET['page'] ) ? sanitize_key( $_GET['page'] ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- No action, nonce is not required.
 		return $page === $this->slug;
 	}
 }

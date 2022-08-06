@@ -117,6 +117,15 @@ class SEO_Analyzer {
 	private function display_graphs() {
 		$data = $this->get_graph_metrices();
 		extract( $data ); // phpcs:ignore
+
+		if ( ! isset( $statuses ) ) {
+			$statuses = [
+				'ok'      => 0,
+				'warning' => 0,
+				'fail'    => 0,
+			];
+		}
+
 		$max = max( $statuses['ok'], $statuses['warning'], $statuses['fail'] );
 
 		include dirname( __FILE__ ) . '/views/graphs.php';
@@ -415,7 +424,7 @@ class SEO_Analyzer {
 			$this->api_url
 		);
 
-		$request = wp_remote_get( $api_url, [ 'timeout' => 30 ] );
+		$request = wp_remote_get( $api_url, [ 'timeout' => 30 ] ); // phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout -- This takes time.
 		if ( is_wp_error( $request ) ) {
 			$this->api_error = wp_strip_all_tags( $request->get_error_message() );
 			return false;

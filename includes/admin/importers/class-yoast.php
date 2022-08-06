@@ -178,7 +178,7 @@ class Yoast extends Plugin_Importer {
 
 			// Sitemap.
 			$key   = "taxonomies-{$taxonomy}-not_in_sitemap";
-			$value = isset( $yoast_sitemap[ $key ] ) ? ! $yoast_sitemap[ $key ] : false;
+			$value = isset( $yoast_titles[ $key ] ) ? ! $yoast_titles[ $key ] : false;
 
 			$this->sitemap[ "tax_{$taxonomy}_sitemap" ] = $value ? 'on' : 'off';
 		}
@@ -484,15 +484,13 @@ class Yoast extends Plugin_Importer {
 	 * @return int|array
 	 */
 	private function get_video_posts( $count = false ) {
-		global $wpdb;
-		$paged = $this->get_pagination_arg( 'page' );
-		$posts = get_posts(
+		$posts = get_posts( // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts -- "suppress_filters" is set to false.
 			[
 				'numberposts' => -1,
 				'post_type'   => 'any',
 				'post_status' => 'any',
 				'fields'      => 'ids',
-				'meta_query'  => [
+				'meta_query'  => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Slow query is OK here.
 					'relation' => 'AND',
 					[
 						'key'     => '_yoast_wpseo_video_meta',
@@ -503,6 +501,7 @@ class Yoast extends Plugin_Importer {
 						'compare' => 'NOT EXISTS',
 					],
 				],
+				'suppress_filters' => false,
 			]
 		);
 

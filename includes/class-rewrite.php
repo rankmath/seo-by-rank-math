@@ -82,7 +82,13 @@ class Rewrite {
 			return $query_vars;
 		}
 
-		$author_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key='rank_math_permalink' AND meta_value = %s", $query_vars['author_name'] ) );
+		$author_id = wp_cache_get( 'rank_math_rewrite_author_id', $query_vars['author_name'] );
+
+		if ( false === $author_id ) {
+			$author_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key='rank_math_permalink' AND meta_value = %s", $query_vars['author_name'] ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct query ok.
+			wp_cache_set( 'rank_math_rewrite_author_id', $author_id, $query_vars['author_name'] );
+		}
+
 		if ( $author_id ) {
 			$query_vars['author'] = $author_id;
 			unset( $query_vars['author_name'] );

@@ -28,7 +28,7 @@ trait DB {
 		global $wpdb;
 		$changed_collations = 0;
 
-		$prefixed = $wpdb->prefix . $table;
+		$prefixed = $wpdb->prefix . sanitize_key( $table );
 
 		$sql = "SHOW TABLES LIKE '{$wpdb->prefix}%'";
 		$res = $wpdb->get_col( $sql ); // phpcs:ignore
@@ -53,8 +53,8 @@ trait DB {
 		// If collation is not set or is incorrect, fix it.
 		if ( ! $current_collate || $current_collate !== $collate ) {
 			$sql = "ALTER TABLE `{$prefixed}` COLLATE={$collate}";
-			error_log( sprintf( 'Rank Math: Changing collation of `%1$s` table from %2$s to %3$s. SQL: "%4$s"', $prefixed, $current_collate, $collate, $sql ) ); // phpcs:ignore
-			$wpdb->query( $sql ); // phpcs:ignore
+			error_log( sprintf( 'Rank Math: Changing collation of `%1$s` table from %2$s to %3$s. SQL: "%4$s"', $prefixed, $current_collate, $collate, $sql ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Debugging.
+			$wpdb->query( $sql ); // phpcs:ignore -- Only $prefixed comes from input and that is sanitized. Also we can't use DB cache here, obviously.
 			$changed_collations++;
 		}
 
@@ -85,8 +85,8 @@ trait DB {
 			$default = ! empty( $col['Default'] ) ? "DEFAULT '{$col['Default']}'" : '';
 
 			$sql = "ALTER TABLE `{$prefixed}` MODIFY `{$col['Field']}` {$col['Type']} COLLATE {$collate} {$null} {$default}";
-			error_log( sprintf( 'Rank Math: Changing collation of `%1$s`.`%2$s` column from %3$s to %4$s. SQL: "%5$s"', $prefixed, $col['Field'], $current_collate, $collate, $sql ) ); // phpcs:ignore
-			$wpdb->query( $sql ); // phpcs:ignore
+			error_log( sprintf( 'Rank Math: Changing collation of `%1$s`.`%2$s` column from %3$s to %4$s. SQL: "%5$s"', $prefixed, $col['Field'], $current_collate, $collate, $sql ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Debugging.
+			$wpdb->query( $sql ); // phpcs:ignore -- Only $prefixed comes from input and that is sanitized. Also we can't use DB cache here, obviously.
 			$changed_collations++;
 		}
 

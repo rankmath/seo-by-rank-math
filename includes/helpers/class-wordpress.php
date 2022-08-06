@@ -575,4 +575,32 @@ trait WordPress {
 
 		return $home_url;
 	}
+
+	/**
+	 * Wrapper to set sane timeout for wp_remote_get().
+	 * 
+	 * @param string $url The URL to fetch.
+	 * @param array  $args Optional. Request arguments. Default empty array.
+	 */
+	public static function wp_remote_get( $url, $args = [] ) {
+		$args = wp_parse_args(
+			$args,
+			[
+				'timeout' => 10,
+			]
+		);
+
+		$response = wp_remote_get( $url, $args ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.wp_remote_get_wp_remote_get
+
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( 200 !== $response_code ) {
+			return false;
+		}
+
+		return wp_remote_retrieve_body( $response );
+	}
 }

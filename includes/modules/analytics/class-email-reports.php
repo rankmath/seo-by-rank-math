@@ -284,7 +284,7 @@ class Email_Reports {
 		 */
 		$report_email = $this->do_filter( 'analytics/email_report_parameters', $report_email );
 
-		wp_mail(
+		wp_mail( // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.wp_mail_wp_mail -- wp_mail is used here for sending a single email, not bulk emails.
 			$report_email['to'],
 			$report_email['subject'],
 			$report_email['message'],
@@ -311,7 +311,7 @@ class Email_Reports {
 		}
 
 		ob_start();
-		include_once $file;
+		include_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 		$content = ob_get_clean();
 
 		/**
@@ -340,7 +340,7 @@ class Email_Reports {
 		}
 
 		extract( $args, EXTR_SKIP ); // phpcs:ignore
-		include $file;
+		include $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 	}
 
 	/**

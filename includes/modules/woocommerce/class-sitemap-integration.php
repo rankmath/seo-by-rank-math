@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * WC Sitemap class.
  */
-class Sitemap {
+class Sitemap_Integration {
 
 	/**
 	 * Register hooks.
@@ -107,22 +107,37 @@ class Sitemap {
 			$product_gallery = get_post_meta( $post_id, '_product_image_gallery', true );
 			$attachments     = array_filter( explode( ',', $product_gallery ) );
 			foreach ( $attachments as $attachment_id ) {
-				$image_src = wp_get_attachment_image_src( $attachment_id, 'full' );
-				if ( empty( $image_src ) ) {
-					continue;
-				}
-
-				$image = [
-					'src'   => $this->do_filter( 'sitemap/xml_img_src', $image_src[0], $post_id ),
-					'title' => get_the_title( $attachment_id ),
-					'alt'   => Attachment::get_alt_tag( $attachment_id ),
-				];
-				$images[]  = $image;
-
-				unset( $image, $image_src );
+				$images[] = $this->get_image_attributes( $attachment_id, $post_id );
 			}
 		}
 
+		$images = array_filter( $images );
+
 		return $images;
+	}
+
+	/**
+	 * Get image data.
+	 *
+	 * @param int $attachment_id The ID of the attachment.
+	 * @param int $post_id       The ID of the post object.
+	 *
+	 * @return array|bool
+	 */
+	private function get_image_attributes( $attachment_id, $post_id ) {
+		$image_src = wp_get_attachment_image_src( $attachment_id, 'full' );
+		if ( empty( $image_src ) ) {
+			return false;
+		}
+
+		$image = [
+			'src'   => $this->do_filter( 'sitemap/xml_img_src', $image_src[0], $post_id ),
+			'title' => get_the_title( $attachment_id ),
+			'alt'   => Attachment::get_alt_tag( $attachment_id ),
+		];
+
+		$image = $this->do_filter( 'sitemap/xml_img_attributes', $image, $post_id );
+
+		return $image;
 	}
 }

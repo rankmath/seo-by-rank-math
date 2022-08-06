@@ -141,7 +141,7 @@ class Shared extends WP_REST_Controller {
 		remove_all_filters( 'is_protected_meta' );
 		add_filter( 'is_protected_meta', [ $this, 'only_this_plugin' ], 10, 2 );
 
-		$sanitizer = Sanitize::get();
+		$sanitizer = Sanitizer::get();
 		foreach ( $meta as $meta_key => $meta_value ) {
 			// Delete schema by meta id.
 			if ( Str::starts_with( 'rank_math_delete_', $meta_key ) ) {

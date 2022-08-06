@@ -155,7 +155,7 @@ class Paper {
 		 */
 		$this->title = $this->do_filter( 'frontend/title', $this->paper->title() );
 
-		// Early Bail!!
+		// Early bail.
 		if ( '' === $this->title ) {
 			return $this->title;
 		}
@@ -192,7 +192,7 @@ class Paper {
 		*/
 		$this->description = $this->do_filter( 'frontend/description', trim( $this->paper->description() ) );
 
-		// Early Bail!!
+		// Early bail.
 		if ( '' === $this->description ) {
 			return $this->description;
 		}
@@ -267,7 +267,7 @@ class Paper {
 	 * Add Advanced robots.
 	 */
 	private function advanced_robots() {
-		// Early Bail if robots is set to noindex or nosnippet!
+		// Early bail if robots is set to noindex or nosnippet.
 		if ( ( isset( $this->robots['index'] ) && 'noindex' === $this->robots['index'] ) || ( isset( $this->robots['nosnippet'] ) && 'nosnippet' === $this->robots['nosnippet'] ) ) {
 			return;
 		}
@@ -330,7 +330,7 @@ class Paper {
 	 */
 	private function respect_settings_for_robots() {
 		// If blog is not public or replytocom is set, then force noindex.
-		if ( 0 === absint( get_option( 'blog_public' ) ) || isset( $_GET['replytocom'] ) ) {
+		if ( 0 === absint( get_option( 'blog_public' ) ) || isset( $_GET['replytocom'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- No action, nonce is not required.
 			$this->robots['index']  = 'noindex';
 			$this->robots['follow'] = 'nofollow';
 		}
@@ -376,7 +376,10 @@ class Paper {
 				'canonical_override' => false,
 			]
 		);
-		extract( $this->canonical ); // phpcs:ignore
+		
+		$canonical          = $this->canonical['canonical'];
+		$canonical_unpaged  = $this->canonical['canonical_unpaged'];
+		$canonical_override = $this->canonical['canonical_override'];
 
 		if ( is_front_page() || ( function_exists( 'ampforwp_is_front_page' ) && ampforwp_is_front_page() ) ) {
 			$canonical = user_trailingslashit( home_url() );

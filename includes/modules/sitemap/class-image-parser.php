@@ -502,7 +502,7 @@ class Image_Parser {
 
 		// When there are posts that should be excluded from result set.
 		if ( ! empty( $gallery['exclude'] ) ) {
-			$query['post__not_in'] = wp_parse_id_list( $gallery['exclude'] );
+			$query['post__not_in'] = wp_parse_id_list( $gallery['exclude'] ); // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn -- post__not_in is needed here.
 		}
 
 		return $this->get_attachments( $query );
@@ -549,8 +549,7 @@ class Image_Parser {
 			'orderby'             => 'date',
 			'order'               => 'DESC',
 			'meta_key'            => '',
-			'meta_value'          => '',
-			'suppress_filters'    => true,
+			'meta_value'          => '', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- This is just a default value, overridden when needed.
 			'ignore_sticky_posts' => true,
 			'no_found_rows'       => true,
 		];

@@ -56,7 +56,7 @@ class HTML {
 	 */
 	public static function attributes_to_string( $attributes = [], $prefix = '' ) {
 
-		// Early Bail!
+		// Early bail.
 		if ( empty( $attributes ) ) {
 			return false;
 		}

@@ -152,8 +152,8 @@ class Twitter extends OpenGraph {
 		if ( $size ) {
 			$size = Arr::from_string( $size, 'x' );
 			if ( isset( $size[1] ) ) {
-				$twitter_meta['twitter:player:width']  = (int) $size[0];
-				$twitter_meta['twitter:player:height'] = (int) $size[1];
+				$this->tag( 'twitter:player:width', (int) $size[0] );
+				$this->tag( 'twitter:player:height', (int) $size[1] );
 			}
 		}
 		$this->tag( 'twitter:player:stream', Helper::get_post_meta( 'twitter_player_stream' ) );

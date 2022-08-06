@@ -63,6 +63,8 @@ class Export {
 			return;
 		}
 
+		$text = [];
+
 		$text[] = '# Created by Rank Math';
 		$text[] = '# ' . date_i18n( 'r' );
 		$text[] = '# Rank Math ' . trim( rank_math()->version ) . ' - https://rankmath.com/';
@@ -85,6 +87,8 @@ class Export {
 	 * @return string
 	 */
 	private function apache( $items ) {
+		$output = [];
+
 		$output[] = '<IfModule mod_rewrite.c>';
 
 		foreach ( $items as $item ) {
@@ -127,6 +131,8 @@ class Export {
 	 * @return string
 	 */
 	private function nginx( $items ) {
+		$output = [];
+
 		$output[] = 'server {';
 
 		foreach ( $items as $item ) {

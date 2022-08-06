@@ -49,7 +49,7 @@ class Admin implements Runner {
 	 */
 	public function flush() {
 		if ( get_option( 'rank_math_flush_rewrite' ) ) {
-			flush_rewrite_rules();
+			flush_rewrite_rules(); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules -- We do want to flush rewrite rules here.
 			delete_option( 'rank_math_flush_rewrite' );
 		}
 	}
@@ -103,11 +103,11 @@ class Admin implements Runner {
 		$post_type  = get_post_type( $post_id );
 		$is_allowed = in_array( $post_type, Helper::get_allowed_post_types(), true );
 
-		if ( ! $is_allowed || Conditional::is_autosave() || Conditional::is_ajax() || isset( $_REQUEST['bulk_edit'] ) ) {
+		if ( ! $is_allowed || Conditional::is_autosave() || Conditional::is_ajax() || isset( $_REQUEST['bulk_edit'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- This is hooked to save_post, which runs after nonce check anyway.
 			return $post_id;
 		}
 
-		if ( ! empty( $_POST['rank_math_canonical_url'] ) && false === Param::post( 'rank_math_canonical_url', false, FILTER_VALIDATE_URL ) ) {
+		if ( ! empty( $_POST['rank_math_canonical_url'] ) && false === Param::post( 'rank_math_canonical_url', false, FILTER_VALIDATE_URL ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- This is hooked to save_post, which runs after nonce check anyway.
 			$message = esc_html__( 'The canonical URL you entered does not seem to be a valid URL. Please double check it in the SEO meta box &raquo; Advanced tab.', 'rank-math' );
 			Helper::add_notification( $message, [ 'type' => 'error' ] );
 		}
@@ -193,39 +193,8 @@ class Admin implements Runner {
 			return;
 		}
 
-		$output = [];
-		$post   = get_post( $post );
-		$args   = [
-			'post_type'      => $post->post_type,
-			'post__not_in'   => [ $post->ID ],
-			'posts_per_page' => 5,
-			'meta_key'       => 'rank_math_pillar_content',
-			'meta_value'     => 'on',
-			'tax_query'      => [ 'relation' => 'OR' ],
-		];
-
-		$taxonomies = Helper::get_object_taxonomies( $post, 'names' );
-		$taxonomies = array_filter( $taxonomies, [ $this, 'is_taxonomy_allowed' ] );
-
-		foreach ( $taxonomies as $taxonomy ) {
-			$this->set_term_query( $args, $post->ID, $taxonomy );
-		}
-
-		$posts = get_posts( $args );
-		foreach ( $posts as $related_post ) {
-			$item = [
-				'title'          => get_the_title( $related_post->ID ),
-				'url'            => get_permalink( $related_post->ID ),
-				'post_id'        => $related_post->ID,
-				'focus_keywords' => get_post_meta( $related_post->ID, 'rank_math_focus_keyword', true ),
-			];
-
-			$item['focus_keywords'] = empty( $item['focus_keywords'] ) ? [] : explode( ',', $item['focus_keywords'] );
-
-			$output[] = $item;
-		}
-
-		return $output;
+		$max_suggestions = 5;
+		return $this->get_link_suggestions_data( $post, $max_suggestions );
 	}
 
 	/**
@@ -242,6 +211,75 @@ class Admin implements Runner {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get link suggestions for the current post.
+	 *
+	 * @param  WP_Post $post Current post.
+	 * @param  int     $max_suggestions Max suggestions.
+	 *
+	 * @return array
+	 */
+	public function get_link_suggestions_data( $post, $max_suggestions = 5 ) {
+		$output     = [];
+		$posts      = $this->get_link_suggestions_posts( $post, $max_suggestions );
+		$post_count = 0;
+		foreach ( $posts as $related_post ) {
+			if ( $related_post->ID === $post->ID || $post_count > $max_suggestions ) {
+				continue;
+			}
+
+			$post_count++;
+			$output[] = $this->get_link_suggestion( $related_post );
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Get args for get_posts.
+	 * 
+	 * @param int|WP_Post $post Current post.
+	 * @return array
+	 */
+	private function get_link_suggestions_posts( $post, $max_suggestions ) {
+		$post = get_post( $post );
+		$args = [
+			'post_type'        => $post->post_type,
+			'posts_per_page'   => $max_suggestions + 1, // +1 to avoid using "post__not_in".
+			'meta_key'         => 'rank_math_pillar_content',
+			'meta_value'       => 'on',                         // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- We need to use meta_value here to get the Pillar Content posts.
+			'tax_query'        => [ 'relation' => 'OR' ],       // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- We need to use tax_query here to filter by taxonomy.
+			'suppress_filters' => false,
+		];
+
+		$taxonomies = Helper::get_object_taxonomies( $post, 'names' );
+		$taxonomies = array_filter( $taxonomies, [ $this, 'is_taxonomy_allowed' ] );
+
+		foreach ( $taxonomies as $taxonomy ) {
+			$this->set_term_query( $args, $post->ID, $taxonomy );
+		}
+
+		return get_posts( $args ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts -- "suppress_filters" is set to false.
+	}
+
+	/**
+	 * Get data for a link suggestion.
+	 * 
+	 * @param WP_Post $related_post Post to get data for.
+	 */
+	private function get_link_suggestion( $related_post ) {
+		$item = [
+			'title'          => get_the_title( $related_post->ID ),
+			'url'            => get_permalink( $related_post->ID ),
+			'post_id'        => $related_post->ID,
+			'focus_keywords' => get_post_meta( $related_post->ID, 'rank_math_focus_keyword', true ),
+		];
+
+		$item['focus_keywords'] = empty( $item['focus_keywords'] ) ? [] : explode( ',', $item['focus_keywords'] );
+
+		return $item;
 	}
 
 	/**

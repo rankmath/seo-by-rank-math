@@ -117,7 +117,8 @@ class Registration {
 			return Security::remove_query_arg_raw( [ 'rankmath_connect', 'rankmath_auth' ] );
 		}
 
-		if ( 'ok' === $status && $auth_data = $this->get_registration_params() ) { // phpcs:ignore
+		$auth_data = $this->get_registration_params();
+		if ( 'ok' === $status && $auth_data ) {
 			Admin_Helper::get_registration_data(
 				[
 					'username'  => $auth_data['username'],
@@ -129,7 +130,7 @@ class Registration {
 				]
 			);
 
-			if ( 1 == Param::get( 'analytics' ) ) {
+			if ( 1 === (int) Param::get( 'analytics' ) ) {
 				wp_redirect( Authentication::get_auth_url() );
 				exit;
 			}
@@ -238,9 +239,9 @@ class Registration {
 		/**
 		 * Start the actual page content.
 		 */
-		include_once $this->get_view( 'header' );
-		include_once $this->get_view( 'content' );
-		include_once $this->get_view( 'footer' );
+		include_once $this->get_view( 'header' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The parameter is sanitized and the include is safe.
+		include_once $this->get_view( 'content' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The parameter is sanitized and the include is safe.
+		include_once $this->get_view( 'footer' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The parameter is sanitized and the include is safe.
 		exit;
 	}
 
@@ -272,7 +273,7 @@ class Registration {
 		Admin_Helper::maybe_show_invalid_siteurl_notice();
 		?>
 		<div class="text-center wp-core-ui rank-math-ui" style="margin-top: 30px;">
-			<button type="submit" class="button button-primary button-connect <?php echo Admin_Helper::is_site_url_valid() ? 'button-animated' : 'disabled'; ?>" name="rank_math_activate"><?php echo esc_attr__( 'Connect Your Account', 'rank-math' ); ?></button>
+			<button type="submit" class="button button-primary button-connect <?php echo Admin_Helper::is_site_url_valid() ? 'button-animated' : 'disabled'; ?>" name="rank_math_activate"><?php echo esc_html__( 'Connect Your Account', 'rank-math' ); ?></button>
 		</div>
 		<?php
 	}
@@ -287,7 +288,7 @@ class Registration {
 			<p class="rank-math-gray-box">
 				<?php
 				/* translators: Link to Free Account Benefits KB article */
-				printf( esc_html__( 'By connecting your free account, you get keyword suggestions directly from Google when entering the focus keywords. Not only that, get access to our revolutionary SEO Analyzer inside WordPress that scans your website for SEO errors and suggest improvements. %s', 'rank-math' ), '<a href="' . KB::get( 'free-account-benefits' ) . '" target="_blank">' . esc_html__( 'Read more by following this link.', 'rank-math' ) . '</a>' );
+				printf( esc_html__( 'By connecting your free account, you get keyword suggestions directly from Google when entering the focus keywords. Not only that, get access to our revolutionary SEO Analyzer inside WordPress that scans your website for SEO errors and suggest improvements. %s', 'rank-math' ), '<a href="' . esc_url( KB::get( 'free-account-benefits' ) ) . '" target="_blank">' . esc_html__( 'Read more by following this link.', 'rank-math' ) . '</a>' );
 				?>
 			</p>
 			<?php
@@ -361,7 +362,7 @@ class Registration {
 
 		delete_transient( '_rank_math_activation_redirect' );
 
-		if ( ( ! empty( $_GET['page'] ) && in_array( $_GET['page'], [ 'rank-math-registration', 'rank-math-wizard' ], true ) ) || ! current_user_can( 'manage_options' ) ) {
+		if ( ( ! empty( $_GET['page'] ) && in_array( $_GET['page'], [ 'rank-math-registration', 'rank-math-wizard' ], true ) ) || ! current_user_can( 'manage_options' ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- No action, nonce is not required.
 			return false;
 		}
 
@@ -379,6 +380,7 @@ class Registration {
 			$view = 'no-navigation';
 		}
 
+		$view = sanitize_key( $view );
 		return rank_math()->admin_dir() . "wizard/views/{$view}.php";
 	}
 

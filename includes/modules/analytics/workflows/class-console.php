@@ -54,7 +54,7 @@ class Console extends Base {
 		$collate = $wpdb->get_charset_collate();
 		$table   = 'rank_math_analytics_gsc';
 
-		// Early Bail!!
+		// Early bail.
 		if ( DB::check_table_exists( $table ) ) {
 			return;
 		}

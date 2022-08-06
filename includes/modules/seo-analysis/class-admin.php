@@ -34,8 +34,8 @@ class Admin extends Base {
 		);
 		parent::__construct();
 
-		if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || $this->page->is_current_page() ) {
-			include_once 'seo-analysis-tests.php';
+		if ( wp_doing_ajax() || $this->page->is_current_page() ) {
+			include_once rank_math()->plugin_dir() . 'includes/modules/seo-analysis/seo-analysis-tests.php';
 			$this->analyzer = new SEO_Analyzer();
 		}
 	}

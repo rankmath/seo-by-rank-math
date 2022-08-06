@@ -82,12 +82,12 @@ class Base {
 			[
 				'limit'     => 99,
 				'separator' => ', ',
-				'exclude'   => [],
+				'exclude'   => [], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- This is just a default value, overridden when needed.
 			]
 		);
 
 		if ( ! empty( $args['exclude'] ) ) {
-			$args['exclude'] = array_map( 'intval', explode( ',', $args['exclude'] ) );
+			$args['exclude'] = wp_parse_id_list( $args['exclude'] ); // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Here we just sanitize the values.
 		}
 
 		$terms = get_the_terms( $id, $taxonomy );
@@ -159,9 +159,10 @@ class Base {
 		if ( is_null( $this->post ) ) {
 			$posts      = get_posts(
 				[
-					'fields'         => 'id',
-					'posts_per_page' => 1,
-					'post_type'      => [ 'post', 'page' ],
+					'fields'           => 'id',
+					'posts_per_page'   => 1,
+					'post_type'        => [ 'post', 'page' ],
+					'suppress_filters' => false,
 				]
 			);
 			$this->post = isset( $posts[0] ) ? $posts[0] : null;

@@ -27,7 +27,7 @@ class Compatibility implements Wizard_Step {
 	 * @return void
 	 */
 	public function render( $wizard ) {
-		include_once $wizard->get_view( 'compatibility' );
+		include_once $wizard->get_view( 'compatibility' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 	}
 
 	/**

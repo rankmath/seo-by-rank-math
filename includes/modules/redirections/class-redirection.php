@@ -377,7 +377,7 @@ class Redirection {
 		global $wpdb;
 
 		// Check for post.
-		$post_id = url_to_postid( home_url( $slug ) );
+		$post_id = function_exists( 'wpcom_vip_url_to_postid' ) ? \wpcom_vip_url_to_postid( $slug ) : url_to_postid( home_url( $slug ) ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.url_to_postid_url_to_postid
 		if ( $post_id ) {
 			$this->cache[] = [
 				'from_url'    => $slug,
@@ -388,7 +388,7 @@ class Redirection {
 		}
 
 		// Check for term.
-		$terms = $wpdb->get_results( $wpdb->prepare( "SELECT term_id FROM $wpdb->terms WHERE slug = %s", $slug ) );
+		$terms = $wpdb->get_results( $wpdb->prepare( "SELECT term_id FROM $wpdb->terms WHERE slug = %s", $slug ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 		if ( $terms ) {
 			foreach ( $terms as $term ) {
 				$this->cache[] = [

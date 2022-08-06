@@ -261,7 +261,7 @@ final class RankMath {
 		// theme-folder/rankmath.php will be loaded automatically.
 		$file = get_stylesheet_directory() . '/rank-math.php';
 		if ( file_exists( $file ) ) {
-			require_once $file;
+			require_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
 		}
 	}
 
@@ -432,6 +432,8 @@ final class RankMath {
 				'registration' => __( 'Setup Wizard', 'rank-math' ),
 			];
 		}
+
+		$plugin_links = [];
 
 		foreach ( $options as $link => $label ) {
 			$plugin_links[] = '<a href="' . \RankMath\Helper::get_admin_url( $link ) . '">' . esc_html( $label ) . '</a>';

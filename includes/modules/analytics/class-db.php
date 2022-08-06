@@ -182,6 +182,8 @@ class DB {
 	 * @return boolean
 	 */
 	public static function date_exists( $date, $action = 'console' ) {
+		$tables = [];
+
 		$tables['console'] = DB_Helper::check_table_exists( 'rank_math_analytics_gsc' ) ? 'rank_math_analytics_gsc' : '';
 
 		/**

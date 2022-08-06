@@ -70,7 +70,7 @@ class System_Status {
 				continue;
 			}
 
-			include $directory . '/views/system-status-accordion.php';
+			include $directory . '/views/system-status-accordion.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 		}
 	}
 
@@ -148,7 +148,7 @@ class System_Status {
 			],
 		];
 
-		$database_tables = $wpdb->get_results(
+		$database_tables = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 			$wpdb->prepare(
 				"SELECT
 				table_name AS 'name'

@@ -383,7 +383,7 @@ class Breadcrumbs {
 
 		$type_object = get_post_type_object( $post_type );
 		if ( ! empty( $type_object->has_archive ) ) {
-			$this->add_crumb( $type_object->labels->singular_name, get_post_type_archive_link( $post_type ) );
+			$this->add_crumb( $type_object->labels->name, get_post_type_archive_link( $post_type ) );
 		}
 	}
 
@@ -508,7 +508,7 @@ class Breadcrumbs {
 	 * @param array $terms Terms attached to the current post.
 	 */
 	private function maybe_add_primary_term( $terms ) {
-		// Early Bail!
+		// Early bail.
 		if ( is_wp_error( $terms ) || empty( $terms ) ) {
 			return;
 		}
@@ -530,7 +530,7 @@ class Breadcrumbs {
 	 * @param object $term Term data object.
 	 */
 	private function maybe_add_term_ancestors( $term ) {
-		// Early Bail!
+		// Early bail.
 		if ( ! $this->can_add_term_ancestors( $term ) ) {
 			return;
 		}
@@ -595,7 +595,7 @@ class Breadcrumbs {
 	 * @since 1.0.33
 	 */
 	private function maybe_add_blog() {
-		// Early Bail!
+		// Early bail.
 		$blog_id = get_option( 'page_for_posts' );
 		if ( ! $blog_id || ! $this->can_add_blog() ) {
 			return;

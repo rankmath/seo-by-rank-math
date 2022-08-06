@@ -77,7 +77,7 @@ class Update_Email {
 		$email = compact( 'to', 'subject', 'body', 'headers' );
 		$email = $this->do_filter( 'admin/update_notification_email', $email );
 
-		$result = wp_mail( $email['to'], $email['subject'], $email['body'], $email['headers'] );
+		$result = wp_mail( $email['to'], $email['subject'], $email['body'], $email['headers'] ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.wp_mail_wp_mail -- wp_mail is used here for sending a single email, not bulk emails.
 
 		$stored  = get_option( 'rank_math_update_notifications_sent', [] );
 		$new_opt = $stored;

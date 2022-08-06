@@ -258,7 +258,7 @@ trait Conditional {
 	 * @return boolean
 	 */
 	public static function is_wizard() {
-		return ( filter_input( INPUT_GET, 'page' ) === 'rank-math-wizard' || filter_input( INPUT_POST, 'action' ) === 'rank_math_save_wizard' );
+		return ( Param::get( 'page' ) === 'rank-math-wizard' || Param::post( 'action' ) === 'rank_math_save_wizard' );
 	}
 
 	/**

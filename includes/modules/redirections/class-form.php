@@ -177,7 +177,7 @@ class Form {
 			return $return;
 		}
 
-		if ( ! empty( $_REQUEST['log'] ) && is_array( $_REQUEST['log'] ) ) {
+		if ( ! empty( $_REQUEST['log'] ) && is_array( $_REQUEST['log'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- No action, nonce is not required.
 			return [
 				'sources' => $this->get_sources_for_log(),
 				'url_to'  => esc_url( home_url( '/' ) ),
@@ -193,7 +193,7 @@ class Form {
 	 * @return array
 	 */
 	private function get_sources_for_log() {
-		$logs = array_map( 'absint', $_REQUEST['log'] );
+		$logs = array_map( 'absint', $_REQUEST['log'] ); // phpcs:ignore -- Nonce checked in CMB2 & array index is validated in the above code.
 		$logs = Monitor_DB::get_logs(
 			[
 				'ids'     => $logs,

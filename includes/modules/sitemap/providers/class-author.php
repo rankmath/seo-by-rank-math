@@ -150,7 +150,7 @@ class Author implements Provider {
 		$defaults = [
 			'orderby'    => 'meta_value_num',
 			'order'      => 'DESC',
-			'meta_query' => [
+			'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				'relation' => 'AND',
 				[
 					'relation' => 'OR',
@@ -192,7 +192,7 @@ class Author implements Provider {
 	public function exclude_users( $args ) {
 		$exclude = Helper::get_settings( 'sitemap.exclude_users' );
 		if ( ! empty( $exclude ) ) {
-			$args['exclude'] = wp_parse_id_list( $exclude );
+			$args['exclude'] = wp_parse_id_list( $exclude ); // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 		}
 
 		return $args;

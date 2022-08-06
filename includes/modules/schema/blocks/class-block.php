@@ -10,9 +10,6 @@
 
 namespace RankMath\Schema;
 
-use RankMath\Helper;
-use RankMath\Traits\Hooker;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -28,7 +25,28 @@ class Block {
 	 * @return string
 	 */
 	protected function clean_text( $text ) {
-		return strip_tags( $text, '<h1><h2><h3><h4><h5><h6><br><ol><ul><li><a><p><b><strong><i><em>' );
+		return wp_kses(
+			$text, [
+				'h1'     => [],
+				'h2'     => [],
+				'h3'     => [],
+				'h4'     => [],
+				'h5'     => [],
+				'h6'     => [],
+				'br'     => [],
+				'ol'     => [],
+				'ul'     => [],
+				'li'     => [],
+				'p'      => [],
+				'b'      => [],
+				'i'      => [],
+				'em'     => [],
+				'strong' => [],
+				'a'      => [
+					'href' => [],
+				],
+			]
+		);
 	}
 
 	/**

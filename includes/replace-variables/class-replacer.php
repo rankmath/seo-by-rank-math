@@ -172,8 +172,6 @@ class Replacer {
 			if ( false !== $value ) {
 				$replacements[ $matches[0][ $index ] ] = $value;
 			}
-
-			unset( $variable );
 		}
 
 		$this->set_cache( $string, $replacements );

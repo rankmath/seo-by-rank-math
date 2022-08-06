@@ -50,7 +50,7 @@ function rank_math_1_0_84_check_analytics_collations() {
 function rank_math_1_0_84_check_collations() {
 	if ( is_multisite() ) {
 		foreach ( get_sites() as $site ) {
-			switch_to_blog( $site->blog_id );
+			switch_to_blog( $site->blog_id ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.switch_to_blog_switch_to_blog
 			rank_math_1_0_84_check_analytics_collations();
 			restore_current_blog();
 		}

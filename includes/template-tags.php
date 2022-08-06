@@ -36,7 +36,7 @@ function rank_math_get_breadcrumbs( $args = [] ) {
  * @param array $args Array of arguments.
  */
 function rank_math_the_breadcrumbs( $args = [] ) {
-	echo rank_math_get_breadcrumbs( $args );
+	echo wp_kses_post( rank_math_get_breadcrumbs( $args ) );
 }
 
 /**
@@ -64,7 +64,7 @@ function rank_math_get_seo_score( $args = [] ) {
  * @param array $args Array of arguments.
  */
 function rank_math_the_seo_score( $args = [] ) {
-	echo rank_math_get_seo_score( $args );
+	echo wp_kses_post( rank_math_get_seo_score( $args ) );
 }
 
 /**

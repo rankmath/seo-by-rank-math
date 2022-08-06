@@ -121,15 +121,15 @@ if ( RankMath\Analytics\Email_Reports::are_fields_hidden() ) {
 	return;
 }
 
-$preview_url = home_url( '?rank_math_analytics_report_preview=1' );
-$title       = esc_html__( 'Email Reports', 'rank-math' );
+$preview_url       = home_url( '?rank_math_analytics_report_preview=1' );
+$email_field_title = esc_html__( 'Email Reports', 'rank-math' );
 // Translators: Placeholders are the opening and closing tag for the link.
 $description = sprintf( esc_html__( 'Receive periodic SEO Performance reports via email. Once enabled and options are saved, you can see %1$s the preview here%2$s.', 'rank-math' ), '<a href="' . esc_url_raw( $preview_url ) . '" target="_blank">', '</a>' );
 $cmb->add_field(
 	[
 		'id'      => 'email_reports_title',
 		'type'    => 'raw',
-		'content' => sprintf( '<div class="cmb-form cmb-row nopb"><header class="email-reports-title"><h3>%1$s</h3><p class="description">%2$s</p></header></div>', $title, $description ),
+		'content' => sprintf( '<div class="cmb-form cmb-row nopb"><header class="email-reports-title"><h3>%1$s</h3><p class="description">%2$s</p></header></div>', $email_field_title, $description ),
 	]
 );
 

@@ -169,7 +169,7 @@ class Taxonomy_Screen implements IScreen {
 	 * @return {string} Taxonomy slug.
 	 */
 	private function get_taxonomy() {
-		$taxonomy        = filter_input( INPUT_GET, 'taxonomy', FILTER_DEFAULT, [ 'options' => [ 'default' => '' ] ] );
+		$taxonomy        = Param::get( 'taxonomy', null, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_BACKTICK );
 		$taxonomy_object = get_taxonomy( $taxonomy );
 		if ( empty( $taxonomy_object ) || empty( $taxonomy_object->public ) ) {
 			return;

@@ -169,22 +169,23 @@ class Yoast_Blocks extends \WP_Background_Process {
 
 		// FAQs Posts.
 		$args = [
-			's'             => 'wp:yoast/faq-block',
-			'post_status'   => 'any',
-			'numberposts'   => -1,
-			'fields'        => 'ids',
-			'no_found_rows' => true,
+			's'                => 'wp:yoast/faq-block',
+			'post_status'      => 'any',
+			'numberposts'      => -1,
+			'fields'           => 'ids',
+			'no_found_rows'    => true,
+			'suppress_filters' => false,
 		];
-		$faqs = get_posts( $args );
+		$faqs = get_posts( $args ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts -- "suppress_filters" is set to false.
 
 		// HowTo Posts.
 		$args['s'] = 'wp:yoast/how-to-block';
-		$howto     = get_posts( $args );
+		$howto     = get_posts( $args ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts -- "suppress_filters" is set to false.
 
 		// Local Business Posts.
 		$args['s']         = ':yoast-seo-local/';
 		$args['post_type'] = 'any';
-		$local_business    = get_posts( $args );
+		$local_business    = get_posts( $args ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts -- "suppress_filters" is set to false.
 		$posts             = array_merge( $faqs, $howto, $local_business );
 
 		$posts_data = [

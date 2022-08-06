@@ -27,7 +27,7 @@ class Ready implements Wizard_Step {
 	 * @return void
 	 */
 	public function render( $wizard ) {
-		include_once $wizard->get_view( 'ready' );
+		include_once $wizard->get_view( 'ready' ); // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable - The include is safe.
 	}
 
 	/**

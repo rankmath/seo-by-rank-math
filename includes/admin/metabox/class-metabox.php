@@ -304,7 +304,7 @@ class Metabox implements Runner {
 	 * @param CMB2_Field $field    This field object.
 	 */
 	public function invalidate_facebook_object_cache( $field_id, $updated, $action, $field ) {
-		// Early Bail!
+		// Early bail.
 		if ( ! in_array( $field_id, [ 'rank_math_facebook_title', 'rank_math_facebook_image', 'rank_math_facebook_description' ], true ) || ! $updated ) {
 			return;
 		}

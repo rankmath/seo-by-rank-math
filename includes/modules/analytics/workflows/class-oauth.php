@@ -45,7 +45,7 @@ class OAuth {
 		$access_token  = Param::get( 'access_token', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 		$security      = Param::get( 'rankmath_security', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 
-		// Early Bail!!
+		// Early bail.
 		if ( empty( $security ) || ( $process_oauth < 1 && empty( $access_token ) ) ) {
 			return;
 		}
@@ -86,7 +86,7 @@ class OAuth {
 			return;
 		}
 
-		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'rank_math_reconnect_google' ) ) {
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ), 'rank_math_reconnect_google' ) ) {
 			wp_nonce_ays( 'rank_math_reconnect_google' );
 			die();
 		}

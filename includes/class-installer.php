@@ -78,7 +78,7 @@ class Installer {
 			return;
 		}
 
-		switch_to_blog( $blog_id );
+		switch_to_blog( $blog_id ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.switch_to_blog_switch_to_blog
 		$this->activate();
 		restore_current_blog();
 	}
@@ -115,7 +115,7 @@ class Installer {
 	private function network_activate_deactivate( $activate ) {
 		global $wpdb;
 
-		$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" );
+		$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No need to prepare or cache.
 		if ( empty( $blog_ids ) ) {
 			return;
 		}
@@ -123,7 +123,7 @@ class Installer {
 		foreach ( $blog_ids as $blog_id ) {
 			$func = true === $activate ? 'activate' : 'deactivate';
 
-			switch_to_blog( $blog_id );
+			switch_to_blog( $blog_id ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.switch_to_blog_switch_to_blog
 			$this->$func();
 			restore_current_blog();
 		}

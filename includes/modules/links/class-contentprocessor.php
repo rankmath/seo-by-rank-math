@@ -86,7 +86,7 @@ class ContentProcessor {
 
 		$target_post_id = 0;
 		if ( Classifier::TYPE_INTERNAL === $link_type ) {
-			$target_post_id = url_to_postid( $link );
+			$target_post_id = function_exists( 'wpcom_vip_url_to_postid' ) ? \wpcom_vip_url_to_postid( $link ) : url_to_postid( $link ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.url_to_postid_url_to_postid
 		}
 		$counts[ "{$link_type}_link_count" ] += 1;
 

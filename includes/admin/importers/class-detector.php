@@ -143,7 +143,7 @@ class Detector {
 					'file'  => 'wp-schema-pro/wp-schema-pro.php',
 				],
 				'redirections'            => [
-					'class' => '\\RankMath\\Admin\\Importers\\Redirections',
+					'class' => '\\RankMath\\Admin\\Importers\\Redirection',
 					'file'  => 'redirection/redirection.php',
 				],
 			]

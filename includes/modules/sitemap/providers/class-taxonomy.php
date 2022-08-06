@@ -127,7 +127,7 @@ class Taxonomy implements Provider {
 				$query   = new \WP_Query(
 					[
 						'post_type'      => $tax->object_type,
-						'tax_query'      => [
+						'tax_query'      => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 							[
 								'taxonomy' => $tax_name,
 								'terms'    => $terms_page,
@@ -246,7 +246,7 @@ class Taxonomy implements Provider {
 				'hide_empty'             => $hide_empty,
 				'offset'                 => $offset,
 				'number'                 => $max_entries,
-				'exclude'                => wp_parse_id_list( Helper::get_settings( 'sitemap.exclude_terms' ) ),
+				'exclude'                => wp_parse_id_list( Helper::get_settings( 'sitemap.exclude_terms' ) ), // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 
 				/*
 				 * Limits aren't included in queries when hierarchical is set to true (by default).

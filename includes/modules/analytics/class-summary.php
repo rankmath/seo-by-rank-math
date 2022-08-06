@@ -138,7 +138,7 @@ class Summary {
 		}
 
 		$average         = $query->one();
-		$average->total += property_exists( $stats, 'noData' ) ? $stats->noData : 0; // phpcs:ignore
+		$average->total += property_exists( $stats, 'noData' ) ? $stats->noData : 0; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 		if ( $average->total > 0 ) {
 			$stats->average = \round( $average->score / $average->total, 2 );
 		}
@@ -266,31 +266,43 @@ class Summary {
 		global $wpdb;
 
 		// Get Total Keywords Counts.
-		$keywords_count = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT COUNT(DISTINCT(query))
-				FROM {$wpdb->prefix}rank_math_analytics_gsc
-				WHERE created BETWEEN %s AND %s
-				GROUP BY Date(created)
-				ORDER BY Date(created) DESC
-				LIMIT 1",
-				$this->start_date,
-				$this->end_date
-			)
-		);
+		$keywords_count = wp_cache_get( 'rank_math_analytics_keywords_count', $this->start_date . '>' . $this->end_date );
 
-		$old_keywords_count = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT COUNT(DISTINCT(query))
-				FROM {$wpdb->prefix}rank_math_analytics_gsc
-				WHERE created BETWEEN %s AND %s
-				GROUP BY Date(created)
-				ORDER BY Date(created) DESC
-				LIMIT 1",
-				$this->compare_start_date,
-				$this->compare_end_date
-			)
-		);
+		if ( false === $keywords_count ) {
+			$keywords_count = $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB call is required.
+				$wpdb->prepare(
+					"SELECT COUNT(DISTINCT(query))
+					FROM {$wpdb->prefix}rank_math_analytics_gsc
+					WHERE created BETWEEN %s AND %s
+					GROUP BY DATE(created)
+					ORDER BY DATE(created) DESC
+					LIMIT 1",
+					$this->start_date,
+					$this->end_date
+				)
+			);
+
+			wp_cache_set( 'rank_math_analytics_keywords_count', $keywords_count, $this->start_date . '>' . $this->end_date, HOUR_IN_SECONDS );
+		}
+
+		$old_keywords_count = wp_cache_get( 'rank_math_analytics_old_keywords_count', $this->compare_start_date . '>' . $this->compare_end_date );
+
+		if ( false === $old_keywords_count ) {
+			$old_keywords_count = $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB call is required.
+				$wpdb->prepare(
+					"SELECT COUNT(DISTINCT(query))
+					FROM {$wpdb->prefix}rank_math_analytics_gsc
+					WHERE created BETWEEN %s AND %s
+					GROUP BY DATE(created)
+					ORDER BY DATE(created) DESC
+					LIMIT 1",
+					$this->compare_start_date,
+					$this->compare_end_date
+				)
+			);
+
+			wp_cache_set( 'rank_math_analytics_old_keywords_count', $old_keywords_count, $this->compare_start_date . '>' . $this->compare_end_date, HOUR_IN_SECONDS );
+		}
 
 		$keywords = [
 			'total'      => (int) $keywords_count,

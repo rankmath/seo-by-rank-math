@@ -67,10 +67,12 @@ class Url_Inspection extends Request {
 	 */
 	public function get_api_results( $page ) {
 		$gsc_profile = Console::get_site_url();
+		$lang_arr    = \explode( '_', get_locale() );
+		$lang_code   = $lang_arr[0] . '-' . $lang_arr[1];
 		$args        = [
 			'inspectionUrl' => untrailingslashit( $gsc_profile ) . $page,
 			'siteUrl'       => $gsc_profile,
-			'languageCode'  => str_replace( '_', '-', get_locale() ),
+			'languageCode'  => $lang_code,
 		];
 
 		set_time_limit( 90 );

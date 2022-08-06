@@ -10,27 +10,27 @@ use RankMath\Admin\Importers\Detector;
 
 defined( 'ABSPATH' ) || exit;
 
-$detector = new Detector();
-$plugins  = $detector->detect();
-$first = empty( $plugins ) ? '' : array_keys( $plugins )[0];
+$detector         = new Detector();
+$detected_plugins = $detector->detect();
+$first            = empty( $detected_plugins ) ? '' : array_keys( $detected_plugins )[0];
 ?>
 <h2><?php esc_html_e( 'Other Plugins', 'rank-math' ); ?></h2>
 
 <p class="description">
 	<?php
 	/* translators: Link to learn about import export panel KB article */
-	printf( esc_html__( 'If you were using another plugin to add important SEO information to your website before switching to Rank Math SEO, you can import the settings and data here. %s', 'rank-math' ), '<a href="' . \RankMath\KB::get( 'import-export-settings' ) . '" target="_blank">' . esc_html__( 'Learn more about the Import/Export options.', 'rank-math' ) . '</a>' );
+	printf( esc_html__( 'If you were using another plugin to add important SEO information to your website before switching to Rank Math SEO, you can import the settings and data here. %s', 'rank-math' ), '<a href="' . esc_url( \RankMath\KB::get( 'import-export-settings' ) ) . '" target="_blank">' . esc_html__( 'Learn more about the Import/Export options.', 'rank-math' ) . '</a>' );
 	?>
 </p>
 
 <form class="rank-math-box no-padding rank-math-export-form cmb2-form" action="" method="post">
 	<div class="with-action at-top">
 
-		<?php if ( empty( $plugins ) ) : ?>
+		<?php if ( empty( $detected_plugins ) ) : ?>
 			<p class="empty-notice"><?php echo esc_html__( 'No plugin detected with importable data.', 'rank-math' ); ?></p>
 		<?php else : ?>
 			<div class="rank-math-box-tabs wp-clearfix">
-				<?php foreach ( $plugins as $slug => $importer ) : ?>
+				<?php foreach ( $detected_plugins as $slug => $importer ) : ?>
 					<a href="#import-plugin-<?php echo esc_attr( $slug ); ?>" class="<?php echo $slug === $first ? 'active-tab' : ''; ?>">
 						<i class="rm-icon rm-icon-import"></i>
 						<span class="rank-math-tab-text"><?php echo esc_html( $importer['name'] ); ?></span>
@@ -40,7 +40,7 @@ $first = empty( $plugins ) ? '' : array_keys( $plugins )[0];
 
 			<div class="rank-math-box-content">
 				<div class="rank-math-box-inner">
-					<?php foreach ( $plugins as $slug => $importer ) : ?>
+					<?php foreach ( $detected_plugins as $slug => $importer ) : ?>
 						<div id="import-plugin-<?php echo esc_attr( $slug ); ?>" class="<?php echo $slug === $first ? ' active-tab' : ''; ?>">
 							<table class="form-table cmb2-wrap">
 								<tbody>
@@ -49,11 +49,11 @@ $first = empty( $plugins ) ? '' : array_keys( $plugins )[0];
 											<ul class="cmb2-checkbox-list cmb2-list no-select-all">
 												<?php
 												foreach ( $importer['choices'] as $key => $label ) :
-													$id = "{$slug}_{$key}";
+													$the_id = "{$slug}_{$key}";
 													?>
 													<li>
-														<input type="checkbox" class="cmb2-option" name="<?php echo $slug; ?>[]" id="<?php echo $id; ?>" value="<?php echo $key; ?>" checked="checked">
-														<label for="<?php echo $id; ?>"><?php echo $label; ?></label>
+														<input type="checkbox" class="cmb2-option" name="<?php echo esc_attr( $slug ); ?>[]" id="<?php echo esc_attr( $the_id ); ?>" value="<?php echo esc_attr( $key ); ?>" checked="checked">
+														<label for="<?php echo esc_attr( $the_id ); ?>"><?php echo esc_html( $label ); ?></label>
 													</li>
 												<?php endforeach; ?>
 											</ul>

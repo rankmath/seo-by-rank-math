@@ -87,7 +87,7 @@ class Database_Tools {
 	public function clear_transients() {
 		global $wpdb;
 
-		$transients = $wpdb->get_col(
+		$transients = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 			"SELECT `option_name` AS `name`
 			FROM  $wpdb->options
 			WHERE `option_name` LIKE '%\\_transient\\_rank_math%'
@@ -134,7 +134,7 @@ class Database_Tools {
 	public function delete_links() {
 		global $wpdb;
 
-		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_internal_links )" );
+		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_internal_links )" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 		if ( empty( $exists ) ) {
 			return [
 				'status'  => 'error',
@@ -142,8 +142,8 @@ class Database_Tools {
 			];
 		}
 
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_links" );
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_meta" );
+		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_links" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
+		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_meta" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 
 		return __( 'Internal Links successfully deleted.', 'rank-math' );
 	}
@@ -154,7 +154,7 @@ class Database_Tools {
 	public function delete_log() {
 		global $wpdb;
 
-		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_404_logs )" );
+		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_404_logs )" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 		if ( empty( $exists ) ) {
 			return [
 				'status'  => 'error',
@@ -162,7 +162,7 @@ class Database_Tools {
 			];
 		}
 
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_404_logs;" );
+		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_404_logs;" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 
 		return __( '404 Log successfully deleted.', 'rank-math' );
 	}
@@ -173,7 +173,7 @@ class Database_Tools {
 	public function delete_redirections() {
 		global $wpdb;
 
-		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_redirections )" );
+		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_redirections )" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 		if ( empty( $exists ) ) {
 			return [
 				'status'  => 'error',
@@ -181,8 +181,8 @@ class Database_Tools {
 			];
 		}
 
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections;" );
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections_cache;" );
+		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections;" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
+		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections_cache;" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not applicable.
 
 		return __( 'Redirection rules successfully deleted.', 'rank-math' );
 	}
@@ -236,7 +236,7 @@ class Database_Tools {
 			'actionscheduler_claims',
 		];
 
-		$found_tables = $wpdb->get_col( "SHOW TABLES LIKE '{$wpdb->prefix}actionscheduler%'" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$found_tables = $wpdb->get_col( "SHOW TABLES LIKE '{$wpdb->prefix}actionscheduler%'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Direct DB query is required, cache is not applicable.
 		foreach ( $table_list as $table_name ) {
 			if ( ! in_array( $wpdb->prefix . $table_name, $found_tables, true ) ) {
 				$this->recreate_actionscheduler_tables();

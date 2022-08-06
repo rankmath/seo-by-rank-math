@@ -39,10 +39,10 @@ if ( true === apply_filters( 'rank_math_clear_data_on_uninstall', false ) ) {
 
 	global $wpdb;
 
-	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" );
+	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Direct DB query is required, cache is not needed.
 	if ( ! empty( $blog_ids ) ) {
-		foreach ( $blog_ids as $blog_id ) {
-			switch_to_blog( $blog_id );
+		foreach ( $blog_ids as $next_blog_id ) {
+			switch_to_blog( $next_blog_id ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.switch_to_blog_switch_to_blog
 			rank_math_remove_data();
 			restore_current_blog();
 		}

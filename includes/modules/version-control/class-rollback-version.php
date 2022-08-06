@@ -60,7 +60,7 @@ class Rollback_Version {
 			return false;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'rank-math-rollback' ) ) {
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_POST['_wpnonce'] ), 'rank-math-rollback' ) ) {
 			return false;
 		}
 

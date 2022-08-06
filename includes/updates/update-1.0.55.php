@@ -30,7 +30,7 @@ function rank_math_1_0_55_reschedule_analytics_daily_tasks() {
 	$fetch_gap = apply_filters( 'rank_math/analytics/fetch_gap', 7 );
 
 	if ( false === as_next_scheduled_action( $daily_task_action ) ) {
-		$schedule_in_minute = rand( 3, defined( 'RANK_MATH_PRO_FILE' ) ? 1380 : 4320 );
+		$schedule_in_minute = wp_rand( 3, defined( 'RANK_MATH_PRO_FILE' ) ? 1380 : 4320 );
 		$time_to_schedule   = ( strtotime( 'now' ) + ( $schedule_in_minute * MINUTE_IN_SECONDS ) );
 		as_schedule_recurring_action(
 			$time_to_schedule,

@@ -42,8 +42,8 @@ $this->get_image();
 		];
 		foreach ( $schema['hasPart'] as $edition ) {
 			$this->schema = $edition;
-			foreach ( $hash as $id => $label ) {
-				$this->get_field( $label, $id, 'datePublished' === $id );
+			foreach ( $hash as $schema_id => $label ) {
+				$this->get_field( $label, $schema_id, 'datePublished' === $id );
 			}
 		}
 		$this->schema = $schema;
