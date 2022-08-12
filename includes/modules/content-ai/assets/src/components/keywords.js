@@ -256,7 +256,7 @@ class Keywords extends Component {
 
 	getCount( keyword, type ) {
 		let content = this.props.caData.content
-		keyword = Helpers.removeDiacritics( keyword )
+		keyword = Helpers.removeDiacritics( keyword ).toLowerCase()
 
 		if ( 'heading' === type ) {
 			keyword = keyword.replace( /[\\^$*+?.()|[\]{}]/g, '\\$&' )

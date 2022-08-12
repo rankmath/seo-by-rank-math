@@ -20,6 +20,13 @@
 	.grid {
 		@extend %flex;
 		flex-flow: row wrap;
+
+		&.pro-active {
+			.rank-math-pro-badge {
+				color: $color-1;
+				background: rgba( $color-1, .1 );
+			}
+		}
 	}
 
 	.rank-math-box {
@@ -30,6 +37,15 @@
 		text-align: center;
 
 		flex: 0 0 288px;
+
+		&.is-pro {
+			cursor: pointer;
+
+			&:hover {
+				border-color: $primary;
+				box-shadow: 0 0 0 3px rgba( $primary, .15 );
+			}
+		}
 
 		&.rank-math-unlock-pro-box {
 			border-color: #161e28;
@@ -229,23 +245,42 @@
 		}
 
 		header {
-			overflow: hidden;
-
 			h3 {
 				font-size: 1.0625rem;
 
 				margin: 1.5rem 0 .75rem;
 
-				span {
+				.rank-math-pro-badge {
 					font-weight: 500;
-
-					color: $color-1;
-					background: rgba( $color-1, .1 );
 
 					&.beta {
 						color: #e91e63;
 						background: rgba( #e91e63, .1 );
 					}
+				}
+			}
+
+			.is-upgradeable div {
+				font-size: 20px;
+				line-height: 0;
+
+				display: inline-block;
+
+				height: 10px;
+
+				transform: rotate(90deg);
+				vertical-align: 3px;
+
+				color: $gray;
+
+				&:hover,
+				&:focus {
+					color: $color-1;
+				}
+
+				&.upgraded {
+					color: $color-1;
+					cursor: default;
 				}
 			}
 
@@ -295,6 +330,7 @@
 					text-indent: 0;
 
 					color: #fff;
+					visibility: hidden;
 				}
 			}
 
@@ -370,6 +406,10 @@
 
 				margin-top: 0;
 			}
+		}
+
+		input:disabled + label.cmb2-slider.rank-math-tooltip > span:first-child {
+			visibility: visible;
 		}
 	}
 }

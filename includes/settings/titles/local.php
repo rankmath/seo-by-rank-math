@@ -37,7 +37,7 @@ $cmb->add_field(
 		'id'      => 'knowledgegraph_logo',
 		'type'    => 'file',
 		'name'    => esc_html__( 'Logo', 'rank-math' ),
-		'desc'    => __( '<strong>Min Size: 160Χ90px, Max Size: 1920X1080px</strong>.<br /> A squared image is preferred by the search engines.', 'rank-math' ),
+		'desc'    => __( '<strong>Min Size: 112Χ112px</strong>.<br /> A squared image is preferred by the search engines.', 'rank-math' ),
 		'options' => [ 'url' => false ],
 	]
 );

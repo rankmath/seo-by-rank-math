@@ -11,7 +11,7 @@
 namespace RankMath\Google;
 
 use RankMath\Helpers\Security;
-
+use MyThemeShop\Helpers\WordPress;
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -155,6 +155,7 @@ class Request {
 					wp_kses_post( __( 'There is a problem with the Google auth token. Please <a href="%1$s" class="button button-link rank-math-reconnect-google">reconnect your app</a>', 'rank-math' ) ),
 					wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' )
 				);
+				$this->log_response( $http_verb, $url, $args, date( 'Y-m-d H:i:s' ) . ': Google auth token has been expired or is invalid' );
 			}
 			return;
 		}
@@ -176,13 +177,50 @@ class Request {
 		}
 
 		$this->reset();
-		$response           = wp_remote_request( $url, $params );
+		$response = wp_remote_request( $url, $params );
+		$this->log_response( $http_verb, $url, $args, $response );
 		$formatted_response = $this->format_response( $response );
 		$this->determine_success( $response, $formatted_response );
 
 		return $formatted_response;
 	}
 
+	/**
+	 * Log the response in analytics_debug.log file.
+	 *
+	 * @param string $http_verb The HTTP verb to use: get, post, put, patch, delete.
+	 * @param string $url       URL to do request.
+	 * @param array  $args       Assoc array of parameters to be passed.
+	 * @param string $response make_request response.
+	 */
+	private function log_response( $http_verb = '', $url = '', $args = [], $response = [] ) {
+		if ( ! apply_filters( 'rank_math/analytics/log_response', false ) ) {
+			return;
+		}
+		$uploads       = wp_upload_dir();
+		$file          = $uploads['basedir'] . '/rank-math/analytics-debug.log';
+		$wp_filesystem = WordPress::get_filesystem();
+
+		// Create log file if it doesn't exist.
+		$wp_filesystem->touch( $file );
+
+		// Not writable? Bail.
+		if ( ! $wp_filesystem->is_writable( $file ) ) {
+			return;
+		}
+
+		$message = $wp_filesystem->get_contents( $file );
+
+		$message .= '********************************' . PHP_EOL;
+		$message .= $http_verb . PHP_EOL;
+		$message .= $url . PHP_EOL;
+		$message .= wp_json_encode( $args ) . PHP_EOL;
+		$message .= is_wp_error( $response ) ? 'FAILED: ' : '';
+		$message .= wp_json_encode( $response ) . PHP_EOL;
+		$message .= '================================' . PHP_EOL;
+
+		$wp_filesystem->put_contents( $file, $message );
+	}
 	/**
 	 * Decode the response and format any error messages for debugging
 	 *

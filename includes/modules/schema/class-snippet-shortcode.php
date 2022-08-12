@@ -151,6 +151,8 @@ class Snippet_Shortcode {
 				if ( file_exists( $file ) ) {
 					include $file;
 				}
+
+				$this->do_action( 'snippet/after_schema_content', $this );
 				?>
 
 			</div>

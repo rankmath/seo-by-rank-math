@@ -121,7 +121,34 @@ class Module {
 	 * @return bool
 	 */
 	public function is_probadge() {
-		return isset( $this->args['probadge'] ) && $this->args['probadge'] && defined( 'RANK_MATH_PRO_FILE' );
+		return isset( $this->args['probadge'] ) && $this->args['probadge'];
+	}
+
+	/**
+	 * Is module upgradeable?
+	 *
+	 * @return bool
+	 */
+	public function is_upgradeable() {
+		return isset( $this->args['upgradeable'] ) && $this->args['upgradeable'];
+	}
+
+	/**
+	 * Is PRO module.
+	 *
+	 * @return bool
+	 */
+	public function is_pro_module() {
+		return isset( $this->args['probadge'] ) && $this->args['probadge'] && ! defined( 'RANK_MATH_PRO_FILE' );
+	}
+
+	/**
+	 * Get the module dependencies.
+	 *
+	 * @return array
+	 */
+	public function get_dependencies() {
+		return isset( $this->args['dep_modules'] ) ? $this->args['dep_modules'] : [];
 	}
 
 	/**

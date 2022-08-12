@@ -69,7 +69,7 @@ export function noDataMessage( title, text = '' ) {
 	)
 	return (
 		<div id="rank-math-pro-cta" className="rank-math-analytics-notice">
-			<div className="rank-math-cta-table">
+			<div className="rank-math-cta-table woocommerce-table rank-math-table">
 				<div className="rank-math-cta-header">
 					<h2>{ title }</h2>
 				</div>

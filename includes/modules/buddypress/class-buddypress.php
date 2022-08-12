@@ -80,6 +80,7 @@ class BuddyPress {
 
 		$data['ProfilePage'] = [
 			'@type'    => 'ProfilePage',
+			'@id'      => get_author_posts_url( $user_id ),
 			'headline' => sprintf( 'About %s', get_the_author_meta( 'display_name', $user_id ) ),
 			'about'    => [
 				'@type'       => 'Person',
@@ -158,7 +159,6 @@ class BuddyPress {
 	 * @return null|Object
 	 */
 	private function get_group() {
-
 		if ( ! function_exists( 'groups_get_current_group' ) ) {
 			return '';
 		}

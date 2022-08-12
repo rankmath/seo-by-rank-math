@@ -296,7 +296,7 @@ function rank_math_analyze_focus_keywords() {
 		];
 	}
 
-	$in_search_post_types = get_post_types( [ 'exclude_from_search' => false ] );
+	$in_search_post_types = Helper::get_allowed_post_types();
 	$in_search_post_types = empty( $in_search_post_types ) ? '' : " AND {$wpdb->posts}.post_type IN ('" . join( "', '", array_map( 'esc_sql', $in_search_post_types ) ) . "')";
 
 	$meta_query = new WP_Meta_Query(
@@ -414,7 +414,7 @@ function rank_math_get_post_type_links( $rows, $extra_params ) {
 function rank_math_get_posts_with_titles() {
 	global $wpdb;
 
-	$in_post_types = get_post_types( [ 'exclude_from_search' => false ] );
+	$in_post_types = Helper::get_allowed_post_types();
 	$in_post_types = empty( $in_post_types ) ? '' : " AND {$wpdb->posts}.post_type IN ('" . join( "', '", array_map( 'esc_sql', $in_post_types ) ) . "')";
 	$meta_query    = new WP_Meta_Query(
 		[

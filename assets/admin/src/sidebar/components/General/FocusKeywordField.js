@@ -74,7 +74,7 @@ class FocusKeywordField extends Component {
 			blur: this.hideDropdown,
 		}
 
-		if ( rankMath.isUserRegistered ) {
+		if ( rankMath.autoSuggestKeywords ) {
 			this.callbacks.input = debounce( this.onInput.bind( this ), 300 )
 		}
 
