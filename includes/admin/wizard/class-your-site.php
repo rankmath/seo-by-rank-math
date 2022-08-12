@@ -84,7 +84,7 @@ class Your_Site implements Wizard_Step {
 				'type'    => 'file',
 				'name'    => esc_html__( 'Logo for Google', 'rank-math' ),
 				'default' => $this->get_default_logo(),
-				'desc'    => __( '<strong>Min Size: 160Χ90px, Max Size: 1920X1080px</strong>.<br />A squared image is preferred by the search engines.', 'rank-math' ),
+				'desc'    => __( '<strong>Min Size: 112Χ112px</strong>.<br />A squared image is preferred by the search engines.', 'rank-math' ),
 				'options' => [ 'url' => false ],
 			]
 		);

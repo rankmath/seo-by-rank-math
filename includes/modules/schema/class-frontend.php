@@ -239,6 +239,10 @@ class Frontend {
 			return $data;
 		}
 
+		if ( function_exists( 'bp_is_user' ) && bp_is_user() ) {
+			return $data;
+		}
+
 		$temp_data = $data;
 		$id        = $temp_data['ProfilePage']['@id'];
 		$ids       = [];

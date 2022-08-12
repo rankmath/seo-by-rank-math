@@ -449,14 +449,20 @@ class JsonLD {
 	private function add_prop_image( &$entity ) {
 		$logo = Helper::get_settings( 'titles.knowledgegraph_logo' );
 		if ( ! $logo ) {
+			$logo_id = \get_option( 'site_logo' );
+			$logo    = $logo_id ? wp_get_attachment_image_url( $logo_id ) : '';
+		}
+
+		if ( ! $logo ) {
 			return;
 		}
 
 		$entity['logo'] = [
-			'@type'   => 'ImageObject',
-			'@id'     => home_url( '/#logo' ),
-			'url'     => $logo,
-			'caption' => $this->get_website_name(),
+			'@type'      => 'ImageObject',
+			'@id'        => home_url( '/#logo' ),
+			'url'        => $logo,
+			'contentUrl' => $logo,
+			'caption'    => $this->get_website_name(),
 		];
 		$this->add_prop_language( $entity['logo'] );
 

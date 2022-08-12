@@ -104,7 +104,7 @@
                 text-decoration: none;
 
                 i {
-                    font-size: 24px;
+                    font-size: 18px;
                     line-height: 18px;
 
                     width: auto;
@@ -113,15 +113,14 @@
 
                     transition: .25s all linear;
 
-                    color: $primary;
+                    color: $gray;
                     border-radius: 2px;
                 }
 
                 &:hover,
                 &:focus {
                     i {
-                        color: #fff;
-                        background: $primary;
+                        color: $primary;
                     }
                 }
             }

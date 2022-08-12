@@ -2,7 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { forEach, isArray, isObject, isString, isUndefined, map, get, has, find } from 'lodash'
+import { forEach, isArray, isObject, isString, isUndefined, map, get, has, find, isEmpty } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -359,6 +359,52 @@ const registerDefaultHooks = () => {
 			return schema
 		}
 	)
+
+	addFilter(
+		'rank_math_processed_schema',
+		'rank-math',
+		( schema ) => {
+			if ( ! isUndefined( schema.positiveNotes ) && ! isEmpty( schema.positiveNotes.itemListElement ) ) {
+				const values = schema.positiveNotes.itemListElement.split( /\r?\n/ )
+				schema.positiveNotes.itemListElement = values.map( ( value, key ) => {
+					return {
+						'@type': 'ListItem',
+						position: key + 1,
+						name: value,
+					}
+				} )
+			}
+
+			if ( ! isUndefined( schema.negativeNotes ) && ! isEmpty( schema.negativeNotes.itemListElement ) ) {
+				const values = schema.negativeNotes.itemListElement.split( /\r?\n/ )
+				schema.negativeNotes.itemListElement = values.map( ( value, key ) => {
+					return {
+						'@type': 'ListItem',
+						position: key + 1,
+						name: value,
+					}
+				} )
+			}
+
+			return schema
+		}
+	)
+
+	addFilter(
+		'rank_math_pre_schema',
+		'rank-math',
+		( schema ) => {
+			if ( ! isUndefined( schema.positiveNotes ) && ! isEmpty( schema.positiveNotes.itemListElement ) ) {
+				const values = schema.positiveNotes.itemListElement.map( ( value ) => value.name )
+				schema.positiveNotes.itemListElement = values.join( '\n' )
+			}
+
+			if ( ! isUndefined( schema.negativeNotes ) && ! isEmpty( schema.negativeNotes.itemListElement ) ) {
+				const values = schema.negativeNotes.itemListElement.map( ( value ) => value.name )
+				schema.negativeNotes.itemListElement = values.join( '\n' )
+			}
+			return schema
+		} )
 }
 
 export default registerDefaultHooks

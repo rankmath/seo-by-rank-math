@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.0
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.94
+Stable tag: 1.0.95
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -580,17 +580,16 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.94 [July 28, 2022] =
-* Improved: [NEW!] Major improvement in the plugin's UI
-* Added: Hover effect on inactive radio button type fields like [Redirection Type](https://rankmath.com/kb/general-settings/#redirection-type) & [Breadcrumbs](https://rankmath.com/kb/general-settings/#breadcrumbs)
-* Improved: Show two Schema types in one row in the [Schema Generator](https://rankmath.com/kb/schema-generator/) popup for a better user experience
-* Improved: Disconnect account button styling
-* Improved: Variable dropdown description color for better readability
-* Improved: Width issue of [GSC and GA fields](https://rankmath.com/kb/general-settings/#search-console-settings) if there are no properties in it
-* Improved: Replaced Rank Math's SVG icon in the header of Settings page with the font icon
-* Updated: [Google preview](https://rankmath.com/kb/general-tab/#the-preview-section) as per the current Google design
-* Updated: Font icons in the plugin for better UX
-* Fixed: Adding incorrect [Source URL in Redirection](https://rankmath.com/kb/setting-up-redirections/#source-urls) was leading to a white screen of death
-* Fixed: Pillar icon was incorrectly showing in the [Post list](https://rankmath.com/kb/titles-and-meta/#bulk-editing)
+= 1.0.95 [Aug 11, 2022] =
+* Added: Site logo is now used as a fallback when the logo is not added in the [Local SEO settings](https://rankmath.com/kb/local-seo/#logo)
+* Added: The `contentUrl` property in `ImageObject`
+* Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#disable-keyword-suggestions) to disable the Focus keyword auto-suggestion
+* Improved: [SEO Analysis](https://rankmath.com/kb/seo-analysis/) will now include only the post types where the Rank Math metabox is enabled
+* Improved: CPT name will now be used in the [Breadcrumb](https://rankmath.com/kb/general-settings/#breadcrumbs) instead of Post type's Singular name
+* Fixed: [Content AI test](https://rankmath.com/kb/how-to-use-content-ai/#content-ai-results-overview) was not recognizing the uppercase keywords in the content
+* Fixed: Dependent [Modules](https://rankmath.com/kb/managing-modules/) were not getting deactivated after deactivating the main module
+* Fixed: [Links Per Sitemap](https://rankmath.com/kb/configure-sitemaps/#links-per-sitemap) option was not working properly on some setups
+* Fixed: [URL Inspection API](https://rankmath.com/kb/url-inspection-api-integration/) was not working on some sites where the site locale didn't match with the language code required by the URL Inspection API
+* Fixed: PHP warning on BuddyPress Members page when Schema module is active
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

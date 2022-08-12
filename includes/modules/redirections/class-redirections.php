@@ -59,7 +59,7 @@ class Redirections {
 		?>
 		<h3>
 			<?php esc_html_e( 'Redirections', 'rank-math' ); ?>
-			<a href="<?php echo esc_url( Helper::get_admin_url( 'redirections' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'rank-math' ); ?>"><i class="dashicons dashicons-ellipsis"></i></a>
+			<a href="<?php echo esc_url( Helper::get_admin_url( 'redirections' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'rank-math' ); ?>"><i class="dashicons dashicons-chart-bar"></i></a>
 		</h3>
 		<div class="rank-math-dashabord-block">
 			<div>

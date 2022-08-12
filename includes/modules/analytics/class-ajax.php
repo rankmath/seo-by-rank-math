@@ -65,7 +65,7 @@ class AJAX {
 			$offset_st = $offset > 0 ? "-$offset" : '+' . absint( $offset );
 			$timezone  = 'Etc/GMT' . $offset_st;
 		}
-		
+
 		$args = [
 			'displayName' => get_bloginfo( 'sitename' ) . ' - ' . 'GA4',
 			'parent'      => "accounts/{$account_id}",
@@ -86,7 +86,7 @@ class AJAX {
 		$all_accounts  = get_option( 'rank_math_analytics_all_services' );
 		if ( isset( $all_accounts['accounts'][ $account_id ] ) ) {
 			$all_accounts['accounts'][ $account_id ]['properties'][ $property_id ] = [
-				'name' 	     => $property_name,
+				'name'       => $property_name,
 				'id'         => $property_id,
 				'account_id' => $account_id,
 				'type'       => 'GA4',
@@ -482,11 +482,11 @@ class AJAX {
 	 * @param string $property_id GA4 property ID.
 	 */
 	private function create_ga4_data_stream( $property_id ) {
-		$args          = [
+		$args = [
 			'type'          => 'WEB_DATA_STREAM',
 			'displayName'   => 'Website',
 			'webStreamData' => [
-				'defaultUri' => home_url()
+				'defaultUri' => home_url(),
 			],
 		];
 
@@ -499,7 +499,6 @@ class AJAX {
 			return $stream['error']['message'];
 		}
 
-		
 		return [
 			'id'            => str_replace( "properties/{$property_id}/dataStreams/", '', $stream['name'] ),
 			'name'          => $stream['displayName'],

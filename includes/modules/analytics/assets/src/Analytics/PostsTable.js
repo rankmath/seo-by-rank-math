@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { map, isUndefined } from 'lodash'
+import { map, isUndefined, isEmpty } from 'lodash'
 import { TableCard } from '@woocommerce/components'
 
 /**
@@ -189,6 +189,7 @@ const PostsTable = ( props ) => {
 				downloadable={ true }
 				rowsPerPage={ 25 }
 				rows={ processRows( rows, map( headers, 'key' ) ) }
+				isLoading={ isEmpty( rows ) }
 				totalRows={ 50 }
 				summary={ tableSummary }
 				showPageArrowsLabel={ false }
