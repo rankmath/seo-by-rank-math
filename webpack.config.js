@@ -71,7 +71,6 @@ const entryPoints = {
 		blocks: './assets/admin/src/blocks.js',
 		classic: './assets/admin/src/classic/classic.js',
 		gutenberg: './assets/admin/src/gutenberg/gutenberg.js',
-		elementor: './assets/admin/src/elementor/elementor.js',
 		'rank-math-app': './assets/admin/src/app.js',
 		'gutenberg-formats': './assets/admin/src/gutenberg/formats/index.js',
 		'gutenberg-primary-term': './assets/admin/src/gutenberg-primary-term.js',
@@ -125,9 +124,12 @@ const entryPoints = {
 		'schema-template': './includes/modules/schema/assets/src/metabox-template.js',
 	},
 	divi: {
-		divi: './assets/admin/src/divi/divi.js',
-		'divi-iframe': './assets/admin/src/divi/divi-iframe.js',
-		'divi-admin': './assets/admin/src/divi/divi-admin.js',
+		divi: './includes/3rdparty/divi/assets/src/divi.js',
+		'divi-iframe': './includes/3rdparty/divi/assets/src/divi-iframe.js',
+		'divi-admin': './includes/3rdparty/divi/assets/src/divi-admin.js',
+	},
+	elementor: {
+		elementor: './includes/3rdparty/elementor/assets/src/elementor.js',
 	},
 	'content-ai': {
 		'content-ai': './includes/modules/content-ai/assets/src/index.js',
@@ -136,7 +138,8 @@ const entryPoints = {
 
 const paths = {
 	plugin: './assets/admin/js',
-	divi: './assets/admin/js',
+	divi: './includes/3rdparty/divi/assets/js',
+	elementor: './includes/3rdparty/elementor/assets/js',
 	analytics: './includes/modules/analytics/assets/js',
 	front: './assets/front/js',
 	'instant-indexing': './includes/modules/instant-indexing/assets/js',

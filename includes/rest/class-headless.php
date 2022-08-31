@@ -113,7 +113,9 @@ class Headless extends WP_REST_Controller {
 		// Setup WordPress.
 		$_SERVER['REQUEST_URI'] = $this->generate_request_uri( $url );
 		remove_all_actions( 'wp' );
+		remove_all_actions( 'parse_request' );
 		wp();
+
 		if ( $this->is_home ) {
 			$GLOBALS['wp_query']->is_home = true;
 		}

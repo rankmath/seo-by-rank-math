@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 class Admin_Dashboard_Nav {
 
 	/**
-	 * Display dashabord tabs.
+	 * Display dashboard tabs.
 	 */
 	public function display() {
 		$nav_links = $this->get_nav_links();

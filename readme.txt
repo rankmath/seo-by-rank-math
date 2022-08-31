@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.0
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.95
+Stable tag: 1.0.96
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -580,16 +580,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.95 [Aug 11, 2022] =
-* Added: Site logo is now used as a fallback when the logo is not added in the [Local SEO settings](https://rankmath.com/kb/local-seo/#logo)
-* Added: The `contentUrl` property in `ImageObject`
-* Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#disable-keyword-suggestions) to disable the Focus keyword auto-suggestion
-* Improved: [SEO Analysis](https://rankmath.com/kb/seo-analysis/) will now include only the post types where the Rank Math metabox is enabled
-* Improved: CPT name will now be used in the [Breadcrumb](https://rankmath.com/kb/general-settings/#breadcrumbs) instead of Post type's Singular name
-* Fixed: [Content AI test](https://rankmath.com/kb/how-to-use-content-ai/#content-ai-results-overview) was not recognizing the uppercase keywords in the content
-* Fixed: Dependent [Modules](https://rankmath.com/kb/managing-modules/) were not getting deactivated after deactivating the main module
-* Fixed: [Links Per Sitemap](https://rankmath.com/kb/configure-sitemaps/#links-per-sitemap) option was not working properly on some setups
-* Fixed: [URL Inspection API](https://rankmath.com/kb/url-inspection-api-integration/) was not working on some sites where the site locale didn't match with the language code required by the URL Inspection API
-* Fixed: PHP warning on BuddyPress Members page when Schema module is active
+= 1.0.96 [Aug 24, 2022] =
+* Improved: [Open Graph image](https://rankmath.com/kb/open-graph-meta-tags/#og-image) generation code to execute faster on the front-end
+* Improved: File structure by moving page builder-related assets to their respective folders
+* Fixed: All Redirection rules were not getting exported to the [.htaccess & Nginx .conf file](https://rankmath.com/kb/setting-up-redirections/#backing-up-your-redirects)
+* Fixed: [Local SEO Sitemap](https://rankmath.com/kb/kml-sitemap/) was showing the wrong date format on non-English sites
+* Fixed: Incompatibility with the Oxygen plugin
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

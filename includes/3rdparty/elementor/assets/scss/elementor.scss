@@ -1,12 +1,12 @@
 // compileCompressed: ../css/$1.css
 
-@import '../../vendor/bourbon/bourbon';
-@import 'mixins';
-@import 'variables';
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/variables';
 
-@import "sidebar";
+@import "../../../../../assets/admin/scss/sidebar";
 
-@import "./partials/common/pro-cta";
+@import "../../../../../assets/admin/scss/partials/common/pro-cta";
 
 .#{$namespace} {
 	// Main RM Tabs

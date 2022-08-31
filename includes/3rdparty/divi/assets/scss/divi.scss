@@ -1,0 +1,16 @@
+// compileCompressed: ../css/$1.css
+
+@import '../../../../../assets/admin/scss/sidebar',
+    '../../../../../assets/admin/scss/partials/common/pro-cta';
+
+@import
+    'variables',
+    'app-root',
+    'app',
+    'settings-bar-root',
+    'settings-bar',
+    'modal-button',
+    'modal',
+    'primary-term-select',
+    'rtl',
+    'sidebar';

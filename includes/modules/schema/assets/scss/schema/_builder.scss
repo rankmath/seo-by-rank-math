@@ -283,6 +283,14 @@
 
             position: relative;
             z-index: 1;
+
+            width: 100%;
+
+            &-help {
+                float: right;
+                font-size: 13px;
+                font-style: italic;
+            }
         }
 
         &--field {

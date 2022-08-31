@@ -17,7 +17,7 @@ import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
 /**
  * Internal dependencies
  */
-import Editor from '../rankMathEditor'
+import Editor from '../../../../../assets/admin/src/rankMathEditor'
 import DataCollector from './DataCollector'
 import rankMathSettingsBar from './settings-bar'
 import rankMathPrimaryTerm from './primary-term'

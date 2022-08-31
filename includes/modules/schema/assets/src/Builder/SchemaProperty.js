@@ -77,7 +77,7 @@ const SchemaProperty = ( props ) => {
 	}
 
 	if ( props.isCustom ) {
-		fieldProps.type = 'text'
+		fieldProps.type = applyFilters( 'rank_math_schema_custom_field_type', 'text', property )
 		delete fieldProps.label
 	}
 
