@@ -186,11 +186,11 @@ class Divi {
 		}
 
 		wp_enqueue_style( 'wp-components' );
-		wp_enqueue_style( 'rank-math-editor', rank_math()->plugin_url() . 'assets/admin/css/divi.css', [], rank_math()->version );
+		wp_enqueue_style( 'rank-math-editor', rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/css/divi.css', [], rank_math()->version );
 
 		wp_register_script( 'rank-math-analyzer', rank_math()->plugin_url() . 'assets/admin/js/analyzer.js', null, rank_math()->version, true );
-		wp_enqueue_script( 'rank-math-editor', rank_math()->plugin_url() . 'assets/admin/js/divi.js', $divi_deps, rank_math()->version, true );
-		wp_enqueue_script( 'rank-math-divi-iframe', rank_math()->plugin_url() . 'assets/admin/js/divi-iframe.js', [ 'jquery', 'lodash' ], rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-editor', rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/js/divi.js', $divi_deps, rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-divi-iframe', rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/js/divi-iframe.js', [ 'jquery', 'lodash' ], rank_math()->version, true );
 
 		if ( Helper::is_module_active( 'rich-snippet' ) ) {
 			wp_enqueue_style( 'rank-math-schema', rank_math()->plugin_url() . 'includes/modules/schema/assets/css/schema.css', [ 'wp-components' ], rank_math()->version );

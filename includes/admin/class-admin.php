@@ -87,7 +87,7 @@ class Admin implements Runner {
 	}
 
 	/**
-	 * Display dashabord tabs.
+	 * Display dashboard tabs.
 	 */
 	public function display_dashboard_nav() {
 		$nav_tabs = new Admin_Dashboard_Nav();

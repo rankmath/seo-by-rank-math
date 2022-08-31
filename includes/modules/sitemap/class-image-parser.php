@@ -219,7 +219,7 @@ class Image_Parser {
 		$customs = Arr::from_string( $customs, "\n" );
 		foreach ( $customs as $key ) {
 			$src = get_post_meta( $this->post->ID, $key, true );
-			if ( Str::is_non_empty( $src ) && preg_match( '/\.(jpg|jpeg|png|gif)$/i', $src ) ) {
+			if ( Str::is_non_empty( $src ) && Helper::is_image_url( $src ) ) {
 				$this->get_image_item( $src );
 			}
 		}

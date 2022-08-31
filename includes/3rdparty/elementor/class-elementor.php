@@ -131,13 +131,13 @@ class Elementor {
 
 		wp_enqueue_style( 'wp-components' );
 		wp_enqueue_style( 'site-health' );
-		wp_enqueue_style( 'rank-math-editor', rank_math()->plugin_url() . 'assets/admin/css/elementor.css', [], rank_math()->version );
+		wp_enqueue_style( 'rank-math-editor', rank_math()->plugin_url() . 'includes/3rdparty/elementor/assets/css/elementor.css', [], rank_math()->version );
 		$media_query = '';
 
 		$dark_styles = $this->do_filter(
 			'elementor/dark_styles',
 			[
-				'rank-math-elementor-dark' => rank_math()->plugin_url() . 'assets/admin/css/elementor-dark.css',
+				'rank-math-elementor-dark' => rank_math()->plugin_url() . 'includes/3rdparty/elementor/assets/css/elementor-dark.css',
 			]
 		);
 
@@ -150,7 +150,7 @@ class Elementor {
 
 		Helper::add_json( 'elementorDarkMode', $dark_styles );
 
-		wp_enqueue_script( 'rank-math-editor', rank_math()->plugin_url() . 'assets/admin/js/elementor.js', $deps, rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-editor', rank_math()->plugin_url() . 'includes/3rdparty/elementor/assets/js/elementor.js', $deps, rank_math()->version, true );
 		rank_math()->variables->setup();
 		rank_math()->variables->setup_json();
 	}

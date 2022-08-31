@@ -105,6 +105,7 @@ class Metabox implements Runner {
 				rank_math()->version
 			);
 
+			wp_enqueue_media();
 			wp_enqueue_script(
 				'rank-math-editor',
 				rank_math()->plugin_url() . 'assets/admin/js/classic.js',

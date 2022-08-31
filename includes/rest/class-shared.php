@@ -201,7 +201,7 @@ class Shared extends WP_REST_Controller {
 	public function update_schemas( WP_REST_Request $request ) {
 		$object_id   = $request->get_param( 'objectID' );
 		$object_type = $request->get_param( 'objectType' );
-		$schemas     = $request->get_param( 'schemas' );
+		$schemas     = apply_filters( 'rank_math/schema/filter_data', $request->get_param( 'schemas' ), $request );
 		$new_ids     = [];
 
 		do_action( 'rank_math/pre_update_schema', $object_id, $object_type );

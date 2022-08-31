@@ -58,11 +58,11 @@
 		"webpack-cli": "^4.10.0"
 	},
 	"dependencies": {
-		"@woocommerce/components": "^10.2.1",
+		"@woocommerce/components": "^10.3.0",
 		"@woocommerce/settings": "^1.0.0",
 		"@wordpress/keycodes": "^3.14.0",
 		"@yaireo/tagify": "^4.14.1",
-		"interpolate-components": "^1.1.1",
+		"@automattic/interpolate-components": "^1.2.1",
 		"lodash": "^4.17.21",
 		"recharts": "^2.1.13"
 	},
@@ -87,6 +87,7 @@
 		"status": "webpack --mode=production --env what=status --progress",
 		"version-control": "webpack --mode=production --env what=version-control --progress",
 		"divi": "webpack --mode=production --env what=divi --progress",
+		"elementor": "webpack --mode=production --env what=elementor --progress",
 		"ca": "webpack --mode=production --env what=content-ai --progress",
 		"dist": "npm run build && npm run a && npm run f && npm run s && npm run m && npm run ca && npm run redirection && npm run acf && npm run woocommerce && npm run role-manager && npm run seo-analysis && npm run status && npm run version-control && npm run divi && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS"
 	},

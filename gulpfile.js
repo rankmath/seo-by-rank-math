@@ -15,8 +15,16 @@ const paths = {
 		dest: 'assets/front/css',
 	},
 	admin: {
-		src: 'assets/admin/scss/**/*.scss',
+		src: 'assets/admin/scss/*.scss',
 		dest: 'assets/admin/css',
+	},
+	divi: {
+		src: 'includes/3rdparty/divi/assets/scss/**/*.scss',
+		dest: 'includes/3rdparty/divi/assets/css',
+	},
+	elementor: {
+		src: 'includes/3rdparty/elementor/assets/scss/**/*.scss',
+		dest: 'includes/3rdparty/elementor/assets/css',
 	},
 	modules: {
 		src: 'includes/modules/**/assets/scss/**/*.scss',
@@ -58,6 +66,20 @@ function adminCSS() {
 		)
 		.pipe( autoprefixer() )
 		.pipe( dest( paths.admin.dest, { sourcemaps: '.' } ) )
+		&&
+	src( paths.divi.src, { sourcemaps: false } )
+		.pipe(
+			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
+		)
+		.pipe( autoprefixer() )
+		.pipe( dest( paths.divi.dest, { sourcemaps: '.' } ) )
+		&&
+	src( paths.elementor.src, { sourcemaps: false } )
+		.pipe(
+			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
+		)
+		.pipe( autoprefixer() )
+		.pipe( dest( paths.elementor.dest, { sourcemaps: '.' } ) )
 }
 
 /**
@@ -100,6 +122,8 @@ function schemaCSS() {
 function watchFiles() {
 	watch( paths.front.src, frontCSS )
 	watch( paths.admin.src, adminCSS )
+	watch( paths.divi.src, adminCSS )
+	watch( paths.elementor.src, adminCSS )
 	watch( paths.modules.src, modulesCSS )
 }
 

@@ -10,6 +10,7 @@
 
 namespace RankMath\Redirections;
 
+use RankMath\Redirections\Import_Export;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Param;
@@ -55,6 +56,7 @@ class Export {
 
 		$items = DB::get_redirections(
 			[
+				'limit'  => Import_Export::get()->limit,
 				'status' => 'active',
 			]
 		);
@@ -168,7 +170,7 @@ class Export {
 	 * @return string
 	 */
 	private function is_valid_regex( $source ) {
-		if ( 'regex' == $source['comparison'] && @preg_match( $source['pattern'], null ) === false ) { // phpcs:ignore
+		if ( 'regex' == $source['comparison'] && @preg_match( '/' . $source['pattern'] . '/', null ) === false ) { // phpcs:ignore
 			return false;
 		}
 

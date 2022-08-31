@@ -321,4 +321,14 @@ class Helper {
 		}
 		return date_i18n( $format, $timestamp_with_offset, $gmt );
 	}
+
+	/**
+	 * Check for valid image url.
+	 *
+	 * @param string $image_url The image url.
+	 * @return boolean
+	 */
+	public static function is_image_url( $image_url ) {
+		return filter_var( $image_url, FILTER_VALIDATE_URL ) && preg_match( '/\.(jpg|jpeg|png|gif|webp)$/i', $image_url );
+	}
 }

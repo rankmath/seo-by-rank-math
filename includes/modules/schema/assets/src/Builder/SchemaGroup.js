@@ -76,6 +76,7 @@ const SchemaGroup = ( props ) => {
 							return (
 								<div className="schema-property--label">
 									{ field.label }
+									{ field.labelHelp && <span className="schema-property--label-help">{ field.labelHelp }</span> }
 								</div>
 							)
 						}

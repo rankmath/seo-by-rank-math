@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { isUndefined } from 'lodash'
-import interpolateComponents from 'interpolate-components'
+import interpolateComponents from '@automattic/interpolate-components'
 
 const Interpolate = ( { tags, components, children } ) => {
 	components = components || {}

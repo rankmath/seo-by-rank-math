@@ -508,18 +508,24 @@ class Image {
 		}
 
 		foreach ( $images as $image ) {
-			$attachment_id = Attachment::get_by_url( $image );
-			if ( 0 === $attachment_id ) {
-				$this->add_image( $image );
-			} else {
-				$this->add_image_by_id( $attachment_id );
-			}
 
 			// If an image has been added, we're done.
 			if ( $this->has_images() ) {
-				return;
+				break;
+			}
+
+			if ( Url::is_external( $image ) ) {
+				$this->add_image( $image );
+			} else {
+				$attachment_id = Attachment::get_by_url( $image );
+				if ( 0 === $attachment_id ) {
+					$this->add_image( $image );
+				} else {
+					$this->add_image_by_id( $attachment_id );
+				}
 			}
 		}
+
 	}
 
 	/**

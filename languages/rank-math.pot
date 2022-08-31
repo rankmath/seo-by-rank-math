@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2022-08-11 03:20+0000\n"
+"POT-Creation-Date: 2022-08-24 04:18+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -1069,7 +1069,13 @@ msgstr ""
 msgid "Worldwide"
 msgstr ""
 
+msgid "Algeria"
+msgstr ""
+
 msgid "Argentina"
+msgstr ""
+
+msgid "Armenia"
 msgstr ""
 
 msgid "Australia"
@@ -1078,10 +1084,31 @@ msgstr ""
 msgid "Austria"
 msgstr ""
 
+msgid "Azerbaijan"
+msgstr ""
+
+msgid "Bahrain"
+msgstr ""
+
+msgid "Bangladesh"
+msgstr ""
+
+msgid "Belarus"
+msgstr ""
+
 msgid "Belgium"
 msgstr ""
 
+msgid "Bolivia, Plurinational State Of"
+msgstr ""
+
 msgid "Brazil"
+msgstr ""
+
+msgid "Bulgaria"
+msgstr ""
+
+msgid "Cambodia"
 msgstr ""
 
 msgid "Canada"
@@ -1093,13 +1120,31 @@ msgstr ""
 msgid "Colombia"
 msgstr ""
 
+msgid "Costa Rica"
+msgstr ""
+
+msgid "Croatia"
+msgstr ""
+
+msgid "Cyprus"
+msgstr ""
+
 msgid "Czechia"
 msgstr ""
 
 msgid "Denmark"
 msgstr ""
 
+msgid "Ecuador"
+msgstr ""
+
 msgid "Egypt"
+msgstr ""
+
+msgid "El Salvador"
+msgstr ""
+
+msgid "Estonia"
 msgstr ""
 
 msgid "Finland"
@@ -1111,7 +1156,13 @@ msgstr ""
 msgid "Germany"
 msgstr ""
 
+msgid "Ghana"
+msgstr ""
+
 msgid "Greece"
+msgstr ""
+
+msgid "Guatemala"
 msgstr ""
 
 msgid "Hong Kong"
@@ -1138,139 +1189,13 @@ msgstr ""
 msgid "Japan"
 msgstr ""
 
-msgid "Kenya"
-msgstr ""
-
-msgid "Malaysia"
-msgstr ""
-
-msgid "Mexico"
-msgstr ""
-
-msgid "Netherlands"
-msgstr ""
-
-msgid "New Zealand"
-msgstr ""
-
-msgid "Nigeria"
-msgstr ""
-
-msgid "Norway"
-msgstr ""
-
-msgid "Philippines"
-msgstr ""
-
-msgid "Poland"
-msgstr ""
-
-msgid "Portugal"
-msgstr ""
-
-msgid "Romania"
-msgstr ""
-
-msgid "Russia"
-msgstr ""
-
-msgid "Saudi Arabia"
-msgstr ""
-
-msgid "Singapore"
-msgstr ""
-
-msgid "South Africa"
-msgstr ""
-
-msgid "South Korea"
-msgstr ""
-
-msgid "Spain"
-msgstr ""
-
-msgid "Sweden"
-msgstr ""
-
-msgid "Switzerland"
-msgstr ""
-
-msgid "Taiwan"
-msgstr ""
-
-msgid "Thailand"
-msgstr ""
-
-msgid "Turkey"
-msgstr ""
-
-msgid "Ukraine"
-msgstr ""
-
-msgid "United Kingdom"
-msgstr ""
-
-msgid "United States"
-msgstr ""
-
-msgid "Vietnam"
-msgstr ""
-
-msgid "Algeria"
-msgstr ""
-
-msgid "Armenia"
-msgstr ""
-
-msgid "Azerbaijan"
-msgstr ""
-
-msgid "Bahrain"
-msgstr ""
-
-msgid "Bangladesh"
-msgstr ""
-
-msgid "Belarus"
-msgstr ""
-
-msgid "Bolivia, Plurinational State Of"
-msgstr ""
-
-msgid "Bulgaria"
-msgstr ""
-
-msgid "Cambodia"
-msgstr ""
-
-msgid "Costa Rica"
-msgstr ""
-
-msgid "Croatia"
-msgstr ""
-
-msgid "Cyprus"
-msgstr ""
-
-msgid "Ecuador"
-msgstr ""
-
-msgid "El Salvador"
-msgstr ""
-
-msgid "Estonia"
-msgstr ""
-
-msgid "Ghana"
-msgstr ""
-
-msgid "Guatemala"
-msgstr ""
-
 msgid "Jordan"
 msgstr ""
 
 msgid "Kazakhstan"
+msgstr ""
+
+msgid "Kenya"
 msgstr ""
 
 msgid "Korea, Republic Of"
@@ -1285,7 +1210,13 @@ msgstr ""
 msgid "Macedonia, The Former Yugoslav Republic Of"
 msgstr ""
 
+msgid "Malaysia"
+msgstr ""
+
 msgid "Malta"
+msgstr ""
+
+msgid "Mexico"
 msgstr ""
 
 msgid "Morocco"
@@ -1294,7 +1225,19 @@ msgstr ""
 msgid "Myanmar"
 msgstr ""
 
+msgid "Netherlands"
+msgstr ""
+
+msgid "New Zealand"
+msgstr ""
+
 msgid "Nicaragua"
+msgstr ""
+
+msgid "Nigeria"
+msgstr ""
+
+msgid "Norway"
 msgstr ""
 
 msgid "Pakistan"
@@ -1306,7 +1249,22 @@ msgstr ""
 msgid "Peru"
 msgstr ""
 
+msgid "Philippines"
+msgstr ""
+
+msgid "Poland"
+msgstr ""
+
+msgid "Portugal"
+msgstr ""
+
+msgid "Romania"
+msgstr ""
+
 msgid "Russian Federation"
+msgstr ""
+
+msgid "Saudi Arabia"
 msgstr ""
 
 msgid "Senegal"
@@ -1315,19 +1273,49 @@ msgstr ""
 msgid "Serbia"
 msgstr ""
 
+msgid "Singapore"
+msgstr ""
+
 msgid "Slovakia"
 msgstr ""
 
 msgid "Slovenia"
 msgstr ""
 
+msgid "South Africa"
+msgstr ""
+
+msgid "Spain"
+msgstr ""
+
 msgid "Sri Lanka"
+msgstr ""
+
+msgid "Sweden"
+msgstr ""
+
+msgid "Switzerland"
+msgstr ""
+
+msgid "Taiwan"
+msgstr ""
+
+msgid "Thailand"
 msgstr ""
 
 msgid "Tunisia"
 msgstr ""
 
+msgid "Turkey"
+msgstr ""
+
+msgid "Ukraine"
+msgstr ""
+
 msgid "United Arab Emirates"
+msgstr ""
+
+msgid "United Kingdom"
 msgstr ""
 
 msgid "United States Of America"

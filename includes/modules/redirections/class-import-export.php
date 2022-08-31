@@ -23,6 +23,40 @@ class Import_Export {
 	use Hooker;
 
 	/**
+	 * Limit
+	 *
+	 * @var string
+	 */
+	public $limit;
+
+	/**
+	 * Instance of this class.
+	 *
+	 * @var object
+	 */
+	protected static $instance;
+
+	/**
+	 * Get the singleton instance of this class.
+	 *
+	 * @return Import_Export
+	 */
+	public static function get() {
+		if ( ! ( self::$instance instanceof self ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * The Constructor.
+	 */
+	public function __construct() {
+		$this->limit = $this->do_filter( 'redirections/export_notice_limit', 1000 );
+	}
+
+	/**
 	 * The hooks.
 	 */
 	public function hooks() {
@@ -36,21 +70,20 @@ class Import_Export {
 	 */
 	public function export_tab() {
 		// Show a notice if the number of redirections is too high.
-		$limit = $this->do_filter( 'redirections/export_notice_limit', 1000 );
 		$count = DB::get_redirections(
 			[
-				'limit'  => $limit,
+				'limit'  => $this->limit,
 				'status' => 'active',
 			]
 		);
 
-		if ( $count['count'] >= $limit ) {
+		if ( $count['count'] >= $this->limit ) {
 			?>
 			<div class="inline notice notice-warning notice-alt rank-math-notice" style="margin: 10px 10px 0;">
 				<p>
 					<?php
 					// Translators: Placeholder expands to number of redirections.
-					printf( esc_html__( 'Warning: you have more than %d active redirections. Exporting them to your .htaccess file may cause performance issues.', 'rank-math' ), $limit );
+					printf( esc_html__( 'Warning: you have more than %d active redirections. Exporting them to your .htaccess file may cause performance issues.', 'rank-math' ), $this->limit );
 					?>
 				</p>
 			</div>
@@ -105,4 +138,5 @@ class Import_Export {
 
 		<?php
 	}
+
 }

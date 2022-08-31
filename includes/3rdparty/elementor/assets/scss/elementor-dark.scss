@@ -1,10 +1,10 @@
 // compileCompressed: ../css/$1.css
 
-@import '../../vendor/bourbon/bourbon';
-@import 'mixins';
-@import 'variables';
+@import '../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../assets/admin/scss/mixins';
+@import '../../../../../assets/admin/scss/variables';
 
-@use 'sidebar';
+@use '../../../../../assets/admin/scss/sidebar';
 
 // Dark Mode
 .#{$namespace} {

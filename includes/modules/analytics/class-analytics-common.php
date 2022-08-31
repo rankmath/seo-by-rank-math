@@ -75,7 +75,7 @@ class Analytics_Common {
 				<i class="dashicons dashicons-chart-bar"></i>
 			</a>
 		</h3>
-		<div class="rank-math-dashabord-block items-4">
+		<div class="rank-math-dashboard-block items-4">
 			<?php
 			$items = $this->get_dashboard_widget_items();
 			foreach ( $items as $label => $item ) {

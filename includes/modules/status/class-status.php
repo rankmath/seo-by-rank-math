@@ -76,7 +76,7 @@ class Status extends Base {
 	}
 
 	/**
-	 * Display dashabord tabs.
+	 * Display dashboard tabs.
 	 */
 	public function display_nav() {
 		$default_tab = $this->do_filter( 'tools/default_tab', 'status' );
