@@ -59,4 +59,9 @@
 			font-weight: bold;
 		}
 	}
+
+	&-tools-wrap tr.cmb-row.cmb-type-switch th, 
+	&-tools-wrap tr.cmb-row.cmb-type-switch td {
+		padding: 20px 0 !important;
+	}
 }

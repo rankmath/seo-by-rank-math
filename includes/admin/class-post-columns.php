@@ -198,7 +198,7 @@ class Post_Columns implements Runner {
 		}
 		?>
 		<span class="rank-math-column-display"><?php echo esc_html( $title ); ?></span>
-		<span class="rank-math-column-value" data-field="title" contenteditable="true" tabindex="11"><?php echo esc_html( $title ); ?></span>
+		<textarea class="rank-math-column-value" data-field="title" tabindex="11"><?php echo esc_attr( $title ); ?></textarea>
 		<div class="rank-math-column-edit">
 			<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
 			<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
@@ -219,7 +219,7 @@ class Post_Columns implements Runner {
 		}
 		?>
 		<span class="rank-math-column-display"><?php echo esc_html( $description ); ?></span>
-		<span class="rank-math-column-value" data-field="description" contenteditable="true" tabindex="11"><?php echo esc_html( $description ); ?></span>
+		<textarea class="rank-math-column-value" data-field="description" tabindex="11"><?php echo esc_attr( $description ); ?></textarea>
 		<div class="rank-math-column-edit">
 			<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
 			<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
@@ -267,9 +267,7 @@ class Post_Columns implements Runner {
 				<span><?php echo $keyword ? esc_html( $keyword ) : esc_html__( 'Not Set', 'rank-math' ); ?></span>
 			</span>
 
-			<span class="rank-math-column-value" data-field="focus_keyword" contenteditable="true" tabindex="11">
-				<span><?php echo esc_html( $keyword ); ?></span>
-			</span>
+			<input class="rank-math-column-value" data-field="focus_keyword" tabindex="11" value="<?php echo esc_attr( $keyword ); ?>" />
 
 			<?php $this->do_action( 'post/column/seo_details', $post_id, $data, $this->data ); ?>
 
@@ -292,7 +290,7 @@ class Post_Columns implements Runner {
 			$title = get_the_title( $post_id );
 			?>
 			<span class="rank-math-column-display"><?php echo esc_html( $title ); ?></span>
-			<span class="rank-math-column-value" data-field="image_title" contenteditable="true" tabindex="11"><?php echo esc_html( $title ); ?></span>
+			<input class="rank-math-column-value" data-field="image_title" tabindex="11" value="<?php echo esc_attr( $title ); ?>" />
 			<div class="rank-math-column-edit">
 				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
 				<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
@@ -305,7 +303,7 @@ class Post_Columns implements Runner {
 			$alt = get_post_meta( $post_id, '_wp_attachment_image_alt', true );
 			?>
 			<span class="rank-math-column-display"><?php echo esc_html( $alt ); ?></span>
-			<span class="rank-math-column-value" data-field="image_alt" contenteditable="true" tabindex="11"><?php echo esc_html( $alt ); ?></span>
+			<input class="rank-math-column-value" data-field="image_alt" tabindex="11" value="<?php echo esc_attr( $alt ); ?>" />
 			<div class="rank-math-column-edit">
 				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
 				<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>

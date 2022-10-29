@@ -699,7 +699,13 @@ class JsonLD {
 			return $description;
 		}
 
-		$description = $product->get_short_description() ? $product->get_short_description() : $product->get_description();
+		$product_object = get_post( $product->get_id() );
+		$description    = Paper::get_from_options( 'pt_product_description', $product_object, '%excerpt%' );
+
+		if ( ! $description ) {
+			$description = $product->get_short_description() ? $product->get_short_description() : $product->get_description();
+		}
+
 		$description = $this->do_filter( 'product_description/apply_shortcode', false ) ? do_shortcode( $description ) : WordPress::strip_shortcodes( $description );
 		return wp_strip_all_tags( $description, true );
 	}
@@ -719,7 +725,10 @@ class JsonLD {
 			return $title;
 		}
 
-		return $product->get_name();
+		$product_object = get_post( $product->get_id() );
+
+		$title = Paper::get_from_options( 'pt_product_title', $product_object, '%title% %sep% %sitename%' );
+		return $title ? $title : $product->get_name();
 	}
 
 	/**

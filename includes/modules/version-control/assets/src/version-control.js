@@ -26,9 +26,9 @@ import jQuery from 'jquery'
 			rollbackButton.text( rollbackButton.data( 'buttonlabel' ).replace( '%s', $( this ).val() ) )
 		} ).trigger( 'change' )
 
-		$( 'input[name="enable_auto_update"]' ).on( 'change', function() {
+		$( '#enable_auto_update' ).on( 'change', function() {
 			$( '#control_update_notification_email' )
-				.toggleClass( 'hidden', 'on' === $( this ).attr( 'value' ) )
-		} ).filter( ':checked' ).trigger( 'change' )
+				.toggleClass( 'hidden', ! $( this ).prop( 'checked' ) )
+		} ).trigger( 'change' )
 	} )
 }( jQuery ) )

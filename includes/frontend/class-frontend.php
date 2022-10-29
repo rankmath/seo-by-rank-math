@@ -62,8 +62,8 @@ class Frontend {
 			add_filter( 'bbp_get_breadcrumb', '__return_false' );
 		}
 
-		new Link_Attributes();
-		new Comments();
+		rank_math()->link_attributes = new Link_Attributes();
+		rank_math()->comments        = new Comments();
 	}
 
 	/**

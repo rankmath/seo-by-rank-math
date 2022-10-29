@@ -73,7 +73,7 @@ class RankMathPostList {
 			.on( 'input', function() {
 				const $this = jQuery( this )
 				const td = $this.closest( 'td' )
-				const val = $this.text()
+				const val = $this.val()
 
 				if ( val !== $this.prev().text() ) {
 					td.addClass( 'dirty' )
@@ -103,7 +103,19 @@ class RankMathPostList {
 			if ( display.find( 'span' ).length ) {
 				display = display.find( 'span' )
 			}
-			$this.find( '.rank-math-column-value' ).text( display.text() )
+
+			let value = display.html()
+			const emojis = value.match( /<img\s+[^>]*?src=("|')([^"']+)">/gm )
+			if ( emojis ) {
+				for ( const img of emojis ) {
+					let emoji = img.match( /alt=("|')([^"']+)/gm )[ 0 ]
+					emoji = emoji.replace( 'alt="', '' )
+
+					value = value.replaceAll( img, emoji )
+				}
+			}
+
+			$this.find( '.rank-math-column-value' ).val( value )
 		} )
 	}
 
@@ -129,7 +141,7 @@ class RankMathPostList {
 
 				columns.push( column )
 				data[ postID ] = data[ postID ] || {}
-				data[ postID ][ valueField.data( 'field' ) ] = valueField.text()
+				data[ postID ][ valueField.data( 'field' ) ] = valueField.val()
 			} )
 
 			if ( jQuery.isEmptyObject( data ) ) {
@@ -162,7 +174,7 @@ class RankMathPostList {
 
 			const data = {}
 			data[ postID ] = {}
-			data[ postID ][ valueField.data( 'field' ) ] = valueField.text()
+			data[ postID ][ valueField.data( 'field' ) ] = valueField.val()
 
 			self.save( data ).done( function( results ) {
 				if ( results.success ) {
@@ -182,9 +194,8 @@ class RankMathPostList {
 			display = display.find( 'span' )
 		}
 
-		const node = document.createElement( 'div' )
-		node.innerHTML = column.find( '.rank-math-column-value' ).text()
-		display.text( node.innerText )
+		const value = column.find( '.rank-math-column-value' ).val()
+		display.text( value )
 	}
 
 	save( data ) {

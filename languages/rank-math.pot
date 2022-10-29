@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2022-08-24 04:18+0000\n"
+"POT-Creation-Date: 2022-09-14 11:34+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -2267,6 +2267,12 @@ msgstr ""
 msgid "Input Data From:"
 msgstr ""
 
+msgid "Recalculate SEO Scores (opens in a new window)"
+msgstr ""
+
+msgid "Popup blocked. Try again?"
+msgstr ""
+
 #. translators: 1 is plugin name
 msgid "Import meta data from the %1$s plugin."
 msgstr ""
@@ -2884,6 +2890,36 @@ msgid "Delete the schema data from the old format (<1.0.48). Note: This process 
 msgstr ""
 
 msgid "Are you sure you want to delete the old schema data? This action is irreversible."
+msgstr ""
+
+msgid "Recalculate SEO Scores for Posts"
+msgstr ""
+
+msgid "This tool will recalculate the SEO score for all the posts that have a Focus Keyword set. Note: This process may take some time and the browser tab must be kept open while it is running."
+msgstr ""
+
+msgid "Recalculate Scores"
+msgstr ""
+
+msgid "All data updated"
+msgstr ""
+
+msgid "Recalculating SEO Scores"
+msgstr ""
+
+msgid "This process may take a while. Please keep this window open until the process is complete."
+msgstr ""
+
+msgid "Calculated:"
+msgstr ""
+
+msgid "The SEO Scores have been recalculated successfully!"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
 #. translators: placeholder is the number of modified posts.

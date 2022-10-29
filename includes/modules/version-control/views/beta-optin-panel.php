@@ -25,16 +25,14 @@ defined( 'ABSPATH' ) || exit;
 			<tr class="cmb-row cmb-type-switch">
 				<th scope="row"><label><?php esc_html_e( 'Beta Tester', 'rank-math' ); ?></label></th>
 				<td>
-					<ul class="cmb2-radio-list cmb2-list">
-						<li>
-							<input type="radio" class="cmb2-option" name="beta_optin" id="beta_optin1" value="off" <?php checked( ! $beta_optin ); ?>>
-							<label for="beta_optin1"><?php esc_html_e( 'Off', 'rank-math' ); ?></label>
-						</li>
-						<li>
-							<input type="radio" class="cmb2-option" name="beta_optin" id="beta_optin2" value="on" <?php checked( $beta_optin ); ?>>
-							<label for="beta_optin2"><?php esc_html_e( 'On', 'rank-math' ); ?></label>
-						</li>
-					</ul>
+					<label class="cmb2-toggle">
+						<input type="hidden" name="beta_optin" id="beta_optin_hidden" value="off">
+						<input type="checkbox" class="regular-text" name="beta_optin" id="beta_optin" value="on" <?php checked( $beta_optin ); ?>>
+						<span class="cmb2-slider">
+							<svg width="3" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 6" class="toggle_on" role="img" aria-hidden="true" focusable="false"><path d="M0 0h2v6H0z"></path></svg>
+							<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg>
+						</span>
+					</label>
 				</td>
 			</tr>
 		</tbody>

@@ -19,7 +19,6 @@ use WP_REST_Controller;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Traits\Meta;
-use MyThemeShop\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -90,6 +89,16 @@ class Admin extends WP_REST_Controller {
 				'methods'             => \WP_REST_Server::READABLE,
 				'callback'            => [ $this, 'dashboard_widget_items' ],
 				'permission_callback' => function() { return current_user_can( 'read' ); },
+			]
+		);
+
+		register_rest_route(
+			\RankMath\Rest\Rest_Helper::BASE,
+			'/updateSeoScore',
+			[
+				'methods'             => \WP_REST_Server::EDITABLE,
+				'callback'            => [ $this, 'update_seo_score' ],
+				'permission_callback' => [ $this, 'can_edit_posts' ],
 			]
 		);
 	}
@@ -174,6 +183,36 @@ class Admin extends WP_REST_Controller {
 	}
 
 	/**
+	 * Rest route to update the seo score.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function update_seo_score( WP_REST_Request $request ) {
+		$post_scores = $request->get_param( 'postScores' );
+		if ( empty( $post_scores ) ) {
+			return 0;
+		}
+
+		foreach ( $post_scores as $post_id => $score ) {
+			$post = get_post( $post_id );
+			if ( ! $post ) {
+				continue;
+			}
+
+			$score = (int) $score;
+			if ( $score < 0 || $score > 100 ) {
+				continue;
+			}
+
+			update_post_meta( $post_id, 'rank_math_seo_score', $score );
+		}
+
+		return 1;
+	}
+
+	/**
 	 * Update Setup Mode.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
@@ -188,6 +227,28 @@ class Admin extends WP_REST_Controller {
 
 		$settings['general']['setup_mode'] = $request->get_param( 'mode' );
 		Helper::update_all_settings( $settings['general'], null, null );
+
+		return true;
+	}
+
+	/**
+	 * Check if user can edit post.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return bool
+	 */
+	public function can_edit_posts( WP_REST_Request $request ) {
+		$post_scores = $request->get_param( 'postScores' );
+		if ( empty( $post_scores ) ) {
+			return false;
+		}
+
+		foreach ( $post_scores as $post_id => $score ) {
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				return false;
+			}
+		}
 
 		return true;
 	}

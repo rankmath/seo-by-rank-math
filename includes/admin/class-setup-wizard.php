@@ -287,6 +287,9 @@ class Setup_Wizard {
 		Helper::add_json( 'deactivated', esc_html__( 'Deactivated', 'rank-math' ) );
 		Helper::add_json( 'confirm', esc_html__( 'Are you sure you want to import settings into Rank Math? Don\'t worry, your current configuration will be saved as a backup.', 'rank-math' ) );
 		Helper::add_json( 'isConfigured', Helper::is_configured() );
+		
+		// Recalculate SEO Scores tool URL.
+		Helper::add_json( 'recalculateURL', Helper::get_admin_url( 'status', [ 'view' => 'tools', 'update_scores' => '1', '_wpnonce' => wp_create_nonce( 'rank-math-recalculate-scores' ) ] ) );
 
 		ob_start();
 

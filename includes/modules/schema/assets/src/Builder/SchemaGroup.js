@@ -10,6 +10,7 @@ import { get, startCase, map as mapProperties, isUndefined } from 'lodash'
 import { __ } from '@wordpress/i18n'
 import { applyFilters } from '@wordpress/hooks'
 import { Button, ButtonGroup, TextControl } from '@wordpress/components'
+import { RawHTML } from '@wordpress/element'
 
 /**
  * Internal dependencies
@@ -76,7 +77,7 @@ const SchemaGroup = ( props ) => {
 							return (
 								<div className="schema-property--label">
 									{ field.label }
-									{ field.labelHelp && <span className="schema-property--label-help">{ field.labelHelp }</span> }
+									{ field.labelHelp && <span className="schema-property--label-help">{ RawHTML( { children: field.labelHelp } ) }</span> }
 								</div>
 							)
 						}

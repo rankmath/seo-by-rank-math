@@ -153,6 +153,9 @@ class Import_Export implements Runner {
 
 		// Translators: %s is the plugin name.
 		Helper::add_json( 'cleanPluginConfirm', esc_html__( 'Are you sure you want erase all traces of %s?', 'rank-math' ) );
+
+		// Recalculate SEO Scores tool URL.
+		Helper::add_json( 'recalculateURL', Helper::get_admin_url( 'status', [ 'view' => 'tools', 'update_scores' => '1', '_wpnonce' => wp_create_nonce( 'rank-math-recalculate-scores' ) ] ) );
 	}
 
 	/**

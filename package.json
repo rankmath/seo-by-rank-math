@@ -58,11 +58,11 @@
 		"webpack-cli": "^4.10.0"
 	},
 	"dependencies": {
+		"@automattic/interpolate-components": "^1.2.1",
 		"@woocommerce/components": "^10.3.0",
 		"@woocommerce/settings": "^1.0.0",
 		"@wordpress/keycodes": "^3.14.0",
 		"@yaireo/tagify": "^4.14.1",
-		"@automattic/interpolate-components": "^1.2.1",
 		"lodash": "^4.17.21",
 		"recharts": "^2.1.13"
 	},

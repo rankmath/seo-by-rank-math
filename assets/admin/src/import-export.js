@@ -175,6 +175,36 @@ import boxTabs from '@helpers/boxTabs'
 					} )
 			},
 
+			getAllActions() {
+				let actions = $.map(
+					$( '.import-plugins .active-tab' )
+						.find( '.choices' )
+						.find( 'input:checkbox:checked' ),
+					function( input ) {
+						return input.value
+					}
+				)
+
+				/**
+				 * If it contains "recalculate", then move that to the beginning, or after "postmeta" if it exists.
+				 * The recalculate action opens a new window, and if we wait too long after user interaction then the browser will block it.
+				 * But it also has to be after postmeta, because postmeta is required for recalculate to work.
+				 */
+				if ( -1 !== actions.indexOf( 'recalculate' ) ) {
+					actions = actions.filter( function( action ) {
+						return 'recalculate' !== action
+					} )
+					const index = actions.indexOf( 'postmeta' )
+					if ( -1 !== index ) {
+						actions.splice( index + 1, 0, 'recalculate' )
+					} else {
+						actions.unshift( 'recalculate' )
+					}
+				}
+
+				return actions
+			},
+
 			importPlugin( event ) {
 				const button = $( event.currentTarget )
 
@@ -183,15 +213,7 @@ import boxTabs from '@helpers/boxTabs'
 					return
 				}
 
-				const actions = $.map(
-					button
-						.parents( '.active-tab' )
-						.find( '.choices' )
-						.find( 'input:checkbox:checked' ),
-					function( input ) {
-						return input.value
-					}
-				)
+				const actions = this.getAllActions()
 				if ( 1 > actions.length ) {
 					addNotice(
 						rankMath.importPluginSelectAction,
@@ -226,14 +248,20 @@ import boxTabs from '@helpers/boxTabs'
 							importTextarea.fadeOut( function() {
 								importTextarea.remove()
 							} )
-						}, 3000 )
+						}, 10000 )
 					}
 				)
 			},
 
 			ajaxImport( slug, actions, logger, paged, callback ) {
 				if ( 0 === actions.length ) {
-					this.addLog( 'Import finished.', logger )
+					let message = 'Import finished.'
+					// If "recalculate" is in getAllActions, then we need to show a different message to the user.
+					if ( -1 !== this.getAllActions().indexOf( 'recalculate' ) ) {
+						message = 'Import finished. You can continue while we recalculate your SEO scores.'
+					}
+
+					this.addLog( message, logger )
 					callback()
 					return
 				}
@@ -245,6 +273,13 @@ import boxTabs from '@helpers/boxTabs'
 							: 'Importing ' + action
 
 				paged = paged || 1
+
+				if ( 'recalculate' === action ) {
+					this.addLog( 'Starting SEO Score Recalculation...', logger )
+					this.startRecalculation( logger, callback )
+					this.ajaxImport( slug, actions, logger, null, callback )
+					return
+				}
 
 				this.addLog( message, logger )
 				ajax( 'import_plugin', {
@@ -333,6 +368,22 @@ import boxTabs from '@helpers/boxTabs'
 							5000
 						)
 					} )
+			},
+
+			startRecalculation( logger, callback ) {
+				// Start recalculation in a new small window.
+				const recalcWindow = window.open(
+					rankMath.recalculateURL,
+					'rank-math-recalculation',
+					'width=530,height=300'
+				)
+
+				// Check if the window is open.
+				if ( null === recalcWindow ) {
+					$( 'input[value="recalculate"]' ).prop( 'checked', false ).next( 'label' ).find( 'a' ).removeClass( 'hidden' )
+					this.addLog( 'The SEO Score Recalculation could not be started because the popup was blocked. Try again with the above link, or run it from Rank Math > Status & Tools > Database Tools.', logger )
+					callback()
+				}
 			},
 		}
 

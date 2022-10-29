@@ -93,6 +93,34 @@ import jQuery from 'jquery'
 					)
 				}
 
+				const getAllActions = function( checkboxWrap ) {
+					let actions = $.map(
+						checkboxWrap,
+						function( input ) {
+							return input.value
+						}
+					)
+	
+					/**
+					 * If it contains "recalculate", then move that to the beginning, or after "postmeta" if it exists.
+					 * The recalculate action opens a new window, and if we wait too long after user interaction then the browser will block it.
+					 * But it also has to be after postmeta, because postmeta is required for recalculate to work.
+					 */
+					if ( -1 !== actions.indexOf( 'recalculate' ) ) {
+						actions = actions.filter( function( action ) {
+							return 'recalculate' !== action
+						} )
+						const index = actions.indexOf( 'postmeta' )
+						if ( -1 !== index ) {
+							actions.splice( index + 1, 0, 'recalculate' )
+						} else {
+							actions.unshift( 'recalculate' )
+						}
+					}
+	
+					return actions
+				}
+
 				const setProgress = function( progress ) {
 					if ( progress > 100 ) {
 						progress = 100
@@ -101,6 +129,31 @@ import jQuery from 'jquery'
 					progressBar
 						.find( '#importBar' )
 						.css( 'width', progress + '%' )
+				}
+
+				let recalculationDone = false
+				const startRecalculation = function( logger, callback ) {
+					if ( recalculationDone ) {
+						return
+					}
+
+					// Start recalculation in a new small window.
+					const recalcWindow = window.open(
+						rankMath.recalculateURL,
+						'rank-math-recalculation',
+						'width=530,height=300'
+					)
+
+					recalculationDone = true
+	
+					// Check if the window is open.
+					if ( null === recalcWindow ) {
+						$( '.recalculate-scores input[type="checkbox"]' ).prop( 'checked', false ).next( 'label' ).find( 'a' ).removeClass( 'hidden' ).first().appendTo( '#import-progress-bar .left' )
+						addLog( 'The SEO Score Recalculation could not be started because the popup was blocked. Try again with the above link, or run it from Rank Math > Status & Tools > Database Tools.', logger )
+						callback()
+						return
+					}
+	
 				}
 
 				const ajaxImport = function(
@@ -124,6 +177,13 @@ import jQuery from 'jquery'
 								: 'Importing ' + action + ' from ' + plugin
 
 					let actionProgress = Math.floor( 100 / totalActions )
+
+					if ( 'recalculate' === action ) {
+						addLog( 'Recalculating SEO Scores...', logger )
+						startRecalculation( logger, callback )
+						ajaxImport( from, actions, logger, null, callback, plugin )
+						return
+					}
 
 					addLog( message, logger )
 					$.ajax( {
@@ -214,9 +274,7 @@ import jQuery from 'jquery'
 
 						plugins.push( plugin )
 
-						const actions = $.map( checkboxWrap, function( input ) {
-							return input.value
-						} )
+						const actions = getAllActions( checkboxWrap )
 						if ( 0 < actions.length && isPluginActive ) {
 							actions.push( 'deactivate' )
 						}
@@ -231,7 +289,7 @@ import jQuery from 'jquery'
 					button.prop( 'disabled', true )
 					importTextarea.show()
 					progressBar.show()
-					progressBar.find( '.plugin-from' ).html( plugins.join() )
+					progressBar.find( '.plugin-from' ).html( plugins.join(', ') )
 					addLog( 'Import started...', importTextarea )
 					pluginsData( importData, importTextarea, function() {
 						setProgress( 100 )

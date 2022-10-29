@@ -275,6 +275,7 @@ return array(
     'RankMath\\Thumbnail_Overlay' => $baseDir . '/includes/class-thumbnail-overlay.php',
     'RankMath\\Tools\\Database_Tools' => $baseDir . '/includes/modules/database-tools/class-database-tools.php',
     'RankMath\\Tools\\Remove_Schema' => $baseDir . '/includes/modules/database-tools/class-remove-schema.php',
+    'RankMath\\Tools\\Update_Score' => $baseDir . '/includes/modules/database-tools/class-update-score.php',
     'RankMath\\Tools\\Yoast_Blocks' => $baseDir . '/includes/modules/database-tools/class-yoast-blocks.php',
     'RankMath\\Tools\\Yoast_FAQ_Converter' => $baseDir . '/includes/modules/database-tools/class-yoast-faq-converter.php',
     'RankMath\\Tools\\Yoast_HowTo_Converter' => $baseDir . '/includes/modules/database-tools/class-yoast-howto-converter.php',
