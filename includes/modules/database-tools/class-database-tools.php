@@ -32,6 +32,7 @@ class Database_Tools {
 
 		Yoast_Blocks::get();
 		Remove_Schema::get();
+		Update_Score::get();
 		$this->hooks();
 	}
 
@@ -395,6 +396,14 @@ class Database_Tools {
 				'description'  => __( 'Delete the schema data from the old format (<1.0.48). Note: This process is irreversible and will delete all the metadata prefixed with rank_math_snippet.', 'rank-math' ),
 				'confirm_text' => __( 'Are you sure you want to delete the old schema data? This action is irreversible.', 'rank-math' ),
 				'button_text'  => __( 'Delete', 'rank-math' ),
+			];
+		}
+
+		if ( ! empty( Update_Score::get()->find() ) ) {
+			$tools['update_seo_score'] = [
+				'title'       => __( 'Recalculate SEO Scores for Posts', 'rank-math' ),
+				'description' => __( 'This tool will recalculate the SEO score for all the posts that have a Focus Keyword set. Note: This process may take some time and the browser tab must be kept open while it is running.', 'rank-math' ),
+				'button_text' => __( 'Recalculate Scores', 'rank-math' ),
 			];
 		}
 

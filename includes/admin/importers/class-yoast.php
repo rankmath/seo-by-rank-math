@@ -68,6 +68,7 @@ class Yoast extends Plugin_Importer {
 	 */
 	public function convert_variables( $string ) {
 		$string = str_replace( '%%term_title%%', '%term%', $string );
+		$string = str_replace( '%%category_description%%', '%term_description%', $string );
 		$string = preg_replace( '/%%cf_([^%]+)%%/i', '%customfield($1)%', $string );
 		$string = preg_replace( '/%%ct_([^%]+)%%/i', '%customterm($1)%', $string );
 		$string = preg_replace( '/%%ct_desc_([^%]+)%%/i', '%customterm($1)%', $string );

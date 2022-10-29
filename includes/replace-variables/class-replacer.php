@@ -130,7 +130,7 @@ class Replacer {
 			$this->exclude = $exclude;
 		}
 
-		self::$args = (object) wp_parse_args( $args, self::$defaults );
+		self::$args = (object) array_merge( self::$defaults, (array) $args );
 		$this->process_content();
 	}
 
@@ -140,13 +140,13 @@ class Replacer {
 	 * @return void
 	 */
 	private function process_content() {
-		if ( ! isset( self::$content_processed['post_content'] ) ) {
-			self::$content_processed['post_content'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_content ) : WordPress::strip_shortcodes( self::$args->post_content );
-			self::$content_processed['post_excerpt'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_excerpt ) : WordPress::strip_shortcodes( self::$args->post_excerpt );
+		if ( ! isset( self::$content_processed[ self::$args->ID ]['post_content'] ) ) {
+			self::$content_processed[ self::$args->ID ]['post_content'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_content ) : WordPress::strip_shortcodes( self::$args->post_content );
+			self::$content_processed[ self::$args->ID ]['post_excerpt'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_excerpt ) : WordPress::strip_shortcodes( self::$args->post_excerpt );
 		}
 
-		self::$args->post_content = self::$content_processed['post_content'];
-		self::$args->post_excerpt = self::$content_processed['post_excerpt'];
+		self::$args->post_content = self::$content_processed[ self::$args->ID ]['post_content'];
+		self::$args->post_excerpt = self::$content_processed[ self::$args->ID ]['post_excerpt'];
 	}
 
 	/**

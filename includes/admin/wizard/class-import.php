@@ -11,6 +11,7 @@
 namespace RankMath\Wizard;
 
 use RankMath\KB;
+use RankMath\Helper;
 use RankMath\Admin\Importers\Detector;
 
 defined( 'ABSPATH' ) || exit;
@@ -41,7 +42,7 @@ class Import implements Wizard_Step {
 			<div id="importProgress">
 				<div id="importBar"></div>
 			</div>
-			<span class="left"><strong><?php echo esc_html__( 'Importing: ', 'rank-math' ); ?></strong><span class="plugin-from"></span></span>
+			<span class="left"><strong><?php echo esc_html__( 'Importing: ', 'rank-math' ); ?></strong><span class="plugin-from"></span> </span>
 			<span class="right"><span class="number">0</span>% <?php echo esc_html__( 'Completed', 'rank-math' ); ?></span>
 		</div>
 		<textarea id="import-progress" class="import-progress-area large-text" disabled="disabled" rows="8"></textarea>
@@ -102,19 +103,40 @@ class Import implements Wizard_Step {
 					'options'    => $plugin['choices'],
 					'default'    => $choices,
 					'dep'        => [ [ 'import_from', $slug ] ],
-					'classes'    => 'nob nopb cmb-multicheck-inline with-description ' . $multi_checked . ' ' . $is_active,
+					'classes'    => 'nob nopb cmb-multicheck-inline with-description ' . $multi_checked,
 					'attributes' => [ 'data-active' => $is_active ],
 				]
 			);
 
 			$count++;
+
+			// Add checkbox field to Recalculate SEO Scores.
+			// But not for Redirections.
+			if ( 'redirections' === $slug ) {
+				continue;
+			}
+
+			$wizard->cmb->add_group_field(
+				$group_id,
+				[
+					'id'         => $slug . '_recalculate',
+					'type'       => 'checkbox',
+					'repeatable' => false,
+					'desc'       => esc_html__( 'Recalculate SEO Scores (opens in a new window)', 'rank-math' ) . ' <a href="' . esc_url( Helper::get_admin_url( 'status', [ 'view' => 'tools', 'update_scores' => '1', '_wpnonce' => wp_create_nonce( 'rank-math-recalculate-scores' ) ] ) ) . '" class="hidden recalculate-try-again" target="_blank">' . esc_html__( 'Popup blocked. Try again?', 'rank-math' ) . '</a>',
+					'value'      => 'recalculate',
+					'default'    => 'recalculate',
+					'dep'        => [ [ 'import_from', $slug ] ],
+					'classes'    => 'nob nopb recalculate-scores',
+					'attributes' => [ 'data-active' => $is_active, 'value' => 'recalculate' ],
+				]
+			);
 		}
 	}
 
 	/**
 	 * Set plugins priority.
 	 *
-	 * @param array $plugins Array of detected plgins.
+	 * @param array $plugins Array of detected plugins.
 	 *
 	 * @return array
 	 */
@@ -162,7 +184,7 @@ class Import implements Wizard_Step {
 		$desc = 'aio-rich-snippet' === $slug ? esc_html__( 'Import meta data from the %1$s plugin.', 'rank-math' ) : esc_html__( 'Import settings and meta data from the %1$s plugin.', 'rank-math' );
 
 		/* translators: 2 is link to Knowledge Base article */
-		$desc .= __( 'The process may take a few minutes if you have a large number of posts or pages <a href="%2$s" target="_blank">Learn more about the import process here.</a>', 'rank-math' );
+		$desc .= ' ' . __( 'The process may take a few minutes if you have a large number of posts or pages <a href="%2$s" target="_blank">Learn more about the import process here.</a>', 'rank-math' );
 
 		if ( $is_active ) {
 			/* translators: 1 is plugin name */

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.0
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.96
+Stable tag: 1.0.97
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -580,11 +580,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.96 [Aug 24, 2022] =
-* Improved: [Open Graph image](https://rankmath.com/kb/open-graph-meta-tags/#og-image) generation code to execute faster on the front-end
-* Improved: File structure by moving page builder-related assets to their respective folders
-* Fixed: All Redirection rules were not getting exported to the [.htaccess & Nginx .conf file](https://rankmath.com/kb/setting-up-redirections/#backing-up-your-redirects)
-* Fixed: [Local SEO Sitemap](https://rankmath.com/kb/kml-sitemap/) was showing the wrong date format on non-English sites
-* Fixed: Incompatibility with the Oxygen plugin
+= 1.0.97 [Sep 14, 2022] =
+* Added: [NEW!] Tool to [Recalculate the SEO scores](https://rankmath.com/kb/seo-score-not-available/)
+* Improved: Use SEO Title & SEO Description in the WooCommerce [Product Schema](https://rankmath.com/kb/woocommerce-product-schema/) instead of Product title & description
+* Improved: Toggle buttons UI on the [Version Control](https://rankmath.com/kb/version-control/) page
+* Fixed: [Index Status](https://rankmath.com/kb/url-inspection-api-integration/) was not working well on the WordPress installed in a subdirectory
+* Fixed: Emojis were getting removed from the SEO description at the time of updating the description using the [Bulk Edit option](https://rankmath.com/kb/bulk-editing-in-rank-math/)
+* Fixed: `%%category_description%%` variable was not getting [imported](https://rankmath.com/kb/yoast-seo-migration/#num-1-3-import-data-from-yoast-seo) from the Yoast plugin
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

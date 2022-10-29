@@ -7,6 +7,7 @@
  */
 
 use RankMath\Admin\Importers\Detector;
+use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -52,10 +53,17 @@ $first = empty( $plugins ) ? '' : array_keys( $plugins )[0];
 													$id = "{$slug}_{$key}";
 													?>
 													<li>
-														<input type="checkbox" class="cmb2-option" name="<?php echo $slug; ?>[]" id="<?php echo $id; ?>" value="<?php echo $key; ?>" checked="checked">
-														<label for="<?php echo $id; ?>"><?php echo $label; ?></label>
+														<input type="checkbox" class="cmb2-option" name="<?php echo esc_attr( $slug ); ?>[]" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $key ); ?>" checked="checked">
+														<label for="<?php echo esc_attr( $id ); ?>"><?php echo wp_kses_post( $label ); ?></label>
 													</li>
 												<?php endforeach; ?>
+
+												<?php if ( 'redirections' !== $slug ) : ?>
+													<li style="margin-top: 20px;">
+														<input type="checkbox" class="cmb2-option" name="<?php echo esc_attr( $slug ); ?>[]" id="<?php echo esc_attr( $slug ); ?>_recalculate" value="recalculate" checked="checked">
+														<label for="<?php echo esc_attr( $slug ); ?>_recalculate"><?php esc_html_e( 'Recalculate SEO Scores (opens in a new window)', 'rank-math' ); ?> <a href="<?php echo esc_url( Helper::get_admin_url( 'status', [ 'view' => 'tools', 'update_scores' => '1', '_wpnonce' => wp_create_nonce( 'rank-math-recalculate-scores' ) ] ) ); ?>" class="hidden recalculate-try-again" target="_blank"><?php esc_html_e( 'Popup blocked. Try again?', 'rank-math' ); ?></a></label>
+													</li>
+												<?php endif; ?>
 											</ul>
 										</td>
 									</tr>

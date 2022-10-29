@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { debounce, isEmpty, isUndefined, isObject, intersection } from 'lodash'
+import { debounce, isEmpty, isUndefined, isObject, intersection, forEach } from 'lodash'
 import { Analyzer, Paper, Helpers } from '@rankMath/analyzer'
 
 /**
@@ -113,6 +113,7 @@ class Assessor {
 					Helpers.removeDiacritics( keyword ),
 					keywords
 				)
+				let totalScore = {}
 				const researches =
 					0 === index
 						? rankMath.assessor.researchesTests
