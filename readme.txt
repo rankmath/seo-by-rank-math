@@ -4,8 +4,8 @@ Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.0
 Requires at least: 5.6
-Requires PHP: 7.2
-Stable tag: 1.0.98.1
+Requires PHP: 7.4
+Stable tag: 1.0.98.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -596,6 +596,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 = 1.0.98.1 [Sep 22, 2022] =
 * Fixed: Strict PHP 7.2 error. It is recommended to update the PHP version to at least 7.4.
+
+= 1.0.98.2 [Sep 24, 2022] =
+* Fixed: Clicking on the [Questions tab of Content AI](https://rankmath.com/kb/how-to-use-content-ai/#questions) was crashing the editor on some setups
+* Fixed: Button to open the Rank Math modal was not working in the [Divi's Frontend editor](https://rankmath.com/blog/divi-seo/) on some installations
+* Fixed: Error in console when [Frontend Stats Bar](https://rankmath.com/kb/analytics-stats-bar/#num-2-2-enable-stats) option was enabled
 
 **Note:** From the next update, we will stop supporting older versions.
 

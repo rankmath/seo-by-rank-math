@@ -140,6 +140,8 @@ class Divi {
 			]
 		);
 
+		Helper::add_json( 'links', KB::get_links() );
+
 		Helper::add_json(
 			'validationl10n',
 			[
