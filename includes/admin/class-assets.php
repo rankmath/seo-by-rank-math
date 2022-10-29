@@ -120,7 +120,7 @@ class Assets implements Runner {
 
 		Helper::add_json(
 			'links',
-			KB::get_links(),
+			KB::get_links()
 		);
 
 		Helper::add_json(
