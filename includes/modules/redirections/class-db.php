@@ -438,7 +438,14 @@ class DB {
 	 */
 	public static function delete( $ids ) {
 		Cache::purge( $ids );
-		return self::table()->whereIn( 'id', (array) $ids )->delete();
+		$deleted = self::table()->whereIn( 'id', (array) $ids )->delete();
+
+		/**
+		 * Fires after deleting redirections.
+		 */
+		do_action( 'rank_math/redirection/deleted', $ids, $deleted );
+
+		return $deleted;
 	}
 
 	/**

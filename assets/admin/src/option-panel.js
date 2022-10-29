@@ -221,6 +221,7 @@ import addNotice from '@helpers/addNotice'
 								tab.removeAttr( 'id' )
 								tab.find( '.rank-math-notice' ).remove()
 								tab.find( '.rank-math-desc' ).remove()
+								tab.find( 'input, select, textarea' ).remove()
 							} )
 
 							tabs.find( '.rank-math-tab' )

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.0
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.99
+Stable tag: 1.0.100
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -580,15 +580,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.99 [Oct 06, 2022] =
-* Improved: Remove all Action Scheduler tasks related to Rank Math after uninstalling the plugin
-* Updated: Description links in the [Webmaster Tools tab](https://rankmath.com/kb/general-settings/#webmaster-tools) of the General Settings
-* Fixed: Converting Yoast's HowTo & FAQ block was working only on the 'Posts', not on other post types
-* Fixed: PHP warning on some setups after importing the data from [SEOPress](https://rankmath.com/kb/seopress-migration/)
-* Fixed: PHP error after deleting the post when [Link Counter module](https://rankmath.com/kb/link-counter/) was enabled
-* Fixed: PHP error when invalid schema data is saved in the Database
-* Fixed: Copying [Schema shortcode](https://rankmath.com/kb/rich-snippets/#book-shortcode) using the Keyboard was not working in the Elementor editor
-* Fixed: [Index Now API key](https://rankmath.com/kb/how-to-use-indexnow/#managing-api-key) was changed every time the Settings are updated
-* Fixed: Missing Analytics table error on some setups
+= 1.0.100[Oct 19, 2022] =
+* Fixed: Missing [Google Analytics tracking code](https://rankmath.com/kb/install-google-analytics/) on some setups
+* Fixed: [Index Status](https://rankmath.com/kb/analytics/#index-status) was not working well on Arabic language sites
+* Fixed: Filter to change [Opengraph image](https://rankmath.com/kb/filters-hooks-api-developer/#change-opengraph-image) was not working when an image was not added in the settings
+* Fixed: Sitemap was getting timed out on some sites hosted on Cloudflare when the [Include Images in Sitemap](https://rankmath.com/kb/configure-sitemaps/#images-in-sitemaps) option was enabled
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

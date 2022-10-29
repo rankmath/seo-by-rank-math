@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2022-10-06 06:31+0000\n"
+"POT-Creation-Date: 2022-10-19 05:13+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -4086,7 +4086,7 @@ msgid "Google Search Console"
 msgstr ""
 
 #. translators: Google Search Console Link
-msgid "Enter your Google Search Console verification HTML code or ID. Get it from here: %s"
+msgid "Enter your Google Search Console verification HTML code or ID. Learn how to get it: %s"
 msgstr ""
 
 msgid "Search Console Verification Page"
@@ -4106,14 +4106,14 @@ msgid "Baidu Webmaster Tools"
 msgstr ""
 
 #. translators: Baidu webmaster link
-msgid "Enter your Baidu Webmaster Tools verification HTML code or ID. Get it from here: %s"
+msgid "Enter your Baidu Webmaster Tools verification HTML code or ID. Learn how to get it: %s"
 msgstr ""
 
 msgid "Yandex Verification ID"
 msgstr ""
 
 #. translators: Yandex webmaster link
-msgid "Enter your Yandex verification HTML code or ID. Get it from here: %s"
+msgid "Enter your Yandex verification HTML code or ID. Learn how to get it: %s"
 msgstr ""
 
 msgid "Yandex.Webmaster Page"
@@ -4123,7 +4123,7 @@ msgid "Pinterest Verification ID"
 msgstr ""
 
 #. translators: Pinterest webmaster link
-msgid "Enter your Pinterest verification HTML code or ID. Get it from here: %s"
+msgid "Enter your Pinterest verification HTML code or ID. Learn how to get it: %s"
 msgstr ""
 
 msgid "Pinterest Account"
@@ -4133,7 +4133,7 @@ msgid "Norton Safe Web Verification ID"
 msgstr ""
 
 #. translators: Norton webmaster link
-msgid "Enter your Norton Safe Web verification HTML code or ID. Get it from here: %s"
+msgid "Enter your Norton Safe Web verification HTML code or ID. Learn how to get it: %s"
 msgstr ""
 
 msgid "Norton Ownership Verification Page"

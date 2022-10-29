@@ -69,10 +69,10 @@ class Url_Inspection extends Request {
 		$gsc_profile        = Console::get_site_url();
 		$rank_math_site_url = wp_parse_url( home_url(), PHP_URL_HOST );
 		$rank_math_site_url = ( is_ssl() ? 'https://' : 'http://' ) . $rank_math_site_url;
-
 		$lang_arr  = \explode( '_', get_locale() );
-		$lang_code = $lang_arr[0] . '-' . $lang_arr[1];
-		$args      = [
+		$lang_code = empty( $lang_arr[1] ) ? $lang_arr[0] : $lang_arr[0] . '-' . $lang_arr[1];
+
+		$args = [
 			'inspectionUrl' => untrailingslashit( $rank_math_site_url ) . $page,
 			'siteUrl'       => $gsc_profile,
 			'languageCode'  => $lang_code,

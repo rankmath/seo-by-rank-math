@@ -12,6 +12,7 @@ namespace RankMath\Redirections;
 
 use RankMath\Helper;
 use MyThemeShop\Helpers\Url;
+use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -452,5 +453,18 @@ class Redirection {
 		$home_dir = ltrim( Helper::get_home_url( '', 'relative' ), '/' );
 
 		return $home_dir ? str_replace( trailingslashit( $home_dir ), '', $url ) : $url;
+	}
+
+	/**
+	 * Get the current URI.
+	 *
+	 * @return string
+	 */
+	public static function get_full_uri() {
+		$uri = str_replace( home_url( '/' ), '', Param::server( 'REQUEST_URI' ) );
+		$uri = urldecode( $uri );
+		$uri = trim( self::strip_subdirectory( $uri ), '/' );
+
+		return $uri;
 	}
 }

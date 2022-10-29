@@ -14,7 +14,6 @@ use WP_Query;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -87,15 +86,11 @@ class Redirector {
 	 * Set the required values.
 	 */
 	private function start() {
-		$this->uri = str_replace( home_url( '/' ), '', Param::server( 'REQUEST_URI' ) );
-		$this->uri = urldecode( $this->uri );
-		$this->uri = trim( Redirection::strip_subdirectory( $this->uri ), '/' );
-
 		// Complete request uri.
-		$this->full_uri = $this->uri;
+		$this->full_uri = Redirection::get_full_uri();
 
 		// Remove query string.
-		$this->uri = explode( '?', $this->uri );
+		$this->uri = explode( '?', $this->full_uri );
 		if ( isset( $this->uri[1] ) ) {
 			$this->query_string = $this->uri[1];
 		}
@@ -313,7 +308,8 @@ class Redirector {
 			$redirection = DB::get_redirection_by_id( $redirection, 'active' );
 		}
 
-		if ( false === $redirection || ! DB::compare_sources( $redirection['sources'], $this->uri ) ) {
+		$custom_match = $this->do_filter( 'redirection/redirection_match', false, $redirection );
+		if ( false === $redirection || ( ! DB::compare_sources( $redirection['sources'], $this->uri ) && ! $custom_match ) ) {
 			return;
 		}
 

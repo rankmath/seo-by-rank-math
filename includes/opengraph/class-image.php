@@ -210,10 +210,21 @@ class Image {
 	 *
 	 * @param string $attachment Source URL to the image.
 	 */
-	public function add_image( $attachment ) {
+	public function add_image( $attachment = '' ) {
 		// In the past `add_image` accepted an image url, so leave this for backwards compatibility.
 		if ( Str::is_non_empty( $attachment ) ) {
 			$attachment = [ 'url' => $attachment ];
+		}
+
+		/**
+		 * Allow changing the OpenGraph image.
+		 * The dynamic part of the hook name, $this->network, is the network slug (facebook, twitter).
+		 *
+		 * @param string $img The image we are about to add.
+		 */
+		$filter_image_url = trim( $this->do_filter( "opengraph/{$this->network}/image", isset( $attachment['url'] ) ? $attachment['url'] : '' ) );
+		if ( ! empty( $filter_image_url ) ) {
+			$attachment = [ 'url' => $filter_image_url ];
 		}
 
 		if ( ! is_array( $attachment ) || empty( $attachment['url'] ) ) {
@@ -230,14 +241,7 @@ class Image {
 			return;
 		}
 
-		/**
-		 * Allow changing the OpenGraph image.
-		 *
-		 * The dynamic part of the hook name. $this->network, is the network slug.
-		 *
-		 * @param string $img The image we are about to add.
-		 */
-		$image_url = trim( $this->do_filter( "opengraph/{$this->network}/image", $attachment['url'] ) );
+		$image_url = $attachment['url'];
 		if ( empty( $image_url ) ) {
 			return;
 		}
@@ -336,8 +340,13 @@ class Image {
 
 		// If not, get default image.
 		$image_id = Helper::get_settings( 'titles.open_graph_image_id' );
-		if ( ! $this->has_images() && $image_id > 0 ) {
-			$this->add_image_by_id( $image_id );
+		if ( ! $this->has_images() ) {
+			if ( $image_id > 0 ) {
+				$this->add_image_by_id( $image_id );
+				return;
+			}
+
+			$this->add_image(); // This allows "opengraph/{$this->network}/image" filter to be used even if no image is set.
 		}
 	}
 
