@@ -523,7 +523,7 @@ class JsonLD {
 	 * @param  array  $data  Schema Data.
 	 */
 	public function add_prop_publisher( &$entity, $key, $data ) {
-		if ( ! isset( $data['publisher'] ) ) {
+		if ( empty( $data['publisher'] ) ) {
 			return;
 		}
 

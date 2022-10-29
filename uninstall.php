@@ -25,9 +25,13 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-// Clear cron.
-wp_clear_scheduled_hook( 'rank_math_tracker_send_event' );
-wp_clear_scheduled_hook( 'rank_math_search_console_get_analytics' );
+// Clear scheduled tasks.
+if ( class_exists( 'ActionScheduler_QueueRunner' ) ) {
+	ActionScheduler_QueueRunner::instance()->unhook_dispatch_async_request();
+}
+if ( class_exists( 'ActionScheduler_DBStore' ) ) {
+	ActionScheduler_DBStore::instance()->cancel_actions_by_group( 'rank-math' );
+}
 
 // Set rank_math_clear_data_on_uninstall to TRUE to delete all data on uninstall.
 if ( true === apply_filters( 'rank_math_clear_data_on_uninstall', false ) ) {

@@ -78,7 +78,7 @@ class Links {
 		$processor->storage->cleanup( $post_id );
 
 		// Update link counts.
-		$processor->storage->update_link_counts( $post_id, 0, $links );
+		$processor->storage->update_link_counts( $post_id, [], $links );
 	}
 
 	/**

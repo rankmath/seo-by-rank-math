@@ -15,13 +15,14 @@ use MyThemeShop\Helpers\DB;
 use RankMath\Traits\Hooker;
 use RankMath\Analytics\DB as AnalyticsDB;
 use RankMath\Analytics\Url_Inspection;
+use RankMath\Google\Console;
 
 use function as_unschedule_all_actions;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Console class.
+ * Inspections class.
  */
 class Inspections {
 
@@ -43,8 +44,11 @@ class Inspections {
 	 * Constructor.
 	 */
 	public function __construct() {
+
+		$this->create_tables();
+
 		// If console is not connected, ignore all, no need to proceed.
-		if ( ! \RankMath\Google\Console::is_console_connected() ) {
+		if ( ! Console::is_console_connected() ) {
 			return;
 		}
 

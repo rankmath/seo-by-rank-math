@@ -32,7 +32,7 @@ $cmb->add_field(
 		'after_field' => '<a href="#" id="indexnow_reset_key" class="button button-secondary large-button"><span class="dashicons dashicons-update"></span> ' . esc_html__( 'Change Key', 'rank-math' ) . '</a>',
 		'classes'     => 'rank-math-advanced-option',
 		'attributes'  => [
-			'disabled' => 'disabled',
+			'readonly' => 'readonly',
 		],
 	]
 );

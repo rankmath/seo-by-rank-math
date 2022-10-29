@@ -1675,7 +1675,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]",
 					"dependency": [
@@ -1971,7 +1971,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]",
 					"dependency": [
@@ -2271,7 +2271,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]",
 					"dependency": [
@@ -2981,7 +2981,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]"
 				}
@@ -3423,7 +3423,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]"
 				}
@@ -3537,7 +3537,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]"
 				}
@@ -3712,7 +3712,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]",
 					"dependency": [
@@ -4177,7 +4177,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]",
 					"dependency": [
@@ -4771,7 +4771,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]"
 				}
@@ -5095,7 +5095,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]"
 				}
@@ -5341,7 +5341,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]",
 					"dependency": [
@@ -5751,7 +5751,7 @@ export default {
 						"type": "text",
 						"label": __( "Shortcode", "rank-math" ),
 						"help": __( "You can either use this shortcode or Schema Block in the block editor to print the schema data in the content in order to meet the Google's guidelines. Read more about it <a href=https://developers.google.com/search/docs/guides/sd-policies#content target=_blank>here</a>.", "rank-math" ),
-						"disabled": "disabled"
+						"readonly": "readonly"
 					},
 					"value": "[rank_math_rich_snippet]"
 				}

@@ -774,8 +774,13 @@ class SEOPress extends Plugin_Importer {
 
 		if ( ! $is_noindex || ! $is_nofollow ) {
 			$robots    = $this->get_default_robots( $object_id, $object_type );
-			$current[] = ! $is_noindex && ! empty( $robots['noindex'] ) ? 'noindex' : 'index';
 			$current[] = ! $is_nofollow && ! empty( $robots['nofollow'] ) ? 'nofollow' : '';
+
+			// Keep global no index status.
+			if ( ! empty( $robots['noindex'] ) ) {
+				unset( $current[ 'index' ] );
+				$current[] = 'noindex';
+			}
 		}
 
 		$this->update_meta( $object_type, $object_id, 'rank_math_robots', array_unique( $current ) );
