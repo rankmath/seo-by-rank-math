@@ -6,6 +6,8 @@
  * @subpackage RankMath\Admin
  */
 
+use RankMath\KB;
+
 defined( 'ABSPATH' ) || exit;
 
 ?>
@@ -13,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 	<tbody>
 		<tr class="top">
 			<td align="left">
-				<a href="https://rankmath.com/kb/seo-email-reporting/?utm_source=Plugin&utm_medium=Email%20Report%20CTA&utm_campaign=WP"><?php $this->image( 'rank-math-pro.jpg', 540, 422, __( 'Rank Math PRO', 'rank-math' ) ); ?></a>
+				<a href="<?php KB::the( 'seo-email-reporting', 'Email Report CTA' ); ?>"><?php $this->image( 'rank-math-pro.jpg', 540, 422, __( 'Rank Math PRO', 'rank-math' ) ); ?></a>
 			</td>
 		</tr>
 	</tbody>

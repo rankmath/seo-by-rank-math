@@ -67,7 +67,7 @@ class Admin extends Base {
 				'icon'      => 'rm-icon rm-icon-settings',
 				'title'     => esc_html__( 'General', 'rank-math' ),
 				'file'      => $this->directory . '/settings/general.php',
-				'desc'      => esc_html__( 'This tab contains General settings related to the XML sitemaps.', 'rank-math' ) . ' <a href="' . KB::get( 'sitemap-general' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
+				'desc'      => esc_html__( 'This tab contains General settings related to the XML sitemaps.', 'rank-math' ) . ' <a href="' . KB::get( 'sitemap-general', 'Options Panel Sitemap General Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
 				/* translators: sitemap url */
 				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Your sitemap index can be found here: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . '</p></div>' . $this->get_nginx_notice(),
 			],
@@ -112,8 +112,8 @@ class Admin extends Base {
 			'product'    => esc_html__( 'your product pages', 'rank-math' ),
 		];
 		$urls   = [
-			'attachment' => KB::get( 'sitemap-media' ),
-			'product'    => KB::get( 'sitemap-product' ),
+			'attachment' => KB::get( 'sitemap-media', 'Options Panel Sitemap Attachments Tab' ),
+			'product'    => KB::get( 'sitemap-product', 'Options Panel Sitemap Product Tab' ),
 		];
 
 		// Post type label seprator.
@@ -130,7 +130,7 @@ class Admin extends Base {
 
 			/* translators: Post Type label */
 			$thing = isset( $things[ $post_type ] ) ? $things[ $post_type ] : sprintf( __( 'single %s', 'rank-math' ), $name );
-			$url   = isset( $urls[ $post_type ] ) ? $urls[ $post_type ] : ( in_array( $name, [ 'post', 'page' ], true ) ? KB::get( "sitemap-{$name}" ) : '' );
+			$url   = isset( $urls[ $post_type ] ) ? $urls[ $post_type ] : ( in_array( $name, [ 'post', 'page' ], true ) ? KB::get( "sitemap-{$name}", 'Options Panel Sitemap ' . $object->label . ' Tab' ) : '' );
 
 			$tabs[ 'sitemap-post-type-' . $object->name ] = [
 				'title'     => 'attachment' === $post_type ? esc_html__( 'Attachments', 'rank-math' ) : $object->label,
@@ -180,14 +180,14 @@ class Admin extends Base {
 				case 'product_tag':
 					/* translators: Taxonomy singular label */
 					$thing = sprintf( __( 'your product %s pages', 'rank-math' ), strtolower( $taxonomy->labels->singular_name ) );
-					$url   = KB::get( "sitemap-$taxonomy->name" );
+					$url   = KB::get( "sitemap-$taxonomy->name", 'Options Panel Sitemap tax ' . $taxonomy->name . ' Tab' );
 					break;
 
 				default:
 					/* translators: Taxonomy singular label */
 					$thing = sprintf( __( '%s archives', 'rank-math' ), strtolower( $taxonomy->labels->singular_name ) );
 					$name  = strtolower( $taxonomy->labels->name );
-					$url   = in_array( $name, [ 'category', 'tags' ], true ) ? KB::get( "sitemap-{$name}" ) : '';
+					$url   = in_array( $name, [ 'category', 'tags' ], true ) ? KB::get( "sitemap-{$name}", 'Options Panel Sitemap ' . $taxonomy->labels->name . ' Tab' ) : '';
 			}
 
 			$tabs[ 'sitemap-taxonomy-' . $taxonomy->name ] = [

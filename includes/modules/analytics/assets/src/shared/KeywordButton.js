@@ -5,6 +5,11 @@ import { __ } from '@wordpress/i18n'
 import { Fragment } from '@wordpress/element'
 import { Button, withFilters } from '@wordpress/components'
 
+/**
+ * Internal dependencies
+ */
+import getLink from '@helpers/getLink'
+
 const KeywordButton = ( props ) => {
 	const { sequence } = props
 	return (
@@ -12,7 +17,7 @@ const KeywordButton = ( props ) => {
 			{ sequence }
 			<Button
 				className="button button-secondary button-small add-keyword"
-				href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Add%20KW%20Button&utm_campaign=WP"
+				href={ getLink( 'pro', 'Add KW Button' ) }
 				target="_blank"
 			>
 				<div className="rank-math-tooltip">

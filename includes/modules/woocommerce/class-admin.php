@@ -73,7 +73,7 @@ class Admin extends Base {
 					'icon'  => 'rm-icon rm-icon-cart',
 					'title' => esc_html__( 'WooCommerce', 'rank-math' ),
 					/* translators: Link to kb article */
-					'desc'  => sprintf( esc_html__( 'Choose how you want Rank Math to handle your WooCommerce SEO. %s.', 'rank-math' ), '<a href="' . KB::get( 'woocommerce-settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+					'desc'  => sprintf( esc_html__( 'Choose how you want Rank Math to handle your WooCommerce SEO. %s.', 'rank-math' ), '<a href="' . KB::get( 'woocommerce-settings', 'Options Panel WooCommerce Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options-general.php',
 				],
 			],

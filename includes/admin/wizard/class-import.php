@@ -11,7 +11,6 @@
 namespace RankMath\Wizard;
 
 use RankMath\KB;
-use RankMath\Helper;
 use RankMath\Admin\Importers\Detector;
 
 defined( 'ABSPATH' ) || exit;
@@ -122,7 +121,7 @@ class Import implements Wizard_Step {
 					'id'         => $slug . '_recalculate',
 					'type'       => 'checkbox',
 					'repeatable' => false,
-					'desc'       => esc_html__( 'Recalculate SEO Scores (opens in a new window)', 'rank-math' ) . ' <a href="' . esc_url( Helper::get_admin_url( 'status', [ 'view' => 'tools', 'update_scores' => '1', '_wpnonce' => wp_create_nonce( 'rank-math-recalculate-scores' ) ] ) ) . '" class="hidden recalculate-try-again" target="_blank">' . esc_html__( 'Popup blocked. Try again?', 'rank-math' ) . '</a>',
+					'desc'       => esc_html__( 'Recalculate SEO Scores', 'rank-math' ),
 					'value'      => 'recalculate',
 					'default'    => 'recalculate',
 					'dep'        => [ [ 'import_from', $slug ] ],
@@ -191,6 +190,6 @@ class Import implements Wizard_Step {
 			$desc .= '<br>' . __( ' %1$s plugin will be disabled automatically moving forward to avoid conflicts. <strong>It is thus recommended to import the data you need now.</strong>', 'rank-math' );
 		}
 
-		return sprintf( wp_kses_post( $desc ), $plugin['name'], KB::get( 'seo-import' ) );
+		return sprintf( wp_kses_post( $desc ), $plugin['name'], KB::get( 'seo-import', 'SW Import Step' ) );
 	}
 }

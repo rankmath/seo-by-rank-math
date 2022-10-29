@@ -5,6 +5,11 @@ import { __ } from '@wordpress/i18n'
 import { Fragment } from '@wordpress/element'
 import { Dashicon, withFilters } from '@wordpress/components'
 
+/**
+ * Internal dependencies
+ */
+import getLink from '@helpers/getLink'
+
 const TopKeywords = () => {
 	return (
 		<Fragment>
@@ -16,7 +21,7 @@ const TopKeywords = () => {
 					<div className="rank-math-cta-body">
 						<Dashicon size="50" icon="awards" />
 						<p>{ __( 'Prioritize what’s most important so you can take action before its too late by seeing keywords you’re ranking well for and keywords where your site’s position has dropped.', 'rank-math' ) }</p>
-						<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Winning%20KW%20CTA&utm_campaign=WP" target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
+						<a href={ getLink( 'pro', 'Winning KW CTA' ) } target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
 					</div>
 				</div>
 			</div>

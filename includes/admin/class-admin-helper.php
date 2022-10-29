@@ -12,6 +12,7 @@
 
 namespace RankMath\Admin;
 
+use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Data_Encryption;
 use RankMath\Helpers\Security;
@@ -153,7 +154,7 @@ class Admin_Helper {
 				sprintf(
 					/* translators: KB Link */
 					__( 'If the issue persists, please try the solution described in our Knowledge Base article: %s', 'rank-math' ),
-					'<a href="https://rankmath.com/kb/fix-automatic-update-unavailable-for-this-plugin/#unable-to-encrypt" target="_blank">' . __( '[3. Unable to Encrypt]', 'rank-math' ) . '</a>'
+					'<a href="' . KB::get( 'unable-to-encrypt', 'Registration Data' ) . '" target="_blank">' . __( '[3. Unable to Encrypt]', 'rank-math' ) . '</a>'
 				),
 				[ 'type' => 'error' ]
 			);

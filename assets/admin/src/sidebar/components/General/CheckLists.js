@@ -16,6 +16,7 @@ import { Fragment, Component } from '@wordpress/element'
  * Internal dependencies
  */
 import getPartialClass from '@helpers/getPartialClass'
+import getLink from '@helpers/getLink'
 
 class CheckLists extends Component {
 	shouldComponentUpdate( nextProps ) {
@@ -121,7 +122,7 @@ class CheckLists extends Component {
 					{
 						link &&
 						<a
-							href={ 'https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_medium=Content%20Analysis%20Single%20Test%20KB&utm_campaign=WP' + link }
+							href={ getLink( 'score-100', 'Content Analysis Single Test KB' ) + link }
 							rel="noreferrer"
 							target="_blank"
 							className="dashicons-before dashicons-editor-help rank-math-help-icon"

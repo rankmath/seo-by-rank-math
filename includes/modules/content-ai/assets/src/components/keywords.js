@@ -18,6 +18,7 @@ import { withDispatch } from '@wordpress/data'
  */
 import { Helpers } from '@rankMath/analyzer'
 import getClassByScore from '@helpers/getClassByScore'
+import getLink from '@helpers/getLink'
 
 class Keywords extends Component {
 	/**
@@ -90,7 +91,7 @@ class Keywords extends Component {
 							this.setState( { type } )
 						} }
 					/>
-					<a href="https://rankmath.com/kb/how-to-use-content-ai/?utm_source=Plugin&utm_medium=Sidebar%20Keywords%20KB%20Icon&utm_campaign=WP#keywords" rel="noreferrer" target="_blank" id="rank-math-help-icon" title={ __( 'Know more about Keywords.', 'rank-math' ) }>﹖</a>
+					<a href={ getLink( 'content-ai-keywords', 'Sidebar Keywords KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" title={ __( 'Know more about Keywords.', 'rank-math' ) }>﹖</a>
 					<>
 						<span className="components-form-token-field__help">{ __( 'Click on any keyword to copy it.', 'rank-math' ) }</span>
 						<br />

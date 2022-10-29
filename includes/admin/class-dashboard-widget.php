@@ -10,6 +10,7 @@
 
 namespace RankMath;
 
+use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
@@ -169,18 +170,18 @@ class Dashboard_Widget {
 	public function dashboard_widget_footer() {
 		?>
 		<div class="rank-math-widget-footer">
-			<a target="_blank" href="https://rankmath.com/blog/?utm_source=Plugin&utm_medium=Dashboard%20Widget%20Blog&utm_campaign=WP">
+			<a target="_blank" href="<?php KB::the( 'blog', 'Dashboard Widget Blog' ); ?>">
 				<?php esc_html_e( 'Blog', 'rank-math' ); ?>
 				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
 				<span aria-hidden="true" class="dashicons dashicons-external"></span>
 			</a>
-			<a target="_blank" href="https://rankmath.com/kb/?utm_source=Plugin&utm_medium=Dashboard%20Widget%20Help&utm_campaign=WP">
+			<a target="_blank" href="<?php KB::the( 'knowledgebase', 'Dashboard Widget Help' ); ?>">
 				<?php esc_html_e( 'Help', 'rank-math' ); ?>
 				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
 				<span aria-hidden="true" class="dashicons dashicons-external"></span>
 			</a>
 			<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) { ?>
-				<a target="_blank" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Dashboard%20Widget%20PRO&utm_campaign=WP" class="rank-math-widget-go-pro">
+				<a target="_blank" href="<?php KB::the( 'pro', 'Dashboard Widget PRO' ); ?>" class="rank-math-widget-go-pro">
 					<?php esc_html_e( 'Go Pro', 'rank-math' ); ?>
 					<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
 					<span aria-hidden="true" class="dashicons dashicons-external"></span>

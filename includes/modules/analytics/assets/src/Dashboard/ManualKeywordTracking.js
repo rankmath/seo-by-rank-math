@@ -13,6 +13,7 @@ import { withFilters } from '@wordpress/components'
  * Internal dependencies
  */
 import { convertNumbers } from '../functions'
+import getLink from '@helpers/getLink'
 
 const ManualKeywordTracking = () => {
 	const losingKeywords = {
@@ -100,7 +101,7 @@ const ManualKeywordTracking = () => {
 						<li>{ __( 'Keep an eye on losing keywords', 'rank-math' ) }</li>
 						<li>{ __( 'Built-in Keyword Rank Tracker', 'rank-math' ) }</li>
 					</ul>
-					<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Overview%20KW%20Tabs&utm_campaign=WP" target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
+					<a href={ getLink( 'pro', 'Overview KW Tabs' ) } target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
 				</div>
 			</div>
 			<div className="rank-math-box-grid blurred">

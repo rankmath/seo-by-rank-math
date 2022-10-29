@@ -140,7 +140,7 @@ class Admin extends Base {
 				],
 				'assets'     => [
 					'styles'  => [
-						'rank-math-common' 		=> '',
+						'rank-math-common'      => '',
 						'rank-math-404-monitor' => $uri . '/assets/css/404-monitor.css',
 					],
 					'scripts' => [ 'rank-math-404-monitor' => $uri . '/assets/js/404-monitor.js' ],
@@ -170,7 +170,7 @@ class Admin extends Base {
 					'icon'  => 'rm-icon rm-icon-404',
 					'title' => esc_html__( '404 Monitor', 'rank-math' ),
 					/* translators: 1. Link to KB article 2. Link to redirection setting scree */
-					'desc'  => sprintf( esc_html__( 'Monitor broken pages that ruin user-experience and affect SEO. %s.', 'rank-math' ), '<a href="' . \RankMath\KB::get( '404-monitor-settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+					'desc'  => sprintf( esc_html__( 'Monitor broken pages that ruin user-experience and affect SEO. %s.', 'rank-math' ), '<a href="' . KB::get( '404-monitor-settings', 'Options Panel 404 Monitor Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
 				],
 			],
@@ -187,14 +187,14 @@ class Admin extends Base {
 	 */
 	public function page_title_actions() {
 		$actions = [
-			'settings' => [
+			'settings'   => [
 				'class' => 'page-title-action',
 				'href'  => Helper::get_admin_url( 'options-general#setting-panel-404-monitor' ),
 				'label' => __( 'Settings', 'rank-math' ),
 			],
 			'learn_more' => [
 				'class' => 'page-title-action',
-				'href'  => KB::get( '404-monitor' ),
+				'href'  => KB::get( '404-monitor', '404 Page Learn More Button' ),
 				'label' => __( 'Learn More', 'rank-math' ),
 			],
 		];

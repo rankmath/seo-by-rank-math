@@ -16,6 +16,7 @@ import { withFilters } from '@wordpress/components'
  */
 import { processRows, withRouter } from '../functions'
 import humanNumber from '@helpers/humanNumber'
+import getLink from '@helpers/getLink'
 
 const PostsTable = ( props ) => {
 	const { summary, seoScores } = props
@@ -179,7 +180,7 @@ const PostsTable = ( props ) => {
 						<li>{ __( 'Monitor key metrics like traffic and search performance', 'rank-math' ) }</li>
 						<li>{ __( 'Use data provided by Google instead of 3rd party tools', 'rank-math' ) }</li>
 					</ul>
-					<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Analytics%20Tab%20Table&utm_campaign=WP" target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
+					<a href={ getLink( 'pro', 'Analytics Tab Table' ) } target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
 				</div>
 			</div>
 			<TableCard

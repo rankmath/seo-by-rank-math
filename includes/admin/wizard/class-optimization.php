@@ -34,7 +34,7 @@ class Optimization implements Wizard_Step {
 			<p>
 				<?php
 					/* translators: Link to How to Optimization KB article */
-					printf( esc_html__( 'Automate some of your SEO tasks like making external links nofollow, redirecting attachment pages, etc. %s', 'rank-math' ), '<a href="' . esc_url( KB::get( 'seo-tweaks' ) ) . '" target="_blank">' . esc_html__( 'Learn More', 'rank-math' ) . '</a>' );
+					printf( esc_html__( 'Automate some of your SEO tasks like making external links nofollow, redirecting attachment pages, etc. %s', 'rank-math' ), '<a href="' . esc_url( KB::get( 'seo-tweaks', 'SW Optimization Step' ) ) . '" target="_blank">' . esc_html__( 'Learn More', 'rank-math' ) . '</a>' );
 				?>
 			</p>
 		</header>

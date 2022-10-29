@@ -1607,6 +1607,19 @@ export default {
 						}
 					}
 				}
+			},
+			"articleSection": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": true,
+					"isRecommended": false,
+					"field": {
+						"label": __( "Article Section", "rank-math" ),
+						"classes": "hide-group",
+						"default": "%primary_taxonomy_terms%"
+					}
+				}
 			}
 		},
 		"Book": {

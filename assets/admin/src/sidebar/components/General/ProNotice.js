@@ -8,6 +8,7 @@ import { Notice } from '@wordpress/components'
 /**
  * Internal dependencies
  */
+import getLink from '@helpers/getLink'
 import Interpolate from '@components/Interpolate'
 
 const ProNotice = ( { isPro } ) => {
@@ -18,7 +19,7 @@ const ProNotice = ( { isPro } ) => {
 					components={ {
 						link: (
 							<a
-								href={ rankMath.assessor.futureSeo }
+								href={ getLink( 'pro', 'Gutenberg General Tab Notice' ) }
 								target="_blank"
 								rel="noopener noreferrer"
 							/>
@@ -66,7 +67,7 @@ const ProNotice = ( { isPro } ) => {
 				components={ {
 					link: (
 						<a
-							href="https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_medium=Gutenberg%20General%20Tab%20Score%20Notice&utm_campaign=WP"
+							href={ getLink( 'score-100', 'General Tab Score Notice' ) }
 							target="_blank"
 							rel="noopener noreferrer"
 						/>

@@ -6,9 +6,16 @@
  */
 
 /**
+ * WP dependencies
+ */
+import { __ } from '@wordpress/i18n'
+
+/**
  * External Dependencies
  */
 import jQuery from 'jquery'
+import { forEach, difference } from 'lodash'
+import { Analyzer, Paper, ResultManager } from '@rankMath/analyzer'
 
 /**
  * Internal Dependencies
@@ -185,23 +192,6 @@ import boxTabs from '@helpers/boxTabs'
 					}
 				)
 
-				/**
-				 * If it contains "recalculate", then move that to the beginning, or after "postmeta" if it exists.
-				 * The recalculate action opens a new window, and if we wait too long after user interaction then the browser will block it.
-				 * But it also has to be after postmeta, because postmeta is required for recalculate to work.
-				 */
-				if ( -1 !== actions.indexOf( 'recalculate' ) ) {
-					actions = actions.filter( function( action ) {
-						return 'recalculate' !== action
-					} )
-					const index = actions.indexOf( 'postmeta' )
-					if ( -1 !== index ) {
-						actions.splice( index + 1, 0, 'recalculate' )
-					} else {
-						actions.unshift( 'recalculate' )
-					}
-				}
-
 				return actions
 			},
 
@@ -256,18 +246,14 @@ import boxTabs from '@helpers/boxTabs'
 			ajaxImport( slug, actions, logger, paged, callback ) {
 				if ( 0 === actions.length ) {
 					let message = 'Import finished.'
-					// If "recalculate" is in getAllActions, then we need to show a different message to the user.
-					if ( -1 !== this.getAllActions().indexOf( 'recalculate' ) ) {
-						message = 'Import finished. You can continue while we recalculate your SEO scores.'
-					}
 
 					this.addLog( message, logger )
 					callback()
 					return
 				}
 
-				const action = actions.shift(),
-					message =
+				const action = actions.shift()
+				let message =
 						'deactivate' === action
 							? 'Deactivating plugin'
 							: 'Importing ' + action
@@ -275,10 +261,7 @@ import boxTabs from '@helpers/boxTabs'
 				paged = paged || 1
 
 				if ( 'recalculate' === action ) {
-					this.addLog( 'Starting SEO Score Recalculation...', logger )
-					this.startRecalculation( logger, callback )
-					this.ajaxImport( slug, actions, logger, null, callback )
-					return
+					message = 'Starting SEO score recalculation'
 				}
 
 				this.addLog( message, logger )
@@ -298,22 +281,148 @@ import boxTabs from '@helpers/boxTabs'
 							actions.unshift( action )
 						}
 
-						this.addLog(
-							result.success ? result.message : result.error,
-							logger
-						)
-						this.ajaxImport(
-							slug,
-							actions,
-							logger,
-							paged,
-							callback
-						)
+						if ( action === 'recalculate' && result.total_items > 0 ) {
+							this.updateSeoScores( result.data, slug, actions, logger, paged, callback )
+						} else {
+							if ( action === 'recalculate' && result.total_items === 0 ) {
+								result.message = __( 'No posts found without SEO score.', 'rank-math' )
+							}
+
+							this.addLog(
+								result.success ? result.message : result.error,
+								logger
+							)
+							this.ajaxImport(
+								slug,
+								actions,
+								logger,
+								paged,
+								callback
+							)
+						}
 					} )
-					.fail( function( result ) {
+					.fail( ( result ) => {
 						this.addLog( result.statusText, logger )
 						this.ajaxImport( slug, actions, logger, null, callback )
 					} )
+			},
+
+			updateSeoScores( posts_data, slug, actions, logger, paged, callback ) {
+				let postScores = {}
+				if ( posts_data === 'complete' ) {
+					this.ajaxImport(
+						slug,
+						actions,
+						logger,
+						paged,
+						callback
+					)
+					return
+				}
+
+				if ( typeof this.postIds === 'undefined' ) {
+					this.postIds = []
+				}
+
+				return new Promise( ( resolve ) => {
+					forEach( posts_data, ( data, postID ) => {
+						if ( this.postIds.indexOf( postID ) !== -1 ) {
+							return
+						}
+
+						this.postIds.push( postID )
+						const resultManager = new ResultManager()
+						const i18n = wp.i18n
+						const paper = new Paper()
+						paper.setTitle( data.title )
+						paper.setDescription( data.description )
+						paper.setText( data.content )
+						paper.setKeyword( data.keyword )
+						paper.setKeywords( data.keywords )
+						paper.setPermalink( data.url )
+						paper.setUrl( data.url )
+						if ( data.thumbnail ) {
+							paper.setThumbnail( data.thumbnail )
+						}
+						paper.setContentAI( data.hasContentAi )
+
+						const researches = this.getResearchesTests( data )
+						const analyzer = new Analyzer( { i18n, analysis: researches } )
+						analyzer.analyzeSome( researches, paper ).then( function( results ) {
+
+							resultManager.update(
+								paper.getKeyword(),
+								results,
+								true
+							)
+
+							let score = resultManager.getScore( data.keyword )
+							if ( data.isProduct ) {
+								score = data.isReviewEnabled ? score + 1 : score
+								score = data.hasProductSchema ? score + 1 : score
+							}
+
+							postScores[ postID ] = score
+						} )
+					} )
+
+					resolve()
+				} ).then( () => {
+					$.ajax( {
+						url: rankMath.api.root + 'rankmath/v1/updateSeoScore',
+						method: 'POST',
+						beforeSend( xhr ) {
+							xhr.setRequestHeader( 'X-WP-Nonce', rankMath.restNonce )
+						},
+						data: {
+							action: 'rank_math_update_seo_score',
+							postScores,
+						},
+						success: ( response ) => {
+							this.addLog( 'SEO Scores updated', logger )
+							this.ajaxImport(
+								slug,
+								actions,
+								logger,
+								paged,
+								callback
+							)
+						},
+						error: ( response ) => {
+							this.addLog( response.statusText, logger )
+						},
+					} )
+				} )
+			},
+
+			getResearchesTests( data ) {
+				let tests = rankMath.assessor.researchesTests
+				tests = difference(
+					tests,
+					[
+						// Unneeded, has no effect on the score.
+						'keywordNotUsed',
+					]
+				)
+	
+				if ( ! data.isProduct ) {
+					return tests
+				}
+	
+				tests = difference(
+					tests,
+					[
+						'keywordInSubheadings',
+						'linksHasExternals',
+						'linksNotAllExternals',
+						'linksHasInternal',
+						'titleSentiment',
+						'titleHasNumber',
+						'contentHasTOC',
+					]
+				)
+	
+				return tests
 			},
 
 			addLog( msg, elem ) {
@@ -368,22 +477,6 @@ import boxTabs from '@helpers/boxTabs'
 							5000
 						)
 					} )
-			},
-
-			startRecalculation( logger, callback ) {
-				// Start recalculation in a new small window.
-				const recalcWindow = window.open(
-					rankMath.recalculateURL,
-					'rank-math-recalculation',
-					'width=530,height=300'
-				)
-
-				// Check if the window is open.
-				if ( null === recalcWindow ) {
-					$( 'input[value="recalculate"]' ).prop( 'checked', false ).next( 'label' ).find( 'a' ).removeClass( 'hidden' )
-					this.addLog( 'The SEO Score Recalculation could not be started because the popup was blocked. Try again with the above link, or run it from Rank Math > Status & Tools > Database Tools.', logger )
-					callback()
-				}
 			},
 		}
 

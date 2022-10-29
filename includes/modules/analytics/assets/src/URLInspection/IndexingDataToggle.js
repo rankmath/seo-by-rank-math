@@ -5,6 +5,10 @@ import { __ } from '@wordpress/i18n'
 import { withFilters } from '@wordpress/components'
 import { Component } from '@wordpress/element'
 
+/**
+ * Internal dependencies
+ */
+import getLink from '@helpers/getLink'
 class IndexingDataToggle extends Component {
 	render() {
 		return (
@@ -27,7 +31,7 @@ class IndexingDataToggle extends Component {
 												<li>{ __( 'All the Indexing statistics about your content in one place', 'rank-math' ) }</li>
 												<li>{ __( 'Use data provided by Google instead of 3rd party tools', 'rank-math' ) }</li>
 											</ul>
-											<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Index%20Status%20Tab%20Toggle&utm_campaign=WP" target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
+											<a href={ getLink( 'pro', 'Index Status Tab Toggle' ) } target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
 										</div>
 									</div>
 								</div>

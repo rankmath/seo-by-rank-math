@@ -10,6 +10,7 @@
 
 namespace RankMath\Divi;
 
+use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Schema\DB as Schema_DB;
 use RankMath\Schema\Admin as Schema_Admin;
@@ -65,24 +66,30 @@ class Divi {
 	public function set_window_lodash() {
 		wp_register_script( 'rm-set-window-lodash', '', [ 'lodash' ], rank_math()->version, false );
 		wp_enqueue_script( 'rm-set-window-lodash' );
-		wp_add_inline_script( 'rm-set-window-lodash', join( "\r\n ", [
-			"window.isLodash = function() {",
-				"if ( typeof window._ !== 'function' || typeof window._.forEach !== 'function' ) {",
-					"return false;",
-				"}",
-				"var isLodash = true;",
-				"window._.forEach(",
+		wp_add_inline_script(
+			'rm-set-window-lodash',
+			join(
+				"\r\n ",
+				[
+					'window.isLodash = function() {',
+					"if ( typeof window._ !== 'function' || typeof window._.forEach !== 'function' ) {",
+					'return false;',
+					'}',
+					'var isLodash = true;',
+					'window._.forEach(',
 					"[ 'cloneDeep', 'at', 'add', 'ary', 'attempt' ],",
-					"function( fn ) {",
-						"if ( isLodash && typeof window._[ fn ] !== 'function' ) {",
-							"isLodash = false;",
-						"}",
-					"}",
-				");",
-				"return isLodash;",
-			"}",
-			'if ( window.isLodash() ) { window.lodash = window._.noConflict(); }'
-		] ) );
+					'function( fn ) {',
+					"if ( isLodash && typeof window._[ fn ] !== 'function' ) {",
+					'isLodash = false;',
+					'}',
+					'}',
+					');',
+					'return isLodash;',
+					'}',
+					'if ( window.isLodash() ) { window.lodash = window._.noConflict(); }',
+				]
+			)
+		);
 	}
 
 	/**
@@ -113,7 +120,7 @@ class Divi {
 			Helper::add_json( 'customSchemaImage', esc_url( rank_math()->plugin_url() . 'includes/modules/schema/assets/img/custom-schema-builder.jpg' ) );
 
 			// Trends.
-			$trends_upgrade_link = 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Divi%20General%20Tab%20Trends&utm_campaign=WP';
+			$trends_upgrade_link = KB::get( 'pro', 'Divi General Tab Trends' );
 			Helper::add_json( 'trendsUpgradeLink', esc_url_raw( $trends_upgrade_link ) );
 			Helper::add_json( 'trendsPreviewImage', esc_url( rank_math()->plugin_url() . 'assets/admin/img/trends-preview.jpg' ) );
 		}

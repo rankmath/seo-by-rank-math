@@ -15,6 +15,7 @@ import { withFilters } from '@wordpress/components'
  * Internal dependencies
  */
 import { processRows, withRouter } from '../functions'
+import getLink from '@helpers/getLink'
 
 const KeywordsTracked = () => {
 	const headers = [
@@ -222,7 +223,7 @@ const KeywordsTracked = () => {
 							<li>{ __( 'Monitor impressions, clicks, and position history', 'rank-math' ) }</li>
 							<li>{ __( 'No additional monthly subscriptions for third-party tools', 'rank-math' ) }</li>
 						</ul>
-						<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Keyword%20Manager%20Table&utm_campaign=WP" target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
+						<a href={ getLink( 'pro', 'Keyword Manager Table' ) } target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
 					</div>
 				</div>
 				<TableCard

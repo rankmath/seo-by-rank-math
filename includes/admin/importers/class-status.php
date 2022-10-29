@@ -117,6 +117,8 @@ class Status {
 			'redirections' => esc_html__( 'Imported %s redirections.', 'rank-math' ),
 			/* translators: start, end, total */
 			'blocks'       => esc_html__( 'Imported blocks from posts %1$s - %2$s out of %3$s ', 'rank-math' ),
+			/* translators: start, end, total */
+			'recalculate'  => esc_html__( 'Recalculating scores for posts %1$s - %2$s... ', 'rank-math' ),
 		];
 
 		if ( false === $this->is_success() ) {

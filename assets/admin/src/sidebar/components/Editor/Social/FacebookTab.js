@@ -21,6 +21,7 @@ import {
 /**
  * Internal dependencies
  */
+import getLink from '@helpers/getLink'
 import Preview from './Preview'
 import SocialMediaUpload from './MediaUpload'
 import { getOverlayChoices } from '@helpers/overlayImages'
@@ -52,7 +53,7 @@ const FacebookTab = ( props ) => (
 					'rank-math'
 				) }{ ' ' }
 				<a
-					href="https://rankmath.com/kb/meta-box-social-tab/?utm_source=Plugin&utm_medium=Gutenberg%20Social%20Tab&utm_campaign=WP"
+					href={ getLink( 'meta-box-social-tab', 'Gutenberg Social Tab' ) }
 					target="_blank"
 					rel="noreferrer noopener"
 				>
@@ -130,7 +131,7 @@ const FacebookTab = ( props ) => (
 								components={ {
 									link: (
 										<a
-											href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Gutenberg%20Social%20Tab&utm_campaign=WP"
+											href={ getLink( 'pro', 'Gutenberg Social Tab' ) }
 											target="_blank"
 											rel="noopener noreferrer"
 										/>

@@ -17,7 +17,7 @@ $cmb->add_field(
 		'type'    => 'toggle',
 		'name'    => esc_html__( 'Strip Category Base', 'rank-math' ),
 		/* translators: Link to kb article */
-		'desc'    => sprintf( wp_kses_post( __( 'Remove /category/ from category archive URLs. %s <br>E.g. <code>example.com/category/my-category/</code> becomes <code>example.com/my-category</code>', 'rank-math' ) ), '<a href="' . KB::get( 'remove-category-base' ) . '" target="_blank">' . esc_html__( 'Why do this?', 'rank-math' ) . '</a>' ),
+		'desc'    => sprintf( wp_kses_post( __( 'Remove /category/ from category archive URLs. %s <br>E.g. <code>example.com/category/my-category/</code> becomes <code>example.com/my-category</code>', 'rank-math' ) ), '<a href="' . KB::get( 'remove-category-base', 'Options Panel Strip Category Base' ) . '" target="_blank">' . esc_html__( 'Why do this?', 'rank-math' ) . '</a>' ),
 		'classes' => 'rank-math-advanced-option',
 		'default' => 'off',
 	]

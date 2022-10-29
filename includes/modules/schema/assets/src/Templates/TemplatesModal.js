@@ -10,6 +10,7 @@ import { rawShortcut } from '@wordpress/keycodes'
 /**
  * Internal dependencies
  */
+import getLink from '@helpers/getLink'
 import TabPanel from './Tabs'
 
 /**
@@ -42,7 +43,7 @@ const TemplatesModal = ( { isOpen = false, toggleModal } ) => {
 				} }
 			>
 				<a
-					href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_medium=Schema%20Generator%20Header&utm_campaign=WP"
+					href={ getLink( 'rich-snippets', 'Schema Generator Header' ) }
 					rel="noopener noreferrer"
 					target="_blank"
 					title={ __( 'More Info', 'rank-math' ) }

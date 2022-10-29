@@ -7,6 +7,7 @@
  */
 
 use RankMath\Helper;
+use RankMath\KB;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,7 +49,7 @@ if ( false !== $credits ) {
 			'id'      => 'content_ai_credits',
 			'type'    => 'raw',
 			/* translators: 1. Credits left 2. Buy more credits link */
-			'content' => '<div class="cmb-row buy-more-credits rank-math-exclude-from-search">' . $update_credits . sprintf( esc_html__( '%1$s credits left. Upgrade to get more credits from %2$s.', 'rank-math' ), '<strong>' . $credits . '</strong>', '<a href="https://rankmath.com/content-ai/?utm_source=Plugin&utm_medium=Buy%20CAI%20Credits%20Options%20Panel&utm_campaign=WP#pricing-tables" target="_blank">' . esc_html__( 'here', 'rank-math' ) . '</a>' ) . '</div>',
+			'content' => '<div class="cmb-row buy-more-credits rank-math-exclude-from-search">' . $update_credits . sprintf( esc_html__( '%1$s credits left. Upgrade to get more credits from %2$s.', 'rank-math' ), '<strong>' . $credits . '</strong>', '<a href="' . KB::get( 'content-ai-pricing-tables', 'Buy CAI Credits Options Panel' ) . '" target="_blank">' . esc_html__( 'here', 'rank-math' ) . '</a>' ) . '</div>',
 		]
 	);
 }

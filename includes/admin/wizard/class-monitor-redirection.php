@@ -73,7 +73,7 @@ class Monitor_Redirection implements Wizard_Step {
 			[
 				'id'      => 'redirection_title',
 				'type'    => 'raw',
-				'content' => sprintf( '<br><div class="cmb-row redirections-header text-center" style="border-top:0;"><h1>%1$s</h1><div class="redirections-desc text-center">%2$s %3$s</div>', esc_html__( 'Redirections', 'rank-math' ), esc_html__( 'Set default values for the redirection module from here.', 'rank-math' ), '<a href="' . KB::get( 'redirections' ) . '" target="_blank">' . esc_html__( 'Learn more about Redirections.', 'rank-math' ) . '</a></div>' ),
+				'content' => sprintf( '<br><div class="cmb-row redirections-header text-center" style="border-top:0;"><h1>%1$s</h1><div class="redirections-desc text-center">%2$s %3$s</div>', esc_html__( 'Redirections', 'rank-math' ), esc_html__( 'Set default values for the redirection module from here.', 'rank-math' ), '<a href="' . KB::get( 'redirections', 'SW Redirection Step' ) . '" target="_blank">' . esc_html__( 'Learn more about Redirections.', 'rank-math' ) . '</a></div>' ),
 			]
 		);
 

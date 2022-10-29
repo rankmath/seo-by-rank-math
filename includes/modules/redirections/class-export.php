@@ -10,6 +10,7 @@
 
 namespace RankMath\Redirections;
 
+use RankMath\KB;
 use RankMath\Redirections\Import_Export;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
@@ -67,7 +68,7 @@ class Export {
 
 		$text[] = '# Created by Rank Math';
 		$text[] = '# ' . date_i18n( 'r' );
-		$text[] = '# Rank Math ' . trim( rank_math()->version ) . ' - https://rankmath.com/';
+		$text[] = '# Rank Math ' . trim( rank_math()->version ) . ' - ' . KB::get( 'seo-suite' );
 		$text[] = '';
 
 		$text = array_merge( $text, $this->$server( $items['redirections'] ) );

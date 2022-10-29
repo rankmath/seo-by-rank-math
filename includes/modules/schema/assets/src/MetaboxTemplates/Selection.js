@@ -10,6 +10,7 @@ import { withSelect } from '@wordpress/data'
  * Internal dependencies
  */
 import TabPanel from '@schema/Templates/Tabs'
+import getLink from '@helpers/getLink'
 
 /**
  * Selection form template component.
@@ -34,7 +35,7 @@ const Selection = ( { isOpen } ) => {
 			overlayClassName="rank-math-modal-overlay"
 		>
 			<a
-				href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_medium=Schema%20Generator%20Header&utm_campaign=WP"
+				href={ getLink( 'rich-snippets', 'Schema Generator Header' ) }
 				rel="noopener noreferrer"
 				target="_blank"
 				title={ __( 'More Info', 'rank-math' ) }

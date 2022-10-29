@@ -3,6 +3,11 @@
  */
 import { __ } from '@wordpress/i18n'
 
+/**
+ * Internal dependencies
+ */
+import getLink from '@helpers/getLink'
+
 export default () => (
 	<div className="components-panel__body rank-math-custom-schema-wrapper">
 		<img src={ rankMath.customSchemaImage } alt="" className="custom-schema" />
@@ -14,7 +19,7 @@ export default () => (
 					<li>{ __( 'Import Schema from ANY website', 'rank-math' ) }</li>
 					<li>{ __( 'Create Advanced templates', 'rank-math' ) }</li>
 				</ul>
-				<a className="button button-primary is-green" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Custom+Builder&utm_campaign=WP" rel="noreferrer noopener" target="_blank">{ __( 'Upgrade', 'rank-math' ) }</a>
+				<a className="button button-primary is-green" href={ getLink( 'pro', 'Custom Builder' ) } rel="noreferrer noopener" target="_blank">{ __( 'Upgrade', 'rank-math' ) }</a>
 			</div>
 		</div>
 	</div>

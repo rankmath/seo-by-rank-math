@@ -121,11 +121,11 @@ class Screen implements IScreen {
 	 */
 	public function get_values() {
 		$editor      = Helper::get_current_editor();
-		$trends_link = 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=CE%20General%20Tab%20Trends&utm_campaign=WP';
+		$trends_link = KB::get( 'pro', 'CE General Tab Trends' );
 		if ( 'gutenberg' === $editor ) {
-			$trends_link = 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Gutenberg%20General%20Tab%20Trends&utm_campaign=WP';
+			$trends_link = KB::get( 'pro', 'Gutenberg General Tab Trends' );
 		} elseif ( 'elementor' === $editor ) {
-			$trends_link = 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Elementor%20General%20Tab%20Trends&utm_campaign=WP';
+			$trends_link = KB::get( 'pro', 'Elementor General Tab Trends' );
 		}
 
 		$values = array_merge_recursive(
@@ -156,15 +156,12 @@ class Screen implements IScreen {
 					'content_ai' => Helper::has_cap( 'content_ai' ),
 				],
 				'assessor'            => [
-					'serpData'         => $this->get_object_values(),
-					'powerWords'       => $this->power_words(),
-					'diacritics'       => $this->diacritics(),
-					'sentimentKbLink'  => KB::get( 'sentiments' ),
-					'hundredScoreLink' => KB::get( 'score-100-ge' ),
-					'futureSeo'        => KB::get( 'pro-general-g' ),
-					'researchesTests'  => $this->get_analysis(),
-					'hasRedirection'   => Helper::is_module_active( 'redirections' ),
-					'hasBreadcrumb'    => Helper::is_breadcrumbs_enabled(),
+					'serpData'        => $this->get_object_values(),
+					'powerWords'      => $this->power_words(),
+					'diacritics'      => $this->diacritics(),
+					'researchesTests' => $this->get_analysis(),
+					'hasRedirection'  => Helper::is_module_active( 'redirections' ),
+					'hasBreadcrumb'   => Helper::is_breadcrumbs_enabled(),
 				],
 				'isPro'               => defined( 'RANK_MATH_PRO_FILE' ),
 				'is_front_page'       => Admin_Helper::is_home_page(),

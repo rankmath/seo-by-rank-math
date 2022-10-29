@@ -82,7 +82,7 @@ class Console extends Analytics {
 		$this->http_post( 'https://www.googleapis.com/siteVerification/v1/webResource?verificationMethod=META', $args );
 
 		// Sync sitemap.
-		as_enqueue_async_action( 'rank_math/analytics/sync_sitemaps' );
+		as_enqueue_async_action( 'rank_math/analytics/sync_sitemaps', [], 'rank-math' );
 
 		return $this->is_success();
 	}

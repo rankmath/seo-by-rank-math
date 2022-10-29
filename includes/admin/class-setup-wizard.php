@@ -280,6 +280,9 @@ class Setup_Wizard {
 		rank_math()->admin_assets->register();
 		wp_enqueue_style( 'rank-math-wizard', rank_math()->plugin_url() . 'assets/admin/css/setup-wizard.css', [ 'wp-admin', 'buttons', 'cmb2-styles', 'select2-rm', 'rank-math-common', 'rank-math-cmb2' ], rank_math()->version );
 
+		// Enqueue scripts for the SEO Score Updater tool.
+		\RankMath\Tools\Update_Score::get()->enqueue();
+
 		// Enqueue javascript.
 		wp_enqueue_script( 'rank-math-wizard', rank_math()->plugin_url() . 'assets/admin/js/wizard.js', [ 'media-editor', 'select2-rm', 'lodash', 'rank-math-common', 'rank-math-validate' ], rank_math()->version, true );
 
@@ -287,9 +290,6 @@ class Setup_Wizard {
 		Helper::add_json( 'deactivated', esc_html__( 'Deactivated', 'rank-math' ) );
 		Helper::add_json( 'confirm', esc_html__( 'Are you sure you want to import settings into Rank Math? Don\'t worry, your current configuration will be saved as a backup.', 'rank-math' ) );
 		Helper::add_json( 'isConfigured', Helper::is_configured() );
-		
-		// Recalculate SEO Scores tool URL.
-		Helper::add_json( 'recalculateURL', Helper::get_admin_url( 'status', [ 'view' => 'tools', 'update_scores' => '1', '_wpnonce' => wp_create_nonce( 'rank-math-recalculate-scores' ) ] ) );
 
 		ob_start();
 
