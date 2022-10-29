@@ -7,6 +7,7 @@
  */
 
 use RankMath\Helper;
+use RankMath\KB;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -268,6 +269,6 @@ $cmb->add_field(
 		'desc'  => esc_html__( 'Latitude and longitude values separated by comma.', 'rank-math' ),
 		'dep'   => $rank_math_company,
 		/* Translators: placeholder is a link to the Pro version */
-		'after' => '<strong style="margin-top:20px; display:block; text-align:right;">' . sprintf( __( 'Multiple Locations are available in the %s.', 'rank-math' ), '<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Multiple%20Location%20Notice&utm_campaign=WP" target="_blank">PRO Version</a>' ) . '</strong>',
+		'after' => '<strong style="margin-top:20px; display:block; text-align:right;">' . sprintf( __( 'Multiple Locations are available in the %s.', 'rank-math' ), '<a href="' . KB::get( 'pro', 'Multiple Location Notice' ) . '" target="_blank">PRO Version</a>' ) . '</strong>',
 	]
 );

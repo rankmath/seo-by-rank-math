@@ -16,6 +16,7 @@ import { __, sprintf } from '@wordpress/i18n'
 /**
  * Internal dependencies
  */
+import getLink from '@helpers/getLink'
 import Stats from './admin-bar-stats'
 import { isPro } from './functions'
 
@@ -66,7 +67,7 @@ class AnalyticsAdminBar {
 		return (
 			`<div id="rank-math-analytics-stats-wrapper" class="${ className }">
 				<div class="top-icons">	
-					<a href="https://rankmath.com/kb/analytics-stats-bar/?utm_source=Plugin&utm_medium=Analytics%20Stats%20Bar%20KB&utm_campaign=WP" target="_blank" class="rank-math-stats-bar-help">
+					<a href="${ getLink( 'analytics-stats-bar', 'Analytics Stats Bar KB' ) }" target="_blank" class="rank-math-stats-bar-help">
 						<em class="dashicons-before dashicons-editor-help" title="${ __( 'Learn More', 'rank-math' ) }"></em>
 					</a>
 					<a href="#" class="rank-math-analytics-disable-stats" title="${ __( 'Close Permanently', 'rank-math' ) }">
@@ -136,11 +137,11 @@ class AnalyticsAdminBar {
 			sprintf(
 				// translators: KB Link
 				__( 'Advanced Stats are available in the PRO version, %1$s.', 'rank-math' ),
-				'<a href="https://rankmath.com/kb/analytics-stats-bar/?utm_source=Plugin&utm_medium=Analytics%20Stats%20Bar&utm_campaign=WP" target="_blank" rel="noreferrer" class="button button-primary">' + __( 'learn More', 'rank-math' ) + '</a>'
+				'<a href="' + getLink( 'analytics-stats-bar', 'Analytics Stats Bar' ) + '" target="_blank" rel="noreferrer" class="button button-primary">' + __( 'learn More', 'rank-math' ) + '</a>'
 			)
 			}
 			</p>
-			<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Analytics%20Stats%20Bar&utm_campaign=WP" target="_blank" rel="noreferrer" class="button button-primary">
+			<a href="${ getLink( 'analytics-stats-bar', 'Analytics Stats Bar' ) }" target="_blank" rel="noreferrer" class="button button-primary">
 				${ __( 'Upgrade to PRO', 'rank-math' ) }
 			</a>
 			</div>

@@ -19,6 +19,7 @@ import { withDispatch, withSelect } from '@wordpress/data'
  */
 import { getSnippetIcon } from '@helpers/snippetIcon'
 import { generateValidSchema } from '@schema/functions'
+import getLink from '@helpers/getLink'
 
 /**
  * Template list.
@@ -57,7 +58,7 @@ const TemplatesCatalog = ( { search, templates, isPro, addSchema, editSchema, pr
 							key={ index }
 							id="rank-math-schema-item"
 							className={ classes }
-							href={ template.isPro ? 'https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=PRO%20Schema%20Type&utm_campaign=WP' : '#' }
+							href={ template.isPro ? getLink( 'pro', 'PRO Schema Type' ) : '#' }
 							target={ template.isPro ? '_blank' : '' }
 							isLink
 							onClick={ () => {

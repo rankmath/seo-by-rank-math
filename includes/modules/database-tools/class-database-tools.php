@@ -205,7 +205,7 @@ class Database_Tools {
 			as_enqueue_async_action(
 				'rank_math/analytics/workflow/create_tables',
 				[],
-				'workflow'
+				'rank-math'
 			);
 		}
 
@@ -401,8 +401,8 @@ class Database_Tools {
 
 		if ( ! empty( Update_Score::get()->find() ) ) {
 			$tools['update_seo_score'] = [
-				'title'       => __( 'Recalculate SEO Scores for Posts', 'rank-math' ),
-				'description' => __( 'This tool will recalculate the SEO score for all the posts that have a Focus Keyword set. Note: This process may take some time and the browser tab must be kept open while it is running.', 'rank-math' ),
+				'title'       => __( 'Update SEO Scores', 'rank-math' ),
+				'description' => __( 'This tool will calculate the SEO score for the posts/pages that have a Focus Keyword set. Note: This process may take some time and the browser tab must be kept open while it is running.', 'rank-math' ),
 				'button_text' => __( 'Recalculate Scores', 'rank-math' ),
 			];
 		}

@@ -264,7 +264,6 @@ class JsonLD {
 	public function replace_variables( $schemas, $object = [], $data = [] ) {
 		$new_schemas = [];
 		$object      = empty( $object ) ? get_queried_object() : $object;
-
 		foreach ( $schemas as $key => $schema ) {
 			if ( 'metadata' === $key ) {
 				$new_schemas['isPrimary'] = ! empty( $schema['isPrimary'] );
@@ -290,7 +289,7 @@ class JsonLD {
 				$schema = '%modified(Y-m-d\TH:i:sP)%';
 			}
 
-			$new_schemas[ $key ] = Str::contains( '%', $schema ) ? Helper::replace_vars( $schema, $object ) : $schema;
+			$new_schemas[ $key ] = is_string( $schema ) && Str::contains( '%', $schema ) ? Helper::replace_vars( $schema, $object ) : $schema;
 			if ( '' === $new_schemas[ $key ] ) {
 				unset( $new_schemas[ $key ] );
 			}

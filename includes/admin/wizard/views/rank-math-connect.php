@@ -34,7 +34,7 @@ $button_class   = 'button button-primary button-connect' . ( $site_url_valid ? '
 			<li><?php echo esc_attr__( 'Automatically submit sitemaps to the Google Search Console', 'rank-math' ); ?></li>
 			<li><?php echo esc_attr__( 'Free keyword suggestions when entering a focus keyword', 'rank-math' ); ?></li>
 			<li><?php echo esc_attr__( 'Use our revolutionary SEO Analyzer to scan your website for SEO errors', 'rank-math' ); ?></li>
-			<li><a href="<?php echo esc_url( KB::get( 'free-account-benefits' ) ); ?>" target="_blank"><?php echo esc_html__( 'Learn more about the benefits of connecting your account here.', 'rank-math' ); ?></a></li>
+			<li><a href="<?php echo esc_url( KB::get( 'free-account-benefits', 'SW Analytics Step' ) ); ?>" target="_blank"><?php echo esc_html__( 'Learn more about the benefits of connecting your account here.', 'rank-math' ); ?></a></li>
 		</ul>
 	</div>
 </div>
@@ -42,7 +42,7 @@ $button_class   = 'button button-primary button-connect' . ( $site_url_valid ? '
 	<div class="rank-math-cta-table">
 		<div class="rank-math-cta-body less-padding">
 			<i class="dashicons dashicons-lock"></i>
-			<p><?php printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . esc_url( KB::get( 'usage-policy' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); ?></p>
+			<p><?php printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . esc_url( KB::get( 'usage-policy', 'Analytics Privacy Notice' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); ?></p>
 		</div>
 	</div>
 </div>

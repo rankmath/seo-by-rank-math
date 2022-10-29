@@ -20,6 +20,7 @@ import {
 /**
  * Internal dependencies
  */
+import getLink from '@helpers/getLink'
 import Preview from './Preview'
 import TwitterApp from './TwitterApp'
 import TwitterPlayer from './TwitterPlayer'
@@ -195,7 +196,7 @@ const TwitterTab = ( props ) => (
 									components={ {
 										link: (
 											<a
-												href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Gutenberg%20Social%20Tab&utm_campaign=WP"
+												href={ getLink( 'pro', 'Gutenberg Social Tab' ) }
 												target="_blank"
 												rel="noopener noreferrer"
 											/>

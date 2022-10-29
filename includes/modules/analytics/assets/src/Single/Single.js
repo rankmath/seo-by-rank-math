@@ -17,6 +17,7 @@ import { decodeEntities } from '@wordpress/html-entities'
  */
 import Header from '@scShared/Header'
 import { withRouter } from '../functions'
+import getLink from '@helpers/getLink'
 
 const Single = ( { post } ) => {
 	if ( isEmpty( post ) ) {
@@ -41,7 +42,7 @@ const Single = ( { post } ) => {
 							<li>{ __( 'Monitor Google trends for your selected focus keyword', 'rank-math' ) }</li>
 							<li>{ __( 'Keep an eye on the data that matters all in one place', 'rank-math' ) }</li>
 						</ul>
-						<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Single%20Post%20Report&utm_campaign=WP" target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
+						<a href={ getLink( 'pro', 'Single Post Report' ) } target="_blank" rel="noreferrer" className="button button-primary is-green">{ __( 'Upgrade', 'rank-math' ) }</a>
 					</div>
 				</div>
 				<img src={ rankMath.singleImage } alt={ __( 'Single Post/Page Reports', 'rank-math' ) } className="single-post-report" />

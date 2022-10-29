@@ -151,7 +151,7 @@ class Inspections {
 				$time       = strtotime( "+{$delay_days} days", $time );
 			}
 
-			as_schedule_single_action( $time, 'rank_math/analytics/get_inspections_data', [ $object->page ], 'rank_math/analytics/get_inspections_data' );
+			as_schedule_single_action( $time, 'rank_math/analytics/get_inspections_data', [ $object->page ], 'rank-math' );
 		}
 	}
 

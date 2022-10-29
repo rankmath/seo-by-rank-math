@@ -10,6 +10,7 @@
 
 namespace RankMath;
 
+use RankMath\KB;
 use RankMath\Traits\Hooker;
 use RankMath\Helper;
 
@@ -142,7 +143,7 @@ class Update_Email {
 				'name'        => __( 'Rank Math Free', 'rank-math' ),
 				'old_version' => $old_version,
 				'new_version' => $new_version,
-				'changelog'   => __( 'https://rankmath.com/changelog/free', 'rank-math' ),
+				'changelog'   => KB::get( 'changelog-free', 'Changelog Update notification mail' ),
 			],
 		];
 

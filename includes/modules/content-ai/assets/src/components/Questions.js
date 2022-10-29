@@ -104,7 +104,7 @@ class Questions extends Component {
 					<div className="rank-math-section-heading">
 						<h2>
 							{ __( 'Related Questions', 'rank-math' ) }
-							<a href="https://rankmath.com/kb/how-to-use-content-ai/?utm_source=Plugin&amp;utm_medium=Sidebar%20Questions%20KB%20Icon&amp;utm_campaign=WP" rel="noreferrer" target="_blank" id="rank-math-help-icon" title={ __( 'Know more about Questions.', 'rank-math' ) }>﹖</a>
+							<a href={ getLink( 'content-ai-settings', 'Sidebar Questions KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" title={ __( 'Know more about Questions.', 'rank-math' ) }>﹖</a>
 						</h2>
 						<Button
 							onClick={ () => {

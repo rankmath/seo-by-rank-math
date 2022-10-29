@@ -7,6 +7,7 @@
  */
 
 use RankMath\Helper;
+use RankMath\KB;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -156,7 +157,7 @@ if ( ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) || ( class_ex
 			'id'         => 'pt_' . $post_type . '_default_rich_snippet',
 			'type'       => $type,
 			'name'       => esc_html__( 'Schema Type', 'rank-math' ),
-			'desc'       => sprintf( 
+			'desc'       => sprintf(
 				// Translators: %s is "Article" inside a <code> tag.
 				esc_html__( 'Default rich snippet selected when creating a new post of this type. If %s is selected, it will be applied for all existing posts with no Schema selected.', 'rank-math' ),
 				'<code>' . esc_html_x( 'Article', 'Schema type name in a field description', 'rank-math' ) . '</code>'
@@ -203,7 +204,7 @@ if ( ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) || ( class_ex
 // Article fields.
 $article_dep = [ [ 'pt_' . $post_type . '_default_rich_snippet', 'article' ] ];
 /* translators: Google article snippet doc link */
-$article_desc = 'person' === Helper::get_settings( 'titles.knowledgegraph_type' ) ? '<div class="notice notice-warning inline rank-math-notice"><p>' . sprintf( __( 'Google does not allow Person as the Publisher for articles. Organization will be used instead. You can read more about this <a href="%s" target="_blank">here</a>.', 'rank-math' ), \RankMath\KB::get( 'article' ) ) . '</p></div>' : '';
+$article_desc = 'person' === Helper::get_settings( 'titles.knowledgegraph_type' ) ? '<div class="notice notice-warning inline rank-math-notice"><p>' . sprintf( __( 'Google does not allow Person as the Publisher for articles. Organization will be used instead. You can read more about this <a href="%s" target="_blank">here</a>.', 'rank-math' ), KB::get( 'google-article-schema' ) ) . '</p></div>' : '';
 $cmb->add_field(
 	[
 		'id'      => 'pt_' . $post_type . '_default_article_type',

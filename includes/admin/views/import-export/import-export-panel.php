@@ -6,6 +6,8 @@
  * @subpackage RankMath\Admin
  */
 
+use RankMath\KB;
+
 defined( 'ABSPATH' ) || exit;
 
 ?>
@@ -14,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 <p class="description">
 	<?php
 	/* translators: Link to learn about import export panel KB article */
-	printf( esc_html__( 'Import or export your Rank Math settings, This option is useful for replicating Rank Math settings across multiple websites. %s', 'rank-math' ), '<a href="' . \RankMath\KB::get( 'import-export-settings' ) . '" target="_blank">' . esc_html__( 'Learn more about the Import/Export options.', 'rank-math' ) . '</a>' );
+	printf( esc_html__( 'Import or export your Rank Math settings, This option is useful for replicating Rank Math settings across multiple websites. %s', 'rank-math' ), '<a href="' . KB::get( 'import-export-settings', 'Options Panel Import Export Page' ) . '" target="_blank">' . esc_html__( 'Learn more about the Import/Export options.', 'rank-math' ) . '</a>' );
 	?>
 </p>
 

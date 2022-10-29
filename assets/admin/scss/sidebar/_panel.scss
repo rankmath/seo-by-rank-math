@@ -156,7 +156,11 @@
 
             .rank-math-tooltip-content {
                 float: right;
-                width: 227%!important;
+                width: 227%;
+
+                @at-root .block-editor & {
+                    max-width: 268px;
+                }
             }
         }
     }
@@ -174,23 +178,30 @@
             }
         }
 
-        .rank-math-tooltip-content {
+        @at-root .rank-math-sidebar-panel & .rank-math-tooltip-content {
             width: 162%;
         }
     }
 
-    .rank-math-tooltip-content {
-        width: 182%!important;
+    @at-root .rank-math-sidebar-panel & .rank-math-tooltip-content {
+        width: 182%;
+
+        @at-root .block-editor & {
+            max-width: 268px;
+        }
     }
 }
 
 .#{$namespace}-primary-term-picker {
-    margin: 20px -16px -17px;
-    padding: 16px;
+    margin: 20px 0 0;
+    padding: 16px 0;
     padding-bottom: 24px;
-
     border-top: 1px solid #e2e4e7;
     border-bottom: 1px solid #e2e4e7;
+
+    .components-base-control {
+        width: 100%;
+    }
 
     label {
         font-weight: 600;

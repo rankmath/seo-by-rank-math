@@ -109,7 +109,7 @@ $console_classes = Helper::classnames(
 					</span>
 				</label>
 				<label for="enable-index-status"><?php esc_html_e( 'Enable the Index Status tab', 'rank-math' ); ?></label>
-				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option to show the Index Status tab in the Analytics module.', 'rank-math' ); ?> <a href="<?php echo KB::get( 'url-inspection-api' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more.', 'rank-math' ); ?></a></div>
+				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option to show the Index Status tab in the Analytics module.', 'rank-math' ); ?> <a href="<?php echo KB::get( 'url-inspection-api', 'SW Analytics Index Status Option' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more.', 'rank-math' ); ?></a></div>
 			</div>
 		</div>
 	</div>
@@ -142,7 +142,7 @@ $analytic_classes = Helper::classnames(
 			/* translators: GA4 KB link */
 			echo sprintf(
 				esc_html__( 'Ready to switch to Google Analytics 4? %s', 'rank-math' ),
-				'<a href="https://rankmath.com/kb/using-ga4/?utm_source=Plugin&utm_medium=Analytics%20GA4%20KB&utm_campaign=WP" target="_blank">' . esc_html__( 'Click here to know how', 'rank-math' ) . '</a>.'
+				'<a href="'. KB::get( 'using-ga4', 'Analytics GA4 KB' ) . '" target="_blank">' . esc_html__( 'Click here to know how', 'rank-math' ) . '</a>.'
 			);
 			?>
 		</p>
@@ -205,7 +205,7 @@ $analytic_classes = Helper::classnames(
 			</div>
 		</div>
 
-		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="https://rankmath.com/free-vs-pro/?utm_source=Plugin&utm_medium=Anonymize%20IP&utm_campaign=WP"' : ''; ?>>
+		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="' . KB::the( 'free-vs-pro', 'Anonymize IP' ) .'"' : ''; ?>>
 			<div class="cmb-td">
 				<label class="cmb2-toggle">
 					<input type="checkbox" class="regular-text notrack" name="anonymize-ip" id="anonymize-ip" value="on"<?php checked( $analytics['anonymize_ip'] ); ?><?php disabled( ! $is_pro_active ); ?>>
@@ -218,7 +218,7 @@ $analytic_classes = Helper::classnames(
 					<?php esc_html_e( 'Anonymize IP addresses', 'rank-math' ); ?>
 					<?php if ( ! $is_pro_active ) : ?>
 					<span class="rank-math-pro-badge">
-						<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Anonymize%20IP&utm_campaign=WP" target="_blank" rel="noopener noreferrer">
+						<a href="<?php KB::the( 'pro', 'Anonymize IP' ); ?>" target="_blank" rel="noopener noreferrer">
 							<?php esc_html_e( 'PRO', 'rank-math' ); ?>
 						</a>
 					</span>
@@ -230,7 +230,7 @@ $analytic_classes = Helper::classnames(
 			</div>
 		</div>
 
-		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Localjs%20IP&utm_campaign=WP"' : ''; ?>>
+		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="' . KB::the( 'pro', 'Localjs IP' ) . '"' : ''; ?>>
 			<div class="cmb-td">
 				<label class="cmb2-toggle">
 					<input type="checkbox" class="regular-text notrack" name="local-ga-js" id="local-ga-js" value="on"<?php checked( $analytics['local_ga_js'] ); ?><?php disabled( ! $is_pro_active ); ?>>
@@ -243,7 +243,7 @@ $analytic_classes = Helper::classnames(
 					<?php esc_html_e( 'Self-Hosted Analytics JS File', 'rank-math' ); ?>
 					<?php if ( ! $is_pro_active ) : ?>
 					<span class="rank-math-pro-badge">
-						<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Localjs%20IP&utm_campaign=WP" target="_blank" rel="noopener noreferrer">
+						<a href="<?php KB::the( 'pro', 'Localjs IP' ); ?>" target="_blank" rel="noopener noreferrer">
 							<?php esc_html_e( 'PRO', 'rank-math' ); ?>
 						</a>
 					</span>
@@ -311,7 +311,7 @@ $adsense_classes = Helper::classnames(
 		<?php if ( ! $is_pro_active ) : ?>
 		<div id="rank-math-pro-cta" class="no-margin">
 			<div class="rank-math-cta-text">
-				<span class="rank-math-pro-badge"><a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=AdSense%20Toggle&utm_campaign=WP" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'PRO', 'rank-math' ); ?></a></span> <?php esc_html_e( "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module.", 'rank-math' ); ?>
+				<span class="rank-math-pro-badge"><a href="<?php KB::the( 'pro', 'AdSense Toggle' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'PRO', 'rank-math' ); ?></a></span> <?php esc_html_e( "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module.", 'rank-math' ); ?>
 			</div>
 		</div>
 		<?php endif; ?>
@@ -322,7 +322,7 @@ $adsense_classes = Helper::classnames(
 	<div class="rank-math-cta-table">
 		<div class="rank-math-cta-body less-padding">
 			<i class="dashicons dashicons-lock"></i>
-			<p><?php printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . KB::get( 'usage-policy' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); ?></p>
+			<p><?php printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . KB::get( 'usage-policy', 'Analytics Privacy Notice' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); ?></p>
 		</div>
 	</div>
 </div>

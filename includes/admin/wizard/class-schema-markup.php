@@ -72,7 +72,7 @@ class Schema_Markup implements Wizard_Step {
 			$article_dep   = [ 'relation' => 'and' ] + [ [ 'rich_snippet', 'on' ] ];
 			$article_dep[] = [ 'pt_' . $post_type . '_default_rich_snippet', 'article' ];
 			/* translators: Google article snippet doc link */
-			$article_desc = 'person' === Helper::get_settings( 'titles.knowledgegraph_type' ) ? '<div class="notice notice-warning inline rank-math-notice" style="margin-left:0;"><p>' . sprintf( __( 'Google does not allow Person as the Publisher for articles. Organization will be used instead. You can read more about this <a href="%s" target="_blank">here</a>.', 'rank-math' ), KB::get( 'article' ) ) . '</p></div>' : '';
+			$article_desc = 'person' === Helper::get_settings( 'titles.knowledgegraph_type' ) ? '<div class="notice notice-warning inline rank-math-notice" style="margin-left:0;"><p>' . sprintf( __( 'Google does not allow Person as the Publisher for articles. Organization will be used instead. You can read more about this <a href="%s" target="_blank">here</a>.', 'rank-math' ), KB::get( 'google-article-schema' ) ) . '</p></div>' : '';
 			$wizard->cmb->add_field(
 				[
 					'id'      => 'pt_' . $post_type . '_default_article_type',

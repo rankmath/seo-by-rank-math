@@ -41,7 +41,7 @@ defined( 'ABSPATH' ) || exit;
 			</div>
 			<div class="rank-math-tabs-content rank-math-custom">
 				<div id="help-panel-video" class="rank-math-tab">
-					<a href="<?php KB::the( 'how-to-setup-your-site' ); ?>" target="_blank" style="font-size: 15px; border-bottom: 1px dashed;">
+					<a href="<?php KB::the( 'how-to-setup-your-site', 'SW Your Site Setup KB' ); ?>" target="_blank" style="font-size: 15px; border-bottom: 1px dashed;">
 						<?php echo esc_html_e( 'Click here to learn how to setup Rank Math properly', 'rank-math' ); ?>
 					</a>
 				</div>
@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) || exit;
 					<div class="search-form wp-core-ui rank-math-ui">
 						<label for="rank-math-search-input"><?php esc_html_e( 'Search the Knowledge Base for answers to your questions:', 'rank-math' ); ?></label>
 						<input type="text" class="regular-text" id="rank-math-search-input" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="<?php esc_attr_e( 'Type here to search...', 'rank-math' ); ?>" value="">
-						<a data-href="https://rankmath.com/kb/wordpress/seo-suite/?ht-kb-search=1&lang=<?php echo get_locale(); ?>&utm_source=Plugin&utm_medium=SW%20Your%20Site%20Search&utm_campaign=WP&s=" target="_blank" class="button button-primary"><?php esc_html_e( 'Search', 'rank-math' ); ?></a>
+						<a data-href="<?php KB::the( 'kb-search', 'SW Your Site Search' ); ?>&s=&lang=<?php echo get_locale(); ?>" target="_blank" class="button button-primary"><?php esc_html_e( 'Search', 'rank-math' ); ?></a>
 					</div>
 				</div>
 			</div>

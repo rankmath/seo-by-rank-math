@@ -127,7 +127,7 @@ class Email_Reports {
 			'report_url'                  => Helper::get_admin_url( 'analytics' ),
 			'assets_url'                  => $this->assets_url,
 			'address'                     => '<br/> [rank_math_contact_info show="address"]',
-			'logo_link'                   => KB::get( 'email-reports-logo' ),
+			'logo_link'                   => KB::get( 'email-reports-logo', 'Email Report Logo' ),
 
 			'period_days'                 => $date['period'],
 			'start_date'                  => $date['start'],

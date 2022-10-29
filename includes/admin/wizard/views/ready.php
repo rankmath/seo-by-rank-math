@@ -6,8 +6,8 @@
  * @subpackage RankMath\Admin\Wizard
  */
 
-use RankMath\Helper;
 use RankMath\KB;
+use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<div class="wizard-next-steps wp-clearfix">
 		<div class="score-100">
-			<a href="<?php KB::the( 'score-100-sw' ); ?>" target="_blank">
+			<a href="<?php KB::the( 'score-100', 'SW Ready Score Image' ); ?>" target="_blank">
 				<img src="<?php echo esc_url( rank_math()->plugin_url() ); ?>/assets/admin/img/score-100.png">
 			</a>
 		</div>
@@ -46,19 +46,19 @@ defined( 'ABSPATH' ) || exit;
 			<ul>
 				<li>
 					<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) { ?>
-						<span class="dashicons dashicons-star-filled pro"></span><a href="<?php KB::the( 'pro-ready-step' ); ?>" target="_blank"><strong class="pro-label"><?php esc_html_e( 'Know more about the PRO version', 'rank-math' ); ?></strong></a>
+						<span class="dashicons dashicons-star-filled pro"></span><a href="<?php KB::the( 'pro', 'SW Ready Step Upgrade' ); ?>" target="_blank"><strong class="pro-label"><?php esc_html_e( 'Know more about the PRO version', 'rank-math' ); ?></strong></a>
 					<?php } else { ?>
-						<span class="dashicons dashicons-video-alt3"></span><a href="<?php KB::the( 'yt-link' ); ?>" target="_blank"><?php esc_html_e( 'Subscribe to Our YouTube Channel', 'rank-math' ); ?></a>
+						<span class="dashicons dashicons-video-alt3"></span><a href="<?php KB::the( 'yt-link', 'SW Ready Step Upgrade' ); ?>" target="_blank"><?php esc_html_e( 'Subscribe to Our YouTube Channel', 'rank-math' ); ?></a>
 					<?php } ?>
 				</li>
 				<li>
-					<span class="dashicons dashicons-facebook"></span><a href="<?php KB::the( 'fb-group' ); ?>" target="_blank"><?php esc_html_e( 'Join FREE Facebook Group', 'rank-math' ); ?></a>
+					<span class="dashicons dashicons-facebook"></span><a href="<?php KB::the( 'fb-group', 'SW Ready Step Upgrade' ); ?>" target="_blank"><?php esc_html_e( 'Join FREE Facebook Group', 'rank-math' ); ?></a>
 				</li>
 				<li>
-					<span class="dashicons dashicons-welcome-learn-more"></span><a href="<?php KB::the( 'rm-kb-ready' ); ?>" target="_blank"><?php esc_html_e( 'Rank Math Knowledge Base', 'rank-math' ); ?></a>
+					<span class="dashicons dashicons-welcome-learn-more"></span><a href="<?php KB::the( 'kb-seo-suite', 'SW Ready Step KB' ); ?>" target="_blank"><?php esc_html_e( 'Rank Math Knowledge Base', 'rank-math' ); ?></a>
 				</li>
 				<li>
-					<span class="dashicons dashicons-sos"></span><a href="<?php KB::the( 'rm-support-ready' ); ?>" target="_blank"><?php esc_html_e( 'Get 24x7 Support', 'rank-math' ); ?></a>
+					<span class="dashicons dashicons-sos"></span><a href="<?php KB::the( 'support', 'SW Ready Step Support' ); ?>" target="_blank"><?php esc_html_e( 'Get 24x7 Support', 'rank-math' ); ?></a>
 				</li>
 			</ul>
 		</div>
@@ -66,7 +66,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<footer class="form-footer wp-core-ui rank-math-ui">
 		<a href="<?php echo esc_url( Helper::get_dashboard_url() ); ?>" class="button button-secondary rank-math-return-dashboard"><?php esc_html_e( 'Return to dashboard', 'rank-math' ); ?></a>
-		<a href="<?php echo esc_url( Helper::get_admin_url( 'help' ) ); ?>" class="button button-secondary"><?php esc_html_e( 'Proceed to Help Page', 'rank-math' ); ?></a>
+		<a href="<?php echo esc_url( Helper::get_admin_url( '', 'view=help' ) ); ?>" class="button button-secondary"><?php esc_html_e( 'Proceed to Help Page', 'rank-math' ); ?></a>
 		<a href="<?php echo esc_url( $wizard->step_next_link() ); ?>" class="button button-primary rank-math-advanced-option"><?php esc_html_e( 'Setup Advanced Options', 'rank-math' ); ?></a>
 		<?php do_action( 'rank_math/wizard/ready_footer', $wizard ); ?>
 	</footer>

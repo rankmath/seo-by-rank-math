@@ -11,6 +11,7 @@ import RankMathAfterFocusKeyword from '@slots/AfterFocusKeyword'
 /**
  * Internal dependencies
  */
+import getLink from '@helpers/getLink'
 import ProNotice from './ProNotice'
 import Tooltip from '@components/Tooltip'
 import Interpolate from '@components/Interpolate'
@@ -32,7 +33,7 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 						components={ {
 							link: (
 								<a
-									href={ rankMath.assessor.hundredScoreLink }
+									href={ getLink( 'score-100', 'General Focus Keyword' ) }
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -75,7 +76,7 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 								{ __( 'This post is Pillar Content', 'rank-math' ) }
 							</strong>
 							<a
-								href="https://rankmath.com/kb/pillar-content-internal-linking/"
+								href={ getLink( 'pillar-content-internal-linking', 'Pillar Content' ) }
 								rel="noreferrer"
 								target="_blank"
 								className="dashicons-before dashicons-editor-help rank-math-help-icon"

@@ -7,20 +7,22 @@
  */
 
 use RankMath\Admin\Importers\Detector;
+
+use RankMath\KB;
 use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
 $detector = new Detector();
 $plugins  = $detector->detect();
-$first = empty( $plugins ) ? '' : array_keys( $plugins )[0];
+$first    = empty( $plugins ) ? '' : array_keys( $plugins )[0];
 ?>
 <h2><?php esc_html_e( 'Other Plugins', 'rank-math' ); ?></h2>
 
 <p class="description">
 	<?php
 	/* translators: Link to learn about import export panel KB article */
-	printf( esc_html__( 'If you were using another plugin to add important SEO information to your website before switching to Rank Math SEO, you can import the settings and data here. %s', 'rank-math' ), '<a href="' . \RankMath\KB::get( 'import-export-settings' ) . '" target="_blank">' . esc_html__( 'Learn more about the Import/Export options.', 'rank-math' ) . '</a>' );
+	printf( esc_html__( 'If you were using another plugin to add important SEO information to your website before switching to Rank Math SEO, you can import the settings and data here. %s', 'rank-math' ), '<a href="' . KB::get( 'import-export-settings', 'Options Panel Import Export Page Other Plugins' ) . '" target="_blank">' . esc_html__( 'Learn more about the Import/Export options.', 'rank-math' ) . '</a>' );
 	?>
 </p>
 
@@ -61,7 +63,7 @@ $first = empty( $plugins ) ? '' : array_keys( $plugins )[0];
 												<?php if ( 'redirections' !== $slug ) : ?>
 													<li style="margin-top: 20px;">
 														<input type="checkbox" class="cmb2-option" name="<?php echo esc_attr( $slug ); ?>[]" id="<?php echo esc_attr( $slug ); ?>_recalculate" value="recalculate" checked="checked">
-														<label for="<?php echo esc_attr( $slug ); ?>_recalculate"><?php esc_html_e( 'Recalculate SEO Scores (opens in a new window)', 'rank-math' ); ?> <a href="<?php echo esc_url( Helper::get_admin_url( 'status', [ 'view' => 'tools', 'update_scores' => '1', '_wpnonce' => wp_create_nonce( 'rank-math-recalculate-scores' ) ] ) ); ?>" class="hidden recalculate-try-again" target="_blank"><?php esc_html_e( 'Popup blocked. Try again?', 'rank-math' ); ?></a></label>
+														<label for="<?php echo esc_attr( $slug ); ?>_recalculate"><?php esc_html_e( 'Calculate SEO Scores', 'rank-math' ); ?></label>
 													</li>
 												<?php endif; ?>
 											</ul>

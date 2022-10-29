@@ -14,10 +14,10 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="header">
 	<div class="logo text-center">
-		<a href="<?php KB::the( 'logo' ); ?>" target="_blank"><img src="<?php echo esc_url( rank_math()->plugin_url() . 'assets/admin/img/logo.svg' ); ?>" width="245"></a>
+		<a href="<?php KB::the( 'logo', 'SW Logo' ); ?>" target="_blank"><img src="<?php echo esc_url( rank_math()->plugin_url() . 'assets/admin/img/logo.svg' ); ?>" width="245"></a>
 	</div>
 
-	<?php include_once $this->get_view( 'navigation' ); ?>
+	<?php require_once $this->get_view( 'navigation' ); ?>
 </div>
 
 <div class="wrapper">

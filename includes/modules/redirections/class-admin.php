@@ -171,7 +171,7 @@ class Admin extends Base {
 					'icon'  => 'rm-icon rm-icon-redirection',
 					'title' => esc_html__( 'Redirections', 'rank-math' ),
 					/* translators: Link to kb article */
-					'desc'  => sprintf( esc_html__( 'Easily create redirects without fiddling with tedious code. %s.', 'rank-math' ), '<a href="' . \RankMath\KB::get( 'redirections-settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+					'desc'  => sprintf( esc_html__( 'Easily create redirects without fiddling with tedious code. %s.', 'rank-math' ), '<a href="' . KB::get( 'redirections-settings', 'Options Panel Redirections Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
 				],
 			],
@@ -283,7 +283,7 @@ class Admin extends Base {
 	 */
 	public function page_title_actions( $is_editing ) {
 		$actions = [
-			'add' => [
+			'add'           => [
 				'class' => 'page-title-action rank-math-add-new-redirection' . ( $is_editing ? '-refresh' : '' ),
 				'href'  => Helper::get_admin_url( 'redirections', 'new=1' ),
 				'label' => __( 'Add New', 'rank-math' ),
@@ -293,12 +293,12 @@ class Admin extends Base {
 				'href'  => Helper::get_admin_url( 'redirections', 'importexport=1' ),
 				'label' => __( 'Export Options', 'rank-math' ),
 			],
-			'learn_more' => [
+			'learn_more'    => [
 				'class' => 'page-title-action',
-				'href'  => KB::get( 'redirections' ),
+				'href'  => KB::get( 'redirections', 'SW Redirection Step' ),
 				'label' => __( 'Learn More', 'rank-math' ),
 			],
-			'settings' => [
+			'settings'      => [
 				'class' => 'page-title-action',
 				'href'  => Helper::get_admin_url( 'options-general#setting-panel-redirections' ),
 				'label' => __( 'Settings', 'rank-math' ),

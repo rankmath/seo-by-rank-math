@@ -6,6 +6,8 @@
  * @subpackage RankMath\Role_Manager
  */
 
+use RankMath\KB;
+
 defined( 'ABSPATH' ) || exit;
 
 // Header.
@@ -23,7 +25,7 @@ rank_math()->admin->display_admin_header();
 				<p>
 					<?php
 						/* translators: %s is a Learn More link to the documentation. */
-						printf( esc_html__( 'Control which user has access to which options of Rank Math. %s', 'rank-math' ), '<a href="' . esc_url_raw( \RankMath\KB::get( 'role-manager' ) ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.' );
+						printf( esc_html__( 'Control which user has access to which options of Rank Math. %s', 'rank-math' ), '<a href="' . esc_url_raw( KB::get( 'role-manager', 'Role Manager Page' ) ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.' );
 					?>
 				</p>
 			</header>

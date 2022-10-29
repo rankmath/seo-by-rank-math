@@ -26,7 +26,7 @@ echo $authorize . $deauthorize;
 			<li><?php echo esc_attr__( 'Track page and keyword rankings with the Advanced Analytics module', 'rank-math' ); ?></li>
 			<li><?php echo esc_attr__( 'Easily set up Google Analytics without using another 3rd party plugin', 'rank-math' ); ?></li>
 			<li><?php echo esc_attr__( 'Automatically submit sitemaps to the Google Search Console', 'rank-math' ); ?></li>
-			<li><a href="<?php echo KB::get( 'benefits-analytics-kb' ); ?>" target="_blank"><?php echo esc_html__( 'Learn more about the benefits of connecting your account here.', 'rank-math' ); ?></a></li>
+			<li><a href="<?php echo KB::get( 'help-analytics', 'SW Analytics Step Benefits' ); ?>" target="_blank"><?php echo esc_html__( 'Learn more about the benefits of connecting your account here.', 'rank-math' ); ?></a></li>
 		</ul>
 	</div>
 </div>
@@ -34,7 +34,7 @@ echo $authorize . $deauthorize;
 	<div class="rank-math-cta-table">
 		<div class="rank-math-cta-body less-padding">
 			<i class="dashicons dashicons-lock"></i>
-			<p><?php printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . KB::get( 'usage-policy' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); ?></p>
+			<p><?php printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . KB::get( 'usage-policy', 'Analytics Privacy Notice' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); ?></p>
 		</div>
 	</div>
 </div>

@@ -32,6 +32,17 @@
     tbody tr td:first-child {
         width: 33%;
     }
+
+    .update_all_scores {
+        display: block;
+        font-size: 13px;
+        margin-top: 10px;
+        line-height: 1.3;
+    }
+    
+    .update_all_scores input {
+        vertical-align: middle;
+    }
 }
 
 .rank-math-tools-table.widefat {

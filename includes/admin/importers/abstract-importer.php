@@ -216,7 +216,7 @@ abstract class Plugin_Importer {
 	 * @return mixed
 	 */
 	private function format_message( $result, $action, $message ) {
-		if ( 'blocks' === $action ) {
+		if ( 'blocks' === $action || 'recalculate' === $action ) {
 			return is_array( $result ) ? sprintf( $message, $result['start'], $result['end'], $result['total_items'] ) : $result;
 		}
 
@@ -545,5 +545,19 @@ abstract class Plugin_Importer {
 
 		$result = DB::query_builder( 'postmeta' )->select( 'meta_id' )->whereLike( 'meta_key', $this->meta_key, '' )->getVar();
 		return absint( $result ) > 0 ? true : false;
+	}
+
+	/**
+	 * Recalculate SEO scores.
+	 */
+	private function recalculate() {
+		$this->set_pagination( \RankMath\Tools\Update_Score::get()->find( false ) );
+
+		$return = $this->get_pagination_arg();
+		$data   = \RankMath\Tools\Update_Score::get()->update_seo_score();
+
+		$return['data'] = $data;
+
+		return $return;
 	}
 }

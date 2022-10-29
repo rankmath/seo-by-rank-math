@@ -11,6 +11,7 @@
 namespace RankMath\Admin;
 
 use WP_Http;
+use RankMath\KB;
 use RankMath\CMB2;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
@@ -272,7 +273,7 @@ class Options {
 
 		<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) : ?>
 			<div class="rank-math-unlock-pro-notice" id="rank-math-unlock-pro-notice">
-				<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Unlock%20PRO%20Options%20Panel%20Notice&utm_campaign=WP" target="_blank" class="pro-link">
+				<a href="<?php KB::the( 'pro', 'Unlock PRO Options Panel Notice' ); ?>" target="_blank" class="pro-link">
 					<p>
 						<?php esc_html_e( 'Take your SEO to the Next Level!', 'rank-math' ); ?>
 						<strong><?php esc_html_e( 'Get Rank Math PRO!', 'rank-math' ); ?></strong>

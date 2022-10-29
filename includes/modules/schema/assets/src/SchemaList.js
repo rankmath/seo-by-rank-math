@@ -15,6 +15,7 @@ import { withSelect, withDispatch } from '@wordpress/data'
  * Internal dependencies
  */
 import { getSnippetIcon } from '@helpers/snippetIcon'
+import getLink from '@helpers/getLink'
 import DeleteConfirmation from './DeleteConfirmation'
 
 /**
@@ -38,7 +39,7 @@ const SchemaList = ( { schemas, edit, trash, preview, showProNotice } ) => {
 			{ showProNotice && (
 				<div className="components-notice rank-math-notice is-warning">
 					<div className="components-notice__content">
-						{ __( 'Multiple Schemas are allowed in the', 'rank-math' ) } <a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Schema%20Tab%20Notice&utm_campaign=WP" rel="noreferrer noopener" target="_blank"><strong>{ __( 'PRO Version', 'rank-math' ) }</strong></a>
+						{ __( 'Multiple Schemas are allowed in the', 'rank-math' ) } <a href={ getLink( 'pro', 'Schema Tab Notice' ) } rel="noreferrer noopener" target="_blank"><strong>{ __( 'PRO Version', 'rank-math' ) }</strong></a>
 					</div>
 				</div>
 			) }

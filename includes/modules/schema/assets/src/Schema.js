@@ -14,6 +14,7 @@ import SchemaList from './SchemaList'
 import registerDefaultHooks from './defaultFilters'
 import EditorModal from './Editor/EditorModal'
 import TemplatesModal from './Templates/TemplatesModal'
+import getLink from '@helpers/getLink'
 
 registerDefaultHooks()
 
@@ -23,7 +24,7 @@ registerDefaultHooks()
 const Schema = () => {
 	return (
 		<PanelBody initialOpen={ true } className="rank-math-schema-in-use">
-			<p className="cmb2-metabox-description">{ __( 'Configure Schema Markup for your pages. Search engines, use structured data to display rich results in SERPs.', 'rank-math' ) } <a href="https://rankmath.com/kb/rich-snippets/?utm_source=Plugin&utm_medium=Schema%20G%20Tab&utm_campaign=WP" target="_blank" rel="noopener noreferrer">{ __( 'Learn more.', 'rank-math' ) }</a></p>
+			<p className="cmb2-metabox-description">{ __( 'Configure Schema Markup for your pages. Search engines, use structured data to display rich results in SERPs.', 'rank-math' ) } <a href={ getLink( 'rich-snippets', 'Schema G Tab' ) } target="_blank" rel="noopener noreferrer">{ __( 'Learn more.', 'rank-math' ) }</a></p>
 			<SchemaList />
 			<Button
 				isPrimary

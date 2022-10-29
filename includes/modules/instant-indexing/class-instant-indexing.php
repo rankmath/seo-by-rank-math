@@ -193,7 +193,7 @@ class Instant_Indexing extends Base {
 			'url-submission' => [
 				'icon'    => 'rm-icon rm-icon-instant-indexing',
 				'title'   => esc_html__( 'Submit URLs', 'rank-math' ),
-				'desc'    => esc_html__( 'Send URLs directly to the IndexNow API.', 'rank-math' ) . ' <a href="' . KB::get( 'instant-indexing' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
+				'desc'    => esc_html__( 'Send URLs directly to the IndexNow API.', 'rank-math' ) . ' <a href="' . KB::get( 'instant-indexing', 'Indexing Submit URLs' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
 				'classes' => 'rank-math-advanced-option',
 				'file'    => dirname( __FILE__ ) . '/views/console.php',
 			],
@@ -201,7 +201,7 @@ class Instant_Indexing extends Base {
 				'icon'  => 'rm-icon rm-icon-settings',
 				'title' => esc_html__( 'Settings', 'rank-math' ),
 				/* translators: Link to kb article */
-				'desc'  => sprintf( esc_html__( 'Instant Indexing module settings. %s.', 'rank-math' ), '<a href="' . KB::get( 'instant-indexing' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+				'desc'  => sprintf( esc_html__( 'Instant Indexing module settings. %s.', 'rank-math' ), '<a href="' . KB::get( 'instant-indexing', 'Indexing Settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 				'file'  => dirname( __FILE__ ) . '/views/options.php',
 			],
 			'history'        => [

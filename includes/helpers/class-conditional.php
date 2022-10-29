@@ -93,6 +93,10 @@ trait Conditional {
 	 * @return bool
 	 */
 	public static function is_invalid_registration() {
+		if ( defined( 'RANK_MATH_REGISTRATION_SKIP' ) && RANK_MATH_REGISTRATION_SKIP ) {
+			return false;
+		}
+
 		$is_skipped = Helper::is_plugin_active_for_network() ? get_blog_option( get_main_site_id(), 'rank_math_registration_skip' ) : get_option( 'rank_math_registration_skip' );
 		if ( true === boolval( $is_skipped ) ) {
 			return false;

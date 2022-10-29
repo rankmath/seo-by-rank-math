@@ -19,7 +19,7 @@ if ( Helper::has_cap( 'general' ) ) {
 	include_once 'plugin-activation.php';
 }
 
-include_once 'plugin-activation.php'; ?>
+require_once 'plugin-activation.php'; ?>
 
 	<div class="two-col rank-math-box-help">
 
@@ -35,7 +35,7 @@ include_once 'plugin-activation.php'; ?>
 
 					<li>
 					<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) { ?>
-						<a href="<?php KB::the( 'pro-help-tab' ); ?>" target="_blank">
+						<a href="<?php KB::the( 'pro', 'Help Tab PRO Link' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-star-filled"></i>
 							<div>
 								<strong><?php esc_html_e( 'Upgrade to PRO', 'rank-math' ); ?></strong>
@@ -43,7 +43,7 @@ include_once 'plugin-activation.php'; ?>
 							</div>
 						</a>
 					<?php } else { ?>
-						<a href="<?php KB::the( 'how-to-setup' ); ?>" target="_blank">
+						<a href="<?php KB::the( 'how-to-setup', 'Help Tab Setup KB' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-settings"></i>
 							<div>
 								<strong><?php esc_html_e( 'Setup Rank Math', 'rank-math' ); ?></strong>
@@ -54,7 +54,7 @@ include_once 'plugin-activation.php'; ?>
 					</li>
 
 					<li>
-						<a href="<?php KB::the( 'seo-import' ); ?>" target="_blank">
+						<a href="<?php KB::the( 'seo-import', 'Help Tab Import Data' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-import"></i>
 							<div>
 								<strong><?php esc_html_e( 'Import Data', 'rank-math' ); ?></strong>
@@ -64,7 +64,7 @@ include_once 'plugin-activation.php'; ?>
 					</li>
 
 					<li>
-						<a href="<?php KB::the( 'score-100-dh' ); ?>" target="_blank">
+						<a href="<?php KB::the( 'score-100', 'Help Tab Score KB' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-post"></i>
 							<div>
 								<strong><?php esc_html_e( 'Improve SEO Score', 'rank-math' ); ?></strong>
@@ -89,7 +89,7 @@ include_once 'plugin-activation.php'; ?>
 				<ul class="rank-math-list-icon">
 
 					<li>
-						<a href="<?php KB::the( 'rm-kb' ); ?>" target="_blank">
+						<a href="<?php KB::the( 'kb-seo-suite', 'Help Tab KB Link' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-help"></i>
 							<div>
 								<strong><?php esc_html_e( 'Online Documentation', 'rank-math' ); ?></strong>
@@ -99,7 +99,7 @@ include_once 'plugin-activation.php'; ?>
 					</li>
 
 					<li>
-						<a href="<?php KB::the( 'rm-support' ); ?>" target="_blank">
+						<a href="<?php KB::the( 'support', 'Help Tab Ticket' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-support"></i>
 							<div>
 								<strong><?php esc_html_e( 'Ticket Support', 'rank-math' ); ?></strong>
@@ -109,7 +109,7 @@ include_once 'plugin-activation.php'; ?>
 					</li>
 
 					<li>
-						<a href="<?php KB::the( 'help-affiliate' ); ?>" target="_blank">
+						<a href="<?php KB::the( 'help-affiliate', 'Help Tab Aff Link' ); ?>" target="_blank">
 							<i class="rm-icon rm-icon-sitemap"></i>
 							<div>
 								<strong><?php esc_html_e( 'Affiliate Program', 'rank-math' ); ?></strong>

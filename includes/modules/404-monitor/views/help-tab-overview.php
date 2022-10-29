@@ -22,17 +22,17 @@ defined( 'ABSPATH' ) || exit;
 
 <ul>
 	<li>
-		<a href="<?php echo KB::get( '404-monitor' ); ?>" target="_blank">
+		<a href="<?php echo KB::get( '404-monitor', '404 Monitor Help Toggle' ); ?>" target="_blank">
 			<?php esc_html_e( '404 Monitor', 'rank-math' ); ?>
 </a>
 	</li>
 	<li>
-		<a href="<?php echo KB::get( '404-monitor-help' ); ?>" target="_blank">
+		<a href="<?php echo KB::get( '404-monitor-settings', '404 Monitor Help Toggle' ); ?>" target="_blank">
 			<?php esc_html_e( '404 Monitor Settings', 'rank-math' ); ?>
 </a>
 	</li>
 	<li>
-		<a href="<?php echo KB::get( 'fix-404' ); ?>" target="_blank">
+		<a href="<?php echo KB::get( 'fix-404', '404 Monitor Help Toggle Fix link' ); ?>" target="_blank">
 			<?php esc_html_e( 'Fix 404 Errors', 'rank-math' ); ?>
 </a>
 	</li>

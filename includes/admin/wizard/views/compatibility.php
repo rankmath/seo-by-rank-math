@@ -59,7 +59,7 @@ if ( $all_good ) :
 						<p class="description">
 						<?php
 							echo ( ! Helper::is_whitelabel() ) ?
-								esc_html__( 'Rank Math is compatible with your PHP version but we recommend updating to PHP 7.2 for increased speed and security.', 'rank-math' ) . ' <a href="' . KB::get( 'rm-requirements' ) . '" target="_blank">' . esc_html__( 'More information', 'rank-math' ) . '</a>' :
+								esc_html__( 'Rank Math is compatible with your PHP version but we recommend updating to PHP 7.2 for increased speed and security.', 'rank-math' ) . ' <a href="' . KB::get( 'requirements', 'Setup wizard compatibility step' ) . '" target="_blank">' . esc_html__( 'More information', 'rank-math' ) . '</a>' :
 								esc_html__( 'This plugin is compatible with your PHP version but we recommend updating to PHP 7.2 for increased speed and security.', 'rank-math' );
 						?>
 						</p>

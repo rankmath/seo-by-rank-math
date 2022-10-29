@@ -66,7 +66,7 @@ class Robots_Txt {
 					'icon'      => 'rm-icon rm-icon-robots',
 					'title'     => esc_html__( 'Edit robots.txt', 'rank-math' ),
 					/* translators: Link to kb article */
-					'desc'      => sprintf( esc_html__( 'Edit your robots.txt file to control what bots see. %s.', 'rank-math' ), '<a href="' . KB::get( 'edit-robotstxt' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+					'desc'      => sprintf( esc_html__( 'Edit your robots.txt file to control what bots see. %s.', 'rank-math' ), '<a href="' . KB::get( 'edit-robotstxt', 'Options Panel Robots Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'      => dirname( __FILE__ ) . '/options.php',
 					'classes'   => 'rank-math-advanced-option',
 					'after_row' => '<div class="rank-math-desc">' . __( 'Leave the field empty to let WordPress handle the contents dynamically. If an actual robots.txt file is present in the root folder of your site, this option won\'t take effect and you have to edit the file directly, or delete it and then edit from here.', 'rank-math' ) . '</div>',

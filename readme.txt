@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.0
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.97
+Stable tag: 1.0.98
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -580,12 +580,18 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.97 [Sep 14, 2022] =
-* Added: [NEW!] Tool to [Recalculate the SEO scores](https://rankmath.com/kb/seo-score-not-available/)
-* Improved: Use SEO Title & SEO Description in the WooCommerce [Product Schema](https://rankmath.com/kb/woocommerce-product-schema/) instead of Product title & description
-* Improved: Toggle buttons UI on the [Version Control](https://rankmath.com/kb/version-control/) page
-* Fixed: [Index Status](https://rankmath.com/kb/url-inspection-api-integration/) was not working well on the WordPress installed in a subdirectory
-* Fixed: Emojis were getting removed from the SEO description at the time of updating the description using the [Bulk Edit option](https://rankmath.com/kb/bulk-editing-in-rank-math/)
-* Fixed: `%%category_description%%` variable was not getting [imported](https://rankmath.com/kb/yoast-seo-migration/#num-1-3-import-data-from-yoast-seo) from the Yoast plugin
+= 1.0.98 [Sep 22, 2022] =
+* Added: New option into the [Recalculate the SEO score](https://rankmath.com/kb/rank-math-status-and-tools/#recalculate-seo-score-for-posts) tool to include/exclude posts that already have an SEO score
+* Added: New property `articleSection` in the [Article Schema](https://rankmath.com/kb/article-schema/)
+* Added: New constant `RANK_MATH_REGISTRATION_SKIP` to skip the invalid registration check for developers
+* Improved: Knowledge Base link management code in the plugin
+* Improved: Grouped all scheduled actions used in the plugin with the name `rank-math`
+* Improved: Several small UI changes
+* Fixed: Action Schedular notice appearing on some setups
+* Fixed: [Tool to Recalculate the SEO score](https://rankmath.com/kb/rank-math-status-and-tools/#recalculate-seo-score-for-posts) was not working well with focus keywords containing `diacritics`
+* Fixed: Link to the Help page was broken in the [Setup Wizard](https://rankmath.com/kb/how-to-setup/#ready)
+* Fixed: Disabling [Email reports](https://rankmath.com/kb/how-to-setup/#email-reports) from Setup Wizard was not working
+* Fixed: [Analytics Dashboard](https://rankmath.com/kb/analytics/#rank-math-analytics-dashboard) tab was showing an active state even after selecting other tab
+* Fixed: [Site Analytics](https://rankmath.com/kb/analytics/#site-analytics) page was crashing on some setups when PRO plugin is not active
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

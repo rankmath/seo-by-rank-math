@@ -165,7 +165,17 @@ const App = () => {
 
 							return (
 								<NavLink
-									className={ ( { isActive } ) => isActive ? navClass + ' is-active' : navClass }
+									className={ ( { isActive } ) => {
+										if ( ! isActive ) {
+											return navClass
+										}
+
+										if ( '/' === path && window.location.hash && window.location.hash !== '#/' ) {
+											return navClass
+										}
+
+										return isActive ? navClass + ' is-active' : navClass
+									} }
 									key={ path }
 									to={ link ? link : path }
 								>

@@ -9,6 +9,7 @@
 
 namespace RankMath;
 
+use RankMath\KB;
 use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
@@ -138,7 +139,7 @@ class Frontend_SEO_Score {
 
 		// If template is empty we output $score value directly.
 		$html     = $score;
-		$backlink = '<a href="https://rankmath.com" target="_blank" rel="noopener">Rank Math SEO</a>';
+		$backlink = '<a href="' . KB::get( 'seo-suite', 'Frontend SEO score' ) . '" target="_blank" rel="noopener">Rank Math SEO</a>';
 		if ( ! empty( $args['template'] ) ) {
 			ob_start();
 

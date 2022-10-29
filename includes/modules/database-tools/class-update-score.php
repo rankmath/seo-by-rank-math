@@ -45,20 +45,16 @@ class Update_Score {
 
 		$this->screen = new Screen();
 		$this->screen->load_screen( 'post' );
-		$this->action( 'admin_enqueue_scripts', 'enqueue' );
 
-		$this->action( 'admin_init', 'run_in_new_window' );
+		if ( Param::get( 'page' ) === 'rank-math-status' && Param::get( 'view' ) === 'tools' ) {
+			$this->action( 'admin_enqueue_scripts', 'enqueue' );
+		}
 	}
 
 	/**
 	 * Enqueue scripts & add JSON data needed to update the SEO score on existing posts.
 	 */
 	public function enqueue() {
-		$screen = get_current_screen();
-		if ( Param::get('page') !== 'rank-math-status' || Param::get( 'view' ) !== 'tools' ) {
-			return;
-		}
-
 		$scripts = [
 			'lodash'             => '',
 			'wp-data'            => '',
@@ -90,7 +86,8 @@ class Update_Score {
 		$this->screen->localize();
 		$post = $temp_post;
 
-		Helper::add_json( 'totalPosts', $this->find() );
+		Helper::add_json( 'totalPostsWithoutScore', $this->find( false ) );
+		Helper::add_json( 'totalPosts', $this->find( true ) );
 		Helper::add_json( 'batchSize', $this->batch_size );
 	}
 
@@ -100,26 +97,51 @@ class Update_Score {
 	public function update_seo_score() {
 		$args   = Param::post( 'args', [], FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		$offset = isset( $args['offset'] ) ? absint( $args['offset'] ) : 0;
-		$posts  = get_posts(
-			[
-				'post_type'      => $this->get_post_types(),
-				'posts_per_page' => $this->batch_size,
-				'offset'         => $offset,
-				'orderby'        => 'ID',
-				'order'          => 'ASC',
 
-				'meta_query'     => [
-					[
-						'key'     => 'rank_math_focus_keyword',
-						'value'   => '',
-						'compare' => '!=',
-					],
+		// We get "paged" when running from the importer.
+		$paged  = Param::post( 'paged', 0 );
+		if ( $paged ) {
+			$offset = ( $paged - 1 ) * $this->batch_size;
+		}
+
+		$update_all = ! isset( $args['update_all_scores'] ) || ! empty( $args['update_all_scores'] );
+		$query_args = [
+			'post_type'      => $this->get_post_types(),
+			'posts_per_page' => $this->batch_size,
+			'offset'         => $offset,
+			'orderby'        => 'ID',
+			'order'          => 'ASC',
+			'status'         => 'any',
+
+			'meta_query'     => [
+				'relation' => 'AND',
+				[
+					'key'     => 'rank_math_focus_keyword',
+					'value'   => '',
+					'compare' => '!=',
 				],
-			]
-		);
+			],
+		];
+
+		if ( ! $update_all ) {
+			$query_args['meta_query'][] = [
+				'relation' => 'OR',
+				[
+					'key'     => 'rank_math_seo_score',
+					'compare' => 'NOT EXISTS',
+				],
+				[
+					'key'     => 'rank_math_seo_score',
+					'value'   => '',
+					'compare' => '=',
+				],
+			];
+		}
+
+		$posts = get_posts( $query_args );
 
 		if ( empty( $posts ) ) {
-			return esc_html__( 'All data updated', 'rank-math' );
+			return 'complete'; // Don't translate this string.
 		}
 
 		add_filter(
@@ -134,8 +156,6 @@ class Update_Score {
 
 		rank_math()->variables->setup();
 		$data = [];
-
-		global $wpdb;
 		foreach ( $posts as $post ) {
 			$post_id   = $post->ID;
 			$post_type = $post->post_type;
@@ -206,27 +226,22 @@ class Update_Score {
 	}
 
 	/**
-	 * Find posts with focus keyword.
+	 * Find posts with focus keyword but no SEO score.
 	 *
+	 * @param  bool $update_all Whether to update all posts or only those without a score.
 	 * @return int
 	 */
-	public function find() {
-		static $update_score_post_ids;
-		if ( null !== $update_score_post_ids ) {
-			return $update_score_post_ids;
-		}
-
+	public function find( $update_all = true ) {
 		global $wpdb;
 		$post_types  = $this->get_post_types();
 		$placeholder = implode( ', ', array_fill( 0, count( $post_types ), '%s' ) );
 		$query       = "SELECT COUNT(ID) FROM {$wpdb->posts} as p
-		LEFT JOIN {$wpdb->postmeta} ON ( p.ID = {$wpdb->postmeta}.post_id )
-		WHERE (
-			{$wpdb->postmeta}.meta_key = 'rank_math_focus_keyword' AND {$wpdb->postmeta}.meta_value != ''
-		)
-		AND p.post_type IN ($placeholder)
-		AND p.post_status = 'publish'
-		";
+			LEFT JOIN {$wpdb->postmeta} as pm ON p.ID = pm.post_id AND pm.meta_key = 'rank_math_focus_keyword'
+			WHERE p.post_type IN ({$placeholder}) AND p.post_status = 'publish' AND pm.meta_value != ''";
+
+		if ( ! $update_all ) {
+			$query .= " AND (SELECT COUNT(*) FROM {$wpdb->postmeta} as pm2 WHERE pm2.post_id = p.ID AND pm2.meta_key = 'rank_math_seo_score' AND pm2.meta_value != '') = 0";
+		}
 
 		$update_score_post_ids = $wpdb->get_var( $wpdb->prepare( $query, $post_types ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- It's prepared above.
 
@@ -251,7 +266,7 @@ class Update_Score {
 				</div>
 				<div class="rank-math-modal-body">
 					<div class="count">
-						<?php esc_html_e( 'Calculated:', 'rank-math' ); ?> <span>0</span> / <?php echo esc_html( $this->find() ); ?>
+						<?php esc_html_e( 'Calculated:', 'rank-math' ); ?> <span class="update-posts-done">0</span> / <span class="update-posts-total"><?php echo esc_html( $this->find() ); ?></span>
 					</div>
 					<div class="progress-bar">
 						<span></span>
@@ -283,34 +298,4 @@ class Update_Score {
 		return $this->do_filter( 'tool/post_types', array_keys( $post_types ) );
 	}
 
-	/**
-	 * Run the tool in a new window, so that the user can continue to use the site.
-	 */
-	public function run_in_new_window() {
-		// Check if we're on the right page.
-		if ( Param::get( 'page' ) !== 'rank-math-status' || Param::get( 'view' ) !== 'tools' || Param::get( 'update_scores' ) !== '1' ) {
-			return;
-		}
-
-		// Check user capabilities.
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'rank-math' ) );
-		}
-
-		// Check nonce.
-		check_admin_referer( 'rank-math-recalculate-scores' );
-
-		Helper::add_json( 'startUpdateScore', true );
-		$this->filter( 'admin_body_class', 'add_body_class' );
-	}
-
-	/**
-	 * Add body class.
-	 *
-	 * @param  string $classes Body classes.
-	 * @return string
-	 */
-	public function add_body_class( $classes ) {
-		return $classes . ' rank-math-start-update-score';
-	}
 }

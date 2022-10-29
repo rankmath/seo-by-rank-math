@@ -275,7 +275,7 @@ class SEO_Analyzer {
 		delete_option( 'rank_math_seo_analysis_results' );
 
 		if ( Helper::is_localhost() ) {
-			echo '<div class="notice notice-error is-dismissible notice-seo-analysis-error rank-math-notice"><p><strong>' . esc_html__( 'API Error:', 'rank-math' ) . '</strong> ' . esc_html__( 'The Site-Wide Analysis is unavailable on localhost.', 'rank-math' ) . ' <a href="' . KB::get( 'seo-analysis' ) . '" target="_blank">' . esc_html__( 'Click here to learn more', 'rank-math' ) . '</a>.</p></div>'; // phpcs:ignore
+			echo '<div class="notice notice-error is-dismissible notice-seo-analysis-error rank-math-notice"><p><strong>' . esc_html__( 'API Error:', 'rank-math' ) . '</strong> ' . esc_html__( 'The Site-Wide Analysis is unavailable on localhost.', 'rank-math' ) . ' <a href="' . KB::get( 'seo-analysis', 'SEO Analyzer Localhost Message' ) . '" target="_blank">' . esc_html__( 'Click here to learn more', 'rank-math' ) . '</a>.</p></div>'; // phpcs:ignore
 			$success = false;
 			die;
 		}

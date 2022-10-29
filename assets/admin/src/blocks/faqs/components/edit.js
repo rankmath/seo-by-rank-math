@@ -14,6 +14,7 @@ import { BlockControls, AlignmentToolbar } from '@wordpress/block-editor'
 /**
  * Internal dependencies
  */
+import getLink from '@helpers/getLink'
 import Inspector from './Inspector'
 import Question from './Question'
 import generateId from '@helpers/generateId'
@@ -62,7 +63,7 @@ class Edit extends Component {
 				</Button>
 
 				<a
-					href="https://rankmath.com/kb/faq-schema-block/"
+					href={ getLink( 'faq-schema-block', 'Add New FAQ' ) }
 					rel="noopener noreferrer"
 					target="_blank"
 					title={ __( 'More Info', 'rank-math' ) }

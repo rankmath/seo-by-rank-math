@@ -28,7 +28,7 @@ rank_math()->admin->display_admin_header();
 		<header class="rank-math-box">
 			<h2>
 				<?php echo esc_html( get_admin_page_title() ); ?>
-				<a class="button button-secondary button-small" href="<?php KB::the( 'seo-analysis' ); ?>" target="_blank"><?php esc_html_e( 'What is this?', 'rank-math' ); ?></a>
+				<a class="button button-secondary button-small" href="<?php KB::the( 'seo-analysis', 'SEO Start Analytics' ); ?>" target="_blank"><?php esc_html_e( 'What is this?', 'rank-math' ); ?></a>
 			</h2>
 			<?php if ( Helper::is_site_connected() && ! empty( $analyzer->results ) ) : ?>
 				<div>

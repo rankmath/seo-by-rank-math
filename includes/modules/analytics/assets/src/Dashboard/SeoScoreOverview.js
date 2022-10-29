@@ -28,6 +28,7 @@ import { Button } from '@wordpress/components'
  * Internal dependencies
  */
 import { isPro } from '../functions'
+import getLink from '@helpers/getLink'
 
 const renderActiveShape = ( props ) => {
 	const {
@@ -142,7 +143,7 @@ const SeoScoreOverview = ( { seoScores } ) => {
 		<div className="rank-math-box rank-math-score-overview">
 			<h3>
 				{ __( 'Overall Optimization', 'rank-math' ) }
-				<a href="https://rankmath.com/kb/analytics/?utm_source=Plugin&utm_medium=Overall%20Optimization%20Tooltip&utm_campaign=WP" target="_blank" rel="noopener noreferrer" className="rank-math-tooltip">
+				<a href={ getLink( 'help-analytics', 'Overall Optimization Tooltip' ) } target="_blank" rel="noopener noreferrer" className="rank-math-tooltip">
 					<em className="dashicons-before dashicons-editor-help"></em>
 				</a>
 			</h3>

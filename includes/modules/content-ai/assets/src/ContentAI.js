@@ -30,7 +30,7 @@ import ContentAIScore from './ContentAIScore'
 import Recommendations from './Recommendations'
 import ContentAIPanel from './ContentAIPanel'
 import Interpolate from '@components/Interpolate'
-
+import getLink from '@helpers/getLink'
 class ContentAI extends Component {
 	/**
 	 * Constructor.
@@ -106,7 +106,7 @@ class ContentAI extends Component {
 								<h3 className="rank-math-ca-section-title">
 									{ __( 'Content AI', 'rank-math' ) }
 									<span>{ __( 'New!', 'rank-math' ) }</span>
-									<a href="https://rankmath.com/kb/how-to-use-content-ai/?utm_source=Plugin&utm_medium=Sidebar%20KB%20Icon&utm_campaign=WP" rel="noreferrer" target="_blank" id="rank-math-help-icon" title={ __( 'Content AI Knowledge Base.', 'rank-math' ) }>﹖</a>
+									<a href={ getLink( 'content-ai-settings', 'Sidebar KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" title={ __( 'Content AI Knowledge Base.', 'rank-math' ) }>﹖</a>
 								</h3>
 								<ContentAIScore />
 								<Recommendations recommendations={ data.recommendations } hasCredits={ hasCredits } content={ this.props.content } researcher={ this.props.researcher } updateAiScore={ this.props.updateAiScore } hasThumbnail={ this.props.hasThumbnail } />
@@ -203,13 +203,13 @@ class ContentAI extends Component {
 						help={
 							<>
 								{ __( 'Upgrade to buy more credits from ', 'rank-math' ) }
-								<a href="https://rankmath.com/content-ai/?utm_source=Plugin&utm_medium=Sidebar%20Upgrade%20Text&utm_campaign=WP#pricing-tables" rel="noreferrer" target="_blank" title={ __( 'Content AI Pricing.', 'rank-math' ) }>{ __( 'here.', 'rank-math' ) }</a>
+								<a href={ getLink( 'content-ai-pricing-tables', 'Sidebar Upgrade Text' ) } rel="noreferrer" target="_blank" title={ __( 'Content AI Pricing.', 'rank-math' ) }>{ __( 'here.', 'rank-math' ) }</a>
 							</>
 						}
 						placeholder={ __( 'Suggested length 2-3 Words', 'rank-math' ) }
 					/>
 					<div className="help-text">
-						{ __( 'To learn how to use it', 'rank-math' ) } <a href="https://rankmath.com/kb/how-to-use-content-ai/?utm_source=Plugin&utm_medium=Content%20AI%20Sidebar%20KB%20Link&utm_campaign=WP" target="_blank" rel="noreferrer">{ __( 'Click here', 'rank-math' ) }</a>
+						{ __( 'To learn how to use it', 'rank-math' ) } <a href={ getLink( 'content-ai-settings', 'Content AI Sidebar KB Link' ) } target="_blank" rel="noreferrer">{ __( 'Click here', 'rank-math' ) }</a>
 					</div>
 					{
 						! this.state.showResearch && ! this.state.loading && ! isEmpty( this.props.data ) &&
@@ -232,7 +232,7 @@ class ContentAI extends Component {
 						</Button>
 						<span>{ __( 'Credits', 'rank-math' ) }</span>
 						<a
-							href="https://rankmath.com/kb/how-to-use-content-ai/?utm_source=Plugin&utm_medium=Sidebar%20Credits%20Tooltip%20Icon&utm_campaign=WP#credits-usage"
+							href={ getLink( 'content-ai-credits-usage', 'Sidebar Credits Tooltip Icon' ) }
 							rel="noreferrer"
 							target="_blank"
 							id="rank-math-help-icon"
@@ -289,7 +289,7 @@ class ContentAI extends Component {
 								link1: (
 									// eslint-disable-next-line jsx-a11y/anchor-has-content
 									<a
-										href="https://rankmath.com/my-account/?utm_source=Plugin&utm_medium=Sidebar%20No%20Credits&utm_campaign=WP"
+										href={ getLink( 'free-account', 'Sidebar No Credits' ) }
 										target="_blank"
 										rel="noopener noreferrer"
 									/>
@@ -297,7 +297,7 @@ class ContentAI extends Component {
 								link2: (
 									// eslint-disable-next-line jsx-a11y/anchor-has-content
 									<a
-										href="https://rankmath.com/content-ai/?utm_source=Plugin&utm_medium=Sidebar%20No%20Credits&utm_campaign=WP#pricing-tables"
+										href={ getLink( 'content-ai-pricing-tables', 'Sidebar No Credits' ) }
 										target="_blank"
 										rel="noopener noreferrer"
 									/>
@@ -318,7 +318,7 @@ class ContentAI extends Component {
 					<>
 						<p>{ __( 'You don\'t have any credits left.', 'rank-math' ) }</p>
 						<Button
-							href="https://rankmath.com/content-ai/?utm_source=Plugin&utm_medium=Sidebar%20No%20Credits&utm_campaign=WP#pricing-tables"
+							href={ getLink( 'content-ai-pricing-tables', 'Sidebar No Credits' ) }
 							target="_blank"
 							rel="noreferrer"
 							className="is-primary"

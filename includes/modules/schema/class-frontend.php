@@ -127,6 +127,11 @@ class Frontend {
 		}
 
 		$schema['name'] = $schema['headline'];
+		if ( ! isset( $schema['articleSection'] ) ) {
+			global $post;
+			$schema['articleSection'] = Helper::replace_vars( '%primary_taxonomy_terms%', $post );
+		}
+
 		return $schema;
 	}
 
