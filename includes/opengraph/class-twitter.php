@@ -195,7 +195,7 @@ class Twitter extends OpenGraph {
 			$overlay = $this->get_overlay_image( $this->prefix );
 			if ( $overlay && ! empty( $image_meta['id'] ) ) {
 				$secret    = $images->generate_secret( $image_meta['id'], $overlay );
-				$image_url = admin_url( "admin-ajax.php?action=rank_math_overlay_thumb&id={$image_meta['id']}&type={$overlay}&secret={$secret}" );
+				$image_url = admin_url( "admin-ajax.php?action=rank_math_overlay_thumb&id={$image_meta['id']}&type={$overlay}&hash={$secret}" );
 			}
 
 			$this->tag( 'twitter:image', esc_url_raw( $image_url ) );

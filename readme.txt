@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.0
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.100
+Stable tag: 1.0.100.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -585,5 +585,9 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 * Fixed: [Index Status](https://rankmath.com/kb/analytics/#index-status) was not working well on Arabic language sites
 * Fixed: Filter to change [Opengraph image](https://rankmath.com/kb/filters-hooks-api-developer/#change-opengraph-image) was not working when an image was not added in the settings
 * Fixed: Sitemap was getting timed out on some sites hosted on Cloudflare when the [Include Images in Sitemap](https://rankmath.com/kb/configure-sitemaps/#images-in-sitemaps) option was enabled
+
+= 1.0.100.1[Oct 21, 2022] =
+* Improved: Renamed the secret parameter in the thumbnail overlay URL to hash to avoid any confusion, as this is not a sensitive information
+* Fixed: [Icon Overlay](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails) was not working after the last update
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
