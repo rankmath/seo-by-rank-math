@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.0
 Requires at least: 5.6
 Requires PHP: 7.2
-Stable tag: 1.0.98
+Stable tag: 1.0.98.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -593,5 +593,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 * Fixed: Disabling [Email reports](https://rankmath.com/kb/how-to-setup/#email-reports) from Setup Wizard was not working
 * Fixed: [Analytics Dashboard](https://rankmath.com/kb/analytics/#rank-math-analytics-dashboard) tab was showing an active state even after selecting other tab
 * Fixed: [Site Analytics](https://rankmath.com/kb/analytics/#site-analytics) page was crashing on some setups when PRO plugin is not active
+
+= 1.0.98.1 [Sep 22, 2022] =
+* Fixed: Strict PHP 7.2 error. It is recommended to update the PHP version to at least 7.4.
+
+**Note:** From the next update, we will stop supporting older versions.
 
 Full changelog can be found here - **[Rank Math SEO changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
