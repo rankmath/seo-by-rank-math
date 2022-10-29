@@ -14,6 +14,7 @@ import { PanelBody, Button } from '@wordpress/components'
  * Internal dependencies
  */
 import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
+import getLink from '@helpers/getLink'
 
 class Questions extends Component {
 	/**

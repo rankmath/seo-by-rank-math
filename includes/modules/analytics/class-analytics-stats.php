@@ -11,6 +11,7 @@
 namespace RankMath\Analytics;
 
 use RankMath\Helper;
+use RankMath\KB;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -47,5 +48,7 @@ class Analytics_Stats {
 
 		Helper::add_json( 'isAnalyticsConnected', \RankMath\Google\Analytics::is_analytics_connected() );
 		Helper::add_json( 'hideFrontendStats', get_user_meta( get_current_user_id(), 'rank_math_hide_frontend_stats', true ) );
+
+		Helper::add_json( 'links', KB::get_links() );
 	}
 }
