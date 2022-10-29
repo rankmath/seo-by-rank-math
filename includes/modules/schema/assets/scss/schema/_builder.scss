@@ -203,6 +203,11 @@
                             border-color: $primary;
                             box-shadow: 0 0 0 1px $primary;
                         }
+
+                        &:read-only {
+                            background-color: rgba(255,255,255,.5);
+                            color: rgba(44,51,56,.5);
+                        }
                     }
 
                     .components-notice {

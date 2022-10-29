@@ -120,6 +120,12 @@ class KB {
 		'breadcrumbs-install'             => 'https://rankmath.com/kb/breadcrumbs/?#add-breadcrumbs-theme',
 		'change-seo-score-backlink'       => 'https://rankmath.com/kb/filters-hooks-api-developer/?#change-seo-score-backlink',
 		'unable-to-encrypt'               => 'https://rankmath.com/kb/fix-automatic-update-unavailable-for-this-plugin/?#unable-to-encrypt',
+		'google-verification-kb'          => 'https://rankmath.com/kb/google-site-verification/',
+		'bing-verification-kb'            => 'https://rankmath.com/kb/verify-your-site-with-bing-webmaster-tools/',
+		'baidu-verification-kb'           => 'https://rankmath.com/kb/baidu-webmaster-tools-verification/',
+		'yandex-verification-kb'          => 'https://rankmath.com/kb/verifying-your-domain-with-yandex/',
+		'norton-verification-kb'          => 'https://rankmath.com/kb/verify-site-with-norton-safe-web/',
+		'pinterest-verification-kb'       => 'https://rankmath.com/kb/pinterest-site-verification/',
 
 		// Social Media.
 		'yt-link'                         => 'http://youtube.com/rankmath',

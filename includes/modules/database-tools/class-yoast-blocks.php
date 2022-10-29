@@ -174,6 +174,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 			'numberposts'   => -1,
 			'fields'        => 'ids',
 			'no_found_rows' => true,
+			'post_type'     => 'any',
 		];
 		$faqs = get_posts( $args );
 
@@ -182,10 +183,9 @@ class Yoast_Blocks extends \WP_Background_Process {
 		$howto     = get_posts( $args );
 
 		// Local Business Posts.
-		$args['s']         = ':yoast-seo-local/';
-		$args['post_type'] = 'any';
-		$local_business    = get_posts( $args );
-		$posts             = array_merge( $faqs, $howto, $local_business );
+		$args['s']      = ':yoast-seo-local/';
+		$local_business = get_posts( $args );
+		$posts          = array_merge( $faqs, $howto, $local_business );
 
 		$posts_data = [
 			'posts' => $posts,

@@ -151,6 +151,11 @@
             border-color: #64666a;
             background: #34383c;
 
+            &:read-only {
+                color: #e0e1e3 !important;
+                background: #34383c !important;
+            }
+
             &:focus {
                 color: #e0e1e3;
                 background: #34383c;
