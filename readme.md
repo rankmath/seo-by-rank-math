@@ -33,6 +33,7 @@ After installing Node, run the below command in the plugin directory to install 
 ## 🏗️ Development
 
 **Analytics Module:**
+
 `npm run devca` - Development
 
 `npm run ca` - Production
