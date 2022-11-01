@@ -12,8 +12,22 @@ We recommend using these tools for the development of Rank Math.
 
  - Local by Flywheel: For installing WordPress. Create two sites, one for regular development and another one for the fresh installation testing. You can use the [WP Reset](https://wordpress.org/plugins/wp-reset/) plugin to reset the fresh installation site after testing.
 	 - Make sure [PHPCS & WPCS](https://www.edmundcwm.com/setting-up-wordpress-coding-standards-in-vs-code/) are installed and working properly
- - VS Code Editor [You can use these these [VS Code Settings\]
- ](https://gist.github.com/surajv/504f0e160976ca89b3ec580f04ec6db7), [how to download](https://github.com/shanalikhan/code-settings-sync#download-your-settings)
+ - VS Code Editor, here is the list of recommended extensions:
+ 	* markdown-all-in-one
+	* minifyall
+	* php-debug
+	* php-intellisense
+	* php-pack
+	* vscode-colorize
+	* vscode-csscomb
+	* vscode-eslint
+	* vscode-html-css
+	* vscode-html-format
+	* vscode-intelephense-client
+	* vscode-phpsab
+	* vscode-scss
+	* vscode-wordpress-hooks
+	* wordpress-toolbox
  - [Github for desktop](https://desktop.github.com/)
  - Chrome Browser
 
