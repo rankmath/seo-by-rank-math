@@ -518,6 +518,14 @@ import { Analyzer, Paper, ResultManager } from '@rankMath/analyzer'
 			},
 
 			yoursite() {
+				const webSiteName = jQuery( '#website_name' )
+				const companyName = jQuery( '#company_name' )
+				if ( webSiteName.val() === companyName.val() ) {
+					webSiteName.on( 'keyup', () => {
+						companyName.val( webSiteName.val() )
+					} )
+				}
+
 				$( '#rank-math-search-input' ).on( 'input keypress', function(
 					event
 				) {

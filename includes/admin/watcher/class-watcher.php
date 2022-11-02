@@ -34,6 +34,7 @@ class Watcher implements Runner {
 		$this->action( 'deactivated_plugin', 'check_deactivated_plugin' );
 
 		$this->filter( 'wp_helpers_notifications_render', 'deactivate_plugins_link', 10, 3 );
+		$this->action( 'update_option_blog_public', 'check_search_engine_visibility' );
 	}
 
 	/**
@@ -193,15 +194,15 @@ class Watcher implements Runner {
 	 */
 	private static function get_conflicting_plugins() {
 		$plugins = [
-			'wordpress-seo/wp-seo.php'                        => 'seo',
-			'wordpress-seo-premium/wp-seo-premium.php'        => 'seo',
-			'wpseo-local/local-seo.php'                       => 'seo',
-			'wpseo-news/wpseo-news.php'                       => 'seo',
-			'wpseo-video/video-seo.php'                       => 'seo',
-			'all-in-one-seo-pack/all_in_one_seo_pack.php'     => 'seo',
+			'wordpress-seo/wp-seo.php'                    => 'seo',
+			'wordpress-seo-premium/wp-seo-premium.php'    => 'seo',
+			'wpseo-local/local-seo.php'                   => 'seo',
+			'wpseo-news/wpseo-news.php'                   => 'seo',
+			'wpseo-video/video-seo.php'                   => 'seo',
+			'all-in-one-seo-pack/all_in_one_seo_pack.php' => 'seo',
 			'all-in-one-seo-pack-pro/all_in_one_seo_pack.php' => 'seo',
-			'wp-seopress/seopress.php'                        => 'seo',
-			'wp-seopress-pro/seopress-pro.php'                => 'seo',
+			'wp-seopress/seopress.php'                    => 'seo',
+			'wp-seopress-pro/seopress-pro.php'            => 'seo',
 		];
 
 		if ( GlobalHelper::is_module_active( 'redirections' ) ) {
@@ -255,5 +256,32 @@ class Watcher implements Runner {
 		$output = str_replace( '###DEACTIVATE_SITEMAP_PLUGINS###', $deactivate_sitemap_plugins_url, $output );
 
 		return $output;
+	}
+
+	/**
+	 * Check search visibility
+	 *
+	 * @param integer $value Setting value.
+	 */
+	public function check_search_engine_visibility( $value ) {
+
+		if ( ! $value ) {
+			GlobalHelper::remove_notification( 'search_engine_visibility' );
+			return;
+		}
+
+		GlobalHelper::add_notification(
+			sprintf(
+				// translators: %1$s: general reading settings URL.
+				__( '<strong>SEO Notice</strong>: Your site is set to No Index and will not appear in search engines. You can change the Search engine visibility <a href="%1$s">from here</a>.', 'rank-math' ),
+				admin_url( 'options-reading.php' )
+			),
+			[
+				'type'    => 'warning',
+				'id'      => 'search_engine_visibility',
+				'classes' => 'is-dismissible',
+			]
+		);
+
 	}
 }

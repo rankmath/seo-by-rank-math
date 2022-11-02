@@ -60,6 +60,7 @@ class Post_Variables extends Advanced_Variables {
 				'description' => esc_html__( 'Excerpt of the current post (or auto-generated if it does not exist)', 'rank-math' ),
 				'variable'    => 'excerpt',
 				'example'     => $this->get_excerpt(),
+				'nocache'     => true,
 			],
 			[ $this, 'get_excerpt' ]
 		);
@@ -71,6 +72,7 @@ class Post_Variables extends Advanced_Variables {
 				'description' => esc_html__( 'Excerpt of the current post (without auto-generation)', 'rank-math' ),
 				'variable'    => 'excerpt_only',
 				'example'     => $this->is_post_edit && $this->args->post_excerpt ? $this->args->post_excerpt : esc_html__( 'Post Excerpt Only', 'rank-math' ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_excerpt_only' ]
 		);

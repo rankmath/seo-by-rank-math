@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2022-10-19 05:13+0000\n"
+"POT-Creation-Date: 2022-11-02 03:39+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -2220,6 +2220,10 @@ msgstr ""
 msgid "Please keep only one Sitemap plugin active, otherwise, you might lose your rankings and traffic. %s."
 msgstr ""
 
+#. translators: %1$s: general reading settings URL.
+msgid "<strong>SEO Notice</strong>: Your site is set to No Index and will not appear in search engines. You can change the Search engine visibility <a href=\"%1$s\">from here</a>."
+msgstr ""
+
 #. translators: Option Description
 msgid "Easy %s"
 msgstr ""
@@ -2425,7 +2429,22 @@ msgstr ""
 msgid "Select the type that best describes your business. If you can't find one that applies exactly, use the generic \"Organization\" or \"Local Business\" types."
 msgstr ""
 
-msgid "Company Name"
+msgid "Website Name"
+msgstr ""
+
+msgid "Enter the name of your site to appear in search results."
+msgstr ""
+
+msgid "Website Alternate Name"
+msgstr ""
+
+msgid "An alternate version of your site name (for example, an acronym or shorter name)."
+msgstr ""
+
+msgid "Person/Organization Name"
+msgstr ""
+
+msgid "Your name or company name intended to feature in Google's Knowledge Panel."
 msgstr ""
 
 msgid "Logo for Google"
@@ -4298,9 +4317,6 @@ msgid "Organization"
 msgstr ""
 
 msgid "Choose whether the site represents a person or an organization."
-msgstr ""
-
-msgid "Your name or company name"
 msgstr ""
 
 msgid "Logo"

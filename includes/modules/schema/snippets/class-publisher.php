@@ -33,7 +33,7 @@ class Publisher implements Snippet {
 		$data['publisher'] = [
 			'@type' => $this->get_publisher_type( $type ),
 			'@id'   => home_url( "/#{$id}" ),
-			'name'  => $jsonld->get_website_name(),
+			'name'  => $jsonld->get_organization_name(),
 		];
 
 		$jsonld->add_prop( 'image', $data['publisher'] );

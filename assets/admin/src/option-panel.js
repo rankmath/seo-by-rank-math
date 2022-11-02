@@ -33,6 +33,7 @@ import addNotice from '@helpers/addNotice'
 				this.robotsEvents()
 				this.proRedirect()
 				this.contentAI()
+				this.localSEO()
 			},
 
 			searchEngine: {
@@ -677,6 +678,18 @@ import addNotice from '@helpers/addNotice'
 							updateCredit.removeClass( 'loading' ).next( 'strong' ).text( resp.credits )
 						} )
 					return false
+				} )
+			},
+
+			localSEO() {
+				const webSiteName = jQuery( '#website_name' )
+				const companyName = jQuery( '#knowledgegraph_name' )
+				if ( webSiteName.val() !== companyName.val() ) {
+					return
+				}
+
+				webSiteName.on( 'keyup', () => {
+					companyName.val( webSiteName.val() )
 				} )
 			},
 		}

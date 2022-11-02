@@ -291,7 +291,7 @@ class Import_Export implements Runner {
 	 * @return mixed
 	 */
 	public function run_backup( $action = 'add', $key = null ) {
-		$backups = get_option( 'rank_math_backups', [] );
+		$backups = $this->get_backups();
 
 		// Restore.
 		if ( 'restore' === $action ) {
@@ -608,5 +608,19 @@ class Import_Export implements Runner {
 	private function is_action_allowed( $perform ) {
 		$allowed = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks', 'deactivate', 'locations', 'news', 'video', 'recalculate' ];
 		return $perform && in_array( $perform, $allowed, true );
+	}
+
+	/**
+	 * Get backups from the database.
+	 */
+	public function get_backups() {
+		$backups = get_option( 'rank_math_backups', [] );
+		if ( empty( $backups ) ) {
+			$backups = [];
+		} elseif ( ! is_array( $backups ) ) {
+			$backups = (array) $backups;
+		}
+
+		return $backups;
 	}
 }

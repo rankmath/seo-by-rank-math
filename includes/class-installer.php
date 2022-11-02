@@ -395,6 +395,7 @@ class Installer {
 			'twitter_card_type'          => 'summary_large_image',
 			'knowledgegraph_type'        => class_exists( 'Easy_Digital_Downloads' ) || class_exists( 'WooCommerce' ) ? 'company' : 'person',
 			'knowledgegraph_name'        => get_bloginfo( 'name' ),
+			'website_name'               => get_bloginfo( 'name' ),
 			'local_business_type'        => 'Organization',
 			'local_address_format'       => '{address} {locality}, {region} {postalcode}',
 			'opening_hours'              => $this->get_opening_hours(),

@@ -791,10 +791,12 @@ class Yoast extends Plugin_Importer {
 		$logo_id  = 'company' === $knowledgegraph_type ? 'company_logo_id' : 'person_logo_id';
 
 		$hash = [
-			'company_name'      => 'knowledgegraph_name',
-			'company_or_person' => 'knowledgegraph_type',
-			$logo_key           => 'knowledgegraph_logo',
-			$logo_id            => 'knowledgegraph_logo_id',
+			'company_name'           => 'knowledgegraph_name',
+			'website_name'           => 'website_name',
+			'alternate_website_name' => 'website_alternate_name',
+			'company_or_person'      => 'knowledgegraph_type',
+			$logo_key                => 'knowledgegraph_logo',
+			$logo_id                 => 'knowledgegraph_logo_id',
 		];
 		$this->replace( $hash, $yoast_titles, $this->titles );
 
