@@ -223,7 +223,7 @@ class Image {
 		 * @param string $img The image we are about to add.
 		 */
 		$filter_image_url = trim( $this->do_filter( "opengraph/{$this->network}/image", isset( $attachment['url'] ) ? $attachment['url'] : '' ) );
-		if ( ! empty( $filter_image_url ) && $filter_image_url !== $attachment['url'] ) {
+		if ( ! empty( $filter_image_url ) && ( empty( $attachment['url'] ) || $filter_image_url !== $attachment['url'] ) ) {
 			$attachment = [ 'url' => $filter_image_url ];
 		}
 

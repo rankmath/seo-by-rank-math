@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.0
+Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.100.1
+Stable tag: 1.0.101
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -417,7 +417,10 @@ Rank Math® SEO is a registered trademark. Please use the following format when 
 
 **<a href="https://rankmath.com/kb/wordpress/seo-suite/?utm_source=LP&utm_campaign=WP" target="_blank">3. User Documentation:</a>** Although Rank Math is already easy to set up, we've put together tutorials, guides, and some knowledge bases to help you set up and get started with Rank Math.
 
-**<a href="https://translate.wordpress.org/projects/wp-plugins/seo-by-rank-math/?utm_campaign=Rank+Math" target="_blank">4. Contribute (Sharing is caring):</a>** If you are one of those caring hearts that want to help, go to our <a href="https://github.com/RankMath/seo-by-rank-math/?utm_campaign=Rank+Math" target="_blank">Rank Math's GitHub Repository</a> and see how you can contribute to the SEO community. You can also add a new language via <a href="https://translate.wordpress.org/projects/wp-plugins/seo-by-rank-math/?utm_campaign=Rank+Math" target="_blank">translate.wordpress.org.</a>
+**<a href="https://translate.wordpress.org/projects/wp-plugins/seo-by-rank-math/?utm_campaign=Rank+Math" target="_blank">4. Contribute (Sharing is caring):</a>** If you are one of those caring hearts that want to help, please check the following resources:
+* [Rank Math's GitHub repository](https://github.com/RankMath/seo-by-rank-math/) - Includes all the uncompressed files.
+* [Content Analyzer Code Files](https://github.com/rankmath/content-analyzer) - Includes all supplementary uncompressed files.
+* [Translation](https://translate.wordpress.org/projects/wp-plugins/seo-by-rank-math/) - If you are looking to translate the plugin into your local language.
 
 **<a href="https://mythemeshop.com/wordpress-errors-fixes/?utm_campaign=Rank+Math" target="_blank">5. Fixing Common Errors:</a>** Sometimes, avoidable or common issues can get you stuck. We’ve created a common guide where we discuss all the common issues and how to fix them.
 
@@ -580,14 +583,17 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.100[Oct 19, 2022] =
-* Fixed: Missing [Google Analytics tracking code](https://rankmath.com/kb/install-google-analytics/) on some setups
-* Fixed: [Index Status](https://rankmath.com/kb/analytics/#index-status) was not working well on Arabic language sites
-* Fixed: Filter to change [Opengraph image](https://rankmath.com/kb/filters-hooks-api-developer/#change-opengraph-image) was not working when an image was not added in the settings
-* Fixed: Sitemap was getting timed out on some sites hosted on Cloudflare when the [Include Images in Sitemap](https://rankmath.com/kb/configure-sitemaps/#images-in-sitemaps) option was enabled
+= 1.0.101[Nov 02, 2022] =
+* Added: [NEW!] New fields in the [Local SEO](https://rankmath.com/kb/local-seo/#local-seo-module-general-settings) Tab for the Website Name and Alternative Name to support Google's newly introduced [Site Name](https://developers.google.com/search/docs/appearance/site-names) feature
+* Added: New filter to allow CDN path in the [Social Overlay Image](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails)
+* Added: Notification alert when the "Discourage search engines from indexing this site" option is enabled
+* Added: Property/View ID in the Analytics Module's [Properties setting](https://rankmath.com/kb/analytics/#settings-in-the-rank-math-analytics) to easily identify the Properties with the same name
+* Fixed: Self-linking in post content was counted as an [incoming link](https://rankmath.com/kb/link-counter/#rank-maths-link-counter)
+* Fixed: [Overall Content length](https://rankmath.com/kb/score-100-in-tests/#overall-content-length) test was not working well when encoded space `&nbsp;` was used in the content
+* Fixed: PHP warning on some setups when primary taxonomy is deleted
+* Fixed: PHP Undefined function error on sites that were overwriting the WooCommerce functions
+* Fixed: PHP warning on some setups when [Backup data](https://rankmath.com/kb/import-export-settings/#performing-and-restoring-backups) is not available
+* Fixed: PHP error on some setups when [filter](https://rankmath.com/kb/filters-hooks-api-developer/#change-opengraph-image) was used to change the Opengraph image
 
-= 1.0.100.1[Oct 21, 2022] =
-* Improved: Renamed the secret parameter in the thumbnail overlay URL to hash to avoid any confusion, as this is not a sensitive information
-* Fixed: [Icon Overlay](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails) was not working after the last update
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

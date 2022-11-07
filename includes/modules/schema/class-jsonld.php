@@ -588,8 +588,16 @@ class JsonLD {
 	 * @return string
 	 */
 	public function get_website_name() {
-		$name = Helper::get_settings( 'titles.knowledgegraph_name' );
+		return Helper::get_settings( 'titles.website_name', $this->get_organization_name() );
+	}
 
+	/**
+	 * Get website name with a fallback to bloginfo( 'name' ).
+	 *
+	 * @return string
+	 */
+	public function get_organization_name() {
+		$name = Helper::get_settings( 'titles.knowledgegraph_name' );
 		return $name ? $name : get_bloginfo( 'name' );
 	}
 

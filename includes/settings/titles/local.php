@@ -24,10 +24,29 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
+		'id'      => 'website_name',
+		'type'    => 'text',
+		'name'    => esc_html__( 'Website Name', 'rank-math' ),
+		'desc'    => esc_html__( 'Enter the name of your site to appear in search results.', 'rank-math' ),
+		'default' => get_bloginfo( 'name' ),
+	]
+);
+
+$cmb->add_field(
+	[
+		'id'      => 'website_alternate_name',
+		'type'    => 'text',
+		'name'    => esc_html__( 'Website Alternate Name', 'rank-math' ),
+		'desc'    => esc_html__( 'An alternate version of your site name (for example, an acronym or shorter name).', 'rank-math' ),
+	]
+);
+
+$cmb->add_field(
+	[
 		'id'      => 'knowledgegraph_name',
 		'type'    => 'text',
-		'name'    => esc_html__( 'Name', 'rank-math' ),
-		'desc'    => esc_html__( 'Your name or company name', 'rank-math' ),
+		'name'    => esc_html__( 'Person/Organization Name', 'rank-math' ),
+		'desc'    => esc_html__( 'Your name or company name intended to feature in Google\'s Knowledge Panel.', 'rank-math' ),
 		'default' => get_bloginfo( 'name' ),
 	]
 );

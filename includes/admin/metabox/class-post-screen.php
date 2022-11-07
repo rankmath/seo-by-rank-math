@@ -413,6 +413,9 @@ class Post_Screen implements IScreen {
 		}
 
 		$taxonomy = get_taxonomy( $taxonomy );
+		if ( empty( $taxonomy ) ) {
+			return false;
+		}
 
 		$this->primary_taxonomy = [
 			'title'         => $taxonomy->labels->singular_name,

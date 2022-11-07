@@ -10,6 +10,8 @@
 
 namespace RankMath\Schema;
 
+use RankMath\Helper;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -34,6 +36,11 @@ class Website implements Snippet {
 			'url'   => get_home_url(),
 			'name'  => $jsonld->get_website_name(),
 		];
+
+		$alternate_name = Helper::get_settings( 'titles.website_alternate_name' );
+		if ( $alternate_name ) {
+			$data['WebSite']['alternateName'] = $alternate_name;
+		}
 		$jsonld->add_prop( 'publisher', $data['WebSite'], 'publisher', $data );
 		$jsonld->add_prop( 'language', $data['WebSite'] );
 

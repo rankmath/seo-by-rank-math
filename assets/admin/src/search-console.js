@@ -272,7 +272,7 @@ class SearchConsole {
 
 		map( adsenseAccounts, ( account, id ) => {
 			this.adsenseSelect.append(
-				'<option value="' + id + '">' + account.name + '</option>'
+				'<option value="' + id + '">' + account.name + ' (' + id + ')</option>'
 			)
 		} )
 
@@ -289,7 +289,7 @@ class SearchConsole {
 
 		map( accounts, ( account, id ) => {
 			this.accountSelect.append(
-				'<option value="' + id + '">' + account.name + '</option>'
+				'<option value="' + id + '">' + account.name + ' (' + id + ')</option>'
 			)
 		} )
 
@@ -324,7 +324,9 @@ class SearchConsole {
 					property.id +
 					'">' +
 					property.name +
-					'</option>'
+					' (' +
+					property.id +
+					')</option>'
 			)
 		} )
 
