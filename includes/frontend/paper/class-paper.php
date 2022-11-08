@@ -30,7 +30,7 @@ class Paper {
 	/**
 	 * Hold the class instance.
 	 *
-	 * @var object
+	 * @var self
 	 */
 	private static $instance = null;
 
@@ -79,7 +79,7 @@ class Paper {
 	/**
 	 * Initialize object
 	 *
-	 * @return object Post|Term|User.
+	 * @return self Post|Term|User.
 	 */
 	public static function get() {
 		if ( ! is_null( self::$instance ) ) {
