@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.102
+Stable tag: 1.0.102.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -588,5 +588,8 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 * Improved: [Rank Math settings](https://rankmath.com/kb/general-settings/) can now be updated while editing textarea using a Keyboard shortcut `Ctrl/Cmd + Enter`
 * Fixed: Dropdown menus on [Rank Math Analytics tables](https://rankmath.com/kb/analytics/) were not accessible
 * Fixed: [Capitalize Titles](https://rankmath.com/kb/titles-and-meta/#capitalize-titles) option was not working well with the accented characters
+
+= 1.0.102.1[Nov 22, 2022] =
+* Removed: Unused JS files from the plugin
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

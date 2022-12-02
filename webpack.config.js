@@ -83,7 +83,6 @@ const entryPoints = {
 		'post-list': './assets/admin/src/post-list.js',
 		wizard: './assets/admin/src/wizard.js',
 		wplink: './assets/admin/src/wplink.js',
-		validate: './assets/admin/src/validate.js',
 	},
 	'instant-indexing': {
 		'instant-indexing': './includes/modules/instant-indexing/assets/src/instant-indexing.js',
