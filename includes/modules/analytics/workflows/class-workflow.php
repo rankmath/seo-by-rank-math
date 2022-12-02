@@ -139,6 +139,7 @@ class Workflow {
 		as_unschedule_all_actions( 'rank_math/analytics/get_inspections_data' );
 
 		do_action( 'rank_math/analytics/clear_cache' );
+
 	}
 
 	/**
@@ -154,5 +155,7 @@ class Workflow {
 			[],
 			'rank-math'
 		);
+
+		delete_option( 'rank_math_analytics_last_single_action_schedule_time' );
 	}
 }

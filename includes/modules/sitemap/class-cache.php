@@ -95,16 +95,20 @@ class Cache {
 	 *
 	 * @param  string $type Sitemap type.
 	 * @param  int    $page Page number to retrieve.
+	 * @param  bool   $html Is HTML sitemap.
 	 * @return false|string false on no cache found otherwise sitemap file.
 	 */
-	public function get_sitemap( $type, $page ) {
-		$filename = $this->get_storage_key( $type, $page );
+	public function get_sitemap( $type, $page, $html = false ) {
+		$filename = $this->get_storage_key( $type, $page, $html );
 		if ( false === $filename || is_null( $this->wp_filesystem ) ) {
 			return false;
 		}
 
-		if ( 'file' === $this->mode ) {
-			return $this->wp_filesystem->get_contents( self::get_cache_directory() . $filename );
+		$path = self::get_cache_directory() . $filename;
+		if ( 'file' === $this->mode
+			&& is_a( $this->wp_filesystem, 'WP_Filesystem_Direct' )
+			&& $this->wp_filesystem->exists( $path ) ) {
+			return $this->wp_filesystem->get_contents( $path );
 		}
 
 		$filename = "sitemap_{$type}_$filename";
@@ -118,10 +122,11 @@ class Cache {
 	 * @param  string $type    Sitemap type.
 	 * @param  int    $page    Page number to store.
 	 * @param  string $sitemap Sitemap body to store.
+	 * @param  bool   $html    Is HTML sitemap.
 	 * @return boolean
 	 */
-	public function store_sitemap( $type, $page, $sitemap ) {
-		$filename = $this->get_storage_key( $type, $page );
+	public function store_sitemap( $type, $page, $sitemap, $html = false ) {
+		$filename = $this->get_storage_key( $type, $page, $html );
 		if ( false === $filename || is_null( $this->wp_filesystem ) ) {
 			return false;
 		}
@@ -145,10 +150,10 @@ class Cache {
 	 * @param  int         $page The page of cache to get the key for.
 	 * @return boolean|string The key where the cache is stored on. False if the key could not be generated.
 	 */
-	public function get_storage_key( $type = null, $page = 1 ) {
+	private function get_storage_key( $type = null, $page = 1, $html = false ) {
 		$type = is_null( $type ) ? '1' : $type;
 
-		$filename = self::STORAGE_KEY_PREFIX . md5( "{$type}_{$page}_" . home_url() ) . '.xml';
+		$filename = self::STORAGE_KEY_PREFIX . md5( "{$type}_{$page}_" . home_url() ) . '.' . ( $html ? 'html' : 'xml' );
 
 		return $filename;
 	}

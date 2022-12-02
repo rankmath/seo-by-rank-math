@@ -262,6 +262,11 @@ class AIOSEO extends Plugin_Importer {
 		if ( ! empty( $general['advancedSettings'] ) ) {
 			$this->sitemap_advanced_settings( $general['advancedSettings'] );
 		}
+
+		// HTML Sitemap.
+		if ( isset( $sitemap_settings['html'] ) ) {
+			$this->html_sitemap_settings( $sitemap_settings['html'] );
+		}
 	}
 
 	/**
@@ -442,6 +447,62 @@ class AIOSEO extends Plugin_Importer {
 	}
 
 	/**
+	 * Import HTML Sitemap Settings.
+	 *
+	 * @param array $settings HTML Settings.
+	 */
+	private function html_sitemap_settings( $settings ) {
+		if ( empty( $settings ) ) {
+			return;
+		}
+
+		$this->sitemap['html_sitemap']         = $settings['enable'] ? 'on' : 'off';
+		$this->sitemap['html_sitemap_display'] = empty( $settings['pageUrl'] ) ? 'shortcode' : 'page';
+		if ( ! empty( $settings['pageUrl'] ) ) {
+			$page = get_page_by_path( basename( $settings['pageUrl'] ) );
+			if ( ! empty( $page ) ) {
+				$this->sitemap['html_sitemap_page'] = $page->ID;
+			} else {
+				// Create a new page with the sitemap page url.
+				$this->sitemap['html_sitemap_page'] = wp_insert_post(
+					[
+						'post_title'   => __( 'HTML Sitemap', 'rank-math' ),
+						'post_content' => '',
+						'post_status'  => 'publish',
+						'post_type'    => 'page',
+						'post_name'    => basename( $settings['pageUrl'] ),
+					]
+				);
+			}
+		}
+
+		if ( ! empty( $settings['postTypes']['all'] ) ) {
+			$post_types = Helper::get_accessible_post_types();
+			$post_types = array_keys( $post_types );
+			foreach ( $post_types as $post_type ) {
+				$this->sitemap[ 'pt_' . $post_type . '_html_sitemap' ] = in_array( $post_type, $settings['postTypes']['included'], true ) ? 'on' : 'off';
+			}
+		} else {
+			foreach ( $settings['postTypes']['included'] as $post_type ) {
+				$this->sitemap[ 'pt_' . $post_type . '_html_sitemap' ] = 'on';
+			}
+		}
+
+		if ( ! empty( $settings['taxonomies']['all'] ) ) {
+			$taxonomies = Helper::get_accessible_taxonomies();
+			$taxonomies = array_keys( $taxonomies );
+			foreach ( $taxonomies as $taxonomy ) {
+				$this->sitemap[ 'tax_' . $taxonomy . '_html_sitemap' ] = in_array( $taxonomy, $settings['taxonomies']['included'], true ) ? 'on' : 'off';
+			}
+		} else {
+			foreach ( $settings['taxonomies']['included'] as $taxonomy ) {
+				$this->sitemap[ 'tax_' . $taxonomy . '_html_sitemap' ] = 'on';
+			}
+		}
+
+	}
+
+	/**
 	 * Import Titles & Meta Settings.
 	 */
 	private function titles_settings() {
@@ -567,6 +628,10 @@ class AIOSEO extends Plugin_Importer {
 	 * Taxonomies settings.
 	 */
 	private function taxonomies_settings() {
+		if ( ! isset( $this->aio_settings['searchAppearance']['dynamic']['taxonomies'] ) ) {
+			return;
+		}
+
 		$settings = $this->aio_settings['searchAppearance']['dynamic']['taxonomies'];
 		foreach ( Helper::get_accessible_taxonomies() as $taxonomy => $tax_obj ) {
 			if ( empty( $settings[ $taxonomy ] ) ) {

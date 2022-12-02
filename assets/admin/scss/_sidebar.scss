@@ -4,12 +4,9 @@
 @import 'mixins';
 @import 'variables';
 
-// @import '1sidebar';
-
 // Common
 @import 'sidebar/inputs';
 @import 'sidebar/panel';
-@import '_font-icons';
 @import 'sidebar/tabs';
 @import 'sidebar/tooltip';
 @import 'sidebar/modal';

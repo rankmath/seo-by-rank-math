@@ -35,8 +35,7 @@ class Installer {
 		register_deactivation_hook( RANK_MATH_FILE, [ $this, 'deactivation' ] );
 
 		$this->action( 'wp', 'create_cron_jobs' );
-		$this->action( 'wpmu_new_blog', 'activate_blog' );
-		$this->action( 'activate_blog', 'activate_blog' );
+		$this->action( 'wp_initialize_site', 'initialize_site' );
 		$this->filter( 'wpmu_drop_tables', 'on_delete_blog' );
 	}
 
@@ -71,14 +70,10 @@ class Installer {
 	/**
 	 * Fired when a new site is activated with a WPMU environment.
 	 *
-	 * @param int $blog_id ID of the new blog.
+	 * @param WP_Site $site The new site's object.
 	 */
-	public function activate_blog( $blog_id ) {
-		if ( 1 !== did_action( 'wpmu_new_blog' ) ) {
-			return;
-		}
-
-		switch_to_blog( $blog_id );
+	public function initialize_site( $site ) {
+		switch_to_blog( $site->blog_id );
 		$this->activate();
 		restore_current_blog();
 	}
@@ -382,11 +377,16 @@ class Installer {
 	 */
 	private function create_titles_sitemaps_options() {
 		$sitemap = [
-			'items_per_page'         => 200,
-			'include_images'         => 'on',
-			'include_featured_image' => 'off',
-			'ping_search_engines'    => 'on',
-			'exclude_roles'          => $this->get_excluded_roles(),
+			'items_per_page'          => 200,
+			'include_images'          => 'on',
+			'include_featured_image'  => 'off',
+			'ping_search_engines'     => 'on',
+			'exclude_roles'           => $this->get_excluded_roles(),
+			'html_sitemap'            => 'on',
+			'html_sitemap_display'    => 'shortcode',
+			'html_sitemap_sort'       => 'published',
+			'html_sitemap_seo_titles' => 'titles',
+			'authors_sitemap'         => 'on',
 		];
 		$titles  = [
 			'noindex_empty_taxonomies'   => 'on',

@@ -2,25 +2,37 @@
  * WordPress dependencies.
  */
 import { __ } from '@wordpress/i18n'
-import { compose } from '@wordpress/compose'
-import { Fragment } from '@wordpress/element'
-import { Modal, withFilters } from '@wordpress/components'
-import { withDispatch, withSelect } from '@wordpress/data'
+import { Fragment, useState } from '@wordpress/element'
+import { Modal, withFilters, Button } from '@wordpress/components'
 
 /**
  * Internal dependencies.
  */
 
-const TrendsPreview = ( { isTrendsCtaOpen, toggleTrendsCta } ) => {
+const TrendsPreview = () => {
+	const [ isOpen, toggleModal ] = useState( false )
+
 	return (
 		<Fragment>
-			<a href="#" title={ __( 'Trends', 'rank-math' ) } rel="noreferrer noopener" id="rank-math-compare-keywords-trigger" className="button button-icon rank-math-compare-keywords-trigger" dangerouslySetInnerHTML={ { __html: rankMath.trendsIcon } } onClick={ toggleTrendsCta }></a>
-			{ isTrendsCtaOpen && (
+			<Button
+				title={ __( 'Trends', 'rank-math' ) }
+				rel="noreferrer noopener"
+				id="rank-math-compare-keywords-trigger"
+				className="button button-icon rank-math-compare-keywords-trigger"
+				onClick={ () => {
+					toggleModal( true )
+				} }
+			>
+				<span className="button-icon" dangerouslySetInnerHTML={ { __html: rankMath.trendsIcon } }></span>
+			</Button>
+			{ isOpen && (
 				<Modal
 					title={ __( 'Google Trends', 'rank-math' ) }
 					closeButtonLabel={ __( 'Close', 'rank-math' ) }
 					shouldCloseOnClickOutside={ true }
-					onRequestClose={ toggleTrendsCta }
+					onRequestClose={ () => {
+						toggleModal( false )
+					} }
 					className="rank-math-modal rank-math-trends-cta-modal"
 					overlayClassName="rank-math-modal-overlay"
 				>
@@ -45,20 +57,4 @@ const TrendsPreview = ( { isTrendsCtaOpen, toggleTrendsCta } ) => {
 	)
 }
 
-export default withFilters( 'rankMath.focusKeywords.Trends' )(
-	compose(
-		withSelect( ( select ) => {
-			const repo = select( 'rank-math' )
-			return {
-				isTrendsCtaOpen: repo.isTrendsCtaOpen(),
-			}
-		} ),
-		withDispatch( ( dispatch, props ) => {
-			return {
-				toggleTrendsCta() {
-					dispatch( 'rank-math' ).toggleTrendsCta( ! props.isTrendsCtaOpen )
-				},
-			}
-		} )
-	)( TrendsPreview )
-)
+export default withFilters( 'rankMath.focusKeywords.Trends' )( TrendsPreview )

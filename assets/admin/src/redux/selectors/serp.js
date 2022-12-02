@@ -55,14 +55,3 @@ export function isSnippetEditorOpen( state ) {
 export function getSnippetPreviewType( state ) {
 	return state.appUi.snippetPreviewType
 }
-
-/**
- * Get Trends CTA modal state.
- *
- * @param {Object} state The app state.
- *
- * @return {boolean} Return modal state.
- */
-export function isTrendsCtaOpen( state ) {
-	return state.appUi.isTrendsCtaOpen
-}

@@ -104,7 +104,9 @@ class Console extends Base {
 			return;
 		}
 
+		update_option( 'rank_math_analytics_first_fetch', 'fetching' );
+
 		// Fetch now.
-		$this->create_jobs( $days, 'console' );
+		$this->schedule_single_action( $days, 'console' );
 	}
 }

@@ -42,6 +42,7 @@ class Admin extends Base {
 		parent::__construct();
 
 		$this->action( 'init', 'register_setting_page', 999 );
+		$this->action( 'admin_footer', 'admin_scripts' );
 		$this->filter( 'rank_math/settings/sitemap', 'post_type_settings' );
 		$this->filter( 'rank_math/settings/sitemap', 'taxonomy_settings' );
 
@@ -54,13 +55,18 @@ class Admin extends Base {
 		}
 
 		$this->ajax( 'remove_nginx_notice', 'remove_nginx_notice' );
+		$this->ajax( 'viewed_html_sitemap', 'viewed_html_sitemap' );
 	}
 
 	/**
 	 * Register setting page.
 	 */
 	public function register_setting_page() {
-		$sitemap_url = Router::get_base_url( 'sitemap_index.xml' );
+		$sitemap_url   = Router::get_base_url( 'sitemap_index.xml' );
+		$new_label = '';
+		if ( ! get_option( 'rank_math_viewed_html_sitemap', false ) ) {
+			$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . esc_html__( 'New!', 'rank-math' ) . '</span>';
+		}
 
 		$tabs = [
 			'general' => [
@@ -71,6 +77,15 @@ class Admin extends Base {
 				/* translators: sitemap url */
 				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Your sitemap index can be found here: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . '</p></div>' . $this->get_nginx_notice(),
 			],
+		];
+
+		$tabs['html_sitemap'] = [
+			'icon'    => 'rm-icon rm-icon-sitemap',
+			/* translators: new label */
+			'title'   => sprintf( esc_html__( 'HTML Sitemap %s', 'rank-math' ), $new_label ),
+			'file'    => $this->directory . '/settings/html-sitemap.php',
+			'desc'    => esc_html__( 'This tab contains settings related to the HTML sitemap.', 'rank-math' ) . ' <a href="' . KB::get( 'sitemap-general', 'Options Panel Sitemap HTML Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
+			'classes' => 'html-sitemap',
 		];
 
 		if ( Helper::is_author_archive_indexable() ) {
@@ -89,7 +104,7 @@ class Admin extends Base {
 			[
 				'key'        => 'rank-math-options-sitemap',
 				'title'      => esc_html__( 'Sitemap Settings', 'rank-math' ),
-				'menu_title' => esc_html__( 'Sitemap Settings', 'rank-math' ),
+				'menu_title' => sprintf( esc_html__( 'Sitemap Settings %s', 'rank-math' ), $new_label ),
 				'capability' => 'rank_math_sitemap',
 				'folder'     => 'titles',
 				'position'   => 99,
@@ -262,6 +277,14 @@ class Admin extends Base {
 	}
 
 	/**
+	 * Ajax callback to update the viewed_html_sitemap value.
+	 */
+	public function viewed_html_sitemap() {
+		update_option( 'rank_math_viewed_html_sitemap', true, false );
+		return;
+	}
+
+	/**
 	 * Remove Sitemap nginx notice.
 	 *
 	 * @since 1.0.73
@@ -319,5 +342,31 @@ class Admin extends Base {
  # END Nginx Rewrites for Rank Math Sitemaps
  </pre>
 		 </div>';
+	}
+
+	/**
+	 * Add some inline JS for the sitemap settings admin page.
+	 */
+	public function admin_scripts() {
+		if ( 'rank-math-options-sitemap' !== Param::get( 'page' ) ) {
+			return;
+		}
+
+		?>
+		<script>
+			jQuery( function( $ ) {
+				$( '.cmb2-id-html-sitemap-seo-titles input' ).on( 'change', function() {
+					if ( 'seo_titles' === $( this ).filter(':checked').val() ) {
+						$( '#html_sitemap_sort option[value="alphabetical"]' ).prop( 'disabled', true );
+						if ( $( '#html_sitemap_sort option:selected' ).prop( 'disabled' ) ) {
+							$( '#html_sitemap_sort option:first' ).prop( 'selected', true );
+						}
+					} else {
+						$( '#html_sitemap_sort option[value="alphabetical"]' ).prop( 'disabled', false );
+					}
+				} ).trigger( 'change' );
+			} );
+		</script>
+		<?php
 	}
 }

@@ -76,6 +76,7 @@ class Cache_Watcher {
 		self::register_clear_on_option_update( 'rank-math-options-titles' );
 		self::register_clear_on_option_update( 'rank-math-options-general' );
 		self::register_clear_on_option_update( 'rank-math-options-sitemap' );
+		self::register_clear_on_option_update( 'date_format' );
 	}
 
 	/**
@@ -84,10 +85,6 @@ class Cache_Watcher {
 	 * @param int $post_id Post ID to possibly invalidate for.
 	 */
 	public function save_post( $post_id ) {
-		if ( false === Sitemap::is_object_indexable( $post_id ) ) {
-			return false;
-		}
-
 		$post = get_post( $post_id );
 		if ( ! empty( $post->post_password ) ) {
 			return false;

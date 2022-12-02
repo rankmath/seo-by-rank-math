@@ -171,9 +171,14 @@ class Update_Score {
 				'keyword'      => $keyword,
 				'content'      => $post->post_content,
 				'url'          => get_the_permalink( $post_id ),
-				'thumbnail'    => get_the_post_thumbnail_url( $post_id ),
 				'hasContentAi' => ! empty( Helper::get_post_meta( 'contentai_score', $post_id ) ),
 			];
+
+			if ( has_post_thumbnail( $post_id ) ) {
+				$thumbnail_id           = get_post_thumbnail_id( $post_id );
+				$values['thumbnail']    = get_the_post_thumbnail_url( $post_id );
+				$values['thumbnailAlt'] = get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true );
+			}
 
 			if (
 				( Conditional::is_woocommerce_active() && 'product' === $post_type ) ||

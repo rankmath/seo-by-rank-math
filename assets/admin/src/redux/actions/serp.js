@@ -67,14 +67,3 @@ export function toggleSnippetEditor( state ) {
 export function updateSnippetPreviewType( type ) {
 	return updateAppUi( 'snippetPreviewType', type )
 }
-
-/**
- * Toggle Trends CTA modal state.
- *
- * @param {boolean} state The modal state.
- *
- * @return {Object} An action for redux.
- */
-export function toggleTrendsCta( state ) {
-	return updateAppUi( 'isTrendsCtaOpen', state )
-}

@@ -101,7 +101,7 @@ class Url_Inspection {
 	 */
 	public static function is_enabled() {
 		$profile = get_option( 'rank_math_google_analytic_profile', [] );
-		if ( empty( $profile) || ! is_array( $profile ) ) {
+		if ( empty( $profile ) || ! is_array( $profile ) ) {
 			return false;
 		}
 

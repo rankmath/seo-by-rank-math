@@ -69,8 +69,8 @@ class Url_Inspection extends Request {
 		$gsc_profile        = Console::get_site_url();
 		$rank_math_site_url = wp_parse_url( home_url(), PHP_URL_HOST );
 		$rank_math_site_url = ( is_ssl() ? 'https://' : 'http://' ) . $rank_math_site_url;
-		$lang_arr  = \explode( '_', get_locale() );
-		$lang_code = empty( $lang_arr[1] ) ? $lang_arr[0] : $lang_arr[0] . '-' . $lang_arr[1];
+		$lang_arr           = \explode( '_', get_locale() );
+		$lang_code          = empty( $lang_arr[1] ) ? $lang_arr[0] : $lang_arr[0] . '-' . $lang_arr[1];
 
 		$args = [
 			'inspectionUrl' => untrailingslashit( $rank_math_site_url ) . $page,
@@ -79,9 +79,13 @@ class Url_Inspection extends Request {
 		];
 
 		set_time_limit( 90 );
+
+		$workflow = 'inspections';
+		$this->set_workflow( $workflow );
+
 		$response = $this->http_post( $this->api_url, $args, 60 );
 
-		$this->log_failed_request( $response, 'inspections', $page, func_get_args() );
+		$this->log_failed_request( $response, $workflow, $page, func_get_args() );
 
 		if ( ! $this->is_success() ) {
 			return false;

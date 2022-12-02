@@ -132,4 +132,65 @@ abstract class Base {
 
 		return true;
 	}
+
+	/**
+	 * Schedule single action
+	 *
+	 * @param int     $days
+	 * @param string  $hook
+	 * @param array   $args
+	 * @param string  $group
+	 * @param boolean $unique
+	 */
+	public function schedule_single_action( $days = 90, $action = '', $args = [], $group = 'rank-math', $unique = false ) {
+		$timestamp = get_option( 'rank_math_analytics_last_single_action_schedule_time', time() );
+		$time_gap  = $this->get_schedule_gap();
+
+		$end        = Helper::get_midnight( strtotime( '-1 day', time() ) );
+		$start      = strtotime( '-' . $days . ' day', $end );
+		$start_date = date_i18n( 'Y-m-d', $start );
+		$end_date   = date_i18n( 'Y-m-d', $end );
+
+		// Get the analytics dates in which analytics data is actually available.
+		$days = apply_filters(
+			'rank_math/analytics/get_' . $action . '_days',
+			[
+				'start_date' => $start_date,
+				'end_date'   => $end_date,
+			]
+		);
+
+		// No days then don't schedule the action.
+		if ( empty( $days ) ) {
+			return;
+		}
+
+		foreach ( $days as $day ) {
+
+			// Next schedule time.
+			$timestamp = $timestamp + $time_gap;
+
+			$args = wp_parse_args(
+				[
+					'start_date' => $day['start_date'],
+					'end_date'   => $day['end_date'],
+				],
+				$args
+			);
+
+			as_schedule_single_action(
+				$timestamp,
+				'rank_math/analytics/get_' . $action . '_data',
+				$args,
+				$group,
+				$unique
+			);
+
+		}
+
+		Workflow::add_clear_cache( $timestamp );
+
+		// Update timestamp.
+		update_option( 'rank_math_analytics_last_single_action_schedule_time', $timestamp );
+	}
 }

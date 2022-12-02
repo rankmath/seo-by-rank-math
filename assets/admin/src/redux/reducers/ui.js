@@ -26,7 +26,6 @@ const DEFAULT_STATE = {
 	snippetPreviewType: '',
 	refreshResults: '',
 	redirectionItem: {},
-	isTrendsCtaOpen: false,
 
 	// Schema.
 	editorTab: '',

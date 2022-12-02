@@ -9,7 +9,7 @@
  * External Dependencies
  */
 import jQuery from 'jquery'
-import { debounce } from 'lodash'
+import { debounce, forEach } from 'lodash'
 
 /**
  * Internal Dependencies
@@ -34,6 +34,7 @@ import addNotice from '@helpers/addNotice'
 				this.proRedirect()
 				this.contentAI()
 				this.localSEO()
+				this.htmlSitemap()
 			},
 
 			searchEngine: {
@@ -466,6 +467,13 @@ import addNotice from '@helpers/addNotice'
 						},
 						width: '100%',
 						minimumInputLength: 2,
+					} ).on( 'select2:select', function( e ) {
+						const data = e.params.data
+						$( this )
+							.closest( '.cmb-td' )
+							.find( '.rank-math-selected-page' )
+							.prop( 'href', data.url )
+							.text( data.url )
 					} )
 				}
 
@@ -545,7 +553,7 @@ import addNotice from '@helpers/addNotice'
 							// Textarea should allow new lines.
 							if ( 'TEXTAREA' !== this.tagName ) {
 								e.preventDefault()
-							}	
+							}
 						}
 					}
 				)
@@ -698,6 +706,24 @@ import addNotice from '@helpers/addNotice'
 
 				webSiteName.on( 'keyup', () => {
 					companyName.val( webSiteName.val() )
+				} )
+			},
+
+			htmlSitemap() {
+				jQuery( '.html-sitemap' ).on( 'click', () => {
+					ajax( 'viewed_html_sitemap' )
+					jQuery( '.rank-math-new-label' ).remove()
+				} )
+
+				const htmlSitemap = jQuery( '#html_sitemap' )
+				const htmlSitemapFields = jQuery( '.rank-math-html-sitemap' )
+				htmlSitemap.on( 'change', () => {
+					if ( htmlSitemap.is( ':checked' ) ) {
+						htmlSitemapFields.removeClass( 'hidden' )
+						return
+					}
+
+					htmlSitemapFields.addClass( 'hidden' )
 				} )
 			},
 		}

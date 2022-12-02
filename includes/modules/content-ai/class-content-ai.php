@@ -30,13 +30,14 @@ class Content_AI {
 	 * Class constructor.
 	 */
 	public function __construct() {
+		$this->action( 'rest_api_init', 'init_rest_api' );
+
 		if ( ! Helper::has_cap( 'content_ai' ) ) {
 			return;
 		}
 
 		$this->filter( 'rank_math/analytics/post_data', 'add_contentai_data', 10, 2 );
 		$this->filter( 'rank_math/settings/general', 'add_settings' );
-		$this->action( 'rest_api_init', 'init_rest_api' );
 		$this->action( 'rank_math/admin/editor_scripts', 'editor_scripts', 20 );
 		$this->filter( 'rank_math/metabox/post/values', 'add_metadata', 10, 2 );
 		$this->action( 'cmb2_admin_init', 'add_content_ai_metabox', 11 );

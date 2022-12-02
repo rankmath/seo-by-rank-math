@@ -109,7 +109,7 @@ const SchemaPropertyField = ( {
 		return (
 			<DatePicker
 				value={ value }
-				position="middle left"
+				position="bottom left"
 				onChange={ onChange }
 			>
 				<TextControl value={ value } onChange={ onChange } { ...rest } />
@@ -121,7 +121,7 @@ const SchemaPropertyField = ( {
 		return (
 			<DateTimePicker
 				value={ value }
-				position="middle left"
+				position="bottom left"
 				onChange={ onChange }
 			>
 				<TextControl value={ value } onChange={ onChange } { ...rest } />
