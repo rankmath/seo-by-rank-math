@@ -332,12 +332,11 @@ trait WordPress {
 		$robots = Helper::get_settings( 'titles.robots_global', [] );
 
 		if ( $screen instanceof WP_Screen ) {
-
-			if ( 'post' === $screen->base && Helper::get_settings( "titles.pt_{$screen->post_type}_custom_robots" ) ) {
+			if ( in_array( $screen->base, [ 'post', 'edit' ], true ) && isset( $screen->post_type ) && Helper::get_settings( "titles.pt_{$screen->post_type}_custom_robots" ) ) {
 				$robots = Helper::get_settings( "titles.pt_{$screen->post_type}_robots", [] );
 			}
 
-			if ( 'term' === $screen->base && Helper::get_settings( "titles.tax_{$screen->taxonomy}_custom_robots" ) ) {
+			if ( in_array( $screen->base, [ 'term', 'edit-tags' ], true ) && isset( $screen->taxonomy ) && Helper::get_settings( "titles.tax_{$screen->taxonomy}_custom_robots" ) ) {
 				$robots = Helper::get_settings( "titles.tax_{$screen->taxonomy}_robots", [] );
 			}
 

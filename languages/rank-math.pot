@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2022-11-02 03:39+0000\n"
+"POT-Creation-Date: 2022-11-14 11:03+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -288,6 +288,9 @@ msgid "Insert Link in Content"
 msgstr ""
 
 msgid "You are not authorized to perform this action."
+msgstr ""
+
+msgid "Exclusive Offer!"
 msgstr ""
 
 #. translators: placeholder is the plugin name.
@@ -636,6 +639,9 @@ msgid "Get Rank Math PRO!"
 msgstr ""
 
 msgid "Click here to see all the exciting features."
+msgstr ""
+
+msgid "Ctrl/Cmd + Enter"
 msgstr ""
 
 msgid "Save Changes"

@@ -11,7 +11,6 @@ import { withSelect } from '@wordpress/data'
 /**
  * Internal dependencies
  */
-import SVGIcon from '../../../img/menu-icon.svg'
 import AnalysisScore from '@components/AnalysisScore'
 import getClassByScore from '@helpers/getClassByScore'
 
@@ -23,7 +22,7 @@ const RankMathIcon = ( { isLoaded, score } ) => {
 
 	return (
 		<div className={ classes }>
-			<SVGIcon />
+			<i className="rm-icon rm-icon-rank-math"></i>
 			<AnalysisScore />
 		</div>
 	)

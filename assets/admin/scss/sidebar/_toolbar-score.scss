@@ -1,104 +1,147 @@
-// main: ../sidebar.scss
+// main: ./sidebar.scss
+
+$bad-score  : #e12925;
+$ok-score   : #b36f0e;
+$good-score : #439f40;
 
 .edit-post-layout:not(.show-icon-labels) {
-    .interface-pinned-items {
-        button.components-button[aria-label='Rank Math'] {
-            padding: 0;
-            background: transparent;
-    
-            &:hover {
-                background: transparent;
-            }
-    
-            .#{$namespace}-toolbar-score {
-                padding: 8.5px 9px;
-                color: $color-8;
-                border-radius: 2px;
-                background: $light_gray;
-                border: 1px solid darken( $gray, 5% );
-    
-                .rank-math-icon {
-                    float: left;
-                    height: 17px;
-                    margin-right: 4px;
-    
-                    &,
-                    *,
-                    &:hover,
-                    &:hover * {
-                        fill: inherit !important;
-                        stroke: inherit !important;
-                    }
-                }
-    
-                .seo-score {
-                    font-weight: 600;
-                    display: inline-block;
-                }
-    
-                &.loading {
-                    pointer-events: none;
-                }
-    
-                &.bad-fk {
-                    color: darken( $color-bad, 5% );
-                    background: lighten( $color-bad, 18% );
-                    fill: darken( $color-bad, 5% );
-                    border-color: darken( $color-bad, 5% );
-                }
-    
-                &.ok-fk {
-                    color: darken( $color-ok, 15% );
-                    background: lighten( $color-ok, 22% );
-                    fill: darken( $color-ok, 15% );
-                    border-color: darken( $color-ok, 5% );
-                }
-    
-                &.good-fk {
-                    color: darken( $color-good, 5% );
-                    background: lighten( $color-good, 28% );
-                    fill: darken( $color-good, 5% );
-                    border-color: darken( $color-good, 5% );
-                }
-            }
-    
-            &.is-toggled,
-            &.is-pressed {
-                .#{$namespace}-toolbar-score {
-                    background: $gray;
-    
-                    &.bad-fk {
-                        color: lighten( $color-bad, 40% );
-                        background: $color-bad;
-                        fill: lighten( $color-bad, 40% );
-                    }
-    
-                    &.ok-fk {
-                        color: lighten( $color-ok, 40% );
-                        background: $color-ok;
-                        fill: lighten( $color-ok, 40% );
-                    }
-    
-                    &.good-fk {
-                        color: lighten( $color-good, 40% );
-                        background: $color-good;
-                        fill: lighten( $color-good, 40% );
-                    }
-                }
-            }
-        }
-    }
-} 
+	.interface-pinned-items {
+		button.components-button[aria-label='Rank Math'],
+		button.components-button[aria-label='Content AI'] {
+			padding: 0;
+
+			background: transparent;
+
+			&:hover {
+				background: transparent;
+			}
+
+			&:focus:not(:disabled) {
+				box-shadow: none;
+
+				> div {
+					box-shadow: inset 0 0 0 1px #fff,0 0 0 0.5px $gray;
+
+					&.bad-fk {
+						box-shadow: inset 0 0 0 1px #fff,0 0 0 0.5px $bad-score;
+					}
+
+					&.ok-fk {
+						box-shadow: inset 0 0 0 1px #fff,0 0 0 0.5px $ok-score;
+					}
+
+					&.good-fk {
+						box-shadow: inset 0 0 0 1px #fff,0 0 0 0.5px $good-score;
+					}
+				}
+			}
+
+			.#{$namespace}-toolbar-score.content-ai-score {
+				font-weight: 600;
+			}
+
+			&:not(.is-pressed) .#{$namespace}-toolbar-score.content-ai-score {
+				&.bad-fk {
+					color: darken( #f296b6, 25% );
+					border-color: darken( #f296b6, 25% );
+					background: lighten( #f296b6, 18% );
+				}
+
+				&.ok-fk {
+					color: darken( #f1ae50, 25% );
+					border-color: darken( #f1ae50, 25% );
+					background: lighten( #f1ae50, 30% );
+				}
+
+				&.good-fk {
+					color: darken( #29ab87, 5% );
+					border-color: darken( #29ab87, 5% );
+					background: lighten( #29ab87, 50% );
+				}
+			}
+
+			.#{$namespace}-toolbar-score {
+				padding: 10px 9px 8px;
+
+				color: $color-8;
+				border: 1px solid darken( $gray, 5% );
+				border-radius: 2px;
+				background: $light_gray;
+
+				.rm-icon {
+					font-size: 17px;
+
+					float: left;
+
+					height: 17px;
+					margin-right: 4px;
+
+					&-target {
+						font-size: 15px;
+						font-weight: 600;
+					}
+				}
+
+				.seo-score {
+					font-weight: 600;
+
+					display: inline-block;
+				}
+
+				&.loading {
+					pointer-events: none;
+				}
+
+				&.bad-fk {
+					color: $bad-score;
+					border-color: $bad-score;
+					background: #fce5e2;
+				}
+
+				&.ok-fk {
+					color: $ok-score;
+					border-color: $ok-score;
+					background: lighten( #ffa500, 38% );;
+				}
+
+				&.good-fk {
+					color: $good-score;
+					border-color: $good-score;
+					background: #e3f4e3;
+				}
+			}
+
+			&.is-toggled,
+			&.is-pressed {
+				.#{$namespace}-toolbar-score {
+					color: #fff;
+					background: $gray;
+
+					&.bad-fk {
+						background: lighten($bad-score, 20%);
+					}
+
+					&.ok-fk {
+						background: lighten( #ffa500, 0% );
+					}
+
+					&.good-fk {
+						border-color: darken( #4ab147, 5% );
+						background: lighten( #4ab147, 10% );
+					}
+				}
+			}
+		}
+	}
+}
 
 
 .components-menu-group .rank-math-toolbar-score {
-	.seo-score {
+	.seo-score, .content-ai-score {
 		display: none;
 	}
 
-	.rank-math-icon {
-		g {
-			fill: inherit!important;
-		}
+	i {
+		font-size: 1.25rem;
 	}
 }

@@ -89,7 +89,8 @@
 		"divi": "webpack --mode=production --env what=divi --progress",
 		"elementor": "webpack --mode=production --env what=elementor --progress",
 		"ca": "webpack --mode=production --env what=content-ai --progress",
-		"dist": "npm run build && npm run a && npm run f && npm run s && npm run m && npm run ca && npm run redirection && npm run acf && npm run woocommerce && npm run role-manager && npm run seo-analysis && npm run status && npm run version-control && npm run divi && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS"
+		"dist": "npm run build && npm run a && npm run f && npm run s && npm run m && npm run ca && npm run redirection && npm run acf && npm run woocommerce && npm run role-manager && npm run seo-analysis && npm run status && npm run version-control && npm run divi && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS",
+		"gulp:watch": "gulp watch"
 	},
 	"browserslist": [
 		"last 2 versions"

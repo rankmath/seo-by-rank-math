@@ -164,13 +164,6 @@ class ContentAI extends Component {
 	getHeader() {
 		return (
 			<div className="rank-math-ca-top-section">
-				<Button
-					onClick={ () => ( $( '.rank-math-general-tab' ).trigger( 'click' ) ) }
-				>
-					<i className="dashicons dashicons-arrow-left-alt"></i>
-					{ __( 'Back', 'rank-math' ) }
-				</Button>
-
 				<SelectControl
 					value={ this.state.country }
 					onChange={ ( country ) => this.setState( { country, showResearch: true } ) }

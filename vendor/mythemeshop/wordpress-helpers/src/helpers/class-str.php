@@ -218,4 +218,17 @@ class Str {
 
 		return $excerpt;
 	}
+
+	/**
+	 * Multibyte ucwords.
+	 *
+	 * @param string $string String to convert.
+	 */
+	public static function mb_ucwords( $string ) {
+		if ( ! function_exists( 'mb_convert_case' ) || ! function_exists( 'mb_detect_encoding' ) || mb_detect_encoding( $string ) !== 'UTF-8' ) {
+			return ucwords( $string );
+		}
+
+		return mb_convert_case( $string, MB_CASE_TITLE, 'UTF-8' );
+	}
 }

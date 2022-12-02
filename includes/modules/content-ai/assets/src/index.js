@@ -13,13 +13,18 @@ import { addAction, addFilter } from '@wordpress/hooks'
 import { Button } from '@wordpress/components'
 import { Fragment, createElement, render } from '@wordpress/element'
 import { registerPlugin } from '@wordpress/plugins'
-import { PluginPrePublishPanel } from '@wordpress/edit-post'
 import { select } from '@wordpress/data'
+import {
+	PluginSidebar,
+	PluginSidebarMoreMenuItem,
+	PluginPrePublishPanel,
+} from '@wordpress/edit-post'
 
 /**
  * Internal dependencies
  */
 import ContentAI from './ContentAI'
+import ContentAIIcon from './ContentAIIcon'
 import ContentAnalysis from './ContentAnalysis'
 
 const ContentAIButton = () => {
@@ -29,7 +34,14 @@ const ContentAIButton = () => {
 	return (
 		<Button
 			className={ className }
-			onClick={ () => ( jQuery( '.rank-math-content-ai-tab' ).trigger( 'click' ) ) }
+			onClick={ () => {
+				if ( jQuery( '.rank-math-toolbar-score.content-ai-score' ).length ) {
+					jQuery( '.rank-math-toolbar-score.content-ai-score' ).parent().trigger( 'click' )
+					return
+				}
+
+				jQuery( '.rank-math-content-ai-tab' ).trigger( 'click' )
+			} }
 		>
 			<i className="rm-icon rm-icon-target"></i>
 			{ __( 'Content AI', 'rank-math' ) }
@@ -106,6 +118,33 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 				)
 			},
 		} )
+
+		if ( 'gutenberg' === rankMath.currentEditor ) {
+			const RankMathContentAISidebar = () => (
+				<Fragment>
+					<PluginSidebarMoreMenuItem
+						target="seo-by-rank-math-content-ai-sidebar"
+						icon={ <ContentAIIcon /> }
+					>
+						{ __( 'Content AI', 'rank-math' ) }
+					</PluginSidebarMoreMenuItem>
+					<PluginSidebar
+						name="seo-by-rank-math-content-ai-sidebar"
+						title={ __( 'Content AI', 'rank-math' ) }
+						className="rank-math-sidebar-content-ai-panel"
+					>
+						<ContentAI showMinimal={ true } />
+					</PluginSidebar>
+				</Fragment>
+			)
+
+			setTimeout( () => {
+				registerPlugin( 'rank-math-content-ai', {
+					icon: <ContentAIIcon />,
+					render: RankMathContentAISidebar,
+				} )
+			}, 1000 )
+		}
 	}
 
 	if ( 'classic' !== rankMath.currentEditor ) {

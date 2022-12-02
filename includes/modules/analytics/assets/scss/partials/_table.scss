@@ -204,7 +204,6 @@
 				margin-right: 1rem;
 				padding: 1.25rem .825rem;
 
-				border-bottom: 1px solid #dadfe4;
 				border-bottom: 1px solid $light-gray;
 
 				@extend %flex;
@@ -219,18 +218,40 @@
 				.components-dropdown {
 					position: relative;
 
+					.components-popover {
+						z-index: 999;
+						position: relative !important;
+						top: 0 !important;
+						right: auto !important;
+						left: auto !important;
+					}
+
 					.components-popover__content {
 						position: absolute;
 						z-index: 200;
-						top: 35px;
-						right: 0;
-
+						top: 5px;
+						right: auto;
+						left: 0;
 						width: 200px;
 						padding: 1rem;
-
 						border: 1px solid $light-gray;
 						border-radius: 6px;
-						background: #fff;
+						background: $white;
+						
+						@at-root .rtl & {
+							right: 0;
+							left: auto;
+						}
+
+						@at-root .woocommerce-table .components-card__header .woocommerce-ellipsis-menu .components-dropdown .components-popover__content {
+							right: 0;
+							left: auto;
+
+							@at-root .rtl & {
+								right: auto;
+								left: 0;
+							}
+						}
 
 						.woocommerce-ellipsis-menu {
 							&__item {

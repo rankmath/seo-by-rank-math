@@ -534,10 +534,18 @@ import addNotice from '@helpers/addNotice'
 				// Don't submit CMB settings form on Enter.
 				$( '.cmb-form' ).on(
 					'keydown',
-					'input',
+					'input, textarea',
 					function( e ) {
 						if ( e.key === 'Enter' ) {
-							e.preventDefault()
+							// Do submit CMB settings form on Ctrl + Enter or Cmd + Enter.
+							if ( e.ctrlKey || e.metaKey ) {
+								$( '#submit-cmb' ).trigger( 'click' )
+							}
+
+							// Textarea should allow new lines.
+							if ( 'TEXTAREA' !== this.tagName ) {
+								e.preventDefault()
+							}	
 						}
 					}
 				)

@@ -75,6 +75,19 @@
 				span {
 					vertical-align: 4px;
 				}
+
+				.emoji {
+					animation: beat .25s infinite alternate;
+					transform-origin: center;
+				}
+
+				@keyframes beat{
+					to { transform: scale(0.9); }
+				}
+
+				.rank-math-tooltip span {
+					width: 100px;
+				}
 			}
 		}
 
