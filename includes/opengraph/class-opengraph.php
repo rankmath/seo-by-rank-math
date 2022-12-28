@@ -19,6 +19,7 @@ use RankMath\User;
 use RankMath\Helper;
 use RankMath\Paper\Paper;
 use RankMath\Traits\Hooker;
+use MyThemeShop\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -81,7 +82,7 @@ class OpenGraph {
 	public function get_title() {
 		$title = $this->_title();
 		if ( $title && Helper::get_settings( 'titles.capitalize_titles' ) ) {
-			$title = ucwords( $title );
+			$title = Str::mb_ucwords( $title );
 		}
 
 		return $title ? $title : Paper::get()->get_title();

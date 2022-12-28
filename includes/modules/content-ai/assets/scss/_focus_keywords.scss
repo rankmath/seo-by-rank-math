@@ -7,11 +7,13 @@
 		padding: 10px 16px;
 
 		align-items: flex-start;
-		justify-content: space-between;
+		justify-content: flex-end;
 
 		button {
 			height: 30px;
 			padding: 0;
+
+			flex-grow: 1;
 
 			color: $primary;
 

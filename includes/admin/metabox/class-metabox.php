@@ -123,7 +123,6 @@ class Metabox implements Runner {
 					'wp-media-utils',
 					'rank-math-common',
 					'rank-math-analyzer',
-					'rank-math-validate',
 					'wp-block-editor',
 					'rank-math-app',
 				],

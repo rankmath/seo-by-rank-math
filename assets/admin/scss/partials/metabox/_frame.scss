@@ -13,6 +13,14 @@
 		.rank-math-tabs-content {
 			width: 100%;
 		}
+
+		.components-toggle-control {
+			.components-h-stack {
+				flex-direction: row-reverse;
+				align-items: flex-start;
+				justify-content: flex-end;
+			}
+		}
 	}
 }
 

@@ -6,6 +6,8 @@
  * @subpackage RankMath\Sitemap
  */
 
+use RankMath\Helper;
+
 defined( 'ABSPATH' ) || exit;
 
 $taxonomy   = $tab['taxonomy'];
@@ -19,6 +21,20 @@ $cmb->add_field(
 		'name'    => esc_html__( 'Include in Sitemap', 'rank-math' ),
 		'desc'    => esc_html__( 'Include archive pages for terms of this taxonomy in the XML sitemap.', 'rank-math' ),
 		'default' => $is_enabled,
+	]
+);
+
+$cmb->add_field(
+	[
+		'id'      => $prefix . 'html_sitemap',
+		'type'    => 'toggle',
+		'name'    => esc_html__( 'Include in HTML Sitemap', 'rank-math' ),
+		'desc'    => esc_html__( 'Include archive pages for terms of this taxonomy in the HTML sitemap.', 'rank-math' ),
+		'default' => $is_enabled,
+		'classes' => [
+			'rank-math-html-sitemap',
+			! Helper::get_settings( 'sitemap.html_sitemap' ) ? 'hidden' : ''
+		],
 	]
 );
 

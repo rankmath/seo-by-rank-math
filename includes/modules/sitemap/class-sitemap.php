@@ -13,6 +13,7 @@ namespace RankMath\Sitemap;
 use RankMath\Helper;
 use RankMath\Helpers\Sitepress;
 use RankMath\Traits\Hooker;
+use RankMath\Sitemap\Html\Sitemap as Html_Sitemap;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -43,6 +44,7 @@ class Sitemap {
 		$this->index = new Sitemap_Index();
 		$this->index->hooks();
 		new Redirect_Core_Sitemaps();
+		new Html_Sitemap();
 
 		add_action( 'rank_math/sitemap/hit_index', [ __CLASS__, 'hit_index' ] );
 		add_action( 'rank_math/sitemap/ping_search_engines', [ __CLASS__, 'ping_google' ] );

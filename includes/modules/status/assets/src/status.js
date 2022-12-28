@@ -115,6 +115,7 @@ import { __ } from '@wordpress/i18n'
 					paper.setUrl( data.url )
 					if ( data.thumbnail ) {
 						paper.setThumbnail( data.thumbnail )
+						paper.setThumbnailAltText( data.thumbnailAlt )
 					}
 					paper.setContentAI( data.hasContentAi )
 

@@ -38,6 +38,21 @@ $cmb->add_field(
 	]
 );
 
+$cmb->add_field(
+	[
+		'id'         => $prefix . 'html_sitemap',
+		'type'       => 'toggle',
+		'name'       => esc_html__( 'Include in HTML Sitemap', 'rank-math' ),
+		'desc'       => esc_html__( 'Include this post type in the HTML sitemap if it\'s enabled.', 'rank-math' ),
+		'default'    => 'attachment' === $post_type ? 'off' : 'on',
+		'attributes' => $attributes,
+		'classes'    => [
+			'rank-math-html-sitemap',
+			! Helper::get_settings( 'sitemap.html_sitemap' ) ? 'hidden' : ''
+		],
+	]
+);
+
 if ( 'attachment' !== $post_type ) {
 	$cmb->add_field(
 		[

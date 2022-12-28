@@ -194,6 +194,7 @@ class Divi {
 			wp_enqueue_script( 'rank-math', rank_math()->assets() . 'js/rank-math.js', [ 'jquery' ], rank_math()->version, true );
 		}
 
+		wp_enqueue_style( 'rank-math-common', rank_math()->plugin_url() . 'assets/admin/css/common.css', null, rank_math()->version );
 		wp_enqueue_style( 'wp-components' );
 		wp_enqueue_style( 'rank-math-editor', rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/css/divi.css', [], rank_math()->version );
 

@@ -76,7 +76,7 @@ class Local_Seo {
 		global $wpdb;
 		$pages = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT ID, post_title FROM {$wpdb->prefix}posts WHERE post_type = 'page' AND post_title LIKE %s",
+				"SELECT ID, post_title FROM {$wpdb->prefix}posts WHERE post_type = 'page' AND post_status = 'publish' AND post_title LIKE %s",
 				"%{$wpdb->esc_like( $term )}%"
 			),
 			ARRAY_A
@@ -87,6 +87,7 @@ class Local_Seo {
 			$data[] = [
 				'id'   => $page['ID'],
 				'text' => $page['post_title'],
+				'url'  => get_permalink( $page['ID'] ),
 			];
 		}
 

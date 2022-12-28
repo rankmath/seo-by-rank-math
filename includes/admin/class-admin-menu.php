@@ -68,7 +68,6 @@ class Admin_Menu implements Runner {
 					'styles'  => [ 'rank-math-dashboard' => '' ],
 					'scripts' => [
 						'rank-math-dashboard' => '',
-						'rank-math-validate'  => '',
 					],
 				],
 				'is_network' => is_network_admin() && Helper::is_plugin_active_for_network(),

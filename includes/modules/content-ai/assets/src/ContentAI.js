@@ -4,7 +4,7 @@
  * External dependencies
  */
 import $ from 'jquery'
-import { isEmpty, isNull, get, round, isString, isUndefined, isNumber } from 'lodash'
+import { isEmpty, isNull, get, round, isString, isUndefined, isNumber, includes } from 'lodash'
 import classnames from 'classnames'
 
 /**
@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n'
 import { Fragment, Component } from '@wordpress/element'
 import { compose } from '@wordpress/compose'
 import { withDispatch, withSelect } from '@wordpress/data'
-import { doAction } from '@wordpress/hooks'
+import { doAction, applyFilters } from '@wordpress/hooks'
 import apiFetch from '@wordpress/api-fetch'
 import {
 	PanelBody,
@@ -24,13 +24,14 @@ import {
 } from '@wordpress/components'
 
 /*
- * Internal dependencies
- */
+* Internal dependencies
+*/
 import ContentAIScore from './ContentAIScore'
 import Recommendations from './Recommendations'
 import ContentAIPanel from './ContentAIPanel'
 import Interpolate from '@components/Interpolate'
 import getLink from '@helpers/getLink'
+
 class ContentAI extends Component {
 	/**
 	 * Constructor.
@@ -164,13 +165,15 @@ class ContentAI extends Component {
 	getHeader() {
 		return (
 			<div className="rank-math-ca-top-section">
-				<Button
-					onClick={ () => ( $( '.rank-math-general-tab' ).trigger( 'click' ) ) }
-				>
-					<i className="dashicons dashicons-arrow-left-alt"></i>
-					{ __( 'Back', 'rank-math' ) }
-				</Button>
-
+				{
+					includes( [ 'elementor', 'divi' ], rankMath.currentEditor ) &&
+					<Button
+						onClick={ () => ( $( '.rank-math-general-tab' ).trigger( 'click' ) ) }
+					>
+						<i className="dashicons dashicons-arrow-left-alt"></i>
+						{ __( 'Back', 'rank-math' ) }
+					</Button>
+				}
 				<SelectControl
 					value={ this.state.country }
 					onChange={ ( country ) => this.setState( { country, showResearch: true } ) }
@@ -201,10 +204,15 @@ class ContentAI extends Component {
 							}
 						} }
 						help={
-							<>
-								{ __( 'Upgrade to buy more credits from ', 'rank-math' ) }
-								<a href={ getLink( 'content-ai-pricing-tables', 'Sidebar Upgrade Text' ) } rel="noreferrer" target="_blank" title={ __( 'Content AI Pricing.', 'rank-math' ) }>{ __( 'here.', 'rank-math' ) }</a>
-							</>
+							applyFilters(
+								'rank_math_content_ai_help_text',
+								(
+									<>
+										{ __( 'Upgrade to buy more credits from ', 'rank-math' ) }
+										<a href={ getLink( 'content-ai-pricing-tables', 'Sidebar Upgrade Text' ) } rel="noreferrer" target="_blank" title={ __( 'Content AI Pricing.', 'rank-math' ) }>{ __( 'here.', 'rank-math' ) }</a>
+									</>
+								)
+							)
 						}
 						placeholder={ __( 'Suggested length 2-3 Words', 'rank-math' ) }
 					/>
@@ -305,9 +313,13 @@ class ContentAI extends Component {
 							} }
 						>
 							{
-								__(
-									'All credits assigned to this site are used. Please add more credits from {{link1}}My Account{{/link1}} Page or {{link2}}upgrade your plan{{/link2}}.',
-									'rank-math'
+								applyFilters(
+									'rank_math_content_ai_credits_notice',
+									__(
+										'All credits assigned to this site are used. Please add more credits from {{link1}}My Account{{/link1}} Page or {{link2}}upgrade your plan{{/link2}}.',
+										'rank-math'
+									),
+									'site_limit_reached'
 								)
 							}
 						</Interpolate>
@@ -315,17 +327,23 @@ class ContentAI extends Component {
 				}
 
 				{ 'account_limit_reached' === this.state.credits &&
-					<>
-						<p>{ __( 'You don\'t have any credits left.', 'rank-math' ) }</p>
-						<Button
-							href={ getLink( 'content-ai-pricing-tables', 'Sidebar No Credits' ) }
-							target="_blank"
-							rel="noreferrer"
-							className="is-primary"
-						>
-							{ __( 'Get More Credits', 'rank-math' ) }
-						</Button>
-					</>
+					applyFilters(
+						'rank_math_content_ai_credits_notice',
+						(
+							<>
+								<p>{ __( 'You don\'t have any credits left.', 'rank-math' ) }</p>
+								<Button
+									href={ getLink( 'content-ai-pricing-tables', 'Sidebar No Credits' ) }
+									target="_blank"
+									rel="noreferrer"
+									className="is-primary"
+								>
+									{ __( 'Get More Credits', 'rank-math' ) }
+								</Button>
+							</>
+						),
+						'account_limit_reached'
+					)
 				}
 			</div>
 		)

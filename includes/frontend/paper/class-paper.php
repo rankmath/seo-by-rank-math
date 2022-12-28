@@ -165,7 +165,7 @@ class Paper {
 
 		// Capitalize Titles.
 		if ( Helper::get_settings( 'titles.capitalize_titles' ) ) {
-			$this->title = ucwords( $this->title );
+			$this->title = Str::mb_ucwords( $this->title );
 		}
 
 		$this->title = wp_strip_all_tags( stripslashes( $this->title ), true );

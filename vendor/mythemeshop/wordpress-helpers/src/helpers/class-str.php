@@ -218,4 +218,23 @@ class Str {
 
 		return $excerpt;
 	}
+
+	/**
+	 * Multibyte ucwords.
+	 *
+	 * @param string $string String to convert.
+	 */
+	public static function mb_ucwords( $string ) {
+		if ( ! function_exists( 'mb_convert_case' ) || ! function_exists( 'mb_detect_encoding' ) || mb_detect_encoding( $string ) !== 'UTF-8' ) {
+			return ucwords( $string );
+		}
+
+		$words = preg_split( '/([\s]+)/u', $string, -1, PREG_SPLIT_DELIM_CAPTURE );
+		$ucwords = '';
+		foreach ( $words as $word ) {
+			$ucwords .= preg_match( '/[\p{L}]/u', $word[0] ) ? mb_strtoupper( $word[0], 'UTF-8' ) . mb_substr( $word, 1, mb_strlen( $word ), 'UTF-8' ) : $word;
+		}
+
+		return $ucwords;
+	}
 }

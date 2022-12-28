@@ -189,3 +189,7 @@ div.#{$namespace}-code-box textarea:focus {
 	margin-top: 1em !important;
 	padding: .8em 1.2em;
 }
+
+#html_sitemap_sort option[disabled] {
+    display: none;
+}

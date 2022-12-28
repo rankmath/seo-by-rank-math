@@ -131,7 +131,7 @@ class Elementor {
 
 		wp_enqueue_style( 'wp-components' );
 		wp_enqueue_style( 'site-health' );
-		wp_enqueue_style( 'rank-math-editor', rank_math()->plugin_url() . 'includes/3rdparty/elementor/assets/css/elementor.css', [], rank_math()->version );
+		wp_enqueue_style( 'rank-math-editor', rank_math()->plugin_url() . 'includes/3rdparty/elementor/assets/css/elementor.css', [ 'rank-math-common' ], rank_math()->version );
 		$media_query = '';
 
 		$dark_styles = $this->do_filter(

@@ -13,7 +13,7 @@ import { addAction, addFilter } from '@wordpress/hooks'
 /**
  * Internal dependencies
  */
-import Editor from '../rankMathEditor'
+import Editor from '../../../../../assets/admin/src/rankMathEditor'
 import DataCollector from './DataCollector'
 import ElementorAddRegion from './AddRegion'
 import UIThemeComponent from './UIThemeComponent'

@@ -216,6 +216,7 @@ class Image {
 			$attachment = [ 'url' => $attachment ];
 		}
 
+		$validate_image = true;
 		/**
 		 * Allow changing the OpenGraph image.
 		 * The dynamic part of the hook name, $this->network, is the network slug (facebook, twitter).
@@ -224,7 +225,8 @@ class Image {
 		 */
 		$filter_image_url = trim( $this->do_filter( "opengraph/{$this->network}/image", isset( $attachment['url'] ) ? $attachment['url'] : '' ) );
 		if ( ! empty( $filter_image_url ) && ( empty( $attachment['url'] ) || $filter_image_url !== $attachment['url'] ) ) {
-			$attachment = [ 'url' => $filter_image_url ];
+			$attachment     = [ 'url' => $filter_image_url ];
+			$validate_image = false;
 		}
 
 		/**
@@ -240,14 +242,17 @@ class Image {
 			return;
 		}
 
-		$attachment_url = explode( '?', $attachment['url'] );
-		if ( ! empty( $attachment_url ) ) {
-			$attachment['url'] = $attachment_url[0];
-		}
+		// Validate image only when it is not added using the opengraph filter.
+		if ( $validate_image ) {
+			$attachment_url = explode( '?', $attachment['url'] );
+			if ( ! empty( $attachment_url ) ) {
+				$attachment['url'] = $attachment_url[0];
+			}
 
-		// If the URL ends in `.svg`, we need to return.
-		if ( ! $this->is_valid_image_url( $attachment['url'] ) ) {
-			return;
+			// If the URL ends in `.svg`, we need to return.
+			if ( ! $this->is_valid_image_url( $attachment['url'] ) ) {
+				return;
+			}
 		}
 
 		$image_url = $attachment['url'];

@@ -47,6 +47,7 @@ class DataCollector {
 			featuredImage: '',
 		}
 		this._featuredImage = null
+		this._featuredImageInProcess = false
 		this._data = {
 			id: false,
 			slug: false,
@@ -224,6 +225,12 @@ class DataCollector {
 	}
 
 	async fetchFeaturedImageId() {
+		if ( this._featuredImageInProcess ) {
+			return this._featuredImage;
+		}
+
+		this._featuredImageInProcess = true
+
 		let id = null
 		await apiFetch( {
 			path: `/rankmath/v1/getFeaturedImageId`,
@@ -231,7 +238,10 @@ class DataCollector {
 			data: {
 				postId: get( ETBuilderBackendDynamic, 'postId', 0 ),
 			},
-		} ).then( ( resp ) => id = resp.success ? resp.featImgId : false )
+		} ).then( ( resp ) => {
+			id = resp.success ? resp.featImgId : false
+			this._featuredImageInProcess = false
+		} )
 		return id
 	}
 

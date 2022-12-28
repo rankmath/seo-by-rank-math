@@ -46,7 +46,7 @@ class Url {
 	}
 
 	/**
-	 * Check if a URL doesn't start with "http" or "//", which means it's relative.
+	 * Check whether a url is relative.
 	 *
 	 * @param string $url URL string to check.
 	 *

@@ -38,6 +38,7 @@ class Admin implements Runner {
 		$this->action( 'save_post', 'canonical_check_notice' );
 		$this->action( 'cmb2_save_options-page_fields', 'update_is_configured_value', 10, 2 );
 		$this->filter( 'action_scheduler_pastdue_actions_check_pre', 'as_exclude_pastdue_actions' );
+		$this->action( 'rank_math/pro_badge', 'offer_icon' );
 
 		// AJAX.
 		$this->ajax( 'is_keyword_new', 'is_keyword_new' );
@@ -367,5 +368,32 @@ class Admin implements Runner {
 
 		$check = ( $num_pastdue_actions >= $threshhold_min );
 		return (bool) apply_filters( 'action_scheduler_pastdue_actions_check', $check, $num_pastdue_actions, $threshold_seconds, $threshhold_min );
+	}
+
+	/**
+	 * Check and print the Anniversary icon in the header of Rank Math's setting pages.
+	 */
+	public static function offer_icon() {
+		if ( ! current_user_can( 'manage_options' ) || defined( 'RANK_MATH_PRO_FILE' ) ) {
+			return;
+		}
+
+		// Holiday Season related variables.
+		$time                   = time();
+		$current_year           = 2022;
+		$anniversary_start_time = gmmktime( 17, 00, 00, 10, 30, $current_year ); // 30 Oct.
+		$anniversary_end_time   = gmmktime( 17, 00, 00, 11, 30, $current_year ); // 30 Nov.
+		$holiday_start_time     = gmmktime( 17, 00, 00, 12, 20, $current_year ); // 20 Dec.
+		$holiday_end_time       = gmmktime( 17, 00, 00, 01, 07, 2023 ); // 07 Jan.
+
+		if (
+			( $time > $anniversary_start_time && $time < $anniversary_end_time ) ||
+			( $time > $holiday_start_time && $time < $holiday_end_time )
+		) { ?>
+			<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Header+Offer+Icon&utm_campaign=WP" target="_blank" class="rank-math-tooltip bottom" style="margin-left:5px;">
+				🎉
+				<span><?php esc_attr_e( 'Exclusive Offer!', 'rank-math' ); ?></span>
+			</a>
+		<?php }
 	}
 }

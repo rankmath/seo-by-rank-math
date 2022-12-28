@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2022-11-02 03:39+0000\n"
+"POT-Creation-Date: 2022-11-30 11:01+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -288,6 +288,9 @@ msgid "Insert Link in Content"
 msgstr ""
 
 msgid "You are not authorized to perform this action."
+msgstr ""
+
+msgid "Exclusive Offer!"
 msgstr ""
 
 #. translators: placeholder is the plugin name.
@@ -636,6 +639,9 @@ msgid "Get Rank Math PRO!"
 msgstr ""
 
 msgid "Click here to see all the exciting features."
+msgstr ""
+
+msgid "Ctrl/Cmd + Enter"
 msgstr ""
 
 msgid "Save Changes"
@@ -2049,6 +2055,9 @@ msgid "Import all the redirections you have already set up in AIO SEO Premium."
 msgstr ""
 
 msgid "Import Locations Settings."
+msgstr ""
+
+msgid "HTML Sitemap"
 msgstr ""
 
 msgid "Settings imported successfully."
@@ -3585,6 +3594,9 @@ msgstr ""
 msgid "Your site is accessible by search engine."
 msgstr ""
 
+msgid "New!"
+msgstr ""
+
 msgid "General"
 msgstr ""
 
@@ -3595,8 +3607,18 @@ msgstr ""
 msgid "Your sitemap index can be found here: %s"
 msgstr ""
 
+#. translators: new label
+msgid "HTML Sitemap %s"
+msgstr ""
+
+msgid "This tab contains settings related to the HTML sitemap."
+msgstr ""
+
 #. translators: Learn more link.
 msgid "Set the sitemap options for author archive pages. %s."
+msgstr ""
+
+msgid "Sitemap Settings %s"
 msgstr ""
 
 msgid "attachments"
@@ -5651,6 +5673,18 @@ msgstr ""
 msgid "Analyze your site by %1$s linking your Rank Math account %2$s"
 msgstr ""
 
+msgid "Include in Sitemap"
+msgstr ""
+
+msgid "Include author archives in the XML sitemap."
+msgstr ""
+
+msgid "Include in HTML Sitemap"
+msgstr ""
+
+msgid "Include author archives in the HTML sitemap if it's enabled."
+msgstr ""
+
 msgid "Exclude User Roles"
 msgstr ""
 
@@ -5706,10 +5740,68 @@ msgstr ""
 msgid "Automatically notify Google when a sitemap gets updated."
 msgstr ""
 
-msgid "Include in Sitemap"
+msgid "Enable the HTML sitemap."
+msgstr ""
+
+msgid "Display Format"
+msgstr ""
+
+msgid "Choose how you want to display the HTML sitemap."
+msgstr ""
+
+msgid "Shortcode"
+msgstr ""
+
+msgid "Use this shortcode to display the HTML sitemap."
+msgstr ""
+
+msgid "Selected page: "
+msgstr ""
+
+#. translators: link to the selected page
+msgid "Selected page: <a href=\"%s\" target=\"_blank\" class=\"rank-math-selected-page\">%s</a>"
+msgstr ""
+
+msgid "Select the page to display the HTML sitemap. Once the settings are saved, the sitemap will be displayed below the content of the selected page."
+msgstr ""
+
+msgid "Select a page"
+msgstr ""
+
+msgid "Sort By"
+msgstr ""
+
+msgid "Choose how you want to sort the items in the HTML sitemap."
+msgstr ""
+
+msgid "Published Date"
+msgstr ""
+
+msgid "Modified Date"
+msgstr ""
+
+msgid "Alphabetical"
+msgstr ""
+
+msgid "Show Dates"
+msgstr ""
+
+msgid "Show published dates for each post & page."
+msgstr ""
+
+msgid "Item Titles"
+msgstr ""
+
+msgid "Show the post/term titles, or the SEO titles in the HTML sitemap."
+msgstr ""
+
+msgid "SEO Titles"
 msgstr ""
 
 msgid "Include this post type in the XML sitemap."
+msgstr ""
+
+msgid "Include this post type in the HTML sitemap if it's enabled."
 msgstr ""
 
 msgid "Image Custom Fields"
@@ -5719,6 +5811,9 @@ msgid "Insert custom field (post meta) names which contain image URLs to include
 msgstr ""
 
 msgid "Include archive pages for terms of this taxonomy in the XML sitemap."
+msgstr ""
+
+msgid "Include archive pages for terms of this taxonomy in the HTML sitemap."
 msgstr ""
 
 msgid "Include Empty Terms"

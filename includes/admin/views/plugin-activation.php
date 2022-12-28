@@ -28,7 +28,7 @@ $button_class   = 'button button-primary button-connect' . ( $site_url_valid ? '
 
 		</header>
 
-		<div class="rank-math-box-content rank-math-ui rank-math-validate-field">
+		<div class="rank-math-box-content rank-math-ui">
 
 			<form method="post" action="">
 

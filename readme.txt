@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.101
+Stable tag: 1.0.103
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,17 +583,22 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.101[Nov 02, 2022] =
-* Added: [NEW!] New fields in the [Local SEO](https://rankmath.com/kb/local-seo/#local-seo-module-general-settings) Tab for the Website Name and Alternative Name to support Google's newly introduced [Site Name](https://developers.google.com/search/docs/appearance/site-names) feature
-* Added: New filter to allow CDN path in the [Social Overlay Image](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails)
-* Added: Notification alert when the "Discourage search engines from indexing this site" option is enabled
-* Added: Property/View ID in the Analytics Module's [Properties setting](https://rankmath.com/kb/analytics/#settings-in-the-rank-math-analytics) to easily identify the Properties with the same name
-* Fixed: Self-linking in post content was counted as an [incoming link](https://rankmath.com/kb/link-counter/#rank-maths-link-counter)
-* Fixed: [Overall Content length](https://rankmath.com/kb/score-100-in-tests/#overall-content-length) test was not working well when encoded space `&nbsp;` was used in the content
-* Fixed: PHP warning on some setups when primary taxonomy is deleted
-* Fixed: PHP Undefined function error on sites that were overwriting the WooCommerce functions
-* Fixed: PHP warning on some setups when [Backup data](https://rankmath.com/kb/import-export-settings/#performing-and-restoring-backups) is not available
-* Fixed: PHP error on some setups when [filter](https://rankmath.com/kb/filters-hooks-api-developer/#change-opengraph-image) was used to change the Opengraph image
-
+= 1.0.103 [Nov 30, 2022] =
+* Added: [NEW!] [HTML Sitemaps](https://rankmath.com/kb/html-sitemap/?play-video=Euw7qS4IRXM) are here for everyone!
+* Added: Option to enable/disable [Author Sitemap](https://rankmath.com/kb/configure-sitemaps/#authors)
+* Added: Back button in the [Content AI Panel](https://rankmath.com/kb/how-to-use-content-ai/#open-content-ai-panel) to get back to the SEO Controls without reloading the page
+* Improved: [HUGE!] [SEO Tests](https://rankmath.com/kb/score-100-in-tests/) & [Content AI](https://rankmath.com/kb/how-to-use-content-ai/) tests run much faster than ever
+* Improved: [HUGE!] Performance by preventing unnecessary calls for the `getFeaturedImageId` REST endpoint in the [Divi Editor](https://rankmath.com/kb/seo-meta-tags/#divi)
+* Fixed: Visual bug in the date field of [Schema Generator](https://rankmath.com/kb/schema-generator/)
+* Fixed: Query strings added to the attachment URL using the Open Graph Image [filter](https://rankmath.com/kb/filters-hooks-api-developer/#change-opengraph-image) were getting removed
+* Fixed: Incorrect [description](https://rankmath.com/kb/variables-in-seo-title-description/#num-18-post-excerpt) was generated when multiple keywords were used in the post
+* Fixed: [Capitalize Title](https://rankmath.com/kb/titles-and-meta/#capitalize-titles) option was not working well when an apostrophe was used in the title
+* Fixed: [Google Trends tool](https://rankmath.com/kb/keyword-research-with-rank-math/#google-trends) was not displaying the popup in the Elementor Editor after switching tabs
+* Fixed: [Recalculate SEO score tool](https://rankmath.com/kb/seo-score-not-available/#database-tools) was not detecting the ALT text added to the post thumbnail
+* Fixed: Position of the toggle options in [Rank Math's Meta Box](https://rankmath.com/kb/on-page-seo/#num-3-in-classic-editor) at Classic Editor
+* Fixed: Missing font icons in Divi & Elementor Editor when Schema & Content AI modules are disabled
+* Fixed: Content AI REST endpoints were showing 404 error on some setups
+* Fixed: Sitemap cache not being cleared after setting a post to `noindex`
+* Fixed: Deprecated function used in the plugin
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
