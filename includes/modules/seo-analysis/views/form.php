@@ -1,6 +1,6 @@
 <?php
 /**
- * SEO Analysis form.
+ * SEO Analyzer form.
  *
  * @package   RANK_MATH
  * @author    Rank Math <support@rankmath.com>
@@ -29,7 +29,7 @@ $analyzer = Helper::get_module( 'seo-analysis' )->admin->analyzer;
 		<h2><?php esc_html_e( 'Analysing Page&hellip;', 'rank-math' ); ?></h2>
 
 	<?php } else { ?>
-		<button data-what="website" class="button button-primary button-xlarge rank-math-recheck"><?php esc_html_e( 'Start Site-Wide Analysis', 'rank-math' ); ?></button>
+		<button data-what="website" class="button button-primary button-xlarge rank-math-recheck"><?php esc_html_e( 'Start SEO Analyzer', 'rank-math' ); ?></button>
 
 		<h2><?php esc_html_e( 'Analysing Website&hellip;', 'rank-math' ); ?></h2>
 

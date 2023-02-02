@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2022-12-19 11:23+0000\n"
+"POT-Creation-Date: 2022-12-28 08:37+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -1425,10 +1425,10 @@ msgstr ""
 msgid "Connect Rank Math with Google Search Console to see the most important information from Google directly in your WordPress dashboard."
 msgstr ""
 
-msgid "SEO Analysis"
+msgid "SEO Analyzer"
 msgstr ""
 
-msgid "Let Rank Math analyze your website and your website's content using 70+ different tests to provide tailor-made SEO Analysis to you."
+msgid "Let Rank Math analyze your website and your website's content using 28+ different tests to provide tailor-made SEO Analysis to you."
 msgstr ""
 
 msgid "Robots Txt"
@@ -2801,10 +2801,10 @@ msgid_plural "%d Rank Math transients cleared."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "SEO Analysis data has already been cleared."
+msgid "SEO Analyzer data has already been cleared."
 msgstr ""
 
-msgid "SEO Analysis data successfully deleted."
+msgid "SEO Analyzer data successfully deleted."
 msgstr ""
 
 msgid "No Internal Links data found."
@@ -2840,13 +2840,13 @@ msgstr ""
 msgid "Deletion started. A success message will be shown here once the process completes. You can close this page."
 msgstr ""
 
-msgid "Flush SEO Analysis Data"
+msgid "Flush SEO Analyzer Data"
 msgstr ""
 
-msgid "Need a clean slate or not able to run the SEO Analysis tool? Flushing the analysis data might fix the issue. Flushing SEO Analysis data is entirely safe and doesn't remove any critical data from your website."
+msgid "Need a clean slate or not able to run the SEO Analyzer tool? Flushing the analysis data might fix the issue. Flushing SEO Analyzer data is entirely safe and doesn't remove any critical data from your website."
 msgstr ""
 
-msgid "Clear SEO Analysis"
+msgid "Clear SEO Analyzer"
 msgstr ""
 
 msgid "Remove Rank Math Transients"
@@ -3357,7 +3357,22 @@ msgstr ""
 msgid "Editor's Rating:"
 msgstr ""
 
+msgid "Competitor Analyzer"
+msgstr ""
+
+msgid "New!"
+msgstr ""
+
+msgid "SEO Analyzer %s"
+msgstr ""
+
+msgid "Print"
+msgstr ""
+
 msgid "How to fix"
+msgstr ""
+
+msgid "Read more"
 msgstr ""
 
 msgid "OK"
@@ -3381,20 +3396,27 @@ msgstr ""
 msgid "SEO Analysis for this page"
 msgstr ""
 
-msgid "API Error:"
+msgid "Passed Tests"
 msgstr ""
 
-msgid "The Site-Wide Analysis is unavailable on localhost."
+msgid "Warnings"
 msgstr ""
 
-msgid "Click here to learn more"
+msgid "Failed Tests"
+msgstr ""
+
+#. translators: 1: Date, 2: Time.
+msgid "Last checked:"
+msgstr ""
+
+msgid "%1$s at %2$s"
 msgstr ""
 
 #. translators: API error
 msgid "<strong>API Error:</strong> %s"
 msgstr ""
 
-msgid "Rank Math SEO Analysis error: "
+msgid "Rank Math SEO Analyzer error: "
 msgstr ""
 
 msgid "Rank Math auto-update option is enabled on your site."
@@ -3442,6 +3464,9 @@ msgstr ""
 msgid "The tagline is the second option.  Choose a tagline that summarizes your site in a few words.  The tagline is also a good place to use your main keyword."
 msgstr ""
 
+msgid "Confirm custom tagline is set for your site"
+msgstr ""
+
 msgid "Blog Public"
 msgstr ""
 
@@ -3451,6 +3476,9 @@ msgstr ""
 
 #. translators: %1$s link to the reading settings, %2$s closing tag for the link
 msgid "You must %1$sgo to your Reading Settings%2$s and uncheck the box for Search Engine Visibility."
+msgstr ""
+
+msgid "Check your site's visibility to search engines"
 msgstr ""
 
 msgid "Permalink Structure"
@@ -3476,6 +3504,9 @@ msgstr ""
 msgid "This looks nice for readers - and it gets your keywords into the URL (keywords in the URL is a ranking factor)."
 msgstr ""
 
+msgid "Check your site for SEO-friendly permalink structure"
+msgstr ""
+
 msgid "Setting focus keywords for your posts allows Rank Math to analyse the content."
 msgstr ""
 
@@ -3491,6 +3522,9 @@ msgstr ""
 msgid "Fixing this issue is easy - just edit the post, and set a Focus Keyword.  Then follow Rank Math's analysis to improve your rankings."
 msgstr ""
 
+msgid "Confirm focus keywords are set for all your posts"
+msgstr ""
+
 msgid "Post Titles Missing Focus Keywords"
 msgstr ""
 
@@ -3501,6 +3535,9 @@ msgid "HTML Page Titles play a large role in Google's ranking algorithm.  When y
 msgstr ""
 
 msgid "Fixing the issue is simple - just edit the post/page and add the focus keyword(s) to the title."
+msgstr ""
+
+msgid "Verify the presence of focus keywords in your post titles"
 msgstr ""
 
 msgid "Search Console"
@@ -3521,16 +3558,25 @@ msgstr ""
 msgid "Read <a href=\"%1$s\" target=\"_blank\">this article</a> for detailed instructions on setting up your Google Webmaster account and getting Rank Math to work with the Google Search Console."
 msgstr ""
 
+msgid "Confirm if Rank Math is connected to Search Console"
+msgstr ""
+
 msgid "XML sitemaps are a special type of text file that tells search engines about the structure of your site. They're a list of all the resources (pages and files) you would like the search engine to index. You can assign different priorities, so certain pages will be crawled first. Before XML sitemaps, search engines were limited to indexing the content they could find by following links. That's still an important feature for search engine spiders, but XML sitemaps have made it easier for content creators and search engines to collaborate."
 msgstr ""
 
 msgid "If you don't have an XML sitemap, the best option is to install a plugin that creates sitemaps for you. That way you'll know the sitemap will always be up-to-date. Plugins can also automatically ping the search engines when the XML file is updated. The Rank Math WordPress plugin gives you complete control over your site's XML sitemaps. You can control the settings for each page as you write or edit it, and Rank Math will ping Google as soon as you submit your edits. This results in fast crawls and indexing."
 msgstr ""
 
+msgid "Check the presence of sitemaps on your website"
+msgstr ""
+
 msgid "Automatic Updates"
 msgstr ""
 
 msgid "Enable automatic updates to ensure you are always using the latest version of Rank Math."
+msgstr ""
+
+msgid "Verify auto-updates are enabled for Rank Math"
 msgstr ""
 
 #. translators: placeholder is an activate button.
@@ -3603,9 +3649,6 @@ msgstr ""
 msgid "Your site is accessible by search engine."
 msgstr ""
 
-msgid "New!"
-msgstr ""
-
 msgid "General"
 msgstr ""
 
@@ -3616,18 +3659,11 @@ msgstr ""
 msgid "Your sitemap index can be found here: %s"
 msgstr ""
 
-#. translators: new label
-msgid "HTML Sitemap %s"
-msgstr ""
-
 msgid "This tab contains settings related to the HTML sitemap."
 msgstr ""
 
 #. translators: Learn more link.
 msgid "Set the sitemap options for author archive pages. %s."
-msgstr ""
-
-msgid "Sitemap Settings %s"
 msgstr ""
 
 msgid "attachments"
@@ -4044,9 +4080,6 @@ msgstr ""
 
 #. translators: placeholder is a link to "Read more".
 msgid "Enable this option to register a REST API endpoint that returns the HTML meta tags for a given URL. %s"
-msgstr ""
-
-msgid "Read more"
 msgstr ""
 
 msgid "Show SEO Score to Visitors"
@@ -5648,7 +5681,19 @@ msgstr ""
 msgid "Application Category"
 msgstr ""
 
-msgid "Start Site-Wide Analysis"
+msgid "Analyze competitor websites to gain an edge"
+msgstr ""
+
+msgid "Evaluate strengths and weaknesses"
+msgstr ""
+
+msgid "Explore new keywords and opportunities"
+msgstr ""
+
+msgid "Make more informed decisions & strategy"
+msgstr ""
+
+msgid "Start SEO Analyzer"
 msgstr ""
 
 msgid "Analysing Website&hellip;"
@@ -5669,23 +5714,23 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-msgid "Passed Tests"
+msgid "SEO Analysis for"
 msgstr ""
 
-msgid "Warnings"
+msgid "Restart SEO Analyzer"
 msgstr ""
 
-msgid "Failed Tests"
-msgstr ""
-
-msgid "What is this?"
-msgstr ""
-
-msgid "Start Analysis Again"
+msgid "View Issues"
 msgstr ""
 
 #. translators: placeholders are opening and closing tag for link.
 msgid "Analyze your site by %1$s linking your Rank Math account %2$s"
+msgstr ""
+
+msgid "(No Title)"
+msgstr ""
+
+msgid "(No Description)"
 msgstr ""
 
 msgid "Include in Sitemap"

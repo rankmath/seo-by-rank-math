@@ -66,6 +66,7 @@
 	&[disabled] {
 		border-color: $primary-border-color!important;
 		background: $primary!important;
+		color: lighten( $primary, 35% )!important;
 	}
 }
 

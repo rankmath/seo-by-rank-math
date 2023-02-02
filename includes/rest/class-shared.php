@@ -145,6 +145,17 @@ class Shared extends WP_REST_Controller {
 		foreach ( $meta as $meta_key => $meta_value ) {
 			// Delete schema by meta id.
 			if ( Str::starts_with( 'rank_math_delete_', $meta_key ) ) {
+				// First, delete the "shortcut" to the new schema.
+				$schema = \get_metadata_by_mid( $object_type, absint( \str_replace( 'rank_math_delete_schema-', '', $meta_key ) ) );
+				if ( ! empty( $schema->meta_value ) ) {
+					// Maybe unserialize the schema.
+					$schema = \maybe_unserialize( $schema->meta_value );
+					if ( ! empty( $schema['metadata']['shortcode'] ) ) {
+						\delete_metadata( $object_type, $object_id, 'rank_math_shortcode_schema_' . $schema['metadata']['shortcode'] );
+					}
+				}
+
+				// Now delete the schema.
 				\delete_metadata_by_mid( $object_type, absint( \str_replace( 'rank_math_delete_schema-', '', $meta_key ) ) );
 				update_metadata( $object_type, $object_id, 'rank_math_rich_snippet', 'off' );
 				continue;
@@ -213,12 +224,25 @@ class Shared extends WP_REST_Controller {
 			// Add new.
 			if ( Str::starts_with( 'new-', $meta_id ) ) {
 				$new_ids[ $meta_id ] = add_metadata( $object_type, $object_id, $meta_key, $schema );
+
+				// Add "shortcut" to the new schema: a meta data where the key is $schema['metadata']['shortcode'] and the value is the new meta id.
+				if ( isset( $schema['metadata']['shortcode'] ) ) {
+					add_metadata( $object_type, $object_id, 'rank_math_shortcode_schema_' . $schema['metadata']['shortcode'], $new_ids[ $meta_id ] );
+				}
+
 				continue;
 			}
 
 			// Update old.
 			$db_id      = absint( str_replace( 'schema-', '', $meta_id ) );
 			$prev_value = update_metadata_by_mid( $object_type, $db_id, $schema, $meta_key );
+
+			// Update or delete the "shortcut" to the new schema.
+			if ( isset( $schema['metadata']['shortcode'] ) ) {
+				update_metadata( $object_type, $object_id, 'rank_math_shortcode_schema_' . $schema['metadata']['shortcode'], $db_id );
+			} elseif ( isset( $prev_value['metadata']['shortcode'] ) ) {
+				delete_metadata( $object_type, $object_id, 'rank_math_shortcode_schema_' . $prev_value['metadata']['shortcode'] );
+			}
 		}
 
 		do_action( 'rank_math/schema/update', $object_id, $schemas, $object_type );

@@ -514,6 +514,28 @@ class Image {
 			return;
 		}
 
+		$do_og_content_image_cache = $this->do_filter( 'opengraph/content_image_cache', true );
+		if ( $do_og_content_image_cache ) {
+			$cache_key = 'rank_math_og_content_image';
+			$cache = get_post_meta( $post->ID, $cache_key, true );
+			$check = md5( $post->post_content );
+			if ( ! empty( $cache ) && $check === $cache['check'] ) {
+				foreach ( $cache['images'] as $image ) {
+					if ( is_int( $image ) ) {
+						$this->add_image_by_id( $image );
+					} else {
+						$this->add_image( $image );
+					}
+				}
+				return;
+			}
+
+			$cache = [
+				'check'  => $check,
+				'images' => [],
+			];
+		}
+
 		$images = [];
 		if ( preg_match_all( '`<img [^>]+>`', $content, $matches ) ) {
 			foreach ( $matches[0] as $img ) {
@@ -543,12 +565,21 @@ class Image {
 				$attachment_id = Attachment::get_by_url( $image );
 				if ( 0 === $attachment_id ) {
 					$this->add_image( $image );
+					if ( $do_og_content_image_cache ) {
+						$cache['images'][] = $image;
+					}
 				} else {
 					$this->add_image_by_id( $attachment_id );
+					if ( $do_og_content_image_cache ) {
+						$cache['images'][] = $attachment_id;
+					}
 				}
 			}
 		}
 
+		if ( $do_og_content_image_cache ) {
+			update_post_meta( $post->ID, $cache_key, $cache );
+		}
 	}
 
 	/**

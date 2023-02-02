@@ -10,19 +10,48 @@ import { TableCard } from '@woocommerce/components'
 import { __ } from '@wordpress/i18n'
 import { applyFilters } from '@wordpress/hooks'
 import { withFilters } from '@wordpress/components'
-import { withSelect, dispatch } from '@wordpress/data'
+import { withSelect, dispatch, useSelect } from '@wordpress/data'
 
 /**
  * Internal dependencies
  */
 import humanNumber from '@helpers/humanNumber'
 import { processRows, getPageOffset, filterShownHeaders, withRouter } from '../functions'
-import { noDataMessage } from '../helpers'
+import {elementObserver, noDataMessage} from '../helpers'
+import {useRef, useState} from '@wordpress/element';
 
 const TABLE_PREF_KEY = 'performance'
 
 const PostsTable = ( props ) => {
-	const { tableData, summary, query, navigate, userPreference } = props
+	const { query, navigate, userPreference } = props
+	const { paged = 1 } = query;
+
+	// Component state.
+	const [ tableData, setTableData ] = useState( false )
+	const [ summary, setSummary ] = useState( false )
+	const intersectedState = useState( false )
+	const [ isIntersected ] = intersectedState
+
+	// Element reference.
+	const elementReference = useRef( null )
+	elementObserver( elementReference, intersectedState )
+
+	useSelect( ( select ) => {
+		if ( false === isIntersected ) {
+			return;
+		}
+
+		const responseTableData = select( 'rank-math' ).getPostsRowsByObjects( paged, {} )
+		if ( ! isEmpty( responseTableData ) && responseTableData !== tableData ) {
+			setTableData( responseTableData )
+		}
+
+		const responseSummary = select( 'rank-math' ).getPostsSummary()
+		if ( ! isEmpty( responseSummary ) && responseSummary !== summary ) {
+			setSummary( responseSummary )
+		}
+	}, [ isIntersected, paged, tableData, summary ] )
+
 	if ( isUndefined( tableData ) || isUndefined( summary ) ) {
 		return 'Loading'
 	}
@@ -91,7 +120,6 @@ const PostsTable = ( props ) => {
 	)
 
 	const rowsPerPage = 25
-	const { paged = 1 } = query
 	const filteredHeaders = filterShownHeaders( headers, userPreference )
 	const onColumnsChange = ( columns, toggled ) => {
 		userPreference[ toggled ] = ! userPreference[ toggled ]
@@ -102,7 +130,7 @@ const PostsTable = ( props ) => {
 	}
 
 	return (
-		<div className="rank-math-posts">
+		<div className="rank-math-posts" ref={elementReference}>
 			<TableCard
 				className="rank-math-table"
 				title={ __( 'Content', 'rank-math' ) }
@@ -134,13 +162,10 @@ export default withRouter(
 	withFilters( 'rankMath.analytics.postsTable' )(
 		withSelect( ( select, props ) => {
 			const query = props.params
-			const { paged = 1 } = query
 
 			return {
 				query,
 				navigate: props.navigate,
-				tableData: select( 'rank-math' ).getPostsRowsByObjects( paged, {} ),
-				summary: select( 'rank-math' ).getPostsSummary(),
 				userPreference: select( 'rank-math' ).getUserColumnPreference(
 					TABLE_PREF_KEY
 				),

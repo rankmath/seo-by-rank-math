@@ -83,14 +83,14 @@
 		"woocommerce": "webpack --mode=production --env what=woocommerce --progress",
 		"acf": "webpack --mode=production --env what=acf --progress",
 		"role-manager": "webpack --mode=production --env what=role-manager --progress",
-		"seo-analysis": "webpack --mode=production --env what=seo-analysis --progress",
+		"sa": "webpack --mode=production --env what=seo-analysis --progress",
 		"status": "webpack --mode=production --env what=status --progress",
 		"version-control": "webpack --mode=production --env what=version-control --progress",
 		"divi": "webpack --mode=production --env what=divi --progress",
 		"elementor": "webpack --mode=production --env what=elementor --progress",
 		"ca": "webpack --mode=production --env what=content-ai --progress",
 		"blocks": "webpack --mode=production --env what=toc --progress",
-		"dist": "npm run build && npm run a && npm run f && npm run s && npm run blocks && npm run m && npm run ca && npm run redirection && npm run acf && npm run woocommerce && npm run role-manager && npm run seo-analysis && npm run status && npm run version-control && npm run divi && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS",
+		"dist": "npm run build && npm run a && npm run f && npm run s && npm run blocks && npm run m && npm run ca && npm run redirection && npm run acf && npm run woocommerce && npm run role-manager && npm run sa && npm run status && npm run version-control && npm run divi && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS",
 		"gulp:watch": "gulp watch"
 	},
 	"browserslist": [

@@ -12,6 +12,7 @@ sass.compiler = require( 'node-sass' )
 const paths = {
 	front: {
 		src: 'assets/front/scss/**/*.scss',
+		dest: 'assets/front/css',
 	},
 	admin: {
 		src: 'assets/admin/scss/*.scss',

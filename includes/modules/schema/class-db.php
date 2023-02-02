@@ -137,9 +137,52 @@ class DB {
 	 * Get schema by shortcode id.
 	 *
 	 * @param  string $id Shortcode unique id.
+	 * @param  bool   $from_db If set to true, the schema will be retrieved from the database.
 	 * @return array
 	 */
-	public static function get_schema_by_shortcode_id( $id ) {
+	public static function get_schema_by_shortcode_id( $id, $from_db = false ) {
+		/**
+		 * Keep Schema data in memory after querying by shortcode ID, to avoid
+		 * unnecessary queries.
+		 *
+		 * @var array
+		 */
+		static $cached_schema_shortcodes = [];
+
+		if ( ! $from_db && isset( $cached_schema_shortcodes[ $id ] ) ) {
+			return $cached_schema_shortcodes[ $id ];
+		}
+
+		// First, check for meta_key matches for a "shortcut" to the schema.
+		$shortcut = false;
+		if ( strpos( self::table()->table, 'post' ) !== false ) {
+			// Only check for shortcuts if we're querying for a post.
+			$shortcut = self::table()
+				->select( 'meta_value' )
+				->where( 'meta_key', 'rank_math_shortcode_schema_' . $id )
+				->one();
+		}
+
+		if ( ! empty( $shortcut ) ) {
+			$data = self::table()
+				->select( 'post_id' )
+				->select( 'meta_value' )
+				->where( 'meta_id', $shortcut->meta_value )
+				->one();
+
+			if ( ! empty( $data ) ) {
+				$schema = [
+					'post_id' => $data->post_id,
+					'schema'  => maybe_unserialize( $data->meta_value ),
+				];
+
+				// Cache the schema for future use.
+				$cached_schema_shortcodes[ $id ] = $schema;
+
+				return $schema;
+			}
+		}
+
 		$data = self::table()
 			->select( 'post_id' )
 			->select( 'meta_value' )
@@ -147,10 +190,15 @@ class DB {
 			->one();
 
 		if ( ! empty( $data ) ) {
-			return [
+			$schema = [
 				'post_id' => $data->post_id,
 				'schema'  => maybe_unserialize( $data->meta_value ),
 			];
+
+			// Cache the schema for future use.
+			$cached_schema_shortcodes[ $id ] = $schema;
+
+			return $schema;
 		}
 
 		return false;

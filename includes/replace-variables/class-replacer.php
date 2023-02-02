@@ -90,7 +90,7 @@ class Replacer {
 		}
 
 		if ( Str::ends_with( ' %sep%', $string ) ) {
-			$string = str_replace( ' %sep%', '', $string );
+			$string = substr( $string, 0, -5 );
 		}
 
 		$this->pre_replace( $args, $exclude );

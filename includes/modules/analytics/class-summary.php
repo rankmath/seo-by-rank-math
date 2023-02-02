@@ -10,12 +10,16 @@
 
 namespace RankMath\Analytics;
 
+use RankMath\Traits\Cache;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Summary class.
  */
 class Summary {
+
+	use Cache;
 
 	/**
 	 * Get Widget.
@@ -95,6 +99,13 @@ class Summary {
 	public function get_optimization_summary( $post_type = '' ) {
 		global $wpdb;
 
+		$cache_group = 'rank_math_optimization_summary';
+		$cache_key   = $this->generate_hash( $post_type );
+		$cache       = $this->get_cache( $cache_key, $cache_group );
+		if ( false !== $cache ) {
+			return $cache;
+		}
+
 		$stats = (object) [
 			'good'    => 0,
 			'ok'      => 0,
@@ -142,15 +153,32 @@ class Summary {
 		if ( $average->total > 0 ) {
 			$stats->average = \round( $average->score / $average->total, 2 );
 		}
+
+		$this->set_cache( $cache_key, $stats, $cache_group, DAY_IN_SECONDS );
+
 		return $stats;
 	}
 
 	/**
-	 * Get analytics summmary.
+	 * Get analytics summary.
 	 *
 	 * @return object
 	 */
 	public function get_analytics_summary() {
+		$args = [
+			'start_date'         => $this->start_date,
+			'end_date'           => $this->end_date,
+			'compare_start_date' => $this->compare_start_date,
+			'compare_end_date'   => $this->compare_end_date,
+		];
+
+		$cache_group = 'rank_math_analytics_summary';
+		$cache_key = $this->generate_hash( $args );
+		$cache     = $this->get_cache( $cache_key, $cache_group );
+		if ( false !== $cache ) {
+			return $cache;
+		}
+
 		$stats = DB::analytics()
 			->selectCount( 'DISTINCT(page)', 'posts' )
 			->selectSum( 'impressions', 'impressions' )
@@ -213,6 +241,8 @@ class Summary {
 		];
 		$stats->keywords = $this->get_keywords_summary();
 		$stats->graph    = $this->get_analytics_summary_graph();
+
+		$this->set_cache( $cache_key, $stats, $cache_group, DAY_IN_SECONDS );
 
 		$stats = apply_filters( 'rank_math/analytics/summary', $stats );
 		return array_filter( (array) $stats );

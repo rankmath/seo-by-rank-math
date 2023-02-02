@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.104.1
+Stable tag: 1.0.105
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -77,7 +77,7 @@ Rank Math's integrated LSI keyword tool gives you multiple keyword variations of
 Rank Math makes social thumbnails click magnets by giving you the option of overlaying a GIF or a video icon on the thumbnail.
 
 * **Advanced SEO Analysis Tool**
-With just a single click, Rank Math can perform an SEO audit of your website.
+With just a single click, Rank Math can perform an SEO Analyzer of your website.
 
 * **30 Detailed SEO Tests**
 Rank Math is designed to completely supercharge your website's SEO with its 30 detailed SEO tests. Free account needed.
@@ -583,12 +583,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.104 [Dec 19, 2022] =
-* Added: [HUGE!] Introducing [Table of Contents block](https://rankmath.com/kb/table-of-contents-block/) to automatically generate Table of Contents from the headings added to the page  
-* Fixed: PHP Warnings related to Analytics Widget on the Dashboard page
-* Fixed: [SEO Analysis](https://rankmath.com/kb/seo-analysis/) was not working on some sites where the `INPUT_SERVER` was not available
-
-= 1.0.104.1 [Dec 20, 2022] =
-* Fixed: Nested object properties added in the [Schema](https://rankmath.com/kb/schema-generator/) were not working well on some setups
+= 1.0.105 [Dec 28, 2022] =
+* Improved: [NEW!] Revamped the [SEO Analysis module](https://rankmath.com/kb/seo-analysis/) and renamed it to **SEO Analyzer** for a more intuitive user experience. Also, added two new features for PRO users: Competitor Analysis and Print Option
+* Improved: Significantly improved the performance of the schema shortcode database query on the frontend (upto 1000x faster, especially on larger sites)
+* Improved: Implemented lazy loading in the Analytics reports for faster loading
+* Improved: Improved the caching mechanism in the Analytics Module to speed up report loading
+* Improved: Performance related to the Open Graph code
+* Fixed: All separator characters were being removed from meta tags when a string ended with the %sep% variable
+* Fixed: [Table of Contents test](https://rankmath.com/kb/score-100-in-tests/#table-of-contents) was not recognizing the Rank Math's [Table of Contents block](https://rankmath.com/kb/table-of-contents-block/)
+* Fixed: Missing `InspectControls` error in the Table of Contents block when all heading levels were excluded
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

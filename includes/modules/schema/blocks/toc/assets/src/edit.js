@@ -104,6 +104,7 @@ export default ( {
 					label={ __( 'Table of Contents', 'rank-math' ) }
 					instructions={ __( 'Add Heading blocks to this page to generate the Table of Contents.', 'rank-math' ) }
 				/>
+				<InspectControls attributes={ attributes } setAttributes={ setAttributes } excludeHeadings={ excludeHeadings } setExcludeHeadings={ setExcludeHeadings } />
 			</div>
 		)
 	}

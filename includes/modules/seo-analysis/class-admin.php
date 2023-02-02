@@ -1,6 +1,6 @@
 <?php
 /**
- * The SEO Analysis module - admin side functionality.
+ * The SEO Analyzer module - admin side functionality.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -12,6 +12,7 @@ namespace RankMath\SEO_Analysis;
 
 use RankMath\Module\Base;
 use MyThemeShop\Admin\Page;
+use RankMath\KB;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -38,6 +39,8 @@ class Admin extends Base {
 			include_once 'seo-analysis-tests.php';
 			$this->analyzer = new SEO_Analyzer();
 		}
+
+		$this->action( 'rank_math/analyzer/results_header', 'add_print_button', 15, 0 );
 	}
 
 	/**
@@ -46,9 +49,14 @@ class Admin extends Base {
 	public function register_admin_page() {
 		$uri = untrailingslashit( plugin_dir_url( __FILE__ ) );
 
+		$new_label = '';
+		if ( ! get_option( 'rank_math_viewed_seo_analyer', false ) && strtotime( '28 December 2022' ) > get_option( 'rank_math_install_date' ) ) {
+			$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . esc_html__( 'New!', 'rank-math' ) . '</span>';
+		}
+
 		$this->page = new Page(
 			'rank-math-seo-analysis',
-			esc_html__( 'SEO Analysis', 'rank-math' ),
+			sprintf( esc_html__( 'SEO Analyzer %s', 'rank-math' ), $new_label ),
 			[
 				'position'   => 60,
 				'parent'     => 'rank-math',
@@ -67,5 +75,18 @@ class Admin extends Base {
 				],
 			]
 		);
+	}
+
+	/**
+	 * Add print button.
+	 */
+	public function add_print_button() {
+		?>
+		<a href="<?php KB::the( 'pro', 'SEO Analyzer Print Button' ); ?>" class="button button-secondary rank-math-print-results disabled" target="_blank">
+			<span class="dashicons dashicons-printer"></span>
+			<?php esc_html_e( 'Print', 'rank-math' ); ?>
+			<span class="rank-math-pro-badge">PRO</span>
+		</a>
+		<?php
 	}
 }

@@ -7,6 +7,7 @@ import { has } from 'lodash'
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n'
+import { useEffect } from '@wordpress/element'
 
 /**
  * Get schema object for builder based on data.
@@ -83,7 +84,40 @@ export function noDataMessage( title, text = '' ) {
 	)
 }
 
+/**
+ * Observe the element and check if element is intersected by user or not.
+ * It will update state passed by caller.
+ *
+ * @param {object} elementReference
+ * @param {array} state
+ *
+ * @return {*}
+ */
+export function elementObserver( elementReference, state ) {
+	const [ isIntersected, setIsIntersected ] = state;
+
+	useEffect( () => {
+		const element = elementReference.current
+		if ( !element ) {
+			return
+		}
+
+		// Callback function when element is intersected.
+		const callback = ( [firstElement] ) => {
+			if ( firstElement.isIntersecting && false === isIntersected ) {
+				setIsIntersected( true )
+			}
+		}
+
+		// Observe the element.
+		let observer = new IntersectionObserver( callback )
+		observer.observe( element )
+	}, [ isIntersected ] )
+
+	return isIntersected;
+}
+
 window.rankMath = window.rankMath || {}
 window.rankMath.analyticsHelpers = window.rankMath.analyticsHelpers || {}
 
-window.rankMath.analyticsHelpers = { translateText, convertValue, noDataMessage }
+window.rankMath.analyticsHelpers = { translateText, convertValue, noDataMessage, elementObserver }

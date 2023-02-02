@@ -114,20 +114,26 @@ class Database_Tools {
 	}
 
 	/**
-	 * Function to reset the SEO Analysis.
+	 * Function to reset the SEO Analyzer.
 	 */
 	public function clear_seo_analysis() {
 		$stored = get_option( 'rank_math_seo_analysis_results' );
 		if ( empty( $stored ) ) {
 			return [
 				'status'  => 'error',
-				'message' => __( 'SEO Analysis data has already been cleared.', 'rank-math' ),
+				'message' => __( 'SEO Analyzer data has already been cleared.', 'rank-math' ),
 			];
 		}
 
 		delete_option( 'rank_math_seo_analysis_results' );
+		delete_option( 'rank_math_seo_analysis_date' );
 
-		return __( 'SEO Analysis data successfully deleted.', 'rank-math' );
+		/**
+		 * Fires after SEO Analyzer data is cleared.
+		 */
+		do_action( 'rank_math/tools/clear_seo_analysis' );
+
+		return __( 'SEO Analyzer data successfully deleted.', 'rank-math' );
 	}
 
 	/**
@@ -347,9 +353,9 @@ class Database_Tools {
 
 		if ( Helper::is_module_active( 'seo-analysis' ) ) {
 			$tools['clear_seo_analysis'] = [
-				'title'       => __( 'Flush SEO Analysis Data', 'rank-math' ),
-				'description' => __( "Need a clean slate or not able to run the SEO Analysis tool? Flushing the analysis data might fix the issue. Flushing SEO Analysis data is entirely safe and doesn't remove any critical data from your website.", 'rank-math' ),
-				'button_text' => __( 'Clear SEO Analysis', 'rank-math' ),
+				'title'       => __( 'Flush SEO Analyzer Data', 'rank-math' ),
+				'description' => __( "Need a clean slate or not able to run the SEO Analyzer tool? Flushing the analysis data might fix the issue. Flushing SEO Analyzer data is entirely safe and doesn't remove any critical data from your website.", 'rank-math' ),
+				'button_text' => __( 'Clear SEO Analyzer', 'rank-math' ),
 			];
 		}
 

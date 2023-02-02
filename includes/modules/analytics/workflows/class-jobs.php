@@ -16,6 +16,7 @@ use RankMath\Google\Api;
 use RankMath\Google\Console;
 use RankMath\Google\Url_Inspection;
 use RankMath\Analytics\DB;
+use RankMath\Traits\Cache;
 use RankMath\Traits\Hooker;
 use RankMath\Analytics\Stats;
 use RankMath\Analytics\Watcher;
@@ -27,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Jobs {
 
-	use Hooker;
+	use Hooker, Cache;
 
 	/**
 	 * Main instance
@@ -173,9 +174,10 @@ class Jobs {
 
 		$rows = \array_map( [ $this, 'normalize_query_page_data' ], $rows );
 
-		try {
-			DB::add_query_page_bulk( $date, $rows );
-		} catch ( Exception $e ) {} // phpcs:ignore
+		// Clear the cache here.
+		$this->cache_flush_group( 'rank_math_rest_keywords_rows' );
+		$this->cache_flush_group( 'rank_math_posts_rows_by_objects' );
+		$this->cache_flush_group( 'rank_math_analytics_summary' );
 	}
 
 	/**
@@ -192,12 +194,12 @@ class Jobs {
 			return;
 		}
 
-		if( ! isset( $data['args']['startDate'] ) ) {
+		if ( ! isset( $data['args']['startDate'] ) ) {
 			return;
 		}
 
 		$dates = get_option( 'rank_math_console_empty_dates', [] );
-		if( ! $dates ) {
+		if ( ! $dates ) {
 			$dates = [];
 		}
 

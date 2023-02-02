@@ -8,28 +8,60 @@ import { TableCard } from '@woocommerce/components'
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { Fragment } from '@wordpress/element'
+import { Fragment, useRef, useState } from '@wordpress/element'
 import { applyFilters } from '@wordpress/hooks'
 import { withFilters } from '@wordpress/components'
-import { dispatch, withSelect } from '@wordpress/data'
+import { dispatch, withSelect, useSelect } from '@wordpress/data'
 
 /**
  * Internal dependencies
  */
 import humanNumber from '@helpers/humanNumber'
 import { processRows, getPageOffset, filterShownHeaders, withRouter } from '../functions'
-import { noDataMessage } from '../helpers'
+import { elementObserver, noDataMessage } from '../helpers'
 
 const TABLE_PREF_KEY = 'keywords'
 
 const KeywordsTable = ( props ) => {
-	const { rows, summary, query, navigate, userPreference } = props
+	const { query, navigate, userPreference } = props
+	const { paged = 1 } = query
+
+	// Component state.
+	const [ rows, setRows ] = useState( false )
+	const [ summary, setSummary ] = useState( false )
+	const intersectedState = useState( false )
+	const [ isIntersected ] = intersectedState
+
+	// Element reference.
+	const elementReference = useRef( null )
+	elementObserver( elementReference, intersectedState )
+
+	useSelect( ( select ) => {
+		if ( false === isIntersected ) {
+			return;
+		}
+
+		const responseRows = select( 'rank-math' ).getKeywordsRows( paged )
+		if ( ! isEmpty( responseRows ) && responseRows !== rows ) {
+			setRows( responseRows )
+		}
+
+		const responseSummary = select( 'rank-math' ).getKeywordsSummary()
+		if ( ! isEmpty( responseSummary ) && responseSummary !== summary ) {
+			setSummary( responseSummary )
+		}
+	}, [ isIntersected, paged, rows, summary ] )
+
 	if ( isUndefined( rows ) || isUndefined( summary ) ) {
 		return 'Loading'
 	}
 	const keywordRows = 'No Data' === rows.response ? [] : rows
 	if ( isEmpty( keywordRows ) ) {
-		return noDataMessage( __( 'Rest of the Keywords', 'rank-math' ) )
+		return (
+			<div ref={elementReference}>
+				{ noDataMessage( __( 'Rest of the Keywords', 'rank-math' ) ) }
+			</div>
+		)
 	}
 
 	const headers = applyFilters(
@@ -90,7 +122,6 @@ const KeywordsTable = ( props ) => {
 	]
 
 	const rowsPerPage = 25
-	const { paged = 1 } = query
 	const filteredHeaders = filterShownHeaders( headers, userPreference )
 	const onColumnsChange = ( columns, toggled ) => {
 		userPreference[ toggled ] = ! userPreference[ toggled ]
@@ -102,7 +133,7 @@ const KeywordsTable = ( props ) => {
 
 	return (
 		<Fragment>
-			<div className="rank-math-keyword-table">
+			<div className="rank-math-keyword-table" ref={elementReference}>
 				<TableCard
 					className="rank-math-table rank-math-analytics__card"
 					title={ __( 'Rest of the Keywords', 'rank-math' ) }
@@ -134,13 +165,10 @@ export default withRouter(
 	withFilters( 'rankMath.analytics.keywordsTable' )(
 		withSelect( ( select, props ) => {
 			const query = props.params
-			const { paged = 1 } = query
 
 			return {
 				query,
 				navigate: props.navigate,
-				rows: select( 'rank-math' ).getKeywordsRows( paged ),
-				summary: select( 'rank-math' ).getKeywordsSummary(),
 				userPreference: select( 'rank-math' ).getUserColumnPreference(
 					TABLE_PREF_KEY
 				),

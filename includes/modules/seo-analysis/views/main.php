@@ -1,6 +1,6 @@
 <?php
 /**
- * SEO Analysis admin page contents.
+ * SEO Analyzer admin page contents.
  *
  * @package   RANK_MATH
  * @author    Rank Math <support@rankmath.com>
@@ -9,53 +9,37 @@
  * @copyright 2019 Rank Math
  */
 
-use RankMath\KB;
+use MyThemeShop\Helpers\Param;
 use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-$assets   = plugin_dir_url( dirname( __FILE__ ) );
-$analyzer = Helper::get_module( 'seo-analysis' )->admin->analyzer;
+$current_tab  = Param::get( 'view', 'seo_analyzer' );
+$allowed_tabs = [ 'seo_analyzer', 'competitor_analyzer' ];
+if ( ! in_array( $current_tab, $allowed_tabs, true ) ) {
+	$current_tab = 'seo_analyzer';
+}
+
+$module   = Helper::get_module( 'seo-analysis' );
+$analyzer = $module->admin->analyzer;
+
+$tab_file = apply_filters( 'rank_math/seo_analysis/admin_tab_view', '', $current_tab );
 
 // Header.
 rank_math()->admin->display_admin_header();
 ?>
 
-<div class="wrap rank-math-wrap rank-math-seo-analysis-wrap">
+<div class="wrap rank-math-wrap rank-math-seo-analysis-wrap dashboard">
+	<span class="wp-header-end"></span>
 
-	<div class="container">
-
-		<header class="rank-math-box">
-			<h2>
-				<?php echo esc_html( get_admin_page_title() ); ?>
-				<a class="button button-secondary button-small" href="<?php KB::the( 'seo-analysis', 'SEO Start Analytics' ); ?>" target="_blank"><?php esc_html_e( 'What is this?', 'rank-math' ); ?></a>
-			</h2>
-			<?php if ( Helper::is_site_connected() && ! empty( $analyzer->results ) ) : ?>
-				<div>
-					<button data-what="website" class="button button-primary button-xlarge rank-math-recheck"><?php esc_html_e( 'Start Analysis Again', 'rank-math' ); ?></button>
-				</div>
-			<?php endif; ?>
-		</header>
-
-		<div class="rank-math-box rank-math-analyzer-result">
-
-			<span class="wp-header-end"></span>
-
-			<?php if ( Helper::is_site_connected() ) : ?>
-				<?php include dirname( __FILE__ ) . '/form.php'; ?>
-
-				<?php if ( ! $analyzer->analyse_subpage ) : ?>
-					<div class="rank-math-results-wrapper">
-						<?php $analyzer->display(); ?>
-					</div>
-				<?php endif; ?>
-
-			<?php else : ?>
-				<div class="rank-math-seo-analysis-header">
-					<?php // Translators: placeholders are opening and closing tag for link. ?>
-					<h3><?php echo wp_kses_post( sprintf( __( 'Analyze your site by %1$s linking your Rank Math account %2$s', 'rank-math' ), '<a href="' . Helper::get_connect_url() . '" target="_blank">', '</a>' ) ); ?>
-				</div>
-			<?php endif; ?>
-		</div>
-	</div><!--.container-->
+	<?php $analyzer->admin_tabs(); ?>
+	<div class="rank-math-ui dashboard-wrapper seo-analysis <?php echo esc_attr( $current_tab ); ?>">
+		<?php
+		if ( $tab_file && file_exists( $tab_file ) ) {
+			include_once $tab_file;
+		} else {
+			include_once dirname( __FILE__ ) . '/seo-analyzer.php';
+		}
+		?>
+	</div><!--.rank-math-ui.module-listing.dashboard-wrapper-->
 </div>

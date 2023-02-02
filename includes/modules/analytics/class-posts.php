@@ -104,6 +104,13 @@ class Posts extends Objects {
 			return $pre;
 		}
 
+		$cache_group = 'rank_math_posts_rows_by_objects';
+		$cache_key   = $this->generate_hash( $request );
+		$data        = $this->get_cache( $cache_key, $cache_group );
+		if ( false !== $data ) {
+			return rest_ensure_response( $data );
+		}
+
 		// Pagination.
 		$per_page = 25;
 		$offset   = ( $request->get_param( 'page' ) - 1 ) * $per_page;
@@ -147,9 +154,14 @@ class Posts extends Objects {
 		if ( empty( $new_rows ) ) {
 			$new_rows['response'] = 'No Data';
 		}
-		return [
+
+		$output = [
 			'rows'      => $new_rows,
 			'rowsFound' => $objects['rowsFound'],
 		];
+
+		$this->set_cache( $cache_key, $output, $cache_group, DAY_IN_SECONDS );
+
+		return rest_ensure_response( $output );
 	}
 }
