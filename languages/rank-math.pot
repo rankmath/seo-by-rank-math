@@ -1,4 +1,4 @@
-# Copyright (C) 2022 rank-math
+# Copyright (C) 2023 rank-math
 # This file is distributed under the same license as the rank-math package.
 msgid ""
 msgstr ""
@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2022-12-28 08:37+0000\n"
+"POT-Creation-Date: 2023-01-11 03:31+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -278,6 +278,9 @@ msgstr ""
 msgid "Facebook profile URL"
 msgstr ""
 
+msgid "Additional profile URLs"
+msgstr ""
+
 msgid "The canonical URL you entered does not seem to be a valid URL. Please double check it in the SEO meta box &raquo; Advanced tab."
 msgstr ""
 
@@ -291,6 +294,9 @@ msgid "You are not authorized to perform this action."
 msgstr ""
 
 msgid "Exclusive Offer!"
+msgstr ""
+
+msgid "Additional Profiles to add in the <code>sameAs</code> Schema property."
 msgstr ""
 
 #. translators: placeholder is the plugin name.
@@ -573,7 +579,7 @@ msgid "Social Meta"
 msgstr ""
 
 #. translators: Link to social setting KB article
-msgid "Add social meta to your website's Schema for Knowledge Graph cards. %s."
+msgid "Add social account information to your website's Schema and Open Graph. %s."
 msgstr ""
 
 msgid "Homepage"
@@ -2046,6 +2052,9 @@ msgid "Import AIO SEO plugin settings, global meta, sitemap settings, etc."
 msgstr ""
 
 msgid "Import meta information of your posts/pages like the titles, descriptions, robots meta, OpenGraph info, etc."
+msgstr ""
+
+msgid "Import Social URLs of your author archive pages."
 msgstr ""
 
 msgid "Import meta information of your terms like the titles, descriptions, robots meta, OpenGraph info, etc."
@@ -4616,6 +4625,9 @@ msgid "Twitter Username"
 msgstr ""
 
 msgid "Enter the Twitter username of the author to add <code>twitter:creator</code> tag to posts. eg: <code>RankMathSEO</code>"
+msgstr ""
+
+msgid "Additional Profiles"
 msgstr ""
 
 #. translators: taxonomy name

@@ -152,7 +152,7 @@ class Option_Center implements Runner {
 				'icon'  => 'rm-icon rm-icon-social',
 				'title' => esc_html__( 'Social Meta', 'rank-math' ),
 				/* translators: Link to social setting KB article */
-				'desc'  => sprintf( esc_html__( "Add social meta to your website's Schema for Knowledge Graph cards. %s.", 'rank-math' ), '<a href="' . KB::get( 'social-meta-settings', 'Options Panel Meta Social Tab' ) . '" target="_blank">' . esc_html__( 'Learn More', 'rank-math' ) . '</a>' ),
+				'desc'  => sprintf( esc_html__( "Add social account information to your website's Schema and Open Graph. %s.", 'rank-math' ), '<a href="' . KB::get( 'social-meta-settings', 'Options Panel Meta Social Tab' ) . '" target="_blank">' . esc_html__( 'Learn More', 'rank-math' ) . '</a>' ),
 			],
 			'homepage' => [
 				'icon'  => 'rm-icon rm-icon-home',

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames'
-import { get, startCase, map as mapProperties, isUndefined } from 'lodash'
+import { get, startCase, map as mapProperties, isUndefined, isEmpty } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -38,7 +38,7 @@ const SchemaGroup = ( props ) => {
 	}
 
 	const { parentId, isCustom, isPro, isMain = false } = props
-	const { id, property, properties, map } = props.data
+	const { id, property, properties, map, metadata } = props.data
 	const { addProperty, addGroup, removeGroup, propertyChange, duplicateGroup } = props.actions
 	const field = get( map, 'field', { label: false } )
 	const containerClasses = classnames(
@@ -86,7 +86,7 @@ const SchemaGroup = ( props ) => {
 						return (
 							<div className="schema-property--field">
 								<TextControl
-									value={ value }
+									value={ ! isUndefined( metadata ) && ! isEmpty( metadata.title ) ? metadata.title : value }
 									disabled={ ! isPro }
 									onChange={ ( newProperty ) => {
 										propertyChange( id, 'property', newProperty )

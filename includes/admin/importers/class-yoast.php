@@ -691,6 +691,15 @@ class Yoast extends Plugin_Importer {
 			if ( empty( $this->get_meta( 'user', $userid, 'rank_math_robots' ) ) && get_user_meta( $userid, 'wpseo_noindex_author', true ) ) {
 				update_user_meta( $userid, 'rank_math_robots', [ 'noindex' ] );
 			}
+
+			$social_urls = [];
+			foreach ( ['linkedin', 'myspace', 'pinterest', 'instagram', 'soundcloud', 'tumblr', 'youtube', 'wikipedia'] as $key ) {
+				$social_urls[] = get_user_meta( $userid, $key, true );
+			}
+
+			if ( ! empty( $social_urls ) ) {
+				update_user_meta( $userid, 'additional_profile_urls', implode( ' ', array_filter( $social_urls ) ) );
+			}
 		}
 
 		return $this->get_pagination_arg();
@@ -1151,6 +1160,10 @@ class Yoast extends Plugin_Importer {
 			'twitter_site'  => 'twitter_author_names',
 			'fbadminapp'    => 'facebook_app_id',
 		];
+
+		if ( ! empty( $yoast_social['other_social_urls'] ) ) {
+			$this->titles['social_additional_profiles'] = implode( PHP_EOL, $yoast_social['other_social_urls'] );
+		}
 		$this->replace( $hash, $yoast_social, $this->titles );
 	}
 

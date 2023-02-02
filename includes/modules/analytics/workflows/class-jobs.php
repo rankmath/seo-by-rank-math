@@ -174,10 +174,14 @@ class Jobs {
 
 		$rows = \array_map( [ $this, 'normalize_query_page_data' ], $rows );
 
-		// Clear the cache here.
-		$this->cache_flush_group( 'rank_math_rest_keywords_rows' );
-		$this->cache_flush_group( 'rank_math_posts_rows_by_objects' );
-		$this->cache_flush_group( 'rank_math_analytics_summary' );
+		try {
+			DB::add_query_page_bulk( $date, $rows );
+
+			// Clear the cache here.
+			$this->cache_flush_group( 'rank_math_rest_keywords_rows' );
+			$this->cache_flush_group( 'rank_math_posts_rows_by_objects' );
+			$this->cache_flush_group( 'rank_math_analytics_summary' );
+		} catch ( Exception $e ) {} // phpcs:ignore
 	}
 
 	/**

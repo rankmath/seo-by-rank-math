@@ -68,7 +68,7 @@ const processData = ( data ) => {
 
 	if ( 'metadata' in data ) {
 		schema.metadata = { ...data.metadata }
-		schema.metadata.title = data.property
+		schema.metadata.title = schema.metadata.title ? schema.metadata.title : data.property
 	}
 
 	map( data.properties, ( property ) => {

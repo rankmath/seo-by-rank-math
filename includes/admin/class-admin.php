@@ -12,6 +12,7 @@ namespace RankMath\Admin;
 
 use RankMath\Runner;
 use RankMath\Helper;
+use RankMath\Admin\Admin_Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Str;
@@ -35,6 +36,7 @@ class Admin implements Runner {
 	public function hooks() {
 		$this->action( 'init', 'flush', 999 );
 		$this->filter( 'user_contactmethods', 'update_user_contactmethods' );
+		$this->action( 'admin_footer', 'convert_additional_profile_url_to_textarea' );
 		$this->action( 'save_post', 'canonical_check_notice' );
 		$this->action( 'cmb2_save_options-page_fields', 'update_is_configured_value', 10, 2 );
 		$this->filter( 'action_scheduler_pastdue_actions_check_pre', 'as_exclude_pastdue_actions' );
@@ -66,8 +68,9 @@ class Admin implements Runner {
 	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 */
 	public function update_user_contactmethods( $contactmethods ) {
-		$contactmethods['twitter']  = esc_html__( 'Twitter username (without @)', 'rank-math' );
-		$contactmethods['facebook'] = esc_html__( 'Facebook profile URL', 'rank-math' );
+		$contactmethods['twitter']                 = esc_html__( 'Twitter username (without @)', 'rank-math' );
+		$contactmethods['facebook']                = esc_html__( 'Facebook profile URL', 'rank-math' );
+		$contactmethods['additional_profile_urls'] = esc_html__( 'Additional profile URLs', 'rank-math' );
 
 		return $contactmethods;
 	}
@@ -395,5 +398,40 @@ class Admin implements Runner {
 				<span><?php esc_attr_e( 'Exclusive Offer!', 'rank-math' ); ?></span>
 			</a>
 		<?php }
+	}
+
+	/**
+	 * Code to convert Addiontal Profile URLs from input type text to textarea.
+	 */
+	public function convert_additional_profile_url_to_textarea() {
+		if ( ! Admin_Helper::is_user_edit() ) {
+			return;
+		}
+
+		$field_description = wp_kses_post( __( 'Additional Profiles to add in the <code>sameAs</code> Schema property.', 'rank-math' ) );
+		?>
+		<script type="text/javascript">
+			( function( $ ) {
+				$( function() {
+					const twitterWrapper = $( '.user-twitter-wrap' );
+					twitterWrapper.before( '<tr><th><h2 style="margin: 0;">Rank Math SEO</h2></th><td></td></tr>' );
+
+					const additionalProfileField = $( '#additional_profile_urls' );
+					if ( ! additionalProfileField.length ) {
+						return
+					}
+
+					var $txtarea = $( '<textarea />' );
+					$txtarea.attr( 'id', additionalProfileField[0].id );
+					$txtarea.attr( 'name', additionalProfileField[0].name );
+					$txtarea.attr( 'rows', 5 );
+					$txtarea.val( additionalProfileField[0].value.replaceAll( " ", "\n" ) );
+					additionalProfileField.replaceWith( $txtarea );
+
+					$( '<p class="description"><?php echo $field_description; ?></p>' ).insertAfter( $txtarea );
+				} );
+			})(jQuery);
+		</script>
+		<?php
 	}
 }

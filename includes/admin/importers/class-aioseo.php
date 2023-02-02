@@ -49,7 +49,7 @@ class AIOSEO extends Plugin_Importer {
 	 *
 	 * @var array
 	 */
-	protected $choices = [ 'settings', 'postmeta', 'termmeta', 'redirections', 'locations' ];
+	protected $choices = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'locations' ];
 
 	/**
 	 * Get the actions which can be performed for the plugin.
@@ -60,6 +60,7 @@ class AIOSEO extends Plugin_Importer {
 		$choices = [
 			'settings' => esc_html__( 'Import Settings', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import AIO SEO plugin settings, global meta, sitemap settings, etc.', 'rank-math' ) ),
 			'postmeta' => esc_html__( 'Import Post Meta', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import meta information of your posts/pages like the titles, descriptions, robots meta, OpenGraph info, etc.', 'rank-math' ) ),
+			'usermeta' => esc_html__( 'Import Author Meta', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import Social URLs of your author archive pages.', 'rank-math' ) ),
 		];
 
 		if ( DB::check_table_exists( 'aioseo_terms' ) ) {
@@ -552,6 +553,23 @@ class AIOSEO extends Plugin_Importer {
 			'image'       => 'homepage_facebook_image',
 		];
 		$this->replace( $hash, $this->aio_settings['social']['facebook']['homePage'], $this->titles );
+
+		$profiles        = $this->aio_settings['social']['profiles'];
+		$profile_urls    = $profiles['urls'];
+		$fb_url          = $profile_urls['facebookPageUrl'];
+		$tw_url          = $profile_urls['twitterUrl'];
+		$additional_urls = $profiles['additionalUrls'];
+
+		$profile_urls = array_map( function( $url ) use( $fb_url, $tw_url ) {
+			return $url !== $fb_url && $url !== $tw_url ? $url : false;
+		} , $profile_urls );
+
+		$urls = array_filter( array_values( $profile_urls ) );
+		array_merge( $urls, explode( "\n", $additional_urls ) );
+
+		$this->titles['social_additional_profiles'] = implode( PHP_EOL, $urls );
+		$this->titles['social_url_facebook']        = $fb_url;
+		$this->titles['twitter_author_names']       = str_replace( 'https://twitter.com/', '', $tw_url );
 	}
 
 	/**
@@ -745,6 +763,52 @@ class AIOSEO extends Plugin_Importer {
 		}
 
 		return [ 'count' => count( $terms ) ];
+	}
+
+	/**
+	 * Import user meta of plugin.
+	 *
+	 * @return array
+	 */
+	protected function usermeta() {
+		$this->set_pagination( $this->get_user_ids( true ) );
+		$user_ids = $this->get_user_ids();
+
+		$hash = [
+			'wpseo_title'    => 'rank_math_title',
+			'wpseo_desc'     => 'rank_math_description',
+			'wpseo_metadesc' => 'rank_math_description',
+		];
+
+		foreach ( $user_ids as $user ) {
+			$userid = $user->ID;
+
+			$facebook_url = get_user_meta( $userid, 'aioseo_facebook_page_url', true );
+			if ( $facebook_url ) {
+				update_user_meta( $userid, 'facebook', $facebook_url );
+			}
+
+			$twitter_url = get_user_meta( $userid, 'aioseo_twitter_url', true );
+			if ( $twitter_url ) {
+				update_user_meta( $userid, 'twitter', str_replace( 'https://twitter.com/', '', $twitter_url ) );
+			}
+
+			$social_urls = [];
+			foreach ( ['aioseo_instagram_url', 'aioseo_pinterest_url', 'aioseo_youtube_url', 'aioseo_linkedin_url', 'aioseo_tumblr_url', 'aioseo_yelp_page_url', 'aioseo_sound_cloud_url', 'aioseo_wikipedia_url', 'aioseo_myspace_url'] as $key ) {
+				$social_urls[] = get_user_meta( $userid, $key, true );
+			}
+
+			$additional_urls = get_user_meta( 4, 'aioseo_profiles_additional_urls', true );
+			if ( $additional_urls ) {
+				$social_urls = array_merge( $social_urls, explode( "\n", $additional_urls ) );
+			}
+
+			if ( ! empty( $social_urls ) ) {
+				update_user_meta( $userid, 'additional_profile_urls', implode( ' ', array_filter( $social_urls ) ) );
+			}
+		}
+
+		return $this->get_pagination_arg();
 	}
 
 	/**

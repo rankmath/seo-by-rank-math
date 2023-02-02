@@ -128,11 +128,6 @@ class Database_Tools {
 		delete_option( 'rank_math_seo_analysis_results' );
 		delete_option( 'rank_math_seo_analysis_date' );
 
-		/**
-		 * Fires after SEO Analyzer data is cleared.
-		 */
-		do_action( 'rank_math/tools/clear_seo_analysis' );
-
 		return __( 'SEO Analyzer data successfully deleted.', 'rank-math' );
 	}
 

@@ -225,7 +225,7 @@ class DB {
 		$schema = maybe_unserialize( $data->meta_value );
 
 		return [
-			'type'   => $schema['@type'],
+			'type'   => isset( $schema['@type'] ) ? $schema['@type'] : '',
 			'schema' => $schema,
 		];
 	}

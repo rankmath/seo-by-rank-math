@@ -17,6 +17,7 @@ use MyThemeShop\Helpers\Url;
 use MyThemeShop\Helpers\Conditional;
 use MyThemeShop\Helpers\WordPress;
 use MyThemeShop\Helpers\Str;
+use MyThemeShop\Helpers\Arr;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -282,7 +283,7 @@ class JsonLD {
 			}
 
 			// Need this conditions to convert date to valid ISO 8601 format.
-			if ( 'datePublished' === $key && '%date(Y-m-dTH:i:sP)%' === $schema ) {
+			if ( in_array( $key, ['datePublished', 'uploadDate'], true ) && '%date(Y-m-dTH:i:sP)%' === $schema ) {
 				$schema = '%date(Y-m-d\TH:i:sP)%';
 			}
 			if ( 'dateModified' === $key && '%modified(Y-m-dTH:i:sP)%' === $schema ) {
@@ -769,5 +770,26 @@ class JsonLD {
 		}
 
 		$this->parts = $parts;
+	}
+
+	/**
+	 * Get global social profile URLs, to use in the `sameAs` property.
+	 *
+	 * @link https://developers.google.com/webmasters/structured-data/customize/social-profiles
+	 */
+	public function get_social_profiles() {
+		$profiles = [ Helper::get_settings( 'titles.social_url_facebook' ) ];
+
+		$twitter = Helper::get_settings( 'titles.twitter_author_names' );
+		if ( $twitter ) {
+			$profiles[] = "https://twitter.com/$twitter";
+		}
+
+		$addional_profiles = Helper::get_settings( 'titles.social_additional_profiles' );
+		if ( ! empty( $addional_profiles ) ) {
+			$profiles = array_merge( $profiles, Arr::from_string( $addional_profiles, "\n" ) );
+		}
+
+		return array_values( array_filter( $profiles ) );
 	}
 }

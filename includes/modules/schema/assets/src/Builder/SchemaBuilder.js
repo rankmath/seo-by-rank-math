@@ -4,7 +4,7 @@
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import jQuery from 'jquery'
-import { get, cloneDeep, forEach, isArray, isEmpty, has } from 'lodash'
+import { get, cloneDeep, forEach, isArray, isEmpty, has, isUndefined } from 'lodash'
 import { v4 as uuid } from 'uuid'
 
 /**
@@ -180,9 +180,9 @@ class SchemaBuilder extends Component {
 	/**
 	 * Duplicate group.
 	 *
-	 * @param  {string} groupId  Group id to duplicate.
-	 * @param  {string} parentId Parent group id to insert into.
-	 * @param  {Object} group    Group data.
+	 * @param {string} groupId  Group id to duplicate.
+	 * @param {string} parentId Parent group id to insert into.
+	 * @param {Object} group    Group data.
 	 */
 	duplicateGroup = ( groupId, parentId, group ) => {
 		const data = { ...this.state.data }
@@ -199,9 +199,9 @@ class SchemaBuilder extends Component {
 	/**
 	 * Duplicate property.
 	 *
-	 * @param  {string} propertyId Property id to duplicate.
-	 * @param  {string} parentId   Parent group id to insert into.
-	 * @param  {Object} property   Property data.
+	 * @param {string} propertyId Property id to duplicate.
+	 * @param {string} parentId   Parent group id to insert into.
+	 * @param {Object} property   Property data.
 	 */
 	duplicateProperty = ( propertyId, parentId, property ) => {
 		const data = { ...this.state.data }
@@ -220,8 +220,8 @@ class SchemaBuilder extends Component {
 	/**
 	 * Remove group from schema.
 	 *
-	 * @param  {string} groupId  Group id to remove.
-	 * @param  {string} parentId Parent group id to remove from.
+	 * @param {string} groupId  Group id to remove.
+	 * @param {string} parentId Parent group id to remove from.
 	 */
 	removeGroup = ( groupId, parentId ) => {
 		const data = { ...this.state.data }
@@ -244,8 +244,8 @@ class SchemaBuilder extends Component {
 	/**
 	 * Remove property from schema.
 	 *
-	 * @param  {string} propertyId Property id to remove.
-	 * @param  {string} parentId   Parent group id to remove from.
+	 * @param {string} propertyId Property id to remove.
+	 * @param {string} parentId   Parent group id to remove from.
 	 */
 	removeProperty = ( propertyId, parentId ) => {
 		const data = { ...this.state.data }
@@ -261,9 +261,9 @@ class SchemaBuilder extends Component {
 	/**
 	 * Update property data.
 	 *
-	 * @param  {string} propertyId Property or Group id to update.
-	 * @param  {string} property   Property name to update.
-	 * @param  {string} value      Property value.
+	 * @param {string} propertyId Property or Group id to update.
+	 * @param {string} property   Property name to update.
+	 * @param {string} value      Property value.
 	 */
 	propertyChange = ( propertyId, property, value ) => {
 		const data = { ...this.state.data }
@@ -273,9 +273,13 @@ class SchemaBuilder extends Component {
 			data.metadata[ parent.property ] = value
 		}
 
+		if ( 'property' === property && ! isUndefined( parent.metadata ) ) {
+			parent.metadata.title = value
+		}
+
 		this.setState( { data } )
 
-		doAction( 'rank_math_property_changed', data, parent, this.setState )
+		doAction( 'rank_math_property_changed', data, parent, this.setState, property, value, this.state )
 	}
 }
 

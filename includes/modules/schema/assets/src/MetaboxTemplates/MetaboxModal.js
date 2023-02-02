@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
 import { Modal } from '@wordpress/components'
 import { withSelect } from '@wordpress/data'
+import { applyFilters } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -33,9 +34,14 @@ const MetaboxModal = ( { isOpen = false, isCutomSchema } ) => {
 		'rank-math-schema-modal-no-map': 'custom' === isCutomSchema,
 	} )
 
+	/**
+	 * Filter the modal title.
+	 */
+	const title = applyFilters( 'rank_math_schema_modal_title', __( 'Select Schema', 'rank-math' ) )
+
 	return (
 		<Modal
-			title={ __( 'Select Schema', 'rank-math' ) }
+			title={ title }
 			closeButtonLabel={ __( 'Close', 'rank-math' ) }
 			shouldCloseOnClickOutside={ false }
 			className={ containerClasses }
