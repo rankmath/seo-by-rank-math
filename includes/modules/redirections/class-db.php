@@ -280,7 +280,11 @@ class DB {
 		}
 
 		// Exist by ID.
-		return self::get_redirection_by_id( $data['id'] );
+		if ( ! empty( $data['id'] ) ) {
+			return self::get_redirection_by_id( $data['id'] );
+		}
+
+		return false;
 	}
 
 	/**

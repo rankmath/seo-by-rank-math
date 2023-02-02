@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2022-12-02 15:12+0000\n"
+"POT-Creation-Date: 2022-12-19 11:23+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -2786,6 +2786,12 @@ msgstr ""
 msgid "You have used all the free credits which are allowed to this domain."
 msgstr ""
 
+#. translators: placeholder is the number of modified posts.
+msgid "Blocks successfully converted in %d post."
+msgid_plural "Blocks successfully converted in %d posts."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "No Rank Math transients found."
 msgstr ""
 
@@ -2882,13 +2888,22 @@ msgstr ""
 msgid "Yoast Block Converter"
 msgstr ""
 
-msgid "Convert FAQ & HowTo Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math."
+msgid "Convert FAQ, HowTo, & Table of Contents Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math."
 msgstr ""
 
 msgid "Are you sure you want to convert Yoast blocks into Rank Math blocks? This action is irreversible."
 msgstr ""
 
 msgid "Convert Blocks"
+msgstr ""
+
+msgid "AIOSEO Block Converter"
+msgstr ""
+
+msgid "Convert TOC block created using AIOSEO. Use this option to easily move your previous blocks into Rank Math."
+msgstr ""
+
+msgid "Are you sure you want to convert AIOSEO blocks into Rank Math blocks? This action is irreversible."
 msgstr ""
 
 msgid "Delete Internal Links Data"
@@ -2947,12 +2962,6 @@ msgstr ""
 
 msgid "Close"
 msgstr ""
-
-#. translators: placeholder is the number of modified posts.
-msgid "Blocks successfully converted in %d post."
-msgid_plural "Blocks successfully converted in %d posts."
-msgstr[0] ""
-msgstr[1] ""
 
 msgid "Images"
 msgstr ""
@@ -5433,6 +5442,12 @@ msgstr ""
 msgid "Toggle All"
 msgstr ""
 
+msgid "Blocks"
+msgstr ""
+
+msgid "Take control over the default settings available for Rank Math Blocks."
+msgstr ""
+
 #. translators: %d is the number of days.
 msgid "%d day"
 msgid_plural "%d days"
@@ -5980,6 +5995,51 @@ msgid "Last ###PERIOD_DAYS### Days"
 msgstr ""
 
 msgid "Data Chart"
+msgstr ""
+
+msgid "Table of Contents Title"
+msgstr ""
+
+msgid "Enter the default title to use for the Table of Contents block."
+msgstr ""
+
+msgid "Table of Contents"
+msgstr ""
+
+msgid "Table of Contents List style"
+msgstr ""
+
+msgid "Select the default list style for the Table of Contents block."
+msgstr ""
+
+msgid "Numbered"
+msgstr ""
+
+msgid "Unordered"
+msgstr ""
+
+msgid "Table of Contents Exclude Headings"
+msgstr ""
+
+msgid "Choose the headings to exclude from the Table of Contents block."
+msgstr ""
+
+msgid "Heading H1"
+msgstr ""
+
+msgid "Heading H2"
+msgstr ""
+
+msgid "Heading H3"
+msgstr ""
+
+msgid "Heading H4"
+msgstr ""
+
+msgid "Heading H5"
+msgstr ""
+
+msgid "Heading H6"
 msgstr ""
 
 msgid "Top 3 Positions"

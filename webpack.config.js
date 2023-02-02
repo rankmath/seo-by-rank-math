@@ -122,6 +122,9 @@ const entryPoints = {
 		'schema-gutenberg': './includes/modules/schema/assets/src/index.js',
 		'schema-template': './includes/modules/schema/assets/src/metabox-template.js',
 	},
+	toc: {
+		index: './includes/modules/schema/blocks/toc/assets/src/index.js',
+	},
 	divi: {
 		divi: './includes/3rdparty/divi/assets/src/divi.js',
 		'divi-iframe': './includes/3rdparty/divi/assets/src/divi-iframe.js',
@@ -152,6 +155,7 @@ const paths = {
 	status: './includes/modules/status/assets/js',
 	'version-control': './includes/modules/version-control/assets/js',
 	'content-ai': './includes/modules/content-ai/assets/js',
+	toc: './includes/modules/schema/blocks/toc/assets/js',
 }
 
 module.exports = ( env ) => {

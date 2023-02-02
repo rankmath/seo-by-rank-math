@@ -301,9 +301,28 @@ class Helper {
 			'::1', // IPv6 address.
 		];
 
+		return in_array( self::get_remote_addr(), $whitelist, true );
+	}
+
+	/**
+	 * Get IP address from which the user is viewing the current page.
+	 *
+	 * @return string
+	 */
+	public static function get_remote_addr() {
 		$ip = filter_input( INPUT_SERVER, 'REMOTE_ADDR', FILTER_VALIDATE_IP );
 
-		return in_array( $ip, $whitelist, true );
+		// INPUT_SERVER is not available on some hosts, let's try INPUT_ENV.
+		if ( ! $ip ) {
+			$ip = filter_input( INPUT_ENV, 'REMOTE_ADDR', FILTER_VALIDATE_IP );
+		}
+
+		// If we still don't have it, try to get it from the $_SERVER global.
+		if ( ! $ip && isset( $_SERVER['REMOTE_ADDR'] ) ) {
+			$ip = filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP );
+		}
+
+		return $ip ? $ip : '';
 	}
 
 	/**

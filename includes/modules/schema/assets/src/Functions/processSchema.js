@@ -13,7 +13,7 @@ import { applyFilters } from '@wordpress/hooks'
  *
  * This function includes filters to modify property value.
  *
- * @param  {Object} property Property of which value to process.
+ * @param {Object} property Property of which value to process.
  * @return {string} Processed value.
  */
 const processValues = ( property ) => {
@@ -37,7 +37,7 @@ const processValues = ( property ) => {
 /**
  * Get property value or default value.
  *
- * @param  {Object} property Property of which value to process.
+ * @param {Object} property Property of which value to process.
  * @return {string} Processed value.
  */
 const getValue = ( property ) => {
@@ -56,7 +56,7 @@ const getValue = ( property ) => {
 /**
  * Process schema from maps to json.
  *
- * @param  {Object} data schema as maps.
+ * @param {Object} data schema as maps.
  * @return {Object} Converted schema.
  */
 const processData = ( data ) => {
@@ -75,7 +75,7 @@ const processData = ( data ) => {
 		const canSave = get( property, 'map.save', true )
 		const isHidden = get( property, 'map.isHidden', false )
 
-		if ( ! isEmpty( property.properties ) && ! isEmpty( property.properties[ 0 ] ) && ! isEmpty( property.properties[ 0 ].properties ) ) {
+		if ( ! isEmpty( property.properties ) && ! isEmpty( property.properties[ 0 ] ) ) {
 			property.map.isArray = true
 		}
 
@@ -138,7 +138,7 @@ const processData = ( data ) => {
 /**
  * Process schema from maps to json.
  *
- * @param  {Object} data schema as maps.
+ * @param {Object} data schema as maps.
  * @return {Object} Converted schema.
  */
 export function processSchema( data ) {

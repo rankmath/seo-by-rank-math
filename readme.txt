@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.103.1
+Stable tag: 1.0.104
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,28 +583,9 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.103 [Nov 30, 2022] =
-* Added: [NEW!] [HTML Sitemaps](https://rankmath.com/kb/html-sitemap/?play-video=Euw7qS4IRXM) are here for everyone!
-* Added: Option to enable/disable [Author Sitemap](https://rankmath.com/kb/configure-sitemaps/#authors)
-* Added: Back button in the [Content AI Panel](https://rankmath.com/kb/how-to-use-content-ai/#open-content-ai-panel) to get back to the SEO Controls without reloading the page
-* Improved: [HUGE!] [SEO Tests](https://rankmath.com/kb/score-100-in-tests/) & [Content AI](https://rankmath.com/kb/how-to-use-content-ai/) tests run much faster than ever
-* Improved: [HUGE!] Performance by preventing unnecessary calls for the `getFeaturedImageId` REST endpoint in the [Divi Editor](https://rankmath.com/kb/seo-meta-tags/#divi)
-* Fixed: Visual bug in the date field of [Schema Generator](https://rankmath.com/kb/schema-generator/)
-* Fixed: Query strings added to the attachment URL using the Open Graph Image [filter](https://rankmath.com/kb/filters-hooks-api-developer/#change-opengraph-image) were getting removed
-* Fixed: Incorrect [description](https://rankmath.com/kb/variables-in-seo-title-description/#num-18-post-excerpt) was generated when multiple keywords were used in the post
-* Fixed: [Capitalize Title](https://rankmath.com/kb/titles-and-meta/#capitalize-titles) option was not working well when an apostrophe was used in the title
-* Fixed: [Google Trends tool](https://rankmath.com/kb/keyword-research-with-rank-math/#google-trends) was not displaying the popup in the Elementor Editor after switching tabs
-* Fixed: [Recalculate SEO score tool](https://rankmath.com/kb/seo-score-not-available/#database-tools) was not detecting the ALT text added to the post thumbnail
-* Fixed: Position of the toggle options in [Rank Math's Meta Box](https://rankmath.com/kb/on-page-seo/#num-3-in-classic-editor) at Classic Editor
-* Fixed: Missing font icons in Divi & Elementor Editor when Schema & Content AI modules are disabled
-* Fixed: Content AI REST endpoints were showing 404 error on some setups
-* Fixed: Sitemap cache not being cleared after setting a post to `noindex`
-* Fixed: Deprecated function used in the plugin
-
-= 1.0.103.1 [Dec 02, 2022] =
-* Improved: Refactored the Analytics Token regeneration code to avoid Google account disconnections
-* Improved: The Analytics data fetch will now only import data for dates on which data exists, reducing the time required to import the data
-* Improved: Clear pending background cron jobs related to Analytics if data import fails
-* Fixed: [Keyword in Image Alt attribute](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-image-alt-attributes-primary-focus-keyword-only) test now works properly when additional text is present in the Alt tag for improving [Image SEO](https://rankmath.com/kb/image-seo/)
+= 1.0.104 [Dec 19, 2022] =
+* Added: [HUGE!] Introducing [Table of Contents block](https://rankmath.com/kb/table-of-contents-block/) to automatically generate Table of Contents from the headings added to the page  
+* Fixed: PHP Warnings related to Analytics Widget on the Dashboard page
+* Fixed: [SEO Analysis](https://rankmath.com/kb/seo-analysis/) was not working on some sites where the `INPUT_SERVER` was not available
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

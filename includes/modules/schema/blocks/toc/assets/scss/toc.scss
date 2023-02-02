@@ -1,0 +1,65 @@
+@import '../../../../../../../assets/admin/scss/font-icons';
+
+@font-face {
+	font-family: 'Rank-Math';
+	font-weight: normal;
+	font-style: normal;
+
+	font-display: block;
+	src: url('../../../../../../../assets/admin/fonts/Rank-Math.ttf?v1.0.76') format('truetype'),
+	url('../../../../../../../assets/admin/fonts/Rank-Math.woff?v1.0.76') format('woff'),
+	url('../../../../../../../assets/admin/fonts/Rank-Math.svg?v1.0.76#Rank-Math') format('svg');
+}
+
+.wp-block-rank-math-toc-block {
+	nav {
+		li, div {
+			position: relative;
+			min-height: 28px;
+			margin-bottom: 0;
+
+			&.disabled {
+				display: block !important;
+				opacity: 0.5;
+			}
+
+			.components-base-control {
+				position: absolute;
+				top: 2px;
+				left: -4px;
+				right: -3px;
+			}
+
+			.rank-math-block-actions {
+				position: absolute;
+				top: 1px;
+				right: 0;
+				display: none;
+				line-height: 1;
+
+				button.components-button {
+					min-width: 24px;
+					width: 24px;
+					height: 24px;
+					line-height: 34px;
+				}				
+			}
+
+			&:hover, &:focus, .components-base-control + .rank-math-block-actions {
+				.rank-math-block-actions {
+					display: block;
+				}
+			}
+		}
+	}
+}
+
+.rank-math-toc-exclude-headings {
+	display: flex;
+	flex-wrap: wrap;
+
+	> div {
+		flex: 0 0 50%;
+		margin-bottom: 10px!important;
+	}
+}

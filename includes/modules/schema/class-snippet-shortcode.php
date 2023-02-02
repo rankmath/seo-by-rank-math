@@ -128,7 +128,7 @@ class Snippet_Shortcode {
 		$this->post   = $post;
 		$this->schema = $schema;
 
-		if ( in_array( $type, [ 'article' ], true ) ) {
+		if ( in_array( $type, [ 'article', 'blogposting', 'newsarticle' ], true ) ) {
 			return;
 		}
 
