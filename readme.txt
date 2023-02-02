@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.103
+Stable tag: 1.0.103.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -600,5 +600,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 * Fixed: Content AI REST endpoints were showing 404 error on some setups
 * Fixed: Sitemap cache not being cleared after setting a post to `noindex`
 * Fixed: Deprecated function used in the plugin
+
+= 1.0.103.1 [Dec 02, 2022] =
+* Improved: Refactored the Analytics Token regeneration code to avoid Google account disconnections
+* Improved: The Analytics data fetch will now only import data for dates on which data exists, reducing the time required to import the data
+* Improved: Clear pending background cron jobs related to Analytics if data import fails
+* Fixed: [Keyword in Image Alt attribute](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-image-alt-attributes-primary-focus-keyword-only) test now works properly when additional text is present in the Alt tag for improving [Image SEO](https://rankmath.com/kb/image-seo/)
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
