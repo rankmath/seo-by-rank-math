@@ -27,7 +27,7 @@ class Updates implements Runner {
 	 *
 	 * @var array
 	 */
-	private static  $updates = [
+	private static $updates = [
 		'1.0.24'    => 'updates/update-1.0.24.php',
 		'1.0.28'    => 'updates/update-1.0.28.php',
 		'1.0.30'    => 'updates/update-1.0.30.php',
@@ -59,6 +59,7 @@ class Updates implements Runner {
 		'1.0.98'    => 'updates/update-1.0.98.php',
 		'1.0.103.1' => 'updates/update-1.0.103.1.php',
 		'1.0.104'   => 'updates/update-1.0.104.php',
+		'1.0.107.3' => 'updates/update-1.0.107.3.php',
 	];
 
 	/**

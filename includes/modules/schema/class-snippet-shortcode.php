@@ -26,6 +26,20 @@ class Snippet_Shortcode {
 	use Hooker, Shortcode;
 
 	/**
+	 * Post object.
+	 *
+	 * @var object
+	 */
+	private $post;
+
+	/**
+	 * Schema data.
+	 *
+	 * @var array
+	 */
+	private $schema;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
@@ -125,6 +139,7 @@ class Snippet_Shortcode {
 		wp_enqueue_style( 'rank-math-review-snippet', rank_math()->assets() . 'css/rank-math-snippet.css', null, rank_math()->version );
 
 		$type         = \strtolower( $schema['@type'] );
+		$type         = preg_replace( '/[^a-z0-9_-]+/i', '', $type );
 		$this->post   = $post;
 		$this->schema = $schema;
 
@@ -147,6 +162,7 @@ class Snippet_Shortcode {
 			<div id="rank-math-rich-snippet-wrapper" class="<?php echo esc_attr( $class ); ?>">
 
 				<?php
+				$type = sanitize_file_name( $type );
 				$file = rank_math()->plugin_dir() . "includes/modules/schema/shortcode/$type.php";
 				if ( file_exists( $file ) ) {
 					include $file;

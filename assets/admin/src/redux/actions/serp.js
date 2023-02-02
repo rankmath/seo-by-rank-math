@@ -4,6 +4,7 @@
 import { updateAppUi } from './metadata'
 import { swapVariables } from '@helpers/swapVariables'
 import generateDescription from '@helpers/generateDescription'
+import decodeEntities from '@helpers/decodeEntities'
 
 /**
  * Update title.
@@ -17,7 +18,7 @@ export function updateSerpTitle( title ) {
 		'' !== title ? title : rankMath.assessor.serpData.titleTemplate
 	)
 	rankMathEditor.refresh( 'title' )
-	return updateAppUi( 'serpTitle', title )
+	return updateAppUi( 'serpTitle', decodeEntities( title ) )
 }
 
 /**

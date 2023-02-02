@@ -217,6 +217,7 @@ class Shared extends WP_REST_Controller {
 
 		do_action( 'rank_math/pre_update_schema', $object_id, $object_type );
 		foreach ( $schemas as $meta_id => $schema ) {
+			$schema   = $this->sanitize_schema_type( $schema );
 			$type     = is_array( $schema['@type'] ) ? $schema['@type'][0] : $schema['@type'];
 			$meta_key = 'rank_math_schema_' . $type;
 			$schema   = wp_kses_post_deep( $schema );
@@ -248,6 +249,31 @@ class Shared extends WP_REST_Controller {
 		do_action( 'rank_math/schema/update', $object_id, $schemas, $object_type );
 
 		return $new_ids;
+	}
+
+	/**
+	 * Make sure that the Schema @type is alphanumerical.
+	 *
+	 * @param array $schema Schema to sanitize.
+	 * @return array
+	 */
+	private function sanitize_schema_type( $schema ) {
+		if ( ! isset( $schema['@type'] ) ) {
+			return $schema;
+		}
+
+		if ( ! is_array( $schema['@type'] ) ) {
+			// Sanitize single type.
+			$schema['@type'] = preg_replace( '/[^a-zA-Z0-9]/', '', $schema['@type'] );
+			return $schema;
+		}
+
+		// Sanitize each type.
+		foreach ( $schema['@type'] as $key => $type ) {
+			$schema['@type'][ $key ] = preg_replace( '/[^a-zA-Z0-9]/', '', $type );
+		}
+
+		return $schema;
 	}
 
 	/**

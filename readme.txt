@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.107.2
+Stable tag: 1.0.107.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -596,5 +596,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 = 1.0.107.2 [Jan 26, 2023] =
 - Fixed: TOC Block was not detecting the headings added in FAQ & HowTo blocks when core headings were present in the content
+
+= 1.0.107.3 [Jan 30, 2023] =
+- Improved: Strengthened the security of the plugin. Thanks to PatchStack(link) for revealing it responsibly
+- Fixed: After importing the data from Yoast, the `%%searchphrase%%` variable was not getting converted to the Rank Math's `%search_query%`
+- Fixed: [Focus Keyword in Title test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-the-seo-title-primary-focus-keyword-only) was not working well when `&` was used in the SERP Title
+- Fixed: [Book schema](https://rankmath.com/kb/book-schema/#date-published) was showing incorrect published date on the frontend
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
