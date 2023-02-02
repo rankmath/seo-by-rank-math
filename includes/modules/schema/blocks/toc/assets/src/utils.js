@@ -85,7 +85,7 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 						_latestHeadings.push( {
 							key: value.id,
 							content: ! isUndefined( currentHeading.isUpdated ) && currentHeading.isUpdated ? currentHeading.content : value.title,
-							level: headingAttributes.titleWrapper,
+							level: parseInt( headingAttributes.titleWrapper.replace( 'h', '' ) ),
 							link: ! isGeneratedLink ? currentHeading.link : `#${ value.id }`,
 							disable: currentHeading.disable ? currentHeading.disable : false,
 							isUpdated: ! isUndefined( currentHeading.isUpdated ) ? currentHeading.isUpdated : false,

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.107.1
+Stable tag: 1.0.107.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -593,5 +593,8 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 = 1.0.107.1 [Jan 25, 2023] =
 - Fixed: Version number
+
+= 1.0.107.2 [Jan 26, 2023] =
+- Fixed: TOC Block was not detecting the headings added in FAQ & HowTo blocks when core headings were present in the content
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
