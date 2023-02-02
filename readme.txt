@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.104
+Stable tag: 1.0.104.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -587,5 +587,8 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 * Added: [HUGE!] Introducing [Table of Contents block](https://rankmath.com/kb/table-of-contents-block/) to automatically generate Table of Contents from the headings added to the page  
 * Fixed: PHP Warnings related to Analytics Widget on the Dashboard page
 * Fixed: [SEO Analysis](https://rankmath.com/kb/seo-analysis/) was not working on some sites where the `INPUT_SERVER` was not available
+
+= 1.0.104.1 [Dec 20, 2022] =
+* Fixed: Nested object properties added in the [Schema](https://rankmath.com/kb/schema-generator/) were not working well on some setups
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
