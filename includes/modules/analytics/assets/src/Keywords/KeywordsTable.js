@@ -36,17 +36,17 @@ const KeywordsTable = ( props ) => {
 	const elementReference = useRef( null )
 	elementObserver( elementReference, intersectedState )
 
-	useSelect( ( select ) => {
+	useSelect( async ( select ) => {
 		if ( false === isIntersected ) {
 			return;
 		}
 
-		const responseRows = select( 'rank-math' ).getKeywordsRows( paged )
+		const responseRows = await select( 'rank-math' ).getKeywordsRows( paged )
 		if ( ! isEmpty( responseRows ) && responseRows !== rows ) {
 			setRows( responseRows )
 		}
 
-		const responseSummary = select( 'rank-math' ).getKeywordsSummary()
+		const responseSummary = await select( 'rank-math' ).getKeywordsSummary()
 		if ( ! isEmpty( responseSummary ) && responseSummary !== summary ) {
 			setSummary( responseSummary )
 		}

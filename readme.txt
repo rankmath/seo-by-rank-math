@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.106
+Stable tag: 1.0.107
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,13 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.106 [Jan 11, 2023] =
-- Added: Social Media Settings now include an option for [Additional Profile URLs](https://rankmath.com/kb/titles-and-meta/#additional-profiles) that will be added to the `sameAs` property of the Organization Schema.
-- Added: User Profile now includes an option for Additional Profile URLs that will be added to the `sameAs` property of the [Author Schema Entities](https://rankmath.com/kb/author-schema-entity/#sameas).
-- Improved: Token regeneration method for Google Search Console to avoid data import issues in the [Analytics Module](https://rankmath.com/kb/analytics/) was revised to ensure proper regeneration on all setups.
-- Fixed: Analytics data is now updating correctly on all setups after the last update.
-- Fixed: Compatibility issues with the ACF's Link type field, where the title added from the Link modal was not getting saved.
-- Fixed: `uploadDate` error in [Video Schema](https://rankmath.com/kb/video-schema/) that occurred when the site's Timezone was set to a non-UTC value is now resolved.
-- Fixed: An error that occurred on some setups after [clearing the SEO Analysis data](https://rankmath.com/kb/rank-math-status-and-tools/#clear-seo-analysis-data) from Database tools has been resolved.
+= 1.0.107 [Jan 25, 2023] =
+- Improved: [TOC Block](https://rankmath.com/kb/table-of-contents-block/) can now recognize the headings added to [FAQ](https://rankmath.com/kb/faq-schema-block/) & [HowTo](https://rankmath.com/blog/howto-schema/) Blocks
+- Fixed: PHP error related to [Analytics](https://rankmath.com/kb/analytics) on WordPress 6.0
+- Fixed: [Sorting option](https://rankmath.com/kb/analytics/#data-sorting) was not working in Analytics tables
+- Fixed: [Rank Tracker graph](https://rankmath.com/kb/analytics/#rank-tracker) was not showing correctly on RTL websites
+- Fixed: PHP error on some setups when the [Content AI](https://rankmath.com/content-ai/) module is active
+- Fixed: Missing term names in the [HTML Sitemap](https://rankmath.com/kb/html-sitemap/)
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

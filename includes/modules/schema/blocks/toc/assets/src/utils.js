@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isEmpty, isUndefined, kebabCase, includes, forEach, isEqual, startsWith, map, isNull } from 'lodash'
+import { isEmpty, isUndefined, kebabCase, includes, forEach, isEqual, map, isNull } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -52,53 +52,95 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 					continue
 				}
 
-				if ( blockName !== 'core/heading' ) {
+				if ( ! includes( [ 'rank-math/faq-block', 'rank-math/howto-block', 'core/heading' ], blockName ) ) {
 					continue
 				}
 
 				const headingAttributes = getBlockAttributes( blockClientId )
-				if ( includes( excludeHeadings, 'h' + headingAttributes.level ) ) {
+				if ( blockName === 'rank-math/faq-block' || blockName === 'rank-math/howto-block' ) {
+					const titleWrapper = headingAttributes.titleWrapper
+					if (
+						includes( excludeHeadings, titleWrapper ) ||
+						includes( [ 'div', 'p' ], titleWrapper )
+					) {
+						continue
+					}
+
+					const data = blockName === 'rank-math/howto-block' ? headingAttributes.steps : headingAttributes.questions
+					if ( isEmpty( data ) ) {
+						continue
+					}
+
+					forEach( data, ( value ) => {
+						const currentHeading = ! isUndefined( headings ) && ! isEmpty( headings[ _latestHeadings.length ] ) ? headings[ _latestHeadings.length ] : {
+							content: '',
+							level: '',
+							disable: false,
+							isUpdated: false,
+							isGeneratedLink: true,
+						}
+
+						const isGeneratedLink = ! isUndefined( currentHeading.isGeneratedLink ) && currentHeading.isGeneratedLink
+
+						_latestHeadings.push( {
+							key: value.id,
+							content: ! isUndefined( currentHeading.isUpdated ) && currentHeading.isUpdated ? currentHeading.content : value.title,
+							level: headingAttributes.titleWrapper,
+							link: ! isGeneratedLink ? currentHeading.link : `#${ value.id }`,
+							disable: currentHeading.disable ? currentHeading.disable : false,
+							isUpdated: ! isUndefined( currentHeading.isUpdated ) ? currentHeading.isUpdated : false,
+							isGeneratedLink,
+						} )
+					} )
+
 					continue
 				}
 
-				const currentHeading = ! isUndefined( headings ) && ! isEmpty( headings[ _latestHeadings.length ] ) ? headings[ _latestHeadings.length ] : {
-					content: '',
-					level: '',
-					disable: false,
-					isUpdated: false,
-					isGeneratedLink: true,
-				}
+				if ( blockName === 'core/heading' ) {
+					if ( includes( excludeHeadings, 'h' + headingAttributes.level ) ) {
+						continue
+					}
 
-				const isGeneratedLink = ! isUndefined( currentHeading.isGeneratedLink ) && currentHeading.isGeneratedLink
-				let anchor = headingAttributes.anchor
-				if ( isEmpty( headingAttributes.anchor ) || isGeneratedLink ) {
-					anchor = kebabCase( headingAttributes.content )
-				}
+					const currentHeading = ! isUndefined( headings ) && ! isEmpty( headings[ _latestHeadings.length ] ) ? headings[ _latestHeadings.length ] : {
+						content: '',
+						level: '',
+						disable: false,
+						isUpdated: false,
+						isGeneratedLink: true,
+					}
 
-				if ( includes( anchors, anchor ) ) {
-					i += 1
-					anchor = anchor + '-' + i
-				}
+					const isGeneratedLink = ! isUndefined( currentHeading.isGeneratedLink ) && currentHeading.isGeneratedLink
 
-				anchors.push( anchor )
-				headingAttributes.anchor = anchor
+					let anchor = headingAttributes.anchor
+					if ( isEmpty( headingAttributes.anchor ) || isGeneratedLink ) {
+						anchor = kebabCase( headingAttributes.content )
+					}
 
-				const headingContent = stripHTML(
-					headingAttributes.content.replace(
-						/(<br *\/?>)+/g,
-						' '
+					if ( includes( anchors, anchor ) ) {
+						i += 1
+						anchor = anchor + '-' + i
+					}
+
+					anchors.push( anchor )
+					headingAttributes.anchor = anchor
+
+					const headingContent = stripHTML(
+						headingAttributes.content.replace(
+							/(<br *\/?>)+/g,
+							' '
+						)
 					)
-				)
 
-				_latestHeadings.push( {
-					key: blockClientId,
-					content: ! isUndefined( currentHeading.isUpdated ) && currentHeading.isUpdated ? currentHeading.content : `${ headingContent }`,
-					level: headingAttributes.level,
-					link: ! isGeneratedLink ? currentHeading.link : `#${ headingAttributes.anchor }`,
-					disable: currentHeading.disable ? currentHeading.disable : false,
-					isUpdated: ! isUndefined( currentHeading.isUpdated ) ? currentHeading.isUpdated : false,
-					isGeneratedLink,
-				} )
+					_latestHeadings.push( {
+						key: blockClientId,
+						content: ! isUndefined( currentHeading.isUpdated ) && currentHeading.isUpdated ? currentHeading.content : headingContent,
+						level: headingAttributes.level,
+						link: ! isGeneratedLink ? currentHeading.link : `#${ headingAttributes.anchor }`,
+						disable: currentHeading.disable ? currentHeading.disable : false,
+						isUpdated: ! isUndefined( currentHeading.isUpdated ) ? currentHeading.isUpdated : false,
+						isGeneratedLink,
+					} )
+				}
 			}
 
 			if ( isEqual( headings, _latestHeadings ) ) {

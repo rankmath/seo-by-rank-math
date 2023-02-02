@@ -217,7 +217,7 @@ class Content_AI {
 		$values['ca_keyword'] = $keyword;
 
 		$content_ai_data          = $screen->get_meta( $screen->get_object_type(), $screen->get_object_id(), 'rank_math_contentai_score' );
-		$content_ai_score         = ! empty( $content_ai_data ) ? round( array_sum( array_values( $content_ai_data ) ) / count( $content_ai_data ) ) : 0;
+		$content_ai_score         = ! empty( $content_ai_data ) && is_array( $content_ai_data ) ? round( array_sum( array_values( $content_ai_data ) ) / count( $content_ai_data ) ) : 0;
 		$values['contentAiScore'] = absint( $content_ai_score );
 
 		return $values;

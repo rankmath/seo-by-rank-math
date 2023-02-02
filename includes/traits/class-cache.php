@@ -51,7 +51,7 @@ trait Cache {
 	 * The value is set whether or not this key already exists in Redis.
 	 *
 	 * @param string $key    The key under which to store the value.
-	 * @param mixed  $value  The value to store.
+	 * @param mixed  $data   The value to store.
 	 * @param string $group  The group value appended to the $key.
 	 * @param int    $expire The expiration time, defaults to 0.
 	 *
@@ -95,6 +95,13 @@ trait Cache {
 			return false;
 		}
 
-		return wp_cache_flush_group( $group );
+		global $wp_object_cache;
+		if ( ! isset( $wp_object_cache->cache[ $group ] ) ) {
+			return;
+		}
+
+		$wp_object_cache->delete_multiple( array_keys( $wp_object_cache->cache[ $group ] ), $group );
+
+		return true;
 	}
 }
