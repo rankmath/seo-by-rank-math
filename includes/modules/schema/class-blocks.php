@@ -48,8 +48,10 @@ class Blocks {
 			rank_math()->version
 		);
 
+		new Blocks\Admin();
 		new Block_FAQ();
 		new Block_HowTo();
+		new Block_TOC();
 	}
 
 	/**

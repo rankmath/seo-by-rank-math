@@ -231,22 +231,23 @@ class Manager {
 		];
 
 		$modules['analytics'] = [
-			'title'    => esc_html__( 'Analytics', 'rank-math' ),
-			'desc'     => esc_html__( 'Connect Rank Math with Google Search Console to see the most important information from Google directly in your WordPress dashboard.', 'rank-math' ),
-			'class'    => 'RankMath\Analytics\Analytics',
-			'icon'     => 'search-console',
-			'only'     => 'admin',
-			'probadge' => defined( 'RANK_MATH_PRO_FILE' ),
-			'settings' => Helper::get_admin_url( 'options-general' ) . '#setting-panel-analytics',
+			'title'       => esc_html__( 'Analytics', 'rank-math' ),
+			'desc'        => esc_html__( 'Connect Rank Math with Google Search Console to see the most important information from Google directly in your WordPress dashboard.', 'rank-math' ),
+			'class'       => 'RankMath\Analytics\Analytics',
+			'icon'        => 'search-console',
+			'only'        => 'admin',
+			'upgradeable' => true,
+			'settings'    => Helper::get_admin_url( 'options-general' ) . '#setting-panel-analytics',
 		];
 
 		$modules['seo-analysis'] = [
-			'title'    => esc_html__( 'SEO Analysis', 'rank-math' ),
-			'desc'     => esc_html__( 'Let Rank Math analyze your website and your website\'s content using 70+ different tests to provide tailor-made SEO Analysis to you.', 'rank-math' ),
-			'class'    => 'RankMath\SEO_Analysis\SEO_Analysis',
-			'icon'     => 'analyzer',
-			'only'     => 'admin',
-			'settings' => Helper::get_admin_url( 'seo-analysis' ),
+			'title'       => esc_html__( 'SEO Analyzer', 'rank-math' ),
+			'desc'        => esc_html__( 'Let Rank Math analyze your website and your website\'s content using 28+ different tests to provide tailor-made SEO Analysis to you.', 'rank-math' ),
+			'class'       => 'RankMath\SEO_Analysis\SEO_Analysis',
+			'icon'        => 'analyzer',
+			'only'        => 'admin',
+			'upgradeable' => true,
+			'settings'    => Helper::get_admin_url( 'seo-analysis' ),
 		];
 
 		return $modules;

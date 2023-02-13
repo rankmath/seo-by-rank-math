@@ -114,6 +114,11 @@ class Local_Seo {
 			'url'   => get_home_url(),
 		];
 
+		$social_profiles = $json_ld->get_social_profiles();
+		if ( ! empty( $social_profiles ) ) {
+			$entity['sameAs'] = $social_profiles;
+		}
+
 		$json_ld->add_prop( 'email', $entity );
 		$json_ld->add_prop( 'url', $entity );
 		$json_ld->add_prop( 'address', $entity );

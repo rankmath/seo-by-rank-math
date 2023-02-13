@@ -159,6 +159,14 @@ class Request {
 	 */
 	private function make_request( $http_verb, $url, $args = [], $timeout = 10 ) {
 		// Early Bail!!
+		if ( ! Authentication::is_authorized() ) {
+			return;
+		}
+
+		if ( $this->have_buffer_time() ) {
+			return;
+		}
+
 		if ( ! $this->refresh_token() || ! is_scalar( $this->token ) ) {
 			if ( ! $this->is_notice_added ) {
 				$this->is_notice_added = true;
@@ -169,7 +177,6 @@ class Request {
 					wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' )
 				);
 				$this->log_response( $http_verb, $url, $args, '', '', '', date( 'Y-m-d H:i:s' ) . ': Google auth token has been expired or is invalid' );
-
 			}
 			return;
 		}
@@ -251,7 +258,14 @@ class Request {
 		}
 
 		$message  = '********************************' . PHP_EOL;
-		$message .= date( 'd F Y h:i:s a' ) . PHP_EOL;
+		$message .= date( 'Y-m-d h:i:s' ) . PHP_EOL;
+
+		$tokens = Authentication::tokens();
+		if ( ! empty( $tokens ) && is_array( $tokens ) && isset( $tokens['expire'] ) ) {
+			$message .= 'Expiry: ' . date( 'Y-m-d h:i:s', $tokens['expire'] ) . PHP_EOL;
+			$message .= 'Expiry Readable: ' . human_time_diff( $tokens['expire'] ) . PHP_EOL;
+		}
+
 		$message .= $text . PHP_EOL;
 
 		if ( is_wp_error( $response ) ) {
@@ -362,7 +376,45 @@ class Request {
 		$tokens['access_token'] = $token;
 		Authentication::tokens( $tokens );
 
+		$this->set_buffer_time();
+
 		return true;
+	}
+
+	/**
+	 * Set buffer time.
+	 *
+	 * @param int $buffer_time The buffer time to hold the request until the new token generate.
+	 */
+	protected function set_buffer_time( $buffer_time = 120 ) {
+		update_option( 'rank_math_google_api_buffer_time', time() + $buffer_time );
+	}
+
+	/**
+	 * Check buffer time.
+	 *
+	 * @return boolean
+	 */
+	protected function have_buffer_time() {
+		$tokens      = Authentication::tokens();
+		$buffer_time = get_option( 'rank_math_google_api_buffer_time', '' );
+		// Set buffer time only once before 2 min token expiry.
+		if ( empty( $buffer_time ) && $tokens['expire'] && time() > ( $tokens['expire'] - 120 ) ) {
+			$this->set_buffer_time();
+			return true;
+		}
+
+		if ( empty( $buffer_time ) ) {
+			return false;
+		}
+
+		// Check the current time exceed the buffer time.
+		if ( time() <= $buffer_time ) {
+			return true;
+		}
+
+		delete_option( 'rank_math_google_api_buffer_time' );
+		return false;
 	}
 
 	/**

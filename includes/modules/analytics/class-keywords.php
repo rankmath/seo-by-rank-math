@@ -56,18 +56,27 @@ class Keywords extends Posts {
 		$keywords = array_map( 'mb_strtolower', $keywords );
 		$per_page = 25;
 
-		$rows = $this->get_analytics_data(
-			[
-				'dimension' => 'query',
-				'objects'   => false,
-				'pageview'  => false,
-				'orderBy'   => ! empty( $request->get_param( 'orderby' ) ) ? $request->get_param( 'orderby' ) : 'impressions',
-				'order'     => in_array( $request->get_param( 'order' ), [ 'asc', 'desc' ], true ) ? strtoupper( $request->get_param( 'order' ) ) : 'DESC',
-				'offset'    => ( $request->get_param( 'page' ) - 1 ) * $per_page,
-				'perpage'   => $per_page,
-				'sub_where' => " AND query IN ('" . join( "', '", $keywords ) . "')",
-			]
-		);
+		$cache_args             = $request->get_params();
+		$cache_args['per_page'] = $per_page;
+
+		$cache_group = 'rank_math_rest_keywords_rows';
+		$cache_key   = $this->generate_hash( $cache_args );
+		$rows        = $this->get_cache( $cache_key, $cache_group );
+		if ( empty( $rows ) ) {
+			$rows = $this->get_analytics_data(
+				[
+					'dimension' => 'query',
+					'objects'   => false,
+					'pageview'  => false,
+					'orderBy'   => ! empty( $request->get_param( 'orderby' ) ) ? $request->get_param( 'orderby' ) : 'impressions',
+					'order'     => in_array( $request->get_param( 'order' ), [ 'asc', 'desc' ], true ) ? strtoupper( $request->get_param( 'order' ) ) : 'DESC',
+					'offset'    => ( $request->get_param( 'page' ) - 1 ) * $per_page,
+					'perpage'   => $per_page,
+					'sub_where' => " AND query IN ('" . join( "', '", $keywords ) . "')",
+				]
+			);
+		}
+
 		$rows = apply_filters( 'rank_math/analytics/keywords', $rows );
 		if ( empty( $rows ) ) {
 			$rows['response'] = 'No Data';

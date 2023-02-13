@@ -55,18 +55,13 @@ class Admin extends Base {
 		}
 
 		$this->ajax( 'remove_nginx_notice', 'remove_nginx_notice' );
-		$this->ajax( 'viewed_html_sitemap', 'viewed_html_sitemap' );
 	}
 
 	/**
 	 * Register setting page.
 	 */
 	public function register_setting_page() {
-		$sitemap_url   = Router::get_base_url( 'sitemap_index.xml' );
-		$new_label = '';
-		if ( ! get_option( 'rank_math_viewed_html_sitemap', false ) ) {
-			$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . esc_html__( 'New!', 'rank-math' ) . '</span>';
-		}
+		$sitemap_url = Router::get_base_url( 'sitemap_index.xml' );
 
 		$tabs = [
 			'general' => [
@@ -81,8 +76,7 @@ class Admin extends Base {
 
 		$tabs['html_sitemap'] = [
 			'icon'    => 'rm-icon rm-icon-sitemap',
-			/* translators: new label */
-			'title'   => sprintf( esc_html__( 'HTML Sitemap %s', 'rank-math' ), $new_label ),
+			'title'   => esc_html__( 'HTML Sitemap', 'rank-math' ),
 			'file'    => $this->directory . '/settings/html-sitemap.php',
 			'desc'    => esc_html__( 'This tab contains settings related to the HTML sitemap.', 'rank-math' ) . ' <a href="' . KB::get( 'sitemap-general', 'Options Panel Sitemap HTML Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
 			'classes' => 'html-sitemap',
@@ -104,7 +98,7 @@ class Admin extends Base {
 			[
 				'key'        => 'rank-math-options-sitemap',
 				'title'      => esc_html__( 'Sitemap Settings', 'rank-math' ),
-				'menu_title' => sprintf( esc_html__( 'Sitemap Settings %s', 'rank-math' ), $new_label ),
+				'menu_title' => esc_html__( 'Sitemap Settings', 'rank-math' ),
 				'capability' => 'rank_math_sitemap',
 				'folder'     => 'titles',
 				'position'   => 99,
@@ -274,14 +268,6 @@ class Admin extends Base {
 			$html = str_replace( ' class="', ' data-sitemapexclude="true" class="', $html );
 		}
 		return $html;
-	}
-
-	/**
-	 * Ajax callback to update the viewed_html_sitemap value.
-	 */
-	public function viewed_html_sitemap() {
-		update_option( 'rank_math_viewed_html_sitemap', true, false );
-		return;
 	}
 
 	/**

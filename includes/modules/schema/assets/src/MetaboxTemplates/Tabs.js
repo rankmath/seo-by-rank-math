@@ -23,8 +23,8 @@ const textarea = jQuery( '.rank-math-schema' )
 /**
  * On Save callback.
  *
- * @param  {string} id     Form id.
- * @param  {Object} schema Schema data.
+ * @param {string} id     Form id.
+ * @param {Object} schema Schema data.
  */
 const onSave = ( id, schema ) => {
 	textarea.val( JSON.stringify( schema ) )

@@ -34,11 +34,11 @@ class Terms {
 	 */
 	private function get_terms( $taxonomy, $parent = 0 ) {
 		$sort_map = [
-			'published' => [
+			'published'    => [
 				'field' => 'term_id',
 				'order' => 'DESC',
 			],
-			'modified'  => [
+			'modified'     => [
 				'field' => 'term_id',
 				'order' => 'DESC',
 			],
@@ -46,14 +46,14 @@ class Terms {
 				'field' => 'name',
 				'order' => 'ASC',
 			],
-			'post_id' => [
+			'post_id'      => [
 				'field' => 'term_id',
 				'order' => 'DESC',
 			],
 		];
 
 		$sort_setting = Helper::get_settings( 'sitemap.html_sitemap_sort' );
-		$sort = ( isset( $sort_map[ $sort_setting ] ) ) ? $sort_map[ $sort_setting ] : $sort_map['published'];
+		$sort         = ( isset( $sort_map[ $sort_setting ] ) ) ? $sort_map[ $sort_setting ] : $sort_map['published'];
 
 		/**
 		 * Filter: 'rank_math/sitemap/html_sitemap/sort_items' - Allow changing the sort order of the HTML sitemap.
@@ -82,9 +82,12 @@ class Terms {
 
 		$terms = $query->orderBy( $sort['field'], $sort['order'] )->get();
 
-		return array_filter( $terms, function( $term ) use ( $taxonomy ) {
-			return SitemapBase::is_object_indexable( get_term( $term->term_id, $taxonomy ), 'term' );
-		} );
+		return array_filter(
+			$terms,
+			function( $term ) use ( $taxonomy ) {
+				return SitemapBase::is_object_indexable( get_term( $term->term_id, $taxonomy ), 'term' );
+			}
+		);
 	}
 
 	/**
@@ -104,7 +107,7 @@ class Terms {
 		$output[] = '<div class="rank-math-html-sitemap__section rank-math-html-sitemap__section--taxonomy rank-math-html-sitemap__section--' . $taxonomy . '">';
 		$output[] = '<h2 class="rank-math-html-sitemap__title">' . esc_html( get_taxonomy( $taxonomy )->labels->name ) . '</h2>';
 		$output[] = '<ul class="rank-math-html-sitemap__list">';
-		$output[] = $this->generate_terms_list( $terms, $show_dates, $taxonomy );
+		$output[] = $this->generate_terms_list( $terms, $taxonomy );
 		$output[] = '</ul>';
 		$output[] = '</div>';
 

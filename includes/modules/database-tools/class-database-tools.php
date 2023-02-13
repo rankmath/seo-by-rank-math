@@ -31,6 +31,7 @@ class Database_Tools {
 		}
 
 		Yoast_Blocks::get();
+		AIOSEO_Blocks::get();
 		Remove_Schema::get();
 		Update_Score::get();
 		$this->hooks();
@@ -113,20 +114,21 @@ class Database_Tools {
 	}
 
 	/**
-	 * Function to reset the SEO Analysis.
+	 * Function to reset the SEO Analyzer.
 	 */
 	public function clear_seo_analysis() {
 		$stored = get_option( 'rank_math_seo_analysis_results' );
 		if ( empty( $stored ) ) {
 			return [
 				'status'  => 'error',
-				'message' => __( 'SEO Analysis data has already been cleared.', 'rank-math' ),
+				'message' => __( 'SEO Analyzer data has already been cleared.', 'rank-math' ),
 			];
 		}
 
 		delete_option( 'rank_math_seo_analysis_results' );
+		delete_option( 'rank_math_seo_analysis_date' );
 
-		return __( 'SEO Analysis data successfully deleted.', 'rank-math' );
+		return __( 'SEO Analyzer data successfully deleted.', 'rank-math' );
 	}
 
 	/**
@@ -281,6 +283,25 @@ class Database_Tools {
 	}
 
 	/**
+	 * Function to convert AIOSEO blocks in posts to Rank Math blocks (TOC).
+	 *
+	 * @return string
+	 */
+	public function aioseo_blocks() {
+		$posts = AIOSEO_Blocks::get()->find_posts();
+		if ( empty( $posts['posts'] ) ) {
+			return [
+				'status'  => 'error',
+				'message' => __( 'No posts found to convert.', 'rank-math' ),
+			];
+		}
+
+		AIOSEO_Blocks::get()->start( $posts['posts'] );
+
+		return __( 'Conversion started. A success message will be shown here once the process completes. You can close this page.', 'rank-math' );
+	}
+
+	/**
 	 * Function to delete old schema data.
 	 *
 	 * @return string
@@ -327,9 +348,9 @@ class Database_Tools {
 
 		if ( Helper::is_module_active( 'seo-analysis' ) ) {
 			$tools['clear_seo_analysis'] = [
-				'title'       => __( 'Flush SEO Analysis Data', 'rank-math' ),
-				'description' => __( "Need a clean slate or not able to run the SEO Analysis tool? Flushing the analysis data might fix the issue. Flushing SEO Analysis data is entirely safe and doesn't remove any critical data from your website.", 'rank-math' ),
-				'button_text' => __( 'Clear SEO Analysis', 'rank-math' ),
+				'title'       => __( 'Flush SEO Analyzer Data', 'rank-math' ),
+				'description' => __( "Need a clean slate or not able to run the SEO Analyzer tool? Flushing the analysis data might fix the issue. Flushing SEO Analyzer data is entirely safe and doesn't remove any critical data from your website.", 'rank-math' ),
+				'button_text' => __( 'Clear SEO Analyzer', 'rank-math' ),
 			];
 		}
 
@@ -366,8 +387,18 @@ class Database_Tools {
 		if ( is_array( $block_posts ) && ! empty( $block_posts['count'] ) ) {
 			$tools['yoast_blocks'] = [
 				'title'        => __( 'Yoast Block Converter', 'rank-math' ),
-				'description'  => __( 'Convert FAQ & HowTo Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
+				'description'  => __( 'Convert FAQ, HowTo, & Table of Contents Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
 				'confirm_text' => __( 'Are you sure you want to convert Yoast blocks into Rank Math blocks? This action is irreversible.', 'rank-math' ),
+				'button_text'  => __( 'Convert Blocks', 'rank-math' ),
+			];
+		}
+
+		$aio_block_posts = AIOSEO_Blocks::get()->find_posts();
+		if ( is_array( $aio_block_posts ) && ! empty( $aio_block_posts['count'] ) ) {
+			$tools['aioseo_blocks'] = [
+				'title'        => __( 'AIOSEO Block Converter', 'rank-math' ),
+				'description'  => __( 'Convert TOC block created using AIOSEO. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
+				'confirm_text' => __( 'Are you sure you want to convert AIOSEO blocks into Rank Math blocks? This action is irreversible.', 'rank-math' ),
 				'button_text'  => __( 'Convert Blocks', 'rank-math' ),
 			];
 		}

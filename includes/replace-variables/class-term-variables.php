@@ -36,6 +36,7 @@ class Term_Variables extends Basic_Variables {
 				'description' => esc_html__( 'Current term name', 'rank-math' ),
 				'variable'    => 'term',
 				'example'     => $this->is_term_edit ? $term->name : esc_html__( 'Example Term', 'rank-math' ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_term' ]
 		);

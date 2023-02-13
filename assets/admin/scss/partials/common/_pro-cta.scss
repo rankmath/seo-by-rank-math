@@ -1,6 +1,14 @@
 // main: ../../common.scss
+
+@import '../../mixins';
+
+%flex {
+    @include flex;
+}
+
 .blurred {
     filter: blur(2px);
+	pointer-events: none;
 
     &:after {
         position: absolute;

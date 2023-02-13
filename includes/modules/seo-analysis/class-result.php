@@ -1,6 +1,6 @@
 <?php
 /**
- * The SEO Analysis result of each test.
+ * The SEO Analyzer result of each test.
  *
  * @since      1.0.24
  * @package    RankMath
@@ -60,21 +60,27 @@ class Result {
 	 * Magic method: convert object to string.
 	 */
 	public function __toString() {
+		$kb_link = 'https://rankmath.com/kb/seo-analysis/';
+		if ( ! empty( $this->result['kb_link'] ) ) {
+			$kb_link = $this->result['kb_link'];
+		}
+
 		ob_start();
 		?>
 		<div class="row-title">
 
-			<h3><?php echo esc_html( $this->result['title'] ); ?></h3>
+			<?php $this->the_status(); ?>
+
+			<h3><?php echo esc_html( $this->result['title'] ); ?>
 
 			<?php if ( ! empty( $this->result['tooltip'] ) ) : ?>
-			<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php echo esc_html( $this->result['tooltip'] ); ?></span></span>
+			<a href="<?php echo esc_url( $kb_link ); ?>" target="_blank" class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php echo esc_html( $this->result['tooltip'] ); ?></span></a>
 			<?php endif; ?>
+			</h3>
 
 		</div>
 
 		<div class="row-description">
-
-			<?php $this->the_status(); ?>
 
 			<div class="row-content">
 
@@ -84,19 +90,24 @@ class Result {
 
 				<?php echo wp_kses_post( $this->result['message'] ); ?>
 
+				<?php if ( $this->has_fix() ) : ?>
+				<div class="how-to-fix-wrapper">
+					<div class="analysis-test-how-to-fix">
+						<?php echo wp_kses_post( $this->result['fix'] ); ?>
+						<?php if ( ! preg_match( '#<\/a><\/p>$#i', trim( $this->result['fix'] ) ) ) : ?>
+							<p><a href="<?php echo esc_url( $kb_link ); ?>" target="_blank" class="analysis-read-more"><?php esc_html_e( 'Read more', 'rank-math' ); ?></a></p>
+						<?php endif; ?>
+					</div>
+				</div>
+				<?php endif; ?>
+
+				<div class="clear"></div>
+
 				<?php
 				if ( isset( $this->result['data'] ) && ! empty( $this->result['data'] ) ) {
 					$this->the_content();
 				}
 				?>
-
-				<div class="clear"></div>
-
-				<?php if ( $this->has_fix() ) : ?>
-				<div class="how-to-fix-wrapper">
-					<div class="analysis-test-how-to-fix"><?php echo wp_kses_post( $this->result['fix'] ); ?></div>
-				</div>
-				<?php endif; ?>
 
 			</div>
 
@@ -156,9 +167,9 @@ class Result {
 
 		$icons = [
 			'ok'      => 'dashicons dashicons-yes',
-			'fail'    => 'dashicons dashicons-no',
+			'fail'    => 'dashicons dashicons-no-alt',
 			'warning' => 'dashicons dashicons-warning',
-			'info'    => 'dashicons dashicons-info',
+			'info'    => 'dashicons',
 		];
 
 		$labels = [
@@ -196,7 +207,7 @@ class Result {
 			return;
 		}
 
-		$explode = [ 'h1_heading', 'h2_headings', 'title_length', 'description_length', 'canonical' ];
+		$explode = [ 'title_length', 'description_length', 'canonical' ];
 		if ( in_array( $this->id, $explode, true ) ) {
 			echo '<code class="full-width">' . wp_kses_post( join( ', ', (array) $data ) ) . '</code>';
 			return;
@@ -226,7 +237,7 @@ class Result {
 	 * @return bool
 	 */
 	private function is_list() {
-		return in_array( $this->id, [ 'img_alt', 'minify_css', 'minify_js', 'active_plugins' ], true );
+		return in_array( $this->id, [ 'img_alt', 'minify_css', 'minify_js', 'active_plugins', 'h1_heading', 'h2_headings' ], true );
 	}
 
 	/**
@@ -305,6 +316,12 @@ class Result {
 	 * @return bool
 	 */
 	public function is_hidden() {
+		$always_hidden = [
+			'serp_preview',
+			'mobile_serp_preview',
+		];
+
+		// Hidden when not in advanced mode.
 		$hidden_tests = [
 			// Performance.
 			'image_header',
@@ -322,7 +339,9 @@ class Result {
 			'active_theme',
 		];
 
-		return ! Helper::is_advanced_mode() && in_array( $this->id, $hidden_tests, true );
+		$is_hidden = in_array( $this->id, $always_hidden, true ) || ( ! Helper::is_advanced_mode() && in_array( $this->id, $hidden_tests, true ) );
+
+		return apply_filters( 'rank_math/seo_analysis/is_test_hidden', $is_hidden, $this->id );
 	}
 
 	/**
@@ -367,5 +386,14 @@ class Result {
 		];
 
 		return isset( $score[ $this->id ] ) ? $score[ $this->id ] : 0;
+	}
+
+	/**
+	 * Get test result data.
+	 *
+	 * @return array
+	 */
+	public function get_result() {
+		return $this->result;
 	}
 }

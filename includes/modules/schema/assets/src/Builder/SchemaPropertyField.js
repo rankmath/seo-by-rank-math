@@ -27,11 +27,11 @@ import { sanitizeChoices } from '@helpers/sanitize'
 /**
  * Schema property field type component.
  *
- * @param {Object} props This component's props.
- * @param {string|Array} props.value Field value.
- * @param {Function} props.onChange Callback function.
- * @param {string} props.type Field type.
- * @param {Object} props.options Field options.
+ * @param {Object}       props          This component's props.
+ * @param {string|Array} props.value    Field value.
+ * @param {Function}     props.onChange Callback function.
+ * @param {string}       props.type     Field type.
+ * @param {Object}       props.options  Field options.
  */
 const SchemaPropertyField = ( {
 	value,

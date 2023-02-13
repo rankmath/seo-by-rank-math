@@ -62,8 +62,10 @@ const PositionGraph = ( { graph, selected } ) => {
 					data={ graph }
 					margin={ { top: 0, right: 0, left: 0, bottom: 0 } }
 					stackOffset="expand"
+					style={ { direction: rankMath.isRtl ? 'rtl' : 'ltr' } }
 				>
 					<XAxis
+						reversed={ rankMath.isRtl }
 						dy={ 15 }
 						dataKey="formattedDate"
 						interval="preserveStartEnd"
@@ -74,6 +76,7 @@ const PositionGraph = ( { graph, selected } ) => {
 						axisLine={ { stroke: 'rgba(0, 0, 0, 0.15)' } }
 					/>
 					<YAxis
+						orientation={ rankMath.isRtl ? 'right' : 'left' }
 						dx={ -10 }
 						axisLine={ false }
 						tickLine={ false }
@@ -81,6 +84,7 @@ const PositionGraph = ( { graph, selected } ) => {
 						tick={ { fill: '#7f868d', fontSize: 14 } }
 					/>
 					<ChartTooltip
+						style={ { direction: rankMath.isRtl ? 'rtl' : 'ltr' } }
 						content={ <CustomTooltip /> }
 						wrapperStyle={ { zIndex: 10 } }
 						wrapperClassName="rank-math-graph-tooltip"

@@ -337,15 +337,17 @@ class Analytics_Common {
 	 * @param boolean $revert Flag whether to revert difference icon or not.
 	 */
 	private function get_analytic_block( $item, $revert = false ) {
-		$is_negative = abs( $item['difference'] ) !== $item['difference'];
+		$total       = isset( $item['total'] ) ? abs( $item['total'] ) : 0;
+		$difference  = isset( $item['difference'] ) ? abs( $item['difference'] ) : 0;
+		$is_negative = isset( $item['difference'] ) && abs( $item['difference'] ) !== $item['difference'];
 		$diff_class  = 'up';
 		if ( ( ! $revert && $is_negative ) || ( $revert && ! $is_negative && $item['difference'] > 0 ) ) {
 			$diff_class = 'down';
 		}
 		?>
 		<div class="rank-math-item-numbers">
-			<strong class="text-large" title="<?php echo esc_html( Str::human_number( $item['total'] ) ); ?>"><?php echo esc_html( Str::human_number( $item['total'] ) ); ?></strong>
-			<span class="rank-math-item-difference <?php echo esc_attr( $diff_class ); ?>" title="<?php echo esc_html( Str::human_number( abs( $item['difference'] ) ) ); ?>"><?php echo esc_html( Str::human_number( abs( $item['difference'] ) ) ); ?></span>
+			<strong class="text-large" title="<?php echo esc_html( Str::human_number( $total ) ); ?>"><?php echo esc_html( Str::human_number( $total ) ); ?></strong>
+			<span class="rank-math-item-difference <?php echo esc_attr( $diff_class ); ?>" title="<?php echo esc_html( Str::human_number( $difference ) ); ?>"><?php echo esc_html( Str::human_number( $difference ) ); ?></span>
 		</div>
 		<?php
 	}

@@ -1,6 +1,6 @@
 <?php
 /**
- * The local tests for the SEO Analysis.
+ * The local tests for the SEO Analyzer.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_basic_tests' );
 
 /**
- * Register basic local tests for the SEO Analysis.
+ * Register basic local tests for the SEO Analyzer.
  *
  * @param array $tests Array of tests.
  *
@@ -36,6 +36,8 @@ function rank_math_register_seo_analysis_basic_tests( $tests ) {
 			/* translators: link to general setting screen */
 			'<p>' . sprintf( wp_kses_post( __( 'Changing your tagline is very easy.  Just head on over to <a target="_blank" href="%1$s">Settings - General</a> in WordPress\'s admin menu (on the left), or click on the link in this sentence.', 'rank-math' ) ), esc_url( admin_url( 'options-general.php' ) ) ) . '</p>' .
 			'<p>' . esc_html__( 'The tagline is the second option.  Choose a tagline that summarizes your site in a few words.  The tagline is also a good place to use your main keyword.', 'rank-math' ) . '</p>',
+		'kb_link'     => KB::get( 'analysis-site-tagline' ),
+		'tooltip'     => esc_html__( 'Confirm custom tagline is set for your site', 'rank-math' ),
 	];
 
 	$new_tests['blog_public'] = [
@@ -50,6 +52,8 @@ function rank_math_register_seo_analysis_basic_tests( $tests ) {
 				'</a>'
 			) .
 		'</p>',
+		'kb_link'     => KB::get( 'analysis-blog-public' ),
+		'tooltip'     => esc_html__( "Check your site's visibility to search engines", 'rank-math' ),
 	];
 
 	$new_tests['permalink_structure'] = [
@@ -62,6 +66,8 @@ function rank_math_register_seo_analysis_basic_tests( $tests ) {
 			'<p>' . sprintf( wp_kses_post( __( 'Fortunately, it\'s very easy to fix.  Just hop on over to <a target="_blank" href="%1$s">Settings - Permalinks</a>.  Then chose the "Post Name" option.', 'rank-math' ) ), esc_url( admin_url( 'options-permalink.php' ) ) ) . '</p>' .
 			'<p>' . esc_html__( 'This option will replace the "?p=99" part of the URL with the post\'s title, like this: http://www.yoursite.com/my-amazing-post-title/', 'rank-math' ) . '</p>' .
 			'<p>' . esc_html__( 'This looks nice for readers - and it gets your keywords into the URL (keywords in the URL is a ranking factor).', 'rank-math' ) . '</p>',
+		'kb_link'     => KB::get( 'analysis-permalink-structure' ),
+		'tooltip'     => esc_html__( 'Check your site for SEO-friendly permalink structure', 'rank-math' ),
 	];
 
 	$new_tests['focus_keywords'] = [
@@ -71,6 +77,8 @@ function rank_math_register_seo_analysis_basic_tests( $tests ) {
 			'<p>' . esc_html__( 'Rank Math uses these focus keywords to analyze your on-page content.  It can tell if you\'ve done a good job of optimizing your text to rank for these keywords.', 'rank-math' ) . '</p>' .
 			'<p>' . esc_html__( 'Of course, if you don\'t give Rank Math a focus keyword to work with, it can\'t give you any useful feedback.', 'rank-math' ) . '</p>' .
 			'<p>' . esc_html__( 'Fixing this issue is easy - just edit the post, and set a Focus Keyword.  Then follow Rank Math\'s analysis to improve your rankings.', 'rank-math' ) . '</p>',
+		'kb_link'     => KB::get( 'analysis-focus-keywords' ),
+		'tooltip'     => esc_html__( 'Confirm focus keywords are set for all your posts', 'rank-math' ),
 	];
 
 	$new_tests['post_titles'] = [
@@ -78,6 +86,8 @@ function rank_math_register_seo_analysis_basic_tests( $tests ) {
 		'description' => esc_html__( 'Make sure the focus keywords you set for the posts appear in their titles.', 'rank-math' ),
 		'how_to_fix'  => '<p>' . esc_html__( 'HTML Page Titles play a large role in Google\'s ranking algorithm.  When you add a Focus Keyword to a post or page, Rank Math will check to see that you used the keyword in the title.  If it finds any posts or pages that are missing the keyword in the title, it will tell you here.', 'rank-math' ) . '</p>' .
 			'<p>' . esc_html__( 'Fixing the issue is simple - just edit the post/page and add the focus keyword(s) to the title.', 'rank-math' ) . '</p>',
+		'kb_link'     => KB::get( 'analysis-post-titles' ),
+		'tooltip'     => esc_html__( 'Verify the presence of focus keywords in your post titles', 'rank-math' ),
 	];
 
 	foreach ( $new_tests as $key => $test ) {
@@ -92,7 +102,7 @@ function rank_math_register_seo_analysis_basic_tests( $tests ) {
 add_filter( 'rank_math/seo_analysis/tests', 'rank_math_register_seo_analysis_advanced_tests' );
 
 /**
- * Register advanced local tests for the SEO Analysis.
+ * Register advanced local tests for the SEO Analyzer.
  *
  * @param array $tests Array of tests.
  *
@@ -114,6 +124,8 @@ function rank_math_register_seo_analysis_advanced_tests( $tests ) {
 			/* translators: Link to Search Console KB article */
 			'<p>' . sprintf( wp_kses_post( __( 'Read <a href="%1$s" target="_blank">this article</a> for detailed instructions on setting up your Google Webmaster account and getting Rank Math to work with the Google Search Console.', 'rank-math' ) ), KB::get( 'help-analytics', 'SEO Analysis GSC Test' ) ) . '</p>',
 		'callback'    => 'rank_math_analyze_search_console',
+		'kb_link'     => KB::get( 'analysis-search-console' ),
+		'tooltip'     => esc_html__( 'Confirm if Rank Math is connected to Search Console', 'rank-math' ),
 	];
 
 	$tests['sitemaps'] = [
@@ -122,6 +134,8 @@ function rank_math_register_seo_analysis_advanced_tests( $tests ) {
 		'description' => esc_html__( 'XML sitemaps are a special type of text file that tells search engines about the structure of your site. They\'re a list of all the resources (pages and files) you would like the search engine to index. You can assign different priorities, so certain pages will be crawled first. Before XML sitemaps, search engines were limited to indexing the content they could find by following links. That\'s still an important feature for search engine spiders, but XML sitemaps have made it easier for content creators and search engines to collaborate.', 'rank-math' ),
 		'how_to_fix'  => esc_html__( 'If you don\'t have an XML sitemap, the best option is to install a plugin that creates sitemaps for you. That way you\'ll know the sitemap will always be up-to-date. Plugins can also automatically ping the search engines when the XML file is updated. The Rank Math WordPress plugin gives you complete control over your site\'s XML sitemaps. You can control the settings for each page as you write or edit it, and Rank Math will ping Google as soon as you submit your edits. This results in fast crawls and indexing.', 'rank-math' ),
 		'callback'    => 'rank_math_analyze_sitemap',
+		'kb_link'     => KB::get( 'analysis-sitemaps' ),
+		'tooltip'     => esc_html__( 'Check the presence of sitemaps on your website', 'rank-math' ),
 	];
 
 	return $tests;
@@ -143,6 +157,8 @@ function rank_math_register_seo_analysis_auto_update_test( $tests ) {
 			'title'       => esc_html__( 'Automatic Updates', 'rank-math' ),
 			'description' => esc_html__( 'Enable automatic updates to ensure you are always using the latest version of Rank Math.', 'rank-math' ),
 			'callback'    => 'rank_math_analyze_auto_update',
+			'kb_link'     => KB::get( 'analysis-auto-update' ),
+			'tooltip'     => esc_html__( 'Verify auto-updates are enabled for Rank Math', 'rank-math' ),
 		],
 	];
 

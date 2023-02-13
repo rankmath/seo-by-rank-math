@@ -321,7 +321,6 @@ import jQuery from 'jquery'
 
 			inputs.backdrop.hide()
 			inputs.wrap.hide()
-			inputs.title.val( '' )
 
 			correctedURL = false
 

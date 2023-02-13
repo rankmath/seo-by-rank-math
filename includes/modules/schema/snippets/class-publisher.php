@@ -36,6 +36,11 @@ class Publisher implements Snippet {
 			'name'  => $jsonld->get_organization_name(),
 		];
 
+		$social_profiles = $jsonld->get_social_profiles();
+		if ( ! empty( $social_profiles ) ) {
+			$data['publisher']['sameAs'] = $social_profiles;
+		}
+
 		$jsonld->add_prop( 'image', $data['publisher'] );
 		if ( empty( $data['publisher']['logo'] ) ) {
 			return $data;

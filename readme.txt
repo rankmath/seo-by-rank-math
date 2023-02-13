@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.103
+Stable tag: 1.0.107.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -77,7 +77,7 @@ Rank Math's integrated LSI keyword tool gives you multiple keyword variations of
 Rank Math makes social thumbnails click magnets by giving you the option of overlaying a GIF or a video icon on the thumbnail.
 
 * **Advanced SEO Analysis Tool**
-With just a single click, Rank Math can perform an SEO audit of your website.
+With just a single click, Rank Math can perform an SEO Analyzer of your website.
 
 * **30 Detailed SEO Tests**
 Rank Math is designed to completely supercharge your website's SEO with its 30 detailed SEO tests. Free account needed.
@@ -583,22 +583,24 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.103 [Nov 30, 2022] =
-* Added: [NEW!] [HTML Sitemaps](https://rankmath.com/kb/html-sitemap/?play-video=Euw7qS4IRXM) are here for everyone!
-* Added: Option to enable/disable [Author Sitemap](https://rankmath.com/kb/configure-sitemaps/#authors)
-* Added: Back button in the [Content AI Panel](https://rankmath.com/kb/how-to-use-content-ai/#open-content-ai-panel) to get back to the SEO Controls without reloading the page
-* Improved: [HUGE!] [SEO Tests](https://rankmath.com/kb/score-100-in-tests/) & [Content AI](https://rankmath.com/kb/how-to-use-content-ai/) tests run much faster than ever
-* Improved: [HUGE!] Performance by preventing unnecessary calls for the `getFeaturedImageId` REST endpoint in the [Divi Editor](https://rankmath.com/kb/seo-meta-tags/#divi)
-* Fixed: Visual bug in the date field of [Schema Generator](https://rankmath.com/kb/schema-generator/)
-* Fixed: Query strings added to the attachment URL using the Open Graph Image [filter](https://rankmath.com/kb/filters-hooks-api-developer/#change-opengraph-image) were getting removed
-* Fixed: Incorrect [description](https://rankmath.com/kb/variables-in-seo-title-description/#num-18-post-excerpt) was generated when multiple keywords were used in the post
-* Fixed: [Capitalize Title](https://rankmath.com/kb/titles-and-meta/#capitalize-titles) option was not working well when an apostrophe was used in the title
-* Fixed: [Google Trends tool](https://rankmath.com/kb/keyword-research-with-rank-math/#google-trends) was not displaying the popup in the Elementor Editor after switching tabs
-* Fixed: [Recalculate SEO score tool](https://rankmath.com/kb/seo-score-not-available/#database-tools) was not detecting the ALT text added to the post thumbnail
-* Fixed: Position of the toggle options in [Rank Math's Meta Box](https://rankmath.com/kb/on-page-seo/#num-3-in-classic-editor) at Classic Editor
-* Fixed: Missing font icons in Divi & Elementor Editor when Schema & Content AI modules are disabled
-* Fixed: Content AI REST endpoints were showing 404 error on some setups
-* Fixed: Sitemap cache not being cleared after setting a post to `noindex`
-* Fixed: Deprecated function used in the plugin
+= 1.0.107 [Jan 25, 2023] =
+- Improved: [TOC Block](https://rankmath.com/kb/table-of-contents-block/) can now recognize the headings added to [FAQ](https://rankmath.com/kb/faq-schema-block/) & [HowTo](https://rankmath.com/blog/howto-schema/) Blocks
+- Fixed: PHP error related to [Analytics](https://rankmath.com/kb/analytics) on WordPress 6.0
+- Fixed: [Sorting option](https://rankmath.com/kb/analytics/#data-sorting) was not working in Analytics tables
+- Fixed: [Rank Tracker graph](https://rankmath.com/kb/analytics/#rank-tracker) was not showing correctly on RTL websites
+- Fixed: PHP error on some setups when the [Content AI](https://rankmath.com/content-ai/) module is active
+- Fixed: Missing term names in the [HTML Sitemap](https://rankmath.com/kb/html-sitemap/)
+
+= 1.0.107.1 [Jan 25, 2023] =
+- Fixed: Version number
+
+= 1.0.107.2 [Jan 26, 2023] =
+- Fixed: TOC Block was not detecting the headings added in FAQ & HowTo blocks when core headings were present in the content
+
+= 1.0.107.3 [Jan 30, 2023] =
+- Improved: Strengthened the security of the plugin. Thanks to PatchStack(link) for revealing it responsibly
+- Fixed: After importing the data from Yoast, the `%%searchphrase%%` variable was not getting converted to the Rank Math's `%search_query%`
+- Fixed: [Focus Keyword in Title test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-the-seo-title-primary-focus-keyword-only) was not working well when `&` was used in the SERP Title
+- Fixed: [Book schema](https://rankmath.com/kb/book-schema/#date-published) was showing incorrect published date on the frontend
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

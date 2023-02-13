@@ -73,6 +73,11 @@ class Author implements Snippet {
 			$same_as[] = 'https://twitter.com/' . $twitter;
 		}
 
+		$addional_urls = get_user_meta( $author_id, 'additional_profile_urls', true );
+		if ( $addional_urls ) {
+			$same_as = array_merge( $same_as, explode( ' ', $addional_urls ) );
+		}
+
 		$same_as = array_filter( $same_as );
 		if ( empty( $same_as ) ) {
 			return;

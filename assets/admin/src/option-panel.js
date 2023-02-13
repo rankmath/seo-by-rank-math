@@ -710,11 +710,6 @@ import addNotice from '@helpers/addNotice'
 			},
 
 			htmlSitemap() {
-				jQuery( '.html-sitemap' ).on( 'click', () => {
-					ajax( 'viewed_html_sitemap' )
-					jQuery( '.rank-math-new-label' ).remove()
-				} )
-
 				const htmlSitemap = jQuery( '#html_sitemap' )
 				const htmlSitemapFields = jQuery( '.rank-math-html-sitemap' )
 				htmlSitemap.on( 'change', () => {

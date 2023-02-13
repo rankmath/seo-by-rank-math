@@ -9,6 +9,11 @@
     height: 10px;
     margin-right: 10px;
 
+    @at-root .rtl & {
+        margin-right: auto;
+        margin-left: 10px;
+    }
+
     content: '';
 
     border-radius: 2px;
@@ -44,6 +49,11 @@
 
                     .#{$namespace}-tooltip em:before {
                         margin-left: 3px;
+
+                        @at-root .rtl & {
+                            margin-left: auto;
+                            margin-right: 3px;
+                        }
 
                         vertical-align: -3px;
                     }

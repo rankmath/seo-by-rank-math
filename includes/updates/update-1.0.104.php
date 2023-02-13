@@ -13,25 +13,15 @@ use RankMath\Helper;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Disable HTML sitemap by default, but copy the posts/terms "include in
- * sitemap" settings to the new HTML sitemap settings.
+ * Update TOC block settings on existing sites.
  */
-function rank_math_1_0_104_update_html_sitemap() {
-	$all_opts = rank_math()->settings->all_raw();
+function rank_math_1_0_104_toc_block_settings() {
+	$all_opts                        = rank_math()->settings->all_raw();
+	$general                         = $all_opts['general'];
+	$general['toc_block_title']      = 'Table of Contents';
+	$general['toc_block_list_style'] = 'ul';
 
-	$sitemap_settings                    = $all_opts['sitemap'];
-	$sitemap_settings['html_sitemap']    = 'off';
-	$sitemap_settings['authors_sitemap'] = 'on';
-
-	foreach ( Helper::get_accessible_post_types() as $post_type ) {
-		$sitemap_settings[ 'pt_' . $post_type . '_html_sitemap' ] = isset( $sitemap_settings[ 'pt_' . $post_type . '_sitemap' ] ) ? $sitemap_settings[ 'pt_' . $post_type . '_sitemap' ] : 'off';
-	}
-
-	foreach ( Helper::get_accessible_taxonomies() as $taxonomy => $object ) {
-		$sitemap_settings[ 'tax_' . $taxonomy . '_html_sitemap' ] = isset( $sitemap_settings[ 'tax_' . $taxonomy . '_sitemap' ] ) ? $sitemap_settings[ 'tax_' . $taxonomy . '_sitemap' ] : 'off';
-	}
-
-	Helper::update_all_settings( null, null, $sitemap_settings );
+	Helper::update_all_settings( $general, null, null );
 	rank_math()->settings->reset();
 }
-rank_math_1_0_104_update_html_sitemap();
+rank_math_1_0_104_toc_block_settings();
