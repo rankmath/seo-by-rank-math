@@ -47,6 +47,8 @@ class Export {
 
 		check_admin_referer( 'rank-math-export-redirections' );
 
+
+
 		$filename = "rank-math-redirections-{$server}-" . date_i18n( 'Y-m-d-H-i-s' ) . ( 'apache' === $server ? '.htaccess' : '.conf' );
 
 		header( 'Content-Type: application/octet-stream' );
@@ -54,6 +56,7 @@ class Export {
 		header( 'Cache-Control: no-cache, no-store, must-revalidate' );
 		header( 'Pragma: no-cache' );
 		header( 'Expires: 0' );
+
 
 		$items = DB::get_redirections(
 			[
@@ -88,7 +91,7 @@ class Export {
 	 * @return string
 	 */
 	private function apache( $items ) {
-		$output[] = '<IfModule mod_rewrite.c>';
+		$output[] = '<IfModule mod_alias.c>';
 
 		foreach ( $items as $item ) {
 			$this->apache_item( $item, $output );
@@ -106,7 +109,6 @@ class Export {
 	 * @param array $output Output array.
 	 */
 	private function apache_item( $item, &$output ) {
-		$target  = '410' === $item['header_code'] ? '- [G]' : sprintf( '%s [R=%d,L]', $this->encode2nd( $item['url_to'] ), $item['header_code'] );
 		$sources = maybe_unserialize( $item['sources'] );
 
 		foreach ( $sources as $from ) {
@@ -118,7 +120,10 @@ class Export {
 			}
 
 			// Get rewrite string.
-			$output[] = sprintf( '%sRewriteRule %s %s', ( $this->is_valid_regex( $from ) ? '' : '# ' ), $this->get_comparison( $url, $from ), $target );
+			$header_code   = $item['header_code'];
+			$redirect_from = $this->get_comparison( $from['pattern'], $from );
+			$valid_regex   = ( $this->is_valid_regex( $from ) ? '' : '# ' );
+			$output[]      = sprintf( '%sRedirectMatch %s %s %s', $valid_regex, $header_code, $redirect_from, $this->encode2nd( $item['url_to'] ) );
 		}
 	}
 
