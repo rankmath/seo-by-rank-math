@@ -47,8 +47,6 @@ class Export {
 
 		check_admin_referer( 'rank-math-export-redirections' );
 
-
-
 		$filename = "rank-math-redirections-{$server}-" . date_i18n( 'Y-m-d-H-i-s' ) . ( 'apache' === $server ? '.htaccess' : '.conf' );
 
 		header( 'Content-Type: application/octet-stream' );
@@ -56,7 +54,6 @@ class Export {
 		header( 'Cache-Control: no-cache, no-store, must-revalidate' );
 		header( 'Pragma: no-cache' );
 		header( 'Expires: 0' );
-
 
 		$items = DB::get_redirections(
 			[
