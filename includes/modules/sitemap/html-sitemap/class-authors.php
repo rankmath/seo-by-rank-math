@@ -13,15 +13,23 @@ namespace RankMath\Sitemap\Html;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Database\Database;
+use RankMath\Sitemap\Providers\Author;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Terms class.
  */
-class Authors {
+class Authors extends Author {
 
 	use Hooker;
+
+	/**
+	 * The constructor.
+	 */
+	public function __construct() {
+		parent::__construct();
+	}
 
 	/**
 	 * Get all authors.
@@ -61,20 +69,19 @@ class Authors {
 		 * @var string $order The item type.
 		 * @var string $empty Empty string (unused).
 		 */
-		$sort = $this->do_filter( 'sitemap/html_sitemap/sort_items', $sort, 'authors', '' );
+		$sort     = $this->do_filter( 'sitemap/html_sitemap/sort_items', $sort, 'authors', '' );
+		$defaults = array(
+			'orderby' => $sort['field'],
+			'order'   => $sort['order'],
+		);
+		$args     = $this->do_filter( 'sitemap/author/query', wp_parse_args( array( 'posts_per_page' => -1 ), $defaults ) );
+		$users    = $this->get_users( $args );
 
-		$exclude = wp_parse_id_list( Helper::get_settings( 'sitemap.exclude_users' ) );
-		$table   = Database::table( 'users' );
-
-		$query = $table->select( [ 'ID', 'display_name', 'user_nicename' ] );
-
-		if ( ! empty( $exclude ) ) {
-			$query->whereNotIn( 'ID', $exclude );
+		if ( empty( $users ) ) {
+			return array();
 		}
 
-		$authors = $query->orderBy( $sort['field'], $sort['order'] )->get();
-
-		return array_filter( $authors, [ $this, 'should_include_user' ] );
+		return $users;
 	}
 
 	/**
