@@ -14,7 +14,6 @@ use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Paper\Paper;
 use RankMath\Traits\Hooker;
-use RankMath\Sitemap\Router;
 use MyThemeShop\Helpers\Str;
 use RankMath\Helpers\Security;
 
