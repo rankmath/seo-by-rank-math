@@ -312,7 +312,7 @@ class Head {
 		}
 
 		if ( is_front_page() ) {
-			$url = Router::get_base_url( '' );
+			$url = trailingslashit( get_home_url() );
 		}
 
 		if ( $paged > 2 ) {
