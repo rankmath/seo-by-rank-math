@@ -148,7 +148,7 @@ class Terms {
 		$output = [];
 		foreach ( $terms as $term ) {
 			$output[] = '<li class="rank-math-html-sitemap__item">'
-				. '<a href="' . esc_url( $this->get_term_link( (int) $term->term_id, get_taxonomy( $taxonomy ) ) ) . '" class="rank-math-html-sitemap__link">'
+				. '<a href="' . esc_url( $this->get_term_link( (int) $term->term_id, $taxonomy ) ) . '" class="rank-math-html-sitemap__link">'
 				. esc_html( $this->get_term_title( $term, $taxonomy ) )
 				. '</a>'
 				. '</li>';
