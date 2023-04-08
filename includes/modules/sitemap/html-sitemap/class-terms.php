@@ -95,11 +95,12 @@ class Terms {
 	 *
 	 * @param string $taxonomy Taxonomy name.
 	 * @param bool   $show_dates Whether to show dates.
+	 * @param array   $args Array with term query arguments.
 	 *
 	 * @return string
 	 */
-	public function generate_sitemap( $taxonomy, $show_dates ) {
-		$terms = $this->get_terms( $taxonomy );
+	public function generate_sitemap( $taxonomy, $show_dates, $args = array() ) {
+		$terms = get_terms( $taxonomy, $args );
 		if ( empty( $terms ) ) {
 			return '';
 		}
