@@ -45,7 +45,7 @@ $entries_status = Param::get( 'status' ) ?? 'any';
 
 	<form method="get">
 		<input type="hidden" name="page" value="rank-math-redirections">
-		<input type="hidden" name="status" value="<?php echo esc_html( $entries_status ); ?>">
+		<input type="hidden" name="status" value="<?php echo esc_attr( $entries_status ); ?>">
 		<?php $redirections->table->search_box( esc_html__( 'Search', 'rank-math' ), 's' ); ?>
 	</form>
 
