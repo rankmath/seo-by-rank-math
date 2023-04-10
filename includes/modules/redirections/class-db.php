@@ -75,7 +75,8 @@ class DB {
 
 		$table = self::table()
 			->found_rows()
-			->page( $args['paged'] - 1, $args['limit'] );
+			->page( $args['paged'] - 1, $args['limit'] )
+			->where( 'status', $status[0], $status[1] );
 
 		if ( ! empty( $args['search'] ) ) {
 			$table->whereLike( 'sources', $args['search'] );
