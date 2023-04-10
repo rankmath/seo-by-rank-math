@@ -19,12 +19,7 @@ $is_editing = ! empty( Param::get( 'url' ) ) || ! empty( $_GET['urls'] ) || ! em
 
 $is_importexport = ! empty( Param::get( 'importexport' ) );
 
-if ( Param::get( 'status' ) ) {
-	$entries_status = Param::get( 'status' );
-} else {
-	$entries_status = 'any';
-}
-
+$entries_status = Param::get( 'status' ) ?? 'any';
 
 ?>
 <div class="wrap rank-math-redirections-wrap">

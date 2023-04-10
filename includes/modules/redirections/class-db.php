@@ -75,14 +75,11 @@ class DB {
 
 		$table = self::table()
 			->found_rows()
-			->page( $args['paged'] - 1, $args['limit'] )
-			->where( 'status', $status[0], $status[1] );
+			->page( $args['paged'] - 1, $args['limit'] );
 
 		if ( ! empty( $args['search'] ) ) {
 			$table->whereLike( 'sources', $args['search'] );
 			$table->orWhereLike( 'url_to', $args['search'] );
-
-			// Combines WHERE clauses with AND status
 			$table->where( 'status', $status[0], $status[1] );
 		}
 
