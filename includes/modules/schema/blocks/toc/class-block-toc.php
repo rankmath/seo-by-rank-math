@@ -84,8 +84,8 @@ class Block_TOC extends Block {
 	/**
 	 * Add default TOC title.
 	 *
-	 * @param string $block_content        Block content.
-	 * @param array  $parsed_block         The full block, including name and attributes.
+	 * @param string $block_content Block content.
+	 * @param array  $parsed_block  The full block, including name and attributes.
 	 *
 	 * @return string
 	 */
