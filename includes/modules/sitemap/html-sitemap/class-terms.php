@@ -120,7 +120,7 @@ class Terms {
 	/**
 	 * Get the term list HTML.
 	 *
-	 * @param array  $terms The terms to output.
+	 * @param array  $terms    The terms to output.
 	 * @param object $taxonomy The taxonomy object.
 	 *
 	 * @return string
