@@ -103,7 +103,7 @@ class Sitemap extends Taxonomy {
 		 * Filter the setting of excluding empty terms from the XML sitemap.
 		 *
 		 * @param boolean $exclude        Defaults to true.
-		 * @param array   $taxonomies Array of names for the taxonomies being processed.
+		 * @param array   $taxonomies     Array of names for the taxonomies being processed.
 		 */
 		$hide_empty = $this->do_filter( 'sitemap/exclude_empty_terms', true, $taxonomies );
 
@@ -135,7 +135,7 @@ class Sitemap extends Taxonomy {
 				$sitemap = $this->get_generator( 'terms' )->generate_sitemap(
 					$taxonomy,
 					$show_dates,
-					array( 'hide_empty' => $hide_empty )
+					[ 'hide_empty' => $hide_empty ]
 				);
 				$this->set_cache( $taxonomy, $sitemap );
 				$output[] = $sitemap;
@@ -228,6 +228,8 @@ class Sitemap extends Taxonomy {
 
 	/**
 	 * Show sitemap on a page (after content).
+	 *
+	 * @param mixed $content The page content.
 	 */
 	public function show_on_page( $content ) {
 		if ( ! is_page() ) {

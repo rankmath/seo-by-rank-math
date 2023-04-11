@@ -70,15 +70,15 @@ class Authors extends Author {
 		 * @var string $empty Empty string (unused).
 		 */
 		$sort     = $this->do_filter( 'sitemap/html_sitemap/sort_items', $sort, 'authors', '' );
-		$defaults = array(
+		$defaults = [
 			'orderby' => $sort['field'],
 			'order'   => $sort['order'],
-		);
+		];
 		$args     = $this->do_filter( 'sitemap/author/query', wp_parse_args( array( 'posts_per_page' => -1 ), $defaults ) );
 		$users    = $this->get_users( $args );
 
 		if ( empty( $users ) ) {
-			return array();
+			return [];
 		}
 
 		return $users;

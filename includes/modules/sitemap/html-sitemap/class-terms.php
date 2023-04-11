@@ -93,13 +93,13 @@ class Terms {
 	/**
 	 * Generate the HTML sitemap for a given taxonomy.
 	 *
-	 * @param string $taxonomy Taxonomy name.
+	 * @param string $taxonomy   Taxonomy name.
 	 * @param bool   $show_dates Whether to show dates.
-	 * @param array   $args Array with term query arguments.
+	 * @param array  $args       Array with term query arguments.
 	 *
 	 * @return string
 	 */
-	public function generate_sitemap( $taxonomy, $show_dates, $args = array() ) {
+	public function generate_sitemap( $taxonomy, $show_dates, $args = [] ) {
 		$terms = get_terms( $taxonomy, $args );
 		if ( empty( $terms ) ) {
 			return '';
@@ -140,8 +140,8 @@ class Terms {
 	/**
 	 * Get the term list HTML for non-hierarchical taxonomies.
 	 *
-	 * @param array $terms The terms to output.
-	 * @param bool  $show_dates Whether to show the term dates.
+	 * @param array $terms    The terms to output.
+	 * @param bool  $taxonomy Name of taxonomy object to generate list for.
 	 *
 	 * @return string
 	 */
