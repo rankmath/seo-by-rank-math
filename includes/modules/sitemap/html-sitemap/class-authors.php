@@ -31,11 +31,11 @@ class Authors extends Author {
 	 */
 	private function get_authors() {
 		$sort_map = [
-			'published' => [
+			'published'    => [
 				'field' => 'user_registered',
 				'order' => 'DESC',
 			],
-			'modified'  => [
+			'modified'     => [
 				'field' => 'user_registered',
 				'order' => 'DESC',
 			],
@@ -43,7 +43,7 @@ class Authors extends Author {
 				'field' => 'display_name',
 				'order' => 'ASC',
 			],
-			'post_id' => [
+			'post_id'      => [
 				'field' => 'ID',
 				'order' => 'DESC',
 			],
