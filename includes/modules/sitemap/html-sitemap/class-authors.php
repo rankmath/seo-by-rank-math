@@ -67,7 +67,7 @@ class Authors extends Author {
 			'orderby' => $sort['field'],
 			'order'   => $sort['order'],
 		];
-		$args     = $this->do_filter( 'sitemap/author/query', wp_parse_args( array( 'posts_per_page' => -1 ), $defaults ) );
+		$args     = $this->do_filter( 'sitemap/author/query', wp_parse_args( [ 'posts_per_page' => -1 ], $defaults ) );
 		$users    = $this->get_users( $args );
 
 		if ( empty( $users ) ) {
