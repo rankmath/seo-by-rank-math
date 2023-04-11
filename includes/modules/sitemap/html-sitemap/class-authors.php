@@ -50,7 +50,7 @@ class Authors extends Author {
 		];
 
 		$sort_setting = Helper::get_settings( 'sitemap.html_sitemap_sort' );
-		$sort = ( isset( $sort_map[ $sort_setting ] ) ) ? $sort_map[ $sort_setting ] : $sort_map['published'];
+		$sort         = ( isset( $sort_map[ $sort_setting ] ) ) ? $sort_map[ $sort_setting ] : $sort_map['published'];
 
 		/**
 		 * Filter: 'rank_math/sitemap/html_sitemap/sort_items' - Allow changing the sort order of the HTML sitemap.
