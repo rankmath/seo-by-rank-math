@@ -25,13 +25,6 @@ class Authors extends Author {
 	use Hooker;
 
 	/**
-	 * The constructor.
-	 */
-	public function __construct() {
-		parent::__construct();
-	}
-
-	/**
 	 * Get all authors.
 	 *
 	 * @return array
