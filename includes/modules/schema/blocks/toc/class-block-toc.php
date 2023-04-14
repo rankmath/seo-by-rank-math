@@ -60,10 +60,45 @@ class Block_TOC extends Block {
 			return;
 		}
 
+
 		$this->filter( 'rank_math/schema/block/toc-block', 'add_graph', 10, 2 );
 		$this->filter( 'render_block_rank-math/toc-block', 'render_toc_block_content', 10, 2 );
 		$this->filter( 'rank_math/metabox/post/values', 'block_settings_metadata' );
-		register_block_type( RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json' );
+		//register_block_type( RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json' );
+		register_block_type(
+			RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json',
+			[
+				'render_callback' => [ $this, 'render'],
+				//'editor_style'    => 'rank-math-block-admin',
+				'attributes'      => [
+					'title' => [
+						'type'    => 'string',
+						'default' => '',
+					],
+					'headings' => [
+						'type'    => 'array',
+						'default' => [],
+						'items'   => [ 'type' => 'object' ],
+					],
+					'listStyle'   => [
+						'type'    => 'string',
+					],
+					'titleWrapper'           => [
+						'type'    => 'string',
+						'default' => 'h2',
+					],
+					'excludeHeadings' => [
+						'type'    => 'array',
+						'default' => '',
+					],
+					'textAlign'         => [
+						'type'    => 'string',
+						'default' => 'left',
+					],
+				],
+			]
+		);
+
 	}
 
 	/**
@@ -79,6 +114,66 @@ class Block_TOC extends Block {
 		$values['listStyle']          = Helper::get_settings( 'general.toc_block_list_style', 'ul' );
 
 		return $values;
+	}
+
+	public function render( $attributes ) {
+		$list_tag = self::get()->get_list_style( $attributes['listStyle'] );
+		$item_tag = self::get()->get_list_item_style( $attributes['listStyle'] );
+		$class    = 'rank-math-block';
+		if ( ! empty( $attributes['className'] ) ) {
+			$class .= ' ' . esc_attr( $attributes['className'] );
+		}
+
+		// TODO:: loop through headings and group them together with levels.
+		// TODO:: maybe an issue with how they are loaded to start with.
+
+		$title = ! empty( $attributes['title'] ) ? $attributes['title'] : Helper::get_settings( 'general.toc_block_title' );
+
+		//dump(self::get()->get_styles( $attributes ));
+//		dump($title);
+		dump($attributes);
+//		dump(Helper::get_settings( 'general.toc_block_title' ));
+
+		## @TODO for heading children
+
+		// HTML.
+		$out   = [];
+		$out[] = sprintf(
+			'<div id="rank-math-toc" class="%1$s"%2$s><%3$s>%4$s</%3$s>',
+			$class,
+			self::get()->get_styles( $attributes ),
+			$attributes['titleWrapper'],
+			$title,
+		);
+		//$out[] = sprintf( '<%1$s class="rank-math-list %2$s">', $list_tag, $attributes['listCssClasses'] );
+		$out[] = '<nav><div>';
+		foreach ( $attributes['headings'] as $heading ) {
+
+			if ( empty( $heading['link'] ) ) {
+				continue;
+			}
+
+			dump($heading['level']);
+			dump($heading['content']);
+
+			$out[] = sprintf(
+				'<div><a href="%1$s">%2$s</a></div>',
+				$heading['link'],
+				$heading['content']
+			);
+			//dump($heading);
+		}
+//		dump($class);
+//		dump($list_tag);
+//		dump($item_tag);
+//		dump($attributes);
+
+		//$out[] = sprintf( '</%1$s>', $list_tag );
+		$out[] ='</div></nav>';
+		$out[] = '</div>';
+
+		return join( "\n", $out );
+
 	}
 
 	/**
