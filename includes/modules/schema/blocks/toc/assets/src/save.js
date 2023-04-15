@@ -14,12 +14,12 @@ export default function save( { attributes } ) {
 		return null
 	}
 
-	const TitleWrapper = attributes.titleWrapper
+	const TitleWrapper = attributes.titleWrapper ?? 'h2'
 	const headings = linearToNestedHeadingList( attributes.headings )
 	const ListStyle = attributes.listStyle
 
 	return (
-		<div { ...useBlockProps.save() }>
+		<div { ...useBlockProps.save() } id="rank-math-toc">
 			{ attributes.title && <TitleWrapper dangerouslySetInnerHTML={ { __html: attributes.title } }></TitleWrapper> }
 			<nav>
 				<ListStyle>

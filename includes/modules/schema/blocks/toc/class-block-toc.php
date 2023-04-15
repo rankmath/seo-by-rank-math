@@ -108,7 +108,6 @@ class Block_TOC extends Block {
 					return $block_content;
 				}
 
-				$value[0] = str_replace( '>', ' id="rank-math-toc">', $value[0] );
 				return $value[0] . '<' . tag_escape( $title_wrapper ) . '>' . esc_html( $title ) . '</' . tag_escape( $title_wrapper ) . '>';
 			},
 			$block_content
