@@ -91,16 +91,38 @@ class Block_TOC extends Block {
 
 	public function render( $attributes ) {
 		// @TODO cache with count($attributes['headings']) maybe
+
 		$headings = $this->linear_to_nested_heading_list($attributes['headings']);
 		$list_out_put = $this->list_output($headings);
-		$list_tag = self::get()->get_list_style( $attributes['listStyle'] );
-		$item_tag = self::get()->get_list_item_style( $attributes['listStyle'] );
+
+		/**
+		 * @TODO apply settings/options,
+		 * @ /seo-by-rank-math/includes/modules/schema/blocks/views/options-general.php
+		 * We have
+		 * 1. attributes.titleWrapper
+		 * 2. attributes.listStyle
+		 * 3. attributes.title ?? rankMath.tocTitle
+		 * 4. attributes.excludeHeadings ?? rankMath.tocExcludeHeadings
+		 * Others to confirm include:
+		 * 5. heading.disable
+		 * 6. TagName = 'div' === ListStyle ? 'div' : 'li'
+		 */
+
+		// Settings
+		$title_wrapper = $attributes['titleWrapper'];
+		$list_style = Helper::get_settings('general.toc_block_list_style') ?? $attributes['listStyle'];
+		$title = ! empty( $attributes['title'] ) ? $attributes['title'] : Helper::get_settings( 'general.toc_block_title' );
+		$exclude_headings = Helper::get_settings('general.toc_block_exclude_headings');
+
+		$list_tag = self::get()->get_list_style( $list_style );
+		$item_tag = self::get()->get_list_item_style( $list_style );
+
+		//dump($attributes);
+
 		$class    = 'rank-math-block';
 		if ( ! empty( $attributes['className'] ) ) {
 			$class .= ' ' . esc_attr( $attributes['className'] );
 		}
-
-		$title = ! empty( $attributes['title'] ) ? $attributes['title'] : Helper::get_settings( 'general.toc_block_title' );
 
 		// HTML.
 		$out   = [];
@@ -244,7 +266,6 @@ class Block_TOC extends Block {
 		$out[] = '<ul>';
 
 		foreach ($headings as $heading) {
-			//dump($heading['children']);
 			$out[] = sprintf(
 				'<div><a href="%1$s">%2$s</a></div>',
 				$heading['item']['link'],
