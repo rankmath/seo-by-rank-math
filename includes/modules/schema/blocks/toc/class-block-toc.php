@@ -62,40 +62,13 @@ class Block_TOC extends Block {
 
 
 		$this->filter( 'rank_math/schema/block/toc-block', 'add_graph', 10, 2 );
-		$this->filter( 'render_block_rank-math/toc-block', 'render_toc_block_content', 10, 2 );
+		//$this->filter( 'render_block_rank-math/toc-block', 'render_toc_block_content', 10, 2 );
 		$this->filter( 'rank_math/metabox/post/values', 'block_settings_metadata' );
 		//register_block_type( RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json' );
 		register_block_type(
 			RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json',
 			[
 				'render_callback' => [ $this, 'render'],
-				//'editor_style'    => 'rank-math-block-admin',
-				'attributes'      => [
-					'title' => [
-						'type'    => 'string',
-						'default' => '',
-					],
-					'headings' => [
-						'type'    => 'array',
-						'default' => [],
-						'items'   => [ 'type' => 'object' ],
-					],
-					'listStyle'   => [
-						'type'    => 'string',
-					],
-					'titleWrapper'           => [
-						'type'    => 'string',
-						'default' => 'h2',
-					],
-					'excludeHeadings' => [
-						'type'    => 'array',
-						'default' => '',
-					],
-					'textAlign'         => [
-						'type'    => 'string',
-						'default' => 'left',
-					],
-				],
 			]
 		);
 
@@ -117,6 +90,9 @@ class Block_TOC extends Block {
 	}
 
 	public function render( $attributes ) {
+		// @TODO cache with count($attributes['headings']) maybe
+		$headings = $this->linear_to_nested_heading_list($attributes['headings']);
+		$list_out_put = $this->list_output($headings);
 		$list_tag = self::get()->get_list_style( $attributes['listStyle'] );
 		$item_tag = self::get()->get_list_item_style( $attributes['listStyle'] );
 		$class    = 'rank-math-block';
@@ -124,17 +100,7 @@ class Block_TOC extends Block {
 			$class .= ' ' . esc_attr( $attributes['className'] );
 		}
 
-		// TODO:: loop through headings and group them together with levels.
-		// TODO:: maybe an issue with how they are loaded to start with.
-
 		$title = ! empty( $attributes['title'] ) ? $attributes['title'] : Helper::get_settings( 'general.toc_block_title' );
-
-		//dump(self::get()->get_styles( $attributes ));
-//		dump($title);
-		dump($attributes);
-//		dump(Helper::get_settings( 'general.toc_block_title' ));
-
-		## @TODO for heading children
 
 		// HTML.
 		$out   = [];
@@ -145,30 +111,9 @@ class Block_TOC extends Block {
 			$attributes['titleWrapper'],
 			$title,
 		);
-		//$out[] = sprintf( '<%1$s class="rank-math-list %2$s">', $list_tag, $attributes['listCssClasses'] );
+
 		$out[] = '<nav><div>';
-		foreach ( $attributes['headings'] as $heading ) {
-
-			if ( empty( $heading['link'] ) ) {
-				continue;
-			}
-
-			dump($heading['level']);
-			dump($heading['content']);
-
-			$out[] = sprintf(
-				'<div><a href="%1$s">%2$s</a></div>',
-				$heading['link'],
-				$heading['content']
-			);
-			//dump($heading);
-		}
-//		dump($class);
-//		dump($list_tag);
-//		dump($item_tag);
-//		dump($attributes);
-
-		//$out[] = sprintf( '</%1$s>', $list_tag );
+		$out[] = $list_out_put;
 		$out[] ='</div></nav>';
 		$out[] = '</div>';
 
@@ -244,5 +189,75 @@ class Block_TOC extends Block {
 		}
 
 		return $data;
+	}
+
+
+	/**
+	 * Nest heading based on the Heading level.
+	 * @param array $heading_list The flat list of headings to nest.
+	 *
+	 * @return array The nested list of headings.
+	 */
+	private function linear_to_nested_heading_list( $heading_list ) {
+		$nexted_heading_list = [];
+		foreach ($heading_list as $key => $heading) {
+			if (empty($heading['content'])) {
+				continue;
+			}
+
+			// Make sure we are only working with the same level as the first iteration in our set.
+			if (  $heading['level'] === $heading_list[ 0 ]['level']){
+
+				// Propagate to children only (those whose level is lower than their parent ie $heading['level'].
+				if ( isset($heading_list[ $key + 1]['level']) &&  $heading_list[ $key + 1]['level'] > $heading['level']) {
+					$endOfSlice = count($heading_list);
+					$children = $this->linear_to_nested_heading_list(
+						array_slice($heading_list,  $key + 1, $endOfSlice)
+					);
+
+					array_push(
+						$nexted_heading_list,
+						[
+							'item' => $heading,
+							'children' => $children
+						]
+					);
+				} else {
+					array_push(
+						$nexted_heading_list,
+						[
+							'item' => $heading,
+							'children' => null
+						]
+					);
+				}
+
+			}
+
+		}
+
+		return $nexted_heading_list;
+
+	}
+
+	private function list_output( $headings ){
+		$out[] = '<ul>';
+
+		foreach ($headings as $heading) {
+			//dump($heading['children']);
+			$out[] = sprintf(
+				'<div><a href="%1$s">%2$s</a></div>',
+				$heading['item']['link'],
+				$heading['item']['content']
+			);
+
+			if ($heading['children']) {
+				$out[] = $this->list_output($heading['children']);
+			}
+		}
+
+		$out[] = '</ul>';
+		return join( "\n", $out );
+
 	}
 }
