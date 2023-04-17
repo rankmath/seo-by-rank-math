@@ -100,6 +100,14 @@ export default compose(
 		const schemas = select( 'rank-math' ).getSchemas()
 		const count = Object.keys( schemas ).length
 
+		// @TODO:: it's reset from where when the modal is open and no selection is made.
+		// Always overrides to default if the user doesn't interract with the select.
+		console.log("||||||||||||||||| SchemaList.js ||||||||||||||||||||||")
+		console.log("||||||||||||||||| SchemaList.js ||||||||||||||||||||||")
+		console.log(schemas['schema-16']['metadata']['unpublish'])
+		console.log("||||||||||||||||| SchemaList.js ||||||||||||||||||||||")
+		console.log("||||||||||||||||| SchemaList.js ||||||||||||||||||||||")
+
 		return {
 			schemas,
 			showProNotice: 1 <= count,
