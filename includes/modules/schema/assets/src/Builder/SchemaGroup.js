@@ -39,6 +39,7 @@ const SchemaGroup = ( props ) => {
 
 	// @TODO from here compare against schemaMaps.js and the related props!
 	// seo-by-rank-math/includes/modules/schema/assets/src/Functions/schemaMaps.js
+	// seo-by-rank-math/includes/modules/schema/assets/src/Builder/SchemaPropertyField.js
 	// OTHERS:
 	// includes/modules/schema/assets/src/Builder/SchemaBuilder.js withSelect (290)
 	// includes/modules/schema/assets/src/Editor/EditorModal.js
