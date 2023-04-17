@@ -14,7 +14,7 @@ export default function save( { attributes } ) {
 		return null
 	}
 
-	const TitleWrapper = attributes.titleWrapper ?? 'h2'
+	const TitleWrapper = attributes.titleWrapper
 	const headings = linearToNestedHeadingList( attributes.headings )
 	const ListStyle = attributes.listStyle
 
