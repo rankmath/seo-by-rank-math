@@ -37,7 +37,6 @@ const SchemaGroup = ( props ) => {
 		return null
 	}
 
-
 	const { parentId, isCustom, isPro, isMain = false } = props
 	const { id, property, properties, map, metadata } = props.data
 	const { addProperty, addGroup, removeGroup, propertyChange, duplicateGroup } = props.actions
