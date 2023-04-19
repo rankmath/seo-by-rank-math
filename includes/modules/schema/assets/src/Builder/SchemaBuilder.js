@@ -40,7 +40,6 @@ class SchemaBuilder extends Component {
 	constructor() {
 		super( ...arguments )
 		this.options = get( this.props.data, 'metadata', {} )
-		// Always overrides to default if the user doesn't interract with the select.
 		const data = this.syncSavedMetaWithProperties( this.props.data )
 		this.state = { data, loading: false, showNotice: false, postId: rankMath.objectID }
 		this.setState = this.setState.bind( this )
