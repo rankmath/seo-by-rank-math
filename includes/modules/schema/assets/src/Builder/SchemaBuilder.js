@@ -29,7 +29,6 @@ import {
 	processSchema,
 	changeIds,
 } from '@schema/functions'
-import {property} from "lodash/util";
 
 /**
  * Schema builder component.
