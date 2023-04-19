@@ -37,17 +37,6 @@ const SchemaGroup = ( props ) => {
 		return null
 	}
 
-	// @TODO from here compare against schemaMaps.js and the related props!
-	// seo-by-rank-math/includes/modules/schema/assets/src/Functions/schemaMaps.js
-	// seo-by-rank-math/includes/modules/schema/assets/src/Builder/SchemaPropertyField.js
-	// OTHERS:
-	// includes/modules/schema/assets/src/Builder/SchemaBuilder.js withSelect (290)
-	// includes/modules/schema/assets/src/Editor/EditorModal.js
-	// includes/modules/schema/assets/src/Editor/Tabs.js
-	// includes/modules/schema/assets/src/SchemaList.js
-	// includes/modules/schema/assets/src/Templates/catalog/Templates.js
-	// includes/modules/schema/assets/src/Templates/TemplatesModal.js
-
 
 	const { parentId, isCustom, isPro, isMain = false } = props
 	const { id, property, properties, map, metadata } = props.data
@@ -155,11 +144,6 @@ const SchemaGroup = ( props ) => {
 				</div>
 				<div className="schema-group--children">
 					{ mapProperties( properties, ( prop, index ) => {
-						console.log("+++++++++++++ mapProperties ++++++++++++++")
-						console.log("+++++++++++++ mapProperties ++++++++++++++")
-						console.log(properties)
-						console.log("+++++++++++++ mapProperties ++++++++++++++")
-						console.log("+++++++++++++ mapProperties ++++++++++++++")
 						return prop.map.isGroup ? (
 							<SchemaGroup
 								key={ index }

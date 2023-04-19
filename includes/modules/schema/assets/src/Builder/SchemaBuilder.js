@@ -4,7 +4,7 @@
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import jQuery from 'jquery'
-import { get, cloneDeep, forEach, isArray, isEmpty, has, isUndefined } from 'lodash'
+import { get, cloneDeep, forEach, isArray, isEmpty, has, isUndefined, find, map } from 'lodash'
 import { v4 as uuid } from 'uuid'
 
 /**
@@ -29,6 +29,7 @@ import {
 	processSchema,
 	changeIds,
 } from '@schema/functions'
+import {property} from "lodash/util";
 
 /**
  * Schema builder component.
@@ -40,10 +41,39 @@ class SchemaBuilder extends Component {
 	constructor() {
 		super( ...arguments )
 		this.options = get( this.props.data, 'metadata', {} )
-		this.state = { data: this.props.data, loading: false, showNotice: false, postId: rankMath.objectID }
+		// Always overrides to default if the user doesn't interract with the select.
+		const data = this.syncSavedMetaWithProperties( this.props.data )
+		this.state = { data, loading: false, showNotice: false, postId: rankMath.objectID }
 		this.setState = this.setState.bind( this )
 		this.templateSaveCount = 0
 		this.isEditingTemplate = get( rankMath, 'isTemplateScreen', false )
+	}
+
+	/**
+	 * Sync metadata with properties for JobPosting.
+	 *
+	 * Fixes issue https://github.com/rankmath/seo-by-rank-math/issues/173,
+	 * even though this is not the root cause, and should be fixed at the root cause!
+	 *
+	 * @param data The props data.
+	 * @returns {(*&{properties: Array})|*}
+	 */
+	syncSavedMetaWithProperties( data ) {
+		const { metadata, properties } = data
+		const isJobPosting             = find( properties, { 'property' : '@type', 'value': 'JobPosting' } )
+
+		if ( isEmpty( isJobPosting ) ) return data
+
+		const updatedProps = map( properties, ( item ) => {
+			const { property } = item
+			if ( 'unpublish' !== property || isUndefined(metadata.unpublish)) {
+				return item
+
+			}
+
+			return { ...item, value: metadata.unpublish }
+		} )
+		return { ...data,  properties: updatedProps }
 	}
 
 	getWrapperClasses() {
@@ -64,7 +94,7 @@ class SchemaBuilder extends Component {
 	}
 
 	/**
-	 * Redenr this component.
+	 * Render this component.
 	 *
 	 * @return {Component} Schema builder.
 	 */
