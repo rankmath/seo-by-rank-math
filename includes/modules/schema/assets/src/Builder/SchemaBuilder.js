@@ -64,7 +64,7 @@ class SchemaBuilder extends Component {
 
 		const updatedProps = map( properties, ( item ) => {
 			const { property } = item
-			if ( 'unpublish' !== property || isUndefined(metadata.unpublish)) {
+			if ( 'unpublish' !== property || isUndefined( metadata.unpublish ) ) {
 				return item
 
 			}
