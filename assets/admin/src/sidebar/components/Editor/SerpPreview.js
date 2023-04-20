@@ -177,26 +177,41 @@ const SerpPreview = ( {
 				>
 
 					<div className="group">
-						<img
-							src={ rankMath.siteFavIcon }
-							width="16"
-							height="16"
-							className="serp-preview-favicon"
-							alt=""
-						/>
-						<div
-							className="serp-url"
-							dangerouslySetInnerHTML={ {
-								__html: highlight(
-									keywordPermalink,
-									Helpers.sanitizeText(
-										safeDecodeURIComponent( permalink )
-									),
-									75,
-									/-? +/
-								),
-							} }
-						></div>
+						<div className="serp-preview-body-header">
+							<div className="serp-preview-favicon">
+								<img
+									src={ rankMath.siteFavIcon }
+									width="16"
+									height="16"
+									alt="Site favicon"
+								/>
+							</div>
+							<div>
+								<span
+									className="serp-blog-name"
+									dangerouslySetInnerHTML={ {
+										__html: highlight(
+											keyword,
+											Helpers.sanitizeText( rankMath.blogName ),
+											60
+										),
+									} }
+								></span>
+								<div
+									className="serp-url"
+									dangerouslySetInnerHTML={ {
+										__html: highlight(
+											keywordPermalink,
+											Helpers.sanitizeText(
+												safeDecodeURIComponent( permalink )
+											),
+											75,
+											/-? +/
+										),
+									} }
+								></div>
+							</div>
+						</div>
 					</div>
 					<div className="group">
 						<h5

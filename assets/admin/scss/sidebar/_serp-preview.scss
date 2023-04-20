@@ -151,9 +151,20 @@ $title-height: 24px;
 		}
 	}
 
+	.serp-preview-body-header {
+		display: flex;
+		align-items: center;
+	}
+
+	// Blog name (site name)
+	.serp-blog-name {
+		font-size: 14px;
+		line-height: 20px;
+	}
+
 	// URL
 	.serp-url {
-		font-size: 14px;
+		font-size: 12px;
 		line-height: 16px;
 
 		margin: 3px 0 5px;
@@ -249,7 +260,16 @@ $title-height: 24px;
 // Google Preview
 .serp-preview {
 	&-favicon {
-		display: none;
+		background-color: #fff;
+		border: 1px solid #3c4043;
+		border-radius: 50%;
+		display: flex;
+		align-self: center;
+		justify-content: center;
+		align-items: center;
+		height: 26px;
+		width: 26px;
+		margin-right: 12px;
 	}
 
 	&-bg {
@@ -541,11 +561,10 @@ $title-height: 24px;
 		}
 
 		.serp-preview-favicon {
-			display: block;
-
-			height: 16px;
-			margin-top: 7px;
-			margin-right: 7px;
+			//display: block;
+			//height: 16px;
+			//margin-top: 7px;
+			//margin-right: 7px;
 		}
 
 		.serp-url {
