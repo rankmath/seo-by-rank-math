@@ -52,6 +52,7 @@ class SchemaBuilder extends Component {
 	 *
 	 * Fixes issue https://github.com/rankmath/seo-by-rank-math/issues/173,
 	 * even though this is not the root cause, and should be fixed at the root cause!
+	 * and originates from select( 'rank-math' ).getEditingSchema() below, inside compose()
 	 *
 	 * @param data The props data.
 	 * @returns {(*&{properties: Array})|*}
