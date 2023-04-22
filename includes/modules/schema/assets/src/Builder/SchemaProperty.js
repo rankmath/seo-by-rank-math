@@ -66,7 +66,7 @@ const SchemaProperty = ( props ) => {
 	const fieldProps = { ...field }
 	const [ value, setValue ] = useState( )
 
-	useEffect(() => {
+	useEffect( () => {
 		setValue( getSchemaPropertyValue( props, field )  )
 	}, [ id ] )
 
