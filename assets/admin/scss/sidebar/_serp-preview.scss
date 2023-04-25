@@ -162,6 +162,13 @@ $title-height: 24px;
 		line-height: 20px;
 	}
 
+	// Url parent div
+	.serp-url-items {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
 	// URL
 	.serp-url {
 		font-size: 12px;
@@ -184,6 +191,13 @@ $title-height: 24px;
 
 			@include size(17px, 17px);
 		}
+	}
+
+	.serp-url-suffix {
+		@include size(17px, 17px);
+		line-height: 18px;
+		opacity: .4;
+
 	}
 
 	// Description

@@ -16,8 +16,8 @@ import { safeDecodeURIComponent } from '@wordpress/url'
  */
 import PreviewDevices from './PreviewDevices'
 import AnalysisScore from '@components/AnalysisScore'
-import highlight from '@helpers/highlight'
-import RatingPreview from './RatingPreview'
+import highlight from '@helpers/highlight';
+import RatingPreview from "./RatingPreview";
 
 const SerpPreview = ( {
 	title,
@@ -183,33 +183,36 @@ const SerpPreview = ( {
 									src={ rankMath.siteFavIcon }
 									width="16"
 									height="16"
-									alt="Site favicon"
+									alt={ __( 'Site favicon', 'rank-math' ) }
 								/>
 							</div>
 							<div>
 								<span
 									className="serp-blog-name"
-									dangerouslySetInnerHTML={ {
-										__html: highlight(
-											keyword,
-											Helpers.sanitizeText( rankMath.blogName ),
-											60
-										),
-									} }
+									dangerouslySetInnerHTML={ { __html: Helpers.sanitizeText( rankMath.blogName ) } }
 								></span>
-								<div
-									className="serp-url"
-									dangerouslySetInnerHTML={ {
-										__html: highlight(
-											keywordPermalink,
-											Helpers.sanitizeText(
-												safeDecodeURIComponent( permalink )
+								<div className="serp-url-items">
+									<div
+										className="serp-url"
+										dangerouslySetInnerHTML={ {
+											__html: highlight(
+												keywordPermalink,
+												Helpers.sanitizeText(
+													`${ rankMath.homeUrl } › ${ __( rankMath.postName, 'rank-math' ) }`
+												),
+												75,
+												/-? +/
 											),
-											75,
-											/-? +/
-										),
-									} }
-								></div>
+										} }
+									></div>
+									<div
+										className="serp-url-suffix"
+									>
+										<svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+										</svg>
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
