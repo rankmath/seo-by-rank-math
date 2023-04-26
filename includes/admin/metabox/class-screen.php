@@ -12,7 +12,6 @@ namespace RankMath\Admin\Metabox;
 
 use RankMath\KB;
 use RankMath\Helper;
-use RankMath\Paper\Paper;
 use RankMath\Paper\Singular;
 use RankMath\Post;
 use RankMath\Traits\Meta;
