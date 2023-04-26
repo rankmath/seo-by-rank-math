@@ -9,7 +9,6 @@ import { Helpers } from '@rankMath/analyzer'
  */
 import { __ } from '@wordpress/i18n'
 import { withSelect } from '@wordpress/data'
-import { safeDecodeURIComponent } from '@wordpress/url'
 
 /**
  * Internal dependencies
@@ -22,6 +21,7 @@ import RatingPreview from "./RatingPreview";
 const SerpPreview = ( {
 	title,
 	permalink,
+	permalinkFormat,
 	description,
 	previewType = 'desktop',
 	isNoIndex,
@@ -43,6 +43,18 @@ const SerpPreview = ( {
 	const keywordPermalink = rankMathEditor.assessor.getResearch( 'slugify' )(
 		keyword
 	)
+
+	const cite = () => {
+		const replace = {
+			'/': ' › ',
+			'://': '://',
+			'%postname%': title,
+		}
+
+		return permalinkFormat.replace( /( :\/\/)|(\/)|(%postname%)/g, function ( match ) {
+			return replace[ match ]
+		} )
+	}
 
 	return (
 		<div className={ classes }>
@@ -192,19 +204,19 @@ const SerpPreview = ( {
 									dangerouslySetInnerHTML={ { __html: Helpers.sanitizeText( rankMath.blogName ) } }
 								></span>
 								<div className="serp-url-items">
-									<div
+									<span
 										className="serp-url"
 										dangerouslySetInnerHTML={ {
 											__html: highlight(
 												keywordPermalink,
 												Helpers.sanitizeText(
-													`${ rankMath.homeUrl } › ${ __( rankMath.postName, 'rank-math' ) }`
+													cite()
 												),
 												75,
 												/-? +/
 											),
 										} }
-									></div>
+									></span>
 									<div
 										className="serp-url-suffix"
 									>
@@ -269,6 +281,7 @@ export default withSelect( ( select ) => {
 	return {
 		title: repo.getSerpTitle(),
 		permalink: rankMathEditor.assessor.dataCollector.getPermalink(),
+		permalinkFormat: rankMath.permalinkFormat,
 		description: repo.getSerpDescription(),
 		previewType: repo.getSnippetPreviewType(),
 		isNoIndex: 'noindex' in robots,

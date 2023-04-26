@@ -42,6 +42,7 @@ $title-height: 24px;
 
 .serp-preview {
 	background: #fff;
+	color: $text;
 
 	* {
 		box-sizing: border-box;
@@ -171,6 +172,7 @@ $title-height: 24px;
 
 	// URL
 	.serp-url {
+		max-width: 315px;
 		font-size: 12px;
 		line-height: 16px;
 
@@ -196,7 +198,7 @@ $title-height: 24px;
 	.serp-url-suffix {
 		@include size(17px, 17px);
 		line-height: 18px;
-		opacity: .4;
+		opacity: .8;
 
 	}
 
@@ -274,7 +276,7 @@ $title-height: 24px;
 // Google Preview
 .serp-preview {
 	&-favicon {
-		background-color: #fff;
+		background-color: $light_gray;
 		border: 1px solid #3c4043;
 		border-radius: 50%;
 		display: flex;
