@@ -12,6 +12,9 @@ namespace RankMath\Admin\Metabox;
 
 use RankMath\KB;
 use RankMath\Helper;
+use RankMath\Paper\Paper;
+use RankMath\Paper\Singular;
+use RankMath\Post;
 use RankMath\Traits\Meta;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Locale;
@@ -23,7 +26,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Screen.
  */
-class Screen implements IScreen {
+class Screen extends Singular implements IScreen {
 
 	use Meta;
 	use Hooker;
@@ -242,7 +245,8 @@ class Screen implements IScreen {
 		}
 
 		// Robots.
-		$data['robots'] = $this->normalize_robots( $this->get_meta( $object_type, $object_id, 'rank_math_robots' ) );
+		$post           = Post::get( $object_id );
+		$data['robots'] = $this->normalize_robots( $this->get_post_robots( $post->get_object() ) );
 
 		// Advanced Robots.
 		$data['advancedRobots'] = $this->normalize_advanced_robots( $this->get_meta( $object_type, $object_id, 'rank_math_advanced_robots' ) );
