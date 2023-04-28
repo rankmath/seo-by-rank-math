@@ -15,8 +15,8 @@ import { withSelect } from '@wordpress/data'
  */
 import PreviewDevices from './PreviewDevices'
 import AnalysisScore from '@components/AnalysisScore'
-import highlight from '@helpers/highlight';
-import RatingPreview from "./RatingPreview";
+import highlight from '@helpers/highlight'
+import RatingPreview from './RatingPreview'
 
 const SerpPreview = ( {
 	title,
@@ -51,7 +51,7 @@ const SerpPreview = ( {
 			'%postname%': title,
 		}
 
-		return permalinkFormat.replace( /( :\/\/)|(\/)|(%postname%)/g, function ( match ) {
+		return permalinkFormat.replace( /( :\/\/)|(\/)|(%postname%)/g, function( match ) {
 			return replace[ match ]
 		} )
 	}
