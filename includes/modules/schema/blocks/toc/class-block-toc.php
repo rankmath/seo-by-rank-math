@@ -228,9 +228,12 @@ class Block_TOC extends Block {
 			}
 
 			// Make sure we are only working with the same level as the first iteration in our set.
-			if (  $heading['level'] === $heading_list[ 0 ]['level']){
+			//if (  $heading['level'] === $heading_list[ 0 ]['level'] || $heading['level'] > $heading_list[ 0 ]['level']){
+			if (  $heading['level'] === $heading_list[ 0 ]['level'] ||   $heading['level'] < $heading_list[ $key - 1 ]['level'] ){
 
 				// Propagate to children only (those whose level is lower than their parent ie $heading['level'].
+                // @TODO.. don't pass on higher level headers below lower, this causes mulitple values of the same!!!
+                // @TODO slice upto where we have the higher level because that's where the children end!
 				if ( isset($heading_list[ $key + 1]['level']) &&  $heading_list[ $key + 1]['level'] > $heading['level']) {
 					$endOfSlice = count($heading_list);
 					$children = $this->linear_to_nested_heading_list(
