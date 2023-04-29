@@ -244,15 +244,14 @@ class Screen extends Singular implements IScreen {
 		}
 
 		// Robots.
-        if ( 0 === $object_id ) {
-            $data['robots'] = $this->normalize_robots( $this->get_meta( $object_type, $object_id, 'rank_math_robots' ) );
-        }
+		if ( 0 === $object_id ) {
+			$data['robots'] = $this->normalize_robots( $this->get_meta( $object_type, $object_id, 'rank_math_robots' ) );
+		} else {
 
-		$post = Post::get( $object_id );
+			$post           = Post::get( $object_id );
+			$data['robots'] = $this->normalize_robots( $this->get_post_robots( $post->get_object() ) );
 
-        if ( $post ) {
-            $data['robots'] = $this->normalize_robots( $this->get_post_robots( $post->get_object() ) );
-        }
+		}
 
 		// Advanced Robots.
 		$data['advancedRobots'] = $this->normalize_advanced_robots( $this->get_meta( $object_type, $object_id, 'rank_math_advanced_robots' ) );
