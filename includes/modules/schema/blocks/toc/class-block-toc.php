@@ -66,9 +66,9 @@ class Block_TOC extends Block {
 		// register_block_type( RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json' );
 		register_block_type(
 			RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json',
-			array(
-				'render_callback' => array( $this, 'render' ),
-			)
+			[
+				'render_callback' => [ $this, 'render' ],
+			]
 		);
 
 	}
@@ -95,6 +95,7 @@ class Block_TOC extends Block {
 		$list_out_put = $this->list_output( $headings );
 
 		/**
+		 *
 		 * @TODO apply settings/options,
 		 * @ /seo-by-rank-math/includes/modules/schema/blocks/views/options-general.php
 		 * We have
@@ -107,7 +108,7 @@ class Block_TOC extends Block {
 		 * 6. TagName = 'div' === ListStyle ? 'div' : 'li'
 		 */
 
-		// Settings
+		// Settings.
 		$title_wrapper    = $attributes['titleWrapper'];
 		$list_style       = Helper::get_settings( 'general.toc_block_list_style' ) ?? $attributes['listStyle'];
 		$title            = ! empty( $attributes['title'] ) ? $attributes['title'] : Helper::get_settings( 'general.toc_block_title' );
@@ -116,15 +117,13 @@ class Block_TOC extends Block {
 		$list_tag = self::get()->get_list_style( $list_style );
 		$item_tag = self::get()->get_list_item_style( $list_style );
 
-		// dump($attributes);
-
 		$class = 'rank-math-block';
 		if ( ! empty( $attributes['className'] ) ) {
 			$class .= ' ' . esc_attr( $attributes['className'] );
 		}
 
 		// HTML.
-		$out   = array();
+		$out   = [];
 		$out[] = sprintf(
 			'<div id="rank-math-toc" class="%1$s"%2$s><%3$s>%4$s</%3$s>',
 			$class,
@@ -146,7 +145,7 @@ class Block_TOC extends Block {
 	 * Add default TOC title.
 	 *
 	 * @param string $block_content Block content.
-	 * @param array  $block         The full block, including name and attributes.
+	 * @param array  $parsed_block         The full block, including name and attributes.
 	 *
 	 * @return string
 	 */
@@ -192,7 +191,7 @@ class Block_TOC extends Block {
 		}
 
 		if ( ! isset( $data['toc'] ) ) {
-			$data['toc'] = array();
+			$data['toc'] = [];
 		}
 
 		foreach ( $attributes['headings'] as $heading ) {
@@ -200,13 +199,13 @@ class Block_TOC extends Block {
 				continue;
 			}
 
-			$data['toc'][] = array(
+			$data['toc'][] = [
 				'@context' => 'https://schema.org',
 				'@type'    => 'SiteNavigationElement',
 				'@id'      => '#rank-math-toc',
 				'name'     => $heading['content'],
 				'url'      => get_permalink() . $heading['link'],
-			);
+			];
 		}
 
 		if ( empty( $data['toc'] ) ) {
@@ -225,8 +224,7 @@ class Block_TOC extends Block {
 	 * @return array The nested list of headings.
 	 */
 	private function linear_to_nested_heading_list( $heading_list ) {
-		$nexted_heading_list = array();
-		// dump($heading_list);
+		$nexted_heading_list = [];
 		foreach ( $heading_list as $key => $heading ) {
 			if ( empty( $heading['content'] ) ) {
 				continue;
@@ -236,37 +234,34 @@ class Block_TOC extends Block {
 			if ( $heading['level'] === $heading_list[0]['level'] ) {
 
 				// Propagate to children only (those whose level is lower than their parent ie $heading['level'].
-				// @TODO.. don't pass on higher level headers below lower, this causes mulitple values of the same!!!
-				// @TODO slice upto where we have the higher level because that's where the children end!
 				if ( isset( $heading_list[ $key + 1 ]['level'] ) && $heading_list[ $key + 1 ]['level'] > $heading['level'] ) {
 
-					// endOfSlice should be upto where heading level is smaller than then current
-					$endOfSlice = $this->get_end_of_slice( $heading_list );
-					$children   = $this->linear_to_nested_heading_list(
-						array_slice( $heading_list, $key + 1, $endOfSlice )
+					// endOfSlice should be upto where heading level is smaller than then current.
+					$end_of_slice = $this->get_end_of_slice( $heading_list );
+					$children     = $this->linear_to_nested_heading_list(
+						array_slice( $heading_list, $key + 1, $end_of_slice )
 					);
 
 					array_push(
 						$nexted_heading_list,
-						array(
+						[
 							'item'     => $heading,
 							'children' => $children,
-						)
+						]
 					);
 				} else {
 					array_push(
 						$nexted_heading_list,
-						array(
+						[
 							'item'     => $heading,
 							'children' => null,
-						)
+						]
 					);
 				}
 			} elseif ( $heading['level'] < $heading_list[0]['level'] ) {
-				//$endOfSlice  = count( $heading_list );
-				$endOfSlice  = $this->get_end_of_slice( $heading_list );
-				$items_array = array_slice( $heading_list, $key, $endOfSlice );
-				$items       = $this->linear_to_nested_heading_list( $items_array );
+				$end_of_slice = $this->get_end_of_slice( $heading_list );
+				$items_array  = array_slice( $heading_list, $key, $end_of_slice );
+				$items        = $this->linear_to_nested_heading_list( $items_array );
 
 				array_push( $nexted_heading_list, $items[0] );
 
