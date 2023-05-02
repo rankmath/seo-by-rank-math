@@ -263,7 +263,8 @@ class Block_TOC extends Block {
 					);
 				}
 			} elseif ( $heading['level'] < $heading_list[0]['level'] ) {
-				$endOfSlice  = count( $heading_list );
+				//$endOfSlice  = count( $heading_list );
+				$endOfSlice  = $this->get_end_of_slice( $heading_list );
 				$items_array = array_slice( $heading_list, $key, $endOfSlice );
 				$items       = $this->linear_to_nested_heading_list( $items_array );
 
@@ -297,10 +298,9 @@ class Block_TOC extends Block {
 	}
 
 	private function get_end_of_slice( $list ) {
-
 		foreach ( $list as $key => $item ) {
 
-			if ( $list[0]['level'] > $item['level'] && 0 !== $key ) {
+			if ( $list[0]['level'] >= $item['level'] && 0 !== $key ) {
 				return $key - 1;
 			}
 		}
