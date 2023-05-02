@@ -222,20 +222,22 @@ class Block_TOC extends Block {
 	 */
 	private function linear_to_nested_heading_list( $heading_list ) {
 		$nexted_heading_list = [];
+		//dump($heading_list);
 		foreach ($heading_list as $key => $heading) {
 			if (empty($heading['content'])) {
 				continue;
 			}
 
 			// Make sure we are only working with the same level as the first iteration in our set.
-			//if (  $heading['level'] === $heading_list[ 0 ]['level'] || $heading['level'] > $heading_list[ 0 ]['level']){
-			if (  $heading['level'] === $heading_list[ 0 ]['level'] ||   $heading['level'] < $heading_list[ $key - 1 ]['level'] ){
+			if (  $heading['level'] === $heading_list[ 0 ]['level'] ){
 
 				// Propagate to children only (those whose level is lower than their parent ie $heading['level'].
                 // @TODO.. don't pass on higher level headers below lower, this causes mulitple values of the same!!!
                 // @TODO slice upto where we have the higher level because that's where the children end!
 				if ( isset($heading_list[ $key + 1]['level']) &&  $heading_list[ $key + 1]['level'] > $heading['level']) {
-					$endOfSlice = count($heading_list);
+
+					// endOfSlice should be upto where heading level is smaller than then current
+					$endOfSlice = $this->get_end_of_slice($heading_list);
 					$children = $this->linear_to_nested_heading_list(
 						array_slice($heading_list,  $key + 1, $endOfSlice)
 					);
@@ -256,6 +258,13 @@ class Block_TOC extends Block {
 						]
 					);
 				}
+
+			} elseif ( $heading['level'] < $heading_list[ 0 ]['level'] && $heading_list[ $key + 1]['level'] > $heading['level'] ) {
+				$endOfSlice = count($heading_list);
+				$items_array = array_slice($heading_list,  $key, $endOfSlice);
+				$items = $this->linear_to_nested_heading_list( $items_array	);
+
+				array_push($nexted_heading_list, $items[0]);
 
 			}
 
@@ -283,5 +292,18 @@ class Block_TOC extends Block {
 		$out[] = '</ul>';
 		return join( "\n", $out );
 
+	}
+
+	private function get_end_of_slice($list) {
+
+		foreach ($list as $key => $item) {
+
+			if ($list[0]['level'] > $item['level']) {
+				return $key - 1;
+			}
+
+		}
+
+		return count($list);
 	}
 }
