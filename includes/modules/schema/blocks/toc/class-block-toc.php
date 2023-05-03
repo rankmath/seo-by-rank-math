@@ -235,8 +235,10 @@ class Block_TOC extends Block {
 			if ( $heading['level'] === $heading_list[0]['level']) {
 
 				// Propagate to children only (those whose level is lower than their parent ie $heading['level'].
+                // @TODO children with higher levels are added to parents after even lower levels!!.
+                // @TODO make sure that the last child level is also lower than the current!!
+                // @TODO example http://localhost:10004/uncategorized/testing-nested-toc-heading-list/231/
 				if ( isset( $heading_list[ $key + 1 ]['level'] ) && $heading_list[ $key + 1 ]['level'] > $heading['level'] ) {
-
 					// endOfSlice should be upto where heading level is smaller than then current.
 					$end_of_slice = $this->get_end_of_slice( $heading_list );
 					$children_array = array_slice( $heading_list, $key + 1, $end_of_slice );
@@ -308,7 +310,8 @@ class Block_TOC extends Block {
 	 */
 	private function get_end_of_slice( $list ) {
 		foreach ( $list as $key => $item ) {
-			if ( $list[0]['level'] >= $item['level'] && 0 !== $key) {
+
+			if ( $list[0]['level'] > $item['level'] ) {
 				return $key - 1;
 			}
 		}
