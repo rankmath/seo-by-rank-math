@@ -256,6 +256,20 @@ class Block_TOC extends Block {
                     // @TODO
                     // get the reason not to push item into nested_heading_list
                     // track this against upper/presiding value
+					// @TODO when is it the wrong children/parent!!!
+					// @TODO a well thought solution, so it doesn't reoccur in other nest patterns!!
+					dump("|||| origin ||||");
+					dump("|||| origin ||||");
+					dump($heading['content']);
+					dump($key);
+					dump($heading_list);
+					dump($heading_list[$key - 1]);
+					// @TODO Sometimes $heading_list[0] is same same as the current $heading
+					// @TODO when we have $heading_list[0] and $heading_list[$key - 1], do not add the heading to the nest if it's heading level is greater(higher) than $heading_list[$key - 1] or $heading_list[0]
+					// @TODO the bug is well documented (from above), implement solution!!
+					dump($heading_list[0]);
+					dump("|||| origin ||||");
+					dump("|||| origin ||||");
 					array_push(
 						$nexted_heading_list,
 						[
