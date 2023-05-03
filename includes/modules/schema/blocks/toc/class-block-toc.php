@@ -258,8 +258,8 @@ class Block_TOC extends Block {
 						]
 					);
 				}
-			} elseif ( $heading['level'] < $heading_list[0]['level'] ) {
-				$end_of_slice = $this->get_end_of_slice( $heading_list );
+			} elseif ( $heading['level'] < $heading_list[0]['level']) {
+				$end_of_slice = count($heading_list);
 				$items_array  = array_slice( $heading_list, $key, $end_of_slice );
 				$items        = $this->linear_to_nested_heading_list( $items_array );
 
@@ -272,6 +272,12 @@ class Block_TOC extends Block {
 
 	}
 
+	/**
+	 * TOC heading list HTML.
+	 *
+	 * @param array $headings The heading and their children.
+	 * @return string|mixed The list HTML.
+	 */
 	private function list_output( $headings ) {
 		$out[] = '<ul>';
 
@@ -292,14 +298,21 @@ class Block_TOC extends Block {
 
 	}
 
+	/**
+	 * Gets the point|length of the array.
+	 *
+	 * @param array $list Heading list.
+	 *
+	 * @return int|string The length of the array.
+	 */
 	private function get_end_of_slice( $list ) {
-		foreach ( $list as $key => $item ) {
+		// Need to keep track of heading levels also below the $list[0]['level'],
+		// because there might be other higher levels below it.
+		$list = array_map(function ($value){
+			return $value['level'];
+		}, $list);
+		arsort($list);
+		return key($list);
 
-			if ( $list[0]['level'] >= $item['level'] && 0 !== $key ) {
-				return $key - 1;
-			}
-		}
-
-		return count( $list );
 	}
 }
