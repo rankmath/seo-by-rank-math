@@ -231,15 +231,16 @@ class Block_TOC extends Block {
 			}
 
 			// Make sure we are only working with the same level as the first iteration in our set.
-			if ( $heading['level'] === $heading_list[0]['level'] ) {
+			if ( $heading['level'] === $heading_list[0]['level']) {
 
 				// Propagate to children only (those whose level is lower than their parent ie $heading['level'].
 				if ( isset( $heading_list[ $key + 1 ]['level'] ) && $heading_list[ $key + 1 ]['level'] > $heading['level'] ) {
 
 					// endOfSlice should be upto where heading level is smaller than then current.
 					$end_of_slice = $this->get_end_of_slice( $heading_list );
+					$children_array = array_slice( $heading_list, $key + 1, $end_of_slice );
 					$children     = $this->linear_to_nested_heading_list(
-						array_slice( $heading_list, $key + 1, $end_of_slice )
+						$children_array
 					);
 
 					array_push(
@@ -260,9 +261,11 @@ class Block_TOC extends Block {
 				}
 			} elseif ( $heading['level'] < $heading_list[0]['level']) {
 				$end_of_slice = count($heading_list);
+				//$end_of_slice = $this->get_end_of_slice( $heading_list );
 				$items_array  = array_slice( $heading_list, $key, $end_of_slice );
 				$items        = $this->linear_to_nested_heading_list( $items_array );
 
+				// @TODO fix bug in the block, where list is also appended to the children as well (multiple)
 				array_push( $nexted_heading_list, $items[0] );
 
 			}
@@ -306,13 +309,17 @@ class Block_TOC extends Block {
 	 * @return int|string The length of the array.
 	 */
 	private function get_end_of_slice( $list ) {
-		// Need to keep track of heading levels also below the $list[0]['level'],
-		// because there might be other higher levels below it.
-		$list = array_map(function ($value){
-			return $value['level'];
-		}, $list);
-		arsort($list);
-		return key($list);
+		foreach ( $list as $key => $item ) {
+			if ( $list[0]['level'] > $item['level'] ) {
+				return $key - 1;
+			}
+
+			if ($list[$key + 1]['level'] < $item['level']) {
+				return $key;
+			}
+		}
+
+		return count($list);
 
 	}
 }
