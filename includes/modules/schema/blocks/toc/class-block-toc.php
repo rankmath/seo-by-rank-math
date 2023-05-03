@@ -220,10 +220,11 @@ class Block_TOC extends Block {
 	 * Nest heading based on the Heading level.
 	 *
 	 * @param array $heading_list The flat list of headings to nest.
+	 * @param bool $is_children Identify the parsed list if children.
 	 *
 	 * @return array The nested list of headings.
 	 */
-	private function linear_to_nested_heading_list( $heading_list ) {
+	private function linear_to_nested_heading_list( $heading_list, $is_children = false) {
 		$nexted_heading_list = [];
 		foreach ( $heading_list as $key => $heading ) {
 			if ( empty( $heading['content'] ) ) {
@@ -239,9 +240,7 @@ class Block_TOC extends Block {
 					// endOfSlice should be upto where heading level is smaller than then current.
 					$end_of_slice = $this->get_end_of_slice( $heading_list );
 					$children_array = array_slice( $heading_list, $key + 1, $end_of_slice );
-					$children     = $this->linear_to_nested_heading_list(
-						$children_array
-					);
+					$children     = $this->linear_to_nested_heading_list( $children_array, true );
 
 					array_push(
 						$nexted_heading_list,
@@ -259,14 +258,13 @@ class Block_TOC extends Block {
 						]
 					);
 				}
-			} elseif ( $heading['level'] < $heading_list[0]['level']) {
+			} elseif ( $heading['level'] < $heading_list[0]['level'] && !$is_children) {
 				$end_of_slice = count($heading_list);
-				//$end_of_slice = $this->get_end_of_slice( $heading_list );
 				$items_array  = array_slice( $heading_list, $key, $end_of_slice );
 				$items        = $this->linear_to_nested_heading_list( $items_array );
 
-				// @TODO fix bug in the block, where list is also appended to the children as well (multiple)
-				array_push( $nexted_heading_list, $items[0] );
+                array_push( $nexted_heading_list, $items[0] );
+
 
 			}
 		}
@@ -310,12 +308,8 @@ class Block_TOC extends Block {
 	 */
 	private function get_end_of_slice( $list ) {
 		foreach ( $list as $key => $item ) {
-			if ( $list[0]['level'] > $item['level'] ) {
+			if ( $list[0]['level'] >= $item['level'] && 0 !== $key) {
 				return $key - 1;
-			}
-
-			if ($list[$key + 1]['level'] < $item['level']) {
-				return $key;
 			}
 		}
 
