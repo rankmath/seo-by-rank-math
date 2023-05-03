@@ -240,9 +240,9 @@ class Block_TOC extends Block {
                 // @TODO example http://localhost:10004/uncategorized/testing-nested-toc-heading-list/231/
 				if ( isset( $heading_list[ $key + 1 ]['level'] ) && $heading_list[ $key + 1 ]['level'] > $heading['level'] ) {
 					// endOfSlice should be upto where heading level is smaller than then current.
-					$end_of_slice = $this->get_end_of_slice( $heading_list );
+					$end_of_slice   = $this->get_end_of_slice( $heading_list );
 					$children_array = array_slice( $heading_list, $key + 1, $end_of_slice );
-					$children     = $this->linear_to_nested_heading_list( $children_array, true );
+					$children       = $this->linear_to_nested_heading_list( $children_array, true );
 
 					array_push(
 						$nexted_heading_list,
@@ -252,6 +252,10 @@ class Block_TOC extends Block {
 						]
 					);
 				} else {
+                    // The only issue we have currently originates from here, see TODOs above!
+                    // @TODO
+                    // get the reason not to push item into nested_heading_list
+                    // track this against upper/presiding value
 					array_push(
 						$nexted_heading_list,
 						[
@@ -264,9 +268,7 @@ class Block_TOC extends Block {
 				$end_of_slice = count($heading_list);
 				$items_array  = array_slice( $heading_list, $key, $end_of_slice );
 				$items        = $this->linear_to_nested_heading_list( $items_array );
-
                 array_push( $nexted_heading_list, $items[0] );
-
 
 			}
 		}
@@ -310,12 +312,10 @@ class Block_TOC extends Block {
 	 */
 	private function get_end_of_slice( $list ) {
 		foreach ( $list as $key => $item ) {
-
 			if ( $list[0]['level'] > $item['level'] ) {
 				return $key - 1;
 			}
 		}
-
 		return count($list);
 
 	}
