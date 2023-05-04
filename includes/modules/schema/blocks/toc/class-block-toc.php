@@ -37,6 +37,14 @@ class Block_TOC extends Block {
 	 */
 	protected static $instance = null;
 
+
+	/**
+	 * To debug heading list hook because it's called twice.
+	 * @TODO delete
+	 * @var bool
+	 */
+	private static $called = false;
+
 	/**
 	 * Retrieve main Block_TOC instance.
 	 *
@@ -91,7 +99,16 @@ class Block_TOC extends Block {
 	public function render( $attributes ) {
 		// @TODO cache with count($attributes['headings']) maybe
 
-		$headings     = $this->linear_to_nested_heading_list( $attributes['headings'] );
+		if (self::$called) {
+			return;
+		} else {
+			$headings     = $this->just_a_test( $attributes['headings'] );
+			//dump($headings);
+			self::$called = true;
+		}
+
+
+		//$headings     = $this->linear_to_nested_heading_list( $attributes['headings'] );
 		$list_out_put = $this->list_output( $headings );
 
 		/**
@@ -238,35 +255,55 @@ class Block_TOC extends Block {
 				if ( isset( $heading_list[ $key + 1 ]['level'] ) && $heading_list[ $key + 1 ]['level'] > $heading['level'] ) {
 					// endOfSlice should be upto where heading level is smaller (higher level) than then current.
 					$end_of_slice   = $this->get_end_of_slice( $heading_list );
+					//$end_of_slice   = count($heading_list);
 					$children_array = array_slice( $heading_list, $key + 1, $end_of_slice );
 					$children       = $this->linear_to_nested_heading_list( $children_array, true );
-
-					array_push(
-						$nexted_heading_list,
-						[
+//					dump('|||||||||| here ||||||||||||||');
+//					dump('|||||||||| here ||||||||||||||');
+//					dump($end_of_slice);
+//					dump($children_array);
+//					dump($heading_list);
+//					dump('|||||||||| here ||||||||||||||');
+//					dump('|||||||||| here ||||||||||||||');
+						$nexted_heading_list[] = [
 							'item'     => $heading,
 							'children' => $children,
-						]
-					);
+						];
 					} else {
 					// if there are lower level headers in the $heading_list, that should disqualify any other higher level headers from being added here as they are added below in elseif block!
 					// We check for the presiding heading ($key - 1), but to be more accurate, we should check for the highest level in $heading_list[i] and work with that
+
 					if (!(isset($heading_list[$key - 1]) && $heading_list[$key - 1]['level'] < $heading['level'])) {
-						array_push(
-							$nexted_heading_list,
-							[
-								'item'     => $heading,
-								'children' => null,
-							]
-						);
+						$nexted_heading_list[] = [
+							'item'     => $heading,
+							'children' => null,
+						];
 					}
 
 				}
+				// BUG for heading listing pattern in http://localhost:10004/uncategorized/test-more-about-toc-001/256/
 			} elseif ( $heading['level'] < $heading_list[0]['level'] && !$is_children) {
-				$end_of_slice = count($heading_list);
-				$items_array  = array_slice( $heading_list, $key, $end_of_slice );
-				$items        = $this->linear_to_nested_heading_list( $items_array );
-                array_push( $nexted_heading_list, $items[0] );
+			//} elseif ( $heading['level'] < $heading_list[0]['level'] ) {
+			//} else {
+
+				//dump($heading_list);
+				//if ($heading['level'] < $heading_list[0]['level']) {
+					$end_of_slice = count( $heading_list );
+					$items_array  = array_slice( $heading_list, $key, $end_of_slice );
+					$items        = $this->linear_to_nested_heading_list( $items_array );
+//					dump( '********** THE OTHER BUGS ********' );
+//					dump( '********** THE OTHER BUGS ********' );
+//					dump( $heading_list[0]['content'] );
+//					dump( $heading['content'] );
+//					dump( $heading_list[0]['level'] );
+//					dump( $heading['level'] );
+//					dump($heading['level'] < $heading_list[0]['level']);
+//					dump( $items_array );
+//					dump( $items );
+//					dump( '********** THE OTHER BUGS ********' );
+//					dump( '********** THE OTHER BUGS ********' );
+					$nexted_heading_list[] = $items[0];
+				//}
 
 			}
 		}
@@ -308,14 +345,115 @@ class Block_TOC extends Block {
 	 *
 	 * @return int|string The length of the array.
 	 */
-	private function get_end_of_slice( $list ) {
+	private function get_end_of_slice( $list, $level ) {
 		foreach ( $list as $key => $item ) {
 
-			if ( $list[0]['level'] > $item['level'] ) {
-				return $key - 1;
+			// @TODO solution is to get the last item (instead of the first) where heading level is higher than the passed level!!!
+			// @TODO we can use key + 1 to have this detail!!
+			// Make sure there are lower level headings before the higher level heading as well.
+//			dump("************* here *********");
+//			dump("************* here *********");
+//			dump("++++++++++ list[key + 1]['level'] ++++++++++");
+//			dump("++++++++++ list[key + 1]['level'] ++++++++++");
+//			dump($level);
+//			dump($item['level']);
+////			dump($list[$key + 1]['level'] );
+//			dump($item['content']);
+////			dump($list[$key + 1]['content'] );
+////			dump($list[$key + 1]['level'] <= $level && $level < $item['level']);
+//			dump("++++++++++ list[key + 1]['level'] ++++++++++");
+//			dump("++++++++++ list[key + 1]['level'] ++++++++++");
+//			dump("************* here *********");
+//			dump("************* here *********");
+
+			//if ( $list[0]['level'] > $item['level'] || (isset($list[$key + 1]['level']) && $list[$key + 1]['level'] < $item['level'])) {
+			// Level is greater (higher) the next element in the loop.
+			// Heading level for the next element in the loop is higher (less) than the passed level.
+			if ( $list[$key + 1]['level'] <= $level ) {
+
+				// After above check
+				// Current heading level is lower than the passed level ge h2 < h3
+				// I think we should start with this logic and apply the other
+				if ($level < $item['level']) {
+					return $key - 1;
+				}
+			//if ( $level < $item['level']  ) {
+//				dump("**************");
+//			dump("**************");
+//			dump($key);
+//			dump($item['content']);
+//			dump($item['level']);
+//			dump($list[$key + 1]['level']);
+//			dump("**************");
+//			dump("**************");
+				//return $key - 1;
+//				dump("************* here *********");
+//				dump("************* here *********");
+////				dump($item['level']);
+////				dump($level);
+////				dump($key);
+//				dump($item);
+//				dump("************* here *********");
+//				dump("************* here *********");
+//				return $key - 1;
+			}
+//			elseif ( $list[$key + 1]['level'] > $item['level'] ) {
+//				return $key;
+//			}
+		}
+		return count($list) - 1;
+
+	}
+
+
+	private function just_a_test($heading_list) {
+		//dump($heading_list);
+
+		$nested_heading_list = [];
+		foreach ($heading_list as $key => $heading ) {
+			//dump($heading);
+
+			// Make sure we're dealing with same or higher level headings only.
+			if (  $heading['level'] === $heading_list[0]['level'] || $heading['level'] <  $heading_list[0]['level'] ) {
+
+				// Has children.
+				if ( isset( $heading_list[ $key + 1 ]['level'] ) && $heading_list[ $key + 1 ]['level'] > $heading_list[0]['level'] ) {
+
+					$end_of_slice   = $this->get_end_of_slice( $heading_list, $heading['level']);
+					//$end_of_slice   = count($heading_list);
+					$children_array = array_slice( $heading_list, $key + 1, $end_of_slice );
+
+//					dump("+++++++++++++ children ++++++++++++++++++++");
+//					dump("+++++++++++++ children ++++++++++++++++++++");
+//					dump("+++++++++++++ children ++++++++++++++++++++");
+//					dump($end_of_slice);
+//					dump($children_array);
+//					dump($heading_list);
+//					dump($heading['level']);
+//					dump("+++++++++++++ children ++++++++++++++++++++");
+//					dump("+++++++++++++ children ++++++++++++++++++++");
+//					dump("+++++++++++++ children ++++++++++++++++++++");
+					$nested_heading_list[] = [
+						'level'     => $heading['level'],
+						'item'     => $heading,
+						//'children' => $this->just_a_test($children_array),
+						'children' => null,
+					];
+				} else {
+					// Has no children.
+					$nested_heading_list[] = [
+						'level'     => $heading['level'],
+						'item'     => $heading,
+						'children' => null,
+					];
+				}
+
 			}
 		}
-		return count($list);
+
+//		dump($heading_list);
+//		dump($nested_heading_list);
+		return $nested_heading_list;
 
 	}
 }
