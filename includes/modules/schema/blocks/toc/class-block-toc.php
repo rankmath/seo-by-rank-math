@@ -235,11 +235,8 @@ class Block_TOC extends Block {
 			if ( $heading['level'] === $heading_list[0]['level']) {
 
 				// Propagate to children only (those whose level is lower than their parent ie $heading['level'].
-                // @TODO children with higher levels are added to parents after even lower levels!!.
-                // @TODO make sure that the last child level is also lower than the current!!
-                // @TODO example http://localhost:10004/uncategorized/testing-nested-toc-heading-list/231/
 				if ( isset( $heading_list[ $key + 1 ]['level'] ) && $heading_list[ $key + 1 ]['level'] > $heading['level'] ) {
-					// endOfSlice should be upto where heading level is smaller than then current.
+					// endOfSlice should be upto where heading level is smaller (higher level) than then current.
 					$end_of_slice   = $this->get_end_of_slice( $heading_list );
 					$children_array = array_slice( $heading_list, $key + 1, $end_of_slice );
 					$children       = $this->linear_to_nested_heading_list( $children_array, true );
@@ -251,32 +248,19 @@ class Block_TOC extends Block {
 							'children' => $children,
 						]
 					);
-				} else {
-                    // The only issue we have currently originates from here, see TODOs above!
-                    // @TODO
-                    // get the reason not to push item into nested_heading_list
-                    // track this against upper/presiding value
-					// @TODO when is it the wrong children/parent!!!
-					// @TODO a well thought solution, so it doesn't reoccur in other nest patterns!!
-					dump("|||| origin ||||");
-					dump("|||| origin ||||");
-					dump($heading['content']);
-					dump($key);
-					dump($heading_list);
-					dump($heading_list[$key - 1]);
-					// @TODO Sometimes $heading_list[0] is same same as the current $heading
-					// @TODO when we have $heading_list[0] and $heading_list[$key - 1], do not add the heading to the nest if it's heading level is greater(higher) than $heading_list[$key - 1] or $heading_list[0]
-					// @TODO the bug is well documented (from above), implement solution!!
-					dump($heading_list[0]);
-					dump("|||| origin ||||");
-					dump("|||| origin ||||");
-					array_push(
-						$nexted_heading_list,
-						[
-							'item'     => $heading,
-							'children' => null,
-						]
-					);
+					} else {
+					// if there are lower level headers in the $heading_list, that should disqualify any other higher level headers from being added here as they are added below in elseif block!
+					// We check for the presiding heading ($key - 1), but to be more accurate, we should check for the highest level in $heading_list[i] and work with that
+					if (!(isset($heading_list[$key - 1]) && $heading_list[$key - 1]['level'] < $heading['level'])) {
+						array_push(
+							$nexted_heading_list,
+							[
+								'item'     => $heading,
+								'children' => null,
+							]
+						);
+					}
+
 				}
 			} elseif ( $heading['level'] < $heading_list[0]['level'] && !$is_children) {
 				$end_of_slice = count($heading_list);
@@ -326,6 +310,7 @@ class Block_TOC extends Block {
 	 */
 	private function get_end_of_slice( $list ) {
 		foreach ( $list as $key => $item ) {
+
 			if ( $list[0]['level'] > $item['level'] ) {
 				return $key - 1;
 			}
