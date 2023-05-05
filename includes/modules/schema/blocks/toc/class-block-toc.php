@@ -111,6 +111,8 @@ class Block_TOC extends Block {
 
 		preg_match_all( '/(<h([1-6]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuU', $post_content, $headings, PREG_SET_ORDER );
 
+		// @TODO for no headings!
+
 		return $this->toc_output( $headings, $attributes );
 
 		/**
@@ -231,6 +233,7 @@ class Block_TOC extends Block {
         // settings for shortcode
         // Title wrapper in Block options too
         $toc_options = $this->get_toc_options( $attributes );
+		//dump($toc_options);
 
         // attr have
         // titleWrapper, listStyle, title, excludeHeadings[]
@@ -268,11 +271,11 @@ class Block_TOC extends Block {
          * @var array $heading
          *  Contains [heading markup, attr, heading_level, link|anchor, content]
          */
-        foreach ( $headings as $heading ) {
+        foreach ( $headings as $key => $heading ) {
 
             if ( ! in_array('h'.$heading[2], $exclude_headings) ) {
                 // Nest lists accordingly, 3 variants <ul>, </ul> or none
-                // @TODO $list_append_prepend =
+                // @TODO $list_prepend_or_append =
                 $out[] = sprintf(
                     '<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
                     $item_tag,
@@ -292,8 +295,8 @@ class Block_TOC extends Block {
 	}
 
 
-    private function list_append_prepend( $heading, $heading_list ) {
-        // Nest lists accordingly, 3 variants <ul>, </ul> or none
+    private function list_prepend_or_append( $heading, $heading_list ) {
+        // Nest lists accordingly, 3 variants 'prepend <ul>' || 'append </ul>' || none
         // if lower level headers <ul> current is greater that current[key - 1]
 
 

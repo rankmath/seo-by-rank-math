@@ -14,12 +14,6 @@
 		},"title": {
 			"type": "string"
 		},
-		"headings": {
-			"type": "array",
-			"items": {
-				"type": "object"
-			}
-		},
 		"listStyle": {
 			"type": "string"
 		},

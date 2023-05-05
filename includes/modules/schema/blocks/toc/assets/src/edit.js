@@ -58,36 +58,36 @@ export default ( {
 	const excludeHeadings = ! isUndefined( attributes.excludeHeadings ) ? attributes.excludeHeadings : rankMath.tocExcludeHeadings
 
 	// Function to hide certain heading.
-	const hideHeading = ( value, key ) => {
-		const headings = map( attributes.headings, ( heading ) => {
-			if ( heading.key === key ) {
-				heading.disable = value
-			}
-
-			return heading
-		} )
-
-		setAttributes( { headings } )
-	}
+	// const hideHeading = ( value, key ) => {
+	// 	const headings = map( attributes.headings, ( heading ) => {
+	// 		if ( heading.key === key ) {
+	// 			heading.disable = value
+	// 		}
+	//
+	// 		return heading
+	// 	} )
+	//
+	// 	setAttributes( { headings } )
+	// }
 
 	// Function to update Heading link.
-	const onHeadingUpdate = ( value, key, isContent = false ) => {
-		const headings = map( attributes.headings, ( heading ) => {
-			if ( heading.key === key ) {
-				if ( isContent ) {
-					heading.content = value
-					heading.isUpdated = true
-				} else {
-					heading.isGeneratedLink = false
-					heading.link = value
-				}
-			}
-
-			return heading
-		} )
-
-		setAttributes( { headings } )
-	}
+	// const onHeadingUpdate = ( value, key, isContent = false ) => {
+	// 	const headings = map( attributes.headings, ( heading ) => {
+	// 		if ( heading.key === key ) {
+	// 			if ( isContent ) {
+	// 				heading.content = value
+	// 				heading.isUpdated = true
+	// 			} else {
+	// 				heading.isGeneratedLink = false
+	// 				heading.link = value
+	// 			}
+	// 		}
+	//
+	// 		return heading
+	// 	} )
+	//
+	// 	setAttributes( { headings } )
+	// }
 
 	const setExcludeHeadings = ( headingLevel ) => {
 		if ( includes( excludeHeadings, headingLevel ) ) {
@@ -104,26 +104,26 @@ export default ( {
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore )
 
 	// Get Latest headings from the content.
-	const latestHeadings = GetLatestHeadings( attributes.headings, excludeHeadings )
-	useEffect( () => {
-		if ( latestHeadings !== null ) {
-			__unstableMarkNextChangeAsNotPersistent();
-			setAttributes( { headings: latestHeadings } )
-		}
-	}, [ latestHeadings ] )
+	// const latestHeadings = GetLatestHeadings( attributes.headings, excludeHeadings )
+	// useEffect( () => {
+	// 	if ( latestHeadings !== null ) {
+	// 		__unstableMarkNextChangeAsNotPersistent();
+	// 		setAttributes( { headings: latestHeadings } )
+	// 	}
+	// }, [ latestHeadings ] )
 
-	const headingTree = linearToNestedHeadingList( attributes.headings )
-	if ( isUndefined( attributes.headings ) || attributes.headings.length === 0 ) {
-		return (
-			<div { ...blockProps }>
-				<Placeholder
-					label={ __( 'Table of Contents', 'rank-math' ) }
-					instructions={ __( 'Add Heading blocks to this page to generate the Table of Contents.', 'rank-math' ) }
-				/>
-				<InspectControls attributes={ attributes } setAttributes={ setAttributes } excludeHeadings={ excludeHeadings } setExcludeHeadings={ setExcludeHeadings } />
-			</div>
-		)
-	}
+	// const headingTree = linearToNestedHeadingList( attributes.headings )
+	// if ( isUndefined( attributes.headings ) || attributes.headings.length === 0 ) {
+	// 	return (
+	// 		<div { ...blockProps }>
+	// 			<Placeholder
+	// 				label={ __( 'Table of Contents', 'rank-math' ) }
+	// 				instructions={ __( 'Add Heading blocks to this page to generate the Table of Contents.', 'rank-math' ) }
+	// 			/>
+	// 			<InspectControls attributes={ attributes } setAttributes={ setAttributes } excludeHeadings={ excludeHeadings } setExcludeHeadings={ setExcludeHeadings } />
+	// 		</div>
+	// 	)
+	// }
 
 	return (
 		<div { ...blockProps }>
