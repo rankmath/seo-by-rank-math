@@ -61,7 +61,8 @@ class Block_TOC extends Block {
 			return;
 		}
 
-		$this->add_shortcode('rank_math_toc', [ $this, 'render_toc_contents' ] );
+		//$this->add_shortcode('rank_math_toc', [ $this, 'render_toc_contents' ] );
+		add_shortcode('rank_math_toc', [ $this, 'render_toc_contents' ] );
 
 		$this->filter( 'rank_math/schema/block/toc-block', 'add_graph', 10, 2 );
 		// $this->filter( 'render_block_rank-math/toc-block', 'render_toc_block_content', 10, 2 );
