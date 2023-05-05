@@ -46,6 +46,7 @@ export default ( {
 	const { postId } = context;
 
 	// State to monitor edit heading links.
+	// @TODO headings is undefined fix!!
 	const [ edit, toggleEdit ] = useState( false )
 	const [ excludeHeading, toggleExcludeHeading ] = useState( {} )
 	if ( ! attributes.listStyle ) {

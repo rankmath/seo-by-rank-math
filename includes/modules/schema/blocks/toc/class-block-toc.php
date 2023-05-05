@@ -211,7 +211,8 @@ class Block_TOC extends Block {
      */
     public function get_toc_options( $attributes = [] ) {
         // Title wrapper in Block options too
-        $toc_options['titleWrapper']    = $attributes['titleWrapper'] ?? Helper::get_settings( 'general.toc_block_title_wrapper' );;
+        $toc_options['className']       = $attributes['className'] ?? Helper::get_settings( 'general.toc_block_class_name' );
+        $toc_options['titleWrapper']    = $attributes['titleWrapper'] ?? Helper::get_settings( 'general.toc_block_title_wrapper' );
         $toc_options['title']           = $attributes['title'] ?? Helper::get_settings( 'general.toc_block_title' );
         $toc_options['excludeHeadings'] = $attributes['excludeHeadings'] ?? Helper::get_settings( 'general.toc_block_exclude_headings', array() );
         $toc_options['listStyle']       = $attributes['listStyle'] ?? Helper::get_settings( 'general.toc_block_list_style', 'ul' );
@@ -241,8 +242,8 @@ class Block_TOC extends Block {
 		$exclude_headings = $toc_options['excludeHeadings'];
 
 		$class = 'rank-math-block';
-		if ( ! empty( $attributes['className'] ) ) {
-			$class .= ' ' . esc_attr( $attributes['className'] );
+		if ( ! empty( $toc_options['className'] ) ) {
+			$class .= ' ' . esc_attr( $toc_options['className'] );
 		}
 
 		// HTML.
@@ -255,7 +256,7 @@ class Block_TOC extends Block {
 			$title,
 		);
 
-		$list_tag = self::get()->get_list_style( $list_style );
+		// $list_tag = self::get()->get_list_style( $list_style );
 		// $item_tag = self::get()->get_list_item_style( $list_style );
 
 		$list_tag = $list_style;
@@ -263,7 +264,11 @@ class Block_TOC extends Block {
 
 		$out[] = sprintf( '<nav><%1$s>', $list_tag );
 
-		foreach ( $headings as $heading ) {
+		/**
+         * @var array $heading
+         *  Contains [heading markup, attr, heading_level, link|anchor, content]
+         */
+        foreach ( $headings as $heading ) {
 
             if ( ! in_array('h'.$heading[2], $exclude_headings) ) {
                 // Nest lists accordingly, 3 variants <ul>, </ul> or none
