@@ -10,7 +10,6 @@
 
 namespace RankMath\Schema;
 
-use RankMath\Paper\Paper;
 use RankMath\Traits\Shortcode;
 use WP_Block_Type_Registry;
 use RankMath\Helper;
@@ -67,7 +66,6 @@ class Block_TOC extends Block {
 		$this->filter( 'rank_math/schema/block/toc-block', 'add_graph', 10, 2 );
 		// $this->filter( 'render_block_rank-math/toc-block', 'render_toc_block_content', 10, 2 );
 		$this->filter( 'rank_math/metabox/post/values', 'block_settings_metadata' );
-		// register_block_type( RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json' );
 		register_block_type(
 			RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json',
 			[
@@ -204,6 +202,21 @@ class Block_TOC extends Block {
 		return $data;
 	}
 
+    /**
+     * Gets the toc options for shortcode or the gutenberg block.
+     *
+     * @param  array $attributes The toc gutenberg attributes.
+     * @return array The toc options.
+     */
+    public function get_toc_options( $attributes = [] ) {
+        // Title wrapper in Block options too
+        $toc_options['titleWrapper']    = $attributes['titleWrapper'] ?? Helper::get_settings( 'general.toc_block_title_wrapper' );;
+        $toc_options['title']           = $attributes['title'] ?? Helper::get_settings( 'general.toc_block_title' );
+        $toc_options['excludeHeadings'] = $attributes['excludeHeadings'] ?? Helper::get_settings( 'general.toc_block_exclude_headings', array() );
+        $toc_options['listStyle']       = $attributes['listStyle'] ?? Helper::get_settings( 'general.toc_block_list_style', 'ul' );
+        return $toc_options;
+    }
+
 
 	/**
 	 * TOC heading list HTML.
@@ -213,12 +226,18 @@ class Block_TOC extends Block {
 	 * @return string|mixed The list HTML.
 	 */
 	private function toc_output( $headings, $attributes = [] ) {
+        // settings for shortcode
+        // Title wrapper in Block options too
+        $toc_options = $this->get_toc_options( $attributes );
+
+        // attr have
+        // titleWrapper, listStyle, title, excludeHeadings[]
 
 		// Settings.
-		$title_wrapper    = $attributes['titleWrapper'] ?? 'h2';
-		$list_style       = $attributes['listStyle'] ?? Helper::get_settings( 'general.toc_block_list_style' );
-		$title            = $attributes['title'] ?? Helper::get_settings( 'general.toc_block_title' );
-		$exclude_headings = $attributes['excludeHeadings'] ?? Helper::get_settings( 'general.toc_block_exclude_headings' );
+		$title_wrapper    = $toc_options['titleWrapper'];
+		$list_style       = $toc_options['listStyle'];
+		$title            = $toc_options['title'];
+		$exclude_headings = $toc_options['excludeHeadings'];
 
 		$class = 'rank-math-block';
 		if ( ! empty( $attributes['className'] ) ) {
@@ -235,7 +254,7 @@ class Block_TOC extends Block {
 			$title,
 		);
 
-		// $list_tag = self::get()->get_list_style( $list_style );
+		$list_tag = self::get()->get_list_style( $list_style );
 		// $item_tag = self::get()->get_list_item_style( $list_style );
 
 		$list_tag = $list_style;
@@ -244,13 +263,19 @@ class Block_TOC extends Block {
 		$out[] = sprintf( '<nav><%1$s>', $list_tag );
 
 		foreach ( $headings as $heading ) {
-			$out[] = sprintf(
-				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
-				$item_tag,
-				$heading[2],
-				$heading[3],
-				$heading[4],
-			);
+
+            if ( ! in_array('h'.$heading[2], $exclude_headings) ) {
+                // Nest lists accordingly, 3 variants <ul>, </ul> or none
+                // @TODO $list_append_prepend =
+                $out[] = sprintf(
+                    '<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
+                    $item_tag,
+                    $heading[2],
+                    $heading[3],
+                    $heading[4],
+                );
+            }
+
 
 		}
 
@@ -259,5 +284,14 @@ class Block_TOC extends Block {
 		return join( "\n", $out );
 
 	}
+
+
+    private function list_append_prepend( $heading, $heading_list ) {
+        // Nest lists accordingly, 3 variants <ul>, </ul> or none
+        // if lower level headers <ul> current is greater that current[key - 1]
+
+
+        // if higher level header </ul>
+    }
 
 }
