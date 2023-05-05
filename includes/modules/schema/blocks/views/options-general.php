@@ -12,6 +12,26 @@ defined( 'ABSPATH' ) || exit;
 
 $cmb->add_field(
 	[
+		'id'      => 'toc_block_title_wrapper',
+		'type'    => 'select',
+		'name'    => esc_html__( 'Table of Contents Title Wrapper', 'rank-math' ),
+		'desc'    => esc_html__( 'Select a wrapper to use on the Table of Contents block title.', 'rank-math' ),
+		'classes' => 'rank-math-advanced-option',
+        'default' => 'h2',
+        'options' => [
+            'h2' => esc_html__( 'H2', 'rank-math' ),
+            'h3'  => esc_html__( 'H3', 'rank-math' ),
+            'h4'  => esc_html__( 'H4', 'rank-math' ),
+            'h5'  => esc_html__( 'H5', 'rank-math' ),
+            'h6'  => esc_html__( 'H6', 'rank-math' ),
+            'p'  => esc_html__( 'p', 'rank-math' ),
+            'div'  => esc_html__( 'DIV', 'rank-math' ),
+        ],
+	]
+);
+
+$cmb->add_field(
+	[
 		'id'      => 'toc_block_title',
 		'type'    => 'text',
 		'name'    => esc_html__( 'Table of Contents Title', 'rank-math' ),
