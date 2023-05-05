@@ -72,3 +72,14 @@ $cmb->add_field(
 		],
 	]
 );
+
+$cmb->add_field(
+	[
+		'id'      => 'toc_block_class_name',
+		'type'    => 'text',
+		'name'    => esc_html__( 'Additional CSS class(es)', 'rank-math' ),
+		'desc'    => esc_html__( 'Separate multiple classes with spaces.', 'rank-math' ),
+		'classes' => 'rank-math-advanced-option',
+		'default' => esc_html__( '', 'rank-math' ),
+	]
+);
