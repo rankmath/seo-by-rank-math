@@ -10,6 +10,7 @@
 
 namespace RankMath\Schema;
 
+use RankMath\Paper\Paper;
 use WP_Block_Type_Registry;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
@@ -36,14 +37,6 @@ class Block_TOC extends Block {
 	 * @var Block_TOC
 	 */
 	protected static $instance = null;
-
-
-	/**
-	 * To debug heading list hook because it's called twice.
-	 * @TODO delete
-	 * @var bool
-	 */
-	private static $called = false;
 
 	/**
 	 * Retrieve main Block_TOC instance.
@@ -75,7 +68,7 @@ class Block_TOC extends Block {
 		register_block_type(
 			RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json',
 			[
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => [ $this, 'render_toc_contents' ],
 			]
 		);
 
@@ -96,20 +89,27 @@ class Block_TOC extends Block {
 		return $values;
 	}
 
-	public function render( $attributes ) {
-		// @TODO cache with count($attributes['headings']) maybe
+	public function render_toc_contents( $attributes = [] ) {
+		$post_content = null;
+		if ( ! isset( $attributes['postId'] ) ) {
+			global $post;
+			$post_content = $post->post_content;
 
-		if (self::$called) {
-			return;
 		} else {
-			$headings     = $this->just_a_test( $attributes['headings'] );
-			//dump($headings);
-			self::$called = true;
+			global $wpdb;
+			$sql  = "SELECT post_content FROM {$wpdb->posts} WHERE ID=%s";
+			$post = $wpdb->get_results( $wpdb->prepare( $sql, $attributes['postId'] ) );
+			if ( ! $post ) {
+				exit();
+			}
+
+			$post_content = $post[0]->post_content;
+
 		}
 
+		preg_match_all( '/(<h([1-6]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuU', $post_content, $headings, PREG_SET_ORDER );
 
-		//$headings     = $this->linear_to_nested_heading_list( $attributes['headings'] );
-		$list_out_put = $this->list_output( $headings );
+		return $this->toc_output( $headings, $attributes );
 
 		/**
 		 *
@@ -124,37 +124,6 @@ class Block_TOC extends Block {
 		 * 5. heading.disable
 		 * 6. TagName = 'div' === ListStyle ? 'div' : 'li'
 		 */
-
-		// Settings.
-		$title_wrapper    = $attributes['titleWrapper'];
-		$list_style       = Helper::get_settings( 'general.toc_block_list_style' ) ?? $attributes['listStyle'];
-		$title            = ! empty( $attributes['title'] ) ? $attributes['title'] : Helper::get_settings( 'general.toc_block_title' );
-		$exclude_headings = Helper::get_settings( 'general.toc_block_exclude_headings' );
-
-		$list_tag = self::get()->get_list_style( $list_style );
-		$item_tag = self::get()->get_list_item_style( $list_style );
-
-		$class = 'rank-math-block';
-		if ( ! empty( $attributes['className'] ) ) {
-			$class .= ' ' . esc_attr( $attributes['className'] );
-		}
-
-		// HTML.
-		$out   = [];
-		$out[] = sprintf(
-			'<div id="rank-math-toc" class="%1$s"%2$s><%3$s>%4$s</%3$s>',
-			$class,
-			self::get()->get_styles( $attributes ),
-			$attributes['titleWrapper'],
-			$title,
-		);
-
-		$out[] = '<nav><div>';
-		$out[] = $list_out_put;
-		$out[] = '</div></nav>';
-		$out[] = '</div>';
-
-		return join( "\n", $out );
 
 	}
 
@@ -234,226 +203,58 @@ class Block_TOC extends Block {
 
 
 	/**
-	 * Nest heading based on the Heading level.
-	 *
-	 * @param array $heading_list The flat list of headings to nest.
-	 * @param bool $is_children Identify the parsed list if children.
-	 *
-	 * @return array The nested list of headings.
-	 */
-	private function linear_to_nested_heading_list( $heading_list, $is_children = false) {
-		$nexted_heading_list = [];
-		foreach ( $heading_list as $key => $heading ) {
-			if ( empty( $heading['content'] ) ) {
-				continue;
-			}
-
-			// Make sure we are only working with the same level as the first iteration in our set.
-			if ( $heading['level'] === $heading_list[0]['level']) {
-
-				// Propagate to children only (those whose level is lower than their parent ie $heading['level'].
-				if ( isset( $heading_list[ $key + 1 ]['level'] ) && $heading_list[ $key + 1 ]['level'] > $heading['level'] ) {
-					// endOfSlice should be upto where heading level is smaller (higher level) than then current.
-					$end_of_slice   = $this->get_end_of_slice( $heading_list );
-					//$end_of_slice   = count($heading_list);
-					$children_array = array_slice( $heading_list, $key + 1, $end_of_slice );
-					$children       = $this->linear_to_nested_heading_list( $children_array, true );
-//					dump('|||||||||| here ||||||||||||||');
-//					dump('|||||||||| here ||||||||||||||');
-//					dump($end_of_slice);
-//					dump($children_array);
-//					dump($heading_list);
-//					dump('|||||||||| here ||||||||||||||');
-//					dump('|||||||||| here ||||||||||||||');
-						$nexted_heading_list[] = [
-							'item'     => $heading,
-							'children' => $children,
-						];
-					} else {
-					// if there are lower level headers in the $heading_list, that should disqualify any other higher level headers from being added here as they are added below in elseif block!
-					// We check for the presiding heading ($key - 1), but to be more accurate, we should check for the highest level in $heading_list[i] and work with that
-
-					if (!(isset($heading_list[$key - 1]) && $heading_list[$key - 1]['level'] < $heading['level'])) {
-						$nexted_heading_list[] = [
-							'item'     => $heading,
-							'children' => null,
-						];
-					}
-
-				}
-				// BUG for heading listing pattern in http://localhost:10004/uncategorized/test-more-about-toc-001/256/
-			} elseif ( $heading['level'] < $heading_list[0]['level'] && !$is_children) {
-			//} elseif ( $heading['level'] < $heading_list[0]['level'] ) {
-			//} else {
-
-				//dump($heading_list);
-				//if ($heading['level'] < $heading_list[0]['level']) {
-					$end_of_slice = count( $heading_list );
-					$items_array  = array_slice( $heading_list, $key, $end_of_slice );
-					$items        = $this->linear_to_nested_heading_list( $items_array );
-//					dump( '********** THE OTHER BUGS ********' );
-//					dump( '********** THE OTHER BUGS ********' );
-//					dump( $heading_list[0]['content'] );
-//					dump( $heading['content'] );
-//					dump( $heading_list[0]['level'] );
-//					dump( $heading['level'] );
-//					dump($heading['level'] < $heading_list[0]['level']);
-//					dump( $items_array );
-//					dump( $items );
-//					dump( '********** THE OTHER BUGS ********' );
-//					dump( '********** THE OTHER BUGS ********' );
-					$nexted_heading_list[] = $items[0];
-				//}
-
-			}
-		}
-
-		return $nexted_heading_list;
-
-	}
-
-	/**
 	 * TOC heading list HTML.
 	 *
 	 * @param array $headings The heading and their children.
+	 * @param array $attributes The attributes if gutenberg block.
 	 * @return string|mixed The list HTML.
 	 */
-	private function list_output( $headings ) {
-		$out[] = '<ul>';
+	private function toc_output( $headings, $attributes = [] ) {
+
+		// Settings.
+		$title_wrapper    = $attributes['titleWrapper'] ?? 'h2';
+		$list_style       = $attributes['listStyle'] ?? Helper::get_settings( 'general.toc_block_list_style' );
+		$title            = $attributes['title'] ?? Helper::get_settings( 'general.toc_block_title' );
+		$exclude_headings = $attributes['excludeHeadings'] ?? Helper::get_settings( 'general.toc_block_exclude_headings' );
+
+		$class = 'rank-math-block';
+		if ( ! empty( $attributes['className'] ) ) {
+			$class .= ' ' . esc_attr( $attributes['className'] );
+		}
+
+		// HTML.
+		$out   = [];
+		$out[] = sprintf(
+			'<div id="rank-math-toc" class="%1$s"%2$s><%3$s>%4$s</%3$s>',
+			$class,
+			self::get()->get_styles( $attributes ),
+			$title_wrapper,
+			$title,
+		);
+
+		// $list_tag = self::get()->get_list_style( $list_style );
+		// $item_tag = self::get()->get_list_item_style( $list_style );
+
+		$list_tag = $list_style;
+		$item_tag = 'li';
+
+		$out[] = sprintf( '<nav><%1$s>', $list_tag );
 
 		foreach ( $headings as $heading ) {
 			$out[] = sprintf(
-				'<div><a href="%1$s">%2$s</a></div>',
-				$heading['item']['link'],
-				$heading['item']['content']
+				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
+				$item_tag,
+				$heading[2],
+				$heading[3],
+				$heading[4],
 			);
 
-			if ( $heading['children'] ) {
-				$out[] = $this->list_output( $heading['children'] );
-			}
 		}
 
-		$out[] = '</ul>';
+		$out[] = sprintf( '</%1$s></nav>', $list_tag );
+		$out[] = '</div>';
 		return join( "\n", $out );
 
 	}
 
-	/**
-	 * Gets the point|length of the array.
-	 *
-	 * @param array $list Heading list.
-	 *
-	 * @return int|string The length of the array.
-	 */
-	private function get_end_of_slice( $list, $level ) {
-		foreach ( $list as $key => $item ) {
-
-			// @TODO solution is to get the last item (instead of the first) where heading level is higher than the passed level!!!
-			// @TODO we can use key + 1 to have this detail!!
-			// Make sure there are lower level headings before the higher level heading as well.
-//			dump("************* here *********");
-//			dump("************* here *********");
-//			dump("++++++++++ list[key + 1]['level'] ++++++++++");
-//			dump("++++++++++ list[key + 1]['level'] ++++++++++");
-//			dump($level);
-//			dump($item['level']);
-////			dump($list[$key + 1]['level'] );
-//			dump($item['content']);
-////			dump($list[$key + 1]['content'] );
-////			dump($list[$key + 1]['level'] <= $level && $level < $item['level']);
-//			dump("++++++++++ list[key + 1]['level'] ++++++++++");
-//			dump("++++++++++ list[key + 1]['level'] ++++++++++");
-//			dump("************* here *********");
-//			dump("************* here *********");
-
-			//if ( $list[0]['level'] > $item['level'] || (isset($list[$key + 1]['level']) && $list[$key + 1]['level'] < $item['level'])) {
-			// Level is greater (higher) the next element in the loop.
-			// Heading level for the next element in the loop is higher (less) than the passed level.
-			if ( $list[$key + 1]['level'] <= $level ) {
-
-				// After above check
-				// Current heading level is lower than the passed level ge h2 < h3
-				// I think we should start with this logic and apply the other
-				if ($level < $item['level']) {
-					return $key - 1;
-				}
-			//if ( $level < $item['level']  ) {
-//				dump("**************");
-//			dump("**************");
-//			dump($key);
-//			dump($item['content']);
-//			dump($item['level']);
-//			dump($list[$key + 1]['level']);
-//			dump("**************");
-//			dump("**************");
-				//return $key - 1;
-//				dump("************* here *********");
-//				dump("************* here *********");
-////				dump($item['level']);
-////				dump($level);
-////				dump($key);
-//				dump($item);
-//				dump("************* here *********");
-//				dump("************* here *********");
-//				return $key - 1;
-			}
-//			elseif ( $list[$key + 1]['level'] > $item['level'] ) {
-//				return $key;
-//			}
-		}
-		return count($list) - 1;
-
-	}
-
-
-	private function just_a_test($heading_list) {
-		//dump($heading_list);
-
-		$nested_heading_list = [];
-		foreach ($heading_list as $key => $heading ) {
-			//dump($heading);
-
-			// Make sure we're dealing with same or higher level headings only.
-			if (  $heading['level'] === $heading_list[0]['level'] || $heading['level'] <  $heading_list[0]['level'] ) {
-
-				// Has children.
-				if ( isset( $heading_list[ $key + 1 ]['level'] ) && $heading_list[ $key + 1 ]['level'] > $heading_list[0]['level'] ) {
-
-					$end_of_slice   = $this->get_end_of_slice( $heading_list, $heading['level']);
-					//$end_of_slice   = count($heading_list);
-					$children_array = array_slice( $heading_list, $key + 1, $end_of_slice );
-
-//					dump("+++++++++++++ children ++++++++++++++++++++");
-//					dump("+++++++++++++ children ++++++++++++++++++++");
-//					dump("+++++++++++++ children ++++++++++++++++++++");
-//					dump($end_of_slice);
-//					dump($children_array);
-//					dump($heading_list);
-//					dump($heading['level']);
-//					dump("+++++++++++++ children ++++++++++++++++++++");
-//					dump("+++++++++++++ children ++++++++++++++++++++");
-//					dump("+++++++++++++ children ++++++++++++++++++++");
-					$nested_heading_list[] = [
-						'level'     => $heading['level'],
-						'item'     => $heading,
-						//'children' => $this->just_a_test($children_array),
-						'children' => null,
-					];
-				} else {
-					// Has no children.
-					$nested_heading_list[] = [
-						'level'     => $heading['level'],
-						'item'     => $heading,
-						'children' => null,
-					];
-				}
-
-			}
-		}
-
-//		dump($heading_list);
-//		dump($nested_heading_list);
-		return $nested_heading_list;
-
-	}
 }

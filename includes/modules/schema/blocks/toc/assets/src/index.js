@@ -15,6 +15,7 @@ import save from './save'
 registerBlockType(
 	'rank-math/toc-block',
 	{
+		usesContext: [ 'postId' ],
 		edit,
 		save,
 	}

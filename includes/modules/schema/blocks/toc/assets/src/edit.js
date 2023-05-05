@@ -15,6 +15,7 @@ import {
 import { useDispatch } from '@wordpress/data'
 import { Placeholder } from '@wordpress/components'
 import { useEffect, useState } from '@wordpress/element'
+import ServerSideRender from '@wordpress/server-side-render';
 
 /**
  * Internal dependencies
@@ -27,8 +28,10 @@ import Toolbar from './toolbar'
 export default ( {
 	attributes,
 	setAttributes,
+	context,
 } ) => {
 	const blockProps = useBlockProps()
+	const { postId } = context;
 
 	// State to monitor edit heading links.
 	const [ edit, toggleEdit ] = useState( false )
@@ -111,6 +114,12 @@ export default ( {
 
 	return (
 		<div { ...blockProps }>
+			<ServerSideRender
+				block="rank-math/toc-block"
+				attributes={{
+					postId: postId
+				}}
+			/>
 			<RichText
 				tagName={ attributes.titleWrapper }
 				value={ tocTitle }

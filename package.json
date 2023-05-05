@@ -62,6 +62,7 @@
 		"@woocommerce/components": "^11.1.0",
 		"@woocommerce/settings": "^1.0.0",
 		"@wordpress/keycodes": "^3.25.0",
+		"@wordpress/server-side-render": "^4.9.0",
 		"@yaireo/tagify": "^4.17.7",
 		"lodash": "^4.17.21",
 		"recharts": "^2.3.2"
@@ -72,6 +73,7 @@
 		"deva": "webpack --mode=development --env what=analytics --watch",
 		"devf": "webpack --mode=development --env what=front --watch",
 		"devs": "webpack --mode=development --env what=schema --watch",
+		"toc": "webpack --mode=development --env what=toc --watch",
 		"devdivi": "webpack --mode=development --env what=divi --progress --watch",
 		"devca": "webpack --mode=development --env what=content-ai --watch",
 		"a": "webpack --mode=production --env what=analytics --progress",
