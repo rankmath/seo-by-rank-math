@@ -11,6 +11,7 @@
 namespace RankMath\Schema;
 
 use RankMath\Paper\Paper;
+use RankMath\Traits\Shortcode;
 use WP_Block_Type_Registry;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
@@ -22,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Block_TOC extends Block {
 
-	use Hooker;
+	use Hooker, Shortcode;
 
 	/**
 	 * Block type name.
@@ -60,6 +61,8 @@ class Block_TOC extends Block {
 		if ( WP_Block_Type_Registry::get_instance()->is_registered( $this->block_type ) ) {
 			return;
 		}
+
+		$this->add_shortcode('rank_math_toc', [ $this, 'render_toc_contents' ] );
 
 		$this->filter( 'rank_math/schema/block/toc-block', 'add_graph', 10, 2 );
 		// $this->filter( 'render_block_rank-math/toc-block', 'render_toc_block_content', 10, 2 );
