@@ -12,10 +12,12 @@ import {
 	RichText,
 	store as blockEditorStore,
 } from '@wordpress/block-editor'
-import { useDispatch } from '@wordpress/data'
-import { Placeholder } from '@wordpress/components'
+import { store as editorStore } from '@wordpress/editor'
+import { useDispatch, useSelect } from '@wordpress/data'
+import { Placeholder, Spinner } from '@wordpress/components'
 import { useEffect, useState } from '@wordpress/element'
 import ServerSideRender from '@wordpress/server-side-render';
+
 
 /**
  * Internal dependencies
@@ -30,6 +32,16 @@ export default ( {
 	setAttributes,
 	context,
 } ) => {
+
+	const { isSaving, isSavingNonPostEntityChanges } = useSelect( ( select ) => {
+		const { isSavingPost, isSavingNonPostEntityChanges } = select( editorStore );
+		return {
+			isSaving: isSavingPost(),
+			isSavingNonPostEntityChanges: isSavingNonPostEntityChanges(),
+		}
+	})
+
+
 	const blockProps = useBlockProps()
 	const { postId } = context;
 
@@ -114,12 +126,14 @@ export default ( {
 
 	return (
 		<div { ...blockProps }>
-			<ServerSideRender
-				block="rank-math/toc-block"
-				attributes={{
-					postId: postId
-				}}
-			/>
+			{ ( isSaving || isSavingNonPostEntityChanges ) ? <Spinner /> : (
+				<ServerSideRender
+					block="rank-math/toc-block"
+					attributes={{
+						postId: postId
+					}}
+				/>
+			)}
 			<RichText
 				tagName={ attributes.titleWrapper }
 				value={ tocTitle }
@@ -128,18 +142,6 @@ export default ( {
 				} }
 				placeholder={ __( 'Enter a title', 'rank-math' ) }
 			/>
-			<nav>
-				<ListStyle>
-					<List
-						headings={ headingTree }
-						onHeadingUpdate={ onHeadingUpdate }
-						edit={ edit }
-						toggleEdit={ toggleEdit }
-						hideHeading={ hideHeading }
-						ListStyle={ ListStyle }
-					/>
-				</ListStyle>
-			</nav>
 			<Toolbar setAttributes={ setAttributes } />
 			<InspectControls attributes={ attributes } setAttributes={ setAttributes } excludeHeadings={ excludeHeadings } setExcludeHeadings={ setExcludeHeadings } />
 		</div>
