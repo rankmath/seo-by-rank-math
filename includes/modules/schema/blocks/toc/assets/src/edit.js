@@ -76,7 +76,7 @@ export default ( {
 						title: attributes.title,
 						excludeHeadings: attributes.excludeHeadings,
 						listStyle: attributes.listStyle,
-						
+
 					}}
 				/>
 			)}

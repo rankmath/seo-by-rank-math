@@ -108,8 +108,37 @@ class Block_TOC extends Block {
 
 		}
 
+        $toc_options = $this->get_toc_options( $attributes );
+
+        $headings_to_include = ['1', '2', '3', '4', '5', '6'];
+
+        if ( isset($toc_options['excludeHeadings']) ) {
+            $excluded = [];
+            foreach ( $toc_options['excludeHeadings'] as $exclude) {
+                $excluded[] = str_replace('h', '', $exclude);
+            }
+
+
+            $headings_to_include = array_diff( $headings_to_include, $excluded );
+        }
+
+        dump($headings_to_include);
+
+        $included_string = implode('|', $headings_to_include);
+
+        dump($included_string);
+
+        // @TODO exit if included heading is empty
+
 		// @TODO exclude headings from here!
-		preg_match_all( '/(<h([1-6]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuUD', $post_content, $headings, PREG_SET_ORDER );
+        $heading_pattern = sprintf('/(<h([%1$s]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuUD', $included_string);
+
+        dump($heading_pattern);
+        exit();
+
+		preg_match_all( $heading_pattern, $post_content, $headings, PREG_SET_ORDER );
+
+        //dump($headings);
 
 		// @TODO for no headings!
 		// const headingTree = linearToNestedHeadingList( attributes.headings )
@@ -125,7 +154,7 @@ class Block_TOC extends Block {
 		// 	)
 		// }
 
-		return $this->toc_output( $headings, $attributes );
+		return $this->toc_output( $headings, $toc_options, $attributes );
 
 		/**
 		 *
@@ -240,10 +269,9 @@ class Block_TOC extends Block {
 	 * @param array $attributes The attributes if gutenberg block.
 	 * @return string|mixed The list HTML.
 	 */
-	private function toc_output( $headings, $attributes = [] ) {
-        // settings for shortcode
-        // Title wrapper in Block options too
-        $toc_options = $this->get_toc_options( $attributes );
+	private function toc_output( $headings, $toc_options, $attributes = [] ) {
+
+
 
         // attr have
         // titleWrapper, listStyle, title, excludeHeadings[]
