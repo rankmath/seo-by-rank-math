@@ -224,6 +224,12 @@ class Block_TOC extends Block {
 	 * @return array The toc options.
 	 */
 	public function get_toc_options( $attributes = [] ) {
+		// @TODO compare setting from both attr and general.toc_block_
+		//dump($attributes);
+		// listStyle => 'ol'
+		// excludeHeadings => ['h3']
+		// className => 'p-block-rank-math-toc-block'
+		// titleWrapper => 'h2'
 		$toc_options['className']       = $attributes['className'] ?? Helper::get_settings( 'general.toc_block_class_name' );
 		$toc_options['titleWrapper']    = $attributes['titleWrapper'] ?? Helper::get_settings( 'general.toc_block_title_wrapper' );
 		$toc_options['title']           = $attributes['title'] ?? Helper::get_settings( 'general.toc_block_title' );
