@@ -84,12 +84,20 @@ class Block_TOC extends Block {
 	 */
 	public function block_settings_metadata( $values ) {
 		$values['tocTitle']           = Helper::get_settings( 'general.toc_block_title' );
-		$values['tocExcludeHeadings'] = Helper::get_settings( 'general.toc_block_exclude_headings', array() );
+		$values['tocExcludeHeadings'] = Helper::get_settings( 'general.toc_block_exclude_headings', [] );
 		$values['listStyle']          = Helper::get_settings( 'general.toc_block_list_style', 'ul' );
 
 		return $values;
 	}
 
+	/**
+	 * Renders the toc contents.
+	 *
+	 * Either for the Gutenberg or shortcode.
+	 * @param array $attributes The block attributes.
+	 *
+	 * @return mixed|string|void
+	 */
 	public function render_toc_contents( $attributes = [] ) {
 		$post_content = null;
 		if ( ! isset( $attributes['postId'] ) ) {
@@ -122,53 +130,49 @@ class Block_TOC extends Block {
             $headings_to_include = array_diff( $headings_to_include, $excluded );
         }
 
-        dump($headings_to_include);
+		// No headings to show because all are excluded!
+		if ( !$headings_to_include ) {
+			ob_start();
+			?>
+			<div class="components-placeholder is-large">
+				<div aria-hidden="true">
+				</div>
+				<div class="components-placeholder__label"><?php _e('Table of Contents', 'rank-math')?></div>
+				<fieldset class="components-placeholder__fieldset">
+					<legend class="components-placeholder__instructions"> <?php _e( 'No headings to show because all are excluded.', 'rank-math')?>
+					</legend>
+				</fieldset>
+			</div>
+
+			<?php
+			return ob_get_clean ();
+		}
 
         $included_string = implode('|', $headings_to_include);
 
-        dump($included_string);
-
-        // @TODO exit if included heading is empty
-
-		// @TODO exclude headings from here!
         $heading_pattern = sprintf('/(<h([%1$s]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuUD', $included_string);
-
-        dump($heading_pattern);
-        exit();
 
 		preg_match_all( $heading_pattern, $post_content, $headings, PREG_SET_ORDER );
 
-        //dump($headings);
+		// No headings!
+		if (  !$headings ) {
+			ob_start();
+			?>
+			<div class="components-placeholder is-large">
+				<div aria-hidden="true">
+				</div>
+				<div class="components-placeholder__label"><?php _e('Table of Contents', 'rank-math')?></div>
+				<fieldset class="components-placeholder__fieldset">
+					<legend class="components-placeholder__instructions"> <?php _e( 'Add Heading blocks to this page to generate the Table of Contents.', 'rank-math')?>
+					</legend>
+				</fieldset>
+			</div>
 
-		// @TODO for no headings!
-		// const headingTree = linearToNestedHeadingList( attributes.headings )
-		// if ( isUndefined( attributes.headings ) || attributes.headings.length === 0 ) {
-		// 	return (
-		// 		<div { ...blockProps }>
-		// 			<Placeholder
-		// 				label={ __( 'Table of Contents', 'rank-math' ) }
-		// 				instructions={ __( 'Add Heading blocks to this page to generate the Table of Contents.', 'rank-math' ) }
-		// 			/>
-		// 			<InspectControls attributes={ attributes } setAttributes={ setAttributes } excludeHeadings={ excludeHeadings } setExcludeHeadings={ setExcludeHeadings } />
-		// 		</div>
-		// 	)
-		// }
+			<?php
+			return ob_get_clean ();
+		}
 
 		return $this->toc_output( $headings, $toc_options, $attributes );
-
-		/**
-		 *
-		 * @TODO apply settings/options,
-		 * @ /seo-by-rank-math/includes/modules/schema/blocks/views/options-general.php
-		 * We have
-		 * 1. attributes.titleWrapper
-		 * 2. attributes.listStyle
-		 * 3. attributes.title ?? rankMath.tocTitle
-		 * 4. attributes.excludeHeadings ?? rankMath.tocExcludeHeadings
-		 * Others to confirm include:
-		 * 5. heading.disable
-		 * 6. TagName = 'div' === ListStyle ? 'div' : 'li'
-		 */
 
 	}
 
@@ -266,21 +270,16 @@ class Block_TOC extends Block {
 	 * TOC heading list HTML.
 	 *
 	 * @param array $headings The heading and their children.
+	 * @param array $toc_options The options to apply to toc content.
 	 * @param array $attributes The attributes if gutenberg block.
 	 * @return string|mixed The list HTML.
 	 */
 	private function toc_output( $headings, $toc_options, $attributes = [] ) {
 
-
-
-        // attr have
-        // titleWrapper, listStyle, title, excludeHeadings[]
-
 		// Settings.
 		$title_wrapper    = $toc_options['titleWrapper'];
 		$list_style       = $toc_options['listStyle'];
 		$title            = $toc_options['title'];
-		$exclude_headings = $toc_options['excludeHeadings'];
 
 		$class = 'rank-math-block';
 		if ( ! empty( $toc_options['className'] ) ) {
@@ -303,7 +302,6 @@ class Block_TOC extends Block {
 		$list_tag = $list_style;
 		$item_tag = 'li';
 
-		$out[] = "<h1> List style: {$list_tag}</h1>";
 		$out[] = sprintf( '<nav><%1$s>', $list_tag );
 
 		// Heading array contains [heading markup, attr, heading_level, link|anchor, content]!
@@ -319,14 +317,20 @@ class Block_TOC extends Block {
 	}
 
 
+	/**
+	 * Nest lists accordingly, 3 variants 'prepend <ul>' || 'append </ul>' || none .
+	 *
+	 * @param $key
+	 * @param $heading
+	 * @param $heading_list
+	 * @param $list_tag
+	 * @param $item_tag
+	 * @param $output
+	 *
+	 * @return string|void
+	 */
 	private function list_prepend_or_append( $key, $heading, $heading_list, $list_tag, $item_tag, $output ) {
-        //dump($heading_list);
-		// @TODO use the settings list tag for children as well
 		// Nest lists accordingly, 3 variants 'prepend <ul>' || 'append </ul>' || none
-		// if lower level headers <ul> current is greater that current[key - 1]
-
-
-
 
 		// The last item in the list.
 		if ( 0 === count($heading_list) || $key === count($heading_list) - 1 ) {

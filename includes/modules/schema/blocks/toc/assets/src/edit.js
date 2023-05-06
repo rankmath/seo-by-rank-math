@@ -67,6 +67,15 @@ export default ( {
 	
 	return (
 		<div { ...blockProps }>
+			<RichText
+				tagName={ attributes.titleWrapper }
+				value={ tocTitle }
+				onChange={ ( newTitle ) => {
+					setAttributes( { title: newTitle } )
+				} }
+				placeholder={ __( 'Enter a title', 'rank-math' ) }
+			/>
+
 			{ ( isSaving || isSavingNonPostEntityChanges ) ? <Spinner /> : (
 				<ServerSideRender
 					block="rank-math/toc-block"
@@ -80,14 +89,7 @@ export default ( {
 					}}
 				/>
 			)}
-			<RichText
-				tagName={ attributes.titleWrapper }
-				value={ tocTitle }
-				onChange={ ( newTitle ) => {
-					setAttributes( { title: newTitle } )
-				} }
-				placeholder={ __( 'Enter a title', 'rank-math' ) }
-			/>
+
 			<Toolbar setAttributes={ setAttributes } />
 			<InspectControls attributes={ attributes } setAttributes={ setAttributes } excludeHeadings={ excludeHeadings } setExcludeHeadings={ setExcludeHeadings } />
 		</div>
