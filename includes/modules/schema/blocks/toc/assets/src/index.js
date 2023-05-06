@@ -17,6 +17,6 @@ registerBlockType(
 	{
 		usesContext: [ 'postId' ],
 		edit,
-		save,
+		save: () => {},
 	}
 )

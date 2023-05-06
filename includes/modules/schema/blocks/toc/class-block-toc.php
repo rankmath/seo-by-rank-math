@@ -112,6 +112,18 @@ class Block_TOC extends Block {
 		preg_match_all( '/(<h([1-6]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuUD', $post_content, $headings, PREG_SET_ORDER );
 
 		// @TODO for no headings!
+		// const headingTree = linearToNestedHeadingList( attributes.headings )
+		// if ( isUndefined( attributes.headings ) || attributes.headings.length === 0 ) {
+		// 	return (
+		// 		<div { ...blockProps }>
+		// 			<Placeholder
+		// 				label={ __( 'Table of Contents', 'rank-math' ) }
+		// 				instructions={ __( 'Add Heading blocks to this page to generate the Table of Contents.', 'rank-math' ) }
+		// 			/>
+		// 			<InspectControls attributes={ attributes } setAttributes={ setAttributes } excludeHeadings={ excludeHeadings } setExcludeHeadings={ setExcludeHeadings } />
+		// 		</div>
+		// 	)
+		// }
 
 		return $this->toc_output( $headings, $attributes );
 
