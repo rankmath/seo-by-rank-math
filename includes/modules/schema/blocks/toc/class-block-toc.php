@@ -224,14 +224,8 @@ class Block_TOC extends Block {
 	 * @return array The toc options.
 	 */
 	public function get_toc_options( $attributes = [] ) {
-		// @TODO compare setting from both attr and general.toc_block_
-		//dump($attributes);
-		// listStyle => 'ol'
-		// excludeHeadings => ['h3']
-		// className => 'p-block-rank-math-toc-block'
-		// titleWrapper => 'h2'
 		$toc_options['className']       = $attributes['className'] ?? Helper::get_settings( 'general.toc_block_class_name' );
-		$toc_options['titleWrapper']    = $attributes['titleWrapper'] ?? Helper::get_settings( 'general.toc_block_title_wrapper' );
+		$toc_options['titleWrapper']    = $attributes['titleWrapper'] ?? Helper::get_settings( 'general.toc_block_title_wrapper', 'h2' );
 		$toc_options['title']           = $attributes['title'] ?? Helper::get_settings( 'general.toc_block_title' );
 		$toc_options['excludeHeadings'] = $attributes['excludeHeadings'] ?? Helper::get_settings( 'general.toc_block_exclude_headings', [] );
 		$toc_options['listStyle']       = $attributes['listStyle'] ?? Helper::get_settings( 'general.toc_block_list_style', 'ul' );
@@ -281,12 +275,13 @@ class Block_TOC extends Block {
 		$list_tag = $list_style;
 		$item_tag = 'li';
 
+		$out[] = "<h1> List style: {$list_tag}</h1>";
 		$out[] = sprintf( '<nav><%1$s>', $list_tag );
 
 		// Heading array contains [heading markup, attr, heading_level, link|anchor, content]!
 		foreach ( $headings as $key => $heading ) {
 			// Nest lists accordingly, 3 variants <ul>, </ul> or none.
-			$out[] = $this->list_prepend_or_append( $key, $heading, $headings, $item_tag, $out );
+			$out[] = $this->list_prepend_or_append( $key, $heading, $headings, $list_tag, $item_tag, $out );
 		}
 
 		$out[] = sprintf( '</%1$s></nav>', $list_tag );
@@ -296,29 +291,33 @@ class Block_TOC extends Block {
 	}
 
 
-	private function list_prepend_or_append( $key, $heading, $heading_list, $item_tag, $output ) {
+	private function list_prepend_or_append( $key, $heading, $heading_list, $list_tag, $item_tag, $output ) {
+        //dump($heading_list);
 		// @TODO use the settings list tag for children as well
 		// Nest lists accordingly, 3 variants 'prepend <ul>' || 'append </ul>' || none
 		// if lower level headers <ul> current is greater that current[key - 1]
 
-		$next_heading = $heading_list[ $key + 1 ];
+
+
 
 		// The last item in the list.
-		if ( ! isset( $next_heading ) ) {
+		if ( 0 === count($heading_list) || $key === count($heading_list) - 1 ) {
 			// Search if <ul> or </ul> occur last in the html, output and add a </ul> (close the list) if needed.
 			$output = join( "\n", $output );
 
-			preg_match_all( '/(<\/ul>)|(<ul>)/msuUD', $output, $matches );
+            $list_pattern = sprintf('/(<\/%1$s>)|(<%1$s>)/msuUD', $list_tag);
+			preg_match_all( $list_pattern, $output, $matches );
 
 			if ( 1 < count( $matches) ) {
-				if ( '<ul>' === end( $matches[0] ) ) {
+				if ( sprintf('<%1$s>', $list_tag) === end( $matches[0] ) ) {
 					return sprintf(
-						'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></ul></%1$s>',
-						$item_tag,
-						$heading[2],
-						$heading[3],
-						$heading[4],
-					);
+                        '<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%5$s></%1$s>',
+                        $item_tag,
+                        $heading[2],
+                        $heading[3],
+                        $heading[4],
+                        $list_tag,
+                    );
 				}
 			}
 			return sprintf(
@@ -329,6 +328,8 @@ class Block_TOC extends Block {
 				$heading[4],
 			);
 		}
+
+        $next_heading = $heading_list[ $key + 1 ];
 
 		// TRUE if h3 == h3!
 		if ( $heading[2] === $next_heading[2] ) {
@@ -345,21 +346,23 @@ class Block_TOC extends Block {
 		// TRUE if h2 < h3!
 		if ( $heading[2] < $next_heading[2] ) {
 			return sprintf(
-				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a><ul></%1$s>',
+				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a><%5$s></%1$s>',
 				$item_tag,
 				$heading[2],
 				$heading[3],
 				$heading[4],
+                $list_tag,
 			);
 		}
 		// TRUE if h3 > h2!
 		if ( $heading[2] > $next_heading[2] ) {
 			return sprintf(
-				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></ul></%1$s>',
+				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%5$s></%1$s>',
 				$item_tag,
 				$heading[2],
 				$heading[3],
 				$heading[4],
+                $list_tag,
 			);
 		}
 	}

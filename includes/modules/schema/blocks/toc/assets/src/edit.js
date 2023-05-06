@@ -71,7 +71,12 @@ export default ( {
 				<ServerSideRender
 					block="rank-math/toc-block"
 					attributes={{
-						postId: postId
+						postId: postId,
+						titleWrapper: attributes.titleWrapper,
+						title: attributes.title,
+						excludeHeadings: attributes.excludeHeadings,
+						listStyle: attributes.listStyle,
+						
 					}}
 				/>
 			)}
