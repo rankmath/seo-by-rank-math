@@ -61,8 +61,7 @@ class Block_TOC extends Block {
 			return;
 		}
 
-		//$this->add_shortcode('rank_math_toc', [ $this, 'render_toc_contents' ] );
-		add_shortcode('rank_math_toc', [ $this, 'render_toc_contents' ] );
+		add_shortcode( 'rank_math_toc', [ $this, 'render_toc_contents' ] );
 
 		$this->filter( 'rank_math/schema/block/toc-block', 'add_graph', 10, 2 );
 		// $this->filter( 'render_block_rank-math/toc-block', 'render_toc_block_content', 10, 2 );
@@ -109,7 +108,8 @@ class Block_TOC extends Block {
 
 		}
 
-		preg_match_all( '/(<h([1-6]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuU', $post_content, $headings, PREG_SET_ORDER );
+		// @TODO exclude headings from here!
+		preg_match_all( '/(<h([1-6]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuUD', $post_content, $headings, PREG_SET_ORDER );
 
 		// @TODO for no headings!
 
@@ -205,21 +205,20 @@ class Block_TOC extends Block {
 		return $data;
 	}
 
-    /**
-     * Gets the toc options for shortcode or the gutenberg block.
-     *
-     * @param  array $attributes The toc gutenberg attributes.
-     * @return array The toc options.
-     */
-    public function get_toc_options( $attributes = [] ) {
-        // Title wrapper in Block options too
-        $toc_options['className']       = $attributes['className'] ?? Helper::get_settings( 'general.toc_block_class_name' );
-        $toc_options['titleWrapper']    = $attributes['titleWrapper'] ?? Helper::get_settings( 'general.toc_block_title_wrapper' );
-        $toc_options['title']           = $attributes['title'] ?? Helper::get_settings( 'general.toc_block_title' );
-        $toc_options['excludeHeadings'] = $attributes['excludeHeadings'] ?? Helper::get_settings( 'general.toc_block_exclude_headings', array() );
-        $toc_options['listStyle']       = $attributes['listStyle'] ?? Helper::get_settings( 'general.toc_block_list_style', 'ul' );
-        return $toc_options;
-    }
+	/**
+	 * Gets the toc options for shortcode or the gutenberg block.
+	 *
+	 * @param  array $attributes The toc gutenberg attributes.
+	 * @return array The toc options.
+	 */
+	public function get_toc_options( $attributes = [] ) {
+		$toc_options['className']       = $attributes['className'] ?? Helper::get_settings( 'general.toc_block_class_name' );
+		$toc_options['titleWrapper']    = $attributes['titleWrapper'] ?? Helper::get_settings( 'general.toc_block_title_wrapper' );
+		$toc_options['title']           = $attributes['title'] ?? Helper::get_settings( 'general.toc_block_title' );
+		$toc_options['excludeHeadings'] = $attributes['excludeHeadings'] ?? Helper::get_settings( 'general.toc_block_exclude_headings', [] );
+		$toc_options['listStyle']       = $attributes['listStyle'] ?? Helper::get_settings( 'general.toc_block_list_style', 'ul' );
+		return $toc_options;
+	}
 
 
 	/**
@@ -233,7 +232,6 @@ class Block_TOC extends Block {
         // settings for shortcode
         // Title wrapper in Block options too
         $toc_options = $this->get_toc_options( $attributes );
-		//dump($toc_options);
 
         // attr have
         // titleWrapper, listStyle, title, excludeHeadings[]
@@ -267,25 +265,10 @@ class Block_TOC extends Block {
 
 		$out[] = sprintf( '<nav><%1$s>', $list_tag );
 
-		/**
-         * @var array $heading
-         *  Contains [heading markup, attr, heading_level, link|anchor, content]
-         */
-        foreach ( $headings as $key => $heading ) {
-
-            if ( ! in_array('h'.$heading[2], $exclude_headings) ) {
-                // Nest lists accordingly, 3 variants <ul>, </ul> or none
-                // @TODO $list_prepend_or_append =
-                $out[] = sprintf(
-                    '<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
-                    $item_tag,
-                    $heading[2],
-                    $heading[3],
-                    $heading[4],
-                );
-            }
-
-
+		// Heading array contains [heading markup, attr, heading_level, link|anchor, content]!
+		foreach ( $headings as $key => $heading ) {
+			// Nest lists accordingly, 3 variants <ul>, </ul> or none.
+			$out[] = $this->list_prepend_or_append( $key, $heading, $headings, $item_tag, $out );
 		}
 
 		$out[] = sprintf( '</%1$s></nav>', $list_tag );
@@ -295,12 +278,72 @@ class Block_TOC extends Block {
 	}
 
 
-    private function list_prepend_or_append( $heading, $heading_list ) {
-        // Nest lists accordingly, 3 variants 'prepend <ul>' || 'append </ul>' || none
-        // if lower level headers <ul> current is greater that current[key - 1]
+	private function list_prepend_or_append( $key, $heading, $heading_list, $item_tag, $output ) {
+		// @TODO use the settings list tag for children as well
+		// Nest lists accordingly, 3 variants 'prepend <ul>' || 'append </ul>' || none
+		// if lower level headers <ul> current is greater that current[key - 1]
 
+		$next_heading = $heading_list[ $key + 1 ];
 
-        // if higher level header </ul>
-    }
+		// The last item in the list.
+		if ( ! isset( $next_heading ) ) {
+			// Search if <ul> or </ul> occur last in the html, output and add a </ul> (close the list) if needed.
+			$output = join( "\n", $output );
+
+			preg_match_all( '/(<\/ul>)|(<ul>)/msuUD', $output, $matches );
+
+			if ( 1 < count( $matches) ) {
+				if ( '<ul>' === end( $matches[0] ) ) {
+					return sprintf(
+						'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></ul></%1$s>',
+						$item_tag,
+						$heading[2],
+						$heading[3],
+						$heading[4],
+					);
+				}
+			}
+			return sprintf(
+				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
+				$item_tag,
+				$heading[2],
+				$heading[3],
+				$heading[4],
+			);
+		}
+
+		// TRUE if h3 == h3!
+		if ( $heading[2] === $next_heading[2] ) {
+
+			return sprintf(
+				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
+				$item_tag,
+				$heading[2],
+				$heading[3],
+				$heading[4],
+			);
+		}
+
+		// TRUE if h2 < h3!
+		if ( $heading[2] < $next_heading[2] ) {
+			return sprintf(
+				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a><ul></%1$s>',
+				$item_tag,
+				$heading[2],
+				$heading[3],
+				$heading[4],
+			);
+		}
+		// TRUE if h3 > h2!
+		if ( $heading[2] > $next_heading[2] ) {
+			return sprintf(
+				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></ul></%1$s>',
+				$item_tag,
+				$heading[2],
+				$heading[3],
+				$heading[4],
+			);
+		}
+	}
 
 }
