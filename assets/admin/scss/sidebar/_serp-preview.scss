@@ -666,6 +666,17 @@ body.rtl {
 		}
 	}
 
+	// Reset direction of trimmed text.
+	.serp-preview-body {
+		.group {
+			.serp-url ,
+			.serp-title {
+				direction: ltr;
+				text-align: end;
+			}
+		}
+	}
+
 	.mobile-preview {
 		.serp-preview-bg .serp-preview-input .serp-icon-search {
 			left: 0;
