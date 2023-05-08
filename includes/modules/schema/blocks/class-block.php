@@ -80,11 +80,11 @@ class Block {
 	 * @return string
 	 */
 	protected function get_list_style( $style ) {
-		if ( 'numbered' === $style ) {
+		if ( 'numbered' === $style || 'ol' === $style ) {
 			return 'ol';
 		}
 
-		if ( 'unordered' === $style ) {
+		if ( 'unordered' === $style || 'ul' === $style ) {
 			return 'ul';
 		}
 
@@ -99,7 +99,7 @@ class Block {
 	 * @return string
 	 */
 	protected function get_list_item_style( $style ) {
-		if ( 'numbered' === $style || 'unordered' === $style ) {
+		if ( 'numbered' === $style || 'unordered' === $style || 'ol' === $style || 'ul' === $style ) {
 			return 'li';
 		}
 

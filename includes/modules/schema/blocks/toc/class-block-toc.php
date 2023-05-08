@@ -302,11 +302,8 @@ class Block_TOC extends Block {
 			$title,
 		);
 
-		// $list_tag = self::get()->get_list_style( $list_style );
-		// $item_tag = self::get()->get_list_item_style( $list_style );
-
-		$list_tag = $list_style;
-		$item_tag = 'li';
+		$list_tag = self::get()->get_list_style( $list_style );
+		$item_tag = self::get()->get_list_item_style( $list_style );
 
 		$out[] = sprintf( '<nav><%1$s>', $list_tag );
 
