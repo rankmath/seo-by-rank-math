@@ -50,8 +50,7 @@ const SerpPreview = ( {
 			'://': '://',
 			'%postname%': title,
 		}
-
-		return permalinkFormat.replace( /( :\/\/)|(\/)|(%postname%)/g, function( match ) {
+		return permalinkFormat.replace( /(:\/\/)|(\/)|(%postname%)/g, function( match ) {
 			return replace[ match ]
 		} )
 	}
@@ -198,25 +197,27 @@ const SerpPreview = ( {
 									alt={ __( 'Site favicon', 'rank-math' ) }
 								/>
 							</div>
-							<div>
+							<div className="serp-header-info">
 								<span
 									className="serp-blog-name"
 									dangerouslySetInnerHTML={ { __html: Helpers.sanitizeText( rankMath.blogName ) } }
 								></span>
 								<div className="serp-url-items">
-									<span
-										className="serp-url"
-										dangerouslySetInnerHTML={ {
-											__html: highlight(
-												keywordPermalink,
-												Helpers.sanitizeText(
-													cite()
+									{
+										title && <span
+											className="serp-url"
+											dangerouslySetInnerHTML={ {
+												__html: highlight(
+													keywordPermalink,
+													Helpers.sanitizeText(
+														cite()
+													),
+													75,
+													/-? +/
 												),
-												75,
-												/-? +/
-											),
-										} }
-									></span>
+											} }
+										></span>
+									}
 									<div
 										className="serp-url-suffix"
 									>
