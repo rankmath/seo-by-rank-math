@@ -9,7 +9,6 @@ import { Helpers } from '@rankMath/analyzer'
  */
 import { __ } from '@wordpress/i18n'
 import { withSelect } from '@wordpress/data'
-import { safeDecodeURIComponent } from '@wordpress/url'
 
 /**
  * Internal dependencies
@@ -21,7 +20,7 @@ import RatingPreview from './RatingPreview'
 
 const SerpPreview = ( {
 	title,
-	permalink,
+	permalinkFormat,
 	description,
 	previewType = 'desktop',
 	isNoIndex,
@@ -44,7 +43,19 @@ const SerpPreview = ( {
 		keyword
 	)
 
+	const cite = () => {
+		const replace = {
+			'/': ' › ',
+			'://': '://',
+			'%postname%': title,
+		}
+		return permalinkFormat.replace( /(:\/\/)|(\/)|(%postname%)/g, function( match ) {
+			return replace[ match ]
+		} )
+	}
+
 	return (
+		// <div className={ classes } dir="auto">
 		<div className={ classes }>
 			<div
 				className="serp-preview-title"
@@ -177,26 +188,46 @@ const SerpPreview = ( {
 				>
 
 					<div className="group">
-						<img
-							src={ rankMath.siteFavIcon }
-							width="16"
-							height="16"
-							className="serp-preview-favicon"
-							alt=""
-						/>
-						<div
-							className="serp-url"
-							dangerouslySetInnerHTML={ {
-								__html: highlight(
-									keywordPermalink,
-									Helpers.sanitizeText(
-										safeDecodeURIComponent( permalink )
-									),
-									75,
-									/-? +/
-								),
-							} }
-						></div>
+						<div className="serp-preview-body-header">
+							<div className="serp-preview-favicon">
+								<img
+									src={ rankMath.siteFavIcon }
+									width="16"
+									height="16"
+									alt={ __( 'Site favicon', 'rank-math' ) }
+								/>
+							</div>
+							<div className="serp-header-info">
+								<span
+									className="serp-blog-name"
+									dangerouslySetInnerHTML={ { __html: Helpers.sanitizeText( rankMath.blogName ) } }
+								></span>
+								<div className="serp-url-items">
+									{
+										title && <span
+											className="serp-url"
+											dangerouslySetInnerHTML={ {
+												__html: highlight(
+													keywordPermalink,
+													Helpers.sanitizeText(
+														cite()
+													),
+													75,
+													/-? +/
+												),
+											} }
+										></span>
+									}
+									<div
+										className="serp-url-suffix"
+									>
+										<svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+										</svg>
+									</div>
+								</div>
+
+							</div>
+						</div>
 					</div>
 					<div className="group">
 						<h5
@@ -251,6 +282,7 @@ export default withSelect( ( select ) => {
 	return {
 		title: repo.getSerpTitle(),
 		permalink: rankMathEditor.assessor.dataCollector.getPermalink(),
+		permalinkFormat: rankMath.permalinkFormat,
 		description: repo.getSerpDescription(),
 		previewType: repo.getSnippetPreviewType(),
 		isNoIndex: 'noindex' in robots,
