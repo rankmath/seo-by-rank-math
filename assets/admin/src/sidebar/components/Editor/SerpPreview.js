@@ -20,7 +20,6 @@ import RatingPreview from './RatingPreview'
 
 const SerpPreview = ( {
 	title,
-	permalink,
 	permalinkFormat,
 	description,
 	previewType = 'desktop',
@@ -56,7 +55,7 @@ const SerpPreview = ( {
 	}
 
 	return (
-		<div className={ classes }>
+		<div className={ classes } dir="auto">
 			<div
 				className="serp-preview-title"
 				data-title={ __( 'Preview', 'rank-math' ) }
