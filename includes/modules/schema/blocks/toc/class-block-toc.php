@@ -92,8 +92,8 @@ class Block_TOC extends Block {
 
 	/**
 	 * Renders the toc contents.
-	 *
 	 * Either for the Gutenberg or shortcode.
+	 *
 	 * @param array $attributes The block attributes.
 	 *
 	 * @return mixed|string|void
@@ -107,7 +107,7 @@ class Block_TOC extends Block {
 		} else {
 			global $wpdb;
 			$sql  = "SELECT post_content FROM {$wpdb->posts} WHERE ID=%s";
-			$post = $wpdb->get_results( $wpdb->prepare( $sql, $attributes['postId'] ) );
+			$post = $wpdb->get_results( $wpdb->prepare( $sql, $attributes['postId'] ) ); // phpcs:ignore
 			if ( ! $post ) {
 				exit();
 			}
@@ -116,60 +116,58 @@ class Block_TOC extends Block {
 
 		}
 
-        $toc_options = $this->get_toc_options( $attributes );
+		$toc_options         = $this->get_toc_options( $attributes );
+		$headings_to_include = [ '1', '2', '3', '4', '5', '6' ];
 
-        $headings_to_include = ['1', '2', '3', '4', '5', '6'];
+		if ( isset( $toc_options['excludeHeadings'] ) ) {
+			$excluded = [];
+			foreach ( $toc_options['excludeHeadings'] as $exclude ) {
+				$excluded[] = str_replace( 'h', '', $exclude );
+			}
 
-        if ( isset($toc_options['excludeHeadings']) ) {
-            $excluded = [];
-            foreach ( $toc_options['excludeHeadings'] as $exclude) {
-                $excluded[] = str_replace('h', '', $exclude);
-            }
-
-
-            $headings_to_include = array_diff( $headings_to_include, $excluded );
-        }
+			$headings_to_include = array_diff( $headings_to_include, $excluded );
+		}
 
 		// No headings to show because all are excluded!
-		if ( !$headings_to_include ) {
+		if ( ! $headings_to_include ) {
 			ob_start();
 			?>
 			<div class="components-placeholder is-large">
 				<div aria-hidden="true">
 				</div>
-				<div class="components-placeholder__label"><?php _e('Table of Contents', 'rank-math')?></div>
+				<div class="components-placeholder__label"><?php esc_html_e( 'Table of Contents', 'rank-math' ); ?></div>
 				<fieldset class="components-placeholder__fieldset">
-					<legend class="components-placeholder__instructions"> <?php _e( 'No headings to show because all are excluded.', 'rank-math')?>
+					<legend class="components-placeholder__instructions"> <?php esc_html_e( 'No headings to show because all are excluded.', 'rank-math' ); ?>
 					</legend>
 				</fieldset>
 			</div>
 
 			<?php
-			return ob_get_clean ();
+			return ob_get_clean();
 		}
 
-        $included_string = implode('|', $headings_to_include);
+		$included_string = implode( '|', $headings_to_include );
 
-        $heading_pattern = sprintf('/(<h([%1$s]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuUD', $included_string);
+		$heading_pattern = sprintf( '/(<h([%1$s]{1})[^>].*id="(.*)".*>)(.*)<\/h\2>/msuUD', $included_string );
 
 		preg_match_all( $heading_pattern, $post_content, $headings, PREG_SET_ORDER );
 
 		// No headings!
-		if (  !$headings ) {
+		if ( ! $headings ) {
 			ob_start();
 			?>
 			<div class="components-placeholder is-large">
 				<div aria-hidden="true">
 				</div>
-				<div class="components-placeholder__label"><?php _e('Table of Contents', 'rank-math')?></div>
+				<div class="components-placeholder__label"><?php esc_html_e( 'Table of Contents', 'rank-math' ); ?></div>
 				<fieldset class="components-placeholder__fieldset">
-					<legend class="components-placeholder__instructions"> <?php _e( 'Add Heading blocks to this page to generate the Table of Contents.', 'rank-math')?>
+					<legend class="components-placeholder__instructions"> <?php esc_html_e( 'Add Heading blocks to this page to generate the Table of Contents.', 'rank-math' ); ?>
 					</legend>
 				</fieldset>
 			</div>
 
 			<?php
-			return ob_get_clean ();
+			return ob_get_clean();
 		}
 
 		return $this->toc_output( $headings, $toc_options, $attributes );
@@ -277,9 +275,9 @@ class Block_TOC extends Block {
 	private function toc_output( $headings, $toc_options, $attributes = [] ) {
 
 		// Settings.
-		$title_wrapper    = $toc_options['titleWrapper'];
-		$list_style       = $toc_options['listStyle'];
-		$title            = $toc_options['title'];
+		$title_wrapper = $toc_options['titleWrapper'];
+		$list_style    = $toc_options['listStyle'];
+		$title         = $toc_options['title'];
 
 		$class = 'rank-math-block';
 		if ( ! empty( $toc_options['className'] ) ) {
@@ -320,36 +318,36 @@ class Block_TOC extends Block {
 	/**
 	 * Nest lists accordingly, 3 variants 'prepend <ul>' || 'append </ul>' || none .
 	 *
-	 * @param $key
-	 * @param $heading
-	 * @param $heading_list
-	 * @param $list_tag
-	 * @param $item_tag
-	 * @param $output
+	 * @param int    $key          The index of heading in the heading list array.
+	 * @param array  $heading      The current heading in the loop.
+	 * @param array  $heading_list The list of headingsfound in post content.
+	 * @param string $list_tag     List tag as saved in option settings or the block attr.
+	 * @param string $item_tag     The list item tag according to the option settings or the block attr.
+	 * @param array  $output       The array output upto the lastitem in the list without closing (</ul>) the main list.
 	 *
 	 * @return string|void
 	 */
 	private function list_prepend_or_append( $key, $heading, $heading_list, $list_tag, $item_tag, $output ) {
-		// Nest lists accordingly, 3 variants 'prepend <ul>' || 'append </ul>' || none
+		// Nest lists accordingly, 3 variants 'prepend <ul>' || 'append </ul>' || none.
 
 		// The last item in the list.
-		if ( 0 === count($heading_list) || $key === count($heading_list) - 1 ) {
+		if ( 0 === count( $heading_list ) || count( $heading_list ) - 1 === $key ) {
 			// Search if <ul> or </ul> occur last in the html, output and add a </ul> (close the list) if needed.
 			$output = join( "\n", $output );
 
-            $list_pattern = sprintf('/(<\/%1$s>)|(<%1$s>)/msuUD', $list_tag);
+			$list_pattern = sprintf( '/(<\/%1$s>)|(<%1$s>)/msuUD', $list_tag );
 			preg_match_all( $list_pattern, $output, $matches );
 
-			if ( 1 < count( $matches) ) {
-				if ( sprintf('<%1$s>', $list_tag) === end( $matches[0] ) ) {
+			if ( 1 < count( $matches ) ) {
+				if ( sprintf( '<%1$s>', $list_tag ) === end( $matches[0] ) ) {
 					return sprintf(
-                        '<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%5$s></%1$s>',
-                        $item_tag,
-                        $heading[2],
-                        $heading[3],
-                        $heading[4],
-                        $list_tag,
-                    );
+						'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%5$s></%1$s>',
+						$item_tag,
+						$heading[2],
+						$heading[3],
+						$heading[4],
+						$list_tag,
+					);
 				}
 			}
 			return sprintf(
@@ -361,7 +359,7 @@ class Block_TOC extends Block {
 			);
 		}
 
-        $next_heading = $heading_list[ $key + 1 ];
+		$next_heading = $heading_list[ $key + 1 ];
 
 		// TRUE if h3 == h3!
 		if ( $heading[2] === $next_heading[2] ) {
@@ -383,7 +381,7 @@ class Block_TOC extends Block {
 				$heading[2],
 				$heading[3],
 				$heading[4],
-                $list_tag,
+				$list_tag,
 			);
 		}
 		// TRUE if h3 > h2!
@@ -394,7 +392,7 @@ class Block_TOC extends Block {
 				$heading[2],
 				$heading[3],
 				$heading[4],
-                $list_tag,
+				$list_tag,
 			);
 		}
 	}
