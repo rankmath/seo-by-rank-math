@@ -55,7 +55,8 @@ const SerpPreview = ( {
 	}
 
 	return (
-		<div className={ classes } dir="auto">
+		// <div className={ classes } dir="auto">
+		<div className={ classes }>
 			<div
 				className="serp-preview-title"
 				data-title={ __( 'Preview', 'rank-math' ) }
