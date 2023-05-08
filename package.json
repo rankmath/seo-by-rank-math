@@ -73,6 +73,7 @@
 		"deva": "webpack --mode=development --env what=analytics --watch",
 		"devf": "webpack --mode=development --env what=front --watch",
 		"devs": "webpack --mode=development --env what=schema --watch",
+		"toc": "webpack --mode=development --env what=toc --watch",
 		"devdivi": "webpack --mode=development --env what=divi --progress --watch",
 		"devca": "webpack --mode=development --env what=content-ai --watch",
 		"a": "webpack --mode=production --env what=analytics --progress",

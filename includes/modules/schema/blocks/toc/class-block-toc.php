@@ -10,7 +10,6 @@
 
 namespace RankMath\Schema;
 
-use RankMath\Traits\Shortcode;
 use WP_Block_Type_Registry;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
@@ -22,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Block_TOC extends Block {
 
-	use Hooker, Shortcode;
+	use Hooker;
 
 	/**
 	 * Block type name.
@@ -37,6 +36,13 @@ class Block_TOC extends Block {
 	 * @var Block_TOC
 	 */
 	protected static $instance = null;
+
+	/**
+	 * Toc options per attributes|options settings.
+	 *
+	 * @var array
+	 */
+	private $toc_options = [];
 
 	/**
 	 * Retrieve main Block_TOC instance.
@@ -116,7 +122,9 @@ class Block_TOC extends Block {
 
 		}
 
-		$toc_options         = $this->get_toc_options( $attributes );
+		// Update toc_options.
+		$this->set_toc_options( $attributes );
+		$toc_options         = $this->toc_options;
 		$headings_to_include = [ '1', '2', '3', '4', '5', '6' ];
 
 		if ( isset( $toc_options['excludeHeadings'] ) ) {
@@ -170,7 +178,7 @@ class Block_TOC extends Block {
 			return ob_get_clean();
 		}
 
-		return $this->toc_output( $headings, $toc_options, $attributes );
+		return $this->toc_output( $headings, $attributes );
 
 	}
 
@@ -249,18 +257,18 @@ class Block_TOC extends Block {
 	}
 
 	/**
-	 * Gets the toc options for shortcode or the gutenberg block.
+	 * Sets the toc options for shortcode or the gutenberg block.
 	 *
 	 * @param  array $attributes The toc gutenberg attributes.
-	 * @return array The toc options.
+	 * @return void.
 	 */
-	public function get_toc_options( $attributes = [] ) {
+	public function set_toc_options( $attributes = [] ) {
 		$toc_options['className']       = $attributes['className'] ?? Helper::get_settings( 'general.toc_block_class_name' );
 		$toc_options['titleWrapper']    = $attributes['titleWrapper'] ?? Helper::get_settings( 'general.toc_block_title_wrapper', 'h2' );
 		$toc_options['title']           = $attributes['title'] ?? Helper::get_settings( 'general.toc_block_title' );
 		$toc_options['excludeHeadings'] = $attributes['excludeHeadings'] ?? Helper::get_settings( 'general.toc_block_exclude_headings', [] );
 		$toc_options['listStyle']       = $attributes['listStyle'] ?? Helper::get_settings( 'general.toc_block_list_style', 'ul' );
-		return $toc_options;
+		$this->toc_options              = $toc_options;
 	}
 
 
@@ -268,12 +276,12 @@ class Block_TOC extends Block {
 	 * TOC heading list HTML.
 	 *
 	 * @param array $headings The heading and their children.
-	 * @param array $toc_options The options to apply to toc content.
 	 * @param array $attributes The attributes if gutenberg block.
 	 * @return string|mixed The list HTML.
 	 */
-	private function toc_output( $headings, $toc_options, $attributes = [] ) {
+	private function toc_output( $headings, $attributes = [] ) {
 
+		$toc_options = $this->toc_options;
 		// Settings.
 		$title_wrapper = $toc_options['titleWrapper'];
 		$list_style    = $toc_options['listStyle'];
