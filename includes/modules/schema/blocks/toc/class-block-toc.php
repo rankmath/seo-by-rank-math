@@ -78,7 +78,6 @@ class Block_TOC extends Block {
 				'render_callback' => [ $this, 'render_toc_contents' ],
 			]
 		);
-
 	}
 
 	/**
@@ -95,6 +94,7 @@ class Block_TOC extends Block {
 
 		return $values;
 	}
+
 
 	/**
 	 * Renders the toc contents.
@@ -186,7 +186,7 @@ class Block_TOC extends Block {
 	 * Add default TOC title.
 	 *
 	 * @param string $block_content Block content.
-	 * @param array  $parsed_block         The full block, including name and attributes.
+	 * @param array  $parsed_block  The full block, including name and attributes.
 	 *
 	 * @return string
 	 */
