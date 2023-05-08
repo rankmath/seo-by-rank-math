@@ -2,7 +2,7 @@ import { linearToNestedHeadingList } from './utils'
 import { useBlockProps } from '@wordpress/block-editor'
 import List from './list'
 
-const attributes = {
+const blockAttr = {
 	title: {
 		type: 'text',
 	},
@@ -25,7 +25,7 @@ const attributes = {
 }
 
 const v1 = {
-	attributes,
+	attributes: blockAttr,
 	save( { attributes } ) {
 		if ( attributes.headings.length === 0 ) {
 			return null
@@ -52,4 +52,31 @@ const v1 = {
 	},
 }
 
-export default [ v1 ]
+const v2 = {
+	attributes: blockAttr,
+	save( { attributes } ) {
+		if ( attributes.headings.length === 0 ) {
+			return null
+		}
+
+		const TitleWrapper = attributes.titleWrapper
+		const headings = linearToNestedHeadingList( attributes.headings )
+		const ListStyle = attributes.listStyle
+
+		return (
+			<div { ...useBlockProps.save() } id="rank-math-toc">
+				{ attributes.title && <TitleWrapper dangerouslySetInnerHTML={ { __html: attributes.title } }></TitleWrapper> }
+				<nav>
+					<ListStyle>
+						<List
+							headings={ headings }
+							ListStyle={ ListStyle }
+							isSave={ true }
+						/>
+					</ListStyle>
+				</nav>
+			</div>
+		)
+	},
+}
+export default [ v2, v1 ]

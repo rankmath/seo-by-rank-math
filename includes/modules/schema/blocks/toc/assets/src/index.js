@@ -7,7 +7,6 @@ import { registerBlockType } from '@wordpress/blocks'
  * Internal dependencies
  */
 import edit from './edit'
-import save from './save'
 import deprecated from './deprecated'
 
 /**
@@ -18,7 +17,6 @@ registerBlockType(
 	{
 		usesContext: [ 'postId' ],
 		edit,
-		save,
 		deprecated,
 	}
 )
