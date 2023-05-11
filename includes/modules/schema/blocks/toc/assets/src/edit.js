@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isUndefined, map, includes, remove } from 'lodash'
+import { isUndefined, includes, remove } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -10,14 +10,12 @@ import { __ } from '@wordpress/i18n'
 import {
 	useBlockProps,
 	RichText,
-	store as blockEditorStore,
 } from '@wordpress/block-editor'
 import { store as editorStore } from '@wordpress/editor'
-import { useDispatch, useSelect } from '@wordpress/data'
-import { Placeholder, Spinner } from '@wordpress/components'
-import { useEffect, useState } from '@wordpress/element'
-import ServerSideRender from '@wordpress/server-side-render';
-
+import { useSelect } from '@wordpress/data'
+import { Spinner } from '@wordpress/components'
+import { useState } from '@wordpress/element'
+import ServerSideRender from '@wordpress/server-side-render'
 
 /**
  * Internal dependencies
@@ -30,21 +28,18 @@ export default ( {
 	setAttributes,
 	context,
 } ) => {
-
 	const { isSaving, isSavingNonPostEntityChanges } = useSelect( ( select ) => {
-		const { isSavingPost, isSavingNonPostEntityChanges } = select( editorStore );
+		const { isSavingPost, isSavingNonPostEntityChanges } = select( editorStore )
 		return {
 			isSaving: isSavingPost(),
 			isSavingNonPostEntityChanges: isSavingNonPostEntityChanges(),
 		}
-	})
-
+	} )
 
 	const blockProps = useBlockProps()
-	const { postId } = context;
+	const { postId } = context
 
 	// State to monitor edit heading links.
-	const [ edit, toggleEdit ] = useState( false )
 	const [ excludeHeading, toggleExcludeHeading ] = useState( {} )
 	if ( ! attributes.listStyle ) {
 		setAttributes( { listStyle: rankMath.listStyle } )
@@ -64,7 +59,7 @@ export default ( {
 		setAttributes( { excludeHeadings } )
 		toggleExcludeHeading( ! excludeHeading )
 	}
-	
+
 	return (
 		<div { ...blockProps }>
 			<RichText
@@ -79,16 +74,16 @@ export default ( {
 			{ ( isSaving || isSavingNonPostEntityChanges ) ? <Spinner /> : (
 				<ServerSideRender
 					block="rank-math/toc-block"
-					attributes={{
-						postId: postId,
+					attributes={ {
+						postId,
 						titleWrapper: attributes.titleWrapper,
 						title: attributes.title,
 						excludeHeadings: attributes.excludeHeadings,
 						listStyle: attributes.listStyle,
 
-					}}
+					} }
 				/>
-			)}
+			) }
 
 			<Toolbar setAttributes={ setAttributes } />
 			<InspectControls attributes={ attributes } setAttributes={ setAttributes } excludeHeadings={ excludeHeadings } setExcludeHeadings={ setExcludeHeadings } />
