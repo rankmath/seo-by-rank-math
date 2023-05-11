@@ -5,6 +5,7 @@ return [
 		'wp-element',
 		'wp-components',
 		'wp-block-editor',
+		'wp-editor',
 		'wp-data',
 		'wp-dom',
 		'wp-url',
