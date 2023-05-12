@@ -45,6 +45,22 @@ class Block_TOC extends Block {
 	private $toc_options = [];
 
 	/**
+	 * Makes its easy to debug executions
+	 * @TODO delete!
+	 * @var bool
+	 */
+	private static $called = false;
+
+	/**
+	 * Holds values where the main parent starts and ends.
+	 *
+	 * key is the start, end is the value.
+	 * Needed to maintain that visual hierarchy.
+	 * @var array
+	 */
+	private $parents = [];
+
+	/**
 	 * Retrieve main Block_TOC instance.
 	 *
 	 * Ensure only one instance is loaded or can be loaded.
@@ -281,6 +297,12 @@ class Block_TOC extends Block {
 	 */
 	private function toc_output( $headings, $attributes = [] ) {
 
+		if  (self::$called) {
+			return;
+		} else {
+			self::$called = true;
+		}
+
 		$toc_options = $this->toc_options;
 		// Settings.
 		$title_wrapper = $toc_options['titleWrapper'];
@@ -294,27 +316,57 @@ class Block_TOC extends Block {
 
 		// HTML.
 		$out   = [];
-		$out[] = sprintf(
+
+		$list_tag = self::get()->get_list_style( $list_style );
+		$item_tag = self::get()->get_list_item_style( $list_style );
+
+		// The opening html elements of the TOC block.
+		$open_out[] = sprintf(
 			'<div id="rank-math-toc" class="%1$s"%2$s><%3$s>%4$s</%3$s>',
 			$class,
 			self::get()->get_styles( $attributes ),
 			$title_wrapper,
 			$title,
 		);
+		$open_out[] =	sprintf( '<nav><%1$s>', $list_tag );
 
-		$list_tag = self::get()->get_list_style( $list_style );
-		$item_tag = self::get()->get_list_item_style( $list_style );
-
-		$out[] = sprintf( '<nav><%1$s>', $list_tag );
 
 		// Heading array contains [heading markup, attr, heading_level, link|anchor, content]!
 		foreach ( $headings as $key => $heading ) {
 			// Nest lists accordingly, 3 variants <ul>, </ul> or none.
-			$out[] = $this->list_prepend_or_append( $key, $heading, $headings, $list_tag, $item_tag, $out );
+
+			// For main parents only eg h2 h2 h1 ($headings)
+			if ($headings[0][2] >= $heading[2]) {
+				// $key is parent and has children! so to close and open this sub-main list.
+				if ( isset($headings[$key + 1][2]) && $headings[$key + 1][2] > $heading[2] && !$this->is_a_child($key)) {
+					dump($headings[$key + 1]);
+					$children_end = $this->list_children_last_index($headings, $heading, $key);
+					$this->parents[$key] = $children_end;
+				}
+			}
+
+
+			$li = $this->list_prepend_or_append( $key, $heading, $headings, $list_tag, $item_tag, $out );
+
+			// Close and open the sub-main parents|children list here! (top level parent)
+			if (isset($this->parents[$key])) {
+				$li = sprintf( $li . '<%1$s>', $list_tag );
+			}
+
+			if ( isset($headings[$key + 1]) && $headings[$key + 1][2] < $heading[2] && $this->is_a_child($key)) {
+				$li = sprintf(  $li. '</%1$s>', $list_tag );
+			}
+
+
+			$out[] = $li;
+
 		}
+
+		$out = array_merge($open_out, $out);
 
 		$out[] = sprintf( '</%1$s></nav>', $list_tag );
 		$out[] = '</div>';
+
 		return join( "\n", $out );
 
 	}
@@ -337,7 +389,7 @@ class Block_TOC extends Block {
 
 		// The last item in the list.
 		if ( 0 === count( $heading_list ) || count( $heading_list ) - 1 === $key ) {
-			// Search if <ul> or </ul> occur last in the html, output and add a </ul> (close the list) if needed.
+			// Search if <ul> or </ul> occur last in the html, output and add a </ul> (close the children list) if needed.
 			$output = join( "\n", $output );
 
 			$list_pattern = sprintf( '/(<\/%1$s>)|(<%1$s>)/msuUD', $list_tag );
@@ -346,12 +398,11 @@ class Block_TOC extends Block {
 			if ( 1 < count( $matches ) ) {
 				if ( sprintf( '<%1$s>', $list_tag ) === end( $matches[0] ) ) {
 					return sprintf(
-						'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%5$s></%1$s>',
+						'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
 						$item_tag,
 						$heading[2],
 						$heading[3],
 						$heading[4],
-						$list_tag,
 					);
 				}
 			}
@@ -368,7 +419,6 @@ class Block_TOC extends Block {
 
 		// TRUE if h3 == h3!
 		if ( $heading[2] === $next_heading[2] ) {
-
 			return sprintf(
 				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
 				$item_tag,
@@ -380,26 +430,171 @@ class Block_TOC extends Block {
 
 		// TRUE if h2 < h3!
 		if ( $heading[2] < $next_heading[2] ) {
+
+			//$this->parents[] = $heading[2];
+
+			// Before opening an ul tag, decide if we should close the preceding list with </ul>|</ol>|...!
+
+			// If the next item heading is in the array.
+//			if ( in_array( $next_heading[2], $this->parents ) ) {
+//				// Remove closed parent upto this point!
+////				$this->parents = array_filter($this->parents, function ($parent) use ($next_heading){
+////					return $parent !== $next_heading[2];
+////				});
+//
+//				return sprintf(
+//					'</%5$s><%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a><%5$s></%1$s>',
+//					$item_tag,
+//					$heading[2],
+//					$heading[3],
+//					$heading[4],
+//					$list_tag,
+//				);
+//			}
+
+
+			// TODO!!
+			// Sometimes the end of children is the end of another children as well apply double </ul>!
+			// the next item heading level is the highest in the array.
+
+
+			// Some lists require to be close, we can use the current output to determine the end of a string
+			// like count all the last values of <ul> and compare with all values of </ul> then decide how many
+			// </ul> to add to close that parent and it's children!
+
+			// @ TODO like close the parent list completely before opening another parent list!
+			// @ TODO maybe track all unclosed parents and add as much </ul> as required to close that part before opening a new parent!
+			//dump($next_heading[3]);
+
 			return sprintf(
-				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a><%5$s></%1$s>',
+				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
 				$item_tag,
 				$heading[2],
 				$heading[3],
 				$heading[4],
-				$list_tag,
 			);
 		}
 		// TRUE if h3 > h2!
 		if ( $heading[2] > $next_heading[2] ) {
+			//dump($next_heading[3]);
+
+			// Remove closed parents upto this point!
+//			$this->parents = array_filter($this->parents, function ($parent) use ($next_heading){
+//				return $parent !== $next_heading[2];
+//			});
+
+
+//			if ('heading-3' === $next_heading[3] ) {
+//				return sprintf(
+//					'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%5$s></%1$s>',
+//					$item_tag,
+//					$heading[2],
+//					$heading[3],
+//					$heading[4],
+//					$list_tag,
+//				);
+//			}
+
 			return sprintf(
-				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%5$s></%1$s>',
+				'<%1$s class="rank-math-toc-heading-level-%2$s"><a href="#%3$s">%4$s</a></%1$s>',
 				$item_tag,
 				$heading[2],
 				$heading[3],
 				$heading[4],
-				$list_tag,
 			);
 		}
+	}
+
+
+	private function example_nested_html_list() {
+		ob_start();
+		?>
+		<ul class="components-placeholder is-large">
+			<li> Heading seo 3</li>
+			<ul>
+				<li>Heading seo 4</li>
+				<ul>
+					<li> Heading 5</li>
+					<ul>
+						<li> Heading 6</li>
+					</ul>
+				</ul>
+			</ul>
+			<li>Heading seo 2</li>
+			<ul>
+				<ul>
+					<li>Heading 4</li>
+				</ul>
+				<li>Heading 03</li>
+			</ul>
+		</ul>
+		<?php
+		return ob_get_clean();
+	}
+
+
+	private function linear_to_nested($headings) {
+
+		$heading_list = [];
+		foreach ($headings as $key => $heading ) {
+
+			// For parents only eg h2 h2 h1 ($headings)
+			if ($headings[0][2] >= $heading[2]) {
+
+				// Has children!
+				if ( isset($headings[$key + 1]) && $headings[$key + 1] > $heading[2] ) {
+
+					$children_end = $this->list_children_last_index($headings, $heading, $key);
+					dump("++++++++++++++++++++++++++++++++++++++++++++");
+					dump($children_end);
+					dump($key);
+					dump($heading);
+					dump($headings);
+					dump("++++++++++++++++++++++++++++++++++++++++++++");
+					$heading_list[] = [
+						'item' => $heading,
+						'children' => [],
+					];
+
+				} else {
+					// No children!
+					$heading_list[] = [
+						'item' => $heading,
+						'children' => null,
+					];
+				}
+
+
+
+
+				//dump($heading);
+			}
+//			dump($headings);
+//			dump(array_column($headings, 2));
+		}
+
+		//dump($headings);
+//		dump($heading_list);
+	}
+
+	private function list_children_last_index($headings, $parent, $parent_key) {
+		// $key is past parent and $headings[$key] heading_level is higher than parent!
+		// @TODO !! verify variants upto this point to avoid running into bugs later when working with other variants of nests!
+		$last_index = current(array_filter(array_keys($headings), function ($key) use ($headings, $parent, $parent_key) {
+
+			// Level is lower than or equal parent, and past the parent key(index) from the $headings array.
+			return $headings[$key][2] <= $parent[2] && $key > $parent_key;
+		}));
+
+		if ($last_index) return $last_index - 1;
+		// Index of the last item in $headings.
+		return count($headings) - 1;
+	}
+
+	private function is_a_child( $key ){
+		return array_filter( $this->parents, function ( $parent ) use ( $key ) {
+			return $parent === $key;
+		});
 	}
 
 }
