@@ -205,7 +205,7 @@ class Installer {
 		if ( in_array( 'redirections', $modules, true ) ) {
 			$table_schema[] = "CREATE TABLE {$wpdb->prefix}rank_math_redirections (
 				id bigint(20) unsigned NOT NULL auto_increment,
-				sources text CHARACTER SET {$wpdb->charset} COLLATE {$wpdb->charset}_bin NOT NULL,
+				sources text NOT NULL,
 				url_to text NOT NULL,
 				header_code smallint(4) unsigned NOT NULL,
 				hits bigint(20) unsigned NOT NULL default '0',
@@ -219,7 +219,7 @@ class Installer {
 
 			$table_schema[] = "CREATE TABLE {$wpdb->prefix}rank_math_redirections_cache (
 				id bigint(20) unsigned NOT NULL auto_increment,
-				from_url text CHARACTER SET {$wpdb->charset} COLLATE {$wpdb->charset}_bin NOT NULL,
+				from_url text NOT NULL,
 				redirection_id bigint(20) unsigned NOT NULL,
 				object_id bigint(20) unsigned NOT NULL default '0',
 				object_type varchar(10) NOT NULL default 'post',
