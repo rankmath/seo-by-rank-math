@@ -185,6 +185,10 @@ class DB {
 			if ( 'exact' === $source['comparison'] ) {
 				$compare_uri = untrailingslashit( $compare_uri );
 			}
+			
+			if ( 'contains' === $source['comparison'] || 'start' === $source['comparison'] ) {
+				$source['pattern'] = untrailingslashit( $source['pattern'] );
+			}
 
 			if ( 'exact' === $source['comparison'] && isset( $source['ignore'] ) && 'case' === $source['ignore'] && strtolower( $source['pattern'] ) === strtolower( $compare_uri ) ) {
 				return true;
@@ -328,14 +332,6 @@ class DB {
 			return false;
 		}
 
-		if ( ! empty( $args['sources'] ) ) {
-			foreach ( $args['sources'] as $key => $value ) {
-				if ( 'start' === $value['comparison'] || 'contains' === $value['comparison'] ) {
-					$args['sources'][ $key ]['pattern'] = untrailingslashit( $value['pattern'] );
-				}
-			}
-		}
-
 		$args = wp_parse_args(
 			$args,
 			[
@@ -368,14 +364,6 @@ class DB {
 	public static function update( $args = [] ) {
 		if ( empty( $args ) ) {
 			return false;
-		}
-
-		if ( ! empty( $args['sources'] ) ) {
-			foreach ( $args['sources'] as $key => $value ) {
-				if ( 'start' === $value['comparison'] || 'contains' === $value['comparison'] ) {
-					$args['sources'][ $key ]['pattern'] = untrailingslashit( $value['pattern'] );
-				}
-			}
 		}
 		
 		$args = wp_parse_args(
