@@ -328,6 +328,14 @@ class DB {
 			return false;
 		}
 
+		if ( ! empty( $args['sources'] ) ) {
+			foreach ( $args['sources'] as $key => $value ) {
+				if ( 'start' === $value['comparison'] || 'contains' === $value['comparison'] ) {
+					$args['sources'][ $key ]['pattern'] = untrailingslashit( $value['pattern'] );
+				}
+			}
+		}
+
 		$args = wp_parse_args(
 			$args,
 			[
@@ -362,6 +370,14 @@ class DB {
 			return false;
 		}
 
+		if ( ! empty( $args['sources'] ) ) {
+			foreach ( $args['sources'] as $key => $value ) {
+				if ( 'start' === $value['comparison'] || 'contains' === $value['comparison'] ) {
+					$args['sources'][ $key ]['pattern'] = untrailingslashit( $value['pattern'] );
+				}
+			}
+		}
+		
 		$args = wp_parse_args(
 			$args,
 			[
