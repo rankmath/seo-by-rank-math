@@ -186,7 +186,7 @@ class DB {
 				$compare_uri = untrailingslashit( $compare_uri );
 			}
 			
-			if ( 'contains' === $source['comparison'] || 'start' === $source['comparison'] ) {
+			if ( 'contains' === $source['comparison'] || 'start' === $source['comparison'] || 'end' === $source['comparison'] ) {
 				$source['pattern'] = untrailingslashit( $source['pattern'] );
 			}
 
@@ -364,8 +364,7 @@ class DB {
 	public static function update( $args = [] ) {
 		if ( empty( $args ) ) {
 			return false;
-		}
-		
+		}		
 		$args = wp_parse_args(
 			$args,
 			[
