@@ -123,10 +123,7 @@ class Monitor {
 		}
 
 		$uri = untrailingslashit( Helper::get_current_page_url( Helper::get_settings( 'general.404_monitor_ignore_query_parameters' ) ) );
-		$uri = wp_parse_url( $uri );
-		$uri = ( isset( $uri['path'] ) ? $uri['path'] : '' ) . ( isset( $uri['query'] ) ? '?' . $uri['query'] : '' );
-		$uri = isset( $uri[0] ) && '/' === $uri[0] ? mb_substr( $uri, 1 ) : $uri;
-
+		$uri = str_replace( Helper::get_home_url( '/' ), '', $uri );
 		// Check if excluded.
 		if ( $this->is_url_excluded( $uri ) ) {
 			return;
