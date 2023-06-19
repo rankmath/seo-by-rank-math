@@ -165,7 +165,7 @@ class Links {
 		// Apply the default filters to get the real content.
 		// phpcs:ignore
 		$content = apply_filters( 'the_content', $content );
-		$content = apply_filters( 'rank_math/link/content', $content, $post_id ); // phpcs:ignore
+		$content = $this->do_filter( 'links/content', $content, $post_id );
 		$content = str_replace( ']]>', ']]&gt;', $content );
 
 		$processor = new ContentProcessor();
