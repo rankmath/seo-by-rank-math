@@ -108,16 +108,20 @@ class ContentProcessor {
 	 */
 	public function extract( $content ) {
 		$links = [];
-		if ( false === Str::contains( 'href', $content ) ) {
+		if ( false === Str::contains( 'href', $content ) && false === Str::contains( 'url', $content ) ) {
 			return $links;
 		}
 
 		$regexp = '<a\s[^>]*href=("??)([^" >]*?)\\1[^>]*>';
-
+		$urlexp = "@((https?://)?([-\\w]+\\.[-\\w\\.]+)+\\w(:\\d+)?(/([-\\w/_\\.]*(\\?\\S+)?)?)*)@";
 		// Case insensitive & ungreedy modifiers.
 		if ( preg_match_all( "/$regexp/iU", $content, $matches, PREG_SET_ORDER ) ) {
 			foreach ( $matches as $match ) {
 				$links[] = trim( $match[2], "'" );
+			}
+		}elseif ( preg_match_all( $urlexp, $content, $matches, PREG_SET_ORDER ) ) {
+			foreach ( $matches as $match ) {
+				$links[] = trim( $match[0], "'" );
 			}
 		}
 
