@@ -367,7 +367,11 @@ class AJAX {
 		}
 
 		$result = apply_filters( 'rank_math/analytics/check_all_services', $result );
-
+		as_enqueue_async_action(
+			'rank_math/analytics/workflow/create_tables',
+			[],
+			'rank-math'
+		);
 		update_option( 'rank_math_analytics_all_services', $result );
 
 		$this->success( $result );
