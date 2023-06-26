@@ -74,23 +74,25 @@ class Analytics extends Request {
 		if ( ! $this->is_success() || isset( $v4_response->error ) ) {
 			return $accounts;
 		}
-		foreach ( $v4_response['accountSummaries'] as $account ) {
-			if ( empty( $account['propertySummaries'] ) ) {
-				continue;
-			}
+		if ( ! empty( $v4_response ) ) {
+			foreach ( $v4_response['accountSummaries'] as $account ) {
+				if ( empty( $account['propertySummaries'] ) ) {
+					continue;
+				}
 
-			$properties = [];
-			$account_id = str_replace( 'accounts/', '', $account['account'] );
+				$properties = [];
+				$account_id = str_replace( 'accounts/', '', $account['account'] );
 
-			foreach ( $account['propertySummaries'] as $property ) {
-				$property_id = str_replace( 'properties/', '', $property['property'] );
+				foreach ( $account['propertySummaries'] as $property ) {
+					$property_id = str_replace( 'properties/', '', $property['property'] );
 
-				$accounts[ $account_id ]['properties'][ $property_id ] = [
-					'name'       => $property['displayName'],
-					'id'         => $property_id,
-					'account_id' => $account_id,
-					'type'       => 'GA4',
-				];
+					$accounts[ $account_id ]['properties'][ $property_id ] = [
+						'name'       => $property['displayName'],
+						'id'         => $property_id,
+						'account_id' => $account_id,
+						'type'       => 'GA4',
+					];
+				}
 			}
 		}
 		return $accounts;

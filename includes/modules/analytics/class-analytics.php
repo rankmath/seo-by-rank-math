@@ -141,7 +141,7 @@ class Analytics extends Base {
 		$this->remove_action( 'admin_notices', 'render_notice' );
 		$all_services = get_option( 'rank_math_analytics_all_services', true );
 		if ( ! empty( $all_services ) && empty( $all_services['hasAnalytics'] ) ) {
-			$class = 'notice rank-math-notice notice-error';
+			$class = 'notice rank-math-notice notice-error rank-math-admin-notice-google';
 			$message = __( 'Check the Google account connected. It seems like there is no Google analytics enabled with the account', 'rank-math' );
 			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
 		}

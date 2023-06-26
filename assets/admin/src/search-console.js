@@ -25,7 +25,7 @@ class SearchConsole {
 
 			ajax( 'google_check_all_services' ).done( ( response ) => {
 				this.response = response
-				if( 'undefined' !== typeof this.response && !this.response.hasAnalytics){
+				if( 'undefined' !== typeof this.response && !this.response.hasAnalytics && !this.noticeHide.is(":visible") ){
 					this.hasAnalytics.css("display", "block");
 				}
 				this.fillSelect()
@@ -45,6 +45,7 @@ class SearchConsole {
 		this.countryConsole = jQuery( '#site-console-country' )
 		this.countryAnalytics = jQuery( '#site-analytics-country' )
 		this.hasAnalytics = jQuery( '.rank-math-hidden-search-console' )
+		this.noticeHide = jQuery('.rank-math-admin-notice-google')
 		jQuery( '.cmb2_select' ).on( 'select2:open', function() {
 			document.querySelector( '.select2-search__field' ).focus()
 		} )
