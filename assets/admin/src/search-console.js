@@ -25,7 +25,6 @@ class SearchConsole {
 
 			ajax( 'google_check_all_services' ).done( ( response ) => {
 				this.response = response
-				this.response = response
 				if( 'undefined' !== typeof this.response && !this.response.hasAnalytics){
 					this.hasAnalytics.css("display", "block");
 				}
