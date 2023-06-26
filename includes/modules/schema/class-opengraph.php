@@ -102,7 +102,8 @@ class Opengraph {
 
 		$opengraph->tag( 'og:video', $video_url );
 		if ( ! empty( $schema['duration'] ) ) {
-			$opengraph->tag( 'video:duration', Helper::duration_to_seconds( $schema['duration'] ) );
+			global $post;
+			$opengraph->tag( 'video:duration', Helper::duration_to_seconds( Helper::replace_vars( $schema['duration'], $post ) ) );
 		}
 	}
 

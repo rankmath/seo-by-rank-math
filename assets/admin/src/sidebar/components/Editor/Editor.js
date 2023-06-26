@@ -74,7 +74,10 @@ const SnippetEditor = ( {
 					title={ __( 'Preview Snippet Editor', 'rank-math' ) }
 					closeButtonLabel={ __( 'Close', 'rank-math' ) }
 					shouldCloseOnClickOutside={ false }
-					onRequestClose={ toggleEditor }
+					onRequestClose={ () => {
+						document.body.classList.remove( 'modal-open' )
+						toggleEditor()
+					} }
 					className="rank-math-modal"
 					overlayClassName="rank-math-modal-overlay"
 				>

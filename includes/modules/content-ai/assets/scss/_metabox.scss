@@ -1,4 +1,23 @@
 #rank_math_metabox_content_ai {
+	.rank-math-ca-credits {
+		top: -30px;
+		right: 90px;
+
+		> span {
+			display: none;
+		}
+
+		.update-credits.rank-math-tooltip span {
+			left: -50px;
+
+			height: auto;
+
+			&:after {
+				left: 75%;
+			}
+		}
+	}
+
 	.inside {
 		margin: 0;
 		padding: 0;
@@ -25,20 +44,27 @@
 				padding-left: 12px;
 			}
 
+			.rank-math-tab-content-ai-tools {
+				overflow: auto;
+
+				max-height: 500px;
+			}
+
 			.rank-math-contentai-tabs {
 				.components-tab-panel__tab-content {
-					max-height: 500px;
 					overflow-y: scroll;
+
+					max-height: 500px;
 				}
 
 				.rank-math-section-heading h2 {
+					margin: 0 !important;
 					padding: 0;
-					margin: 0!important;
 				}
 			}
 
 			.rank-math-ca-force-update {
-				bottom: 27px;
+				top: 56.5px;
 			}
 		}
 	}

@@ -41,6 +41,13 @@ class Yoast_Blocks extends \WP_Background_Process {
 	private $toc_converter;
 
 	/**
+	 * Local Converter.
+	 *
+	 * @var Yoast_Local_Converter
+	 */
+	private $local_converter;
+
+	/**
 	 * Action.
 	 *
 	 * @var string
@@ -208,7 +215,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 			'posts' => $posts,
 			'count' => count( $posts ),
 		];
-		update_option( 'rank_math_yoast_block_posts', $posts_data );
+		update_option( 'rank_math_yoast_block_posts', $posts_data, false );
 
 		return $posts_data;
 	}

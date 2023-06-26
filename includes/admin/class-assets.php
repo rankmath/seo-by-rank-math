@@ -14,6 +14,9 @@ use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
+use RankMath\Google\Console;
+use RankMath\Google\Analytics;
+use RankMath\Analytics\Url_Inspection;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -112,7 +115,7 @@ class Assets implements Runner {
 		Helper::add_json(
 			'keywordsApi',
 			[
-				'url' => 'https://rankmathapi.com/ltkw/v1/',
+				'url' => 'https://api.rankmath.com/ltkw/v1/',
 			]
 		);
 
@@ -133,10 +136,15 @@ class Assets implements Runner {
 
 		Helper::add_json( 'capitalizeTitle', Helper::get_settings( 'titles.capitalize_titles' ) );
 
+		Helper::add_json( 'isConsoleConnected', Console::is_console_connected() );
+		Helper::add_json( 'isAnalyticsConnected', Analytics::is_analytics_connected() );
+		Helper::add_json( 'isUrlInspectionEnabled', Url_Inspection::is_enabled() );
+
 		/**
 		 * Allow other plugins to register/deregister admin styles or scripts after plugin assets.
 		 */
 		$this->do_action( 'admin/register_scripts' );
+
 	}
 
 	/**
@@ -172,7 +180,7 @@ class Assets implements Runner {
 	 */
 	public function admin_footer_text( $text ) {
 		/* translators: plugin url */
-		return Helper::is_whitelabel() ? $text : sprintf( wp_kses_post( __( 'Thank you for using <a href="%s" target="_blank">Rank Math</a>', 'rank-math' ) ), 'https://s.rankmath.com/home' );
+		return Helper::is_whitelabel() ? $text : sprintf( wp_kses_post( __( 'Thank you for using <a href="%s" target="_blank">Rank Math</a>', 'rank-math' ) ), KB::get( 'seo-suite', 'Admin Footer Text' ) );
 	}
 
 	/**

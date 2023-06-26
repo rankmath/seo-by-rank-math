@@ -65,7 +65,8 @@ class Assessor {
 	}
 
 	addScoreElem() {
-		if ( ! rankMath.showScore ) {
+		// Early bail if score is disabled or user doesn't have the required capabilities.
+		if ( ! rankMath.showScore || ! rankMath.canUser.analysis || ! rankMath.canUser.general ) {
 			return
 		}
 

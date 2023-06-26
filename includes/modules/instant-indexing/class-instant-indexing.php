@@ -41,6 +41,16 @@ class Instant_Indexing extends Base {
 	private $submitted = [];
 
 	/**
+	 * Store previous post status that we can check agains in save_post.
+	 */
+	private $previous_post_status = [];
+
+	/**
+	 * Store original permalinks for when they get trashed.
+	 */
+	private $previous_post_permalinks = [];
+
+	/**
 	 * Restrict to one request every X seconds to a given URL.
 	 */
 	const THROTTLE_LIMIT = 5;
@@ -58,6 +68,10 @@ class Instant_Indexing extends Base {
 		}
 
 		$post_types = $this->get_auto_submit_post_types();
+		if (  ! empty( $post_types ) ) {
+			$this->filter( 'wp_insert_post_data', 'before_save_post', 10, 4 );
+		}
+
 		foreach ( $post_types as $post_type ) {
 			$this->action( 'save_post_' . $post_type, 'save_post', 10, 3 );
 			$this->filter( "bulk_actions-edit-{$post_type}", 'post_bulk_actions', 11 );
@@ -238,6 +252,25 @@ class Instant_Indexing extends Base {
 	}
 
 	/**
+	 * Store previous post status & permalink before saving the post.
+	 * 
+	 * @param  array $data                Post data.
+	 * @param  array $postarr             Raw post data.
+	 * @param  array $unsanitized_postarr Unsanitized post data.
+	 * @param  bool  $update              Whether this is an existing post being updated or not.
+	 */
+	public function before_save_post( $data, $postarr, $unsanitized_postarr, $update = false ) {
+		if ( ! $update ) {
+			return $data;
+		}
+
+		$this->previous_post_status[ $postarr['ID'] ]     = get_post_status( $postarr['ID'] );
+		$this->previous_post_permalinks[ $postarr['ID'] ] = str_replace( '__trashed', '', get_permalink( $postarr['ID'] ) );
+
+		return $data;
+	}
+
+	/**
 	 * When a post from a watched post type is published or updated, submit its URL
 	 * to the API and add notice about it.
 	 *
@@ -247,11 +280,18 @@ class Instant_Indexing extends Base {
 	 * @return void
 	 */
 	public function save_post( $post_id, $post ) {
+		// Check if already submitted.
 		if ( in_array( $post_id, $this->submitted, true ) ) {
 			return;
 		}
 
+		// Check if post status changed to publish or trash.
 		if ( ! in_array( $post->post_status, [ 'publish', 'trash' ], true ) ) {
+			return;
+		}
+
+		// If new status is trash, check if previous status was publish.
+		if ( 'trash' === $post->post_status && 'publish' !== $this->previous_post_status[ $post_id ] ) {
 			return;
 		}
 
@@ -263,6 +303,11 @@ class Instant_Indexing extends Base {
 			return;
 		}
 
+		$url = get_permalink( $post );
+		if ( 'trash' === $post->post_status ) {
+			$url = $this->previous_post_permalinks[ $post_id ];
+		}
+
 		/**
 		 * Filter the URL to be submitted to IndexNow.
 		 * Returning false will prevent the URL from being submitted.
@@ -270,7 +315,7 @@ class Instant_Indexing extends Base {
 		 * @param string  $url  URL to be submitted.
 		 * @param WP_POST $post Post object.
 		 */
-		$send_url = $this->do_filter( 'instant_indexing/publish_url', get_permalink( $post ), $post );
+		$send_url = $this->do_filter( 'instant_indexing/publish_url', $url, $post );
 
 		// Early exit if filter is set to false.
 		if ( ! $send_url ) {

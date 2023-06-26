@@ -117,9 +117,10 @@ class Keywords extends Component {
 		}
 
 		const keywordData = []
-		forEach( this.props.caData.data.related_keywords, ( value ) => {
+		forEach( this.props.caData.data.related_keywords, ( value, index ) => {
 			keywordData.push(
 				<li
+					key={ index }
 					className="rank-math-tooltip show"
 					onClick={ () => ( this.setState( { selected: value } ) ) }
 					role="presentation"
@@ -157,7 +158,7 @@ class Keywords extends Component {
 			}
 
 			this.contentAiScore[ type ] = {}
-			forEach( keywords, ( data ) => {
+			forEach( keywords, ( data, index ) => {
 				const count = this.props.hasCredits ? this.getCount( data.keyword, type ) : data.count
 				const scoreClass = getClassByScore( this.getScore( data.keyword, count, data.average, type ) )
 				const className = classnames( 'rank-math-tooltip', {
@@ -166,6 +167,7 @@ class Keywords extends Component {
 
 				keywordData.push(
 					<li
+						key={ type + ' - ' + index }
 						className={ className + ' ' + scoreClass }
 						onClick={ () => ( this.setState( { selected: data.keyword } ) ) }
 						role="presentation"

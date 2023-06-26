@@ -17,6 +17,7 @@ import {
 	TextControl,
 	TextareaControl,
 } from '@wordpress/components'
+import { applyFilters } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -64,7 +65,9 @@ const FacebookTab = ( props ) => (
 
 		<SocialMediaUpload { ...props } />
 
+		{ applyFilters( 'rank_math_before_serp_devices', '', 'Opengraph' ) }
 		<div className="field-group">
+
 			<label htmlFor="rank-math-facebook-title">
 				{ __( 'Title', 'rank-math' ) }
 			</label>

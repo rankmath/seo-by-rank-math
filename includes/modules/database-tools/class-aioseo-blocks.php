@@ -163,7 +163,7 @@ class AIOSEO_Blocks extends \WP_Background_Process {
 			'posts' => $toc_posts,
 			'count' => count( $toc_posts ),
 		];
-		update_option( 'rank_math_aioseo_block_posts', $posts_data );
+		update_option( 'rank_math_aioseo_block_posts', $posts_data, false );
 
 		return $posts_data;
 	}

@@ -131,9 +131,15 @@ class Jobs {
 	public function get_console_days( $args = [] ) {
 		set_time_limit( 300 );
 
-		$rows = Api::get()->get_search_analytics( $args['start_date'], $args['end_date'], [ 'date' ] );
+		$rows = Api::get()->get_search_analytics(
+			[
+				'start_date' => $args['start_date'],
+				'end_date'   => $args['end_date'],
+				'dimensions' => [ 'date' ],
+			]
+		);
 
-		if ( empty( $rows ) ) {
+		if ( empty( $rows ) || is_wp_error( $rows ) ) {
 			return [];
 		}
 
@@ -167,8 +173,15 @@ class Jobs {
 	public function get_console_data( $date ) {
 		set_time_limit( 300 );
 
-		$rows = Api::get()->get_search_analytics( $date, $date, [ 'query', 'page' ] );
-		if ( empty( $rows ) ) {
+		$rows = Api::get()->get_search_analytics(
+			[
+				'start_date' => $date,
+				'end_date'   => $date,
+				'dimensions' => [ 'query', 'page' ],
+			]
+		);
+
+		if ( empty( $rows ) || is_wp_error( $rows ) ) {
 			return;
 		}
 
@@ -181,6 +194,8 @@ class Jobs {
 			$this->cache_flush_group( 'rank_math_rest_keywords_rows' );
 			$this->cache_flush_group( 'rank_math_posts_rows_by_objects' );
 			$this->cache_flush_group( 'rank_math_analytics_summary' );
+
+			return $rows;
 		} catch ( Exception $e ) {} // phpcs:ignore
 	}
 
@@ -241,29 +256,16 @@ class Jobs {
 	 *
 	 * @param string $action Action to perform.
 	 */
-	private function check_for_missing_dates( $action ) {
-		$count = 1;
-		$hook  = "get_{$action}_data";
-		$start = Helper::get_midnight( time() + DAY_IN_SECONDS );
-		$days  = Helper::get_settings( 'general.console_caching_control', 90 );
+	public function check_for_missing_dates( $action ) {
+		$days = Helper::get_settings( 'general.console_caching_control', 90 );
 
-		for ( $current = 1; $current <= $days; $current++ ) {
-			$date = Helper::get_date( 'Y-m-d', $start - ( DAY_IN_SECONDS * $current ), false, true );
-			if ( ! DB::date_exists( $date, $action ) ) {
-				$count++;
-				as_schedule_single_action(
-					time() + ( 60 * ( $count / 2 ) ),
-					'rank_math/analytics/' . $hook,
-					[ $date ],
-					'rank-math'
-				);
-			}
-		}
+		Workflow::do_workflow(
+			$action,
+			$days,
+			null,
+			null
+		);
 
-		// Clear cache.
-		if ( $count > 1 ) {
-			Workflow::add_clear_cache( time() + ( 60 * ( ( $count + 1 ) / 2 ) ) );
-		}
 	}
 
 	/**

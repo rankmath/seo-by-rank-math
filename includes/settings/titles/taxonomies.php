@@ -14,8 +14,9 @@ $taxonomy     = $tab['taxonomy'];
 $taxonomy_obj = get_taxonomy( $taxonomy );
 $name         = $taxonomy_obj->labels->singular_name;
 
-$metabox_default = 'off';
-$custom_default  = 'off';
+$metabox_default        = 'off';
+$custom_default         = 'off';
+$remove_snippet_default = in_array( $taxonomy, [ 'product_cat', 'product_tag' ], true ) || substr( $taxonomy, 0, 3 ) === 'pa_' ? 'on' : 'off';
 
 if ( 'category' === $taxonomy ) {
 	$metabox_default = 'on';
@@ -135,7 +136,7 @@ $cmb->add_field(
 		'name'    => esc_html__( 'Remove Snippet Data', 'rank-math' ),
 		/* translators: taxonomy name */
 		'desc'    => sprintf( esc_html__( 'Remove schema data from %s.', 'rank-math' ), $name ),
-		'default' => ( in_array( $taxonomy, [ 'product_cat', 'product_tag' ], true ) ) ? 'on' : 'off',
+		'default' => $remove_snippet_default,
 		'classes' => 'rank-math-advanced-option',
 	]
 );

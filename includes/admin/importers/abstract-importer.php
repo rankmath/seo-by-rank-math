@@ -86,6 +86,27 @@ abstract class Plugin_Importer {
 	protected $_pagination_args = [];
 
 	/**
+	 * General settings.
+	 * 
+	 * @var array
+	 */
+	protected $settings;
+
+	/**
+	 * Titles settings.
+	 * 
+	 * @var array
+	 */
+	protected $titles;
+
+	/**
+	 * Sitemap settings.
+	 * 
+	 * @var array
+	 */
+	protected $sitemap;
+
+	/**
 	 * Class constructor.
 	 *
 	 * @param string $plugin_file Plugins file.

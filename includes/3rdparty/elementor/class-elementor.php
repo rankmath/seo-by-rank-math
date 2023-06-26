@@ -98,8 +98,8 @@ class Elementor {
 	 */
 	public function end_capturing() {
 		$output  = \ob_get_clean();
-		$search  = '/(<div class="elementor-component-tab elementor-panel-navigation-tab" data-tab="global">.*<\/div>)/m';
-		$replace = '${1}<div class="elementor-component-tab elementor-panel-navigation-tab" data-tab="rank-math">SEO</div>';
+		$search  = '/(<(div|button) class="elementor-component-tab elementor-panel-navigation-tab" data-tab="global">.*<\/(div|button)>)/m';
+		$replace = '${1}<${2} class="elementor-component-tab elementor-panel-navigation-tab" data-tab="rank-math">SEO</${2}>';
 		echo \preg_replace(
 			$search,
 			$replace,

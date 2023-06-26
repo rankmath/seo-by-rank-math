@@ -62,6 +62,9 @@ class Sanitize {
 			case 'rank_math_snippet_recipe_single_instructions':
 				$sanitized_value = $this->sanitize_textarea( $field_id, $value );
 				break;
+			case 'rank_math_canonical_url':
+				$sanitized_value = esc_url_raw( $value );
+				break;
 			default:
 				$sanitized_value = is_array( $value ) ? $this->loop_sanitize( $value ) : \RankMath\CMB2::sanitize_textfield( $value );
 		}

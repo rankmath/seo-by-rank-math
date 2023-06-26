@@ -176,7 +176,7 @@ class Manager {
 			'title'       => esc_html__( 'Content AI', 'rank-math' ),
 			'desc'        => esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. Supports 80+ Countries.', 'rank-math' ),
 			'class'       => 'RankMath\ContentAI\Content_AI',
-			'icon'        => 'target',
+			'icon'        => 'content-ai',
 			'upgradeable' => true,
 			'settings'    => Helper::get_admin_url( 'options-general' ) . '#setting-panel-content-ai',
 			'betabadge'   => true,

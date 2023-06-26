@@ -18,8 +18,10 @@
 
 .module-listing {
 	.grid {
-		@extend %flex;
 		flex-flow: row wrap;
+
+		@extend %flex;
+		gap: .9375rem;
 
 		&.pro-active {
 			.rank-math-pro-badge {
@@ -30,8 +32,10 @@
 	}
 
 	.rank-math-box {
+		flex: 0 0 288px;
+
 		box-sizing: border-box;
-		margin: 0 .9375rem .9375rem 0;
+		margin: 0;
 		padding: 1.875rem 1.25rem 80px;
 
 		text-align: center;
@@ -124,125 +128,7 @@
 			}
 		}
 
-		> i {
-			@extend %rm-icon;
-
-			// Icon Colors.
-			&.rm-icon {
-				&-404 {
-					color: #ff521b;
-					background: rgba( #ff521b, .12 );
-				}
-
-				&-mobile {
-					color: #3f8aca;
-					background: rgba( #3f8aca, .12 );;
-				}
-
-				&-acf {
-					color: #03e6aa;
-					background: rgba( #03e6aa, .12 );
-				}
-
-				&-users {
-					color: #3494be;
-					background: rgba( #3494be, .1 );
-				}
-
-				&-comments {
-					color: #b8423f;
-					background: rgba( #b8423f, .1 );
-				}
-
-				&-images {
-					color: #649d66;
-					background: rgba( #649d66, .1 );
-				}
-
-				&-link {
-					color: #dba240;
-					background: rgba( #dba240, .1 );
-				}
-
-				&-local-seo {
-					color: #2940c9;
-					background: rgba( #2940c9, .1 );
-				}
-
-				&-post {
-					color: #679cf7;
-					background: rgba( #679cf7, .1 );
-				}
-
-				&-podcast {
-					color: #8a24c7;
-					background: rgba( #8a24c7, .1 );
-				}
-
-				&-redirection {
-					color: #f7b267;
-					background: rgba( #f7b267, .1 );
-				}
-
-				&-schema {
-					color: #843224;
-					background: rgba( #843224, .1 );
-				}
-
-				&-role-manager {
-					color: #87a627;
-					background: rgba( #87a627, .1 );
-				}
-
-				&-search-console {
-					color: #3c88d8;
-					background: rgba( #3c88d8, .1 );
-				}
-
-				&-analyzer {
-					color: #e3765c;
-					background: rgba( #e3765c, .1 );
-				}
-
-				&-sitemap {
-					color: #049404;
-					background: rgba( #049404, .1 );
-				}
-
-				&-cart {
-					color: #842474;
-					background: rgba( #842474, .1 );
-				}
-
-				&-video {
-					color: #f76767;
-					background: rgba( #f76767, .1 );
-				}
-
-				&-stories {
-					color: #180ca4;
-					background: rgba( #180ca4, .1 );
-				}
-
-				&-instant-indexing {
-					color: #a40fa4;
-					background: rgba( #a40fa4, .1 );
-				}
-
-				&-target {
-					color: #e91e63;
-					background: rgba( #e91e63, .05 );
-
-					&:before {
-						background: linear-gradient(-135deg, #ff4492, #434e8f);
-						-webkit-background-clip: text;
-								background-clip: text;
-
-						-webkit-text-fill-color: transparent;
-					}
-				}
-			}
-		}
+		@import 'icon-colors';
 
 		header {
 			h3 {
@@ -279,18 +165,19 @@
 				}
 
 				&.upgraded {
-					color: $color-1;
 					cursor: default;
+
+					color: $color-1;
 				}
 			}
 
 			p {
 				display: -webkit-box;
 				overflow: hidden;
+				-webkit-box-orient: vertical;
 
 				margin-bottom: 0;
 
-				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 5;
 			}
 		}
@@ -327,6 +214,8 @@
 				color: #77797c;
 
 				&.rank-math-tooltip span {
+					visibility: hidden;
+
 					text-indent: 0;
 
 					color: #fff;

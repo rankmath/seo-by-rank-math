@@ -24,6 +24,20 @@ class Base {
 	use Hooker;
 
 	/**
+	 * Current post.
+	 *
+	 * @var object
+	 */
+	public $post;
+
+	/**
+	 * Current args.
+	 * 
+	 * @var object
+	 */
+	public $args;
+
+	/**
 	 * Get a comma separated list of the post's terms.
 	 *
 	 * @param int    $id            ID of the post.

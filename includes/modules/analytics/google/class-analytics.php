@@ -12,6 +12,11 @@ namespace RankMath\Google;
 
 defined( 'ABSPATH' ) || exit;
 
+use WP_Error;
+use RankMath\Google\Api;
+use MyThemeShop\Helpers\Str;
+use RankMath\Analytics\Workflow\Base;
+
 /**
  * Analytics class.
  */
@@ -108,5 +113,234 @@ class Analytics extends Request {
 		);
 
 		return ! empty( $account['view_id'] );
+	}
+
+	/**
+	 * Query analytics data from google client api.
+	 *
+	 * @param string $start_date Start date.
+	 * @param string $end_date   End date.
+	 *
+	 * @return array
+	 */
+	public static function get_analytics( $options = [], $days = false ) {
+		// Check view ID.
+		$view_id = isset( $options['view_id'] ) ? $options['view_id'] : self::get_view_id();
+		if ( ! $view_id ) {
+			return false;
+		}
+
+		$stored = get_option(
+			'rank_math_google_analytic_options',
+			[
+				'account_id'       => '',
+				'property_id'      => '',
+				'view_id'          => '',
+				'measurement_id'   => '',
+				'stream_name'      => '',
+				'country'          => '',
+				'install_code'     => '',
+				'anonymize_ip'     => '',
+				'local_ga_js'      => '',
+				'exclude_loggedin' => '',
+			]
+		);
+
+		// Check property ID.
+		$property_id = isset( $options['property_id'] ) ? $options['property_id'] : $stored['property_id'];
+		if ( ! $property_id ) {
+			return false;
+		}
+
+		// Check dates.
+		$dates 		= Base::get_dates();
+		$start_date = isset( $options['start_date'] ) ? $options['start_date'] : $dates['start_date'];
+		$end_date   = isset( $options['end_date'] ) ? $options['end_date'] : $dates['end_date'];
+		if ( ! $start_date || ! $end_date ) {
+			return false;
+		}
+
+		// Request params.
+		$row_limit = isset( $options['row_limit'] ) ? $options['row_limit'] : Api::get()->get_row_limit();
+		$country   = isset( $options['country'] ) ? $options['country'] : '';
+		if ( ! empty( $stored['country'] ) && 'all' !== $stored['country'] ) {
+			$country = $stored['country'];
+		}
+
+		// Check the property for old Google Analytics.
+		if ( Str::starts_with( 'UA-', $property_id ) ) {
+			$args = [
+				'viewId'                 => $view_id,
+				'pageSize'               => $row_limit,
+				'dateRanges'             => [
+					[
+						'startDate' => $start_date,
+						'endDate'   => $end_date,
+					],
+				],
+				'dimensionFilterClauses' => [
+					[
+						'filters' => [
+							[
+								'dimensionName' => 'ga:medium',
+								'operator'      => 'EXACT',
+								'expressions'   => 'organic',
+							],
+						],
+					],
+				],
+			];
+
+			// Include only dates.
+			if ( true === $days ) {
+				$args = wp_parse_args(
+					[
+						'dimensions' => [
+							[ 'name' => 'ga:date' ],
+						],
+					],
+					$args
+				);
+			} else {
+				$args = wp_parse_args(
+					[
+						'metrics'    => [
+							[ 'expression' => 'ga:pageviews' ],
+							[ 'expression' => 'ga:users' ],
+						],
+						'dimensions' => [
+							[ 'name' => 'ga:date' ],
+							[ 'name' => 'ga:pagePath' ],
+						],
+						'orderBys'   => [
+							[
+								'fieldName' => 'ga:pageviews',
+								'sortOrder' => 'DESCENDING',
+							],
+						],
+					],
+					$args
+				);
+
+				// Add country.
+				if ( ! $country ) {
+					$args['dimensionFilterClauses'][0]['filters'][] = [
+						'dimensionName' => 'ga:countryIsoCode',
+						'operator'      => 'EXACT',
+						'expressions'   => $country,
+					];
+				}
+			}
+
+			$response = Api::get()->http_post(
+				'https://analyticsreporting.googleapis.com/v4/reports:batchGet',
+				[
+					'reportRequests' => [ $args ],
+				]
+			);
+
+			Api::get()->log_failed_request( $response, 'analytics', $start_date, func_get_args() );
+
+			if ( ! Api::get()->is_success() ) {
+				return new WP_Error( 'request_failed', __( 'The Google Analytics request failed.', 'rank-math' ) );
+			}
+
+			if ( ! isset( $response['reports'], $response['reports'][0]['data']['rows'] ) ) {
+				return false;
+			}
+
+			return $response['reports'][0]['data']['rows'];
+		}
+
+		// Request for GA4 API.
+		$args = [
+			'dateRanges'      => [
+				[
+					'startDate' => $start_date,
+					'endDate'   => $end_date,
+				],
+			],
+			'dimensionFilter' => [
+				'filter' => [
+					'fieldName'    => 'streamId',
+					'stringFilter' => [
+						'matchType' => 'EXACT',
+						'value'     => $view_id,
+					],
+				],
+			],
+		];
+
+		// Include only dates.
+		if ( true === $days ) {
+			$args = wp_parse_args(
+				[
+					'dimensions' => [
+						[ 'name' => 'date' ],
+					],
+				],
+				$args
+			);
+		} else {
+			$args = wp_parse_args(
+				[
+					'dimensions' => [
+						[ 'name' => 'pagePathPlusQueryString' ],
+						[ 'name' => 'countryId' ],
+					],
+					'metrics'    => [
+						[ 'name' => 'screenPageViews' ],
+						[ 'name' => 'totalUsers' ],
+					],
+				],
+				$args
+			);
+
+			// Include country.
+			if ( $country ) {
+				$args['dimensionFilter']['filter'] = [
+					'fieldName'    => 'countryId',
+					'stringFilter' => [
+						'matchType' => 'EXACT',
+						'value'     => $country,
+					],
+				];
+			}
+		}
+
+		$workflow = 'analytics';
+		Api::get()->set_workflow( $workflow );
+		$response = Api::get()->http_post(
+			'https://analyticsdata.googleapis.com/v1beta/properties/' . $property_id . ':runReport',
+			$args
+		);
+
+		Api::get()->log_failed_request( $response, $workflow, $start_date, func_get_args() );
+
+		if ( ! Api::get()->is_success() ) {
+			return new WP_Error( 'request_failed', __( 'The Google Analytics Console request failed.', 'rank-math' ) );
+		}
+
+		if ( ! isset( $response['rows'] ) ) {
+			return false;
+		}
+
+		return $response['rows'];
+	}
+
+	/**
+	 * Get view id.
+	 *
+	 * @return string
+	 */
+	public static function get_view_id() {
+		static $rank_math_view_id;
+
+		if ( is_null( $rank_math_view_id ) ) {
+			$options           = get_option( 'rank_math_google_analytic_options' );
+			$rank_math_view_id = ! empty( $options['view_id'] ) ? $options['view_id'] : false;
+		}
+
+		return $rank_math_view_id;
 	}
 }

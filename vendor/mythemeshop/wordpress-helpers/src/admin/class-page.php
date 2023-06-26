@@ -251,7 +251,7 @@ class Page {
 		}
 
 		if ( is_callable( $this->render ) ) {
-			call_user_func( $this->onrender, $this );
+			call_user_func( $this->render, $this );
 			return;
 		}
 

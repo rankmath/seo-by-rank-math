@@ -12,7 +12,7 @@
 		display: flex;
 
 		min-height: 22px;
-		padding: 0 10px;
+		padding: 0 5px;
 
 		&.is-new {
 			border-color: $color-3;
@@ -58,7 +58,6 @@
 		i {
 			width: 13px;
 			font-size: 13px;
-			font-weight: bold;
 			line-height: 14px;
 
 			margin-right: 5px;
@@ -71,236 +70,6 @@
 	}
 }
 
-div.rank-math-content-ai-wrapper {
-	&.is-opened {
-		padding: 0;
-
-		background: #fff;
-	}
-
-	.components-panel__body {
-		padding: 20px 16px 16px;
-
-		border-top: 0;
-	}
-
-	// No Credits.
-	.rank-math-ca-warning {
-		padding: 25px 16px;
-
-		text-align: center;
-
-		border-top: 1px solid #ddd;
-		border-bottom: 1px solid #ddd;
-		background-color: #fff8e5;
-
-		h3 {
-			font-size: 18px;
-
-			margin-bottom: 8px;
-		}
-
-		p {
-			font-size: 15px;
-
-			margin-bottom: 10px;
-
-			color: #606060;
-		}
-
-		a {
-			font-size: 14px;
-
-			height: 32px;
-		}
-	}
-
-	// Content AI Output.
-	.rank-math-content-ai-data {
-		// Loading.
-		.loader-text {
-			font-size: 18px;
-
-			position: absolute;
-			z-index: -1;
-			top: 50px;
-			right: 0;
-			left: 0;
-
-			box-sizing: border-box;
-			width: 100%;
-			padding: 25px;
-
-			text-align: center;
-
-			span {
-				line-height: 1.3;
-
-				position: absolute;
-				top: 100%;
-				right: 0;
-				bottom: 0;
-				left: 0;
-
-				margin-top: 50px;
-
-				opacity: 0;
-			}
-		}
-
-		&.loading {
-			position: relative;
-
-			min-height: 200px;
-
-			&:after {
-				content: '';
-
-				position: absolute;
-				z-index: 1;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-
-				background-color: rgba( 255, 255, 255, .85 );
-			}
-
-			.loader-text {
-				z-index: 99;
-
-				span {
-					padding: 16px;
-
-					animation-name: loader;
-					animation-duration: 6s;
-					animation-fill-mode: both;
-
-					&:first-child {
-						animation-delay: 0s;
-					}
-
-					&:nth-child( 2 ) {
-						animation-delay: 4s;
-					}
-
-					&:nth-child( 3 ) {
-						animation-delay: 8s;
-					}
-
-					&:nth-child( 4 ) {
-						animation-delay: 12s;
-					}
-
-					&:nth-child( 5 ) {
-						animation-name: loader2;
-						animation-delay: 16s;
-					}
-				}
-			}
-		}
-
-		h3.rank-math-ca-section-title {
-			font-size: 15px;
-			font-weight: 500;
-
-			margin-bottom: 0;
-			padding: 18px 16px;
-
-			border-bottom: 1px solid #ddd;
-
-			span {
-				font-size: 12px;
-				line-height: 18px;
-
-				display: inline-block;
-
-				margin: 0 2px 0 5px;
-				padding: 0 5px;
-
-				vertical-align: 2px;
-				text-transform: uppercase;
-
-				color: #e91e63;
-				border-radius: 3px;
-				background: rgba( #e91e63, .1 );
-			}
-		}
-
-		h3 {
-			text-transform: initial;
-			
-			&.no-data {
-				font-size: 15px;
-				line-height: 1.5;
-
-				margin-top: 20px;
-				padding: 12px;
-
-				background-color: transparent;
-				text-transform: initial;
-			}
-		}
-	}
-
-	.rank-math-contentai-tabs {
-		.components-tab-panel__tabs {
-			padding: 0 16px;
-
-			border-bottom: 1px solid #ddd;
-
-			justify-content: space-between;
-		}
-
-		.rank-math-section-heading {
-			display: flex;
-
-			margin-bottom: 15px;
-
-			align-items: center;
-			justify-content: space-between;
-
-			h2 {
-				font-size: 15px;
-				font-weight: 600;
-
-				margin: 0;
-				padding: 0;
-			}
-		}
-
-		button:not(:disabled) {
-			font-size: 14px;
-			line-height: 1;
-
-			margin-bottom: -1px;
-			padding: 0 10px;
-
-			box-shadow: none;
-
-			&.is-active {
-				&:before {
-					border-bottom-color: $primary;
-				}
-			}
-
-			&:focus {
-				color: $primary;
-				box-shadow: none;
-			}
-
-			i {
-				vertical-align: -5px;
-			}
-		}
-	}
-
-	#rank-math-help-icon {
-		@include tooltipicon;
-	}
-}
-
-
 .editor-post-publish-panel__prepublish .rank-math-content-ai-box {
 	background-color: #fff8e5;
 
@@ -309,7 +78,6 @@ div.rank-math-content-ai-wrapper {
 			width: 17px;
 			height: 17px;
 			font-size: 12px;
-			font-weight: bold;
 			background: linear-gradient(-135deg, #ff4492, #434e8f);
 			background-clip: text;
 			-webkit-text-fill-color: transparent;

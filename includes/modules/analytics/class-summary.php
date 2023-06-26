@@ -22,6 +22,41 @@ class Summary {
 	use Cache;
 
 	/**
+	 * Start date.
+	 *
+	 * @var string
+	 */
+	public $start_date;
+
+	/**
+	 * End date.
+	 *
+	 * @var string
+	 */
+	public $end_date;
+
+	/**
+	 * Compare start date.
+	 *
+	 * @var string
+	 */
+	public $compare_start_date;
+
+	/**
+	 * Compare end date.
+	 *
+	 * @var string
+	 */
+	public $compare_end_date;
+
+	/**
+	 * Days.
+	 *
+	 * @var int
+	 */
+	public $days;
+
+	/**
 	 * Get Widget.
 	 *
 	 * @return object
@@ -242,10 +277,13 @@ class Summary {
 		$stats->keywords = $this->get_keywords_summary();
 		$stats->graph    = $this->get_analytics_summary_graph();
 
+		$stats = apply_filters( 'rank_math/analytics/summary', $stats );
+
+		$stats = array_filter( (array) $stats );
+
 		$this->set_cache( $cache_key, $stats, $cache_group, DAY_IN_SECONDS );
 
-		$stats = apply_filters( 'rank_math/analytics/summary', $stats );
-		return array_filter( (array) $stats );
+		return $stats;
 	}
 	/**
 	 * Get posts summary.

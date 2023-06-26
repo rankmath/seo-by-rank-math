@@ -314,8 +314,8 @@ class Admin_Helper {
 			return;
 		}
 
-		$tw_link = 'https://s.rankmath.com/twitter';
-		$fb_link = rawurlencode( 'https://s.rankmath.com/suite-free' );
+		$tw_link = KB::get( 'logo', 'Setup Wizard Tweet Button' );
+		$fb_link = rawurlencode( KB::get( 'logo', 'Facebook' ) );
 		/* translators: sitename */
 		$tw_message = rawurlencode( sprintf( esc_html__( 'I just installed @RankMathSEO #WordPress Plugin. It looks great! %s', 'rank-math' ), $tw_link ) );
 		/* translators: sitename */

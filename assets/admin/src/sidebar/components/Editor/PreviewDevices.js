@@ -3,6 +3,7 @@
  */
 import { compose } from '@wordpress/compose'
 import { withDispatch, withSelect } from '@wordpress/data'
+import { applyFilters } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -20,6 +21,8 @@ const PreviewDevices = ( { type, updatePreviewType } ) => {
 	)
 	return (
 		<div className="rank-math-button-devices alignright">
+			{ applyFilters( 'rank_math_before_serp_devices', '' ) }
+
 			<div
 				onClick={ () => updatePreviewType( 'desktop' ) }
 				className={ desktopClassess }

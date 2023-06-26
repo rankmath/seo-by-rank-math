@@ -13,8 +13,19 @@ defined( 'ABSPATH' ) || exit;
 
 $src_format = 'https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=%%SITEURL%%&size=128';
 $favicon    = str_replace( '%%SITEURL%%', urlencode( $this->analyse_url ), $src_format );
-$title_data = $this->results['title_length']->get_result();
-$title      = $title_data['data'];
+
+if ( is_array( $this->results ) ) {
+	if ( isset( $this->results['title_length'] ) ) {
+		$title_data = $this->results['title_length']->get_result();
+		$title      = $title_data['data'];
+	}
+
+	if ( isset( $this->results['description_length'] ) ) {
+		$description_data = $this->results['description_length']->get_result();
+		$description      = $description_data['data'];
+	}
+}
+
 if ( empty( $title ) ) {
 	$title = __( '(No Title)', 'rank-math' );
 }
@@ -23,8 +34,6 @@ if ( strlen( $title ) > 60 ) {
 	$title = substr( $title, 0, 60 ) . '...';
 }
 
-$description_data = $this->results['description_length']->get_result();
-$description      = $description_data['data'];
 if ( empty( $description ) ) {
 	$description = __( '(No Description)', 'rank-math' );
 }

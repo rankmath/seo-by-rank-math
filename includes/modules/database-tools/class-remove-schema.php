@@ -116,7 +116,7 @@ class Remove_Schema extends \WP_Background_Process {
 			->get();
 
 		$meta_ids = wp_list_pluck( $meta_ids, 'meta_id' );
-		update_option( 'rank_math_old_schema_data', $meta_ids );
+		update_option( 'rank_math_old_schema_data', $meta_ids, false );
 
 		return $meta_ids;
 	}

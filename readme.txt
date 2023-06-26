@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.1
+Tested up to: 6.2.2
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.107.3
+Stable tag: 1.0.117.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -315,7 +315,7 @@ Even with significantly more features than other plugins, Rank Math loads amazin
 	* Contextual Help
 
 ### BIG Publications are Raving About Rank Math ###
-**<a href="https://s.rankmath.com/reviews" target="_blank">Rank Math Reviews</a>**
+**<a href="https://rankmath.com/reviews/" target="_blank">Rank Math Reviews</a>**
 
 [youtube https://www.youtube.com/watch?v=cFI_jRVOQZk]
 
@@ -529,14 +529,14 @@ Google WILL NOT necessarily show the Schema data though. They check a few things
 Here is a quote from one of Google's help articles:
 `We perform algorithmic and manual quality checks to ensure that structured data meets relevancy standards. In cases where we see structured data that does not comply with these standards, we reserve the right to disable rich snippets for a site in order to maintain a high-quality search experience for our users. Read our webmaster guidelines for more details.`
 
-Link: <a href="https://s.rankmath.com/googlestructureddata" target="_blank">https://s.rankmath.com/googlestructureddata</a>
+Link: <a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies/" target="_blank">https://developers.google.com/search/docs/appearance/structured-data/sd-policies</a>
 
 = Why is the Carousel or Data Highlighter Not Working? =
 Google can actually extract content from your pages and display it as a rich carousel (AMP or not).
 
 But to make it easier, the best you can do is to use the Data Highlighter option in your Search Appearance tab in Webmaster Tools for your important pages (especially the pillar posts) but not on all content types. Rank Math makes it extremely convenient to do so.
 
-To learn more about using this feature, visit <a href="https://s.rankmath.com/googledatahighlighter" target="_blank">https://s.rankmath.com/googledatahighlighter</a>
+To learn more about using this feature, visit <a href="https://support.google.com/webmasters/answer/2692911" target="_blank">https://support.google.com/webmasters/answer/2692911?</a>
 
 = How to enter Meta Keywords in the plugin? =
 Google does not use the keyword meta tag in web ranking. Here's a video supporting that:
@@ -583,24 +583,15 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.107 [Jan 25, 2023] =
-- Improved: [TOC Block](https://rankmath.com/kb/table-of-contents-block/) can now recognize the headings added to [FAQ](https://rankmath.com/kb/faq-schema-block/) & [HowTo](https://rankmath.com/blog/howto-schema/) Blocks
-- Fixed: PHP error related to [Analytics](https://rankmath.com/kb/analytics) on WordPress 6.0
-- Fixed: [Sorting option](https://rankmath.com/kb/analytics/#data-sorting) was not working in Analytics tables
-- Fixed: [Rank Tracker graph](https://rankmath.com/kb/analytics/#rank-tracker) was not showing correctly on RTL websites
-- Fixed: PHP error on some setups when the [Content AI](https://rankmath.com/content-ai/) module is active
-- Fixed: Missing term names in the [HTML Sitemap](https://rankmath.com/kb/html-sitemap/)
+= 1.0.117 [June 15, 2023] =
+- Added: New option to [test Google Analytics connection status](https://rankmath.com/kb/general-settings/#test-connections)
+- Improved: Compatibility with PHP 8.2
+- Improved: Optimized the [Table of Contents block](https://rankmath.com/kb/table-of-contents-block/) CSS
+- Fixed: PHP warning related to attributes type in the Table of Contents block when Debug mode is enabled on the site
+- Fixed: [Auto Post Redirect](https://rankmath.com/kb/general-settings/#auto-post-redirect) was not working for Attachment posts
+- Fixed: Fatal error related to [Instant Indexing](https://rankmath.com/kb/how-to-use-indexnow/) that occurred on some setups when creating a new post
 
-= 1.0.107.1 [Jan 25, 2023] =
-- Fixed: Version number
-
-= 1.0.107.2 [Jan 26, 2023] =
-- Fixed: TOC Block was not detecting the headings added in FAQ & HowTo blocks when core headings were present in the content
-
-= 1.0.107.3 [Jan 30, 2023] =
-- Improved: Strengthened the security of the plugin. Thanks to PatchStack(link) for revealing it responsibly
-- Fixed: After importing the data from Yoast, the `%%searchphrase%%` variable was not getting converted to the Rank Math's `%search_query%`
-- Fixed: [Focus Keyword in Title test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-the-seo-title-primary-focus-keyword-only) was not working well when `&` was used in the SERP Title
-- Fixed: [Book schema](https://rankmath.com/kb/book-schema/#date-published) was showing incorrect published date on the frontend
+= 1.0.117.1 [June 16, 2023] =
+- Fixed: A minor bug that affected the connection to [Google Analytics/Google Search Console](https://rankmath.com/kb/analytics/)
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

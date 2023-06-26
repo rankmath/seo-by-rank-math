@@ -44,7 +44,6 @@
 			&__tab-content {
 				> div > div:first-child {
 					border-top: 0;
-					margin-top: 10px;
 					border-bottom: 0;
 				}
 
@@ -89,6 +88,12 @@
 			&-toggle.components-button {
 				color: #6d7882;
 				padding: 10px 15px;
+			}
+
+			.rank-math-ca-credits {
+				top: auto;
+				margin-top: 5px;
+				right: 15px;
 			}
 		}
 

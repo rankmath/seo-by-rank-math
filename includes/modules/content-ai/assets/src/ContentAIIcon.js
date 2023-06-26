@@ -22,7 +22,7 @@ const ContentAIIcon = ( { isLoaded, score } ) => {
 
 	return (
 		<div className={ classes }>
-			<i className="rm-icon rm-icon-target"></i>
+			<i className="rm-icon rm-icon-content-ai"></i>
 			<span className="content-ai-score">{ score } / 100</span>
 		</div>
 	)

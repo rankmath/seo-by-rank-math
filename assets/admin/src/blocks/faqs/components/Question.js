@@ -58,20 +58,22 @@ class Question extends Component {
 					/>
 
 					<div className="rank-math-block-actions">
-						{ applyFilters( 'rank_math_block_faq_actions', '', this.props ) }
+						{ applyFilters( 'rank_math_block_faq_actions', '', this.props, this ) }
 
 						<Button
 							className="rank-math-item-visbility"
 							icon={ visible ? 'visibility' : 'hidden' }
 							onClick={ this.toggleVisibility }
-							title={ __( 'Hide Question', 'rank-math' ) }
+							label={ __( 'Hide Question', 'rank-math' ) }
+							showTooltip={ true }
 						/>
 
 						<Button
 							icon="trash"
 							className="rank-math-item-delete"
 							onClick={ this.deleteQuestion }
-							title={ __( 'Delete Question', 'rank-math' ) }
+							label={ __( 'Delete Question', 'rank-math' ) }
+							showTooltip={ true }
 						/>
 					</div>
 				</div>

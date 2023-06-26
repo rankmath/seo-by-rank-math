@@ -274,7 +274,6 @@ trait Choices {
 								[
 									'label' => 'Legal Service',
 									'child' => [
-										[ 'label' => 'Attorney' ],
 										[ 'label' => 'Notary' ],
 									],
 								],

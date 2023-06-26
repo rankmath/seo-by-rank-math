@@ -81,10 +81,11 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 						}
 
 						const isGeneratedLink = ! isUndefined( currentHeading.isGeneratedLink ) && currentHeading.isGeneratedLink
+						const content = ! isUndefined( currentHeading.isUpdated ) && currentHeading.isUpdated ? currentHeading.content : value.title
 
 						_latestHeadings.push( {
 							key: value.id,
-							content: ! isUndefined( currentHeading.isUpdated ) && currentHeading.isUpdated ? currentHeading.content : value.title,
+							content: stripHTML( content ),
 							level: parseInt( headingAttributes.titleWrapper.replace( 'h', '' ) ),
 							link: ! isGeneratedLink ? currentHeading.link : `#${ value.id }`,
 							disable: currentHeading.disable ? currentHeading.disable : false,
@@ -113,7 +114,7 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 
 					let anchor = headingAttributes.anchor
 					if ( isEmpty( headingAttributes.anchor ) || isGeneratedLink ) {
-						anchor = kebabCase( headingAttributes.content )
+						anchor = kebabCase( stripHTML( headingAttributes.content ) )
 					}
 
 					if ( includes( anchors, anchor ) ) {
@@ -131,9 +132,11 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 						)
 					)
 
+					const content = ! isUndefined( currentHeading.isUpdated ) && currentHeading.isUpdated ? currentHeading.content : headingContent
+
 					_latestHeadings.push( {
 						key: blockClientId,
-						content: ! isUndefined( currentHeading.isUpdated ) && currentHeading.isUpdated ? currentHeading.content : headingContent,
+						content: stripHTML( content ),
 						level: headingAttributes.level,
 						link: ! isGeneratedLink ? currentHeading.link : `#${ headingAttributes.anchor }`,
 						disable: currentHeading.disable ? currentHeading.disable : false,

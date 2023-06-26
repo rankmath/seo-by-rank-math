@@ -10,6 +10,7 @@
 
 namespace RankMath;
 
+use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Arr;
@@ -89,7 +90,7 @@ class Robots_Txt {
 		$public        = absint( get_option( 'blog_public' ) );
 
 		$default  = '# This file is automatically added by Rank Math SEO plugin to help a website index better';
-		$default .= "\n# More info: https://s.rankmath.com/home\n";
+		$default .= "\n# More info: " . KB::get( 'seo-suite', 'Robots' ) . "\n";
 		$default .= "User-Agent: *\n";
 		if ( 0 === $public ) {
 			$default .= "Disallow: /\n";

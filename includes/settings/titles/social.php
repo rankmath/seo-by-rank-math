@@ -8,6 +8,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use RankMath\KB;
+
 $cmb->add_field(
 	[
 		'id'   => 'social_url_facebook',
@@ -34,7 +36,7 @@ $cmb->add_field(
 		'type' => 'text',
 		'name' => esc_html__( 'Facebook Admin', 'rank-math' ),
 		/* translators: numeric user ID link */
-		'desc' => sprintf( esc_html__( 'Enter %s. Use a comma to separate multiple IDs. Alternatively, you can enter an app ID below.', 'rank-math' ), '<a href="https://findmyfbid.com/?utm_campaign=Rank+Math" target="_blank">numeric user ID</a>' ),
+		'desc' => sprintf( esc_html__( 'Enter %s. Use a comma to separate multiple IDs. Alternatively, you can enter an app ID below.', 'rank-math' ), '<a href="https://lookup-id.com/?utm_campaign=Rank+Math" target="_blank">numeric user ID</a>' ),
 	]
 );
 
@@ -54,7 +56,7 @@ $cmb->add_field(
 		'type'       => 'text',
 		'name'       => esc_html__( 'Facebook Secret', 'rank-math' ),
 		/* translators: Learn more link */
-		'desc'       => sprintf( esc_html__( 'Enter alphanumeric secret ID. %s.', 'rank-math' ), '<a href="https://s.rankmath.com/fbapp" target="_blank">Learn more</a>' ),
+		'desc'       => sprintf( esc_html__( 'Enter alphanumeric secret ID. %s.', 'rank-math' ), '<a href="' . KB::get( 'create-facebook-app' ) . '" target="_blank">Learn more</a>' ),
 		'attributes' => [ 'type' => 'password' ],
 	]
 );

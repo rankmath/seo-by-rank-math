@@ -19,7 +19,7 @@ export default function save( { attributes } ) {
 	const ListStyle = attributes.listStyle
 
 	return (
-		<div { ...useBlockProps.save() }>
+		<div { ...useBlockProps.save() } id="rank-math-toc">
 			{ attributes.title && <TitleWrapper dangerouslySetInnerHTML={ { __html: attributes.title } }></TitleWrapper> }
 			<nav>
 				<ListStyle>

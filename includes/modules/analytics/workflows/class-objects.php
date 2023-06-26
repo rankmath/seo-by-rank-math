@@ -13,6 +13,7 @@ namespace RankMath\Analytics\Workflow;
 use Exception;
 use RankMath\Helper;
 use MyThemeShop\Helpers\DB;
+use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,6 +21,8 @@ defined( 'ABSPATH' ) || exit;
  * Objects class.
  */
 class Objects extends Base {
+
+	use Hooker;
 
 	/**
 	 * Constructor.
@@ -111,7 +114,7 @@ class Objects extends Base {
 	 * Flat posts
 	 */
 	public function flat_posts() {
-		$post_types = Helper::get_accessible_post_types();
+		$post_types = $this->do_filter( 'analytics/post_types', Helper::get_accessible_post_types() );
 		unset( $post_types['attachment'] );
 
 		$ids = get_posts(

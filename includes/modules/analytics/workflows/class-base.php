@@ -133,6 +133,16 @@ abstract class Base {
 		return true;
 	}
 
+	public static function get_dates( $days = 90 ) {
+		$end   = Helper::get_midnight( strtotime( '-1 day', time() ) );
+		$start = strtotime( '-' . $days . ' day', $end );
+
+		return [
+			'start_date' => date_i18n( 'Y-m-d', $start ),
+			'end_date'   => date_i18n( 'Y-m-d', $end ),
+		];
+	}
+
 	/**
 	 * Schedule single action
 	 *
@@ -146,17 +156,14 @@ abstract class Base {
 		$timestamp = get_option( 'rank_math_analytics_last_single_action_schedule_time', time() );
 		$time_gap  = $this->get_schedule_gap();
 
-		$end        = Helper::get_midnight( strtotime( '-1 day', time() ) );
-		$start      = strtotime( '-' . $days . ' day', $end );
-		$start_date = date_i18n( 'Y-m-d', $start );
-		$end_date   = date_i18n( 'Y-m-d', $end );
+		$dates = self::get_dates( $days );
 
 		// Get the analytics dates in which analytics data is actually available.
 		$days = apply_filters(
 			'rank_math/analytics/get_' . $action . '_days',
 			[
-				'start_date' => $start_date,
-				'end_date'   => $end_date,
+				'start_date' => $dates['start_date'],
+				'end_date'   => $dates['end_date'],
 			]
 		);
 

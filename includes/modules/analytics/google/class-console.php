@@ -11,6 +11,8 @@
 namespace RankMath\Google;
 
 use MyThemeShop\Helpers\Str;
+use RankMath\Analytics\Workflow\Base;
+use WP_Error;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -157,49 +159,68 @@ class Console extends Analytics {
 	/**
 	 * Query analytics data from google client api.
 	 *
-	 * @param string $start_date Start date.
-	 * @param string $end_date   End date.
-	 * @param string $dimension  Dimension of data.
+	 * @param array $args  Query arguments.
 	 *
 	 * @return array
 	 */
-	public function get_search_analytics( $start_date, $end_date, $dimension ) {
-		$args = [
+	public function get_search_analytics( $args = [] ) {
+		$dates = Base::get_dates();
+
+		$start_date = isset( $args['start_date'] ) ? $args['start_date'] : $dates['start_date'];
+		$end_date   = isset( $args['end_date'] ) ? $args['end_date'] : $dates['end_date'];
+		$dimensions = isset( $args['dimensions'] ) ? $args['dimensions'] : 'date';
+		$row_limit  = isset( $args['row_limit'] ) ? $args['row_limit'] : Api::get()->get_row_limit();
+
+		$params = [
 			'startDate'  => $start_date,
 			'endDate'    => $end_date,
-			'rowLimit'   => $this->get_row_limit(),
-			'dimensions' => \is_array( $dimension ) ? $dimension : [ $dimension ],
+			'rowLimit'   => $row_limit,
+			'dimensions' => \is_array( $dimensions ) ? $dimensions : [ $dimensions ],
 		];
 
-		$options = get_option( 'rank_math_google_analytic_profile', [] );
-		if ( ! empty( $options ) && 'all' !== $options['country'] ) {
-			$args['dimensionFilterGroups'] = [
+		$stored  = get_option(
+			'rank_math_google_analytic_profile',
+			[
+				'country'             => '',
+				'profile'             => '',
+				'enable_index_status' => '',
+			]
+		);
+		$country = isset( $args['country'] ) ? $args['country'] : $stored['country'];
+		$profile = isset( $args['profile'] ) ? $args['profile'] : $stored['profile'];
+
+		if ( 'all' !== $country ) {
+			$params['dimensionFilterGroups'] = [
 				[
 					'filters' => [
 						[
 							'dimension'  => 'country',
 							'operator'   => 'equals',
-							'expression' => $options['country'],
+							'expression' => $country,
 						],
 					],
 				],
 			];
 		}
 
-		$default            = trailingslashit( strtolower( home_url() ) );
-		$rank_math_site_url = get_option( 'rank_math_google_analytic_profile', [ 'profile' => $default ] );
-		$rank_math_site_url = empty( $rank_math_site_url['profile'] ) ? $default : $rank_math_site_url['profile'];
+		if ( empty( $profile ) ) {
+			$profile = trailingslashit( strtolower( home_url() ) );
+		}
 
 		$workflow = 'console';
 		$this->set_workflow( $workflow );
 		$response = $this->http_post(
-			'https://www.googleapis.com/webmasters/v3/sites/' . rawurlencode( $rank_math_site_url ) . '/searchAnalytics/query',
-			$args
+			'https://www.googleapis.com/webmasters/v3/sites/' . rawurlencode( $profile ) . '/searchAnalytics/query',
+			$params
 		);
 
 		$this->log_failed_request( $response, $workflow, $start_date, func_get_args() );
 
-		if ( ! $this->is_success() || ! isset( $response['rows'] ) ) {
+		if ( ! $this->is_success() ) {
+			return new WP_Error( 'request_failed', __( 'The Google Search Console request failed.', 'rank-math' ) );
+		}
+
+		if ( ! isset( $response['rows'] ) ) {
 			return false;
 		}
 

@@ -60,7 +60,7 @@ rank_math()->admin->display_admin_header();
 		$( '.toggle-all-capabilities' ).on( 'click', function( e ) {
 			e.preventDefault();
 
-			var $checkboxes = $( this ).closest( '.cmb-row' ).find( 'input.cmb2-option' ),
+			var $checkboxes = $( this ).closest( '.cmb-row' ).find( 'input.cmb2-option:not(#administrator7)' ),
 				should_check = ! $checkboxes.filter(':checked').length;
 
 			$checkboxes.prop( 'checked', should_check );

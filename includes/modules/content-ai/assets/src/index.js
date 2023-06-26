@@ -23,9 +23,22 @@ import {
 /**
  * Internal dependencies
  */
-import ContentAI from './ContentAI'
+import ContentAITab from './ContentAITab'
 import ContentAIIcon from './ContentAIIcon'
 import ContentAnalysis from './ContentAnalysis'
+
+import generateId from '@helpers/generateId'
+import isTinymceActive from '@helpers/isTinymceActive'
+import TagifyField from '@components/TagifyField'
+
+window.rankMath = window.rankMath || {}
+window.rankMath.contentAIHelpers = window.rankMath.contentAIHelpers || {}
+
+window.rankMath.contentAIHelpers = {
+	generateId,
+	isTinymceActive,
+	TagifyField,
+}
 
 const ContentAIButton = () => {
 	const className = classnames( 'button-secondary rank-math-content-ai', {
@@ -43,7 +56,7 @@ const ContentAIButton = () => {
 				jQuery( '.rank-math-content-ai-tab' ).trigger( 'click' )
 			} }
 		>
-			<i className="rm-icon rm-icon-target"></i>
+			<i className="rm-icon rm-icon-content-ai"></i>
 			{ __( 'Content AI', 'rank-math' ) }
 		</Button>
 	)
@@ -61,11 +74,11 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 			name: 'contentAI',
 			title: (
 				<Fragment>
-					<i className="rm-icon rm-icon-target" />
+					<i className="rm-icon rm-icon-content-ai" />
 					<span>{ __( 'Content AI', 'rank-math' ) }</span>
 				</Fragment>
 			),
-			view: ContentAI,
+			view: ContentAITab,
 			className: 'rank-math-content-ai-tab hidden is-active',
 		} )
 
@@ -77,7 +90,7 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 	if ( metaboxElem ) {
 		setTimeout( () => {
 			render(
-				createElement( ContentAI ),
+				createElement( ContentAITab ),
 				metaboxElem
 			)
 		}, 1000 )
@@ -94,7 +107,7 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 				return (
 					<PluginPrePublishPanel
 						title={ __( 'Content AI', 'rank-math' ) }
-						icon="rm-icon rm-icon-target"
+						icon="rm-icon rm-icon-content-ai"
 						initialOpen="true"
 						className="rank-math-content-ai-box"
 					>
@@ -131,9 +144,9 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 					<PluginSidebar
 						name="seo-by-rank-math-content-ai-sidebar"
 						title={ __( 'Content AI', 'rank-math' ) }
-						className="rank-math-sidebar-content-ai-panel"
+						className="rank-math-sidebar-panel rank-math-sidebar-content-ai-panel"
 					>
-						<ContentAI showMinimal={ true } />
+						<ContentAITab />
 					</PluginSidebar>
 				</Fragment>
 			)

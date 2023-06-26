@@ -70,7 +70,7 @@ class Product implements Snippet {
 		$type     = Helper::get_settings( 'titles.knowledgegraph_type' );
 		$seller   = [
 			'@type' => 'person' === $type ? 'Person' : 'Organization',
-			'@id'   => $site_url . '/',
+			'@id'   => trailingslashit( $site_url ),
 			'name'  => $jsonld->get_website_name(),
 			'url'   => $site_url,
 		];

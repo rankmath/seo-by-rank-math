@@ -241,12 +241,10 @@ class Thumbnail_Overlay {
 		}
 
 		$stamp_width = $stamp->getImageWidth();
-
-		$img_width  = $image->getImageWidth();
-		$img_height = $image->getImageHeight();
+		$img_width   = $image->getImageWidth();
 
 		if ( $stamp_width > $img_width ) {
-			$stamp->scaleImage( $img_width, $img_height );
+			$stamp->resizeImage( $img_width, 0, \Imagick::FILTER_LANCZOS, 1 );
 		}
 
 		$margins = $this->get_position_margins_imagick( $position, $image, $stamp );

@@ -32,7 +32,7 @@
 			&:checked {
 				+ label {
 					opacity: 1;
-					color: $color-blue;
+					color: $primary;
 					&:after {
 						display: block;
 					}

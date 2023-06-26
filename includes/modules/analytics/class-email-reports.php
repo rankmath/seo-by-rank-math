@@ -63,6 +63,20 @@ class Email_Reports {
 	private $charts_key = '10042B42-9193-428A-ABA7-5753F3370F84';
 
 	/**
+	 * Graph data.
+	 *
+	 * @var array
+	 */
+	private $graph_data = [];
+
+	/**
+	 * Debug mode.
+	 * 
+	 * @var boolean
+	 */
+	private $debug = false;
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {

@@ -1,0 +1,9 @@
+- Improved: [`%customfield%` variable](https://rankmath.com/kb/variables-in-seo-title-description/#custom-field-advanced) now works on Taxonomy & Author pages
+- Fixed: SEO Analyzer was showing an option to [Enable Auto Update](https://rankmath.com/kb/seo-analysis/#priority) even when Auto-updates were disabled on the site using a function
+- Fixed: [Icon Overlay feature](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails) compatibility issues with sites using the Imagick module
+- Fixed: Incorrect seller ID error in the [Product Schema](https://rankmath.com/kb/product-schema/) on secondary languages
+- Fixed: Timezones in [Sitemap](https://rankmath.com/kb/configure-sitemaps/) were not accurate when using half hours like (+5:30)
+- Fixed: [SEO Score](https://rankmath.com/kb/general-tab/) was shown in Classic Editor even to the users who didn't have the required capabilities
+- Fixed: [404 Monitor](https://rankmath.com/kb/advanced-404-monitor/) log was not including the language slug on multilingual sites
+- Fixed: Redirection with [Contains, Starts With, & Ends with](https://rankmath.com/kb/setting-up-redirections/#contains) was not working well when trailing slash is added in the Source URL
+- Fixed: Incompatibility with the Molongui Authorship plugin

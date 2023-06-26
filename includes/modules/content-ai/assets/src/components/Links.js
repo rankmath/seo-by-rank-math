@@ -25,9 +25,9 @@ const Links = ( props ) => {
 		)
 	}
 
-	forEach( props.caData.data.links, ( value ) => (
+	forEach( props.caData.data.links, ( value, index ) => (
 		links.push(
-			<li>
+			<li key={ index }>
 				<a href={ value } rel="noreferrer" target="_blank">{ value }</a>
 			</li>
 		)

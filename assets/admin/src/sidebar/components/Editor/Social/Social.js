@@ -40,6 +40,9 @@ const EditorSocialTab = () => (
 					className: 'button-twitter',
 				},
 			] }
+			onSelect={ ( tabName ) => {
+				wp.data.dispatch( 'rank-math' ).updateSocialTab( tabName )
+			} }
 		>
 			{ ( tab ) => createElement( tab.view ) }
 		</TabPanel>

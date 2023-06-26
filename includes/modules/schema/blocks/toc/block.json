@@ -10,7 +10,7 @@
 	"editorStyle": "file:./assets/css/toc.css",
 	"attributes": {
 		"title": {
-			"type": "text"
+			"type": "string"
 		},
 		"headings": {
 			"type": "array",
@@ -19,10 +19,10 @@
 			}
 		},
 		"listStyle": {
-			"type": "text"
+			"type": "string"
 		},
 		"titleWrapper": {
-			"type": "text",
+			"type": "string",
 			"default": "h2"
 		},
 		"excludeHeadings": {

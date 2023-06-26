@@ -26,6 +26,17 @@ export function updateSelectedKeyword( keyword ) {
 }
 
 /**
+ * Update social tab.
+ *
+ * @param {Object} tab Active social tab.
+ *
+ * @return {Object} An action for redux.
+ */
+export function updateSocialTab( tab ) {
+	return updateAppUi( 'socialTab', tab )
+}
+
+/**
  * Refresh results.
  *
  * @return {Object} An action for redux.

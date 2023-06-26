@@ -100,7 +100,7 @@ class Content_AI {
 			$tabs,
 			[
 				'content-ai' => [
-					'icon'  => 'rm-icon rm-icon-target',
+					'icon'  => 'rm-icon rm-icon-content-ai',
 					'title' => esc_html__( 'Content AI', 'rank-math' ),
 					/* translators: Link to kb article */
 					'desc'  => sprintf( esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. %s.', 'rank-math' ), '<a href="' . KB::get( 'content-ai-settings', 'Options Panel Content AI Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
@@ -117,7 +117,7 @@ class Content_AI {
 	 * Add link suggestion metabox.
 	 */
 	public function add_content_ai_metabox() {
-		if ( ! $this->can_add_tab() || 'classic' !== Helper::get_current_editor() ) {
+		if ( ! self::can_add_tab() || 'classic' !== Helper::get_current_editor() ) {
 			return;
 		}
 
@@ -125,7 +125,7 @@ class Content_AI {
 		$cmb = new_cmb2_box(
 			[
 				'id'               => $id,
-				'title'            => esc_html__( 'Rank Math Content AI', 'rank-math' ),
+				'title'            => esc_html__( 'Content AI', 'rank-math' ),
 				'object_types'     => array_keys( Helper::get_accessible_post_types() ),
 				'context'          => 'side',
 				'priority'         => 'high',
@@ -146,7 +146,7 @@ class Content_AI {
 	 * @return void
 	 */
 	public function editor_scripts() {
-		if ( ! $this->can_add_tab() ) {
+		if ( ! self::can_add_tab() ) {
 			return;
 		}
 
@@ -294,7 +294,7 @@ class Content_AI {
 	/**
 	 * Whether to load Content AI data.
 	 */
-	private function can_add_tab() {
+	public static function can_add_tab() {
 		return in_array( WordPress::get_post_type(), (array) Helper::get_settings( 'general.content_ai_post_types' ), true );
 	}
 }

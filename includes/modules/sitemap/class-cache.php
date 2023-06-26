@@ -15,6 +15,7 @@ namespace RankMath\Sitemap;
 
 use RankMath\Helper;
 use MyThemeShop\Helpers\WordPress;
+use MyThemeShop\Database\Database;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -256,19 +257,15 @@ class Cache {
 	 * @param null|string $type The type to get the key for. Null for all caches.
 	 */
 	private static function clear_transients( $type = null ) {
-		global $wpdb;
+
 		if ( is_null( $type ) ) {
-			return $wpdb->delete(
-				$wpdb->options,
-				[ 'option_name' => $wpdb->esc_like( '_transient_sitemap_' ) . '%' ],
-				[ '%s' ]
-			);
+			return Database::table( 'options' )
+				->whereLike( 'option_name', '_transient_sitemap_' )
+				->delete();
 		}
 
-		return $wpdb->delete(
-			$wpdb->options,
-			[ 'option_name' => $wpdb->esc_like( '_transient_sitemap_' . $type ) . '%' ],
-			[ '%s' ]
-		);
+		return Database::table( 'options' )
+			->whereLike( 'option_name', '_transient_sitemap_' . $type )
+			->delete();
 	}
 }

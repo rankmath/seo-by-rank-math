@@ -1,195 +1,210 @@
 // SERP Preview
 .components-tab-panel__tab-content .rank-math-tab-content-general {
-    .serp {
-        &-preview {
-            &-title {
-                .seo-score {
-                    display: block;
-                }
+	.serp {
+		&-preview {
+			&-title {
+				.seo-score {
+					display: block;
+				}
 
-                &::before {
-                    font-weight: 500;
+				&::before {
+					font-weight: 500;
 
-                    letter-spacing: 0;
-                }
-            }
-        }
-    }
+					letter-spacing: 0;
+				}
+			}
+		}
+	}
 
-    .serp-result {
-        @include position( absolute, -1px null null 0 );
-    }
+	.serp-result {
+		@include position( absolute, -1px null null 0 );
+	}
 }
 
 .#{$namespace} {
-    // Main Divi SEO Modal (not SERP preview modal)
-    &-rm-modal {
-        .#{$namespace}-tabs {
-            .components-tab-panel {
-                &__tabs {
-                    background: $et-builder-modal-tabs-bg;
+	// Main Divi SEO Modal (not SERP preview modal)
+	&-rm-modal {
+		.#{$namespace}-tabs {
+			.components-tab-panel {
+				&__tabs {
+					background: $et-builder-modal-tabs-bg;
 
-                    justify-content: flex-start;
-                    button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
-                        font-size: 100%;
-                        line-height: 1;
+					justify-content: flex-start;
+					button:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+						font-size: 100%;
+						line-height: 1;
 
-                        display: block;
+						display: block;
 
-                        width: auto;
-                        padding: 13px 20px;
+						width: auto;
+						padding: 13px 20px;
 
-                        transition: background .5s ease-in-out;
-                        vertical-align: baseline;
-                        text-decoration: none;
+						transition: background .5s ease-in-out;
+						vertical-align: baseline;
+						text-decoration: none;
 
-                        color: #fff;
-                        background: transparent;
+						color: #fff;
+						background: transparent;
 
-                        i {
-                            background: transparent;
-                            box-shadow: none;
-                        }
-                        &:hover {
-                            background: $et-builder-modal-tabs-item-hover;
-                            & i {
-                                background: transparent;
-                                box-shadow: none;
-                            }
-                        }
-                        &:not([id]) {
-                            // This is the more icon (+) tab.
-                            margin-left: auto;
-                        }
-                        &:not(.is-active) {
-                            padding: 13px 19px 13px 26px;
-                        }
-                        &.is-active {
-                            margin-bottom: 0;
-                            &,
-                            &:hover {
-                                background: $et-builder-modal-tabs-item-active;
-                            }
-                        }
-                        &::before,
-                        &::after {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
-    }
+						i {
+							background: transparent;
+							box-shadow: none;
+						}
+						&:hover {
+							background: $et-builder-modal-tabs-item-hover;
+							& i {
+								background: transparent;
+								box-shadow: none;
+							}
+						}
+						&:not([id]) {
+							// This is the more icon (+) tab.
+							margin-left: auto;
+						}
+						&:not(.is-active) {
+							padding: 13px 19px 13px 26px;
+						}
+						&.is-active {
+							margin-bottom: 0;
+							&,
+							&:hover {
+								background: $et-builder-modal-tabs-item-active;
+							}
+						}
+						&::before,
+						&::after {
+							display: none;
+						}
+					}
+				}
 
-    // Preview Modal (not SEO modal)
-    &-modal {
-        .components-modal__header {
-            &-heading {
-                padding-bottom: 0;
-            }
-        }
-        .#{$namespace}-tabs {
-            & > .components-tab-panel__tabs {
-                button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
-                    &.is-active::after {
-                        background: $et-builder-blue !important;
-                    }
-                }
-            }
-        }
-    }
+				&__tab-content {
+					.rank-math-ca-credits {
+						right: 15px;
+						margin-top: 10px;
+	
+						color: #fff;
+	
+						button.update-credits {
+							height: auto;
 
-    // Main RM Tabs
-    &-tabs {
-        > .components-tab-panel {
-            &__tab-content {
-                > div > div:first-child {
-                    margin-top: 10px;
+							color: #fff;
+						}
+					}
+				}
+			}
+		}
+	}
 
-                    border-top: 0;
-                    border-bottom: 0;
-                }
-                select,
-                input[type=text] {
-                    min-height: 30px;
-                }
-                textarea {
-                    font-family: inherit;
-                    line-height: 1.42857143;
-                }
-            }
-        }
+	// Preview Modal (not SEO modal)
+	&-modal {
+		.components-modal__header {
+			&-heading {
+				padding-bottom: 0;
+			}
+		}
+		.#{$namespace}-tabs {
+			& > .components-tab-panel__tabs {
+				button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+					&.is-active::after {
+						background: $et-builder-blue !important;
+					}
+				}
+			}
+		}
+	}
 
-        .cmb2-metabox-description {
-            font-weight: 400;
-        }
+	// Main RM Tabs
+	&-tabs {
+		> .components-tab-panel {
+			&__tab-content {
+				> div > div:first-child {
+					margin-top: 10px;
 
-        .#{$namespace}-datepicker > button {
-            color: inherit;
-        }
-    }
+					border-top: 0;
+					border-bottom: 0;
+				}
+				select,
+				input[type=text] {
+					min-height: 30px;
+				}
+				textarea {
+					font-family: inherit;
+					line-height: 1.42857143;
+				}
+			}
+		}
 
-    // Tooltip
-    &-tooltip {
-        label {
-            cursor: pointer;
-            &:before {
-                height: 21px;
+		.cmb2-metabox-description {
+			font-weight: 400;
+		}
 
-                vertical-align: middle;
-            }
-            &:hover {
-                color: #d30c5c;
-            }
-        }
-        input:checked + label {
-            color: #d30c5c;
-        }
-    }
+		.#{$namespace}-datepicker > button {
+			color: inherit;
+		}
+	}
 
-    // Popup
-    &-modal {
+	// Tooltip
+	&-tooltip {
+		label {
+			cursor: pointer;
+			&:before {
+				height: 21px;
 
-        // Tabs
-        .#{$namespace}-tabs > .components-tab-panel {
-            &__tabs {
-                button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
-                    font-size: 13px;
+				vertical-align: middle;
+			}
+			&:hover {
+				color: #d30c5c;
+			}
+		}
+		input:checked + label {
+			color: #d30c5c;
+		}
+	}
 
-                    height: 44px;
+	// Popup
+	&-modal {
 
-                    text-transform: none;
+		// Tabs
+		.#{$namespace}-tabs > .components-tab-panel {
+			&__tabs {
+				button:not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
+					font-size: 13px;
 
-                    &:hover,
-                    &:not(.is-active):hover {
-                        i {
-                            background: transparent;
-                            box-shadow: none;
-                        }
-                    }
+					height: 44px;
 
-                    &.is-active {
-                        box-shadow: none;
+					text-transform: none;
 
-                        &:after {
-                            display: block;
+					&:hover,
+					&:not(.is-active):hover {
+						i {
+							background: transparent;
+							box-shadow: none;
+						}
+					}
 
-                            background: #d30c5c;
-                        }
-                    }
-                }
-            }
-        }
+					&.is-active {
+						box-shadow: none;
 
-        .#{$namespace}-button-devices .components-button.active,
-        .#{$namespace}-button-devices .components-button:hover {
-            background: #f6e7ee!important;
-        }
+						&:after {
+							display: block;
 
-        // Trends Modal.
-        &.#{$namespace}-modal-trends-tool {
-            width: 930px;
-            max-height: 580px;
-        }
-    }
+							background: #d30c5c;
+						}
+					}
+				}
+			}
+		}
+
+		.#{$namespace}-button-devices .components-button.active,
+		.#{$namespace}-button-devices .components-button:hover {
+			background: #f6e7ee!important;
+		}
+
+		// Trends Modal.
+		&.#{$namespace}-modal-trends-tool {
+			width: 930px;
+			max-height: 580px;
+		}
+	}
 }

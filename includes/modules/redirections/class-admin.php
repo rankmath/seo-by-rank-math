@@ -18,7 +18,6 @@ use RankMath\Traits\Hooker;
 use RankMath\Admin\Admin_Helper;
 use MyThemeShop\Admin\Page;
 use MyThemeShop\Helpers\Arr;
-use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\WordPress;
 use MyThemeShop\Helpers\Conditional;
@@ -31,6 +30,62 @@ defined( 'ABSPATH' ) || exit;
 class Admin extends Base {
 
 	use Ajax, Hooker;
+
+	/**
+	 * Module ID.
+	 * 
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory = '';
+
+	/**
+	 * List table object.
+	 * 
+	 * @var object
+	 */
+	public $table;
+
+	/**
+	 * Screen options.
+	 * 
+	 * @var array
+	 */
+	public $screen_options = [];
+
+	/**
+	 * Module page.
+	 * 
+	 * @var object
+	 */
+	public $page;
+
+	/**
+	 * Admin object.
+	 *
+	 * @var Admin
+	 */
+	public $admin;
+
+	/**
+	 * Form object.
+	 *
+	 * @var Form
+	 */
+	public $form;
+
+	/**
+	 * Import/Export object.
+	 *
+	 * @var Import_Export
+	 */
+	public $import_export;
 
 	/**
 	 * The Constructor.

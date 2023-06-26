@@ -70,9 +70,22 @@ class KML_File {
 	 * @return string $xml The sitemap index with the Local SEO Sitemap added.
 	 */
 	public function add_local_sitemap() {
+		$item = $this->do_filter(
+			'sitemap/index/entry',
+			[
+				'loc'     => Router::get_base_url( 'local-sitemap.xml' ),
+				'lastmod' => $this->get_modified_date(),
+			],
+			'local',
+		);
+
+		if ( ! $item ) {
+			return '';
+		}
+
 		$xml  = $this->newline( '<sitemap>', 1 );
-		$xml .= $this->newline( '<loc>' . htmlspecialchars( Router::get_base_url( 'local-sitemap.xml' ) ) . '</loc>', 2 );
-		$xml .= $this->newline( '<lastmod>' . htmlspecialchars( $this->get_modified_date() ) . '</lastmod>', 2 );
+		$xml .= $this->newline( '<loc>' . htmlspecialchars( $item['loc'] ) . '</loc>', 2 );
+		$xml .= empty( $item['lastmod'] ) ? '' : $this->newline( '<lastmod>' . htmlspecialchars( $item['lastmod'] ) . '</lastmod>', 2 );
 		$xml .= $this->newline( '</sitemap>', 1 );
 
 		return $xml;
@@ -84,14 +97,28 @@ class KML_File {
 	 * @return string $urlset Local SEO Sitemap XML content.
 	 */
 	public function local_sitemap_content() {
-		$urlset = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-			<url>
-				<loc>' . htmlspecialchars( Router::get_base_url( 'locations.kml' ) ) . '</loc>
-				<lastmod>' . htmlspecialchars( $this->get_modified_date() ) . '</lastmod>
-			</url>
-		</urlset>';
+		$item = $this->do_filter(
+			'sitemap/entry',
+			[
+				'loc' => Router::get_base_url( 'locations.kml' ),
+				'mod' => $this->get_modified_date(),
+			],
+			'local',
+			[]
+		);
 
-		return $urlset;
+		if ( ! $item ) {
+			return '';
+		}
+
+		$output  = $this->newline( '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', 1 );
+		$output .= $this->newline( '<url>', 2 );
+		$output .= $this->newline( '<loc>' . htmlspecialchars( $item['loc'] ) . '</loc>', 3 );
+		$output .= empty( $item['mod'] ) ? '' : $this->newline( '<lastmod>' . htmlspecialchars( $item['mod'] ) . '</lastmod>', 3 );
+		$output .= $this->newline( '</url>', 2 );
+		$output .= $this->newline( '</urlset>', 1 );
+
+		return $output;
 	}
 
 	/**

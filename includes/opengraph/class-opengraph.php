@@ -101,7 +101,7 @@ class OpenGraph {
 		}
 
 		if ( is_front_page() ) {
-			return Helper::get_settings( 'titles.homepage_facebook_title' );
+			return Helper::replace_vars( Helper::get_settings( 'titles.homepage_facebook_title' ) );
 		}
 
 		if ( is_category() || is_tax() || is_tag() ) {
@@ -124,7 +124,7 @@ class OpenGraph {
 			$desc = Post::get_meta( $key, Post::get_page_id() );
 			$desc = '' !== $desc ? $desc : $this->fallback_description( 'get_the_excerpt' );
 		} elseif ( is_front_page() ) {
-			$desc = Helper::get_settings( 'titles.homepage_facebook_description' );
+			$desc = Helper::replace_vars( Helper::get_settings( 'titles.homepage_facebook_description' ) );
 		} elseif ( is_category() || is_tag() || is_tax() ) {
 			$desc = Term::get_meta( $key );
 			$desc = '' !== $desc ? $desc : $this->fallback_description( 'term_description' );

@@ -106,44 +106,6 @@ div.rank-math-ca-keywords-wrapper {
 			top: 23px;
 		}
 
-		.rank-math-ca-credits {
-			position: absolute;
-			top: 0;
-			right: 0;
-
-			.update-credits {
-				position: absolute;
-				z-index: inherit;
-				left: -22px;
-
-				display: none;
-
-				margin: 0;
-				padding: 0;
-
-				box-shadow: none;
-
-				i {
-					font-size: 12px;
-
-					display: flex;
-
-					transform: scaleX(-1);
-
-					align-items: center;
-
-					&:before {
-						margin-bottom: 2px;
-						margin-left: 3px;
-					}
-				}
-
-				&.loading i:before {
-					animation: spin 1s infinite linear;
-				}
-			}
-		}
-
 		input {
 			font-size: 1rem;
 			font-weight: 600;
@@ -165,9 +127,5 @@ div.rank-math-ca-keywords-wrapper {
 		&[disabled] {
 			opacity: .5!important;
 		}
-	}
-
-	&:hover .rank-math-ca-credits-wrapper .update-credits {
-		display: inline;
 	}
 }
