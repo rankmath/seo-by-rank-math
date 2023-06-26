@@ -60,7 +60,13 @@ $is_pro_active           = defined( 'RANK_MATH_PRO_FILE' );
 $is_ga4                  = ! Str::starts_with( 'UA-', $analytics['property_id'] );
 ?>
 <input type="hidden" class="cmb2-id-check-all-services" value="<?php echo $is_profile_connected && $is_analytics_connected ? '1' : '0'; ?>" />
-
+<div class="connect-actions">
+	<div class="notice rank-math-notice notice-error rank-math-hidden-search-console">
+		<p>
+			<?php echo esc_html__( 'Check the Google account connected. It seems like there is no Google analytics enabled with the account', 'rank-math' ); ?>
+		</p>
+	</div>
+</div>
 <div class="disconnect-wrap">
 	<a href="<?php echo wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ); ?>" class="button button-link rank-math-reconnect-google"><?php esc_html_e( 'Reconnect', 'rank-math' ); ?></a> <span>|</span> <button class="button button-link rank-math-disconnect-google"><?php esc_html_e( 'Disconnect', 'rank-math' ); ?></button>
 </div>

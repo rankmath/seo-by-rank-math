@@ -25,6 +25,10 @@ class SearchConsole {
 
 			ajax( 'google_check_all_services' ).done( ( response ) => {
 				this.response = response
+				this.response = response
+				if( 'undefined' !== typeof this.response && !this.response.hasAnalytics){
+					this.hasAnalytics.css("display", "block");
+				}
 				this.fillSelect()
 				this.accordions.removeClass( 'locked' )
 			} )
@@ -41,7 +45,7 @@ class SearchConsole {
 		this.accordions = jQuery( '.rank-math-accordion' )
 		this.countryConsole = jQuery( '#site-console-country' )
 		this.countryAnalytics = jQuery( '#site-analytics-country' )
-
+		this.hasAnalytics = jQuery( '.rank-math-hidden-search-console' )
 		jQuery( '.cmb2_select' ).on( 'select2:open', function() {
 			document.querySelector( '.select2-search__field' ).focus()
 		} )

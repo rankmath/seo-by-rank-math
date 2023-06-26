@@ -6107,3 +6107,6 @@ msgstr ""
 
 msgid "11-50 Positions"
 msgstr ""
+
+msgid "Check the Google account connected. It seems like there is no Google analytics enabled with the account"
+msgstr 
