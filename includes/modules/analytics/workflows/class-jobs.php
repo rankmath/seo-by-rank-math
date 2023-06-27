@@ -76,6 +76,10 @@ class Jobs {
 	 * Fetch missing console data.
 	 */
 	public function data_fetch() {
+		// Delete the previous events.
+		DB::purge_scheduler_actions();
+		// Find pending schedules.
+		DB::cancel_pending_scheduler_actions();
 		$this->check_for_missing_dates( 'console' );
 	}
 

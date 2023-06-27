@@ -63,6 +63,27 @@ class DB {
 	}
 
 	/**
+	 * Purge Scheduler Actions
+	 */
+	public static function purge_scheduler_actions() {
+		$check_date = date_i18n( 'Y-m-d H:i:s', strtotime( '- 14 days' ) );
+		$table      = Database::table( 'actionscheduler_actions' );
+		$table->whereLike( 'hook', 'rank_math/analytics' );
+		$table->where( 'scheduled_date_gmt', ' < ', $check_date )->delete();
+	}
+
+	/**
+	 * Find pending action and cancel it.
+	 */
+	public static function cancel_pending_scheduler_actions() {
+		$table = Database::table( 'actionscheduler_actions' );
+		$table->set( [ 'status' => 'canceled' ] );
+		$table->whereLike( 'hook', 'rank_math/analytics' );
+		$table->where( 'status', 'pending' )->update();
+	}
+
+
+	/**
 	 * Delete a record.
 	 *
 	 * @param  int $days Decide whether to delete all or delete 90 days data.
