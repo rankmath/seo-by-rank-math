@@ -1,0 +1,41 @@
+version: "2"
+checks:
+  argument-count:
+    enabled: false
+  similar-code:
+    enabled: false
+  method-count:
+    config:
+      threshold: 30
+  method-lines:
+    config:
+      threshold: 50
+  file-lines:
+    config:
+      threshold: 500
+plugins:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+      - php
+  fixme:
+    enabled: true
+  phpmd:
+    enabled: true
+    config:
+      rulesets: "phpmd.xml"
+
+exclude_patterns:
+- tests/*
+- vendor/*
+- assets/admin/css/*
+- assets/admin/js/*
+- assets/front/css/*
+- assets/front/js/*
+- assets/vendor/*
+- includes/**/index.php
+- includes/updates/*
+- includes/modules/redirections/views/*
+- includes/modules/schema/assets/src/Functions/schemaMaps.js

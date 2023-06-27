@@ -1,0 +1,9 @@
+/assets/admin/js/**
+/assets/front/js/**
+/assets/vendor/**
+**/*.min.js
+**/*.build.js
+**/node_modules/**
+**/vendor/**
+node_modules
+vendor
