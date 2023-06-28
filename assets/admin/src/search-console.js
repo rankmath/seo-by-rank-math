@@ -10,6 +10,7 @@ import { get, map, isEmpty, isUndefined } from 'lodash'
  * Internal Dependencies
  */
 import ajax from '@helpers/ajax'
+import addNotice from '@helpers/addNotice'
 import { __ } from '@wordpress/i18n'
 
 class SearchConsole {
@@ -25,6 +26,9 @@ class SearchConsole {
 
 			ajax( 'google_check_all_services' ).done( ( response ) => {
 				this.response = response
+				if ( response && ! response.success ) {
+					addNotice( response.error, 'error', this.divtoShowerror )
+				}
 				this.fillSelect()
 				this.accordions.removeClass( 'locked' )
 			} )

@@ -99,7 +99,7 @@ $console_classes = Helper::classnames(
 		</div>
 
 
-		<div class="cmb-row cmb-type-toggle">
+		<div class="cmb-row cmb-type-toggle rank_math_no_gsc_ga">
 			<div class="cmb-td">
 				<label class="cmb2-toggle">
 					<input type="checkbox" class="regular-text notrack" name="enable-index-status" id="enable-index-status" value="on"<?php checked( $is_index_status_enabled ); ?> <?php echo disabled( ! $is_profile_connected ) ?>>

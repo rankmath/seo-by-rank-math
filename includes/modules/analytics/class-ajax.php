@@ -364,6 +364,8 @@ class AJAX {
 		if ( ! empty( $result['accounts'] ) ) {
 			$result['hasAnalytics']         = true;
 			$result['hasAnalyticsProperty'] = $this->is_site_in_analytics( $result['accounts'] );
+		} else {
+			$this->error( esc_html__( 'Check the Google account connected. It seems like there is no Google analytics enabled with the account', 'rank-math-pro' ) );
 		}
 
 		$result = apply_filters( 'rank_math/analytics/check_all_services', $result );
