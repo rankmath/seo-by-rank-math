@@ -3,7 +3,7 @@
  * Rank Math SEO Plugin.
  *
  * @package      RANK_MATH
- * @copyright    Copyright (C) 2019-2021, Rank Math - support@rankmath.com
+ * @copyright    Copyright (C) 2019-2023, Rank Math - support@rankmath.com
  * @link         https://rankmath.com
  * @since        0.9.0
  *
