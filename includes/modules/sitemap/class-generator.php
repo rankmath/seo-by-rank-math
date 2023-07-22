@@ -171,10 +171,34 @@ class Generator extends XML {
 				continue;
 			}
 
-			return $this->get_sitemap( $links, $type, $page );
+			// Custom entries.
+			if ( 'custom' === $type ) {
+				$this->max_entries = $provider->max_entries;
+				return $this->custom_user_sitemap( $links, $type, $page );
+			} else {
+				return $this->get_sitemap( $links, $type, $page );
+			}
 		}
 
 		return $this->do_filter( "sitemap/{$type}/content", '' );
+	}
+
+	/**
+	 * Custom User sitemap
+	 *
+	 * @param array  $links Links.
+	 * @param string $type  Custom type.
+	 * @param int    $page  Current page of the sitemap.
+	 */
+	public function custom_user_sitemap( $links, $type, $page ) {
+		$max_entries = $this->max_entries;
+		$offset      = ( $page - 1 ) * $max_entries;
+		$total_count = count( $links );
+		if ( $total_count > $offset ) {
+			$new_links = array_slice( $links, $offset, $max_entries );
+			return $this->get_sitemap( $new_links, $type, $page );
+		}
+		return '';
 	}
 
 	/**
