@@ -350,4 +350,12 @@ class Helper {
 	public static function is_image_url( $image_url ) {
 		return filter_var( $image_url, FILTER_VALIDATE_URL ) && preg_match( '/\.(jpg|jpeg|png|gif|webp)$/i', $image_url );
 	}
+
+	/**
+	 * Enable big selects.
+	 */
+	public static function enable_big_selects_for_queries() {
+		global $wpdb;
+		$wpdb->query( 'SET SESSION SQL_BIG_SELECTS=1' );
+	}
 }
