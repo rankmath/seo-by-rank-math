@@ -7,7 +7,6 @@ import classnames from 'classnames'
  * WordPress dependencies
  */
 import { withSelect, dispatch } from '@wordpress/data'
-
 /**
  * Internal dependencies
  */
