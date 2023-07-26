@@ -318,6 +318,9 @@ class Block_HowTo extends Block {
 			}
 		} elseif ( empty( $text ) ) {
 			$schema_step['text'] = $name;
+			if ( false === $this->add_step_image( $schema_step, $step ) ) {
+				$this->add_step_image_from_content( $schema_step, $step );
+			}
 		} else {
 			$schema_step['name'] = $name;
 			if ( ! empty( $text ) ) {
