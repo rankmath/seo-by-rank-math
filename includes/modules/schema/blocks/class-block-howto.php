@@ -243,21 +243,20 @@ class Block_HowTo extends Block {
 				);
 			}
 
-			if ( ! empty( $step['content'] ) ) {
-				if ( ! empty( $step['imageUrl'] ) ) {
-					$step_image = '<img src="' . esc_url( $step['imageUrl'] ) . '" />';
-				} else {
-					$step_image = self::get()->get_image( $step, $size_slug, '' );
-				}
-
-				$out[] = sprintf(
-					'<div class="rank-math-step-content %2$s">%4$s%3$s</div>',
-					$title_wrapper,
-					$content_css_classes,
-					self::get()->normalize_text( $step['content'], 'howto' ),
-					$step_image
-				);
+			$step_content = ! empty( $step['content'] ) ? self::get()->normalize_text( $step['content'], 'howto' ) : '';
+			if ( ! empty( $step['imageUrl'] ) ) {
+				$step_image = '<img src="' . esc_url( $step['imageUrl'] ) . '" />';
+			} else {
+				$step_image = self::get()->get_image( $step, $size_slug, '' );
 			}
+
+			$out[] = sprintf(
+				'<div class="rank-math-step-content %2$s">%4$s%3$s</div>',
+				$title_wrapper,
+				$content_css_classes,
+				$step_content,
+				$step_image
+			);
 
 			$out[] = sprintf( '</%1$s>', $item_tag );
 		}
