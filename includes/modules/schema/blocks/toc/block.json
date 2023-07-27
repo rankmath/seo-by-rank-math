@@ -9,20 +9,16 @@
 	"editorScript": "file:./assets/js/index.js",
 	"editorStyle": "file:./assets/css/toc.css",
 	"attributes": {
-		"title": {
-			"type": "text"
-		},
-		"headings": {
-			"type": "array",
-			"items": {
-				"type": "object"
-			}
+		"postId": {
+			"type": "string"
+		},"title": {
+			"type": "string"
 		},
 		"listStyle": {
-			"type": "text"
+			"type": "string"
 		},
 		"titleWrapper": {
-			"type": "text",
+			"type": "string",
 			"default": "h2"
 		},
 		"excludeHeadings": {
