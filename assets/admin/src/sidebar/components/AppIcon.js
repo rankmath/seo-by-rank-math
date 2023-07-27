@@ -6,7 +6,7 @@ import classnames from 'classnames'
 /**
  * WordPress dependencies
  */
-import { withSelect, dispatch } from '@wordpress/data'
+import { withSelect } from '@wordpress/data'
 
 /**
  * Internal dependencies
@@ -14,14 +14,14 @@ import { withSelect, dispatch } from '@wordpress/data'
 import AnalysisScore from '@components/AnalysisScore'
 import getClassByScore from '@helpers/getClassByScore'
 
-const RankMathIcon = ( { isLoaded, score, toggleEditor } ) => {
+const RankMathIcon = ( { isLoaded, score } ) => {
 	const classes = classnames( 'rank-math-toolbar-score', {
 		[ getClassByScore( score ) ]: true,
 		loading: ! isLoaded,
 	} )
 
 	return (
-		<div className={ classes } onClick={ toggleEditor }>
+		<div className={ classes }>
 			<i className="rm-icon rm-icon-rank-math"></i>
 			<AnalysisScore />
 		</div>
@@ -34,8 +34,5 @@ export default withSelect( ( select ) => {
 	return {
 		isLoaded: repo.isLoaded(),
 		score: repo.getAnalysisScore(),
-		toggleEditor() {
-			dispatch( 'core/editor' ).editPost({meta:{rankmath:'saving_post'}})
-		},
 	}
 } )( RankMathIcon )

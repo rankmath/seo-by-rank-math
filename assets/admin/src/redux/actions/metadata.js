@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { doAction, applyFilters } from '@wordpress/hooks'
-
+import { dispatch } from '@wordpress/data'
 /**
  * Update the app data in redux.
  *
@@ -14,6 +14,10 @@ import { doAction, applyFilters } from '@wordpress/hooks'
  * @return {Object} An action for redux.
  */
 export function updateAppData( key, value, metaKey = false, metaValue = null ) {
+	if ( metaKey && metaKey !== 'rank_math_seo_score' ){
+		dispatch( 'core/editor' ).editPost({meta:{rankmath:'saving_post'}})
+	}
+
 	value = applyFilters( 'rank_math_sanitize_data', value, key, metaKey )
 	if ( null !== metaValue ) {
 		metaValue = applyFilters(
