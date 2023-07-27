@@ -304,23 +304,14 @@ class Block_HowTo extends Block {
 
 		if ( empty( $name ) ) {
 			$schema_step['text'] = '';
-
-			if ( false === $this->add_step_image( $schema_step, $step ) ) {
-				$this->add_step_image_from_content( $schema_step, $step );
-			}
-
 			if ( empty( $text ) && empty( $schema_step['image'] ) ) {
 				return false;
 			}
-
 			if ( ! empty( $text ) ) {
 				$schema_step['text'] = $text;
 			}
 		} elseif ( empty( $text ) ) {
 			$schema_step['text'] = $name;
-			if ( false === $this->add_step_image( $schema_step, $step ) ) {
-				$this->add_step_image_from_content( $schema_step, $step );
-			}
 		} else {
 			$schema_step['name'] = $name;
 			if ( ! empty( $text ) ) {
@@ -331,10 +322,10 @@ class Block_HowTo extends Block {
 					],
 				];
 			}
+		}
 
-			if ( false === $this->add_step_image( $schema_step, $step ) ) {
-				$this->add_step_image_from_content( $schema_step, $step );
-			}
+		if ( false === $this->add_step_image( $schema_step, $step ) ) {
+			$this->add_step_image_from_content( $schema_step, $step );
 		}
 
 		return $schema_step;
