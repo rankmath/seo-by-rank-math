@@ -14,7 +14,9 @@ import { dispatch } from '@wordpress/data'
  * @return {Object} An action for redux.
  */
 export function updateAppData( key, value, metaKey = false, metaValue = null ) {
-	if ( metaKey && metaKey !== 'rank_math_seo_score' ){
+	const saveButton = document.querySelector( '.editor-post-publish-button' );
+	const get_attr = saveButton ? saveButton.getAttribute('aria-disabled') : false;
+	if ( get_attr === 'true' && metaKey && metaKey !== 'rank_math_seo_score' ) {
 		dispatch( 'core/editor' ).editPost({meta:{rankmath:'saving_post'}})
 	}
 
