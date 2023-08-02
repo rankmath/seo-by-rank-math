@@ -94,8 +94,8 @@ class Paper {
 	/**
 	 * Setup paper.
 	 */
-	private function setup() {
-		foreach ( $this->get_papers() as $class_name => $is_valid ) {
+	public function setup( $object = null, $object_type = null ) {
+		foreach ( $this->get_papers( $object_type ) as $class_name => $is_valid ) {
 			if ( $this->do_filter( 'paper/is_valid/' . strtolower( $class_name ), $is_valid ) ) {
 				$class_name  = '\\RankMath\\Paper\\' . $class_name;
 				$this->paper = new $class_name();
@@ -107,7 +107,11 @@ class Paper {
 			return;
 		}
 
-		if ( Post::is_home_static_page() ) {
+		if ( ! is_null( $object ) ) {
+			$post = Post::get( $object );
+			$this->paper->set_object( $post->get_object() );
+			return $this->paper;
+		} else if ( Post::is_home_static_page() ) {
 			$this->paper->set_object( get_queried_object() );
 		} elseif ( Post::is_simple_page() ) {
 			$post = Post::get( Post::get_page_id() );
@@ -120,17 +124,28 @@ class Paper {
 	 *
 	 * @return array
 	 */
-	private function get_papers() {
+	private function get_papers( $object_type ) {
+		$post = $taxonomy = false;
+		if ( ! is_null( $object_type ) ) {
+			switch( $object_type ) {
+				case 'post':
+					$post = true;
+					break;
+				case 'taxonomy':
+					$taxonomy = true;
+					break;	
+			}
+		}
 		return $this->do_filter(
 			'paper/hash',
 			[
 				'Search'    => is_search(),
 				'Shop'      => Post::is_shop_page(),
-				'Singular'  => Post::is_home_static_page() || Post::is_simple_page(),
+				'Singular'  => Post::is_home_static_page() || Post::is_simple_page() || $post,
 				'Blog'      => Post::is_home_posts_page(),
 				'Author'    => is_author() || ( Helper::is_module_active( 'bbpress' ) && function_exists( 'bbp_is_single_user' ) && bbp_is_single_user() ),
 				'Date'      => is_date(),
-				'Taxonomy'  => is_category() || is_tag() || is_tax(),
+				'Taxonomy'  => is_category() || is_tag() || is_tax() || $taxonomy,
 				'Archive'   => is_archive(),
 				'Error_404' => is_404(),
 				'Misc'      => true,
