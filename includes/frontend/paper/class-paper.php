@@ -107,11 +107,27 @@ class Paper {
 			return;
 		}
 
-		if ( ! is_null( $object ) ) {
-			$post = Post::get( $object );
-			$this->paper->set_object( $post->get_object() );
-			return $this->paper;
-		} else if ( Post::is_home_static_page() ) {
+		if ( ! is_null( $object_type ) && ! is_null( $object ) ) {
+			switch( $object_type ) {
+				case 'taxonomy':
+					$taxonomy = Taxonomy::get( $object );
+					$this->paper->set_object( $taxonomy );
+					return $this->paper;
+					break;	
+				case 'post':
+					$post = Post::get( $object );
+					$this->paper->set_object( $post->get_object() );
+					return $this->paper;
+					break;
+				case 'author':
+					$post = Author::get( $object );
+					$this->paper->set_object( $post->get_object() );
+					return $this->paper;
+					break;
+			}
+		}
+
+		if ( Post::is_home_static_page() ) {
 			$this->paper->set_object( get_queried_object() );
 		} elseif ( Post::is_simple_page() ) {
 			$post = Post::get( Post::get_page_id() );
@@ -125,7 +141,7 @@ class Paper {
 	 * @return array
 	 */
 	private function get_papers( $object_type ) {
-		$post = $taxonomy = false;
+		$post = $taxonomy = $author = false;
 		if ( ! is_null( $object_type ) ) {
 			switch( $object_type ) {
 				case 'post':
@@ -134,6 +150,9 @@ class Paper {
 				case 'taxonomy':
 					$taxonomy = true;
 					break;	
+				case 'author':
+					$author = true;
+					break;
 			}
 		}
 		return $this->do_filter(
@@ -143,7 +162,7 @@ class Paper {
 				'Shop'      => Post::is_shop_page(),
 				'Singular'  => Post::is_home_static_page() || Post::is_simple_page() || $post,
 				'Blog'      => Post::is_home_posts_page(),
-				'Author'    => is_author() || ( Helper::is_module_active( 'bbpress' ) && function_exists( 'bbp_is_single_user' ) && bbp_is_single_user() ),
+				'Author'    => is_author() || ( Helper::is_module_active( 'bbpress' ) && function_exists( 'bbp_is_single_user' ) && bbp_is_single_user() ) || $author,
 				'Date'      => is_date(),
 				'Taxonomy'  => is_category() || is_tag() || is_tax() || $taxonomy,
 				'Archive'   => is_archive(),

@@ -21,12 +21,40 @@ defined( 'ABSPATH' ) || exit;
 class Author implements IPaper {
 
 	/**
+	 * User object.
+	 *
+	 * @var User
+	 */
+	private $object;
+
+	/**
+	 * Retrieve User instance.
+	 *
+	 * @param  User|object|int $user_id User to get using (int) user_id.
+	 * @return User|false User object, false otherwise.
+	 */
+	public static function get( $user_id = 0 ) {
+		$user = User::get( $user_id );
+		return $user;
+	}
+
+	/**
+	 * Set user object.
+	 *
+	 * @param User $object Current user object.
+	 */
+	public function set_object( $object ) {
+		$this->object = $object;
+	}
+
+	/**
 	 * Get the SEO title set in the user metabox.
 	 *
 	 * @return string
 	 */
 	public function title() {
-		$title = User::get_meta( 'title', $this->get_user_id() );
+		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
+		$title = User::get_meta( 'title', $user_id );
 		if ( '' !== $title ) {
 			return $title;
 		}
@@ -40,7 +68,8 @@ class Author implements IPaper {
 	 * @return string
 	 */
 	public function description() {
-		$description = User::get_meta( 'description', $this->get_user_id() );
+		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
+		$description = User::get_meta( 'description', $user_id );
 		if ( '' !== $description ) {
 			return $description;
 		}
@@ -54,7 +83,8 @@ class Author implements IPaper {
 	 * @return string
 	 */
 	public function robots() {
-		$robots = Paper::robots_combine( User::get_meta( 'robots', $this->get_user_id() ) );
+		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
+		$robots = Paper::robots_combine( User::get_meta( 'robots', $user_id ) );
 
 		if ( empty( $robots ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
 			$robots = Paper::robots_combine( Helper::get_settings( 'titles.author_robots' ), true );
@@ -69,7 +99,8 @@ class Author implements IPaper {
 	 * @return array
 	 */
 	public function advanced_robots() {
-		$robots = Paper::advanced_robots_combine( User::get_meta( 'advanced_robots', $this->get_user_id() ) );
+		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
+		$robots = Paper::advanced_robots_combine( User::get_meta( 'advanced_robots', $user_id ) );
 
 		if ( empty( $robots ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
 			$robots = Paper::advanced_robots_combine( Helper::get_settings( 'titles.author_advanced_robots' ), true );
@@ -84,9 +115,10 @@ class Author implements IPaper {
 	 * @return array
 	 */
 	public function canonical() {
+		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
 		return [
-			'canonical'          => get_author_posts_url( $this->get_user_id(), get_query_var( 'author_name' ) ),
-			'canonical_override' => User::get_meta( 'canonical_url', $this->get_user_id() ),
+			'canonical'          => get_author_posts_url( $user_id, get_query_var( 'author_name' ) ),
+			'canonical_override' => User::get_meta( 'canonical_url', $user_id ),
 		];
 	}
 
@@ -96,7 +128,8 @@ class Author implements IPaper {
 	 * @return string
 	 */
 	public function keywords() {
-		return User::get_meta( 'focus_keyword', $this->get_user_id() );
+		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
+		return User::get_meta( 'focus_keyword', $user_id );
 	}
 
 	/**

@@ -12,7 +12,7 @@ namespace RankMath\Paper;
 
 use RankMath\Term;
 use RankMath\Helper;
-
+use WP_Term;
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -21,12 +21,43 @@ defined( 'ABSPATH' ) || exit;
 class Taxonomy implements IPaper {
 
 	/**
+	 * Term object.
+	 *
+	 * @var WP_Term
+	 */
+	private $object;
+
+	/**
+	 * Retrieve Term instance.
+	 *
+	 * @param  WP_Term|object|int $term_id Term to get using (int) term_id.
+	 * @return Term|false Term object, false otherwise.
+	 */
+	public static function get( $term_id = 0 ) {
+		$term = Term::get( $term_id );
+		if ( false === $term ) {
+			return null;
+		}
+		$_term = WP_Term::get_instance( $term_id );
+		return $_term;
+	}
+
+	/**
+	 * Set term object.
+	 *
+	 * @param WP_Term $object Current term object.
+	 */
+	public function set_object( $object ) {
+		$this->object = $object;
+	}
+
+	/**
 	 * Retrieves the SEO title for a taxonomy.
 	 *
 	 * @return string The SEO title for the taxonomy.
 	 */
 	public function title() {
-		$object = get_queried_object();
+		$object = $this->object ? $this->object : get_queried_object();
 		if ( ! is_object( $object ) ) {
 			return Paper::get_from_options( '404_title', [], esc_html__( 'Page not found', 'rank-math' ) );
 		}
@@ -45,7 +76,7 @@ class Taxonomy implements IPaper {
 	 * @return string The SEO description for the taxonomy.
 	 */
 	public function description() {
-		$object      = get_queried_object();
+		$object = $this->object ? $this->object : get_queried_object();
 		$description = Term::get_meta( 'description', $object, $object->taxonomy );
 		if ( '' !== $description ) {
 			return $description;
@@ -60,7 +91,7 @@ class Taxonomy implements IPaper {
 	 * @return string The robots for the taxonomy
 	 */
 	public function robots() {
-		$object = get_queried_object();
+		$object = $this->object ? $this->object : get_queried_object();
 		$robots = Paper::robots_combine( Term::get_meta( 'robots', $object ) );
 
 		if ( is_object( $object ) && empty( $robots ) && Helper::get_settings( "titles.tax_{$object->taxonomy}_custom_robots" ) ) {
@@ -80,7 +111,7 @@ class Taxonomy implements IPaper {
 	 * @return array The advanced robots for the taxonomy
 	 */
 	public function advanced_robots() {
-		$object = get_queried_object();
+		$object = $this->object ? $this->object : get_queried_object();
 		$robots = Paper::advanced_robots_combine( Term::get_meta( 'advanced_robots', $object ) );
 
 		if ( is_object( $object ) && empty( $robots ) && Helper::get_settings( "titles.tax_{$object->taxonomy}_custom_robots" ) ) {
@@ -96,7 +127,7 @@ class Taxonomy implements IPaper {
 	 * @return array
 	 */
 	public function canonical() {
-		$object = get_queried_object();
+		$object = $this->object ? $this->object : get_queried_object();
 
 		if ( empty( $object ) || Term::is_multiple_terms_query() ) {
 			return [];
@@ -116,7 +147,7 @@ class Taxonomy implements IPaper {
 	 * @return string The focus keywords.
 	 */
 	public function keywords() {
-		$object = get_queried_object();
+		$object = $this->object ? $this->object : get_queried_object();
 
 		if ( empty( $object ) || Term::is_multiple_terms_query() ) {
 			return '';
