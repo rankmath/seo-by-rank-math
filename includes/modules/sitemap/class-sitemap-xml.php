@@ -166,7 +166,7 @@ class Sitemap_XML extends XML {
 	 * @param integer $current_page The part that should be generated.
 	 */
 	public function set_n( $current_page ) {
-		if ( is_scalar( $current_page ) ) {
+		if ( is_scalar( $current_page ) && ! empty( $current_page ) ) {
 			$this->maybe_redirect( $current_page );
 			$this->current_page = max( intval( $current_page ), 1 );
 		}
