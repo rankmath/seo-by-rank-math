@@ -53,8 +53,8 @@ class Author implements IPaper {
 	 * @return string
 	 */
 	public function title() {
-		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
-		$title = User::get_meta( 'title', $user_id );
+		$user_id = $this->get_user_id();
+		$title   = User::get_meta( 'title', $user_id );
 		if ( '' !== $title ) {
 			return $title;
 		}
@@ -68,7 +68,7 @@ class Author implements IPaper {
 	 * @return string
 	 */
 	public function description() {
-		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
+		$user_id     = $this->get_user_id();
 		$description = User::get_meta( 'description', $user_id );
 		if ( '' !== $description ) {
 			return $description;
@@ -83,8 +83,8 @@ class Author implements IPaper {
 	 * @return string
 	 */
 	public function robots() {
-		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
-		$robots = Paper::robots_combine( User::get_meta( 'robots', $user_id ) );
+		$user_id = $this->get_user_id();
+		$robots  = Paper::robots_combine( User::get_meta( 'robots', $user_id ) );
 
 		if ( empty( $robots ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
 			$robots = Paper::robots_combine( Helper::get_settings( 'titles.author_robots' ), true );
@@ -99,8 +99,8 @@ class Author implements IPaper {
 	 * @return array
 	 */
 	public function advanced_robots() {
-		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
-		$robots = Paper::advanced_robots_combine( User::get_meta( 'advanced_robots', $user_id ) );
+		$user_id = $this->get_user_id();
+		$robots  = Paper::advanced_robots_combine( User::get_meta( 'advanced_robots', $user_id ) );
 
 		if ( empty( $robots ) && Helper::get_settings( 'titles.author_custom_robots' ) ) {
 			$robots = Paper::advanced_robots_combine( Helper::get_settings( 'titles.author_advanced_robots' ), true );
@@ -115,7 +115,7 @@ class Author implements IPaper {
 	 * @return array
 	 */
 	public function canonical() {
-		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
+		$user_id = $this->get_user_id();
 		return [
 			'canonical'          => get_author_posts_url( $user_id, get_query_var( 'author_name' ) ),
 			'canonical_override' => User::get_meta( 'canonical_url', $user_id ),
@@ -128,7 +128,7 @@ class Author implements IPaper {
 	 * @return string
 	 */
 	public function keywords() {
-		$user_id = $this->object ? $this->object->ID : $this->get_user_id();
+		$user_id = $this->get_user_id();
 		return User::get_meta( 'focus_keyword', $user_id );
 	}
 
@@ -138,6 +138,9 @@ class Author implements IPaper {
 	 * @return int
 	 */
 	private function get_user_id() {
+		if ( ! empty( $this->object ) ) {
+			return $this->object->ID;
+		}
 		$author_id = get_query_var( 'author' );
 		if ( $author_id ) {
 			return $author_id;
