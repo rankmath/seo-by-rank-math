@@ -30,7 +30,7 @@ class Taxonomy implements IPaper {
 	/**
 	 * Retrieve Term instance.
 	 *
-	 * @param  WP_Term|object|int $term_id Term to get using (int) term_id.
+	 * @param int $term_id Term to get using (int) term_id.
 	 * @return Term|false Term object, false otherwise.
 	 */
 	public static function get( $term_id = 0 ) {
