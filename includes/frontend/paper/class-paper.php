@@ -111,7 +111,9 @@ class Paper {
 		}
 
 		// Set object.
-		$this->set_paper_object( $object, $object_type );
+		if ( ! is_null( $object_type ) && ! is_null( $object ) ) {
+			return $this->set_paper_object( $object, $object_type );
+		}
 		if ( Post::is_home_static_page() ) {
 			$this->paper->set_object( get_queried_object() );
 		} elseif ( Post::is_simple_page() ) {
@@ -128,10 +130,6 @@ class Paper {
 	 * @return array
 	 */
 	private function set_paper_object( $object, $object_type ) {
-		if ( is_null( $object_type ) && is_null( $object ) ) {
-			return;
-		}
-
 		switch ( $object_type ) {
 			case 'taxonomy':
 				$taxonomy = Taxonomy::get( $object );
