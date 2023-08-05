@@ -20,6 +20,22 @@ defined( 'ABSPATH' ) || exit;
 class Archive implements IPaper {
 
 	/**
+	 * Archive object.
+	 *
+	 * @var Archive
+	 */
+	private $object;
+
+	/**
+	 * Set Archive object.
+	 *
+	 * @param Archive $object Current Archive object.
+	 */
+	public function set_object( $object ) {
+		$this->object = $object;
+	}
+
+	/**
 	 * Build the title for a post type archive.
 	 *
 	 * @return string
@@ -97,6 +113,9 @@ class Archive implements IPaper {
 	 * @return string
 	 */
 	private function get_queried_post_type() {
+		if ( ! empty( $this->object ) ) {
+			return $this->object;
+		}
 		$post_type = get_query_var( 'post_type' );
 		if ( is_array( $post_type ) ) {
 			$post_type = reset( $post_type );

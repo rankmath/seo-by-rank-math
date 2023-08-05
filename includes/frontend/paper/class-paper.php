@@ -143,6 +143,10 @@ class Paper {
 				$post = Author::get( $object );
 				$this->paper->set_object( $post->get_object() );
 				break;
+			case 'archive':
+				$archive = new Archive();
+				$archive->set_object( $object );
+				break;
 		}
 		return $this->paper;
 	}
@@ -164,7 +168,7 @@ class Paper {
 				'Author'    => is_author() || ( Helper::is_module_active( 'bbpress' ) && function_exists( 'bbp_is_single_user' ) && bbp_is_single_user() ) || 'author' === $object_type,
 				'Date'      => is_date(),
 				'Taxonomy'  => is_category() || is_tag() || is_tax() || 'taxonomy' === $object_type,
-				'Archive'   => is_archive(),
+				'Archive'   => is_archive() || 'archive' === $object_type,
 				'Error_404' => is_404(),
 				'Misc'      => true,
 			]
