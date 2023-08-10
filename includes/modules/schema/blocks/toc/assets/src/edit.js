@@ -29,12 +29,19 @@ export default ( {
 	setAttributes,
 } ) => {
 	const blockProps = useBlockProps()
-
 	// State to monitor edit heading links.
 	const [ edit, toggleEdit ] = useState( false )
 	const [ excludeHeading, toggleExcludeHeading ] = useState( {} )
 	if ( ! attributes.listStyle ) {
-		setAttributes( { listStyle: rankMath.listStyle } )
+		setAttributes( { listStyle: ! isUndefined( rankMath.listStyle ) ? rankMath.listStyle : 'ul' } )
+	}
+
+	if ( ! attributes.title ) {
+		setAttributes( { title: 'Table of Contents' } )
+	}
+
+	if ( ! attributes.excludeHeadings ) {
+		setAttributes( { excludeHeadings: [] } )
 	}
 
 	const ListStyle = attributes.listStyle
