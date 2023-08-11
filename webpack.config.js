@@ -64,6 +64,10 @@ const alias = {
 		__dirname,
 		'./includes/modules/content-ai/assets/src'
 	),
+	'components-ui': resolve(
+		__dirname,
+		'./includes/modules/components/assets/src'
+	),
 }
 
 const entryPoints = {
@@ -136,6 +140,9 @@ const entryPoints = {
 	'content-ai': {
 		'content-ai': './includes/modules/content-ai/assets/src/index.js',
 	},
+	'components': {
+		'components': './includes/modules/components/assets/src/index.js',
+	},
 }
 
 const paths = {
@@ -156,6 +163,7 @@ const paths = {
 	'version-control': './includes/modules/version-control/assets/js',
 	'content-ai': './includes/modules/content-ai/assets/js',
 	toc: './includes/modules/schema/blocks/toc/assets/js',
+	components: './includes/modules/components/assets/js',
 }
 
 module.exports = ( env ) => {

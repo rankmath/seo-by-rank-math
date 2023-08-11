@@ -100,6 +100,7 @@ return array(
     'RankMath\\CMB2' => $baseDir . '/includes/class-cmb2.php',
     'RankMath\\Common' => $baseDir . '/includes/class-common.php',
     'RankMath\\Compatibility' => $baseDir . '/includes/class-compatibility.php',
+    'RankMath\\Components\\WP_Components' => $baseDir . '/includes/modules/components/class-components.php',
     'RankMath\\ContentAI\\Content_AI' => $baseDir . '/includes/modules/content-ai/class-content-ai.php',
     'RankMath\\ContentAI\\Rest' => $baseDir . '/includes/modules/content-ai/class-rest.php',
     'RankMath\\Dashboard_Widget' => $baseDir . '/includes/admin/class-dashboard-widget.php',
