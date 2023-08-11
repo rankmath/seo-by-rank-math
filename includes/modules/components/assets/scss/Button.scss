@@ -1,0 +1,13 @@
+@import '@wordpress/components/build-style/style.css';
+
+.components-button.is-large {
+  height: 48px;
+  line-height: 22px;
+  font-size: 15px;
+  padding: 12px 20px;
+}
+
+.components-button.is-primary:disabled,
+.components-button.is-primary[aria-disabled="true"] {
+  opacity: 0.3;
+}
