@@ -54,11 +54,7 @@ class ContentProcessor {
 	 * @param string $content The content.
 	 */
 	public function process( $post_id, $content ) {
-		if ( in_array( 'themify-builder/themify-builder.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-			// plugin is activated.
-			$themify = new \Themify_Builder();
-			$content = $themify->get_builder_output( $post_id );
-		}
+		$content = apply_filters( 'rank_math/links/content', $content, $post_id );
 		$links  = $this->extract( $content );
 		$counts = [
 			'internal_link_count' => 0,
