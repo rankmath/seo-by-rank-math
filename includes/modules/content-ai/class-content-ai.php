@@ -117,7 +117,7 @@ class Content_AI {
 	 * Add link suggestion metabox.
 	 */
 	public function add_content_ai_metabox() {
-		if ( ! $this->can_add_tab() || 'classic' !== Helper::get_current_editor() ) {
+		if ( ! self::can_add_tab() || 'classic' !== Helper::get_current_editor() ) {
 			return;
 		}
 
@@ -146,7 +146,7 @@ class Content_AI {
 	 * @return void
 	 */
 	public function editor_scripts() {
-		if ( ! $this->can_add_tab() ) {
+		if ( ! self::can_add_tab() ) {
 			return;
 		}
 
@@ -294,7 +294,7 @@ class Content_AI {
 	/**
 	 * Whether to load Content AI data.
 	 */
-	private function can_add_tab() {
+	public static function can_add_tab() {
 		return in_array( WordPress::get_post_type(), (array) Helper::get_settings( 'general.content_ai_post_types' ), true );
 	}
 }

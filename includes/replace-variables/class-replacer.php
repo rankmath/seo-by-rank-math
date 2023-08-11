@@ -73,6 +73,13 @@ class Replacer {
 	public static $content_processed = [];
 
 	/**
+	 * Exclude variables.
+	 *
+	 * @var array
+	 */
+	public $exclude = [];
+
+	/**
 	 *  Replace `%variables%` with context-dependent value.
 	 *
 	 * @param string $string  The string containing the %variables%.

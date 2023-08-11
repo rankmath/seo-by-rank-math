@@ -118,6 +118,12 @@ import jQuery from 'jquery'
 		},
 
 		open: function( editorId, url, text ) {
+			if ( 'acf-link-textarea' === editorId ) {
+				$( '.wp-link-title-field' ).hide()
+			} else {
+				$( '.wp-link-title-field' ).show()
+			}
+
 			let ed
 			const $body = $( document.body )
 

@@ -61,6 +61,13 @@ class Notification {
 	const CAPABILITY_ANY = '';
 
 	/**
+	 * The notification message.
+	 *
+	 * @var string
+	 */
+	public $message = '';
+
+	/**
 	 * Contains optional arguments:
 	 *
 	 * -             type: The notification type, i.e. 'updated' or 'error'

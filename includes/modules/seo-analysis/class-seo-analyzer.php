@@ -406,8 +406,8 @@ class SEO_Analyzer {
 
 		if ( ! $this->analyse_subpage ) {
 			$this->run_local_tests();
-			update_option( 'rank_math_seo_analysis_results', $this->results );
-			update_option( 'rank_math_seo_analysis_date', time() );
+			update_option( 'rank_math_seo_analysis_results', $this->results, false );
+			update_option( 'rank_math_seo_analysis_date', time(), false );
 		}
 
 		/**
@@ -483,7 +483,7 @@ class SEO_Analyzer {
 
 		$results['auto_update']['status']  = 'ok';
 		$results['auto_update']['message'] = __( 'Rank Math auto-update option is enabled on your site.', 'rank-math' );
-		update_option( 'rank_math_seo_analysis_results', $results );
+		update_option( 'rank_math_seo_analysis_results', $results, false );
 	}
 
 	/**

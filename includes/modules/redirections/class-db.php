@@ -81,6 +81,7 @@ class DB {
 		if ( ! empty( $args['search'] ) ) {
 			$table->whereLike( 'sources', $args['search'] );
 			$table->orWhereLike( 'url_to', $args['search'] );
+			$table->where( 'status', $status[0], $status[1] );
 		}
 
 		if ( ! empty( $args['orderby'] ) && in_array( $args['orderby'], [ 'id', 'url_to', 'header_code', 'hits', 'created', 'last_accessed' ], true ) ) {
@@ -182,15 +183,20 @@ class DB {
 
 		foreach ( $sources as $source ) {
 			$compare_uri = $uri;
-			if ( 'exact' === $source['comparison'] ) {
+			$comparison  = $source['comparison'];
+			if ( 'exact' === $comparison ) {
 				$compare_uri = untrailingslashit( $compare_uri );
 			}
 
-			if ( 'exact' === $source['comparison'] && isset( $source['ignore'] ) && 'case' === $source['ignore'] && strtolower( $source['pattern'] ) === strtolower( $compare_uri ) ) {
+			if ( in_array( $comparison, [ 'contains', 'start', 'end' ], true ) ) {
+				$source['pattern'] = untrailingslashit( $source['pattern'] );
+			}
+
+			if ( 'exact' === $comparison && isset( $source['ignore'] ) && 'case' === $source['ignore'] && strtolower( $source['pattern'] ) === strtolower( $compare_uri ) ) {
 				return true;
 			}
 
-			if ( Str::comparison( self::get_clean_pattern( $source['pattern'], $source['comparison'] ), $compare_uri, $source['comparison'] ) ) {
+			if ( Str::comparison( self::get_clean_pattern( $source['pattern'], $comparison ), $compare_uri, $comparison ) ) {
 				return true;
 			}
 		}
@@ -310,7 +316,7 @@ class DB {
 	/**
 	 * Get stats for dashboard widget.
 	 *
-	 * @return int
+	 * @return object
 	 */
 	public static function get_stats() {
 		return self::table()->selectCount( '*', 'total' )->selectSum( 'hits', 'hits' )->one();

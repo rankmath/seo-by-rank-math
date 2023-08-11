@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2023-01-30 12:54+0000\n"
+"POT-Creation-Date: 2023-08-11 10:11+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -282,6 +282,9 @@ msgid "Additional profile URLs"
 msgstr ""
 
 msgid "The canonical URL you entered does not seem to be a valid URL. Please double check it in the SEO meta box &raquo; Advanced tab."
+msgstr ""
+
+msgid "Please update to WordPress v6.0 or higher as Rank Math SEO will soon stop supporting lower versions."
 msgstr ""
 
 msgid "Copy Link URL to Clipboard"
@@ -907,10 +910,10 @@ msgstr ""
 msgid "Page %s"
 msgstr ""
 
-msgid "Search Engine Optimization by Rank Math PRO - https://s.rankmath.com/home"
+msgid "Search Engine Optimization by Rank Math PRO - https://rankmath.com/"
 msgstr ""
 
-msgid "Search Engine Optimization by Rank Math - https://s.rankmath.com/home"
+msgid "Search Engine Optimization by Rank Math - https://rankmath.com/"
 msgstr ""
 
 msgid "Rank Math WordPress SEO plugin"
@@ -1973,18 +1976,6 @@ msgstr ""
 msgid "Rank Math: Introducing SEO Performance Reports via Email. %1$sClick here to enable it%2$s."
 msgstr ""
 
-#. translators: %1$s: post type label, %2$s: edit redirection URL.
-#. translators: %1$s: term name, %2$s: edit redirection URL.
-msgid "SEO Notice: you just changed the slug of a %1$s and Rank Math has automatically created a redirection. You can edit the redirection by <a href=\"%2$s\">clicking here</a>."
-msgstr ""
-
-#. translators: 1. url to new screen, 2. old trashed post permalink
-msgid "<strong>SEO Notice:</strong> A previously published post has been moved to trash. You may redirect it <code>%2$s</code> to <a href=\"%1$s\">new url</a>."
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
 msgid "Import Settings"
 msgstr ""
 
@@ -2558,6 +2549,9 @@ msgstr ""
 msgid "Clear Log"
 msgstr ""
 
+msgid "View"
+msgstr ""
+
 msgid "Delete"
 msgstr ""
 
@@ -2580,6 +2574,9 @@ msgid "Hits"
 msgstr ""
 
 msgid "Access Time"
+msgstr ""
+
+msgid "Data import will not work for this service as sufficient permissions are not given."
 msgstr ""
 
 msgid "Data fetching cancelled."
@@ -2784,6 +2781,13 @@ msgid "Sorry, only authenticated users can research the keyword."
 msgstr ""
 
 msgid "Content AI is not enabled on this Post type."
+msgstr ""
+
+#. translators: link to the update page.
+msgid "There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature."
+msgstr ""
+
+msgid "Please update"
 msgstr ""
 
 msgid "No data found for the researched keyword."
@@ -3166,6 +3170,12 @@ msgstr ""
 msgid "Deactivate"
 msgstr ""
 
+msgid "The redirection you are trying to update may cause an infinite loop. Please check the source and destination URLs."
+msgstr ""
+
+msgid "The redirection you are trying to create may cause an infinite loop. Please check the source and destination URLs. The redirection has been deactivated."
+msgstr ""
+
 msgid "Please add at least one valid source URL."
 msgstr ""
 
@@ -3252,9 +3262,6 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
-msgid "View"
-msgstr ""
-
 msgid "From"
 msgstr ""
 
@@ -3283,6 +3290,11 @@ msgid "Inactive"
 msgstr ""
 
 msgid "Empty Trash"
+msgstr ""
+
+#. translators: %1$s: post type label, %2$s: edit redirection URL.
+#. translators: %1$s: term name, %2$s: edit redirection URL.
+msgid "SEO Notice: you just changed the slug of a %1$s and Rank Math has automatically created a redirection. You can edit the redirection by <a href=\"%2$s\">clicking here</a>."
 msgstr ""
 
 #. translators: 1. url to new screen, 2. old trashed post permalink
@@ -3586,6 +3598,9 @@ msgid "Enable automatic updates to ensure you are always using the latest versio
 msgstr ""
 
 msgid "Verify auto-updates are enabled for Rank Math"
+msgstr ""
+
+msgid "Site wide plugins auto-update option is disabled on your site."
 msgstr ""
 
 #. translators: placeholder is an activate button.
@@ -4906,6 +4921,9 @@ msgstr ""
 msgid "Disconnect"
 msgstr ""
 
+msgid "Test Connections"
+msgstr ""
+
 msgid "Site"
 msgstr ""
 
@@ -4984,6 +5002,9 @@ msgstr ""
 msgid "Type here to search..."
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
 msgid "Hovering over a row in the list will display action links that allow you to manage the item. You can perform the following actions:"
 msgstr ""
 
@@ -5057,6 +5078,15 @@ msgid "Ignore Query Parameters"
 msgstr ""
 
 msgid "Turn ON to ignore all query parameters (the part after a question mark in a URL) when logging 404 errors."
+msgstr ""
+
+msgid "The Google Analytics request failed."
+msgstr ""
+
+msgid "The Google Analytics Console request failed."
+msgstr ""
+
+msgid "The Google Search Console request failed."
 msgstr ""
 
 msgid "Given"
@@ -5760,7 +5790,7 @@ msgstr ""
 msgid "Exclude User Roles"
 msgstr ""
 
-msgid "Selected roles will be excluded in the sitemap."
+msgid "Selected roles will be excluded from the XML &amp; HTML sitemaps."
 msgstr ""
 
 msgid "Exclude Users"
@@ -5897,6 +5927,9 @@ msgstr ""
 msgid "Auto Update"
 msgstr ""
 
+msgid "You cannot turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released, because site wide plugins auto-update option is disabled on your site."
+msgstr ""
+
 msgid "Turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released. The beta versions will never install automatically."
 msgstr ""
 
@@ -5913,6 +5946,9 @@ msgid "Rank Math will not auto-update because you have rolled back to a previous
 msgstr ""
 
 msgid "Beta Opt-in"
+msgstr ""
+
+msgid "You cannot turn on the Beta Tester feature because site wide plugins auto-update option is disabled on your site."
 msgstr ""
 
 msgid "You can take part in shaping Rank Math by test-driving the newest features and letting us know what you think. Turn on the Beta Tester feature to get notified about new beta releases. The beta version will not install automatically and you always have the option to ignore it."

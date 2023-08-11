@@ -61,6 +61,13 @@ class Request {
 	private $is_notice_added = false;
 
 	/**
+	 * Access token.
+	 *
+	 * @var string
+	 */
+	public $token = '';
+
+	/**
 	 * Set workflow
 	 */
 	public function set_workflow( $workflow = '' ) {
@@ -163,10 +170,6 @@ class Request {
 			return;
 		}
 
-		if ( $this->have_buffer_time() ) {
-			return;
-		}
-
 		if ( ! $this->refresh_token() || ! is_scalar( $this->token ) ) {
 			if ( ! $this->is_notice_added ) {
 				$this->is_notice_added = true;
@@ -238,11 +241,11 @@ class Request {
 	 * @param string $response make_request response.
 	 */
 	private function log_response( $http_verb = '', $url = '', $args = [], $response = [], $formatted_response = '', $params = [], $text = '' ) {
+		do_action( 'rank_math/analytics/log', $http_verb, $url, $args, $response, $formatted_response, $params );
+
 		if ( ! apply_filters( 'rank_math/analytics/log_response', false ) ) {
 			return;
 		}
-
-		do_action( 'rank_math/analytics/log', $http_verb, $url, $args, $response, $formatted_response, $params );
 
 		$uploads = wp_upload_dir();
 		$file    = $uploads['basedir'] . '/rank-math/analytics-debug.log';
@@ -363,58 +366,24 @@ class Request {
 			return true;
 		}
 
-		$token = $this->get_refresh_token();
-		if ( ! $token ) {
+		$response = $this->get_refresh_token();
+		if ( ! $response ) {
+			return false;
+		}
+
+		if ( false === $response['success'] ) {
 			return false;
 		}
 
 		$tokens = Authentication::tokens();
 
 		// Save new token.
-		$this->token            = $token;
-		$tokens['expire']       = time() + 3600;
-		$tokens['access_token'] = $token;
+		$this->token            = $response['access_token'];
+		$tokens['expire']       = $response['expire'];
+		$tokens['access_token'] = $response['access_token'];
 		Authentication::tokens( $tokens );
 
-		$this->set_buffer_time();
-
 		return true;
-	}
-
-	/**
-	 * Set buffer time.
-	 *
-	 * @param int $buffer_time The buffer time to hold the request until the new token generate.
-	 */
-	protected function set_buffer_time( $buffer_time = 120 ) {
-		update_option( 'rank_math_google_api_buffer_time', time() + $buffer_time );
-	}
-
-	/**
-	 * Check buffer time.
-	 *
-	 * @return boolean
-	 */
-	protected function have_buffer_time() {
-		$tokens      = Authentication::tokens();
-		$buffer_time = get_option( 'rank_math_google_api_buffer_time', '' );
-		// Set buffer time only once before 2 min token expiry.
-		if ( empty( $buffer_time ) && $tokens['expire'] && time() > ( $tokens['expire'] - 120 ) ) {
-			$this->set_buffer_time();
-			return true;
-		}
-
-		if ( empty( $buffer_time ) ) {
-			return false;
-		}
-
-		// Check the current time exceed the buffer time.
-		if ( time() <= $buffer_time ) {
-			return true;
-		}
-
-		delete_option( 'rank_math_google_api_buffer_time' );
-		return false;
 	}
 
 	/**
@@ -428,12 +397,21 @@ class Request {
 			return false;
 		}
 
-		$response = wp_remote_get( Authentication::get_auth_app_url() . '/refresh.php?code=' . $tokens['refresh_token'] );
+		$response = wp_remote_get(
+			add_query_arg(
+				[
+					'code'   => $tokens['refresh_token'],
+					'format' => 'json',
+				],
+				Authentication::get_auth_app_url() . '/refresh.php'
+			)
+		);
+
 		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
 			return false;
 		}
 
-		$response = wp_remote_retrieve_body( $response );
+		$response = json_decode( wp_remote_retrieve_body( $response ), true );
 		if ( empty( $response ) ) {
 			return false;
 		}
@@ -447,11 +425,6 @@ class Request {
 	 * @return boolean Whether the token was revoked successfully.
 	 */
 	public function revoke_token() {
-		$tokens = Authentication::tokens();
-		$this->http_post(
-			Security::add_query_arg_raw( [ 'token' => $tokens['access_token'] ], 'https://oauth2.googleapis.com/revoke' )
-		);
-
 		Authentication::tokens( false );
 		delete_option( 'rank_math_google_analytic_profile' );
 		delete_option( 'rank_math_google_analytic_options' );

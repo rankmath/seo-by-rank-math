@@ -25,6 +25,20 @@ class Add_Attributes {
 	use Hooker;
 
 	/**
+	 * Stores the image alt format if it is set.
+	 *
+	 * @var string|false
+	 */
+	public $is_alt;
+
+	/**
+	 * Stores the image title format if it is set.
+	 *
+	 * @var string|false
+	 */
+	public $is_title;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {

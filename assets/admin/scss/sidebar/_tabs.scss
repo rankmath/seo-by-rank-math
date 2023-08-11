@@ -150,7 +150,7 @@
     }
 }
 
-.components-tab-panel__tab-content,
+.#{$namespace}-sidebar-panel,
 .#{$namespace}-modal {
     .components-panel__body,
     .components-modal__content {

@@ -105,7 +105,8 @@ class Table extends List_Table {
 	 * @param object $item The current item.
 	 */
 	protected function column_uri( $item ) {
-		$out = esc_html( $item['uri_decoded'] ) . $this->column_actions( $item );
+		$link = '<a href="' . esc_url( home_url( $item['uri'] ) ) . '" target="_blank" title="' . esc_attr__( 'View', 'rank-math' ) . '">' . esc_html( $item['uri_decoded'] ) . '</a>';
+		$out  = $link . $this->column_actions( $item );
 		return $this->do_filter( '404_monitor/list_table_column', $out, $item, 'uri' );
 	}
 
@@ -141,6 +142,11 @@ class Table extends List_Table {
 	 */
 	public function column_actions( $item ) {
 		$actions = [];
+
+		$actions['view'] = sprintf(
+			'<a href="%s" target="_blank">' . esc_html__( 'View', 'rank-math' ) . '</a>',
+			esc_url( home_url( $item['uri'] ) )
+		);
 
 		if ( Helper::get_module( 'redirections' ) ) {
 			$this->add_redirection_actions( $item, $actions );

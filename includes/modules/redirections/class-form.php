@@ -231,6 +231,16 @@ class Form {
 		$values = $cmb->get_sanitized_values( $_POST );
 
 		$redirection = Redirection::from( $values );
+
+		if ( $redirection->is_infinite_loop() ) {
+			if ( ! $redirection->get_id() ) {
+				Helper::add_notification( __( 'The redirection you are trying to create may cause an infinite loop. Please check the source and destination URLs. The redirection has been deactivated.', 'rank-math' ), [ 'type' => 'error' ] );
+				$redirection->set_status( 'inactive' );
+			} else {
+				Helper::add_notification( __( 'The redirection you are trying to update may cause an infinite loop. Please check the source and destination URLs.', 'rank-math' ), [ 'type' => 'error' ] );
+			}
+		}
+
 		if ( false === $redirection->save() ) {
 			Helper::add_notification( __( 'Please add at least one valid source URL.', 'rank-math' ), [ 'type' => 'error' ] );
 			Helper::redirect( Param::post( '_wp_http_referer', false ) );

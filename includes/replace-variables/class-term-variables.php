@@ -118,9 +118,7 @@ class Term_Variables extends Basic_Variables {
 	 * @return string|null
 	 */
 	public function get_custom_term( $taxonomy ) {
-		global $post;
-
-		return Str::is_non_empty( $taxonomy ) ? $this->get_terms( $post->ID, $taxonomy, true, [], 'name' ) : null;
+		return Str::is_non_empty( $taxonomy ) ? $this->get_terms( $this->args->ID, $taxonomy, true, [], 'name' ) : null;
 	}
 
 	/**
@@ -131,8 +129,6 @@ class Term_Variables extends Basic_Variables {
 	 * @return string|null
 	 */
 	public function get_custom_term_desc( $taxonomy ) {
-		global $post;
-
-		return Str::is_non_empty( $taxonomy ) ? $this->get_terms( $post->ID, $taxonomy, true, [], 'description' ) : null;
+		return Str::is_non_empty( $taxonomy ) ? $this->get_terms( $this->args->ID, $taxonomy, true, [], 'description' ) : null;
 	}
 }

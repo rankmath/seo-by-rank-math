@@ -42,6 +42,7 @@ class Role_Manager extends Base {
 		$this->action( 'cmb2_admin_init', 'register_form' );
 		add_filter( 'cmb2_override_option_get_rank-math-role-manager', [ '\RankMath\Helper', 'get_roles_capabilities' ] );
 		$this->action( 'admin_post_rank_math_handle_capabilities', 'handle_form' );
+		$this->filter( 'cmb2_list_input_attributes', 'input_attributes', 10, 4 );
 
 		if ( $this->page->is_current_page() ) {
 			add_action( 'admin_enqueue_scripts', [ 'CMB2_Hookup', 'enqueue_cmb_css' ], 25 );
@@ -142,5 +143,40 @@ class Role_Manager extends Base {
 
 		Helper::redirect( Helper::get_admin_url( 'role-manager' ) );
 		exit;
+	}
+
+	/**
+	 * Update checkbox input attributes
+	 *
+	 * @param array  $args              The array of attribute arguments.
+	 * @param array  $type_defaults     The array of default values.
+	 * @param array  $field             The `CMB2_Field` object.
+	 * @param object $field_type_object This `CMB2_Types` object.
+	 * @return array                  Parsed and filtered arguments.
+	 */
+	public function input_attributes( $args, $type_defaults, $field, $types ) {
+		if ( ! isset( $type_defaults['class'] ) || ! isset( $type_defaults['name'] ) || ! isset( $args['label'] ) ) {
+			return $args;
+		}
+
+		$classes = [];
+
+		if ( isset( $args['class'] ) ) {
+			$classes[] = $args['class'];
+		}
+
+		$classes[] = $type_defaults['class'];
+		$classes[] = implode(
+			'-',
+			[
+				$type_defaults['class'],
+				$type_defaults['name'],
+				sanitize_title_with_dashes( $args['label'] ),
+			]
+		);
+
+		$args['class'] = implode( ' ', $classes );
+
+		return $args;
 	}
 }

@@ -14,7 +14,6 @@ use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Module\Base;
 use MyThemeShop\Admin\Page;
-use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Arr;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\WordPress;
@@ -25,6 +24,34 @@ defined( 'ABSPATH' ) || exit;
  * Admin class.
  */
 class Admin extends Base {
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory;
+
+	/**
+	 * WP_List_Table class name.
+	 * 
+	 * @var string
+	 */
+	public $table;
+
+	/**
+	 * Screen options.
+	 *
+	 * @var array
+	 */
+	public $screen_options = [];
+
+	/**
+	 * Page object.
+	 *
+	 * @var Page
+	 */
+	public $page;
 
 	/**
 	 * The Constructor.

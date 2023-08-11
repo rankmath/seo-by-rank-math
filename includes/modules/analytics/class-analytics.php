@@ -32,10 +32,38 @@ defined( 'ABSPATH' ) || exit;
 class Analytics extends Base {
 
 	/**
+	 * Module ID.
+	 * 
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory = '';
+
+	/**
+	 * Module help.
+	 * 
+	 * @var array
+	 */
+	public $help = [];
+
+	/**
+	 * Module page.
+	 * 
+	 * @var object
+	 */
+	public $page;
+
+	/**
 	 * The Constructor
 	 */
 	public function __construct() {
-		if ( Conditional::is_heartbeat() ) {
+		if ( Conditional::is_heartbeat() || ! Helper::has_cap( 'analytics' ) ) {
 			return;
 		}
 
@@ -304,6 +332,7 @@ class Analytics extends Base {
 			'rank-math-analytics',
 			$uri . '/assets/js/stats.js',
 			[
+				'lodash',
 				'wp-components',
 				'wp-element',
 				'wp-i18n',

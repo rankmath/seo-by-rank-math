@@ -56,6 +56,7 @@ class DataCollector {
 		this.saveRedirection = this.saveRedirection.bind( this )
 		this.saveSchemas = this.saveSchemas.bind( this )
 		this.subscribeToElementor()
+		addAction( 'rank_math_elementor_before_save', 'rank-math', this.beforeSave );
 
 		setTimeout( this.elementorPreviewLoaded.bind( this ), 5000 )
 	}
@@ -265,10 +266,19 @@ class DataCollector {
 
 		this.subscriber = debounce( this.refresh, 500 )
 		subscribe( this.subscriber )
-		elementor.saver.on( 'before:save', this.savePost )
-		elementor.saver.on( 'before:save', this.saveRedirection )
-		elementor.saver.on( 'before:save', this.saveSchemas )
 		elementor.settings.page.model.on( 'change', this.subscriber )
+	}
+
+	/**
+	 * Before save hook
+	 *
+	 * @param {object} args The hook arguments.
+	 * @return {object} The hook result.
+	 */
+	beforeSave( args, result ) {
+		window.rankMathDataCollector.savePost()
+		window.rankMathDataCollector.saveRedirection()
+		window.rankMathDataCollector.saveSchemas()
 	}
 
 	/**

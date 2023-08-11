@@ -8,7 +8,7 @@ import jQuery from 'jquery'
  */
 import { dispatch } from '@wordpress/data'
 import { MediaUpload } from '@wordpress/media-utils'
-import { addAction, addFilter } from '@wordpress/hooks'
+import { addAction, addFilter, doAction } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -73,10 +73,13 @@ jQuery( function() {
 		$e.components
 			.get( 'panel/elements' )
 			.addTab( 'rank-math', { title: 'SEO' } )
-
-		window.rankMathEditor.setup( new DataCollector() )
+		
+		window.rankMathDataCollector = new DataCollector()
+		window.rankMathEditor.setup( window.rankMathDataCollector )
 		dispatch( 'rank-math' ).refreshResults()
 	} )
+
+	
 } )
 
 jQuery( window ).on( 'elementor:init', function() {
@@ -84,4 +87,31 @@ jQuery( window ).on( 'elementor:init', function() {
 		'panel/elements/regionViews',
 		ElementorAddRegion
 	)
+
+	/**
+	 * @copyright Copyright (C) Elementor
+	 * The following code is a derivative work of the code from the Elementor(https://github.com/elementor/elementor/), which is licensed under GPL v3.
+	 *
+	 * @link https://github.com/elementor/elementor/issues/20055#issuecomment-1282415610
+	 */
+	class RankMathElementorUpdaterBeforeSave extends $e.modules.hookUI.Before {
+		getCommand() {
+			return 'document/save/save';
+		}
+	
+		getId() {
+			return 'custom-updater-before-save';
+		}
+	
+		getConditions( args ) {
+			return true;
+		}
+	
+		apply( args, result ) {
+			doAction( 'rank_math_elementor_before_save', args, result )
+		}
+	}
+
+	$e.hooks.registerUIBefore( new RankMathElementorUpdaterBeforeSave() );
+	
 } )

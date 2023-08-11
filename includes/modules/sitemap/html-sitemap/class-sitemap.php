@@ -11,6 +11,7 @@
 namespace RankMath\Sitemap\Html;
 
 use RankMath\Helper;
+use RankMath\Sitemap\Providers\Taxonomy;
 use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Cache;
 
@@ -19,9 +20,23 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Sitemap class.
  */
-class Sitemap {
+class Sitemap extends Taxonomy {
 
 	use Hooker;
+
+	/**
+	 * Generators.
+	 *
+	 * @var array
+	 */
+	private $generators;
+
+	/**
+	 * Cache.
+	 *
+	 * @var object
+	 */
+	private $cache;
 
 	/**
 	 * Constructor.
@@ -96,6 +111,14 @@ class Sitemap {
 	public function get_output() {
 		$post_types = self::get_post_types();
 		$taxonomies = self::get_taxonomies();
+
+		/**
+		 * Filter the setting of excluding empty terms from the XML sitemap.
+		 *
+		 * @param boolean $exclude        Defaults to true.
+		 * @param array   $taxonomies     Array of names for the taxonomies being processed.
+		 */
+
 		$show_dates = Helper::get_settings( 'sitemap.html_sitemap_show_dates' );
 		$output     = [];
 
@@ -112,16 +135,27 @@ class Sitemap {
 			$output[] = $sitemap;
 		}
 
-		foreach ( $taxonomies as $taxonomy ) {
-			$cached = $this->get_cache( $taxonomy );
-			if ( ! empty( $cached ) ) {
-				$output[] = $cached;
-				continue;
-			}
+		if ( ! empty( $taxonomies ) ) {
+			foreach ( $taxonomies as $taxonomy => $object ) {
 
-			$sitemap = $this->get_generator( 'terms' )->generate_sitemap( $taxonomy, $show_dates );
-			$this->set_cache( $taxonomy, $sitemap );
-			$output[] = $sitemap;
+				$cached = $this->get_cache( $taxonomy );
+				if ( ! empty( $cached ) ) {
+					$output[] = $cached;
+					continue;
+				}
+
+				$hide_empty = ! Helper::get_settings( 'sitemap.tax_' . $taxonomy . '_include_empty' );
+				$sitemap    = $this->get_generator( 'terms' )->generate_sitemap(
+					$taxonomy,
+					$show_dates,
+					[
+						'hide_empty' => $hide_empty,
+						'exclude'    => wp_parse_id_list( Helper::get_settings( 'sitemap.exclude_terms' ) ),
+					]
+				);
+				$this->set_cache( $taxonomy, $sitemap );
+				$output[] = $sitemap;
+			}
 		}
 
 		if ( $this->should_show_author_sitemap() ) {
@@ -197,7 +231,7 @@ class Sitemap {
 				continue;
 			}
 
-			$taxonomies[] = $taxonomy->name;
+			$taxonomies[ $taxonomy->name ] = $taxonomy;
 		}
 
 		/**
@@ -210,6 +244,8 @@ class Sitemap {
 
 	/**
 	 * Show sitemap on a page (after content).
+	 *
+	 * @param mixed $content The page content.
 	 */
 	public function show_on_page( $content ) {
 		if ( ! is_page() ) {

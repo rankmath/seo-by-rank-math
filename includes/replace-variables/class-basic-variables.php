@@ -26,6 +26,27 @@ class Basic_Variables extends Cache {
 	 * @var array
 	 */
 	protected $counters = [];
+	
+	/**
+	 * Is on post edit screen.
+	 *
+	 * @var bool
+	 */
+	public $is_post_edit = false;
+
+	/**
+	 * Is on term edit screen.
+	 *
+	 * @var bool
+	 */
+	public $is_term_edit = false;
+
+	/**
+	 * Is on user edit screen.
+	 *
+	 * @var bool
+	 */
+	protected $is_user_edit = false;
 
 	/**
 	 * Setup basic variables.

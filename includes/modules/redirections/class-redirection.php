@@ -144,7 +144,7 @@ class Redirection {
 	 * @return int
 	 */
 	public function get_id() {
-		return $this->id;
+		return $this->data['id'];
 	}
 
 	/**
@@ -154,6 +154,15 @@ class Redirection {
 	 */
 	public function set_id( $id ) {
 		$this->data['id'] = $id;
+	}
+
+	/**
+	 * Set item status.
+	 * 
+	 * @param string $status Item status.
+	 */
+	public function set_status( $status ) {
+		$this->data['status'] = $status;
 	}
 
 	/**
@@ -198,6 +207,25 @@ class Redirection {
 		}
 
 		return $this->get_id();
+	}
+
+	/**
+	 * Check a newly added redirection for infinite loop.
+	 */
+	public function is_infinite_loop() {
+		$destination = $this->data['url_to'];
+		foreach ( $this->data['sources'] as $source ) {
+			if ( 'exact' !== $source['comparison'] ) {
+				continue;
+			}
+
+			$source_url = home_url( $source['pattern'] );
+			if ( $destination === $source_url ) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	/**

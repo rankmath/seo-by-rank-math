@@ -22,6 +22,13 @@ class Sitepress {
 	 *
 	 * @var boolean
 	 */
+	private $has_get_category = false;
+
+	/**
+	 * Has filter removed.
+	 *
+	 * @var boolean
+	 */
 	private $has_get_term = false;
 
 	/**

@@ -12,6 +12,8 @@ use RankMath\Google\Authentication;
 use RankMath\Google\Permissions;
 use RankMath\Analytics\Url_Inspection;
 use MyThemeShop\Helpers\Str;
+use RankMath\Google\Analytics;
+use RankMath\Google\Console;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,33 +53,79 @@ $analytics = wp_parse_args(
 	]
 );
 
-$is_profile_connected    = ! empty( $profile['profile'] );
+$is_profile_connected    = Console::is_console_connected();
 $is_adsense_connected    = ! empty( $analytics['adsense_id'] );
-$is_analytics_connected  = ! empty( $analytics['view_id'] );
+$is_analytics_connected  = Analytics::is_analytics_connected();
 $is_index_status_enabled = Url_Inspection::is_enabled() || ! $is_profile_connected;
-$all_services            = get_option( 'rank_math_analytics_all_services' );
+$all_services            = get_option( 'rank_math_analytics_all_services', [
+	'isVerified'           => '',
+	'inSearchConsole'      => '',
+	'hasSitemap'           => '',
+	'hasAnalytics'         => '',
+	'hasAnalyticsProperty' => '',
+	'homeUrl'              => '',
+	'sites'                => '',
+	'accounts'             => [],
+	'adsenseAccounts'      => [],
+] );
 $is_pro_active           = defined( 'RANK_MATH_PRO_FILE' );
 $is_ga4                  = ! Str::starts_with( 'UA-', $analytics['property_id'] );
 ?>
 <input type="hidden" class="cmb2-id-check-all-services" value="<?php echo $is_profile_connected && $is_analytics_connected ? '1' : '0'; ?>" />
 
-<div class="disconnect-wrap">
-	<a href="<?php echo wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ); ?>" class="button button-link rank-math-reconnect-google"><?php esc_html_e( 'Reconnect', 'rank-math' ); ?></a> <span>|</span> <button class="button button-link rank-math-disconnect-google"><?php esc_html_e( 'Disconnect', 'rank-math' ); ?></button>
+<?php
+$actions = [
+	'reconnect' => [
+		'link' => wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ),
+		'class' => 'rank-math-reconnect-google',
+		'text' => esc_html__( 'Reconnect', 'rank-math' ),
+	],
+	'disconnect' => [
+		'link' => '#',
+		'class' => 'rank-math-disconnect-google',
+		'text' => esc_html__( 'Disconnect', 'rank-math' ),
+	],
+];
+
+if ( Helper::is_advanced_mode() && ( $is_profile_connected || $is_adsense_connected || $is_analytics_connected ) ) {
+	$actions['test-connections'] = [
+		'link'  => '#',
+		'class' => 'rank-math-test-connection-google',
+		'text'  => esc_html__( 'Test Connections', 'rank-math' ),
+	];
+}
+
+$actions = apply_filters( 'rank_math/analytics/connect_actions', $actions );
+?>
+<div class="connect-actions">
+	<?php foreach( $actions as $action ) { ?>
+		<a href="<?php echo esc_attr( $action['link'] ); ?>" class="button button-link <?php echo esc_attr( $action['class'] ); ?>"><?php echo esc_html( $action['text'] ); ?></a>
+	<?php } ?>
 </div>
 
 <?php
 $console_classes = Helper::classnames(
-	'rank-math-box no-padding rank-math-accordion',
+	'rank-math-box no-padding rank-math-accordion rank-math-connect-search-console',
 	[
 		'connected'    => $is_profile_connected,
 		'disconnected' => ! $is_profile_connected,
 		'disabled'     => ! Permissions::has_console(),
 	]
 );
+$console_status_classes = Helper::classnames(
+	'rank-math-connection-status',
+	[
+		'rank-math-connection-status-success' => $is_profile_connected,
+		'rank-math-connection-status-error' => ! $is_profile_connected,
+	]
+);
+
+$console_status = $is_profile_connected ? 'Connected' : 'Not Connected';
+
 ?>
-<div class="<?php echo $console_classes; ?>" tabindex="0">
+<div class="<?php echo esc_attr( $console_classes ); ?>" tabindex="0">
 	<header>
-		<h3><?php esc_html_e( 'Search Console', 'rank-math' ); ?></h3>
+		<h3><span class="rank-math-connection-status-wrap"><span class="<?php echo esc_attr( $console_status_classes ); ?>" title="<?php echo esc_attr( $console_status ); ?>"></span></span> <?php esc_html_e( 'Search Console', 'rank-math' ); ?></h3>
 	</header>
 	<div class="rank-math-accordion-content">
 
@@ -117,17 +165,25 @@ $console_classes = Helper::classnames(
 
 <?php
 $analytic_classes = Helper::classnames(
-	'rank-math-box no-padding rank-math-accordion',
+	'rank-math-box no-padding rank-math-accordion rank-math-connect-analytics',
 	[
 		'connected'    => $is_analytics_connected,
 		'disconnected' => ! $is_analytics_connected,
 		'disabled'     => ! Permissions::has_analytics(),
 	]
 );
+$analytic_status_classes = Helper::classnames(
+	'rank-math-connection-status',
+	[
+		'rank-math-connection-status-success' => $is_analytics_connected,
+		'rank-math-connection-status-error' => ! $is_analytics_connected,
+	]
+);
+$analytic_status = $is_analytics_connected ? 'Connected' : 'Not Connected';
 ?>
-<div class="<?php echo $analytic_classes; ?>" tabindex="0">
+<div class="<?php echo esc_attr( $analytic_classes ); ?>" tabindex="0">
 	<header>
-		<h3><?php esc_html_e( 'Analytics', 'rank-math' ); ?></h3>
+		<h3><span class="rank-math-connection-status-wrap"><span class="<?php echo esc_attr( $analytic_status_classes ); ?>" title="<?php echo esc_attr( $analytic_status ); ?>"></span></span><?php esc_html_e( 'Analytics', 'rank-math' ); ?></h3>
 	</header>
 	<div class="rank-math-accordion-content rank-math-analytics-content">
 
@@ -275,17 +331,25 @@ $analytic_classes = Helper::classnames(
 
 <?php
 $adsense_classes = Helper::classnames(
-	'rank-math-box no-padding rank-math-accordion',
+	'rank-math-box no-padding rank-math-accordion rank-math-connect-adsense',
 	[
 		'connected'    => $is_adsense_connected,
 		'disconnected' => ! $is_adsense_connected,
 		'disabled'     => ! Permissions::has_adsense(),
 	]
 );
+$adsense_status_classes = Helper::classnames(
+	'rank-math-connection-status',
+	[
+		'rank-math-connection-status-success' => Permissions::has_adsense() && $is_adsense_connected,
+		'rank-math-connection-status-error' => Permissions::has_adsense() && ! $is_adsense_connected,
+	]
+);
+$adsense_status = $is_adsense_connected ? 'Connected' : 'Not Connected';
 ?>
-<div class="<?php echo $adsense_classes; ?>" tabindex="0">
+<div class="<?php echo esc_attr( $adsense_classes ); ?>" tabindex="0">
 	<header>
-		<h3><?php esc_html_e( 'AdSense', 'rank-math' ); ?></h3>
+		<h3><span class="rank-math-connection-status-wrap"><span class="<?php echo esc_attr( $adsense_status_classes ); ?>" title="<?php echo esc_attr( $adsense_status ); ?>"></span></span><?php esc_html_e( 'AdSense', 'rank-math' ); ?></h3>
 	</header>
 	<div class="rank-math-accordion-content">
 

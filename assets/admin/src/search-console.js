@@ -4,13 +4,14 @@
  * External Dependencies
  */
 import jQuery from 'jquery'
-import { get, map, isEmpty, isUndefined } from 'lodash'
+import { get, map, isUndefined } from 'lodash'
 
 /**
  * Internal Dependencies
  */
 import ajax from '@helpers/ajax'
 import { __ } from '@wordpress/i18n'
+import { applyFilters } from '@wordpress/hooks'
 
 class SearchConsole {
 	/**
@@ -41,6 +42,7 @@ class SearchConsole {
 		this.accordions = jQuery( '.rank-math-accordion' )
 		this.countryConsole = jQuery( '#site-console-country' )
 		this.countryAnalytics = jQuery( '#site-analytics-country' )
+		this.testConnectionButton = jQuery( '.rank-math-test-connection-google' )
 
 		jQuery( '.cmb2_select' ).on( 'select2:open', function() {
 			document.querySelector( '.select2-search__field' ).focus()
@@ -70,6 +72,11 @@ class SearchConsole {
 		]
 		jQuery( submitSelectors.join( ', ' ) ).on( 'click', ( e ) => {
 			this.submitButtonHandler( e )
+		} )
+
+		this.testConnectionButton.on( 'click', ( e ) => {
+			e.preventDefault()
+			this.testConnections( e )
 		} )
 
 		this.propertySelect.on( 'change', () => {
@@ -170,22 +177,99 @@ class SearchConsole {
 		} )
 	}
 
-	submitButtonHandler( e ) {
+	async submitButtonHandler( e ) {
 		const target = jQuery( e.target )
 		e.preventDefault()
 
-		this.saveConsole()
-		this.saveAnalytics()
-		this.saveAdsense()
+		if ( target.hasClass( 'disabled' ) ) {
+			return
+		}
 
-		setTimeout( () => {
+		if ( ! jQuery( '#setting-panel-analytics:visible' ).length || jQuery( '#setting-panel-analytics .connect-wrap' ).length ) {
 			target.off( 'click' ).trigger( 'click' )
-		}, 100 )
+			return
+		}
+
+		target.addClass( 'disabled' ).val( __( 'Saving…', 'rank-math' ) )
+
+		const consoleConnected = await this.saveConsole()
+		const analyticsConnected = await this.saveAnalytics()
+		const adsenseConnected = await this.saveAdsense()
+
+		// Remove all notices.
+		jQuery( '.rank-math-accordion' ).find( '.rank-math-notice' ).remove()
+
+		let content = ''
+		let error = ''
+
+		if ( ! consoleConnected.success ) {
+			content = jQuery( '.rank-math-connect-search-console .rank-math-accordion-content' )
+			error = consoleConnected.error
+		} else if ( ! analyticsConnected.success ) {
+			content = jQuery( '.rank-math-connect-analytics .rank-math-accordion-content' )
+			error = analyticsConnected.error
+		} else if ( ! adsenseConnected.success ) {
+			content = jQuery( '.rank-math-connect-adsense .rank-math-accordion-content' )
+			error = adsenseConnected.error
+		}
+
+		// Have anyone connection issue?
+		if ( ! consoleConnected.success || ! analyticsConnected.success || ! adsenseConnected.success ) {
+			content.append( '<div class="rank-math-notice notice notice-error"><p>' + error + '</p></div>' )
+
+			jQuery( 'html, body' ).animate( {
+				scrollTop: content.offset().top,
+			}, 2000 )
+
+			target.removeClass( 'disabled' ).val( __( 'Save Changes', 'rank-math' ) )
+		} else {
+			target.off( 'click' ).trigger( 'click' )
+		}
+	}
+
+	testConnections( e ) {
+		e.preventDefault()
+
+		const tests = applyFilters(
+			'rank_math_test_connections',
+			[
+				{
+					class: '.rank-math-connect-search-console',
+					canTest: rankMath.isConsoleConnected,
+					action: 'check_console_request',
+				},
+				{
+					class: '.rank-math-connect-analytics',
+					canTest: rankMath.isAnalyticsConnected,
+					action: 'check_analytics_request',
+				},
+			],
+			this
+		)
+
+		tests.forEach( ( test ) => {
+			if ( test.canTest ) {
+				const parent = jQuery( test.class )
+				const wrap = parent.find( '.rank-math-connection-status-wrap' )
+
+				wrap.html( '<svg class="rank-math-spinner" viewBox="0 0 100 100" width="16" height="16" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false"><circle cx="50" cy="50" r="50" vector-effect="non-scaling-stroke"></circle><path d="m 50 0 a 50 50 0 0 1 50 50" vector-effect="non-scaling-stroke"></path></svg>' )
+
+				ajax( test.action, {}, 'post' ).done( ( response ) => {
+					if ( response.success ) {
+						wrap.html( '<span class="rank-math-connection-status rank-math-connection-status-success" title="' + __( 'Connected', 'rank-math' ) + '"></span>' )
+					} else {
+						wrap.html( '<span class="rank-math-connection-status rank-math-connection-status-error" title="' + __( 'Some permissions are missing, please reconnect', 'rank-math' ) + '"></span>' )
+					}
+				} )
+			}
+		} )
 	}
 
 	saveConsole() {
 		if ( 0 === parseInt( this.profileSelect.val() ) ) {
-			return
+			return {
+				success: true,
+			}
 		}
 
 		const data = {
@@ -199,7 +283,9 @@ class SearchConsole {
 			data.days = days.val()
 		}
 
-		ajax( 'save_analytic_profile', data, 'post' )
+		return ajax( 'save_analytic_profile', data, 'post' ).done( ( response ) => {
+			return response
+		} )
 	}
 
 	saveAnalytics() {
@@ -220,7 +306,9 @@ class SearchConsole {
 			0 === parseInt( data.accountID ) ||
 			0 === parseInt( data.propertyID )
 		) {
-			return
+			return {
+				success: true,
+			}
 		}
 
 		const days = jQuery( '#console_caching_control' )
@@ -228,7 +316,9 @@ class SearchConsole {
 			data.days = days.val()
 		}
 
-		ajax( 'save_analytic_options', data, 'post' )
+		return ajax( 'save_analytic_options', data, 'post' ).done( ( response ) => {
+			return response
+		} )
 	}
 
 	saveAdsense() {
@@ -237,10 +327,14 @@ class SearchConsole {
 		}
 
 		if ( ! data.accountID ) {
-			return
+			return {
+				success: true,
+			}
 		}
 
-		ajax( 'save_adsense_account', data, 'post' )
+		return ajax( 'save_adsense_account', data, 'post' ).done( ( response ) => {
+			return response
+		} )
 	}
 
 	fillSelect() {
@@ -319,14 +413,14 @@ class SearchConsole {
 				property.url === homeUrl ? ' selected="selected"' : ''
 			this.propertySelect.append(
 				'<option' +
-					selected +
-					' value="' +
-					property.id +
-					'">' +
-					property.name +
-					' (' +
-					property.id +
-					')</option>'
+				selected +
+				' value="' +
+				property.id +
+				'">' +
+				property.name +
+				' (' +
+				property.id +
+				')</option>'
 			)
 		} )
 
@@ -348,12 +442,12 @@ class SearchConsole {
 			selected = key === homeUrl ? ' selected="selected"' : ''
 			this.profileSelect.append(
 				'<option' +
-					selected +
-					' value="' +
-					key +
-					'">' +
-					val +
-					'</option>'
+				selected +
+				' value="' +
+				key +
+				'">' +
+				val +
+				'</option>'
 			)
 		} )
 

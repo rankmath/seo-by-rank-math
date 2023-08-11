@@ -33,7 +33,7 @@ class Admin_Menu implements Runner {
 	 */
 	public function hooks() {
 		$this->action( 'init', 'register_pages' );
-		$this->action( 'admin_menu', 'fix_first_submenu', 999 );
+		$this->action( 'admin_menu', 'fix_admin_menu', 999 );
 		$this->action( 'admin_head', 'icon_css' );
 	}
 
@@ -76,9 +76,20 @@ class Admin_Menu implements Runner {
 	}
 
 	/**
-	 * Fix first submenu name.
+	 * Fix menu names.
 	 */
-	public function fix_first_submenu() {
+	public function fix_admin_menu() {
+
+		// Replace the main menu name "Rank Math" with "Rank Math SEO".
+		global $menu;
+		foreach ( $menu as $key => $item ) {
+			if ( 'Rank Math' === $item[0] ) {
+				$menu[ $key ][0] = esc_html__( 'Rank Math SEO', 'rank-math' );
+				break;
+			}
+		}
+
+		// Replace the first submenu name "Rank Math" with "Dashboard".
 		global $submenu;
 		if ( ! isset( $submenu['rank-math'] ) ) {
 			return;
@@ -96,7 +107,7 @@ class Admin_Menu implements Runner {
 			return;
 		}
 
-		$submenu['rank-math'][] = [ esc_html__( 'Help &amp; Support', 'rank-math' ) . '<i class="dashicons dashicons-external" style="font-size:12px;vertical-align:-2px;height:10px;"></i>', 'level_1', KB::get( 'kb-seo-suite', 'Sidebar Help Link' ) ];
+		$submenu['rank-math'][] = [ esc_html__( 'Help &amp; Support', 'rank-math' ) . '<i class="dashicons dashicons-external" style="font-size:12px;vertical-align:-2px;height:10px;"></i>', 'level_1', KB::get( 'knowledgebase', 'Sidebar Help Link' ) ];
 
 		// Store ID of first_menu item so we can use it in the Admin menu item.
 		set_transient( 'rank_math_first_submenu_id', array_values( $submenu['rank-math'] )[0][2] );

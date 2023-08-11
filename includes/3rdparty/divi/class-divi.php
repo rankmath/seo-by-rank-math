@@ -30,6 +30,13 @@ class Divi {
 	use Hooker;
 
 	/**
+	 * Screen object.
+	 *
+	 * @var Screen
+	 */
+	private $screen;
+
+	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
@@ -136,7 +143,7 @@ class Divi {
 		Helper::add_json(
 			'keywordsApi',
 			[
-				'url' => 'https://rankmathapi.com/ltkw/v1/',
+				'url' => 'https://api.rankmath.com/ltkw/v1/',
 			]
 		);
 

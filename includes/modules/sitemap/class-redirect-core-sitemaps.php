@@ -75,7 +75,7 @@ class Redirect_Core_Sitemaps {
 	 */
 	private function get_redirect_url( $path ) {
 		if ( '/wp-sitemap.xml' === $path ) {
-			return '/sitemap_index.xml';
+			return '/' . Sitemap::get_sitemap_index_slug() . '.xml';
 		}
 
 		if ( preg_match( '/^\/wp-sitemap-(posts|taxonomies)-(\w+)-(\d+)\.xml$/', $path, $matches ) ) {

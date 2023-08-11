@@ -9,9 +9,9 @@
  *
  * @wordpress-plugin
  * Plugin Name:       WordPress Helpers
- * Version:           1.1.20
+ * Version:           1.1.22
  * Plugin URI:        http://mythemeshop.com/wordpress-helpers/
- * Description:       Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.
+ * Description:       Collection of utilities required during development of a plugin or theme for WordPress. Built for developers by developers.
  * Author:            MyThemeShop
  * Author URI:        http://mythemeshop.com/
  * License:           GPL-2.0+

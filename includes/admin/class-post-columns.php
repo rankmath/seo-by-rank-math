@@ -395,6 +395,8 @@ class Post_Columns implements Runner {
 	 */
 	public static function is_post_indexable( $post_id ) {
 		$robots = Param::post( 'rank_math_robots', false, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+
+		$robots = apply_filters( 'rank_math/admin/robots', $robots, $post_id );
 		if ( ! empty( $robots ) ) {
 			return in_array( 'index', $robots, true ) ? true : false;
 		}

@@ -8,20 +8,27 @@
     "packages": [
         {
             "name": "a5hleyrich/wp-background-processing",
-            "version": "1.0.2",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deliciousbrains/wp-background-processing.git",
-                "reference": "2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800"
+                "reference": "ebbed762c42e70e76573ffbd36e591378ba5f2ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800",
-                "reference": "2cbee1abd1b49e1133cd8f611df4d4fc5a8b9800",
+                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/ebbed762c42e70e76573ffbd36e591378ba5f2ee",
+                "reference": "ebbed762c42e70e76573ffbd36e591378ba5f2ee",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2"
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpcompatibility/phpcompatibility-wp": "*",
+                "phpunit/phpunit": "^8.0",
+                "spryker/code-sniffer": "^0.17.18",
+                "wp-coding-standards/wpcs": "^2.3",
+                "yoast/phpunit-polyfills": "^1.0"
             },
             "suggest": {
                 "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
@@ -45,9 +52,9 @@
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
             "support": {
                 "issues": "https://github.com/deliciousbrains/wp-background-processing/issues",
-                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.0.2"
+                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.1.1"
             },
-            "time": "2020-07-31T07:00:11+00:00"
+            "time": "2023-07-18T10:22:06+00:00"
         },
         {
             "name": "cmb2/cmb2",
@@ -179,16 +186,16 @@
         },
         {
             "name": "mythemeshop/wordpress-helpers",
-            "version": "v1.1.20",
+            "version": "v1.1.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MyThemeShopTeam/wordpress-helpers.git",
-                "reference": "f9416e29c48567e436488b7551f908ccc780c235"
+                "reference": "0ee4a87a03dac72e9e503cc4e1b0208d3269f4dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/f9416e29c48567e436488b7551f908ccc780c235",
-                "reference": "f9416e29c48567e436488b7551f908ccc780c235",
+                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/0ee4a87a03dac72e9e503cc4e1b0208d3269f4dc",
+                "reference": "0ee4a87a03dac72e9e503cc4e1b0208d3269f4dc",
                 "shasum": ""
             },
             "require": {
@@ -213,25 +220,25 @@
                     "email": "info@mythemeshop.com"
                 }
             ],
-            "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
+            "description": "Collection of utilities required during development of a plugin or theme for WordPress. Built for developers by developers.",
             "support": {
                 "issues": "https://github.com/MyThemeShopTeam/wordpress-helpers/issues",
-                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/v1.1.20"
+                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/v1.1.22"
             },
-            "time": "2022-11-22T05:21:30+00:00"
+            "time": "2023-06-15T08:54:41+00:00"
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.5.4",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "9533e71b0eba4a519721dde84a34dfb161f11eb8"
+                "reference": "7fd383cad3d64b419ec81bcd05bab44355a6e6ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/9533e71b0eba4a519721dde84a34dfb161f11eb8",
-                "reference": "9533e71b0eba4a519721dde84a34dfb161f11eb8",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/7fd383cad3d64b419ec81bcd05bab44355a6e6ef",
+                "reference": "7fd383cad3d64b419ec81bcd05bab44355a6e6ef",
                 "shasum": ""
             },
             "require-dev": {
@@ -256,9 +263,9 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.5.4"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.6.1"
             },
-            "time": "2023-01-17T20:20:43+00:00"
+            "time": "2023-06-14T19:23:12+00:00"
         }
     ],
     "packages-dev": [],

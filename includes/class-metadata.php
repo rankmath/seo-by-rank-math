@@ -46,6 +46,13 @@ abstract class Metadata {
 	protected static $objects = [];
 
 	/**
+	 * Holds the properties.
+	 * 
+	 * @var array
+	 */
+	protected $properties = [];
+
+	/**
 	 * Getter.
 	 *
 	 * @param string $property Key to get.
@@ -57,11 +64,27 @@ abstract class Metadata {
 			return $this->$property;
 		}
 
+		if ( isset( $this->properties[ $property ] ) ) {
+			return $this->properties[ $property ];
+		}
+
 		if ( isset( $this->object->$property ) ) {
 			return $this->object->$property;
 		}
 
 		return get_metadata( $this->meta_type, $this->object_id, $property, true );
+	}
+
+	/**
+	 * Setter.
+	 * This prevents the Dynamic Properties deprecation notice in PHP 8.2.
+	 * 
+	 * @param string $property Key to set.
+	 * @param mixed  $value    Value to set.
+	 * @return void
+	 */
+	public function __set( $property, $value ) {
+		$this->properties[ $property ] = $value;
 	}
 
 	/**

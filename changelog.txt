@@ -1,0 +1,7 @@
+- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#modify-sitemap-index-slug) to change the sitemap_index.xml slug
+- Improved: Query to retrieve score on [Site Analytics page](https://rankmath.com/kb/analytics/#site-analytics)
+- Fixed: PHP error in the [Version Control](https://rankmath.com/kb/rank-math-status-and-tools/#version-control) on sites using Themify Updater plugin
+- Fixed: [Keywords](https://rankmath.com/kb/analytics/#keywords) tab in Analytics was not showing data on some setups due to the nested SELECT queries
+- Fixed: PHP error in the [Error log section](https://rankmath.com/kb/rank-math-status-and-tools/#error-log) on some setups
+- Fixed: HowTo block was not showing the [Step image](https://rankmath.com/blog/howto-schema/#adding-steps) when the [Step description](https://rankmath.com/blog/howto-schema/#step-description) was not added
+- Fixed: PHP error on some setups in Dashboard Widget

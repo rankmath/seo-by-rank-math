@@ -10,6 +10,8 @@
 
 namespace RankMath\Google;
 
+use RankMath\Helper;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -70,7 +72,7 @@ class Url_Inspection extends Request {
 		$lang_code = empty( $lang_arr[1] ) ? $lang_arr[0] : $lang_arr[0] . '-' . $lang_arr[1];
 
 		$args = [
-			'inspectionUrl' => untrailingslashit( home_url() ) . $page,
+			'inspectionUrl' => untrailingslashit( Helper::get_home_url() ) . $page,
 			'siteUrl'       => Console::get_site_url(),
 			'languageCode'  => $lang_code,
 		];

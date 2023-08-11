@@ -8,6 +8,7 @@ import { registerBlockType } from '@wordpress/blocks'
  */
 import edit from './edit'
 import save from './save'
+import deprecated from './deprecated'
 
 /**
  * Register TOC block
@@ -17,5 +18,6 @@ registerBlockType(
 	{
 		edit,
 		save,
+		deprecated,
 	}
 )

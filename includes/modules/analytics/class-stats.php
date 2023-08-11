@@ -26,6 +26,20 @@ class Stats extends Keywords {
 	use Hooker;
 
 	/**
+	 * Start timestamp.
+	 *
+	 * @var int
+	 */
+	public $start = 0;
+
+	/**
+	 * End timestamp.
+	 *
+	 * @var int
+	 */
+	public $end = 0;
+
+	/**
 	 * Start date.
 	 *
 	 * @var string
@@ -696,7 +710,13 @@ class Stats extends Keywords {
 			// Step1. Get most recent row id for each dimension for current data.
 			// phpcs:disable
 			$query = $wpdb->prepare(
-				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
+				"SELECT t1.id as id
+				FROM {$wpdb->prefix}rank_math_analytics_gsc t1
+				INNER JOIN (
+					SELECT query, MAX(created) as latest_created
+					FROM {$wpdb->prefix}rank_math_analytics_gsc
+					WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}
+				) t2 ON t1.query = t2.query AND t1.created = t2.latest_created",
 				$this->start_date,
 				$this->end_date
 			);
@@ -710,7 +730,13 @@ class Stats extends Keywords {
 			// Step3. Get most recent row id for each dimension for compare data.
 			// phpcs:disable
 			$query = $wpdb->prepare(
-				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
+				"SELECT t1.id as id
+				FROM {$wpdb->prefix}rank_math_analytics_gsc t1
+				INNER JOIN (
+					SELECT query, MAX(created) as latest_created
+					FROM {$wpdb->prefix}rank_math_analytics_gsc
+					WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}
+				) t2 ON t1.query = t2.query AND t1.created = t2.latest_created",
 				$this->compare_start_date,
 				$this->compare_end_date
 			);
@@ -751,7 +777,7 @@ class Stats extends Keywords {
 	 */
 	public function get_metrics_data_by_dimension( $args = [] ) {
 		global $wpdb;
-
+		Helper::enable_big_selects_for_queries();
 		$args = wp_parse_args(
 			$args,
 			[
@@ -945,11 +971,16 @@ class Stats extends Keywords {
 	public static function get_relative_url( $url ) {
 		$home_url = Google_Analytics::get_site_url();
 
-		$domain = strtolower( wp_parse_url( $home_url, PHP_URL_HOST ) );
-		$domain = str_replace( [ 'www.', '.' ], [ '', '\.' ], $domain );
-		$regex  = "/http[s]?:\/\/(www\.)?$domain/mU";
-		$url    = strtolower( trim( $url ) );
-		$url    = preg_replace( $regex, '', $url );
+		// On multisite and sub-directory setup replace the home url.
+		if ( is_multisite() && ! is_subdomain_install() ) {
+			$url = \str_replace( $home_url, '/', $url );
+		} else {
+			$domain = strtolower( wp_parse_url( $home_url, PHP_URL_HOST ) );
+			$domain = str_replace( [ 'www.', '.' ], [ '', '\.' ], $domain );
+			$regex  = "/http[s]?:\/\/(www\.)?$domain/mU";
+			$url    = strtolower( trim( $url ) );
+			$url    = preg_replace( $regex, '', $url );
+		}
 
 		/**
 		 * Google API and get_permalink sends URL Encoded strings so we need

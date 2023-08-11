@@ -65,19 +65,18 @@ class Assessor {
 	}
 
 	addScoreElem() {
-		if ( ! rankMath.showScore ) {
+		// Early bail if score is disabled or user doesn't have the required capabilities.
+		if ( ! rankMath.showScore || ! rankMath.canUser.analysis || ! rankMath.canUser.general ) {
 			return
 		}
-
+		this.scoreElem = jQuery(
+			'<div class="misc-pub-section rank-math-seo-score"></div>'
+		)
+		jQuery( '#misc-publishing-actions' ).append( this.scoreElem )
 		setTimeout( () => {
 			this.scoreText = '<span class="score-text"><span class="score-icon"><i class="rm-icon-rank-math"></i></span> SEO: <strong>Not available</strong></span>'
-			this.scoreElem = jQuery(
-				'<div class="misc-pub-section rank-math-seo-score">' +
-					this.scoreText +
-					'</div>'
-			)
+			this.scoreElem.html( this.scoreText )
 			this.scoreText = this.scoreElem.find( 'strong' )
-			jQuery( '#misc-publishing-actions' ).append( this.scoreElem )
 
 			this.fkScoreText = '<span class="score-text">Not available</span>'
 			this.fkScoreElem = jQuery(

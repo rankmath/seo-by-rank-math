@@ -28,6 +28,13 @@ class Sitemap {
 	use Hooker;
 
 	/**
+	 * Sitemap Index object.
+	 *
+	 * @var Sitemap_Index
+	 */
+	public $index;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
@@ -143,7 +150,7 @@ class Sitemap {
 	 * Hit sitemap index to pre-generate the cache.
 	 */
 	public static function hit_index() {
-		wp_remote_get( Router::get_base_url( 'sitemap_index.xml' ) );
+		wp_remote_get( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) );
 	}
 
 	/**
@@ -157,7 +164,7 @@ class Sitemap {
 		}
 
 		if ( empty( $url ) ) {
-			$url = rawurlencode( Router::get_base_url( 'sitemap_index.xml' ) );
+			$url = rawurlencode( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) );
 		}
 
 		wp_remote_get( 'http://www.google.com/webmasters/tools/ping?sitemap=' . $url, [ 'blocking' => false ] );
@@ -219,7 +226,7 @@ class Sitemap {
 	 * @param  string|array $post_types Post type or array of types.
 	 * @param  boolean      $return_all Flag to return array of values.
 	 * @return string|array|false
-	 * 
+	 *
 	 * @copyright Copyright (C) 2008-2019, Yoast BV
 	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 */
@@ -248,7 +255,7 @@ class Sitemap {
 
 			if ( ! empty( $post_type_names ) ) {
 				$sql = "
-				SELECT post_type, MAX(post_modified_gmt) AS date
+				SELECT post_type, MAX(GREATEST(post_modified_gmt, post_date_gmt)) AS date
 				FROM $wpdb->posts
 				WHERE post_status IN ('publish','inherit')
 					AND post_type IN ('" . implode( "','", $post_type_names ) . "')
@@ -332,5 +339,19 @@ class Sitemap {
 			Helper::redirect( preg_replace( '/' . preg_quote( $current_page ) . '\.xml$/', '.xml', Helper::get_current_page_url() ) );
 			die();
 		}
+	}
+
+	/**
+	 * Get the sitemap index slug.
+	 */
+	public static function get_sitemap_index_slug() {
+		/**
+		 * Filter: 'rank_math/sitemap/index_slug' - Modify the sitemap index slug.
+		 *
+		 * @param string $slug Sitemap index slug.
+		 *
+		 * @return string
+		 */
+		return apply_filters( 'rank_math/sitemap/index/slug', 'sitemap_index' );
 	}
 }

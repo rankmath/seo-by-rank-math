@@ -336,9 +336,15 @@
 .#{$namespace}-metabox-frame {
 	margin-bottom: 25px;
 
-	##{$namespace}-metabox-wrapper .#{$namespace}-tabs .components-panel__body {
-		h2 {
-			margin-left: 0;
+	.#{$namespace}-tabs-content {
+		width: 100%;
+	}
+
+	##{$namespace}-metabox-wrapper {
+		.#{$namespace}-tabs .components-panel__body {
+			h2 {
+				margin-left: 0;
+			}
 		}
 	}
 

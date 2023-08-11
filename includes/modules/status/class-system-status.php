@@ -23,6 +23,13 @@ defined( 'ABSPATH' ) || exit;
 class System_Status {
 
 	/**
+	 * WP Info.
+	 *
+	 * @var array
+	 */
+	private $wp_info = [];
+
+	/**
 	 * Display Database/Tables Details.
 	 */
 	public function display() {

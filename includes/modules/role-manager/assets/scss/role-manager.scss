@@ -35,6 +35,14 @@
 		}
 	}
 
+	.cmb2-option-administrator-role-manager {
+		&,
+		& + label {
+			opacity: .7;
+			pointer-events: none;
+		}
+	}
+
 	> footer.form-footer {
 		margin: 30px -1.875rem -1.875rem;
 		padding: 1.875rem;

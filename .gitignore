@@ -24,6 +24,7 @@ sitemap-cache/*
 
 # Source Map Files
 *.map
+*.src
 assets/.DS_Store
 .DS_Store
 vendor/wordpress-stubs.php

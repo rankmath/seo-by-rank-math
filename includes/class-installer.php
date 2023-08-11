@@ -547,10 +547,15 @@ class Installer {
 			$titles[ 'tax_' . $taxonomy . '_slack_enhanced_sharing' ] = 'on';
 
 			$sitemap[ 'tax_' . $taxonomy . '_sitemap' ] = 'category' === $taxonomy ? 'on' : 'off';
+
+			if ( substr( $taxonomy, 0, 3 ) === 'pa_' ) {
+				$titles[ 'remove_' . $taxonomy . '_snippet_data' ] = 'on';
+			}
 		}
 
 		$titles['remove_product_cat_snippet_data'] = 'on';
 		$titles['remove_product_tag_snippet_data'] = 'on';
+
 	}
 
 	/**
@@ -614,8 +619,8 @@ class Installer {
 	 */
 	private function get_cron_jobs() {
 		return [
-			'redirection/clean_trashed'    => 'daily',     // Add cron for cleaning trashed redirects.
-			'links/internal_links'         => 'daily',     // Add cron for counting links.
+			'redirection/clean_trashed' => 'daily',     // Add cron for cleaning trashed redirects.
+			'links/internal_links'      => 'daily',     // Add cron for counting links.
 		];
 	}
 

@@ -1,16 +1,3 @@
-@import '../../../../../../../assets/admin/scss/font-icons';
-
-@font-face {
-	font-family: 'Rank-Math';
-	font-weight: normal;
-	font-style: normal;
-
-	font-display: block;
-	src: url('../../../../../../../assets/admin/fonts/Rank-Math.ttf?v1.0.76') format('truetype'),
-	url('../../../../../../../assets/admin/fonts/Rank-Math.woff?v1.0.76') format('woff'),
-	url('../../../../../../../assets/admin/fonts/Rank-Math.svg?v1.0.76#Rank-Math') format('svg');
-}
-
 .wp-block-rank-math-toc-block {
 	nav {
 		li, div {

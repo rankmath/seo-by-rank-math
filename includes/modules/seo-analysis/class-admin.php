@@ -22,6 +22,34 @@ defined( 'ABSPATH' ) || exit;
 class Admin extends Base {
 
 	/**
+	 * Module ID.
+	 * 
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory = '';
+
+	/**
+	 * Module page.
+	 * 
+	 * @var object
+	 */
+	public $page;
+
+	/**
+	 * SEO Analyzer object.
+	 * 
+	 * @var object
+	 */
+	public $analyzer;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {

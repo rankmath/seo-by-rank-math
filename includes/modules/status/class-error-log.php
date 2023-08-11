@@ -123,7 +123,7 @@ class Error_Log {
 			return join( '', $this->contents );
 		}
 
-		return join( '', array_slice( $this->contents, -$limit ) );
+		return is_array( $this->contents ) ? join( '', array_slice( $this->contents, -$limit ) ) : '';
 	}
 
 	/**

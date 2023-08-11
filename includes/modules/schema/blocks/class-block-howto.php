@@ -243,21 +243,16 @@ class Block_HowTo extends Block {
 				);
 			}
 
-			if ( ! empty( $step['content'] ) ) {
-				if ( ! empty( $step['imageUrl'] ) ) {
-					$step_image = '<img src="' . esc_url( $step['imageUrl'] ) . '" />';
-				} else {
-					$step_image = self::get()->get_image( $step, $size_slug, '' );
-				}
+			$step_content = ! empty( $step['content'] ) ? self::get()->normalize_text( $step['content'], 'howto' ) : '';
+			$step_image   = ! empty( $step['imageUrl'] ) ? '<img src="' . esc_url( $step['imageUrl'] ) . '" />' : self::get()->get_image( $step, $size_slug, '' );
 
-				$out[] = sprintf(
-					'<div class="rank-math-step-content %2$s">%4$s%3$s</div>',
-					$title_wrapper,
-					$content_css_classes,
-					self::get()->normalize_text( $step['content'], 'howto' ),
-					$step_image
-				);
-			}
+			$out[] = sprintf(
+				'<div class="rank-math-step-content %2$s">%4$s%3$s</div>',
+				$title_wrapper,
+				$content_css_classes,
+				$step_content,
+				$step_image
+			);
 
 			$out[] = sprintf( '</%1$s>', $item_tag );
 		}
@@ -306,10 +301,6 @@ class Block_HowTo extends Block {
 		if ( empty( $name ) ) {
 			$schema_step['text'] = '';
 
-			if ( false === $this->add_step_image( $schema_step, $step ) ) {
-				$this->add_step_image_from_content( $schema_step, $step );
-			}
-
 			if ( empty( $text ) && empty( $schema_step['image'] ) ) {
 				return false;
 			}
@@ -329,10 +320,10 @@ class Block_HowTo extends Block {
 					],
 				];
 			}
+		}
 
-			if ( false === $this->add_step_image( $schema_step, $step ) ) {
-				$this->add_step_image_from_content( $schema_step, $step );
-			}
+		if ( false === $this->add_step_image( $schema_step, $step ) ) {
+			$this->add_step_image_from_content( $schema_step, $step );
 		}
 
 		return $schema_step;

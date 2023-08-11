@@ -102,7 +102,7 @@ class ContentAI extends Component {
 								<span>{ __( 'Cooking a Personalized SEO Plan', 'rank-math' ) }</span>
 								<span>{ __( 'Final Touches to the SEO Recommendations', 'rank-math' ) }</span>
 							</span>
-							{ isString( data ) && <h3 className="no-data">{ data }</h3> }
+							{ isString( data ) && <h3 className="no-data" dangerouslySetInnerHTML={ { __html: data } }></h3> }
 							{ ! isEmpty( data ) && ! isString( data ) && <div>
 								<h3 className="rank-math-ca-section-title">
 									{ __( 'Content AI', 'rank-math' ) }

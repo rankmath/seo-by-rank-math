@@ -10,7 +10,7 @@ import classnames from 'classnames'
 import { applyFilters } from '@wordpress/hooks'
 import { compose } from '@wordpress/compose'
 import { withSelect } from '@wordpress/data'
-import { Fragment, useState } from '@wordpress/element'
+import { Fragment, useEffect, useState } from '@wordpress/element'
 import { Button, TextControl, Notice } from '@wordpress/components'
 
 /**
@@ -55,16 +55,22 @@ const getSchemaPropertyValue = ( props, field ) => {
  * @param {Object} props This component's props.
  */
 const SchemaProperty = ( props ) => {
+	const { property, id, map } = props.data
+	const { removeProperty, propertyChange, duplicateProperty } = props.actions
+
+	const field = get( map, 'field', { label: false } )
+	const fieldProps = { ...field }
+
+	const [ value, setValue ] = useState()
+
+	useEffect( () => {
+		setValue( getSchemaPropertyValue( props, field ) )
+	}, [ id ] )
+
 	if ( false === validateDependency( props.data, props.schema ) ) {
 		props.data.map.isHidden = true
 		return null
 	}
-
-	const { property, id, map } = props.data
-	const { removeProperty, propertyChange, duplicateProperty } = props.actions
-	const field = get( map, 'field', { label: false } )
-	const fieldProps = { ...field }
-	const [ value, setValue ] = useState( getSchemaPropertyValue( props, field ) )
 
 	if ( map.isRequired ) {
 		if ( field.label ) {

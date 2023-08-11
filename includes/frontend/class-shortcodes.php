@@ -41,11 +41,15 @@ class Shortcodes {
 		$this->remove_shortcode( 'wpseo_address' );
 		$this->remove_shortcode( 'wpseo_map' );
 		$this->remove_shortcode( 'wpseo_opening_hours' );
+		$this->remove_shortcode( 'wpseo_breadcrumb' );
+		$this->remove_shortcode( 'aioseo_breadcrumbs' );
 
 		// Add Yoast compatibility shortcodes.
 		$this->add_shortcode( 'wpseo_address', 'yoast_address' );
 		$this->add_shortcode( 'wpseo_map', 'yoast_map' );
 		$this->add_shortcode( 'wpseo_opening_hours', 'yoast_opening_hours' );
+		$this->add_shortcode( 'wpseo_breadcrumb', 'breadcrumb' );
+		$this->add_shortcode( 'aioseo_breadcrumbs', 'breadcrumb' );
 
 		// Add the Contact shortcode.
 		$this->add_shortcode( 'rank_math_contact_info', 'contact_info' );
@@ -90,7 +94,7 @@ class Shortcodes {
 		wp_enqueue_style( 'rank-math-contact-info', rank_math()->assets() . 'css/rank-math-contact-info.css', null, rank_math()->version );
 
 		ob_start();
-		echo '<div class="' . $this->get_contact_classes( $allowed, $args['class'] ) . '">';
+		echo '<div class="' . esc_attr( $this->get_contact_classes( $allowed, $args['class'] ) ) . '">';
 
 		foreach ( $allowed as $element ) {
 			$method = 'display_' . $element;

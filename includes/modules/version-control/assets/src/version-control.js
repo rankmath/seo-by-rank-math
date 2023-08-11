@@ -25,10 +25,5 @@ import jQuery from 'jquery'
 		$( '#rm_rollback_version' ).on( 'change', function() {
 			rollbackButton.text( rollbackButton.data( 'buttonlabel' ).replace( '%s', $( this ).val() ) )
 		} ).trigger( 'change' )
-
-		$( '#enable_auto_update' ).on( 'change', function() {
-			$( '#control_update_notification_email' )
-				.toggleClass( 'hidden', ! $( this ).prop( 'checked' ) )
-		} ).trigger( 'change' )
 	} )
 }( jQuery ) )

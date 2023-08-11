@@ -141,10 +141,21 @@ class Post_Type implements Provider {
 					$date = $last_modified_times[ $post_type ];
 				}
 
-				$index[] = [
-					'loc'     => Router::get_base_url( $post_type . '-sitemap' . $current_page . '.xml' ),
-					'lastmod' => $date,
-				];
+				$item = $this->do_filter(
+					'sitemap/index/entry',
+					[
+						'loc'     => Router::get_base_url( $post_type . '-sitemap' . $current_page . '.xml' ),
+						'lastmod' => $date,
+					],
+					'post',
+					$post_type,
+				);
+
+				if ( ! $item ) {
+					continue;
+				}
+
+				$index[] = $item;
 			}
 		}
 
@@ -282,7 +293,10 @@ class Post_Type implements Provider {
 
 		if ( ! $this->get_page_on_front_id() && ( 'post' === $post_type || 'page' === $post_type ) ) {
 			$needs_archive = false;
-			$links[]       = [ 'loc' => $this->get_home_url() ];
+			$links[]       = [
+				'loc' => $this->get_home_url(),
+				'mod' => Sitemap::get_last_modified_gmt( $post_type ),
+			];
 		} elseif ( $this->get_page_on_front_id() && 'post' === $post_type && $this->get_page_for_posts_id() ) {
 			$needs_archive = false;
 			$links[]       = Sitemap::is_object_indexable( $this->get_page_for_posts_id() ) ? [ 'loc' => get_permalink( $this->get_page_for_posts_id() ) ] : '';
@@ -410,6 +424,18 @@ class Post_Type implements Provider {
 	 */
 	protected function get_url( $post ) {
 		$url = [];
+
+		/**
+		 * Filter the post object before it gets added to the sitemap.
+		 * This allows you to add custom properties to the post object, or replace it entirely.
+		 * 
+		 * @param object $post Post object.
+		 */
+		$post = $this->do_filter( 'sitemap/post_object', $post );
+
+		if ( ! $post ) {
+			return false;
+		}
 
 		/**
 		 * Filter the URL Rank Math SEO uses in the XML sitemap.

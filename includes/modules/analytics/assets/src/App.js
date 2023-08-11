@@ -186,7 +186,7 @@ const App = () => {
 					) }
 
 					{ '' !== rankMath.lastUpdated && (
-						<div className="rank-math-updated"><strong>{ __( 'Last updated on', 'rank-math' ) }</strong><br /> { rankMath.lastUpdated }</div>
+						<div className="rank-math-updated"><strong>{ __( 'Last updated', 'rank-math' ) }</strong><br /> { rankMath.lastUpdated }</div>
 					) }
 				</div>
 				<Routes>

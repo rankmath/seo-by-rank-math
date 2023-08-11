@@ -6,8 +6,9 @@
  * @subpackage RankMath\Version_Control
  */
 
-defined( 'ABSPATH' ) || exit;
+use RankMath\Helper;
 
+defined( 'ABSPATH' ) || exit;
 ?>
 
 <form id="cmb2-metabox-rank-math-beta-optin" class="rank-math-beta-optin-form cmb2-form rank-math-box" action="" method="post">
@@ -15,6 +16,13 @@ defined( 'ABSPATH' ) || exit;
 	<header>
 		<h3><?php esc_html_e( 'Beta Opt-in', 'rank-math' ); ?></h3>
 	</header>
+
+	<?php if ( Helper::is_plugin_update_disabled() ) : ?>
+		<p><?php esc_html_e( 'You cannot turn on the Beta Tester feature because site wide plugins auto-update option is disabled on your site.', 'rank-math' ); ?></p>
+
+</form>
+		<?php return; ?>
+	<?php endif; ?>
 
 	<p><?php esc_html_e( 'You can take part in shaping Rank Math by test-driving the newest features and letting us know what you think. Turn on the Beta Tester feature to get notified about new beta releases. The beta version will not install automatically and you always have the option to ignore it.', 'rank-math' ); ?></p>
 	<?php // translators: Warning. ?>

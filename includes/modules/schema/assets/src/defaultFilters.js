@@ -79,7 +79,7 @@ const registerDefaultHooks = () => {
 		'rank_math_schema_type',
 		'rank-math',
 		( type ) => {
-			if ( isUndefined( type ) ) {
+			if ( isUndefined( type ) || isEmpty( type ) ) {
 				return type
 			}
 
@@ -357,6 +357,28 @@ const registerDefaultHooks = () => {
 			}
 
 			return schema
+		}
+	)
+
+	/**
+	 * Some properties are only saved in database as metadata[], we need to use those values instead the default values.
+	 *
+	 * @param {Object} data The saved Job Posting schema object.
+	 */
+	addFilter(
+		'rank_math_schema_apply_metadata_values_Job_Posting',
+		'rank-math',
+		( data ) => {
+			data.properties.map( ( item ) => {
+				if ( 'unpublish' !== item.property || isUndefined( data.metadata.unpublish ) ) {
+					return item
+				}
+
+				item.value = data.metadata.unpublish
+				return item
+			} )
+
+			return data
 		}
 	)
 }

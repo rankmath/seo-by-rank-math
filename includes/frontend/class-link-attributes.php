@@ -26,6 +26,56 @@ class Link_Attributes {
 	use Hooker;
 
 	/**
+	 * Add rel=noopener or not.
+	 *
+	 * @var bool
+	 */
+	public $add_noopener;
+
+	/**
+	 * Add rel=nofollow to links or not.
+	 *
+	 * @var bool
+	 */
+	public $nofollow_link;
+
+	/**
+	 * Add rel=nofollow to images or not.
+	 *
+	 * @var bool
+	 */
+	public $nofollow_image;
+
+	/**
+	 * Open links in a new window or not.
+	 *
+	 * @var bool
+	 */
+	public $new_window_link;
+
+	/**
+	 * Remove existing CSS class from links or not.
+	 *
+	 * @var bool
+	 */
+	public $remove_class;
+
+	/**
+	 * Check if the link attributes have been modified or not.
+	 *
+	 * @var bool
+	 */
+	public $is_dirty;
+
+	/**
+	 * Additional attributes to add to links.
+	 *
+	 * @var array
+	 */
+	public $add_attributes;
+
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {

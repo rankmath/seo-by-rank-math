@@ -35,6 +35,13 @@ class Update_Score {
 	private $batch_size;
 
 	/**
+	 * Screen object.
+	 *
+	 * @var object
+	 */
+	public $screen;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {

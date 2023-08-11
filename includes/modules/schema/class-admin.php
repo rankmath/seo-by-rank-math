@@ -10,12 +10,9 @@
 
 namespace RankMath\Schema;
 
-use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Module\Base;
-use RankMath\Rest\Sanitize;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\Arr;
 use MyThemeShop\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
@@ -24,6 +21,20 @@ defined( 'ABSPATH' ) || exit;
  * Admin class.
  */
 class Admin extends Base {
+
+	/**
+	 * Module ID.
+	 * 
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory = '';
 
 	/**
 	 * The Constructor.
@@ -52,7 +63,7 @@ class Admin extends Base {
 	 */
 	public function display_schema_type( $post_id, $data ) {
 		$schema = absint( get_option( 'page_for_posts' ) ) !== $post_id ? $this->get_schema_types( $data, $post_id ) : 'CollectionPage';
-		$schema = ! empty( $schema ) ? $schema : Helper::get_default_schema_type( $post_id, true, true );
+		$schema = ! empty( $schema ) ? $schema : $this->get_schema_name( Helper::get_default_schema_type( $post_id, true ) );
 		$schema = $schema ? $schema : esc_html__( 'Off', 'rank-math' );
 		?>
 			<span class="rank-math-column-display schema-type">
@@ -208,7 +219,7 @@ class Admin extends Base {
 			}
 
 			if ( ! is_array( $schema['@type'] ) ) {
-				$types[] = Helper::sanitize_schema_title( $schema['@type'] );
+				$types[] = $this->get_schema_name( $schema['@type'] );
 				continue;
 			}
 
@@ -216,7 +227,7 @@ class Admin extends Base {
 				$types,
 				array_map(
 					function( $type ) {
-						return Helper::sanitize_schema_title( $type );
+						return $this->get_schema_name( $type );
 					},
 					$schema['@type']
 				)
@@ -224,7 +235,7 @@ class Admin extends Base {
 		}
 
 		if ( empty( $types ) && Helper::get_default_schema_type( $post_id ) ) {
-			$types[] = ucfirst( Helper::get_default_schema_type( $post_id ) );
+			$types[] = $this->get_schema_name( Helper::get_default_schema_type( $post_id ) );
 		}
 
 		if ( has_block( 'rank-math/faq-block', $post_id ) ) {
@@ -236,6 +247,18 @@ class Admin extends Base {
 		}
 
 		return empty( $types ) ? false : implode( ', ', $types );
+	}
+
+	/**
+	 * Function to get Sanitized schema name with sub-schema.
+	 *
+	 * @param string $schema Selected schema type.
+	 *
+	 * @return string Schema name with sub-schema.
+	 */
+	private function get_schema_name( $schema ) {
+		$subtitle = in_array( $schema, [ 'BlogPosting', 'NewsArticle' ], true ) ? " ($schema)" : '';
+		return Helper::sanitize_schema_title( $schema ) . $subtitle;
 	}
 
 	/**
