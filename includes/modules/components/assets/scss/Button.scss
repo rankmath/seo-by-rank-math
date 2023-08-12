@@ -1,5 +1,8 @@
 @import '@wordpress/components/build-style/style.css';
 
+$btn-hover-color: #EDF6FA;
+$btn-hover-color-disabled: #E6F2F9;
+
 .components-button.is-large {
   height: 48px;
   line-height: 22px;
@@ -7,7 +10,29 @@
   padding: 12px 20px;
 }
 
+.components-button.primary-outline {
+  &:hover, &:focus {
+    background-color: $btn-hover-color;
+  }
+}
+
 .components-button.is-primary:disabled,
 .components-button.is-primary[aria-disabled="true"] {
   opacity: 0.3;
+}
+
+.components-button.is-secondary:disabled,
+.components-button.is-secondary[aria-disabled="true"], .components-button.is-secondary:disabled:hover,
+.components-button.is-secondary[aria-disabled="true"]:hover {
+  color: var(--wp-admin-theme-color);
+  opacity: 0.3;
+  box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
+  outline: 1px solid transparent;
+  transform: inherit;
+}
+
+.components-button.primary-outline:disabled,
+.components-button.primary-outline[aria-disabled="true"], .components-button.is-secondary:disabled:hover,
+.components-button.is-secondary[aria-disabled="true"]:hover {
+  background-color: $btn-hover-color-disabled;
 }
