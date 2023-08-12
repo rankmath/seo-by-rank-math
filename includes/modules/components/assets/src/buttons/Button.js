@@ -13,20 +13,28 @@ import '../../scss/Button.scss'
 import { Button as WPButton } from '@wordpress/components';
 
 const Button = ({ children, variant = 'primary', size = 'default', disabled = false }) => {
+  const variantClassMap = {
+    'primary-outline': 'primary-outline',
+    'secondary-grey': 'secondary-grey',
+    tertiary: 'secondary'
+  };
+
   const getButtonClasses = () => {
-    const classes = []
+    let classes = '';
 
-    size === 'large' && classes.push('is-large');
+    size === 'large' ? classes += ' is-large' : '';
 
-    variant === 'primary-outline' && classes.push('primary-outline');
-    variant === 'secondary-grey' && classes.push('secondary-grey');
 
-    return classes.join(' ')
-  }
+    if (variantClassMap[variant]) {
+      classes += ` ${variantClassMap[variant]}`;
+    }
+
+    return classes;
+  };
 
   return (
     <WPButton
-      variant={(variant === 'primary-outline' || variant === 'secondary-grey' || variant === 'tertiary') ? 'secondary' : variant}
+      variant={variantClassMap[variant] ? 'secondary' : variant}
       size={size}
       disabled={disabled}
       aria-disabled={disabled}
