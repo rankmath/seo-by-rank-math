@@ -10,9 +10,9 @@ import '../../scss/Button.scss'
 /**
  * WordPress dependencies
  */
-import { Button as WPButton } from '@wordpress/components';
+import { Button } from '@wordpress/components';
 
-const Button = ({
+export default function Button({
   children,
   variant = 'primary',
   size = 'default',
@@ -32,7 +32,7 @@ const Button = ({
   icon,
   iconPosition,
   iconSize,
-}) => {
+}) {
   const variantClassMap = {
     'primary-outline': 'primary-outline',
     'secondary-grey': 'secondary-grey',
@@ -53,7 +53,7 @@ const Button = ({
   };
 
   return (
-    <WPButton
+    <Button
       variant={variantClassMap[variant] ? 'secondary' : variant}
       aria-disabled={disabled}
       className={getButtonClasses()}
@@ -79,11 +79,9 @@ const Button = ({
       }}
     >
       {children}
-    </WPButton>
+    </Button>
   )
 }
-
-export default Button
 
 
 export const ButtonShowcase = () => {
