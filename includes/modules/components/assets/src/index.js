@@ -7,12 +7,14 @@ import { createElement, render } from '@wordpress/element';
  * Internal dependencies
  */
 import '../scss/components.scss'
+import TextControl from './inputs/TextControl';
 
 const AllComponents = () => {
   return (
-    <>
-      components
-    </>
+    <div className='group-components'>
+      <TextControl placeholder='Placeholder Text' />
+      <TextControl placeholder='Disabled Field' disabled />
+    </div>
   );
 };
 

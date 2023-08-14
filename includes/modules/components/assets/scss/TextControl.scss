@@ -1,0 +1,8 @@
+@import '@wordpress/components/build-style/style.css';
+
+input {
+  &:disabled {
+    background: #F0F0F0;
+    opacity: 0.3;
+  }
+}
