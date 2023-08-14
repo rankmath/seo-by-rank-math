@@ -12,6 +12,8 @@ $secondary-active-outline: gray;
 
 $secondary-grey-bg: #FAFAFA;
 
+$tertiary-color: gray;
+
 $btn-pressed-bg: #1e1e1e;
 
 
@@ -143,11 +145,23 @@ $btn-pressed-bg: #1e1e1e;
         background-color: $btn-pressed-bg;
       }
     }
-}
 
-// .components-button.has-icon.has-text {
-//   justify-content: start;
-//   padding-right: 12px;
-//   padding-left: 8px;
-//   gap: 1px;
-// }
+    /*Tertiary Variant*/
+    &.tertiary {
+      color: $tertiary-color;
+    }
+
+    /*Has Icon*/
+    &.has-icon{
+      &.has-text{
+        justify-content: start;
+        padding-right: 12px;
+        padding-left: 8px;
+        gap: 4px;
+
+        svg {
+          margin-right: 0px;
+        }
+      }
+    }
+}
