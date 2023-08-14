@@ -10,7 +10,7 @@ import '../../scss/Button.scss'
 /**
  * WordPress dependencies
  */
-import { Button } from '@wordpress/components';
+import { Button as WPButton } from '@wordpress/components';
 
 export default function Button({
   children,
@@ -53,7 +53,7 @@ export default function Button({
   };
 
   return (
-    <Button
+    <WPButton
       variant={variantClassMap[variant] ? 'secondary' : variant}
       aria-disabled={disabled}
       className={getButtonClasses()}
@@ -79,7 +79,7 @@ export default function Button({
       }}
     >
       {children}
-    </Button>
+    </WPButton>
   )
 }
 
