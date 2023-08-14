@@ -1,8 +1,74 @@
 @import '@wordpress/components/build-style/style.css';
 
-input {
-  &:disabled {
-    background: #F0F0F0;
-    opacity: 0.3;
+/* Variables */
+$text-control-border-color: #A7A7A7;
+$text-control-disabled-border-color: #F0F0F0;
+$validation-success: #4AB866;
+$validation-error: #FB7272;
+
+.text-control-container {
+  position: relative;
+
+  .text-control-icon {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-40%);
+    right: 0.5rem;
+
+    .validation-icon {
+      font-size: 1rem;
+
+      &.is-error {
+        color: $validation-error;
+      }
+
+      &.is-success {
+        color: $validation-success;
+      }
+    }
+  }
+
+  .components-text-control__input, 
+  .components-text-control__input[type="text"] {
+    border: 1px solid $text-control-border-color;
+
+    &:active:not(:disabled), &:focus:not(:disabled) {
+      border-color: var(--wp-admin-theme-color);
+    }
+  }
+
+  input {
+    &:disabled {
+      background: $text-control-disabled-border-color;
+      opacity: 0.3;
+    }
+  }
+
+  .components-base-control {
+    &.is-success {
+      input {
+        border-color: $validation-success;
+        background-color: #F9FDFA;
+        padding-right: 1.6rem;
+
+        &:active:not(:disabled), &:focus:not(:disabled) {
+          border-color: $validation-success;
+          box-shadow: 0 0 0 1px $validation-success;
+        }
+      }
+    }
+
+    &.is-error {
+      input {
+        border-color: $validation-error;
+        background-color: #FFFAFA;
+        padding-right: 1.6rem;
+
+        &:active:not(:disabled), &:focus:not(:disabled) {
+          border-color: $validation-error;
+          box-shadow: 0 0 0 1px $validation-error;
+        }
+      }
+    }
   }
 }
