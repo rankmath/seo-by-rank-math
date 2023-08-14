@@ -28,6 +28,7 @@ export default function ({
   icon,
   iconPosition,
   iconSize,
+  ...rest
 }) {
   const variantClassMap = {
     'primary-outline': 'is-primary-outline',
@@ -40,7 +41,6 @@ export default function ({
 
     size === 'large' ? classes += ' is-large' : '';
 
-
     if (variantClassMap[variant]) {
       classes += ` ${variantClassMap[variant]}`;
     } else if (variant === 'tertiary') {
@@ -50,33 +50,32 @@ export default function ({
     return classes;
   };
 
+  const buttonProps = {
+    variant: variantClassMap[variant] ? 'secondary' : variant,
+    'aria-disabled': disabled,
+    className: getButtonClasses(),
+    size,
+    disabled,
+    describedBy,
+    focus,
+    isBusy,
+    isDestructive,
+    isPressed,
+    label,
+    showTooltip,
+    shortcut,
+    href,
+    target,
+    text,
+    tooltipPosition,
+    icon,
+    iconPosition,
+    iconSize,
+    children,
+    ...rest
+  };
+
   return (
-    <Button
-      variant={variantClassMap[variant] ? 'secondary' : variant}
-      aria-disabled={disabled}
-      className={getButtonClasses()}
-      {...{
-        size,
-        disabled,
-        describedBy,
-        focus,
-        isBusy,
-        isDestructive,
-        isPressed,
-        label,
-        showTooltip,
-        shortcut,
-        href,
-        target,
-        text,
-        tooltipPosition,
-        icon,
-        iconPosition,
-        iconSize,
-        children
-      }}
-    >
-      {children}
-    </Button>
+    <Button {...buttonProps}>{children}</Button>
   )
 }
