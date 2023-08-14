@@ -13,6 +13,8 @@ $secondary-active-outline: gray;
 $secondary-grey-bg: #FAFAFA;
 
 $tertiary-color: gray;
+$tertiary-hover-color: #F7F7F7;
+$tertiary-active-outline: gray;
 
 $btn-pressed-bg: #1e1e1e;
 
@@ -28,116 +30,116 @@ $btn-pressed-bg: #1e1e1e;
 
     /*Primary Variant*/
     &.is-primary {
-        &:disabled,
-        &[aria-disabled="true"] {
-            opacity: 0.3;
-        }
+      &:disabled,
+      &[aria-disabled="true"] {
+          opacity: 0.3;
+      }
 
-        &.is-destructive {
-            &:active, &:focus {
-                outline-color: #cc1818;
-                color: white;
+      &.is-destructive {
+        &:active, &:focus {
+          outline-color: #cc1818;
+          color: white;
 
-                &:hover {
-                    background-color: #9E1313;
-                    box-shadow: inset 0 0 0 1px #fff, 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
-                }
-            }
+          &:hover {
+            background-color: #9E1313;
+            box-shadow: inset 0 0 0 1px #fff, 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
+          }
         }
+      }
     }
 
     /*Secondary Variant*/
     &.is-secondary {
-        box-shadow: inset 0 0 0 1px $secondary-box-shadow;
-        color: $secondary-color;
-
-        &:hover, &:focus {
-            background-color: $secondary-bg;
-        }
-
-        &:active, &:focus {
-            outline-color: $secondary-active-outline;
-        }
-
-        &:hover:not(:disabled) {
-            box-shadow: inset 0 0 0 1px $secondary-box-shadow;
-            outline: none;
-            color: $secondary-color;
-        }
-
-        &:disabled,
-        &[aria-disabled="true"],
-        &:disabled:hover,
-        &[aria-disabled="true"]:hover {
-            color: inherit;
-            opacity: 0.3;
-            box-shadow: inset 0 0 0 1px $secondary-box-shadow;
-            outline: 1px solid transparent;
-            transform: inherit;
-            background-color: $secondary-disabled-bg;
-        }
-
-        &.is-destructive {
-            color: #cc1818;
-            box-shadow: inset 0 0 0 1px #cc1818;
-
-            &:hover:not(:disabled) {
-                color: #710d0d;
-                box-shadow: inset 0 0 0 1px #710d0d;
-            }
-
-            &:focus:not(:disabled) {
-                color: #cc1818;
-                background-color: #FAFAFA;
-            }
-
-            &:active:not(:disabled) {
-                background: #ccc;
-            }
-
-            &:active, &:focus {
-                outline-color: #cc1818;
-            }
-        }
-    }
-
-    /*Primary-Outline Variant*/
-    &.primary-outline {
-      box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
-      color: var(--wp-admin-theme-color);
+      box-shadow: inset 0 0 0 1px $secondary-box-shadow;
+      color: $secondary-color;
 
       &:hover, &:focus {
-          background-color: $primary-outline-hover-color;
+        background-color: $secondary-bg;
       }
 
       &:active, &:focus {
-          outline-color: var(--wp-admin-theme-color);
-          background-color: $primary-outline-hover-color;
+        outline-color: $secondary-active-outline;
       }
 
       &:hover:not(:disabled) {
-          box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
-          color: var(--wp-admin-theme-color);
-      }
-
-      &.is-destructive {
-          &:hover:not(:disabled) {
-              background-color: transparent;
-          }
+        box-shadow: inset 0 0 0 1px $secondary-box-shadow;
+        outline: none;
+        color: $secondary-color;
       }
 
       &:disabled,
       &[aria-disabled="true"],
       &:disabled:hover,
       &[aria-disabled="true"]:hover {
-          background-color: $primary-outline-hover-color-disabled;
-          box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
-          color: var(--wp-admin-theme-color);
+        color: inherit;
+        opacity: 0.3;
+        box-shadow: inset 0 0 0 1px $secondary-box-shadow;
+        outline: 1px solid transparent;
+        transform: inherit;
+        background-color: $secondary-disabled-bg;
+      }
+
+      &.is-destructive {
+        color: #cc1818;
+        box-shadow: inset 0 0 0 1px #cc1818;
+
+        &:hover:not(:disabled) {
+            color: #710d0d;
+            box-shadow: inset 0 0 0 1px #710d0d;
+        }
+
+        &:focus:not(:disabled) {
+            color: #cc1818;
+            background-color: #FAFAFA;
+        }
+
+        &:active:not(:disabled) {
+            background: #ccc;
+        }
+
+        &:active, &:focus {
+            outline-color: #cc1818;
+        }
+      }
+    }
+
+    /*Primary-Outline Variant*/
+    &.is-primary-outline {
+      box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
+      color: var(--wp-admin-theme-color);
+
+      &:hover, &:focus {
+        background-color: $primary-outline-hover-color;
+      }
+
+      &:active, &:focus {
+        outline-color: var(--wp-admin-theme-color);
+        background-color: $primary-outline-hover-color;
+      }
+
+      &:hover:not(:disabled) {
+        box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
+        color: var(--wp-admin-theme-color);
+      }
+
+      &.is-destructive {
+        &:hover:not(:disabled) {
+          background-color: transparent;
+        }
+      }
+
+      &:disabled,
+      &[aria-disabled="true"],
+      &:disabled:hover,
+      &[aria-disabled="true"]:hover {
+        background-color: $primary-outline-hover-color-disabled;
+        box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
+        color: var(--wp-admin-theme-color);
       }
     }
 
     /*Secondary-Grey Variant*/
-    &.secondary-grey {
+    &.is-secondary-grey {
       background-color: $secondary-grey-bg;
 
       &.is-pressed {
@@ -147,8 +149,27 @@ $btn-pressed-bg: #1e1e1e;
     }
 
     /*Tertiary Variant*/
-    &.tertiary {
+    &.is-tertiary {
       color: $tertiary-color;
+
+      &:hover:not(:disabled) {
+        color: $tertiary-color;
+        box-shadow: none;
+        background-color: $tertiary-hover-color;
+      }
+
+      &:active, &:focus {
+        box-shadow: inset 0 0 0 1px #fff, 0 0 0 var(--wp-admin-border-width-focus) $tertiary-active-outline;
+      }
+
+      &:disabled,
+      &[aria-disabled="true"],
+      &:disabled:hover,
+      &[aria-disabled="true"]:hover {
+        color: $tertiary-color;
+        background-color: transparent;
+        opacity: 0.3;
+      }
     }
 
     /*Has Icon*/

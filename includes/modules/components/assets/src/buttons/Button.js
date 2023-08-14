@@ -30,8 +30,8 @@ export default function ({
   iconSize,
 }) {
   const variantClassMap = {
-    'primary-outline': 'primary-outline',
-    'secondary-grey': 'secondary-grey',
+    'primary-outline': 'is-primary-outline',
+    'secondary-grey': 'is-secondary-grey',
     'tertiary-outline': 'secondary',
   };
 
