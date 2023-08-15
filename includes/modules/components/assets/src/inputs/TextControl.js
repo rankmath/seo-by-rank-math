@@ -15,7 +15,7 @@ import { TextControl } from '@wordpress/components';
 import { useRef } from '@wordpress/element';
 
 export default function ({
-  type,
+  type = 'text',
   placeholder,
   onChange,
   value,

@@ -9,6 +9,7 @@ import '../../../../../assets/admin/scss/_font-icons.scss';
  */
 import Button from './buttons/Button';
 import TextControl from './inputs/TextControl';
+import TextAreaControl from './inputs/TextAreaControl';
 import '../scss/components.scss'
 
 
@@ -21,11 +22,23 @@ const AllComponents = () => {
   );
 };
 
+function TextAreaControlShowcase() {
+  return (
+    <>
+      <div className='group-components'>
+        <TextAreaControl placeholder='Placeholder Text' />
+        <TextAreaControl placeholder='Disabled Field' disabled />
+      </div>
+    </>
+  )
+}
+
 function TextControlShowcase() {
   return (
     <>
       <div className='group-components'>
         <TextControl type='number' placeholder='Placeholder Text' />
+        <TextControl placeholder='Placeholder Text' />
         <TextControl placeholder='Disabled Field' disabled />
       </div>
 
