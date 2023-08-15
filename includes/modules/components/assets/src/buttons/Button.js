@@ -38,7 +38,7 @@ export default function ({
   const variantClassMap = {
     'primary-outline': 'is-primary-outline',
     'secondary-grey': 'is-secondary-grey',
-    'tertiary-outline': 'secondary',
+    'tertiary-outline': 'is-tertiary-outline',
   };
 
   const getButtonClasses = () => {

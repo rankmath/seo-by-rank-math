@@ -16,10 +16,7 @@ import '../scss/components.scss'
 const AllComponents = () => {
   return (
     <div className='components-container'>
-      <TextAreaControlShowcase />
-
-
-      <TextControlShowcase />
+      <ButtonsShowcase />
     </div>
   );
 };
@@ -63,7 +60,7 @@ function ButtonsShowcase() {
         <div className='group-components'>
           <Button size='small' onMouseOver={() => console.log('clicked')}>Label</Button>
 
-          <Button>Label</Button>
+          <Button icon={<i className='rm-icon-trash'></i>}>Label</Button>
 
           <Button size='large' children={'Label'} />
 
@@ -77,7 +74,7 @@ function ButtonsShowcase() {
         <div className='group-components'>
           <Button variant='primary-outline' size='small'>Label</Button>
 
-          <Button variant='primary-outline'>Label</Button>
+          <Button variant='primary-outline' icon={<i className='rm-icon-trash'></i>}>Label</Button>
 
           <Button variant='primary-outline' size='large'>Label</Button>
 
@@ -91,7 +88,7 @@ function ButtonsShowcase() {
         <div className='group-components'>
           <Button variant='secondary' size='small'>Label</Button>
 
-          <Button variant='secondary'>Label</Button>
+          <Button variant='secondary' icon={<i className='rm-icon-trash'></i>}>Label</Button>
 
           <Button variant='secondary' size='large'>Label</Button>
 
@@ -105,7 +102,7 @@ function ButtonsShowcase() {
         <div className='group-components'>
           <Button variant='secondary-grey' size='small'>Label</Button>
 
-          <Button variant='secondary-grey'>Label</Button>
+          <Button variant='secondary-grey' icon={<i className='rm-icon-trash'></i>}>Label</Button>
 
           <Button variant='secondary-grey' size='large'>Label</Button>
 
@@ -119,7 +116,7 @@ function ButtonsShowcase() {
         <div className='group-components'>
           <Button variant='tertiary-outline' size='small'>Label</Button>
 
-          <Button variant='tertiary-outline'>Label</Button>
+          <Button variant='tertiary-outline' icon={<i className='rm-icon-trash'></i>}>Label</Button>
 
           <Button variant='tertiary-outline' size='large'>Label</Button>
 
@@ -133,7 +130,7 @@ function ButtonsShowcase() {
         <div className='group-components'>
           <Button variant='tertiary' size='small'>Label</Button>
 
-          <Button variant='tertiary'>Label</Button>
+          <Button variant='tertiary' icon={<i className='rm-icon-trash'></i>}>Label</Button>
 
           <Button variant='tertiary' size='large'>Label</Button>
 
