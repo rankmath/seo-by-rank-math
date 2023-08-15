@@ -1,1 +1,22 @@
 @import '@wordpress/components/build-style/style.css';
+
+.components-base-control {
+  .components-base-control__field {
+    .components-textarea-control__input {
+      &::placeholder {
+        color: #9E9E9E;
+      }
+
+      &:disabled {
+          background: #F0F0F0;
+          opacity: 0.5;
+      }
+
+      &:focus {
+        border-color: var(--wp-admin-theme-color);
+        box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+        outline: 2px solid transparent;
+      }
+    }
+  }
+}

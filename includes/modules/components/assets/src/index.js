@@ -2,21 +2,23 @@
  * WordPress dependencies
  */
 import { createElement, render } from '@wordpress/element';
-import '../../../../../assets/admin/scss/_font-icons.scss';
 
 /**
  * Internal dependencies
- */
+*/
 import Button from './buttons/Button';
 import TextControl from './inputs/TextControl';
 import TextAreaControl from './inputs/TextAreaControl';
+import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss'
 
 
 const AllComponents = () => {
-
   return (
     <div className='components-container'>
+      <TextAreaControlShowcase />
+
+
       <TextControlShowcase />
     </div>
   );
