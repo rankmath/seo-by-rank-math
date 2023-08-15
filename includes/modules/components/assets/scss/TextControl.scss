@@ -11,74 +11,76 @@ $control-icon-disabled-color: gray;
 .text-control-container {
   position: relative;
 
-  input {
-    &:disabled {
-      background: $text-control-disabled-border-color;
-      opacity: 0.3;
-    }
-  }
-
-  .components-text-control__input {
-    border: 1px solid $text-control-border-color;
-
-    &:active:not(:disabled), 
-    &:focus:not(:disabled) {
-      border-color: var(--wp-admin-theme-color);
-    }
-
-    &::placeholder {
-      color: #9E9E9E;
-    }
-  }
-
-  .components-text-control__input[type="number"] {
-    padding-right: 3.7rem;
-  }
-
   .components-base-control {
     &.is-success {
-      input {
-        border-color: $validation-success;
-        background-color: #F9FDFA;
-        padding-right: 1.6rem;
-
-        &:active:not(:disabled), &:focus:not(:disabled) {
-          border-color: $validation-success;
-          box-shadow: 0 0 0 1px $validation-success;
+      .components-base-control__field {
+        .components-text-control__input {
+          border: 1px solid $validation-success;
+          background-color: #F9FDFA;
+          padding-right: 1.6rem;
+          
+          &:active:not(:disabled), &:focus:not(:disabled) {
+            border-color: $validation-success;
+            box-shadow: 0 0 0 1px $validation-success;
+          }
         }
       }
     }
 
     &.is-error {
-      input {
-        border-color: $validation-error;
-        background-color: #FFFAFA;
-        padding-right: 1.6rem;
-
-        &:active:not(:disabled), &:focus:not(:disabled) {
+      .components-base-control__field {
+        .components-text-control__input {
           border-color: $validation-error;
-          box-shadow: 0 0 0 1px $validation-error;
+          background-color: #FFFAFA;
+          padding-right: 1.6rem;
+
+          &:active:not(:disabled), &:focus:not(:disabled) {
+            border-color: $validation-error;
+            box-shadow: 0 0 0 1px $validation-error;
+          }
         }
       }
     }
-  }
 
-  .components-base-control__field {
-    margin-bottom: 0px;
-  }
-
-  .hide-default-number-controls {
-    input {
-      -webkit-appearance: none;
-      -moz-appearance: textfield;
-      appearance: textfield;
-      margin: 0;
-
-      &::-webkit-inner-spin-button,
-      &::-webkit-outer-spin-button {
+    &.hide-default-number-controls {
+      input {
         -webkit-appearance: none;
-        appearance: none;
+        -moz-appearance: textfield;
+        appearance: textfield;
         margin: 0;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    .components-base-control__field {
+      margin-bottom: 0px;
+
+      .components-text-control__input {
+        border: 1px solid $text-control-border-color;
+
+        &:active:not(:disabled), 
+        &:focus:not(:disabled) {
+          border-color: var(--wp-admin-theme-color);
+        }
+
+        &::placeholder {
+          color: #9E9E9E;
+        }
+
+        &[type="number"] {
+          padding-right: 3.7rem;
+        }
+
+        &:disabled {
+          background: $text-control-disabled-border-color;
+          opacity: 0.5;
+        }
       }
     }
   }
