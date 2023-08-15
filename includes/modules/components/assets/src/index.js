@@ -16,7 +16,7 @@ const AllComponents = () => {
 
   return (
     <div className='components-container'>
-      <ButtonsShowcase />
+      <TextControlShowcase />
     </div>
   );
 };

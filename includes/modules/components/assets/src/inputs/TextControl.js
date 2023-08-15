@@ -88,12 +88,12 @@ export default function ({
         <div className='text-control-icon custom-number-controls'>
           <i
             onClick={handleIncrement}
-            className={`rm-icon-plus control-icon ${disabled && 'is-disabled'}`}>
+            className={`rm-icon-plus control-icon ${disabled ? 'is-disabled' : ''}`}>
           </i>
 
           <i
             onClick={handleDecrement}
-            className={`rm-icon-trash control-icon ${disabled && 'is-disabled'}`}>
+            className={`rm-icon-trash control-icon ${disabled ? 'is-disabled' : ''}`}>
           </i>
         </div>
       )}

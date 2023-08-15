@@ -5,6 +5,8 @@ $text-control-border-color: #A7A7A7;
 $text-control-disabled-border-color: #F0F0F0;
 $validation-success: #4AB866;
 $validation-error: #FB7272;
+$control-icon-bg: #F0F7FB;
+$control-icon-disabled-color: gray;
 
 .text-control-container {
   position: relative;
@@ -70,11 +72,6 @@ $validation-error: #FB7272;
         appearance: none;
         margin: 0;
       }
-
-      &:focus {
-        outline: none; // Remove the default focus outline
-        border-color: #007bff; // Add your desired focus border color
-      }
     }
   }
 
@@ -106,11 +103,11 @@ $validation-error: #FB7272;
         padding: 0.45rem;
 
         &:hover {
-          background-color: #F0F7FB;
+          background-color: $control-icon-bg;
         }
 
         &.is-disabled {
-          color: gray;
+          color: $control-icon-disabled-color;
            background-color: transparent;
         }
       }
