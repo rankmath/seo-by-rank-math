@@ -2,5 +2,12 @@
   display: flex;
   align-items: end;
   gap: 1rem;
-  margin: 0 2rem 5rem 2rem;
+  margin: 0 0 3rem 0;
+}
+
+.components-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+  padding: 3rem;
 }

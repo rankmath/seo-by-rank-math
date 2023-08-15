@@ -9,22 +9,10 @@ $validation-error: #FB7272;
 .text-control-container {
   position: relative;
 
-  .text-control-icon {
-    position: absolute;
-    top: 40%;
-    transform: translateY(-40%);
-    right: 0.5rem;
-
-    .validation-icon {
-      font-size: 1rem;
-
-      &.is-error {
-        color: $validation-error;
-      }
-
-      &.is-success {
-        color: $validation-success;
-      }
+  input {
+    &:disabled {
+      background: $text-control-disabled-border-color;
+      opacity: 0.3;
     }
   }
 
@@ -37,11 +25,8 @@ $validation-error: #FB7272;
     }
   }
 
-  input {
-    &:disabled {
-      background: $text-control-disabled-border-color;
-      opacity: 0.3;
-    }
+  .components-text-control__input[type="number"] {
+    padding-right: 3.7rem;
   }
 
   .components-base-control {
@@ -67,6 +52,66 @@ $validation-error: #FB7272;
         &:active:not(:disabled), &:focus:not(:disabled) {
           border-color: $validation-error;
           box-shadow: 0 0 0 1px $validation-error;
+        }
+      }
+    }
+  }
+
+  .hide-default-number-controls {
+    input {
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+      appearance: textfield;
+      margin: 0;
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+      }
+
+      &:focus {
+        outline: none; // Remove the default focus outline
+        border-color: #007bff; // Add your desired focus border color
+      }
+    }
+  }
+
+  .text-control-icon {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-40%);
+    right: 0.5rem;
+
+    .validation-icon {
+      font-size: 0.8rem;
+
+      &.is-error {
+        color: $validation-error;
+      }
+
+      &.is-success {
+        color: $validation-success;
+      }
+    }
+
+    &.custom-number-controls {
+      display: flex;
+      align-items: center;
+      font-size: 0.55rem;
+      color: var(--wp-admin-theme-color);
+      
+      .control-icon {
+        padding: 0.45rem;
+
+        &:hover {
+          background-color: #F0F7FB;
+        }
+
+        &.is-disabled {
+          color: gray;
+           background-color: transparent;
         }
       }
     }

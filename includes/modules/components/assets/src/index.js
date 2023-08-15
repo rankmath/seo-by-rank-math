@@ -15,9 +15,9 @@ import '../scss/components.scss'
 const AllComponents = () => {
 
   return (
-    <>
+    <div className='components-container'>
       <TextControlShowcase />
-    </>
+    </div>
   );
 };
 
@@ -25,12 +25,12 @@ function TextControlShowcase() {
   return (
     <>
       <div className='group-components'>
-        <TextControl placeholder='Placeholder Text' />
+        <TextControl type='number' placeholder='Placeholder Text' />
         <TextControl placeholder='Disabled Field' disabled />
       </div>
 
       <div className='group-components'>
-        <TextControl value='email@website.com' isSuccess />
+        <TextControl isSuccess />
         <TextControl value='email@website.com' isError />
       </div>
     </>
