@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import classNames from 'classnames';
+
+/**
  * Internal dependencies
  */
 import '../../scss/Button.scss'
@@ -37,17 +42,13 @@ export default function ({
   };
 
   const getButtonClasses = () => {
-    let classes = '';
-
-    size === 'large' ? classes += ' is-large' : '';
-
-    if (variantClassMap[variant]) {
-      classes += ` ${variantClassMap[variant]}`;
-    } else if (variant === 'tertiary') {
-      classes += 'tertiary'
-    }
-
-    return classes;
+    return classNames(
+      {
+        'is-large': size === 'large',
+        [variantClassMap[variant]]: variantClassMap[variant],
+        tertiary: variant === 'tertiary'
+      }
+    );
   };
 
   const buttonProps = {

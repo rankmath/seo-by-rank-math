@@ -1,4 +1,6 @@
-
+/**
+ * External dependencies
+ */
 import classNames from 'classnames';
 
 /**

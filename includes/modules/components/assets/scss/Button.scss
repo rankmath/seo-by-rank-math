@@ -122,6 +122,10 @@ $btn-pressed-bg: #1e1e1e;
         color: var(--wp-admin-theme-color);
       }
 
+      &:active:not(:disabled) {
+        background-color: #E6F2F9;
+      }
+
       &.is-destructive {
         &:hover:not(:disabled) {
           background-color: transparent;
