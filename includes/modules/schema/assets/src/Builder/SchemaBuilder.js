@@ -15,7 +15,7 @@ import { compose } from '@wordpress/compose'
 import { Fragment, Component } from '@wordpress/element'
 import { Button } from '@wordpress/components'
 import { withSelect, withDispatch } from '@wordpress/data'
-import { doAction } from '@wordpress/hooks'
+import { applyFilters, doAction } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -269,7 +269,7 @@ class SchemaBuilder extends Component {
 		const data = { ...this.state.data }
 		const parent = findProperty( propertyId, data )
 		Object.assign( parent, { [ property ]: value } )
-		if ( ! isEmpty( data.metadata ) && has( data.metadata, parent.property ) ) {
+		if ( ! isEmpty( data.metadata ) && has( data.metadata, parent.property ) && parent.property !== 'title' ) {
 			data.metadata[ parent.property ] = value
 		}
 
@@ -299,6 +299,12 @@ export default compose(
 	withSelect( ( select, props ) => {
 		const selected = select( 'rank-math' ).getEditingSchema()
 		const schemas = select( 'rank-math' ).getEditSchemas()
+
+		// Some properties are saved in database as metadata[], we need to sync those values with the defaults.
+		applyFilters(
+			'rank_math_schema_apply_metadata_values_' + selected.data.property.replaceAll( ' ', '_' ),
+			selected.data
+		)
 		return {
 			...props,
 			...selected,

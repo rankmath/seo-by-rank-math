@@ -82,12 +82,7 @@ class Terms {
 
 		$terms = $query->orderBy( $sort['field'], $sort['order'] )->get();
 
-		return array_filter(
-			$terms,
-			function( $term ) use ( $taxonomy ) {
-				return SitemapBase::is_object_indexable( get_term( $term->term_id, $taxonomy ), 'term' );
-			}
-		);
+		return $this->get_indexable_terms( $terms, $taxonomy );
 	}
 
 	/**
@@ -101,6 +96,7 @@ class Terms {
 	 */
 	public function generate_sitemap( $taxonomy, $show_dates, $args = [] ) {
 		$terms = get_terms( $taxonomy, $args );
+		$terms = $this->get_indexable_terms( $terms, $taxonomy );
 		if ( empty( $terms ) ) {
 			return '';
 		}
@@ -251,6 +247,22 @@ class Terms {
 			$terms,
 			function ( $term ) {
 				return ! $term->parent;
+			}
+		);
+	}
+
+	/**
+	 * Remove terms that are not indexable.
+	 *
+	 * @param array  $terms    Array of terms.
+	 * @param string $taxonomy Taxonomy name that `$terms` are part of.
+	 * @return array
+	 */
+	private function get_indexable_terms( $terms, $taxonomy ) {
+		return array_filter(
+			$terms,
+			function( $term ) use ( $taxonomy ) {
+				return SitemapBase::is_object_indexable( get_term( $term->term_id, $taxonomy ), 'term' );
 			}
 		);
 	}

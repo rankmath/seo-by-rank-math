@@ -118,8 +118,8 @@ class Analytics extends Request {
 	/**
 	 * Query analytics data from google client api.
 	 *
-	 * @param string $start_date Start date.
-	 * @param string $end_date   End date.
+	 * @param array   $options Analytics options.
+	 * @param boolean $days    Whether to include dates.
 	 *
 	 * @return array
 	 */
@@ -153,7 +153,7 @@ class Analytics extends Request {
 		}
 
 		// Check dates.
-		$dates 		= Base::get_dates();
+		$dates      = Base::get_dates();
 		$start_date = isset( $options['start_date'] ) ? $options['start_date'] : $dates['start_date'];
 		$end_date   = isset( $options['end_date'] ) ? $options['end_date'] : $dates['end_date'];
 		if ( ! $start_date || ! $end_date ) {
@@ -211,6 +211,7 @@ class Analytics extends Request {
 						'dimensions' => [
 							[ 'name' => 'ga:date' ],
 							[ 'name' => 'ga:pagePath' ],
+							[ 'name' => 'ga:hostname' ],
 						],
 						'orderBys'   => [
 							[
@@ -261,11 +262,26 @@ class Analytics extends Request {
 				],
 			],
 			'dimensionFilter' => [
-				'filter' => [
-					'fieldName'    => 'streamId',
-					'stringFilter' => [
-						'matchType' => 'EXACT',
-						'value'     => $view_id,
+				'andGroup' => [
+					'expressions' => [
+						[
+							'filter' => [
+								'fieldName'    => 'streamId',
+								'stringFilter' => [
+									'matchType' => 'EXACT',
+									'value'     => $view_id,
+								],
+							],
+						],
+						[
+							'filter' => [
+								'fieldName'    => 'sessionMedium',
+								'stringFilter' => [
+									'matchType' => 'EXACT',
+									'value'     => 'organic',
+								],
+							],
+						],
 					],
 				],
 			],
@@ -285,8 +301,10 @@ class Analytics extends Request {
 			$args = wp_parse_args(
 				[
 					'dimensions' => [
-						[ 'name' => 'pagePathPlusQueryString' ],
+						[ 'name' => 'hostname' ],
+						[ 'name' => 'pagePath' ],
 						[ 'name' => 'countryId' ],
+						[ 'name' => 'sessionMedium' ],
 					],
 					'metrics'    => [
 						[ 'name' => 'screenPageViews' ],
@@ -298,11 +316,13 @@ class Analytics extends Request {
 
 			// Include country.
 			if ( $country ) {
-				$args['dimensionFilter']['filter'] = [
-					'fieldName'    => 'countryId',
-					'stringFilter' => [
-						'matchType' => 'EXACT',
-						'value'     => $country,
+				$args['dimensionFilter']['andGroup']['expressions'][] = [
+					'filter' => [
+						'fieldName'    => 'countryId',
+						'stringFilter' => [
+							'matchType' => 'EXACT',
+							'value'     => $country,
+						],
 					],
 				];
 			}

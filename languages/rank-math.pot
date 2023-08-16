@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2023-06-28 04:59+0000\n"
+"POT-Creation-Date: 2023-07-12 05:33+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -282,6 +282,9 @@ msgid "Additional profile URLs"
 msgstr ""
 
 msgid "The canonical URL you entered does not seem to be a valid URL. Please double check it in the SEO meta box &raquo; Advanced tab."
+msgstr ""
+
+msgid "Please update to WordPress v6.0 or higher as Rank Math SEO will soon stop supporting lower versions."
 msgstr ""
 
 msgid "Copy Link URL to Clipboard"

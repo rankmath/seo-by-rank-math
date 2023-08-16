@@ -210,7 +210,7 @@ class Registration {
 	public function admin_menu() {
 		add_menu_page(
 			esc_html__( 'Rank Math', 'rank-math' ),
-			esc_html__( 'Rank Math', 'rank-math' ),
+			esc_html__( 'Rank Math SEO', 'rank-math' ),
 			'manage_options',
 			$this->slug,
 			[ $this, 'render_page' ]
