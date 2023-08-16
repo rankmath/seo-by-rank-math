@@ -10,7 +10,7 @@ import { useState } from '@wordpress/element';
 import Button from './buttons/Button';
 import TextControl from './inputs/TextControl';
 import TextAreaControl from './inputs/TextAreaControl';
-import SelectControl from './select/SelectControl';
+import CustomSelectControl from './select/CustomSelectControl';
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss'
 
@@ -24,7 +24,7 @@ const AllComponents = () => {
   return (
     <div className='components-container'>
       <div className='group-components'>
-        <SelectControl
+        <CustomSelectControl
           label="Test"
           value={size}
           options={
@@ -50,7 +50,7 @@ const AllComponents = () => {
           onChange={(target) => setSize(target.selectedItem)}
         // disabled
         />
-        <SelectControl
+        <CustomSelectControl
           label="Test"
           value={size}
           options={
