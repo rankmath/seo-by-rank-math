@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.2.2
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.117.1
+Stable tag: 1.0.118
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,15 +583,16 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.117 [June 15, 2023] =
-- Added: New option to [test Google Analytics connection status](https://rankmath.com/kb/general-settings/#test-connections)
-- Improved: Compatibility with PHP 8.2
-- Improved: Optimized the [Table of Contents block](https://rankmath.com/kb/table-of-contents-block/) CSS
-- Fixed: PHP warning related to attributes type in the Table of Contents block when Debug mode is enabled on the site
-- Fixed: [Auto Post Redirect](https://rankmath.com/kb/general-settings/#auto-post-redirect) was not working for Attachment posts
-- Fixed: Fatal error related to [Instant Indexing](https://rankmath.com/kb/how-to-use-indexnow/) that occurred on some setups when creating a new post
-
-= 1.0.117.1 [June 16, 2023] =
-- Fixed: A minor bug that affected the connection to [Google Analytics/Google Search Console](https://rankmath.com/kb/analytics/)
+= 1.0.118 [June 28, 2023] =
+- Improved: [`%customfield%` variable](https://rankmath.com/kb/variables-in-seo-title-description/#custom-field-advanced) now works on Taxonomy & Author pages
+- Improved: [Image-related tests in SEO Analyzer](https://rankmath.com/kb/seo-analysis/#image-alt-attributes-test) will now display a clear message when Images are not found on the homepage
+- Fixed: SEO Analyzer was showing an option to [Enable Auto Update](https://rankmath.com/kb/seo-analysis/#priority) even when Auto-updates were disabled on the site using a function
+- Fixed: [Icon Overlay feature](https://rankmath.com/kb/meta-box-social-tab/#add-icon-overlay-to-thumbnails) compatibility issues with sites using the Imagick module
+- Fixed: Incorrect seller ID error in the [Product Schema](https://rankmath.com/kb/product-schema/) on secondary languages
+- Fixed: Timezones in [Sitemap](https://rankmath.com/kb/configure-sitemaps/) were not accurate when using half hours like (+5:30)
+- Fixed: [SEO Score](https://rankmath.com/kb/general-tab/) was shown in Classic Editor even to the users who didn't have the required capabilities
+- Fixed: [404 Monitor](https://rankmath.com/kb/advanced-404-monitor/) log was not including the language slug on multilingual sites
+- Fixed: Redirection with [Contains, Starts With, & Ends with](https://rankmath.com/kb/setting-up-redirections/#contains) was not working well when trailing slash is added in the Source URL
+- Fixed: Incompatibility with the Molongui Authorship plugin
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

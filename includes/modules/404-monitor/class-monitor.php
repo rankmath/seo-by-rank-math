@@ -130,7 +130,7 @@ class Monitor {
 		}
 
 		$uri = untrailingslashit( Helper::get_current_page_url( Helper::get_settings( 'general.404_monitor_ignore_query_parameters' ) ) );
-		$uri = str_replace( home_url( '/' ), '', $uri );
+		$uri = str_replace( Helper::get_home_url( '/' ), '', $uri );
 
 		// Check if excluded.
 		if ( $this->is_url_excluded( $uri ) ) {

@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) || exit;
 					<th scope="row"><label><?php esc_html_e( 'Latest Stable Version', 'rank-math' ); ?></label></th>
 					<td>
 						<strong><?php echo esc_html( $latest_version ); ?></strong>
-						<?php if ( version_compare( $current_version, $latest_version, '<' ) ) { ?>
+						<?php if ( ! Helper::is_plugin_update_disabled() && version_compare( $current_version, $latest_version, '<' ) ) { ?>
 							<a href="<?php echo esc_url( self_admin_url( 'update-core.php' ) ); ?>" class="update-link"><?php esc_html_e( 'Update Now', 'rank-math' ); ?></a>
 						<?php } ?>
 						<p class="description"><?php esc_html_e( 'This is the latest version of the plugin.', 'rank-math' ); ?></p>

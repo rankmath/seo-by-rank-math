@@ -245,16 +245,19 @@ class Advanced_Variables extends Author_Variables {
 			return null;
 		}
 
-		global $post;
-		$object    = is_object( $post ) ? $post : $this->args;
-		$has_post  = is_object( $object ) && isset( $object->ID );
-		$on_screen = is_singular() || is_admin() || ! empty( get_query_var( 'sitemap' ) );
-		if ( ! $has_post || ! $on_screen ) {
+		if ( ! empty( get_query_var( 'sitemap' ) ) ) {
 			return null;
 		}
 
-		$name = get_post_meta( $object->ID, $name, true );
-		return '' !== $name ? $name : null;
+		if ( is_author() ) {
+			return get_user_meta( $this->args->ID, $name, true );
+		} elseif ( is_singular() ) {
+			return get_post_meta( $this->args->ID, $name, true );
+		} elseif ( is_category() || is_tag() || is_tax() ) {
+			return get_term_meta( $this->args->term_id, $name, true );
+		}
+
+		return null;
 	}
 
 	/**

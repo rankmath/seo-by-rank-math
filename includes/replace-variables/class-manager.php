@@ -14,6 +14,8 @@ namespace RankMath\Replace_Variables;
 
 use RankMath\Helper;
 use MyThemeShop\Helpers\Str;
+use MyThemeShop\Helpers\Param;
+use RankMath\Admin\Admin_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -154,6 +156,7 @@ class Manager extends Post_Variables {
 			$screen_base        = $current_screen->base;
 			$this->is_post_edit = is_admin() && 'post' === $screen_base;
 			$this->is_term_edit = is_admin() && 'term' === $screen_base;
+			$this->is_user_edit = is_admin() && ( 'profile' === $screen_base || 'user-edit' === $screen_base );
 		}
 
 		/**
@@ -171,7 +174,7 @@ class Manager extends Post_Variables {
 		$this->setup_advanced_variables();
 
 		// Setup custom fields.
-		if ( $this->is_post_edit ) {
+		if ( $this->is_post_edit || $this->is_term_edit || $this->is_user_edit ) {
 			Helper::add_json( 'customFields', $this->get_custom_fields() );
 			Helper::add_json( 'customTerms', $this->get_custom_taxonomies() );
 		}
@@ -230,9 +233,18 @@ class Manager extends Post_Variables {
 	 * @return array
 	 */
 	private function get_custom_fields() {
-		global $wpdb;
+		$metas = [];
 
-		$metas = get_post_custom( $this->args->ID );
+		if ( $this->is_user_edit ) {
+			global $user_id;
+			$metas = get_metadata( 'user', $user_id );
+		} elseif ( $this->is_post_edit ) {
+			$metas = get_metadata( 'post', $this->args->ID );
+		} elseif ( $this->is_term_edit ) {
+			$term_id = Param::request( 'tag_ID', 0, FILTER_VALIDATE_INT );
+			$metas   = get_metadata( 'term', $term_id );
+		}
+
 		if ( empty( $metas ) ) {
 			return [];
 		}

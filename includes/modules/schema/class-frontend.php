@@ -240,7 +240,7 @@ class Frontend {
 	 * @return array
 	 */
 	public function remove_person_entity( $data ) {
-		if ( empty( $data['ProfilePage'] ) || ! is_singular() ) {
+		if ( empty( $data['ProfilePage'] ) || empty( $data['ProfilePage']['@id'] ) || ! is_singular() ) {
 			return $data;
 		}
 

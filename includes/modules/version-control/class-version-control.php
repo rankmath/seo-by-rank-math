@@ -24,14 +24,14 @@ class Version_Control {
 
 	/**
 	 * Module ID.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $id = '';
 
 	/**
 	 * Module directory.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $directory = '';
@@ -111,7 +111,7 @@ class Version_Control {
 	 * @return bool Change successful.
 	 */
 	public function maybe_save_auto_update() {
-		if ( ! Param::post( 'enable_auto_update' ) || ! Param::post( '_wpnonce' ) ) {
+		if ( ! ( Param::post( 'enable_auto_update' ) || Param::post( 'enable_update_notification_email' ) ) && ! Param::post( '_wpnonce' ) ) {
 			return false;
 		}
 
@@ -123,10 +123,12 @@ class Version_Control {
 			return false;
 		}
 
-		$new_value = Param::post( 'enable_auto_update' ) === 'on' ? 'on' : 'off';
-		Helper::toggle_auto_update_setting( $new_value );
+		if ( Param::post( 'enable_auto_update' ) ) {
+			$new_value = Param::post( 'enable_auto_update' ) === 'on' ? 'on' : 'off';
+			Helper::toggle_auto_update_setting( $new_value );
+		}
 
-		if ( 'off' === $new_value && Param::post( 'enable_update_notification_email' ) ) {
+		if ( Param::post( 'enable_update_notification_email' ) ) {
 			$enable_notifications = Param::post( 'enable_update_notification_email' ) === 'on' ? 'on' : 'off';
 			$settings             = get_option( 'rank-math-options-general', [] );
 

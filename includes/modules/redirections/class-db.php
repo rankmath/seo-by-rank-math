@@ -183,15 +183,20 @@ class DB {
 
 		foreach ( $sources as $source ) {
 			$compare_uri = $uri;
-			if ( 'exact' === $source['comparison'] ) {
+			$comparison  = $source['comparison'];
+			if ( 'exact' === $comparison ) {
 				$compare_uri = untrailingslashit( $compare_uri );
 			}
 
-			if ( 'exact' === $source['comparison'] && isset( $source['ignore'] ) && 'case' === $source['ignore'] && strtolower( $source['pattern'] ) === strtolower( $compare_uri ) ) {
+			if ( in_array( $comparison, [ 'contains', 'start', 'end' ], true ) ) {
+				$source['pattern'] = untrailingslashit( $source['pattern'] );
+			}
+
+			if ( 'exact' === $comparison && isset( $source['ignore'] ) && 'case' === $source['ignore'] && strtolower( $source['pattern'] ) === strtolower( $compare_uri ) ) {
 				return true;
 			}
 
-			if ( Str::comparison( self::get_clean_pattern( $source['pattern'], $source['comparison'] ), $compare_uri, $source['comparison'] ) ) {
+			if ( Str::comparison( self::get_clean_pattern( $source['pattern'], $comparison ), $compare_uri, $comparison ) ) {
 				return true;
 			}
 		}

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2023-06-15 09:52+0000\n"
+"POT-Creation-Date: 2023-06-28 04:59+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -3591,6 +3591,9 @@ msgstr ""
 msgid "Verify auto-updates are enabled for Rank Math"
 msgstr ""
 
+msgid "Site wide plugins auto-update option is disabled on your site."
+msgstr ""
+
 #. translators: placeholder is an activate button.
 msgid "Automatic updates are not enabled on your site. %s"
 msgstr ""
@@ -5912,6 +5915,9 @@ msgstr ""
 msgid "Auto Update"
 msgstr ""
 
+msgid "You cannot turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released, because site wide plugins auto-update option is disabled on your site."
+msgstr ""
+
 msgid "Turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released. The beta versions will never install automatically."
 msgstr ""
 
@@ -5928,6 +5934,9 @@ msgid "Rank Math will not auto-update because you have rolled back to a previous
 msgstr ""
 
 msgid "Beta Opt-in"
+msgstr ""
+
+msgid "You cannot turn on the Beta Tester feature because site wide plugins auto-update option is disabled on your site."
 msgstr ""
 
 msgid "You can take part in shaping Rank Math by test-driving the newest features and letting us know what you think. Turn on the Beta Tester feature to get notified about new beta releases. The beta version will not install automatically and you always have the option to ignore it."

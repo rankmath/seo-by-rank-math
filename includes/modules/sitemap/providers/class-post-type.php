@@ -293,7 +293,10 @@ class Post_Type implements Provider {
 
 		if ( ! $this->get_page_on_front_id() && ( 'post' === $post_type || 'page' === $post_type ) ) {
 			$needs_archive = false;
-			$links[]       = [ 'loc' => $this->get_home_url() ];
+			$links[]       = [
+				'loc' => $this->get_home_url(),
+				'mod' => Sitemap::get_last_modified_gmt( $post_type ),
+			];
 		} elseif ( $this->get_page_on_front_id() && 'post' === $post_type && $this->get_page_for_posts_id() ) {
 			$needs_archive = false;
 			$links[]       = Sitemap::is_object_indexable( $this->get_page_for_posts_id() ) ? [ 'loc' => get_permalink( $this->get_page_for_posts_id() ) ] : '';
