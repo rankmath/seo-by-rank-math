@@ -624,10 +624,7 @@ class Image {
 			return false;
 		}
 
-		$extensions = [ 'jpeg', 'jpg', 'gif', 'png' ];
-		if ( 'twitter' === $this->network ) {
-			$extensions[] = 'webp';
-		}
+		$extensions = [ 'jpeg', 'jpg', 'gif', 'png', 'webp' ];
 
 		return in_array( $check['ext'], $extensions, true );
 	}

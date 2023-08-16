@@ -242,10 +242,13 @@ class Summary {
 		$stats->keywords = $this->get_keywords_summary();
 		$stats->graph    = $this->get_analytics_summary_graph();
 
+		$stats = apply_filters( 'rank_math/analytics/summary', $stats );
+
+		$stats = array_filter( (array) $stats );
+
 		$this->set_cache( $cache_key, $stats, $cache_group, DAY_IN_SECONDS );
 
-		$stats = apply_filters( 'rank_math/analytics/summary', $stats );
-		return array_filter( (array) $stats );
+		return $stats;
 	}
 	/**
 	 * Get posts summary.
