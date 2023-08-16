@@ -35,7 +35,7 @@ class Analytics extends Base {
 	 * The Constructor
 	 */
 	public function __construct() {
-		if ( Conditional::is_heartbeat() ) {
+		if ( Conditional::is_heartbeat() || ! Helper::has_cap( 'analytics' ) ) {
 			return;
 		}
 

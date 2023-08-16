@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.1
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.108
+Stable tag: 1.0.109
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,10 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.108 [Feb 09, 2023] =
-- Added: Support for WebP image format to use with [Facebook's Open Graph](https://rankmath.com/kb/sharing-content-on-social-media/#facebook)
-- Improved: `autoload` data for [SEO Analysis](https://rankmath.com/kb/seo-analysis) & [Database Tools](https://rankmath.com/kb/rank-math-status-and-tools/#database-tools) have now been set to `false`
-- Fixed: Compatibility issues with the ACF's Link type field, where the title added from the Link modal was not saved
-- Fixed: [Analytics](https://rankmath.com/kb/analytics/) was showing zero search traffic on some setups because of the cache
+= 1.0.109 [Feb 22, 2023] =
+- Improved: On new setups, the [Remove Snippet Data](https://rankmath.com/kb/titles-and-meta/#product-categories-remove-snippet-data) option will be enabled on all WooCommerce Product archive pages by default
+- Fixed: [Elementor editor](https://rankmath.com/blog/elementor-seo/) was showing deprecated warnings when the `SCRIPT_DEBUG` constant is set to `true`
+- Fixed: [Analytics Settings](https://rankmath.com/kb/install-google-analytics/#num-4-choose-your-analytics-account-property) will now be shown only to the users who have access to the Analytics through the [Role Manager](https://rankmath.com/kb/role-manager/)
+- Fixed: Some styling issues when the Gutenberg plugin was active
+- Fixed: Missing `author` name in the default Article Schema added to the old posts
+- Fixed: Missing `video:duration` tag when [Custom field variable](https://rankmath.com/kb/variables-in-seo-title-description/#custom-field-advanced) was used in the Video Schema [Duration field](https://rankmath.com/kb/video-schema/#duration)
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

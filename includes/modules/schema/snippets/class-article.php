@@ -40,7 +40,10 @@ class Article implements Snippet {
 			'isPrimary'      => true,
 			'articleSection' => Helper::replace_vars( '%primary_taxonomy_terms%', $jsonld->post ),
 			'author'         => ! empty( $data['ProfilePage'] ) ?
-				[ '@id' => $data['ProfilePage']['@id'] ] :
+				[
+					'@id'  => $data['ProfilePage']['@id'],
+					'name' => $jsonld->parts['author'],
+				] :
 				[
 					'@type' => 'Person',
 					'name'  => $jsonld->parts['author'],
