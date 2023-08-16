@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { createElement, render } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -9,14 +10,73 @@ import { createElement, render } from '@wordpress/element';
 import Button from './buttons/Button';
 import TextControl from './inputs/TextControl';
 import TextAreaControl from './inputs/TextAreaControl';
+import SelectControl from './select/SelectControl';
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss'
 
 
 const AllComponents = () => {
+  const [size, setSize] = useState({
+    key: "large",
+    name: "Large",
+  });
+
   return (
     <div className='components-container'>
-      <ButtonsShowcase />
+      <div className='group-components'>
+        <SelectControl
+          label="Test"
+          value={size}
+          options={
+            [
+              {
+                key: "thumbnail",
+                name: "Thumbnail",
+              },
+              {
+                key: "medium",
+                name: "Medium",
+              },
+              {
+                key: "large",
+                name: "Large",
+              },
+              {
+                key: "full",
+                name: "Full Size",
+              }
+            ]
+          }
+          onChange={(target) => setSize(target.selectedItem)}
+        // disabled
+        />
+        <SelectControl
+          label="Test"
+          value={size}
+          options={
+            [
+              {
+                key: "thumbnail",
+                name: "Thumbnail",
+              },
+              {
+                key: "medium",
+                name: "Medium",
+              },
+              {
+                key: "large",
+                name: "Large",
+              },
+              {
+                key: "full",
+                name: "Full Size",
+              }
+            ]
+          }
+          onChange={(target) => setSize(target.selectedItem)}
+          disabled
+        />
+      </div>
     </div>
   );
 };
