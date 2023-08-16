@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "a5hleyrich/wp-background-processing",
-            "version": "1.1.0",
-            "version_normalized": "1.1.0.0",
+            "version": "1.1.1",
+            "version_normalized": "1.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deliciousbrains/wp-background-processing.git",
-                "reference": "d5ef95cecba7f792ddca3e3bd70ebfb90dc4996d"
+                "reference": "ebbed762c42e70e76573ffbd36e591378ba5f2ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/d5ef95cecba7f792ddca3e3bd70ebfb90dc4996d",
-                "reference": "d5ef95cecba7f792ddca3e3bd70ebfb90dc4996d",
+                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/ebbed762c42e70e76573ffbd36e591378ba5f2ee",
+                "reference": "ebbed762c42e70e76573ffbd36e591378ba5f2ee",
                 "shasum": ""
             },
             "require": {
@@ -28,7 +28,7 @@
             "suggest": {
                 "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
             },
-            "time": "2023-04-18T12:32:25+00:00",
+            "time": "2023-07-18T10:22:06+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -49,7 +49,7 @@
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
             "support": {
                 "issues": "https://github.com/deliciousbrains/wp-background-processing/issues",
-                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.1.0"
+                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.1.1"
             },
             "install-path": "../a5hleyrich/wp-background-processing"
         },

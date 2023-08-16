@@ -94,7 +94,7 @@ class Shortcodes {
 		wp_enqueue_style( 'rank-math-contact-info', rank_math()->assets() . 'css/rank-math-contact-info.css', null, rank_math()->version );
 
 		ob_start();
-		echo '<div class="' . $this->get_contact_classes( $allowed, $args['class'] ) . '">';
+		echo '<div class="' . esc_attr( $this->get_contact_classes( $allowed, $args['class'] ) ) . '">';
 
 		foreach ( $allowed as $element ) {
 			$method = 'display_' . $element;

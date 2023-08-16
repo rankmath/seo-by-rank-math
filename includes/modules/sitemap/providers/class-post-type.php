@@ -426,6 +426,18 @@ class Post_Type implements Provider {
 		$url = [];
 
 		/**
+		 * Filter the post object before it gets added to the sitemap.
+		 * This allows you to add custom properties to the post object, or replace it entirely.
+		 * 
+		 * @param object $post Post object.
+		 */
+		$post = $this->do_filter( 'sitemap/post_object', $post );
+
+		if ( ! $post ) {
+			return false;
+		}
+
+		/**
 		 * Filter the URL Rank Math SEO uses in the XML sitemap.
 		 *
 		 * Note that only absolute local URLs are allowed as the check after this removes external URLs.

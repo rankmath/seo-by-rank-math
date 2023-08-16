@@ -81,6 +81,30 @@ class Search_Console implements Wizard_Step {
 
 		Helper::update_all_settings( $settings['general'], null, null );
 
+		// For Search console.
+		$value = [
+			'country'             => Param::post( 'site-console-country' ),
+			'profile'             => Param::post( 'site-console-profile' ),
+			'enable_index_status' => Param::post( 'enable-index-status' ),
+		];
+		update_option( 'rank_math_google_analytic_profile', $value );
+
+		// For Analytics.
+		$analytic_value = [
+			'adsense_id'       => Param::post( 'site-adsense-account' ),
+			'account_id'       => Param::post( 'site-analytics-account' ),
+			'property_id'      => Param::post( 'site-analytics-property' ),
+			'view_id'          => Param::post( 'site-analytics-view' ),
+			'measurement_id'   => Param::post( 'measurementID' ),
+			'stream_name'      => Param::post( 'streamName' ),
+			'country'          => Param::post( 'site-analytics-country' ),
+			'install_code'     => 'on' === Param::post( 'install-code' ) ? true : false,
+			'anonymize_ip'     => 'on' === Param::post( 'anonymize-ip' ) ? true : false,
+			'local_ga_js'      => 'on' === Param::post( 'local-ga-js' ) ? true : false,
+			'exclude_loggedin' => 'on' === Param::post( 'exclude-loggedin' ) ? true : false,
+		];
+		update_option( 'rank_math_google_analytic_options', $analytic_value );
+
 		return true;
 	}
 }

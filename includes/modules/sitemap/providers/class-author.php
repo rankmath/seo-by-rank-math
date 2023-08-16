@@ -147,9 +147,11 @@ class Author implements Provider {
 			return false;
 		}
 
-		$mod = isset( $user->last_update ) ? date( 'Y-m-d H:i:s', $user->last_update ) : strtotime( $user->user_registered );
+		$mod = isset( $user->last_update ) ? $user->last_update : strtotime( $user->user_registered );
 
-		$date = new DateTime( $mod, new DateTimeZone( 'UTC' ) );
+		$date = new DateTime();
+		$date->setTimestamp( $mod );
+		$date->setTimezone( new DateTimeZone( 'UTC' ) );
 
 		$url = [
 			'loc' => $author_link,

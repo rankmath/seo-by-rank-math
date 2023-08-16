@@ -226,7 +226,7 @@ class Sitemap {
 	 * @param  string|array $post_types Post type or array of types.
 	 * @param  boolean      $return_all Flag to return array of values.
 	 * @return string|array|false
-	 * 
+	 *
 	 * @copyright Copyright (C) 2008-2019, Yoast BV
 	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 */
@@ -255,7 +255,7 @@ class Sitemap {
 
 			if ( ! empty( $post_type_names ) ) {
 				$sql = "
-				SELECT post_type, MAX(post_modified_gmt) AS date
+				SELECT post_type, MAX(GREATEST(post_modified_gmt, post_date_gmt)) AS date
 				FROM $wpdb->posts
 				WHERE post_status IN ('publish','inherit')
 					AND post_type IN ('" . implode( "','", $post_type_names ) . "')

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2023-07-12 05:33+0000\n"
+"POT-Creation-Date: 2023-07-26 09:49+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -2561,6 +2561,9 @@ msgstr ""
 msgid "Clear Log"
 msgstr ""
 
+msgid "View"
+msgstr ""
+
 msgid "Delete"
 msgstr ""
 
@@ -3172,6 +3175,12 @@ msgstr ""
 msgid "Deactivate"
 msgstr ""
 
+msgid "The redirection you are trying to update may cause an infinite loop. Please check the source and destination URLs."
+msgstr ""
+
+msgid "The redirection you are trying to create may cause an infinite loop. Please check the source and destination URLs. The redirection has been deactivated."
+msgstr ""
+
 msgid "Please add at least one valid source URL."
 msgstr ""
 
@@ -3256,9 +3265,6 @@ msgid "Edit"
 msgstr ""
 
 msgid "Trash"
-msgstr ""
-
-msgid "View"
 msgstr ""
 
 msgid "From"
