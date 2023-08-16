@@ -34,7 +34,7 @@ $cmb->add_field(
 		'type' => 'text',
 		'name' => esc_html__( 'Facebook Admin', 'rank-math' ),
 		/* translators: numeric user ID link */
-		'desc' => sprintf( esc_html__( 'Enter %s. Use a comma to separate multiple IDs. Alternatively, you can enter an app ID below.', 'rank-math' ), '<a href="https://findmyfbid.com/?utm_campaign=Rank+Math" target="_blank">numeric user ID</a>' ),
+		'desc' => sprintf( esc_html__( 'Enter %s. Use a comma to separate multiple IDs. Alternatively, you can enter an app ID below.', 'rank-math' ), '<a href="https://lookup-id.com/?utm_campaign=Rank+Math" target="_blank">numeric user ID</a>' ),
 	]
 );
 

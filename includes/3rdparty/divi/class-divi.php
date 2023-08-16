@@ -136,7 +136,7 @@ class Divi {
 		Helper::add_json(
 			'keywordsApi',
 			[
-				'url' => 'https://rankmathapi.com/ltkw/v1/',
+				'url' => 'https://api.rankmath.com/ltkw/v1/',
 			]
 		);
 

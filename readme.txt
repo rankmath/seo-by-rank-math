@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.1
+Tested up to: 6.2
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.110.1
+Stable tag: 1.0.110.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -595,5 +595,9 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 - Fixed: Frequent disconnection issue in our [Analytics](https://rankmath.com/kb/analytics) module that prevented data from being updated on some setups
 - Fixed: Frequent disconnection issues occurred when multiple sites used the same [Google account](https://rankmath.com/kb/connect-your-google-account/). Prior to this change, disconnecting one of these sites caused the data import to fail on other sites.
 - Fixed: Character encoding issue that occurred when Hebrew text was used in the [Canonical field](https://rankmath.com/kb/how-to-change-canonical-url/#change-the-canonical-url)
+
+= 1.0.110.2 [Mar 18, 2023] =
+- Updated: Link in the [Facebook Admin settings](https://rankmath.com/kb/titles-and-meta/#facebook-admin) to find the Facebook's Numeric User ID
+- Fixed: Variables added for the [Homepage Facebook Title](https://rankmath.com/kb/titles-and-meta/#homepage-title-for-facebook) & Description were not working
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
