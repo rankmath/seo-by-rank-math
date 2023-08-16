@@ -6,9 +6,6 @@
   }
 }
 
-/* Variables */
-
-
 .components-custom-select-control {
   width: 15rem;
 
@@ -17,11 +14,10 @@
     opacity: 0.3;
 
     .components-input-control__container {
-      background-color: rgb(227, 227, 221);
+      background-color: #E3E3DD;
 
       .components-custom-select-control__button {
         &:focus {
-          box-shadow: inset 0 0 0 1px transparent;
           + .components-input-control__suffix {
             svg {
               transform: none;
@@ -53,20 +49,15 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: 10px;
+      left: 15px;
       z-index: 50;
       text-transform: inherit;
       font-size: 13px;
+      margin-bottom: 0;
     }
   }
 
   .components-input-control__container {
-    padding: 2px 0;
-
-    @include tablet {
-      padding: 3px 0;
-    }
-
     .css-1t91ps2.css-1t91ps2.css-1t91ps2 {
       font-size: 13px;
     }

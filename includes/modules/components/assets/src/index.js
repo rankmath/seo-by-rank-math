@@ -40,7 +40,6 @@ const AllComponents = () => {
     }
   ]
 
-
   return (
     <div className='components-container'>
       <div className='group-components'>

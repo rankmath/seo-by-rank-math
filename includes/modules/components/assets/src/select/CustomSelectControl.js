@@ -21,7 +21,6 @@ export default function ({
   size,
   disabled,
   className,
-  __nextUnconstrainedWidth = true,
   ...rest
 }) {
   const getSelectControlClasses = () => {
@@ -42,7 +41,7 @@ export default function ({
     options,
     disabled,
     size,
-    __nextUnconstrainedWidth,
+    __next36pxDefaultSize: true,
     ...rest
   }
 
