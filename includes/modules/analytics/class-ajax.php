@@ -16,8 +16,7 @@ use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Param;
 use RankMath\Google\Analytics;
 use RankMath\Google\Authentication;
-use RankMath\Google\Url_Inspection;
-use RankMath\Analytics\Workflow\Base;
+use RankMath\Sitemap\Sitemap;
 use RankMath\Google\Console as Google_Analytics;
 
 defined( 'ABSPATH' ) || exit;
@@ -534,7 +533,7 @@ class AJAX {
 		}
 
 		foreach ( $sitemaps as $sitemap ) {
-			if ( $sitemap['path'] === $home_url . 'sitemap_index.xml' ) {
+			if ( $sitemap['path'] === $home_url . Sitemap::get_sitemap_index_slug() . '.xml' ) {
 				return true;
 			}
 		}

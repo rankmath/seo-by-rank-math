@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.2.2
+Tested up to: 6.3
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.120
+Stable tag: 1.0.121
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,13 +583,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.120 [July 26, 2023] =
-- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#modify-post-object-in-sitemap) to change the post object passed to the Sitemap
-- Improved: [Redirection](https://rankmath.com/kb/setting-up-redirections/) code to deactivate self redirects by default when they are created.
-- Improved: URLs in the [404 monitor](https://rankmath.com/kb/advanced-404-monitor/) are now clickable
-- Fixed: Incorrect modified date added to the [Sitemap](https://rankmath.com/kb/sitemaps-seo-benefits/) when a scheduled post was published
-- Fixed: Analytics settings were not updating when configured through [Setup Wizard](https://rankmath.com/kb/how-to-setup/#analytics)
-- Fixed: Error in the [Author Sitemap](https://rankmath.com/kb/configure-sitemaps/#authors) on some setups
-- Fixed: Broken Analytics styling in Dashboard Widget on German sites
+= 1.0.121 [Aug 09, 2023] =
+- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#modify-sitemap-index-slug) to change the sitemap_index.xml slug
+- Improved: Query to retrieve score on [Site Analytics page](https://rankmath.com/kb/analytics/#site-analytics)
+- Fixed: PHP error in the [Version Control](https://rankmath.com/kb/rank-math-status-and-tools/#version-control) on sites using Themify Updater plugin
+- Fixed: [Keywords](https://rankmath.com/kb/analytics/#keywords) tab in Analytics was not showing data on some setups due to the nested SELECT queries
+- Fixed: PHP error in the [Error log section](https://rankmath.com/kb/rank-math-status-and-tools/#error-log) on some setups
+- Fixed: HowTo block was not showing the [Step image](https://rankmath.com/blog/howto-schema/#adding-steps) when the [Step description](https://rankmath.com/blog/howto-schema/#step-description) was not added
+- Fixed: PHP error on some setups in Dashboard Widget
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

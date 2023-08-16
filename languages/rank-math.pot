@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2023-07-26 09:49+0000\n"
+"POT-Creation-Date: 2023-08-09 05:21+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -1976,18 +1976,6 @@ msgstr ""
 msgid "Rank Math: Introducing SEO Performance Reports via Email. %1$sClick here to enable it%2$s."
 msgstr ""
 
-#. translators: %1$s: post type label, %2$s: edit redirection URL.
-#. translators: %1$s: term name, %2$s: edit redirection URL.
-msgid "SEO Notice: you just changed the slug of a %1$s and Rank Math has automatically created a redirection. You can edit the redirection by <a href=\"%2$s\">clicking here</a>."
-msgstr ""
-
-#. translators: 1. url to new screen, 2. old trashed post permalink
-msgid "<strong>SEO Notice:</strong> A previously published post has been moved to trash. You may redirect it <code>%2$s</code> to <a href=\"%1$s\">new url</a>."
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
 msgid "Import Settings"
 msgstr ""
 
@@ -2795,6 +2783,13 @@ msgstr ""
 msgid "Content AI is not enabled on this Post type."
 msgstr ""
 
+#. translators: link to the update page.
+msgid "There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature."
+msgstr ""
+
+msgid "Please update"
+msgstr ""
+
 msgid "No data found for the researched keyword."
 msgstr ""
 
@@ -3295,6 +3290,11 @@ msgid "Inactive"
 msgstr ""
 
 msgid "Empty Trash"
+msgstr ""
+
+#. translators: %1$s: post type label, %2$s: edit redirection URL.
+#. translators: %1$s: term name, %2$s: edit redirection URL.
+msgid "SEO Notice: you just changed the slug of a %1$s and Rank Math has automatically created a redirection. You can edit the redirection by <a href=\"%2$s\">clicking here</a>."
 msgstr ""
 
 #. translators: 1. url to new screen, 2. old trashed post permalink
@@ -5002,6 +5002,9 @@ msgstr ""
 msgid "Type here to search..."
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
 msgid "Hovering over a row in the list will display action links that allow you to manage the item. You can perform the following actions:"
 msgstr ""
 
@@ -5787,7 +5790,7 @@ msgstr ""
 msgid "Exclude User Roles"
 msgstr ""
 
-msgid "Selected roles will be excluded in the sitemap."
+msgid "Selected roles will be excluded from the XML &amp; HTML sitemaps."
 msgstr ""
 
 msgid "Exclude Users"

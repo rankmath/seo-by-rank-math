@@ -50,7 +50,7 @@ $cmb->add_field(
 		'id'                => 'exclude_roles',
 		'type'              => 'multicheck',
 		'name'              => esc_html__( 'Exclude User Roles', 'rank-math' ),
-		'desc'              => esc_html__( 'Selected roles will be excluded in the sitemap.', 'rank-math' ),
+		'desc'              => esc_html__( 'Selected roles will be excluded from the XML &amp; HTML sitemaps.', 'rank-math' ),
 		'options'           => $roles,
 		'default'           => $default,
 		'select_all_button' => false,

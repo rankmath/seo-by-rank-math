@@ -75,7 +75,7 @@ class Admin extends Base {
 	 * Register setting page.
 	 */
 	public function register_setting_page() {
-		$sitemap_url = Router::get_base_url( 'sitemap_index.xml' );
+		$sitemap_url = Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' );
 
 		$tabs = [
 			'general' => [
@@ -347,7 +347,7 @@ class Admin extends Base {
 		</p>
  <pre>
  # START Nginx Rewrites for Rank Math Sitemaps
- rewrite ^/' . $sitemap_base . 'sitemap_index.xml$ /index.php?sitemap=1 last;
+ rewrite ^/' . $sitemap_base . Sitemap::get_sitemap_index_slug() . '\\.xml$ /index.php?sitemap=1 last;
  rewrite ^/' . $sitemap_base . '([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?sitemap=$1&sitemap_n=$2 last;
  # END Nginx Rewrites for Rank Math Sitemaps
  </pre>

@@ -362,9 +362,23 @@ class Helper {
 	 * @return bool
 	 */
 	public static function is_plugin_update_disabled() {
-		return ! apply_filters_ref_array( 'auto_update_plugin', [ true, [] ] )
-			|| apply_filters_ref_array( 'automatic_updater_disabled', [ false, [] ] )
+		return ! apply_filters_ref_array( 'auto_update_plugin', [ true, (object)[] ] )
+			|| apply_filters_ref_array( 'automatic_updater_disabled', [ false ] )
 			|| ( defined( 'DISALLOW_FILE_MODS' ) && DISALLOW_FILE_MODS )
 			|| ( defined( 'AUTOMATIC_UPDATER_DISABLED' ) && AUTOMATIC_UPDATER_DISABLED );
+	}
+
+	/**
+	 * Enable big selects.
+	 */
+	public static function enable_big_selects_for_queries() {
+		static $rank_math_enable_big_select;
+
+		if ( $rank_math_enable_big_select || ! apply_filters( 'rank_math/enable_big_selects', true ) ) {
+			return;
+		}
+
+		global $wpdb;
+		$rank_math_enable_big_select = $wpdb->query( 'SET SESSION SQL_BIG_SELECTS=1' );
 	}
 }

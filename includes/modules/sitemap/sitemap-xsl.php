@@ -9,6 +9,7 @@
 use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Sitemap\Router;
+use RankMath\Sitemap\Sitemap;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -159,7 +160,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 								printf(
 									/* translators: xsl value count */
 									wp_kses_post( __( '<a href="%s">&#8592; Sitemap Index</a>', 'rank-math' ) ),
-									esc_url( Router::get_base_url( 'sitemap_index.xml' ) )
+									esc_url( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) )
 								);
 								?>
 							</p>
@@ -295,7 +296,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 									printf(
 										/* translators: xsl value count */
 										wp_kses_post( __( '<a href="%s">&#8592; Sitemap Index</a>', 'rank-math' ) ),
-										esc_url( Router::get_base_url( 'sitemap_index.xml' ) )
+										esc_url( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) )
 									);
 									?>
 								</p>

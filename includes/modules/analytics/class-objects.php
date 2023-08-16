@@ -57,8 +57,8 @@ class Objects extends Summary {
 			'noData' => $request->get_param( 'noData' ),
 		];
 		$field_name = 'seo_score';
-		$per_page   = 25;
-		$offset     = ( $request->get_param( 'page' ) - 1 ) * $per_page;
+		$per_page   = $request->get_param( 'per_page' ) ? sanitize_text_field( $request->get_param( 'per_page' ) ) : 25;
+		$offset     = ( sanitize_text_field( $request->get_param( 'page' ) ) - 1 ) * $per_page;
 
 		// Construct SQL condition based on filter parameters.
 		$conditions = [];
@@ -93,8 +93,9 @@ class Objects extends Summary {
 		$pages = $wpdb->get_results(
 			"SELECT * FROM {$wpdb->prefix}rank_math_analytics_objects 
 			WHERE is_indexable = 1 
-			{$subwhere}
-			ORDER BY {$orderby} {$order}",
+			{$subwhere} 
+			ORDER BY {$orderby} {$order}
+			LIMIT {$offset} , {$per_page}",
 			ARRAY_A
 		);
 		

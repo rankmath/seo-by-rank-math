@@ -210,7 +210,13 @@ class Rest extends WP_REST_Controller {
 		$response_code = wp_remote_retrieve_response_code( $data );
 		if ( 200 !== $response_code ) {
 			return [
-				'error' => $data['response']['message'],
+				'error' => 410 !== $response_code ? $data['response']['message'] : wp_kses_post(
+					sprintf(
+						// Translators: link to the update page.
+						__( 'There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature.', 'rank-math' ),
+						'<a href="' . esc_url( self_admin_url( 'update-core.php' ) ) . '">' . __( 'Please update', 'rank-math' ) . '</a>'
+					)
+				),
 			];
 		}
 

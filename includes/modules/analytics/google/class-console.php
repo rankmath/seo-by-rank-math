@@ -12,6 +12,7 @@ namespace RankMath\Google;
 
 use MyThemeShop\Helpers\Str;
 use RankMath\Analytics\Workflow\Base;
+use RankMath\Sitemap\Sitemap;
 use WP_Error;
 
 defined( 'ABSPATH' ) || exit;
@@ -122,7 +123,7 @@ class Console extends Analytics {
 	 * @return array
 	 */
 	public function get_sitemaps( $url, $with_index = false ) {
-		$with_index = $with_index ? '?sitemapIndex=' . rawurlencode( $url . 'sitemap_index.xml' ) : '';
+		$with_index = $with_index ? '?sitemapIndex=' . rawurlencode( $url . Sitemap::get_sitemap_index_slug() . '.xml' ) : '';
 		$response   = $this->http_get( 'https://www.googleapis.com/webmasters/v3/sites/' . rawurlencode( $url ) . '/sitemaps' . $with_index );
 
 		if ( ! $this->is_success() || empty( $response['sitemap'] ) ) {
@@ -275,7 +276,7 @@ class Console extends Analytics {
 		$sitemaps_in_list = false;
 		$site_url         = self::get_site_url();
 		$sitemaps         = $this->get_sitemaps( $site_url );
-		$local_sitemap    = trailingslashit( $site_url ) . 'sitemap_index.xml';
+		$local_sitemap    = trailingslashit( $site_url ) . Sitemap::get_sitemap_index_slug() . '.xml';
 
 		// Early Bail if there are no sitemaps.
 		if ( empty( $sitemaps ) ) {

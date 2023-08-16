@@ -31,7 +31,7 @@ const paths = {
 		dest: './',
 	},
 	pot: {
-		src: [ '**/*.php', '!node_modules/**/*', '!vendor/**/*' ],
+		src: [ '**/*.php', '!node_modules/**/*', '!vendor/**/*', '!tests/**/*' ],
 		dest: 'languages/rank-math.pot',
 	},
 }

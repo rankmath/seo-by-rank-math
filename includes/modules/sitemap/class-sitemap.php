@@ -150,7 +150,7 @@ class Sitemap {
 	 * Hit sitemap index to pre-generate the cache.
 	 */
 	public static function hit_index() {
-		wp_remote_get( Router::get_base_url( 'sitemap_index.xml' ) );
+		wp_remote_get( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) );
 	}
 
 	/**
@@ -164,7 +164,7 @@ class Sitemap {
 		}
 
 		if ( empty( $url ) ) {
-			$url = rawurlencode( Router::get_base_url( 'sitemap_index.xml' ) );
+			$url = rawurlencode( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) );
 		}
 
 		wp_remote_get( 'http://www.google.com/webmasters/tools/ping?sitemap=' . $url, [ 'blocking' => false ] );
@@ -339,5 +339,19 @@ class Sitemap {
 			Helper::redirect( preg_replace( '/' . preg_quote( $current_page ) . '\.xml$/', '.xml', Helper::get_current_page_url() ) );
 			die();
 		}
+	}
+
+	/**
+	 * Get the sitemap index slug.
+	 */
+	public static function get_sitemap_index_slug() {
+		/**
+		 * Filter: 'rank_math/sitemap/index_slug' - Modify the sitemap index slug.
+		 *
+		 * @param string $slug Sitemap index slug.
+		 *
+		 * @return string
+		 */
+		return apply_filters( 'rank_math/sitemap/index/slug', 'sitemap_index' );
 	}
 }
