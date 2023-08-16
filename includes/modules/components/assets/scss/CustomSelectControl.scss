@@ -14,20 +14,49 @@
 
   &.is-disabled {
     pointer-events: none;
+    opacity: 0.3;
 
     .components-input-control__container {
-      background-color: #F0F0F0;
-      opacity: 0.5;
+      background-color: rgb(227, 227, 221);
 
       .components-custom-select-control__button {
-        opacity: 0.5;
-      }
-
-      .components-input-control__suffix {
-        svg {
-          opacity: 0.5;
+        &:focus {
+          box-shadow: inset 0 0 0 1px transparent;
+          + .components-input-control__suffix {
+            svg {
+              transform: none;
+            }
+          }
         }
       }
+    }
+
+    .components-custom-select-control__menu {
+      display: none;
+    }
+  }
+
+  &.with-label {
+    .components-input-control__container {
+      .components-custom-select-control__button {
+        text-align: right;
+      }
+    }
+
+    .components-custom-select-control__menu {
+      .components-custom-select-control__item {
+        justify-content: end;
+      }
+    }
+
+    .components-custom-select-control__label {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 10px;
+      z-index: 50;
+      text-transform: inherit;
+      font-size: 13px;
     }
   }
 
@@ -36,6 +65,10 @@
 
     @include tablet {
       padding: 3px 0;
+    }
+
+    .css-1t91ps2.css-1t91ps2.css-1t91ps2 {
+      font-size: 13px;
     }
 
     .components-custom-select-control__button {

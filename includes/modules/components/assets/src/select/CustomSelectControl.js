@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../scss/SelectControl.scss';
+import '../../scss/CustomSelectControl.scss';
 
 /**
  * WordPress dependencies
@@ -28,7 +28,8 @@ export default function ({
     return classNames(
       className,
       {
-        'is-disabled': disabled
+        'is-disabled': disabled,
+        'with-label': label
       }
     );
   };

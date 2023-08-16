@@ -21,58 +21,53 @@ const AllComponents = () => {
     name: "Large",
   });
 
+  const options = [
+    {
+      key: "thumbnail",
+      name: "Thumbnail",
+    },
+    {
+      key: "medium",
+      name: "Medium",
+    },
+    {
+      key: "large",
+      name: "Large",
+    },
+    {
+      key: "full",
+      name: "Full Size",
+    }
+  ]
+
+
   return (
     <div className='components-container'>
       <div className='group-components'>
         <CustomSelectControl
-          label="Test"
+          label="Label"
           value={size}
-          options={
-            [
-              {
-                key: "thumbnail",
-                name: "Thumbnail",
-              },
-              {
-                key: "medium",
-                name: "Medium",
-              },
-              {
-                key: "large",
-                name: "Large",
-              },
-              {
-                key: "full",
-                name: "Full Size",
-              }
-            ]
-          }
+          options={options}
           onChange={(target) => setSize(target.selectedItem)}
-        // disabled
         />
         <CustomSelectControl
-          label="Test"
+          label="Label"
           value={size}
-          options={
-            [
-              {
-                key: "thumbnail",
-                name: "Thumbnail",
-              },
-              {
-                key: "medium",
-                name: "Medium",
-              },
-              {
-                key: "large",
-                name: "Large",
-              },
-              {
-                key: "full",
-                name: "Full Size",
-              }
-            ]
-          }
+          options={options}
+          onChange={(target) => setSize(target.selectedItem)}
+          disabled
+        />
+      </div>
+
+      <div className='group-components'>
+        <CustomSelectControl
+          value={size}
+          options={options}
+          onChange={(target) => setSize(target.selectedItem)}
+        />
+        <CustomSelectControl
+          value={size}
+          options={options}
           onChange={(target) => setSize(target.selectedItem)}
           disabled
         />
