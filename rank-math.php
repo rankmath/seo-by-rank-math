@@ -3,13 +3,13 @@
  * Rank Math SEO Plugin.
  *
  * @package      RANK_MATH
- * @copyright    Copyright (C) 2019-2021, Rank Math - support@rankmath.com
+ * @copyright    Copyright (C) 2019-2023, Rank Math - support@rankmath.com
  * @link         https://rankmath.com
  * @since        0.9.0
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.121
+ * Version:           1.0.121.1
  * Plugin URI:        https://rankmath.com/
  * Description:       Rank Math is a revolutionary SEO product that combines the features of many SEO tools and lets you multiply your traffic in the easiest way possible.
  * Author:            Rank Math
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.121';
+	public $version = '1.0.121.1';
 
 	/**
 	 * Rank Math database version.

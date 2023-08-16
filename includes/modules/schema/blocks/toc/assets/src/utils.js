@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isEmpty, isUndefined, kebabCase, includes, forEach, isEqual, map, isNull } from 'lodash'
+import { isEmpty, isUndefined, isString, kebabCase, includes, forEach, isEqual, map, isNull } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -37,16 +37,14 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 				if ( blockName === 'core/block' ) {
 					const attrs = getBlockAttributes( blockClientId )
 					if ( ! isNull( attrs.ref ) ) {
-						setImmediate( () => {
-							const reusableBlock = wp.data.select( 'core' ).getEditedEntityRecord( 'postType', 'wp_block', attrs.ref )
-							const blocks = map( reusableBlock.blocks, ( block ) => {
-								return block.name
-							} )
-
-							if ( includes( blocks, 'rank-math/toc-block' ) && ! isNull( getBlockAttributes( blockClientId ) ) ) {
-								convertBlockToStatic( blockClientId )
-							}
+						const reusableBlock = wp.data.select( 'core' ).getEditedEntityRecord( 'postType', 'wp_block', attrs.ref )
+						const blocks = map( reusableBlock.blocks, ( block ) => {
+							return block.name
 						} )
+
+						if ( includes( blocks, 'rank-math/toc-block' ) && ! isNull( getBlockAttributes( blockClientId ) ) ) {
+							convertBlockToStatic( blockClientId )
+						}
 					}
 
 					continue
@@ -124,13 +122,12 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 
 					anchors.push( anchor )
 					headingAttributes.anchor = anchor
-
-					const headingContent = stripHTML(
+					const headingContent = isString( headingAttributes.content ) ? stripHTML(
 						headingAttributes.content.replace(
 							/(<br *\/?>)+/g,
 							' '
 						)
-					)
+					) : ''
 
 					const content = ! isUndefined( currentHeading.isUpdated ) && currentHeading.isUpdated ? currentHeading.content : headingContent
 

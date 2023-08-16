@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.3
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.121
+Stable tag: 1.0.121.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -591,5 +591,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 - Fixed: PHP error in the [Error log section](https://rankmath.com/kb/rank-math-status-and-tools/#error-log) on some setups
 - Fixed: HowTo block was not showing the [Step image](https://rankmath.com/blog/howto-schema/#adding-steps) when the [Step description](https://rankmath.com/blog/howto-schema/#step-description) was not added
 - Fixed: PHP error on some setups in Dashboard Widget
+
+= 1.0.121.1 [Aug 11, 2023] =
+- Fixed: [Rank Math Analytics Front-End Bar](https://rankmath.com/kb/analytics-stats-bar/) was not working on WordPress v6.3
+- Fixed: [Table of Contents](https://rankmath.com/kb/table-of-contents-block/) was showing an error when used as a Reusable block 
+- Fixed: [Content AI](https://rankmath.com/kb/how-to-use-content-ai/) was not working properly when diacritics keywords were used
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

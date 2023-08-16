@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { isUndefined } from 'lodash'
+
+/**
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor'
@@ -10,7 +15,7 @@ import { linearToNestedHeadingList } from './utils'
 import List from './list'
 
 export default function save( { attributes } ) {
-	if ( attributes.headings.length === 0 ) {
+	if ( isUndefined( attributes.headings ) || attributes.headings.length === 0 ) {
 		return null
 	}
 

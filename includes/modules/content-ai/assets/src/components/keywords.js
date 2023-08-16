@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { forEach, isEmpty, isNull, isNaN, round, sum, includes, max } from 'lodash'
+import { forEach, isEmpty, isString, isNull, isNaN, round, sum, includes, max } from 'lodash'
 import classnames from 'classnames'
 
 /**
@@ -158,6 +158,10 @@ class Keywords extends Component {
 
 			this.contentAiScore[ type ] = {}
 			forEach( keywords, ( data ) => {
+				if ( isEmpty( data.keyword ) ) {
+					return
+				}
+
 				const count = this.props.hasCredits ? this.getCount( data.keyword, type ) : data.count
 				const scoreClass = getClassByScore( this.getScore( data.keyword, count, data.average, type ) )
 				const className = classnames( 'rank-math-tooltip', {
@@ -257,7 +261,7 @@ class Keywords extends Component {
 
 	getCount( keyword, type ) {
 		let content = this.props.caData.content
-		keyword = Helpers.removeDiacritics( keyword ).toLowerCase()
+		keyword = isString( keyword ) ? Helpers.removeDiacritics( keyword ).toLowerCase() : keyword
 
 		if ( 'heading' === type ) {
 			keyword = keyword.replace( /[\\^$*+?.()|[\]{}]/g, '\\$&' )
