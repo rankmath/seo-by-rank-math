@@ -172,7 +172,7 @@ class Assets implements Runner {
 	 */
 	public function admin_footer_text( $text ) {
 		/* translators: plugin url */
-		return Helper::is_whitelabel() ? $text : sprintf( wp_kses_post( __( 'Thank you for using <a href="%s" target="_blank">Rank Math</a>', 'rank-math' ) ), 'https://s.rankmath.com/home' );
+		return Helper::is_whitelabel() ? $text : sprintf( wp_kses_post( __( 'Thank you for using <a href="%s" target="_blank">Rank Math</a>', 'rank-math' ) ), KB::get( 'seo-suite', 'Admin Footer Text' ) );
 	}
 
 	/**

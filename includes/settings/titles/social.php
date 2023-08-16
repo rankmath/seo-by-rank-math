@@ -8,6 +8,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use RankMath\KB;
+
 $cmb->add_field(
 	[
 		'id'   => 'social_url_facebook',
@@ -54,7 +56,7 @@ $cmb->add_field(
 		'type'       => 'text',
 		'name'       => esc_html__( 'Facebook Secret', 'rank-math' ),
 		/* translators: Learn more link */
-		'desc'       => sprintf( esc_html__( 'Enter alphanumeric secret ID. %s.', 'rank-math' ), '<a href="https://s.rankmath.com/fbapp" target="_blank">Learn more</a>' ),
+		'desc'       => sprintf( esc_html__( 'Enter alphanumeric secret ID. %s.', 'rank-math' ), '<a href="' . KB::get( 'create-facebook-app' ) . '" target="_blank">Learn more</a>' ),
 		'attributes' => [ 'type' => 'password' ],
 	]
 );

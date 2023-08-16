@@ -124,7 +124,7 @@ class Taxonomy implements Provider {
 					continue;
 				}
 
-				$query   = new \WP_Query(
+				$query = new \WP_Query(
 					[
 						'post_type'      => $tax->object_type,
 						'tax_query'      => [
@@ -138,10 +138,22 @@ class Taxonomy implements Provider {
 						'posts_per_page' => 1,
 					]
 				);
-				$index[] = [
-					'loc'     => Router::get_base_url( $tax_name . '-sitemap' . $current_page . '.xml' ),
-					'lastmod' => $query->have_posts() ? $query->posts[0]->post_modified_gmt : $last_modified_gmt,
-				];
+
+				$item = $this->do_filter(
+					'sitemap/index/entry',
+					[
+						'loc'     => Router::get_base_url( $tax_name . '-sitemap' . $current_page . '.xml' ),
+						'lastmod' => $query->have_posts() ? $query->posts[0]->post_modified_gmt : $last_modified_gmt,
+					],
+					'term',
+					$tax_name,
+				);
+
+				if ( ! $item ) {
+					continue;
+				}
+
+				$index[] = $item;
 			}
 		}
 

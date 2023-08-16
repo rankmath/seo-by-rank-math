@@ -141,10 +141,21 @@ class Post_Type implements Provider {
 					$date = $last_modified_times[ $post_type ];
 				}
 
-				$index[] = [
-					'loc'     => Router::get_base_url( $post_type . '-sitemap' . $current_page . '.xml' ),
-					'lastmod' => $date,
-				];
+				$item = $this->do_filter(
+					'sitemap/index/entry',
+					[
+						'loc'     => Router::get_base_url( $post_type . '-sitemap' . $current_page . '.xml' ),
+						'lastmod' => $date,
+					],
+					'post',
+					$post_type,
+				);
+
+				if ( ! $item ) {
+					continue;
+				}
+
+				$index[] = $item;
 			}
 		}
 

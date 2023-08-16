@@ -16,6 +16,7 @@
 namespace RankMath\Links;
 
 use MyThemeShop\Helpers\Str;
+use RankMath\Helper;
 use RankMath\Sitemap\Classifier;
 
 defined( 'ABSPATH' ) || exit;
@@ -60,7 +61,7 @@ class ContentProcessor {
 			'external_link_count' => 0,
 		];
 
-		$new_links = [];
+		$new_links      = [];
 		$post_permalink = $this->normalize_link( get_permalink( $post_id ) );
 		foreach ( $links as $link ) {
 			$normalized_link = $this->normalize_link( $link );
@@ -93,6 +94,11 @@ class ContentProcessor {
 		$target_post_id = 0;
 		if ( Classifier::TYPE_INTERNAL === $link_type ) {
 			$target_post_id = url_to_postid( $link );
+
+			if ( 0 === $target_post_id ) {
+				// Maybe a product with altered url!
+				$target_post_id = $this->maybe_product_id( $link );
+			}
 		}
 		$counts[ "{$link_type}_link_count" ] += 1;
 
@@ -179,5 +185,25 @@ class ContentProcessor {
 	private function normalize_link( $link ) {
 		$normalized = untrailingslashit( str_replace( home_url(), '', explode( '#', $link )[0] ) );
 		return $normalized;
+	}
+
+
+	/**
+	 * Gets the post id from a modified link.
+	 *
+	 * @param string $link Link to process.
+	 * @return int
+	 */
+	private function maybe_product_id( $link ) {
+		// Early bail if Remove Base option is not enabled.
+		if ( ! Helper::get_settings( 'general.wc_remove_product_base' ) ) {
+			return 0;
+		}
+
+		$product = get_page_by_path( basename( untrailingslashit( $link ) ), OBJECT, [ 'product' ] );
+		if ( ! $product ) {
+			return 0;
+		}
+		return $product->ID;
 	}
 }

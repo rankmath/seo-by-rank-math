@@ -104,7 +104,7 @@ class ContentAnalysis {
 	/**
 	 * Change recommended content length text.
 	 *
-	 * @param  {Object} data Content Length Text.
+	 * @param {Object} data Content Length Text.
 	 * @return {Object} Filtered Content Length Text.
 	 */
 	contentLength( data ) {
@@ -131,7 +131,7 @@ class ContentAnalysis {
 			emptyContent: sprintf(
 				// translators: contet length
 				__( 'Content should be %1$s long.', 'rank-math' ),
-				'<a href="https://s.rankmath.com/100contentlength" target="_blank">' +
+				'<a href="https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_campaign=WP#overall-content-length" target="_blank">' +
 					wordCount + ' - ' + max + __( ' words', 'rank-math' ) +
 					'</a>'
 			),
@@ -141,7 +141,7 @@ class ContentAnalysis {
 	/**
 	 * Change recommended content length boundaries.
 	 *
-	 * @param  {Object} boundaries Content Length Boundaries.
+	 * @param {Object} boundaries Content Length Boundaries.
 	 * @return {Object} Contnt Length Boundaries
 	 */
 	contentLengthBoundary( boundaries ) {
@@ -170,8 +170,8 @@ class ContentAnalysis {
 	/**
 	 * Change Keyword density.
 	 *
-	 * @param  {number} density Keyword density.
-	 * @param  {number} count   Total number of times a keyword appwars in the content.
+	 * @param {number} density Keyword density.
+	 * @param {number} count   Total number of times a keyword appwars in the content.
 	 * @return {number} Updated keyword density.
 	 */
 	keywordDensity( density, count ) {

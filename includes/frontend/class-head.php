@@ -10,6 +10,7 @@
 
 namespace RankMath\Frontend;
 
+use RankMath\KB;
 use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Paper\Paper;
@@ -379,9 +380,9 @@ class Head {
 
 		if ( false === $closing ) {
 			if ( ! Helper::is_whitelabel() && ! defined( 'RANK_MATH_PRO_FILE' ) ) {
-				echo "\n<!-- " . esc_html__( 'Search Engine Optimization by Rank Math - https://s.rankmath.com/home', 'rank-math' ) . " -->\n";
+				echo "\n<!-- " . esc_html__( 'Search Engine Optimization by Rank Math - https://rankmath.com/', 'rank-math' ) . " -->\n";
 			} elseif ( defined( 'RANK_MATH_PRO_FILE' ) ) {
-				echo "\n<!-- " . esc_html__( 'Search Engine Optimization by Rank Math PRO - https://s.rankmath.com/home', 'rank-math' ) . " -->\n";
+				echo "\n<!-- " . esc_html__( 'Search Engine Optimization by Rank Math PRO - https://rankmath.com/', 'rank-math' ) . " -->\n";
 			}
 			return;
 		}

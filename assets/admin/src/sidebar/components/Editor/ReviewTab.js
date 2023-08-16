@@ -60,7 +60,7 @@ class ReviewTab extends Component {
 			stars.push(
 				<a
 					key={ i }
-					href="https://s.rankmath.com/wpreview"
+					href="https://wordpress.org/support/plugin/seo-by-rank-math/reviews/?rate=5#new-post"
 					target="_blank"
 					rel="noopener noreferrer"
 				>

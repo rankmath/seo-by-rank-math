@@ -72,11 +72,23 @@ class Author implements Provider {
 		}
 
 		foreach ( $user_pages as $user_page ) {
-			$user    = array_shift( $user_page ); // Time descending, first user on page is most recently updated.
-			$index[] = [
-				'loc'     => Router::get_base_url( 'author-sitemap' . $page . '.xml' ),
-				'lastmod' => '@' . $user->last_update,
-			];
+			$user = array_shift( $user_page ); // Time descending, first user on page is most recently updated.
+
+			$item = $this->do_filter(
+				'sitemap/index/entry',
+				[
+					'loc'     => Router::get_base_url( 'author-sitemap' . $page . '.xml' ),
+					'lastmod' => '@' . $user->last_update,
+				],
+				'author',
+				$user
+			);
+
+			if ( ! $item ) {
+				continue;
+			}
+
+			$index[] = $item;
 
 			$page++;
 		}

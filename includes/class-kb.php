@@ -67,6 +67,8 @@ class KB {
 		'content-length'                  => 'https://rankmath.com/kb/score-100-in-tests/?#content-length',
 		'configure-sitemaps'              => 'https://rankmath.com/kb/configure-sitemaps/',
 		'sitemap-general'                 => 'https://rankmath.com/kb/configure-sitemaps/?#general',
+		'sitemap-post'                    => 'https://rankmath.com/kb/configure-sitemaps/?#posts',
+		'sitemap-page'                    => 'https://rankmath.com/kb/configure-sitemaps/?#pages',
 		'sitemap-media'                   => 'https://rankmath.com/kb/configure-sitemaps/?#media',
 		'sitemap-product'                 => 'https://rankmath.com/kb/configure-sitemaps/?#products',
 		'social-meta-settings'            => 'https://rankmath.com/kb/titles-and-meta/?#social-meta',
@@ -143,6 +145,7 @@ class KB {
 
 		// Other.
 		'google-article-schema'           => 'https://developers.google.com/search/docs/data-types/article/?utm_campaign=Rank+Math',
+		'create-facebook-app'             => 'https://www.youtube.com/watch?utm_source=Plugin&utm_campaign=WP&v=-XME8Q25omQ&feature=youtu.be',
 	];
 
 	/**
@@ -152,7 +155,7 @@ class KB {
 	 * @param  string $medium Medium of the link to get.
 	 */
 	public static function the( $id, $medium = '' ) {
-		echo self::get( $id, $medium );
+		echo self::get( $id, $medium ); // phpcs:ignore
 	}
 
 	/**

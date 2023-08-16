@@ -25,7 +25,7 @@ class CommonFilters {
 	/**
 	 * Change recommended content length text on homepage.
 	 *
-	 * @param  {Object} data Content Length Text.
+	 * @param {Object} data Content Length Text.
 	 * @return {Object} Filtered Content Length Text.
 	 */
 	contentLength( data ) {
@@ -43,7 +43,7 @@ class CommonFilters {
 			emptyContent: sprintf(
 				// translators: contet length
 				__( 'Content should be %1$s long.', 'rank-math' ),
-				'<a href="https://s.rankmath.com/100contentlength" target="_blank">' +
+				'<a href="https://rankmath.com/kb/score-100-in-tests/?utm_source=Plugin&utm_campaign=WP#overall-content-length" target="_blank">' +
 					__( '300 words', 'rank-math' ) +
 					'</a>'
 			),
