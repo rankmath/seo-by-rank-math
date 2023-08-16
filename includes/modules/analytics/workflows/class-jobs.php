@@ -243,29 +243,16 @@ class Jobs {
 	 *
 	 * @param string $action Action to perform.
 	 */
-	private function check_for_missing_dates( $action ) {
-		$count = 1;
-		$hook  = "get_{$action}_data";
-		$start = Helper::get_midnight( time() + DAY_IN_SECONDS );
-		$days  = Helper::get_settings( 'general.console_caching_control', 90 );
+	public function check_for_missing_dates( $action ) {
+		$days = Helper::get_settings( 'general.console_caching_control', 90 );
 
-		for ( $current = 1; $current <= $days; $current++ ) {
-			$date = Helper::get_date( 'Y-m-d', $start - ( DAY_IN_SECONDS * $current ), false, true );
-			if ( ! DB::date_exists( $date, $action ) ) {
-				$count++;
-				as_schedule_single_action(
-					time() + ( 60 * ( $count / 2 ) ),
-					'rank_math/analytics/' . $hook,
-					[ $date ],
-					'rank-math'
-				);
-			}
-		}
+		Workflow::do_workflow(
+			$action,
+			$days,
+			null,
+			null
+		);
 
-		// Clear cache.
-		if ( $count > 1 ) {
-			Workflow::add_clear_cache( time() + ( 60 * ( ( $count + 1 ) / 2 ) ) );
-		}
 	}
 
 	/**

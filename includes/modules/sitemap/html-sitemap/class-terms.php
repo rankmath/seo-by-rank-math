@@ -93,13 +93,14 @@ class Terms {
 	/**
 	 * Generate the HTML sitemap for a given taxonomy.
 	 *
-	 * @param string $taxonomy Taxonomy name.
+	 * @param string $taxonomy   Taxonomy name.
 	 * @param bool   $show_dates Whether to show dates.
+	 * @param array  $args       Array with term query arguments.
 	 *
 	 * @return string
 	 */
-	public function generate_sitemap( $taxonomy, $show_dates ) {
-		$terms = $this->get_terms( $taxonomy );
+	public function generate_sitemap( $taxonomy, $show_dates, $args = [] ) {
+		$terms = get_terms( $taxonomy, $args );
 		if ( empty( $terms ) ) {
 			return '';
 		}
@@ -119,7 +120,7 @@ class Terms {
 	/**
 	 * Get the term list HTML.
 	 *
-	 * @param array  $terms The terms to output.
+	 * @param array  $terms    The terms to output.
 	 * @param object $taxonomy The taxonomy object.
 	 *
 	 * @return string
@@ -139,8 +140,8 @@ class Terms {
 	/**
 	 * Get the term list HTML for non-hierarchical taxonomies.
 	 *
-	 * @param array $terms The terms to output.
-	 * @param bool  $show_dates Whether to show the term dates.
+	 * @param array  $terms    The terms to output.
+	 * @param string $taxonomy Taxonomy name.
 	 *
 	 * @return string
 	 */
@@ -148,7 +149,7 @@ class Terms {
 		$output = [];
 		foreach ( $terms as $term ) {
 			$output[] = '<li class="rank-math-html-sitemap__item">'
-				. '<a href="' . esc_url( $this->get_term_link( (int) $term->term_id, get_taxonomy( $taxonomy ) ) ) . '" class="rank-math-html-sitemap__link">'
+				. '<a href="' . esc_url( $this->get_term_link( (int) $term->term_id, $taxonomy ) ) . '" class="rank-math-html-sitemap__link">'
 				. esc_html( $this->get_term_title( $term, $taxonomy ) )
 				. '</a>'
 				. '</li>';

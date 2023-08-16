@@ -11,6 +11,7 @@
 namespace RankMath\Sitemap\Html;
 
 use RankMath\Helper;
+use RankMath\Sitemap\Providers\Taxonomy;
 use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Cache;
 
@@ -19,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Sitemap class.
  */
-class Sitemap {
+class Sitemap extends Taxonomy {
 
 	use Hooker;
 
@@ -95,7 +96,17 @@ class Sitemap {
 	 */
 	public function get_output() {
 		$post_types = self::get_post_types();
-		$taxonomies = self::get_taxonomies();
+		$taxonomies = Helper::get_accessible_taxonomies();
+		$taxonomies = array_filter( $taxonomies, [ $this, 'handles_type' ] );
+
+		/**
+		 * Filter the setting of excluding empty terms from the XML sitemap.
+		 *
+		 * @param boolean $exclude        Defaults to true.
+		 * @param array   $taxonomies     Array of names for the taxonomies being processed.
+		 */
+		$hide_empty = $this->do_filter( 'sitemap/exclude_empty_terms', true, $taxonomies );
+
 		$show_dates = Helper::get_settings( 'sitemap.html_sitemap_show_dates' );
 		$output     = [];
 
@@ -112,16 +123,23 @@ class Sitemap {
 			$output[] = $sitemap;
 		}
 
-		foreach ( $taxonomies as $taxonomy ) {
-			$cached = $this->get_cache( $taxonomy );
-			if ( ! empty( $cached ) ) {
-				$output[] = $cached;
-				continue;
-			}
+		if ( ! empty( $taxonomies ) ) {
+			foreach ( $taxonomies as $taxonomy => $object ) {
 
-			$sitemap = $this->get_generator( 'terms' )->generate_sitemap( $taxonomy, $show_dates );
-			$this->set_cache( $taxonomy, $sitemap );
-			$output[] = $sitemap;
+				$cached = $this->get_cache( $taxonomy );
+				if ( ! empty( $cached ) ) {
+					$output[] = $cached;
+					continue;
+				}
+
+				$sitemap = $this->get_generator( 'terms' )->generate_sitemap(
+					$taxonomy,
+					$show_dates,
+					[ 'hide_empty' => $hide_empty ]
+				);
+				$this->set_cache( $taxonomy, $sitemap );
+				$output[] = $sitemap;
+			}
 		}
 
 		if ( $this->should_show_author_sitemap() ) {
@@ -210,6 +228,8 @@ class Sitemap {
 
 	/**
 	 * Show sitemap on a page (after content).
+	 *
+	 * @param mixed $content The page content.
 	 */
 	public function show_on_page( $content ) {
 		if ( ! is_page() ) {

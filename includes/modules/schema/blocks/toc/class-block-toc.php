@@ -85,7 +85,7 @@ class Block_TOC extends Block {
 	 * Add default TOC title.
 	 *
 	 * @param string $block_content Block content.
-	 * @param array  $block         The full block, including name and attributes.
+	 * @param array  $parsed_block  The full block, including name and attributes.
 	 *
 	 * @return string
 	 */
@@ -99,14 +99,20 @@ class Block_TOC extends Block {
 			return $block_content;
 		}
 
-		$block_content = preg_replace_callback( '/(<div class=".*?wp-block-rank-math-toc-block.*?"\>)/i', function( $value ) use ( $title, $block_content ) {
-			if ( ! isset( $value[0] ) ) {
-				return $block_content;
-			}
+		$title_wrapper = $parsed_block['attrs']['titleWrapper'] ?? 'h2';
 
-			$value[0] = str_replace( '>', ' id="rank-math-toc">', $value[0] );
-			return $value[0] . '<h2>' . esc_html( $title ) . '</h2>';
-		}, $block_content );
+		$block_content = preg_replace_callback(
+			'/(<div class=".*?wp-block-rank-math-toc-block.*?"\>)/i',
+			function( $value ) use ( $title, $block_content, $title_wrapper ) {
+				if ( ! isset( $value[0] ) ) {
+					return $block_content;
+				}
+
+				$value[0] = str_replace( '>', ' id="rank-math-toc">', $value[0] );
+				return $value[0] . '<' . tag_escape( $title_wrapper ) . '>' . esc_html( $title ) . '</' . tag_escape( $title_wrapper ) . '>';
+			},
+			$block_content
+		);
 
 		return str_replace( 'class=""', '', $block_content );
 	}
@@ -136,11 +142,11 @@ class Block_TOC extends Block {
 			}
 
 			$data['toc'][] = [
-				"@context" => 'https://schema.org',
-				"@type"    => 'SiteNavigationElement',
-				"@id"      => '#rank-math-toc',
-				"name"     => $heading['content'],
-				"url"      => get_permalink() . $heading['link'],
+				'@context' => 'https://schema.org',
+				'@type'    => 'SiteNavigationElement',
+				'@id'      => '#rank-math-toc',
+				'name'     => $heading['content'],
+				'url'      => get_permalink() . $heading['link'],
 			];
 		}
 

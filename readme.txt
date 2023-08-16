@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.2
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.111
+Stable tag: 1.0.112
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,13 +583,16 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.111 [Apr 05, 2023] =
-- Improved: Disabled the [Role Manager](https://rankmath.com/kb/role-manager/) option for the Administrator user role to prevent accidental disabling
-- Fixed: WordPress 6.2 compatibility issue where the editor would crash after clicking on the [Content AI button](https://rankmath.com/kb/how-to-use-content-ai/#open-content-ai-panel) while Post settings were still loading
-- Fixed: Embedded Google map was being counted as a [video in Content AI](https://rankmath.com/kb/how-to-use-content-ai/#media-count)
-- Fixed: [Content Analysis](https://rankmath.com/kb/score-100-in-tests/#use-of-media-in-your-posts) was not recognizing the self-hosted URLs used in the `video` tag
-- Fixed: [Sitemap](https://rankmath.com/kb/url-not-in-sitemap/#cached) was not updating when it was cached using the Transient method
-- Fixed: Deprecated warning with PHP 8.1 on the [Setup Wizard page](https://rankmath.com/kb/how-to-access-setup-wizard/)
-- Fixed: Console error related to [Schema](https://rankmath.com/kb/schema-generator/) with WordPress 6.2
+= 1.0.112 [Apr 19, 2023] =
+- Improved: Significant code improvements in the [Analytics module](https://rankmath.com/kb/analytics) resulting in FASTER and LIGHTER performance of the plugin
+- Fixed: [Schema Block](https://rankmath.com/kb/rich-snippets/) was not working with WordPress 6.2
+- Fixed: Missing SEO tab in the beta version of [Elementor editor](https://rankmath.com/blog/elementor-seo/)
+- Fixed: PHP error related to [SEO Analyzer](https://rankmath.com/kb/seo-analysis/) on some setups
+- Fixed: PHP warning related to [Slack Open Graph tags](https://rankmath.com/kb/slack-enhanced-sharing/) on some setups
+- Fixed: [Title wrapper option](https://rankmath.com/kb/table-of-contents-block/#title-wrapper) in the Table of Contents Block was not working with the default TOC title on the frontend
+- Fixed: Redirection rules from Trash will no longer be displayed when searching for [Redirection](https://rankmath.com/kb/setting-up-redirections/).
+- Fixed: Empty Taxonomies & Author archive pages displayed in the [HTML sitemap](https://rankmath.com/kb/html-sitemap/)
+- Fixed: Misaligned [SEO Metabox](https://rankmath.com/kb/on-page-seo/#classic-editor) on Product taxonomy pages in the latest version of WooCommerce
+- Fixed: [Analytics pages](https://rankmath.com/kb/analytics/) were not working with the Gutenberg plugin
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

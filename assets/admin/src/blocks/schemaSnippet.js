@@ -9,8 +9,9 @@ import { startCase, forEach } from 'lodash'
 import { __ } from '@wordpress/i18n'
 import { registerBlockType } from '@wordpress/blocks'
 import { InspectorControls } from '@wordpress/block-editor'
-import { ServerSideRender, TextControl } from '@wordpress/components'
+import { TextControl } from '@wordpress/components'
 import { applyFilters } from '@wordpress/hooks'
+import ServerSideRender from '@wordpress/server-side-render'
 
 /**
  * Internal dependencies

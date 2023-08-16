@@ -13,13 +13,14 @@ namespace RankMath\Sitemap\Html;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Database\Database;
+use RankMath\Sitemap\Providers\Author;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Terms class.
  */
-class Authors {
+class Authors extends Author {
 
 	use Hooker;
 
@@ -30,11 +31,11 @@ class Authors {
 	 */
 	private function get_authors() {
 		$sort_map = [
-			'published' => [
+			'published'    => [
 				'field' => 'user_registered',
 				'order' => 'DESC',
 			],
-			'modified'  => [
+			'modified'     => [
 				'field' => 'user_registered',
 				'order' => 'DESC',
 			],
@@ -42,14 +43,14 @@ class Authors {
 				'field' => 'display_name',
 				'order' => 'ASC',
 			],
-			'post_id' => [
+			'post_id'      => [
 				'field' => 'ID',
 				'order' => 'DESC',
 			],
 		];
 
 		$sort_setting = Helper::get_settings( 'sitemap.html_sitemap_sort' );
-		$sort = ( isset( $sort_map[ $sort_setting ] ) ) ? $sort_map[ $sort_setting ] : $sort_map['published'];
+		$sort         = ( isset( $sort_map[ $sort_setting ] ) ) ? $sort_map[ $sort_setting ] : $sort_map['published'];
 
 		/**
 		 * Filter: 'rank_math/sitemap/html_sitemap/sort_items' - Allow changing the sort order of the HTML sitemap.
@@ -61,20 +62,19 @@ class Authors {
 		 * @var string $order The item type.
 		 * @var string $empty Empty string (unused).
 		 */
-		$sort = $this->do_filter( 'sitemap/html_sitemap/sort_items', $sort, 'authors', '' );
+		$sort     = $this->do_filter( 'sitemap/html_sitemap/sort_items', $sort, 'authors', '' );
+		$defaults = [
+			'orderby' => $sort['field'],
+			'order'   => $sort['order'],
+		];
+		$args     = $this->do_filter( 'sitemap/author/query', wp_parse_args( [ 'posts_per_page' => -1 ], $defaults ) );
+		$users    = $this->get_users( $args );
 
-		$exclude = wp_parse_id_list( Helper::get_settings( 'sitemap.exclude_users' ) );
-		$table   = Database::table( 'users' );
-
-		$query = $table->select( [ 'ID', 'display_name', 'user_nicename' ] );
-
-		if ( ! empty( $exclude ) ) {
-			$query->whereNotIn( 'ID', $exclude );
+		if ( empty( $users ) ) {
+			return [];
 		}
 
-		$authors = $query->orderBy( $sort['field'], $sort['order'] )->get();
-
-		return array_filter( $authors, [ $this, 'should_include_user' ] );
+		return $users;
 	}
 
 	/**

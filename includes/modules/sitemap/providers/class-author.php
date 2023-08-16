@@ -150,7 +150,7 @@ class Author implements Provider {
 	 * @param  array $args Arguments to add.
 	 * @return array
 	 */
-	protected function get_users( $args = [] ) {
+	public function get_users( $args = [] ) {
 		$defaults = [
 			'orderby'    => 'meta_value_num',
 			'order'      => 'DESC',
