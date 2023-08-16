@@ -181,6 +181,8 @@ class Jobs {
 			$this->cache_flush_group( 'rank_math_rest_keywords_rows' );
 			$this->cache_flush_group( 'rank_math_posts_rows_by_objects' );
 			$this->cache_flush_group( 'rank_math_analytics_summary' );
+
+			return $rows;
 		} catch ( Exception $e ) {} // phpcs:ignore
 	}
 

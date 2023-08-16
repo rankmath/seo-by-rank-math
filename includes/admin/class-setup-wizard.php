@@ -251,7 +251,7 @@ class Setup_Wizard {
 		}
 
 		$this->hook_suffix = add_submenu_page(
-			null,
+			'',
 			esc_html__( 'Setup Wizard', 'rank-math' ),
 			esc_html__( 'Setup Wizard', 'rank-math' ),
 			'manage_options',

@@ -234,11 +234,11 @@ class Request {
 	 * @param string $response make_request response.
 	 */
 	private function log_response( $http_verb = '', $url = '', $args = [], $response = [], $formatted_response = '', $params = [], $text = '' ) {
+		do_action( 'rank_math/analytics/log', $http_verb, $url, $args, $response, $formatted_response, $params );
+
 		if ( ! apply_filters( 'rank_math/analytics/log_response', false ) ) {
 			return;
 		}
-
-		do_action( 'rank_math/analytics/log', $http_verb, $url, $args, $response, $formatted_response, $params );
 
 		$uploads = wp_upload_dir();
 		$file    = $uploads['basedir'] . '/rank-math/analytics-debug.log';

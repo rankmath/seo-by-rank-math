@@ -161,7 +161,7 @@ export default compose(
 			const getWordCount = props.researcher.getResearch( 'wordCount' )
 			const contentAssets = rankMathEditor.assessor.analyzer.defaultAnalyses.contentHasAssets
 			wordCount = getWordCount( props.content )
-			images = ! isUndefined( contentAssets ) ? contentAssets.getImages( props.researcher.paper, props.content ) : 0
+			images = ! isUndefined( contentAssets ) && ! isUndefined( props.researcher.paper ) ? contentAssets.getImages( props.researcher.paper, props.content ) : 0
 			videos = ! isUndefined( contentAssets ) ? contentAssets.getVideos( props.content ) : 0
 			h2 = ( props.content.match( /<h2\b[^>]*>(.*?)<\/h2>/g ) || [] ).length
 			h3 = ( props.content.match( /<h3\b[^>]*>(.*?)<\/h3>/g ) || [] ).length

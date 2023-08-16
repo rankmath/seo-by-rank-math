@@ -79,7 +79,7 @@ const registerDefaultHooks = () => {
 		'rank_math_schema_type',
 		'rank-math',
 		( type ) => {
-			if ( isUndefined( type ) ) {
+			if ( isUndefined( type ) || isEmpty( type ) ) {
 				return type
 			}
 
