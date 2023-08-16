@@ -232,7 +232,9 @@ class Str {
 		$words = preg_split( '/([\s]+)/u', $string, -1, PREG_SPLIT_DELIM_CAPTURE );
 		$ucwords = '';
 		foreach ( $words as $word ) {
-			$ucwords .= preg_match( '/[\p{L}]/u', $word[0] ) ? mb_strtoupper( $word[0], 'UTF-8' ) . mb_substr( $word, 1, mb_strlen( $word ), 'UTF-8' ) : $word;
+			if ( ! empty( $word[ 0 ] ) ) {
+				$ucwords .= preg_match( '/[\p{L}]/u', $word[0] ) ? mb_strtoupper( $word[0], 'UTF-8' ) . mb_substr( $word, 1, mb_strlen( $word ), 'UTF-8' ) : $word;
+			}
 		}
 
 		return $ucwords;

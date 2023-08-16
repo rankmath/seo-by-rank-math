@@ -86,7 +86,7 @@ class Cache_Watcher {
 	 */
 	public function save_post( $post_id ) {
 		$post = get_post( $post_id );
-		if ( ! empty( $post->post_password ) ) {
+		if ( ! empty( $post->post_password ) || 'auto-draft' === $post->post_status ) {
 			return false;
 		}
 

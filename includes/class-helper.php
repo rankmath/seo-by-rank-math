@@ -266,6 +266,11 @@ class Helper {
 	 * Credit @davidbarratt: https://github.com/davidbarratt/varnish-http-purge
 	 */
 	private static function clear_varnish_cache() {
+		// Early bail if Varnish cache is not enabled on the site.
+		if ( ! isset( $_SERVER['HTTP_X_VARNISH'] ) ) {
+			return;
+		}
+
 		// Parse the URL for proxy proxies.
 		$parsed_url = wp_parse_url( home_url() );
 
@@ -278,7 +283,7 @@ class Helper {
 		// If we made varniship, let it sail.
 		$purgeme = ( isset( $varniship ) && null !== $varniship ) ? $varniship : $parsed_url['host'];
 		wp_remote_request(
-			'http://' . $purgeme,
+			$parsed_url['scheme'] . '://' . $purgeme,
 			[
 				'method'   => 'PURGE',
 				'blocking' => false,

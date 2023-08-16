@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.2
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.112
+Stable tag: 1.0.114
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,16 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.112 [Apr 19, 2023] =
-- Improved: Significant code improvements in the [Analytics module](https://rankmath.com/kb/analytics) resulting in FASTER and LIGHTER performance of the plugin
-- Fixed: [Schema Block](https://rankmath.com/kb/rich-snippets/) was not working with WordPress 6.2
-- Fixed: Missing SEO tab in the beta version of [Elementor editor](https://rankmath.com/blog/elementor-seo/)
-- Fixed: PHP error related to [SEO Analyzer](https://rankmath.com/kb/seo-analysis/) on some setups
-- Fixed: PHP warning related to [Slack Open Graph tags](https://rankmath.com/kb/slack-enhanced-sharing/) on some setups
-- Fixed: [Title wrapper option](https://rankmath.com/kb/table-of-contents-block/#title-wrapper) in the Table of Contents Block was not working with the default TOC title on the frontend
-- Fixed: Redirection rules from Trash will no longer be displayed when searching for [Redirection](https://rankmath.com/kb/setting-up-redirections/).
-- Fixed: Empty Taxonomies & Author archive pages displayed in the [HTML sitemap](https://rankmath.com/kb/html-sitemap/)
-- Fixed: Misaligned [SEO Metabox](https://rankmath.com/kb/on-page-seo/#classic-editor) on Product taxonomy pages in the latest version of WooCommerce
-- Fixed: [Analytics pages](https://rankmath.com/kb/analytics/) were not working with the Gutenberg plugin
+= 1.0.114 [May 03, 2023] =
+- Added: New filter to exclude certain post types from [Analytics Index](https://rankmath.com/kb/filters-hooks-api-developer/#exclude-post-types-analytics-index)
+- Improved: Optimized [Sitemap caching](https://rankmath.com/kb/exclude-sitemaps-from-caching/) code to skip auto-draft posts and to run the Varnish cache function only on the sites where it is enabled
+- Fixed: Invalid Purge cache request warning on `https` sites with Varnish cache enabled
+- Fixed: [Index Status](https://rankmath.com/kb/analytics/#index-status) issue on subdirectory installations
+- Fixed: PHP warning when the [Capitalize Title option](https://rankmath.com/kb/titles-and-meta/#capitalize-titles) is enabled
+- Fixed: PHP warning related to [Schema](https://rankmath.com/kb/schema-generator/) when the image attachment ID is missing
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

@@ -255,9 +255,11 @@ trait WordPress {
 	 */
 	public static function get_thumbnail_with_fallback( $post_id, $size = 'thumbnail' ) {
 		if ( has_post_thumbnail( $post_id ) ) {
-			$thumbnail_id     = get_post_thumbnail_id( $post_id );
-			$image            = wp_get_attachment_image_src( $thumbnail_id, $size );
-			$image['caption'] = $image ? get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true ) : '';
+			$thumbnail_id = get_post_thumbnail_id( $post_id );
+			$image        = (array) wp_get_attachment_image_src( $thumbnail_id, $size );
+			if ( ! empty( array_filter( $image ) ) ) {
+				$image['caption'] = $image ? get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true ) : '';
+			}
 
 			return self::validate_image_data( $image );
 		}

@@ -140,6 +140,7 @@ class Post_Variables extends Advanced_Variables {
 				'description' => wp_kses_post( __( 'Publication date of the current post/page <strong>OR</strong> specified date on date archives', 'rank-math' ) ),
 				'variable'    => 'date',
 				'example'     => $this->is_post_edit ? get_the_date() : current_time( get_option( 'date_format' ) ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_date' ]
 		);
@@ -151,6 +152,7 @@ class Post_Variables extends Advanced_Variables {
 				'description' => esc_html__( 'Last modification date of the current post/page', 'rank-math' ),
 				'variable'    => 'modified',
 				'example'     => $this->is_post_edit ? get_the_modified_date() : current_time( get_option( 'date_format' ) ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_modified' ]
 		);
