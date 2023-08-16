@@ -52,6 +52,13 @@ class AIOSEO extends Plugin_Importer {
 	protected $choices = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'locations' ];
 
 	/**
+	 * AIOSEO settings.
+	 *
+	 * @var array
+	 */
+	private $aio_settings = [];
+
+	/**
 	 * Get the actions which can be performed for the plugin.
 	 *
 	 * @return array

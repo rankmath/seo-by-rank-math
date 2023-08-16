@@ -30,6 +30,13 @@ class Divi {
 	use Hooker;
 
 	/**
+	 * Screen object.
+	 *
+	 * @var Screen
+	 */
+	private $screen;
+
+	/**
 	 * Class constructor.
 	 */
 	public function __construct() {

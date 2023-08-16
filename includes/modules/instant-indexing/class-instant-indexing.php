@@ -259,7 +259,7 @@ class Instant_Indexing extends Base {
 	 * @param  array $unsanitized_postarr Unsanitized post data.
 	 * @param  bool  $update              Whether this is an existing post being updated or not.
 	 */
-	public function before_save_post( $data, $postarr, $unsanitized_postarr, $update ) {
+	public function before_save_post( $data, $postarr, $unsanitized_postarr, $update = false ) {
 		if ( ! $update ) {
 			return $data;
 		}

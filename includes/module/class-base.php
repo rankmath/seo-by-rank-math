@@ -12,7 +12,6 @@
 
 namespace RankMath\Module;
 
-use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -25,11 +24,60 @@ class Base {
 	use Hooker;
 
 	/**
-	 * Screen
+	 * Module ID.
+	 * 
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory = '';
+
+	/**
+	 * Module help.
+	 * 
+	 * @var array
+	 */
+	public $help = [];
+
+	/**
+	 * Page object.
+	 * 
+	 * @var object
+	 */
+	public $page;
+
+	/**
+	 * List table object.
+	 * 
+	 * @var object
+	 */
+	public $table;
+
+	/**
+	 * Screen.
 	 *
 	 * @var string
 	 */
 	public static $screen = '';
+
+	/**
+	 * Screen options.
+	 * 
+	 * @var array
+	 */
+	public $screen_options = [];
+
+	/**
+	 * Admin object.
+	 *
+	 * @var Admin
+	 */
+	public $admin;
 
 	/**
 	 * The Constructor.
@@ -37,7 +85,7 @@ class Base {
 	public function __construct() {
 		$this->register_admin_page();
 
-		if ( isset( $this->page ) && $this->page->is_current_page() ) {
+		if ( ! empty( $this->page ) && $this->page->is_current_page() ) {
 
 			// Store the current screen ID.
 			self::$screen = $this->page->parent . '_page_' . $this->page->id;
@@ -87,6 +135,10 @@ class Base {
 	 * Add screen options.
 	 */
 	public function add_screen_options() {
+		if ( ! isset( $this->screen_options['id'] ) ) {
+			return;
+		}
+
 		add_screen_option(
 			'per_page',
 			[

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.2.2
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.116
+Stable tag: 1.0.117
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,12 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.116 [May 31, 2023] =
-- Added: New Filter to modify data on [Sitemap Index](https://rankmath.com/kb/filters-hooks-api-developer/#remove-lastmod-in-sitemap)
-- Added: New Filter to change the host used in  [Instant Indexing](https://rankmath.com/kb/filters-hooks-api-developer/#indexnow-api-key-location) requests
-- Improved: [SEO Details in the Post column](https://rankmath.com/kb/bulk-editing-in-rank-math/#quick-edit-seo-details) now shows Article with its sub-type to avoid confusion
-- Fixed: [Incoming link count](https://rankmath.com/kb/link-counter/) was not detecting Products when the [Remove Base](https://rankmath.com/kb/general-settings/#remove-base) option was enabled
-- Fixed: Post URLs were incorrectly submitted to the IndexNow API when moving a post from Draft to Trash
-- Fixed: Taxonomies were displayed in the HTML Sitemap even when the [Include in HTML Sitemap](https://rankmath.com/kb/configure-sitemaps/#categories-include-in-html-sitemap) option was disabled
+= 1.0.117 [June 15, 2023] =
+- Added: New option to [test Google Analytics connection status](https://rankmath.com/kb/general-settings/#test-connections)
+- Improved: Compatibility with PHP 8.2
+- Improved: Optimized the [Table of Contents block](https://rankmath.com/kb/table-of-contents-block/) CSS
+- Fixed: PHP warning related to attributes type in the Table of Contents block when Debug mode is enabled on the site
+- Fixed: [Auto Post Redirect](https://rankmath.com/kb/general-settings/#auto-post-redirect) was not working for Attachment posts
+- Fixed: Fatal error related to [Instant Indexing](https://rankmath.com/kb/how-to-use-indexnow/) that occurred on some setups when creating a new post
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

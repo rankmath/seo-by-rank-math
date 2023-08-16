@@ -28,6 +28,20 @@ class Admin extends Base {
 	use Ajax;
 
 	/**
+	 * Module ID.
+	 * 
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory = '';
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {

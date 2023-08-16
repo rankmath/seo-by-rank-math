@@ -32,6 +32,34 @@ defined( 'ABSPATH' ) || exit;
 class Analytics extends Base {
 
 	/**
+	 * Module ID.
+	 * 
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory = '';
+
+	/**
+	 * Module help.
+	 * 
+	 * @var array
+	 */
+	public $help = [];
+
+	/**
+	 * Module page.
+	 * 
+	 * @var object
+	 */
+	public $page;
+
+	/**
 	 * The Constructor
 	 */
 	public function __construct() {

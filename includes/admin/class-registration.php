@@ -35,6 +35,19 @@ class Registration {
 	private $slug = 'rank-math-registration';
 
 	/**
+	 * Hold current step.
+	 *
+	 * @var string
+	 */
+	protected $step = '';
+
+	/**
+	 * Current step slug.
+	 *
+	 * @var string
+	 */
+	protected $step_slug = '';
+	/**
 	 * The text string array.
 	 *
 	 * @var array

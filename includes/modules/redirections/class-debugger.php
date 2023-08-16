@@ -22,6 +22,13 @@ class Debugger {
 	use Hooker;
 
 	/**
+	 * Redirector variables.
+	 *
+	 * @var array
+	 */
+	private $args = [];
+
+	/**
 	 * Constructor.
 	 *
 	 * @param array $args Redirector variables.

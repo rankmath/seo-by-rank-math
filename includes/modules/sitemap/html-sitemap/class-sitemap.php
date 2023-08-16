@@ -25,6 +25,20 @@ class Sitemap extends Taxonomy {
 	use Hooker;
 
 	/**
+	 * Generators.
+	 *
+	 * @var array
+	 */
+	private $generators;
+
+	/**
+	 * Cache.
+	 *
+	 * @var object
+	 */
+	private $cache;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {

@@ -22,6 +22,41 @@ class Summary {
 	use Cache;
 
 	/**
+	 * Start date.
+	 *
+	 * @var string
+	 */
+	public $start_date;
+
+	/**
+	 * End date.
+	 *
+	 * @var string
+	 */
+	public $end_date;
+
+	/**
+	 * Compare start date.
+	 *
+	 * @var string
+	 */
+	public $compare_start_date;
+
+	/**
+	 * Compare end date.
+	 *
+	 * @var string
+	 */
+	public $compare_end_date;
+
+	/**
+	 * Days.
+	 *
+	 * @var int
+	 */
+	public $days;
+
+	/**
 	 * Get Widget.
 	 *
 	 * @return object

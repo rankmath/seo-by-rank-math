@@ -189,23 +189,23 @@
         },
         {
             "name": "mythemeshop/wordpress-helpers",
-            "version": "v1.1.21",
-            "version_normalized": "1.1.21.0",
+            "version": "v1.1.22",
+            "version_normalized": "1.1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MyThemeShopTeam/wordpress-helpers.git",
-                "reference": "5f3e69ffcdcbd8fc190dae0cd0f93bb87ebe696d"
+                "reference": "0ee4a87a03dac72e9e503cc4e1b0208d3269f4dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/5f3e69ffcdcbd8fc190dae0cd0f93bb87ebe696d",
-                "reference": "5f3e69ffcdcbd8fc190dae0cd0f93bb87ebe696d",
+                "url": "https://api.github.com/repos/MyThemeShopTeam/wordpress-helpers/zipball/0ee4a87a03dac72e9e503cc4e1b0208d3269f4dc",
+                "reference": "0ee4a87a03dac72e9e503cc4e1b0208d3269f4dc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6"
             },
-            "time": "2023-05-31T04:50:02+00:00",
+            "time": "2023-06-15T08:54:41+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -226,26 +226,26 @@
                     "email": "info@mythemeshop.com"
                 }
             ],
-            "description": "Collection of utilities required during development of a plugin or theme for WordPress. Build for developers by developers.",
+            "description": "Collection of utilities required during development of a plugin or theme for WordPress. Built for developers by developers.",
             "support": {
                 "issues": "https://github.com/MyThemeShopTeam/wordpress-helpers/issues",
-                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/v1.1.21"
+                "source": "https://github.com/MyThemeShopTeam/wordpress-helpers/tree/v1.1.22"
             },
             "install-path": "../mythemeshop/wordpress-helpers"
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.6.0",
-            "version_normalized": "3.6.0.0",
+            "version": "3.6.1",
+            "version_normalized": "3.6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "1373570a9ee03a0be31c73df086d1e4343a27347"
+                "reference": "7fd383cad3d64b419ec81bcd05bab44355a6e6ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/1373570a9ee03a0be31c73df086d1e4343a27347",
-                "reference": "1373570a9ee03a0be31c73df086d1e4343a27347",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/7fd383cad3d64b419ec81bcd05bab44355a6e6ef",
+                "reference": "7fd383cad3d64b419ec81bcd05bab44355a6e6ef",
                 "shasum": ""
             },
             "require-dev": {
@@ -254,7 +254,7 @@
                 "wp-cli/wp-cli": "~2.5.0",
                 "yoast/phpunit-polyfills": "^1.0"
             },
-            "time": "2023-05-10T19:25:40+00:00",
+            "time": "2023-06-14T19:23:12+00:00",
             "type": "wordpress-plugin",
             "extra": {
                 "scripts-description": {
@@ -272,7 +272,7 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.6.0"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.6.1"
             },
             "install-path": "../woocommerce/action-scheduler"
         }

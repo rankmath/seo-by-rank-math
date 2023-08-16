@@ -104,6 +104,7 @@ class KML_File {
 				'mod' => $this->get_modified_date(),
 			],
 			'local',
+			[]
 		);
 
 		if ( ! $item ) {

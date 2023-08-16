@@ -28,6 +28,13 @@ class Sitemap {
 	use Hooker;
 
 	/**
+	 * Sitemap Index object.
+	 *
+	 * @var Sitemap_Index
+	 */
+	public $index;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {

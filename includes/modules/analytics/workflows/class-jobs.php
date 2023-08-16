@@ -131,9 +131,15 @@ class Jobs {
 	public function get_console_days( $args = [] ) {
 		set_time_limit( 300 );
 
-		$rows = Api::get()->get_search_analytics( $args['start_date'], $args['end_date'], [ 'date' ] );
+		$rows = Api::get()->get_search_analytics(
+			[
+				'start_date' => $args['start_date'],
+				'end_date'   => $args['end_date'],
+				'dimensions' => [ 'date' ],
+			]
+		);
 
-		if ( empty( $rows ) ) {
+		if ( empty( $rows ) || is_wp_error( $rows ) ) {
 			return [];
 		}
 
@@ -167,8 +173,15 @@ class Jobs {
 	public function get_console_data( $date ) {
 		set_time_limit( 300 );
 
-		$rows = Api::get()->get_search_analytics( $date, $date, [ 'query', 'page' ] );
-		if ( empty( $rows ) ) {
+		$rows = Api::get()->get_search_analytics(
+			[
+				'start_date' => $date,
+				'end_date'   => $date,
+				'dimensions' => [ 'query', 'page' ],
+			]
+		);
+
+		if ( empty( $rows ) || is_wp_error( $rows ) ) {
 			return;
 		}
 

@@ -27,6 +27,13 @@ defined( 'ABSPATH' ) || exit;
 class Rest extends WP_REST_Controller {
 
 	/**
+	 * Registered data.
+	 * 
+	 * @var array|false
+	 */
+	private $registered;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {

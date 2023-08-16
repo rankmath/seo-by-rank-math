@@ -30,20 +30,6 @@ class Manager extends Post_Variables {
 	protected $replacements = [];
 
 	/**
-	 * Is on post edit screen.
-	 *
-	 * @var bool
-	 */
-	protected $is_post_edit = false;
-
-	/**
-	 * Is on term edit screen.
-	 *
-	 * @var bool
-	 */
-	protected $is_term_edit = false;
-
-	/**
 	 * Removed non replaced variables.
 	 *
 	 * @var bool
@@ -62,7 +48,14 @@ class Manager extends Post_Variables {
 	 *
 	 * @var array
 	 */
-	protected $args = [];
+	public $args = [];
+
+	/**
+	 * Hold arguments temporarily.
+	 *
+	 * @var array
+	 */
+	protected $tmp_args = [];
 
 	/**
 	 * Class constructor.

@@ -61,6 +61,13 @@ class Request {
 	private $is_notice_added = false;
 
 	/**
+	 * Access token.
+	 *
+	 * @var string
+	 */
+	private $token = '';
+
+	/**
 	 * Set workflow
 	 */
 	public function set_workflow( $workflow = '' ) {
@@ -361,10 +368,6 @@ class Request {
 
 		$response = $this->get_refresh_token();
 		if ( ! $response ) {
-			return false;
-		}
-
-		if ( ! isset( $response['success'] ) ) {
 			return false;
 		}
 

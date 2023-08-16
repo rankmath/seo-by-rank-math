@@ -61,6 +61,13 @@ class Sitemap_XML extends XML {
 	private $transient = false;
 
 	/**
+	 * Holds the stats for the sitemap generation.
+	 *
+	 * @var array
+	 */
+	private $stats = [];
+
+	/**
 	 * The Constructor.
 	 *
 	 * @param string $type Sitemap type.

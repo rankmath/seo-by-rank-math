@@ -23,6 +23,20 @@ class Version_Control {
 	use Hooker;
 
 	/**
+	 * Module ID.
+	 * 
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory = '';
+
+	/**
 	 * Plugin info transient key.
 	 *
 	 * @var string

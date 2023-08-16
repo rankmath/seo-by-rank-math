@@ -48,6 +48,13 @@ class Cache_Watcher {
 	protected static $clear_types = [];
 
 	/**
+	 * Holds the array of post types being imported.
+	 *
+	 * @var array
+	 */
+	private $importing_post_types = [];
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {

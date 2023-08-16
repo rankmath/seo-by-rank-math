@@ -28,6 +28,13 @@ class Monitor {
 	use Hooker, Ajax;
 
 	/**
+	 * Admin object.
+	 *
+	 * @var Admin
+	 */
+	public $admin;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {

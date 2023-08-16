@@ -311,7 +311,7 @@ class DB {
 	/**
 	 * Get stats for dashboard widget.
 	 *
-	 * @return int
+	 * @return object
 	 */
 	public static function get_stats() {
 		return self::table()->selectCount( '*', 'total' )->selectSum( 'hits', 'hits' )->one();

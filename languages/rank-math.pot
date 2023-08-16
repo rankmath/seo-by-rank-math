@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Rank Math\n"
 "Last-Translator: Rank Math\n"
-"POT-Creation-Date: 2023-05-31 08:08+0000\n"
+"POT-Creation-Date: 2023-06-15 09:52+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -2582,6 +2582,9 @@ msgstr ""
 msgid "Access Time"
 msgstr ""
 
+msgid "Data import will not work for this service as sufficient permissions are not given."
+msgstr ""
+
 msgid "Data fetching cancelled."
 msgstr ""
 
@@ -4906,6 +4909,9 @@ msgstr ""
 msgid "Disconnect"
 msgstr ""
 
+msgid "Test Connections"
+msgstr ""
+
 msgid "Site"
 msgstr ""
 
@@ -5057,6 +5063,15 @@ msgid "Ignore Query Parameters"
 msgstr ""
 
 msgid "Turn ON to ignore all query parameters (the part after a question mark in a URL) when logging 404 errors."
+msgstr ""
+
+msgid "The Google Analytics request failed."
+msgstr ""
+
+msgid "The Google Analytics Console request failed."
+msgstr ""
+
+msgid "The Google Search Console request failed."
 msgstr ""
 
 msgid "Given"

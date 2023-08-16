@@ -26,6 +26,20 @@ class Stats extends Keywords {
 	use Hooker;
 
 	/**
+	 * Start timestamp.
+	 *
+	 * @var int
+	 */
+	public $start = 0;
+
+	/**
+	 * End timestamp.
+	 *
+	 * @var int
+	 */
+	public $end = 0;
+
+	/**
 	 * Start date.
 	 *
 	 * @var string

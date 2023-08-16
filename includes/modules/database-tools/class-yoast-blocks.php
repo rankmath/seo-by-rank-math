@@ -41,6 +41,13 @@ class Yoast_Blocks extends \WP_Background_Process {
 	private $toc_converter;
 
 	/**
+	 * Local Converter.
+	 *
+	 * @var Yoast_Local_Converter
+	 */
+	private $local_converter;
+
+	/**
 	 * Action.
 	 *
 	 * @var string

@@ -77,6 +77,13 @@ class Options {
 	private $cmb_id = null;
 
 	/**
+	 * Options key.
+	 *
+	 * @var string
+	 */
+	public $key = '';
+
+	/**
 	 * The Constructor
 	 *
 	 * @param array $config Array of configuration.

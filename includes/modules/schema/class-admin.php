@@ -10,12 +10,9 @@
 
 namespace RankMath\Schema;
 
-use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Module\Base;
-use RankMath\Rest\Sanitize;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\Arr;
 use MyThemeShop\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
@@ -24,6 +21,20 @@ defined( 'ABSPATH' ) || exit;
  * Admin class.
  */
 class Admin extends Base {
+
+	/**
+	 * Module ID.
+	 * 
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Module directory.
+	 * 
+	 * @var string
+	 */
+	public $directory = '';
 
 	/**
 	 * The Constructor.

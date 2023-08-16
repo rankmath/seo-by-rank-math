@@ -40,6 +40,27 @@ class Permalink_Watcher {
 	private $categories;
 
 	/**
+	 * Remove product base.
+	 *
+	 * @var bool
+	 */
+	private $remove_product_base;
+
+	/**
+	 * Remove category base.
+	 *
+	 * @var bool
+	 */
+	private $remove_category_base;
+
+	/**
+	 * Remove parent slugs.
+	 *
+	 * @var bool
+	 */
+	private $remove_parent_slugs;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {

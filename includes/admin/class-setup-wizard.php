@@ -70,6 +70,13 @@ class Setup_Wizard {
 	public $wizard_step = null;
 
 	/**
+	 * Hook suffix.
+	 * 
+	 * @var string
+	 */
+	public $hook_suffix = '';
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
