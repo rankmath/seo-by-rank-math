@@ -78,12 +78,14 @@ class Watcher {
 			$primary_keyword = trim( $primary_keyword[0] );
 		}
 
+		$page = str_replace( site_url(), '', urldecode( get_permalink( $post_id ) ) );
+
 		// Set argument for object row.
 		$object_args = [
 			'id'                  => get_post_meta( $post_id, 'rank_math_analytic_object_id', true ),
 			'created'             => get_the_modified_date( 'Y-m-d H:i:s', $post_id ),
 			'title'               => get_the_title( $post_id ),
-			'page'                => Stats::get_relative_url( urldecode( get_permalink( $post_id ) ) ),
+			'page'                => $page,
 			'object_type'         => 'post',
 			'object_subtype'      => $post_type,
 			'object_id'           => $post_id,

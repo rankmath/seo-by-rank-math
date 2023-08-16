@@ -696,7 +696,13 @@ class Stats extends Keywords {
 			// Step1. Get most recent row id for each dimension for current data.
 			// phpcs:disable
 			$query = $wpdb->prepare(
-				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
+				"SELECT t1.id as id
+				FROM {$wpdb->prefix}rank_math_analytics_gsc t1
+				INNER JOIN (
+					SELECT query, MAX(created) as latest_created
+					FROM {$wpdb->prefix}rank_math_analytics_gsc
+					WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}
+				) t2 ON t1.query = t2.query AND t1.created = t2.latest_created",
 				$this->start_date,
 				$this->end_date
 			);
@@ -710,7 +716,13 @@ class Stats extends Keywords {
 			// Step3. Get most recent row id for each dimension for compare data.
 			// phpcs:disable
 			$query = $wpdb->prepare(
-				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
+				"SELECT t1.id as id
+				FROM {$wpdb->prefix}rank_math_analytics_gsc t1
+				INNER JOIN (
+					SELECT query, MAX(created) as latest_created
+					FROM {$wpdb->prefix}rank_math_analytics_gsc
+					WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}
+				) t2 ON t1.query = t2.query AND t1.created = t2.latest_created",
 				$this->compare_start_date,
 				$this->compare_end_date
 			);
