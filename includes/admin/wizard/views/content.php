@@ -26,7 +26,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<form class="cmb-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 			<input type="hidden" name="action" value="<?php echo 'rank-math-registration' === $this->slug ? 'rank_math_save_registration' : 'rank_math_save_wizard'; ?>">
-			<input type="hidden" name="step" value="<?php echo $this->step; ?>">
+			<input type="hidden" name="step" value="<?php echo esc_attr( $this->step ); ?>">
 			<?php wp_nonce_field( 'rank-math-wizard', 'security' ); ?>
 
 			<?php $this->body(); ?>

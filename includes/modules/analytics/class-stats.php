@@ -957,11 +957,16 @@ class Stats extends Keywords {
 	public static function get_relative_url( $url ) {
 		$home_url = Google_Analytics::get_site_url();
 
-		$domain = strtolower( wp_parse_url( $home_url, PHP_URL_HOST ) );
-		$domain = str_replace( [ 'www.', '.' ], [ '', '\.' ], $domain );
-		$regex  = "/http[s]?:\/\/(www\.)?$domain/mU";
-		$url    = strtolower( trim( $url ) );
-		$url    = preg_replace( $regex, '', $url );
+		// On multisite and sub-directory setup replace the home url.
+		if ( is_multisite() && ! is_subdomain_install() ) {
+			$url = \str_replace( $home_url, '/', $url );
+		} else {
+			$domain = strtolower( wp_parse_url( $home_url, PHP_URL_HOST ) );
+			$domain = str_replace( [ 'www.', '.' ], [ '', '\.' ], $domain );
+			$regex  = "/http[s]?:\/\/(www\.)?$domain/mU";
+			$url    = strtolower( trim( $url ) );
+			$url    = preg_replace( $regex, '', $url );
+		}
 
 		/**
 		 * Google API and get_permalink sends URL Encoded strings so we need

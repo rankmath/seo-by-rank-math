@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.2
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.114
+Stable tag: 1.0.115
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,12 +583,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.114 [May 03, 2023] =
-- Added: New filter to exclude certain post types from [Analytics Index](https://rankmath.com/kb/filters-hooks-api-developer/#exclude-post-types-analytics-index)
-- Improved: Optimized [Sitemap caching](https://rankmath.com/kb/exclude-sitemaps-from-caching/) code to skip auto-draft posts and to run the Varnish cache function only on the sites where it is enabled
-- Fixed: Invalid Purge cache request warning on `https` sites with Varnish cache enabled
-- Fixed: [Index Status](https://rankmath.com/kb/analytics/#index-status) issue on subdirectory installations
-- Fixed: PHP warning when the [Capitalize Title option](https://rankmath.com/kb/titles-and-meta/#capitalize-titles) is enabled
-- Fixed: PHP warning related to [Schema](https://rankmath.com/kb/schema-generator/) when the image attachment ID is missing
+= 1.0.115 [May 18, 2023] =
+- Fixed: [HTML Sitemap](https://rankmath.com/kb/html-sitemap/) was incorrectly repeating subcategories as standalone categories
+- Fixed: Issue with importing [Analytics](https://rankmath.com/kb/analytics/) data on Multisite setup with sub-directory domain
+- Fixed: Incompatibility between Rank Math Site Analytics and WPML plugin's 'Use directory for default language' option
+- Fixed: Missing [Table of Contents Block](https://rankmath.com/kb/table-of-contents-block/) ID after editing the title or heading in the block
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

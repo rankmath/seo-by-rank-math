@@ -78,7 +78,7 @@ class Watcher {
 			$primary_keyword = trim( $primary_keyword[0] );
 		}
 
-		$page = str_replace( home_url(), '', urldecode( get_permalink( $post_id ) ) );
+		$page = str_replace( Helper::get_home_url(), '', urldecode( get_permalink( $post_id ) ) );
 
 		// Set argument for object row.
 		$object_args = [

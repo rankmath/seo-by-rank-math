@@ -517,8 +517,8 @@ class Image {
 		$do_og_content_image_cache = $this->do_filter( 'opengraph/content_image_cache', true );
 		if ( $do_og_content_image_cache ) {
 			$cache_key = 'rank_math_og_content_image';
-			$cache = get_post_meta( $post->ID, $cache_key, true );
-			$check = md5( $post->post_content );
+			$cache     = get_post_meta( $post->ID, $cache_key, true );
+			$check     = md5( $post->post_content );
 			if ( ! empty( $cache ) && $check === $cache['check'] ) {
 				foreach ( $cache['images'] as $image ) {
 					if ( is_int( $image ) ) {

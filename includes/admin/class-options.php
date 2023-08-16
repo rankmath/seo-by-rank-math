@@ -297,7 +297,7 @@ class Options {
 
 				<footer class="form-footer rank-math-ui settings-footer wp-clearfix">
 					<?php wp_nonce_field( 'rank-math-reset-options' ); ?>
-					<input type="submit" name="submit-cmb" id="submit-cmb" title="<?php echo esc_html__( 'Ctrl/Cmd + Enter', 'rank-math' ) ?>" class="button button-primary save-options" value="<?php esc_attr_e( 'Save Changes', 'rank-math' ); ?>">
+					<input type="submit" name="submit-cmb" id="submit-cmb" title="<?php echo esc_html__( 'Ctrl/Cmd + Enter', 'rank-math' ); ?>" class="button button-primary save-options" value="<?php esc_attr_e( 'Save Changes', 'rank-math' ); ?>">
 					<input type="submit" name="reset-cmb" id="rank-math-reset-cmb" value="<?php esc_attr_e( 'Reset Options', 'rank-math' ); ?>" class="button button-secondary reset-options alignleft">
 				</footer>
 
