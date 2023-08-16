@@ -65,7 +65,7 @@ class Request {
 	 *
 	 * @var string
 	 */
-	private $token = '';
+	public $token = '';
 
 	/**
 	 * Set workflow

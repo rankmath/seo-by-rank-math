@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.2.2
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.117
+Stable tag: 1.0.117.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -590,5 +590,8 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 - Fixed: PHP warning related to attributes type in the Table of Contents block when Debug mode is enabled on the site
 - Fixed: [Auto Post Redirect](https://rankmath.com/kb/general-settings/#auto-post-redirect) was not working for Attachment posts
 - Fixed: Fatal error related to [Instant Indexing](https://rankmath.com/kb/how-to-use-indexnow/) that occurred on some setups when creating a new post
+
+= 1.0.117.1 [June 16, 2023] =
+- Fixed: A minor bug that affected the connection to [Google Analytics/Google Search Console](https://rankmath.com/kb/analytics/)
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
