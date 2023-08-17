@@ -74,6 +74,7 @@ class Add_Attributes {
 		}
 
 		$stripped_content = preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', $content );
+		$stripped_content = preg_replace( '/(<(?!img)\w+[^>]+)(data-.+?=".*?")([^>]*)(>)/', '${1}${3}${4}', $stripped_content );
 		preg_match_all( '/<img ([^>]+)\/?>/iU', $stripped_content, $matches, PREG_SET_ORDER );
 		if ( empty( $matches ) ) {
 			return $content;
