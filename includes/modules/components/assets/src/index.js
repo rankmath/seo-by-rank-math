@@ -11,9 +11,10 @@ import Button from './buttons/Button';
 import TextControl from './inputs/TextControl';
 import TextAreaControl from './inputs/TextAreaControl';
 import CustomSelectControl from './select/CustomSelectControl';
+import ToggleControl from './controls/ToggleControl';
+import RadioControl from './controls/RadioControl';
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss'
-import ToggleControl from './controls/ToggleControl';
 
 
 const AllComponents = () => {
@@ -42,9 +43,22 @@ const AllComponents = () => {
   ]
   const [value, setValue] = useState(false);
 
+  const [option, setOption] = useState('a');
+
   return (
     <div className='components-container'>
-
+      <div className='group-components'>
+        <RadioControl
+          label="User type"
+          selected={option}
+          options={[
+            { label: 'Selected', value: 'a' },
+            { label: 'Default', value: 'e' },
+          ]}
+          onChange={(value) => setOption(value)}
+          disabled
+        />
+      </div>
     </div>
   );
 };

@@ -9,6 +9,10 @@
         .components-form-toggle__track {
           background-color: gray;
         }
+
+        + .components-toggle-control__label {
+          opacity: 0.3;
+        }
       }
 
       .components-form-toggle__input {
@@ -20,4 +24,3 @@
     }
   }
 }
-
