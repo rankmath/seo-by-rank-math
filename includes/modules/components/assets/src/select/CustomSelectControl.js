@@ -11,7 +11,7 @@ import '../../scss/CustomSelectControl.scss';
 /**
  * WordPress dependencies
  */
-import { CustomSelectControl } from '@wordpress/components';
+import { CustomSelectControl, Disabled } from '@wordpress/components';
 
 export default function ({
   label,
@@ -19,7 +19,7 @@ export default function ({
   onChange,
   options,
   size,
-  disabled,
+  disabled = false,
   className,
   ...rest
 }) {
@@ -46,8 +46,10 @@ export default function ({
   }
 
   return (
-    <CustomSelectControl
-      {...selectControlProps}
-    />
+    <Disabled isDisabled={disabled}>
+      <CustomSelectControl
+        {...selectControlProps}
+      />
+    </Disabled>
   );
 };

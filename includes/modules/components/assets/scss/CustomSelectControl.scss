@@ -15,20 +15,6 @@
 
     .components-input-control__container {
       background-color: #E3E3DD;
-
-      .components-custom-select-control__button {
-        &:focus {
-          + .components-input-control__suffix {
-            svg {
-              transform: none;
-            }
-          }
-        }
-      }
-    }
-
-    .components-custom-select-control__menu {
-      display: none;
     }
   }
 
@@ -54,6 +40,7 @@
       text-transform: inherit;
       font-size: 13px;
       margin-bottom: 0;
+      font-weight: normal;
     }
   }
 
