@@ -31,25 +31,20 @@ class Schema {
 		}
 		$this->action( 'wp', 'integrations' );
 		$this->filter( 'rank_math/elementor/dark_styles', 'add_dark_style' );
-		$this->filter( 'oembed_response_data', 'set_oembed_data', 10, 2 );
+		$this->filter( 'oembed_response_data', 'create_oembed_data', 10, 2 );
 		new Blocks();
 		new Snippet_Shortcode();
 	}
 
 	/**
-	 * Callback function to pass to the oEmbed's response data that will enable
-	 * support for using the image and title set by the WordPress SEO plugin's fields. This
-	 * address the concern where some social channels/subscribed use oEmebed data over Open Graph data
-	 * if both are present.
+	 * Change the title for oembed data
 	 *
-	 * @link https://developer.wordpress.org/reference/hooks/oembed_response_data/ for hook info.
+	 * @param array   $data oEmbed title,desc etc.
+	 * @param WP_Post $post current Post.
 	 *
-	 * @param array   $data The oEmbed data.
-	 * @param WP_Post $post The current Post object.
-	 *
-	 * @return array An array of oEmbed data with modified values where appropriate.
+	 * @return array changed title and description.
 	 */
-	public function set_oembed_data( $data, $post ) {
+	public function create_oembed_data( $data, $post ) {
 		$title = get_post_meta( $post->ID, 'rank_math_title', true );
 		if ( ! empty( $title ) ) {
 			$data['title'] = Helper::replace_vars( $title, $post );
