@@ -1,0 +1,23 @@
+@import '@wordpress/components/build-style/style.css';
+
+.components-toggle-control { 
+  .components-base-control__field {
+    .components-form-toggle {
+      margin-right: 0px;
+
+      &.is-disabled {
+        .components-form-toggle__track {
+          background-color: gray;
+        }
+      }
+
+      .components-form-toggle__input {
+        &:focus + .components-form-toggle__track {
+          box-shadow: none;
+          outline: none;
+        }
+      }
+    }
+  }
+}
+

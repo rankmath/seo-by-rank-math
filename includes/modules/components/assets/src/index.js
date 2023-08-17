@@ -13,6 +13,7 @@ import TextAreaControl from './inputs/TextAreaControl';
 import CustomSelectControl from './select/CustomSelectControl';
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss'
+import ToggleControl from './controls/ToggleControl';
 
 
 const AllComponents = () => {
@@ -39,9 +40,42 @@ const AllComponents = () => {
       name: "Full Size",
     }
   ]
+  const [value, setValue] = useState(false);
 
   return (
     <div className='components-container'>
+
+    </div>
+  );
+};
+
+function ToggleControlShowcase() {
+  return (
+    <>
+      <div className='group-components'>
+        <ToggleControl
+          help='Help me'
+          label="On"
+          checked={value}
+          onChange={() => setValue((state) => !state)}
+        />
+      </div>
+
+      <div className='group-components'>
+        <ToggleControl
+          label="Off"
+          checked={value}
+          onChange={() => setValue((state) => !state)}
+          disabled
+        />
+      </div>
+    </>
+  )
+}
+
+function CustomSelectControlShowcase() {
+  return (
+    <>
       <div className='group-components'>
         <CustomSelectControl
           label="Label"
@@ -71,9 +105,9 @@ const AllComponents = () => {
           disabled
         />
       </div>
-    </div>
-  );
-};
+    </>
+  )
+}
 
 function TextAreaControlShowcase() {
   return (
