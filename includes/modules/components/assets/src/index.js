@@ -1,113 +1,56 @@
 /**
  * WordPress dependencies
  */
-import { createElement, render } from '@wordpress/element';
-import { useState } from '@wordpress/element';
+import { createElement, render, useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
 */
-import ToggleControl from './controls/ToggleControl';
-import CheckboxControl from './controls/CheckboxControl';
-import RadioControl from './controls/RadioControl';
+import SearchSelectControl from './select/search-select/SearchSelectControl';
 import '../../../../../assets/admin/scss/_font-icons.scss';
-import '../scss/components.scss'
+import '../scss/components.scss';
 
 
 const AllComponents = () => {
-  const [value, setValue] = useState(false);
-  const [option, setOption] = useState('a');
-  const [isChecked, setChecked] = useState(true);
+  const optionsList = [
+    {
+      key: 'first_option',
+      name: {
+        title: 'First Option Title',
+        subTitle: '%code_text%',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+      }
+    },
+    {
+      key: 'second_option',
+      name: {
+        title: 'Second Option Title',
+        subTitle: '%code_text%',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+      }
+    },
+  ]
 
-  const initialCheckboxes = [
-    { id: 'checkbox-1', label: 'Checkbox 1', checked: false },
-    { id: 'checkbox-2', label: 'Checkbox 2', checked: false },
-    { id: 'checkbox-3', label: 'Checkbox 3', checked: false },
-  ];
-
-  const [checkboxes, setCheckboxes] = useState(initialCheckboxes);
-
-  const handleCheckboxChange = (id) => {
-    const updatedCheckboxes = checkboxes.map((checkbox) =>
-      checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
-    );
-    setCheckboxes(updatedCheckboxes);
-  };
-
-  const areAllChecked = checkboxes.every((checkbox) => checkbox.checked);
-  const areAnyChecked = checkboxes.some((checkbox) => checkbox.checked);
-
-  const handleMasterCheckboxChange = () => {
-    const newCheckValue = !areAllChecked;
-    const updatedCheckboxes = checkboxes.map((checkbox) => ({
-      ...checkbox,
-      checked: newCheckValue,
-    }));
-    setCheckboxes(updatedCheckboxes);
-  };
+  const [value, setValue] = useState({
+    key: optionsList[0].key,
+    name: optionsList[0].name.title,
+  });
 
   return (
     <div className='components-container'>
-      <div className='group-components'>
-        <CheckboxControl
-          label="Select All"
-          checked={areAllChecked}
-          indeterminate={!areAllChecked && areAnyChecked}
-          isIndeterminate
-          onChange={handleMasterCheckboxChange}
+      <div>
+        <SearchSelectControl
+          label="Search Options"
+          value={value}
+          options={optionsList}
+          onChange={
+            ({ selectedItem: { key, name } }) => setValue({ key, name: name.props.title })
+          }
         // disabled
-        />
-        {checkboxes.map((checkbox) => (
-          <CheckboxControl
-            key={checkbox.id}
-            label={checkbox.label}
-            checked={checkbox.checked}
-            onChange={() => handleCheckboxChange(checkbox.id)}
-          // disabled
-          />
-        ))}
-      </div>
-
-      <div className="group-components">
-        <CheckboxControl
-          label="Checkbox"
-          checked={isChecked}
-          onChange={setChecked}
-        // disabled
-        />
-      </div>
-
-      <div className='group-components'>
-        <RadioControl
-          label="Radio"
-          selected={option}
-          options={[
-            { label: 'Selected', value: 'a' },
-            { label: 'Default', value: 'e' },
-          ]}
-          onChange={(value) => setOption(value)}
-        // disabled
-        />
-      </div>
-
-      <div className='group-components'>
-        <ToggleControl
-          help='Toggle'
-          label="On"
-          checked={value}
-          onChange={() => setValue((state) => !state)}
-        />
-
-        <ToggleControl
-          label="Off"
-          help='Toggle'
-          checked={value}
-          onChange={() => setValue((state) => !state)}
-          disabled
         />
       </div>
     </div>
-  );
+  )
 };
 
 const renderAllComponents = () => {

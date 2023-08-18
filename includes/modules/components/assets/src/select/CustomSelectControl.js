@@ -42,6 +42,7 @@ export default function ({
     disabled,
     size,
     __next36pxDefaultSize: true,
+    __nextUnconstrainedWidth: true,
     ...rest
   }
 

@@ -1,0 +1,125 @@
+@import '@wordpress/components/build-style/style.css';
+
+
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+.search-select-control {
+  &.components-custom-select-control {
+    width: 30rem;
+  }
+
+  &.is-disabled {
+    pointer-events: none;
+    opacity: 0.3;
+
+    .components-input-control__container {
+      background-color: #E3E3DD;
+
+      .components-input-control__suffix {
+        .components-input-control-suffix-wrapper {
+          .css-18q9qlf {
+            background-color: #CECECE;
+          }
+        }
+      }
+    }
+  }
+
+  .components-input-control__container {
+    .css-1t91ps2.css-1t91ps2.css-1t91ps2 {
+      font-size: 13px;
+    }
+
+    .components-input-control__suffix {
+      .components-input-control-suffix-wrapper {
+        right: 4px;
+
+        &.css-1bc3d1v {
+          padding-right: 4px;
+        }
+
+        .css-18q9qlf {
+          padding: 5px;
+          background-color: #F2F2F2;
+        }
+      }
+    }
+
+    .components-custom-select-control__button {
+      &[aria-expanded="true"] {
+        + .components-input-control__suffix {
+          .components-input-control-suffix-wrapper {
+            .css-18q9qlf {
+              background-color: #E6F2F9; 
+            }
+          }
+
+          svg {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+
+  .components-custom-select-control__menu {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    border-color: var(--wp-admin-theme-color);
+    margin: 0;
+    border-top: 0;
+    min-width: 99%;
+
+    .components-search-control {
+      .components-base-control__field {
+        background-color: #fff;
+        padding: 8px 16px;
+        border-bottom: 1px solid #E8E8E8;
+
+        .components-search-control__input {
+          background-color: #fff;
+          border: 1px solid #949494;
+
+          &:focus {
+            box-shadow: none;
+            outline: none;
+          }
+        }
+
+        .components-search-control__icon {
+          svg {
+            transform: rotate(-90deg);
+            color: #949494;
+          }
+        }
+      }
+    }
+    
+    .components-custom-select-control__item {
+      border-bottom: 1px solid #E8E8E8;
+      margin-bottom: 0px;
+
+      &.is-highlighted {
+        background-color: #F0F7FB;
+        cursor: pointer;
+
+        .option__heading {
+          .option__heading-title {
+            color: var(--wp-admin-theme-color); 
+          }
+          .option__heading-subtitle {
+            background-color: #E3F1F8;
+            color: var(--wp-admin-theme-color); 
+          }
+        }
+
+        .option__description {
+          color: #626262;
+        }
+      }
+    }
+  }
+}
