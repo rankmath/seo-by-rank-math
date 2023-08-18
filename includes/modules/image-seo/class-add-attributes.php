@@ -109,7 +109,7 @@ class Add_Attributes {
 
 			if ( $is_dirty ) {
 				$new     = '<img' . HTML::attributes_to_string( $attrs ) . '>';
-				$content = str_replace( $image[0], $new, $content );
+				$content = str_replace( $image[0], $new, $stripped_content );
 			}
 		}
 
