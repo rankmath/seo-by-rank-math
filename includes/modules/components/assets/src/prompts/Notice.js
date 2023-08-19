@@ -49,7 +49,6 @@ export default function ({
     politeness,
     spokenMessage,
     onRemove,
-    icon,
     ...rest
   }
 
@@ -57,7 +56,7 @@ export default function ({
     <Notice {...noticeProps} >
       {icon &&
         <div className='components-notice__icon'>
-          {icon}
+          <i className={icon}></i>
         </div>
       }
 

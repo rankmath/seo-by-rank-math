@@ -10,9 +10,19 @@ import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
 import TabPanelWithIcon from './tabs/TabPanelWithIcon';
 import PageTabPanel from './tabs/PageTabPanel';
+import Button from './buttons/Button';
+import Notice from './prompts/Notice';
 
 
 const AllComponents = () => {
+  return (
+    <div className='components-container'>
+      <PageTabPanelShowcase />
+    </div>
+  )
+};
+
+function PageTabPanelShowcase() {
   return (
     <div className='components-container'>
       <PageTabPanel
