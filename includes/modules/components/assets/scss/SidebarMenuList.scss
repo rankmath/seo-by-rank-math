@@ -1,0 +1,55 @@
+@import '@wordpress/components/build-style/style.css';
+@import 'variables';
+
+.components-menu-group {
+  &.sidebar-menu-list {
+    width: 13rem;
+    border: 1px solid $color-border--gray-primary;
+    padding: 1.5rem 1rem;
+
+    div {
+      row-gap: 0.7rem;
+      display: flex;
+      flex-direction: column;
+
+      .components-menu-group__label {
+        margin-bottom: 16px;
+      }
+
+      .components-menu-item__button {
+        border-radius: 0.2rem;
+        border: 1px solid $color-border--gray-primary;
+
+        &:hover {
+          background-color: #F8F8F8;
+          color: inherit;
+        }
+
+        &:focus {
+          background-color: #F8F8F8;
+          color: inherit;
+          border: 2px solid #949494;
+        }
+
+        &.components-button {
+          &:focus {
+            box-shadow: none;
+            outline: none;
+          }
+        }
+
+        .components-menu-item__item {
+          column-gap: 0.5rem;
+          min-width: fit-content;
+          margin-right: 0px;
+          white-space: break-spaces;
+          text-align: left;
+
+          .components-menu-item__icon {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}
