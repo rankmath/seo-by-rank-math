@@ -8,8 +8,8 @@
       opacity: 0.3; 
 
       .components-checkbox-control__input {
-        border: 1px solid $radio-checkbox-disabled-border-color;
-        background-color: $radio-checkbox-disabled-bg;
+        border: 1px solid $color-border--controls-disabled;
+        background-color: $color-bg--controls-disabled;
 
         &:checked {
           border: 1px solid var(--wp-admin-theme-color);
@@ -45,10 +45,10 @@
 
   .components-base-control__field {
     .components-checkbox-control__input-container {
-      margin-right: $control-gap;
+      margin-right: $gap--controls;
 
       .components-checkbox-control__input {
-        border: 1px solid $radio-checkbox-border-color;
+        border: 1px solid $color-border--controls;
 
         &:focus {
           box-shadow: none;

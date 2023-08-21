@@ -1,6 +1,8 @@
-$control-gap: 8px;
-$radio-checkbox-border-color: #A9A9A9;
-$radio-checkbox-disabled-border-color: #656565;
-$radio-checkbox-disabled-bg: #e2e1e1;
-$color-hover-blue: #EBF5FA;
-$color-border-gray: #EFEFEF;
+$color-border--gray: #EFEFEF;
+$color-bg--hover-blue: #EBF5FA;
+
+// Radio/Checkbox/Toggle Controls
+$color-border--controls-disabled: #656565;
+$color-bg--controls-disabled: #e2e1e1;
+$color-border--controls: #A9A9A9;
+$gap--controls: 8px;

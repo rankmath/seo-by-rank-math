@@ -2,7 +2,7 @@
 @import 'variables';
 
 .multi-section-tab-panel {
-  border: 1px solid $color-border-gray;
+  border: 1px solid $color-border--gray;
   width: 13rem;
   padding: 1rem;
 
@@ -12,7 +12,7 @@
     padding: 0px;
 
     & + .components-menu-group {
-      border-top: 1px solid $color-border-gray;
+      border-top: 1px solid $color-border--gray;
       margin-top: 1rem;
       padding-top: 1rem;
     }

@@ -8,8 +8,8 @@
 }
 
 .components-radio-control__input[type=radio] {
-  border: 1px solid $radio-checkbox-border-color;
-  margin-right: $control-gap;
+  border: 1px solid $color-border--controls;
+  margin-right: $gap--controls;
 
   &:focus {
     box-shadow: none;
@@ -17,8 +17,8 @@
   }
 
   &:disabled {
-    border: 1px solid $radio-checkbox-disabled-border-color;
-    background-color: $radio-checkbox-disabled-bg;
+    border: 1px solid $color-border--controls-disabled;
+    background-color: $color-bg--controls-disabled;
     opacity: 0.3; 
     pointer-events: none;
 

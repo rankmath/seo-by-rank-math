@@ -3,7 +3,7 @@
 
 .components-menu-group {
   width: 13rem;
-  border: 1px solid $color-border-gray;
+  border: 1px solid $color-border--gray;
   padding: 1rem;
 
   .components-menu-group__label {
@@ -20,7 +20,7 @@
 
     &:focus {
       color: var(--wp-admin-theme-color);
-      background-color: $color-hover-blue;
+      background-color: $color-bg--hover-blue;
     }
 
     &.components-button {
