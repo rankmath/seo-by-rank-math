@@ -1,7 +1,12 @@
 /**
+ * External dependencies
+ */
+import classNames from 'classnames';
+
+/**
  * Internal dependencies
  */
-import '../../../scss/SidebarTabPanel.scss';
+import '../../scss/FilterMenus.scss';
 
 /**
  * WordPress dependencies
@@ -14,19 +19,31 @@ export default function ({
   selectOnMove = true,
   tabs = [],
   children = () => { },
-  className = 'sidebar-tab-panel',
+  className,
+  variant = 'black',
   onSelect,
   initialTabName,
   ...rest
 }) {
+  const getTabPanelClasses = () => {
+    return classNames(
+      className,
+      'filter-menus',
+      {
+        'is-black': variant === 'black',
+        'is-blue': variant === 'blue',
+      }
+    );
+  };
+
   const tabPanelProps = {
+    className: getTabPanelClasses(),
     activeClass,
     orientation,
     selectOnMove,
     children,
     tabs,
     onSelect,
-    className,
     initialTabName,
     ...rest
   }

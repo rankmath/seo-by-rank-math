@@ -26,9 +26,10 @@
     }
   }
 
-  .components-tab-panel__tabs {
+  .page-tab-panel__content .components-tab-panel__tabs {
     gap: 10px;
     border: none;
+    background-color: transparent;
     
     .components-tab-panel__tabs-item{
       color: #5F5F5F;

@@ -14,8 +14,8 @@ export default function ({
   selectOnMove = true,
   tabs = [],
   children = () => { },
+  className = 'page-tab-panel__content',
   onSelect,
-  className,
   initialTabName,
   ...rest
 }) {

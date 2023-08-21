@@ -1,6 +1,6 @@
 @import '@wordpress/components/build-style/style.css';
 
-.components-tab-panel__tabs {
+.sidebar-tab-panel .components-tab-panel__tabs {
   border: 1px solid #EFEFEF;
   width: fit-content;
   gap: 10px;
@@ -8,6 +8,7 @@
   .components-tab-panel__tabs-item{
     color: #5F5F5F;
     padding: 3px 16px;
+    background-color: transparent;
 
     &:hover {
       color: var(--wp-admin-theme-color);

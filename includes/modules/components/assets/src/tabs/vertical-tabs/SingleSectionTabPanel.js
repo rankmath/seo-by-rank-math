@@ -20,12 +20,11 @@ export default function ({
     hideSeparator,
     label,
     children,
-    className,
     ...rest
   }
 
   return (
-    <MenuGroup {...menuGroupProps}>
+    <MenuGroup className={`single-section-tab-panel ${className}`} {...menuGroupProps}>
       {menuItems.map(({ icon, title }) => (
         <MenuItem>
           {icon && <i className={`${icon} components-menu-item__icon`}></i>}

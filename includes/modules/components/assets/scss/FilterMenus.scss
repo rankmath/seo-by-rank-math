@@ -1,0 +1,63 @@
+@import '@wordpress/components/build-style/style.css';
+@import 'variables';
+
+
+.filter-menus .components-tab-panel__tabs {
+  border: none;
+  width: fit-content;
+  gap: 7px;
+  
+  .components-tab-panel__tabs-item{
+    color: #999999;
+    padding: 3px 16px;
+    background-color: #F2F2F2;
+    border-radius: 0.15rem;
+
+    &:focus:not(:disabled) {
+      box-shadow: none;
+    }
+
+    &.is-active{
+      color: white;
+      box-shadow: none;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }   
+}
+
+.is-black .components-tab-panel__tabs {
+  .components-tab-panel__tabs-item{ 
+    &:hover {
+      color: #393939;
+      background-color: #E4E4E4;
+    }
+
+    &.is-active{
+      background-color: #2F2F2F;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
+
+.is-blue .components-tab-panel__tabs {
+  .components-tab-panel__tabs-item{ 
+    &:hover {
+      color: var(--wp-admin-theme-color);
+      background-color: $color-bg--hover-secondary;
+    }
+
+    &.is-active{
+      background-color: var(--wp-admin-theme-color);
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
