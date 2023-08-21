@@ -1,0 +1,20 @@
+@import '@wordpress/components/build-style/style.css';
+@import 'variables';
+
+.multi-section-tab-panel {
+  border: 1px solid $color-border-gray;
+  width: 13rem;
+  padding: 1rem;
+
+  .components-menu-group {
+    width: 100%;
+    border: none;
+    padding: 0px;
+
+    & + .components-menu-group {
+      border-top: 1px solid $color-border-gray;
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
+  }
+}
