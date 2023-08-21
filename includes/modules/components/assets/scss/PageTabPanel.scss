@@ -1,6 +1,6 @@
 @import '@wordpress/components/build-style/style.css';
 
-.page-tab-panel {
+.page-tab-panel__container {
   border: 1px solid #EFEFEF;
   display: flex;
   align-items: center;
@@ -28,6 +28,7 @@
 
   .components-tab-panel__tabs {
     gap: 10px;
+    border: none;
     
     .components-tab-panel__tabs-item{
       color: #5F5F5F;
@@ -53,6 +54,7 @@
           font-size: 13px;
           font-weight: normal;
           color: #5F5F5F;
+          display: block;
         }
       }
 

@@ -32,7 +32,7 @@ export default function ({
   }
 
   return (
-    <div className='page-tab-panel'>
+    <div className='page-tab-panel__container'>
       <TabPanel
         {...tabPanelProps}
       />
