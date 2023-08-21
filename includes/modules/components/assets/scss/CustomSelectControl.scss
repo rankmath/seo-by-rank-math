@@ -1,4 +1,5 @@
 @import '@wordpress/components/build-style/style.css';
+@import 'variables';
 
 @mixin tablet {
   @media screen and (max-width: 768px) {
@@ -69,7 +70,7 @@
 
     .components-custom-select-control__item {
       &.is-highlighted {
-        background-color: #F0F7FB;
+        background-color: $color-bg--hover-primary;
         color: var(--wp-admin-theme-color);
         cursor: pointer;
       }

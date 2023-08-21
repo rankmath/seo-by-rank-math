@@ -1,8 +1,13 @@
-$color-border--gray: #EFEFEF;
-$color-bg--hover-blue: #EBF5FA;
+$color-border--gray-primary: #EFEFEF;
+$color-bg--hover-primary: #F0F7FB;
 
 // Radio/Checkbox/Toggle Controls
 $color-border--controls-disabled: #656565;
 $color-bg--controls-disabled: #e2e1e1;
 $color-border--controls: #A9A9A9;
 $gap--controls: 8px;
+
+// Inputs
+$color-border--inputs: #A7A7A7;
+$color-placeholder--inputs: #9E9E9E;
+$color-bg--inputs-disabled: #F0F0F0;

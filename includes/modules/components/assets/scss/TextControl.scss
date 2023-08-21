@@ -1,12 +1,9 @@
 @import '@wordpress/components/build-style/style.css';
+@import 'variables';
 
 /* Variables */
-$text-control-border-color: #A7A7A7;
-$text-control-disabled-border-color: #F0F0F0;
-$validation-success: #4AB866;
-$validation-error: #FB7272;
-$control-icon-bg: #F0F7FB;
-$control-icon-disabled-color: gray;
+$color-validation-success: #4AB866;
+$color-validation-error: #FB7272;
 
 .text-control-container {
   position: relative;
@@ -15,13 +12,13 @@ $control-icon-disabled-color: gray;
     &.is-success {
       .components-base-control__field {
         .components-text-control__input {
-          border: 1px solid $validation-success;
+          border: 1px solid $color-validation-success;
           background-color: #F9FDFA;
           padding-right: 1.6rem;
           
           &:active:not(:disabled), &:focus:not(:disabled) {
-            border-color: $validation-success;
-            box-shadow: 0 0 0 1px $validation-success;
+            border-color: $color-validation-success;
+            box-shadow: 0 0 0 1px $color-validation-success;
           }
         }
       }
@@ -30,13 +27,13 @@ $control-icon-disabled-color: gray;
     &.is-error {
       .components-base-control__field {
         .components-text-control__input {
-          border-color: $validation-error;
+          border-color: $color-validation-error;
           background-color: #FFFAFA;
           padding-right: 1.6rem;
 
           &:active:not(:disabled), &:focus:not(:disabled) {
-            border-color: $validation-error;
-            box-shadow: 0 0 0 1px $validation-error;
+            border-color: $color-validation-error;
+            box-shadow: 0 0 0 1px $color-validation-error;
           }
         }
       }
@@ -62,7 +59,7 @@ $control-icon-disabled-color: gray;
       margin-bottom: 0px;
 
       .components-text-control__input {
-        border: 1px solid $text-control-border-color;
+        border: 1px solid $color-border--inputs;
 
         &:active:not(:disabled), 
         &:focus:not(:disabled) {
@@ -70,7 +67,7 @@ $control-icon-disabled-color: gray;
         }
 
         &::placeholder {
-          color: #9E9E9E;
+          color: $color-placeholder--inputs;
         }
 
         &[type="number"] {
@@ -78,7 +75,7 @@ $control-icon-disabled-color: gray;
         }
 
         &:disabled {
-          background: $text-control-disabled-border-color;
+          background: $color-bg--inputs-disabled;
           opacity: 0.5;
         }
       }
@@ -95,11 +92,11 @@ $control-icon-disabled-color: gray;
       font-size: 0.8rem;
 
       &.is-error {
-        color: $validation-error;
+        color: $color-validation-error;
       }
 
       &.is-success {
-        color: $validation-success;
+        color: $color-validation-success;
       }
     }
 
@@ -113,11 +110,11 @@ $control-icon-disabled-color: gray;
         padding: 0.45rem;
 
         &:hover {
-          background-color: $control-icon-bg;
+          background-color: $color-bg--hover-primary;
         }
 
         &.is-disabled {
-          color: $control-icon-disabled-color;
+          color: gray;
            background-color: transparent;
         }
       }

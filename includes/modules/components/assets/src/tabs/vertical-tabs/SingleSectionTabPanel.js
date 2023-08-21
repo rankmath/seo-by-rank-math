@@ -30,7 +30,7 @@ export default function ({
         <MenuItem>
           {icon && <i className={`${icon} components-menu-item__icon`}></i>}
 
-          <span>{title}</span>
+          <span className='components-menu-item__text'>{title}</span>
         </MenuItem>
       ))}
     </MenuGroup>

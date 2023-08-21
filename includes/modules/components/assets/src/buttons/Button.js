@@ -55,7 +55,7 @@ export default function ({
     variant: variantClassMap[variant] ? 'secondary' : variant,
     'aria-disabled': disabled,
     className: getButtonClasses(),
-    icon: <i className={icon}></i>,
+    ...(icon ? { icon: <i className={icon}></i> } : {}),
     size,
     disabled,
     describedBy,

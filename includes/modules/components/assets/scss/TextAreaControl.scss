@@ -1,20 +1,18 @@
 @import '@wordpress/components/build-style/style.css';
-
-/* Variables */
-$text-area-control-border-color: #A7A7A7;
+@import 'variables';
 
 
 .components-base-control {
   .components-base-control__field {
     .components-textarea-control__input {
-      border: 1px solid $text-area-control-border-color;
+      border: 1px solid $color-border--inputs;
 
       &::placeholder {
-        color: #9E9E9E;
+        color: $color-placeholder--inputs;
       }
 
       &:disabled {
-          background: #F0F0F0;
+          background: $color-bg--inputs-disabled;
           opacity: 0.5;
       }
 
