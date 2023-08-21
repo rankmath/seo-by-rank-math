@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../scss/SidebarTabPanel.scss';
+import '../../../scss/PageTabPanel.scss';
 
 /**
  * WordPress dependencies
@@ -32,8 +32,14 @@ export default function ({
   }
 
   return (
-    <TabPanel
-      {...tabPanelProps}
-    />
+    <div className='page-tab-panel__container'>
+      <TabPanel
+        {...tabPanelProps}
+      />
+
+      <button className='page-tab-panel__button'>
+        <i className='rm-icon-trash'></i>
+      </button>
+    </div>
   )
 }
