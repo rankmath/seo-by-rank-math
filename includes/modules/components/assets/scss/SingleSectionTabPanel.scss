@@ -6,14 +6,14 @@
   border: 1px solid $color-border--gray-primary;
   padding: 1rem;
 
-  div {
+  .components-menu-group__label {
+    margin-bottom: 16px;
+  }
+
+  div[role="group"]  {
     row-gap: 0.2rem;
     display: flex;
     flex-direction: column;
-
-    .components-menu-group__label {
-      margin-bottom: 16px;
-    }
 
     .components-menu-item__button {
       border-radius: 0.25rem;

@@ -2,7 +2,7 @@
 @import 'variables';
 
 .components-menu-group {
-  &.sidebar-menu-list {
+  &.menu-list-popup {
     width: 13rem;
     border: 1px solid $color-border--gray-primary;
     padding: 1.5rem 1rem;
@@ -11,24 +11,17 @@
       display: none;
     }
 
-    div[role="group"]  {
-      row-gap: 0.7rem;
-      display: flex;
-      flex-direction: column;
-
+     div[role="group"]  {
       .components-menu-item__button {
-        border-radius: 0.2rem;
-        border: 1px solid $color-border--gray-primary;
-
         &:hover {
-          background-color: #F8F8F8;
-          color: inherit;
+          color: var(--wp-admin-theme-color);
+          background-color: transparent;
         }
 
         &:focus {
-          background-color: #F8F8F8;
           color: inherit;
-          box-shadow: inset 0 0 0 1.9px #949494;
+          background-color: transparent;
+          box-shadow: inset 0 0 0 1px #fff, 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
         }
 
         .components-menu-item__item {
