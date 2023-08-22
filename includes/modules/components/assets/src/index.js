@@ -14,10 +14,103 @@ import SidebarTabPanel from './tabs/horizontal-tabs/SidebarTabPanel';
 import FilterMenus from './tabs/FilterMenus';
 import SingleSectionTabPanel from './tabs/vertical-tabs/SingleSectionTabPanel';
 import MultiSectionTabPanel from './tabs/vertical-tabs/MultiSectionTabPanel';
+import SwitchTaps from './tabs/SwitchTaps';
 
 const AllComponents = () => {
   return (
     <div className='components-container'>
+      <SwitchTaps
+        iconOnly
+        tabs={[
+          {
+            name: 'tab1',
+            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+          },
+          {
+            name: 'tab2',
+            icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+          }
+        ]}
+        children={(tab) => (
+          <div>
+            <h3>{tab.title}</h3>
+            <p>This is the content for tab {tab.name}</p>
+          </div>
+        )
+        }
+      />
+
+      <div style={{ margin: '1rem' }} />
+
+      <SwitchTaps
+        iconOnly
+        variant='blue'
+        tabs={[
+          {
+            name: 'tab1',
+            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+          },
+          {
+            name: 'tab2',
+            icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+          }
+        ]}
+        children={(tab) => (
+          <div>
+            <h3>{tab.title}</h3>
+            <p>This is the content for tab {tab.name}</p>
+          </div>
+        )
+        }
+      />
+
+      <div style={{ margin: '1rem' }} />
+
+      <SwitchTaps
+        tabs={[
+          {
+            name: 'tab1',
+            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+          },
+          {
+            name: 'tab2',
+            icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+          }
+        ]}
+        children={(tab) => (
+          <div>
+            <h3>{tab.title}</h3>
+            <p>This is the content for tab {tab.name}</p>
+          </div>
+        )
+        }
+      />
+
+      <div style={{ margin: '1rem' }} />
+
+      <SwitchTaps
+        variant='blue'
+        tabs={[
+          {
+            name: 'tab1',
+            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+          },
+          {
+            name: 'tab2',
+            icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+          }
+        ]}
+        children={(tab) => (
+          <div>
+            <h3>{tab.title}</h3>
+            <p>This is the content for tab {tab.name}</p>
+          </div>
+        )
+        }
+      />
+
+      <div style={{ margin: '1rem' }} />
+
       <FilterMenus
         tabs={[
           {
