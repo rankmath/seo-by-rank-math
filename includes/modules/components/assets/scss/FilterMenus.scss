@@ -9,9 +9,10 @@
   
   .components-tab-panel__tabs-item{
     color: #999999;
-    padding: 3px 16px;
+    padding: 6px 12px;
     background-color: #F2F2F2;
     border-radius: 0.15rem;
+    height: fit-content;
 
     &:focus:not(:disabled) {
       box-shadow: none;
