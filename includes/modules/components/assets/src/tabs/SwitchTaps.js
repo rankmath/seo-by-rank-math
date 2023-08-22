@@ -14,14 +14,11 @@ import '../../scss/SwitchTaps.scss';
 import { TabPanel } from '@wordpress/components';
 
 export default function ({
-  activeClass = 'is-active',
-  orientation = 'horizontal',
-  selectOnMove = true,
   tabs = [],
   children = () => { },
-  className,
   variant = 'black',
   iconOnly = false,
+  className,
   onSelect,
   initialTabName,
   ...rest
@@ -40,9 +37,6 @@ export default function ({
 
   const tabPanelProps = {
     className: getTabPanelClasses(),
-    activeClass,
-    orientation,
-    selectOnMove,
     children,
     tabs,
     onSelect,

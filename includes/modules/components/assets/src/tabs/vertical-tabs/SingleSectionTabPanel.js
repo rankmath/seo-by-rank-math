@@ -10,21 +10,20 @@ import { MenuGroup, MenuItem } from '@wordpress/components';
 
 export default function ({
   menuItems = [],
-  hideSeparator = false,
-  label = '',
-  children,
+  label,
   className,
+  children,
   ...rest
 }) {
   const menuGroupProps = {
-    hideSeparator,
+    className: `single-section-tab-panel ${className}`,
     label,
     children,
     ...rest
   }
 
   return (
-    <MenuGroup className={`single-section-tab-panel ${className}`} {...menuGroupProps}>
+    <MenuGroup {...menuGroupProps}>
       {menuItems.map(({ icon, title }) => (
         <MenuItem>
           {icon && <i className={`${icon} components-menu-item__icon`}></i>}

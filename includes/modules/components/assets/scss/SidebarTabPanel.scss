@@ -1,7 +1,8 @@
 @import '@wordpress/components/build-style/style.css';
+@import 'variables';
 
 .sidebar-tab-panel .components-tab-panel__tabs {
-  border: 1px solid #EFEFEF;
+  border: 1px solid $color-border--gray-primary;
   width: fit-content;
   gap: 10px;
 

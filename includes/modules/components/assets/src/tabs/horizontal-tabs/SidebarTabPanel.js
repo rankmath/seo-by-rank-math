@@ -9,24 +9,18 @@ import '../../../scss/SidebarTabPanel.scss';
 import { TabPanel } from '@wordpress/components';
 
 export default function ({
-  activeClass = 'is-active',
-  orientation = 'horizontal',
-  selectOnMove = true,
   tabs = [],
   children = () => { },
-  className = 'sidebar-tab-panel',
+  className,
   onSelect,
   initialTabName,
   ...rest
 }) {
   const tabPanelProps = {
-    activeClass,
-    orientation,
-    selectOnMove,
-    children,
+    className: `sidebar-tab-panel ${className}`,
     tabs,
+    children,
     onSelect,
-    className,
     initialTabName,
     ...rest
   }

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../scss/SidebarMenuList.scss';
+import '../../../scss/SidebarMenuList.scss';
 
 /**
  * WordPress dependencies
@@ -10,21 +10,21 @@ import { MenuGroup, MenuItem } from '@wordpress/components';
 
 export default function ({
   menuItems = [],
-  hideSeparator = false,
+  className,
   children,
   ...rest
 }) {
   const menuGroupProps = {
-    hideSeparator,
+    className: `sidebar-menu-list ${className}`,
     children,
     ...rest
   }
 
   return (
-    <MenuGroup className='sidebar-menu-list' {...menuGroupProps}>
+    <MenuGroup {...menuGroupProps}>
       {menuItems.map(({ icon, title }) => (
         <MenuItem>
-          {icon && <i className={`${icon} components-menu-item__icon`}></i>}
+          <i className={`${icon} components-menu-item__icon`}></i>
 
           <span className='components-menu-item__text'>{title}</span>
         </MenuItem>

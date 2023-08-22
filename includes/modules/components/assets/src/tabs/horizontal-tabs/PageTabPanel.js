@@ -9,24 +9,18 @@ import '../../../scss/PageTabPanel.scss';
 import { TabPanel } from '@wordpress/components';
 
 export default function ({
-  activeClass = 'is-active',
-  orientation = 'horizontal',
-  selectOnMove = true,
   tabs = [],
   children = () => { },
-  className = 'page-tab-panel__content',
+  className,
   onSelect,
   initialTabName,
   ...rest
 }) {
   const tabPanelProps = {
-    activeClass,
-    orientation,
-    selectOnMove,
-    children,
+    className: `page-tab-panel__content ${className}`,
     tabs,
+    children,
     onSelect,
-    className,
     initialTabName,
     ...rest
   }
