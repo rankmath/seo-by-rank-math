@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../scss/Button.scss'
+import '../../scss/button.scss'
 
 /**
  * WordPress dependencies

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../../scss/MultiSectionTabPanel.scss';
+import '../../../scss/multi-section-tab-panel.scss';
 
 export default function ({
   children

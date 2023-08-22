@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../../scss/SingleSectionTabPanel.scss';
+import '../../../scss/single-section-tab-panel.scss';
 
 /**
  * WordPress dependencies

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../scss/Notice.scss';
+import '../../scss/notice.scss';
 
 /**
  * WordPress dependencies

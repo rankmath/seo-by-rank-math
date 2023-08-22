@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../scss/SwitchTaps.scss';
+import '../../scss/switch-taps.scss';
 
 /**
  * WordPress dependencies

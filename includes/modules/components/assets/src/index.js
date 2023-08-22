@@ -9,6 +9,7 @@ import { createElement, render, useState } from '@wordpress/element';
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
 
+
 const AllComponents = () => {
   return (
     <div className='components-container'>
@@ -18,6 +19,7 @@ const AllComponents = () => {
     </div>
   )
 };
+
 
 const renderAllComponents = () => {
   const componentsUi = document.getElementById('components-page');

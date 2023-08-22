@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../../scss/MenuListPopup.scss';
+import '../../../scss/menu-list-popup.scss';
 
 /**
  * WordPress dependencies

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../../scss/SidebarTabPanel.scss';
+import '../../../scss/sidebar-tab-panel.scss';
 
 /**
  * WordPress dependencies

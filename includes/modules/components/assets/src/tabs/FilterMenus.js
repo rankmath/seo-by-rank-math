@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../scss/FilterMenus.scss';
+import '../../scss/filter-menus.scss';
 
 /**
  * WordPress dependencies

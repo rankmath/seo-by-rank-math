@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../../scss/PageTabPanel.scss';
+import '../../../scss/page-tab-panel.scss';
 
 /**
  * WordPress dependencies

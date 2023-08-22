@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../../scss/SearchSelectControl.scss';
+import '../../../scss/search-select-control.scss';
 import SearchSelectOption from './SearchSelectOption';
 
 /**

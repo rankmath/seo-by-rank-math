@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../../scss/SidebarMenuList.scss';
+import '../../../scss/sidebar-menu-list.scss';
 
 /**
  * WordPress dependencies

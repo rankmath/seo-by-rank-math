@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../scss/TextAreaControl.scss';
+import '../../scss/textarea-control.scss';
 
 /**
  * WordPress dependencies

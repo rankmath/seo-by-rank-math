@@ -1,4 +1,4 @@
-import '../../../scss/SearchSelectOption.scss'
+import '../../../scss/search-select-option.scss'
 
 export default function ({ title, subTitle, description }) {
   return (

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../scss/TextControl.scss';
+import '../../scss/text-control.scss';
 
 /**
  * WordPress dependencies
