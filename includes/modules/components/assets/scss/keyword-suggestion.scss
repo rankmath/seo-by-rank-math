@@ -1,0 +1,126 @@
+@import '@wordpress/components/build-style/style.css';
+
+.components-button {
+  &.keyword-suggestion-button {
+    padding: 5px 10px;
+    height: fit-content;
+    font-size: 11px;
+    gap: 6px;
+
+    &.is-secondary {
+      box-shadow: none;
+
+      &:hover {
+        box-shadow: none;
+      }
+
+      &:focus:not(:disabled) {
+        outline: none;
+        box-shadow: none;
+      }
+    }
+
+    .keyword-suggestion-button__keyword, .keyword-suggestion-button__score {
+      font-size: inherit;
+      color: inherit;   
+      margin: 0px; 
+      font-weight: normal;
+    }
+
+    .keyword-suggestion-button__score {
+      padding: 2px 5px;
+      font-size: 10px;
+      border-radius: 0.1rem;
+    }
+    
+    &.good {
+      color: #27984D;
+      background-color: #DEF3E5;
+      border: 2px solid transparent;
+
+      .keyword-suggestion-button__score {
+        background-color: #5CC47F;
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #C6EAD2;
+        color: #27984D;
+
+        .keyword-suggestion-button__score {
+          background-color: #42B268;
+        }
+      }
+
+      &:focus {
+        background-color: #C6EAD2;
+        border-color: #42B268;
+        color: #27984D;
+
+        .keyword-suggestion-button__score {
+          background-color: #42B268;
+        }
+      }
+    }
+    
+    &.neutral {
+      color: #DAA233;
+      background-color: #FCF0D7;
+      border: 2px solid transparent;
+
+      .keyword-suggestion-button__score {
+        background-color: #F3BA49;
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #FAE3B6;
+        color: #C78910;
+
+        .keyword-suggestion-button__score {
+          background-color: #E8A623;
+        }
+      }
+
+      &:focus {
+        background-color: #FAE3B6;
+        border-color: #E8A623;
+        color: #C78910;
+
+        .keyword-suggestion-button__score {
+          background-color: #E8A623;
+        }
+      }
+    }
+    
+    &.bad {
+      color: #F35F73;
+      background-color: #FDE9EB;
+      border: 2px solid transparent;
+
+      .keyword-suggestion-button__score {
+        background-color: #F3808F;
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #FBDADE;
+        color: #E54B5F;
+
+        .keyword-suggestion-button__score {
+          background-color: #F66276;
+        }
+      }
+
+      &:focus {
+        background-color: #FBDADE;
+        border-color: #F66276;
+        color: #E54B5F;
+
+        .keyword-suggestion-button__score {
+          background-color: #F66276;
+        }
+      }
+    }
+  }
+}
