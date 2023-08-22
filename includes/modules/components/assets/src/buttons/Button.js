@@ -33,6 +33,7 @@ export default function ({
   icon,
   iconPosition,
   iconSize,
+  className,
   ...rest
 }) {
   const variantClassMap = {
@@ -43,6 +44,7 @@ export default function ({
 
   const getButtonClasses = () => {
     return classNames(
+      className,
       {
         'is-large': size === 'large',
         [variantClassMap[variant]]: variantClassMap[variant],

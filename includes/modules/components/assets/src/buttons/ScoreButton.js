@@ -1,0 +1,48 @@
+/**
+ * External dependencies
+ */
+import classNames from 'classnames';
+
+/**
+ * Internal dependencies
+ */
+import '../../scss/score-button.scss'
+
+/**
+ * WordPress dependencies
+ */
+import { Button } from '@wordpress/components';
+
+export default function ({
+  company = 'Rank Math',
+  severity = 'good',
+  className,
+  ...rest
+}) {
+  const getScoreButtonClasses = () => {
+    return classNames(
+      'score-button',
+      className,
+      severity,
+      {
+        'rank-math': company === 'Rank Math',
+        'content-ai': company === 'Content AI',
+      }
+    );
+  };
+
+  const iconName = company === 'Content AI' ? 'rm-icon-content-ai' : 'rm-icon-rank-math';
+
+  const scoreButtonProps = {
+    className: getScoreButtonClasses(),
+    variant: 'secondary',
+    icon: <i className={iconName}></i>,
+    ...rest
+  }
+
+  return (
+    <Button
+      {...scoreButtonProps}
+    />
+  )
+};
