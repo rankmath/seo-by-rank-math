@@ -2,12 +2,12 @@
 
 .components-button {
   &.score-button {
-    padding: 5px 10px;
-    height: fit-content;
-    font-size: 11px;
-
     &.is-secondary {
       box-shadow: none;
+      padding: 8px 12px;
+      height: fit-content;
+      font-size: 12px;
+      gap: 8px;
 
       &:hover {
         box-shadow: none;
@@ -125,11 +125,11 @@
     &.has-icon{
       &.has-text{
         justify-content: start;
-        gap: 5px;
+        gap: 8px;
       }
 
       i {
-        font-size: 17px;
+        font-size: 20px;
       }
     }
   }
