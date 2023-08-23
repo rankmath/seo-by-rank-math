@@ -9,14 +9,20 @@ import '../../scss/connection-status-button.scss'
 import { Button } from '@wordpress/components';
 
 export default function ({
-  status = 'connected',
-  iconName = 'rm-icon-cross',
+  status = 'connect',
   className,
   children,
   ...rest
 }) {
-  const groupedClassNames = `connection-status-button ${className}`;
-  // const iconName = 'rm-icon-cross';
+  const statusIconMap = {
+    connect: 'rm-icon-plus',
+    connected: 'rm-icon-tick',
+    disconnect: 'rm-icon-cross',
+    disconnected: 'rm-icon-cross',
+    reconnect: 'rm-icon-trash',
+  };
+  const iconName = statusIconMap[status] || '';
+  const groupedClassNames = `connection-status-button ${status} ${className}`;
 
   const buttonProps = {
     ...rest,

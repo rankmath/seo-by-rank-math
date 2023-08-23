@@ -1,97 +1,78 @@
 @import '@wordpress/components/build-style/style.css';
 
 .components-button  {
-  &:focus:not(:disabled) {
-    outline: none;
-    box-shadow: none;
-  }
-
   &.connection-status-button {
-    padding: 5px 10px;
-    height: fit-content;
-    font-size: 11px;
-    gap: 6px;
-
     &.is-secondary {
+      padding: 8px 12px;
+      height: fit-content;
+      font-size: 12px;
+    }
+    
+    &.connect {
+      color: #2D9A52;
+      box-shadow: inset 0 0 0 1px #5CC47F;
 
-      &:hover {
-        box-shadow: none;
-      }
-
-      &:focus:not(:disabled) {
-        outline: none;
-        box-shadow: none;
+      &:hover, &:active, &:focus {
+        background-color: #F2FBF5;
+        color: #379A58;
+        box-shadow: inset 0 0 0 1px #42B268;
       }
     }
     
-    &.good {
-      color: #62AE60;
-      background-color: #E4F4E4;
+    &.connected {
+      color: #fff;
+      box-shadow: inset 0 0 0 1px #4AB866;
+      background-color: #4AB866;
 
-      &:hover {
-        background-color: #D7EFD7;
-        color: #489F46;
-      }
-
-      &:active {
-        background-color: #7AC979;
+      &:hover, &:active, &:focus {
         color: #fff;
-      }
-
-      &:focus {
-        background-color: #D7EFD7;
-        color: #489F46;
+        box-shadow: inset 0 0 0 1px #4AB866;
+        background-color: #4AB866;
       }
     }
     
-    &.warning {
-      color: #E29E3C;
-      background-color: #FFF0DA;
+    &.disconnect {
+      color: #757575;
+      box-shadow: inset 0 0 0 1px #BFBFBF;
 
-      &:hover {
-        background-color: #FFEACC;
-        color: #D99124;
+      &:hover, &:active, &:focus {
+        background-color: #FEF1F3;
+        color: #F3576C;
+        box-shadow: inset 0 0 0 1px #F66276;
       }
+    }
 
-      &:active {
-        background-color: #FFBE5F;
+    &.disconnected {
+      color: #fff;
+      box-shadow: inset 0 0 0 1px #F3808F;
+      background-color: #F3808F;
+
+      &:hover, &:active, &:focus {
         color: #fff;
-      }
-
-      &:focus {
-        background-color: #FFEACC;
-        color: #D99124;
+        box-shadow: inset 0 0 0 1px #F3808F;
+        background-color: #F3808F;
       }
     }
     
-    &.error {
-      color: #E47E78;
-      background-color: #FCEBEA;
+    &.reconnect {
+      color: #D49517;
+      box-shadow: inset 0 0 0 1px #F3BA49;
 
-      &:hover {
-        background-color: #FBE1DF;
-        color: #DA6961;
-      }
-
-      &:active {
-        background-color: #F29C96;
-        color: #fff;
-      }
-
-      &:focus {
-        background-color: #FBE1DF;
-        color: #DA6961;
+      &:hover, &:active, &:focus {
+        background-color: #FEFAF1;
+        color: #C5870C;
+        box-shadow: inset 0 0 0 1px #E8A623;
       }
     }
 
     &.has-icon{
       &.has-text{
         justify-content: start;
-        gap: 5px;
+        gap: 8px;
       }
 
       i {
-        font-size: 17px;
+        font-size: 9px;
       }
     }
   }

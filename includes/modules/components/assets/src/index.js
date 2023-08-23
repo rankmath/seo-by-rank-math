@@ -17,9 +17,18 @@ const AllComponents = () => {
     <div className='components-container'>
 
       <div className='group-components'>
-        <ConnectionStatusButton iconName='rm-icon-plus'>Connect</ConnectionStatusButton>
-        <ConnectionStatusButton>Disconnect</ConnectionStatusButton>
-        <ConnectionStatusButton>Reconnect</ConnectionStatusButton>
+        <ConnectionStatusButton>Connect</ConnectionStatusButton>
+        <ConnectionStatusButton status='connected'>Connected</ConnectionStatusButton>
+      </div>
+
+      <div className='group-components'>
+        <ConnectionStatusButton status='disconnect'>Disconnect</ConnectionStatusButton>
+        <ConnectionStatusButton status='disconnected'>Disconnected</ConnectionStatusButton>
+      </div>
+
+      <div className='group-components'>
+        <ConnectionStatusButton status='reconnect'>Reconnect</ConnectionStatusButton>
+        <ConnectionStatusButton status='connected'>Connected</ConnectionStatusButton>
       </div>
 
     </div>
