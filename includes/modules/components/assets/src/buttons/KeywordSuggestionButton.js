@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../scss/keyword-suggestion.scss'
+import '../../scss/keyword-suggestion-button.scss'
 
 /**
  * WordPress dependencies

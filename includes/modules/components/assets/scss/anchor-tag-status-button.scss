@@ -6,17 +6,18 @@
     box-shadow: none;
   }
 
-  &.anchor-tag-status {
+  &.anchor-tag-status-button {
     padding: 5px 10px;
     height: fit-content;
     font-size: 11px;
-    gap: 6px;
 
     &.is-secondary {
       box-shadow: none;
+      outline: none;
 
       &:hover {
         box-shadow: none;
+        outline: none;
       }
 
       &:focus:not(:disabled) {

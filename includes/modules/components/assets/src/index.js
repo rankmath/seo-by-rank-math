@@ -8,7 +8,8 @@ import { createElement, render, useState } from '@wordpress/element';
 */
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
-import AnchorTagStatus from './buttons/AnchorTagStatus';
+import ConnectionStatusButton from './buttons/ConnectionStatusButton';
+import AnchorTagStatus from './buttons/AnchorTagStatusButton';
 
 
 const AllComponents = () => {
@@ -16,13 +17,9 @@ const AllComponents = () => {
     <div className='components-container'>
 
       <div className='group-components'>
-        <AnchorTagStatus>All Good</AnchorTagStatus>
-
-        <AnchorTagStatus severity='warning' children='Warning' />
-
-        <AnchorTagStatus severity='error' children='Error' />
-
-        <AnchorTagStatus severity='grey' children='Label' />
+        <ConnectionStatusButton iconName='rm-icon-plus'>Connect</ConnectionStatusButton>
+        <ConnectionStatusButton>Disconnect</ConnectionStatusButton>
+        <ConnectionStatusButton>Reconnect</ConnectionStatusButton>
       </div>
 
     </div>

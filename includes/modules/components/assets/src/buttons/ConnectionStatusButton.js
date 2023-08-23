@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../scss/anchor-tag-status.scss'
+import '../../scss/connection-status-button.scss'
 
 /**
  * WordPress dependencies
@@ -9,24 +9,21 @@ import '../../scss/anchor-tag-status.scss'
 import { Button } from '@wordpress/components';
 
 export default function ({
-  severity = 'good',
-  href = '',
-  target = '_blank',
-  rel = 'noopener noreferrer',
+  status = 'connected',
+  iconName = 'rm-icon-cross',
   className,
   children,
   ...rest
 }) {
-  const groupedClassNames = `anchor-tag-status ${className} ${severity}`;
+  const groupedClassNames = `connection-status-button ${className}`;
+  // const iconName = 'rm-icon-cross';
 
   const buttonProps = {
     ...rest,
-    href,
     children,
-    target,
-    rel,
     className: groupedClassNames,
-    variant: 'is-secondary',
+    icon: <i className={iconName}></i>,
+    variant: 'secondary',
   }
 
   return (
