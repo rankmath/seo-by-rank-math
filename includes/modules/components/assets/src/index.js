@@ -8,8 +8,6 @@ import { createElement, render, useState } from '@wordpress/element';
 */
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
-import ScoreButton from './buttons/ScoreButton';
-import KeywordSuggestion from './buttons/KeywordSuggestion';
 
 
 const AllComponents = () => {
@@ -17,11 +15,7 @@ const AllComponents = () => {
     <div className='components-container'>
 
       <div className='group-components'>
-        <KeywordSuggestion />
 
-        <KeywordSuggestion severity='neutral' />
-
-        <KeywordSuggestion severity='bad' />
       </div>
 
     </div>
