@@ -6,12 +6,11 @@
     box-shadow: none;
   }
 
-  &.anchor-tag-status-button {
-    padding: 5px 10px;
-    height: fit-content;
-    font-size: 11px;
-
+  &.anchor-tag-status {
     &.is-secondary {
+      padding: 5px 10px;
+      height: fit-content;
+      font-size: 11px;
       box-shadow: none;
       outline: none;
 
@@ -30,7 +29,7 @@
       color: #62AE60;
       background-color: #E4F4E4;
 
-      &:hover {
+      &:hover, &:focus {
         background-color: #D7EFD7;
         color: #489F46;
       }
@@ -39,18 +38,13 @@
         background-color: #7AC979;
         color: #fff;
       }
-
-      &:focus {
-        background-color: #D7EFD7;
-        color: #489F46;
-      }
     }
     
     &.warning {
       color: #E29E3C;
       background-color: #FFF0DA;
 
-      &:hover {
+      &:hover, &:focus {
         background-color: #FFEACC;
         color: #D99124;
       }
@@ -59,18 +53,13 @@
         background-color: #FFBE5F;
         color: #fff;
       }
-
-      &:focus {
-        background-color: #FFEACC;
-        color: #D99124;
-      }
     }
     
     &.error {
       color: #E47E78;
       background-color: #FCEBEA;
 
-      &:hover {
+      &:hover, &:focus {
         background-color: #FBE1DF;
         color: #DA6961;
       }
@@ -79,18 +68,13 @@
         background-color: #F29C96;
         color: #fff;
       }
-
-      &:focus {
-        background-color: #FBE1DF;
-        color: #DA6961;
-      }
     }
     
     &.grey {
       color: #787878;
       background-color: #F2F2F2;
 
-      &:hover {
+      &:hover, &:focus {
         background-color: #E9E9E9;
         color: #383838;
       }
@@ -98,11 +82,6 @@
       &:active {
         background-color: #383838;
         color: #fff;
-      }
-
-      &:focus {
-        background-color: #E9E9E9;
-        color: #383838;
       }
     }
   }

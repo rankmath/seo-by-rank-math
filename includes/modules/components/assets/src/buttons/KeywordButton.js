@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../scss/keyword-suggestion-button.scss'
+import '../../scss/keyword-button.scss'
 
 /**
  * WordPress dependencies
@@ -18,6 +18,7 @@ export default function ({
 }) {
   const [isCopied, setIsCopied] = useState(false);
   const buttonRef = useRef(null);
+  const groupedClassNames = `${className} ${severity}`;
 
   const handleCopyClick = () => {
     const textToCopy = keyword;
@@ -41,17 +42,17 @@ export default function ({
     setIsCopied(true);
   };
 
+  const handleButtonBlur = () => {
+    setIsCopied(false);
+  };
+
   const buttonProps = {
     ...rest,
-    className: `${className} ${severity}`,
+    className: groupedClassNames,
     onClick: handleCopyClick,
     variant: 'secondary',
     ref: buttonRef
   }
-
-  const handleButtonBlur = () => {
-    setIsCopied(false);
-  };
 
   useEffect(() => {
     const buttonElement = buttonRef.current;
@@ -67,10 +68,10 @@ export default function ({
   }, []);
 
   return (
-    <div className='keyword-suggestion-button'>
+    <div className='keyword-button'>
       <Button {...buttonProps}>
-        <h1 className='keyword-suggestion-button__keyword'>{keyword}</h1>
-        <h6 className='keyword-suggestion-button__score'>{score}</h6>
+        <h1 className='keyword-button__keyword'>{keyword}</h1>
+        <h6 className='keyword-button__score'>{score}</h6>
       </Button>
 
       {isCopied && (

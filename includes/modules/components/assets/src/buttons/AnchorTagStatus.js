@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../scss/anchor-tag-status-button.scss'
+import '../../scss/anchor-tag-status.scss'
 
 /**
  * WordPress dependencies
@@ -17,7 +17,7 @@ export default function ({
   children,
   ...rest
 }) {
-  const groupedClassNames = `anchor-tag-status-button ${className} ${severity}`;
+  const groupedClassNames = `anchor-tag-status ${className} ${severity}`;
 
   const buttonProps = {
     ...rest,

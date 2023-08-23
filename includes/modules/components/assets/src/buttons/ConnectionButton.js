@@ -22,7 +22,7 @@ export default function ({
     reconnect: 'rm-icon-trash',
   };
   const iconName = statusIconMap[status] || '';
-  const groupedClassNames = `connection-status-button ${status} ${className}`;
+  const groupedClassNames = `connection-button ${status} ${className}`;
 
   const buttonProps = {
     ...rest,

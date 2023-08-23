@@ -31,7 +31,13 @@ export default function ({
     );
   };
 
-  const iconName = company === 'Content AI' ? 'rm-icon-content-ai' : 'rm-icon-rank-math';
+  const companyIconMap = {
+    'Content AI': 'rm-icon-content-ai',
+    'Rank Math': 'rm-icon-rank-math',
+  };
+
+  const iconName = companyIconMap[company] || '';
+
 
   const buttonProps = {
     className: getScoreButtonClasses(),
