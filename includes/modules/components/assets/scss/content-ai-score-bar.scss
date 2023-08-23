@@ -1,0 +1,34 @@
+@import '@wordpress/components/build-style/style.css';
+
+.components-range-control {
+  &.content-ai-score-bar {
+    width: 25rem;
+
+    .components-range-control__slider {
+      cursor: default;
+    }
+
+    .components-range-control__thumb-wrapper {
+      margin-top: 11px;
+      background-color: transparent;
+      border: 4px solid #fff;
+
+      .css-1oxlee5 {
+        display: none;
+      }
+    }
+
+    .css-1tw038v {
+      height: 8px;
+      background-image: linear-gradient(to right, #EB475C, #F2B34A, #5EC580);
+    }
+
+    .components-range-control__track { 
+      height: 8px;
+    }
+
+    .components-range-control__track {
+      background-color: transparent;
+    }
+  }
+}

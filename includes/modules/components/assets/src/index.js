@@ -9,11 +9,17 @@ import { createElement, render, useState } from '@wordpress/element';
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
 import EditorScoreBar from './score-bars/EditorScoreBar';
+import ContentAIScoreBar from './score-bars/ContentAIScoreBar';
 
 
 const AllComponents = () => {
   return (
     <div className='components-container'>
+
+      <div className="group-components">
+        <ContentAIScoreBar value={23} />
+      </div>
+
 
       <div className="group-components">
         <EditorScoreBar value={23} />

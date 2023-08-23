@@ -8,12 +8,17 @@
       display: flex;
       align-items: center;
       margin: 0px;
-      margin-top: 2px;
     }
 
     .components-base-control__label {
       min-width: 3.25rem;
       margin: 0px;
+      margin-top: 2px;
+      cursor: default;
+    }
+
+    .components-range-control__slider {
+      cursor: default;
     }
 
     .components-range-control__thumb-wrapper {
