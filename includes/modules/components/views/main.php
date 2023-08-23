@@ -1,4 +1,4 @@
 <div>
-    <h2>Components UI</h2>
+    <h1>Components UI</h1>
     <div id="components-page"></div>
 </div>

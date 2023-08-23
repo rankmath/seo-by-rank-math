@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../scss/connection-status-button.scss'
+import '../../scss/connection-button.scss'
 
 /**
  * WordPress dependencies

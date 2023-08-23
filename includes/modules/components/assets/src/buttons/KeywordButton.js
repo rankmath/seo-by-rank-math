@@ -7,7 +7,7 @@ import '../../scss/keyword-button.scss'
  * WordPress dependencies
  */
 import { Button, Popover } from '@wordpress/components';
-import { useState, useEffect, useRef } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 
 export default function ({
   severity = 'good',
@@ -17,7 +17,6 @@ export default function ({
   ...rest
 }) {
   const [isCopied, setIsCopied] = useState(false);
-  const buttonRef = useRef(null);
   const groupedClassNames = `${className} ${severity}`;
 
   const handleCopyClick = () => {
@@ -40,10 +39,10 @@ export default function ({
     document.body.removeChild(textElement);
 
     setIsCopied(true);
-  };
 
-  const handleButtonBlur = () => {
-    setIsCopied(false);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
   };
 
   const buttonProps = {
@@ -51,21 +50,7 @@ export default function ({
     className: groupedClassNames,
     onClick: handleCopyClick,
     variant: 'secondary',
-    ref: buttonRef
   }
-
-  useEffect(() => {
-    const buttonElement = buttonRef.current;
-    if (buttonElement) {
-      buttonElement.addEventListener('blur', handleButtonBlur);
-    }
-
-    return () => {
-      if (buttonElement) {
-        buttonElement.removeEventListener('blur', handleButtonBlur);
-      }
-    };
-  }, []);
 
   return (
     <div className='keyword-button'>
@@ -77,7 +62,6 @@ export default function ({
       {isCopied && (
         <Popover
           placement="top"
-          onClose={() => setIsCopied(false)}
           noArrow={false}
           offset={11}
         >

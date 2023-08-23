@@ -1,10 +1,10 @@
 @import '@wordpress/components/build-style/style.css';
 
 .keyword-button .components-button {
-  padding: 5px 10px;
+  padding: 6px 10px;
   height: fit-content;
-  font-size: 11px;
-  gap: 6px;
+  font-size: 12px;
+  gap: 8px;
 
   &.is-secondary {
     box-shadow: none;
@@ -50,6 +50,10 @@
         background-color: #42B268;
       }
     }
+
+    &:focus {
+      border-color: #42B268;
+    }
   }
   
   &.neutral {
@@ -70,6 +74,10 @@
         background-color: #E8A623;
       }
     }
+
+    &:focus {
+      border-color: #E8A623;
+    }
   }
   
   &.bad {
@@ -89,6 +97,10 @@
       .keyword-button__score {
         background-color: #F66276;
       }
+    }
+
+    &:focus {
+      border-color: #F66276;
     }
   }
 }
