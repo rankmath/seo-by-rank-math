@@ -33,7 +33,7 @@ export default function ({
 
   const iconName = company === 'Content AI' ? 'rm-icon-content-ai' : 'rm-icon-rank-math';
 
-  const scoreButtonProps = {
+  const buttonProps = {
     className: getScoreButtonClasses(),
     variant: 'secondary',
     icon: <i className={iconName}></i>,
@@ -42,7 +42,7 @@ export default function ({
 
   return (
     <Button
-      {...scoreButtonProps}
+      {...buttonProps}
     />
   )
 };
