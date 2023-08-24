@@ -8,6 +8,7 @@ import { createElement, render, useState } from '@wordpress/element';
 */
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
+import ImageUploader from './file-uploaders/ImageUploader';
 
 
 const AllComponents = () => {
@@ -15,7 +16,7 @@ const AllComponents = () => {
     <div className='components-container'>
 
       <div className="group-components">
-
+        <ImageUploader />
       </div>
 
     </div>
