@@ -74,7 +74,7 @@ class Add_Attributes {
 		}
 
 		$stripped_content = preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', $content );
-		preg_match_all( '/\< *[img][^\>]*[.]*\>(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/', $stripped_content, $matches, PREG_SET_ORDER );
+		preg_match_all( '/\<img[^\>]*[.]*\>(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/', $stripped_content, $matches, PREG_SET_ORDER );
 		if ( empty( $matches ) ) {
 			return $content;
 		}
@@ -108,7 +108,7 @@ class Add_Attributes {
 
 			if ( $is_dirty ) {
 				$new     = '<img' . HTML::attributes_to_string( $attrs ) . '>';
-				$content = str_replace( $image[0], $new, $content );
+				$content = preg_replace( '/\<img[^\>]*[.]*\>(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/', $new, $content );
 			}
 		}
 
