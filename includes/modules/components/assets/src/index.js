@@ -17,7 +17,7 @@ const AllComponents = () => {
     <div className='components-container'>
 
       <div className="group-components">
-        <ContentAIScoreBar value={23} />
+        <ContentAIScoreBar value={20} />
       </div>
 
 

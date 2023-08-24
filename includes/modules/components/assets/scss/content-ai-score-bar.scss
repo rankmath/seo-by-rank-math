@@ -1,6 +1,7 @@
 @import '@wordpress/components/build-style/style.css';
 
-.components-range-control {
+
+.content-ai-score-bar .components-range-control {
   &.content-ai-score-bar {
     width: 25rem;
 
@@ -11,9 +12,14 @@
     .components-range-control__thumb-wrapper {
       margin-top: 11px;
       background-color: transparent;
-      border: 4px solid #fff;
+      border: 5px solid #fff;
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 
       .css-1oxlee5 {
+        display: none;
+      }
+
+      .css-cp5s75 {
         display: none;
       }
     }
@@ -29,6 +35,42 @@
 
     .components-range-control__track {
       background-color: transparent;
+    }
+  }
+}
+
+.content-ai-score-bar .components-popover {
+  .components-popover__content {
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 5.7rem;
+    min-height: 3.4rem;
+    border-radius: 5px;
+    gap: 1px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    .score-bar__title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: normal;
+      color: #888;
+    }
+
+    .score-bar__value {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 605;
+    }
+  }
+
+  .components-popover__arrow {
+    .components-popover__triangle {
+      .components-popover__triangle-border {
+        stroke: #fff;
+      }
     }
   }
 }
