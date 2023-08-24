@@ -1,5 +1,5 @@
 @import '@wordpress/components/build-style/style.css';
-@import 'variables';
+@import './partials/variables';
 
 .multi-section-tab-panel {
   border: 1px solid $color-border--gray-primary;

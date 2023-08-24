@@ -8,9 +8,6 @@ import { createElement, render, useState } from '@wordpress/element';
 */
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
-import EditorScoreBar from './score-bars/EditorScoreBar';
-import ContentAIScoreBar from './score-bars/ContentAIScoreBar';
-import LightIndicator from './LightIndicator';
 
 
 const AllComponents = () => {
@@ -18,10 +15,7 @@ const AllComponents = () => {
     <div className='components-container'>
 
       <div className="group-components">
-        <LightIndicator />
-        <LightIndicator status='red' />
-        <LightIndicator status='yellow' />
-        <LightIndicator status='green' />
+
       </div>
 
     </div>

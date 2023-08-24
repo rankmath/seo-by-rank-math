@@ -1,6 +1,5 @@
 @import '@wordpress/components/build-style/style.css';
-@import 'variables';
-
+@import './partials/variables';
 
 .components-base-control {
   .components-base-control__field {

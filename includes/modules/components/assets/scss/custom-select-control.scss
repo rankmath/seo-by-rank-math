@@ -1,5 +1,6 @@
 @import '@wordpress/components/build-style/style.css';
-@import 'variables';
+@import './partials/variables';
+
 
 @mixin tablet {
   @media screen and (max-width: 768px) {

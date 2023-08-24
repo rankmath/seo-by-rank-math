@@ -1,5 +1,5 @@
 @import '@wordpress/components/build-style/style.css';
-@import 'variables';
+@import './partials/variables';
 
 @mixin from-tablet {
   @media (min-width: 600px) {
