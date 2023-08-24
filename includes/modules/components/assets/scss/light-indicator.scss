@@ -1,0 +1,26 @@
+.light-indicator {
+  background-color: #F5F5F5;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  padding-right: 2.2rem;
+
+  .is-off {
+    color: #A8A8A8;
+  }
+  .is-green {
+    color: #3AA856;
+  }
+  .is-red {
+    color: #F86666;
+  }
+  .is-yellow {
+    color: #DB9F27;
+  }
+
+  .light-indicator__label {
+    font-size: 12px;
+  }
+}

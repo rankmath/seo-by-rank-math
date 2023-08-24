@@ -10,25 +10,18 @@ import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
 import EditorScoreBar from './score-bars/EditorScoreBar';
 import ContentAIScoreBar from './score-bars/ContentAIScoreBar';
+import LightIndicator from './LightIndicator';
 
 
 const AllComponents = () => {
   return (
-    <div className='components-container' style={{ paddingTop: '5rem' }}>
+    <div className='components-container'>
 
       <div className="group-components">
-        <ContentAIScoreBar value={20} />
-      </div>
-
-
-      <div className="group-components">
-        <EditorScoreBar value={23} />
-      </div>
-      <div className="group-components">
-        <EditorScoreBar value={52} />
-      </div>
-      <div className="group-components">
-        <EditorScoreBar value={94} />
+        <LightIndicator />
+        <LightIndicator status='red' />
+        <LightIndicator status='yellow' />
+        <LightIndicator status='green' />
       </div>
 
     </div>
