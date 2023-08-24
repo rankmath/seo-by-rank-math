@@ -50,7 +50,7 @@
     min-height: 3.4rem;
     border-radius: 5px;
     gap: 1px;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px;
 
     .score-bar__title {
       margin: 0;
@@ -67,10 +67,42 @@
   }
 
   .components-popover__arrow {
+    display: none;
+    
+    &::before {
+      display: none;
+    }
+
     .components-popover__triangle {
       .components-popover__triangle-border {
         stroke: #fff;
       }
+    }
+  }
+
+  .popover-pointer {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #fff;
+    position: absolute;
+    top: 100%;
+
+    &.is-left {
+      left: 0;
+      border-left: none;
+      border-right: 20px solid transparent;
+      border-top: 13px solid #fff;
+      top: 90%;
+    }
+
+    &.is-right {
+      right: 0;
+      border-right: none;
+      border-left: 20px solid transparent;
+      border-top: 13px solid #fff;
+      top: 90%;
     }
   }
 }

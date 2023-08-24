@@ -14,7 +14,7 @@ import ContentAIScoreBar from './score-bars/ContentAIScoreBar';
 
 const AllComponents = () => {
   return (
-    <div className='components-container'>
+    <div className='components-container' style={{ paddingTop: '5rem' }}>
 
       <div className="group-components">
         <ContentAIScoreBar value={20} />

@@ -15,16 +15,17 @@ export default function ({
   ...rest
 }) {
   const [currentValue, setCurrentValue] = useState(value)
+  const popoverPointerPlacement = currentValue < 50 ? 'is-left' : currentValue > 60 ? 'is-right' : '';
   const groupedClassNames = `content-ai-score-bar ${className}`;
 
-  const handleValueChange = (newValue) => {
-    setCurrentValue(newValue);
+  const handleSliderChange = (value) => {
+    setCurrentValue(value);
   };
 
   const rangeControlProps = {
     ...rest,
     value: currentValue,
-    onChange: handleValueChange,
+    onChange: handleSliderChange,
     className: groupedClassNames,
     min: 0,
     max: 100,
@@ -39,11 +40,15 @@ export default function ({
       />
 
       <Popover
-        placement='top'
+        placement={'top'}
         noArrow={false}
+        offset={4}
+
       >
         <h1 className='score-bar__title'>Score</h1>
         <h6 className='score-bar__value'>{currentValue}/100</h6>
+
+        <div className={`popover-pointer ${popoverPointerPlacement}`} />
       </Popover>
     </div>
   );
