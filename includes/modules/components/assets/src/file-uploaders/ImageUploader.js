@@ -26,14 +26,14 @@ export default function () {
       const image = new Image();
 
       image.onload = () => {
-        // if (image.width < 1400 || image.height < 1400) {
-        //   alert("Image dimensions are too small. Minimum dimensions required: 1400x1400px.");
-        //   return;
-        // }
-        // if (image.width > 3000 || image.height > 3000) {
-        //   alert("Image dimensions are too large. Maximum dimensions allowed: 3000x3000px.");
-        //   return;
-        // }
+        if (image.width < 1400 || image.height < 1400) {
+          alert("Image dimensions are too small. Minimum dimensions required: 1400x1400px.");
+          return;
+        }
+        if (image.width > 3000 || image.height > 3000) {
+          alert("Image dimensions are too large. Maximum dimensions allowed: 3000x3000px.");
+          return;
+        }
 
         setImageIsUploading(true);
 
