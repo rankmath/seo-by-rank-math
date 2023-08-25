@@ -1,8 +1,55 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
 
-.image-uploader-container {
-  border: 1px solid $color-border--gray-secondary;
+.image-uploader {
+  width: 35rem;
   background-color: #FCFCFC;
-  padding: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid $color-border--gray-secondary;
+  padding: 16px;
+  display: grid;
+  gap: 16px;
+
+  .image-uploader__controls {
+    grid-column: span 3 / span 3;
+    background-color: #F7F7F7;
+    color: #909090;
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23C7C7C7FF' stroke-width='2' stroke-dasharray='3%2c 4' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+
+    .components-form-file-upload .components-button {
+        background-color: #fff;
+        border: 1px solid #949494;
+        color: #515151;
+        gap: 10px;
+
+        &:focus:not(:disabled) {
+          box-shadow: none;
+          outline: none;
+        }
+    }
+  }
+
+  .image-uploader__preview {
+    background-color: #F2F2F2;
+    height: 8rem;
+
+    .image-uploader__preview-title {
+      font-size: 0.83rem;
+      color: #9B9B9B;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      line-height: 1.5rem;
+      padding: 0 16px;
+    }
+  }
 }
