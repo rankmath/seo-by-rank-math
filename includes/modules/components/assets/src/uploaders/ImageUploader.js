@@ -37,7 +37,7 @@ export default function () {
 
         setImageIsUploading(true);
 
-        // Simulate upload progress
+        // Simulates upload progress
         const interval = setInterval(() => {
           setImageUploadingPercentage((prevPercentage) => {
             const newPercentage = prevPercentage + 25;
@@ -67,13 +67,13 @@ export default function () {
         showTooltip={false}
       />
 
-      <span className='image-uploader__actions-label'>Uploading File: {imageUploadingPercentage}%</span>
+      <span className='image-uploader__is-uploading'>Uploading File: {imageUploadingPercentage}%</span>
     </>
   );
 
   const imageActions = (
     <>
-      <div className='image-uploader__actions-has-image'>
+      <div className='image-uploader__actions'>
         <FormFileUpload accept='image/*' onChange={handleImageUpload}>
           <i className={imageUploaded ? 'rm-icon-trash' : 'rm-icon-export'}></i>
           <span>{imageUploaded ? 'Replace Image' : 'Add or Upload Image'}</span>
@@ -100,8 +100,8 @@ export default function () {
   );
 
   return (
-    <div className='image-uploader'>
-      <div className='image-uploader__actions'>
+    <div className='image-uploader__wrapper'>
+      <div className='image-uploader__content'>
         {imageIsUploading ? uploadingActions : imageActions}
       </div>
 

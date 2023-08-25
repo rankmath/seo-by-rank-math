@@ -8,13 +8,17 @@ import { createElement, render, useState } from '@wordpress/element';
 */
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
-import ImageUploader from './file-uploaders/ImageUploader';
+import ImageUploader from './uploaders/ImageUploader';
+import FileUploader from './uploaders/FileUploader';
 
 
 const AllComponents = () => {
   return (
     <div className='components-container'>
 
+      <div className="group-components">
+        <FileUploader />
+      </div>
       <div className="group-components">
         <ImageUploader />
       </div>

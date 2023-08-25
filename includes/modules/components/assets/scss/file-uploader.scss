@@ -1,17 +1,13 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
 
-.image-uploader__wrapper {
+.file-uploader__wrapper {
   width: 35rem;
   background-color: #FCFCFC;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
   border: 1px solid $color-border--gray-secondary;
   padding: 16px;
-  display: grid;
-  gap: 16px;
 
-  .image-uploader__content {
-    grid-column: span 3 / span 3;
+  .file-uploader__content {
     background-color: #F7F7F7;
     color: #909090;
     height: 8rem;
@@ -21,14 +17,14 @@
     align-items: center;
     gap: 1rem;
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23C7C7C7FF' stroke-width='2' stroke-dasharray='3%2c 4' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-    padding: 0 1.8rem;
+    padding: 0 2.5rem;
     text-align: center;
 
-    .image-uploader__is-uploading {
+    .file-uploader__is-uploading {
       color: #4A4A4A ;
     }
 
-    .image-uploader__actions {
+    .file-uploader__actions {
       display: flex;
       align-items: center;
       gap: 13px;
@@ -39,7 +35,7 @@
     }
   }
 
-  .image-uploader__content  .components-button {
+  .file-uploader__content  .components-button {
     background-color: #fff;
     border: 1px solid #949494;
     color: #515151;
@@ -51,7 +47,7 @@
     }
   }
 
-  .image-uploader__content .components-range-control {
+  .file-uploader__content .components-range-control {
     width: 100%;
 
     .components-base-control__field {
@@ -68,30 +64,6 @@
 
     .components-range-control__track {
       color: #1A89C1;
-    }
-  }
-
-  .image-uploader__preview {
-    background-color: #F2F2F2;
-    height: 8rem;
-
-    .image-uploader__preview-title {
-      font-size: 0.83rem;
-      color: #9B9B9B;
-      text-transform: uppercase;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      text-align: center;
-      line-height: 1.5rem;
-      padding: 0 16px;
-    }
-
-    .image-uploader__preview-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
   }
 }
