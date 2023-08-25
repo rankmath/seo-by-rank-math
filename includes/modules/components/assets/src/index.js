@@ -35,11 +35,17 @@ import CustomSelectControl from './select/CustomSelectControl';
 import TextAreaControl from './inputs/TextAreaControl';
 import TextControl from './inputs/TextControl';
 import Button from './buttons/Button';
+import SegmentedSelectControl from './select/SegmentedSelectControl';
 
 
 const AllComponents = () => {
   return (
     <div className='components-container'>
+      <div className="group-components">
+        <SegmentedSelectControl
+          menuItems={['Select Option 1', 'Select Option 2', 'Select Option 3']} />
+      </div>
+
 
       <FileUploadersShowcase />
 

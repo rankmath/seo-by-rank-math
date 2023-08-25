@@ -23,7 +23,7 @@ export default function ({
   return (
     <MenuGroup {...menuGroupProps}>
       {menuItems.map(({ icon, title }) => (
-        <MenuItem>
+        <MenuItem key={title}>
           <i className={`${icon} components-menu-item__icon`}></i>
 
           <span className='components-menu-item__text'>{title}</span>
