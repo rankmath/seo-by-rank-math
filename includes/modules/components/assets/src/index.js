@@ -238,11 +238,11 @@ function FilterAndSwitchTabs() {
         variant='blue'
         tabs={[
           {
-            name: 'tab1',
+            name: 'tab3',
             icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
           },
           {
-            name: 'tab2',
+            name: 'tab4',
             icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
           }
         ]}
@@ -260,11 +260,11 @@ function FilterAndSwitchTabs() {
       <SwitchTaps
         tabs={[
           {
-            name: 'tab1',
+            name: 'tab5',
             icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
           },
           {
-            name: 'tab2',
+            name: 'tab6',
             icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
           }
         ]}
@@ -283,11 +283,11 @@ function FilterAndSwitchTabs() {
         variant='blue'
         tabs={[
           {
-            name: 'tab1',
+            name: 'tab7',
             icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
           },
           {
-            name: 'tab2',
+            name: 'tab8',
             icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
           }
         ]}

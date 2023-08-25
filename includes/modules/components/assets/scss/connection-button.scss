@@ -12,7 +12,7 @@
       color: #2D9A52;
       box-shadow: inset 0 0 0 1px #5CC47F;
 
-      &:hover, &:active, &:focus {
+      &:hover:not(:disabled), &:active, &:focus {
         background-color: #F2FBF5;
         color: #379A58;
         box-shadow: inset 0 0 0 1px #42B268;
@@ -24,7 +24,7 @@
       box-shadow: inset 0 0 0 1px #4AB866;
       background-color: #4AB866;
 
-      &:hover, &:active, &:focus {
+      &:hover:not(:disabled), &:active, &:focus {
         color: #fff;
         box-shadow: inset 0 0 0 1px #4AB866;
         background-color: #4AB866;
@@ -35,7 +35,7 @@
       color: #757575;
       box-shadow: inset 0 0 0 1px #BFBFBF;
 
-      &:hover, &:active, &:focus {
+      &:hover:not(:disabled), &:active, &:focus {
         background-color: #FEF1F3;
         color: #F3576C;
         box-shadow: inset 0 0 0 1px #F66276;
@@ -47,7 +47,7 @@
       box-shadow: inset 0 0 0 1px #F3808F;
       background-color: #F3808F;
 
-      &:hover, &:active, &:focus {
+      &:hover:not(:disabled), &:active, &:focus {
         color: #fff;
         box-shadow: inset 0 0 0 1px #F3808F;
         background-color: #F3808F;
@@ -58,7 +58,7 @@
       color: #D49517;
       box-shadow: inset 0 0 0 1px #F3BA49;
 
-      &:hover, &:active, &:focus {
+      &:hover:not(:disabled), &:active, &:focus {
         background-color: #FEFAF1;
         color: #C5870C;
         box-shadow: inset 0 0 0 1px #E8A623;

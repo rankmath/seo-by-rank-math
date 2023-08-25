@@ -9,7 +9,7 @@
   &.is-secondary {
     box-shadow: none;
 
-    &:hover {
+    &:hover:not(:disabled) {
       box-shadow: none;
     }
 
@@ -42,7 +42,7 @@
       color: #fff;
     }
 
-    &:hover, &:focus {
+    &:hover:not(:disabled), &:focus {
       background-color: #C6EAD2;
       color: #27984D;
 
@@ -66,7 +66,7 @@
       color: #fff;
     }
 
-    &:hover, &:focus {
+    &:hover:not(:disabled), &:focus {
       background-color: #FAE3B6;
       color: #C78910;
 
@@ -90,7 +90,7 @@
       color: #fff;
     }
 
-    &:hover, &:focus {
+    &:hover:not(:disabled), &:focus {
       background-color: #FBDADE;
       color: #E54B5F;
 
