@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import classNames from 'classnames';
-
-/**
  * Internal dependencies
  */
 import '../../scss/image-uploader.scss'
@@ -11,25 +6,106 @@ import '../../scss/image-uploader.scss'
 /**
  * WordPress dependencies
  */
-import { RangeControl, FormFileUpload } from '@wordpress/components';
+import { RangeControl, FormFileUpload, Button } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 
 export default function () {
-  return (
-    <div className='image-uploader'>
-      <div className='image-uploader__controls'>
-        <FormFileUpload
-          accept="image/*"
-        >
-          <i className='rm-icon-export'></i> <span>Add or Upload Image</span>
+  const [imageUploadingPercentage, setImageUploadingPercentage] = useState(0);
+  const [imageIsUploading, setImageIsUploading] = useState(false);
+  const [imageUploaded, setImageUploaded] = useState(false);
+  const [uploadedImageSrc, setUploadedImageSrc] = useState(null);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      if (file.size > 500000) {
+        alert("File size exceeds 0.5MB. Please choose a smaller image.");
+        return;
+      }
+
+      const image = new Image();
+
+      image.onload = () => {
+        // if (image.width < 1400 || image.height < 1400) {
+        //   alert("Image dimensions are too small. Minimum dimensions required: 1400x1400px.");
+        //   return;
+        // }
+        // if (image.width > 3000 || image.height > 3000) {
+        //   alert("Image dimensions are too large. Maximum dimensions allowed: 3000x3000px.");
+        //   return;
+        // }
+
+        setImageIsUploading(true);
+
+        // Simulate upload progress
+        const interval = setInterval(() => {
+          setImageUploadingPercentage((prevPercentage) => {
+            const newPercentage = prevPercentage + 25;
+            if (newPercentage >= 100) {
+              clearInterval(interval);
+              setImageIsUploading(false);
+              setImageUploaded(true);
+            }
+            return newPercentage;
+          });
+        }, 500);
+
+        setUploadedImageSrc(URL.createObjectURL(file));
+      };
+
+      image.src = URL.createObjectURL(file);
+    }
+  };
+
+  const uploadingActions = (
+    <>
+      <RangeControl
+        value={imageUploadingPercentage}
+        min={0}
+        max={100}
+        withInputField={false}
+        showTooltip={false}
+      />
+
+      <span className='image-uploader__actions-label'>Uploading File: {imageUploadingPercentage}%</span>
+    </>
+  );
+
+  const imageActions = (
+    <>
+      <div className='image-uploader__actions-has-image'>
+        <FormFileUpload accept='image/*' onChange={handleImageUpload}>
+          <i className={imageUploaded ? 'rm-icon-trash' : 'rm-icon-export'}></i>
+          <span>{imageUploaded ? 'Replace Image' : 'Add or Upload Image'}</span>
         </FormFileUpload>
 
-        <span>Min: 1400x1400px. &bull; Max: 3000x3000px. &bull; Max file size: 0.5MB.</span>
+        {imageUploaded && (
+          <Button>
+            <i className='rm-icon-trash'></i> <span>Remove Image</span>
+          </Button>
+        )}
       </div>
 
-      <div className='image-uploader__preview'>
-        <span className='image-uploader__preview-title'>Image Preview</span>
-        {/* <img src="" alt="" /> */}
-      </div>
+      <span>Min: 1400x1400px. &bull; Max: 3000x3000px. &bull; Max file size: 0.5MB.</span>
+    </>
+  );
+
+  const imagePreview = (
+    <div className='image-uploader__preview'>
+      {imageUploaded ?
+        <img src={uploadedImageSrc} alt='' className='image-uploader__preview-img' />
+        :
+        <span className='image-uploader__preview-title'>Image Preview</span>}
     </div>
-  )
+  );
+
+  return (
+    <div className='image-uploader'>
+      <div className='image-uploader__actions'>
+        {imageIsUploading ? uploadingActions : imageActions}
+      </div>
+
+      {imagePreview}
+    </div>
+  );
 }
