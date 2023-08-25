@@ -1,1 +1,8 @@
 @import '@wordpress/components/build-style/style.css';
+@import './partials/variables';
+
+.image-uploader-container {
+  border: 1px solid $color-border--gray-secondary;
+  background-color: #FCFCFC;
+  padding: 10px;
+}
