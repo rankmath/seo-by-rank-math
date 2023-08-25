@@ -57,6 +57,11 @@ export default function () {
     }
   };
 
+  const handleRemoveImage = () => {
+    setImageUploaded(false);
+    setUploadedImageSrc(null);
+  };
+
   const uploadingActions = (
     <>
       <RangeControl
@@ -80,7 +85,7 @@ export default function () {
         </FormFileUpload>
 
         {imageUploaded && (
-          <Button>
+          <Button onClick={handleRemoveImage}>
             <i className='rm-icon-trash'></i> <span>Remove Image</span>
           </Button>
         )}
