@@ -10,10 +10,10 @@ import { RangeControl, FormFileUpload, Button } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
 export default function () {
-  const [fileUploadingPercentage, setFileUploadingPercentage] = useState(50);
+  const [fileIsUploadingPercentage, setFileIsUploadingPercentage] = useState(0);
   const [fileIsUploading, setFileIsUploading] = useState(false);
-  const [fileUploaded, setFileUploaded] = useState(false);
-  const [uploadedFileName, setUploadedFileName] = useState('filename.xml');
+  const [fileHasUploaded, setFileHasUploaded] = useState(false);
+  const [uploadedFileName, setUploadedFileName] = useState('');
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -22,39 +22,67 @@ export default function () {
         alert("File size exceeds 0.5MB.");
         return;
       }
+
+      setFileIsUploading(true);
+
+      // Simulates upload progress
+      const interval = setInterval(() => {
+        setFileIsUploadingPercentage((prevPercentage) => {
+          const newPercentage = prevPercentage + 25;
+          if (newPercentage >= 100) {
+            clearInterval(interval);
+            setFileIsUploading(false);
+            setFileHasUploaded(true);
+            setUploadedFileName(file.name);
+          }
+          return newPercentage;
+        });
+      }, 500);
     }
+  };
+
+  const handleRemoveImage = () => {
+    setFileHasUploaded(false);
+    setUploadedFileName(null);
   };
 
   const uploadingActions = (
     <>
       <RangeControl
-        value={fileUploadingPercentage}
+        value={fileIsUploadingPercentage}
         min={0}
         max={100}
         withInputField={false}
         showTooltip={false}
       />
 
-      <span className='file-uploader__is-uploading'>Uploading File: {fileUploadingPercentage}%</span>
+      <span className='file-uploader__is-uploading'>
+        Uploading File: {fileIsUploadingPercentage}%
+      </span>
     </>
   );
 
   const fileActions = (
     <>
-      {fileUploaded && (
-        <div>
-          <i className='rm-icon-trash'></i> <span>File added: </span> <span>{uploadedFileName}</span>
+      {fileHasUploaded && (
+        <div className='file-uploader__uploaded-title'>
+          <i className='rm-icon-tick icon'></i>
+          <b>File Added: </b>
+          <span>{uploadedFileName}</span>
         </div>
       )}
 
       <div className='file-uploader__actions'>
-        <FormFileUpload accept='image/*'>
-          <i className={fileUploaded ? 'rm-icon-trash' : 'rm-icon-export'}></i>
-          <span>{fileUploaded ? 'Replace File' : 'Add or Upload File'}</span>
+        <FormFileUpload
+          accept='.xml,.html,application/zip,application/x-rar-compressed'
+          onChange={handleFileUpload}
+        >
+          <i className={fileHasUploaded ? 'rm-icon-trash' : 'rm-icon-export'}></i>
+          <span>{fileHasUploaded ? 'Replace File' : 'Add or Upload File'}</span>
         </FormFileUpload>
 
-        {fileUploaded && (
-          <Button>
+        {fileHasUploaded && (
+          <Button onClick={handleRemoveImage}>
             <i className='rm-icon-trash'></i> <span>Remove File</span>
           </Button>
         )}
