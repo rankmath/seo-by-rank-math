@@ -1,8 +1,8 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
 
-.components-menu-group {
-  &.sidebar-menu-list {
+.sidebar-menu-list {
+  &.components-menu-group  {
     width: 13rem;
     border: 1px solid $color-border--gray-primary;
     padding: 1.5rem 1rem;
@@ -30,6 +30,8 @@
           background-color: #F8F8F8;
           color: inherit;
           border: 2px solid #949494;
+          box-shadow: none;
+          outline: none;
         }
 
         .components-menu-item__item {

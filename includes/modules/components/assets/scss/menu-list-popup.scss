@@ -1,8 +1,8 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
 
-.components-menu-group {
-  &.menu-list-popup {
+.menu-list-popup {
+  &.components-menu-group  {
     width: 13rem;
     border: 1px solid $color-border--gray-primary;
     padding: 1rem;

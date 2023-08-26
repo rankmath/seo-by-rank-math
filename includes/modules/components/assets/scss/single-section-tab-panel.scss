@@ -1,8 +1,8 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
 
-.components-menu-group {
-  &.single-section-tab-panel {
+.single-section-tab-panel {
+  &.components-menu-group {
     width: 13rem;
     border: 1px solid $color-border--gray-primary;
     padding: 1rem;
