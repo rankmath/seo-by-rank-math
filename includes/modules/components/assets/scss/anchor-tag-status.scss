@@ -1,12 +1,7 @@
 @import '@wordpress/components/build-style/style.css';
 
-.components-button  {
-  &:focus:not(:disabled) {
-    outline: none;
-    box-shadow: none;
-  }
-
-  &.anchor-tag-status {
+.anchor-tag-status {
+  &.components-button {
     &.is-secondary {
       padding: 5px 10px;
       height: fit-content;
@@ -18,65 +13,65 @@
         box-shadow: none;
         outline: none;
       }
-    }
     
-    &.good {
-      color: #62AE60;
-      background-color: #E4F4E4;
+      &.good {
+        color: #62AE60;
+        background-color: #E4F4E4;
 
-      &:hover:not(:disabled), &:focus {
-        background-color: #D7EFD7;
-        color: #489F46;
+        &:hover:not(:disabled), &:focus {
+          background-color: #D7EFD7;
+          color: #489F46;
+        }
+
+        &:active {
+          background-color: #7AC979;
+          color: #fff;
+        }
       }
+      
+      &.warning {
+        color: #E29E3C;
+        background-color: #FFF0DA;
 
-      &:active {
-        background-color: #7AC979;
-        color: #fff;
+        &:hover:not(:disabled), &:focus {
+          background-color: #FFEACC;
+          color: #D99124;
+        }
+
+        &:active {
+          background-color: #FFBE5F;
+          color: #fff;
+        }
       }
-    }
-    
-    &.warning {
-      color: #E29E3C;
-      background-color: #FFF0DA;
+      
+      &.error {
+        color: #E47E78;
+        background-color: #FCEBEA;
 
-      &:hover:not(:disabled), &:focus {
-        background-color: #FFEACC;
-        color: #D99124;
+        &:hover:not(:disabled), &:focus {
+          background-color: #FBE1DF;
+          color: #DA6961;
+        }
+
+        &:active {
+          background-color: #F29C96;
+          color: #fff;
+        }
       }
+      
+      &.grey {
+        color: #787878;
+        background-color: #F2F2F2;
 
-      &:active {
-        background-color: #FFBE5F;
-        color: #fff;
-      }
-    }
-    
-    &.error {
-      color: #E47E78;
-      background-color: #FCEBEA;
+        &:hover:not(:disabled), &:focus {
+          background-color: #E9E9E9;
+          color: #383838;
+        }
 
-      &:hover:not(:disabled), &:focus {
-        background-color: #FBE1DF;
-        color: #DA6961;
-      }
-
-      &:active {
-        background-color: #F29C96;
-        color: #fff;
-      }
-    }
-    
-    &.grey {
-      color: #787878;
-      background-color: #F2F2F2;
-
-      &:hover:not(:disabled), &:focus {
-        background-color: #E9E9E9;
-        color: #383838;
-      }
-
-      &:active {
-        background-color: #383838;
-        color: #fff;
+        &:active {
+          background-color: #383838;
+          color: #fff;
+        }
       }
     }
   }
