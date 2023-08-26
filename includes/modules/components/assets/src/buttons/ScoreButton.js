@@ -32,7 +32,7 @@ export default ({
   };
 
   const companyIconMap = {
-    'Content AI': 'rm-icon-content-ai',
+    'Content AI': 'rm-icon-rank-math',
     'Rank Math': 'rm-icon-rank-math',
   };
 

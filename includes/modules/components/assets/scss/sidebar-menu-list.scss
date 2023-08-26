@@ -23,12 +23,13 @@
         &:hover {
           background-color: #F8F8F8;
           color: inherit;
+          border: 1px solid #949494;
         }
 
         &:focus {
           background-color: #F8F8F8;
           color: inherit;
-          box-shadow: inset 0 0 0 1.9px #949494;
+          border: 2px solid #949494;
         }
 
         .components-menu-item__item {

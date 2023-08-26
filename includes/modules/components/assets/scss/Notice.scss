@@ -1,6 +1,9 @@
 @import '@wordpress/components/build-style/style.css';
 
 .components-notice {
+  width: 35rem;
+  margin: 0px;
+
   &.is-info {
     background-color: #F2F8FC;
 

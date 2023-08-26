@@ -40,35 +40,29 @@ import SegmentedSelectControl from './select/SegmentedSelectControl';
 
 const AllComponents = () => {
   return (
-    <div className='components-container'>
+    <div className='container'>
 
       <FileUploadersShowcase />
 
-      <LightIndicatorShowcase />
+      <ConnectionStatus />
 
-      <ScoreBarShowcase />
+      <Scores />
 
-      <ScoreAndStatusButtons />
+      <AnchorTagStatusShowcase />
 
       <FilterAndSwitchTabs />
 
-      <TabsAndMenuListShowcase />
+      <MenuListShowcase />
 
-      <PageTabPanelShowcase />
+      <VerticalTabsShowcase />
 
-      <SidebarTabPanelShowcase />
+      <HorizontalTabs />
 
       <NoticeShowcase />
 
-      <SearchSelectShowcase />
-
       <ControlsShowcase />
 
-      <CustomSelectControlShowcase />
-
-      <TextAreaControlShowcase />
-
-      <TextControlShowcase />
+      <TextInputFields />
 
       <ButtonsShowcase />
 
@@ -79,82 +73,143 @@ const AllComponents = () => {
 function FileUploadersShowcase() {
   return (
     <>
+      <h2>File Uploaders</h2>
 
-      <div className="group-components">
-        <FileUploader />
+      <div className='components-wrapper'>
+        <div>
+          <h4>Other File Uploader</h4>
+
+          <FileUploader />
+        </div>
+
+        <div className="margin-top">
+          <h4>Image Uploader</h4>
+
+          <ImageUploader />
+        </div>
       </div>
-
-      <div className="group-components">
-        <ImageUploader />
-      </div>
-
     </>
   )
 };
 
-function LightIndicatorShowcase() {
+function ConnectionStatus() {
   return (
     <>
+      <h2>Connection Status</h2>
 
-      <div className="group-components">
-        <LightIndicator />
-        <LightIndicator status='red' />
-        <LightIndicator status='yellow' />
-        <LightIndicator status='green' />
+      <div className='components-wrapper'>
+
+        <div>
+          <h4>Light Indicators</h4>
+
+          <div className="group-components">
+            <LightIndicator />
+            <LightIndicator status='red' />
+            <LightIndicator status='yellow' />
+            <LightIndicator status='green' />
+          </div>
+        </div>
+
+
+        <div>
+          <h4>Connection</h4>
+
+          <div className='group-components'>
+            <ConnectionButton status='connect'>Connect</ConnectionButton>
+            <ConnectionButton status='connected'>Connected</ConnectionButton>
+          </div>
+
+          <div className='group-components'>
+            <ConnectionButton status='disconnect'>Disconnect</ConnectionButton>
+            <ConnectionButton status='disconnected'>Disconnected</ConnectionButton>
+          </div>
+
+          <div className='group-components'>
+            <ConnectionButton status='reconnect'>Reconnect</ConnectionButton>
+            <ConnectionButton status='connected'>Connected</ConnectionButton>
+          </div>
+        </div>
       </div>
-
     </>
   )
 };
 
-function ScoreBarShowcase() {
+function Scores() {
   return (
-    <div style={{ paddingTop: '5rem' }}>
+    <>
+      <h2>Scores</h2>
 
-      <div className="group-components">
-        <ContentAIScoreBar value={20} />
-      </div>
+      <div className='components-wrapper'>
+        <div>
+          <h4>Content AI Score Bar</h4>
+
+          <div className="group-components">
+            <ContentAIScoreBar value={20} />
+          </div>
+        </div>
 
 
-      <div className="group-components">
-        <EditorScoreBar value={23} />
-      </div>
-      <div className="group-components">
-        <EditorScoreBar value={52} />
-      </div>
-      <div className="group-components">
-        <EditorScoreBar value={94} />
-      </div>
+        <div>
+          <h4>Snippet Editor Score Bar</h4>
 
-    </div>
+          <div className="group-components">
+            <EditorScoreBar value={23} />
+          </div>
+          <div className="group-components">
+            <EditorScoreBar value={52} />
+          </div>
+          <div className="group-components">
+            <EditorScoreBar value={94} />
+          </div>
+        </div>
+
+        <div>
+          <h4 className='margin-top'>Keyword Suggestions</h4>
+
+          <div className='group-components'>
+            <KeywordButton />
+
+            <KeywordButton keyword='Increase' severity='neutral' />
+
+            <KeywordButton severity='bad' />
+          </div>
+        </div>
+
+        <div>
+          <h4 className='margin-top'>Rank Math Buttons</h4>
+
+          <div className='group-components'>
+            <ScoreButton>94/100</ScoreButton>
+
+            <ScoreButton severity='neutral'>52/100</ScoreButton>
+
+            <ScoreButton severity='bad'>52/100</ScoreButton>
+          </div>
+        </div>
+
+
+        <div>
+          <h4 className='margin-top'>Content AI Buttons</h4>
+
+          <div className='group-components'>
+            <ScoreButton company='Content AI'>94/100</ScoreButton>
+
+            <ScoreButton company='Content AI' severity='neutral'>52/100</ScoreButton>
+
+            <ScoreButton company='Content AI' severity='bad'>52/100</ScoreButton>
+          </div>
+        </div>
+      </div>
+    </>
   )
 };
 
-function ScoreAndStatusButtons() {
+function AnchorTagStatusShowcase() {
   return (
     <>
-      <div>
-        <h3>Connection Button</h3>
+      <h2>Anchor Tag Status</h2>
 
-        <div className='group-components'>
-          <ConnectionButton status='connect'>Connect</ConnectionButton>
-          <ConnectionButton status='connected'>Connected</ConnectionButton>
-        </div>
-
-        <div className='group-components'>
-          <ConnectionButton status='disconnect'>Disconnect</ConnectionButton>
-          <ConnectionButton status='disconnected'>Disconnected</ConnectionButton>
-        </div>
-
-        <div className='group-components'>
-          <ConnectionButton status='reconnect'>Reconnect</ConnectionButton>
-          <ConnectionButton status='connected'>Connected</ConnectionButton>
-        </div>
-      </div>
-
-      <div>
-        <h3>Anchor Tag Status</h3>
-
+      <div className='components-wrapper'>
         <div className='group-components'>
           <AnchorTagStatus>All Good</AnchorTagStatus>
 
@@ -165,39 +220,6 @@ function ScoreAndStatusButtons() {
           <AnchorTagStatus severity='grey' children='Label' />
         </div>
       </div>
-
-      <div>
-        <h3>Score Button</h3>
-
-        <div className='group-components'>
-          <ScoreButton>94/100</ScoreButton>
-
-          <ScoreButton severity='neutral'>52/100</ScoreButton>
-
-          <ScoreButton severity='bad'>52/100</ScoreButton>
-        </div>
-
-        <div className='group-components'>
-          <ScoreButton company='Content AI'>94/100</ScoreButton>
-
-          <ScoreButton company='Content AI' severity='neutral'>52/100</ScoreButton>
-
-          <ScoreButton company='Content AI' severity='bad'>52/100</ScoreButton>
-        </div>
-      </div>
-
-      <div>
-        <h3>Keyword Button</h3>
-
-        <div className='group-components'>
-          <KeywordButton />
-
-          <KeywordButton keyword='Increase' severity='neutral' />
-
-          <KeywordButton severity='bad' />
-        </div>
-      </div>
-
     </>
   )
 };
@@ -205,293 +227,349 @@ function ScoreAndStatusButtons() {
 function FilterAndSwitchTabs() {
   return (
     <>
-      <SwitchTaps
-        iconOnly
-        tabs={[
-          {
-            name: 'tab1',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
-          },
-          {
-            name: 'tab2',
-            icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
-          }
-        ]}
-        children={(tab) => (
-          <div>
-            <h3>{tab.title}</h3>
-            <p>This is the content for tab {tab.name}</p>
-          </div>
-        )
-        }
-      />
+      <h2>Filter And Switch Tabs</h2>
 
-      <div style={{ margin: '1rem' }} />
+      <div className='components-wrapper'>
+        <div>
+          <h4>Switch Tabs - Black</h4>
 
-      <SwitchTaps
-        iconOnly
-        variant='blue'
-        tabs={[
-          {
-            name: 'tab3',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
-          },
-          {
-            name: 'tab4',
-            icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
-          }
-        ]}
-        children={(tab) => (
-          <div>
-            <h3>{tab.title}</h3>
-            <p>This is the content for tab {tab.name}</p>
-          </div>
-        )
-        }
-      />
+          <div className='group-components'>
+            <SwitchTaps
+              iconOnly
+              tabs={[
+                {
+                  name: 'tab1',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+                },
+                {
+                  name: 'tab2',
+                  icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+                }
+              ]}
+              children={(tab) => (
+                <div>
+                  <p>This is the content for tab {tab.name}</p>
+                </div>
+              )
+              }
+            /></div>
 
-      <div style={{ margin: '1rem' }} />
+          <div className='group-components'>
+            <SwitchTaps
+              tabs={[
+                {
+                  name: 'tab5',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+                },
+                {
+                  name: 'tab6',
+                  icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+                }
+              ]}
+              children={(tab) => (
+                <div>
+                  <p>This is the content for tab {tab.name}</p>
+                </div>
+              )
+              }
+            /></div>
+        </div>
 
-      <SwitchTaps
-        tabs={[
-          {
-            name: 'tab5',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
-          },
-          {
-            name: 'tab6',
-            icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
-          }
-        ]}
-        children={(tab) => (
-          <div>
-            <h3>{tab.title}</h3>
-            <p>This is the content for tab {tab.name}</p>
-          </div>
-        )
-        }
-      />
+        <div>
+          <h4>Switch Tabs - Blue</h4>
 
-      <div style={{ margin: '1rem' }} />
+          <div className='group-components'>
+            <SwitchTaps
+              iconOnly
+              variant='blue'
+              tabs={[
+                {
+                  name: 'tab3',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+                },
+                {
+                  name: 'tab4',
+                  icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+                }
+              ]}
+              children={(tab) => (
+                <div>
+                  <p>This is the content for tab {tab.name}</p>
+                </div>
+              )
+              }
+            /></div>
 
-      <SwitchTaps
-        variant='blue'
-        tabs={[
-          {
-            name: 'tab7',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
-          },
-          {
-            name: 'tab8',
-            icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
-          }
-        ]}
-        children={(tab) => (
-          <div>
-            <h3>{tab.title}</h3>
-            <p>This is the content for tab {tab.name}</p>
-          </div>
-        )
-        }
-      />
+          <div className='group-components'>
+            <SwitchTaps
+              variant='blue'
+              tabs={[
+                {
+                  name: 'tab7',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+                },
+                {
+                  name: 'tab8',
+                  icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+                }
+              ]}
+              children={(tab) => (
+                <div>
+                  <p>This is the content for tab {tab.name}</p>
+                </div>
+              )
+              }
+            /></div>
+        </div>
 
-      <div style={{ margin: '1rem' }} />
 
-      <FilterMenus
-        tabs={[
-          {
-            name: 'tab1',
-            title: 'All',
-          },
-          {
-            name: 'tab2',
-            title: 'First Content',
-          },
-          {
-            name: 'tab3',
-            title: 'Third',
-          }
-        ]}
-        children={(tab) => (
-          <div>
-            <h3>{tab.title}</h3>
-            <p>This is the content for tab {tab.name}</p>
-          </div>
-        )
-        }
-      />
+        <div>
+          <h4>Filter Menu - Black</h4>
 
-      <div style={{ margin: '1rem' }} />
+          <div className='group-components'>
+            <FilterMenus
+              tabs={[
+                {
+                  name: 'tab1',
+                  title: 'All',
+                },
+                {
+                  name: 'tab2',
+                  title: 'First Content',
+                },
+                {
+                  name: 'tab3',
+                  title: 'Third',
+                }
+              ]}
+              children={(tab) => (
+                <div>
+                  <h5>{tab.title}</h5>
+                  <p>This is the content for tab {tab.name}</p>
+                </div>
+              )
+              }
+            /></div>
+        </div>
 
-      <FilterMenus
-        variant='blue'
-        tabs={[
-          {
-            name: 'tab1',
-            title: 'All',
-          },
-          {
-            name: 'tab2',
-            title: 'First Content',
-          },
-          {
-            name: 'tab3',
-            title: 'Third',
-          }
-        ]}
-        children={(tab) => (
-          <div>
-            <h3>{tab.title}</h3>
-            <p>This is the content for tab {tab.name}</p>
-          </div>
-        )
-        }
-      />
+
+        <div>
+          <h4>Filter Menu - Blue</h4>
+
+          <div className='group-components'>
+            <FilterMenus
+              variant='blue'
+              tabs={[
+                {
+                  name: 'tab1',
+                  title: 'All',
+                },
+                {
+                  name: 'tab2',
+                  title: 'First Content',
+                },
+                {
+                  name: 'tab3',
+                  title: 'Third',
+                }
+              ]}
+              children={(tab) => (
+                <div>
+                  <h5>{tab.title}</h5>
+                  <p>This is the content for tab {tab.name}</p>
+                </div>
+              )
+              }
+            /></div>
+        </div>
+      </div>
     </>
   )
 }
 
-function TabsAndMenuListShowcase() {
+function MenuListShowcase() {
   return (
     <>
-      <MenuListPopup
-        label='Menu List Popup'
-        menuItems={[
-          { title: 'Frist Option Item', icon: 'rm-icon-trash' },
-          { title: 'Second Option Item', icon: 'rm-icon-trash' },
-          { title: 'Third Option Item', icon: 'rm-icon-trash' },
-          { title: 'Fourth Option Item', icon: 'rm-icon-trash' },
-        ]}
-      />
+      <h2>Menu List Items</h2>
 
-      <div style={{ margin: '1rem' }} />
+      <div className='components-wrapper'>
+        <div>
+          <h4>Choose a Block Popup</h4>
 
-      <SidebarMenuList
-        label='Sidebar Menu List Popup'
-        menuItems={[
-          { title: 'Frist Option List Item', icon: 'rm-icon-trash' },
-          { title: 'Second Option List Item', icon: 'rm-icon-trash' },
-          { title: 'Third Option List Item', icon: 'rm-icon-trash' },
-          { title: 'Fourth Option List Item', icon: 'rm-icon-trash' },
-        ]}
-      />
+          <div className='group-components'>
+            <MenuListPopup
+              menuItems={[
+                { title: 'Frist Option Item', icon: 'rm-icon-trash' },
+                { title: 'Second Option Item', icon: 'rm-icon-trash' },
+                { title: 'Third Option Item', icon: 'rm-icon-trash' },
+                { title: 'Fourth Option Item', icon: 'rm-icon-trash' },
+              ]}
+            />
+          </div>
+        </div>
 
-      <div style={{ margin: '1rem' }} />
+        <div>
+          <h4>Sidebar Menu List</h4>
 
-      <SingleSectionTabPanel
-        label='Title'
-        menuItems={[
-          { title: 'Frist Tab', icon: 'rm-icon-trash' },
-          { title: 'Second Tab', icon: 'rm-icon-trash' },
-          { title: 'Third Tab', icon: 'rm-icon-trash' },
-          { title: 'Fourth Tab', icon: 'rm-icon-trash' },
-        ]}
-      />
-
-      <div style={{ margin: '1rem' }} />
-
-      <MultiSectionTabPanel>
-        <SingleSectionTabPanel
-          menuItems={[
-            { title: 'Frist Tab', icon: 'rm-icon-trash' },
-            { title: 'Second Tab', icon: 'rm-icon-trash' },
-            { title: 'Third Tab', icon: 'rm-icon-trash' },
-            { title: 'Fourth Tab', icon: 'rm-icon-trash' },
-          ]}
-        />
-
-        <SingleSectionTabPanel
-          label='Settings'
-          menuItems={[
-            { title: 'Settings 1', icon: 'rm-icon-trash' },
-            { title: 'Settings 2', icon: 'rm-icon-trash' },
-            { title: 'Settings 3', icon: 'rm-icon-trash' },
-            { title: 'Settings 4', icon: 'rm-icon-trash' },
-          ]}
-        />
-      </MultiSectionTabPanel>
+          <div className='group-components'>
+            <SidebarMenuList
+              menuItems={[
+                { title: 'Frist Option List Item', icon: 'rm-icon-trash' },
+                { title: 'Second Option List Item', icon: 'rm-icon-trash' },
+                { title: 'Third Option List Item', icon: 'rm-icon-trash' },
+                { title: 'Fourth Option List Item', icon: 'rm-icon-trash' },
+              ]}
+            />
+          </div>
+        </div>
+      </div>
     </>
   )
 };
 
-function PageTabPanelShowcase() {
+function VerticalTabsShowcase() {
   return (
-    <div style={{ padding: '1rem 0' }}>
-      <PageTabPanel
-        tabs={[
-          {
-            name: 'tab1',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='First Tab' />
-          },
-          {
-            name: 'tab2',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Second Tab' />
-          },
-          {
-            name: 'tab3',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Third Tab' />
-          }
-        ]}
-      />
-    </div>
+    <>
+      <h2>Vertical Tabs</h2>
+
+      <div className='components-wrapper'>
+        <div>
+          <h4>Single Section Column</h4>
+
+          <div className='group-components'>
+            <SingleSectionTabPanel
+              label='Title'
+              menuItems={[
+                { title: 'Frist Tab', icon: 'rm-icon-trash' },
+                { title: 'Second Tab', icon: 'rm-icon-trash' },
+                { title: 'Third Tab', icon: 'rm-icon-trash' },
+                { title: 'Fourth Tab', icon: 'rm-icon-trash' },
+              ]}
+            />
+          </div>
+        </div>
+
+        <div>
+          <h4>Multi Section Column </h4>
+
+          <div className='group-components'>
+            <MultiSectionTabPanel>
+              <SingleSectionTabPanel
+                menuItems={[
+                  { title: 'Frist Tab', icon: 'rm-icon-trash' },
+                  { title: 'Second Tab', icon: 'rm-icon-trash' },
+                  { title: 'Third Tab', icon: 'rm-icon-trash' },
+                  { title: 'Fourth Tab', icon: 'rm-icon-trash' },
+                ]}
+              />
+
+              <SingleSectionTabPanel
+                label='Settings'
+                menuItems={[
+                  { title: 'Settings 1', icon: 'rm-icon-trash' },
+                  { title: 'Settings 2', icon: 'rm-icon-trash' },
+                  { title: 'Settings 3', icon: 'rm-icon-trash' },
+                  { title: 'Settings 4', icon: 'rm-icon-trash' },
+                ]}
+              />
+            </MultiSectionTabPanel>
+          </div>
+        </div>
+      </div>
+    </>
   )
 };
 
-function SidebarTabPanelShowcase() {
-
+function HorizontalTabs() {
   return (
     <div>
-      <SidebarTabPanel
-        tabs={[
-          {
-            name: 'tab1',
-            title: 'First',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='First' />
-          },
-          {
-            name: 'tab2',
-            title: 'Second',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Second' />
-          },
-          {
-            name: 'tab3',
-            title: 'Third',
-            icon: <TabPanelWithIcon icon='rm-icon-trash' title='Third' />
-          }
-        ]}
-        children={(tab) => (
-          <div>
-            <h3>{tab.title}</h3>
-            <p>This is the content for tab {tab.name}</p>
-          </div>
-        )
-        }
-      />
+      <h2>Horizontal Tabs</h2>
 
-      <div style={{ marginTop: '1rem' }}>
-        <SidebarTabPanel
-          tabs={[
-            {
-              name: 'tab1',
-              title: 'First Tab',
-            },
-            {
-              name: 'tab2',
-              title: 'Second Tab',
-            },
-            {
-              name: 'tab3',
-              title: 'Third Tab',
-            }
-          ]}
-          children={(tab) => (
-            <div>
-              <h3>{tab.title}</h3>
-              <p>This is the content for tab {tab.name}</p>
-            </div>
-          )
-          }
-        />
+      <div className='components-wrapper'>
+        <h4>Sidebar Tabs</h4>
+
+        <div>
+          <h5>Variant 1</h5>
+          <div className='group-components'>
+            <SidebarTabPanel
+              tabs={[
+                {
+                  name: 'tab1',
+                  title: 'First',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='First' />
+                },
+                {
+                  name: 'tab2',
+                  title: 'Second',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='Second' />
+                },
+                {
+                  name: 'tab3',
+                  title: 'Third',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='Third' />
+                }
+              ]}
+              children={(tab) => (
+                <div>
+                  <h5>{tab.title}</h5>
+                  <p>This is the content for tab {tab.name}</p>
+                </div>
+              )
+              }
+            />
+          </div>
+
+          <h5>Variant 2</h5>
+          <div className='group-components'>
+            <SidebarTabPanel
+              tabs={[
+                {
+                  name: 'tab1',
+                  title: 'First Tab',
+                },
+                {
+                  name: 'tab2',
+                  title: 'Second Tab',
+                },
+                {
+                  name: 'tab3',
+                  title: 'Third Tab',
+                }
+              ]}
+              children={(tab) => (
+                <div>
+                  <h5>{tab.title}</h5>
+                  <p>This is the content for tab {tab.name}</p>
+                </div>
+              )
+              }
+            />
+          </div>
+        </div>
+
+
+        <div>
+          <h4>Page & Modal Tabs</h4>
+
+          <div className='group-components'>
+            <PageTabPanel
+              tabs={[
+                {
+                  name: 'tab1',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='First Tab' />
+                },
+                {
+                  name: 'tab2',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='Second Tab' />
+                },
+                {
+                  name: 'tab3',
+                  icon: <TabPanelWithIcon icon='rm-icon-trash' title='Third Tab' />
+                }
+              ]}
+            />
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -500,103 +578,133 @@ function SidebarTabPanelShowcase() {
 function NoticeShowcase() {
   return (
     <>
-      <div className='notice-group'>
-        <Notice
-        >
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </Notice>
+      <h2>Notice Banners</h2>
 
-        <Notice
-          status='warning'
-          icon='rm-icon-trash'
-          actions={[
-            {
-              label: "Read More",
-              url: "https://wordpress.org"
-            }
-          ]}
-        >
-          Lorem ipsum dolor sit, amet consectetur ipsum dolor sit.
-        </Notice>
+      <div className='components-wrapper'>
+        <div className='notice-group'>
+          <Notice
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+          </Notice>
 
-        <Notice
-          status='success'
-          icon='rm-icon-trash'
-          actions={[
-            {
-              label: "Read More",
-              url: "https://wordpress.org"
-            }
-          ]}
-        >
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit.
-        </Notice>
+          <Notice
+            icon='rm-icon-trash'
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+          </Notice>
 
-        <Notice
-          status='error'
-          actions={[
-            {
-              label: "Read More",
-              url: "https://wordpress.org"
-            }
-          ]}
-        >
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit.
-        </Notice>
+          <Notice
+            status='warning'
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+          </Notice>
 
-        <Notice
-          status='info-grey'
-          actions={[
-            {
-              label: "Read More",
-              url: "https://wordpress.org"
-            }
-          ]}
-        >
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit.
-        </Notice>
-      </div>
-    </>
-  )
-};
+          <Notice
+            status='warning'
+            icon='rm-icon-trash'
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+          </Notice>
 
-function SearchSelectShowcase() {
-  const optionsList = [
-    {
-      key: 'first_option',
-      name: {
-        title: 'First Option Title',
-        subTitle: '%code_text%',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
-      }
-    },
-    {
-      key: 'second_option',
-      name: {
-        title: 'Second Option Title',
-        subTitle: '%code_text%',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
-      }
-    },
-  ]
+          <Notice
+            status='success'
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+          </Notice>
 
-  const [value, setValue] = useState({
-    key: optionsList[0].key,
-    name: optionsList[0].name.title,
-  });
+          <Notice
+            status='success'
+            icon='rm-icon-trash'
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+          </Notice>
 
-  return (
-    <>
-      <div style={{ padding: '1rem 0' }}>
-        <SearchSelectControl
-          label="Search Options"
-          value={value}
-          options={optionsList}
-          onChange={
-            ({ selectedItem: { key, name } }) => setValue({ key, name: name.props.title })
-          }
-        // disabled
-        />
+          <Notice
+            status='error'
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+          </Notice>
+
+          <Notice
+            status='error'
+            icon='rm-icon-trash'
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+          </Notice>
+
+          <Notice
+            status='info-grey'
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+          </Notice>
+
+          <Notice
+            status='info-grey'
+            icon='rm-icon-trash'
+            actions={[
+              {
+                label: "Read More",
+                url: "https://wordpress.org"
+              }
+            ]}
+          >
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+          </Notice>
+        </div>
       </div>
     </>
   )
@@ -635,70 +743,113 @@ function ControlsShowcase() {
   };
 
   return (
-    <>
-      <div className='group-components'>
-        <CheckboxControl
-          label="Select All"
-          checked={areAllChecked}
-          indeterminate={!areAllChecked && areAnyChecked}
-          isIndeterminate
-          onChange={handleMasterCheckboxChange}
-        // disabled
-        />
-        {checkboxes.map((checkbox) => (
-          <CheckboxControl
-            key={checkbox.id}
-            label={checkbox.label}
-            checked={checkbox.checked}
-            onChange={() => handleCheckboxChange(checkbox.id)}
-          // disabled
-          />
-        ))}
-      </div>
+    <div>
+      <h2>Controls</h2>
 
-      <div className="group-components">
-        <CheckboxControl
-          label="Checkbox"
-          checked={isChecked}
-          onChange={setChecked}
-        // disabled
-        />
-      </div>
+      <div className='components-wrapper'>
+        <div>
+          <h4>Select/ Deselect All</h4>
 
-      <div className='group-components'>
-        <RadioControl
-          label="Radio"
-          selected={option}
-          options={[
-            { label: 'Selected', value: 'a' },
-            { label: 'Default', value: 'e' },
-          ]}
-          onChange={(value) => setOption(value)}
-        // disabled
-        />
-      </div>
+          <div className='group-components'>
+            <CheckboxControl
+              label="Select All"
+              checked={areAllChecked}
+              indeterminate={!areAllChecked && areAnyChecked}
+              isIndeterminate
+              onChange={handleMasterCheckboxChange}
+            // disabled
+            />
+            {checkboxes.map((checkbox) => (
+              <CheckboxControl
+                key={checkbox.id}
+                label={checkbox.label}
+                checked={checkbox.checked}
+                onChange={() => handleCheckboxChange(checkbox.id)}
+              // disabled
+              />
+            ))}
+          </div>
+        </div>
 
-      <div className='group-components'>
-        <ToggleControl
-          help='Toggle'
-          label="On"
-          checked={value}
-          onChange={() => setValue((state) => !state)}
-        />
+        <div>
+          <h4>Select One</h4>
+          <div className="group-components">
+            <CheckboxControl
+              label="Checkbox"
+              checked={isChecked}
+              onChange={setChecked}
+            // disabled
+            />
+          </div>
+        </div>
 
-        <ToggleControl
-          label="Off"
-          help='Toggle'
-          checked={value}
-          onChange={() => setValue((state) => !state)}
-          disabled
-        />
+        <div>
+          <h4>Radio Buttons</h4>
+
+          <div className='group-components'>
+            <RadioControl
+              label="Radio"
+              selected={option}
+              options={[
+                { label: 'Selected', value: 'a' },
+                { label: 'Default', value: 'e' },
+              ]}
+              onChange={(value) => setOption(value)}
+            // disabled
+            />
+          </div>
+        </div>
+
+        <div>
+          <h4>Toggle</h4>
+
+          <div className='group-components'>
+            <ToggleControl
+              help='Toggle'
+              label="On"
+              checked={value}
+              onChange={() => setValue((state) => !state)}
+            />
+
+            <ToggleControl
+              label="Off"
+              help='Toggle'
+              checked={value}
+              onChange={() => setValue((state) => !state)}
+              disabled
+            />
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
-function CustomSelectControlShowcase() {
+function TextInputFields() {
+  const optionsList = [
+    {
+      key: 'first_option',
+      name: {
+        title: 'First Option Title',
+        subTitle: '%code_text%',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+      }
+    },
+    {
+      key: 'second_option',
+      name: {
+        title: 'Second Option Title',
+        subTitle: '%code_text%',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+      }
+    },
+  ]
+
+  const [value, setValue] = useState({
+    key: optionsList[0].key,
+    name: optionsList[0].name.title,
+  });
+
   const [size, setSize] = useState({
     key: "large",
     name: "Large",
@@ -724,154 +875,196 @@ function CustomSelectControlShowcase() {
   ]
 
   return (
-    <>
-      <div className='group-components'>
-        <CustomSelectControl
-          label="Label"
-          value={size}
-          options={options}
-          onChange={(target) => setSize(target.selectedItem)}
-        />
-        <CustomSelectControl
-          label="Label"
-          value={size}
-          options={options}
-          onChange={(target) => setSize(target.selectedItem)}
-          disabled
-        />
-      </div>
+    <div>
+      <h2>Text Input Fields</h2>
 
-      <div className='group-components'>
-        <CustomSelectControl
-          value={size}
-          options={options}
-          onChange={(target) => setSize(target.selectedItem)}
-        />
-        <CustomSelectControl
-          value={size}
-          options={options}
-          onChange={(target) => setSize(target.selectedItem)}
-          disabled
-        />
+      <div className='components-wrapper'>
+        <div>
+          <h4>Dropdown Select 3</h4>
+
+          <div className='group-components'>
+            <SearchSelectControl
+              value={value}
+              options={optionsList}
+              onChange={
+                ({ selectedItem: { key, name } }) => setValue({ key, name: name.props.title })
+              }
+            // disabled
+            />
+          </div>
+        </div>
+
+        <div>
+          <h4>Dropdown Select 2</h4>
+
+          <div className='group-components'>
+            <CustomSelectControl
+              label="Label"
+              value={size}
+              options={options}
+              onChange={(target) => setSize(target.selectedItem)}
+            />
+            <CustomSelectControl
+              label="Label"
+              value={size}
+              options={options}
+              onChange={(target) => setSize(target.selectedItem)}
+              disabled
+            />
+          </div>
+        </div>
+
+        <div>
+          <h4>Dropdown Select 1</h4>
+
+          <div className='group-components'>
+            <CustomSelectControl
+              value={size}
+              options={options}
+              onChange={(target) => setSize(target.selectedItem)}
+            />
+            <CustomSelectControl
+              value={size}
+              options={options}
+              onChange={(target) => setSize(target.selectedItem)}
+              disabled
+            />
+          </div>
+        </div>
+
+        <div>
+          <h4>Text Area</h4>
+
+          <div className='group-components'>
+            <TextAreaControl placeholder='Placeholder Text' />
+            <TextAreaControl placeholder='Disabled Field' disabled />
+          </div>
+        </div>
+
+        <div>
+          <h4>Stepper</h4>
+
+          <div className='group-components'>
+            <TextControl type='number' placeholder='Placeholder Text' />
+          </div>
+        </div>
+
+        <div>
+          <h4>Single Line</h4>
+
+          <div className='group-components'>
+            <TextControl placeholder='Placeholder Text' />
+            <TextControl placeholder='Disabled Field' disabled />
+          </div>
+
+          <div className='group-components'>
+            <TextControl isSuccess />
+            <TextControl value='email@website.com' isError />
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   )
-}
-
-function TextAreaControlShowcase() {
-  return (
-    <>
-      <div className='group-components'>
-        <TextAreaControl placeholder='Placeholder Text' />
-        <TextAreaControl placeholder='Disabled Field' disabled />
-      </div>
-    </>
-  )
-}
-
-function TextControlShowcase() {
-  return (
-    <>
-      <div className='group-components'>
-        <TextControl type='number' placeholder='Placeholder Text' />
-        <TextControl placeholder='Placeholder Text' />
-        <TextControl placeholder='Disabled Field' disabled />
-      </div>
-
-      <div className='group-components'>
-        <TextControl isSuccess />
-        <TextControl value='email@website.com' isError />
-      </div>
-    </>
-  )
-}
+};
 
 function ButtonsShowcase() {
   return (
     <div>
-      <h4>Text Buttons</h4>
+      <h2>Text Buttons</h2>
 
       <div>
-        <h3>Primary</h3>
+        <h4>Primary</h4>
 
-        <div className='group-components'>
-          <Button size='small'>Label</Button>
+        <div className='components-wrapper'>
+          <div className='button-group'>
+            <Button size='small'>Label</Button>
 
-          <Button icon='rm-icon-trash' iconPosition='right'>Label</Button>
+            <Button icon='rm-icon-trash' iconPosition='right'>Label</Button>
 
-          <Button size='large' children={'Label'} />
+            <Button size='large' children={'Label'} />
 
-          <Button size='large' disabled>Label</Button>
+            <Button size='large' disabled>Label</Button>
+          </div>
         </div>
       </div>
 
       <div>
-        <h3>Primary Outline</h3>
+        <h4>Primary Outline</h4>
 
-        <div className='group-components'>
-          <Button variant='primary-outline' size='small'>Label</Button>
+        <div className='components-wrapper'>
+          <div className='button-group'>
+            <Button variant='primary-outline' size='small'>Label</Button>
 
-          <Button variant='primary-outline' icon='rm-icon-trash'>Label</Button>
+            <Button variant='primary-outline' icon='rm-icon-trash'>Label</Button>
 
-          <Button variant='primary-outline' size='large'>Label</Button>
+            <Button variant='primary-outline' size='large'>Label</Button>
 
-          <Button variant='primary-outline' size='large' disabled>Label</Button>
+            <Button variant='primary-outline' size='large' disabled>Label</Button>
+          </div>
         </div>
       </div>
 
       <div>
-        <h3>Secondary</h3>
+        <h4>Secondary</h4>
 
-        <div className='group-components'>
-          <Button variant='secondary' size='small'>Label</Button>
+        <div className='components-wrapper'>
+          <div className='button-group'>
+            <Button variant='secondary' size='small'>Label</Button>
 
-          <Button variant='secondary' icon='rm-icon-trash'>Label</Button>
+            <Button variant='secondary' icon='rm-icon-trash'>Label</Button>
 
-          <Button variant='secondary' size='large'>Label</Button>
+            <Button variant='secondary' size='large'>Label</Button>
 
-          <Button variant='secondary' size='large' disabled>Label</Button>
+            <Button variant='secondary' size='large' disabled>Label</Button>
+          </div>
         </div>
       </div>
 
       <div>
-        <h3>Secondary Grey</h3>
+        <h4>Secondary Grey</h4>
 
-        <div className='group-components'>
-          <Button variant='secondary-grey' size='small'>Label</Button>
+        <div className='components-wrapper'>
+          <div className='button-group'>
+            <Button variant='secondary-grey' size='small'>Label</Button>
 
-          <Button variant='secondary-grey' icon='rm-icon-trash'>Label</Button>
+            <Button variant='secondary-grey' icon='rm-icon-trash'>Label</Button>
 
-          <Button variant='secondary-grey' size='large'>Label</Button>
+            <Button variant='secondary-grey' size='large'>Label</Button>
 
-          <Button variant='secondary-grey' size='large' disabled>Label</Button>
+            <Button variant='secondary-grey' size='large' disabled>Label</Button>
+          </div>
         </div>
       </div>
 
       <div>
-        <h3>Tertiary Outline</h3>
+        <h4>Tertiary Outline</h4>
 
-        <div className='group-components'>
-          <Button variant='tertiary-outline' size='small'>Label</Button>
+        <div className='components-wrapper'>
+          <div className='button-group'>
+            <Button variant='tertiary-outline' size='small'>Label</Button>
 
-          <Button variant='tertiary-outline' icon='rm-icon-trash'>Label</Button>
+            <Button variant='tertiary-outline' icon='rm-icon-trash'>Label</Button>
 
-          <Button variant='tertiary-outline' size='large'>Label</Button>
+            <Button variant='tertiary-outline' size='large'>Label</Button>
 
-          <Button variant='tertiary-outline' size='large' disabled>Label</Button>
+            <Button variant='tertiary-outline' size='large' disabled>Label</Button>
+          </div>
         </div>
       </div>
 
       <div>
-        <h3>Tertiary</h3>
+        <h4>Tertiary</h4>
 
-        <div className='group-components'>
-          <Button variant='tertiary' size='small'>Label</Button>
+        <div className='components-wrapper'>
+          <div className='button-group'>
+            <Button variant='tertiary' icon='rm-icon-trash' size='small' />
 
-          <Button variant='tertiary' icon='rm-icon-trash'>Label</Button>
+            <Button variant='tertiary' icon='rm-icon-trash' />
 
-          <Button variant='tertiary' size='large'>Label</Button>
+            <Button variant='tertiary' icon='rm-icon-trash' size='large' />
 
-          <Button variant='tertiary' size='large' disabled>Label</Button>
+            <Button variant='tertiary' icon='rm-icon-trash' size='large' disabled />
+          </div>
         </div>
       </div>
     </div>

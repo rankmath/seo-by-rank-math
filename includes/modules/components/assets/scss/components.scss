@@ -1,18 +1,35 @@
-.components-container {
+.container {
   background-color: #fff;
   padding: 3rem;
+
+  .components-wrapper {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='11' ry='11' stroke='%23E5E5E587' stroke-width='2' stroke-dasharray='0.5%2c 5' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-radius: 11px;
+    padding: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .margin-top {
+    margin-top: 3rem;
+  }
 
   .group-components {
     display: flex;
     align-items: end;
     gap: 1rem;
-    margin: 0 0 3rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .button-group {
+    display: flex;
+    align-items: end;
+    gap: 1rem;
+    margin: 1rem 0;
   }
 
   .notice-group {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 30rem;
   }
 }
