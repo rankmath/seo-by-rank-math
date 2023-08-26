@@ -102,7 +102,7 @@ function ConnectionStatus() {
         <div>
           <h4>Light Indicators</h4>
 
-          <div className="group-components">
+          <div className="components-group">
             <LightIndicator />
             <LightIndicator status='red' />
             <LightIndicator status='yellow' />
@@ -114,17 +114,17 @@ function ConnectionStatus() {
         <div>
           <h4>Connection</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <ConnectionButton status='connect'>Connect</ConnectionButton>
             <ConnectionButton status='connected'>Connected</ConnectionButton>
           </div>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <ConnectionButton status='disconnect'>Disconnect</ConnectionButton>
             <ConnectionButton status='disconnected'>Disconnected</ConnectionButton>
           </div>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <ConnectionButton status='reconnect'>Reconnect</ConnectionButton>
             <ConnectionButton status='connected'>Connected</ConnectionButton>
           </div>
@@ -143,7 +143,7 @@ function Scores() {
         <div>
           <h4>Content AI Score Bar</h4>
 
-          <div className="group-components">
+          <div className="components-group">
             <ContentAIScoreBar value={20} />
           </div>
         </div>
@@ -152,13 +152,13 @@ function Scores() {
         <div>
           <h4>Snippet Editor Score Bar</h4>
 
-          <div className="group-components">
+          <div className="components-group">
             <EditorScoreBar value={23} />
           </div>
-          <div className="group-components">
+          <div className="components-group">
             <EditorScoreBar value={52} />
           </div>
-          <div className="group-components">
+          <div className="components-group">
             <EditorScoreBar value={94} />
           </div>
         </div>
@@ -166,7 +166,7 @@ function Scores() {
         <div>
           <h4 className='margin-top'>Keyword Suggestions</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <KeywordButton />
 
             <KeywordButton keyword='Increase' severity='neutral' />
@@ -178,7 +178,7 @@ function Scores() {
         <div>
           <h4 className='margin-top'>Rank Math Buttons</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <ScoreButton>94/100</ScoreButton>
 
             <ScoreButton severity='neutral'>52/100</ScoreButton>
@@ -191,7 +191,7 @@ function Scores() {
         <div>
           <h4 className='margin-top'>Content AI Buttons</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <ScoreButton company='Content AI'>94/100</ScoreButton>
 
             <ScoreButton company='Content AI' severity='neutral'>52/100</ScoreButton>
@@ -210,7 +210,7 @@ function AnchorTagStatusShowcase() {
       <h2>Anchor Tag Status</h2>
 
       <div className='components-wrapper'>
-        <div className='group-components'>
+        <div className='components-group'>
           <AnchorTagStatus>All Good</AnchorTagStatus>
 
           <AnchorTagStatus severity='warning' children='Warning' />
@@ -233,7 +233,7 @@ function FilterAndSwitchTabs() {
         <div>
           <h4>Switch Tabs - Black</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <SwitchTaps
               iconOnly
               tabs={[
@@ -254,7 +254,7 @@ function FilterAndSwitchTabs() {
               }
             /></div>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <SwitchTaps
               tabs={[
                 {
@@ -278,7 +278,7 @@ function FilterAndSwitchTabs() {
         <div>
           <h4>Switch Tabs - Blue</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <SwitchTaps
               iconOnly
               variant='blue'
@@ -300,7 +300,7 @@ function FilterAndSwitchTabs() {
               }
             /></div>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <SwitchTaps
               variant='blue'
               tabs={[
@@ -326,7 +326,7 @@ function FilterAndSwitchTabs() {
         <div>
           <h4>Filter Menu - Black</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <FilterMenus
               tabs={[
                 {
@@ -356,7 +356,7 @@ function FilterAndSwitchTabs() {
         <div>
           <h4>Filter Menu - Blue</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <FilterMenus
               variant='blue'
               tabs={[
@@ -396,7 +396,7 @@ function MenuListShowcase() {
         <div>
           <h4>Choose a Block Popup</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <MenuListPopup
               menuItems={[
                 { title: 'Frist Option Item', icon: 'rm-icon-trash' },
@@ -411,7 +411,7 @@ function MenuListShowcase() {
         <div>
           <h4>Sidebar Menu List</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <SidebarMenuList
               menuItems={[
                 { title: 'Frist Option List Item', icon: 'rm-icon-trash' },
@@ -436,7 +436,7 @@ function VerticalTabsShowcase() {
         <div>
           <h4>Single Section Column</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <SingleSectionTabPanel
               label='Title'
               menuItems={[
@@ -452,7 +452,7 @@ function VerticalTabsShowcase() {
         <div>
           <h4>Multi Section Column </h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <MultiSectionTabPanel>
               <SingleSectionTabPanel
                 menuItems={[
@@ -489,23 +489,20 @@ function HorizontalTabs() {
         <h4>Sidebar Tabs</h4>
 
         <div>
-          <h5>Variant 1</h5>
-          <div className='group-components'>
+          <h4>Variant 1</h4>
+          <div className='components-group'>
             <SidebarTabPanel
               tabs={[
                 {
                   name: 'tab1',
-                  title: 'First',
                   icon: <TabPanelWithIcon icon='rm-icon-trash' title='First' />
                 },
                 {
                   name: 'tab2',
-                  title: 'Second',
                   icon: <TabPanelWithIcon icon='rm-icon-trash' title='Second' />
                 },
                 {
                   name: 'tab3',
-                  title: 'Third',
                   icon: <TabPanelWithIcon icon='rm-icon-trash' title='Third' />
                 }
               ]}
@@ -519,8 +516,8 @@ function HorizontalTabs() {
             />
           </div>
 
-          <h5>Variant 2</h5>
-          <div className='group-components'>
+          <h4>Variant 2</h4>
+          <div className='components-group'>
             <SidebarTabPanel
               tabs={[
                 {
@@ -551,7 +548,7 @@ function HorizontalTabs() {
         <div>
           <h4>Page & Modal Tabs</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <PageTabPanel
               tabs={[
                 {
@@ -750,7 +747,7 @@ function ControlsShowcase() {
         <div>
           <h4>Select/ Deselect All</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <CheckboxControl
               label="Select All"
               checked={areAllChecked}
@@ -773,7 +770,7 @@ function ControlsShowcase() {
 
         <div>
           <h4>Select One</h4>
-          <div className="group-components">
+          <div className="components-group">
             <CheckboxControl
               label="Checkbox"
               checked={isChecked}
@@ -786,7 +783,7 @@ function ControlsShowcase() {
         <div>
           <h4>Radio Buttons</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <RadioControl
               label="Radio"
               selected={option}
@@ -803,7 +800,7 @@ function ControlsShowcase() {
         <div>
           <h4>Toggle</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <ToggleControl
               help='Toggle'
               label="On"
@@ -882,7 +879,7 @@ function TextInputFields() {
         <div>
           <h4>Dropdown Select 3</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <SearchSelectControl
               value={value}
               options={optionsList}
@@ -897,7 +894,7 @@ function TextInputFields() {
         <div>
           <h4>Dropdown Select 2</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <CustomSelectControl
               label="Label"
               value={size}
@@ -917,7 +914,7 @@ function TextInputFields() {
         <div>
           <h4>Dropdown Select 1</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <CustomSelectControl
               value={size}
               options={options}
@@ -935,7 +932,7 @@ function TextInputFields() {
         <div>
           <h4>Text Area</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <TextAreaControl placeholder='Placeholder Text' />
             <TextAreaControl placeholder='Disabled Field' disabled />
           </div>
@@ -944,7 +941,7 @@ function TextInputFields() {
         <div>
           <h4>Stepper</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <TextControl type='number' placeholder='Placeholder Text' />
           </div>
         </div>
@@ -952,12 +949,12 @@ function TextInputFields() {
         <div>
           <h4>Single Line</h4>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <TextControl placeholder='Placeholder Text' />
             <TextControl placeholder='Disabled Field' disabled />
           </div>
 
-          <div className='group-components'>
+          <div className='components-group'>
             <TextControl isSuccess />
             <TextControl value='email@website.com' isError />
           </div>
