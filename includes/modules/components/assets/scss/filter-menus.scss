@@ -2,65 +2,67 @@
 @import './partials/variables';
 
 
-.filter-menus .components-tab-panel__tabs {
-  border: none;
-  width: fit-content;
-  gap: 7px;
-  
-  .components-tab-panel__tabs-item{
-    color: #999999;
-    padding: 6px 12px;
-    background-color: #F2F2F2;
-    border-radius: 0.15rem;
-    height: fit-content;
+.filter-menus{
+  .components-tab-panel__tabs {
+    border: none;
+    width: fit-content;
+    gap: 7px;
+    
+    .components-tab-panel__tabs-item{
+      color: #999999;
+      padding: 6px 12px;
+      background-color: #F2F2F2;
+      border-radius: 0.15rem;
+      height: fit-content;
 
-    &:focus:not(:disabled) {
-      box-shadow: none;
-    }
-
-    &.is-active{
-      color: white;
-      box-shadow: none;
-
-      &:focus {
+      &:focus:not(:disabled) {
         box-shadow: none;
-      }
-    }
-  }   
-}
-
-.is-black {
-  &.filter-menus .components-tab-panel__tabs {
-    .components-tab-panel__tabs-item{ 
-      &:hover {
-        color: $color--tab-is-black--hover;
-        background-color: $color-bg--tab-is-black--hover;
       }
 
       &.is-active{
-        background-color: $color-bg--tab-is-black--active;
+        color: white;
+        box-shadow: none;
 
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }   
+  }
+
+  &.is-black {
+    .components-tab-panel__tabs {
+      .components-tab-panel__tabs-item{ 
         &:hover {
-          color: $color--tab-is-black--active;
+          color: $color--tab-is-black--hover;
+          background-color: $color-bg--tab-is-black--hover;
+        }
+
+        &.is-active{
+          background-color: $color-bg--tab-is-black--active;
+
+          &:hover {
+            color: $color--tab-is-black--active;
+          }
         }
       }
     }
   }
-}
 
-.is-blue {
-  &.filter-menus .components-tab-panel__tabs {
-    .components-tab-panel__tabs-item{ 
-      &:hover {
-        color: var(--wp-admin-theme-color);
-        background-color: $color-bg--hover-secondary;
-      }
-
-      &.is-active{
-        background-color: var(--wp-admin-theme-color);
-
+  &.is-blue {
+    .components-tab-panel__tabs {
+      .components-tab-panel__tabs-item{ 
         &:hover {
-          color: white;
+          color: var(--wp-admin-theme-color);
+          background-color: $color-bg--hover-secondary;
+        }
+
+        &.is-active{
+          background-color: var(--wp-admin-theme-color);
+
+          &:hover {
+            color: white;
+          }
         }
       }
     }

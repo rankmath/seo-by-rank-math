@@ -73,7 +73,7 @@ const AllComponents = () => {
 function FileUploadersShowcase() {
   return (
     <>
-      <h2>File Uploaders</h2>
+      <h2>FILE UPLOADERS</h2>
 
       <div className='components-wrapper'>
         <div>
@@ -95,7 +95,7 @@ function FileUploadersShowcase() {
 function ConnectionStatus() {
   return (
     <>
-      <h2>Connection Status</h2>
+      <h2>CONNECTION STATUS</h2>
 
       <div className='components-wrapper'>
 
@@ -137,7 +137,7 @@ function ConnectionStatus() {
 function Scores() {
   return (
     <>
-      <h2>Scores</h2>
+      <h2>SCORES</h2>
 
       <div className='components-wrapper'>
         <div>
@@ -207,7 +207,7 @@ function Scores() {
 function AnchorTagStatusShowcase() {
   return (
     <>
-      <h2>Anchor Tag Status</h2>
+      <h2>ANCHOR TAG STATUS</h2>
 
       <div className='components-wrapper'>
         <div className='components-group'>
@@ -227,7 +227,7 @@ function AnchorTagStatusShowcase() {
 function FilterAndSwitchTabs() {
   return (
     <>
-      <h2>Filter And Switch Tabs</h2>
+      <h2>FILTER AND SWITCH TABS</h2>
 
       <div className='components-wrapper'>
         <div>
@@ -390,7 +390,7 @@ function FilterAndSwitchTabs() {
 function MenuListShowcase() {
   return (
     <>
-      <h2>Menu List Items</h2>
+      <h2>MENU LIST ITEMS</h2>
 
       <div className='components-wrapper'>
         <div>
@@ -430,7 +430,7 @@ function MenuListShowcase() {
 function VerticalTabsShowcase() {
   return (
     <>
-      <h2>Vertical Tabs</h2>
+      <h2>VERTICAL TABS</h2>
 
       <div className='components-wrapper'>
         <div>
@@ -483,7 +483,7 @@ function VerticalTabsShowcase() {
 function HorizontalTabs() {
   return (
     <div>
-      <h2>Horizontal Tabs</h2>
+      <h2>HORIZONTAL TABS</h2>
 
       <div className='components-wrapper'>
         <h4>Sidebar Tabs</h4>
@@ -575,7 +575,7 @@ function HorizontalTabs() {
 function NoticeShowcase() {
   return (
     <>
-      <h2>Notice Banners</h2>
+      <h2>NOTICE BANNERS</h2>
 
       <div className='components-wrapper'>
         <div className='notice-group'>
@@ -741,7 +741,7 @@ function ControlsShowcase() {
 
   return (
     <div>
-      <h2>Controls</h2>
+      <h2>CONTROLS</h2>
 
       <div className='components-wrapper'>
         <div>
@@ -873,7 +873,7 @@ function TextInputFields() {
 
   return (
     <div>
-      <h2>Text Input Fields</h2>
+      <h2>INPUT FIELDS</h2>
 
       <div className='components-wrapper'>
         <div>
@@ -967,7 +967,7 @@ function TextInputFields() {
 function ButtonsShowcase() {
   return (
     <div>
-      <h2>Text Buttons</h2>
+      <h2>BUTTONS</h2>
 
       <div>
         <h4>Primary</h4>

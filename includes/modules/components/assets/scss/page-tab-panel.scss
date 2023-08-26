@@ -27,58 +27,60 @@
     }
   }
 
-  .page-tab-panel__content .components-tab-panel__tabs {
-    gap: 10px;
-    border: none;
-    background-color: transparent;
-    
-    .components-tab-panel__tabs-item{
-      color: #5F5F5F;
-      padding: 3px 16px;
+  .page-tab-panel__content {
+    .components-tab-panel__tabs {
+      gap: 10px;
+      border: none;
+      background-color: transparent;
+      
+      .components-tab-panel__tabs-item{
+        color: #5F5F5F;
+        padding: 3px 16px;
 
-      &:hover {
-        color: var(--wp-admin-theme-color);
+        &:hover {
+          color: var(--wp-admin-theme-color);
 
-        .panel-has-icon {
-          .title {
-            color: var(--wp-admin-theme-color);
+          .panel-has-icon {
+            .title {
+              color: var(--wp-admin-theme-color);
+            }
           }
-        }
-      }
-
-      .panel-has-icon {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 1rem;
-
-        .title {
-          font-size: 13px;
-          font-weight: normal;
-          color: #5F5F5F;
-          display: block;
-        }
-      }
-
-      &:focus:not(:disabled) {
-        box-shadow: none;
-      }
-
-      &.is-active{
-        color: black;
-        transition: 0.2s ease-in-out all;
-
-        &:focus {
-          box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) transparent, inset 0 -1.5px 0 0 var(--wp-admin-theme-color);
-          position: relative;
         }
 
         .panel-has-icon {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 1rem;
+
           .title {
-            color: black;
+            font-size: 13px;
+            font-weight: normal;
+            color: #5F5F5F;
+            display: block;
           }
         }
-      }
-    }   
-  }
+
+        &:focus:not(:disabled) {
+          box-shadow: none;
+        }
+
+        &.is-active{
+          color: black;
+          transition: 0.2s ease-in-out all;
+
+          &:focus {
+            box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) transparent, inset 0 -1.5px 0 0 var(--wp-admin-theme-color);
+            position: relative;
+          }
+
+          .panel-has-icon {
+            .title {
+              color: black;
+            }
+          }
+        }
+      }   
+    }
+  } 
 }
