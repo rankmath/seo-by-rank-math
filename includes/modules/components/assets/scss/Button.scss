@@ -6,6 +6,7 @@ $color-bg--primary-outline--disabled--active: #E6F2F9;
 $color--secondary: gray;
 $color-box-shadow--secondary: gray;
 $color-border--tertiary-outline: #C8C8C8;
+$color-border--tertiary-outline--focus: #949494;
 $color--tertiary: gray;
 
 
@@ -48,7 +49,8 @@ $color--tertiary: gray;
     }
 
     &:active, &:focus {
-      outline-color: gray;
+      box-shadow: inset 0 0 0 1.5px gray;
+      outline: none;
     }
 
     &:active:not(:disabled) {
@@ -107,7 +109,7 @@ $color--tertiary: gray;
     }
 
     &:active, &:focus {
-      outline-color: var(--wp-admin-theme-color);
+      box-shadow: inset 0 0 0 1.5px var(--wp-admin-theme-color);
       background-color: $color-bg--primary-outline--hover;
     }
 
@@ -176,7 +178,10 @@ $color--tertiary: gray;
     box-shadow: inset 0 0 0 1px $color-border--tertiary-outline;
     
     &:hover:not(:disabled) {
-      box-shadow: inset 0 0 0 1px $color-border--tertiary-outline;
+      box-shadow: inset 0 0 0 1px $color-border--tertiary-outline--focus;
+    }
+    &:focus:not(:disabled) {
+      box-shadow: inset 0 0 0 1.5px $color-border--tertiary-outline--focus;
     }
 
     &:active:not(:disabled) {
