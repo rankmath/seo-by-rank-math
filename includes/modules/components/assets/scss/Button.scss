@@ -160,7 +160,7 @@ $color--tertiary: gray;
     }
 
     &:active, &:focus {
-      box-shadow: inset 0 0 0 1px #fff, 0 0 0 var(--wp-admin-border-width-focus) gray;
+      box-shadow: inset 0 0 0 1.5px gray;
     }
 
     &:disabled,
