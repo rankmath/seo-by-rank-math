@@ -44,25 +44,25 @@ const AllComponents = () => {
 
       <FileUploadersShowcase />
 
-      <ConnectionStatus />
+      <ConnectionStatusShowcase />
 
-      <Scores />
+      <ScoresShowcase />
 
       <AnchorTagStatusShowcase />
 
-      <FilterAndSwitchTabs />
+      <FilterAndSwitchTabsShowcase />
 
       <MenuListShowcase />
 
       <VerticalTabsShowcase />
 
-      <HorizontalTabs />
+      <HorizontalTabsShowcase />
 
       <NoticeShowcase />
 
       <ControlsShowcase />
 
-      <TextInputFields />
+      <TextInputFieldsShowcase />
 
       <ButtonsShowcase />
 
@@ -92,7 +92,7 @@ function FileUploadersShowcase() {
   )
 };
 
-function ConnectionStatus() {
+function ConnectionStatusShowcase() {
   return (
     <>
       <h2>CONNECTION STATUS</h2>
@@ -134,7 +134,7 @@ function ConnectionStatus() {
   )
 };
 
-function Scores() {
+function ScoresShowcase() {
   return (
     <>
       <h2>SCORES</h2>
@@ -224,7 +224,7 @@ function AnchorTagStatusShowcase() {
   )
 };
 
-function FilterAndSwitchTabs() {
+function FilterAndSwitchTabsShowcase() {
   return (
     <>
       <h2>FILTER AND SWITCH TABS</h2>
@@ -480,7 +480,7 @@ function VerticalTabsShowcase() {
   )
 };
 
-function HorizontalTabs() {
+function HorizontalTabsShowcase() {
   return (
     <div>
       <h2>HORIZONTAL TABS</h2>
@@ -822,7 +822,7 @@ function ControlsShowcase() {
   );
 };
 
-function TextInputFields() {
+function TextInputFieldsShowcase() {
   const optionsList = [
     {
       key: 'first_option',
