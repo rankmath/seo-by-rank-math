@@ -4,13 +4,13 @@
     align-items: center;
     justify-content: space-between;
 
-    .option__heading-title {
+    &-title {
       font-weight: normal;
       font-size: 13px;
       margin: 0px;
     }
 
-    .option__heading-subtitle {
+    &-subtitle {
       background-color: #F4F4F4;
       font-size: 13px;
       font-weight: 600;

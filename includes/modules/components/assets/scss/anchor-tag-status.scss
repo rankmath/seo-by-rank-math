@@ -9,7 +9,8 @@
       box-shadow: none;
       outline: none;
 
-      &:hover:not(:disabled), &:focus:not(:disabled) {
+      &:hover:not(:disabled), 
+      &:focus:not(:disabled) {
         box-shadow: none;
         outline: none;
       }
@@ -18,7 +19,8 @@
         color: #62AE60;
         background-color: #E4F4E4;
 
-        &:hover:not(:disabled), &:focus {
+        &:hover:not(:disabled), 
+        &:focus {
           background-color: #D7EFD7;
           color: #489F46;
         }
@@ -33,7 +35,8 @@
         color: #E29E3C;
         background-color: #FFF0DA;
 
-        &:hover:not(:disabled), &:focus {
+        &:hover:not(:disabled), 
+        &:focus {
           background-color: #FFEACC;
           color: #D99124;
         }
@@ -48,7 +51,8 @@
         color: #E47E78;
         background-color: #FCEBEA;
 
-        &:hover:not(:disabled), &:focus {
+        &:hover:not(:disabled), 
+        &:focus {
           background-color: #FBE1DF;
           color: #DA6961;
         }
@@ -63,7 +67,8 @@
         color: #787878;
         background-color: #F2F2F2;
 
-        &:hover:not(:disabled), &:focus {
+        &:hover:not(:disabled), 
+        &:focus {
           background-color: #E9E9E9;
           color: #383838;
         }

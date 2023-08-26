@@ -76,7 +76,7 @@
     background-color: #F2F2F2;
     height: 8rem;
 
-    .image-uploader__preview-title {
+    &-title {
       font-size: 0.83rem;
       color: #9B9B9B;
       text-transform: uppercase;
@@ -89,7 +89,7 @@
       padding: 0 16px;
     }
 
-    .image-uploader__preview-img {
+    &-img {
       width: 100%;
       height: 100%;
       object-fit: cover;

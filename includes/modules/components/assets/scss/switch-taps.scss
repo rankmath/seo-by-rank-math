@@ -10,7 +10,7 @@
     gap: 7px;
     padding: 4px;
     
-    .components-tab-panel__tabs-item{
+    &-item {
       color: #999999;
       padding: 0px 10px;
       border-radius: 0.15rem;
@@ -51,7 +51,7 @@
         border: 1px solid $color--tab-is-black--hover;
       }
 
-      .components-tab-panel__tabs-item{ 
+      &-item { 
         &:hover {
           color: $color--tab-is-black--hover;
           background-color: $color-bg--tab-is-black--hover;
@@ -86,7 +86,7 @@
         border: 1px solid var(--wp-admin-theme-color);
       }
 
-      .components-tab-panel__tabs-item{ 
+      &-item { 
         &:hover {
           color: var(--wp-admin-theme-color);
           background-color: $color-bg--hover-secondary;
@@ -117,7 +117,7 @@
 
   &.icon-only {
     .components-tab-panel__tabs {
-      .components-tab-panel__tabs-item{
+      &-item {
         padding: 6px;
         
         .panel-has-icon {
