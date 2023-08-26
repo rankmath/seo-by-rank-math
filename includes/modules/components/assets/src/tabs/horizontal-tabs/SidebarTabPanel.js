@@ -8,14 +8,14 @@ import '../../../scss/sidebar-tab-panel.scss';
  */
 import { TabPanel } from '@wordpress/components';
 
-export default function ({
+export default ({
   tabs = [],
   children = () => { },
   className,
   onSelect,
   initialTabName,
   ...rest
-}) {
+}) => {
   const tabPanelProps = {
     className: `sidebar-tab-panel ${className}`,
     tabs,

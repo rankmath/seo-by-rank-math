@@ -13,11 +13,11 @@ import '../../scss/editor-score-bar.scss';
  */
 import { RangeControl } from '@wordpress/components';
 
-export default function ({
+export default ({
   value,
   className,
   ...rest
-}) {
+}) => {
   const getButtonClasses = () => {
     return classNames(
       'editor-score-bar',

@@ -8,13 +8,13 @@ import '../../../scss/single-section-tab-panel.scss';
 */
 import { MenuGroup, MenuItem } from '@wordpress/components';
 
-export default function ({
+export default ({
   menuItems = [],
   label,
   className,
   children,
   ...rest
-}) {
+}) => {
   const menuGroupProps = {
     className: `single-section-tab-panel ${className}`,
     label,

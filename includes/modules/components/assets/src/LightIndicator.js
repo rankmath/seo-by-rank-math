@@ -4,7 +4,7 @@
 import '../scss/light-indicator.scss'
 
 
-export default function ({ status = 'off' }) {
+export default ({ status = 'off' }) => {
   const iconClasses = {
     green: 'is-green',
     red: 'is-red',

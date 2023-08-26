@@ -9,7 +9,7 @@ import '../../scss/image-uploader.scss'
 import { RangeControl, FormFileUpload, Button } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
-export default function () {
+export default () => {
   const [imageUploadingPercentage, setImageUploadingPercentage] = useState(0);
   const [imageIsUploading, setImageIsUploading] = useState(false);
   const [imageUploaded, setImageUploaded] = useState(false);

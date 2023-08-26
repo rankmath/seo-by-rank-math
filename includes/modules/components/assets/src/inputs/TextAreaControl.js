@@ -8,7 +8,7 @@ import '../../scss/textarea-control.scss';
  */
 import { TextareaControl } from '@wordpress/components';
 
-export default function ({
+export default ({
   onChange,
   value,
   rows,
@@ -18,7 +18,7 @@ export default function ({
   placeholder,
   disabled,
   ...rest
-}) {
+}) => {
   const textControlProps = {
     onChange,
     value,

@@ -40,7 +40,7 @@ module.exports = {
 			pragma: "wp"
 		},
 		jsdoc: {
-			preferredTypes: [ "jqXHR" ]
+			preferredTypes: ["jqXHR"]
 		}
 	},
 	rules: {
@@ -155,7 +155,7 @@ module.exports = {
 		"padded-blocks": ["error", "never"],
 		"prefer-const": "error",
 		"quote-props": ["error", "as-needed"],
-		"semi": [ 1, "never" ],
+		"semi": [1, "never"],
 		"semi-spacing": "error",
 		"space-before-blocks": ["error", "always"],
 		"space-before-function-paren": ["error", "never"],

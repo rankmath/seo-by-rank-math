@@ -9,13 +9,13 @@ import '../../scss/keyword-button.scss'
 import { Button, Popover } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
-export default function ({
+export default ({
   severity = 'good',
   keyword = 'Keyword',
   score = '94/100',
   className,
   ...rest
-}) {
+}) => {
   const [isCopied, setIsCopied] = useState(false);
   const groupedClassNames = `${className} ${severity}`;
 

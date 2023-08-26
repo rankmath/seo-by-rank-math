@@ -13,7 +13,7 @@ import '../../scss/custom-select-control.scss';
  */
 import { CustomSelectControl, Disabled } from '@wordpress/components';
 
-export default function ({
+export default ({
   label,
   value,
   onChange,
@@ -22,7 +22,7 @@ export default function ({
   disabled = false,
   className,
   ...rest
-}) {
+}) => {
   const getSelectControlClasses = () => {
     return classNames(
       className,

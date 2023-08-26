@@ -8,12 +8,12 @@ import '../../../scss/menu-list-popup.scss';
 */
 import { MenuGroup, MenuItem } from '@wordpress/components';
 
-export default function ({
+export default ({
   menuItems = [],
   className,
   children,
   ...rest
-}) {
+}) => {
   const menuGroupProps = {
     className: `menu-list-popup ${className}`,
     children,

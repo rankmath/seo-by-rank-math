@@ -15,7 +15,7 @@ import SearchSelectOption from './SearchSelectOption';
 import { CustomSelectControl, Disabled, SearchControl } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element'
 
-export default function ({
+export default ({
   disabled = false,
   className = 'search-select-control',
   label,
@@ -24,7 +24,7 @@ export default function ({
   options,
   size,
   ...rest
-}) {
+}) => {
   const [searchValue, setSearchValue] = useState('');
   const filteredOptions = searchValue
     ? options.filter((item) =>

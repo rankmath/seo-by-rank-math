@@ -1,4 +1,4 @@
-export default function ({ title, icon }) {
+export default ({ title, icon }) => {
   return (
     <div className="panel-has-icon">
       <i className={icon}></i>

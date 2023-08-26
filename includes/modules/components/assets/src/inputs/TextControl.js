@@ -14,7 +14,7 @@ import '../../scss/text-control.scss';
 import { TextControl } from '@wordpress/components';
 import { useRef } from '@wordpress/element';
 
-export default function ({
+export default ({
   type = 'text',
   placeholder,
   onChange,
@@ -27,7 +27,7 @@ export default function ({
   isSuccess,
   isError,
   ...rest
-}) {
+}) => {
   const inputRef = useRef(null);
 
   const handleIncrement = () => {

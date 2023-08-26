@@ -8,7 +8,7 @@ import '../../scss/radio-control.scss';
  */
 import { RadioControl } from '@wordpress/components';
 
-export default function ({
+export default ({
   hideLabelFromVision = false,
   onChange = () => { },
   label,
@@ -16,7 +16,7 @@ export default function ({
   selected,
   options,
   ...rest
-}) {
+}) => {
   const radioControlProps = {
     hideLabelFromVision,
     onChange,

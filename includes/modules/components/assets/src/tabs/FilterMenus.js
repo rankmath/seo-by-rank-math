@@ -13,7 +13,7 @@ import '../../scss/filter-menus.scss';
  */
 import { TabPanel } from '@wordpress/components';
 
-export default function ({
+export default ({
   tabs = [],
   children = () => { },
   variant = 'black',
@@ -21,7 +21,7 @@ export default function ({
   onSelect,
   initialTabName,
   ...rest
-}) {
+}) => {
   const getTabPanelClasses = () => {
     return classNames(
       className,

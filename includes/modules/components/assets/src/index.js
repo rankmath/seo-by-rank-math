@@ -41,11 +41,6 @@ import SegmentedSelectControl from './select/SegmentedSelectControl';
 const AllComponents = () => {
   return (
     <div className='components-container'>
-      <div className="group-components">
-        <SegmentedSelectControl
-          menuItems={['Select Option 1', 'Select Option 2', 'Select Option 3']} />
-      </div>
-
 
       <FileUploadersShowcase />
 

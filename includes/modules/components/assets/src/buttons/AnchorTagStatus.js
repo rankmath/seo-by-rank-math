@@ -8,7 +8,7 @@ import '../../scss/anchor-tag-status.scss'
  */
 import { Button } from '@wordpress/components';
 
-export default function ({
+export default ({
   severity = 'good',
   href = '',
   target = '_blank',
@@ -16,7 +16,7 @@ export default function ({
   className,
   children,
   ...rest
-}) {
+}) => {
   const groupedClassNames = `anchor-tag-status ${className} ${severity}`;
 
   const buttonProps = {

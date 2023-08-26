@@ -8,7 +8,7 @@ import '../../scss/segmented-select-control.scss'
  */
 import { MenuGroup, MenuItem } from '@wordpress/components';
 
-export default function ({ menuItems }) {
+export default ({ menuItems }) => {
   return (
     <MenuGroup>
       {menuItems.map(item => (

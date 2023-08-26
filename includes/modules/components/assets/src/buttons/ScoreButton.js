@@ -13,12 +13,12 @@ import '../../scss/score-button.scss'
  */
 import { Button } from '@wordpress/components';
 
-export default function ({
+export default ({
   company = 'Rank Math',
   severity = 'good',
   className,
   ...rest
-}) {
+}) => {
   const getScoreButtonClasses = () => {
     return classNames(
       'score-button',

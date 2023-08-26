@@ -9,11 +9,11 @@ import '../../scss/content-ai-score-bar.scss';
 import { RangeControl, Popover } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
-export default function ({
+export default ({
   value,
   className,
   ...rest
-}) {
+}) => {
   const [currentValue, setCurrentValue] = useState(value)
   const popoverPointerPlacement = currentValue < 50 ? 'is-left' : currentValue > 60 ? 'is-right' : '';
   const groupedClassNames = `content-ai-score-bar ${className}`;

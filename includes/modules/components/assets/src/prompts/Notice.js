@@ -13,7 +13,7 @@ import '../../scss/notice.scss';
  */
 import { Notice } from '@wordpress/components';
 
-export default function ({
+export default ({
   status = 'info',
   actions = [],
   isDismissible = true,
@@ -24,7 +24,7 @@ export default function ({
   onRemove,
   icon,
   ...rest
-}) {
+}) => {
   const statusToTitle = {
     error: 'Error!',
     success: 'Success!',

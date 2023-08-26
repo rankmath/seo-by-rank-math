@@ -8,12 +8,12 @@ import '../../scss/connection-button.scss'
  */
 import { Button } from '@wordpress/components';
 
-export default function ({
+export default ({
   status = 'connect',
   className,
   children,
   ...rest
-}) {
+}) => {
   const statusIconMap = {
     connect: 'rm-icon-plus',
     connected: 'rm-icon-tick',

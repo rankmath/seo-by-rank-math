@@ -8,12 +8,12 @@ import '../../../scss/sidebar-menu-list.scss';
 */
 import { MenuGroup, MenuItem } from '@wordpress/components';
 
-export default function ({
+export default ({
   menuItems = [],
   className,
   children,
   ...rest
-}) {
+}) => {
   const menuGroupProps = {
     className: `sidebar-menu-list ${className}`,
     children,

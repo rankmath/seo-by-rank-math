@@ -1,6 +1,6 @@
 import '../../../scss/search-select-option.scss'
 
-export default function ({ title, subTitle, description }) {
+export default ({ title, subTitle, description }) => {
   return (
     <div className='option__container'>
       <div className='option__heading'>

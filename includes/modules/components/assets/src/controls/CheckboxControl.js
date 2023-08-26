@@ -13,7 +13,7 @@ import '../../scss/checkbox-control.scss';
  */
 import { CheckboxControl } from '@wordpress/components';
 
-export default function ({
+export default ({
   __nextHasNoMarginBottom = false,
   onChange = () => { },
   indeterminate = false,
@@ -24,7 +24,7 @@ export default function ({
   className,
   disabled,
   ...rest
-}) {
+}) => {
   const getCheckboxControlClasses = () => {
     return classNames(
       className,

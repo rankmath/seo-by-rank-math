@@ -13,7 +13,7 @@ import '../../scss/button.scss'
  */
 import { Button } from '@wordpress/components';
 
-export default function ({
+export default ({
   children,
   variant = 'primary',
   size = 'default',
@@ -35,7 +35,7 @@ export default function ({
   iconSize,
   className,
   ...rest
-}) {
+}) => {
   const variantClassMap = {
     'primary-outline': 'is-primary-outline',
     'secondary-grey': 'is-secondary-grey',
@@ -79,6 +79,6 @@ export default function ({
   };
 
   return (
-    <Button {...buttonProps}>{children}</Button>
+    <Button {...buttonProps} />
   )
 }

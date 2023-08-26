@@ -9,7 +9,7 @@ import '../../scss/toggle-control.scss';
 import { ToggleControl } from '@wordpress/components';
 
 
-export default function ({
+export default ({
   onChange = () => { },
   __nextHasNoMarginBottom = true,
   label,
@@ -18,7 +18,7 @@ export default function ({
   help,
   className,
   ...rest
-}) {
+}) => {
   const toggleControlProps = {
     label,
     checked,
