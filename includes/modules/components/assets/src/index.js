@@ -52,7 +52,7 @@ function ButtonsShowcase() {
 
 							<Button variant='primary-outline'>Label</Button>
 
-							<Button variant='primary-outline' size='large'>Label</Button>
+							<Button variant='primary-outline' isDestructive size='large'>Label</Button>
 
 							<Button variant='primary-outline' size='large' disabled>Label</Button>
 						</div>
@@ -66,7 +66,7 @@ function ButtonsShowcase() {
 
 							<Button variant='secondary'>Label</Button>
 
-							<Button variant='secondary' size='large'>Label</Button>
+							<Button variant='secondary' isDestructive size='large'>Label</Button>
 
 							<Button variant='secondary' size='large' disabled>Label</Button>
 						</div>

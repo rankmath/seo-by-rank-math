@@ -1,5 +1,6 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/colors';
+@import './partials/mixins';
 
 $color-bg--primary-outline: rgba($color-blue, 5%);
 $color-bg--primary-outline--2: rgba($color-blue, 25%);
@@ -9,7 +10,6 @@ $color-box-shadow--tertiary-outline: lighten($color-black, 60%);
 $color--tertiary: lighten($color-black, 50%);
 $color-destructive: mix($color-red, $color-black, 80%);
 $color-destructive--hover: mix($color-red, $color-black, 61%);
-
 
 .components-button {
 	height: 32px;
@@ -36,103 +36,32 @@ $color-destructive--hover: mix($color-red, $color-black, 61%);
 	}
 
 	&.is-secondary {
-		box-shadow: inset 0 0 0 1px $color-box-shadow--secondary;
-		color: $color--secondary;
-
-		&:hover, &:focus {
-			background-color: lighten($color-black, 97%);
-		}
-
-		&:active, &:focus, &:focus:hover:not(:disabled) {
-			box-shadow: inset 0 0 0 1.5px $color-box-shadow--secondary;
-			outline: none;
-		}
-
-		&:active:not(:disabled) {
-			color: $color--secondary;
-		}
-
-		&:hover:not(:disabled) {
-			box-shadow: inset 0 0 0 1px $color-box-shadow--secondary;
-			outline: none;
-			color: $color--secondary;
-		}
-
-		&:disabled,
-		&[aria-disabled="true"],
-		&:disabled:hover,
-		&[aria-disabled="true"]:hover {
-			color: inherit;
-			opacity: 0.3;
-			box-shadow: inset 0 0 0 1px $color-box-shadow--secondary;
-			outline: 1px solid transparent;
-			transform: inherit;
-			background-color: darken($color-white, 20%);
-		}
-
-		&.is-destructive {
-			color: $color-destructive;
-			box-shadow: inset 0 0 0 1px $color-destructive;
-
-			&:hover:not(:disabled) {
-				color: $color-destructive--hover;
-				box-shadow: inset 0 0 0 1px $color-destructive--hover;
-			}
-
-			&:focus:not(:disabled), &:focus:hover:not(:disabled) {
-				color: $color-destructive;
-				background-color: darken($color-white, 1%);
-				box-shadow: inset 0 0 0 1.5px $color-destructive;
-			}
-
-			&:active:not(:disabled) {
-				background: darken($color-white, 5%);
-				color: $color-destructive;
-			}
-
-			&:active, &:focus {
-				outline-color: $color-destructive--hover;
-			}
-		}
+		@include button-style(
+				lighten($color-black, 97%), 
+				$color--secondary, 
+				$color-box-shadow--secondary, 
+				lighten($color-black, 97%), 
+				lighten($color-black, 87%),
+				inherit,
+				darken($color-white, 20%)
+			);
 	}
 
 	&.is-primary-outline {
-		box-shadow: inset 0 0 0 1px $color-blue;
-		color: $color-blue;
-
-		&:hover, &:focus {
-			background-color: $color-bg--primary-outline;
-		}
-
-		&:focus, &:focus:hover:not(:disabled) {
-			box-shadow: inset 0 0 0 1.5px $color-blue;
-			background-color: $color-bg--primary-outline;
-		}
-
-		&:hover:not(:disabled) {
-			box-shadow: inset 0 0 0 1px $color-blue;
-			color: $color-blue;
-		}
-
-		&:active:not(:disabled) {
-			box-shadow: inset 0 0 0 1.5px $color-blue;
-			background-color: $color-bg--primary-outline--2;
-			color: $color-blue;
-		}
+		@include button-style(
+				$color-bg--primary-outline, 
+				$color-blue, 
+				$color-blue, 
+				$color-bg--primary-outline, 
+				$color-bg--primary-outline--2,
+				$color-blue,
+				$color-bg--primary-outline--2
+			);
 
 		&.is-destructive {
 			&:hover:not(:disabled) {
 				background-color: transparent;
 			}
-		}
-
-		&:disabled,
-		&[aria-disabled="true"],
-		&:disabled:hover,
-		&[aria-disabled="true"]:hover {
-			background-color: $color-bg--primary-outline--2;
-			box-shadow: inset 0 0 0 1px $color-blue;
-			color: $color-blue;
 		}
 	}
 
@@ -146,6 +75,20 @@ $color-destructive--hover: mix($color-red, $color-black, 61%);
 		&.is-pressed {
 			color: $color--secondary;
 			background-color: $color-black;
+		}
+	}
+
+	&.is-tertiary-outline {
+		box-shadow: inset 0 0 0 1px lighten($color-black, 85%);
+		color: lighten($color-black, 55%);
+		
+		&:hover:not(:disabled) {
+			box-shadow: inset 0 0 0 1px $color-box-shadow--tertiary-outline;
+			color: lighten($color-black, 45%);
+		}
+		&:focus:not(:disabled), &:focus:hover:not(:disabled) {
+			box-shadow: inset 0 0 0 1.5px $color-box-shadow--tertiary-outline;
+			color: lighten($color-black, 45%);
 		}
 	}
 
@@ -171,20 +114,6 @@ $color-destructive--hover: mix($color-red, $color-black, 61%);
 			color: $color--tertiary;
 			background-color: transparent;
 			opacity: 0.3;
-		}
-	}
-
-	&.is-tertiary-outline {
-		box-shadow: inset 0 0 0 1px lighten($color-black, 85%);
-		color: lighten($color-black, 55%);
-		
-		&:hover:not(:disabled) {
-			box-shadow: inset 0 0 0 1px $color-box-shadow--tertiary-outline;
-			color: lighten($color-black, 45%);
-		}
-		&:focus:not(:disabled), &:focus:hover:not(:disabled) {
-			box-shadow: inset 0 0 0 1.5px $color-box-shadow--tertiary-outline;
-			color: lighten($color-black, 45%);
 		}
 	}
 
