@@ -11,195 +11,234 @@ $color--tertiary: gray;
 
 
 .components-button {
-  /* Large Button */
-  &.is-large {
-    height: 48px;
-    line-height: 22px;
-    font-size: 15px;
-    padding: 12px 20px;
-  }
+	height: 32px;
+	padding: 6px 14px;
 
-  /*Primary Variant*/
-  &.is-primary {
-    &:disabled,
-    &[aria-disabled="true"] {
-        opacity: 0.3;
-    }
+	&.is-primary {
+		&:disabled,
+		&[aria-disabled="true"] {
+			opacity: 0.3;
+			color: rgba(255, 255, 255, 0.8);
+		}
 
-    &.is-destructive {
-      &:active, &:focus {
-        outline-color: #cc1818;
-        color: white;
+		&.is-destructive {
+			&:active, &:focus {
+				outline-color: #cc1818;
+				color: white;
 
-        &:hover {
-          background-color: #9E1313;
-          box-shadow: inset 0 0 0 1px #fff, 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
-        }
-      }
-    }
-  }
+				&:hover {
+					background-color: #9E1313;
+					box-shadow: inset 0 0 0 1px #fff, 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
+				}
+			}
+		}
+	}
 
-  /*Secondary Variant*/
-  &.is-secondary {
-    box-shadow: inset 0 0 0 1px $color-box-shadow--secondary;
-    color: $color--secondary;
+	&.is-secondary {
+		box-shadow: inset 0 0 0 1px $color-box-shadow--secondary;
+		color: $color--secondary;
 
-    &:hover, &:focus {
-      background-color: #F7F7F7;
-    }
+		&:hover, &:focus {
+			background-color: #F7F7F7;
+		}
 
-    &:active, &:focus {
-      box-shadow: inset 0 0 0 1.5px gray;
-      outline: none;
-    }
+		&:active, &:focus, &:focus:hover:not(:disabled) {
+			box-shadow: inset 0 0 0 1.5px $color-box-shadow--secondary;
+			outline: none;
+		}
 
-    &:active:not(:disabled) {
-      color: $color--secondary;
-    }
+		&:active:not(:disabled) {
+			color: $color--secondary;
+		}
 
-    &:hover:not(:disabled) {
-      box-shadow: inset 0 0 0 1px $color-box-shadow--secondary;
-      outline: none;
-      color: $color--secondary;
-    }
+		&:hover:not(:disabled) {
+			box-shadow: inset 0 0 0 1px $color-box-shadow--secondary;
+			outline: none;
+			color: $color--secondary;
+		}
 
-    &:disabled,
-    &[aria-disabled="true"],
-    &:disabled:hover,
-    &[aria-disabled="true"]:hover {
-      color: inherit;
-      opacity: 0.3;
-      box-shadow: inset 0 0 0 1px $color-box-shadow--secondary;
-      outline: 1px solid transparent;
-      transform: inherit;
-      background-color: #E4E4E4;
-    }
+		&:disabled,
+		&[aria-disabled="true"],
+		&:disabled:hover,
+		&[aria-disabled="true"]:hover {
+			color: inherit;
+			opacity: 0.3;
+			box-shadow: inset 0 0 0 1px $color-box-shadow--secondary;
+			outline: 1px solid transparent;
+			transform: inherit;
+			background-color: #E4E4E4;
+		}
 
-    &.is-destructive {
-      color: #cc1818;
-      box-shadow: inset 0 0 0 1px #cc1818;
+		&.is-destructive {
+			color: #cc1818;
+			box-shadow: inset 0 0 0 1px #cc1818;
 
-      &:hover:not(:disabled) {
-          color: #710d0d;
-          box-shadow: inset 0 0 0 1px #710d0d;
-      }
+			&:hover:not(:disabled) {
+					color: #710d0d;
+					box-shadow: inset 0 0 0 1px #710d0d;
+			}
 
-      &:focus:not(:disabled) {
-          color: #cc1818;
-          background-color: #FAFAFA;
-      }
+			&:focus:not(:disabled) {
+					color: #cc1818;
+					background-color: #FAFAFA;
+			}
 
-      &:active:not(:disabled) {
-          background: #ccc;
-      }
+			&:active:not(:disabled) {
+					background: #ccc;
+			}
 
-      &:active, &:focus {
-          outline-color: #cc1818;
-      }
-    }
-  }
+			&:active, &:focus {
+					outline-color: #cc1818;
+			}
+		}
+	}
 
-  /*Primary-Outline Variant*/
-  &.is-primary-outline {
-    box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
-    color: var(--wp-admin-theme-color);
+	&.is-primary-outline {
+		box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
+		color: var(--wp-admin-theme-color);
 
-    &:hover, &:focus {
-      background-color: $color-bg--primary-outline--hover;
-    }
+		&:hover, &:focus {
+			background-color: $color-bg--primary-outline--hover;
+		}
 
-    &:active, &:focus {
-      box-shadow: inset 0 0 0 1.5px var(--wp-admin-theme-color);
-      background-color: $color-bg--primary-outline--hover;
-    }
+		&:active, &:focus, &:focus:hover:not(:disabled) {
+			box-shadow: inset 0 0 0 1.5px var(--wp-admin-theme-color);
+			background-color: $color-bg--primary-outline--hover;
+		}
 
-    &:hover:not(:disabled) {
-      box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
-      color: var(--wp-admin-theme-color);
-    }
+		&:hover:not(:disabled) {
+			box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
+			color: var(--wp-admin-theme-color);
+		}
 
-    &:active:not(:disabled) {
-      background-color: $color-bg--primary-outline--disabled--active;
-      color: var(--wp-admin-theme-color);
-    }
+		&:active:not(:disabled) {
+			background-color: $color-bg--primary-outline--disabled--active;
+			color: var(--wp-admin-theme-color);
+		}
 
-    &.is-destructive {
-      &:hover:not(:disabled) {
-        background-color: transparent;
-      }
-    }
+		&.is-destructive {
+			&:hover:not(:disabled) {
+				background-color: transparent;
+			}
+		}
 
-    &:disabled,
-    &[aria-disabled="true"],
-    &:disabled:hover,
-    &[aria-disabled="true"]:hover {
-      background-color: $color-bg--primary-outline--disabled--active;
-      box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
-      color: var(--wp-admin-theme-color);
-    }
-  }
+		&:disabled,
+		&[aria-disabled="true"],
+		&:disabled:hover,
+		&[aria-disabled="true"]:hover {
+			background-color: $color-bg--primary-outline--disabled--active;
+			box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
+			color: var(--wp-admin-theme-color);
+		}
+	}
 
-  /*Secondary-Grey Variant*/
-  &.is-secondary-grey {
-    background-color: #FAFAFA;
+	&.is-secondary-grey {
+		background-color: #FAFAFA;
 
-    &.is-pressed {
-      color: $color--secondary;
-      background-color: #1e1e1e;
-    }
-  }
+		&.is-pressed {
+			color: $color--secondary;
+			background-color: #1e1e1e;
+		}
+	}
 
-  /*Tertiary Variant*/
-  &.is-tertiary {
-    color: $color--tertiary;
+	&.is-tertiary {
+		color: $color--tertiary;
 
-    &:hover:not(:disabled) {
-      color: $color--tertiary;
-      box-shadow: none;
-      background-color: #F7F7F7;
-    }
+		&:hover:not(:disabled) {
+			color: $color--tertiary;
+			box-shadow: none;
+			background-color: #F7F7F7;
+		}
 
-    &:active, &:focus {
-      box-shadow: inset 0 0 0 1.5px gray;
-    }
+		&:active, &:focus, &:focus:hover:not(:disabled) {
+			box-shadow: inset 0 0 0 1.5px gray;
+		}
 
-    &:disabled,
-    &[aria-disabled="true"],
-    &:disabled:hover,
-    &[aria-disabled="true"]:hover {
-      color: $color--tertiary;
-      background-color: transparent;
-      opacity: 0.3;
-    }
-  }
+		&:disabled,
+		&[aria-disabled="true"],
+		&:disabled:hover,
+		&[aria-disabled="true"]:hover {
+			color: $color--tertiary;
+			background-color: transparent;
+			opacity: 0.3;
+		}
+	}
 
-  /*Tertiary Variant*/
-  &.is-tertiary-outline {
-    box-shadow: inset 0 0 0 1px $color-border--tertiary-outline;
-    
-    &:hover:not(:disabled) {
-      box-shadow: inset 0 0 0 1px $color-border--tertiary-outline--focus;
-    }
-    &:focus:not(:disabled) {
-      box-shadow: inset 0 0 0 1.5px $color-border--tertiary-outline--focus;
-    }
+	&.is-tertiary-outline {
+		box-shadow: inset 0 0 0 1px $color-border--tertiary-outline;
+		
+		&:hover:not(:disabled) {
+			box-shadow: inset 0 0 0 1px $color-border--tertiary-outline--focus;
+		}
+		&:focus:not(:disabled) {
+			box-shadow: inset 0 0 0 1.5px $color-border--tertiary-outline--focus;
+		}
 
-    &:active:not(:disabled) {
-      outline-color: #A2A2A2;
-    }
-  }
+		&:active:not(:disabled) {
+			outline-color: #A2A2A2;
+		}
+	}
 
-  /*Has Icon*/
-  &.has-icon{
-    &.has-text{
-      justify-content: start;
-      padding-right: 12px;
-      padding-left: 8px;
-      gap: 4px;
+	&.has-icon{
+		&:not(.has-text) {
+			min-width: 32px;
+			height: 28px;
+			font-size: 16px;
+		}
 
-      svg {
-        margin-right: 0px;
-      }
-    }
-  }
+		&.has-text{
+			justify-content: start;
+			padding-right: 10px;
+			padding-left: 10px;
+			gap: 5px;
+
+			i {
+				font-size: 15px;
+			}
+		}
+	}
+
+	&.is-small {
+		&.has-icon{
+			&:not(.has-text) {
+				min-width: 24px;
+				height: 24px;
+				font-size: 13px;
+			}
+
+			&.has-text{
+				padding-right: 6px;
+				padding-left: 6px;
+				gap: 3px;
+			}
+
+			i {
+				font-size: 13px;
+			}
+		}
+	}
+
+	&.is-large {
+		height: 36px;
+		line-height: 22px;
+		padding: 12px 20px;
+
+		&.has-icon{
+			&:not(.has-text) {
+				min-width: 24px;
+				height: 32px;
+				padding: 12px 10px;
+				font-size: 18px;
+			}
+
+			&.has-text{
+				padding-right: 12px;
+				padding-left: 12px;
+			}
+
+			i {
+				font-size: 17px;
+			}
+		}
+	}
 }
