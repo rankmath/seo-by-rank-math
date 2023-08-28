@@ -8,7 +8,7 @@ import { isEmpty, isUndefined, isString, kebabCase, includes, forEach, isEqual, 
  */
 import { store as blockEditorStore } from '@wordpress/block-editor'
 import { __unstableStripHTML as stripHTML } from '@wordpress/dom'
-import { useSelect } from '@wordpress/data'
+import { useSelect, useDispatch } from '@wordpress/data'
 
 /**
  * Get the headings from the content.
@@ -24,7 +24,7 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 				getBlockName,
 				getClientIdsWithDescendants,
 			} = select( blockEditorStore )
-			const { __experimentalConvertBlockToStatic: convertBlockToStatic } = select( 'core/reusable-blocks' )
+			const { __experimentalConvertBlockToStatic: convertBlockToStatic } = useDispatch( 'core/reusable-blocks' )
 
 			// Get the client ids of all blocks in the editor.
 			const allBlockClientIds = getClientIdsWithDescendants()
