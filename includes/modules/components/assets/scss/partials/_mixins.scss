@@ -94,3 +94,34 @@
 		}
 	}
 }
+
+
+@mixin text-control-validation($validation-color, $validation-background) {
+	.components-base-control__field {
+		.components-text-control__input {
+			border: 1px solid $validation-color;
+			background-color: $validation-background;
+			padding-right: 1.6rem;
+			
+			&:active:not(:disabled), 
+			&:focus:not(:disabled) {
+				border-color: $validation-color;
+				box-shadow: 0 0 0 1px $validation-color;
+			}
+		}
+	}
+}
+
+@mixin border-default() {
+	border: 1px solid $color-border--inputs;
+}
+
+@mixin font-size-small() {
+	font-size: 13px;
+}
+@mixin font-size-regular() {
+	font-size: 16px;
+}
+@mixin font-size-large() {
+	font-size: 18px;
+}

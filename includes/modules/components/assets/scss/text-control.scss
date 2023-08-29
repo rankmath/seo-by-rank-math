@@ -1,42 +1,24 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
+@import './partials/colors';
+@import './partials/mixins';
 
-/* Variables */
-$color-validation-success: #4AB866;
-$color-validation-error: #FB7272;
+// Validation Variables
+$color-validation-success: lighten($color-green, 10%);
+$color-bg-validation-sucess: lighten($color-green, 74%);
+$color-validation-error: lighten($color-red, 10%);
+$color-bg-validation-error: lighten($color-red, 49%);
 
 .text-control-container {
 	position: relative;
 
 	.components-base-control {
 		&.is-success {
-			.components-base-control__field {
-				.components-text-control__input {
-					border: 1px solid $color-validation-success;
-					background-color: #F9FDFA;
-					padding-right: 1.6rem;
-					
-					&:active:not(:disabled), &:focus:not(:disabled) {
-						border-color: $color-validation-success;
-						box-shadow: 0 0 0 1px $color-validation-success;
-					}
-				}
-			}
+			@include text-control-validation($color-validation-success, $color-bg-validation-sucess);
 		}
 
 		&.is-error {
-			.components-base-control__field {
-				.components-text-control__input {
-					border-color: $color-validation-error;
-					background-color: #FFFAFA;
-					padding-right: 1.6rem;
-
-					&:active:not(:disabled), &:focus:not(:disabled) {
-						border-color: $color-validation-error;
-						box-shadow: 0 0 0 1px $color-validation-error;
-					}
-				}
-			}
+			@include text-control-validation($color-validation-error, $color-bg-validation-error);
 		}
 
 		&.hide-default-number-controls {
@@ -59,15 +41,16 @@ $color-validation-error: #FB7272;
 			margin-bottom: 0px;
 
 			.components-text-control__input {
-				border: 1px solid $color-border--inputs;
+				@include border-default();
 
-				&:active:not(:disabled), 
+				&:active:not(:disabled),
 				&:focus:not(:disabled) {
-					border-color: var(--wp-admin-theme-color);
+					border-color: $color-blue;
 				}
 
 				&::placeholder {
 					color: $color-placeholder--inputs;
+					@include font-size-small();
 				}
 
 				&[type="number"] {
@@ -88,8 +71,8 @@ $color-validation-error: #FB7272;
 		transform: translateY(-50%);
 		right: 0.5rem;
 
-		.validation-icon {
-			font-size: 0.8rem;
+		.text-control-icon__validation {
+			@include font-size-small();
 
 			&.is-error {
 				color: $color-validation-error;
@@ -100,13 +83,13 @@ $color-validation-error: #FB7272;
 			}
 		}
 
-		&.custom-number-controls {
+		&.custom-number-control {
 			display: flex;
 			align-items: center;
 			font-size: 0.55rem;
-			color: var(--wp-admin-theme-color);
+			color: $color-blue;
 			
-			.control-icon {
+			.custom-number-control__icon {
 				padding: 0.45rem;
 
 				&:hover {
@@ -114,8 +97,10 @@ $color-validation-error: #FB7272;
 				}
 
 				&.is-disabled {
-					color: gray;
-					 background-color: transparent;
+					pointer-events: none;
+					color: $color-gray;
+					background-color: transparent;
+					opacity: 0.5;
 				}
 			}
 		}
