@@ -2,19 +2,19 @@
 @import './partials/variables';
 
 .multi-section-tab-panel {
-  border: 1px solid $color-border--gray-primary;
-  width: 13rem;
-  padding: 1rem;
+	border: 1px solid $color-border--gray-primary;
+	width: 13rem;
+	padding: 1rem;
 
-  .components-menu-group {
-    width: 100%;
-    border: none;
-    padding: 0px;
+	.components-menu-group {
+		width: 100%;
+		border: none;
+		padding: 0px;
 
-    & + .components-menu-group {
-      border-top: 1px solid $color-border--gray-primary;
-      margin-top: 1rem;
-      padding-top: 1rem;
-    }
-  }
+		& + .components-menu-group {
+			border-top: 1px solid $color-border--gray-primary;
+			margin-top: 1rem;
+			padding-top: 1rem;
+		}
+	}
 }

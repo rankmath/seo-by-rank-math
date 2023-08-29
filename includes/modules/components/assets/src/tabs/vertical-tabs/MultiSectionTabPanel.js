@@ -4,12 +4,12 @@
 import '../../../scss/multi-section-tab-panel.scss';
 
 export default ({
-  children
+	children
 }) => {
 
-  return (
-    <div className='multi-section-tab-panel'>
-      {children}
-    </div>
-  )
+	return (
+		<div className='multi-section-tab-panel'>
+			{children}
+		</div>
+	)
 };

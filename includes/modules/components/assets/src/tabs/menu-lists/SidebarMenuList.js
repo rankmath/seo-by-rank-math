@@ -9,26 +9,26 @@ import '../../../scss/sidebar-menu-list.scss';
 import { MenuGroup, MenuItem } from '@wordpress/components';
 
 export default ({
-  menuItems = [],
-  className,
-  children,
-  ...rest
+	menuItems = [],
+	className,
+	children,
+	...rest
 }) => {
-  const menuGroupProps = {
-    className: `sidebar-menu-list ${className}`,
-    children,
-    ...rest
-  }
+	const menuGroupProps = {
+		className: `sidebar-menu-list ${className}`,
+		children,
+		...rest
+	}
 
-  return (
-    <MenuGroup {...menuGroupProps}>
-      {menuItems.map(({ icon, title }) => (
-        <MenuItem key={title}>
-          <i className={`${icon} components-menu-item__icon`}></i>
+	return (
+		<MenuGroup {...menuGroupProps}>
+			{menuItems.map(({ icon, title }) => (
+				<MenuItem key={title}>
+					<i className={`${icon} components-menu-item__icon`}></i>
 
-          <span className='components-menu-item__text'>{title}</span>
-        </MenuItem>
-      ))}
-    </MenuGroup>
-  )
+					<span className='components-menu-item__text'>{title}</span>
+				</MenuItem>
+			))}
+		</MenuGroup>
+	)
 };

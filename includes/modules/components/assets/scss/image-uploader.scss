@@ -2,97 +2,97 @@
 @import './partials/variables';
 
 .image-uploader__wrapper {
-  width: 35rem;
-  background-color: #FCFCFC;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border: 1px solid $color-border--gray-secondary;
-  padding: 16px;
-  display: grid;
-  gap: 16px;
+	width: 35rem;
+	background-color: #FCFCFC;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	border: 1px solid $color-border--gray-secondary;
+	padding: 16px;
+	display: grid;
+	gap: 16px;
 
-  .image-uploader__content {
-    grid-column: span 3 / span 3;
-    background-color: #F7F7F7;
-    color: #909090;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23C7C7C7FF' stroke-width='2' stroke-dasharray='3%2c 4' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-    padding: 1.8rem;
-    text-align: center;
+	.image-uploader__content {
+		grid-column: span 3 / span 3;
+		background-color: #F7F7F7;
+		color: #909090;
+		height: fit-content;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23C7C7C7FF' stroke-width='2' stroke-dasharray='3%2c 4' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+		padding: 1.8rem;
+		text-align: center;
 
-    .image-uploader__is-uploading {
-      color: #4A4A4A ;
-    }
+		.image-uploader__is-uploading {
+			color: #4A4A4A ;
+		}
 
-    .image-uploader__actions {
-      display: flex;
-      align-items: center;
-      gap: 13px;
+		.image-uploader__actions {
+			display: flex;
+			align-items: center;
+			gap: 13px;
 
-      .components-button {
-        color: #757575;
-      }
-    }
-  
+			.components-button {
+				color: #757575;
+			}
+		}
+	
 
-    .components-button {
-      background-color: #fff;
-      border: 1px solid #949494;
-      color: #515151;
-      gap: 6px;
-      
-      &:focus:not(:disabled) {
-        box-shadow: none;
-        outline: none;
-      }
-    }
+		.components-button {
+			background-color: #fff;
+			border: 1px solid #949494;
+			color: #515151;
+			gap: 6px;
+			
+			&:focus:not(:disabled) {
+				box-shadow: none;
+				outline: none;
+			}
+		}
 
-    .components-range-control {
-      width: 100%;
+		.components-range-control {
+			width: 100%;
 
-      .components-base-control__field {
-        margin-bottom: 0px;
-      }
+			.components-base-control__field {
+				margin-bottom: 0px;
+			}
 
-      .components-range-control__slider {
-        cursor: default;
-      }
+			.components-range-control__slider {
+				cursor: default;
+			}
 
-      .components-range-control__thumb-wrapper {
-        display: none;
-      }
+			.components-range-control__thumb-wrapper {
+				display: none;
+			}
 
-      .components-range-control__track {
-        color: #1A89C1;
-      }
-    }
-  }
+			.components-range-control__track {
+				color: #1A89C1;
+			}
+		}
+	}
 
-  .image-uploader__preview {
-    background-color: #F2F2F2;
-    height: 8rem;
+	.image-uploader__preview {
+		background-color: #F2F2F2;
+		height: 8rem;
 
-    &-title {
-      font-size: 0.83rem;
-      color: #9B9B9B;
-      text-transform: uppercase;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      text-align: center;
-      line-height: 1.5rem;
-      padding: 0 16px;
-    }
+		&-title {
+			font-size: 0.83rem;
+			color: #9B9B9B;
+			text-transform: uppercase;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			text-align: center;
+			line-height: 1.5rem;
+			padding: 0 16px;
+		}
 
-    &-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
+		&-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 }

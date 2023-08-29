@@ -2,63 +2,63 @@
 @import './partials/variables';
 
 .components-checkbox-control {
-  &.is-disabled {
-    .components-base-control__field {
-      pointer-events: none;
-      opacity: 0.3; 
+	&.is-disabled {
+		.components-base-control__field {
+			pointer-events: none;
+			opacity: 0.3; 
 
-      .components-checkbox-control__input {
-        border: 1px solid $color-border--controls-disabled;
-        background-color: $color-bg--controls-disabled;
+			.components-checkbox-control__input {
+				border: 1px solid $color-border--controls-disabled;
+				background-color: $color-bg--controls-disabled;
 
-        &:checked {
-          border: 1px solid var(--wp-admin-theme-color);
-          background-color: var(--wp-admin-theme-color);
-        }
-      }
-    }
-  }
+				&:checked {
+					border: 1px solid var(--wp-admin-theme-color);
+					background-color: var(--wp-admin-theme-color);
+				}
+			}
+		}
+	}
 
-  &.is-indeterminate,
-  &.is-indeterminate ~ .components-checkbox-control {
-    .components-base-control__field {
-      .components-checkbox-control__input-container {
-        .components-checkbox-control__input {
-          border: 1px solid var(--wp-admin-theme-color);
+	&.is-indeterminate,
+	&.is-indeterminate ~ .components-checkbox-control {
+		.components-base-control__field {
+			.components-checkbox-control__input-container {
+				.components-checkbox-control__input {
+					border: 1px solid var(--wp-admin-theme-color);
 
-          &:focus {
-            box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--wp-admin-theme-color);
-          }
+					&:focus {
+						box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--wp-admin-theme-color);
+					}
 
-          &:disabled {
-            background-color: #D8E4EB;
-            pointer-events: none;
+					&:disabled {
+						background-color: #D8E4EB;
+						pointer-events: none;
 
-            &:checked {
-              background-color: var(--wp-admin-theme-color);
-            }
-          }
-        }
-      }
-    }
-  }
+						&:checked {
+							background-color: var(--wp-admin-theme-color);
+						}
+					}
+				}
+			}
+		}
+	}
 
-  .components-base-control__field {
-    .components-checkbox-control__input-container {
-      margin-right: $gap--controls;
+	.components-base-control__field {
+		.components-checkbox-control__input-container {
+			margin-right: $gap--controls;
 
-      .components-checkbox-control__input {
-        border: 1px solid $color-border--controls;
+			.components-checkbox-control__input {
+				border: 1px solid $color-border--controls;
 
-        &:focus {
-          box-shadow: none;
-          outline: none;
-        }
+				&:focus {
+					box-shadow: none;
+					outline: none;
+				}
 
-        &:checked {
-          border-color: var(--wp-admin-theme-color);
-        }
-      }
-    } 
-  }
+				&:checked {
+					border-color: var(--wp-admin-theme-color);
+				}
+			}
+		} 
+	}
 }

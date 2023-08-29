@@ -2,40 +2,40 @@
 @import './partials/variables';
 
 @mixin from-tablet {
-  @media (min-width: 600px) {
-    @content;
-  }
+	@media (min-width: 600px) {
+		@content;
+	}
 }
 
 .components-radio-control__input[type=radio] {
-  border: 1px solid $color-border--controls;
-  margin-right: $gap--controls;
+	border: 1px solid $color-border--controls;
+	margin-right: $gap--controls;
 
-  &:focus {
-    box-shadow: none;
-    outline: none;
-  }
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
 
-  &:disabled {
-    border: 1px solid $color-border--controls-disabled;
-    background-color: $color-bg--controls-disabled;
-    opacity: 0.3; 
-    pointer-events: none;
+	&:disabled {
+		border: 1px solid $color-border--controls-disabled;
+		background-color: $color-bg--controls-disabled;
+		opacity: 0.3; 
+		pointer-events: none;
 
-    + label {
-      opacity: 0.3;
-      pointer-events: none;
-    }
+		+ label {
+			opacity: 0.3;
+			pointer-events: none;
+		}
 
-    &:checked {
-      border: 1px solid var(--wp-admin-theme-color);
-      background-color: var(--wp-admin-theme-color);
-    }
-  }
+		&:checked {
+			border: 1px solid var(--wp-admin-theme-color);
+			background-color: var(--wp-admin-theme-color);
+		}
+	}
 
-  @include from-tablet {
-    &:checked::before{
-      transform: translate(5.5px, 5px);
-    }
-  }
+	@include from-tablet {
+		&:checked::before{
+			transform: translate(5.5px, 5px);
+		}
+	}
 }

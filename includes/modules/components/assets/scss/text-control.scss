@@ -6,118 +6,118 @@ $color-validation-success: #4AB866;
 $color-validation-error: #FB7272;
 
 .text-control-container {
-  position: relative;
+	position: relative;
 
-  .components-base-control {
-    &.is-success {
-      .components-base-control__field {
-        .components-text-control__input {
-          border: 1px solid $color-validation-success;
-          background-color: #F9FDFA;
-          padding-right: 1.6rem;
-          
-          &:active:not(:disabled), &:focus:not(:disabled) {
-            border-color: $color-validation-success;
-            box-shadow: 0 0 0 1px $color-validation-success;
-          }
-        }
-      }
-    }
+	.components-base-control {
+		&.is-success {
+			.components-base-control__field {
+				.components-text-control__input {
+					border: 1px solid $color-validation-success;
+					background-color: #F9FDFA;
+					padding-right: 1.6rem;
+					
+					&:active:not(:disabled), &:focus:not(:disabled) {
+						border-color: $color-validation-success;
+						box-shadow: 0 0 0 1px $color-validation-success;
+					}
+				}
+			}
+		}
 
-    &.is-error {
-      .components-base-control__field {
-        .components-text-control__input {
-          border-color: $color-validation-error;
-          background-color: #FFFAFA;
-          padding-right: 1.6rem;
+		&.is-error {
+			.components-base-control__field {
+				.components-text-control__input {
+					border-color: $color-validation-error;
+					background-color: #FFFAFA;
+					padding-right: 1.6rem;
 
-          &:active:not(:disabled), &:focus:not(:disabled) {
-            border-color: $color-validation-error;
-            box-shadow: 0 0 0 1px $color-validation-error;
-          }
-        }
-      }
-    }
+					&:active:not(:disabled), &:focus:not(:disabled) {
+						border-color: $color-validation-error;
+						box-shadow: 0 0 0 1px $color-validation-error;
+					}
+				}
+			}
+		}
 
-    &.hide-default-number-controls {
-      input {
-        -webkit-appearance: none;
-        -moz-appearance: textfield;
-        appearance: textfield;
-        margin: 0;
+		&.hide-default-number-controls {
+			input {
+				-webkit-appearance: none;
+				-moz-appearance: textfield;
+				appearance: textfield;
+				margin: 0;
 
-        &::-webkit-inner-spin-button,
-        &::-webkit-outer-spin-button {
-          -webkit-appearance: none;
-          appearance: none;
-          margin: 0;
-        }
-      }
-    }
+				&::-webkit-inner-spin-button,
+				&::-webkit-outer-spin-button {
+					-webkit-appearance: none;
+					appearance: none;
+					margin: 0;
+				}
+			}
+		}
 
-    .components-base-control__field {
-      margin-bottom: 0px;
+		.components-base-control__field {
+			margin-bottom: 0px;
 
-      .components-text-control__input {
-        border: 1px solid $color-border--inputs;
+			.components-text-control__input {
+				border: 1px solid $color-border--inputs;
 
-        &:active:not(:disabled), 
-        &:focus:not(:disabled) {
-          border-color: var(--wp-admin-theme-color);
-        }
+				&:active:not(:disabled), 
+				&:focus:not(:disabled) {
+					border-color: var(--wp-admin-theme-color);
+				}
 
-        &::placeholder {
-          color: $color-placeholder--inputs;
-        }
+				&::placeholder {
+					color: $color-placeholder--inputs;
+				}
 
-        &[type="number"] {
-          padding-right: 3.7rem;
-        }
+				&[type="number"] {
+					padding-right: 3.7rem;
+				}
 
-        &:disabled {
-          background: $color-bg--inputs-disabled;
-          opacity: 0.5;
-        }
-      }
-    }
-  }
+				&:disabled {
+					background: $color-bg--inputs-disabled;
+					opacity: 0.5;
+				}
+			}
+		}
+	}
 
-  .text-control-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 0.5rem;
+	.text-control-icon {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 0.5rem;
 
-    .validation-icon {
-      font-size: 0.8rem;
+		.validation-icon {
+			font-size: 0.8rem;
 
-      &.is-error {
-        color: $color-validation-error;
-      }
+			&.is-error {
+				color: $color-validation-error;
+			}
 
-      &.is-success {
-        color: $color-validation-success;
-      }
-    }
+			&.is-success {
+				color: $color-validation-success;
+			}
+		}
 
-    &.custom-number-controls {
-      display: flex;
-      align-items: center;
-      font-size: 0.55rem;
-      color: var(--wp-admin-theme-color);
-      
-      .control-icon {
-        padding: 0.45rem;
+		&.custom-number-controls {
+			display: flex;
+			align-items: center;
+			font-size: 0.55rem;
+			color: var(--wp-admin-theme-color);
+			
+			.control-icon {
+				padding: 0.45rem;
 
-        &:hover {
-          background-color: $color-bg--hover-primary;
-        }
+				&:hover {
+					background-color: $color-bg--hover-primary;
+				}
 
-        &.is-disabled {
-          color: gray;
-           background-color: transparent;
-        }
-      }
-    }
-  }
+				&.is-disabled {
+					color: gray;
+					 background-color: transparent;
+				}
+			}
+		}
+	}
 }

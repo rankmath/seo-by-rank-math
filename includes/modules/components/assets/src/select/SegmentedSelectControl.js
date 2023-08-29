@@ -9,12 +9,12 @@ import '../../scss/segmented-select-control.scss'
 import { MenuGroup, MenuItem } from '@wordpress/components';
 
 export default ({ menuItems }) => {
-  return (
-    <MenuGroup>
-      {menuItems.map(item => (
-        <MenuItem key={item}>{item}</MenuItem>
-      ))
-      }
-    </MenuGroup>
-  );
+	return (
+		<MenuGroup>
+			{menuItems.map(item => (
+				<MenuItem key={item}>{item}</MenuItem>
+			))
+			}
+		</MenuGroup>
+	);
 }

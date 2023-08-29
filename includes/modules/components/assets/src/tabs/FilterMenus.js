@@ -14,37 +14,37 @@ import '../../scss/filter-menus.scss';
 import { TabPanel } from '@wordpress/components';
 
 export default ({
-  tabs = [],
-  children = () => { },
-  variant = 'black',
-  className,
-  onSelect,
-  initialTabName,
-  ...rest
+	tabs = [],
+	children = () => { },
+	variant = 'black',
+	className,
+	onSelect,
+	initialTabName,
+	...rest
 }) => {
-  const getTabPanelClasses = () => {
-    return classNames(
-      className,
-      'filter-menus',
-      {
-        'is-black': variant === 'black',
-        'is-blue': variant === 'blue',
-      }
-    );
-  };
+	const getTabPanelClasses = () => {
+		return classNames(
+			className,
+			'filter-menus',
+			{
+				'is-black': variant === 'black',
+				'is-blue': variant === 'blue',
+			}
+		);
+	};
 
-  const tabPanelProps = {
-    className: getTabPanelClasses(),
-    tabs,
-    children,
-    onSelect,
-    initialTabName,
-    ...rest
-  }
+	const tabPanelProps = {
+		className: getTabPanelClasses(),
+		tabs,
+		children,
+		onSelect,
+		initialTabName,
+		...rest
+	}
 
-  return (
-    <TabPanel
-      {...tabPanelProps}
-    />
-  )
+	return (
+		<TabPanel
+			{...tabPanelProps}
+		/>
+	)
 }

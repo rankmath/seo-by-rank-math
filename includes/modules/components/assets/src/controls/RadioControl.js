@@ -9,27 +9,27 @@ import '../../scss/radio-control.scss';
 import { RadioControl } from '@wordpress/components';
 
 export default ({
-  hideLabelFromVision = false,
-  onChange = () => { },
-  label,
-  help,
-  selected,
-  options,
-  ...rest
+	hideLabelFromVision = false,
+	onChange = () => { },
+	label,
+	help,
+	selected,
+	options,
+	...rest
 }) => {
-  const radioControlProps = {
-    hideLabelFromVision,
-    onChange,
-    label,
-    help,
-    selected,
-    options,
-    ...rest,
-  }
+	const radioControlProps = {
+		hideLabelFromVision,
+		onChange,
+		label,
+		help,
+		selected,
+		options,
+		...rest,
+	}
 
-  return (
-    <RadioControl
-      {...radioControlProps}
-    />
-  );
+	return (
+		<RadioControl
+			{...radioControlProps}
+		/>
+	);
 };

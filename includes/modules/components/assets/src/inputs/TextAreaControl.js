@@ -9,31 +9,31 @@ import '../../scss/textarea-control.scss';
 import { TextareaControl } from '@wordpress/components';
 
 export default ({
-  onChange,
-  value,
-  rows,
-  label,
-  help,
-  hideLabelFromVision,
-  placeholder,
-  disabled,
-  ...rest
+	onChange,
+	value,
+	rows,
+	label,
+	help,
+	hideLabelFromVision,
+	placeholder,
+	disabled,
+	...rest
 }) => {
-  const textControlProps = {
-    onChange,
-    value,
-    help,
-    hideLabelFromVision,
-    label,
-    placeholder,
-    disabled,
-    rows,
-    ...rest
-  }
+	const textControlProps = {
+		onChange,
+		value,
+		help,
+		hideLabelFromVision,
+		label,
+		placeholder,
+		disabled,
+		rows,
+		...rest
+	}
 
-  return (
-    <TextareaControl
-      {...textControlProps}
-    />
-  );
+	return (
+		<TextareaControl
+			{...textControlProps}
+		/>
+	);
 };

@@ -2,109 +2,109 @@
 
 
 .content-ai-score-bar {
-  .components-range-control {
-    &.content-ai-score-bar {
-      width: 25rem;
+	.components-range-control {
+		&.content-ai-score-bar {
+			width: 25rem;
 
-      .components-range-control__slider {
-        cursor: default;
-      }
+			.components-range-control__slider {
+				cursor: default;
+			}
 
-      .components-range-control__thumb-wrapper {
-        margin-top: 11px;
-        background-color: transparent;
-        border: 5px solid #fff;
-        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+			.components-range-control__thumb-wrapper {
+				margin-top: 11px;
+				background-color: transparent;
+				border: 5px solid #fff;
+				box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 
-        .css-1oxlee5 {
-          display: none;
-        }
+				.css-1oxlee5 {
+					display: none;
+				}
 
-        .css-cp5s75 {
-          display: none;
-        }
-      }
+				.css-cp5s75 {
+					display: none;
+				}
+			}
 
-      .css-1tw038v {
-        height: 8px;
-        background-image: linear-gradient(to right, #EB475C, #F2B34A, #5EC580);
-      }
+			.css-1tw038v {
+				height: 8px;
+				background-image: linear-gradient(to right, #EB475C, #F2B34A, #5EC580);
+			}
 
-      .components-range-control__track { 
-        height: 8px;
-      }
+			.components-range-control__track { 
+				height: 8px;
+			}
 
-      .components-range-control__track {
-        background-color: transparent;
-      }
-    }
-  }
+			.components-range-control__track {
+				background-color: transparent;
+			}
+		}
+	}
 
-  .components-popover {
-    .components-popover__content {
-      outline: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-width: 5.7rem;
-      min-height: 3.4rem;
-      border-radius: 5px;
-      gap: 1px;
-      box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px;
+	.components-popover {
+		.components-popover__content {
+			outline: none;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			min-width: 5.7rem;
+			min-height: 3.4rem;
+			border-radius: 5px;
+			gap: 1px;
+			box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px;
 
-      .score-bar__title {
-        margin: 0;
-        font-size: 13px;
-        font-weight: normal;
-        color: #888;
-      }
+			.score-bar__title {
+				margin: 0;
+				font-size: 13px;
+				font-weight: normal;
+				color: #888;
+			}
 
-      .score-bar__value {
-        margin: 0;
-        font-size: 18px;
-        font-weight: 605;
-      }
-    }
+			.score-bar__value {
+				margin: 0;
+				font-size: 18px;
+				font-weight: 605;
+			}
+		}
 
-    .components-popover__arrow {
-      display: none;
-      
-      &::before {
-        display: none;
-      }
+		.components-popover__arrow {
+			display: none;
+			
+			&::before {
+				display: none;
+			}
 
-      .components-popover__triangle {
-        &-border {
-          stroke: #fff;
-        }
-      }
-    }
+			.components-popover__triangle {
+				&-border {
+					stroke: #fff;
+				}
+			}
+		}
 
-    .popover-pointer {
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 8px solid #fff;
-      position: absolute;
-      top: 100%;
+		.popover-pointer {
+			width: 0;
+			height: 0;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-top: 8px solid #fff;
+			position: absolute;
+			top: 100%;
 
-      &.is-left {
-        left: 0;
-        border-left: none;
-        border-right: 20px solid transparent;
-        border-top: 13px solid #fff;
-        top: 90%;
-      }
+			&.is-left {
+				left: 0;
+				border-left: none;
+				border-right: 20px solid transparent;
+				border-top: 13px solid #fff;
+				top: 90%;
+			}
 
-      &.is-right {
-        right: 0;
-        border-right: none;
-        border-left: 20px solid transparent;
-        border-top: 13px solid #fff;
-        top: 90%;
-      }
-    }
-  }
+			&.is-right {
+				right: 0;
+				border-right: none;
+				border-left: 20px solid transparent;
+				border-top: 13px solid #fff;
+				top: 90%;
+			}
+		}
+	}
 }
