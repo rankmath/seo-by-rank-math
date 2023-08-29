@@ -1,28 +1,40 @@
-@mixin button-style($background, $color, $box-shadow, $focus-background, $active-background, $disabled-color, $disabled-background) {
+@mixin button-style(
+		$color-bg--hover, 
+		$color, 
+		$color-box-shadow, 
+		$color-bg-focus, 
+		$color-bg-active,
+		$color--disabled, 
+		$color-bg--disabled,
+		$color-box-shadow--hover,
+		$color--hover--focus,
+		$color-box-shadow--focus-active
+	) {
 	color: $color;
-	box-shadow: inset 0 0 0 1px $box-shadow;
-
-	&:hover, &:focus {
-		background-color: $background;
-	}
+	box-shadow: inset 0 0 0 1px $color-box-shadow;
 
 	&:hover:not(:disabled) {
-		box-shadow: inset 0 0 0 1px $box-shadow;
-		outline: none;
-		color: $color;
+		color: $color--hover--focus;
+		background-color: $color-bg--hover;
+		box-shadow: inset 0 0 0 1px $color-box-shadow--hover;
 	}
 
-	&:focus, &:focus:hover:not(:disabled) {
-		box-shadow: inset 0 0 0 1.5px $box-shadow;
-		background-color: $focus-background;
+	&:focus, 
+	&:focus:hover:not(:disabled),
+	&:active:not(:disabled) {
+		box-shadow: inset 0 0 0 1.5px $color-box-shadow--focus-active;
 		outline: none;
+	}
+
+	&:focus, 
+	&:focus:hover:not(:disabled) {
+		color: $color--hover--focus;
+		background-color: $color-bg-focus;
 	}
 
 	&:active:not(:disabled) {
-		outline: none;
 		color: $color;
-		box-shadow: inset 0 0 0 1.5px $box-shadow;
-		background-color: $active-background;
+		background-color: $color-bg-active;
 	}
 
 	&:disabled,
@@ -32,33 +44,8 @@
 		opacity: 0.3;
 		outline: 1px solid transparent;
 		transform: inherit;
-		box-shadow: inset 0 0 0 1px $box-shadow;
-		color: $disabled-color;
-		background-color: $disabled-background;
-	}
-
-	&.is-destructive {
-		color: $color-destructive;
-		box-shadow: inset 0 0 0 1px $color-destructive;
-
-		&:hover:not(:disabled) {
-			color: $color-destructive--hover;
-			box-shadow: inset 0 0 0 1px $color-destructive--hover;
-		}
-
-		&:focus:not(:disabled), &:focus:hover:not(:disabled) {
-			color: $color-destructive;
-			background-color: darken($color-white, 1%);
-			box-shadow: inset 0 0 0 1.5px $color-destructive;
-		}
-
-		&:active:not(:disabled) {
-			background: darken($color-white, 5%);
-			color: $color-destructive;
-		}
-
-		&:active, &:focus {
-			outline-color: $color-destructive--hover;
-		}
+		box-shadow: inset 0 0 0 1px $color-box-shadow;
+		color: $color--disabled;
+		background-color: $color-bg--disabled;
 	}
 }

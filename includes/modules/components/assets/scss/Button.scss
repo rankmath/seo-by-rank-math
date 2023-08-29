@@ -37,26 +37,58 @@ $color-destructive--hover: mix($color-red, $color-black, 61%);
 
 	&.is-secondary {
 		@include button-style(
-				lighten($color-black, 97%), 
-				$color--secondary, 
-				$color-box-shadow--secondary, 
-				lighten($color-black, 97%), 
-				lighten($color-black, 87%),
+			lighten($color-black, 97%), 
+			$color--secondary, 
+			$color-box-shadow--secondary, 
+			lighten($color-black, 97%), 
+			lighten($color-black, 87%),
+			inherit,
+			darken($color-white, 20%),
+			$color-box-shadow--secondary,
+			$color--secondary,
+			$color-box-shadow--secondary,
+		);
+
+		&.is-destructive {
+			@include button-style(
 				inherit,
-				darken($color-white, 20%)
+				$color-destructive,
+				$color-destructive,
+				darken($color-white, 1%),
+				darken($color-white, 5%),
+				inherit,
+				inherit,
+				$color-destructive,
+				$color-destructive,
+				$color-destructive,
 			);
+
+			&:hover:not(:disabled) {
+				color: $color-destructive--hover;
+				box-shadow: inset 0 0 0 1px $color-destructive--hover;
+			}
+
+			&:focus:not(:disabled), 
+			&:focus:hover:not(:disabled),
+			&:active:not(:disabled)  {
+				color: $color-destructive;
+			}
+		}
 	}
 
 	&.is-primary-outline {
 		@include button-style(
-				$color-bg--primary-outline, 
-				$color-blue, 
-				$color-blue, 
-				$color-bg--primary-outline, 
-				$color-bg--primary-outline--2,
-				$color-blue,
-				$color-bg--primary-outline--2
-			);
+			$color-bg--primary-outline,
+			$color-blue,
+			$color-blue,
+			$color-bg--primary-outline,
+			$color-bg--primary-outline--2,
+			$color-blue,
+			$color-bg--primary-outline--2,
+			$color-blue,
+			$color-blue,
+			$color-blue,
+		);
 
 		&.is-destructive {
 			&:hover:not(:disabled) {
@@ -79,17 +111,18 @@ $color-destructive--hover: mix($color-red, $color-black, 61%);
 	}
 
 	&.is-tertiary-outline {
-		box-shadow: inset 0 0 0 1px lighten($color-black, 85%);
-		color: lighten($color-black, 55%);
-		
-		&:hover:not(:disabled) {
-			box-shadow: inset 0 0 0 1px $color-box-shadow--tertiary-outline;
-			color: lighten($color-black, 45%);
-		}
-		&:focus:not(:disabled), &:focus:hover:not(:disabled) {
-			box-shadow: inset 0 0 0 1.5px $color-box-shadow--tertiary-outline;
-			color: lighten($color-black, 45%);
-		}
+		@include button-style(
+			inherit, 
+			lighten($color-black, 55%),
+			lighten($color-black, 85%),
+			inherit,
+			inherit,
+			inherit,
+			inherit,
+			$color-box-shadow--tertiary-outline,
+			lighten($color-black, 45%),
+			$color-box-shadow--tertiary-outline
+		);
 	}
 
 	&.is-tertiary {
