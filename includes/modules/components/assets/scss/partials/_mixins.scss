@@ -1,20 +1,22 @@
 @mixin button-style(
-		$color-bg--hover, 
-		$color, 
-		$color-box-shadow, 
-		$color-bg-focus, 
-		$color-bg-active,
-		$color--disabled, 
-		$color-bg--disabled,
-		$color-box-shadow--hover,
-		$color--hover--focus,
-		$color-box-shadow--focus-active
-	) {
+	$color, 
+	$color-box-shadow,
+	$color--hover,
+	$color-bg--hover,
+	$color-box-shadow--hover,
+	$color-bg-focus, 
+	$color--focus,
+	$color-bg-active,
+	$color-box-shadow--focus-active,
+	$color--disabled,
+	$color-bg--disabled,
+	$color-box-shadow--disabled
+) {
 	color: $color;
 	box-shadow: inset 0 0 0 1px $color-box-shadow;
 
 	&:hover:not(:disabled) {
-		color: $color--hover--focus;
+		color: $color--hover;
 		background-color: $color-bg--hover;
 		box-shadow: inset 0 0 0 1px $color-box-shadow--hover;
 	}
@@ -28,7 +30,7 @@
 
 	&:focus, 
 	&:focus:hover:not(:disabled) {
-		color: $color--hover--focus;
+		color: $color--focus;
 		background-color: $color-bg-focus;
 	}
 
@@ -44,7 +46,7 @@
 		opacity: 0.3;
 		outline: 1px solid transparent;
 		transform: inherit;
-		box-shadow: inset 0 0 0 1px $color-box-shadow;
+		box-shadow: inset 0 0 0 1px $color-box-shadow--disabled;
 		color: $color--disabled;
 		background-color: $color-bg--disabled;
 	}
