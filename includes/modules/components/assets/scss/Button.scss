@@ -4,11 +4,12 @@
 
 // Primary-Outline Variant Variables
 $color-bg--primary-outline: rgba($color-blue, 5%);
-$color-bg--primary-outline--2: rgba($color-blue, 25%);
+$color-bg--primary-outline-2: rgba($color-blue, 25%);
 
 // Secondary Variant Variables
 $color--secondary: lighten($color-black, 35%);
-$color-box-shadow--secondary: $color-gray;
+$color-box-shadow--secondary: lighten($color-black, 75%);
+$color-box-shadow--secondary-2: $color-gray;
 $color--secondary--hover--focus: lighten($color-black, 20%);
 $color-bg--secondary--hover--focus: lighten($color-black, 97%);
 
@@ -59,18 +60,18 @@ $color-lightgray: darken($color-white, 1%);
 			$hover: (
 				$color--secondary--hover--focus,
 				$color-bg--secondary--hover--focus,
-				$color-box-shadow--secondary,
+				$color-box-shadow--secondary-2,
 			),
 			$focus-active: (
 				$color--secondary--hover--focus,
 				$color-bg--secondary--hover--focus, 
-				$color-box-shadow--secondary,
+				$color-box-shadow--secondary-2,
 				lighten($color-black, 87%),
 			),
 			$disabled: (
 				inherit,
 				darken($color-white, 20%),
-				$color-box-shadow--secondary
+				$color-box-shadow--secondary-2
 			)
 		);
 
@@ -115,11 +116,11 @@ $color-lightgray: darken($color-white, 1%);
 				$color-blue,
 				$color-bg--primary-outline,
 				$color-blue,
-				$color-bg--primary-outline--2,
+				$color-bg--primary-outline-2,
 			),
 			$disabled: (
 				$color-blue,
-				$color-bg--primary-outline--2,
+				$color-bg--primary-outline-2,
 				$color-blue
 			)
 		);
@@ -173,6 +174,7 @@ $color-lightgray: darken($color-white, 1%);
 		color: $color--tertiary;
 
 		&:hover:not(:disabled) {
+			color: $color--tertiary;
 			background-color: darken($color-white, 3%);
 			box-shadow: none;
 		}

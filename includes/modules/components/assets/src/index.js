@@ -25,8 +25,6 @@ const AllComponents = () => {
 function ButtonsShowcase() {
 	return (
 		<div>
-			<h2>BUTTONS</h2>
-
 			<div>
 				<h3>TEXT BUTTONS</h3>
 
