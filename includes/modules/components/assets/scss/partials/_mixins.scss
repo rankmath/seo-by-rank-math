@@ -1,42 +1,56 @@
-@mixin button-secondary-style(
-	$color, 
-	$color-box-shadow,
-	$color--hover,
-	$color-bg--hover,
-	$color-box-shadow--hover,
-	$color-bg-focus, 
-	$color--focus,
-	$color-bg-active,
-	$color-box-shadow--focus-active,
-	$color--disabled,
-	$color-bg--disabled,
-	$color-box-shadow--disabled
+@mixin secondary-button-style(
+	$normal: (
+		$color,
+		$color-box-shadow
+	),
+	
+	$hover: (
+		$color--hover,
+		$color-bg--hover,
+		$color-box-shadow--hover
+	),
+	
+	$focus-active: (
+		$color--focus,
+		$color-bg-focus,
+		$color-box-shadow--focus-active,
+		$color-bg-active,
+	),
+	
+	$disabled: (
+		$color--disabled,
+		$color-bg--disabled,
+		$color-box-shadow--disabled
+	)
 ) {
+	$color: nth($normal, 1);
+	$color-box-shadow: nth($normal, 2);
+
 	color: $color;
 	box-shadow: inset 0 0 0 1px $color-box-shadow;
 
 	&:hover:not(:disabled) {
-		color: $color--hover;
-		background-color: $color-bg--hover;
-		box-shadow: inset 0 0 0 1px $color-box-shadow--hover;
+		color: nth($hover, 1);
+		background-color: nth($hover, 2);
+		box-shadow: inset 0 0 0 1px nth($hover, 3);
 	}
 
-	&:focus, 
+	&:focus,
 	&:focus:hover:not(:disabled),
 	&:active:not(:disabled) {
-		box-shadow: inset 0 0 0 1.5px $color-box-shadow--focus-active;
+		box-shadow: inset 0 0 0 1.5px nth($focus-active, 3);
 		outline: none;
 	}
 
-	&:focus, 
+	&:focus,
 	&:focus:hover:not(:disabled) {
-		color: $color--focus;
-		background-color: $color-bg-focus;
+		color: nth($focus-active, 1);
+		background-color: nth($focus-active, 2);
 	}
 
 	&:active:not(:disabled) {
 		color: $color;
-		background-color: $color-bg-active;
+		background-color: nth($focus-active, 4);
 	}
 
 	&:disabled,
@@ -46,11 +60,12 @@
 		opacity: 0.3;
 		outline: 1px solid transparent;
 		transform: inherit;
-		box-shadow: inset 0 0 0 1px $color-box-shadow--disabled;
-		color: $color--disabled;
-		background-color: $color-bg--disabled;
+		box-shadow: inset 0 0 0 1px nth($disabled, 3);
+		color: nth($disabled, 1);
+		background-color: nth($disabled, 2);
 	}
 }
+
 
 @mixin button-has-icon-style(
 	$min-width,
