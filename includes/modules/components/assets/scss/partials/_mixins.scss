@@ -51,3 +51,31 @@
 		background-color: $color-bg--disabled;
 	}
 }
+
+@mixin button-has-icon-style(
+	$min-width,
+	$height,
+	$font-size,
+	$padding-vertical,
+	$padding-horizontal,
+	$gap,
+	$icon-font-size
+) {
+	&.has-icon{
+		&:not(.has-text) {
+			min-width: $min-width;
+			height: $height;
+			font-size: $font-size;
+		}
+
+		&.has-text{
+			justify-content: start;
+			padding: $padding-vertical $padding-horizontal;
+			gap: $gap;
+
+			i {
+				font-size: $icon-font-size;
+			}
+		}
+	}
+}
