@@ -6,36 +6,36 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../../scss/select-control.scss';
-import SearchSelectOption from './SearchSelectOption';
+import SelectControlSearchOption from './SelectControlSearchOption';
+import '../../scss/select-control.scss';
 
 /**
  * WordPress dependencies
  */
 import { CustomSelectControl, Disabled, SearchControl } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element'
+import { useState, useEffect } from '@wordpress/element';
 
 export default ({
-	disabled = false,
-	className,
+	withSearch,
 	label,
 	value,
 	onChange,
 	options,
 	size,
+	disabled = false,
+	className,
 	...rest
 }) => {
 	const [searchValue, setSearchValue] = useState('');
-	const filteredOptions = searchValue
-		? options.filter((item) =>
-			item.name.title.toLowerCase().includes(searchValue.toLowerCase())
-		)
-		: options;
+	const filterOptions = withSearch && options.filter((item) =>
+		item.name.title.toLowerCase().includes(searchValue.toLowerCase())
+	);
+	const filteredOptionsResult = searchValue ? filterOptions : options;
 
-	const finalOptions = filteredOptions.map(({ key, name }) => ({
+	const finalFilteredOptions = filteredOptionsResult.map(({ key, name }) => ({
 		key,
 		name: (
-			<SearchSelectOption
+			<SelectControlSearchOption
 				title={name.title}
 				subTitle={name.subTitle}
 				description={name.description}
@@ -46,25 +46,13 @@ export default ({
 	const getSelectControlClasses = () => {
 		return classNames(
 			className,
-			'search-select-control',
 			{
 				'is-disabled': disabled,
+				'with-label': label,
+				'search-select-control': withSearch,
 			}
 		);
 	};
-
-	const selectControlProps = {
-		className: getSelectControlClasses(),
-		options: finalOptions,
-		label,
-		value,
-		onChange,
-		disabled,
-		size,
-		__next36pxDefaultSize: true,
-		__nextUnconstrainedWidth: true,
-		...rest
-	}
 
 	useEffect(() => {
 		const searchSelectControl = document.querySelector('.search-select-control');
@@ -88,8 +76,18 @@ export default ({
 		}
 	}, [searchValue]);
 
-
-
+	const selectControlProps = {
+		className: getSelectControlClasses(),
+		options: withSearch ? finalFilteredOptions : options,
+		label,
+		value,
+		onChange,
+		disabled,
+		size,
+		__next36pxDefaultSize: true,
+		__nextUnconstrainedWidth: true,
+		...rest
+	}
 
 	return (
 		<Disabled isDisabled={disabled}>
@@ -99,4 +97,3 @@ export default ({
 		</Disabled>
 	);
 };
-

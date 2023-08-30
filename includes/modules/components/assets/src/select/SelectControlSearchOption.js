@@ -1,5 +1,3 @@
-import '../../../scss/search-select-option.scss'
-
 export default ({ title, subTitle, description }) => {
 	return (
 		<div className='option__container'>
@@ -8,7 +6,6 @@ export default ({ title, subTitle, description }) => {
 
 				<p className='option__heading-subtitle'>{subTitle}</p>
 			</div>
-
 
 			<p className='option__description'>{description}</p>
 		</div>

@@ -98,7 +98,6 @@
 		}
 
 		.components-custom-select-control__menu {
-
 			.components-search-control {
 				.components-base-control__field {
 					@include option-separator();
@@ -128,6 +127,31 @@
 				@include option-separator();
 				margin-bottom: 0px;
 
+				.option__container {
+					.option__heading {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+
+						&-title {
+							@include font-size-small();
+							font-weight: normal;
+							margin: 0px;
+						}
+
+						&-subtitle {
+							@include font-size-small();
+							background-color: $color-white-darker;
+							font-weight: 600;
+							margin: 0px;
+						}
+					}
+
+					.option__description {
+						color: $color-gray;
+					}
+				}
+
 				&.is-highlighted {
 					.option__heading {
 						&-title {
@@ -144,7 +168,6 @@
 					}
 				}
 			}
-
 		}
 
 		&.is-disabled {

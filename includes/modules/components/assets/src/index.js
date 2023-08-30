@@ -11,9 +11,7 @@ import '../scss/components.scss';
 import Button from './buttons/Button';
 import TextControl from './inputs/TextControl';
 import TextAreaControl from './inputs/TextAreaControl';
-import CustomSelectControl from './select/CustomSelectControl';
-import SearchSelectControl from './select/search-select/SearchSelectControl';
-
+import SelectControl from './select/SelectControl';
 
 const AllComponents = () => {
 	return (
@@ -117,12 +115,12 @@ function TextInputFieldsShowcase() {
 					<h4>Dropdown Select 1</h4>
 
 					<div className='components-group'>
-						<CustomSelectControl
+						<SelectControl
 							value={size}
 							options={options}
 							onChange={(target) => setSize(target.selectedItem)}
 						/>
-						<CustomSelectControl
+						<SelectControl
 							value={size}
 							options={options}
 							onChange={(target) => setSize(target.selectedItem)}
@@ -135,13 +133,13 @@ function TextInputFieldsShowcase() {
 					<h4>Dropdown Select 2</h4>
 
 					<div className='components-group'>
-						<CustomSelectControl
+						<SelectControl
 							label="Label"
 							value={size}
 							options={options}
 							onChange={(target) => setSize(target.selectedItem)}
 						/>
-						<CustomSelectControl
+						<SelectControl
 							label="Label"
 							value={size}
 							options={options}
@@ -155,23 +153,24 @@ function TextInputFieldsShowcase() {
 					<h4>Dropdown Select 3</h4>
 
 					<div className='components-group'>
-						<SearchSelectControl
+						<SelectControl
 							value={value}
 							options={optionsList}
 							onChange={
 								({ selectedItem: { key, name } }) => setValue({ key, name: name.props.title })
 							}
-						// disabled
+							withSearch
 						/>
 					</div>
 
 					<div className='components-group'>
-						<SearchSelectControl
+						<SelectControl
 							value={value}
 							options={optionsList}
 							onChange={
 								({ selectedItem: { key, name } }) => setValue({ key, name: name.props.title })
 							}
+							withSearch
 							disabled
 						/>
 					</div>
