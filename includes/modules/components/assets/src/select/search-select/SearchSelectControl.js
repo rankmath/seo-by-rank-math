@@ -17,7 +17,7 @@ import { useState, useEffect } from '@wordpress/element'
 
 export default ({
 	disabled = false,
-	className = 'search-select-control',
+	className,
 	label,
 	value,
 	onChange,
@@ -46,6 +46,7 @@ export default ({
 	const getSelectControlClasses = () => {
 		return classNames(
 			className,
+			'search-select-control',
 			{
 				'is-disabled': disabled,
 			}

@@ -12,23 +12,6 @@
 		width: 30rem;
 	}
 
-	&.is-disabled {
-		pointer-events: none;
-		opacity: 0.3;
-
-		.components-input-control__container {
-			background-color: #E3E3DD;
-
-			.components-input-control__suffix {
-				.components-input-control-suffix-wrapper {
-					.css-18q9qlf {
-						background-color: #CECECE;
-					}
-				}
-			}
-		}
-	}
-
 	.components-input-control__container {
 		.css-1t91ps2.css-1t91ps2.css-1t91ps2 {
 			font-size: 13px;
@@ -118,6 +101,23 @@
 
 				.option__description {
 					color: #626262;
+				}
+			}
+		}
+	}
+
+	&.is-disabled {
+		pointer-events: none;
+		opacity: 0.3;
+
+		.components-input-control__container {
+			background-color: #E3E3DD;
+
+			.components-input-control__suffix {
+				.components-input-control-suffix-wrapper {
+					.css-18q9qlf {
+						background-color: #CECECE;
+					}
 				}
 			}
 		}

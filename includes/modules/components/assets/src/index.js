@@ -9,13 +9,163 @@ import { createElement, render, useState } from '@wordpress/element';
 import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
 import Button from './buttons/Button';
+import TextControl from './inputs/TextControl';
+import TextAreaControl from './inputs/TextAreaControl';
+import CustomSelectControl from './select/CustomSelectControl';
+import SearchSelectControl from './select/search-select/SearchSelectControl';
+
 
 const AllComponents = () => {
 	return (
 		<div className='container'>
 
+			<TextInputFieldsShowcase />
+
 			<ButtonsShowcase />
 
+		</div>
+	)
+};
+
+function TextInputFieldsShowcase() {
+	const optionsList = [
+		{
+			key: 'first_option',
+			name: {
+				title: 'First Option Title',
+				subTitle: '%code_text%',
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+			}
+		},
+		{
+			key: 'second_option',
+			name: {
+				title: 'Second Option Title',
+				subTitle: '%code_text%',
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+			}
+		},
+	]
+
+	const [value, setValue] = useState({
+		key: optionsList[0].key,
+		name: optionsList[0].name.title,
+	});
+
+	const [size, setSize] = useState({
+		key: "large",
+		name: "Large",
+	});
+
+	const options = [
+		{
+			key: "thumbnail",
+			name: "Thumbnail",
+		},
+		{
+			key: "medium",
+			name: "Medium",
+		},
+		{
+			key: "large",
+			name: "Large",
+		},
+		{
+			key: "full",
+			name: "Full Size",
+		}
+	]
+
+	return (
+		<div>
+			<h2>INPUT FIELDS</h2>
+
+			<div className='components-wrapper'>
+				<div>
+					<h4>Single Line</h4>
+
+					<div className='components-group'>
+						<TextControl placeholder='Placeholder Text' />
+						<TextControl placeholder='Disabled Field' disabled />
+					</div>
+
+					<div className='components-group'>
+						<TextControl value='email@website.com' isSuccess />
+						<TextControl value='email@website.com' isError />
+					</div>
+				</div>
+
+				<div>
+					<h4>Stepper</h4>
+
+					<div className='components-group'>
+						<TextControl type='number' placeholder='200' />
+						<TextControl type='number' placeholder='200' disabled />
+					</div>
+				</div>
+
+				<div>
+					<h4>Text Area</h4>
+
+					<div className='components-group'>
+						<TextAreaControl placeholder='Placeholder Text' />
+						<TextAreaControl placeholder='Disabled Field' disabled />
+					</div>
+				</div>
+
+				<div>
+					<h4>Dropdown Select 1</h4>
+
+					<div className='components-group'>
+						<CustomSelectControl
+							value={size}
+							options={options}
+							onChange={(target) => setSize(target.selectedItem)}
+						/>
+						<CustomSelectControl
+							value={size}
+							options={options}
+							onChange={(target) => setSize(target.selectedItem)}
+							disabled
+						/>
+					</div>
+				</div>
+
+				<div>
+					<h4>Dropdown Select 2</h4>
+
+					<div className='components-group'>
+						<CustomSelectControl
+							label="Label"
+							value={size}
+							options={options}
+							onChange={(target) => setSize(target.selectedItem)}
+						/>
+						<CustomSelectControl
+							label="Label"
+							value={size}
+							options={options}
+							onChange={(target) => setSize(target.selectedItem)}
+							disabled
+						/>
+					</div>
+				</div>
+
+				<div>
+					<h4>Dropdown Select 3</h4>
+
+					<div className='components-group'>
+						<SearchSelectControl
+							value={value}
+							options={optionsList}
+							onChange={
+								({ selectedItem: { key, name } }) => setValue({ key, name: name.props.title })
+							}
+						// disabled
+						/>
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 };

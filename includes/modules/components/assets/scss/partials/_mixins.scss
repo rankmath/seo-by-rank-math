@@ -66,7 +66,6 @@
 	}
 }
 
-
 @mixin button-has-icon-style(
 	$min-width,
 	$height,
@@ -95,7 +94,6 @@
 	}
 }
 
-
 @mixin text-control-validation($validation-color, $validation-background) {
 	.components-base-control__field {
 		.components-text-control__input {
@@ -119,21 +117,39 @@
 @mixin font-size-small() {
 	font-size: 13px;
 }
+
 @mixin font-size-regular() {
 	font-size: 16px;
 }
+
 @mixin font-size-large() {
 	font-size: 18px;
 }
-@mixin disabled-style () {
+
+@mixin disabled-style() {
 	background: $color-gray-lighter;
 	color: $color-gray;
 	opacity: 0.5;
 	pointer-events: none;
 }
 
-@mixin input-style () {
+@mixin box-shadow() {
+	box-shadow: 0px 2px 4px $color-gray-lighter;
+}
+
+@mixin center-vertically() {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+@mixin input-height() {
+	min-height: 40px;
+}
+
+@mixin input-style() {
 	@include border-default();
+	@include input-height();
 	padding: 6px 14px;
 
 	&:focus,

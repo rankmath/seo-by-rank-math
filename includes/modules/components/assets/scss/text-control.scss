@@ -40,16 +40,13 @@
 			margin-bottom: 0px;
 
 			.components-text-control__input {
-				min-height: 40px;
 				@include input-style();
 			}
 		}
 	}
 
 	.text-control-icon {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
+		@include center-vertically();
 		right: 0.5rem;
 
 		.text-control-icon__validation {
