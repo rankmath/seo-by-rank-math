@@ -4,14 +4,13 @@
 
 
 @mixin option-separator() {
-	border-bottom: 1px solid $color-gray-lighter;
+	border-bottom: 1px solid $color-gray-lightest;
 }
 
 .components-custom-select-control {
-	width: 15rem;
-
 	.css-f0d2mi.css-f0d2mi.css-f0d2mi {
-		@include input-height();
+		@include min-height-input();
+		@include min-width-input();
 		@include font-size-small();
 	}
 
@@ -89,7 +88,7 @@
 			.components-input-control-suffix-wrapper {
 				right: 4px;
 				padding-right: 4px;
-				background-color: $color-gray-lighter;
+				background-color: $color-gray-lightest;
 
 				.css-18q9qlf {
 					padding: 5px;

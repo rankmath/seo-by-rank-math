@@ -43,36 +43,44 @@ function TextInputFieldsShowcase() {
 				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
 			}
 		},
+		{
+			key: 'third_option',
+			name: {
+				title: 'Third Option Title',
+				subTitle: '%code_text%',
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+			}
+		},
+		{
+			key: 'fourth_option',
+			name: {
+				title: 'Fourth Option Title',
+				subTitle: '%code_text%',
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+			}
+		},
+	]
+	const options = [
+		{
+			key: "first_option",
+			name: "Frist Option",
+		},
+		{
+			key: "second_option",
+			name: "Second Option",
+		},
+		{
+			key: "third_option",
+			name: "Third Option",
+		}
 	]
 
-	const [value, setValue] = useState({
+	const [selectedValue, setSelectedValue] = useState({
 		key: optionsList[0].key,
 		name: optionsList[0].name.title,
 	});
 
-	const [size, setSize] = useState({
-		key: "large",
-		name: "Large",
-	});
-
-	const options = [
-		{
-			key: "thumbnail",
-			name: "Thumbnail",
-		},
-		{
-			key: "medium",
-			name: "Medium",
-		},
-		{
-			key: "large",
-			name: "Large",
-		},
-		{
-			key: "full",
-			name: "Full Size",
-		}
-	]
+	const [selectedOption, setSelectedOption] = useState(options[0]);
 
 	return (
 		<div>
@@ -116,14 +124,14 @@ function TextInputFieldsShowcase() {
 
 					<div className='components-group'>
 						<SelectControl
-							value={size}
+							value={selectedOption}
 							options={options}
-							onChange={(target) => setSize(target.selectedItem)}
+							onChange={(target) => setSelectedOption(target.selectedItem)}
 						/>
 						<SelectControl
-							value={size}
+							value={selectedOption}
 							options={options}
-							onChange={(target) => setSize(target.selectedItem)}
+							onChange={(target) => setSelectedOption(target.selectedItem)}
 							disabled
 						/>
 					</div>
@@ -135,15 +143,15 @@ function TextInputFieldsShowcase() {
 					<div className='components-group'>
 						<SelectControl
 							label="Label"
-							value={size}
+							value={selectedOption}
 							options={options}
-							onChange={(target) => setSize(target.selectedItem)}
+							onChange={(target) => setSelectedOption(target.selectedItem)}
 						/>
 						<SelectControl
 							label="Label"
-							value={size}
+							value={selectedOption}
 							options={options}
-							onChange={(target) => setSize(target.selectedItem)}
+							onChange={(target) => setSelectedOption(target.selectedItem)}
 							disabled
 						/>
 					</div>
@@ -154,10 +162,10 @@ function TextInputFieldsShowcase() {
 
 					<div className='components-group'>
 						<SelectControl
-							value={value}
+							value={selectedValue}
 							options={optionsList}
 							onChange={
-								({ selectedItem: { key, name } }) => setValue({ key, name: name.props.title })
+								({ selectedItem: { key, name } }) => setSelectedValue({ key, name: name.props.title })
 							}
 							withSearch
 						/>
@@ -165,10 +173,10 @@ function TextInputFieldsShowcase() {
 
 					<div className='components-group'>
 						<SelectControl
-							value={value}
+							value={selectedValue}
 							options={optionsList}
 							onChange={
-								({ selectedItem: { key, name } }) => setValue({ key, name: name.props.title })
+								({ selectedItem: { key, name } }) => setSelectedValue({ key, name: name.props.title })
 							}
 							withSearch
 							disabled
