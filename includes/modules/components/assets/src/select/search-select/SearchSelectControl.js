@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../../scss/search-select-control.scss';
+import '../../../scss/select-control.scss';
 import SearchSelectOption from './SearchSelectOption';
 
 /**
@@ -67,22 +67,29 @@ export default ({
 	}
 
 	useEffect(() => {
-		const optionsContainer = document.querySelector('.components-custom-select-control__menu');
+		const searchSelectControl = document.querySelector('.search-select-control');
 
-		if (optionsContainer) {
-			ReactDOM.render(
-				<SearchControl
-					value={searchValue}
-					onChange={setSearchValue}
-				/>,
-				optionsContainer
-			);
+		if (searchSelectControl) {
+			const optionsContainer = searchSelectControl.querySelector('.components-custom-select-control__menu');
 
-			return () => {
-				ReactDOM.unmountComponentAtNode(optionsContainer);
-			};
+			if (optionsContainer) {
+				ReactDOM.render(
+					<SearchControl
+						value={searchValue}
+						onChange={setSearchValue}
+					/>,
+					optionsContainer
+				);
+
+				return () => {
+					ReactDOM.unmountComponentAtNode(optionsContainer);
+				};
+			}
 		}
 	}, [searchValue]);
+
+
+
 
 	return (
 		<Disabled isDisabled={disabled}>

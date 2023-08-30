@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import '../../scss/custom-select-control.scss';
+import '../../scss/select-control.scss';
 
 /**
  * WordPress dependencies

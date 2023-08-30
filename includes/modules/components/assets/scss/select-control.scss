@@ -1,0 +1,162 @@
+@import '@wordpress/components/build-style/style.css';
+@import './partials/variables';
+@import './partials/mixins';
+
+
+@mixin option-separator() {
+	border-bottom: 1px solid $color-gray-lighter;
+}
+
+.components-custom-select-control {
+	width: 15rem;
+
+	.css-f0d2mi.css-f0d2mi.css-f0d2mi {
+		@include input-height();
+		@include font-size-small();
+	}
+
+	.components-custom-select-control__button {
+		&[aria-expanded="true"] {
+			+ .components-input-control__suffix {
+				svg {
+					transform: rotate(180deg);
+				}
+			}
+		}
+	}
+
+	.components-custom-select-control__menu {
+		@include box-shadow();
+		border-color: $color-blue;
+		margin: 0;
+		border-top: 0;
+		min-width: 99%;
+
+		.components-custom-select-control__item {
+			&.is-highlighted {
+				background-color: $color-blue--hover;
+				color: $color-blue;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.components-custom-select-control__label {
+		@include center-vertically();
+		@include font-size-small();
+		left: 15px;
+		z-index: 50;
+		text-transform: inherit;
+		margin-bottom: 0;
+		font-weight: normal;
+	}
+
+	&.with-label {
+		.components-custom-select-control__button {
+			text-align: right;
+		}
+		
+		.components-custom-select-control__item {
+			justify-content: end;
+		}
+	}
+
+	&.is-disabled {
+		.components-input-control__container {
+			@include disabled-style();
+		}
+
+		.components-custom-select-control__label {
+			opacity: 0.5;
+		}
+	}
+
+	// Select Control with Search
+	&.search-select-control {
+		width: 30rem;
+
+		.components-custom-select-control__button {
+			&[aria-expanded="true"] {
+				+ .components-input-control__suffix {
+					.components-input-control-suffix-wrapper {
+						background-color: $color-blue-lightest;
+					}
+				}
+			}
+		}
+
+		.components-input-control__suffix {
+			.components-input-control-suffix-wrapper {
+				right: 4px;
+				padding-right: 4px;
+				background-color: $color-gray-lighter;
+
+				.css-18q9qlf {
+					padding: 5px;
+				}
+			}
+		}
+
+		.components-custom-select-control__menu {
+
+			.components-search-control {
+				.components-base-control__field {
+					@include option-separator();
+					background-color: $color-white;
+					padding: 8px 16px;
+
+					.components-search-control__input {
+						@include border-default();
+						background-color: $color-white;
+
+						&:focus {
+							box-shadow: none;
+							outline: none;
+						}
+					}
+
+					.components-search-control__icon {
+						svg {
+							transform: rotate(-90deg);
+							opacity: 0.5;
+						}
+					}
+				}
+			}
+			
+			.components-custom-select-control__item {
+				@include option-separator();
+				margin-bottom: 0px;
+
+				&.is-highlighted {
+					.option__heading {
+						&-title {
+							color: $color-blue; 
+						}
+						&-subtitle {
+							background-color: $color-blue--hover;
+							color: $color-blue; 
+						}
+					}
+
+					.option__description {
+						color: $color-gray-darkest;
+					}
+				}
+			}
+
+		}
+
+		&.is-disabled {
+			.components-input-control__suffix {
+				.components-input-control-suffix-wrapper {	
+					background-color: rgba($color-gray, 0.2);
+					
+					svg {
+						opacity: 0.4;
+					}
+				}
+			}
+		}
+	}
+}

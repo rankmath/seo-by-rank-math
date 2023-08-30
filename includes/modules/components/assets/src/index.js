@@ -164,6 +164,17 @@ function TextInputFieldsShowcase() {
 						// disabled
 						/>
 					</div>
+
+					<div className='components-group'>
+						<SearchSelectControl
+							value={value}
+							options={optionsList}
+							onChange={
+								({ selectedItem: { key, name } }) => setValue({ key, name: name.props.title })
+							}
+							disabled
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

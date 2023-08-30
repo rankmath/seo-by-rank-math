@@ -8,6 +8,7 @@ $color-gray: #808080;
 $color-blue: #007cba;
 
 // Base Color Variations
+$color-blue-lightest: rgba($color-blue, 12%);
 $color-blue--hover: rgba($color-blue, 5%);
 $color-blue--focus: rgba($color-blue, 25%);
 
@@ -15,6 +16,9 @@ $color-white-dark: darken($color-white, 1%);
 
 $color-gray-light: lighten($color-gray, 10%);
 $color-gray-lighter: lighten($color-gray, 40%);
+$color-gray-dark: darken($color-gray, 10%);
+$color-gray-darker: darken($color-gray, 20%);
+$color-gray-darkest: darken($color-gray, 30%);
 
 // Validation Colors
 $color-success: lighten($color-green, 10%);
