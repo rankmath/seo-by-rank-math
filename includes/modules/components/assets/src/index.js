@@ -10,7 +10,6 @@ import '../../../../../assets/admin/scss/_font-icons.scss';
 import '../scss/components.scss';
 import Button from './buttons/Button';
 
-
 const AllComponents = () => {
 	return (
 		<div className='container'>
