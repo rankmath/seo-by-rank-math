@@ -80,7 +80,7 @@ $color-tertiary: $color-gray;
 				),
 				$focus-active: (
 					$color-destructive,
-					$color-white--dark,
+					$color-white-dark,
 					$color-destructive,
 					darken($color-white, 5%),
 				),
@@ -125,7 +125,7 @@ $color-tertiary: $color-gray;
 	}
 
 	&.is-secondary-grey {
-		background-color: $color-white--dark;
+		background-color: $color-white-dark;
 
 		&:hover, &:focus {
 			background-color: lighten($color-black, 95%);

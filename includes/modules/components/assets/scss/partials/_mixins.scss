@@ -113,7 +113,7 @@
 }
 
 @mixin border-default() {
-	border: 1px solid $color-border--inputs;
+	border: 1px solid $color-gray-light;
 }
 
 @mixin font-size-small() {
@@ -126,7 +126,7 @@
 	font-size: 18px;
 }
 @mixin disabled-style () {
-	background: $color-bg--inputs-disabled;
+	background: $color-gray-lighter;
 	color: $color-gray;
 	opacity: 0.5;
 	pointer-events: none;
@@ -145,7 +145,6 @@
 	}
 
 	&::placeholder {
-		color: $color-placeholder--inputs;
 		@include font-size-small();
 	}
 
