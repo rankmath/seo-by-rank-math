@@ -1,66 +1,47 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
-@import './partials/colors';
 @import './partials/mixins';
-
-// Validation Variables
-$color-validation-success: lighten($color-green, 10%);
-$color-bg-validation-sucess: lighten($color-green, 74%);
-$color-validation-error: lighten($color-red, 10%);
-$color-bg-validation-error: lighten($color-red, 49%);
 
 .text-control-container {
 	position: relative;
 
+	.hide-default-number-controls {
+		input {
+			-webkit-appearance: none;
+			-moz-appearance: textfield;
+			appearance: textfield;
+			margin: 0;
+
+			&::-webkit-inner-spin-button,
+			&::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				appearance: none;
+				margin: 0;
+			}
+		}
+	}
+
 	.components-base-control {
 		&.is-success {
-			@include text-control-validation($color-validation-success, $color-bg-validation-sucess);
+			@include text-control-validation(
+				$color-success, 
+				$color-success-bg
+			);
 		}
 
 		&.is-error {
-			@include text-control-validation($color-validation-error, $color-bg-validation-error);
-		}
-
-		&.hide-default-number-controls {
-			input {
-				-webkit-appearance: none;
-				-moz-appearance: textfield;
-				appearance: textfield;
-				margin: 0;
-
-				&::-webkit-inner-spin-button,
-				&::-webkit-outer-spin-button {
-					-webkit-appearance: none;
-					appearance: none;
-					margin: 0;
-				}
-			}
+			@include text-control-validation(
+				$color-error,
+				$color-error-bg
+			);
 		}
 
 		.components-base-control__field {
 			margin-bottom: 0px;
 
 			.components-text-control__input {
-				@include border-default();
-
-				&:active:not(:disabled),
-				&:focus:not(:disabled) {
-					border-color: $color-blue;
-				}
-
-				&::placeholder {
-					color: $color-placeholder--inputs;
-					@include font-size-small();
-				}
-
-				&[type="number"] {
-					padding-right: 3.7rem;
-				}
-
-				&:disabled {
-					background: $color-bg--inputs-disabled;
-					opacity: 0.5;
-				}
+				min-height: 40px;
+				@include input-style();
 			}
 		}
 	}
@@ -75,11 +56,11 @@ $color-bg-validation-error: lighten($color-red, 49%);
 			@include font-size-small();
 
 			&.is-error {
-				color: $color-validation-error;
+				color: $color-error;
 			}
 
 			&.is-success {
-				color: $color-validation-success;
+				color: $color-success;
 			}
 		}
 
@@ -93,14 +74,12 @@ $color-bg-validation-error: lighten($color-red, 49%);
 				padding: 0.45rem;
 
 				&:hover {
-					background-color: $color-bg--hover-primary;
+					background-color: $color-blue--hover;
 				}
 
 				&.is-disabled {
-					pointer-events: none;
-					color: $color-gray;
+					@include disabled-style();
 					background-color: transparent;
-					opacity: 0.5;
 				}
 			}
 		}

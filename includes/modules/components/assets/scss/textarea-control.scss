@@ -1,25 +1,11 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
+@import './partials/mixins';
 
-.components-base-control {
-	.components-base-control__field {
-		.components-textarea-control__input {
-			border: 1px solid $color-border--inputs;
+.components-base-control__field {
+	margin-bottom: 0px;
 
-			&::placeholder {
-				color: $color-placeholder--inputs;
-			}
-
-			&:disabled {
-					background: $color-bg--inputs-disabled;
-					opacity: 0.5;
-			}
-
-			&:focus {
-				border-color: var(--wp-admin-theme-color);
-				box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
-				outline: 2px solid transparent;
-			}
-		}
+	.components-textarea-control__input {
+		@include input-style();
 	}
 }

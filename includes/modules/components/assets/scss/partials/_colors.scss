@@ -1,7 +1,24 @@
+// Base Colors
 $color-red: #ff0000;
 $color-green: #008000;
 $color-yellow: #ffff00;
-$color-blue: #007cba;
 $color-black: #000000;
 $color-white: #ffffff;
 $color-gray: #808080;
+$color-blue: #007cba;
+
+// Base Color Variations
+$color-blue--hover: rgba($color-blue, 5%);
+$color-blue--focus: rgba($color-blue, 25%);
+
+$color-white--dark: darken($color-white, 1%);
+
+// Validation Colors
+$color-success: lighten($color-green, 10%);
+$color-success-bg: lighten($color-green, 74%);
+
+$color-error: lighten($color-red, 10%);
+$color-error-bg: lighten($color-red, 49%);
+
+$color-destructive: mix($color-red, $color-black, 80%);
+$color-destructive--hover: mix($color-red, $color-black, 61%);

@@ -125,3 +125,35 @@
 @mixin font-size-large() {
 	font-size: 18px;
 }
+@mixin disabled-style () {
+	background: $color-bg--inputs-disabled;
+	color: $color-gray;
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+@mixin input-style () {
+	@include border-default();
+	padding: 6px 14px;
+
+	&:focus,
+	&:active:not(:disabled),
+	&:focus:not(:disabled) {
+		border-color: $color-blue;
+		outline: 2px solid transparent;
+		box-shadow: 0 0 0 1px $color-blue;
+	}
+
+	&::placeholder {
+		color: $color-placeholder--inputs;
+		@include font-size-small();
+	}
+
+	&[type="number"] {
+		padding-right: 3.7rem;
+	}
+
+	&:disabled {
+		@include disabled-style();
+	}
+}

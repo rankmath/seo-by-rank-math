@@ -99,8 +99,8 @@ function TextInputFieldsShowcase() {
 					<h4>Stepper</h4>
 
 					<div className='components-group'>
-						<TextControl type='number' placeholder='Placeholder Text' />
-						<TextControl type='number' placeholder='Placeholder Text' disabled />
+						<TextControl type='number' placeholder='200' />
+						<TextControl type='number' placeholder='200' disabled />
 					</div>
 				</div>
 

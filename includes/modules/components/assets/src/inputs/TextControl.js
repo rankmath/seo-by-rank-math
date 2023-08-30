@@ -11,7 +11,7 @@ import '../../scss/text-control.scss';
 /**
  * WordPress dependencies
  */
-import { TextControl, Disabled } from '@wordpress/components';
+import { TextControl } from '@wordpress/components';
 import { useRef } from '@wordpress/element';
 
 export default ({
