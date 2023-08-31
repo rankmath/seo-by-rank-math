@@ -149,8 +149,12 @@
 	opacity: 0.4;
 }
 
-@mixin box-shadow() {
+@mixin box-shadow-default() {
 	box-shadow: 0px 2px 4px $color-gray-lightest;
+}
+
+@mixin box-shadow-primary() {
+	box-shadow: 0 0 0 1px $color-white, 0 0 0 $border-width--focus $color-blue;
 }
 
 @mixin center-vertically() {
