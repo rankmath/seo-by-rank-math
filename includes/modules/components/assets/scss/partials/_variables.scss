@@ -2,11 +2,10 @@
 
 $border-width--focus: 2px;
 
-// Radio/Checkbox/Toggle Controls
-$color-border--controls-disabled: #656565;
-$color-bg--controls-disabled: #e2e1e1;
-$color-border--controls: #A9A9A9;
-$gap--controls: 8px;
+// Radio, Checkbox & Toggle Control
+$controls-border-color--disabled: $color-gray;
+$controls-bg--disabled: $color-gray-lightest;
+$controls-margin: 8px;
 
 //Switch & Filter Tabs
 $color--tab-is-black--hover: #393939;

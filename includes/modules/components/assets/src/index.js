@@ -12,10 +12,15 @@ import Button from './buttons/Button';
 import TextControl from './inputs/TextControl';
 import TextAreaControl from './inputs/TextAreaControl';
 import SelectControl from './select/SelectControl';
+import CheckboxControl from './controls/CheckboxControl';
+import RadioControl from './controls/RadioControl';
+import ToggleControl from './controls/ToggleControl';
 
 const AllComponents = () => {
 	return (
 		<div className='container'>
+
+			<ControlsShowcase />
 
 			<TextInputFieldsShowcase />
 
@@ -23,6 +28,144 @@ const AllComponents = () => {
 
 		</div>
 	)
+};
+
+function ControlsShowcase() {
+	const [value, setValue] = useState(false);
+	const [option, setOption] = useState('a');
+	const [isChecked, setChecked] = useState(true);
+
+	const initialCheckboxes = [
+		{ id: 'checkbox-1', label: 'Checkbox 1', checked: false },
+		{ id: 'checkbox-2', label: 'Checkbox 2', checked: false },
+		{ id: 'checkbox-3', label: 'Checkbox 3', checked: false },
+	];
+
+	const [checkboxes, setCheckboxes] = useState(initialCheckboxes);
+
+	const handleCheckboxChange = (id) => {
+		const updatedCheckboxes = checkboxes.map((checkbox) =>
+			checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
+		);
+		setCheckboxes(updatedCheckboxes);
+	};
+
+	const areAllChecked = checkboxes.every((checkbox) => checkbox.checked);
+	const areAnyChecked = checkboxes.some((checkbox) => checkbox.checked);
+
+	const handleMasterCheckboxChange = () => {
+		const newCheckValue = !areAllChecked;
+		const updatedCheckboxes = checkboxes.map((checkbox) => ({
+			...checkbox,
+			checked: newCheckValue,
+		}));
+		setCheckboxes(updatedCheckboxes);
+	};
+
+	return (
+		<div>
+			<h2>CONTROLS</h2>
+
+			<div className='components-wrapper'>
+				<div>
+					<h4>Select/ Deselect All</h4>
+
+					<div className='components-group'>
+						<CheckboxControl
+							label="Select All"
+							checked={areAllChecked}
+							indeterminate={!areAllChecked && areAnyChecked}
+							isIndeterminate
+							onChange={handleMasterCheckboxChange}
+						// disabled
+						/>
+						{checkboxes.map((checkbox) => (
+							<CheckboxControl
+								key={checkbox.id}
+								label={checkbox.label}
+								checked={checkbox.checked}
+								onChange={() => handleCheckboxChange(checkbox.id)}
+							// disabled
+							/>
+						))}
+
+						<CheckboxControl
+							label="Select All"
+							checked={areAllChecked}
+							indeterminate={!areAllChecked && areAnyChecked}
+							isIndeterminate
+							onChange={handleMasterCheckboxChange}
+							disabled
+						/>
+					</div>
+				</div>
+
+				<div>
+					<h4>Select One</h4>
+					<div className="components-group">
+						<CheckboxControl
+							label="Checkbox"
+							checked={isChecked}
+							onChange={setChecked}
+						// disabled
+						/>
+
+						<CheckboxControl
+							label="Checkbox"
+							checked={isChecked}
+							onChange={setChecked}
+							disabled
+						/>
+					</div>
+				</div>
+
+				<div>
+					<h4>Radio Buttons</h4>
+
+					<div className='components-group'>
+						<RadioControl
+							label="Radio"
+							selected={option}
+							options={[
+								{ label: 'Selected', value: 'a' },
+								{ label: 'Default', value: 'e' },
+							]}
+							onChange={(value) => setOption(value)}
+						// disabled
+						/>
+
+						<RadioControl
+							selected={option}
+							options={[
+								{ label: 'Default', value: 'e' },
+							]}
+							onChange={(value) => setOption(value)}
+							disabled
+						/>
+					</div>
+				</div>
+
+				<div>
+					<h4>Toggle</h4>
+
+					<div className='components-group'>
+						<ToggleControl
+							label="On"
+							checked={value}
+							onChange={() => setValue((state) => !state)}
+						/>
+
+						<ToggleControl
+							label="Off"
+							checked={value}
+							onChange={() => setValue((state) => !state)}
+							disabled
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 function TextInputFieldsShowcase() {

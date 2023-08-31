@@ -1,3 +1,11 @@
+// Screen Sizes
+@mixin from-tablet {
+	@media (min-width: 600px) {
+		@content;
+	}
+}
+
+
 @mixin secondary-button-style(
 	$normal: (
 		$color,
@@ -114,6 +122,10 @@
 	border: 1px solid $color-gray-light;
 }
 
+@mixin border-blue() {
+	border: 1px solid $color-blue;
+}
+
 @mixin font-size-small() {
 	font-size: 13px;
 }
@@ -143,18 +155,18 @@
 	transform: translateY(-50%);
 }
 
-@mixin min-height-input() {
+@mixin input-min-height() {
 	min-height: 40px;
 }
 
-@mixin min-width-input() {
+@mixin input-min-width() {
 	min-width: 16rem;
 }
 
 @mixin input-style() {
 	@include border-default();
-	@include min-height-input();
-	@include min-width-input();
+	@include input-min-height();
+	@include input-min-width();
 	padding: 6px 14px;
 
 	&:focus,
@@ -175,5 +187,35 @@
 
 	&:disabled {
 		@include disabled-style();
+	}
+}
+
+@mixin checkbox-radio-style() {
+	@include border-default();
+
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
+
+	&:checked {
+		border-color: $color-blue;
+	}
+}
+
+@mixin checkbox-radio-style--disabled() {
+	border: 1px solid $controls-border-color--disabled;
+	background-color: $controls-bg--disabled;
+	opacity: 0.3; 
+	pointer-events: none;
+
+	+ label {
+		opacity: 0.3;
+		pointer-events: none;
+	}
+
+	&:checked {
+		@include border-blue();
+		background-color: $color-blue;
 	}
 }

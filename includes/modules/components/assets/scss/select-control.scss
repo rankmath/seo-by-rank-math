@@ -9,8 +9,8 @@
 
 .components-custom-select-control {
 	.css-f0d2mi.css-f0d2mi.css-f0d2mi {
-		@include min-height-input();
-		@include min-width-input();
+		@include input-min-height();
+		@include input-min-width();
 		@include font-size-small();
 	}
 

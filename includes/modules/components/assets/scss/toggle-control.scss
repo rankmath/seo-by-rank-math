@@ -3,29 +3,29 @@
 
 .components-toggle-control { 
 	.components-base-control__field {
-		.css-1aagzef {
-			gap: $gap--controls;
-		}
-
 		.components-form-toggle {
 			margin-right: 0px;
 
-			&.is-disabled {
-				pointer-events: none;
-				
-				.components-form-toggle__track {
-					background-color: gray;
-				}
-
-				+ .components-toggle-control__label {
-					opacity: 0.3;
-				}
+			~ .css-1aagzef {
+				gap: $controls-margin;
 			}
 
 			.components-form-toggle__input {
 				&:focus + .components-form-toggle__track {
 					box-shadow: none;
 					outline: none;
+				}
+			}
+
+			&.is-disabled {
+				pointer-events: none;
+				
+				.components-form-toggle__track {
+					background-color: $color-gray;
+				}
+
+				+ .components-toggle-control__label {
+					opacity: 0.3;
 				}
 			}
 		}
