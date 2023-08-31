@@ -139,10 +139,14 @@
 }
 
 @mixin disabled-style() {
+	@include disabled-opacity-default();
 	background: $color-gray-lightest;
 	color: $color-gray;
-	opacity: 0.4;
 	pointer-events: none;
+}
+
+@mixin disabled-opacity-default() {
+	opacity: 0.4;
 }
 
 @mixin box-shadow() {
@@ -204,13 +208,13 @@
 }
 
 @mixin checkbox-radio-style--disabled() {
+	@include disabled-opacity-default();
 	border: 1px solid $controls-border-color--disabled;
 	background-color: $controls-bg--disabled;
-	opacity: 0.3; 
 	pointer-events: none;
 
 	+ label {
-		opacity: 0.3;
+		@include disabled-opacity-default();
 		pointer-events: none;
 	}
 

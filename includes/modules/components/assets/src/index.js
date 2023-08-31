@@ -33,7 +33,7 @@ const AllComponents = () => {
 function ControlsShowcase() {
 	const [value, setValue] = useState(false);
 	const [option, setOption] = useState('a');
-	const [isChecked, setChecked] = useState(true);
+	const [isChecked, setChecked] = useState(false);
 
 	const initialCheckboxes = [
 		{ id: 'checkbox-1', label: 'Checkbox 1', checked: false },

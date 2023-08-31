@@ -1,5 +1,6 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
+@import './partials/mixins';
 
 .components-toggle-control { 
 	.components-base-control__field {
@@ -21,11 +22,11 @@
 				pointer-events: none;
 				
 				.components-form-toggle__track {
-					background-color: $color-gray;
+					background-color: $controls-bg--disabled;
 				}
 
 				+ .components-toggle-control__label {
-					opacity: 0.3;
+					@include disabled-opacity-default();
 				}
 			}
 		}

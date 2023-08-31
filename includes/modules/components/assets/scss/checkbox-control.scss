@@ -12,16 +12,16 @@
 	}
 
 	&.is-disabled {
-		.components-checkbox-control__input {
-			@include checkbox-radio-style--disabled();
+		.components-checkbox-control__input-container {
+			.components-checkbox-control__input {
+				@include checkbox-radio-style--disabled();
+			}
 		}
 
 		.components-checkbox-control__label {
-			pointer-events: none;
-			opacity: 0.3;
+			@include disabled-opacity-default();
 		}
 	}
-
 
 	&.is-indeterminate,
 	&.is-indeterminate ~ .components-checkbox-control {
@@ -33,7 +33,7 @@
 			}
 
 			&:disabled {
-				background-color: $color-gray-lightest;
+				background-color: mix($color-blue, $color-gray-lighter, 20%);
 
 				&:checked {
 					background-color: $color-blue;
