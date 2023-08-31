@@ -39,6 +39,7 @@
 		.components-base-control__field {
 			margin-bottom: 0px;
 
+			.components-textarea-control__input,
 			.components-text-control__input {
 				@include input-style();
 			}

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import '../../scss/textarea-control.scss';
+import '../../scss/text-control.scss';
 
 /**
  * WordPress dependencies
@@ -32,8 +32,10 @@ export default ({
 	}
 
 	return (
-		<TextareaControl
-			{...textControlProps}
-		/>
+		<div className="text-control-container">
+			<TextareaControl
+				{...textControlProps}
+			/>
+		</div>
 	);
 };
