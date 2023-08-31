@@ -1,70 +1,69 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
+@import './partials/mixins';
+
+@mixin filter-menu-color-style(
+	$hover: (
+		$tab-color--hover,
+		$tab-bg--hover,
+	),
+
+	$active: (
+		$tab-color--active,
+		$tab-bg--active,
+	),
+) {
+	.components-tab-panel__tabs {
+		&-item { 
+			&:hover {
+				color: nth($hover, 1);
+				background-color: nth($hover, 2);
+			}
+
+			&.is-active{
+				background-color: nth($active, 2);
+
+				&:hover {
+					color: nth($active, 1);
+				}
+			}
+		}
+	}
+}
 
 
 .filter-menus{
 	.components-tab-panel__tabs {
-		border: none;
-		width: fit-content;
-		gap: 7px;
-		
+		@include filter-switch-tab-style();
+
 		&-item {
-			color: #999999;
-			padding: 6px 12px;
-			background-color: #F2F2F2;
-			border-radius: 0.15rem;
-			height: fit-content;
-
-			&:focus:not(:disabled) {
-				box-shadow: none;
-			}
-
-			&.is-active{
-				color: white;
-				box-shadow: none;
-
-				&:focus {
-					box-shadow: none;
-				}
-			}
-		}   
+			background-color: $color-white-darker;
+		}
 	}
 
 	&.is-black {
-		.components-tab-panel__tabs {
-			&-item { 
-				&:hover {
-					color: $color--tab-is-black--hover;
-					background-color: $color-bg--tab-is-black--hover;
-				}
-
-				&.is-active{
-					background-color: $color-bg--tab-is-black--active;
-
-					&:hover {
-						color: $color--tab-is-black--active;
-					}
-				}
-			}
-		}
+		@include filter-menu-color-style(
+			$hover: (
+				$black-tab-color--hover,
+				$black-tab-bg--hover-2
+			),
+			$active: (
+				$black-tab-color--active,
+				$black-tab-bg--active
+			)
+		)
 	}
 
 	&.is-blue {
-		.components-tab-panel__tabs {
-			&-item { 
-				&:hover {
-					color: var(--wp-admin-theme-color);
-					background-color: $color-bg--hover-secondary;
-				}
-
-				&.is-active{
-					background-color: var(--wp-admin-theme-color);
-
-					&:hover {
-						color: white;
-					}
-				}
-			}
-		}
+		@include filter-menu-color-style(
+			$hover: (
+				$blue-tab-color--hover,
+				$blue-tab-bg--hover
+			),
+			$active: (
+				$blue-tab-color--active,
+				$blue-tab-bg--active
+			)
+		)
 	}
 }

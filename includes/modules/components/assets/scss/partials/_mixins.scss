@@ -126,6 +126,14 @@
 	border: 1px solid $color-blue;
 }
 
+@mixin border-light() {
+	border: 1px solid $color-gray-lighter;
+}
+
+@mixin border-radius-small() {
+	border-radius: 0.15rem;
+}
+
 @mixin font-size-small() {
 	font-size: 13px;
 }
@@ -136,6 +144,10 @@
 
 @mixin font-size-large() {
 	font-size: 18px;
+}
+
+@mixin gap-small() {
+	gap: 5px;
 }
 
 @mixin disabled-style() {
@@ -225,5 +237,31 @@
 	&:checked {
 		@include border-blue();
 		background-color: $color-blue;
+	}
+}
+
+@mixin filter-switch-tab-style() {
+	@include gap-small();
+	border: none;
+	width: fit-content;
+	
+	&-item {
+		@include border-radius-small();
+		color: $color-gray;
+		padding: 6px 12px;
+		height: fit-content; 
+
+		&:focus:not(:disabled) {
+			box-shadow: none;
+		}
+
+		&.is-active{
+			color: $color-white;
+			box-shadow: none;
+
+			&:focus {
+				box-shadow: none;
+			}
+		}
 	}
 }

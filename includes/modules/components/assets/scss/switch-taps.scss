@@ -1,44 +1,79 @@
 @import '@wordpress/components/build-style/style.css';
 @import './partials/variables';
+@import './partials/mixins';
 
+@mixin switch-tap-color-style(
+	$hover: (
+		$tab-color--hover,
+		$tab-bg--hover,
+	),
 
-.switch-taps {
+	$active: (
+		$tab-color--active,
+		$tab-bg--active,
+	),
+) {
 	.components-tab-panel__tabs {
-		border: 1px solid $color-border--gray-primary;
-		border-radius: 0.15rem;
-		width: fit-content;
-		gap: 7px;
-		padding: 4px;
-		
+		&:hover {
+			border: 1px solid nth($hover, 1);
+		}
+
 		&-item {
-			color: #999999;
-			padding: 0px 10px;
-			border-radius: 0.15rem;
-			height: fit-content;
+			&:hover {
+				color: nth($hover, 1);
+				background-color: nth($hover, 2);
 
-			&:focus:not(:disabled) {
-				box-shadow: none;
-			}
-
-			&.is-active{
-				color: white;
-				box-shadow: none;
-
-				&:focus {
-					box-shadow: none;
+				.panel-has-icon {
+					.title,
+					i {
+						color: nth($hover, 1);
+					}
 				}
 			}
 
+			&.is-active{
+				background-color: nth($active, 2);
+
+				.title,
+				i, 
+				&:hover {
+					color: nth($active, 1);
+				}
+
+				.panel-has-icon {
+					.title {
+						color: nth($active, 1);
+					}
+				}
+			}
+		}
+	}
+}
+
+.switch-taps {
+	.components-tab-panel__tabs {
+		@include filter-switch-tab-style();
+		@include border-light();
+		@include border-radius-small();
+		padding: 4px;
+
+		&-item {
+			padding: 0px 10px;
+
 			.panel-has-icon {
+				@include gap-small();
 				display: flex;
 				align-items: center;
-				gap: 5px;
 				font-size: 1rem;
+
+				.title,
+				i {
+					color: $color-black-light;
+				}
 
 				.title {
 					font-size: 13px;
 					font-weight: normal;
-					color: #5F5F5F;
 					display: block;
 				}
 			}
@@ -46,73 +81,29 @@
 	}
 
 	&.is-black {
-		.components-tab-panel__tabs {
-			&:hover {
-				border: 1px solid $color--tab-is-black--hover;
-			}
-
-			&-item { 
-				&:hover {
-					color: $color--tab-is-black--hover;
-					background-color: $color-bg--tab-is-black--hover;
-
-					.panel-has-icon {
-						.title {
-							color: $color--tab-is-black--hover;
-						}
-					}
-				}
-
-				&.is-active{
-					background-color: $color-bg--tab-is-black--active;
-
-					&:hover {
-						color: $color--tab-is-black--active;
-					}
-
-					.panel-has-icon {
-						.title {
-							color: $color--tab-is-black--active;
-						}
-					}
-				}
-			}
-		}
+		@include switch-tap-color-style(
+			$hover: (
+				$black-tab-color--hover,
+				$black-tab-bg--hover
+			),
+			$active: (
+				$black-tab-color--active,
+				$black-tab-bg--active
+			)
+		)
 	}
 
 	&.is-blue {
-		.components-tab-panel__tabs {
-			&:hover {
-				border: 1px solid var(--wp-admin-theme-color);
-			}
-
-			&-item { 
-				&:hover {
-					color: var(--wp-admin-theme-color);
-					background-color: $color-bg--hover-secondary;
-
-					.panel-has-icon {
-						.title {
-							color: var(--wp-admin-theme-color);
-						}
-					}
-				}
-
-				&.is-active{
-					background-color: var(--wp-admin-theme-color);
-
-					&:hover {
-						color: white;
-					}
-
-					.panel-has-icon {
-						.title {
-							color: white;
-						}
-					}
-				}
-			}
-		}
+		@include switch-tap-color-style(
+			$hover: (
+				$blue-tab-color--hover,
+				$blue-tab-bg--hover
+			),
+			$active: (
+				$blue-tab-color--active,
+				$blue-tab-bg--active
+			)
+		)
 	}
 
 	&.icon-only {
