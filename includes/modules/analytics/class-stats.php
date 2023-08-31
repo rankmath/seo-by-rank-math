@@ -664,10 +664,10 @@ class Stats extends Keywords {
 			// Get current position data.
 			// phpcs:disable
 			$query = $wpdb->prepare(
-				"SELECT {$dimension}, MAX(CONCAT({$dimension}, ':', DATE(created), ':', LPAD((100 - position), 3, '0'))) as uid
+				"SELECT {$dimension}, max(DATE(created)) as date, max(LPAD((100 - position), 3, '0')) as position
 				FROM {$wpdb->prefix}rank_math_analytics_gsc 
 				WHERE created BETWEEN %s AND %s {$sub_where}
-				GROUP BY {$dimension}",
+				GROUP BY {$dimension} ORDER BY position ASC",
 				$this->start_date,
 				$this->end_date
 			);
@@ -675,19 +675,15 @@ class Stats extends Keywords {
 
 			// Get old position data.
 			$query = $wpdb->prepare(
-				"SELECT {$dimension}, MAX(CONCAT({$dimension}, ':', DATE(created), ':', LPAD((100 - position), 3, '0'))) as uid
+				"SELECT {$dimension}, max(DATE(created)) as date, max(LPAD((100 - position), 3, '0')) as position
 				FROM {$wpdb->prefix}rank_math_analytics_gsc 
 				WHERE created BETWEEN %s AND %s 
-				GROUP BY {$dimension}",
+				GROUP BY {$dimension} ORDER BY position ASC",
 				$this->compare_start_date,
 				$this->compare_end_date
 			);
 			$old_positions = $wpdb->get_results( $query );
 			// phpcs:enable
-
-			// Extract proper position data.
-			$positions     = $this->extract_data_from_mixed( $positions, 'uid', ':', [ 'position', 'date' ] );
-			$old_positions = $this->extract_data_from_mixed( $old_positions, 'uid', ':', [ 'position', 'date' ] );
 
 			// Set 'page' as key.
 			$positions     = $this->set_dimension_as_key( $positions, $dimension );
@@ -701,8 +697,9 @@ class Stats extends Keywords {
 				} else {
 					$old_position_value = $old_positions[ $page ]->position;
 				}
-
-				$row['diffPosition'] = $row['position'] - $old_position_value;
+				$position            = ( $row['position'] ) ? $row['position'] : 0;
+				$row['position']     = $position;
+				$row['diffPosition'] = $position - $old_position_value;
 			}
 		} else {
 			// In case dimension is not 'page', position data for each dimension will be most recent position value.
