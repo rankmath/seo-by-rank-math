@@ -5,7 +5,7 @@
 	
 	&-item {
 		@include border-radius-small();
-		color: $color-gray;
+		color: $gray;
 		padding: 6px 12px;
 		height: fit-content; 
 
@@ -14,7 +14,7 @@
 		}
 
 		&.is-active{
-			color: $color-white;
+			color: $white;
 			box-shadow: none;
 
 			&:focus {

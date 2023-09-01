@@ -31,9 +31,9 @@
 	&:focus,
 	&:active:not(:disabled),
 	&:focus:not(:disabled) {
-		border-color: $color-blue;
+		border-color: $blue;
 		outline: 2px solid transparent;
-		box-shadow: 0 0 0 1px $color-blue;
+		box-shadow: 0 0 0 1px $blue;
 	}
 
 	&::placeholder {
@@ -58,7 +58,7 @@
 	}
 
 	&:checked {
-		border-color: $color-blue;
+		border-color: $blue;
 	}
 }
 
@@ -75,6 +75,6 @@
 
 	&:checked {
 		@include border-blue();
-		background-color: $color-blue;
+		background-color: $blue;
 	}
 }

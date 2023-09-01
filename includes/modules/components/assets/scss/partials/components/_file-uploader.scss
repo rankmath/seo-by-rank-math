@@ -7,10 +7,10 @@
 		.uploader__uploaded-title {
 			@include gap-small();
 			@include flex-align();
-			color: $color-black-light;
+			color: $black-light;
 
 			.icon {
-				color: $color-green-light;
+				color: $green-light;
 				font-size: 1rem;
 			}
 		}

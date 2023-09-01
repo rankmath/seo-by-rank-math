@@ -29,10 +29,10 @@
 			}
 
 			&:disabled {
-				background-color: mix($color-blue, $color-gray-lighter, 20%);
+				background-color: mix($blue, $gray-lighter, 20%);
 
 				&:checked {
-					background-color: $color-blue;
+					background-color: $blue;
 				}
 			}
 		}

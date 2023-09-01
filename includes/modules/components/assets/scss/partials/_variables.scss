@@ -1,18 +1,18 @@
 $border-width--focus: 2px;
 
 // Radio, Checkbox & Toggle Control
-$controls-border-color--disabled: $color-gray-darkest;
-$controls-bg--disabled: $color-gray-lighter;
+$controls-border-color--disabled: $gray-darkest;
+$controls-bg--disabled: $gray-lighter;
 $controls-margin: 8px;
 
 //Switch & Filter Tabs
-$black-tab-color--hover: $color-black-light;
-$black-tab-bg--hover: $color-white-darker;
-$black-tab-bg--hover-2: $color-white-darkest;
-$black-tab-color--active: $color-white;
-$black-tab-bg--active: $color-black-light;
+$black-tab-color--hover: $black-light;
+$black-tab-bg--hover: $white-darker;
+$black-tab-bg--hover-2: $white-darkest;
+$black-tab-color--active: $white;
+$black-tab-bg--active: $black-light;
 
-$blue-tab-color--hover: $color-blue;
-$blue-tab-bg--hover: $color-blue--hover-2;
-$blue-tab-color--active: $color-white;
-$blue-tab-bg--active: $color-blue;
+$blue-tab-color--hover: $blue;
+$blue-tab-bg--hover: $blue-lighter;
+$blue-tab-color--active: $white;
+$blue-tab-bg--active: $blue;

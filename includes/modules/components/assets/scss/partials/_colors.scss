@@ -1,41 +1,51 @@
 // Base Colors
-$color-red: #ff0000;
-$color-green: #008000;
-$color-yellow: #ffff00;
-$color-black: #000000;
-$color-white: #ffffff;
-$color-gray: #808080;
-$color-blue: #007cba;
+$red: #ff0000;
+$green: #008000;
+$yellow: #ffff00;
+$black: #000000;
+$white: #ffffff;
+$gray: #808080;
+$blue: #007cba;
 
 // Base Color Variations
-$color-blue-lightest: rgba($color-blue, 12%);
-$color-blue--hover: rgba($color-blue, 5%);
-$color-blue--hover-2: rgba($color-blue, 10%);
-$color-blue--focus: rgba($color-blue, 25%);
+// Blue Variants
+$blue-light: rgba($blue, 12%);
+$blue-lighter: rgba($blue, 10%);
+$blue-lightest: rgba($blue, 5%);
+$blue-dark: rgba($blue, 25%);
 
-$color-white-dark: darken($color-white, 1%);
-$color-white-darker: darken($color-white, 5%);
-$color-white-darkest: darken($color-white, 10%);
-$color-white-heavy: darken($color-white, 20%);
-$color-white-medium: darken($color-white, 3%);
 
-$color-gray-light: lighten($color-gray, 10%);
-$color-gray-lighter: lighten($color-gray, 20%);
-$color-gray-lightest: lighten($color-gray, 40%);
-$color-gray-dark: darken($color-gray, 10%);
-$color-gray-darker: darken($color-gray, 20%);
-$color-gray-darkest: darken($color-gray, 30%);
+// White Variants
+$white-dark: darken($white, 1%);
+$white-darker: darken($white, 5%);
+$white-darkest: darken($white, 10%);
+$white-heavy: darken($white, 20%);
+$white-medium: darken($white, 3%);
 
-$color-black-light: lighten($color-black, 18%);
 
-$color-green-light: lighten($color-green, 10%);
+// Gray Variants
+$gray-light: lighten($gray, 10%);
+$gray-lighter: lighten($gray, 20%);
+$gray-lightest: lighten($gray, 40%);
+$gray-dark: darken($gray, 10%);
+$gray-darker: darken($gray, 20%);
+$gray-darkest: darken($gray, 30%);
+
+
+// Black Variants
+$black-light: lighten($black, 18%);
+
+
+// Green Variants
+$green-light: lighten($green, 10%);
+
 
 // Validation Colors
-$color-success: lighten($color-green, 10%);
-$color-success-bg: lighten($color-green, 74%);
+$color-success: lighten($green, 10%);
+$color-success-bg: lighten($green, 74%);
 
-$color-error: lighten($color-red, 10%);
-$color-error-bg: lighten($color-red, 49%);
+$color-error: lighten($red, 10%);
+$color-error-bg: lighten($red, 49%);
 
-$color-destructive: mix($color-red, $color-black, 80%);
-$color-destructive--hover: mix($color-red, $color-black, 61%);
+$color-destructive: mix($red, $black, 80%);
+$color-destructive-hover: mix($red, $black, 61%);

@@ -63,13 +63,13 @@
 			display: flex;
 			align-items: center;
 			font-size: 0.55rem;
-			color: $color-blue;
+			color: $blue;
 			
 			.custom-number-control__icon {
 				padding: 0.5rem;
 
 				&:hover {
-					background-color: $color-blue--hover;
+					background-color: $blue-lightest;
 				}
 
 				&.is-disabled {

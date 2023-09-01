@@ -1,6 +1,6 @@
 @mixin uploader-style() {
 	@include border-extralight();
-	background-color: $color-white-dark;
+	background-color: $white-dark;
 	width: 35rem;
 	padding: 16px;
 
@@ -8,13 +8,13 @@
 		@include flex-center();
 		@include gap-large();
 		background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23C7C7C7FF' stroke-width='2' stroke-dasharray='3%2c 4' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-		background-color: $color-white-medium;
-		color: $color-gray-light;
+		background-color: $white-medium;
+		color: $gray-light;
 		height: fit-content;
 		height: auto;
 
 		.uploader__is-uploading {
-			color: $color-black-light;
+			color: $black-light;
 		}
 
 		.uploader__actions {
@@ -25,8 +25,8 @@
 		.components-button {
 			@include border-default();
 			@include gap-medium();
-			background-color: $color-white;
-			color: $color-gray;
+			background-color: $white;
+			color: $gray;
 
 			&:focus:not(:disabled) {
 				box-shadow: none;
@@ -50,7 +50,7 @@
 			}
 
 			.components-range-control__track {
-				color: $color-blue;
+				color: $blue;
 			}
 		}
 	}

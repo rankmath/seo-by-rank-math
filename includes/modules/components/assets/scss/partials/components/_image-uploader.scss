@@ -10,12 +10,12 @@
 	}
 
 	.uploader__preview {
-		background-color: darken($color-white, 7%);
+		background-color: darken($white, 7%);
 		height: 8rem;
 
 		&-title {
 			@include flex-center();
-			color: $color-gray;
+			color: $gray;
 			font-size: 0.83rem;
 			text-transform: uppercase;
 			height: 100%;

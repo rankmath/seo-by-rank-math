@@ -1,6 +1,6 @@
 
 @mixin option-separator() {
-	border-bottom: 1px solid $color-gray-lightest;
+	border-bottom: 1px solid $gray-lightest;
 }
 
 .components-custom-select-control {
@@ -22,7 +22,7 @@
 
 	.components-custom-select-control__menu {
 		@include box-shadow-default();
-		border-color: $color-blue;
+		border-color: $blue;
 		margin: 0;
 		border-top: 0;
 		min-width: 99%;
@@ -33,8 +33,8 @@
 			}
 
 			&.is-highlighted {
-				background-color: $color-blue--hover;
-				color: $color-blue;
+				background-color: $blue-lightest;
+				color: $blue;
 				cursor: pointer;
 			}
 		}
@@ -78,7 +78,7 @@
 			&[aria-expanded="true"] {
 				+ .components-input-control__suffix {
 					.components-input-control-suffix-wrapper {
-						background-color: $color-blue-lightest;
+						background-color: $blue-light;
 					}
 				}
 			}
@@ -88,7 +88,7 @@
 			.components-input-control-suffix-wrapper {
 				right: 4px;
 				padding-right: 4px;
-				background-color: $color-gray-lightest;
+				background-color: $gray-lightest;
 
 				.css-18q9qlf {
 					padding: 5px;
@@ -100,12 +100,12 @@
 			.components-search-control {
 				.components-base-control__field {
 					@include option-separator();
-					background-color: $color-white;
+					background-color: $white;
 					padding: 8px 16px;
 
 					.components-search-control__input {
 						@include border-default();
-						background-color: $color-white;
+						background-color: $white;
 
 						&:focus {
 							box-shadow: none;
@@ -140,30 +140,30 @@
 
 						&-subtitle {
 							@include font-size-small();
-							background-color: $color-white-darker;
+							background-color: $white-darker;
 							font-weight: 600;
 							margin: 0px;
 						}
 					}
 
 					.option__description {
-						color: $color-gray;
+						color: $gray;
 					}
 				}
 
 				&.is-highlighted {
 					.option__heading {
 						&-title {
-							color: $color-blue; 
+							color: $blue; 
 						}
 						&-subtitle {
-							background-color: $color-blue--hover;
-							color: $color-blue; 
+							background-color: $blue-lightest;
+							color: $blue; 
 						}
 					}
 
 					.option__description {
-						color: $color-gray-darkest;
+						color: $gray-darkest;
 					}
 				}
 			}
@@ -172,7 +172,7 @@
 		&.is-disabled {
 			.components-input-control__suffix {
 				.components-input-control-suffix-wrapper {	
-					background-color: rgba($color-gray, 0.2);
+					background-color: rgba($gray, 0.2);
 					
 					svg {
 						opacity: 0.4;

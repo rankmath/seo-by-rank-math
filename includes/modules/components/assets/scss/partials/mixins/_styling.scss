@@ -1,21 +1,21 @@
 @mixin border-default() {
-	border: 1px solid $color-gray-light;
+	border: 1px solid $gray-light;
 }
 
 @mixin border-blue() {
-	border: 1px solid $color-blue;
+	border: 1px solid $blue;
 }
 
 @mixin border-light() {
-	border: 1px solid $color-gray-lighter;
+	border: 1px solid $gray-lighter;
 }
 
 @mixin border-lighter() {
-	border: 1px solid $color-gray-lightest;
+	border: 1px solid $gray-lightest;
 }
 
 @mixin border-extralight() {
-	border: 1px solid $color-white-heavy;
+	border: 1px solid $white-heavy;
 }
 
 @mixin border-radius-small() {
@@ -34,8 +34,8 @@
 
 @mixin disabled-style() {
 	@include disabled-opacity-default();
-	background: $color-gray-lightest;
-	color: $color-gray;
+	background: $gray-lightest;
+	color: $gray;
 	pointer-events: none;
 }
 @mixin disabled-opacity-default() {
@@ -43,11 +43,11 @@
 }
 
 @mixin box-shadow-default() {
-	box-shadow: 0px 2px 4px $color-gray-lightest;
+	box-shadow: 0px 2px 4px $gray-lightest;
 }
 
 @mixin box-shadow-primary() {
-	box-shadow: 0 0 0 1px $color-white, 0 0 0 $border-width--focus $color-blue;
+	box-shadow: 0 0 0 1px $white, 0 0 0 $border-width--focus $blue;
 }
 
 @mixin center-float-vertically() {
