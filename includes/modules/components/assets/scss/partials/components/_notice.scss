@@ -1,82 +1,54 @@
+@mixin notice-dismiss-style($background) {
+	.components-notice__dismiss {
+		&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover {
+			svg {
+				background-color: $background;
+				padding: 1px;
+			}
+		}
+	}
+}
+
+@mixin notice-style($icon-color, $background, $border-left-color, $close-icon-bg) {
+	background-color: $background;
+	border-left-color: $border-left-color;
+
+	.components-notice__icon {
+		color: $icon-color;
+	}
+
+	@include notice-dismiss-style($close-icon-bg);
+}
 
 .components-notice {
 	width: 35rem;
 	margin: 0px;
 
 	&.is-info {
-		background-color: #F2F8FC;
-
-		.components-notice__icon {
-			color: #2F93C7;
-		}
-
-		.components-notice__dismiss {
-			&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover {
-				svg {
-					background-color: #DAECF5;
-				}
-			}
-		}
+		@include notice-style($blue, $blue-lightest, $blue, $blue-lighter);
 	}
 
 	&.is-error {
-		background-color: #FEEDF0;
-		border-left-color: #F24F65;
-
-		.components-notice__icon {
-			color: #E93A3A;
-		}
-
-		.components-notice__dismiss {
-			&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover {
-				svg {
-					background-color: #FDDDE2;
-				}
-			}
-		}
+		@include notice-style($error-color-2, $red-lightest, $error-color-2, $red-lighter);
 	}
 
 	&.is-info-grey {
-		background-color: #F6F6F6;
-		border-left: 4px solid #F6F6F6;
-
-		.components-notice__icon {
-			color: #7F7F7F;
-		}
-
-		.components-notice__dismiss {
-			&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover {
-				svg {
-					background-color: #E9E9E9;
-				}
-			}
-		}
+		@include notice-style($gray, $white-darker, $white-darker, $white-darkest);
 	}
 
 	&.is-warning {
-		.components-notice__icon {
-			color: #F1BF5A;
-		}
+		@include notice-dismiss-style(#FBEED4);
 
-		.components-notice__dismiss {
-			&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover {
-				svg {
-					background-color: #FBEED4;
-				}
-			}
+		.components-notice__icon {
+			color: $warning-color;
 		}
 	}
 
 	&.is-success {
+		@include notice-dismiss-style(#D9F0DF);
+
 		.components-notice__icon {
 			color: #5FC078;
-		}
-		.components-notice__dismiss {
-			&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover {
-				svg {
-					background-color: #D9F0DF;
-				}
-			}
 		}
 	}
 
@@ -89,11 +61,9 @@
 			padding-left: 2.3rem;
 
 			.components-notice__icon {
+				@include center-float-vertically();
 				font-size: 1.7rem;
-				position: absolute;
 				left: 0;
-				top: 50%;
-				transform: translateY(-50%);
 			}
 		}
 	}
@@ -125,21 +95,11 @@
 	}
 
 	.components-button{
+		@include remove-focus-styles();
 		margin: auto;
-
-		&:focus:not(:disabled) {
-			box-shadow: none;
-			outline: none;
-		}
 		
 		&.components-notice__dismiss {
 			color: #9DA1A3;
-
-			&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover {
-				svg {
-					padding: 1px;
-				}
-			}
 			
 			svg {
 				width: 1.2rem;

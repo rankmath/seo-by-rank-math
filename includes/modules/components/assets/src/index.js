@@ -18,10 +18,13 @@ import RadioControl from './controls/RadioControl';
 import ToggleControl from './controls/ToggleControl';
 import FileUploader from './uploaders/FileUploader';
 import ImageUploader from './uploaders/ImageUploader';
+import Notice from './prompts/Notice';
 
 const AllComponents = () => {
 	return (
 		<div className='container'>
+
+			<NoticeShowcase />
 
 			<FileUploadersShowcase />
 
@@ -35,6 +38,140 @@ const AllComponents = () => {
 	)
 };
 
+function NoticeShowcase() {
+	return (
+		<>
+			<h2>NOTICE BANNERS</h2>
+
+			<div className='components-wrapper'>
+				<div className='notice-group'>
+					<Notice
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+					</Notice>
+
+					<Notice
+						icon='rm-icon-trash'
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+					</Notice>
+
+					<Notice
+						status='warning'
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+					</Notice>
+
+					<Notice
+						status='warning'
+						icon='rm-icon-trash'
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+					</Notice>
+
+					<Notice
+						status='success'
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+					</Notice>
+
+					<Notice
+						status='success'
+						icon='rm-icon-trash'
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+					</Notice>
+
+					<Notice
+						status='error'
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+					</Notice>
+
+					<Notice
+						status='error'
+						icon='rm-icon-trash'
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+					</Notice>
+
+					<Notice
+						status='info-grey'
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+					</Notice>
+
+					<Notice
+						status='info-grey'
+						icon='rm-icon-trash'
+						actions={[
+							{
+								label: "Read More",
+								url: "https://wordpress.org"
+							}
+						]}
+					>
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+					</Notice>
+				</div>
+			</div>
+		</>
+	)
+};
 function FileUploadersShowcase() {
 	return (
 		<>
@@ -56,8 +193,6 @@ function FileUploadersShowcase() {
 		</>
 	)
 };
-
-
 function ControlsShowcase() {
 	const [value, setValue] = useState(false);
 	const [option, setOption] = useState('a');
@@ -195,7 +330,6 @@ function ControlsShowcase() {
 		</div>
 	);
 };
-
 function TextInputFieldsShowcase() {
 	const optionsList = [
 		{
@@ -358,7 +492,6 @@ function TextInputFieldsShowcase() {
 		</div>
 	)
 };
-
 function ButtonsShowcase() {
 	return (
 		<div>

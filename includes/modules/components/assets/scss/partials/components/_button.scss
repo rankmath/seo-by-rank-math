@@ -125,11 +125,11 @@ $color-tertiary: $gray;
 
 		&.is-destructive {
 			&:active, &:focus {
-				outline-color: $color-destructive;
+				outline-color: $destructive-color;
 				color: $white;
 
 				&:hover {
-					background-color: $color-destructive-hover;
+					background-color: $destructive-color-hover;
 					box-shadow: inset 0 0 0 1px $white, 0 0 0 $border-width--focus $blue;
 				}
 			}
@@ -163,24 +163,24 @@ $color-tertiary: $gray;
 		&.is-destructive {
 			@include secondary-button-style(
 				$normal: (
-					$color-destructive,
-					$color-destructive
+					$destructive-color,
+					$destructive-color
 				),
 				$hover: (
-					$color-destructive-hover,
+					$destructive-color-hover,
 					inherit,
-					$color-destructive-hover,
+					$destructive-color-hover,
 				),
 				$focus-active: (
-					$color-destructive,
+					$destructive-color,
 					$white-dark,
-					$color-destructive,
+					$destructive-color,
 					darken($white, 5%),
 				),
 				$disabled: (
 					inherit,
 					inherit,
-					$color-destructive
+					$destructive-color
 				)
 			);
 		}

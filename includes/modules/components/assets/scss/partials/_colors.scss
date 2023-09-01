@@ -31,6 +31,10 @@ $gray-dark: darken($gray, 10%);
 $gray-darker: darken($gray, 20%);
 $gray-darkest: darken($gray, 30%);
 
+// Red Variants
+$red-lighter: rgba($red, 10%);
+$red-lightest: rgba($red, 7%);
+
 
 // Black Variants
 $black-light: lighten($black, 18%);
@@ -41,11 +45,14 @@ $green-light: lighten($green, 10%);
 
 
 // Validation Colors
-$color-success: lighten($green, 10%);
-$color-success-bg: lighten($green, 74%);
+$success-color: lighten($green, 10%);
+$success-bg: lighten($green, 74%);
 
-$color-error: lighten($red, 10%);
-$color-error-bg: lighten($red, 49%);
+$error-color: lighten($red, 10%);
+$error-color-2: #F24F65;
+$error-bg: lighten($red, 49%);
 
-$color-destructive: mix($red, $black, 80%);
-$color-destructive-hover: mix($red, $black, 61%);
+$warning-color: #F0B849;
+
+$destructive-color: mix($red, $black, 80%);
+$destructive-color-hover: mix($red, $black, 61%);
