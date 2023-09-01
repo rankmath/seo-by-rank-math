@@ -17,6 +17,12 @@
 @mixin gap-small() {
 	gap: 5px;
 }
+@mixin gap-medium() {
+	gap: 10px;
+}
+@mixin gap-large() {
+	gap: 15px;
+}
 
 @mixin disabled-style() {
 	@include disabled-opacity-default();
@@ -37,8 +43,16 @@
 	box-shadow: 0 0 0 1px $color-white, 0 0 0 $border-width--focus $color-blue;
 }
 
-@mixin center-vertically() {
+@mixin center-float-vertically() {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+@mixin center-column() {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 }

@@ -21,14 +21,14 @@ export default () => {
 			const image = new Image();
 
 			image.onload = () => {
-				if (image.width < 1400 || image.height < 1400) {
-					alert("Image dimensions are too small. Minimum dimensions required: 1400x1400px.");
-					return;
-				}
-				if (image.width > 3000 || image.height > 3000) {
-					alert("Image dimensions are too large. Maximum dimensions allowed: 3000x3000px.");
-					return;
-				}
+				// if (image.width < 1400 || image.height < 1400) {
+				// 	alert("Image dimensions are too small. Minimum dimensions required: 1400x1400px.");
+				// 	return;
+				// }
+				// if (image.width > 3000 || image.height > 3000) {
+				// 	alert("Image dimensions are too large. Maximum dimensions allowed: 3000x3000px.");
+				// 	return;
+				// }
 
 				setImageIsUploading(true);
 
@@ -67,13 +67,13 @@ export default () => {
 				showTooltip={false}
 			/>
 
-			<span className='image-uploader__is-uploading'>Uploading File: {imageUploadingPercentage}%</span>
+			<span className='uploader__is-uploading'>Uploading File: {imageUploadingPercentage}%</span>
 		</>
 	);
 
 	const imageActions = (
 		<>
-			<div className='image-uploader__actions'>
+			<div className='uploader__actions'>
 				<FormFileUpload accept='image/*' onChange={handleImageUpload}>
 					<i className={imageUploaded ? 'rm-icon-trash' : 'rm-icon-export'}></i>
 					<span>{imageUploaded ? 'Replace Image' : 'Add or Upload Image'}</span>
@@ -91,17 +91,17 @@ export default () => {
 	);
 
 	const imagePreview = (
-		<div className='image-uploader__preview'>
+		<div className='uploader__preview'>
 			{imageUploaded ?
-				<img src={uploadedImageSrc} alt='' className='image-uploader__preview-img' />
+				<img src={uploadedImageSrc} alt='' className='uploader__preview-img' />
 				:
-				<span className='image-uploader__preview-title'>Image Preview</span>}
+				<span className='uploader__preview-title'>Image Preview</span>}
 		</div>
 	);
 
 	return (
-		<div className='image-uploader__wrapper'>
-			<div className='image-uploader__content'>
+		<div className='image-uploader'>
+			<div className='uploader__content'>
 				{imageIsUploading ? uploadingActions : imageActions}
 			</div>
 

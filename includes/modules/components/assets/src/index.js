@@ -16,15 +16,14 @@ import SelectControl from './select/SelectControl';
 import CheckboxControl from './controls/CheckboxControl';
 import RadioControl from './controls/RadioControl';
 import ToggleControl from './controls/ToggleControl';
-import SwitchTaps from './tabs/SwitchTaps';
-import TabPanelWithIcon from './tabs/TabPanelWithIcon';
-import FilterMenus from './tabs/FilterMenus';
+import FileUploader from './uploaders/FileUploader';
+import ImageUploader from './uploaders/ImageUploader';
 
 const AllComponents = () => {
 	return (
 		<div className='container'>
 
-			<FilterAndSwitchTabsShowcase />
+			<FileUploadersShowcase />
 
 			<ControlsShowcase />
 
@@ -36,168 +35,28 @@ const AllComponents = () => {
 	)
 };
 
-function FilterAndSwitchTabsShowcase() {
+function FileUploadersShowcase() {
 	return (
 		<>
-			<h2>FILTER AND SWITCH TABS</h2>
+			<h2>FILE UPLOADERS</h2>
 
 			<div className='components-wrapper'>
 				<div>
-					<h4>Switch Tabs - Black</h4>
+					<h4>Other File Uploader</h4>
 
-					<div className='components-group'>
-						<SwitchTaps
-							iconOnly
-							tabs={[
-								{
-									name: 'tab1',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
-								},
-								{
-									name: 'tab2',
-									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
-						/></div>
-
-					<div className='components-group'>
-						<SwitchTaps
-							tabs={[
-								{
-									name: 'tab5',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
-								},
-								{
-									name: 'tab6',
-									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
-						/></div>
+					<FileUploader />
 				</div>
 
-				<div>
-					<h4>Switch Tabs - Blue</h4>
+				<div className="margin-top">
+					<h4>Image Uploader</h4>
 
-					<div className='components-group'>
-						<SwitchTaps
-							iconOnly
-							variant='blue'
-							tabs={[
-								{
-									name: 'tab3',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
-								},
-								{
-									name: 'tab4',
-									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
-						/></div>
-
-					<div className='components-group'>
-						<SwitchTaps
-							variant='blue'
-							tabs={[
-								{
-									name: 'tab7',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
-								},
-								{
-									name: 'tab8',
-									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
-						/></div>
-				</div>
-
-
-				<div>
-					<h4>Filter Menu - Black</h4>
-
-					<div className='components-group'>
-						<FilterMenus
-							tabs={[
-								{
-									name: 'tab1',
-									title: 'All',
-								},
-								{
-									name: 'tab2',
-									title: 'First Content',
-								},
-								{
-									name: 'tab3',
-									title: 'Third',
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<h5>{tab.title}</h5>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
-						/></div>
-				</div>
-
-
-				<div>
-					<h4>Filter Menu - Blue</h4>
-
-					<div className='components-group'>
-						<FilterMenus
-							variant='blue'
-							tabs={[
-								{
-									name: 'tab1',
-									title: 'All',
-								},
-								{
-									name: 'tab2',
-									title: 'First Content',
-								},
-								{
-									name: 'tab3',
-									title: 'Third',
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<h5>{tab.title}</h5>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
-						/></div>
+					<ImageUploader />
 				</div>
 			</div>
 		</>
 	)
-}
+};
+
 
 function ControlsShowcase() {
 	const [value, setValue] = useState(false);
@@ -745,7 +604,6 @@ function ButtonsShowcase() {
 		</div>
 	);
 }
-
 
 const renderAllComponents = () => {
 	const componentsUi = document.getElementById('components-page');

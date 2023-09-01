@@ -51,7 +51,7 @@ export default () => {
 				showTooltip={false}
 			/>
 
-			<span className='file-uploader__is-uploading'>
+			<span className='uploader__is-uploading'>
 				Uploading File: {fileIsUploadingPercentage}%
 			</span>
 		</>
@@ -60,14 +60,14 @@ export default () => {
 	const fileActions = (
 		<>
 			{fileHasUploaded && (
-				<div className='file-uploader__uploaded-title'>
+				<div className='uploader__uploaded-title'>
 					<i className='rm-icon-tick icon'></i>
 					<b>File Added: </b>
 					<span>{uploadedFileName}</span>
 				</div>
 			)}
 
-			<div className='file-uploader__actions'>
+			<div className='uploader__actions'>
 				<FormFileUpload
 					accept='.xml,.html,application/zip,application/x-rar-compressed'
 					onChange={handleFileUpload}
@@ -88,8 +88,8 @@ export default () => {
 	);
 
 	return (
-		<div className='file-uploader__wrapper'>
-			<div className='file-uploader__content'>
+		<div className='file-uploader'>
+			<div className='uploader__content'>
 				{fileIsUploading ? uploadingActions : fileActions}
 			</div>
 		</div>

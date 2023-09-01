@@ -44,7 +44,7 @@
 	}
 
 	.text-control-icon {
-		@include center-vertically();
+		@include center-float-vertically();
 		right: 0.5rem;
 
 		.text-control-icon__validation {
