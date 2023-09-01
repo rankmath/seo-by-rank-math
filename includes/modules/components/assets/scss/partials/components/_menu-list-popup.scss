@@ -1,37 +1,29 @@
-@import '@wordpress/components/build-style/style.css';
-@import './partials/variables';
 
-.sidebar-menu-list {
+.menu-list-popup {
 	&.components-menu-group  {
 		width: 13rem;
-		border: 1px solid $color-border--gray-primary;
-		padding: 1.5rem 1rem;
+		border: 1px solid gray;
+		padding: 1rem;
 
 		.components-menu-group__label {
 			display: none;
 		}
 
-		div[role="group"]  {
-			row-gap: 0.7rem;
+		 div[role="group"]  {
+			row-gap: 0.3rem;
 			display: flex;
 			flex-direction: column;
 
 			.components-menu-item__button {
-				border-radius: 0.2rem;
-				border: 1px solid $color-border--gray-primary;
-
 				&:hover {
-					background-color: #F8F8F8;
-					color: inherit;
-					border: 1px solid #949494;
+					color: var(--wp-admin-theme-color);
+					background-color: transparent;
 				}
 
 				&:focus {
-					background-color: #F8F8F8;
 					color: inherit;
-					border: 2px solid #949494;
-					box-shadow: none;
-					outline: none;
+					background-color: transparent;
+					box-shadow: 0 0 0 1.5px var(--wp-admin-theme-color);
 				}
 
 				.components-menu-item__item {

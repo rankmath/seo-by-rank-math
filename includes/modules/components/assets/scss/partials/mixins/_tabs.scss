@@ -1,0 +1,25 @@
+@mixin filter-switch-tab-style() {
+	@include gap-small();
+	border: none;
+	width: fit-content;
+	
+	&-item {
+		@include border-radius-small();
+		color: $color-gray;
+		padding: 6px 12px;
+		height: fit-content; 
+
+		&:focus:not(:disabled) {
+			box-shadow: none;
+		}
+
+		&.is-active{
+			color: $color-white;
+			box-shadow: none;
+
+			&:focus {
+				box-shadow: none;
+			}
+		}
+	}
+}

@@ -1,7 +1,3 @@
-@import '@wordpress/components/build-style/style.css';
-@import './partials/variables';
-@import './partials/mixins';
-
 
 @mixin option-separator() {
 	border-bottom: 1px solid $color-gray-lightest;

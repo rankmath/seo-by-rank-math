@@ -4,11 +4,6 @@
 import classNames from 'classnames';
 
 /**
- * Internal dependencies
- */
-import '../../scss/notice.scss';
-
-/**
  * WordPress dependencies
  */
 import { Notice } from '@wordpress/components';

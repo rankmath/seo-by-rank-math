@@ -1,10 +1,7 @@
-@import '@wordpress/components/build-style/style.css';
-@import './partials/variables';
-
 .file-uploader__wrapper {
 	width: 35rem;
 	background-color: #FCFCFC;
-	border: 1px solid $color-border--gray-secondary;
+	border: 1px solid gray; //use mixin
 	padding: 16px;
 
 	.file-uploader__content {

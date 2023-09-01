@@ -1,6 +1,99 @@
-@import '@wordpress/components/build-style/style.css';
-@import './partials/variables';
-@import './partials/mixins';
+
+@mixin secondary-button-style(
+	$normal: (
+		$color,
+		$color-box-shadow
+	),
+	
+	$hover: (
+		$color--hover,
+		$color-bg--hover,
+		$color-box-shadow--hover
+	),
+	
+	$focus-active: (
+		$color--focus,
+		$color-bg-focus,
+		$color-box-shadow--focus-active,
+		$color-bg-active,
+	),
+	
+	$disabled: (
+		$color--disabled,
+		$color-bg--disabled,
+		$color-box-shadow--disabled
+	)
+) {
+	$color: nth($normal, 1);
+	$color-box-shadow: nth($normal, 2);
+
+	color: $color;
+	box-shadow: inset 0 0 0 1px $color-box-shadow;
+
+	&:hover:not(:disabled) {
+		color: nth($hover, 1);
+		background-color: nth($hover, 2);
+		box-shadow: inset 0 0 0 1px nth($hover, 3);
+	}
+
+	&:focus,
+	&:focus:hover:not(:disabled),
+	&:active:not(:disabled) {
+		box-shadow: inset 0 0 0 1.5px nth($focus-active, 3);
+		outline: none;
+	}
+
+	&:focus,
+	&:focus:hover:not(:disabled) {
+		color: nth($focus-active, 1);
+		background-color: nth($focus-active, 2);
+	}
+
+	&:active:not(:disabled) {
+		color: $color;
+		background-color: nth($focus-active, 4);
+	}
+
+	&:disabled,
+	&[aria-disabled="true"],
+	&:disabled:hover,
+	&[aria-disabled="true"]:hover {
+		opacity: 0.3;
+		outline: 1px solid transparent;
+		transform: inherit;
+		box-shadow: inset 0 0 0 1px nth($disabled, 3);
+		color: nth($disabled, 1);
+		background-color: nth($disabled, 2);
+	}
+}
+
+@mixin button-has-icon-style(
+	$min-width,
+	$height,
+	$font-size,
+	$padding-vertical,
+	$padding-horizontal,
+	$gap,
+	$icon-font-size
+) {
+	&.has-icon{
+		&:not(.has-text) {
+			min-width: $min-width;
+			height: $height;
+			font-size: $font-size;
+		}
+
+		&.has-text{
+			justify-content: start;
+			padding: $padding-vertical $padding-horizontal;
+			gap: $gap;
+
+			i {
+				font-size: $icon-font-size;
+			}
+		}
+	}
+}
 
 // Secondary Variant Variables
 $color-secondary: lighten($color-black, 35%);

@@ -1,8 +1,3 @@
-/**
- * Internal dependencies
- */
-import '../../../scss/multi-section-tab-panel.scss';
-
 export default ({
 	children
 }) => {

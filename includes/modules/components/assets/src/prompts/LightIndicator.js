@@ -1,9 +1,3 @@
-/**
- * Internal dependencies
- */
-import '../scss/light-indicator.scss'
-
-
 export default ({ status = 'off' }) => {
 	const iconClasses = {
 		green: 'is-green',

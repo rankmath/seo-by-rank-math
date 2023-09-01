@@ -4,11 +4,6 @@
 import classNames from 'classnames';
 
 /**
- * Internal dependencies
- */
-import '../../scss/switch-taps.scss';
-
-/**
  * WordPress dependencies
  */
 import { TabPanel } from '@wordpress/components';

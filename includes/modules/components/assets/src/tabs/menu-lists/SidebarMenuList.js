@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../../scss/sidebar-menu-list.scss';
-
-/**
  * WordPress dependencies
 */
 import { MenuGroup, MenuItem } from '@wordpress/components';

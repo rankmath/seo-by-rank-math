@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../scss/anchor-tag-status.scss'
-
-/**
  * WordPress dependencies
  */
 import { Button } from '@wordpress/components';

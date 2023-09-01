@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../../scss/single-section-tab-panel.scss';
-
-/**
  * WordPress dependencies
 */
 import { MenuGroup, MenuItem } from '@wordpress/components';

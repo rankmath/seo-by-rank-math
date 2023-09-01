@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../scss/file-uploader.scss'
-
-/**
  * WordPress dependencies
  */
 import { RangeControl, FormFileUpload, Button } from '@wordpress/components';

@@ -1,11 +1,9 @@
-@import '@wordpress/components/build-style/style.css';
-@import './partials/variables';
 
 .image-uploader__wrapper {
 	width: 35rem;
 	background-color: #FCFCFC;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-	border: 1px solid $color-border--gray-secondary;
+	border: 1px solid gray; //use mixin
 	padding: 16px;
 	display: grid;
 	gap: 16px;

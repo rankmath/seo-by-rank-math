@@ -1,8 +1,6 @@
-@import '@wordpress/components/build-style/style.css';
-@import './partials/variables';
 
 .page-tab-panel__container {
-	border: 1px solid $color-border--gray-primary;
+	border: 1px solid gray;
 	display: flex;
 	align-items: center;
 	gap: 10rem;

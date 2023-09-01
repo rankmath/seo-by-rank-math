@@ -1,0 +1,80 @@
+@mixin text-control-validation($validation-color, $validation-background) {
+	.components-base-control__field {
+		.components-text-control__input {
+			border: 1px solid $validation-color;
+			background-color: $validation-background;
+			padding-right: 1.6rem;
+			
+			&:active:not(:disabled), 
+			&:focus:not(:disabled) {
+				border-color: $validation-color;
+				box-shadow: 0 0 0 1px $validation-color;
+			}
+		}
+	}
+}
+
+@mixin input-min-height() {
+	min-height: 40px;
+}
+
+@mixin input-min-width() {
+	min-width: 16rem;
+}
+
+@mixin input-style() {
+	@include border-default();
+	@include input-min-height();
+	@include input-min-width();
+	padding: 6px 14px;
+
+	&:focus,
+	&:active:not(:disabled),
+	&:focus:not(:disabled) {
+		border-color: $color-blue;
+		outline: 2px solid transparent;
+		box-shadow: 0 0 0 1px $color-blue;
+	}
+
+	&::placeholder {
+		@include font-size-small();
+	}
+
+	&[type="number"] {
+		padding-right: 3.7rem;
+	}
+
+	&:disabled {
+		@include disabled-style();
+	}
+}
+
+@mixin checkbox-radio-style() {
+	@include border-default();
+
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
+
+	&:checked {
+		border-color: $color-blue;
+	}
+}
+
+@mixin checkbox-radio-style--disabled() {
+	@include disabled-opacity-default();
+	border: 1px solid $controls-border-color--disabled;
+	background-color: $controls-bg--disabled;
+	pointer-events: none;
+
+	+ label {
+		@include disabled-opacity-default();
+		pointer-events: none;
+	}
+
+	&:checked {
+		@include border-blue();
+		background-color: $color-blue;
+	}
+}

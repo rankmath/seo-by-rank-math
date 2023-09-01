@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../scss/toggle-control.scss';
-
-/**
  * WordPress dependencies
  */
 import { ToggleControl } from '@wordpress/components';

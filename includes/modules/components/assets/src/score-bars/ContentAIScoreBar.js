@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../scss/content-ai-score-bar.scss';
-
-/**
  * WordPress dependencies
  */
 import { RangeControl, Popover } from '@wordpress/components';

@@ -4,11 +4,6 @@
 import classNames from 'classnames';
 
 /**
- * Internal dependencies
- */
-import '../../scss/checkbox-control.scss';
-
-/**
  * WordPress dependencies
  */
 import { CheckboxControl } from '@wordpress/components';

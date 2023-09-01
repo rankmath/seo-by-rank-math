@@ -4,11 +4,6 @@
 import classNames from 'classnames';
 
 /**
- * Internal dependencies
- */
-import '../../scss/text-control.scss';
-
-/**
  * WordPress dependencies
  */
 import { TextControl } from '@wordpress/components';

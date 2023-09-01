@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../../scss/page-tab-panel.scss';
-
-/**
  * WordPress dependencies
  */
 import { TabPanel } from '@wordpress/components';

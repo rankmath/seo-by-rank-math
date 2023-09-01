@@ -4,11 +4,6 @@
 import classNames from 'classnames';
 
 /**
- * Internal dependencies
- */
-import '../../scss/score-button.scss'
-
-/**
  * WordPress dependencies
  */
 import { Button } from '@wordpress/components';

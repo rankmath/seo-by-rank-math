@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../../scss/menu-list-popup.scss';
-
-/**
  * WordPress dependencies
 */
 import { MenuGroup, MenuItem } from '@wordpress/components';

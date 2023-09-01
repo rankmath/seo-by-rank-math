@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../scss/radio-control.scss';
-
-/**
  * WordPress dependencies
  */
 import { RadioControl } from '@wordpress/components';

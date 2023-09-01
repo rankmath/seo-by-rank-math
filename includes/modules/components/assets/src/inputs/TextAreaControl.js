@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../scss/text-control.scss';
-
-/**
  * WordPress dependencies
  */
 import { TextareaControl } from '@wordpress/components';

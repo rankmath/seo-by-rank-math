@@ -7,7 +7,6 @@ import classNames from 'classnames';
  * Internal dependencies
  */
 import SelectControlSearchOption from './SelectControlSearchOption';
-import '../../scss/select-control.scss';
 
 /**
  * WordPress dependencies

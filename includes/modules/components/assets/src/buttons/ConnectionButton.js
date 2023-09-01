@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../scss/connection-button.scss'
-
-/**
  * WordPress dependencies
  */
 import { Button } from '@wordpress/components';

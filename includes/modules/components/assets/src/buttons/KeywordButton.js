@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import '../../scss/keyword-button.scss'
-
-/**
  * WordPress dependencies
  */
 import { Button, Popover } from '@wordpress/components';

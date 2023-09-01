@@ -7,7 +7,8 @@ import { createElement, render, useState } from '@wordpress/element';
  * Internal dependencies
 */
 import '../../../../../assets/admin/scss/_font-icons.scss';
-import '../scss/components.scss';
+import '../scss/presentation.scss';
+import '../scss/main.scss';
 import Button from './buttons/Button';
 import TextControl from './inputs/TextControl';
 import TextAreaControl from './inputs/TextAreaControl';
