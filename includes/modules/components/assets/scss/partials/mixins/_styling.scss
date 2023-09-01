@@ -10,6 +10,14 @@
 	border: 1px solid $color-gray-lighter;
 }
 
+@mixin border-lighter() {
+	border: 1px solid $color-gray-lightest;
+}
+
+@mixin border-extralight() {
+	border: 1px solid $color-white-heavy;
+}
+
 @mixin border-radius-small() {
 	border-radius: 0.15rem;
 }
@@ -30,7 +38,6 @@
 	color: $color-gray;
 	pointer-events: none;
 }
-
 @mixin disabled-opacity-default() {
 	opacity: 0.4;
 }
@@ -48,11 +55,15 @@
 	top: 50%;
 	transform: translateY(-50%);
 }
-
-@mixin center-column() {
+@mixin flex-center($direction: column) {
 	display: flex;
-	flex-direction: column;
+	flex-direction: $direction;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+}
+@mixin flex-align($align: center, $direction: row) {
+  display: flex;
+  align-items: center;
+  flex-direction: $direction;
 }

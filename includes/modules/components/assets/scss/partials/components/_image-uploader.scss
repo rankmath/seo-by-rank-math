@@ -10,13 +10,13 @@
 	}
 
 	.uploader__preview {
-		background-color: #F2F2F2;
+		background-color: darken($color-white, 7%);
 		height: 8rem;
 
 		&-title {
-			@include center-column();
+			@include flex-center();
+			color: $color-gray;
 			font-size: 0.83rem;
-			color: #9B9B9B;
 			text-transform: uppercase;
 			height: 100%;
 			line-height: 1.5rem;

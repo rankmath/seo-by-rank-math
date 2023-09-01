@@ -16,6 +16,8 @@ $color-blue--focus: rgba($color-blue, 25%);
 $color-white-dark: darken($color-white, 1%);
 $color-white-darker: darken($color-white, 5%);
 $color-white-darkest: darken($color-white, 10%);
+$color-white-heavy: darken($color-white, 20%);
+$color-white-medium: darken($color-white, 3%);
 
 $color-gray-light: lighten($color-gray, 10%);
 $color-gray-lighter: lighten($color-gray, 20%);
@@ -25,6 +27,8 @@ $color-gray-darker: darken($color-gray, 20%);
 $color-gray-darkest: darken($color-gray, 30%);
 
 $color-black-light: lighten($color-black, 18%);
+
+$color-green-light: lighten($color-green, 10%);
 
 // Validation Colors
 $color-success: lighten($color-green, 10%);

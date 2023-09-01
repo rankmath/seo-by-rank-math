@@ -5,13 +5,12 @@
 		padding: 1.8rem 2.5rem;
 
 		.uploader__uploaded-title {
-			display: flex;
-			align-items: center;
-			color: #383838;
-			gap: 5px;
+			@include gap-small();
+			@include flex-align();
+			color: $color-black-light;
 
 			.icon {
-				color: #4AB866;
+				color: $color-green-light;
 				font-size: 1rem;
 			}
 		}
