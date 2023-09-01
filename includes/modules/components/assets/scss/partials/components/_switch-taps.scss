@@ -32,9 +32,15 @@
 				background-color: nth($active, 2);
 
 				.title,
-				i, 
-				&:hover {
+				i {
 					color: nth($active, 1);
+				}
+
+				&:hover {
+					.title,
+					i {
+						color: nth($active, 1);
+					}
 				}
 
 				.panel-has-icon {
