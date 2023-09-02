@@ -43,9 +43,9 @@
 			&.rank-math {
 				&.good {
 					@include score-button-style(
-						$normal: (#7AC979,	#7AC979),
-						$hover: (#3D993A,#F2F8F2, #7AC979),
-						$focus: (#7AC979)
+						$normal: ($success-lightnew,	$success-lighter),
+						$hover: ($success-dark, $success-lightest, $success-light),
+						$focus: ($success-lighter)
 					);
 				}
 

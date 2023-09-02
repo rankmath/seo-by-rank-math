@@ -1,7 +1,7 @@
 // Base Colors
 $red: #ff0000;
 $green: #008000;
-$yellow: #ffff00;
+$orange: #FFA500;
 $black: #000000;
 $white: #ffffff;
 $gray: #808080;
@@ -35,8 +35,11 @@ $gray-darkest: darken($gray, 30%);
 // Validation Colors
 $success: lighten($green, 10%);
 $success-light: rgba($green, 70%);
+$success-lightnew: lighten($green, 15%);
+$success-lighter: rgba($green, 60%);
 $success-lightest: rgba($green, 7%);
 $success-extralight: lighten($green, 74%);
+$success-dark: darken($success-light, 5%);
 
 $error: lighten($red, 10%);
 $error-light: #F24F65;
