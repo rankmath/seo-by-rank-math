@@ -1,3 +1,30 @@
+@mixin anchor-tag-status-style(
+	$normal: (
+		$color,
+		$background
+	),
+	$hover-focus: (
+		$color,
+		$background,
+	),
+	$active: (
+		$background
+	)
+) {
+	color: nth($normal, 1);
+	background-color: nth($normal, 2);
+
+	&:hover:not(:disabled), 
+	&:focus {
+		color: nth($hover-focus, 1);
+		background-color: nth($hover-focus, 2);
+	}
+
+	&:active {
+		color: $white;
+		background-color: nth($active, 1);
+	}
+}
 
 .anchor-tag-status {
 	&.components-button {
@@ -8,74 +35,38 @@
 			box-shadow: none;
 			outline: none;
 
-			&:hover:not(:disabled), 
-			&:focus:not(:disabled) {
-				box-shadow: none;
-				outline: none;
-			}
+			@include remove-box-shadow();
 		
 			&.good {
-				color: #62AE60;
-				background-color: #E4F4E4;
-
-				&:hover:not(:disabled), 
-				&:focus {
-					background-color: #D7EFD7;
-					color: #489F46;
-				}
-
-				&:active {
-					background-color: #7AC979;
-					color: #fff;
-				}
+				@include anchor-tag-status-style(
+					$normal:(#62AE60, #E4F4E4),
+					$hover-focus:(#489F46, #D7EFD7),
+					$active:(#7AC979),
+				);
 			}
 			
 			&.warning {
-				color: #E29E3C;
-				background-color: #FFF0DA;
-
-				&:hover:not(:disabled), 
-				&:focus {
-					background-color: #FFEACC;
-					color: #D99124;
-				}
-
-				&:active {
-					background-color: #FFBE5F;
-					color: #fff;
-				}
+				@include anchor-tag-status-style(
+					$normal:(#E29E3C, #FFF0DA),
+					$hover-focus:(#D99124, #FFEACC),
+					$active:(#FFBE5F),
+				);
 			}
 			
 			&.error {
-				color: #E47E78;
-				background-color: #FCEBEA;
-
-				&:hover:not(:disabled), 
-				&:focus {
-					background-color: #FBE1DF;
-					color: #DA6961;
-				}
-
-				&:active {
-					background-color: #F29C96;
-					color: #fff;
-				}
+				@include anchor-tag-status-style(
+					$normal:(#E47E78, #FCEBEA),
+					$hover-focus:(#DA6961, #FBE1DF),
+					$active:(#F29C96),
+				);
 			}
 			
 			&.grey {
-				color: #787878;
-				background-color: #F2F2F2;
-
-				&:hover:not(:disabled), 
-				&:focus {
-					background-color: #E9E9E9;
-					color: #383838;
-				}
-
-				&:active {
-					background-color: #383838;
-					color: #fff;
-				}
+				@include anchor-tag-status-style(
+					$normal:(#787878, #F2F2F2),
+					$hover-focus:(#383838, #E9E9E9),
+					$active:(#383838),
+				);
 			}
 		}
 	}

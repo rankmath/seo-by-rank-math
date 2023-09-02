@@ -11,7 +11,7 @@
 	border: 1px solid $gray-lightest;
 }
 @mixin border-extralight() {
-	border: 1px solid $white-heavy;
+	border: 1px solid $gray-medium;
 }
 @mixin border-radius-small() {
 	border-radius: 0.15rem;
@@ -37,7 +37,9 @@
 	opacity: 0.4;
 }
 
-@mixin remove-focus-styles() {
+@mixin remove-box-shadow() {
+	&:hover:not(:disabled),
+	&:active:not(:disabled),
 	&:focus:not(:disabled) {
 		box-shadow: none;
 		outline: none;
@@ -67,4 +69,11 @@
   display: flex;
   align-items: center;
   flex-direction: $direction;
+}
+
+@mixin align-button-text() {
+	&.has-text{
+		justify-content: start;
+		gap: 8px;
+	}
 }

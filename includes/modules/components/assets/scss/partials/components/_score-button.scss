@@ -1,128 +1,99 @@
+@mixin score-button-style(
+	$normal: (
+		$color,
+		$border-color
+	),
+	$hover: (
+		$color,
+		$background,
+		$border-color,
+	),
+	$focus: (
+		$background
+	)
+) {
+	color: nth($normal, 1);
+	border: 1px solid nth($normal, 2);
+
+	&:hover:not(:disabled) {
+		color: nth($hover, 1);
+		background-color: nth($hover, 2);
+		border-color: nth($hover, 3);
+	}
+
+	&:focus,
+	&:focus:hover:not(:disabled) {
+		color: $white;
+		background-color: nth($focus, 1);
+		border-color: nth($focus, 1);
+	}
+}
 
 .score-button {
 	&.components-button {
 		&.is-secondary {
+			height: fit-content;
 			box-shadow: none;
 			padding: 8px 12px;
-			height: fit-content;
 			font-size: 12px;
 			gap: 8px;
 
-			&:hover:not(:disabled),
-			&:focus:not(:disabled) {
-				outline: none;
-				box-shadow: none;
-			}
+			@include remove-box-shadow();
 		
-
 			&.rank-math {
 				&.good {
-					color: #7AC979;
-					border: 1px solid #7AC979;
-
-					&:hover:not(:disabled) {
-						background-color: #F2F8F2;
-						color: #3D993A;
-					}
-
-					&:focus {
-						background-color: #7AC979;
-						color: #fff;
-					}
+					@include score-button-style(
+						$normal: (#7AC979,	#7AC979),
+						$hover: (#3D993A,#F2F8F2, #7AC979),
+						$focus: (#7AC979)
+					);
 				}
 
 				&.neutral {
-					color: #E3A347;
-					border: 1px solid #FFBE5F;
-
-					&:hover:not(:disabled) {
-						background-color: #FDF7EF;
-						border-color: #E8B265;
-						color: #DA9329;
-					}
-
-					&:focus {
-						background-color: #FFBE5F;
-						color: #fff;
-						border-color: #FFBE5F;
-					}
+					@include score-button-style(
+						$normal: (#E3A347,	#FFBE5F),
+						$hover: (#DA9329,#FDF7EF, #E8B265),
+						$focus: (#FFBE5F)
+					);
 				}
 
 				&.bad {
-					color: #E37A73;
-					border: 1px solid #F29C96;
-
-					&:hover:not(:disabled) {
-						background-color: #FDF5F4;
-						border-color: #E68781;
-						color: #DB6F67;
-					}
-
-					&:focus {
-						background-color: #F29C96;
-						color: #fff;
-					}
+					@include score-button-style(
+						$normal: (#E37A73,	#F29C96),
+						$hover: (#DB6F67,#FDF5F4, #E68781),
+						$focus: (#F29C96)
+					);
 				}
 			}
 
 			&.content-ai {
 				&.good {
-					color: #46A378;
-					border: 1px solid #88CEAE;
-
-					&:hover:not(:disabled) {
-						background-color: #F1F8F5;
-						color: #4FA77E;
-						border-color: #9CCDB6;
-					}
-
-					&:focus {
-						background-color: #6BC288;
-						border-color: #6BC288;
-						color: #fff;
-					}
+					@include score-button-style(
+						$normal: (#46A378,	#88CEAE),
+						$hover: (#4FA77E,#F1F8F5, #9CCDB6),
+						$focus: (#6BC288)
+					);
 				}
 
 				&.neutral {
-					color: #D49517;
-					border: 1px solid #F5C66A;
-
-					&:hover:not(:disabled) {
-						background-color: #FEFAF1;
-						border-color: #ECB548;
-						color: #C5880E;
-					}
-
-					&:focus {
-						background-color: #F3BA49;
-						color: #fff;
-						border-color: #F3BA49;
-					}
+					@include score-button-style(
+						$normal: (#D49517,	#F5C66A),
+						$hover: (#C5880E,#FEFAF1, #ECB548),
+						$focus: (#F3BA49)
+					);
 				}
 
 				&.bad {
-					color: #FB7184;
-					border: 1px solid #F0909D;
-
-					&:hover:not(:disabled) {
-						background-color: #FFF4F6;
-						border-color: #E6819A;
-						color: #F76A7D;
-					}
-
-					&:focus {
-						background-color: #F3808F;
-						border-color: #F3808F;
-						color: #fff;
-					}
+					@include score-button-style(
+						$normal: (#FB7184,	#F0909D),
+						$hover: (#F76A7D,#FFF4F6, #E6819A),
+						$focus: (#F3808F)
+					);
 				}
 			}
 
 			&.has-icon{
-				&.has-text{
-					justify-content: start;
-					gap: 8px;
-				}
+				@include align-button-text();
 
 				i {
 					font-size: 20px;

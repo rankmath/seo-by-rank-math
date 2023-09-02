@@ -33,7 +33,7 @@
 	}
 
 	&.is-info-grey {
-		@include notice-style($gray, $white-darker, $white-darker, $white-darkest);
+		@include notice-style($gray, $gray-extralight, $gray-extralight, $gray-lightest);
 	}
 
 	&.is-warning {
@@ -95,7 +95,7 @@
 	}
 
 	.components-button{
-		@include remove-focus-styles();
+		@include remove-box-shadow();
 		margin: auto;
 		
 		&.components-notice__dismiss {

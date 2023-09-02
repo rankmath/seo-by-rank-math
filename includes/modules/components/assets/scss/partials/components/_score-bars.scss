@@ -1,0 +1,153 @@
+@mixin score-bar-style($starting-color, $ending-color) {
+	.components-range-control__track {
+		background-image: linear-gradient(to right, $starting-color, $ending-color);
+	}
+}
+
+@mixin popover-direction() {
+	top: 90%;
+	border-right: 20px solid transparent;
+	border-top: 13px solid $white;
+}
+
+.components-range-control {
+	width: 25rem;
+
+	.components-range-control__slider {
+		cursor: default;
+	}
+
+	.components-range-control__track { 
+		height: 8px;
+	}
+
+	.css-1tw038v {
+		height: 8px;
+	}
+}
+
+.editor-score-bar {
+	&.components-range-control {
+		.components-base-control__field {
+			@include flex-align();
+			margin: 0px;
+		}
+
+		.components-base-control__label {
+			min-width: 3.25rem;
+			margin: 0px;
+			margin-top: 2px;
+			cursor: default;
+		}
+
+		.components-range-control__thumb-wrapper {
+			display: none;
+		}
+
+		.css-1tw038v {
+			background-color: $gray-lightest;
+		}
+
+		&.bad-score {
+			@include score-bar-style(#FFAEA8, #FF5D51);
+		}
+
+		&.average-score {
+			@include score-bar-style(#FEC879, #FEAB31);
+		}
+
+		&.good-score {
+			@include score-bar-style(#9AD398, #3CAB3A);
+		}
+	}
+}
+
+.content-ai-score-bar {
+	&.components-range-control {
+		.components-range-control__thumb-wrapper {
+			margin-top: 11px;
+			background-color: transparent;
+			border: 5px solid $white;
+			box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+
+			.css-1oxlee5 {
+				display: none;
+			}
+
+			.css-cp5s75 {
+				display: none;
+			}
+		}
+
+		.css-1tw038v {
+			background-image: linear-gradient(to right, #EB475C, #F2B34A, #5EC580);
+		}
+
+		.components-range-control__track {
+			background-color: transparent;
+		}
+	}
+
+	.components-popover {
+		.components-popover__content {
+			@include flex-center();
+			outline: none;
+			min-width: 5.7rem;
+			min-height: 3.4rem;
+			border-radius: 5px;
+			gap: 1px;
+			box-shadow: $gray-lightest 0px 4px 8px;
+
+			.score-bar__title {
+				margin: 0;
+				font-size: 13px;
+				font-weight: normal;
+				color: $gray;
+			}
+
+			.score-bar__value {
+				margin: 0;
+				font-size: 18px;
+				font-weight: 605;
+			}
+		}
+
+		.components-popover__arrow {
+			display: none;
+			
+			&::before {
+				display: none;
+			}
+
+			.components-popover__triangle {
+				&-border {
+					stroke: $white;
+				}
+			}
+		}
+
+		.popover-pointer {
+			width: 0;
+			height: 0;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-top: 8px solid $white;
+			position: absolute;
+			top: 100%;
+
+			&.is-left {
+				@include popover-direction();
+				left: 0;
+				border-left: none;
+				border-right: 20px solid transparent;
+			}
+
+			&.is-right {
+				@include popover-direction();
+				right: 0;
+				border-right: none;
+				border-left: 20px solid transparent;
+			}
+		}
+	}
+}

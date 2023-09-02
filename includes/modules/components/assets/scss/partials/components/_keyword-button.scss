@@ -1,5 +1,38 @@
+@mixin keyword-style(
+	$normal: (
+		$color,
+		$background,
+		$score-background
+	),
+	$hover-focus: (
+		$background,
+		$score-background
+	)
+) {
+	color: nth($normal, 1);
+	background-color: nth($normal, 2);
+	border: 2px solid transparent;
 
-.keyword-button{
+	.keyword-button__score {
+		background-color: nth($normal, 3);
+		color: $white;
+	}
+
+	&:hover:not(:disabled), &:focus {
+		color: nth($normal, 1);
+		background-color: nth($hover-focus, 1);
+
+		.keyword-button__score {
+			background-color: nth($hover-focus, 2);
+		}
+	}
+
+	&:focus {
+		border-color: nth($hover-focus, 2);
+	}
+}
+
+.keyword-button {
 	.components-button {
 		padding: 6px 10px;
 		height: fit-content;
@@ -8,90 +41,35 @@
 
 		&.is-secondary {
 			box-shadow: none;
-
-			&:hover:not(:disabled),
-			&:focus:not(:disabled) {
-				outline: none;
-				box-shadow: none;
-			}
+			@include remove-box-shadow();
 
 			&.good {
-				color: #27984D;
-				background-color: #DEF3E5;
-				border: 2px solid transparent;
-
-				.keyword-button__score {
-					background-color: #5CC47F;
-					color: #fff;
-				}
-
-				&:hover:not(:disabled), &:focus {
-					background-color: #C6EAD2;
-					color: #27984D;
-
-					.keyword-button__score {
-						background-color: #42B268;
-					}
-				}
-
-				&:focus {
-					border-color: #42B268;
-				}
+				@include keyword-style(
+					$normal: (#27984D, #DEF3E5, #5CC47F),
+					$hover-focus: (#C6EAD2, #42B268)
+				);
 			}
-			
+
 			&.neutral {
-				color: #DAA233;
-				background-color: #FCF0D7;
-				border: 2px solid transparent;
-
-				.keyword-button__score {
-					background-color: #F3BA49;
-					color: #fff;
-				}
-
-				&:hover:not(:disabled), &:focus {
-					background-color: #FAE3B6;
-					color: #C78910;
-
-					.keyword-button__score {
-						background-color: #E8A623;
-					}
-				}
-
-				&:focus {
-					border-color: #E8A623;
-				}
+				@include keyword-style(
+					$normal: (#DAA233, #FCF0D7, #F3BA49),
+					$hover-focus: (#FAE3B6, #E8A623)
+				);
 			}
 			
 			&.bad {
-				color: #F35F73;
-				background-color: #FDE9EB;
-				border: 2px solid transparent;
-
-				.keyword-button__score {
-					background-color: #F3808F;
-					color: #fff;
-				}
-
-				&:hover:not(:disabled), &:focus {
-					background-color: #FBDADE;
-					color: #E54B5F;
-
-					.keyword-button__score {
-						background-color: #F66276;
-					}
-				}
-
-				&:focus {
-					border-color: #F66276;
-				}
+				@include keyword-style(
+					$normal: (#F35F73, #FDE9EB, #F3808F),
+					$hover-focus: (#FBDADE, #F66276)
+				);
 			}
 		}
 
-		.keyword-button__keyword, .keyword-button__score {
+		.keyword-button__keyword,
+		.keyword-button__score {
 			font-size: inherit;
-			color: inherit;   
-			margin: 0px; 
+			color: inherit;
+			margin: 0px;
 			font-weight: normal;
 		}
 
@@ -106,13 +84,13 @@
 		top: -12px;
 
 		.components-popover__content {
-			background-color: #383838;
-			color: #D9D9D9;
+			background-color: $black-light;
+			color: $gray-lightest;
 			padding: 2px 6px;
 			padding-bottom: 4px;
 			font-size: 11px;
 		}
-		
+
 		.components-popover__arrow {
 			height: 10px;
 			width: 10px;
@@ -122,12 +100,12 @@
 			}
 
 			&::before {
-				background-color: #383838;
+				background-color: $black-light;
 				height: 1.1px;
 			}
 
 			.components-popover__triangle-bg {
-				fill: #383838;
+				fill: $black-light;
 			}
 
 			.components-popover__triangle-border {

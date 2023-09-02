@@ -84,7 +84,7 @@
 		}
 
 		&.has-text{
-			justify-content: start;
+			@include align-button-text();
 			padding: $padding-vertical $padding-horizontal;
 			gap: $gap;
 
@@ -173,7 +173,7 @@ $color-tertiary: $gray;
 				),
 				$focus-active: (
 					$destructive,
-					$white-dark,
+					$gray-thin,
 					$destructive,
 					darken($white, 5%),
 				),
@@ -218,7 +218,7 @@ $color-tertiary: $gray;
 	}
 
 	&.is-secondary-grey {
-		background-color: $white-dark;
+		background-color: $gray-thin;
 
 		&:hover, &:focus {
 			background-color: lighten($black, 95%);

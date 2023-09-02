@@ -8,6 +8,10 @@ $gray: #808080;
 $blue: #007cba;
 
 // Base Color Variations
+// Black Variants
+$black-light: lighten($black, 18%);
+
+
 // Blue Variants
 $blue-light: rgba($blue, 12%);
 $blue-lighter: rgba($blue, 10%);
@@ -15,25 +19,17 @@ $blue-lightest: rgba($blue, 5%);
 $blue-dark: rgba($blue, 25%);
 
 
-// White Variants
-$white-dark: darken($white, 1%);
-$white-darker: darken($white, 5%);
-$white-darkest: darken($white, 10%);
-$white-heavy: darken($white, 20%);
-$white-medium: darken($white, 3%);
-
-
 // Gray Variants
 $gray-light: lighten($gray, 10%);
 $gray-lighter: lighten($gray, 20%);
+$gray-medium: lighten($gray, 30%);
 $gray-lightest: lighten($gray, 40%);
+$gray-extralight: lighten($gray, 45%);
+$gray-mono: lighten($gray, 47%);
+$gray-thin: lighten($gray, 48.5%);
 $gray-dark: darken($gray, 10%);
 $gray-darker: darken($gray, 20%);
 $gray-darkest: darken($gray, 30%);
-
-
-// Black Variants
-$black-light: lighten($black, 18%);
 
 
 // Validation Colors

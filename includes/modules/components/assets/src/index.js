@@ -19,10 +19,19 @@ import ToggleControl from './controls/ToggleControl';
 import FileUploader from './uploaders/FileUploader';
 import ImageUploader from './uploaders/ImageUploader';
 import Notice from './prompts/Notice';
+import ScoreButton from './buttons/ScoreButton';
+import EditorScoreBar from './score-bars/EditorScoreBar';
+import ContentAIScoreBar from './score-bars/ContentAIScoreBar';
+import KeywordButton from './buttons/KeywordButton';
+import AnchorTagStatus from './buttons/AnchorTagStatus';
+import ConnectionButton from './buttons/ConnectionButton';
+import LightIndicator from './prompts/LightIndicator';
 
 const AllComponents = () => {
 	return (
 		<div className='container'>
+
+			<ScoresShowcase />
 
 			<NoticeShowcase />
 
@@ -38,6 +47,117 @@ const AllComponents = () => {
 	)
 };
 
+function ScoresShowcase() {
+	return (
+		<>
+			<h2>SCORES</h2>
+
+			<div className='components-wrapper'>
+				<div>
+					<h4>Content AI Score Bar</h4>
+
+					<div className="components-group">
+						<ContentAIScoreBar value={20} />
+					</div>
+				</div>
+
+				<div>
+					<h4>Snippet Editor Score Bar</h4>
+
+					<div className="components-group">
+						<EditorScoreBar value={23} />
+					</div>
+					<div className="components-group">
+						<EditorScoreBar value={52} />
+					</div>
+					<div className="components-group">
+						<EditorScoreBar value={94} />
+					</div>
+				</div>
+
+				<div>
+					<h4>Light Indicators</h4>
+
+					<div className="components-group">
+						<LightIndicator />
+						<LightIndicator status='red' />
+						<LightIndicator status='yellow' />
+						<LightIndicator status='green' />
+					</div>
+				</div>
+
+				<div>
+					<h4>Connection</h4>
+
+					<div className='components-group'>
+						<ConnectionButton status='connect'>Connect</ConnectionButton>
+						<ConnectionButton status='connected'>Connected</ConnectionButton>
+					</div>
+
+					<div className='components-group'>
+						<ConnectionButton status='disconnect'>Disconnect</ConnectionButton>
+						<ConnectionButton status='disconnected'>Disconnected</ConnectionButton>
+					</div>
+
+					<div className='components-group'>
+						<ConnectionButton status='reconnect'>Reconnect</ConnectionButton>
+						<ConnectionButton status='connected'>Connected</ConnectionButton>
+					</div>
+				</div>
+
+				<div>
+					<h4>ANCHOR TAG STATUS</h4>
+
+					<div className='components-group'>
+						<AnchorTagStatus>All Good</AnchorTagStatus>
+
+						<AnchorTagStatus severity='warning' children='Warning' />
+
+						<AnchorTagStatus severity='error' children='Error' />
+
+						<AnchorTagStatus severity='grey' children='Label' />
+					</div>
+				</div>
+
+				<div>
+					<h4 className='margin-top'>Keyword Suggestions</h4>
+
+					<div className='components-group'>
+						<KeywordButton />
+
+						<KeywordButton keyword='Increase' severity='neutral' />
+
+						<KeywordButton severity='bad' />
+					</div>
+				</div>
+
+				<div>
+					<h4 className='margin-top'>Rank Math Buttons</h4>
+
+					<div className='components-group'>
+						<ScoreButton>94/100</ScoreButton>
+
+						<ScoreButton severity='neutral'>52/100</ScoreButton>
+
+						<ScoreButton severity='bad'>52/100</ScoreButton>
+					</div>
+				</div>
+
+				<div>
+					<h4 className='margin-top'>Content AI Buttons</h4>
+
+					<div className='components-group'>
+						<ScoreButton company='Content AI'>94/100</ScoreButton>
+
+						<ScoreButton company='Content AI' severity='neutral'>52/100</ScoreButton>
+
+						<ScoreButton company='Content AI' severity='bad'>52/100</ScoreButton>
+					</div>
+				</div>
+			</div>
+		</>
+	)
+};
 function NoticeShowcase() {
 	return (
 		<>
