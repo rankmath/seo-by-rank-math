@@ -41,10 +41,10 @@ class DB {
 		}
 
 		$redirction_counts = self::table()
-			->selectSum( 'status = "active"', 'active' )
-			->selectSum( 'status = "inactive"', 'inactive' )
-			->selectSum( 'status = "trashed"', 'trashed' )
-			->one( ARRAY_A );
+		->selectSum( "status = 'active'", 'active' )
+		->selectSum( "status = 'inactive'", 'inactive' )
+		->selectSum( "status = 'trashed'", 'trashed' )
+		->one( ARRAY_A );
 
 		$redirction_counts['all'] = $redirction_counts['active'] + $redirction_counts['inactive'];
 
