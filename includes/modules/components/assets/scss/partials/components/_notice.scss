@@ -29,7 +29,7 @@
 	}
 
 	&.is-error {
-		@include notice-style($error-color-2, $red-lightest, $error-color-2, $red-lighter);
+		@include notice-style($error-2, $red-lightest, $error-2, $red-lighter);
 	}
 
 	&.is-info-grey {
@@ -37,18 +37,18 @@
 	}
 
 	&.is-warning {
-		@include notice-dismiss-style(#FBEED4);
+		@include notice-dismiss-style($warning-lighter);
 
 		.components-notice__icon {
-			color: $warning-color;
+			color: $warning;
 		}
 	}
 
 	&.is-success {
-		@include notice-dismiss-style(#D9F0DF);
+		@include notice-dismiss-style($success-lightest);
 
 		.components-notice__icon {
-			color: #5FC078;
+			color: $success-light;
 		}
 	}
 
@@ -99,8 +99,12 @@
 		margin: auto;
 		
 		&.components-notice__dismiss {
-			color: #9DA1A3;
-			
+			color: $gray-lighter;
+
+			&:hover {
+				color: $gray-light;
+			}
+
 			svg {
 				width: 1.2rem;
 				height: 1.2rem;

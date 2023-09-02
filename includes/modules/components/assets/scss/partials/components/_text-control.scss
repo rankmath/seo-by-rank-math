@@ -21,14 +21,14 @@
 	.components-base-control {
 		&.is-success {
 			@include text-control-validation(
-				$success-color, 
+				$success, 
 				$success-bg
 			);
 		}
 
 		&.is-error {
 			@include text-control-validation(
-				$error-color,
+				$error,
 				$error-bg
 			);
 		}
@@ -51,11 +51,11 @@
 			@include font-size-small();
 
 			&.is-error {
-				color: $error-color;
+				color: $error;
 			}
 
 			&.is-success {
-				color: $success-color;
+				color: $success;
 			}
 		}
 

@@ -40,19 +40,18 @@ $red-lightest: rgba($red, 7%);
 $black-light: lighten($black, 18%);
 
 
-// Green Variants
-$green-light: lighten($green, 10%);
-
-
 // Validation Colors
-$success-color: lighten($green, 10%);
+$success: lighten($green, 10%);
+$success-light: rgba($green, 70%);
+$success-lightest: rgba($green, 7%);
 $success-bg: lighten($green, 74%);
 
-$error-color: lighten($red, 10%);
-$error-color-2: #F24F65;
+$error: lighten($red, 10%);
+$error-2: #F24F65;
 $error-bg: lighten($red, 49%);
 
-$warning-color: #F0B849;
+$warning: #F0B849;
+$warning-lighter: lighten($warning, 30%);
 
-$destructive-color: mix($red, $black, 80%);
-$destructive-color-hover: mix($red, $black, 61%);
+$destructive: mix($red, $black, 80%);
+$destructive-hover: mix($red, $black, 61%);
