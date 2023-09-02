@@ -29,7 +29,7 @@
 	}
 
 	&.is-error {
-		@include notice-style($error-2, $red-lightest, $error-2, $red-lighter);
+		@include notice-style($error-light, $error-lightest, $error-light, $error-lighter);
 	}
 
 	&.is-info-grey {
