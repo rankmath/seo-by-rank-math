@@ -40,13 +40,13 @@ $black-light: lighten($black, 18%);
 $success: lighten($green, 10%);
 $success-light: rgba($green, 70%);
 $success-lightest: rgba($green, 7%);
-$success-bg: lighten($green, 74%);
+$success-extralight: lighten($green, 74%);
 
 $error: lighten($red, 10%);
 $error-light: #F24F65;
 $error-lighter: rgba($red, 10%);
 $error-lightest: rgba($red, 7%);
-$error-bg: lighten($red, 49%);
+$error-extralight: lighten($red, 49%);
 
 $warning: #F0B849;
 $warning-lighter: lighten($warning, 30%);

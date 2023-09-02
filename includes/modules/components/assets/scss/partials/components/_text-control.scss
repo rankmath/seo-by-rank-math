@@ -22,14 +22,14 @@
 		&.is-success {
 			@include text-control-validation(
 				$success, 
-				$success-bg
+				$success-extralight
 			);
 		}
 
 		&.is-error {
 			@include text-control-validation(
 				$error,
-				$error-bg
+				$error-extralight
 			);
 		}
 
