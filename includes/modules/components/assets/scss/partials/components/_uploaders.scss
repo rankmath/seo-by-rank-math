@@ -55,3 +55,56 @@
 		}
 	}
 }
+
+
+.file-uploader {
+	@include uploader-style();
+
+	.uploader__content {
+		padding: 1.8rem 2.5rem;
+
+		.uploader__uploaded-title {
+			@include gap-small();
+			@include flex-align();
+			color: $black-light;
+
+			.icon {
+				color: $success;
+				font-size: 1rem;
+			}
+		}
+	}
+}
+
+.image-uploader {
+	@include uploader-style();
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 16px;
+
+	.uploader__content {
+		grid-column: span 3 / span 3;
+		padding: 1.8rem;
+	}
+
+	.uploader__preview {
+		background-color: darken($white, 7%);
+		height: 8rem;
+
+		&-title {
+			@include flex-center();
+			color: $gray;
+			font-size: 0.83rem;
+			text-transform: uppercase;
+			height: 100%;
+			line-height: 1.5rem;
+			padding: 0 16px;
+		}
+
+		&-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
