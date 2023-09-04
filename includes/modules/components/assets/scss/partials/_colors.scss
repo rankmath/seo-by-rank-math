@@ -45,21 +45,18 @@ $success-dark: darken($success, 10%);
 
 // Error
 $error: #F3808F;
-$error-light: lighten($error, 5%);
-$error-lighter: lighten($error, 12%);
-$error-medium: lighten($error, 18%);
-$error-lightest: lighten($error, 23%);
-$error-extralight:  lighten($error, 25.5%);
+$error-light: lighten($error, 18%);
+$error-lighter: lighten($error, 23%);
+$error-lightest:  lighten($error, 25.5%);
 $error-dark: darken($error, 10%);
-$error-darker: darken($error, 15%);
 
 $error-secondary: #F29C96;
 $error-secondary-light: lighten($error-secondary, 20%);
 $error-secondary-dark: darken($error-secondary, 10%);
-$error-secondary-dark2: darken($error-secondary, 15%);
 $error-secondary-darker: darken($error-secondary, 20%);
 
 $error-tertiary: #FF6055;
+$error-tertiary-light: #FF938B;
 
 
 // Warning

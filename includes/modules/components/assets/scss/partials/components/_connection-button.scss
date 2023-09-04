@@ -58,7 +58,7 @@
 		&.disconnect {
 			@include connection-button-style(
 				$normal: ($gray-light, $gray-medium),
-				$hover-active: ($error-dark, $error-extralight, $error-dark)
+				$hover-active: ($error-dark, $error-lightest, $error-dark)
 			);
 		}
 

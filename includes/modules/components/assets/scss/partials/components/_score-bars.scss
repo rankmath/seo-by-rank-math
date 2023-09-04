@@ -49,7 +49,7 @@
 		}
 
 		&.bad-score {
-			@include score-bar-style(#FF938B, $error-tertiary);
+			@include score-bar-style($error-tertiary-light, $error-tertiary);
 		}
 
 		&.average-score {

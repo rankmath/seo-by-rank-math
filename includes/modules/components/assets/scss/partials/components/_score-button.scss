@@ -85,8 +85,8 @@
 
 				&.bad {
 					@include score-button-style(
-						$normal: ($error,	$error-lighter),
-						$hover: ($error-dark, $error-extralight, $error-light),
+						$normal: ($error,	lighten($error, 10%)),
+						$hover: ($error-dark, $error-lightest, lighten($error, 5%)),
 						$focus: ($error)
 					);
 				}

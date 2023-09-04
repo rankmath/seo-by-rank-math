@@ -61,8 +61,8 @@
 			
 			&.bad {
 				@include keyword-style(
-					$normal: ($error-dark, $error-lightest, $error),
-					$hover-focus: ($error-darker, $error-medium, $error-dark)
+					$normal: ($error-dark, $error-lighter, $error),
+					$hover-focus: (darken($error, 15%), $error-light, $error-dark)
 				);
 			}
 		}
