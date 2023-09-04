@@ -26,10 +26,15 @@ import KeywordButton from './buttons/KeywordButton';
 import AnchorTagStatus from './buttons/AnchorTagStatus';
 import ConnectionButton from './buttons/ConnectionButton';
 import LightIndicator from './prompts/LightIndicator';
+import SidebarTabPanel from './tabs/horizontal-tabs/SidebarTabPanel';
+import TabPanelWithIcon from './tabs/TabPanelWithIcon';
+import PageTabPanel from './tabs/horizontal-tabs/PageTabPanel';
 
 const AllComponents = () => {
 	return (
 		<div className='container'>
+
+			<HorizontalTabsShowcase />
 
 			<ScoresShowcase />
 
@@ -47,6 +52,97 @@ const AllComponents = () => {
 	)
 };
 
+function HorizontalTabsShowcase() {
+	return (
+		<div>
+			<h2>HORIZONTAL TABS</h2>
+
+			<div className='components-wrapper'>
+				<h4>Sidebar Tabs</h4>
+
+				<div>
+					<h4>Variant 1</h4>
+					<div className='components-group'>
+						<SidebarTabPanel
+							tabs={[
+								{
+									name: 'tab1',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='First' />
+								},
+								{
+									name: 'tab2',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Second' />
+								},
+								{
+									name: 'tab3',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Third' />
+								}
+							]}
+							children={(tab) => (
+								<div>
+									<h5>{tab.title}</h5>
+									<p>This is the content for tab {tab.name}</p>
+								</div>
+							)
+							}
+						/>
+					</div>
+
+					<h4>Variant 2</h4>
+					<div className='components-group'>
+						<SidebarTabPanel
+							tabs={[
+								{
+									name: 'tab1',
+									title: 'First Tab',
+								},
+								{
+									name: 'tab2',
+									title: 'Second Tab',
+								},
+								{
+									name: 'tab3',
+									title: 'Third Tab',
+								}
+							]}
+							children={(tab) => (
+								<div>
+									<h5>{tab.title}</h5>
+									<p>This is the content for tab {tab.name}</p>
+								</div>
+							)
+							}
+						/>
+					</div>
+				</div>
+
+
+				<div>
+					<h4>Page & Modal Tabs</h4>
+
+					<div className='components-group'>
+						<PageTabPanel
+							tabs={[
+								{
+									name: 'tab1',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='First Tab' />
+								},
+								{
+									name: 'tab2',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Second Tab' />
+								},
+								{
+									name: 'tab3',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Third Tab' />
+								}
+							]}
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
+};
 function ScoresShowcase() {
 	return (
 		<>

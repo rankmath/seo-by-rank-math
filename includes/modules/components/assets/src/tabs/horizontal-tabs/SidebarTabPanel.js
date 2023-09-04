@@ -11,8 +11,10 @@ export default ({
 	initialTabName,
 	...rest
 }) => {
+	const groupedClassNames = `sidebar-tab-panel ${className}`;
+
 	const tabPanelProps = {
-		className: `sidebar-tab-panel ${className}`,
+		className: groupedClassNames,
 		tabs,
 		children,
 		onSelect,

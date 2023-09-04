@@ -11,8 +11,10 @@ export default ({
 	initialTabName,
 	...rest
 }) => {
+	const groupedClassNames = `page-tab-panel__content ${className}`;
+
 	const tabPanelProps = {
-		className: `page-tab-panel__content ${className}`,
+		className: groupedClassNames,
 		tabs,
 		children,
 		onSelect,

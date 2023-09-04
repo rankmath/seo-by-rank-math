@@ -65,10 +65,10 @@
 	align-items: center;
 	text-align: center;
 }
-@mixin flex-align($align: center, $direction: row) {
+@mixin flex-align($direction: row, $align: center) {
   display: flex;
-  align-items: center;
   flex-direction: $direction;
+  align-items: center;
 }
 
 @mixin align-button-text() {
