@@ -71,7 +71,6 @@ function VerticalTabsShowcase() {
 
 					<div className='components-group'>
 						<SingleSectionTabPanel
-							label='Title'
 							menuItems={[
 								{ title: 'Frist Tab', icon: 'rm-icon-trash' },
 								{ title: 'Second Tab', icon: 'rm-icon-trash' },

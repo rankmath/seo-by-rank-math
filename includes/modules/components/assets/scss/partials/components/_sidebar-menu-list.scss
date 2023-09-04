@@ -1,8 +1,7 @@
-
 .sidebar-menu-list {
 	&.components-menu-group  {
+		@include border-lighter();
 		width: 13rem;
-		border: 1px solid gray;
 		padding: 1.5rem 1rem;
 
 		.components-menu-group__label {
@@ -15,8 +14,8 @@
 			flex-direction: column;
 
 			.components-menu-item__button {
+				@include border-lighter();
 				border-radius: 0.2rem;
-				border: 1px solid gray;
 
 				&:hover {
 					background-color: #F8F8F8;
