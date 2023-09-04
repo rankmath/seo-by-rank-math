@@ -51,9 +51,9 @@
 
 				&.neutral {
 					@include score-button-style(
-						$normal: (#E3A347,	#FFBE5F),
-						$hover: (#DA9329,#FDF7EF, #E8B265),
-						$focus: (#FFBE5F)
+						$normal: ($warning-darker, $warning-secondary),
+						$hover: ($warning-darkest, $warning-lightest, $warning-darker),
+						$focus: ($warning-secondary)
 					);
 				}
 
@@ -77,9 +77,9 @@
 
 				&.neutral {
 					@include score-button-style(
-						$normal: (#D49517,	#F5C66A),
-						$hover: (#C5880E,#FEFAF1, #ECB548),
-						$focus: (#F3BA49)
+						$normal: ($warning-darker, lighten($warning, 10%)),
+						$hover: ($warning-darkest, $warning-lightest, $warning-darker),
+						$focus: ($warning)
 					);
 				}
 

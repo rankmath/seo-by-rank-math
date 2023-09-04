@@ -62,6 +62,14 @@ $error-tertiary-light: #FF938B;
 // Warning
 $warning: #F0B849;
 $warning-lighter: lighten($warning, 30%);
+$warning-lightest: lighten($warning, 35%);
+$warning-dark: darken($warning, 10%);
+$warning-darker: darken($warning, 15%);
+$warning-darkest: darken($warning, 20%);
+
+$warning-secondary: #FFBE5F;
+
+$warning-tertiary: #FEAB31;
 
 
 // Destructive

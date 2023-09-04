@@ -54,8 +54,8 @@
 
 			&.neutral {
 				@include keyword-style(
-					$normal: (#DAA233, #FCF0D7, #F3BA49),
-					$hover-focus: (#DAA233, #FAE3B6, #E8A623)
+					$normal: ($warning-darker, $warning-lighter, $warning),
+					$hover-focus: ($warning-darkest, lighten($warning, 23%), $warning-dark)
 				);
 			}
 			

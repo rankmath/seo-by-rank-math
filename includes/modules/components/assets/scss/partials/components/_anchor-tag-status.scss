@@ -47,9 +47,9 @@
 			
 			&.warning {
 				@include anchor-tag-status-style(
-					$normal:(#E29E3C, #FFF0DA),
-					$hover-focus:(#D99124, #FFEACC),
-					$active:(#FFBE5F),
+					$normal:($warning-darker, lighten($warning-secondary, 27%)),
+					$hover-focus:($warning-darkest, lighten($warning-secondary, 23%)),
+					$active:($warning-secondary),
 				);
 			}
 			

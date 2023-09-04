@@ -68,8 +68,8 @@
 		
 		&.reconnect {
 			@include connection-button-style(
-				$normal: (#D49517, #F3BA49),
-				$hover-active: (#C5870C, #FEFAF1, #E8A623)
+				$normal: ($warning, $warning),
+				$hover-active: ($warning-dark, lighten($warning-secondary, 30%), $warning-dark)
 			);
 		}
 
