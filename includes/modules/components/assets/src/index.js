@@ -29,12 +29,20 @@ import LightIndicator from './prompts/LightIndicator';
 import SidebarTabPanel from './tabs/horizontal-tabs/SidebarTabPanel';
 import TabPanelWithIcon from './tabs/TabPanelWithIcon';
 import PageTabPanel from './tabs/horizontal-tabs/PageTabPanel';
+import SwitchTaps from './tabs/SwitchTaps';
+import FilterMenus from './tabs/FilterMenus';
+import SingleSectionTabPanel from './tabs/vertical-tabs/SingleSectionTabPanel';
+import MultiSectionTabPanel from './tabs/vertical-tabs/MultiSectionTabPanel';
 
 const AllComponents = () => {
 	return (
 		<div className='container'>
 
+			<VerticalTabsShowcase />
+
 			<HorizontalTabsShowcase />
+
+			<FilterAndSwitchTabsShowcase />
 
 			<ScoresShowcase />
 
@@ -52,6 +60,58 @@ const AllComponents = () => {
 	)
 };
 
+function VerticalTabsShowcase() {
+	return (
+		<>
+			<h2>VERTICAL TABS</h2>
+
+			<div className='components-wrapper'>
+				<div>
+					<h4>Single Section Column</h4>
+
+					<div className='components-group'>
+						<SingleSectionTabPanel
+							label='Title'
+							menuItems={[
+								{ title: 'Frist Tab', icon: 'rm-icon-trash' },
+								{ title: 'Second Tab', icon: 'rm-icon-trash' },
+								{ title: 'Third Tab', icon: 'rm-icon-trash' },
+								{ title: 'Fourth Tab', icon: 'rm-icon-trash' },
+							]}
+						/>
+					</div>
+				</div>
+
+				<div>
+					<h4>Multi Section Column </h4>
+
+					<div className='components-group'>
+						<MultiSectionTabPanel>
+							<SingleSectionTabPanel
+								menuItems={[
+									{ title: 'Frist Tab', icon: 'rm-icon-trash' },
+									{ title: 'Second Tab', icon: 'rm-icon-trash' },
+									{ title: 'Third Tab', icon: 'rm-icon-trash' },
+									{ title: 'Fourth Tab', icon: 'rm-icon-trash' },
+								]}
+							/>
+
+							<SingleSectionTabPanel
+								label='Settings'
+								menuItems={[
+									{ title: 'Settings 1', icon: 'rm-icon-trash' },
+									{ title: 'Settings 2', icon: 'rm-icon-trash' },
+									{ title: 'Settings 3', icon: 'rm-icon-trash' },
+									{ title: 'Settings 4', icon: 'rm-icon-trash' },
+								]}
+							/>
+						</MultiSectionTabPanel>
+					</div>
+				</div>
+			</div>
+		</>
+	)
+};
 function HorizontalTabsShowcase() {
 	return (
 		<div>
@@ -143,6 +203,168 @@ function HorizontalTabsShowcase() {
 		</div>
 	)
 };
+function FilterAndSwitchTabsShowcase() {
+	return (
+		<>
+			<h2>FILTER AND SWITCH TABS</h2>
+
+			<div className='components-wrapper'>
+				<div>
+					<h4>Switch Tabs - Black</h4>
+
+					<div className='components-group'>
+						<SwitchTaps
+							iconOnly
+							tabs={[
+								{
+									name: 'tab1',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+								},
+								{
+									name: 'tab2',
+									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+								}
+							]}
+							children={(tab) => (
+								<div>
+									<p>This is the content for tab {tab.name}</p>
+								</div>
+							)
+							}
+						/></div>
+
+					<div className='components-group'>
+						<SwitchTaps
+							tabs={[
+								{
+									name: 'tab5',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+								},
+								{
+									name: 'tab6',
+									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+								}
+							]}
+							children={(tab) => (
+								<div>
+									<p>This is the content for tab {tab.name}</p>
+								</div>
+							)
+							}
+						/></div>
+				</div>
+
+				<div>
+					<h4>Switch Tabs - Blue</h4>
+
+					<div className='components-group'>
+						<SwitchTaps
+							iconOnly
+							variant='blue'
+							tabs={[
+								{
+									name: 'tab3',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+								},
+								{
+									name: 'tab4',
+									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+								}
+							]}
+							children={(tab) => (
+								<div>
+									<p>This is the content for tab {tab.name}</p>
+								</div>
+							)
+							}
+						/></div>
+
+					<div className='components-group'>
+						<SwitchTaps
+							variant='blue'
+							tabs={[
+								{
+									name: 'tab7',
+									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+								},
+								{
+									name: 'tab8',
+									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+								}
+							]}
+							children={(tab) => (
+								<div>
+									<p>This is the content for tab {tab.name}</p>
+								</div>
+							)
+							}
+						/></div>
+				</div>
+
+
+				<div>
+					<h4>Filter Menu - Black</h4>
+
+					<div className='components-group'>
+						<FilterMenus
+							tabs={[
+								{
+									name: 'tab1',
+									title: 'All',
+								},
+								{
+									name: 'tab2',
+									title: 'First Content',
+								},
+								{
+									name: 'tab3',
+									title: 'Third',
+								}
+							]}
+							children={(tab) => (
+								<div>
+									<h5>{tab.title}</h5>
+									<p>This is the content for tab {tab.name}</p>
+								</div>
+							)
+							}
+						/></div>
+				</div>
+
+
+				<div>
+					<h4>Filter Menu - Blue</h4>
+
+					<div className='components-group'>
+						<FilterMenus
+							variant='blue'
+							tabs={[
+								{
+									name: 'tab1',
+									title: 'All',
+								},
+								{
+									name: 'tab2',
+									title: 'First Content',
+								},
+								{
+									name: 'tab3',
+									title: 'Third',
+								}
+							]}
+							children={(tab) => (
+								<div>
+									<h5>{tab.title}</h5>
+									<p>This is the content for tab {tab.name}</p>
+								</div>
+							)
+							}
+						/></div>
+				</div>
+			</div>
+		</>
+	)
+}
 function ScoresShowcase() {
 	return (
 		<>

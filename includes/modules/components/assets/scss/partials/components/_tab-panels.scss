@@ -22,15 +22,11 @@
 			}
 
 			.panel-has-icon {
-				@include flex-align();
-				@include gap-small();
-				@include font-size-regular();
+				@include tab-item-has-icon-style();
 
 				.title {
 					display: none;
-					@include font-size-small();
 					color: $gray-dark;
-					font-weight: normal;
 					color: $black;
 				}
 			}
@@ -57,12 +53,13 @@
 	}
 }
 
-
+// SidebarTabPanel
 .sidebar-tab-panel {
 	@include tab-panel-menu-style();
 }
 
 
+// PageTabPanel
 .page-tab-panel__container {
 	@include flex-align();
 	@include border-lighter();

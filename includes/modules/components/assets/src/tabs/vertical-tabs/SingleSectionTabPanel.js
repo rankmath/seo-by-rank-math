@@ -10,8 +10,10 @@ export default ({
 	children,
 	...rest
 }) => {
+	const groupedClassNames = `single-section-tab-panel ${className}`;
+
 	const menuGroupProps = {
-		className: `single-section-tab-panel ${className}`,
+		className: groupedClassNames,
 		label,
 		children,
 		...rest

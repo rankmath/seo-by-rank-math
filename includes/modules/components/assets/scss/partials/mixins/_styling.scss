@@ -77,3 +77,14 @@
 		gap: 8px;
 	}
 }
+
+@mixin tab-item-has-icon-style() {
+	@include flex-align();
+	@include gap-small();
+	@include font-size-regular();
+
+	.title {
+		@include font-size-small();
+		font-weight: normal;
+	}
+}
