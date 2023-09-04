@@ -21,6 +21,22 @@
 	}
 }
 
+@mixin connection-button-style-validation(
+	$color,
+) {
+	color: $white;
+	box-shadow: inset 0 0 0 1px $color;
+	background-color: $color;
+
+	&:active,
+	&:focus,
+	&:hover:not(:disabled) {
+		color: $white;
+		background-color: $color;
+		box-shadow: inset 0 0 0 1px $color;
+	}
+}
+
 .connection-button {
 	&.components-button {
 		padding: 8px 12px;
@@ -30,38 +46,30 @@
 	
 		&.connect {
 			@include connection-button-style(
-				$normal: (#2D9A52, #5CC47F),
-				$hover-active: (#379A58, #F2FBF5, #42B268),
+				$normal: ($success, $success-lighter),
+				$hover-active: ($success-dark, $success-thin, $success)
 			);
 		}
-		
+
 		&.connected {
-			background-color: #4AB866;
-			@include connection-button-style(
-				$normal: ($white, #4AB866),
-				$hover-active: ($white, #4AB866, #4AB866),
-			);
+			@include connection-button-style-validation($success);
 		}
 
 		&.disconnect {
 			@include connection-button-style(
-				$normal: (#757575, #BFBFBF),
-				$hover-active: (#F3576C, #FEF1F3, #F66276),
+				$normal: ($gray-light, $gray-medium),
+				$hover-active: ($error-dark, $error-extralight, $error-dark)
 			);
 		}
 
 		&.disconnected {
-			background-color: #F3808F;
-			@include connection-button-style(
-				$normal: ($white, #F3808F),
-				$hover-active: ($white, #F3808F, #F3808F),
-			);
+			@include connection-button-style-validation($error);
 		}
 		
 		&.reconnect {
 			@include connection-button-style(
 				$normal: (#D49517, #F3BA49),
-				$hover-active: (#C5870C, #FEFAF1, #E8A623),
+				$hover-active: (#C5870C, #FEFAF1, #E8A623)
 			);
 		}
 

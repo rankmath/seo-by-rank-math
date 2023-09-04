@@ -49,7 +49,7 @@
 		}
 
 		&.bad-score {
-			@include score-bar-style(#FFAEA8, #FF5D51);
+			@include score-bar-style(#FF938B, $error-tertiary);
 		}
 
 		&.average-score {
@@ -57,7 +57,7 @@
 		}
 
 		&.good-score {
-			@include score-bar-style(#9AD398, #3CAB3A);
+			@include score-bar-style($success-lighter, $success);
 		}
 	}
 }
@@ -80,7 +80,7 @@
 		}
 
 		.css-1tw038v {
-			background-image: linear-gradient(to right, #EB475C, #F2B34A, #5EC580);
+			background-image: linear-gradient(to right, $error-dark, #F2B34A, $success-light);
 		}
 
 		.components-range-control__track {

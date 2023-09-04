@@ -33,22 +33,40 @@ $gray-darkest: darken($gray, 30%);
 
 
 // Validation Colors
-$success: lighten($green, 10%);
-$success-light: rgba($green, 70%);
-$success-lightnew: lighten($green, 15%);
-$success-lighter: rgba($green, 60%);
-$success-lightest: rgba($green, 7%);
-$success-extralight: lighten($green, 74%);
-$success-dark: darken($success-light, 5%);
+// Success
+$success: #4AB866;
+$success-light: lighten($success, 5%);
+$success-lighter: lighten($success, 12%);
+$success-lightest: lighten($success, 39%);
+$success-extralight: lighten($success, 42%);
+$success-thin: lighten($success, 47%);
+$success-dark: darken($success, 10%);
 
-$error: lighten($red, 10%);
-$error-light: #F24F65;
-$error-lighter: rgba($red, 10%);
-$error-lightest: rgba($red, 7%);
-$error-extralight: lighten($red, 49%);
 
+// Error
+$error: #F3808F;
+$error-light: lighten($error, 5%);
+$error-lighter: lighten($error, 12%);
+$error-medium: lighten($error, 18%);
+$error-lightest: lighten($error, 23%);
+$error-extralight:  lighten($error, 25.5%);
+$error-dark: darken($error, 10%);
+$error-darker: darken($error, 15%);
+
+$error-secondary: #F29C96;
+$error-secondary-light: lighten($error-secondary, 20%);
+$error-secondary-dark: darken($error-secondary, 10%);
+$error-secondary-dark2: darken($error-secondary, 15%);
+$error-secondary-darker: darken($error-secondary, 20%);
+
+$error-tertiary: #FF6055;
+
+
+// Warning
 $warning: #F0B849;
 $warning-lighter: lighten($warning, 30%);
 
+
+// Destructive
 $destructive: mix($red, $black, 80%);
 $destructive-hover: mix($red, $black, 61%);

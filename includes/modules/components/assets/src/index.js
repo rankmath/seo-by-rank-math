@@ -67,6 +67,7 @@ function ScoresShowcase() {
 					<div className="components-group">
 						<EditorScoreBar value={23} />
 					</div>
+
 					<div className="components-group">
 						<EditorScoreBar value={52} />
 					</div>
@@ -79,10 +80,10 @@ function ScoresShowcase() {
 					<h4>Light Indicators</h4>
 
 					<div className="components-group">
-						<LightIndicator />
-						<LightIndicator status='red' />
-						<LightIndicator status='yellow' />
 						<LightIndicator status='green' />
+						<LightIndicator status='yellow' />
+						<LightIndicator status='red' />
+						<LightIndicator />
 					</div>
 				</div>
 
@@ -111,9 +112,9 @@ function ScoresShowcase() {
 					<div className='components-group'>
 						<AnchorTagStatus>All Good</AnchorTagStatus>
 
-						<AnchorTagStatus severity='warning' children='Warning' />
+						<AnchorTagStatus severity='warning' children='2 Warnings' />
 
-						<AnchorTagStatus severity='error' children='Error' />
+						<AnchorTagStatus severity='error' children='5 Errors' />
 
 						<AnchorTagStatus severity='grey' children='Label' />
 					</div>
@@ -139,7 +140,7 @@ function ScoresShowcase() {
 
 						<ScoreButton severity='neutral'>52/100</ScoreButton>
 
-						<ScoreButton severity='bad'>52/100</ScoreButton>
+						<ScoreButton severity='bad'>23/100</ScoreButton>
 					</div>
 				</div>
 
@@ -151,7 +152,7 @@ function ScoresShowcase() {
 
 						<ScoreButton company='Content AI' severity='neutral'>52/100</ScoreButton>
 
-						<ScoreButton company='Content AI' severity='bad'>52/100</ScoreButton>
+						<ScoreButton company='Content AI' severity='bad'>23/100</ScoreButton>
 					</div>
 				</div>
 			</div>

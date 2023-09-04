@@ -5,6 +5,7 @@
 		$score-background
 	),
 	$hover-focus: (
+		$color,
 		$background,
 		$score-background
 	)
@@ -18,17 +19,18 @@
 		color: $white;
 	}
 
-	&:hover:not(:disabled), &:focus {
-		color: nth($normal, 1);
-		background-color: nth($hover-focus, 1);
+	&:hover:not(:disabled), 
+	&:focus {
+		color: nth($hover-focus, 1);
+		background-color: nth($hover-focus, 2);
 
 		.keyword-button__score {
-			background-color: nth($hover-focus, 2);
+			background-color: nth($hover-focus, 3);
 		}
 	}
 
 	&:focus {
-		border-color: nth($hover-focus, 2);
+		border-color: nth($hover-focus, 3);
 	}
 }
 
@@ -45,22 +47,22 @@
 
 			&.good {
 				@include keyword-style(
-					$normal: (#27984D, #DEF3E5, #5CC47F),
-					$hover-focus: (#C6EAD2, #42B268)
+					$normal: ($success, $success-extralight, $success-lighter),
+					$hover-focus: ($success-dark, lighten($success, 35%), $success-light)
 				);
 			}
 
 			&.neutral {
 				@include keyword-style(
 					$normal: (#DAA233, #FCF0D7, #F3BA49),
-					$hover-focus: (#FAE3B6, #E8A623)
+					$hover-focus: (#DAA233, #FAE3B6, #E8A623)
 				);
 			}
 			
 			&.bad {
 				@include keyword-style(
-					$normal: (#F35F73, #FDE9EB, #F3808F),
-					$hover-focus: (#FBDADE, #F66276)
+					$normal: ($error-dark, $error-lightest, $error),
+					$hover-focus: ($error-darker, $error-medium, $error-dark)
 				);
 			}
 		}

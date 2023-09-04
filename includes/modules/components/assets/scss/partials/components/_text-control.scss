@@ -21,15 +21,15 @@
 	.components-base-control {
 		&.is-success {
 			@include text-control-validation(
-				$success, 
-				$success-extralight
+				$success,
+				$success-thin
 			);
 		}
 
 		&.is-error {
 			@include text-control-validation(
-				$error,
-				$error-extralight
+				$error-tertiary,
+				$error-secondary-light
 			);
 		}
 
@@ -51,7 +51,7 @@
 			@include font-size-small();
 
 			&.is-error {
-				color: $error;
+				color: $error-tertiary;
 			}
 
 			&.is-success {

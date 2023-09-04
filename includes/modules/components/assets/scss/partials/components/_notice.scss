@@ -29,7 +29,7 @@
 	}
 
 	&.is-error {
-		@include notice-style($error-light, $error-lightest, $error-light, $error-lighter);
+		@include notice-style($error-dark, $error-lightest, $error-dark, $error-medium);
 	}
 
 	&.is-info-grey {
@@ -48,7 +48,7 @@
 		@include notice-dismiss-style($success-lightest);
 
 		.components-notice__icon {
-			color: $success-light;
+			color: $success;
 		}
 	}
 

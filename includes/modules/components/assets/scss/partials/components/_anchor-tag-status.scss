@@ -39,9 +39,9 @@
 		
 			&.good {
 				@include anchor-tag-status-style(
-					$normal:(#62AE60, #E4F4E4),
-					$hover-focus:(#489F46, #D7EFD7),
-					$active:(#7AC979),
+					$normal:($success, $success-extralight),
+					$hover-focus:($success-dark, $success-lightest),
+					$active:($success-lighter),
 				);
 			}
 			
@@ -55,17 +55,17 @@
 			
 			&.error {
 				@include anchor-tag-status-style(
-					$normal:(#E47E78, #FCEBEA),
-					$hover-focus:(#DA6961, #FBE1DF),
-					$active:(#F29C96),
+					$normal: ($error-secondary-dark, $error-secondary-light),
+					$hover-focus:($error-secondary-darker, lighten($error-secondary, 18%)),
+					$active:($error-secondary),
 				);
 			}
-			
+
 			&.grey {
 				@include anchor-tag-status-style(
-					$normal:(#787878, #F2F2F2),
-					$hover-focus:(#383838, #E9E9E9),
-					$active:(#383838),
+					$normal:($gray-light, $gray-extralight),
+					$hover-focus:($black-light, $gray-lightest),
+					$active:($black-light),
 				);
 			}
 		}

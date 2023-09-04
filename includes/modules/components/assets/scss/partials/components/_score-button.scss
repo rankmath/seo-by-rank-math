@@ -43,9 +43,9 @@
 			&.rank-math {
 				&.good {
 					@include score-button-style(
-						$normal: ($success-lightnew,	$success-lighter),
-						$hover: ($success-dark, $success-lightest, $success-light),
-						$focus: ($success-lighter)
+						$normal: ($success, $success-lighter),
+						$hover: ($success-dark, lighten($success, 45%), $success),
+						$focus: ($success-light)
 					);
 				}
 
@@ -59,9 +59,9 @@
 
 				&.bad {
 					@include score-button-style(
-						$normal: (#E37A73,	#F29C96),
-						$hover: (#DB6F67,#FDF5F4, #E68781),
-						$focus: (#F29C96)
+						$normal: ($error-secondary-dark, $error-secondary),
+						$hover: ($error-secondary-darker, $error-secondary-light, $error-secondary-dark),
+						$focus: ($error-secondary)
 					);
 				}
 			}
@@ -85,9 +85,9 @@
 
 				&.bad {
 					@include score-button-style(
-						$normal: (#FB7184,	#F0909D),
-						$hover: (#F76A7D,#FFF4F6, #E6819A),
-						$focus: (#F3808F)
+						$normal: ($error,	$error-lighter),
+						$hover: ($error-dark, $error-extralight, $error-light),
+						$focus: ($error)
 					);
 				}
 			}
