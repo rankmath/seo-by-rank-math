@@ -142,20 +142,28 @@ class Posts {
 			return $this->generate_posts_list_hierarchical( $posts, $show_dates, $post_type );
 		}
 
-		return $this->generate_posts_list_flat( $posts, $show_dates );
+		return $this->generate_posts_list_flat( $posts, $show_dates, $post_type );
 	}
 
 	/**
 	 * Get the post list HTML for non-hierarchical post types.
 	 *
-	 * @param array $posts The posts to output.
-	 * @param bool  $show_dates Whether to show the post dates.
+	 * @param array  $posts The posts to output.
+	 * @param bool   $show_dates Whether to show the post dates.
+	 * @param string $post_type Post type name.
 	 *
 	 * @return string
 	 */
-	private function generate_posts_list_flat( $posts, $show_dates ) {
+	private function generate_posts_list_flat( $posts, $show_dates, $post_type ) {
 		$output = [];
 		foreach ( $posts as $post ) {
+			if ( 'product' === $post_type ) {
+				$product            = wc_get_product( $post->ID );
+				$product_visibility = $product->get_catalog_visibility();
+				if ( 'hidden' === $product_visibility ) {
+					continue;
+				}
+			}
 			$output[] = '<li class="rank-math-html-sitemap__item">'
 				. '<a href="' . esc_url( $this->get_post_link( $post ) ) . '" class="rank-math-html-sitemap__link">'
 				. esc_html( $this->get_post_title( $post ) )
