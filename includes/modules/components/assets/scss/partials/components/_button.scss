@@ -97,18 +97,17 @@
 
 // Secondary Variant Variables
 $secondary-btn-color: lighten($black, 35%);
-$secondary-btn-box-shadow-color: $gray;
-$secondary-btn-color-hover-focus: lighten($black, 20%);
-$secondary-btn-bg-hover-focus: lighten($black, 97%);
+$secondary-btn-box-shadow: $gray;
+$secondary-btn-color--hover-focus: lighten($black, 20%);
+$secondary-btn-bg--hover-focus: lighten($black, 97%);
 
 // Tertiary-Outline Variables
-$color-tertiary-outline-box-shadow: lighten($black, 60%);
-$color-tertiary-outline-box-shadow-disabled-hover: lighten($black, 45%);
-$color-tertiary-outline-hover-focus: lighten($black, 40%);
-$color-tertiary-outline-hover-focus-bg:lighten($black, 98%);
+$tertiary-outline-btn-box-shadow--disabled-hover: lighten($black, 45%);
+$tertiary-outline-btn-color--hover-focus: lighten($black, 40%);
+$tertiary-outline-btn-bg--hover-focus:lighten($black, 98%);
 
 // Tertiary Variables
-$color-tertiary: $gray;
+$tertiary-btn-color: $gray;
 
 
 .components-button {
@@ -142,20 +141,20 @@ $color-tertiary: $gray;
 				lighten($black, 75%),
 			),
 			$hover: (
-				$secondary-btn-color-hover-focus,
-				$secondary-btn-bg-hover-focus,
-				$secondary-btn-box-shadow-color,
+				$secondary-btn-color--hover-focus,
+				$secondary-btn-bg--hover-focus,
+				$secondary-btn-box-shadow,
 			),
 			$focus-active: (
-				$secondary-btn-color-hover-focus,
-				$secondary-btn-bg-hover-focus, 
-				$secondary-btn-box-shadow-color,
+				$secondary-btn-color--hover-focus,
+				$secondary-btn-bg--hover-focus, 
+				$secondary-btn-box-shadow,
 				lighten($black, 87%),
 			),
 			$disabled: (
 				inherit,
 				darken($white, 20%),
-				$secondary-btn-box-shadow-color
+				$secondary-btn-box-shadow
 			)
 		);
 
@@ -236,29 +235,29 @@ $color-tertiary: $gray;
 				lighten($black, 85%)
 			),
 			$hover: (
-				$color-tertiary-outline-hover-focus,
-				$color-tertiary-outline-hover-focus-bg,
-				$color-tertiary-outline-box-shadow-disabled-hover
+				$tertiary-outline-btn-color--hover-focus,
+				$tertiary-outline-btn-bg--hover-focus,
+				$tertiary-outline-btn-box-shadow--disabled-hover
 			),
 			$focus-active: (
-				$color-tertiary-outline-hover-focus,
-				$color-tertiary-outline-hover-focus-bg,
-				$color-tertiary-outline-box-shadow,
+				$tertiary-outline-btn-color--hover-focus,
+				$tertiary-outline-btn-bg--hover-focus,
+				lighten($black, 60%),
 				inherit,
 			),
 			$disabled: (
 				inherit,
 				darken($white, 15%),
-				$color-tertiary-outline-box-shadow-disabled-hover
+				$tertiary-outline-btn-box-shadow--disabled-hover
 			)
 		);
 	}
 
 	&.is-tertiary {
-		color: $color-tertiary;
+		color: $tertiary-btn-color;
 
 		&:hover:not(:disabled) {
-			color: $color-tertiary;
+			color: $tertiary-btn-color;
 			background-color: darken($white, 3%);
 			box-shadow: none;
 		}
@@ -266,7 +265,7 @@ $color-tertiary: $gray;
 		&:active:not(:disabled), 
 		&:focus:not(:disabled), 
 		&:focus:hover:not(:disabled) {
-			box-shadow: inset 0 0 0 1.5px $color-tertiary;
+			box-shadow: inset 0 0 0 1.5px $tertiary-btn-color;
 		}
 
 		&:disabled,
