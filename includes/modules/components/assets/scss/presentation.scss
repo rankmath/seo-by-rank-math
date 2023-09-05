@@ -1,6 +1,6 @@
 .container {
 	background-color: #fff;
-	padding: 3rem;
+	padding: 2rem;
 
 	.components-wrapper {
 		background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='11' ry='11' stroke='%23E5E5E587' stroke-width='2' stroke-dasharray='0.5%2c 5' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
@@ -11,6 +11,9 @@
 
 	.margin-top {
 		margin-top: 3rem;
+	}
+	.margin-top-sm {
+		margin-top: 10px;
 	}
 
 	.components-group {
@@ -23,7 +26,7 @@
 	.button-group {
 		display: flex;
 		align-items: end;
-		gap: 1rem;
+		gap: 3.3rem;
 		margin: 1rem 0;
 	}
 

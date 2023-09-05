@@ -1,23 +1,19 @@
-
 @mixin secondary-button-style(
 	$normal: (
 		$color,
 		$box-shadow-color
 	),
-	
 	$hover: (
 		$color,
 		$background,
 		$box-shadow-color
 	),
-	
 	$focus-active: (
 		$color,
 		$background,
 		$box-shadow-color
 		$background--active,
 	),
-	
 	$disabled: (
 		$color,
 		$background,
@@ -27,6 +23,7 @@
 	$color: nth($normal, 1);
 	$color-box-shadow: nth($normal, 2);
 
+	
 	color: $color;
 	box-shadow: inset 0 0 0 1px $color-box-shadow;
 
@@ -67,14 +64,14 @@
 	}
 }
 
-@mixin button-has-icon-style(
+@mixin has-icon-style(
 	$min-width,
 	$height,
 	$font-size,
-	$padding-vertical,
 	$padding-horizontal,
-	$gap,
-	$icon-font-size
+	$padding-vertical,
+	$icon-font-size,
+	$gap: 5px,
 ) {
 	&.has-icon{
 		&:not(.has-text) {
@@ -86,7 +83,7 @@
 		&.has-text{
 			@include align-button-text();
 			padding: $padding-vertical $padding-horizontal;
-			gap: $gap;
+			gap: $gap !important;
 
 			i {
 				font-size: $icon-font-size;
@@ -96,25 +93,44 @@
 }
 
 // Secondary Variant Variables
-$secondary-btn-color: lighten($black, 35%);
 $secondary-btn-box-shadow: $gray;
-$secondary-btn-color--hover-focus: lighten($black, 20%);
-$secondary-btn-bg--hover-focus: lighten($black, 97%);
-
-// Tertiary-Outline Variables
-$tertiary-outline-btn-box-shadow--disabled-hover: lighten($black, 45%);
-$tertiary-outline-btn-color--hover-focus: lighten($black, 40%);
-$tertiary-outline-btn-bg--hover-focus:lighten($black, 98%);
 
 // Tertiary Variables
 $tertiary-btn-color: $gray;
 
-
 .components-button {
-	height: 32px;
-	padding: 6px 14px;
+	height: 30px;
+  padding: 6px 16px;
+  font-size: 11px;
+
+	@include has-icon-style(32px, 28px, 16px, 6px, 10px, 15px);
+
+	&.is-small {
+		padding: 0 10px;
+		font-size: 10px;
+
+		@include has-icon-style(24px, 24px, 13px, 6px, 6px, 13px, 3px);
+	}
+
+	&.is-large {
+		height: 33px;
+		line-height: 22px;
+		padding: 12px 22px;
+
+		@include has-icon-style(24px, 30px, 18px, 12px, 12px, 17px);
+
+		&.has-icon{
+			&:not(.has-text) {
+				padding: 12px 8px;
+			}
+		}
+	}
 
 	&.is-primary {
+		&:focus:not(:disabled) {
+			@include box-shadow-primary();
+		}
+
 		&:disabled,
 		&[aria-disabled="true"] {
 			opacity: 0.3;
@@ -138,23 +154,23 @@ $tertiary-btn-color: $gray;
 	&.is-secondary {
 		@include secondary-button-style(
 			$normal: (
-				$secondary-btn-color, 
-				lighten($black, 75%),
+				$gray-dark,
+				$gray-lighter,
 			),
 			$hover: (
-				$secondary-btn-color--hover-focus,
-				$secondary-btn-bg--hover-focus,
+				$gray-darkest,
+				$gray-extralight,
 				$secondary-btn-box-shadow,
 			),
 			$focus-active: (
-				$secondary-btn-color--hover-focus,
-				$secondary-btn-bg--hover-focus, 
+				$gray-darkest,
+				$gray-extralight, 
 				$secondary-btn-box-shadow,
-				lighten($black, 87%),
+				$gray-lightest,
 			),
 			$disabled: (
 				inherit,
-				darken($white, 20%),
+				$gray-medium,
 				$secondary-btn-box-shadow
 			)
 		);
@@ -174,7 +190,7 @@ $tertiary-btn-color: $gray;
 					$destructive,
 					$gray-thin,
 					$destructive,
-					darken($white, 5%),
+					$gray-medium,
 				),
 				$disabled: (
 					inherit,
@@ -219,13 +235,13 @@ $tertiary-btn-color: $gray;
 	&.is-secondary-grey {
 		background-color: $gray-thin;
 
-		&:hover, 
+		&:hover,
 		&:focus {
-			background-color: lighten($black, 95%);
+			background-color: $gray-extralight;
 		}
 
 		&.is-pressed {
-			color: $secondary-btn-color;
+			color: $gray-dark;
 			background-color: $black;
 		}
 	}
@@ -233,24 +249,24 @@ $tertiary-btn-color: $gray;
 	&.is-tertiary-outline {
 		@include secondary-button-style(
 			$normal: (
-				lighten($black, 55%),
-				lighten($black, 85%)
+				$gray-light,
+				$gray-medium
 			),
 			$hover: (
-				$tertiary-outline-btn-color--hover-focus,
-				$tertiary-outline-btn-bg--hover-focus,
-				$tertiary-outline-btn-box-shadow--disabled-hover
+				$gray-dark,
+				$gray-extralight,
+				$gray-light
 			),
 			$focus-active: (
-				$tertiary-outline-btn-color--hover-focus,
-				$tertiary-outline-btn-bg--hover-focus,
-				lighten($black, 60%),
+				$gray-dark,
+				$gray-extralight,
+				$gray,
 				inherit,
 			),
 			$disabled: (
 				inherit,
-				darken($white, 15%),
-				$tertiary-outline-btn-box-shadow--disabled-hover
+				$gray-medium,
+				$gray-light
 			)
 		);
 	}
@@ -260,7 +276,7 @@ $tertiary-btn-color: $gray;
 
 		&:hover:not(:disabled) {
 			color: $tertiary-btn-color;
-			background-color: darken($white, 3%);
+			background-color: $gray-mono;
 			box-shadow: none;
 		}
 
@@ -276,51 +292,6 @@ $tertiary-btn-color: $gray;
 		&[aria-disabled="true"]:hover {
 			background-color: transparent;
 			opacity: 0.3;
-		}
-	}
-
-	//Button Has Icon
-	@include button-has-icon-style (
-		32px,
-		28px,
-		16px,
-		6px,
-		10px,
-		5px,
-		15px
-	);
-
-	&.is-small {
-		@include button-has-icon-style (
-			24px,
-			24px,
-			13px,
-			6px,
-			6px,
-			3px,
-			13px
-		);
-	}
-
-	&.is-large {
-		height: 36px;
-		line-height: 22px;
-		padding: 12px 20px;
-
-		@include button-has-icon-style (
-			24px,
-			32px,
-			18px,
-			12px,
-			12px,
-			5px,
-			17px
-		);
-				
-		&.has-icon{
-			&:not(.has-text) {
-				padding: 12px 10px;
-			}
 		}
 	}
 }
