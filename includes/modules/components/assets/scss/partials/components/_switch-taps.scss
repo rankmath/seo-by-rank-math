@@ -1,13 +1,13 @@
 @mixin switch-tap-color-style(
 	$hover: (
-		$tab-color--hover,
-		$tab-bg--hover,
+		$color,
+		$background,
 	),
 
 	$active: (
-		$tab-color--active,
-		$tab-bg--active,
-	),
+		$color,
+		$background,
+	)
 ) {
 	.components-tab-panel__tabs {
 		&:hover {

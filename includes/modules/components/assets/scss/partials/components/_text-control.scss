@@ -1,4 +1,3 @@
-
 .text-control-container {
 	position: relative;
 
@@ -60,8 +59,7 @@
 		}
 
 		&.custom-number-control {
-			display: flex;
-			align-items: center;
+			@include flex-align();
 			font-size: 0.55rem;
 			color: $blue;
 			

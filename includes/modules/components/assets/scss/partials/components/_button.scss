@@ -2,26 +2,26 @@
 @mixin secondary-button-style(
 	$normal: (
 		$color,
-		$color-box-shadow
+		$box-shadow-color
 	),
 	
 	$hover: (
-		$color--hover,
-		$color-bg--hover,
-		$color-box-shadow--hover
+		$color,
+		$background,
+		$box-shadow-color
 	),
 	
 	$focus-active: (
-		$color--focus,
-		$color-bg-focus,
-		$color-box-shadow--focus-active,
-		$color-bg-active,
+		$color,
+		$background,
+		$box-shadow-color
+		$background--active,
 	),
 	
 	$disabled: (
-		$color--disabled,
-		$color-bg--disabled,
-		$color-box-shadow--disabled
+		$color,
+		$background,
+		$box-shadow-color
 	)
 ) {
 	$color: nth($normal, 1);
@@ -96,11 +96,10 @@
 }
 
 // Secondary Variant Variables
-$color-secondary: lighten($black, 35%);
-$color-secondary-box-shadow: lighten($black, 75%);
-$color-secondary-box-shadow-2: $gray;
-$color-secondary-hover-focus: lighten($black, 20%);
-$color-secondary-hover-focus-bg: lighten($black, 97%);
+$secondary-btn-color: lighten($black, 35%);
+$secondary-btn-box-shadow-color: $gray;
+$secondary-btn-color-hover-focus: lighten($black, 20%);
+$secondary-btn-bg-hover-focus: lighten($black, 97%);
 
 // Tertiary-Outline Variables
 $color-tertiary-outline-box-shadow: lighten($black, 60%);
@@ -139,24 +138,24 @@ $color-tertiary: $gray;
 	&.is-secondary {
 		@include secondary-button-style(
 			$normal: (
-				$color-secondary, 
-				$color-secondary-box-shadow,
+				$secondary-btn-color, 
+				lighten($black, 75%),
 			),
 			$hover: (
-				$color-secondary-hover-focus,
-				$color-secondary-hover-focus-bg,
-				$color-secondary-box-shadow-2,
+				$secondary-btn-color-hover-focus,
+				$secondary-btn-bg-hover-focus,
+				$secondary-btn-box-shadow-color,
 			),
 			$focus-active: (
-				$color-secondary-hover-focus,
-				$color-secondary-hover-focus-bg, 
-				$color-secondary-box-shadow-2,
+				$secondary-btn-color-hover-focus,
+				$secondary-btn-bg-hover-focus, 
+				$secondary-btn-box-shadow-color,
 				lighten($black, 87%),
 			),
 			$disabled: (
 				inherit,
 				darken($white, 20%),
-				$color-secondary-box-shadow-2
+				$secondary-btn-box-shadow-color
 			)
 		);
 
@@ -225,7 +224,7 @@ $color-tertiary: $gray;
 		}
 
 		&.is-pressed {
-			color: $color-secondary;
+			color: $secondary-btn-color;
 			background-color: $black;
 		}
 	}

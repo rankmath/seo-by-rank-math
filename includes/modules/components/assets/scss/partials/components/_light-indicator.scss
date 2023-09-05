@@ -1,8 +1,7 @@
 .light-indicator {
+	@include flex-align();
+	@include gap-large();
 	background-color: $gray-mono;
-	display: flex;
-	align-items: center;
-	gap: 15px;
 	padding: 0.6rem 1rem;
 	border-radius: 5px;
 	padding-right: 2.2rem;
@@ -10,12 +9,15 @@
 	.is-off {
 		color: $gray-light;
 	}
+
 	.is-green {
 		color: $success;
 	}
+
 	.is-red {
 		color: $error-dark;
 	}
+	
 	.is-yellow {
 		color: $warning-dark;
 	}
