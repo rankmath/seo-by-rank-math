@@ -1,0 +1,56 @@
+.sidebar-menu-list {
+	&.components-menu-group  {
+		@include vertical-menu-style();
+		padding: 1.5rem 1rem;
+
+		div[role="group"]  {
+			row-gap: 10px;
+
+			.components-menu-item__button {
+				box-shadow: 0 0 0 1px $gray-lightest;
+
+				&:hover, 
+				&:focus {
+					background-color: $gray-mono;
+					color: inherit;
+				}
+
+				&:hover {
+					box-shadow: 0 0 0 1px $gray-light;
+				}
+
+				&:focus {
+					box-shadow: 0 0 0 1.5px $gray-light;
+				}
+			}
+		}
+	}
+}
+
+
+.menu-list-popup {
+	&.components-menu-group {
+		@include vertical-menu-style();
+		@include box-shadow-small();
+
+		div[role="group"] {
+			.components-menu-item__button {
+				padding: 8px 14px;
+
+				&:hover, 
+				&:focus {
+					background-color: transparent;
+				}
+
+				&:hover {
+					color: $blue;
+				}
+
+				&:focus {
+					color: inherit;
+					box-shadow: 0 0 0 1.5px $blue;
+				}
+			}
+		}
+	}
+}

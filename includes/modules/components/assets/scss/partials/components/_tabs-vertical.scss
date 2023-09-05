@@ -1,21 +1,14 @@
 .single-section-tab-panel {
 	&.components-menu-group {
-		@include border-lighter();
-		width: 13rem;
-		padding: 1rem;
+		@include vertical-menu-style();
 
 		.components-menu-group__label {
-			margin-bottom: 16px;
+			display: block;
 		}
 
-		div[role="group"]  {
-			display: flex;
-			flex-direction: column;
-			row-gap: 3px;
-
+		div[role="group"] {
 			.components-menu-item__button {
 				border-radius: 0.25rem;
-				padding: 10px 14px;
 
 				&:hover {
 					background-color: $gray-mono;
@@ -30,18 +23,6 @@
 				&.components-button {
 					height: fit-content;
 					@include remove-box-shadow();
-				}
-
-				.components-menu-item__item {
-					min-width: fit-content;
-					text-align: left;
-					white-space: break-spaces;
-					column-gap: 0.5rem;
-					margin-right: 0px;
-
-					.components-menu-item__icon {
-						font-size: 0.9rem;
-					}
 				}
 			}
 		}

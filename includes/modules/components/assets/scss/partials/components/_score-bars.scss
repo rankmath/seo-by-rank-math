@@ -65,10 +65,10 @@
 .content-ai-score-bar {
 	&.components-range-control {
 		.components-range-control__thumb-wrapper {
+			@include box-shadow-small();
 			margin-top: 11px;
 			background-color: transparent;
 			border: 5px solid $white;
-			box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 
 			.css-1oxlee5 {
 				display: none;

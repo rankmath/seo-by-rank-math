@@ -33,10 +33,14 @@ import SwitchTaps from './tabs/SwitchTaps';
 import FilterMenus from './tabs/FilterMenus';
 import SingleSectionTabPanel from './tabs/vertical-tabs/SingleSectionTabPanel';
 import MultiSectionTabPanel from './tabs/vertical-tabs/MultiSectionTabPanel';
+import SidebarMenuList from './tabs/menu-lists/SidebarMenuList';
+import MenuListPopup from './tabs/menu-lists/MenuListPopup';
 
 const AllComponents = () => {
 	return (
 		<div className='container'>
+
+			<MenuListShowcase />
 
 			<VerticalTabsShowcase />
 
@@ -60,6 +64,51 @@ const AllComponents = () => {
 	)
 };
 
+function MenuListShowcase() {
+	return (
+		<>
+			<h2>MENU LIST ITEMS</h2>
+
+			<div className='components-wrapper'>
+				<div>
+					<h4>Choose a Block Popup</h4>
+
+					<div className='components-group'>
+						<MenuListPopup
+							menuItems={[
+								{ title: 'Frist Option Item', icon: 'rm-icon-trash' },
+								{ title: 'Second Option Item', icon: 'rm-icon-trash' },
+								{ title: 'Fourth Option Item', icon: 'rm-icon-trash' },
+								{ title: 'Fifth Option Item', icon: 'rm-icon-trash' },
+								{ title: 'Sixth Option Item', icon: 'rm-icon-trash' },
+								{ title: 'Third Option Item', icon: 'rm-icon-trash' },
+								{ title: 'Second Option Item', icon: 'rm-icon-trash' },
+								{ title: 'Third Option Item', icon: 'rm-icon-trash' },
+							]}
+						/>
+					</div>
+				</div>
+
+				<div>
+					<h4>Sidebar Menu List</h4>
+
+					<div className='components-group'>
+						<SidebarMenuList
+							menuItems={[
+								{ title: 'Frist Option List Item', icon: 'rm-icon-trash' },
+								{ title: 'Second Option List Item', icon: 'rm-icon-trash' },
+								{ title: 'Third Option List Item', icon: 'rm-icon-trash' },
+								{ title: 'Fourth Option List Item', icon: 'rm-icon-trash' },
+								{ title: 'Fifth Option List Item', icon: 'rm-icon-trash' },
+								{ title: 'Sixth Option List Item', icon: 'rm-icon-trash' },
+							]}
+						/>
+					</div>
+				</div>
+			</div>
+		</>
+	)
+};
 function VerticalTabsShowcase() {
 	return (
 		<>

@@ -49,6 +49,9 @@
 @mixin box-shadow-default() {
 	box-shadow: 0px 2px 4px $gray-lightest;
 }
+@mixin box-shadow-small() {
+	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
 @mixin box-shadow-primary() {
 	box-shadow: 0 0 0 1px $white, 0 0 0 $border-width--focus $blue;
 }
@@ -86,5 +89,42 @@
 	.title {
 		@include font-size-small();
 		font-weight: normal;
+	}
+}
+
+@mixin vertical-menu-style() {
+	@include border-lighter();
+	width: 13rem;
+	padding: 1rem;
+
+	.components-menu-group__label {
+		display: none;
+		margin-bottom: 16px;
+	}
+
+	div[role="group"]  {
+		display: flex;
+		flex-direction: column;
+		row-gap: 3px;
+
+		.components-menu-item__button {
+			padding: 10px 14px;
+
+			&.components-button {
+				height: fit-content;
+			}
+
+			.components-menu-item__item {
+				min-width: fit-content;
+				text-align: left;
+				white-space: break-spaces;
+				column-gap: 0.5rem;
+				margin-right: 0px;
+
+				.components-menu-item__icon {
+					font-size: 0.9rem;
+				}
+			}
+		}
 	}
 }
