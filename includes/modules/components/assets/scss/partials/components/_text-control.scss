@@ -28,7 +28,7 @@
 		&.is-error {
 			@include text-control-validation(
 				$error-tertiary,
-				$error-secondary-light
+				$error-lightest
 			);
 		}
 

@@ -1,3 +1,4 @@
+// Border mixins
 @mixin border-default() {
 	border: 1px solid $gray-light;
 }
@@ -8,10 +9,12 @@
 	border: 1px solid $gray-lightest;
 }
 
+// Border radius mixin
 @mixin border-radius-small() {
 	border-radius: 0.15rem;
 }
 
+// Gap mixins
 @mixin gap-small() {
 	gap: 5px;
 }
@@ -22,6 +25,7 @@
 	gap: 15px;
 }
 
+// Disabled styles mixins
 @mixin disabled-style() {
 	@include disabled-opacity();
 	background: $gray-lightest;
@@ -32,6 +36,13 @@
 	opacity: 0.4;
 }
 
+// Box shadow mixins
+@mixin box-shadow-small() {
+	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+@mixin box-shadow-primary() {
+	box-shadow: 0 0 0 1px $white, 0 0 0 $border-width--focus $blue;
+}
 @mixin remove-box-shadow() {
 	&:hover:not(:disabled),
 	&:active:not(:disabled),
@@ -41,18 +52,14 @@
 	}
 }
 
-@mixin box-shadow-small() {
-	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-}
-@mixin box-shadow-primary() {
-	box-shadow: 0 0 0 1px $white, 0 0 0 $border-width--focus $blue;
-}
-
+// Vertical alignment mixins
 @mixin center-float-vertically() {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 }
+
+// Flexbox mixins
 @mixin flex-center($direction: column) {
 	display: flex;
 	flex-direction: $direction;
@@ -66,6 +73,7 @@
   align-items: center;
 }
 
+// Button text alignment mixin
 @mixin align-button-text() {
 	&.has-text{
 		justify-content: start;
@@ -73,6 +81,7 @@
 	}
 }
 
+// Tab item with icon mixin
 @mixin tab-item-has-icon-style() {
 	@include flex-align();
 	@include font-size-regular();
@@ -83,6 +92,7 @@
 	}
 }
 
+// Vertical menu style mixin
 @mixin vertical-menu-style() {
 	@include border-light() ;
 	width: 13rem;
