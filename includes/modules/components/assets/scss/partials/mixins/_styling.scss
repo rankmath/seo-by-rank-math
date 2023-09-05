@@ -75,7 +75,6 @@
 
 @mixin tab-item-has-icon-style() {
 	@include flex-align();
-	@include gap-small();
 	@include font-size-regular();
 
 	.title {

@@ -132,14 +132,13 @@
 
 						&-title {
 							@include font-size-small();
-							font-weight: normal;
+							font-weight: 500;
 							margin: 0px;
 						}
 
 						&-subtitle {
 							@include font-size-small();
 							background-color: $gray-mono;
-							font-weight: 600;
 							margin: 0px;
 						}
 					}

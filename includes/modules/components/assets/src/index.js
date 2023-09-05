@@ -546,6 +546,7 @@ function NoticeShowcase() {
 			<div className='components-wrapper'>
 				<div className='notice-group'>
 					<Notice
+						status='error'
 						actions={[
 							{
 								label: "Read More",
@@ -553,10 +554,11 @@ function NoticeShowcase() {
 							}
 						]}
 					>
-						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
 					</Notice>
 
 					<Notice
+						status='error'
 						icon='rm-icon-trash'
 						actions={[
 							{
@@ -565,8 +567,9 @@ function NoticeShowcase() {
 							}
 						]}
 					>
-						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
 					</Notice>
+
 
 					<Notice
 						status='warning'
@@ -593,6 +596,7 @@ function NoticeShowcase() {
 						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
 					</Notice>
 
+
 					<Notice
 						status='success'
 						actions={[
@@ -618,8 +622,8 @@ function NoticeShowcase() {
 						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
 					</Notice>
 
+
 					<Notice
-						status='error'
 						actions={[
 							{
 								label: "Read More",
@@ -627,11 +631,10 @@ function NoticeShowcase() {
 							}
 						]}
 					>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
 					</Notice>
 
 					<Notice
-						status='error'
 						icon='rm-icon-trash'
 						actions={[
 							{
@@ -640,8 +643,9 @@ function NoticeShowcase() {
 							}
 						]}
 					>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
+						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
 					</Notice>
+
 
 					<Notice
 						status='info-grey'

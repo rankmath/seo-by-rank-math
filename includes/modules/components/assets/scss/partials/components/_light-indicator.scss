@@ -1,10 +1,10 @@
 .light-indicator {
 	@include flex-align();
-	@include gap-large();
+	@include gap-medium();
+	width: 4.4rem;
 	background-color: $gray-mono;
 	padding: 0.6rem 1rem;
 	border-radius: 5px;
-	padding-right: 2.2rem;
 
 	.is-off {
 		color: $gray-light;

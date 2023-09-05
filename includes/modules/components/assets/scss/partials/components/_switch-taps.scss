@@ -64,6 +64,7 @@
 
 			.panel-has-icon {
 				@include tab-item-has-icon-style();
+				@include gap-small();
 
 				.title,
 				i {

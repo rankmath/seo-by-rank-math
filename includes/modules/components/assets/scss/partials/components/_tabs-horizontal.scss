@@ -23,6 +23,7 @@
 
 			.panel-has-icon {
 				@include tab-item-has-icon-style();
+				gap: 8px;
 
 				.title {
 					display: none;
