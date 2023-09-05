@@ -76,6 +76,11 @@ function VerticalTabsShowcase() {
 								{ title: 'Second Tab', icon: 'rm-icon-trash' },
 								{ title: 'Third Tab', icon: 'rm-icon-trash' },
 								{ title: 'Fourth Tab', icon: 'rm-icon-trash' },
+								{ title: 'Fifth Tab', icon: 'rm-icon-trash' },
+								{ title: 'Sixth Tab', icon: 'rm-icon-trash' },
+								{ title: 'Seventh Tab', icon: 'rm-icon-trash' },
+								{ title: 'Eight Tab', icon: 'rm-icon-trash' },
+								{ title: 'Ninth Tab', icon: 'rm-icon-trash' },
 							]}
 						/>
 					</div>
@@ -96,12 +101,20 @@ function VerticalTabsShowcase() {
 							/>
 
 							<SingleSectionTabPanel
-								label='Settings'
+								label='Section Title'
 								menuItems={[
-									{ title: 'Settings 1', icon: 'rm-icon-trash' },
-									{ title: 'Settings 2', icon: 'rm-icon-trash' },
-									{ title: 'Settings 3', icon: 'rm-icon-trash' },
-									{ title: 'Settings 4', icon: 'rm-icon-trash' },
+									{ title: 'Fifth Tab', icon: 'rm-icon-trash' },
+									{ title: 'Sixth Tab', icon: 'rm-icon-trash' },
+									{ title: 'Seventh Tab', icon: 'rm-icon-trash' },
+								]}
+							/>
+
+							<SingleSectionTabPanel
+								label='Section Title'
+								menuItems={[
+									{ title: 'Eight Tab', icon: 'rm-icon-trash' },
+									{ title: 'Ninth Tab', icon: 'rm-icon-trash' },
+									{ title: 'Tab Panel with Long Double Line Text', icon: 'rm-icon-trash' },
 								]}
 							/>
 						</MultiSectionTabPanel>
