@@ -1,6 +1,6 @@
 @mixin uploader-style() {
-	@include border-extralight();
 	background-color: $gray-thin;
+	border: 1px solid $gray-medium;
 	width: 35rem;
 	padding: 16px;
 

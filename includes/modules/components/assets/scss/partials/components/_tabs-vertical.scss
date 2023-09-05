@@ -31,7 +31,7 @@
 
 
 .multi-section-tab-panel {
-	@include border-lighter();
+	@include border-light() ;
 	width: 13rem;
 	padding: 1rem;
 

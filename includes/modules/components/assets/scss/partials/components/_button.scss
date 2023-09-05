@@ -122,13 +122,14 @@ $tertiary-btn-color: $gray;
 		}
 
 		&.is-destructive {
-			&:active, &:focus {
+			&:active, 
+			&:focus {
 				outline-color: $destructive;
 				color: $white;
 
 				&:hover {
+					@include box-shadow-primary();
 					background-color: $destructive-hover;
-					box-shadow: inset 0 0 0 1px $white, 0 0 0 $border-width--focus $blue;
 				}
 			}
 		}
@@ -218,7 +219,8 @@ $tertiary-btn-color: $gray;
 	&.is-secondary-grey {
 		background-color: $gray-thin;
 
-		&:hover, &:focus {
+		&:hover, 
+		&:focus {
 			background-color: lighten($black, 95%);
 		}
 

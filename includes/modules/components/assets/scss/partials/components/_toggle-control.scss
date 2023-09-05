@@ -22,7 +22,7 @@
 				}
 
 				+ .components-toggle-control__label {
-					@include disabled-opacity-default();
+					@include disabled-opacity();
 				}
 			}
 		}

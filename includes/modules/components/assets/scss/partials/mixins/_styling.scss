@@ -4,15 +4,10 @@
 @mixin border-blue() {
 	border: 1px solid $blue;
 }
-@mixin border-light() {
-	border: 1px solid $gray-lighter;
-}
-@mixin border-lighter() {
+@mixin border-light()  {
 	border: 1px solid $gray-lightest;
 }
-@mixin border-extralight() {
-	border: 1px solid $gray-medium;
-}
+
 @mixin border-radius-small() {
 	border-radius: 0.15rem;
 }
@@ -28,12 +23,12 @@
 }
 
 @mixin disabled-style() {
-	@include disabled-opacity-default();
+	@include disabled-opacity();
 	background: $gray-lightest;
 	color: $gray;
 	pointer-events: none;
 }
-@mixin disabled-opacity-default() {
+@mixin disabled-opacity() {
 	opacity: 0.4;
 }
 
@@ -46,9 +41,6 @@
 	}
 }
 
-@mixin box-shadow-default() {
-	box-shadow: 0px 2px 4px $gray-lightest;
-}
 @mixin box-shadow-small() {
 	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
@@ -93,7 +85,7 @@
 }
 
 @mixin vertical-menu-style() {
-	@include border-lighter();
+	@include border-light() ;
 	width: 13rem;
 	padding: 1rem;
 

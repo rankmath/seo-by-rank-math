@@ -55,8 +55,8 @@
 .switch-taps {
 	.components-tab-panel__tabs {
 		@include filter-switch-tab-style();
-		@include border-light();
 		@include border-radius-small();
+		border: 1px solid $gray-lighter;
 		padding: 4px;
 
 		&-item {

@@ -1,7 +1,7 @@
 @mixin tab-panel-menu-style() {
 	.components-tab-panel__tabs {
 		@include gap-medium();
-		@include border-lighter();
+		@include border-light() ;
 		width: fit-content;
 
 		.components-button {
@@ -62,7 +62,7 @@
 // PageTabPanel
 .page-tab-panel__container {
 	@include flex-align();
-	@include border-lighter();
+	@include border-light() ;
 	width: fit-content;
 	padding-right: 16px;
 	gap: 10rem;
