@@ -142,6 +142,7 @@ $tertiary-btn-color: $gray;
 
 	&.is-primary {
   	font-size: 11px;
+		border-radius: 2px;
 
 		&:focus:not(:disabled) {
 			@include box-shadow-primary();
@@ -236,7 +237,7 @@ $tertiary-btn-color: $gray;
 			),
 			$disabled: (
 				$blue,
-				$blue-dark,
+				rgba($blue, 30%),
 				$blue
 			)
 		);

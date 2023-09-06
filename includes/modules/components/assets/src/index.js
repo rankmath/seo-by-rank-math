@@ -76,14 +76,14 @@ function MenuListShowcase() {
 					<div className='components-group'>
 						<MenuListPopup
 							menuItems={[
-								{ title: 'Frist Option Item', icon: 'rm-icon-trash' },
-								{ title: 'Second Option Item', icon: 'rm-icon-trash' },
-								{ title: 'Fourth Option Item', icon: 'rm-icon-trash' },
-								{ title: 'Fifth Option Item', icon: 'rm-icon-trash' },
-								{ title: 'Sixth Option Item', icon: 'rm-icon-trash' },
-								{ title: 'Third Option Item', icon: 'rm-icon-trash' },
-								{ title: 'Second Option Item', icon: 'rm-icon-trash' },
-								{ title: 'Third Option Item', icon: 'rm-icon-trash' },
+								{ title: 'Frist Option Item', icon: 'rm-icon-settings' },
+								{ title: 'Second Option Item', icon: 'rm-icon-settings' },
+								{ title: 'Fourth Option Item', icon: 'rm-icon-settings' },
+								{ title: 'Fifth Option Item', icon: 'rm-icon-settings' },
+								{ title: 'Sixth Option Item', icon: 'rm-icon-settings' },
+								{ title: 'Third Option Item', icon: 'rm-icon-settings' },
+								{ title: 'Second Option Item', icon: 'rm-icon-settings' },
+								{ title: 'Third Option Item', icon: 'rm-icon-settings' },
 							]}
 						/>
 					</div>
@@ -95,12 +95,12 @@ function MenuListShowcase() {
 					<div className='components-group'>
 						<SidebarMenuList
 							menuItems={[
-								{ title: 'Frist Option List Item', icon: 'rm-icon-trash' },
-								{ title: 'Second Option List Item', icon: 'rm-icon-trash' },
-								{ title: 'Third Option List Item', icon: 'rm-icon-trash' },
-								{ title: 'Fourth Option List Item', icon: 'rm-icon-trash' },
-								{ title: 'Fifth Option List Item', icon: 'rm-icon-trash' },
-								{ title: 'Sixth Option List Item', icon: 'rm-icon-trash' },
+								{ title: 'Frist Option List Item', icon: 'rm-icon-settings' },
+								{ title: 'Second Option List Item', icon: 'rm-icon-settings' },
+								{ title: 'Third Option List Item', icon: 'rm-icon-settings' },
+								{ title: 'Fourth Option List Item', icon: 'rm-icon-settings' },
+								{ title: 'Fifth Option List Item', icon: 'rm-icon-settings' },
+								{ title: 'Sixth Option List Item', icon: 'rm-icon-settings' },
 							]}
 						/>
 					</div>
@@ -121,15 +121,15 @@ function VerticalTabsShowcase() {
 					<div className='components-group'>
 						<SingleSectionTabPanel
 							menuItems={[
-								{ title: 'Frist Tab', icon: 'rm-icon-trash' },
-								{ title: 'Second Tab', icon: 'rm-icon-trash' },
-								{ title: 'Third Tab', icon: 'rm-icon-trash' },
-								{ title: 'Fourth Tab', icon: 'rm-icon-trash' },
-								{ title: 'Fifth Tab', icon: 'rm-icon-trash' },
-								{ title: 'Sixth Tab', icon: 'rm-icon-trash' },
-								{ title: 'Seventh Tab', icon: 'rm-icon-trash' },
-								{ title: 'Eight Tab', icon: 'rm-icon-trash' },
-								{ title: 'Ninth Tab', icon: 'rm-icon-trash' },
+								{ title: 'Frist Tab', icon: 'rm-icon-settings' },
+								{ title: 'Second Tab', icon: 'rm-icon-settings' },
+								{ title: 'Third Tab', icon: 'rm-icon-settings' },
+								{ title: 'Fourth Tab', icon: 'rm-icon-settings' },
+								{ title: 'Fifth Tab', icon: 'rm-icon-settings' },
+								{ title: 'Sixth Tab', icon: 'rm-icon-settings' },
+								{ title: 'Seventh Tab', icon: 'rm-icon-settings' },
+								{ title: 'Eight Tab', icon: 'rm-icon-settings' },
+								{ title: 'Ninth Tab', icon: 'rm-icon-settings' },
 							]}
 						/>
 					</div>
@@ -142,28 +142,28 @@ function VerticalTabsShowcase() {
 						<MultiSectionTabPanel>
 							<SingleSectionTabPanel
 								menuItems={[
-									{ title: 'Frist Tab', icon: 'rm-icon-trash' },
-									{ title: 'Second Tab', icon: 'rm-icon-trash' },
-									{ title: 'Third Tab', icon: 'rm-icon-trash' },
-									{ title: 'Fourth Tab', icon: 'rm-icon-trash' },
+									{ title: 'Frist Tab', icon: 'rm-icon-settings' },
+									{ title: 'Second Tab', icon: 'rm-icon-settings' },
+									{ title: 'Third Tab', icon: 'rm-icon-settings' },
+									{ title: 'Fourth Tab', icon: 'rm-icon-settings' },
 								]}
 							/>
 
 							<SingleSectionTabPanel
 								label='Section Title'
 								menuItems={[
-									{ title: 'Fifth Tab', icon: 'rm-icon-trash' },
-									{ title: 'Sixth Tab', icon: 'rm-icon-trash' },
-									{ title: 'Seventh Tab', icon: 'rm-icon-trash' },
+									{ title: 'Fifth Tab', icon: 'rm-icon-settings' },
+									{ title: 'Sixth Tab', icon: 'rm-icon-settings' },
+									{ title: 'Seventh Tab', icon: 'rm-icon-settings' },
 								]}
 							/>
 
 							<SingleSectionTabPanel
 								label='Section Title'
 								menuItems={[
-									{ title: 'Eight Tab', icon: 'rm-icon-trash' },
-									{ title: 'Ninth Tab', icon: 'rm-icon-trash' },
-									{ title: 'Tab Panel with Long Double Line Text', icon: 'rm-icon-trash' },
+									{ title: 'Eight Tab', icon: 'rm-icon-settings' },
+									{ title: 'Ninth Tab', icon: 'rm-icon-settings' },
+									{ title: 'Tab Panel with Long Double Line Text', icon: 'rm-icon-settings' },
 								]}
 							/>
 						</MultiSectionTabPanel>
@@ -287,11 +287,11 @@ function FilterAndSwitchTabsShowcase() {
 							tabs={[
 								{
 									name: 'tab1',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
 								},
 								{
 									name: 'tab2',
-									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
 								}
 							]}
 							children={(tab) => (
@@ -307,11 +307,11 @@ function FilterAndSwitchTabsShowcase() {
 							tabs={[
 								{
 									name: 'tab5',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
 								},
 								{
 									name: 'tab6',
-									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
 								}
 							]}
 							children={(tab) => (
@@ -333,11 +333,11 @@ function FilterAndSwitchTabsShowcase() {
 							tabs={[
 								{
 									name: 'tab3',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
 								},
 								{
 									name: 'tab4',
-									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
 								}
 							]}
 							children={(tab) => (
@@ -354,11 +354,11 @@ function FilterAndSwitchTabsShowcase() {
 							tabs={[
 								{
 									name: 'tab7',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Content' />
+									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
 								},
 								{
 									name: 'tab8',
-									icon: <TabPanelWithIcon icon='rm-icon-role-manager' title='Content' />
+									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
 								}
 							]}
 							children={(tab) => (

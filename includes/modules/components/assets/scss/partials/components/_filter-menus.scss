@@ -8,8 +8,8 @@
 		@include remove-box-shadow();
 		color: $gray;
 		padding: 6px 12px;
-		height: fit-content; 
-
+		height: fit-content;
+		font-weight: normal;
 
 		&.is-active{
 			@include remove-box-shadow();
