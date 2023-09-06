@@ -25,7 +25,7 @@
 			@include border-blue();
 
 			&:focus {
-				@include box-shadow-primary();
+				box-shadow: 0 0 0 1px $white, 0 0 0 $border-width--focus $blue;
 			}
 
 			&:disabled {
