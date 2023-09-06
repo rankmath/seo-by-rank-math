@@ -1,4 +1,4 @@
-@mixin tab-panel-menu-style() {
+@mixin tab-menu-style() {
 	.components-tab-panel__tabs {
 		@include gap-medium();
 		@include border-light() ;
@@ -56,7 +56,7 @@
 
 // SidebarTabPanel
 .sidebar-tab-panel {
-	@include tab-panel-menu-style();
+	@include tab-menu-style();
 }
 
 
@@ -69,9 +69,10 @@
 	gap: 10rem;
 
 	.page-tab-panel__content {
-		@include tab-panel-menu-style();
+		@include tab-menu-style();
 
 		.components-tab-panel__tabs {
+			@include gap-small();
 			border: none;
 
 			&-item{

@@ -188,15 +188,19 @@ function HorizontalTabsShowcase() {
 							tabs={[
 								{
 									name: 'tab1',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='First' />
+									icon: <TabPanelWithIcon icon='rm-icon-settings' title='First' />
 								},
 								{
 									name: 'tab2',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Second' />
+									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Second' />
 								},
 								{
 									name: 'tab3',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Third' />
+									icon: <TabPanelWithIcon icon='rm-icon-category' title='Third' />
+								},
+								{
+									name: 'tab4',
+									icon: <TabPanelWithIcon icon='rm-icon-misc' title='Forth' />
 								}
 							]}
 							children={(tab) => (
@@ -246,15 +250,19 @@ function HorizontalTabsShowcase() {
 							tabs={[
 								{
 									name: 'tab1',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='First Tab' />
+									icon: <TabPanelWithIcon icon='rm-icon-settings' title='First Tab' />
 								},
 								{
 									name: 'tab2',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Second Tab' />
+									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Second Tab' />
 								},
 								{
 									name: 'tab3',
-									icon: <TabPanelWithIcon icon='rm-icon-trash' title='Third Tab' />
+									icon: <TabPanelWithIcon icon='rm-icon-category' title='Third Tab' />
+								},
+								{
+									name: 'tab4',
+									icon: <TabPanelWithIcon icon='rm-icon-misc' title='Fourth Tab' />
 								}
 							]}
 						/>
@@ -1110,95 +1118,95 @@ function ButtonsShowcase() {
 						<div>
 							<p>Primary</p>
 							<div>
-								<Button size='large' icon='rm-icon-rank-math' disabled>Label</Button>
+								<Button size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button size='large' icon='rm-icon-rank-math'>Label</Button>
+								<Button size='large' icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button icon='rm-icon-rank-math'>Label</Button>
+								<Button icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button size='small' icon='rm-icon-rank-math'>Label</Button>
+								<Button size='small' icon='rm-icon-category'>Label</Button>
 							</div>
 						</div>
 
 						<div>
 							<p>Primary Outline</p>
 							<div>
-								<Button variant='primary-outline' size='large' icon='rm-icon-rank-math' disabled>Label</Button>
+								<Button variant='primary-outline' size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='primary-outline' size='large' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='primary-outline' size='large' icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='primary-outline' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='primary-outline' icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='primary-outline' size='small' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='primary-outline' size='small' icon='rm-icon-category'>Label</Button>
 							</div>
 						</div>
 
 						<div>
 							<p>Secondary</p>
 							<div>
-								<Button variant='secondary' size='large' icon='rm-icon-rank-math' disabled>Label</Button>
+								<Button variant='secondary' size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary' size='large' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='secondary' size='large' icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='secondary' icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary' size='small' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='secondary' size='small' icon='rm-icon-category'>Label</Button>
 							</div>
 						</div>
 
 						<div>
 							<p>Secondary Grey</p>
 							<div>
-								<Button variant='secondary-grey' size='large' icon='rm-icon-rank-math' disabled>Label</Button>
+								<Button variant='secondary-grey' size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary-grey' size='large' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='secondary-grey' size='large' icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary-grey' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='secondary-grey' icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary-grey' size='small' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='secondary-grey' size='small' icon='rm-icon-category'>Label</Button>
 							</div>
 						</div>
 
 						<div>
 							<p>Tertiary Outline</p>
 							<div>
-								<Button variant='tertiary-outline' size='large' icon='rm-icon-rank-math' disabled>Label</Button>
+								<Button variant='tertiary-outline' size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='tertiary-outline' size='large' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='tertiary-outline' size='large' icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='tertiary-outline' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='tertiary-outline' icon='rm-icon-category'>Label</Button>
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='tertiary-outline' size='small' icon='rm-icon-rank-math'>Label</Button>
+								<Button variant='tertiary-outline' size='small' icon='rm-icon-category'>Label</Button>
 							</div>
 						</div>
 					</div>
@@ -1213,114 +1221,114 @@ function ButtonsShowcase() {
 						<div>
 							<p>Primary</p>
 							<div>
-								<Button size='large' icon='rm-icon-rank-math' disabled />
+								<Button size='large' icon='rm-icon-category' disabled />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button size='large' icon='rm-icon-rank-math' />
+								<Button size='large' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button icon='rm-icon-rank-math' />
+								<Button icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button size='small' icon='rm-icon-rank-math' />
+								<Button size='small' icon='rm-icon-category' />
 							</div>
 						</div>
 
 						<div>
 							<p>Primary Outline</p>
 							<div>
-								<Button variant='primary-outline' size='large' icon='rm-icon-rank-math' disabled />
+								<Button variant='primary-outline' size='large' icon='rm-icon-category' disabled />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='primary-outline' size='large' icon='rm-icon-rank-math' />
+								<Button variant='primary-outline' size='large' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='primary-outline' icon='rm-icon-rank-math' />
+								<Button variant='primary-outline' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='primary-outline' size='small' icon='rm-icon-rank-math' />
+								<Button variant='primary-outline' size='small' icon='rm-icon-category' />
 							</div>
 						</div>
 
 						<div>
 							<p>Secondary</p>
 							<div>
-								<Button variant='secondary' size='large' icon='rm-icon-rank-math' disabled />
+								<Button variant='secondary' size='large' icon='rm-icon-category' disabled />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary' size='large' icon='rm-icon-rank-math' />
+								<Button variant='secondary' size='large' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary' icon='rm-icon-rank-math' />
+								<Button variant='secondary' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary' size='small' icon='rm-icon-rank-math' />
+								<Button variant='secondary' size='small' icon='rm-icon-category' />
 							</div>
 						</div>
 
 						<div>
 							<p>Secondary Grey</p>
 							<div>
-								<Button variant='secondary-grey' size='large' icon='rm-icon-rank-math' disabled />
+								<Button variant='secondary-grey' size='large' icon='rm-icon-category' disabled />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary-grey' size='large' icon='rm-icon-rank-math' />
+								<Button variant='secondary-grey' size='large' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary-grey' icon='rm-icon-rank-math' />
+								<Button variant='secondary-grey' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='secondary-grey' size='small' icon='rm-icon-rank-math' />
+								<Button variant='secondary-grey' size='small' icon='rm-icon-category' />
 							</div>
 						</div>
 
 						<div>
 							<p>Tertiary Outline</p>
 							<div>
-								<Button variant='tertiary-outline' size='large' icon='rm-icon-rank-math' disabled />
+								<Button variant='tertiary-outline' size='large' icon='rm-icon-category' disabled />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='tertiary-outline' size='large' icon='rm-icon-rank-math' />
+								<Button variant='tertiary-outline' size='large' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='tertiary-outline' icon='rm-icon-rank-math' />
+								<Button variant='tertiary-outline' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='tertiary-outline' size='small' icon='rm-icon-rank-math' />
+								<Button variant='tertiary-outline' size='small' icon='rm-icon-category' />
 							</div>
 						</div>
 
 						<div>
 							<p>Tertiary</p>
 							<div>
-								<Button variant='tertiary' size='large' icon='rm-icon-rank-math' disabled />
+								<Button variant='tertiary' size='large' icon='rm-icon-category' disabled />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='tertiary' size='large' icon='rm-icon-rank-math' />
+								<Button variant='tertiary' size='large' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='tertiary' icon='rm-icon-rank-math' />
+								<Button variant='tertiary' icon='rm-icon-category' />
 							</div>
 
 							<div className='margin-top-sm'>
-								<Button variant='tertiary' size='small' icon='rm-icon-rank-math' />
+								<Button variant='tertiary' size='small' icon='rm-icon-category' />
 							</div>
 						</div>
 					</div>

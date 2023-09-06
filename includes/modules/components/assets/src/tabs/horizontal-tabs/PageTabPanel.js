@@ -29,7 +29,7 @@ export default ({
 			/>
 
 			<button className='page-tab-panel__button'>
-				<i className='rm-icon-trash'></i>
+				<i className='rm-icon-info'></i>
 			</button>
 		</div>
 	)

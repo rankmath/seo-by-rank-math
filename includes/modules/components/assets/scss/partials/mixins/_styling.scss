@@ -84,7 +84,7 @@
 // Tab item with icon mixin
 @mixin tab-item-has-icon-style() {
 	@include flex-align();
-	@include font-size-regular();
+	font-size: 14px;
 
 	.title {
 		@include font-size-small();
