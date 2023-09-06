@@ -43,15 +43,15 @@ export default ({
 			/>
 
 			<div
-				className='popover'
 				style={popoverStyle}
 				role='tooltip'
 				aria-hidden='true'
+				className='content-ai-score-bar__tooltip'
 			>
-				<h1 className='popover-title'>Score</h1>
-				<h6 className='popover-value'>{currentValue}/100</h6>
+				<h1 className='content-ai-score-bar__tooltip-title'>Score</h1>
+				<h6 className='content-ai-score-bar__tooltip-value'>{currentValue}/100</h6>
 
-				<div className={`popover-pointer ${popoverPointerPlacement}`} />
+				<div className={`content-ai-score-bar__tooltip-pointer ${popoverPointerPlacement}`} />
 			</div>
 		</div>
 	);
