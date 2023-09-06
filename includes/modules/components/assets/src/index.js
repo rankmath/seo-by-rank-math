@@ -1209,7 +1209,7 @@ function ButtonsShowcase() {
 				<h3>ICON BUTTONS</h3>
 
 				<div className='components-wrapper'>
-					<div className="button-group">
+					<div className="icon-button-group">
 						<div>
 							<p>Primary</p>
 							<div>
@@ -1302,6 +1302,25 @@ function ButtonsShowcase() {
 
 							<div className='margin-top-sm'>
 								<Button variant='tertiary-outline' size='small' icon='rm-icon-rank-math' />
+							</div>
+						</div>
+
+						<div>
+							<p>Tertiary</p>
+							<div>
+								<Button variant='tertiary' size='large' icon='rm-icon-rank-math' disabled />
+							</div>
+
+							<div className='margin-top-sm'>
+								<Button variant='tertiary' size='large' icon='rm-icon-rank-math' />
+							</div>
+
+							<div className='margin-top-sm'>
+								<Button variant='tertiary' icon='rm-icon-rank-math' />
+							</div>
+
+							<div className='margin-top-sm'>
+								<Button variant='tertiary' size='small' icon='rm-icon-rank-math' />
 							</div>
 						</div>
 					</div>

@@ -65,28 +65,32 @@
 }
 
 @mixin has-icon-style(
-	$min-width,
-	$height,
-	$font-size,
-	$padding-horizontal,
-	$padding-vertical,
-	$icon-font-size,
-	$gap: 5px,
+	$icon-only: (
+		$min-width,
+		$height,
+		$font-size,
+	),
+	$icon-and-text: (
+		$padding-vertical,
+		$padding-horizontal,
+		$icon-font-size,
+		$gap
+	)
 ) {
 	&.has-icon{
 		&:not(.has-text) {
-			min-width: $min-width;
-			height: $height;
-			font-size: $font-size;
+			min-width: nth($icon-only, 1);
+			height: nth($icon-only, 2);
+			font-size: nth($icon-only, 3);
 		}
 
 		&.has-text{
 			@include align-button-text();
-			padding: $padding-vertical $padding-horizontal;
-			gap: $gap !important;
+			padding: nth($icon-and-text, 1) nth($icon-and-text, 2);
+			gap: nth($icon-and-text, 4) !important;
 
 			i {
-				font-size: $icon-font-size;
+				font-size: nth($icon-and-text, 3);
 			}
 		}
 	}
@@ -103,13 +107,19 @@ $tertiary-btn-color: $gray;
   padding: 6px 16px;
   font-size: 11px;
 
-	@include has-icon-style(32px, 28px, 16px, 6px, 10px, 15px);
+	@include has-icon-style(
+		$icon-only: (32px, 30px, 16px),
+		$icon-and-text: (6px, 10px, 15px, 5px)
+	);
 
 	&.is-small {
 		padding: 0 10px;
 		font-size: 10px;
 
-		@include has-icon-style(24px, 24px, 13px, 6px, 6px, 13px, 3px);
+		@include has-icon-style(
+			$icon-only: (24px, 22px, 13px),
+			$icon-and-text: (6px, 6px, 13px, 3px)
+		);
 	}
 
 	&.is-large {
@@ -117,11 +127,14 @@ $tertiary-btn-color: $gray;
 		line-height: 22px;
 		padding: 12px 22px;
 
-		@include has-icon-style(24px, 30px, 18px, 12px, 12px, 17px);
+		@include has-icon-style(
+			$icon-only: (26px, 32px, 18px),
+			$icon-and-text: (12px, 12px, 17px, 5px)
+		);
 
 		&.has-icon{
 			&:not(.has-text) {
-				padding: 12px 8px;
+				padding: 12px 9px;
 			}
 		}
 	}
@@ -254,12 +267,12 @@ $tertiary-btn-color: $gray;
 			),
 			$hover: (
 				$gray-dark,
-				$gray-extralight,
+				$gray-mono,
 				$gray-light
 			),
 			$focus-active: (
 				$gray-dark,
-				$gray-extralight,
+				$gray-mono,
 				$gray,
 				inherit,
 			),
