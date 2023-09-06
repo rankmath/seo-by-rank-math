@@ -1,3 +1,4 @@
+// Sidebar Menu List
 .sidebar-menu-list {
 	&.components-menu-group  {
 		@include vertical-menu-style();
@@ -28,6 +29,7 @@
 }
 
 
+// Menu List Popup
 .menu-list-popup {
 	&.components-menu-group {
 		@include vertical-menu-style();

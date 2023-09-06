@@ -1,9 +1,12 @@
+// Single Section Column
 .single-section-tab-panel {
 	&.components-menu-group {
 		@include vertical-menu-style();
 
 		.components-menu-group__label {
 			display: block;
+			font-weight: normal;
+			color: $black;
 		}
 
 		div[role="group"] {
@@ -30,6 +33,7 @@
 }
 
 
+// Multi Section Column
 .multi-section-tab-panel {
 	@include border-light() ;
 	width: 13rem;

@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { RangeControl, Popover } from '@wordpress/components';
+import { RangeControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
 export default ({
@@ -16,6 +16,14 @@ export default ({
 	const handleSliderChange = (value) => {
 		setCurrentValue(value);
 	};
+
+	const popoverStyle = {};
+	popoverStyle.left = `${currentValue}%`;
+	if (currentValue > 60) {
+		popoverStyle.transform = 'translateX(-100%)';
+	} else if (currentValue >= 50) {
+		popoverStyle.transform = 'translateX(-50%)';
+	}
 
 	const rangeControlProps = {
 		...rest,
@@ -34,17 +42,17 @@ export default ({
 				{...rangeControlProps}
 			/>
 
-			<Popover
-				placement={'top'}
-				noArrow={false}
-				offset={4}
-
+			<div
+				className='popover'
+				style={popoverStyle}
+				role='tooltip'
+				aria-hidden='true'
 			>
-				<h1 className='score-bar__title'>Score</h1>
-				<h6 className='score-bar__value'>{currentValue}/100</h6>
+				<h1 className='popover-title'>Score</h1>
+				<h6 className='popover-value'>{currentValue}/100</h6>
 
 				<div className={`popover-pointer ${popoverPointerPlacement}`} />
-			</Popover>
+			</div>
 		</div>
 	);
 }

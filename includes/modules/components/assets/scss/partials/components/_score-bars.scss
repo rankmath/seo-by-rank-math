@@ -26,6 +26,7 @@
 	}
 }
 
+// Editor Score Bar
 .editor-score-bar {
 	&.components-range-control {
 		.components-base-control__field {
@@ -62,7 +63,11 @@
 	}
 }
 
+
+// Content AI Score Bar
 .content-ai-score-bar {
+	position: relative;
+
 	&.components-range-control {
 		.components-range-control__thumb-wrapper {
 			@include box-shadow-small();
@@ -88,45 +93,34 @@
 		}
 	}
 
-	.components-popover {
-		.components-popover__content {
-			@include flex-center();
-			outline: none;
-			min-width: 5.7rem;
-			min-height: 3.4rem;
-			border-radius: 5px;
-			gap: 1px;
-			box-shadow: $gray-lightest 0px 4px 8px;
+	.popover {
+		@include flex-center();
+		width: 5.2rem;
+  	height: 2.8rem;
+		border-radius: 5px;
+		gap: 1px;
+		position: absolute;
+		bottom: 100%;
+		left: 0;
+		z-index: 1000000;
+		background-color: $white;
+		padding-bottom: 0.3rem;
+		box-shadow: lighten($gray, 35%) 0 4px 8px 1px;
 
-			.score-bar__title {
-				margin: 0;
-				font-size: 13px;
-				font-weight: normal;
-				color: $gray;
-			}
-
-			.score-bar__value {
-				margin: 0;
-				font-size: 18px;
-				font-weight: 605;
-			}
+		&-title {
+			margin: 0;
+			font-size: 12px;
+			font-weight: normal;
+			color: $gray;
 		}
 
-		.components-popover__arrow {
-			display: none;
-			
-			&::before {
-				display: none;
-			}
-
-			.components-popover__triangle {
-				&-border {
-					stroke: $white;
-				}
-			}
+		&-value {
+			margin: 0;
+			font-size: 17px;
+			font-weight: 700;
 		}
 
-		.popover-pointer {
+		&-pointer {
 			width: 0;
 			height: 0;
 			border-left: 8px solid transparent;

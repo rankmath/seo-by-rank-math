@@ -56,7 +56,7 @@
 	}
 }
 
-
+// File Uploader
 .file-uploader {
 	@include uploader-style();
 
@@ -76,6 +76,8 @@
 	}
 }
 
+
+// Image Uploader
 .image-uploader {
 	@include uploader-style();
 	display: grid;
