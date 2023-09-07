@@ -35,6 +35,7 @@ import PageTabPanel from './tabs/horizontal-tabs/PageTabPanel';
 import SidebarTabPanel from './tabs/horizontal-tabs/SidebarTabPanel';
 import SidebarMenuList from './tabs/menu-lists/SidebarMenuList';
 import MenuListPopup from './tabs/menu-lists/MenuListPopup';
+import SearchSelect from './select/SearchSelect';
 
 const AllComponents = () => {
 	return (
@@ -446,6 +447,35 @@ function TextInputFieldsShowcase() {
 			name: "Third Option",
 		}
 	]
+	const optionsList2 = [
+		{
+			title: 'First Option Title',
+			subTitle: '%code_text%',
+			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
+		},
+		{
+
+			title: 'Second Option Title',
+			subTitle: '%code_text%',
+			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
+
+		},
+		{
+
+			title: 'Third Option Title',
+			subTitle: '%code_text%',
+			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
+
+		},
+		{
+
+			title: 'Fourth Option Title',
+			subTitle: '%code_text%',
+			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
+
+		},
+	]
+	const [selectedValue2, setSelectedValue2] = useState(optionsList2[0].title);
 
 	const [selectedValue, setSelectedValue] = useState({
 		key: optionsList[0].key,
@@ -532,27 +562,52 @@ function TextInputFieldsShowcase() {
 				<div>
 					<h4>Dropdown Select 3</h4>
 
-					<div className='components-group'>
-						<SelectControl
-							value={selectedValue}
-							options={optionsList}
-							onChange={
-								({ selectedItem: { key, name } }) => setSelectedValue({ key, name: name.props.title })
-							}
-							withSearch
-						/>
+					<div>
+						<h4 style={{ color: 'red' }}>BUGGY. throws and error when you type into the searchbox</h4>
+
+						<div className='components-group'>
+							<SelectControl
+								value={selectedValue}
+								options={optionsList}
+								onChange={
+									({ selectedItem: { key, name } }) => setSelectedValue({ key, name: name.props.title })
+								}
+								withSearch
+							/>
+						</div>
+
+						<div className='components-group'>
+							<SelectControl
+								value={selectedValue}
+								options={optionsList}
+								onChange={
+									({ selectedItem: { key, name } }) => setSelectedValue({ key, name: name.props.title })
+								}
+								withSearch
+								disabled
+							/>
+						</div>
 					</div>
 
-					<div className='components-group'>
-						<SelectControl
-							value={selectedValue}
-							options={optionsList}
-							onChange={
-								({ selectedItem: { key, name } }) => setSelectedValue({ key, name: name.props.title })
-							}
-							withSearch
-							disabled
-						/>
+					<div>
+						<h4>Custom select component for Variant 3 that works.</h4>
+
+						<div className='components-group'>
+							<SearchSelect
+								value={selectedValue2}
+								options={optionsList2}
+								onChange={(value) => setSelectedValue2(value)}
+							/>
+						</div>
+
+						<div className='components-group'>
+							<SearchSelect
+								value={selectedValue2}
+								options={optionsList2}
+								onChange={(value) => setSelectedValue2(value)}
+								disabled
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
