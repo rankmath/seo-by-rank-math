@@ -697,9 +697,8 @@ class Stats extends Keywords {
 				} else {
 					$old_position_value = $old_positions[ $page ]->position;
 				}
-				$position            = ( $row['position'] ) ? $row['position'] : 0;
-				$row['position']     = $position;
-				$row['diffPosition'] = $position - $old_position_value;
+
+				$row['diffPosition'] = $row['position'] - $old_position_value;
 			}
 		} else {
 			// In case dimension is not 'page', position data for each dimension will be most recent position value.
