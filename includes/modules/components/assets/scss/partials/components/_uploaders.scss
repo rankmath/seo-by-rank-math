@@ -20,17 +20,18 @@
 		.uploader__actions {
 			@include flex-align();
 			@include gap-medium();
-		}
 
-		.components-button {
-			@include border-default();
-			@include gap-medium();
-			background-color: $white;
-			color: $gray;
+			.components-button {
+				@include border-default();
+				background-color: $white;
+				color: $gray;
+				padding: 6px 12px;
+				gap: 8px;
 
-			&:focus:not(:disabled) {
-				box-shadow: none;
-				outline: none;
+				&:focus:not(:disabled) {
+					box-shadow: none;
+					outline: none;
+				}
 			}
 		}
 
@@ -51,6 +52,11 @@
 
 			.components-range-control__track {
 				color: $blue;
+				height: 5px;
+			}
+
+			.css-1tw038v {
+				height: 5px;
 			}
 		}
 	}

@@ -63,15 +63,9 @@
 }
 
 @mixin checkbox-radio-style--disabled() {
-	@include disabled-opacity();
 	border: 1px solid $controls-border-color--disabled;
 	background-color: $controls-bg--disabled;
 	pointer-events: none;
-
-	+ label {
-		@include disabled-opacity();
-		pointer-events: none;
-	}
 
 	&:checked {
 		@include border-blue();

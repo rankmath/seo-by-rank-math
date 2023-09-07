@@ -1,0 +1,93 @@
+// Checkbox Control
+.components-checkbox-control {
+	.components-checkbox-control__input-container {
+		margin-right: $controls-margin;
+		
+		.components-checkbox-control__input {
+			@include checkbox-radio-style();
+		}
+	}
+
+	&.is-disabled {
+		@include disabled-opacity();
+
+		.components-checkbox-control__input {
+			@include checkbox-radio-style--disabled();
+		}
+	}
+
+	&.is-indeterminate,
+	&.is-indeterminate ~ .components-checkbox-control {
+		.components-checkbox-control__input {
+			@include border-blue();
+
+			&:focus {
+				box-shadow: 0 0 0 1px $white, 0 0 0 $border-width--focus $blue;
+			}
+
+			&:disabled {
+				background-color: mix($blue, $gray-lighter, 20%);
+
+				&:checked {
+					background-color: $blue;
+				}
+			}
+		}
+	}
+}
+
+
+// Radio Control
+.components-radio-control__input[type=radio] {
+	@include checkbox-radio-style();
+	margin-right: $controls-margin;
+
+	&:disabled {
+		@include checkbox-radio-style--disabled();
+		@include disabled-opacity();
+
+		+ label {
+			@include disabled-opacity();
+			pointer-events: none;
+		}
+	}
+
+	@include from-tablet {
+		&:checked::before{
+			transform: translate(5.5px, 5px);
+		}
+	}
+}
+
+
+// Toggle Control
+.components-toggle-control { 
+	.components-base-control__field {
+		.components-form-toggle {
+			margin-right: 0px;
+
+			~ .css-1aagzef {
+				gap: $controls-margin;
+			}
+
+			.components-form-toggle__input {
+				&:focus + .components-form-toggle__track {
+					box-shadow: none;
+					outline: none;
+				}
+			}
+
+			&.is-disabled {
+				pointer-events: none;
+				
+				.components-form-toggle__track {
+					background-color: $controls-bg--disabled;
+				}
+
+				+ .components-toggle-control__label {
+					@include disabled-opacity();
+				}
+			}
+		}
+	}
+}

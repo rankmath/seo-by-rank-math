@@ -169,7 +169,7 @@
 		&.is-disabled {
 			.components-input-control__suffix {
 				.components-input-control-suffix-wrapper {	
-					background-color: rgba($gray, 0.2);
+					background-color: $gray-lighter;
 					
 					svg {
 						opacity: 0.4;

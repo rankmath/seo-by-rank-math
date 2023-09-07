@@ -97,11 +97,11 @@
 		@include flex-center();
 		width: 5.2rem;
   	height: 2.8rem;
+		position: absolute;
+		bottom: 105%;
+		left: 0;
 		border-radius: 5px;
 		gap: 1px;
-		position: absolute;
-		bottom: 100%;
-		left: 0;
 		z-index: 1000000;
 		background-color: $white;
 		padding-bottom: 0.3rem;

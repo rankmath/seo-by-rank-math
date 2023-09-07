@@ -28,7 +28,7 @@
 // Disabled styles mixins
 @mixin disabled-style() {
 	@include disabled-opacity();
-	background: $gray-lightest;
+	background: lighten($gray, 35%);
 	color: $gray;
 	pointer-events: none;
 }
