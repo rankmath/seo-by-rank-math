@@ -9,25 +9,11 @@ import classNames from 'classnames';
 import { Button } from '@wordpress/components';
 
 export default ({
-	children,
 	variant = 'primary',
 	size = 'default',
-	disabled = false,
-	describedBy = '',
-	focus = false,
-	isBusy = false,
-	isDestructive = false,
-	isPressed = false,
-	label = '',
-	showTooltip = false,
-	shortcut,
-	tooltipPosition,
-	href,
-	target,
-	text,
 	icon,
-	iconPosition,
-	iconSize,
+	children,
+	disabled,
 	className,
 	...rest
 }) => {
@@ -54,22 +40,8 @@ export default ({
 		className: getButtonClasses(),
 		...(icon ? { icon: <i className={icon}></i> } : {}),
 		size,
-		disabled,
-		describedBy,
-		focus,
-		isBusy,
-		isDestructive,
-		isPressed,
-		label,
-		showTooltip,
-		shortcut,
-		href,
-		target,
-		text,
-		tooltipPosition,
-		iconPosition,
-		iconSize,
 		children,
+		disabled,
 		...rest
 	};
 
