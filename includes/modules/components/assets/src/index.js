@@ -35,7 +35,7 @@ import PageTabPanel from './tabs/horizontal-tabs/PageTabPanel';
 import SidebarTabPanel from './tabs/horizontal-tabs/SidebarTabPanel';
 import SidebarMenuList from './tabs/menu-lists/SidebarMenuList';
 import MenuListPopup from './tabs/menu-lists/MenuListPopup';
-import SearchSelect from './select/SearchSelect';
+import SelectControlWithSearchbox from './select/SelectControlWithSearchbox';
 
 const AllComponents = () => {
 	return (
@@ -451,27 +451,27 @@ function TextInputFieldsShowcase() {
 		{
 			title: 'First Option Title',
 			subTitle: '%code_text%',
-			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
+			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio nobis natus doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
 		},
 		{
 
 			title: 'Second Option Title',
 			subTitle: '%code_text%',
-			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
+			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio nobis natus doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
 
 		},
 		{
 
 			title: 'Third Option Title',
 			subTitle: '%code_text%',
-			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
+			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio nobis natus doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
 
 		},
 		{
 
 			title: 'Fourth Option Title',
 			subTitle: '%code_text%',
-			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
+			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio nobis natus doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
 
 		},
 	]
@@ -590,18 +590,18 @@ function TextInputFieldsShowcase() {
 					</div>
 
 					<div>
-						<h4>Custom select component for Variant 3 that works.</h4>
+						<h4>Custom select component for Variant 3 that works. Only icon missen</h4>
 
 						<div className='components-group'>
-							<SearchSelect
-								value={selectedValue2}
+							<SelectControlWithSearchbox
 								options={optionsList2}
+								value={selectedValue2}
 								onChange={(value) => setSelectedValue2(value)}
 							/>
 						</div>
 
 						<div className='components-group'>
-							<SearchSelect
+							<SelectControlWithSearchbox
 								value={selectedValue2}
 								options={optionsList2}
 								onChange={(value) => setSelectedValue2(value)}

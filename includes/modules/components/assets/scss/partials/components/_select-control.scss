@@ -100,11 +100,13 @@
 				.components-base-control__field {
 					@include option-separator();
 					background-color: $white;
-					padding: 8px 16px;
+					padding: 15px 16px;
+					margin-bottom: 0;
 
 					.components-search-control__input {
 						@include border-default();
 						background-color: $white;
+						height: 40px;
 
 						&:focus {
 							box-shadow: none;
@@ -124,6 +126,7 @@
 			.components-custom-select-control__item {
 				@include option-separator();
 				margin-bottom: 0px;
+				padding: 10px 16px;
 
 				.option__container {
 					.option__heading {
@@ -149,6 +152,7 @@
 					.option__description {
 						color: $gray;
 						margin: 0;
+						margin-bottom: 4px;
 					}
 				}
 
@@ -184,32 +188,39 @@
 	}
 }
 
+$select-with-search-btn-color: #2c3338;
 
-.search-select {
+.select-with-search {
 	position: relative;
 	width: 35rem;
 
-	.search-select__button {
+	&__button {
 		&.components-button {
-			@include font-size-small();
-			@include input-min-height();
-			@include flex-align();
-			justify-content: space-between;
-			box-shadow: 0 0 0 1px $gray-light;
-			width: 100%;
-			background: $white;
-			color: #2c3338;
-			padding-right: 4px;
+			&.is-secondary {
+				@include font-size-small();
+				@include input-min-height();
+				@include flex-align();
+				@include border-default();
+				justify-content: space-between;
+				width: 100%;
+				background: $white;
+				color: $select-with-search-btn-color;
+				padding-right: 4px;
+				border-radius: 2px;
+				box-shadow: none;
 
-			&:hover:not(:disabled) {
-				color: #2c3338;
-				box-shadow: 0 0 0 1px $gray-light;
-				background-color: $white;
-			}
-
-			&:focus,
-			&:focus:hover:not(:disabled) {
-				box-shadow: 0 0 0 1.5px $blue;
+				&:hover:not(:disabled) {
+					color: $select-with-search-btn-color;
+					border: 1px solid $gray-light;
+					background-color: $white;
+					box-shadow: none;
+				}
+				
+				&:focus,
+				&:focus:hover:not(:disabled) {
+					box-shadow: inset 0 0 0 1px $blue;
+					border-color: $blue;
+				}
 			}
 		}
 
@@ -222,60 +233,64 @@
 
 		&[aria-expanded="true"] {
 			&.components-button {
-				box-shadow: 0 0 0 1.5px $blue;
+				box-shadow: inset 0 0 0 1px $blue;
+				border-color: $blue;
 
 				&:hover:not(:disabled) {
-					box-shadow: 0 0 0 1.5px $blue;
+					box-shadow: inset 0 0 0 1px $blue;
+					border-color: $blue;
 				}
 			}
 
-			.search-select__button-icon {
+			.select-with-search__button-icon {
 				background-color: $blue-light;
 			}
 		}
 	}
 
-	.search-select__menu {
+	&__menu {
+		max-height: 25rem;
 		box-shadow: 0px 2px 4px $gray-lighter;
 		border: 1px solid $blue;
 		background-color: $white;
 		position: absolute;
-		top: 103%;
-		left: -2px;
-		right: -1px;
+		top: 98%;
+		left: 0;
+		right: 0;
 		margin: 0;
 		z-index: 100000;
 		border-radius: 3px;
-		height: 25rem;
   	overflow: auto;
 
 		&-search {
-			.components-base-control__field {
-				@include option-separator();
-				background-color: $white;
-				padding: 15px 16px;
-				margin: 0;
-
-				.components-search-control__input {
-					@include border-default();
+			&.components-search-control {
+				.components-base-control__field {
+					@include option-separator();
 					background-color: $white;
-					height: 40px;
+					padding: 15px 16px;
+					margin: 0;
 
-					&:focus {
+					.components-search-control__input {
 						@include border-default();
-						box-shadow: none;
-						outline: none;
-					}
-				}
+						background-color: $white;
+						height: 40px;
 
-				.components-search-control__icon {
-					.components-button.has-icon:not(.has-text):focus {
-						box-shadow: none;
+						&:focus {
+							@include border-default();
+							box-shadow: none;
+							outline: none;
+						}
 					}
 
-					svg {
-						transform: rotate(-90deg);
-						opacity: 0.5;
+					.components-search-control__icon {
+						.components-button.has-icon:not(.has-text):focus {
+							box-shadow: none;
+						}
+
+						svg {
+							transform: rotate(-90deg);
+							opacity: 0.5;
+						}
 					}
 				}
 			}
@@ -330,6 +345,18 @@
 				.option__description {
 					color: $gray-darkest;
 				}
+			}
+		}
+	}
+
+	&[aria-disabled="true"] {
+		.select-with-search__button {
+			&.components-button {
+				@include disabled-style();
+			}
+
+			&-icon {
+				background-color: $gray-lighter;
 			}
 		}
 	}
