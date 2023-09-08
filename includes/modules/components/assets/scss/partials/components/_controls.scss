@@ -9,10 +9,12 @@
 	}
 
 	&.is-disabled {
-		@include disabled-opacity();
-
 		.components-checkbox-control__input {
 			@include checkbox-radio-style--disabled();
+		}
+
+		.components-checkbox-control__label {
+			@include disabled-opacity();
 		}
 	}
 
@@ -22,11 +24,11 @@
 			@include border-blue();
 
 			&:focus {
-				box-shadow: 0 0 0 1px $white, 0 0 0 $border-width--focus $blue;
+				box-shadow: 0 0 0 1px $white, 0 0 0 1.5px $blue;
 			}
 
 			&:disabled {
-				background-color: mix($blue, $gray-lighter, 20%);
+				background-color: mix($blue, $gray-lightest, 30%);
 
 				&:checked {
 					background-color: $blue;
@@ -44,7 +46,6 @@
 
 	&:disabled {
 		@include checkbox-radio-style--disabled();
-		@include disabled-opacity();
 
 		+ label {
 			@include disabled-opacity();
@@ -79,6 +80,7 @@
 
 			&.is-disabled {
 				pointer-events: none;
+				opacity: 0.2;
 				
 				.components-form-toggle__track {
 					background-color: $controls-bg--disabled;

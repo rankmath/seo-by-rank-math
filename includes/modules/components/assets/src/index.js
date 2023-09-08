@@ -405,7 +405,7 @@ function TextInputFieldsShowcase() {
 			name: {
 				title: 'First Option Title',
 				subTitle: '%code_text%',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio porro doloremque non, debitis aliquid dolores ad, nobis natus!'
 			}
 		},
 		{
@@ -413,7 +413,7 @@ function TextInputFieldsShowcase() {
 			name: {
 				title: 'Second Option Title',
 				subTitle: '%code_text%',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio porro doloremque non, debitis aliquid dolores ad, nobis natus!'
 			}
 		},
 		{
@@ -421,7 +421,7 @@ function TextInputFieldsShowcase() {
 			name: {
 				title: 'Third Option Title',
 				subTitle: '%code_text%',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio porro doloremque non, debitis aliquid dolores ad, nobis natus!'
 			}
 		},
 		{
@@ -429,7 +429,7 @@ function TextInputFieldsShowcase() {
 			name: {
 				title: 'Fourth Option Title',
 				subTitle: '%code_text%',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint qui amet corporis ipsum? Nam, adipisci iste!'
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio porro doloremque non, debitis aliquid dolores ad, nobis natus!'
 			}
 		},
 	]
@@ -563,7 +563,7 @@ function TextInputFieldsShowcase() {
 					<h4>Dropdown Select 3</h4>
 
 					<div>
-						<h4 style={{ color: 'red' }}>BUGGY. throws and error when you type into the searchbox</h4>
+						<h4 style={{ color: 'red' }}>BUGGY. throws an error when you type into the searchbox</h4>
 
 						<div className='components-group'>
 							<SelectControl
@@ -590,7 +590,7 @@ function TextInputFieldsShowcase() {
 					</div>
 
 					<div>
-						<h4>Custom select component for Variant 3 that works. Only icon missen</h4>
+						<h4 style={{ color: 'green' }}>WORKS. Custom alternative. Only "chevron-down" icon missen</h4>
 
 						<div className='components-group'>
 							<SelectControlWithSearchbox

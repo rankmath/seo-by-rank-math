@@ -19,17 +19,11 @@
 
 	.components-base-control {
 		&.is-success {
-			@include text-control-validation(
-				$success,
-				$success-thin
-			);
+			@include text-control-validation($success, $success-thin);
 		}
 
 		&.is-error {
-			@include text-control-validation(
-				$error-tertiary,
-				$error-lightest
-			);
+			@include text-control-validation($error-tertiary, $error-lightest);
 		}
 
 		.components-base-control__field {
@@ -38,6 +32,15 @@
 			.components-textarea-control__input,
 			.components-text-control__input {
 				@include input-style();
+
+				&:disabled {
+					@include disabled-style();
+					@include disabled-border-color();
+
+					&::placeholder {
+						color: rgba($gray, 0.8);
+					}
+				}
 			}
 		}
 	}

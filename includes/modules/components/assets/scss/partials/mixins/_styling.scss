@@ -28,12 +28,18 @@
 // Disabled styles mixins
 @mixin disabled-style() {
 	@include disabled-opacity();
-	background: lighten($gray, 35%);
+	@include disabled-bg-color();
 	color: $gray;
 	pointer-events: none;
 }
 @mixin disabled-opacity() {
 	opacity: 0.4;
+}
+@mixin disabled-bg-color() {
+	background: lighten($gray, 35%);
+}
+@mixin disabled-border-color() {
+	border-color: rgba($black-light, 0.6);
 }
 
 // Box shadow mixins

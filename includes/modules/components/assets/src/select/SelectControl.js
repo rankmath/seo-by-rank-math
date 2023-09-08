@@ -48,13 +48,13 @@ export default ({
 			{
 				'is-disabled': disabled,
 				'with-label': label,
-				'search-select-control': withSearch,
+				'select-with-search': withSearch,
 			}
 		);
 	};
 
 	useEffect(() => {
-		const searchSelectControl = document.querySelector('.search-select-control');
+		const searchSelectControl = document.querySelector('.select-with-search');
 
 		if (searchSelectControl) {
 			const optionsContainer = searchSelectControl.querySelector('.components-custom-select-control__menu');

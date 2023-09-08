@@ -188,7 +188,7 @@ $tertiary-btn-color: $gray;
 			$disabled: (
 				inherit,
 				$gray-lighter,
-				$secondary-btn-box-shadow
+				$black-light
 			)
 		);
 
@@ -282,8 +282,8 @@ $tertiary-btn-color: $gray;
 			),
 			$disabled: (
 				inherit,
-				$gray-medium,
-				$gray-light
+				lighten($gray, 22%),
+				inherit
 			)
 		);
 	}
