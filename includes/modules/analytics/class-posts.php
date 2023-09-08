@@ -59,15 +59,13 @@ class Posts extends Objects {
 
 		// Get keywords info for this post.
 		$keywords = DB::analytics()
-			->distinct()
-			->selectCount( 'query', 'keywords' )
+			->selectCount( 'DISTINCT(query)', 'keywords' )
 			->whereLike( 'page', $post->page, '%', '' )
 			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
 			->getVar();
 
 		$old_keywords = DB::analytics()
-			->distinct()
-			->selectCount( 'query', 'keywords' )
+			->selectCount( 'DISTINCT(query)', 'keywords' )
 			->whereLike( 'page', $post->page, '%', '' )
 			->whereBetween( 'created', [ $this->compare_start_date, $this->compare_end_date ] )
 			->getVar();
