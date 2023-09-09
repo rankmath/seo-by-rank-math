@@ -9,7 +9,7 @@
 		@include font-size-small();
 	}
 
-	.components-custom-select-control__button {
+	&__button {
 		.components-input-control__backdrop {
 			@include border-light();
 		}
@@ -23,7 +23,7 @@
 		}
 	}
 
-	.components-custom-select-control__menu {
+	&__menu {
 		box-shadow: 0px 2px 4px $gray-lighter;
 		border-color: $blue;
 		margin: 0;
@@ -43,17 +43,17 @@
 		}
 	}
 
-	.components-custom-select-control__label {
-		@include center-float-vertically();
-		@include font-size-small();
-		left: 15px;
-		z-index: 50;
-		text-transform: inherit;
-		margin-bottom: 0;
-		font-weight: normal;
-	}
-
 	&.with-label {
+		.components-custom-select-control__label {
+			@include center-float-vertically();
+			@include font-size-small();
+			left: 15px;
+			z-index: 50;
+			text-transform: inherit;
+			margin-bottom: 0;
+			font-weight: normal;
+		}
+
 		.components-custom-select-control__button {
 			text-align: right;
 		}
@@ -165,6 +165,7 @@
 						color: $gray;
 						margin: 0;
 						margin-bottom: 4px;
+						font-size: 12px;
 					}
 				}
 
@@ -314,7 +315,7 @@ $select-with-search-btn-color: #2c3338;
 				.option__heading {
 					@include flex-align();
 					justify-content: space-between;
-					margin-bottom: 5px;
+					margin-bottom: 7px;
 
 					&-title,
 					&-subtitle {
@@ -333,6 +334,7 @@ $select-with-search-btn-color: #2c3338;
 
 				.option__description {
 					color: $gray;
+					font-size: 12px;
 					margin: 0;
 				}
 			}

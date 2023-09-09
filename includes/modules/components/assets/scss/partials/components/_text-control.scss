@@ -1,22 +1,6 @@
 .text-control-container {
 	position: relative;
 
-	.hide-default-number-controls {
-		input {
-			-webkit-appearance: none;
-			-moz-appearance: textfield;
-			appearance: textfield;
-			margin: 0;
-
-			&::-webkit-inner-spin-button,
-			&::-webkit-outer-spin-button {
-				-webkit-appearance: none;
-				appearance: none;
-				margin: 0;
-			}
-		}
-	}
-
 	.components-base-control {
 		&.is-success {
 			@include text-control-validation($success, $success-thin);
@@ -26,7 +10,7 @@
 			@include text-control-validation($error-tertiary, $error-lightest);
 		}
 
-		.components-base-control__field {
+		&__field {
 			margin-bottom: 0px;
 
 			.components-textarea-control__input,
@@ -49,7 +33,7 @@
 		@include center-float-vertically();
 		right: 0.5rem;
 
-		.text-control-icon__validation {
+		&__validation {
 			@include font-size-small();
 
 			&.is-error {
@@ -77,6 +61,22 @@
 					@include disabled-style();
 					background-color: transparent;
 				}
+			}
+		}
+	}
+
+	.hide-default-number-controls {
+		input {
+			-webkit-appearance: none;
+			-moz-appearance: textfield;
+			appearance: textfield;
+			margin: 0;
+
+			&::-webkit-inner-spin-button,
+			&::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				appearance: none;
+				margin: 0;
 			}
 		}
 	}

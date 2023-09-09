@@ -32,14 +32,13 @@
 .score-button {
 	&.components-button {
 		&.is-secondary {
+			@include remove-box-shadow();
 			height: fit-content;
 			box-shadow: none;
 			padding: 8px 12px;
 			font-size: 12px;
 			gap: 8px;
 
-			@include remove-box-shadow();
-		
 			&.rank-math {
 				&.good {
 					@include score-button-style(
@@ -60,7 +59,7 @@
 				&.bad {
 					@include score-button-style(
 						$normal: ($error-secondary-dark, $error-secondary),
-						$hover: ($error-secondary-darker, $error-secondary-light, $error-secondary-dark),
+						$hover: (darken($error-secondary, 15%), $error-secondary-light, $error-secondary-dark),
 						$focus: ($error-secondary)
 					);
 				}

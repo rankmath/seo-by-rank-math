@@ -1,6 +1,6 @@
 // Checkbox Control
 .components-checkbox-control {
-	.components-checkbox-control__input-container {
+	&__input-container {
 		margin-right: $controls-margin;
 		
 		.components-checkbox-control__input {
@@ -71,7 +71,7 @@
 				gap: $controls-margin;
 			}
 
-			.components-form-toggle__input {
+			&__input {
 				&:focus + .components-form-toggle__track {
 					box-shadow: none;
 					outline: none;
@@ -83,7 +83,7 @@
 				opacity: 0.2;
 				
 				.components-form-toggle__track {
-					background-color: $controls-bg--disabled;
+					background-color: $controls-bg-disabled;
 				}
 
 				+ .components-toggle-control__label {

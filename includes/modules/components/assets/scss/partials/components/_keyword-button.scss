@@ -85,7 +85,7 @@
 	.components-popover {
 		top: -12px;
 
-		.components-popover__content {
+		&__content {
 			background-color: $black-light;
 			color: $gray-lightest;
 			padding: 2px 6px;
@@ -93,7 +93,7 @@
 			font-size: 11px;
 		}
 
-		.components-popover__arrow {
+		&__arrow {
 			height: 10px;
 			width: 10px;
 			

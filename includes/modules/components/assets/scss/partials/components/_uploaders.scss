@@ -22,16 +22,12 @@
 			@include gap-medium();
 
 			.components-button {
+				@include remove-box-shadow();
 				@include border-default();
 				background-color: $white;
 				color: $gray;
 				padding: 6px 12px;
 				gap: 8px;
-
-				&:focus:not(:disabled) {
-					box-shadow: none;
-					outline: none;
-				}
 			}
 		}
 
@@ -42,15 +38,15 @@
 				margin-bottom: 0px;
 			}
 
-			.components-range-control__slider {
+			&__slider {
 				cursor: default;
 			}
 
-			.components-range-control__thumb-wrapper {
+			&__thumb-wrapper {
 				display: none;
 			}
 
-			.components-range-control__track {
+			&__track {
 				color: $blue;
 				height: 5px;
 			}
@@ -61,6 +57,7 @@
 		}
 	}
 }
+
 
 // File Uploader
 .file-uploader {

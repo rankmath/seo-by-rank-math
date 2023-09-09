@@ -61,12 +61,12 @@
 	&.is-black {
 		@include filter-menu-color-style(
 			$hover: (
-				$black-tab-color--hover,
-				$black-tab-bg--hover-2
+				$black-tab-color-hover,
+				$gray-lightest
 			),
 			$active: (
-				$black-tab-color--active,
-				$black-tab-bg--active
+				$black-tab-color-active,
+				$black-tab-bg-active
 			)
 		)
 	}
@@ -74,12 +74,12 @@
 	&.is-blue {
 		@include filter-menu-color-style(
 			$hover: (
-				$blue-tab-color--hover,
-				$blue-tab-bg--hover
+				$blue-tab-color-hover,
+				$blue-tab-bg-hover
 			),
 			$active: (
-				$blue-tab-color--active,
-				$blue-tab-bg--active
+				$blue-tab-color-active,
+				$blue-tab-bg-active
 			)
 		)
 	}

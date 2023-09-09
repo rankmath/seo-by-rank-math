@@ -110,7 +110,7 @@ $tertiary-btn-color: $gray;
 
 	@include has-icon-style(
 		$icon-only: (29px, 27px, 13px),
-		$icon-and-text: (6px, 10px, 14px, 5px)
+		$icon-and-text: (6px, 10px, 14px, 6px)
 	);
 
 	&.is-small {
@@ -119,7 +119,7 @@ $tertiary-btn-color: $gray;
 
 		@include has-icon-style(
 			$icon-only: (24px, 22px, 12px),
-			$icon-and-text: (6px, 6px, 13px, 3px)
+			$icon-and-text: (6px, 6px, 13px, 5px)
 		);
 	}
 
@@ -130,7 +130,7 @@ $tertiary-btn-color: $gray;
 
 		@include has-icon-style(
 			$icon-only: (26px, 30px, 14px),
-			$icon-and-text: (12px, 12px, 15px, 5px)
+			$icon-and-text: (12px, 12px, 15px, 6px)
 		);
 
 		&.has-icon{
@@ -267,7 +267,7 @@ $tertiary-btn-color: $gray;
 		@include secondary-button-style(
 			$normal: (
 				$gray-light,
-				$gray-medium
+				$gray-lighter
 			),
 			$hover: (
 				$gray-dark,

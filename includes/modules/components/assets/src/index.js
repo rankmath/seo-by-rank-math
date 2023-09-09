@@ -652,6 +652,51 @@ function ControlsShowcase() {
 
 			<div className='components-wrapper'>
 				<div>
+					<h4>Toggle</h4>
+
+					<div className='components-group'>
+						<ToggleControl
+							label="On"
+							checked={value}
+							onChange={() => setValue((state) => !state)}
+						/>
+
+						<ToggleControl
+							label="Off"
+							checked={value}
+							onChange={() => setValue((state) => !state)}
+							disabled
+						/>
+					</div>
+				</div>
+
+				<div>
+					<h4>Radio Buttons</h4>
+
+					<div className='components-group'>
+						<RadioControl
+							label="Radio"
+							selected={option}
+							options={[
+								{ label: 'Selected', value: 'a' },
+								{ label: 'Default', value: 'e' },
+							]}
+							onChange={(value) => setOption(value)}
+						// disabled
+						/>
+
+						<RadioControl
+							selected={option}
+							options={[
+								{ label: 'Default', value: 'e' },
+							]}
+							onChange={(value) => setOption(value)}
+							disabled
+						/>
+					</div>
+				</div>
+
+				<div>
 					<h4>Select/ Deselect All</h4>
 
 					<div className='components-group'>
@@ -698,51 +743,6 @@ function ControlsShowcase() {
 							label="Checkbox"
 							checked={isChecked}
 							onChange={setChecked}
-							disabled
-						/>
-					</div>
-				</div>
-
-				<div>
-					<h4>Radio Buttons</h4>
-
-					<div className='components-group'>
-						<RadioControl
-							label="Radio"
-							selected={option}
-							options={[
-								{ label: 'Selected', value: 'a' },
-								{ label: 'Default', value: 'e' },
-							]}
-							onChange={(value) => setOption(value)}
-						// disabled
-						/>
-
-						<RadioControl
-							selected={option}
-							options={[
-								{ label: 'Default', value: 'e' },
-							]}
-							onChange={(value) => setOption(value)}
-							disabled
-						/>
-					</div>
-				</div>
-
-				<div>
-					<h4>Toggle</h4>
-
-					<div className='components-group'>
-						<ToggleControl
-							label="On"
-							checked={value}
-							onChange={() => setValue((state) => !state)}
-						/>
-
-						<ToggleControl
-							label="Off"
-							checked={value}
-							onChange={() => setValue((state) => !state)}
 							disabled
 						/>
 					</div>
@@ -959,7 +959,15 @@ function ScoresShowcase() {
 					<h4>Content AI Score Bar</h4>
 
 					<div className="components-group">
-						<ContentAIScoreBar value={70} />
+						<ContentAIScoreBar value={2} />
+					</div>
+
+					<div className="components-group margin-top">
+						<ContentAIScoreBar value={52} />
+					</div>
+
+					<div className="components-group margin-top">
+						<ContentAIScoreBar value={98} />
 					</div>
 				</div>
 
@@ -1256,6 +1264,27 @@ function FilterAndSwitchTabsShowcase() {
 
 					<div className='components-group'>
 						<SwitchTaps
+							tabs={[
+								{
+									name: 'tab5',
+									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
+								},
+								{
+									name: 'tab6',
+									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
+								}
+							]}
+							children={(tab) => (
+								<div>
+									<p>This is the content for tab {tab.name}</p>
+								</div>
+							)
+							}
+						/>
+					</div>
+
+					<div className='components-group'>
+						<SwitchTaps
 							iconOnly
 							tabs={[
 								{
@@ -1273,17 +1302,23 @@ function FilterAndSwitchTabsShowcase() {
 								</div>
 							)
 							}
-						/></div>
+						/>
+					</div>
+				</div>
+
+				<div>
+					<h4>Switch Tabs - Blue</h4>
 
 					<div className='components-group'>
 						<SwitchTaps
+							variant='blue'
 							tabs={[
 								{
-									name: 'tab5',
+									name: 'tab7',
 									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
 								},
 								{
-									name: 'tab6',
+									name: 'tab8',
 									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
 								}
 							]}
@@ -1293,11 +1328,8 @@ function FilterAndSwitchTabsShowcase() {
 								</div>
 							)
 							}
-						/></div>
-				</div>
-
-				<div>
-					<h4>Switch Tabs - Blue</h4>
+						/>
+					</div>
 
 					<div className='components-group'>
 						<SwitchTaps
@@ -1319,28 +1351,8 @@ function FilterAndSwitchTabsShowcase() {
 								</div>
 							)
 							}
-						/></div>
-
-					<div className='components-group'>
-						<SwitchTaps
-							variant='blue'
-							tabs={[
-								{
-									name: 'tab7',
-									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
-								},
-								{
-									name: 'tab8',
-									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
-						/></div>
+						/>
+					</div>
 				</div>
 			</div>
 		</>

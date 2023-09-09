@@ -81,12 +81,12 @@
 	&.is-black {
 		@include switch-tap-color-style(
 			$hover: (
-				$black-tab-color--hover,
-				$black-tab-bg--hover
+				$black-tab-color-hover,
+				$gray-extralight
 			),
 			$active: (
-				$black-tab-color--active,
-				$black-tab-bg--active
+				$black-tab-color-active,
+				$black-tab-bg-active
 			)
 		)
 	}
@@ -94,12 +94,12 @@
 	&.is-blue {
 		@include switch-tap-color-style(
 			$hover: (
-				$blue-tab-color--hover,
-				$blue-tab-bg--hover
+				$blue-tab-color-hover,
+				$blue-tab-bg-hover
 			),
 			$active: (
-				$blue-tab-color--active,
-				$blue-tab-bg--active
+				$blue-tab-color-active,
+				$blue-tab-bg-active
 			)
 		)
 	}
