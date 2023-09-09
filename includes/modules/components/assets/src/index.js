@@ -36,10 +36,42 @@ import SidebarTabPanel from './tabs/horizontal-tabs/SidebarTabPanel';
 import SidebarMenuList from './tabs/menu-lists/SidebarMenuList';
 import MenuListPopup from './tabs/menu-lists/MenuListPopup';
 import SelectControlWithSearchbox from './select/SelectControlWithSearchbox';
+import SegmentedSelectControl from './select/SegmentedSelectControl';
 
 const AllComponents = () => {
+	const [value, setValue] = useState('option_1');
+
+	const toggleOptions = [
+		{ label: 'Select Option 1', value: 'option_1' },
+		{ label: 'Select Option 2', value: 'option_2' },
+		{ label: 'Select Option 3', value: 'option_3' }
+	]
+
 	return (
 		<div className='container'>
+
+			<div style={{ marginBottom: '3rem' }}>
+				<div>
+					<SegmentedSelectControl
+						{...{
+							value,
+							setValue,
+							toggleOptions
+						}}
+					/>
+				</div>
+
+				<div className='margin-top'>
+					<SegmentedSelectControl
+						{...{
+							value,
+							setValue,
+							toggleOptions,
+							disabled: true
+						}}
+					/>
+				</div>
+			</div>
 
 			<ButtonsShowcase />
 

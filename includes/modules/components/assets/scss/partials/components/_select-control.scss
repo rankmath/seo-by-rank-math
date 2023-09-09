@@ -376,3 +376,51 @@ $select-with-search-btn-color: #2c3338;
 		}
 	}
 }
+
+// Segmented Select Control
+.segemented-select-control {
+	.css-zjik7 {
+		display: none; //Hides label for the control
+	}
+
+	.components-toggle-group-control {
+		@include border-default();
+		gap: 3px;
+
+		&:hover {
+			border-color: $gray-dark;
+		}
+
+		&[aria-disabled="true"] {
+			@include disabled-style();
+
+			.css-apsh3x {
+				background-color: transparent;
+			}
+
+			.components-toggle-group-control-option-base {
+				opacity: 0.8;
+
+				&[aria-checked="true"] {
+					background-color: rgba($black-light, 0.4);
+				}
+			}
+		}
+
+		&-option-base {
+			&[aria-checked="true"] {
+				background-color: $black-light;
+				
+				&:hover {
+					background-color: $black-light;
+					color: $white;
+				}
+			}
+
+			&:hover {
+				background-color: $gray-extralight;
+				color: $black;
+			}
+		}
+	}
+}
