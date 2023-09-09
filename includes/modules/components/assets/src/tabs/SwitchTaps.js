@@ -31,12 +31,12 @@ export default ({
 	};
 
 	const tabPanelProps = {
+		...rest,
 		className: getTabPanelClasses(),
 		children,
 		tabs,
 		onSelect,
-		initialTabName,
-		...rest
+		initialTabName
 	}
 
 	return (

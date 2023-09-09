@@ -9,10 +9,12 @@ export default ({
 	children,
 	...rest
 }) => {
+	const groupedClassNames = `menu-list-popup ${className}`;
+
 	const menuGroupProps = {
-		className: `menu-list-popup ${className}`,
-		children,
-		...rest
+		...rest,
+		className: groupedClassNames,
+		children
 	}
 
 	return (
