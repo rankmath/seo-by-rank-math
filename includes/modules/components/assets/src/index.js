@@ -752,6 +752,63 @@ function ControlsShowcase() {
 	);
 };
 function UploadersShowcase() {
+	const [imageUploadingPercentage, setImageUploadingPercentage] = useState(0);
+	const [imageIsUploading, setImageIsUploading] = useState(false);
+	const [imageUploaded, setImageUploaded] = useState(false);
+	const [uploadedImageSrc, setUploadedImageSrc] = useState(null);
+
+	// For File Upload
+	const [fileIsUploadingPercentage, setFileIsUploadingPercentage] = useState(0);
+	const [fileIsUploading, setFileIsUploading] = useState(false);
+	const [fileHasUploaded, setFileHasUploaded] = useState(false);
+	const [uploadedFileName, setUploadedFileName] = useState('');
+
+	const handleImageUpload = (file) => {
+		setImageIsUploading(true);
+
+		// Simulates upload progress
+		const interval = setInterval(() => {
+			setImageUploadingPercentage((prevPercentage) => {
+				const newPercentage = prevPercentage + 25;
+				if (newPercentage >= 100) {
+					clearInterval(interval);
+					setImageIsUploading(false);
+					setImageUploaded(true);
+				}
+				return newPercentage;
+			});
+		}, 500);
+
+		setUploadedImageSrc(URL.createObjectURL(file));
+	};
+
+	const handleRemoveImage = () => {
+		setImageUploaded(false);
+		setUploadedImageSrc(null);
+	};
+
+	const handleFileUpload = (file) => {
+		setFileIsUploading(true);
+
+		const interval = setInterval(() => {
+			setFileIsUploadingPercentage((prevPercentage) => {
+				const newPercentage = prevPercentage + 25;
+				if (newPercentage >= 100) {
+					clearInterval(interval);
+					setFileIsUploading(false);
+					setFileHasUploaded(true);
+					setUploadedFileName(file.name);
+				}
+				return newPercentage;
+			});
+		}, 500);
+	}
+
+	const handleFileRemove = () => {
+		setFileHasUploaded(false);
+		setUploadedFileName(null);
+	}
+
 	return (
 		<>
 			<h2>FILE UPLOADERS</h2>
@@ -760,13 +817,33 @@ function UploadersShowcase() {
 				<div>
 					<h4>Image Uploader</h4>
 
-					<ImageUploader />
+					<ImageUploader
+						{...{
+							uploadedImageSrc,
+							imageUploadingPercentage,
+							imageIsUploading,
+							imageUploaded,
+							maxFileSize: 500000,
+							onImageUpload: handleImageUpload,
+							onImageRemove: handleRemoveImage
+						}}
+					/>
 				</div>
 
 				<div className="margin-top">
 					<h4>Other File Uploader</h4>
 
-					<FileUploader />
+					<FileUploader
+						{...{
+							fileHasUploaded,
+							fileIsUploading,
+							fileIsUploadingPercentage,
+							uploadedFileName,
+							maxFileSize: 500000,
+							onFileRemove: handleFileRemove,
+							onFileUpload: handleFileUpload
+						}}
+					/>
 				</div>
 			</div>
 		</>
@@ -975,11 +1052,11 @@ function ScoresShowcase() {
 					<h4 className='margin-top'>Keyword Suggestions</h4>
 
 					<div className='components-group'>
-						<KeywordButton />
+						<KeywordButton score='94' keyword='Keyword' />
 
-						<KeywordButton keyword='Increase' severity='neutral' />
+						<KeywordButton score='52' keyword='Keyword' />
 
-						<KeywordButton severity='bad' />
+						<KeywordButton score='23' keyword='Keyword' />
 					</div>
 				</div>
 

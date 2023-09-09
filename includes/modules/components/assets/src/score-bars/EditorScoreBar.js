@@ -19,7 +19,7 @@ export default ({
 			className,
 			{
 				'bad-score': value < 50,
-				'average-score': value > 50 && value <= 70,
+				'average-score': value >= 50 && value <= 70,
 				'good-score': value > 70
 			}
 		);

@@ -1,30 +1,44 @@
 /**
+ * External dependencies
+ */
+import classNames from 'classnames'
+
+/**
  * WordPress dependencies
  */
 import { Button, Popover } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
 export default ({
-	severity = 'good',
-	keyword = 'Keyword',
-	score = '94/100',
+	keyword,
+	score,
 	className,
 	...rest
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
-	const groupedClassNames = `${className} ${severity}`;
+
+	const getButtonClasses = () => {
+		return classNames(
+			className,
+			{
+				'good': score >= 70,
+				'neutral': score >= 50 && score < 70,
+				'bad': score <= 30
+			}
+		);
+	};
 
 	const handleCopyClick = () => {
 		const textToCopy = keyword;
 
-		// Creates a range to select the text
+		// Creates range to select text
 		const range = document.createRange();
 		const textElement = document.createElement('div');
 		textElement.innerText = textToCopy;
 		document.body.appendChild(textElement);
 		range.selectNode(textElement);
 
-		// Selects the text and copies it
+		// Select and copy text
 		window.getSelection().removeAllRanges();
 		window.getSelection().addRange(range);
 		document.execCommand('copy');
@@ -42,7 +56,7 @@ export default ({
 
 	const buttonProps = {
 		...rest,
-		className: groupedClassNames,
+		className: getButtonClasses(),
 		onClick: handleCopyClick,
 		variant: 'secondary',
 	}
@@ -51,7 +65,7 @@ export default ({
 		<div className='keyword-button'>
 			<Button {...buttonProps}>
 				<h1 className='keyword-button__keyword'>{keyword}</h1>
-				<h6 className='keyword-button__score'>{score}</h6>
+				<h6 className='keyword-button__score'>{score}/100</h6>
 			</Button>
 
 			{isCopied && (

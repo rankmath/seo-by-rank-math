@@ -15,14 +15,14 @@ export default ({
 	...rest
 }) => {
 	const toggleControlProps = {
+		...rest,
+		onChange,
 		label,
 		checked,
-		onChange,
 		disabled,
 		help,
 		className,
 		__nextHasNoMarginBottom,
-		...rest
 	}
 
 	return (

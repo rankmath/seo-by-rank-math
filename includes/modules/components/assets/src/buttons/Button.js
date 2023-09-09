@@ -35,14 +35,14 @@ export default ({
 	};
 
 	const buttonProps = {
+		...rest,
 		variant: variantClassMap[variant] ? 'secondary' : variant,
 		'aria-disabled': disabled,
 		className: getButtonClasses(),
 		...(icon ? { icon: <i className={icon}></i> } : {}),
 		size,
 		children,
-		disabled,
-		...rest
+		disabled
 	};
 
 	return (

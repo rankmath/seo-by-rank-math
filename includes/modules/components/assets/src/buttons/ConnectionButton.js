@@ -21,10 +21,10 @@ export default ({
 
 	const buttonProps = {
 		...rest,
-		children,
 		className: groupedClassNames,
 		icon: <i className={iconName}></i>,
 		variant: 'secondary',
+		children
 	}
 
 	return (

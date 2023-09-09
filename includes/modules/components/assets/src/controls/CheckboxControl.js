@@ -31,6 +31,7 @@ export default ({
 	};
 
 	const checkboxControlProps = {
+		...rest,
 		className: getCheckboxControlClasses(),
 		__nextHasNoMarginBottom,
 		onChange,
@@ -38,8 +39,7 @@ export default ({
 		label,
 		help,
 		checked,
-		disabled,
-		...rest
+		disabled
 	}
 
 	return (

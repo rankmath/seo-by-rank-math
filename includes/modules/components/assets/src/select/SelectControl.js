@@ -15,14 +15,14 @@ import { CustomSelectControl, Disabled, SearchControl } from '@wordpress/compone
 import { useState, useEffect } from '@wordpress/element';
 
 export default ({
-	withSearch,
-	label,
-	value,
-	onChange,
-	options,
-	size,
 	disabled = false,
 	className,
+	options,
+	value,
+	onChange,
+	label,
+	size,
+	withSearch,
 	...rest
 }) => {
 	const [searchValue, setSearchValue] = useState('');
@@ -76,16 +76,16 @@ export default ({
 	}, [searchValue]);
 
 	const selectControlProps = {
+		...rest,
 		className: getSelectControlClasses(),
 		options: withSearch ? finalFilteredOptions : options,
+		__next36pxDefaultSize: true,
+		__nextUnconstrainedWidth: true,
 		label,
 		value,
 		onChange,
 		disabled,
 		size,
-		__next36pxDefaultSize: true,
-		__nextUnconstrainedWidth: true,
-		...rest
 	}
 
 	return (

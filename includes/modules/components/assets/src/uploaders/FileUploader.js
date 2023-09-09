@@ -2,95 +2,74 @@
  * WordPress dependencies
  */
 import { RangeControl, FormFileUpload, Button } from '@wordpress/components';
-import { useState } from '@wordpress/element';
 
-export default () => {
-	const [fileIsUploadingPercentage, setFileIsUploadingPercentage] = useState(0);
-	const [fileIsUploading, setFileIsUploading] = useState(false);
-	const [fileHasUploaded, setFileHasUploaded] = useState(false);
-	const [uploadedFileName, setUploadedFileName] = useState('');
-
+export default ({
+	maxFileSize,
+	onFileUpload,
+	onFileRemove,
+	uploadedFileName,
+	fileIsUploadingPercentage,
+	fileIsUploading,
+	fileHasUploaded,
+}) => {
 	const handleFileUpload = (event) => {
 		const file = event.target.files[0];
 		if (file) {
-			if (file.size > 500000) {
-				alert("File size exceeds 0.5MB.");
+			if (file.size > maxFileSize) {
+				alert(`File size exceeds ${maxFileSize / 1000000}MB.`);
 				return;
 			}
 
-			setFileIsUploading(true);
-
-			// Simulates upload progress
-			const interval = setInterval(() => {
-				setFileIsUploadingPercentage((prevPercentage) => {
-					const newPercentage = prevPercentage + 25;
-					if (newPercentage >= 100) {
-						clearInterval(interval);
-						setFileIsUploading(false);
-						setFileHasUploaded(true);
-						setUploadedFileName(file.name);
-					}
-					return newPercentage;
-				});
-			}, 500);
+			onFileUpload(file);
 		}
 	};
-
-	const handleRemoveImage = () => {
-		setFileHasUploaded(false);
-		setUploadedFileName(null);
-	};
-
-	const uploadingActions = (
-		<>
-			<RangeControl
-				value={fileIsUploadingPercentage}
-				min={0}
-				max={100}
-				withInputField={false}
-				showTooltip={false}
-			/>
-
-			<span className='uploader__is-uploading'>
-				Uploading File: {fileIsUploadingPercentage}%
-			</span>
-		</>
-	);
-
-	const fileActions = (
-		<>
-			{fileHasUploaded && (
-				<div className='uploader__uploaded-title'>
-					<i className='rm-icon-tick icon'></i>
-					<b>File Added: </b>
-					<span>{uploadedFileName}</span>
-				</div>
-			)}
-
-			<div className='uploader__actions'>
-				<FormFileUpload
-					accept='.xml,.html,application/zip,application/x-rar-compressed'
-					onChange={handleFileUpload}
-				>
-					<i className={fileHasUploaded ? 'rm-icon-trash' : 'rm-icon-export'}></i>
-					<span>{fileHasUploaded ? 'Replace File' : 'Add or Upload File'}</span>
-				</FormFileUpload>
-
-				{fileHasUploaded && (
-					<Button onClick={handleRemoveImage}>
-						<i className='rm-icon-trash'></i> <span>Remove File</span>
-					</Button>
-				)}
-			</div>
-
-			<span>File types: xml, hmtl, zip, rar &bull; Max file size: 0.5MB.</span>
-		</>
-	);
 
 	return (
 		<div className='file-uploader'>
 			<div className='uploader__content'>
-				{fileIsUploading ? uploadingActions : fileActions}
+				{fileIsUploading ? (
+					<>
+						<RangeControl
+							value={fileIsUploadingPercentage}
+							min={0}
+							max={100}
+							withInputField={false}
+							showTooltip={false}
+						/>
+						<span className='uploader__is-uploading'>
+							Uploading File: {fileIsUploadingPercentage}%
+						</span>
+					</>
+				) : (
+					<>
+						{fileHasUploaded && (
+							<div className='uploader__uploaded-title'>
+								<i className='rm-icon-tick icon'></i>
+								<b>File Added: </b>
+								<span>{uploadedFileName}</span>
+							</div>
+						)}
+						<div className='uploader__actions'>
+							<FormFileUpload
+								accept='.xml,.html,application/zip,application/x-rar-compressed'
+								onChange={handleFileUpload}
+							>
+								<i className={fileHasUploaded ? 'rm-icon-trash' : 'rm-icon-export'}></i>
+								<span>{fileHasUploaded ? 'Replace File' : 'Add or Upload File'}</span>
+							</FormFileUpload>
+
+							{fileHasUploaded && (
+								<Button onClick={onFileRemove}>
+									<i className='rm-icon-trash'></i> <span>Remove File</span>
+								</Button>
+							)}
+						</div>
+
+						<span>
+							File types: xml, hmtl, zip, rar &bull; Max file size: {maxFileSize / 1000000}MB.
+						</span>
+					</>
+				)}
 			</div>
 		</div>
 	);

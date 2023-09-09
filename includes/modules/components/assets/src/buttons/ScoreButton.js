@@ -33,12 +33,11 @@ export default ({
 
 	const iconName = companyIconMap[company] || '';
 
-
 	const buttonProps = {
+		...rest,
 		className: getScoreButtonClasses(),
 		variant: 'secondary',
-		icon: <i className={iconName}></i>,
-		...rest
+		icon: <i className={iconName}></i>
 	}
 
 	return (

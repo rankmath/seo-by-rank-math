@@ -6,8 +6,6 @@ import { Button } from '@wordpress/components';
 export default ({
 	severity = 'good',
 	href = '',
-	target = '_blank',
-	rel = 'noopener noreferrer',
 	className,
 	children,
 	...rest
@@ -16,12 +14,12 @@ export default ({
 
 	const buttonProps = {
 		...rest,
-		href,
-		children,
-		target,
-		rel,
+		target: '_blank',
+		rel: 'noopener noreferrer',
 		className: groupedClassNames,
 		variant: 'secondary',
+		href,
+		children,
 	}
 
 	return (

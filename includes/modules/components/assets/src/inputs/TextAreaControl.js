@@ -15,15 +15,15 @@ export default ({
 	...rest
 }) => {
 	const textControlProps = {
+		...rest,
 		onChange,
 		value,
+		rows,
+		label,
 		help,
 		hideLabelFromVision,
-		label,
 		placeholder,
-		disabled,
-		rows,
-		...rest
+		disabled
 	}
 
 	return (

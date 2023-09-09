@@ -37,14 +37,14 @@ export default ({
 	};
 
 	const noticeProps = {
+		...rest,
 		className: getNoticeClasses(),
 		status,
 		actions,
 		isDismissible,
 		politeness,
 		spokenMessage,
-		onRemove,
-		...rest
+		onRemove
 	}
 
 	return (

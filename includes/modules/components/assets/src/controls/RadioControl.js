@@ -13,13 +13,13 @@ export default ({
 	...rest
 }) => {
 	const radioControlProps = {
+		...rest,
 		hideLabelFromVision,
 		onChange,
 		label,
 		help,
 		selected,
-		options,
-		...rest,
+		options
 	}
 
 	return (

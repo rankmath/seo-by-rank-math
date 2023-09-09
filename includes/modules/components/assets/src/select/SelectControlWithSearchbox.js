@@ -11,10 +11,10 @@ import { useState, useMemo } from '@wordpress/element';
 import useClickOutside from '../others/hooks/useClickOutside';
 
 export default ({
+	disabled = false,
 	options,
 	value,
-	onChange,
-	disabled = false
+	onChange
 }) => {
 	const [searchValue, setSearchValue] = useState('');
 	const [menuRef, isMenuOpen, setIsMenuOpen] = useClickOutside();
@@ -55,6 +55,8 @@ export default ({
 				<ul
 					className='select-with-search__menu'
 					ref={menuRef}
+					role="listbox"
+					aria-label="Options"
 				>
 					<SearchControl
 						value={searchValue}
@@ -67,6 +69,8 @@ export default ({
 							data-value={title}
 							onClick={() => handleSelectedOption(title)}
 							className="select-with-search__menu-item"
+							role="option"
+							aria-selected={title === value ? true : false}
 						>
 							<SelectControlSearchOption
 								title={title}

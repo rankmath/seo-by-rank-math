@@ -11,13 +11,13 @@ import { useRef } from '@wordpress/element';
 
 export default ({
 	type = 'text',
+	className = '',
 	placeholder,
 	onChange,
 	value,
 	help,
 	hideLabelFromVision,
 	label,
-	className = '',
 	disabled,
 	isSuccess,
 	isError,
