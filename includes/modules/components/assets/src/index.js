@@ -697,6 +697,25 @@ function ControlsShowcase() {
 				</div>
 
 				<div>
+					<h4>Select One</h4>
+					<div className="components-group">
+						<CheckboxControl
+							label="Checkbox"
+							checked={isChecked}
+							onChange={setChecked}
+						// disabled
+						/>
+
+						<CheckboxControl
+							label="Checkbox"
+							checked={isChecked}
+							onChange={setChecked}
+							disabled
+						/>
+					</div>
+				</div>
+
+				<div>
 					<h4>Select/ Deselect All</h4>
 
 					<div className='components-group'>
@@ -724,25 +743,6 @@ function ControlsShowcase() {
 							indeterminate={!areAllChecked && areAnyChecked}
 							isIndeterminate
 							onChange={handleMasterCheckboxChange}
-							disabled
-						/>
-					</div>
-				</div>
-
-				<div>
-					<h4>Select One</h4>
-					<div className="components-group">
-						<CheckboxControl
-							label="Checkbox"
-							checked={isChecked}
-							onChange={setChecked}
-						// disabled
-						/>
-
-						<CheckboxControl
-							label="Checkbox"
-							checked={isChecked}
-							onChange={setChecked}
 							disabled
 						/>
 					</div>

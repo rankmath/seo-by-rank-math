@@ -23,9 +23,7 @@
 	}
 }
 
-@mixin connection-button-style-validation(
-	$color,
-) {
+@mixin connection-button-style-validation($color) {
 	color: $white;
 	border: 1px solid $color;
 	background-color: $color;

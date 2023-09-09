@@ -1,3 +1,4 @@
+// Text control validation mixin
 @mixin text-control-validation($validation-color, $validation-background) {
 	.components-base-control__field {
 		.components-text-control__input {
@@ -14,14 +15,15 @@
 	}
 }
 
+// Input size mixins
 @mixin input-min-height() {
 	min-height: 40px;
 }
-
 @mixin input-min-width() {
 	min-width: 16rem;
 }
 
+// Input style mixin
 @mixin input-style() {
 	@include border-default();
 	@include input-min-height();
@@ -49,6 +51,7 @@
 	}
 }
 
+// Checkbox & Radio style mixins
 @mixin checkbox-radio-style() {
 	@include border-default();
 
