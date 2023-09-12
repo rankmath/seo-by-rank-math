@@ -47,6 +47,11 @@ const AllComponents = () => {
 		{ label: 'Select Option 3', value: 'option_3' }
 	]
 
+	const handleChange = (newValue) => {
+		setValue(newValue);
+		return;
+	}
+
 	return (
 		<div className='container'>
 
@@ -55,7 +60,7 @@ const AllComponents = () => {
 					<SegmentedSelectControl
 						{...{
 							value,
-							setValue,
+							onChange: handleChange,
 							toggleOptions
 						}}
 					/>
@@ -65,7 +70,7 @@ const AllComponents = () => {
 					<SegmentedSelectControl
 						{...{
 							value,
-							setValue,
+							onChange: handleChange,
 							toggleOptions,
 							disabled: true
 						}}

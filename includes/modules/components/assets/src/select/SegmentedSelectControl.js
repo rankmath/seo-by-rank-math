@@ -11,11 +11,11 @@ export default ({
 	disabled = false,
 	toggleOptions,
 	value,
-	setValue
+	onChange
 }) => {
 	const toggleGroupControlProps = {
 		value,
-		onChange: setValue,
+		onChange,
 		__nextHasNoMarginBottom: true,
 		isBlock: true,
 		"aria-disabled": disabled,

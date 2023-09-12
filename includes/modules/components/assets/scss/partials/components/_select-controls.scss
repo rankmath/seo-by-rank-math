@@ -2,6 +2,7 @@
 	border-bottom: 1px solid $gray-lightest;
 }
 
+// Select Control
 .components-custom-select-control {
 	.css-f0d2mi.css-f0d2mi.css-f0d2mi {
 		@include input-min-height();
@@ -81,8 +82,8 @@
 		}
 	}
 
-	// Select Control with Search
-	&.select-with-search {
+	// Select Control with Searchbox
+	&.select-with-searchbox {
 		width: 35rem;
 
 		.components-custom-select-control__label {
@@ -201,9 +202,9 @@
 	}
 }
 
-$select-with-search-btn-color: #2c3338;
 
-.select-with-search {
+// Select With Search Control
+.select-with-searchbox {
 	position: relative;
 	width: 35rem;
 
@@ -217,13 +218,13 @@ $select-with-search-btn-color: #2c3338;
 				justify-content: space-between;
 				width: 100%;
 				background: $white;
-				color: $select-with-search-btn-color;
+				color: $black-light;
 				padding-right: 4px;
 				border-radius: 2px;
 				box-shadow: none;
 
 				&:hover:not(:disabled) {
-					color: $select-with-search-btn-color;
+					color: $black-light;
 					border: 1px solid $gray-light;
 					background-color: $white;
 					box-shadow: none;
@@ -255,7 +256,7 @@ $select-with-search-btn-color: #2c3338;
 				}
 			}
 
-			.select-with-search__button-icon {
+			.select-with-searchbox__button-icon {
 				background-color: $blue-light;
 			}
 		}
@@ -364,7 +365,7 @@ $select-with-search-btn-color: #2c3338;
 	}
 
 	&[aria-disabled="true"] {
-		.select-with-search__button {
+		.select-with-searchbox__button {
 			&.components-button {
 				@include disabled-style();
 				@include disabled-border-color();
@@ -377,8 +378,11 @@ $select-with-search-btn-color: #2c3338;
 	}
 }
 
+
 // Segmented Select Control
 .segemented-select-control {
+	width: 40rem;
+
 	.css-zjik7 {
 		display: none; //Hides label for the control
 	}

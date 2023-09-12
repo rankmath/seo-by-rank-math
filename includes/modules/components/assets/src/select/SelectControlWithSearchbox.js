@@ -37,23 +37,23 @@ export default ({
 
 	return (
 		<div
-			className="select-with-search"
+			className="select-with-searchbox"
 			aria-disabled={disabled ? true : false}
 		>
 			<Button
 				onClick={toggleDropdown}
 				variant='secondary'
-				className="select-with-search__button"
+				className="select-with-searchbox__button"
 				aria-expanded={isMenuOpen ? true : false}
 			>
 				<span>{value}</span>
 
-				<span className='select-with-search__button-icon'></span>
+				<span className='select-with-searchbox__button-icon'></span>
 			</Button>
 
 			{isMenuOpen && (
 				<ul
-					className='select-with-search__menu'
+					className='select-with-searchbox__menu'
 					ref={menuRef}
 					role="listbox"
 					aria-label="Options"
@@ -61,14 +61,14 @@ export default ({
 					<SearchControl
 						value={searchValue}
 						onChange={setSearchValue}
-						className="select-with-search__menu-search"
+						className="select-with-searchbox__menu-search"
 					/>
 					{filteredItems.map(({ title, subTitle, description }, index) => (
 						<li
 							key={`${index}-${title}`}
 							data-value={title}
 							onClick={() => handleSelectedOption(title)}
-							className="select-with-search__menu-item"
+							className="select-with-searchbox__menu-item"
 							role="option"
 							aria-selected={title === value ? true : false}
 						>
