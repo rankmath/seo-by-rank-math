@@ -8,9 +8,9 @@ export default ({
 	onFileUpload,
 	onFileRemove,
 	uploadedFileName,
-	fileIsUploadingPercentage,
 	fileIsUploading,
-	fileHasUploaded,
+	fileIsUploadingPercentage,
+	fileUploadComplete,
 }) => {
 	const handleFileUpload = (event) => {
 		const file = event.target.files[0];
@@ -36,29 +36,31 @@ export default ({
 							withInputField={false}
 							showTooltip={false}
 						/>
+
 						<span className='uploader__is-uploading'>
 							Uploading File: {fileIsUploadingPercentage}%
 						</span>
 					</>
 				) : (
 					<>
-						{fileHasUploaded && (
+						{fileUploadComplete && (
 							<div className='uploader__uploaded-title'>
 								<i className='rm-icon-tick icon'></i>
 								<b>File Added: </b>
 								<span>{uploadedFileName}</span>
 							</div>
 						)}
+
 						<div className='uploader__actions'>
 							<FormFileUpload
 								accept='.xml,.html,application/zip,application/x-rar-compressed'
 								onChange={handleFileUpload}
 							>
-								<i className={fileHasUploaded ? 'rm-icon-trash' : 'rm-icon-export'}></i>
-								<span>{fileHasUploaded ? 'Replace File' : 'Add or Upload File'}</span>
+								<i className={fileUploadComplete ? 'rm-icon-trash' : 'rm-icon-export'}></i>
+								<span>{fileUploadComplete ? 'Replace File' : 'Add or Upload File'}</span>
 							</FormFileUpload>
 
-							{fileHasUploaded && (
+							{fileUploadComplete && (
 								<Button onClick={onFileRemove}>
 									<i className='rm-icon-trash'></i> <span>Remove File</span>
 								</Button>

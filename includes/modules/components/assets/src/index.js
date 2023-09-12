@@ -400,7 +400,58 @@ function ButtonsShowcase() {
 	);
 }
 function InputFieldsShowcase() {
-	const optionsList = [
+	// Dropdown Select 1
+	const select1Options = [
+		{
+			key: "first_option",
+			name: "Option Default",
+		},
+		{
+			key: "second_option",
+			name: "Second Option",
+		},
+		{
+			key: "third_option",
+			name: "Third Option",
+		}
+	]
+	const select1DisabledOptions = [
+		{
+			key: "first_option",
+			name: "Option Disabled",
+		}
+	]
+	const [select1Value, setSelect1Value] = useState(select1Options[0]);
+	const [disabledSelect1Value, setDisabledSelect1Value] = useState(select1DisabledOptions[0]);
+
+
+	// Dropdown Select 2
+	const select2Options = [
+		{
+			key: "first_option",
+			name: "Default Option",
+		},
+		{
+			key: "second_option",
+			name: "Second Option",
+		},
+		{
+			key: "third_option",
+			name: "Third Option",
+		}
+	]
+	const select2DisabledOptions = [
+		{
+			key: "first_option",
+			name: "Option Disabled",
+		}
+	]
+	const [select2Value, setSelect2Value] = useState(select2Options[0]);
+	const [disabledSelect2Value, setDisabledSelect2Value] = useState(select2DisabledOptions[0]);
+
+
+	// Dropdown Select 3
+	const select3Options = [
 		{
 			key: 'first_option',
 			name: {
@@ -434,7 +485,29 @@ function InputFieldsShowcase() {
 			}
 		},
 	]
-	const optionsList2 = [
+	const select3DisabledOptions = [
+		{
+			key: 'option_disabled',
+			name: {
+				title: 'Option Disabled',
+				subTitle: '%code_text%',
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio porro doloremque non, debitis aliquid dolores ad, nobis natus!'
+			}
+		}
+	]
+
+	const [select3Value, setSelect3Value] = useState({
+		key: select3Options[0].key,
+		name: select3Options[0].name.title
+	});
+	const [disabledSelect3Value, setDisabledSelect3Value] = useState({
+		key: select3DisabledOptions[0].key,
+		name: select3DisabledOptions[0].name.title
+	});
+
+
+	// Dropdown Select 3 Alternative
+	const select3OptionsAlt = [
 		{
 			title: 'First Option Title',
 			subTitle: '%code_text%',
@@ -462,56 +535,15 @@ function InputFieldsShowcase() {
 
 		},
 	]
-	const options = [
+	const select3DisabledOptionsAlt = [
 		{
-			key: "first_option",
-			name: "Option Default",
-		},
-		{
-			key: "second_option",
-			name: "Second Option",
-		},
-		{
-			key: "third_option",
-			name: "Third Option",
+			title: 'Option Disabled',
+			subTitle: '%code_text%',
+			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magnam, nulla optio nobis natus doloremque non, debitis aliquid dolores ad, nobis natus porro fugit sint!'
 		}
 	]
-	const disabledOptions = [
-		{
-			key: "first_option",
-			name: "Option Disabled",
-		}
-	]
-	const options2 = [
-		{
-			key: "first_option",
-			name: "Default Option",
-		},
-		{
-			key: "second_option",
-			name: "Second Option",
-		},
-		{
-			key: "third_option",
-			name: "Third Option",
-		}
-	]
-	const disabledOptions2 = [
-		{
-			key: "first_option",
-			name: "Option Disabled",
-		}
-	]
-
-	const [selectedValue, setSelectedValue] = useState({
-		key: optionsList[0].key,
-		name: optionsList[0].name.title,
-	});
-	const [selectedValue2, setSelectedValue2] = useState(optionsList2[0].title);
-	const [selectedOption, setSelectedOption] = useState(options[0]);
-	const [disabledOption, setDisabledOption] = useState(disabledOptions[0]);
-	const [selectedOption2, setSelectedOption2] = useState(options2[0]);
-	const [disabledOption2, setDisabledOption2] = useState(disabledOptions2[0]);
+	const [select3ValueAlt, setSelect3ValueAlt] = useState(select3OptionsAlt[0].title);
+	const [disabledSelect3ValueAlt, setDisabledSelect3ValueAlt] = useState(select3DisabledOptionsAlt[0].title);
 
 	return (
 		<div>
@@ -555,14 +587,14 @@ function InputFieldsShowcase() {
 
 					<div className='components-group'>
 						<SelectControl
-							options={options}
-							value={selectedOption}
-							onChange={({ selectedItem }) => setSelectedOption(selectedItem)}
+							options={select1Options}
+							value={select1Value}
+							onChange={({ selectedItem }) => setSelect1Value(selectedItem)}
 						/>
 						<SelectControl
-							options={disabledOptions}
-							value={disabledOption}
-							onChange={() => { }}
+							options={select1DisabledOptions}
+							value={disabledSelect1Value}
+							onChange={({ selectedItem }) => setDisabledSelect1Value(selectedItem)}
 							disabled
 						/>
 					</div>
@@ -574,15 +606,15 @@ function InputFieldsShowcase() {
 					<div className='components-group'>
 						<SelectControl
 							label="Label"
-							options={options2}
-							value={selectedOption2}
-							onChange={({ selectedItem }) => setSelectedOption2(selectedItem)}
+							options={select2Options}
+							value={select2Value}
+							onChange={({ selectedItem }) => setSelect2Value(selectedItem)}
 						/>
 						<SelectControl
 							label="Label"
-							options={disabledOptions2}
-							value={disabledOption2}
-							onChange={() => { }}
+							options={select2DisabledOptions}
+							value={disabledSelect2Value}
+							onChange={({ selectedItem }) => setDisabledSelect2Value(selectedItem)}
 							disabled
 						/>
 					</div>
@@ -596,21 +628,20 @@ function InputFieldsShowcase() {
 
 						<div className='components-group'>
 							<SelectControl
-								options={optionsList}
-								value={selectedValue}
+								options={select3Options}
+								value={select3Value}
 								onChange={
-									({ selectedItem: { key, name } }) => setSelectedValue({ key, name: name.props.title })
+									({ selectedItem: { key, name } }) => setSelect3Value({ key, name: name.props.title })
 								}
 								withSearch
 							/>
 						</div>
-
 						<div className='components-group'>
 							<SelectControl
-								value={selectedValue}
-								options={optionsList}
+								options={select3DisabledOptions}
+								value={disabledSelect3Value}
 								onChange={
-									({ selectedItem: { key, name } }) => setSelectedValue({ key, name: name.props.title })
+									({ selectedItem: { key, name } }) => setDisabledSelect3Value({ key, name: name.props.title })
 								}
 								withSearch
 								disabled
@@ -623,17 +654,17 @@ function InputFieldsShowcase() {
 
 						<div className='components-group'>
 							<SelectControlWithSearchbox
-								options={optionsList2}
-								value={selectedValue2}
-								onChange={(value) => setSelectedValue2(value)}
+								options={select3OptionsAlt}
+								value={select3ValueAlt}
+								onChange={setSelect3ValueAlt}
 							/>
 						</div>
 
 						<div className='components-group'>
 							<SelectControlWithSearchbox
-								value={selectedValue2}
-								options={optionsList2}
-								onChange={(value) => setSelectedValue2(value)}
+								options={select3DisabledOptionsAlt}
+								value={disabledSelect3ValueAlt}
+								onChange={setDisabledSelect3ValueAlt}
 								disabled
 							/>
 						</div>
@@ -644,25 +675,58 @@ function InputFieldsShowcase() {
 	)
 };
 function ControlsShowcase() {
-	const [value, setValue] = useState(false);
-	const [option, setOption] = useState('a');
-	const [isChecked, setChecked] = useState(false);
+	// Segmented Select Control
+	const [segmentedSelectValue, setSegmentedSelectValue] = useState('option_1');
+	const [disabledSegmentedSelect, setDisabledSegmentedSelect] = useState('disabled_1');
+	const [segmentedSelectValue2, setSegmentedSelectValue2] = useState('option2_1');
 
+	const segmentedSelectOptions = [
+		{ label: 'Select Option 1', value: 'option_1' },
+		{ label: 'Select Option 2', value: 'option_2' },
+		{ label: 'Select Option 3', value: 'option_3' }
+	]
+	const disabledSegmentedSelectOptions = [
+		{ label: 'Disabled Option 1', value: 'disabled_1' },
+		{ label: 'Disabled Option 2', value: 'disabled_2' },
+		{ label: 'Disabled Option 3', value: 'disabled_3' }
+	]
+	const segmentedSelectOptions2 = [
+		{ label: 'Option 1', value: 'option2_1' },
+		{ label: 'Option 2', value: 'option2_2' }
+	]
+
+
+	// Toggle Control
+	const [toggleCheckedValue, setToggleCheckedValue] = useState(false);
+	const [toggleDisabledCheckedValue, setToggleDisabledCheckedValue] = useState(false);
+	const handleToggleChange = () => {
+		setToggleCheckedValue((state) => !state);
+	}
+	const handleDisabledToggleChange = () => {
+		setToggleDisabledCheckedValue((state) => !state);
+	}
+
+
+	// Radio Control
+	const [selectedRadioOption, setSelectedRadioOption] = useState('selected');
+	const [disabledRadioOption, setDisabledRadioOption] = useState('');
+	const radioOptions = [
+		{ label: 'Default', value: 'default' },
+		{ label: 'Selected', value: 'selected' }
+	];
+	const disabledRadioOptions = [
+		{ label: 'Disabled', value: 'disabled' }
+	];
+
+
+	// Checkbox Control
 	const initialCheckboxes = [
 		{ id: 'checkbox-1', label: 'Checkbox 1', checked: false },
 		{ id: 'checkbox-2', label: 'Checkbox 2', checked: false },
 		{ id: 'checkbox-3', label: 'Checkbox 3', checked: false },
 	];
-
 	const [checkboxes, setCheckboxes] = useState(initialCheckboxes);
-
-	const handleCheckboxChange = (id) => {
-		const updatedCheckboxes = checkboxes.map((checkbox) =>
-			checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
-		);
-		setCheckboxes(updatedCheckboxes);
-	};
-
+	const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
 	const areAllChecked = checkboxes.every((checkbox) => checkbox.checked);
 	const areAnyChecked = checkboxes.some((checkbox) => checkbox.checked);
 
@@ -674,35 +738,12 @@ function ControlsShowcase() {
 		}));
 		setCheckboxes(updatedCheckboxes);
 	};
-
-
-	const [valueOne, setValueOne] = useState('option_1');
-	const [valueTwo, setValueTwo] = useState('disabled_1');
-	const [valueThree, setValueThree] = useState('option3_1');
-
-	const toggleOptions = [
-		{ label: 'Select Option 1', value: 'option_1' },
-		{ label: 'Select Option 2', value: 'option_2' },
-		{ label: 'Select Option 3', value: 'option_3' }
-	]
-	const toggleOptionsTwo = [
-		{ label: 'Disabled Option 1', value: 'disabled_1' },
-		{ label: 'Disabled Option 2', value: 'disabled_2' },
-		{ label: 'Disabled Option 3', value: 'disabled_3' }
-	]
-	const toggleOptionsThree = [
-		{ label: 'Option 1', value: 'option3_1' },
-		{ label: 'Option 2', value: 'option3_2' }
-	]
-
-	const handleChangeOne = (newValue) => {
-		setValueOne(newValue);
-		return;
-	}
-	const handleChangeThree = (newValue) => {
-		setValueOne(newValue);
-		return;
-	}
+	const handleCheckboxChange = (id) => {
+		const updatedCheckboxes = checkboxes.map((checkbox) =>
+			checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
+		);
+		setCheckboxes(updatedCheckboxes);
+	};
 
 	return (
 		<div>
@@ -714,26 +755,26 @@ function ControlsShowcase() {
 
 					<div className='components-group'>
 						<SegmentedSelectControl
-							value={valueOne}
-							toggleOptions={toggleOptions}
-							onChange={handleChangeOne}
+							toggleOptions={segmentedSelectOptions}
+							value={segmentedSelectValue}
+							onChange={setSegmentedSelectValue}
 						/>
 					</div>
 
 					<div className='components-group'>
 						<SegmentedSelectControl
-							value={valueTwo}
-							toggleOptions={toggleOptionsTwo}
-							onChange={() => { }}
+							toggleOptions={disabledSegmentedSelectOptions}
+							value={disabledSegmentedSelect}
+							onChange={setDisabledSegmentedSelect}
 							disabled
 						/>
 					</div>
 
 					<div className='components-group'>
 						<SegmentedSelectControl
-							value={valueThree}
-							toggleOptions={toggleOptionsThree}
-							onChange={handleChangeThree}
+							toggleOptions={segmentedSelectOptions2}
+							value={segmentedSelectValue2}
+							onChange={setSegmentedSelectValue2}
 						/>
 					</div>
 				</div>
@@ -743,15 +784,20 @@ function ControlsShowcase() {
 
 					<div className='components-group'>
 						<ToggleControl
+							label="Off"
+							checked={toggleCheckedValue}
+							onChange={handleToggleChange}
+						/>
+						<ToggleControl
 							label="On"
-							checked={value}
-							onChange={() => setValue((state) => !state)}
+							checked={true}
+							onChange={() => { }}
 						/>
 
 						<ToggleControl
-							label="Off"
-							checked={value}
-							onChange={() => setValue((state) => !state)}
+							label="Disabled"
+							checked={toggleDisabledCheckedValue}
+							onChange={handleDisabledToggleChange}
 							disabled
 						/>
 					</div>
@@ -762,76 +808,72 @@ function ControlsShowcase() {
 
 					<div className='components-group'>
 						<RadioControl
-							label="Radio"
-							selected={option}
-							options={[
-								{ label: 'Selected', value: 'a' },
-								{ label: 'Default', value: 'e' },
-							]}
-							onChange={(value) => setOption(value)}
-						// disabled
+							selected={selectedRadioOption}
+							options={radioOptions}
+							onChange={setSelectedRadioOption}
 						/>
 
 						<RadioControl
-							selected={option}
-							options={[
-								{ label: 'Default', value: 'e' },
-							]}
-							onChange={(value) => setOption(value)}
+							selected={disabledRadioOption}
+							options={disabledRadioOptions}
+							onChange={setDisabledRadioOption}
 							disabled
 						/>
 					</div>
 				</div>
 
 				<div>
-					<h4>Select One</h4>
-					<div className="components-group">
-						<CheckboxControl
-							label="Checkbox"
-							checked={isChecked}
-							onChange={setChecked}
-						// disabled
-						/>
+					<h4>Checkboxes</h4>
 
-						<CheckboxControl
-							label="Checkbox"
-							checked={isChecked}
-							onChange={setChecked}
-							disabled
-						/>
-					</div>
-				</div>
-
-				<div>
-					<h4>Select/ Deselect All</h4>
-
-					<div className='components-group'>
-						<CheckboxControl
-							label="Select All"
-							checked={areAllChecked}
-							indeterminate={!areAllChecked && areAnyChecked}
-							isIndeterminate
-							onChange={handleMasterCheckboxChange}
-						// disabled
-						/>
-						{checkboxes.map((checkbox) => (
+					<div>
+						<h4>Select One</h4>
+						<div className="components-group">
 							<CheckboxControl
-								key={checkbox.id}
-								label={checkbox.label}
-								checked={checkbox.checked}
-								onChange={() => handleCheckboxChange(checkbox.id)}
-							// disabled
+								label="Default"
+								checked={checkboxIsChecked}
+								onChange={setCheckboxIsChecked}
 							/>
-						))}
 
-						<CheckboxControl
-							label="Select All"
-							checked={areAllChecked}
-							indeterminate={!areAllChecked && areAnyChecked}
-							isIndeterminate
-							onChange={handleMasterCheckboxChange}
-							disabled
-						/>
+							<CheckboxControl
+								label="Checked"
+								checked={true}
+							/>
+
+							<CheckboxControl
+								label="Disabled"
+								checked={false}
+								disabled
+							/>
+						</div>
+					</div>
+
+					<div>
+						<h4>Select/ Deselect All</h4>
+
+						<div className='components-group'>
+							<CheckboxControl
+								label="Default"
+								checked={areAllChecked}
+								indeterminate={!areAllChecked && areAnyChecked}
+								isIndeterminate
+								onChange={handleMasterCheckboxChange}
+							/>
+							{checkboxes.map((checkbox) => (
+								<CheckboxControl
+									key={checkbox.id}
+									label={checkbox.label}
+									checked={checkbox.checked}
+									onChange={() => handleCheckboxChange(checkbox.id)}
+								/>
+							))}
+
+							<CheckboxControl
+								label="Disabled"
+								checked={false}
+								onChange={() => { }}
+								disabled
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -839,16 +881,11 @@ function ControlsShowcase() {
 	);
 };
 function UploadersShowcase() {
+	// Image Uploader
 	const [imageUploadingPercentage, setImageUploadingPercentage] = useState(0);
 	const [imageIsUploading, setImageIsUploading] = useState(false);
-	const [imageUploaded, setImageUploaded] = useState(false);
+	const [imageUploadComplete, setImageUploadComplete] = useState(false);
 	const [uploadedImageSrc, setUploadedImageSrc] = useState(null);
-
-	// For File Upload
-	const [fileIsUploadingPercentage, setFileIsUploadingPercentage] = useState(0);
-	const [fileIsUploading, setFileIsUploading] = useState(false);
-	const [fileHasUploaded, setFileHasUploaded] = useState(false);
-	const [uploadedFileName, setUploadedFileName] = useState('');
 
 	const handleImageUpload = (file) => {
 		setImageIsUploading(true);
@@ -860,7 +897,7 @@ function UploadersShowcase() {
 				if (newPercentage >= 100) {
 					clearInterval(interval);
 					setImageIsUploading(false);
-					setImageUploaded(true);
+					setImageUploadComplete(true);
 				}
 				return newPercentage;
 			});
@@ -868,11 +905,17 @@ function UploadersShowcase() {
 
 		setUploadedImageSrc(URL.createObjectURL(file));
 	};
-
 	const handleRemoveImage = () => {
-		setImageUploaded(false);
+		setImageUploadComplete(false);
 		setUploadedImageSrc(null);
 	};
+
+
+	// File Uploader
+	const [fileIsUploadingPercentage, setFileIsUploadingPercentage] = useState(0);
+	const [fileIsUploading, setFileIsUploading] = useState(false);
+	const [fileUploadComplete, setFileUploadComplete] = useState(false);
+	const [uploadedFileName, setUploadedFileName] = useState('');
 
 	const handleFileUpload = (file) => {
 		setFileIsUploading(true);
@@ -883,16 +926,15 @@ function UploadersShowcase() {
 				if (newPercentage >= 100) {
 					clearInterval(interval);
 					setFileIsUploading(false);
-					setFileHasUploaded(true);
+					setFileUploadComplete(true);
 					setUploadedFileName(file.name);
 				}
 				return newPercentage;
 			});
 		}, 500);
 	}
-
 	const handleFileRemove = () => {
-		setFileHasUploaded(false);
+		setFileUploadComplete(false);
 		setUploadedFileName(null);
 	}
 
@@ -909,7 +951,7 @@ function UploadersShowcase() {
 							uploadedImageSrc,
 							imageUploadingPercentage,
 							imageIsUploading,
-							imageUploaded,
+							imageUploadComplete,
 							maxFileSize: 500000,
 							onImageUpload: handleImageUpload,
 							onImageRemove: handleRemoveImage
@@ -922,7 +964,7 @@ function UploadersShowcase() {
 
 					<FileUploader
 						{...{
-							fileHasUploaded,
+							fileUploadComplete,
 							fileIsUploading,
 							fileIsUploadingPercentage,
 							uploadedFileName,

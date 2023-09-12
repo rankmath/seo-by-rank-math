@@ -10,7 +10,7 @@ export default function ImageUploader({
 	uploadedImageSrc,
 	imageUploadingPercentage,
 	imageIsUploading,
-	imageUploaded,
+	imageUploadComplete,
 }) {
 	const handleImageUpload = (event) => {
 		const file = event.target.files[0];
@@ -51,6 +51,7 @@ export default function ImageUploader({
 							withInputField={false}
 							showTooltip={false}
 						/>
+
 						<span className='uploader__is-uploading'>
 							Uploading File: {imageUploadingPercentage}%
 						</span>
@@ -59,11 +60,11 @@ export default function ImageUploader({
 					<>
 						<div className='uploader__actions'>
 							<FormFileUpload accept='image/*' onChange={handleImageUpload}>
-								<i className={imageUploaded ? 'rm-icon-trash' : 'rm-icon-export'}></i>
-								<span>{imageUploaded ? 'Replace Image' : 'Add or Upload Image'}</span>
+								<i className={imageUploadComplete ? 'rm-icon-trash' : 'rm-icon-export'}></i>
+								<span>{imageUploadComplete ? 'Replace Image' : 'Add or Upload Image'}</span>
 							</FormFileUpload>
 
-							{imageUploaded && (
+							{imageUploadComplete && (
 								<Button onClick={onImageRemove}>
 									<i className='rm-icon-trash'></i> <span>Remove Image</span>
 								</Button>
@@ -74,8 +75,9 @@ export default function ImageUploader({
 					</>
 				)}
 			</div>
+
 			<div className='uploader__preview'>
-				{imageUploaded ? (
+				{imageUploadComplete ? (
 					<img src={uploadedImageSrc} alt='' className='uploader__preview-img' />
 				) : (
 					<span className='uploader__preview-title'>Image Preview</span>
