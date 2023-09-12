@@ -39,48 +39,12 @@ import SelectControlWithSearchbox from './select/SelectControlWithSearchbox';
 import SegmentedSelectControl from './select/SegmentedSelectControl';
 
 const AllComponents = () => {
-	const [value, setValue] = useState('option_1');
-
-	const toggleOptions = [
-		{ label: 'Select Option 1', value: 'option_1' },
-		{ label: 'Select Option 2', value: 'option_2' },
-		{ label: 'Select Option 3', value: 'option_3' }
-	]
-
-	const handleChange = (newValue) => {
-		setValue(newValue);
-		return;
-	}
-
 	return (
 		<div className='container'>
 
-			<div style={{ marginBottom: '3rem' }}>
-				<div>
-					<SegmentedSelectControl
-						{...{
-							value,
-							onChange: handleChange,
-							toggleOptions
-						}}
-					/>
-				</div>
-
-				<div className='margin-top'>
-					<SegmentedSelectControl
-						{...{
-							value,
-							onChange: handleChange,
-							toggleOptions,
-							disabled: true
-						}}
-					/>
-				</div>
-			</div>
-
 			<ButtonsShowcase />
 
-			<TextInputFieldsShowcase />
+			<InputFieldsShowcase />
 
 			<ControlsShowcase />
 
@@ -435,7 +399,7 @@ function ButtonsShowcase() {
 		</div>
 	);
 }
-function TextInputFieldsShowcase() {
+function InputFieldsShowcase() {
 	const optionsList = [
 		{
 			key: 'first_option',
@@ -470,20 +434,6 @@ function TextInputFieldsShowcase() {
 			}
 		},
 	]
-	const options = [
-		{
-			key: "first_option",
-			name: "Frist Option",
-		},
-		{
-			key: "second_option",
-			name: "Second Option",
-		},
-		{
-			key: "third_option",
-			name: "Third Option",
-		}
-	]
 	const optionsList2 = [
 		{
 			title: 'First Option Title',
@@ -512,14 +462,56 @@ function TextInputFieldsShowcase() {
 
 		},
 	]
-	const [selectedValue2, setSelectedValue2] = useState(optionsList2[0].title);
+	const options = [
+		{
+			key: "first_option",
+			name: "Option Default",
+		},
+		{
+			key: "second_option",
+			name: "Second Option",
+		},
+		{
+			key: "third_option",
+			name: "Third Option",
+		}
+	]
+	const disabledOptions = [
+		{
+			key: "first_option",
+			name: "Option Disabled",
+		}
+	]
+	const options2 = [
+		{
+			key: "first_option",
+			name: "Default Option",
+		},
+		{
+			key: "second_option",
+			name: "Second Option",
+		},
+		{
+			key: "third_option",
+			name: "Third Option",
+		}
+	]
+	const disabledOptions2 = [
+		{
+			key: "first_option",
+			name: "Option Disabled",
+		}
+	]
 
 	const [selectedValue, setSelectedValue] = useState({
 		key: optionsList[0].key,
 		name: optionsList[0].name.title,
 	});
-
+	const [selectedValue2, setSelectedValue2] = useState(optionsList2[0].title);
 	const [selectedOption, setSelectedOption] = useState(options[0]);
+	const [disabledOption, setDisabledOption] = useState(disabledOptions[0]);
+	const [selectedOption2, setSelectedOption2] = useState(options2[0]);
+	const [disabledOption2, setDisabledOption2] = useState(disabledOptions2[0]);
 
 	return (
 		<div>
@@ -563,14 +555,14 @@ function TextInputFieldsShowcase() {
 
 					<div className='components-group'>
 						<SelectControl
-							value={selectedOption}
 							options={options}
-							onChange={(target) => setSelectedOption(target.selectedItem)}
+							value={selectedOption}
+							onChange={({ selectedItem }) => setSelectedOption(selectedItem)}
 						/>
 						<SelectControl
-							value={selectedOption}
-							options={options}
-							onChange={(target) => setSelectedOption(target.selectedItem)}
+							options={disabledOptions}
+							value={disabledOption}
+							onChange={() => { }}
 							disabled
 						/>
 					</div>
@@ -582,15 +574,15 @@ function TextInputFieldsShowcase() {
 					<div className='components-group'>
 						<SelectControl
 							label="Label"
-							value={selectedOption}
-							options={options}
-							onChange={(target) => setSelectedOption(target.selectedItem)}
+							options={options2}
+							value={selectedOption2}
+							onChange={({ selectedItem }) => setSelectedOption2(selectedItem)}
 						/>
 						<SelectControl
 							label="Label"
-							value={selectedOption}
-							options={options}
-							onChange={(target) => setSelectedOption(target.selectedItem)}
+							options={disabledOptions2}
+							value={disabledOption2}
+							onChange={() => { }}
 							disabled
 						/>
 					</div>
@@ -604,8 +596,8 @@ function TextInputFieldsShowcase() {
 
 						<div className='components-group'>
 							<SelectControl
-								value={selectedValue}
 								options={optionsList}
+								value={selectedValue}
 								onChange={
 									({ selectedItem: { key, name } }) => setSelectedValue({ key, name: name.props.title })
 								}
@@ -683,11 +675,69 @@ function ControlsShowcase() {
 		setCheckboxes(updatedCheckboxes);
 	};
 
+
+	const [valueOne, setValueOne] = useState('option_1');
+	const [valueTwo, setValueTwo] = useState('disabled_1');
+	const [valueThree, setValueThree] = useState('option3_1');
+
+	const toggleOptions = [
+		{ label: 'Select Option 1', value: 'option_1' },
+		{ label: 'Select Option 2', value: 'option_2' },
+		{ label: 'Select Option 3', value: 'option_3' }
+	]
+	const toggleOptionsTwo = [
+		{ label: 'Disabled Option 1', value: 'disabled_1' },
+		{ label: 'Disabled Option 2', value: 'disabled_2' },
+		{ label: 'Disabled Option 3', value: 'disabled_3' }
+	]
+	const toggleOptionsThree = [
+		{ label: 'Option 1', value: 'option3_1' },
+		{ label: 'Option 2', value: 'option3_2' }
+	]
+
+	const handleChangeOne = (newValue) => {
+		setValueOne(newValue);
+		return;
+	}
+	const handleChangeThree = (newValue) => {
+		setValueOne(newValue);
+		return;
+	}
+
 	return (
 		<div>
 			<h2>CONTROLS</h2>
 
 			<div className='components-wrapper'>
+				<div>
+					<h4>Segmented</h4>
+
+					<div className='components-group'>
+						<SegmentedSelectControl
+							value={valueOne}
+							toggleOptions={toggleOptions}
+							onChange={handleChangeOne}
+						/>
+					</div>
+
+					<div className='components-group'>
+						<SegmentedSelectControl
+							value={valueTwo}
+							toggleOptions={toggleOptionsTwo}
+							onChange={() => { }}
+							disabled
+						/>
+					</div>
+
+					<div className='components-group'>
+						<SegmentedSelectControl
+							value={valueThree}
+							toggleOptions={toggleOptionsThree}
+							onChange={handleChangeThree}
+						/>
+					</div>
+				</div>
+
 				<div>
 					<h4>Toggle</h4>
 
