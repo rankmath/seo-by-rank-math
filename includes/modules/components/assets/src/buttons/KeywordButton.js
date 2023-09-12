@@ -8,6 +8,7 @@ import classNames from 'classnames'
  */
 import { Button, Popover } from '@wordpress/components';
 import { useState } from '@wordpress/element';
+import { useCopyToClipboard } from '@wordpress/compose';
 
 export default ({
 	keyword,
@@ -16,6 +17,15 @@ export default ({
 	...rest
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
+	const onSuccess = () => {
+		setIsCopied(true);
+
+		setTimeout(() => {
+			setIsCopied(false);
+		}, 2000);
+	};
+
+	const copyToClipboardRef = useCopyToClipboard(keyword, onSuccess);
 
 	const getButtonClasses = () => {
 		return classNames(
@@ -28,37 +38,11 @@ export default ({
 		);
 	};
 
-	const handleCopyClick = () => {
-		const textToCopy = keyword;
-
-		// Creates range to select text
-		const range = document.createRange();
-		const textElement = document.createElement('div');
-		textElement.innerText = textToCopy;
-		document.body.appendChild(textElement);
-		range.selectNode(textElement);
-
-		// Select and copy text
-		window.getSelection().removeAllRanges();
-		window.getSelection().addRange(range);
-		document.execCommand('copy');
-
-		// Clean up
-		window.getSelection().removeAllRanges();
-		document.body.removeChild(textElement);
-
-		setIsCopied(true);
-
-		setTimeout(() => {
-			setIsCopied(false);
-		}, 2000);
-	};
-
 	const buttonProps = {
 		...rest,
 		className: getButtonClasses(),
-		onClick: handleCopyClick,
-		variant: 'secondary',
+		ref: copyToClipboardRef,
+		variant: 'secondary'
 	}
 
 	return (
