@@ -1234,6 +1234,57 @@ function ScoresShowcase() {
 	)
 };
 function HorizontalTabsShowcase() {
+	const sidebarTabWithIcon = [
+		{
+			name: 'tab1',
+			icon: <TabPanelWithIcon icon='rm-icon-settings' title='First' />
+		},
+		{
+			name: 'tab2',
+			icon: <TabPanelWithIcon icon='rm-icon-settings' title='Second' />
+		},
+		{
+			name: 'tab3',
+			icon: <TabPanelWithIcon icon='rm-icon-category' title='Third' />
+		},
+		{
+			name: 'tab4',
+			icon: <TabPanelWithIcon icon='rm-icon-misc' title='Forth' />
+		}
+	];
+	const sidebarTabTextOnly = [
+		{
+			name: 'tab1',
+			title: 'First Tab',
+		},
+		{
+			name: 'tab2',
+			title: 'Second Tab',
+		},
+		{
+			name: 'tab3',
+			title: 'Third Tab',
+		}
+	];
+	const pageTabPanelTabs = [
+		{
+			name: 'tab1',
+			icon: <TabPanelWithIcon icon='rm-icon-settings' title='First Tab' />
+		},
+		{
+			name: 'tab2',
+			icon: <TabPanelWithIcon icon='rm-icon-settings' title='Second Tab' />
+		},
+		{
+			name: 'tab3',
+			icon: <TabPanelWithIcon icon='rm-icon-category' title='Third Tab' />
+		},
+		{
+			name: 'tab4',
+			icon: <TabPanelWithIcon icon='rm-icon-misc' title='Forth Tab' />
+		}
+	];
+
 	return (
 		<div>
 			<h2>HORIZONTAL TABS</h2>
@@ -1245,58 +1296,26 @@ function HorizontalTabsShowcase() {
 					<h4>Variant 1</h4>
 					<div className='components-group'>
 						<SidebarTabPanel
-							tabs={[
-								{
-									name: 'tab1',
-									icon: <TabPanelWithIcon icon='rm-icon-settings' title='First' />
-								},
-								{
-									name: 'tab2',
-									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Second' />
-								},
-								{
-									name: 'tab3',
-									icon: <TabPanelWithIcon icon='rm-icon-category' title='Third' />
-								},
-								{
-									name: 'tab4',
-									icon: <TabPanelWithIcon icon='rm-icon-misc' title='Forth' />
-								}
-							]}
+							tabs={sidebarTabWithIcon}
 							children={(tab) => (
 								<div>
 									<h5>{tab.title}</h5>
 									<p>This is the content for tab {tab.name}</p>
 								</div>
-							)
-							}
+							)}
 						/>
 					</div>
 
 					<h4>Variant 2</h4>
 					<div className='components-group'>
 						<SidebarTabPanel
-							tabs={[
-								{
-									name: 'tab1',
-									title: 'First Tab',
-								},
-								{
-									name: 'tab2',
-									title: 'Second Tab',
-								},
-								{
-									name: 'tab3',
-									title: 'Third Tab',
-								}
-							]}
+							tabs={sidebarTabTextOnly}
 							children={(tab) => (
 								<div>
 									<h5>{tab.title}</h5>
 									<p>This is the content for tab {tab.name}</p>
 								</div>
-							)
-							}
+							)}
 						/>
 					</div>
 				</div>
@@ -1307,24 +1326,7 @@ function HorizontalTabsShowcase() {
 
 					<div className='components-group'>
 						<PageTabPanel
-							tabs={[
-								{
-									name: 'tab1',
-									icon: <TabPanelWithIcon icon='rm-icon-settings' title='First Tab' />
-								},
-								{
-									name: 'tab2',
-									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Second Tab' />
-								},
-								{
-									name: 'tab3',
-									icon: <TabPanelWithIcon icon='rm-icon-category' title='Third Tab' />
-								},
-								{
-									name: 'tab4',
-									icon: <TabPanelWithIcon icon='rm-icon-misc' title='Fourth Tab' />
-								}
-							]}
+							tabs={pageTabPanelTabs}
 						/>
 					</div>
 				</div>
@@ -1333,6 +1335,18 @@ function HorizontalTabsShowcase() {
 	)
 };
 function VerticalTabsShowcase() {
+	const tabItems = [
+		{ title: 'Frist Tab', icon: 'rm-icon-settings' },
+		{ title: 'Second Tab', icon: 'rm-icon-settings' },
+		{ title: 'Third Tab', icon: 'rm-icon-settings' },
+		{ title: 'Fourth Tab', icon: 'rm-icon-settings' },
+		{ title: 'Fifth Tab', icon: 'rm-icon-settings' },
+		{ title: 'Sixth Tab', icon: 'rm-icon-settings' },
+		{ title: 'Seventh Tab', icon: 'rm-icon-settings' },
+		{ title: 'Eight Tab', icon: 'rm-icon-settings' },
+		{ title: 'Ninth Tab', icon: 'rm-icon-settings' },
+	];
+
 	return (
 		<>
 			<h2>VERTICAL TABS</h2>
@@ -1343,17 +1357,7 @@ function VerticalTabsShowcase() {
 
 					<div className='components-group'>
 						<SingleSectionTabPanel
-							menuItems={[
-								{ title: 'Frist Tab', icon: 'rm-icon-settings' },
-								{ title: 'Second Tab', icon: 'rm-icon-settings' },
-								{ title: 'Third Tab', icon: 'rm-icon-settings' },
-								{ title: 'Fourth Tab', icon: 'rm-icon-settings' },
-								{ title: 'Fifth Tab', icon: 'rm-icon-settings' },
-								{ title: 'Sixth Tab', icon: 'rm-icon-settings' },
-								{ title: 'Seventh Tab', icon: 'rm-icon-settings' },
-								{ title: 'Eight Tab', icon: 'rm-icon-settings' },
-								{ title: 'Ninth Tab', icon: 'rm-icon-settings' },
-							]}
+							menuItems={tabItems}
 						/>
 					</div>
 				</div>
@@ -1364,28 +1368,18 @@ function VerticalTabsShowcase() {
 					<div className='components-group'>
 						<MultiSectionTabPanel>
 							<SingleSectionTabPanel
-								menuItems={[
-									{ title: 'Frist Tab', icon: 'rm-icon-settings' },
-									{ title: 'Second Tab', icon: 'rm-icon-settings' },
-									{ title: 'Third Tab', icon: 'rm-icon-settings' },
-									{ title: 'Fourth Tab', icon: 'rm-icon-settings' },
-								]}
+								menuItems={tabItems.slice(0, 4)}
+							/>
+
+							<SingleSectionTabPanel
+								label='Section Title'
+								menuItems={tabItems.slice(4, 7)}
 							/>
 
 							<SingleSectionTabPanel
 								label='Section Title'
 								menuItems={[
-									{ title: 'Fifth Tab', icon: 'rm-icon-settings' },
-									{ title: 'Sixth Tab', icon: 'rm-icon-settings' },
-									{ title: 'Seventh Tab', icon: 'rm-icon-settings' },
-								]}
-							/>
-
-							<SingleSectionTabPanel
-								label='Section Title'
-								menuItems={[
-									{ title: 'Eight Tab', icon: 'rm-icon-settings' },
-									{ title: 'Ninth Tab', icon: 'rm-icon-settings' },
+									...tabItems.slice(7, 9),
 									{ title: 'Tab Panel with Long Double Line Text', icon: 'rm-icon-settings' },
 								]}
 							/>
@@ -1397,6 +1391,21 @@ function VerticalTabsShowcase() {
 	)
 };
 function FilterAndSwitchTabsShowcase() {
+	const filterMenuTabs = [
+		{
+			name: 'tab1',
+			title: 'All',
+		},
+		{
+			name: 'tab2',
+			title: 'First Content',
+		},
+		{
+			name: 'tab3',
+			title: 'Third',
+		}
+	];
+
 	return (
 		<>
 			<h2>FILTER AND SWITCH TABS</h2>
@@ -1407,20 +1416,7 @@ function FilterAndSwitchTabsShowcase() {
 
 					<div className='components-group'>
 						<FilterMenus
-							tabs={[
-								{
-									name: 'tab1',
-									title: 'All',
-								},
-								{
-									name: 'tab2',
-									title: 'First Content',
-								},
-								{
-									name: 'tab3',
-									title: 'Third',
-								}
-							]}
+							tabs={filterMenuTabs}
 							children={(tab) => (
 								<div>
 									<h5>{tab.title}</h5>
@@ -1437,20 +1433,7 @@ function FilterAndSwitchTabsShowcase() {
 					<div className='components-group'>
 						<FilterMenus
 							variant='blue'
-							tabs={[
-								{
-									name: 'tab1',
-									title: 'All',
-								},
-								{
-									name: 'tab2',
-									title: 'First Content',
-								},
-								{
-									name: 'tab3',
-									title: 'Third',
-								}
-							]}
+							tabs={filterMenuTabs}
 							children={(tab) => (
 								<div>
 									<h5>{tab.title}</h5>
@@ -1562,6 +1545,28 @@ function FilterAndSwitchTabsShowcase() {
 	)
 }
 function MenuListShowcase() {
+	const icon = 'rm-icon-settings'
+
+	const sidebarMenuListItems = [
+		{ title: 'Frist Option List Item', icon },
+		{ title: 'Second Option List Item', icon },
+		{ title: 'Third Option List Item', icon },
+		{ title: 'Fourth Option List Item', icon },
+		{ title: 'Fifth Option List Item', icon },
+		{ title: 'Sixth Option List Item', icon },
+	];
+
+	const menuListPopupItems = [
+		{ title: 'Frist Option Item', icon },
+		{ title: 'Second Option Item', icon },
+		{ title: 'Fourth Option Item', icon },
+		{ title: 'Fifth Option Item', icon },
+		{ title: 'Sixth Option Item', icon },
+		{ title: 'Third Option Item', icon },
+		{ title: 'Second Option Item', icon },
+		{ title: 'Third Option Item', icon },
+	];
+
 	return (
 		<>
 			<h2>MENU LIST ITEMS</h2>
@@ -1572,14 +1577,7 @@ function MenuListShowcase() {
 
 					<div className='components-group'>
 						<SidebarMenuList
-							menuItems={[
-								{ title: 'Frist Option List Item', icon: 'rm-icon-settings' },
-								{ title: 'Second Option List Item', icon: 'rm-icon-settings' },
-								{ title: 'Third Option List Item', icon: 'rm-icon-settings' },
-								{ title: 'Fourth Option List Item', icon: 'rm-icon-settings' },
-								{ title: 'Fifth Option List Item', icon: 'rm-icon-settings' },
-								{ title: 'Sixth Option List Item', icon: 'rm-icon-settings' },
-							]}
+							menuItems={sidebarMenuListItems}
 						/>
 					</div>
 				</div>
@@ -1590,16 +1588,7 @@ function MenuListShowcase() {
 
 					<div className='components-group'>
 						<MenuListPopup
-							menuItems={[
-								{ title: 'Frist Option Item', icon: 'rm-icon-settings' },
-								{ title: 'Second Option Item', icon: 'rm-icon-settings' },
-								{ title: 'Fourth Option Item', icon: 'rm-icon-settings' },
-								{ title: 'Fifth Option Item', icon: 'rm-icon-settings' },
-								{ title: 'Sixth Option Item', icon: 'rm-icon-settings' },
-								{ title: 'Third Option Item', icon: 'rm-icon-settings' },
-								{ title: 'Second Option Item', icon: 'rm-icon-settings' },
-								{ title: 'Third Option Item', icon: 'rm-icon-settings' },
-							]}
+							menuItems={menuListPopupItems}
 						/>
 					</div>
 				</div>
