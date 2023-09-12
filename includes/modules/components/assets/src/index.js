@@ -979,138 +979,135 @@ function UploadersShowcase() {
 	)
 };
 function NoticeShowcase() {
+	const noticeAction = [
+		{
+			label: "Read More",
+			url: "https://wordpress.org"
+		}
+	];
+
 	return (
 		<>
 			<h2>NOTICE BANNERS</h2>
 
 			<div className='components-wrapper'>
 				<div className='notice-group'>
-					<Notice
-						status='error'
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
-					</Notice>
+					<div>
+						<h4>Error</h4>
 
-					<Notice
-						status='error'
-						icon='rm-icon-trash'
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
-					</Notice>
+						<div>
+							<Notice
+								status='error'
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum.
+							</Notice>
+
+							<div className='margin-top-sm' />
+
+							<Notice
+								status='error'
+								icon='rm-icon-trash'
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing ipsum dolor sit consectetur elit ipsum dolor sit consectetur ipsum.
+							</Notice>
+						</div>
+					</div>
 
 
-					<Notice
-						status='warning'
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
-					</Notice>
+					<div>
+						<h4>Warning</h4>
 
-					<Notice
-						status='warning'
-						icon='rm-icon-trash'
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
-					</Notice>
+						<div>
+							<Notice
+								status='warning'
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum.
+							</Notice>
+
+							<div className='margin-top-sm' />
+
+							<Notice
+								status='warning'
+								icon='rm-icon-trash'
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing ipsum dolor sit consectetur elit ipsum dolor sit consectetur ipsum.
+							</Notice>
+						</div>
+					</div>
 
 
-					<Notice
-						status='success'
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
-					</Notice>
+					<div>
+						<h4>Success</h4>
 
-					<Notice
-						status='success'
-						icon='rm-icon-trash'
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
-					</Notice>
+						<div>
+							<Notice
+								status='success'
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum.
+							</Notice>
+
+							<div className='margin-top-sm' />
+
+							<Notice
+								status='success'
+								icon='rm-icon-trash'
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing ipsum dolor sit consectetur elit ipsum dolor sit consectetur ipsum.
+							</Notice>
+						</div>
+					</div>
 
 
-					<Notice
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
-					</Notice>
+					<div>
+						<h4>Info</h4>
 
-					<Notice
-						icon='rm-icon-trash'
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur ipsum dolor sit consectetur ipsum.
-					</Notice>
+						<div>
+							<Notice
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum.
+							</Notice>
+
+							<div className='margin-top-sm' />
+
+							<Notice
+								icon='rm-icon-trash'
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing ipsum dolor sit consectetur elit ipsum dolor sit consectetur ipsum.
+							</Notice>
+						</div>
+					</div>
 
 
-					<Notice
-						status='info-grey'
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
-					</Notice>
+					<div>
+						<h4>Info Grey</h4>
 
-					<Notice
-						status='info-grey'
-						icon='rm-icon-trash'
-						actions={[
-							{
-								label: "Read More",
-								url: "https://wordpress.org"
-							}
-						]}
-					>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum dolor sit consectetur ipsum.
-					</Notice>
+						<div>
+							<Notice
+								status='info-grey'
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum.
+							</Notice>
+
+							<div className='margin-top-sm' />
+
+							<Notice
+								status='info-grey'
+								icon='rm-icon-trash'
+								actions={noticeAction}
+							>
+								Lorem ipsum dolor sit, amet consectetur adipisicing ipsum dolor sit consectetur elit ipsum dolor sit consectetur ipsum.
+							</Notice>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>
