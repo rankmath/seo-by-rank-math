@@ -44,7 +44,7 @@
 
 // Box shadow mixins
 @mixin box-shadow-small() {
-	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+	box-shadow: 0 1px 3px 0 rgba($black, 0.1), 0 1px 2px -1px rgba($black, 0.1);
 }
 @mixin box-shadow-primary() {
 	box-shadow: 0 0 0 1px $white, 0 0 0 1.5px $blue;

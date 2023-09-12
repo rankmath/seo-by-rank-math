@@ -26,7 +26,7 @@
 	
 	color: $color;
 	box-shadow: 0 0 0 1px $color-box-shadow;
-  font-size: 11px;
+	font-size: 11px;
 
 	&:hover:not(:disabled) {
 		color: nth($hover, 1);
@@ -105,7 +105,7 @@ $tertiary-btn-color: $gray;
 
 .components-button {
 	height: 30px;
-  padding: 6px 16px;
+	padding: 6px 16px;
 	border-radius: 1px;
 
 	@include has-icon-style(

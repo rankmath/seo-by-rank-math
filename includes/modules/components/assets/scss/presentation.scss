@@ -18,7 +18,7 @@
 
 	.components-group {
 		display: flex;
-		align-items: end;
+		align-items: flex-end;
 		gap: 1rem;
 		margin-bottom: 2rem;
 	}
@@ -40,7 +40,7 @@
 		gap: 1rem;
 	}
 
-	h2{
+	h2 {
 		font-size: 1.4rem;
 		color: #757575;
 	}
