@@ -76,6 +76,7 @@ function ButtonsShowcase() {
 					<div className="button-group">
 						<div>
 							<p>Primary</p>
+
 							<div>
 								<Button size='large' disabled>Label</Button>
 							</div>
@@ -95,6 +96,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Primary Outline</p>
+
 							<div>
 								<Button variant='primary-outline' size='large' disabled>Label</Button>
 							</div>
@@ -114,6 +116,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Secondary</p>
+
 							<div>
 								<Button variant='secondary' size='large' disabled>Label</Button>
 							</div>
@@ -133,6 +136,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Secondary Grey</p>
+
 							<div>
 								<Button variant='secondary-grey' size='large' disabled>Label</Button>
 							</div>
@@ -152,6 +156,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Tertiary Outline</p>
+
 							<div>
 								<Button variant='tertiary-outline' size='large' disabled>Label</Button>
 							</div>
@@ -179,6 +184,7 @@ function ButtonsShowcase() {
 					<div className="button-group">
 						<div>
 							<p>Primary</p>
+
 							<div>
 								<Button size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
@@ -198,6 +204,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Primary Outline</p>
+
 							<div>
 								<Button variant='primary-outline' size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
@@ -217,6 +224,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Secondary</p>
+
 							<div>
 								<Button variant='secondary' size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
@@ -236,6 +244,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Secondary Grey</p>
+
 							<div>
 								<Button variant='secondary-grey' size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
@@ -255,6 +264,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Tertiary Outline</p>
+
 							<div>
 								<Button variant='tertiary-outline' size='large' icon='rm-icon-category' disabled>Label</Button>
 							</div>
@@ -282,6 +292,7 @@ function ButtonsShowcase() {
 					<div className="icon-button-group">
 						<div>
 							<p>Primary</p>
+
 							<div>
 								<Button size='large' icon='rm-icon-category' disabled />
 							</div>
@@ -301,6 +312,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Primary Outline</p>
+
 							<div>
 								<Button variant='primary-outline' size='large' icon='rm-icon-category' disabled />
 							</div>
@@ -320,6 +332,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Secondary</p>
+
 							<div>
 								<Button variant='secondary' size='large' icon='rm-icon-category' disabled />
 							</div>
@@ -339,6 +352,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Secondary Grey</p>
+
 							<div>
 								<Button variant='secondary-grey' size='large' icon='rm-icon-category' disabled />
 							</div>
@@ -358,6 +372,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Tertiary Outline</p>
+
 							<div>
 								<Button variant='tertiary-outline' size='large' icon='rm-icon-category' disabled />
 							</div>
@@ -377,6 +392,7 @@ function ButtonsShowcase() {
 
 						<div>
 							<p>Tertiary</p>
+
 							<div>
 								<Button variant='tertiary' size='large' icon='rm-icon-category' disabled />
 							</div>
@@ -495,7 +511,6 @@ function InputFieldsShowcase() {
 			}
 		}
 	]
-
 	const [select3Value, setSelect3Value] = useState({
 		key: select3Options[0].key,
 		name: select3Options[0].name.title
@@ -1161,8 +1176,10 @@ function ScoresShowcase() {
 				<div>
 					<h4>Content AI Score Bar</h4>
 
-					<div className="components-group">
-						<ContentAIScoreBar value={2} />
+					<div className="components-group margin-top-sm">
+						<div className="margin-top">
+							<ContentAIScoreBar value={2} />
+						</div>
 					</div>
 
 					<div className="components-group margin-top">
@@ -1297,12 +1314,6 @@ function HorizontalTabsShowcase() {
 					<div className='components-group'>
 						<SidebarTabPanel
 							tabs={sidebarTabWithIcon}
-							children={(tab) => (
-								<div>
-									<h5>{tab.title}</h5>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)}
 						/>
 					</div>
 
@@ -1310,18 +1321,11 @@ function HorizontalTabsShowcase() {
 					<div className='components-group'>
 						<SidebarTabPanel
 							tabs={sidebarTabTextOnly}
-							children={(tab) => (
-								<div>
-									<h5>{tab.title}</h5>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)}
 						/>
 					</div>
 				</div>
 
-
-				<div>
+				<div className='margin-top'>
 					<h4>Page & Modal Tabs</h4>
 
 					<div className='components-group'>
@@ -1406,114 +1410,99 @@ function FilterAndSwitchTabsShowcase() {
 		}
 	];
 
+	const categoryTab = <TabPanelWithIcon icon='rm-icon-category' title='Content' />;
+	const settingsTab = <TabPanelWithIcon icon='rm-icon-settings' title='Content' />;
+	const switchTabBlack = [
+		{
+			name: 'tab5',
+			icon: categoryTab
+		},
+		{
+			name: 'tab6',
+			icon: settingsTab
+		}
+	];
+	const switchTabBlackIconOnly = [
+		{
+			name: 'tab1',
+			icon: categoryTab
+		},
+		{
+			name: 'tab2',
+			icon: settingsTab
+		}
+	];
+	const switchTabBlue = [
+		{
+			name: 'tab7',
+			icon: categoryTab
+		},
+		{
+			name: 'tab8',
+			icon: settingsTab
+		}
+	];
+	const swtichTabBlueIconOnly = [
+		{
+			name: 'tab3',
+			icon: categoryTab
+		},
+		{
+			name: 'tab4',
+			icon: settingsTab
+		}
+	];
+
 	return (
 		<>
 			<h2>FILTER AND SWITCH TABS</h2>
 
 			<div className='components-wrapper'>
 				<div>
-					<h4>Filter Menu - Black</h4>
+					<h4>Filter Menus - Black</h4>
 
 					<div className='components-group'>
 						<FilterMenus
 							tabs={filterMenuTabs}
-							children={(tab) => (
-								<div>
-									<h5>{tab.title}</h5>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
-						/></div>
+						/>
+					</div>
 				</div>
 
-				<div>
-					<h4>Filter Menu - Blue</h4>
+				<div className='margin-top'>
+					<h4>Filter Menus - Blue</h4>
 
 					<div className='components-group'>
 						<FilterMenus
 							variant='blue'
 							tabs={filterMenuTabs}
-							children={(tab) => (
-								<div>
-									<h5>{tab.title}</h5>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
-						/></div>
+						/>
+					</div>
 				</div>
 
-
-				<div>
+				<div className='margin-top'>
 					<h4>Switch Tabs - Black</h4>
 
 					<div className='components-group'>
 						<SwitchTaps
-							tabs={[
-								{
-									name: 'tab5',
-									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
-								},
-								{
-									name: 'tab6',
-									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
+							tabs={switchTabBlack}
 						/>
 					</div>
 
 					<div className='components-group'>
 						<SwitchTaps
 							iconOnly
-							tabs={[
-								{
-									name: 'tab1',
-									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
-								},
-								{
-									name: 'tab2',
-									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
+							tabs={switchTabBlackIconOnly}
 						/>
 					</div>
 				</div>
 
-				<div>
+				<div className='margin-top'>
 					<h4>Switch Tabs - Blue</h4>
 
 					<div className='components-group'>
 						<SwitchTaps
 							variant='blue'
-							tabs={[
-								{
-									name: 'tab7',
-									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
-								},
-								{
-									name: 'tab8',
-									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
+							tabs={switchTabBlue}
 						/>
 					</div>
 
@@ -1521,22 +1510,7 @@ function FilterAndSwitchTabsShowcase() {
 						<SwitchTaps
 							iconOnly
 							variant='blue'
-							tabs={[
-								{
-									name: 'tab3',
-									icon: <TabPanelWithIcon icon='rm-icon-category' title='Content' />
-								},
-								{
-									name: 'tab4',
-									icon: <TabPanelWithIcon icon='rm-icon-settings' title='Content' />
-								}
-							]}
-							children={(tab) => (
-								<div>
-									<p>This is the content for tab {tab.name}</p>
-								</div>
-							)
-							}
+							tabs={swtichTabBlueIconOnly}
 						/>
 					</div>
 				</div>
