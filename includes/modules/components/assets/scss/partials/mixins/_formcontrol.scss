@@ -24,26 +24,32 @@
 }
 
 // Input style mixin
+@mixin input-box-shadow() {
+	box-shadow: 0 0 0 1px $blue;
+};
+@mixin input-placeholder() {
+	&::placeholder {
+		@include font-size-small();
+	}
+}
+@mixin input-placeholder-disabled-color() {
+	&::placeholder {
+		color: rgba($gray, 0.8);
+	}
+}
 @mixin input-style() {
 	@include border-default();
 	@include input-min-height();
 	@include input-min-width();
+	@include input-placeholder();
 	padding: 6px 14px;
 
 	&:focus,
 	&:active:not(:disabled),
 	&:focus:not(:disabled) {
+		@include input-box-shadow();
 		border-color: $blue;
 		outline: 2px solid transparent;
-		box-shadow: 0 0 0 1px $blue;
-	}
-
-	&::placeholder {
-		@include font-size-small();
-	}
-
-	&[type="number"] {
-		padding-right: 3.7rem;
 	}
 
 	&:disabled {

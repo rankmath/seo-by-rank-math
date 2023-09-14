@@ -37,6 +37,7 @@ import SidebarMenuList from './tabs/menu-lists/SidebarMenuList';
 import MenuListPopup from './tabs/menu-lists/MenuListPopup';
 import SelectControlWithSearchbox from './select/SelectControlWithSearchbox';
 import SegmentedSelectControl from './select/SegmentedSelectControl';
+import NumberControl from './inputs/NumberControl';
 
 const AllComponents = () => {
 	return (
@@ -416,6 +417,10 @@ function ButtonsShowcase() {
 	);
 }
 function InputFieldsShowcase() {
+	// Number Control
+	const [numberControlValue, setNumberControlValue] = useState(200);
+
+
 	// Dropdown Select 1
 	const select1Options = [
 		{
@@ -439,6 +444,7 @@ function InputFieldsShowcase() {
 	]
 	const [select1Value, setSelect1Value] = useState(select1Options[0]);
 	const [disabledSelect1Value, setDisabledSelect1Value] = useState(select1DisabledOptions[0]);
+	const handleSelectChange = (setter) => ({ selectedItem }) => setter(selectedItem);
 
 
 	// Dropdown Select 2
@@ -519,6 +525,8 @@ function InputFieldsShowcase() {
 		key: select3DisabledOptions[0].key,
 		name: select3DisabledOptions[0].name.title
 	});
+	const handleSelect3Change = (setter) => ({ selectedItem: { key, name } }) => setter({ key, name: name.props.title });
+
 
 
 	// Dropdown Select 3 Alternative
@@ -583,8 +591,8 @@ function InputFieldsShowcase() {
 					<h4>Stepper</h4>
 
 					<div className='components-group'>
-						<TextControl type='number' placeholder='200' />
-						<TextControl type='number' placeholder='200' disabled />
+						<NumberControl value={numberControlValue} onChange={setNumberControlValue} placeholder='200' />
+						<NumberControl placeholder='200' disabled />
 					</div>
 				</div>
 
@@ -604,12 +612,12 @@ function InputFieldsShowcase() {
 						<SelectControl
 							options={select1Options}
 							value={select1Value}
-							onChange={({ selectedItem }) => setSelect1Value(selectedItem)}
+							onChange={handleSelectChange(setSelect1Value)}
 						/>
 						<SelectControl
 							options={select1DisabledOptions}
 							value={disabledSelect1Value}
-							onChange={({ selectedItem }) => setDisabledSelect1Value(selectedItem)}
+							onChange={handleSelectChange(setDisabledSelect1Value)}
 							disabled
 						/>
 					</div>
@@ -623,13 +631,13 @@ function InputFieldsShowcase() {
 							label="Label"
 							options={select2Options}
 							value={select2Value}
-							onChange={({ selectedItem }) => setSelect2Value(selectedItem)}
+							onChange={handleSelectChange(setSelect2Value)}
 						/>
 						<SelectControl
 							label="Label"
 							options={select2DisabledOptions}
 							value={disabledSelect2Value}
-							onChange={({ selectedItem }) => setDisabledSelect2Value(selectedItem)}
+							onChange={handleSelectChange(setDisabledSelect2Value)}
 							disabled
 						/>
 					</div>
@@ -645,9 +653,7 @@ function InputFieldsShowcase() {
 							<SelectControl
 								options={select3Options}
 								value={select3Value}
-								onChange={
-									({ selectedItem: { key, name } }) => setSelect3Value({ key, name: name.props.title })
-								}
+								onChange={handleSelect3Change(setSelect3Value)}
 								withSearch
 							/>
 						</div>
@@ -655,9 +661,7 @@ function InputFieldsShowcase() {
 							<SelectControl
 								options={select3DisabledOptions}
 								value={disabledSelect3Value}
-								onChange={
-									({ selectedItem: { key, name } }) => setDisabledSelect3Value({ key, name: name.props.title })
-								}
+								onChange={handleSelect3Change(setDisabledSelect3Value)}
 								withSearch
 								disabled
 							/>
@@ -790,6 +794,7 @@ function ControlsShowcase() {
 							toggleOptions={segmentedSelectOptions2}
 							value={segmentedSelectValue2}
 							onChange={setSegmentedSelectValue2}
+							width='17rem'
 						/>
 					</div>
 				</div>

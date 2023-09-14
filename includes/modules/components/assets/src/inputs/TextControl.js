@@ -7,7 +7,6 @@ import classNames from 'classnames';
  * WordPress dependencies
  */
 import { TextControl } from '@wordpress/components';
-import { useRef } from '@wordpress/element';
 
 export default ({
 	type = 'text',
@@ -23,34 +22,19 @@ export default ({
 	isError,
 	...rest
 }) => {
-	const inputRef = useRef(null);
-
-	const handleIncrement = () => {
-		if (inputRef.current) {
-			inputRef.current.stepUp();
-		}
-	};
-
-	const handleDecrement = () => {
-		if (inputRef.current) {
-			inputRef.current.stepDown();
-		}
-	};
-
 	const getTextControlClasses = () => {
 		return classNames(
 			className,
 			{
 				'is-success': isSuccess && !isError,
-				'is-error': isError && !isSuccess,
-				'hide-default-number-controls': type === 'number'
+				'is-error': isError && !isSuccess
 			}
 		);
 	};
 
 	const textControlProps = {
+		...rest,
 		className: getTextControlClasses(),
-		ref: inputRef,
 		type,
 		onChange,
 		value,
@@ -58,8 +42,7 @@ export default ({
 		hideLabelFromVision,
 		label,
 		placeholder,
-		disabled,
-		...rest
+		disabled
 	}
 
 	return (
@@ -79,20 +62,6 @@ export default ({
 					<i className="rm-icon-trash text-control-icon__validation is-error"></i>
 				</div>
 			}
-
-			{(type === 'number') && (
-				<div className='text-control-icon custom-number-control'>
-					<i
-						onClick={handleIncrement}
-						className={`rm-icon-plus custom-number-control__icon ${disabled ? 'is-disabled' : ''}`}>
-					</i>
-
-					<i
-						onClick={handleDecrement}
-						className={`rm-icon-trash custom-number-control__icon ${disabled ? 'is-disabled' : ''}`}>
-					</i>
-				</div>
-			)}
 		</div>
 	)
 }

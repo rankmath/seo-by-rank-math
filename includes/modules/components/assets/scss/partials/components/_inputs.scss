@@ -1,0 +1,114 @@
+// Text Control
+.text-control-container {
+	position: relative;
+
+	.components-base-control {
+		&.is-success {
+			@include text-control-validation($success, $success-thin);
+		}
+
+		&.is-error {
+			@include text-control-validation($error-tertiary, $error-lightest);
+		}
+
+		&__field {
+			margin-bottom: 0px;
+
+			.components-textarea-control__input,
+			.components-text-control__input {
+				@include input-style();
+				margin: 0;
+
+				&:disabled {
+					@include disabled-border-color();
+					@include input-placeholder-disabled-color();
+				}
+			}
+		}
+	}
+
+	.text-control-icon {
+		@include center-float-vertically();
+		right: 0.5rem;
+
+		&__validation {
+			@include font-size-small();
+
+			&.is-error {
+				color: $error-tertiary;
+			}
+
+			&.is-success {
+				color: $success;
+			}
+		}
+	}
+}
+
+// Number Control 
+.number-control-container {
+	.components-base-control__field {
+		.components-input-control__container {
+			@include input-min-width();
+
+			.components-input-control__input {
+				@include input-min-height();
+				@include input-placeholder();
+				padding-left: 16px;
+			}
+
+			.components-input-control__suffix {
+				.components-button {
+					&.is-small.has-icon:not(.has-text) {
+						@include remove-box-shadow();
+						padding: 12px 4px;
+						color: $blue;
+
+						&:hover {
+							background-color: $blue-lightest;
+						}
+					}
+				}
+			}
+
+			.css-14u9s2n {
+				@include border-default();
+			}
+
+			.css-1drkk0u {
+				@include input-box-shadow();
+				border-color: $blue;
+			}
+		}
+	}
+
+	&.is-disabled {
+		.components-base-control__field {
+			.components-input-control__container {
+				@include disabled-style();
+
+				.components-input-control__input {
+					@include input-placeholder-disabled-color();
+				}
+
+				.components-input-control__suffix {
+					pointer-events: none;
+
+					.components-button {
+						&.is-small.has-icon:not(.has-text) {
+							color: rgba($gray, 0.8) !important;
+
+							&:hover {
+								background-color: transparent;
+							}
+						}
+					}
+				}
+
+				.css-25yejt {
+					@include disabled-border-color();
+				}
+			}
+		}
+	}
+}

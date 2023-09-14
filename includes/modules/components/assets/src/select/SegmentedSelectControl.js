@@ -10,19 +10,27 @@ import {
 export default ({
 	disabled = false,
 	toggleOptions,
+	width = '35rem',
 	value,
-	onChange
+	onChange,
+	className,
+	...rest
 }) => {
 	const toggleGroupControlProps = {
+		...rest,
 		value,
 		onChange,
+		className,
 		__nextHasNoMarginBottom: true,
 		isBlock: true,
 		"aria-disabled": disabled,
 	}
 
 	return (
-		<Disabled isDisabled={disabled}>
+		<Disabled
+			isDisabled={disabled}
+			style={{ width }}
+		>
 			<div className="segemented-select-control">
 				<ToggleGroupControl
 					{...toggleGroupControlProps}

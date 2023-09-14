@@ -381,8 +381,6 @@
 
 // Segmented Select Control
 .segemented-select-control {
-	width: 35rem;
-
 	.css-zjik7 {
 		display: none; //Hides label for the control
 	}
@@ -393,6 +391,10 @@
 
 		&:hover {
 			border-color: $gray-dark;
+		}
+
+		&:focus {
+			box-shadow: none;
 		}
 
 		&[aria-disabled="true"] {
@@ -418,6 +420,10 @@
 				&:hover {
 					background-color: $black-light;
 					color: $white;
+				}
+
+				~ .components-toggle-group-control:focus {
+					box-shadow: none;
 				}
 			}
 
