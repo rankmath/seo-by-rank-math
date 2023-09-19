@@ -146,7 +146,7 @@ class Taxonomy implements Provider {
 						'lastmod' => $query->have_posts() ? $query->posts[0]->post_modified_gmt : $last_modified_gmt,
 					],
 					'term',
-					$tax_name,
+					$tax_name
 				);
 
 				if ( ! $item ) {
