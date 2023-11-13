@@ -117,6 +117,16 @@ class Rest extends WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
+			'/savePrompts',
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'save_prompts' ],
+				'permission_callback' => [ $this, 'has_permission' ],
+			]
+		);
+
+		register_rest_route(
+			$this->namespace,
 			'/pingContentAI',
 			[
 				'methods'             => WP_REST_Server::READABLE,
@@ -338,6 +348,22 @@ class Rest extends WP_REST_Controller {
 		}
 
 		return Helper::update_prompts( $prompt );
+	}
+
+	/**
+	 * Save the Prompts.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function save_prompts( WP_REST_Request $request ) {
+		$prompts = $request->get_param( 'prompts' );
+		if ( empty( $prompts ) ) {
+			return false;
+		}
+
+		return Helper::save_default_prompts( $prompts );
 	}
 
 	/**

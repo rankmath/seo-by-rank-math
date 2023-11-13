@@ -61,7 +61,7 @@ class Event_Scheduler {
 
 		$this->action( 'rank_math/content-ai/update_prompts', 'update_prompts_data' );
 		$this->action( 'rank_math/content-ai/update_plan', 'update_content_ai_plan' );
-		$this->action( 'admin_init', 'update_prompts_on_new_site' );
+		$this->action( 'admin_footer', 'update_prompts_on_new_site' );
 	}
 
 	/**
@@ -74,26 +74,21 @@ class Event_Scheduler {
 			return;
 		}
 
-		$prompt_data = [];
-		$data        = wp_remote_get( 'https://rankmath.com/wp-json/contentai/v1/defaultPrompts' );
-		$data        = wp_remote_retrieve_body( $data );
+		$prompt_data   = [];
+		$data          = wp_remote_get( 'https://rankmath.com/wp-json/contentai/v1/defaultPrompts' );
+		$response_code = wp_remote_retrieve_response_code( $data );
+		if ( 200 !== $response_code ) {
+			return;
+		}
 
+		update_option( 'rank_math_prompts_updated', true );
+		$data = wp_remote_retrieve_body( $data );
+		$data = json_decode( $data, true );
 		if ( empty( $data ) ) {
 			return;
 		}
 
-		$custom_prompts = array_map(
-			function( $prompt ) {
-				return $prompt['PromptCategory'] === 'custom' ? $prompt : false;
-			},
-			Helper::get_prompts()
-		);
-
-		if ( ! empty( $custom_prompts ) ) {
-			$custom_prompts = array_values( array_filter( $custom_prompts ) );
-		}
-
-		update_option( 'rank_math_content_ai_prompts', array_merge( json_decode( $data, true ), $custom_prompts ) );
+		Helper::save_default_prompts( $data );
 	}
 
 	/**
@@ -113,7 +108,7 @@ class Event_Scheduler {
 	 */
 	public function update_prompts_on_new_site() {
 		$prompts = Helper::get_prompts();
-		if ( ! empty( $prompts ) ) {
+		if ( get_option( 'rank_math_prompts_updated' ) || ! empty( $prompts ) ) {
 			return;
 		}
 

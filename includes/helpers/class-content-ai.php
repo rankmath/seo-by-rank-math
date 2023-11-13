@@ -283,6 +283,32 @@ trait Content_AI {
 	}
 
 	/**
+	 * Function to save the default prompts data.
+	 *
+	 * @param array $prompts Prompt data.
+	 *
+	 * @return array
+	 */
+	public static function save_default_prompts( $prompts ) {
+		$saved_prompts  = self::get_prompts();
+		$custom_prompts = ! is_array( $saved_prompts ) ? [] : array_map(
+			function( $prompt ) {
+				return $prompt['PromptCategory'] === 'custom' ? $prompt : false;
+			},
+			$saved_prompts
+		);
+
+		if ( ! empty( $custom_prompts ) ) {
+			$custom_prompts = array_values( array_filter( $custom_prompts ) );
+		}
+
+		$prompts = array_merge( $prompts, $custom_prompts );
+		update_option( self::$prompt_key, $prompts );
+
+		return $prompts;
+	}
+
+	/**
 	 * Function to update the prompts data.
 	 *
 	 * @param string $prompt Prompt name.

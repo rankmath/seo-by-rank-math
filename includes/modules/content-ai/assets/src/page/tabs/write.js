@@ -140,6 +140,7 @@ const Write = ( { hasContentAiError = false } ) => {
 						</>
 					}
 				</Button>
+				<p style={ { marginTop: '10px', opacity: '0.7' } }><em>{ __( '1 Word Output = 1 Credit', 'rank-math' ) }</em></p>
 			</div>
 			{ hasContentAiError && <ErrorMessage /> }
 		</>

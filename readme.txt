@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.3
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.201
+Stable tag: 1.0.201.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -589,6 +589,10 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 - Fixed: `wplink` script was causing issues on the Media page on some setups
 - Fixed: Attachment posts were displaying a blank page when the [Redirect Orphan Attachments field](https://rankmath.com/kb/general-settings/#redirect-orphan-media) was empty
 - Fixed: Console warning related to the [Table of Contents block](https://rankmath.com/kb/table-of-contents-block/) in WordPress 6.3
+
+= 1.0.201.1 [Sept 07, 2023] =
+- Added: A new button to manually update the AI Prompt Library
+- Fixed: PHP error related to PHP v8.2 on some setups
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

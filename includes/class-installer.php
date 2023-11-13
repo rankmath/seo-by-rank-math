@@ -603,7 +603,8 @@ class Installer {
 		$midnight = strtotime( 'tomorrow midnight' );
 		foreach ( $this->get_cron_jobs() as $job => $recurrence ) {
 			if ( ! wp_next_scheduled( "rank_math/{$job}" ) ) {
-				wp_schedule_event( $midnight, $this->do_filter( "{$job}_recurrence", $recurrence ), "rank_math/{$job}" );
+				$timestamp = 'content-ai/update_prompts' === $job ? $midnight + wp_rand( 60, 86400 ) : $midnight;
+				wp_schedule_event( $timestamp, $this->do_filter( "{$job}_recurrence", $recurrence ), "rank_math/{$job}" );
 			}
 		}
 	}

@@ -13,6 +13,7 @@ export default ( { title, helpLink } ) => {
 	const description = sprintf( __( 'Learn how to use this %s Tool effectively.', 'rank-math' ), `<strong>${ title }</strong>` )
 	const hasVideo = includes( helpLink, 'play-video' )
 	return (
+		<>
 		<div
 			key="title"
 			className="rank-math-video-tutorial"
@@ -20,18 +21,17 @@ export default ( { title, helpLink } ) => {
 			<div className="info">
 				<p>
 					<span
-						dangerouslySetInnerHTML={
-							{
-								__html: description,
-							}
-						}
-					/>
+						dangerouslySetInnerHTML={{
+							__html: description,
+						}} />
 				</p>
-				<a className={ ! hasVideo ? 'button button-primary is-red' : '' } href={ helpLink } target="_blank" rel="noreferrer">
-					{ hasVideo && <span className="rm-icon-youtube"></span> }
-					{ ! hasVideo && __( 'Click Here', 'rank-math' ) }
+				<a className={!hasVideo ? 'button button-primary is-red' : ''} href={helpLink} target="_blank" rel="noreferrer">
+					{hasVideo && <span className="rm-icon-youtube"></span>}
+					{!hasVideo && __('Click Here', 'rank-math')}
 				</a>
 			</div>
 		</div>
+		<p><em>{__('1 Word Output = 1 Credit', 'rank-math')}</em></p>
+		</>
 	)
 }

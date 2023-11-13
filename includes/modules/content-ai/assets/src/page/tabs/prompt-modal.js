@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import jQuery from 'jquery'
 import { map, lowerCase, isEmpty, isUndefined, find, compact, reverse } from 'lodash'
 import classnames from 'classnames'
 
@@ -45,6 +46,7 @@ export default ( { isOpen, toggleModal, setMessage } ) => {
 	const [ prompts, setPrompts ] = useState( rankMath.contentAIPrompts )
 	const [ deleting, setDeleting ] = useState( false )
 	const [ saving, setSaving ] = useState( false )
+	const [ updatingLibrary, setUpdating ] = useState( false )
 	const [ customPrompt, setCustomPrompt ] = useState(
 		{
 			prompt_name: '',
@@ -125,6 +127,47 @@ export default ( { isOpen, toggleModal, setMessage } ) => {
 						} )
 					}
 				</div>
+				<Button
+					className="update-library is-secondary is-small"
+					key="update-library"
+					onClick={ () => {
+						setUpdating( true )
+						jQuery.ajax(
+							{
+								url: 'https://rankmath.com/wp-json/contentai/v1/defaultPrompts',
+								type: 'GET',
+								success: ( result ) => {
+									setUpdating( false )
+									if ( isEmpty( result ) ) {
+										console.log( 'No data found' )
+										return
+									}
+
+									apiFetch( {
+										method: 'POST',
+										path: '/rankmath/v1/ca/savePrompts',
+										data: { prompts: result },
+									} )
+										.then( ( response ) => {
+											rankMath.contentAIPrompts = response
+											setPrompts( response )
+											setPrompt( 0 )
+										} )
+										.catch( ( error ) => {
+											// eslint-disable-next-line no-console
+											console.log( error )
+										} )
+								},
+								error: () => {
+									console.error( 'Failed, please try again later' )
+									setUpdating( false )
+								},
+							}
+						)
+					} }
+				>
+					{ updatingLibrary ? __( 'Updating...', 'rank-math' ) : __( 'Update Library', 'rank-math' ) }
+				</Button>
 			</div>
 			<div className="grid">
 				<div className="column column-first">
