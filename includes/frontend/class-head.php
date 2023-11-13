@@ -14,7 +14,6 @@ use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Paper\Paper;
 use RankMath\Traits\Hooker;
-use RankMath\Sitemap\Router;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Arr;
 use RankMath\Helpers\Security;
@@ -328,7 +327,7 @@ class Head {
 		}
 
 		if ( is_front_page() ) {
-			$url = Router::get_base_url( '' );
+			$url = trailingslashit( get_home_url() );
 		}
 
 		if ( $paged > 2 ) {

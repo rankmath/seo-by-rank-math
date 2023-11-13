@@ -12,7 +12,6 @@ namespace RankMath\Paper;
 
 use RankMath\Post;
 use RankMath\Helper;
-use RankMath\Sitemap\Router;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Url;
@@ -426,7 +425,7 @@ class Paper {
 		}
 
 		return user_trailingslashit(
-			trailingslashit( is_front_page() ? Router::get_base_url( '' ) : $canonical ) .
+			trailingslashit( is_front_page() ? get_home_url() : $canonical ) .
 			trailingslashit( $wp_rewrite->pagination_base ) .
 			get_query_var( 'paged' )
 		);
