@@ -136,7 +136,12 @@ class Redirector {
 		$this->do_debugging();
 
 		if ( true === $this->do_filter( 'redirection/add_query_string', true ) && Str::is_non_empty( $this->query_string ) ) {
-			$this->redirect_to .= '?' . $this->query_string;
+			// Check if redirect_to Url contains query string
+			if(strpos($this->redirect_to, '?') !== false){
+				$this->redirect_to .= '&' . $this->query_string;
+			} else{
+				$this->redirect_to .= '?' . $this->query_string;
+			}
 		}
 
 		if ( wp_redirect( esc_url_raw( $this->redirect_to ), $header_code, $this->get_redirect_header() ) ) { // phpcs:ignore
