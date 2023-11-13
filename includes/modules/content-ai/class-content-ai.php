@@ -12,9 +12,12 @@ namespace RankMath\ContentAI;
 
 use RankMath\KB;
 use RankMath\Helper;
+use RankMath\Admin\Admin_Helper as AdminHelper;
+use RankMath\Helpers\Sitepress;
 use RankMath\CMB2;
 use RankMath\Traits\Hooker;
 use RankMath\Traits\Ajax;
+use MyThemeShop\Helpers\Url;
 use MyThemeShop\Helpers\Arr;
 use MyThemeShop\Helpers\WordPress;
 
@@ -32,6 +35,7 @@ class Content_AI {
 	public function __construct() {
 		$this->action( 'rest_api_init', 'init_rest_api' );
 
+		new Content_AI_Page();
 		if ( ! Helper::has_cap( 'content_ai' ) ) {
 			return;
 		}
@@ -44,6 +48,7 @@ class Content_AI {
 		$this->action( 'rank_math/deregister_site', 'remove_credits_data' );
 		$this->ajax( 'get_content_ai_credits', 'update_content_ai_credits' );
 		$this->filter( 'rank_math/elementor/dark_styles', 'add_dark_style' );
+		$this->filter( 'the_editor', 'the_editor', 20 );
 	}
 
 	/**
@@ -61,8 +66,8 @@ class Content_AI {
 	/**
 	 * Add Content AI score in Single Page Site Analytics.
 	 *
-	 * @param  array           $data array.
-	 * @param  WP_REST_Request $request post object.
+	 * @param  array            $data array.
+	 * @param  \WP_REST_Request $request post object.
 	 * @return array $data sorted array.
 	 */
 	public function add_contentai_data( $data, \WP_REST_Request $request ) {
@@ -100,7 +105,7 @@ class Content_AI {
 			$tabs,
 			[
 				'content-ai' => [
-					'icon'  => 'rm-icon rm-icon-target',
+					'icon'  => 'rm-icon rm-icon-content-ai',
 					'title' => esc_html__( 'Content AI', 'rank-math' ),
 					/* translators: Link to kb article */
 					'desc'  => sprintf( esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. %s.', 'rank-math' ), '<a href="' . KB::get( 'content-ai-settings', 'Options Panel Content AI Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
@@ -125,7 +130,7 @@ class Content_AI {
 		$cmb = new_cmb2_box(
 			[
 				'id'               => $id,
-				'title'            => esc_html__( 'Rank Math Content AI', 'rank-math' ),
+				'title'            => esc_html__( 'Content AI', 'rank-math' ),
 				'object_types'     => array_keys( Helper::get_accessible_post_types() ),
 				'context'          => 'side',
 				'priority'         => 'high',
@@ -170,6 +175,8 @@ class Content_AI {
 			rank_math()->version,
 			true
 		);
+
+		$this->localized_data();
 	}
 
 	/**
@@ -191,7 +198,7 @@ class Content_AI {
 
 		$values['contentAiCountry'] = Helper::get_settings( 'general.content_ai_country', 'all' );
 		$values['countries']        = $countries;
-		$values['ca_credits']       = get_option( 'rank_math_ca_credits' );
+		$values['ca_credits']       = Helper::get_credits();
 		$values['ca_keyword']       = '';
 		$values['ca_viewed']        = true;
 
@@ -292,9 +299,64 @@ class Content_AI {
 	}
 
 	/**
+	 * Wrap Grammarly to the editor.
+	 *
+	 * @param  string $editor the Editor markup.
+	 * @return string
+	 */
+	public function the_editor( $editor = '' ) {
+		if ( 'classic' !== Helper::get_current_editor() || ! $this->can_add_grammarly() ) {
+			return $editor;
+		}
+
+		return '<grammarly-editor-plugin>' . $editor . '</grammarly-editor-plugin><grammarly-button class="rank-math-grammarly-button"></grammarly-button>';
+	}
+
+	/**
 	 * Whether to load Content AI data.
 	 */
 	public static function can_add_tab() {
 		return in_array( WordPress::get_post_type(), (array) Helper::get_settings( 'general.content_ai_post_types' ), true );
+	}
+
+	/**
+	 * Localized data to use on the Content AI page.
+	 */
+	public static function localized_data() {
+		Helper::add_json( 'ca_audience', (array) Helper::get_settings( 'general.content_ai_audience', 'General Audience' ) );
+		Helper::add_json( 'ca_tone', (array) Helper::get_settings( 'general.content_ai_tone', 'Formal' ) );
+		Helper::add_json( 'ca_language', Helper::get_settings( 'general.content_ai_language', 'English' ) );
+		Helper::add_json( 'contentAIHistory', Helper::get_outputs() );
+		Helper::add_json( 'contentAIChats', Helper::get_chats() );
+		Helper::add_json( 'contentAIRecentPrompts', Helper::get_recent_prompts() );
+		Helper::add_json( 'contentAIPrompts', Helper::get_prompts() );
+		Helper::add_json( 'isUserRegistered', Helper::is_site_connected() );
+		Helper::add_json( 'connectSiteUrl', AdminHelper::get_activate_url( Url::get_current_url() ) );
+		Helper::add_json( 'contentAICredits', Helper::get_content_ai_credits() );
+		Helper::add_json( 'contentAIPlan', Helper::get_content_ai_plan() );
+		Helper::add_json( 'contentAIErrors', Helper::get_content_ai_errors() );
+		Helper::add_json( 'connectData', AdminHelper::get_registration_data() );
+		Helper::add_json( 'canAddGrammarly', self::can_add_grammarly() );
+	}
+
+	/**
+	 * Check the locale and credits to add the Grammarly support.
+	 *
+	 * @return boolean
+	 */
+	private static function can_add_grammarly() {
+		if ( ! Helper::get_settings( 'general.cotnent_ai_enable_grammarly' ) || ! Helper::get_content_ai_credits() ) {
+			return false;
+		}
+
+		$locale = function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
+		if ( Sitepress::get()->is_active() ) {
+			global $sitepress;
+			$current_language = $sitepress->get_current_language();
+			$locale           = $sitepress->get_locale( $current_language );
+		}
+
+		// All English language locales.
+		return apply_filters( 'rank_math/content_ai/can_add_grammarly', in_array( $locale, [ 'en_US', 'en_AU', 'en_CA', 'en_NZ', 'art_xpirate', 'en_ZA', 'en_GB' ], true ), $locale );
 	}
 }

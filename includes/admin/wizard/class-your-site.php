@@ -77,7 +77,7 @@ class Your_Site implements Wizard_Step {
 				'desc'    => esc_html__( 'Enter the name of your site to appear in search results.', 'rank-math' ),
 			]
 		);
-		
+
 		$wizard->cmb->add_field(
 			[
 				'id'      => 'website_alternate_name',
@@ -130,18 +130,17 @@ class Your_Site implements Wizard_Step {
 	 * @return bool
 	 */
 	public function save( $values, $wizard ) {
-		$settings     = wp_parse_args(
+		$settings = wp_parse_args(
 			rank_math()->settings->all_raw(),
 			[
 				'titles'  => '',
 				'sitemap' => '',
 			]
 		);
-		$current_user = wp_get_current_user();
-		$values       = wp_parse_args(
+		$values   = wp_parse_args(
 			$values,
 			[
-				'author_name'         => $current_user->display_name,
+				'company_name'        => '',
 				'company_logo'        => '',
 				'company_logo_id'     => '',
 				'open_graph_image'    => '',
@@ -183,7 +182,7 @@ class Your_Site implements Wizard_Step {
 			case 'blog':
 			case 'portfolio':
 				$settings['titles']['knowledgegraph_type']    = 'person';
-				$settings['titles']['knowledgegraph_name']    = $values['author_name'];
+				$settings['titles']['knowledgegraph_name']    = $values['company_name'];
 				$settings['titles']['knowledgegraph_logo']    = $values['company_logo'];
 				$settings['titles']['knowledgegraph_logo_id'] = $values['company_logo_id'];
 				break;
@@ -201,7 +200,7 @@ class Your_Site implements Wizard_Step {
 
 			case 'otherpersonal':
 				$settings['titles']['knowledgegraph_type'] = 'person';
-				$settings['titles']['knowledgegraph_name'] = $values['author_name'];
+				$settings['titles']['knowledgegraph_name'] = $values['company_name'];
 				break;
 		}
 

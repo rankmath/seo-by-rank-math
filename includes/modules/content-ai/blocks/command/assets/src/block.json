@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "rank-math/command",
+	"title": "AI Assistant [Content AI]",
+	"icon": "star",
+	"category": "rank-math-blocks",
+	"description": "Generate content without any hassle, powered by Rank Math's Content AI.",
+	"keywords": [ "ai", "content", "rank math", "rankmath", "content ai", "seo" ],
+	"textdomain": "rank-math-pro",
+	"editorScript": "file:../js/index.js",
+	"attributes": {
+		"content": {
+			"type": "string",
+			"source": "html",
+			"selector": "p",
+			"default": "<span>//</span>",
+			"__experimentalRole": "content"
+		}
+	}
+}

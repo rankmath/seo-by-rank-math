@@ -8,7 +8,7 @@ import { forEach, isEmpty } from 'lodash'
  */
 import { __ } from '@wordpress/i18n'
 import { Fragment } from '@wordpress/element'
-import { PanelBody } from '@wordpress/components'
+import { PanelBody, Button } from '@wordpress/components'
 
 /**
  * Internal dependencies
@@ -25,9 +25,9 @@ const Links = ( props ) => {
 		)
 	}
 
-	forEach( props.caData.data.links, ( value ) => (
+	forEach( props.caData.data.links, ( value, index ) => (
 		links.push(
-			<li>
+			<li key={ index }>
 				<a href={ value } rel="noreferrer" target="_blank">{ value }</a>
 			</li>
 		)
@@ -38,7 +38,7 @@ const Links = ( props ) => {
 				<div className="rank-math-section-heading">
 					<h2>
 						{ __( 'Related External Links', 'rank-math' ) }
-						<a href={ getLink( 'content-ai-links', 'Sidebar Links KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" title={ __( 'Know more about Links.', 'rank-math' ) }>﹖</a>
+						<Button className='is-link' href={ getLink( 'content-ai-links', 'Sidebar Links KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Know more about Links.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
 					</h2>
 					<p>{ __( 'Use some of these external links in the content area. It is recommended to add', 'rank-math' ) } <a href={ getLink( 'about-and-mentions-schema', 'Use Some External Links' ) } rel="noreferrer" target="_blank">{ __( 'about or mention Schema.', 'rank-math' ) }</a></p>
 				</div>

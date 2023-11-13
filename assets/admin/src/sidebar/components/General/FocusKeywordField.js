@@ -1,5 +1,3 @@
-/* global DOMParser */
-
 /**
  * External dependencies
  */
@@ -20,6 +18,8 @@ import { applyFilters } from '@wordpress/hooks'
  * Internal dependencies
  */
 import TagifyField from '@components/TagifyField'
+import getAttributes from '@helpers/getAttributes'
+import stripTags from '@helpers/stripTags'
 import FocusKeywordCTA from './FocusKeywordCTA'
 
 class FocusKeywordField extends Component {
@@ -90,7 +90,7 @@ class FocusKeywordField extends Component {
 				whitelist: this.state.whitelist || [],
 				focusableTags: true,
 				transformTag: ( tagData ) => {
-					tagData.value = this.stripTags( tagData.value.replaceAll( ',', '' ) )
+					tagData.value = stripTags( tagData.value.replaceAll( ',', '' ) )
 				},
 				templates: {
 					tag: ( tagData ) => {
@@ -102,7 +102,7 @@ class FocusKeywordField extends Component {
 							)
 							classes += this.getScoreClass( score )
 						}
-						return "<tag draggable='true' title='".concat( this.stripTags( value ), "'\n tabIndex='0'\n contenteditable='false'\n spellcheck='false'\n class='tagify__tag " ).concat( tagData.class ? tagData.class : classes, "'\n " ).concat( this.getAttributesEsc( tagData ), ">\n <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>\n <div>\n <span class='tagify__tag-text'>" ).concat( this.stripTags( value ), '</span>\n </div>\n </tag>' )
+						return "<tag draggable='true' title='".concat( stripTags( value ), "'\n tabIndex='0'\n contenteditable='false'\n spellcheck='false'\n class='tagify__tag " ).concat( tagData.class ? tagData.class : classes, "'\n " ).concat( getAttributes( tagData ), ">\n <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>\n <div>\n <span class='tagify__tag-text'>" ).concat( stripTags( value ), '</span>\n </div>\n </tag>' )
 					},
 				},
 				callbacks: this.callbacks,
@@ -297,7 +297,7 @@ class FocusKeywordField extends Component {
 
 	updateKeywords() {
 		const tagify = this.tagifyField.current,
-			keywords = this.stripTags( tagify.toString() )
+			keywords = stripTags( tagify.toString() )
 		this.props.updateKeywords( keywords )
 	}
 
@@ -317,39 +317,6 @@ class FocusKeywordField extends Component {
 		}
 
 		this.setState( { whitelist: [], showDropdown: false } )
-	}
-
-	getAttributesEsc( data ) {
-		// only items which are objects have properties which can be used as attributes
-		if ( Object.prototype.toString.call( data ) !== '[object Object]' ) {
-			return ''
-		}
-
-		let s = '',
-			propName,
-			i
-
-		const keys = Object.keys( data )
-		for ( i = keys.length; i--; ) {
-			propName = keys[ i ]
-			if ( propName !== 'class' && data.hasOwnProperty( propName ) && data[ propName ] ) {
-				s += '' + propName + ( data[ propName ] ? '=\"'.concat( this.stripTags( data[ propName ] ), '\"' ) : '' )
-			}
-		}
-
-		return s
-	}
-
-	stripTags( html ) {
-		// First decode.
-		html = jQuery( '<textarea />' ).html( html ).text()
-
-		// Strip tags.
-		const doc = new DOMParser().parseFromString( html, 'text/html' )
-		const output = doc.body.textContent || ''
-
-		// Strip remaining characters.
-		return output.replace( /["<>]/g, '' ) || ''
 	}
 }
 

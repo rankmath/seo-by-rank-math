@@ -16,9 +16,157 @@ $cmb->add_field(
 		'id'      => 'content_ai_country',
 		'type'    => 'select',
 		'name'    => esc_html__( 'Default Country', 'rank-math' ),
+		'desc'    => esc_html__( 'Content AI tailors keyword research to the target country for highly relevant suggestions. You can override this in individual posts/pages/CPTs.', 'rank-math' ),
 		'options' => Helper::choices_contentai_countries(),
 		'default' => 'all',
 	]
+);
+
+$cmb->add_field(
+	[
+		'id'         => 'content_ai_tone',
+		'type'       => 'select',
+		'name'       => esc_html__( 'Default Tone', 'rank-math' ),
+		'desc'       => esc_html__( 'This feature enables the default primary tone or writing style that characterizes your content. You can override this in individual tools.', 'rank-math' ),
+		'default'    => 'Formal',
+		'attributes' => ( 'data-s2' ),
+		'options'    => [
+			'Analytical'     => esc_html__( 'Analytical', 'rank-math' ),
+			'Argumentative'  => esc_html__( 'Argumentative', 'rank-math' ),
+			'Casual'         => esc_html__( 'Casual', 'rank-math' ),
+			'Conversational' => esc_html__( 'Conversational', 'rank-math' ),
+			'Creative'       => esc_html__( 'Creative', 'rank-math' ),
+			'Descriptive'    => esc_html__( 'Descriptive', 'rank-math' ),
+			'Emotional'      => esc_html__( 'Emotional', 'rank-math' ),
+			'Empathetic'     => esc_html__( 'Empathetic', 'rank-math' ),
+			'Expository'     => esc_html__( 'Expository', 'rank-math' ),
+			'Factual'        => esc_html__( 'Factual', 'rank-math' ),
+			'Formal'         => esc_html__( 'Formal', 'rank-math' ),
+			'Friendly'       => esc_html__( 'Friendly', 'rank-math' ),
+			'Humorous'       => esc_html__( 'Humorous', 'rank-math' ),
+			'Informal'       => esc_html__( 'Informal', 'rank-math' ),
+			'Journalese'     => esc_html__( 'Journalese', 'rank-math' ),
+			'Narrative'      => esc_html__( 'Narrative', 'rank-math' ),
+			'Objective'      => esc_html__( 'Objective', 'rank-math' ),
+			'Opinionated'    => esc_html__( 'Opinionated', 'rank-math' ),
+			'Persuasive'     => esc_html__( 'Persuasive', 'rank-math' ),
+			'Poetic'         => esc_html__( 'Poetic', 'rank-math' ),
+			'Satirical'      => esc_html__( 'Satirical', 'rank-math' ),
+			'Story-telling'  => esc_html__( 'Story-telling', 'rank-math' ),
+			'Subjective'     => esc_html__( 'Subjective', 'rank-math' ),
+			'Technical'      => esc_html__( 'Technical', 'rank-math' ),
+		],
+	],
+);
+
+$cmb->add_field(
+	[
+		'id'         => 'content_ai_audience',
+		'type'       => 'select',
+		'name'       => esc_html__( 'Default Audience', 'rank-math' ),
+		'desc'       => esc_html__( 'This option lets you set the default audience that usually reads your content. You can override this in individual tools.', 'rank-math' ),
+		'default'    => 'General Audience',
+		'attributes' => ( 'data-s2' ),
+		'options'    => [
+			'Activists'                => esc_html__( 'Activists', 'rank-math' ),
+			'Artists'                  => esc_html__( 'Artists', 'rank-math' ),
+			'Authors'                  => esc_html__( 'Authors', 'rank-math' ),
+			'Bargain Hunters'          => esc_html__( 'Bargain Hunters', 'rank-math' ),
+			'Bloggers'                 => esc_html__( 'Bloggers', 'rank-math' ),
+			'Business Owners'          => esc_html__( 'Business Owners', 'rank-math' ),
+			'Collectors'               => esc_html__( 'Collectors', 'rank-math' ),
+			'Cooks'                    => esc_html__( 'Cooks', 'rank-math' ),
+			'Crafters'                 => esc_html__( 'Crafters', 'rank-math' ),
+			'Dancers'                  => esc_html__( 'Dancers', 'rank-math' ),
+			'DIYers'                   => esc_html__( 'DIYers', 'rank-math' ),
+			'Designers'                => esc_html__( 'Designers', 'rank-math' ),
+			'Educators'                => esc_html__( 'Educators', 'rank-math' ),
+			'Engineers'                => esc_html__( 'Engineers', 'rank-math' ),
+			'Entrepreneurs'            => esc_html__( 'Entrepreneurs', 'rank-math' ),
+			'Environmentalists'        => esc_html__( 'Environmentalists', 'rank-math' ),
+			'Fashionistas'             => esc_html__( 'Fashionistas', 'rank-math' ),
+			'Fitness Enthusiasts'      => esc_html__( 'Fitness Enthusiasts', 'rank-math' ),
+			'Foodies'                  => esc_html__( 'Foodies', 'rank-math' ),
+			'Gaming Enthusiasts'       => esc_html__( 'Gaming Enthusiasts', 'rank-math' ),
+			'Gardeners'                => esc_html__( 'Gardeners', 'rank-math' ),
+			'General Audience'         => esc_html__( 'General Audience', 'rank-math' ),
+			'Health Enthusiasts'       => esc_html__( 'Health Enthusiasts', 'rank-math' ),
+			'Healthcare Professionals' => esc_html__( 'Healthcare Professionals', 'rank-math' ),
+			'Indoor Hobbyists'         => esc_html__( 'Indoor Hobbyists', 'rank-math' ),
+			'Investors'                => esc_html__( 'Investors', 'rank-math' ),
+			'Job Seekers'              => esc_html__( 'Job Seekers', 'rank-math' ),
+			'Movie Buffs'              => esc_html__( 'Movie Buffs', 'rank-math' ),
+			'Musicians'                => esc_html__( 'Musicians', 'rank-math' ),
+			'Outdoor Enthusiasts'      => esc_html__( 'Outdoor Enthusiasts', 'rank-math' ),
+			'Parents'                  => esc_html__( 'Parents', 'rank-math' ),
+			'Pet Owners'               => esc_html__( 'Pet Owners', 'rank-math' ),
+			'Photographers'            => esc_html__( 'Photographers', 'rank-math' ),
+			'Podcast Listeners'        => esc_html__( 'Podcast Listeners', 'rank-math' ),
+			'Professionals'            => esc_html__( 'Professionals', 'rank-math' ),
+			'Retirees'                 => esc_html__( 'Retirees', 'rank-math' ),
+			'Russian'                  => esc_html__( 'Russian', 'rank-math' ),
+			'Seniors'                  => esc_html__( 'Seniors', 'rank-math' ),
+			'Social Media Users'       => esc_html__( 'Social Media Users', 'rank-math' ),
+			'Sports Fans'              => esc_html__( 'Sports Fans', 'rank-math' ),
+			'Students'                 => esc_html__( 'Students', 'rank-math' ),
+			'Tech Enthusiasts'         => esc_html__( 'Tech Enthusiasts', 'rank-math' ),
+			'Travelers'                => esc_html__( 'Travelers', 'rank-math' ),
+			'TV Enthusiasts'           => esc_html__( 'TV Enthusiasts', 'rank-math' ),
+			'Video Creators'           => esc_html__( 'Video Creators', 'rank-math' ),
+			'Writers'                  => esc_html__( 'Writers', 'rank-math' ),
+		],
+	],
+);
+
+$cmb->add_field(
+	[
+		'id'         => 'content_ai_language',
+		'type'       => 'select',
+		'name'       => esc_html__( 'Default Language', 'rank-math' ),
+		'desc'       => esc_html__( 'This option lets you set the default language for content generated using Content AI. You can override this in individual tools.', 'rank-math' ),
+		'default'    => Helper::content_ai_default_language(),
+		'attributes' => ( 'data-s2' ),
+		'options'    => [
+			'English'    => esc_html__( 'English', 'rank-math' ),
+			'Bulgarian'  => esc_html__( 'Bulgarian', 'rank-math' ),
+			'Chinese'    => esc_html__( 'Chinese', 'rank-math' ),
+			'Czech'      => esc_html__( 'Czech', 'rank-math' ),
+			'Danish'     => esc_html__( 'Danish', 'rank-math' ),
+			'Dutch'      => esc_html__( 'Dutch', 'rank-math' ),
+			'Estonian'   => esc_html__( 'Estonian', 'rank-math' ),
+			'Finnish'    => esc_html__( 'Finnish', 'rank-math' ),
+			'French'     => esc_html__( 'French', 'rank-math' ),
+			'German'     => esc_html__( 'German', 'rank-math' ),
+			'Greek'      => esc_html__( 'Greek', 'rank-math' ),
+			'Hebrew'     => esc_html__( 'Hebrew', 'rank-math' ),
+			'Hungarian'  => esc_html__( 'Hungarian', 'rank-math' ),
+			'Indonesian' => esc_html__( 'Indonesian', 'rank-math' ),
+			'Italian'    => esc_html__( 'Italian', 'rank-math' ),
+			'Japanese'   => esc_html__( 'Japanese', 'rank-math' ),
+			'Korean'     => esc_html__( 'Korean', 'rank-math' ),
+			'Latvian'    => esc_html__( 'Latvian', 'rank-math' ),
+			'Lithuanian' => esc_html__( 'Lithuanian', 'rank-math' ),
+			'Norwegian'  => esc_html__( 'Norwegian', 'rank-math' ),
+			'Polish'     => esc_html__( 'Polish', 'rank-math' ),
+			'Portuguese' => esc_html__( 'Portuguese', 'rank-math' ),
+			'Romanian'   => esc_html__( 'Romanian', 'rank-math' ),
+			'Russian'    => esc_html__( 'Russian', 'rank-math' ),
+			'Slovak'     => esc_html__( 'Slovak', 'rank-math' ),
+			'Slovenian'  => esc_html__( 'Slovenian', 'rank-math' ),
+			'Spanish'    => esc_html__( 'Spanish', 'rank-math' ),
+			'Swedish'    => esc_html__( 'Swedish', 'rank-math' ),
+		],
+	],
+);
+
+$cmb->add_field(
+	[
+		'id'      => 'cotnent_ai_enable_grammarly',
+		'type'    => 'toggle',
+		'name'    => esc_html__( 'Enable Grammarly', 'rank-math' ),
+		'desc'    => esc_html__( 'Enable this feature to fix the grammatical errors on the fly while content is being written/generated.', 'rank-math' ),
+		'default' => 'off',
+	],
 );
 
 $post_types = Helper::choices_post_types();
@@ -31,14 +179,14 @@ $cmb->add_field(
 		'id'      => 'content_ai_post_types',
 		'type'    => 'multicheck_inline',
 		'name'    => esc_html__( 'Select Post Type', 'rank-math' ),
-		'desc'    => esc_html__( 'Select the post type you use for Content AI.', 'rank-math' ),
+		'desc'    => esc_html__( 'Choose the type of posts/pages/CPTs where you want to use Content AI.', 'rank-math' ),
 		'options' => $post_types,
 		'default' => array_keys( $post_types ),
 	]
 );
 
-$credits = get_option( 'rank_math_ca_credits' );
-if ( false !== $credits ) {
+$credits = Helper::get_credits();
+if (  Helper::is_site_connected() && false !== $credits  ) {
 	$update_credits = '<a href="#" class="rank-math-tooltip update-credit">
 		<i class="dashicons dashicons-image-rotate"></i>
 		<span>' . esc_html__( 'Click to refresh the available credits.', 'rank-math' ) . '</span>
@@ -49,7 +197,7 @@ if ( false !== $credits ) {
 			'id'      => 'content_ai_credits',
 			'type'    => 'raw',
 			/* translators: 1. Credits left 2. Buy more credits link */
-			'content' => '<div class="cmb-row buy-more-credits rank-math-exclude-from-search">' . $update_credits . sprintf( esc_html__( '%1$s credits left. Upgrade to get more credits from %2$s.', 'rank-math' ), '<strong>' . $credits . '</strong>', '<a href="' . KB::get( 'content-ai-pricing-tables', 'Buy CAI Credits Options Panel' ) . '" target="_blank">' . esc_html__( 'here', 'rank-math' ) . '</a>' ) . '</div>',
+			'content' => '<div class="cmb-row buy-more-credits rank-math-exclude-from-search">' . $update_credits . sprintf( esc_html__( '%1$s credits left this month. Credits will renew next month or you can upgrade to get more credits %2$s.', 'rank-math' ), '<strong>' . $credits . '</strong>', '<a href="' . KB::get( 'content-ai-pricing-tables', 'Buy CAI Credits Options Panel' ) . '" target="_blank">' . esc_html__( 'here', 'rank-math' ) . '</a>' ) . '</div>',
 		]
 	);
 }

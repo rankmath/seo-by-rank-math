@@ -149,9 +149,12 @@ class Frontend {
 		}
 
 		$redirect = ! empty( $post->post_parent ) ? get_permalink( $post->post_parent ) : Helper::get_settings( 'general.attachment_redirect_default' );
+		if ( ! $redirect ) {
+			return;
+		}
 
 		/**
-		 * Redirect atachment to its parent post.
+		 * Redirect attachment to its parent post.
 		 *
 		 * @param string  $redirect URL as calculated for redirection.
 		 * @param WP_Post $post     Current post instance.

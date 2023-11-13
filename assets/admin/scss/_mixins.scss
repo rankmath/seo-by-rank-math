@@ -50,6 +50,13 @@
 	}
 }
 
+@mixin highlight {
+	font-family: monospace;
+
+	color: darken( $color-5, 25 );
+	background: lighten( $color-5, 28 );
+}
+
 @-webkit-keyframes spin {
 	0%   {-webkit-transform: rotate(0deg)}
 	100% {-webkit-transform: rotate(-360deg)}
@@ -75,5 +82,31 @@
 	}
 	to {
 		transform: translateY(-5px);
+	}
+}
+
+@keyframes loading {
+	0% {
+		background-size: 20% 50% ,20% 50% ,20% 50%;
+	}
+
+	20% {
+		background-size: 20% 20% ,20% 50% ,20% 50%;
+	}
+
+	40% {
+		background-size: 20% 100%,20% 20% ,20% 50%;
+	}
+
+	60% {
+		background-size: 20% 50% ,20% 100%,20% 20%;
+	}
+
+	80% {
+		background-size: 20% 50% ,20% 50% ,20% 100%;
+	}
+
+	100% {
+		background-size: 20% 50% ,20% 50% ,20% 50%;
 	}
 }

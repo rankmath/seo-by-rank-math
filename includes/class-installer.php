@@ -366,6 +366,11 @@ class Installer {
 					'frontend_seo_score_position'         => 'top',
 					'setup_mode'                          => 'advanced',
 					'content_ai_post_types'               => array_keys( $post_types ),
+					'content_ai_country'                  => 'all',
+					'content_ai_tone'                     => 'Formal',
+					'content_ai_audience'                 => 'General Audience',
+					'content_ai_language'                 => Helper::content_ai_default_language(),
+					'cotnent_ai_enable_grammarly'         => 'off',
 					'analytics_stats'                     => 'on',
 					'toc_block_title'                     => 'Table of Contents',
 					'toc_block_list_style'                => 'ul',
@@ -619,8 +624,9 @@ class Installer {
 	 */
 	private function get_cron_jobs() {
 		return [
-			'redirection/clean_trashed' => 'daily',     // Add cron for cleaning trashed redirects.
-			'links/internal_links'      => 'daily',     // Add cron for counting links.
+			'redirection/clean_trashed' => 'daily', // Add cron for cleaning trashed redirects.
+			'links/internal_links'      => 'daily', // Add cron for counting links.
+			'content-ai/update_prompts' => 'daily', // Add cron for updating the prompts data.
 		];
 	}
 

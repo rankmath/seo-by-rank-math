@@ -176,7 +176,7 @@ class Manager {
 			'title'       => esc_html__( 'Content AI', 'rank-math' ),
 			'desc'        => esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. Supports 80+ Countries.', 'rank-math' ),
 			'class'       => 'RankMath\ContentAI\Content_AI',
-			'icon'        => 'target',
+			'icon'        => 'content-ai',
 			'upgradeable' => true,
 			'settings'    => Helper::get_admin_url( 'options-general' ) . '#setting-panel-content-ai',
 			'betabadge'   => true,
@@ -403,6 +403,7 @@ class Manager {
 					$is_upgradeable = $module->is_upgradeable();
 					$is_pro         = $module->is_pro_module();
 					$dep_modules    = $module->get_dependencies();
+					$is_pro_active  = defined( 'RANK_MATH_PRO_FILE' );
 					?>
 					<div class="rank-math-box <?php echo $is_active ? 'active' : ''; ?> <?php echo $is_hidden ? 'hidden' : ''; ?> <?php echo $is_pro ? 'is-pro' : ''; ?>">
 						<i class="rm-icon rm-icon-<?php echo esc_attr( $module->get_icon() ); ?>"></i>
@@ -411,17 +412,17 @@ class Manager {
 								<?php echo esc_html( $module->get( 'title' ) ); ?>
 								<?php if ( $is_betabadge ) { ?>
 									<span class="rank-math-pro-badge beta"><?php echo esc_html__( 'NEW!', 'rank-math' ); ?></span>
-								<?php } elseif ( $is_probadge ) { ?>
+								<?php } elseif ( $is_probadge && ! $is_pro_active ) { ?>
 									<span class="rank-math-pro-badge"><?php echo esc_html__( 'PRO', 'rank-math' ); ?></span>
 								<?php } ?>
-								<?php if ( $is_upgradeable && ! defined( 'RANK_MATH_PRO_FILE' ) ) { ?>
+								<?php if ( $is_upgradeable && ! $is_pro_active ) { ?>
 									<span class="is-upgradeable rank-math-tooltip">
 										<a href="<?php KB::the( 'pro', esc_html( $module->get( 'title' ) ) . ' Module Upgradable Icon' ); ?>">
 											<div>&#171;</div>
 										</a>
 										<span><?php echo esc_html__( 'More powerful options are available in the PRO version.', 'rank-math' ); ?></span>
 									</span>
-								<?php } elseif ( $is_upgradeable ) { ?>
+								<?php } elseif ( $is_upgradeable || ( $is_probadge && $is_pro_active ) ) { ?>
 									<span class="is-upgradeable rank-math-tooltip">
 										<div class="upgraded">&#171;</div>
 										<span><?php echo esc_html__( 'PRO options are enabled.', 'rank-math' ); ?></span>

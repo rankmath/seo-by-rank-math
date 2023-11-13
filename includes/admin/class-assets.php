@@ -40,7 +40,7 @@ class Assets implements Runner {
 	public function hooks() {
 		$this->action( 'admin_enqueue_scripts', 'register' );
 		$this->action( 'admin_enqueue_scripts', 'enqueue' );
-		$this->action( 'admin_enqueue_scripts', 'overwrite_wplink', 99 );
+		$this->action( 'admin_enqueue_scripts', 'overwrite_wplink', 999 );
 
 		if ( 'elementor' === \MyThemeShop\Helpers\Param::get( 'action' ) ) {
 			$this->action( 'elementor/editor/before_enqueue_scripts', 'register' );
@@ -190,7 +190,7 @@ class Assets implements Runner {
 	public function overwrite_wplink() {
 
 		wp_deregister_script( 'wplink' );
-		wp_register_script( 'wplink', rank_math()->plugin_url() . 'assets/admin/js/wplink.js', [ 'jquery', 'wpdialogs' ], rank_math()->version, true );
+		wp_register_script( 'wplink', rank_math()->plugin_url() . 'assets/admin/js/wplink.js', [ 'jquery', 'wp-a11y' ], rank_math()->version, true );
 
 		wp_localize_script(
 			'wplink',
@@ -270,7 +270,7 @@ class Assets implements Runner {
 					return true;
 				}
 				jQuery( '.rank-math-notice-permalinks-warning' ).removeClass( 'hidden' ).insertBefore( 'p.submit' );
-				noticeShown = true;	
+				noticeShown = true;
 				return true;
 			}
 

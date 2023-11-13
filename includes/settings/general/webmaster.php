@@ -83,3 +83,18 @@ $cmb->add_field(
 		'classes'         => 'rank-math-advanced-option',
 	]
 );
+
+$cmb->add_field(
+	[
+		'id'              => 'custom_webmaster_tags',
+		'type'            => 'textarea',
+		'name'            => esc_html__( 'Custom Webmaster Tags', 'rank-math' ),
+		'desc'            => sprintf(
+			/* translators: %s: Allowed tags */
+			esc_html__( 'Enter your custom webmaster tags. Only %s tags are allowed.', 'rank-math' ),
+			'<code>&lt;meta&gt;</code>'
+		),
+		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_custom_webmaster_tags' ],
+		'classes'         => 'rank-math-advanced-option',
+	]
+);

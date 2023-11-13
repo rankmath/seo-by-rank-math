@@ -3,268 +3,286 @@
 @import '../../mixins';
 
 %flex {
-    @include flex;
+	@include flex;
 }
 
 .blurred {
-    filter: blur(2px);
 	pointer-events: none;
 
-    &:after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+	filter: blur(2px);
 
-        content: '';
+	&:after {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 
-        background: rgba(248, 249, 250, .1);
-    }
+		content: '';
+
+		background: rgba(248, 249, 250, .1);
+	}
 }
 
 ##{$namespace}-pro-cta {
-    position: relative;
-    z-index: 100;
+	position: relative;
+	z-index: 100;
 
-    margin-top: 2rem;
+	margin-top: 2rem;
 
-    &.center {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+	&.center {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 
-        display: flex;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-        margin-top: 0;
+		margin-top: 0;
+	}
 
-        align-items: center;
-        justify-content: center;
-    }
+	&.analytics {
+		width: 560px;
+		max-width: 100%;
+		margin: 2rem auto 0;
+	}
 
-    &.analytics {
-        width: 560px;
-        max-width: 100%;
-        margin: 2rem auto 0;
-    }
+	&.no-margin {
+		margin: 0;
+	}
 
-    &.no-margin {
-        margin: 0;
-    }
+	.#{$namespace}-cta {
+		&-box {
+			align-self: center;
 
-    .#{$namespace}-cta {
-        &-box {
-            box-sizing: border-box;
-            width: 100%;
-            max-width: 90%;
-            padding: 2rem 1.5rem;
+			box-sizing: border-box;
+			width: 100%;
+			max-width: 90%;
+			padding: 2rem 1.5rem;
 
-            border-radius: 4px;
-            background: #fff;
-            box-shadow: 0 4px 14px 0 rgba(34, 36, 55, .28);
+			border-radius: 4px;
+			background: #fff;
+			box-shadow: 0 4px 14px 0 rgba(34, 36, 55, .28);
+            border: 2px solid $rm_brand;
 
-            align-self: center;
-            justify-self: center;
+			justify-self: center;
 
-            // No Box Shadow.
-            &.no-shadow {
-                box-shadow: none;
-            }
+			// No Box Shadow.
+			&.no-shadow {
+				box-shadow: none;
+			}
 
-            &.no-padding {
-                padding: 0;
-            }
+			&.no-padding {
+				padding: 0;
+			}
 
-            &.less-padding {
-                padding: 1.5rem;
+			&.less-padding {
+				padding: 1.5rem;
 
-                h3 {
-                    margin-bottom: 1rem;
-                }
-            }
+				h3 {
+					margin-bottom: 1rem;
+				}
+			}
 
-            // Box Position.
-            &.top-20 {
-                margin-top: 10%;
+			// Box Position.
+			&.top-20 {
+				align-self: flex-start;
 
-                align-self: flex-start;
-            }
+				margin-top: 10%;
+			}
 
-            h3 {
-                font-size: 1.25rem;
-                font-weight: 600;
+			h3 {
+				font-size: 1.25rem;
+				font-weight: 600;
 
-                margin-top: 0;
-                margin-bottom: 1.5rem;
+				margin-top: 0;
+				margin-bottom: 1.5rem;
 
-                color: $text;
-            }
+				color: $text;
+			}
 
-            @media screen and (min-width: 48rem) {
-                // Widths.
-                &.width-100 {
-                    width: 100%;
-                    max-width: 100%;
-                }
+			@media screen and (min-width: 48rem) {
+				// Widths.
+				&.width-100 {
+					width: 100%;
+					max-width: 100%;
+				}
 
-                &.width-80 {
-                    max-width: 80%;
-                }
+				&.width-80 {
+					max-width: 80%;
+				}
 
-                &.width-70 {
-                    max-width: 70%;
-                }
+				&.width-70 {
+					max-width: 70%;
+				}
 
-                &.width-60 {
-                    max-width: 60%;
+				&.width-60 {
+					max-width: 60%;
 
-                    h3 {
-                        margin-bottom: 1rem;
-                    }
-                }
+					h3 {
+						margin-bottom: 1rem;
+					}
+				}
 
-                &.width-50 {
-                    max-width: 50%;
-                }
-            }
+				&.width-50 {
+					max-width: 50%;
+				}
 
-            // Blue ticks.
-            &.blue-ticks {
-                ul li:before {
-                    background: $primary;
-                }
-            }
-        }
+				&.width-40 {
+					max-width: 40%;
+				}
 
-        // Table CTA.
-        &-table {
-            margin-bottom: 2rem;
+				&.width-30 {
+					max-width: 30%;
+				}
+			}
 
-            border: 1px solid #dadfe4;
-            border-radius: 6px;
-            background: #fff;
+			// Blue ticks.
+			&.blue-ticks {
+				ul li:before {
+					background: $primary;
+				}
+			}
+		}
 
-            .less-padding {
-                padding: 1.5rem;
+		// Table CTA.
+		&-table {
+			margin-bottom: 2rem;
 
-                h3 {
-                    margin-bottom: 1rem;
-                }
-            }
-        }
+			border: 1px solid #dadfe4;
+			border-radius: 6px;
+			background: #fff;
 
-        &-header {
-            padding: 1.25rem .825rem;
+			.less-padding {
+				padding: 1.5rem;
 
-            border-bottom: 1px solid #dadfe4;
+				h3 {
+					margin-bottom: 1rem;
+				}
+			}
+		}
 
-            @extend %flex;
-            justify-content: space-between;
+		&-header {
+			justify-content: space-between;
 
-            h2 {
-                font-size: 1.125rem;
-                font-weight: 500;
+			padding: 1.25rem .825rem;
 
-                margin: 0;
-            }
-        }
+			border-bottom: 1px solid #dadfe4;
 
-        &-body {
-            padding: 1.25rem 1.5rem 1.25rem .825rem;
+			@extend %flex;
 
-            align-items: center;
-            @extend %flex;
-            flex-flow: row wrap;
-            justify-content: space-between;
+			h2 {
+				font-size: 1.125rem;
+				font-weight: 500;
 
-            svg,
-            .dashicon {
-                margin-right: 1.25rem;
+				margin: 0;
+			}
+		}
 
-                fill: $color-3;
-            }
+		&-body {
+			align-items: center;
+			flex-flow: row wrap;
+			justify-content: space-between;
 
-            span.dashicon {
-                font-size: 50px;
+			padding: 1.25rem 1.5rem 1.25rem .825rem;
 
-                width: 50px;
-                height: 50px;
+			@extend %flex;
 
-                color: $color-3;
-            }
+			svg,
+			.dashicon {
+				margin-right: 1.25rem;
 
-            p {
-                font-size: 1rem;
+				fill: $color-3;
+			}
 
-                flex: 1;
-            }
+			span.dashicon {
+				font-size: 50px;
 
-            .button {
-                line-height: 40px;
+				width: 50px;
+				height: 50px;
 
-                margin-left: 1.25rem;
-            }
-        }
+				color: $color-3;
+			}
 
-        // Text CTA.
-        &-text {
-            display: block;
+			p {
+				font-size: 1rem;
 
-            color: $dark-gray;
+				flex: 1;
+			}
 
-            span {
-                margin-right: 3px;
-            }
-        }
-    }
+			.button {
+				line-height: 40px;
 
-    ul {
+				margin-left: 1.25rem;
+			}
+		}
+
+		// Text CTA.
+		&-text {
+			display: block;
+
+			color: $dark-gray;
+
+			span {
+				margin-right: 3px;
+			}
+		}
+	}
+
+    p, ul {
         font-size: 15px;
 
-        margin-bottom: 1.5rem;
-
-        li {
-            font-size: 1rem;
-
-            margin-bottom: 1rem;
-            padding: 0;
-
-            color: $dark_gray;
-            border: 0;
-
-            &:before {
-                font-family: 'dashicons';
-                font-size: 16px;
-                line-height: 18px;
-
-                display: inline-block;
-
-                width: 18px;
-                margin-right: 8px;
-
-                content: '\f15e';
-                text-align: center;
-                vertical-align: -2px;
-
-                color: #fff;
-                border-radius: 50%;
-                background: $color-1;
-            }
-        }
+        color: $dark_gray;
     }
 
-    .button {
-        font-weight: 500;
-
-        display: inline-block;
-
-        width: auto;
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 0 3rem;
-
-        text-align: center;
+    p {
+        margin-top: 0;
     }
+
+	ul {
+		margin-bottom: 1.5rem;
+
+		li {
+			font-size: 1rem;
+
+			margin-bottom: 1rem;
+			padding: 0;
+			border: 0;
+
+			&:before {
+				font-family: 'dashicons';
+				font-size: 16px;
+				line-height: 18px;
+
+				display: inline-block;
+
+				width: 18px;
+				margin-right: 8px;
+
+				content: '\f15e';
+				text-align: center;
+				vertical-align: -2px;
+
+				color: #fff;
+				border-radius: 50%;
+				background: $color-1;
+			}
+		}
+	}
+
+	.button {
+		font-weight: 500;
+
+		display: inline-block;
+
+		width: auto;
+		max-width: 100%;
+		margin: 0 auto;
+		padding: 0 2rem;
+
+		text-align: center;
+	}
 }

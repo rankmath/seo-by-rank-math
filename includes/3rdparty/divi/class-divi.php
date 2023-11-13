@@ -160,6 +160,7 @@ class Divi {
 		);
 
 		Helper::add_json( 'capitalizeTitle', Helper::get_settings( 'titles.capitalize_titles' ) );
+		Helper::add_json( 'blogName', get_bloginfo( 'name' ) );
 
 		if ( is_admin_bar_showing() && Helper::has_cap( 'admin_bar' ) ) {
 			Helper::add_json( 'objectID', get_the_ID() );

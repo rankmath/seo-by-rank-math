@@ -46,6 +46,13 @@ class DB {
 			->selectSum( 'status = "trashed"', 'trashed' )
 			->one( ARRAY_A );
 
+		$redirction_counts = array_map(
+			function( $value ) {
+				return $value ? $value : 0;
+			},
+			$redirction_counts
+		);
+
 		$redirction_counts['all'] = $redirction_counts['active'] + $redirction_counts['inactive'];
 
 		return $redirction_counts;

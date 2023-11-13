@@ -16,6 +16,7 @@ import {
 	TextControl,
 	TextareaControl,
 } from '@wordpress/components'
+import { applyFilters } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
@@ -122,6 +123,8 @@ const TwitterTab = ( props ) => (
 		{ ! props.useFacebook && 'app' !== props.cardType && (
 			<SocialMediaUpload { ...props } />
 		) }
+
+		{ ! props.useFacebook && applyFilters( 'rank_math_before_serp_devices', '', 'Opengraph' ) }
 
 		{ ! props.useFacebook && 'app' !== props.cardType && (
 			<div className="field-group">

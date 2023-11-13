@@ -71,8 +71,8 @@ const ContentAIPanel = ( props ) => {
 			onSelect={ TabonSelect }
 			data={ props }
 		>
-			{ ( tab ) => (
-				<div className={ 'rank-math-contentai-tab-content-' + tab.name }>
+			{ ( tab, index ) => (
+				<div className={ 'rank-math-contentai-tab-content-' + tab.name } key={ index }>
 					{ createElement( tab.view, props ) }
 				</div>
 			) }

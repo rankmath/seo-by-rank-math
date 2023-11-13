@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.3
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.121.1
+Stable tag: 1.0.201
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,18 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.121 [Aug 09, 2023] =
-- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#modify-sitemap-index-slug) to change the sitemap_index.xml slug
-- Improved: Query to retrieve score on [Site Analytics page](https://rankmath.com/kb/analytics/#site-analytics)
-- Fixed: PHP error in the [Version Control](https://rankmath.com/kb/rank-math-status-and-tools/#version-control) on sites using Themify Updater plugin
-- Fixed: [Keywords](https://rankmath.com/kb/analytics/#keywords) tab in Analytics was not showing data on some setups due to the nested SELECT queries
-- Fixed: PHP error in the [Error log section](https://rankmath.com/kb/rank-math-status-and-tools/#error-log) on some setups
-- Fixed: HowTo block was not showing the [Step image](https://rankmath.com/blog/howto-schema/#adding-steps) when the [Step description](https://rankmath.com/blog/howto-schema/#step-description) was not added
-- Fixed: PHP error on some setups in Dashboard Widget
+= 1.0.201 [Sept 06, 2023] =
+- [NEW!] [AI SEO Tools Inside WordPress Like Never Before - Content AI 2.0 is HERE!](https://rankmath.com/content-ai/)
+- Fixed: Reusable patterns in the Block editor could not be saved as unsynced
+- Fixed: `wplink` script was causing issues on the Media page on some setups
+- Fixed: Attachment posts were displaying a blank page when the [Redirect Orphan Attachments field](https://rankmath.com/kb/general-settings/#redirect-orphan-media) was empty
+- Fixed: Console warning related to the [Table of Contents block](https://rankmath.com/kb/table-of-contents-block/) in WordPress 6.3
 
-= 1.0.121.1 [Aug 11, 2023] =
-- Fixed: [Rank Math Analytics Front-End Bar](https://rankmath.com/kb/analytics-stats-bar/) was not working on WordPress v6.3
-- Fixed: [Table of Contents](https://rankmath.com/kb/table-of-contents-block/) was showing an error when used as a Reusable block 
-- Fixed: [Content AI](https://rankmath.com/kb/how-to-use-content-ai/) was not working properly when diacritics keywords were used
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

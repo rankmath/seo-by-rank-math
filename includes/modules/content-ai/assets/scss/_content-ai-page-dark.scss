@@ -1,0 +1,80 @@
+.tab-header,
+.chat-container,
+.chat-sidebar,
+.chat-input,
+.chat-input textarea,
+.chat-input .chat-input-textarea,
+.chat-input-actions .chat-input-buttons,
+div.form-field .components-base-control input[type='text']:focus,
+div.form-field .components-base-control input[type='text']:active,
+.rank-math-contentai-modal.rank-math-modal .components-text-control__input,
+.rank-math-contentai-modal-overlay .rank-math-modal .column .footer input,
+.components-modal__frame.rank-math-contentai-modal.rank-math-modal .components-input-control__container,
+.rank-math-prompt-modal .grid .column-first .components-search-control input.components-search-control__input {
+	background: transparent;
+}
+
+.rank-math-sidebar-panel .components-panel__body .chat-input-actions .button:hover {
+	border-color: #212F3E !important;
+	background: #212F3E !important;
+}
+
+.rank-math-contentai-modal-overlay .rank-math-modal .column .footer input,
+.components-modal__frame.rank-math-contentai-modal.rank-math-modal .components-input-control__container {
+	color: white;
+}
+
+.rank-math-contentai-modal-overlay .rank-math-modal .column.column-output .tutorial {
+	background: #686868;
+}
+
+.rank-math-contentai-modal.rank-math-modal .components-text-control__input {
+	border: 1px solid #7f868d;
+}
+
+.rank-math-prompt-modal .grid .column-first .components-search-control {
+	&:after {
+		top: 5px;
+	}
+
+	input.components-search-control__input {
+		&:hover,
+		&:focus,
+		&:active {
+			background: transparent;
+		}    
+	}
+}
+
+.content-ai-filter .search-field .components-search-control input.components-search-control__input:not(:placeholder-shown) + .components-search-control__icon button {
+	margin-top: 15px;
+
+	svg {
+		fill: #7f868d;
+	}
+}
+
+.content-ai-tagify .tagify .tagify__tag {
+	background: #686868;
+}
+
+.content-ai-header .components-input-control__container {
+	background: transparent;
+}
+
+.rank-math-sidebar-panel .components-panel__body .rank-math-tab-content-chat .button:hover:not(:disabled) {
+	background: transparent;
+	color: #ed5e5e;
+}
+
+.rank-math-contentai-modal-overlay ::-webkit-input-placeholder {
+	color: #616263;
+}
+
+div.form-field .components-base-control .components-toggle-group-control {
+	background: #686868;
+
+	.components-button {
+		color: white;
+	}
+}

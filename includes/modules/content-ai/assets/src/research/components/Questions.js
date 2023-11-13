@@ -88,9 +88,9 @@ class Questions extends Component {
 			)
 		}
 
-		forEach( this.props.caData.data.related_questions, ( question ) => {
+		forEach( this.props.caData.data.related_questions, ( question, index ) => {
 			questionsData.push(
-				<div className="rank-math-questions-item">
+				<div className="rank-math-questions-item" key={ index }>
 					<h3 className="rank-math-tooltip" data-key={ question } onClick={ () => ( this.setState( { selected: question } ) ) } role="presentation">
 						{ question }
 						{ this.getTooltipContent( question ) }

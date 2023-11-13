@@ -38,32 +38,8 @@ class ContentAI extends Component {
 	 */
 	constructor() {
 		super( ...arguments )
-		this.state = { keyword: this.props.keyword, showResearch: this.props.keyword !== rankMath.ca_keyword.keyword, country: this.props.country, credits: 1, creditsValue: rankMath.ca_credits, loading: false, loadingCredits: false }
+		this.state = { keyword: this.props.keyword, showResearch: this.props.keyword !== rankMath.ca_keyword.keyword, country: this.props.country, credits: 1, loading: false }
 		this.setState = this.setState.bind( this )
-	}
-
-	componentDidMount() {
-		if ( this.state.creditsValue || ! rankMath.isUserRegistered ) {
-			return
-		}
-
-		this.updateCredits()
-	}
-
-	updateCredits() {
-		this.setState( { loadingCredits: true } )
-		apiFetch( {
-			method: 'POST',
-			path: '/rankmath/v1/ca/getCredits',
-		} )
-			.catch( ( error ) => {
-				this.setState( { loadingCredits: false } )
-				alert( error.message )
-			} )
-			.then( ( response ) => {
-				this.setState( { creditsValue: response } )
-				this.setState( { loadingCredits: false } )
-			} )
 	}
 
 	/**
@@ -107,7 +83,7 @@ class ContentAI extends Component {
 								<h3 className="rank-math-ca-section-title">
 									{ __( 'Content AI', 'rank-math' ) }
 									<span>{ __( 'New!', 'rank-math' ) }</span>
-									<a href={ getLink( 'content-ai-settings', 'Sidebar KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" title={ __( 'Content AI Knowledge Base.', 'rank-math' ) }>﹖</a>
+									<Button className='is-link' href={ getLink( 'content-ai-settings', 'Sidebar KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Content AI Knowledge Base.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
 								</h3>
 								<ContentAIScore />
 								<Recommendations recommendations={ data.recommendations } hasCredits={ hasCredits } content={ this.props.content } researcher={ this.props.researcher } updateAiScore={ this.props.updateAiScore } hasThumbnail={ this.props.hasThumbnail } />
@@ -187,9 +163,6 @@ class ContentAI extends Component {
 	 * Get the keyword Field.
 	 */
 	keywordField() {
-		const className = classnames( 'rank-math-tooltip update-credits', {
-			loading: this.state.loadingCredits,
-		} )
 		return (
 			<div className="rank-math-ca-keywords-wrapper">
 				<div className="rank-math-ca-credits-wrapper">
@@ -222,41 +195,22 @@ class ContentAI extends Component {
 					{
 						! this.state.showResearch && ! this.state.loading && ! isEmpty( this.props.data ) &&
 						<Button
-							className="rank-math-ca-force-update rank-math-tooltip left"
+							className="rank-math-ca-force-update"
 							onClick={ () => this.props.researchKeyword( this.state, this.setState, true ) }
+							label={ __( 'Refresh will use 500 Credit.', 'rank-math' ) }
+							showTooltip={ true }
 						>
 							<i className="dashicons dashicons-image-rotate"></i>
-							<span>{ __( 'Refresh will use one new credit.', 'rank-math' ) }</span>
 						</Button>
 					}
-
-					<div className="rank-math-ca-credits">
-						<Button
-							className={ className }
-							onClick={ () => this.updateCredits() }
-						>
-							<i className="dashicons dashicons-image-rotate"></i>
-							<span>{ __( 'Click to refresh the available credits.', 'rank-math' ) }</span>
-						</Button>
-						<span>{ __( 'Credits', 'rank-math' ) }</span>
-						<a
-							href={ getLink( 'content-ai-credits-usage', 'Sidebar Credits Tooltip Icon' ) }
-							rel="noreferrer"
-							target="_blank"
-							id="rank-math-help-icon"
-							title={ __( 'Know more about credits.', 'rank-math' ) }
-						>
-							&#65110;
-						</a>
-						<strong>{ this.state.creditsValue }</strong>
-					</div>
 				</div>
 
 				{ this.state.showResearch && <Button
 					className="is-primary"
 					onClick={ () => this.props.researchKeyword( this.state, this.setState ) }
-					title={ __( 'One credit will be used.', 'rank-math' ) }
+					label={ __( '500 credits will be used.', 'rank-math' ) }
 					disabled={ ! this.state.keyword }
+					showTooltip={ true }
 				>
 					{ __( 'Research', 'rank-math' ) }
 				</Button> }
@@ -386,7 +340,8 @@ export default compose(
 						setState( { loading: false } )
 						dispatch( 'rank-math' ).updateKeywordsData( response.data )
 						if ( ! isNull( response.credits ) && ! isUndefined( response.credits ) ) {
-							setState( { credits: response.credits, creditsValue: ! isNumber( response.credits ) ? 0 : response.credits } )
+							setState( { credits: response.credits } )
+							props.setCredits( ! isNumber( response.credits ) ? 0 : response.credits )
 						}
 
 						doAction( 'rank_math_content_ai_changed', response.keyword )

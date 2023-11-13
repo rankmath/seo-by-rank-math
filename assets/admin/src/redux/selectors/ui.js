@@ -21,6 +21,17 @@ export function getSelectedKeyword( state ) {
 }
 
 /**
+ * Get selected keyword.
+ *
+ * @param {Object} state The app state.
+ *
+ * @return {Object} Return selected keyword.
+ */
+export function getSocialTab( state ) {
+	return state.appUi.socialTab
+}
+
+/**
  * Is refreshing results.
  *
  * @param {Object} state The app state.

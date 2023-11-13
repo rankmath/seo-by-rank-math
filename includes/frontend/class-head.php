@@ -10,13 +10,13 @@
 
 namespace RankMath\Frontend;
 
-use RankMath\KB;
 use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Paper\Paper;
 use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Router;
 use MyThemeShop\Helpers\Str;
+use MyThemeShop\Helpers\Arr;
 use RankMath\Helpers\Security;
 
 defined( 'ABSPATH' ) || exit;
@@ -107,6 +107,21 @@ class Head {
 			}
 
 			printf( '<meta name="%1$s" content="%2$s" />' . "\n", esc_attr( $name ), esc_attr( $content ) );
+		}
+
+		$custom_webmaster_tags = Helper::get_settings( 'general.custom_webmaster_tags' );
+		if ( empty( $custom_webmaster_tags ) ) {
+			return;
+		}
+
+		$custom_webmaster_tags = Arr::from_string( $custom_webmaster_tags );
+		foreach ( $custom_webmaster_tags as $custom_webmaster_tag ) {
+			$custom_webmaster_tag = trim( $custom_webmaster_tag );
+			if ( empty( $custom_webmaster_tag ) ) {
+				continue;
+			}
+
+			echo $custom_webmaster_tag . "\n";
 		}
 	}
 

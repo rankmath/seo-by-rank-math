@@ -5,6 +5,7 @@
 		input[type="text"], input[type="number"], input[type="url"], textarea, select {
 			border-color: $dark-gray;
 			border-radius: 4px;
+			width: 100%;
 
 			&:focus,
 			&:hover {

@@ -3,7 +3,7 @@
  */
 import jQuery from 'jquery'
 import classnames from 'classnames'
-import { isEmpty } from 'lodash'
+import { isEmpty, includes } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -13,19 +13,16 @@ import { addAction, addFilter } from '@wordpress/hooks'
 import { Button } from '@wordpress/components'
 import { Fragment, createElement, render } from '@wordpress/element'
 import { registerPlugin } from '@wordpress/plugins'
-import { select } from '@wordpress/data'
-import {
-	PluginSidebar,
-	PluginSidebarMoreMenuItem,
-	PluginPrePublishPanel,
-} from '@wordpress/edit-post'
+import { select, dispatch } from '@wordpress/data'
+import { PluginSidebar, PluginSidebarMoreMenuItem, PluginPrePublishPanel } from '@wordpress/edit-post'
 
 /**
  * Internal dependencies
  */
-import ContentAI from './ContentAI'
-import ContentAIIcon from './ContentAIIcon'
-import ContentAnalysis from './ContentAnalysis'
+import ContentAITab from './research/ContentAITab'
+import ContentAIIcon from './research/ContentAIIcon'
+import ContentAnalysis from './research/ContentAnalysis'
+import './grammarly'
 
 const ContentAIButton = () => {
 	const className = classnames( 'button-secondary rank-math-content-ai', {
@@ -43,7 +40,7 @@ const ContentAIButton = () => {
 				jQuery( '.rank-math-content-ai-tab' ).trigger( 'click' )
 			} }
 		>
-			<i className="rm-icon rm-icon-target"></i>
+			<i className="rm-icon rm-icon-content-ai"></i>
 			{ __( 'Content AI', 'rank-math' ) }
 		</Button>
 	)
@@ -61,11 +58,11 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 			name: 'contentAI',
 			title: (
 				<Fragment>
-					<i className="rm-icon rm-icon-target" />
+					<i className="rm-icon rm-icon-content-ai" />
 					<span>{ __( 'Content AI', 'rank-math' ) }</span>
 				</Fragment>
 			),
-			view: ContentAI,
+			view: ContentAITab,
 			className: 'rank-math-content-ai-tab hidden is-active',
 		} )
 
@@ -77,7 +74,7 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 	if ( metaboxElem ) {
 		setTimeout( () => {
 			render(
-				createElement( ContentAI ),
+				createElement( ContentAITab ),
 				metaboxElem
 			)
 		}, 1000 )
@@ -94,7 +91,7 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 				return (
 					<PluginPrePublishPanel
 						title={ __( 'Content AI', 'rank-math' ) }
-						icon="rm-icon rm-icon-target"
+						icon="rm-icon rm-icon-content-ai"
 						initialOpen="true"
 						className="rank-math-content-ai-box"
 					>
@@ -119,32 +116,37 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 			},
 		} )
 
-		if ( 'gutenberg' === rankMath.currentEditor ) {
-			const RankMathContentAISidebar = () => (
-				<Fragment>
-					<PluginSidebarMoreMenuItem
-						target="seo-by-rank-math-content-ai-sidebar"
-						icon={ <ContentAIIcon /> }
-					>
-						{ __( 'Content AI', 'rank-math' ) }
-					</PluginSidebarMoreMenuItem>
-					<PluginSidebar
-						name="seo-by-rank-math-content-ai-sidebar"
-						title={ __( 'Content AI', 'rank-math' ) }
-						className="rank-math-sidebar-content-ai-panel"
-					>
-						<ContentAI showMinimal={ true } />
-					</PluginSidebar>
-				</Fragment>
-			)
+		const RankMathContentAISidebar = () => (
+			<Fragment>
+				<PluginSidebarMoreMenuItem
+					target="seo-by-rank-math-content-ai-sidebar"
+					icon={ <ContentAIIcon /> }
+				>
+					{ __( 'Content AI', 'rank-math' ) }
+				</PluginSidebarMoreMenuItem>
+				<PluginSidebar
+					name="seo-by-rank-math-content-ai-sidebar"
+					title={ __( 'Content AI', 'rank-math' ) }
+					className="rank-math-sidebar-panel rank-math-sidebar-content-ai-panel"
+				>
+					<ContentAITab />
+				</PluginSidebar>
+			</Fragment>
+		)
 
-			setTimeout( () => {
-				registerPlugin( 'rank-math-content-ai', {
-					icon: <ContentAIIcon />,
-					render: RankMathContentAISidebar,
-				} )
-			}, 1000 )
-		}
+		setTimeout( () => {
+			registerPlugin( 'rank-math-content-ai', {
+				icon: <ContentAIIcon />,
+				render: RankMathContentAISidebar,
+			} )
+
+			if ( includes( window.location.search, 'tab=content-ai' ) ) {
+				const panelName = 'rank-math-content-ai/seo-by-rank-math-content-ai-sidebar'
+				if ( select( 'core/edit-post' ).getActiveGeneralSidebarName() !== panelName ) {
+					dispatch( 'core/edit-post' ).openGeneralSidebar( panelName )
+				}
+			}
+		}, 1000 )
 	}
 
 	if ( 'classic' !== rankMath.currentEditor ) {

@@ -23,8 +23,8 @@
 		box-shadow: inset 0 2px 5px -3px #7f8292;
 	}
 
-	&:focus,
-	&:hover {
+	&:focus:not(:disabled),
+	&:hover:not(:disabled) {
 		color: $primary;
 		border-color: $primary;
 		background: #f8f9fa;
@@ -51,9 +51,10 @@
 	border-color: $primary;
 	background: $primary;
 	text-shadow: none;
+	border-radius: 3px;
 
-	&:focus,
-	&:hover {
+	&:focus:not(:disabled),
+	&:hover:not(:disabled) {
 		color: #fff;
 		border-color: $primary-hover-border-color;
 		background: $primary-hover;
@@ -98,6 +99,21 @@
 
 	&:focus {
 		box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-1, 3);
+	}
+}
+
+.is-red:not(.default) {
+	border-color: $color-3;
+	background: $color-3;
+
+	&:hover,
+	&:focus {
+		border-color: darken( $color-3, 3 );
+		background: darken( $color-3, 3 );
+	}
+
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 3px darken($color-3, 3);
 	}
 }
 

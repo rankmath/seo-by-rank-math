@@ -10,6 +10,8 @@ return [
 		'wp-url',
 		'wp-i18n',
 		'lodash',
+		'wp-primitives',
+		'wp-reusable-blocks',
 	],
 	'version'      => rank_math()->version,
 ];

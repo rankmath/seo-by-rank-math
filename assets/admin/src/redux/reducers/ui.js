@@ -26,6 +26,7 @@ const DEFAULT_STATE = {
 	snippetPreviewType: '',
 	refreshResults: '',
 	redirectionItem: {},
+	socialTab: 'facebook',
 
 	// Schema.
 	editorTab: '',

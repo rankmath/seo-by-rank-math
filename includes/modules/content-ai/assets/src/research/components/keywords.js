@@ -9,7 +9,7 @@ import classnames from 'classnames'
  */
 import { __ } from '@wordpress/i18n'
 import { Fragment, Component } from '@wordpress/element'
-import { PanelBody, SelectControl } from '@wordpress/components'
+import { PanelBody, SelectControl, Button } from '@wordpress/components'
 import { compose } from '@wordpress/compose'
 import { withDispatch } from '@wordpress/data'
 
@@ -91,7 +91,7 @@ class Keywords extends Component {
 							this.setState( { type } )
 						} }
 					/>
-					<a href={ getLink( 'content-ai-keywords', 'Sidebar Keywords KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" title={ __( 'Know more about Keywords.', 'rank-math' ) }>﹖</a>
+					<Button className='is-link' href={ getLink( 'content-ai-keywords', 'Sidebar Keywords KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Know more about Keywords.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
 					<>
 						<span className="components-form-token-field__help">{ __( 'Click on any keyword to copy it.', 'rank-math' ) }</span>
 						<br />

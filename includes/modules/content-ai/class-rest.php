@@ -28,7 +28,7 @@ class Rest extends WP_REST_Controller {
 
 	/**
 	 * Registered data.
-	 * 
+	 *
 	 * @var array|false
 	 */
 	private $registered;
@@ -64,6 +64,81 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 			]
 		);
+
+		register_rest_route(
+			$this->namespace,
+			'/createPost',
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'create_post' ],
+				'permission_callback' => [ $this, 'has_permission' ],
+			]
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/saveOutput',
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'save_output' ],
+				'permission_callback' => [ $this, 'has_permission' ],
+			]
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/deleteOutput',
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'delete_output' ],
+				'permission_callback' => [ $this, 'has_permission' ],
+			]
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/updateRecentPrompt',
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'update_recent_prompt' ],
+				'permission_callback' => [ $this, 'has_permission' ],
+			]
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/updatePrompt',
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'update_prompt' ],
+				'permission_callback' => [ $this, 'has_permission' ],
+			]
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/pingContentAI',
+			[
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => [ $this, 'ping_content_ai' ],
+				'permission_callback' => [ $this, 'has_ping_permission' ],
+			]
+		);
+	}
+
+	/**
+	 * Check API key in request.
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return bool                     Whether the API key matches or not.
+	 */
+	public function has_ping_permission( WP_REST_Request $request ) {
+		if ( empty( $this->registered ) ) {
+			return false;
+		}
+
+		return $request->get_param( 'apiKey' ) === $this->registered['api_key'] &&
+			$request->get_param( 'username' ) === $this->registered['username'];
 	}
 
 	/**
@@ -146,7 +221,7 @@ class Rest extends WP_REST_Controller {
 			return $this->get_errored_data( $data['error'] );
 		}
 
-		$credits = $data['remaining_credits'];
+		$credits = $data['remaining_credits'] > 0 ? $data['remaining_credits'] : 0;
 		$data    = $data['data']['details'];
 		$this->get_recommendations( $data );
 
@@ -160,13 +235,141 @@ class Rest extends WP_REST_Controller {
 		);
 		$keyword_data[ $country ][ $keyword ] = $data;
 		update_option( 'rank_math_ca_data', $keyword_data, false );
-		update_option( 'rank_math_ca_credits', $credits, false );
+		Helper::update_credits( $credits );
 
 		return [
 			'data'    => $keyword_data[ $country ][ $keyword ],
 			'credits' => $credits,
 			'keyword' => $keyword,
 		];
+	}
+
+	/**
+	 * Create a new Post from Content AI Page.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function create_post( WP_REST_Request $request ) {
+		$content       = $request->get_param( 'content' );
+		$title         = 'Content AI Post';
+		$blocks        = parse_blocks( $content );
+		$current_block = ! empty( $blocks ) ? current( $blocks ) : '';
+		if (
+			! empty( $current_block ) &&
+			$current_block['blockName'] === 'core/heading' &&
+			$current_block['attrs']['level'] === 1
+		) {
+			$title = wp_strip_all_tags( $current_block['innerHTML'] );
+		}
+
+		$post_id = wp_insert_post(
+			[
+				'post_title'   => $title,
+				'post_content' => $content,
+			]
+		);
+
+		return wp_specialchars_decode( add_query_arg( 'tab', 'content-ai', get_edit_post_link( $post_id ) ) );
+	}
+
+	/**
+	 * Save the API output.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function save_output( WP_REST_Request $request ) {
+		$outputs      = $request->get_param( 'outputs' );
+		$endpoint     = $request->get_param( 'endpoint' );
+		$is_chat      = $request->get_param( 'isChat' );
+		$attributes   = $request->get_param( 'attributes' );
+		$credits_data = $request->get_param( 'credits' );
+
+		if ( ! empty( $credits_data ) ) {
+			$credits = ! empty( $credits_data['credits'] ) ? json_decode( $credits_data['credits'], true ) : [];
+			$data    = [
+				'credits'      => ! empty( $credits['available'] ) ? $credits['available'] - $credits['taken'] : 0,
+				'plan'         => ! empty( $credits_data['plan'] ) ? $credits_data['plan'] : '',
+				'refresh_date' => ! empty( $credits_data['refreshDate'] ) ? $credits_data['refreshDate'] : '',
+			];
+
+			Helper::update_credits( $data );
+		}
+
+		if ( $is_chat ) {
+			Helper::update_chats( current( $outputs ), end( $attributes['messages'] ), $attributes['session'], $attributes['isNew'], $attributes['regenerate'] );
+			return true;
+		}
+
+		return Helper::update_outputs( $endpoint, $outputs );
+	}
+
+	/**
+	 * Delete the API output.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function delete_output( WP_REST_Request $request ) {
+		$is_chat = $request->get_param( 'isChat' );
+		if ( $is_chat ) {
+			return Helper::delete_chats( $request->get_param( 'index' ) );
+		}
+
+		return Helper::delete_outputs();
+	}
+
+	/**
+	 * Update the Prompts.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function update_prompt( WP_REST_Request $request ) {
+		$prompt = $request->get_param( 'prompt' );
+
+		if ( is_string( $prompt ) ) {
+			return Helper::delete_prompt( $prompt );
+		}
+
+		return Helper::update_prompts( $prompt );
+	}
+
+	/**
+	 * Update the Recent Prompts.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function update_recent_prompt( WP_REST_Request $request ) {
+		$prompt = $request->get_param( 'prompt' );
+		return Helper::update_recent_prompts( $prompt );
+	}
+
+	/**
+	 * Endpoing to update the AI plan and credits.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function ping_content_ai( WP_REST_Request $request ) {
+		$credits = ! empty( $data['credits'] ) ? json_decode( $data['credits'], true ) : [];
+		$data    = [
+			'credits'      => ! empty( $credits['available'] ) ? $credits['available'] - $credits['taken'] : 0,
+			'plan'         => $request->get_param( 'plan' ),
+			'refresh_date' => $request->get_param( 'refreshDate' ),
+		];
+
+		Helper::update_credits( $data );
+
+		return true;
 	}
 
 	/**
@@ -197,7 +400,7 @@ class Rest extends WP_REST_Controller {
 
 		$url = add_query_arg(
 			$args,
-			'https://rankmath.com/wp-json/rankmath/v1/contentAi'
+			'https://rankmath.com/wp-json/contentai/v1/research'
 		);
 
 		$data = wp_remote_get(

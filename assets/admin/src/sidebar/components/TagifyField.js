@@ -60,6 +60,7 @@ class TagifyField extends Component {
 	render() {
 		const attrs = {
 			ref: this._handleRef,
+			id: this.props.id,
 			name: this.props.name,
 			className: this.props.className,
 			placeholder: this.props.placeholder,

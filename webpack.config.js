@@ -30,6 +30,7 @@ const externals = {
 	'@wordpress/plugins': 'wp.plugins',
 	'@wordpress/rich-text': 'wp.richText',
 	'@wordpress/url': 'wp.url',
+	'@wordpress/keyboard-shortcuts': 'wp.keyboardShortcuts',
 
 	// Elementor
 	Marionette: 'Marionette',
@@ -63,6 +64,10 @@ const alias = {
 	'content-ai': resolve(
 		__dirname,
 		'./includes/modules/content-ai/assets/src'
+	),
+	'content-ai-block': resolve(
+		__dirname,
+		'./includes/modules/content-ai/blocks/command/assets/src'
 	),
 }
 
@@ -134,7 +139,11 @@ const entryPoints = {
 		elementor: './includes/3rdparty/elementor/assets/src/elementor.js',
 	},
 	'content-ai': {
-		'content-ai': './includes/modules/content-ai/assets/src/index.js',
+		'content-ai': './includes/modules/content-ai/assets/src/content-ai.js',
+		'content-ai-page': './includes/modules/content-ai/assets/src/content-ai-page.js',
+	},
+	'content-ai-block': {
+		index: './includes/modules/content-ai/blocks/command/assets/src/index.js',
 	},
 }
 
@@ -155,6 +164,7 @@ const paths = {
 	status: './includes/modules/status/assets/js',
 	'version-control': './includes/modules/version-control/assets/js',
 	'content-ai': './includes/modules/content-ai/assets/js',
+	'content-ai-block': './includes/modules/content-ai/blocks/command/assets/js',
 	toc: './includes/modules/schema/blocks/toc/assets/js',
 }
 

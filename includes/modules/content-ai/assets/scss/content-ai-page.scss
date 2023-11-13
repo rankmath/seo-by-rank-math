@@ -1,0 +1,2543 @@
+@import '../../../../../assets/vendor/bourbon/bourbon';
+
+@import '../../../../../assets/admin/scss/variables';
+
+@import '../../../../../assets/admin/scss/mixins';
+
+@import '../../../../../assets/admin/scss/sidebar/modal';
+
+@import '../../../../../assets/admin/scss/sidebar/tagify';
+
+@import '../../../../../assets/admin/scss/partials/common/pro-cta';
+
+// Common and Vendors
+@import '../../../../../assets/vendor/bourbon/bourbon';
+
+@import '../../../../../assets/admin/scss/variables';
+
+@import '../../../../../assets/admin/scss/mixins';
+
+%flex {
+	@include flex;
+}
+
+%rm-icon {
+	font-size: 28px;
+	line-height: 50px;
+
+	display: inline-block;
+
+	color: #ccc;
+	border-radius: 6px;
+	// suggest gray gradient
+	background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+
+	@include size(50px);
+}
+
+%wp-block-code {
+	color: #fff;
+	border-color: #000;
+	background: $text;
+}
+
+@mixin component-search-control {
+	.components-search-control {
+		&:after {
+			line-height: 1.3;
+
+			position: absolute;
+
+			padding: 0 4px 1px;
+
+			content: '/';
+
+			color: $gray;
+			border: 1px solid $gray;
+			border-radius: 3px;
+
+			@include position(absolute, 5px 4px null null);
+		}
+
+		input.components-search-control__input {
+			width: 100%;
+			height: 30px;
+			padding: 0 1.5rem 0 2rem;
+
+			transition: .25s all ease-in-out;
+
+			border: 1px solid $gray;
+			border-radius: 6px;
+			background: #fff;
+
+			&::placeholder {
+				color: $dark_gray;
+			}
+
+			&:hover,
+			&:focus,
+			&:active {
+				border-color: $primary;
+				background-color: #fff;
+				box-shadow: 0 0 0 1px $primary;
+			}
+
+			// has value.
+			&:not(:placeholder-shown) {
+				+ .components-search-control__icon button {
+					min-width: 26px;
+					margin-top: 4px;
+					padding: 0;
+
+					border: 0;
+					background: transparent;
+
+					@at-root .rank-math-elementor & {
+						margin-top: 12px;
+					}
+
+					svg {
+						fill: $text;
+					}
+				}
+			}
+		}
+
+		&__icon {
+			right: auto;
+			left: 1px;
+
+			fill: $dark_gray;
+
+			svg {
+				margin: 0;
+
+				transform: rotate(-90deg);
+			}
+		}
+	}
+}
+
+@mixin character_limit {
+	font-size: 12px;
+	font-weight: normal;
+
+	flex-grow: 1;
+
+	text-align: right;
+
+	opacity: 0;
+	color: $dark_gray;
+
+	&-reached {
+		color: $color-3;
+	}
+}
+
+.rank-math-button-devices {
+	.button.button-small {
+		&:nth-child( 2 ) {
+			margin-right: 5px;
+		}
+	}
+}
+
+.button.button-small.rank-math-content-ai-meta-button {
+	display: inline-flex;
+	align-items: center;
+
+	color: #fff;
+	border-color: $primary;
+	background: $primary;
+
+	i {
+		margin-right: 5px;
+	}
+}
+
+.rank-math-header {
+	.credits-remaining {
+		display: flex;
+		align-items: center;
+
+		color: $dark_gray;
+
+		strong {
+			margin-left: 2px;
+
+			color: #000;
+		}
+	}
+}
+
+//common
+.content-ai {
+	&-header {
+		display: flex;
+		align-items: flex-start;
+		flex: auto;
+		flex-flow: row wrap;
+		flex-basis: 100%;
+	}
+
+	&-filter {
+		display: flex;
+
+		width: 100%;
+
+		div {
+			margin: 0;
+
+			button {
+				display: inline-block;
+
+				height: auto;
+				margin-right: .5rem;
+
+				margin-bottom: 1rem;
+				padding: 5px 14px;
+
+				list-style-type: none;
+
+				cursor: pointer;
+
+				color: #fff;
+				border: 1px solid rgba($primary, .2);
+				border-radius: 15px;
+				background-color: #2c3338;
+
+				&.active:not(:disabled),
+				&:hover:not(:disabled),
+				&:focus:not(:disabled) {
+					color: #fff;
+					border-color: $primary;
+					background: $primary;
+				}
+			}
+		}
+
+		.search-field {
+			margin-left: 1rem;
+
+			margin-bottom: 1rem;
+
+			@include component-search-control;
+		}
+	}
+
+	&-error .notice {
+		display: block !important;
+		margin: 5px 0 10px;
+	}
+}
+
+// Fields.
+div.form-field {
+	position: relative;
+
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	&:first-of-type {
+		padding-top: 0;
+	}
+
+	.components-base-control {
+		input,
+		textarea,
+		select {
+			font-size: .875rem;
+
+			width: 100%;
+			min-height: 34px;
+
+			border-color: $dark_gray;
+			border-radius: 5px;
+
+			&:hover,
+			&:focus {
+				border-color: $primary;
+				box-shadow: $primary 0 0 0 1px inset;
+			}
+		}
+
+		textarea {
+			line-height: 1.4;
+		}
+
+		input[type='text'] {
+			box-sizing: border-box;
+			min-height: 38px;
+			margin: 0;
+
+			&:focus,
+			&:active {
+				border-color: $primary;
+				background: #fff;
+				box-shadow: 0 0 0 1px $primary;
+			}
+		}
+
+		.components-toggle-group-control {
+			border-color: $dark_gray;
+			border-radius: 4px;
+		}
+	}
+
+	a.rank-math-tooltip {
+		margin-left: 3px;
+
+		span {
+			bottom: -20%;
+			left: 125px;
+
+			display: none;
+
+			&:after {
+				top: 45%;
+				left: -10px;
+
+				transform: rotate(90deg);
+			}
+		}
+	}
+
+	.components-select-control {
+		&__field {
+			margin-bottom: 0;
+		}
+
+		select:focus {
+			+ .components-input-control__suffix + .components-input-control__backdrop {
+				border-color: $primary;
+				outline-color: $primary;
+				box-shadow: 0 0 0 1px $primary;
+			}
+		}
+	}
+
+	.components-input-control__backdrop {
+		border-color: $dark_gray;
+		border-radius: 4px;
+	}
+
+	&.is-required label:after {
+		font-size: .875rem;
+
+		margin-left: 3px;
+
+		content: '*';
+		vertical-align: middle;
+
+		color: red;
+	}
+
+	label {
+		font-size: .825rem;
+		font-weight: 600;
+
+		display: block;
+
+		margin-bottom: 6px;
+
+		text-transform: initial;
+
+		.limit {
+			float: right;
+
+			@include character_limit;
+		}
+	}
+
+	&.limit-reached {
+		input,
+		textarea,
+		tags.tagify {
+			border-color: $color-3;
+		}
+
+		.limit {
+			opacity: 1;
+			color: $color-3;
+		}
+
+		input,
+		textarea {
+			&:focus {
+				border-color: $color-3;
+				box-shadow: 0 0 0 1px $color-3;
+			}
+		}
+	}
+
+	&:hover {
+		label .limit {
+			opacity: 1;
+		}
+	}
+}
+
+// Tagify Field.
+.content-ai-tagify {
+	.limit {
+		display: none;
+	}
+
+	.tagify {
+		margin-bottom: 0;
+
+		border-color: $dark_gray;
+		background: #fff;
+
+		&:hover,
+		&:focus {
+			border-color: $primary;
+			box-shadow: $primary 0 0 0 1px inset;
+		}
+
+		&__tag:first-child .tagify__tag-text:before {
+			display: none;
+		}
+
+		.tagify {
+			&__input:empty:before {
+				opacity: .75;
+			}
+
+			&__tag {
+				background: lighten($light_gray, 5%);
+
+				&__removeBtn {
+					&:hover,
+					&:focus {
+						background: $color-bad-dark;
+					}
+				}
+			}
+		}
+
+		&--focus {
+			border-color: $primary;
+		}
+
+		@at-root .tagify__dropdown {
+			font-size: .875rem;
+
+			cursor: pointer;
+
+			span {
+				margin-left: 2px;
+			}
+		}
+	}
+}
+
+// AI Tool List.
+.grid {
+	flex-flow: row wrap;
+
+	@extend %flex;
+	gap: .9375rem;
+}
+
+// Single AI Tool Item.
+.module-listing .rank-math-box {
+	flex: 0 0 288px;
+
+	box-sizing: border-box;
+	margin: 0;
+	padding: 1.875rem 1.25rem 2rem;
+
+	transition: .2s all linear;
+
+	// align-items: flex-start;
+	// text-align: left;
+
+	&:hover,
+	&:focus {
+		cursor: pointer;
+
+		border-color: $primary;
+		box-shadow: 0 0 0 1px $primary;
+	}
+
+	i {
+		text-align: center;
+	}
+
+	header {
+		h3 {
+			font-size: 1.125rem;
+
+			margin: .75rem 0 .75rem;
+
+			.rank-math-pro-badge {
+				font-weight: 500;
+
+				&.beta {
+					color: #e91e63;
+					background: rgba( #e91e63, .1 );
+				}
+			}
+		}
+
+		p {
+			font-size: .938rem;
+
+			margin-bottom: 0;
+			padding: 0;
+		}
+	}
+}
+
+@mixin output-item {
+	position: relative;
+
+	padding: 2rem 1rem 1rem;
+
+	transition: all .2s linear;
+
+	border: 1px solid rgba( $color-1, .075 );
+	border-radius: 5px;
+	background: rgba( $color-1, .075 );
+
+	&:hover,
+	&:focus {
+		border-color: $color-1;
+
+		.output-actions {
+			transition: opacity .2s ease-in-out;
+
+			opacity: 1;
+		}
+	}
+
+	.output-actions {
+		position: absolute;
+		top: .5rem;
+		right: 0;
+
+		display: flex;
+
+		margin-bottom: 10px;
+		padding: 0 1rem .5rem .5rem;
+
+		opacity: 0;
+		background: #f0f9f6;
+
+		button {
+			margin-right: 5px;
+
+			color: #fff;
+			border: 0;
+			background: darken($color-1, 5);
+
+			&:hover,
+			&:focus {
+				color: #fff;
+				border-color: darken($color-1, 5);
+				background: $color-1;
+			}
+
+			&:last-of-type {
+				margin-right: 0;
+			}
+
+			i {
+				margin-right: 4px;
+
+				vertical-align: -2px;
+			}
+		}
+	}
+
+	.word-count {
+		font-size: .75rem;
+
+		position: absolute;
+		top: .5rem;
+
+		color: rgba($text, .7);
+	}
+
+	.content {
+		font-size: .875rem;
+		line-height: 1.5;
+
+		overflow-x: auto;
+
+		user-select: all;
+
+		color: darken($color-1, 35);
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin: 0 0 1rem;
+		}
+
+		h1 {
+			font-size: 1.75rem;
+			font-weight: 600;
+		}
+
+		h2 {
+			font-size: 1.25rem;
+			font-weight: 700;
+		}
+
+		h3 {
+			font-size: 1.1rem;
+			font-weight: 500;
+		}
+	}
+}
+
+// AI Tool Modal.
+.rank-math-contentai-modal-overlay {
+	position: fixed !important;
+	z-index: 9999999 !important;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background-color: rgba( 0,0,0,.5 );
+
+	.rank-math-modal {
+		font-size: .875rem;
+
+		overflow: hidden;
+
+		width: 960px;
+
+		> div {
+			display: flex;
+
+			width: 100%;
+
+			> div {
+				width: 100%;
+				max-height: 100%;
+			}
+
+			.components-modal__header {
+				span {
+					display: none !important;
+				}
+
+				button {
+					cursor: pointer;
+
+					border: none;
+					outline: none;
+					background-color: transparent;
+					box-shadow: none;
+				}
+
+				.components-modal__header-heading {
+					font-size: 1rem;
+
+					i {
+						margin-right: 5px;
+
+						vertical-align: -2px;
+					}
+				}
+			}
+		}
+
+		.column-body {
+			display: flex;
+
+			width: 100%;
+			height: 100%;
+
+			.column {
+				position: relative;
+
+				flex: 0 0 35%;
+
+				background-color: lighten($light_gray, 10);
+
+				&-inner {
+					overflow-x: auto;
+
+					height: calc(100% - 64px);
+					padding: 20px;
+				}
+
+				h3 {
+					display: flex;
+
+					margin-top: 0;
+					margin-bottom: 1.25rem;
+
+					span {
+						flex-grow: 1;
+					}
+
+					button {
+						display: flex;
+						align-items: center;
+
+						&:last-child {
+							margin-left: 8px;
+						}
+
+						i {
+							margin-right: 5px;
+						}
+					}
+				}
+
+				.required-fields span {
+					color: $color-3;
+				}
+
+				// Input Footer.
+				.footer {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+
+					display: flex;
+					align-items: baseline;
+					flex-flow: row wrap;
+					justify-content: space-between;
+
+					box-sizing: border-box;
+					width: 100%;
+					padding: 12px 20px;
+
+					border-top: 1px solid $light_gray;
+					background-color: lighten($light_gray, 10);
+
+					.components-input-control__backdrop,
+					input {
+						border-color: $dark_gray;
+						border-radius: 4px;
+					}
+
+					input {
+						&:hover,
+						&:focus {
+							+ .components-input-control__backdrop {
+								border-color: $primary;
+								box-shadow: 0 0 0 1px $primary inset;
+							}
+						}
+					}
+
+					input[type=number]::-webkit-inner-spin-button {
+						opacity: 1;
+					}
+
+					.components-input-control {
+						width: 50px;
+						margin-right: 5px;
+						padding: 0;
+
+						input {
+							min-height: 40px;
+
+							&::-webkit-inner-spin-button {
+								opacity: 1;
+							}
+						}
+					}
+
+					.output-label {
+						font-size: 13px;
+
+						margin-right: auto;
+					}
+				}
+
+				// Output Area.
+				&.column-output {
+					overflow-y: scroll;
+					flex-grow: 1;
+
+					padding: 20px;
+
+					border-left: 1px solid $light_gray;
+					background: #fff;
+
+					.column-output-heading {
+						display: flex;
+						justify-content: space-between;
+
+						button {
+							margin-bottom: 1.25rem;
+						}
+					}
+
+					// Video Tutorial.
+					.rank-math-video-tutorial {
+						text-align: center;
+
+						border-left: 3px solid $color-ok-dark;
+						background-color: lighten( $color-ok, 29% );
+
+						a {
+							margin-top: 1rem;
+
+							display: inline-block;
+							text-decoration: none;
+						}
+
+						.rm-icon-youtube {
+							font-size: 3.5rem;
+
+							width: auto;
+							height: auto;
+
+							transition: .25s all linear;
+
+							color: #f00;
+						}
+
+						p {
+							font-size: 1rem;
+
+							margin: 0 auto;
+						}
+
+						.info {
+							margin: 0;
+							padding: 2rem;
+
+							cursor: pointer;
+
+							&,
+							&:hover,
+							&:focus {
+								border: none;
+								outline: none;
+								background: transparent;
+								box-shadow: none;
+							}
+						}
+					}
+
+					// Results.
+					.inner-wrapper {
+						display: flex;
+						flex-direction: column-reverse;
+
+						.output-item {
+							margin-bottom: 1rem;
+
+							@include output-item;
+
+							&.loading {
+								padding-top: 1rem;
+							}
+
+							.content {
+								p {
+									font-size: inherit;
+
+									margin: 0 0 1rem;
+
+									&:last-of-type {
+										margin-bottom: 0;
+									}
+								}
+
+								@keyframes blink {
+									to {
+										visibility: hidden;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// AI tool grid on Content AI Page.
+.rank-math-tab-content-ai-tools {
+	button.rank-math-box {
+		flex-direction: column;
+
+		height: auto;
+	}
+}
+
+// Single Post Block Editor & 'Content Editor' Tab on Content AI Page.
+.rank-math-content-ai-wrapper {
+	#editor {
+		.edit-post-layout {
+			position: static;
+
+			.interface-interface-skeleton__header {
+				display: none;
+			}
+
+			.interface-interface-skeleton__body {
+				.interface-interface-skeleton__notices,
+				.interface-interface-skeleton__sidebar,
+				.interface-interface-skeleton__actions,
+				.edit-post-visual-editor__post-title-wrapper {
+					display: none;
+				}
+
+				> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+					max-width: 100%;
+				}
+			}
+		}
+	}
+
+	> .wp-block-column:first-of-type > div:last-of-type {
+		position: relative;
+
+		height: calc( 100% - 45px );
+
+		background: #fff;
+
+		> div {
+			overflow-x: auto;
+
+			height: 100%;
+		}
+	}
+
+	// AI Tool list.
+	.rank-math-tab-content-ai-tools {
+		padding: 1rem;
+
+		// Grid filter.
+		.content-ai-header {
+			ul {
+				display: none;
+			}
+
+			select,
+			.components-input-control__backdrop {
+				line-height: 30px;
+
+				height: auto;
+
+				border-color: $dark_gray;
+				border-radius: 4px;
+			}
+
+			select:focus {
+				&,
+				~ .components-input-control__backdrop {
+					border-color: $primary;
+					box-shadow: 0 0 0 1px $primary inset;
+				}
+			}
+
+			.content-ai-filter {
+				justify-content: space-between;
+
+				width: 100%;
+				margin: 0;
+
+				> .components-base-control {
+					margin-right: 1rem;
+				}
+
+				div > button {
+					margin-bottom: .5rem;
+				}
+
+				.search-field {
+					width: 100%;
+					margin-left: 0;
+				}
+
+				input[type='search'] {
+					width: 100%;
+					margin: 0;
+					padding: 0 1.5rem;
+
+					border: 1px solid $dark_gray;
+					border-radius: 4px;
+					background: #fff;
+
+					&:hover {
+						border-color: $primary;
+					}
+
+					&:focus {
+						border-color: $primary;
+						box-shadow: 0 0 0 1px $primary;
+					}
+				}
+			}
+		}
+
+		// AI Tool Item.
+		.rank-math-box {
+			display: flex;
+			align-items: center;
+			flex: 0 0 100%;
+			flex-direction: row;
+
+			padding: .5rem;
+
+			color: darken($dark_gray, 8);
+			border: 1px solid $gray;
+			border-radius: 4px;
+			background: #fbfbfb;
+
+			&:hover {
+				border-color: $primary;
+				background: lighten($primary, 52);
+			}
+
+			i {
+				margin-left: 2px;
+
+				text-align: center;
+
+				&.rm-icon-content-ai:before {
+					color: inherit;
+					background: none;
+					-webkit-background-clip: unset;
+					        background-clip: unset;
+
+					-webkit-text-fill-color: unset;
+				}
+			}
+
+			header {
+				margin-left: 5px;
+
+				h3 {
+					font-size: .875rem;
+					font-weight: normal;
+					line-height: 1;
+
+					z-index: auto;
+
+					margin: 0;
+
+					text-transform: none;
+				}
+
+				p {
+					display: none;
+				}
+			}
+		}
+
+		// Search Form.
+		input,
+		textarea {
+			&:focus {
+				border-color: $primary;
+				box-shadow: 0 0 0 1px $primary;
+			}
+		}
+	}
+
+	// Write Tab.
+	.rank-math-tab-content {
+		&-write, &-ai-tools, &-chat {
+			position: relative;
+		}
+
+		&-write {
+			overflow-x: scroll;
+
+			max-height: calc( 100% - 50px );
+			padding: 1rem;
+
+			.components-notice {
+				margin: 0 0 1rem;
+			}
+
+			label {
+				font-size: .875rem;
+				font-weight: 500;
+
+				display: block;
+
+				margin-bottom: 5px;
+			}
+
+			.write-button {
+				margin-top: .5rem;
+
+				span {
+					font-size: .625rem;
+
+					margin-left: 5px;
+					padding: 4px 6px;
+
+					border-radius: 3px;
+					background: rgba( #000, .25 );
+				}
+			}
+		}
+
+		&-tools {
+			overflow-x: scroll;
+
+			max-height: calc( 100% - 62px );
+			padding: 0 1rem 1rem;
+		}
+	}
+
+	// Chat Tab.
+	.rank-math-tab-content-chat {
+		.tab-header {
+			border: 0;
+			border-bottom: 1px solid $light_gray;
+
+			&-title span {
+				display: none;
+			}
+		}
+
+		.rank-math-content-chat-page {
+			height: auto;
+		}
+	}
+
+	.chat-container {
+		flex: 0 0 100%;
+
+		border: 0;
+	}
+
+	.chat-sidebar {
+		flex: 0 0 100%;
+
+		max-width: 100%;
+		height: auto;
+
+		border-width: 0 0 1px 0;
+		border-color: $light_gray;
+	}
+
+	.chat-messages {
+		.prompt-examples {
+			> h2 {
+				font-size: 1.25rem!important;
+
+				margin-bottom: 1rem;
+			}
+
+			.grid > div {
+				flex: 0 0 100%;
+
+				&:nth-of-type(1n+5) {
+					display: none;
+				}
+			}
+		}
+
+		.chat-message {
+			max-width: 100%;
+
+			.message {
+				font-size: .875rem;
+			}
+		}
+	}
+
+	.chat-input {
+		border-color: $light_gray;
+		border-bottom: 1px solid $light_gray;
+
+		&-buttons .prompts-button i.rm-icon {
+			margin-right: 0;
+		}
+	}
+
+	.clear-history {
+		float: right;
+	}
+}
+
+// Content AI icon in the Block Toolbar.
+.components-dropdown-menu .rm-icon-content-ai {
+	background: linear-gradient(-135deg, #ff4492, #434e8f);
+	-webkit-background-clip: text;
+	        background-clip: text;
+
+	-webkit-text-fill-color: transparent;
+}
+
+// Block Editor `//` Command.
+div.rank-math-content-ai-command {
+	font-family: sans-serif;
+	font-size: 1.063rem;
+	line-height: 1.5;
+
+	position: relative;
+	z-index: 9;
+
+	overflow-x: auto;
+
+	box-sizing: border-box;
+	padding: .5rem 1rem;
+
+	letter-spacing: .5px;
+
+	border: 10px solid;
+	border-width: 2px;
+	border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+	border-image-slice: 1;
+	background: #efeff9;
+
+	&.typing {
+		pointer-events: none;
+	}
+
+	> .rich-text {
+		margin-left: 30px;
+
+		white-space: normal !important;
+
+		> span {
+			margin: 0 0 0 -10px;
+
+			opacity: 0;
+		}
+
+		&:focus *[data-rich-text-format-boundary] {
+			background: transparent;
+		}
+
+		> *:nth-last-child(2) {
+			margin-bottom: 0;
+		}
+
+		.wp-block-code {
+			@extend %wp-block-code;
+		}
+	}
+
+	// Enter button.
+	button {
+		height: 100%;
+
+		cursor: pointer;
+
+		color: $rm_brand;
+		border: none;
+		background-color: transparent;
+
+		i {
+			vertical-align: middle;
+		}
+	}
+
+	&:after,
+	&.has-block-overlay:not(.is-multi-selected):after {
+		font-family: 'rank-math';
+		font-size: 1.5rem;
+
+		position: absolute !important;
+		top: .188rem !important;
+		right: auto !important;
+		left: .875rem !important;
+
+		content: '\e905' !important;
+
+		outline: none !important;
+		background: linear-gradient(-135deg, #ff4492, #434e8f);
+		-webkit-background-clip: text;
+		        background-clip: text;
+		box-shadow: none !important;
+
+		-webkit-text-fill-color: transparent;
+	}
+
+	// Rest of the buttons.
+	&-buttons {
+		margin-top: 10px;
+
+		button.button.button-small {
+			font-size: .875rem!important;
+			font-weight: 500;
+
+			margin-right: 5px;
+			padding: 0 12px;
+
+			color: $rm_brand;
+			border: 1px solid $rm_brand;
+
+			&:focus {
+				color: $rm_brand;
+				border-color: $rm_brand;
+				box-shadow: 0 0 0 1px $rm_brand;;
+			}
+
+			&:hover {
+				color: #fff;
+				border-color: $rm_brand;
+				background: $rm_brand;
+
+				&:focus {
+					border-color: #fff;
+				}
+			}
+		}
+	}
+}
+
+// AI Tool list with `//` Command.
+.content-ai-autocompleters {
+	font-size: .85rem;
+
+	padding: 6px;
+
+	span {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.content-ai-autocompleters,
+.rank-math-tab-content-write .rank-math-tab-content-ai-tools .rank-math-box,
+div.rank-math-tab-content-ai-tools .rank-math-box {
+	@import 'icon-colors';
+
+	i.ai-icon.rm-icon {
+		font-size: 1rem;
+		line-height: 16px;
+
+		box-sizing: border-box;
+		width: 24px;
+		height: 24px;
+		margin-right: 7px !important;
+		padding: 4px;
+
+		border-radius: 3px;
+	}
+}
+
+.rank-math-tab-content-ai-tools.dashboard-wrapper .rank-math-box i.ai-icon.rm-icon {
+	font-size: 28px;
+	line-height: 50px;
+
+	width: 50px;
+	height: 50px;
+	padding: 0;
+
+	border-radius: 6px;
+}
+
+// Content Editor Tab on Content AI Page.
+body.rank-math_page_rank-math-content-ai-page {
+	#wpbody-content {
+		display: flex;
+		flex-direction: column;
+
+		> div {
+			order: 2;
+
+			&.notice {
+				margin-left: 0;
+			}
+
+			&.rank-math-breadcrumbs-wrap {
+				margin-top: 20px;
+			}
+		}
+
+		// Page Header.
+		.rank-math-header {
+			order: 1;
+		}
+
+		// Main Page Tabs.
+		.rank-math-tabs {
+			.components-tab-panel {
+				&__tabs {
+					button {
+						border-bottom: none;
+
+						&.is-active {
+							&:after {
+								position: absolute;
+								z-index: 1;
+								bottom: -1px;
+								left: 0;
+
+								visibility: visible;
+
+								width: 100%;
+								height: 1px;
+
+								content: '';
+
+								background: #fafafb;
+							}
+						}
+					}
+				}
+
+				&__tab-content {
+					position: relative;
+				}
+			}
+		}
+	}
+}
+
+// Chat tab on Content AI page.
+.rank-math-tab-content-chat {
+	width: 1120px;
+	max-width: 100%;
+	height: 100%;
+
+	&.blurred + #rank-math-pro-cta {
+		justify-content: flex-start;
+		
+		.rank-math-cta-box {
+			margin-left: 19%;
+		}
+	}
+
+	.rank-math-content-chat-page {
+		display: flex;
+		overflow: auto;
+		flex-flow: row wrap;
+
+		height: 70vh;
+		min-height: 350px;
+	}
+
+	.tab-header {
+		flex: 0 0 100%;
+
+		box-sizing: border-box;
+
+		border: 1px solid $gray;
+		border-bottom: 0;
+	}
+}
+
+.chat-container {
+	display: flex;
+	flex: 1;
+	flex-flow: column;
+
+	box-sizing: border-box;
+	width: calc( 100% - 305px );
+	max-width: 1120px;
+	height: 100%;
+
+	border: 1px solid $gray;
+	background: #fff;
+}
+
+.chat-sidebar {
+	overflow-x: scroll;
+	flex-basis: 33.33%;
+
+	max-width: 300px;
+	height: calc( 100% - 2px );
+
+	border: 1px solid $gray;
+	border-right: 0;
+	background: #fff;
+
+	&-content {
+		display: flex;
+		flex-direction: column;
+
+		padding: .875rem;
+	}
+
+	.button {
+		line-height: 1;
+
+		position: relative;
+
+		overflow: hidden;
+
+		height: auto;
+		margin-bottom: .5rem;
+		padding: .875rem;
+
+		text-align: left;
+		text-overflow: ellipsis;
+
+		color: $text;
+		border: 1px solid $gray;
+		border-radius: 5px;
+
+		i {
+			font-style: normal;
+
+			margin-right: 5px;
+
+			vertical-align: -2px;
+		}
+
+		.delete-session {
+			font-size: .65rem;
+			font-weight: 900;
+			line-height: 20px;
+
+			position: absolute;
+			top: 10px;
+			right: 4px;
+
+			display: none;
+
+			width: 20px;
+			height: auto;
+			padding: 0;
+
+			text-align: center;
+
+			border-radius: 20px;
+			background: lighten($color-3, 5%);
+
+			&:hover,
+			&:focus {
+				background: $color-3;
+			}
+
+			i.dashicons {
+				display: block;
+
+				margin: 0;
+
+				color: #fff;
+			}
+		}
+
+		&:hover {
+			color: $primary;
+			border-color: $primary;
+			background: #f8f9fa;
+
+			.delete-session {
+				display: block;
+			}
+		}
+
+		&.active:not(:disabled) {
+			color: #fff;
+			border-color: $primary;
+			background: $primary;
+			box-shadow: none;
+
+			&:hover,
+			&:focus {
+				border-color: #fff;
+				box-shadow: 0 0 0 2px $primary;
+			}
+		}
+
+		&.new-chat {
+			&,
+			&  i {
+				font-weight: 500;
+			}
+		}
+	}
+}
+
+.tab-header {
+	font-size: 1rem;
+	font-weight: 500;
+
+	padding: .875rem;
+
+	border-bottom: 1px solid $gray;
+	background: #f8f9fa;
+
+	&-title .rm-icon {
+		vertical-align: -1.5px;
+	}
+
+	.button {
+		font-weight: normal;
+
+		float: right;
+
+		margin-top: -2px;
+
+		text-decoration: none;
+
+		&:hover:not(:disabled),
+		&:focus:not(:disabled) {
+			color: $color-3;
+		}
+	}
+}
+
+.chat-messages {
+	display: flex;
+	overflow-y: scroll;
+	// take remaining space
+	flex: 1;
+	flex-direction: column-reverse;
+
+	padding: .875rem;
+
+	.prompt-examples {
+		max-width: 750px;
+		margin: 0 auto auto;
+
+		h2,
+		p {
+			text-align: center;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+		}
+
+		p {
+			display: block;
+		}
+
+		.grid {
+			> div {
+				display: block;
+				flex: 0 0 48%;
+
+				cursor: pointer;
+
+				&:nth-child(1n+6) {
+					display: block;
+				}
+			}
+		}
+	}
+}
+
+.chat-message {
+	font-size: 1rem;
+
+	align-self: flex-start;
+
+	min-width: 100px;
+	max-width: 70%;
+	margin-top: 10px;
+	padding: 10px;
+
+	color: #fff;
+	border-radius: 8px;
+	background-image: linear-gradient(45deg, #724bb7 0%, #4098d7 100%);
+	box-shadow: 0 .3px .9px rgba(0, 0, 0, .12), 0 1.6px 3.6px rgba(0, 0, 0, .16);
+
+	&.user {
+		align-self: flex-end;
+
+		color: $text;
+		background: rgba( $light_gray, .4 );
+	}
+
+	.message-actions {
+		font-size: .875rem;
+
+		margin-bottom: 5px;
+
+		> span {
+			opacity: .5;
+		}
+	}
+
+	button.button.is-secondary {
+		line-height: 20px;
+
+		float: right;
+
+		min-height: 20px;
+		margin-top: -2px;
+		padding: 0 5px;
+
+		cursor: pointer;
+
+		opacity: 0;
+		color: #fff;
+		border: 1px solid transparent;
+		background: transparent;
+
+		i {
+			margin-right: 4px;
+
+			vertical-align: text-bottom;
+		}
+
+		&:hover,
+		&:focus {
+			&:not(:disabled) {
+				color: #fff;
+				border-color: #fff;
+				background: transparent;
+				box-shadow: none;
+			}
+		}
+	}
+
+	&:hover {
+		button.button.is-secondary {
+			opacity: 1;
+		}
+	}
+
+	.message {
+		line-height: 1.4;
+
+		p {
+			font-size: 1rem;
+
+			margin-top: 0;
+
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+
+		span {
+			@include highlight;
+		}
+
+		.wp-block-code {
+			@extend %wp-block-code;
+		}
+
+		table tr td {
+			background-color: transparent !important;
+		}
+	}
+
+	.rank-math-loader {
+		--c: linear-gradient(#fff 0 0) no-repeat;
+	}
+}
+
+.chat-input {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+
+	padding: .875rem;
+
+	border-top: 1px solid $gray;
+	background: #f8f9fa;
+
+	&-actions {
+		position: relative;
+
+		width: 100%;
+
+		.components-base-control__field {
+			margin-bottom: 0;
+		}
+
+		.regenerate-response {
+			height: 34px!important;
+			margin: 0 5px;
+			padding: 0 7px!important;
+
+			.dashicon {
+				margin-right: 0!important;
+
+				vertical-align: -6px;
+			}
+		}
+
+		.chat-input-buttons {
+			position: absolute;
+			bottom: 1px;
+			left: 1px;
+
+			display: flex;
+			align-items: center;
+			flex-flow: row wrap;
+			justify-content: space-between;
+
+			box-sizing: border-box;
+			width: calc( 100% - 2px );
+			padding: 8px 14px;
+
+			border-radius: 5px;
+			background: #fff;
+
+			.limit {
+				flex-grow: initial;
+
+				margin-right: 5px;
+
+				@include character_limit;
+
+				&-wrap {
+					display: flex;
+					align-items: center;
+					flex: 1;
+					justify-content: flex-end;
+				}
+			}
+
+			grammarly-button {
+				margin-right: 10px;
+			}
+		}
+
+		&:hover,
+		&:focus,
+		&:focus-within {
+			.limit {
+				opacity: 1;
+			}
+		}
+	}
+
+	textarea,
+	.chat-input-textarea {
+		font-size: 1rem;
+		line-height: 1.4;
+
+		overflow: auto;
+		flex: 1;
+
+		box-sizing: border-box;
+		min-height: 100px;
+		max-height: 200px;
+		margin: 0;
+		padding: 14px 14px 50px 14px;
+
+		border: 1px solid $gray;
+		border-radius: 5px;
+		background: #fff;
+
+		&:hover,
+		&:focus {
+			border-color: $primary;
+			box-shadow: 0 0 0 1px $primary;
+		}
+
+		span:not([data-rich-text-placeholder]) {
+			@include highlight;
+		}
+	}
+
+	.button.is-primary {
+		line-height: 1;
+
+		height: 34px;
+		padding: 0 12px;
+
+		&[disabled] {
+			cursor: not-allowed;
+
+			opacity: .7;
+		}
+
+		.rm-icon {
+			font-size: 20px;
+
+			margin-right: 0;
+
+			vertical-align: -4.5px;
+		}
+
+		.loader {
+			width: 25px;
+
+			animation: loading 1s infinite linear alternate;
+
+			background: var(--c) 0   50%,
+			var(--c) 50%  50%,
+			var(--c) 100% 50%;
+
+			aspect-ratio: 1;
+			--c: linear-gradient(#000 0 0) no-repeat;
+		}
+
+		@keyframes loading {
+			0% {
+				background-size: 20% 50% ,20% 50% ,20% 50%;
+			}
+
+			20% {
+				background-size: 20% 20% ,20% 50% ,20% 50%;
+			}
+
+			40% {
+				background-size: 20% 100%,20% 20% ,20% 50%;
+			}
+
+			60% {
+				background-size: 20% 50% ,20% 100%,20% 20%;
+			}
+
+			80% {
+				background-size: 20% 50% ,20% 50% ,20% 100%;
+			}
+
+			100% {
+				background-size: 20% 50% ,20% 50% ,20% 50%;
+			}
+		}
+	}
+
+	.chat-input-buttons {
+		.prompts-button {
+			line-height: 32px;
+
+			padding: 0 10px;
+
+			color: #fff;
+			border-color: $color-8;
+			background: $color-8;
+
+			&:hover:not(:disabled),
+			&:focus:not(:disabled) {
+				color: #fff;
+				border-color: lighten( $color-8, 10% );
+				background: lighten( $color-8, 10% );
+			}
+
+			i {
+				margin-right: 5px;
+
+				vertical-align: -1px;
+			}
+		}
+	}
+}
+
+.prompt-examples {
+	max-width: 350px;
+	margin-bottom: 0;
+	margin-left: 1.25rem;
+
+	h2 {
+		font-size: 1rem;
+
+		margin-bottom: 1rem;
+
+		text-align: left;
+	}
+
+	p {
+		font-size: 1rem;
+
+		display: none;
+
+		margin-bottom: 2rem;
+	}
+
+	.grid {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+		> div {
+			font-size: 1rem;
+			line-height: 1.4;
+
+			flex: 0 0 100%;
+
+			box-sizing: border-box;
+			padding: 1rem;
+
+			cursor: pointer;
+			transition: box-shadow .2s ease-in-out;
+
+			border-radius: 10px;
+			background: rgba( $light_gray, .4 );
+
+			&:nth-child(1n+6) {
+				display: none;
+			}
+
+			&:hover,
+			&:focus {
+				box-shadow: 0 .3px .9px rgba(0, 0, 0, .12), 0 1.6px 3.6px rgba(0, 0, 0, .16);
+			}
+
+			span {
+				@include highlight;
+			}
+		}
+	}
+}
+
+// Prompt Modal.
+.rank-math-prompt-modal {
+	.content-ai-filter {
+		justify-content: space-between;
+
+		height: 60px;
+		padding: 1rem;
+	}
+
+	.components-modal__content {
+		overflow: hidden;
+		flex-flow: row wrap;
+	}
+
+	.grid {
+		flex: 0 0 100%;
+		flex-wrap: wrap;
+
+		height: calc( 100% - 60px );
+
+		border-top: 1px solid $light_gray;
+
+		gap: 0;
+
+		.column {
+			overflow-x: auto;
+		}
+
+		.column-first {
+			flex: 0 0 360px;
+
+			max-width: 360px;
+			height: 100%;
+			padding: 1rem;
+
+			border-right: 1px solid $light_gray;
+
+			@include component-search-control;
+
+			h3 {
+				font-size: 1.3em;
+
+				margin-bottom: 1rem;
+			}
+
+			.components-search-control {
+				margin-bottom: 1rem;
+
+				input {
+					height: 36px;
+				}
+
+				&:after {
+					top: 8.5px;
+					right: 8px;
+				}
+
+				&__icon {
+					left: 5px;
+				}
+			}
+
+			.prompt-list button {
+				font-size: 1rem;
+				font-weight: 500;
+
+				position: relative;
+
+				display: flex;
+
+				width: 100%;
+				height: auto;
+				margin-bottom: 1rem;
+				padding: .875rem;
+
+				cursor: pointer;
+				text-align: left;
+
+				border: 0;
+				border: 1px solid $gray;
+				border-radius: 5px;
+				background: #fff;
+
+				i {
+					height: auto;
+					margin-right: 8px;
+					font-style: normal;
+				}
+
+				&:hover,
+				&:focus {
+					// outline shoadow
+					border-color: #fff;
+					box-shadow: 0 0 0 2px $primary;
+				}
+
+				&.active {
+					color: #fff;
+					border-color: $primary;
+					background: $primary;
+
+					&:hover,
+					&:focus {
+						border-color: #fff;
+					}
+				}
+
+				.delete-prompt {
+					font-size: .65rem;
+					font-weight: 900;
+					line-height: 20px;
+
+					position: absolute;
+					top: 14px;
+					right: 4px;
+
+					display: none;
+
+					width: 20px;
+					height: auto;
+					padding: 0;
+
+					text-align: center;
+
+					border-radius: 20px;
+					background-color: lighten($color-3, 5%);
+
+					&:hover,
+					&:focus {
+						background-color: $color-3;
+					}
+
+					i.dashicons {
+						display: block;
+
+						margin: 0;
+
+						color: #fff;
+					}
+
+					&.rank-math-loader {
+						display: block;
+
+						border-radius: 0;
+						background-color: transparent;
+
+						--c: linear-gradient(#fff 0 0) no-repeat;
+					}
+				}
+
+				&:hover .delete-prompt {
+					display: block;
+				}
+			}
+		}
+
+		.column-second {
+			flex: 1;
+
+			height: 100%;
+			padding: 1rem;
+
+			background: #fff;
+
+			h3 {
+				margin-bottom: 1rem;
+			}
+
+			.prompt-preview-content {
+				line-height: 1.4;
+
+				margin-bottom: 1rem;
+				padding: 1rem;
+
+				white-space: pre-line;
+
+				border-radius: 3px;
+				background: rgba( $light_gray, .4 );
+				box-shadow: inset 0 0 3px 0 rgba(0,0,0,.25);
+
+				p {
+					font-size: 1rem;
+
+					margin-top: 0;
+
+					&:last-of-type {
+						margin-bottom: 0;
+					}
+
+					span {
+						@include highlight;
+					}
+				}
+			}
+
+			.custom-prompt-form {
+				.form-field {
+					&:last-of-type {
+						padding-top: 0;
+					}
+
+					label {
+						font-size: 1rem;
+					}
+
+					p {
+						font-size: .875rem;
+					}
+
+					.limit {
+						position: absolute;
+						right: 0;
+
+						@include character_limit;
+					}
+
+					&:hover,
+					&:focus-within {
+						.limit {
+							opacity: 1;
+						}
+					}
+
+					.is-required {
+						label {
+							color: $color-3;
+						}
+
+						input,
+						textarea {
+							border-color: $color-3;
+						}
+					}
+				}
+			}
+
+			.components-base-control__help {
+				margin-bottom: 0;
+			}
+
+			.save-prompt,
+			.use-prompt {
+				text-align: right;
+
+				.rank-math-loader {
+					--c: linear-gradient(#fff 0 0) no-repeat;
+				}
+			}
+
+			button {
+				padding: 0 1.5rem;
+			}
+		}
+	}
+}
+
+// History Tab.
+.rank-math-tab-content-history {
+	.history-container {
+		overflow: hidden;
+
+		box-sizing: border-box;
+		max-width: 1120px;
+		height: 70vh;
+		min-height: 350px;
+
+		border: 1px solid $gray;
+		background: #fff;
+	}
+
+	.inner-wrapper {
+		overflow-x: auto;
+
+		box-sizing: border-box;
+		height: 100%;
+		padding: 3rem 1rem 1rem;
+	}
+
+	.output-item {
+		margin-bottom: 3.5rem;
+
+		@include output-item;
+
+		// Label.
+		.tool-name {
+			font-weight: 500;
+
+			position: absolute;
+			top: -2rem;
+			left: 0;
+
+			padding: 3px 5px;
+
+			color: $rm_brand;
+			border-radius: 3px;
+			background: lighten( $rm_brand, 37% );
+		}
+
+		.content {
+			&,
+			& p {
+				font-size: 1rem;
+			}
+
+			> *:first-child {
+				margin-top: 0;
+			}
+
+			> *:last-child {
+				margin-bottom: 0;
+			}
+
+			.wp-block-code {
+				@extend %wp-block-code;
+			}
+		}
+	}
+
+	.output-actions {
+		background: transparent;
+	}
+}
+
+// Content AI Page - Editor Tab.
+.rank-math-tab-content-content-editor {
+	.editor-styles-wrapper {
+		font-family: inherit;
+	}
+
+	.components-popover {
+		z-index: 999999;
+
+		opacity: 1;
+
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
+
+	// Editor Actions [Copy, Create Post, etc].
+	.actions-wrapper {
+		height: 44px;
+		padding: 0 1rem;
+
+		text-align: right;
+
+		border-bottom: 1px solid $gray;
+
+		.components-button {
+			margin-top: 9px;
+			margin-right: 10px;
+
+			background: #fff;
+
+			&:last-of-type {
+				margin-right: 0;
+			}
+
+			&:hover,
+			&:focus {
+				box-shadow: none;
+			}
+
+			i {
+				font-size: 14px;
+
+				margin-right: 5px;
+
+				vertical-align: text-top;
+			}
+		}
+	}
+
+	.wp-block-columns {
+		height: 70vh;
+		min-height: 350px;
+
+		border: 1px solid $gray;
+
+		.wp-block-column {
+			// Editor.
+			&:first-child {
+				flex-basis: 66.66%;
+			}
+
+			// Sidebar.
+			&:last-child {
+				overflow: hidden;
+				flex-basis: 33.33%;
+
+				max-width: 300px;
+
+				border-left: 1px solid $gray;
+
+				// Tabs.
+				.rank-math-tabs {
+					width: 100%;
+					height: 100%;
+					margin: 0;
+
+					.components-panel__header {
+						z-index: 10;
+
+						height: auto;
+
+						border-bottom-color: $gray;
+						background: #f8f9fa;
+
+						button {
+							font-size: .875rem;
+							font-weight: 500;
+
+							position: relative;
+
+							height: 44px;
+
+							outline: none;
+							box-shadow: none;
+
+							i {
+								margin-right: 5px;
+							}
+
+							// Active tab.
+							&.is-active,
+							&:hover {
+								&:after {
+									visibility: visible;
+
+									width: 100%;
+									height: 3px;
+
+									content: '';
+
+									background: $primary;
+									box-shadow: none;
+
+									@include position( absolute, null null -1px 0 );
+								}
+							}
+						}
+					}
+
+					.rank-math-tab-content-ai-tools {
+						padding: 0;
+
+						.content-ai-header {
+							position: sticky;
+							z-index: 10;
+							top: 0;
+
+							margin: -1rem -1rem 1rem;
+							padding: 1rem;
+
+							background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, .7) 80%, rgba(255, 255, 255, 0) 100% );
+						}
+					}
+				}
+
+				// Collapse sidebar.
+				&.has-collapsed {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					max-width: 48px;
+
+					button {
+						margin-top: 7px;
+					}
+				}
+
+				&.has-collapsed {
+					align-items: flex-start;
+				}
+			}
+		}
+	}
+
+	// Editor.
+	.is-root-container {
+		min-height: 100%;
+		padding: 1rem 2rem 1rem;
+
+		p {
+			font-size: 1.125rem;
+			line-height: 1.6;
+		}
+	}
+}
+
+.rank-math-loader {
+	width: 25px;
+
+	animation: loading 1s infinite linear alternate;
+
+	background: var(--c) 0   50%,
+	var(--c) 50%  50%,
+	var(--c) 100% 50%;
+
+	aspect-ratio: 1;
+	--c: linear-gradient(#000 0 0) no-repeat;
+}
+
+#rank_math_metabox_content_ai {
+	div.rank-math-ca-credits {
+		.update-credits {
+			position: static;
+
+			i:before {
+				margin-bottom: 0;
+			}
+
+			&.rank-math-tooltip span {
+				left: 0;
+
+				&:after {
+					left: 52%;
+				}
+			}
+		}
+	}
+}
+
+// Divi Editor.
+.rank-math-rm-modal {
+	.rank-math-content-ai-wrapper.is-opened {
+		padding-top: 20px !important;
+
+		.rank-math-ca-credits {
+			top: 5px;
+
+			margin-top: 0;
+
+			color: #444;
+
+			button.update-credits {
+				color: #444;
+			}
+		}
+	}
+}
+
+.rank-math-grammarly-button {
+	position: absolute;
+	z-index: 1;
+	right: 30px;
+	bottom: 35px;
+
+	@at-root .block-editor__container .is-sidebar-opened & {
+		right: 330px;
+	}
+
+	@at-root grammarly-editor-plugin + & {
+		position: absolute;
+		right: 15px;
+		bottom: 10px;
+
+		&.rank-math-grammarly-button-fixed {
+			position: fixed;
+			right: 335px;
+			bottom: 10px;
+		}
+	}
+}

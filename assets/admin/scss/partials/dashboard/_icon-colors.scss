@@ -1,0 +1,299 @@
+// main: ../../dashboard.scss
+// Icon Colors used on the Modules Page & Content AI's Tools page.
+// NOTE: This file will be removed once we move AI code in the FREE version.
+
+i {
+	@extend %rm-icon;
+
+	// Icon Colors.
+	&.rm-icon {
+		&-404 {
+			color: #ff6f6f;
+			background: rgba(255, 111, 111, .15);
+		}
+
+		&-mobile {
+			color: #448aff;
+			background: rgba(68, 138, 255, .15);
+		}
+
+		&-acf {
+			color: #4caf50;
+			background: rgba(76, 175, 80, .15);
+		}
+
+		&-users {
+			color: #ff4081;
+			background: rgba(255, 64, 129, .15);
+		}
+
+		&-comments {
+			color: #b8423f;
+			background: rgba(184, 66, 63, .15);
+		}
+
+		&-images {
+			color: #00bcd4;
+			background: rgba(0, 188, 212, .15);
+		}
+
+		&-link {
+			color: #dba240;
+			background: rgba(219, 162, 64, .15);
+		}
+
+		&-local-seo {
+			color: #ff9f43;
+			background: rgba(255, 159, 67, .15);
+		}
+
+		&-post {
+			color: #679cf7;
+			background: rgba(103, 156, 247, .15);
+		}
+
+		&-podcast {
+			color: #a95be7;
+			background: rgba(169, 91, 231, .15);
+		}
+
+		&-redirection {
+			color: #f7b267;
+			background: rgba(247, 178, 103, .15);
+		}
+
+		&-schema {
+			color: #843224;
+			background: rgba(132, 50, 36, .15);
+		}
+
+		&-role-manager {
+			color: #87a627;
+			background: rgba(135, 166, 39, .15);
+		}
+
+		&-search-console {
+			color: #3c88d8;
+			background: rgba(60, 136, 216, .15);
+		}
+
+		&-analyzer {
+			color: #e3765c;
+			background: rgba(227, 118, 92, .15);
+		}
+
+		&-sitemap {
+			color: #049404;
+			background: rgba(4, 148, 4, .15);
+		}
+
+		&-cart {
+			color: #a13cf7;
+			background: rgba(161, 60, 247, .15);
+		}
+
+		&-video {
+			color: #c4302b;
+			background: rgba(196, 48, 43, .15);
+		}
+
+		&-stories {
+			color: #180ca4;
+			background: rgba(24, 12, 164, .15);
+		}
+
+		&-instant-indexing {
+			color: #a40fa4;
+			background: rgba(164, 15, 164, .15);
+		}
+
+		&-content-ai {
+			color: #e91e63;
+			background: rgba(233, 30, 99, .07);
+
+			&:before {
+				background: linear-gradient(-135deg, #ff4081, #3f51b5);
+				-webkit-background-clip: text;
+				        background-clip: text;
+
+				-webkit-text-fill-color: transparent;
+			}
+		}
+
+		&-edit {
+			color: #673ab7;
+			background: rgba(103, 58, 183, .15);
+		}
+
+		&-faq {
+			color: #ff5722;
+			background: rgba(255, 87, 34, .15);
+		}
+
+		&-support {
+			color: #009688;
+			background: rgba(0, 150, 136, .15);
+		}
+
+		&-job {
+			color: #ff4081;
+			background: rgba(255, 64, 129, .15);
+		}
+
+		&-post-format {
+			color: #607d8b;
+			background: rgba(96, 125, 139, .15);
+		}
+
+		&-book {
+			color: #ff6f00;
+			background: rgba(255, 111, 0, .15);
+		}
+
+		&-misc {
+			color: #c51162;
+			background: rgba(197, 17, 98, .15);
+		}
+
+		&-page {
+			color: #9c27b0;
+			background: rgba(156, 39, 176, .15);
+		}
+
+		&-help {
+			color: #1a237e;
+			background: rgba(26, 35, 126, .15);
+		}
+
+		&-thumbs-up {
+			color: #00bfa5;
+			background: rgba(0, 191, 165, .15);
+		}
+
+		&-star {
+			// Review colors
+			color: #e3aa0b;
+			background: rgba(227, 170, 11, .15);
+		}
+
+		&-user {
+			color: #006064;
+			background: rgba(0, 96, 100, .15);
+		}
+
+		&-restaurant {
+			color: #272649;
+			background: rgba(26, 24, 78, .15);
+		}
+
+		&-facebook {
+			color: #3b5998;
+			background: rgba(59, 89, 152, .15);
+		}
+
+		&-comments-reply {
+			color: #3b5998;
+			background: rgba(59, 89, 152, .15);
+		}
+
+		&-twitter {
+			color: #03a9f4;
+			background: rgba(3, 169, 244, .15);
+		}
+
+		&-comments-reply.Tweet_Reply {
+			color: #03a9f4;
+			background: rgba(3, 169, 244, .15);
+		}
+
+		&-instagram {
+			color: #ff4081;
+			background: rgba(255, 64, 129, .15);
+		}
+
+		&-mail {
+			color: #d93025;
+			background: rgba(217, 48, 37, .15);
+		}
+
+		&-mail-reply {
+			color: #d93025;
+			background: rgba(217, 48, 37, .15);
+		}
+
+		&-light-bulb {
+			color: #dca720;
+			background: rgba(251, 192, 45, .15);
+		}
+
+		&-tick {
+			color: #4caf50;
+			background: rgba(76, 175, 80, .15);
+		}
+
+		&-text {
+			color: #009688;
+			background: rgba(0, 150, 136, .15);
+		}
+
+		&-social {
+			color: #ff5722;
+			background: rgba(255, 87, 34, .15);
+		}
+
+		&-dataset {
+			color: #587c22;
+			background: rgba(88, 124, 34, .15);
+		}
+
+		&-youtube {
+			color: #c4302b;
+			background: rgba(196, 48, 43, .15);
+		}
+
+		&-recipe {
+			color: #4caf50;
+			background: rgba(76, 175, 80, .15);
+		}
+
+		&-code {
+			color: #222;
+			background: rgba(34, 34, 34, .15);
+		}
+
+		&-seo {
+			color: #6d4c41;
+			background: rgba(109, 76, 65, .15);
+		}
+
+		&-pencil {
+			color: #1e88e5;
+			background: rgba(30, 136, 229, .15);
+		}
+
+		&-howto {
+			color: #b71c1c;
+			background: rgba(183, 28, 28, .15);
+		}
+
+		&-heading {
+			color: #0d47a1;
+			background: rgba(13, 71, 161, .15);
+		}
+
+		&-seo-title {
+			color: #d50000;
+			background: rgba(213, 0, 0, .15);
+		}
+
+		&-seo-description {
+			color: #f57f17;
+			background: rgba(245, 127, 23, .15);
+		}
+
+		&-text-align-left {
+			color: #388e3c;
+			background: rgba(56, 142, 60, .15);
+		}
+	}
+}

@@ -21,6 +21,8 @@ class RankMathPostList {
 	}
 
 	addButtons() {
+		jQuery( '.tablenav .bulkactions select' ).find( 'option[value="rank_math_ai_options"]' ).attr( 'disabled', 'disabled' )
+
 		const headers = jQuery(
 			'#rank_math_seo_details, #rank_math_title, #rank_math_description, #rank_math_image_alt, #rank_math_image_title'
 		)

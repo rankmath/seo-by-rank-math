@@ -67,6 +67,7 @@ class Recommendations extends Component {
 
 			data.push(
 				<div
+					key={ key }
 					className={ wrapperClasses + ' ' + getClassByScore( score ) }
 					onClick={ () => this.setState( { activeTab: this.state.activeTab !== key ? key : '' } ) }
 					role="presentation"
