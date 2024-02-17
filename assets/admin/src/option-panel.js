@@ -699,7 +699,7 @@ import addNotice from '@helpers/addNotice'
 						.then( ( response ) => {
 							if ( response.error ) {
 								alert( response.error )
-								updateCredit.removeClass( 'loading' )
+								updateCredit.removeClass( 'loading' ).next( 'strong' ).text( response.credits )
 								return
 							}
 

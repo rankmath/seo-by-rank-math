@@ -38,6 +38,7 @@ $good-score : #439f40;
 
 			.#{$namespace}-toolbar-score.content-ai-score {
 				font-weight: 600;
+				position: relative;
 			}
 
 			&:not(.is-pressed) .#{$namespace}-toolbar-score.content-ai-score {

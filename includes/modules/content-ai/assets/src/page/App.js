@@ -19,6 +19,7 @@ import Chat from './tabs/chat'
 import History from './tabs/history'
 import ErrorCTA from '@components/ErrorCTA'
 import hasError from './helpers/hasError'
+import FreePlanNotice from './components/FreePlanNotice'
 
 const getTabs = () => {
 	const tabs = [
@@ -79,6 +80,7 @@ const ContentAIApp = () => {
 					return (
 						<>
 							<div className={ 'rank-math-tab-content dashboard-wrapper rank-math-tab-content-' + tab.name + blurredClass }>
+								<FreePlanNotice isPage="true" />
 								{ createElement( tab.view, { isPage: true } ) }
 							</div>
 

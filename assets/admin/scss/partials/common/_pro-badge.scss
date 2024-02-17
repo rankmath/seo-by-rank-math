@@ -32,3 +32,15 @@
 		text-decoration: none;
 	}
 }
+
+.#{$namespace}-free-badge {
+	padding: 0 5px;
+	line-height: 14px;
+	font-size: 10px;
+	color: #fff;
+	background: #d63638;
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	border-radius: 10px;
+}

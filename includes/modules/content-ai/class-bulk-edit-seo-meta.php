@@ -183,7 +183,7 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 	 */
 	private function get_posts( $data ) {
 		$connect_data = Admin_Helper::get_registration_data();
-		$posts        = $data['posts'];
+		$posts        = array_values( $data['posts'] );
 		$action       = $data['action'];
 		$language     = $data['language'];
 		$data         = [

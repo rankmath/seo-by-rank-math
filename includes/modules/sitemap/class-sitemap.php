@@ -54,7 +54,6 @@ class Sitemap {
 		new Html_Sitemap();
 
 		add_action( 'rank_math/sitemap/hit_index', [ __CLASS__, 'hit_index' ] );
-		add_action( 'rank_math/sitemap/ping_search_engines', [ __CLASS__, 'ping_google' ] );
 
 		$this->filter( 'rank_math/admin/notice/new_post_type', 'new_post_type_notice', 10, 2 );
 
@@ -151,40 +150,6 @@ class Sitemap {
 	 */
 	public static function hit_index() {
 		wp_remote_get( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) );
-	}
-
-	/**
-	 * Ping Google & Bing about sitemap changes.
-	 *
-	 * @param string|null $url Optional sitemap URL. Falls back to sitemap index URL.
-	 */
-	public static function ping_google( $url = null ) {
-		if ( ! self::can_ping() ) {
-			return;
-		}
-
-		if ( empty( $url ) ) {
-			$url = rawurlencode( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) );
-		}
-
-		wp_remote_get( 'http://www.google.com/webmasters/tools/ping?sitemap=' . $url, [ 'blocking' => false ] );
-	}
-
-	/**
-	 * Check if we can ping search engines.
-	 *
-	 * @return bool
-	 */
-	public static function can_ping() {
-		if ( false === Helper::get_settings( 'sitemap.ping_search_engines' ) ) {
-			return false;
-		}
-
-		if ( '0' === get_option( 'blog_public' ) ) {
-			return false;
-		}
-
-		return true;
 	}
 
 	/**

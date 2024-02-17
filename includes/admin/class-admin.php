@@ -56,6 +56,10 @@ class Admin implements Runner {
 			flush_rewrite_rules();
 			delete_option( 'rank_math_flush_rewrite' );
 		}
+
+		if ( 'rank-math' === Param::get( 'page' ) && get_option( 'rank_math_view_modules' ) ) {
+			delete_option( 'rank_math_view_modules' );
+		}
 	}
 
 	/**

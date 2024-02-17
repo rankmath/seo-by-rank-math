@@ -386,7 +386,6 @@ class Installer {
 			'items_per_page'          => 200,
 			'include_images'          => 'on',
 			'include_featured_image'  => 'off',
-			'ping_search_engines'     => 'on',
 			'exclude_roles'           => $this->get_excluded_roles(),
 			'html_sitemap'            => 'on',
 			'html_sitemap_display'    => 'shortcode',

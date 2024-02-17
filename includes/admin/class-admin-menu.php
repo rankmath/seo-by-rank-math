@@ -99,7 +99,10 @@ class Admin_Menu implements Runner {
 
 		if ( 'Rank Math' === $submenu['rank-math'][0][0] ) {
 			if ( current_user_can( 'manage_options' ) ) {
-				$submenu['rank-math'][0][0] = esc_html__( 'Dashboard', 'rank-math' );
+				$plan         = Helper::get_content_ai_plan();
+				$notification = empty( $plan ) || 'free' === $plan && get_option( 'rank_math_view_modules' ) ? ' <span class="awaiting-mod count-1"><span class="pending-count" aria-hidden="true">1</span></span>' : '';
+
+				$submenu['rank-math'][0][0] = esc_html__( 'Dashboard', 'rank-math' ) . $notification;
 			} else {
 				unset( $submenu['rank-math'][0] );
 			}

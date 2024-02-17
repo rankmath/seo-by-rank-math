@@ -31,6 +31,7 @@ import Recommendations from './Recommendations'
 import ContentAIPanel from './ContentAIPanel'
 import Interpolate from '@components/Interpolate'
 import getLink from '@helpers/getLink'
+import ErrorCTA from '@components/ErrorCTA'
 
 class ContentAI extends Component {
 	/**
@@ -48,27 +49,28 @@ class ContentAI extends Component {
 	 * @return {Component} ContentAI.
 	 */
 	render() {
+		const isFree = isEmpty( rankMath.contentAIPlan ) || rankMath.contentAIPlan === 'free'
 		const hasCredits = rankMath.isUserRegistered && isNumber( this.state.credits )
 		const className = classnames( 'rank-math-content-ai-data', {
 			loading: this.state.loading,
-			blurred: ! hasCredits,
+			blurred: ! hasCredits || isFree,
 		} )
 
 		let data = this.props.data
-		if ( ( ! hasCredits && isEmpty( data ) ) || 'show_dummy_data' === data ) {
+		if ( ( ! hasCredits && isEmpty( data ) ) || 'show_dummy_data' === data || isFree ) {
 			data = this.getDummyData()
 		}
 
 		return (
 			<Fragment>
-				<PanelBody className="rank-math-content-ai-wrapper" initialOpen={ true }>
+				<PanelBody className="rank-math-content-ai-wrapper research" initialOpen={ true }>
 					<>
-						{ this.getHeader() }
+						{ ! isFree && this.getHeader() }
 
 						{ ! rankMath.isUserRegistered && this.connectAccountNotice() }
 						{ rankMath.isUserRegistered && ! hasCredits && this.creditsNotice( hasCredits ) }
 
-						{ hasCredits && this.keywordField() }
+						{ hasCredits && ! isFree && this.keywordField() }
 
 						<div className={ className }>
 							<span className="loader-text">
@@ -91,6 +93,7 @@ class ContentAI extends Component {
 							</div>
 							}
 						</div>
+						<ErrorCTA isResearch={ true } />
 					</>
 				</PanelBody>
 			</Fragment>

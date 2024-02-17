@@ -191,7 +191,8 @@ class Rest extends WP_REST_Controller {
 			$error       = $credits['error'];
 			$error_texts = Helper::get_content_ai_errors();
 			return [
-				'error' => ! empty( $error_texts[ $error ] ) ? wp_specialchars_decode( $error_texts[ $error ], ENT_QUOTES ) : $error,
+				'error'   => ! empty( $error_texts[ $error ] ) ? wp_specialchars_decode( $error_texts[ $error ], ENT_QUOTES ) : $error,
+				'credits' => isset( $credits['credits'] ) ? $credits['credits'] : '',
 			];
 		}
 

@@ -281,14 +281,15 @@ class JsonLD {
 			}
 
 			// Need this conditions to convert date to valid ISO 8601 format.
-			if ( in_array( $key, ['datePublished', 'uploadDate'], true ) && '%date(Y-m-dTH:i:sP)%' === $schema ) {
+			if ( in_array( $key, [ 'datePublished', 'uploadDate' ], true ) && '%date(Y-m-dTH:i:sP)%' === $schema ) {
 				$schema = '%date(Y-m-d\TH:i:sP)%';
 			}
 			if ( 'dateModified' === $key && '%modified(Y-m-dTH:i:sP)%' === $schema ) {
 				$schema = '%modified(Y-m-d\TH:i:sP)%';
 			}
 
-			$new_schemas[ $key ] = is_string( $schema ) && Str::contains( '%', $schema ) ? Helper::replace_vars( $schema, $object ) : $schema;
+			$new_schemas[ $key ] = is_string( $schema ) && Str::contains( '%', $schema ) && ! filter_var( $schema, FILTER_VALIDATE_URL )
+				? Helper::replace_vars( $schema, $object ) : $schema;
 			if ( '' === $new_schemas[ $key ] ) {
 				unset( $new_schemas[ $key ] );
 			}

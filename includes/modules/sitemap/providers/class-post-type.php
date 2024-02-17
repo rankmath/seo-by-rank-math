@@ -247,9 +247,8 @@ class Post_Type implements Provider {
 	protected function get_post_type_count( $post_types ) {
 		global $wpdb;
 
-		if ( ! is_array( $post_types ) ) {
-			$post_types = [ $post_types ];
-		}
+		$posts_to_exclude = 'page' === $post_types ? $this->get_blog_page_id() : '';
+		$post_status      = 'attachment' === $post_types ? [ 'publish', 'inherit' ] : [ 'publish' ];
 
 		/**
 		 * Filter to add a JOIN clause for get_post_type_count(post types) query.
@@ -274,8 +273,10 @@ class Post_Type implements Provider {
 			( pm.meta_key = 'rank_math_robots' AND pm.meta_value NOT LIKE '%noindex%' ) OR
 			pm.post_id IS NULL
 		)
-		AND p.post_type = ( '" . join( "', '", esc_sql( $post_types ) ) . "' ) AND p.post_status = 'publish' AND p.post_password = ''
+		AND p.post_type = '{$post_types}' AND p.post_status IN ( '" . join( "', '", esc_sql( $post_status ) ) . "' ) AND p.post_password = ''
+		AND p.ID != '{$posts_to_exclude}'
 		{$where_filter}";
+
 		return (int) $wpdb->get_var( $sql ); // phpcs:ignore
 	}
 
@@ -354,9 +355,8 @@ class Post_Type implements Provider {
 	protected function get_posts( $post_types, $count, $offset ) {
 		global $wpdb;
 
-		if ( ! is_array( $post_types ) ) {
-			$post_types = [ $post_types ];
-		}
+		$posts_to_exclude = 'page' === $post_types ? $this->get_blog_page_id() : '';
+		$post_status      = 'attachment' === $post_types ? [ 'publish', 'inherit' ] : [ 'publish' ];
 
 		/**
 		 * Filter to add a JOIN clause for get_posts(types) query.
@@ -384,7 +384,8 @@ class Post_Type implements Provider {
 					( pm.meta_key = 'rank_math_robots' AND pm.meta_value NOT LIKE '%noindex%' ) OR
 					pm.post_id IS NULL
 				)
-				AND p.post_type IN ( '" . join( "', '", esc_sql( $post_types ) ) . "' ) AND p.post_status = 'publish' AND p.post_password = ''
+				AND p.post_type = '{$post_types}' AND p.post_status IN ( '" . join( "', '", esc_sql( $post_status ) ) . "' ) AND p.post_password = ''
+				AND p.ID != '{$posts_to_exclude}'
 				{$where_filter}
 				ORDER BY p.post_modified DESC LIMIT %d OFFSET %d
 			)
@@ -561,5 +562,9 @@ class Post_Type implements Provider {
 		}
 
 		return $this->home_url;
+	}
+
+	private function get_blog_page_id() {
+		return get_option( 'show_on_front' ) === 'page' && $this->get_page_for_posts_id() ? $this->get_page_for_posts_id() : '';
 	}
 }

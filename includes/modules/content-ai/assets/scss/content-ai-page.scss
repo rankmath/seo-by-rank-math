@@ -1077,6 +1077,10 @@ div.form-field {
 		&-ai-tools,
 		&-chat {
 			position: relative;
+
+			.components-notice {
+				margin: 0 0 1rem;
+			}
 		}
 
 		&-write {
@@ -1084,10 +1088,6 @@ div.form-field {
 
 			max-height: calc( 100% - 50px );
 			padding: 1rem;
-
-			.components-notice {
-				margin: 0 0 1rem;
-			}
 
 			label {
 				font-size: .875rem;
@@ -1117,7 +1117,7 @@ div.form-field {
 			overflow-x: scroll;
 
 			max-height: calc( 100% - 62px );
-			padding: 0 1rem 1rem;
+			padding: 1rem;
 		}
 	}
 
@@ -1190,6 +1190,10 @@ div.form-field {
 
 	.clear-history {
 		float: right;
+	}
+
+	&.research #rank-math-pro-cta {
+		top: 50px;
 	}
 }
 
@@ -1573,6 +1577,14 @@ body.rank-math_page_rank-math-content-ai-page {
 			&,
 			&  i {
 				font-weight: 500;
+			}
+		}
+
+		&.is-green {
+			&,
+			&:hover,
+			&:focus {
+				color: #fff;
 			}
 		}
 	}
@@ -2008,6 +2020,12 @@ body.rank-math_page_rank-math-content-ai-page {
 	.components-modal__content {
 		overflow: hidden;
 		flex-flow: row wrap;
+
+		margin-top: 0 !important;
+
+		> div {
+			position: relative;
+		}
 	}
 
 	.grid {
@@ -2541,3 +2559,8 @@ body.rank-math_page_rank-math-content-ai-page {
 	}
 }
 
+.rank-math-content-ai-notice {
+	&.is-page {
+		margin: 0 0 15px;
+	}
+}

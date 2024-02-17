@@ -203,7 +203,6 @@ class KML_File {
 
 		if ( count( array_intersect( $local_seo_fields, $updated ) ) ) {
 			update_option( 'rank_math_local_seo_update', date( 'c' ) );
-			\RankMath\Sitemap\Sitemap::ping_google( Router::get_base_url( 'local-sitemap.xml' ) );
 		}
 	}
 

@@ -150,6 +150,16 @@ class MapCache {
 						type: 'Movie',
 						title: __( 'Movie', 'rank-math' ),
 						isPro: true,
+					},
+					{
+						type: 'FAQ',
+						title: __( 'FAQ', 'rank-math' ),
+						isPro: true,
+					},
+					{
+						type: 'HowTo',
+						title: __( 'HowTo', 'rank-math' ),
+						isPro: true,
 					}
 				)
 			}

@@ -128,14 +128,6 @@ class Cache_Watcher {
 		if ( WP_CACHE ) {
 			wp_schedule_single_event( ( time() + 300 ), 'rank_math/sitemap/hit_index' );
 		}
-
-		if ( ! Sitemap::can_ping() ) {
-			return;
-		}
-
-		if ( ! Helper::is_post_excluded( $post->ID ) && ! wp_next_scheduled( 'rank_math/sitemap/ping_search_engines' ) ) {
-			wp_schedule_single_event( ( time() + 300 ), 'rank_math/sitemap/ping_search_engines' );
-		}
 	}
 
 	/**
@@ -184,8 +176,6 @@ class Cache_Watcher {
 		if ( WP_CACHE ) {
 			do_action( 'rank_math/sitemap/hit_index' );
 		}
-
-		Sitemap::ping_google();
 	}
 
 	/**

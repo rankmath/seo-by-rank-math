@@ -2,7 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { isNull } from 'lodash'
+import { isNull, tail } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -84,6 +84,12 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 				className: 'rank-math-chat-tab',
 			},
 		)
+
+		// Move research tab at the end on sites having Free Content AI plan.
+		if ( rankMath.contentAIPlan === 'free' ) {
+			tabs.push( tabs[ 0 ] )
+			tabs = tail( tabs )
+		}
 
 		return tabs
 	} )

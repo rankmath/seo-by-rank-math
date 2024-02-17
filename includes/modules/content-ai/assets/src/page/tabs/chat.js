@@ -2,14 +2,14 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { map, isEmpty, reverse, uniqueId, trim } from 'lodash'
+import { map, reverse, uniqueId, trim, isEmpty, isUndefined } from 'lodash'
 import classnames from 'classnames'
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { Fragment, useState, useEffect } from '@wordpress/element'
+import { useState, useEffect } from '@wordpress/element'
 import { Button, SelectControl, Dashicon, Tooltip } from '@wordpress/components'
 import { RichText } from '@wordpress/block-editor'
 
@@ -22,17 +22,23 @@ import deleteOutput from '../helpers/deleteOutput'
 import markdownConverter from '../helpers/markdownConverter'
 import CopyButton from '../components/CopyButton'
 import ContentAiText from '../components/ContentAiText'
+import FreePlanNotice from '../components/FreePlanNotice'
 import ErrorCTA from '@components/ErrorCTA'
 
 // Chat component.
 export default ( { setCredits = false, hasContentAiError = false } ) => {
+	const isFree = rankMath.contentAIPlan === 'free'
 	const [ openModal, toggleModal ] = useState( false )
 	const [ generating, setGenerating ] = useState( false )
 	const [ message, setMessage ] = useState( '' )
 	const [ chats, setChats ] = useState( rankMath.contentAIChats )
-	const [ session, setSession ] = useState( '' )
+	const [ session, setSession ] = useState( isFree && chats.length ? 0 : '' )
 
 	const isContentAIPage = rankMath.isContentAIPage
+
+	if ( isFree && chats.length && isUndefined( wp.blocks.getBlockType( 'core/paragraph' ) ) ) {
+		wp.blockLibrary.registerCoreBlocks()
+	}
 
 	// Select and highlight span on click.
 	useEffect( () => {
@@ -102,12 +108,16 @@ export default ( { setCredits = false, hasContentAiError = false } ) => {
 
 	// Options to select Chat group.
 	const getOptions = () => {
-		const options = [
-			{
-				label: __( 'New Chat', 'rank-math' ),
-				value: '',
-			},
-		]
+		const options = []
+
+		if ( ! isFree || ! chats.length ) {
+			options.push(
+				{
+					label: __( 'New Chat', 'rank-math' ),
+					value: '',
+				}
+			)
+		}
 
 		map( chats, ( value, index ) => {
 			options.push(
@@ -197,6 +207,7 @@ export default ( { setCredits = false, hasContentAiError = false } ) => {
 						</Button>
 					}
 				</div>
+				{ ! isContentAIPage && <FreePlanNotice /> }
 				<div className="rank-math-content-chat-page">
 					{
 						! isEmpty( chats ) &&
@@ -213,7 +224,7 @@ export default ( { setCredits = false, hasContentAiError = false } ) => {
 									/>
 								}
 								{
-									isContentAIPage &&
+									isContentAIPage && ! isFree &&
 									<Button
 										className={
 											classnames( 'history-button button new-chat', {
@@ -266,6 +277,16 @@ export default ( { setCredits = false, hasContentAiError = false } ) => {
 										)
 									} )
 								}
+								{
+									isContentAIPage && isFree &&
+										<Button
+											className="button is-green"
+											href="https://rankmath.com/content-ai/#pricing"
+											target="_blank"
+										>
+											{ __( 'Buy PRO plan for Multiple Sessions', 'rank-math' ) }
+										</Button>
+								}
 							</div>
 						</div>
 					}
@@ -315,81 +336,85 @@ export default ( { setCredits = false, hasContentAiError = false } ) => {
 							}
 						</div>
 
-						<div className="chat-input">
-							<div className="chat-input-actions">
-								<RichText
-									tagName="div"
-									className="chat-input-textarea"
-									value={ message.slice( 0, 2000 ) }
-									allowedFormats={ [] }
-									onChange={ ( content ) => {
-										const inputWrapper = document.getElementsByClassName( 'chat-input-textarea' )[ 0 ]
-										if ( content.length > 2000 ) {
-											content = content.slice( 0, 2000 )
-											inputWrapper.innerHTML = message
-											const range = document.createRange()
-											const sel = window.getSelection()
-											const childNode = inputWrapper.childNodes[ inputWrapper.childNodes.length - 1 ]
-											range.setStart( childNode, childNode.textContent.length )
-											range.collapse( true )
+						{
+							( ! isFree || ! session ) &&
+							<div className="chat-input">
+								<div className="chat-input-actions">
+									<RichText
+										tagName="div"
+										className="chat-input-textarea"
+										value={ message.slice( 0, 2000 ) }
+										allowedFormats={ [] }
+										disabled={ true }
+										onChange={ ( content ) => {
+											const inputWrapper = document.getElementsByClassName( 'chat-input-textarea' )[ 0 ]
+											if ( content.length > 2000 ) {
+												content = content.slice( 0, 2000 )
+												inputWrapper.innerHTML = message
+												const range = document.createRange()
+												const sel = window.getSelection()
+												const childNode = inputWrapper.childNodes[ inputWrapper.childNodes.length - 1 ]
+												range.setStart( childNode, childNode.textContent.length )
+												range.collapse( true )
 
-											sel.removeAllRanges()
-											sel.addRange( range )
-										}
+												sel.removeAllRanges()
+												sel.addRange( range )
+											}
 
-										setMessage( content )
-									} }
-									onKeyUp={ ( e ) => {
-										if ( e.key === 'Enter' && ! e.shiftKey && ! isEmpty( trim( message ) ) && ! generating ) {
-											submitChat()
+											setMessage( content )
+										} }
+										onKeyUp={ ( e ) => {
+											if ( e.key === 'Enter' && ! e.shiftKey && ! isEmpty( trim( message ) ) && ! generating ) {
+												submitChat()
+											}
+										} }
+										preserveWhiteSpace="true"
+										placeholder={ __( 'Type your message here…', 'rank-math' ) }
+									/>
+									<div className="chat-input-buttons">
+										<Button
+											className="prompts-button button"
+											onClick={ () =>
+												toggleModal( true )
+											}
+										>
+											<i className="rm-icon rm-icon-htaccess"></i> { isContentAIPage ? __( 'Prompts Library', 'rank-math' ) : '' }
+										</Button>
+										<PromptModal isOpen={ openModal } toggleModal={ toggleModal } setMessage={ setMessage } />
+										{
+											session !== '' && ! generating &&
+											<Tooltip text={ __( 'Regenerate Response', 'rank-math' ) }>
+												<Button
+													className="regenerate-response button button-small"
+													onClick={ () => {
+														const data = chats[ session ]
+														const content = data[ 1 ].content
+														data.shift()
+														chats[ session ] = data
+														setChats( chats )
+														submitChat( content, true )
+													} }
+													showTooltip={ true }
+												>
+													<Dashicon icon="controls-repeat" />
+												</Button>
+											</Tooltip>
 										}
-									} }
-									preserveWhiteSpace="true"
-									placeholder={ __( 'Type your message here…', 'rank-math' ) }
-								/>
-								<div className="chat-input-buttons">
-									<Button
-										className="prompts-button button"
-										onClick={ () =>
-											toggleModal( true )
-										}
-									>
-										<i className="rm-icon rm-icon-htaccess"></i> { isContentAIPage ? __( 'Prompts Library', 'rank-math' ) : '' }
-									</Button>
-									<PromptModal isOpen={ openModal } toggleModal={ toggleModal } setMessage={ setMessage } />
-									{
-										session !== '' && ! generating &&
-										<Tooltip text={ __( 'Regenerate Response', 'rank-math' ) }>
-											<Button
-												className="regenerate-response button button-small"
-												onClick={ () => {
-													const data = chats[ session ]
-													const content = data[ 1 ].content
-													data.shift()
-													chats[ session ] = data
-													setChats( chats )
-													submitChat( content, true )
-												} }
-												showTooltip={ true }
-											>
-												<Dashicon icon="controls-repeat" />
-											</Button>
-										</Tooltip>
-									}
-									<div className={ message.length >= 2000 ? 'limit limit-reached' : 'limit' }>
-										<span className="count">{ message.length }</span>/{ __( '2000', 'rank-math' ) }
+										<div className={ message.length >= 2000 ? 'limit limit-reached' : 'limit' }>
+											<span className="count">{ message.length }</span>/{ __( '2000', 'rank-math' ) }
+										</div>
+										<Button
+											className="button is-primary is-large"
+											aria-label={ __( 'Send', 'rank-math' ) }
+											disabled={ isEmpty( trim( message ) ) || generating }
+											onClick={ () => ( submitChat() ) }
+										>
+											<span className="rm-icon rm-icon-send"></span>
+										</Button>
 									</div>
-									<Button
-										className="button is-primary is-large"
-										aria-label={ __( 'Send', 'rank-math' ) }
-										disabled={ isEmpty( trim( message ) ) || generating }
-										onClick={ () => ( submitChat() ) }
-									>
-										<span className="rm-icon rm-icon-send"></span>
-									</Button>
 								</div>
 							</div>
-						</div>
+						}
 					</div>
 				</div>
 			</div>

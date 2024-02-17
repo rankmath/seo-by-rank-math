@@ -19,6 +19,7 @@ import getData from '../helpers/getData'
 import getFields from '../helpers/getFields'
 import getLastParagraph from '../helpers/getLastParagraph'
 import getSelectedBlock from '../helpers/getSelectedBlock'
+import FreePlanNotice from '../components/FreePlanNotice'
 import insertElementorContent from '../helpers/insertElementorContent'
 import insertCommandBox from '../shortcutCommand/insertCommandBox'
 import addContent from '../shortcutCommand/addContent'
@@ -72,6 +73,7 @@ const Write = ( { hasContentAiError = false } ) => {
 			<div className={ hasContentAiError ? 'rank-math-ui module-listing blurred' : 'rank-math-ui module-listing' }>
 				<div className="rank-math-focus-keyword">
 					<Notice status="warning" isDismissible={ false }>
+						<FreePlanNotice addNotice={ false } />
 						<Interpolate
 							components={ {
 								link: (

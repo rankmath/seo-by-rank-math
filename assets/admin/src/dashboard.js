@@ -82,8 +82,6 @@ class RankMathDashboard {
 					return
 				}
 
-				const data = this.data
-
 				box.removeClass( 'saving' )
 				box.toggleClass( 'active', isChecked )
 
@@ -92,14 +90,9 @@ class RankMathDashboard {
 					url: window.location.pathname + window.location.search,
 					method: 'GET',
 				} ).done( function( responseMenu ) {
-					const data = this.data
 					if ( responseMenu ) {
-						const incoming = $( responseMenu ).find(
-							'#toplevel_page_rank-math'
-						)
-						const current = $(
-							'#toplevel_page_rank-math > .wp-submenu'
-						)
+						const incoming = $( responseMenu ).find( '#toplevel_page_rank-math' )
+						const current = $( '#toplevel_page_rank-math > .wp-submenu' )
 						if (
 							incoming.length &&
 							incoming.find( '> .wp-submenu > li' ).length !==
@@ -120,21 +113,21 @@ class RankMathDashboard {
 				} )
 
 				// Check module dependencies.
-				$( '.rank-math-modules' ).each( function( i, el ) {
-					const $this = $(this);
-					const deps = $this.data( 'depmodules' );
+				$( '.rank-math-modules' ).each( function() {
+					const $this = $( this )
+					const deps = $this.data( 'depmodules' )
 
 					if ( typeof deps === 'object' && deps.length ) {
 						const depsEnabled = deps.filter( function( dep ) {
-							return ! $( '#module-' + dep ).is( ':checked' );
-						})
+							return ! $( '#module-' + dep ).is( ':checked' )
+						} )
 
-						const disabled = depsEnabled.length > 0;
-						$this.prop( 'disabled', disabled );
+						const disabled = depsEnabled.length > 0
+						$this.prop( 'disabled', disabled )
 						if ( disabled ) {
-							$this.closest( '.rank-math-box' ).removeClass( 'active' );
+							$this.closest( '.rank-math-box' ).removeClass( 'active' )
 						} else if ( $this.is( ':checked' ) ) {
-							$this.closest( '.rank-math-box' ).addClass( 'active' );
+							$this.closest( '.rank-math-box' ).addClass( 'active' )
 						}
 					}
 				} )

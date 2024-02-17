@@ -16,6 +16,7 @@ import { SelectControl, Button } from '@wordpress/components'
 import getTools from '../helpers/getTools'
 import Modal from '../modal'
 import SearchField from '../components/SearchField'
+import FreePlanNotice from '../components/FreePlanNotice'
 import ErrorCTA from '@components/ErrorCTA'
 
 /**
@@ -44,6 +45,7 @@ export default ( { showMinimal = false, isPage = false, setCredits = false, hasC
 	return (
 		<>
 			<div className={ hasContentAiError ? 'rank-math-ui module-listing blurred' : 'rank-math-ui module-listing' }>
+				{ ! isPage && <FreePlanNotice /> }
 				<div className="content-ai-header">
 					<div className="content-ai-filter">
 						{

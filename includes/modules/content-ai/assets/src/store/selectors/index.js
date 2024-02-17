@@ -19,3 +19,4 @@ export function isAutoCompleterOpen( state ) {
 export function getContentAiAttributes( state ) {
 	return state.appUi.contentAiAttributes
 }
+

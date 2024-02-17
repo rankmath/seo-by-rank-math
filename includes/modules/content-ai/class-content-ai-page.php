@@ -114,9 +114,9 @@ class Content_AI_Page {
 	 * Register admin page.
 	 */
 	public function register_admin_page() {
-		$uri = untrailingslashit( plugin_dir_url( __FILE__ ) );
-
-		$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . esc_html__( 'New!', 'rank-math' ) . '</span>';
+		$uri       = untrailingslashit( plugin_dir_url( __FILE__ ) );
+		$label     = Helper::get_content_ai_plan() === 'free' ? esc_html__( 'Free', 'rank-math' ) : esc_html__( 'New!', 'rank-math' );
+		$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . $label . '</span>';
 
 		if ( 'rank-math-content-ai-page' === Param::get( 'page' ) ) {
 			Helper::add_json( 'isContentAIPage', true );
@@ -168,6 +168,10 @@ class Content_AI_Page {
 	 * @return array          New actions.
 	 */
 	public function post_bulk_actions( $actions ) {
+		if ( ! Helper::has_cap( 'content_ai' ) ) {
+			return $actions;
+		}
+
 		$actions['rank_math_ai_options']                             = __( '&#8595; Rank Math Content AI', 'rank-math' );
 		$actions['rank_math_content_ai_fetch_seo_title']             = esc_html__( 'Write SEO Title with AI', 'rank-math' );
 		$actions['rank_math_content_ai_fetch_seo_description']       = esc_html__( 'Write SEO Description with AI', 'rank-math' );

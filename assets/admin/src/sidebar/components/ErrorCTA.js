@@ -1,11 +1,16 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import { Button } from '@wordpress/components'
 
+/**
+ * Internal dependencies
+ */
+import Interpolate from '@components/Interpolate'
+
 // Get Error message list.
-const getMessageList = ( width, isBulkEdit ) => {
+const getMessageList = ( width, isBulkEdit, isFree ) => {
 	if ( isBulkEdit ) {
 		return (
 			<ul>
@@ -14,6 +19,18 @@ const getMessageList = ( width, isBulkEdit ) => {
 				<li>{ __( '125+ Expert-Written Prompts', 'rank-math' ) }</li>
 				<li>{ __( '1-Click Competitor Content Research', 'rank-math' ) }</li>
 				<li>{ __( '1-Click WooCommerce Product Descriptions', 'rank-math' ) }</li>
+			</ul>
+		)
+	}
+
+	if ( isFree ) {
+		return (
+			<ul>
+				<li>{ __( '1-Click Competitor Research', 'rank-math' ) }</li>
+				<li>{ __( 'On-Page SEO Suggestions', 'rank-math' ) }</li>
+				<li>{ __( '1-Click Bulk SEO Meta', 'rank-math' ) }</li>
+				<li>{ __( '125+ Pre-Built Prompts', 'rank-math' ) }</li>
+				<li>{ __( 'Multiple RankBot Sessions', 'rank-math' ) }</li>
 			</ul>
 		)
 	}
@@ -66,32 +83,60 @@ const getProNotice = ( width ) => {
 	)
 }
 
-export default ( { width = 40, showProNotice = false, isBulkEdit = false } ) => {
+const getCreditsExhaustedMessage = () => {
+	const resetDate = rankMath.contentAIRefreshDate ? rankMath.contentAIRefreshDate : ''
+	if ( ! resetDate ) {
+		return __( 'Your monthly Content AI credits have been fully utilized. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and access more credits.', 'rank-math' )
+	}
+
+	return (
+		<Interpolate components={ { strong: ( <strong /> ) } }>
+			{
+				sprintf(
+					// Translators: placeholder is the Content AI reset date.
+					__(
+						'Your monthly Content AI credits have been fully utilized. You can wait till %s for your credits to refresh or upgrade to continue enjoying seamless content creation',
+						'rank-math'
+					),
+					'{{strong}}' + resetDate + '{{/strong}}'
+				)
+			}
+		</Interpolate>
+	)
+}
+
+export default ( { width = 40, showProNotice = false, isBulkEdit = false, isResearch = false } ) => {
 	if ( showProNotice ) {
 		return getProNotice( width )
 	}
 
 	const isRegistered = rankMath.isUserRegistered
-	const hasContentAIPlan = rankMath.contentAIPlan && 'free' !== rankMath.contentAIPlan
-	const hasCredits = rankMath.contentAICredits > 0
+	const hasContentAIPlan = rankMath.contentAIPlan
+	const isFree = hasContentAIPlan === 'free'
+	let hasCredits = rankMath.contentAICredits > 0
 	const isMigrating = rankMath.contentAiMigrating
 
-	if ( isRegistered && hasContentAIPlan && hasCredits && ! isMigrating ) {
+	if ( hasCredits && isResearch && ! isFree && rankMath.contentAICredits < 499 ) {
+		hasCredits = false
+	}
+
+	if ( isRegistered && hasContentAIPlan && hasCredits && ! isMigrating && ! isFree ) {
 		return null
 	}
 
 	const widthClass = 'width-' + width
-	if ( ! isRegistered || ! hasContentAIPlan ) {
+	if ( ! isRegistered || ! hasContentAIPlan || ( hasCredits && isFree ) ) {
 		return (
 			<div id="rank-math-pro-cta" className="center rank-math-content-ai-warning-wrapper">
 				<div className={ 'rank-math-cta-box blue-ticks top-20 less-padding ' + widthClass }>
 					<h3>{ __( '🚀 Supercharge Your Content With AI', 'rank-math' ) }</h3>
 					<p>
 						{ ! isRegistered && ! isBulkEdit && __( 'Start using Content AI by connecting your RankMath.com Account', 'rank-math' ) }
-						{ isRegistered && ! hasContentAIPlan && ! isBulkEdit && __( 'To access this Content AI feature, you need to have an active subscription plan.', 'rank-math' ) }
+						{ isRegistered && ! hasContentAIPlan && ! isBulkEdit && ! isFree && __( 'To access this Content AI feature, you need to have an active subscription plan.', 'rank-math' ) }
+						{ isRegistered && ! isBulkEdit && isFree && __( 'To access this Content AI feature, you have to purchase a Content AI Subscription.', 'rank-math' ) }
 						{ isBulkEdit && __( 'You are one step away from unlocking this premium feature along with many more.', 'rank-math' ) }
 					</p>
-					{ getMessageList( width, isBulkEdit ) }
+					{ getMessageList( width, isBulkEdit, isFree ) }
 					{
 						! isRegistered &&
 						<Button
@@ -103,9 +148,9 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false } ) => 
 					}
 
 					{
-						isRegistered && ! hasContentAIPlan &&
+						isRegistered && ( ! hasContentAIPlan || isFree ) &&
 						<Button
-							href={ rankMath.links[ 'content-ai-settings' ] + '?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Plan+Button&utm_campaign=WP' }
+							href={ rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Plan+Button&utm_campaign=WP' }
 							className="button button-primary is-green"
 							target="_blank"
 						>
@@ -126,7 +171,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false } ) => 
 						{
 							__( 'We are working on improving your Content AI experience. Please wait for 5 minutes and then refresh to start using the optimized Content AI. If you see this for more than 5 minutes, please ', 'rank-math' )
 						}
-						<a href="https://rankmath.com/support/" target="_blank" rel="noreferrer">{ __( 'reach out to the support team.', 'rank-math' ) }</a>
+						<a href={ rankMath.links.support } target="_blank" rel="noreferrer">{ __( 'reach out to the support team.', 'rank-math' ) }</a>
 						{ __( ' We are sorry for the inconvenience.', 'rank-math' ) }
 					</p>
 				</div>
@@ -138,7 +183,9 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false } ) => 
 		<div id="rank-math-pro-cta" className="center rank-math-content-ai-warning-wrapper">
 			<div className={ 'rank-math-cta-box less-padding top-20 ' + widthClass }>
 				<h3>{ __( '⛔️ Content AI Credit Alert!', 'rank-math' ) }</h3>
-				<p>{ __( 'Your monthly Content AI credits have been fully utilized. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and access more credits.', 'rank-math' ) }</p>
+				<p>
+					{ getCreditsExhaustedMessage() }
+				</p>
 				<Button
 					href={ rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Credits+Button&utm_campaign=WP' }
 					className="button button-primary is-green"
