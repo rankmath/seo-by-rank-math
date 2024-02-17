@@ -168,7 +168,7 @@ class Posts {
 					$post_list[ $child->ID ]    = $child;
 					continue;
 				}
-				$this->children[ $child->post_parent ][] = $child;
+				$this->children[ $post_type ][ $child->post_parent ][ $child->ID ] = $child;
 			}
 
 			$post_list = $this->remove_with_parent( $post_list );
@@ -230,9 +230,9 @@ class Posts {
 				. ( $show_dates ? ' <span class="rank-math-html-sitemap__date">(' . esc_html( mysql2date( get_option( 'date_format' ), $post->post_date ) ) . ')</span>' : '' );
 			}
 
-			if ( ! empty( $this->children[ $post->ID ] ) ) {
+			if ( ! empty( $this->children[ $post_type ][ $post->ID ] ) ) {
 				! in_array( $post->ID, $exclude, true ) ? $output[] = '<ul class="rank-math-html-sitemap__list">' : '';
-				$output[] = $this->generate_posts_list_hierarchical(  $this->children[ $post->ID ], $show_dates, $post_type, true ); // phpcs:ignore
+				$output[] = $this->generate_posts_list_hierarchical(  $this->children[ $post_type ][ $post->ID ], $show_dates, $post_type, true ); // phpcs:ignore
 				! in_array( $post->ID, $exclude, true ) ? $output[] = '</ul>' : '';
 			}
 

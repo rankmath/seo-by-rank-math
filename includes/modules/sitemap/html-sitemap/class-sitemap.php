@@ -252,7 +252,7 @@ class Sitemap extends Taxonomy {
 			return $content;
 		}
 
-		if ( ! is_main_query() ) {
+		if ( ! is_main_query() || ! in_the_loop() ) {
 			return $content;
 		}
 

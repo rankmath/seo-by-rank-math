@@ -35,6 +35,7 @@ class Content_AI {
 		$this->action( 'rest_api_init', 'init_rest_api' );
 
 		new Content_AI_Page();
+		new Bulk_Actions();
 		if ( ! Helper::has_cap( 'content_ai' ) ) {
 			return;
 		}

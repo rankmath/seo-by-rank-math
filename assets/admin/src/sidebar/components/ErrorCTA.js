@@ -1,4 +1,9 @@
 /**
+ * External Dependencies
+ */
+import { includes } from 'lodash'
+
+/**
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n'
@@ -105,6 +110,25 @@ const getCreditsExhaustedMessage = () => {
 	)
 }
 
+// Get Link with UTM parameters.
+const getLink = ( link, medium ) => {
+	if ( 'free' === rankMath.contentAIPlan ) {
+		medium = medium + '+Free+Plan'
+	}
+
+	const tags = new URLSearchParams( {
+		utm_source: 'Plugin',
+		utm_medium: medium,
+		utm_campaign: 'WP',
+	} )
+
+	if ( ! includes( link, '?' ) ) {
+		link = link + '?'
+	}
+
+	return link + tags.toString()
+}
+
 export default ( { width = 40, showProNotice = false, isBulkEdit = false, isResearch = false } ) => {
 	if ( showProNotice ) {
 		return getProNotice( width )
@@ -150,7 +174,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 					{
 						isRegistered && ( ! hasContentAIPlan || isFree ) &&
 						<Button
-							href={ rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Plan+Button&utm_campaign=WP' }
+							href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw', 'Buy+Plan+Button' ) }
 							className="button button-primary is-green"
 							target="_blank"
 						>
@@ -187,7 +211,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 					{ getCreditsExhaustedMessage() }
 				</p>
 				<Button
-					href={ rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Credits+Button&utm_campaign=WP' }
+					href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw', 'Buy+Credits+Button' ) }
 					className="button button-primary is-green"
 					target="_blank"
 				>
@@ -195,7 +219,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 				</Button>
 				<Button
 					variant="link"
-					href={ rankMath.links[ 'content-ai-restore-credits' ] + '?utm_source=Plugin&utm_medium=Buy+Credits+Button&utm_campaign=WP' }
+					href={ getLink( rankMath.links[ 'content-ai-restore-credits' ], 'Buy+Credits+Button' ) }
 					className="button button-secondary"
 					target="_blank"
 				>

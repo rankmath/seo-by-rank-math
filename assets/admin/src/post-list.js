@@ -14,6 +14,7 @@ import { includes, startsWith, isNull } from 'lodash'
 /**
  * WordPress Dependencies
  */
+import { __ } from '@wordpress/i18n'
 import { render } from '@wordpress/element'
 import { Modal } from '@wordpress/components'
 
@@ -44,15 +45,15 @@ class RankMathPostList {
 
 			$this.append(
 				' <a href=#" class="dashicons dashicons-edit" title="' +
-					rankMath.bulkEditTitle +
+					__( 'Bulk Edit This Field', 'rank-math' ) +
 					'"></a>'
 			)
 			$this.wrapInner( '<span/>' )
 			$this.append(
 				' <span><a href="#" class="button button-primary button-small rank-math-column-save-all">' +
-					rankMath.buttonSaveAll +
+					__( 'Save All Edits', 'rank-math' ) +
 					'</a> <a href="#" class="button-link button-link-delete rank-math-column-cancel-all">' +
-					rankMath.buttonCancel +
+					__( 'Cancel', 'rank-math' ) +
 					'</a></span>'
 			)
 		} )

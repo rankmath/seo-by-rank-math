@@ -3,7 +3,7 @@
         'name' => 'rankmath/seo-by-rank-math',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => '5d93a7fb9b5356db220b546c7cab50084d163653',
+        'reference' => '8781d49eaf17de87874c3920bfca5e409bdda97a',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'a5hleyrich/wp-background-processing' => array(
-            'pretty_version' => '1.1.1',
-            'version' => '1.1.1.0',
-            'reference' => 'ebbed762c42e70e76573ffbd36e591378ba5f2ee',
+            'pretty_version' => '1.2',
+            'version' => '1.2.0.0',
+            'reference' => 'a0018fea79b8e752f41b6a26d6b9b3397d15c52e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../a5hleyrich/wp-background-processing',
             'aliases' => array(),
@@ -49,7 +49,7 @@
         'rankmath/seo-by-rank-math' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '5d93a7fb9b5356db220b546c7cab50084d163653',
+            'reference' => '8781d49eaf17de87874c3920bfca5e409bdda97a',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

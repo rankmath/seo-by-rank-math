@@ -11,12 +11,8 @@
 namespace RankMath\ContentAI;
 
 use RankMath\ContentAI\Content_AI;
-use RankMath\Post;
 use RankMath\Helper;
-use RankMath\Paper\Paper;
-use RankMath\Module\Base;
 use RankMath\Traits\Hooker;
-use RankMath\Helpers\Str;
 use RankMath\Admin\Page;
 use RankMath\Helpers\Param;
 use WP_Block_Editor_Context;
@@ -33,12 +29,6 @@ class Content_AI_Page {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		$post_types = Helper::get_settings( 'general.content_ai_post_types', [] );
-		foreach ( $post_types as $post_type ) {
-			$this->filter( "bulk_actions-edit-{$post_type}", 'post_bulk_actions', 9 );
-			$this->filter( "handle_bulk_actions-edit-{$post_type}", 'handle_post_bulk_actions', 10, 3 );
-		}
-
 		$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
 		$this->action( 'rank_math/admin/editor_scripts', 'enqueue' );
 		$this->action( 'init', 'init' );
@@ -114,9 +104,9 @@ class Content_AI_Page {
 	 * Register admin page.
 	 */
 	public function register_admin_page() {
-		$uri       = untrailingslashit( plugin_dir_url( __FILE__ ) );
-		$label     = Helper::get_content_ai_plan() === 'free' ? esc_html__( 'Free', 'rank-math' ) : esc_html__( 'New!', 'rank-math' );
-		$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . $label . '</span>';
+		$uri = untrailingslashit( plugin_dir_url( __FILE__ ) );
+
+		$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . esc_html__( 'New!', 'rank-math' ) . '</span>';
 
 		if ( 'rank-math-content-ai-page' === Param::get( 'page' ) ) {
 			Helper::add_json( 'isContentAIPage', true );
@@ -159,83 +149,6 @@ class Content_AI_Page {
 				],
 			]
 		);
-	}
-
-	/**
-	 * Add bulk actions for applicable posts, pages, CPTs.
-	 *
-	 * @param  array $actions Actions.
-	 * @return array          New actions.
-	 */
-	public function post_bulk_actions( $actions ) {
-		if ( ! Helper::has_cap( 'content_ai' ) ) {
-			return $actions;
-		}
-
-		$actions['rank_math_ai_options']                             = __( '&#8595; Rank Math Content AI', 'rank-math' );
-		$actions['rank_math_content_ai_fetch_seo_title']             = esc_html__( 'Write SEO Title with AI', 'rank-math' );
-		$actions['rank_math_content_ai_fetch_seo_description']       = esc_html__( 'Write SEO Description with AI', 'rank-math' );
-		$actions['rank_math_content_ai_fetch_seo_title_description'] = esc_html__( 'Write SEO Title & Description with AI', 'rank-math' );
-
-		return $actions;
-	}
-
-	/**
-	 * Handle bulk actions for applicable posts, pages, CPTs.
-	 *
-	 * @param  string $redirect   Redirect URL.
-	 * @param  string $doaction   Performed action.
-	 * @param  array  $object_ids Post IDs.
-	 *
-	 * @return string New redirect URL.
-	 */
-	public function handle_post_bulk_actions( $redirect, $doaction, $object_ids ) {
-		if ( empty( $object_ids ) || ! in_array( $doaction, [ 'rank_math_content_ai_fetch_seo_title', 'rank_math_content_ai_fetch_seo_description', 'rank_math_content_ai_fetch_seo_title_description' ], true ) ) {
-			return $redirect;
-		}
-
-		if ( ! empty( get_option( 'rank_math_content_ai_posts' ) ) ) {
-			Helper::add_notification(
-				esc_html__( 'Another bulk editing process is already running. Please try again later after the existing process is complete.', 'rank-math' ),
-				[
-					'type'    => 'warning',
-					'id'      => 'rank_math_content_ai_posts_error',
-					'classes' => 'rank-math-notice',
-				]
-			);
-
-			return $redirect;
-		}
-
-		$action = 'both';
-		if ( 'rank_math_content_ai_fetch_seo_title' === $doaction ) {
-			$action = 'title';
-		}
-
-		if ( 'rank_math_content_ai_fetch_seo_description' === $doaction ) {
-			$action = 'description';
-		}
-
-		$data = [
-			'action'   => $action,
-			'language' => Helper::get_settings( 'general.content_ai_language', Helper::content_ai_default_language() ),
-			'posts'    => [],
-		];
-
-		foreach ( $object_ids as $object_id ) {
-			$object          = get_post( $object_id );
-			$data['posts'][] = [
-				'post_id'       => $object_id,
-				'post_type'     => 'download' === $object->post_type ? 'Product' : ucfirst( $object->post_type ),
-				'title'         => get_the_title( $object_id ),
-				'focus_keyword' => Post::get_meta( 'focus_keyword', $object->ID ),
-				'summary'       => Helper::replace_vars( $this->get_description( $object ), $object ),
-			];
-		}
-
-		Bulk_Edit_SEO_Meta::get()->start( $data );
-
-		return $redirect;
 	}
 
 	/**
@@ -457,21 +370,5 @@ class Content_AI_Page {
 		}
 
 		return $ai_post;
-	}
-
-	/**
-	 * Get post description.
-	 *
-	 * @param WP_Post $object Post Instance.
-	 *
-	 * @return string Post description.
-	 */
-	private function get_description( $object ) {
-		$description = Post::get_meta( 'description', $object->ID );
-		if ( '' !== $description ) {
-			return $description;
-		}
-
-		return ! empty( $object->post_excerpt ) ? $object->post_excerpt : Str::truncate( Paper::get_from_options( "pt_{$object->post_type}_description", $object ), 160 );
 	}
 }

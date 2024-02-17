@@ -246,7 +246,7 @@ class Advanced_Variables extends Author_Variables {
 			return null;
 		}
 
-		if ( ! empty( get_query_var( 'sitemap' ) ) ) {
+		if ( ! empty( get_query_var( 'sitemap' ) ) && 'locations' !== get_query_var( 'sitemap' ) ) {
 			return null;
 		}
 

@@ -82,7 +82,7 @@ class Instant_Indexing extends Base {
 		$this->filter( 'page_row_actions', 'post_row_actions', 10, 2 );
 		$this->filter( 'admin_init', 'handle_post_row_actions' );
 
-		$this->action( 'template_redirect', 'serve_api_key' );
+		$this->action( 'wp', 'serve_api_key' );
 		$this->action( 'rest_api_init', 'init_rest_api' );
 	}
 

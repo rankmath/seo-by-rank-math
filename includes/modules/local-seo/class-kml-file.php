@@ -146,7 +146,7 @@ class KML_File {
 		}
 
 		foreach ( $locations as $location ) {
-			$address   = ! empty( $location['address'] ) ? implode( ', ', array_filter( $location['address'] ) ) : '';
+			$address   = ! empty( $location['address'] ) ? Helper::replace_vars( implode( ', ', array_filter( $location['address'] ) ) ) : '';
 			$has_coord = ! empty( $location['coords']['latitude'] ) && ! empty( $location['coords']['longitude'] );
 
 			$kml .= $this->newline( '<Placemark>', 3 );

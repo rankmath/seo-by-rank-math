@@ -62,14 +62,16 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 		$action   = $data['action'];
 		$posts    = $data['posts'];
 		$language = $data['language'];
+
 		update_option( 'rank_math_content_ai_posts', $posts );
 		$chunks = array_chunk( $posts, 10, true );
 		foreach ( $chunks as $chunk ) {
 			$this->push_to_queue(
 				[
-					'posts'    => $chunk,
-					'action'   => $action,
-					'language' => $language,
+					'posts'       => $chunk,
+					'action'      => $action,
+					'language'    => $language,
+					'is_taxonomy' => ! empty( $data['is_taxonomy'] ),
 				]
 			);
 		}
@@ -106,8 +108,8 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 		delete_option( 'rank_math_content_ai_posts' );
 		delete_option( 'rank_math_content_ai_posts_processed' );
 		Helper::add_notification(
-			// Translators: placeholder is the number of modified posts.
-			sprintf( _n( 'SEO meta successfully updated in %d post.', 'SEO meta successfully updated in %d posts.', count( $posts ), 'rank-math' ), count( $posts ) ),
+			// Translators: placeholder is the number of modified items.
+			sprintf( _n( 'SEO meta successfully updated in %d item.', 'SEO meta successfully updated in %d items.', count( $posts ), 'rank-math' ), count( $posts ) ),
 			[
 				'type'    => 'success',
 				'id'      => 'rank_math_content_ai_posts',
@@ -128,18 +130,18 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 	protected function task( $data ) {
 		try {
 			$posts = json_decode( wp_remote_retrieve_body( $this->get_posts( $data ) ), true );
-
 			if ( empty( $posts['meta'] ) ) {
 				return false;
 			}
 
 			foreach ( $posts['meta'] as $post_id => $data ) {
+				$method = ! empty( $data['object_type'] ) && 'term' === $data['object_type'] ? 'update_term_meta' : 'update_post_meta';
 				if ( ! empty( $data['title'] ) ) {
-					update_post_meta( $post_id, 'rank_math_title', sanitize_text_field( $data['title'] ) );
+					$method( $post_id, 'rank_math_title', sanitize_text_field( $data['title'] ) );
 				}
 
 				if ( ! empty( $data['description'] ) ) {
-					update_post_meta( $post_id, 'rank_math_description', sanitize_textarea_field( $data['description'] ) );
+					$method( $post_id, 'rank_math_description', sanitize_textarea_field( $data['description'] ) );
 				}
 			}
 
@@ -194,6 +196,7 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 			'username'       => $connect_data['username'],
 			'api_key'        => $connect_data['api_key'],
 			'site_url'       => $connect_data['site_url'],
+			'is_taxonomy'    => ! empty( $data['is_taxonomy'] ),
 			'plugin_version' => rank_math()->version,
 		];
 

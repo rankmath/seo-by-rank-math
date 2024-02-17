@@ -63,7 +63,7 @@ class Router {
 			return;
 		}
 
-		$xsl = get_query_var( 'xsl' );
+		$xsl = self::get_sitemap_slug( get_query_var( 'xsl' ) );
 		if ( ! empty( $xsl ) ) {
 			$this->filter( 'user_has_cap', 'filter_user_has_cap' );
 			$stylesheet = new Stylesheet();

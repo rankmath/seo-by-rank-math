@@ -170,7 +170,7 @@ class Frontend {
 		}
 
 		// Remove empty ImageObject.
-		if ( isset( $schema['image'] ) && empty( $schema['image']['url'] ) ) {
+		if ( isset( $schema['image'] ) && empty( $schema['image']['url'] ) && ! is_array( $schema['image'] ) ) {
 			unset( $schema['image'] );
 		}
 
@@ -203,6 +203,10 @@ class Frontend {
 					'value' => ! in_array( $type, [ 'person', 'service', 'restaurant', 'product', 'musicgroup', 'musicalbum', 'jobposting' ], true ),
 				],
 			];
+
+			if ( isset( $schema['image'] ) && 'product' === $type && is_array( $schema['image'] ) ) {
+				$props['thumbnail']['value'] = false;
+			}
 
 			foreach ( $props as $prop => $data ) {
 				if ( ! $data['value'] ) {

@@ -315,14 +315,14 @@ class Paper {
 			return $this->keywords;
 		}
 
-		$this->keywords = $this->paper->keywords();
-
 		/**
 		 * Allows filtering of the meta keywords.
 		 *
 		 * @param array $keywords The meta keywords to be echoed.
 		 */
-		return $this->do_filter( 'frontend/keywords', $this->keywords );
+		$this->keywords = $this->do_filter( 'frontend/keywords', $this->paper->keywords() );
+
+		return $this->keywords;
 	}
 
 	/**
