@@ -219,21 +219,18 @@ class Summary {
 			->selectSum( 'impressions', 'impressions' )
 			->selectSum( 'clicks', 'clicks' )
 			->selectAvg( 'position', 'position' )
-			->selectAvg( 'ctr', 'ctr' )
 			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
 			->one();
 		// Check validation.
 		$stats->clicks      = empty( $stats->clicks ) ? 0 : $stats->clicks;
 		$stats->impressions = empty( $stats->impressions ) ? 0 : $stats->impressions;
 		$stats->position    = empty( $stats->position ) ? 0 : $stats->position;
-		$stats->ctr         = empty( $stats->ctr ) ? 0 : $stats->ctr;
 
 		$old_stats = DB::analytics()
 			->selectCount( 'DISTINCT(page)', 'posts' )
 			->selectSum( 'impressions', 'impressions' )
 			->selectSum( 'clicks', 'clicks' )
 			->selectAvg( 'position', 'position' )
-			->selectAvg( 'ctr', 'ctr' )
 			->whereBetween( 'created', [ $this->compare_start_date, $this->compare_end_date ] )
 			->one();
 
@@ -241,21 +238,14 @@ class Summary {
 		$old_stats->clicks      = empty( $old_stats->clicks ) ? 0 : $old_stats->clicks;
 		$old_stats->impressions = empty( $old_stats->impressions ) ? 0 : $old_stats->impressions;
 		$old_stats->position    = empty( $old_stats->position ) ? 0 : $old_stats->position;
-		$old_stats->ctr         = empty( $old_stats->ctr ) ? 0 : $old_stats->ctr;
 
+		$total_ctr = 0 !== $stats->impressions ? round( ( $stats->clicks / $stats->impressions ) * 100, 2 ) : 0;
+		$previous_ctr = 0 !== $old_stats->impressions ? round( ( $old_stats->clicks / $old_stats->impressions ) * 100, 2 ) : 0;
 		$stats->ctr = [
-			'total'    => 0,
-			'previous' => 0,
+			'total'    => $total_ctr,
+			'previous' => $previous_ctr,
+			'difference' => $total_ctr - $previous_ctr,
 		];
-
-		if ( 0 !== $stats->impressions ) {
-			$stats->ctr['total'] = round( ( $stats->clicks / $stats->impressions ) * 100, 2 );
-		}
-		if ( 0 !== $old_stats->impressions ) {
-			$stats->ctr['previous'] = round( ( $old_stats->clicks / $old_stats->impressions ) * 100, 2 );
-		}
-
-		$stats->ctr['difference'] = $stats->ctr['total'] - $stats->ctr['previous'];
 
 		$stats->clicks = [
 			'total'      => (int) $stats->clicks,
@@ -338,10 +328,7 @@ class Summary {
 			$wpdb->prepare(
 				"SELECT COUNT(DISTINCT(query))
 				FROM {$wpdb->prefix}rank_math_analytics_gsc
-				WHERE created BETWEEN %s AND %s
-				GROUP BY Date(created)
-				ORDER BY Date(created) DESC
-				LIMIT 1",
+				WHERE created BETWEEN %s AND %s",
 				$this->start_date,
 				$this->end_date
 			)
@@ -351,10 +338,7 @@ class Summary {
 			$wpdb->prepare(
 				"SELECT COUNT(DISTINCT(query))
 				FROM {$wpdb->prefix}rank_math_analytics_gsc
-				WHERE created BETWEEN %s AND %s
-				GROUP BY Date(created)
-				ORDER BY Date(created) DESC
-				LIMIT 1",
+				WHERE created BETWEEN %s AND %s",
 				$this->compare_start_date,
 				$this->compare_end_date
 			)

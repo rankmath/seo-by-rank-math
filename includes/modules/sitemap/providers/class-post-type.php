@@ -251,30 +251,13 @@ class Post_Type implements Provider {
 			$post_types = [ $post_types ];
 		}
 
-		/**
-		 * Filter JOIN query part for type count of post type.
-		 *
-		 * @param string $join       SQL part, defaults to empty string.
-		 * @param string $post_types Post types name.
-		 */
-		$join_filter = $this->do_filter( 'sitemap/typecount_join', '', $post_types );
-
-		/**
-		 * Filter WHERE query part for type count of post type.
-		 *
-		 * @param string $where     SQL part, defaults to empty string.
-		 * @param string $post_types Post types name.
-		 */
-		$where_filter = $this->do_filter( 'sitemap/typecount_where', '', $post_types );
-
-		$where = $this->get_sql_where_clause( $post_types );
-
-		$sql = "
-			SELECT COUNT({$wpdb->posts}.ID)
-			FROM {$wpdb->posts}
-			{$join_filter}
-			{$where}
-			{$where_filter}";
+		$sql = "SELECT COUNT( DISTINCT p.ID ) as count FROM {$wpdb->posts} as p
+		LEFT JOIN {$wpdb->postmeta} AS pm ON ( p.ID = pm.post_id AND pm.meta_key = 'rank_math_robots' )
+		WHERE (
+			( pm.meta_key = 'rank_math_robots' AND pm.meta_value NOT LIKE '%noindex%' ) OR
+			pm.post_id IS NULL
+		)
+		AND p.post_type = ( '" . join( "', '", esc_sql( $post_types ) ) . "' ) AND p.post_status = 'publish'";
 
 		return (int) $wpdb->get_var( $sql ); // phpcs:ignore
 	}
@@ -358,16 +341,17 @@ class Post_Type implements Provider {
 			$post_types = [ $post_types ];
 		}
 
-		$where = $this->get_sql_where_clause( $post_types );
-
-		// Also see http://explainextended.com/2009/10/23/mysql-order-by-limit-performance-late-row-lookups/.
 		$sql = "
 			SELECT l.ID, post_title, post_content, post_name, post_parent, post_author, post_modified_gmt, post_date, post_date_gmt, post_type
 			FROM (
-				SELECT {$wpdb->posts}.ID
-				FROM {$wpdb->posts}
-				{$where}
-				ORDER BY {$wpdb->posts}.post_modified DESC LIMIT %d OFFSET %d
+				SELECT DISTINCT p.ID FROM {$wpdb->posts} as p
+				LEFT JOIN {$wpdb->postmeta} AS pm ON ( p.ID = pm.post_id AND pm.meta_key = 'rank_math_robots' )
+				WHERE (
+					( pm.meta_key = 'rank_math_robots' AND pm.meta_value NOT LIKE '%noindex%' ) OR
+					pm.post_id IS NULL
+				)
+				AND p.post_type IN ( '" . join( "', '", esc_sql( $post_types ) ) . "' ) AND p.post_status = 'publish' AND p.post_password = ''
+				ORDER BY p.post_modified DESC LIMIT %d OFFSET %d
 			)
 			o JOIN {$wpdb->posts} l ON l.ID = o.ID
 		";

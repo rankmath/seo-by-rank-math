@@ -95,6 +95,18 @@ class Taxonomy implements Provider {
 				[
 					'hide_empty' => $hide_empty,
 					'fields'     => 'ids',
+					'meta_query' => [
+						'relation' => 'OR',
+						[
+							'key'     => 'rank_math_robots',
+							'value'   => 'noindex',
+							'compare' => 'NOT LIKE',
+						],
+						[
+							'key'     => 'rank_math_robots',
+							'compare' => 'NOT EXISTS',
+						],
+					],
 				]
 			);
 		}

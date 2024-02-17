@@ -149,7 +149,16 @@ trait Conditional {
 	 * @return bool
 	 */
 	public static function is_edit_allowed() {
-		return ( ! defined( 'DISALLOW_FILE_EDIT' ) || ! DISALLOW_FILE_EDIT ) && ( ! defined( 'DISALLOW_FILE_MODS' ) || ! DISALLOW_FILE_MODS );
+		/**
+		 * Allow editing the robots.txt & htaccess data.
+		 *
+		 * @param bool Can edit the robots & htacess data.
+		 */
+		return apply_filters(
+			'rank_math/can_edit_file',
+			( ! defined( 'DISALLOW_FILE_EDIT' ) || ! DISALLOW_FILE_EDIT ) &&
+			( ! defined( 'DISALLOW_FILE_MODS' ) || ! DISALLOW_FILE_MODS )
+		);
 	}
 
 	/**

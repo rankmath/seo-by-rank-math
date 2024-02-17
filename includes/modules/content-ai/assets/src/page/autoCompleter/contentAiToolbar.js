@@ -52,10 +52,11 @@ export default ( { value } ) => {
 		return null
 	}
 
+	const language = rankMath.ca_language
 	const controls = [
 		{
 			title: '💻  ' + __( 'Run as Command', 'rank-math' ),
-			onClick: () => ( onClick( 'AI_Command', { command: text, choices: 1 }, selectedBlock ) ),
+			onClick: () => ( onClick( 'AI_Command', { command: text, language, choices: 1 }, selectedBlock ) ),
 		},
 		{
 			title: '📖  ' + __( 'Write More', 'rank-math' ),
@@ -63,7 +64,7 @@ export default ( { value } ) => {
 		},
 		{
 			title: '📝  ' + __( 'Improve', 'rank-math' ),
-			onClick: () => ( onClick( 'Paragraph_Rewriter', { original_paragraph: text, choices: 1 }, selectedBlock ) ),
+			onClick: () => ( onClick( 'Paragraph_Rewriter', { original_paragraph: text, language, choices: 1 }, selectedBlock ) ),
 		},
 	]
 
@@ -71,11 +72,11 @@ export default ( { value } ) => {
 		controls.push(
 			{
 				title: '📙  ' + __( 'Summarize', 'rank-math' ),
-				onClick: () => ( onClick( 'Text_Summarizer', { text, choices: 1 }, selectedBlock ) ),
+				onClick: () => ( onClick( 'Text_Summarizer', { text, language, choices: 1 }, selectedBlock ) ),
 			},
 			{
 				title: '💭  ' + __( 'Write Analogy', 'rank-math' ),
-				onClick: () => ( onClick( 'Analogy', { text, choices: 1 }, selectedBlock ) ),
+				onClick: () => ( onClick( 'Analogy', { text, language, choices: 1 }, selectedBlock ) ),
 			},
 		)
 	}

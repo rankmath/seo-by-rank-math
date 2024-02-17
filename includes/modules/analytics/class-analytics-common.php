@@ -298,7 +298,7 @@ class Analytics_Common {
 		return [
 			'search-traffic'    => [
 				'label' => __( 'Search Traffic', 'rank-math' ),
-				'desc'  => __( 'This is the number of pageviews carried out by visitors from Google.', 'rank-math' ),
+				'desc'  => __( 'This is the number of pageviews carried out by visitors from Search Engines.', 'rank-math' ),
 				'value' => $is_connected && defined( 'RANK_MATH_PRO_FILE' ),
 				'data'  => isset( $data->pageviews ) ? $data->pageviews : '',
 			],

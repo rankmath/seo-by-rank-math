@@ -157,6 +157,8 @@ class Update_Score {
 				$non_cacheable[] = 'excerpt';
 				$non_cacheable[] = 'excerpt_only';
 				$non_cacheable[] = 'seo_description';
+				$non_cacheable[] = 'keywords';
+				$non_cacheable[] = 'focuskw';
 				return $non_cacheable;
 			}
 		);
