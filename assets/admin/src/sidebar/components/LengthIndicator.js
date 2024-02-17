@@ -6,7 +6,7 @@ import classnames from 'classnames'
 /**
  * Internal dependencies
  */
-import lengthIndicator from '@helpers/lengthIndicator'
+import lengthIndicator from '@helpers/LengthIndicator'
 
 const LengthIndicator = ( props ) => {
 	const lengthData = lengthIndicator( props.source, props )

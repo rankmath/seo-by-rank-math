@@ -9,7 +9,7 @@ import { createElement, Fragment } from '@wordpress/element'
  * Internal dependencies
  */
 import TabPanel from '@components/TabPanel'
-import Keywords from './components/Keywords'
+import Keywords from './components/keywords'
 import Questions from './components/Questions'
 import Links from './components/Links'
 

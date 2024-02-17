@@ -11,6 +11,9 @@
 @import 'variables';
 @import 'mixins';
 
+@import './sidebar/modal';
+@import 'partials/common/pro-cta';
+
 .wp-list-table {
 	th {
 		&#rank_math_seo_details, &#rank_math_title, &#rank_math_description,

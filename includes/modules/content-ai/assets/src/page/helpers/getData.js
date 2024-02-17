@@ -55,7 +55,7 @@ const updateCredits = ( result, setCredits ) => {
 		return
 	}
 
-	let credits = JSON.parse( result.credits )
+	let credits = result.credits
 	if ( isEmpty( credits ) ) {
 		return
 	}
@@ -87,7 +87,7 @@ const handleErrors = ( error, endpoint, attributes, callback, isChat, setCredits
 const callAPI = ( endpoint, attributes, callback, isChat, setCredits, repeat = 0 ) => {
 	jQuery.ajax(
 		{
-			url: 'https://rankmath.com/wp-json/contentai/v1/' + endpoint,
+			url: rankMath.contentAiUrl + endpoint,
 			type: 'POST',
 			data: attributes,
 			success: ( result ) => {
@@ -107,12 +107,38 @@ const callAPI = ( endpoint, attributes, callback, isChat, setCredits, repeat = 0
 				callback( data )
 				updateCredits( result, setCredits )
 			},
-			error: () => {
-				callback(
-					{
-						error: errorMessage,
+			error: ( jqXHR ) => {
+				// Try to parse the response payload.
+				try {
+					const result = JSON.parse( jqXHR.responseText )
+					if ( ! isEmpty( result.err_key ) ) {
+						if ( 'not_found' === result.err_key && repeat < 2 ) {
+							apiFetch( {
+								method: 'GET',
+								path: '/rankmath/v1/ca/migrateUser',
+							} )
+								.then( ( response ) => {
+									if ( 'completed' === response ) {
+										callAPI( endpoint, attributes, callback, isChat, setCredits, repeat + 1 )
+									}
+								} )
+								.catch( ( error ) => {
+									// eslint-disable-next-line no-console
+									console.log( error )
+								} )
+							return
+						}
+
+						const errorMessages = rankMath.contentAIErrors
+						callback( { error: ! isUndefined( errorMessages[ result.err_key ] ) ? errorMessages[ result.err_key ] : errorMessage } )
+						return
 					}
-				)
+				} catch ( error ) {
+					// Fallback to a generic error message if try statement fails.
+					callback( { error: errorMessage } )
+				}
+				// Fallback to a generic error message if parsing fails or if there's no error message in the payload.
+				callback( { error: errorMessage } )
 			},
 		}
 	)

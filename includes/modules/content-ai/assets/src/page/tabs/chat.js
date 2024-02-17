@@ -22,7 +22,7 @@ import deleteOutput from '../helpers/deleteOutput'
 import markdownConverter from '../helpers/markdownConverter'
 import CopyButton from '../components/CopyButton'
 import ContentAiText from '../components/ContentAiText'
-import ErrorMessage from '../components/ErrorMessage'
+import ErrorCTA from '@components/ErrorCTA'
 
 // Chat component.
 export default ( { setCredits = false, hasContentAiError = false } ) => {
@@ -393,7 +393,7 @@ export default ( { setCredits = false, hasContentAiError = false } ) => {
 					</div>
 				</div>
 			</div>
-			{ hasContentAiError && <ErrorMessage /> }
+			{ hasContentAiError && <ErrorCTA /> }
 		</>
 	)
 }

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.207\n"
+"Project-Id-Version: Rank Math SEO 1.0.208\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-30T08:24:08+00:00\n"
+"POT-Creation-Date: 2023-12-07T09:21:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -100,12 +100,6 @@ msgid "Google PageSpeed"
 msgstr ""
 
 msgid "Google PageSpeed Insights"
-msgstr ""
-
-msgid "Google Mobile-Friendly"
-msgstr ""
-
-msgid "Google Mobile-Friendly Test"
 msgstr ""
 
 msgid "Google Rich Results (Mobile)"
@@ -209,6 +203,21 @@ msgid "WordPress General Settings"
 msgstr ""
 
 msgid "Help &amp; Support"
+msgstr ""
+
+msgid "Christmas Sale"
+msgstr ""
+
+msgid "New Year Sale"
+msgstr ""
+
+msgid "Anniversary Sale"
+msgstr ""
+
+msgid "Black Friday Sale"
+msgstr ""
+
+msgid "Cyber Monday Sale"
 msgstr ""
 
 msgid "Twitter username (without @)"
@@ -592,6 +601,37 @@ msgid "Save Changes"
 msgstr ""
 
 msgid "Reset Options"
+msgstr ""
+
+msgid "&#8595; Rank Math"
+msgstr ""
+
+msgid "Set to noindex"
+msgstr ""
+
+msgid "Set to index"
+msgstr ""
+
+msgid "Set to nofollow"
+msgstr ""
+
+msgid "Set to follow"
+msgstr ""
+
+msgid "Remove custom canonical URL"
+msgstr ""
+
+msgid "Redirect"
+msgstr ""
+
+msgid "Remove redirection"
+msgstr ""
+
+msgid "Set Schema: None"
+msgstr ""
+
+#. Translators: placeholder is the default Schema type setting.
+msgid "Set Schema: Default (%s)"
 msgstr ""
 
 msgid "Bulk Edit This Field"
@@ -2240,6 +2280,12 @@ msgstr ""
 msgid "Could not generate. Please try again later."
 msgstr ""
 
+msgid "Invalid API key. Please check your API key or reconnect the site and try again."
+msgstr ""
+
+msgid "User wallet not found."
+msgstr ""
+
 msgid "WooCommerce Product"
 msgstr ""
 
@@ -2484,9 +2530,6 @@ msgid "Clear Log"
 msgstr ""
 
 msgid "View Redirection"
-msgstr ""
-
-msgid "Redirect"
 msgstr ""
 
 msgid "URI"
@@ -3366,7 +3409,7 @@ msgid "Click to refresh the available credits."
 msgstr ""
 
 #. translators: 1. Credits left 2. Buy more credits link
-msgid "%1$s credits left this month. Credits will renew next month or you can upgrade to get more credits %2$s."
+msgid "%1$s credits left this month. Credits will renew on %2$s or you can upgrade to get more credits %3$s."
 msgstr ""
 
 #. translators: 1. Credits left 2. Buy more credits link
@@ -7143,6 +7186,96 @@ msgstr ""
 msgid "No posts found without SEO score."
 msgstr ""
 
+msgid "🔒 This is a PRO-Only Feature"
+msgstr ""
+
+msgid "We are sorry but this feature is only available to Rank Math PRO/Business/Agency Users. Unlock this feature and many more by getting a Rank Math plan."
+msgstr ""
+
+msgid "Bulk Edit SEO Tags"
+msgstr ""
+
+msgid "Advanced Google Analytics 4 Integration"
+msgstr ""
+
+msgid "Free Content AI Trial"
+msgstr ""
+
+msgid "SEO Performance Email Reports"
+msgstr ""
+
+msgid "Server Maintenance Underway"
+msgstr ""
+
+msgid "We are working on improving your Content AI experience. Please wait for 5 minutes and then refresh to start using the optimized Content AI. If you see this for more than 5 minutes, please "
+msgstr ""
+
+msgid "reach out to the support team."
+msgstr ""
+
+msgid " We are sorry for the inconvenience."
+msgstr ""
+
+msgid "⛔️ Content AI Credit Alert!"
+msgstr ""
+
+msgid "Your monthly Content AI credits have been fully utilized. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and access more credits."
+msgstr ""
+
+msgid "Missing Credits?"
+msgstr ""
+
+msgid "🚀 Supercharge Your Content With AI"
+msgstr ""
+
+msgid "Start using Content AI by connecting your RankMath.com Account"
+msgstr ""
+
+msgid "To access this Content AI feature, you need to have an active subscription plan."
+msgstr ""
+
+msgid "You are one step away from unlocking this premium feature along with many more."
+msgstr ""
+
+msgid "Bulk Update Your SEO Meta using AI"
+msgstr ""
+
+msgid "Get Access to 40+ AI SEO Tools"
+msgstr ""
+
+msgid "125+ Expert-Written Prompts"
+msgstr ""
+
+msgid "1-Click Competitor Content Research"
+msgstr ""
+
+msgid "1-Click WooCommerce Product Descriptions"
+msgstr ""
+
+msgid "1-Click SEO Content"
+msgstr ""
+
+msgid "1-Click SEO Meta"
+msgstr ""
+
+msgid "40+ Specialized AI Tools"
+msgstr ""
+
+msgid "1-Click Competitor Research"
+msgstr ""
+
+msgid "125+ Pre-Built Prompts"
+msgstr ""
+
+msgid "Gain access to 40+ advanced AI tools, empowering your content strategy."
+msgstr ""
+
+msgid "Experience the revolutionary AI-powered Content Editor for unparalleled efficiency."
+msgstr ""
+
+msgid "Engage with RankBot, your personal AI Chat Assistant, for real-time assistance."
+msgstr ""
+
 msgid "This is what will appear in the first line when this post shows up in the search results."
 msgstr ""
 
@@ -8374,45 +8507,6 @@ msgid "Click Here"
 msgstr ""
 
 msgid "1 Word Output = 1 Credit"
-msgstr ""
-
-msgid "⛔️ Content AI Credit Alert!"
-msgstr ""
-
-msgid "Your monthly Content AI credits have been fully utilized. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and access more credits."
-msgstr ""
-
-msgid "🚀 Supercharge Your Content With AI"
-msgstr ""
-
-msgid "Start using Content AI by connecting your RankMath.com Account"
-msgstr ""
-
-msgid "To access this Content AI feature, you need to have an active subscription plan."
-msgstr ""
-
-msgid "1-Click SEO Content"
-msgstr ""
-
-msgid "1-Click SEO Meta"
-msgstr ""
-
-msgid "40+ Specialized AI Tools"
-msgstr ""
-
-msgid "1-Click Competitor Research"
-msgstr ""
-
-msgid "125+ Pre-Built Prompts"
-msgstr ""
-
-msgid "Gain access to 40+ advanced AI tools, empowering your content strategy."
-msgstr ""
-
-msgid "Experience the revolutionary AI-powered Content Editor for unparalleled efficiency."
-msgstr ""
-
-msgid "Engage with RankBot, your personal AI Chat Assistant, for real-time assistance."
 msgstr ""
 
 msgid "Required fields."

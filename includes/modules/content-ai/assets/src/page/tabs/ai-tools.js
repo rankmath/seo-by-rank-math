@@ -16,7 +16,7 @@ import { SelectControl, Button } from '@wordpress/components'
 import getTools from '../helpers/getTools'
 import Modal from '../modal'
 import SearchField from '../components/SearchField'
-import ErrorMessage from '../components/ErrorMessage'
+import ErrorCTA from '@components/ErrorCTA'
 
 /**
  * AI_Tools component
@@ -119,7 +119,7 @@ export default ( { showMinimal = false, isPage = false, setCredits = false, hasC
 					endpoint && <Modal data={ endpoint } setEndpoint={ setEndpoint } isPage={ isPage } setCredits={ setCredits } />
 				}
 			</div>
-			{ hasContentAiError && <ErrorMessage /> }
+			{ hasContentAiError && <ErrorCTA /> }
 		</>
 	)
 }

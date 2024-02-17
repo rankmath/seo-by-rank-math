@@ -183,12 +183,13 @@ if (  Helper::is_site_connected() && false !== $credits  ) {
 		<span>' . esc_html__( 'Click to refresh the available credits.', 'rank-math' ) . '</span>
 	</a>';
 
+	$refresh_date = Helper::get_content_ai_refresh_date();
 	$cmb->add_field(
 		[
 			'id'      => 'content_ai_credits',
 			'type'    => 'raw',
 			/* translators: 1. Credits left 2. Buy more credits link */
-			'content' => '<div class="cmb-row buy-more-credits rank-math-exclude-from-search">' . $update_credits . sprintf( esc_html__( '%1$s credits left this month. Credits will renew next month or you can upgrade to get more credits %2$s.', 'rank-math' ), '<strong>' . $credits . '</strong>', '<a href="' . KB::get( 'content-ai-pricing-tables', 'Buy CAI Credits Options Panel' ) . '" target="_blank">' . esc_html__( 'here', 'rank-math' ) . '</a>' ) . '</div>',
+			'content' => '<div class="cmb-row buy-more-credits rank-math-exclude-from-search">' . $update_credits . sprintf( esc_html__( '%1$s credits left this month. Credits will renew on %2$s or you can upgrade to get more credits %3$s.', 'rank-math' ), '<strong>' . $credits . '</strong>', wp_date( 'Y-m-d g:i a', $refresh_date ), '<a href="' . KB::get( 'content-ai-pricing-tables', 'Buy CAI Credits Options Panel' ) . '" target="_blank">' . esc_html__( 'here', 'rank-math' ) . '</a>' ) . '</div>',
 		]
 	);
 }

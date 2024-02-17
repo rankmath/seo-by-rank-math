@@ -36,10 +36,12 @@ class KB {
 		'help-affiliate'                  => 'https://rankmath.com/affiliates/',
 		'content-ai'                      => 'https://rankmath.com/content-ai/',
 		'content-ai-pricing-tables'       => 'https://rankmath.com/content-ai/?#pricing-tables',
+		'content-ai-restore-credits'      => 'https://rankmath.com/kb/how-to-restore-missing-content-ai-credits/',
 		'free-vs-pro'                     => 'https://rankmath.com/free-vs-pro/',
 		'google-updates'                  => 'https://rankmath.com/google-updates/',
 		'usage-policy'                    => 'https://rankmath.com/usage-tracking/',
 		'logo'                            => 'https://rankmath.com/wordpress/plugin/seo-suite/',
+		'offer'                           => 'https://rankmath.com/offer/',
 
 		// Knowledgebase.
 		'knowledgebase'                   => 'https://rankmath.com/kb/',
@@ -93,7 +95,6 @@ class KB {
 		'news-sitemap'                    => 'https://rankmath.com/kb/news-sitemap/',
 		'role-manager'                    => 'https://rankmath.com/kb/role-manager/',
 		'seo-analysis'                    => 'https://rankmath.com/kb/seo-analysis/',
-		'content-ai'                      => 'https://rankmath.com/kb/content-ai-plans-and-credits/',
 		'requirements'                    => 'https://rankmath.com/kb/requirements/',
 		'video-sitemap'                   => 'https://rankmath.com/kb/video-sitemap/',
 		'rich-snippets'                   => 'https://rankmath.com/kb/rich-snippets/',

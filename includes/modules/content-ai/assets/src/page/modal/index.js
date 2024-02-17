@@ -27,7 +27,7 @@ import getOutput from './getOutput'
 import getEndpointHistory from './getEndpointHistory'
 import closeModal from './closeModal'
 import KBArticle from './KBArticle'
-import ErrorMessage from '../components/ErrorMessage'
+import ErrorCTA from '@components/ErrorCTA'
 import hasError from '../helpers/hasError'
 
 /**
@@ -196,7 +196,7 @@ export default ( { data, setEndpoint = false, isPage = false, setCredits = false
 					}
 				</div>
 			</div>
-			{ hasError() && <ErrorMessage width={ 60 } /> }
+			{ hasError() && <ErrorCTA width={ 60 } /> }
 		</Modal>
 	)
 }

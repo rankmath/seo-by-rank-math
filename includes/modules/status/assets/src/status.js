@@ -101,18 +101,17 @@ import { __ } from '@wordpress/i18n'
 					}
 
 					const keyword = Helpers.removeDiacritics( data.keyword )
-
 					postIds.push( postID )
 					const resultManager = new ResultManager()
 					const i18n = wp.i18n
-					const paper = new Paper()
+					const paper = new Paper( '', { locale: rankMath.localeFull } )
 					paper.setTitle( data.title )
 					paper.setDescription( data.description )
 					paper.setText( data.content )
 					paper.setKeyword( keyword )
 					paper.setKeywords( data.keywords )
 					paper.setPermalink( data.url )
-					paper.setUrl( data.url )
+					paper.setUrl( Helpers.removeDiacritics( data.url ) )
 					if ( data.thumbnail ) {
 						paper.setThumbnail( data.thumbnail )
 						paper.setThumbnailAltText( data.thumbnailAlt )

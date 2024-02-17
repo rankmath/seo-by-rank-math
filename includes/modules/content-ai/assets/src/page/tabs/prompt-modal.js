@@ -134,7 +134,7 @@ export default ( { isOpen, toggleModal, setMessage } ) => {
 						setUpdating( true )
 						jQuery.ajax(
 							{
-								url: 'https://rankmath.com/wp-json/contentai/v1/defaultPrompts',
+								url: rankMath.contentAiUrl + 'default_prompts',
 								type: 'GET',
 								success: ( result ) => {
 									setUpdating( false )

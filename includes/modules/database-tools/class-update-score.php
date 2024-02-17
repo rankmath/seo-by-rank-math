@@ -178,7 +178,7 @@ class Update_Score {
 				'keywords'     => $keywords,
 				'keyword'      => $keyword,
 				'content'      => $post->post_content,
-				'url'          => get_the_permalink( $post_id ),
+				'url'          => urldecode( get_the_permalink( $post_id ) ),
 				'hasContentAi' => ! empty( Helper::get_post_meta( 'contentai_score', $post_id ) ),
 			];
 

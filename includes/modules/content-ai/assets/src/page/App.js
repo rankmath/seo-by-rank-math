@@ -17,7 +17,8 @@ import AITool from './tabs/ai-tools'
 import ContentEditor from './tabs/content-editor'
 import Chat from './tabs/chat'
 import History from './tabs/history'
-import ErrorMessage from './components/ErrorMessage'
+import ErrorCTA from '@components/ErrorCTA'
+import hasError from './helpers/hasError'
 
 const getTabs = () => {
 	const tabs = [
@@ -57,10 +58,8 @@ const getTabs = () => {
 // Content AI App
 const ContentAIApp = () => {
 	const activeTab = ! window.location.hash ? 'ai-tools' : window.location.hash.replace( '#', '' )
-	const isRegistered = rankMath.isUserRegistered && rankMath.contentAIPlan && rankMath.contentAICredits
-
 	useEffect( () => {
-		if ( isRegistered && activeTab !== 'content-editor' && isUndefined( wp.blocks.getBlockType( 'core/paragraph' ) ) ) {
+		if ( ! hasError() && activeTab !== 'content-editor' && isUndefined( wp.blocks.getBlockType( 'core/paragraph' ) ) ) {
 			wp.blockLibrary.registerCoreBlocks()
 		}
 	}, [] )
@@ -76,14 +75,14 @@ const ContentAIApp = () => {
 				} }
 			>
 				{ ( tab ) => {
-					const blurredClass = ! isRegistered && 'history' !== tab.id ? ' blurred' : ''
+					const blurredClass = hasError() && 'history' !== tab.id ? ' blurred' : ''
 					return (
 						<>
 							<div className={ 'rank-math-tab-content dashboard-wrapper rank-math-tab-content-' + tab.name + blurredClass }>
 								{ createElement( tab.view, { isPage: true } ) }
 							</div>
 
-							{ blurredClass && <ErrorMessage width="40" /> }
+							{ blurredClass && <ErrorCTA width="40" /> }
 						</>
 					)
 				} }

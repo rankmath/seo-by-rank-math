@@ -75,9 +75,9 @@ class Event_Scheduler {
 		}
 
 		$prompt_data   = [];
-		$data          = wp_remote_get( 'https://rankmath.com/wp-json/contentai/v1/defaultPrompts' );
+		$data          = wp_remote_get( CONTENT_AI_URL . '/ai/default_prompts' );
 		$response_code = wp_remote_retrieve_response_code( $data );
-		if ( 200 !== $response_code ) {
+		if ( is_wp_error( $data ) || 200 !== $response_code ) {
 			return;
 		}
 

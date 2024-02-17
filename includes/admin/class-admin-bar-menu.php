@@ -385,12 +385,6 @@ class Admin_Bar_Menu {
 				'meta'  => [ 'title' => esc_html__( 'Google PageSpeed Insights', 'rank-math' ) ],
 			],
 
-			'google-mobilefriendly'      => [
-				'title' => esc_html__( 'Google Mobile-Friendly', 'rank-math' ),
-				'href'  => 'https://search.google.com/test/mobile-friendly?url=' . $url,
-				'meta'  => [ 'title' => esc_html__( 'Google Mobile-Friendly Test', 'rank-math' ) ],
-			],
-
 			'google-richresults-mobile'  => [
 				'title' => esc_html__( 'Google Rich Results (Mobile)', 'rank-math' ),
 				'href'  => 'https://search.google.com/test/rich-results?url=' . $url . '&user_agent=1',

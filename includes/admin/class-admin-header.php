@@ -116,14 +116,14 @@ class Admin_Header {
 	 */
 	private function get_help_link() {
 		$links = [
-			'import-export-settings' => 'import_export' === Param::get( 'view' ),
-			'version-control'        => 'version_control' === Param::get( 'view' ) || 'rank-math-status' === Param::get( 'page' ),
-			'general-settings'       => 'rank-math-options-general' === Param::get( 'page' ),
-			'titles-meta'            => 'rank-math-options-titles' === Param::get( 'page' ),
-			'sitemap-general'        => 'rank-math-options-sitemap' === Param::get( 'page' ),
-			'role-manager'           => 'rank-math-role-manager' === Param::get( 'page' ),
-			'seo-analysis'           => 'rank-math-seo-analysis' === Param::get( 'page' ),
-			'content-ai'             => 'rank-math-content-ai-page' === Param::get( 'page' ),
+			'import-export-settings'     => 'import_export' === Param::get( 'view' ),
+			'version-control'            => 'version_control' === Param::get( 'view' ) || 'rank-math-status' === Param::get( 'page' ),
+			'general-settings'           => 'rank-math-options-general' === Param::get( 'page' ),
+			'titles-meta'                => 'rank-math-options-titles' === Param::get( 'page' ),
+			'sitemap-general'            => 'rank-math-options-sitemap' === Param::get( 'page' ),
+			'role-manager'               => 'rank-math-role-manager' === Param::get( 'page' ),
+			'seo-analysis'               => 'rank-math-seo-analysis' === Param::get( 'page' ),
+			'content-ai-restore-credits' => 'rank-math-content-ai-page' === Param::get( 'page' ),
 		];
 
 		$link = KB::get( 'knowledgebase', 'RM Header KB Icon' );

@@ -9,6 +9,18 @@
  * External Dependencies
  */
 import jQuery from 'jquery'
+import { includes, startsWith, isNull } from 'lodash'
+
+/**
+ * WordPress Dependencies
+ */
+import { render } from '@wordpress/element'
+import { Modal } from '@wordpress/components'
+
+/**
+ * Internal Dependencies
+ */
+import ErrorCTA from '@components/ErrorCTA'
 
 class RankMathPostList {
 	/**
@@ -16,6 +28,7 @@ class RankMathPostList {
 	 */
 	constructor() {
 		this.addButtons()
+		this.bulkEvents()
 		this.editingEvents()
 		this.saveEvents()
 	}
@@ -68,6 +81,52 @@ class RankMathPostList {
 				}
 			}
 		)
+	}
+
+	bulkEvents() {
+		const selectBox = jQuery( '.tablenav .bulkactions select' )
+		selectBox.find( 'option[value="rank_math_ai_options"]' ).attr( 'disabled', 'disabled' )
+		selectBox.find( 'option[value="rank_math_options"]' ).attr( 'disabled', 'disabled' )
+		const contentAiOptions = [ 'rank_math_content_ai_fetch_seo_title', 'rank_math_content_ai_fetch_seo_description', 'rank_math_content_ai_fetch_seo_title_description' ]
+		selectBox.on( 'change', () => {
+			const value = selectBox.val()
+			if (
+				includes( contentAiOptions, value ) &&
+				(
+					! rankMath.isUserRegistered || ! rankMath.contentAICredits || ! rankMath.contentAIPlan || 'free' === rankMath.contentAIPlan
+				)
+			) {
+				selectBox.val( '-1' ).change()
+				this.showCTABox()
+			}
+
+			if ( startsWith( value, 'rank_math_bulk' ) && ! rankMath.isProActive ) {
+				selectBox.val( '-1' ).change()
+				this.showCTABox( true )
+			}
+		} )
+	}
+
+	showCTABox( showProNotice = false ) {
+		if ( isNull( document.getElementById( 'rank-math-content-ai-modal-wrapper' ) ) ) {
+			jQuery( '#wpwrap' ).append( '<div id="rank-math-content-ai-modal-wrapper"></div>' )
+		}
+
+		setTimeout( () => {
+			render(
+				<Modal
+					className="rank-math-contentai-modal rank-math-modal rank-math-error-modal"
+					onRequestClose={ () => {
+						jQuery( '.components-modal__screen-overlay' ).remove()
+						document.getElementById( 'rank-math-content-ai-modal-wrapper' ).remove()
+					} }
+					shouldCloseOnClickOutside={ true }
+				>
+					<ErrorCTA width={ 100 } showProNotice={ showProNotice } isBulkEdit={ true } />
+				</Modal>,
+				document.getElementById( 'rank-math-content-ai-modal-wrapper' )
+			)
+		}, 100 )
 	}
 
 	editingEvents() {

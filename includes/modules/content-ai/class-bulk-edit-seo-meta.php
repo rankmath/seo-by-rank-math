@@ -189,7 +189,7 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 		];
 
 		return wp_remote_post(
-			'https://rankmath.com/wp-json/contentai/v1/Bulk_SEO_Meta',
+			CONTENT_AI_URL . '/ai/bulk_seo_meta',
 			[
 				'headers' => [
 					'content-type' => 'application/json',

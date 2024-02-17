@@ -22,7 +22,7 @@ import getSelectedBlock from '../helpers/getSelectedBlock'
 import insertElementorContent from '../helpers/insertElementorContent'
 import insertCommandBox from '../shortcutCommand/insertCommandBox'
 import addContent from '../shortcutCommand/addContent'
-import ErrorMessage from '../components/ErrorMessage'
+import ErrorCTA from '@components/ErrorCTA'
 import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
 import Interpolate from '@components/Interpolate'
 
@@ -142,7 +142,7 @@ const Write = ( { hasContentAiError = false } ) => {
 				</Button>
 				<p style={ { marginTop: '10px', opacity: '0.7' } }><em>{ __( '1 Word Output = 1 Credit', 'rank-math' ) }</em></p>
 			</div>
-			{ hasContentAiError && <ErrorMessage /> }
+			{ hasContentAiError && <ErrorCTA /> }
 		</>
 	)
 }

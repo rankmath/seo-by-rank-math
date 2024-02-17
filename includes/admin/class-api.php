@@ -121,13 +121,22 @@ class Api {
 	 */
 	public function deactivate_site( $username, $api_key ) {
 		$this->is_blocking = false;
-		$this->http_post(
-			'deactivateSite',
+		$data              = wp_json_encode(
 			[
 				'username' => $username,
 				'api_key'  => $api_key,
 				'site_url' => esc_url( home_url() ),
 			]
+		);
+
+		$response = wp_remote_post(
+			RANK_MATH_SITE_URL . '/wp-json/rankmath/v1/deactivateSite',
+			[
+				'body'    => $data,
+				'headers' => [
+					'Content-Type' => 'application/json',
+				],
+			],
 		);
 	}
 

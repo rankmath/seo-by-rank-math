@@ -255,12 +255,17 @@ class Sitemap {
 
 			if ( ! empty( $post_type_names ) ) {
 				$sql = "
-				SELECT post_type, MAX(GREATEST(post_modified_gmt, post_date_gmt)) AS date
-				FROM $wpdb->posts
-				WHERE post_status IN ('publish','inherit')
-					AND post_type IN ('" . implode( "','", $post_type_names ) . "')
-				GROUP BY post_type
-				ORDER BY post_modified_gmt DESC";
+				SELECT post_type, MAX( GREATEST( p.post_modified_gmt, p.post_date_gmt ) ) AS date
+				FROM $wpdb->posts as p
+				LEFT JOIN {$wpdb->postmeta} AS pm ON ( p.ID = pm.post_id AND pm.meta_key = 'rank_math_robots')
+				WHERE (
+					( pm.meta_key = 'rank_math_robots' AND pm.meta_value NOT LIKE '%noindex%' ) OR
+				    pm.post_id IS NULL
+				)
+				AND p.post_status IN ( 'publish','inherit' )
+					AND p.post_type IN ('" . implode( "','", $post_type_names ) . "')
+				GROUP BY p.post_type
+				ORDER BY p.post_modified_gmt DESC";
 
 				foreach ( $wpdb->get_results( $sql ) as $obj ) { // phpcs:ignore
 					$post_type_dates[ $obj->post_type ] = $obj->date;

@@ -127,7 +127,10 @@ class Admin_Helper {
 
 			Helper::remove_notification( 'rank-math-site-url-mismatch' );
 			update_option( 'rank_math_registration_skip', 1 );
-			return update_option( $row, $data );
+			$connected = update_option( $row, $data );
+
+			do_action( 'rank_math/connect/account_connected', $data );
+			return $connected;
 		}
 
 		// Getter.
@@ -388,7 +391,7 @@ class Admin_Helper {
 
 		return apply_filters(
 			'rank_math/license/activate_url',
-			Security::add_query_arg_raw( $args, 'https://rankmath.com/auth' ),
+			Security::add_query_arg_raw( $args, RANK_MATH_SITE_URL . '/auth' ),
 			$args
 		);
 	}
