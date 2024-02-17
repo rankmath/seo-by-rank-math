@@ -343,6 +343,8 @@ class Analytics extends Base {
 			true
 		);
 
+		wp_set_script_translations( 'rank-math-analytics', 'rank-math', plugin_dir_path(__FILE__) . 'languages/' );
+
 		$this->action( 'admin_footer', 'dequeue_cmb2' );
 
 		$preference = apply_filters(

@@ -40,6 +40,7 @@ class Admin implements Runner {
 		$this->action( 'cmb2_save_options-page_fields', 'update_is_configured_value', 10, 2 );
 		$this->filter( 'action_scheduler_pastdue_actions_check_pre', 'as_exclude_pastdue_actions' );
 		$this->action( 'rank_math/pro_badge', 'offer_icon' );
+		$this->filter( 'load_script_translation_file', 'load_script_translation_file', 10, 3 );
 
 		// AJAX.
 		$this->ajax( 'is_keyword_new', 'is_keyword_new' );
@@ -432,5 +433,22 @@ class Admin implements Runner {
 			})(jQuery);
 		</script>
 		<?php
+	}
+
+	/**
+	 * Function to replace domain with seo-by-rank-math in translation file.
+	 *
+	 * @param string|false $file   Path to the translation file to load. False if there isn't one.
+	 * @param string       $handle Name of the script to register a translation domain to.
+	 * @param string       $domain The text domain.
+	 */
+	public function load_script_translation_file( $file, $handle, $domain ) {
+		if ( 'rank-math' !== $domain ) {
+			return $file;
+		}
+
+		$data                       = explode( '/', $file );
+		$data[ count( $data ) - 1 ] = preg_replace( '/rank-math/', 'seo-by-rank-math', $data[ count( $data ) - 1 ], 1 );
+		return implode( '/', $data );
 	}
 }

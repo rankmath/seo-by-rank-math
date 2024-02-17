@@ -58,8 +58,9 @@ trait Content_AI {
 	 * Get the Content AI Credits.
 	 *
 	 * @param bool $force_update Whether to send a request to API to get the new Credits value.
+	 * @param bool $return_error Whether to return error when request fails.
 	 */
-	public static function get_content_ai_credits( $force_update = false ) {
+	public static function get_content_ai_credits( $force_update = false, $return_error = false ) {
 		$registered = Admin_Helper::get_registration_data();
 		if ( empty( $registered ) ) {
 			return 0;
@@ -92,9 +93,12 @@ trait Content_AI {
 			]
 		);
 
-		$response_code = wp_remote_retrieve_response_code( $data );
-		if ( 200 !== $response_code ) {
-			return $credits;
+		$is_error = self::is_content_ai_error( $data );
+		if ( $is_error ) {
+			return ! $return_error ? $credits : [
+				'credits' => $credits,
+				'error'   => $is_error,
+			];
 		}
 
 		$data = wp_remote_retrieve_body( $data );
@@ -434,5 +438,25 @@ trait Content_AI {
 			'api_content_filter'     => esc_html__( 'The output was stopped as it was identified as potentially unsafe by the content filter.', 'rank-math' ),
 			'could_not_generate'     => esc_html__( 'Could not generate. Please try again later.', 'rank-math' ),
 		];
+	}
+
+	/**
+	 * Function to return the error message.
+	 *
+	 * @param array $response API response.
+	 */
+	public static function is_content_ai_error( $response ) {
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( 200 !== $response_code ) {
+			return 'could_not_generate';
+		}
+
+		$data = wp_remote_retrieve_body( $response );
+		if ( empty( $data ) ) {
+			return 'could_not_generate';
+		}
+
+		$data = json_decode( $data, true );
+		return ! empty( $data['error'] ) ? $data['error']['code'] : false;
 	}
 }

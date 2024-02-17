@@ -70,7 +70,11 @@ export default function() {
 									alert( error.message )
 								} )
 								.then( ( response ) => {
-									setCredits( response )
+									if ( response.error ) {
+										alert( response.error )
+									} else {
+										setCredits( response )
+									}
 									setLoading( '' )
 								} )
 						} }

@@ -45,7 +45,6 @@ class Content_AI {
 		$this->filter( 'rank_math/metabox/post/values', 'add_metadata', 10, 2 );
 		$this->action( 'cmb2_admin_init', 'add_content_ai_metabox', 11 );
 		$this->action( 'rank_math/deregister_site', 'remove_credits_data' );
-		$this->ajax( 'get_content_ai_credits', 'update_content_ai_credits' );
 		$this->filter( 'rank_math/elementor/dark_styles', 'add_dark_style' );
 		$this->filter( 'rank_math/status/rank_math_info', 'content_ai_info' );
 	}
@@ -175,6 +174,8 @@ class Content_AI {
 			true
 		);
 
+		wp_set_script_translations( 'rank-math-content-ai', 'rank-math' );
+
 		$this->localized_data();
 	}
 
@@ -227,19 +228,6 @@ class Content_AI {
 		$values['contentAiScore'] = absint( $content_ai_score );
 
 		return $values;
-	}
-
-	/**
-	 * Ajax callback to update the Content AI Credits.
-	 */
-	public function update_content_ai_credits() {
-		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
-		$this->has_cap_ajax( 'content_ai' );
-		$this->success(
-			[
-				'credits' => Helper::get_content_ai_credits( true ),
-			]
-		);
 	}
 
 	/**

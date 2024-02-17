@@ -125,7 +125,7 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 				</PluginSidebarMoreMenuItem>
 				<PluginSidebar
 					name="seo-by-rank-math-content-ai-sidebar"
-					title={ __( 'Content AI', 'rank-math' ) }
+					title="Content AI"
 					className="rank-math-sidebar-panel rank-math-sidebar-content-ai-panel"
 				>
 					<ContentAITab />

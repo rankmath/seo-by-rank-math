@@ -9,7 +9,12 @@
  * External Dependencies
  */
 import jQuery from 'jquery'
-import { debounce, forEach } from 'lodash'
+import { debounce } from 'lodash'
+
+/**
+ * WordPress Dependencies
+ */
+import apiFetch from '@wordpress/api-fetch'
 
 /**
  * Internal Dependencies
@@ -684,14 +689,21 @@ import addNotice from '@helpers/addNotice'
 				updateCredit.on( 'click', ( e ) => {
 					e.preventDefault()
 					updateCredit.addClass( 'loading' )
-					ajax( 'get_content_ai_credits' )
-						.done( function( resp ) {
-							if ( resp.error ) {
-								alert( resp.error )
+					apiFetch( {
+						method: 'POST',
+						path: '/rankmath/v1/ca/getCredits',
+					} )
+						.catch( ( error ) => {
+							alert( error.message )
+						} )
+						.then( ( response ) => {
+							if ( response.error ) {
+								alert( response.error )
+								updateCredit.removeClass( 'loading' )
 								return
 							}
 
-							updateCredit.removeClass( 'loading' ).next( 'strong' ).text( resp.credits )
+							updateCredit.removeClass( 'loading' ).next( 'strong' ).text( response )
 						} )
 					return false
 				} )

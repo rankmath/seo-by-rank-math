@@ -1,7 +1,6 @@
 /*eslint camelcase: ["error", {properties: "never"}]*/
 
 const { src, dest, watch } = require( 'gulp' )
-const wpPot = require( 'gulp-wp-pot' )
 const checktextdomain = require( 'gulp-checktextdomain' )
 const sass = require( 'gulp-sass' )( require( 'sass' ) )
 const autoprefixer = require( 'gulp-autoprefixer' )
@@ -29,10 +28,6 @@ const paths = {
 	modules: {
 		src: 'includes/modules/**/assets/scss/**/*.scss',
 		dest: './',
-	},
-	pot: {
-		src: [ '**/*.php', '!node_modules/**/*', '!vendor/**/*', '!tests/**/*' ],
-		dest: 'languages/rank-math.pot',
 	},
 }
 
@@ -127,19 +122,6 @@ function watchFiles() {
 	watch( paths.modules.src, modulesCSS )
 }
 
-function pot() {
-	return src( paths.pot.src )
-		.pipe(
-			wpPot( {
-				domain: 'rank-math',
-				lastTranslator: 'Rank Math',
-				noFilePaths: true,
-				team: 'Rank Math',
-			} )
-		)
-		.pipe( dest( paths.pot.dest ) )
-}
-
 // Quality Assurance --------------------------------------
 function ct() {
 	return src( paths.pot.src ).pipe(
@@ -166,7 +148,6 @@ function ct() {
 }
 
 exports.ct = ct
-exports.pot = pot
 exports.frontCSS = frontCSS
 exports.adminCSS = adminCSS
 exports.modulesCSS = modulesCSS

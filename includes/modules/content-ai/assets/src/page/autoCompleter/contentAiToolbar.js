@@ -68,6 +68,7 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		const text = ! isEmpty( selectedBlock.attributes ) ? selectedBlock.attributes.content.split( ' ' ).splice( 0, 149 ).join( ' ' ) : ''
 		return (
 			<>
+				<BlockEdit { ...selectedBlock } />
 				<BlockControls>
 					<ToolbarGroup>
 						<ToolbarDropdownMenu
@@ -77,7 +78,6 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 						/>
 					</ToolbarGroup>
 				</BlockControls>
-				<BlockEdit { ...selectedBlock } />
 			</>
 		)
 	}

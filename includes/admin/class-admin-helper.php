@@ -176,6 +176,13 @@ class Admin_Helper {
 			);
 		}
 
+		/**
+		 * Ensure the site_url is returned if it is absent, as it is required for the Content AI.
+		 */
+		if ( empty( $options['site_url'] ) ) {
+			$options['site_url'] = Helper::get_home_url();
+		}
+
 		return $options;
 	}
 

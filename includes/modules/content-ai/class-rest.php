@@ -176,7 +176,16 @@ class Rest extends WP_REST_Controller {
 	 * @return int Credits.
 	 */
 	public function get_credits( WP_REST_Request $request ) {
-		return Helper::get_content_ai_credits( true );
+		$credits = Helper::get_content_ai_credits( true, true );
+		if ( ! empty( $credits['error'] ) ) {
+			$error       = $credits['error'];
+			$error_texts = Helper::get_content_ai_errors();
+			return [
+				'error' => ! empty( $error_texts[ $error ] ) ? $error_texts[ $error ] : $error,
+			];
+		}
+
+		return $credits;
 	}
 
 	/**

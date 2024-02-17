@@ -27,6 +27,26 @@
 	}
 }
 
+.rank-math-page {
+	.components-popover {
+		z-index: 999;
+
+		&__content {
+			z-index: 200;
+			width: 200px;
+			padding: 1rem;
+			border: 1px solid $light-gray;
+			border-radius: 6px;
+			background: $white;
+			
+			@at-root .rtl & {
+				right: 0;
+				left: auto;
+			}
+		}
+	}
+}
+
 .woocommerce {
 	&-ellipsis-menu {
 		&__item {

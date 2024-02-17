@@ -12,11 +12,6 @@
 		"glotpress": "http://translate.wordpress.org",
 		"textdomain": "rank-math"
 	},
-	"pot": {
-		"reportmsgidbugsto": "https://wordpress.org/support/plugin/seo-by-rank-math/",
-		"languageteam": "Rank Math <support@rankmath.com>",
-		"lasttranslator": "Rank Math <support@rankmath.com>"
-	},
 	"devDependencies": {
 		"@babel/core": "^7.23.2",
 		"@babel/plugin-proposal-class-properties": "^7.18.6",
@@ -40,7 +35,6 @@
 		"gulp-checktextdomain": "^2.3.0",
 		"gulp-rename": "^2.0.0",
 		"gulp-sass": "^5.1.0",
-		"gulp-wp-pot": "^2.5.0",
 		"node-sass": "^8.0.0",
 		"npm": "^9.8.0",
 		"prettier": "^2.8.8",
@@ -94,7 +88,8 @@
 		"ca": "webpack --mode=production --env what=content-ai --progress",
 		"cab": "webpack --mode=production --env what=content-ai-block --progress",
 		"blocks": "webpack --mode=production --env what=toc --progress",
-		"dist": "npm run build && npm run a && npm run f && npm run s && npm run blocks && npm run m && npm run ca && npm run cab && npm run redirection && npm run acf && npm run woocommerce && npm run role-manager && npm run sa && npm run status && npm run version-control && npm run divi && npm run elementor && gulp pot && gulp frontCSS && gulp adminCSS && gulp modulesCSS",
+		"dist": "npm run build && npm run a && npm run f && npm run s && npm run blocks && npm run m && npm run ca && npm run cab && npm run redirection && npm run acf && npm run woocommerce && npm run role-manager && npm run sa && npm run status && npm run version-control && npm run divi && npm run elementor && gulp frontCSS && gulp adminCSS && gulp modulesCSS && wp i18n make-pot . languages/rank-math.pot --exclude='src/*' --headers='{\"Language-Team\": \"Rank Math <support@rankmath.com>\", \"Last-Translator\": \"Rank Math <support@rankmath.com>\"}' && php remove_file_references.php",
+		"pot": "wp i18n make-pot . languages/rank-math.pot --exclude='src/*' --headers='{\"Language-Team\": \"Rank Math <support@rankmath.com>\", \"Last-Translator\": \"Rank Math <support@rankmath.com>\"}' && php remove_file_references.php",
 		"gulp:watch": "gulp watch"
 	},
 	"browserslist": [

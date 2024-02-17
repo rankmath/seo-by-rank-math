@@ -104,6 +104,8 @@ class Content_AI_Page {
 			rank_math()->version,
 			true
 		);
+
+		wp_set_script_translations( 'rank-math-content-ai-page', 'rank-math' );
 	}
 
 	/**
@@ -312,6 +314,9 @@ class Content_AI_Page {
 
 		<div id="editor2" data-settings='<?php echo esc_attr( wp_json_encode( $editor_settings ) ); ?>' data-post-id="<?php echo esc_attr( $post->ID ); ?>"></div>
 		<?php
+
+		wp_set_script_translations( 'rank-math-content-ai', 'rank-math' );
+		wp_set_script_translations( 'rank-math-content-ai-page', 'rank-math' );
 	}
 
 	/**

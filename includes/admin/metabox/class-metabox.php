@@ -149,27 +149,9 @@ class Metabox implements Runner {
 	 */
 	private function enqueue_translation() {
 		if ( function_exists( 'wp_set_script_translations' ) ) {
-			$this->filter( 'load_script_translation_file', 'load_script_translation_file', 10, 3 );
 			wp_set_script_translations( 'rank-math-analyzer', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
 			wp_set_script_translations( 'rank-math-app', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
 		}
-	}
-
-	/**
-	 * Function to replace domain with seo-by-rank-math in translation file.
-	 *
-	 * @param string|false $file   Path to the translation file to load. False if there isn't one.
-	 * @param string       $handle Name of the script to register a translation domain to.
-	 * @param string       $domain The text domain.
-	 */
-	public function load_script_translation_file( $file, $handle, $domain ) {
-		if ( 'rank-math' !== $domain ) {
-			return $file;
-		}
-
-		$data                       = explode( '/', $file );
-		$data[ count( $data ) - 1 ] = preg_replace( '/rank-math/', 'seo-by-rank-math', $data[ count( $data ) - 1 ], 1 );
-		return implode( '/', $data );
 	}
 
 	/**

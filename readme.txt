@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.4.1
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.206
+Stable tag: 1.0.207
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,17 +583,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.206 [Nov 15, 2023] =
-- Added: [New filter to disable the Rich Text editor](https://rankmath.com/kb/filters-hooks-api-developer/#disable-rich-text-editor-taxonomy) in the Taxonomy description
-- Improved: Typing effect for the Content AI output
-- Removed: [Grammarly option](https://rankmath.com/kb/how-to-use-content-ai/#enable-grammarly) as the API will be deprecated in a couple of months
-- Fixed: Deprecated warnings in PHP 8.1 and higher
-- Fixed: Missing [Content AI Command Center option](https://rankmath.com/kb/using-content-ai-in-block-editor/#command-center) when the Jetpack plugin is active
-- Fixed: Timezone issue for the `startDate` & `endDate` properties of the [Event Schema](https://rankmath.com/kb/event-schema/) on sites that do not use UTC timezone
-- Fixed: Incorrect scheduled dates shown for the [Analytics Data fetch](https://rankmath.com/kb/general-settings/#analytics-database)
-- Fixed: [Power words test](https://rankmath.com/kb/score-100-in-tests/#use-of-power-word-in-title) is now displayed on sites that use [custom Power Words](https://rankmath.com/kb/filters-hooks-api-developer/#add-custom-power-words)
-- Fixed: [HTML Sitemap](https://rankmath.com/kb/html-sitemap/) issue when sorted by [modified date](https://rankmath.com/kb/configure-sitemaps/#sort-by)
-- Fixed: PHP error related to [Instant Indexing](https://rankmath.com/kb/how-to-use-indexnow/) on some setups
+= 1.0.207 [Nov 30, 2023] =
+- Added: Fields in [Course Schema Builder](https://rankmath.com/kb/course-schema/) to make your courses compatible with the [latest Google guidelines](https://www.seroundtable.com/google-adds-course-carousel-36398.html)
+- Improved: Strings from JS files are now available for translations
+- Improved: Error handling when [Content AI credits are refreshed from Settings](https://rankmath.com/kb/how-to-use-content-ai/#credits-left)
+- Fixed: Shortcode key `/` to display Block list was not functioning without a subsequent character
+- Fixed: Minor UI issue with [Analytics](https://rankmath.com/kb/analytics/)
+- Fixed: Missing required parameter `site_url` when using [Content AI](https://rankmath.com/content-ai/) on certain setups
+- Fixed: Minor UI issue in the [Content AI Results Overview](https://rankmath.com/kb/how-to-use-content-ai/#content-ai-results-overview) section
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

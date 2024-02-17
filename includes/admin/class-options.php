@@ -248,7 +248,7 @@ class Options {
 		\CMB2_Hookup::enqueue_cmb_css();
 		rank_math()->variables->setup_json();
 		wp_enqueue_style( 'rank-math-options', rank_math()->plugin_url() . 'assets/admin/css/option-panel.css', [ 'select2-rm', 'rank-math-common', 'rank-math-cmb2' ], rank_math()->version );
-		wp_enqueue_script( 'rank-math-options', rank_math()->plugin_url() . 'assets/admin/js/option-panel.js', [ 'underscore', 'select2-rm', 'lodash', 'rank-math-common' ], rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-options', rank_math()->plugin_url() . 'assets/admin/js/option-panel.js', [ 'underscore', 'select2-rm', 'lodash', 'rank-math-common', 'wp-api-fetch' ], rank_math()->version, true );
 
 		// Add thank you.
 		Helper::add_json( 'indexUrl', rank_math()->plugin_url() . 'assets/admin/js/search-index/' );

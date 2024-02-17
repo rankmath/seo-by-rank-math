@@ -445,6 +445,377 @@ export default {
 				}
 			}
 		},
+		"courseSchedule": {
+			"map": {
+				"isArray": false,
+				"isGroup": true,
+				"isRequired": false,
+				"isRecommended": false,
+				"field": {
+					"label": __( "Course Schedule", "rank-math" )
+				}
+			},
+			"@type": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": false,
+					"value": "Schedule"
+				}
+			},
+			"duration": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": false,
+					"field": {
+						"label": __( "Duration", "rank-math" ),
+						"help": __( "Total time to watch all videos and complete all assignments and exams for the course. Use the 8601 format", "rank-math" )
+					}
+				}
+			},
+			"repeatCount": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": false,
+					"field": {
+						"type": "number",
+						"label": __( "Repeat Count", "rank-math" ),
+						"help": __( "The numerical value for how long the course lasts for, in repeatFrequency units. For example, if the repeatFrequency is monthly and the repeatCount is 4, the course lasts for 4 months.", "rank-math" )
+					}
+				}
+			},
+			"repeatFrequency": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"type": "select",
+						"label": __( "Repeat Frequency", "rank-math" ),
+						"help": __( "The duration and repeatCount properties are relative to this field. ", "rank-math" ),
+						"options": {
+							"": __( "Select Repeat Frequency", 'rank-math' ),
+							"Daily": __( "Daily", 'rank-math' ),
+							"Weekly": __( "Weekly", 'rank-math' ),
+							"Monthly": __( "Monthly", 'rank-math' ),
+							"Yearly": __( "Yearly", 'rank-math' )
+						},
+						"default": ""
+					}
+				}
+			},
+			"startDate": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": false,
+					"field": {
+						"type": "datepicker",
+						"label": __( "Start Date", "rank-math" ),
+						"help": __( "The start date for the course, in 8601 date format (YYYY-MM-DD), if applicable.", "rank-math" ),
+						"classes": "col-4"
+					}
+				}
+			},
+			"endDate": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": false,
+					"field": {
+						"type": "datepicker",
+						"label": __( "End Date", "rank-math" ),
+						"help": __( "The end date for the course, in 8601 date format (YYYY-MM-DD), if applicable.", "rank-math" ),
+						"classes": "col-4"
+					}
+				}
+			}
+		},
+		"courseInstance": {
+			"map": {
+				"isArray": false,
+				"isGroup": true,
+				"isRequired": false,
+				"isRecommended": false,
+				"field": {
+					"label": __( "Course Instance", "rank-math" )
+				}
+			},
+			"@type": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": true,
+					"isRecommended": false,
+					"value": "CourseInstance"
+				}
+			},
+			"courseMode": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"type": "select",
+						"label": __( "Course Mode", "rank-math" ),
+						"help": __( "The medium through which the course will be delivered.", "rank-math" ),
+						"options": {
+							"Online": "Online",
+							"Onsite": "Onsite",
+							"Blended": "Blended"
+						},
+						"default": "Online"
+					}
+				}
+			},
+			"courseWorkload": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"label": __( "Course Workload", "rank-math" ),
+						"help": __( "Total time to watch all videos and complete all assignments and exams for the course. Use the 8601 format. Example: PT22H", "rank-math" )
+					}
+				}
+			},
+			"courseSchedule": {
+				"map": {
+					"isArray": false,
+					"isGroup": true,
+					"isRequired": false,
+					"isRecommended": false,
+					"field": {
+						"label": __( "Course Schedule", "rank-math" )
+					}
+				},
+				"@type": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": false,
+						"value": "Schedule"
+					}
+				},
+				"duration": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": false,
+						"field": {
+							"label": __( "Duration", "rank-math" ),
+							"help": __( "Total time to watch all videos and complete all assignments and exams for the course. Use the 8601 format", "rank-math" )
+						}
+					}
+				},
+				"repeatCount": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": false,
+						"field": {
+							"type": "number",
+							"label": __( "Repeat Count", "rank-math" ),
+							"help": __( "The numerical value for how long the course lasts for, in repeatFrequency units. For example, if the repeatFrequency is monthly and the repeatCount is 4, the course lasts for 4 months.", "rank-math" )
+						}
+					}
+				},
+				"repeatFrequency": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"type": "select",
+							"label": __( "Repeat Frequency", "rank-math" ),
+							"help": __( "The duration and repeatCount properties are relative to this field. ", "rank-math" ),
+							"options": {
+								"": "Select Repeat Frequency",
+								"Daily": "Daily",
+								"Weekly": "Weekly",
+								"Monthly": "Monthly",
+								"Yearly": "Yearly"
+							},
+							"default": ""
+						}
+					}
+				},
+				"startDate": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": false,
+						"field": {
+							"type": "datepicker",
+							"label": __( "Start Date", "rank-math" ),
+							"help": __( "The start date for the course, in 8601 date format (YYYY-MM-DD), if applicable.", "rank-math" ),
+							"classes": "col-4"
+						}
+					}
+				},
+				"endDate": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": false,
+						"field": {
+							"type": "datepicker",
+							"label": __( "End Date", "rank-math" ),
+							"help": __( "The end date for the course, in 8601 date format (YYYY-MM-DD), if applicable.", "rank-math" ),
+							"classes": "col-4"
+						}
+					}
+				}
+			}
+		},
+		"offers": {
+			"map": {
+				"isArray": false,
+				"isGroup": true,
+				"isRequired": false,
+				"isRecommended": false,
+				"field": {
+					"label": __( "Offers", "rank-math" )
+				}
+			},
+			"@type": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": true,
+					"isRecommended": false,
+					"value": "Offer"
+				}
+			},
+			"name": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"label": __( "Name", "rank-math" )
+					}
+				}
+			},
+			"category": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"label": __( "Category", "rank-math" )
+					}
+				}
+			},
+			"url": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"label": __( "URL", "rank-math" )
+					}
+				}
+			},
+			"price": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"label": __( "Price", "rank-math" )
+					}
+				}
+			},
+			"priceCurrency": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"label": __( "Currency", "rank-math" )
+					}
+				}
+			},
+			"availability": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"type": "select",
+						"label": __( "Availability", "rank-math" ),
+						"help": __( "Offer availability", "rank-math" ),
+						"classes": "col-4",
+						"options": {
+							"InStock": "In Stock",
+							"SoldOut": "Sold Out",
+							"PreOrder": "Preorder"
+						},
+						"default": "InStock"
+					}
+				}
+			},
+			"validFrom": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"type": "datepicker",
+						"label": __( "Price Valid From", "rank-math" ),
+						"help": __( "The date when the item becomes valid.", "rank-math" )
+					}
+				}
+			},
+			"priceValidUntil": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": true,
+					"field": {
+						"type": "datepicker",
+						"label": __( "Price Valid Until", "rank-math" ),
+						"help": __( "The date after which the price will no longer be available", "rank-math" )
+					}
+				}
+			},
+			"inventoryLevel": {
+				"map": {
+					"isArray": false,
+					"isGroup": false,
+					"isRequired": false,
+					"isRecommended": false,
+					"field": {
+						"label": __( "Inventory Level", "rank-math" )
+					}
+				}
+			}
+		},
 		"virtual-location": {
 			"map": {
 				"isArray": false,
@@ -727,138 +1098,6 @@ export default {
 					"isRecommended": true,
 					"field": {
 						"label": __( "Website or Social Link", "rank-math" )
-					}
-				}
-			}
-		},
-		"offers": {
-			"map": {
-				"isArray": false,
-				"isGroup": true,
-				"isRequired": false,
-				"isRecommended": false,
-				"field": {
-					"label": __( "Offers", "rank-math" )
-				}
-			},
-			"@type": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": true,
-					"isRecommended": false,
-					"value": "Offer"
-				}
-			},
-			"name": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": true,
-					"field": {
-						"label": __( "Name", "rank-math" )
-					}
-				}
-			},
-			"category": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": true,
-					"field": {
-						"label": __( "Category", "rank-math" )
-					}
-				}
-			},
-			"url": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": true,
-					"field": {
-						"label": __( "URL", "rank-math" )
-					}
-				}
-			},
-			"price": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": true,
-					"field": {
-						"label": __( "Price", "rank-math" )
-					}
-				}
-			},
-			"priceCurrency": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": true,
-					"field": {
-						"label": __( "Currency", "rank-math" )
-					}
-				}
-			},
-			"availability": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": true,
-					"field": {
-						"type": "select",
-						"label": __( "Availability", "rank-math" ),
-						"help": __( "Offer availability", "rank-math" ),
-						"classes": "col-4",
-						"options": {
-							"InStock": "In Stock",
-							"SoldOut": "Sold Out",
-							"PreOrder": "Preorder"
-						},
-						"default": "InStock"
-					}
-				}
-			},
-			"validFrom": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": true,
-					"field": {
-						"type": "datepicker",
-						"label": __( "Price Valid From", "rank-math" ),
-						"help": __( "The date when the item becomes valid.", "rank-math" )
-					}
-				}
-			},
-			"priceValidUntil": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": true,
-					"field": {
-						"type": "datepicker",
-						"label": __( "Price Valid Until", "rank-math" ),
-						"help": __( "The date after which the price will no longer be available", "rank-math" )
-					}
-				}
-			},
-			"inventoryLevel": {
-				"map": {
-					"isArray": false,
-					"isGroup": false,
-					"isRequired": false,
-					"isRecommended": false,
-					"field": {
-						"label": __( "Inventory Level", "rank-math" )
 					}
 				}
 			}
@@ -2073,6 +2312,294 @@ export default {
 						"field": {
 							"label": __( "Image URL", "rank-math" ),
 							"placeholder": "%post_thumbnail%"
+						}
+					}
+				}
+			},
+			"hasCourseInstance": {
+				"map": {
+					"isArray": false,
+					"isGroup": true,
+					"isRequired": false,
+					"isRecommended": false,
+					"field": {
+						"label": __( "Course Instance", "rank-math" )
+					}
+				},
+				"@type": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": true,
+						"isRecommended": false,
+						"value": "CourseInstance"
+					}
+				},
+				"courseMode": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"type": "select",
+							"label": __( "Course Mode", "rank-math" ),
+							"help": __( "The medium through which the course will be delivered.", "rank-math" ),
+							"options": {
+								"Online": "Online",
+								"Onsite": "Onsite",
+								"Blended": "Blended"
+							},
+							"default": "Online"
+						}
+					}
+				},
+				"courseWorkload": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"label": __( "Course Workload", "rank-math" ),
+							"help": __( "Total time to watch all videos and complete all assignments and exams for the course. Use the 8601 format. Example: PT22H", "rank-math" )
+						}
+					}
+				},
+				"courseSchedule": {
+					"map": {
+						"isArray": false,
+						"isGroup": true,
+						"isRequired": false,
+						"isRecommended": false,
+						"field": {
+							"label": __( "Course Schedule", "rank-math" )
+						}
+					},
+					"@type": {
+						"map": {
+							"isArray": false,
+							"isGroup": false,
+							"isRequired": false,
+							"isRecommended": false,
+							"value": "Schedule"
+						}
+					},
+					"duration": {
+						"map": {
+							"isArray": false,
+							"isGroup": false,
+							"isRequired": false,
+							"isRecommended": false,
+							"field": {
+								"label": __( "Duration", "rank-math" ),
+								"help": __( "Total time to watch all videos and complete all assignments and exams for the course. Use the 8601 format", "rank-math" )
+							}
+						}
+					},
+					"repeatCount": {
+						"map": {
+							"isArray": false,
+							"isGroup": false,
+							"isRequired": false,
+							"isRecommended": false,
+							"field": {
+								"type": "number",
+								"label": __( "Repeat Count", "rank-math" ),
+								"help": __( "The numerical value for how long the course lasts for, in repeatFrequency units. For example, if the repeatFrequency is monthly and the repeatCount is 4, the course lasts for 4 months.", "rank-math" )
+							}
+						}
+					},
+					"repeatFrequency": {
+						"map": {
+							"isArray": false,
+							"isGroup": false,
+							"isRequired": false,
+							"isRecommended": true,
+							"field": {
+								"type": "select",
+								"label": __( "Repeat Frequency", "rank-math" ),
+								"help": __( "The duration and repeatCount properties are relative to this field. ", "rank-math" ),
+								"options": {
+									"": "Select Repeat Frequency",
+									"Daily": "Daily",
+									"Weekly": "Weekly",
+									"Monthly": "Monthly",
+									"Yearly": "Yearly"
+								},
+								"default": ""
+							}
+						}
+					},
+					"startDate": {
+						"map": {
+							"isArray": false,
+							"isGroup": false,
+							"isRequired": false,
+							"isRecommended": false,
+							"field": {
+								"type": "datepicker",
+								"label": __( "Start Date", "rank-math" ),
+								"help": __( "The start date for the course, in 8601 date format (YYYY-MM-DD), if applicable.", "rank-math" ),
+								"classes": "col-4"
+							}
+						}
+					},
+					"endDate": {
+						"map": {
+							"isArray": false,
+							"isGroup": false,
+							"isRequired": false,
+							"isRecommended": false,
+							"field": {
+								"type": "datepicker",
+								"label": __( "End Date", "rank-math" ),
+								"help": __( "The end date for the course, in 8601 date format (YYYY-MM-DD), if applicable.", "rank-math" ),
+								"classes": "col-4"
+							}
+						}
+					}
+				}
+			},
+			"offers": {
+				"map": {
+					"isArray": false,
+					"isGroup": true,
+					"isRequired": false,
+					"isRecommended": false,
+					"field": {
+						"label": __( "Offers", "rank-math" )
+					}
+				},
+				"@type": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": true,
+						"isRecommended": false,
+						"value": "Offer"
+					}
+				},
+				"name": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"label": __( "Name", "rank-math" ),
+							"classes": "hide-group"
+						}
+					}
+				},
+				"category": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"label": __( "Category", "rank-math" ),
+							"help": __( "The pricing category of the course. Example: Free, Partially Free, Subscription, Paid", "rank-math" )
+						}
+					}
+				},
+				"url": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"label": __( "URL", "rank-math" ),
+							"classes": "hide-group"
+						}
+					}
+				},
+				"price": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"label": __( "Price", "rank-math" ),
+							"help": __( "The numerical price of the course, if applicable.", "rank-math" )
+						}
+					}
+				},
+				"priceCurrency": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"label": __( "Currency", "rank-math" ),
+							"help": __( "The currency of the price of the course, in ISO 4217 currency format (3 letter code), if applicable.", "rank-math" )
+						}
+					}
+				},
+				"availability": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"type": "select",
+							"label": __( "Availability", "rank-math" ),
+							"help": __( "Offer availability", "rank-math" ),
+							"classes": [
+								"col-4",
+								"hide-group"
+							],
+							"options": {
+								"InStock": "In Stock",
+								"SoldOut": "Sold Out",
+								"PreOrder": "Preorder"
+							},
+							"default": "InStock"
+						}
+					}
+				},
+				"validFrom": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"type": "datepicker",
+							"label": __( "Price Valid From", "rank-math" ),
+							"help": __( "The date when the item becomes valid.", "rank-math" ),
+							"classes": "hide-group"
+						}
+					}
+				},
+				"priceValidUntil": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": true,
+						"field": {
+							"type": "datepicker",
+							"label": __( "Price Valid Until", "rank-math" ),
+							"help": __( "The date after which the price will no longer be available", "rank-math" ),
+							"classes": "hide-group"
+						}
+					}
+				},
+				"inventoryLevel": {
+					"map": {
+						"isArray": false,
+						"isGroup": false,
+						"isRequired": false,
+						"isRecommended": false,
+						"field": {
+							"label": __( "Inventory Level", "rank-math" ),
+							"classes": "hide-group"
 						}
 					}
 				}
