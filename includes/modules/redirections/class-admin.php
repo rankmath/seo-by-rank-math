@@ -12,15 +12,13 @@ namespace RankMath\Redirections;
 
 use RankMath\KB;
 use RankMath\Helper;
+use RankMath\Helpers\Arr;
+use RankMath\Helpers\Param;
 use RankMath\Module\Base;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Admin\Page;
-use RankMath\Helpers\Arr;
-use RankMath\Helpers\Param;
-use RankMath\Helpers\WordPress;
-use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -144,7 +142,7 @@ class Admin extends Base {
 	 * Hooks for ajax.
 	 */
 	private function ajax_hooks() {
-		if ( ! Conditional::is_ajax() ) {
+		if ( ! Helper::is_ajax() ) {
 			return;
 		}
 
@@ -246,7 +244,7 @@ class Admin extends Base {
 			return;
 		}
 
-		$action = WordPress::get_request_action();
+		$action = Helper::get_request_action();
 		if ( false === $action || empty( $_REQUEST['redirection'] ) || 'edit' === $action ) {
 			return;
 		}
@@ -270,7 +268,7 @@ class Admin extends Base {
 	 * Handle AJAX request.
 	 */
 	public function handle_ajax() {
-		$action = WordPress::get_request_action();
+		$action = Helper::get_request_action();
 		if ( false === $action ) {
 			return;
 		}

@@ -11,7 +11,6 @@
 namespace RankMath;
 
 use RankMath\Helpers\Api;
-use RankMath\Helpers\Attachment;
 use RankMath\Helpers\Conditional;
 use RankMath\Helpers\Choices;
 use RankMath\Helpers\Post_Type;
@@ -21,13 +20,9 @@ use RankMath\Helpers\WordPress;
 use RankMath\Helpers\Schema;
 use RankMath\Helpers\Analytics;
 use RankMath\Helpers\Content_AI;
-use RankMath\Helpers\DB;
-use RankMath\Replace_Variables\Replacer;
-use RankMath\Helpers\Arr;
 use RankMath\Helpers\HTML;
+use RankMath\Replace_Variables\Replacer;
 use RankMath\Helpers\Param;
-use RankMath\Helpers\Str;
-use RankMath\Helpers\Url;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -36,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Helper {
 
-	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress, Schema, DB, Analytics, Content_AI, Arr, HTML, Param, Str, Url;
+	use Api, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress, Schema, Analytics, Content_AI;
 
 	/**
 	 * Replace `%variables%` with context-dependent value.
@@ -385,5 +380,21 @@ class Helper {
 
 		global $wpdb;
 		$rank_math_enable_big_select = $wpdb->query( 'SET SESSION SQL_BIG_SELECTS=1' );
+	}
+
+	/**
+	 * Used for Backward compatibility to prevent site from showing undefined method error. (PRO  v3.0.49-beta)
+	 *
+	 * @param string $name     Method name.
+	 * @param array  $argument Parameters passed to the function.
+	 *
+	 * @return string
+	 */
+	public static function __callStatic( $name, $argument ) {
+		if ( 'extract_attributes' === $name ) {
+			return HTML::extract_attributes( current( $argument ) );
+		}
+
+		return '';
 	}
 }

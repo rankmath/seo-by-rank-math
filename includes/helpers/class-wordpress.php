@@ -18,7 +18,6 @@ use RankMath\Role_Manager\Capability_Manager;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Param;
 use RankMath\Helpers\Security;
-use RankMath\Helpers\WordPress as WP_Helper;
 use stdClass;
 use WP_Screen;
 
@@ -165,7 +164,7 @@ trait WordPress {
 		$data = [];
 		$caps = Capability_Manager::get()->get_capabilities( true );
 
-		foreach ( WP_Helper::get_roles() as $slug => $role ) {
+		foreach ( self::get_roles() as $slug => $role ) {
 			self::get_role_capabilities( $slug, $caps, $data );
 		}
 
@@ -204,7 +203,7 @@ trait WordPress {
 	 */
 	public static function set_capabilities( $roles ) {
 		$caps = Capability_Manager::get()->get_capabilities( true );
-		foreach ( WP_Helper::get_roles() as $slug => $role ) {
+		foreach ( self::get_roles() as $slug => $role ) {
 			self::set_role_capabilities( $slug, $caps, $roles );
 		}
 	}

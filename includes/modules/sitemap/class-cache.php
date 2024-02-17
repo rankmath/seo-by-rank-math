@@ -14,7 +14,6 @@
 namespace RankMath\Sitemap;
 
 use RankMath\Helper;
-use RankMath\Helpers\WordPress;
 use RankMath\Admin\Database\Database;
 
 defined( 'ABSPATH' ) || exit;
@@ -49,7 +48,7 @@ class Cache {
 	 * The constructor.
 	 */
 	public function __construct() {
-		$this->wp_filesystem = WordPress::get_filesystem();
+		$this->wp_filesystem = Helper::get_filesystem();
 		$this->mode          = $this->is_writable() ? 'file' : 'db';
 
 		/**
@@ -214,7 +213,7 @@ class Cache {
 			return;
 		}
 
-		$wp_filesystem = WordPress::get_filesystem();
+		$wp_filesystem = Helper::get_filesystem();
 		if ( is_null( $wp_filesystem ) ) {
 			return;
 		}

@@ -317,38 +317,36 @@ export default ( { setCredits = false, hasContentAiError = false } ) => {
 
 						<div className="chat-input">
 							<div className="chat-input-actions">
-								<grammarly-editor-plugin>
-									<RichText
-										tagName="div"
-										className="chat-input-textarea"
-										value={ message.slice( 0, 2000 ) }
-										allowedFormats={ [] }
-										onChange={ ( content ) => {
-											const inputWrapper = document.getElementsByClassName( 'chat-input-textarea' )[ 0 ]
-											if ( content.length > 2000 ) {
-												content = content.slice( 0, 2000 )
-												inputWrapper.innerHTML = message
-												const range = document.createRange()
-												const sel = window.getSelection()
-												const childNode = inputWrapper.childNodes[ inputWrapper.childNodes.length - 1 ]
-												range.setStart( childNode, childNode.textContent.length )
-												range.collapse( true )
+								<RichText
+									tagName="div"
+									className="chat-input-textarea"
+									value={ message.slice( 0, 2000 ) }
+									allowedFormats={ [] }
+									onChange={ ( content ) => {
+										const inputWrapper = document.getElementsByClassName( 'chat-input-textarea' )[ 0 ]
+										if ( content.length > 2000 ) {
+											content = content.slice( 0, 2000 )
+											inputWrapper.innerHTML = message
+											const range = document.createRange()
+											const sel = window.getSelection()
+											const childNode = inputWrapper.childNodes[ inputWrapper.childNodes.length - 1 ]
+											range.setStart( childNode, childNode.textContent.length )
+											range.collapse( true )
 
-												sel.removeAllRanges()
-												sel.addRange( range )
-											}
+											sel.removeAllRanges()
+											sel.addRange( range )
+										}
 
-											setMessage( content )
-										} }
-										onKeyUp={ ( e ) => {
-											if ( e.key === 'Enter' && ! e.shiftKey && ! isEmpty( trim( message ) ) && ! generating ) {
-												submitChat()
-											}
-										} }
-										preserveWhiteSpace="true"
-										placeholder={ __( 'Type your message here…', 'rank-math' ) }
-									/>
-								</grammarly-editor-plugin>
+										setMessage( content )
+									} }
+									onKeyUp={ ( e ) => {
+										if ( e.key === 'Enter' && ! e.shiftKey && ! isEmpty( trim( message ) ) && ! generating ) {
+											submitChat()
+										}
+									} }
+									preserveWhiteSpace="true"
+									placeholder={ __( 'Type your message here…', 'rank-math' ) }
+								/>
 								<div className="chat-input-buttons">
 									<Button
 										className="prompts-button button"
@@ -378,11 +376,8 @@ export default ( { setCredits = false, hasContentAiError = false } ) => {
 											</Button>
 										</Tooltip>
 									}
-									<div className="limit-wrap">
-										<grammarly-button />
-										<div className={ message.length >= 2000 ? 'limit limit-reached' : 'limit' }>
-											<span className="count">{ message.length }</span>/{ __( '2000', 'rank-math' ) }
-										</div>
+									<div className={ message.length >= 2000 ? 'limit limit-reached' : 'limit' }>
+										<span className="count">{ message.length }</span>/{ __( '2000', 'rank-math' ) }
 									</div>
 									<Button
 										className="button is-primary is-large"

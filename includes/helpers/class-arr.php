@@ -15,7 +15,7 @@ use ArrayAccess;
 /**
  * Arr class.
  */
-trait Arr {
+class Arr {
 
 	/**
 	 * Determine whether the given value is array accessible.

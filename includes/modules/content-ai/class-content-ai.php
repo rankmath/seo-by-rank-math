@@ -12,14 +12,13 @@ namespace RankMath\ContentAI;
 
 use RankMath\KB;
 use RankMath\Helper;
-use RankMath\Admin\Admin_Helper as AdminHelper;
 use RankMath\Helpers\Sitepress;
+use RankMath\Helpers\Url;
+use RankMath\Helpers\Arr;
+use RankMath\Admin\Admin_Helper as AdminHelper;
 use RankMath\CMB2;
 use RankMath\Traits\Hooker;
 use RankMath\Traits\Ajax;
-use RankMath\Helpers\Url;
-use RankMath\Helpers\Arr;
-use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,7 +47,6 @@ class Content_AI {
 		$this->action( 'rank_math/deregister_site', 'remove_credits_data' );
 		$this->ajax( 'get_content_ai_credits', 'update_content_ai_credits' );
 		$this->filter( 'rank_math/elementor/dark_styles', 'add_dark_style' );
-		$this->filter( 'the_editor', 'the_editor', 20 );
 		$this->filter( 'rank_math/status/rank_math_info', 'content_ai_info' );
 	}
 
@@ -245,24 +243,10 @@ class Content_AI {
 	}
 
 	/**
-	 * Wrap Grammarly to the editor.
-	 *
-	 * @param  string $editor the Editor markup.
-	 * @return string
-	 */
-	public function the_editor( $editor = '' ) {
-		if ( 'classic' !== Helper::get_current_editor() || ! $this->can_add_grammarly() ) {
-			return $editor;
-		}
-
-		return '<grammarly-editor-plugin>' . $editor . '</grammarly-editor-plugin><grammarly-button class="rank-math-grammarly-button"></grammarly-button>';
-	}
-
-	/**
 	 * Whether to load Content AI data.
 	 */
 	public static function can_add_tab() {
-		return in_array( WordPress::get_post_type(), (array) Helper::get_settings( 'general.content_ai_post_types' ), true );
+		return in_array( Helper::get_post_type(), (array) Helper::get_settings( 'general.content_ai_post_types' ), true );
 	}
 
 	/**
@@ -282,7 +266,6 @@ class Content_AI {
 		Helper::add_json( 'contentAIPlan', Helper::get_content_ai_plan() );
 		Helper::add_json( 'contentAIErrors', Helper::get_content_ai_errors() );
 		Helper::add_json( 'connectData', AdminHelper::get_registration_data() );
-		Helper::add_json( 'canAddGrammarly', self::can_add_grammarly() );
 		Helper::add_json( 'registerWriteShortcut', version_compare( get_bloginfo( 'version' ), '6.2', '>=' ) );
 	}
 
@@ -320,7 +303,7 @@ class Content_AI {
 	 * @return void
 	 */
 	private function reorder_content_ai_metabox( $id ) {
-		$post_type = WordPress::get_post_type();
+		$post_type = Helper::get_post_type();
 		if ( ! $post_type ) {
 			return;
 		}
@@ -368,24 +351,4 @@ class Content_AI {
 		update_user_option( $user->ID, 'meta-box-order_' . $post_type, $order, true );
 	}
 
-	/**
-	 * Check the locale and credits to add the Grammarly support.
-	 *
-	 * @return boolean
-	 */
-	private static function can_add_grammarly() {
-		if ( ! Helper::get_settings( 'general.cotnent_ai_enable_grammarly' ) || ! Helper::get_content_ai_credits() ) {
-			return false;
-		}
-
-		$locale = function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
-		if ( Sitepress::get()->is_active() ) {
-			global $sitepress;
-			$current_language = $sitepress->get_current_language();
-			$locale           = $sitepress->get_locale( $current_language );
-		}
-
-		// All English language locales.
-		return apply_filters( 'rank_math/content_ai/can_add_grammarly', in_array( $locale, [ 'en_US', 'en_AU', 'en_CA', 'en_NZ', 'art_xpirate', 'en_ZA', 'en_GB' ], true ), $locale );
-	}
 }

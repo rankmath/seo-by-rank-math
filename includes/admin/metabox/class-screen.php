@@ -310,8 +310,9 @@ class Screen implements IScreen {
 		$locale = Locale::get_site_language();
 		$file   = rank_math()->plugin_dir() . 'assets/vendor/powerwords/' . $locale . '.php';
 		if ( ! file_exists( $file ) ) {
-			return false;
+			return $this->do_filter( 'metabox/power_words', [], $locale );
 		}
+
 		$words = $words ? $words : include $file;
 		return $this->do_filter( 'metabox/power_words', array_map( 'strtolower', $words ), $locale );
 	}

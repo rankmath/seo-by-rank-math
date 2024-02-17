@@ -59,7 +59,6 @@
 	},
 	"dependencies": {
 		"@automattic/interpolate-components": "^1.2.1",
-		"@grammarly/editor-sdk": "^2.5.4",
 		"@woocommerce/components": "^11.1.0",
 		"@woocommerce/settings": "^1.0.0",
 		"@wordpress/annotations": "^2.43.1",

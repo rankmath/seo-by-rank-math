@@ -11,7 +11,6 @@
 namespace RankMath\SEO_Analysis;
 
 use RankMath\Helper;
-use RankMath\Helpers\Security;
 use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;

@@ -13,7 +13,7 @@ namespace RankMath\Helpers;
 /**
  * HTML class.
  */
-trait HTML {
+class HTML {
 
 	/**
 	 * Extract attributes from a html tag.

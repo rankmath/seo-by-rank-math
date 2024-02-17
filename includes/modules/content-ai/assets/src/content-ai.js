@@ -22,7 +22,6 @@ import { PluginSidebar, PluginSidebarMoreMenuItem, PluginPrePublishPanel } from 
 import ContentAITab from './research/ContentAITab'
 import ContentAIIcon from './research/ContentAIIcon'
 import ContentAnalysis from './research/ContentAnalysis'
-import './grammarly'
 
 const ContentAIButton = () => {
 	const className = classnames( 'button-secondary rank-math-content-ai', {

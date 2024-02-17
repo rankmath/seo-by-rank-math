@@ -14,7 +14,6 @@ use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Arr;
-use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -86,7 +85,7 @@ class Robots_Txt {
 	 * @return array
 	 */
 	public static function get_robots_data() {
-		$wp_filesystem = WordPress::get_filesystem();
+		$wp_filesystem = Helper::get_filesystem();
 		$public        = absint( get_option( 'blog_public' ) );
 
 		$default  = '# This file is automatically added by Rank Math SEO plugin to help a website index better';

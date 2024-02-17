@@ -11,7 +11,6 @@ namespace RankMath\Tools;
 use RankMath\Helper;
 use RankMath\Installer;
 use RankMath\Traits\Hooker;
-use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -26,7 +25,7 @@ class Database_Tools {
 	 * Constructor.
 	 */
 	public function __construct() {
-		if ( Conditional::is_heartbeat() || ! Helper::is_advanced_mode() ) {
+		if ( Helper::is_heartbeat() || ! Helper::is_advanced_mode() ) {
 			return;
 		}
 
@@ -45,7 +44,7 @@ class Database_Tools {
 			$this->filter( 'rank_math/tools/pages', 'add_tools_page', 11 );
 		}
 
-		if ( Conditional::is_rest() ) {
+		if ( Helper::is_rest() ) {
 			foreach ( $this->get_tools() as $id => $tool ) {
 				if ( ! method_exists( $this, $id ) ) {
 					continue;
@@ -220,7 +219,7 @@ class Database_Tools {
 	public function maybe_recreate_actionscheduler_tables() {
 		global $wpdb;
 
-		if ( Conditional::is_woocommerce_active() ) {
+		if ( Helper::is_woocommerce_active() ) {
 			return;
 		}
 

@@ -10,8 +10,8 @@
 
 namespace RankMath\Role_Manager;
 
+use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -96,7 +96,7 @@ class Capability_Manager {
 	 * Add capabilities on install.
 	 */
 	public function create_capabilities() {
-		foreach ( WordPress::get_roles() as $slug => $role ) {
+		foreach ( Helper::get_roles() as $slug => $role ) {
 			$role = get_role( $slug );
 			if ( ! $role ) {
 				continue;
@@ -111,7 +111,7 @@ class Capability_Manager {
 	 */
 	public function remove_capabilities() {
 		$capabilities = $this->get_capabilities( true );
-		foreach ( WordPress::get_roles() as $slug => $role ) {
+		foreach ( Helper::get_roles() as $slug => $role ) {
 			$role = get_role( $slug );
 			if ( ! $role ) {
 				continue;

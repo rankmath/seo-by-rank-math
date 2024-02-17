@@ -9,9 +9,8 @@
 namespace RankMath;
 
 use RankMath\Helper;
-use RankMath\Traits\Hooker;
 use RankMath\Helpers\Param;
-use RankMath\Helpers\Conditional;
+use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -54,11 +53,11 @@ class Version_Control {
 	 * Constructor.
 	 */
 	public function __construct() {
-		if ( Conditional::is_heartbeat() ) {
+		if ( Helper::is_heartbeat() ) {
 			return;
 		}
 
-		if ( Conditional::is_rest() ) {
+		if ( Helper::is_rest() ) {
 			return;
 		}
 

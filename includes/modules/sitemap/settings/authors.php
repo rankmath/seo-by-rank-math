@@ -7,11 +7,10 @@
  */
 
 use RankMath\Helper;
-use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
-$roles   = WordPress::get_roles();
+$roles   = Helper::get_roles();
 $default = $roles;
 unset( $default['administrator'], $default['editor'], $default['author'] );
 

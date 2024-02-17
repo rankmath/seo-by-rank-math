@@ -12,11 +12,9 @@ namespace RankMath\Admin;
 
 use RankMath\CMB2;
 use RankMath\Helper;
+use RankMath\Helpers\Param;
 use RankMath\Rewrite;
 use RankMath\Schema\DB;
-use RankMath\Helpers\Param;
-use RankMath\Helpers\WordPress;
-use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -120,7 +118,7 @@ class Serp_Preview {
 		global $post;
 		setup_postdata( $post );
 
-		$post_type    = WordPress::get_post_type();
+		$post_type    = Helper::get_post_type();
 		$title_format = Helper::get_settings( "titles.pt_{$post_type}_title" );
 		$desc_format  = Helper::get_settings( "titles.pt_{$post_type}_description" );
 		$title_format = $title_format ? $title_format : '%title%';
@@ -420,7 +418,7 @@ class Serp_Preview {
 	 * @return array Preview Schema Data.
 	 */
 	private function get_woocommerceproduct_data( $schema ) {
-		if ( ! Conditional::is_woocommerce_active() ) {
+		if ( ! Helper::is_woocommerce_active() ) {
 			return [];
 		}
 

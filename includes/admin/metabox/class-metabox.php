@@ -11,14 +11,11 @@
 namespace RankMath\Admin\Metabox;
 
 use RankMath\CMB2;
-use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
-use RankMath\Admin\Admin_Helper;
+use RankMath\Helper;
 use RankMath\Helpers\Param;
-use RankMath\Helpers\Str;
-use RankMath\Helpers\Conditional;
-use RankMath\Helpers\WordPress;
+use RankMath\Admin\Admin_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -207,7 +204,7 @@ class Metabox implements Runner {
 		 */
 		if ( false === apply_filters_deprecated( 'rank_math/primary_term', [ false ], '1.0.43', 'rank_math/admin/disable_primary_term' )
 		&& false === $this->do_filter( 'admin/disable_primary_term', false ) ) {
-			$taxonomies = Helper::get_object_taxonomies( WordPress::get_post_type(), 'objects' );
+			$taxonomies = Helper::get_object_taxonomies( Helper::get_post_type(), 'objects' );
 			$taxonomies = wp_filter_object_list( $taxonomies, [ 'hierarchical' => true ], 'and', 'name' );
 			foreach ( $taxonomies as $taxonomy ) {
 				$cmb->add_field(
@@ -389,8 +386,8 @@ class Metabox implements Runner {
 	 * @return bool
 	 */
 	private function dont_load() {
-		return Conditional::is_heartbeat() || Conditional::is_ajax() ||
-			( class_exists( 'Vc_Manager' ) && \RankMath\Helpers\Param::get( 'vc_action' ) ) ||
+		return Helper::is_heartbeat() || Helper::is_ajax() ||
+			( class_exists( 'Vc_Manager' ) && Param::get( 'vc_action' ) ) ||
 			is_network_admin();
 	}
 }

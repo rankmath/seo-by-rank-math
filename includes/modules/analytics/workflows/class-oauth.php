@@ -15,8 +15,8 @@ use RankMath\Google\Api;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Param;
-use RankMath\Analytics\DB;
 use RankMath\Helpers\Security;
+use RankMath\Analytics\DB;
 use RankMath\Google\Permissions;
 use RankMath\Google\Authentication;
 

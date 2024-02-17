@@ -12,12 +12,11 @@ namespace RankMath\Admin;
 
 use RankMath\Runner;
 use RankMath\Helper;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use RankMath\Helpers\Str;
-use RankMath\Helpers\Param;
-use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -108,7 +107,7 @@ class Admin implements Runner {
 		$post_type  = get_post_type( $post_id );
 		$is_allowed = in_array( $post_type, Helper::get_allowed_post_types(), true );
 
-		if ( ! $is_allowed || Conditional::is_autosave() || Conditional::is_ajax() || isset( $_REQUEST['bulk_edit'] ) ) {
+		if ( ! $is_allowed || Helper::is_autosave() || Helper::is_ajax() || isset( $_REQUEST['bulk_edit'] ) ) {
 			return $post_id;
 		}
 

@@ -9,7 +9,6 @@
  */
 
 use RankMath\Helper;
-use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -19,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 function rank_math_1_0_76_add_content_ai_capability() {
 	wp_roles();
 
-	foreach ( WordPress::get_roles() as $slug => $role ) {
+	foreach ( Helper::get_roles() as $slug => $role ) {
 		$role = get_role( $slug );
 		if ( ! $role ) {
 			continue;

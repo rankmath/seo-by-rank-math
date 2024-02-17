@@ -13,7 +13,6 @@ namespace RankMath\Admin\Importers;
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Redirections\Redirection;
-use RankMath\Helpers\Str;
 use RankMath\Helpers\DB;
 
 defined( 'ABSPATH' ) || exit;

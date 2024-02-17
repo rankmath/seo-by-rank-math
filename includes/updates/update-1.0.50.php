@@ -8,7 +8,7 @@
  * @author     Rank Math <support@rankmath.com>
  */
 
-use RankMath\Helpers\Conditional;
+use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -39,7 +39,7 @@ function rank_math_1_0_50_delete_analytic_tables() {
 function rank_math_1_0_50_recreate_as() {
 	global $wpdb;
 
-	if ( Conditional::is_woocommerce_active() ) {
+	if ( Helper::is_woocommerce_active() ) {
 		return;
 	}
 

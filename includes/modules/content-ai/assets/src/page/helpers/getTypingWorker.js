@@ -5,7 +5,7 @@ const typingWorkerCode = () => {
 	let words = [];
 	let currentWordIndex = 0;
 	let currentLetterIndex = 0;
-	let typingSpeed = 50; // Adjust the typing speed as needed
+	let typingSpeed = 25; // Adjust the typing speed as needed
 	
 	function typeWords() {
 		if ( currentWordIndex >= words.length ) {

@@ -13,7 +13,7 @@ namespace RankMath\Helpers;
 /**
  * Str class.
  */
-trait Str {
+class Str {
 
 	/**
 	 * Validates whether the passed variable is a empty string.

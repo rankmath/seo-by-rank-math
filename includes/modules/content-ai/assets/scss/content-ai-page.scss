@@ -1838,10 +1838,6 @@ body.rank-math_page_rank-math-content-ai-page {
 					justify-content: flex-end;
 				}
 			}
-
-			grammarly-button {
-				margin-right: 10px;
-			}
 		}
 
 		&:hover,
@@ -2570,25 +2566,3 @@ body.rank-math_page_rank-math-content-ai-page {
 	}
 }
 
-.rank-math-grammarly-button {
-	position: absolute;
-	z-index: 1;
-	right: 30px;
-	bottom: 35px;
-
-	@at-root .block-editor__container .is-sidebar-opened & {
-		right: 330px;
-	}
-
-	@at-root grammarly-editor-plugin + & {
-		position: absolute;
-		right: 15px;
-		bottom: 10px;
-
-		&.rank-math-grammarly-button-fixed {
-			position: fixed;
-			right: 335px;
-			bottom: 10px;
-		}
-	}
-}

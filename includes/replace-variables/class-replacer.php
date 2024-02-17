@@ -13,9 +13,9 @@
 
 namespace RankMath\Replace_Variables;
 
-use RankMath\Paper\Paper;
+use RankMath\Helper;
 use RankMath\Helpers\Str;
-use RankMath\Helpers\WordPress;
+use RankMath\Paper\Paper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -148,8 +148,8 @@ class Replacer {
 	 */
 	private function process_content() {
 		if ( ! isset( self::$content_processed[ self::$args->ID ]['post_content'] ) ) {
-			self::$content_processed[ self::$args->ID ]['post_content'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_content ) : WordPress::strip_shortcodes( self::$args->post_content );
-			self::$content_processed[ self::$args->ID ]['post_excerpt'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_excerpt ) : WordPress::strip_shortcodes( self::$args->post_excerpt );
+			self::$content_processed[ self::$args->ID ]['post_content'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_content ) : Helper::strip_shortcodes( self::$args->post_content );
+			self::$content_processed[ self::$args->ID ]['post_excerpt'] = Paper::should_apply_shortcode() ? do_shortcode( self::$args->post_excerpt ) : Helper::strip_shortcodes( self::$args->post_excerpt );
 		}
 
 		self::$args->post_content = self::$content_processed[ self::$args->ID ]['post_content'];

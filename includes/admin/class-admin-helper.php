@@ -17,7 +17,6 @@ use RankMath\Helper;
 use RankMath\Data_Encryption;
 use RankMath\Helpers\Security;
 use RankMath\Helpers\Param;
-use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -39,7 +38,7 @@ class Admin_Helper {
 			];
 		}
 
-		$wp_filesystem = WordPress::get_filesystem();
+		$wp_filesystem = Helper::get_filesystem();
 		if ( empty( $wp_filesystem ) ) {
 			return;
 		}

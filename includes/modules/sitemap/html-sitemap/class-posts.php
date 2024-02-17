@@ -79,7 +79,7 @@ class Posts {
 		$statuses = $this->do_filter( 'sitemap/html_sitemap_post_statuses', $statuses, $post_type );
 		$get_child = ( 0 !== $post_parent ) ? ' WHERE post_parent = ' . $post_parent : '';
 		$sql       = "
-			SELECT l.ID, post_title, post_name, post_parent, post_date, post_type
+			SELECT l.ID, post_title, post_name, post_parent, post_date, post_type, l.post_modified 
 			FROM (
 				SELECT DISTINCT p.ID, p.post_modified FROM {$wpdb->posts} as p
 				LEFT JOIN {$wpdb->postmeta} AS pm ON ( p.ID = pm.post_id AND pm.meta_key = 'rank_math_robots' )

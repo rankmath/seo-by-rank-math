@@ -11,7 +11,6 @@
 namespace RankMath\Schema;
 
 use RankMath\Helper;
-use RankMath\Helpers\Str;
 use RankMath\Admin\Database\Database;
 
 defined( 'ABSPATH' ) || exit;

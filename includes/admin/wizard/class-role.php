@@ -11,7 +11,6 @@
 namespace RankMath\Wizard;
 
 use RankMath\Helper;
-use RankMath\Helpers\WordPress;
 use RankMath\Role_Manager\Capability_Manager;
 
 defined( 'ABSPATH' ) || exit;
@@ -67,7 +66,7 @@ class Role implements Wizard_Step {
 		$caps      = Capability_Manager::get()->get_capabilities();
 		$cap_count = count( $caps );
 
-		foreach ( WordPress::get_roles() as $role => $label ) {
+		foreach ( Helper::get_roles() as $role => $label ) {
 			$default = isset( $defaults[ $role ] ) ? $defaults[ $role ] : [];
 			$wizard->cmb->add_field(
 				[

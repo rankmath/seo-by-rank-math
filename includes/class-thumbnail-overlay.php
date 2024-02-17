@@ -12,6 +12,7 @@ namespace RankMath;
 
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Param;
+use RankMath\Helpers\Attachment;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -50,12 +51,12 @@ class Thumbnail_Overlay {
 			$secret = Param::request( 'secret', '' );
 		}
 
-		$choices      = Helper::choices_overlay_images();
+		$choices = Helper::choices_overlay_images();
 		if ( ! isset( $choices[ $type ] ) ) {
 			die();
 		}
 		$overlay_image = $choices[ $type ]['path'];
-		$image         = Helper::get_scaled_image_path( $thumbnail_id, 'large' );
+		$image         = Attachment::get_scaled_image_path( $thumbnail_id, 'large' );
 
 		if ( ! $this->is_secret_valid( $thumbnail_id, $type, $secret ) ) {
 			die();
@@ -63,7 +64,7 @@ class Thumbnail_Overlay {
 
 		// If 'large' thumbnail is not found, fall back to full size.
 		if ( empty( $image ) ) {
-			$image = Helper::get_scaled_image_path( $thumbnail_id, 'full' );
+			$image = Attachment::get_scaled_image_path( $thumbnail_id, 'full' );
 		}
 
 		$position = $choices[ $type ]['position'];

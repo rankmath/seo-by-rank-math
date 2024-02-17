@@ -16,10 +16,11 @@ namespace RankMath\Sitemap;
 use WP_Query;
 use DOMDocument;
 use RankMath\Helper;
-use RankMath\Traits\Hooker;
+use RankMath\Helpers\Attachment;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Url;
 use RankMath\Helpers\Arr;
+use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -163,7 +164,7 @@ class Image_Parser {
 		$thumbnail_id = get_post_thumbnail_id( $this->post->ID );
 		if (
 			! Helper::get_settings( 'sitemap.include_featured_image' ) ||
-			! Helper::attachment_in_sitemap( $thumbnail_id )
+			! Attachment::attachment_in_sitemap( $thumbnail_id )
 		) {
 			return;
 		}

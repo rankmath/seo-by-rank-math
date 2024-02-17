@@ -18,7 +18,6 @@ use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Router;
 use RankMath\Sitemap\Sitemap;
 use RankMath\Sitemap\Image_Parser;
-use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 

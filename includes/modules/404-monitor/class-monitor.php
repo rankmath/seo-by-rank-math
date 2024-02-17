@@ -11,11 +11,10 @@
 namespace RankMath\Monitor;
 
 use RankMath\Helper;
-use RankMath\Traits\Ajax;
-use RankMath\Traits\Hooker;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Param;
-use RankMath\Helpers\Conditional;
+use RankMath\Traits\Ajax;
+use RankMath\Traits\Hooker;
 use donatj\UserAgent\UserAgentParser;
 
 defined( 'ABSPATH' ) || exit;
@@ -42,11 +41,11 @@ class Monitor {
 			$this->admin = new Admin();
 		}
 
-		if ( Conditional::is_ajax() ) {
+		if ( Helper::is_ajax() ) {
 			$this->ajax( 'delete_log', 'delete_log' );
 		}
 
-		if ( Helper::has_cap( '404_monitor' ) && Conditional::is_rest() ) {
+		if ( Helper::has_cap( '404_monitor' ) && Helper::is_rest() ) {
 			$this->action( 'rank_math/dashboard/widget', 'dashboard_widget', 11 );
 		}
 

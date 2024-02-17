@@ -13,7 +13,6 @@ namespace RankMath\Module;
 use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,7 +41,7 @@ class Manager {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		if ( Conditional::is_heartbeat() ) {
+		if ( Helper::is_heartbeat() ) {
 			return;
 		}
 
@@ -334,7 +333,7 @@ class Manager {
 			'class'         => 'RankMath\WooCommerce\WooCommerce',
 			'icon'          => 'cart',
 			'upgradeable'   => true,
-			'disabled'      => ( ! Conditional::is_woocommerce_active() ),
+			'disabled'      => ( ! Helper::is_woocommerce_active() ),
 			'disabled_text' => esc_html__( 'Please activate WooCommerce plugin to use this module.', 'rank-math' ),
 		];
 

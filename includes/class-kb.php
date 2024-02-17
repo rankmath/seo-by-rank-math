@@ -12,8 +12,6 @@
 
 namespace RankMath;
 
-use RankMath\Helpers\Arr;
-
 defined( 'ABSPATH' ) || exit;
 
 /**

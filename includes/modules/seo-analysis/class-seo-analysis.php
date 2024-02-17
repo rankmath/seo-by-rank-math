@@ -13,7 +13,6 @@ namespace RankMath\SEO_Analysis;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Param;
-use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -35,7 +34,7 @@ class SEO_Analysis {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		if ( Conditional::is_heartbeat() ) {
+		if ( Helper::is_heartbeat() ) {
 			return;
 		}
 

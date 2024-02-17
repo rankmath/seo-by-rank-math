@@ -11,12 +11,11 @@
 namespace RankMath\Tools;
 
 use RankMath\Helper;
+use RankMath\Helpers\Param;
 use RankMath\Traits\Hooker;
 use RankMath\Paper\Paper;
 use RankMath\Admin\Metabox\Screen;
 use RankMath\Schema\DB;
-use RankMath\Helpers\Param;
-use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -190,8 +189,8 @@ class Update_Score {
 			}
 
 			if (
-				( Conditional::is_woocommerce_active() && 'product' === $post_type ) ||
-				( Conditional::is_edd_active() && 'download' === $post_type )
+				( Helper::is_woocommerce_active() && 'product' === $post_type ) ||
+				( Helper::is_edd_active() && 'download' === $post_type )
 			) {
 				$values['isProduct']       = true;
 				$values['isReviewEnabled'] = 'yes' === get_option( 'woocommerce_enable_reviews', 'yes' );

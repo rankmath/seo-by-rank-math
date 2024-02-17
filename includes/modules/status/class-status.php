@@ -11,11 +11,10 @@
 namespace RankMath\Status;
 
 use RankMath\Helper;
+use RankMath\Helpers\Param;
 use RankMath\Module\Base;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Page;
-use RankMath\Helpers\Param;
-use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,7 +50,7 @@ class Status extends Base {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		if ( Conditional::is_heartbeat() ) {
+		if ( Helper::is_heartbeat() ) {
 			return;
 		}
 

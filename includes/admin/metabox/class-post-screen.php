@@ -18,7 +18,6 @@ use RankMath\Frontend_SEO_Score;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Url;
-use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 

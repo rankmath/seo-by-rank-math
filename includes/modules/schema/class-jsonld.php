@@ -11,13 +11,11 @@
 namespace RankMath\Schema;
 
 use RankMath\Helper;
-use RankMath\Paper\Paper;
-use RankMath\Traits\Hooker;
 use RankMath\Helpers\Url;
-use RankMath\Helpers\Conditional;
-use RankMath\Helpers\WordPress;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Arr;
+use RankMath\Paper\Paper;
+use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -411,7 +409,7 @@ class JsonLD {
 	 * @return bool
 	 */
 	private function is_product_archive_page() {
-		return Conditional::is_woocommerce_active() && ( ( is_tax() && in_array( get_query_var( 'taxonomy' ), get_object_taxonomies( 'product' ), true ) ) || is_shop() );
+		return Helper::is_woocommerce_active() && ( ( is_tax() && in_array( get_query_var( 'taxonomy' ), get_object_taxonomies( 'product' ), true ) ) || is_shop() );
 	}
 
 	/**
@@ -714,7 +712,7 @@ class JsonLD {
 			$description = $product->get_short_description() ? $product->get_short_description() : $product->get_description();
 		}
 
-		$description = $this->do_filter( 'product_description/apply_shortcode', false ) ? do_shortcode( $description ) : WordPress::strip_shortcodes( $description );
+		$description = $this->do_filter( 'product_description/apply_shortcode', false ) ? do_shortcode( $description ) : Helper::strip_shortcodes( $description );
 		return wp_strip_all_tags( $description, true );
 	}
 

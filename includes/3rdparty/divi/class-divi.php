@@ -12,13 +12,13 @@ namespace RankMath\Divi;
 
 use RankMath\KB;
 use RankMath\Helper;
+use RankMath\Helpers\Editor;
+use RankMath\Helpers\Str;
 use RankMath\Schema\DB as Schema_DB;
 use RankMath\Schema\Admin as Schema_Admin;
 use RankMath\Traits\Hooker;
-use RankMath\Helpers\Editor;
 use RankMath\Admin\Metabox\Screen;
 use WP_Dependencies;
-use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 

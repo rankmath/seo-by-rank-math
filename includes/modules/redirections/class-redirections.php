@@ -10,12 +10,11 @@
 
 namespace RankMath\Redirections;
 
-use RankMath\Helper;
 use RankMath\Traits\Hooker;
+use RankMath\Helper;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Security;
 use RankMath\Helpers\Param;
-use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,7 +47,7 @@ class Redirections {
 		if ( Helper::has_cap( 'redirections' ) ) {
 			$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
 
-			if ( Conditional::is_rest() ) {
+			if ( Helper::is_rest() ) {
 				$this->action( 'rank_math/dashboard/widget', 'dashboard_widget', 12 );
 			}
 		}
@@ -95,7 +94,7 @@ class Redirections {
 			$this->admin = new Admin();
 		}
 
-		if ( is_admin() || Conditional::is_rest() ) {
+		if ( is_admin() || Helper::is_rest() ) {
 			new Watcher();
 		}
 	}
@@ -107,7 +106,7 @@ class Redirections {
 		if (
 			$this->is_wp_login() ||
 			is_customize_preview() ||
-			Conditional::is_ajax() ||
+			Helper::is_ajax() ||
 			! isset( $_SERVER['REQUEST_URI'] ) ||
 			empty( $_SERVER['REQUEST_URI'] ) ||
 			$this->is_script_uri_or_http_x() ||

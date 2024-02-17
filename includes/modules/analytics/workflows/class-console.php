@@ -87,8 +87,8 @@ class Console extends Base {
 		}
 
 		// Make sure that collations match the objects table.
-		$objects_coll = \RankMath\Helper::get_table_collation( 'rank_math_analytics_objects' );
-		\RankMath\Helper::check_collation( $table, 'all', $objects_coll );
+		$objects_coll = DB::get_table_collation( 'rank_math_analytics_objects' );
+		DB::check_collation( $table, 'all', $objects_coll );
 	}
 
 	/**

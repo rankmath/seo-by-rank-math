@@ -16,7 +16,6 @@ use RankMath\Module\Base;
 use RankMath\Admin\Page;
 use RankMath\Helpers\Arr;
 use RankMath\Helpers\Param;
-use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -84,7 +83,7 @@ class Admin extends Base {
 	 * Initialize.
 	 */
 	public function init() {
-		$action = WordPress::get_request_action();
+		$action = Helper::get_request_action();
 		if ( false === $action || ! in_array( $action, [ 'delete', 'clear_log' ], true ) ) {
 			return;
 		}

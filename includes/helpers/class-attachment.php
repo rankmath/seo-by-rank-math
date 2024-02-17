@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Attachment trait.
  */
-trait Attachment {
+class Attachment {
 
 	/**
 	 * Check if a post can be included in sitemap.

@@ -9,7 +9,6 @@
  */
 
 use RankMath\Helper;
-use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,7 +29,7 @@ function rank_math_1_0_49_enable_new_analytics_module() {
 function rank_math_1_0_49_sync_user_roles() {
 	wp_roles();
 
-	foreach ( WordPress::get_roles() as $slug => $role ) {
+	foreach ( Helper::get_roles() as $slug => $role ) {
 		$role = get_role( $slug );
 		if ( ! $role ) {
 			continue;

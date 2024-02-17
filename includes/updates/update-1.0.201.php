@@ -22,7 +22,6 @@ function rank_math_1_0_201_content_ai_settings() {
 	$general['content_ai_tone']             = 'Formal';
 	$general['content_ai_audience']         = 'General Audience';
 	$general['content_ai_language']         = Helper::content_ai_default_language();
-	$general['cotnent_ai_enable_grammarly'] = 'on';
 
 	Helper::update_all_settings( $general, null, null );
 	rank_math()->settings->reset();

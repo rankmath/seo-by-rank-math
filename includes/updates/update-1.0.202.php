@@ -22,8 +22,6 @@ function rank_math_1_0_202_content_ai_convert_english_language() {
 		$general['content_ai_language'] = 'US English';
 	}
 
-	$general['cotnent_ai_enable_grammarly'] = 'on';
-
 	Helper::update_all_settings( $general, null, null );
 	rank_math()->settings->reset();
 }

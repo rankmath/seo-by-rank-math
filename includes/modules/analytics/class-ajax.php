@@ -342,7 +342,7 @@ class AJAX {
 		if ( empty( $rows ) ) {
 			delete_option( 'rank_math_analytics_installed' );
 		}
-
+		delete_option( 'rank_math_analytics_last_single_action_schedule_time' );
 		// Start fetching data.
 		foreach ( [ 'console', 'analytics', 'adsense' ] as $action ) {
 			Workflow\Workflow::do_workflow(

@@ -160,16 +160,6 @@ $cmb->add_field(
 	],
 );
 
-$cmb->add_field(
-	[
-		'id'      => 'cotnent_ai_enable_grammarly',
-		'type'    => 'toggle',
-		'name'    => esc_html__( 'Enable Grammarly', 'rank-math' ),
-		'desc'    => esc_html__( 'Enable this feature to fix the grammatical errors on the fly while content is being written/generated.', 'rank-math' ),
-		'default' => 'on',
-	],
-);
-
 $post_types = Helper::choices_post_types();
 if ( isset( $post_types['attachment'] ) ) {
 	unset( $post_types['attachment'] );

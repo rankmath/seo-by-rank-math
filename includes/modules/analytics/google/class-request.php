@@ -10,8 +10,7 @@
 
 namespace RankMath\Google;
 
-use RankMath\Helpers\Security;
-use RankMath\Helpers\WordPress;
+use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -250,7 +249,7 @@ class Request {
 		$uploads = wp_upload_dir();
 		$file    = $uploads['basedir'] . '/rank-math/analytics-debug.log';
 
-		$wp_filesystem = WordPress::get_filesystem();
+		$wp_filesystem = Helper::get_filesystem();
 
 		// Create log file if it doesn't exist.
 		$wp_filesystem->touch( $file );

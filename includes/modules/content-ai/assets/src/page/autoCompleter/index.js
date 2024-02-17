@@ -2,7 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { isNull, isUndefined } from 'lodash'
+import { isNull, isUndefined, isEmpty, includes } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -11,14 +11,17 @@ import { __ } from '@wordpress/i18n'
 import { addFilter } from '@wordpress/hooks'
 import { render } from '@wordpress/element'
 import { registerFormatType } from '@wordpress/rich-text'
+import { Popover, Button } from '@wordpress/components'
+import { select } from '@wordpress/data'
 
 /**
  * Internal dependencies
  */
 import getTools from '../helpers/getTools'
 import Modal from '../modal'
-import ContentAiToolbar from './contentAiToolbar'
+import contentAiToolbar from './contentAiToolbar'
 import hasError from '../helpers/hasError'
+import callApi from './callApi'
 
 /**
  * Autocompleter function to register the shortcut & get the response from the API.
@@ -67,6 +70,40 @@ const getContentAICompleters = ( prefix ) => {
 	}
 }
 
+const HighlightPopover = () => {
+	const highlightedParagraphs = ! isUndefined( select( 'rank-math' ) ) ? select( 'rank-math' ).getHighlightedParagraphs() : []
+	if ( isEmpty( highlightedParagraphs ) ) {
+		return
+	}
+
+	const selectedBlock = select( 'core/block-editor' ).getSelectedBlock()
+	if ( isEmpty( selectedBlock ) || ! includes( highlightedParagraphs, selectedBlock.clientId ) ) {
+		jQuery( '.block-editor-block-popover' ).show()
+		return
+	}
+
+	jQuery( '.block-editor-block-popover' ).hide()
+
+	return (
+		<Popover
+			placement="top-start"
+			focusOnMount="firstElement"
+			key="rank-math-popover"
+			expandOnMobile={ true }
+			noArrow={ false }
+			anchor={ document.getElementById( 'block-' + selectedBlock.clientId ) }
+		>
+			<Button
+				variant="primary"
+				onClick={ () => ( callApi( 'Text_Summarizer', { text: selectedBlock.attributes.content, language: rankMath.ca_language, format: 'paragraph', choices: 1 }, selectedBlock, true ) ) }
+
+			>
+				{ __( 'Shorten with AI', 'rank-math' ) }
+			</Button>
+		</Popover>
+	)
+}
+
 /**
  * Register Content AI Autocompleters to show AI tools on // & // .
  */
@@ -75,8 +112,10 @@ export default () => {
 		title: __( 'Content AI', 'rank-math' ),
 		tagName: 'p',
 		className: null,
-		edit: ContentAiToolbar,
+		edit: HighlightPopover,
 	} )
+
+	addFilter( 'editor.BlockEdit', 'rank-math', contentAiToolbar )
 
 	if ( hasError() ) {
 		return

@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * DB class.
  */
-trait DB {
+class DB {
 
 	/**
 	 * Check and fix collation of table and columns.
@@ -171,7 +171,7 @@ trait DB {
 	/**
 	 * Check if table has more rows than X.
 	 *
- 	 * @since      1.1.16
+	 * @since      1.1.16
 	 *
 	 * @param string $table_name Table name to check.
 	 * @param int    $limit      Number of rows to check against.

@@ -11,8 +11,8 @@
 namespace RankMath\Redirections;
 
 use RankMath\Helper;
-use RankMath\Traits\Hooker;
 use RankMath\Helpers\Param;
+use RankMath\Traits\Hooker;
 use RankMath\Monitor\DB as Monitor_DB;
 
 defined( 'ABSPATH' ) || exit;

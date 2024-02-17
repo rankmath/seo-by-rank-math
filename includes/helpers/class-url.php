@@ -16,7 +16,7 @@ use RankMath\Helpers\Param;
 /**
  * Url class.
  */
-trait Url {
+class Url {
 
 	/**
 	 * Simple check for validating a URL, it must start with http:// or https://.

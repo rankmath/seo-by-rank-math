@@ -13,7 +13,7 @@ namespace RankMath\Helpers;
 /**
  * Param class.
  */
-trait Param {
+class Param {
 
 	/**
 	 * Get field from query string.
