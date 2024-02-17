@@ -113,15 +113,11 @@ trait Content_AI {
 			return 0;
 		}
 
-		$data                  = json_decode( $data, true );
-		$total_monthly_credits = intval( $data['totalMonthlyCredits'] ?? 0 );
-		$additional_credits    = intval( $data['additionalMonthlyCredits'] ?? 0 ) + intval( $data['additionalMonthOnlyCredits'] ?? 0 );
-		$credits_used          = intval( $data['creditsUsed'] ?? 0 );
-
+		$data = json_decode( $data, true );
 		$data = [
-			'credits'      => $total_monthly_credits + $additional_credits - $credits_used,
-			'plan'         => ! empty( $data['plan'] ) ? $data['plan'] : 0,
-			'refresh_date' => ! empty( $data['nextResetDate'] ) ? $data['nextResetDate'] : '',
+			'credits'      => intval( $data['availableCredits'] ?? 0 ),
+			'plan'         => $data['plan'] ?? '',
+			'refresh_date' => $data['nextResetDate'] ?? '',
 		];
 
 		self::update_credits( $data );
@@ -450,7 +446,6 @@ trait Content_AI {
 			'could_not_generate'     => esc_html__( 'Could not generate. Please try again later.', 'rank-math' ),
 			'invalid_key'            => esc_html__( 'Invalid API key. Please check your API key or reconnect the site and try again.', 'rank-math' ),
 			'not_found'              => esc_html__( 'User wallet not found.', 'rank-math' ),
-			'site_blocked'           => esc_html__( 'Your site is blocked. Please contact support.', 'rank-math' ),
 		];
 	}
 
@@ -491,10 +486,6 @@ trait Content_AI {
 	 * @param int   $response_code API response code.
 	 */
 	public static function is_content_ai_error( $response, $response_code ) {
-		if ( 403 === $response_code ) {
-			return 'site_blocked';
-		}
-
 		$data = wp_remote_retrieve_body( $response );
 		$data = ! empty( $data ) ? json_decode( $data, true ) : [];
 		if ( is_wp_error( $response ) || 200 !== $response_code || empty( $data ) ) {

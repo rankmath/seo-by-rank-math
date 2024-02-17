@@ -30,9 +30,19 @@ class Author implements Provider {
 	use Hooker;
 
 	/**
+	 * Holds the Sitemap slug.
+	 *
+	 * @var string
+	 */
+	protected $sitemap_slug = null;
+
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {
+		$this->sitemap_slug = Router::get_sitemap_slug( 'author' );
+
 		$this->filter( 'rank_math/sitemap/author/query', 'exclude_users', 5 );
 		$this->filter( 'rank_math/sitemap/author/query', 'exclude_roles', 5 );
 		$this->filter( 'rank_math/sitemap/author/query', 'exclude_post_types', 5 );
@@ -45,7 +55,7 @@ class Author implements Provider {
 	 * @return boolean
 	 */
 	public function handles_type( $type ) {
-		return 'author' === $type && Helper::get_settings( 'sitemap.authors_sitemap' );
+		return $this->sitemap_slug === $type && Helper::get_settings( 'sitemap.authors_sitemap' );
 	}
 
 	/**
@@ -59,8 +69,7 @@ class Author implements Provider {
 			return [];
 		}
 
-		$users = $this->get_users();
-
+		$users = $this->get_index_users();
 		if ( empty( $users ) ) {
 			return [];
 		}
@@ -78,7 +87,7 @@ class Author implements Provider {
 			$item = $this->do_filter(
 				'sitemap/index/entry',
 				[
-					'loc'     => Router::get_base_url( 'author-sitemap' . $page . '.xml' ),
+					'loc'     => Router::get_base_url( $this->sitemap_slug . '-sitemap' . $page . '.xml' ),
 					'lastmod' => '@' . $user->last_update,
 				],
 				'author',
@@ -200,7 +209,6 @@ class Author implements Provider {
 		];
 
 		$args = $this->do_filter( 'sitemap/author/query', wp_parse_args( $args, $defaults ) );
-
 		return get_users( $args );
 	}
 
@@ -253,5 +261,52 @@ class Author implements Provider {
 		$args['has_published_posts'] = array_keys( $public_post_types );
 
 		return $args;
+	}
+
+	/**
+	 * Get all users according to author sitemap settings.
+	 *
+	 * @return array
+	 */
+	private function get_index_users() {
+		global $wpdb;
+		$exclude_users       = Helper::get_settings( 'sitemap.exclude_users' );
+		$exclude_roles       = Helper::get_settings( 'sitemap.exclude_roles' );
+		$exclude_users_query = ! $exclude_users ? '' : 'AND post_author NOT IN ( ' . esc_sql( $exclude_users ) . ' )';
+		$exclude_roles_query = '';
+		$meta_query          = "(
+		 		( um.meta_key = 'rank_math_robots' AND um.meta_value NOT LIKE '%noindex%' )
+		 		OR um.user_id IS NULL
+			)
+			AND (  umt1.meta_key = 'last_update' OR umt1.user_id IS NULL )
+			";
+		if ( $exclude_roles ) {
+			$exclude_roles_query = "AND ( umt.meta_key ='wp_capabilities' AND ( ";
+			foreach ( $exclude_roles as $key => $role ) {
+				$exclude_roles_query .= 0 === $key ? " umt.meta_value NOT LIKE '%" . esc_sql( $role ) . "%'" : " AND umt.meta_value NOT LIKE '%" . esc_sql( $role ) . "%'";
+			}
+
+			$exclude_roles_query .= ' ) )';
+		}
+
+		$meta_query .= $exclude_roles_query;
+
+		$sql = "
+		SELECT u.ID, umt1.meta_value as last_update
+		FROM {$wpdb->users} as u
+		    LEFT JOIN {$wpdb->usermeta} AS um ON ( u.ID = um.user_id AND um.meta_key = 'rank_math_robots' )
+		    LEFT JOIN {$wpdb->usermeta} AS umt ON ( u.ID = umt.user_id AND umt.meta_key = 'wp_capabilities' )
+		    LEFT JOIN {$wpdb->usermeta} AS umt1 ON ( u.ID = umt1.user_id AND umt1.meta_key = 'last_update' )
+		    WHERE ( {$meta_query} )
+		    AND u.ID IN (
+		    	SELECT post_author
+		    	FROM {$wpdb->posts} as p
+		    	WHERE p.post_status = 'publish' AND p.post_password = ''
+		    	{$exclude_users_query}
+		    	)
+		ORDER BY umt1.meta_value DESC
+		 ";
+
+		return $wpdb->get_results( $sql ); // phpcs:ignore
 	}
 }

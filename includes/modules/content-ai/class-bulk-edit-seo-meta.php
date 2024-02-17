@@ -145,7 +145,7 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 
 			$this->update_content_ai_posts_count( count( $posts['meta'] ) );
 
-			$credits = ! empty( $posts['credits'] ) ? json_decode( $posts['credits'], true ) : [];
+			$credits = ! empty( $posts['credits'] ) ? $posts['credits'] : [];
 			if ( ! empty( $credits['available'] ) ) {
 				$credits = $credits['available'] - $credits['taken'];
 				Helper::update_credits( $credits );

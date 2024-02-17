@@ -150,6 +150,21 @@ class Router {
 	}
 
 	/**
+	 * Get sitemap slug.
+	 *
+	 * @param string $type Sitemap type.
+	 * @return string
+	 */
+	public static function get_sitemap_slug( $type ) {
+		/**
+		 * Filter the slug of the sitemap.
+		 *
+		 * @param string $slug Slug of the sitemap.
+		 */
+		return apply_filters( "rank_math/sitemap/{$type}/slug", $type );
+	}
+
+	/**
 	 * Get page URL for the sitemap.
 	 *
 	 * @param string $page Page to append to the base URL.

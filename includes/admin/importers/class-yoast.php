@@ -569,7 +569,7 @@ class Yoast extends Plugin_Importer {
 	private function set_post_focus_keyword( $post_id ) {
 		$extra_fks = get_post_meta( $post_id, '_yoast_wpseo_focuskeywords', true );
 		$extra_fks = json_decode( $extra_fks, true );
-		if ( empty( $extra_fks ) ) {
+		if ( empty( $extra_fks ) || ! is_array( $extra_fks ) ) {
 			return;
 		}
 

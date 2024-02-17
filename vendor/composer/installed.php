@@ -3,7 +3,7 @@
         'name' => 'rankmath/seo-by-rank-math',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => 'ad85ed710f1ec59f15cc7cef4cc7d4a1b910f0d7',
+        'reference' => '93a95bac9ddc3b2be2ab358c077d72c1dde816eb',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -49,7 +49,7 @@
         'rankmath/seo-by-rank-math' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => 'ad85ed710f1ec59f15cc7cef4cc7d4a1b910f0d7',
+            'reference' => '93a95bac9ddc3b2be2ab358c077d72c1dde816eb',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

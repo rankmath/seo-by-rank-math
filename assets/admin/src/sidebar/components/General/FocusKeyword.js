@@ -17,6 +17,7 @@ import Tooltip from '@components/Tooltip'
 import Interpolate from '@components/Interpolate'
 import FocusKeywordField from './FocusKeywordField'
 import TrendsPreview from '@helpers/TrendsPreview'
+import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
 import ContentAI from './ContentAI'
 
 const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
@@ -50,7 +51,7 @@ const FocusKeyword = ( { isLoaded, isPillarContent, togglePillarContent } ) => {
 			</h2>
 
 			<TrendsPreview></TrendsPreview>
-			{ rankMath.currentEditor && 'classic' !== rankMath.currentEditor && <ContentAI></ContentAI> }
+			{ rankMath.currentEditor && ( 'classic' !== rankMath.currentEditor || isGutenbergAvailable() ) && <ContentAI></ContentAI> }
 			<RankMathAfterFocusKeyword.Slot>
 				{ ( fills ) => {
 					if ( fills.length > 0 ) {
