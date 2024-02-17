@@ -138,7 +138,7 @@ class Bulk_Actions implements Runner {
 			return Helper::get_settings( 'titles.tax_' . Param::get( 'taxonomy' ) . '_add_meta_box' );
 		}
 
-		if ( Admin_Helper::is_post_list() ) {
+		if ( Admin_Helper::is_post_list() || Admin_Helper::is_media_library() ) {
 			$screen = get_current_screen();
 
 			$allowed_post_types   = Helper::get_allowed_post_types();

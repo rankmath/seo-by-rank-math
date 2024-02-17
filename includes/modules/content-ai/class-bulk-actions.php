@@ -29,6 +29,13 @@ class Bulk_Actions {
 	 * The Constructor.
 	 */
 	public function __construct() {
+		$this->action( 'admin_init', 'init_admin', 15 );
+	}
+
+	/**
+	 * Init.
+	 */
+	public function init_admin() {
 		$post_types = Helper::get_settings( 'general.content_ai_post_types', [] );
 		foreach ( $post_types as $post_type ) {
 			$this->filter( "bulk_actions-edit-{$post_type}", 'bulk_actions', 9 );
