@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.4.1
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.208
+Stable tag: 1.0.208.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -589,6 +589,9 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 - Fixed: [Sitemap Index](https://rankmath.com/kb/sitemaps-seo-benefits/#xml-sitemap) was incorrectly using noindexed post data for `Last Modified` date
 - Fixed: [Update SEO Score tool](https://rankmath.com/kb/seo-score-not-available/#update-seo-scores) now handles encoded characters in Post URL correctly
 - Removed: Google Mobile-Friendly tool from the [Quick Actions admin menu](https://rankmath.com/kb/quick-actions/) as Google deprecated it
+
+= 1.0.208.1 [Dec 07, 2023] =
+- Fixed: Cache issue was causing Content AI to not work properly.
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

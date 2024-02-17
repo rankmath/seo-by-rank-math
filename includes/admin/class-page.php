@@ -280,7 +280,7 @@ class Page {
 		}
 
 		foreach ( $this->assets['styles'] as $handle => $src ) {
-			wp_enqueue_style( $handle, $src, null );
+			wp_enqueue_style( $handle, $src, null, rank_math()->version );
 		}
 	}
 
@@ -295,7 +295,7 @@ class Page {
 		}
 
 		foreach ( $this->assets['scripts'] as $handle => $src ) {
-			wp_enqueue_script( $handle, $src, null, null, true );
+			wp_enqueue_script( $handle, $src, null, rank_math()->version, true );
 		}
 	}
 
