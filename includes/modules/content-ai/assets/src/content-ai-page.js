@@ -148,7 +148,7 @@ jQuery( () => {
 } )
 
 jQuery( window ).on( 'load', () => {
-	if ( hasError() || ( ! isGutenbergAvailable() && ! rankMath.isContentAIPage ) ) {
+	if ( hasError() || ! rankMath.registerWriteShortcut || ( ! isGutenbergAvailable() && ! rankMath.isContentAIPage ) ) {
 		return
 	}
 

@@ -4,13 +4,11 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
  */
 import { select, dispatch } from '@wordpress/data'
-import { createBlock } from '@wordpress/blocks'
 
 /**
  * Internal dependencies
@@ -60,7 +58,7 @@ export default ( content, selectionID = '', appendContent = false, existingConte
 		}
 
 		if ( 'classic' === rankMath.currentEditor ) {
-			tinymce.activeEditor.insertContent( ' ' + value )
+			tinymce.activeEditor.insertContent( 'rank_math_process_complete' !== value ? ' ' + value : '' )
 			return
 		}
 

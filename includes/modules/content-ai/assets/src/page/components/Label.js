@@ -18,7 +18,7 @@ import generateHelpLink from '../helpers/generateHelpLink'
  * @param {string} props.endpoint Current endpoint.
  */
 export default ( { id, data, value, endpoint = '' } ) => {
-	const helpLink = generateHelpLink( endpoint )
+	const helpLink = generateHelpLink( endpoint, true )
 	return (
 		<label htmlFor={ id }>
 			{ unescape( data.label ) }

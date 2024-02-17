@@ -25,7 +25,7 @@ $button_class   = 'button button-primary button-connect' . ( $site_url_valid ? '
 	<a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $button_class ); ?>" name="rank_math_activate"><?php echo esc_attr__( 'Connect Your Rank Math Account', 'rank-math' ); ?></a>
 </div>
 <div id="rank-math-pro-cta" class="analytics">
-	<div class="rank-math-cta-box width-100 no-shadow no-padding">
+	<div class="rank-math-cta-box width-100 no-shadow no-padding no-border">
 		<h3><?php echo esc_attr__( 'Benefits of Connecting Rank Math Account', 'rank-math' ); ?></h3>
 		<ul>
 			<li><?php echo esc_attr__( 'Verify site ownership on Google Search Console in a single click', 'rank-math' ); ?></li>

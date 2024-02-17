@@ -370,7 +370,7 @@ class Installer {
 					'content_ai_tone'                     => 'Formal',
 					'content_ai_audience'                 => 'General Audience',
 					'content_ai_language'                 => Helper::content_ai_default_language(),
-					'cotnent_ai_enable_grammarly'         => 'off',
+					'cotnent_ai_enable_grammarly'         => 'on',
 					'analytics_stats'                     => 'on',
 					'toc_block_title'                     => 'Table of Contents',
 					'toc_block_list_style'                => 'ul',

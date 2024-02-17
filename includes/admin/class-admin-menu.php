@@ -121,7 +121,7 @@ class Admin_Menu implements Runner {
 		<script type="text/javascript">
 			// Open RM KB menu link in the new tab.
 			jQuery( document ).ready( function( $ ) {
-				$( "ul#adminmenu a[href$='<?php KB::the( 'kb-seo-suite', 'Sidebar Help Link' ); ?>']" ).attr( 'target', '_blank' );
+				$( "ul#adminmenu a[href$='<?php KB::the( 'knowledgebase', 'Sidebar Help Link' ); ?>']" ).attr( 'target', '_blank' );
 			} );
 		</script>
 		<style>

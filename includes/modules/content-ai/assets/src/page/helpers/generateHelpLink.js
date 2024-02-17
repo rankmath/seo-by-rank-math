@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isUndefined } from 'lodash'
+import { isUndefined, includes } from 'lodash'
 
 // KB URLs
 const KB_URLS = {
@@ -41,18 +41,21 @@ const KB_URLS = {
 	HERO: 'https://rankmath.com/kb/content-ai-hero-tool/',
 	BAB: 'https://rankmath.com/kb/content-ai-bab-tool/',
 	SPIN: 'https://rankmath.com/kb/content-ai-spin-tool/',
-	YouTube_Video_Script: 'https://rankmath.com/kb/content-ai-youtube-video-script-tool/',
-	YouTube_Video_Description: 'https://rankmath.com/kb/content-ai-youtube-video-description-tool/',
+	Youtube_Video_Script: 'https://rankmath.com/kb/content-ai-youtube-video-script-tool/',
+	Youtube_Video_Description: 'https://rankmath.com/kb/content-ai-youtube-video-description-tool/',
 	Podcast_Episode_Outline: 'https://rankmath.com/kb/content-ai-podcast-episode-outline-tool/',
 	Recipe: 'https://rankmath.com/kb/content-ai-recipe-tool/',
 	Freeform_Writing: 'https://rankmath.com/kb/content-ai-freeform-writing-tool/',
-	AI_Command: 'https://rankmath.com/kb/content-ai-ai-command-tool/',
+	AI_Command: 'https://rankmath.com/kb/content-ai-command-tool/',
 	SEO_Meta: 'https://rankmath.com/kb/content-ai-seo-meta-tool/?play-video=fqC81KMX5IY',
 	Open_Graph: 'https://rankmath.com/kb/content-ai-open-graph-tool/',
 	Write: 'https://rankmath.com/kb/content-ai-editor/',
 }
 
-export default ( endpoint ) => {
-	const kb = KB_URLS[ endpoint ]
+export default ( endpoint, isLabel = false ) => {
+	let kb = KB_URLS[ endpoint ]
+	if ( isLabel && includes( kb, 'play-video' ) ) {
+		kb = kb.substring( 0, kb.indexOf( '?' ) )
+	}
 	return isUndefined( kb ) ? false : `${ kb }?utm_source=Plugin&utm_medium=AI+Tool&utm_campaign=WP`
 }

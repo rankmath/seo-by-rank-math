@@ -41,7 +41,6 @@ class Admin implements Runner {
 		$this->action( 'cmb2_save_options-page_fields', 'update_is_configured_value', 10, 2 );
 		$this->filter( 'action_scheduler_pastdue_actions_check_pre', 'as_exclude_pastdue_actions' );
 		$this->action( 'rank_math/pro_badge', 'offer_icon' );
-		$this->action( 'admin_init', 'update_wp_notification' );
 
 		// AJAX.
 		$this->ajax( 'is_keyword_new', 'is_keyword_new' );
@@ -248,22 +247,6 @@ class Admin implements Runner {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Add an admin notice informing users to update WordPress to v6.3 or higher.
-	 *
-	 * @return void
-	 */
-	public function update_wp_notification() {
-		if ( ! Str::starts_with( 'rank-math', Param::get( 'page' ) ) || version_compare( get_bloginfo( 'version' ), '6.0', '>=' ) ) {
-			return;
-		}
-
-		Helper::add_notification(
-			esc_html__( 'Please update to WordPress v6.0 or higher as Rank Math SEO will soon stop supporting lower versions.', 'rank-math' ),
-			[ 'type' => 'error' ]
-		);
 	}
 
 	/**

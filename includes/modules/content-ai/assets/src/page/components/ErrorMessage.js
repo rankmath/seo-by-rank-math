@@ -4,12 +4,30 @@
 import { __ } from '@wordpress/i18n'
 import { Button } from '@wordpress/components'
 
-/**
- * Internal dependencies.
- */
-import getLink from '@helpers/getLink'
+// Get Error message list.
+const getMessageList = ( width ) => {
+	if ( width === 40 ) {
+		return (
+			<ul>
+				<li>{ __( '1-Click SEO Content', 'rank-math' ) }</li>
+				<li>{ __( '1-Click SEO Meta', 'rank-math' ) }</li>
+				<li>{ __( '40+ Specialized AI Tools', 'rank-math' ) }</li>
+				<li>{ __( '1-Click Competitor Research', 'rank-math' ) }</li>
+				<li>{ __( '125+ Pre-Built Prompts', 'rank-math' ) }</li>
+			</ul>
+		)
+	}
 
-export default ( { width = 80 } ) => {
+	return (
+		<ul>
+			<li>{ __( 'Gain access to 40+ advanced AI tools, empowering your content strategy.', 'rank-math' ) }</li>
+			<li>{ __( 'Experience the revolutionary AI-powered Content Editor for unparalleled efficiency.', 'rank-math' ) }</li>
+			<li>{ __( 'Engage with RankBot, your personal AI Chat Assistant, for real-time assistance.', 'rank-math' ) }</li>
+		</ul>
+	)
+}
+
+export default ( { width = 40 } ) => {
 	const isRegistered = rankMath.isUserRegistered
 	const hasContentAIPlan = rankMath.contentAIPlan
 	const hasCredits = rankMath.contentAICredits > 0
@@ -23,18 +41,12 @@ export default ( { width = 80 } ) => {
 		return (
 			<div id="rank-math-pro-cta" className="center rank-math-content-ai-warning-wrapper">
 				<div className={ 'rank-math-cta-box blue-ticks top-20 less-padding ' + widthClass }>
-					<h3>{ __( '🚀 Unlock the Power of Content AI', 'rank-math' ) }</h3>
+					<h3>{ __( '🚀 Supercharge Your Content With AI', 'rank-math' ) }</h3>
 					<p>
 						{ ! isRegistered && __( 'Start using Content AI by connecting your RankMath.com Account', 'rank-math' ) }
 						{ isRegistered && ! hasContentAIPlan && __( 'Get started with Content AI by purchasing a subscription plan.', 'rank-math' ) }
 					</p>
-					<ul>
-						<ul>
-							<li>{ __( 'Gain access to 40+ advanced AI tools, empowering your content strategy.', 'rank-math' ) }</li>
-							<li>{ __( 'Experience the revolutionary AI-powered Content Editor for unparalleled efficiency.', 'rank-math' ) }</li>
-							<li>{ __( 'Engage with RankBot, your personal AI Chat Assistant, for real-time assistance.', 'rank-math' ) }</li>
-						</ul>
-					</ul>
+					{ getMessageList( width ) }
 					{
 						! isRegistered &&
 						<Button
@@ -48,11 +60,11 @@ export default ( { width = 80 } ) => {
 					{
 						isRegistered && ! hasContentAIPlan &&
 						<Button
-							href={ getLink( 'content-ai-pricing-tables', 'Sidebar No Plan' ) }
+							href="https://rankmath.com/kb/how-to-use-content-ai/?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Plan+Button&utm_campaign=WP"
 							className="button button-primary is-green"
 							target="_blank"
 						>
-							{ __( 'Buy Now', 'rank-math' ) }
+							{ __( 'Learn More', 'rank-math' ) }
 						</Button>
 					}
 				</div>
@@ -66,11 +78,11 @@ export default ( { width = 80 } ) => {
 				<h3>{ __( '⛔️ Content AI Credit Alert!', 'rank-math' ) }</h3>
 				<p>{ __( 'Your monthly Content AI credits have been fully utilized. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and access more credits.', 'rank-math' ) }</p>
 				<Button
-					href={ getLink( 'content-ai-pricing-tables', 'Content AI Page No Credits' ) }
+					href="https://rankmath.com/kb/how-to-use-content-ai/?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Credits+Button&utm_campaign=WP"
 					className="button button-primary is-green"
 					target="_blank"
 				>
-					{ __( 'Get More Credits', 'rank-math' ) }
+					{ __( 'Learn More', 'rank-math' ) }
 				</Button>
 			</div>
 		</div>

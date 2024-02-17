@@ -59,15 +59,17 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 			]
 		);
 
-		$action = $data['action'];
-		$posts  = $data['posts'];
+		$action   = $data['action'];
+		$posts    = $data['posts'];
+		$language = $data['language'];
 		update_option( 'rank_math_content_ai_posts', $posts );
 		$chunks = array_chunk( $posts, 10, true );
 		foreach ( $chunks as $chunk ) {
 			$this->push_to_queue(
 				[
-					'posts'  => $chunk,
-					'action' => $action,
+					'posts'    => $chunk,
+					'action'   => $action,
+					'language' => $language,
 				]
 			);
 		}
@@ -174,9 +176,11 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 		$connect_data = Admin_Helper::get_registration_data();
 		$posts        = $data['posts'];
 		$action       = $data['action'];
+		$language     = $data['language'];
 		$data         = [
 			'posts'          => $posts,
 			'output'         => $action,
+			'language'       => $language,
 			'choices'        => 1,
 			'username'       => $connect_data['username'],
 			'api_key'        => $connect_data['api_key'],

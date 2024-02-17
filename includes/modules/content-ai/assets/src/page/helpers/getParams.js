@@ -419,13 +419,17 @@
 	        "maxlength": "200"
 	    },
 	    "language": {
-	        "label": __( 'Language', 'rank-math' ),
+	        "label": __( 'Output Language', 'rank-math' ),
 	        "placeholder": __( '', 'rank-math' ),
 	        "type": "select",
 	        "options": [
 				{
-					"value": "English",
+					"value": "US English",
 					"icon": "🇺🇸"
+				},
+				{
+					"value": "UK English",
+					"icon": "🇬🇧"
 				},
 				{
 					"value": "Bulgarian",

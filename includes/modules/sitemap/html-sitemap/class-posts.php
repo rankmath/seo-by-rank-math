@@ -92,9 +92,12 @@ class Posts {
 
 		$posts = $query->orderBy( $sort['field'], $sort['order'] )->get();
 
-		return array_filter( $posts, function( $post ) {
-			return SitemapBase::is_object_indexable( $post->ID );
-		} );
+		return array_filter(
+			$posts,
+			function( $post ) {
+				return SitemapBase::is_object_indexable( $post->ID );
+			}
+		);
 	}
 
 	/**
@@ -156,6 +159,11 @@ class Posts {
 	private function generate_posts_list_flat( $posts, $show_dates ) {
 		$output = [];
 		foreach ( $posts as $post ) {
+			$url = $this->do_filter( 'sitemap/entry', esc_url( $this->get_post_link( $post ) ), 'post', $post );
+			if ( empty( $url ) ) {
+				continue;
+			}
+
 			$output[] = '<li class="rank-math-html-sitemap__item">'
 				. '<a href="' . esc_url( $this->get_post_link( $post ) ) . '" class="rank-math-html-sitemap__link">'
 				. esc_html( $this->get_post_title( $post ) )
@@ -184,8 +192,7 @@ class Posts {
 				. '<a href="' . esc_url( get_permalink( $post->ID ) ) . '" class="rank-math-html-sitemap__link">'
 				. esc_html( $this->get_post_title( $post ) )
 				. '</a>'
-				. ( $show_dates ? ' <span class="rank-math-html-sitemap__date">(' . esc_html( mysql2date( get_option( 'date_format' ), $post->post_date ) ) . ')</span>' : '' )
-				. '</li>';
+				. ( $show_dates ? ' <span class="rank-math-html-sitemap__date">(' . esc_html( mysql2date( get_option( 'date_format' ), $post->post_date ) ) . ')</span>' : '' );
 
 			$children = $this->get_posts( $post_type, $post->ID );
 			if ( ! empty( $children ) ) {
@@ -193,6 +200,7 @@ class Posts {
 				$output[] = $this->generate_posts_list_hierarchical( $children, $show_dates, $post_type );
 				$output[] = '</ul>';
 			}
+			$output[] = '</li>';
 		}
 
 		return implode( '', $output );
@@ -200,6 +208,10 @@ class Posts {
 
 	/**
 	 * Get the post permalink.
+	 *
+	 * @param object $post The post object.
+	 *
+	 * @return string
 	 */
 	private function get_post_link( $post ) {
 		return get_permalink( $post->ID );

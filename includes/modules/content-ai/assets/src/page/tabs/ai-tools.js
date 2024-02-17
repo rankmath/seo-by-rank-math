@@ -89,7 +89,11 @@ export default ( { showMinimal = false, isPage = false, setCredits = false, hasC
 								return
 							}
 
-							if ( search && ! lowerCase( value.title ).includes( lowerCase( search ) ) ) {
+							if (
+								search &&
+								! lowerCase( value.title ).includes( lowerCase( search ) ) &&
+								! lowerCase( value.endpoint ).includes( lowerCase( search ) )
+							) {
 								return
 							}
 

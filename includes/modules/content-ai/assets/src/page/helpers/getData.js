@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n'
 import apiFetch from '@wordpress/api-fetch'
 
 const errorMessage = __( 'Sorry, the request has failed. If the issue persists, please contact our Support for assistance.', 'rank-math' )
-
+let creditsRemaining = rankMath.contentAICredits
 // Save API output in the Database.
 const saveOutput = ( result, endpoint, attributes, isChat ) => {
 	const data = {
@@ -62,6 +62,7 @@ const updateCredits = ( result, setCredits ) => {
 
 	credits = credits.available - credits.taken
 	credits = credits < 0 ? 0 : credits
+	creditsRemaining = credits
 	if ( setCredits ) {
 		setCredits( credits )
 	}
@@ -138,6 +139,15 @@ export default ( endpoint, attributes = {}, callback, isChat, setCredits = '' ) 
 			debug: '1',
 		}
 	)
+
+	if ( ! creditsRemaining ) {
+		handleErrors( { code: 'account_limit_reached' }, endpoint, attributes, callback, isChat, setCredits, 1 )
+		return
+	}
+
+	if ( ! isUndefined( attributes.language ) && ! attributes.language ) {
+		attributes.language = rankMath.ca_language
+	}
 
 	callAPI( endpoint, attributes, callback, isChat, setCredits )
 }

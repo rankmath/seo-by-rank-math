@@ -127,7 +127,8 @@ $cmb->add_field(
 		'default'    => Helper::content_ai_default_language(),
 		'attributes' => ( 'data-s2' ),
 		'options'    => [
-			'English'    => esc_html__( 'English', 'rank-math' ),
+			'US English'    => esc_html__( 'US English', 'rank-math' ),
+			'UK English' => esc_html__( 'UK English', 'rank-math' ),
 			'Bulgarian'  => esc_html__( 'Bulgarian', 'rank-math' ),
 			'Chinese'    => esc_html__( 'Chinese', 'rank-math' ),
 			'Czech'      => esc_html__( 'Czech', 'rank-math' ),
@@ -165,7 +166,7 @@ $cmb->add_field(
 		'type'    => 'toggle',
 		'name'    => esc_html__( 'Enable Grammarly', 'rank-math' ),
 		'desc'    => esc_html__( 'Enable this feature to fix the grammatical errors on the fly while content is being written/generated.', 'rank-math' ),
-		'default' => 'off',
+		'default' => 'on',
 	],
 );
 

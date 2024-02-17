@@ -70,7 +70,7 @@ const Write = ( { hasContentAiError = false } ) => {
 	return (
 		<>
 			<div className={ hasContentAiError ? 'rank-math-ui module-listing blurred' : 'rank-math-ui module-listing' }>
-				<div className='rank-math-focus-keyword'>
+				<div className="rank-math-focus-keyword">
 					<Notice status="warning" isDismissible={ false }>
 						<Interpolate
 							components={ {

@@ -4,7 +4,7 @@
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import jQuery from 'jquery'
-import { get, cloneDeep, forEach, isArray, isEmpty, has, isUndefined } from 'lodash'
+import { get, cloneDeep, forEach, has, isArray, isEmpty, isString, isUndefined } from 'lodash'
 import { v4 as uuid } from 'uuid'
 
 /**
@@ -299,10 +299,11 @@ export default compose(
 	withSelect( ( select, props ) => {
 		const selected = select( 'rank-math' ).getEditingSchema()
 		const schemas = select( 'rank-math' ).getEditSchemas()
+		const schemaName = isString( selected.data.property ) ? selected.data.property : isArray( selected.data.property ) ? selected.data.property[ 0 ] : ''
 
 		// Some properties are saved in database as metadata[], we need to sync those values with the defaults.
 		applyFilters(
-			'rank_math_schema_apply_metadata_values_' + selected.data.property.replaceAll( ' ', '_' ),
+			'rank_math_schema_apply_metadata_values_' + schemaName.replaceAll( ' ', '_' ),
 			selected.data
 		)
 		return {

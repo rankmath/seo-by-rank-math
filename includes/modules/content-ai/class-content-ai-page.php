@@ -146,6 +146,7 @@ class Content_AI_Page {
 						'wp-blocks'                 => '',
 						'wp-element'                => '',
 						'wp-editor'                 => '',
+						'rank-math-block-faq'       => rank_math()->plugin_url() . 'assets/admin/js/blocks.js',
 						'rank-math-analyzer'        => rank_math()->plugin_url() . 'assets/admin/js/analyzer.js',
 						'rank-math-content-ai'      => rank_math()->plugin_url() . 'includes/modules/content-ai/assets/js/content-ai.js',
 						'rank-math-content-ai-page' => $uri . '/assets/js/content-ai-page.js',
@@ -211,8 +212,9 @@ class Content_AI_Page {
 		}
 
 		$data = [
-			'action' => $action,
-			'posts'  => [],
+			'action'   => $action,
+			'language' => Helper::get_settings( 'general.content_ai_language', Helper::content_ai_default_language() ),
+			'posts'    => [],
 		];
 
 		foreach ( $object_ids as $object_id ) {
@@ -294,7 +296,7 @@ class Content_AI_Page {
 			'disablePostFormats'   => true,
 			'autosaveInterval'     => 0,
 			'richEditingEnabled'   => user_can_richedit(),
-			'supportsLayout'       => wp_theme_has_theme_json(),
+			'supportsLayout'       => function_exists( 'wp_theme_has_theme_json' ) ? wp_theme_has_theme_json() : false,
 			'supportsTemplateMode' => false,
 			'enableCustomFields'   => false,
 		];
@@ -392,7 +394,7 @@ class Content_AI_Page {
 		$ai_post = current( $posts );
 		$content = $ai_post->post_content;
 		$blocks  = parse_blocks( $content );
-		if ( count( $blocks ) < 2 && 'core/paragraph' === $blocks[0]['blockName'] ) {
+		if ( ! empty( $blocks ) && count( $blocks ) < 2 && 'core/paragraph' === $blocks[0]['blockName'] ) {
 			$content = do_blocks( $ai_post->post_content );
 			$content = trim( preg_replace( '/<p[^>]*><\\/p[^>]*>/', '', $content ) );
 		}

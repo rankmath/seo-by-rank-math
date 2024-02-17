@@ -15,6 +15,7 @@ import { RichText, MediaUpload } from '@wordpress/block-editor'
  * Internal dependencies
  */
 import MediaUploader from '@blocks/shared/MediaUploader'
+import { applyFilters } from "@wordpress/hooks";
 
 /**
  * A Step within HowTo block.
@@ -57,6 +58,8 @@ class Step extends Component {
 					/>
 
 					<div className="rank-math-block-actions">
+						{ applyFilters( 'rank_math_block_howto_actions', '', this.props ) }
+
 						<Button
 							className="rank-math-item-visbility"
 							icon={ visible ? 'visibility' : 'hidden' }

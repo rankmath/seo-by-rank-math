@@ -19,7 +19,7 @@ $deauthorize = $is_authorized ? '<button class="button button-primary rank-math-
 echo $authorize . $deauthorize;
 ?>
 <div id="rank-math-pro-cta" class="analytics">
-	<div class="rank-math-cta-box width-100 no-shadow no-padding">
+	<div class="rank-math-cta-box width-100 no-shadow no-padding no-border">
 		<h3><?php echo esc_attr__( 'Benefits of Connecting Google Account', 'rank-math' ); ?></h3>
 		<ul>
 			<li><?php echo esc_attr__( 'Verify site ownership on Google Search Console in a single click', 'rank-math' ); ?></li>

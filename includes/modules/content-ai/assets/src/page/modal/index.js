@@ -7,7 +7,7 @@ import { reverse, isEmpty, isArray, isString, isObject } from 'lodash'
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import {
 	Button,
 	Modal,
@@ -27,6 +27,8 @@ import getOutput from './getOutput'
 import getEndpointHistory from './getEndpointHistory'
 import closeModal from './closeModal'
 import KBArticle from './KBArticle'
+import ErrorMessage from '../components/ErrorMessage'
+import hasError from '../helpers/hasError'
 
 /**
  * Content AI Tools modal.
@@ -109,7 +111,7 @@ export default ( { data, setEndpoint = false, isPage = false, setCredits = false
 			shouldCloseOnClickOutside={ true }
 			onRequestClose={ ( e ) => ( closeModal( e, params, attributes, setEndpoint ) ) }
 		>
-			<div className="columns column-body">
+			<div className={ hasError() ? 'columns column-body blurred' : 'columns column-body' }>
 				<div className="column column-input">
 					<div className="column-inner">
 						{ getFields( params, attributes, endpoint, onChange ) }
@@ -179,10 +181,22 @@ export default ( { data, setEndpoint = false, isPage = false, setCredits = false
 						</>
 					}
 
-					{ ! showHistory && getOutput( resultData, isPage, endpoint ) }
-					{ ! generating && showHistory && getOutput( reverse( endpointHistory ), isPage, endpoint, false ) }
+					{ ! showHistory && getOutput( resultData, isPage, endpoint, true, callApi ) }
+					{ ! generating && showHistory && getOutput( endpoint === 'Frequently_Asked_Questions' ? endpointHistory[ 0 ] : reverse( endpointHistory ), isPage, endpoint, false, callApi ) }
+					{
+						! showHistory && callApi && ! generating &&
+						<div className='notice notice-info'
+							dangerouslySetInnerHTML={ {
+								__html: sprintf(
+									// Translators: Link to Content AI page.
+									__( '%s to access all the Content AI tools', 'rank-math' ), '<a href="' + rankMath.adminurl + '?page=rank-math-content-ai-page#ai-tools" target="_blank">' + __( 'Click here', 'rank-math' ) + '</a>'
+								),
+							} }
+						></div>
+					}
 				</div>
 			</div>
+			{ hasError() && <ErrorMessage width={ 60 } /> }
 		</Modal>
 	)
 }

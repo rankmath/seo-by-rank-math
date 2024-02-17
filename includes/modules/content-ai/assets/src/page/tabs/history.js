@@ -17,12 +17,20 @@ import CopyButton from '../components/CopyButton'
 import deleteOutput from '../helpers/deleteOutput'
 import markdownConverter from '../helpers/markdownConverter'
 
-const getContent = ( value ) => {
+const getContent = ( value, endpoint ) => {
 	if ( ! isObject( value ) ) {
 		return markdownConverter( value )
 	}
 
 	let content = ''
+	if ( 'Frequently_Asked_Questions' === endpoint ) {
+		map( value, ( val ) => {
+			content += '<h4>' + val.question + '</h4><span>' + val.answer + '</span>'
+		} )
+
+		return content
+	}
+
 	map( value, ( val, title ) => {
 		content += '<h4>' + startCase( title ) + '</h4><span>' + val + '</span>'
 	} )
@@ -33,7 +41,6 @@ const getContent = ( value ) => {
 // History Tab Component.
 export default () => {
 	const [ outputs, setOutputs ] = useState( rankMath.contentAIHistory )
-
 	return (
 		<div className="history-container">
 			<div className="tab-header">
@@ -57,14 +64,14 @@ export default () => {
 				{
 					! isEmpty( outputs ) &&
 						map( outputs, ( value, key ) => {
-							const content = getContent( value.output )
+							const content = getContent( value.output, value.key )
 							return (
 								<div className="output-item" key={ key }>
 									<div className="tool-name">{ value.key }</div>
 									<div className="output-actions">
 										<CopyButton value={ content } />
 									</div>
-									<div className="word-count">{ __( 'Words:', 'rank-math' ) } { content.length }</div>
+									<div className="word-count">{ __( 'Words:', 'rank-math' ) } { content.split( ' ' ).length }</div>
 									<div className="content" dangerouslySetInnerHTML={ { __html: content } }></div>
 								</div>
 							)

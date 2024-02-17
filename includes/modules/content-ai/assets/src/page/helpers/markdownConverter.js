@@ -44,13 +44,18 @@ const bulletsToAsterisks = ( text ) => {
  * Converts a piece of text into HTML based on any Markdown present.
  * Also decodes any encoded HTML.
  *
- * @param {string} text The plain text to convert.
+ * @param {string} text         The plain text to convert.
+ * @param {string} makeMarkdown Convert content to markdown format.
  *
  * @return {string} HTML.
  */
-export default ( text ) => {
+export default ( text, makeMarkdown = false ) => {
 	if ( ! isString( text ) ) {
 		return text
+	}
+
+	if ( makeMarkdown ) {
+		return converter.makeMarkdown( text )
 	}
 
 	if ( ! rankMath.isContentAIPage && rankMath.currentEditor !== 'gutenberg' ) {

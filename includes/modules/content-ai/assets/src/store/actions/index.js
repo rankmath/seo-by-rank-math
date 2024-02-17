@@ -30,6 +30,6 @@ export function isAutoCompleterOpen( isOpen ) {
 
 export function updateAIAttributes( key, value ) {
 	const attributes = select( 'rank-math-content-ai' ).getContentAiAttributes()
-	attributes[ key ] = value
+	attributes[ key ] = 'language' === key && ! value ? rankMath.ca_language : value
 	return updateAppUi( 'contentAiAttributes', attributes )
 }

@@ -52,14 +52,15 @@ const getFormattedContent = ( value, endpoint ) => {
 /**
  * Copy Button component.
  *
- * @param {Object}  props              Component props.
- * @param {string}  props.value        Content returned from API.
- * @param {string}  props.index        Index key.
- * @param {string}  props.isPage       Is Content AI Page.
- * @param {string}  props.endpoint     Current endpoint.
- * @param {boolean} props.typingEffect Whether to add text using typing effect.
+ * @param {Object}  props               Component props.
+ * @param {string}  props.value         Content returned from API.
+ * @param {string}  props.index         Index key.
+ * @param {string}  props.isPage        Is Content AI Page.
+ * @param {string}  props.endpoint      Current endpoint.
+ * @param {boolean} props.typingEffect  Whether to add text using typing effect.
+ * @param {boolean} props.isSerpPreview Whether the request is for the SERP Preview.
  */
-export default ( { value, index = 0, isPage = false, endpoint, typingEffect = true } ) => {
+export default ( { value, index = 0, isPage = false, endpoint, typingEffect = true, isSerpPreview = false } ) => {
 	const content = getFormattedContent( value, endpoint )
 	let aiText = value
 	if ( isArray( value ) ) {
@@ -82,7 +83,7 @@ export default ( { value, index = 0, isPage = false, endpoint, typingEffect = tr
 				<CopyButton value={ isString( content ) ? content : aiText } />
 
 				{
-					( isUndefined( rankMath.currentEditor ) || includes( [ 'gutenberg', 'classic', 'elementor' ], rankMath.currentEditor ) ) &&
+					( isUndefined( rankMath.currentEditor ) || includes( [ 'gutenberg', 'classic', 'elementor' ], rankMath.currentEditor ) || isSerpPreview ) &&
 					! isPage &&
 					<Button
 						variant="secondary"

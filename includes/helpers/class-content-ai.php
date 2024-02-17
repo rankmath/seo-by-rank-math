@@ -90,7 +90,7 @@ trait Content_AI {
 
 		$response_code = wp_remote_retrieve_response_code( $data );
 		if ( 200 !== $response_code ) {
-			return 0;
+			return $credits;
 		}
 
 		$data = wp_remote_retrieve_body( $data );
@@ -114,7 +114,7 @@ trait Content_AI {
 	/**
 	 * Function to get Content AI Credits.
 	 *
-	 * @return array Credits data.
+	 * @return int Credits data.
 	 */
 	public static function get_credits() {
 		$credits_data = get_option( self::$credits_key, [] );
@@ -124,11 +124,21 @@ trait Content_AI {
 	/**
 	 * Function to get Content AI Plan.
 	 *
-	 * @return array Credits data.
+	 * @return string Content AI Plan.
 	 */
 	public static function get_content_ai_plan() {
 		$credits_data = get_option( self::$credits_key, [] );
 		return ! empty( $credits_data['plan'] ) ? $credits_data['plan'] : '';
+	}
+
+	/**
+	 * Function to get Content AI Refresh date.
+	 *
+	 * @return int Content AI Refresh date.
+	 */
+	public static function get_content_ai_refresh_date() {
+		$credits_data = get_option( self::$credits_key, [] );
+		return ! empty( $credits_data['refresh_date'] ) ? $credits_data['refresh_date'] : '';
 	}
 
 	/**
@@ -223,10 +233,11 @@ trait Content_AI {
 	/**
 	 * Function to get Default Schema type by post_type.
 	 *
-	 * @param array   $answer   API endpoint.
-	 * @param array   $question API output.
-	 * @param int     $session  Chat session.
-	 * @param boolean $is_new   Whether its a new chat.
+	 * @param array   $answer          API endpoint.
+	 * @param array   $question        API output.
+	 * @param int     $session         Chat session.
+	 * @param boolean $is_new          Whether its a new chat.
+	 * @param boolean $is_regenerating Is regenerating the Chat message.
 	 *
 	 * @return void
 	 */
@@ -377,6 +388,7 @@ trait Content_AI {
 				'Russian'    => Str::starts_with( 'ru_', $locale ),
 				'Chinese'    => Str::starts_with( 'zh_', $locale ),
 				'Korean'     => Str::starts_with( 'ko_', $locale ),
+				'UK English' => 'en_GB' === $locale,
 				'Japanese'   => 'ja' === $locale,
 				'Bulgarian'  => 'bg_BG' === $locale,
 				'Czech'      => 'cs_CZ' === $locale,
@@ -398,7 +410,7 @@ trait Content_AI {
 			]
 		);
 
-		return ! empty( $languages ) ? current( array_keys( $languages ) ) : 'English';
+		return ! empty( $languages ) ? current( array_keys( $languages ) ) : 'US English';
 	}
 
 	/**

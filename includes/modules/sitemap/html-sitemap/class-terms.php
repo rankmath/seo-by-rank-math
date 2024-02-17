@@ -174,8 +174,7 @@ class Terms {
 			$output[] = '<li class="rank-math-html-sitemap__item">'
 							. '<a href="' . esc_url( $this->get_term_link( (int) $term->term_id, $taxonomy ) ) . '" class="rank-math-html-sitemap__link">'
 							. esc_html( $this->get_term_title( $term, $taxonomy ) )
-							. '</a>'
-						. '</li>';
+							. '</a>';
 
 			$children = $this->get_terms( $taxonomy, $term->term_id );
 
@@ -184,6 +183,7 @@ class Terms {
 				$output[] = $this->generate_terms_list_hierarchical( $children, $taxonomy, false );
 				$output[] = '</ul>';
 			}
+			$output[] = '</li>';
 		}
 
 		return implode( '', $output );

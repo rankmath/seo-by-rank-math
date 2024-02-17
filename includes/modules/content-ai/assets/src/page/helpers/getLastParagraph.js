@@ -16,6 +16,7 @@ import { select } from '@wordpress/data'
  */
 import isTinymceActive from '@helpers/isTinymceActive'
 import getSelectedBlock from './getSelectedBlock'
+import markdownConverter from './markdownConverter'
 
 /**
  * Get last paragraph from different editor.
@@ -84,7 +85,7 @@ export default ( length = 0 ) => {
 			} )
 		} )
 
-		return paragraphs.reverse().join( '\n\n' )
+		return markdownConverter( paragraphs.reverse().join( '\n\n' ), true )
 	}
 
 	// Get last paragraph from Classic editor
@@ -95,7 +96,7 @@ export default ( length = 0 ) => {
 				return false
 			}
 
-			const content = includes( [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], block.localName ) ? 'Heading: ' + block.innerText : block.innerText
+			const content = includes( [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], block.localName ) ? '<' + block.localName + '>' + block.innerText + '</' + block.localName + '>' : block.innerHTML
 			if ( content.length <= remainingLength ) {
 				paragraphs.push( content )
 				length = length + content.length
@@ -113,7 +114,7 @@ export default ( length = 0 ) => {
 			}
 		} )
 
-		return paragraphs.reverse().join( '\n\n' )
+		return markdownConverter( paragraphs.reverse().join( '\n\n' ), true )
 	}
 
 	// Get last paragraph from Block editor
@@ -143,7 +144,7 @@ export default ( length = 0 ) => {
 			return
 		}
 
-		const content = block.name === 'core/heading' ? 'Heading: ' + block.attributes.content : block.attributes.content
+		const content = block.name === 'core/heading' ? '<h' + block.attributes.level + '>' + block.attributes.content + '</h' + block.attributes.level + '>' : '<p>' + block.attributes.content + '</p>'
 		if ( content.length <= remainingLength ) {
 			paragraphs.push( content )
 			length = length + content.length
@@ -162,5 +163,5 @@ export default ( length = 0 ) => {
 		}
 	} )
 
-	return paragraphs.reverse().join( '\n\n' )
+	return markdownConverter( paragraphs.reverse().join( '\n\n' ), true )
 }

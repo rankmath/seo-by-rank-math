@@ -63,10 +63,10 @@
 			max-width: 90%;
 			padding: 2rem 1.5rem;
 
+			border: 2px solid $rm_brand;
 			border-radius: 4px;
 			background: #fff;
 			box-shadow: 0 4px 14px 0 rgba(34, 36, 55, .28);
-            border: 2px solid $rm_brand;
 
 			justify-self: center;
 
@@ -77,6 +77,10 @@
 
 			&.no-padding {
 				padding: 0;
+			}
+
+			&.no-border {
+				border: none;
 			}
 
 			&.less-padding {
@@ -97,6 +101,7 @@
 			h3 {
 				font-size: 1.25rem;
 				font-weight: 600;
+				line-height: 1.4;
 
 				margin-top: 0;
 				margin-bottom: 1.5rem;
@@ -232,24 +237,27 @@
 		}
 	}
 
-    p, ul {
-        font-size: 15px;
+	p,
+	ul {
+		font-size: 1rem;
 
-        color: $dark_gray;
-    }
+		color: $dark_gray;
+	}
 
-    p {
-        margin-top: 0;
-    }
+	p {
+		margin-top: 0;
+	}
 
 	ul {
 		margin-bottom: 1.5rem;
 
 		li {
 			font-size: 1rem;
+			line-height: 1.5;
 
 			margin-bottom: 1rem;
 			padding: 0;
+
 			border: 0;
 
 			&:before {

@@ -175,13 +175,13 @@ export default ( { setCredits = false, hasContentAiError = false } ) => {
 					<span className="tab-header-title">
 						<i className="rm-icon rm-icon-bot"></i> RankBot <span>- { __( 'Your Personal Assistant', 'rank-math' ) }</span>
 					</span>
-					
+
 					<a href="https://rankmath.com/kb/how-to-use-rankbot-ai-tool/?play-video=OBxuy8u0eCY&utm_source=Plugin&utm_medium=RankBot+Tab&utm_campaign=WP" rel="noreferrer" target="_blank" title={ __( 'Know more about RankBot', 'rank-math' ) }>
 						<em className="dashicons-before dashicons-editor-help rank-math-tooltip"></em>
 					</a>
 
 					{
-						! isContentAIPage && session &&
+						! isContentAIPage && session !== '' &&
 						<Button
 							className="clear-history is-small button-link-delete"
 							onClick={ () => {

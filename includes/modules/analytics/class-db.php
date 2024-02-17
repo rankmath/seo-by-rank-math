@@ -397,7 +397,7 @@ class DB {
 
 			$data[] = $date;
 			$data[] = $row['query'];
-			$data[] = Stats::get_relative_url( self::remove_hash( $row['page'] ) );
+			$data[] = str_replace( Helper::get_home_url(), '', self::remove_hash( $row['page'] ) );
 			$data[] = $row['clicks'];
 			$data[] = $row['impressions'];
 			$data[] = $row['position'];

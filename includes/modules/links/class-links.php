@@ -184,8 +184,13 @@ class Links {
 	 * @return bool True if processable.
 	 */
 	private function is_processable( $post ) {
-
-		if ( wp_is_post_revision( $post->ID ) ) {
+		/**
+		 * Filter to prevent processing the post.
+		 *
+		 * @param boolean $value Whether to process the post.
+		 * @param WP_POST $post  The Post object.
+		 */
+		if ( wp_is_post_revision( $post->ID ) || ! $this->do_filter( 'links/process_post', true, $post ) ) {
 			return false;
 		}
 

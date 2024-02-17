@@ -14,24 +14,24 @@ export default ( { title, helpLink } ) => {
 	const hasVideo = includes( helpLink, 'play-video' )
 	return (
 		<>
-		<div
-			key="title"
-			className="rank-math-video-tutorial"
-		>
-			<div className="info">
-				<p>
-					<span
-						dangerouslySetInnerHTML={{
-							__html: description,
-						}} />
-				</p>
-				<a className={!hasVideo ? 'button button-primary is-red' : ''} href={helpLink} target="_blank" rel="noreferrer">
-					{hasVideo && <span className="rm-icon-youtube"></span>}
-					{!hasVideo && __('Click Here', 'rank-math')}
-				</a>
+			<div
+				key="title"
+				className="rank-math-video-tutorial"
+			>
+				<div className="info">
+					<p>
+						<span
+							dangerouslySetInnerHTML={ {
+								__html: description,
+							} } />
+					</p>
+					<a className={ ! hasVideo ? 'button button-primary is-red' : '' } href={ helpLink } target="_blank" rel="noreferrer">
+						{ hasVideo && <span className="rm-icon-youtube"></span> }
+						{ ! hasVideo && __( 'Click Here', 'rank-math' ) }
+					</a>
+				</div>
 			</div>
-		</div>
-		<p><em>{__('1 Word Output = 1 Credit', 'rank-math')}</em></p>
+			<p><em>{ __( '1 Word Output = 1 Credit', 'rank-math' ) }</em></p>
 		</>
 	)
 }

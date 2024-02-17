@@ -24,10 +24,6 @@ import hasError from './hasError'
 import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
 
 export default () => {
-	if ( hasError() ) {
-		return
-	}
-
 	// Filter to add Generate with AI button in SERP modal.
 	addFilter(
 		'rank_math_before_serp_devices',
@@ -41,6 +37,7 @@ export default () => {
 			return (
 				<Button
 					className={ className }
+					disabled={ hasError() }
 					onClick={ () => {
 						if ( isNull( document.getElementById( 'rank-math-content-ai-modal-wrapper' ) ) ) {
 							jQuery( 'body' ).append( '<div id="rank-math-content-ai-modal-wrapper"></div>' )
@@ -52,10 +49,10 @@ export default () => {
 						params.topic.default = repo.getSerpTitle()
 						params.post_brief.default = repo.getSerpDescription()
 						params.focus_keyword.default = repo.getKeywords().split( ',' )
-
+						tool.output.default = 1
 						tool.params = params
 						render(
-							<MyModal data={ tool } callApi={ endpoint === 'SEO_Meta' } />,
+							<MyModal data={ tool } callApi={ true } />,
 							document.getElementById( 'rank-math-content-ai-modal-wrapper' )
 						)
 					} }
@@ -75,13 +72,15 @@ export default () => {
 	addFilter( 'rank_math_block_faq_actions', 'rank-math', ( data, props, obj ) => {
 		return (
 			<>
+				{ data }
 				<Button
 					icon="rm-icon rm-icon-content-ai"
 					className="rank-math-faq-content-ai"
 					label={ __( 'Generate Answer with Content AI', 'rank-math' ) }
+					disabled={ hasError() }
 					showTooltip={ true }
 					onClick={ () => {
-						obj.setQuestionProp( 'content', 'Generating...' )
+						obj.setQuestionProp( 'content', __( 'Generating…', 'rank-math' ) )
 						getData( 'AI_Command', { command: props.title, choices: 1 }, ( response ) => {
 							let content = ''
 							setTimeout( () => {

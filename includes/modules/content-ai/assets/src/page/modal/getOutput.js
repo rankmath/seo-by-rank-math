@@ -19,7 +19,7 @@ const ErrorMessage = ( { value } ) => {
 	)
 }
 
-export default ( results, isPage, endpoint, typingEffect = true ) => {
+export default ( results, isPage, endpoint, typingEffect = true, isSerpPreview = false ) => {
 	if ( isEmpty( results ) ) {
 		return
 	}
@@ -37,7 +37,7 @@ export default ( results, isPage, endpoint, typingEffect = true ) => {
 
 		return (
 			<div className="inner-wrapper">
-				<ModalContent value={ content } isPage={ isPage } endpoint={ endpoint } typingEffect={ typingEffect } />
+				<ModalContent value={ content } isPage={ isPage } endpoint={ endpoint } typingEffect={ typingEffect } isSerpPreview={ isSerpPreview } />
 			</div>
 		)
 	}
@@ -52,13 +52,13 @@ export default ( results, isPage, endpoint, typingEffect = true ) => {
 							return <ErrorMessage value={ '<div class="notice notice-error">' + value.warning + '</div>' } />
 						}
 
-						return <ModalContent value={ value } key={ key } index={ key } isPage={ isPage } endpoint={ endpoint } typingEffect={ typingEffect } />
+						return <ModalContent value={ value } key={ key } index={ key } isPage={ isPage } endpoint={ endpoint } typingEffect={ typingEffect } isSerpPreview={ isSerpPreview } />
 					} )
 				}
 
 				{
 					'Frequently_Asked_Questions' === endpoint &&
-					<ModalContent value={ results } isPage={ isPage } endpoint={ endpoint } typingEffect={ typingEffect } />
+					<ModalContent value={ results } isPage={ isPage } endpoint={ endpoint } typingEffect={ typingEffect } isSerpPreview={ isSerpPreview } />
 				}
 			</div>
 		)

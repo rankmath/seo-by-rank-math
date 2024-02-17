@@ -75,6 +75,8 @@ And use `npm run dist` before the final commit, this command will regenerate the
 **CSS Compilatoin**
 `gulp watch`
 
+- When any `scss` file is edited make sure to [run the CSSComb](https://i.rankmath.com/lKelov) extension
+
 ### Issue Formatting:
 - Issue title should start with the Module name, for example `[Analytics Module/Feature]: Issue Text`
 - Make sure to add all details related to the issue in the description area, so everyone can understand it

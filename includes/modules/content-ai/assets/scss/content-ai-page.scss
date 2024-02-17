@@ -86,7 +86,9 @@
 			&:not(:placeholder-shown) {
 				+ .components-search-control__icon button {
 					min-width: 26px;
-					margin-top: 4px;
+					margin-top: 3px;
+					margin-right: 0;
+					margin-bottom: 0;
 					padding: 0;
 
 					border: 0;
@@ -193,7 +195,6 @@
 
 				height: auto;
 				margin-right: .5rem;
-
 				margin-bottom: 1rem;
 				padding: 5px 14px;
 
@@ -217,9 +218,8 @@
 		}
 
 		.search-field {
-			margin-left: 1rem;
-
 			margin-bottom: 1rem;
+			margin-left: 1rem;
 
 			@include component-search-control;
 		}
@@ -227,6 +227,7 @@
 
 	&-error .notice {
 		display: block !important;
+
 		margin: 5px 0 10px;
 	}
 }
@@ -788,9 +789,10 @@ div.form-field {
 						background-color: lighten( $color-ok, 29% );
 
 						a {
+							display: inline-block;
+
 							margin-top: 1rem;
 
-							display: inline-block;
 							text-decoration: none;
 						}
 
@@ -864,6 +866,11 @@ div.form-field {
 				}
 			}
 		}
+
+		.notice {
+			margin: 0 0 1rem;
+			padding: .5rem 1rem;
+		}
 	}
 }
 
@@ -897,6 +904,22 @@ div.form-field {
 				> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
 					max-width: 100%;
 				}
+			}
+		}
+	}
+
+	#rank-math-pro-cta {
+		.rank-math-cta-box {
+			max-width: 88%;
+
+			h3 {
+				font-size: .9rem;
+			}
+
+			p,
+			ul,
+			li {
+				font-size: .85rem;
 			}
 		}
 	}
@@ -1050,7 +1073,9 @@ div.form-field {
 
 	// Write Tab.
 	.rank-math-tab-content {
-		&-write, &-ai-tools, &-chat {
+		&-write,
+		&-ai-tools,
+		&-chat {
 			position: relative;
 		}
 
@@ -1404,7 +1429,7 @@ body.rank-math_page_rank-math-content-ai-page {
 
 	&.blurred + #rank-math-pro-cta {
 		justify-content: flex-start;
-		
+
 		.rank-math-cta-box {
 			margin-left: 19%;
 		}
@@ -2059,9 +2084,10 @@ body.rank-math_page_rank-math-content-ai-page {
 				background: #fff;
 
 				i {
+					font-style: normal;
+
 					height: auto;
 					margin-right: 8px;
-					font-style: normal;
 				}
 
 				&:hover,

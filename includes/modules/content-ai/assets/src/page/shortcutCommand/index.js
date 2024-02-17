@@ -23,10 +23,6 @@ import getWriteAttributes from '../helpers/getWriteAttributes'
  * Keyboard Shortcut command. ( // Command + Enter)
  */
 export default () => {
-	if ( hasError() ) {
-		return
-	}
-
 	const { updateBlockAttributes } = dispatch( blockEditorStore )
 
 	const runCommand = () => {
@@ -138,7 +134,7 @@ export default () => {
 	} )
 
 	document.addEventListener( 'keydown', ( event ) => {
-		if ( event.code !== 'Enter' || event.shiftKey || event.metaKey || 'button' === event.target.localName ) {
+		if ( event.code !== 'Enter' || event.shiftKey || event.metaKey || 'button' === event.target.localName || hasError() ) {
 			return
 		}
 
