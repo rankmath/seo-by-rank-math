@@ -78,6 +78,24 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 	}
 
 	/**
+	 * Task to perform.
+	 *
+	 * @param string $data Posts to process.
+	 */
+	public function wizard( $data ) {
+		$this->task( $data );
+	}
+
+	/**
+	 * Cancel the Bulk edit process.
+	 */
+	public function cancel() {
+		delete_option( 'rank_math_content_ai_posts' );
+		delete_option( 'rank_math_content_ai_posts_processed' );
+		parent::clear_scheduled_event();
+	}
+
+	/**
 	 * Complete.
 	 *
 	 * Override if applicable, but ensure that the below actions are
@@ -98,15 +116,6 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 		);
 
 		parent::complete();
-	}
-
-	/**
-	 * Task to perform.
-	 *
-	 * @param string $data Posts to process.
-	 */
-	public function wizard( $data ) {
-		$this->task( $data );
 	}
 
 	/**

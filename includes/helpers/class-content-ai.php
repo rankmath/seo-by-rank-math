@@ -450,6 +450,7 @@ trait Content_AI {
 			'could_not_generate'     => esc_html__( 'Could not generate. Please try again later.', 'rank-math' ),
 			'invalid_key'            => esc_html__( 'Invalid API key. Please check your API key or reconnect the site and try again.', 'rank-math' ),
 			'not_found'              => esc_html__( 'User wallet not found.', 'rank-math' ),
+			'site_blocked'           => esc_html__( 'Your site is blocked. Please contact support.', 'rank-math' ),
 		];
 	}
 
@@ -490,6 +491,10 @@ trait Content_AI {
 	 * @param int   $response_code API response code.
 	 */
 	public static function is_content_ai_error( $response, $response_code ) {
+		if ( 403 === $response_code ) {
+			return 'site_blocked';
+		}
+
 		$data = wp_remote_retrieve_body( $response );
 		$data = ! empty( $data ) ? json_decode( $data, true ) : [];
 		if ( is_wp_error( $response ) || 200 !== $response_code || empty( $data ) ) {

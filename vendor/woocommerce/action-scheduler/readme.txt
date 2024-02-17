@@ -1,9 +1,11 @@
 === Action Scheduler ===
 Contributors: Automattic, wpmuguru, claudiosanches, peterfabian1000, vedjain, jamosova, obliviousharmony, konamiman, sadowski, royho, barryhughes-1
 Tags: scheduler, cron
-Stable tag: 3.7.0
+Stable tag: 3.7.1
 License: GPLv3
+Requires at least: 6.2
 Tested up to: 6.4
+Requires PHP: 5.6
 
 Action Scheduler - Job Queue for WordPress
 
@@ -45,7 +47,13 @@ Collaboration is cool. We'd love to work with you to improve Action Scheduler. [
 
 == Changelog ==
 
+= 3.7.1 - 2023-12-13 =
+* Release/3.7.0.
+* Tweak - WP 6.4 compatibility.
+* update semver to 5.7.2 because of a security vulnerability in 5.7.1.
+
 = 3.7.0 - 2023-11-20 =
+* Important: starting with this release, Action Scheduler follows an L-2 version policy (WordPress, and consequently PHP).
 * Add extended indexes for hook_status_scheduled_date_gmt and status_sheduled_date_gmt.
 * Catch and log exceptions thrown when actions can't be created, e.g. under a corrupt database schema.
 * Release/3.6.4.

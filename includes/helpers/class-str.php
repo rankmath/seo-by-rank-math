@@ -233,7 +233,7 @@ class Str {
 		$ucwords = '';
 		foreach ( $words as $word ) {
 			if ( ! empty( $word[ 0 ] ) ) {
-				$ucwords .= preg_match( '/[\p{L}]/u', $word[0] ) ? mb_strtoupper( $word[0], 'UTF-8' ) . mb_substr( $word, 1, mb_strlen( $word ), 'UTF-8' ) : $word;
+				$ucwords .= preg_match( '/[\p{L}]/u', $word[0] ) ? mb_strtoupper( $word[0], 'UTF-8' ) . mb_substr( $word, 1, mb_strlen( $word ), 'UTF-8' ) : $word[0];
 			}
 		}
 

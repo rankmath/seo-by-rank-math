@@ -160,6 +160,12 @@ class Admin_Menu implements Runner {
 			.multisite.network-admin #toplevel_page_rank-math {
 				display: block;
 			}
+			#toplevel_page_rank-math a[href$='<?php KB::the( 'offer', 'Offer Menu Item' ); ?>'],
+			#toplevel_page_rank-math a[href$='<?php KB::the( 'offer', 'Offer Menu Item' ); ?>']:hover,
+			#toplevel_page_rank-math a[href$='<?php KB::the( 'offer', 'Offer Menu Item' ); ?>']:focus {
+				background-color: #10AC84;
+				color: #fff;
+			}
 		</style>
 		<?php
 	}
@@ -191,7 +197,7 @@ class Admin_Menu implements Runner {
 			return;
 		}
 
-		$submenu['rank-math'][] = [ current( $offer ) . '&nbsp;<span class="awaiting-mod"><span class="pending-count">1</span></span>', 'level_1', KB::get( 'offer', 'Offer Menu Item' ) ];
+		$submenu['rank-math'][] = [ current( $offer ) . '&nbsp;', 'level_1', KB::get( 'offer', 'Offer Menu Item' ) ];
 	}
 
 	/**
