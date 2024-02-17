@@ -75,3 +75,15 @@ export function toggleIsDiviPageSettingsBarActive( active ) {
 export function toggleIsDiviRankMathModalActive( active ) {
 	return updateAppUi( 'isDiviRankMathModalActive', active )
 }
+
+/**
+ * Update Highlighted long paragraph client ID.
+ *
+ * @param {Array} paragraphs The client Ids of the long highlighted paragraphs.
+ *
+ * @return {Object} An action for redux.
+ */
+export function updateHighlightedParagraphs( paragraphs ) {
+	return updateAppUi( 'highlightedParagraphs', paragraphs )
+}
+

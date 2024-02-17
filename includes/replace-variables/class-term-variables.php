@@ -25,8 +25,9 @@ class Term_Variables extends Basic_Variables {
 	 */
 	public function setup_term_variables() {
 		if ( $this->is_term_edit ) {
-			$tag_id = Param::request( 'tag_ID', 0, FILTER_VALIDATE_INT );
-			$term   = get_term( $tag_id, $GLOBALS['taxnow'], OBJECT );
+			$tag_id     = Param::request( 'tag_ID', 0, FILTER_VALIDATE_INT );
+			$term       = get_term( $tag_id, $GLOBALS['taxnow'], OBJECT );
+			$this->args = $term;
 		}
 
 		$this->register_replacement(

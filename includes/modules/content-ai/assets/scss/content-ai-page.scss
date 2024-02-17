@@ -874,6 +874,31 @@ div.form-field {
 	}
 }
 
+// Content AI Error modal.
+.rank-math-error-modal.rank-math-contentai-modal {
+	background-color: transparent;
+    box-shadow: none;
+	height: auto;
+
+	.components-modal {
+		&__content {
+			margin-top: 0;
+
+			.components-modal__header {
+				border: none;
+			}
+
+			#rank-math-pro-cta {
+				position: static;
+
+				.rank-math-cta-box {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}
+
 // AI tool grid on Content AI Page.
 .rank-math-tab-content-ai-tools {
 	button.rank-math-box {

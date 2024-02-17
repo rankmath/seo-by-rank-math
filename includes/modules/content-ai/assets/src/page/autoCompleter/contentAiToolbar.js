@@ -1,27 +1,62 @@
 /**
  * External dependencies
  */
-import { includes, isEmpty, isNull } from 'lodash'
+import jQuery from 'jquery'
+import { includes, isEmpty, isNull, find, startCase, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { ToolbarDropdownMenu, ToolbarGroup } from '@wordpress/components'
+import { ToolbarDropdownMenu, ToolbarGroup, Popover, Button, Modal } from '@wordpress/components'
+import { Fragment, render } from '@wordpress/element'
 import { select, dispatch, useSelect } from '@wordpress/data'
 import { createBlock } from '@wordpress/blocks'
 import { BlockControls } from '@wordpress/block-editor'
+import ErrorMessage from '../components/ErrorMessage'
 
 /**
  * Internal dependencies
  */
 import getLastParagraph from '../helpers/getLastParagraph'
 import insertCommandBox from '../shortcutCommand/insertCommandBox'
+import hasError from '../helpers/hasError'
+import getTools from '../helpers/getTools'
 
 const generatingText = __( 'Generating…', 'rank-math' )
 
 // Function to run when Toolbar option is clicked.
-const onClick = ( endpoint, data, selectedBlock ) => {
+const onClick = ( endpoint, data, selectedBlock, replaceBlock = false ) => {
+	if ( hasError() ) {
+		let tool = find( getTools(), [ 'endpoint', endpoint ] )
+		if ( isUndefined( tool ) ) {
+			tool = find( getTools(), [ 'endpoint', 'Blog_Post_Idea' ] )
+			tool.title = startCase( endpoint )
+		}
+
+		if ( isNull( document.getElementById( 'rank-math-content-ai-modal-wrapper' ) ) ) {
+			jQuery( '#wpwrap' ).append( '<div id="rank-math-content-ai-modal-wrapper"></div>' )
+		}
+
+		setTimeout( () => {
+			render(
+				<Modal
+					className="rank-math-contentai-modal rank-math-modal rank-math-error-modal"
+					onRequestClose={ () => {
+						jQuery( '.components-modal__screen-overlay' ).remove()
+						document.getElementById( 'rank-math-content-ai-modal-wrapper' ).remove()
+					} }
+					shouldCloseOnClickOutside={ true }
+				>
+					<ErrorMessage width={ 100 } />
+				</Modal>,
+				document.getElementById( 'rank-math-content-ai-modal-wrapper' )
+			)
+		}, 100 )
+
+		return
+	}
+
 	const newBlock = createBlock( 'rank-math/command', {
 		content: generatingText,
 		className: 'rank-math-content-ai-command',
@@ -34,7 +69,40 @@ const onClick = ( endpoint, data, selectedBlock ) => {
 	).indexOf( true )
 	dispatch( 'core/block-editor' ).insertBlocks( newBlock, position + 1 )
 
-	insertCommandBox( endpoint, data, newBlock.clientId )
+	insertCommandBox( endpoint, data, newBlock.clientId, selectedBlock.clientId, replaceBlock )
+}
+
+const HighlightPopover = () => {
+	const highlightedParagraphs = select( 'rank-math' ).getHighlightedParagraphs()
+	if ( isEmpty( highlightedParagraphs ) ) {
+		return
+	}
+
+	const selectedBlock = select( 'core/block-editor' ).getSelectedBlock()
+	if ( isEmpty( selectedBlock ) || ! includes( highlightedParagraphs, selectedBlock.clientId ) ) {
+		jQuery( '.block-editor-block-popover' ).show()
+		return
+	}
+
+	jQuery( '.block-editor-block-popover' ).hide()
+
+	return (
+		<Popover
+			placement="top-start"
+			focusOnMount="firstElement"
+			key="rank-math-popover"
+			expandOnMobile={ true }
+			noArrow={ false }
+			anchor={ document.getElementById( 'block-' + selectedBlock.clientId ) }
+		>
+			<Button
+				variant="primary"
+				onClick={ () => ( onClick( 'Text_Summarizer', { text: selectedBlock.attributes.content, language: rankMath.ca_language, format: 'paragraph', choices: 1 }, selectedBlock, true ) ) }
+			>
+				{ __( 'Shorten with AI', 'rank-math' ) }
+			</Button>
+		</Popover>
+	)
 }
 
 /**
@@ -90,14 +158,17 @@ export default ( { value } ) => {
 
 	const text = ! isEmpty( value.text ) ? value.text.split( ' ' ).splice( 0, 149 ).join( ' ' ) : ''
 	return (
-		<BlockControls>
-			<ToolbarGroup>
-				<ToolbarDropdownMenu
-					icon="rm-icon rm-icon-content-ai"
-					label={ __( 'Content AI Commands', 'rank-math' ) }
-					controls={ controls }
-				/>
-			</ToolbarGroup>
-		</BlockControls>
+		<Fragment>
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarDropdownMenu
+						icon="rm-icon rm-icon-content-ai"
+						label={ __( 'Content AI Commands', 'rank-math' ) }
+						controls={ controls }
+					/>
+				</ToolbarGroup>
+			</BlockControls>
+			<HighlightPopover />
+		</Fragment>
 	)
 }

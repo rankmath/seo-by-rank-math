@@ -44,7 +44,7 @@ export default ( { width = 40 } ) => {
 					<h3>{ __( '🚀 Supercharge Your Content With AI', 'rank-math' ) }</h3>
 					<p>
 						{ ! isRegistered && __( 'Start using Content AI by connecting your RankMath.com Account', 'rank-math' ) }
-						{ isRegistered && ! hasContentAIPlan && __( 'Get started with Content AI by purchasing a subscription plan.', 'rank-math' ) }
+						{ isRegistered && ! hasContentAIPlan && __( 'To access this Content AI feature, you need to have an active subscription plan.', 'rank-math' ) }
 					</p>
 					{ getMessageList( width ) }
 					{

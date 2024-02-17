@@ -203,6 +203,12 @@
 	}
 }
 
+.#{$namespace}-highlight-button {
+	padding: 0;
+	height: auto;
+	box-shadow: none;
+}
+
 /* Ripple Out */
 @-webkit-keyframes hvr-ripple-out {
 	100% {

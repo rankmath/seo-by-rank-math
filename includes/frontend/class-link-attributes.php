@@ -218,7 +218,7 @@ class Link_Attributes {
 			return $attrs;
 		}
 
-		if ( $this->should_add_nofollow( $attrs['href'] ) ) {
+		if ( $this->do_filter( 'nofollow/url', $this->should_add_nofollow( $attrs['href'] ), $attrs['href'] ) ) {
 			if ( $this->nofollow_link || ( $this->nofollow_image && $this->is_valid_image( $attrs['href'] ) ) ) {
 				$this->is_dirty = true;
 				$this->set_rel_attribute( $attrs, 'nofollow', ( isset( $attrs['rel'] ) && ! Str::contains( 'dofollow', $attrs['rel'] ) && ! Str::contains( 'nofollow', $attrs['rel'] ) ) );

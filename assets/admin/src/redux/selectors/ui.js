@@ -74,3 +74,14 @@ export function isDiviPageSettingsBarActive( state ) {
 export function isDiviRankMathModalActive( state ) {
 	return state.appUi.isDiviRankMathModalActive
 }
+
+/**
+ * Get Highlighted long paragraph client IDs.
+ *
+ * @param {Object} state The app state.
+ *
+ * @return {Array} Logn paragraph client IDs.
+ */
+export function getHighlightedParagraphs( state ) {
+	return state.appUi.highlightedParagraphs
+}

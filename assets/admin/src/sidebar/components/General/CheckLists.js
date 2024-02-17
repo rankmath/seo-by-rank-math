@@ -2,24 +2,68 @@
  * External dependencies
  */
 import classnames from 'classnames'
-import { isUndefined, has } from 'lodash'
+import { has, includes, isUndefined, isEmpty } from 'lodash'
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { withSelect } from '@wordpress/data'
-import { PanelBody } from '@wordpress/components'
+import { compose } from '@wordpress/compose'
+import { withSelect, withDispatch } from '@wordpress/data'
+import { PanelBody, Button } from '@wordpress/components'
 import { Fragment, Component } from '@wordpress/element'
 
 /**
  * Internal dependencies
  */
+import highlightParagraph from './highlightParagraph'
 import getPartialClass from '@helpers/getPartialClass'
 import getLink from '@helpers/getLink'
 
 class CheckLists extends Component {
-	shouldComponentUpdate( nextProps ) {
+	constructor() {
+		super()
+		this.state = { highlightText: true }
+	}
+
+	// Register annotator in Classic editor to highlight long paragraphs.
+	componentDidMount() {
+		if ( 'classic' !== rankMath.currentEditor ) {
+			return false
+		}
+
+		const editor = window.tinymce.get( window.wpActiveEditor )
+		if ( ! editor ) {
+			return false
+		}
+
+		editor.annotator.register( 'rank-math-annotations', {
+			persistent: false,
+			decorate: () => ( { classes: [ 'rank-math-annotations' ] } ),
+		} )
+
+		editor.dom.addStyle( `
+		.rank-math-annotations.mce-annotation {
+			background-color: mark !important;
+			position: relative;
+		}
+		.rank-math-annotations.mce-annotation .rank-math-content-ai-tooltip {
+			display: none;
+			background-color: #2271b1;
+			border-color: #2271b1;
+			color: #fff;
+			cursor: pointer;
+			position: absolute;
+			top: -30px;
+			left: 0px;
+		}
+		.rank-math-annotations.mce-annotation[data-mce-selected="inline-boundary"] .rank-math-content-ai-tooltip {
+			display: inline-block;
+		}
+		` )
+	}
+
+	shouldComponentUpdate( nextProps, nextState ) {
 		if ( nextProps.isLoaded !== this.props.isLoaded ) {
 			return true
 		}
@@ -31,6 +75,10 @@ class CheckLists extends Component {
 		}
 
 		if ( nextProps.isRefreshing !== this.props.isRefreshing ) {
+			return true
+		}
+
+		if ( nextState.highlightText !== this.state.highlightText ) {
 			return true
 		}
 
@@ -112,8 +160,20 @@ class CheckLists extends Component {
 			if ( false === result.hasScore() ) {
 				this.errors += 1
 			}
-
 			const link = this.getLink( id )
+
+			if (
+				'contentHasShortParagraphs' === id &&
+				includes( [ 'classic', 'gutenberg' ], rankMath.currentEditor ) &&
+				! this.state.highlightText
+			) {
+				highlightParagraph(
+					true,
+					this.props.highlightedParagraphs,
+					this.props.updateHighlightedParagraphs,
+				)
+			}
+
 			return (
 				<li key={ id } className={ classes }>
 					<span
@@ -128,6 +188,28 @@ class CheckLists extends Component {
 							className="dashicons-before dashicons-editor-help rank-math-help-icon"
 						>
 						</a>
+					}
+					{
+						! result.hasScore() &&
+						'contentHasShortParagraphs' === id &&
+						! isEmpty( result.text ) &&
+						includes( [ 'classic', 'gutenberg' ], rankMath.currentEditor ) &&
+						<Button
+							className="rank-math-highlight-button"
+							onClick={ () => {
+								highlightParagraph(
+									this.state.highlightText,
+									this.props.highlightedParagraphs,
+									this.props.updateHighlightedParagraphs,
+								)
+								this.setState( {
+									highlightText: ! this.state.highlightText,
+								} )
+							} }
+						>
+							{ this.state.highlightText && <i className="dashicons dashicons-visibility"></i> }
+							{ ! this.state.highlightText && <i className="dashicons dashicons-hidden"></i> }
+						</Button>
 					}
 				</li>
 			)
@@ -241,11 +323,21 @@ class CheckLists extends Component {
 	}
 }
 
-export default withSelect( ( select ) => {
-	const repo = select( 'rank-math' )
-	return {
-		isLoaded: repo.isLoaded(),
-		isRefreshing: repo.isRefreshing(),
-		selectedKeyword: repo.getSelectedKeyword(),
-	}
-} )( CheckLists )
+export default compose(
+	withSelect( ( select ) => {
+		const repo = select( 'rank-math' )
+		return {
+			isLoaded: repo.isLoaded(),
+			isRefreshing: repo.isRefreshing(),
+			selectedKeyword: repo.getSelectedKeyword(),
+			highlightedParagraphs: repo.getHighlightedParagraphs(),
+		}
+	} ),
+	withDispatch( ( dispatch ) => {
+		return {
+			updateHighlightedParagraphs( paragraphs ) {
+				dispatch( 'rank-math' ).updateHighlightedParagraphs( paragraphs )
+			},
+		}
+	} )
+)( CheckLists )

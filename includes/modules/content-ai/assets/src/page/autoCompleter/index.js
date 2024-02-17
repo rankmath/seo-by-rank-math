@@ -71,6 +71,13 @@ const getContentAICompleters = ( prefix ) => {
  * Register Content AI Autocompleters to show AI tools on // & // .
  */
 export default () => {
+	registerFormatType( 'rank-math/content-ai', {
+		title: __( 'Content AI', 'rank-math' ),
+		tagName: 'p',
+		className: null,
+		edit: ContentAiToolbar,
+	} )
+
 	if ( hasError() ) {
 		return
 	}
@@ -94,11 +101,4 @@ export default () => {
 				: completers
 		}
 	)
-
-	registerFormatType( 'rank-math/content-ai', {
-		title: __( 'Content AI', 'rank-math' ),
-		tagName: 'p',
-		className: null,
-		edit: ContentAiToolbar,
-	} )
 }

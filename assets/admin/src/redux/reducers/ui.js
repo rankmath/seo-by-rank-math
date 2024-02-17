@@ -27,6 +27,7 @@ const DEFAULT_STATE = {
 	refreshResults: '',
 	redirectionItem: {},
 	socialTab: 'facebook',
+	highlightedParagraphs: [],
 
 	// Schema.
 	editorTab: '',

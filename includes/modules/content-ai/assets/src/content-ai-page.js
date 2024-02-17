@@ -22,6 +22,7 @@ import Chat from './page/tabs/chat'
 import shortcutCommand from './page/shortcutCommand'
 import App from './page/App'
 import Helpers from './page/helpers'
+import tinyMceAnnotators from './page/components/tinyMceAnnotators'
 import WriteShortcut from './page/tabs/WriteShortcut'
 import hasError from './page/helpers/hasError'
 import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
@@ -30,6 +31,7 @@ import { getStore } from './store'
 getStore()
 Helpers()
 shortcutCommand()
+tinyMceAnnotators()
 
 addAction( 'rank_math_loaded', 'rank-math', () => {
 	addFilter( 'rank_math_content_ai_tabs', 'rank-math', ( tabs ) => {
@@ -88,7 +90,7 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 } )
 
 // Filter to change the paragraph placeholder text.
-addFilter( 'blocks.registerBlockType', 'rank-math', function( settings, name ) {
+addFilter( 'blocks.registerBlockType', 'rank-math', ( settings, name ) => {
 	if ( 'core/paragraph' !== name ) {
 		return settings
 	}

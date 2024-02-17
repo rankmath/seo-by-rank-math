@@ -74,6 +74,12 @@ const useBlock = () => {
 		createBlock( parsedBlock.name, parsedBlock.attributes, parsedBlock.innerBlocks )
 	)
 
+	if ( selectedBlock.attributes.replaceBlock ) {
+		dispatch( 'core/block-editor' ).replaceBlock( selectedBlock.attributes.selectedId, newBlock )
+		removeBlock( selectedBlock.clientId )
+		return
+	}
+
 	dispatch( 'core/block-editor' ).replaceBlock( selectedBlock.clientId, newBlock )
 }
 
@@ -173,11 +179,13 @@ commandActions()
 /**
  * Function to insert the API output in the content.
  *
- * @param {string} endpoint Selected Text.
- * @param {Object} params   Selected Text.
- * @param {string} clientId Block ID.
+ * @param {string}  endpoint     Selected Text.
+ * @param {Object}  params       Selected Text.
+ * @param {string}  clientId     Block ID.
+ * @param {string}  selectedId   Selected Block ID.
+ * @param {boolean} replaceBlock Whether to replace the existing block.
  */
-export default ( endpoint, params, clientId = null ) => {
+export default ( endpoint, params, clientId = null, selectedId, replaceBlock = false ) => {
 	if ( isNull( clientId ) ) {
 		runCommand( endpoint, params, clientId )
 		return
@@ -190,6 +198,8 @@ export default ( endpoint, params, clientId = null ) => {
 			className: 'typing rank-math-content-ai-command',
 			endpoint,
 			params,
+			replaceBlock,
+			selectedId,
 		}
 	)
 
