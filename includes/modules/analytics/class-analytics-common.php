@@ -16,8 +16,8 @@ use RankMath\Google\Console;
 use RankMath\Google\Authentication;
 use RankMath\Analytics\Workflow\Jobs;
 use RankMath\Analytics\Workflow\Workflow;
-use MyThemeShop\Helpers\Conditional;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Conditional;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 

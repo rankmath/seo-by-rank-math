@@ -11,7 +11,7 @@
 namespace RankMath\Analytics;
 
 use Exception;
-use MyThemeShop\Helpers\DB as DB_Helper;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 

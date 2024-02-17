@@ -15,9 +15,9 @@ use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 

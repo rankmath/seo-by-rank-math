@@ -11,7 +11,7 @@
 namespace RankMath\Analytics\Workflow;
 
 use Exception;
-use MyThemeShop\Helpers\DB;
+use RankMath\Helpers\DB;
 use RankMath\Google\Console as GoogleConsole;
 use function as_unschedule_all_actions;
 

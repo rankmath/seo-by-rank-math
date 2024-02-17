@@ -6,7 +6,7 @@
  * @subpackage RankMath\Admin
  */
 
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 

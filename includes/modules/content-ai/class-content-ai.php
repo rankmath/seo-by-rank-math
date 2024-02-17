@@ -17,9 +17,9 @@ use RankMath\Helpers\Sitepress;
 use RankMath\CMB2;
 use RankMath\Traits\Hooker;
 use RankMath\Traits\Ajax;
-use MyThemeShop\Helpers\Url;
-use MyThemeShop\Helpers\Arr;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\Url;
+use RankMath\Helpers\Arr;
+use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 

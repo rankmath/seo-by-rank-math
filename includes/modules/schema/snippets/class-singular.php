@@ -13,7 +13,7 @@ namespace RankMath\Schema;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Schema\DB;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 

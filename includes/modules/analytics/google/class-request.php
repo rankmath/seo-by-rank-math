@@ -11,7 +11,7 @@
 namespace RankMath\Google;
 
 use RankMath\Helpers\Security;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 

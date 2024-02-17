@@ -12,7 +12,7 @@ namespace RankMath\Redirections;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 use RankMath\Monitor\DB as Monitor_DB;
 
 defined( 'ABSPATH' ) || exit;

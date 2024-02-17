@@ -23,10 +23,10 @@ class Storage {
 	/**
 	 * Get query builder.
 	 *
-	 * @return \MyThemeShop\Database\Query_Builder
+	 * @return \RankMath\Admin\Database\Query_Builder
 	 */
 	private function table() {
-		return \MyThemeShop\Helpers\DB::query_builder( 'rank_math_internal_links' );
+		return \RankMath\Helpers\DB::query_builder( 'rank_math_internal_links' );
 	}
 
 	/**

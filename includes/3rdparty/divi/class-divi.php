@@ -18,7 +18,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Helpers\Editor;
 use RankMath\Admin\Metabox\Screen;
 use WP_Dependencies;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 

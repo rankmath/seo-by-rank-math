@@ -14,7 +14,7 @@
 namespace RankMath;
 
 use WP_Post;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 

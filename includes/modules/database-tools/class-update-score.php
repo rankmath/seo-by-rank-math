@@ -15,8 +15,8 @@ use RankMath\Traits\Hooker;
 use RankMath\Paper\Paper;
 use RankMath\Admin\Metabox\Screen;
 use RankMath\Schema\DB;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 

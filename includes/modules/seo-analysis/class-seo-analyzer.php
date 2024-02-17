@@ -13,7 +13,7 @@ namespace RankMath\SEO_Analysis;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Security;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;

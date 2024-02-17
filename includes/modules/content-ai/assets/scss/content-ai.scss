@@ -330,14 +330,18 @@ div.rank-math-content-ai-wrapper {
 	}
 }
 
-.rank-math-sidebar-content-ai-panel,
-.rank-math-sidebar-panel {
+.rank-math-sidebar-content-ai-panel {
 	&.components-panel {
 		position: static;
 
 		.rank-math-content-ai-wrapper {
 			.rank-math-ca-top-section button {
 				display: none;
+			}
+
+			.rank-math-tabs {
+				position: relative;
+				z-index: 0;
 			}
 		}
 

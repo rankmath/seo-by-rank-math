@@ -8,7 +8,7 @@
  * @author     Rank Math <support@rankmath.com>
  */
 
-use MyThemeShop\Helpers\DB;
+use RankMath\Helpers\DB;
 
 defined( 'ABSPATH' ) || exit;
 

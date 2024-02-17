@@ -14,8 +14,8 @@ use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\WordPress;
 use RankMath\Admin\Importers\Detector;
 
 defined( 'ABSPATH' ) || exit;

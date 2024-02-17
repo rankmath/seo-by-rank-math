@@ -8,7 +8,7 @@
 use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Analytics\DB;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 use RankMath\Google\Authentication;
 
 defined( 'ABSPATH' ) || exit;

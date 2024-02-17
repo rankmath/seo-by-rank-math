@@ -13,8 +13,8 @@ namespace RankMath\Schema;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Traits\Shortcode;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

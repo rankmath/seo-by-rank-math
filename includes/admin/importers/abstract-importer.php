@@ -16,9 +16,9 @@ use RankMath\Traits\Ajax;
 use RankMath\Traits\Meta;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\DB;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Attachment;
+use RankMath\Helpers\DB;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\Attachment;
 
 defined( 'ABSPATH' ) || exit;
 

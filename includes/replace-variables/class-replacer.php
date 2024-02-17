@@ -14,8 +14,8 @@
 namespace RankMath\Replace_Variables;
 
 use RankMath\Paper\Paper;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 

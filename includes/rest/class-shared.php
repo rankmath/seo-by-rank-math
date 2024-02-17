@@ -12,7 +12,7 @@
 
 namespace RankMath\Rest;
 
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 use RankMath\Helper;
 use RankMath\Redirections\Metabox;
 use RankMath\Rest\Rest_Helper;

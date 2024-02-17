@@ -11,7 +11,7 @@
 namespace RankMath\SEO_Analysis;
 
 use RankMath\Module\Base;
-use MyThemeShop\Admin\Page;
+use RankMath\Admin\Page;
 use RankMath\KB;
 
 defined( 'ABSPATH' ) || exit;

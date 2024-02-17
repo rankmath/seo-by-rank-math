@@ -8,7 +8,7 @@
  * @author     Rank Math <support@rankmath.com>
  */
 
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 

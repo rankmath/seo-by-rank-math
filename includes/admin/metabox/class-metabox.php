@@ -15,10 +15,10 @@ use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Conditional;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Conditional;
+use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -390,7 +390,7 @@ class Metabox implements Runner {
 	 */
 	private function dont_load() {
 		return Conditional::is_heartbeat() || Conditional::is_ajax() ||
-			( class_exists( 'Vc_Manager' ) && \MyThemeShop\Helpers\Param::get( 'vc_action' ) ) ||
+			( class_exists( 'Vc_Manager' ) && \RankMath\Helpers\Param::get( 'vc_action' ) ) ||
 			is_network_admin();
 	}
 }

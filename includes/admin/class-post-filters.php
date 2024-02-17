@@ -15,7 +15,7 @@ use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Security;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

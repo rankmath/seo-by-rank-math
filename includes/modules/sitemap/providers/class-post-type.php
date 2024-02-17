@@ -257,7 +257,7 @@ class Post_Type implements Provider {
 			( pm.meta_key = 'rank_math_robots' AND pm.meta_value NOT LIKE '%noindex%' ) OR
 			pm.post_id IS NULL
 		)
-		AND p.post_type = ( '" . join( "', '", esc_sql( $post_types ) ) . "' ) AND p.post_status = 'publish'";
+		AND p.post_type = ( '" . join( "', '", esc_sql( $post_types ) ) . "' ) AND p.post_status = 'publish' AND p.post_password = ''";
 
 		return (int) $wpdb->get_var( $sql ); // phpcs:ignore
 	}
@@ -412,7 +412,7 @@ class Post_Type implements Provider {
 		/**
 		 * Filter the post object before it gets added to the sitemap.
 		 * This allows you to add custom properties to the post object, or replace it entirely.
-		 * 
+		 *
 		 * @param object $post Post object.
 		 */
 		$post = $this->do_filter( 'sitemap/post_object', $post );

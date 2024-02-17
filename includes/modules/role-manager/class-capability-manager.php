@@ -11,7 +11,7 @@
 namespace RankMath\Role_Manager;
 
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 

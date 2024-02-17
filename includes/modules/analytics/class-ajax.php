@@ -12,8 +12,8 @@ namespace RankMath\Analytics;
 
 use RankMath\Helper;
 use RankMath\Google\Api;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
 use RankMath\Google\Analytics;
 use RankMath\Google\Authentication;
 use RankMath\Sitemap\Sitemap;

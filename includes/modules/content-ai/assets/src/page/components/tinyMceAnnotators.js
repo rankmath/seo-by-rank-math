@@ -2,7 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { isEmpty, forEach } from 'lodash'
+import { isEmpty, isUndefined, forEach } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -10,6 +10,9 @@ import { isEmpty, forEach } from 'lodash'
 import { __ } from '@wordpress/i18n'
 import { addAction } from '@wordpress/hooks'
 
+/**
+ * Internal dependencies
+ */
 import getData from '../helpers/getData'
 
 const onClick = ( e ) => {
@@ -32,6 +35,10 @@ export default () => {
 
 	const buttons = []
 	addAction( 'rank_math_content_refresh', 'rank-math', () => {
+		if ( isUndefined( window.tinymce ) ) {
+			return
+		}
+
 		setTimeout( () => {
 			const editor = window.tinymce.get( window.wpActiveEditor )
 			const annotations = editor.annotator.getAll( 'rank-math-annotations' )

@@ -12,7 +12,7 @@ namespace RankMath\OpenGraph;
 
 use RankMath\Helper;
 use RankMath\Paper\Paper;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 

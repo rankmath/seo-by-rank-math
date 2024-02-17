@@ -12,7 +12,7 @@
 
 namespace RankMath;
 
-use MyThemeShop\Helpers\Arr;
+use RankMath\Helpers\Arr;
 
 defined( 'ABSPATH' ) || exit;
 

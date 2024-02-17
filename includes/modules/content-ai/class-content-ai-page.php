@@ -16,9 +16,9 @@ use RankMath\Helper;
 use RankMath\Paper\Paper;
 use RankMath\Module\Base;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Admin\Page;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Str;
+use RankMath\Admin\Page;
+use RankMath\Helpers\Param;
 use WP_Block_Editor_Context;
 
 defined( 'ABSPATH' ) || exit;
@@ -139,6 +139,7 @@ class Content_AI_Page {
 						'rank-math-content-ai-page' => $uri . '/assets/css/content-ai-page.css',
 					],
 					'scripts' => [
+						'lodash'                    => '',
 						'wp-components'             => '',
 						'wp-block-library'          => '',
 						'wp-format-library'         => '',

@@ -11,7 +11,7 @@ use RankMath\Helper;
 use RankMath\Google\Authentication;
 use RankMath\Google\Permissions;
 use RankMath\Analytics\Url_Inspection;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 use RankMath\Google\Analytics;
 use RankMath\Google\Console;
 

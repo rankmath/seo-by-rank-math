@@ -11,8 +11,8 @@
 namespace RankMath\WooCommerce;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Attachment;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Attachment;
 
 defined( 'ABSPATH' ) || exit;
 

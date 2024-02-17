@@ -16,7 +16,7 @@ namespace RankMath\Links;
 use WP_Post;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Database\Database;
+use RankMath\Admin\Database\Database;
 use RankMath\Admin\Post_Columns;
 
 defined( 'ABSPATH' ) || exit;

@@ -14,8 +14,8 @@ use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Sitemap\Router;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Url;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Url;
 use RankMath\Helpers\Security;
 
 defined( 'ABSPATH' ) || exit;

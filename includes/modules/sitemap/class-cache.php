@@ -14,8 +14,8 @@
 namespace RankMath\Sitemap;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\WordPress;
-use MyThemeShop\Database\Database;
+use RankMath\Helpers\WordPress;
+use RankMath\Admin\Database\Database;
 
 defined( 'ABSPATH' ) || exit;
 

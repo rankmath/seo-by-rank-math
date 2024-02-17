@@ -35,7 +35,7 @@ class Frontend {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		if ( \MyThemeShop\Helpers\Param::get( 'et_fb' ) ) {
+		if ( \RankMath\Helpers\Param::get( 'et_fb' ) ) {
 			return;
 		}
 

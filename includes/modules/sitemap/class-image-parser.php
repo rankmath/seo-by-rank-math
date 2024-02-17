@@ -17,9 +17,9 @@ use WP_Query;
 use DOMDocument;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Url;
-use MyThemeShop\Helpers\Arr;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Url;
+use RankMath\Helpers\Arr;
 
 defined( 'ABSPATH' ) || exit;
 

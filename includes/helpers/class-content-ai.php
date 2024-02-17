@@ -11,7 +11,7 @@
 namespace RankMath\Helpers;
 
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -65,15 +65,19 @@ trait Content_AI {
 			return 0;
 		}
 
-		$credits = self::get_credits();
-		if ( $credits && ! $force_update ) {
+		$transient = 'rank_math_content_ai_requested';
+		$credits   = self::get_credits();
+		if ( ! $force_update || get_site_transient( $transient ) ) {
 			return $credits;
 		}
 
+		set_site_transient( $transient, true, 60 ); // Set transient for 1 minute.
+
 		$args = [
-			'username' => rawurlencode( $registered['username'] ),
-			'api_key'  => rawurlencode( $registered['api_key'] ),
-			'site_url' => rawurlencode( self::get_home_url() ),
+			'username'       => rawurlencode( $registered['username'] ),
+			'api_key'        => rawurlencode( $registered['api_key'] ),
+			'site_url'       => rawurlencode( self::get_home_url() ),
+			'plugin_version' => rawurlencode( rank_math()->version ),
 		];
 
 		$url = add_query_arg(

@@ -245,8 +245,7 @@ class System_Status {
 	 */
 	public function get_table_size( $table ) {
 		global $wpdb;
-		$size = (int) $wpdb->get_var( 'SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema="' . $wpdb->dbname . '" AND (table_name="' . $wpdb->prefix . $table . '")' ); // phpcs:ignore
-
+		$size = (int) $wpdb->get_var( "SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema='" . $wpdb->dbname . "' AND (table_name='" . $wpdb->prefix . $table . "')" ); // phpcs:ignore
 		return size_format( $size );
 	}
 }

@@ -13,7 +13,7 @@ use RankMath\Helper;
 use RankMath\Google\Console;
 use RankMath\Google\Authentication;
 
-use MyThemeShop\Helpers\DB;
+use RankMath\Helpers\DB;
 
 defined( 'ABSPATH' ) || exit;
 

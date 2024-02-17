@@ -11,7 +11,7 @@
 namespace RankMath\Schema;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;

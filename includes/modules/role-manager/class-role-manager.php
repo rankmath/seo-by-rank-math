@@ -12,10 +12,10 @@ namespace RankMath\Role_Manager;
 
 use RankMath\Helper;
 use RankMath\Module\Base;
-use MyThemeShop\Admin\Page;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Admin\Page;
+use RankMath\Helpers\WordPress;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

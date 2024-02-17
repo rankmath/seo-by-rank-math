@@ -12,7 +12,7 @@ namespace RankMath\Sitemap\Html;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Database\Database;
+use RankMath\Admin\Database\Database;
 use RankMath\Sitemap\Sitemap as SitemapBase;
 
 defined( 'ABSPATH' ) || exit;
@@ -33,6 +33,7 @@ class Posts {
 	 * @return array
 	 */
 	private function get_posts( $post_type, $post_parent = 0 ) {
+		global $wpdb;
 		$sort_map = [
 			'published' => [
 				'field' => 'post_date',
@@ -76,28 +77,22 @@ class Posts {
 		 * @var string $post_type Post type name.
 		 */
 		$statuses = $this->do_filter( 'sitemap/html_sitemap_post_statuses', $statuses, $post_type );
-
-		$exclude = wp_parse_id_list( Helper::get_settings( 'sitemap.exclude_posts' ) );
-		$table   = Database::table( 'posts' );
-
-		$query = $table
-			->select( [ 'ID', 'post_title', 'post_name', 'post_date', 'post_parent', 'post_type' ] )
-			->where( 'post_type', $post_type )
-			->where( 'post_parent', $post_parent )
-			->whereIn( 'post_status', $statuses );
-
-		if ( ! empty( $exclude ) ) {
-			$query->whereNotIn( 'ID', $exclude );
-		}
-
-		$posts = $query->orderBy( $sort['field'], $sort['order'] )->get();
-
-		return array_filter(
-			$posts,
-			function( $post ) {
-				return SitemapBase::is_object_indexable( $post->ID );
-			}
-		);
+		$get_child = ( 0 !== $post_parent ) ? ' WHERE post_parent = ' . $post_parent : '';
+		$sql       = "
+			SELECT l.ID, post_title, post_name, post_parent, post_date, post_type
+			FROM (
+				SELECT DISTINCT p.ID, p.post_modified FROM {$wpdb->posts} as p
+				LEFT JOIN {$wpdb->postmeta} AS pm ON ( p.ID = pm.post_id AND pm.meta_key = 'rank_math_robots' )
+				WHERE (
+					( pm.meta_key = 'rank_math_robots' AND pm.meta_value NOT LIKE '%noindex%' ) OR
+					pm.post_id IS NULL
+				)
+				AND p.post_type IN ( '" . $post_type . "' ) AND p.post_status IN ( '" . join( "', '", esc_sql( $statuses ) ) . "' ) 
+				ORDER BY p.post_modified DESC 
+			)
+			o JOIN {$wpdb->posts} l ON l.ID = o.ID " . $get_child . " ORDER BY " . $sort['field'] . " " . $sort['order']; // phpcs:ignore
+		$posts = $wpdb->get_results( $wpdb->prepare( $sql ) ); // phpcs:ignore
+		return $posts;
 	}
 
 	/**
@@ -185,22 +180,25 @@ class Posts {
 	 *
 	 * @return string
 	 */
-	private function generate_posts_list_hierarchical( $posts, $show_dates, $post_type ) {
-		$output = [];
+	private function generate_posts_list_hierarchical( $posts, $show_dates, $post_type, $child = false ) {
+		$output  = [];
+		$exclude = wp_parse_id_list( Helper::get_settings( 'sitemap.exclude_posts' ) );
 		foreach ( $posts as $post ) {
-			$output[] = '<li class="rank-math-html-sitemap__item">'
+			$check_parent_index = empty( $post->post_parent ) ? 0 : SitemapBase::is_object_indexable( $post->post_parent );
+			if ( ( ! $check_parent_index || $child ) && ! in_array( $post->ID, $exclude ) ) {
+				$output[] = '<li class="rank-math-html-sitemap__item">'
 				. '<a href="' . esc_url( get_permalink( $post->ID ) ) . '" class="rank-math-html-sitemap__link">'
 				. esc_html( $this->get_post_title( $post ) )
 				. '</a>'
 				. ( $show_dates ? ' <span class="rank-math-html-sitemap__date">(' . esc_html( mysql2date( get_option( 'date_format' ), $post->post_date ) ) . ')</span>' : '' );
-
+			}
 			$children = $this->get_posts( $post_type, $post->ID );
 			if ( ! empty( $children ) ) {
-				$output[] = '<ul class="rank-math-html-sitemap__list">';
-				$output[] = $this->generate_posts_list_hierarchical( $children, $show_dates, $post_type );
-				$output[] = '</ul>';
+				! in_array( $post->ID, $exclude ) ? $output[] = '<ul class="rank-math-html-sitemap__list">' : '';
+				$output[] = $this->generate_posts_list_hierarchical( $children, $show_dates, $post_type, true ); // phpcs:ignore
+				! in_array( $post->ID, $exclude ) ? $output[] = '</ul>' : '';
 			}
-			$output[] = '</li>';
+			( ! $check_parent_index || $child ) && ! in_array( $post->ID, $exclude ) ? $output[] = '</li>' : '';
 		}
 
 		return implode( '', $output );

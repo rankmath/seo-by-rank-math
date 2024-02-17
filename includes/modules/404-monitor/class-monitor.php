@@ -13,9 +13,9 @@ namespace RankMath\Monitor;
 use RankMath\Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\Conditional;
 use donatj\UserAgent\UserAgentParser;
 
 defined( 'ABSPATH' ) || exit;

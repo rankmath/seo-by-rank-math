@@ -14,7 +14,7 @@ use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Redirections\DB as RedirectionsDB;
 use RankMath\Redirections\Cache as RedirectionsCache;
-use MyThemeShop\Admin\List_Table;
+use RankMath\Admin\List_Table;
 use RankMath\Monitor\Admin;
 
 defined( 'ABSPATH' ) || exit;

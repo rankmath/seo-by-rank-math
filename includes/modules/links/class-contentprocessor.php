@@ -15,7 +15,7 @@
 
 namespace RankMath\Links;
 
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 use RankMath\Helper;
 use RankMath\Sitemap\Classifier;
 

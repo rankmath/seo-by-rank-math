@@ -11,8 +11,8 @@
 namespace RankMath\Schema;
 
 use RankMath\Paper\Paper;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Attachment;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Attachment;
 use WP_Block_Type_Registry;
 
 defined( 'ABSPATH' ) || exit;

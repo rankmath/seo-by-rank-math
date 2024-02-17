@@ -10,8 +10,8 @@
 
 namespace RankMath\Redirections;
 
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Database\Database;
+use RankMath\Helpers\Str;
+use RankMath\Admin\Database\Database;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -7,7 +7,7 @@
  */
 
 use RankMath\KB;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 use RankMath\Admin\Admin_Helper;
 
 defined( 'ABSPATH' ) || exit;

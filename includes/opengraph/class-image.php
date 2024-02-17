@@ -16,9 +16,9 @@ namespace RankMath\OpenGraph;
 use RankMath\Helper;
 use RankMath\Post;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Url;
-use MyThemeShop\Helpers\Attachment;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Url;
+use RankMath\Helpers\Attachment;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -16,7 +16,7 @@
 		"donatj/phpuseragentparser": "^1.6.1",
 		"woocommerce/action-scheduler": "^3.4.2",
 		"a5hleyrich/wp-background-processing": "^1.0.2",
-		"mythemeshop/wordpress-helpers": "^1.0.18"
+		"mythemeshop/wordpress-helpers": "^1.1"
 	},
 	"extra": {
         "installer-paths": {

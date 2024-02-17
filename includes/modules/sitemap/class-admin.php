@@ -15,8 +15,8 @@ use RankMath\Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Module\Base;
 use RankMath\Admin\Options;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

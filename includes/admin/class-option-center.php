@@ -15,9 +15,9 @@ use RankMath\CMB2;
 use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Arr;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\Arr;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 

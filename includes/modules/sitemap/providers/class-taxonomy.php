@@ -18,7 +18,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Router;
 use RankMath\Sitemap\Sitemap;
 use RankMath\Sitemap\Image_Parser;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -95,6 +95,7 @@ class Taxonomy implements Provider {
 				[
 					'hide_empty' => $hide_empty,
 					'fields'     => 'ids',
+					'orderby'    => 'name',
 					'meta_query' => [
 						'relation' => 'OR',
 						[

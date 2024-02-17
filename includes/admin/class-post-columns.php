@@ -13,9 +13,9 @@ namespace RankMath\Admin;
 use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Database\Database;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
+use RankMath\Admin\Database\Database;
 
 defined( 'ABSPATH' ) || exit;
 

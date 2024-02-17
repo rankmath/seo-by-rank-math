@@ -13,8 +13,8 @@
 namespace RankMath\Replace_Variables;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
 use RankMath\Admin\Admin_Helper;
 
 defined( 'ABSPATH' ) || exit;

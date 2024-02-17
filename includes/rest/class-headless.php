@@ -15,7 +15,7 @@ use WP_REST_Server;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Controller;
-use MyThemeShop\Helpers\Url;
+use RankMath\Helpers\Url;
 use RankMath\Helper;
 use RankMath\Frontend\Frontend;
 

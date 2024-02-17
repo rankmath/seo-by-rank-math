@@ -10,7 +10,7 @@
 
 namespace RankMath\Google;
 
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 use RankMath\Analytics\Workflow\Base;
 use RankMath\Sitemap\Sitemap;
 use WP_Error;

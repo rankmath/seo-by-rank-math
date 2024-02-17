@@ -13,11 +13,11 @@ namespace RankMath\Schema;
 use RankMath\Helper;
 use RankMath\Paper\Paper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Url;
-use MyThemeShop\Helpers\Conditional;
-use MyThemeShop\Helpers\WordPress;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Arr;
+use RankMath\Helpers\Url;
+use RankMath\Helpers\Conditional;
+use RankMath\Helpers\WordPress;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Arr;
 
 defined( 'ABSPATH' ) || exit;
 

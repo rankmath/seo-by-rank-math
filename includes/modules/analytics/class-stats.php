@@ -12,7 +12,7 @@ namespace RankMath\Analytics;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 use RankMathPro\Analytics\Pageviews;
 use RankMath\Google\Console as Google_Analytics;
 

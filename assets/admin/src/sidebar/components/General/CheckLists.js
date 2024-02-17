@@ -28,7 +28,7 @@ class CheckLists extends Component {
 
 	// Register annotator in Classic editor to highlight long paragraphs.
 	componentDidMount() {
-		if ( 'classic' !== rankMath.currentEditor ) {
+		if ( 'classic' !== rankMath.currentEditor || isUndefined( window.tinymce ) ) {
 			return false
 		}
 

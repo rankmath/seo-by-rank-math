@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 
 use WP_Error;
 use RankMath\Google\Api;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 use RankMath\Analytics\Workflow\Base;
 
 /**

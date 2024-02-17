@@ -13,8 +13,8 @@ namespace RankMath;
 use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Arr;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\Arr;
+use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 

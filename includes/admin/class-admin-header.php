@@ -12,7 +12,7 @@ namespace RankMath\Admin;
 
 use RankMath\Helper;
 use RankMath\KB;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

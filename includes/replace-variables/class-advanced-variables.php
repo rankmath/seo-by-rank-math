@@ -11,7 +11,7 @@
 namespace RankMath\Replace_Variables;
 
 use RankMath\Paper\Paper;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -67,6 +67,7 @@ class Advanced_Variables extends Author_Variables {
 				'description' => esc_html__( 'Custom field value.', 'rank-math' ),
 				'variable'    => 'customfield(field-name)',
 				'example'     => esc_html__( 'Custom field value', 'rank-math' ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_customfield' ]
 		);
@@ -251,13 +252,13 @@ class Advanced_Variables extends Author_Variables {
 
 		if ( is_author() ) {
 			return get_user_meta( $this->args->ID, $name, true );
-		} elseif ( is_singular() ) {
-			return get_post_meta( $this->args->ID, $name, true );
-		} elseif ( is_category() || is_tag() || is_tax() ) {
+		}
+
+		if ( is_category() || is_tag() || is_tax() ) {
 			return get_term_meta( $this->args->term_id, $name, true );
 		}
 
-		return null;
+		return is_singular() || ! empty( $this->args->post_type ) ? get_post_meta( $this->args->ID, $name, true ) : null;
 	}
 
 	/**

@@ -14,9 +14,9 @@ use RankMath\CMB2;
 use RankMath\Helper;
 use RankMath\Rewrite;
 use RankMath\Schema\DB;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\WordPress;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\WordPress;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 

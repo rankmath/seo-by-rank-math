@@ -145,7 +145,7 @@ export default ( endpoint, attributes = {}, callback, isChat, setCredits = '' ) 
 		return
 	}
 
-	if ( ! isUndefined( attributes.language ) && ! attributes.language ) {
+	if ( isUndefined( attributes.language ) || ! attributes.language ) {
 		attributes.language = rankMath.ca_language
 	}
 

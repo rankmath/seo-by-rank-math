@@ -16,8 +16,8 @@ use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Data_Encryption;
 use RankMath\Helpers\Security;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 

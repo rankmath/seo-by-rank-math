@@ -15,7 +15,7 @@ use RankMath\Admin\Admin_Helper;
 use RankMath\Redirections\Redirection;
 use RankMath\Schema\JsonLD;
 use RankMath\Schema\Singular;
-use MyThemeShop\Helpers\DB;
+use RankMath\Helpers\DB;
 
 defined( 'ABSPATH' ) || exit;
 

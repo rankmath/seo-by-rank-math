@@ -11,8 +11,8 @@
 namespace RankMath\Redirections;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\Url;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Url;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

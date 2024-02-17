@@ -134,19 +134,17 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 			</Fragment>
 		)
 
-		setTimeout( () => {
-			registerPlugin( 'rank-math-content-ai', {
-				icon: <ContentAIIcon />,
-				render: RankMathContentAISidebar,
-			} )
+		registerPlugin( 'rank-math-content-ai', {
+			icon: <ContentAIIcon />,
+			render: RankMathContentAISidebar,
+		} )
 
-			if ( includes( window.location.search, 'tab=content-ai' ) ) {
-				const panelName = 'rank-math-content-ai/seo-by-rank-math-content-ai-sidebar'
-				if ( select( 'core/edit-post' ).getActiveGeneralSidebarName() !== panelName ) {
-					dispatch( 'core/edit-post' ).openGeneralSidebar( panelName )
-				}
+		if ( includes( window.location.search, 'tab=content-ai' ) ) {
+			const panelName = 'rank-math-content-ai/seo-by-rank-math-content-ai-sidebar'
+			if ( select( 'core/edit-post' ).getActiveGeneralSidebarName() !== panelName ) {
+				dispatch( 'core/edit-post' ).openGeneralSidebar( panelName )
 			}
-		}, 1000 )
+		}
 	}
 
 	if ( 'classic' !== rankMath.currentEditor ) {

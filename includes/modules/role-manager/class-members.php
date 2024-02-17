@@ -11,7 +11,7 @@
 namespace RankMath\Role_Manager;
 
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

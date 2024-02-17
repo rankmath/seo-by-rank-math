@@ -15,8 +15,8 @@ namespace RankMath\OpenGraph;
 
 use RankMath\Helper;
 use RankMath\Post;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Arr;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Arr;
 
 defined( 'ABSPATH' ) || exit;
 

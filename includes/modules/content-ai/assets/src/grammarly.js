@@ -21,7 +21,7 @@ export const rankMathGrammarly = async () => {
 	return await Grammarly.init( 'client_1koEZ9cDaJXxfVojByQKKL' )
 }
 
-if ( 'classic' === rankMath.currentEditor ) {
+if ( 'classic' === rankMath.currentEditor && ! isUndefined( window.tinymce ) ) {
 	jQuery( window ).on( 'scroll.editor-expand resize.editor-expand', function( event ) {
 		const wrap = document.getElementById( 'wp-content-wrap' )
 		const wrapRect = wrap.getBoundingClientRect()

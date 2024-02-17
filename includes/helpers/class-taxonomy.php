@@ -137,7 +137,6 @@ trait Taxonomy {
 	 * @return boolean|array
 	 */
 	public static function get_object_taxonomies( $post_type, $output = 'choices', $filter = true ) {
-
 		if ( 'names' === $output ) {
 			return get_object_taxonomies( $post_type );
 		}
@@ -192,6 +191,10 @@ trait Taxonomy {
 			if ( ! $taxonomy ) {
 				return false;
 			}
+		}
+
+		if ( isset( $taxonomy->name ) && 'wp_pattern_category' === $taxonomy->name ) {
+			return false;
 		}
 
 		/*

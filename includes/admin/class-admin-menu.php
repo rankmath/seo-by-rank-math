@@ -14,8 +14,8 @@ use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Admin\Page;
-use MyThemeShop\Helpers\Param;
+use RankMath\Admin\Page;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 

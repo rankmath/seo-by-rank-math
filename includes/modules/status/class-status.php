@@ -13,9 +13,9 @@ namespace RankMath\Status;
 use RankMath\Helper;
 use RankMath\Module\Base;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Admin\Page;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Admin\Page;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -88,6 +88,8 @@ class Status extends Base {
 						'rank-math-status' => $uri . '/assets/css/status.css',
 					],
 					'scripts' => [
+						'lodash'              => '',
+						'rank-math-analyzer'  => rank_math()->plugin_url() . 'assets/admin/js/analyzer.js',
 						'rank-math-dashboard' => '',
 						'rank-math-status'    => $uri . '/assets/js/status.js',
 					],

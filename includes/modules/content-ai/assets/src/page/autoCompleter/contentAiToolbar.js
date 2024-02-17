@@ -73,7 +73,7 @@ const onClick = ( endpoint, data, selectedBlock, replaceBlock = false ) => {
 }
 
 const HighlightPopover = () => {
-	const highlightedParagraphs = select( 'rank-math' ).getHighlightedParagraphs()
+	const highlightedParagraphs = ! isUndefined( select( 'rank-math' ) ) ? select( 'rank-math' ).getHighlightedParagraphs() : []
 	if ( isEmpty( highlightedParagraphs ) ) {
 		return
 	}

@@ -13,10 +13,10 @@ namespace RankMath\Monitor;
 use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Module\Base;
-use MyThemeShop\Admin\Page;
-use MyThemeShop\Helpers\Arr;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Admin\Page;
+use RankMath\Helpers\Arr;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.204
+ * Version:           1.0.205
  * Plugin URI:        https://rankmath.com/
  * Description:       Rank Math is a revolutionary SEO product that combines the features of many SEO tools and lets you multiply your traffic in the easiest way possible.
  * Author:            Rank Math
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.204';
+	public $version = '1.0.205';
 
 	/**
 	 * Rank Math database version.
@@ -275,10 +275,10 @@ final class RankMath {
 		$this->container['settings'] = new \RankMath\Settings();
 
 		// JSON Manager.
-		$this->container['json'] = new \MyThemeShop\Json_Manager();
+		$this->container['json'] = new \RankMath\Json_Manager();
 
 		// Notification Manager.
-		$this->container['notification'] = new \MyThemeShop\Notification_Center( 'rank_math_notifications' );
+		$this->container['notification'] = new \RankMath\Admin\Notifications\Notification_Center( 'rank_math_notifications' );
 
 		// Product Registration.
 		$this->container['registration'] = new \RankMath\Admin\Registration();
@@ -326,7 +326,7 @@ final class RankMath {
 		}
 
 		// Frontend-only functionality.
-		if ( ! is_admin() || in_array( \MyThemeShop\Helpers\Param::request( 'action' ), [ 'elementor', 'elementor_ajax' ], true ) ) {
+		if ( ! is_admin() || in_array( \RankMath\Helpers\Param::request( 'action' ), [ 'elementor', 'elementor_ajax' ], true ) ) {
 			add_action( 'plugins_loaded', [ $this, 'init_frontend' ], 15 );
 		}
 

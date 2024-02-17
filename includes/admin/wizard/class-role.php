@@ -11,7 +11,7 @@
 namespace RankMath\Wizard;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\WordPress;
+use RankMath\Helpers\WordPress;
 use RankMath\Role_Manager\Capability_Manager;
 
 defined( 'ABSPATH' ) || exit;

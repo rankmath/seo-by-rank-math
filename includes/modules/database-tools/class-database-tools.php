@@ -11,7 +11,7 @@ namespace RankMath\Tools;
 use RankMath\Helper;
 use RankMath\Installer;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 

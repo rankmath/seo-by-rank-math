@@ -11,7 +11,7 @@
 namespace RankMath\Schema;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Conditional;
 use RankMath\Schema\Product_Edd;
 use RankMath\Schema\Product_WooCommerce;
 

@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.3
+Tested up to: 6.4
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.204
+Stable tag: 1.0.205
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,12 +583,19 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.204 [Oct 18, 2023] =
-- Added: Option to [highlight long paragraphs](https://rankmath.com/kb/score-100-in-tests/#use-of-short-paragraphs) and shorten them using Content AI in Classic & Block Editor
-- Added: New [filter](https://rankmath.com/kb/filters-hooks-api-developer/#remove-nofollow-from-specific-external-links) to programmatically apply or remove the `nofollow` attribute to external URLs
-- Fixed: [Focus keyword variable](https://rankmath.com/kb/variables-in-seo-title-description/#focus-keyword) was not working on taxonomies
-- Fixed: PHP error on [Redirections page](https://rankmath.com/kb/setting-up-redirections/) when the site uses `ANSI_QUOTES` SQL mode
-- Fixed: [Analytics](https://rankmath.com/kb/analytics) issue on sub-directory WordPress setup
+= 1.0.205 [Nov 01, 2023] =
+- Improved: [Content AI Credit refresh](https://rankmath.com/kb/how-to-use-content-ai/#credits-left) to work more efficiently
+- Added: WordPress v6.4 Compatibility
+- Fixed: [Rank Math Meta Box](https://rankmath.com/kb/on-page-seo/#classic-editor) was not expanding in Classic Editor when Visual Editor was disabled on the post
+- Fixed: [Product Category Sitemap](https://rankmath.com/kb/configure-sitemaps/#product-categories) was not appearing in the Sitemap index when the taxonomy had only `Uncategorized` category
+- Fixed: Password-protected pages were considered when creating the paginated sitemap
+- Fixed: [HTML Sitemap](https://rankmath.com/kb/html-sitemap/) was not displaying Child pages when the Parent page was set to `noindex`
+- Fixed: SQL error on [Status & Tools page](https://rankmath.com/kb/rank-math-status-and-tools/) for MySQL version 5.7 or lower
+- Fixed: Users having the `rank_math_general` capability were not able to [Submit URLs manually](https://rankmath.com/kb/how-to-use-indexnow/) for Instant indexing
+- Fixed: [Write More option](https://rankmath.com/kb/using-content-ai-in-block-editor/#write-more) was not using the language setting and generated output in an incorrect language
+- Fixed: [Content Editor](https://rankmath.com/kb/content-ai-editor/) was showing error after clicking on any paragraph
+- Fixed: Wrong link added in the admin notice for [Auto Post Redirections](https://rankmath.com/kb/general-settings/#auto-post-redirect)
+- Fixed: Minor UX issue in Content AI Toolbar
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

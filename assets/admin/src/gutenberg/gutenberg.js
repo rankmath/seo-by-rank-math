@@ -43,7 +43,6 @@ class GutenbergEditor extends Editor {
 		addAction( 'rank_math_loaded', 'rank-math', this.registerSlots, 0 )
 
 		super.setup( dataCollector )
-		this.registerSidebar()
 		this.registerPostPublish()
 		this.registerPrimaryTermSelector()
 		new LinkSuggestions()
@@ -54,6 +53,7 @@ class GutenbergEditor extends Editor {
 	 * Register slots.
 	 */
 	registerSlots() {
+		this.registerSidebar()
 		this.RankMathAfterEditor = RankMathAfterEditor
 		this.RankMathAfterFocusKeyword = RankMathAfterFocusKeyword
 		this.RankMathAdvancedTab = RankMathAdvancedTab

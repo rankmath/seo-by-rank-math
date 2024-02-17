@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5906693fd17bf7918f98c41aa2a5a52",
+    "content-hash": "a6977e74433ad4061ced76be8d5323ec",
     "packages": [
         {
             "name": "a5hleyrich/wp-background-processing",
@@ -276,5 +276,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

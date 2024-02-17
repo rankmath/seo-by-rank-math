@@ -12,12 +12,13 @@
 
 namespace RankMath\Instant_Indexing;
 
+use RankMath\Helper;
 use WP_Error;
 use WP_REST_Server;
 use WP_REST_Request;
 use WP_REST_Controller;
 use WP_REST_Response;
-use MyThemeShop\Helpers\Arr;
+use RankMath\Helpers\Arr;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -49,7 +50,7 @@ class Rest extends WP_REST_Controller {
 				[
 					'methods'             => WP_REST_Server::EDITABLE,
 					'callback'            => [ $this, 'submit_urls' ],
-					'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
+					'permission_callback' => [ $this, 'has_permission' ],
 				],
 			]
 		);
@@ -62,7 +63,7 @@ class Rest extends WP_REST_Controller {
 				[
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => [ $this, 'get_log' ],
-					'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
+					'permission_callback' => [ $this, 'has_permission' ],
 				],
 			]
 		);
@@ -75,7 +76,7 @@ class Rest extends WP_REST_Controller {
 				[
 					'methods'             => WP_REST_Server::EDITABLE,
 					'callback'            => [ $this, 'clear_log' ],
-					'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
+					'permission_callback' => [ $this, 'has_permission' ],
 				],
 			]
 		);
@@ -88,7 +89,7 @@ class Rest extends WP_REST_Controller {
 				[
 					'methods'             => WP_REST_Server::EDITABLE,
 					'callback'            => [ $this, 'reset_key' ],
-					'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
+					'permission_callback' => [ $this, 'has_permission' ],
 				],
 			]
 		);
@@ -201,5 +202,14 @@ class Rest extends WP_REST_Controller {
 				'location' => $location,
 			]
 		);
+	}
+
+	/**
+	 * Determine if the current user can manage instant indexing.
+	 *
+	 * @return bool
+	 */
+	public function has_permission() {
+		return Helper::has_cap( 'general' );
 	}
 }

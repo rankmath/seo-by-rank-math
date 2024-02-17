@@ -13,7 +13,7 @@ namespace RankMath\Image_Seo;
 use stdClass;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\HTML;
+use RankMath\Helpers\HTML;
 
 defined( 'ABSPATH' ) || exit;
 

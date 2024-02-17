@@ -12,7 +12,7 @@ namespace RankMath\SEO_Analysis;
 
 use RankMath\Helper;
 use RankMath\Helpers\Security;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -86,7 +86,7 @@ class Admin_Tabs {
 				'id'    => 'seo_analyzer',
 				'url'   => 'seo-analysis',
 				'args'  => 'view=seo_analyzer',
-				'cap'   => 'manage_options',
+				'cap'   => 'rank_math_site_analysis',
 				'title' => esc_html__( 'SEO Analyzer', 'rank-math' ),
 				'icon'  => 'rm-icon rm-icon-analyzer',
 			],
@@ -94,7 +94,7 @@ class Admin_Tabs {
 				'id'    => 'competitor_analyzer',
 				'url'   => 'seo-analysis',
 				'args'  => 'view=competitor_analyzer',
-				'cap'   => 'manage_options',
+				'cap'   => 'rank_math_site_analysis',
 				'title' => esc_html__( 'Competitor Analyzer', 'rank-math' ),
 				'icon'  => 'rm-icon rm-icon-users',
 			],

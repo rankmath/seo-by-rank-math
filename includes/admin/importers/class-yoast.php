@@ -13,9 +13,9 @@ namespace RankMath\Admin\Importers;
 use RankMath\Helper;
 use RankMath\Redirections\Redirection;
 use RankMath\Tools\Yoast_Blocks;
-use MyThemeShop\Helpers\DB;
-use MyThemeShop\Helpers\WordPress;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\DB;
+use RankMath\Helpers\WordPress;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -13,7 +13,7 @@ namespace RankMath\Paper;
 use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Helpers\Security;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -23,7 +23,11 @@ use RankMath\Helpers\Analytics;
 use RankMath\Helpers\Content_AI;
 use RankMath\Helpers\DB;
 use RankMath\Replace_Variables\Replacer;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Arr;
+use RankMath\Helpers\HTML;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Url;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -32,7 +36,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Helper {
 
-	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress, Schema, DB, Analytics, Content_AI;
+	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress, Schema, DB, Analytics, Content_AI, Arr, HTML, Param, Str, Url;
 
 	/**
 	 * Replace `%variables%` with context-dependent value.

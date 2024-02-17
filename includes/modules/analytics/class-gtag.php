@@ -15,7 +15,7 @@ namespace RankMath\Analytics;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 use AMP_Theme_Support;
 use AMP_Options_Manager;
 

@@ -42,7 +42,7 @@ class Assets implements Runner {
 		$this->action( 'admin_enqueue_scripts', 'enqueue' );
 		$this->action( 'admin_enqueue_scripts', 'overwrite_wplink', 99 );
 
-		if ( 'elementor' === \MyThemeShop\Helpers\Param::get( 'action' ) ) {
+		if ( 'elementor' === \RankMath\Helpers\Param::get( 'action' ) ) {
 			$this->action( 'elementor/editor/before_enqueue_scripts', 'register' );
 			$this->action( 'elementor/editor/before_enqueue_scripts', 'enqueue' );
 			$this->action( 'elementor/editor/before_enqueue_scripts', 'overwrite_wplink', 99 );

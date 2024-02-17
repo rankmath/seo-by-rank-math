@@ -12,7 +12,7 @@ namespace RankMath\Redirections;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 use RankMath\Helpers\Sitepress;
 
 defined( 'ABSPATH' ) || exit;
@@ -265,6 +265,7 @@ class Watcher {
 			'redirections',
 			[
 				'redirection' => $redirection_id,
+				'action'      => 'edit',
 				'security'    => wp_create_nonce( 'redirection_list_action' ),
 			]
 		);

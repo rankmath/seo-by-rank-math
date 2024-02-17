@@ -12,7 +12,7 @@ namespace RankMath\Image_Seo;
 
 use RankMath\KB;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Arr;
+use RankMath\Helpers\Arr;
 
 defined( 'ABSPATH' ) || exit;
 

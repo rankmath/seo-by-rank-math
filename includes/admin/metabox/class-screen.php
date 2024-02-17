@@ -16,7 +16,7 @@ use RankMath\Traits\Meta;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Locale;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\Url;
+use RankMath\Helpers\Url;
 
 defined( 'ABSPATH' ) || exit;
 

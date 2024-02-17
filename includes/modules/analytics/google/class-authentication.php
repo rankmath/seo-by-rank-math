@@ -10,9 +10,9 @@
 
 namespace RankMath\Google;
 
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 use RankMath\Data_Encryption;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 use RankMath\Helpers\Security;
 
 defined( 'ABSPATH' ) || exit;

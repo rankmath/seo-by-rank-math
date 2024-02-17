@@ -12,7 +12,7 @@ namespace RankMath\Analytics\Workflow;
 
 use Exception;
 use RankMath\Helper;
-use MyThemeShop\Helpers\DB;
+use RankMath\Helpers\DB;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
