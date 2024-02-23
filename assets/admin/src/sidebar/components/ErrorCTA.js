@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { includes } from 'lodash'
+import { includes, isEmpty } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -140,7 +140,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 	let hasCredits = rankMath.contentAICredits > 0
 	const isMigrating = rankMath.contentAiMigrating
 
-	if ( hasCredits && isResearch && ! isFree && rankMath.contentAICredits < 499 ) {
+	if ( hasCredits && isResearch && ! isFree && rankMath.contentAICredits < 500 && isEmpty( wp.data.select( 'rank-math' ).getKeywordsData() ) ) {
 		hasCredits = false
 	}
 

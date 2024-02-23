@@ -244,6 +244,7 @@ trait Content_AI {
 			$output
 		);
 
+		$output  = isset( $output['faqs'] ) ? [ current( $output ) ] : $output;
 		$outputs = array_merge( $output, $outputs );
 		$outputs = array_slice( $outputs, 0, 50 );
 		update_option( self::$output_key, $outputs, false );

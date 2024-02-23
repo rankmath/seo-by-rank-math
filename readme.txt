@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.4.1
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.212.1
+Stable tag: 1.0.213
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,19 +583,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.212 [Jan 31, 2024] =
-- Added: Options to [Bulk generate meta tags using Content AI](https://rankmath.com/kb/bulk-generate-seo-meta-tags/) for Taxonomies (Categories, Tags, etc).
-- Improved: Images from the Product gallery are now included in the [Product Schema](https://rankmath.com/kb/woocommerce-product-schema/)
-- Improved: Reusable Block Content Analysis code
-- Fixed: Dashboard notification was persistently shown on some sites
-- Fixed: [Filter to change meta keywords](https://rankmath.com/kb/filters-hooks-api-developer/#change-meta-keywords) was not working
-- Fixed: [Instant Indexing API Key location file](https://rankmath.com/kb/how-to-use-indexnow/#check-api-key-location) was redirecting to the homepage when [Fallback Behaviour in Redirection settings](https://rankmath.com/kb/general-settings/#fallback-behaviour) was set to Homepage
-- Fixed: Child pages were duplicated in the [HTML Sitemap](https://rankmath.com/kb/html-sitemap/) on multisite setups
-- Fixed: [Researching a Keyword with Content AI](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) was not working for some countries
-
-= 1.0.212.1 [Feb 07, 2024] =
-- Fixed: [Bulk Editing for Media Library](https://rankmath.com/kb/bulk-editing-in-rank-math/#bulk-editing-media) was not working after the latest update
-- Fixed: [XML Sitemap](https://rankmath.com/kb/sitemaps-seo-benefits/#xml-sitemap) was not displaying Taxonomies after the latest update
+= 1.0.213 [Feb 21, 2024] =
+- Fixed: [Content AI Research](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) was not displaying existing results when the site had fewer than 500 credits
+- Fixed: [Content AI History tab](https://rankmath.com/kb/content-ai-history/) was not displaying all output from the [FAQ tool](https://rankmath.com/kb/content-ai-frequently-asked-questions-tool/)
+- Fixed: UX issue that hid some prompts in the [Content AI Prompts Library](https://rankmath.com/kb/how-to-use-rankbot-ai/#how-to-use-the-prompts-library) modal
+- Fixed: Hidden products were submitted to [Instant Indexing](https://rankmath.com/blog/google-indexing-api/)
+- Fixed: Duplicate Schema issue on [Easy Digital Download product pages](https://rankmath.com/kb/edd-product-schema/)
+- Fixed: [Exclude Posts option](https://rankmath.com/kb/configure-sitemaps/#exclude-posts) was not effective in the [HTML Sitemap](https://rankmath.com/kb/html-sitemap/)
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

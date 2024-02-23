@@ -57,8 +57,15 @@ export default ( results, isPage, endpoint, typingEffect = true, isSerpPreview =
 				}
 
 				{
-					'Frequently_Asked_Questions' === endpoint &&
+					'Frequently_Asked_Questions' === endpoint && ! isArray( results[ 0 ] ) &&
 					<ModalContent value={ results } isPage={ isPage } endpoint={ endpoint } typingEffect={ typingEffect } isSerpPreview={ isSerpPreview } />
+				}
+
+				{
+					'Frequently_Asked_Questions' === endpoint && isArray( results[ 0 ] ) &&
+					map( results, ( value ) => {
+						return <ModalContent value={ value } isPage={ isPage } endpoint={ endpoint } typingEffect={ typingEffect } isSerpPreview={ isSerpPreview } />
+					} )
 				}
 			</div>
 		)

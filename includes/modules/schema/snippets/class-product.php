@@ -48,6 +48,7 @@ class Product implements Snippet {
 		}
 
 		if ( Helper::is_edd_active() && is_singular( 'download' ) ) {
+			remove_filter( 'wp_footer', [ \EDD()->structured_data, 'output_structured_data' ] );
 			remove_action( 'edd_purchase_link_top', 'edd_purchase_link_single_pricing_schema', 10 );
 			remove_action( 'loop_start', 'edd_microdata_wrapper_open', 10 );
 			$product = new Product_Edd();

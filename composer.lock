@@ -8,20 +8,20 @@
     "packages": [
         {
             "name": "a5hleyrich/wp-background-processing",
-            "version": "1.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deliciousbrains/wp-background-processing.git",
-                "reference": "a0018fea79b8e752f41b6a26d6b9b3397d15c52e"
+                "reference": "33b7bc1aacfc6a18a2f50fee4d9fdd4652dfaad4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/a0018fea79b8e752f41b6a26d6b9b3397d15c52e",
-                "reference": "a0018fea79b8e752f41b6a26d6b9b3397d15c52e",
+                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/33b7bc1aacfc6a18a2f50fee4d9fdd4652dfaad4",
+                "reference": "33b7bc1aacfc6a18a2f50fee4d9fdd4652dfaad4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=7.0"
             },
             "require-dev": {
                 "phpcompatibility/phpcompatibility-wp": "*",
@@ -52,9 +52,9 @@
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
             "support": {
                 "issues": "https://github.com/deliciousbrains/wp-background-processing/issues",
-                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.2"
+                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.3.0"
             },
-            "time": "2023-07-20T15:40:50+00:00"
+            "time": "2024-02-08T14:27:35+00:00"
         },
         {
             "name": "cmb2/cmb2",
@@ -234,16 +234,16 @@
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.7.1",
+            "version": "3.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "bdaecb016e0358065a8bf76a41fdd60772cacaa5"
+                "reference": "cb3c7854b31a285b46964931425fef6f485be145"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/bdaecb016e0358065a8bf76a41fdd60772cacaa5",
-                "reference": "bdaecb016e0358065a8bf76a41fdd60772cacaa5",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/cb3c7854b31a285b46964931425fef6f485be145",
+                "reference": "cb3c7854b31a285b46964931425fef6f485be145",
                 "shasum": ""
             },
             "require": {
@@ -271,9 +271,9 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.7.1"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.7.2"
             },
-            "time": "2023-12-13T21:52:55+00:00"
+            "time": "2024-02-14T21:35:25+00:00"
         }
     ],
     "packages-dev": [],

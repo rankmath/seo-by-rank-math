@@ -189,6 +189,10 @@ class Posts {
 	private function generate_posts_list_flat( $posts, $show_dates ) {
 		$output = [];
 		foreach ( $posts as $post ) {
+			if ( ! SitemapBase::is_object_indexable( absint( $post->ID ) ) ) {
+				continue;
+			}
+
 			$url = $this->do_filter( 'sitemap/entry', esc_url( $this->get_post_link( $post ) ), 'post', $post );
 			if ( empty( $url ) ) {
 				continue;
@@ -222,7 +226,9 @@ class Posts {
 
 		foreach ( $posts as $post ) {
 			$check_parent_index = empty( $post->post_parent ) ? 0 : SitemapBase::is_object_indexable( $post->post_parent );
-			if ( ( ! $check_parent_index || $child ) && ! in_array( $post->ID, $exclude, true ) ) {
+			$is_indexable       = SitemapBase::is_object_indexable( absint( $post->ID ) );
+
+			if ( ( ! $check_parent_index || $child ) && $is_indexable ) {
 				$output[] = '<li class="rank-math-html-sitemap__item">'
 				. '<a href="' . esc_url( get_permalink( $post->ID ) ) . '" class="rank-math-html-sitemap__link">'
 				. esc_html( $this->get_post_title( $post ) )
@@ -231,12 +237,20 @@ class Posts {
 			}
 
 			if ( ! empty( $this->children[ $post_type ][ $post->ID ] ) ) {
-				! in_array( $post->ID, $exclude, true ) ? $output[] = '<ul class="rank-math-html-sitemap__list">' : '';
+				if ( $is_indexable ) {
+					$output[] = '<ul class="rank-math-html-sitemap__list">';
+				}
+
 				$output[] = $this->generate_posts_list_hierarchical(  $this->children[ $post_type ][ $post->ID ], $show_dates, $post_type, true ); // phpcs:ignore
-				! in_array( $post->ID, $exclude, true ) ? $output[] = '</ul>' : '';
+
+				if ( $is_indexable ) {
+					$output[] = '</ul>';
+				}
 			}
 
-			( ! $check_parent_index || $child ) && ! in_array( $post->ID, $exclude, true ) ? $output[] = '</li>' : '';
+			if ( $is_indexable ) {
+				$output[] = '</li>';
+			}
 		}
 
 		return implode( '', $output );

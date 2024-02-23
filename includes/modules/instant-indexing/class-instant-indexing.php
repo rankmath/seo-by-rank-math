@@ -303,6 +303,14 @@ class Instant_Indexing extends Base {
 			return;
 		}
 
+		// Check if it's a hidden product.
+		if ( 'product' === $post->post_type && Helper::is_woocommerce_active() ) {
+			$product = wc_get_product( $post_id );
+			if ( $product && ! $product->is_visible() ) {
+				return;
+			}
+		}
+
 		$url = get_permalink( $post );
 		if ( 'trash' === $post->post_status ) {
 			$url = $this->previous_post_permalinks[ $post_id ];

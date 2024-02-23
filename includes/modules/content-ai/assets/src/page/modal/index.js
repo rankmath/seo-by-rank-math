@@ -182,7 +182,7 @@ export default ( { data, setEndpoint = false, isPage = false, setCredits = false
 					}
 
 					{ ! showHistory && getOutput( resultData, isPage, endpoint, true, callApi ) }
-					{ ! generating && showHistory && getOutput( endpoint === 'Frequently_Asked_Questions' ? endpointHistory[ 0 ] : reverse( endpointHistory ), isPage, endpoint, false, callApi ) }
+					{ ! generating && showHistory && getOutput( reverse( endpointHistory ), isPage, endpoint, false, callApi ) }
 					{
 						! showHistory && callApi && ! generating &&
 						<div className='notice notice-info'
