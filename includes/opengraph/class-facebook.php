@@ -222,7 +222,12 @@ class Facebook extends OpenGraph {
 	 * Output the site name straight from the blog info.
 	 */
 	public function site_name() {
-		$this->tag( 'og:site_name', Helper::get_settings( 'titles.website_name', get_bloginfo( 'name' ) ) );
+		/**
+		 * Filter the OpenGraph site name.
+		 */
+		$siteName = $this->do_filter('opengraph/site_name', Helper::get_settings('titles.website_name', get_bloginfo('name')));
+		
+		$this->tag('og:site_name', $siteName);
 	}
 
 	/**
