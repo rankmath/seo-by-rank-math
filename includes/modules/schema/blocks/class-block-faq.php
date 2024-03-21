@@ -168,7 +168,7 @@ class Block_FAQ extends Block {
 		// HTML.
 		$out   = [];
 		$out[] = sprintf( '<div id="rank-math-faq" class="%1$s"%2$s>', $class, self::get()->get_styles( $attributes ) );
-		$out[] = sprintf( '<%1$s class="rank-math-list %2$s">', $list_tag, $attributes['listCssClasses'] );
+		$out[] = sprintf( '<%1$s class="rank-math-list %2$s">', $list_tag, esc_attr( $attributes['listCssClasses'] ) );
 
 		// Questions.
 		foreach ( $attributes['questions'] as $question ) {
@@ -184,9 +184,9 @@ class Block_FAQ extends Block {
 
 			$out[] = sprintf(
 				'<%1$s class="rank-math-question %2$s">%3$s</%1$s>',
-				apply_filters( 'rank_math/blocks/faq/title_wrapper', $attributes['titleWrapper'] ),
-				$attributes['titleCssClasses'],
-				$question['title']
+				apply_filters( 'rank_math/blocks/faq/title_wrapper', esc_attr( $attributes['titleWrapper'] ) ),
+				esc_attr( $attributes['titleCssClasses'] ),
+				wp_kses_post( $question['title'] )
 			);
 
 			$out[] = '<div class="rank-math-answer ' . esc_attr( $attributes['contentCssClasses'] ) . '">';

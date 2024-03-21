@@ -29,7 +29,6 @@ import {
 import ContentAIScore from './ContentAIScore'
 import Recommendations from './Recommendations'
 import ContentAIPanel from './ContentAIPanel'
-import Interpolate from '@components/Interpolate'
 import getLink from '@helpers/getLink'
 import ErrorCTA from '@components/ErrorCTA'
 
@@ -50,14 +49,15 @@ class ContentAI extends Component {
 	 */
 	render() {
 		const isFree = isEmpty( rankMath.contentAIPlan ) || rankMath.contentAIPlan === 'free'
-		const hasCredits = rankMath.isUserRegistered && isNumber( this.state.credits )
+		const hasCredits = this.hasCredits()
+		const showError = ! hasCredits || isFree
 		const className = classnames( 'rank-math-content-ai-data', {
 			loading: this.state.loading,
-			blurred: ! hasCredits || isFree,
+			blurred: showError,
 		} )
 
 		let data = this.props.data
-		if ( ( ! hasCredits && isEmpty( data ) ) || 'show_dummy_data' === data || isFree ) {
+		if ( showError || 'show_dummy_data' === data ) {
 			data = this.getDummyData()
 		}
 
@@ -65,12 +65,9 @@ class ContentAI extends Component {
 			<Fragment>
 				<PanelBody className="rank-math-content-ai-wrapper research" initialOpen={ true }>
 					<>
-						{ ! isFree && this.getHeader() }
+						{ ! showError && this.getHeader() }
 
-						{ ! rankMath.isUserRegistered && this.connectAccountNotice() }
-						{ rankMath.isUserRegistered && ! hasCredits && this.creditsNotice( hasCredits ) }
-
-						{ hasCredits && ! isFree && this.keywordField() }
+						{ ! showError && this.keywordField() }
 
 						<div className={ className }>
 							<span className="loader-text">
@@ -93,11 +90,19 @@ class ContentAI extends Component {
 							</div>
 							}
 						</div>
-						<ErrorCTA isResearch={ true } />
+						{ showError && <ErrorCTA isResearch={ true } /> }
 					</>
 				</PanelBody>
 			</Fragment>
 		)
+	}
+
+	hasCredits() {
+		if ( ! isEmpty( this.props.data ) ) {
+			return true
+		}
+
+		return rankMath.isUserRegistered && this.state.credits >= 500
 	}
 
 	/**
@@ -196,7 +201,7 @@ class ContentAI extends Component {
 						{ __( 'To learn how to use it', 'rank-math' ) } <a href={ getLink( 'content-ai-settings', 'Content AI Sidebar KB Link' ) } target="_blank" rel="noreferrer">{ __( 'Click here', 'rank-math' ) }</a>
 					</div>
 					{
-						! this.state.showResearch && ! this.state.loading && ! isEmpty( this.props.data ) &&
+						! this.state.showResearch && ! this.state.loading && ! isEmpty( this.props.data ) && this.state.credits >= 500 &&
 						<Button
 							className="rank-math-ca-force-update"
 							onClick={ () => this.props.researchKeyword( this.state, this.setState, true ) }
@@ -217,91 +222,6 @@ class ContentAI extends Component {
 				>
 					{ __( 'Research', 'rank-math' ) }
 				</Button> }
-			</div>
-		)
-	}
-
-	/**
-	 * Notice to show when user has used all his credits or the site is not connected with Rank Math.
-	 */
-	connectAccountNotice() {
-		return (
-			<div className="rank-math-ca-warning">
-				<h3>{ __( 'Content AI', 'rank-math' ) }</h3>
-				<p>{ __( 'Please connect your account to use this feature.', 'rank-math' ) }</p>
-				<Button
-					href={ rankMath.connectSiteUrl }
-					className="is-primary"
-				>
-					{ __( 'Connect Now', 'rank-math' ) }
-				</Button>
-			</div>
-		)
-	}
-
-	/**
-	 * Notice to show when user has used all his credits or the site is not connected with Rank Math.
-	 */
-	creditsNotice() {
-		return (
-			<div className="rank-math-ca-warning">
-				<h3>{ __( 'Content AI', 'rank-math' ) }</h3>
-
-				{ 'site_limit_reached' === this.state.credits &&
-					<p>
-						<Interpolate
-							components={ {
-								link1: (
-									// eslint-disable-next-line jsx-a11y/anchor-has-content
-									<a
-										href={ getLink( 'free-account', 'Sidebar No Credits' ) }
-										target="_blank"
-										rel="noopener noreferrer"
-									/>
-								),
-								link2: (
-									// eslint-disable-next-line jsx-a11y/anchor-has-content
-									<a
-										href={ getLink( 'content-ai-pricing-tables', 'Sidebar No Credits' ) }
-										target="_blank"
-										rel="noopener noreferrer"
-									/>
-								),
-							} }
-						>
-							{
-								applyFilters(
-									'rank_math_content_ai_credits_notice',
-									__(
-										'All credits assigned to this site are used. Please add more credits from {{link1}}My Account{{/link1}} Page or {{link2}}upgrade your plan{{/link2}}.',
-										'rank-math'
-									),
-									'site_limit_reached'
-								)
-							}
-						</Interpolate>
-					</p>
-				}
-
-				{ 'account_limit_reached' === this.state.credits &&
-					applyFilters(
-						'rank_math_content_ai_credits_notice',
-						(
-							<>
-								<p>{ __( 'You don\'t have any credits left.', 'rank-math' ) }</p>
-								<Button
-									href={ getLink( 'content-ai-pricing-tables', 'Sidebar No Credits' ) }
-									target="_blank"
-									rel="noreferrer"
-									className="is-primary"
-								>
-									{ __( 'Get More Credits', 'rank-math' ) }
-								</Button>
-							</>
-						),
-						'account_limit_reached'
-					)
-				}
 			</div>
 		)
 	}

@@ -41,12 +41,8 @@ class Block {
 	 * @return string The HTML image element.
 	 */
 	protected function get_image( $attrs, $size = 'thumbnail', $class = 'class=alignright' ) {
-		if ( ! isset( $attrs['imageID'] ) ) {
-			return '';
-		}
-
-		$image_id = absint( $attrs['imageID'] );
-		if ( ! ( $image_id > 0 ) ) {
+		$image_id = empty( $attrs['imageID'] ) ? '' : absint( $attrs['imageID'] );
+		if ( ! $image_id ) {
 			return '';
 		}
 
@@ -63,13 +59,9 @@ class Block {
 	 * @return string
 	 */
 	protected function get_styles( $attributes ) {
-		$out = [];
-
-		if ( ! empty( $attributes['textAlign'] ) && 'left' !== $attributes['textAlign'] ) {
-			$out[] = 'text-align:' . $attributes['textAlign'];
-		}
-
-		return empty( $out ) ? '' : ' style="' . join( ';', $out ) . '"';
+		return empty( $attributes['textAlign'] ) || 'left' === $attributes['textAlign']
+			? ''
+			: ' style="' . join( ';', 'text-align:' . $attributes['textAlign'] ) . '"';
 	}
 
 	/**
@@ -84,11 +76,7 @@ class Block {
 			return 'ol';
 		}
 
-		if ( 'unordered' === $style ) {
-			return 'ul';
-		}
-
-		return 'div';
+		return 'unordered' === $style ? 'ul' : 'div';
 	}
 
 	/**
@@ -99,11 +87,7 @@ class Block {
 	 * @return string
 	 */
 	protected function get_list_item_style( $style ) {
-		if ( 'numbered' === $style || 'unordered' === $style ) {
-			return 'li';
-		}
-
-		return 'div';
+		return in_array( $style, [ 'numbered', 'unordered' ], true ) ? 'li' : 'div';
 	}
 
 	/**

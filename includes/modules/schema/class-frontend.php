@@ -188,11 +188,11 @@ class Frontend {
 			$props = [
 				'is_part_of' => [
 					'key'   => 'webpage',
-					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
+					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'productgroup', 'restaurant', 'service' ], true ) && ! $is_event,
 				],
 				'publisher'  => [
 					'key'   => 'publisher',
-					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
+					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'productgroup', 'restaurant', 'service' ], true ) && ! $is_event,
 				],
 				'thumbnail'  => [
 					'key'   => 'image',
@@ -200,7 +200,7 @@ class Frontend {
 				],
 				'language'   => [
 					'key'   => 'inLanguage',
-					'value' => ! in_array( $type, [ 'person', 'service', 'restaurant', 'product', 'musicgroup', 'musicalbum', 'jobposting' ], true ),
+					'value' => ! in_array( $type, [ 'person', 'service', 'restaurant', 'product', 'productgroup', 'musicgroup', 'musicalbum', 'jobposting' ], true ),
 				],
 			];
 

@@ -1,0 +1,21 @@
+.rank-math-onsite-checkout-modal {
+    width: 100%;
+    height: 100%;
+
+    max-width: 85%;
+    max-height: 85%;
+
+    .components-modal__content {
+        padding: 0;
+        margin-top: 0;
+
+        .components-modal__header {
+            padding: 5px 15px;
+            height: auto;
+        }
+
+        > div {
+            height: 100%;
+        }
+    }
+}

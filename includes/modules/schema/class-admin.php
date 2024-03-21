@@ -24,14 +24,14 @@ class Admin extends Base {
 
 	/**
 	 * Module ID.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $id = '';
 
 	/**
 	 * Module directory.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $directory = '';
@@ -150,6 +150,7 @@ class Admin extends Base {
 
 		$schemas['new-9999']['headline']    = $name ? $name : '';
 		$schemas['new-9999']['description'] = $description ? $description : '';
+		$schemas['new-9999']['keywords']    = '%keywords%';
 		$schemas['new-9999']['author']      = [
 			'@type' => 'Person',
 			'name'  => '%name%',

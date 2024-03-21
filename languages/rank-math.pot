@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.214\n"
+"Project-Id-Version: Rank Math SEO 1.0.215\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-07T15:14:34+00:00\n"
+"POT-Creation-Date: 2024-03-20T16:48:47+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -8898,18 +8898,6 @@ msgid "500 credits will be used."
 msgstr ""
 
 msgid "Research"
-msgstr ""
-
-msgid "Please connect your account to use this feature."
-msgstr ""
-
-msgid "All credits assigned to this site are used. Please add more credits from {{link1}}My Account{{/link1}} Page or {{link2}}upgrade your plan{{/link2}}."
-msgstr ""
-
-msgid "You don't have any credits left."
-msgstr ""
-
-msgid "Get More Credits"
 msgstr ""
 
 msgid "Credits"

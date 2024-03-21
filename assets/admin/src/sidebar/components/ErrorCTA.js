@@ -140,7 +140,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 	let hasCredits = rankMath.contentAICredits > 0
 	const isMigrating = rankMath.contentAiMigrating
 
-	if ( hasCredits && isResearch && ! isFree && rankMath.contentAICredits < 500 && isEmpty( wp.data.select( 'rank-math' ).getKeywordsData() ) ) {
+	if ( hasCredits && isResearch && ! isFree && rankMath.contentAICredits < 500 ) {
 		hasCredits = false
 	}
 

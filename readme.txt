@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.4.1
+Tested up to: 6.5
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.214
+Stable tag: 1.0.215
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,12 +583,17 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.214 [Mar 07, 2024] =
-- Added: New [Organization Schema properties]((https://rankmath.com/kb/local-seo/)) recently introduced by Google
-- Fixed: [About](https://rankmath.com/kb/local-seo/#about-page) & [Contact Page](https://rankmath.com/kb/local-seo/#contact-page) search fields were not working when the Local SEO Module was disabled
-- Fixed: [Headless CMS](https://rankmath.com/kb/general-settings/#headless-cms-support) issue with Japanese characters
-- Fixed: Wrong colors in the [SEO Performance Graph](https://rankmath.com/kb/analytics/#seo-performance)
-- Fixed: Deprecated warning related to the `getBlocks` function in the browser's console
+= 1.0.215 [Mar 20, 2024] =
+- Added: WordPress 6.5 Compatibility
+- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#change-local-seo-shortcode-output) to change the [[rank_math_contact_info] shortcode](https://rankmath.com/kb/local-seo/#business-location-data-shortcode) content
+- Improved: Strengthened the security of the plugin's HowTo Block to prevent potential exploitation by users with post edit access. Thanks to [WordFence]
+(https://www.wordfence.com/) for revealing it responsibly
+- Fixed: [Content AI Research](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) was not displaying existing results when the site had used all the credits
+- Fixed: [Analytics](https://rankmath.com/kb/analytics/) was displaying a white page on Arabic language sites.
+- Fixed: Issue with [Remove Base option](https://rankmath.com/kb/general-settings/#remove-base) when product base words are used in the product slug
+- Fixed: [Redirection](https://rankmath.com/kb/setting-up-redirections/) issue on sub-directory installations when the source URL contains a substring of the sub-directory
+- Fixed: Missing period(.) after number in the [Table of Contents ordered list](https://rankmath.com/kb/table-of-contents-block/#list-style)
+- Fixed: Incompatibility with Dokan plugin
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

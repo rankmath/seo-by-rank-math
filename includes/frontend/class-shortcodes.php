@@ -108,7 +108,12 @@ class Shortcodes {
 		echo '</div>';
 		echo '<div class="clear"></div>';
 
-		return ob_get_clean();
+		/**
+		 * Change the Contact Info HTML output.
+		 *
+		 * @param string $unsigned HTML output.
+		 */
+		return $this->do_filter( 'contact_info/html', ob_get_clean() );
 	}
 
 	/**
