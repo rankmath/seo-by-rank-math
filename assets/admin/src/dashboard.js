@@ -210,6 +210,11 @@ class RankMathDashboard {
 
 	onsiteCheckout() {
 		$( '.pro-link' ).on( 'click', function( e ) {
+			const url = $( this ).data( 'url' )
+			if ( typeof url === 'undefined' || url === '' ) {
+				return
+			}
+
 			e.preventDefault()
 			if ( ! isNull( document.getElementById( 'rank-math-onsite-checkout-wrapper' ) ) ) {
 				$( '.components-modal__screen-overlay' ).show()
@@ -227,7 +232,7 @@ class RankMathDashboard {
 						} }
 						shouldCloseOnClickOutside={ true }
 					>
-						<iframe width="100%" height="100%" src={ $( this ).data( 'url' ) } />
+						<iframe width="100%" height="100%" src={ url } />
 					</Modal>,
 					document.getElementById( 'rank-math-onsite-checkout-wrapper' )
 				)

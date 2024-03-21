@@ -102,7 +102,7 @@ class ContentAI extends Component {
 			return true
 		}
 
-		return rankMath.isUserRegistered && this.state.credits >= 500
+		return rankMath.isUserRegistered && rankMath.ca_credits >= 500
 	}
 
 	/**
@@ -201,7 +201,7 @@ class ContentAI extends Component {
 						{ __( 'To learn how to use it', 'rank-math' ) } <a href={ getLink( 'content-ai-settings', 'Content AI Sidebar KB Link' ) } target="_blank" rel="noreferrer">{ __( 'Click here', 'rank-math' ) }</a>
 					</div>
 					{
-						! this.state.showResearch && ! this.state.loading && ! isEmpty( this.props.data ) && this.state.credits >= 500 &&
+						! this.state.showResearch && ! this.state.loading && ! isEmpty( this.props.data ) && rankMath.ca_credits >= 500 &&
 						<Button
 							className="rank-math-ca-force-update"
 							onClick={ () => this.props.researchKeyword( this.state, this.setState, true ) }

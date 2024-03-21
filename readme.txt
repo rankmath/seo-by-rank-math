@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.5
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.215
+Stable tag: 1.0.215.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -594,6 +594,9 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 - Fixed: [Redirection](https://rankmath.com/kb/setting-up-redirections/) issue on sub-directory installations when the source URL contains a substring of the sub-directory
 - Fixed: Missing period(.) after number in the [Table of Contents ordered list](https://rankmath.com/kb/table-of-contents-block/#list-style)
 - Fixed: Incompatibility with Dokan plugin
+
+= 1.0.215.1 [Mar 21, 2024] =
+- Fixed: [Content AI Research](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) was showing blurred section on new posts
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
