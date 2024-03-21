@@ -54,7 +54,7 @@ const getBlockContent = ( blockData ) => {
 
 export default () => {
 	const core = select( 'core' )
-	const coreEditor = select( 'core/editor' )
+	const coreEditor = select( 'core/block-editor' )
 
 	addFilter( 'rank_math_content', 'rank-math', addReusableBlockContent, 11 )
 	subscribe( debounce( () => {

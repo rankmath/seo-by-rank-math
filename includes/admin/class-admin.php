@@ -43,6 +43,7 @@ class Admin implements Runner {
 		$this->filter( 'load_script_translation_file', 'load_script_translation_file', 10, 3 );
 
 		// AJAX.
+		$this->ajax( 'search_pages', 'search_pages' );
 		$this->ajax( 'is_keyword_new', 'is_keyword_new' );
 		$this->ajax( 'save_checklist_layout', 'save_checklist_layout' );
 		$this->ajax( 'deactivate_plugins', 'deactivate_plugins' );
@@ -145,6 +146,39 @@ class Admin implements Runner {
 
 		update_user_meta( get_current_user_id(), 'rank_math_metabox_checklist_layout', $layout );
 		exit;
+	}
+
+	/**
+	 * Ajax handler to search pages based on the searched string. Used in the Local SEO Settings.
+	 */
+	public function search_pages() {
+		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
+		$this->has_cap_ajax( 'general' );
+
+		$term = Param::get( 'term' );
+		if ( empty( $term ) ) {
+			exit;
+		}
+
+		global $wpdb;
+		$pages = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT ID, post_title FROM {$wpdb->prefix}posts WHERE post_type = 'page' AND post_status = 'publish' AND post_title LIKE %s",
+				"%{$wpdb->esc_like( $term )}%"
+			),
+			ARRAY_A
+		);
+
+		$data = [];
+		foreach ( $pages as $page ) {
+			$data[] = [
+				'id'   => $page['ID'],
+				'text' => $page['post_title'],
+				'url'  => get_permalink( $page['ID'] ),
+			];
+		}
+
+		wp_send_json( [ 'results' => $data ] );
 	}
 
 	/**

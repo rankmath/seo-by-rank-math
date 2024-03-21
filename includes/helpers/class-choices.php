@@ -617,6 +617,26 @@ trait Choices {
 	}
 
 	/**
+	 * Additional Organization details for schema.
+	 *
+	 * @return array
+	 */
+	public static function choices_additional_organization_info() {
+		return [
+			'legalName'            => esc_html__( 'Legal Name', 'rank-math' ),
+			'foundingDate'         => esc_html__( 'Founding Date', 'rank-math' ),
+			'iso6523Code'          => esc_html__( 'ISO 6523 Code', 'rank-math' ),
+			'duns'                 => esc_html__( 'DUNS', 'rank-math' ),
+			'leiCode'              => esc_html__( 'LEI Code', 'rank-math' ),
+			'naics'                => esc_html__( 'NAICS Code', 'rank-math' ),
+			'globalLocationNumber' => esc_html__( 'Global Location Number', 'rank-math' ),
+			'vatID'                => esc_html__( 'VAT ID', 'rank-math' ),
+			'taxID'                => esc_html__( 'Tax ID', 'rank-math' ),
+			'numberOfEmployees'    => esc_html__( 'Number of Employees', 'rank-math' ),
+		];
+	}
+
+	/**
 	 * Function to indent child business types..
 	 *
 	 * @param array $business Business types array.

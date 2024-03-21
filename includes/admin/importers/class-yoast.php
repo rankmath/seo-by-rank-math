@@ -113,10 +113,12 @@ class Yoast extends Plugin_Importer {
 			'metadesc-archive-wpseo' => 'date_archive_description',
 			'title-search-wpseo'     => 'search_title',
 			'title-404-wpseo'        => '404_title',
+			'org-description'        => 'organization_description',
 		];
 		$this->replace( $hash, $yoast_titles, $this->titles, 'convert_variables' );
 
 		$this->local_seo_settings();
+		$this->set_additional_organization_details( $yoast_titles );
 		$this->set_separator( $yoast_titles );
 		$this->set_post_types( $yoast_titles );
 		$this->set_taxonomies( $yoast_titles );
@@ -754,6 +756,41 @@ class Yoast extends Plugin_Importer {
 		);
 
 		return $item->save();
+	}
+
+	/**
+	 * Set additional Organization details.
+	 *
+	 * @param array $yoast_titles Settings.
+	 */
+	private function set_additional_organization_details( $yoast_titles ) {
+		$additional_details = [];
+		$properties         = [
+			'org-legal-name'       => 'legalName',
+			'org-founding-date'    => 'foundingDate',
+			'org-number-employees' => 'numberOfEmployees',
+			'org-vat-id'           => 'vatID',
+			'org-tax-id'           => 'taxID',
+			'org-iso'              => 'iso6523Code',
+			'org-duns'             => 'duns',
+			'org-leicode'          => 'leiCode',
+			'org-naics'            => 'naics',
+		];
+
+		foreach ( $properties as $key => $property ) {
+			if ( empty( $yoast_titles[ $key ] ) ) {
+				continue;
+			}
+
+			$additional_details[] = [
+				'type'  => $property,
+				'value' => $yoast_titles[ $key ],
+			];
+		}
+
+		if ( ! empty( $additional_details ) ) {
+			$this->titles['additional_info'] = $additional_details;
+		}
 	}
 
 	/**

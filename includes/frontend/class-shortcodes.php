@@ -123,7 +123,7 @@ class Shortcodes {
 
 		$allowed = 'person' === $type
 		? [ 'name', 'email', 'person_phone', 'address' ]
-		: [ 'name', 'email', 'address', 'hours', 'phone', 'map' ];
+		: [ 'name', 'organization_description', 'email', 'address', 'hours', 'phone', 'additional_info', 'map' ];
 
 		if ( ! empty( $args['show'] ) && 'all' !== $args['show'] ) {
 			$allowed = array_intersect( Arr::from_string( $args['show'] ), $allowed );
@@ -369,6 +369,46 @@ class Shortcodes {
 			<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Output Organization description.
+	 */
+	private function display_organization_description() {
+		$description = Helper::get_settings( 'titles.organization_description' );
+		if ( ! $description ) {
+			return;
+		}
+		?>
+		<div class="rank-math-organization-description">
+			<label><?php esc_html_e( 'Description:', 'rank-math' ); ?></label>
+			<p><?php echo esc_html( $description ); ?></p>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Output Additional Organization details.
+	 */
+	private function display_additional_info() {
+		$properties = Helper::get_settings( 'titles.additional_info' );
+		if ( empty( $properties ) ) {
+			return;
+		}
+
+		$choices = Helper::choices_additional_organization_info();
+
+		foreach ( $properties as $property ) {
+			if ( empty( $property['value'] ) ) {
+				continue;
+			}
+			?>
+			<div class="rank-math-organization-additional-details">
+				<label><?php echo esc_html( $choices[ $property['type'] ] ); ?>:</label>
+				<span><?php echo esc_html( $property['value'] ); ?></span>
+			</div>
+			<?php
+		}
 	}
 
 	/**

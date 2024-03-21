@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.4.1
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.213
+Stable tag: 1.0.214
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,13 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.213 [Feb 21, 2024] =
-- Fixed: [Content AI Research](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) was not displaying existing results when the site had fewer than 500 credits
-- Fixed: [Content AI History tab](https://rankmath.com/kb/content-ai-history/) was not displaying all output from the [FAQ tool](https://rankmath.com/kb/content-ai-frequently-asked-questions-tool/)
-- Fixed: UX issue that hid some prompts in the [Content AI Prompts Library](https://rankmath.com/kb/how-to-use-rankbot-ai/#how-to-use-the-prompts-library) modal
-- Fixed: Hidden products were submitted to [Instant Indexing](https://rankmath.com/blog/google-indexing-api/)
-- Fixed: Duplicate Schema issue on [Easy Digital Download product pages](https://rankmath.com/kb/edd-product-schema/)
-- Fixed: [Exclude Posts option](https://rankmath.com/kb/configure-sitemaps/#exclude-posts) was not effective in the [HTML Sitemap](https://rankmath.com/kb/html-sitemap/)
+= 1.0.214 [Mar 07, 2024] =
+- Added: New [Organization Schema properties]((https://rankmath.com/kb/local-seo/)) recently introduced by Google
+- Fixed: [About](https://rankmath.com/kb/local-seo/#about-page) & [Contact Page](https://rankmath.com/kb/local-seo/#contact-page) search fields were not working when the Local SEO Module was disabled
+- Fixed: [Headless CMS](https://rankmath.com/kb/general-settings/#headless-cms-support) issue with Japanese characters
+- Fixed: Wrong colors in the [SEO Performance Graph](https://rankmath.com/kb/analytics/#seo-performance)
+- Fixed: Deprecated warning related to the `getBlocks` function in the browser's console
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

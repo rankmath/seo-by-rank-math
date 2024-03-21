@@ -29,7 +29,6 @@ class Local_Seo {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		$this->ajax( 'search_pages', 'search_pages' );
 		$this->action( 'after_setup_theme', 'location_sitemap' );
 		$this->filter( 'rank_math/settings/title', 'add_settings' );
 		$this->filter( 'rank_math/json_ld', 'organization_or_person', 9, 2 );
@@ -59,39 +58,6 @@ class Local_Seo {
 		$tabs['local']['file'] = dirname( __FILE__ ) . '/views/titles-options.php';
 
 		return $tabs;
-	}
-
-	/**
-	 * Ajax handler to search pages based on the searched string. Used in the Local SEO Settings.
-	 */
-	public function search_pages() {
-		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
-		$this->has_cap_ajax( 'general' );
-
-		$term = Param::get( 'term' );
-		if ( empty( $term ) ) {
-			exit;
-		}
-
-		global $wpdb;
-		$pages = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT ID, post_title FROM {$wpdb->prefix}posts WHERE post_type = 'page' AND post_status = 'publish' AND post_title LIKE %s",
-				"%{$wpdb->esc_like( $term )}%"
-			),
-			ARRAY_A
-		);
-
-		$data = [];
-		foreach ( $pages as $page ) {
-			$data[] = [
-				'id'   => $page['ID'],
-				'text' => $page['post_title'],
-				'url'  => get_permalink( $page['ID'] ),
-			];
-		}
-
-		wp_send_json( [ 'results' => $data ] );
 	}
 
 	/**
@@ -184,6 +150,7 @@ class Local_Seo {
 
 		$this->add_contact_points( $entity );
 		$this->add_business_hours( $entity );
+		$this->add_additional_details( $entity );
 
 		// Add reference to the place entity.
 		if ( isset( $data['place'] ) ) {
@@ -314,6 +281,52 @@ class Local_Seo {
 		}
 
 		return $opening_hours;
+	}
+
+	/**
+	 * Add additional details in the Organization schema.
+	 *
+	 * @param array $entity Array of JSON-LD entity.
+	 */
+	private function add_additional_details( &$entity ) {
+		$description = Helper::get_settings( 'titles.organization_description' );
+		if ( $description ) {
+			$entity['description'] = $description;
+		}
+
+		$properties = Helper::get_settings( 'titles.additional_info' );
+		if ( empty( $properties ) ) {
+			return;
+		}
+
+		foreach ( $properties as $property ) {
+			if ( empty( $property['value'] ) ) {
+				continue;
+			}
+
+			$type = $property['type'];
+			if ( 'numberOfEmployees' === $type ) {
+				$parts = explode( '-', $property['value'] );
+				if ( empty( $parts[1] ) ) {
+					$entity['numberOfEmployees'] = [
+						'@type' => 'QuantitativeValue',
+						'value' => $parts[0],
+					];
+
+					continue;
+				}
+
+				$entity['numberOfEmployees'] = [
+					'@type'    => 'QuantitativeValue',
+					'minValue' => $parts[0],
+					'maxValue' => $parts[1],
+				];
+
+				continue;
+			}
+
+			$entity[ $type ] = $property['value'];
+		}
 	}
 
 	/**
