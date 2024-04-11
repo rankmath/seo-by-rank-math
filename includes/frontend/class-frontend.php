@@ -173,7 +173,7 @@ class Frontend {
 			( Helper::get_settings( 'titles.disable_date_archives' ) && $wp_query->is_date ) ||
 			( true === Helper::get_settings( 'titles.disable_author_archives' ) && $wp_query->is_author )
 		) {
-			Helper::redirect( get_bloginfo( 'url' ), 301 );
+			Helper::redirect( $this->do_filter( 'frontend/archive/redirect_url', get_bloginfo( 'url' ) ), 301 );
 			exit;
 		}
 	}
