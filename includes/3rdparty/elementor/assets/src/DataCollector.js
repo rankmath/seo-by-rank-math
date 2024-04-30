@@ -86,11 +86,7 @@ class DataCollector {
 	 * @return {void}
 	 */
 	activateSaveButton() {
-		const footerSaver = get( elementor, 'saver.footerSaver', false )
-		if ( false !== footerSaver ) {
-			footerSaver.activateSaveButtons( document, true )
-			return
-		}
+		window.top.$e.internal( 'document/save/set-is-modified', { status: true } );
 
 		elementor.channels.editor.trigger( 'status:change', true )
 	}
