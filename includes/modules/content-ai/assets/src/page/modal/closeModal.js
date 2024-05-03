@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { includes, forEach, isEmpty, isNull } from 'lodash'
+import { includes, forEach, isEmpty, isUndefined, isNull } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -16,6 +16,7 @@ const closeModal = ( setEndpoint ) => {
 	if ( ! isNull( document.getElementById( 'rank-math-content-ai-modal-wrapper' ) ) ) {
 		document.getElementById( 'rank-math-content-ai-modal-wrapper' ).remove()
 		document.querySelector( '.rank-math-contentai-modal-overlay' ).remove()
+		document.body.classList.remove( 'modal-open' )
 	}
 
 	return true
@@ -24,6 +25,10 @@ const closeModal = ( setEndpoint ) => {
 export default ( e, params, attributes, setEndpoint ) => {
 	if ( ! isNull( dispatch( 'rank-math' ) ) ) {
 		dispatch( 'rank-math-content-ai' ).isAutoCompleterOpen( false )
+	}
+
+	if ( isUndefined( e ) ) {
+		return
 	}
 
 	if ( e.type === 'blur' ) {

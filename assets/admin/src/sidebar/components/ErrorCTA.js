@@ -174,7 +174,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 					{
 						isRegistered && ( ! hasContentAIPlan || isFree ) &&
 						<Button
-							href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw', 'Buy+Plan+Button' ) }
+							href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&', 'Buy+Plan+Button' ) }
 							className="button button-primary is-green"
 							target="_blank"
 						>
@@ -211,7 +211,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 					{ getCreditsExhaustedMessage() }
 				</p>
 				<Button
-					href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw', 'Buy+Credits+Button' ) }
+					href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&', 'Buy+Credits+Button' ) }
 					className="button button-primary is-green"
 					target="_blank"
 				>

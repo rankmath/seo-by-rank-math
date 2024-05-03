@@ -341,7 +341,6 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Tools\\AIOSEO_Blocks' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-aioseo-blocks.php',
         'RankMath\\Tools\\AIOSEO_TOC_Converter' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-aioseo-toc-converter.php',
         'RankMath\\Tools\\Database_Tools' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-database-tools.php',
-        'RankMath\\Tools\\Remove_Schema' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-remove-schema.php',
         'RankMath\\Tools\\Update_Score' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-update-score.php',
         'RankMath\\Tools\\Yoast_Blocks' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-yoast-blocks.php',
         'RankMath\\Tools\\Yoast_FAQ_Converter' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-yoast-faq-converter.php',

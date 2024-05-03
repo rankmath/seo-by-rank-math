@@ -13,7 +13,6 @@ import { select, dispatch } from '@wordpress/data'
 /**
  * Internal dependencies
  */
-import markdownConverter from '../helpers/markdownConverter'
 import getTypingWorker from '../helpers/getTypingWorker'
 
 /**
@@ -40,7 +39,6 @@ const changeCursorPosition = ( wrapper ) => {
  */
 export default ( content, selectionID = '', appendContent = false, existingContent = '' ) => {
 	// Add content in Elementor editor.
-	content = markdownConverter( content )
 	if ( existingContent ) {
 		dispatch( 'core/block-editor' ).updateBlockAttributes(
 			selectionID,

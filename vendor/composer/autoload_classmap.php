@@ -311,7 +311,6 @@ return array(
     'RankMath\\Tools\\AIOSEO_Blocks' => $baseDir . '/includes/modules/database-tools/class-aioseo-blocks.php',
     'RankMath\\Tools\\AIOSEO_TOC_Converter' => $baseDir . '/includes/modules/database-tools/class-aioseo-toc-converter.php',
     'RankMath\\Tools\\Database_Tools' => $baseDir . '/includes/modules/database-tools/class-database-tools.php',
-    'RankMath\\Tools\\Remove_Schema' => $baseDir . '/includes/modules/database-tools/class-remove-schema.php',
     'RankMath\\Tools\\Update_Score' => $baseDir . '/includes/modules/database-tools/class-update-score.php',
     'RankMath\\Tools\\Yoast_Blocks' => $baseDir . '/includes/modules/database-tools/class-yoast-blocks.php',
     'RankMath\\Tools\\Yoast_FAQ_Converter' => $baseDir . '/includes/modules/database-tools/class-yoast-faq-converter.php',

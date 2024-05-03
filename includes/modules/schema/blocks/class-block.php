@@ -91,6 +91,18 @@ class Block {
 	}
 
 	/**
+	 * Get title wrapper tag.
+	 *
+	 * @param string $title_wrapper Title wrapper attribute.
+	 * @param string $block         Block name.
+	 */
+	protected function get_title_wrapper( $title_wrapper, $block = 'faq' ) {
+		$wrapper = in_array( $title_wrapper, [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div' ], true ) ? $title_wrapper : 'h2';
+
+		return apply_filters( "rank_math/blocks/{$block}/title_wrapper", $wrapper );
+	}
+
+	/**
 	 * Normalize the block text.
 	 *
 	 * @param string $text  Text.

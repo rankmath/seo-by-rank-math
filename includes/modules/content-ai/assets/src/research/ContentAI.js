@@ -40,6 +40,8 @@ class ContentAI extends Component {
 		super( ...arguments )
 		this.state = { keyword: this.props.keyword, showResearch: this.props.keyword !== rankMath.ca_keyword.keyword, country: this.props.country, credits: 1, loading: false }
 		this.setState = this.setState.bind( this )
+		this.isFree = isEmpty( rankMath.contentAIPlan ) || rankMath.contentAIPlan === 'free'
+		this.hasCredits = rankMath.isUserRegistered && rankMath.ca_credits >= 500
 	}
 
 	/**
@@ -48,9 +50,7 @@ class ContentAI extends Component {
 	 * @return {Component} ContentAI.
 	 */
 	render() {
-		const isFree = isEmpty( rankMath.contentAIPlan ) || rankMath.contentAIPlan === 'free'
-		const hasCredits = this.hasCredits()
-		const showError = ! hasCredits || isFree
+		const showError = isEmpty( this.props.data ) && ( ! this.hasCredits || this.isFree )
 		const className = classnames( 'rank-math-content-ai-data', {
 			loading: this.state.loading,
 			blurred: showError,
@@ -85,8 +85,8 @@ class ContentAI extends Component {
 									<Button className='is-link' href={ getLink( 'content-ai-settings', 'Sidebar KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Content AI Knowledge Base.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
 								</h3>
 								<ContentAIScore />
-								<Recommendations recommendations={ data.recommendations } hasCredits={ hasCredits } content={ this.props.content } researcher={ this.props.researcher } updateAiScore={ this.props.updateAiScore } hasThumbnail={ this.props.hasThumbnail } />
-								<ContentAIPanel caData={ this.props } updateAiScore={ this.props.updateAiScore } hasCredits={ hasCredits } />
+								<Recommendations recommendations={ data.recommendations } hasCredits={ this.hasCredits } content={ this.props.content } researcher={ this.props.researcher } updateAiScore={ this.props.updateAiScore } hasThumbnail={ this.props.hasThumbnail } />
+								<ContentAIPanel caData={ this.props } updateAiScore={ this.props.updateAiScore } hasCredits={ this.hasCredits } />
 							</div>
 							}
 						</div>
@@ -95,14 +95,6 @@ class ContentAI extends Component {
 				</PanelBody>
 			</Fragment>
 		)
-	}
-
-	hasCredits() {
-		if ( ! isEmpty( this.props.data ) ) {
-			return true
-		}
-
-		return rankMath.isUserRegistered && rankMath.ca_credits >= 500
 	}
 
 	/**
@@ -201,7 +193,7 @@ class ContentAI extends Component {
 						{ __( 'To learn how to use it', 'rank-math' ) } <a href={ getLink( 'content-ai-settings', 'Content AI Sidebar KB Link' ) } target="_blank" rel="noreferrer">{ __( 'Click here', 'rank-math' ) }</a>
 					</div>
 					{
-						! this.state.showResearch && ! this.state.loading && ! isEmpty( this.props.data ) && rankMath.ca_credits >= 500 &&
+						! this.state.showResearch && ! this.state.loading && ! isEmpty( this.props.data ) && this.hasCredits && ! this.isFree &&
 						<Button
 							className="rank-math-ca-force-update"
 							onClick={ () => this.props.researchKeyword( this.state, this.setState, true ) }

@@ -184,7 +184,7 @@ class Block_FAQ extends Block {
 
 			$out[] = sprintf(
 				'<%1$s class="rank-math-question %2$s">%3$s</%1$s>',
-				apply_filters( 'rank_math/blocks/faq/title_wrapper', esc_attr( $attributes['titleWrapper'] ) ),
+				self::get()->get_title_wrapper( $attributes['titleWrapper'] ),
 				esc_attr( $attributes['titleCssClasses'] ),
 				wp_kses_post( $question['title'] )
 			);

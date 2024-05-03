@@ -25,7 +25,12 @@ import callApi from './callApi'
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 	return ( selectedBlock ) => {
-		if ( selectedBlock && ( ! includes( [ 'core/paragraph', 'core/heading' ], selectedBlock.name ) || isEmpty( selectedBlock.attributes.content ) ) ) {
+		if ( selectedBlock && ( ! includes( [ 'core/paragraph', 'core/heading' ], selectedBlock.name ) ) ) {
+			return <BlockEdit { ...selectedBlock } />
+		}
+
+		const text = ! isEmpty( selectedBlock.attributes.content.text ) ? selectedBlock.attributes.content.text : selectedBlock.attributes.content
+		if ( isEmpty( text ) ) {
 			return <BlockEdit { ...selectedBlock } />
 		}
 
@@ -65,7 +70,6 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 			},
 		)
 
-		const text = ! isEmpty( selectedBlock.attributes ) ? selectedBlock.attributes.content.split( ' ' ).splice( 0, 149 ).join( ' ' ) : ''
 		return (
 			<>
 				<BlockEdit { ...selectedBlock } />

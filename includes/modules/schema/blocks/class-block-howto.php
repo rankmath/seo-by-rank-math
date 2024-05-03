@@ -189,7 +189,7 @@ class Block_HowTo extends Block {
 	public static function markup( $attributes = [] ) {
 		$list_style          = isset( $attributes['listStyle'] ) ? esc_attr( $attributes['listStyle'] ) : '';
 		$list_css_classes    = isset( $attributes['listCssClasses'] ) ? esc_attr( $attributes['listCssClasses'] ) : '';
-		$title_wrapper       = isset( $attributes['titleWrapper'] ) ? esc_attr( $attributes['titleWrapper'] ) : 'h2';
+		$title_wrapper       = isset( $attributes['titleWrapper'] ) ? esc_attr( $attributes['titleWrapper'] ) : 'h3';
 		$title_css_classes   = isset( $attributes['titleCssClasses'] ) ? esc_attr( $attributes['titleCssClasses'] ) : '';
 		$content_css_classes = isset( $attributes['contentCssClasses'] ) ? esc_attr( $attributes['contentCssClasses'] ) : '';
 		$size_slug           = isset( $attributes['sizeSlug'] ) ? esc_attr( $attributes['sizeSlug'] ) : '';
@@ -237,7 +237,7 @@ class Block_HowTo extends Block {
 			if ( ! empty( $step['title'] ) ) {
 				$out[] = sprintf(
 					'<%1$s class="rank-math-step-title %2$s">%3$s</%1$s>',
-					$title_wrapper,
+					self::get()->get_title_wrapper( $title_wrapper, 'howto' ),
 					$title_css_classes,
 					$step['title']
 				);
@@ -247,8 +247,7 @@ class Block_HowTo extends Block {
 			$step_image   = ! empty( $step['imageUrl'] ) ? '<img src="' . esc_url( $step['imageUrl'] ) . '" />' : self::get()->get_image( $step, $size_slug, '' );
 
 			$out[] = sprintf(
-				'<div class="rank-math-step-content %2$s">%4$s%3$s</div>',
-				$title_wrapper,
+				'<div class="rank-math-step-content %1$s">%3$s%2$s</div>',
 				$content_css_classes,
 				$step_content,
 				$step_image
