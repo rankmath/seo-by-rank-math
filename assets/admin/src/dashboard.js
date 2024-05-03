@@ -9,7 +9,7 @@
  * External Dependencies
  */
 import $ from 'jquery'
-import { isNull } from 'lodash'
+import { isNull, isUndefined, includes } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -226,7 +226,11 @@ class RankMathDashboard {
 				render(
 					<Modal
 						className="rank-math-onsite-checkout-modal"
-						onRequestClose={ () => {
+						onRequestClose={ ( event ) => {
+							if ( ! isUndefined( event ) && includes( event.target.classList, 'rank-math-onsite-checkout-modal' ) ) {
+								return false
+							}
+
 							$( '.components-modal__screen-overlay' ).hide()
 							$( 'body' ).removeClass( 'modal-open' )
 						} }

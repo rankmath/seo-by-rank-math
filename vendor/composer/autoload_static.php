@@ -163,6 +163,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Frontend\\Frontend' => __DIR__ . '/../..' . '/includes/frontend/class-frontend.php',
         'RankMath\\Frontend\\Head' => __DIR__ . '/../..' . '/includes/frontend/class-head.php',
         'RankMath\\Frontend\\Link_Attributes' => __DIR__ . '/../..' . '/includes/frontend/class-link-attributes.php',
+        'RankMath\\Frontend\\Redirection' => __DIR__ . '/../..' . '/includes/frontend/class-redirection.php',
         'RankMath\\Frontend\\Shortcodes' => __DIR__ . '/../..' . '/includes/frontend/class-shortcodes.php',
         'RankMath\\Frontend_SEO_Score' => __DIR__ . '/../..' . '/includes/class-frontend-seo-score.php',
         'RankMath\\Google\\Analytics' => __DIR__ . '/../..' . '/includes/modules/analytics/google/class-analytics.php',

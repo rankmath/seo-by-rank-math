@@ -123,7 +123,15 @@ class Permissions {
 	 */
 	public static function print_warning() {
 		?>
-		<p class="warning"><strong class="warning"><?php esc_html_e( 'Warning:', 'rank-math' ); ?></strong> <?php printf( wp_kses_post( __( 'You have not given the permission to fetch this data. Please <a href="%s">reconnect</a> with all required permissions.', 'rank-math' ) ), wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ) ); ?></p>
+		<p class="warning">
+			<strong class="warning">
+				<?php esc_html_e( 'Warning:', 'rank-math' ); ?>
+			</strong>
+			<?php
+				/* translators: %s is the reconnect link. */
+				printf( wp_kses_post( __( 'You have not given the permission to fetch this data. Please <a href="%s">reconnect</a> with all required permissions.', 'rank-math' ) ), wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ) );
+			?>
+		</p>
 		<?php
 	}
 }

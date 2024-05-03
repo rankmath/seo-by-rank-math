@@ -121,7 +121,7 @@ class Add_Attributes {
 	 * @param null|int $post_id The post ID.
 	 * @return object
 	 */
-	private function get_post( $post_id = null) {
+	private function get_post( $post_id = null ) {
 		$post = \get_post( $post_id );
 		if ( empty( $post ) ) {
 			$post = new stdClass();

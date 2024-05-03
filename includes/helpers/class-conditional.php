@@ -344,7 +344,7 @@ trait Conditional {
 
 		// (#3)
 		if ( null === $wp_rewrite ) {
-			$wp_rewrite = new \WP_Rewrite;
+			$wp_rewrite = new \WP_Rewrite();
 		}
 
 		// (#4)

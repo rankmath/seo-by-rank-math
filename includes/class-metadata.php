@@ -47,7 +47,7 @@ abstract class Metadata {
 
 	/**
 	 * Holds the properties.
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $properties = [];
@@ -78,7 +78,7 @@ abstract class Metadata {
 	/**
 	 * Setter.
 	 * This prevents the Dynamic Properties deprecation notice in PHP 8.2.
-	 * 
+	 *
 	 * @param string $property Key to set.
 	 * @param mixed  $value    Value to set.
 	 * @return void

@@ -61,7 +61,7 @@ class Block {
 	protected function get_styles( $attributes ) {
 		return empty( $attributes['textAlign'] ) || 'left' === $attributes['textAlign']
 			? ''
-			: ' style="' . join( ';', 'text-align:' . $attributes['textAlign'] ) . '"';
+			: ' style="' . join( ';', [ 'text-align:' . $attributes['textAlign'] ] ) . '"';
 	}
 
 	/**

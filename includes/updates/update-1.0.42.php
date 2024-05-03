@@ -21,9 +21,9 @@ function rank_math_1_0_42_delete_fake_redirection() {
 
 	$table = Database::table( 'rank_math_redirections' );
 	$table->select( 'id' )
-		->whereLike( 'url_to', 'https://' . 'ischeck' . '.xyz', '' )
-		->orWhereLike( 'url_to', 'http://' . 'ischeck' . '.xyz', '' )
-		->orWhereLike( 'url_to', '//ischeck' . '.xyz', '' );
+		->whereLike( 'url_to', 'https://ischeck.xyz', '' )
+		->orWhereLike( 'url_to', 'http://ischeck.xyz', '' )
+		->orWhereLike( 'url_to', '//ischeck.xyz', '' );
 
 	$redirections = $table->get( ARRAY_A );
 	$redirections = wp_list_pluck( $redirections, 'id' );

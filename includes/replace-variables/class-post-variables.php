@@ -505,9 +505,7 @@ class Post_Variables extends Advanced_Variables {
 		$terms = wp_get_object_terms(
 			$this->args->ID,
 			$main_tax,
-			[
-				'fields' => 'names'
-			]
+			[ 'fields' => 'names' ]
 		);
 
 		if ( is_wp_error( $terms ) || empty( $terms ) ) {

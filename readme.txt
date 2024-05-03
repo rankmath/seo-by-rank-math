@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.5
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.215.1
+Stable tag: 1.0.216
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,20 +583,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.215 [Mar 20, 2024] =
-- Added: WordPress 6.5 Compatibility
-- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#change-local-seo-shortcode-output) to change the [[rank_math_contact_info] shortcode](https://rankmath.com/kb/local-seo/#business-location-data-shortcode) content
-- Improved: Strengthened the security of the plugin's HowTo Block to prevent potential exploitation by users with post edit access. Thanks to [WordFence]
-(https://www.wordfence.com/) for revealing it responsibly
-- Fixed: [Content AI Research](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) was not displaying existing results when the site had used all the credits
-- Fixed: [Analytics](https://rankmath.com/kb/analytics/) was displaying a white page on Arabic language sites.
-- Fixed: Issue with [Remove Base option](https://rankmath.com/kb/general-settings/#remove-base) when product base words are used in the product slug
-- Fixed: [Redirection](https://rankmath.com/kb/setting-up-redirections/) issue on sub-directory installations when the source URL contains a substring of the sub-directory
-- Fixed: Missing period(.) after number in the [Table of Contents ordered list](https://rankmath.com/kb/table-of-contents-block/#list-style)
-- Fixed: Incompatibility with Dokan plugin
-
-= 1.0.215.1 [Mar 21, 2024] =
-- Fixed: [Content AI Research](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) was showing blurred section on new posts
+= 1.0.216 [Apr 03, 2024] =
+- Improved: [Debug Redirections option](https://rankmath.com/kb/solving-redirection-issues-using-rank-math-seo/#redirection-debug) can now track other Rank Math system redirections, such as [Redirect Attachments](https://rankmath.com/kb/general-settings/#redirect-attachments) and [Author/Date archives redirects](https://rankmath.com/kb/titles-and-meta/#author-archives)
+- Fixed: PHP error with the alignment option in [FAQ Block](https://rankmath.com/kb/faq-schema-block/)
+- Fixed: [Remove Base option](https://rankmath.com/kb/general-settings/#remove-base) was not working on subsites within a multisite setup
+- Fixed: Missing WooCommerce Settings page link on the [Modules page](https://rankmath.com/kb/managing-modules/)
+- Fixed: PHP warning related to [Open Graph image](https://rankmath.com/kb/open-graph-meta-tags/#og-image) on some setups
+- Fixed: Sitewide noindex notification not being displayed when the option was enabled before the plugin installation
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

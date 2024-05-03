@@ -323,12 +323,12 @@ trait Where {
 		// have an "in" or "between" statement which has no need for duplicates.
 		if ( is_array( $param2 ) ) {
 			$param2 = $this->esc_array( array_unique( $param2 ) );
-			$param2 = in_array( $param1, array( 'BETWEEN', 'NOT BETWEEN' ), true ) ? join( ' AND ', $param2 ) : '(' . join( ', ', $param2 ) . ')';
+			$param2 = in_array( $param1, [ 'BETWEEN', 'NOT BETWEEN' ], true ) ? join( ' AND ', $param2 ) : '(' . join( ', ', $param2 ) . ')';
 		} elseif ( is_scalar( $param2 ) ) {
 			$param2 = $this->esc_value( $param2 );
 		}
 
-		return join( ' ', array( $type, $column, $param1, $param2 ) );
+		return join( ' ', [ $type, $column, $param1, $param2 ] );
 	}
 
 	/**
@@ -339,7 +339,7 @@ trait Where {
 	 * @throws \Exception If not a valid type.
 	 */
 	private function is_valid_type( $type ) {
-		if ( ! in_array( $type, array( 'AND', 'OR', 'WHERE' ), true ) ) {
+		if ( ! in_array( $type, [ 'AND', 'OR', 'WHERE' ], true ) ) {
 			throw new \Exception( 'Invalid where type "' . $type . '"' );
 		}
 	}
@@ -352,7 +352,7 @@ trait Where {
 	 * @param string $sub_type Statement sub-type.
 	 */
 	private function bulk_where( $where, $type, $sub_type ) {
-		$subquery = array();
+		$subquery = [];
 		foreach ( $where as $value ) {
 			if ( ! isset( $value[2] ) ) {
 				$value[2] = $value[1];

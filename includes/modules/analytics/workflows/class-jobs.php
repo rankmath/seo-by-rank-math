@@ -127,6 +127,8 @@ class Jobs {
 
 	/**
 	 * Set the console start and end dates.
+	 *
+	 * @param array $args Args containing start and end date.
 	 */
 	public function get_console_days( $args = [] ) {
 		set_time_limit( 300 );

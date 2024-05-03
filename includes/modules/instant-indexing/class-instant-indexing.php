@@ -42,11 +42,15 @@ class Instant_Indexing extends Base {
 
 	/**
 	 * Store previous post status that we can check agains in save_post.
+	 *
+	 * @var array
 	 */
 	private $previous_post_status = [];
 
 	/**
 	 * Store original permalinks for when they get trashed.
+	 *
+	 * @var array
 	 */
 	private $previous_post_permalinks = [];
 
@@ -68,7 +72,7 @@ class Instant_Indexing extends Base {
 		}
 
 		$post_types = $this->get_auto_submit_post_types();
-		if (  ! empty( $post_types ) ) {
+		if ( ! empty( $post_types ) ) {
 			$this->filter( 'wp_insert_post_data', 'before_save_post', 10, 4 );
 		}
 
@@ -253,7 +257,7 @@ class Instant_Indexing extends Base {
 
 	/**
 	 * Store previous post status & permalink before saving the post.
-	 * 
+	 *
 	 * @param  array $data                Post data.
 	 * @param  array $postarr             Raw post data.
 	 * @param  array $unsanitized_postarr Unsanitized post data.

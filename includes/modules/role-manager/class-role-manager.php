@@ -147,11 +147,11 @@ class Role_Manager extends Base {
 	/**
 	 * Update checkbox input attributes
 	 *
-	 * @param array  $args              The array of attribute arguments.
-	 * @param array  $type_defaults     The array of default values.
-	 * @param array  $field             The `CMB2_Field` object.
-	 * @param object $field_type_object This `CMB2_Types` object.
-	 * @return array                  Parsed and filtered arguments.
+	 * @param array  $args          The array of attribute arguments.
+	 * @param array  $type_defaults The array of default values.
+	 * @param array  $field         The `CMB2_Field` object.
+	 * @param object $types         This `CMB2_Types` object.
+	 * @return array                Parsed and filtered arguments.
 	 */
 	public function input_attributes( $args, $type_defaults, $field, $types ) {
 		if ( ! isset( $type_defaults['class'] ) || ! isset( $type_defaults['name'] ) || ! isset( $args['label'] ) ) {

@@ -159,6 +159,7 @@ class Installer {
 		// Activate Watcher.
 		$watcher = new Watcher();
 		$watcher->check_activated_plugin();
+		$watcher->check_search_engine_visibility( ! get_option( 'blog_public' ) );
 
 		$this->clear_rewrite_rules( true );
 		Helper::clear_cache( 'activate' );

@@ -133,6 +133,13 @@ abstract class Base {
 		return true;
 	}
 
+	/**
+	 * Function to get the dates.
+	 *
+	 * @param int $days Number of days.
+	 *
+	 * @return array
+	 */
 	public static function get_dates( $days = 90 ) {
 		$end   = Helper::get_midnight( strtotime( '-1 day', time() ) );
 		$start = strtotime( '-' . $days . ' day', $end );
@@ -146,11 +153,11 @@ abstract class Base {
 	/**
 	 * Schedule single action
 	 *
-	 * @param int     $days
-	 * @param string  $hook
-	 * @param array   $args
-	 * @param string  $group
-	 * @param boolean $unique
+	 * @param int     $days   Number of days.
+	 * @param string  $action Name of the action hook.
+	 * @param array   $args   Arguments to pass to callbacks when the hook triggers.
+	 * @param string  $group  The group to assign this job to.
+	 * @param boolean $unique Whether the action should be unique.
 	 */
 	public function schedule_single_action( $days = 90, $action = '', $args = [], $group = 'rank-math', $unique = false ) {
 		$timestamp = get_option( 'rank_math_analytics_last_single_action_schedule_time', time() );

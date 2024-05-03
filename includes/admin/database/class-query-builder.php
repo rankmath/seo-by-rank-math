@@ -268,20 +268,20 @@ class Query_Builder {
 	private function reset() {
 		$this->distinct    = false;
 		$this->found_rows  = false;
-		$this->sql_clauses = array(
-			'select'     => array(),
-			'from'       => array(),
-			'left_join'  => array(),
-			'join'       => array(),
-			'right_join' => array(),
-			'where'      => array(),
-			'where_time' => array(),
-			'group_by'   => array(),
-			'having'     => array(),
-			'limit'      => array(),
-			'order_by'   => array(),
-			'values'     => array(),
-		);
+		$this->sql_clauses = [
+			'select'     => [],
+			'from'       => [],
+			'left_join'  => [],
+			'join'       => [],
+			'right_join' => [],
+			'where'      => [],
+			'where_time' => [],
+			'group_by'   => [],
+			'having'     => [],
+			'limit'      => [],
+			'order_by'   => [],
+			'values'     => [],
+		];
 
 		return $this;
 	}

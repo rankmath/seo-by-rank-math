@@ -435,7 +435,8 @@ class Admin implements Runner {
 				🎉
 				<span><?php esc_attr_e( 'Exclusive Offer!', 'rank-math' ); ?></span>
 			</a>
-		<?php }
+			<?php
+		}
 	}
 
 	/**

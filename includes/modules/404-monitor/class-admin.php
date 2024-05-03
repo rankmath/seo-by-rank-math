@@ -26,14 +26,14 @@ class Admin extends Base {
 
 	/**
 	 * Module directory.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $directory;
 
 	/**
 	 * WP_List_Table class name.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $table;

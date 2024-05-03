@@ -503,7 +503,7 @@ class Stats extends Keywords {
 		$offset         = $args['offset'];
 		$perpage        = $args['perpage'];
 		$order_by_field = $args['orderBy'];
-		$sub_where		= $args['sub_where'];
+		$sub_where      = $args['sub_where'];
 
 		$order_position_fields = [ 'position', 'diffPosition' ];
 		$order_metrics_fields  = [ 'clicks', 'diffClicks', 'impressions', 'diffImpressions', 'ctr', 'diffCtr' ];

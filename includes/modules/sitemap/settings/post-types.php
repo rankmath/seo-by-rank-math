@@ -48,7 +48,7 @@ $cmb->add_field(
 		'attributes' => $attributes,
 		'classes'    => [
 			'rank-math-html-sitemap',
-			! Helper::get_settings( 'sitemap.html_sitemap' ) ? 'hidden' : ''
+			! Helper::get_settings( 'sitemap.html_sitemap' ) ? 'hidden' : '',
 		],
 	]
 );

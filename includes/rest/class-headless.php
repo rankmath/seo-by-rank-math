@@ -26,6 +26,11 @@ defined( 'ABSPATH' ) || exit;
  */
 class Headless extends WP_REST_Controller {
 
+	/**
+	 * Whether the request is for the homepage.
+	 *
+	 * @var boolean
+	 */
 	public $is_home = false;
 
 	/**

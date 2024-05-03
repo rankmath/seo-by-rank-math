@@ -28,7 +28,7 @@ class AIOSEO_TOC_Converter {
 		$attributes = $block['attrs'];
 		$headings   = [];
 		$this->get_headings( $attributes['headings'], $headings );
-		$new_block  = [
+		$new_block = [
 			'blockName' => 'rank-math/toc-block',
 			'attrs'     => [
 				'title'           => '',
@@ -67,7 +67,7 @@ class AIOSEO_TOC_Converter {
 	 * @param array $data     Block data.
 	 * @param array $headings Headings.
 	 *
-	 * @return array
+	 * @return void
 	 */
 	public function get_headings( $data, &$headings ) {
 		foreach ( $data as $heading ) {
@@ -93,7 +93,7 @@ class AIOSEO_TOC_Converter {
 	 * @return string
 	 */
 	public function get_toc_title( $html ) {
-		preg_match('#<h2.*?>(.*?)</h2>#i', $html, $found);
+		preg_match( '#<h2.*?>(.*?)</h2>#i', $html, $found );
 		return ! empty( $found[1] ) ? $found[1] : '';
 	}
 

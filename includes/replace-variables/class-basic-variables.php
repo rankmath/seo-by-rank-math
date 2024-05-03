@@ -26,7 +26,7 @@ class Basic_Variables extends Cache {
 	 * @var array
 	 */
 	protected $counters = [];
-	
+
 	/**
 	 * Is on post edit screen.
 	 *

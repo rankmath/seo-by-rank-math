@@ -342,6 +342,6 @@ class Facebook extends OpenGraph {
 	 * @return bool
 	 */
 	private function is_product() {
-		return function_exists( 'is_woocommerce' ) && function_exists('is_product') && is_product();
+		return function_exists( 'is_woocommerce' ) && function_exists( 'is_product' ) && is_product();
 	}
 }

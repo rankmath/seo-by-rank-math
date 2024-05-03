@@ -149,7 +149,7 @@ class Sitemap {
 	 * Hit sitemap index to pre-generate the cache.
 	 */
 	public static function hit_index() {
-		wp_remote_get( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) );
+		wp_remote_get( Router::get_base_url( self::get_sitemap_index_slug() . '.xml' ) );
 	}
 
 	/**

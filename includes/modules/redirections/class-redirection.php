@@ -478,9 +478,8 @@ class Redirection {
 	 */
 	public static function strip_subdirectory( $url ) {
 		$home_dir = ltrim( Helper::get_home_url( '', 'relative' ), '/' );
-		$pattern  = '/^' . str_replace( '/', '\/', trailingslashit( $home_dir ) ) . '/';
 
-		return $home_dir ? preg_replace( $pattern, '', $url ) : $url;
+		return $home_dir ? str_replace( trailingslashit( $home_dir ), '', $url ) : $url;
 	}
 
 	/**

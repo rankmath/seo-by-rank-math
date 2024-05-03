@@ -234,16 +234,16 @@
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.7.2",
+            "version": "3.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "cb3c7854b31a285b46964931425fef6f485be145"
+                "reference": "8aa895a6edfeb92f40d6eddc9dfc35df65da38ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/cb3c7854b31a285b46964931425fef6f485be145",
-                "reference": "cb3c7854b31a285b46964931425fef6f485be145",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/8aa895a6edfeb92f40d6eddc9dfc35df65da38ae",
+                "reference": "8aa895a6edfeb92f40d6eddc9dfc35df65da38ae",
                 "shasum": ""
             },
             "require": {
@@ -271,9 +271,9 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.7.2"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.7.3"
             },
-            "time": "2024-02-14T21:35:25+00:00"
+            "time": "2024-03-20T10:16:56+00:00"
         }
     ],
     "packages-dev": [],

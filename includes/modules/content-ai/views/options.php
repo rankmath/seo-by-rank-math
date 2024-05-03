@@ -15,17 +15,17 @@ defined( 'ABSPATH' ) || exit;
 if ( ! Helper::is_site_connected() ) {
 	$cmb->add_field(
 		[
-			'id'   => 'rank_math_content_ai_settings',
-			'type' => 'raw',
+			'id'      => 'rank_math_content_ai_settings',
+			'type'    => 'raw',
 			'content' => '<div id="setting-panel-content-ai" class="rank-math-tab rank-math-options-panel-content exclude">
 				<div class="wp-core-ui rank-math-ui connect-wrap">
-					<a href="'. Admin_Helper::get_activate_url( admin_url( 'admin.php??page=rank-math-options-general#setting-panel-content-ai' ) ) .'" class="button button-primary button-connect button-animated" name="rank_math_activate">'.
-						esc_html__( 'Connect Your Rank Math Account', 'rank-math' ).
-					'</a>
+					<a href="' . Admin_Helper::get_activate_url( admin_url( 'admin.php??page=rank-math-options-general#setting-panel-content-ai' ) ) . '" class="button button-primary button-connect button-animated" name="rank_math_activate">'
+					. esc_html__( 'Connect Your Rank Math Account', 'rank-math' )
+					. '</a>
 				</div>
 				<div id="rank-math-pro-cta" class="content-ai-settings">
 					<div class="rank-math-cta-box width-100 no-shadow no-padding no-border">
-						<h3>'. esc_html__( 'Benefits of Connecting Rank Math Account', 'rank-math' ) .'</h3>
+						<h3>' . esc_html__( 'Benefits of Connecting Rank Math Account', 'rank-math' ) . '</h3>
 						<ul>
 							<li>' . esc_html__( 'Gain Access to 40+ Advanced AI Tools.', 'rank-math' ) . '</li>
 							<li>' . esc_html__( 'Experience the Revolutionary AI-Powered Content Editor.', 'rank-math' ) . '</li>
@@ -156,7 +156,7 @@ $cmb->add_field(
 		'default'    => Helper::content_ai_default_language(),
 		'attributes' => ( 'data-s2' ),
 		'options'    => [
-			'US English'    => esc_html__( 'US English', 'rank-math' ),
+			'US English' => esc_html__( 'US English', 'rank-math' ),
 			'UK English' => esc_html__( 'UK English', 'rank-math' ),
 			'Bulgarian'  => esc_html__( 'Bulgarian', 'rank-math' ),
 			'Chinese'    => esc_html__( 'Chinese', 'rank-math' ),
@@ -206,7 +206,7 @@ $cmb->add_field(
 );
 
 $credits = Helper::get_credits();
-if (  Helper::is_site_connected() && false !== $credits  ) {
+if ( Helper::is_site_connected() && false !== $credits ) {
 	$update_credits = '<a href="#" class="rank-math-tooltip update-credit">
 		<i class="dashicons dashicons-image-rotate"></i>
 		<span>' . esc_html__( 'Click to refresh the available credits.', 'rank-math' ) . '</span>

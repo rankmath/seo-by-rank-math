@@ -564,6 +564,11 @@ class Post_Type implements Provider {
 		return $this->home_url;
 	}
 
+	/**
+	 * Get Blog page id.
+	 *
+	 * @return int
+	 */
 	private function get_blog_page_id() {
 		return get_option( 'show_on_front' ) === 'page' && $this->get_page_for_posts_id() ? $this->get_page_for_posts_id() : '';
 	}

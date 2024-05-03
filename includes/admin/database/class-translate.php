@@ -21,7 +21,7 @@ trait Translate {
 	 * @return string
 	 */
 	private function translateSelect() { // @codingStandardsIgnoreLine
-		$query = array( 'SELECT' );
+		$query = [ 'SELECT' ];
 
 		if ( $this->found_rows ) {
 			$query[] = 'SQL_CALC_FOUND_ROWS';
@@ -48,10 +48,10 @@ trait Translate {
 	 * @return string
 	 */
 	private function translateUpdate() { // @codingStandardsIgnoreLine
-		$query = array( "UPDATE {$this->table} SET" );
+		$query = [ "UPDATE {$this->table} SET" ];
 
 		// Add the values.
-		$values = array();
+		$values = [];
 		foreach ( $this->sql_clauses['values'] as $key => $value ) {
 			$values[] = $key . ' = ' . $this->esc_value( $value );
 		}
@@ -72,7 +72,7 @@ trait Translate {
 	 * @return string
 	 */
 	private function translateDelete() { // @codingStandardsIgnoreLine
-		$query   = array( 'DELETE' );
+		$query   = [ 'DELETE' ];
 		$query[] = $this->translateFrom();
 		$query[] = $this->get_sql_clause( 'where', true );
 		$query[] = $this->translateLimit();

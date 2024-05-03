@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.215.1\n"
+"Project-Id-Version: Rank Math SEO 1.0.216\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-21T16:48:40+00:00\n"
+"POT-Creation-Date: 2024-04-03T09:30:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -462,6 +462,9 @@ msgstr ""
 msgid "Settings could not be imported: Upload failed."
 msgstr ""
 
+msgid "No items found."
+msgstr ""
+
 #. Translators: placeholder is the post type name.
 msgid "Rank Math has detected a new post type: %1$s. You may want to check the settings of the <a href=\"%2$s\">Titles &amp; Meta page</a>."
 msgstr ""
@@ -632,6 +635,15 @@ msgid "Save Changes"
 msgstr ""
 
 msgid "Reset Options"
+msgstr ""
+
+msgid "$id variable required"
+msgstr ""
+
+msgid "Variable Required"
+msgstr ""
+
+msgid "$title variable required"
 msgstr ""
 
 msgid "SEO Details"
@@ -1399,6 +1411,7 @@ msgid "Choose your Sitemap configuration and select which type of posts or pages
 msgstr ""
 
 #. translators: Link to How to Setup Sitemap KB article
+#. Translators: placeholder is the KB link.
 msgid "Learn more."
 msgstr ""
 
@@ -1603,6 +1616,7 @@ msgstr ""
 msgid "Learn more about the benefits of connecting your account here."
 msgstr ""
 
+#. Translators: placeholder is the KB link.
 msgid "We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s"
 msgstr ""
 
@@ -2849,6 +2863,7 @@ msgstr ""
 msgid "Warning:"
 msgstr ""
 
+#. translators: %s is the reconnect link.
 msgid "You have not given the permission to fetch this data. Please <a href=\"%s\">reconnect</a> with all required permissions."
 msgstr ""
 
@@ -4663,6 +4678,7 @@ msgstr ""
 msgid "Competitor Analyzer"
 msgstr ""
 
+#. Translators: placeholder is the new Rank Math label.
 msgid "SEO Analyzer %s"
 msgstr ""
 

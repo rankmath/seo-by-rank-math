@@ -789,7 +789,7 @@ class SEOPress extends Plugin_Importer {
 
 			// Keep global no index status.
 			if ( ! empty( $robots['noindex'] ) ) {
-				unset( $current[ 'index' ] );
+				unset( $current['index'] );
 				$current[] = 'noindex';
 			}
 		}

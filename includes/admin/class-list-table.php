@@ -31,7 +31,7 @@ class List_Table extends WP_List_Table {
 	 * Message to be displayed when there are no items.
 	 */
 	public function no_items() {
-		echo isset( $this->_args['no_items'] ) ? $this->_args['no_items'] : esc_html__( 'No items found.' );
+		echo isset( $this->_args['no_items'] ) ? $this->_args['no_items'] : esc_html__( 'No items found.', 'rank-math' );
 	}
 
 	/**

@@ -37,38 +37,38 @@ class Rest extends WP_REST_Controller {
 	 */
 	public function register_routes() {
 		$routes = [
-			'dashboard'          => [
+			'dashboard'           => [
 				'callback' => [ $this, 'get_dashboard' ],
 			],
-			'keywordsOverview'   => [
+			'keywordsOverview'    => [
 				'callback' => [ $this, 'get_keywords_overview' ],
 			],
-			'postsSummary'       => [
+			'postsSummary'        => [
 				'callback' => [ Stats::get(), 'get_posts_summary' ],
 			],
-			'postsRowsByObjects' => [
+			'postsRowsByObjects'  => [
 				'callback' => [ Stats::get(), 'get_posts_rows_by_objects' ],
 			],
-			'post/(?P<id>\d+)'   => [
+			'post/(?P<id>\d+)'    => [
 				'callback' => [ $this, 'get_post' ],
 			],
-			'keywordsSummary'    => [
+			'keywordsSummary'     => [
 				'callback' => [ Stats::get(), 'get_analytics_summary' ],
 			],
-			'analyticsSummary'   => [
+			'analyticsSummary'    => [
 				'callback' => [ $this, 'get_analytics_summary' ],
 			],
-			'keywordsRows'       => [
+			'keywordsRows'        => [
 				'callback' => [ Stats::get(), 'get_keywords_rows' ],
 			],
-			'userPreferences'    => [
+			'userPreferences'     => [
 				'callback' => [ $this, 'update_user_preferences' ],
 				'methods'  => WP_REST_Server::CREATABLE,
 			],
-			'inspectionResults'  => [
+			'inspectionResults'   => [
 				'callback' => [ $this, 'get_inspection_results' ],
 			],
-			'removeFrontendStats'  => [
+			'removeFrontendStats' => [
 				'callback' => [ $this, 'remove_frontend_stats' ],
 				'methods'  => WP_REST_Server::CREATABLE,
 			],
@@ -244,7 +244,7 @@ class Rest extends WP_REST_Controller {
 
 			return delete_user_meta( $user_id, 'rank_math_hide_frontend_stats' );
 		}
-		
+
 		$all_opts                   = rank_math()->settings->all_raw();
 		$general                    = $all_opts['general'];
 		$general['analytics_stats'] = 'off';

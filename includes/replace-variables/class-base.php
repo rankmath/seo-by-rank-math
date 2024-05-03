@@ -32,7 +32,7 @@ class Base {
 
 	/**
 	 * Current args.
-	 * 
+	 *
 	 * @var object
 	 */
 	public $args;

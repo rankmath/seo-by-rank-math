@@ -358,16 +358,19 @@ class CMB2 {
 	/**
 	 * Handles sanitization for custom webmaster tags.
 	 * Only <meta> tags are allowed.
-	 * 
+	 *
 	 * @param mixed $value The unsanitized value from the form.
 	 */
 	public static function sanitize_custom_webmaster_tags( $value ) {
-		$sanitized = wp_kses( $value, [
-			'meta' => [
-				'name'    => [],
-				'content' => [],
-			],
-		] );
+		$sanitized = wp_kses(
+			$value,
+			[
+				'meta' => [
+					'name'    => [],
+					'content' => [],
+				],
+			]
+		);
 
 		return $sanitized;
 	}

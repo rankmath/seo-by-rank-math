@@ -57,12 +57,12 @@ class Notification_Center {
 	 */
 	public function __construct( $storage_key = 'mythemeshop_notifications' ) {
 		$this->storage_key = $storage_key;
-		add_action( 'plugins_loaded', array( $this, 'get_from_storage' ), 5 );
-		add_action( 'all_admin_notices', array( $this, 'display' ) );
-		add_action( 'shutdown', array( $this, 'update_storage' ) );
-		add_action( 'admin_footer', array( $this, 'print_javascript' ) );
+		add_action( 'plugins_loaded', [ $this, 'get_from_storage' ], 5 );
+		add_action( 'all_admin_notices', [ $this, 'display' ] );
+		add_action( 'shutdown', [ $this, 'update_storage' ] );
+		add_action( 'admin_footer', [ $this, 'print_javascript' ] );
 
-		add_action( 'wp_ajax_wp_helpers_notice_dismissible', array( $this, 'notice_dismissible' ) );
+		add_action( 'wp_ajax_wp_helpers_notice_dismissible', [ $this, 'notice_dismissible' ] );
 	}
 
 	/**

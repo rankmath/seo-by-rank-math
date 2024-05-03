@@ -119,11 +119,11 @@ class Page {
 
 		// Early bail!
 		if ( ! $id ) {
-			wp_die( esc_html__( '$id variable required' ), esc_html__( 'Variable Required' ) );
+			wp_die( esc_html__( '$id variable required', 'rank-math' ), esc_html__( 'Variable Required', 'rank-math' ) );
 		}
 
 		if ( ! $title ) {
-			wp_die( esc_html__( '$title variable required' ), esc_html__( 'Variable Required' ) );
+			wp_die( esc_html__( '$title variable required', 'rank-math' ), esc_html__( 'Variable Required', 'rank-math' ) );
 		}
 
 		$this->id    = $id;

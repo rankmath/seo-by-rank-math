@@ -566,9 +566,12 @@ class AIOSEO extends Plugin_Importer {
 		$tw_url          = $profile_urls['twitterUrl'];
 		$additional_urls = $profiles['additionalUrls'];
 
-		$profile_urls = array_map( function( $url ) use( $fb_url, $tw_url ) {
-			return $url !== $fb_url && $url !== $tw_url ? $url : false;
-		} , $profile_urls );
+		$profile_urls = array_map(
+			function( $url ) use ( $fb_url, $tw_url ) {
+				return $url !== $fb_url && $url !== $tw_url ? $url : false;
+			},
+			$profile_urls
+		);
 
 		$urls = array_filter( array_values( $profile_urls ) );
 		array_merge( $urls, explode( "\n", $additional_urls ) );
@@ -800,7 +803,7 @@ class AIOSEO extends Plugin_Importer {
 			}
 
 			$social_urls = [];
-			foreach ( ['aioseo_instagram_url', 'aioseo_pinterest_url', 'aioseo_youtube_url', 'aioseo_linkedin_url', 'aioseo_tumblr_url', 'aioseo_yelp_page_url', 'aioseo_sound_cloud_url', 'aioseo_wikipedia_url', 'aioseo_myspace_url'] as $key ) {
+			foreach ( [ 'aioseo_instagram_url', 'aioseo_pinterest_url', 'aioseo_youtube_url', 'aioseo_linkedin_url', 'aioseo_tumblr_url', 'aioseo_yelp_page_url', 'aioseo_sound_cloud_url', 'aioseo_wikipedia_url', 'aioseo_myspace_url' ] as $key ) {
 				$social_urls[] = get_user_meta( $userid, $key, true );
 			}
 

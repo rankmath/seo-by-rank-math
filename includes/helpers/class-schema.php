@@ -77,7 +77,8 @@ trait Schema {
 	/**
 	 * Sanitize schema title.
 	 *
-	 * @param  string $schema Schema.
+	 * @param  string  $schema    Schema.
+	 * @param  boolean $translate Whether to return the translated string.
 	 * @return string
 	 */
 	public static function sanitize_schema_title( $schema, $translate = true ) {

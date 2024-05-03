@@ -239,11 +239,11 @@ class Summary {
 		$old_stats->impressions = empty( $old_stats->impressions ) ? 0 : $old_stats->impressions;
 		$old_stats->position    = empty( $old_stats->position ) ? 0 : $old_stats->position;
 
-		$total_ctr = 0 !== $stats->impressions ? round( ( $stats->clicks / $stats->impressions ) * 100, 2 ) : 0;
+		$total_ctr    = 0 !== $stats->impressions ? round( ( $stats->clicks / $stats->impressions ) * 100, 2 ) : 0;
 		$previous_ctr = 0 !== $old_stats->impressions ? round( ( $old_stats->clicks / $old_stats->impressions ) * 100, 2 ) : 0;
-		$stats->ctr = [
-			'total'    => $total_ctr,
-			'previous' => $previous_ctr,
+		$stats->ctr   = [
+			'total'      => $total_ctr,
+			'previous'   => $previous_ctr,
 			'difference' => $total_ctr - $previous_ctr,
 		];
 
@@ -292,7 +292,7 @@ class Summary {
 
 		global $wpdb;
 		$query   = DB::analytics()
-			->selectCount( 'DISTINCT(' . $wpdb->prefix . 'rank_math_analytics_gsc.page' . ')', 'posts' )
+			->selectCount( 'DISTINCT(' . $wpdb->prefix . 'rank_math_analytics_gsc.page)', 'posts' )
 			->selectSum( 'impressions', 'impressions' )
 			->selectSum( 'clicks', 'clicks' )
 			->selectAvg( 'ctr', 'ctr' )

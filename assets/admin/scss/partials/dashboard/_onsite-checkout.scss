@@ -10,8 +10,19 @@
         margin-top: 0;
 
         .components-modal__header {
-            padding: 5px 15px;
+            padding: 0;
+
             height: auto;
+            width: auto;
+
+            left: auto;
+            right: 10px;
+            top: 10px;
+
+            button {
+                padding: 0;
+                height: auto;
+            }
         }
 
         > div {

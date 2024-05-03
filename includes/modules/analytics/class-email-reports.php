@@ -71,7 +71,7 @@ class Email_Reports {
 
 	/**
 	 * Debug mode.
-	 * 
+	 *
 	 * @var boolean
 	 */
 	private $debug = false;

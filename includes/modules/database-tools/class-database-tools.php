@@ -45,7 +45,7 @@ class Database_Tools {
 			$this->filter( 'rank_math/tools/pages', 'add_tools_page', 11 );
 		}
 
-		if ( Helper::is_rest() && Str::ends_with( 'toolsAction', add_query_arg( [] ) )  ) {
+		if ( Helper::is_rest() && Str::ends_with( 'toolsAction', add_query_arg( [] ) ) ) {
 			foreach ( $this->get_tools() as $id => $tool ) {
 				if ( ! method_exists( $this, $id ) ) {
 					continue;

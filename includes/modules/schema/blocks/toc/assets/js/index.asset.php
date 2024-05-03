@@ -1,4 +1,12 @@
 <?php
+/**
+ * Block script dependencies.
+ *
+ * @package    RankMath
+ * @subpackage RankMath\Schema
+ * @author     Rank Math <support@rankmath.com>
+ */
+
 return [
 	'dependencies' => [
 		'wp-blocks',

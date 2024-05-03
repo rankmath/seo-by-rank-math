@@ -133,6 +133,7 @@ return array(
     'RankMath\\Frontend\\Frontend' => $baseDir . '/includes/frontend/class-frontend.php',
     'RankMath\\Frontend\\Head' => $baseDir . '/includes/frontend/class-head.php',
     'RankMath\\Frontend\\Link_Attributes' => $baseDir . '/includes/frontend/class-link-attributes.php',
+    'RankMath\\Frontend\\Redirection' => $baseDir . '/includes/frontend/class-redirection.php',
     'RankMath\\Frontend\\Shortcodes' => $baseDir . '/includes/frontend/class-shortcodes.php',
     'RankMath\\Frontend_SEO_Score' => $baseDir . '/includes/class-frontend-seo-score.php',
     'RankMath\\Google\\Analytics' => $baseDir . '/includes/modules/analytics/google/class-analytics.php',

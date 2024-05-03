@@ -62,6 +62,7 @@ class Frontend {
 			add_filter( 'bbp_get_breadcrumb', '__return_false' );
 		}
 
+		new Redirection();
 		rank_math()->link_attributes = new Link_Attributes();
 		rank_math()->comments        = new Comments();
 	}
@@ -75,16 +76,6 @@ class Frontend {
 		$this->action( 'wp', 'integrations' );
 		$this->filter( 'the_content_feed', 'embed_rssfooter' );
 		$this->filter( 'the_excerpt_rss', 'embed_rssfooter_excerpt' );
-
-		// Redirect attachment page to parent post.
-		if ( Helper::get_settings( 'general.attachment_redirect_urls', true ) ) {
-			$this->action( 'wp', 'attachment_redirect_urls' );
-		}
-
-		// Redirect archives.
-		if ( Helper::get_settings( 'titles.disable_author_archives' ) || Helper::get_settings( 'titles.disable_date_archives' ) ) {
-			$this->action( 'wp', 'archive_redirect' );
-		}
 
 		// Add support for shortcode in the Category/Term description.
 		add_filter( 'category_description', 'do_shortcode' );
@@ -134,47 +125,6 @@ class Frontend {
 		} elseif ( is_author() ) {
 			Helper::add_json( 'objectID', get_queried_object_id() );
 			Helper::add_json( 'objectType', 'user' );
-		}
-	}
-
-	/**
-	 * Redirects attachment to its parent post if it has one.
-	 */
-	public function attachment_redirect_urls() {
-		global $post;
-
-		// Early bail.
-		if ( ! is_attachment() ) {
-			return;
-		}
-
-		$redirect = ! empty( $post->post_parent ) ? get_permalink( $post->post_parent ) : Helper::get_settings( 'general.attachment_redirect_default' );
-		if ( ! $redirect ) {
-			return;
-		}
-
-		/**
-		 * Redirect attachment to its parent post.
-		 *
-		 * @param string  $redirect URL as calculated for redirection.
-		 * @param WP_Post $post     Current post instance.
-		 */
-		Helper::redirect( $this->do_filter( 'frontend/attachment/redirect_url', $redirect, $post ), 301 );
-		exit;
-	}
-
-	/**
-	 * Redirect date & author archives if the setting is enabled.
-	 */
-	public function archive_redirect() {
-		global $wp_query;
-
-		if (
-			( Helper::get_settings( 'titles.disable_date_archives' ) && $wp_query->is_date ) ||
-			( true === Helper::get_settings( 'titles.disable_author_archives' ) && $wp_query->is_author )
-		) {
-			Helper::redirect( get_bloginfo( 'url' ), 301 );
-			exit;
 		}
 	}
 
