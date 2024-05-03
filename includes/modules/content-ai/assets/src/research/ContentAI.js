@@ -82,11 +82,11 @@ class ContentAI extends Component {
 								<h3 className="rank-math-ca-section-title">
 									{ __( 'Content AI', 'rank-math' ) }
 									<span>{ __( 'New!', 'rank-math' ) }</span>
-									<Button className='is-link' href={ getLink( 'content-ai-settings', 'Sidebar KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Content AI Knowledge Base.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
+									<Button className="is-link" href={ getLink( 'content-ai-settings', 'Sidebar KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Content AI Knowledge Base.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
 								</h3>
 								<ContentAIScore />
-								<Recommendations recommendations={ data.recommendations } hasCredits={ this.hasCredits } content={ this.props.content } researcher={ this.props.researcher } updateAiScore={ this.props.updateAiScore } hasThumbnail={ this.props.hasThumbnail } />
-								<ContentAIPanel caData={ this.props } updateAiScore={ this.props.updateAiScore } hasCredits={ this.hasCredits } />
+								<Recommendations recommendations={ data.recommendations } showError={ showError } hasCredits={ this.hasCredits } content={ this.props.content } researcher={ this.props.researcher } updateAiScore={ this.props.updateAiScore } hasThumbnail={ this.props.hasThumbnail } />
+								<ContentAIPanel caData={ this.props } updateAiScore={ this.props.updateAiScore } hasCredits={ this.hasCredits } showError={ showError } />
 							</div>
 							}
 						</div>

@@ -1,0 +1,82 @@
+// CSS rules for the Image alt functionality.
+.rank-math-generate-alt-button {
+	padding: 10px 9px 8px;
+	margin-bottom: 4px;
+
+	border: 1px solid $primary-border-color;
+	border-radius: 2px;
+	
+	color: $primary;
+	background: #dcedf7;
+	
+	text-align: left;
+	cursor: pointer;
+
+	transition: all .2s ease-in-out;
+
+	&:hover {
+		background: #c5e1f2;
+	}
+
+	.rm-icon {
+		font-size: 17px;
+		float: left;
+		height: 17px;
+		margin-right: 4px;
+	}
+
+	&.failed {
+		color: $white;
+		border-color: $error;
+		background: $error;
+		pointer-events: none;
+	}
+}
+
+// Generate button added in Image Block settings.
+.edit-post-sidebar__panel {
+	div[role="tabpanel"] div.css-0 {
+		position: relative;
+
+		button.rank-math-generate-alt {
+			position: absolute;
+			top: 40px;
+			right: 5px;
+		
+			&.error {
+				color: $error;
+			}
+		
+			.rm-icon {
+				margin-right: 3px;
+			}
+		
+			.rank-math-tooltip {
+				span {
+					transform: none;
+		
+					right: 0;
+					left: auto;
+		
+					&:after {
+						transform: none;
+		
+						right: 3px;
+						left: auto;
+						top: 98%;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Bulk Generate Button added in Media Library Grid mode.
+.rank-math-bulk-generate-button.button-primary {
+	display: inline-flex;
+	align-items: center;
+
+	i {
+		margin-right: 5px;
+	}
+}

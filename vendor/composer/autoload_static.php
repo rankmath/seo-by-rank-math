@@ -148,6 +148,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\ContentAI\\Block_Command' => __DIR__ . '/../..' . '/includes/modules/content-ai/blocks/command/class-block-command.php',
         'RankMath\\ContentAI\\Bulk_Actions' => __DIR__ . '/../..' . '/includes/modules/content-ai/class-bulk-actions.php',
         'RankMath\\ContentAI\\Bulk_Edit_SEO_Meta' => __DIR__ . '/../..' . '/includes/modules/content-ai/class-bulk-edit-seo-meta.php',
+        'RankMath\\ContentAI\\Bulk_Image_Alt' => __DIR__ . '/../..' . '/includes/modules/content-ai/class-bulk-image-alt.php',
         'RankMath\\ContentAI\\Content_AI' => __DIR__ . '/../..' . '/includes/modules/content-ai/class-content-ai.php',
         'RankMath\\ContentAI\\Content_AI_Page' => __DIR__ . '/../..' . '/includes/modules/content-ai/class-content-ai-page.php',
         'RankMath\\ContentAI\\Event_Scheduler' => __DIR__ . '/../..' . '/includes/modules/content-ai/class-event-scheduler.php',

@@ -22,6 +22,7 @@ import { PluginSidebar, PluginSidebarMoreMenuItem, PluginPrePublishPanel } from 
 import ContentAITab from './research/ContentAITab'
 import ContentAIIcon from './research/ContentAIIcon'
 import ContentAnalysis from './research/ContentAnalysis'
+import MediaHandler from './components/MediaHandler'
 
 const ContentAIButton = () => {
 	const className = classnames( 'button-secondary rank-math-content-ai', {
@@ -154,5 +155,6 @@ addAction( 'rank_math_loaded', 'rank-math', () => {
 		} )
 	}
 
+	new MediaHandler()
 	new ContentAnalysis()
 } )

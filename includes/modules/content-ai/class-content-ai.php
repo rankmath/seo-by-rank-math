@@ -12,7 +12,6 @@ namespace RankMath\ContentAI;
 
 use RankMath\KB;
 use RankMath\Helper;
-use RankMath\Helpers\Sitepress;
 use RankMath\Helpers\Url;
 use RankMath\Helpers\Arr;
 use RankMath\Admin\Admin_Helper as AdminHelper;
@@ -49,6 +48,7 @@ class Content_AI {
 		$this->filter( 'rank_math/elementor/dark_styles', 'add_dark_style' );
 		$this->filter( 'rank_math/status/rank_math_info', 'content_ai_info' );
 		$this->action( 'rank_math/connect/account_connected', 'refresh_content_ai_credits' );
+		$this->action( 'admin_enqueue_scripts', 'media_scripts', 20 );
 	}
 
 	/**
@@ -357,4 +357,30 @@ class Content_AI {
 		update_user_option( $user->ID, 'meta-box-order_' . $post_type, $order, true );
 	}
 
+	/**
+	 * Enqueue our inject-generate-alt-text script on the Edit Media page (post.php with post_type=attachment).
+	 */
+	public function media_scripts() {
+		$screen = \function_exists( 'get_current_screen' ) ? get_current_screen() : false;
+		if ( ! $screen || 'attachment' !== $screen->post_type ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'rank-math-content-ai-media',
+			rank_math()->plugin_url() . 'includes/modules/content-ai/assets/js/media-edit.js',
+			[ 'jquery', 'wp-api-fetch', 'lodash', 'wp-element', 'wp-components' ],
+			rank_math()->version,
+			true
+		);
+
+		wp_enqueue_style(
+			'rank-math-content-ai-page',
+			rank_math()->plugin_url() . 'includes/modules/content-ai/assets/css/content-ai-page.css',
+			[ 'rank-math-common', 'wp-components' ],
+			rank_math()->version
+		);
+
+		$this->localized_data();
+	}
 }

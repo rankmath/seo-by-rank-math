@@ -21,6 +21,7 @@ import MyModal from '../modal'
 import getData from './getData'
 import contentAiCompleters from '../autoCompleter'
 import hasError from './hasError'
+import addGenerateAltButton from './addGenerateAltButton'
 import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
 
 export default () => {
@@ -111,4 +112,11 @@ export default () => {
 	} )
 
 	contentAiCompleters()
+
+	// Add Generate Alt button in Image Block settings.
+	addFilter(
+		'editor.BlockEdit',
+		'rank-math/add-alt-generator',
+		addGenerateAltButton
+	)
 }

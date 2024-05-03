@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { includes, isEmpty } from 'lodash'
+import { includes } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -129,7 +129,7 @@ const getLink = ( link, medium ) => {
 	return link + tags.toString()
 }
 
-export default ( { width = 40, showProNotice = false, isBulkEdit = false, isResearch = false } ) => {
+export default ( { width = 40, showProNotice = false, isBulkEdit = false, isResearch = false, creditsRequired = 0 } ) => {
 	if ( showProNotice ) {
 		return getProNotice( width )
 	}
@@ -137,7 +137,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 	const isRegistered = rankMath.isUserRegistered
 	const hasContentAIPlan = rankMath.contentAIPlan
 	const isFree = hasContentAIPlan === 'free'
-	let hasCredits = rankMath.contentAICredits > 0
+	let hasCredits = rankMath.contentAICredits > creditsRequired
 	const isMigrating = rankMath.contentAiMigrating
 
 	if ( hasCredits && isResearch && ! isFree && rankMath.contentAICredits < 500 ) {

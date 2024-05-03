@@ -53,6 +53,7 @@ class Content_AI_Page {
 		$this->register_admin_page();
 		Block_Command::get();
 		Bulk_Edit_SEO_Meta::get();
+		Bulk_Image_Alt::get();
 		Event_Scheduler::get();
 	}
 

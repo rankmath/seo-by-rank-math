@@ -145,8 +145,8 @@ class Block_TOC extends Block {
 				'@context' => 'https://schema.org',
 				'@type'    => 'SiteNavigationElement',
 				'@id'      => '#rank-math-toc',
-				'name'     => $heading['content'],
-				'url'      => get_permalink() . $heading['link'],
+				'name'     => esc_html( $heading['content'] ),
+				'url'      => esc_url( get_permalink() . $heading['link'] ),
 			];
 		}
 

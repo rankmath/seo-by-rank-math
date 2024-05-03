@@ -294,7 +294,7 @@ class Block_HowTo extends Block {
 
 		$schema_step = [
 			'@type' => 'HowToStep',
-			'url'   => '' . $permalink,
+			'url'   => '' . esc_url( $permalink ),
 		];
 
 		if ( empty( $name ) ) {
@@ -349,7 +349,7 @@ class Block_HowTo extends Block {
 
 		$schema_image = [
 			'@type' => 'ImageObject',
-			'url'   => $matches[1][0],
+			'url'   => esc_url( $matches[1][0] ),
 		];
 
 		$image_id = Attachment::get_by_url( $schema_image['url'] );
@@ -388,7 +388,7 @@ class Block_HowTo extends Block {
 
 		$schema_image = [
 			'@type' => 'ImageObject',
-			'url'   => $image_url,
+			'url'   => esc_url( $image_url ),
 		];
 
 		$this->add_caption( $schema_image, $image_id );
@@ -408,13 +408,13 @@ class Block_HowTo extends Block {
 	private function add_caption( &$schema_image, $image_id ) {
 		$caption = wp_get_attachment_caption( $image_id );
 		if ( ! empty( $caption ) ) {
-			$schema_image['caption'] = $caption;
+			$schema_image['caption'] = esc_html( $caption );
 			return;
 		}
 
 		$caption = Attachment::get_alt_tag( $image_id );
 		if ( ! empty( $caption ) ) {
-			$schema_image['caption'] = $caption;
+			$schema_image['caption'] = esc_html( $caption );
 		}
 	}
 
@@ -430,8 +430,8 @@ class Block_HowTo extends Block {
 			return;
 		}
 
-		$schema_image['width']  = $image_meta['width'];
-		$schema_image['height'] = $image_meta['height'];
+		$schema_image['width']  = absint( $image_meta['width'] );
+		$schema_image['height'] = absint( $image_meta['height'] );
 	}
 
 	/**

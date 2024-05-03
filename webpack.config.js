@@ -141,6 +141,7 @@ const entryPoints = {
 	'content-ai': {
 		'content-ai': './includes/modules/content-ai/assets/src/content-ai.js',
 		'content-ai-page': './includes/modules/content-ai/assets/src/content-ai-page.js',
+		'media-edit': './includes/modules/content-ai/assets/src/media-edit.js',
 	},
 	'content-ai-block': {
 		index: './includes/modules/content-ai/blocks/command/assets/src/index.js',

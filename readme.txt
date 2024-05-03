@@ -3,9 +3,9 @@ Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.5
-Requires at least: 6.0
+Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.217
+Stable tag: 1.0.218
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,14 +583,16 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.217 [Apr 12, 2024] =
-- Updated: [Minimum required PHP version](https://wordpress.org/about/requirements/) to 7.4
-- Improved: Strengthened the security of the plugin's FAQ Block. Thanks to WordFence for disclosing it responsibly.
-- Improved: Existing [Content AI Research](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) data will be visible even after the subscription expires
-- Fixed: Compatibility issues with WordPress 6.5
-- Fixed: Extra line breaks were added in the [Content AI shortcut command](https://rankmath.com/kb/using-content-ai-in-block-editor/#shortcode)
-- Fixed: [Analytics Stats in Frontend](https://rankmath.com/kb/analytics-stats-bar/) was not displaying the data from GSC when GA is not connected
-- Fixed: Content AI Compatibility issue with Avada Builder
+= 1.0.218 [May 02, 2024] =
+- Added: [NEW!] Tool to [Generate Image Alt using Content AI](https://rankmath.com/kb/generate-alt-text-with-content-ai/)
+- Improved: Strengthened the security of the plugin's Blocks. Thanks to WordFence for disclosing it responsibly
+- Fixed: Incorrect values were displayed in the [Content AI Results Overview](https://rankmath.com/kb/how-to-use-content-ai/#content-ai-results-overview) when all credits had been used on the site
+- Fixed: [SERP Preview modal](https://rankmath.com/kb/seo-meta-tags/#elementor) was not working in Elementor Editor with WordPress 6.5 after clicking on the Text widget
+- Fixed: [Shorten Long Paragraphs with AI](https://rankmath.com/kb/fix-long-paragraph-test/#shorten-the-highlighted-paragraphs) was not working with WordPress 6.5
+- Fixed: [Short Paragraphs test](https://rankmath.com/kb/score-100-in-tests/#use-of-short-paragraphs) was not working on WooCommerce Products
+- Fixed: [Paginated Sitemap for taxonomies](https://rankmath.com/kb/configure-sitemaps/#categories) was not working when noindexed terms were present in the taxonomy
+- Fixed: PHP deprecated warning related to [Link attributes](https://rankmath.com/kb/nofollow-specific-external-links/) on some setups
+- Fixed: [Filter to add External Sitemap](https://rankmath.com/kb/filters-hooks-api-developer/#add-external-sitemap) was not working when [KML Sitemap](https://rankmath.com/kb/kml-sitemap/) is enabled
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

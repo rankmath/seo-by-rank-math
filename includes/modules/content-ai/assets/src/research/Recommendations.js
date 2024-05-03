@@ -112,14 +112,19 @@ class Recommendations extends Component {
 	/**
 	 * Get the recommendations section score after comparing it with the recommended score.
 	 *
-	 * @param {string}  key        Current item key.
-	 * @param {number} value       Current score.
-	 * @param {number} recommended Recommended score.
-	 * @param {boolean} isSubMenu  Whether the current item is sub-menu.
+	 * @param {string}  key         Current item key.
+	 * @param {number}  value       Current score.
+	 * @param {number}  recommended Recommended score.
+	 * @param {boolean} isSubMenu   Whether the current item is sub-menu.
 	 *
 	 * @return {number} Total of score.
 	 */
 	getScore( key, value, recommended, isSubMenu ) {
+		// Early Bail if Research tab is disabled.
+		if ( this.props.showError ) {
+			return 0
+		}
+
 		let score = value === recommended ? 100 : ( value / recommended ) * 100
 
 		if ( recommended === 0 && value <= 2 ) {
@@ -158,7 +163,7 @@ export default compose(
 		let internal = 8
 		let external = 19
 
-		if ( props.hasCredits ) {
+		if ( ! props.showError ) {
 			const getWordCount = props.researcher.getResearch( 'wordCount' )
 			const contentAssets = rankMathEditor.assessor.analyzer.defaultAnalyses.contentHasAssets
 			wordCount = getWordCount( props.content )

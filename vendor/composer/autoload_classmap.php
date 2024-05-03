@@ -118,6 +118,7 @@ return array(
     'RankMath\\ContentAI\\Block_Command' => $baseDir . '/includes/modules/content-ai/blocks/command/class-block-command.php',
     'RankMath\\ContentAI\\Bulk_Actions' => $baseDir . '/includes/modules/content-ai/class-bulk-actions.php',
     'RankMath\\ContentAI\\Bulk_Edit_SEO_Meta' => $baseDir . '/includes/modules/content-ai/class-bulk-edit-seo-meta.php',
+    'RankMath\\ContentAI\\Bulk_Image_Alt' => $baseDir . '/includes/modules/content-ai/class-bulk-image-alt.php',
     'RankMath\\ContentAI\\Content_AI' => $baseDir . '/includes/modules/content-ai/class-content-ai.php',
     'RankMath\\ContentAI\\Content_AI_Page' => $baseDir . '/includes/modules/content-ai/class-content-ai-page.php',
     'RankMath\\ContentAI\\Event_Scheduler' => $baseDir . '/includes/modules/content-ai/class-event-scheduler.php',

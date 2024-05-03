@@ -16,6 +16,7 @@
 @import '../../../../../assets/admin/scss/variables';
 
 @import '../../../../../assets/admin/scss/mixins';
+@import './image-alt';
 
 %flex {
 	@include flex;

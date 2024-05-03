@@ -254,6 +254,18 @@ class Taxonomy implements Provider {
 				 */
 				'hierarchical'           => false,
 				'update_term_meta_cache' => false,
+				'meta_query' => [
+					'relation' => 'OR',
+					[
+						'key'     => 'rank_math_robots',
+						'value'   => 'noindex',
+						'compare' => 'NOT LIKE',
+					],
+					[
+						'key'     => 'rank_math_robots',
+						'compare' => 'NOT EXISTS',
+					],
+				],
 			]
 		);
 

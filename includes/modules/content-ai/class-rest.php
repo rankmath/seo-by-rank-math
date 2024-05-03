@@ -144,6 +144,26 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 			]
 		);
+
+		register_rest_route(
+			$this->namespace,
+			'/generateAlt',
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'generate_alt' ],
+				'permission_callback' => [ $this, 'has_permission' ],
+			]
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/updateCredits',
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'update_credits' ],
+				'permission_callback' => [ $this, 'has_permission' ],
+			]
+		);
 	}
 
 	/**
@@ -431,6 +451,37 @@ class Rest extends WP_REST_Controller {
 	 */
 	public function migrate_user( WP_REST_Request $request ) {
 		return Helper::migrate_user_to_nest_js();
+	}
+
+	/**
+	 * Endpoint to generate Image Alt.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function generate_alt( WP_REST_Request $request ) {
+		$ids = $request->get_param( 'attachmentIds' );
+		if ( empty( $ids ) ) {
+			return false;
+		}
+
+		do_action( 'rank_math/content_ai/generate_alt', $ids );
+
+		return true;
+	}
+
+	/**
+	 * Endpoint to Update the credits data.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function update_credits( WP_REST_Request $request ) {
+		$credits = $request->get_param( 'credits' );
+		Helper::update_credits( $credits );
+		return true;
 	}
 
 	/**

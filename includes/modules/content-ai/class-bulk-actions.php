@@ -30,6 +30,7 @@ class Bulk_Actions {
 	 */
 	public function __construct() {
 		$this->action( 'admin_init', 'init_admin', 15 );
+		$this->action( 'rank_math/content_ai/generate_alt', 'generate_image_alt' );
 	}
 
 	/**
@@ -42,6 +43,9 @@ class Bulk_Actions {
 			$this->filter( "handle_bulk_actions-edit-{$post_type}", 'handle_bulk_actions', 10, 3 );
 		}
 
+		$this->filter( 'bulk_actions-upload', 'bulk_actions_attachment' );
+		$this->filter( 'handle_bulk_actions-upload', 'handle_bulk_actions', 10, 3 );
+
 		$taxonomies = Helper::get_accessible_taxonomies();
 		unset( $taxonomies['post_format'] );
 		$taxonomies = wp_list_pluck( $taxonomies, 'label', 'name' );
@@ -51,6 +55,7 @@ class Bulk_Actions {
 		}
 
 		$this->filter( 'wp_bulk_edit_seo_meta_post_args', 'update_background_process_args' );
+		$this->filter( 'wp_bulk_image_alt_post_args', 'update_background_process_args' );
 	}
 
 	/**
@@ -68,6 +73,24 @@ class Bulk_Actions {
 		$actions['rank_math_content_ai_fetch_seo_title']             = esc_html__( 'Write SEO Title with AI', 'rank-math' );
 		$actions['rank_math_content_ai_fetch_seo_description']       = esc_html__( 'Write SEO Description with AI', 'rank-math' );
 		$actions['rank_math_content_ai_fetch_seo_title_description'] = esc_html__( 'Write SEO Title & Description with AI', 'rank-math' );
+		$actions['rank_math_content_ai_fetch_image_alt']             = esc_html__( 'Write Image Alt Text with AI', 'rank-math' );
+
+		return $actions;
+	}
+
+	/**
+	 * Add bulk actions for Attachment.
+	 *
+	 * @param  array $actions Actions.
+	 * @return array          New actions.
+	 */
+	public function bulk_actions_attachment( $actions ) {
+		if ( ! Helper::has_cap( 'content_ai' ) ) {
+			return $actions;
+		}
+
+		$actions['rank_math_ai_options']                             = __( '&#8595; Rank Math Content AI', 'rank-math' );
+		$actions['rank_math_content_ai_fetch_image_alt'] = esc_html__( 'Write Image Alt Text with AI', 'rank-math' );
 
 		return $actions;
 	}
@@ -82,7 +105,7 @@ class Bulk_Actions {
 	 * @return string New redirect URL.
 	 */
 	public function handle_bulk_actions( $redirect, $doaction, $object_ids ) {
-		if ( empty( $object_ids ) || ! in_array( $doaction, [ 'rank_math_content_ai_fetch_seo_title', 'rank_math_content_ai_fetch_seo_description', 'rank_math_content_ai_fetch_seo_title_description' ], true ) ) {
+		if ( empty( $object_ids ) || ! in_array( $doaction, [ 'rank_math_content_ai_fetch_seo_title', 'rank_math_content_ai_fetch_seo_description', 'rank_math_content_ai_fetch_seo_title_description', 'rank_math_content_ai_fetch_image_alt' ], true ) ) {
 			return $redirect;
 		}
 
@@ -96,6 +119,11 @@ class Bulk_Actions {
 				]
 			);
 
+			return $redirect;
+		}
+
+		if ( 'rank_math_content_ai_fetch_image_alt' === $doaction ) {
+			$this->generate_image_alt( $object_ids );
 			return $redirect;
 		}
 
@@ -124,6 +152,45 @@ class Bulk_Actions {
 		Bulk_Edit_SEO_Meta::get()->start( $data );
 
 		return $redirect;
+	}
+
+	/**
+	 * Generate Image Alt for the attachmed Ids.
+	 *
+	 * @param array $object_ids Attachment Ids.
+	 */
+	public function generate_image_alt( $object_ids ) {
+		$data = [
+			'action' => 'image_alt',
+			'posts'  => [],
+		];
+
+		foreach ( $object_ids as $object_id ) {
+			if ( get_post_type( $object_id ) === 'attachment' ) {
+				$data['posts'][ $object_id ] = [ wp_get_attachment_url( $object_id ) ];
+				continue;
+			}
+			// Get all <img> tags from the post content.
+			$images = [];
+			preg_match_all( '/<img\\s[^>]+>/i', get_post_field( 'post_content', $object_id ), $images );
+
+			// Keep only the image tags that have src attribute but no alt attribute.
+			$images = array_filter(
+				$images[0],
+				function( $image ) {
+					return preg_match( '/src=[\'"]?([^\'" >]+)[\'" >]/i', $image, $matches ) && ( ! preg_match( '/alt="([^"]*)"/i', $image, $matches ) || preg_match( '/alt=""/i', $image, $matches ) );
+				}
+			);
+
+			if ( empty( $images ) ) {
+				continue;
+			}
+
+			$object                      = get_post( $object_id );
+			$data['posts'][ $object_id ] = array_filter( array_values( $images ) );
+		}
+
+		Bulk_Image_Alt::get()->start( $data );
 	}
 
 	/**
