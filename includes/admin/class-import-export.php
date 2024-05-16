@@ -458,6 +458,8 @@ class Import_Export implements Runner {
 		// Import options.
 		$down = $this->set_options( $data );
 
+		Helper::update_modules( array_flip( $data['modules'] ) );
+
 		// Import capabilities.
 		if ( ! empty( $data['role-manager'] ) ) {
 			$down = true;
