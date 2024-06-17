@@ -181,7 +181,7 @@ class Image {
 	 */
 	public function add_image_by_id( $attachment_id ) {
 
-		do_action( 'rank_math_opengraph_pre_attachment_image_check' );
+		do_action( 'rank_math_opengraph_pre_attachment_image_check', $attachment_id );
 
 		$attachment_id = apply_filters( 'rank_math_opengraph_filter_image_id', $attachment_id );
 
@@ -191,7 +191,7 @@ class Image {
 
 		$variations = $this->get_variations( $attachment_id );
 
-		do_action( 'rank_math_opengraph_post_attachment_image_check' );
+		do_action( 'rank_math_opengraph_post_attachment_image_check', $attachment_id );
 
 		// If we are left without variations, there is no valid variation for this attachment.
 		if ( empty( $variations ) ) {
