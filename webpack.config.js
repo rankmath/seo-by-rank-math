@@ -1,6 +1,6 @@
 const resolve = require( 'path' ).resolve
 const TerserPlugin = require( 'terser-webpack-plugin' )
-const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin
 
 const externals = {
 	jquery: 'jQuery',
@@ -43,6 +43,14 @@ const alias = {
 	'@components': resolve(
 		__dirname,
 		'./assets/admin/src/sidebar/components'
+	),
+	'@rank-math-settings': resolve(
+		__dirname,
+		'./assets/admin/src/settings'
+	),
+	'@rank-math/components': resolve(
+		__dirname,
+		'./assets/admin/src/components/src'
 	),
 	'@containers': resolve(
 		__dirname,
@@ -140,8 +148,7 @@ const entryPoints = {
 	},
 	'content-ai': {
 		'content-ai': './includes/modules/content-ai/assets/src/content-ai.js',
-		'content-ai-page': './includes/modules/content-ai/assets/src/content-ai-page.js',
-		'media-edit': './includes/modules/content-ai/assets/src/media-edit.js',
+		'content-ai-media': './includes/modules/content-ai/assets/src/content-ai-media.js',
 	},
 	'content-ai-block': {
 		index: './includes/modules/content-ai/blocks/command/assets/src/index.js',

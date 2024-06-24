@@ -1,0 +1,23 @@
+/*
+ * Tab Header component.
+ */
+.rank-math-tab-header {
+	margin: -1.875rem -1.875rem 30px;
+	padding: 1.875rem 1.875rem 0;
+	text-align: center;
+	border-bottom: 1px solid #b5bfc9;
+	border-radius: 6px 6px 0 0;
+	background-color: #f8f9fa;
+	
+	h2 {
+		margin: 0;
+		font-size: 30px;
+		font-weight: 500;
+	}
+
+	p {
+		font-size: 1rem;
+		max-width: 715px;
+		margin: 0 auto 2rem;
+	}
+}

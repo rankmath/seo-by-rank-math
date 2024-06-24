@@ -1,0 +1,266 @@
+// Mixin function used to style Score Bar range slider height.
+@mixin range-style {
+	width: 100%;
+	
+	.components-range-control {
+		&__slider {
+			cursor: default;
+		}
+
+		&__track { 
+			height: 8px;
+		}
+	}
+
+	.css-1tw038v {
+		height: 8px;
+	}
+}
+
+// Mixin function used to style Uploader component.
+@mixin uploader-style {
+	@include radius-xs;
+	border: 1px solid #C6C6C6;
+	background-color: #FCFCFC;
+	padding: 16px;
+
+	.uploader-content {
+		@include gap-lg;
+		@include body-sm;
+		@include radius-xs;
+		@include flex-center;
+		background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='2' ry='2' stroke='%23CCCCCCFF' stroke-width='2' stroke-dasharray='3%2c 6' stroke-dashoffset='5' stroke-linecap='square'/%3e%3c/svg%3e");
+		background-color: #F7F7F7;
+		color: #868686;
+
+		&__actions {
+			@include flex-align();
+			@include gap-lg;
+		}
+
+		.is-uploading {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			width: 100%;
+
+			&__description {
+				color: $black-70;
+			}
+		}
+
+		.components-range-control {
+			padding: 0 1rem;
+			width: 100%;
+
+			&__slider {
+				cursor: default;
+			}
+
+			&__thumb-wrapper {
+				display: none;
+			}
+
+			&__track {
+				color: $blue-100;
+				height: 4px;
+			}
+
+			.components-base-control__field {
+				margin-bottom: 0px;
+			}
+
+			.css-1tw038v {
+				color: $black-a10;
+				height: 4px;
+			}
+		}
+
+		b {
+			font-weight: 500;
+		}
+	}
+}
+
+// Mixin function used to style ListBoxField and FocusKeywordField component.
+@mixin tagify-style {
+	width: 100%;
+	border-radius: 2px;
+
+	.tagify {
+		&__tag {
+			&:hover,
+			&:focus,
+			&:hover:not([readonly]) {
+				div	{
+					&::before{
+						inset: 0px;
+						background-color: inherit;
+					}
+				}
+			}
+
+			&__removeBtn {
+				&::after {
+					display: none;
+				}
+
+				&:hover{
+					+ div{
+						> span { 
+							opacity: 1; 
+						}
+					}
+				}
+			}
+
+			> div {
+				display: flex;
+				gap: 8px;
+				height: 30px;
+				align-items: center;
+				padding: 6px 6px 6px 8px;
+				
+				.tagify__tag {
+					&-star-icon {
+						font-size: 11px;
+					}
+
+					&-text {
+						font-size: 13px;
+						font-weight: 400;
+						line-height: 14px;
+						transform: translateY(-1px);
+					}
+				}
+
+				> * {
+					overflow: visible;
+				}
+			}
+		}
+	}
+
+	&.tagify--focus {
+		border: 2px solid $blue-100;
+	}
+}
+
+// Mixin function for hiding the Cancel button of Dialog component.
+@mixin hide-cancel-btn {
+	.components-flex {
+		.components-button {
+			&.is-tertiary {
+				display: none;
+			}
+		}
+	}
+}
+
+@mixin select-menu($margin, $width) {
+	margin-bottom: 0;
+	
+	.components-input-control__container {
+		background-color: transparent;
+
+		.components-input-control {
+			&__input {
+				@include base-input-style;
+				padding: 0 8px;
+				line-height: 2;
+				min-height: 30px;
+				max-width: 100%;
+				border-color: $gray-10;
+				background: $white;
+				height: 34px;
+				margin: $margin;
+				width: $width;
+	
+				&:focus {
+					border-color: $primary;
+					box-shadow: 0 0 0 1px $primary !important;
+					outline: 2px solid transparent;
+					background-color: $white;
+				}
+			}
+	
+			&__suffix {
+				display: none;
+			}
+	
+			&__backdrop {
+				border: 0;
+				box-shadow: none;
+				outline: none;
+			}
+		}
+	}
+}
+
+// Vertical menu style mixin
+@mixin vertical-menu-style {
+	@include border-lightgray;
+	padding: 24px 16px;
+	width: 13rem;
+
+	.components-menu-group__label {
+		display: none;
+		margin-bottom: 16px;
+	}
+
+	div[role="group"]  {
+		@include flex-align(column, flex-start);
+		@include radius-xs;
+		gap: 2px;
+
+		.components-menu-item__button {
+			color: $black-70;
+
+			&.components-button {
+				background-color: $white;
+				height: fit-content;
+				padding: 0px;
+
+				.components-menu-item__item {
+					white-space: break-spaces;
+					min-width: fit-content;
+					line-height: 15.6px;
+					margin-right: 0px;
+					text-align: left;
+					gap: 10px;
+
+					i {
+						font-size: 14px;
+					}
+
+					svg {
+						width: 14px;
+						height: 14px;
+
+						path {
+							fill: currentColor;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Filter and Switch tab
+@mixin filter-switch-tab-style {
+	width: fit-content;
+	border: none;
+	
+	&-item {
+		@include radius-xs;
+		@include remove-box-shadow;
+		font-weight: 400;
+		color: $gray;
+
+		&.is-active{
+			@include remove-box-shadow;
+			color: $white;
+		}
+	}
+}

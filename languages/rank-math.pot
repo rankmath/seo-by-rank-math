@@ -2,20 +2,20 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO with AI Best SEO Tools 1.0.218\n"
+"Project-Id-Version: Rank Math SEO with AI SEO Tools 1.0.221\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-02T08:50:02+00:00\n"
+"POT-Creation-Date: 2024-06-12T04:53:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
 
 #. Plugin Name of the plugin
-msgid "Rank Math SEO with AI Best SEO Tools"
+msgid "Rank Math SEO with AI SEO Tools"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -506,7 +506,6 @@ msgstr ""
 #. translators: Link to KB article
 #. translators: Redirection page url
 #. translators: 1. Link to KB article 2. Link to redirection setting scree
-#. translators: %s is a Learn More link to the documentation.
 #. translators: Learn more link.
 #. translators: %1$s: thing, %2$s: Learn more link.
 msgid "Learn more"
@@ -770,7 +769,6 @@ msgstr ""
 msgid "By connecting your free account, you get keyword suggestions directly from Google when entering the focus keywords. Not only that, get access to our revolutionary Content AI, SEO Analyzer inside WordPress that scans your website for SEO errors and suggest improvements. %s"
 msgstr ""
 
-#. translators: Link to Free Account Benefits KB article
 msgid "Read more by following this link."
 msgstr ""
 
@@ -778,74 +776,6 @@ msgid "Account Successfully Connected"
 msgstr ""
 
 msgid "You have successfully activated Rank Math."
-msgstr ""
-
-msgid "Preview"
-msgstr ""
-
-msgid "Desktop Preview"
-msgstr ""
-
-msgid "Mobile Preview"
-msgstr ""
-
-msgid "Click to enter permalink"
-msgstr ""
-
-msgid "Click to enter custom title"
-msgstr ""
-
-msgid "Click to enter custom meta description"
-msgstr ""
-
-msgid "Noindex robots meta is enabled"
-msgstr ""
-
-msgid "This page will not appear in search results. You can disable noindex in the Advanced tab."
-msgstr ""
-
-msgid "Price range: "
-msgstr ""
-
-msgid "Calories: "
-msgstr ""
-
-#. translators: total reviews
-msgid "Rating: %s"
-msgstr ""
-
-#. translators: total reviews
-msgid "%s reviews"
-msgstr ""
-
-msgid "Price"
-msgstr ""
-
-msgid "Price range"
-msgstr ""
-
-msgid "Cooking time"
-msgstr ""
-
-msgid "Calories"
-msgstr ""
-
-msgid "In Stock"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Location"
-msgstr ""
-
-msgid "Rating"
-msgstr ""
-
-msgid "Out of stock"
-msgstr ""
-
-msgid "In stock"
 msgstr ""
 
 msgid "Requirements"
@@ -1413,7 +1343,6 @@ msgstr ""
 msgid "Choose your Sitemap configuration and select which type of posts or pages you want to include in your Sitemaps. %s"
 msgstr ""
 
-#. translators: Link to How to Setup Sitemap KB article
 #. Translators: placeholder is the KB link.
 msgid "Learn more."
 msgstr ""
@@ -3035,6 +2964,19 @@ msgstr ""
 msgid "Group Advanced Robots Meta"
 msgstr ""
 
+#. translators: Link to kb article
+msgid "Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. %s."
+msgstr ""
+
+msgid "Content AI Plan"
+msgstr ""
+
+msgid "Content AI Credits"
+msgstr ""
+
+msgid "Content AI Refresh Date"
+msgstr ""
+
 msgid "&#8595; Rank Math Content AI"
 msgstr ""
 
@@ -3051,6 +2993,19 @@ msgid "Write Image Alt Text with AI"
 msgstr ""
 
 msgid "Another bulk editing process is already running. Please try again later after the existing process is complete."
+msgstr ""
+
+msgid "Cancel Content AI Bulk Editing Process"
+msgstr ""
+
+#. Translators: placeholders are the number of posts that were processed.
+msgid "Terminate the ongoing Content AI Bulk Editing Process to halt any pending modifications and revert to the previous state. The bulk metadata has been generated for %1$d out of %1$d posts so far."
+msgstr ""
+
+msgid "Terminate"
+msgstr ""
+
+msgid "Bulk Editing Process Successfully Cancelled"
 msgstr ""
 
 msgid "Bulk editing SEO meta started. It might take few minutes to complete the process."
@@ -3114,32 +3069,6 @@ msgid "History"
 msgstr ""
 
 msgid "Content AI History"
-msgstr ""
-
-msgid "Cancel Content AI Bulk Editing Process"
-msgstr ""
-
-#. Translators: placeholders are the number of posts that were processed.
-msgid "Terminate the ongoing Content AI Bulk Editing Process to halt any pending modifications and revert to the previous state. The bulk metadata has been generated for %1$d out of %1$d posts so far."
-msgstr ""
-
-msgid "Terminate"
-msgstr ""
-
-msgid "Bulk Editing Process Successfully Cancelled"
-msgstr ""
-
-#. translators: Link to kb article
-msgid "Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. %s."
-msgstr ""
-
-msgid "Content AI Plan"
-msgstr ""
-
-msgid "Content AI Credits"
-msgstr ""
-
-msgid "Content AI Refresh Date"
 msgstr ""
 
 msgid "Sorry, only authenticated users can research the keyword."
@@ -3489,6 +3418,9 @@ msgid "Spanish"
 msgstr ""
 
 msgid "Swedish"
+msgstr ""
+
+msgid "Turkish"
 msgstr ""
 
 msgid "Select Post Type"
@@ -4357,19 +4289,6 @@ msgstr ""
 msgid "Top Admin Bar"
 msgstr ""
 
-#. translators: %s is a Learn More link to the documentation.
-msgid "Control which user has access to which options of Rank Math. %s"
-msgstr ""
-
-msgid "Reset"
-msgstr ""
-
-msgid "Update Capabilities"
-msgstr ""
-
-msgid "Toggle All"
-msgstr ""
-
 msgid "Blocks"
 msgstr ""
 
@@ -4607,6 +4526,9 @@ msgstr ""
 msgid "Organization Logo"
 msgstr ""
 
+msgid "Location"
+msgstr ""
+
 msgid "Gender"
 msgstr ""
 
@@ -4640,6 +4562,9 @@ msgstr ""
 msgid "Recipe Yield"
 msgstr ""
 
+msgid "Calories"
+msgstr ""
+
 msgid "Preparation Time"
 msgstr ""
 
@@ -4671,6 +4596,9 @@ msgid "Menu URL"
 msgstr ""
 
 msgid "Service Type"
+msgstr ""
+
+msgid "Price"
 msgstr ""
 
 msgid "Price Currency"
@@ -5591,6 +5519,9 @@ msgid "Brand"
 msgstr ""
 
 msgid "Select Product Brand Taxonomy to use in Schema.org & OpenGraph markup."
+msgstr ""
+
+msgid "In stock"
 msgstr ""
 
 msgid "Written by"
@@ -7388,6 +7319,15 @@ msgstr ""
 msgid "Rating: "
 msgstr ""
 
+msgid "Preview"
+msgstr ""
+
+msgid "Desktop Preview"
+msgstr ""
+
+msgid "Mobile Preview"
+msgstr ""
+
 msgid "Videos"
 msgstr ""
 
@@ -7401,6 +7341,12 @@ msgid "Tools"
 msgstr ""
 
 msgid "About 43,700,000 results (0.32 seconds) "
+msgstr ""
+
+msgid "Noindex robots meta is enabled"
+msgstr ""
+
+msgid "This page will not appear in search results. You can disable noindex in the Advanced tab."
 msgstr ""
 
 msgid "Replace Image"
@@ -8045,6 +7991,18 @@ msgstr ""
 msgid "The statistics that appear in the Rank Math Analytics module won’t match with the data from the Google Search Console as we only track posts and keywords that rank in the top 100 positions in the selected timeframe. We do this to help make decision-making easier and for faster data processing since this is the data you really need to prioritize your SEO efforts on."
 msgstr ""
 
+msgid "Failed to generate alt text."
+msgstr ""
+
+msgid "Generate Alt"
+msgstr ""
+
+msgid "Generating…"
+msgstr ""
+
+msgid "Generate Alt with AI"
+msgstr ""
+
 msgid "Blog Post Idea"
 msgstr ""
 
@@ -8609,9 +8567,6 @@ msgstr ""
 msgid "Outputs"
 msgstr ""
 
-msgid "Generating…"
-msgstr ""
-
 msgid "Generate"
 msgstr ""
 
@@ -8777,13 +8732,7 @@ msgstr ""
 msgid "Shorten with AI"
 msgstr ""
 
-msgid "Failed to generate alt text."
-msgstr ""
-
 msgid "Image URL is missing."
-msgstr ""
-
-msgid "Generate Alt"
 msgstr ""
 
 msgid "50 Content AI credits will be used to generate the Alt"
@@ -8801,6 +8750,33 @@ msgstr ""
 msgid "Type / to choose a block or // to use Content AI"
 msgstr ""
 
+msgid "Back"
+msgstr ""
+
+msgid "Upgrade to buy more credits from "
+msgstr ""
+
+msgid "Content AI Pricing."
+msgstr ""
+
+msgid "here."
+msgstr ""
+
+msgid "Suggested length 2-3 Words"
+msgstr ""
+
+msgid "To learn how to use it"
+msgstr ""
+
+msgid "Refresh will use 500 Credit."
+msgstr ""
+
+msgid "500 credits will be used."
+msgstr ""
+
+msgid "Research"
+msgstr ""
+
 msgid "Score:"
 msgstr ""
 
@@ -8808,27 +8784,6 @@ msgid "100"
 msgstr ""
 
 msgid "to"
-msgstr ""
-
-msgid "Use Keyword in"
-msgstr ""
-
-msgid "Headings"
-msgstr ""
-
-msgid "Know more about Keywords."
-msgstr ""
-
-msgid "Click on any keyword to copy it."
-msgstr ""
-
-msgid "Please use only one or two keywords from here."
-msgstr ""
-
-msgid "Related Keywords"
-msgstr ""
-
-msgid "There are no recommended Keywords for this researched keyword."
 msgstr ""
 
 msgid "Copied"
@@ -8847,6 +8802,27 @@ msgid "Click to copy keyword"
 msgstr ""
 
 msgid "No data available"
+msgstr ""
+
+msgid "Use Keyword in"
+msgstr ""
+
+msgid "Headings"
+msgstr ""
+
+msgid "Know more about Keywords."
+msgstr ""
+
+msgid "Click on any keyword to copy it."
+msgstr ""
+
+msgid "Please use only one or two keywords from here."
+msgstr ""
+
+msgid "There are no recommended Keywords for this researched keyword."
+msgstr ""
+
+msgid "Related Keywords"
 msgstr ""
 
 msgid "There are no recommended Questions for this researched keyword."
@@ -8900,31 +8876,10 @@ msgstr ""
 msgid "Content AI Knowledge Base."
 msgstr ""
 
-msgid "Back"
+msgid "Updating…"
 msgstr ""
 
-msgid "Upgrade to buy more credits from "
-msgstr ""
-
-msgid "Content AI Pricing."
-msgstr ""
-
-msgid "here."
-msgstr ""
-
-msgid "Suggested length 2-3 Words"
-msgstr ""
-
-msgid "To learn how to use it"
-msgstr ""
-
-msgid "Refresh will use 500 Credit."
-msgstr ""
-
-msgid "500 credits will be used."
-msgstr ""
-
-msgid "Research"
+msgid "Prompt with this name already exists"
 msgstr ""
 
 msgid "Credits"
@@ -8948,9 +8903,6 @@ msgstr ""
 msgid "Improve Now"
 msgstr ""
 
-msgid "Generate Alt with AI"
-msgstr ""
-
 msgid "You have exhausted your Content AI Credits."
 msgstr ""
 
@@ -8966,13 +8918,37 @@ msgstr ""
 msgid "Start using Content AI by connecting your RankMath account."
 msgstr ""
 
-msgid "Are you sure? You want to reset settings."
+msgid "Resetting…"
+msgstr ""
+
+msgid "Resetted"
+msgstr ""
+
+msgid "Updated"
+msgstr ""
+
+msgid "Select / Deselect All"
+msgstr ""
+
+msgid "Toggle All"
+msgstr ""
+
+msgid "Control which user has access to which options of Rank Math."
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Update Capabilities"
 msgstr ""
 
 msgid "Author Name"
 msgstr ""
 
 msgid "Image URL"
+msgstr ""
+
+msgid "Rating"
 msgstr ""
 
 msgid "Rating score"

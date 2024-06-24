@@ -1,0 +1,70 @@
+@import '../../../scss/variables';
+
+/*
+ * Toggle Group Control component.
+ */
+.components-base-control {
+	.components-base-control__field {
+		.rank-math-toggle-group-control {
+			&.components-toggle-group-control {
+				padding: 5px;
+				border: 1px solid $gray-10;
+				border-radius: 4px;
+				background: $white;
+				margin: 0;
+				gap: 5px;
+				width: fit-content;
+
+				&:focus-within {
+					box-shadow: none;
+					outline: none;
+				}
+
+				.css-1abtnze {	
+					flex: auto;
+					
+					.components-toggle-group-control-option-base {
+						box-sizing: border-box;
+						height: 36px;
+						padding: 0 15px;
+						white-space: nowrap;
+						border: 1px solid $light_gray;
+						border-radius: 4px;
+						color: #666d73;
+						transition: none;
+
+						.css-1v0f2i8 {
+							line-height: 34px;
+							font-weight: 500;
+							font-size: 14px;
+						}
+
+						&:hover {
+							color: $primary;
+							border-color: $primary;
+						}
+						
+						&[aria-checked="true"],
+						&[aria-checked="true"]:hover {
+							color: $white;
+							border-color: $primary;
+							background-color: $primary;
+						}
+
+						+ .css-k1frqi {
+							background-color: $primary;
+						}
+					}
+				}
+
+				&[aria-disabled="true"] {
+					opacity: 0.4;
+				}
+			}
+		}
+
+		.css-zjik7 {
+			display: none;
+		}
+	}
+}

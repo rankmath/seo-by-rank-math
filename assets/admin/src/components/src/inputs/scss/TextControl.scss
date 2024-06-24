@@ -1,0 +1,30 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins/base';
+
+/*
+ * Text Control component.
+ */
+.rank-math-text-control {
+	&.components-base-control {
+		.components-base-control__field {
+			margin-bottom: 0px;
+
+			.components-text-control__input {
+				@include base-input-style;
+				padding: 0 8px;
+				line-height: 2;
+				min-height: 30px;
+			}
+		}
+
+		&.regular-text {
+			width: 100%;
+			
+			.components-base-control__field {
+				.components-text-control__input {
+					@include metabox;
+				}
+			}
+		}
+	}
+}

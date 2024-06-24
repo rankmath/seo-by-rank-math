@@ -1,0 +1,118 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins/formcontrol';
+@import '../../../scss/mixins/styling';
+
+// Variables
+$slate-gray: #6c7781;
+
+/*
+ * Toggle Control component.
+ */
+.rank-math-toggle-control.components-toggle-control {
+	.components-base-control__field {
+		margin-bottom: 0px;
+
+		.components-flex {
+			gap: 8px;
+
+			.components-form-toggle {
+				margin-right: 0px;
+
+				&__input {
+					&:focus + .components-form-toggle__track {
+						@include remove-box-shadow;
+					}
+				}
+
+				&__track {
+					border: 2px solid $slate-gray;
+					width: 50px;
+					height: 24px;
+					border-radius: 34px;
+				}
+
+				&__thumb {
+					top: 50%;
+					left: 5px;
+					width: 14px;
+					border: none;
+					height: 14px;
+					transform: translateY(-50%);
+					background-color: $slate-gray;
+				}
+
+				&::after {
+					content: "";
+					top: 50%;
+					right: 6px;
+					width: 8px;
+					height: 8px;
+					border-radius: 50%;
+					position: absolute;
+					border: 3px solid $slate-gray;
+					transform: translateY(-50%);
+					box-sizing: border-box;
+				}
+
+				&.is-checked {
+					.components-form-toggle {
+						&__track {
+							border-color: $primary;
+							background-color: $primary;
+						}
+
+						&__thumb {
+							right: 5px;
+							left: auto;
+							background-color: $white;
+						}
+					}
+
+					&::after {
+						left: 11px;
+						background: $white;
+						border-radius: 1px;
+						border: none;
+						width: 3px;
+						height: 8px;
+						right: auto;
+					}
+				}
+				
+				&.is-disabled {
+					opacity: 1;
+					pointer-events: none;
+
+					&.is-checked {
+						&::after {
+							background: $gray-10;
+						}
+					}
+
+					.components-form-toggle {
+						&__track {
+							border-color: $gray-10;
+							background: transparent;
+						}
+
+						&__thumb {
+							background: $gray-10;
+						}
+					}
+
+					&::after {
+						border-color: $gray-10;
+					}
+
+					+ label {
+						pointer-events: none;
+					}
+				}
+			}
+
+			.components-toggle-control__label {
+				@include control-label-style;
+			}
+		}
+	}
+}
