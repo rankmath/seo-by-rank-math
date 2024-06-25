@@ -1,0 +1,145 @@
+@import '../../../scss/variables';
+
+/*
+ * Mixin for styling the state of the progress bar.
+ */
+@mixin progress-state-style($line-bg, $color, $indicator-color) {
+	&::after {
+		background: $line-bg;
+	}
+
+	&.components-tab-panel__tabs-item {
+		color: $color;
+
+		&:not(:first-of-type)::before {
+			background-color: $indicator-color;
+			border-color: $indicator-color;
+		}
+	}
+}
+
+/*
+ * Steps Progress component
+ */
+.rank-math-steps-progress {
+	gap: 13px;
+  	display: grid;
+
+	> .components-tab-panel__tabs[role="tablist"] {
+		.components-tab-panel__tabs-item {
+			flex: 1;
+			display: block;
+			color: #5b6065;
+			font-weight: 600;
+			position: relative;
+			text-transform: uppercase;
+			padding: 0px;
+			display: flex;
+			flex-direction: column;
+			align-items: start;
+			letter-spacing: 0.5px;
+			line-height: 22px;
+			text-wrap: nowrap;
+
+			&:focus,
+			&.is-active,
+			&.is-active:focus {
+				box-shadow: none;
+			}
+
+			&:first-of-type {
+				display: flex;
+				color: $primary !important;
+				margin-left: 20px;
+
+				+ .components-tab-panel__tabs-item::after {
+					width: 158%;
+				}
+
+				&::after {
+					display: none;
+				}
+			}
+	
+			&:not(:first-of-type) {
+				align-items: center;
+
+				&::after {
+					content: '';
+					height: 3px;
+					width: 100%;
+					pointer-events: none;
+					background-color: #cbd2d9;
+					transform: translate(-50%, 17px);
+					visibility: visible;
+					overflow: hidden;
+					position: relative;
+					outline: none;
+					transition: none;
+				}
+
+				&::before {
+					content: "";
+					width: 18px;
+					height: 18px;
+					z-index: 10;
+					line-height: 20px;
+					position: absolute;
+					background: #cbd2d9;
+					display: inline-block;
+					box-shadow: inset 0 0 0 2px $white;
+					border: 2px solid #cbd2d9;
+					border-radius: 50%;
+					top: 30px;
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+			
+			@media screen and (max-width: 782px) and (max-width: 595px) {
+				&:first-of-type {
+					z-index: 1;
+					margin-top: -7px;
+					background-color: $white;
+					height: fit-content;
+					padding-bottom: 10px;
+					text-wrap: wrap;
+					margin-left: 0;
+
+					font-size: 12px;
+					font-weight: 600;
+					text-align: center;
+				}
+
+				&:not(:first-of-type) {
+					font-size: 0;
+					line-height: 1;
+
+					&::before {
+						top: 0;
+					}
+
+					&::after {
+						transform: translate(-50%, 9px);
+					}
+				}
+			}
+	
+			&.is-active {
+				@include progress-state-style (
+					linear-gradient(to right, $status-good 0%, $primary 100%),
+					$primary,
+					$primary
+				);
+			}
+
+			&.is-done {
+				@include progress-state-style(
+					$status-good,
+					#5b6065,
+					$status-good
+				);
+			}
+		}
+	}
+}

@@ -1,0 +1,60 @@
+@import '../../../scss/variables';
+
+/*
+ * Mixin function used to style Status Button's validation state.
+ */
+@mixin status-validation($color) {
+	border: 1px solid $color;
+	background-color: $color;
+	color: $white;
+
+	svg {
+		path {
+			fill: $white;
+		}
+	}
+}
+
+/*
+ * Status Button component.
+ */
+.rank-math-status-button {
+	&.components-button {
+		line-height: 2.30769231;
+		padding: 0px 12px;
+		min-height: 32px;
+		font-weight: 500;
+		border-radius: 4px;
+		font-size: 14px;
+
+		&.has-icon.has-text {
+			svg {
+				width: 14px;
+				height: 14px;
+				margin-right: 5px;
+			}
+		}
+
+		&.is-connected {
+			@include status-validation($status-good);
+		}
+
+		&.is-disconnected {
+			@include status-validation($error);
+		}
+
+		&.is-disconnect {
+			&:hover {
+				box-shadow: none;
+				border-color: $error;
+				color: $white;
+				background: $error;
+			}
+		}
+
+		&.is-connected,
+		&.is-disconnected {
+			pointer-events: none;
+		}
+	}
+}

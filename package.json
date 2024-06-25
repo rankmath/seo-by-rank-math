@@ -1,3 +1,4 @@
+
 {
 	"name": "rank-math",
 	"version": "1.1.0",
@@ -82,6 +83,7 @@
 		"woocommerce": "webpack --mode=production --env what=woocommerce --progress",
 		"acf": "webpack --mode=production --env what=acf --progress",
 		"role-manager": "webpack --mode=production --env what=role-manager --progress",
+		"devrm": "webpack --mode=development --env what=role-manager --watch",
 		"sa": "webpack --mode=production --env what=seo-analysis --progress",
 		"status": "webpack --mode=production --env what=status --progress",
 		"version-control": "webpack --mode=production --env what=version-control --progress",

@@ -1,0 +1,411 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins/styling';
+
+// Variables
+$button-destructive: 'is-destructive:not(.is-primary):not(.is-secondary):not(.is-tertiary):not(.is-link)';
+$primary-highlight: #08a7f1;
+$primary-dark: #135e96;
+$green-highlight: #0f9e79;
+$green-default: #10AC84;
+
+/* 
+ * Button component.
+ */
+.rank-math-button {
+	&.components-button {
+		display: inline-flex !important;
+		font-size: 14px;
+		line-height: 38px;
+		height: auto;
+		min-height: 30px;
+		padding: 0 20px;
+		border-radius: 3px;
+		vertical-align: top;
+		color: $secondary;
+		border: 1px solid $dark_gray;
+		background: $tertiary;
+		transition: 0.05s ease-in-out;
+
+		&:active,
+		&.button-secondary:active,
+		&.#{$button-destructive}:active {
+			&:not(:disabled) {
+				box-shadow: none;
+				background: $tertiary-light;
+				border-color: $border-highlight;
+			}
+		}
+
+		&:focus,
+		&:hover, 
+		&.button-secondary:hover,
+		&.button-secondary:focus,
+		&.#{$button-destructive}:hover,
+		&.#{$button-destructive}:focus {
+			&:not(:disabled) {
+				color: $primary;
+				border-color: $primary;
+				background: $tertiary;
+			}
+		}
+
+		&:focus:not(:disabled) {
+			outline-width: 2px;
+			outline-offset: 0;
+			box-shadow: 0 0 0 1px $primary;
+		}
+
+		&:disabled {
+			pointer-events: none;
+		}
+
+		&.has-icon {
+			@include icon-size(20px);
+
+			&.has-text {
+				gap: 5px;
+			}
+		}
+
+		/*
+		 * Small button
+		 */
+		&.is-small {
+			min-height: 26px;
+			line-height: 2.18181818;
+			padding: 0 8px;
+			font-size: 11px;
+
+			&.has-icon.has-text {
+				gap: 5px;
+				@include icon-size(13px);
+			}
+		}
+
+		/*
+		 * Large button
+		 */
+		&.is-large {
+			min-height: 32px;
+			line-height: 2.30769231;
+  			padding: 0 12px;
+		}
+
+		/*
+		 * Extra large button
+		 */
+		&.is-xlarge {
+			font-size: 16px;
+			line-height: 44px;
+			height: 46px;
+		}
+
+		@media screen and (max-width: 782px) {
+			&.is-small, &.is-large {
+				padding: 0 14px;
+				line-height: 2.71428571;
+				font-size: 14px;
+				vertical-align: middle;
+				min-height: 40px;
+				margin-bottom: 4px;
+			}
+		}
+
+		/**
+		 * Destructive buttons.
+		 */
+		&.#{$button-destructive} {
+			color: $error;
+			border-color: $error;
+			background: transparent;
+			box-shadow: none;
+
+			&:hover, 
+			&:focus {
+				&:not(:disabled) {
+					box-shadow: 0 0 0 1px $error;
+				}
+			}
+
+			&:active:not(:focus):not(:disabled) {
+				color: $error;
+			}
+		}
+		
+		/**
+		 * Primary and animated buttons.
+		 */
+		&.button-animate,
+		&.button-primary {
+			color: $white;
+			background-color: $primary;
+			border-color: $primary;
+
+			&:hover:not(:disabled) {
+				color: $white;
+			}
+
+			&:active:not(:disabled) {
+				border-color: $primary-dark;
+				background-color: $primary-dark;
+			}
+
+			&:hover, &:focus {
+				&:not(:disabled) {
+					border-color: $primary-highlight;
+					background-color: $primary-highlight;
+				}
+			}
+
+			&:focus:not(:disabled) {
+				color: $white;
+				box-shadow: 0 0 0 1px $white,0 0 0 3px $primary;
+			}
+
+			&:disabled {
+				color: #9fdffc !important;
+				background-color: $primary !important;
+				border-color: $primary !important;
+			}
+		}
+
+		/**
+		 * Primary outline button style.
+		 */
+		&.button-primary-outline {
+			color: $primary-light;
+			background-color: $tertiary-light;
+			border-color: $primary-light;
+
+			&:hover:not(:disabled) {
+				background: $gray-30;
+				border-color: $primary-darker;
+			}
+
+			&:active:not(:disabled) {
+				border-color: $border-highlight;
+			}
+
+			&:disabled {
+				color: $primary-light !important;
+				background-color: $tertiary-light !important;
+				border-color: $primary-light !important;
+			}
+
+			&:hover, &:focus {
+				&:not(:disabled) {
+					color: $primary-darker;
+				}
+			}
+
+			&:focus:not(:disabled) {
+				border-color: $focus;
+				background-color: $tertiary-light;
+				box-shadow: 0 0 0 1px $focus;
+				color: $primary-darker;
+			}
+
+			&.is-destructive {
+				color: $danger;
+
+				&:hover:not(:focus) {
+					box-shadow: none;
+				}
+
+				&:focus:not(:disabled) {
+					background-color: $tertiary-light;
+				}
+			}
+		}
+
+		/**
+		 * Secondary and animated buttons.
+		 */
+		&.button-animate:disabled,
+		&.button-secondary:disabled {
+			@include secondary-button-styles;
+		}
+
+		/**
+		 * Secondary buttons.
+		 */
+		&.button-secondary,
+		&.button-secondary:active:not(:focus):not(:disabled) {
+			color: $secondary;
+		}
+
+		&.button-secondary {
+			box-shadow: none;
+			background: $tertiary;
+			border-color: $dark_gray;
+
+			&:hover, &:active {
+				&:not(:disabled) {
+					box-shadow: none;
+				}
+			}
+
+			&:focus:not(:disabled) {
+				box-shadow: 0 0 0 1px $primary;
+			}
+		}
+
+		/**
+		 * Link buttons.
+		 */
+		&.button-link {
+			border: 0;
+			padding: 0;
+			height: auto;
+			min-height: 0;
+			line-height: 1.3;
+			border-radius: 0;
+			background: none;
+			transition: 0.05s ease-in-out;
+			color: $primary-light;
+
+			&:hover, &:active {
+				&:not(:disabled) {
+					color: $primary-dark;
+					background: none;
+				}
+			}
+
+			&:focus:not(:disabled) {
+				color: #043959;
+				box-shadow: 0 0 0 1px #4f94d4,0 0 2px 1px rgba(79,148,212,.8);
+				outline-width: 1px;
+			}
+		}
+
+		/**
+		 * Green buttons.
+		 */
+		&.button-green,
+		&.button-green:focus:not(:disabled) {
+			color: $white;
+		}
+
+		&.button-green {
+			font-weight: 500;
+			width: auto;
+			max-width: 100%;
+			margin: 0 auto;
+			padding: 0 2rem;
+			background: $green-default;
+			border-color: $green-default;
+			display: inline-block;
+
+			&:active:not(:disabled) {
+				color: $black-90;
+			}
+
+			&:hover, &:focus {
+				&:not(:disabled) {
+					color: $white;
+					border-color: $green-highlight;
+					background: $green-highlight;
+				}
+			}
+
+			&:focus:not(:disabled) {
+				box-shadow: 0 0 0 1px $white,0 0 0 3px $green-highlight;
+			}
+		}
+
+		/**
+		 * Remove-group buttons.
+		 */
+		&.button-remove-group, 
+		&.button-remove-group:active {
+			color: #a00;
+		}
+
+		&.button-remove-group {
+			border: 0;
+			padding: 0 10px;
+			background: transparent;
+			box-shadow: none;
+
+			&:focus,
+			&:hover {
+				&:not(:disabled) {
+					box-shadow: 0 0 0 1px #dc3232;
+				}
+			}
+		}
+
+		/**
+		 * Animated button style.
+		 */
+		&.button-animate {
+			position: relative;
+			font-size: 24px;
+			line-height: 82px;
+			height: auto;
+			min-height: 30px;
+			padding: 0 40px;
+			transform: perspective(1px) translateZ(0);
+			text-align: center;
+			border-radius: 82px;
+			gap: 8px;
+
+			&:disabled {
+				opacity: 1;
+			}
+		
+			&:not(:disabled) {
+				&::before {
+					content: '';
+					animation: ripple-out 1s linear infinite;
+					border: #bcdbea solid 6px;
+					border-radius: 55px;
+					position: absolute;
+					top: -6px;
+					right: -6px;
+					bottom: -6px;
+					left: -6px;
+				}
+			}
+
+			@media screen and (max-width: 782px) {
+				font-size: 15px;
+    			padding: 0 20px;
+			}
+		}
+
+		/**
+		 * Start new chat button style.
+		 */
+		&.button-start-new-chat {
+			width: 16.5rem;
+			height: 42px;
+			line-height: 15px;
+			font-weight: 500;
+			
+			&.has-icon.has-text {
+				padding-left: 16px;
+				padding-right: 16px;
+				justify-content: center;
+				gap: 12px;
+
+				i {
+					font-size: 14px;
+				}
+			}
+		}
+	}
+}
+
+/*
+ * Animation keyframes.
+ */
+@keyframes ripple-out {
+	100% {
+		opacity: 0;
+		top: -20px;
+		right: -20px;
+		bottom: -20px;
+		left: -20px;
+	}
+}
