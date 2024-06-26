@@ -10,7 +10,6 @@
 
 namespace RankMath\ContentAI;
 
-use RankMath\ContentAI\Content_AI;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Page;
@@ -26,15 +25,22 @@ class Content_AI_Page {
 	use Hooker;
 
 	/**
-	 * The Constructor.
+	 * Content_AI object.
+	 *
+	 * @var object
 	 */
-	public function __construct() {
+	public $content_ai;
+
+	/**
+	 * Class constructor.
+	 *
+	 * @param Object $content_ai Content_AI class object.
+	 */
+	public function __construct( $content_ai ) {
+		$this->content_ai = $content_ai;
 		$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
-		$this->action( 'rank_math/admin/editor_scripts', 'enqueue' );
 		$this->action( 'init', 'init' );
 		$this->filter( 'wp_insert_post_data', 'remove_unused_generated_content' );
-		$this->filter( 'rank_math/database/tools', 'add_tools' );
-		$this->filter( 'rank_math/tools/content_ai_cancel_bulk_edit_process', 'cancel_bulk_edit_process' );
 
 		if ( Param::get( 'page' ) !== 'rank-math-content-ai-page' ) {
 			return;
@@ -52,8 +58,6 @@ class Content_AI_Page {
 		$this->register_post_type();
 		$this->register_admin_page();
 		Block_Command::get();
-		Bulk_Edit_SEO_Meta::get();
-		Bulk_Image_Alt::get();
 		Event_Scheduler::get();
 	}
 
@@ -76,32 +80,6 @@ class Content_AI_Page {
 	}
 
 	/**
-	 * Enqueue Content AI Page CSS.
-	 */
-	public function enqueue() {
-		wp_enqueue_style(
-			'rank-math-content-ai-page',
-			rank_math()->plugin_url() . 'includes/modules/content-ai/assets/css/content-ai-page.css',
-			[ 'rank-math-common' ],
-			rank_math()->version
-		);
-
-		wp_enqueue_script(
-			'rank-math-content-ai-page',
-			rank_math()->plugin_url() . 'includes/modules/content-ai/assets/js/content-ai-page.js',
-			[
-				'lodash',
-				'wp-dom-ready',
-				'rank-math-content-ai',
-			],
-			rank_math()->version,
-			true
-		);
-
-		wp_set_script_translations( 'rank-math-content-ai-page', 'rank-math' );
-	}
-
-	/**
 	 * Register admin page.
 	 */
 	public function register_admin_page() {
@@ -110,8 +88,7 @@ class Content_AI_Page {
 		$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . esc_html__( 'New!', 'rank-math' ) . '</span>';
 
 		if ( 'rank-math-content-ai-page' === Param::get( 'page' ) ) {
-			Helper::add_json( 'isContentAIPage', true );
-			Content_AI::localized_data();
+			$this->content_ai->localized_data( [ 'isContentAIPage' => true ] );
 		}
 
 		new Page(
@@ -134,18 +111,17 @@ class Content_AI_Page {
 						'rank-math-content-ai-page' => $uri . '/assets/css/content-ai-page.css',
 					],
 					'scripts' => [
-						'lodash'                    => '',
-						'wp-components'             => '',
-						'wp-block-library'          => '',
-						'wp-format-library'         => '',
-						'wp-edit-post'              => '',
-						'wp-blocks'                 => '',
-						'wp-element'                => '',
-						'wp-editor'                 => '',
-						'rank-math-block-faq'       => rank_math()->plugin_url() . 'assets/admin/js/blocks.js',
-						'rank-math-analyzer'        => rank_math()->plugin_url() . 'assets/admin/js/analyzer.js',
-						'rank-math-content-ai'      => rank_math()->plugin_url() . 'includes/modules/content-ai/assets/js/content-ai.js',
-						'rank-math-content-ai-page' => $uri . '/assets/js/content-ai-page.js',
+						'lodash'               => '',
+						'wp-components'        => '',
+						'wp-block-library'     => '',
+						'wp-format-library'    => '',
+						'wp-edit-post'         => '',
+						'wp-blocks'            => '',
+						'wp-element'           => '',
+						'wp-editor'            => '',
+						'rank-math-block-faq'  => rank_math()->plugin_url() . 'assets/admin/js/blocks.js',
+						'rank-math-analyzer'   => rank_math()->plugin_url() . 'assets/admin/js/analyzer.js',
+						'rank-math-content-ai' => rank_math()->plugin_url() . 'includes/modules/content-ai/assets/js/content-ai.js',
 					],
 				],
 			]
@@ -259,46 +235,6 @@ class Content_AI_Page {
 		}
 
 		return $data;
-	}
-
-	/**
-	 * Add database tools.
-	 *
-	 * @param array $tools Array of tools.
-	 *
-	 * @return array
-	 */
-	public function add_tools( $tools ) {
-		$posts = get_option( 'rank_math_content_ai_posts' );
-
-		// Early Bail if process is not running.
-		if ( empty( $posts ) ) {
-			return $tools;
-		}
-
-		$processed = get_option( 'rank_math_content_ai_posts_processed' );
-
-		$tools['content_ai_cancel_bulk_edit_process'] = [
-			'title'       => esc_html__( 'Cancel Content AI Bulk Editing Process', 'rank-math' ),
-			'description' => sprintf(
-				// Translators: placeholders are the number of posts that were processed.
-				esc_html__( 'Terminate the ongoing Content AI Bulk Editing Process to halt any pending modifications and revert to the previous state. The bulk metadata has been generated for %1$d out of %1$d posts so far.', 'rank-math' ),
-				$processed,
-				count( $posts )
-			),
-			'button_text' => esc_html__( 'Terminate', 'rank-math' ),
-		];
-
-		return $tools;
-	}
-
-	/**
-	 * Function to cancel the Bulk Edit process.
-	 */
-	public function cancel_bulk_edit_process() {
-		Bulk_Edit_SEO_Meta::get()->cancel();
-		Helper::remove_notification( 'rank_math_content_ai_posts_started' );
-		return __( 'Bulk Editing Process Successfully Cancelled', 'rank-math' );
 	}
 
 	/**

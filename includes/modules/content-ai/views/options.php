@@ -185,6 +185,7 @@ $cmb->add_field(
 			'Slovenian'  => esc_html__( 'Slovenian', 'rank-math' ),
 			'Spanish'    => esc_html__( 'Spanish', 'rank-math' ),
 			'Swedish'    => esc_html__( 'Swedish', 'rank-math' ),
+			'Turkish'    => esc_html__( 'Turkish', 'rank-math' ),
 		],
 	],
 );

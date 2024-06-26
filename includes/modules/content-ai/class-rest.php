@@ -230,7 +230,7 @@ class Rest extends WP_REST_Controller {
 		$object_id    = $request->get_param( 'objectID' );
 		$country      = $request->get_param( 'country' );
 		$keyword      = mb_strtolower( $request->get_param( 'keyword' ) );
-		$force_update = $request->get_param( 'force_update' );
+		$force_update = $request->get_param( 'forceUpdate' );
 		$keyword_data = get_option( 'rank_math_ca_data' );
 
 		if ( ! in_array( get_post_type( $object_id ), (array) Helper::get_settings( 'general.content_ai_post_types' ), true ) ) {

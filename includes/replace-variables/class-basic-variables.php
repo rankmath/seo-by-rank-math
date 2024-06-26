@@ -217,7 +217,7 @@ class Basic_Variables extends Cache {
 				'name'        => esc_html__( 'Organization Name', 'rank-math' ),
 				'description' => esc_html__( 'The Organization Name added in Local SEO Settings.', 'rank-math' ),
 				'variable'    => 'org_name',
-				'example'     => $this->get_sitename(),
+				'example'     => $this->get_org_name(),
 			],
 			[ $this, 'get_org_name' ]
 		);

@@ -32,7 +32,7 @@ $cmb->add_field(
 			'ol'  => esc_html__( 'Numbered', 'rank-math' ),
 			'ul'  => esc_html__( 'Unordered', 'rank-math' ),
 		],
-		'default' => 'unordered',
+		'default' => 'ul',
 	]
 );
 

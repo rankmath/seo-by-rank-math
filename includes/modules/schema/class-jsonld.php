@@ -88,7 +88,7 @@ class JsonLD {
 		$schema = $this->filter( $schema, $this, $data );
 		$schema = wp_parse_args( $schema['schema'], $current_data );
 		if ( ! empty( $schema['@type'] ) && in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true ) ) {
-			$schema['@type'] = 'Product';
+			$schema['@type'] = ! empty( $schema['hasVariant'] ) ? 'ProductGroup' : 'Product';
 		}
 
 		// Merge.

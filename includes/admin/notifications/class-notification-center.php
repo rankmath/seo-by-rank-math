@@ -115,7 +115,7 @@ class Notification_Center {
 
 		foreach ( $notifications as $notification ) {
 			if ( $notification->can_display() && ! in_array( (string) $notification, $this->displayed_notifications, true ) ) {
-				echo $notification;
+				echo wp_kses_post( $notification );
 				$this->displayed_notifications[] = (string) $notification;
 			}
 		}

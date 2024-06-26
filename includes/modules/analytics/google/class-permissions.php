@@ -129,7 +129,7 @@ class Permissions {
 			</strong>
 			<?php
 				/* translators: %s is the reconnect link. */
-				printf( wp_kses_post( __( 'You have not given the permission to fetch this data. Please <a href="%s">reconnect</a> with all required permissions.', 'rank-math' ) ), wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ) );
+				printf( wp_kses_post( __( 'You have not given the permission to fetch this data. Please <a href="%s">reconnect</a> with all required permissions.', 'rank-math' ) ), esc_url( wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ) ) );
 			?>
 		</p>
 		<?php

@@ -33,8 +33,11 @@ class Sitemap implements Wizard_Step {
 			<h1><?php esc_html_e( 'Sitemap', 'rank-math' ); ?> </h1>
 			<p>
 				<?php
-				/* translators: Link to How to Setup Sitemap KB article */
-				printf( esc_html__( 'Choose your Sitemap configuration and select which type of posts or pages you want to include in your Sitemaps. %s', 'rank-math' ), '<a href="' . KB::get( 'configure-sitemaps', 'SW Sitemap Step' ) . '" target="_blank">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' );
+				printf(
+					/* translators: Link to How to Setup Sitemap KB article */
+					esc_html__( 'Choose your Sitemap configuration and select which type of posts or pages you want to include in your Sitemaps. %s', 'rank-math' ),
+					'<a href="' . esc_url( KB::get( 'configure-sitemaps', 'SW Sitemap Step' ) ) . '" target="_blank">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>'
+				);
 				?>
 			</p>
 		</header>

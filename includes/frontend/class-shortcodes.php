@@ -193,7 +193,7 @@ class Shortcodes {
 				$format = str_replace( "{{$tag}}", $value, $format );
 			}
 
-			echo $format;
+			echo wp_kses_post( $format );
 			?>
 		</address>
 		<?php
@@ -223,8 +223,8 @@ class Shortcodes {
 
 				printf(
 					'<div class="rank-math-opening-hours"><span class="rank-math-opening-days">%1$s</span><span class="rank-math-opening-time">%2$s</span></div>',
-					join( ', ', $days ),
-					$time
+					esc_html( join( ', ', $days ) ),
+					esc_html( $time )
 				);
 			}
 			?>
@@ -295,7 +295,7 @@ class Shortcodes {
 			?>
 			<div class="rank-math-phone-number type-<?php echo sanitize_html_class( $phone['type'] ); ?>">
 				<label><?php echo esc_html( $label ); ?>:</label>
-				<span><?php echo isset( $phone['number'] ) ? '<a href="tel://' . $number . '">' . $number . '</a>' : ''; ?></span>
+				<span><?php echo isset( $phone['number'] ) ? '<a href="tel://' . esc_attr( $number ) . '">' . esc_html( $number ) . '</a>' : ''; ?></span>
 			</div>
 			<?php
 		endforeach;

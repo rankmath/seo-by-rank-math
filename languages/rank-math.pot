@@ -2,20 +2,20 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO with AI SEO Tools 1.0.221\n"
+"Project-Id-Version: Rank Math SEO 1.0.222\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-06-12T04:53:58+00:00\n"
+"POT-Creation-Date: 2024-06-26T05:23:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
 
 #. Plugin Name of the plugin
-msgid "Rank Math SEO with AI SEO Tools"
+msgid "Rank Math SEO"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -44,9 +44,6 @@ msgid "Please enter a valid email address."
 msgstr ""
 
 msgid "Please enter a valid URL."
-msgstr ""
-
-msgid "Rank Math SEO"
 msgstr ""
 
 msgid "Rank Math Dashboard"

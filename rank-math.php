@@ -8,8 +8,8 @@
  * @since        0.9.0
  *
  * @wordpress-plugin
- * Plugin Name:       Rank Math SEO with AI SEO Tools
- * Version:           1.0.221
+ * Plugin Name:       Rank Math SEO
+ * Version:           1.0.222
  * Plugin URI:        https://rankmath.com/
  * Description:       Rank Math SEO is the Best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic.
  * Author:            Rank Math
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.221';
+	public $version = '1.0.222';
 
 	/**
 	 * Rank Math database version.

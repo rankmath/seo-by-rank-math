@@ -84,7 +84,7 @@ class Json_Manager {
 
 		echo "<script type='text/javascript'>\n"; // CDATA and type='text/javascript' is not needed for HTML 5.
 		echo "/* <![CDATA[ */\n";
-		echo "$script\n";
+		echo "$script\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $object_data used in the script is already escaped.
 		echo "/* ]]> */\n";
 		echo "</script>\n";
 	}

@@ -1,11 +1,11 @@
-=== Rank Math SEO with AI SEO Tools ===
+=== Rank Math SEO – AI SEO Tools to Dominate SEO Rankings ===
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.5
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.221
+Stable tag: 1.0.222
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,13 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.221 [June 12, 2024] =
-- Improved: Moved [Role Manager](https://rankmath.com/kb/role-manager/) code to React. Now it loads blazing fast. We will gruadually make other modules load fast as well. 
-- Fixed: Update button state in the [Elementor editor](https://rankmath.com/blog/elementor-seo/) remained active even without any content changes when the Schema module was enabled
-- Fixed: [Table of Contents Block](https://rankmath.com/kb/table-of-contents-block/) was not working with Full Site editing templates
-- Fixed: [Organization name variable](https://rankmath.com/kb/variables-in-seo-title-description/#organization-name) `%org_name%` was displaying the site name in the Preview editor instead of the Organization name
-- Fixed: Missing link to [add new Redirection](https://rankmath.com/kb/setting-up-redirections/#redirections) in the Redirections Table
-- Fixed: Missing checkbox to allow editing [.htaccess file](https://rankmath.com/kb/general-settings/#edit-htaccess)
+= 1.0.222 [June 26, 2024] =
+- Added: Support for AVIF images in [Open Graph](https://rankmath.com/kb/open-graph-meta-tags/) meta tags
+- Fixed: [Content AI](https://rankmath.com/kb/how-to-use-content-ai-tools/) displayed a white screen when the Schema module was disabled
+- Fixed: Issue with [Highlight Long Paragraphs](https://rankmath.com/kb/fix-long-paragraph-test/) feature in the Classic Editor
+- Fixed: Content AI error popup in the [Research tab](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) was blocking other metaboxes in the Classic Editor
+- Fixed: Issue with Show/Hide columns option in the [Index Status table](https://rankmath.com/kb/analytics/#index-status-of-posts)
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

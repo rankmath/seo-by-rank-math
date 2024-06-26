@@ -161,7 +161,7 @@ class Breadcrumbs {
 		 * @param array       $crumbs The breadcrumbs array.
 		 * @param Breadcrumbs $this   Current breadcrumb.
 		 */
-		return $this->do_filter( 'frontend/breadcrumb/html', $html, $crumbs, $this );
+		return $this->do_filter( 'frontend/breadcrumb/html', wp_kses_post( $html ), $crumbs, $this );
 	}
 
 	/**

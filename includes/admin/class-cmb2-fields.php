@@ -95,7 +95,7 @@ class CMB2_Fields implements Runner {
 		}
 
 		echo '<label class="cmb2-toggle">';
-		echo $field_type_object->input( $args );
+		echo $field_type_object->input( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CMB2 handles escaping.
 		echo '<span class="cmb2-slider">';
 		echo '<svg width="3" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 6" class="toggle_on" role="img" aria-hidden="true" focusable="false"><path d="M0 0h2v6H0z"></path></svg>';
 		echo '<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg>';
@@ -128,13 +128,13 @@ class CMB2_Fields implements Runner {
 		}
 		$field->set_options();
 
-		echo $field_type_object->radio_inline();
+		echo $field_type_object->radio_inline(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CMB2 handles escaping.
 	}
 
 	/**
 	 * Render notices
 	 *
-	 * @param array $field The passed in `CMB2_Field` object.
+	 * @param object $field The passed in `CMB2_Field` object.
 	 */
 	public function render_notice( $field ) {
 		$hash = [
@@ -143,13 +143,13 @@ class CMB2_Fields implements Runner {
 			'warning' => 'notice notice-alt notice-warning warning inline rank-math-notice',
 		];
 
-		echo '<div class="' . $hash[ $field->args( 'what' ) ] . '"><p>' . $field->args( 'content' ) . '</p></div>';
+		echo '<div class="' . esc_attr( $hash[ $field->args( 'what' ) ] ) . '"><p>' . $field->args( 'content' ) . '</p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CMB2 handles escaping.
 	}
 
 	/**
 	 * Render address field.
 	 *
-	 * @param array  $field             The passed in `CMB2_Field` object.
+	 * @param object $field             The passed in `CMB2_Field` object.
 	 * @param mixed  $escaped_value     The value of this field escaped
 	 *                                  It defaults to `sanitize_text_field`.
 	 *                                  If you need the unescaped value, you can access it
@@ -183,21 +183,22 @@ class CMB2_Fields implements Runner {
 		];
 
 		foreach ( array_keys( $value ) as $id ) :
-			echo '<div class="cmb-address-field">' . $field_type_object->input(
+			$field_input = $field_type_object->input(
 				[
 					'name'        => $field_type_object->_name( '[' . $id . ']' ),
 					'id'          => $field_type_object->_id( '_' . $id ),
 					'value'       => $value[ $id ],
 					'placeholder' => esc_html( $field->get_string( $id . '_text', $strings[ $id ] ) ),
 				]
-			) . '</div>';
+			);
+			echo '<div class="cmb-address-field">' . $field_input . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CMB2 handles escaping.
 		endforeach;
 	}
 
 	/**
 	 * Render Advanced Robots fields.
 	 *
-	 * @param array  $field             The passed in `CMB2_Field` object.
+	 * @param object $field             The passed in `CMB2_Field` object.
 	 * @param mixed  $escaped_value     The value of this field escaped
 	 *                                  It defaults to `sanitize_text_field`.
 	 *                                  If you need the unescaped value, you can access it
@@ -230,42 +231,57 @@ class CMB2_Fields implements Runner {
 			$value = isset( $escaped_value[ $id ] ) ? $escaped_value[ $id ] : $value;
 
 			echo '<li>';
-				echo '<label for="' . $field_type_object->_id( '_' . $id . '_name' ) . '">';
-					echo $field_type_object->checkbox(
-						[
-							'name'    => $field_type_object->_name( "[{$id}][enable]" ),
-							'id'      => $field_type_object->_id( '_' . $id . '_name' ),
-							'value'   => true,
-							'checked' => ! empty( $escaped_value[ $id ] ) || empty( $escaped_value ) ? 'checked' : false,
-						]
-					);
-				echo $field->get_string( $id . '_text', $strings[ $id ] ) . '</label>';
+				echo '<label for="' . esc_attr( $field_type_object->_id( '_' . $id . '_name' ) ) . '">';
+					echo $this->get_advanced_robots_field( 'checkbox', $field_type_object, $id, $value, $escaped_value ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CMB2 handles escaping.
+				echo wp_kses_post( $field->get_string( $id . '_text', $strings[ $id ] ) ) . '</label>';
 
 			if ( 'max-image-preview' === $id ) {
-				echo $field_type_object->select(
-					[
-						'name'    => $field_type_object->_name( "[{$id}][length]" ),
-						'id'      => $field_type_object->_id( '_' . $id . '_name' ),
-						'options' => $this->get_image_sizes( $value ),
-					]
-				);
+				echo $this->get_advanced_robots_field( 'select', $field_type_object, $id, $value, $escaped_value ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CMB2 handles escaping.
 			}
 
 			if ( 'max-image-preview' !== $id ) {
-				echo $field_type_object->input(
-					[
-						'name'  => $field_type_object->_name( "[{$id}][length]" ),
-						'id'    => $field_type_object->_id( '_' . $id . '_length' ),
-						'value' => $value ? $value : -1,
-						'type'  => 'number',
-						'min'   => -1,
-					]
-				);
+				echo $this->get_advanced_robots_field( 'input', $field_type_object, $id, $value, $escaped_value ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CMB2 handles escaping.
 			}
 
 			echo '</li>';
 		endforeach;
 		echo '</ul>';
+	}
+
+	/**
+	 * Get the field markup for the advanced robots field.
+	 *
+	 * @param string $field_type        The type of field.
+	 * @param object $field_type_object The CMB2_Types object.
+	 * @param string $id                The field id.
+	 * @param string $value             The field value.
+	 * @param string $escaped_value     The escaped field value.
+	 *
+	 * @return string The field markup.
+	 */
+	private function get_advanced_robots_field( $field_type, $field_type_object, $id, $value, $escaped_value ) {
+		$props = [
+			'name' => $field_type_object->_name( "[{$id}][length]" ),
+			'id'   => $field_type_object->_id( '_' . $id . '_name' ),
+		];
+
+		switch ( $field_type ) {
+			case 'checkbox':
+				$props['name']    = $field_type_object->_name( "[{$id}][enable]" );
+				$props['value']   = true;
+				$props['checked'] = ! empty( $escaped_value[ $id ] ) || empty( $escaped_value ) ? 'checked' : false;
+				break;
+			case 'select':
+				$props['options'] = $this->get_image_sizes( $value );
+				break;
+			case 'input':
+				$props['value'] = $value ? $value : -1;
+				$props['type']  = 'number';
+				$props['min']   = -1;
+				break;
+		}
+
+		return $field_type_object->$field_type( $props );
 	}
 
 	/**

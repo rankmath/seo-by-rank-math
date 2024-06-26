@@ -87,17 +87,17 @@ class Variable {
 	 */
 	public static function from( $id, $args ) {
 		if ( empty( $id ) ) {
-			throw new \InvalidArgumentException( __( 'The $id variable is required.', 'rank-math' ) );
+			throw new \InvalidArgumentException( esc_html__( 'The $id variable is required.', 'rank-math' ) );
 		}
 
 		$variable          = new Variable();
 		$variable->id      = $id;
-		$variable->example = isset( $args['example'] ) ? $args['example'] : __( 'Example', 'rank-math' );
+		$variable->example = isset( $args['example'] ) ? $args['example'] : esc_html__( 'Example', 'rank-math' );
 
 		foreach ( self::$required as $key ) {
 			if ( ! isset( $args[ $key ] ) ) {
 				/* translators: variable name */
-				throw new \InvalidArgumentException( sprintf( __( 'The $%1$s is required for variable %2$s.', 'rank-math' ), $key, $id ) );
+				throw new \InvalidArgumentException( sprintf( esc_html__( 'The $%1$s is required for variable %2$s.', 'rank-math' ), esc_html( $key ), esc_html( $id ) ) );
 			}
 
 			$variable->$key = $args[ $key ];

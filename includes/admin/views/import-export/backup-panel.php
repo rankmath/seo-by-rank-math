@@ -25,7 +25,7 @@ $backups = $this->get_backups();
 						<th>
 							<?php
 							/* translators: Snapshot formatted date */
-							printf( esc_html__( 'Backup: %s', 'rank-math' ), date_i18n( 'M jS Y, H:i a', $key ) );
+							printf( esc_html__( 'Backup: %s', 'rank-math' ), esc_html( date_i18n( 'M jS Y, H:i a', $key ) ) );
 							?>
 						</th>
 						<td style="width:195px;padding-left:0;">

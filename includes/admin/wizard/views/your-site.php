@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) || exit;
 					<div class="search-form wp-core-ui rank-math-ui">
 						<label for="rank-math-search-input"><?php esc_html_e( 'Search the Knowledge Base for answers to your questions:', 'rank-math' ); ?></label>
 						<input type="text" class="regular-text" id="rank-math-search-input" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="<?php esc_attr_e( 'Type here to search...', 'rank-math' ); ?>" value="">
-						<a data-href="<?php KB::the( 'kb-search', 'SW Your Site Search' ); ?>&s=&lang=<?php echo get_locale(); ?>" target="_blank" class="button button-primary"><?php esc_html_e( 'Search', 'rank-math' ); ?></a>
+						<a data-href="<?php KB::the( 'kb-search', 'SW Your Site Search' ); ?>&s=&lang=<?php echo esc_attr( get_locale() ); ?>" target="_blank" class="button button-primary"><?php esc_html_e( 'Search', 'rank-math' ); ?></a>
 					</div>
 				</div>
 			</div>

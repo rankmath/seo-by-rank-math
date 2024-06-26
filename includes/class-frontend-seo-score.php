@@ -157,10 +157,12 @@ class Frontend_SEO_Score {
 					<div class="backlink">
 						<span class="poweredby">
 							<?php
-							printf(
-								/* translators: %s is a Rank Math link. */
-								__( 'Powered by %s', 'rank-math' ),
-								$this->do_filter( 'frontend/seo_score/backlink', $backlink )
+							echo wp_kses_post(
+								sprintf(
+									/* translators: %s is a Rank Math link. */
+									__( 'Powered by %s', 'rank-math' ),
+									$this->do_filter( 'frontend/seo_score/backlink', $backlink )
+								)
 							);
 							?>
 						</span>

@@ -203,7 +203,7 @@ class Block_HowTo extends Block {
 
 		// HTML.
 		$out   = [];
-		$out[] = sprintf( '<div id="rank-math-howto" class="%1$s" %2$s>', $class, self::get()->get_styles( $attributes ) );
+		$out[] = sprintf( '<div id="rank-math-howto" class="%1$s" %2$s>', esc_attr( $class ), self::get()->get_styles( $attributes ) );
 
 		// HeaderContent.
 		$out[] = '<div class="rank-math-howto-description">';
@@ -239,7 +239,7 @@ class Block_HowTo extends Block {
 					'<%1$s class="rank-math-step-title %2$s">%3$s</%1$s>',
 					self::get()->get_title_wrapper( $title_wrapper, 'howto' ),
 					$title_css_classes,
-					$step['title']
+					wp_kses_post( $step['title'] )
 				);
 			}
 
@@ -259,7 +259,12 @@ class Block_HowTo extends Block {
 		$out[] = sprintf( '</%1$s>', $list_tag );
 		$out[] = '</div>';
 
-		return apply_filters( 'rank_math/schema/block/howto/content', join( "\n", $out ), $out, $attributes );
+		return apply_filters(
+			'rank_math/schema/block/howto/content',
+			wp_kses_post( join( "\n", $out ) ),
+			$out,
+			$attributes
+		);
 	}
 
 	/**

@@ -10,8 +10,8 @@ defined( 'ABSPATH' ) || exit;
 
 $suggestions = rank_math()->admin->get_link_suggestions( get_post() );
 if ( empty( $suggestions ) ) {
-	echo $field->args( 'not_found' );
+	echo wp_kses_post( $field->args( 'not_found' ) );
 	return;
 }
 
-echo rank_math()->admin->get_link_suggestions_html( $suggestions );
+echo wp_kses_post( rank_math()->admin->get_link_suggestions_html( $suggestions ) );

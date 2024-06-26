@@ -624,7 +624,7 @@ class Image {
 			return false;
 		}
 
-		$extensions = [ 'jpeg', 'jpg', 'gif', 'png', 'webp' ];
+		$extensions = [ 'jpeg', 'jpg', 'gif', 'png', 'webp', 'avif' ];
 
 		return in_array( $check['ext'], $extensions, true );
 	}

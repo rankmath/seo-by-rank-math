@@ -348,10 +348,10 @@ class Admin_Helper {
 		);
 		?>
 		<span class="wizard-share">
-			<a href="#" onclick="window.open('<?php echo $tweet_url; ?>', 'sharewindow', 'resizable,width=600,height=300'); return false;" class="share-twitter">
+			<a href="#" onclick="window.open('<?php echo esc_url( $tweet_url ); ?>', 'sharewindow', 'resizable,width=600,height=300'); return false;" class="share-twitter">
 				<span class="dashicons dashicons-twitter"></span> <?php esc_html_e( 'Tweet', 'rank-math' ); ?>
 			</a>
-			<a href="#" onclick="window.open('<?php echo $fb_share_url; ?>', 'sharewindow', 'resizable,width=600,height=300'); return false;" class="share-facebook">
+			<a href="#" onclick="window.open('<?php echo esc_url( $fb_share_url ); ?>', 'sharewindow', 'resizable,width=600,height=300'); return false;" class="share-facebook">
 				<span class="dashicons dashicons-facebook-alt"></span> <?php esc_html_e( 'Share', 'rank-math' ); ?>
 			</a>
 		</span>
