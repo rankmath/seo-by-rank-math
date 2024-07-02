@@ -180,11 +180,18 @@ class Image {
 	 * @param int $attachment_id The attachment ID to add.
 	 */
 	public function add_image_by_id( $attachment_id ) {
+
+		do_action( 'rank_math_opengraph_pre_attachment_image_check', $attachment_id );
+
+		$attachment_id = apply_filters( 'rank_math_opengraph_filter_image_id', $attachment_id );
+
 		if ( ! wp_attachment_is_image( $attachment_id ) ) {
 			return;
 		}
 
 		$variations = $this->get_variations( $attachment_id );
+
+		do_action( 'rank_math_opengraph_post_attachment_image_check', $attachment_id );
 
 		// If we are left without variations, there is no valid variation for this attachment.
 		if ( empty( $variations ) ) {
