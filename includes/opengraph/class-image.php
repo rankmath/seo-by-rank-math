@@ -180,11 +180,7 @@ class Image {
 	 * @param int $attachment_id The attachment ID to add.
 	 */
 	public function add_image_by_id( $attachment_id ) {
-		if ( ! wp_attachment_is_image( $attachment_id ) ) {
-			return;
-		}
-
-		$variations = $this->get_variations( $attachment_id );
+		$variations = $this->get_image_variations( $attachment_id );
 
 		// If we are left without variations, there is no valid variation for this attachment.
 		if ( empty( $variations ) ) {
@@ -603,6 +599,7 @@ class Image {
 	 */
 	private function set_archive_image() {
 		$post_type = get_query_var( 'post_type' );
+		$post_type = is_array( $post_type ) ? reset( $post_type ) : $post_type;
 		$image_id  = Helper::get_settings( "titles.pt_{$post_type}_facebook_image_id" );
 		$this->add_image_by_id( $image_id );
 	}
@@ -653,6 +650,39 @@ class Image {
 				}
 			}
 		}
+
+		return $variations;
+	}
+
+	/**
+	 * Validate Attachment image and return its variations.
+	 *
+	 * @param int $attachment_id The attachment to return the variations for.
+	 *
+	 * @return array The different variations possible for this attachment ID.
+	 */
+	private function get_image_variations( $attachment_id ) {
+		/**
+		 * Allow plugins to change the blog in a multisite environment. This hook can be used by plugins that uses a global media library from the main site.
+		 */
+		$this->do_action( 'opengraph/pre_attachment_image_check', $attachment_id );
+
+		/**
+		 * Filter to change the attachment ID.
+		 *
+		 * @param int $attachment_id Attachment ID.
+		 */
+		$attachment_id = $this->do_filter( 'opengraph/attachment_id', $attachment_id );
+		if ( ! wp_attachment_is_image( $attachment_id ) ) {
+			return;
+		}
+
+		$variations = $this->get_variations( $attachment_id );
+
+		/**
+		 * Allow plugins to reset the blog in a multisite environment. This hook can be used by plugins that utilize a global media library from the main site.
+		 */
+		$this->do_action( 'opengraph/post_attachment_image_check', $attachment_id );
 
 		return $variations;
 	}

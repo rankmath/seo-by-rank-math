@@ -410,7 +410,6 @@ class Analytics extends Base {
 				'indexing' => [
 					'index_verdict'            => true,
 					'indexing_state'           => true,
-					'mobile_usability_verdict' => true,
 					'rich_results_items'       => true,
 					'page_fetch_state'         => false,
 				],

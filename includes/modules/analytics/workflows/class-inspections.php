@@ -89,8 +89,6 @@ class Inspections {
                 coverage_state text NOT NULL,                  /* String, e.g. 'Submitted and indexed'. */
                 page_fetch_state varchar(64) NOT NULL,         /* SUCCESSFUL, SOFT_404, BLOCKED_ROBOTS_TXT, NOT_FOUND, ACCESS_DENIED, SERVER_ERROR, REDIRECT_ERROR, ACCESS_FORBIDDEN, BLOCKED_4XX, INTERNAL_CRAWL_ERROR, INVALID_URL, PAGE_FETCH_STATE_UNSPECIFIED */
                 robots_txt_state varchar(64) NOT NULL,         /* ALLOWED, DISALLOWED, ROBOTS_TXT_STATE_UNSPECIFIED */
-                mobile_usability_verdict varchar(64) NOT NULL, /* PASS, PARTIAL, FAIL, NEUTRAL, VERDICT_UNSPECIFIED */
-                mobile_usability_issues longtext NOT NULL,     /* JSON */
                 rich_results_verdict varchar(64) NOT NULL,     /* PASS, PARTIAL, FAIL, NEUTRAL, VERDICT_UNSPECIFIED */
                 rich_results_items longtext NOT NULL,          /* JSON */
                 last_crawl_time timestamp NOT NULL,
@@ -106,7 +104,6 @@ class Inspections {
                 KEY index_verdict (index_verdict),
                 KEY page_fetch_state (page_fetch_state),
                 KEY robots_txt_state (robots_txt_state),
-                KEY mobile_usability_verdict (mobile_usability_verdict),
                 KEY rich_results_verdict (rich_results_verdict)
             ) $collate;";
 

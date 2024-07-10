@@ -135,7 +135,8 @@ class Summary {
 		global $wpdb;
 
 		$cache_group = 'rank_math_optimization_summary';
-		$cache_key   = $this->generate_hash( $post_type );
+		$hash_name   = $post_type ? $post_type : 'overall';
+		$cache_key   = $this->generate_hash( $hash_name );
 		$cache       = $this->get_cache( $cache_key, $cache_group );
 		if ( false !== $cache ) {
 			return $cache;

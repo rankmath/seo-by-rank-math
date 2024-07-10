@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.5
+Tested up to: 6.6
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.222
+Stable tag: 1.0.223
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,12 +583,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.222 [June 26, 2024] =
-- Added: Support for AVIF images in [Open Graph](https://rankmath.com/kb/open-graph-meta-tags/) meta tags
-- Fixed: [Content AI](https://rankmath.com/kb/how-to-use-content-ai-tools/) displayed a white screen when the Schema module was disabled
-- Fixed: Issue with [Highlight Long Paragraphs](https://rankmath.com/kb/fix-long-paragraph-test/) feature in the Classic Editor
-- Fixed: Content AI error popup in the [Research tab](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) was blocking other metaboxes in the Classic Editor
-- Fixed: Issue with Show/Hide columns option in the [Index Status table](https://rankmath.com/kb/analytics/#index-status-of-posts)
+= 1.0.223 [July 10, 2024] =
+- Improved: Compatibility with WordPress 6.6
+- Improved: Compatibility with the Multisite Global Media plugin
+- Fixed: Missing recommended fields `image` and `telephone` error when using the DietNutrition [Business type](https://rankmath.com/kb/local-seo/#business-type)
+- Fixed: PHP warning on archive pages with custom templates
+- Fixed: Missing taxonomy terms in the [HTML sitemap](https://rankmath.com/kb/html-sitemap/) when the parent term is set to noindex
+- Fixed: PHP warning related to caching on the [Analytics page](https://rankmath.com/kb/analytics/)
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

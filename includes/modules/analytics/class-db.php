@@ -291,8 +291,6 @@ class DB {
 			'coverage_state'           => '',
 			'page_fetch_state'         => 'PAGE_FETCH_STATE_UNSPECIFIED',
 			'robots_txt_state'         => 'ROBOTS_TXT_STATE_UNSPECIFIED',
-			'mobile_usability_verdict' => 'VERDICT_UNSPECIFIED',
-			'mobile_usability_issues'  => '',
 			'rich_results_verdict'     => 'VERDICT_UNSPECIFIED',
 			'rich_results_items'       => '',
 			'last_crawl_time'          => '',
