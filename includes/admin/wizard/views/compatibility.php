@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 global $wp_version;
 
-update_option( 'rank_math_wizard_completed', true );
+update_option( 'rank_math_wizard_completed', true, false );
 
 $php_version           = phpversion();
 $php_version_ok        = version_compare( $php_version, rank_math()->php_version, '>' );

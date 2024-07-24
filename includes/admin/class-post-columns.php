@@ -292,21 +292,10 @@ class Post_Columns implements Runner {
 	 * Get SEO data.
 	 */
 	private function get_seo_data() {
-		global $wp_query;
 		$post_ids = [];
 
-		if ( $wp_query->posts ) {
-			$post_ids = array_filter(
-				array_map(
-					function( $post ) {
-						return isset( $post->ID ) ? $post->ID : '';
-					},
-					$wp_query->posts
-				)
-			);
-		}
-
-		$post_id = (int) Param::post( 'post_ID' );
+		$post_ids = array_filter( $this->get_post_ids() );
+		$post_id  = (int) Param::post( 'post_ID' );
 		if ( $post_id ) {
 			$post_ids[] = $post_id;
 		}
@@ -323,6 +312,71 @@ class Post_Columns implements Runner {
 		foreach ( $results as $result ) {
 			$this->data[ $result['post_id'] ][ $result['meta_key'] ] = $result['meta_value'];
 		}
+	}
+
+	/**
+	 * Get Post IDs dispalyed on the Post lists page.
+	 */
+	private function get_post_ids() {
+		global $wp_query, $per_page;
+		if ( empty( $wp_query->posts ) ) {
+			return [];
+		}
+
+		$pages = $wp_query->posts;
+		if (
+			! is_post_type_hierarchical( Param::get( 'post_type' ) ) ||
+			'menu_order title' !== $wp_query->query['orderby']
+		) {
+			return array_map(
+				function( $post ) {
+					return isset( $post->ID ) ? $post->ID : '';
+				},
+				$pages
+			);
+		}
+
+		if ( empty( Param::request( 's' ) ) ) {
+			$top_level_pages = [];
+			$children_pages  = [];
+
+			foreach ( $pages as $page ) {
+				if ( $page->post_parent > 0 ) {
+					$children_pages[ $page->post_parent ][] = $page;
+				} else {
+					$top_level_pages[] = $page;
+				}
+			}
+
+			$pages = &$top_level_pages;
+		}
+
+		$pagenum = max( 1, Param::request( 'paged', 0 ) );
+		$count   = 0;
+		$start   = ( $pagenum - 1 ) * $per_page;
+		$end     = $start + $per_page;
+		$ids     = [];
+
+		foreach ( $pages as $page ) {
+			if ( $count >= $end ) {
+				break;
+			}
+
+			if ( $count >= $start ) {
+				$ids[] = $page->ID;
+			}
+
+			++$count;
+
+			if ( isset( $children_pages ) && ! empty( $children_pages[ $page->ID ] ) ) {
+				foreach ( $children_pages[ $page->ID ] as $child_page ) {
+					$ids[] = $child_page->ID;
+					++$count;
+				}
+			}
+		}
+
+		return $ids;
 	}
 
 	/**

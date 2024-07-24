@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.6
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.223
+Stable tag: 1.0.224
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,13 +583,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.223 [July 10, 2024] =
-- Improved: Compatibility with WordPress 6.6
-- Improved: Compatibility with the Multisite Global Media plugin
-- Fixed: Missing recommended fields `image` and `telephone` error when using the DietNutrition [Business type](https://rankmath.com/kb/local-seo/#business-type)
-- Fixed: PHP warning on archive pages with custom templates
-- Fixed: Missing taxonomy terms in the [HTML sitemap](https://rankmath.com/kb/html-sitemap/) when the parent term is set to noindex
-- Fixed: PHP warning related to caching on the [Analytics page](https://rankmath.com/kb/analytics/)
+= 1.0.224 [July 24, 2024] =
+- Added: Support for Arabic language in [Content AI](https://rankmath.com/kb/configure-content-ai-global-settings/#languages)
+- Improved: Added hover state to SEO score buttons in the WordPress Editor toolbar for better accessibility
+- Improved: Prevented autoloading of plugin-specific options
+- Fixed: Incorrect use of the [Sitemap item filter](https://rankmath.com/kb/filters-hooks-api-developer/#filter-sitemap-item) in the [HTML sitemap](https://rankmath.com/kb/html-sitemap/)
+- Fixed: [Content AI test](https://rankmath.com/kb/score-100-in-tests/#used-content-ai) was being incorrectly marked as passed
+- Fixed: Update button state in the Elementor editor was not changing after making changes to the [Schema](https://rankmath.com/blog/elementor-seo/#add-schema-markup)
+- Fixed: [Bulk editing](https://rankmath.com/kb/bulk-editing-in-rank-math/) was affecting the page loading speed on some setups
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

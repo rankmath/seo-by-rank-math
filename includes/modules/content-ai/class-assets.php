@@ -152,7 +152,7 @@ class Assets {
 		$content_ai_viewed = get_option( 'rank_math_content_ai_viewed', false );
 		if ( ! $content_ai_viewed ) {
 			$values['viewed'] = false;
-			update_option( 'rank_math_content_ai_viewed', true );
+			update_option( 'rank_math_content_ai_viewed', true, false );
 		}
 
 		$researched_values = $screen->get_meta( $screen->get_object_type(), $screen->get_object_id(), 'rank_math_ca_keyword' );

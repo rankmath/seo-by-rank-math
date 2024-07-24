@@ -73,7 +73,7 @@ trait Conditional {
 			return ! empty( $value );
 		}
 		Helper::schedule_flush_rewrite();
-		update_option( $key, $value );
+		update_option( $key, $value, false );
 	}
 
 	/**
