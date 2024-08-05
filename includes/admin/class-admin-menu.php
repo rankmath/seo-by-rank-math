@@ -149,6 +149,7 @@ class Admin_Menu implements Runner {
 				position: relative;
 				padding-right: 10px;
 				max-width: 20px;
+				max-height: 20px;
 			}
 			#wp-admin-bar-rank-math .rank-math-icon svg {
 				fill-rule: evenodd;
