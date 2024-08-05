@@ -158,7 +158,7 @@ class Redirection {
 
 	/**
 	 * Set item status.
-	 * 
+	 *
 	 * @param string $status Item status.
 	 */
 	public function set_status( $status ) {
@@ -224,7 +224,6 @@ class Redirection {
 				return true;
 			}
 		}
-		
 		return false;
 	}
 

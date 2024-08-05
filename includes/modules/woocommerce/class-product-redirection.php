@@ -14,6 +14,7 @@ use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Sitepress;
 use RankMath\Helpers\Param;
+use RankMath\Helpers\Str;
 use RankMath\Redirections\Redirection;
 
 defined( 'ABSPATH' ) || exit;
@@ -92,8 +93,8 @@ class Product_Redirection {
 
 		// On Single product page redirect base with shop and product.
 		if ( $is_product ) {
-			$base[] = 'product';
-			$base[] = 'shop';
+			$base[]   = 'product';
+			$base[]   = 'shop';
 			$new_link = $this->remove_base_from_url( $new_link );
 		}
 
@@ -101,10 +102,12 @@ class Product_Redirection {
 			if ( '%product_cat%' === $remove ) {
 				continue;
 			}
-			$new_link = preg_replace( "#{$remove}/#i", '', $new_link, 1 );
+
+			$new_link = ! Str::starts_with( '/', $new_link ) ? '/' . $new_link : $new_link;
+			$new_link = preg_replace( "#/{$remove}/#i", '', $new_link, 1 );
 		}
 
-		$new_link = implode( '/', array_map( 'rawurlencode', explode( '/', $new_link ) ) ); // encode everything but slashes.
+		$new_link = implode( '/', array_map( 'rawurlencode', explode( '/', ltrim( $new_link, '/' ) ) ) ); // encode everything but slashes.
 
 		return $new_link === $this->strip_ignored_parts( $url ) ? false : trailingslashit( home_url( strtolower( $new_link ) ) );
 	}

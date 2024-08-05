@@ -83,7 +83,7 @@ class Import_Export {
 				<p>
 					<?php
 					// Translators: Placeholder expands to number of redirections.
-					printf( esc_html__( 'Warning: you have more than %d active redirections. Exporting them to your .htaccess file may cause performance issues.', 'rank-math' ), $this->limit );
+					printf( esc_html__( 'Warning: you have more than %d active redirections. Exporting them to your .htaccess file may cause performance issues.', 'rank-math' ), absint( $this->limit ) );
 					?>
 				</p>
 			</div>

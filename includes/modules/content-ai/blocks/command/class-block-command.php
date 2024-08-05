@@ -4,7 +4,7 @@
  *
  * @since      1.0.104
  * @package    RankMath
- * @subpackage RankMath\Schema
+ * @subpackage RankMath\ContentAI
  * @author     Rank Math <support@rankmath.com>
  */
 

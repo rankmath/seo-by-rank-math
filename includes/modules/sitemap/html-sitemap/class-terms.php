@@ -236,17 +236,18 @@ class Terms {
 	}
 
 	/**
-	 * Removes terms that have a parent from the list.
+	 * Removes terms that have a parent (and the parent is available in the list) from the list.
 	 *
 	 * @param array $terms The terms list.
 	 *
 	 * @return array
 	 */
 	private function remove_with_parent( $terms ) {
+		$term_ids = array_column( $terms, 'term_id' );
 		return array_filter(
 			$terms,
-			function ( $term ) {
-				return ! $term->parent;
+			function ( $term ) use ( $term_ids ) {
+				return ! $term->parent || ! in_array( $term->parent, $term_ids, true );
 			}
 		);
 	}

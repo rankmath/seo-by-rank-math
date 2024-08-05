@@ -25,35 +25,35 @@ class Base {
 
 	/**
 	 * Module ID.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $id = '';
 
 	/**
 	 * Module directory.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $directory = '';
 
 	/**
 	 * Module help.
-	 * 
+	 *
 	 * @var array
 	 */
 	public $help = [];
 
 	/**
 	 * Page object.
-	 * 
+	 *
 	 * @var object
 	 */
 	public $page;
 
 	/**
 	 * List table object.
-	 * 
+	 *
 	 * @var object
 	 */
 	public $table;
@@ -67,7 +67,7 @@ class Base {
 
 	/**
 	 * Screen options.
-	 * 
+	 *
 	 * @var array
 	 */
 	public $screen_options = [];

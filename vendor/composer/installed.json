@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "a5hleyrich/wp-background-processing",
-            "version": "1.3.0",
-            "version_normalized": "1.3.0.0",
+            "version": "1.3.1",
+            "version_normalized": "1.3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deliciousbrains/wp-background-processing.git",
-                "reference": "33b7bc1aacfc6a18a2f50fee4d9fdd4652dfaad4"
+                "reference": "6d1e48165e461260075b9f161b3861c7278f71e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/33b7bc1aacfc6a18a2f50fee4d9fdd4652dfaad4",
-                "reference": "33b7bc1aacfc6a18a2f50fee4d9fdd4652dfaad4",
+                "url": "https://api.github.com/repos/deliciousbrains/wp-background-processing/zipball/6d1e48165e461260075b9f161b3861c7278f71e7",
+                "reference": "6d1e48165e461260075b9f161b3861c7278f71e7",
                 "shasum": ""
             },
             "require": {
@@ -28,7 +28,7 @@
             "suggest": {
                 "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
             },
-            "time": "2024-02-08T14:27:35+00:00",
+            "time": "2024-02-28T13:39:06+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -49,39 +49,39 @@
             "description": "WP Background Processing can be used to fire off non-blocking asynchronous requests or as a background processing tool, allowing you to queue tasks.",
             "support": {
                 "issues": "https://github.com/deliciousbrains/wp-background-processing/issues",
-                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.3.0"
+                "source": "https://github.com/deliciousbrains/wp-background-processing/tree/1.3.1"
             },
             "install-path": "../a5hleyrich/wp-background-processing"
         },
         {
             "name": "cmb2/cmb2",
-            "version": "v2.10.1",
-            "version_normalized": "2.10.1.0",
+            "version": "v2.11.0",
+            "version_normalized": "2.11.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CMB2/CMB2.git",
-                "reference": "4afc4bb7b92ab6d93aac2247c9a84af773e42532"
+                "reference": "2847828b5cce1b48d09427ee13e6f7c752704468"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/4afc4bb7b92ab6d93aac2247c9a84af773e42532",
-                "reference": "4afc4bb7b92ab6d93aac2247c9a84af773e42532",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/2847828b5cce1b48d09427ee13e6f7c752704468",
+                "reference": "2847828b5cce1b48d09427ee13e6f7c752704468",
                 "shasum": ""
             },
             "require": {
-                "php": ">5.2.4"
+                "php": ">7.4"
             },
             "require-dev": {
                 "apigen/apigen": "4.1.2",
-                "awesomemotive/am-cli-tools": ">=1.3.1",
+                "awesomemotive/am-cli-tools": ">=1.3.7",
                 "nette/utils": "2.5.3",
                 "phpunit/phpunit": "^6.5",
-                "yoast/phpunit-polyfills": "^1.0"
+                "yoast/phpunit-polyfills": "^1.1"
             },
             "suggest": {
                 "composer/installers": "~1.0"
             },
-            "time": "2022-02-22T14:15:16+00:00",
+            "time": "2024-04-02T19:30:07+00:00",
             "type": "wordpress-plugin",
             "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
@@ -240,17 +240,17 @@
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.7.2",
-            "version_normalized": "3.7.2.0",
+            "version": "3.8.1",
+            "version_normalized": "3.8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "cb3c7854b31a285b46964931425fef6f485be145"
+                "reference": "e331b534d7de10402d7545a0de50177b874c0779"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/cb3c7854b31a285b46964931425fef6f485be145",
-                "reference": "cb3c7854b31a285b46964931425fef6f485be145",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/e331b534d7de10402d7545a0de50177b874c0779",
+                "reference": "e331b534d7de10402d7545a0de50177b874c0779",
                 "shasum": ""
             },
             "require": {
@@ -262,7 +262,7 @@
                 "wp-cli/wp-cli": "~2.5.0",
                 "yoast/phpunit-polyfills": "^2.0"
             },
-            "time": "2024-02-14T21:35:25+00:00",
+            "time": "2024-06-20T19:53:06+00:00",
             "type": "wordpress-plugin",
             "extra": {
                 "scripts-description": {
@@ -280,7 +280,7 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.7.2"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.8.1"
             },
             "install-path": "../woocommerce/action-scheduler"
         }

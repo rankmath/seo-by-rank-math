@@ -42,7 +42,12 @@ $button_class   = 'button button-primary button-connect' . ( $site_url_valid ? '
 	<div class="rank-math-cta-table">
 		<div class="rank-math-cta-body less-padding">
 			<i class="dashicons dashicons-lock"></i>
-			<p><?php printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . esc_url( KB::get( 'usage-policy', 'Analytics Privacy Notice' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); ?></p>
+			<p>
+				<?php
+					// Translators: placeholder is the KB link.
+					printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . esc_url( KB::get( 'usage-policy', 'Analytics Privacy Notice' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' );
+				?>
+			</p>
 		</div>
 	</div>
 </div>

@@ -67,9 +67,11 @@ class KML_File {
 	/**
 	 * Add the Local SEO Sitemap to the sitemap index.
 	 *
+	 * @param string $xml String to append to sitemaps index.
+	 *
 	 * @return string $xml The sitemap index with the Local SEO Sitemap added.
 	 */
-	public function add_local_sitemap() {
+	public function add_local_sitemap( $xml ) {
 		$item = $this->do_filter(
 			'sitemap/index/entry',
 			[
@@ -80,10 +82,10 @@ class KML_File {
 		);
 
 		if ( ! $item ) {
-			return '';
+			return $xml;
 		}
 
-		$xml  = $this->newline( '<sitemap>', 1 );
+		$xml .= $this->newline( '<sitemap>', 1 );
 		$xml .= $this->newline( '<loc>' . htmlspecialchars( $item['loc'] ) . '</loc>', 2 );
 		$xml .= empty( $item['lastmod'] ) ? '' : $this->newline( '<lastmod>' . htmlspecialchars( $item['lastmod'] ) . '</lastmod>', 2 );
 		$xml .= $this->newline( '</sitemap>', 1 );

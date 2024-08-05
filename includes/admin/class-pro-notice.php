@@ -180,6 +180,7 @@ class Pro_Notice {
 	/**
 	 * Add admin notice.
 	 *
+	 * @param int $variant Notice variant.
 	 * @return void
 	 */
 	public function add_notice( $variant = 0 ) {

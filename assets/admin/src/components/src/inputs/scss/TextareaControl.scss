@@ -1,0 +1,43 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins/base';
+
+/*
+ * Textarea Control component.
+ */
+.rank-math-textarea-control {
+	&.components-base-control {
+		.components-base-control__field {
+			margin: 0px;
+		}
+
+		.components-textarea-control__input {
+			@include base-textarea-style;
+		}
+
+		&.code-box, 
+		&.metabox {
+			.components-textarea-control__input {
+				@include metabox;
+				height: auto;
+				display: block;
+				resize: none;
+			}
+		}
+
+		&.code-box {
+			.components-textarea-control__input, 
+			.components-textarea-control__input:focus {
+				display: block;
+				resize: none;
+				width: 100%;
+				color: #bbbec5 !important;
+				border-color: #32344b !important;
+				background: #32344b !important;
+
+				&::placeholder {
+					color: #63686F;
+				}
+			}
+		}
+	}
+}

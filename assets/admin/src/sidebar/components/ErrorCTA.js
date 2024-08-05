@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { includes, isEmpty } from 'lodash'
+import { includes } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -129,7 +129,7 @@ const getLink = ( link, medium ) => {
 	return link + tags.toString()
 }
 
-export default ( { width = 40, showProNotice = false, isBulkEdit = false, isResearch = false } ) => {
+export default ( { width = 40, showProNotice = false, isBulkEdit = false, isResearch = false, creditsRequired = 0 } ) => {
 	if ( showProNotice ) {
 		return getProNotice( width )
 	}
@@ -137,10 +137,10 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 	const isRegistered = rankMath.isUserRegistered
 	const hasContentAIPlan = rankMath.contentAIPlan
 	const isFree = hasContentAIPlan === 'free'
-	let hasCredits = rankMath.contentAICredits > 0
+	let hasCredits = rankMath.contentAICredits > creditsRequired
 	const isMigrating = rankMath.contentAiMigrating
 
-	if ( hasCredits && isResearch && ! isFree && rankMath.contentAICredits < 500 && isEmpty( wp.data.select( 'rank-math' ).getKeywordsData() ) ) {
+	if ( hasCredits && isResearch && ! isFree && rankMath.contentAICredits < 500 ) {
 		hasCredits = false
 	}
 
@@ -174,7 +174,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 					{
 						isRegistered && ( ! hasContentAIPlan || isFree ) &&
 						<Button
-							href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw', 'Buy+Plan+Button' ) }
+							href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&', 'Buy+Plan+Button' ) }
 							className="button button-primary is-green"
 							target="_blank"
 						>
@@ -211,7 +211,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 					{ getCreditsExhaustedMessage() }
 				</p>
 				<Button
-					href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw', 'Buy+Credits+Button' ) }
+					href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&', 'Buy+Credits+Button' ) }
 					className="button button-primary is-green"
 					target="_blank"
 				>

@@ -108,7 +108,12 @@ class Shortcodes {
 		echo '</div>';
 		echo '<div class="clear"></div>';
 
-		return ob_get_clean();
+		/**
+		 * Change the Contact Info HTML output.
+		 *
+		 * @param string $unsigned HTML output.
+		 */
+		return $this->do_filter( 'contact_info/html', ob_get_clean() );
 	}
 
 	/**
@@ -123,7 +128,7 @@ class Shortcodes {
 
 		$allowed = 'person' === $type
 		? [ 'name', 'email', 'person_phone', 'address' ]
-		: [ 'name', 'email', 'address', 'hours', 'phone', 'map' ];
+		: [ 'name', 'organization_description', 'email', 'address', 'hours', 'phone', 'additional_info', 'map' ];
 
 		if ( ! empty( $args['show'] ) && 'all' !== $args['show'] ) {
 			$allowed = array_intersect( Arr::from_string( $args['show'] ), $allowed );
@@ -188,7 +193,7 @@ class Shortcodes {
 				$format = str_replace( "{{$tag}}", $value, $format );
 			}
 
-			echo $format;
+			echo wp_kses_post( $format );
 			?>
 		</address>
 		<?php
@@ -218,8 +223,8 @@ class Shortcodes {
 
 				printf(
 					'<div class="rank-math-opening-hours"><span class="rank-math-opening-days">%1$s</span><span class="rank-math-opening-time">%2$s</span></div>',
-					join( ', ', $days ),
-					$time
+					esc_html( join( ', ', $days ) ),
+					esc_html( $time )
 				);
 			}
 			?>
@@ -290,7 +295,7 @@ class Shortcodes {
 			?>
 			<div class="rank-math-phone-number type-<?php echo sanitize_html_class( $phone['type'] ); ?>">
 				<label><?php echo esc_html( $label ); ?>:</label>
-				<span><?php echo isset( $phone['number'] ) ? '<a href="tel://' . $number . '">' . $number . '</a>' : ''; ?></span>
+				<span><?php echo isset( $phone['number'] ) ? '<a href="tel://' . esc_attr( $number ) . '">' . esc_html( $number ) . '</a>' : ''; ?></span>
 			</div>
 			<?php
 		endforeach;
@@ -369,6 +374,46 @@ class Shortcodes {
 			<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Output Organization description.
+	 */
+	private function display_organization_description() {
+		$description = Helper::get_settings( 'titles.organization_description' );
+		if ( ! $description ) {
+			return;
+		}
+		?>
+		<div class="rank-math-organization-description">
+			<label><?php esc_html_e( 'Description:', 'rank-math' ); ?></label>
+			<p><?php echo esc_html( $description ); ?></p>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Output Additional Organization details.
+	 */
+	private function display_additional_info() {
+		$properties = Helper::get_settings( 'titles.additional_info' );
+		if ( empty( $properties ) ) {
+			return;
+		}
+
+		$choices = Helper::choices_additional_organization_info();
+
+		foreach ( $properties as $property ) {
+			if ( empty( $property['value'] ) ) {
+				continue;
+			}
+			?>
+			<div class="rank-math-organization-additional-details">
+				<label><?php echo esc_html( $choices[ $property['type'] ] ); ?>:</label>
+				<span><?php echo esc_html( $property['value'] ); ?></span>
+			</div>
+			<?php
+		}
 	}
 
 	/**

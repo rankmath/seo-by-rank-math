@@ -308,9 +308,7 @@ trait Content_AI {
 	 */
 	public static function update_recent_prompts( $prompt ) {
 		$prompts = self::get_recent_prompts();
-
 		array_unshift( $prompts, $prompt );
-
 		$prompts = array_slice( array_filter( array_unique( $prompts ) ), 0, 10 );
 		return update_option( self::$recent_prompt_key, $prompts, false );
 	}

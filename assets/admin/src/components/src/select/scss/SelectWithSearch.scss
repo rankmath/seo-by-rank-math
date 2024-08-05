@@ -1,0 +1,120 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins/base';
+@import '../../../scss/mixins/formcontrol';
+@import '../../../scss/mixins/shared';
+
+/*
+ * Select With Searchbox component.
+ */
+.rank-math-select-with-searchbox {
+	position: relative;
+	background-color: $white;
+	max-width: 25rem;
+	
+	label {
+		@include control-label-style;
+		line-height: 1.4em;
+	}
+	
+	.components-button.is-secondary {
+		box-sizing: border-box;
+		display: block;
+		border-radius: 4px;
+		background-color: $white;
+  		border: 1px solid $gray-70;
+		color: #444;
+		line-height: 18px;
+		box-shadow: none;
+		justify-content: space-between;
+  		display: flex;
+		@include metabox;
+
+		&::after {
+			content: "\f140";
+			font-size: 18px;
+			color: #888;
+			font-family: 'dashicons';
+			margin-left: auto;
+		}
+
+		&:hover,
+		&:active {
+			&:not(:focus):not(:disabled) {
+				box-shadow: none;
+				color: currentColor;
+				background-color: $white;
+			}
+		}
+
+		&:focus:not(:disabled) {
+			color: #444;
+			background-color: $white;
+		}
+		
+		&:disabled {
+			pointer-events: none;
+			color: rgba(44, 51, 56, 0.5);
+
+			&::after {
+				color: currentColor;
+			}
+		}
+
+		&[aria-expanded="true"] {
+			border-bottom-left-radius: 0;
+  			border-bottom-right-radius: 0;
+
+			&::after {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	.select-menu {
+		background-color: $white;
+  		border: 1px solid $gray-70;
+		border-radius: 4px;
+		box-sizing: border-box;
+		display: block;
+		position: absolute;
+		left: -100000px;
+		width: 100%;
+		z-index: 1051;
+		left: 0;
+		border-top: none;
+		border-top-left-radius: 0;
+  		border-top-right-radius: 0;
+		border-color: $dark_gray;
+
+		.components-search-control {
+			.components-base-control__field {
+				@include select-menu(4px, calc(100% - 8px));
+			}
+		}
+
+		ul {
+			max-height: 200px;
+  			overflow-y: auto;
+			margin: 0;
+
+			li {
+				margin-bottom: 6px;
+				cursor: pointer;
+				padding: 6px;
+				font-size: 13px;
+
+				&:hover {
+					background-color: #5897fb;
+  					color: $white;
+				}
+			}
+		}
+
+		.no-results {
+			margin: 6px;
+			display: block;
+			font-size: 13px;
+			margin-bottom: 6px
+		}
+	}
+}

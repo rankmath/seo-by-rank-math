@@ -87,21 +87,21 @@ abstract class Plugin_Importer {
 
 	/**
 	 * General settings.
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $settings;
 
 	/**
 	 * Titles settings.
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $titles;
 
 	/**
 	 * Sitemap settings.
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $sitemap;

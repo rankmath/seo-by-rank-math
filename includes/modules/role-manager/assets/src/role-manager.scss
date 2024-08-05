@@ -1,0 +1,22 @@
+// compileCompressed: $1.css
+/*!
+ * Plugin:	Rank Math - Role Manager
+ * URL:		https://rankmath.com/wordpress/plugin/seo-suite/
+ * Name:	role-manager.css
+ */
+
+.field-wrap .field-big-labels .rank-math-checkbox-list li {
+	@media (min-width: 1200px) {
+		width: 33.33%;
+	}
+}
+
+footer.form-footer .rank-math-button {
+	&:first-of-type {
+		width: 90px;
+	} 
+
+	&:last-of-type {
+		width: 150px;
+	}
+}

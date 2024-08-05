@@ -26,6 +26,11 @@ defined( 'ABSPATH' ) || exit;
  */
 class Headless extends WP_REST_Controller {
 
+	/**
+	 * Whether the request is for the homepage.
+	 *
+	 * @var boolean
+	 */
 	public $is_home = false;
 
 	/**
@@ -177,6 +182,14 @@ class Headless extends WP_REST_Controller {
 	 * @return boolean
 	 */
 	public function is_valid_url( $url ) {
+		$url = preg_replace_callback(
+			'/[^\x20-\x7f]/',
+			function( $match ) {
+				return rawurlencode( $match[0] );
+			},
+			$url
+		);
+
 		return Url::is_url( $url ) && ! Url::is_external( $url );
 	}
 }

@@ -22,7 +22,7 @@ $first    = empty( $plugins ) ? '' : array_keys( $plugins )[0];
 <p class="description">
 	<?php
 	/* translators: Link to learn about import export panel KB article */
-	printf( esc_html__( 'If you were using another plugin to add important SEO information to your website before switching to Rank Math SEO, you can import the settings and data here. %s', 'rank-math' ), '<a href="' . KB::get( 'import-export-settings', 'Options Panel Import Export Page Other Plugins' ) . '" target="_blank">' . esc_html__( 'Learn more about the Import/Export options.', 'rank-math' ) . '</a>' );
+	printf( esc_html__( 'If you were using another plugin to add important SEO information to your website before switching to Rank Math SEO, you can import the settings and data here. %s', 'rank-math' ), '<a href="' . esc_url( KB::get( 'import-export-settings', 'Options Panel Import Export Page Other Plugins' ) ) . '" target="_blank">' . esc_html__( 'Learn more about the Import/Export options.', 'rank-math' ) . '</a>' );
 	?>
 </p>
 

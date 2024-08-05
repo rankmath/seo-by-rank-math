@@ -336,6 +336,7 @@ class Manager {
 			'upgradeable'   => true,
 			'disabled'      => ( ! Helper::is_woocommerce_active() ),
 			'disabled_text' => esc_html__( 'Please activate WooCommerce plugin to use this module.', 'rank-math' ),
+			'settings'      => Helper::get_admin_url( 'options-general' ) . '#setting-panel-woocommerce',
 		];
 
 		$modules['acf'] = [
@@ -524,7 +525,7 @@ class Manager {
 		?>
 			<div class="rank-math-box rank-math-unlock-pro-box">
 				<i class="rm-icon rm-icon-software"></i>
-				<a href="<?php KB::the( 'pro', 'Unlock PRO Module Box' ); ?>" target="_blank" class="pro-link">
+				<a href="<?php KB::the( 'pro', 'Unlock PRO Module Box' ); ?>" target="_blank" class="pro-link" data-url="https://rankmath.com/site-checkout/">
 					<header>
 						<h3><?php esc_html_e( 'Take SEO to the Next Level!', 'rank-math' ); ?></h3>
 						<ul>

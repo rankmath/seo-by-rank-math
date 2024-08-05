@@ -21,6 +21,8 @@ class Request {
 
 	/**
 	 * Workflow.
+	 *
+	 * @var string
 	 */
 	private $workflow = '';
 
@@ -68,6 +70,8 @@ class Request {
 
 	/**
 	 * Set workflow
+	 *
+	 * @param string $workflow Workflow name.
 	 */
 	public function set_workflow( $workflow = '' ) {
 		$this->workflow = $workflow;
@@ -234,10 +238,13 @@ class Request {
 	/**
 	 * Log the response in analytics_debug.log file.
 	 *
-	 * @param string $http_verb The HTTP verb to use: get, post, put, patch, delete.
-	 * @param string $url       URL to do request.
-	 * @param array  $args       Assoc array of parameters to be passed.
-	 * @param string $response make_request response.
+	 * @param string $http_verb          The HTTP verb to use: get, post, put, patch, delete.
+	 * @param string $url                URL to do request.
+	 * @param array  $args               Assoc array of parameters to be passed.
+	 * @param string $response           make_request response.
+	 * @param string $formatted_response Formated response.
+	 * @param array  $params             Parameters.
+	 * @param string $text               Text to append at the end of the response.
 	 */
 	private function log_response( $http_verb = '', $url = '', $args = [], $response = [], $formatted_response = '', $params = [], $text = '' ) {
 		do_action( 'rank_math/analytics/log', $http_verb, $url, $args, $response, $formatted_response, $params );

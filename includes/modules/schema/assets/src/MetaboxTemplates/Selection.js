@@ -27,10 +27,12 @@ const Selection = ( { isOpen } ) => {
 			shouldCloseOnClickOutside={ false }
 			className="rank-math-modal rank-math-schema-generator rank-math-schema-modal"
 			onRequestClose={ () => {
-				const { origin, pathname } = window.location
-				window.location = origin + ( pathname
-					.replace( 'post.php', 'edit.php?post_type=rank_math_schema' )
-					.replace( 'post-new.php', 'edit.php?post_type=rank_math_schema' ) )
+				if ( ! wp.data.select( 'rank-math' ).isSchemaEditorOpen() ) {
+					const { origin, pathname } = window.location
+					window.location = origin + ( pathname
+						.replace( 'post.php', 'edit.php?post_type=rank_math_schema' )
+						.replace( 'post-new.php', 'edit.php?post_type=rank_math_schema' ) )
+				}
 			} }
 			overlayClassName="rank-math-modal-overlay"
 		>

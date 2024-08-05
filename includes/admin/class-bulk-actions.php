@@ -122,9 +122,14 @@ class Bulk_Actions implements Runner {
 		}
 
 		wp_enqueue_script( 'rank-math-post-bulk-edit', rank_math()->plugin_url() . 'assets/admin/js/post-list.js', [ 'lodash', 'wp-element', 'wp-components' ], rank_math()->version, true );
-		Helper::add_json( 'isUserRegistered', Helper::is_site_connected() );
-		Helper::add_json( 'contentAICredits', Helper::get_content_ai_credits() );
-		Helper::add_json( 'contentAIPlan', Helper::get_content_ai_plan() );
+		Helper::add_json(
+			'contentAI',
+			[
+				'isUserRegistered' => Helper::is_site_connected(),
+				'credits'          => Helper::get_content_ai_credits(),
+				'plan'             => Helper::get_content_ai_plan(),
+			]
+		);
 		Helper::add_json( 'isProActive', defined( 'RANK_MATH_PRO_FILE' ) );
 		Helper::add_json( 'connectSiteUrl', Admin_Helper::get_activate_url( Url::get_current_url() ) );
 	}

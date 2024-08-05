@@ -161,7 +161,7 @@ class Breadcrumbs {
 		 * @param array       $crumbs The breadcrumbs array.
 		 * @param Breadcrumbs $this   Current breadcrumb.
 		 */
-		return $this->do_filter( 'frontend/breadcrumb/html', $html, $crumbs, $this );
+		return $this->do_filter( 'frontend/breadcrumb/html', wp_kses_post( $html ), $crumbs, $this );
 	}
 
 	/**
@@ -447,7 +447,7 @@ class Breadcrumbs {
 
 	/**
 	 * Single post trail.
-	 * 
+	 *
 	 * @copyright Copyright (C) 2008-2019, Yoast BV
 	 * The following code is a derivative work of the code from the Yoast (https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 *

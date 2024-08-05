@@ -6,18 +6,25 @@
 *.php text eol=lf
 
 # Export Ignore Files
+*.map export-ignore
+readme.md export-ignore
 .babelrc export-ignore
 .codeclimate.yml export-ignore
 .csscomb.json export-ignore
 .editorconfig export-ignore
 .eslintignore export-ignore
 .eslintrc export-ignore
+.eslintrc.js export-ignore
 .gitattributes export-ignore
 .github export-ignore
 .gitignore export-ignore
+.distignore export-ignore
 .phpcs.xml.dist export-ignore
 .prettierrc export-ignore
+.prettierrc.js export-ignore
 .travis.yml export-ignore
+.travis-disabled.yml export-ignore
+*.zip export-ignore
 composer.json export-ignore
 composer.lock export-ignore
 gulpfile.js export-ignore
@@ -26,19 +33,81 @@ package-lock.json export-ignore
 package.json export-ignore
 phpmd.xml export-ignore
 phpunit.xml export-ignore
+phpunit.xml.dist export-ignore
 webpack.config.js export-ignore
+.php_cs export-ignore
+CONTRIBUTING.md export-ignore
+CHANGELOG.md export-ignore
+README.md export-ignore
+yarn.lock export-ignore
+changelog.txt export-ignore
 
 # Export Ignore Folders
 assets/admin/scss export-ignore
 assets/admin/src export-ignore
 assets/front/scss export-ignore
-assets/vendor/bourbon export-ignore
-vendor/cmb2/cmb2/css/sass export-ignore
+assets/front/src export-ignore
+assets/shared export-ignore
 bin export-ignore
 tests export-ignore
+.vscode export-ignore
 
-# Export SCSS Files from Modules
-includes/modules/redirections/assets/redirections.scss export-ignore
-includes/modules/role-manager/assets/role-manager.scss export-ignore
-includes/modules/search-console/assets/search-console.scss export-ignore
-includes/modules/seo-analysis/assets/seo-analysis.scss export-ignore
+# Export JS/SCSS Files from Modules
+includes/modules/404-monitor/assets/src export-ignore
+includes/modules/acf/assets/src export-ignore
+includes/modules/redirections/assets/src export-ignore
+includes/modules/redirections/assets/scss export-ignore
+includes/modules/role-manager/assets/scss export-ignore
+includes/modules/role-manager/assets/src export-ignore
+includes/modules/search-console/assets/scss export-ignore
+includes/modules/seo-analysis/assets/scss export-ignore
+includes/modules/seo-analysis/assets/src export-ignore
+includes/modules/status/assets/scss export-ignore
+includes/modules/status/assets/src export-ignore
+includes/modules/version-control/assets/scss export-ignore
+includes/modules/version-control/assets/src export-ignore
+includes/modules/schema/assets/scss export-ignore
+includes/modules/schema/assets/src export-ignore
+includes/modules/analytics/assets/scss export-ignore
+includes/modules/analytics/assets/src export-ignore
+includes/modules/instant-indexing/assets/src export-ignore
+includes/modules/woocommerce/assets/src export-ignore
+includes/modules/content-ai/assets/src export-ignore
+includes/modules/content-ai/assets/scss export-ignore
+
+# Remove development files from vendor folder
+assets/vendor/bourbon export-ignore
+vendor/cmb2/cmb2/css/readme.txt export-ignore
+vendor/cmb2/cmb2/css/sass export-ignore
+vendor/cmb2/cmb2/css/css export-ignore
+vendor/cmb2/cmb2/css/cmb2-display-rtl.css  export-ignore
+vendor/cmb2/cmb2/css/cmb2-display-rtl.min.css  export-ignore
+vendor/cmb2/cmb2/css/cmb2-display.css  export-ignore
+vendor/cmb2/cmb2/css/cmb2-display.min.css  export-ignore
+vendor/cmb2/cmb2/css/cmb2-front-rtl.css  export-ignore
+vendor/cmb2/cmb2/css/cmb2-front-rtl.min.css  export-ignore
+vendor/cmb2/cmb2/css/cmb2-front.css  export-ignore
+vendor/cmb2/cmb2/css/cmb2-front.min.css  export-ignore
+vendor/cmb2/cmb2/images export-ignore
+vendor/cmb2/cmb2/languages export-ignore
+vendor/cmb2/cmb2/js/cmb2-wysiwyg.js export-ignore
+vendor/cmb2/cmb2/js/cmb2-char-counter.js export-ignore
+vendor/cmb2/cmb2/js/wp-color-picker-alpha.js export-ignore
+vendor/cmb2/cmb2/js/wp-color-picker-alpha.min.js export-ignore
+vendor/cmb2/cmb2/example-functions.php export-ignore
+vendor/cmb2/cmb2/CODE_OF_CONDUCT.md export-ignore
+vendor/cmb2/cmb2/CHANGELOG.md export-ignore
+vendor/cmb2/cmb2/readme.txt export-ignore
+vendor/cmb2/cmb2/.wp-env.json export-ignore
+vendor/cmb2/cmb2/cypress.json export-ignore
+vendor/woocommerce/action-scheduler/readme.txt export-ignore
+vendor/woocommerce/action-scheduler/changelog.txt export-ignore
+
+# Remove development files from 3rdparty folder
+includes/3rdparty/divi/assets/src export-ignore
+includes/3rdparty/divi/assets/scss export-ignore
+includes/3rdparty/elementor/assets/src export-ignore
+includes/3rdparty/elementor/assets/scss export-ignore
+
+# Remove development file used to remove file references from pot file
+remove_file_references.php export-ignore

@@ -174,12 +174,12 @@ class OpenGraph {
 			return false;
 		}
 
-		$tag = 'facebook' === $this->network ? 'property' : 'name';
+		$tag           = 'facebook' === $this->network ? 'property' : 'name';
 		$escaped_value = esc_attr( $content );
 		if ( false !== filter_var( $content, FILTER_VALIDATE_URL ) ) {
 			$escaped_value = esc_url_raw( $content );
 		}
-		printf( '<meta %1$s="%2$s" content="%3$s" />' . "\n", $tag, esc_attr( $property ), $escaped_value );
+		printf( '<meta %1$s="%2$s" content="%3$s" />' . "\n", esc_attr( $tag ), esc_attr( $property ), $escaped_value ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $escaped_value is escaped above.
 
 		return true;
 	}

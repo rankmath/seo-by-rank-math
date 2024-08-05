@@ -227,7 +227,7 @@ class Divi {
 		/**
 		 * Allow other plugins to enqueue/dequeue admin styles or scripts after plugin assets.
 		 */
-		$this->do_action( 'admin/editor_scripts' );
+		$this->do_action( 'admin/editor_scripts', $this->screen );
 	}
 
 	/**

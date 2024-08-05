@@ -1,0 +1,6 @@
+- Improved: Moved [Role Manager](https://rankmath.com/kb/role-manager/) code to React. Now it loads blazing fast. We will gruadually make other modules load fast as well. 
+- Fixed: Update button state in the [Elementor editor](https://rankmath.com/blog/elementor-seo/) remained active even without any content changes when the Schema module was enabled
+- Fixed: [Table of Contents Block](https://rankmath.com/kb/table-of-contents-block/) was not working with Full Site editing templates
+- Fixed: [Organization name variable](https://rankmath.com/kb/variables-in-seo-title-description/#organization-name) `%org_name%` was displaying the site name in the Preview editor instead of the Organization name
+- Fixed: Missing link to [add new Redirection](https://rankmath.com/kb/setting-up-redirections/#redirections) in the Redirections Table
+- Fixed: Missing checkbox to allow editing [.htaccess file](https://rankmath.com/kb/general-settings/#edit-htaccess)

@@ -83,9 +83,9 @@ class Yoast_TOC_Converter {
 
 		$headings = [];
 		foreach ( $matches[0] as $link ) {
-			$attrs = HTML::extract_attributes( $link );
+			$attrs      = HTML::extract_attributes( $link );
 			$headings[] = [
-				'key'      => uniqid( 'toc-' ),
+				'key'     => uniqid( 'toc-' ),
 				'link'    => $attrs['href'] ?? '',
 				'content' => wp_strip_all_tags( $link ),
 				'level'   => $attrs['data-level'] ?? '',
@@ -103,7 +103,7 @@ class Yoast_TOC_Converter {
 	 * @return string
 	 */
 	public function get_toc_title( $html ) {
-		preg_match('#<h2.*?>(.*?)</h2>#i', $html, $found);
+		preg_match( '#<h2.*?>(.*?)</h2>#i', $html, $found );
 		return ! empty( $found[1] ) ? $found[1] : '';
 	}
 

@@ -9,22 +9,27 @@
  * External Dependencies
  */
 import $ from 'jquery'
+import { isNull, isUndefined, includes } from 'lodash'
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
+import { Modal } from '@wordpress/components'
+import { render } from '@wordpress/element'
 
 class RankMathDashboard {
 	/**
 	 * Class constructor
 	 */
 	constructor() {
+		// Click and change events.
 		this.deactivatePlugins()
 		this.updateModules()
 		this.initializeClipBoard()
 		this.modeSelector()
 		this.dashboardWidget()
+		this.onsiteCheckout()
 	}
 
 	deactivatePlugins() {
@@ -200,6 +205,44 @@ class RankMathDashboard {
 			}
 
 			dashboardWrapper.removeClass( 'rank-math-loading' ).html( response )
+		} )
+	}
+
+	onsiteCheckout() {
+		$( '.pro-link' ).on( 'click', function( e ) {
+			const url = $( this ).data( 'url' )
+			if ( typeof url === 'undefined' || url === '' ) {
+				return
+			}
+
+			e.preventDefault()
+			if ( ! isNull( document.getElementById( 'rank-math-onsite-checkout-wrapper' ) ) ) {
+				$( '.components-modal__screen-overlay' ).show()
+				return false
+			}
+
+			$( 'body' ).append( '<div id="rank-math-onsite-checkout-wrapper"></div>' )
+			setTimeout( () => {
+				render(
+					<Modal
+						className="rank-math-onsite-checkout-modal"
+						onRequestClose={ ( event ) => {
+							if ( ! isUndefined( event ) && includes( event.target.classList, 'rank-math-onsite-checkout-modal' ) ) {
+								return false
+							}
+
+							$( '.components-modal__screen-overlay' ).hide()
+							$( 'body' ).removeClass( 'modal-open' )
+						} }
+						shouldCloseOnClickOutside={ true }
+					>
+						<iframe width="100%" height="100%" src={ url } />
+					</Modal>,
+					document.getElementById( 'rank-math-onsite-checkout-wrapper' )
+				)
+			}, 100 )
+
+			return false
 		} )
 	}
 }

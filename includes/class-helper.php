@@ -362,7 +362,7 @@ class Helper {
 	 * @return bool
 	 */
 	public static function is_plugin_update_disabled() {
-		return ! apply_filters_ref_array( 'auto_update_plugin', [ true, (object)[] ] )
+		return ! apply_filters_ref_array( 'auto_update_plugin', [ true, (object) [] ] )
 			|| apply_filters_ref_array( 'automatic_updater_disabled', [ false ] )
 			|| ( defined( 'DISALLOW_FILE_MODS' ) && DISALLOW_FILE_MODS )
 			|| ( defined( 'AUTOMATIC_UPDATER_DISABLED' ) && AUTOMATIC_UPDATER_DISABLED );

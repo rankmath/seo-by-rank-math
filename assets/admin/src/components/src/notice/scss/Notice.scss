@@ -1,0 +1,93 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins/styling';
+
+/*
+ * Mixin function used to style the Notice component.
+ */
+@mixin notice-style($background, $color) {
+	background-color: $background;
+	border-left-color: $color;
+
+	.rank-math-notice__icon {
+		color: $color;
+	}
+}
+
+/*
+ * Notice component.
+ */
+.rank-math-notice {
+	&.components-notice {
+		margin: 5px 15px 2px;
+		border-radius: 4px;
+		width: fit-content;
+		background: $white;
+		border: 1px solid $silver-gray;
+		padding: 9px 12px;
+		border-left-width: 4px;
+		line-height: 1.5;
+
+		&.is-error {
+			@include notice-style(#fcf0f1, $danger);
+		}
+
+		&.is-warning {
+			@include notice-style(#fcf9e8, #dba617);
+		}
+
+		&.is-success {
+			@include notice-style(#edfaef, #00a32a);
+		}
+
+		&.is-info {
+			@include notice-style(#f0f6fc, #72aee6);
+		}
+
+		.components-notice__content {
+			position: relative;
+			margin: 0;
+			margin-right: 3px;
+		}
+
+		.rank-math-notice__icon {
+			@include center-float-vertically;
+			@include icon-size(27px);
+			color: $silver-gray;
+			left: 0;
+		}
+
+		&.has-icon {
+			.components-notice__content {
+				padding-left: 40px;
+			}
+		}
+
+		.components-button {
+			@include remove-box-shadow;
+			height: fit-content;
+			padding: 0px;
+			margin-top: 2px;
+			
+			&.components-notice__dismiss {
+				color: rgba($black, 0.5);
+
+				&:hover {
+					color: rgba($black, 0.88);
+				}
+
+				svg {
+					@include radius-xs;
+					padding: 4px;
+					height: 1rem;
+					width: 1rem;
+				}
+
+				&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover {
+					svg {
+						background-color: $black-a5;
+					}
+				}
+			}
+		}
+	}
+}

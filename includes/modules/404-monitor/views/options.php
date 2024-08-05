@@ -53,10 +53,10 @@ $monitor_exclude = $cmb->add_field(
 		'type'    => 'group',
 		'name'    => esc_html__( 'Exclude Paths', 'rank-math' ),
 		'desc'    => esc_html__( 'Enter URIs or keywords you wish to prevent from getting logged by the 404 monitor.', 'rank-math' ),
-		'options' => array(
+		'options' => [
 			'add_button'    => esc_html__( 'Add another', 'rank-math' ),
 			'remove_button' => esc_html__( 'Remove', 'rank-math' ),
-		),
+		],
 		'classes' => 'cmb-group-text-only',
 	]
 );

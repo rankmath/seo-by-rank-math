@@ -233,6 +233,7 @@ class Api {
 	/**
 	 * Get the API key location.
 	 *
+	 * @param string $context Key context.
 	 * @return string
 	 */
 	public function get_key_location( $context = '' ) {
@@ -372,9 +373,9 @@ class Api {
 	 * Generate and save a new API key.
 	 */
 	public function reset_key() {
-		$settings = Helper::get_settings( 'instant_indexing', [] );
+		$settings                     = Helper::get_settings( 'instant_indexing', [] );
 		$settings['indexnow_api_key'] = $this->generate_api_key();
-		$this->api_key = $settings['indexnow_api_key'];
+		$this->api_key                = $settings['indexnow_api_key'];
 		update_option( 'rank-math-options-instant-indexing', $settings );
 	}
 

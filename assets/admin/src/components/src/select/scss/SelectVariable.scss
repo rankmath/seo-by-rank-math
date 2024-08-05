@@ -1,0 +1,129 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins/base';
+@import '../../../scss/mixins/shared';
+@import '../../../scss/mixins/styling';
+
+/*
+ * Select With Searchbox component.
+ */
+.rank-math-select-variable {
+	position: relative;
+	background-color: $white;
+	max-width: 25rem;
+
+	&[aria-disabled="true"] {
+		pointer-events: none;
+	}
+
+	.select-input {
+		position: relative;
+		
+		.components-text-control__input {
+			padding-right: 50px;
+		}
+
+		.rank-math-text-control + .rank-math-button {
+			border-width: 0 0 0 1px;
+			border-radius: 0 3px 3px 0;
+			top: 1px;
+			right: 0;
+			bottom: 1px;
+		}
+
+		.rank-math-textarea-control + .rank-math-button {
+			top: auto;
+			right: 1px;
+			bottom: 1px;
+			border-width: 1px 0 0 1px;
+			border-radius: 3px 0 3px 0;
+			min-height: 40px;
+		}
+		
+		.rank-math-button {
+			height: auto;
+			padding: 0 10px;
+			line-height: 40px;
+			box-shadow: none;
+			position: absolute;
+			color: #858b90;
+		}
+	}
+
+	.select-menu {
+		z-index: 999;
+		overflow: auto;
+		max-width: 450px;
+		border: 1px solid $gray-10;
+		border-radius: 6px;
+		background: $white;
+		position: absolute;
+		top: 48px;
+		right: 0;
+		height: 220px;
+		width: 80%;
+
+		&.is-textarea-menu {
+			top: 70px;
+		}
+
+		.components-search-control {
+			.components-base-control__field {
+				@include select-menu(10px, calc(100% - 20px));
+			}
+		}
+
+		ul {
+			margin: 0;
+
+			li {
+				position: relative;
+				margin: 0;
+				padding: 10px;
+				cursor: pointer;
+
+				&:not(:last-child) {
+					border-bottom: 1px solid $gray-10;
+				}
+
+				div:first-of-type {
+					@include flex-align();
+					justify-content: space-between;
+
+					p,
+					h1 {
+						margin: 0px;
+					}
+
+					p, h1 {
+						font-size: 12px;
+						line-height: 16px;
+					}
+
+					h1 {
+						font-weight: 600;
+					}
+
+					p {
+						font-size: 12px;
+						line-height: 16px;
+						display: inline-block;
+						margin-top: 3px;
+						padding: .25em .4em;
+						border-radius: .25rem;
+						background-color: $gray-20;
+					}
+				}
+
+				.description {
+					font-style: italic;
+					display: block;
+					color: $dark_gray;
+				}
+				
+				&:hover {
+					background: $tertiary;
+				}
+			}
+		}
+	}
+}

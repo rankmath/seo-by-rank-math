@@ -126,7 +126,10 @@ class Import implements Wizard_Step {
 					'default'    => 'recalculate',
 					'dep'        => [ [ 'import_from', $slug ] ],
 					'classes'    => 'nob nopb recalculate-scores',
-					'attributes' => [ 'data-active' => $is_active, 'value' => 'recalculate' ],
+					'attributes' => [
+						'data-active' => $is_active,
+						'value'       => 'recalculate',
+					],
 				]
 			);
 		}

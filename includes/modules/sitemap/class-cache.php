@@ -148,6 +148,7 @@ class Cache {
 	 *
 	 * @param  null|string $type The type to get the key for. Null or '1' for index cache.
 	 * @param  int         $page The page of cache to get the key for.
+	 * @param  boolean     $html Whether to add html extension.
 	 * @return boolean|string The key where the cache is stored on. False if the key could not be generated.
 	 */
 	private function get_storage_key( $type = null, $page = 1, $html = false ) {

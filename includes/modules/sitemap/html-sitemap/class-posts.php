@@ -193,8 +193,8 @@ class Posts {
 				continue;
 			}
 
-			$url = $this->do_filter( 'sitemap/entry', esc_url( $this->get_post_link( $post ) ), 'post', $post );
-			if ( empty( $url ) ) {
+			$url = $this->do_filter( 'sitemap/entry', [ 'loc' => esc_url( $this->get_post_link( $post ) ) ], 'post', $post );
+			if ( empty( $url['loc'] ) ) {
 				continue;
 			}
 

@@ -73,13 +73,13 @@ const getContentAICompleters = ( prefix ) => {
 const HighlightPopover = () => {
 	const highlightedParagraphs = ! isUndefined( select( 'rank-math' ) ) ? select( 'rank-math' ).getHighlightedParagraphs() : []
 	if ( isEmpty( highlightedParagraphs ) ) {
-		return
+		return ''
 	}
 
 	const selectedBlock = select( 'core/block-editor' ).getSelectedBlock()
 	if ( isEmpty( selectedBlock ) || ! includes( highlightedParagraphs, selectedBlock.clientId ) ) {
 		jQuery( '.block-editor-block-popover' ).show()
-		return
+		return ''
 	}
 
 	jQuery( '.block-editor-block-popover' ).hide()
@@ -95,7 +95,10 @@ const HighlightPopover = () => {
 		>
 			<Button
 				variant="primary"
-				onClick={ () => ( callApi( 'Text_Summarizer', { text: selectedBlock.attributes.content, language: rankMath.ca_language, format: 'paragraph', choices: 1 }, selectedBlock, true ) ) }
+				onClick={ () => {
+					const text = ! isEmpty( selectedBlock.attributes.content.text ) ? selectedBlock.attributes.content.text : selectedBlock.attributes.content
+					callApi( 'Text_Summarizer', { text, language: rankMath.ca_language, format: 'paragraph', choices: 1 }, selectedBlock, true )
+				} }
 
 			>
 				{ __( 'Shorten with AI', 'rank-math' ) }

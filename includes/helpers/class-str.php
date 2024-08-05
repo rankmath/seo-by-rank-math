@@ -84,12 +84,12 @@ class Str {
 	 */
 	public static function comparison( $needle, $haystack, $comparison = '' ) {
 
-		$hash = array(
+		$hash = [
 			'regex'    => 'preg_match',
-			'end'      => array( __CLASS__, 'ends_with' ),
-			'start'    => array( __CLASS__, 'starts_with' ),
-			'contains' => array( __CLASS__, 'contains' ),
-		);
+			'end'      => [ __CLASS__, 'ends_with' ],
+			'start'    => [ __CLASS__, 'starts_with' ],
+			'contains' => [ __CLASS__, 'contains' ],
+		];
 
 		if ( $comparison && isset( $hash[ $comparison ] ) ) {
 			return call_user_func( $hash[ $comparison ], $needle, $haystack );
@@ -122,7 +122,7 @@ class Str {
 	 * @return array
 	 */
 	public static function to_arr_no_empty( $str, $sep_pattern = '\r\n|[\r\n]' ) {
-		$array = empty( $str ) ? array() : preg_split( '/' . $sep_pattern . '/', $str, -1, PREG_SPLIT_NO_EMPTY );
+		$array = empty( $str ) ? [] : preg_split( '/' . $sep_pattern . '/', $str, -1, PREG_SPLIT_NO_EMPTY );
 		$array = array_filter( array_map( 'trim', $array ) );
 
 		return $array;
@@ -182,7 +182,7 @@ class Str {
 		}
 
 		$unit  = intval( log( $number, 1000 ) );
-		$units = array( '', 'K', 'M', 'B', 'T', 'Q' );
+		$units = [ '', 'K', 'M', 'B', 'T', 'Q' ];
 
 		if ( array_key_exists( $unit, $units ) ) {
 			return sprintf( '%s%s%s', $negative, rtrim( number_format( $number / pow( 1000, $unit ), $precision ), '.0' ), $units[ $unit ] );
@@ -237,7 +237,7 @@ class Str {
 				continue;
 			}
 
-			if ( ! empty( $word[0] ) ) {
+			if ( isset( $word[0] ) ) {
 				$ucwords .= preg_match( '/[\p{L}]/u', $word[0] ) ? mb_strtoupper( $word[0], 'UTF-8' ) . mb_substr( $word, 1, mb_strlen( $word ), 'UTF-8' ) : $word;
 			}
 		}

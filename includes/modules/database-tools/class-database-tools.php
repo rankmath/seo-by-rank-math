@@ -32,7 +32,6 @@ class Database_Tools {
 
 		Yoast_Blocks::get();
 		AIOSEO_Blocks::get();
-		Remove_Schema::get();
 		Update_Score::get();
 		$this->hooks();
 	}
@@ -45,7 +44,7 @@ class Database_Tools {
 			$this->filter( 'rank_math/tools/pages', 'add_tools_page', 11 );
 		}
 
-		if ( Helper::is_rest() && Str::ends_with( 'toolsAction', add_query_arg( [] ) )  ) {
+		if ( Helper::is_rest() && Str::ends_with( 'toolsAction', add_query_arg( [] ) ) ) {
 			foreach ( $this->get_tools() as $id => $tool ) {
 				if ( ! method_exists( $this, $id ) ) {
 					continue;
@@ -302,25 +301,6 @@ class Database_Tools {
 	}
 
 	/**
-	 * Function to delete old schema data.
-	 *
-	 * @return string
-	 */
-	public function delete_old_schema() {
-		$meta = Remove_Schema::get()->find();
-		if ( empty( $meta ) ) {
-			return [
-				'status'  => 'error',
-				'message' => __( 'No data found to delete.', 'rank-math' ),
-			];
-		}
-
-		Remove_Schema::get()->start( $meta );
-
-		return __( 'Deletion started. A success message will be shown here once the process completes. You can close this page.', 'rank-math' );
-	}
-
-	/**
 	 * Add subpage to Status & Tools screen.
 	 *
 	 * @param array $pages Pages.
@@ -418,15 +398,6 @@ class Database_Tools {
 				'description'  => __( 'Getting a redirection loop or need a fresh start? Delete all the redirections using this tool. Note: This process is irreversible and will delete ALL your redirection rules.', 'rank-math' ),
 				'confirm_text' => __( 'Are you sure you want to delete all the Redirection Rules? This action is irreversible.', 'rank-math' ),
 				'button_text'  => __( 'Delete Redirections', 'rank-math' ),
-			];
-		}
-
-		if ( Helper::is_module_active( 'rich-snippet' ) && ! empty( Remove_Schema::get()->find() ) ) {
-			$tools['delete_old_schema'] = [
-				'title'        => __( 'Delete Old Schema Data', 'rank-math' ),
-				'description'  => __( 'Delete the schema data from the old format (<1.0.48). Note: This process is irreversible and will delete all the metadata prefixed with rank_math_snippet.', 'rank-math' ),
-				'confirm_text' => __( 'Are you sure you want to delete the old schema data? This action is irreversible.', 'rank-math' ),
-				'button_text'  => __( 'Delete', 'rank-math' ),
 			];
 		}
 

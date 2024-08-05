@@ -2,7 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { debounce, isUndefined } from 'lodash'
+import { debounce, isUndefined, isNull } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -44,8 +44,8 @@ class PostCollector extends DataCollector {
 
 		return this.isTinymce() &&
 			tinymce.activeEditor &&
-			'content' === tinymce.activeEditor.id
-			? tinymce.activeEditor.getContent()
+			! isNull( tinymce.get( 'content' ) )
+			? tinymce.get( 'content' ).getContent()
 			: this.elemContent.val()
 	}
 

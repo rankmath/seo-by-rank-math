@@ -13,6 +13,7 @@ namespace RankMath\Analytics;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Param;
+use RankMath\Google\Analytics;
 use RankMathPro\Analytics\Pageviews;
 use RankMath\Google\Console as Google_Analytics;
 
@@ -503,7 +504,7 @@ class Stats extends Keywords {
 		$offset         = $args['offset'];
 		$perpage        = $args['perpage'];
 		$order_by_field = $args['orderBy'];
-		$sub_where		= $args['sub_where'];
+		$sub_where      = $args['sub_where'];
 
 		$order_position_fields = [ 'position', 'diffPosition' ];
 		$order_metrics_fields  = [ 'clicks', 'diffClicks', 'impressions', 'diffImpressions', 'ctr', 'diffCtr' ];
@@ -565,12 +566,6 @@ class Stats extends Keywords {
 
 		$page_urls = \array_merge( \array_keys( $rows ), $args['pages'] );
 
-		$pageviews = [];
-		if ( \class_exists( 'RankMathPro\Analytics\Pageviews' ) && $args['pageview'] && ! empty( $page_urls ) ) {
-			$pageviews = Pageviews::get_pageviews( [ 'pages' => $page_urls ] );
-			$pageviews = $pageviews['rows'];
-		}
-
 		if ( $args['objects'] ) {
 			$objects = $this->get_objects( $page_urls );
 		}
@@ -609,20 +604,6 @@ class Stats extends Keywords {
 			);
 		}
 
-		if ( $args['pageview'] && ! empty( $pageviews ) ) {
-			foreach ( $pageviews as $pageview ) {
-				$page = $pageview['page'];
-				if ( ! isset( $rows[ $page ] ) ) {
-					$rows[ $page ] = [];
-				}
-
-				$rows[ $page ]['pageviews'] = [
-					'total'      => (int) $pageview['pageviews'],
-					'difference' => (int) $pageview['difference'],
-				];
-			}
-		}
-
 		if ( $args['objects'] && ! empty( $objects ) ) {
 			foreach ( $objects as $object ) {
 				$page = $object['page'];
@@ -633,7 +614,7 @@ class Stats extends Keywords {
 			}
 		}
 
-		return $rows;
+		return $this->do_filter( 'analytics/rows', $rows, $args, $page_urls );
 	}
 
 	/**

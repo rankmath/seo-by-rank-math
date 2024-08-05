@@ -29,14 +29,14 @@ class Admin extends Base {
 
 	/**
 	 * Module ID.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $id = '';
 
 	/**
 	 * Module directory.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $directory = '';
@@ -209,7 +209,7 @@ class Admin extends Base {
 			$notice_end  = '</p><div class="rank-math-cmb-dependency hidden" data-relation="or"><span class="hidden" data-field="tax_' . $taxonomy->name . '_sitemap" data-comparison="=" data-value="on"></span></div></div>';
 
 			$taxonomy_name = strtolower( $taxonomy->name );
-			$url           = isset( $hash_links[ $taxonomy_name ] ) ? KB::get( 'configure-sitemaps', 'Options Panel Sitemap ' . $taxonomy->labels->name . ' Tab' )  . $hash_links[ $taxonomy_name ] : KB::get( 'configure-sitemaps' );
+			$url           = isset( $hash_links[ $taxonomy_name ] ) ? KB::get( 'configure-sitemaps', 'Options Panel Sitemap ' . $taxonomy->labels->name . ' Tab' ) . $hash_links[ $taxonomy_name ] : KB::get( 'configure-sitemaps' );
 			switch ( $taxonomy->name ) {
 				case 'product_cat':
 				case 'product_tag':

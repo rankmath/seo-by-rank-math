@@ -71,7 +71,7 @@ class Setup_Wizard {
 
 	/**
 	 * Hook suffix.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $hook_suffix = '';
@@ -365,7 +365,7 @@ class Setup_Wizard {
 		$this->steps       = $this->do_filter( 'wizard/steps', $this->steps );
 		$this->step        = Param::request( 'step', current( array_keys( $this->steps ) ) );
 		$this->step_slug   = isset( $this->steps[ $this->step ]['slug'] ) ? $this->steps[ $this->step ]['slug'] : $this->step;
-		$this->wizard_step = new $this->steps[ $this->step ]['class'];
+		$this->wizard_step = new $this->steps[ $this->step ]['class']();
 	}
 
 	/**

@@ -125,8 +125,6 @@ class Url_Inspection extends Request {
 			'indexStatusResult.indexingState'   => 'indexing_state',
 			'indexStatusResult.pageFetchState'  => 'page_fetch_state',
 			'indexStatusResult.robotsTxtState'  => 'robots_txt_state',
-			'mobileUsabilityResult.verdict'     => 'mobile_usability_verdict',
-			'mobileUsabilityResult.issues'      => 'mobile_usability_issues',
 			'richResultsResult.verdict'         => 'rich_results_verdict',
 			'indexStatusResult.crawledAs'       => 'crawled_as',
 			'indexStatusResult.googleCanonical' => 'google_canonical',

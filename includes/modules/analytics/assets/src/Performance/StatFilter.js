@@ -51,7 +51,7 @@ const StatFilter = ( { stats, selected, setSelection } ) => {
 				onClick={ setSelection }
 			/>
 			<StatFilterBlock
-				className="stat-filter-color-4"
+				className="stat-filter-color-3"
 				type="keywords"
 				title={ __( 'Total Keywords', 'rank-math' ) }
 				data={ keywords }
@@ -65,7 +65,7 @@ const StatFilter = ( { stats, selected, setSelection } ) => {
 			/>
 
 			<StatFilterBlock
-				className="stat-filter-color-3"
+				className="stat-filter-color-4"
 				type="clicks"
 				title={ __( 'Search Clicks', 'rank-math' ) }
 				data={ clicks }

@@ -11,6 +11,7 @@
 namespace RankMath\Admin;
 
 use RankMath\Helpers\Param;
+use RankMath\Helper;
 
 /**
  * Page class.
@@ -109,6 +110,13 @@ class Page {
 	public $classes = null;
 
 	/**
+	 * Hold localized data.
+	 *
+	 * @var array
+	 */
+	public $json = null;
+
+	/**
 	 * The Constructor.
 	 *
 	 * @param string $id     Admin page unique id.
@@ -119,11 +127,11 @@ class Page {
 
 		// Early bail!
 		if ( ! $id ) {
-			wp_die( esc_html__( '$id variable required' ), esc_html__( 'Variable Required' ) );
+			wp_die( esc_html__( '$id variable required', 'rank-math' ), esc_html__( 'Variable Required', 'rank-math' ) );
 		}
 
 		if ( ! $title ) {
-			wp_die( esc_html__( '$title variable required' ), esc_html__( 'Variable Required' ) );
+			wp_die( esc_html__( '$title variable required', 'rank-math' ), esc_html__( 'Variable Required', 'rank-math' ) );
 		}
 
 		$this->id    = $id;
@@ -201,6 +209,7 @@ class Page {
 	public function enqueue() {
 		$this->enqueue_styles();
 		$this->enqueue_scripts();
+		$this->add_localized_data();
 	}
 
 	/**
@@ -248,6 +257,10 @@ class Page {
 	public function display() {
 		if ( is_null( $this->render ) ) {
 			return;
+		}
+
+		if ( 'settings' === $this->render ) {
+			return $this->display_settings();
 		}
 
 		if ( is_callable( $this->render ) ) {
@@ -322,5 +335,35 @@ class Page {
 		}
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * Localized data.
+	 */
+	private function add_localized_data() {
+		if ( empty( $this->assets['json'] ) ) {
+			return;
+		}
+
+		foreach ( $this->assets['json'] as $key => $value ) {
+			Helper::add_json( $key, $value );
+		}
+
+		Helper::add_json(
+			'settings',
+			[
+				'general' => Helper::get_settings( 'general' ),
+				'titles'  => Helper::get_settings( 'titles' ),
+				'sitemap' => Helper::get_settings( 'sitemap' ),
+			]
+		);
+	}
+
+	/**
+	 * Display settings.
+	 */
+	private function display_settings() {
+		rank_math()->admin->display_admin_header();
+		echo '<div id="rank-math-settings" class="' . esc_attr( $this->id ) . '"></div>';
 	}
 }

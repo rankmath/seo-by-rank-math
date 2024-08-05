@@ -9,19 +9,17 @@
  * External Dependencies
  */
 import jQuery from 'jquery'
-import { includes, startsWith, isNull } from 'lodash'
+import { includes, startsWith } from 'lodash'
 
 /**
  * WordPress Dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { render } from '@wordpress/element'
-import { Modal } from '@wordpress/components'
 
 /**
  * Internal Dependencies
  */
-import ErrorCTA from '@components/ErrorCTA'
+import showCTABox from '@helpers/showCTABox'
 
 class RankMathPostList {
 	/**
@@ -88,46 +86,40 @@ class RankMathPostList {
 		const selectBox = jQuery( '.tablenav .bulkactions select' )
 		selectBox.find( 'option[value="rank_math_ai_options"]' ).attr( 'disabled', 'disabled' )
 		selectBox.find( 'option[value="rank_math_options"]' ).attr( 'disabled', 'disabled' )
-		const contentAiOptions = [ 'rank_math_content_ai_fetch_seo_title', 'rank_math_content_ai_fetch_seo_description', 'rank_math_content_ai_fetch_seo_title_description' ]
+		const contentAiOptions = [
+			'rank_math_content_ai_fetch_seo_title',
+			'rank_math_content_ai_fetch_seo_description',
+			'rank_math_content_ai_fetch_seo_title_description',
+		]
 		selectBox.on( 'change', () => {
 			const value = selectBox.val()
 			if (
+				value === 'rank_math_content_ai_fetch_image_alt' &&
+				( rankMath.contentAICredits < 50 || ! rankMath.isUserRegistered )
+			) {
+				selectBox.val( '-1' ).change()
+				showCTABox( { isBulkEdit: true, creditsRequired: 50 } )
+				return
+			}
+
+			if (
 				includes( contentAiOptions, value ) &&
 				(
-					! rankMath.isUserRegistered || ! rankMath.contentAICredits || ! rankMath.contentAIPlan || 'free' === rankMath.contentAIPlan
+					! rankMath.isUserRegistered ||
+					! rankMath.contentAICredits ||
+					! rankMath.contentAIPlan ||
+					'free' === rankMath.contentAIPlan
 				)
 			) {
 				selectBox.val( '-1' ).change()
-				this.showCTABox()
+				showCTABox( { isBulkEdit: true } )
 			}
 
 			if ( startsWith( value, 'rank_math_bulk' ) && ! rankMath.isProActive ) {
 				selectBox.val( '-1' ).change()
-				this.showCTABox( true )
+				showCTABox( { showProNotice: true, isBulkEdit: true } )
 			}
 		} )
-	}
-
-	showCTABox( showProNotice = false ) {
-		if ( isNull( document.getElementById( 'rank-math-content-ai-modal-wrapper' ) ) ) {
-			jQuery( '#wpwrap' ).append( '<div id="rank-math-content-ai-modal-wrapper"></div>' )
-		}
-
-		setTimeout( () => {
-			render(
-				<Modal
-					className="rank-math-contentai-modal rank-math-modal rank-math-error-modal"
-					onRequestClose={ () => {
-						jQuery( '.components-modal__screen-overlay' ).remove()
-						document.getElementById( 'rank-math-content-ai-modal-wrapper' ).remove()
-					} }
-					shouldCloseOnClickOutside={ true }
-				>
-					<ErrorCTA width={ 100 } showProNotice={ showProNotice } isBulkEdit={ true } />
-				</Modal>,
-				document.getElementById( 'rank-math-content-ai-modal-wrapper' )
-			)
-		}, 100 )
 	}
 
 	editingEvents() {

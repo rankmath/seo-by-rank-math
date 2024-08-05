@@ -32,28 +32,28 @@ class Analytics extends Base {
 
 	/**
 	 * Module ID.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $id = '';
 
 	/**
 	 * Module directory.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $directory = '';
 
 	/**
 	 * Module help.
-	 * 
+	 *
 	 * @var array
 	 */
 	public $help = [];
 
 	/**
 	 * Module page.
-	 * 
+	 *
 	 * @var object
 	 */
 	public $page;
@@ -410,7 +410,6 @@ class Analytics extends Base {
 				'indexing' => [
 					'index_verdict'            => true,
 					'indexing_state'           => true,
-					'mobile_usability_verdict' => true,
 					'rich_results_items'       => true,
 					'page_fetch_state'         => false,
 				],

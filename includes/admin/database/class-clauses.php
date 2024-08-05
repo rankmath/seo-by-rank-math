@@ -20,24 +20,24 @@ trait Clauses {
 	 *
 	 * @var array
 	 */
-	private $sql_clauses = array();
+	private $sql_clauses = [];
 
 	/**
 	 * SQL clause merge filters.
 	 *
 	 * @var array
 	 */
-	private $sql_filters = array(
-		'where' => array(
+	private $sql_filters = [
+		'where' => [
 			'where',
 			'where_time',
-		),
-		'join'  => array(
+		],
+		'join'  => [
 			'right_join',
 			'join',
 			'left_join',
-		),
-	);
+		],
+	];
 
 	/**
 	 * Check has SQL clause.
@@ -70,7 +70,7 @@ trait Clauses {
 	protected function clear_sql_clause( $types ) {
 		foreach ( (array) $types as $type ) {
 			if ( isset( $this->sql_clauses[ $type ] ) ) {
-				$this->sql_clauses[ $type ] = array();
+				$this->sql_clauses[ $type ] = [];
 			}
 		}
 	}
@@ -89,7 +89,7 @@ trait Clauses {
 		}
 
 		$separator = ' ';
-		if ( in_array( $type, array( 'select', 'order_by', 'group_by' ), true ) ) {
+		if ( in_array( $type, [ 'select', 'order_by', 'group_by' ], true ) ) {
 			$separator = ', ';
 		}
 
@@ -102,7 +102,7 @@ trait Clauses {
 		}
 
 		if ( isset( $this->sql_filters[ $type ] ) ) {
-			$clauses = array();
+			$clauses = [];
 			foreach ( $this->sql_filters[ $type ] as $subset ) {
 				$clauses = array_merge( $clauses, $this->sql_clauses[ $subset ] );
 			}

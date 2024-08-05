@@ -37,7 +37,7 @@ class Keywords extends Component {
 	 * @param {Component.setState} setState Updates the current component state.
 	 */
 	initializeClipboard( setState ) {
-		if ( 'function' !== typeof ClipboardJS || ! this.props.hasCredits ) {
+		if ( 'function' !== typeof ClipboardJS || this.props.showError ) {
 			return
 		}
 
@@ -91,7 +91,7 @@ class Keywords extends Component {
 							this.setState( { type } )
 						} }
 					/>
-					<Button className='is-link' href={ getLink( 'content-ai-keywords', 'Sidebar Keywords KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Know more about Keywords.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
+					<Button className="is-link" href={ getLink( 'content-ai-keywords', 'Sidebar Keywords KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Know more about Keywords.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
 					<>
 						<span className="components-form-token-field__help">{ __( 'Click on any keyword to copy it.', 'rank-math' ) }</span>
 						<br />
@@ -162,7 +162,7 @@ class Keywords extends Component {
 					return
 				}
 
-				const count = this.props.hasCredits ? this.getCount( data.keyword, type ) : data.count
+				const count = ! this.props.showError ? this.getCount( data.keyword, type ) : data.count
 				const scoreClass = getClassByScore( this.getScore( data.keyword, count, data.average, type ) )
 				const className = classnames( 'rank-math-tooltip', {
 					show: this.state.type === type,
@@ -224,7 +224,7 @@ class Keywords extends Component {
 	}
 
 	getTooltipContent( data, isRelatedKeyword = false ) {
-		if ( ! this.props.hasCredits ) {
+		if ( this.props.showError ) {
 			return
 		}
 

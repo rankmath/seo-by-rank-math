@@ -41,12 +41,8 @@ class Block {
 	 * @return string The HTML image element.
 	 */
 	protected function get_image( $attrs, $size = 'thumbnail', $class = 'class=alignright' ) {
-		if ( ! isset( $attrs['imageID'] ) ) {
-			return '';
-		}
-
-		$image_id = absint( $attrs['imageID'] );
-		if ( ! ( $image_id > 0 ) ) {
+		$image_id = empty( $attrs['imageID'] ) ? '' : absint( $attrs['imageID'] );
+		if ( ! $image_id ) {
 			return '';
 		}
 
@@ -63,13 +59,9 @@ class Block {
 	 * @return string
 	 */
 	protected function get_styles( $attributes ) {
-		$out = [];
-
-		if ( ! empty( $attributes['textAlign'] ) && 'left' !== $attributes['textAlign'] ) {
-			$out[] = 'text-align:' . $attributes['textAlign'];
-		}
-
-		return empty( $out ) ? '' : ' style="' . join( ';', $out ) . '"';
+		return empty( $attributes['textAlign'] ) || ! in_array( $attributes['textAlign'], [ 'right', 'center' ], true )
+			? ''
+			: ' style="text-align:' . $attributes['textAlign'] . '"';
 	}
 
 	/**
@@ -84,11 +76,7 @@ class Block {
 			return 'ol';
 		}
 
-		if ( 'unordered' === $style ) {
-			return 'ul';
-		}
-
-		return 'div';
+		return 'unordered' === $style ? 'ul' : 'div';
 	}
 
 	/**
@@ -99,11 +87,19 @@ class Block {
 	 * @return string
 	 */
 	protected function get_list_item_style( $style ) {
-		if ( 'numbered' === $style || 'unordered' === $style ) {
-			return 'li';
-		}
+		return in_array( $style, [ 'numbered', 'unordered' ], true ) ? 'li' : 'div';
+	}
 
-		return 'div';
+	/**
+	 * Get title wrapper tag.
+	 *
+	 * @param string $title_wrapper Title wrapper attribute.
+	 * @param string $block         Block name.
+	 */
+	protected function get_title_wrapper( $title_wrapper, $block = 'faq' ) {
+		$wrapper = in_array( $title_wrapper, [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div' ], true ) ? $title_wrapper : 'h2';
+
+		return apply_filters( "rank_math/blocks/{$block}/title_wrapper", $wrapper );
 	}
 
 	/**
@@ -121,6 +117,6 @@ class Block {
 		 * @param bool   $return If set, this will convert all remaining line breaks after paragraphing.
 		 * @param string $block  Block name.
 		 */
-		return wpautop( $text, apply_filters( 'rank_math/block/preserve_line_breaks', true, $block ) );
+		return wpautop( wp_kses_post( $text ), apply_filters( 'rank_math/block/preserve_line_breaks', true, $block ) );
 	}
 }

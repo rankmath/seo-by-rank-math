@@ -31,35 +31,35 @@ class Admin extends Base {
 
 	/**
 	 * Module ID.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $id = '';
 
 	/**
 	 * Module directory.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $directory = '';
 
 	/**
 	 * List table object.
-	 * 
+	 *
 	 * @var object
 	 */
 	public $table;
 
 	/**
 	 * Screen options.
-	 * 
+	 *
 	 * @var array
 	 */
 	public $screen_options = [];
 
 	/**
 	 * Module page.
-	 * 
+	 *
 	 * @var object
 	 */
 	public $page;

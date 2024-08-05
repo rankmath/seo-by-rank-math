@@ -74,7 +74,11 @@ const SnippetEditor = ( {
 					title={ __( 'Preview Snippet Editor', 'rank-math' ) }
 					closeButtonLabel={ __( 'Close', 'rank-math' ) }
 					shouldCloseOnClickOutside={ false }
-					onRequestClose={ () => {
+					onRequestClose={ ( e ) => {
+						if ( undefined === e ) {
+							return
+						}
+
 						document.body.classList.remove( 'modal-open' )
 						toggleEditor()
 					} }

@@ -122,7 +122,7 @@ class AdminBarStats extends Component {
 	}
 
 	getAveragePosition() {
-		if ( isUndefined( this.data.position ) || rankMath.isAnalyticsConnected ) {
+		if ( isUndefined( this.data.position ) || ! rankMath.isConsoleConnected ) {
 			return false
 		}
 

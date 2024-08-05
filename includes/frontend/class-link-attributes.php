@@ -111,6 +111,11 @@ class Link_Attributes {
 	 * @return string
 	 */
 	public function add_link_attributes( $content ) {
+		// Early bail if content is empty.
+		if ( empty( $content ) ) {
+			return $content;
+		}
+
 		preg_match_all( '/<(a\s[^>]+)>/', $content, $matches );
 		if ( empty( $matches ) || empty( $matches[0] ) ) {
 			return $content;

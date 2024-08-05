@@ -219,4 +219,16 @@ class Rest_Helper {
 		}
 		return true;
 	}
+
+	/**
+	 * Checks whether a given request has permission to update settings.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return true|WP_Error True if the request has read access, WP_Error object otherwise.
+	 */
+	public static function can_manage_settings( $request ) {
+		$type = $request->get_param( 'type' );
+		return $type === 'roleCapabilities' ? current_user_can( 'rank_math_role_manager' ) : current_user_can( "rank_math_$type" );
+	}
 }

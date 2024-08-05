@@ -110,8 +110,9 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 					const isGeneratedLink = ! isUndefined( currentHeading.isGeneratedLink ) && currentHeading.isGeneratedLink
 
 					let anchor = headingAttributes.anchor
+					const headingText = ! isEmpty( headingAttributes.content.text ) ? headingAttributes.content.text : headingAttributes.content
 					if ( isEmpty( headingAttributes.anchor ) || isGeneratedLink ) {
-						anchor = kebabCase( stripHTML( headingAttributes.content ) )
+						anchor = kebabCase( stripHTML( headingText ) )
 					}
 
 					if ( includes( anchors, anchor ) ) {
@@ -121,8 +122,8 @@ export function GetLatestHeadings( headings, excludeHeadings ) {
 
 					anchors.push( anchor )
 					headingAttributes.anchor = anchor
-					const headingContent = isString( headingAttributes.content ) ? stripHTML(
-						headingAttributes.content.replace(
+					const headingContent = isString( headingText ) ? stripHTML(
+						headingText.replace(
 							/(<br *\/?>)+/g,
 							' '
 						)

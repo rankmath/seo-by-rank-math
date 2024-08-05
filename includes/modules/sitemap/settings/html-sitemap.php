@@ -45,7 +45,7 @@ $cmb->add_field(
 		'dep'        => [
 			'relation' => 'AND',
 			[ 'html_sitemap', 'on' ],
-			[ 'html_sitemap_display', 'shortcode' ]
+			[ 'html_sitemap_display', 'shortcode' ],
 		],
 		'classes'    => 'rank-math-code',
 		'attributes' => [
@@ -71,18 +71,18 @@ if ( $rank_math_sitemap_page ) {
 
 $cmb->add_field(
 	[
-		'id'          => 'html_sitemap_page',
-		'type'        => 'select',
-		'name'        => esc_html__( 'Page', 'rank-math' ),
-		'desc'        => esc_html__( 'Select the page to display the HTML sitemap. Once the settings are saved, the sitemap will be displayed below the content of the selected page.', 'rank-math' ),
-		'options'     => $rank_math_sitemap_page_options,
-		'dep'         => [
+		'id'         => 'html_sitemap_page',
+		'type'       => 'select',
+		'name'       => esc_html__( 'Page', 'rank-math' ),
+		'desc'       => esc_html__( 'Select the page to display the HTML sitemap. Once the settings are saved, the sitemap will be displayed below the content of the selected page.', 'rank-math' ),
+		'options'    => $rank_math_sitemap_page_options,
+		'dep'        => [
 			'relation' => 'AND',
 			[ 'html_sitemap', 'on' ],
-			[ 'html_sitemap_display', 'page' ]
+			[ 'html_sitemap_display', 'page' ],
 		],
-		'after'       => $rank_math_sitemap_page_after,
-		'attributes'  => [
+		'after'      => $rank_math_sitemap_page_after,
+		'attributes' => [
 			'data-placeholder' => esc_html__( 'Select a page', 'rank-math' ),
 			'data-s2-pages'    => 'true',
 		],

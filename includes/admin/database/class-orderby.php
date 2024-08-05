@@ -81,6 +81,6 @@ trait OrderBy {
 			return Arr::from_string( $argument );
 		}
 
-		return array( $argument );
+		return [ $argument ];
 	}
 }

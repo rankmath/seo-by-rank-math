@@ -29,19 +29,37 @@ class Bulk_Actions {
 	 * The Constructor.
 	 */
 	public function __construct() {
+		$this->action( 'init', 'init' );
 		$this->action( 'admin_init', 'init_admin', 15 );
+		$this->action( 'rank_math/content_ai/generate_alt', 'generate_image_alt' );
+		$this->filter( 'rank_math/database/tools', 'add_tools' );
+		$this->filter( 'rank_math/tools/content_ai_cancel_bulk_edit_process', 'cancel_bulk_edit_process' );
+	}
+
+	/**
+	 * Init function.
+	 */
+	public function init() {
+		Bulk_Edit_SEO_Meta::get();
+		Bulk_Image_Alt::get();
 	}
 
 	/**
 	 * Init.
 	 */
 	public function init_admin() {
+		// Add Bulk actions for Posts.
 		$post_types = Helper::get_settings( 'general.content_ai_post_types', [] );
 		foreach ( $post_types as $post_type ) {
 			$this->filter( "bulk_actions-edit-{$post_type}", 'bulk_actions', 9 );
 			$this->filter( "handle_bulk_actions-edit-{$post_type}", 'handle_bulk_actions', 10, 3 );
 		}
 
+		// Add Bulk Generate on Attachment page.
+		$this->filter( 'bulk_actions-upload', 'bulk_actions_attachment' );
+		$this->filter( 'handle_bulk_actions-upload', 'handle_bulk_actions', 10, 3 );
+
+		// Add Bulk Actions for Taxonomies.
 		$taxonomies = Helper::get_accessible_taxonomies();
 		unset( $taxonomies['post_format'] );
 		$taxonomies = wp_list_pluck( $taxonomies, 'label', 'name' );
@@ -51,6 +69,7 @@ class Bulk_Actions {
 		}
 
 		$this->filter( 'wp_bulk_edit_seo_meta_post_args', 'update_background_process_args' );
+		$this->filter( 'wp_bulk_image_alt_post_args', 'update_background_process_args' );
 	}
 
 	/**
@@ -68,6 +87,24 @@ class Bulk_Actions {
 		$actions['rank_math_content_ai_fetch_seo_title']             = esc_html__( 'Write SEO Title with AI', 'rank-math' );
 		$actions['rank_math_content_ai_fetch_seo_description']       = esc_html__( 'Write SEO Description with AI', 'rank-math' );
 		$actions['rank_math_content_ai_fetch_seo_title_description'] = esc_html__( 'Write SEO Title & Description with AI', 'rank-math' );
+		$actions['rank_math_content_ai_fetch_image_alt']             = esc_html__( 'Write Image Alt Text with AI', 'rank-math' );
+
+		return $actions;
+	}
+
+	/**
+	 * Add bulk actions for Attachment.
+	 *
+	 * @param  array $actions Actions.
+	 * @return array          New actions.
+	 */
+	public function bulk_actions_attachment( $actions ) {
+		if ( ! Helper::has_cap( 'content_ai' ) ) {
+			return $actions;
+		}
+
+		$actions['rank_math_ai_options']                 = __( '&#8595; Rank Math Content AI', 'rank-math' );
+		$actions['rank_math_content_ai_fetch_image_alt'] = esc_html__( 'Write Image Alt Text with AI', 'rank-math' );
 
 		return $actions;
 	}
@@ -82,7 +119,7 @@ class Bulk_Actions {
 	 * @return string New redirect URL.
 	 */
 	public function handle_bulk_actions( $redirect, $doaction, $object_ids ) {
-		if ( empty( $object_ids ) || ! in_array( $doaction, [ 'rank_math_content_ai_fetch_seo_title', 'rank_math_content_ai_fetch_seo_description', 'rank_math_content_ai_fetch_seo_title_description' ], true ) ) {
+		if ( empty( $object_ids ) || ! in_array( $doaction, [ 'rank_math_content_ai_fetch_seo_title', 'rank_math_content_ai_fetch_seo_description', 'rank_math_content_ai_fetch_seo_title_description', 'rank_math_content_ai_fetch_image_alt' ], true ) ) {
 			return $redirect;
 		}
 
@@ -96,6 +133,11 @@ class Bulk_Actions {
 				]
 			);
 
+			return $redirect;
+		}
+
+		if ( 'rank_math_content_ai_fetch_image_alt' === $doaction ) {
+			$this->generate_image_alt( $object_ids );
 			return $redirect;
 		}
 
@@ -127,6 +169,45 @@ class Bulk_Actions {
 	}
 
 	/**
+	 * Generate Image Alt for the attachmed Ids.
+	 *
+	 * @param array $object_ids Attachment Ids.
+	 */
+	public function generate_image_alt( $object_ids ) {
+		$data = [
+			'action' => 'image_alt',
+			'posts'  => [],
+		];
+
+		foreach ( $object_ids as $object_id ) {
+			if ( get_post_type( $object_id ) === 'attachment' ) {
+				$data['posts'][ $object_id ] = [ wp_get_attachment_url( $object_id ) ];
+				continue;
+			}
+			// Get all <img> tags from the post content.
+			$images = [];
+			preg_match_all( '/<img\\s[^>]+>/i', get_post_field( 'post_content', $object_id ), $images );
+
+			// Keep only the image tags that have src attribute but no alt attribute.
+			$images = array_filter(
+				$images[0],
+				function( $image ) {
+					return preg_match( '/src=[\'"]?([^\'" >]+)[\'" >]/i', $image, $matches ) && ( ! preg_match( '/alt="([^"]*)"/i', $image, $matches ) || preg_match( '/alt=""/i', $image, $matches ) );
+				}
+			);
+
+			if ( empty( $images ) ) {
+				continue;
+			}
+
+			$object                      = get_post( $object_id );
+			$data['posts'][ $object_id ] = array_filter( array_values( $images ) );
+		}
+
+		Bulk_Image_Alt::get()->start( $data );
+	}
+
+	/**
 	 * Change the timeout value in Background_Process to resolve the issue with notifications not appearing after completion in v1.2.
 	 *
 	 * @param array $args Process args.
@@ -137,6 +218,46 @@ class Bulk_Actions {
 		$args['timeout'] = 0.01;
 
 		return $args;
+	}
+
+	/**
+	 * Add database tools.
+	 *
+	 * @param array $tools Array of tools.
+	 *
+	 * @return array
+	 */
+	public function add_tools( $tools ) {
+		$posts = get_option( 'rank_math_content_ai_posts' );
+
+		// Early Bail if process is not running.
+		if ( empty( $posts ) ) {
+			return $tools;
+		}
+
+		$processed = get_option( 'rank_math_content_ai_posts_processed' );
+
+		$tools['content_ai_cancel_bulk_edit_process'] = [
+			'title'       => esc_html__( 'Cancel Content AI Bulk Editing Process', 'rank-math' ),
+			'description' => sprintf(
+				// Translators: placeholders are the number of posts that were processed.
+				esc_html__( 'Terminate the ongoing Content AI Bulk Editing Process to halt any pending modifications and revert to the previous state. The bulk metadata has been generated for %1$d out of %1$d posts so far.', 'rank-math' ),
+				$processed,
+				count( $posts )
+			),
+			'button_text' => esc_html__( 'Terminate', 'rank-math' ),
+		];
+
+		return $tools;
+	}
+
+	/**
+	 * Function to cancel the Bulk Edit process.
+	 */
+	public function cancel_bulk_edit_process() {
+		Bulk_Edit_SEO_Meta::get()->cancel();
+		Helper::remove_notification( 'rank_math_content_ai_posts_started' );
+		return __( 'Bulk Editing Process Successfully Cancelled', 'rank-math' );
 	}
 
 	/**

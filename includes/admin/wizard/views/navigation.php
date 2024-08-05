@@ -14,7 +14,7 @@ $current_step = array_search( $this->step, $array_keys, true );
 ?>
 <div class="wizard-navigation">
 
-	<a class="step step-label" href="<?php echo esc_url( apply_filters( 'rank_math/wizard/step/label_url', \RankMath\Helper::get_admin_url( 'wizard' ) ) ); ?>" title="<?php echo apply_filters( 'rank_math/wizard/step/label', esc_html__( 'Getting Started', 'rank-math' ) ); ?>"></a>
+	<a class="step step-label" href="<?php echo esc_url( apply_filters( 'rank_math/wizard/step/label_url', \RankMath\Helper::get_admin_url( 'wizard' ) ) ); ?>" title="<?php echo esc_html( apply_filters( 'rank_math/wizard/step/label', __( 'Getting Started', 'rank-math' ) ) ); ?>"></a>
 
 	<?php
 	foreach ( $output_steps as $step_key => $step ) :

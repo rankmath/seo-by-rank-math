@@ -71,7 +71,7 @@ class AJAX {
 		}
 
 		$args = [
-			'displayName' => get_bloginfo( 'sitename' ) . ' - ' . 'GA4',
+			'displayName' => get_bloginfo( 'sitename' ) . ' - GA4',
 			'parent'      => "accounts/{$account_id}",
 			'timeZone'    => empty( $timezone ) ? 'UTC' : $timezone,
 		];

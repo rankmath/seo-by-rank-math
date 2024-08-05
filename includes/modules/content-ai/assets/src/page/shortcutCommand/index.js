@@ -37,10 +37,14 @@ export default () => {
 	// Change caret position when ArrowLeft, Right is pressed.
 	const changeCaretPosition = ( start = false ) => {
 		const richTextContainer = document.activeElement
+		const textElement = richTextContainer.childNodes[ 1 ]
+		if ( isUndefined( textElement ) ) {
+			return
+		}
+
 		const sel = window.getSelection()
 		const range = document.createRange()
 
-		const textElement = richTextContainer.childNodes[ 1 ]
 		range.setStart( textElement, start ? 0 : textElement.length )
 		range.collapse( true )
 		sel.removeAllRanges()
