@@ -20,6 +20,7 @@ use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Traits\Meta;
 use RankMath\Role_Manager\Capability_Manager;
+use RankMath\Redirections\Redirection;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -267,6 +268,42 @@ class Admin extends WP_REST_Controller {
 
 		if ( $type === 'roleCapabilities' ) {
 			Helper::set_capabilities( $settings );
+			return true;
+		}
+
+		if ( $type === 'redirections' ) {
+			$redirection = Redirection::from(
+				[
+					'id'          => isset( $settings['id'] ) ? $settings['id'] : '',
+					'sources'     => $settings['sources'],
+					'url_to'      => $settings['url_to'],
+					'header_code' => $settings['header_code'],
+					'status'      => $settings['status'],
+				]
+			);
+			if ( $redirection->is_infinite_loop() ) {
+				if ( ! $redirection->get_id() ) {
+					$redirection->set_status( 'inactive' );
+					return rest_ensure_response(
+						[
+							'error' => __( 'The redirection you are trying to create may cause an infinite loop. Please check the source and destination URLs. The redirection has been deactivated.', 'rank-math' ),
+						]
+					);
+				}
+
+				return rest_ensure_response(
+					[
+						'error' => __( 'The redirection you are trying to update may cause an infinite loop. Please check the source and destination URLs.', 'rank-math' ),
+					]
+				);
+
+			}
+
+			if ( false === $redirection->save() ) {
+				return __( 'Please add at least one valid source URL.', 'rank-math' );
+			}
+
+			$this->do_action( 'redirection/saved', $redirection, $settings );
 			return true;
 		}
 

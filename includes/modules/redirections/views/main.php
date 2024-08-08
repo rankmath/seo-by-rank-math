@@ -15,7 +15,7 @@ $redirections = Helper::get_module( 'redirections' )->admin;
 $redirections->table->prepare_items();
 
 $is_new     = (bool) Param::get( 'new' );
-$is_editing = ! empty( Param::get( 'url' ) ) || ! empty( $_GET['urls'] ) || ! empty( $_REQUEST['log'] ) || ! empty( Param::request( 'redirect_uri' ) ) || $redirections->form->is_editing();
+$is_editing = ! empty( Param::get( 'url' ) ) || ! empty( $_GET['urls'] ) || ! empty( $_REQUEST['log'] ) || ! empty( Param::request( 'redirect_uri' ) );
 
 $is_importexport = ! empty( Param::get( 'importexport' ) );
 
@@ -31,11 +31,7 @@ $entries_status = Param::get( 'status' ) ?? 'any';
 
 	<div class="clear"></div>
 
-	<div class="rank-math-redirections-form rank-math-editcreate-form<?php echo $is_editing || $is_new ? ' is-open' : ''; ?> rank-math-page rank-math-box">
-
-		<?php $redirections->form->display(); ?>
-
-	</div>
+	<div id="rank-math-redirections-form"></div>
 
 	<div class="rank-math-redirections-form rank-math-importexport-form<?php echo $is_importexport ? ' is-open' : ''; ?>">
 

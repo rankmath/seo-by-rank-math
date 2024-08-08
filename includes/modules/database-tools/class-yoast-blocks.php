@@ -183,7 +183,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 	 */
 	public function find_posts() {
 		$posts = get_option( 'rank_math_yoast_block_posts' );
-		if ( false !== $posts ) {
+		if ( ! empty( $posts['posts'] ) ) {
 			return $posts;
 		}
 

@@ -503,6 +503,10 @@ class Image {
 	 * @param object $post The post object.
 	 */
 	private function set_content_image( $post ) {
+		if ( empty( $post ) || ! $post instanceof \WP_Post ) {
+			return;
+		}
+
 		$content = sanitize_post_field( 'post_content', $post->post_content, $post->ID );
 
 		// Early bail!

@@ -277,8 +277,12 @@ trait WordPress {
 			return false;
 		}
 
-		$image            = wp_get_attachment_image_src( $og_image, $size );
-		$image['caption'] = $image ? get_post_meta( $og_image, '_wp_attachment_image_alt', true ) : '';
+		$image = wp_get_attachment_image_src( $og_image, $size );
+		if ( empty( $image ) ) {
+			return false;
+		}
+
+		$image['caption'] = get_post_meta( $og_image, '_wp_attachment_image_alt', true );
 		return self::validate_image_data( $image );
 	}
 

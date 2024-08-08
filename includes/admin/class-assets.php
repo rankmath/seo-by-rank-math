@@ -66,6 +66,7 @@ class Assets implements Runner {
 		// Scripts.
 		wp_register_script( self::PREFIX . 'common', $js . 'common.js', [ 'jquery', 'wp-i18n', 'lodash' ], rank_math()->version, true );
 		wp_register_script( self::PREFIX . 'dashboard', $js . 'dashboard.js', [ 'jquery', 'clipboard', 'lodash', 'wp-components', 'wp-element' ], rank_math()->version, true );
+		wp_register_script( self::PREFIX . 'components', $js . 'components.js', [ 'lodash', 'wp-components', 'wp-element', 'wp-api-fetch' ], rank_math()->version, true );
 
 		// Select2.
 		wp_register_style( 'select2-rm', $vendor . 'select2/select2.min.css', null, '4.0.6-rc.1' );

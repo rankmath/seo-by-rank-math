@@ -72,13 +72,6 @@ class Admin extends Base {
 	public $admin;
 
 	/**
-	 * Form object.
-	 *
-	 * @var Form
-	 */
-	public $form;
-
-	/**
 	 * Import/Export object.
 	 *
 	 * @var Import_Export
@@ -111,19 +104,13 @@ class Admin extends Base {
 		}
 
 		if ( $this->page->is_current_page() || 'rank_math_save_redirections' === Param::post( 'action' ) ) {
-			$this->form = new Form();
-			$this->form->hooks();
-
 			$this->import_export = new Import_Export();
 			$this->import_export->hooks();
 		}
 
 		if ( $this->page->is_current_page() ) {
 			new Export();
-			$this->action( 'init', 'init' );
-			add_action( 'admin_enqueue_scripts', [ 'CMB2_Hookup', 'enqueue_cmb_css' ] );
-			Helper::add_json( 'maintenanceMode', esc_html__( 'Maintenance Code', 'rank-math' ) );
-			Helper::add_json( 'emptyError', __( 'This field must not be empty.', 'rank-math' ) );
+			$this->action( 'init', 'init', 21 );
 		}
 
 		add_action( 'rank_math/redirection/clean_trashed', 'RankMath\\Redirections\\DB::periodic_clean_trash' );
@@ -189,13 +176,19 @@ class Admin extends Base {
 				],
 				'assets'     => [
 					'styles'  => [
+						'wp-components'          => '',
 						'rank-math-common'       => '',
-						'rank-math-cmb2'         => '',
 						'rank-math-redirections' => $uri . '/assets/css/redirections.css',
 					],
 					'scripts' => [
+						'wp-element'             => '',
+						'wp-components'          => '',
 						'rank-math-common'       => '',
+						'rank-math-components'   => '',
 						'rank-math-redirections' => $uri . '/assets/js/redirections.js',
+					],
+					'json'    => [
+						'isNew' => Param::get( 'new' ),
 					],
 				],
 			]
@@ -238,6 +231,7 @@ class Admin extends Base {
 	 * Initialize module actions.
 	 */
 	public function init() {
+		Helper::add_json( 'redirections', $this->get_default_redirection() );
 		if ( ! empty( $_REQUEST['delete_all'] ) ) {
 			check_admin_referer( 'bulk-redirections' );
 			DB::clear_trashed();
@@ -292,6 +286,129 @@ class Admin extends Base {
 	}
 
 	/**
+	 * Output page title actions.
+	 *
+	 * @param bool $is_editing User is editing a redirection.
+	 * @return void
+	 */
+	public function page_title_actions( $is_editing ) {
+		$actions = [
+			'add'           => [
+				'class' => 'page-title-action rank-math-add-new-redirection' . ( $is_editing ? '-refresh' : '' ),
+				'href'  => Helper::get_admin_url( 'redirections', 'new=1' ),
+				'label' => __( 'Add New', 'rank-math' ),
+			],
+			'import_export' => [
+				'class' => 'page-title-action',
+				'href'  => Helper::get_admin_url( 'redirections', 'importexport=1' ),
+				'label' => __( 'Export Options', 'rank-math' ),
+			],
+			'learn_more'    => [
+				'class' => 'page-title-action',
+				'href'  => KB::get( 'redirections', 'SW Redirection Step' ),
+				'label' => __( 'Learn More', 'rank-math' ),
+			],
+			'settings'      => [
+				'class' => 'page-title-action',
+				'href'  => Helper::get_admin_url( 'options-general#setting-panel-redirections' ),
+				'label' => __( 'Settings', 'rank-math' ),
+			],
+		];
+
+		$actions = $this->do_filter( 'redirections/page_title_actions', $actions, $is_editing );
+
+		foreach ( $actions as $action_name => $action ) {
+			?>
+				<a class="<?php echo esc_attr( $action['class'] ); ?> rank-math-redirections-<?php echo esc_attr( $action_name ); ?>" href="<?php echo esc_attr( $action['href'] ); ?>" target="<?php echo $action_name === 'learn_more' ? '_blank' : ''; ?>"><?php echo esc_attr( $action['label'] ); ?></a>
+			<?php
+		}
+	}
+
+	/**
+	 * Get default Redirection to show on a new Redirection form.
+	 *
+	 * @return array
+	 */
+	private function get_default_redirection() {
+		$redirection = Param::get( 'redirection' );
+		if ( $redirection ) {
+			return $this->do_filter( 'redirections/table_item', DB::get_redirection_by_id( $redirection ) );
+		}
+
+		$url = Param::get( 'url' );
+		if ( $url ) {
+			return [
+				'header_code' => '301',
+				'status'      => 'active',
+				'sources'     => [
+					[
+						'pattern'    => esc_attr( $url ),
+						'comparison' => 'exact',
+					],
+				],
+			];
+		}
+
+		$urls = Param::get( 'urls', false, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		if ( $urls ) {
+			$urls    = array_map( 'esc_attr', $urls );
+			$sources = [];
+			foreach ( $urls as $url ) {
+				$sources[] = [
+					'pattern'    => $url,
+					'comparison' => 'exact',
+				];
+			}
+
+			return [
+				'header_code' => '301',
+				'status'      => 'active',
+				'sources'     => $sources,
+			];
+		}
+
+		if ( ! empty( $_REQUEST['log'] ) && is_array( $_REQUEST['log'] ) ) {
+			return [
+				'header_code' => '301',
+				'status'      => 'active',
+				'sources'     => $this->get_sources_for_log(),
+				'url_to'      => esc_url( home_url( '/' ) ),
+			];
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get sources for 404 log items.
+	 *
+	 * @return array
+	 */
+	private function get_sources_for_log() {
+		$logs = array_map( 'absint', $_REQUEST['log'] );
+		$logs = Monitor_DB::get_logs(
+			[
+				'ids'     => $logs,
+				'orderby' => '',
+				'limit'   => 1000,
+			]
+		);
+
+		$sources = [];
+		foreach ( $logs['logs'] as $log ) {
+			if ( empty( $log['uri'] ) ) {
+				continue;
+			}
+			$sources[] = [
+				'pattern'    => $log['uri'],
+				'comparison' => 'exact',
+			];
+		}
+
+		return $sources;
+	}
+
+	/**
 	 * Perform action on database.
 	 *
 	 * @param  string        $action Action to perform.
@@ -326,44 +443,5 @@ class Admin extends Base {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Output page title actions.
-	 *
-	 * @param bool $is_editing User is editing a redirection.
-	 * @return void
-	 */
-	public function page_title_actions( $is_editing ) {
-		$actions = [
-			'add'           => [
-				'class' => 'page-title-action rank-math-add-new-redirection' . ( $is_editing ? '-refresh' : '' ),
-				'href'  => Helper::get_admin_url( 'redirections', 'new=1' ),
-				'label' => __( 'Add New', 'rank-math' ),
-			],
-			'import_export' => [
-				'class' => 'page-title-action',
-				'href'  => Helper::get_admin_url( 'redirections', 'importexport=1' ),
-				'label' => __( 'Export Options', 'rank-math' ),
-			],
-			'learn_more'    => [
-				'class' => 'page-title-action',
-				'href'  => KB::get( 'redirections', 'SW Redirection Step' ),
-				'label' => __( 'Learn More', 'rank-math' ),
-			],
-			'settings'      => [
-				'class' => 'page-title-action',
-				'href'  => Helper::get_admin_url( 'options-general#setting-panel-redirections' ),
-				'label' => __( 'Settings', 'rank-math' ),
-			],
-		];
-
-		$actions = $this->do_filter( 'redirections/page_title_actions', $actions, $is_editing );
-
-		foreach ( $actions as $action_name => $action ) {
-			?>
-				<a class="<?php echo esc_attr( $action['class'] ); ?> rank-math-redirections-<?php echo esc_attr( $action_name ); ?>" href="<?php echo esc_attr( $action['href'] ); ?>"><?php echo esc_attr( $action['label'] ); ?></a>
-			<?php
-		}
 	}
 }

@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.6
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.224
+Stable tag: 1.0.225
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,14 +583,15 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.224 [July 24, 2024] =
-- Added: Support for Arabic language in [Content AI](https://rankmath.com/kb/configure-content-ai-global-settings/#languages)
-- Improved: Added hover state to SEO score buttons in the WordPress Editor toolbar for better accessibility
-- Improved: Prevented autoloading of plugin-specific options
-- Fixed: Incorrect use of the [Sitemap item filter](https://rankmath.com/kb/filters-hooks-api-developer/#filter-sitemap-item) in the [HTML sitemap](https://rankmath.com/kb/html-sitemap/)
-- Fixed: [Content AI test](https://rankmath.com/kb/score-100-in-tests/#used-content-ai) was being incorrectly marked as passed
-- Fixed: Update button state in the Elementor editor was not changing after making changes to the [Schema](https://rankmath.com/blog/elementor-seo/#add-schema-markup)
-- Fixed: [Bulk editing](https://rankmath.com/kb/bulk-editing-in-rank-math/) was affecting the page loading speed on some setups
+= 1.0.225 [Aug 08, 2024] =
+- Added: New [Blog Post Wizard AI Tool](https://rankmath.com/kb/content-ai-blog-post-wizard-tool/) to write SEO-friendly long-form articles with 1-click
+- Improved: Moved [Redirections](https://rankmath.com/kb/setting-up-redirections/) code to React to load blazing fast. We will gradually enhance the performance of other modules.
+- Fixed: Incorrect description in the [Course Schedule Description field](https://rankmath.com/kb/course-schema/#course-schedule)
+- Fixed: `Make Term Primary` string is now translation-ready
+- Fixed: [Yoast Block Converter tool](https://rankmath.com/kb/rank-math-status-and-tools/#yoast-block-converter) was not detecting the FAQ Block
+- Fixed: [SEO Settings in the Divi editor](https://rankmath.com/blog/divi-seo/) was not updating when the Admin Toolbar was disabled
+- Fixed: [Use of Power word in Title](https://rankmath.com/kb/score-100-in-tests/#use-of-power-word-in-title) test was not detecting words with diacritics
+- Fixed: PHP warning when an [Open Graph image](https://rankmath.com/kb/open-graph-meta-tags/#og-image) is deleted from the Media Library
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

@@ -246,7 +246,6 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Redirections\\DB' => __DIR__ . '/../..' . '/includes/modules/redirections/class-db.php',
         'RankMath\\Redirections\\Debugger' => __DIR__ . '/../..' . '/includes/modules/redirections/class-debugger.php',
         'RankMath\\Redirections\\Export' => __DIR__ . '/../..' . '/includes/modules/redirections/class-export.php',
-        'RankMath\\Redirections\\Form' => __DIR__ . '/../..' . '/includes/modules/redirections/class-form.php',
         'RankMath\\Redirections\\Import_Export' => __DIR__ . '/../..' . '/includes/modules/redirections/class-import-export.php',
         'RankMath\\Redirections\\Metabox' => __DIR__ . '/../..' . '/includes/modules/redirections/class-metabox.php',
         'RankMath\\Redirections\\Redirection' => __DIR__ . '/../..' . '/includes/modules/redirections/class-redirection.php',

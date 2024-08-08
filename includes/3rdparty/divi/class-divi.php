@@ -118,6 +118,7 @@ class Divi {
 	 * Add JSON data.
 	 */
 	public function add_json_data() {
+		$this->maybe_load_editor_deps();
 
 		if ( Helper::has_cap( 'onpage_snippet' ) ) {
 
@@ -351,5 +352,19 @@ class Divi {
 		];
 
 		return $schemas;
+	}
+
+	/**
+	 * Ensures required dependencies are loaded when toolbar is hidden.
+	 *
+	 * @return void
+	 */
+	private function maybe_load_editor_deps() {
+		if ( is_admin_bar_showing() ) {
+			return;
+		}
+
+		Helper::add_json( 'security', wp_create_nonce( 'rank-math-ajax-nonce' ) );
+		Helper::add_json( 'restNonce', ( wp_installing() && ! is_multisite() ) ? '' : wp_create_nonce( 'wp_rest' ) );
 	}
 }

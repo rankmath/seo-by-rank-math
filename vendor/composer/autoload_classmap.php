@@ -216,7 +216,6 @@ return array(
     'RankMath\\Redirections\\DB' => $baseDir . '/includes/modules/redirections/class-db.php',
     'RankMath\\Redirections\\Debugger' => $baseDir . '/includes/modules/redirections/class-debugger.php',
     'RankMath\\Redirections\\Export' => $baseDir . '/includes/modules/redirections/class-export.php',
-    'RankMath\\Redirections\\Form' => $baseDir . '/includes/modules/redirections/class-form.php',
     'RankMath\\Redirections\\Import_Export' => $baseDir . '/includes/modules/redirections/class-import-export.php',
     'RankMath\\Redirections\\Metabox' => $baseDir . '/includes/modules/redirections/class-metabox.php',
     'RankMath\\Redirections\\Redirection' => $baseDir . '/includes/modules/redirections/class-redirection.php',

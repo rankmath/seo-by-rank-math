@@ -307,7 +307,8 @@ class Rest extends WP_REST_Controller {
 	 */
 	public function create_post( WP_REST_Request $request ) {
 		$content       = $request->get_param( 'content' );
-		$title         = 'Content AI Post';
+		$title         = $request->get_param( 'title' );
+		$title         = $title ? $title : 'Content AI Post';
 		$blocks        = parse_blocks( $content );
 		$current_block = ! empty( $blocks ) ? current( $blocks ) : '';
 		if (
