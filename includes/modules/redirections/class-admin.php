@@ -19,6 +19,7 @@ use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Admin\Page;
+use RankMath\Monitor\DB as Monitor_DB;
 
 defined( 'ABSPATH' ) || exit;
 

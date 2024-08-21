@@ -58,7 +58,7 @@ trait Cache {
 	 * @return bool              Returns TRUE on success or FALSE on failure.
 	 */
 	public function set_cache( $key, $data, $group = '', $expire = 0 ) {
-		if ( false === wp_using_ext_object_cache() ) {
+		if ( ! $this->is_enabled() ) {
 			return false;
 		}
 
@@ -76,7 +76,7 @@ trait Cache {
 	 * @return bool|mixed Cached object value.
 	 */
 	public function get_cache( $key, $group ) {
-		if ( false === wp_using_ext_object_cache() ) {
+		if ( ! $this->is_enabled() ) {
 			return false;
 		}
 
@@ -91,7 +91,7 @@ trait Cache {
 	 * @return bool True if group was flushed, false otherwise.
 	 */
 	public function cache_flush_group( $group ) {
-		if ( false === wp_using_ext_object_cache() ) {
+		if ( ! $this->is_enabled() ) {
 			return false;
 		}
 
@@ -104,4 +104,16 @@ trait Cache {
 
 		return true;
 	}
+
+	/**
+	 * Check if cache is enabled.
+	 */
+	public function is_enabled() {
+		if ( wp_using_ext_object_cache() === false ) {
+			return false;
+		}
+
+		return apply_filters( 'rank_math/cache/enabled', true );
+	}
+
 }

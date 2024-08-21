@@ -368,15 +368,32 @@ class Post_Columns implements Runner {
 
 			++$count;
 
-			if ( isset( $children_pages ) && ! empty( $children_pages[ $page->ID ] ) ) {
-				foreach ( $children_pages[ $page->ID ] as $child_page ) {
-					$ids[] = $child_page->ID;
-					++$count;
-				}
-			}
+			$this->add_child_page_ids( $children_pages, $page->ID, $ids, $count );
 		}
 
 		return $ids;
+	}
+
+	/**
+	 * Add the child page IDs to the list of IDs to be processed.
+	 *
+	 * @param array $children_pages Child Pages.
+	 * @param int   $id             Current page ID.
+	 * @param array $ids            IDs to be processed.
+	 * @param int   $count          Counter.
+	 */
+	private function add_child_page_ids( $children_pages, $id, &$ids, &$count ) {
+		if ( empty( $children_pages ) || empty( $children_pages[ $id ] ) ) {
+			return;
+		}
+
+		foreach ( $children_pages[ $id ] as $child_page ) {
+			$id    = $child_page->ID;
+			$ids[] = $child_page->ID;
+			++$count;
+
+			$this->add_child_page_ids( $children_pages, $id, $ids, $count );
+		}
 	}
 
 	/**

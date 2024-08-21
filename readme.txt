@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.6
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.225
+Stable tag: 1.0.226
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,15 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.225 [Aug 08, 2024] =
-- Added: New [Blog Post Wizard AI Tool](https://rankmath.com/kb/content-ai-blog-post-wizard-tool/) to write SEO-friendly long-form articles with 1-click
-- Improved: Moved [Redirections](https://rankmath.com/kb/setting-up-redirections/) code to React to load blazing fast. We will gradually enhance the performance of other modules.
-- Fixed: Incorrect description in the [Course Schedule Description field](https://rankmath.com/kb/course-schema/#course-schedule)
-- Fixed: `Make Term Primary` string is now translation-ready
-- Fixed: [Yoast Block Converter tool](https://rankmath.com/kb/rank-math-status-and-tools/#yoast-block-converter) was not detecting the FAQ Block
-- Fixed: [SEO Settings in the Divi editor](https://rankmath.com/blog/divi-seo/) was not updating when the Admin Toolbar was disabled
-- Fixed: [Use of Power word in Title](https://rankmath.com/kb/score-100-in-tests/#use-of-power-word-in-title) test was not detecting words with diacritics
-- Fixed: PHP warning when an [Open Graph image](https://rankmath.com/kb/open-graph-meta-tags/#og-image) is deleted from the Media Library
+= 1.0.226 [Aug 21, 2024] =
+- Added: New filter to [disable the cache](https://rankmath.com/kb/filters-hooks-api-developer/#disable-cache) used in the plugin
+- Fixed: PHP error when [creating a redirection from the 404 Monitor page](https://rankmath.com/kb/fix-404-errors/#redirecting-the-problematic-url)
+- Fixed: [Bulk redirects](https://rankmath.com/kb/set-410-status-in-bulk/#set-a-410-status-code) weren't being created after the last update
+- Fixed: Missing [SEO details in the post column](https://rankmath.com/kb/bulk-editing-in-rank-math/#quick-editing) for second-level child pages
+- Fixed: UI issue in toolbar buttons when a long title is added to a post
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

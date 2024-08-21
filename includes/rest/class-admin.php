@@ -276,7 +276,7 @@ class Admin extends WP_REST_Controller {
 				[
 					'id'          => isset( $settings['id'] ) ? $settings['id'] : '',
 					'sources'     => $settings['sources'],
-					'url_to'      => $settings['url_to'],
+					'url_to'      => isset( $settings['url_to'] ) ? $settings['url_to'] : '',
 					'header_code' => $settings['header_code'],
 					'status'      => $settings['status'],
 				]
