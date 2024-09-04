@@ -17,6 +17,9 @@ use RankMath\Helpers\Param;
 use RankMath\Google\Analytics;
 use RankMath\Google\Authentication;
 use RankMath\Sitemap\Sitemap;
+use RankMath\Analytics\Workflow\Console;
+use RankMath\Analytics\Workflow\Inspections;
+use RankMath\Analytics\Workflow\Objects;
 use RankMath\Google\Console as Google_Analytics;
 
 defined( 'ABSPATH' ) || exit;
@@ -217,6 +220,10 @@ class AJAX {
 		if ( ! empty( array_diff( $prev, $value ) ) ) {
 			DB::purge_cache();
 		}
+
+		new Objects();
+		new Console();
+		new Inspections();
 
 		// Start fetching console data.
 		Workflow\Workflow::do_workflow(

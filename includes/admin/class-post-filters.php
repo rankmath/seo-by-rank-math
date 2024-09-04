@@ -173,7 +173,11 @@ class Post_Filters implements Runner {
 			'noindexed' => esc_html__( 'Articles noindexed', 'rank-math' ),
 		];
 
-		$options  = $this->do_filter( 'manage_posts/seo_filter_options', $options, $post_type );
+		$options = $this->do_filter( 'manage_posts/seo_filter_options', $options, $post_type );
+		if ( empty( $options ) ) {
+			return;
+		}
+
 		$selected = Param::get( 'seo-filter' );
 		?>
 		<select name="seo-filter" id="rank-math-seo-filter">

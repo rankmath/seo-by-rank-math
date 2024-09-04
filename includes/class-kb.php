@@ -65,6 +65,7 @@ class KB {
 		'other-settings'                  => 'https://rankmath.com/kb/general-settings/?#others',
 		'score-100'                       => 'https://rankmath.com/kb/score-100-in-tests/',
 		'content-length'                  => 'https://rankmath.com/kb/score-100-in-tests/?#content-length',
+		'toc'                             => 'https://rankmath.com/kb/score-100-in-tests/?#content-length',
 		'configure-sitemaps'              => 'https://rankmath.com/kb/configure-sitemaps/',
 		'sitemap-general'                 => 'https://rankmath.com/kb/configure-sitemaps/?#general',
 		'sitemap-post'                    => 'https://rankmath.com/kb/configure-sitemaps/?#posts',

@@ -336,9 +336,9 @@ class Post_Columns implements Runner {
 			);
 		}
 
+		$children_pages = [];
 		if ( empty( Param::request( 's' ) ) ) {
 			$top_level_pages = [];
-			$children_pages  = [];
 
 			foreach ( $pages as $page ) {
 				if ( $page->post_parent > 0 ) {

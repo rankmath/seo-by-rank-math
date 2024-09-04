@@ -49,6 +49,7 @@ class Common {
 		new Admin_Bar_Menu();
 		new Dashboard_Widget();
 		new Thumbnail_Overlay();
+		new Admin\Lock_Modified_Date();
 	}
 
 	/**

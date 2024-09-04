@@ -185,8 +185,8 @@ class Summary {
 		}
 
 		$average         = $query->one();
-		$average->total += property_exists( $stats, 'noData' ) ? $stats->noData : 0; // phpcs:ignore
-		if ( $average->total > 0 ) {
+		if ( $average && $average->total > 0 ) {
+			$average->total += property_exists( $stats, 'noData' ) ? $stats->noData : 0; // phpcs:ignore
 			$stats->average = \round( $average->score / $average->total, 2 );
 		}
 

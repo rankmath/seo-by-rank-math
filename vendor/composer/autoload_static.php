@@ -95,6 +95,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Admin\\Importers\\WP_Schema_Pro' => __DIR__ . '/../..' . '/includes/admin/importers/class-wp-schema-pro.php',
         'RankMath\\Admin\\Importers\\Yoast' => __DIR__ . '/../..' . '/includes/admin/importers/class-yoast.php',
         'RankMath\\Admin\\List_Table' => __DIR__ . '/../..' . '/includes/admin/class-list-table.php',
+        'RankMath\\Admin\\Lock_Modified_Date' => __DIR__ . '/../..' . '/includes/admin/class-lock-modified-date.php',
         'RankMath\\Admin\\Metabox\\IScreen' => __DIR__ . '/../..' . '/includes/admin/metabox/interface-screen.php',
         'RankMath\\Admin\\Metabox\\Metabox' => __DIR__ . '/../..' . '/includes/admin/metabox/class-metabox.php',
         'RankMath\\Admin\\Metabox\\Post_Screen' => __DIR__ . '/../..' . '/includes/admin/metabox/class-post-screen.php',

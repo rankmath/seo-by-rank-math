@@ -253,6 +253,7 @@ class Yoast extends Plugin_Importer {
 			$this->replace_image( get_post_meta( $post_id, '_yoast_wpseo_twitter-image', true ), 'post', 'rank_math_twitter_image', 'rank_math_twitter_image_id', $post_id );
 			$this->set_post_focus_keyword( $post_id );
 			$this->is_twitter_using_facebook( 'post', $post_id );
+			$this->add_schema_data( $post_id );
 		}
 
 		return $this->get_pagination_arg();
@@ -285,6 +286,28 @@ class Yoast extends Plugin_Importer {
 		}
 
 		return $this->get_pagination_arg();
+	}
+
+	/**
+	 * Import Schema Data.
+	 *
+	 * @param int $post_id Post ID.
+	 */
+	private function add_schema_data( $post_id ) {
+		$type = get_post_meta( $post_id, '_yoast_wpseo_schema_article_type', true );
+		if ( empty( $type ) || ! in_array( $type, [ 'Article', 'BlogPosting', 'NewsArticle' ], true ) ) {
+			return;
+		}
+
+		$data['@type']    = $type;
+		$data['metadata'] = [
+			'title'     => Helper::sanitize_schema_title( $type ),
+			'type'      => 'template',
+			'isPrimary' => 1,
+			'shortcode' => uniqid( 's-' ),
+		];
+
+		update_post_meta( $post_id, 'rank_math_schema_' . $type, $data );
 	}
 
 	/**

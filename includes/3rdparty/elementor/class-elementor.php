@@ -127,6 +127,10 @@ class Elementor {
 			'rank-math-app',
 		];
 
+		if ( wp_script_is( 'elementor-v2-editor-app-bar', 'registered' ) ) {
+			$deps[] = 'elementor-v2-editor-app-bar';
+		}
+
 		$mode = \Elementor\Core\Settings\Manager::get_settings_managers( 'editorPreferences' )->get_model()->get_settings( 'ui_theme' );
 		wp_deregister_style( 'rank-math-editor' );
 

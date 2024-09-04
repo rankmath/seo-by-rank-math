@@ -117,17 +117,17 @@
         },
         {
             "name": "donatj/phpuseragentparser",
-            "version": "v1.8.0",
-            "version_normalized": "1.8.0.0",
+            "version": "v1.9.0",
+            "version_normalized": "1.9.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/donatj/PhpUserAgent.git",
-                "reference": "b8c16fd6e963651c6d86f66cb782ce599d62418e"
+                "reference": "e807895c848f0e4a0f0001bbb1c99cfb7181111e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/b8c16fd6e963651c6d86f66cb782ce599d62418e",
-                "reference": "b8c16fd6e963651c6d86f66cb782ce599d62418e",
+                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/e807895c848f0e4a0f0001bbb1c99cfb7181111e",
+                "reference": "e807895c848f0e4a0f0001bbb1c99cfb7181111e",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +140,7 @@
                 "ext-json": "*",
                 "phpunit/phpunit": "~4.8|~9"
             },
-            "time": "2023-10-27T05:22:44+00:00",
+            "time": "2024-08-28T22:45:36+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -174,7 +174,7 @@
             ],
             "support": {
                 "issues": "https://github.com/donatj/PhpUserAgent/issues",
-                "source": "https://github.com/donatj/PhpUserAgent/tree/v1.8.0"
+                "source": "https://github.com/donatj/PhpUserAgent/tree/v1.9.0"
             },
             "funding": [
                 {

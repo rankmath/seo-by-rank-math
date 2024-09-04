@@ -13,6 +13,10 @@ namespace RankMath\Wizard;
 use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Helpers\Param;
+use RankMath\Analytics\Workflow\Workflow;
+use RankMath\Analytics\Workflow\Console;
+use RankMath\Analytics\Workflow\Inspections;
+use RankMath\Analytics\Workflow\Objects;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -104,6 +108,10 @@ class Search_Console implements Wizard_Step {
 			'exclude_loggedin' => 'on' === Param::post( 'exclude-loggedin' ) ? true : false,
 		];
 		update_option( 'rank_math_google_analytic_options', $analytic_value );
+
+		new Objects();
+		new Console();
+		new Inspections();
 
 		return true;
 	}

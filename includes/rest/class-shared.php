@@ -128,12 +128,14 @@ class Shared extends WP_REST_Controller {
 		if ( isset( $meta['permalink'] ) && ! empty( $meta['permalink'] ) && 'post' === $object_type ) {
 			$post     = get_post( $object_id );
 			$new_slug = wp_unique_post_slug( $meta['permalink'], $post->ID, $post->post_status, $post->post_type, $post->post_parent );
-			wp_update_post(
-				[
-					'ID'        => $object_id,
-					'post_name' => $new_slug,
-				]
-			);
+			if ( $new_slug !== $post->post_name ) {
+				wp_update_post(
+					[
+						'ID'        => $object_id,
+						'post_name' => $new_slug,
+					]
+				);
+			}
 			unset( $meta['permalink'] );
 		}
 

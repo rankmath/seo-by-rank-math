@@ -130,7 +130,7 @@ class Product_Redirection {
 			if (
 				isset( $sitepress_settings['custom_posts_sync_option'] ) &&
 				isset( $sitepress_settings['custom_posts_sync_option']['product'] ) &&
-				2 === (int) $sitepress_settings['custom_posts_sync_option']['product']
+				0 !== (int) $sitepress_settings['custom_posts_sync_option']['product']
 			) {
 				return $link;
 			}

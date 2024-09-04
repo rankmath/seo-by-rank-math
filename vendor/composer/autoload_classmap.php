@@ -65,6 +65,7 @@ return array(
     'RankMath\\Admin\\Importers\\WP_Schema_Pro' => $baseDir . '/includes/admin/importers/class-wp-schema-pro.php',
     'RankMath\\Admin\\Importers\\Yoast' => $baseDir . '/includes/admin/importers/class-yoast.php',
     'RankMath\\Admin\\List_Table' => $baseDir . '/includes/admin/class-list-table.php',
+    'RankMath\\Admin\\Lock_Modified_Date' => $baseDir . '/includes/admin/class-lock-modified-date.php',
     'RankMath\\Admin\\Metabox\\IScreen' => $baseDir . '/includes/admin/metabox/interface-screen.php',
     'RankMath\\Admin\\Metabox\\Metabox' => $baseDir . '/includes/admin/metabox/class-metabox.php',
     'RankMath\\Admin\\Metabox\\Post_Screen' => $baseDir . '/includes/admin/metabox/class-post-screen.php',

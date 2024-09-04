@@ -159,6 +159,7 @@ class Post_Screen implements IScreen {
 			'titleTemplate'       => Helper::get_settings( "titles.pt_{$post->post_type}_title", '%title% %sep% %sitename%' ),
 			'descriptionTemplate' => Helper::get_settings( "titles.pt_{$post->post_type}_description", '' ),
 			'showScoreFrontend'   => ! Helper::get_post_meta( 'dont_show_seo_score', $this->get_object_id() ),
+			'lockModifiedDate'    => ! empty( Helper::get_post_meta( 'lock_modified_date', $this->get_object_id() ) ),
 		];
 	}
 

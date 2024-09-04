@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.6
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.226
+Stable tag: 1.0.227
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,12 +583,16 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.226 [Aug 21, 2024] =
-- Added: New filter to [disable the cache](https://rankmath.com/kb/filters-hooks-api-developer/#disable-cache) used in the plugin
-- Fixed: PHP error when [creating a redirection from the 404 Monitor page](https://rankmath.com/kb/fix-404-errors/#redirecting-the-problematic-url)
-- Fixed: [Bulk redirects](https://rankmath.com/kb/set-410-status-in-bulk/#set-a-410-status-code) weren't being created after the last update
-- Fixed: Missing [SEO details in the post column](https://rankmath.com/kb/bulk-editing-in-rank-math/#quick-editing) for second-level child pages
-- Fixed: UI issue in toolbar buttons when a long title is added to a post
+= 1.0.227 [Sept 04, 2024] =
+- Added: Option to [lock the modified date](https://rankmath.com/kb/prevent-modified-date-from-being-updated/) of a post when there is no substantial change in the content
+- Improved: `rank_math/manage_posts/seo_filter_options` [filter](https://rankmath.com/kb/filters-hooks-api-developer/#remove-seo-filters-from-posts) can now be used to remove [SEO filters from Posts](https://rankmath.com/kb/bulk-editing-in-rank-math/#filtering)
+- Fixed: Issue with [Remove Product Base](https://rankmath.com/kb/general-settings/#remove-base) option while using WPML's multi-domain products
+- Fixed: Schema Article type data was not being [imported from Yoast](https://rankmath.com/kb/yoast-seo-migration/)
+- Fixed: Alignment issues in the [Link popup](https://rankmath.com/kb/link-controls/)
+- Fixed: Automatic anchor links were not functioning properly when `block_editor_settings_all` filter was being used
+- Fixed: PHP error on the [Analytics page](https://rankmath.com/kb/analytics/) when a site had no Analytics data
+- Fixed: Missing Analytics tables error on some setups
+- Fixed: PHP warning on the Page list after searching for a page
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

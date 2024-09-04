@@ -299,7 +299,7 @@ class Instant_Indexing extends Base {
 			return;
 		}
 
-		if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+		if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) || ! empty( Helper::get_post_meta( 'lock_modified_date', $post_id ) ) ) {
 			return;
 		}
 
