@@ -393,6 +393,10 @@ class Breadcrumbs {
 	private function add_crumbs_category() {
 		$this->maybe_add_blog();
 		$term = $GLOBALS['wp_query']->get_queried_object();
+		if ( empty( $term ) ) {
+			return;
+		}
+
 		$this->maybe_add_term_ancestors( $term );
 		$this->add_crumb( $this->get_breadcrumb_title( 'term', $term, $term->name ), get_term_link( $term ) );
 	}
@@ -554,7 +558,7 @@ class Breadcrumbs {
 	 * @return bool
 	 */
 	private function can_add_term_ancestors( $term ) {
-		if ( 0 === $term->parent || false === $this->settings['show_ancestors'] || false === is_taxonomy_hierarchical( $term->taxonomy ) ) {
+		if ( empty( $term ) || 0 === $term->parent || false === $this->settings['show_ancestors'] || false === is_taxonomy_hierarchical( $term->taxonomy ) ) {
 			return false;
 		}
 

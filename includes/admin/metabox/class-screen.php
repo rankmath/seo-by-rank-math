@@ -17,6 +17,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Helpers\Locale;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Helpers\Url;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -345,7 +346,8 @@ class Screen implements IScreen {
 			return;
 		}
 
-		if ( Admin_Helper::is_term_edit() || 'term' === $manual ) {
+		$doing_quick_edit = Param::request( 'action' ) === 'inline-save-tax';
+		if ( Admin_Helper::is_term_edit() || 'term' === $manual || $doing_quick_edit ) {
 			$this->screen = new Taxonomy_Screen();
 			return;
 		}

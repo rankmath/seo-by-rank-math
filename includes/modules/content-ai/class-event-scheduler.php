@@ -74,10 +74,29 @@ class Event_Scheduler {
 			return;
 		}
 
+		$registered = Admin_Helper::get_registration_data();
+		if ( empty( $registered ) || empty( $registered['username'] ) ) {
+			return;
+		}
+
 		$prompt_data   = [];
-		$data          = wp_remote_get( CONTENT_AI_URL . '/ai/default_prompts' );
+		$data          = wp_remote_post(
+			CONTENT_AI_URL . '/ai/default_prompts',
+			[
+				'headers' => [
+					'Content-type' => 'application/json',
+				],
+				'body'    => wp_json_encode(
+					[
+						'username' => $registered['username'],
+						'api_key'  => $registered['api_key'],
+						'site_url' => $registered['site_url'],
+					]
+				),
+			]
+		);
 		$response_code = wp_remote_retrieve_response_code( $data );
-		if ( is_wp_error( $data ) || 200 !== $response_code ) {
+		if ( is_wp_error( $data ) || ! in_array( $response_code, [ 200, 201 ], true ) ) {
 			return;
 		}
 

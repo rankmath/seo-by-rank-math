@@ -322,7 +322,7 @@ trait Content_AI {
 	 */
 	public static function save_default_prompts( $prompts ) {
 		$saved_prompts  = self::get_prompts();
-		$custom_prompts = ! is_array( $saved_prompts ) ? [] : array_map(
+		$custom_prompts = ! is_array( $saved_prompts ) || ! empty( $saved_prompts['error'] ) ? [] : array_map(
 			function( $prompt ) {
 				return $prompt['PromptCategory'] === 'custom' ? $prompt : false;
 			},

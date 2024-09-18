@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.6
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.227
+Stable tag: 1.0.228
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,16 +583,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.227 [Sept 04, 2024] =
-- Added: Option to [lock the modified date](https://rankmath.com/kb/prevent-modified-date-from-being-updated/) of a post when there is no substantial change in the content
-- Improved: `rank_math/manage_posts/seo_filter_options` [filter](https://rankmath.com/kb/filters-hooks-api-developer/#remove-seo-filters-from-posts) can now be used to remove [SEO filters from Posts](https://rankmath.com/kb/bulk-editing-in-rank-math/#filtering)
-- Fixed: Issue with [Remove Product Base](https://rankmath.com/kb/general-settings/#remove-base) option while using WPML's multi-domain products
-- Fixed: Schema Article type data was not being [imported from Yoast](https://rankmath.com/kb/yoast-seo-migration/)
-- Fixed: Alignment issues in the [Link popup](https://rankmath.com/kb/link-controls/)
-- Fixed: Automatic anchor links were not functioning properly when `block_editor_settings_all` filter was being used
-- Fixed: PHP error on the [Analytics page](https://rankmath.com/kb/analytics/) when a site had no Analytics data
-- Fixed: Missing Analytics tables error on some setups
-- Fixed: PHP warning on the Page list after searching for a page
+= 1.0.228 [Sept 18, 2024] =
+- Fixed: Missing option to [Generate Alt Texts](https://rankmath.com/kb/generate-alt-text-with-content-ai/#generate-alt-text-for-images-from-media-library) when the Elementor editor is active
+- Fixed: [Focus Keyword in the URL test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-the-url-primary-focus-keyword-only) was not working correctly when a period(`.`) was added to the post title
+- Fixed: [Capitalize Titles](https://rankmath.com/kb/titles-and-meta/#capitalize-titles) feature was incorrectly capitalizing the character after a period(`.`) in the [SERP Preview](https://rankmath.com/kb/general-tab/#previewing-your-metadata)
+- Fixed: PHP warnings on Elementor landing pages
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

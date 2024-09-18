@@ -164,8 +164,8 @@ class Slack extends OpenGraph {
 	 */
 	private function is_term() {
 		if ( is_category() || is_tag() || is_tax() ) {
-			global $wp_query;
-			return Helper::get_settings( sprintf( 'titles.tax_%s_slack_enhanced_sharing', $wp_query->get_queried_object()->taxonomy ) );
+			$object = get_queried_object();
+			return $object && Helper::get_settings( sprintf( 'titles.tax_%s_slack_enhanced_sharing', $object->taxonomy ) );
 		}
 
 		return false;
