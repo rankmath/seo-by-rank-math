@@ -279,14 +279,25 @@ class DB {
 	 * @return bool|array
 	 */
 	public static function get_redirection( $data ) {
+		$args = [];
+		if ( isset( $data['destination'] ) ) {
+			$args[] = [ 'url_to', '=', $data['destination'] ];
+		}
+
+		if ( isset( $data['type'] ) ) {
+			$args[] = [ 'header_code', '=', $data['type'] ];
+		}
+
+		if ( isset( $data['status'] ) ) {
+			$args[] = [ 'status', '=', $data['status'] ];
+		}
+
+		if ( empty( $args ) ) {
+			return false;
+		}
+
 		// Exist by destination.
-		$exist = self::get_redirection_by(
-			[
-				[ 'url_to', '=', $data['destination'] ],
-				[ 'header_code', '=', $data['type'] ],
-				[ 'status', '=', $data['status'] ],
-			]
-		);
+		$exist = self::get_redirection_by( $args );
 
 		if ( $exist ) {
 			return $exist;

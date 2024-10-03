@@ -302,7 +302,7 @@ class Slack extends OpenGraph {
 		 */
 		$words_per_minute = absint( $this->do_filter( 'frontend/time_to_read_wpm', 200 ) );
 
-		$words   = str_word_count( $content );
+		$words   = preg_match_all( '/\p{L}+/u', $content );
 		$minutes = floor( $words / $words_per_minute );
 
 		if ( $minutes > 0 ) {

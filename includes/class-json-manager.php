@@ -82,11 +82,7 @@ class Json_Manager {
 			return;
 		}
 
-		echo "<script type='text/javascript'>\n"; // CDATA and type='text/javascript' is not needed for HTML 5.
-		echo "/* <![CDATA[ */\n";
-		echo "$script\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $object_data used in the script is already escaped.
-		echo "/* ]]> */\n";
-		echo "</script>\n";
+		wp_print_inline_script_tag( $script, [ 'id' => 'rank-math-json' ] );
 	}
 
 	/**
@@ -115,6 +111,7 @@ class Json_Manager {
 			return '';
 		}
 
+		$object_data = apply_filters( 'rank_math/json_data', $object_data );
 		foreach ( (array) $object_data as $key => $value ) {
 			if ( ! is_string( $value ) ) {
 				continue;

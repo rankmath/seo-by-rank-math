@@ -54,6 +54,7 @@ class Product_WooCommerce {
 		$entity['category']         = Product::get_category( $product->get_id(), 'product_cat' );
 		$entity['mainEntityOfPage'] = [ '@id' => $jsonld->parts['canonical'] . '#webpage' ];
 
+		$this->set_gtin( $product, $entity );
 		$this->set_weight( $product, $entity );
 		$this->set_dimensions( $product, $entity );
 		$this->set_images( $product, $entity );
@@ -71,6 +72,20 @@ class Product_WooCommerce {
 
 		// Remaining Attributes.
 		$this->attributes->assign_remaining( $entity );
+	}
+
+	/**
+	 * Set product gtin.
+	 *
+	 * @param object $product Product instance.
+	 * @param array  $entity  Array of JSON-LD entity.
+	 */
+	private function set_gtin( $product, &$entity ) {
+		if ( ! method_exists( $product, 'get_global_unique_id' ) || empty( $product->get_global_unique_id() ) ) {
+			return;
+		}
+
+		$entity['gtin'] = $product->get_global_unique_id();
 	}
 
 	/**

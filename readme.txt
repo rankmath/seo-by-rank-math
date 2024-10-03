@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.6
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.228
+Stable tag: 1.0.229
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,11 +583,16 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.228 [Sept 18, 2024] =
-- Fixed: Missing option to [Generate Alt Texts](https://rankmath.com/kb/generate-alt-text-with-content-ai/#generate-alt-text-for-images-from-media-library) when the Elementor editor is active
-- Fixed: [Focus Keyword in the URL test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-the-url-primary-focus-keyword-only) was not working correctly when a period(`.`) was added to the post title
-- Fixed: [Capitalize Titles](https://rankmath.com/kb/titles-and-meta/#capitalize-titles) feature was incorrectly capitalizing the character after a period(`.`) in the [SERP Preview](https://rankmath.com/kb/general-tab/#previewing-your-metadata)
-- Fixed: PHP warnings on Elementor landing pages
+= 1.0.229 [Oct 03, 2024] =
+- Added: New filter to [modify localized JSON data](https://rankmath.com/kb/filters-hooks-api-developer/#modify-json-data) added to the frontend
+- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#remove-lock-modified-date) to remove the [Lock Modified Date option](https://rankmath.com/kb/prevent-modified-date-from-being-updated/)
+- Added: GTIN property from the WooCommerce GTIN field is now included in the [Product Schema](https://rankmath.com/kb/woocommerce-product-schema/)
+- Improved: Strengthened the security of the plugin's [Import Redirections](https://rankmath.com/kb/import-export-settings/#importing-your-settings) and Update User's SEO Data features to prevent potential exploitation by users with Administrator-level access. Thanks to Leo for revealing it responsibly
+- Fixed: Pagination issue in the [Rest of the Keywords section](https://rankmath.com/kb/analytics/#rest-of-the-keywords) in Analytics
+- Fixed: [Time to Read](https://rankmath.com/kb/slack-enhanced-sharing/) was not functioning properly on non-English sites
+- Fixed: Left arrow key was not working correctly in the text editor of the Avia Builder when the [Content AI](https://rankmath.com/content-ai/) module was enabled
+- Fixed: Missing SEO Metabox for taxonomies created using the PODS plugin
+- Fixed: [UI issue in the Instant Indexing History tab](https://rankmath.com/kb/how-to-use-indexnow/#history) when submitting long URLs
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

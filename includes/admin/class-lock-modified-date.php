@@ -11,6 +11,7 @@
 namespace RankMath\Admin;
 
 use RankMath\Helper;
+use RankMath\Helpers\Editor;
 use RankMath\Helpers\Param;
 use RankMath\Traits\Hooker;
 
@@ -104,6 +105,10 @@ class Lock_Modified_Date {
 	 * @param int   $post_id Post ID.
 	 */
 	private function lock_modified_date( $data, $post_id ) {
+		if ( ! Editor::can_add_lock_modified_date() ) {
+			return false;
+		}
+
 		if ( Param::request( 'action' ) === 'et_fb_ajax_save' ) {
 			if (
 				empty( $_REQUEST['et_fb_save_nonce'] ) ||

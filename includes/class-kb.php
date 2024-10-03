@@ -89,6 +89,7 @@ class KB {
 		'kb-seo-suite'                    => 'https://rankmath.com/kb/wordpress/seo-suite/',
 		'kb-search'                       => 'https://rankmath.com/kb/wordpress/seo-suite/?ht-kb-search=1',
 		'help-analytics'                  => 'https://rankmath.com/kb/analytics/',
+		'monitor-seo-performance'         => 'https://rankmath.com/kb/client-management/#num-3-1-monitor-seo-performance-business',
 		'top-5-winning-and-losing'        => 'https://rankmath.com/kb/analytics/?#top-5-winning-and-losing-posts-pro',
 		'using-ga4'                       => 'https://rankmath.com/kb/using-ga4/',
 		'local-seo-settings'              => 'https://rankmath.com/kb/local-seo/',
