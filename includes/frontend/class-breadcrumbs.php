@@ -118,7 +118,7 @@ class Breadcrumbs {
 			wp_parse_args(
 				$args,
 				[
-					'delimiter'   => '&nbsp;&#47;&nbsp;',
+					'separator'   => $this->settings['separator'],
 					'wrap_before' => '<nav aria-label="breadcrumbs" class="rank-math-breadcrumb"><p>',
 					'wrap_after'  => '</p></nav>',
 					'before'      => '',
@@ -145,14 +145,14 @@ class Breadcrumbs {
 			$link = $link ? '<a href="' . esc_url( $crumb[1] ) . '">' . esc_html( $crumb[0] ) . '</a>' :
 				'<span class="last">' . esc_html( $crumb[0] ) . '</span>';
 
-			$html .= $args['before'] . $link . $args['after'];
+			$html .= wp_kses_post( $args['before'] ) . $link . wp_kses_post( $args['after'] );
 
 			if ( $size !== $key + 1 ) {
-				$html .= '<span class="separator"> ' . wp_kses_post( $this->settings['separator'] ) . ' </span>';
+				$html .= '<span class="separator"> ' . wp_kses_post( $args['separator'] ) . ' </span>';
 			}
 		}
 
-		$html = $args['wrap_before'] . $html . $args['wrap_after'];
+		$html = wp_kses_post( $args['wrap_before'] ) . $html . wp_kses_post( $args['wrap_after'] );
 
 		/**
 		 * Change the breadcrumbs HTML output.

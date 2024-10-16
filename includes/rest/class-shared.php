@@ -122,8 +122,16 @@ class Shared extends WP_REST_Controller {
 		$object_type = $request->get_param( 'objectType' );
 		$meta        = apply_filters( 'rank_math/filter_metadata', $request->get_param( 'meta' ), $request );
 		$content     = $request->get_param( 'content' );
-		do_action( 'rank_math/pre_update_metadata', $object_id, $object_type, $content );
 
+		if ( $object_id === 0 ) {
+			$this->update_site_editor_homepage( $meta );
+			return [
+				'slug'    => '/',
+				'schemas' => [],
+			];
+		}
+
+		do_action( 'rank_math/pre_update_metadata', $object_id, $object_type, $content );
 		$new_slug = true;
 		if ( isset( $meta['permalink'] ) && ! empty( $meta['permalink'] ) && 'post' === $object_type ) {
 			$post     = get_post( $object_id );
@@ -194,7 +202,16 @@ class Shared extends WP_REST_Controller {
 				'type'              => 'integer',
 				'required'          => true,
 				'description'       => esc_html__( 'Object unique id', 'rank-math' ),
-				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
+				'validate_callback' => function( $param ) {
+					if ( empty( $param ) && 0 !== $param ) {
+						return new WP_Error(
+							'param_value_empty',
+							esc_html__( 'Sorry, field is empty which is not allowed.', 'rank-math' )
+						);
+					}
+
+					return true;
+				},
 			],
 			'meta'       => [
 				'required'          => true,
@@ -202,6 +219,32 @@ class Shared extends WP_REST_Controller {
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 		];
+	}
+
+	private function update_site_editor_homepage( $meta ) {
+		$meta_keys = [
+			'homepage_title'                => 'rank_math_title',
+			'homepage_description'          => 'rank_math_description',
+			'homepage_facebook_title'       => 'rank_math_facebook_title',
+			'homepage_facebook_description' => 'rank_math_facebook_description',
+			'homepage_facebook_image'       => 'rank_math_facebook_image',
+			'homepage_facebook_image_id'    => 'rank_math_facebook_image_id',
+			'homepage_robots'               => 'rank_math_robots',
+			'homepage_advanced_robots'      => 'rank_math_advanced_robots',
+			'breadcrumbs_home_label'        => 'rank_math_breadcrumb_title',
+		];
+
+		$settings = rank_math()->settings->all_raw();
+		foreach ( $meta_keys as $key => $meta_key ) {
+			if ( empty( $meta[ $meta_key ] ) ) {
+				continue;
+			}
+			$prefix = $key === 'breadcrumbs_home_label' ? 'general' : 'titles';
+
+			$settings[ $prefix ][ $key ] = $meta[ $meta_key ];
+		}
+
+		Helper::update_all_settings( $settings['general'], $settings['titles'], null );
 	}
 
 	/**

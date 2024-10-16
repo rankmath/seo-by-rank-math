@@ -352,6 +352,10 @@ class DB {
 			return false;
 		}
 
+		if ( array_key_exists( 'id', $args ) ) {
+			unset( $args['id'] );
+		}
+
 		$args = wp_parse_args(
 			$args,
 			[

@@ -436,11 +436,6 @@ trait WordPress {
 	 * @return bool
 	 */
 	public static function is_block_editor() {
-		// Check WordPress version.
-		if ( version_compare( get_bloginfo( 'version' ), '5.0.0', '<' ) ) {
-			return false;
-		}
-
 		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : false;
 
 		if ( ! $screen instanceof WP_Screen ) {
@@ -456,6 +451,17 @@ trait WordPress {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Is site editor enabled.
+	 *
+	 * @return bool
+	 */
+	public static function is_site_editor() {
+		global $pagenow;
+
+		return $pagenow === 'site-editor.php';
 	}
 
 	/**
@@ -651,6 +657,10 @@ trait WordPress {
 	 */
 	public static function get_post_type() {
 		global $pagenow;
+
+		if ( Helper::is_site_editor() ) {
+			return 'page';
+		}
 
 		$post_type = self::post_type_from_globals();
 		if ( false !== $post_type ) {

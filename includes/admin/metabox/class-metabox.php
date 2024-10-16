@@ -53,6 +53,10 @@ class Metabox implements Runner {
 			$this->action( 'cmb2_admin_init', 'add_main_metabox', 30 );
 			$this->action( 'rank_math/admin/enqueue_scripts', 'enqueue' );
 
+			if ( Helper::is_site_editor() ) {
+				$this->action( 'enqueue_block_editor_assets', 'enqueue' );
+			}
+
 			if ( Helper::has_cap( 'link_builder' ) ) {
 				$this->action( 'cmb2_admin_init', 'add_link_suggestion_metabox', 30 );
 			}
@@ -78,6 +82,7 @@ class Metabox implements Runner {
 		$this->screen->enqueue();
 		$this->screen->localize();
 		$this->enqueue_translation();
+		rank_math()->variables->setup();
 		rank_math()->variables->setup_json();
 
 		$is_gutenberg = Helper::is_block_editor() && \rank_math_is_gutenberg();

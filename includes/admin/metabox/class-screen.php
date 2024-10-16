@@ -170,6 +170,30 @@ class Screen implements IScreen {
 				'trendsUpgradeLabel'  => esc_html__( 'Upgrade', 'rank-math' ),
 				'trendsPreviewImage'  => esc_url( rank_math()->plugin_url() . 'assets/admin/img/trends-preview.jpg' ),
 				'currentEditor'       => $editor,
+				'homepageData'        => [
+					'assessor' => [
+						'powerWords'      => $this->power_words(),
+						'diacritics'      => $this->diacritics(),
+						'researchesTests' => $this->get_analysis(),
+						'hasBreadcrumb'   => Helper::is_breadcrumbs_enabled(),
+						'serpData'        => [
+							'title'               => Helper::get_settings( 'titles.homepage_title' ),
+							'description'         => Helper::get_settings( 'titles.homepage_description', '' ),
+							'titleTemplate'       => '%sitename% %page% %sep% %sitedesc%',
+							'descriptionTemplate' => '',
+							'focusKeywords'       => '',
+							'breadcrumbTitle'     => Helper::get_settings( 'general.breadcrumbs_home_label' ),
+							'robots'              => $this->normalize_robots( Helper::get_settings( 'titles.homepage_robots' ) ),
+							'advancedRobots'      => $this->normalize_advanced_robots( Helper::get_settings( 'titles.homepage_advanced_robots' ) ),
+
+							// Facebook.
+							'facebookTitle'       => Helper::get_settings( 'titles.homepage_facebook_title', '' ),
+							'facebookDescription' => Helper::get_settings( 'titles.homepage_facebook_description', '' ),
+							'facebookImage'       => Helper::get_settings( 'titles.homepage_facebook_image', '' ),
+							'facebookImageID'     => Helper::get_settings( 'titles.homepage_facebook_image_id', '' ),
+						],
+					],
+				],
 			]
 		);
 
@@ -341,7 +365,7 @@ class Screen implements IScreen {
 	 * @param string $manual To load any screen manually.
 	 */
 	public function load_screen( $manual = '' ) {
-		if ( Admin_Helper::is_post_edit() || 'post' === $manual ) {
+		if ( Admin_Helper::is_post_edit() || 'post' === $manual || Helper::is_site_editor() ) {
 			$this->screen = new Post_Screen();
 			return;
 		}

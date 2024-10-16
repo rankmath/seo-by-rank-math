@@ -193,7 +193,7 @@ $analytic_status = $is_analytics_connected ? 'Connected' : 'Not Connected';
 		} ?>
 
 		<p class="warning yellow">
-			<strong class="note"><?php echo esc_attr( 'Note', 'rank-math' ); ?></strong>
+			<strong class="note"><?php echo esc_html__( 'Note', 'rank-math' ); ?></strong>
 			<?php
 			/* translators: GA4 KB link */
 			echo sprintf(

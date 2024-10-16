@@ -232,8 +232,9 @@ class Rest extends WP_REST_Controller {
 		$keyword      = mb_strtolower( $request->get_param( 'keyword' ) );
 		$force_update = $request->get_param( 'forceUpdate' );
 		$keyword_data = get_option( 'rank_math_ca_data' );
+		$post_type    = 0 === $object_id ? 'page' : get_post_type( $object_id );
 
-		if ( ! in_array( get_post_type( $object_id ), (array) Helper::get_settings( 'general.content_ai_post_types' ), true ) ) {
+		if ( ! in_array( $post_type, (array) Helper::get_settings( 'general.content_ai_post_types' ), true ) ) {
 			return [
 				'data' => esc_html__( 'Content AI is not enabled on this Post type.', 'rank-math' ),
 			];

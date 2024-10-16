@@ -48,6 +48,18 @@ class Post extends WP_REST_Controller {
 				'args'                => $this->get_update_metadata_args(),
 			]
 		);
+
+		register_rest_field(
+			'page',
+			'rankMath',
+			[
+				'get_callback'        => [ $this, 'get_post_screen_meta' ],
+				'schema'              => null,
+				'permission_callback' => function() {
+					return current_user_can( 'read' );
+				},
+			]
+		);
 	}
 
 	/**
@@ -75,6 +87,15 @@ class Post extends WP_REST_Controller {
 		}
 
 		return [ 'success' => true ];
+	}
+
+	/**
+	 * Retrieves the Post screen metadata to be utilized when a Page is changed from the Full Site Editor.
+	 */
+	public function get_post_screen_meta() {
+		$screen = new \RankMath\Admin\Metabox\Screen();
+		$screen->load_screen( 'post' );
+		return $screen->get_values();
 	}
 
 	/**

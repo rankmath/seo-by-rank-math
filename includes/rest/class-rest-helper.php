@@ -82,7 +82,12 @@ class Rest_Helper {
 	 * @return true|WP_Error True if the request has read access, WP_Error object otherwise.
 	 */
 	public static function get_post_permissions_check( $request ) {
-		$post = self::get_post( $request->get_param( 'objectID' ) );
+		$object_id = $request->get_param( 'objectID' );
+		if ( $object_id === 0 ) {
+			return true;
+		}
+
+		$post = self::get_post( $object_id );
 		if ( is_wp_error( $post ) ) {
 			return $post;
 		}
