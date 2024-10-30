@@ -397,12 +397,6 @@ class Admin_Bar_Menu {
 				'meta'  => [ 'title' => esc_html__( 'Google Rich Results Test - Googlebot Desktop', 'rank-math' ) ],
 			],
 
-			'google-cache'               => [
-				'title' => esc_html__( 'Google Cache', 'rank-math' ),
-				'href'  => 'https://webcache.googleusercontent.com/search?q=cache:' . $url,
-				'meta'  => [ 'title' => esc_html__( 'See Google\'s cached version of your site', 'rank-math' ) ],
-			],
-
 			'fb-debugger'                => [
 				'title' => esc_html__( 'Facebook Debugger', 'rank-math' ),
 				'href'  => 'https://developers.facebook.com/tools/debug/sharing/?q=' . $url,

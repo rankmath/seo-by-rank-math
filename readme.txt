@@ -5,11 +5,11 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.6
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.230
+Stable tag: 1.0.231
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
-Rank Math SEO is the Best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic.
+Rank Math SEO is the best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic and improve your site's SEO ranking.
 
 == Description ==
 
@@ -24,7 +24,7 @@ Rank Math SEO is the Best WordPress SEO plugin with the features of many SEO and
 
 <a href="https://rankmath.com/wordpress/plugin/seo-suite/?utm_source=LP&utm_campaign=WP#features" target="_blank">Features</a> | <a href="https://rankmath.com/wordpress/plugin/seo-suite/?utm_source=LP&utm_campaign=WP#reasons" target="_blank">Why Choose Rank Math?</a> | <a href="https://rankmath.com/wordpress/plugin/seo-suite/?utm_source=LP&utm_campaign=WP#comparison" target="_blank">Compare</a> | <a href="https://rankmath.com/wordpress/plugin/seo-suite/?utm_source=LP&utm_campaign=WP#screenshots" target="_blank">Screenshots</a> | <a href="https://rankmath.com/wordpress/plugin/seo-suite/?utm_source=LP&utm_campaign=WP#benefits" target="_blank">Benefits</a>
 
-SEO might be the best and most **consistent source of traffic** for one's website, but it's not without its quirks. The constant process of optimizing your posts can sometimes take more time than actually writing the content. **If you always feel that you can do more on the SEO** front for your website but don't have the time, **then Rank Math is what you're looking for.**
+SEO might be the best and most **consistent source of traffic** for one's website, but it's not without its quirks. The constant process of optimizing your posts for SEO can sometimes take more time than actually writing the content. **If you always feel that you can do more on the SEO** front for your website but don't have the time, then **Rank Math SEO is what you're looking for.**
 
 Its host of **intelligent features** brings top SEO capabilities in your hands that were previously out of reach. The **smart automation** features give you the **power of an entire SEO team** with just a few clicks. A **well-thought-out design, powerful features, and years of development** make Rank Math a game-changing SEO plugin that will level the SEO playing field in your favor to help increase traffic.
 
@@ -583,12 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.230 [Oct 16, 2024] =
-- Added: [Rank Math SEO Metabox](https://rankmath.com/kb/on-page-seo/) can now be used in FSE Block Templates
-- Fixed: [Filter](https://rankmath.com/kb/filters-hooks-api-developer/#change-breadcrumb-settings) for changing the breadcrumb separator was not working
-- Fixed: Creating new [redirections](https://rankmath.com/kb/setting-up-redirections/) was not working on certain setups
-- Fixed: Incorrect title was added when editing an existing redirection rule
-- Fixed: Untranslated string appeared on [Analytics page](https://rankmath.com/kb/analytics/)
+= 1.0.231 [Oct 30, 2024] =
+- Improved: [Rank Math SEO Metabox in the Divi editor](https://rankmath.com/kb/general-tab/#seo-title-permalink-description) is now movable
+- Fixed: [Bulk Editing option](https://rankmath.com/kb/bulk-editing-in-rank-math/) was incorrectly being added to the Web Stories post type
+- Fixed: Web Stories posts were incorrectly included in the [Post Analytics](https://rankmath.com/kb/analytics/#post-analytics)
+- Fixed: [SERP Preview](https://rankmath.com/kb/general-tab/#seo-title-permalink-description) was not displaying description for post types that don't support excerpts
+- Removed: Google Cache from the [External Tools](https://rankmath.com/kb/quick-actions/#external-tools) as it is no longer supported
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

@@ -171,7 +171,7 @@ trait Post_Type {
 
 		$rank_math_allowed_post_types = [];
 		foreach ( self::get_accessible_post_types() as $post_type ) {
-			if ( false === apply_filters( 'rank_math/metabox/add_seo_metabox', Helper::get_settings( 'titles.pt_' . $post_type . '_add_meta_box', true ) ) ) {
+			if ( false === apply_filters( 'rank_math/metabox/add_seo_metabox', Helper::get_settings( 'titles.pt_' . $post_type . '_add_meta_box', 'web-story' !== $post_type ) ) ) {
 				continue;
 			}
 
