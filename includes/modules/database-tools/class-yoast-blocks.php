@@ -55,6 +55,13 @@ class Yoast_Blocks extends \WP_Background_Process {
 	protected $action = 'convert_yoast_blocks';
 
 	/**
+	 * Holds blocks for each post.
+	 *
+	 * @var array
+	 */
+	private static $yoast_blocks = [];
+
+	/**
 	 * Main instance.
 	 *
 	 * Ensure only one instance is loaded or can be loaded.
@@ -131,7 +138,8 @@ class Yoast_Blocks extends \WP_Background_Process {
 			$this->local_converter = new Yoast_Local_Converter();
 			$this->toc_converter   = new Yoast_TOC_Converter();
 			foreach ( $posts as $post_id ) {
-				$post = get_post( $post_id );
+				self::$yoast_blocks = [];
+				$post               = get_post( $post_id );
 				$this->convert( $post );
 			}
 			return false;
@@ -228,7 +236,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 	 * @return array
 	 */
 	private function parse_blocks( $content ) {
-		$parsed_blocks = parse_blocks( $content );
+		$parsed_blocks = $this->filter_parsed_blocks( parse_blocks( $content ) );
 
 		$blocks = [];
 		foreach ( $parsed_blocks as $block ) {
@@ -267,5 +275,31 @@ class Yoast_Blocks extends \WP_Background_Process {
 		}
 
 		return $blocks;
+	}
+
+	/**
+	 * Does a deep filter for blocks.
+	 *
+	 * @param array $blocks The blocks array.
+	 *
+	 * @return array
+	 */
+	private function filter_parsed_blocks( $blocks ) {
+		$block_names = [
+			'yoast-seo/table-of-contents',
+			'yoast/how-to-block',
+			'yoast/faq-block',
+		];
+
+		foreach ( $blocks as $block ) {
+			if ( in_array( $block['blockName'], $block_names, true ) ) {
+				self::$yoast_blocks[] = $block;
+			}
+			if ( ! empty( $block['innerBlocks'] ) ) {
+				$this->filter_parsed_blocks( $block['innerBlocks'] );
+			}
+		}
+
+		return self::$yoast_blocks;
 	}
 }

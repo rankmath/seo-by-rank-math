@@ -76,7 +76,7 @@ class Analytics extends Request {
 	public function add_ga4_accounts( $accounts ) {
 
 		$v4_response = $this->http_get( 'https://analyticsadmin.googleapis.com/v1alpha/accountSummaries?pageSize=200' );
-		if ( ! $this->is_success() || isset( $v4_response->error ) ) {
+		if ( ! $v4_response || ! $this->is_success() || isset( $v4_response->error ) ) {
 			return $accounts;
 		}
 		foreach ( $v4_response['accountSummaries'] as $account ) {

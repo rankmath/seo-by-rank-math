@@ -349,14 +349,30 @@ class Option_Center implements Runner {
 			}
 		}
 
-		$this->update_htaccess();
+		$this->maybe_update_htaccess();
 	}
 
 	/**
 	 * Update .htaccess.
 	 */
-	private function update_htaccess() {
+	private function maybe_update_htaccess() {
 		if ( empty( Param::post( 'htaccess_accept_changes' ) ) ) {
+			return;
+		}
+
+		if ( ! is_super_admin() || ! Helper::has_cap( 'general' ) || ! Helper::has_cap( 'edit_htaccess' ) ) {
+			Helper::add_notification(
+				esc_html__( 'You do not have permission to edit the .htaccess file.', 'rank-math' ),
+				[ 'type' => 'error' ]
+			);
+			return;
+		}
+
+		if ( ! Helper::is_edit_allowed() ) {
+			Helper::add_notification(
+				esc_html__( 'You do not have permission to edit the .htaccess file.', 'rank-math' ),
+				[ 'type' => 'error' ]
+			);
 			return;
 		}
 

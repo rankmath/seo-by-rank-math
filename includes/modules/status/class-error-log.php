@@ -85,6 +85,9 @@ class Error_Log {
 	 * Show information about the error log file.
 	 */
 	private function display_info() {
+		if ( ! is_array( $this->contents ) ) {
+			return;
+		}
 		?>
 		<div class="error-log-info" style="margin-top: 1rem;">
 			<code><?php echo esc_html( basename( $this->get_log_path() ) ); ?></code>

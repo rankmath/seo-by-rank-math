@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.6
+Tested up to: 6.7
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.231
+Stable tag: 1.0.232
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,12 +583,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.231 [Oct 30, 2024] =
-- Improved: [Rank Math SEO Metabox in the Divi editor](https://rankmath.com/kb/general-tab/#seo-title-permalink-description) is now movable
-- Fixed: [Bulk Editing option](https://rankmath.com/kb/bulk-editing-in-rank-math/) was incorrectly being added to the Web Stories post type
-- Fixed: Web Stories posts were incorrectly included in the [Post Analytics](https://rankmath.com/kb/analytics/#post-analytics)
-- Fixed: [SERP Preview](https://rankmath.com/kb/general-tab/#seo-title-permalink-description) was not displaying description for post types that don't support excerpts
-- Removed: Google Cache from the [External Tools](https://rankmath.com/kb/quick-actions/#external-tools) as it is no longer supported
+= 1.0.232 [Nov 13, 2024] =
+- Added: Compatibility with WordPress 6.7
+- Improved: Strengthened the security of the [edit .htaccess feature](https://rankmath.com/kb/general-settings/#edit-htaccess) to prevent potential exploitation by users with access to the General Settings. Thanks to Rafie Muhammad (Patchstack) for disclosing it responsibly
+- Improved: [Links Counter](https://rankmath.com/kb/link-counter/) by adding indexes to the `rank_math_internal_links` table
+- Fixed: [Links option](https://rankmath.com/kb/general-settings/#links) was causing issues on sites with a `<script>` tag in the body
+- Fixed: [Yoast Block converter](https://rankmath.com/kb/yoast-seo-migration/#yoast-block-converter) was not detecting blocks within a Group block
+- Fixed: PHP warning displayed on the [Analytics page](https://rankmath.com/kb/analytics/)
+- Fixed: PHP error on the [Error Log page](https://rankmath.com/kb/rank-math-status-and-tools/#error-log) on some setups
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
