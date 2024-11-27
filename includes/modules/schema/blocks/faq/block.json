@@ -1,0 +1,52 @@
+{
+	"apiVersion": 3,
+	"title": "FAQ by Rank Math",
+	"description": "Easily add Schema-ready, SEO-friendly, Frequently Asked Questions to your content.",
+	"name": "rank-math/faq-block",
+	"category": "rank-math-blocks",
+	"icon": "editor-ul",
+	"textdomain": "rank-math",
+ 	"keywords": [ "FAQ", "Frequently Asked Questions", "Schema", "SEO", "Structured Data", "Yoast", "Rank Math", "Block", "Markup", "Rich Snippet" ],
+	"editorScript": [
+		"lodash",
+		"file:./assets/js/index.js"
+	],
+	"editorStyle": "rank-math-block-admin",
+	"attributes": {
+		"listStyle": {
+			"type": "string",
+			"default": ""
+		},
+		"titleWrapper": {
+			"type": "string",
+			"default": "h3"
+		},
+		"sizeSlug": {
+			"type": "string",
+			"default": "thumbnail"
+		},
+		"questions": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "object"
+			}
+		},
+		"listCssClasses": {
+			"type": "string",
+			"default": ""
+		},
+		"titleCssClasses": {
+			"type": "string",
+			"default": ""
+		},
+		"contentCssClasses": {
+			"type": "string",
+			"default": ""
+		},
+		"textAlign": {
+			"type": "string",
+			"default": "left"
+		}
+	}
+}

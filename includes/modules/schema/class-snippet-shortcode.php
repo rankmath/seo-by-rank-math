@@ -49,27 +49,6 @@ class Snippet_Shortcode {
 		if ( ! is_admin() ) {
 			$this->filter( 'the_content', 'output_schema_in_content', 11 );
 		}
-
-		if ( ! function_exists( 'register_block_type' ) ) {
-			return;
-		}
-
-		register_block_type(
-			'rank-math/rich-snippet',
-			[
-				'render_callback' => [ $this, 'rich_snippet' ],
-				'attributes'      => [
-					'id'      => [
-						'default' => '',
-						'type'    => 'string',
-					],
-					'post_id' => [
-						'default' => '',
-						'type'    => 'integer',
-					],
-				],
-			]
-		);
 	}
 
 	/**
@@ -81,12 +60,12 @@ class Snippet_Shortcode {
 	 * @return string Shortcode output.
 	 */
 	public function rich_snippet( $atts ) {
-
 		$atts = shortcode_atts(
 			[
 				'id'        => false,
 				'post_id'   => Param::get( 'post_id' ) ? Param::get( 'post_id' ) : get_the_ID(),
 				'className' => '',
+				'is_block'  => false,
 			],
 			$atts,
 			'rank_math_rich_snippet'
@@ -107,9 +86,12 @@ class Snippet_Shortcode {
 		$html = '';
 
 		foreach ( $schemas as $schema ) {
-
 			$schema = $this->replace_variables( $schema, $post );
 			$schema = $this->do_filter( 'schema/shortcode/filter_attributes', $schema, $atts );
+
+			if ( empty( $schema ) ) {
+				continue;
+			}
 
 			/**
 			 * Change the Schema HTML output.
@@ -136,8 +118,9 @@ class Snippet_Shortcode {
 	 * @return string Shortcode output.
 	 */
 	public function get_snippet_content( $schema, $post, $atts ) {
-		wp_enqueue_style( 'rank-math-review-snippet', rank_math()->assets() . 'css/rank-math-snippet.css', null, rank_math()->version );
-
+		if ( empty( $atts['is_block'] ) ) {
+			wp_enqueue_style( 'rank-math-review-snippet', untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/blocks/schema/assets/css/schema.css', null, rank_math()->version );
+		}
 		$type         = \strtolower( $schema['@type'] );
 		$type         = preg_replace( '/[^a-z0-9_-]+/i', '', $type );
 		$this->post   = $post;

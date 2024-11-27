@@ -45,13 +45,13 @@ class Manager {
 			return;
 		}
 
-		$this->action( 'plugins_loaded', 'setup_modules' );
+		$this->action( 'after_setup_theme', 'setup_modules', 2 );
 		$this->filter( 'rank_math/modules', 'setup_core', 1 );
 		$this->filter( 'rank_math/modules', 'setup_admin_only', 1 );
 		$this->filter( 'rank_math/modules', 'setup_internals', 1 );
 		$this->filter( 'rank_math/modules', 'setup_3rd_party', 1 );
 
-		$this->action( 'plugins_loaded', 'load_modules' );
+		$this->action( 'after_setup_theme', 'load_modules', 2 );
 		add_action( 'rank_math/module_changed', [ '\RankMath\Admin\Watcher', 'module_changed' ], 10, 2 );
 		$this->action( 'rank_math/module_changed', 'watch_for_analytics', 10, 2 );
 	}

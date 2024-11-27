@@ -119,7 +119,6 @@ class Content_AI_Page {
 						'wp-blocks'            => '',
 						'wp-element'           => '',
 						'wp-editor'            => '',
-						'rank-math-block-faq'  => rank_math()->plugin_url() . 'assets/admin/js/blocks.js',
 						'rank-math-analyzer'   => rank_math()->plugin_url() . 'assets/admin/js/analyzer.js',
 						'rank-math-content-ai' => rank_math()->plugin_url() . 'includes/modules/content-ai/assets/js/content-ai.js',
 					],

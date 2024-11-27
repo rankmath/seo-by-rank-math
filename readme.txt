@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.7
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.232
+Stable tag: 1.0.233
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -132,8 +132,6 @@ Even with significantly more features than other plugins, Rank Math loads amazin
 
 * **Image SEO** - With Rank Math's perfect solution to add ALT & Title tags on the fly, to optimize images, showing inside the content, and that too for FREE, there is no reason to choose any other SEO solution that does not provide all the essential SEO features.
 
-* **[Web Stories SEO](https://rankmath.com/kb/google-web-stories/)** - Make any Story created with the Google's Web Stories plugin SEO-Ready. Automatically adds AMP-friendly Schema markup and Meta tags.
-
 * **[WooCommerce SEO](https://rankmath.com/blog/woocommerce-seo/)** - Optimizing your store products is easier with Rank Math. SEO Meta tags and Schema are automatically added but can be customized with total control as well. Rank Math has the most advanced SEO for WooCommerce.
 
 * **Google AMP SEO** - Accelerated Mobile Pages need to be prepared for search engines. What better way to do that than letting Rank Math use your regular SEO details and optimizing AMPs based on that data?
@@ -187,133 +185,6 @@ Even with significantly more features than other plugins, Rank Math loads amazin
 #### Detailed Setup Tutorial ####
 [youtube https://www.youtube.com/watch?v=cQLvCBVev3I]
 
-### List of Best Rank Math Features ###
-
-* Clean, & Simple User Interface
-* **Optimal Settings Pre-Selected**
-* Simple Setup Wizard
-	* Compatibility Check
-* **Auto Canonical URLs**
-* **LSI Keyword Tool Integrated**
-* **Google Search Console Integration**
-* **Google Keyword Ranking**
-* **Import Other Plugin Settings**
-	* 1 Click Import From <strong>Yoast SEO Plugin</strong>
-	* 1 Click Import From <strong>AIO SEO</strong>
-	* 1 Click Import From SEOPress & SEOPress Pro
-	* 1 Click Import From All In One Schema Rich Snippets & Schema Pro
-	* 1 Click Import From Redirection Plugin
-* **Role Manager**
-* **ACF Support**
-* **AMP Ready**
-* **bbPress & BuddyPress Modules**
-* **Google Schema Markup Integrated**
-	* <strong>Article Rich Snippet</strong>
-	* <strong>Review Rich Snippet</strong>
-	* Book Rich Snippet
-	* Course Rich Snippet
-	* Event Rich Snippet
-	* Job Posting Rich Snippet
-	* <strong>Local Business Rich Snippet</strong>
-	* <strong>193 Local Business Types</strong>
-	* Music Rich Snippet
-	* Person Rich Snippet
-	* Product Rich Snippet
-	* Recipe Rich Snippet
-	* Restaurant Rich Snippet
-	* Service Rich Snippet
-	* Software Application Rich Snippet
-	* Video Rich Snippet
-	* Author Stay Rating
-* **Social Media Optimization**
-	* **Add Overlay Icons On Social Images**
-	* Default OpenGraph Thumbnail
-	* **Auto Facebook Open Graph**
-	* Facebook Authorship
-	* Facebook Open Graph for Homepage
-	* **Automatic Twitter Meta Cards**
-	* Twitter Card for Homepage
-	* Default Twitter Card Type
-	* **Social Previews**
-* Add **Knowledge Graph**
-	* Represent site as a Person
-	* Represent site as a Company
-	* Set a Site Logo
-* **Advanced SEO Analysis Tool**
-	* **30 Detailed SEO Tests**
-	* SEO Analysis Score
-* **Automated Image SEO**
-* **Powerful Post Optimization**
-	* **Add SEO Meta Box to all post types**
-	* **Bulk Edit Titles & Descriptions**
-	* **Post Preview on Google**
-	* Content Analysis
-	* Control SEO For Single Pages
-	* Control The Title
-	* Control Meta Description
-	* **Auto Add Additional Meta Data**
-	* Control ROBOTS Meta
-	* **Choose a Primary Category**
-* Single Post/page Optimization
-	* **Focus Keyword**
-	* **Google Keyword Suggestion**
-	* **Optimize UNLIMITED Keywords (5 by default)**
-	* Choose Pillar Posts & Pages
-	* Internal Linking Suggestions
-	* Capitalize Titles
-	* SEO Failed Tests
-	* SEO Warnings
-* **<strong>XML Sitemap (New!)</strong>**
-* Module Based System
-* Choose Any Separator Character
-* Modify Global Meta
-* **Search Engine Verification Tools**
-	* Bing Site Verification
-	* Baidu Site Verification
-	* Yandex Site Verification
-	* **Google Site Verification**
-	* Pinterest Site Verification
-	* Norton Safe Web Site Verification
-* Advanced **Redirection Manager**
-	* **Smart & Automatic Post Redirects**
-	* 301 Redirection Type
-	* 302 Redirection Type
-	* 307 Redirection Type
-	* 410 Redirection Type
-	* 451 Redirection Type
-	* **Support for REGEX**
-	* Debug Redirections
-* Simple **404 Monitor**
-	* Advanced 404 Monitor
-* Advanced SEO Breadcrumbs
-	* Auto Show SEO Breadcrumbs
-* **Advanced Link Options**
-	* Nofollow All External Image Links
-	* <strong>Nofollow All External Links</strong>
-	* Open External Links in New Tab/Window
-	* Redirect Attachments to Parent
-	* <strong>Strip Category Base</strong>
-* Remove Stopwords from Permalinks
-* **Ping Search Engines**
-* **Local SEO Optimization**
-	* Contact Info Shortcode
-* **Deep Support For WooCommerce SEO**
-* **Compatible for EDD SEO (Easy Digital Downloads SEO)**
-* **Only 30k Lines of Code**
-	* PSR-4 Coding Standards (wherever possible)
-* **Optimize Different Archives**
-	* Optimize Author Archive Pages
-	* Optimize Date Archive Pages
-	* Optimize Archive Pages
-* **.htaccess Editor**
-* **Robots.txt Editor**
-* **Import/Export Settings**
-* Import/Export Redirections
-* Add Content Before the RSS Feed
-* Add Content After the RSS Feed
-* **Detailed Documentation**
-	* Contextual Help
-
 ### BIG Publications are Raving About Rank Math ###
 **<a href="https://rankmath.com/reviews/" target="_blank">Rank Math Reviews</a>**
 
@@ -350,7 +221,6 @@ and many more
 ✔ Advanced Schema Builder [Advanced SEOs can use this to create any complex Schema Markup)
 ✔ Schema Templates for Automation
 ✔ Conditional Schema Markup
-✔ Inbuilt Schema Code Preview and Validation
 ✔ Multiple Location Schema On Any Page (using the Shortcode)
 
 **Automation At Its BEST**
@@ -583,14 +453,13 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.232 [Nov 13, 2024] =
-- Added: Compatibility with WordPress 6.7
-- Improved: Strengthened the security of the [edit .htaccess feature](https://rankmath.com/kb/general-settings/#edit-htaccess) to prevent potential exploitation by users with access to the General Settings. Thanks to Rafie Muhammad (Patchstack) for disclosing it responsibly
-- Improved: [Links Counter](https://rankmath.com/kb/link-counter/) by adding indexes to the `rank_math_internal_links` table
-- Fixed: [Links option](https://rankmath.com/kb/general-settings/#links) was causing issues on sites with a `<script>` tag in the body
-- Fixed: [Yoast Block converter](https://rankmath.com/kb/yoast-seo-migration/#yoast-block-converter) was not detecting blocks within a Group block
-- Fixed: PHP warning displayed on the [Analytics page](https://rankmath.com/kb/analytics/)
-- Fixed: PHP error on the [Error Log page](https://rankmath.com/kb/rank-math-status-and-tools/#error-log) on some setups
+= 1.0.233 [Nov 27, 2024] =
+- Improved: Migrated [HowTo](https://rankmath.com/blog/howto-schema/#how-to-add-how-to-schema), [FAQ](https://rankmath.com/kb/faq-schema-block/#adding-faq-blocks-in-rank-math), and [Schema Block](https://rankmath.com/kb/review-schema/#schema-block) to the new `block.json` format
+- Fixed: PHP translation notices on WordPress 6.7
+- Fixed: Missing Zoom Out button in WordPress 6.7
+- Fixed: [Primary Term](https://rankmath.com/kb/how-to-choose-a-primary-category/#how-to-choose-a-primary-category) setting was not working in Classic Editor
+- Fixed: Block editor was incorrectly displaying the Attributes section for the paragraph block in WordPress 6.7
+- Fixed: UI issue in the [Prompts Library](https://rankmath.com/kb/how-to-use-rankbot-ai/#how-to-use-the-prompts-library)
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

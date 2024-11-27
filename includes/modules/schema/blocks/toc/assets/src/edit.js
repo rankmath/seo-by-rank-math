@@ -91,7 +91,7 @@ export default ( {
 	const latestHeadings = GetLatestHeadings( attributes.headings, excludeHeadings )
 	useEffect( () => {
 		if ( latestHeadings !== null ) {
-			__unstableMarkNextChangeAsNotPersistent();
+			__unstableMarkNextChangeAsNotPersistent()
 			setAttributes( { headings: latestHeadings } )
 		}
 	}, [ latestHeadings ] )

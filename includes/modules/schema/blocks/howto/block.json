@@ -1,0 +1,89 @@
+{
+	"apiVersion": 3,
+	"title": "HowTo by Rank Math",
+	"description": "Easily add Schema-ready, SEO-friendly, HowTo block to your content.",
+	"name": "rank-math/howto-block",
+	"category": "rank-math-blocks",
+	"icon": "editor-ol",
+	"textdomain": "rank-math",
+ 	"keywords": [ "HowTo", "Schema", "SEO", "Structured Data", "Yoast", "Rank Math", "Block", "Markup", "Rich Snippet" ],
+	"editorScript": [
+		"lodash",
+		"file:./assets/js/index.js"
+	],
+	"editorStyle": [
+		"rank-math-block-admin",
+		"file:./assets/css/howto.css"
+	],
+	"attributes": {
+		"hasDuration": {
+			"type": "boolean",
+			"default": false
+		},
+		"days": {
+			"type": "string",
+			"default": ""
+		},
+		"hours": {
+			"type": "string",
+			"default": ""
+		},
+		"minutes": {
+			"type": "string",
+			"default": ""
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"steps": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "object"
+			}
+		},
+		"sizeSlug": {
+			"type": "string",
+			"default": "full"
+		},
+		"imageID": {
+			"type": "integer"
+		},
+		"mainSizeSlug": {
+			"type": "string",
+			"default": "full"
+		},
+		"listStyle": {
+			"type": "string",
+			"default": ""
+		},
+		"timeLabel": {
+			"type": "string",
+			"default": ""
+		},
+		"titleWrapper": {
+			"type": "string",
+			"default": "h3"
+		},
+		"listCssClasses": {
+			"type": "string",
+			"default": ""
+		},
+		"titleCssClasses": {
+			"type": "string",
+			"default": ""
+		},
+		"contentCssClasses": {
+			"type": "string",
+			"default": ""
+		},
+		"textAlign": {
+			"type": "string",
+			"default": "left"
+		}
+	},
+	"supports": {
+		"multiple": false
+	}
+}

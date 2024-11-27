@@ -30,25 +30,8 @@ class Lock_Modified_Date {
 	 * Register hooks.
 	 */
 	public function __construct() {
-		$this->action( 'init', 'register_meta' );
 		$this->action( 'rest_api_init', 'init_rest_api' );
 		$this->action( 'wp_insert_post_data', 'update_modified_date', 999, 3 );
-	}
-
-	/**
-	 * Register Lock Modified Date meta so it can be used in the REST route to prevent WordPress from updating the last_modified date.
-	 */
-	public function register_meta() {
-		register_meta(
-			'post',
-			'rank_math_lock_modified_date',
-			[
-				'show_in_rest'  => true,
-				'type'          => 'boolean',
-				'single'        => true,
-				'auth_callback' => '__return_true',
-			]
-		);
 	}
 
 	/**

@@ -1,0 +1,143 @@
+// compileCompressed: ../css/$1.css
+
+/*!
+* Plugin:  Rank Math
+* URL: https://rankmath.com/wordpress/plugin/seo-suite/
+* Name:  rank-math-review-snippet.css
+*/
+
+// Common and Vendors
+@import '../../../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../../../assets/admin/scss/mixins';
+@import '../../../../../../../assets/admin/scss/variables';
+
+/**
+* Styling for Rank Math [rank_math_review_snippet] shortcode
+*/
+#rank-math-rich-snippet-wrapper {
+	overflow: hidden;
+
+	h5.rank-math-title {
+		display: block;
+		font-size: 18px;
+		line-height: 1.4;
+	}
+
+	.rank-math-review-image {
+		float: right;
+		max-width: 40%;
+		margin-left: 15px;
+	}
+
+	.rank-math-review-data {
+		margin-bottom: 15px;
+	}
+
+	.rank-math-total-wrapper {
+		width: 100%;
+		padding: 0 0 20px 0;
+		float: left;
+		clear: both;
+		position: relative;
+		box-sizing: border-box;
+
+		.rank-math-total {
+			border: 0;
+			display: block;
+			margin: 0;
+			width: auto;
+			float: left;
+			text-align: left;
+			padding: 0;
+			font-size: 24px;
+			line-height: 1;
+			font-weight: 700;
+			box-sizing: border-box;
+			overflow: hidden;
+		}
+
+		.rank-math-review-star {
+			float: left;
+			margin-left: 15px;
+			margin-top: 5px;
+			position: relative;
+			z-index: 99;
+			line-height: 1;
+
+			.rank-math-review-result-wrapper {
+				display: inline-block;
+				white-space: nowrap;
+				position: relative;
+				color: #e7e7e7;
+
+				.rank-math-review-result {
+					position: absolute;
+					top: 0;
+					left: 0;
+					overflow: hidden;
+					white-space: nowrap;
+					color:#ffbe01;
+				}
+
+				i {
+					font-size: 18px;
+					-webkit-text-stroke-width: 1px;
+					font-style: normal;
+					padding: 0 2px;
+					line-height: inherit;
+
+					&:before {
+						content: "\2605";
+					}
+				}
+			}
+		}
+	}
+}
+
+body.rtl {
+	#rank-math-rich-snippet-wrapper {
+		.rank-math-review-image {
+			float: left;
+			margin-left: 0;
+			margin-right: 15px;
+		}
+
+		.rank-math-total-wrapper {
+			.rank-math-total {
+				float: right;
+			}
+
+			.rank-math-review-star {
+				float: right;
+				margin-left: 0;
+				margin-right: 15px;
+
+				.rank-math-review-result {
+					left: auto;
+					right: 0;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 480px) {
+	#rank-math-rich-snippet-wrapper {
+		.rank-math-review-image {
+			display: block;
+			max-width: 100%;
+			width: 100%;
+			text-align: center;
+			margin-right: 0;
+		}
+
+		.rank-math-review-data {
+			clear: both;
+		}
+	}
+}
+
+.clear {
+	clear: both;
+}

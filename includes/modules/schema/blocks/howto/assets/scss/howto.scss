@@ -1,0 +1,106 @@
+// Common and Vendors
+@import '../../../../../../../assets/vendor/bourbon/bourbon';
+@import '../../../../../../../assets/admin/scss/mixins';
+@import '../../../../../../../assets/admin/scss/variables';
+
+// HowTo Block.
+#rank-math-howto {
+    .rank-math-media-placeholder {
+        position: relative;
+
+        display: inline-block;
+        float: none;
+
+        margin-bottom: 15px;
+        margin-left: 0;
+
+        text-align: left;
+    }
+
+    .components-base-control {
+        &__label {
+            font-weight: 600;
+        }
+
+        &__field {
+            margin-bottom: 0;
+        }
+
+        &__help {
+            font-style: italic;
+
+            margin: 0;
+        }
+    }
+
+    .components-text-control__input,
+    .components-textarea-control__input {
+        font-size: 1rem;
+
+        margin-bottom: 0;
+
+        color: #3a3a3a;
+        border-color: $gray;
+    }
+
+    .rank-math-howto {
+        &-duration {
+            &-label {
+                // Toggle Control.
+                .components-toggle-control {
+                    display: inline-block;
+
+                    margin-left: 8px;
+                }
+            }
+
+            &-fields {
+                margin-top: 10px;
+
+                .components-base-control {
+                    display: inline-block;
+
+                    width: 75px;
+                    margin-right: 5px;
+
+                    + .components-base-control {
+                        margin-bottom: 0!important;
+                    }
+
+                    > .components-base-control__field {
+                        margin: 0;
+                    }
+
+                    &:first-child {
+                        width: auto;
+                    }
+
+                    &.hidden {
+                        display: none;
+                    }
+                }
+            }
+
+            &-instructions {
+                font-size: 13px;
+                font-style: italic;
+
+                margin: 10px 0 5px;
+
+                opacity: .7;
+            }
+        }
+
+        &-estimated-cost {
+            display: flex;
+
+            flex-flow: row wrap;
+
+            > div:last-child {
+                margin-left: 10px;
+
+                align-self: flex-end;
+            }
+        }
+    }
+}
