@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.7
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.233
+Stable tag: 1.0.234
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -156,11 +156,7 @@ Even with significantly more features than other plugins, Rank Math loads amazin
 
 * **1-Click Import From AIO SEO** — Rank Math can also import all your settings from AIO SEO & All in One SEO Pack Pro in a single click. The transfer is instant, and you don't lose any SERP rankings as a result.
 
-* **1-Click Import From All In One Schema Rich Snippets** — Rank Math can also import all of AIO's Rich Snippet & Schema Pro settings in a few clicks, which help preserve your rich rankings when moving to Rank Math.
-
-* **1-Click Import From SEOPress SEO** — With a single click of your mouse, Rank Math can import all your settings from SEOPress & SEOPress Pro SEO plugin to itself. The transfer is instant, and you don't lose any SERP rankings as a result.
-
-* **1-Click Import From Redirection** — Moving all your redirects shouldn’t be a hassle. That’s why we have made importing redirections from the popular Redirection plugin as simple as clicking a button.
+* **1-Click Import From All in One Schema, SEOPress, and Redirection** —Rank Math allows seamless migration of settings from plugins like All In One Schema Rich Snippets, SEOPress (including Pro), and Redirection with just a single click, ensuring no loss of rankings or data during the transfer.
 
 * **Google Keyword Suggestion** — When deciding on focus keywords, Rank Math can help you discover more keywords by pulling in automatic keyword suggestions from Google.
 
@@ -453,13 +449,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.233 [Nov 27, 2024] =
-- Improved: Migrated [HowTo](https://rankmath.com/blog/howto-schema/#how-to-add-how-to-schema), [FAQ](https://rankmath.com/kb/faq-schema-block/#adding-faq-blocks-in-rank-math), and [Schema Block](https://rankmath.com/kb/review-schema/#schema-block) to the new `block.json` format
-- Fixed: PHP translation notices on WordPress 6.7
-- Fixed: Missing Zoom Out button in WordPress 6.7
-- Fixed: [Primary Term](https://rankmath.com/kb/how-to-choose-a-primary-category/#how-to-choose-a-primary-category) setting was not working in Classic Editor
-- Fixed: Block editor was incorrectly displaying the Attributes section for the paragraph block in WordPress 6.7
-- Fixed: UI issue in the [Prompts Library](https://rankmath.com/kb/how-to-use-rankbot-ai/#how-to-use-the-prompts-library)
+= 1.0.234 [Dec 11, 2024] =
+- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#update-404-pages-hook) to change the hook used for monitoring the 404 page
+- Updated: [Swedish Power Words](https://rankmath.com/blog/power-words/#swedish)
+- Improved: [Placeholder for the Address fields in Local SEO settings](https://rankmath.com/kb/local-seo/#address) to clarify the required value for the Country field
+- Fixed: [Missing Locations Sitemap](https://rankmath.com/kb/kml-sitemap/) issue that occurred after the last update
+- Fixed: Duplicate Schema data displayed on the frontend when the [Review location](https://rankmath.com/kb/event-schema/#review-location) was not set to Custom shortcode
+- Fixed: Default Open Graph image was not added to the Twitter tag on Taxonomy pages when the [Use Data from Facebook Tab option](https://rankmath.com/kb/meta-box-social-tab/#use-data-from-facebook-tab) was enabled
+- Fixed: UI issues on the [Content AI page](https://rankmath.com/kb/how-to-use-content-ai-tools/) in WordPress 6.7
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

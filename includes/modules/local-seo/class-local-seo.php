@@ -29,7 +29,7 @@ class Local_Seo {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		$this->action( 'after_setup_theme', 'location_sitemap' );
+		$this->action( 'after_setup_theme', 'location_sitemap', 11 );
 		$this->filter( 'rank_math/settings/title', 'add_settings' );
 		$this->filter( 'rank_math/json_ld', 'organization_or_person', 9, 2 );
 	}

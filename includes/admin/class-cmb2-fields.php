@@ -179,7 +179,7 @@ class CMB2_Fields implements Runner {
 			'addressLocality' => 'Locality',
 			'addressRegion'   => 'Region',
 			'postalCode'      => 'Postal Code',
-			'addressCountry'  => 'Country',
+			'addressCountry'  => '2-letter Country Code (ISO 3166-1)',
 		];
 
 		foreach ( array_keys( $value ) as $id ) :

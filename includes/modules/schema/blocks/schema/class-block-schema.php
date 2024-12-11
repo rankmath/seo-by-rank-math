@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Schema Block class.
  */
-class Block_Schema extends Snippet_Shortcode {
+class Block_Schema {
 
 	use Hooker;
 
@@ -59,8 +59,6 @@ class Block_Schema extends Snippet_Shortcode {
 			return;
 		}
 
-		parent::__construct();
-
 		register_block_type(
 			RANK_MATH_PATH . 'includes/modules/schema/blocks/schema/block.json',
 			[
@@ -77,6 +75,11 @@ class Block_Schema extends Snippet_Shortcode {
 	public function rich_snippet( $attributes ) {
 		$attributes['is_block'] = true;
 
-		return parent::rich_snippet( $attributes );
+		$output = '';
+		foreach ( $attributes as $key => $value ) {
+			$output .= $key . '="' . esc_attr( $value ) . '" ';
+		}
+
+		return do_shortcode( '[rank_math_rich_snippet ' . trim( $output ) . ']' );
 	}
 }

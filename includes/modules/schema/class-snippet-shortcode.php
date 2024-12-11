@@ -64,7 +64,7 @@ class Snippet_Shortcode {
 			[
 				'id'        => false,
 				'post_id'   => Param::get( 'post_id' ) ? Param::get( 'post_id' ) : get_the_ID(),
-				'className' => '',
+				'classname' => '',
 				'is_block'  => false,
 			],
 			$atts,
@@ -138,7 +138,7 @@ class Snippet_Shortcode {
 			$type = 'restaurant';
 		}
 
-		$class = ! empty( $atts['className'] ) ? $atts['className'] : '';
+		$class = ! empty( $atts['classname'] ) ? $atts['classname'] : '';
 
 		ob_start();
 		?>

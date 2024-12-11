@@ -253,14 +253,17 @@ class Monitor {
 	 * @return string WP hook.
 	 */
 	private function get_hook() {
-		if ( defined( 'CT_VERSION' ) ) {
-			return 'oxygen_enqueue_frontend_scripts';
-		}
+		$hook = defined( 'CT_VERSION' ) ?
+			'oxygen_enqueue_frontend_scripts' :
+			(
+				function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ?
+				'wp_head' :
+				'get_header'
+			);
 
-		if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
-			return 'wp_head';
-		}
-
-		return 'get_header';
+		/**
+		 * Allow developers to change the action hook that will trigger the 404 capture.
+		*/
+		return $this->do_filter( '404_monitor/hook', $hook );
 	}
 }
