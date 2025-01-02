@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.7
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.234
+Stable tag: 1.0.235
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -449,14 +449,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.234 [Dec 11, 2024] =
-- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#update-404-pages-hook) to change the hook used for monitoring the 404 page
-- Updated: [Swedish Power Words](https://rankmath.com/blog/power-words/#swedish)
-- Improved: [Placeholder for the Address fields in Local SEO settings](https://rankmath.com/kb/local-seo/#address) to clarify the required value for the Country field
-- Fixed: [Missing Locations Sitemap](https://rankmath.com/kb/kml-sitemap/) issue that occurred after the last update
-- Fixed: Duplicate Schema data displayed on the frontend when the [Review location](https://rankmath.com/kb/event-schema/#review-location) was not set to Custom shortcode
-- Fixed: Default Open Graph image was not added to the Twitter tag on Taxonomy pages when the [Use Data from Facebook Tab option](https://rankmath.com/kb/meta-box-social-tab/#use-data-from-facebook-tab) was enabled
-- Fixed: UI issues on the [Content AI page](https://rankmath.com/kb/how-to-use-content-ai-tools/) in WordPress 6.7
-
+= 1.0.235 [Jan 02, 2025] =
+- Added: [New Filters](https://rankmath.com/kb/filters-hooks-api-developer/#where-clause-html-sitemap) to modify the query used for generating the [HTML Sitemap](https://rankmath.com/kb/html-sitemap/)
+- Improved: Tooltip text in the [SEO Performance Overview Report](https://rankmath.com/kb/analytics/#seo-performance) for better clarity
+- Fixed: [Primary Category](https://rankmath.com/kb/how-to-choose-a-primary-category/#for-permalinks) was not used in post links
+- Fixed: Setting a Primary Category on WooCommerce products caused a redirection loop on certain setups
+- Fixed: [Redirection Fallback Behavior to Homepage](https://rankmath.com/kb/general-settings/#fallback-behaviour) was not working on sites using plain URLs
+- Fixed: [Email Reports](https://rankmath.com/kb/seo-email-reporting/#enabling-email-reports) was not working after the last plugin update
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

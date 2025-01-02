@@ -11,6 +11,7 @@
 namespace RankMath\Admin;
 
 use RankMath\Runner;
+use RankMath\Helpers\Str;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Admin_Helper;
 
@@ -50,6 +51,33 @@ class CMB2_Fields implements Runner {
 		}
 
 		$this->filter( 'cmb2_sanitize_toggle', 'sanitize_toggle', 10, 2 );
+		$this->filter( 'cmb2_field_arguments_raw', 'default_value', 10, 2 );
+	}
+
+	/**
+	 * Set a default value in default_cb to prevent the callback function from executing on the site.
+	 *
+	 * @see https://github.com/CMB2/CMB2/issues/750
+	 *
+	 * @param array  $args The field arguments.
+	 * @param object $cmb2 The CMB2 object.
+	 */
+	public function default_value( $args, $cmb2 ) {
+		if (
+			! Str::starts_with( 'rank-math', trim( $cmb2->cmb_id ) ) ||
+			! isset( $args['default'] ) ||
+			! is_callable( $args['default'] )
+		) {
+			return $args;
+		}
+
+		$args['default_cb'] = function() use ( $args ) {
+			return $args['default'];
+		};
+
+		$args['default'] = null;
+
+		return $args;
 	}
 
 	/**

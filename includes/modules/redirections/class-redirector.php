@@ -264,8 +264,7 @@ class Redirector {
 	 * Do the fallback strategy here.
 	 */
 	private function fallback() {
-		$wp_redirect_admin_locations = $this->do_filter( 'redirection/fallback_exclude_locations', [ 'login', 'admin', 'dashboard' ] );
-		if ( ! is_404() || ! $this->uri || in_array( $this->uri, $wp_redirect_admin_locations, true ) ) {
+		if ( ! $this->can_run_fallback() ) {
 			return;
 		}
 
@@ -407,5 +406,41 @@ class Redirector {
 	 */
 	private function is_amp_endpoint() {
 		return \function_exists( 'is_amp_endpoint' ) && \function_exists( 'amp_is_canonical' ) && is_amp_endpoint() && ! amp_is_canonical();
+	}
+
+	/**
+	 * Gets the post id for the redirections' fallback.
+	 *
+	 * @return int|void
+	 */
+	private static function get_redirections_fallback_post_id() {
+		$fall_back = Helper::get_settings( 'general.redirections_fallback' );
+
+		if ( in_array( $fall_back, [ 'default', 'homepage' ], true ) ) {
+			return (int) get_option( 'page_on_front' );
+		}
+
+		if ( Helper::get_settings( 'general.redirections_custom_url' ) ) {
+			return url_to_postid( Helper::get_settings( 'general.redirections_custom_url' ) );
+		}
+	}
+
+	/**
+	 * Check if the fall_back redirect can run in the current contexts.
+	 *
+	 * @return bool
+	 */
+	private function can_run_fallback() {
+		if ( ! is_404() ) {
+			return false;
+		}
+
+		if ( ! $this->uri && $this->query_string && Str::starts_with( 'p=', trim( $this->query_string ) ) ) {
+			$this->query_string = '';
+			return true;
+		}
+
+		$wp_redirect_admin_locations = $this->do_filter( 'redirection/fallback_exclude_locations', [ 'login', 'admin', 'dashboard' ] );
+		return $this->uri && ! in_array( $this->uri, $wp_redirect_admin_locations, true );
 	}
 }

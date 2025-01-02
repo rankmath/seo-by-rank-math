@@ -1,15 +1,15 @@
-# Copyright (C) 2024 Rank Math SEO
+# Copyright (C) 2025 Rank Math SEO
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.234\n"
+"Project-Id-Version: Rank Math SEO 1.0.235\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-12-11T06:33:41+00:00\n"
+"POT-Creation-Date: 2025-01-02T10:39:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -2655,13 +2655,13 @@ msgstr ""
 msgid "Total Keywords"
 msgstr ""
 
-msgid "Total number of keywords your site ranking below 100 position."
+msgid "Total number of keywords your site ranks for within top 100 positions."
 msgstr ""
 
 msgid "Average Position"
 msgstr ""
 
-msgid "Average position of all the ranking keywords below 100 position."
+msgid "Average position of all the keywords ranking within top 100 positions."
 msgstr ""
 
 #. translators: Auth URL

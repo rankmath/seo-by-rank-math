@@ -47,7 +47,7 @@ class Analytics_Common {
 
 		new GTag();
 		new Analytics_Stats();
-		$this->action( 'plugins_loaded', 'maybe_init_email_reports', 15 );
+		$this->action( 'init', 'maybe_init_email_reports' );
 		$this->action( 'init', 'maybe_enable_email_reports', 20 );
 		$this->action( 'cmb2_save_options-page_fields_rank-math-options-general_options', 'maybe_update_report_schedule', 20, 3 );
 
@@ -316,13 +316,13 @@ class Analytics_Common {
 			],
 			'total-keywords'    => [
 				'label' => __( 'Total Keywords', 'rank-math' ),
-				'desc'  => __( 'Total number of keywords your site ranking below 100 position.', 'rank-math' ),
+				'desc'  => __( 'Total number of keywords your site ranks for within top 100 positions.', 'rank-math' ),
 				'value' => true,
 				'data'  => $data->keywords,
 			],
 			'average-position'  => [
 				'label'  => __( 'Average Position', 'rank-math' ),
-				'desc'   => __( 'Average position of all the ranking keywords below 100 position.', 'rank-math' ),
+				'desc'   => __( 'Average position of all the keywords ranking within top 100 positions.', 'rank-math' ),
 				'value'  => true,
 				'revert' => true,
 				'data'   => $data->position,

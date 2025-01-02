@@ -100,7 +100,7 @@ class Email_Reports {
 	 */
 	public function hooks() {
 		$this->action( 'rank_math/analytics/email_report_event', 'email_report' );
-		$this->action( 'template_redirect', 'maybe_debug' );
+		$this->action( 'wp_loaded', 'maybe_debug' );
 
 		$this->action( 'rank_math/analytics/email_report_html', 'replace_variables' );
 		$this->action( 'rank_math/analytics/email_report_html', 'strip_comments' );
