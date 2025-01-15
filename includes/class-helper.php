@@ -253,8 +253,14 @@ class Helper {
 		// Clear caches on WPEngine-hosted sites.
 		if ( class_exists( 'WpeCommon' ) ) {
 			\WpeCommon::purge_memcached();
-			\WpeCommon::clear_maxcdn_cache();
 			\WpeCommon::purge_varnish_cache();
+
+			// Clear WPEngine CDN cache. Added this condition to avoid PHP error as we are not sure when the new clear_cdn_cache method was added.
+			if ( method_exists( 'WpeCommon', 'clear_cdn_cache' ) ) {
+				\WpeCommon::clear_cdn_cache();
+			} else {
+				\WpeCommon::clear_maxcdn_cache();
+			}
 		}
 
 		// Clear Varnish caches.

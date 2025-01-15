@@ -56,6 +56,25 @@ class Rest_Helper {
 	}
 
 	/**
+	 * Checks whether a given request has permission to update schema.
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return true|WP_Error True if the request has read access, WP_Error object otherwise.
+	 */
+	public static function get_schema_permissions_check( $request ) {
+		if ( ! Helper::is_module_active( 'rich-snippet' ) || ! Helper::has_cap( 'onpage_snippet' ) ) {
+			return new WP_Error(
+				'rest_cannot_edit',
+				__( 'Sorry, you are not allowed to create/update schema.', 'rank-math' ),
+				[ 'status' => rest_authorization_required_code() ]
+			);
+		}
+
+		return self::get_object_permissions_check( $request );
+	}
+
+	/**
 	 * Checks whether a given request has permission to read types.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.

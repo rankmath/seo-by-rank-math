@@ -12,6 +12,8 @@
 
 namespace RankMath\Rest;
 
+use RankMath\CMB2;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -66,7 +68,7 @@ class Sanitize {
 				$sanitized_value = esc_url_raw( $value );
 				break;
 			default:
-				$sanitized_value = is_array( $value ) ? $this->loop_sanitize( $value ) : \RankMath\CMB2::sanitize_textfield( $value );
+				$sanitized_value = is_array( $value ) ? $this->loop_sanitize( $value ) : CMB2::sanitize_textfield( $value );
 		}
 
 		return $sanitized_value;
@@ -96,7 +98,7 @@ class Sanitize {
 		$sanitized_value = [];
 
 		foreach ( $array  as $key => $value ) {
-			$sanitized_value[ $key ] = is_array( $value ) ? $this->loop_sanitize( $value, $method ) : $this->$method( $key, $value );
+			$sanitized_value[ CMB2::sanitize_textfield( $key ) ] = is_array( $value ) ? $this->loop_sanitize( $value, $method ) : $this->$method( $key, $value );
 		}
 
 		return $sanitized_value;
