@@ -195,7 +195,7 @@ class Thumbnail_Overlay {
 		$stamp_width  = imagesx( $stamp );
 		$stamp_height = imagesy( $stamp );
 
-		$img_width  = imagesx( $image );
+		$img_width = imagesx( $image );
 
 		if ( $stamp_width > $img_width ) {
 			$stamp = imagescale( $stamp, $img_width );

@@ -235,7 +235,7 @@ trait Content_AI {
 		$outputs = self::get_outputs();
 
 		$output = array_map(
-			function( $item ) use ( $endpoint ) {
+			function ( $item ) use ( $endpoint ) {
 				return [
 					'key'    => $endpoint,
 					'output' => $item,
@@ -323,7 +323,7 @@ trait Content_AI {
 	public static function save_default_prompts( $prompts ) {
 		$saved_prompts  = self::get_prompts();
 		$custom_prompts = ! is_array( $saved_prompts ) || ! empty( $saved_prompts['error'] ) ? [] : array_map(
-			function( $prompt ) {
+			function ( $prompt ) {
 				return $prompt['PromptCategory'] === 'custom' ? $prompt : false;
 			},
 			$saved_prompts

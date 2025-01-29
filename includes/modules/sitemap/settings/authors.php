@@ -46,6 +46,18 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
+		'id'      => 'include_authors_without_posts',
+		'type'    => 'toggle',
+		'name'    => esc_html__( 'Include Authors Without Posts', 'rank-math' ),
+		'desc'    => esc_html__( 'Enable this option to include authors in the sitemap even if they have not created any posts. This ensures all author archives are listed, regardless of content availability.', 'rank-math' ),
+		'default' => 'off',
+		'classes' => 'rank-math-advanced-option cmb2-top-border',
+		'dep'     => $dep,
+	]
+);
+
+$cmb->add_field(
+	[
 		'id'                => 'exclude_roles',
 		'type'              => 'multicheck',
 		'name'              => esc_html__( 'Exclude User Roles', 'rank-math' ),

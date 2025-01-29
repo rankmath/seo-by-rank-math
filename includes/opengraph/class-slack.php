@@ -353,7 +353,13 @@ class Slack extends OpenGraph {
 		$data = [];
 
 		$author = $wp_query->get_queried_object();
-		if ( ! $author ) {
+		if ( ! $author || ! is_object( $author ) || ! isset( $author->ID ) ) {
+			return $data;
+		}
+
+		// Check with get_userdata() to avoid issues with guest authors.
+		$userdata = get_userdata( $author->ID );
+		if ( ! $userdata || ! is_object( $userdata ) || ! isset( $userdata->ID ) ) {
 			return $data;
 		}
 

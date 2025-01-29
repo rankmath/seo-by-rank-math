@@ -446,6 +446,10 @@ class Breadcrumbs {
 		global $author;
 
 		$userdata = get_userdata( $author );
+		if ( ! $userdata || ! is_object( $userdata ) || ! isset( $userdata->ID ) ) {
+			return;
+		}
+
 		$this->add_crumb( sprintf( $this->strings['archive_format'], $this->get_breadcrumb_title( 'user', $userdata->ID, $userdata->display_name ) ) );
 	}
 

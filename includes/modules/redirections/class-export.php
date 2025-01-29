@@ -111,7 +111,7 @@ class Export {
 
 		foreach ( $sources as $from ) {
 			$url = $from['pattern'];
-			if ( 'regex' !== $from['comparison'] && strpos( $url, '?' ) !== false || strpos( $url, '&' ) !== false ) {
+			if ( ( 'regex' !== $from['comparison'] && strpos( $url, '?' ) !== false ) || strpos( $url, '&' ) !== false ) {
 				$url_parts = wp_parse_url( $url );
 				$url       = $url_parts['path'];
 				$output[]  = sprintf( 'RewriteCond %%{QUERY_STRING} ^%s$', preg_quote( $url_parts['query'], null ) );

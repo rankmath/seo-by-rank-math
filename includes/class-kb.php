@@ -57,6 +57,7 @@ class KB {
 		'breadcrumbs'                     => 'https://rankmath.com/kb/general-settings/?#breadcrumbs',
 		'webmaster-tools'                 => 'https://rankmath.com/kb/general-settings/?#webmaster-tools',
 		'edit-robotstxt'                  => 'https://rankmath.com/kb/general-settings/?#edit-robotstxt',
+		'robotstxt-tool'                  => 'https://rankmath.com/tools/robots-txt/',
 		'edit-htaccess'                   => 'https://rankmath.com/kb/general-settings/?#edit-htaccess',
 		'woocommerce-settings'            => 'https://rankmath.com/kb/general-settings/?#woo-commerce',
 		'404-monitor-settings'            => 'https://rankmath.com/kb/general-settings/?#404-monitor',

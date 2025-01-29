@@ -10,8 +10,6 @@ use RankMath\Sitemap\Router;
 use RankMath\Frontend\Breadcrumbs;
 use RankMath\Sitemap\Sitemap;
 
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Is Gutenberg enabled.
  *

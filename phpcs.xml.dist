@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="SEO by Rank Math" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+
+	<description>A custom set of rules to check for in SEO by Rank Math</description>
+
+	<file>includes</file>
+	<file>rank-math.php</file>
+	<file>uninstall.php</file>
+
+	<!-- Only scan PHP files. -->
+	<arg name="extensions" value="php"/>
+
+	<!-- Strip the filepaths down to the relevant bit. -->
+	<arg name="basepath" value="."/>
+
+	<!-- Exclude paths -->
+	<exclude-pattern>*/index.php</exclude-pattern>
+
+	<arg value="sp"/><!-- Show sniff and progress -->
+	<arg name="colors"/><!-- Show results with colors -->
+	<arg name="parallel" value="50"/><!-- Enables parallel processing when available for faster results. -->
+	<arg name="extensions" value="php"/><!-- Limit to PHP files -->
+
+	<!-- Include the WordPress-Extra standard. -->
+	<rule ref="WordPress-Extra">
+	</rule>
+
+	<rule ref="WordPress">
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+		<exclude name="WordPress.PHP.YodaConditions"/>
+	</rule>
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+
+	<!-- Let's also check that everything is properly documented. -->
+	<rule ref="WordPress-Docs"/>
+
+	<!-- Add in some extra rules from other standards. -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+	<rule ref="Generic.Commenting.Todo"/>
+
+	<!-- Check for PHP cross-version compatibility. -->
+	<!--
+	To enable this, the PHPCompatibilityWP standard needs
+	to be installed.
+	See the readme for installation instructions:
+	https://github.com/PHPCompatibility/PHPCompatibilityWP
+	For more information, also see:
+	https://github.com/PHPCompatibility/PHPCompatibility
+	-->
+	<config name="testVersion" value="7.4-"/>
+	<config name="minimum_supported_wp_version" value="6.3"/>
+
+	<!--
+	To get the optimal benefits of using WPCS, we should add a couple of
+	custom properties.
+	Adjust the values of these properties to fit our needs.
+
+	For information on additional custom properties available, check out
+	the wiki:
+	https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
+	-->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="rank-math"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.ValidHookName">
+		<properties>
+			<property name="additionalWordDelimiters" value="-/."/>
+		</properties>
+	</rule>
+</ruleset>

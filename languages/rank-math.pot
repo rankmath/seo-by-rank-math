@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.236\n"
+"Project-Id-Version: Rank Math SEO 1.0.237\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-14T03:32:42+00:00\n"
+"POT-Creation-Date: 2025-01-29T03:35:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -5013,6 +5013,12 @@ msgid "Include in HTML Sitemap"
 msgstr ""
 
 msgid "Include author archives in the HTML sitemap if it's enabled."
+msgstr ""
+
+msgid "Include Authors Without Posts"
+msgstr ""
+
+msgid "Enable this option to include authors in the sitemap even if they have not created any posts. This ensures all author archives are listed, regardless of content availability."
 msgstr ""
 
 msgid "Exclude User Roles"

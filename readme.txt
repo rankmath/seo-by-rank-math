@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.7
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.236
+Stable tag: 1.0.237
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -449,12 +449,11 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.236 [Jan 15, 2025] =
-- Added: [NEW!] Option to [fix the SEO tests](https://rankmath.com/kb/fix-seo-tests-with-content-ai/) using AI in 1-click
-- Added: Option to remove the selected [About & Contact page from Local SEO settings](https://rankmath.com/kb/local-seo/#about-page)
-- Improved: Strengthened the security of the plugin's Schema feature, thanks to Webbernaut for responsibly disclosing the issue
-- Fixed: Pasting any text into the [Source URL field of Redirections](https://rankmath.com/kb/setting-up-redirections/#source-urls) was overwriting the existing text
-- Fixed: Missing border in the Destination field of Redirections
-- Fixed: PHP Deprecated warning related to `WpeCommon::clear_maxcdn_cache()`
+= 1.0.237 [Jan 29, 2025] =
+- Added: [Option to include Authors](https://rankmath.com/kb/configure-sitemaps/#include-authors-without-posts) without any posts in the Sitemap
+- Improved: Updated the [Redirections](https://rankmath.com/kb/setting-up-redirections/) sources field type to `longtext` to support large texts
+- Fixed: Content Analysis was not working in [Elementor editor](https://rankmath.com/blog/elementor-seo/) when the Optimized Markup feature of Elementor was enabled
+- Fixed: [Content Analysis](https://rankmath.com/kb/score-100-in-tests) was not working properly when special characters were added to the [Focus Keyword](https://rankmath.com/kb/what-is-a-focus-keyword/)
+- Fixed: PHP warning on Guest Author pages created using the Co-Author Plus plugin
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

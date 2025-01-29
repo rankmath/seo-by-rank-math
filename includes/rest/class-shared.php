@@ -371,7 +371,7 @@ class Shared extends WP_REST_Controller {
 		}
 
 		$meta_id = absint( \str_replace( 'rank_math_delete_schema-', '', $meta_key ) );
-		$schemas = DB::get_schemas( $object_id );
+		$schemas = DB::get_schemas( $object_id, "{$object_type}meta" );
 		// Early bail if meta_id doesn't match with the schema data of the current post.
 		if ( empty( $schemas ) || ! in_array( "schema-{$meta_id}", array_keys( $schemas ), true ) ) {
 			return;

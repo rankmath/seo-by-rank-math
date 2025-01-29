@@ -7,6 +7,7 @@
  */
 
 use RankMath\Robots_Txt;
+use RankMath\KB;
 use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
@@ -65,7 +66,6 @@ if ( $desc ) {
 			'content' => wp_kses_post( $desc ),
 		]
 	);
-	return;
 } elseif ( 0 === $data['public'] ) {
 	$cmb->add_field(
 		[
@@ -82,5 +82,20 @@ if ( $desc ) {
 			),
 		]
 	);
-	return;
 }
+
+$cmb->add_field(
+	[
+		'id'      => 'robots_tester',
+		'type'    => 'notice',
+		'what'    => 'info',
+		'classes' => 'nob nopt rank-math-notice',
+		'content' => wp_kses_post(
+			sprintf(
+				// Translators: placeholder is the URL to the robots.txt tester tool.
+				__( 'Test and edit your live robots.txt file with our <a href="%1$s" target="_blank">Robots.txt Tester</a>.', 'rank-math' ),
+				KB::get( 'robotstxt-tool', 'Options Panel Robots.txt Tester' ) . '&url=' . rawurlencode( home_url( '/' ) )
+			)
+		),
+	]
+);

@@ -209,6 +209,11 @@ class Author implements Provider {
 		];
 
 		$args = $this->do_filter( 'sitemap/author/query', wp_parse_args( $args, $defaults ) );
+
+		if ( Helper::get_settings( 'sitemap.include_authors_without_posts' ) ) {
+			$args['has_published_posts'] = false;
+		}
+
 		return get_users( $args );
 	}
 
@@ -258,7 +263,9 @@ class Author implements Provider {
 		// We're not supporting sitemaps for author pages for attachments.
 		unset( $public_post_types['attachment'] );
 
-		$args['has_published_posts'] = array_keys( $public_post_types );
+		if ( ! Helper::get_settings( 'sitemap.include_authors_without_posts' ) ) {
+			$args['has_published_posts'] = array_keys( $public_post_types );	
+		}
 
 		return $args;
 	}
@@ -270,6 +277,7 @@ class Author implements Provider {
 	 */
 	private function get_index_users() {
 		global $wpdb;
+		$include_authors_without_posts = Helper::get_settings( 'sitemap.include_authors_without_posts' );
 		$exclude_users       = Helper::get_settings( 'sitemap.exclude_users' );
 		$exclude_roles       = Helper::get_settings( 'sitemap.exclude_roles' );
 		$exclude_users_query = ! $exclude_users ? '' : 'AND post_author NOT IN ( ' . esc_sql( $exclude_users ) . ' )';
@@ -291,6 +299,13 @@ class Author implements Provider {
 
 		$meta_query .= $exclude_roles_query;
 
+		$include_authors_without_posts_query = $include_authors_without_posts ? '' : "AND u.ID IN (
+			SELECT post_author
+			FROM {$wpdb->posts} as p
+			WHERE p.post_status = 'publish' AND p.post_password = ''
+			{$exclude_users_query}
+		)";
+
 		$sql = "
 		SELECT u.ID, umt1.meta_value as last_update
 		FROM {$wpdb->users} as u
@@ -298,12 +313,7 @@ class Author implements Provider {
 		    LEFT JOIN {$wpdb->usermeta} AS umt ON ( u.ID = umt.user_id AND umt.meta_key = 'wp_capabilities' )
 		    LEFT JOIN {$wpdb->usermeta} AS umt1 ON ( u.ID = umt1.user_id AND umt1.meta_key = 'last_update' )
 		    WHERE ( {$meta_query} )
-		    AND u.ID IN (
-		    	SELECT post_author
-		    	FROM {$wpdb->posts} as p
-		    	WHERE p.post_status = 'publish' AND p.post_password = ''
-		    	{$exclude_users_query}
-		    	)
+		    {$include_authors_without_posts_query}
 		ORDER BY umt1.meta_value DESC
 		 ";
 

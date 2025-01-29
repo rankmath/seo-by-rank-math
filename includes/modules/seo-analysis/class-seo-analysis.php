@@ -90,7 +90,7 @@ class SEO_Analysis {
 	 */
 	public function add_tab_previews( $file, $current_tab ) {
 		if ( 'competitor_analyzer' === $current_tab ) {
-			$file = dirname( __FILE__ ) . '/views/competitor-analysis.php';
+			$file = __DIR__ . '/views/competitor-analysis.php';
 		}
 
 		return $file;

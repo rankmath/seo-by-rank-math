@@ -52,29 +52,29 @@ class WP_Schema_Pro extends Plugin_Importer {
 	/**
 	 * Convert Schema Pro variables if needed.
 	 *
-	 * @param string $string Value to convert.
+	 * @param string $value Value to convert.
 	 *
 	 * @return string
 	 */
-	public function convert_variables( $string ) {
-		$string = str_replace( 'blogname', '%sitename%', $string );
-		$string = str_replace( 'blogdescription', '%sitedesc%', $string );
-		$string = str_replace( 'site_url', get_bloginfo( 'url' ), $string );
-		$string = str_replace( 'site_logo', get_theme_mod( 'custom_logo' ), $string );
-		$string = str_replace( 'featured_image', '', $string );
-		$string = str_replace( 'featured_img', '', $string );
-		$string = str_replace( 'post_title', '%seo_title%', $string );
-		$string = str_replace( 'post_excerpt', '%seo_description%', $string );
-		$string = str_replace( 'post_content', '%seo_description%', $string );
-		$string = str_replace( 'post_date', '%date%', $string );
-		$string = str_replace( 'post_modified', '%modified%', $string );
-		$string = str_replace( 'post_permalink', '', $string );
-		$string = str_replace( 'author_name', '%name%', $string );
-		$string = str_replace( 'author_first_name', '%name%', $string );
-		$string = str_replace( 'author_last_name', '%name%', $string );
-		$string = str_replace( 'author_image', '', $string );
+	public function convert_variables( $value ) {
+		$value = str_replace( 'blogname', '%sitename%', $value );
+		$value = str_replace( 'blogdescription', '%sitedesc%', $value );
+		$value = str_replace( 'site_url', get_bloginfo( 'url' ), $value );
+		$value = str_replace( 'site_logo', get_theme_mod( 'custom_logo' ), $value );
+		$value = str_replace( 'featured_image', '', $value );
+		$value = str_replace( 'featured_img', '', $value );
+		$value = str_replace( 'post_title', '%seo_title%', $value );
+		$value = str_replace( 'post_excerpt', '%seo_description%', $value );
+		$value = str_replace( 'post_content', '%seo_description%', $value );
+		$value = str_replace( 'post_date', '%date%', $value );
+		$value = str_replace( 'post_modified', '%modified%', $value );
+		$value = str_replace( 'post_permalink', '', $value );
+		$value = str_replace( 'author_name', '%name%', $value );
+		$value = str_replace( 'author_first_name', '%name%', $value );
+		$value = str_replace( 'author_last_name', '%name%', $value );
+		$value = str_replace( 'author_image', '', $value );
 
-		return $string;
+		return $value;
 	}
 
 	/**
