@@ -76,7 +76,7 @@ class Objects extends Base {
 				KEY analytics_object_page (page(190))
 			) $collate;";
 
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php'; // @phpstan-ignore-line
 		try {
 			dbDelta( $schema );
 		} catch ( Exception $e ) { // phpcs:ignore

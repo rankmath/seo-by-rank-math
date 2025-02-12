@@ -184,7 +184,7 @@ class Bulk_Image_Alt extends \WP_Background_Process {
 			}
 
 			return false;
-		} catch ( Exception $error ) {
+		} catch ( \Exception $error ) {
 			return true;
 		}
 	}
@@ -237,7 +237,7 @@ class Bulk_Image_Alt extends \WP_Background_Process {
 	 * @param array   $data          Data to process.
 	 * @param boolean $is_attachment Whether the current post is attachment.
 	 *
-	 * @return array
+	 * @return void
 	 */
 	private function update_image_alt( $alt_texts, $data, $is_attachment ) {
 		if ( $is_attachment ) {

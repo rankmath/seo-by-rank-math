@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.7
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.237
+Stable tag: 1.0.238
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -449,11 +449,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.237 [Jan 29, 2025] =
-- Added: [Option to include Authors](https://rankmath.com/kb/configure-sitemaps/#include-authors-without-posts) without any posts in the Sitemap
-- Improved: Updated the [Redirections](https://rankmath.com/kb/setting-up-redirections/) sources field type to `longtext` to support large texts
-- Fixed: Content Analysis was not working in [Elementor editor](https://rankmath.com/blog/elementor-seo/) when the Optimized Markup feature of Elementor was enabled
-- Fixed: [Content Analysis](https://rankmath.com/kb/score-100-in-tests) was not working properly when special characters were added to the [Focus Keyword](https://rankmath.com/kb/what-is-a-focus-keyword/)
-- Fixed: PHP warning on Guest Author pages created using the Co-Author Plus plugin
+= 1.0.238 [Feb 12, 2025] =
+- Fixed: PHP error on the Scheduled Actions page caused by another plugin or theme using an outdated version of the Action Scheduler package
+- Fixed: Content generated from the [Fix SEO Tests](https://rankmath.com/kb/fix-seo-tests-with-content-ai/) was not being highlighted when it contained nested blocks
+- Fixed: Plugin block styles were loaded in non-block themes, even when no block was added to the content
+- Fixed: [Remove Category Base](https://rankmath.com/kb/general-settings/#remove-category-base) feature was not working properly when a category slug contained uppercase encoded characters
+- Fixed: [Taxonomy Sitemap](https://rankmath.com/kb/configure-sitemaps/#categories) was missing when the [Archive Robots Meta](https://rankmath.com/kb/titles-and-meta/#category-archives-robots-meta-custom-settings) setting was set to `noindex`
+- Fixed: [SERP Preview](https://rankmath.com/kb/general-tab/#previewing-your-metadata) was displaying incorrect description for products using the Block Editor
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

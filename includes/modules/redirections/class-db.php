@@ -458,7 +458,7 @@ class DB {
 		$args['hits']          = absint( $redirection['hits'] ) + 1;
 		$args['last_accessed'] = current_time( 'mysql' );
 
-		self::table()->set( $args )->where( 'id', $redirection['id'] )->update();
+		return self::table()->set( $args )->where( 'id', $redirection['id'] )->update();
 	}
 
 	/**
@@ -501,15 +501,15 @@ class DB {
 	/**
 	 * Clean trashed redirects after 30 days.
 	 *
-	 * @return int Number of records deleted.
+	 * @return void
 	 */
 	public static function periodic_clean_trash() {
 		$ids = self::table()->select( 'id' )->where( 'status', 'trashed' )->where( 'updated', '<=', date_i18n( 'Y-m-d', strtotime( '30 days ago' ) ) )->get( ARRAY_A );
 		if ( empty( $ids ) ) {
-			return 0;
+			return;
 		}
 
-		return self::delete( wp_list_pluck( $ids, 'id' ) );
+		self::delete( wp_list_pluck( $ids, 'id' ) );
 	}
 
 	/**

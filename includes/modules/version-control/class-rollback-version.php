@@ -83,7 +83,7 @@ class Rollback_Version {
 		$nonce  = 'upgrade-plugin_' . $plugin;
 		$url    = 'update.php?action=upgrade-plugin&plugin=' . rawurlencode( $plugin );
 		if ( ! class_exists( '\Plugin_Upgrader' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php'; // @phpstan-ignore-line
 		}
 
 		update_option( self::ROLLBACK_VERSION_OPTION, $new_version );

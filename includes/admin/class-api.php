@@ -10,7 +10,7 @@
 
 namespace RankMath\Admin;
 
-defined( 'ABSPATH' ) || exit;
+use WP_Error;
 
 /**
  * Api class.
@@ -224,7 +224,7 @@ class Api {
 	/**
 	 * Decode the response and format any error messages for debugging
 	 *
-	 * @param array $response The response from the curl request.
+	 * @param array|WP_Error $response The response from the curl request.
 	 *
 	 * @return array|false The JSON decoded into an array
 	 */
@@ -245,7 +245,7 @@ class Api {
 	/**
 	 * Check if the response was successful or a failure. If it failed, store the error.
 	 *
-	 * @param array $response The response from the curl request.
+	 * @param array|WP_Error $response The response from the curl request.
 	 */
 	protected function determine_success( $response ) {
 		if ( is_wp_error( $response ) ) {

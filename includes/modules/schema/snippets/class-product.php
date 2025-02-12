@@ -43,8 +43,7 @@ class Product implements Snippet {
 		if ( Helper::is_woocommerce_active() && is_product() ) {
 			remove_action( 'wp_footer', [ WC()->structured_data, 'output_structured_data' ], 10 );
 			remove_action( 'woocommerce_email_order_details', [ WC()->structured_data, 'output_email_structured_data' ], 30 );
-			$product = new Product_WooCommerce();
-			$product->set_product( $entity, $jsonld );
+			Product_WooCommerce::get()->set_product( $entity, $jsonld );
 		}
 
 		if ( Helper::is_edd_active() && is_singular( 'download' ) ) {

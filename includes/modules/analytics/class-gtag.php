@@ -289,7 +289,7 @@ class GTag {
 		$filter_match = false;
 		if ( $logged_in ) {
 			if ( ! function_exists( 'get_editable_roles' ) ) {
-				require_once ABSPATH . 'wp-admin/includes/user.php';
+				require_once ABSPATH . 'wp-admin/includes/user.php'; // @phpstan-ignore-line
 			}
 
 			$all_roles    = array_keys( get_editable_roles() );

@@ -165,6 +165,7 @@ class Permalink_Watcher {
 		foreach ( $this->get_categories() as $category ) {
 			$cat_path = $this->get_category_fullpath( $category );
 			$cat_slug = $category_base . ( $this->remove_parent_slugs ? $category['slug'] : $cat_path );
+			$cat_slug = urldecode( $cat_slug );
 
 			$category_rules[ "{$cat_slug}/?\$" ]                                  = 'index.php?product_cat=' . $category['slug'];
 			$category_rules[ "{$cat_slug}/embed/?\$" ]                            = 'index.php?product_cat=' . $category['slug'] . '&embed=true';
@@ -173,6 +174,7 @@ class Permalink_Watcher {
 			$category_rules[ "{$cat_slug}/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?\$" ] = 'index.php?product_cat=' . $category['slug'] . '&paged=$matches[1]';
 
 			if ( $this->remove_product_base && $use_parent_slug ) {
+				$cat_path                                   = urldecode( $cat_path );
 				$product_rules[ $cat_path . '/([^/]+)/?$' ] = 'index.php?product=$matches[1]';
 				$product_rules[ $cat_path . '/([^/]+)/' . $wp_rewrite->comments_pagination_base . '-([0-9]{1,})/?$' ] = 'index.php?product=$matches[1]&cpage=$matches[2]';
 			}

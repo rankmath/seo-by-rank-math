@@ -162,7 +162,7 @@ class Console extends Analytics {
 	 *
 	 * @param array $args  Query arguments.
 	 *
-	 * @return array
+	 * @return array|false|WP_Error
 	 */
 	public function get_search_analytics( $args = [] ) {
 		$dates = Base::get_dates();

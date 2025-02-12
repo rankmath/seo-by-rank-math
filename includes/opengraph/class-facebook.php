@@ -296,7 +296,7 @@ class Facebook extends OpenGraph {
 	 */
 	public function category() {
 		$terms = get_the_category();
-		if ( is_wp_error( $terms ) || empty( $terms ) ) {
+		if ( empty( $terms ) ) {
 			return;
 		}
 

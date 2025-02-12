@@ -106,8 +106,8 @@ class Replacer {
 		/**
 		 * Filter: Allow customizing the replacements.
 		 *
-		 * @param array $replacements The replacements.
-		 * @param array $args The object some of the replacement values might come from,
+		 * @param array  $replacements The replacements.
+		 * @param object $args The object some of the replacement values might come from,
 		 *                    could be a post, taxonomy or term.
 		 */
 		$replacements = apply_filters( 'rank_math/replacements', $replacements, self::$args );
@@ -180,7 +180,7 @@ class Replacer {
 				$replacements[ $matches[0][ $index ] ] = $value;
 			}
 
-			unset( $variable );
+			unset( $value );
 		}
 
 		$this->set_cache( $string, $replacements );

@@ -171,7 +171,7 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 			}
 
 			return false;
-		} catch ( Exception $error ) {
+		} catch ( \Exception $error ) {
 			return true;
 		}
 	}

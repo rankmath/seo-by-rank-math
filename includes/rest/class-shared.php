@@ -19,6 +19,7 @@ use RankMath\Rest\Rest_Helper;
 use RankMath\Rest\Sanitize;
 use RankMath\Traits\Meta;
 use RankMath\Schema\DB;
+use WP_Error;
 use WP_REST_Controller;
 use WP_REST_Request;
 use WP_REST_Server;

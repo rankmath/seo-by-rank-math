@@ -16,6 +16,8 @@ use RankMath\Traits\Ajax;
 use RankMath\Traits\Meta;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Str;
+use WP_Error;
+use WP_Term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -208,7 +210,7 @@ class Common {
 	/**
 	 * Get chain of hierarchical links.
 	 *
-	 * @param WP_Term $term The term in question.
+	 * @param WP_Term|WP_Error $term The term in question.
 	 *
 	 * @return string
 	 */

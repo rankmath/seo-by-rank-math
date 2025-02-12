@@ -304,7 +304,7 @@ class JsonLD {
 	 * @param array $schema Schema to replace.
 	 * @param array $data   Array of json-ld data.
 	 *
-	 * @return array
+	 * @return void
 	 */
 	private function replace_author( &$schema, $data ) {
 		if ( empty( $data['ProfilePage'] ) ) {

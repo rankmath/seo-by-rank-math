@@ -12,6 +12,7 @@ namespace RankMath\Helpers;
 
 use RankMath\Admin\Admin_Helper;
 use RankMath\Helpers\Str;
+use WP_Error;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -194,7 +195,7 @@ trait Content_AI {
 	/**
 	 * Function to get Default Schema type by post_type.
 	 *
-	 * @return string Default Schema Type.
+	 * @return array Default Schema Type.
 	 */
 	public static function get_chats() {
 		return array_values( get_option( self::$chat_key, [] ) );
@@ -487,8 +488,8 @@ trait Content_AI {
 	/**
 	 * Function to return the error message.
 	 *
-	 * @param array $response      API response.
-	 * @param int   $response_code API response code.
+	 * @param array|WP_Error $response      API response.
+	 * @param int            $response_code API response code.
 	 */
 	public static function is_content_ai_error( $response, $response_code ) {
 		$data = wp_remote_retrieve_body( $response );

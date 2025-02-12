@@ -121,7 +121,7 @@ class Analytics extends Request {
 	 * @param array   $options Analytics options.
 	 * @param boolean $days    Whether to include dates.
 	 *
-	 * @return array
+	 * @return array|false|WP_Error
 	 */
 	public static function get_analytics( $options = [], $days = false ) {
 		// Check view ID.

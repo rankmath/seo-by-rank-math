@@ -143,7 +143,7 @@ class Yoast_Blocks extends \WP_Background_Process {
 				$this->convert( $post );
 			}
 			return false;
-		} catch ( Exception $error ) {
+		} catch ( \Exception $error ) {
 			return true;
 		}
 	}

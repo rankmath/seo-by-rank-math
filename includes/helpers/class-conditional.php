@@ -74,6 +74,8 @@ trait Conditional {
 		}
 		Helper::schedule_flush_rewrite();
 		update_option( $key, $value, false );
+
+		return $value;
 	}
 
 	/**
@@ -152,7 +154,7 @@ trait Conditional {
 		/**
 		 * Allow editing the robots.txt & htaccess data.
 		 *
-		 * @param bool Can edit the robots & htacess data.
+		 * @param bool $can_edit Can edit the robots & htacess data.
 		 */
 		return apply_filters(
 			'rank_math/can_edit_file',
@@ -172,7 +174,7 @@ trait Conditional {
 		/**
 		 * Enable SEO Score.
 		 *
-		 * @param bool Enable SEO Score.
+		 * @param bool $score_enabled Enable SEO Score.
 		 */
 		return apply_filters( 'rank_math/show_score', true );
 	}
@@ -283,7 +285,7 @@ trait Conditional {
 	 */
 	public static function is_filesystem_direct() {
 		if ( ! function_exists( 'get_filesystem_method' ) ) {
-			require_once ABSPATH . '/wp-admin/includes/file.php';
+			require_once ABSPATH . '/wp-admin/includes/file.php'; // @phpstan-ignore-line
 		}
 
 		return 'direct' === get_filesystem_method();
@@ -386,7 +388,7 @@ trait Conditional {
 	public static function is_woocommerce_active() {
 		// @codeCoverageIgnoreStart
 		if ( ! function_exists( 'is_plugin_active' ) ) {
-			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+			include_once ABSPATH . 'wp-admin/includes/plugin.php'; // @phpstan-ignore-line
 		}
 		// @codeCoverageIgnoreEnd
 		return is_plugin_active( 'woocommerce/woocommerce.php' ) && function_exists( 'is_woocommerce' );

@@ -70,7 +70,7 @@ class Notification_Center {
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @return array Notification[] Notifications
+	 * @return void
 	 */
 	public function get_from_storage() {
 		if ( $this->retrieved ) {
@@ -193,7 +193,8 @@ class Notification_Center {
 		/**
 		 * Filter: 'wp_helpers_notification_dismissed' - Allows developer to perform action after dismissed.
 		 *
-		 * @param Notification[] $notifications
+		 * @param string  $notification_id
+		 * @param Notification $notifications
 		 */
 		do_action( 'wp_helpers_notification_dismissed', $notification_id, $notification );
 	}

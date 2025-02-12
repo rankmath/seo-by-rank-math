@@ -7,8 +7,10 @@
 	"icon": "rm-icon rm-icon-stories",
 	"textdomain": "rank-math",
 	"editorScript": "file:./assets/js/index.js",
-	"editorStyle": "file:./assets/css/toc.css",
-	"style": "file:./assets/css/toc_list_style.css",
+	"editorStyle": [
+		"file:./assets/css/toc.css",
+		"file:./assets/css/toc_list_style.css"
+	],
 	"attributes": {
 		"title": {
 			"type": "string"

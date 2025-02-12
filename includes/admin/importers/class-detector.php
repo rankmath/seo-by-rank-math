@@ -155,7 +155,7 @@ class Detector {
 	 */
 	private function requirements() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			require_once ABSPATH . 'wp-admin/includes/plugin.php'; // @phpstan-ignore-line
 		}
 	}
 

@@ -102,7 +102,7 @@ class Post extends Metadata {
 		/**
 		 * Filter: Allow changing the page ID before we process anything.
 		 *
-		 * @param unsigned int $page_id The default page ID.
+		 * @param bool|int $page_id The default page ID.
 		 */
 		$page_id = apply_filters( 'rank_math/pre_simple_page_id', false );
 		if ( false !== $page_id ) {
@@ -124,7 +124,7 @@ class Post extends Metadata {
 		/**
 		 * Filter: Allow changing the page ID.
 		 *
-		 * @param unsigned int $page_id The page ID.
+		 * @param int $page_id The page ID.
 		 */
 		return apply_filters( 'rank_math/simple_page_id', 0 );
 	}

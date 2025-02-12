@@ -128,7 +128,7 @@ trait WordPress {
 
 		// Makes sure the plugin functions are defined before trying to use them.
 		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+			require_once ABSPATH . '/wp-admin/includes/plugin.php'; // @phpstan-ignore-line
 		}
 
 		return is_plugin_active_for_network( plugin_basename( RANK_MATH_FILE ) ) ?
@@ -300,7 +300,7 @@ trait WordPress {
 
 		// Makes sure the plugin is defined before trying to use it.
 		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+			require_once ABSPATH . '/wp-admin/includes/plugin.php'; // @phpstan-ignore-line
 		}
 
 		if ( ! is_plugin_active_for_network( plugin_basename( RANK_MATH_FILE ) ) ) {
@@ -641,7 +641,7 @@ trait WordPress {
 		global $wp_filesystem;
 
 		if ( empty( $wp_filesystem ) ) {
-			require_once ABSPATH . '/wp-admin/includes/file.php';
+			require_once ABSPATH . '/wp-admin/includes/file.php'; // @phpstan-ignore-line
 			WP_Filesystem();
 		}
 

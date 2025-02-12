@@ -306,7 +306,7 @@ class Sitemap {
 		}
 
 		if ( $count < $max_entries && $current_page ) {
-			Helper::redirect( preg_replace( '/' . preg_quote( $current_page ) . '\.xml$/', '.xml', Helper::get_current_page_url() ) );
+			Helper::redirect( preg_replace( '/' . preg_quote( $current_page, '/' ) . '\.xml$/', '.xml', Helper::get_current_page_url() ) );
 			die();
 		}
 	}

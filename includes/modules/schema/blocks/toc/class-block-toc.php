@@ -66,6 +66,14 @@ class Block_TOC extends Block {
 		$this->filter( 'rank_math/metabox/post/values', 'block_settings_metadata' );
 		$this->action( 'admin_enqueue_scripts', 'add_json_data' );
 		register_block_type( RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json' );
+		$this->action( 'wp_enqueue_scripts', 'register_block_style' );
+	}
+
+	/**
+	 * Register block style.
+	 */
+	public function register_block_style() {
+		wp_register_style( 'rank-math-toc-block', rank_math()->plugin_url() . 'includes/modules/schema/blocks/toc/assets/css/toc_list_style.css', [], rank_math()->version );
 	}
 
 	/**
@@ -107,6 +115,7 @@ class Block_TOC extends Block {
 	 * @return string
 	 */
 	public function render_toc_block_content( $block_content, $parsed_block ) {
+		wp_enqueue_style( 'rank-math-toc-block' );
 		if ( isset( $parsed_block['attrs']['title'] ) ) {
 			return $block_content;
 		}

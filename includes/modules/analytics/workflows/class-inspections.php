@@ -107,7 +107,7 @@ class Inspections {
                 KEY rich_results_verdict (rich_results_verdict)
             ) $collate;";
 
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php'; // @phpstan-ignore-line
 		try {
 			dbDelta( $schema );
 		} catch ( Exception $e ) { // phpcs:ignore

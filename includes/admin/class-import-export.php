@@ -383,11 +383,6 @@ class Import_Export implements Runner {
 		$this->remove_filter( 'upload_mimes', 'allow_txt_upload', 10 );
 		$this->remove_filter( 'wp_check_filetype_and_ext', 'filetype_and_ext', 10 );
 
-		if ( is_wp_error( $file ) ) {
-			Helper::add_notification( esc_html__( 'Settings could not be imported:', 'rank-math' ) . ' ' . $file->get_error_message(), [ 'type' => 'error' ] );
-			return false;
-		}
-
 		if ( isset( $file['error'] ) ) {
 			Helper::add_notification( esc_html__( 'Settings could not be imported:', 'rank-math' ) . ' ' . $file['error'], [ 'type' => 'error' ] );
 			return false;

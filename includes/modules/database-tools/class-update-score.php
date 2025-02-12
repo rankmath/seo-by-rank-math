@@ -264,7 +264,7 @@ class Update_Score {
 	/**
 	 * Modal to show the Update SEO Score progress.
 	 *
-	 * @return array
+	 * @return void
 	 */
 	public function footer_modal() {
 		if ( Param::get( 'page' ) !== 'rank-math-status' || Param::get( 'view' ) !== 'tools' ) {

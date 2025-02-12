@@ -47,7 +47,7 @@ class Website implements Snippet {
 		/**
 		 * Disable the JSON-LD output for the Sitelinks Searchbox.
 		 *
-		 * @param boolean Display or not the JSON-LD for the Sitelinks Searchbox.
+		 * @param bool $disable Display or not the JSON-LD for the Sitelinks Searchbox.
 		 */
 		if ( apply_filters( 'rank_math/json_ld/disable_search', ! is_front_page() || is_paged() ) ) {
 			return $data;

@@ -118,9 +118,7 @@ class Snippet_Shortcode {
 	 * @return string Shortcode output.
 	 */
 	public function get_snippet_content( $schema, $post, $atts ) {
-		if ( empty( $atts['is_block'] ) ) {
-			wp_enqueue_style( 'rank-math-review-snippet', untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/blocks/schema/assets/css/schema.css', null, rank_math()->version );
-		}
+		wp_enqueue_style( 'rank-math-review-snippet', untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/blocks/schema/assets/css/schema.css', null, rank_math()->version );
 		$type         = \strtolower( $schema['@type'] );
 		$type         = preg_replace( '/[^a-z0-9_-]+/i', '', $type );
 		$this->post   = $post;
@@ -436,6 +434,14 @@ class Snippet_Shortcode {
 			if ( is_array( $schema ) ) {
 				$new_schemas[ $key ] = $this->replace_variables( $schema, $post );
 				continue;
+			}
+
+			// Need this conditions to convert date to valid ISO 8601 format.
+			if ( in_array( $key, [ 'datePublished', 'uploadDate' ], true ) && '%date(Y-m-dTH:i:sP)%' === $schema ) {
+				$schema = '%date(Y-m-d\TH:i:sP)%';
+			}
+			if ( 'dateModified' === $key && '%modified(Y-m-dTH:i:sP)%' === $schema ) {
+				$schema = '%modified(Y-m-d\TH:i:sP)%';
 			}
 
 			$new_schemas[ $key ] = Str::contains( '%', $schema ) ? Helper::replace_seo_fields( $schema, $post ) : $schema;

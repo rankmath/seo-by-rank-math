@@ -177,7 +177,7 @@ class Beta_Optin {
 		$this->trunk_version = 0;
 
 		$response = wp_remote_get( 'https://plugins.svn.wordpress.org/seo-by-rank-math/trunk/rank-math.php' );
-		if ( ! is_array( $response ) || is_wp_error( $response ) ) {
+		if ( is_wp_error( $response ) || ! is_array( $response ) ) {
 			return $this->trunk_version;
 		}
 

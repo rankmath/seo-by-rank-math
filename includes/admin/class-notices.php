@@ -145,7 +145,7 @@ class Notices implements Runner {
 			return;
 		}
 
-		$languages = icl_get_languages();
+		$languages = icl_get_languages(); // @phpstan-ignore-line
 		foreach ( $languages as $lang_code => $language ) {
 
 			foreach ( [ 'general', 'titles' ] as $option ) {
@@ -160,8 +160,8 @@ class Notices implements Runner {
 				}
 
 				foreach ( $common_data as $option_key ) {
-					$string_id = icl_get_string_id( Helper::get_settings( "$option.$option_key" ), "admin_texts_rank-math-options-$option" );
-					icl_add_string_translation( $string_id, $lang_code, $data[ $option_key ], 10 );
+					$string_id = icl_get_string_id( Helper::get_settings( "$option.$option_key" ), "admin_texts_rank-math-options-$option" ); // @phpstan-ignore-line
+					icl_add_string_translation( $string_id, $lang_code, $data[ $option_key ], 10 ); // @phpstan-ignore-line
 				}
 			}
 		}

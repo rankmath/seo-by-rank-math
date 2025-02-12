@@ -16,6 +16,8 @@ namespace RankMath\Frontend;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Security;
+use WP_Error;
+use WP_Term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -513,7 +515,7 @@ class Breadcrumbs {
 	/**
 	 * Get the primary term.
 	 *
-	 * @param array $terms Terms attached to the current post.
+	 * @param WP_Term[]|false|WP_Error $terms Terms attached to the current post.
 	 */
 	private function maybe_add_primary_term( $terms ) {
 		// Early Bail!

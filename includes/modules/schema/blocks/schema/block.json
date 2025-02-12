@@ -9,7 +9,6 @@
 	"keywords": [ "Schema", "Markup", "Structured Data", "Rich Snippet", "SEO", "Rank Math", "Yoast" ],
 	"editorScript": "file:./assets/js/index.js",
 	"editorStyle": "file:./assets/css/schema.css",
-	"style": "file:./assets/css/schema.css",
 	"attributes": {
 		"post_id": {
 			"type": "string",

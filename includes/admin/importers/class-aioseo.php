@@ -1155,7 +1155,7 @@ class AIOSEO extends Plugin_Importer {
 			$args['post_type'] = 'rank_math_locations';
 
 			$post_id = wp_insert_post( $args );
-			if ( is_wp_error( $post_id ) ) {
+			if ( $post_id === 0 ) {
 				continue;
 			}
 

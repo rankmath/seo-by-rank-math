@@ -253,7 +253,7 @@ class Installer {
 
 		$table_schema = apply_filters( 'rank_math/admin/create_tables', $table_schema, $modules );
 
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php'; // @phpstan-ignore-line
 		foreach ( $table_schema as $table ) {
 			dbDelta( $table );
 		}

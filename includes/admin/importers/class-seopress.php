@@ -230,7 +230,7 @@ class SEOPress extends Plugin_Importer {
 			]
 		);
 
-		if ( empty( $terms ) || is_wp_error( $terms ) ) {
+		if ( empty( $terms ) ) {
 			return false;
 		}
 

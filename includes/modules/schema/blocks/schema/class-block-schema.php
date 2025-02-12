@@ -73,8 +73,6 @@ class Block_Schema {
 	 * @param array $attributes Block Attributes.
 	 */
 	public function rich_snippet( $attributes ) {
-		$attributes['is_block'] = true;
-
 		$output = '';
 		foreach ( $attributes as $key => $value ) {
 			$output .= $key . '="' . esc_attr( $value ) . '" ';

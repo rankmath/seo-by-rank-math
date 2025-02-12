@@ -162,13 +162,15 @@ class Links {
 	 * @param string $content The content.
 	 */
 	private function process( $post_id, $content ) {
+		$content = apply_filters( 'the_content', $content );
+
 		/**
 		 * Filter to change the content passed to the Link processor.
 		 *
 		 * @param string $content Post content.
 		 * @param int    $post_id Post ID.
 		 */
-		$content = $this->do_filter( 'links/content', apply_filters( 'the_content', $content ), $post_id );
+		$content = $this->do_filter( 'links/content', $content, $post_id );
 		$content = str_replace( ']]>', ']]&gt;', $content );
 
 		$processor = new ContentProcessor();

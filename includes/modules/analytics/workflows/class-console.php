@@ -79,7 +79,7 @@ class Console extends Base {
 				KEY rank_position (position)
 			) $collate;";
 
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php'; // @phpstan-ignore-line
 		try {
 			dbDelta( $schema );
 		} catch ( Exception $e ) { // phpcs:ignore

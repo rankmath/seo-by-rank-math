@@ -118,8 +118,8 @@ class Table extends List_Table {
 		/**
 		 * Filters the default column output. Pass non-empty value to enable.
 		 *
-		 * @param mixed $false The column value.
-		 * @param array $item  The current item.
+		 * @param bool   $false The column value.
+		 * @param object $item  The current item.
 		 */
 		$default = apply_filters( "rank_math/redirection/admin_column_{$column_name}", false, $item );
 		if ( ! empty( $default ) ) {
@@ -368,6 +368,7 @@ class Table extends List_Table {
 		 * Filters the row class.
 		 *
 		 * @param string $classes The row class.
+		 * @param object $item    The current item.
 		 */
 		$classes = apply_filters( 'rank_math/redirection/row_classes', $classes, $item );
 
