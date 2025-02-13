@@ -50,7 +50,6 @@ class Slack extends OpenGraph {
 	 */
 	public function enhanced_data() {
 		$data = $this->get_enhanced_data();
-
 		foreach ( $data as $key => $value ) {
 			if ( empty( $value ) ) {
 				continue;
@@ -70,9 +69,8 @@ class Slack extends OpenGraph {
 	 */
 	public function enhanced_data_tag( $key, $value ) {
 		self::$data_tag_count++;
-
 		$this->tag( sprintf( 'twitter:label%d', self::$data_tag_count ), $key );
-		$this->tag( sprintf( 'twitter:data%d', self::$data_tag_count ), $value );
+		$this->tag( sprintf( 'twitter:data%d', self::$data_tag_count ), html_entity_decode($value) );
 	}
 
 	/**
