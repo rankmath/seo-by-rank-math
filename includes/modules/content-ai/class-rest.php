@@ -137,16 +137,6 @@ class Rest extends WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
-			'/migrateuser',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'migrate_user' ],
-				'permission_callback' => [ $this, 'has_permission' ],
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
 			'/generateAlt',
 			[
 				'methods'             => WP_REST_Server::CREATABLE,
@@ -432,7 +422,7 @@ class Rest extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function ping_content_ai( WP_REST_Request $request ) {
-		$credits = ! empty( $data['credits'] ) ? json_decode( $data['credits'], true ) : [];
+		$credits = ! empty( $request->get_param( 'credits' ) ) ? json_decode( $request->get_param( 'credits' ), true ) : [];
 		$data    = [
 			'credits'      => ! empty( $credits['available'] ) ? $credits['available'] - $credits['taken'] : 0,
 			'plan'         => $request->get_param( 'plan' ),
@@ -442,17 +432,6 @@ class Rest extends WP_REST_Controller {
 		Helper::update_credits( $data );
 
 		return true;
-	}
-
-	/**
-	 * Migrate user to nest js server.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function migrate_user( WP_REST_Request $request ) {
-		return Helper::migrate_user_to_nest_js();
 	}
 
 	/**

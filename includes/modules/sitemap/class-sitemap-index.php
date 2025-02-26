@@ -34,14 +34,14 @@ class Sitemap_Index implements Runner {
 	/**
 	 * Adds the sitemap index to robots.txt.
 	 *
-	 * @param string $output robots.txt output.
-	 * @param bool   $public Whether the site is public or not.
+	 * @param string $output    robots.txt output.
+	 * @param bool   $is_public Whether the site is public or not.
 	 *
 	 * @return string robots.txt output.
 	 */
-	public function add_sitemap_directive( $output, $public ) {
+	public function add_sitemap_directive( $output, $is_public ) {
 		if (
-			'0' === $public ||
+			'0' === $is_public ||
 			Str::contains( 'Sitemap:', $output ) ||
 			Str::contains( 'sitemap:', $output )
 		) {

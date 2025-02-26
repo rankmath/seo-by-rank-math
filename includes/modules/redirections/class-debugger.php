@@ -41,7 +41,7 @@ class Debugger {
 
 		$this->debugger_headers();
 
-		include_once \dirname( __FILE__ ) . '/views/debugging.php';
+		include_once __DIR__ . '/views/debugging.php';
 		exit;
 	}
 
@@ -159,7 +159,7 @@ class Debugger {
 	private function debugger_headers() {
 		$headers = [];
 
-		$protocol = wp_get_server_protocol();
+		$protocol  = wp_get_server_protocol();
 		$headers[] = "$protocol 200 OK";
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
 

@@ -39,6 +39,6 @@ defined( 'ABSPATH' ) || exit;
 
 <?php
 if ( ! in_array( $this->step_slug, [ 'register', 'ready' ], true ) ) :
-	echo sprintf( '<div class="return-to-dashboard"><a href="%s">%s</a></div>', esc_url( 'rank-math-registration' === Param::get( 'page' ) ? admin_url( '/' ) : RankMath\Helper::get_dashboard_url() ), esc_html__( 'Return to dashboard', 'rank-math' ) );
+	printf( '<div class="return-to-dashboard"><a href="%s">%s</a></div>', esc_url( 'rank-math-registration' === Param::get( 'page' ) ? admin_url( '/' ) : RankMath\Helper::get_dashboard_url() ), esc_html__( 'Return to dashboard', 'rank-math' ) );
 endif;
 ?>

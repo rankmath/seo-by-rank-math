@@ -63,7 +63,6 @@ class Facebook extends OpenGraph {
 		$this->action( 'rank_math/opengraph/facebook', 'website', 14 );
 		$this->action( 'rank_math/opengraph/facebook', 'site_owner', 20 );
 		$this->action( 'rank_math/opengraph/facebook', 'image', 30 );
-
 	}
 
 	/**
@@ -103,15 +102,15 @@ class Facebook extends OpenGraph {
 	 * @see  http://www.facebook.com/translations/FacebookLocales.xml for the list of supported locales
 	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/article/
 	 *
-	 * @param bool $echo Whether to echo or return the locale.
+	 * @param bool $display Whether to echo or return the locale.
 	 * @return string
 	 */
-	public function locale( $echo = true ) {
+	public function locale( $display = true ) {
 		$locale = get_locale();
 		$locale = Facebook_Locale::sanitize( $locale );
 		$locale = Facebook_Locale::validate( $locale );
 
-		if ( $echo ) {
+		if ( $display ) {
 			$this->tag( 'og:locale', $locale );
 		}
 
@@ -123,10 +122,10 @@ class Facebook extends OpenGraph {
 	 *
 	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/object/
 	 *
-	 * @param bool $echo Whether to echo or return the type.
+	 * @param bool $display Whether to echo or return the type.
 	 * @return string
 	 */
-	public function type( $echo = true ) {
+	public function type( $display = true ) {
 		$type = $this->get_type();
 
 		if ( is_singular() ) {
@@ -145,7 +144,7 @@ class Facebook extends OpenGraph {
 		 */
 		$type = $this->do_filter( 'opengraph/type', $type );
 
-		if ( Str::is_non_empty( $type ) && $echo ) {
+		if ( Str::is_non_empty( $type ) && $display ) {
 			$this->tag( 'og:type', $type );
 		}
 
@@ -177,13 +176,13 @@ class Facebook extends OpenGraph {
 	 *
 	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/article/
 	 *
-	 * @param bool $echo Whether or not to echo the output.
+	 * @param bool $display Whether or not to echo the output.
 	 *
 	 * @return string
 	 */
-	public function title( $echo = true ) {
+	public function title( $display = true ) {
 		$title = trim( $this->get_title() );
-		if ( $echo ) {
+		if ( $display ) {
 			$this->tag( 'og:title', $title );
 		}
 
@@ -193,12 +192,12 @@ class Facebook extends OpenGraph {
 	/**
 	 * Output the OpenGraph description, specific OG description first, if not, grab the meta description.
 	 *
-	 * @param bool $echo Whether to echo or return the description.
+	 * @param bool $display Whether to echo or return the description.
 	 * @return string
 	 */
-	public function description( $echo = true ) {
+	public function description( $display = true ) {
 		$desc = trim( $this->get_description() );
-		if ( $echo ) {
+		if ( $display ) {
 			$this->tag( 'og:description', $desc );
 		}
 

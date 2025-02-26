@@ -131,7 +131,7 @@ class Dashboard_Widget {
 	private function filter_posts( $posts ) {
 		$posts = array_filter(
 			$posts,
-			function( $post ) {
+			function ( $post ) {
 				if ( isset( $post['condition'] ) && 'is_free' === $post['condition'] && defined( 'RANK_MATH_PRO_FILE' ) ) {
 					return false;
 				}

@@ -18,7 +18,7 @@ if ( Rollback_Version::should_rollback() ) {
 	return;
 }
 
-$directory           = dirname( __FILE__ );
+$directory           = __DIR__;
 $beta_optin          = boolval( Helper::get_settings( 'general.beta_optin' ) );
 $update_notification = boolval( Helper::get_settings( 'general.update_notification_email' ) );
 $auto_update         = boolval( Helper::get_auto_update_setting() );

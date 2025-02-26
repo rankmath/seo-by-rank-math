@@ -228,12 +228,12 @@ class Shared extends WP_REST_Controller {
 	/**
 	 * Allow only rank math meta keys
 	 *
-	 * @param bool   $protected Whether the key is considered protected.
-	 * @param string $meta_key  Meta key.
+	 * @param bool   $is_protected Whether the key is considered protected.
+	 * @param string $meta_key     Meta key.
 	 *
 	 * @return bool
 	 */
-	public function only_this_plugin( $protected, $meta_key ) {
+	public function only_this_plugin( $is_protected, $meta_key ) {
 		return Str::starts_with( 'rank_math_', $meta_key );
 	}
 
@@ -254,7 +254,7 @@ class Shared extends WP_REST_Controller {
 				'type'              => 'integer',
 				'required'          => true,
 				'description'       => esc_html__( 'Object unique id', 'rank-math' ),
-				'validate_callback' => function( $param ) {
+				'validate_callback' => function ( $param ) {
 					if ( empty( $param ) && 0 !== $param ) {
 						return new WP_Error(
 							'param_value_empty',

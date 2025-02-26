@@ -47,13 +47,13 @@ class Module {
 	/**
 	 * Getter.
 	 *
-	 * @param string $key     Key to get data for.
-	 * @param mixed  $default Defaul value if not found.
+	 * @param string $key           Key to get data for.
+	 * @param mixed  $default_value Defaul value if not found.
 	 *
 	 * @return mixed
 	 */
-	public function get( $key, $default = '' ) {
-		return isset( $this->args[ $key ] ) ? $this->args[ $key ] : $default;
+	public function get( $key, $default_value = '' ) {
+		return isset( $this->args[ $key ] ) ? $this->args[ $key ] : $default_value;
 	}
 
 	/**

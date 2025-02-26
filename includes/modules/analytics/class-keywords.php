@@ -17,6 +17,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Keywords class.
+ *
+ * @method get_analytics_data()
  */
 class Keywords extends Posts {
 

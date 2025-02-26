@@ -10,27 +10,27 @@ use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-$taxonomy     = $tab['taxonomy'];
-$taxonomy_obj = get_taxonomy( $taxonomy );
-$name         = $taxonomy_obj->labels->singular_name;
+$taxonomy_name = $tab['taxonomy'];
+$taxonomy_obj  = get_taxonomy( $taxonomy_name );
+$name          = $taxonomy_obj->labels->singular_name;
 
 $metabox_default        = 'off';
 $custom_default         = 'off';
-$remove_snippet_default = in_array( $taxonomy, [ 'product_cat', 'product_tag' ], true ) || substr( $taxonomy, 0, 3 ) === 'pa_' ? 'on' : 'off';
+$remove_snippet_default = in_array( $taxonomy_name, [ 'product_cat', 'product_tag' ], true ) || substr( $taxonomy_name, 0, 3 ) === 'pa_' ? 'on' : 'off';
 
-if ( 'category' === $taxonomy ) {
+if ( 'category' === $taxonomy_name ) {
 	$metabox_default = 'on';
 	$custom_default  = 'off';
-} elseif ( 'post_tag' === $taxonomy ) {
+} elseif ( 'post_tag' === $taxonomy_name ) {
 	$metabox_default = 'off';
 	$custom_default  = 'on';
-} elseif ( 'post_format' === $taxonomy ) {
+} elseif ( 'post_format' === $taxonomy_name ) {
 	$custom_default = 'on';
 }
 
 $cmb->add_field(
 	[
-		'id'              => 'tax_' . $taxonomy . '_title',
+		'id'              => 'tax_' . $taxonomy_name . '_title',
 		'type'            => 'text',
 		/* translators: taxonomy name */
 		'name'            => sprintf( esc_html__( '%s Archive Titles', 'rank-math' ), $name ),
@@ -45,7 +45,7 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'         => 'tax_' . $taxonomy . '_description',
+		'id'         => 'tax_' . $taxonomy_name . '_description',
 		'type'       => 'textarea_small',
 		/* translators: taxonomy name */
 		'name'       => sprintf( esc_html__( '%s Archive Descriptions', 'rank-math' ), $name ),
@@ -64,7 +64,7 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'      => 'tax_' . $taxonomy . '_custom_robots',
+		'id'      => 'tax_' . $taxonomy_name . '_custom_robots',
 		'type'    => 'toggle',
 		/* translators: taxonomy name */
 		'name'    => sprintf( esc_html__( '%s Archives Robots Meta', 'rank-math' ), $name ),
@@ -81,7 +81,7 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'                => 'tax_' . $taxonomy . '_robots',
+		'id'                => 'tax_' . $taxonomy_name . '_robots',
 		'type'              => 'multicheck',
 		/* translators: taxonomy name */
 		'name'              => sprintf( esc_html__( '%s Archives Robots Meta', 'rank-math' ), $name ),
@@ -89,7 +89,7 @@ $cmb->add_field(
 		'desc'              => sprintf( esc_html__( 'Custom values for robots meta tag on %s archives.', 'rank-math' ), $name ),
 		'options'           => Helper::choices_robots(),
 		'select_all_button' => false,
-		'dep'               => [ [ 'tax_' . $taxonomy . '_custom_robots', 'on' ] ],
+		'dep'               => [ [ 'tax_' . $taxonomy_name . '_custom_robots', 'on' ] ],
 		'classes'           => 'rank-math-advanced-option rank-math-robots-data',
 		'default'           => [ 'index' ],
 	]
@@ -97,19 +97,19 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'              => 'tax_' . $taxonomy . '_advanced_robots',
+		'id'              => 'tax_' . $taxonomy_name . '_advanced_robots',
 		'type'            => 'advanced_robots',
 		/* translators: taxonomy name */
 		'name'            => sprintf( esc_html__( '%s Archives Advanced Robots Meta', 'rank-math' ), $name ),
 		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_advanced_robots' ],
-		'dep'             => [ [ 'tax_' . $taxonomy . '_custom_robots', 'on' ] ],
+		'dep'             => [ [ 'tax_' . $taxonomy_name . '_custom_robots', 'on' ] ],
 		'classes'         => 'rank-math-advanced-option',
 	]
 );
 
 $cmb->add_field(
 	[
-		'id'      => 'tax_' . $taxonomy . '_slack_enhanced_sharing',
+		'id'      => 'tax_' . $taxonomy_name . '_slack_enhanced_sharing',
 		'type'    => 'toggle',
 		'name'    => esc_html__( 'Slack Enhanced Sharing', 'rank-math' ),
 		'desc'    => esc_html__( 'When the option is enabled and a term from this taxonomy is shared on Slack, additional information will be shown (the total number of items with this term).', 'rank-math' ),
@@ -120,7 +120,7 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'      => 'tax_' . $taxonomy . '_add_meta_box',
+		'id'      => 'tax_' . $taxonomy_name . '_add_meta_box',
 		'type'    => 'toggle',
 		'name'    => esc_html__( 'Add SEO Controls', 'rank-math' ),
 		'desc'    => esc_html__( 'Add the SEO Controls for the term editor screen to customize SEO options for individual terms in this taxonomy.', 'rank-math' ),
@@ -131,7 +131,7 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'      => 'remove_' . $taxonomy . '_snippet_data',
+		'id'      => 'remove_' . $taxonomy_name . '_snippet_data',
 		'type'    => 'toggle',
 		'name'    => esc_html__( 'Remove Snippet Data', 'rank-math' ),
 		/* translators: taxonomy name */
@@ -141,7 +141,7 @@ $cmb->add_field(
 	]
 );
 
-if ( 'post_format' === $taxonomy ) {
-	$cmb->remove_field( 'tax_' . $taxonomy . '_add_meta_box' );
-	$cmb->remove_field( 'remove_' . $taxonomy . '_snippet_data' );
+if ( 'post_format' === $taxonomy_name ) {
+	$cmb->remove_field( 'tax_' . $taxonomy_name . '_add_meta_box' );
+	$cmb->remove_field( 'remove_' . $taxonomy_name . '_snippet_data' );
 }

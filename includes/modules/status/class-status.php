@@ -54,7 +54,7 @@ class Status extends Base {
 			return;
 		}
 
-		$directory = dirname( __FILE__ );
+		$directory = __DIR__;
 		$this->config(
 			[
 				'id'        => 'status',

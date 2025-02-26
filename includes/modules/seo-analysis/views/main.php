@@ -38,7 +38,7 @@ rank_math()->admin->display_admin_header();
 		if ( $tab_file && file_exists( $tab_file ) ) {
 			include_once $tab_file;
 		} else {
-			include_once dirname( __FILE__ ) . '/seo-analyzer.php';
+			include_once __DIR__ . '/seo-analyzer.php';
 		}
 		?>
 	</div><!--.rank-math-ui.module-listing.dashboard-wrapper-->

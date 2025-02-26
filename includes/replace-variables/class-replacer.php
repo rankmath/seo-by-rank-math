@@ -82,26 +82,26 @@ class Replacer {
 	/**
 	 *  Replace `%variables%` with context-dependent value.
 	 *
-	 * @param string $string  The string containing the %variables%.
-	 * @param array  $args    Context object, can be post, taxonomy or term.
-	 * @param array  $exclude Excluded variables won't be replaced.
+	 * @param string $variable The string containing the %variables%.
+	 * @param array  $args     Context object, can be post, taxonomy or term.
+	 * @param array  $exclude  Excluded variables won't be replaced.
 	 *
 	 * @return string
 	 */
-	public function replace( $string, $args = [], $exclude = [] ) {
-		$string = wp_strip_all_tags( $string );
+	public function replace( $variable, $args = [], $exclude = [] ) {
+		$variable = wp_strip_all_tags( $variable );
 
 		// Bail early.
-		if ( ! Str::contains( '%', $string ) ) {
-			return $string;
+		if ( ! Str::contains( '%', $variable ) ) {
+			return $variable;
 		}
 
-		if ( Str::ends_with( ' %sep%', $string ) ) {
-			$string = substr( $string, 0, -5 );
+		if ( Str::ends_with( ' %sep%', $variable ) ) {
+			$variable = substr( $variable, 0, -5 );
 		}
 
 		$this->pre_replace( $args, $exclude );
-		$replacements = $this->set_up_replacements( $string );
+		$replacements = $this->set_up_replacements( $variable );
 
 		/**
 		 * Filter: Allow customizing the replacements.
@@ -114,16 +114,16 @@ class Replacer {
 
 		// Do the replacements.
 		if ( is_array( $replacements ) && [] !== $replacements ) {
-			$string = str_replace( array_keys( $replacements ), array_values( $replacements ), $string );
+			$variable = str_replace( array_keys( $replacements ), array_values( $replacements ), $variable );
 		}
 
 		if ( isset( $replacements['%sep%'] ) && Str::is_non_empty( $replacements['%sep%'] ) ) {
-			$q_sep  = preg_quote( $replacements['%sep%'], '`' );
-			$string = preg_replace( '`' . $q_sep . '(?:\s*' . $q_sep . ')*`u', $replacements['%sep%'], $string );
+			$q_sep    = preg_quote( $replacements['%sep%'], '`' );
+			$variable = preg_replace( '`' . $q_sep . '(?:\s*' . $q_sep . ')*`u', $replacements['%sep%'], $variable );
 		}
 
 		// Remove excess whitespace.
-		return preg_replace( '[\s\s+]', ' ', $string );
+		return preg_replace( '[\s\s+]', ' ', $variable );
 	}
 
 	/**
@@ -159,18 +159,18 @@ class Replacer {
 	/**
 	 * Get the replacements for the variables.
 	 *
-	 * @param string $string String to parse for variables.
+	 * @param string $variable String to parse for variables.
 	 *
 	 * @return array Retrieved replacements.
 	 */
-	private function set_up_replacements( $string ) {
-		if ( $this->has_cache( $string ) ) {
-			return $this->get_cache( $string );
+	private function set_up_replacements( $variable ) {
+		if ( $this->has_cache( $variable ) ) {
+			return $this->get_cache( $variable );
 		}
 
 		$replacements = [];
-		if ( ! preg_match_all( '/%(([a-z0-9_-]+)\(([^)]*)\)|[^\s]+)%/iu', $string, $matches ) ) {
-			$this->set_cache( $string, $replacements );
+		if ( ! preg_match_all( '/%(([a-z0-9_-]+)\(([^)]*)\)|[^\s]+)%/iu', $variable, $matches ) ) {
+			$this->set_cache( $variable, $replacements );
 			return $replacements;
 		}
 
@@ -183,7 +183,7 @@ class Replacer {
 			unset( $value );
 		}
 
-		$this->set_cache( $string, $replacements );
+		$this->set_cache( $variable, $replacements );
 		return $replacements;
 	}
 
@@ -217,24 +217,24 @@ class Replacer {
 	/**
 	 * Check if we have cache for a string.
 	 *
-	 * @param string $string String to check.
+	 * @param string $variable String to check.
 	 *
 	 * @return bool
 	 */
-	private function has_cache( $string ) {
-		return isset( self::$replacements_cache[ md5( $string ) ] );
+	private function has_cache( $variable ) {
+		return isset( self::$replacements_cache[ md5( $variable ) ] );
 	}
 
 	/**
 	 * Get cache for a string. Handles non-cacheable variables.
 	 *
-	 * @param string $string String to get cache for.
+	 * @param string $variable String to get cache for.
 	 *
 	 * @return array
 	 */
-	private function get_cache( $string ) {
+	private function get_cache( $variable ) {
 		$non_cacheable = $this->get_non_cacheable_variables();
-		$replacements  = self::$replacements_cache[ md5( $string ) ];
+		$replacements  = self::$replacements_cache[ md5( $variable ) ];
 		if ( empty( $non_cacheable ) ) {
 			return $replacements;
 		}
@@ -260,12 +260,12 @@ class Replacer {
 	/**
 	 * Set cache for a string.
 	 *
-	 * @param string $string String to set cache for.
+	 * @param string $variable String to set cache for.
 	 *
 	 * @param array  $cache  Cache to set.
 	 */
-	private function set_cache( $string, $cache ) {
-		self::$replacements_cache[ md5( $string ) ] = $cache;
+	private function set_cache( $variable, $cache ) {
+		self::$replacements_cache[ md5( $variable ) ] = $cache;
 	}
 
 	/**
@@ -323,16 +323,16 @@ class Replacer {
 	/**
 	 * Convert arguments string to arguments array.
 	 *
-	 * @param  string $string The string that needs to be converted.
+	 * @param  string $variable The string that needs to be converted.
 	 *
 	 * @return array
 	 */
-	private function normalize_args( $string ) {
-		$string = wp_specialchars_decode( $string );
-		if ( ! Str::contains( '=', $string ) ) {
-			return $string;
+	private function normalize_args( $variable ) {
+		$variable = wp_specialchars_decode( $variable );
+		if ( ! Str::contains( '=', $variable ) ) {
+			return $variable;
 		}
 
-		return wp_parse_args( $string, [] );
+		return wp_parse_args( $variable, [] );
 	}
 }

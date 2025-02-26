@@ -130,7 +130,7 @@ class Block_TOC extends Block {
 
 		$block_content = preg_replace_callback(
 			'/(<div class=".*?wp-block-rank-math-toc-block.*?"\>)/i',
-			function( $value ) use ( $title, $block_content, $title_wrapper ) {
+			function ( $value ) use ( $title, $block_content, $title_wrapper ) {
 				if ( ! isset( $value[0] ) ) {
 					return $block_content;
 				}

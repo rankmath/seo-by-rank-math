@@ -100,7 +100,7 @@ class Author implements Provider {
 
 			$index[] = $item;
 
-			$page++;
+			++$page;
 		}
 
 		return $index;
@@ -264,7 +264,7 @@ class Author implements Provider {
 		unset( $public_post_types['attachment'] );
 
 		if ( ! Helper::get_settings( 'sitemap.include_authors_without_posts' ) ) {
-			$args['has_published_posts'] = array_keys( $public_post_types );	
+			$args['has_published_posts'] = array_keys( $public_post_types );
 		}
 
 		return $args;
@@ -278,11 +278,11 @@ class Author implements Provider {
 	private function get_index_users() {
 		global $wpdb;
 		$include_authors_without_posts = Helper::get_settings( 'sitemap.include_authors_without_posts' );
-		$exclude_users       = Helper::get_settings( 'sitemap.exclude_users' );
-		$exclude_roles       = Helper::get_settings( 'sitemap.exclude_roles' );
-		$exclude_users_query = ! $exclude_users ? '' : 'AND post_author NOT IN ( ' . esc_sql( $exclude_users ) . ' )';
-		$exclude_roles_query = '';
-		$meta_query          = "(
+		$exclude_users                 = Helper::get_settings( 'sitemap.exclude_users' );
+		$exclude_roles                 = Helper::get_settings( 'sitemap.exclude_roles' );
+		$exclude_users_query           = ! $exclude_users ? '' : 'AND post_author NOT IN ( ' . esc_sql( $exclude_users ) . ' )';
+		$exclude_roles_query           = '';
+		$meta_query                    = "(
 		 		( um.meta_key = 'rank_math_robots' AND um.meta_value NOT LIKE '%noindex%' )
 		 		OR um.user_id IS NULL
 			)

@@ -47,7 +47,7 @@ class DB {
 			->one( ARRAY_A );
 
 		$redirction_counts = array_map(
-			function( $value ) {
+			function ( $value ) {
 				return $value ? $value : 0;
 			},
 			$redirction_counts
@@ -314,12 +314,11 @@ class DB {
 	/**
 	 *  Get source by.
 	 *
-	 * @param array  $data     Redirection fields.
-	 * @param string $status Status to filter with.
+	 * @param array $data Redirection fields.
 	 *
 	 * @return bool|array
 	 */
-	public static function get_redirection_by( $data = [], $status = 'all' ) {
+	public static function get_redirection_by( $data = [] ) {
 		$table = self::table()->where( $data );
 
 		$item = $table->one( ARRAY_A );

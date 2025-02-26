@@ -34,10 +34,10 @@ $cmb->add_field(
 
 $cmb->add_field(
 	[
-		'id'      => 'website_alternate_name',
-		'type'    => 'text',
-		'name'    => esc_html__( 'Website Alternate Name', 'rank-math' ),
-		'desc'    => esc_html__( 'An alternate version of your site name (for example, an acronym or shorter name).', 'rank-math' ),
+		'id'   => 'website_alternate_name',
+		'type' => 'text',
+		'name' => esc_html__( 'Website Alternate Name', 'rank-math' ),
+		'desc' => esc_html__( 'An alternate version of your site name (for example, an acronym or shorter name).', 'rank-math' ),
 	]
 );
 

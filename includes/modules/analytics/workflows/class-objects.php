@@ -82,7 +82,6 @@ class Objects extends Base {
 		} catch ( Exception $e ) { // phpcs:ignore
 			// Will log.
 		}
-
 	}
 
 	/**
@@ -126,7 +125,7 @@ class Objects extends Base {
 		$counter = 0;
 		$chunks  = \array_chunk( $ids, 50 );
 		foreach ( $chunks as $chunk ) {
-			$counter++;
+			++$counter;
 			as_schedule_single_action(
 				time() + ( 60 * ( $counter / 2 ) ),
 				'rank_math/analytics/flat_posts',

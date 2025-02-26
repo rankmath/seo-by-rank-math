@@ -45,7 +45,7 @@ class Admin {
 					'title' => esc_html__( 'Images', 'rank-math' ),
 					/* translators: Link to kb article */
 					'desc'  => sprintf( esc_html__( 'SEO options related to featured images and media appearing in your post content. %s.', 'rank-math' ), '<a href="' . KB::get( 'image-settings', 'Options Panel Images Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
-					'file'  => dirname( __FILE__ ) . '/options.php',
+					'file'  => __DIR__ . '/options.php',
 				],
 			],
 			3
@@ -53,5 +53,4 @@ class Admin {
 
 		return $tabs;
 	}
-
 }

@@ -14,6 +14,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Objects class.
+ *
+ * @method set_page_as_key()
  */
 class Objects extends Summary {
 

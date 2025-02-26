@@ -57,7 +57,7 @@ class DB {
 			$sql = "ALTER TABLE `{$prefixed}` COLLATE={$collate}";
 			error_log( sprintf( 'Rank Math: Changing collation of `%1$s` table from %2$s to %3$s. SQL: "%4$s"', $prefixed, $current_collate, $collate, $sql ) ); // phpcs:ignore
 			$wpdb->query( $sql ); // phpcs:ignore
-			$changed_collations++;
+			++$changed_collations;
 		}
 
 		// Now handle columns if needed.
@@ -89,7 +89,7 @@ class DB {
 			$sql = "ALTER TABLE `{$prefixed}` MODIFY `{$col['Field']}` {$col['Type']} COLLATE {$collate} {$null} {$default}";
 			error_log( sprintf( 'Rank Math: Changing collation of `%1$s`.`%2$s` column from %3$s to %4$s. SQL: "%5$s"', $prefixed, $col['Field'], $current_collate, $collate, $sql ) ); // phpcs:ignore
 			$wpdb->query( $sql ); // phpcs:ignore
-			$changed_collations++;
+			++$changed_collations;
 		}
 
 		return $changed_collations;

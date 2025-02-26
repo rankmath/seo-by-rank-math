@@ -34,21 +34,21 @@ class Block {
 	/**
 	 * Function to get the block image.
 	 *
-	 * @param array  $attrs Block attributes data.
-	 * @param string $size  Image size.
-	 * @param string $class Attachment image class.
+	 * @param array  $attrs       Block attributes data.
+	 * @param string $size        Image size.
+	 * @param string $image_class Attachment image class.
 	 *
 	 * @return string The HTML image element.
 	 */
-	protected function get_image( $attrs, $size = 'thumbnail', $class = 'class=alignright' ) {
+	protected function get_image( $attrs, $size = 'thumbnail', $image_class = 'class=alignright' ) {
 		$image_id = empty( $attrs['imageID'] ) ? '' : absint( $attrs['imageID'] );
 		if ( ! $image_id ) {
 			return '';
 		}
 
-		$html = wp_get_attachment_image( $image_id, $size, false, $class );
+		$html = wp_get_attachment_image( $image_id, $size, false, $image_class );
 
-		return $html ? $html : wp_get_attachment_image( $image_id, 'full', false, $class );
+		return $html ? $html : wp_get_attachment_image( $image_id, 'full', false, $image_class );
 	}
 
 	/**

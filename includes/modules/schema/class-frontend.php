@@ -69,7 +69,7 @@ class Frontend {
 		global $post;
 		$schemas = array_filter(
 			DB::get_schemas( $post->ID ),
-			function( $schema ) {
+			function ( $schema ) {
 				return ! in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
 			}
 		);
@@ -259,7 +259,7 @@ class Frontend {
 		unset( $temp_data['ProfilePage'] );
 		array_walk_recursive(
 			$temp_data,
-			function( $value, $key ) use ( &$ids, $id ) {
+			function ( $value, $key ) use ( &$ids, $id ) {
 				if ( '@id' === $key && $value === $id ) {
 					$ids[] = $value;
 				}
@@ -291,7 +291,7 @@ class Frontend {
 		}
 
 		$faq_data = array_map(
-			function( $schema ) {
+			function ( $schema ) {
 				return isset( $schema['@type'] ) && 'FAQPage' === $schema['@type'];
 			},
 			$schemas

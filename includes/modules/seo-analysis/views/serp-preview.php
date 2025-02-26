@@ -12,12 +12,12 @@
 defined( 'ABSPATH' ) || exit;
 
 $src_format = 'https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=%%SITEURL%%&size=128';
-$favicon    = str_replace( '%%SITEURL%%', urlencode( $this->analyse_url ), $src_format );
+$favicon    = str_replace( '%%SITEURL%%', rawurlencode( $this->analyse_url ), $src_format );
 
 if ( is_array( $this->results ) ) {
 	if ( isset( $this->results['title_length'] ) ) {
 		$title_data = $this->results['title_length']->get_result();
-		$title      = $title_data['data'];
+		$page_title = $title_data['data'];
 	}
 
 	if ( isset( $this->results['description_length'] ) ) {
@@ -26,12 +26,12 @@ if ( is_array( $this->results ) ) {
 	}
 }
 
-if ( empty( $title ) ) {
-	$title = __( '(No Title)', 'rank-math' );
+if ( empty( $page_title ) ) {
+	$page_title = __( '(No Title)', 'rank-math' );
 }
 // Cut title to 60 characters.
-if ( strlen( $title ) > 60 ) {
-	$title = substr( $title, 0, 60 ) . '...';
+if ( strlen( $page_title ) > 60 ) {
+	$page_title = substr( $page_title, 0, 60 ) . '...';
 }
 
 if ( empty( $description ) ) {
@@ -49,7 +49,7 @@ if ( strlen( $description ) > 160 ) {
 			<img src="<?php echo $favicon; // phpcs:ignore ?>" width="16" height="16" class="serp-favicon" />
 			<span class="serp-url"><?php echo esc_url( $this->analyse_url ); ?></span>
 		</div>
-		<h5 class="serp-title"><?php echo esc_html( $title ); ?></h5>
+		<h5 class="serp-title"><?php echo esc_html( $page_title ); ?></h5>
 
 		<p class="serp-description"><?php echo esc_html( $description ); ?></p>
 	</div>

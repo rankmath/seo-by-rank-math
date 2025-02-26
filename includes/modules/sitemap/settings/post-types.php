@@ -10,11 +10,11 @@ use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-$attributes = [];
-$post_type  = $tab['post_type'];
-$prefix     = "pt_{$post_type}_";
+$attributes        = [];
+$current_post_type = $tab['post_type'];
+$prefix            = "pt_{$current_post_type}_";
 
-if ( 'attachment' === $post_type && Helper::get_settings( 'general.attachment_redirect_urls', true ) ) {
+if ( 'attachment' === $current_post_type && Helper::get_settings( 'general.attachment_redirect_urls', true ) ) {
 	$cmb->add_field(
 		[
 			'id'      => 'attachment_redirect_urls_notice',
@@ -33,7 +33,7 @@ $cmb->add_field(
 		'type'       => 'toggle',
 		'name'       => esc_html__( 'Include in Sitemap', 'rank-math' ),
 		'desc'       => esc_html__( 'Include this post type in the XML sitemap.', 'rank-math' ),
-		'default'    => 'attachment' === $post_type ? 'off' : 'on',
+		'default'    => 'attachment' === $current_post_type ? 'off' : 'on',
 		'attributes' => $attributes,
 	]
 );
@@ -44,7 +44,7 @@ $cmb->add_field(
 		'type'       => 'toggle',
 		'name'       => esc_html__( 'Include in HTML Sitemap', 'rank-math' ),
 		'desc'       => esc_html__( 'Include this post type in the HTML sitemap if it\'s enabled.', 'rank-math' ),
-		'default'    => 'attachment' === $post_type ? 'off' : 'on',
+		'default'    => 'attachment' === $current_post_type ? 'off' : 'on',
 		'attributes' => $attributes,
 		'classes'    => [
 			'rank-math-html-sitemap',
@@ -53,7 +53,7 @@ $cmb->add_field(
 	]
 );
 
-if ( 'attachment' !== $post_type ) {
+if ( 'attachment' !== $current_post_type ) {
 	$cmb->add_field(
 		[
 			'id'      => $prefix . 'image_customfields',

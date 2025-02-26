@@ -436,5 +436,4 @@ class Product_WooCommerce {
 			'valueAddedTaxIncluded' => wc_prices_include_tax() ? 'true' : 'false',
 		];
 	}
-
 }

@@ -184,8 +184,8 @@ class Headless extends WP_REST_Controller {
 	public function is_valid_url( $url ) {
 		$url = preg_replace_callback(
 			'/[^\x20-\x7f]/',
-			function( $match ) {
-				return rawurlencode( $match[0] );
+			function ( $matcher ) {
+				return rawurlencode( $matcher[0] );
 			},
 			$url
 		);

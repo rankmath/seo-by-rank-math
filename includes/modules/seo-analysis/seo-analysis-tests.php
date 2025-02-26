@@ -486,10 +486,9 @@ function rank_math_analyze_group_result( $data ) {
 /**
  * Check if sitemap module is active.
  *
- * @param SEO_Analyzer $analyzer Analyzer instance.
  * @return array
  */
-function rank_math_analyze_sitemap( $analyzer ) {
+function rank_math_analyze_sitemap() {
 
 	$found = Helper::is_module_active( 'sitemap' );
 	if ( ! $found ) {

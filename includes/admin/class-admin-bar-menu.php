@@ -25,7 +25,9 @@ defined( 'ABSPATH' ) || exit;
  */
 class Admin_Bar_Menu {
 
-	use Hooker, Ajax, Meta;
+	use Hooker;
+	use Ajax;
+	use Meta;
 
 	/**
 	 * The unique identifier used for the menu.
@@ -413,14 +415,14 @@ class Admin_Bar_Menu {
 	/**
 	 * Add sub menu item
 	 *
-	 * @param string $id     Unique ID for the node.
-	 * @param array  $args   Arguments for adding a node.
-	 * @param string $parent Node parent.
+	 * @param string $id          Unique ID for the node.
+	 * @param array  $args        Arguments for adding a node.
+	 * @param string $parent_node Node parent.
 	 */
-	public function add_sub_menu( $id, $args, $parent = '' ) {
+	public function add_sub_menu( $id, $args, $parent_node = '' ) {
 		$args['priority']   = isset( $args['priority'] ) ? $args['priority'] : 999;
 		$args['id']         = 'rank-math-' . $id;
-		$args['parent']     = '' !== $parent ? 'rank-math-' . $parent : self::MENU_IDENTIFIER;
+		$args['parent']     = '' !== $parent_node ? 'rank-math-' . $parent_node : self::MENU_IDENTIFIER;
 		$this->items[ $id ] = $args;
 	}
 
@@ -477,5 +479,4 @@ class Admin_Bar_Menu {
 	private function get_icon( $width = 20 ) {
 		return '<svg viewBox="0 0 462.03 462.03" xmlns="http://www.w3.org/2000/svg" width="' . $width . '"><g><path d="m462 234.84-76.17 3.43 13.43 21-127 81.18-126-52.93-146.26 60.97 10.14 24.34 136.1-56.71 128.57 54 138.69-88.61 13.43 21z"/><path d="m54.1 312.78 92.18-38.41 4.49 1.89v-54.58h-96.67zm210.9-223.57v235.05l7.26 3 89.43-57.05v-181zm-105.44 190.79 96.67 40.62v-165.19h-96.67z"/></g></svg>';
 	}
-
 }

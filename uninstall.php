@@ -45,8 +45,8 @@ if ( true === apply_filters( 'rank_math_clear_data_on_uninstall', false ) ) {
 
 	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" );
 	if ( ! empty( $blog_ids ) ) {
-		foreach ( $blog_ids as $blog_id ) {
-			switch_to_blog( $blog_id );
+		foreach ( $blog_ids as $site_id ) {
+			switch_to_blog( $site_id );
 			rank_math_remove_data();
 			restore_current_blog();
 		}
@@ -81,7 +81,7 @@ function rank_math_remove_data() {
 	/**
 	 * PSR-4 Autoload.
 	 */
-	include dirname( __FILE__ ) . '/vendor/autoload.php';
+	include __DIR__ . '/vendor/autoload.php';
 
 	\RankMath\Role_Manager\Capability_Manager::get()->remove_capabilities();
 

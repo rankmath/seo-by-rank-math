@@ -15,7 +15,6 @@ use RankMath\Helpers\Param;
 use RankMath\Traits\Hooker;
 use RankMath\Paper\Paper;
 use RankMath\Admin\Metabox\Screen;
-use RankMath\Schema\DB;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -86,11 +85,11 @@ class Update_Score {
 					'post_type'      => $this->get_post_types(),
 				]
 			);
-			$post  = isset( $posts[0] ) ? $posts[0] : null;
+			$post  = isset( $posts[0] ) ? $posts[0] : null; //phpcs:ignore -- Overriding $post is required to load the localized data for the post.
 		}
 
 		$this->screen->localize();
-		$post = $temp_post;
+		$post = $temp_post; //phpcs:ignore -- Overriding $post is required to load the localized data for the post.
 
 		Helper::add_json( 'totalPostsWithoutScore', $this->find( false ) );
 		Helper::add_json( 'totalPosts', $this->find( true ) );
@@ -105,7 +104,7 @@ class Update_Score {
 		$offset = isset( $args['offset'] ) ? absint( $args['offset'] ) : 0;
 
 		// We get "paged" when running from the importer.
-		$paged  = Param::post( 'paged', 0 );
+		$paged = Param::post( 'paged', 0 );
 		if ( $paged ) {
 			$offset = ( $paged - 1 ) * $this->batch_size;
 		}
@@ -118,7 +117,6 @@ class Update_Score {
 			'orderby'        => 'ID',
 			'order'          => 'ASC',
 			'status'         => 'any',
-
 			'meta_query'     => [
 				'relation' => 'AND',
 				[
@@ -152,7 +150,7 @@ class Update_Score {
 
 		add_filter(
 			'rank_math/replacements/non_cacheable',
-			function( $non_cacheable ) {
+			function ( $non_cacheable ) {
 				$non_cacheable[] = 'excerpt';
 				$non_cacheable[] = 'excerpt_only';
 				$non_cacheable[] = 'seo_description';
@@ -172,12 +170,12 @@ class Update_Score {
 			$keywords  = array_map( 'trim', explode( ',', Helper::get_post_meta( 'focus_keyword', $post_id ) ) );
 			$keyword   = $keywords[0];
 
-			$values    = [
+			$values = [
 				'title'        => Helper::replace_vars( '%seo_title%', $post ),
 				'description'  => Helper::replace_vars( '%seo_description%', $post ),
 				'keywords'     => $keywords,
 				'keyword'      => $keyword,
-				'content'      => $post->post_content,
+				'content'      => wpautop( $post->post_content ),
 				'url'          => urldecode( get_the_permalink( $post_id ) ),
 				'hasContentAi' => ! empty( Helper::get_post_meta( 'contentai_score', $post_id ) ),
 			];
@@ -186,30 +184,6 @@ class Update_Score {
 				$thumbnail_id           = get_post_thumbnail_id( $post_id );
 				$values['thumbnail']    = get_the_post_thumbnail_url( $post_id );
 				$values['thumbnailAlt'] = get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true );
-			}
-
-			if (
-				( Helper::is_woocommerce_active() && 'product' === $post_type ) ||
-				( Helper::is_edd_active() && 'download' === $post_type )
-			) {
-				$values['isProduct']       = true;
-				$values['isReviewEnabled'] = 'yes' === get_option( 'woocommerce_enable_reviews', 'yes' );
-
-				$schemas = DB::get_schemas( $post_id );
-				if ( empty( $schemas ) && Helper::get_default_schema_type( $post_id ) ) {
-					$schemas = [
-						[ '@type' => Helper::get_default_schema_type( $post_id ) ],
-					];
-				}
-
-				$schemas = array_filter(
-					$schemas,
-					function( $schema ) {
-						return in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct', 'Product' ], true );
-					}
-				);
-
-				$values['hasProductSchema'] = ! empty( $schemas );
 			}
 
 			/**
@@ -310,5 +284,4 @@ class Update_Score {
 
 		return $this->do_filter( 'tool/post_types', array_keys( $post_types ) );
 	}
-
 }

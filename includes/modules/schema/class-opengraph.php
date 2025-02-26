@@ -65,7 +65,7 @@ class Opengraph {
 		global $post;
 		$schemas = array_filter(
 			DB::get_schemas( $post->ID ),
-			function( $schema ) {
+			function ( $schema ) {
 				return ! empty( $schema['@type'] ) && in_array( $schema['@type'], [ 'Article', 'NewsArticle', 'BlogPosting', 'Product', 'VideoObject' ], true );
 			}
 		);

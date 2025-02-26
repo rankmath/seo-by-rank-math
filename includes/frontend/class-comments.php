@@ -79,7 +79,7 @@ class Comments {
 
 		if ( isset( $_GET['replytocom'] ) && is_singular() ) {
 			$url          = get_permalink( $GLOBALS['post']->ID );
-			$query_string = Security::remove_query_arg_raw( 'replytocom', sanitize_text_field( $_SERVER['QUERY_STRING'] ) );
+			$query_string = isset( $_SERVER['QUERY_STRING'] ) ? Security::remove_query_arg_raw( 'replytocom', sanitize_text_field( $_SERVER['QUERY_STRING'] ) ) : '';
 			if ( ! empty( $query_string ) ) {
 				$url .= '?' . $query_string;
 			}
@@ -113,5 +113,4 @@ class Comments {
 
 		return $text;
 	}
-
 }

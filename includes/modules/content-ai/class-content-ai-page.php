@@ -100,7 +100,7 @@ class Content_AI_Page {
 				// Translators: placeholder is the new label.
 				'menu_title' => sprintf( esc_html__( 'Content AI %s', 'rank-math' ), $new_label ),
 				'capability' => 'rank_math_content_ai',
-				'render'     => dirname( __FILE__ ) . '/views/main.php',
+				'render'     => __DIR__ . '/views/main.php',
 				'classes'    => [ 'rank-math-page' ],
 				'assets'     => [
 					'styles'  => [

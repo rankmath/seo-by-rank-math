@@ -192,7 +192,7 @@ class Elementor {
 			return false;
 		}
 
-		$post_type = isset( $_GET['post'] ) ? get_post_type( $_GET['post'] ) : '';
+		$post_type = isset( $_GET['post'] ) ? get_post_type( absint( $_GET['post'] ) ) : '';
 		if ( $post_type && ! Helper::get_settings( 'titles.pt_' . $post_type . '_add_meta_box' ) ) {
 			return false;
 		}

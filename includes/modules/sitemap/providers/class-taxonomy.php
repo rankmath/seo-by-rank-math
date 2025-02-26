@@ -257,7 +257,7 @@ class Taxonomy implements Provider {
 				 */
 				'hierarchical'           => false,
 				'update_term_meta_cache' => false,
-				'meta_query' => [
+				'meta_query'             => [
 					'relation' => 'OR',
 					[
 						'key'     => 'rank_math_robots',

@@ -107,7 +107,7 @@ class Import implements Wizard_Step {
 				]
 			);
 
-			$count++;
+			++$count;
 
 			// Add checkbox field to Recalculate SEO Scores.
 			// But not for Redirections.

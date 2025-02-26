@@ -456,13 +456,13 @@ class Paper {
 	 * Get title or description option from the settings.
 	 * The results will be run through the Helper::replace_vars() function.
 	 *
-	 * @param string       $id      Name of the option we are looking for.
-	 * @param object|array $object  Object to pass to the replace_vars function.
-	 * @param string       $default Default value if nothing found.
+	 * @param string       $id            Name of the option we are looking for.
+	 * @param object|array $args          Object to pass to the replace_vars function.
+	 * @param string       $default_value Default value if nothing found.
 	 *
 	 * @return string
 	 */
-	public static function get_from_options( $id, $object = [], $default = '' ) {
+	public static function get_from_options( $id, $args = [], $default_value = '' ) {
 		$value = Helper::get_settings( "titles.$id" );
 
 		// Break loop.
@@ -474,20 +474,20 @@ class Paper {
 			);
 		}
 
-		return Helper::replace_vars( '' !== $value ? $value : $default, $object );
+		return Helper::replace_vars( '' !== $value ? $value : $default_value, $args );
 	}
 
 	/**
 	 * Make robots values as keyed array.
 	 *
-	 * @param array $robots  Main instance.
-	 * @param bool  $default Append default.
+	 * @param array $robots        Main instance.
+	 * @param bool  $default_value Append default.
 	 *
 	 * @return array
 	 */
-	public static function robots_combine( $robots, $default = false ) {
+	public static function robots_combine( $robots, $default_value = false ) {
 		if ( empty( $robots ) || ! is_array( $robots ) ) {
-			return ! $default ? [] : [
+			return ! $default_value ? [] : [
 				'index'  => 'index',
 				'follow' => 'follow',
 			];

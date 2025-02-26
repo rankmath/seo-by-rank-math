@@ -66,7 +66,7 @@ class Analytics extends Base {
 			return;
 		}
 
-		$directory = dirname( __FILE__ );
+		$directory = __DIR__;
 		$this->config(
 			[
 				'id'        => 'analytics',

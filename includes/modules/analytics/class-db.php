@@ -284,22 +284,22 @@ class DB {
 	 */
 	public static function get_inspection_defaults() {
 		$defaults = [
-			'created'                  => current_time( 'mysql' ),
-			'page'                     => '',
-			'index_verdict'            => 'VERDICT_UNSPECIFIED',
-			'indexing_state'           => 'INDEXING_STATE_UNSPECIFIED',
-			'coverage_state'           => '',
-			'page_fetch_state'         => 'PAGE_FETCH_STATE_UNSPECIFIED',
-			'robots_txt_state'         => 'ROBOTS_TXT_STATE_UNSPECIFIED',
-			'rich_results_verdict'     => 'VERDICT_UNSPECIFIED',
-			'rich_results_items'       => '',
-			'last_crawl_time'          => '',
-			'crawled_as'               => 'CRAWLING_USER_AGENT_UNSPECIFIED',
-			'google_canonical'         => '',
-			'user_canonical'           => '',
-			'sitemap'                  => '',
-			'referring_urls'           => '',
-			'raw_api_response'         => '',
+			'created'              => current_time( 'mysql' ),
+			'page'                 => '',
+			'index_verdict'        => 'VERDICT_UNSPECIFIED',
+			'indexing_state'       => 'INDEXING_STATE_UNSPECIFIED',
+			'coverage_state'       => '',
+			'page_fetch_state'     => 'PAGE_FETCH_STATE_UNSPECIFIED',
+			'robots_txt_state'     => 'ROBOTS_TXT_STATE_UNSPECIFIED',
+			'rich_results_verdict' => 'VERDICT_UNSPECIFIED',
+			'rich_results_items'   => '',
+			'last_crawl_time'      => '',
+			'crawled_as'           => 'CRAWLING_USER_AGENT_UNSPECIFIED',
+			'google_canonical'     => '',
+			'user_canonical'       => '',
+			'sitemap'              => '',
+			'referring_urls'       => '',
+			'raw_api_response'     => '',
 		];
 
 		return apply_filters( 'rank_math/analytics/inspection_defaults', $defaults );

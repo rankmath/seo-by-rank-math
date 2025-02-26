@@ -75,21 +75,21 @@ class Term extends Metadata {
 	/**
 	 * Get term meta value.
 	 *
-	 * @param string $key      Meta key.
-	 * @param mixed  $term     Term name, term ID, or term object.
-	 * @param string $taxonomy Optional. Limit matched terms to those matching `$taxonomy`. Only used for
-	 *                         disambiguating potentially shared terms.
-	 * @param string $default Default value to use when metadata does not exists.
+	 * @param string $key           Meta key.
+	 * @param mixed  $term          Term name, term ID, or term object.
+	 * @param string $taxonomy      Optional. Limit matched terms to those matching `$taxonomy`. Only used for
+	 *                              disambiguating potentially shared terms.
+	 * @param string $default_value Default value to use when metadata does not exists.
 	 * @return mixed
 	 */
-	public static function get_meta( $key, $term = 0, $taxonomy = null, $default = '' ) {
+	public static function get_meta( $key, $term = 0, $taxonomy = null, $default_value = '' ) {
 		$term = self::get( $term, $taxonomy );
 
 		if ( is_null( $term ) || ! $term->is_found() ) {
-			return $default;
+			return $default_value;
 		}
 
-		return $term->get_metadata( $key, $default );
+		return $term->get_metadata( $key, $default_value );
 	}
 
 	/**

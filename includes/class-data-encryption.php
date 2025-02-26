@@ -86,7 +86,7 @@ class Data_Encryption {
 			return $value;
 		}
 
-		return base64_encode( $iv . $raw_value );
+		return base64_encode( $iv . $raw_value );  // phpcs:ignore -- Verified as safe usage.
 	}
 
 	/**
@@ -106,7 +106,7 @@ class Data_Encryption {
 			$method = $ciphers[0];
 		}
 
-		$raw_value = base64_decode( $raw_value, true );
+		$raw_value = base64_decode( $raw_value, true );  // phpcs:ignore -- Verified as safe usage.
 
 		$ivlen = openssl_cipher_iv_length( $method );
 		$iv    = substr( $raw_value, 0, $ivlen );

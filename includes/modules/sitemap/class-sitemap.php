@@ -157,9 +157,9 @@ class Sitemap {
 	 *
 	 * @param  int     $object_id   Object id.
 	 * @param  string  $object_type Object type. Accetps: post, term, user.
-	 * @param  boolean $include     Add or Remove object.
+	 * @param  boolean $is_include  Add or Remove object.
 	 */
-	public static function exclude_object( $object_id, $object_type, $include ) {
+	public static function exclude_object( $object_id, $object_type, $is_include ) {
 		$field_id = "exclude_{$object_type}s";
 		$ids      = Helper::get_settings( 'sitemap.' . $field_id );
 
@@ -169,12 +169,12 @@ class Sitemap {
 			$ids = array_filter( wp_parse_id_list( $ids ) );
 
 			// Add object.
-			if ( $include && ! in_array( $object_id, $ids, true ) ) {
+			if ( $is_include && ! in_array( $object_id, $ids, true ) ) {
 				$ids[] = $object_id;
 			}
 
 			// Remove object.
-			if ( ! $include && in_array( $object_id, $ids, true ) ) {
+			if ( ! $is_include && in_array( $object_id, $ids, true ) ) {
 				$ids = array_diff( $ids, [ $object_id ] );
 			}
 
@@ -269,12 +269,12 @@ class Sitemap {
 	/**
 	 * Check if `object` is indexable.
 	 *
-	 * @param int/object $object Post|Term Object.
-	 * @param string     $type   Object Type.
+	 * @param int/object $data_object Post|Term Object.
+	 * @param string     $type        Object Type.
 	 *
 	 * @return boolean
 	 */
-	public static function is_object_indexable( $object, $type = 'post' ) {
+	public static function is_object_indexable( $data_object, $type = 'post' ) {
 		/**
 		 * Filter: 'rank_math/sitemap/include_noindex' - Include noindex data in Sitemap.
 		 *
@@ -289,7 +289,7 @@ class Sitemap {
 
 		$method = 'post' === $type ? 'is_post_indexable' : 'is_term_indexable';
 
-		return Helper::$method( $object );
+		return Helper::$method( $data_object );
 	}
 
 	/**

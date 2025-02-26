@@ -42,13 +42,13 @@ class Robots_Txt {
 	/**
 	 * Replace robots.txt content.
 	 *
-	 * @param string $content Robots.txt file content.
-	 * @param bool   $public  Whether the site is considered "public".
+	 * @param string $content   Robots.txt file content.
+	 * @param bool   $is_public Whether the site is considered "public".
 	 *
 	 * @return string New robots.txt content.
 	 */
-	public function robots_txt( $content, $public ) {
-		return 0 === absint( $public ) ? $content : Helper::get_settings( 'general.robots_txt_content' );
+	public function robots_txt( $content, $is_public ) {
+		return 0 === absint( $is_public ) ? $content : Helper::get_settings( 'general.robots_txt_content' );
 	}
 
 	/**
@@ -67,7 +67,7 @@ class Robots_Txt {
 					'title'     => esc_html__( 'Edit robots.txt', 'rank-math' ),
 					/* translators: Link to kb article */
 					'desc'      => sprintf( esc_html__( 'Edit your robots.txt file to control what bots see. %s.', 'rank-math' ), '<a href="' . KB::get( 'edit-robotstxt', 'Options Panel Robots Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
-					'file'      => dirname( __FILE__ ) . '/options.php',
+					'file'      => __DIR__ . '/options.php',
 					'classes'   => 'rank-math-advanced-option',
 					'after_row' => '<div class="rank-math-desc">' . __( 'Leave the field empty to let WordPress handle the contents dynamically. If an actual robots.txt file is present in the root folder of your site, this option won\'t take effect and you have to edit the file directly, or delete it and then edit from here.', 'rank-math' ) . '</div>',
 				],

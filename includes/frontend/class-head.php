@@ -156,7 +156,7 @@ class Head {
 		$old_wp_query = null;
 		if ( ! $wp_query->is_main_query() ) {
 			$old_wp_query = $wp_query;
-			wp_reset_query();
+			wp_reset_query(); //phpcs:ignore -- This function is needed here to reset the query before running the head code.
 		}
 
 		$this->credits();
@@ -372,8 +372,8 @@ class Head {
 		if ( Str::is_non_empty( $link ) ) {
 			$allowed_tags = [
 				'link' => [
-					'href'  => [],
-					'rel'   => [],
+					'href' => [],
+					'rel'  => [],
 				],
 			];
 			echo wp_kses( $link, $allowed_tags );
@@ -440,7 +440,7 @@ class Head {
 		$old_wp_query = null;
 		if ( ! $wp_query->is_main_query() ) {
 			$old_wp_query = $wp_query;
-			wp_reset_query();
+			wp_reset_query(); //phpcs:ignore -- This function is needed here to reset the query before running the head code.
 		}
 
 		$content = ob_get_clean();

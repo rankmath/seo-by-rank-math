@@ -38,6 +38,37 @@ class Base {
 	public $args;
 
 	/**
+	 * Register variable replacements.
+	 *
+	 * @var array
+	 */
+	protected $replacements = [];
+
+	/**
+	 * Register variables
+	 *
+	 * For developers see rank_math_register_var_replacement().
+	 *
+	 * @param string $id        Uniquer ID of variable, for example custom.
+	 * @param array  $args      Array with additional name, description, variable and example values for the variable.
+	 * @param mixed  $callback  Replacement callback. Should return value, not output it.
+	 *
+	 * @return bool Replacement was registered successfully or not.
+	 */
+	public function register_replacement( $id, $args = [], $callback = false ) {
+		if ( ! $this->is_unique_id( $id ) ) {
+			return false;
+		}
+
+		$variable = Variable::from( $id, $args );
+		$variable->set_callback( $callback );
+
+		$this->replacements[ $id ] = $variable;
+
+		return true;
+	}
+
+	/**
 	 * Get a comma separated list of the post's terms.
 	 *
 	 * @param int    $id            ID of the post.
@@ -64,64 +95,6 @@ class Base {
 	}
 
 	/**
-	 * Get the selected term, if we're on a taxonomy archive.
-	 *
-	 * @return string
-	 */
-	private function get_queried_term_object() {
-		if ( is_category() || is_tag() || is_tax() ) {
-			$term = $GLOBALS['wp_query']->get_queried_object();
-			if ( is_object( $term ) && isset( $term->name ) ) {
-				return $term->name;
-			}
-		}
-
-		return '';
-	}
-
-	/**
-	 * Get the post's terms.
-	 *
-	 * @param int    $id            ID of the post.
-	 * @param string $taxonomy      The taxonomy to get the terms from.
-	 * @param bool   $return_single Return the first term only.
-	 * @param array  $args          Array of arguments.
-	 * @param string $field         The term field to return.
-	 *
-	 * @return string Either a single term field or a comma delimited list of terms.
-	 */
-	private function get_the_terms( $id, $taxonomy, $return_single = false, $args = [], $field = 'name' ) {
-		$args = wp_parse_args(
-			$args,
-			[
-				'limit'     => 99,
-				'separator' => ', ',
-				'exclude'   => [],
-			]
-		);
-
-		if ( ! empty( $args['exclude'] ) ) {
-			$args['exclude'] = array_map( 'intval', explode( ',', $args['exclude'] ) );
-		}
-
-		$terms = get_the_terms( $id, $taxonomy );
-		if ( is_wp_error( $terms ) || empty( $terms ) ) {
-			return '';
-		}
-
-		array_splice( $terms, $args['limit'] );
-		$output = [];
-		$terms  = $this->filter_exclude( $terms, $args['exclude'] );
-
-		if ( empty( $terms ) ) {
-			return '';
-		}
-
-		return $return_single ? $terms[0]->{$field} :
-			join( $args['separator'], wp_list_pluck( $terms, $field ) );
-	}
-
-	/**
 	 * Filter terms for exclude.
 	 *
 	 * @param array $terms   Terms to filter.
@@ -136,7 +109,7 @@ class Base {
 
 		return array_filter(
 			$terms,
-			function( $term ) use ( $exclude ) {
+			function ( $term ) use ( $exclude ) {
 				return in_array( $term->term_id, $exclude, true ) ? false : true;
 			}
 		);
@@ -274,5 +247,84 @@ class Base {
 		}
 
 		return $wp_query->get_queried_object()->post_type;
+	}
+
+	/**
+	 * Get the selected term, if we're on a taxonomy archive.
+	 *
+	 * @return string
+	 */
+	private function get_queried_term_object() {
+		if ( is_category() || is_tag() || is_tax() ) {
+			$term = $GLOBALS['wp_query']->get_queried_object();
+			if ( is_object( $term ) && isset( $term->name ) ) {
+				return $term->name;
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Get the post's terms.
+	 *
+	 * @param int    $id            ID of the post.
+	 * @param string $taxonomy      The taxonomy to get the terms from.
+	 * @param bool   $return_single Return the first term only.
+	 * @param array  $args          Array of arguments.
+	 * @param string $field         The term field to return.
+	 *
+	 * @return string Either a single term field or a comma delimited list of terms.
+	 */
+	private function get_the_terms( $id, $taxonomy, $return_single = false, $args = [], $field = 'name' ) {
+		$args = wp_parse_args(
+			$args,
+			[
+				'limit'     => 99,
+				'separator' => ', ',
+				'exclude'   => [],
+			]
+		);
+
+		if ( ! empty( $args['exclude'] ) ) {
+			$args['exclude'] = array_map( 'intval', explode( ',', $args['exclude'] ) );
+		}
+
+		$terms = get_the_terms( $id, $taxonomy );
+		if ( is_wp_error( $terms ) || empty( $terms ) ) {
+			return '';
+		}
+
+		array_splice( $terms, $args['limit'] );
+		$output = [];
+		$terms  = $this->filter_exclude( $terms, $args['exclude'] );
+
+		if ( empty( $terms ) ) {
+			return '';
+		}
+
+		return $return_single ? $terms[0]->{$field} :
+			join( $args['separator'], wp_list_pluck( $terms, $field ) );
+	}
+
+	/**
+	 * Check if variable ID is valid and unique before further processing.
+	 *
+	 * @param string $id Variable ID.
+	 *
+	 * @return bool Whether the variable is valid or not.
+	 */
+	private function is_unique_id( $id ) {
+		if ( false === preg_match( '`^[A-Z0-9_-]+$`i', $id ) ) {
+			trigger_error( esc_html__( 'Variable names can only contain alphanumeric characters, underscores and dashes.', 'rank-math' ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+			return false;
+		}
+
+		if ( isset( $this->replacements[ $id ] ) ) {
+			trigger_error( esc_html__( 'The variable has already been registered.', 'rank-math' ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+			return false;
+		}
+
+		return true;
 	}
 }

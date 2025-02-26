@@ -10,6 +10,7 @@
 
 namespace RankMath;
 
+use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
 
@@ -39,12 +40,11 @@ class Updates implements Runner {
 		'1.0.201'   => 'updates/update-1.0.201.php',
 		'1.0.201.1' => 'updates/update-1.0.201.1.php',
 		'1.0.202'   => 'updates/update-1.0.202.php',
-		'1.0.208'   => 'updates/update-1.0.208.php',
-		'1.0.209'   => 'updates/update-1.0.209.php',
 		'1.0.211'   => 'updates/update-1.0.211.php',
 		'1.0.232'   => 'updates/update-1.0.232.php',
 		'1.0.237'   => 'updates/update-1.0.237.php',
 		'1.0.238'   => 'updates/update-1.0.238.php',
+		'1.0.239'   => 'updates/update-1.0.239.php',
 	];
 
 	/**
@@ -85,7 +85,7 @@ class Updates implements Runner {
 
 		// Save install date.
 		if ( false === boolval( get_option( 'rank_math_install_date' ) ) ) {
-			update_option( 'rank_math_install_date', current_time( 'timestamp' ) ); // phpcs:ignore
+			update_option( 'rank_math_install_date', Helper::get_current_time() );
 		}
 
 		// Clear rollback option if necessary.

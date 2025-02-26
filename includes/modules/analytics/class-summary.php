@@ -16,6 +16,16 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Summary class.
+ *
+ * @method get_cache_key()
+ * @method get_intervals()
+ * @method get_sql_date_intervals()
+ * @method set_dimension_as_key()
+ * @method extract_data_from_mixed()
+ * @method get_merged_metrics()
+ * @method get_merge_data_graph()
+ * @method get_date_array()
+ * @method get_graph_data_flat()
  */
 class Summary {
 
@@ -184,10 +194,10 @@ class Summary {
 			$query->where( 'object_subtype', $post_type );
 		}
 
-		$average         = $query->one();
+		$average = $query->one();
 		if ( $average && $average->total > 0 ) {
 			$average->total += property_exists( $stats, 'noData' ) ? $stats->noData : 0; // phpcs:ignore
-			$stats->average = \round( $average->score / $average->total, 2 );
+			$stats->average  = \round( $average->score / $average->total, 2 );
 		}
 
 		$this->set_cache( $cache_key, $stats, $cache_group, DAY_IN_SECONDS );

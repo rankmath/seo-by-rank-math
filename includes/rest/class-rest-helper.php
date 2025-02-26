@@ -39,11 +39,9 @@ class Rest_Helper {
 	/**
 	 * Checks whether a given request has permission to update redirection.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
 	 * @return true|WP_Error True if the request has read access, WP_Error object otherwise.
 	 */
-	public static function get_redirection_permissions_check( $request ) {
+	public static function get_redirection_permissions_check() {
 		if ( ! Helper::is_module_active( 'redirections' ) || ! Helper::has_cap( 'redirections' ) ) {
 			return new WP_Error(
 				'rest_cannot_edit',

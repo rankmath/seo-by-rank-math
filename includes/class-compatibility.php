@@ -50,7 +50,7 @@ class Compatibility {
 			if ( function_exists( 'qtrans_convertURL' ) ) {
 				$page_permalink = qtrans_convertURL( $page_permalink );
 			}
-			if ( ( strpos( $_SERVER['REQUEST_URI'], $page_permalink ) !== false ) ) {
+			if ( isset( $_SERVER['REQUEST_URI'] ) && ( strpos( sanitize_text_field( $_SERVER['REQUEST_URI'] ), $page_permalink ) !== false ) ) {
 				$this->action( 'rank_math/head', 'subscribe_to_comments_reloaded_remove_robots', 1 );
 				return get_queried_object_id();
 			}
@@ -90,14 +90,14 @@ class Compatibility {
 	/**
 	 * Disable Genesis SEO functionality.
 	 *
-	 * @param array $array Array hold disable info.
+	 * @param array $value Array hold disable info.
 	 *
 	 * @return array
 	 */
-	public function disable_genesis_seo( $array ) {
-		$array['classes'][]   = '\RankMath\RankMath';
-		$array['functions'][] = 'rank_math';
+	public function disable_genesis_seo( $value ) {
+		$value['classes'][]   = '\RankMath\RankMath';
+		$value['functions'][] = 'rank_math';
 
-		return $array;
+		return $value;
 	}
 }

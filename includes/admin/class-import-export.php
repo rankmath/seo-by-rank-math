@@ -24,7 +24,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Import_Export implements Runner {
 
-	use Hooker, Ajax;
+	use Hooker;
+	use Ajax;
 
 	/**
 	 * Register hooks.
@@ -95,7 +96,7 @@ class Import_Export implements Runner {
 	 * @return array
 	 */
 	public function get_panels() {
-		$dir = dirname( __FILE__ ) . '/views/import-export/';
+		$dir = __DIR__ . '/views/import-export/';
 
 		$panels = [
 			'import-export' => [
@@ -305,7 +306,7 @@ class Import_Export implements Runner {
 
 		// Add.
 		if ( 'add' === $action ) {
-			$key     = current_time( 'U' );
+			$key     = Helper::get_current_time();
 			$backups = [ $key => $this->get_export_data() ] + $backups;
 		}
 
@@ -356,7 +357,7 @@ class Import_Export implements Runner {
 		$settings = $wp_filesystem->get_contents( $file['file'] );
 		$settings = json_decode( $settings, true );
 
-		\unlink( $file['file'] );
+		\wp_delete_file( $file['file'] );
 
 		if ( is_array( $settings ) && $this->do_import_data( $settings ) ) {
 			Helper::add_notification( esc_html__( 'Settings successfully imported. Your old configuration has been saved as a backup.', 'rank-math' ), [ 'type' => 'success' ] );
@@ -377,7 +378,7 @@ class Import_Export implements Runner {
 		$this->filter( 'wp_check_filetype_and_ext', 'filetype_and_ext', 10, 4 );
 
 		// Do the upload.
-		$file = wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] );
+		$file = isset( $_FILES['import-me'] ) ? wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] ) : '';
 
 		// Remove upload hooks.
 		$this->remove_filter( 'upload_mimes', 'allow_txt_upload', 10 );
@@ -506,7 +507,7 @@ class Import_Export implements Runner {
 				continue;
 			}
 
-			$sources = unserialize( trim( $redirection['sources'] ), [ 'allowed_classes' => false ] );
+			$sources = unserialize( trim( $redirection['sources'] ), [ 'allowed_classes' => false ] ); // phpcs:ignore -- We are going to move Redirections sources to JSON, that will fix this issue.
 			if ( ! is_array( $sources ) || $sources instanceof \__PHP_Incomplete_Class ) {
 				continue;
 			}

@@ -110,31 +110,31 @@ class Singular implements IPaper {
 	/**
 	 * Set post object.
 	 *
-	 * @param WP_Post $object Current post object.
+	 * @param WP_Post $post Current post object.
 	 */
-	public function set_object( $object ) {
-		$this->object = $object;
+	public function set_object( $post ) {
+		$this->object = $post;
 	}
 
 	/**
 	 * Get the SEO title set in the post metabox.
 	 *
-	 * @param object|null $object Post object to retrieve the title for.
+	 * @param object|null $post Post object to retrieve the title for.
 	 *
 	 * @return string
 	 */
-	protected function get_post_title( $object = null ) {
-		if ( ! is_object( $object ) ) {
+	protected function get_post_title( $post = null ) {
+		if ( ! is_object( $post ) ) {
 			return Paper::get_from_options( '404_title', [], esc_html__( 'Page not found', 'rank-math' ) );
 		}
 
-		$title = Post::get_meta( 'title', $object->ID );
+		$title = Post::get_meta( 'title', $post->ID );
 		if ( '' !== $title ) {
 			return $title;
 		}
 
-		$post_type = isset( $object->post_type ) ? $object->post_type : $object->query_var;
-		return Paper::get_from_options( "pt_{$post_type}_title", $object, '%title% %sep% %sitename%' );
+		$post_type = isset( $post->post_type ) ? $post->post_type : $post->query_var;
+		return Paper::get_from_options( "pt_{$post_type}_title", $post, '%title% %sep% %sitename%' );
 	}
 
 	/**
@@ -147,54 +147,54 @@ class Singular implements IPaper {
 	 *     4. Paragraph with the focus keyword
 	 *     5. The First paragraph of the content
 	 *
-	 * @param object|null $object Object to retrieve the description from.
+	 * @param object|null $post Object to retrieve the description from.
 	 *
 	 * @return string The SEO description for the specified object, or queried object if not supplied.
 	 */
-	protected function get_post_description( $object = null ) {
-		if ( ! is_object( $object ) ) {
+	protected function get_post_description( $post = null ) {
+		if ( ! is_object( $post ) ) {
 			return '';
 		}
 
 		// 1. Custom meta description set for the post in SERP field.
-		$description = Post::get_meta( 'description', $object->ID );
+		$description = Post::get_meta( 'description', $post->ID );
 		if ( '' !== $description ) {
 			return $description;
 		}
 
 		// 2. Excerpt
-		if ( ! empty( $object->post_excerpt ) ) {
-			return $object->post_excerpt;
+		if ( ! empty( $post->post_excerpt ) ) {
+			return $post->post_excerpt;
 		}
 
 		// 3. Description template set in the Titles & Meta.
-		$post_type = isset( $object->post_type ) ? $object->post_type : $object->query_var;
+		$post_type = isset( $post->post_type ) ? $post->post_type : $post->query_var;
 
-		return Str::truncate( Paper::get_from_options( "pt_{$post_type}_description", $object ), 160 );
+		return Str::truncate( Paper::get_from_options( "pt_{$post_type}_description", $post ), 160 );
 	}
 
 	/**
 	 * Retrieves the robots set in the post metabox.
 	 *
-	 * @param object|null $object Object to retrieve the robots data from.
+	 * @param object|null $post Object to retrieve the robots data from.
 	 *
 	 * @return string The robots for the specified object, or queried object if not supplied.
 	 */
-	protected function get_post_robots( $object = null ) {
-		if ( ! is_object( $object ) ) {
+	protected function get_post_robots( $post = null ) {
+		if ( ! is_object( $post ) ) {
 			return [];
 		}
 
-		$post_type = $object->post_type;
-		$robots    = Paper::robots_combine( Post::get_meta( 'robots', $object->ID ) );
+		$post_type = $post->post_type;
+		$robots    = Paper::robots_combine( Post::get_meta( 'robots', $post->ID ) );
 		if ( empty( $robots ) && Helper::get_settings( "titles.pt_{$post_type}_custom_robots" ) ) {
 			$robots = Paper::robots_combine( Helper::get_settings( "titles.pt_{$post_type}_robots" ), true );
 		}
 
 		// `noindex` these conditions.
-		$noindex_private            = 'private' === $object->post_status;
+		$noindex_private            = 'private' === $post->post_status;
 		$no_index_subpages          = is_paged() && Helper::get_settings( 'titles.noindex_paginated_pages' );
-		$noindex_password_protected = ! empty( $object->post_password ) && Helper::get_settings( 'titles.noindex_password_protected' );
+		$noindex_password_protected = ! empty( $post->post_password ) && Helper::get_settings( 'titles.noindex_password_protected' );
 
 		if ( $noindex_private || $noindex_password_protected || $no_index_subpages ) {
 			$robots['index'] = 'noindex';
@@ -206,11 +206,11 @@ class Singular implements IPaper {
 	/**
 	 * Retrieves the advanced robots set in the post metabox.
 	 *
-	 * @param object|null $object Object to retrieve the robots data from.
+	 * @param object|null $post Object to retrieve the robots data from.
 	 *
 	 * @return string The robots for the specified object, or queried object if not supplied.
 	 */
-	protected function get_post_advanced_robots( $object = null ) {
+	protected function get_post_advanced_robots( $post = null ) {
 		if ( ! is_object( $this->object ) ) {
 			return [];
 		}

@@ -282,6 +282,5 @@ class Watcher implements Runner {
 				'classes' => 'is-dismissible',
 			]
 		);
-
 	}
 }

@@ -62,7 +62,7 @@ class OpenGraph {
 	 * Main OpenGraph output.
 	 */
 	public function output_tags() {
-		wp_reset_query();
+		wp_reset_query(); //phpcs:ignore
 
 		/**
 		 * Hook to add all OpenGraph metadata
@@ -80,7 +80,7 @@ class OpenGraph {
 	 * @return bool|string
 	 */
 	public function get_title() {
-		$title = $this->_title();
+		$title = $this->title();
 		if ( $title && Helper::get_settings( 'titles.capitalize_titles' ) ) {
 			$title = Str::mb_ucwords( $title );
 		}
@@ -93,7 +93,7 @@ class OpenGraph {
 	 *
 	 * @return string
 	 */
-	private function _title() {
+	private function title() {
 		$key = $this->prefix . '_title';
 
 		if ( Post::is_simple_page() ) {

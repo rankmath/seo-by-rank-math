@@ -340,7 +340,7 @@ trait Where {
 	 */
 	private function is_valid_type( $type ) {
 		if ( ! in_array( $type, [ 'AND', 'OR', 'WHERE' ], true ) ) {
-			throw new \Exception( 'Invalid where type "' . $type . '"' );
+			throw new \Exception( 'Invalid where type "' . esc_html( $type ) . '"' );
 		}
 	}
 

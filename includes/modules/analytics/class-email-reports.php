@@ -84,7 +84,7 @@ class Email_Reports {
 			return;
 		}
 
-		$directory        = dirname( __FILE__ );
+		$directory        = __DIR__;
 		$this->views_path = $directory . '/views/email-reports/';
 
 		$url              = plugin_dir_url( __FILE__ );
@@ -377,7 +377,7 @@ class Email_Reports {
 		}
 
 		if ( $recursion ) {
-			$recursion--;
+			--$recursion;
 			$content = $this->replace_variables( $content, $recursion );
 		}
 
@@ -466,12 +466,12 @@ class Email_Reports {
 	/**
 	 * Setting getter.
 	 *
-	 * @param string $option  Option name.
-	 * @param mixed  $default Default value.
+	 * @param string $option        Option name.
+	 * @param mixed  $default_value Default value.
 	 * @return mixed
 	 */
-	public static function get_setting( $option, $default = false ) {
-		return Helper::get_settings( 'general.console_email_' . $option, $default );
+	public static function get_setting( $option, $default_value = false ) {
+		return Helper::get_settings( 'general.console_email_' . $option, $default_value );
 	}
 
 	/**

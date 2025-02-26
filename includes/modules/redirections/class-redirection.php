@@ -356,8 +356,8 @@ class Redirection {
 			'https://www.' . $domain,
 			'www.' . $domain,
 		];
-		$url    = str_replace( $search, '', $url );
-		$url    = preg_replace( '/^' . preg_quote( $domain, '/' ) . '/s', '', $url );
+		$url      = str_replace( $search, '', $url );
+		$url      = preg_replace( '/^' . preg_quote( $domain, '/' ) . '/s', '', $url );
 
 		// Empty url.
 		// External domain.

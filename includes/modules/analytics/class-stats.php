@@ -218,7 +218,7 @@ class Stats extends Keywords {
 
 			array_push( $sql_parts, sprintf( "WHEN %s BETWEEN '%s' AND '%s' THEN 'range%d'", $column, $start_date, $end_date, $index ) );
 
-			$index ++;
+			++$index;
 		}
 
 		array_push( $sql_parts, "ELSE 'none'" );
@@ -230,14 +230,14 @@ class Stats extends Keywords {
 	/**
 	 * Get date array
 	 *
-	 * @param  array $dates Dates.
-	 * @param  array $default Default value.
+	 * @param  array $dates         Dates.
+	 * @param  array $default_value Default value.
 	 * @return array
 	 */
-	public function get_date_array( $dates, $default ) {
+	public function get_date_array( $dates, $default_value ) {
 		$data = [];
 		foreach ( $dates as $date => $d ) {
-			$data[ $date ]                  = $default;
+			$data[ $date ]                  = $default_value;
 			$data[ $date ]['date']          = $date;
 			$data[ $date ]['dateFormatted'] = $d['start'] === $d['end'] ? $d['formatted_date'] : $d['formatted_period'];
 			$data[ $date ]['formattedDate'] = $d['formatted_date'];
@@ -453,12 +453,12 @@ class Stats extends Keywords {
 	/**
 	 * Get filter data.
 	 *
-	 * @param string $filter  Filter key.
-	 * @param string $default Filter default value.
+	 * @param string $filter        Filter key.
+	 * @param string $default_value Filter default value.
 	 *
 	 * @return mixed
 	 */
-	public function get_date_from_cookie( $filter, $default ) {
+	public function get_date_from_cookie( $filter, $default_value ) {
 		$cookie_key = 'rank_math_analytics_' . $filter;
 		$new_value  = sanitize_title( Param::post( $filter ) );
 		if ( $new_value ) {
@@ -467,10 +467,10 @@ class Stats extends Keywords {
 		}
 
 		if ( ! empty( $_COOKIE[ $cookie_key ] ) ) {
-			return $_COOKIE[ $cookie_key ];
+			return sanitize_text_field( $_COOKIE[ $cookie_key ] );
 		}
 
-		return $default;
+		return $default_value;
 	}
 
 	/**

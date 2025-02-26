@@ -107,11 +107,11 @@ class JsonLD {
 	/**
 	 * Function to get Old schema data. This code is used in the Schema_Converter to convert old schema data.
 	 *
-	 * @param  int   $post_id Post id for conversion.
-	 * @param  mixed $class   Class instance of snippet.
+	 * @param  int   $post_id       Post id for conversion.
+	 * @param  mixed $snippet_class Class instance of snippet.
 	 * @return array
 	 */
-	public function get_old_schema( $post_id, $class ) {
+	public function get_old_schema( $post_id, $snippet_class ) {
 		global $post;
 		$post          = get_post( $post_id ); // phpcs:ignore
 		$this->post    = $post;
@@ -125,7 +125,7 @@ class JsonLD {
 		 * @param array  $unsigned An array of data to output in json-ld.
 		 * @param JsonLD $unsigned JsonLD instance.
 		 */
-		return $class->process( [], $this );
+		return $snippet_class->process( [], $this );
 	}
 
 	/**
@@ -254,15 +254,15 @@ class JsonLD {
 	/**
 	 * Function to replace variables used in Schema fields.
 	 *
-	 * @param array  $schemas Schema to replace.
-	 * @param object $object  Current Object.
-	 * @param array  $data   Array of json-ld data.
+	 * @param array  $schemas        Schema to replace.
+	 * @param object $current_object Current Object.
+	 * @param array  $data           Array of json-ld data.
 	 *
 	 * @return array
 	 */
-	public function replace_variables( $schemas, $object = [], $data = [] ) {
-		$new_schemas = [];
-		$object      = empty( $object ) ? get_queried_object() : $object;
+	public function replace_variables( $schemas, $current_object = [], $data = [] ) {
+		$new_schemas    = [];
+		$current_object = empty( $current_object ) ? get_queried_object() : $current_object;
 		foreach ( $schemas as $key => $schema ) {
 			if ( 'metadata' === $key ) {
 				$new_schemas['isPrimary'] = ! empty( $schema['isPrimary'] );
@@ -276,7 +276,7 @@ class JsonLD {
 
 			$this->replace_author( $schema, $data );
 			if ( is_array( $schema ) ) {
-				$new_schemas[ $key ] = $this->replace_variables( $schema, $object, $data );
+				$new_schemas[ $key ] = $this->replace_variables( $schema, $current_object, $data );
 				continue;
 			}
 
@@ -289,7 +289,7 @@ class JsonLD {
 			}
 
 			$new_schemas[ $key ] = is_string( $schema ) && Str::contains( '%', $schema ) && ! filter_var( $schema, FILTER_VALIDATE_URL )
-				? Helper::replace_vars( $schema, $object ) : $schema;
+				? Helper::replace_vars( $schema, $current_object ) : $schema;
 			if ( '' === $new_schemas[ $key ] ) {
 				unset( $new_schemas[ $key ] );
 			}

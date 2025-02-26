@@ -105,6 +105,7 @@ defined( 'ABSPATH' ) || exit;
 					<div class="row-description">
 						<div class="row-content">
 							Here are the most common keywords we found on page: 
+							<?php //phpcs:ignore -- wordpress here is a keyword and doesn't represent the brand. ?>
 							<div class="wp-tag-cloud"><span class="keyword-cloud-item" style="font-size: 22.00px">rank</span> <span class="keyword-cloud-item" style="font-size: 21.29px">math</span> <span class="keyword-cloud-item" style="font-size: 15.65px">wordpress</span> <span class="keyword-cloud-item" style="font-size: 13.18px">best</span> <span class="keyword-cloud-item" style="font-size: 12.82px">search</span> <span class="keyword-cloud-item" style="font-size: 12.82px">plugin</span> <span class="keyword-cloud-item" style="font-size: 12.47px">site</span> <span class="keyword-cloud-item" style="font-size: 12.47px">features</span> <span class="keyword-cloud-item" style="font-size: 12.47px">support</span> <span class="keyword-cloud-item" style="font-size: 12.47px">google</span></div>
 							<div class="clear"></div>
 						</div>
@@ -193,8 +194,8 @@ defined( 'ABSPATH' ) || exit;
 						<div class="row-content">
 							One or more keywords were found in the title and description of page.
 							<ul class="info-list">
-								<li><strong>title: </strong> rank, math, wordpress, best</li>
-								<li><strong>description: </strong> rank, math, wordpress, search, plugin, site</li>
+								<li><strong>title: </strong> rank, math, wordpress, best</li> <?php //phpcs:ignore -- wordpress here is a keyword and doesn't represent the brand. ?>
+								<li><strong>description: </strong> rank, math, wordpress, search, plugin, site</li>  <?php //phpcs:ignore -- wordpress here is a keyword and doesn't represent the brand. ?>
 							</ul>
 							<div class="clear"></div>
 						</div>

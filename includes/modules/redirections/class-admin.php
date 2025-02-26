@@ -28,7 +28,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Admin extends Base {
 
-	use Ajax, Hooker;
+	use Ajax;
+	use Hooker;
 
 	/**
 	 * Module ID.
@@ -83,7 +84,7 @@ class Admin extends Base {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		$directory = dirname( __FILE__ );
+		$directory = __DIR__;
 		$this->config(
 			[
 				'id'             => 'redirect',
@@ -386,7 +387,7 @@ class Admin extends Base {
 	 * @return array
 	 */
 	private function get_sources_for_log() {
-		$logs = array_map( 'absint', $_REQUEST['log'] );
+		$logs = isset( $_REQUEST['log'] ) ? array_map( 'absint', $_REQUEST['log'] ) : [];
 		$logs = Monitor_DB::get_logs(
 			[
 				'ids'     => $logs,

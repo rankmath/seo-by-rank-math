@@ -23,7 +23,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Shortcodes {
 
-	use Hooker, Shortcode;
+	use Hooker;
+	use Shortcode;
 
 	/**
 	 * The Constructor.
@@ -165,7 +166,7 @@ class Shortcodes {
 			return;
 		}
 
-		$hash = [
+		$hash   = [
 			'streetAddress'   => 'address',
 			'addressLocality' => 'locality',
 			'addressRegion'   => 'region',
@@ -173,7 +174,7 @@ class Shortcodes {
 			'addressCountry'  => 'country',
 		];
 		$format = nl2br( Helper::get_settings( 'titles.local_address_format' ) );
-		$data = self::get_address( $hash, $address, $format );		
+		$data   = self::get_address( $hash, $address, $format );
 		?>
 		<label><?php esc_html_e( 'Address:', 'rank-math' ); ?></label>
 		<address><?php echo wp_kses_post( $data ); ?></address>
@@ -446,10 +447,9 @@ class Shortcodes {
 	/**
 	 * Yoast map compatibility functionality.
 	 *
-	 * @param  array $args Array of arguments.
 	 * @return string
 	 */
-	public function yoast_map( $args ) {
+	public function yoast_map() {
 		return $this->contact_info(
 			[
 				'show'  => 'map',
@@ -461,10 +461,9 @@ class Shortcodes {
 	/**
 	 * Yoast opening hours compatibility functionality.
 	 *
-	 * @param  array $args Array of arguments.
 	 * @return string
 	 */
-	public function yoast_opening_hours( $args ) {
+	public function yoast_opening_hours() {
 		return $this->contact_info(
 			[
 				'show'  => 'hours',
@@ -475,7 +474,7 @@ class Shortcodes {
 
 	/**
 	 * Get address
-	 * 
+	 *
 	 * @param array  $hash   Hash of tags.
 	 * @param array  $address Address data.
 	 * @param string $format Address format.

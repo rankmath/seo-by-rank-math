@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
 	<span class="wp-header-end"></span>
 
 	<?php if ( Helper::is_site_connected() ) : ?>
-		<?php include dirname( __FILE__ ) . '/form.php'; ?>
+		<?php include __DIR__ . '/form.php'; ?>
 
 		<?php if ( ! $analyzer->analyse_subpage ) : ?>
 			<div class="rank-math-results-wrapper">

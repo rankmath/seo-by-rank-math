@@ -81,11 +81,11 @@ class ContentProcessor {
 	/**
 	 * Process a link.
 	 *
-	 * @param string $link   Link to process.
-	 * @param array  $list   Links to add after process.
-	 * @param array  $counts Counts array.
+	 * @param string $link      Link to process.
+	 * @param array  $new_links Links to add after process.
+	 * @param array  $counts    Counts array.
 	 */
-	private function process_link( $link, &$list, &$counts ) {
+	private function process_link( $link, &$new_links, &$counts ) {
 		$link_type = $this->is_valid_link_type( $link );
 		if ( empty( $link_type ) ) {
 			return;
@@ -102,7 +102,7 @@ class ContentProcessor {
 		}
 		$counts[ "{$link_type}_link_count" ] += 1;
 
-		$list[] = new Link( $link, $target_post_id, $link_type );
+		$new_links[] = new Link( $link, $target_post_id, $link_type );
 	}
 
 	/**

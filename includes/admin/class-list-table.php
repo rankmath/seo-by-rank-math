@@ -17,16 +17,6 @@ use RankMath\Helpers\Param;
  * List_Table class.
  */
 class List_Table extends WP_List_Table {
-
-	/**
-	 * The Constructor.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function __construct( $args = [] ) {
-		parent::__construct( $args );
-	}
-
 	/**
 	 * Message to be displayed when there are no items.
 	 */
@@ -47,12 +37,12 @@ class List_Table extends WP_List_Table {
 	/**
 	 * Get orderby setting.
 	 *
-	 * @param string $default (Optional) Extract order by from request.
+	 * @param string $default_value (Optional) Extract order by from request.
 	 *
 	 * @return string
 	 */
-	protected function get_orderby( $default = 'create_date' ) {
-		return Param::get( 'orderby', $default, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
+	protected function get_orderby( $default_value = 'create_date' ) {
+		return Param::get( 'orderby', $default_value, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 	}
 
 	/**

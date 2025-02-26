@@ -2,7 +2,6 @@
 /**
  * Divi admin integration.
  *
- * @since      TODO
  * @package    RankMath
  * @subpackage RankMath\Core
  * @author     Rank Math <support@rankmath.com>

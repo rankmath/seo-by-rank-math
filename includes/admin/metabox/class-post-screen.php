@@ -392,7 +392,7 @@ class Post_Screen implements IScreen {
 	 * @return bool
 	 */
 	private function plugin_reviewed() {
-		return get_option( 'rank_math_already_reviewed' ) || current_time( 'timestamp' ) < get_option( 'rank_math_install_date' ) + ( 2 * WEEK_IN_SECONDS );
+		return get_option( 'rank_math_already_reviewed' ) || Helper::get_current_time() < get_option( 'rank_math_install_date' ) + ( 2 * WEEK_IN_SECONDS );
 	}
 
 	/**

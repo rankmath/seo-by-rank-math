@@ -10,9 +10,9 @@ use RankMath\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-$taxonomy   = $tab['taxonomy'];
-$prefix     = "tax_{$taxonomy}_";
-$is_enabled = 'category' === $taxonomy ? 'on' : 'off';
+$taxonomy_name = $tab['taxonomy'];
+$prefix        = "tax_{$taxonomy_name}_";
+$is_enabled    = 'category' === $taxonomy_name ? 'on' : 'off';
 
 $cmb->add_field(
 	[

@@ -44,8 +44,6 @@ class Table extends List_Table {
 	 * Prepares the list of items for displaying.
 	 */
 	public function prepare_items() {
-		global $per_page;
-
 		$per_page = $this->get_items_per_page( 'rank_math_404_monitor_per_page', 100 );
 		$search   = $this->get_search();
 

@@ -60,7 +60,7 @@ class Rollback_Version {
 			return false;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'rank-math-rollback' ) ) {
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'rank-math-rollback' ) ) {
 			return false;
 		}
 
@@ -93,13 +93,13 @@ class Rollback_Version {
 		}
 
 		add_filter( 'pre_site_transient_update_plugins', [ $this, 'pre_transient_update_plugins' ], 20 );
-		add_filter( 'gettext', [ $this, 'change_updater_strings' ], 20, 3 );
+		add_filter( 'gettext', [ $this, 'change_updater_strings' ], 20, 2 );
 		$upgrader = new \Plugin_Upgrader( new \Plugin_Upgrader_Skin( compact( 'title', 'nonce', 'url', 'plugin' ) ) );
 		echo '<div class="rank-math-rollback-status">';
 		$upgrader->upgrade( $plugin );
 		echo '</div>';
 		remove_filter( 'pre_site_transient_update_plugins', [ $this, 'pre_transient_update_plugins' ], 20 );
-		remove_filter( 'gettext', [ $this, 'change_updater_strings' ], 20 );
+		remove_filter( 'gettext', [ $this, 'change_updater_strings' ], 20, 2 );
 
 		return true;
 	}
@@ -107,10 +107,9 @@ class Rollback_Version {
 	/**
 	 * Inject old version in the `update_plugins` transient for downgrading.
 	 *
-	 * @param  boolean $false False. Pass truthy value to short-circuit the get_site_transient().
-	 * @return object         New `update_plugins` data object.
+	 * @return object New `update_plugins` data object.
 	 */
-	public function pre_transient_update_plugins( $false ) {
+	public function pre_transient_update_plugins() {
 		$versions       = Beta_Optin::get_available_versions( true );
 		$selected       = Param::post( 'rm_rollback_version' );
 		$package        = $versions[ $selected ];
@@ -130,11 +129,10 @@ class Rollback_Version {
 	 *
 	 * @param  string $translation Translated text.
 	 * @param  string $text        Original text.
-	 * @param  string $domain      Text-domain.
 	 *
 	 * @return string New translated text.
 	 */
-	public function change_updater_strings( $translation, $text, $domain ) {
+	public function change_updater_strings( $translation, $text ) {
 		if ( 'Plugin updated successfully.' === $text ) {
 			return __( 'Plugin rollback successful.', 'rank-math' );
 		}

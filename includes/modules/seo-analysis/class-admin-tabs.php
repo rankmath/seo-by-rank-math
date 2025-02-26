@@ -81,7 +81,7 @@ class Admin_Tabs {
 	 */
 	private function get_nav_links() {
 		$links = [
-			'seo_analyzer'           => [
+			'seo_analyzer'        => [
 				'id'    => 'seo_analyzer',
 				'url'   => 'seo-analysis',
 				'args'  => 'view=seo_analyzer',

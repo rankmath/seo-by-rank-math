@@ -57,7 +57,7 @@ class Breadcrumbs implements Snippet {
 				],
 			];
 
-			$position++;
+			++$position;
 		}
 
 		$entity = apply_filters( 'rank_math/snippet/breadcrumb', $entity );

@@ -337,16 +337,16 @@ trait Conditional {
 
 		$prefix = rest_get_url_prefix();
 		if (
-			defined( 'REST_REQUEST' ) && REST_REQUEST || // (#1)
-			isset( $_GET['rest_route'] ) && // (#2)
-			0 === strpos( trim( $_GET['rest_route'], '\\/' ), $prefix, 0 )
+			( defined( 'REST_REQUEST' ) && REST_REQUEST ) || // (#1)
+			// phpcs:ignore= WordPress.Security.ValidatedSanitizedInput, WordPress.Security.NonceVerification -- Nonce verification is not needed here as this is only used to verify the imported file.
+			( isset( $_GET['rest_route'] ) && 0 === strpos( trim( $_GET['rest_route'], '\\/' ), $prefix, 0 ) ) // (#2)
 		) {
 			return true;
 		}
 
 		// (#3)
 		if ( null === $wp_rewrite ) {
-			$wp_rewrite = new \WP_Rewrite();
+			$wp_rewrite = new \WP_Rewrite();  //phpcs:ignore
 		}
 
 		// (#4)

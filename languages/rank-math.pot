@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.238\n"
+"Project-Id-Version: Rank Math SEO 1.0.239\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-12T05:51:56+00:00\n"
+"POT-Creation-Date: 2025-02-26T04:57:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -811,31 +811,61 @@ msgstr ""
 msgid "Skip Step"
 msgstr ""
 
+msgid "Import Schemas"
+msgstr ""
+
+msgid "Import all Schema data for Posts, Pages, and custom post types."
+msgstr ""
+
 msgid "Import Settings"
 msgstr ""
 
-msgid "Import plugin settings, global meta, sitemap settings, etc."
+msgid "Import AIO SEO plugin settings, global meta, sitemap settings, etc."
 msgstr ""
 
 msgid "Import Post Meta"
 msgstr ""
 
-msgid "Import meta information of your posts/pages like the focus keyword, titles, descriptions, robots meta, OpenGraph info, etc."
-msgstr ""
-
-msgid "Import Term Meta"
-msgstr ""
-
-msgid "Import data like category, tag, and CPT meta data from SEO."
+msgid "Import meta information of your posts/pages like the titles, descriptions, robots meta, OpenGraph info, etc."
 msgstr ""
 
 msgid "Import Author Meta"
 msgstr ""
 
-msgid "Import meta information like titles, descriptions, focus keyword, robots meta, etc., of your author archive pages."
+msgid "Import Social URLs of your author archive pages."
+msgstr ""
+
+msgid "Import Term Meta"
+msgstr ""
+
+msgid "Import meta information of your terms like the titles, descriptions, robots meta, OpenGraph info, etc."
 msgstr ""
 
 msgid "Import Redirections"
+msgstr ""
+
+msgid "Import all the redirections you have already set up in AIO SEO Premium."
+msgstr ""
+
+msgid "Import Locations"
+msgstr ""
+
+msgid "Import Locations Settings."
+msgstr ""
+
+msgid "HTML Sitemap"
+msgstr ""
+
+msgid "Import plugin settings, global meta, sitemap settings, etc."
+msgstr ""
+
+msgid "Import meta information of your posts/pages like the focus keyword, titles, descriptions, robots meta, OpenGraph info, etc."
+msgstr ""
+
+msgid "Import data like category, tag, and CPT meta data from SEO."
+msgstr ""
+
+msgid "Import meta information like titles, descriptions, focus keyword, robots meta, etc., of your author archive pages."
 msgstr ""
 
 msgid "Import all the redirections you have already set up in Yoast Premium."
@@ -845,9 +875,6 @@ msgid "Import Blocks"
 msgstr ""
 
 msgid "Import and convert all compatible blocks in post contents."
-msgstr ""
-
-msgid "Import Locations"
 msgstr ""
 
 msgid "Import Locations Settings from Yoast plugin."
@@ -866,33 +893,6 @@ msgid "Import Video Sitemap Settings from Yoast Video Add-on."
 msgstr ""
 
 msgid "Unable to perform action this time."
-msgstr ""
-
-msgid "Import Schemas"
-msgstr ""
-
-msgid "Import all Schema data for Posts, Pages, and custom post types."
-msgstr ""
-
-msgid "Import AIO SEO plugin settings, global meta, sitemap settings, etc."
-msgstr ""
-
-msgid "Import meta information of your posts/pages like the titles, descriptions, robots meta, OpenGraph info, etc."
-msgstr ""
-
-msgid "Import Social URLs of your author archive pages."
-msgstr ""
-
-msgid "Import meta information of your terms like the titles, descriptions, robots meta, OpenGraph info, etc."
-msgstr ""
-
-msgid "Import all the redirections you have already set up in AIO SEO Premium."
-msgstr ""
-
-msgid "Import Locations Settings."
-msgstr ""
-
-msgid "HTML Sitemap"
 msgstr ""
 
 msgid "Settings imported successfully."
@@ -1338,6 +1338,7 @@ msgid "Choose your Sitemap configuration and select which type of posts or pages
 msgstr ""
 
 #. Translators: placeholder is the KB link.
+#. translators: %s: Link to KB article
 msgid "Learn more."
 msgstr ""
 
@@ -1543,6 +1544,7 @@ msgid "Learn more about the benefits of connecting your account here."
 msgstr ""
 
 #. Translators: placeholder is the KB link.
+#. translators: %s: Link to KB article
 msgid "We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s"
 msgstr ""
 
@@ -1615,6 +1617,7 @@ msgstr ""
 msgid "Enable this option to show the Index Status tab in the Analytics module."
 msgstr ""
 
+#. translators: %s: Link to KB article
 msgid "Ready to switch to Google Analytics 4? %s"
 msgstr ""
 
@@ -1625,9 +1628,6 @@ msgid "Property"
 msgstr ""
 
 msgid "Data Stream"
-msgstr ""
-
-msgid "View"
 msgstr ""
 
 msgid "Install analytics code"
@@ -1649,6 +1649,9 @@ msgid "Exclude Logged-in users"
 msgstr ""
 
 msgid "AdSense"
+msgstr ""
+
+msgid "Select Account"
 msgstr ""
 
 msgid "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module."
@@ -2499,6 +2502,9 @@ msgstr ""
 msgid "Clear Log"
 msgstr ""
 
+msgid "View"
+msgstr ""
+
 msgid "View Redirection"
 msgstr ""
 
@@ -2769,9 +2775,6 @@ msgid "Rank Math [SEO Report] - %s"
 msgstr ""
 
 msgid "Sorry, no post found for given id."
-msgstr ""
-
-msgid "The Google Analytics request failed."
 msgstr ""
 
 msgid "The Google Analytics Console request failed."
@@ -5589,6 +5592,12 @@ msgstr ""
 msgid "Example Post title"
 msgstr ""
 
+msgid "Variable names can only contain alphanumeric characters, underscores and dashes."
+msgstr ""
+
+msgid "The variable has already been registered."
+msgstr ""
+
 msgid "Separator Character"
 msgstr ""
 
@@ -5674,12 +5683,6 @@ msgid "Organization Logo added in Local SEO Settings."
 msgstr ""
 
 msgid "Organization URL added in Local SEO Settings."
-msgstr ""
-
-msgid "Variable names can only contain alphanumeric characters, underscores and dashes."
-msgstr ""
-
-msgid "The variable has already been registered."
 msgstr ""
 
 #. translators: Taxonomy name.
@@ -6648,6 +6651,10 @@ msgstr ""
 msgid "Error: Nonce verification failed"
 msgstr ""
 
+#. Translators: placeholders are opening and closing tags for connect analytics setting and using ga4 property doc.
+msgid "Universal Analytics (UA) is no longer supported. Please connect your Google Analytics GA4 account by navigating to %1$sGeneral Settings → Analytics%2$s. For more details, refer to this guide: %3$sHow to Use Google Analytics 4 (GA4) Property with Rank Math%4$s."
+msgstr ""
+
 #. translators: WordPress Version
 msgid "You are using the outdated WordPress, please update it to version %s or higher."
 msgstr ""
@@ -6954,6 +6961,171 @@ msgstr ""
 msgid "You are using the Product Schema for this Product"
 msgstr ""
 
+msgid "FAQ Options"
+msgstr ""
+
+msgid "List Style"
+msgstr ""
+
+msgid "Title Wrapper"
+msgstr ""
+
+msgid "H2"
+msgstr ""
+
+msgid "H3"
+msgstr ""
+
+msgid "H4"
+msgstr ""
+
+msgid "H5"
+msgstr ""
+
+msgid "H6"
+msgstr ""
+
+msgid "P"
+msgstr ""
+
+msgid "DIV"
+msgstr ""
+
+msgid "Image Size"
+msgstr ""
+
+msgid "Styling Options"
+msgstr ""
+
+msgid "Title Wrapper CSS Class(es)"
+msgstr ""
+
+msgid "Content Wrapper CSS Class(es)"
+msgstr ""
+
+msgid "List CSS Class(es)"
+msgstr ""
+
+msgid "Add Image"
+msgstr ""
+
+msgid "Question…"
+msgstr ""
+
+msgid "Hide Question"
+msgstr ""
+
+msgid "Delete Question"
+msgstr ""
+
+msgid "Enter the answer to the question"
+msgstr ""
+
+msgid "Add New FAQ"
+msgstr ""
+
+msgid "More Info"
+msgstr ""
+
+msgid "Enter a step title"
+msgstr ""
+
+msgid "Hide Step"
+msgstr ""
+
+msgid "Delete Step"
+msgstr ""
+
+msgid "Add Step Image"
+msgstr ""
+
+msgid "Enter a step description"
+msgstr ""
+
+msgid "HowTo Options"
+msgstr ""
+
+msgid "Main Image Size"
+msgstr ""
+
+msgid "Step Title Wrapper CSS Class(es)"
+msgstr ""
+
+msgid "Step Content Wrapper CSS Class(es)"
+msgstr ""
+
+msgid "Step List CSS Class(es)"
+msgstr ""
+
+msgid "Add Final Image"
+msgstr ""
+
+msgid "Enter a main description"
+msgstr ""
+
+msgid "Total time:"
+msgstr ""
+
+msgid "DD"
+msgstr ""
+
+msgid "HH"
+msgstr ""
+
+msgid "MM"
+msgstr ""
+
+msgid "Optional, use first field to describe the duration."
+msgstr ""
+
+msgid "Add New Step"
+msgstr ""
+
+msgid "FAQ"
+msgstr ""
+
+msgid "Frequently Asked Questions"
+msgstr ""
+
+msgid "SEO"
+msgstr ""
+
+msgid "Structured Data"
+msgstr ""
+
+msgid "Yoast"
+msgstr ""
+
+msgid "Block"
+msgstr ""
+
+msgid "Markup"
+msgstr ""
+
+msgid "Rich Snippet"
+msgstr ""
+
+msgid "FAQ by Rank Math"
+msgstr ""
+
+msgid "Easily add Schema-ready, SEO-friendly, Frequently Asked Questions to your content."
+msgstr ""
+
+msgid "HowTo"
+msgstr ""
+
+msgid "HowTo by Rank Math"
+msgstr ""
+
+msgid "Easily add Schema-ready, SEO-friendly, HowTo block to your content."
+msgstr ""
+
+msgid "Schema by Rank Math"
+msgstr ""
+
+msgid "Add the Schema generated by Rank Math anywhere on your page using this Block."
+msgstr ""
+
 msgid "Lock Modified Date"
 msgstr ""
 
@@ -7207,9 +7379,6 @@ msgid "This page will not appear in search results. You can disable noindex in t
 msgstr ""
 
 msgid "Replace Image"
-msgstr ""
-
-msgid "Add Image"
 msgstr ""
 
 msgid "Remove Image"
@@ -7971,9 +8140,6 @@ msgstr ""
 msgid "Provide detailed evaluations covering strengths, weaknesses, and practical recommendations."
 msgstr ""
 
-msgid "Frequently Asked Questions"
-msgstr ""
-
 msgid "Address common queries with comprehensive answers, offering valuable information and guidance."
 msgstr ""
 
@@ -8454,9 +8620,6 @@ msgstr ""
 msgid "Thank you for choosing Rank Math! {{strong}}Enjoy 750 Credits monthly for life{{/strong}} as a token of our appreciation! 🎁"
 msgstr ""
 
-msgid "SEO"
-msgstr ""
-
 msgid "Marketing & Sales"
 msgstr ""
 
@@ -8743,6 +8906,12 @@ msgid "Final Touches to the SEO Recommendations"
 msgstr ""
 
 msgid "Content AI Knowledge Base."
+msgstr ""
+
+msgid "AI Fix was applied only considering the beginning of the content, as the full content is too large to be processed by the AI."
+msgstr ""
+
+msgid "Error: The request payload is too large!"
 msgstr ""
 
 msgid "Generate with AI"
@@ -9249,12 +9418,6 @@ msgstr ""
 msgid "Movie"
 msgstr ""
 
-msgid "FAQ"
-msgstr ""
-
-msgid "HowTo"
-msgstr ""
-
 msgid "Delete?"
 msgstr ""
 
@@ -9333,9 +9496,6 @@ msgstr ""
 msgid "Schema Builder"
 msgstr ""
 
-msgid "More Info"
-msgstr ""
-
 msgid "Pro"
 msgstr ""
 
@@ -9373,120 +9533,6 @@ msgid "Configure Schema Markup for your pages. Search engines, use structured da
 msgstr ""
 
 msgid "Select Schema"
-msgstr ""
-
-msgid "FAQ Options"
-msgstr ""
-
-msgid "List Style"
-msgstr ""
-
-msgid "Title Wrapper"
-msgstr ""
-
-msgid "H2"
-msgstr ""
-
-msgid "H3"
-msgstr ""
-
-msgid "H4"
-msgstr ""
-
-msgid "H5"
-msgstr ""
-
-msgid "H6"
-msgstr ""
-
-msgid "P"
-msgstr ""
-
-msgid "DIV"
-msgstr ""
-
-msgid "Image Size"
-msgstr ""
-
-msgid "Styling Options"
-msgstr ""
-
-msgid "Title Wrapper CSS Class(es)"
-msgstr ""
-
-msgid "Content Wrapper CSS Class(es)"
-msgstr ""
-
-msgid "List CSS Class(es)"
-msgstr ""
-
-msgid "Question…"
-msgstr ""
-
-msgid "Hide Question"
-msgstr ""
-
-msgid "Delete Question"
-msgstr ""
-
-msgid "Enter the answer to the question"
-msgstr ""
-
-msgid "Add New FAQ"
-msgstr ""
-
-msgid "Enter a step title"
-msgstr ""
-
-msgid "Hide Step"
-msgstr ""
-
-msgid "Delete Step"
-msgstr ""
-
-msgid "Add Step Image"
-msgstr ""
-
-msgid "Enter a step description"
-msgstr ""
-
-msgid "HowTo Options"
-msgstr ""
-
-msgid "Main Image Size"
-msgstr ""
-
-msgid "Step Title Wrapper CSS Class(es)"
-msgstr ""
-
-msgid "Step Content Wrapper CSS Class(es)"
-msgstr ""
-
-msgid "Step List CSS Class(es)"
-msgstr ""
-
-msgid "Add Final Image"
-msgstr ""
-
-msgid "Enter a main description"
-msgstr ""
-
-msgid "Total time:"
-msgstr ""
-
-msgid "DD"
-msgstr ""
-
-msgid "HH"
-msgstr ""
-
-msgid "MM"
-msgstr ""
-
-msgid "Optional, use first field to describe the duration."
-msgstr ""
-
-msgid "Add New Step"
 msgstr ""
 
 msgid "Heading text"

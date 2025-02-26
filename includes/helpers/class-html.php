@@ -26,12 +26,12 @@ class HTML {
 		$regex = '#([^\s=]+)\s*=\s*(\'[^<\']*\'|"[^<"]*")#';
 		preg_match_all( $regex, $elem, $attributes, PREG_SET_ORDER );
 
-		$new = [];
+		$new       = [];
 		$remaining = $elem;
 		foreach ( $attributes as $attribute ) {
-			$val = substr( $attribute[2], 1, -1 );
+			$val                  = substr( $attribute[2], 1, -1 );
 			$new[ $attribute[1] ] = $val;
-			$remaining = str_replace( $attribute[0], '', $remaining );
+			$remaining            = str_replace( $attribute[0], '', $remaining );
 		}
 
 		// Chop off tag name.

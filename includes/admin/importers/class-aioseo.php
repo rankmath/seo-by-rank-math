@@ -87,37 +87,37 @@ class AIOSEO extends Plugin_Importer {
 	/**
 	 * Convert Yoast / AIO SEO variables if needed.
 	 *
-	 * @param string $string Value to convert.
+	 * @param string $value Value to convert.
 	 * @return string
 	 */
-	public function convert_variables( $string ) {
-		$string = str_replace( '#site_title', '%sitename%', $string );
-		$string = str_replace( '#tagline', '%sitedesc%', $string );
-		$string = str_replace( '#separator_sa', '%sep%', $string );
-		$string = str_replace( '#post_title', '%title%', $string );
-		$string = str_replace( '#post_excerpt', '%excerpt%', $string );
-		$string = str_replace( '#post_content', '%excerpt%', $string );
-		$string = str_replace( '#taxonomy_description', '%term_description%', $string );
-		$string = str_replace( '#category_description', '%term_description%', $string );
-		$string = str_replace( '#taxonomy_title', '%term%', $string );
-		$string = str_replace( '#category', '%term%', $string );
-		$string = str_replace( '#author_first_name #author_last_name', '%name%', $string );
-		$string = str_replace( '#current_year', '%currentyear%', $string );
-		$string = str_replace( '#current_date', '%currentdate%', $string );
-		$string = str_replace( '#current_day', '%currentday%', $string );
-		$string = str_replace( '#current_month', '%currentmonth%', $string );
-		$string = str_replace( '#post_date', '%date%', $string );
-		$string = str_replace( '#search_term', '%search_query%', $string );
-		$string = str_replace( '#author_link', '%AUTHORLINK%', $string );
-		$string = str_replace( '#post_link', '%POSTLINK%', $string );
-		$string = str_replace( '#site_link', '%BLOGLINK%', $string );
-		$string = str_replace( '#author_name', '%name%', $string );
-		$string = str_replace( '#author_bio', '%user_description%', $string );
-		$string = str_replace( '#archive_date', '%date%', $string );
-		$string = str_replace( '#breadcrumb_archive_post_type_name', '%s', $string );
-		$string = str_replace( '#breadcrumb_search_string', '%s', $string );
+	public function convert_variables( $value ) {
+		$value = str_replace( '#site_title', '%sitename%', $value );
+		$value = str_replace( '#tagline', '%sitedesc%', $value );
+		$value = str_replace( '#separator_sa', '%sep%', $value );
+		$value = str_replace( '#post_title', '%title%', $value );
+		$value = str_replace( '#post_excerpt', '%excerpt%', $value );
+		$value = str_replace( '#post_content', '%excerpt%', $value );
+		$value = str_replace( '#taxonomy_description', '%term_description%', $value );
+		$value = str_replace( '#category_description', '%term_description%', $value );
+		$value = str_replace( '#taxonomy_title', '%term%', $value );
+		$value = str_replace( '#category', '%term%', $value );
+		$value = str_replace( '#author_first_name #author_last_name', '%name%', $value );
+		$value = str_replace( '#current_year', '%currentyear%', $value );
+		$value = str_replace( '#current_date', '%currentdate%', $value );
+		$value = str_replace( '#current_day', '%currentday%', $value );
+		$value = str_replace( '#current_month', '%currentmonth%', $value );
+		$value = str_replace( '#post_date', '%date%', $value );
+		$value = str_replace( '#search_term', '%search_query%', $value );
+		$value = str_replace( '#author_link', '%AUTHORLINK%', $value );
+		$value = str_replace( '#post_link', '%POSTLINK%', $value );
+		$value = str_replace( '#site_link', '%BLOGLINK%', $value );
+		$value = str_replace( '#author_name', '%name%', $value );
+		$value = str_replace( '#author_bio', '%user_description%', $value );
+		$value = str_replace( '#archive_date', '%date%', $value );
+		$value = str_replace( '#breadcrumb_archive_post_type_name', '%s', $value );
+		$value = str_replace( '#breadcrumb_search_string', '%s', $value );
 
-		return $string;
+		return $value;
 	}
 
 	/**
@@ -155,7 +155,7 @@ class AIOSEO extends Plugin_Importer {
 		Helper::update_modules( [ 'redirections' => 'on' ] );
 		foreach ( $redirections as $redirection ) {
 			if ( false !== $this->save_redirection( (array) $redirection ) ) {
-				$count++;
+				++$count;
 			}
 		}
 
@@ -506,7 +506,6 @@ class AIOSEO extends Plugin_Importer {
 				$this->sitemap[ 'tax_' . $taxonomy . '_html_sitemap' ] = 'on';
 			}
 		}
-
 	}
 
 	/**
@@ -567,7 +566,7 @@ class AIOSEO extends Plugin_Importer {
 		$additional_urls = $profiles['additionalUrls'];
 
 		$profile_urls = array_map(
-			function( $url ) use ( $fb_url, $tw_url ) {
+			function ( $url ) use ( $fb_url, $tw_url ) {
 				return $url !== $fb_url && $url !== $tw_url ? $url : false;
 			},
 			$profile_urls
@@ -912,7 +911,7 @@ class AIOSEO extends Plugin_Importer {
 
 		if ( ! empty( $data['operatingSystems'] ) ) {
 			$operating_system = array_map(
-				function( $system ) {
+				function ( $system ) {
 					return $system['value'];
 				},
 				json_decode( $data['operatingSystems'], true )
@@ -1005,7 +1004,7 @@ class AIOSEO extends Plugin_Importer {
 
 		if ( ! empty( $data['keywords'] ) ) {
 			$keywords = array_map(
-				function( $keyword ) {
+				function ( $keyword ) {
 					return $keyword['value'];
 				},
 				json_decode( $data['keywords'], true )
@@ -1016,7 +1015,7 @@ class AIOSEO extends Plugin_Importer {
 
 		if ( ! empty( $data['ingredients'] ) ) {
 			$schema['recipeIngredient'] = array_map(
-				function( $ingredient ) {
+				function ( $ingredient ) {
 					return $ingredient['value'];
 				},
 				json_decode( $data['ingredients'], true )
@@ -1046,12 +1045,12 @@ class AIOSEO extends Plugin_Importer {
 	 * Set Keywords.
 	 *
 	 * @param int    $object_id   Object ID.
-	 * @param array  $object      Object data.
+	 * @param array  $data        Object data.
 	 * @param string $object_type Current Object type.
 	 */
-	private function set_keywords( $object_id, $object, $object_type ) {
+	private function set_keywords( $object_id, $data, $object_type ) {
 		$keywords   = [];
-		$keyphrases = json_decode( $object['keyphrases'], true );
+		$keyphrases = json_decode( $data['keyphrases'], true );
 
 		if ( ! empty( $keyphrases['focus']['keyphrase'] ) ) {
 			$keywords[] = $keyphrases['focus']['keyphrase'];
@@ -1074,19 +1073,19 @@ class AIOSEO extends Plugin_Importer {
 	 * Set object robots meta.
 	 *
 	 * @param int    $object_id   Object ID.
-	 * @param array  $object      Object data.
+	 * @param array  $data        Object data.
 	 * @param string $object_type Current Object type.
 	 */
-	private function set_object_robots( $object_id, $object, $object_type ) {
+	private function set_object_robots( $object_id, $data, $object_type ) {
 		// Early bail if robots data is set in Rank Math plugin.
-		if ( ! empty( $this->get_meta( $object_type, $object_id, 'rank_math_robots' ) ) || ! empty( $object['robots_default'] ) ) {
+		if ( ! empty( $this->get_meta( $object_type, $object_id, 'rank_math_robots' ) ) || ! empty( $data['robots_default'] ) ) {
 			return;
 		}
 
 		// ROBOTS.
 		$robots = [];
 		foreach ( [ 'robots_noindex', 'robots_noarchive', 'robots_nosnippet', 'robots_nofollow', 'robots_noimageindex' ] as $key ) {
-			if ( empty( $object[ $key ] ) ) {
+			if ( empty( $data[ $key ] ) ) {
 				continue;
 			}
 
@@ -1105,11 +1104,11 @@ class AIOSEO extends Plugin_Importer {
 			'robots_max_imagepreview' => 'max-image-preview',
 		];
 		foreach ( [ 'robots_max_snippet', 'robots_max_videopreview', 'robots_max_imagepreview' ] as $key ) {
-			if ( empty( $object[ $key ] ) ) {
+			if ( empty( $data[ $key ] ) ) {
 				continue;
 			}
 
-			$advanced_robots[ $keys[ $key ] ] = $object[ $key ];
+			$advanced_robots[ $keys[ $key ] ] = $data[ $key ];
 		}
 
 		$this->update_meta( $object_type, $object_id, 'rank_math_advanced_robots', array_unique( $advanced_robots ) );
@@ -1239,7 +1238,7 @@ class AIOSEO extends Plugin_Importer {
 				$schema['currenciesAccepted'] = implode(
 					', ',
 					array_map(
-						function( $value ) {
+						function ( $value ) {
 							return $value['value'];
 						},
 						json_decode( $payment['currenciesAccepted'], true )

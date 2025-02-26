@@ -10,6 +10,7 @@
 
 namespace RankMath\WooCommerce;
 
+use RankMath\Traits\Hooker;
 use RankMath\Helper;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Attachment;
@@ -19,7 +20,9 @@ defined( 'ABSPATH' ) || exit;
 /**
  * WC Sitemap class.
  */
-class Sitemap {
+class Sitemap extends Base {
+
+	use Hooker;
 
 	/**
 	 * Register hooks.
@@ -34,28 +37,28 @@ class Sitemap {
 	/**
 	 * Make sure product variations and shop coupons are not included in the XML sitemap.
 	 *
-	 * @param bool   $bool      Whether or not to include this post type in the XML sitemap.
+	 * @param bool   $value     Whether or not to include this post type in the XML sitemap.
 	 * @param string $post_type The post type of the post.
 	 *
 	 * @return bool
 	 */
-	public function sitemap_exclude_post_type( $bool, $post_type ) {
+	public function sitemap_exclude_post_type( $value, $post_type ) {
 		if ( in_array( $post_type, [ 'product_variation', 'shop_coupon' ], true ) ) {
 			return true;
 		}
 
-		return $bool;
+		return $value;
 	}
 
 	/**
 	 * Make sure product attribute taxonomies are not included in the XML sitemap.
 	 *
-	 * @param bool   $bool     Whether or not to include this post type in the XML sitemap.
+	 * @param bool   $value    Whether or not to include this post type in the XML sitemap.
 	 * @param string $taxonomy The taxonomy to check against.
 	 *
 	 * @return bool
 	 */
-	public function sitemap_taxonomies( $bool, $taxonomy ) {
+	public function sitemap_taxonomies( $value, $taxonomy ) {
 		if ( in_array( $taxonomy, [ 'product_type', 'product_shipping_class', 'shop_order_status' ], true ) ) {
 			return true;
 		}
@@ -64,7 +67,7 @@ class Sitemap {
 			return true;
 		}
 
-		return $bool;
+		return $value;
 	}
 
 	/**
@@ -112,12 +115,12 @@ class Sitemap {
 					continue;
 				}
 
-				$image = [
+				$image    = [
 					'src'   => $this->do_filter( 'sitemap/xml_img_src', $image_src[0], $post_id ),
 					'title' => get_the_title( $attachment_id ),
 					'alt'   => Attachment::get_alt_tag( $attachment_id ),
 				];
-				$images[]  = $image;
+				$images[] = $image;
 
 				unset( $image, $image_src );
 			}

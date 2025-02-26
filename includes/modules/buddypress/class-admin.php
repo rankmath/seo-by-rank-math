@@ -45,7 +45,7 @@ class Admin {
 			'icon'  => 'rm-icon rm-icon-users',
 			'title' => esc_html__( 'Groups', 'rank-math' ),
 			'desc'  => esc_html__( 'This tab contains SEO options for BuddyPress Group pages.', 'rank-math' ),
-			'file'  => dirname( __FILE__ ) . '/views/options-titles.php',
+			'file'  => __DIR__ . '/views/options-titles.php',
 		];
 
 		return $tabs;

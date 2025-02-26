@@ -40,7 +40,7 @@ trait Ajax {
 	 * @param string $action The nonce action name.
 	 */
 	public function verify_nonce( $action ) {
-		if ( ! isset( $_REQUEST['security'] ) || ! \wp_verify_nonce( $_REQUEST['security'], $action ) ) {
+		if ( ! isset( $_REQUEST['security'] ) || ! \wp_verify_nonce( sanitize_key( $_REQUEST['security'] ), $action ) ) {
 			$this->error( __( 'Error: Nonce verification failed', 'rank-math' ) );
 		}
 	}

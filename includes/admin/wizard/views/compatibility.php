@@ -24,7 +24,7 @@ $simplexml_ext = extension_loaded( 'SimpleXML' );
 $image_ext     = extension_loaded( 'gd' ) || extension_loaded( 'imagick' );
 $mb_string     = extension_loaded( 'mbstring' );
 $openssl       = extension_loaded( 'openssl' );
-$base64_func   = function_exists( 'base64_encode' ) && function_exists( 'base64_decode' ) && (bool) base64_decode( base64_encode( '1' ) );
+$base64_func   = function_exists( 'base64_encode' ) && function_exists( 'base64_decode' ) && (bool) base64_decode( base64_encode( '1' ) );  // phpcs:ignore -- Verified as safe usage.
 $all_good      = $php_version_ok && $dom_ext && $simplexml_ext && $image_ext && $mb_string && $openssl && $base64_func;
 
 ?>
@@ -151,10 +151,10 @@ if ( $all_good ) :
 			?>
 		</p>
 		<table class="form-table wp-core-ui wizard-conflicts">
-			<?php foreach ( $conflicting_plugins as $pk => $plugin ) { ?>
+			<?php foreach ( $conflicting_plugins as $pk => $conflicting_plugin ) { ?>
 				<tr>
 					<td><span class="dashicons dashicons-warning"></span></td>
-					<td><?php echo esc_html( $plugin ) . ( in_array( $pk, [ 'all-in-one-schemaorg-rich-snippets/index.php', 'wordpress-seo/wp-seo.php', 'wordpress-seo-premium/wp-seo-premium.php', 'all-in-one-seo-pack/all_in_one_seo_pack.php' ], true ) ? '<span class="import-info">' . esc_html__( 'You can import settings in the next step.', 'rank-math' ) . '</span>' : '' ); ?></td>
+					<td><?php echo esc_html( $conflicting_plugin ) . ( in_array( $pk, [ 'all-in-one-schemaorg-rich-snippets/index.php', 'wordpress-seo/wp-seo.php', 'wordpress-seo-premium/wp-seo-premium.php', 'all-in-one-seo-pack/all_in_one_seo_pack.php' ], true ) ? '<span class="import-info">' . esc_html__( 'You can import settings in the next step.', 'rank-math' ) . '</span>' : '' ); ?></td>
 					<td><a href="#" class="button button-small wizard-deactivate-plugin" data-plugin="<?php echo esc_attr( $pk ); ?>"><?php esc_html_e( 'Deactivate Plugin', 'rank-math' ); ?></a></td>
 				</tr>
 			<?php } ?>

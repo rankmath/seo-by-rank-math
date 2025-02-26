@@ -329,7 +329,7 @@ class Post_Columns implements Runner {
 			'menu_order title' !== $wp_query->query['orderby']
 		) {
 			return array_map(
-				function( $post ) {
+				function ( $post ) {
 					return isset( $post->ID ) ? $post->ID : '';
 				},
 				$pages

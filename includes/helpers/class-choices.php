@@ -117,7 +117,7 @@ trait Choices {
 		if ( ! isset( $choices_post_types ) ) {
 			$choices_post_types = Helper::get_accessible_post_types();
 			$choices_post_types = \array_map(
-				function( $post_type ) {
+				function ( $post_type ) {
 					$object = get_post_type_object( $post_type );
 					return $object->label;
 				},

@@ -27,12 +27,12 @@ class Terms {
 	/**
 	 * Get all terms from a given taxonomy.
 	 *
-	 * @param string $taxonomy Taxonomy name.
-	 * @param int    $parent   Parent term ID.
+	 * @param string $taxonomy    Taxonomy name.
+	 * @param int    $parent_term Parent term ID.
 	 *
 	 * @return array
 	 */
-	private function get_terms( $taxonomy, $parent = 0 ) {
+	private function get_terms( $taxonomy, $parent_term = 0 ) {
 		$sort_map = [
 			'published'    => [
 				'field' => 'term_id',
@@ -74,7 +74,7 @@ class Terms {
 		$query = $terms_table->where( 'taxonomy', $taxonomy )
 			->select( [ $terms_table->table . '.term_id', 'name', 'slug', 'taxonomy' ] )
 			->leftJoin( $tt_table->table, $terms_table->table . '.term_id', $tt_table->table . '.term_id' )
-			->where( 'parent', $parent );
+			->where( 'parent', $parent_term );
 
 		if ( ! empty( $exclude ) ) {
 			$query->whereNotIn( $terms_table->table . '.term_id', $exclude );
@@ -95,8 +95,9 @@ class Terms {
 	 * @return string
 	 */
 	public function generate_sitemap( $taxonomy, $show_dates, $args = [] ) {
-		$terms = get_terms( $taxonomy, $args );
-		$terms = $this->get_indexable_terms( $terms, $taxonomy );
+		$args['taxonomy'] = $taxonomy;
+		$terms            = get_terms( $args );
+		$terms            = $this->get_indexable_terms( $terms, $taxonomy );
 		if ( empty( $terms ) ) {
 			return '';
 		}
@@ -262,10 +263,9 @@ class Terms {
 	private function get_indexable_terms( $terms, $taxonomy ) {
 		return array_filter(
 			$terms,
-			function( $term ) use ( $taxonomy ) {
+			function ( $term ) use ( $taxonomy ) {
 				return SitemapBase::is_object_indexable( get_term( $term->term_id, $taxonomy ), 'term' );
 			}
 		);
 	}
-
 }

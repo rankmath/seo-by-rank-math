@@ -636,12 +636,12 @@ class Breadcrumbs {
 	/**
 	 * Get the breadcrumb title.
 	 *
-	 * @param  string $object_type Object type.
-	 * @param  int    $object_id   Object ID to get the title for.
-	 * @param  string $default     Default value to use for title.
+	 * @param  string $object_type   Object type.
+	 * @param  int    $object_id     Object ID to get the title for.
+	 * @param  string $default_value Default value to use for title.
 	 * @return string
 	 */
-	private function get_breadcrumb_title( $object_type, $object_id, $default ) {
+	private function get_breadcrumb_title( $object_type, $object_id, $default_value ) {
 		$title = '';
 		if ( 'post' === $object_type ) {
 			$title = Helper::get_post_meta( 'breadcrumb_title', $object_id );
@@ -651,6 +651,6 @@ class Breadcrumbs {
 			$title = Helper::get_user_meta( 'breadcrumb_title', $object_id );
 		}
 
-		return $title ? $title : $default;
+		return $title ? $title : $default_value;
 	}
 }

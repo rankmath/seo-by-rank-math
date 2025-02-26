@@ -75,7 +75,7 @@ class Singular implements Snippet {
 		if ( ! empty( $schemas ) ) {
 			$has_product = array_filter(
 				$schemas,
-				function( $schema ) {
+				function ( $schema ) {
 					return ! empty( $schema['@type'] ) && in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
 				}
 			);

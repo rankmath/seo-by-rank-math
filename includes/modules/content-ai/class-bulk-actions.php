@@ -191,7 +191,7 @@ class Bulk_Actions {
 			// Keep only the image tags that have src attribute but no alt attribute.
 			$images = array_filter(
 				$images[0],
-				function( $image ) {
+				function ( $image ) {
 					return preg_match( '/src=[\'"]?([^\'" >]+)[\'" >]/i', $image, $matches ) && ( ! preg_match( '/alt="([^"]*)"/i', $image, $matches ) || preg_match( '/alt=""/i', $image, $matches ) );
 				}
 			);
@@ -299,32 +299,32 @@ class Bulk_Actions {
 	/**
 	 * Get post description.
 	 *
-	 * @param WP_Post $object Post Instance.
+	 * @param WP_Post $post Post Instance.
 	 *
 	 * @return string Post description.
 	 */
-	private function get_post_description( $object ) {
-		$description = Post::get_meta( 'description', $object->ID );
+	private function get_post_description( $post ) {
+		$description = Post::get_meta( 'description', $post->ID );
 		if ( '' !== $description ) {
 			return $description;
 		}
 
-		return ! empty( $object->post_excerpt ) ? $object->post_excerpt : Str::truncate( Paper::get_from_options( "pt_{$object->post_type}_description", $object ), 160 );
+		return ! empty( $post->post_excerpt ) ? $post->post_excerpt : Str::truncate( Paper::get_from_options( "pt_{$post->post_type}_description", $post ), 160 );
 	}
 
 	/**
 	 * Get post description.
 	 *
-	 * @param WP_Post $object Post Instance.
+	 * @param WP_Term $term Post Instance.
 	 *
 	 * @return string Post description.
 	 */
-	private function get_term_description( $object ) {
-		$description = get_term_meta( $object->term_id, 'rank_math_description', true );
+	private function get_term_description( $term ) {
+		$description = get_term_meta( $term->term_id, 'rank_math_description', true );
 		if ( '' !== $description ) {
 			return $description;
 		}
 
-		return ! empty( $object->description ) ? $object->description : Str::truncate( Paper::get_from_options( "tax_{$object->taxonomy}_description", $object ), 160 );
+		return ! empty( $term->description ) ? $term->description : Str::truncate( Paper::get_from_options( "tax_{$term->taxonomy}_description", $term ), 160 );
 	}
 }

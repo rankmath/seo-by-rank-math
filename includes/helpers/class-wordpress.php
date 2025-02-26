@@ -59,13 +59,13 @@ trait WordPress {
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @param  string  $key     Internal key of the value to get (without prefix).
-	 * @param  integer $post_id Post ID of the post to get the value for.
-	 * @param  string  $default  Default value to use.
+	 * @param  string  $key           Internal key of the value to get (without prefix).
+	 * @param  integer $post_id       Post ID of the post to get the value for.
+	 * @param  string  $default_value Default value to use.
 	 * @return mixed
 	 */
-	public static function get_post_meta( $key, $post_id = 0, $default = '' ) {
-		return Post::get_meta( $key, $post_id, $default );
+	public static function get_post_meta( $key, $post_id = 0, $default_value = '' ) {
+		return Post::get_meta( $key, $post_id, $default_value );
 	}
 
 	/**
@@ -73,14 +73,14 @@ trait WordPress {
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @param  string $key      Internal key of the value to get (without prefix).
-	 * @param  mixed  $term     Term to get the meta value for either (string) term name, (int) term ID or (object) term.
-	 * @param  string $taxonomy Name of the taxonomy to which the term is attached.
-	 * @param  string $default  Default value to use.
+	 * @param  string $key           Internal key of the value to get (without prefix).
+	 * @param  mixed  $term          Term to get the meta value for either (string) term name, (int) term ID or (object) term.
+	 * @param  string $taxonomy      Name of the taxonomy to which the term is attached.
+	 * @param  string $default_value Default value to use.
 	 * @return mixed
 	 */
-	public static function get_term_meta( $key, $term = 0, $taxonomy = '', $default = '' ) {
-		return Term::get_meta( $key, $term, $taxonomy, $default );
+	public static function get_term_meta( $key, $term = 0, $taxonomy = '', $default_value = '' ) {
+		return Term::get_meta( $key, $term, $taxonomy, $default_value );
 	}
 
 	/**
@@ -88,13 +88,13 @@ trait WordPress {
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @param  string $key  Internal key of the value to get (without prefix).
-	 * @param  mixed  $user User to get the meta value for either (int) user ID or (object) user.
-	 * @param  string $default  Default value to use.
+	 * @param  string $key           Internal key of the value to get (without prefix).
+	 * @param  mixed  $user          User to get the meta value for either (int) user ID or (object) user.
+	 * @param  string $default_value Default value to use.
 	 * @return mixed
 	 */
-	public static function get_user_meta( $key, $user = 0, $default = '' ) {
-		return User::get_meta( $key, $user, $default );
+	public static function get_user_meta( $key, $user = 0, $default_value = '' ) {
+		return User::get_meta( $key, $user, $default_value );
 	}
 
 	/**
@@ -526,7 +526,7 @@ trait WordPress {
 
 		$data = array_reduce(
 			$args,
-			function( $carry, $arg ) {
+			function ( $carry, $arg ) {
 				if ( is_array( $arg ) ) {
 					return array_merge( $carry, $arg );
 				}
@@ -626,7 +626,7 @@ trait WordPress {
 		}
 
 		if ( '-1' === $_REQUEST['action'] && ! empty( $_REQUEST['action2'] ) ) {
-			$_REQUEST['action'] = $_REQUEST['action2'];
+			$_REQUEST['action'] = sanitize_key( $_REQUEST['action2'] );
 		}
 
 		return sanitize_key( $_REQUEST['action'] );
@@ -738,5 +738,14 @@ trait WordPress {
 		$content = \preg_replace( '#\s*\[caption[^]]*\].*?\[/caption\]\s*#is', '', $content );
 
 		return preg_replace( '~\[\/?.*?\]~s', '', $content );
+	}
+
+	/**
+	 * Get the current time as a Unix timestamp (seconds since epoch).
+	 *
+	 * @return int The current Unix timestamp.
+	 */
+	public static function get_current_time() {
+		return strtotime( current_time( 'mysql' ) );
 	}
 }

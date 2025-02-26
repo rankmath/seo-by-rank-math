@@ -23,7 +23,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class SEO_Analyzer {
 
-	use Ajax, Hooker;
+	use Ajax;
+	use Hooker;
 
 	/**
 	 * Rank Math SEO Checkup API.
@@ -167,14 +168,14 @@ class SEO_Analyzer {
 		$data = $this->get_graph_metrices();
 		extract( $data ); // phpcs:ignore
 
-		include dirname( __FILE__ ) . '/views/graphs.php';
+		include __DIR__ . '/views/graphs.php';
 	}
 
 	/**
 	 * Output the SERP Preview.
 	 */
 	public function display_serp_preview() {
-		include dirname( __FILE__ ) . '/views/serp-preview.php';
+		include __DIR__ . '/views/serp-preview.php';
 	}
 
 	/**
@@ -201,8 +202,8 @@ class SEO_Analyzer {
 				continue;
 			}
 
-			$statuses[ $result->get_status() ]++;
-			$total++;
+			++$statuses[ $result->get_status() ];
+			++$total;
 
 			$total_score = $total_score + $result->get_score();
 
@@ -295,7 +296,7 @@ class SEO_Analyzer {
 		$status_class = implode(
 			' ',
 			array_map(
-				function( $status ) {
+				function ( $status ) {
 					return 'rank-math-result-statuses-' . $status;
 				},
 				array_unique( $status_classes )
@@ -388,7 +389,7 @@ class SEO_Analyzer {
 	 */
 	public function analyze_me() {
 		$success   = true;
-		$directory = dirname( __FILE__ );
+		$directory = __DIR__;
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
 		$this->has_cap_ajax( 'site_analysis' );
 
@@ -591,7 +592,7 @@ class SEO_Analyzer {
 	 */
 	private function is_allowed_url( $url ) {
 		$allowed = true;
-		$home = get_home_url();
+		$home    = get_home_url();
 		if ( strpos( $url, $home ) !== 0 ) {
 			$allowed = false;
 		}

@@ -512,12 +512,12 @@ class Image_Parser {
 	/**
 	 * Returns an array with attachments for the post IDs that will be included.
 	 *
-	 * @param array $include Array with ids to include.
+	 * @param array $include_ids Array with ids to include.
 	 *
 	 * @return array The found attachments.
 	 */
-	private function get_gallery_attachments_for_included( $include ) {
-		$ids_to_include = wp_parse_id_list( $include );
+	private function get_gallery_attachments_for_included( $include_ids ) {
+		$ids_to_include = wp_parse_id_list( $include_ids );
 		$attachments    = $this->get_attachments(
 			[
 				'posts_per_page' => count( $ids_to_include ),

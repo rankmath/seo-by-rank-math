@@ -525,7 +525,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 * @return string
 	 */
 	private function get_specific_field( $key, $value, $data ) {
-		$key = isset( $data['details'][ $data[ $snippet_key . '-specific-field' ] ] ) ? $data['details'][ $data[ $snippet_key . '-specific-field' ] ] : '';
+		$key = isset( $data['details'][ $data[ $key . '-specific-field' ] ] ) ? $data['details'][ $data[ $key . '-specific-field' ] ] : '';
 		return get_post_meta( $data['post_id'], $key, true );
 	}
 
@@ -588,6 +588,8 @@ class WP_Schema_Pro extends Plugin_Importer {
 				'details' => get_post_meta( $local_post, 'bsf-aiosrs-' . $snippet_type, true ),
 			];
 		}
+
+		return false;
 	}
 
 	/**

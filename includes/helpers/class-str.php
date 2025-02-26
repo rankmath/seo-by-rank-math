@@ -166,13 +166,12 @@ class Str {
 	 * @return string
 	 */
 	public static function human_number( $number, $precision = 1 ) {
-
 		if ( ! is_numeric( $number ) ) {
 			return 0;
 		}
 
 		$negative = '';
-		if ( abs( $number ) != $number ) {
+		if ( abs( $number ) != $number ) { //phpcs:ignore -- Loose comparison is needed here due to the negative value.
 			$negative = '-';
 			$number   = abs( $number );
 		}
@@ -222,14 +221,14 @@ class Str {
 	/**
 	 * Multibyte ucwords.
 	 *
-	 * @param string $string String to convert.
+	 * @param string $value String to convert.
 	 */
-	public static function mb_ucwords( $string ) {
-		if ( ! function_exists( 'mb_convert_case' ) || ! function_exists( 'mb_detect_encoding' ) || mb_detect_encoding( $string ) !== 'UTF-8' ) {
-			return ucwords( $string );
+	public static function mb_ucwords( $value ) {
+		if ( ! function_exists( 'mb_convert_case' ) || ! function_exists( 'mb_detect_encoding' ) || mb_detect_encoding( $value ) !== 'UTF-8' ) {
+			return ucwords( $value );
 		}
 
-		$words   = preg_split( '/([\s]+)/u', $string, -1, PREG_SPLIT_DELIM_CAPTURE );
+		$words   = preg_split( '/([\s]+)/u', $value, -1, PREG_SPLIT_DELIM_CAPTURE );
 		$ucwords = '';
 		foreach ( $words as $word ) {
 			if ( is_numeric( $word ) ) {

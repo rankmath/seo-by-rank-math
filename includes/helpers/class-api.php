@@ -63,12 +63,12 @@ trait Api {
 	/**
 	 * Get Setting.
 	 *
-	 * @param  string $field_id The field id to get value for.
-	 * @param  mixed  $default  The default value if no field found.
+	 * @param  string $field_id      The field id to get value for.
+	 * @param  mixed  $default_value The default value if no field found.
 	 * @return mixed
 	 */
-	public static function get_settings( $field_id = '', $default = false ) {
-		return rank_math()->settings->get( $field_id, $default );
+	public static function get_settings( $field_id = '', $default_value = false ) {
+		return rank_math()->settings->get( $field_id, $default_value );
 	}
 
 	/**

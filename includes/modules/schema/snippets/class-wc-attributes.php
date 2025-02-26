@@ -22,14 +22,14 @@ class WC_Attributes {
 	 *
 	 * @var array
 	 */
-	private $_attributes;
+	private $attributes;
 
 	/**
 	 * Hold product object.
 	 *
 	 * @var WC_Product
 	 */
-	private $_product;
+	private $product;
 
 	/**
 	 * The Constructor.
@@ -37,8 +37,8 @@ class WC_Attributes {
 	 * @param WC_Product $product The Product.
 	 */
 	public function __construct( $product ) {
-		$this->_product    = $product;
-		$this->_attributes = $product->get_attributes();
+		$this->product    = $product;
+		$this->attributes = $product->get_attributes();
 	}
 
 	/**
@@ -48,10 +48,10 @@ class WC_Attributes {
 	 * @param string $needle Assign this property.
 	 */
 	public function assign_property( &$entity, $needle ) {
-		foreach ( $this->_attributes as $key => $attrib ) {
+		foreach ( $this->attributes as $key => $attrib ) {
 			if ( stristr( $key, $needle ) ) {
-				$entity[ $needle ] = $this->_product->get_attribute( $key );
-				unset( $this->_attributes[ $key ] );
+				$entity[ $needle ] = $this->product->get_attribute( $key );
+				unset( $this->attributes[ $key ] );
 				return;
 			}
 		}
@@ -63,12 +63,12 @@ class WC_Attributes {
 	 * @param array $entity Entity to attach data to.
 	 */
 	public function assign_remaining( &$entity ) {
-		foreach ( $this->_attributes as $key => $attrib ) {
+		foreach ( $this->attributes as $key => $attrib ) {
 			if ( $attrib['is_visible'] && ! $attrib['is_variation'] ) {
 				$entity['additionalProperty'][] = [
 					'@type' => 'PropertyValue',
 					'name'  => $key,
-					'value' => $this->_product->get_attribute( $key ),
+					'value' => $this->product->get_attribute( $key ),
 				];
 			}
 		}

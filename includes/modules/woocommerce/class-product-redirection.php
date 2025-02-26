@@ -41,13 +41,11 @@ class Product_Redirection {
 	/**
 	 * Pre-filter the redirection.
 	 *
-	 * @param string $check    Check.
-	 * @param string $uri      Current URL.
-	 * @param string $full_uri Full URL.
+	 * @param string $check Check.
 	 *
 	 * @return string|array
 	 */
-	public function pre_redirection( $check, $uri, $full_uri ) {
+	public function pre_redirection( $check ) {
 		if ( $new_link = $this->get_redirection_url() ) { // phpcs:ignore
 			return [
 				'url_to'      => $new_link,

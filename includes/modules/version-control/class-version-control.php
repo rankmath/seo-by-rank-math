@@ -61,7 +61,7 @@ class Version_Control {
 			return;
 		}
 
-		$directory = dirname( __FILE__ );
+		$directory = __DIR__;
 		$this->config(
 			[
 				'id'        => 'status',
@@ -89,7 +89,7 @@ class Version_Control {
 			return false;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'rank-math-beta-optin' ) ) {
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'rank-math-beta-optin' ) ) {
 			return false;
 		}
 
@@ -118,7 +118,7 @@ class Version_Control {
 			return false;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'rank-math-auto-update' ) ) {
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'rank-math-auto-update' ) ) {
 			return false;
 		}
 
@@ -158,7 +158,7 @@ class Version_Control {
 			$this->filter( 'rank_math/tools/default_tab', 'change_default_tab' );
 		}
 
-		$this->filter( 'rank_math/admin/dashboard_view', 'network_admin_view', 10, 2 );
+		$this->filter( 'rank_math/admin/dashboard_view', 'network_admin_view' );
 		$this->filter( 'rank_math/admin/dashboard_nav_links', 'network_admin_dashboard_tabs' );
 		$this->action( 'admin_enqueue_scripts', 'enqueue', 20 );
 
@@ -203,12 +203,11 @@ class Version_Control {
 	 * Replace Admin_Helper::get_view() output for the network admin tab.
 	 *
 	 * @param  string $file File path.
-	 * @param  string $view Requested view.
 	 * @return string       New file path.
 	 */
-	public function network_admin_view( $file, $view ) {
+	public function network_admin_view( $file ) {
 		if ( 'version_control' === Param::get( 'view' ) && is_network_admin() && Helper::is_plugin_active_for_network() ) {
-			return dirname( __FILE__ ) . '/display.php';
+			return __DIR__ . '/display.php';
 		}
 
 		return $file;
@@ -268,12 +267,12 @@ class Version_Control {
 	/**
 	 * Change default tab on the Status & Tools screen.
 	 *
-	 * @param string $default Default tab.
+	 * @param string $default_value Default tab.
 	 * @return string         New default tab.
 	 */
-	public function change_default_tab( $default ) {
+	public function change_default_tab( $default_value ) {
 		if ( is_multisite() && ! current_user_can( 'setup_network' ) ) {
-			return $default;
+			return $default_value;
 		}
 		return 'version_control';
 	}
@@ -349,8 +348,7 @@ class Version_Control {
 	 * Display forms.
 	 */
 	public function display() {
-		$directory = dirname( __FILE__ );
+		$directory = __DIR__;
 		include_once $directory . '/display.php';
 	}
-
 }

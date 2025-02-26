@@ -71,7 +71,7 @@ class System_Status {
 	 * @return void
 	 */
 	private function display_system_info_list() {
-		$directory = dirname( __FILE__ );
+		$directory = __DIR__;
 		foreach ( $this->wp_info as $section => $details ) {
 			if ( ! isset( $details['fields'] ) || empty( $details['fields'] ) ) {
 				continue;

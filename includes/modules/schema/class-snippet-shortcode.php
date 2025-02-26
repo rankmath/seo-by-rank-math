@@ -23,7 +23,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Snippet_Shortcode {
 
-	use Hooker, Shortcode;
+	use Hooker;
+	use Shortcode;
 
 	/**
 	 * Post object.
@@ -161,11 +162,11 @@ class Snippet_Shortcode {
 	/**
 	 * Get field value.
 	 *
-	 * @param  string $field_id Field id.
-	 * @param  mixed  $default  Default value.
+	 * @param  string $field_id      Field id.
+	 * @param  mixed  $default_value Default value.
 	 * @return mixed
 	 */
-	public function get_field_value( $field_id, $default = null ) {
+	public function get_field_value( $field_id, $default_value = null ) {
 		$array = $this->schema;
 		if ( isset( $array[ $field_id ] ) ) {
 			if ( isset( $array[ $field_id ]['@type'] ) ) {
@@ -177,7 +178,7 @@ class Snippet_Shortcode {
 
 		foreach ( explode( '.', $field_id ) as $segment ) {
 			if ( ! is_array( $array ) || ! array_key_exists( $segment, $array ) ) {
-				return $default;
+				return $default_value;
 			}
 
 			$array = $array[ $segment ];
@@ -189,13 +190,13 @@ class Snippet_Shortcode {
 	/**
 	 * Get field.
 	 *
-	 * @param  string $title        Field title.
-	 * @param  string $field_id     Field id to get value.
-	 * @param  string $convert_date Convert date value to proper format.
-	 * @param  mixed  $default      Default value.
+	 * @param  string $title         Field title.
+	 * @param  string $field_id      Field id to get value.
+	 * @param  string $convert_date  Convert date value to proper format.
+	 * @param  mixed  $default_value Default value.
 	 */
-	public function get_field( $title, $field_id, $convert_date = false, $default = null ) {
-		$value = $this->get_field_value( $field_id, $default );
+	public function get_field( $title, $field_id, $convert_date = false, $default_value = null ) {
+		$value = $this->get_field_value( $field_id, $default_value );
 		if ( empty( $value ) ) {
 			return;
 		}
@@ -486,7 +487,7 @@ class Snippet_Shortcode {
 
 		return array_filter(
 			$schemas['schema'],
-			function( $schema ) {
+			function ( $schema ) {
 				return ! empty( $schema['metadata']['reviewLocation'] );
 			}
 		);

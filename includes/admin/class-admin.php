@@ -27,7 +27,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Admin implements Runner {
 
-	use Hooker, Ajax;
+	use Hooker;
+	use Ajax;
 
 	/**
 	 * Register hooks.
@@ -113,11 +114,11 @@ class Admin implements Runner {
 		$post_type  = get_post_type( $post_id );
 		$is_allowed = in_array( $post_type, Helper::get_allowed_post_types(), true );
 
-		if ( ! $is_allowed || Helper::is_autosave() || Helper::is_ajax() || isset( $_REQUEST['bulk_edit'] ) ) {
+		if ( ! $is_allowed || Helper::is_autosave() || Helper::is_ajax() || isset( $_REQUEST['bulk_edit'] ) ) { // phpcs:ignore
 			return $post_id;
 		}
 
-		if ( ! empty( $_POST['rank_math_canonical_url'] ) && false === Param::post( 'rank_math_canonical_url', false, FILTER_VALIDATE_URL ) ) {
+		if ( ! empty( $_POST['rank_math_canonical_url'] ) && false === Param::post( 'rank_math_canonical_url', false, FILTER_VALIDATE_URL ) ) { // phpcs:ignore
 			$message = esc_html__( 'The canonical URL you entered does not seem to be a valid URL. Please double check it in the SEO meta box &raquo; Advanced tab.', 'rank-math' );
 			Helper::add_notification( $message, [ 'type' => 'error' ] );
 		}
@@ -161,7 +162,7 @@ class Admin implements Runner {
 		}
 
 		global $wpdb;
-		$pages = $wpdb->get_results(
+		$pages = $wpdb->get_results( // phpcs:ignore
 			$wpdb->prepare(
 				"SELECT ID, post_title FROM {$wpdb->prefix}posts WHERE post_type = 'page' AND post_status = 'publish' AND post_title LIKE %s",
 				"%{$wpdb->esc_like( $term )}%"
@@ -385,9 +386,9 @@ class Admin implements Runner {
 	 * We first do the same check as what ActionScheduler_AdminView->check_pastdue_actions() does,
 	 * but then we also count how many of those past-due actions are ours.
 	 *
-	 * @param null $null Null value.
+	 * @param null $value Null value.
 	 */
-	public function as_exclude_pastdue_actions( $null ) {
+	public function as_exclude_pastdue_actions( $value ) {
 		$query_args = [
 			'date'     => as_get_datetime_object( time() - DAY_IN_SECONDS ),
 			'status'   => \ActionScheduler_Store::STATUS_PENDING,

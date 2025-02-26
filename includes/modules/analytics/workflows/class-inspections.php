@@ -145,7 +145,7 @@ class Inspections {
 
 		$count = 0;
 		foreach ( $objects as $object ) {
-			$count++;
+			++$count;
 			$time = time() + ( $count * self::REQUEST_GAP_SECONDS );
 			if ( $count > self::API_LIMIT ) {
 				$delay_days = floor( $count / self::API_LIMIT );
@@ -155,5 +155,4 @@ class Inspections {
 			as_schedule_single_action( $time, 'rank_math/analytics/get_inspections_data', [ $object->page ], 'rank-math' );
 		}
 	}
-
 }

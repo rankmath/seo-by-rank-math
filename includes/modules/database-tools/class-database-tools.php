@@ -105,7 +105,7 @@ class Database_Tools {
 		$count = 0;
 		foreach ( $transients as $transient ) {
 			delete_option( $transient );
-			$count++;
+			++$count;
 		}
 
 		// Translators: placeholder is the number of transients deleted.

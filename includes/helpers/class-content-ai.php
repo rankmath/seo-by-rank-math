@@ -58,11 +58,10 @@ trait Content_AI {
 	/**
 	 * Get the Content AI Credits.
 	 *
-	 * @param bool $force_update       Whether to send a request to API to get the new Credits value.
-	 * @param bool $return_error       Whether to return error when request fails.
-	 * @param bool $migration_complete Whether the request was send after migrating the user.
+	 * @param bool $force_update Whether to send a request to API to get the new Credits value.
+	 * @param bool $return_error Whether to return error when request fails.
 	 */
-	public static function get_content_ai_credits( $force_update = false, $return_error = false, $migration_complete = false ) {
+	public static function get_content_ai_credits( $force_update = false, $return_error = false ) {
 		$registered = Admin_Helper::get_registration_data();
 		if ( empty( $registered ) ) {
 			return 0;
@@ -70,7 +69,7 @@ trait Content_AI {
 
 		$transient = 'rank_math_content_ai_requested';
 		$credits   = self::get_credits();
-		if ( ! $force_update || ( get_site_transient( $transient ) && ! $migration_complete ) ) {
+		if ( ! $force_update || ( get_site_transient( $transient ) ) ) {
 			return $credits;
 		}
 
@@ -97,9 +96,6 @@ trait Content_AI {
 		);
 
 		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( 404 === $response_code && ! $migration_complete ) {
-			return self::maybe_migrate_user( $response );
-		}
 
 		$is_error = self::is_content_ai_error( $response, $response_code );
 		if ( $is_error ) {
@@ -456,36 +452,6 @@ trait Content_AI {
 	}
 
 	/**
-	 * User migration request.
-	 */
-	public static function migrate_user_to_nest_js() {
-		$registered = Admin_Helper::get_registration_data();
-		if ( empty( $registered ) || empty( $registered['username'] ) ) {
-			return;
-		}
-
-		$res = wp_remote_post(
-			CONTENT_AI_URL . '/migrate',
-			[
-				'headers' => [
-					'Content-type' => 'application/json',
-				],
-				'body'    => wp_json_encode( [ 'username' => $registered['username'] ] ),
-			]
-		);
-
-		$res_code = wp_remote_retrieve_response_code( $res );
-		if ( is_wp_error( $res ) || 400 <= $res_code ) {
-			return false;
-		}
-
-		$data             = json_decode( wp_remote_retrieve_body( $res ), true );
-		$migration_status = $data['status'] ?? '';
-
-		return in_array( $migration_status, [ 'added', 'migration_not_needed' ], true ) ? 'completed' : $migration_status;
-	}
-
-	/**
 	 * Function to return the error message.
 	 *
 	 * @param array|WP_Error $response      API response.
@@ -499,22 +465,5 @@ trait Content_AI {
 		}
 
 		return ! empty( $data['error'] ) ? $data['error']['code'] : false;
-	}
-
-	/**
-	 * Migrate user depending on the error received in the response
-	 *
-	 * @param array $response API response.
-	 */
-	private static function maybe_migrate_user( $response ) {
-		$data = json_decode( wp_remote_retrieve_body( $response ), true );
-		if ( empty( $data['err_key'] ) || 'not_found' !== $data['err_key'] ) {
-			return;
-		}
-
-		$status = self::migrate_user_to_nest_js();
-		if ( 'completed' === $status ) {
-			return self::get_content_ai_credits( true, false, true );
-		}
 	}
 }

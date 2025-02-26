@@ -17,7 +17,6 @@ use RankMath\Google\Console;
 
 defined( 'ABSPATH' ) || exit;
 
-// phpcs:disable
 if ( ! Helper::is_site_connected() ) {
 	require_once 'rank-math-connect.php';
 	return;
@@ -29,7 +28,7 @@ if ( ! $is_authorized ) {
 	return;
 }
 
-$profile = wp_parse_args(
+$profile   = wp_parse_args(
 	get_option( 'rank_math_google_analytic_profile' ),
 	[
 		'profile' => '',
@@ -57,54 +56,56 @@ $is_profile_connected    = Console::is_console_connected();
 $is_adsense_connected    = ! empty( $analytics['adsense_id'] );
 $is_analytics_connected  = Analytics::is_analytics_connected();
 $is_index_status_enabled = Url_Inspection::is_enabled() || ! $is_profile_connected;
-$all_services            = get_option( 'rank_math_analytics_all_services', [
-	'isVerified'           => '',
-	'inSearchConsole'      => '',
-	'hasSitemap'           => '',
-	'hasAnalytics'         => '',
-	'hasAnalyticsProperty' => '',
-	'homeUrl'              => '',
-	'sites'                => '',
-	'accounts'             => [],
-	'adsenseAccounts'      => [],
-] );
+$all_services            = get_option(
+	'rank_math_analytics_all_services',
+	[
+		'isVerified'           => '',
+		'inSearchConsole'      => '',
+		'hasSitemap'           => '',
+		'hasAnalytics'         => '',
+		'hasAnalyticsProperty' => '',
+		'homeUrl'              => '',
+		'sites'                => '',
+		'accounts'             => [],
+		'adsenseAccounts'      => [],
+	]
+);
 $is_pro_active           = defined( 'RANK_MATH_PRO_FILE' );
-$is_ga4                  = ! Str::starts_with( 'UA-', $analytics['property_id'] );
 ?>
 <input type="hidden" class="cmb2-id-check-all-services" value="<?php echo $is_profile_connected && $is_analytics_connected ? '1' : '0'; ?>" />
 
 <?php
-$actions = [
-	'reconnect' => [
-		'link' => wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ),
+$connections = [
+	'reconnect'  => [
+		'link'  => wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ),
 		'class' => 'rank-math-reconnect-google',
-		'text' => esc_html__( 'Reconnect', 'rank-math' ),
+		'text'  => esc_html__( 'Reconnect', 'rank-math' ),
 	],
 	'disconnect' => [
-		'link' => '#',
+		'link'  => '#',
 		'class' => 'rank-math-disconnect-google',
-		'text' => esc_html__( 'Disconnect', 'rank-math' ),
+		'text'  => esc_html__( 'Disconnect', 'rank-math' ),
 	],
 ];
 
 if ( Helper::is_advanced_mode() && ( $is_profile_connected || $is_adsense_connected || $is_analytics_connected ) ) {
-	$actions['test-connections'] = [
+	$connections['test-connections'] = [
 		'link'  => '#',
 		'class' => 'rank-math-test-connection-google',
 		'text'  => esc_html__( 'Test Connections', 'rank-math' ),
 	];
 }
 
-$actions = apply_filters( 'rank_math/analytics/connect_actions', $actions );
+$connections = apply_filters( 'rank_math/analytics/connect_actions', $connections );
 ?>
 <div class="connect-actions">
-	<?php foreach( $actions as $action ) { ?>
-		<a href="<?php echo esc_attr( $action['link'] ); ?>" class="button button-link <?php echo esc_attr( $action['class'] ); ?>"><?php echo esc_html( $action['text'] ); ?></a>
+	<?php foreach ( $connections as $connection ) { ?>
+		<a href="<?php echo esc_attr( $connection['link'] ); ?>" class="button button-link <?php echo esc_attr( $connection['class'] ); ?>"><?php echo esc_html( $connection['text'] ); ?></a>
 	<?php } ?>
 </div>
 
 <?php
-$console_classes = Helper::classnames(
+$console_classes        = Helper::classnames(
 	'rank-math-box no-padding rank-math-accordion rank-math-connect-search-console',
 	[
 		'connected'    => $is_profile_connected,
@@ -116,7 +117,7 @@ $console_status_classes = Helper::classnames(
 	'rank-math-connection-status',
 	[
 		'rank-math-connection-status-success' => $is_profile_connected,
-		'rank-math-connection-status-error' => ! $is_profile_connected,
+		'rank-math-connection-status-error'   => ! $is_profile_connected,
 	]
 );
 
@@ -132,39 +133,39 @@ $console_status = $is_profile_connected ? 'Connected' : 'Not Connected';
 		<?php
 		if ( ! Permissions::has_console() ) {
 			Permissions::print_warning();
-		} ?>
+		}
+		?>
 
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">
 				<label for="site-console-profile"><?php esc_html_e( 'Site', 'rank-math' ); ?></label>
-				<select class="cmb2_select site-console-profile notrack" name="site-console-profile" id="site-console-profile" data-selected="<?php echo $profile['profile']; ?>" disabled="disabled">
+				<select class="cmb2_select site-console-profile notrack" name="site-console-profile" id="site-console-profile" data-selected="<?php echo esc_attr( $profile['profile'] ); ?>" disabled="disabled">
 					<?php if ( $is_profile_connected ) : ?>
-					<option value="<?php echo $profile['profile']; ?>"><?php echo $profile['profile']; ?></option>
+					<option value="<?php echo esc_attr( $profile['profile'] ); ?>"><?php echo esc_attr( $profile['profile'] ); ?></option>
 					<?php endif; ?>
 				</select>
 			</div>
 			<?php do_action( 'rank_math/analytics/options/console' ); ?>
 		</div>
 
-
 		<div class="cmb-row cmb-type-toggle">
 			<div class="cmb-td">
 				<label class="cmb2-toggle">
-					<input type="checkbox" class="regular-text notrack" name="enable-index-status" id="enable-index-status" value="on"<?php checked( $is_index_status_enabled ); ?> <?php disabled( ! $is_profile_connected ) ?>>
+					<input type="checkbox" class="regular-text notrack" name="enable-index-status" id="enable-index-status" value="on" <?php checked( $is_index_status_enabled ); ?> <?php disabled( ! $is_profile_connected ); ?>>
 					<span class="cmb2-slider">
 						<svg width="3" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 6" class="toggle_on" role="img" aria-hidden="true" focusable="false"><path d="M0 0h2v6H0z"></path></svg>
 						<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg>
 					</span>
 				</label>
 				<label for="enable-index-status"><?php esc_html_e( 'Enable the Index Status tab', 'rank-math' ); ?></label>
-				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option to show the Index Status tab in the Analytics module.', 'rank-math' ); ?> <a href="<?php echo KB::get( 'url-inspection-api', 'SW Analytics Index Status Option' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more.', 'rank-math' ); ?></a></div>
+				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option to show the Index Status tab in the Analytics module.', 'rank-math' ); ?> <a href="<?php echo KB::get( 'url-inspection-api', 'SW Analytics Index Status Option' ); // phpcs:ignore ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more.', 'rank-math' ); ?></a></div>
 			</div>
 		</div>
 	</div>
 </div>
 
 <?php
-$analytic_classes = Helper::classnames(
+$analytic_classes        = Helper::classnames(
 	'rank-math-box no-padding rank-math-accordion rank-math-connect-analytics',
 	[
 		'connected'    => $is_analytics_connected,
@@ -176,10 +177,10 @@ $analytic_status_classes = Helper::classnames(
 	'rank-math-connection-status',
 	[
 		'rank-math-connection-status-success' => $is_analytics_connected,
-		'rank-math-connection-status-error' => ! $is_analytics_connected,
+		'rank-math-connection-status-error'   => ! $is_analytics_connected,
 	]
 );
-$analytic_status = $is_analytics_connected ? 'Connected' : 'Not Connected';
+$analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connected';
 ?>
 <div class="<?php echo esc_attr( $analytic_classes ); ?>" tabindex="0">
 	<header>
@@ -190,15 +191,16 @@ $analytic_status = $is_analytics_connected ? 'Connected' : 'Not Connected';
 		<?php
 		if ( ! Permissions::has_analytics() ) {
 			Permissions::print_warning();
-		} ?>
+		}
+		?>
 
 		<p class="warning yellow">
 			<strong class="note"><?php echo esc_html__( 'Note', 'rank-math' ); ?></strong>
 			<?php
-			/* translators: GA4 KB link */
-			echo sprintf(
+			printf(
+				/* translators: %s: Link to KB article */
 				esc_html__( 'Ready to switch to Google Analytics 4? %s', 'rank-math' ),
-				'<a href="'. KB::get( 'using-ga4', 'Analytics GA4 KB' ) . '" target="_blank">' . esc_html__( 'Click here to know how', 'rank-math' ) . '</a>.'
+				'<a href="' . KB::get( 'using-ga4', 'Analytics GA4 KB' ) . '" target="_blank">' . esc_html__( 'Click here to know how', 'rank-math' ) . '</a>.' // phpcs:ignore
 			);
 			?>
 		</p>
@@ -211,7 +213,7 @@ $analytic_status = $is_analytics_connected ? 'Connected' : 'Not Connected';
 					if ( $is_analytics_connected ) :
 						$analytic_account = $all_services['accounts'][ $analytics['account_id'] ];
 						?>
-					<option value="<?php echo $analytics['account_id']; ?>"><?php echo $analytic_account['name']; ?></option>
+					<option value="<?php echo esc_attr( $analytics['account_id'] ); ?>"><?php echo esc_attr( $analytic_account['name'] ); ?></option>
 					<?php endif; ?>
 				</select>
 			</div>
@@ -221,29 +223,28 @@ $analytic_status = $is_analytics_connected ? 'Connected' : 'Not Connected';
 					<?php
 					if ( $is_analytics_connected ) :
 						$analytic_property = $all_services['accounts'][ $analytics['account_id'] ]['properties'][ $analytics['property_id'] ]['name'];
-					?>
-					<option value="<?php echo $analytics['property_id']; ?>"><?php echo $analytic_property; ?></option>
+						?>
+					<option value="<?php echo esc_attr( $analytics['property_id'] ); ?>"><?php echo esc_html( $analytic_property ); ?></option>
 					<?php endif; ?>
 				</select>
 			</div>
 			<div class="cmb-row-col">
 				<label for="site-analytics-view">
-					<?php echo $is_ga4 ? esc_html__( 'Data Stream', 'rank-math' ) : esc_html__( 'View', 'rank-math' ); ?>
+				<?php echo esc_html__( 'Data Stream', 'rank-math' ); ?>
 				</label>
 				<select class="cmb2_select site-analytics-view notrack" name="site-analytics-view" id="site-analytics-view" data-selected="<?php echo esc_attr( $analytics['view_id'] ); ?>" disabled="disabled">
 					<?php
 					if ( $is_analytics_connected ) :
-						$analytic_view = $is_ga4 ? $analytics['stream_name'] : $all_services['accounts'][ $analytics['account_id'] ]['properties'][ $analytics['property_id'] ]['profiles'][ $analytics['view_id'] ]['name'];
-						$analytic_view = $is_ga4 && ! $analytic_view && ! empty( $analytics['view_id'] ) ? 'Website' : $analytic_view;
-					?>
+						$analytic_view = $analytics['stream_name'] ? $analytics['stream_name'] : 'Website';
+						?>
 						<option value="<?php echo esc_attr( $analytics['view_id'] ); ?>"><?php echo esc_attr( $analytic_view ); ?></option>
-					<?php
+						<?php
 					endif;
 					?>
 				</select>
 			</div>
-			<input type="hidden" id="rank-math-analytics-measurement-id" name="measurementID" value="<?php echo esc_attr( $analytics['measurement_id'] ) ?>" />
-			<input type="hidden" id="rank-math-analytics-stream-name" name="streamName" value="<?php echo esc_attr( $analytics['stream_name'] ) ?>" />
+			<input type="hidden" id="rank-math-analytics-measurement-id" name="measurementID" value="<?php echo esc_attr( $analytics['measurement_id'] ); ?>" />
+			<input type="hidden" id="rank-math-analytics-stream-name" name="streamName" value="<?php echo esc_attr( $analytics['stream_name'] ); ?>" />
 			<?php do_action( 'rank_math/analytics/options/analytics' ); ?>
 		</div>
 
@@ -261,7 +262,7 @@ $analytic_status = $is_analytics_connected ? 'Connected' : 'Not Connected';
 			</div>
 		</div>
 
-		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="' . KB::the( 'free-vs-pro', 'Anonymize IP' ) .'"' : ''; ?>>
+		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="' . KB::the( 'free-vs-pro', 'Anonymize IP' ) . '"' : ''; // phpcs:ignore ?>>
 			<div class="cmb-td">
 				<label class="cmb2-toggle">
 					<input type="checkbox" class="regular-text notrack" name="anonymize-ip" id="anonymize-ip" value="on"<?php checked( $analytics['anonymize_ip'] ); ?><?php disabled( ! $is_pro_active ); ?>>
@@ -286,7 +287,7 @@ $analytic_status = $is_analytics_connected ? 'Connected' : 'Not Connected';
 			</div>
 		</div>
 
-		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="' . KB::the( 'pro', 'Localjs IP' ) . '"' : ''; ?>>
+		<div class="cmb-row cmb-type-toggle <?php echo ! $is_pro_active ? 'cmb-redirector-element' : ''; ?>" <?php echo ! $is_pro_active ? 'data-url="' . KB::the( 'pro', 'Localjs IP' ) . '"' : ''; // phpcs:ignore ?>>
 			<div class="cmb-td">
 				<label class="cmb2-toggle">
 					<input type="checkbox" class="regular-text notrack" name="local-ga-js" id="local-ga-js" value="on"<?php checked( $analytics['local_ga_js'] ); ?><?php disabled( ! $is_pro_active ); ?>>
@@ -329,64 +330,44 @@ $analytic_status = $is_analytics_connected ? 'Connected' : 'Not Connected';
 	</div>
 </div>
 
-<?php
-$adsense_classes = Helper::classnames(
-	'rank-math-box no-padding rank-math-accordion rank-math-connect-adsense',
-	[
-		'connected'    => $is_adsense_connected,
-		'disconnected' => ! $is_adsense_connected,
-		'disabled'     => ! Permissions::has_adsense(),
-	]
-);
-$adsense_status_classes = Helper::classnames(
-	'rank-math-connection-status',
-	[
-		'rank-math-connection-status-success' => Permissions::has_adsense() && $is_adsense_connected,
-		'rank-math-connection-status-error' => Permissions::has_adsense() && ! $is_adsense_connected,
-	]
-);
-$adsense_status = $is_adsense_connected ? 'Connected' : 'Not Connected';
-?>
-<div class="<?php echo esc_attr( $adsense_classes ); ?>" tabindex="0">
+<?php ob_start(); ?>
+<div class="rank-math-box no-padding rank-math-accordion rank-math-connect-adsense disconnected" tabindex="0">
 	<header>
-		<h3><span class="rank-math-connection-status-wrap"><span class="<?php echo esc_attr( $adsense_status_classes ); ?>" title="<?php echo esc_attr( $adsense_status ); ?>"></span></span><?php esc_html_e( 'AdSense', 'rank-math' ); ?></h3>
+		<h3>
+			<span class="rank-math-connection-status-wrap">
+				<span class="rank-math-connection-status rank-math-connection-status-error" title="Not Connected"></span>
+			</span><?php esc_html_e( 'AdSense', 'rank-math' ); ?>
+		</h3>
 	</header>
 	<div class="rank-math-accordion-content">
-
-		<?php
-		if ( defined( 'RANK_MATH_PRO_FILE' ) && ! Permissions::has_adsense() ) {
-			Permissions::print_warning();
-		} ?>
-
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">
 				<label for="site-adsense-account"><?php esc_html_e( 'Account', 'rank-math' ); ?></label>
-				<select class="cmb2_select site-adsense-account notrack" name="site-adsense-account" id="site-adsense-account" data-selected="<?php echo esc_attr( $analytics['adsense_id'] ); ?>" disabled="disabled">
-					<?php
-					if ( $is_adsense_connected ) :
-						$adsense = $all_services['adsenseAccounts'][ $analytics['adsense_id'] ];
-						?>
-					<option value="<?php echo $analytics['adsense_id']; ?>"><?php echo $adsense['name']; ?></option>
-					<?php endif; ?>
+				<select class="cmb2_select site-adsense-account notrack" name="site-adsense-account" id="site-adsense-account" data-selected="" disabled="disabled">
+					<option value=""><?php esc_html_e( 'Select Account', 'rank-math' ); ?></option>
 				</select>
 			</div>
 		</div>
-
-		<?php if ( ! $is_pro_active ) : ?>
 		<div id="rank-math-pro-cta" class="no-margin">
 			<div class="rank-math-cta-text">
-				<span class="rank-math-pro-badge"><a href="<?php KB::the( 'pro', 'AdSense Toggle' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'PRO', 'rank-math' ); ?></a></span> <?php esc_html_e( "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module.", 'rank-math' ); ?>
+				<span class="rank-math-pro-badge">
+					<a href="<?php KB::the( 'pro', 'AdSense Toggle' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'PRO', 'rank-math' ); ?></a></span> <?php esc_html_e( "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module.", 'rank-math' ); ?>
 			</div>
 		</div>
-		<?php endif; ?>
 	</div>
 </div>
+<?php echo apply_filters( 'rank_math/analytics/adsense', ob_get_clean(), $analytics, $all_services ); // phpcs:ignore ?>
 
 <div id="rank-math-pro-cta" class="rank-math-privacy-box width-100">
 	<div class="rank-math-cta-table">
 		<div class="rank-math-cta-body less-padding">
 			<i class="dashicons dashicons-lock"></i>
-			<p><?php printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . KB::get( 'usage-policy', 'Analytics Privacy Notice' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); ?></p>
+			<p>
+			<?php
+			/* translators: %s: Link to KB article */
+			printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . KB::get( 'usage-policy', 'Analytics Privacy Notice' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); // phpcs:ignore
+			?>
+			</p>
 		</div>
 	</div>
 </div>

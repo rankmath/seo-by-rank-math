@@ -450,5 +450,4 @@ class Block_HowTo extends Block {
 	private function has_steps( $attributes ) {
 		return ! isset( $attributes['steps'] ) || empty( $attributes['steps'] ) ? false : true;
 	}
-
 }

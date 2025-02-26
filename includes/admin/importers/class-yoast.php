@@ -121,7 +121,7 @@ class Yoast extends Plugin_Importer {
 		$this->set_additional_organization_details( $yoast_titles );
 		$this->set_separator( $yoast_titles );
 		$this->set_post_types( $yoast_titles );
-		$this->set_taxonomies( $yoast_titles );
+		$this->set_taxonomies( $yoast_titles, $yoast_sitemap );
 		$this->sitemap_settings( $yoast_main, $yoast_sitemap, $yoast_titles );
 		$this->social_webmaster_settings( $yoast_main, $yoast_social );
 		$this->breadcrumb_settings( $yoast_titles, $yoast_internallinks );
@@ -166,9 +166,10 @@ class Yoast extends Plugin_Importer {
 	/**
 	 * Set taxonomies settings.
 	 *
-	 * @param array $yoast_titles Settings.
+	 * @param array $yoast_titles  Titles & Meta Settings.
+	 * @param array $yoast_sitemap Sitemap Settings.
 	 */
-	private function set_taxonomies( $yoast_titles ) {
+	private function set_taxonomies( $yoast_titles, $yoast_sitemap ) {
 		$hash = [];
 		foreach ( Helper::get_accessible_taxonomies() as $taxonomy => $object ) {
 			$this->set_robots( "tax_{$taxonomy}", "tax-{$taxonomy}", $yoast_titles );

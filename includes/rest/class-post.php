@@ -41,7 +41,7 @@ class Post extends WP_REST_Controller {
 			'/updateMetaBulk',
 			[
 				'methods'             => WP_REST_Server::CREATABLE,
-				'permission_callback' => function() {
+				'permission_callback' => function () {
 					return \RankMath\Helper::has_cap( 'onpage_general' );
 				},
 				'callback'            => [ $this, 'update_bulk_meta' ],
@@ -55,7 +55,7 @@ class Post extends WP_REST_Controller {
 			[
 				'get_callback'        => [ $this, 'get_post_screen_meta' ],
 				'schema'              => null,
-				'permission_callback' => function() {
+				'permission_callback' => function () {
 					return current_user_can( 'read' );
 				},
 			]

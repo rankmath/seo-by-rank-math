@@ -376,8 +376,8 @@ class Option_Center implements Runner {
 			return;
 		}
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Writing to .htaccess file and escaping for HTML will break functionality.
-		$content = wp_unslash( $_POST['htaccess_content'] );
+		// phpcs:ignore= WordPress.Security.ValidatedSanitizedInput, WordPress.Security.NonceVerification -- Writing to .htaccess file and escaping for HTML will break functionality & CMB2 package handles the nonce verification
+		$content = isset( $_POST['htaccess_content'] ) ? wp_unslash( $_POST['htaccess_content'] ) : '';
 		if ( empty( $content ) ) {
 			return;
 		}

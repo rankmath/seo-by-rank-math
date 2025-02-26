@@ -69,46 +69,46 @@ class SEOPress extends Plugin_Importer {
 	/**
 	 * Convert SEOPress variables if needed.
 	 *
-	 * @param string $string Value to convert.
+	 * @param string $variable Value to convert.
 	 *
 	 * @return string
 	 */
-	public function convert_variables( $string ) {
-		$string = str_replace( '%%sitetitle%%', '%sitename%', $string );
-		$string = str_replace( '%%tagline%%', '%sitedesc%', $string );
-		$string = str_replace( '%%post_title%%', '%title%', $string );
-		$string = str_replace( '%%post_excerpt%%', '%excerpt%', $string );
-		$string = str_replace( '%%post_date%%', '%date%', $string );
-		$string = str_replace( '%%post_modified_date%%', '%modified%', $string );
-		$string = str_replace( '%post_author%%', '%name%', $string );
-		$string = str_replace( '%%post_category%%', '%category%', $string );
-		$string = str_replace( '%%post_tag%%', '%tag%', $string );
-		$string = str_replace( '%%_category_title%%', '%term%', $string );
-		$string = str_replace( '%%_category_description%%', '%term_description%', $string );
-		$string = str_replace( '%%tag_title%%', '%term%', $string );
-		$string = str_replace( '%%tag_description%%', '%term_description%', $string );
-		$string = str_replace( '%%term_title%%', '%term%', $string );
-		$string = str_replace( '%%term_description%%', '%term_description%', $string );
-		$string = str_replace( '%%search_keywords%%', '%search_query%', $string );
-		$string = str_replace( '%%current_pagination%%', '%page%', $string );
-		$string = str_replace( '%%cpt_plural%%', '%pt_plural%', $string );
-		$string = str_replace( '%%archive_title%%', '%title%', $string );
-		$string = str_replace( '%%archive_date%%', '%currentdate%', $string );
-		$string = str_replace( '%%archive_date_day%%', '%currentday%', $string );
-		$string = str_replace( '%%archive_date_month%%', '%currentmonth%', $string );
-		$string = str_replace( '%%archive_date_year%%', '%year%', $string );
-		$string = str_replace( '%%currentdate%%', '%currentdate%', $string );
-		$string = str_replace( '%%currentday%%', '%currentday%', $string );
-		$string = str_replace( '%%currentmonth%%', '%currentmonth%', $string );
-		$string = str_replace( '%%currentyear%%', '%currentyear%', $string );
-		$string = str_replace( '%%currenttime%%', '%time%', $string );
-		$string = str_replace( '%%author_bio%%', '%user_description%', $string );
-		$string = str_replace( '%%wc_single_cat%%', '%term%', $string );
-		$string = str_replace( '%%wc_single_tag%%', '%term%', $string );
-		$string = str_replace( '%%wc_single_short_desc%%', '%wc_shortdesc%', $string );
-		$string = str_replace( '%%wc_single_price%%', '%wc_price%', $string );
+	public function convert_variables( $variable ) {
+		$variable = str_replace( '%%sitetitle%%', '%sitename%', $variable );
+		$variable = str_replace( '%%tagline%%', '%sitedesc%', $variable );
+		$variable = str_replace( '%%post_title%%', '%title%', $variable );
+		$variable = str_replace( '%%post_excerpt%%', '%excerpt%', $variable );
+		$variable = str_replace( '%%post_date%%', '%date%', $variable );
+		$variable = str_replace( '%%post_modified_date%%', '%modified%', $variable );
+		$variable = str_replace( '%post_author%%', '%name%', $variable );
+		$variable = str_replace( '%%post_category%%', '%category%', $variable );
+		$variable = str_replace( '%%post_tag%%', '%tag%', $variable );
+		$variable = str_replace( '%%_category_title%%', '%term%', $variable );
+		$variable = str_replace( '%%_category_description%%', '%term_description%', $variable );
+		$variable = str_replace( '%%tag_title%%', '%term%', $variable );
+		$variable = str_replace( '%%tag_description%%', '%term_description%', $variable );
+		$variable = str_replace( '%%term_title%%', '%term%', $variable );
+		$variable = str_replace( '%%term_description%%', '%term_description%', $variable );
+		$variable = str_replace( '%%search_keywords%%', '%search_query%', $variable );
+		$variable = str_replace( '%%current_pagination%%', '%page%', $variable );
+		$variable = str_replace( '%%cpt_plural%%', '%pt_plural%', $variable );
+		$variable = str_replace( '%%archive_title%%', '%title%', $variable );
+		$variable = str_replace( '%%archive_date%%', '%currentdate%', $variable );
+		$variable = str_replace( '%%archive_date_day%%', '%currentday%', $variable );
+		$variable = str_replace( '%%archive_date_month%%', '%currentmonth%', $variable );
+		$variable = str_replace( '%%archive_date_year%%', '%year%', $variable );
+		$variable = str_replace( '%%currentdate%%', '%currentdate%', $variable );
+		$variable = str_replace( '%%currentday%%', '%currentday%', $variable );
+		$variable = str_replace( '%%currentmonth%%', '%currentmonth%', $variable );
+		$variable = str_replace( '%%currentyear%%', '%currentyear%', $variable );
+		$variable = str_replace( '%%currenttime%%', '%time%', $variable );
+		$variable = str_replace( '%%author_bio%%', '%user_description%', $variable );
+		$variable = str_replace( '%%wc_single_cat%%', '%term%', $variable );
+		$variable = str_replace( '%%wc_single_tag%%', '%term%', $variable );
+		$variable = str_replace( '%%wc_single_short_desc%%', '%wc_shortdesc%', $variable );
+		$variable = str_replace( '%%wc_single_price%%', '%wc_price%', $variable );
 
-		return str_replace( '%%', '%', $string );
+		return str_replace( '%%', '%', $variable );
 	}
 
 	/**
@@ -247,7 +247,7 @@ class SEOPress extends Plugin_Importer {
 		];
 
 		foreach ( $terms->get_terms() as $term_id ) {
-			$count++;
+			++$count;
 
 			$this->replace_meta( $hash, [], $term_id, 'term', 'convert_variables' );
 			delete_term_meta( $term_id, 'rank_math_permalink' );
@@ -286,7 +286,7 @@ class SEOPress extends Plugin_Importer {
 				'status'      => 'publish' === $redirection->post_status ? true : false,
 			];
 			if ( false !== $this->save_redirection( $data ) ) {
-				$count++;
+				++$count;
 			}
 		}
 
@@ -642,7 +642,7 @@ class SEOPress extends Plugin_Importer {
 		$this->replace_meta( $hash, null, $object_id, $object_type, 'convert_variables' );
 
 		$redirection = [
-			'source'      => trim( parse_url( $source_url, PHP_URL_PATH ), '/' ),
+			'source'      => trim( wp_parse_url( $source_url, PHP_URL_PATH ), '/' ),
 			'destination' => $this->get_meta( $object_type, $object_id, '_seopress_redirections_value' ),
 			'code'        => $this->get_meta( $object_type, $object_id, '_seopress_redirections_type' ),
 			'status'      => $this->get_meta( $object_type, $object_id, '_seopress_redirections_enabled' ),
@@ -679,7 +679,6 @@ class SEOPress extends Plugin_Importer {
 		}
 
 		return $value;
-
 	}
 
 	/**

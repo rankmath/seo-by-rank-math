@@ -148,7 +148,7 @@ class Rest extends WP_REST_Controller {
 	public function get_log( WP_REST_Request $request ) {
 		$filter = $request->get_param( 'filter' );
 		$result = Api::get()->get_log();
-		$total = count( $result );
+		$total  = count( $result );
 		foreach ( $result as $key => $value ) {
 			$result[ $key ]['timeFormatted'] = wp_date( 'Y-m-d H:i:s', $value['time'] );
 			// Translators: placeholder is human-readable time, e.g. "1 hour".
@@ -193,7 +193,7 @@ class Rest extends WP_REST_Controller {
 	public function reset_key( WP_REST_Request $request ) {
 		$api = Api::get();
 		$api->reset_key();
-		$key = $api->get_key();
+		$key      = $api->get_key();
 		$location = $api->get_key_location( 'reset_key' );
 		return new WP_REST_Response(
 			[

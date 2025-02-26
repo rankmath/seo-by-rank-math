@@ -207,5 +207,4 @@ class Block_FAQ extends Block {
 	private function has_questions( $attributes ) {
 		return ! isset( $attributes['questions'] ) || empty( $attributes['questions'] ) ? false : true;
 	}
-
 }

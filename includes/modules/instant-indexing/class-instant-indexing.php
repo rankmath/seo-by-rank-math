@@ -24,7 +24,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Instant_Indexing extends Base {
 
-	use Hooker, Ajax;
+	use Hooker;
+	use Ajax;
 
 	/**
 	 * API Object.
@@ -213,21 +214,21 @@ class Instant_Indexing extends Base {
 				'title'   => esc_html__( 'Submit URLs', 'rank-math' ),
 				'desc'    => esc_html__( 'Send URLs directly to the IndexNow API.', 'rank-math' ) . ' <a href="' . KB::get( 'instant-indexing', 'Indexing Submit URLs' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
 				'classes' => 'rank-math-advanced-option',
-				'file'    => dirname( __FILE__ ) . '/views/console.php',
+				'file'    => __DIR__ . '/views/console.php',
 			],
 			'settings'       => [
 				'icon'  => 'rm-icon rm-icon-settings',
 				'title' => esc_html__( 'Settings', 'rank-math' ),
 				/* translators: Link to kb article */
 				'desc'  => sprintf( esc_html__( 'Instant Indexing module settings. %s.', 'rank-math' ), '<a href="' . KB::get( 'instant-indexing', 'Indexing Settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
-				'file'  => dirname( __FILE__ ) . '/views/options.php',
+				'file'  => __DIR__ . '/views/options.php',
 			],
 			'history'        => [
 				'icon'    => 'rm-icon rm-icon-htaccess',
 				'title'   => esc_html__( 'History', 'rank-math' ),
 				'desc'    => esc_html__( 'The last 100 IndexNow API requests.', 'rank-math' ),
 				'classes' => 'rank-math-advanced-option',
-				'file'    => dirname( __FILE__ ) . '/views/history.php',
+				'file'    => __DIR__ . '/views/history.php',
 			],
 		];
 
@@ -471,5 +472,4 @@ class Instant_Indexing extends Base {
 		$post_types = Helper::get_settings( 'instant_indexing.bing_post_types', [] );
 		return $post_types;
 	}
-
 }

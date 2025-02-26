@@ -28,7 +28,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Jobs {
 
-	use Hooker, Cache;
+	use Hooker;
+	use Cache;
 
 	/**
 	 * Main instance
@@ -267,7 +268,6 @@ class Jobs {
 			null,
 			null
 		);
-
 	}
 
 	/**

@@ -1,4 +1,4 @@
-<?php
+<?php //phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase -- This filename format is intentionally used to match the plugin version.
 /**
  * The Updates routine for version 1.0.201
  *
@@ -16,12 +16,12 @@ defined( 'ABSPATH' ) || exit;
  * Add default values for the new Content AI settings.
  */
 function rank_math_1_0_201_content_ai_settings() {
-	$all_opts                               = rank_math()->settings->all_raw();
-	$general                                = $all_opts['general'];
-	$general['content_ai_country']          = 'all';
-	$general['content_ai_tone']             = 'Formal';
-	$general['content_ai_audience']         = 'General Audience';
-	$general['content_ai_language']         = Helper::content_ai_default_language();
+	$all_opts                       = rank_math()->settings->all_raw();
+	$general                        = $all_opts['general'];
+	$general['content_ai_country']  = 'all';
+	$general['content_ai_tone']     = 'Formal';
+	$general['content_ai_audience'] = 'General Audience';
+	$general['content_ai_language'] = Helper::content_ai_default_language();
 
 	Helper::update_all_settings( $general, null, null );
 	rank_math()->settings->reset();

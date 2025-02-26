@@ -71,7 +71,7 @@ class CMB2_Fields implements Runner {
 			return $args;
 		}
 
-		$args['default_cb'] = function() use ( $args ) {
+		$args['default_cb'] = function () use ( $args ) {
 			return $args['default'];
 		};
 

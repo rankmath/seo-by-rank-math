@@ -78,19 +78,19 @@ class Post extends Metadata {
 	/**
 	 * Get a post meta value.
 	 *
-	 * @param  string  $key     Value to get, without prefix.
-	 * @param  integer $post_id ID of the post.
-	 * @param  string  $default Default value to use when metadata does not exists.
+	 * @param  string  $key           Value to get, without prefix.
+	 * @param  integer $post_id       ID of the post.
+	 * @param  string  $default_value Default value to use when metadata does not exists.
 	 * @return mixed
 	 */
-	public static function get_meta( $key, $post_id = 0, $default = '' ) {
+	public static function get_meta( $key, $post_id = 0, $default_value = '' ) {
 		$post = self::get( $post_id );
 
 		if ( is_null( $post ) || ! $post->is_found() || 'auto-draft' === $post->post_status ) {
 			return '';
 		}
 
-		return $post->get_metadata( $key, $default );
+		return $post->get_metadata( $key, $default_value );
 	}
 
 	/**

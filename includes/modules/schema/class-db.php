@@ -108,7 +108,7 @@ class DB {
 
 		$types = array_reduce(
 			wp_list_pluck( $schemas, '@type' ),
-			function( $carry, $type ) {
+			function ( $carry, $type ) {
 				if ( is_array( $type ) ) {
 					return array_merge( $carry, $type );
 				}
@@ -252,7 +252,7 @@ class DB {
 		}
 
 		$job_postings = array_map(
-			function( $schema ) {
+			function ( $schema ) {
 				return isset( $schema['@type'] ) && 'JobPosting' === $schema['@type'] ? $schema : false;
 			},
 			$schemas

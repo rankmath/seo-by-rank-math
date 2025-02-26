@@ -56,7 +56,7 @@ class Beta_Optin {
 	 */
 	public function hooks() {
 		$this->filter( 'site_transient_update_plugins', 'transient_update_plugins' );
-		$this->action( 'in_plugin_update_message-seo-by-rank-math/rank-math.php', 'plugin_update_message', 10, 2 );
+		$this->action( 'in_plugin_update_message-seo-by-rank-math/rank-math.php', 'plugin_update_message' );
 		$this->action( 'install_plugins_pre_plugin-information', 'beta_plugin_information' );
 		$this->action( 'admin_footer', 'beta_changelog_link_js' );
 	}
@@ -255,10 +255,9 @@ class Beta_Optin {
 	 * Add warning about beta version in the update notice.
 	 *
 	 * @param  array $plugin_data An array of plugin metadata.
-	 * @param  array $response    An array of metadata about the available plugin update.
 	 * @return void
 	 */
-	public function plugin_update_message( $plugin_data, $response ) {
+	public function plugin_update_message( $plugin_data ) {
 		if ( empty( $plugin_data['is_beta'] ) ) {
 			return;
 		}

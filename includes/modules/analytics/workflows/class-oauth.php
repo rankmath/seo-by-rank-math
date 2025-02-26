@@ -86,7 +86,7 @@ class OAuth {
 			return;
 		}
 
-		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'rank_math_reconnect_google' ) ) {
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'rank_math_reconnect_google' ) ) {
 			wp_nonce_ays( 'rank_math_reconnect_google' );
 			die();
 		}

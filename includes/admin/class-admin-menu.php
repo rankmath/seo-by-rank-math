@@ -27,7 +27,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Admin_Menu implements Runner {
 
-	use Hooker, Ajax;
+	use Hooker;
+	use Ajax;
 
 	/**
 	 * Register hooks.
@@ -64,7 +65,7 @@ class Admin_Menu implements Runner {
 				'position'   => 50,
 				'menu_title' => 'Rank Math',
 				'capability' => 'level_1',
-				'icon'       => 'data:image/svg+xml;base64,' . \base64_encode( '<svg viewBox="0 0 462.03 462.03" xmlns="http://www.w3.org/2000/svg" width="20"><g fill="#fff"><path d="m462 234.84-76.17 3.43 13.43 21-127 81.18-126-52.93-146.26 60.97 10.14 24.34 136.1-56.71 128.57 54 138.69-88.61 13.43 21z"/><path d="m54.1 312.78 92.18-38.41 4.49 1.89v-54.58h-96.67zm210.9-223.57v235.05l7.26 3 89.43-57.05v-181zm-105.44 190.79 96.67 40.62v-165.19h-96.67z"/></g></svg>' ),
+				'icon'       => 'data:image/svg+xml;base64,' . \base64_encode( '<svg viewBox="0 0 462.03 462.03" xmlns="http://www.w3.org/2000/svg" width="20"><g fill="#fff"><path d="m462 234.84-76.17 3.43 13.43 21-127 81.18-126-52.93-146.26 60.97 10.14 24.34 136.1-56.71 128.57 54 138.69-88.61 13.43 21z"/><path d="m54.1 312.78 92.18-38.41 4.49 1.89v-54.58h-96.67zm210.9-223.57v235.05l7.26 3 89.43-57.05v-181zm-105.44 190.79 96.67 40.62v-165.19h-96.67z"/></g></svg>' ), // phpcs:ignore -- This should not cause any issue as we only pass a static svg code.
 				'render'     => Admin_Helper::get_view( 'dashboard' ),
 				'classes'    => [ 'rank-math-page' ],
 				'assets'     => [
@@ -87,7 +88,7 @@ class Admin_Menu implements Runner {
 		global $menu;
 		foreach ( $menu as $key => $item ) {
 			if ( 'Rank Math' === $item[0] ) {
-				$menu[ $key ][0] = esc_html__( 'Rank Math SEO', 'rank-math' );
+				$menu[ $key ][0] = esc_html__( 'Rank Math SEO', 'rank-math' ); // phpcs:ignore -- This is required to change the menu name without changing its slug `rank-math`
 				break;
 			}
 		}
@@ -103,7 +104,7 @@ class Admin_Menu implements Runner {
 				$plan         = Helper::get_content_ai_plan();
 				$notification = ( empty( $plan ) || 'free' === $plan ) && get_option( 'rank_math_view_modules' ) ? ' <span class="awaiting-mod count-1"><span class="pending-count" aria-hidden="true">1</span></span>' : '';
 
-				$submenu['rank-math'][0][0] = esc_html__( 'Dashboard', 'rank-math' ) . $notification;
+				$submenu['rank-math'][0][0] = esc_html__( 'Dashboard', 'rank-math' ) . $notification; // phpcs:ignore -- This is required to change the menu name when the plugin is not configured.
 			} else {
 				unset( $submenu['rank-math'][0] );
 			}
@@ -113,7 +114,7 @@ class Admin_Menu implements Runner {
 			return;
 		}
 
-		$submenu['rank-math'][] = [ esc_html__( 'Help &amp; Support', 'rank-math' ) . '<i class="dashicons dashicons-external" style="font-size:12px;vertical-align:-2px;height:10px;"></i>', 'level_1', KB::get( 'knowledgebase', 'Sidebar Help Link' ) ];
+		$submenu['rank-math'][] = [ esc_html__( 'Help &amp; Support', 'rank-math' ) . '<i class="dashicons dashicons-external" style="font-size:12px;vertical-align:-2px;height:10px;"></i>', 'level_1', KB::get( 'knowledgebase', 'Sidebar Help Link' ) ]; // phpcs:ignore -- A custom link to our KB article.
 		$this->add_offer_link( $submenu );
 
 		// Store ID of first_menu item so we can use it in the Admin menu item.
