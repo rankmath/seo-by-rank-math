@@ -171,7 +171,7 @@ class Frontend_SEO_Score {
 				<?php endif; ?>
 
 				<span class="label">
-					<?php esc_html__( 'SEO Score', 'rank-math' ); ?>
+					<?php echo esc_html__( 'SEO Score', 'rank-math' ); ?>
 				</span>
 
 			</div>
