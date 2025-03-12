@@ -156,6 +156,7 @@ class Screen implements IScreen {
 					'analytics'  => Helper::has_cap( 'analytics' ),
 					'content_ai' => Helper::has_cap( 'content_ai' ),
 				],
+				'showKeywordIntent'   => Helper::should_determine_search_intent(),
 				'assessor'            => [
 					'serpData'        => $this->get_object_values(),
 					'powerWords'      => $this->power_words(),

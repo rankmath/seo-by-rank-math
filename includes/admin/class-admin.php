@@ -83,10 +83,12 @@ class Admin implements Runner {
 
 	/**
 	 * Display admin header.
+	 *
+	 * @param bool $show_breadcrumbs Determines whether to show breadcrumbs or not.
 	 */
-	public function display_admin_header() {
+	public function display_admin_header( $show_breadcrumbs = true ) {
 		$nav_tabs = new Admin_Header();
-		$nav_tabs->display();
+		$nav_tabs->display( $show_breadcrumbs );
 	}
 
 	/**

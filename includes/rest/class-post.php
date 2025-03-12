@@ -45,7 +45,7 @@ class Post extends WP_REST_Controller {
 					return \RankMath\Helper::has_cap( 'onpage_general' );
 				},
 				'callback'            => [ $this, 'update_bulk_meta' ],
-				'args'                => $this->get_update_metadata_args(),
+				'args'                => $this->get_update_bulk_meta_args(),
 			]
 		);
 
@@ -149,11 +149,11 @@ class Post extends WP_REST_Controller {
 	 *
 	 * @return array
 	 */
-	private function get_update_metadata_args() {
+	private function get_update_bulk_meta_args() {
 		return [
 			'rows' => [
 				'required'          => true,
-				'description'       => esc_html__( 'No meta rows found to update.', 'rank-math' ),
+				'description'       => esc_html__( 'Selected posts to update the data for.', 'rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 		];

@@ -12,6 +12,7 @@ namespace RankMath\SEO_Analysis;
 
 use RankMath\Module\Base;
 use RankMath\Admin\Page;
+use RankMath\Helper;
 use RankMath\KB;
 
 defined( 'ABSPATH' ) || exit;
@@ -66,9 +67,10 @@ class Admin extends Base {
 		if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || $this->page->is_current_page() ) {
 			include_once 'seo-analysis-tests.php';
 			$this->analyzer = new SEO_Analyzer();
+			Helper::add_json( 'results', $this->analyzer->get_results_from_storage() );
+			Helper::add_json( 'analyzeSubpage', $this->analyzer->analyse_subpage );
+			Helper::add_json( 'analyzeUrl', $this->analyzer->analyse_url );
 		}
-
-		$this->action( 'rank_math/analyzer/results_header', 'add_print_button', 15, 0 );
 	}
 
 	/**
@@ -94,28 +96,21 @@ class Admin extends Base {
 				'render'     => $this->directory . '/views/main.php',
 				'assets'     => [
 					'styles'  => [
+						'wp-components'          => '',
 						'rank-math-common'       => '',
 						'rank-math-seo-analysis' => $uri . '/assets/css/seo-analysis.css',
 					],
 					'scripts' => [
-						'circle-progress'        => $uri . '/assets/js/circle-progress.min.js',
+						'wp-element'             => '',
+						'rank-math-components'   => '',
 						'rank-math-seo-analysis' => $uri . '/assets/js/seo-analysis.js',
+					],
+					'json'    => [
+						'connectUrl'      => Helper::get_connect_url(),
+						'isSiteConnected' => Helper::is_site_connected(),
 					],
 				],
 			]
 		);
-	}
-
-	/**
-	 * Add print button.
-	 */
-	public function add_print_button() {
-		?>
-		<a href="<?php KB::the( 'pro', 'SEO Analyzer Print Button' ); ?>" class="button button-secondary rank-math-print-results disabled" target="_blank">
-			<span class="dashicons dashicons-printer"></span>
-			<?php esc_html_e( 'Print', 'rank-math' ); ?>
-			<span class="rank-math-pro-badge">PRO</span>
-		</a>
-		<?php
 	}
 }

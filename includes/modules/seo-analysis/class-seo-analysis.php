@@ -45,8 +45,6 @@ class SEO_Analysis {
 		if ( Helper::has_cap( 'rank_math_site_analysis' ) ) {
 			$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
 		}
-
-		$this->filter( 'rank_math/seo_analysis/admin_tab_view', 'add_tab_previews', 10, 2 );
 	}
 
 	/**

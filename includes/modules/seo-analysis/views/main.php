@@ -9,37 +9,10 @@
  * @copyright 2019 Rank Math
  */
 
-use RankMath\Helper;
-use RankMath\Helpers\Param;
-
 defined( 'ABSPATH' ) || exit;
 
-$current_tab  = Param::get( 'view', 'seo_analyzer' );
-$allowed_tabs = [ 'seo_analyzer', 'competitor_analyzer' ];
-if ( ! in_array( $current_tab, $allowed_tabs, true ) ) {
-	$current_tab = 'seo_analyzer';
-}
-
-$module   = Helper::get_module( 'seo-analysis' );
-$analyzer = $module->admin->analyzer;
-
-$tab_file = apply_filters( 'rank_math/seo_analysis/admin_tab_view', '', $current_tab );
-
 // Header.
-rank_math()->admin->display_admin_header();
+rank_math()->admin->display_admin_header( false );
 ?>
 
-<div class="wrap rank-math-wrap rank-math-seo-analysis-wrap dashboard">
-	<span class="wp-header-end"></span>
-
-	<?php $analyzer->admin_tabs(); ?>
-	<div class="rank-math-ui dashboard-wrapper seo-analysis <?php echo esc_attr( $current_tab ); ?>">
-		<?php
-		if ( $tab_file && file_exists( $tab_file ) ) {
-			include_once $tab_file;
-		} else {
-			include_once __DIR__ . '/seo-analyzer.php';
-		}
-		?>
-	</div><!--.rank-math-ui.module-listing.dashboard-wrapper-->
-</div>
+<div class="wrap rank-math-wrap rank-math-seo-analysis-wrap dashboard"></div>

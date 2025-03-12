@@ -42,49 +42,68 @@ class Rest extends WP_REST_Controller {
 	public function register_routes() {
 		$namespace = $this->namespace;
 
-		$endpoint = '/submitUrls/';
 		register_rest_route(
 			$namespace,
-			$endpoint,
+			'/submitUrls',
 			[
 				[
 					'methods'             => WP_REST_Server::EDITABLE,
 					'callback'            => [ $this, 'submit_urls' ],
 					'permission_callback' => [ $this, 'has_permission' ],
+					'args'                => [
+						'urls' => [
+							'description' => __( 'The list of urls to submit to the Instant Indexing API.', 'rank-math' ),
+							'type'        => 'string',
+							'required'    => true,
+						],
+					],
 				],
 			]
 		);
 
-		$endpoint = '/getLog/';
 		register_rest_route(
 			$namespace,
-			$endpoint,
+			'/getLog',
 			[
 				[
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => [ $this, 'get_log' ],
 					'permission_callback' => [ $this, 'has_permission' ],
+					'args'                => [
+						'filter' => [
+							'description' => __( 'Filter log by type.', 'rank-math' ),
+							'type'        => 'string',
+							'enum'        => [ 'all', 'manual', 'auto' ],
+							'default'     => 'all',
+						],
+					],
 				],
 			]
 		);
 
-		$endpoint = '/clearLog/';
 		register_rest_route(
 			$namespace,
-			$endpoint,
+			'/clearLog',
 			[
 				[
 					'methods'             => WP_REST_Server::EDITABLE,
 					'callback'            => [ $this, 'clear_log' ],
 					'permission_callback' => [ $this, 'has_permission' ],
+					'args'                => [
+						'filter' => [
+							'description' => __( 'Clear log by type.', 'rank-math' ),
+							'type'        => 'string',
+							'enum'        => [ 'all', 'manual', 'auto' ],
+							'default'     => 'all',
+						],
+					],
 				],
 			]
 		);
 
-		$endpoint = '/resetKey/';
 		register_rest_route(
 			$namespace,
-			$endpoint,
+			'/resetKey',
 			[
 				[
 					'methods'             => WP_REST_Server::EDITABLE,

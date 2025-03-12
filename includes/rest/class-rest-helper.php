@@ -258,4 +258,39 @@ class Rest_Helper {
 		$type = $request->get_param( 'type' );
 		return $type === 'roleCapabilities' ? current_user_can( 'rank_math_role_manager' ) : current_user_can( "rank_math_$type" );
 	}
+
+	/**
+	 * Param emptiness validate callback.
+	 *
+	 * @param mixed $param Param to validate.
+	 *
+	 * @return boolean
+	 */
+	public static function is_valid_string( $param ) {
+		if ( empty( $param ) ) {
+			return new WP_Error(
+				'param_value_empty',
+				esc_html__( 'Sorry, field is empty which is not allowed.', 'rank-math' )
+			);
+		}
+
+		return self::is_alphanumerical( $param );
+	}
+
+	/**
+	 * Check the alphanumerical string.
+	 *
+	 * @param mixed $param Param to validate.
+	 *
+	 * @return boolean
+	 */
+	public static function is_alphanumerical( $param ) {
+		if ( ! preg_match( '/^[a-zA-Z0-9]+$/', $param ) ) {
+			return new WP_Error(
+				'param_value_empty',
+				esc_html__( 'Sorry, the field contains invalid characters.', 'rank-math' )
+			);
+		}
+		return true;
+	}
 }

@@ -59,6 +59,7 @@ class Bulk_Actions implements Runner {
 		$post_types = Helper::get_allowed_post_types();
 		foreach ( $post_types as $post_type ) {
 			$this->filter( "bulk_actions-edit-{$post_type}", 'post_bulk_actions' );
+			$this->filter( "handle_bulk_actions-edit-{$post_type}", 'handle_bulk_actions', 10, 3 );
 		}
 
 		$taxonomies = Helper::get_accessible_taxonomies();
@@ -102,11 +103,45 @@ class Bulk_Actions implements Runner {
 			}
 		}
 
+		if ( Helper::has_cap( 'onpage_general' ) && Helper::should_determine_search_intent() ) {
+			$new_actions['rank_math_bulk_determine_search_intent'] = __( 'Determine Search Intent', 'rank-math' );
+		}
+
 		if ( is_array( $actions ) && count( $new_actions ) > 1 ) {
 			return array_merge( $actions, $new_actions );
 		}
 
 		return $actions;
+	}
+
+	/**
+	 * Handle bulk actions for applicable posts, pages, CPTs.
+	 *
+	 * @param  string $redirect   Redirect URL.
+	 * @param  string $doaction   Performed action.
+	 * @param  array  $object_ids Post IDs.
+	 *
+	 * @return string New redirect URL.
+	 */
+	public function handle_bulk_actions( $redirect, $doaction, $object_ids ) {
+		if (
+			$doaction === 'rank_math_bulk_determine_search_intent' &&
+			(
+				defined( 'RANK_MATH_PRO_VERSION' ) &&
+				version_compare( RANK_MATH_PRO_VERSION, '3.0.83-beta', '<' )
+			)
+		) {
+			Helper::add_notification(
+				esc_html__( 'Your current plugin version does not support this feature. Please update Rank Math PRO to version 3.0.83 or later to unlock full functionality.', 'rank-math' ),
+				[
+					'type'    => 'error',
+					'id'      => 'rank_math_search_intent_error',
+					'classes' => 'rank-math-notice',
+				]
+			);
+		}
+
+		return $redirect;
 	}
 
 	/**

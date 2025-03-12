@@ -5,11 +5,11 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.7
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.239
+Stable tag: 1.0.240
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
-Rank Math SEO is the best Wordpress SEO plugin with AI SEO tools to boost traffic and rankings with powerful features in one easy-to-use package.
+Rank Math SEO is the best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic and improve your site's SEO ranking.
 
 == Description ==
 
@@ -339,10 +339,13 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.239 [Feb 26, 2025] =
-- Fixed: PHP warning when [importing data from the WP Schema PRO plugin](https://rankmath.com/kb/import-schema-pro-data/#choose-wp-schema-pro)
-- Fixed: [Default Schema Headline & Description](https://rankmath.com/kb/titles-and-meta/#headline) was not working when the Schema type was not set to `Article`  
-- Fixed: [Focus Keyword in Image Alt Attribute test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-image-alt-attributes-primary-focus-keyword-only) was not working when the alt attribute contained quotes
-- Removed: [Universal Analytics (UA) Property selection from Analytics settings](https://rankmath.com/kb/general-settings/#analytics-settings), as Google no longer supports it
+= 1.0.240 [Mar 12, 2025] =
+- Improved: Moved [SEO Analysis](https://rankmath.com/kb/seo-analysis/) code to React to load blazing fast. We will gradually enhance the performance of other modules
+- Improved: Strengthened the security of REST endpoints used in the plugin
+- Fixed: [Post Analytics](https://rankmath.com/kb/analytics/#post-analytics) was not working properly with the secondary language created using the WPML plugin
+- Fixed: UI issues in the score indicator on the [Analytics - SEO Performance page](https://rankmath.com/kb/analytics/#seo-performance)
+- Fixed: Unable to connect the site to Rank Math from [Setup Wizard](https://rankmath.com/kb/how-to-access-setup-wizard/) after the last update
+- Fixed: PHP warning in the RSS feed on some setups
+- Fixed: PHP warning related to translations on some setups
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

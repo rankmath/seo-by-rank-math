@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.239\n"
+"Project-Id-Version: Rank Math SEO 1.0.240\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-26T04:57:18+00:00\n"
+"POT-Creation-Date: 2025-03-12T07:13:51+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -328,6 +328,12 @@ msgstr ""
 
 #. Translators: placeholder is the default Schema type setting.
 msgid "Set Schema: Default (%s)"
+msgstr ""
+
+msgid "Determine Search Intent"
+msgstr ""
+
+msgid "Your current plugin version does not support this feature. Please update Rank Math PRO to version 3.0.83 or later to unlock full functionality."
 msgstr ""
 
 msgid "Off"
@@ -733,12 +739,6 @@ msgid "Yes, I want better SEO"
 msgstr ""
 
 msgid "I already purchased"
-msgstr ""
-
-msgid "Rank Math Product Registration"
-msgstr ""
-
-msgid "Return to dashboard"
 msgstr ""
 
 msgid "Rank Math plugin could not be connected."
@@ -1520,6 +1520,9 @@ msgid "No known conflicting plugins found."
 msgstr ""
 
 msgid "Start Wizard"
+msgstr ""
+
+msgid "Return to dashboard"
 msgstr ""
 
 msgid "Connect Google Services"
@@ -2806,6 +2809,42 @@ msgstr ""
 msgid "Unknown error, call get_response() to find out what happened."
 msgstr ""
 
+msgid "Post ID."
+msgstr ""
+
+msgid "Post Type."
+msgstr ""
+
+msgid "Page number."
+msgstr ""
+
+msgid "Results per page."
+msgstr ""
+
+msgid "Order by."
+msgstr ""
+
+msgid "Order."
+msgstr ""
+
+msgid "Search."
+msgstr ""
+
+msgid "User preferences."
+msgstr ""
+
+msgid "Filter."
+msgstr ""
+
+msgid "Filter type."
+msgstr ""
+
+msgid "Toggle bar."
+msgstr ""
+
+msgid "Hide."
+msgstr ""
+
 msgid "Sorry, no preference found."
 msgstr ""
 
@@ -3068,10 +3107,67 @@ msgstr ""
 msgid "Content AI History"
 msgstr ""
 
+msgid "The content of the new post."
+msgstr ""
+
+msgid "The title of the new post."
+msgstr ""
+
+msgid "An array of AI-generated and existing outputs to be saved."
+msgstr ""
+
+msgid "The API endpoint for which the output was generated."
+msgstr ""
+
+msgid "Indicates if the request was for the Chat endpoint."
+msgstr ""
+
+msgid "The parameters used to generate the AI output."
+msgstr ""
+
+msgid "Credit usage details returned by the API."
+msgstr ""
+
+msgid "Indicates if the request to delete the output was for the Chat endpoint."
+msgstr ""
+
+msgid "The output index to delete, applicable only to the Chat endpoint."
+msgstr ""
+
+msgid "The selected prompt to be updated in the recent prompts."
+msgstr ""
+
+msgid "The prompt data to be saved in the database."
+msgstr ""
+
+msgid "A list of prompts received from the API to be saved in the database."
+msgstr ""
+
+msgid "Content AI plan to update in the Database."
+msgstr ""
+
+msgid "Content AI reset date to update in the Database"
+msgstr ""
+
+msgid "List of attachment IDs for which to generate alt text."
+msgstr ""
+
 msgid "Sorry, only authenticated users can research the keyword."
 msgstr ""
 
 msgid "Content AI is not enabled on this Post type."
+msgstr ""
+
+msgid "The keyword to be researched."
+msgstr ""
+
+msgid "The country for which the keyword should be researched."
+msgstr ""
+
+msgid "The ID of the post initiating the keyword research request."
+msgstr ""
+
+msgid "If true, forces a fresh research request."
 msgstr ""
 
 #. Translators: link to the update page.
@@ -3690,6 +3786,15 @@ msgid "%s page submitted to IndexNow."
 msgid_plural "%s pages submitted to IndexNow."
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "The list of urls to submit to the Instant Indexing API."
+msgstr ""
+
+msgid "Filter log by type."
+msgstr ""
+
+msgid "Clear log by type."
+msgstr ""
 
 msgid "No URLs provided."
 msgstr ""
@@ -4584,30 +4689,8 @@ msgstr ""
 msgid "Application Category"
 msgstr ""
 
-msgid "Competitor Analyzer"
-msgstr ""
-
 #. Translators: placeholder is the new Rank Math label.
 msgid "SEO Analyzer %s"
-msgstr ""
-
-msgid "Print"
-msgstr ""
-
-msgid "How to fix"
-msgstr ""
-
-#. Translators: placeholder is a link to "Read more".
-msgid "Read more"
-msgstr ""
-
-msgid "Failed"
-msgstr ""
-
-msgid "Warning"
-msgstr ""
-
-msgid "Info"
 msgstr ""
 
 msgid "Site-wide analysis"
@@ -4619,28 +4702,8 @@ msgstr ""
 msgid "SEO Analysis for this page"
 msgstr ""
 
-msgid "Passed Tests"
-msgstr ""
-
-msgid "Warnings"
-msgstr ""
-
-msgid "Failed Tests"
-msgstr ""
-
-#. translators: 1: Date, 2: Time.
-msgid "Last checked:"
-msgstr ""
-
-#. translators: 1: Date, 2: Time.
-msgid "%1$s at %2$s"
-msgstr ""
-
 #. translators: API error
 msgid "<strong>API Error:</strong> %s"
-msgstr ""
-
-msgid "Rank Math SEO Analyzer error: "
 msgstr ""
 
 msgid "Rank Math auto-update option is enabled on your site."
@@ -4653,19 +4716,10 @@ msgstr ""
 msgid "Unexpected API response."
 msgstr ""
 
-msgid "Priority"
+msgid "(No Title)"
 msgstr ""
 
-msgid "Advanced SEO"
-msgstr ""
-
-msgid "Basic SEO"
-msgstr ""
-
-msgid "Performance"
-msgstr ""
-
-msgid "Security"
+msgid "(No Description)"
 msgstr ""
 
 msgid "Site Tagline"
@@ -4874,58 +4928,6 @@ msgid "Navigate to %1$sSettings > Reading%2$s and turn off this option: \"Discou
 msgstr ""
 
 msgid "Your site is accessible by search engine."
-msgstr ""
-
-msgid "Analyze competitor websites to gain an edge"
-msgstr ""
-
-msgid "Evaluate strengths and weaknesses"
-msgstr ""
-
-msgid "Explore new keywords and opportunities"
-msgstr ""
-
-msgid "Make more informed decisions & strategy"
-msgstr ""
-
-msgid "Selected page: %s"
-msgstr ""
-
-msgid "Change URL"
-msgstr ""
-
-msgid "Start Page Analysis"
-msgstr ""
-
-msgid "Analysing Page&hellip;"
-msgstr ""
-
-msgid "Start SEO Analyzer"
-msgstr ""
-
-msgid "Analysing Website&hellip;"
-msgstr ""
-
-msgid "Complete"
-msgstr ""
-
-msgid "SEO Analysis for"
-msgstr ""
-
-msgid "Restart SEO Analyzer"
-msgstr ""
-
-msgid "View Issues"
-msgstr ""
-
-#. Translators: placeholders are opening and closing tag for link.
-msgid "Analyze your site by %1$s linking your Rank Math account %2$s"
-msgstr ""
-
-msgid "(No Title)"
-msgstr ""
-
-msgid "(No Description)"
 msgstr ""
 
 msgid "General"
@@ -5874,7 +5876,25 @@ msgstr ""
 msgid "Module slug"
 msgstr ""
 
+msgid "Invalid module"
+msgstr ""
+
 msgid "Module state either on or off"
+msgstr ""
+
+msgid "Post scores"
+msgstr ""
+
+msgid "Setting key"
+msgstr ""
+
+msgid "Setting value"
+msgstr ""
+
+msgid "Action to perform"
+msgstr ""
+
+msgid "Mode to set"
 msgstr ""
 
 msgid "Site disconnected successfully."
@@ -5886,7 +5906,7 @@ msgstr ""
 msgid "URL to get HTML tags for."
 msgstr ""
 
-msgid "No meta rows found to update."
+msgid "Selected posts to update the data for."
 msgstr ""
 
 msgid "Sorry, you are not allowed to create/update redirection."
@@ -5913,10 +5933,22 @@ msgstr ""
 msgid "Sorry, field is empty which is not allowed."
 msgstr ""
 
-msgid "Object Type i.e. post, term, user"
+msgid "Sorry, the field contains invalid characters."
 msgstr ""
 
 msgid "Object unique id"
+msgstr ""
+
+msgid "Object Type i.e. post, term, user"
+msgstr ""
+
+msgid "Whether the object has a redirect or not"
+msgstr ""
+
+msgid "Redirection ID"
+msgstr ""
+
+msgid "Redirection URL"
 msgstr ""
 
 msgid "Meta to add or update data."
@@ -6076,6 +6108,10 @@ msgstr ""
 
 #. Translators: placeholder is a link to "Read more".
 msgid "Enable this option to register a REST API endpoint that returns the HTML meta tags for a given URL. %s"
+msgstr ""
+
+#. Translators: placeholder is a link to "Read more".
+msgid "Read more"
 msgstr ""
 
 msgid "Show SEO Score to Visitors"
@@ -7168,16 +7204,64 @@ msgstr ""
 msgid "Search &hellip;"
 msgstr ""
 
-msgid "Select / Deselect All"
-msgstr ""
-
 msgid "Search …"
 msgstr ""
 
 msgid "No results found"
 msgstr ""
 
+msgid "Passed Tests"
+msgstr ""
+
+msgid "Warnings"
+msgstr ""
+
+msgid "Failed Tests"
+msgstr ""
+
+msgid "Last checked: "
+msgstr ""
+
+msgid " at "
+msgstr ""
+
+msgid "Passed"
+msgstr ""
+
+msgid "Failed"
+msgstr ""
+
+msgid "Warning"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+msgid "How to fix"
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "Advanced SEO"
+msgstr ""
+
+msgid "Basic SEO"
+msgstr ""
+
+msgid "Performance"
+msgstr ""
+
+msgid "Security"
+msgstr ""
+
+msgid "Select / Deselect All"
+msgstr ""
+
 msgid "Add or Upload File"
+msgstr ""
+
+msgid "Complete"
 msgstr ""
 
 msgid "Something went wrong! Please try again."
@@ -7232,6 +7316,9 @@ msgid "Free Content AI Trial"
 msgstr ""
 
 msgid "SEO Performance Email Reports"
+msgstr ""
+
+msgid "⛔️ Update Required"
 msgstr ""
 
 msgid "🚀 Supercharge Your Content With AI"
@@ -7577,6 +7664,9 @@ msgid "and many other premium SEO features"
 msgstr ""
 
 msgid "Example: Rank Math SEO"
+msgstr ""
+
+msgid "Show Intent"
 msgstr ""
 
 msgid "Trends"
@@ -9563,6 +9653,57 @@ msgid "Add Heading blocks to this page to generate the Table of Contents."
 msgstr ""
 
 msgid "Enter a title"
+msgstr ""
+
+msgid "Change URL"
+msgstr ""
+
+msgid "Analysing Page…"
+msgstr ""
+
+msgid "Analysing Website…"
+msgstr ""
+
+msgid "Start Page Analysis"
+msgstr ""
+
+msgid "Start SEO Analyzer"
+msgstr ""
+
+msgid "Restart SEO Analyzer"
+msgstr ""
+
+msgid "Print"
+msgstr ""
+
+msgid "View Issues"
+msgstr ""
+
+msgid "SEO Analysis for"
+msgstr ""
+
+msgid "Analyze your site by "
+msgstr ""
+
+msgid "linking your Rank Math account"
+msgstr ""
+
+msgid "Competitor Analyzer"
+msgstr ""
+
+msgid "Enter a site URL to see how it ranks for the same SEO criteria as site."
+msgstr ""
+
+msgid "Analyze competitor websites to gain an edge"
+msgstr ""
+
+msgid "Evaluate strengths and weaknesses"
+msgstr ""
+
+msgid "Explore new keywords and opportunities"
+msgstr ""
+
+msgid "Make more informed decisions & strategy"
 msgstr ""
 
 msgid "Something went wrong. Please refresh the page and try again."

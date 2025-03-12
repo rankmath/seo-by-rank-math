@@ -12,7 +12,6 @@ use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Google\Console;
 use RankMath\Google\Authentication;
-
 use RankMath\Helpers\DB;
 
 defined( 'ABSPATH' ) || exit;

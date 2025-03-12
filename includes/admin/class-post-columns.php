@@ -239,7 +239,11 @@ class Post_Columns implements Runner {
 			<label><?php esc_html_e( 'Focus Keyword', 'rank-math' ); ?>:</label>
 			<span class="rank-math-column-display">
 				<strong title="Focus Keyword"><?php esc_html_e( 'Keyword', 'rank-math' ); ?>:</strong>
-				<span><?php echo $keyword ? esc_html( $keyword ) : esc_html__( 'Not Set', 'rank-math' ); ?></span>
+				<span>
+					<?php
+						echo $keyword ? wp_kses_post( $this->do_filter( 'post/column/seo_details/focus_keyword', $keyword ) ) : esc_html__( 'Not Set', 'rank-math' );
+					?>
+				</span>
 			</span>
 
 			<input class="rank-math-column-value" data-field="focus_keyword" tabindex="11" value="<?php echo esc_attr( $keyword ); ?>" />

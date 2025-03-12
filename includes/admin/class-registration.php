@@ -47,12 +47,6 @@ class Registration {
 	 * @var string
 	 */
 	protected $step_slug = '';
-	/**
-	 * The text string array.
-	 *
-	 * @var array
-	 */
-	protected $strings = null;
 
 	/**
 	 * Is registration invalid.
@@ -65,12 +59,6 @@ class Registration {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		// Strings passed in from the config file.
-		$this->strings = [
-			'title'               => esc_html__( 'Rank Math Product Registration', 'rank-math' ),
-			'return-to-dashboard' => esc_html__( 'Return to dashboard', 'rank-math' ),
-		];
-
 		$this->step      = 'register';
 		$this->step_slug = 'register';
 		$this->invalid   = Helper::is_invalid_registration();
@@ -84,6 +72,18 @@ class Registration {
 		}
 
 		$this->action( 'admin_init', 'handle_registration' );
+		$this->filter( 'allowed_redirect_hosts', 'allowed_redirect_hosts' );
+	}
+
+	/**
+	 * Add allowed redirect hosts.
+	 *
+	 * @param  array $hosts Allowed hosts.
+	 * @return array
+	 */
+	public function allowed_redirect_hosts( $hosts ) {
+		$hosts[] = 'rankmath.com';
+		return $hosts;
 	}
 
 	/**

@@ -52,6 +52,7 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'research_keyword' ],
 				'permission_callback' => [ $this, 'has_permission' ],
+				'args'                => $this->get_research_keyword_args(),
 			]
 		);
 
@@ -72,6 +73,18 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'create_post' ],
 				'permission_callback' => [ $this, 'has_permission' ],
+				'args'                => [
+					'content' => [
+						'description' => esc_html__( 'The content of the new post.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => true,
+					],
+					'title'   => [
+						'description' => esc_html__( 'The title of the new post.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => false,
+					],
+				],
 			]
 		);
 
@@ -82,6 +95,33 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'save_output' ],
 				'permission_callback' => [ $this, 'has_permission' ],
+				'args'                => [
+					'outputs'    => [
+						'description' => esc_html__( 'An array of AI-generated and existing outputs to be saved.', 'rank-math' ),
+						'type'        => 'array',
+						'required'    => true,
+					],
+					'endpoint'   => [
+						'description' => esc_html__( 'The API endpoint for which the output was generated.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => true,
+					],
+					'isChat'     => [
+						'description' => esc_html__( 'Indicates if the request was for the Chat endpoint.', 'rank-math' ),
+						'type'        => 'boolean',
+						'required'    => false,
+					],
+					'attributes' => [
+						'description' => esc_html__( 'The parameters used to generate the AI output.', 'rank-math' ),
+						'type'        => 'object',
+						'required'    => false,
+					],
+					'credits'    => [
+						'description' => esc_html__( 'Credit usage details returned by the API.', 'rank-math' ),
+						'type'        => 'object',
+						'required'    => false,
+					],
+				],
 			]
 		);
 
@@ -92,6 +132,18 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'delete_output' ],
 				'permission_callback' => [ $this, 'has_permission' ],
+				'args'                => [
+					'isChat' => [
+						'description' => esc_html__( 'Indicates if the request to delete the output was for the Chat endpoint.', 'rank-math' ),
+						'type'        => 'boolean',
+						'required'    => false,
+					],
+					'index'  => [
+						'description' => esc_html__( 'The output index to delete, applicable only to the Chat endpoint.', 'rank-math' ),
+						'type'        => 'integer',
+						'required'    => false,
+					],
+				],
 			]
 		);
 
@@ -102,6 +154,13 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'update_recent_prompt' ],
 				'permission_callback' => [ $this, 'has_permission' ],
+				'args'                => [
+					'prompt' => [
+						'description' => esc_html__( 'The selected prompt to be updated in the recent prompts.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => true,
+					],
+				],
 			]
 		);
 
@@ -112,6 +171,13 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'update_prompt' ],
 				'permission_callback' => [ $this, 'has_permission' ],
+				'args'                => [
+					'prompt' => [
+						'description' => esc_html__( 'The prompt data to be saved in the database.', 'rank-math' ),
+						'type'        => 'object',
+						'required'    => true,
+					],
+				],
 			]
 		);
 
@@ -122,6 +188,13 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'save_prompts' ],
 				'permission_callback' => [ $this, 'has_permission' ],
+				'args'                => [
+					'prompts' => [
+						'description' => esc_html__( 'A list of prompts received from the API to be saved in the database.', 'rank-math' ),
+						'type'        => 'array',
+						'required'    => true,
+					],
+				],
 			]
 		);
 
@@ -132,6 +205,18 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => [ $this, 'ping_content_ai' ],
 				'permission_callback' => [ $this, 'has_ping_permission' ],
+				'args'                => [
+					'plan'        => [
+						'description' => esc_html__( 'Content AI plan to update in the Database.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => true,
+					],
+					'refreshDate' => [
+						'description' => esc_html__( 'Content AI reset date to update in the Database', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => true,
+					],
+				],
 			]
 		);
 
@@ -142,6 +227,13 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'generate_alt' ],
 				'permission_callback' => [ $this, 'has_permission' ],
+				'args'                => [
+					'attachmentIds' => [
+						'description' => esc_html__( 'List of attachment IDs for which to generate alt text.', 'rank-math' ),
+						'type'        => 'array',
+						'required'    => true,
+					],
+				],
 			]
 		);
 
@@ -152,6 +244,13 @@ class Rest extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'update_credits' ],
 				'permission_callback' => [ $this, 'has_permission' ],
+				'args'                => [
+					'attachmentIds' => [
+						'description' => esc_html__( 'Credit usage details returned by the API.', 'rank-math' ),
+						'type'        => 'object',
+						'required'    => true,
+					],
+				],
 			]
 		);
 	}
@@ -191,11 +290,9 @@ class Rest extends WP_REST_Controller {
 	/**
 	 * Get Content AI Credits.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
 	 * @return int Credits.
 	 */
-	public function get_credits( WP_REST_Request $request ) {
+	public function get_credits() {
 		$credits = Helper::get_content_ai_credits( true, true );
 		if ( ! empty( $credits['error'] ) ) {
 			$error       = $credits['error'];
@@ -286,6 +383,36 @@ class Rest extends WP_REST_Controller {
 			'data'    => $keyword_data[ $country ][ $keyword ],
 			'credits' => $credits,
 			'keyword' => $keyword,
+		];
+	}
+
+	/**
+	 * Get the arguments for the researchKeyword route.
+	 *
+	 * @return array
+	 */
+	public function get_research_keyword_args() {
+		return [
+			'keyword'      => [
+				'description' => esc_html__( 'The keyword to be researched.', 'rank-math' ),
+				'type'        => 'string',
+				'required'    => true,
+			],
+			'country'      => [
+				'description' => esc_html__( 'The country for which the keyword should be researched.', 'rank-math' ),
+				'type'        => 'string',
+				'required'    => true,
+			],
+			'objectID'     => [
+				'description' => esc_html__( 'The ID of the post initiating the keyword research request.', 'rank-math' ),
+				'type'        => 'integer',
+				'required'    => true,
+			],
+			'force_update' => [
+				'description' => esc_html__( 'If true, forces a fresh research request.', 'rank-math' ),
+				'type'        => 'boolean',
+				'required'    => false,
+			],
 		];
 	}
 

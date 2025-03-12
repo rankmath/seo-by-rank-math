@@ -466,4 +466,11 @@ trait Content_AI {
 
 		return ! empty( $data['error'] ) ? $data['error']['code'] : false;
 	}
+
+	/**
+	 * Whether to add Keyword Intent.
+	 */
+	public static function should_determine_search_intent() {
+		return apply_filters( 'rank_math/determine_search_intent', true );
+	}
 }

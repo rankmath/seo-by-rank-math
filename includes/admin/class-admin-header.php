@@ -32,8 +32,10 @@ class Admin_Header {
 
 	/**
 	 * Display Header.
+	 *
+	 * @param bool $show_breadcrumbs Determines whether to show breadcrumbs or not.
 	 */
-	public function display() {
+	public function display( $show_breadcrumbs ) {
 		$logo_url        = '<a href="' . esc_url( Helper::get_admin_url() ) . '"><i class="rm-icon rm-icon-rank-math"></i></a>';
 		$this->screen_id = $this->get_current_screen();
 		?>
@@ -53,8 +55,10 @@ class Admin_Header {
 		</div>
 		<?php
 
-		// Breadcrumbs.
-		rank_math()->admin->display_admin_breadcrumbs();
+		if ( $show_breadcrumbs ) {
+			// Breadcrumbs.
+			rank_math()->admin->display_admin_breadcrumbs();
+		}
 	}
 
 	/**

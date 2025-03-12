@@ -56,6 +56,7 @@ class Front extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::EDITABLE,
 				'callback'            => [ $this, 'get_featured_image_id' ],
 				'permission_callback' => 'is_user_logged_in',
+				'args'                => $this->get_featured_image_id_args(),
 			]
 		);
 	}
@@ -135,6 +136,22 @@ class Front extends WP_REST_Controller {
 			]
 		);
 		return $resp;
+	}
+
+	/**
+	 * Get featured image ID endpoint arguments.
+	 *
+	 * @return array
+	 */
+	private function get_featured_image_id_args() {
+		return [
+			'postId' => [
+				'type'              => 'integer',
+				'required'          => true,
+				'description'       => esc_html__( 'Post ID', 'rank-math' ),
+				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
+			],
+		];
 	}
 
 	/**

@@ -46,7 +46,7 @@ class Watcher {
 	 */
 	public function hooks() {
 		if ( Authentication::is_authorized() ) {
-			$this->action( 'save_post', 'update_post_info', 99 );
+			$this->action( 'save_post', 'update_post_info', 101 );
 		}
 	}
 

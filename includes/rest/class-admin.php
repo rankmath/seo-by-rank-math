@@ -43,7 +43,6 @@ class Admin extends WP_REST_Controller {
 	 * Registers the routes for the objects of the controller.
 	 */
 	public function register_routes() {
-
 		register_rest_route(
 			$this->namespace,
 			'/saveModule',
@@ -62,6 +61,7 @@ class Admin extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::EDITABLE,
 				'callback'            => [ $this, 'auto_update' ],
 				'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
+				'args'                => $this->get_auto_update_args(),
 			]
 		);
 
@@ -72,6 +72,7 @@ class Admin extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::EDITABLE,
 				'callback'            => [ $this, 'tools_actions' ],
 				'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
+				'args'                => $this->get_tools_action_args(),
 			]
 		);
 
@@ -82,6 +83,7 @@ class Admin extends WP_REST_Controller {
 				'methods'             => WP_REST_Server::EDITABLE,
 				'callback'            => [ $this, 'update_mode' ],
 				'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
+				'args'                => $this->get_update_mode_args(),
 			]
 		);
 
@@ -104,6 +106,7 @@ class Admin extends WP_REST_Controller {
 				'methods'             => \WP_REST_Server::EDITABLE,
 				'callback'            => [ $this, 'update_seo_score' ],
 				'permission_callback' => [ $this, 'can_edit_posts' ],
+				'args'                => $this->get_update_seo_score_args(),
 			]
 		);
 
@@ -343,13 +346,101 @@ class Admin extends WP_REST_Controller {
 				'type'              => 'string',
 				'required'          => true,
 				'description'       => esc_html__( 'Module slug', 'rank-math' ),
-				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
+				'sanitize_callback' => 'rest_sanitize_request_arg',
+				'validate_callback' => function ( $param, $request, $key ) {
+					$modules = array_keys( rank_math()->manager->modules );
+					if ( ! in_array( $param, $modules, true ) ) {
+						return new WP_Error( 'invalid_module', esc_html__( 'Invalid module', 'rank-math' ), [ 'status' => 400 ] );
+					}
+
+					return rest_validate_request_arg( $param, $request, $key );
+				},
 			],
 			'state'  => [
 				'type'              => 'string',
 				'required'          => true,
 				'description'       => esc_html__( 'Module state either on or off', 'rank-math' ),
-				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
+				'enum'              => [ 'on', 'off' ],
+				'sanitize_callback' => 'rest_sanitize_request_arg',
+				'validate_callback' => 'rest_validate_request_arg',
+			],
+		];
+	}
+
+	/**
+	 * Get update seo score endpoint arguments.
+	 *
+	 * @return array
+	 */
+	private function get_update_seo_score_args() {
+		return [
+			'postScores' => [
+				'type'              => 'array',
+				'required'          => true,
+				'description'       => esc_html__( 'Post scores', 'rank-math' ),
+				'sanitize_callback' => 'rest_sanitize_request_arg',
+				'validate_callback' => 'rest_validate_request_arg',
+			],
+		];
+	}
+
+	/**
+	 * Get save module endpoint arguments.
+	 *
+	 * @return array
+	 */
+	private function get_auto_update_args() {
+		return [
+			'key'   => [
+				'type'              => 'string',
+				'required'          => true,
+				'description'       => esc_html__( 'Setting key', 'rank-math' ),
+				'enum'              => [ 'enable_auto_update' ],
+				'sanitize_callback' => 'rest_sanitize_request_arg',
+				'validate_callback' => 'rest_validate_request_arg',
+			],
+			'value' => [
+				'type'              => 'string',
+				'required'          => true,
+				'enum'              => [ 'true', 'false' ],
+				'description'       => esc_html__( 'Setting value', 'rank-math' ),
+				'sanitize_callback' => 'rest_sanitize_request_arg',
+				'validate_callback' => 'rest_validate_request_arg',
+			],
+		];
+	}
+
+	/**
+	 * Get tools action endpoint arguments.
+	 *
+	 * @return array
+	 */
+	private function get_tools_action_args() {
+		return [
+			'action' => [
+				'type'              => 'string',
+				'required'          => true,
+				'description'       => esc_html__( 'Action to perform', 'rank-math' ),
+				'sanitize_callback' => 'rest_sanitize_request_arg',
+				'validate_callback' => 'rest_validate_request_arg',
+			],
+		];
+	}
+
+	/**
+	 * Get update mode endpoint arguments.
+	 *
+	 * @return array
+	 */
+	private function get_update_mode_args() {
+		return [
+			'mode' => [
+				'type'              => 'string',
+				'required'          => true,
+				'description'       => esc_html__( 'Mode to set', 'rank-math' ),
+				'enum'              => [ 'easy', 'advanced', 'custom' ],
+				'sanitize_callback' => 'rest_sanitize_request_arg',
+				'validate_callback' => 'rest_validate_request_arg',
 			],
 		];
 	}
