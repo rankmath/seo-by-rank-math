@@ -133,7 +133,8 @@ class Snippet_Shortcode {
 			$type = 'event';
 		}
 
-		if ( 'restaurant' === $type ) {
+		// Known typo
+		if ( 'resturant' === $type ) {
 			$type = 'restaurant';
 		}
 

@@ -1162,10 +1162,10 @@ class Yoast extends Plugin_Importer {
 			'number' => $yoast_local['location_phone'],
 		];
 
-		if ( ! empty( $yoast_local['location_phone_2and'] ) ) {
+		if ( ! empty( $yoast_local['location_phone_2nd'] ) ) {
 			$this->titles['phone_numbers'][] = [
 				'type'   => 'customer support',
-				'number' => $yoast_local['location_phone_2and'],
+				'number' => $yoast_local['location_phone_2nd'],
 			];
 		}
 	}

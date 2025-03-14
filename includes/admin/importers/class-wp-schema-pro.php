@@ -629,12 +629,12 @@ class WP_Schema_Pro extends Plugin_Importer {
 				'work-example' => 'book_editions',
 				'rating'       => 'review.reviewRating.ratingValue',
 			],
-			'course'               => [
-				'name'             => 'name',
-				'description'      => 'description',
+			'course'                => [
+				'name'              => 'name',
+				'description'       => 'description',
 				'organization-name' => 'provider.name',
-				'same-as'          => 'provider.sameAs',
-				'rating'           => 'review.reviewRating.ratingValue',
+				'same-as'           => 'provider.sameAs',
+				'rating'            => 'review.reviewRating.ratingValue',
 			],
 			'person'               => [
 				'name'      => 'name',
@@ -708,7 +708,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 			'job-type'          => 'employmentType',
 			'start-date'        => 'datePosted',
 			'expiry-date'       => 'validThrough',
-			'organization-name'  => 'hiringOrganization.name',
+			'organization-name' => 'hiringOrganization.name',
 			'same-as'           => 'hiringOrganization.sameAs',
 			'organization-logo' => 'hiringOrganization.logo',
 			'location-street'   => 'jobLocation.address.streetAddress',

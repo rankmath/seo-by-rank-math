@@ -139,7 +139,7 @@ class Product_WooCommerce {
 		}
 
 		$hash = [
-			'in' => 'IN',
+			'in' => 'INH',
 			'm'  => 'MTR',
 			'cm' => 'CMT',
 			'mm' => 'MMT',

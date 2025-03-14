@@ -408,7 +408,7 @@ class Admin implements Runner {
 		}
 
 		$threshold_seconds = (int) apply_filters( 'action_scheduler_pastdue_actions_seconds', DAY_IN_SECONDS );
-		$threshold_min    = (int) apply_filters( 'action_scheduler_pastdue_actions_min', 1 );
+		$threshold_min     = (int) apply_filters( 'action_scheduler_pastdue_actions_min', 1 );
 
 		$check = ( $num_pastdue_actions >= $threshold_min );
 		return (bool) apply_filters( 'action_scheduler_pastdue_actions_check', $check, $num_pastdue_actions, $threshold_seconds, $threshold_min );

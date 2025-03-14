@@ -497,7 +497,7 @@ class SEO_Analyzer {
 	private function get_results() {
 		return [
 			'results'  => $this->sort_results_by_category(),
-			'metrics' => $this->get_graph_metrics(),
+			'metrics'  => $this->get_graph_metrics(),
 			'date'     => $this->get_last_checked_date(),
 			'serpData' => $this->get_serp_data(),
 		];
