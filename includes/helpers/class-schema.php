@@ -24,7 +24,7 @@ trait Schema {
 	 *
 	 * @param int     $post_id      Post ID.
 	 * @param boolean $return_valid Whether to return valid schema type which can be used on the frontend.
-	 * @param boolean $sanitize     Return santized Schema type.
+	 * @param boolean $sanitize     Return sanitized Schema type.
 	 *
 	 * @return string Default Schema Type.
 	 */

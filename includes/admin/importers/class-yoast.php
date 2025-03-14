@@ -426,7 +426,7 @@ class Yoast extends Plugin_Importer {
 		}
 
 		if ( isset( $schema['geo']['latitude'] ) && isset( $schema['geo']['longitude'] ) ) {
-			update_post_meta( $new_post_id, 'rank_math_local_business_latitide', $schema['geo']['latitude'] );
+			update_post_meta( $new_post_id, 'rank_math_local_business_latitude', $schema['geo']['latitude'] );
 			update_post_meta( $new_post_id, 'rank_math_local_business_longitude', $schema['geo']['longitude'] );
 		}
 
@@ -1162,10 +1162,10 @@ class Yoast extends Plugin_Importer {
 			'number' => $yoast_local['location_phone'],
 		];
 
-		if ( ! empty( $yoast_local['location_phone_2nd'] ) ) {
+		if ( ! empty( $yoast_local['location_phone_2and'] ) ) {
 			$this->titles['phone_numbers'][] = [
 				'type'   => 'customer support',
-				'number' => $yoast_local['location_phone_2nd'],
+				'number' => $yoast_local['location_phone_2and'],
 			];
 		}
 	}

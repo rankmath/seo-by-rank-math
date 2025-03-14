@@ -112,7 +112,7 @@ class Local_Seo {
 	 */
 	private function add_place_entity( &$data, $jsonld ) {
 		$properties = [];
-		$this->add_geo_cordinates( $properties );
+		$this->add_geo_coordinates( $properties );
 		$jsonld->add_prop( 'address', $properties );
 		if ( empty( $properties ) ) {
 			return;
@@ -229,7 +229,7 @@ class Local_Seo {
 	 *
 	 * @param array $entity Array of JSON-LD entity.
 	 */
-	private function add_geo_cordinates( &$entity ) {
+	private function add_geo_coordinates( &$entity ) {
 		$geo = Str::to_arr( Helper::get_settings( 'titles.geo' ) );
 		if ( ! isset( $geo[0], $geo[1] ) ) {
 			return;

@@ -144,7 +144,7 @@ class CMB2 {
 					continue;
 				}
 
-				if ( isset( $tab['type'] ) && 'seprator' === $tab['type'] ) {
+				if ( isset( $tab['type'] ) && 'separator' === $tab['type'] ) {
 					printf( '<span class="separator">%s</span>', esc_html( $tab['title'] ) );
 					continue;
 				}

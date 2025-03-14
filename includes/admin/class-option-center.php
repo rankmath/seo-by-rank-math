@@ -225,7 +225,7 @@ class Option_Center implements Runner {
 
 		$tabs['p_types'] = [
 			'title' => esc_html__( 'Post Types:', 'rank-math' ),
-			'type'  => 'seprator',
+			'type'  => 'separator',
 		];
 
 		foreach ( Helper::get_accessible_post_types() as $post_type ) {
@@ -277,10 +277,10 @@ class Option_Center implements Runner {
 		}
 
 		foreach ( $taxonomies_data as $attached => $taxonomies ) {
-			// Seprator.
+			// Separator.
 			$tabs[ $attached ] = [
 				'title' => ucwords( $attached ) . ':',
-				'type'  => 'seprator',
+				'type'  => 'separator',
 			];
 
 			foreach ( $taxonomies as $taxonomy ) {

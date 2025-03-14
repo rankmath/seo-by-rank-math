@@ -100,10 +100,10 @@ class Str {
 	}
 
 	/**
-	 * Convert string to array with defined seprator.
+	 * Convert string to array with defined separator.
 	 *
 	 * @param string $str String to convert.
-	 * @param string $sep Seprator.
+	 * @param string $sep Separator.
 	 *
 	 * @return bool|array
 	 */

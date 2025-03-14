@@ -133,7 +133,7 @@ class Snippet_Shortcode {
 			$type = 'event';
 		}
 
-		if ( 'resturant' === $type ) {
+		if ( 'restaurant' === $type ) {
 			$type = 'restaurant';
 		}
 

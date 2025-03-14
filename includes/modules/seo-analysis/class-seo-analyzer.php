@@ -101,7 +101,7 @@ class SEO_Analyzer {
 	 * @return void
 	 */
 	public function set_url() {
-		update_option( 'rank_math_viewed_seo_analyer', true, false ); // Code to update the viewed value to remove the New label.
+		update_option( 'rank_math_viewed_seo_analyzer', true, false ); // Code to update the viewed value to remove the New label.
 
 		$this->api_url = $this->do_filter( 'seo_analysis/api_endpoint', 'https://rankmath.com/analyze/v2/json/' );
 		if ( ! empty( $_REQUEST['u'] ) && $this->is_allowed_url( Param::request( 'u' ) ) ) { // phpcs:ignore
@@ -123,11 +123,11 @@ class SEO_Analyzer {
 	}
 
 	/**
-	 * Get graph metrices.
+	 * Get graph metrics.
 	 *
 	 * @return array
 	 */
-	private function get_graph_metrices() {
+	private function get_graph_metrics() {
 		$total       = 0;
 		$percent     = 0;
 		$total_score = 0;
@@ -497,7 +497,7 @@ class SEO_Analyzer {
 	private function get_results() {
 		return [
 			'results'  => $this->sort_results_by_category(),
-			'metrices' => $this->get_graph_metrices(),
+			'metrics' => $this->get_graph_metrics(),
 			'date'     => $this->get_last_checked_date(),
 			'serpData' => $this->get_serp_data(),
 		];

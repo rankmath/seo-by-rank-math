@@ -114,7 +114,7 @@ class Manager {
 
 		$modules['local-seo'] = [
 			'title'       => esc_html__( 'Local SEO', 'rank-math' ),
-			'desc'        => esc_html__( 'Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to aquire the Knowledge Graph.', 'rank-math' ),
+			'desc'        => esc_html__( 'Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to acquire the Knowledge Graph.', 'rank-math' ),
 			'class'       => 'RankMath\Local_Seo\Local_Seo',
 			'icon'        => 'local-seo',
 			'upgradeable' => true,

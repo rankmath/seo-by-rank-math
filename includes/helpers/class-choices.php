@@ -747,7 +747,7 @@ trait Choices {
 			'en_US'    => esc_html__( 'United States Of America', 'rank-math' ),
 			'es_UY'    => esc_html__( 'Uruguay', 'rank-math' ),
 			'es_VE'    => esc_html__( 'Venezuela, Bolivarian Republic Of', 'rank-math' ),
-			'vi_VN'    => esc_html__( 'Viet Nam', 'rank-math' ),
+			'vi_VN'    => esc_html__( 'Viet Name', 'rank-math' ),
 		];
 	}
 }
