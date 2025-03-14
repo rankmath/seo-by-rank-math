@@ -41,7 +41,7 @@ class Bulk_Actions implements Runner {
 	}
 
 	/**
-	 * Intialize.
+	 * Initialize.
 	 */
 	public function init() {
 		if ( ! Helper::has_cap( 'onpage_general' ) || ! $this->can_add() ) {

@@ -203,7 +203,7 @@ class Link_Attributes {
 	}
 
 	/**
-	 * Set External attributs
+	 * Set External attributes
 	 *
 	 * @since 1.0.44.2
 	 *

@@ -535,7 +535,7 @@ class Breadcrumbs {
 	}
 
 	/**
-	 * Add ancestor taxonomy crumbs to the hierachical taxonomy trails.
+	 * Add ancestor taxonomy crumbs to the hierarchical taxonomy trails.
 	 *
 	 * @param object $term Term data object.
 	 */
@@ -557,7 +557,7 @@ class Breadcrumbs {
 	}
 
 	/**
-	 * Can add ancestor taxonomy crumbs to the hierachical taxonomy trails.
+	 * Can add ancestor taxonomy crumbs to the hierarchical taxonomy trails.
 	 *
 	 * @param object $term Term data object.
 	 *

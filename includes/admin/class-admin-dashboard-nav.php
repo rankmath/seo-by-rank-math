@@ -83,7 +83,7 @@ class Admin_Dashboard_Nav {
 	}
 
 	/**
-	 * Get dashbaord navigation links
+	 * Get dashboard navigation links
 	 *
 	 * @return array
 	 */

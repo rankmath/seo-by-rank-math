@@ -146,7 +146,7 @@ class Status extends Base {
 	}
 
 	/**
-	 * Get dashbaord navigation links
+	 * Get dashboard navigation links
 	 *
 	 * @return array
 	 */

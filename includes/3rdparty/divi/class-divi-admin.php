@@ -28,7 +28,7 @@ class Divi_Admin {
 	}
 
 	/**
-	 * Intialize Divi admin.
+	 * Initialize Divi admin.
 	 */
 	public function init() {
 		$screen = get_current_screen();

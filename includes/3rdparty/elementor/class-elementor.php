@@ -33,7 +33,7 @@ class Elementor {
 	}
 
 	/**
-	 * Intialize.
+	 * Initialize.
 	 */
 	public function init() {
 		if ( ! $this->can_add_seo_tab() ) {

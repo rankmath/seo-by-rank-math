@@ -35,27 +35,27 @@ class DB {
 	 * @return array
 	 */
 	public static function get_counts() {
-		static $redirction_counts;
-		if ( ! is_null( $redirction_counts ) ) {
-			return $redirction_counts;
+		static $redirection_counts;
+		if ( ! is_null( $redirection_counts ) ) {
+			return $redirection_counts;
 		}
 
-		$redirction_counts = self::table()
+		$redirection_counts = self::table()
 			->selectSum( "status = 'active'", 'active' )
 			->selectSum( "status = 'inactive'", 'inactive' )
 			->selectSum( "status = 'trashed'", 'trashed' )
 			->one( ARRAY_A );
 
-		$redirction_counts = array_map(
+		$redirection_counts = array_map(
 			function ( $value ) {
 				return $value ? $value : 0;
 			},
-			$redirction_counts
+			$redirection_counts
 		);
 
-		$redirction_counts['all'] = $redirction_counts['active'] + $redirction_counts['inactive'];
+		$redirection_counts['all'] = $redirection_counts['active'] + $redirection_counts['inactive'];
 
-		return $redirction_counts;
+		return $redirection_counts;
 	}
 
 	/**

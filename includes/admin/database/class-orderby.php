@@ -26,7 +26,7 @@ trait OrderBy {
 	 *     // multiple order clauses
 	 *     ->orderBy(['firstname', 'lastname'], 'desc')
 	 *
-	 *     // muliple order clauses with diffrent directions
+	 *     // multiple order clauses with different directions
 	 *     ->orderBy(['firstname' => 'asc', 'lastname' => 'desc'])
 	 *
 	 * @param array|string $columns   Columns.

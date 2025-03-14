@@ -347,7 +347,7 @@ trait Where {
 	/**
 	 * Create bulk where statement.
 	 *
-	 * @param array  $where    Array of statments.
+	 * @param array  $where    Array of statements.
 	 * @param string $type     Statement type.
 	 * @param string $sub_type Statement sub-type.
 	 */

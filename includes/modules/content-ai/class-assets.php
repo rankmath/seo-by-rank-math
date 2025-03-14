@@ -121,7 +121,7 @@ class Assets {
 	/**
 	 * Add meta data to use in gutenberg.
 	 *
-	 * @param Screen $screen Sceen object.
+	 * @param Screen $screen Screen object.
 	 *
 	 * @return array
 	 */

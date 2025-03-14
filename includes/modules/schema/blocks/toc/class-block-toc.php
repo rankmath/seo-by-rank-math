@@ -79,7 +79,7 @@ class Block_TOC extends Block {
 	/**
 	 * Add meta data to use in the TOC block.
 	 *
-	 * @param array $values Aray of tabs.
+	 * @param array $values Array of tabs.
 	 *
 	 * @return array
 	 */

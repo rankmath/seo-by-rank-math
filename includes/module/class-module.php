@@ -48,7 +48,7 @@ class Module {
 	 * Getter.
 	 *
 	 * @param string $key           Key to get data for.
-	 * @param mixed  $default_value Defaul value if not found.
+	 * @param mixed  $default_value Default value if not found.
 	 *
 	 * @return mixed
 	 */

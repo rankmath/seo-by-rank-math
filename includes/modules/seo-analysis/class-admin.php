@@ -80,7 +80,7 @@ class Admin extends Base {
 		$uri = untrailingslashit( plugin_dir_url( __FILE__ ) );
 
 		$new_label = '';
-		if ( ! get_option( 'rank_math_viewed_seo_analyer', false ) && strtotime( '28 December 2022' ) > get_option( 'rank_math_install_date' ) ) {
+		if ( ! get_option( 'rank_math_viewed_seo_analyzer', false ) && strtotime( '28 December 2022' ) > get_option( 'rank_math_install_date' ) ) {
 			$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . esc_html__( 'New!', 'rank-math' ) . '</span>';
 		}
 

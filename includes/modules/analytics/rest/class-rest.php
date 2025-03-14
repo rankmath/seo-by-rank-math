@@ -202,7 +202,7 @@ class Rest extends WP_REST_Controller {
 	}
 
 	/**
-	 * Update user perferences.
+	 * Update user preferences.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *

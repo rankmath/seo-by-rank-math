@@ -24,7 +24,7 @@ phpmd.html
 config.json
 package-lock.json
 
-# Code Sniffers, Linters and Formaters
+# Code Sniffers, Linters and Formatters
 /wpcs
 
 # Source Map Files

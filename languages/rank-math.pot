@@ -2271,7 +2271,7 @@ msgstr ""
 msgid "Records the URLs on which visitors & search engines run into 404 Errors. You can also turn on Redirections to redirect the error causing URLs to other URLs."
 msgstr ""
 
-msgid "Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to aquire the Knowledge Graph."
+msgid "Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to acquire the Knowledge Graph."
 msgstr ""
 
 msgid "Redirect non-existent content easily with 301 and 302 status code. This can help improve your site ranking. Also supports many other response codes."
@@ -9109,7 +9109,7 @@ msgstr ""
 msgid "Resetting…"
 msgstr ""
 
-msgid "Resetted"
+msgid "Reset"
 msgstr ""
 
 msgid "Updated"
@@ -9352,7 +9352,7 @@ msgstr ""
 msgid "Instruction Texts"
 msgstr ""
 
-msgid "Geo Cordinates"
+msgid "Geo Coordinates"
 msgstr ""
 
 msgid "Timings"

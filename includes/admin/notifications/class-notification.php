@@ -175,7 +175,7 @@ class Notification {
 	}
 
 	/**
-	 * Dismiss persisten notification.
+	 * Dismiss persistent notification.
 	 *
 	 * @codeCoverageIgnore
 	 */

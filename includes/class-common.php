@@ -201,10 +201,10 @@ class Common {
 
 		$primary_term = $this->get_primary_term( $taxonomy, $post->ID );
 		if ( false !== $primary_term ) {
-			// Get the hierachical terms.
+			// Get the hierarchical terms.
 			$parents = $this->get_hierarchical_link( $primary_term );
 
-			// Replace the placeholder rewrite tag with hierachical terms.
+			// Replace the placeholder rewrite tag with hierarchical terms.
 			$post_link = str_replace( $find, $parents, $post_link );
 		}
 	}

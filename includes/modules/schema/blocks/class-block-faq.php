@@ -154,7 +154,7 @@ class Block_FAQ extends Block {
 	/**
 	 * Render block content.
 	 *
-	 * @param array $attributes Array of atributes.
+	 * @param array $attributes Array of attributes.
 	 * @return string
 	 */
 	public static function markup( $attributes = [] ) {
@@ -217,7 +217,7 @@ class Block_FAQ extends Block {
 	/**
 	 * Render block content
 	 *
-	 * @param array $attributes Array of atributes.
+	 * @param array $attributes Array of attributes.
 	 *
 	 * @return string
 	 */

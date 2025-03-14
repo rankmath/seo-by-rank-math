@@ -221,7 +221,7 @@ class Base {
 	}
 
 	/**
-	 * Get post type for current quried object.
+	 * Get post type for current queried object.
 	 *
 	 * @return string
 	 */

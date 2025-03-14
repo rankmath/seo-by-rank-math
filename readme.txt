@@ -233,7 +233,7 @@ and many more
 ✔ PREMIUM 24x7x365 Dedicated Support Managers
 ✔ MOST COMPETITIVE PRICING EVER!
 
-**<a href="https://rankmath.com/pricing/" target="_blank">CHEK ALL THE PREMIUM FEATURES AND PRICING HERE</a>**
+**<a href="https://rankmath.com/pricing/" target="_blank">CHECK ALL THE PREMIUM FEATURES AND PRICING HERE</a>**
 
 
 ## CONNECT WITH THE TEAM AND SEO EXPERTS ##

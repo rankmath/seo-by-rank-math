@@ -49,7 +49,7 @@ class User_Role_Editor {
 	 * Adds Rank Math capability group in the User Role Editor plugin.
 	 *
 	 * @param  array $groups Current groups.
-	 * @return array Filtered list of capabilty groups.
+	 * @return array Filtered list of capability groups.
 	 */
 	public function register_group( $groups = [] ) {
 		$groups = (array) $groups;
