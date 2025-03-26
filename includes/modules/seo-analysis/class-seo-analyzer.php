@@ -171,7 +171,7 @@ class SEO_Analyzer {
 	 *
 	 * @return bool
 	 */
-	private function can_count_result( $result ) {
+	public function can_count_result( $result ) {
 		return ! is_object( $result ) ? false : true;
 	}
 
@@ -248,7 +248,7 @@ class SEO_Analyzer {
 	/**
 	 * Convert result into object.
 	 */
-	private function build_results() {
+	public function build_results() {
 		if ( ! is_array( $this->results ) ) {
 			return;
 		}
@@ -355,7 +355,7 @@ class SEO_Analyzer {
 	 *
 	 * @return boolean
 	 */
-	private function run_api_tests() {
+	public function run_api_tests() {
 		$response = $this->get_api_results();
 		if ( false === $response ) {
 			return false;

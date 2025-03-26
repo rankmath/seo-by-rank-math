@@ -316,11 +316,16 @@ class Product_WooCommerce {
 			return $offers;
 		}
 
+		$price_valid_until = gmdate( 'Y-12-31', time() + YEAR_IN_SECONDS );
+		if ( $product->get_date_on_sale_to() ) {
+			$sale_price_valid_until = gmdate( 'Y-m-d', $product->get_date_on_sale_to()->getTimestamp() );
+		}
+
 		$offer = [
 			'@type'           => 'Offer',
 			'price'           => $product->get_price() ? wc_format_decimal( $product->get_price(), wc_get_price_decimals() ) : '0',
 			'priceCurrency'   => get_woocommerce_currency(),
-			'priceValidUntil' => $product->is_on_sale() && ! empty( $product->get_date_on_sale_to() ) ? date_i18n( 'Y-m-d', strtotime( $product->get_date_on_sale_to() ) ) : date( 'Y-12-31', time() + YEAR_IN_SECONDS ),
+			'priceValidUntil' => $sale_price_valid_until ?? $price_valid_until,
 			'availability'    => $product->is_in_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
 			'itemCondition'   => 'NewCondition',
 			'url'             => $product->get_permalink(),

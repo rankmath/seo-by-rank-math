@@ -375,7 +375,7 @@ class Admin extends WP_REST_Controller {
 	private function get_update_seo_score_args() {
 		return [
 			'postScores' => [
-				'type'              => 'array',
+				'type'              => 'object',
 				'required'          => true,
 				'description'       => esc_html__( 'Post scores', 'rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',

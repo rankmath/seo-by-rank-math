@@ -277,6 +277,7 @@ class Author implements Provider {
 	 */
 	private function get_index_users() {
 		global $wpdb;
+		$table_prefix                  = $wpdb->get_blog_prefix();
 		$include_authors_without_posts = Helper::get_settings( 'sitemap.include_authors_without_posts' );
 		$exclude_users                 = Helper::get_settings( 'sitemap.exclude_users' );
 		$exclude_roles                 = Helper::get_settings( 'sitemap.exclude_roles' );
@@ -289,7 +290,7 @@ class Author implements Provider {
 			AND (  umt1.meta_key = 'last_update' OR umt1.user_id IS NULL )
 			";
 		if ( $exclude_roles ) {
-			$exclude_roles_query = "AND ( umt.meta_key ='wp_capabilities' AND ( ";
+			$exclude_roles_query = "AND ( umt.meta_key ='{$table_prefix}capabilities' AND ( ";
 			foreach ( $exclude_roles as $key => $role ) {
 				$exclude_roles_query .= 0 === $key ? " umt.meta_value NOT LIKE '%" . esc_sql( $role ) . "%'" : " AND umt.meta_value NOT LIKE '%" . esc_sql( $role ) . "%'";
 			}
@@ -310,7 +311,7 @@ class Author implements Provider {
 		SELECT u.ID, umt1.meta_value as last_update
 		FROM {$wpdb->users} as u
 		    LEFT JOIN {$wpdb->usermeta} AS um ON ( u.ID = um.user_id AND um.meta_key = 'rank_math_robots' )
-		    LEFT JOIN {$wpdb->usermeta} AS umt ON ( u.ID = umt.user_id AND umt.meta_key = 'wp_capabilities' )
+		    LEFT JOIN {$wpdb->usermeta} AS umt ON ( u.ID = umt.user_id AND umt.meta_key = '{$table_prefix}capabilities' )
 		    LEFT JOIN {$wpdb->usermeta} AS umt1 ON ( u.ID = umt1.user_id AND umt1.meta_key = 'last_update' )
 		    WHERE ( {$meta_query} )
 		    {$include_authors_without_posts_query}

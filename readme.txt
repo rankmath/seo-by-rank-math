@@ -5,11 +5,11 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.7
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.240
+Stable tag: 1.0.241
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
-Rank Math SEO is the best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic and improve your site's SEO ranking.
+Rank Math SEO is the best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic.
 
 == Description ==
 
@@ -339,13 +339,10 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.240 [Mar 12, 2025] =
-- Improved: Moved [SEO Analysis](https://rankmath.com/kb/seo-analysis/) code to React to load blazing fast. We will gradually enhance the performance of other modules
-- Improved: Strengthened the security of REST endpoints used in the plugin
-- Fixed: [Post Analytics](https://rankmath.com/kb/analytics/#post-analytics) was not working properly with the secondary language created using the WPML plugin
-- Fixed: UI issues in the score indicator on the [Analytics - SEO Performance page](https://rankmath.com/kb/analytics/#seo-performance)
-- Fixed: Unable to connect the site to Rank Math from [Setup Wizard](https://rankmath.com/kb/how-to-access-setup-wizard/) after the last update
-- Fixed: PHP warning in the RSS feed on some setups
-- Fixed: PHP warning related to translations on some setups
+= 1.0.241 [Mar 26, 2025] =
+- Fixed: [Updating SEO Score using Database Tools](https://rankmath.com/kb/seo-score-not-available/#database-tools) was not working after the last update
+- Fixed: [Fix with AI tool](https://rankmath.com/kb/fix-seo-tests-with-content-ai/) was not working properly when a `<script>` tag was added to the content
+- Fixed: [Exclude User Roles](https://rankmath.com/kb/exclude-content-from-sitemap/#exclude-user-roles) option was not working on sites that do not use the default table prefix `wp_`
+- Fixed: Incompatibility with the Discount PRO plugin, which caused a PHP error on the site when the [WooCommerce module](https://rankmath.com/kb/advanced-mode/#woocommerce) was active
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
