@@ -42,6 +42,9 @@ class User extends Metadata {
 		if ( empty( $user ) ) {
 			return null;
 		}
+                if ( ! is_a( $user, 'WP_User') ) {
+                        return null;
+                }
 
 		if ( isset( self::$objects[ $user ] ) && 'user' === self::$objects[ $user ]->meta_type ) {
 			return self::$objects[ $user ];
