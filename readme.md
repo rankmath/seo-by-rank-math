@@ -28,7 +28,7 @@ We recommend using these tools for the development of Rank Math.
 	* vscode-scss
 	* vscode-wordpress-hooks
 	* wordpress-toolbox
- - [Github for desktop](https://desktop.github.com/)
+ - [GitHub for desktop](https://desktop.github.com/)
  - Chrome Browser
 
 ### Required WP Plugins:

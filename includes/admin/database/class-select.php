@@ -108,7 +108,7 @@ trait Select {
 	/**
 	 * Distinct select setter
 	 *
-	 * @param bool $distinct Is disticnt.
+	 * @param bool $distinct Is distinct.
 	 *
 	 * @return self The current query builder.
 	 */

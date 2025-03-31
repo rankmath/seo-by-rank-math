@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
 class Data_Encryption {
 
 	/**
-	 * Enryption available or not.
+	 * Encryption available or not.
 	 *
 	 * @var bool
 	 */

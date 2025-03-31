@@ -282,7 +282,7 @@ class Metabox implements Runner {
 	/**
 	 * Invalidate facebook object cache for the post.
 	 *
-	 * @param string     $field_id The current field id paramater.
+	 * @param string     $field_id The current field id parameter.
 	 * @param bool       $updated  Whether the metadata update action occurred.
 	 * @param string     $action   Action performed. Could be "repeatable", "updated", or "removed".
 	 * @param CMB2_Field $field    This field object.

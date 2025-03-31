@@ -34,7 +34,7 @@ class Variable {
 	protected $id;
 
 	/**
-	 * The name of the variabe.
+	 * The name of the variable.
 	 *
 	 * @var string
 	 */

@@ -56,7 +56,7 @@ trait Wizard {
 	}
 
 	/**
-	 * Is the page is currrent page.
+	 * Is the page is current page.
 	 *
 	 * @return boolean
 	 */
