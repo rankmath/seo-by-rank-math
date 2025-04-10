@@ -23,103 +23,11 @@ defined( 'ABSPATH' ) || exit;
 class System_Status {
 
 	/**
-	 * WP Info.
-	 *
-	 * @var array
+	 * Get localized JSON data based on the Page view.
 	 */
-	private $wp_info = [];
-
-	/**
-	 * Display Database/Tables Details.
-	 */
-	public function display() {
-		$this->prepare_info();
-
-		$this->display_system_info();
-		( new Error_Log() )->display(); // phpcs:ignore
-	}
-
-	/**
-	 * Display system details.
-	 */
-	private function display_system_info() {
-		?>
-		<div class="rank-math-system-status rank-math-box">
-			<header>
-				<h3><?php esc_html_e( 'System Info', 'rank-math' ); ?></h3>
-			</header>
-
-			<div class="site-health-copy-buttons">
-				<div class="copy-button-wrapper">
-					<button type="button" class="button copy-button" data-clipboard-text="<?php echo esc_attr( \WP_Debug_Data::format( $this->wp_info, 'debug' ) ); ?>">
-						<?php esc_html_e( 'Copy System Info to Clipboard', 'rank-math' ); ?>
-					</button>
-					<span class="success hidden" aria-hidden="true"><?php esc_html_e( 'Copied!', 'rank-math' ); ?></span>
-				</div>
-			</div>
-
-			<div id="health-check-debug" class="health-check-accordion">
-				<?php $this->display_system_info_list(); ?>
-			</div>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Display list for system info.
-	 *
-	 * @return void
-	 */
-	private function display_system_info_list() {
-		$directory = __DIR__;
-		foreach ( $this->wp_info as $section => $details ) {
-			if ( ! isset( $details['fields'] ) || empty( $details['fields'] ) ) {
-				continue;
-			}
-
-			include $directory . '/views/system-status-accordion.php';
-		}
-	}
-
-	/**
-	 * Display individual fields for the system info.
-	 *
-	 * @param  array $fields Fields array.
-	 * @return void
-	 */
-	protected function display_system_info_fields( $fields ) {
-		foreach ( $fields as $field_name => $field ) {
-			$values = $this->system_info_value( $field_name, $field['value'] );
-			printf( '<tr><td>%s</td><td>%s</td></tr>', esc_html( $field['label'] ), wp_kses_post( $values ) );
-		}
-	}
-
-	/**
-	 * Get individual values for the system info.
-	 *
-	 * @param  string $field_name  Field name.
-	 * @param  mixed  $field_value Field value.
-	 * @return string              Output HTML.
-	 */
-	private function system_info_value( $field_name, $field_value ) {
-		if ( is_array( $field_value ) ) {
-			$values = '<ul>';
-			foreach ( $field_value as $name => $value ) {
-				$values .= sprintf( '<li>%s: %s</li>', esc_html( $name ), esc_html( $value ) );
-			}
-			$values .= '</ul>';
-
-			return $values;
-		}
-
-		return esc_html( $field_value );
-	}
-
-	/**
-	 * Get Database information.
-	 */
-	private function prepare_info() {
+	public static function get_json_data() {
 		global $wpdb;
+		$info = [];
 
 		$plan    = Admin_Helper::get_registration_data();
 		$tokens  = Authentication::tokens();
@@ -199,7 +107,7 @@ class System_Status {
 		foreach ( $should_exist as $name => $label ) {
 			$rankmath['fields'][ $name ] = [
 				'label' => $label,
-				'value' => isset( $tables[ $name ] ) ? $this->get_table_size( $name ) : esc_html__( 'Not found', 'rank-math' ),
+				'value' => isset( $tables[ $name ] ) ? self::get_table_size( $name ) : esc_html__( 'Not found', 'rank-math' ),
 			];
 		}
 
@@ -208,8 +116,17 @@ class System_Status {
 			require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php'; // @phpstan-ignore-line
 		}
 
-		wp_enqueue_style( 'site-health' );
-		wp_enqueue_script( 'site-health' );
+		if ( ! function_exists( 'got_url_rewrite' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/misc.php'; // @phpstan-ignore-line
+		}
+
+		if ( false === function_exists( 'get_core_updates' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/update.php'; // @phpstan-ignore-line
+		}
+
+		if ( ! class_exists( 'WP_Site_Health' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/class-wp-site-health.php'; // @phpstan-ignore-line
+		}
 
 		$rankmath_data = apply_filters( 'rank_math/status/rank_math_info', $rankmath );
 		$core_data     = \WP_Debug_Data::debug_data();
@@ -233,7 +150,14 @@ class System_Status {
 			)
 		);
 
-		$this->wp_info = [ 'rank-math' => $rankmath_data ] + $core_data;
+		$system_info = [ 'rank-math' => $rankmath_data ] + $core_data;
+		return array_merge(
+			[
+				'systemInfo'     => $system_info,
+				'systemInfoCopy' => esc_attr( \WP_Debug_Data::format( $system_info, 'debug' ) ),
+			],
+			\RankMath\Status\Error_Log::get_error_log_localized_data()
+		);
 	}
 
 	/**
@@ -243,7 +167,7 @@ class System_Status {
 	 *
 	 * @return int Table size.
 	 */
-	public function get_table_size( $table ) {
+	public static function get_table_size( $table ) {
 		global $wpdb;
 		$size = (int) $wpdb->get_var( "SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema='" . $wpdb->dbname . "' AND (table_name='" . $wpdb->prefix . $table . "')" ); // phpcs:ignore
 		return size_format( $size );

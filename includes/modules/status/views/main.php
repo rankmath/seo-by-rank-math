@@ -10,31 +10,17 @@
  * @copyright  2019 Rank Math
  */
 
-use RankMath\Helper;
-use RankMath\Helpers\Param;
-
 defined( 'ABSPATH' ) || exit;
 
-$default_tab = apply_filters( 'rank_math/tools/default_tab', 'status' );
-$module      = Helper::get_module( 'status' );
-$current     = Param::get( 'view', $default_tab );
-
-if ( ! in_array( $current, array_keys( apply_filters( 'rank_math/tools/pages', [] ) ), true ) ) {
-	Helper::redirect( Helper::get_admin_url( 'status' ) );
-	exit;
-}
+use RankMath\Rollback_Version;
 
 // Header.
-rank_math()->admin->display_admin_header();
+rank_math()->admin->display_admin_header( false );
+
+if ( Rollback_Version::should_rollback() ) {
+	$rollback = new Rollback_Version();
+	$rollback->rollback();
+	return;
+}
 ?>
-<div class="wrap rank-math-wrap rank-math-tools-wrap dashboard">
-
-	<span class='wp-header-end'></span>
-
-	<?php $module->display_nav(); ?>
-
-	<div class="rank-math-ui dashboard-wrapper container <?php echo esc_attr( $current ); ?>">
-		<?php $module->display_body( $current ); ?>
-	</div>
-
-</div>
+<div class="wrap rank-math-wrap rank-math-tools-wrap dashboard"></div>

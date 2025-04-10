@@ -261,10 +261,9 @@ class Shared extends WP_REST_Controller {
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_valid_string' ],
 			],
 			'hasRedirect'     => [
-				'type'              => 'boolean',
-				'required'          => true,
-				'description'       => esc_html__( 'Whether the object has a redirect or not', 'rank-math' ),
-				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
+				'type'        => 'boolean',
+				'required'    => true,
+				'description' => esc_html__( 'Whether the object has a redirect or not', 'rank-math' ),
 			],
 			'redirectionID'   => [
 				'type'        => 'string',

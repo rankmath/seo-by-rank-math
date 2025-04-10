@@ -194,6 +194,7 @@ class Divi {
 			'wp-element',
 			'wp-hooks',
 			'wp-media-utils',
+			'wp-wordcount',
 			'rank-math-analyzer',
 			'rank-math-app',
 		];

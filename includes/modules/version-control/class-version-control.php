@@ -61,82 +61,14 @@ class Version_Control {
 			return;
 		}
 
-		$directory = __DIR__;
 		$this->config(
 			[
 				'id'        => 'status',
-				'directory' => $directory,
+				'directory' => __DIR__,
 			]
 		);
 
 		$this->hooks();
-
-		$this->maybe_save_beta_optin();
-		$this->maybe_save_auto_update();
-	}
-
-	/**
-	 * Change beta_optin setting.
-	 *
-	 * @return bool Change successful.
-	 */
-	public function maybe_save_beta_optin() {
-		if ( ! Param::post( 'beta_optin' ) || ! Param::post( '_wpnonce' ) ) {
-			return false;
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return false;
-		}
-
-		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'rank-math-beta-optin' ) ) {
-			return false;
-		}
-
-		// Sanitize input.
-		$new_value = Param::post( 'beta_optin' ) === 'on' ? 'on' : 'off';
-
-		$settings               = get_option( 'rank-math-options-general', [] );
-		$settings['beta_optin'] = $new_value;
-		rank_math()->settings->set( 'general', 'beta_optin', 'on' === $new_value ? true : false );
-		update_option( 'rank-math-options-general', $settings );
-
-		return true;
-	}
-
-	/**
-	 * Change enable_auto_update setting.
-	 *
-	 * @return bool Change successful.
-	 */
-	public function maybe_save_auto_update() {
-		if ( ! ( Param::post( 'enable_auto_update' ) || Param::post( 'enable_update_notification_email' ) ) && ! Param::post( '_wpnonce' ) ) {
-			return false;
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return false;
-		}
-
-		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'rank-math-auto-update' ) ) {
-			return false;
-		}
-
-		if ( Param::post( 'enable_auto_update' ) ) {
-			$new_value = Param::post( 'enable_auto_update' ) === 'on' ? 'on' : 'off';
-			Helper::toggle_auto_update_setting( $new_value );
-		}
-
-		if ( Param::post( 'enable_update_notification_email' ) ) {
-			$enable_notifications = Param::post( 'enable_update_notification_email' ) === 'on' ? 'on' : 'off';
-			$settings             = get_option( 'rank-math-options-general', [] );
-
-			$settings['update_notification_email'] = $enable_notifications;
-			rank_math()->settings->set( 'general', 'update_notification_email', 'on' === $enable_notifications ? true : false );
-			update_option( 'rank-math-options-general', $settings );
-		}
-
-		return true;
 	}
 
 	/**
@@ -154,49 +86,31 @@ class Version_Control {
 				current_user_can( 'setup_network' )
 			)
 		) {
-			$this->filter( 'rank_math/tools/pages', 'add_status_page' );
 			$this->filter( 'rank_math/tools/default_tab', 'change_default_tab' );
 		}
 
-		$this->filter( 'rank_math/admin/dashboard_view', 'network_admin_view' );
+		$this->filter( 'rank_math/admin/dashboard_view', 'network_admin_view', 10, 2 );
 		$this->filter( 'rank_math/admin/dashboard_nav_links', 'network_admin_dashboard_tabs' );
-		$this->action( 'admin_enqueue_scripts', 'enqueue', 20 );
-
-		if ( $this->should_add_json() ) {
-			/* translators: Placeholder is version number. */
-			Helper::add_json( 'rollbackConfirm', esc_html__( 'Are you sure you want to install version %s?', 'rank-math' ) );
-		}
 	}
 
 	/**
-	 * Check if JSON for confirmation l10n needs to be added.
-	 *
-	 * @return bool Whether the data needs to be added.
+	 * Get localized JSON data based on the Page view.
 	 */
-	private function should_add_json() {
-		if ( ! is_admin() ) {
-			return false;
-		}
-
-		if ( is_network_admin() && Helper::is_plugin_active_for_network() ) {
-			return Param::get( 'page' ) === 'rank-math';
-		}
-
-		return Param::get( 'page' ) === 'rank-math-status';
-	}
-
-	/**
-	 * Check if assets should be enqueued on current admin page.
-	 *
-	 * @param  string $hook Page hook name.
-	 * @return bool         Whether we should proceed with the enqueue functions.
-	 */
-	private function should_enqueue( $hook ) {
-		if ( is_network_admin() && Helper::is_plugin_active_for_network() ) {
-			return 'toplevel_page_rank-math' === $hook;
-		}
-
-		return 'rank-math_page_rank-math-status' === $hook;
+	public static function get_json_data() {
+		$versions = array_reverse( array_keys( Beta_Optin::get_available_versions( Helper::get_settings( 'general.beta_optin' ) ) ) );
+		array_splice( $versions, 10 );
+		return [
+			'latestVersion'           => Beta_Optin::get_latest_version(),
+			'isRollbackVersion'       => Rollback_Version::is_rollback_version(),
+			'isPluginUpdateDisabled'  => Helper::is_plugin_update_disabled(),
+			'availableVersions'       => $versions,
+			'updateCoreUrl'           => self_admin_url( 'update-core.php' ),
+			'rollbackVersion'         => get_option( 'rank_math_rollback_version', false ),
+			'rollbackNonce'           => wp_create_nonce( 'rank-math-rollback' ),
+			'betaOptin'               => boolval( Helper::get_settings( 'general.beta_optin' ) ),
+			'autoUpdate'              => boolval( Helper::get_auto_update_setting() ),
+			'updateNotificationEmail' => boolval( Helper::get_settings( 'general.update_notification_email' ) ),
+		];
 	}
 
 	/**
@@ -207,6 +121,22 @@ class Version_Control {
 	 */
 	public function network_admin_view( $file ) {
 		if ( 'version_control' === Param::get( 'view' ) && is_network_admin() && Helper::is_plugin_active_for_network() ) {
+			wp_enqueue_script( 'rank-math-status', rank_math()->plugin_url() . 'includes/modules/status/assets/js/status.js', [ 'lodash', 'rank-math-components' ], rank_math()->version, true );
+
+			$data = array_merge(
+				[
+					'canUser' => [
+						'manageOptions'  => current_user_can( 'manage_options' ),
+						'setupNetwork'   => current_user_can( 'setup_network' ),
+						'installPlugins' => current_user_can( 'install_plugins' ),
+					],
+				],
+				$this->get_json_data(),
+			);
+
+			foreach ( $data as $key => $value ) {
+				Helper::add_json( $key, $value );
+			}
 			return __DIR__ . '/display.php';
 		}
 
@@ -247,50 +177,18 @@ class Version_Control {
 	}
 
 	/**
-	 * Add subpage to Status & Tools screen.
-	 *
-	 * @param array $pages Pages.
-	 * @return array       New pages.
-	 */
-	public function add_status_page( $pages ) {
-		$pages['version_control'] = [
-			'url'   => 'status',
-			'args'  => 'view=version_control',
-			'cap'   => 'install_plugins',
-			'title' => __( 'Version Control', 'rank-math' ),
-			'class' => '\\RankMath\\Version_Control',
-		];
-
-		return $pages;
-	}
-
-	/**
 	 * Change default tab on the Status & Tools screen.
 	 *
 	 * @param string $default_value Default tab.
-	 * @return string         New default tab.
+	 *
+	 * @return string New default tab.
 	 */
 	public function change_default_tab( $default_value ) {
 		if ( is_multisite() && ! current_user_can( 'setup_network' ) ) {
 			return $default_value;
 		}
-		return 'version_control';
-	}
 
-	/**
-	 * Enqueue CSS & JS.
-	 *
-	 * @param string $hook Page hook name.
-	 * @return void
-	 */
-	public function enqueue( $hook ) {
-		if ( ! $this->should_enqueue( $hook ) ) {
-			return;
-		}
-		$uri = untrailingslashit( plugin_dir_url( __FILE__ ) );
-		wp_enqueue_style( 'rank-math-cmb2' );
-		wp_enqueue_style( 'rank-math-version-control', $uri . '/assets/css/version-control.css', [], rank_math()->version );
-		wp_enqueue_script( 'rank-math-version-control', $uri . '/assets/js/version-control.js', [ 'jquery' ], rank_math()->version, true );
+		return 'version_control';
 	}
 
 	/**
@@ -342,13 +240,5 @@ class Version_Control {
 			],
 			'banners_rtl' => [],
 		];
-	}
-
-	/**
-	 * Display forms.
-	 */
-	public function display() {
-		$directory = __DIR__;
-		include_once $directory . '/display.php';
 	}
 }

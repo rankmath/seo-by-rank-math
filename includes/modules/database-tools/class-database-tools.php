@@ -40,11 +40,7 @@ class Database_Tools {
 	 * Register version control hooks.
 	 */
 	public function hooks() {
-		if ( ! Helper::is_plugin_active_for_network() || current_user_can( 'manage_options' ) ) {
-			$this->filter( 'rank_math/tools/pages', 'add_tools_page', 11 );
-		}
-
-		if ( Helper::is_rest() && Str::ends_with( 'toolsAction', add_query_arg( [] ) ) ) {
+		if ( Helper::is_rest() && Str::contains( 'toolsAction', add_query_arg( [] ) ) ) {
 			foreach ( $this->get_tools() as $id => $tool ) {
 				if ( ! method_exists( $this, $id ) ) {
 					continue;
@@ -56,30 +52,12 @@ class Database_Tools {
 	}
 
 	/**
-	 * Display Tools data.
+	 * Get localized JSON data to be used on the Database Tools view of the Status & Tools page.
 	 */
-	public function display() {
-		?>
-		<table class='rank-math-status-table striped rank-math-tools-table widefat rank-math-box'>
-
-			<tbody class='tools'>
-
-				<?php foreach ( $this->get_tools() as $id => $tool ) : ?>
-					<tr class='<?php echo sanitize_html_class( $id ); ?>'>
-						<th>
-							<h4 class='name'><?php echo esc_html( $tool['title'] ); ?></h4>
-							<p class="description"><?php echo esc_html( $tool['description'] ); ?></p>
-						</th>
-						<td class='run-tool'>
-							<a href='#' class='button button-large button-link-delete tools-action' data-action='<?php echo esc_attr( $id ); ?>' data-confirm="<?php echo isset( $tool['confirm_text'] ) ? esc_attr( $tool['confirm_text'] ) : 'false'; ?>"><?php echo esc_html( $tool['button_text'] ); ?></a>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-
-			</tbody>
-
-		</table>
-		<?php
+	public static function get_json_data() {
+		return [
+			'tools' => self::get_tools(),
+		];
 	}
 
 	/**
@@ -301,29 +279,11 @@ class Database_Tools {
 	}
 
 	/**
-	 * Add subpage to Status & Tools screen.
-	 *
-	 * @param array $pages Pages.
-	 * @return array       New pages.
-	 */
-	public function add_tools_page( $pages ) {
-		$pages['tools'] = [
-			'url'   => 'status',
-			'args'  => 'view=tools',
-			'cap'   => 'manage_options',
-			'title' => __( 'Database Tools', 'rank-math' ),
-			'class' => '\\RankMath\\Tools\\Database_Tools',
-		];
-
-		return $pages;
-	}
-
-	/**
 	 * Get tools.
 	 *
 	 * @return array
 	 */
-	private function get_tools() {
+	private static function get_tools() {
 		$tools = [];
 
 		if ( Helper::is_module_active( 'seo-analysis' ) ) {
@@ -414,7 +374,7 @@ class Database_Tools {
 		 *
 		 * @param array $tools The tools.
 		 */
-		$tools = $this->do_filter( 'database/tools', $tools );
+		$tools = apply_filters( 'rank_math/database/tools', $tools );
 
 		return $tools;
 	}

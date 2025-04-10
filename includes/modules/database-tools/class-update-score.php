@@ -45,13 +45,12 @@ class Update_Score {
 	public function __construct() {
 		$this->batch_size = absint( apply_filters( 'rank_math/recalculate_scores_batch_size', 25 ) );
 
-		$this->action( 'admin_footer', 'footer_modal' );
 		$this->filter( 'rank_math/tools/update_seo_score', 'update_seo_score' );
 
 		$this->screen = new Screen();
 		$this->screen->load_screen( 'post' );
 
-		if ( Param::get( 'page' ) === 'rank-math-status' && Param::get( 'view' ) === 'tools' ) {
+		if ( Param::get( 'page' ) === 'rank-math-status' ) {
 			$this->action( 'admin_enqueue_scripts', 'enqueue' );
 		}
 	}
@@ -233,42 +232,6 @@ class Update_Score {
 		$update_score_post_ids = $wpdb->get_var( $wpdb->prepare( $query, $post_types ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- It's prepared above.
 
 		return (int) $update_score_post_ids;
-	}
-
-	/**
-	 * Modal to show the Update SEO Score progress.
-	 *
-	 * @return void
-	 */
-	public function footer_modal() {
-		if ( Param::get( 'page' ) !== 'rank-math-status' || Param::get( 'view' ) !== 'tools' ) {
-			return;
-		}
-		?>
-		<div class="rank-math-modal rank-math-modal-update-score">
-			<div class="rank-math-modal-content">
-				<div class="rank-math-modal-header">
-					<h3><?php esc_html_e( 'Recalculating SEO Scores', 'rank-math' ); ?></h3>
-					<p><?php esc_html_e( 'This process may take a while. Please keep this window open until the process is complete.', 'rank-math' ); ?></p>
-				</div>
-				<div class="rank-math-modal-body">
-					<div class="count">
-						<?php esc_html_e( 'Calculated:', 'rank-math' ); ?> <span class="update-posts-done">0</span> / <span class="update-posts-total"><?php echo esc_html( $this->find() ); ?></span>
-					</div>
-					<div class="progress-bar">
-						<span></span>
-					</div>
-
-					<div class="rank-math-modal-footer hidden">
-						<p>
-							<?php esc_html_e( 'The SEO Scores have been recalculated successfully!', 'rank-math' ); ?>
-						</p>
-						<button class="button button-large rank-math-modal-close"><?php esc_html_e( 'Close', 'rank-math' ); ?></button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php
 	}
 
 	/**

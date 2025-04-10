@@ -143,7 +143,7 @@ class Admin extends WP_REST_Controller {
 		$state  = $request->get_param( 'state' );
 
 		Helper::update_modules( [ $module => $state ] );
-
+		$this->maybe_delete_rewrite_rules( $module );
 		do_action( 'rank_math/module_changed', $module, $state );
 		return true;
 	}
@@ -443,5 +443,18 @@ class Admin extends WP_REST_Controller {
 				'validate_callback' => 'rest_validate_request_arg',
 			],
 		];
+	}
+
+	/**
+	 * Maybe update(delete) rewrite rules.
+	 *
+	 * @param string $module The module name.
+	 *
+	 * @return void
+	 */
+	private function maybe_delete_rewrite_rules( $module ) {
+		if ( 'sitemap' === $module ) {
+			delete_option( 'rewrite_rules' );
+		}
 	}
 }

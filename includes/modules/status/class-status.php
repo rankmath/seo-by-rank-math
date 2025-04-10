@@ -13,8 +13,8 @@ namespace RankMath\Status;
 use RankMath\Helper;
 use RankMath\Helpers\Param;
 use RankMath\Module\Base;
-use RankMath\Traits\Hooker;
 use RankMath\Admin\Page;
+use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -50,6 +50,7 @@ class Status extends Base {
 	 * Class constructor.
 	 */
 	public function __construct() {
+		$this->action( 'rest_api_init', 'init_rest_api' );
 		if ( Helper::is_heartbeat() ) {
 			return;
 		}
@@ -62,9 +63,15 @@ class Status extends Base {
 			]
 		);
 
-		$this->filter( 'rank_math/tools/pages', 'add_status_page', 12 );
-
 		parent::__construct();
+	}
+
+	/**
+	 * Load the REST API endpoints.
+	 */
+	public function init_rest_api() {
+		$rest = new Rest();
+		$rest->register_routes();
 	}
 
 	/**
@@ -83,74 +90,52 @@ class Status extends Base {
 				'render'   => $this->directory . '/views/main.php',
 				'assets'   => [
 					'styles'  => [
+						'wp-components'    => '',
 						'rank-math-common' => '',
 						'rank-math-status' => $uri . '/assets/css/status.css',
 					],
 					'scripts' => [
-						'lodash'              => '',
-						'rank-math-analyzer'  => rank_math()->plugin_url() . 'assets/admin/js/analyzer.js',
-						'rank-math-dashboard' => '',
-						'rank-math-status'    => $uri . '/assets/js/status.js',
+						'lodash'               => '',
+						'rank-math-components' => '',
+						'rank-math-dashboard'  => '',
+						'rank-math-status'     => $uri . '/assets/js/status.js',
 					],
+					'json'    => $this->get_json_data( Param::get( 'view', 'version_control' ) ),
 				],
 			]
 		);
 	}
 
 	/**
-	 * Display dashboard tabs.
-	 */
-	public function display_nav() {
-		$default_tab = $this->do_filter( 'tools/default_tab', 'status' );
-		?>
-		<div class="rank-math-tab-nav" role="tablist" aria-orientation="horizontal">
-			<?php
-			foreach ( $this->get_views() as $id => $link ) :
-				if ( isset( $link['cap'] ) && ! current_user_can( $link['cap'] ) ) {
-					continue;
-				}
-				?>
-			<a class="rank-math-tab<?php echo Param::get( 'view', $default_tab ) === sanitize_html_class( $id ) ? ' is-active' : ''; ?>" href="<?php echo esc_url( Helper::get_admin_url( $link['url'], $link['args'] ) ); ?>" title="<?php echo esc_attr( $link['title'] ); ?>"><?php echo esc_html( $link['title'] ); ?></a>
-			<?php endforeach; ?>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Display view body.
+	 * Get localized JSON data based on the Page view.
 	 *
-	 * @param string $view Current view.
+	 * @param string $view Current Page view.
 	 */
-	public function display_body( $view ) {
-		$hash = $this->get_views();
-		$hash = new $hash[ $view ]['class']();
-		$hash->display();
-	}
-
-	/**
-	 * Add subpage to Status & Tools screen.
-	 *
-	 * @param array $pages Pages.
-	 * @return array       New pages.
-	 */
-	public function add_status_page( $pages ) {
-		$pages['status'] = [
-			'url'   => 'status',
-			'args'  => 'view=status',
-			'cap'   => 'manage_options',
-			'title' => __( 'System Status', 'rank-math' ),
-			'class' => '\\RankMath\\Status\\System_Status',
+	private function get_json_data( $view ) {
+		$hash = [
+			'version_control' => '\RankMath\Version_Control',
+			'tools'           => '\RankMath\Tools\Database_Tools',
+			'status'          => '\RankMath\Status\System_Status',
+			'import_export'   => '\RankMath\Admin\Import_Export',
 		];
 
-		return $pages;
-	}
+		$data = [
+			'isAdvancedMode'           => Helper::is_advanced_mode(),
+			'isPluginActiveForNetwork' => Helper::is_plugin_active_for_network(),
+			'canUser'                  => [
+				'manageOptions'  => current_user_can( 'manage_options' ),
+				'setupNetwork'   => current_user_can( 'setup_network' ),
+				'installPlugins' => current_user_can( 'install_plugins' ),
+			],
+		];
 
-	/**
-	 * Get dashbaord navigation links
-	 *
-	 * @return array
-	 */
-	private function get_views() {
-		return $this->do_filter( 'tools/pages', [] );
+		if ( ! isset( $hash[ $view ] ) ) {
+			return $data;
+		}
+
+		return array_merge(
+			$data,
+			[ $view => $hash[ $view ]::get_json_data() ]
+		);
 	}
 }

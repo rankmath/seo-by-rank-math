@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.241\n"
+"Project-Id-Version: Rank Math SEO 1.0.242\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-26T04:48:00+00:00\n"
+"POT-Creation-Date: 2025-04-10T06:31:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -387,29 +387,6 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
-msgid "Import & Export"
-msgstr ""
-
-msgid "Are you sure you want to import settings into Rank Math? Don't worry, your current configuration will be saved as a backup."
-msgstr ""
-
-#. Translators: %s is the plugin name.
-msgid "Are you sure you want to import data from %s?"
-msgstr ""
-
-msgid "Select data to import."
-msgstr ""
-
-msgid "Are you sure you want to restore this backup? Your current configuration will be overwritten."
-msgstr ""
-
-msgid "Are you sure you want to delete this backup?"
-msgstr ""
-
-#. Translators: %s is the plugin name.
-msgid "Are you sure you want erase all traces of %s?"
-msgstr ""
-
 #. translators: Plugin name
 msgid "Cleanup of %s data successfully done."
 msgstr ""
@@ -419,47 +396,6 @@ msgid "Cleanup of %s data failed."
 msgstr ""
 
 msgid "Action not allowed."
-msgstr ""
-
-msgid "Unable to create backup this time."
-msgstr ""
-
-#. translators: Backup formatted date
-#. translators: Snapshot formatted date
-msgid "Backup: %s"
-msgstr ""
-
-msgid "Backup created successfully."
-msgstr ""
-
-msgid "No backup key found to delete."
-msgstr ""
-
-msgid "Backup successfully deleted."
-msgstr ""
-
-msgid "No backup key found to restore."
-msgstr ""
-
-msgid "Backup does not exist."
-msgstr ""
-
-msgid "Backup restored successfully."
-msgstr ""
-
-msgid "Uploaded file could not be read."
-msgstr ""
-
-msgid "Settings successfully imported. Your old configuration has been saved as a backup."
-msgstr ""
-
-msgid "No settings found to be imported."
-msgstr ""
-
-msgid "Settings could not be imported:"
-msgstr ""
-
-msgid "Settings could not be imported: Upload failed."
 msgstr ""
 
 msgid "No items found."
@@ -808,6 +744,9 @@ msgstr ""
 msgid "Deactivated"
 msgstr ""
 
+msgid "Are you sure you want to import settings into Rank Math? Don't worry, your current configuration will be saved as a backup."
+msgstr ""
+
 msgid "Skip Step"
 msgstr ""
 
@@ -1024,81 +963,6 @@ msgstr ""
 msgid "Earn flat 30% on every sale!"
 msgstr ""
 
-msgid "Create Backup"
-msgstr ""
-
-msgid "Settings Backup"
-msgstr ""
-
-msgid "Take a backup of your plugin settings in case you wish to restore them in future. Use it as backup before making substantial changes to Rank Math settings. For taking a backup of the SEO data of your content, use the XML Export option."
-msgstr ""
-
-msgid "Restore"
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "There is no backup."
-msgstr ""
-
-msgid "Plugin Settings"
-msgstr ""
-
-#. translators: Link to learn about import export panel KB article
-msgid "Import or export your Rank Math settings, This option is useful for replicating Rank Math settings across multiple websites. %s"
-msgstr ""
-
-#. translators: Link to learn about import export panel KB article
-msgid "Learn more about the Import/Export options."
-msgstr ""
-
-msgid "Export Settings"
-msgstr ""
-
-msgid "Settings File"
-msgstr ""
-
-msgid "Please select a file to import."
-msgstr ""
-
-msgid "Import settings by locating settings file and clicking \"Import settings\"."
-msgstr ""
-
-msgid "Titles &amp; Metas"
-msgstr ""
-
-msgid "Sitemap Settings"
-msgstr ""
-
-msgid "Role Manager Settings"
-msgstr ""
-
-msgid "Redirections"
-msgstr ""
-
-msgid "Choose the panels to export."
-msgstr ""
-
-msgid "Export"
-msgstr ""
-
-msgid "Other Plugins"
-msgstr ""
-
-#. translators: Link to learn about import export panel KB article
-msgid "If you were using another plugin to add important SEO information to your website before switching to Rank Math SEO, you can import the settings and data here. %s"
-msgstr ""
-
-msgid "No plugin detected with importable data."
-msgstr ""
-
-msgid "Calculate SEO Scores"
-msgstr ""
-
-msgid "Clean"
-msgstr ""
-
 msgid "Account"
 msgstr ""
 
@@ -1231,6 +1095,9 @@ msgstr ""
 
 #. translators: Link to kb article
 msgid "The 404 monitor will let you see if visitors or search engines bump into any <code>404 Not Found</code> error while browsing your site."
+msgstr ""
+
+msgid "Redirections"
 msgstr ""
 
 msgid "Set default values for the redirection module from here."
@@ -2508,6 +2375,9 @@ msgstr ""
 msgid "View"
 msgstr ""
 
+msgid "Delete"
+msgstr ""
+
 msgid "View Redirection"
 msgstr ""
 
@@ -3683,21 +3553,6 @@ msgstr ""
 msgid "Recalculate Scores"
 msgstr ""
 
-msgid "Recalculating SEO Scores"
-msgstr ""
-
-msgid "This process may take a while. Please keep this window open until the process is complete."
-msgstr ""
-
-msgid "Calculated:"
-msgstr ""
-
-msgid "The SEO Scores have been recalculated successfully!"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
 msgid "Images"
 msgstr ""
 
@@ -4108,6 +3963,9 @@ msgstr ""
 msgid "Export to Nginx config file"
 msgstr ""
 
+msgid "Export"
+msgstr ""
+
 msgid "Redirection successfully deleted."
 msgstr ""
 
@@ -4164,6 +4022,9 @@ msgid "Hide details"
 msgstr ""
 
 msgid "Hide"
+msgstr ""
+
+msgid "Restore"
 msgstr ""
 
 msgid "Delete Permanently"
@@ -4339,6 +4200,9 @@ msgid "Test and edit your live robots.txt file with our <a href=\"%1$s\" target=
 msgstr ""
 
 msgid "Titles & Meta Settings"
+msgstr ""
+
+msgid "Sitemap Settings"
 msgstr ""
 
 msgid "404 Monitor Log"
@@ -5224,17 +5088,22 @@ msgstr ""
 msgid "Last Mod."
 msgstr ""
 
-msgid "Error Log"
+msgid "Unable to create backup this time."
 msgstr ""
 
-#. Translators: placeholder is a link to WP_DEBUG documentation.
-msgid "If you have %s enabled, errors will be stored in a log file. Here you can find the last 100 lines in reversed order so that you or the Rank Math support team can view it easily. The file cannot be edited here."
+msgid "Backup created successfully."
 msgstr ""
 
-msgid "Copy Log to Clipboard"
+msgid "Backup does not exist."
 msgstr ""
 
-msgid "Copied!"
+msgid "Backup restored successfully."
+msgstr ""
+
+msgid "No backup key found to delete."
+msgstr ""
+
+msgid "Backup successfully deleted."
 msgstr ""
 
 msgid "The error log cannot be retrieved."
@@ -5243,16 +5112,28 @@ msgstr ""
 msgid "The error log cannot be retrieved: Error log file is too large."
 msgstr ""
 
+msgid "Settings could not be imported:"
+msgstr ""
+
+msgid "Settings could not be imported: Upload failed."
+msgstr ""
+
+msgid "Uploaded file could not be read."
+msgstr ""
+
+msgid "Settings successfully imported. Your old configuration has been saved as a backup."
+msgstr ""
+
+msgid "No settings found to be imported."
+msgstr ""
+
+msgid "Sorry, you are not authorized to Import/Export the settings."
+msgstr ""
+
+msgid "Invalid action selected."
+msgstr ""
+
 msgid "Status & Tools"
-msgstr ""
-
-msgid "System Status"
-msgstr ""
-
-msgid "System Info"
-msgstr ""
-
-msgid "Copy System Info to Clipboard"
 msgstr ""
 
 msgid "Version"
@@ -5328,105 +5209,6 @@ msgid "Plugin rollback successful."
 msgstr ""
 
 msgid "Installing the rollback version&#8230;"
-msgstr ""
-
-#. translators: Placeholder is version number.
-msgid "Are you sure you want to install version %s?"
-msgstr ""
-
-msgid "Auto Update"
-msgstr ""
-
-msgid "You cannot turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released, because site wide plugins auto-update option is disabled on your site."
-msgstr ""
-
-msgid "Turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released. The beta versions will never install automatically."
-msgstr ""
-
-msgid "Auto Update Plugin"
-msgstr ""
-
-msgid "When auto-updates are turned off, you can enable update notifications, to send an email to the site administrator when an update is available for Rank Math."
-msgstr ""
-
-msgid "Update Notification Email"
-msgstr ""
-
-msgid "Rank Math will not auto-update because you have rolled back to a previous version. Update to the latest version manually to make this option work again."
-msgstr ""
-
-msgid "Beta Opt-in"
-msgstr ""
-
-msgid "You cannot turn on the Beta Tester feature because site wide plugins auto-update option is disabled on your site."
-msgstr ""
-
-msgid "You can take part in shaping Rank Math by test-driving the newest features and letting us know what you think. Turn on the Beta Tester feature to get notified about new beta releases. The beta version will not install automatically and you always have the option to ignore it."
-msgstr ""
-
-#. translators: Warning.
-msgid "%s It is not recommended to use the beta version on live production sites."
-msgstr ""
-
-#. translators: Warning.
-#. translators: placeholder is the word "warning".
-msgid "Warning: "
-msgstr ""
-
-msgid "Beta Tester"
-msgstr ""
-
-msgid "Rollback to Previous Version"
-msgstr ""
-
-msgid "If you are facing issues after an update, you can reinstall a previous version with this tool."
-msgstr ""
-
-#. translators: placeholder is the word "warning".
-msgid "%s Previous versions may not be secure or stable. Proceed with caution and always create a backup."
-msgstr ""
-
-msgid "Your Version"
-msgstr ""
-
-#. Translators: placeholder is "Rolled Back Version:".
-msgid "%s Auto updates will not work, please update the plugin manually."
-msgstr ""
-
-#. Translators: placeholder is "Rolled Back Version:".
-msgid "Rolled Back Version: "
-msgstr ""
-
-msgid "You are using the latest version of the plugin."
-msgstr ""
-
-msgid "This is the version you are using on this site."
-msgstr ""
-
-msgid "Latest Stable Version"
-msgstr ""
-
-msgid "Update Now"
-msgstr ""
-
-msgid "This is the latest version of the plugin."
-msgstr ""
-
-msgid "Rollback Version"
-msgstr ""
-
-msgid "Roll back to this version."
-msgstr ""
-
-#. translators: Version number.
-msgid "Install Version %s"
-msgstr ""
-
-#. translators: Version number.
-msgid "Install Selected Version"
-msgstr ""
-
-msgid "Reinstalling, please wait..."
 msgstr ""
 
 #. translators: Link to kb article
@@ -6712,9 +6494,6 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-msgid "Once Weekly"
-msgstr ""
-
 msgid "Add a few images and/or videos to make your content appealing."
 msgstr ""
 
@@ -7297,9 +7076,6 @@ msgstr ""
 msgid "Notify your readers by sharing!"
 msgstr ""
 
-msgid "No posts found without SEO score."
-msgstr ""
-
 msgid "🔒 This is a PRO-Only Feature"
 msgstr ""
 
@@ -7319,6 +7095,9 @@ msgid "SEO Performance Email Reports"
 msgstr ""
 
 msgid "⛔️ Update Required"
+msgstr ""
+
+msgid "Update Now"
 msgstr ""
 
 msgid "🚀 Supercharge Your Content With AI"
@@ -7615,6 +7394,9 @@ msgstr ""
 msgid "Preview Snippet Editor"
 msgstr ""
 
+msgid "Close"
+msgstr ""
+
 msgid "Social Media Preview"
 msgstr ""
 
@@ -7736,6 +7518,9 @@ msgid "Specify a maximum size of image preview to be shown for images on this pa
 msgstr ""
 
 msgid "Show SEO Score on Front-end"
+msgstr ""
+
+msgid "No posts found without SEO score."
 msgstr ""
 
 msgid "The below options are handled via the Rank Math SEO <settings_page_link/>."
@@ -8669,6 +8454,9 @@ msgid "Words: %d"
 msgstr ""
 
 msgid "Copy"
+msgstr ""
+
+msgid "Copied!"
 msgstr ""
 
 msgid "Insert"
@@ -9706,13 +9494,208 @@ msgstr ""
 msgid "Make more informed decisions & strategy"
 msgstr ""
 
-msgid "Something went wrong. Please refresh the page and try again."
+msgid "Starting SEO score recalculation"
+msgstr ""
+
+msgid "The SEO Scores have been recalculated successfully!"
 msgstr ""
 
 msgid "Something went wrong. Please try again later."
 msgstr ""
 
 msgid "Include posts/pages where the score is already set"
+msgstr ""
+
+msgid "Calculating SEO score for posts %1$d - %2$d out of %3$d"
+msgstr ""
+
+msgid "Titles & Metas"
+msgstr ""
+
+msgid "Role Manager Settings"
+msgstr ""
+
+msgid "Settings File"
+msgstr ""
+
+msgid "Choose File"
+msgstr ""
+
+msgid "Please select a file to import."
+msgstr ""
+
+msgid "Import settings by locating settings file and clicking \"Import settings\"."
+msgstr ""
+
+msgid "Export Settings"
+msgstr ""
+
+msgid "Choose the panels to export."
+msgstr ""
+
+msgid "Plugin Settings"
+msgstr ""
+
+msgid "Import or export your Rank Math settings. This option is useful for replicating Rank Math settings across multiple websites. "
+msgstr ""
+
+msgid "Learn more about the Import/Export options."
+msgstr ""
+
+msgid "Import finished."
+msgstr ""
+
+msgid "No posts found with SEO score."
+msgstr ""
+
+msgid "Calculate SEO Scores"
+msgstr ""
+
+msgid "Are you sure you want to import data from %s?"
+msgstr ""
+
+msgid "Select data to import."
+msgstr ""
+
+msgid "Are you sure you want erase all traces of %s?"
+msgstr ""
+
+msgid "Clean"
+msgstr ""
+
+msgid "Other Plugins"
+msgstr ""
+
+msgid "If you were using another plugin to add important SEO information to your website before switching to Rank Math SEO, you can import the settings and data here. "
+msgstr ""
+
+msgid "No plugin detected with importable data."
+msgstr ""
+
+msgid "Create Backup"
+msgstr ""
+
+msgid "Settings Backup"
+msgstr ""
+
+msgid "Take a backup of your plugin settings in case you wish to restore them in future. Use it as backup before making substantial changes to Rank Math settings. For taking a backup of the SEO data of your content, use the XML Export option."
+msgstr ""
+
+msgid "Backup: %s"
+msgstr ""
+
+msgid "Are you sure you want to restore this backup? Your current configuration will be overwritten."
+msgstr ""
+
+msgid "Are you sure you want to delete this backup?"
+msgstr ""
+
+msgid "There is no backup."
+msgstr ""
+
+msgid "Failed! Try again"
+msgstr ""
+
+msgid "Warning: "
+msgstr ""
+
+msgid "Auto Update"
+msgstr ""
+
+msgid "You cannot turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released, because site wide plugins auto-update option is disabled on your site."
+msgstr ""
+
+msgid "Turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released. The beta versions of Rank Math as soon as they are released. The beta versions will never install automatically."
+msgstr ""
+
+msgid "Auto Update Plugin"
+msgstr ""
+
+msgid "When auto-updates are turned off, you can enable update notifications, to send an email to the site administrator when an update is available for Rank Math."
+msgstr ""
+
+msgid "Update Notification Email"
+msgstr ""
+
+msgid "Rank Math will not auto-update because you have rolled back to a previous version. Update to the latest version manually to make this option work again."
+msgstr ""
+
+msgid "Beta Opt-in"
+msgstr ""
+
+msgid "You cannot turn on the Beta Tester feature because site wide plugins auto-update option is disabled on your site."
+msgstr ""
+
+msgid "You can take part in shaping Rank Math by test-driving the newest features and letting us know what you think. Turn on the Beta Tester feature to get notified about new beta releases. The beta version will not install automatically and you always have the option to ignore it."
+msgstr ""
+
+msgid "It is not recommended to use the beta version on live production sites."
+msgstr ""
+
+msgid "Beta Tester"
+msgstr ""
+
+msgid "Rollback to Previous Version"
+msgstr ""
+
+msgid "If you are facing issues after an update, you can reinstall a previous version with this tool."
+msgstr ""
+
+msgid "Previous versions may not be secure or stable. Proceed with caution and always create a backup."
+msgstr ""
+
+msgid "Your Version"
+msgstr ""
+
+msgid "Rolled Back Version: "
+msgstr ""
+
+msgid "Auto updates will not work, please update the plugin manually."
+msgstr ""
+
+msgid "You are using the latest version of the plugin."
+msgstr ""
+
+msgid "This is the version you are using on this site."
+msgstr ""
+
+msgid "Latest Stable Version"
+msgstr ""
+
+msgid "This is the latest version of the plugin."
+msgstr ""
+
+msgid "Rollback Version"
+msgstr ""
+
+msgid "Roll back to this version."
+msgstr ""
+
+msgid "Install Version "
+msgstr ""
+
+msgid "Reinstalling, please wait…"
+msgstr ""
+
+msgid "System Status"
+msgstr ""
+
+msgid "Import & Export"
+msgstr ""
+
+msgid "Error Log"
+msgstr ""
+
+msgid "If you have %s enabled, errors will be stored in a log file. Here you can find the last 100 lines in reversed order so that you or the Rank Math support team can view it easily. The file cannot be edited here."
+msgstr ""
+
+msgid "Copy Log to Clipboard"
+msgstr ""
+
+msgid "System Info"
+msgstr ""
+
+msgid "Copy System Info to Clipboard"
 msgstr ""
 
 msgctxt "block title"

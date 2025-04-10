@@ -79,15 +79,16 @@ class Author implements Provider {
 		$user_pages = array_chunk( $users, $max_entries );
 
 		if ( 1 === count( $user_pages ) ) {
-			$page = '';
+			$page = 0;
 		}
 
 		foreach ( $user_pages as $user_page ) {
-			$user = array_shift( $user_page ); // Time descending, first user on page is most recently updated.
-			$item = $this->do_filter(
+			$current_page = $page > 0 ? $page : '';
+			$user         = array_shift( $user_page ); // Time descending, first user on page is most recently updated.
+			$item         = $this->do_filter(
 				'sitemap/index/entry',
 				[
-					'loc'     => Router::get_base_url( $this->sitemap_slug . '-sitemap' . $page . '.xml' ),
+					'loc'     => Router::get_base_url( $this->sitemap_slug . '-sitemap' . $current_page . '.xml' ),
 					'lastmod' => '@' . $user->last_update,
 				],
 				'author',
@@ -181,6 +182,7 @@ class Author implements Provider {
 		$defaults = [
 			'orderby'    => 'meta_value_num',
 			'order'      => 'DESC',
+			// phpcs:ignore WordPress.DB.SlowDBQuery -- Needed to generate the author sitemap by comparing values stored in the meta table
 			'meta_query' => [
 				'relation' => 'AND',
 				[
@@ -318,6 +320,6 @@ class Author implements Provider {
 		ORDER BY umt1.meta_value DESC
 		 ";
 
-		return $wpdb->get_results( $sql ); // phpcs:ignore
+		return $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery -- Proper validation is applied to variables used in the SQL query.
 	}
 }
