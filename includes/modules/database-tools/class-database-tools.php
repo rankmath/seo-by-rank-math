@@ -10,6 +10,7 @@ namespace RankMath\Tools;
 
 use RankMath\Helper;
 use RankMath\Helpers\Str;
+use RankMath\Helpers\Arr;
 use RankMath\Installer;
 use RankMath\Traits\Hooker;
 
@@ -367,6 +368,25 @@ class Database_Tools {
 				'description' => __( 'This tool will calculate the SEO score for the posts/pages that have a Focus Keyword set. Note: This process may take some time and the browser tab must be kept open while it is running.', 'rank-math' ),
 				'button_text' => __( 'Recalculate Scores', 'rank-math' ),
 			];
+		}
+
+		if ( Helper::is_module_active( 'analytics' ) && Helper::has_cap( 'analytics' ) ) {
+			Arr::insert(
+				$tools,
+				[
+					'analytics_clear_caches'  => [
+						'title'       => __( 'Purge Analytics Cache', 'rank-math' ),
+						'description' => __( 'Clear analytics cache to re-calculate all the stats again.', 'rank-math' ),
+						'button_text' => __( 'Clear Cache', 'rank-math' ),
+					],
+					'analytics_reindex_posts' => [
+						'title'       => __( 'Rebuild Index for Analytics', 'rank-math' ),
+						'description' => __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' ),
+						'button_text' => __( 'Rebuild Index', 'rank-math' ),
+					],
+				],
+				3
+			);
 		}
 
 		/**

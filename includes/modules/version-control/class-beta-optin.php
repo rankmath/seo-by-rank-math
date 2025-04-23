@@ -102,6 +102,9 @@ class Beta_Optin {
 	public static function get_available_versions( $beta = false ) {
 		$versions    = [];
 		$plugin_info = Version_Control::get_plugin_info();
+		if ( empty( $plugin_info['versions'] ) ) {
+			return $versions;
+		}
 
 		foreach ( (array) $plugin_info['versions'] as $version => $url ) {
 			if ( ! self::is_eligible_version( $version, $beta ) ) {

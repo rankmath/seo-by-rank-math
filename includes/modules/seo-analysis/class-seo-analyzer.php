@@ -158,7 +158,7 @@ class SEO_Analyzer {
 			$percent = $percent + $result->get_score();
 		}
 
-		$percent = round( ( $percent / $total_score ) * 100 );
+		$percent = $total_score > 0 ? round( ( $percent / $total_score ) * 100 ) : 0;
 		$grade   = $this->get_graph_grade( $percent );
 
 		return compact( 'total', 'percent', 'statuses', 'grade' );

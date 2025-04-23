@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.242
+Stable tag: 1.0.243
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,15 +339,11 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.242 [Apr 10, 2025] =
-- Improved: Moved [Status & Tools page](https://rankmath.com/kb/rank-math-status-and-tools/) code to React to load blazing fast. We will gradually enhance the performance of other modules
-- Fixed: Compatibility issues with WordPress 6.8
-- Fixed: [Deleting Redirection from the Post screen](https://rankmath.com/kb/advanced-tab/#redirect) was not working after the last update
-- Fixed: Editing Schema in [Elementor editor](https://rankmath.com/blog/elementor-seo/) was not working the second time after revisiting the Schema tab
-- Fixed: PHP Deprecated warning on Sitemap page when [Author sitemap](https://rankmath.com/kb/configure-sitemaps/#authors) is enabled
-- Fixed: Site URL was incorrectly logged in the [404 monitor](https://rankmath.com/kb/monitor-404-errors/) on some setups
-- Fixed: Incorrect 404 title and description were used on the `sitemap_index.xml` page when Sitemap module was disabled
-- Fixed: PHP warning regarding Translations loading too early on some setups
-- Fixed: Missing `SEO Score` label on frontend when[ Show SEO Score to Visitors option](https://rankmath.com/kb/general-settings/#show-seo-score) is enabled
+= 1.0.243 [Apr 10, 2025] =
+- Fixed: PHP error in [Version Control](https://rankmath.com/kb/version-control/#native-rollback) on sites hosted on WPEngine
+- Fixed: Terms from all languages were added to the [Sitemap](https://rankmath.com/kb/sitemaps-seo-benefits/) even when the Multi-domain option was selected in the WPML plugin
+- Fixed: Missing [Purge Analytics Cache](https://rankmath.com/kb/rank-math-status-and-tools/#purge-analytics-cache) and [Rebuild Index for Analytics](https://rankmath.com/kb/rank-math-status-and-tools/#rebuild-index-for-analytics) tools after the last update
+- Fixed: PHP warning on the [SEO Analysis page](https://rankmath.com/kb/seo-analysis/) when the Analysis API did not return any data on certain setups
+- Fixed: Typo in the [Restaurant Schema field](https://rankmath.com/kb/restaurant-schema/#geo-coordinates)
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

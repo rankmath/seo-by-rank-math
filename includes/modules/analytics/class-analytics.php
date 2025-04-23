@@ -92,7 +92,6 @@ class Analytics extends Base {
 		$this->action( 'wp_helpers_notification_dismissed', 'analytic_first_fetch_dismiss' );
 
 		if ( is_admin() ) {
-			$this->filter( 'rank_math/database/tools', 'add_tools' );
 			$this->filter( 'rank_math/settings/general', 'add_settings' );
 			$this->action( 'admin_init', 'refresh_token_missing', 25 );
 			$this->action( 'admin_init', 'cancel_fetch', 5 );
@@ -506,33 +505,5 @@ class Analytics extends Base {
 		);
 
 		return $tabs;
-	}
-
-	/**
-	 * Add database tools.
-	 *
-	 * @param array $tools Array of tools.
-	 *
-	 * @return array
-	 */
-	public function add_tools( $tools ) {
-		Arr::insert(
-			$tools,
-			[
-				'analytics_clear_caches'  => [
-					'title'       => __( 'Purge Analytics Cache', 'rank-math' ),
-					'description' => __( 'Clear analytics cache to re-calculate all the stats again.', 'rank-math' ),
-					'button_text' => __( 'Clear Cache', 'rank-math' ),
-				],
-				'analytics_reindex_posts' => [
-					'title'       => __( 'Rebuild Index for Analytics', 'rank-math' ),
-					'description' => __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' ),
-					'button_text' => __( 'Rebuild Index', 'rank-math' ),
-				],
-			],
-			3
-		);
-
-		return $tools;
 	}
 }

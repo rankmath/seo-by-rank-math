@@ -115,6 +115,10 @@ class Sitemap {
 	 */
 	public function rank_math_build_sitemap_filter( $type ) {
 		global $sitepress_settings;
+		if ( isset( $sitepress_settings['language_negotiation_type'] ) && absint( $sitepress_settings['language_negotiation_type'] ) === 2 ) {
+			return $type;
+		}
+
 		// Before to build the sitemap and as we are on front-end just make sure the links won't be translated. The setting should not be updated in DB.
 		$sitepress_settings['auto_adjust_ids'] = 0;
 
