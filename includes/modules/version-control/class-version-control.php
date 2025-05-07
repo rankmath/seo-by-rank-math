@@ -79,18 +79,6 @@ class Version_Control {
 			$beta_optin = new Beta_Optin();
 			$beta_optin->hooks();
 		}
-
-		if (
-			Helper::is_advanced_mode() && (
-				! Helper::is_plugin_active_for_network() ||
-				current_user_can( 'setup_network' )
-			)
-		) {
-			$this->filter( 'rank_math/tools/default_tab', 'change_default_tab' );
-		}
-
-		$this->filter( 'rank_math/admin/dashboard_view', 'network_admin_view', 10, 2 );
-		$this->filter( 'rank_math/admin/dashboard_nav_links', 'network_admin_dashboard_tabs' );
 	}
 
 	/**
@@ -111,84 +99,6 @@ class Version_Control {
 			'autoUpdate'              => boolval( Helper::get_auto_update_setting() ),
 			'updateNotificationEmail' => boolval( Helper::get_settings( 'general.update_notification_email' ) ),
 		];
-	}
-
-	/**
-	 * Replace Admin_Helper::get_view() output for the network admin tab.
-	 *
-	 * @param  string $file File path.
-	 * @return string       New file path.
-	 */
-	public function network_admin_view( $file ) {
-		if ( 'version_control' === Param::get( 'view' ) && is_network_admin() && Helper::is_plugin_active_for_network() ) {
-			wp_enqueue_script( 'rank-math-status', rank_math()->plugin_url() . 'includes/modules/status/assets/js/status.js', [ 'lodash', 'rank-math-components' ], rank_math()->version, true );
-
-			$data = array_merge(
-				[
-					'canUser' => [
-						'manageOptions'  => current_user_can( 'manage_options' ),
-						'setupNetwork'   => current_user_can( 'setup_network' ),
-						'installPlugins' => current_user_can( 'install_plugins' ),
-					],
-				],
-				$this->get_json_data(),
-			);
-
-			foreach ( $data as $key => $value ) {
-				Helper::add_json( $key, $value );
-			}
-			return __DIR__ . '/display.php';
-		}
-
-		return $file;
-	}
-
-	/**
-	 * Filter top nav links in the dashboard.
-	 *
-	 * @param  array $nav_links Nav links.
-	 * @return array            New nav links.
-	 */
-	public function network_admin_dashboard_tabs( $nav_links ) {
-		if ( ! is_network_admin() ) {
-			return $nav_links;
-		}
-
-		if ( empty( $nav_links ) ) {
-			$nav_links = [
-				'help' => [
-					'id'    => 'help',
-					'url'   => '',
-					'args'  => '',
-					'cap'   => 'manage_options',
-					'title' => esc_html__( 'Dashboard', 'rank-math' ),
-				],
-			];
-		}
-
-		$nav_links['version_control'] = [
-			'id'    => 'version_control',
-			'url'   => '',
-			'args'  => 'view=version_control',
-			'cap'   => 'manage_options',
-			'title' => esc_html__( 'Version Control', 'rank-math' ),
-		];
-		return $nav_links;
-	}
-
-	/**
-	 * Change default tab on the Status & Tools screen.
-	 *
-	 * @param string $default_value Default tab.
-	 *
-	 * @return string New default tab.
-	 */
-	public function change_default_tab( $default_value ) {
-		if ( is_multisite() && ! current_user_can( 'setup_network' ) ) {
-			return $default_value;
-		}
-
-		return 'version_control';
 	}
 
 	/**

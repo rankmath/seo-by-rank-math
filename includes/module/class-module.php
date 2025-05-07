@@ -77,6 +77,15 @@ class Module {
 	}
 
 	/**
+	 * Get module id.
+	 *
+	 * @return string
+	 */
+	public function get_args() {
+		return $this->args;
+	}
+
+	/**
 	 * Get module icon.
 	 *
 	 * @return string

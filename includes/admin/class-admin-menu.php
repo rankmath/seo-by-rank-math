@@ -57,6 +57,20 @@ class Admin_Menu implements Runner {
 			return;
 		}
 
+		$modules = rank_math()->manager->modules;
+		$data    = [];
+		foreach ( $modules as $id => $module ) {
+			$data[ $id ] = array_merge(
+				[
+					'id'       => $module->get_id(),
+					'isActive' => $module->is_active(),
+					'isHidden' => $module->is_hidden(),
+					'isPro'    => $module->is_pro_module(),
+				],
+				$module->get_args()
+			);
+		}
+
 		// Dashboard / Welcome / About.
 		new Page(
 			'rank-math',
@@ -71,7 +85,27 @@ class Admin_Menu implements Runner {
 				'assets'     => [
 					'styles'  => [ 'rank-math-dashboard' => '' ],
 					'scripts' => [
-						'rank-math-dashboard' => '',
+						'lodash'               => '',
+						'rank-math-components' => '',
+						'rank-math-dashboard'  => '',
+						'rank-math-modules'    => rank_math()->plugin_url() . 'assets/admin/js/modules.js',
+					],
+					'json'    => [
+						'isPro'                    => defined( 'RANK_MATH_PRO_FILE' ),
+						'isSiteConnected'          => Helper::is_site_connected(),
+						'registerProductNonce'     => wp_create_nonce( 'rank_math_register_product' ),
+						'activateUrl'              => Admin_Helper::get_activate_url(),
+						'isSiteUrlValid'           => Admin_Helper::is_site_url_valid(),
+						'isAdvancedMode'           => Helper::is_advanced_mode(),
+						'contentAiPlan'            => Helper::get_content_ai_plan(),
+						'modulesList'              => $data,
+						'isPluginActiveForNetwork' => Helper::is_plugin_active_for_network(),
+						'isNetworkAdmin'           => is_network_admin(),
+						'canUser'                  => [
+							'manageOptions'  => current_user_can( 'manage_options' ),
+							'setupNetwork'   => current_user_can( 'setup_network' ),
+							'installPlugins' => current_user_can( 'install_plugins' ),
+						],
 					],
 				],
 				'is_network' => is_network_admin() && Helper::is_plugin_active_for_network(),

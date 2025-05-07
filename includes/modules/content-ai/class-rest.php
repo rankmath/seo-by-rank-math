@@ -173,9 +173,9 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
 					'prompt' => [
-						'description' => esc_html__( 'The prompt data to be saved in the database.', 'rank-math' ),
-						'type'        => 'object',
-						'required'    => true,
+						'description'       => esc_html__( 'The prompt data to be saved in the database.', 'rank-math' ),
+						'required'          => true,
+						'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 					],
 				],
 			]
@@ -633,13 +633,7 @@ class Rest extends WP_REST_Controller {
 		$response_code = wp_remote_retrieve_response_code( $data );
 		if ( 200 !== $response_code ) {
 			return [
-				'error' => 410 !== $response_code ? $data['response']['message'] : wp_kses_post(
-					sprintf(
-						// Translators: link to the update page.
-						__( 'There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature.', 'rank-math' ),
-						'<a href="' . esc_url( self_admin_url( 'update-core.php' ) ) . '">' . __( 'Please update', 'rank-math' ) . '</a>'
-					)
-				),
+				'error' => $this->research_keyword_error( $data, $response_code ),
 			];
 		}
 
@@ -653,6 +647,32 @@ class Rest extends WP_REST_Controller {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Update the error message based on the pre-defined Content AI errors defined in the plugin.
+	 *
+	 * @param array $response      API response.
+	 * @param int   $response_code API response code.
+	 *
+	 * @return string Error message.
+	 */
+	private function research_keyword_error( $response, $response_code ) {
+		if ( $response_code === 410 ) {
+			return wp_kses_post(
+				sprintf(
+					// Translators: link to the update page.
+					__( 'There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature.', 'rank-math' ),
+					'<a href="' . esc_url( self_admin_url( 'update-core.php' ) ) . '">' . __( 'Please update', 'rank-math' ) . '</a>'
+				)
+			);
+		}
+
+		$error_texts = Helper::get_content_ai_errors();
+		$data        = wp_remote_retrieve_body( $response );
+		$data        = json_decode( $data, true );
+
+		return isset( $data['message'] ) && isset( $error_texts[ $data['message'] ] ) ? $error_texts[ $data['message'] ] : $response['response']['message'];
 	}
 
 	/**

@@ -16,6 +16,7 @@ use RankMath\Helpers\Str;
 use RankMath\Paper\Paper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Post;
+use RankMath\Term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -160,7 +161,7 @@ class Bulk_Actions {
 
 		$method = $is_post_list ? 'get_post_data' : 'get_term_data';
 		foreach ( $object_ids as $object_id ) {
-			$data['posts'][] = $this->$method( $object_id );
+			$data['posts'][] = $this->$method( $object_id, $action );
 		}
 
 		Bulk_Edit_SEO_Meta::get()->start( $data );
@@ -264,17 +265,18 @@ class Bulk_Actions {
 	 * Get Post data.
 	 *
 	 * @param integer $object_id Post ID.
+	 * @param string  $action    The action being performed (title, description, or both).
 	 *
 	 * @return array Post data.
 	 */
-	private function get_post_data( $object_id ) {
+	private function get_post_data( $object_id, $action = 'both' ) {
 		$object = get_post( $object_id );
 		return [
 			'post_id'       => $object_id,
 			'post_type'     => 'download' === $object->post_type ? 'Product' : ucfirst( $object->post_type ),
 			'title'         => get_the_title( $object_id ),
 			'focus_keyword' => Post::get_meta( 'focus_keyword', $object_id ),
-			'summary'       => Helper::replace_vars( $this->get_post_description( $object ), $object ),
+			'summary'       => Helper::replace_vars( $this->get_content_for_ai( $object, $action ), $object ),
 		];
 	}
 
@@ -282,49 +284,66 @@ class Bulk_Actions {
 	 * Get Term data.
 	 *
 	 * @param integer $object_id Term ID.
+	 * @param string  $action    The action being performed (title, description, or both).
 	 *
 	 * @return array Term data.
 	 */
-	private function get_term_data( $object_id ) {
+	private function get_term_data( $object_id, $action = 'both' ) {
 		$object = get_term( $object_id );
 		return [
 			'post_id'       => $object_id,
 			'post_type'     => $object->taxonomy,
 			'title'         => $object->name,
-			'focus_keyword' => get_term_meta( $object_id, 'rank_math_focus_keyword', true ),
-			'summary'       => Helper::replace_vars( $this->get_term_description( $object ), $object ),
+			'focus_keyword' => Term::get_meta( 'focus_keyword', $object, $object->taxonomy ),
+			'summary'       => Helper::replace_vars( $this->get_content_for_ai( $object, $action ), $object ),
 		];
 	}
 
 	/**
-	 * Get post description.
+	 * Get content for AI processing based on object type and action.
 	 *
-	 * @param WP_Post $post Post Instance.
+	 * @param object $current_object Object instance (WP_Post or WP_Term).
+	 * @param string $action The action being performed (title, description, or both).
 	 *
-	 * @return string Post description.
+	 * @return string Content to use for AI generation.
 	 */
-	private function get_post_description( $post ) {
-		$description = Post::get_meta( 'description', $post->ID );
-		if ( '' !== $description ) {
-			return $description;
+	private function get_content_for_ai( $current_object, $action = 'both' ) {
+		// For description generation, don't use current SEO descriptions.
+		if ( $action === 'description' || $action === 'both' ) {
+			return $this->get_content_without_seo_meta( $current_object );
 		}
 
-		return ! empty( $post->post_excerpt ) ? $post->post_excerpt : Str::truncate( Paper::get_from_options( "pt_{$post->post_type}_description", $post ), 160 );
+		// For title generation, prioritize existing SEO description.
+		return $current_object instanceof \WP_Post
+		? Post::get_meta( 'description', $current_object->ID, $this->get_content_without_seo_meta( $current_object ) )
+		: Term::get_meta( 'description', $current_object, $current_object->taxonomy, $this->get_content_without_seo_meta( $current_object ) );
 	}
 
 	/**
-	 * Get post description.
+	 * Get content from object without using SEO meta description.
 	 *
-	 * @param WP_Term $term Post Instance.
+	 * @param object $current_object Object instance (WP_Post or WP_Term).
 	 *
-	 * @return string Post description.
+	 * @return string Content from the object.
 	 */
-	private function get_term_description( $term ) {
-		$description = get_term_meta( $term->term_id, 'rank_math_description', true );
-		if ( '' !== $description ) {
-			return $description;
+	private function get_content_without_seo_meta( $current_object ) {
+		$is_post = $current_object instanceof \WP_Post;
+
+		// For terms: term description > template.
+		if ( ! $is_post ) {
+			return ! empty( $current_object->description ) ? $current_object->description : Str::truncate( Paper::get_from_options( "tax_{$current_object->taxonomy}_description", $current_object ), 160 );
 		}
 
-		return ! empty( $term->description ) ? $term->description : Str::truncate( Paper::get_from_options( "tax_{$term->taxonomy}_description", $term ), 160 );
+		// For posts: excerpt > content > template.
+		if ( ! empty( $current_object->post_excerpt ) ) {
+			return $current_object->post_excerpt;
+		}
+
+		$content = wp_strip_all_tags( $current_object->post_content );
+		if ( ! empty( $content ) ) {
+			return Str::truncate( $content, 300 );
+		}
+
+		return Str::truncate( Paper::get_from_options( "pt_{$current_object->post_type}_description", $current_object ), 160 );
 	}
 }

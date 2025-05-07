@@ -206,7 +206,7 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 				'headers' => [
 					'content-type' => 'application/json',
 				],
-				'timeout' => 60000,
+				'timeout' => 60,
 				'body'    => wp_json_encode( $data ),
 			]
 		);

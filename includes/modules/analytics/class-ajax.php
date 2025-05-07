@@ -139,7 +139,7 @@ class AJAX {
 			$this->success( [ 'streams' => $streams ] );
 		}
 
-		$stream = $this->create_ga4_data_stream( "properties/{$property_id}" );
+		$stream = $this->create_ga4_data_stream( $property_id );
 		if ( ! is_array( $stream ) ) {
 			$this->error( $stream );
 		}
@@ -563,7 +563,7 @@ class AJAX {
 		];
 
 		$stream = Api::get()->http_post(
-			"https://analyticsadmin.googleapis.com/v1alpha/{$property_id}/dataStreams",
+			"https://analyticsadmin.googleapis.com/v1alpha/properties/{$property_id}/dataStreams",
 			$args
 		);
 

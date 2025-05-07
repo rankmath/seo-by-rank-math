@@ -67,6 +67,7 @@ class Update_Score {
 			'wp-components'      => '',
 			'wp-element'         => '',
 			'wp-block-editor'    => '',
+			'wp-wordcount'       => '',
 			'rank-math-analyzer' => rank_math()->plugin_url() . 'assets/admin/js/analyzer.js',
 		];
 

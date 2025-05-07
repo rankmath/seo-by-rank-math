@@ -55,8 +55,8 @@ class Admin_Header {
 		</div>
 		<?php
 
+		// Breadcrumbs.
 		if ( $show_breadcrumbs ) {
-			// Breadcrumbs.
 			rank_math()->admin->display_admin_breadcrumbs();
 		}
 	}

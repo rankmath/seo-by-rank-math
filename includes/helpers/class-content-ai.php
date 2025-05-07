@@ -437,17 +437,22 @@ trait Content_AI {
 	 */
 	public static function get_content_ai_errors() {
 		return [
-			'not_connected'          => esc_html__( 'Please connect your account to use the Content AI.', 'rank-math' ),
-			'plugin_update_required' => esc_html__( 'Please update the Rank Math SEO plugin to the latest version to use this feature.', 'rank-math' ),
-			'upgrade_required'       => esc_html__( 'This feature is only available for Content AI subscribers.', 'rank-math' ),
-			'rate_limit_exceeded'    => esc_html__( 'Oops! Too many requests in a short time. Please try again after some time.', 'rank-math' ),
-			'domain_limit_reached'   => esc_html__( 'You\'ve used up all available credits for this domain.', 'rank-math' ),
-			'account_limit_reached'  => esc_html__( 'You\'ve used up all available credits from the connected account.', 'rank-math' ),
-			'content_filter'         => esc_html__( 'Please revise the entered values in the fields as they are not secure. Make the required adjustments and try again.', 'rank-math' ),
-			'api_content_filter'     => esc_html__( 'The output was stopped as it was identified as potentially unsafe by the content filter.', 'rank-math' ),
-			'could_not_generate'     => esc_html__( 'Could not generate. Please try again later.', 'rank-math' ),
-			'invalid_key'            => esc_html__( 'Invalid API key. Please check your API key or reconnect the site and try again.', 'rank-math' ),
-			'not_found'              => esc_html__( 'User wallet not found.', 'rank-math' ),
+			'not_connected'           => esc_html__( 'Please connect your account to use the Content AI.', 'rank-math' ),
+			'plugin_update_required'  => esc_html__( 'Please update the Rank Math SEO plugin to the latest version to use this feature.', 'rank-math' ),
+			'upgrade_required'        => esc_html__( 'This feature is only available for Content AI subscribers.', 'rank-math' ),
+			'rate_limit_exceeded'     => esc_html__( 'Oops! Too many requests in a short time. Please try again after some time.', 'rank-math' ),
+			'domain_limit_reached'    => esc_html__( 'You\'ve used up all available credits for this domain.', 'rank-math' ),
+			'account_limit_reached'   => esc_html__( 'You\'ve used up all available credits from the connected account.', 'rank-math' ),
+			'content_filter'          => esc_html__( 'Please revise the entered values in the fields as they are not secure. Make the required adjustments and try again.', 'rank-math' ),
+			'api_content_filter'      => esc_html__( 'The output was stopped as it was identified as potentially unsafe by the content filter.', 'rank-math' ),
+			'could_not_generate'      => esc_html__( 'Could not generate. Please try again later.', 'rank-math' ),
+			'invalid_key'             => esc_html__( 'Invalid API key. Please check your API key or reconnect the site and try again.', 'rank-math' ),
+			'invalid_input'           => esc_html__( 'The input provided is invalid. Please check the format and try again.', 'rank-math' ),
+			'temporarily_unavailable' => esc_html__( 'The service is temporarily unavailable. Please try again later.', 'rank-math' ),
+			'invalid_client'          => esc_html__( 'Unauthorized request. The client credentials are invalid.', 'rank-math' ),
+			'no_results'              => esc_html__( 'No results found for the given query. Please modify your request and try again', 'rank-math' ),
+			'not_enough_results'      => esc_html__( 'Insufficient results to complete the request. Please refine your query or reduce the requirements.', 'rank-math' ),
+			'not_found'               => esc_html__( 'User wallet not found.', 'rank-math' ),
 		];
 	}
 

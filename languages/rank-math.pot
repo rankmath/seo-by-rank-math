@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.243\n"
+"Project-Id-Version: Rank Math SEO 1.0.244\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-23T08:14:04+00:00\n"
+"POT-Creation-Date: 2025-05-07T10:55:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -2123,6 +2123,21 @@ msgstr ""
 msgid "Invalid API key. Please check your API key or reconnect the site and try again."
 msgstr ""
 
+msgid "The input provided is invalid. Please check the format and try again."
+msgstr ""
+
+msgid "The service is temporarily unavailable. Please try again later."
+msgstr ""
+
+msgid "Unauthorized request. The client credentials are invalid."
+msgstr ""
+
+msgid "No results found for the given query. Please modify your request and try again"
+msgstr ""
+
+msgid "Insufficient results to complete the request. Please refine your query or reduce the requirements."
+msgstr ""
+
 msgid "User wallet not found."
 msgstr ""
 
@@ -3022,14 +3037,14 @@ msgstr ""
 msgid "If true, forces a fresh research request."
 msgstr ""
 
+msgid "No data found for the researched keyword."
+msgstr ""
+
 #. Translators: link to the update page.
 msgid "There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature."
 msgstr ""
 
 msgid "Please update"
-msgstr ""
-
-msgid "No data found for the researched keyword."
 msgstr ""
 
 msgid "This feature is not available on the localhost."
@@ -7076,6 +7091,129 @@ msgstr ""
 msgid "Notify your readers by sharing!"
 msgstr ""
 
+msgid "Next steps…"
+msgstr ""
+
+msgid "Advanced Schema, Analytics and much more…"
+msgstr ""
+
+msgid "The plugin is currently not connected with your Rank Math account. Click on the button below to login or register for FREE using your "
+msgstr ""
+
+msgid "Google account, Facebook account"
+msgstr ""
+
+msgid " or "
+msgstr ""
+
+msgid "your email account."
+msgstr ""
+
+msgid "You have successfully activated Rank Math. If you find the plugin useful, "
+msgstr ""
+
+msgid "feel free to recommend it to your friends or colleagues."
+msgstr ""
+
+msgid "OnSite Checkout"
+msgstr ""
+
+msgid "You can't access this page."
+msgstr ""
+
+msgid "Failed! Try again"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+msgid "Warning: "
+msgstr ""
+
+msgid "Auto Update"
+msgstr ""
+
+msgid "You cannot turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released, because site wide plugins auto-update option is disabled on your site."
+msgstr ""
+
+msgid "Turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released. The beta versions of Rank Math as soon as they are released. The beta versions will never install automatically."
+msgstr ""
+
+msgid "Auto Update Plugin"
+msgstr ""
+
+msgid "When auto-updates are turned off, you can enable update notifications, to send an email to the site administrator when an update is available for Rank Math."
+msgstr ""
+
+msgid "Update Notification Email"
+msgstr ""
+
+msgid "Rank Math will not auto-update because you have rolled back to a previous version. Update to the latest version manually to make this option work again."
+msgstr ""
+
+msgid "Beta Opt-in"
+msgstr ""
+
+msgid "You cannot turn on the Beta Tester feature because site wide plugins auto-update option is disabled on your site."
+msgstr ""
+
+msgid "You can take part in shaping Rank Math by test-driving the newest features and letting us know what you think. Turn on the Beta Tester feature to get notified about new beta releases. The beta version will not install automatically and you always have the option to ignore it."
+msgstr ""
+
+msgid "It is not recommended to use the beta version on live production sites."
+msgstr ""
+
+msgid "Beta Tester"
+msgstr ""
+
+msgid "Rollback to Previous Version"
+msgstr ""
+
+msgid "If you are facing issues after an update, you can reinstall a previous version with this tool."
+msgstr ""
+
+msgid "Previous versions may not be secure or stable. Proceed with caution and always create a backup."
+msgstr ""
+
+msgid "Your Version"
+msgstr ""
+
+msgid "Rolled Back Version: "
+msgstr ""
+
+msgid "Auto updates will not work, please update the plugin manually."
+msgstr ""
+
+msgid "You are using the latest version of the plugin."
+msgstr ""
+
+msgid "This is the version you are using on this site."
+msgstr ""
+
+msgid "Latest Stable Version"
+msgstr ""
+
+msgid "Update Now"
+msgstr ""
+
+msgid "This is the latest version of the plugin."
+msgstr ""
+
+msgid "Rollback Version"
+msgstr ""
+
+msgid "Roll back to this version."
+msgstr ""
+
+msgid "Install Version "
+msgstr ""
+
+msgid "Reinstalling, please wait…"
+msgstr ""
+
+msgid "Import & Export"
+msgstr ""
+
 msgid "🔒 This is a PRO-Only Feature"
 msgstr ""
 
@@ -7095,9 +7233,6 @@ msgid "SEO Performance Email Reports"
 msgstr ""
 
 msgid "⛔️ Update Required"
-msgstr ""
-
-msgid "Update Now"
 msgstr ""
 
 msgid "🚀 Supercharge Your Content With AI"
@@ -9335,9 +9470,6 @@ msgstr ""
 msgid "Saving"
 msgstr ""
 
-msgid "Saved"
-msgstr ""
-
 msgid "Save for this Term"
 msgstr ""
 
@@ -9590,94 +9722,7 @@ msgstr ""
 msgid "There is no backup."
 msgstr ""
 
-msgid "Failed! Try again"
-msgstr ""
-
-msgid "Warning: "
-msgstr ""
-
-msgid "Auto Update"
-msgstr ""
-
-msgid "You cannot turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released, because site wide plugins auto-update option is disabled on your site."
-msgstr ""
-
-msgid "Turn on auto-updates to automatically update to stable versions of Rank Math as soon as they are released. The beta versions of Rank Math as soon as they are released. The beta versions will never install automatically."
-msgstr ""
-
-msgid "Auto Update Plugin"
-msgstr ""
-
-msgid "When auto-updates are turned off, you can enable update notifications, to send an email to the site administrator when an update is available for Rank Math."
-msgstr ""
-
-msgid "Update Notification Email"
-msgstr ""
-
-msgid "Rank Math will not auto-update because you have rolled back to a previous version. Update to the latest version manually to make this option work again."
-msgstr ""
-
-msgid "Beta Opt-in"
-msgstr ""
-
-msgid "You cannot turn on the Beta Tester feature because site wide plugins auto-update option is disabled on your site."
-msgstr ""
-
-msgid "You can take part in shaping Rank Math by test-driving the newest features and letting us know what you think. Turn on the Beta Tester feature to get notified about new beta releases. The beta version will not install automatically and you always have the option to ignore it."
-msgstr ""
-
-msgid "It is not recommended to use the beta version on live production sites."
-msgstr ""
-
-msgid "Beta Tester"
-msgstr ""
-
-msgid "Rollback to Previous Version"
-msgstr ""
-
-msgid "If you are facing issues after an update, you can reinstall a previous version with this tool."
-msgstr ""
-
-msgid "Previous versions may not be secure or stable. Proceed with caution and always create a backup."
-msgstr ""
-
-msgid "Your Version"
-msgstr ""
-
-msgid "Rolled Back Version: "
-msgstr ""
-
-msgid "Auto updates will not work, please update the plugin manually."
-msgstr ""
-
-msgid "You are using the latest version of the plugin."
-msgstr ""
-
-msgid "This is the version you are using on this site."
-msgstr ""
-
-msgid "Latest Stable Version"
-msgstr ""
-
-msgid "This is the latest version of the plugin."
-msgstr ""
-
-msgid "Rollback Version"
-msgstr ""
-
-msgid "Roll back to this version."
-msgstr ""
-
-msgid "Install Version "
-msgstr ""
-
-msgid "Reinstalling, please wait…"
-msgstr ""
-
 msgid "System Status"
-msgstr ""
-
-msgid "Import & Export"
 msgstr ""
 
 msgid "Error Log"
