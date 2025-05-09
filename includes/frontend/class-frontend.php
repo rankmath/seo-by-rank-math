@@ -113,8 +113,24 @@ class Frontend {
 			return;
 		}
 
+		$script_in_footer = true;
+		// Since WordPress 6.4 we can safely move front end scripts to header and add a defer attribute.
+		if ( version_compare( get_bloginfo( 'version' ), '6.4', '>=' ) ) {
+			$script_in_footer = array(
+				'strategy' => 'defer',
+				'in_footer' => false,
+			);
+		} elseif ( version_compare( get_bloginfo( 'version' ), '6.3', '>=' ) ) {
+			// In version 6.3 we can use defer, but moving scripts to the header could create a regression
+			// if there is a dependent script that is not deferred. See https://core.trac.wordpress.org/ticket/59599.
+			$script_in_footer = array(
+				'strategy' => 'defer',
+				'in_footer' => true,
+			);
+		}
+
 		wp_enqueue_style( 'rank-math', rank_math()->assets() . 'css/rank-math.css', null, rank_math()->version );
-		wp_enqueue_script( 'rank-math', rank_math()->assets() . 'js/rank-math.js', [ 'jquery' ], rank_math()->version, true );
+		wp_enqueue_script( 'rank-math', rank_math()->assets() . 'js/rank-math.js', [ 'jquery' ], rank_math()->version, $script_in_footer );
 
 		if ( is_singular() ) {
 			Helper::add_json( 'objectID', Post::get_page_id() );
