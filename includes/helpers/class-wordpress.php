@@ -748,4 +748,70 @@ trait WordPress {
 	public static function get_current_time() {
 		return strtotime( current_time( 'mysql' ) );
 	}
+
+	/**
+	 * Handles the upload process to allow .txt and .json file types in WordPress.
+	 *
+	 * This function hooks into 'upload_mimes' and 'wp_check_filetype_and_ext'
+	 * to permit the upload of plain text (.txt) and JSON (.json) files via the media uploader.
+	 * It ensures the correct MIME types and file extensions are accepted.
+	 *
+	 * @return array Array of upload results, including file URL, path, and type, or error information.
+	 */
+	public static function handle_file_upload() {
+		// Add upload hooks.
+		add_filter( 'upload_mimes', [ __CLASS__, 'allow_txt_upload' ] );
+		add_filter( 'wp_check_filetype_and_ext', [ __CLASS__, 'filetype_and_ext' ], 10, 3 );
+
+		// Do the upload.
+		$file = isset( $_FILES['import-me'] ) ? wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] ) : '';
+
+		// Remove upload hooks.
+		remove_filter( 'upload_mimes', [ __CLASS__, 'allow_txt_upload' ] );
+		remove_filter( 'wp_check_filetype_and_ext', [ __CLASS__, 'filetype_and_ext' ], 10 );
+
+		return $file;
+	}
+
+	/**
+	 * Allow txt & json file upload.
+	 *
+	 * @param array $types Mime types keyed by the file extension regex corresponding to those types.
+	 *
+	 * @return array
+	 */
+	public static function allow_txt_upload( $types ) {
+		$types['json'] = 'application/json';
+		$types['txt']  = 'text/plain';
+
+		return $types;
+	}
+
+	/**
+	 * Filters the "real" file type of the given file.
+	 *
+	 * @param array  $types {
+	 *     Values for the extension, mime type, and corrected filename.
+	 *
+	 *     @type string|false $ext             File extension, or false if the file doesn't match a mime type.
+	 *     @type string|false $type            File mime type, or false if the file doesn't match a mime type.
+	 *     @type string|false $proper_filename File name with its correct extension, or false if it cannot be determined.
+	 * }
+	 * @param string $file                      Full path to the file.
+	 * @param string $filename                  The name of the file (may differ from $file due to
+	 *                                                $file being in a tmp directory).
+	 *
+	 * @return array
+	 */
+	public static function filetype_and_ext( $types, $file, $filename ) {
+		if ( false !== strpos( $filename, '.json' ) ) {
+			$types['ext']  = 'json';
+			$types['type'] = 'application/json';
+		} elseif ( false !== strpos( $filename, '.txt' ) ) {
+			$types['ext']  = 'txt';
+			$types['type'] = 'text/plain';
+		}
+
+		return $types;
+	}
 }

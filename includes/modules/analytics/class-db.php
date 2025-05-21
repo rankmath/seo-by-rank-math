@@ -395,7 +395,7 @@ class DB {
 
 			$data[] = $date;
 			$data[] = $row['query'];
-			$data[] = str_replace( Helper::get_home_url(), '', self::remove_hash( urldecode( $row['page'] ) ) );
+			$data[] = self::get_page( $row['page'] );
 			$data[] = $row['clicks'];
 			$data[] = $row['impressions'];
 			$data[] = $row['position'];
@@ -414,6 +414,36 @@ class DB {
 
 		// Run the query.  Returns number of affected rows.
 		return $wpdb->query( $wpdb->prepare( $sql, $data ) ); // phpcs:ignore
+	}
+
+	/**
+	 * Get page slug from full URL.
+	 *
+	 * @param  string $url Full URL to parse.
+	 * @return string Page path/slug with leading slash.
+	 */
+	public static function get_page( $url ) {
+		if ( empty( $url ) || ! is_string( $url ) ) {
+			return '';
+		}
+
+		$url  = urldecode( preg_replace( '/#.*$/', '', $url ) );
+		$host = wp_parse_url( $url, PHP_URL_HOST );
+		if ( ! $host ) {
+			return '';
+		}
+
+		$url = self::remove_hash( $url );
+
+		$url = str_replace( $host, '', $url );
+
+		// Remove ASCII domain.
+		$host_ascii = idn_to_ascii( $host );
+		$url        = str_replace( $host_ascii, '', $url );
+
+		$url = preg_replace( '#^https?://(www\.)?#i', '', $url );
+
+		return $url;
 	}
 
 	/**

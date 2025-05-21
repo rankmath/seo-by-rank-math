@@ -112,14 +112,7 @@ class Status extends Base {
 	 * @param string $view Current Page view.
 	 */
 	private function get_json_data( $view ) {
-		$hash = [
-			'version_control' => '\RankMath\Version_Control',
-			'tools'           => '\RankMath\Tools\Database_Tools',
-			'status'          => '\RankMath\Status\System_Status',
-			'import_export'   => '\RankMath\Admin\Import_Export',
-		];
-
-		$data = [
+		return [
 			'isAdvancedMode'           => Helper::is_advanced_mode(),
 			'isPluginActiveForNetwork' => Helper::is_plugin_active_for_network(),
 			'canUser'                  => [
@@ -128,14 +121,5 @@ class Status extends Base {
 				'installPlugins' => current_user_can( 'install_plugins' ),
 			],
 		];
-
-		if ( ! isset( $hash[ $view ] ) ) {
-			return $data;
-		}
-
-		return array_merge(
-			$data,
-			[ $view => $hash[ $view ]::get_json_data() ]
-		);
 	}
 }

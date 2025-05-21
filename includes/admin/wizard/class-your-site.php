@@ -10,7 +10,6 @@
 
 namespace RankMath\Wizard;
 
-use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 
@@ -20,116 +19,46 @@ defined( 'ABSPATH' ) || exit;
  * Step class.
  */
 class Your_Site implements Wizard_Step {
-
 	/**
-	 * Render step body.
+	 * Get Localized data to be used in the Compatibility step.
 	 *
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return void
+	 * @return array
 	 */
-	public function render( $wizard ) {
-		include_once $wizard->get_view( 'your-site' );
-	}
+	public static function get_localized_data() {
+		$displayname = self::get_site_display_name();
+		$data        = [
+			'site_type'              => self::get_default_site_type(),
+			'businessTypesChoices'   => Helper::choices_business_types(),
+			'business_type'          => Helper::get_settings( 'titles.local_business_type' ),
+			'website_name'           => Helper::get_settings( 'titles.website_name', $displayname ),
+			'website_alternate_name' => Helper::get_settings( 'titles.website_alternate_name' ),
+			'company_name'           => Helper::get_settings( 'titles.knowledgegraph_name', $displayname ),
+			'open_graph_image'       => Helper::get_settings( 'titles.open_graph_image' ),
+		];
 
-	/**
-	 * Render form for step.
-	 *
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return void
-	 */
-	public function form( $wizard ) {
-		$displayname = $this->get_site_display_name();
-		$wizard->cmb->add_field(
-			[
-				'id'      => 'site_type',
-				'type'    => 'select',
-				/* translators: sitename */
-				'name'    => sprintf( esc_html__( '%1$s is a&hellip;', 'rank-math' ), $displayname ),
-				'options' => $this->get_type_choices(),
-				'default' => $this->get_default_site_type(),
-			]
-		);
+		$company_logo = self::get_default_logo();
+		if ( $company_logo ) {
+			$data['company_logo']    = $company_logo;
+			$data['company_logo_id'] = attachment_url_to_postid( $company_logo );
+		}
 
-		$wizard->cmb->add_field(
-			[
-				'id'         => 'business_type',
-				'type'       => 'select',
-				'name'       => esc_html__( 'Business Type', 'rank-math' ),
-				'desc'       => esc_html__( 'Select the type that best describes your business. If you can\'t find one that applies exactly, use the generic "Organization" or "Local Business" types.', 'rank-math' ),
-				'options'    => Helper::choices_business_types(),
-				'attributes' => [
-					'data-s2'      => '',
-					'data-default' => Helper::get_settings( 'titles.local_business_type' ) ? '0' : '1',
-				],
-				'default'    => Helper::get_settings( 'titles.local_business_type' ),
-				'dep'        => $this->get_type_dependency(),
-			]
-		);
+		$open_graph_image = Helper::get_settings( 'titles.open_graph_image' );
+		if ( $open_graph_image ) {
+			$data['open_graph_image']    = $open_graph_image;
+			$data['open_graph_image_id'] = attachment_url_to_postid( $open_graph_image );
+		}
 
-		$wizard->cmb->add_field(
-			[
-				'id'      => 'website_name',
-				'type'    => 'text',
-				'name'    => esc_html__( 'Website Name', 'rank-math' ),
-				'default' => Helper::get_settings( 'titles.website_name', $displayname ),
-				'desc'    => esc_html__( 'Enter the name of your site to appear in search results.', 'rank-math' ),
-			]
-		);
-
-		$wizard->cmb->add_field(
-			[
-				'id'      => 'website_alternate_name',
-				'type'    => 'text',
-				'default' => Helper::get_settings( 'titles.website_alternate_name' ),
-				'name'    => esc_html__( 'Website Alternate Name', 'rank-math' ),
-				'desc'    => esc_html__( 'An alternate version of your site name (for example, an acronym or shorter name).', 'rank-math' ),
-			]
-		);
-
-		$wizard->cmb->add_field(
-			[
-				'id'      => 'company_name',
-				'type'    => 'text',
-				'name'    => esc_html__( 'Person/Organization Name', 'rank-math' ),
-				'desc'    => esc_html__( 'Your name or company name intended to feature in Google\'s Knowledge Panel.', 'rank-math' ),
-				'default' => Helper::get_settings( 'titles.knowledgegraph_name', $displayname ),
-			]
-		);
-
-		$wizard->cmb->add_field(
-			[
-				'id'      => 'company_logo',
-				'type'    => 'file',
-				'name'    => esc_html__( 'Logo for Google', 'rank-math' ),
-				'default' => $this->get_default_logo(),
-				'desc'    => __( '<strong>Min Size: 112Χ112px</strong>.<br />A squared image is preferred by the search engines.', 'rank-math' ),
-				'options' => [ 'url' => false ],
-			]
-		);
-
-		$wizard->cmb->add_field(
-			[
-				'id'      => 'open_graph_image',
-				'type'    => 'file',
-				'name'    => esc_html__( 'Default Social Share Image', 'rank-math' ),
-				'desc'    => __( 'When a featured image or an OpenGraph Image is not set for individual posts/pages/CPTs, this image will be used as a fallback thumbnail when your post is shared on Facebook. <strong>The recommended image size is 1200 x 630 pixels.</strong>', 'rank-math' ),
-				'options' => [ 'url' => false ],
-				'default' => Helper::get_settings( 'titles.open_graph_image' ),
-			]
-		);
+		return $data;
 	}
 
 	/**
 	 * Save handler for step.
 	 *
-	 * @param array  $values Values to save.
-	 * @param object $wizard Wizard class instance.
+	 * @param array $values Values to save.
 	 *
 	 * @return bool
 	 */
-	public function save( $values, $wizard ) {
+	public static function save( $values ) {
 		$settings = wp_parse_args(
 			rank_math()->settings->all_raw(),
 			[
@@ -151,7 +80,7 @@ class Your_Site implements Wizard_Step {
 		// Save these settings.
 		$functions = [ 'save_local_seo', 'save_open_graph', 'save_post_types', 'save_taxonomies' ];
 		foreach ( $functions as $function ) {
-			$settings = $this->$function( $settings, $values );
+			$settings = self::$function( $settings, $values );
 		}
 
 		$business_type = [ 'news', 'business', 'webshop', 'otherbusiness' ];
@@ -162,7 +91,7 @@ class Your_Site implements Wizard_Step {
 			$modules['role-manager'] = 'on';
 		}
 
-		set_transient( '_rank_math_site_type', $values['site_type'] );
+		set_transient( '_rank_math_site_type', sanitize_text_field( $values['site_type'] ) );
 		Helper::update_modules( $modules );
 		Helper::update_all_settings( null, $settings['titles'], null );
 
@@ -177,14 +106,14 @@ class Your_Site implements Wizard_Step {
 	 *
 	 * @return array
 	 */
-	private function save_local_seo( $settings, $values ) {
+	private static function save_local_seo( $settings, $values ) {
 		switch ( $values['site_type'] ) {
 			case 'blog':
 			case 'portfolio':
 				$settings['titles']['knowledgegraph_type']    = 'person';
-				$settings['titles']['knowledgegraph_name']    = $values['company_name'];
-				$settings['titles']['knowledgegraph_logo']    = $values['company_logo'];
-				$settings['titles']['knowledgegraph_logo_id'] = $values['company_logo_id'];
+				$settings['titles']['knowledgegraph_name']    = sanitize_text_field( $values['company_name'] );
+				$settings['titles']['knowledgegraph_logo']    = sanitize_url( $values['company_logo'] );
+				$settings['titles']['knowledgegraph_logo_id'] = absint( $values['company_logo_id'] );
 				break;
 
 			case 'news':
@@ -192,15 +121,15 @@ class Your_Site implements Wizard_Step {
 			case 'business':
 			case 'otherbusiness':
 				$settings['titles']['knowledgegraph_type']    = 'company';
-				$settings['titles']['knowledgegraph_name']    = $values['company_name'];
-				$settings['titles']['knowledgegraph_logo']    = $values['company_logo'];
-				$settings['titles']['local_business_type']    = $values['business_type'];
-				$settings['titles']['knowledgegraph_logo_id'] = $values['company_logo_id'];
+				$settings['titles']['knowledgegraph_name']    = sanitize_text_field( $values['company_name'] );
+				$settings['titles']['knowledgegraph_logo']    = sanitize_url( $values['company_logo'] );
+				$settings['titles']['local_business_type']    = sanitize_text_field( $values['business_type'] );
+				$settings['titles']['knowledgegraph_logo_id'] = absint( $values['company_logo_id'] );
 				break;
 
 			case 'otherpersonal':
 				$settings['titles']['knowledgegraph_type'] = 'person';
-				$settings['titles']['knowledgegraph_name'] = $values['company_name'];
+				$settings['titles']['knowledgegraph_name'] = sanitize_text_field( $values['company_name'] );
 				break;
 		}
 
@@ -209,7 +138,7 @@ class Your_Site implements Wizard_Step {
 				continue;
 			}
 
-			$settings['titles'][ $key ] = $values[ $key ];
+			$settings['titles'][ $key ] = sanitize_text_field( $values[ $key ] );
 		}
 
 		return $settings;
@@ -223,10 +152,10 @@ class Your_Site implements Wizard_Step {
 	 *
 	 * @return array
 	 */
-	private function save_open_graph( $settings, $values ) {
+	private static function save_open_graph( $settings, $values ) {
 		if ( ! empty( $values['open_graph_image_id'] ) ) {
-			$settings['titles']['open_graph_image']    = $values['open_graph_image'];
-			$settings['titles']['open_graph_image_id'] = $values['open_graph_image_id'];
+			$settings['titles']['open_graph_image']    = sanitize_url( $values['open_graph_image'] );
+			$settings['titles']['open_graph_image_id'] = absint( $values['open_graph_image_id'] );
 		}
 
 		if ( empty( $values['company_logo_id'] ) ) {
@@ -245,7 +174,7 @@ class Your_Site implements Wizard_Step {
 	 *
 	 * @return array
 	 */
-	private function save_post_types( $settings, $values ) {
+	private static function save_post_types( $settings, $values ) {
 		foreach ( Helper::get_accessible_post_types() as $post_type => $label ) {
 			if ( 'attachment' === $post_type ) {
 				continue;
@@ -265,7 +194,7 @@ class Your_Site implements Wizard_Step {
 	 *
 	 * @return array
 	 */
-	private function save_taxonomies( $settings, $values ) {
+	private static function save_taxonomies( $settings, $values ) {
 		$taxonomies = Admin_Helper::get_taxonomies_options();
 		array_shift( $taxonomies );
 		foreach ( $taxonomies as $taxonomy => $label ) {
@@ -280,7 +209,7 @@ class Your_Site implements Wizard_Step {
 	 *
 	 * @return string
 	 */
-	protected function get_site_display_name() {
+	protected static function get_site_display_name() {
 		$siteurl  = get_bloginfo( 'url' );
 		$sitename = get_bloginfo( 'title' );
 
@@ -292,7 +221,7 @@ class Your_Site implements Wizard_Step {
 	 *
 	 * @return string
 	 */
-	private function get_default_logo() {
+	private static function get_default_logo() {
 		if ( defined( 'MTS_THEME_NAME' ) && MTS_THEME_NAME ) {
 			$theme_options = get_option( MTS_THEME_NAME );
 			if ( isset( $theme_options['mts_logo'] ) ) {
@@ -312,7 +241,7 @@ class Your_Site implements Wizard_Step {
 	 *
 	 * @return string
 	 */
-	private function get_default_site_type() {
+	private static function get_default_site_type() {
 		$default_type = get_transient( '_rank_math_site_type' );
 		return $default_type ? $default_type : ( class_exists( 'Easy_Digital_Downloads' ) || class_exists( 'WooCommerce' ) ? 'webshop' : 'blog' );
 	}

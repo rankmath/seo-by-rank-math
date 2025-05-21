@@ -20,59 +20,42 @@ defined( 'ABSPATH' ) || exit;
 class Compatibility implements Wizard_Step {
 
 	/**
-	 * Render step body.
+	 * Get Localized data to be used in the Compatibility step.
 	 *
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return void
+	 * @return array
 	 */
-	public function render( $wizard ) {
-		include_once $wizard->get_view( 'compatibility' );
-	}
-
-	/**
-	 * Render form for step.
-	 *
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return void
-	 */
-	public function form( $wizard ) {
-		$wizard->cmb->add_field(
-			[
-				'id'      => 'setup_mode',
-				'name'    => '',
-				'type'    => 'radio',
-				'options' => [
-					/* translators: Option Description */
-					'easy'     => '<div class="rank-math-mode-title">' . sprintf( __( 'Easy %s', 'rank-math' ), '</div><p>' . __( 'For websites where you only want to change the basics and let Rank Math do most of the heavy lifting. Most settings are set to default as per industry best practices. One just has to set it and forget it.', 'rank-math' ) . '</p>' ),
-					/* translators: Option Description */
-					'advanced' => '<div class="rank-math-mode-title">' . sprintf( __( 'Advanced %s', 'rank-math' ), '</div><p>' . __( 'For the advanced users who want to control every SEO aspect of the website. You are offered options to change everything and have full control over the website’s SEO.', 'rank-math' ) . '</p>' ),
-					/* translators: Option Description */
-					'custom'   => '<div class="rank-math-mode-title">' . sprintf( __( 'Custom Mode %s', 'rank-math' ), '</div><p class="rank-math-mode-description">' . __( 'Select this if you have a custom Rank Math settings file you want to use.', 'rank-math' ) . '</p>' ),
-				],
-				'default' => Helper::get_settings( 'general.setup_mode', 'advanced' ),
-				'classes' => ! defined( 'RANK_MATH_PRO_FILE' ) ? 'rank-math-setup-mode is-free' : 'rank-math-setup-mode',
-				'desc'    => '<strong class="note">' . __( 'Note', 'rank-math' ) . '</strong>' . __( 'You can easily switch between modes at any point.', 'rank-math' ),
-			]
-		);
+	public static function get_localized_data() {
+		$php_version = phpversion();
+		return [
+			'conflictingPlugins'    => self::get_conflicting_plugins(),
+			'phpVersion'            => phpversion(),
+			'phpVersionOk'          => version_compare( $php_version, rank_math()->php_version, '>' ),
+			'phpVersionRecommended' => version_compare( $php_version, '7.4', '<' ),
+			'extensions'            => [
+				'dom'        => extension_loaded( 'dom' ),
+				'simpleXml'  => extension_loaded( 'SimpleXML' ),
+				'image'      => extension_loaded( 'gd' ) || extension_loaded( 'imagick' ),
+				'mbString'   => extension_loaded( 'mbstring' ),
+				'openSsl'    => extension_loaded( 'openssl' ),
+				'base64Func' => function_exists( 'base64_encode' ) && function_exists( 'base64_decode' ) && (bool) base64_decode( base64_encode( '1' ) ),  // phpcs:ignore -- Verified as safe usage.
+			],
+		];
 	}
 
 	/**
 	 * Save handler for step.
 	 *
-	 * @param array  $values Values to save.
-	 * @param object $wizard Wizard class instance.
+	 * @param array $values Values to save.
 	 *
 	 * @return bool
 	 */
-	public function save( $values, $wizard ) {
+	public static function save( $values ) {
 		$settings = wp_parse_args(
 			rank_math()->settings->all_raw(),
 			[ 'general' => '' ]
 		);
 
-		$settings['general']['setup_mode'] = ! empty( $values['setup_mode'] ) ? $values['setup_mode'] : 'easy';
+		$settings['general']['setup_mode'] = ! empty( $values['setup_mode'] ) ? sanitize_text_field( $values['setup_mode'] ) : 'easy';
 
 		if ( 'custom' === $settings['general']['setup_mode'] ) {
 			// Don't change, use custom imported value.
@@ -89,10 +72,10 @@ class Compatibility implements Wizard_Step {
 	 *
 	 * @return array
 	 */
-	private function get_conflicting_plugins() {
+	private static function get_conflicting_plugins() {
 		$plugins_found       = [];
 		$active_plugins      = get_option( 'active_plugins' );
-		$conflicting_plugins = $this->get_conflicting_plugins_list();
+		$conflicting_plugins = self::get_conflicting_plugins_list();
 		foreach ( $conflicting_plugins as $plugin_slug => $plugin_name ) {
 			if ( in_array( $plugin_slug, $active_plugins, true ) !== false ) {
 				$plugins_found[ $plugin_slug ] = $plugin_name;
@@ -107,7 +90,7 @@ class Compatibility implements Wizard_Step {
 	 *
 	 * @return array List of plugins in path => name format.
 	 */
-	private function get_conflicting_plugins_list() {
+	private static function get_conflicting_plugins_list() {
 
 		$plugins = [
 			'2-click-socialmedia-buttons/2-click-socialmedia-buttons.php' => '2 Click Social Media Buttons.',
@@ -156,8 +139,8 @@ class Compatibility implements Wizard_Step {
 			'remove-category-url/remove-category-url.php'  => 'Remove Category URL',
 		];
 
-		$plugins = Helper::is_module_active( 'redirections' ) ? array_merge( $plugins, $this->get_redirection_conflicting_plugins() ) : $plugins;
-		$plugins = Helper::is_module_active( 'sitemap' ) ? array_merge( $plugins, $this->get_sitemap_conflicting_plugins() ) : $plugins;
+		$plugins = Helper::is_module_active( 'redirections' ) ? array_merge( $plugins, self::get_redirection_conflicting_plugins() ) : $plugins;
+		$plugins = Helper::is_module_active( 'sitemap' ) ? array_merge( $plugins, self::get_sitemap_conflicting_plugins() ) : $plugins;
 
 		return $plugins;
 	}
@@ -167,7 +150,7 @@ class Compatibility implements Wizard_Step {
 	 *
 	 * @return array
 	 */
-	private function get_redirection_conflicting_plugins() {
+	private static function get_redirection_conflicting_plugins() {
 		return [
 			'redirection/redirection.php' => 'Redirection',
 		];
@@ -178,7 +161,7 @@ class Compatibility implements Wizard_Step {
 	 *
 	 * @return array
 	 */
-	private function get_sitemap_conflicting_plugins() {
+	private static function get_sitemap_conflicting_plugins() {
 		return [
 			'google-sitemap-plugin/google-sitemap-plugin.php' => 'Google Sitemap (BestWebSoft).',
 			'xml-sitemaps/xml-sitemaps.php'                => 'XML Sitemaps (Denis de Bernardy and Mike Koepke).',

@@ -16,32 +16,19 @@ defined( 'ABSPATH' ) || exit;
  * Wizard step contract.
  */
 interface Wizard_Step {
-
 	/**
-	 * Render step body.
+	 * Localized data to be used in the step.
 	 *
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return void
+	 * @return array
 	 */
-	public function render( $wizard );
-
-	/**
-	 * Render form for step.
-	 *
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return void
-	 */
-	public function form( $wizard );
+	public static function get_localized_data();
 
 	/**
 	 * Save handler for step.
 	 *
-	 * @param array  $values Values to save.
-	 * @param object $wizard Wizard class instance.
+	 * @param array $values Values to save.
 	 *
 	 * @return bool
 	 */
-	public function save( $values, $wizard );
+	public static function save( $values );
 }

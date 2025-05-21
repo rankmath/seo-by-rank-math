@@ -310,6 +310,41 @@ trait Conditional {
 	}
 
 	/**
+	 * Checks if WP-Cron is enabled and functional.
+	 *
+	 * @return bool True if WP-Cron is usable; false otherwise.
+	 */
+	public static function is_cron_enabled() {
+		// Check if WP-Cron is disabled in the wp-config.php file.
+		if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) {
+			return false;
+		}
+
+		// Early bail if usable cron transient is set to true.
+		if ( get_transient( 'rank_math_wp_cron_usable' ) ) {
+			return true;
+		}
+
+		// Attempt a loopback request to wp-cron.php to check if it is blocked by the server.
+		$response = wp_remote_post(
+			site_url( 'wp-cron.php' ),
+			[
+				'timeout'   => 5,
+				'blocking'  => true,
+				'sslverify' => apply_filters( 'https_local_ssl_verify', true ),
+			]
+		);
+
+		if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
+			return false;
+		}
+
+		set_transient( 'rank_math_wp_cron_usable', 1, HOUR_IN_SECONDS );
+
+		return true;
+	}
+
+	/**
 	 * Is auto-saving
 	 *
 	 * @return bool Returns true when the page is loaded for auto-saving.

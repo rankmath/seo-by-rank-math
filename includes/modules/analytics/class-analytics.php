@@ -95,6 +95,7 @@ class Analytics extends Base {
 			$this->filter( 'rank_math/settings/general', 'add_settings' );
 			$this->action( 'admin_init', 'refresh_token_missing', 25 );
 			$this->action( 'admin_init', 'cancel_fetch', 5 );
+			$this->action( 'wp_helpers_notification_dismissed', 'notice_dismissible' );
 
 			new OAuth();
 		}
@@ -125,6 +126,8 @@ class Analytics extends Base {
 		if ( ! Helper::is_site_connected() || ! Authentication::is_authorized() ) {
 			return;
 		}
+
+		$this->maybe_add_cron_notice();
 
 		$tokens = Authentication::tokens();
 		if ( ! empty( $tokens['refresh_token'] ) ) {
@@ -214,6 +217,54 @@ class Analytics extends Base {
 	}
 
 	/**
+	 * Store a value in the options table when CRON notice is dismissed to prevent the site from showing it again.
+	 *
+	 * @param string $notification_id Notification id.
+	 */
+	public function notice_dismissible( $notification_id ) {
+		if ( 'analytics_cron_notice' === $notification_id ) {
+			update_option( 'rank_math_analytics_cron_notice_dismissed', true, false );
+		}
+	}
+
+	/**
+	 * Add Notice on Analytics page when CRON is not working on the site.
+	 */
+	private function maybe_add_cron_notice() {
+		if ( ! $this->page->is_current_page() || get_option( 'rank_math_analytics_cron_notice_dismissed' ) ) {
+			return;
+		}
+
+		if ( Helper::is_cron_enabled() ) {
+			Helper::remove_notification( 'analytics_cron_notice' );
+			return;
+		}
+
+		$message = sprintf(
+			/* translators: constant value */
+			esc_html__( 'Loopback requests to %s are blocked. This may prevent scheduled tasks from running. Please check your server configuration.', 'rank-math' ),
+			'<code>wp-cron.php</code>'
+		);
+		if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) {
+			$message = sprintf(
+				/* translators: constant value */
+				esc_html__( 'WordPress\'s internal cron system is disabled via %s. Please ensure a real cron job is set up, otherwise scheduled features like Analytics may not work correctly.', 'rank-math' ),
+				'<code>DISABLE_WP_CRON</code>'
+			);
+		}
+
+		// Show admin notification.
+		Helper::add_notification(
+			$message,
+			[
+				'type'   => 'warning',
+				'id'     => 'analytics_cron_notice',
+				'screen' => 'rank-math_page_rank-math-analytics',
+			]
+		);
+	}
+
+	/**
 	 * Convert an interval of seconds into a two part human friendly string.
 	 *
 	 * The WordPress human_time_diff() function only calculates the time difference to one degree, meaning
@@ -271,7 +322,8 @@ class Analytics extends Base {
 
 		$output = '';
 
-		for ( $time_period_index = 0, $periods_included = 0, $seconds_remaining = $interval; $time_period_index < count( $time_periods ) && $seconds_remaining > 0 && $periods_included < $periods_to_include; $time_period_index++ ) { // phpcs:ignore
+		$time_period_count = count( $time_periods );
+		for ( $time_period_index = 0, $periods_included = 0, $seconds_remaining = $interval; $time_period_index < $time_period_count && $seconds_remaining > 0 && $periods_included < $periods_to_include; $time_period_index++ ) {
 
 			$periods_in_interval = floor( $seconds_remaining / $time_periods[ $time_period_index ]['seconds'] );
 
@@ -279,9 +331,9 @@ class Analytics extends Base {
 				if ( ! empty( $output ) ) {
 					$output .= ' ';
 				}
-				$output .= sprintf( _n( $time_periods[ $time_period_index ]['names'][0], $time_periods[ $time_period_index ]['names'][1], $periods_in_interval, 'rank-math' ), $periods_in_interval ); // phpcs:ignore
+				$output            .= sprintf( _n( $time_periods[ $time_period_index ]['names'][0], $time_periods[ $time_period_index ]['names'][1], $periods_in_interval, 'rank-math' ), $periods_in_interval );
 				$seconds_remaining -= $periods_in_interval * $time_periods[ $time_period_index ]['seconds'];
-				$periods_included++;
+				++$periods_included;
 			}
 		}
 
@@ -342,7 +394,7 @@ class Analytics extends Base {
 			true
 		);
 
-		wp_set_script_translations( 'rank-math-analytics', 'rank-math', plugin_dir_path(__FILE__) . 'languages/' );
+		wp_set_script_translations( 'rank-math-analytics', 'rank-math', plugin_dir_path( __FILE__ ) . 'languages/' );
 
 		$this->action( 'admin_footer', 'dequeue_cmb2' );
 
@@ -406,11 +458,11 @@ class Analytics extends Base {
 					'position'        => true,
 					'positionHistory' => true,
 				],
-				'indexing' => [
-					'index_verdict'            => true,
-					'indexing_state'           => true,
-					'rich_results_items'       => true,
-					'page_fetch_state'         => false,
+				'indexing'        => [
+					'index_verdict'      => true,
+					'indexing_state'     => true,
+					'rich_results_items' => true,
+					'page_fetch_state'   => false,
 				],
 			]
 		);

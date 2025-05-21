@@ -16,6 +16,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Traits\Ajax;
 use RankMath\Admin\Options;
 use RankMath\Helpers\Param;
+use RankMath\Helpers\Sitepress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -316,10 +317,12 @@ class Instant_Indexing extends Base {
 			}
 		}
 
+		Sitepress::get()->remove_home_url_filter();
 		$url = get_permalink( $post );
 		if ( 'trash' === $post->post_status ) {
 			$url = $this->previous_post_permalinks[ $post_id ];
 		}
+		Sitepress::get()->restore_home_url_filter();
 
 		/**
 		 * Filter the URL to be submitted to IndexNow.

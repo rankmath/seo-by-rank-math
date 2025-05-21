@@ -34,7 +34,7 @@ class Import_Export_Settings {
 	 * Handle import.
 	 */
 	public static function import() {
-		$file = self::has_valid_file();
+		$file = Helper::handle_file_upload();
 		if ( isset( $file['error'] ) ) {
 			return [
 				'error' => esc_html__( 'Settings could not be imported:', 'rank-math' ) . ' ' . $file['error'],
@@ -69,68 +69,6 @@ class Import_Export_Settings {
 		return [
 			'error' => esc_html__( 'No settings found to be imported.', 'rank-math' ),
 		];
-	}
-
-	/**
-	 * Import has valid file.
-	 *
-	 * @return mixed
-	 */
-	private static function has_valid_file() {
-		// Add upload hooks.
-		add_filter( 'upload_mimes', [ __CLASS__, 'allow_txt_upload' ] );
-		add_filter( 'wp_check_filetype_and_ext', [ __CLASS__, 'filetype_and_ext' ], 10, 3 );
-
-		// Do the upload.
-		$file = isset( $_FILES['import-me'] ) ? wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] ) : '';
-
-		// Remove upload hooks.
-		remove_filter( 'upload_mimes', [ __CLASS__, 'allow_txt_upload' ] );
-		remove_filter( 'wp_check_filetype_and_ext', [ __CLASS__, 'filetype_and_ext' ], 10 );
-
-		return $file;
-	}
-
-	/**
-	 * Filters the "real" file type of the given file.
-	 *
-	 * @param array  $types {
-	 *     Values for the extension, mime type, and corrected filename.
-	 *
-	 *     @type string|false $ext             File extension, or false if the file doesn't match a mime type.
-	 *     @type string|false $type            File mime type, or false if the file doesn't match a mime type.
-	 *     @type string|false $proper_filename File name with its correct extension, or false if it cannot be determined.
-	 * }
-	 * @param string $file                      Full path to the file.
-	 * @param string $filename                  The name of the file (may differ from $file due to
-	 *                                                $file being in a tmp directory).
-	 *
-	 * @return array
-	 */
-	public static function filetype_and_ext( $types, $file, $filename ) {
-		if ( false !== strpos( $filename, '.json' ) ) {
-			$types['ext']  = 'json';
-			$types['type'] = 'application/json';
-		} elseif ( false !== strpos( $filename, '.txt' ) ) {
-			$types['ext']  = 'txt';
-			$types['type'] = 'text/plain';
-		}
-
-		return $types;
-	}
-
-	/**
-	 * Allow txt & json file upload.
-	 *
-	 * @param array $types Mime types keyed by the file extension regex corresponding to those types.
-	 *
-	 * @return array
-	 */
-	public static function allow_txt_upload( $types ) {
-		$types['json'] = 'application/json';
-		$types['txt']  = 'text/plain';
-
-		return $types;
 	}
 
 	/**

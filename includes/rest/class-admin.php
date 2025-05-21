@@ -56,17 +56,6 @@ class Admin extends WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
-			'/autoUpdate',
-			[
-				'methods'             => WP_REST_Server::EDITABLE,
-				'callback'            => [ $this, 'auto_update' ],
-				'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
-				'args'                => $this->get_auto_update_args(),
-			]
-		);
-
-		register_rest_route(
-			$this->namespace,
 			'/toolsAction',
 			[
 				'methods'             => WP_REST_Server::EDITABLE,
@@ -145,25 +134,6 @@ class Admin extends WP_REST_Controller {
 		Helper::update_modules( [ $module => $state ] );
 		$this->maybe_delete_rewrite_rules( $module );
 		do_action( 'rank_math/module_changed', $module, $state );
-		return true;
-	}
-
-	/**
-	 * Enable Auto update.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function auto_update( WP_REST_Request $request ) {
-		$field = $request->get_param( 'key' );
-		if ( 'enable_auto_update' !== $field ) {
-			return false;
-		}
-
-		$value = 'true' === $request->get_param( 'value' ) ? 'on' : 'off';
-		Helper::toggle_auto_update_setting( $value );
-
 		return true;
 	}
 
@@ -378,32 +348,6 @@ class Admin extends WP_REST_Controller {
 				'type'              => 'object',
 				'required'          => true,
 				'description'       => esc_html__( 'Post scores', 'rank-math' ),
-				'sanitize_callback' => 'rest_sanitize_request_arg',
-				'validate_callback' => 'rest_validate_request_arg',
-			],
-		];
-	}
-
-	/**
-	 * Get save module endpoint arguments.
-	 *
-	 * @return array
-	 */
-	private function get_auto_update_args() {
-		return [
-			'key'   => [
-				'type'              => 'string',
-				'required'          => true,
-				'description'       => esc_html__( 'Setting key', 'rank-math' ),
-				'enum'              => [ 'enable_auto_update' ],
-				'sanitize_callback' => 'rest_sanitize_request_arg',
-				'validate_callback' => 'rest_validate_request_arg',
-			],
-			'value' => [
-				'type'              => 'string',
-				'required'          => true,
-				'enum'              => [ 'true', 'false' ],
-				'description'       => esc_html__( 'Setting value', 'rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => 'rest_validate_request_arg',
 			],

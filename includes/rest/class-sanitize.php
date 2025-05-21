@@ -67,6 +67,45 @@ class Sanitize {
 			case 'rank_math_canonical_url':
 				$sanitized_value = esc_url_raw( $value );
 				break;
+			case 'rank_math_snippet_job_description':
+				$sanitized_value = wp_kses(
+					$value,
+					[
+						'br' => [],
+						'p'  => [],
+						'ul' => [],
+						'li' => [],
+					]
+				);
+				break;
+			case 'rank_math_snippet_answer':
+				$sanitized_value = wp_kses(
+					$value,
+					[
+						'h1'     => [],
+						'h2'     => [],
+						'h3'     => [],
+						'h4'     => [],
+						'h5'     => [],
+						'h6'     => [],
+						'br'     => [],
+						'ol'     => [],
+						'ul'     => [],
+						'li'     => [],
+						'a'      => [
+							'href'   => [],
+							'target' => [],
+							'rel'    => [],
+						],
+						'p'      => [],
+						'b'      => [],
+						'i'      => [],
+						'div'    => [],
+						'strong' => [],
+						'em'     => [],
+					]
+				);
+				break;
 			default:
 				$sanitized_value = is_array( $value ) ? $this->loop_sanitize( $value ) : CMB2::sanitize_textfield( $value );
 		}
@@ -96,9 +135,20 @@ class Sanitize {
 	 */
 	public function loop_sanitize( $values, $method = 'sanitize' ) {
 		$sanitized_value = [];
+		$type            = $values['@type'] ?? '';
 
 		foreach ( $values  as $key => $value ) {
-			$sanitized_value[ CMB2::sanitize_textfield( $key ) ] = is_array( $value ) ? $this->loop_sanitize( $value, $method ) : $this->$method( $key, $value );
+			$field_id = $key;
+
+			if ( 'Answer' === $type && 'text' === $key ) {
+				$field_id = 'rank_math_snippet_answer';
+			}
+
+			if ( 'JobPosting' === $type && 'description' === $key ) {
+				$field_id = 'rank_math_snippet_job_description';
+			}
+
+			$sanitized_value[ CMB2::sanitize_textfield( $key ) ] = is_array( $value ) ? $this->loop_sanitize( $value, $method ) : $this->$method( $field_id, $value );
 		}
 
 		return $sanitized_value;

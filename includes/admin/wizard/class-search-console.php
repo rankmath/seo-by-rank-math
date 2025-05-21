@@ -10,13 +10,16 @@
 
 namespace RankMath\Wizard;
 
-use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Helpers\Param;
-use RankMath\Analytics\Workflow\Workflow;
+use RankMath\Admin\Admin_Helper;
+use RankMath\Google\Authentication;
+use RankMath\Google\Permissions;
+use RankMath\Analytics\Email_Reports;
+use RankMath\Analytics\Workflow\Objects;
 use RankMath\Analytics\Workflow\Console;
 use RankMath\Analytics\Workflow\Inspections;
-use RankMath\Analytics\Workflow\Objects;
+
 
 defined( 'ABSPATH' ) || exit;
 
@@ -26,86 +29,112 @@ defined( 'ABSPATH' ) || exit;
 class Search_Console implements Wizard_Step {
 
 	/**
-	 * Render step body.
+	 * Get Localized data to be used in the Analytics step.
 	 *
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return void
+	 * @return array
 	 */
-	public function render( $wizard ) {
-		?>
-		<header>
-			<h1><?php esc_html_e( 'Connect Google&trade; Services', 'rank-math' ); ?> </h1>
-			<p>
-				<?php
-				/* translators: Link to How to Setup Google Search Console KB article */
-				printf( esc_html__( 'Rank Math automates everything, use below button to connect your site with Google Search Console and Google Analytics. It will verify your site and submit sitemaps automatically. %s', 'rank-math' ), '<a href="' . esc_url( KB::get( 'help-analytics', 'SW Analytics Step Description' ) ) . '" target="_blank">' . esc_html__( 'Read more about it here.', 'rank-math' ) . '</a>' );
-				?>
-			</p>
-		</header>
-
-		<?php $wizard->cmb->show_form(); ?>
-
-		<footer class="form-footer wp-core-ui rank-math-ui">
-			<?php $wizard->get_skip_link(); ?>
-			<button type="submit" class="button button-primary"><?php esc_html_e( 'Save and Continue', 'rank-math' ); ?></button>
-		</footer>
-		<?php
-	}
-
-	/**
-	 * Render form for step.
-	 *
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return void
-	 */
-	public function form( $wizard ) {
-		$wizard->cmb->add_field(
+	public static function get_localized_data() {
+		$all_services = get_option(
+			'rank_math_analytics_all_services',
 			[
-				'id'   => 'search_console_ui',
-				'type' => 'raw',
-				'file' => __DIR__ . '/views/search-console-ui.php',
+				'isVerified'           => '',
+				'inSearchConsole'      => '',
+				'hasSitemap'           => '',
+				'hasAnalytics'         => '',
+				'hasAnalyticsProperty' => '',
+				'homeUrl'              => '',
+				'sites'                => '',
+				'accounts'             => [],
+				'adsenseAccounts'      => [],
 			]
 		);
+		$analytics    = wp_parse_args(
+			get_option( 'rank_math_google_analytic_options' ),
+			[
+				'adsense_id'       => '',
+				'account_id'       => '',
+				'property_id'      => '',
+				'view_id'          => '',
+				'measurement_id'   => '',
+				'stream_name'      => '',
+				'country'          => 'all',
+				'install_code'     => false,
+				'anonymize_ip'     => false,
+				'local_ga_js'      => false,
+				'exclude_loggedin' => false,
+			]
+		);
+
+		$page         = Param::get( 'page', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
+		$page         = in_array( $page, [ 'rank-math-options-general', 'rank-math-analytics' ], true ) ? 'rank-math-options-general' : 'rank-math-wizard&step=analytics';
+		$activate_url = Admin_Helper::get_activate_url( admin_url( 'admin.php?analytics=1&page=' . $page ) );
+
+		$profile = wp_parse_args(
+			get_option( 'rank_math_google_analytic_profile' ),
+			[
+				'profile'             => '',
+				'country'             => 'all',
+				'enable_index_status' => false,
+				'sites'               => $all_services['sites'],
+			]
+		);
+
+		return [
+			'isSiteConnected'        => Helper::is_site_connected(),
+			'isAuthorized'           => Authentication::is_authorized(),
+			'isSiteUrlValid'         => Admin_Helper::is_site_url_valid(),
+			'hasConsolePermission'   => Permissions::has_console(),
+			'hasAnalyticsPermission' => Permissions::has_analytics(),
+			'hasAdsensePermission'   => Permissions::has_adsense(),
+			'activateUrl'            => $activate_url,
+			'authUrl'                => Authentication::get_auth_url(),
+			'reconnectGoogleUrl'     => wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ),
+			'showEmailReports'       => ! Email_Reports::are_fields_hidden(),
+			'searchConsole'          => $profile,
+			'console_email_reports'  => Helper::get_settings( 'general.console_email_reports' ),
+			'analyticsData'          => $analytics,
+			'allServices'            => $all_services,
+		];
 	}
 
 	/**
 	 * Save handler for step.
 	 *
-	 * @param array  $values Values to save.
-	 * @param object $wizard Wizard class instance.
+	 * @param array $values Values to save.
 	 *
 	 * @return bool
 	 */
-	public function save( $values, $wizard ) {
+	public static function save( $values ) {
 		$settings = rank_math()->settings->all_raw();
 
-		$settings['general']['console_email_reports'] = Param::post( 'console_email_reports' );
+		$settings['general']['console_email_reports'] = $values['console_email_reports'] ? 'on' : 'off';
 
 		Helper::update_all_settings( $settings['general'], null, null );
 
 		// For Search console.
+		$search_console_data = $values['searchConsole'];
+
 		$value = [
-			'country'             => Param::post( 'site-console-country' ),
-			'profile'             => Param::post( 'site-console-profile' ),
-			'enable_index_status' => Param::post( 'enable-index-status' ),
+			'country'             => sanitize_text_field( $search_console_data['country'] ),
+			'profile'             => sanitize_text_field( $search_console_data['profile'] ),
+			'enable_index_status' => sanitize_text_field( $search_console_data['country'] ),
 		];
 		update_option( 'rank_math_google_analytic_profile', $value );
 
 		// For Analytics.
+		$analytics_data = $values['analyticsData'];
 		$analytic_value = [
-			'adsense_id'       => Param::post( 'site-adsense-account' ),
-			'account_id'       => Param::post( 'site-analytics-account' ),
-			'property_id'      => Param::post( 'site-analytics-property' ),
-			'view_id'          => Param::post( 'site-analytics-view' ),
-			'measurement_id'   => Param::post( 'measurementID' ),
-			'stream_name'      => Param::post( 'streamName' ),
-			'country'          => Param::post( 'site-analytics-country' ),
-			'install_code'     => 'on' === Param::post( 'install-code' ) ? true : false,
-			'anonymize_ip'     => 'on' === Param::post( 'anonymize-ip' ) ? true : false,
-			'local_ga_js'      => 'on' === Param::post( 'local-ga-js' ) ? true : false,
-			'exclude_loggedin' => 'on' === Param::post( 'exclude-loggedin' ) ? true : false,
+			'adsense_id'       => sanitize_text_field( $analytics_data['adsense_id'] ),
+			'account_id'       => sanitize_text_field( $analytics_data['account_id'] ),
+			'property_id'      => sanitize_text_field( $analytics_data['property_id'] ),
+			'view_id'          => sanitize_text_field( $analytics_data['view_id'] ),
+			'measurement_id'   => sanitize_text_field( $analytics_data['measurement_id'] ),
+			'stream_name'      => sanitize_text_field( $analytics_data['stream_name'] ),
+			'country'          => sanitize_text_field( $analytics_data['country'] ),
+			'install_code'     => sanitize_text_field( $analytics_data['install_code'] ),
+			'anonymize_ip'     => sanitize_text_field( $analytics_data['anonymize_ip'] ),
+			'local_ga_js'      => sanitize_text_field( $analytics_data['local_ga_js'] ),
+			'exclude_loggedin' => sanitize_text_field( $analytics_data['exclude_loggedin'] ),
 		];
 		update_option( 'rank_math_google_analytic_options', $analytic_value );
 

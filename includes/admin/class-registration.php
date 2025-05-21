@@ -10,7 +10,6 @@
 
 namespace RankMath\Admin;
 
-use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Admin_Helper;
@@ -237,90 +236,29 @@ class Registration {
 		wp_styles()->done  = [];
 		wp_scripts()->done = [];
 
-		// Enqueue styles.
-		\CMB2_Hookup::enqueue_cmb_css();
-		\CMB2_Hookup::enqueue_cmb_js();
-
 		// Wizard.
-		wp_enqueue_style( 'rank-math-wizard', rank_math()->plugin_url() . 'assets/admin/css/setup-wizard.css', [ 'wp-admin', 'buttons', 'cmb2-styles', 'rank-math-common', 'rank-math-cmb2' ], rank_math()->version );
-
-		$logo_url = '<a href="' . KB::get( 'logo', 'SW Logo' ) . '" target="_blank"><img src="' . esc_url( rank_math()->plugin_url() . 'assets/admin/img/logo.svg' ) . '"></a>';
+		wp_enqueue_media();
+		wp_enqueue_style( 'rank-math-wizard', rank_math()->plugin_url() . 'assets/admin/css/setup-wizard.css', [ 'wp-admin', 'buttons', 'rank-math-common', 'rank-math-cmb2' ], rank_math()->version );
+		wp_enqueue_script( 'rank-math-registration', rank_math()->plugin_url() . 'assets/admin/js/registration.js', [ 'lodash', 'react', 'react-dom', 'wp-element', 'wp-data', 'rank-math-components' ], rank_math()->version, true );
+		Helper::add_json( 'logo', esc_url( rank_math()->plugin_url() . 'assets/admin/img/logo.svg' ) );
+		Helper::add_json( 'registerNonce', wp_create_nonce( 'rank-math-wizard' ) );
+		Helper::add_json( 'adminUrl', esc_url( admin_url( 'admin-post.php' ) ) );
+		Helper::add_json( 'isSiteUrlValid', Admin_Helper::is_site_url_valid() );
+		Helper::add_json( 'optionsPage', esc_url( admin_url( 'options-general.php' ) ) );
 
 		ob_start();
 
 		/**
 		 * Start the actual page content.
 		 */
-		include_once $this->get_view( 'header' );
-		include_once $this->get_view( 'content' );
-		include_once $this->get_view( 'footer' );
+		include_once rank_math()->admin_dir() . 'wizard/views/content.php';
 		exit;
-	}
-
-	/**
-	 * Render page body.
-	 */
-	protected function body() {
-		?>
-		<header>
-			<?php $this->header_content(); ?>
-		</header>
-
-		<?php rank_math()->notification->display(); ?>
-
-		<?php $this->show_connect_button(); ?>
-
-		<footer class="form-footer wp-core-ui rank-math-ui">
-			<button type="submit" class="button button-<?php echo $this->invalid ? 'secondary' : 'primary alignright'; ?>" formnovalidate id="skip-registration" style="margin-right:15px"><?php echo $this->invalid ? esc_html__( 'Skip Now', 'rank-math' ) : esc_html__( 'Next', 'rank-math' ); ?></button>
-		</footer>
-
-		<?php
-		$this->print_script();
-	}
-
-	/**
-	 * Output connect button (instead of the old connect form).
-	 */
-	private function show_connect_button() {
-		Admin_Helper::maybe_show_invalid_siteurl_notice();
-		?>
-		<div class="text-center wp-core-ui rank-math-ui" style="margin-top: 30px;">
-			<button type="submit" class="button button-primary button-connect <?php echo Admin_Helper::is_site_url_valid() ? 'button-animated' : 'disabled'; ?>" name="rank_math_activate"><?php echo esc_attr__( 'Connect Your Account', 'rank-math' ); ?></button>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Header content.
-	 */
-	private function header_content() {
-		if ( $this->invalid ) :
-			?>
-			<h1><?php esc_html_e( 'Connect FREE Account', 'rank-math' ); ?></h1>
-			<p class="rank-math-gray-box">
-				<?php
-				printf(
-					/* translators: Link to Free Account Benefits KB article */
-					esc_html__( 'By connecting your free account, you get keyword suggestions directly from Google when entering the focus keywords. Not only that, get access to our revolutionary Content AI, SEO Analyzer inside WordPress that scans your website for SEO errors and suggest improvements. %s', 'rank-math' ),
-					'<a href="' . esc_url( KB::get( 'free-account-benefits', 'SW Connect Free Account' ) ) . '" target="_blank">' . esc_html__( 'Read more by following this link.', 'rank-math' ) . '</a>'
-				);
-				?>
-			</p>
-			<?php
-			return;
-		endif;
-		?>
-
-		<h1><?php esc_html_e( 'Account Successfully Connected', 'rank-math' ); ?></h1>
-		<h3 style="text-align: center; padding-top:15px;"><?php esc_html_e( 'You have successfully activated Rank Math.', 'rank-math' ); ?></h3>
-		<?php
 	}
 
 	/**
 	 * Execute save handler for current step.
 	 */
 	public function save_registration() {
-
 		// If no form submission, bail.
 		$referer = Param::post( '_wp_http_referer', get_dashboard_url() );
 		if ( Param::post( 'step' ) !== 'register' ) {
@@ -381,36 +319,5 @@ class Registration {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Get view file to display.
-	 *
-	 * @param string $view View to display.
-	 * @return string
-	 */
-	private function get_view( $view ) {
-		if ( 'navigation' === $view ) {
-			$view = 'no-navigation';
-		}
-
-		return rank_math()->admin_dir() . "wizard/views/{$view}.php";
-	}
-
-	/**
-	 * Print Javascript.
-	 */
-	private function print_script() {
-		?>
-		<script>
-		(function($){
-			$(function() {
-				$( '#skip-registration' ).on( 'click', function( event ) {
-					$('[name="action"]').val( 'rank_math_skip_wizard' );
-				});
-			});
-		})(jQuery);
-		</script>
-		<?php
 	}
 }

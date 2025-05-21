@@ -21,118 +21,29 @@ defined( 'ABSPATH' ) || exit;
 class Import implements Wizard_Step {
 
 	/**
-	 * Render step body.
+	 * Get Localized data to be used in the Analytics step.
 	 *
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return void
+	 * @return array
 	 */
-	public function render( $wizard ) {
-		?>
-		<header>
-			<h1><?php esc_html_e( 'Import SEO Settings', 'rank-math' ); ?></h1>
-			<p><?php esc_html_e( 'You can import SEO settings from the following plugins:', 'rank-math' ); ?></p>
-		</header>
-
-		<?php $wizard->cmb->show_form(); ?>
-
-
-		<div id="import-progress-bar">
-			<div id="importProgress">
-				<div id="importBar"></div>
-			</div>
-			<span class="left"><strong><?php echo esc_html__( 'Importing: ', 'rank-math' ); ?></strong><span class="plugin-from"></span> </span>
-			<span class="right"><span class="number">0</span>% <?php echo esc_html__( 'Completed', 'rank-math' ); ?></span>
-		</div>
-		<textarea id="import-progress" class="import-progress-area large-text" disabled="disabled" rows="8"></textarea>
-		<footer class="form-footer wp-core-ui rank-math-ui">
-			<button type="submit" class="button button-secondary button-deactivate-plugins" data-deactivate-message="<?php esc_html_e( 'Deactivating Plugins...', 'rank-math' ); ?>"><?php esc_html_e( 'Skip, Don\'t Import Now', 'rank-math' ); ?></button>
-			<button type="submit" class="button button-primary button-continue" style="display:none"><?php esc_html_e( 'Continue', 'rank-math' ); ?></button>
-			<button type="submit" class="button button-primary button-import"><?php esc_html_e( 'Start Import', 'rank-math' ); ?></button>
-		</footer>
-		<?php
+	public static function get_localized_data() {
+		$detector = new Detector();
+		$plugins  = $detector->detect();
+		$plugins  = self::set_priority( $plugins );
+		return [
+			'importablePlugins' => $plugins,
+		];
 	}
 
 	/**
-	 * Render form for step.
+	 * Save handler for step.
 	 *
-	 * @param object $wizard Wizard class instance.
+	 * @param array $values Values to save.
 	 *
-	 * @return void
+	 * @return bool
 	 */
-	public function form( $wizard ) {
-		$detector = new Detector();
-		$plugins  = $detector->detect();
-		$plugins  = $this->set_priority( $plugins );
-
-		$count = 0;
-		foreach ( $plugins as $slug => $plugin ) {
-			$checked       = 'checked';
-			$multi_checked = 'multicheck-checked';
-			$choices       = array_keys( $plugin['choices'] );
-
-			if ( isset( $plugin['checked'] ) && false === $plugin['checked'] ) {
-				$checked       = '';
-				$multi_checked = '';
-				$choices       = [];
-			}
-
-			$field_args = [
-				'id'           => 'import_from_' . $slug,
-				'type'         => 'group',
-				'description'  => '<input type="checkbox" class="import-data" name="import[]" value="' . $slug . '" ' . $checked . ' data-plugin="' . $plugin['name'] . '" />',
-				'before_group' => 0 === $count ? '<h3 class="import-label">' . esc_html__( 'Input Data From:', 'rank-math' ) . '</h3>' : '',
-				'repeatable'   => false,
-				'options'      => [
-					'group_title' => $plugin['name'],
-					'sortable'    => false,
-					'closed'      => true,
-				],
-			];
-
-			$group_id  = $wizard->cmb->add_field( $field_args );
-			$is_active = is_plugin_active( $plugin['file'] );
-			$wizard->cmb->add_group_field(
-				$group_id,
-				[
-					'id'         => $slug . '_meta',
-					'type'       => 'multicheck',
-					'repeatable' => false,
-					'desc'       => $this->get_choice_description( $slug, $plugin, $is_active ),
-					'options'    => $plugin['choices'],
-					'default'    => $choices,
-					'dep'        => [ [ 'import_from', $slug ] ],
-					'classes'    => 'nob nopb cmb-multicheck-inline with-description ' . $multi_checked,
-					'attributes' => [ 'data-active' => $is_active ],
-				]
-			);
-
-			++$count;
-
-			// Add checkbox field to Recalculate SEO Scores.
-			// But not for Redirections.
-			if ( 'redirections' === $slug ) {
-				continue;
-			}
-
-			$wizard->cmb->add_group_field(
-				$group_id,
-				[
-					'id'         => $slug . '_recalculate',
-					'type'       => 'checkbox',
-					'repeatable' => false,
-					'desc'       => esc_html__( 'Recalculate SEO Scores', 'rank-math' ),
-					'value'      => 'recalculate',
-					'default'    => 'recalculate',
-					'dep'        => [ [ 'import_from', $slug ] ],
-					'classes'    => 'nob nopb recalculate-scores',
-					'attributes' => [
-						'data-active' => $is_active,
-						'value'       => 'recalculate',
-					],
-				]
-			);
-		}
+	public static function save( $values ) {
+		delete_option( 'rank_math_yoast_block_posts' );
+		return true;
 	}
 
 	/**
@@ -142,7 +53,7 @@ class Import implements Wizard_Step {
 	 *
 	 * @return array
 	 */
-	private function set_priority( $plugins ) {
+	private static function set_priority( $plugins ) {
 		$checked  = false;
 		$priority = array_intersect( [ 'seopress', 'yoast', 'yoast-premium', 'aioseo' ], array_keys( $plugins ) );
 
@@ -157,19 +68,6 @@ class Import implements Wizard_Step {
 		}
 
 		return $plugins;
-	}
-
-	/**
-	 * Save handler for step.
-	 *
-	 * @param array  $values Values to save.
-	 * @param object $wizard Wizard class instance.
-	 *
-	 * @return bool
-	 */
-	public function save( $values, $wizard ) {
-		delete_option( 'rank_math_yoast_block_posts' );
-		return true;
 	}
 
 	/**
