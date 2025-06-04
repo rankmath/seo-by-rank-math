@@ -354,7 +354,7 @@ class Rest extends WP_REST_Controller {
 			];
 		}
 
-		$data = $this->get_researched_data( $keyword, $country, $force_update );
+		$data = $this->get_researched_data( $keyword, $post_type, $country, $force_update );
 		if ( ! empty( $data['error'] ) ) {
 			return $this->get_errored_data( $data['error'] );
 		}
@@ -596,18 +596,20 @@ class Rest extends WP_REST_Controller {
 	 * Get data from the API.
 	 *
 	 * @param string $keyword      Researched keyword.
+	 * @param string $post_type    Researched post type.
 	 * @param string $country      Researched country.
 	 * @param bool   $force_update Whether to force update the researched data.
 	 *
 	 * @return array
 	 */
-	private function get_researched_data( $keyword, $country, $force_update = false ) {
+	private function get_researched_data( $keyword, $post_type, $country, $force_update = false ) {
 		$args = [
-			'username' => rawurlencode( $this->registered['username'] ),
-			'api_key'  => rawurlencode( $this->registered['api_key'] ),
-			'keyword'  => rawurlencode( $keyword ),
-			'site_url' => rawurlencode( Helper::get_home_url() ),
-			'new_api'  => 1,
+			'username'  => rawurlencode( $this->registered['username'] ),
+			'api_key'   => rawurlencode( $this->registered['api_key'] ),
+			'keyword'   => rawurlencode( $keyword ),
+			'post_type' => rawurlencode( $post_type ),
+			'site_url'  => rawurlencode( Helper::get_home_url() ),
+			'new_api'   => 1,
 		];
 
 		if ( 'all' !== $country ) {

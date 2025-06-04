@@ -172,7 +172,7 @@ class Shared extends WP_REST_Controller {
 
 		return [
 			'slug'    => $new_slug,
-			'schemas' => DB::get_schemas( $object_id ),
+			'schemas' => DB::get_schemas( $object_id, "{$object_type}meta", true ),
 		];
 	}
 
@@ -430,6 +430,8 @@ class Shared extends WP_REST_Controller {
 			return;
 		}
 
+		update_metadata( $object_type, $object_id, 'rank_math_rich_snippet', 'off' );
+
 		$meta_id = absint( \str_replace( 'rank_math_delete_schema-', '', $meta_key ) );
 		$schemas = DB::get_schemas( $object_id, "{$object_type}meta" );
 		// Early bail if meta_id doesn't match with the schema data of the current post.
@@ -449,6 +451,5 @@ class Shared extends WP_REST_Controller {
 
 		// Now delete the schema.
 		\delete_metadata_by_mid( $object_type, $meta_id );
-		update_metadata( $object_type, $object_id, 'rank_math_rich_snippet', 'off' );
 	}
 }

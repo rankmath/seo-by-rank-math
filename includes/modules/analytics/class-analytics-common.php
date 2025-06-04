@@ -308,7 +308,7 @@ class Analytics_Common {
 			],
 			'total-clicks'      => [
 				'label' => __( 'Total Clicks', 'rank-math' ),
-				'desc'  => __( 'This is the number of pageviews carried out by visitors from Google.', 'rank-math' ),
+				'desc'  => __( 'How many times your site was clicked on in the search results.', 'rank-math' ),
 				'value' => ! $is_connected || ( $is_connected && ! defined( 'RANK_MATH_PRO_FILE' ) ),
 				'data'  => $data->clicks,
 			],
@@ -341,6 +341,9 @@ class Analytics_Common {
 		$diff_class  = 'up';
 		if ( ( ! $revert && $is_negative ) || ( $revert && ! $is_negative && $item['difference'] > 0 ) ) {
 			$diff_class = 'down';
+		}
+		if ( 0.0 === floatval( $difference ) ) {
+			$diff_class = 'no-diff';
 		}
 		?>
 		<div class="rank-math-item-numbers">

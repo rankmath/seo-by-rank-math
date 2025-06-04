@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.245
+Stable tag: 1.0.246
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,15 +339,12 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.245 [May 21, 2025] =
-- Improved: Moved [Rank Math Setup Wizard page](https://rankmath.com/kb/how-to-setup/) code to React to load blazing fast. We will gradually enhance the performance of other modules
-- Improved: [Analytics page](https://rankmath.com/kb/analytics/) will now show a warning notice when CRON is not working on the site to fetch the data from Google Search Console
-- Fixed: [Fix with AI tool](https://rankmath.com/kb/fix-seo-tests-with-content-ai/) was not working in the Elementor editor
-- Fixed: HTML tags supported by search engines were getting removed when added in [FAQ Schema with the Advanced Schema Generator](https://rankmath.com/kb/faq-schema-block/#schema-generator)
-- Fixed: `%term_description%` variable was showing `undefined` in the SERP Preview when multiple WYSIWYG editors exist on the Taxonomy page
-- Fixed: [Instant Indexing](https://rankmath.com/kb/how-to-use-indexnow/) was not working on secondary language posts created using WPML
-- Fixed: Updated [Status & Tools page](https://rankmath.com/kb/rank-math-status-and-tools/) code to prevent it from loading unnecessarily on other pages
-- Fixed: Update Button state on Custom Post types was not changing to active after editing content in the Rank Math SEO fields
-- Fixed: Analytics issues on sites with Unicode characters in the domain name
+= 1.0.246 [June 04, 2025] =
+- Added: Features & Benefits field in [Content AI FAQ tool](https://rankmath.com/kb/content-ai-frequently-asked-questions-tool/)
+- Added: New filter to remove one or more [Content AI tests](https://rankmath.com/kb/filters-hooks-api-developer/#remove-content-analysis)
+- Improved: [Content AI Research tool recommendations](https://rankmath.com/kb/how-to-use-content-ai/) on WooCommerce products as product pages don't contain much content
+- Improved: Title, tooltip & number formats used in [Analytics stats](https://rankmath.com/kb/analytics) to make them easier to understand
+- Fixed: Clicking "Back" in the second step of [Setup Wizard](https://rankmath.com/kb/how-to-setup/) was breaking the page after the last update
+- Fixed: Translated strings were not showing on [Divi's Frontend editor](https://rankmath.com/blog/divi-seo/)
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

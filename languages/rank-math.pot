@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.245\n"
+"Project-Id-Version: Rank Math SEO 1.0.246\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-21T11:26:19+00:00\n"
+"POT-Creation-Date: 2025-06-04T03:22:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rank-math\n"
@@ -2100,7 +2100,7 @@ msgstr ""
 msgid "Total Clicks"
 msgstr ""
 
-msgid "This is the number of pageviews carried out by visitors from Google."
+msgid "How many times your site was clicked on in the search results."
 msgstr ""
 
 msgid "Total Keywords"
@@ -7676,9 +7676,6 @@ msgstr ""
 msgid "Rank Math's SEO Score"
 msgstr ""
 
-msgid "Search Impressions"
-msgstr ""
-
 msgid "This is how many times your site showed up in the search results."
 msgstr ""
 
@@ -7799,9 +7796,6 @@ msgstr ""
 msgid "Timeframe"
 msgstr ""
 
-msgid "Search Clicks"
-msgstr ""
-
 msgid "#"
 msgstr ""
 
@@ -7865,13 +7859,10 @@ msgstr ""
 msgid "Open Report"
 msgstr ""
 
-msgid "How many times your site was clicked on in the search results."
+msgid "CTR"
 msgstr ""
 
-msgid "Avg. CTR"
-msgstr ""
-
-msgid "Average click-through rate. Search clicks divided by search impressions."
+msgid "Average click-through rate. Total clicks divided by total impressions."
 msgstr ""
 
 msgid "Top Winning Keywords"
@@ -7905,9 +7896,6 @@ msgid "Keyword Positions"
 msgstr ""
 
 msgid "Take full control of what’s important to the success of your website – see content that’s performing well and content that’s dropped in rankings so you can take action."
-msgstr ""
-
-msgid "Avg. Position"
 msgstr ""
 
 msgid "Impressions"
