@@ -13,6 +13,7 @@ namespace RankMath\Analytics;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Google\Authentication;
+use RankMath\Helpers\Sitepress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -78,7 +79,8 @@ class Watcher {
 			$primary_keyword = trim( $primary_keyword[0] );
 		}
 
-		$page = str_replace( Helper::get_home_url(), '', urldecode( get_permalink( $post_id ) ) );
+		$permalink = $this->get_permalink( $post_id );
+		$page      = str_replace( Helper::get_home_url(), '', urldecode( $permalink ) );
 
 		// Set argument for object row.
 		$object_args = [
@@ -121,5 +123,36 @@ class Watcher {
 		if ( $id > 0 ) {
 			update_post_meta( $post_id, 'rank_math_analytic_object_id', $id );
 		}
+	}
+
+	/**
+	 * Get permalink.
+	 *
+	 * @param int $post_id   Post ID.
+	 *
+	 * @return string
+	 */
+	public function get_permalink( $post_id ) {
+		$permalink = get_permalink( $post_id );
+
+		if ( ! Sitepress::get()->is_active() ) {
+			return $permalink;
+		}
+
+		$sitepress = Sitepress::get()->get_var();
+
+		$language_domains = $sitepress->get_setting( 'language_domains', [] );
+		if ( ! $language_domains ) {
+			return $permalink;
+		}
+
+		$details   = apply_filters( 'wpml_post_language_details', null, $post_id );
+		$code      = $details['language_code'] ?? '';
+		$permalink = apply_filters( 'wpml_permalink', get_the_permalink( $post_id ), $code );
+		foreach ( $language_domains as $key => $domain ) {
+			$permalink = preg_replace( "#https?://{$domain}#i", '', $permalink );
+		}
+
+		return $permalink;
 	}
 }

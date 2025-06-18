@@ -120,12 +120,12 @@ class WooCommerce extends WC_Vars {
 			$slug           = array_pop( $url );
 		}
 
-		if ( 0 === strpos( $slug, 'comment-page-' ) ) {
+		if ( ! empty( $slug ) && 0 === strpos( $slug, 'comment-page-' ) ) {
 			$replace['cpage'] = substr( $slug, strlen( 'comment-page-' ) );
 			$slug             = array_pop( $url );
 		}
 
-		if ( 0 === strpos( $slug, 'schema-preview' ) ) {
+		if ( ! empty( $slug ) && 0 === strpos( $slug, 'schema-preview' ) ) {
 			$replace['schema-preview'] = '';
 			$slug                      = array_pop( $url );
 		}

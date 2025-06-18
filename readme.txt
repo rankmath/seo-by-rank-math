@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.246
+Stable tag: 1.0.247
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,12 +339,14 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.246 [June 04, 2025] =
-- Added: Features & Benefits field in [Content AI FAQ tool](https://rankmath.com/kb/content-ai-frequently-asked-questions-tool/)
-- Added: New filter to remove one or more [Content AI tests](https://rankmath.com/kb/filters-hooks-api-developer/#remove-content-analysis)
-- Improved: [Content AI Research tool recommendations](https://rankmath.com/kb/how-to-use-content-ai/) on WooCommerce products as product pages don't contain much content
-- Improved: Title, tooltip & number formats used in [Analytics stats](https://rankmath.com/kb/analytics) to make them easier to understand
-- Fixed: Clicking "Back" in the second step of [Setup Wizard](https://rankmath.com/kb/how-to-setup/) was breaking the page after the last update
-- Fixed: Translated strings were not showing on [Divi's Frontend editor](https://rankmath.com/blog/divi-seo/)
+= 1.0.247 [June 18, 2025] =
+- Added: [Fix with AI tool](https://rankmath.com/kb/fix-seo-tests-with-content-ai/?play-video=_AIYrg0LcRo) will now work on the content tests in the Classic editor
+- Improved: [Stats on the Analytics page](https://rankmath.com/kb/analytics/) will now display `N/A` instead of `0` for data that doesn't exist in Google Search Console
+- Fixed: SEO score calculation in the [Plugin Importers section](https://rankmath.com/kb/import-export-settings/#plugin-importers-section) was not working
+- Fixed: String translations on the [Setup Wizard page](https://rankmath.com/kb/how-to-setup/) were not working
+- Fixed: Error when [exporting settings](https://rankmath.com/kb/import-export-settings/#export-settings) if the Redirections table did not exist on the site
+- Fixed: PHP warning on Feed URLs on some sites when the [Remove Base option](https://rankmath.com/kb/general-settings/#remove-base) was enabled
+- Fixed: Incorrect [Post Analytics stats](https://rankmath.com/kb/analytics/#post-analytics) were displayed for secondary language posts when the multi-domain option was enabled in the WPML plugin
+- Fixed: Links were not visible in the [Content AI chat](https://rankmath.com/kb/how-to-use-content-ai/#chat-with-ai)
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

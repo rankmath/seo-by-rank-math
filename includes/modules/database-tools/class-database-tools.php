@@ -13,6 +13,7 @@ use RankMath\Helpers\Str;
 use RankMath\Helpers\Arr;
 use RankMath\Installer;
 use RankMath\Traits\Hooker;
+use RankMath\Helpers\Sitepress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -371,17 +372,36 @@ class Database_Tools {
 		}
 
 		if ( Helper::is_module_active( 'analytics' ) && Helper::has_cap( 'analytics' ) ) {
+
 			Arr::insert(
 				$tools,
 				[
-					'analytics_clear_caches'  => [
+					'analytics_clear_caches' => [
 						'title'       => __( 'Purge Analytics Cache', 'rank-math' ),
 						'description' => __( 'Clear analytics cache to re-calculate all the stats again.', 'rank-math' ),
 						'button_text' => __( 'Clear Cache', 'rank-math' ),
 					],
+				],
+				3
+			);
+
+			$description = __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' );
+
+			$sitepress = Sitepress::get()->get_var();
+			if ( Sitepress::get()->is_per_domain() && ! empty( $sitepress->get_setting( 'auto_adjust_ids', null ) ) ) {
+				$description .= '<br /><br /><i>' . sprintf(
+					/* translators: 1: settings URL, 2: settings text */
+					__( 'To properly rebuild Analytics posts in secondary languages, please disable the %1$s when using a different domain per language.', 'rank-math' ),
+					'<a href="' . esc_url( admin_url( 'admin.php?page=sitepress-multilingual-cms/menu/languages.php#lang-sec-8' ) ) . '">' . __( 'Make themes work multilingual option in WPML settings', 'rank-math' ) . '</a>'
+				) . '</i>';
+			}
+
+			Arr::insert(
+				$tools,
+				[
 					'analytics_reindex_posts' => [
 						'title'       => __( 'Rebuild Index for Analytics', 'rank-math' ),
-						'description' => __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' ),
+						'description' => $description,
 						'button_text' => __( 'Rebuild Index', 'rank-math' ),
 					],
 				],

@@ -97,6 +97,7 @@ class Setup_Wizard {
 		// Enqueue javascript.
 		wp_enqueue_media();
 		wp_enqueue_script( 'rank-math-wizard', rank_math()->plugin_url() . 'assets/admin/js/wizard.js', [ 'media-editor', 'select2-rm', 'lodash', 'rank-math-common', 'rank-math-components' ], rank_math()->version, true );
+		wp_set_script_translations( 'rank-math-wizard', 'rank-math' );
 
 		Helper::add_json( 'logo', esc_url( rank_math()->plugin_url() . 'assets/admin/img/logo.svg' ) );
 

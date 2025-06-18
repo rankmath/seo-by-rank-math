@@ -232,10 +232,6 @@ class Summary {
 			->selectAvg( 'position', 'position' )
 			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
 			->one();
-		// Check validation.
-		$stats->clicks      = empty( $stats->clicks ) ? 0 : $stats->clicks;
-		$stats->impressions = empty( $stats->impressions ) ? 0 : $stats->impressions;
-		$stats->position    = empty( $stats->position ) ? 0 : $stats->position;
 
 		$old_stats = DB::analytics()
 			->selectCount( 'DISTINCT(page)', 'posts' )
@@ -245,35 +241,31 @@ class Summary {
 			->whereBetween( 'created', [ $this->compare_start_date, $this->compare_end_date ] )
 			->one();
 
-		// Check validation.
-		$old_stats->clicks      = empty( $old_stats->clicks ) ? 0 : $old_stats->clicks;
-		$old_stats->impressions = empty( $old_stats->impressions ) ? 0 : $old_stats->impressions;
-		$old_stats->position    = empty( $old_stats->position ) ? 0 : $old_stats->position;
+		$total_ctr    = is_null( $stats->impressions ) ? 'n/a' : round( ( $stats->clicks / $stats->impressions ) * 100, 2 );
+		$previous_ctr = is_null( $old_stats->impressions ) ? 'n/a' : ( 0 !== $old_stats->impressions && 'n/a' !== $old_stats->impressions ? round( ( $old_stats->clicks / $old_stats->impressions ) * 100, 2 ) : 0 );
 
-		$total_ctr    = 0 !== $stats->impressions ? round( ( $stats->clicks / $stats->impressions ) * 100, 2 ) : 0;
-		$previous_ctr = 0 !== $old_stats->impressions ? round( ( $old_stats->clicks / $old_stats->impressions ) * 100, 2 ) : 0;
-		$stats->ctr   = [
+		$stats->ctr = [
 			'total'      => $total_ctr,
 			'previous'   => $previous_ctr,
-			'difference' => $total_ctr - $previous_ctr,
+			'difference' => 'n/a' !== $total_ctr && 'n/a' !== $previous_ctr ? $total_ctr - $previous_ctr : 'n/a',
 		];
 
 		$stats->clicks = [
-			'total'      => (int) $stats->clicks,
-			'previous'   => (int) $old_stats->clicks,
-			'difference' => $stats->clicks - $old_stats->clicks,
+			'total'      => is_null( $stats->clicks ) ? 'n/a' : (int) $stats->clicks,
+			'previous'   => is_null( $old_stats->clicks ) ? 'n/a' : (int) $old_stats->clicks,
+			'difference' => is_null( $stats->clicks ) || is_null( $old_stats->clicks ) ? 'n/a' : $stats->clicks - $old_stats->clicks,
 		];
 
 		$stats->impressions = [
-			'total'      => (int) $stats->impressions,
-			'previous'   => (int) $old_stats->impressions,
-			'difference' => $stats->impressions - $old_stats->impressions,
+			'total'      => is_null( $stats->impressions ) ? 'n/a' : (int) $stats->impressions,
+			'previous'   => is_null( $old_stats->impressions ) ? 'n/a' : (int) $old_stats->impressions,
+			'difference' => is_null( $stats->impressions ) || is_null( $old_stats->impressions ) ? 'n/a' : $stats->impressions - $old_stats->impressions,
 		];
 
 		$stats->position = [
-			'total'      => (float) \number_format( $stats->position, 2 ),
-			'previous'   => (float) \number_format( $old_stats->position, 2 ),
-			'difference' => (float) \number_format( $stats->position - $old_stats->position, 2 ),
+			'total'      => is_null( $stats->position ) ? 'n/a' : (float) \number_format( $stats->position, 2 ),
+			'previous'   => is_null( $stats->position ) ? 'n/a' : (float) \number_format( $old_stats->position, 2 ),
+			'difference' => is_null( $stats->position ) ? 'n/a' : (float) \number_format( $stats->position - $old_stats->position, 2 ),
 		];
 		$stats->keywords = $this->get_keywords_summary();
 		$stats->graph    = $this->get_analytics_summary_graph();
@@ -313,11 +305,11 @@ class Summary {
 		$summary = wp_parse_args(
 			array_filter( (array) $summary ),
 			[
-				'ctr'         => 0,
-				'posts'       => 0,
-				'clicks'      => 0,
-				'pageviews'   => 0,
-				'impressions' => 0,
+				'ctr'         => 'n/a',
+				'posts'       => 'n/a',
+				'clicks'      => 'n/a',
+				'pageviews'   => 'n/a',
+				'impressions' => 'n/a',
 			]
 		);
 
@@ -337,7 +329,7 @@ class Summary {
 		// Get Total Keywords Counts.
 		$keywords_count = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(DISTINCT(query))
+				"SELECT NULLIF(COUNT(DISTINCT(query)), 0)
 				FROM {$wpdb->prefix}rank_math_analytics_gsc
 				WHERE created BETWEEN %s AND %s",
 				$this->start_date,
@@ -347,7 +339,7 @@ class Summary {
 
 		$old_keywords_count = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(DISTINCT(query))
+				"SELECT NULLIF(COUNT(DISTINCT(query)), 0)
 				FROM {$wpdb->prefix}rank_math_analytics_gsc
 				WHERE created BETWEEN %s AND %s",
 				$this->compare_start_date,
@@ -356,9 +348,9 @@ class Summary {
 		);
 
 		$keywords = [
-			'total'      => (int) $keywords_count,
-			'previous'   => (int) $old_keywords_count,
-			'difference' => (int) $keywords_count - (int) $old_keywords_count,
+			'total'      => is_null( $keywords_count ) ? 'n/a' : (int) $keywords_count,
+			'previous'   => is_null( $old_keywords_count ) ? 'n/a' : (int) $old_keywords_count,
+			'difference' => is_null( $keywords_count ) || is_null( $old_keywords_count ) ? 'n/a' : (int) $keywords_count - (int) $old_keywords_count,
 		];
 
 		return $keywords;
@@ -388,6 +380,7 @@ class Summary {
 			$this->start_date,
 			$this->end_date
 		);
+
 		$analytics = $wpdb->get_results( $query );
 		$analytics = $this->set_dimension_as_key( $analytics, 'range_group' );
 		// phpcs:enable

@@ -52,7 +52,6 @@ class Sitepress {
 	 */
 	private $has_home_url = false;
 
-
 	/**
 	 * Main instance
 	 *
@@ -178,5 +177,25 @@ class Sitepress {
 			md5( wp_json_encode( [ $term_id, $taxonomy, false ] ) ),
 			'icl_tax_permalink_filter'
 		);
+	}
+
+	/**
+	 * Is per domain negotiation type.
+	 *
+	 * @return string
+	 */
+	public function is_per_domain() {
+		if ( ! $this->is_active() ) {
+			return false;
+		}
+
+		$sitepress = $this->get_var();
+		$type      = (int) $sitepress->get_setting( 'language_negotiation_type', 0 );
+
+		if ( absint( $type ) === 2 ) {
+			return true;
+		}
+
+		return false;
 	}
 }

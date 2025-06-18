@@ -209,6 +209,13 @@ class Import_Export_Settings {
 			$panels = [ 'general', 'titles', 'sitemap', 'role-manager', 'redirections' ];
 		}
 
+		if ( ! \RankMath\Helpers\DB::check_table_exists( 'rank_math_redirections' ) ) {
+			$redirections_index = array_search( 'redirections', $panels, true );
+			if ( false !== $redirections_index ) {
+				unset( $panels[ $redirections_index ] );
+			}
+		}
+
 		$settings = rank_math()->settings->all_raw();
 		$data     = [];
 		foreach ( $panels as $panel ) {

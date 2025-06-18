@@ -20,6 +20,7 @@ use RankMath\Helpers\Param;
 use RankMath\Helpers\Security;
 use stdClass;
 use WP_Screen;
+use WP_Error;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -756,7 +757,7 @@ trait WordPress {
 	 * to permit the upload of plain text (.txt) and JSON (.json) files via the media uploader.
 	 * It ensures the correct MIME types and file extensions are accepted.
 	 *
-	 * @return array Array of upload results, including file URL, path, and type, or error information.
+	 * @return array|WP_Error Array of upload results, including file URL, path, and type, or error information.
 	 */
 	public static function handle_file_upload() {
 		// Add upload hooks.
@@ -764,7 +765,9 @@ trait WordPress {
 		add_filter( 'wp_check_filetype_and_ext', [ __CLASS__, 'filetype_and_ext' ], 10, 3 );
 
 		// Do the upload.
-		$file = isset( $_FILES['import-me'] ) ? wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] ) : '';
+		$file = isset( $_FILES['import-me'] )
+			? wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] )
+			: new WP_Error( 'missing_file', __( 'No file selected for upload.', 'rank-math' ) );
 
 		// Remove upload hooks.
 		remove_filter( 'upload_mimes', [ __CLASS__, 'allow_txt_upload' ] );
