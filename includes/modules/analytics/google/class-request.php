@@ -12,6 +12,7 @@ namespace RankMath\Google;
 
 use RankMath\Helper;
 use WP_Error;
+use RankMath\Helpers\Schedule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -480,7 +481,7 @@ class Request {
 			return;
 		}
 
-		as_schedule_single_action(
+		Schedule::single_action(
 			time() + 60,
 			"rank_math/analytics/get_{$action}_data",
 			[ $start_date ],

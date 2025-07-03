@@ -11,7 +11,7 @@
 namespace RankMath\Analytics\Workflow;
 
 use RankMath\Traits\Hooker;
-use function as_enqueue_async_action;
+use RankMath\Helpers\Schedule;
 use function as_unschedule_all_actions;
 
 defined( 'ABSPATH' ) || exit;
@@ -113,7 +113,7 @@ class Workflow {
 	 * @param string  $new_value New posted value.
 	 */
 	public static function do_workflow( $action, $days = 0, $prev = null, $new_value = null ) {
-		as_enqueue_async_action(
+		Schedule::async_action(
 			'rank_math/analytics/workflow',
 			[
 				$action,
@@ -148,7 +148,7 @@ class Workflow {
 	 */
 	public static function add_clear_cache( $time ) {
 		as_unschedule_all_actions( 'rank_math/analytics/clear_cache' );
-		as_schedule_single_action(
+		Schedule::single_action(
 			$time,
 			'rank_math/analytics/clear_cache',
 			[],

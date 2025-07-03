@@ -85,7 +85,7 @@ class BuddyPress {
 			'about'    => [
 				'@type'       => 'Person',
 				'name'        => get_the_author_meta( 'display_name', $user_id ),
-				'url'         => esc_url( bp_core_get_user_domain( $user_id ) ),
+				'url'         => esc_url( bp_members_get_user_url( $user_id ) ),
 				'description' => get_the_author_meta( 'description', $user_id ),
 				'image'       => [
 					'@type'  => 'ImageObject',

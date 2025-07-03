@@ -18,6 +18,7 @@ use RankMath\Google\Console;
 use RankMath\Google\Authentication;
 use RankMath\Analytics\Workflow\Jobs;
 use RankMath\Analytics\Workflow\Workflow;
+use RankMath\Helpers\Schedule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -335,9 +336,9 @@ class Analytics_Common {
 	 * @param boolean $revert Flag whether to revert difference icon or not.
 	 */
 	private function get_analytic_block( $item, $revert = false ) {
-		$total       = isset( $item['total'] ) ? abs( $item['total'] ) : 0;
-		$difference  = isset( $item['difference'] ) ? abs( $item['difference'] ) : 0;
-		$is_negative = isset( $item['difference'] ) && abs( $item['difference'] ) !== $item['difference'];
+		$total       = isset( $item['total'] ) && 'n/a' !== $item['total'] ? abs( $item['total'] ) : 0;
+		$difference  = isset( $item['difference'] ) && 'n/a' !== $item['difference'] ? abs( $item['difference'] ) : 0;
+		$is_negative = isset( $item['difference'] ) && 'n/a' !== $item['difference'] && abs( $item['difference'] ) !== $item['difference'];
 		$diff_class  = 'up';
 		if ( ( ! $revert && $is_negative ) || ( $revert && ! $is_negative && $item['difference'] > 0 ) ) {
 			$diff_class = 'down';
@@ -362,6 +363,6 @@ class Analytics_Common {
 	private function schedule_email_reporting( $frequency = 'monthly' ) {
 		$interval_days = Email_Reports::get_period_from_frequency( $frequency );
 		$midnight      = strtotime( 'tomorrow midnight' );
-		as_schedule_recurring_action( $midnight, $interval_days * DAY_IN_SECONDS, 'rank_math/analytics/email_report_event', [], 'rank-math' );
+		Schedule::recurring_action( $midnight, $interval_days * DAY_IN_SECONDS, 'rank_math/analytics/email_report_event', [], 'rank-math' );
 	}
 }

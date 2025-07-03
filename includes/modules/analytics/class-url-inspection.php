@@ -12,6 +12,7 @@ namespace RankMath\Analytics;
 
 use Exception;
 use RankMath\Helpers\DB as DB_Helper;
+use RankMath\Helpers\Schedule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,19 +48,19 @@ class Url_Inspection {
 	public function schedule_inspection( $page, $reschedule = true, $delay = 0 ) {
 		$delay = absint( $delay );
 		if ( $reschedule ) {
-			as_unschedule_action( 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' );
+			Schedule::unschedule_action( 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' );
 		} elseif ( as_has_scheduled_action( 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' ) ) {
 			// Already scheduled and reschedule = false.
 			return;
 		}
 
 		if ( 0 === $delay ) {
-			as_enqueue_async_action( 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' );
+			Schedule::async_action( 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' );
 			return;
 		}
 
 		$time = time() + $delay;
-		as_schedule_single_action( $time, 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' );
+		Schedule::single_action( $time, 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' );
 	}
 
 	/**

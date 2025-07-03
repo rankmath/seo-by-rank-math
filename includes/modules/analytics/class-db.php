@@ -435,7 +435,7 @@ class DB {
 
 		$url = self::remove_hash( $url );
 
-		$url = str_replace( $host, '', $url );
+		$url = str_replace( Helper::get_home_url(), '', $url );
 
 		// Remove ASCII domain.
 		$host_ascii = idn_to_ascii( $host );

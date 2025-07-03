@@ -13,7 +13,7 @@ namespace RankMath\Analytics\Workflow;
 use RankMath\Helper;
 use RankMath\Analytics\DB;
 use RankMath\Traits\Hooker;
-use function as_schedule_single_action;
+use RankMath\Helpers\Schedule;
 use function has_filter;
 
 defined( 'ABSPATH' ) || exit;
@@ -62,7 +62,7 @@ abstract class Base {
 				$date = date_i18n( 'Y-m-d', $start - ( DAY_IN_SECONDS * $current ) );
 				if ( ! DB::date_exists( $date, $action ) ) {
 					++$count;
-					as_schedule_single_action(
+					Schedule::single_action(
 						time() + ( $time_gap * $count ),
 						'rank_math/analytics/' . $hook,
 						[ $date ],
@@ -76,7 +76,7 @@ abstract class Base {
 					$date = date_i18n( 'Y-m-d', $start - ( DAY_IN_SECONDS * ( $current + $j ) ) );
 					if ( ! DB::date_exists( $date, $action ) ) {
 						++$count;
-						as_schedule_single_action(
+						Schedule::single_action(
 							time() + ( $time_gap * $count ),
 							'rank_math/analytics/' . $hook,
 							[ $date ],
@@ -192,7 +192,7 @@ abstract class Base {
 				$args
 			);
 
-			as_schedule_single_action(
+			Schedule::single_action(
 				$timestamp,
 				'rank_math/analytics/get_' . $action . '_data',
 				$args,

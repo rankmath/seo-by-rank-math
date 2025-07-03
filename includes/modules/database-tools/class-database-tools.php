@@ -11,6 +11,7 @@ namespace RankMath\Tools;
 use RankMath\Helper;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Arr;
+use RankMath\Helpers\Schedule;
 use RankMath\Installer;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Sitepress;
@@ -183,7 +184,7 @@ class Database_Tools {
 
 		// Analytics module.
 		if ( Helper::is_module_active( 'analytics' ) ) {
-			as_enqueue_async_action(
+			Schedule::async_action(
 				'rank_math/analytics/workflow/create_tables',
 				[],
 				'rank-math'
@@ -387,7 +388,7 @@ class Database_Tools {
 
 			$description = __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' );
 
-			$sitepress = Sitepress::get()->get_var();
+			$sitepress = Sitepress::get()->is_active() ? Sitepress::get()->get_var() : false;
 			if ( Sitepress::get()->is_per_domain() && ! empty( $sitepress->get_setting( 'auto_adjust_ids', null ) ) ) {
 				$description .= '<br /><br /><i>' . sprintf(
 					/* translators: 1: settings URL, 2: settings text */

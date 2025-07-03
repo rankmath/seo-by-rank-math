@@ -14,6 +14,7 @@ use Exception;
 use RankMath\Helper;
 use RankMath\Helpers\DB;
 use RankMath\Traits\Hooker;
+use RankMath\Helpers\Schedule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -91,21 +92,9 @@ class Objects extends Base {
 		// Clear old schedule.
 		wp_clear_scheduled_hook( 'rank_math/analytics/get_analytics' );
 
-		// Add action for scheduler.
-		$task_name = 'rank_math/analytics/data_fetch';
-		$fetch_gap = apply_filters( 'rank_math/analytics/fetch_gap', 7, 'objects' );
-
 		// Schedule new action only when there is no existing action.
-		if ( false === as_next_scheduled_action( $task_name ) ) {
-			$schedule_in_minute = wp_rand( 3, defined( 'RANK_MATH_PRO_FILE' ) ? 1380 : 4320 );
-			$time_to_schedule   = ( strtotime( 'tomorrow' ) + ( $schedule_in_minute * MINUTE_IN_SECONDS ) );
-			as_schedule_recurring_action(
-				$time_to_schedule,
-				DAY_IN_SECONDS * $fetch_gap,
-				$task_name,
-				[],
-				'rank-math'
-			);
+		if ( false === as_next_scheduled_action( 'rank_math/analytics/data_fetch' ) ) {
+			Helper::schedule_data_fetch();
 		}
 	}
 
@@ -126,7 +115,7 @@ class Objects extends Base {
 		$chunks  = \array_chunk( $ids, 50 );
 		foreach ( $chunks as $chunk ) {
 			++$counter;
-			as_schedule_single_action(
+			Schedule::single_action(
 				time() + ( 60 * ( $counter / 2 ) ),
 				'rank_math/analytics/flat_posts',
 				[ $chunk ],
@@ -135,7 +124,7 @@ class Objects extends Base {
 		}
 
 		// Check for posts.
-		as_schedule_single_action(
+		Schedule::single_action(
 			time() + ( 60 * ( ( $counter + 1 ) / 2 ) ),
 			'rank_math/analytics/flat_posts_completed',
 			[],
