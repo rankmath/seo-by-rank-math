@@ -15,6 +15,7 @@ namespace RankMath;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Watcher;
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Role_Manager\Capability_Manager;
 
@@ -110,7 +111,7 @@ class Installer {
 	private function network_activate_deactivate( $activate ) {
 		global $wpdb;
 
-		$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" );
+		$blog_ids = DB_Helper::get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" );
 		if ( empty( $blog_ids ) ) {
 			return;
 		}

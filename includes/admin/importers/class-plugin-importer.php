@@ -16,7 +16,7 @@ use RankMath\Traits\Ajax;
 use RankMath\Traits\Meta;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Admin_Helper;
-use RankMath\Helpers\DB;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Helpers\Param;
 use RankMath\Helpers\Attachment;
 
@@ -439,7 +439,7 @@ abstract class Plugin_Importer {
 	 */
 	protected function get_post_ids( $count = false ) {
 		$paged = $this->get_pagination_arg( 'page' );
-		$table = DB::query_builder( 'posts' )->whereIn( 'post_type', Helper::get_accessible_post_types() );
+		$table = DB_Helper::query_builder( 'posts' )->whereIn( 'post_type', Helper::get_accessible_post_types() );
 
 		return $count ? absint( $table->selectCount( 'ID', 'total' )->getVar() ) :
 			$table->select( 'ID' )->page( $paged - 1, $this->items_per_page )->get();
@@ -453,7 +453,7 @@ abstract class Plugin_Importer {
 	 */
 	protected function get_user_ids( $count = false ) {
 		$paged = $this->get_pagination_arg( 'page' );
-		$table = DB::query_builder( 'users' );
+		$table = DB_Helper::query_builder( 'users' );
 
 		return $count ? absint( $table->selectCount( 'ID', 'total' )->getVar() ) :
 			$table->select( 'ID' )->page( $paged - 1, $this->items_per_page )->get();
@@ -491,9 +491,9 @@ abstract class Plugin_Importer {
 		}
 
 		$result = false;
-		$result = DB::query_builder( 'usermeta' )->whereLike( 'meta_key', $this->meta_key )->delete();
-		$result = DB::query_builder( 'termmeta' )->whereLike( 'meta_key', $this->meta_key )->delete();
-		$result = DB::query_builder( 'postmeta' )->whereLike( 'meta_key', $this->meta_key )->delete();
+		$result = DB_Helper::query_builder( 'usermeta' )->whereLike( 'meta_key', $this->meta_key )->delete();
+		$result = DB_Helper::query_builder( 'termmeta' )->whereLike( 'meta_key', $this->meta_key )->delete();
+		$result = DB_Helper::query_builder( 'postmeta' )->whereLike( 'meta_key', $this->meta_key )->delete();
 
 		return $result;
 	}
@@ -508,7 +508,7 @@ abstract class Plugin_Importer {
 			return false;
 		}
 
-		$table = DB::query_builder( 'options' );
+		$table = DB_Helper::query_builder( 'options' );
 		foreach ( $this->option_keys as $option_key ) {
 			$table->orWhereLike( 'option_name', $option_key );
 		}
@@ -528,7 +528,7 @@ abstract class Plugin_Importer {
 		}
 
 		foreach ( $this->table_names as $table ) {
-			$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}{$table}" );
+			DB_Helper::query( "DROP TABLE IF EXISTS {$wpdb->prefix}{$table}" );
 		}
 
 		return true;
@@ -544,7 +544,7 @@ abstract class Plugin_Importer {
 			return false;
 		}
 
-		$table = DB::query_builder( 'options' )->select( 'option_id' );
+		$table = DB_Helper::query_builder( 'options' )->select( 'option_id' );
 		foreach ( $this->option_keys as $option_key ) {
 			if ( '%' === substr( $option_key, -1 ) ) {
 				$table->orWhereLike( 'option_name', substr( $option_key, 0, -1 ), '' );
@@ -566,7 +566,7 @@ abstract class Plugin_Importer {
 			return false;
 		}
 
-		$result = DB::query_builder( 'postmeta' )->select( 'meta_id' )->whereLike( 'meta_key', $this->meta_key, '' )->getVar();
+		$result = DB_Helper::query_builder( 'postmeta' )->select( 'meta_id' )->whereLike( 'meta_key', $this->meta_key, '' )->getVar();
 		return absint( $result ) > 0 ? true : false;
 	}
 

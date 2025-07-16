@@ -12,6 +12,7 @@ namespace RankMath\Rest;
 
 use WP_Error;
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -210,7 +211,7 @@ class Rest_Helper {
 		}
 
 		global $wpdb;
-		$term = $wpdb->get_row( $wpdb->prepare( "SELECT t.* FROM $wpdb->term_taxonomy AS t WHERE t.term_id = %d LIMIT 1", $id ) );
+		$term = DB_Helper::get_row( $wpdb->prepare( "SELECT t.* FROM $wpdb->term_taxonomy AS t WHERE t.term_id = %d LIMIT 1", $id ) );
 		if ( empty( $term ) || empty( $term->term_id ) ) {
 			return $error;
 		}

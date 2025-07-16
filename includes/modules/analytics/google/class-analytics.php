@@ -23,6 +23,11 @@ use RankMath\Analytics\Workflow\Base;
 class Analytics extends Request {
 
 	/**
+	 * Connection status key.
+	 */
+	const CONNECTION_STATUS_KEY = 'rank_math_analytics_connection_error';
+
+	/**
 	 * Get analytics accounts.
 	 */
 	public function get_analytics_accounts() {
@@ -113,6 +118,20 @@ class Analytics extends Request {
 		);
 
 		return ! empty( $account['view_id'] );
+	}
+
+	/**
+	 * Is valid connection
+	 */
+	public static function is_valid_connection() {
+		return Api::get()->get_connection_status( self::CONNECTION_STATUS_KEY );
+	}
+
+	/**
+	 * Test connection
+	 */
+	public static function test_connection() {
+		return Api::get()->check_connection_status( self::CONNECTION_STATUS_KEY, [ __CLASS__, 'get_analytics' ] );
 	}
 
 	/**

@@ -11,6 +11,7 @@
 namespace RankMath\Admin\Importers;
 
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Helpers\Str;
 
@@ -573,7 +574,7 @@ class WP_Schema_Pro extends Plugin_Importer {
 		$meta_args .= " OR pm.meta_value LIKE '%\"{$post_type}|all\"%'";
 		$meta_args .= " OR pm.meta_value LIKE '%\"post-{$post_id}\"%'";
 
-		$local_posts = $wpdb->get_col( $query . ' AND (' . $meta_args . ')' . $orderby ); // phpcs:ignore
+		$local_posts = DB_Helper::get_col( $query . ' AND (' . $meta_args . ')' . $orderby );
 		if ( empty( $local_posts ) ) {
 			return false;
 		}

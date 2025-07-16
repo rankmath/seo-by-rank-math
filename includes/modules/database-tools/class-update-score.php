@@ -15,6 +15,7 @@ use RankMath\Helpers\Param;
 use RankMath\Traits\Hooker;
 use RankMath\Paper\Paper;
 use RankMath\Admin\Metabox\Screen;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -230,7 +231,7 @@ class Update_Score {
 			$query .= " AND (SELECT COUNT(*) FROM {$wpdb->postmeta} as pm2 WHERE pm2.post_id = p.ID AND pm2.meta_key = 'rank_math_seo_score' AND pm2.meta_value != '') = 0";
 		}
 
-		$update_score_post_ids = $wpdb->get_var( $wpdb->prepare( $query, $post_types ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- It's prepared above.
+		$update_score_post_ids = DB_Helper::get_var( $wpdb->prepare( $query, $post_types ) );
 
 		return (int) $update_score_post_ids;
 	}

@@ -33,7 +33,7 @@ class DB {
 		$prefixed = $wpdb->prefix . $table;
 
 		$sql = "SHOW TABLES LIKE '{$wpdb->prefix}%'";
-		$res = $wpdb->get_col( $sql ); // phpcs:ignore
+		$res = self::get_col( $sql );
 		if ( ! in_array( $prefixed, $res, true ) ) {
 			return $changed_collations;
 		}
@@ -42,7 +42,7 @@ class DB {
 		$collate = $set_collation ? $set_collation : self::get_default_collation();
 
 		$sql = "SHOW CREATE TABLE `{$prefixed}`";
-		$res = $wpdb->get_row( $sql ); // phpcs:ignore
+		$res = self::get_row( $sql );
 
 		$table_collate = $res->{'Create Table'};
 
@@ -56,7 +56,7 @@ class DB {
 		if ( ! $current_collate || $current_collate !== $collate ) {
 			$sql = "ALTER TABLE `{$prefixed}` COLLATE={$collate}";
 			error_log( sprintf( 'Rank Math: Changing collation of `%1$s` table from %2$s to %3$s. SQL: "%4$s"', $prefixed, $current_collate, $collate, $sql ) ); // phpcs:ignore
-			$wpdb->query( $sql ); // phpcs:ignore
+			self::query( $sql );
 			++$changed_collations;
 		}
 
@@ -66,7 +66,7 @@ class DB {
 		}
 
 		$sql = "SHOW FULL COLUMNS FROM {$prefixed}";
-		$res = $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore
+		$res = self::get_results( $sql, ARRAY_A );
 		if ( ! $res ) {
 			return $changed_collations;
 		}
@@ -88,7 +88,7 @@ class DB {
 
 			$sql = "ALTER TABLE `{$prefixed}` MODIFY `{$col['Field']}` {$col['Type']} COLLATE {$collate} {$null} {$default}";
 			error_log( sprintf( 'Rank Math: Changing collation of `%1$s`.`%2$s` column from %3$s to %4$s. SQL: "%5$s"', $prefixed, $col['Field'], $current_collate, $collate, $sql ) ); // phpcs:ignore
-			$wpdb->query( $sql ); // phpcs:ignore
+			self::query( $sql );
 			++$changed_collations;
 		}
 
@@ -105,7 +105,7 @@ class DB {
 		global $wpdb;
 
 		$sql = "SHOW CREATE TABLE `{$wpdb->prefix}{$table}`";
-		$res = $wpdb->get_row( $sql ); // phpcs:ignore
+		$res = self::get_row( $sql );
 
 		if ( ! $res ) {
 			return '';
@@ -147,7 +147,7 @@ class DB {
 	 *
 	 * @return Database Database object instance.
 	 */
-	public static function query_builder( $table_name ) {
+	public static function query_builder( $table_name = '' ) {
 		return Database::table( $table_name );
 	}
 
@@ -161,7 +161,7 @@ class DB {
 	public static function check_table_exists( $table_name ) {
 		global $wpdb;
 
-		if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . $table_name ) ) ) === $wpdb->prefix . $table_name ) {
+		if ( self::get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . $table_name ) ) ) === $wpdb->prefix . $table_name ) {
 			return true;
 		}
 
@@ -181,8 +181,57 @@ class DB {
 	public static function table_size_exceeds( $table_name, $limit ) {
 		global $wpdb;
 
-		$check_table = $wpdb->query( "SELECT 1 FROM {$table_name} LIMIT {$limit}, 1" );
+		$check_table = self::query( "SELECT 1 FROM {$table_name} LIMIT {$limit}, 1" );
 
 		return ! empty( $check_table );
+	}
+
+	/**
+	 * Get a single column from the database.
+	 *
+	 * @param string $query  The SQL query to run.
+	 * @param int    $index  The column index.
+	 */
+	public static function get_col( $query = '', $index = 0 ) {
+		return self::query_builder()->get_col( $query, $index );
+	}
+
+	/**
+	 * Get a single row from the database.
+	 *
+	 * @param string $query  The SQL query to run.
+	 * @param string $output The output to retrieve.
+	 * @param int    $index The row index to retrieve.
+	 */
+	public static function get_row( $query = '', $output = OBJECT, $index = 0 ) {
+		return self::query_builder()->get_row( $query, $output, $index );
+	}
+
+	/**
+	 * Get SQL query results.
+	 *
+	 * @param string $query SQL query to run.
+	 */
+	public static function query( $query = '' ) {
+		return self::query_builder()->query( $query );
+	}
+
+	/**
+	 * Get var query results.
+	 *
+	 * @param string $query SQL query to run.
+	 */
+	public static function get_var( $query = '' ) {
+		return self::query_builder()->get_var( $query );
+	}
+
+	/**
+	 * Get SQL query results.
+	 *
+	 * @param string $query  SQL query to run.
+	 * @param string $output Output format.
+	 */
+	public static function get_results( $query = '', $output = OBJECT ) {
+		return self::query_builder()->get_results( $query, $output );
 	}
 }

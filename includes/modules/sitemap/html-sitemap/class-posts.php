@@ -11,6 +11,7 @@
 namespace RankMath\Sitemap\Html;
 
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Database\Database;
 use RankMath\Sitemap\Sitemap as SitemapBase;
@@ -116,7 +117,7 @@ class Posts {
 				ORDER BY p.post_modified DESC
 			)
 			o JOIN {$wpdb->posts} l ON l.ID = o.ID " . $get_child . " ORDER BY " . $sort['field'] . " " . $sort['order']; // phpcs:ignore
-		return $wpdb->get_results( $wpdb->prepare( $sql ) ); // phpcs:ignore
+		return DB_Helper::get_results( $wpdb->prepare( $sql ) );
 	}
 
 	/**

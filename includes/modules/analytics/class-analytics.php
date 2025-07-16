@@ -558,4 +558,5 @@ class Analytics extends Base {
 
 		return $tabs;
 	}
+
 }

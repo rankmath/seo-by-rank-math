@@ -14,6 +14,7 @@ use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Param;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -131,7 +132,7 @@ class WooCommerce extends WC_Vars {
 		}
 
 		$query = "SELECT COUNT(ID) as count_id FROM {$wpdb->posts} WHERE post_name = %s AND post_type = %s";
-		$num   = intval( $wpdb->get_var( $wpdb->prepare( $query, [ $slug, 'product' ] ) ) ); // phpcs:ignore
+		$num   = intval( DB_Helper::get_var( $wpdb->prepare( $query, [ $slug, 'product' ] ) ) );
 		if ( $num > 0 ) {
 			$replace['page']      = '';
 			$replace['name']      = $slug;

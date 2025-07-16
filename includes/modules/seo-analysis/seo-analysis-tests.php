@@ -10,6 +10,7 @@
 
 use RankMath\KB;
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Google\Console;
 use RankMath\Google\Authentication;
 use RankMath\Helpers\DB;
@@ -220,7 +221,7 @@ function rank_math_analyze_site_description() {
 		];
 	}
 
-	if ( rank_math_is_default_tagline() ) { // phpcs:ignore
+	if ( rank_math_is_default_tagline() ) {
 		return [
 			'status'  => 'fail',
 			'message' => wp_kses_post( __( 'Your Site Tagline is set to the default value <em>Just another WordPress site</em>.', 'rank-math' ) ),
@@ -345,7 +346,7 @@ function rank_math_analyze_focus_keywords() {
 
 	$mq_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
 	$query  = "SELECT {$wpdb->posts}.ID, {$wpdb->posts}.post_type FROM $wpdb->posts {$mq_sql['join']} WHERE 1 = 1 {$mq_sql['where']}{$in_search_post_types} AND ({$wpdb->posts}.post_status = 'publish') GROUP BY {$wpdb->posts}.ID";
-	$data   = $wpdb->get_results( $query, ARRAY_A ); // phpcs:ignore
+	$data   = DB_Helper::get_results( $query, ARRAY_A );
 
 	// Early Bail!
 	if ( empty( $data ) ) {
@@ -464,7 +465,7 @@ function rank_math_get_posts_with_titles() {
 	$mq_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
 	$query  = "SELECT {$wpdb->posts}.ID, {$wpdb->posts}.post_type FROM $wpdb->posts {$mq_sql['join']} WHERE 1=1 {$mq_sql['where']}{$in_post_types} AND ({$wpdb->posts}.post_status = 'publish') AND {$wpdb->posts}.post_title NOT LIKE CONCAT( '%', SUBSTRING_INDEX( {$wpdb->postmeta}.meta_value, ',', 1 ), '%' ) GROUP BY {$wpdb->posts}.ID";
 
-	return $wpdb->get_results( $query, ARRAY_A ); // phpcs:ignore
+	return DB_Helper::get_results( $query, ARRAY_A );
 }
 
 /**

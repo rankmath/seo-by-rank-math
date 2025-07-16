@@ -10,6 +10,8 @@
 
 namespace RankMath\Links;
 
+use RankMath\Helpers\DB as DB_Helper;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -167,7 +169,7 @@ class Storage {
 		global $wpdb;
 
 		$where  = [ 'object_id' => $post_id ];
-		$exists = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}rank_math_internal_meta WHERE object_id = %d", $post_id ) );
+		$exists = DB_Helper::get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}rank_math_internal_meta WHERE object_id = %d", $post_id ) );
 
 		if ( $exists ) {
 			$result = $wpdb->update( $wpdb->prefix . 'rank_math_internal_meta', $meta_data, $where );

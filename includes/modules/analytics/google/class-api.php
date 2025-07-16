@@ -62,4 +62,50 @@ class Api extends Console {
 	public function get_row_limit() {
 		return apply_filters( 'rank_math/analytics/row_limit', 10000 );
 	}
+
+	/**
+	 * Get connection status.
+	 *
+	 * @param string $key Connection status key.
+	 *
+	 * @return bool
+	 */
+	public function get_connection_status( $key ) {
+		return ! get_option( $key, false );
+	}
+
+	/**
+	 * Set connection status.
+	 *
+	 * @param string $key   Connection status key.
+	 * @param bool   $status Connection status.
+	 */
+	public function set_connection_status( $key, $status ) {
+		if ( $status ) {
+			update_option( $key, true );
+		} else {
+			delete_option( $key );
+		}
+	}
+
+	/**
+	 * Check connection status.
+	 *
+	 * @param string   $key     Connection status key.
+	 * @param callable $callback Callback to check connection.
+	 *
+	 * @return bool
+	 */
+	public function check_connection_status( $key, $callback ) {
+		$this->set_connection_status( $key, false );
+
+		$response = call_user_func( $callback );
+
+		if ( is_wp_error( $response ) ) {
+			$this->set_connection_status( $key, true );
+			return false;
+		}
+
+		return true;
+	}
 }

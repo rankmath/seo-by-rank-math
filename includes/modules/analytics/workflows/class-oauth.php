@@ -67,8 +67,18 @@ class OAuth {
 		}
 
 		// Remove possible admin notice if we have new access token.
-		delete_option( 'rankmath_google_api_failed_attempts_data' );
-		delete_option( 'rankmath_google_api_reconnect' );
+		// Also remove the connection errors.
+		foreach (
+			[
+				'rankmath_google_api_failed_attempts_data',
+				'rankmath_google_api_reconnect',
+				'rank_math_console_connection_error',
+				'rank_math_analytics_connection_error',
+				'rank_math_adsense_connection_error',
+			] as $option
+		) {
+			delete_option( $option );
+		}
 
 		Permissions::fetch();
 

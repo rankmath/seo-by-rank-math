@@ -13,6 +13,7 @@ namespace RankMath\Analytics;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Param;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Google\Analytics;
 use RankMathPro\Analytics\Pageviews;
 use RankMath\Google\Console as Google_Analytics;
@@ -570,7 +571,7 @@ class Stats extends Keywords {
 			$rows = $this->filter_analytics_data( $rows, $args );
 		}
 
-		$page_urls = \array_merge( \array_keys( $rows ), $args['pages'] );
+		$page_urls = \array_unique( \array_merge( \array_keys( $rows ), $args['pages'] ) );
 
 		if ( $args['objects'] ) {
 			$objects = $this->get_objects( $page_urls );
@@ -650,7 +651,7 @@ class Stats extends Keywords {
 			// That is, among all the position value from the last date of the page, the top position(smallest position value) value will be the result.
 
 			// Get current position data.
-			$positions = $wpdb->get_results( // phpcs:disable -- The $sub_where is already sanitized.
+			$positions = DB_Helper::get_results(
 				$wpdb->prepare(
 					"SELECT %i, MAX(CONCAT(%i, ':', DATE(`created`), ':', LPAD((100 - `position`), 3, '0'))) as uid
 				FROM {$wpdb->prefix}rank_math_analytics_gsc 
@@ -662,10 +663,10 @@ class Stats extends Keywords {
 					$this->end_date,
 					$dimension
 				)
-			); // phpcs:enable
+			);
 
 			// Get old position data.
-			$old_positions = $wpdb->get_results( // phpcs:disable -- The $sub_where is already sanitized.
+			$old_positions = DB_Helper::get_results(
 				$wpdb->prepare(
 					"SELECT %i, MAX(CONCAT(%i, ':', DATE(`created`), ':', LPAD((100 - `position`), 3, '0'))) as uid
 				FROM {$wpdb->prefix}rank_math_analytics_gsc 
@@ -677,7 +678,7 @@ class Stats extends Keywords {
 					$this->compare_end_date,
 					$dimension,
 				)
-			); // phpcs:enable
+			);
 
 			// Extract proper position data.
 			$positions     = $this->extract_data_from_mixed( $positions, 'uid', ':', [ 'position', 'date' ] );
@@ -702,7 +703,7 @@ class Stats extends Keywords {
 			// In case dimension is not 'page', position data for each dimension will be most recent position value.
 
 			// Step1. Get most recent row id for each dimension for current data.
-			$ids = $wpdb->get_results( // phpcs:disable -- The $sub_where is already sanitized.
+			$ids = DB_Helper::get_results(
 				$wpdb->prepare(
 					"SELECT t1.id as id
 				FROM {$wpdb->prefix}rank_math_analytics_gsc t1
@@ -715,14 +716,14 @@ class Stats extends Keywords {
 					$this->end_date,
 					$dimension
 				)
-			); // phpcs:enable
+			);
 
 			// Step2. Get id list from above result.
 			$ids       = wp_list_pluck( $ids, 'id' );
 			$ids_where = " AND id IN ('" . join( "', '", $ids ) . "')";
 
 			// Step3. Get most recent row id for each dimension for compare data.
-			$old_ids = $wpdb->get_results( // phpcs:disable -- The $sub_where is already sanitized.
+			$old_ids = DB_Helper::get_results(
 				$wpdb->prepare(
 					"SELECT t1.id as id
 				FROM {$wpdb->prefix}rank_math_analytics_gsc t1
@@ -735,14 +736,14 @@ class Stats extends Keywords {
 					$this->compare_end_date,
 					$dimension
 				)
-			); // phpcs:enable
+			);
 
 			// Step4. Get id list from above result.
 			$old_ids       = wp_list_pluck( $old_ids, 'id' );
 			$old_ids_where = " AND id IN ('" . join( "', '", $old_ids ) . "')";
 
 			// Step5. Get position and difference data based on above id list.
-			$positions = $wpdb->get_results( // phpcs:disable -- The $ids_where, and $old_ids_where is already sanitized.
+			$positions = DB_Helper::get_results(
 				$wpdb->prepare(
 					"SELECT
 						t1.%i as %i, ROUND( t1.position, 0 ) as position,
@@ -761,7 +762,7 @@ class Stats extends Keywords {
 					$dimension,
 				),
 				ARRAY_A
-			); // phpcs:enable
+			);
 
 			$positions = $this->set_dimension_as_key( $positions, $dimension );
 		}
@@ -790,7 +791,7 @@ class Stats extends Keywords {
 		$sub_where = $args['sub_where'];
 
 		// Get metrics data like impressions, click, ctr, etc.
-		$metrics = $wpdb->get_results( // phpcs:disable -- The $sub_where is already sanitized.
+		$metrics = DB_Helper::get_results(
 			$wpdb->prepare(
 				"SELECT
 				t1.%i as %i, t1.clicks, t1.impressions, t1.ctr,
@@ -822,7 +823,7 @@ class Stats extends Keywords {
 				$dimension
 			),
 			ARRAY_A
-		); // phpcs:enable
+		);
 
 		$metrics = $this->set_dimension_as_key( $metrics, $dimension );
 

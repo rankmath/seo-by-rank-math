@@ -764,10 +764,18 @@ trait WordPress {
 		add_filter( 'upload_mimes', [ __CLASS__, 'allow_txt_upload' ] );
 		add_filter( 'wp_check_filetype_and_ext', [ __CLASS__, 'filetype_and_ext' ], 10, 3 );
 
-		// Do the upload.
-		$file = isset( $_FILES['import-me'] )
-			? wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] )
-			: new WP_Error( 'missing_file', __( 'No file selected for upload.', 'rank-math' ) );
+		if ( isset( $_FILES['import-me'] ) ) {
+			// Do the upload.
+			if ( ! function_exists( 'wp_handle_upload' ) ) {
+				$required_file = ABSPATH . 'wp-admin/includes/file.php';
+				if ( file_exists( $required_file ) ) {
+					require_once $required_file; // @phpstan-ignore-line
+				}
+			}
+			$file = wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] );
+		} else {
+			$file = new WP_Error( 'missing_file', __( 'No file selected for upload.', 'rank-math' ) );
+		}
 
 		// Remove upload hooks.
 		remove_filter( 'upload_mimes', [ __CLASS__, 'allow_txt_upload' ] );

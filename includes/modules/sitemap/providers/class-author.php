@@ -16,6 +16,7 @@ namespace RankMath\Sitemap\Providers;
 use DateTime;
 use DateTimeZone;
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Sitemap\Router;
 use RankMath\Sitemap\Sitemap;
 use RankMath\Traits\Hooker;
@@ -320,6 +321,6 @@ class Author implements Provider {
 		ORDER BY umt1.meta_value DESC
 		 ";
 
-		return $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery -- Proper validation is applied to variables used in the SQL query.
+		return DB_Helper::get_results( $sql );
 	}
 }

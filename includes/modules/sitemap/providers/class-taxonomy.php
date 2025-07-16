@@ -18,6 +18,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Router;
 use RankMath\Sitemap\Sitemap;
 use RankMath\Sitemap\Image_Parser;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -309,7 +310,7 @@ class Taxonomy implements Provider {
 	public function get_lastmod( $term ) {
 		global $wpdb;
 
-		return $wpdb->get_var(
+		return DB_Helper::get_var(
 			$wpdb->prepare(
 				"
 			SELECT MAX(p.post_modified_gmt) AS lastmod

@@ -154,9 +154,8 @@ class AJAX {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
 		$this->has_cap_ajax( 'analytics' );
 
-		$success = Api::get()->get_search_analytics();
-
-		if ( is_wp_error( $success ) ) {
+		$success = Google_Analytics::test_connection();
+		if ( false === $success ) {
 			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ) );
 		}
 
@@ -170,9 +169,8 @@ class AJAX {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
 		$this->has_cap_ajax( 'analytics' );
 
-		$success = Analytics::get_analytics( [], true );
-
-		if ( is_wp_error( $success ) ) {
+		$success = Analytics::test_connection();
+		if ( false === $success ) {
 			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ) );
 		}
 

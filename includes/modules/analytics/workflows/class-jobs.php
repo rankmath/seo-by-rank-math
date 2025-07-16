@@ -12,6 +12,7 @@ namespace RankMath\Analytics\Workflow;
 
 use Exception;
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Google\Api;
 use RankMath\Google\Console;
 use RankMath\Google\Url_Inspection;
@@ -77,7 +78,10 @@ class Jobs {
 	 * Fetch missing console data.
 	 */
 	public function data_fetch() {
-		$this->check_for_missing_dates( 'console' );
+		$success = Console::test_connection();
+		if ( $success ) {
+			$this->check_for_missing_dates( 'console' );
+		}
 	}
 
 	/**
@@ -111,10 +115,10 @@ class Jobs {
 		global $wpdb;
 
 		// Delete all useless data from console data table.
-		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
+		DB_Helper::get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
 
 		// Delete useless data from inspections table too.
-		$wpdb->get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_inspections WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
+		DB_Helper::get_results( "DELETE FROM {$wpdb->prefix}rank_math_analytics_inspections WHERE page NOT IN ( SELECT page from {$wpdb->prefix}rank_math_analytics_objects )" );
 
 		delete_transient( 'rank_math_analytics_data_info' );
 		DB::purge_cache();

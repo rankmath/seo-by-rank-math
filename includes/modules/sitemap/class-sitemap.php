@@ -11,6 +11,7 @@
 namespace RankMath\Sitemap;
 
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Helpers\Sitepress;
 use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Html\Sitemap as Html_Sitemap;
@@ -237,7 +238,7 @@ class Sitemap {
 				GROUP BY p.post_type
 				ORDER BY p.post_modified_gmt DESC";
 
-				foreach ( $wpdb->get_results( $sql ) as $obj ) { // phpcs:ignore
+				foreach ( DB_Helper::get_results( $sql ) as $obj ) {
 					$post_type_dates[ $obj->post_type ] = $obj->date;
 				}
 			}

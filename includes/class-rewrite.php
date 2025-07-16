@@ -15,6 +15,7 @@ namespace RankMath;
 
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Sitepress;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -82,7 +83,7 @@ class Rewrite {
 			return $query_vars;
 		}
 
-		$author_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key='rank_math_permalink' AND meta_value = %s", $query_vars['author_name'] ) );
+		$author_id = DB_Helper::get_var( $wpdb->prepare( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key='rank_math_permalink' AND meta_value = %s", $query_vars['author_name'] ) );
 		if ( $author_id ) {
 			$query_vars['author'] = $author_id;
 			unset( $query_vars['author_name'] );

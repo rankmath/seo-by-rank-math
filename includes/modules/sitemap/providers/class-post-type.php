@@ -14,6 +14,7 @@
 namespace RankMath\Sitemap\Providers;
 
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Router;
 use RankMath\Sitemap\Sitemap;
@@ -128,7 +129,7 @@ class Post_Type implements Provider {
 					)
 					x WHERE rownum %% %d = 0 ORDER BY post_modified_gmt DESC";
 
-				$all_dates = $wpdb->get_col( $wpdb->prepare( $sql, $post_type, $max_entries ) ); // phpcs:ignore
+				$all_dates = DB_Helper::get_col( $wpdb->prepare( $sql, $post_type, $max_entries ) );
 			}
 
 			for ( $page_counter = 0; $page_counter < $max_pages; $page_counter++ ) {
@@ -277,7 +278,7 @@ class Post_Type implements Provider {
 		AND p.ID != '{$posts_to_exclude}'
 		{$where_filter}";
 
-		return (int) $wpdb->get_var( $sql ); // phpcs:ignore
+		return (int) DB_Helper::get_var( $sql );
 	}
 
 	/**
@@ -392,7 +393,7 @@ class Post_Type implements Provider {
 			o JOIN {$wpdb->posts} l ON l.ID = o.ID
 		";
 
-		$posts = $wpdb->get_results( $wpdb->prepare( $sql, $count, $offset ) ); // phpcs:ignore
+		$posts = DB_Helper::get_results( $wpdb->prepare( $sql, $count, $offset ) );
 
 		$post_ids = [];
 		foreach ( $posts as $post ) {

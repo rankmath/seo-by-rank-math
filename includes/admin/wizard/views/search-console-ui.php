@@ -116,8 +116,8 @@ $console_classes        = Helper::classnames(
 $console_status_classes = Helper::classnames(
 	'rank-math-connection-status',
 	[
-		'rank-math-connection-status-success' => $is_profile_connected,
-		'rank-math-connection-status-error'   => ! $is_profile_connected,
+		'rank-math-connection-status-success' => Console::is_valid_connection(),
+		'rank-math-connection-status-error'   => ! Console::is_valid_connection(),
 	]
 );
 
@@ -129,7 +129,6 @@ $console_status = $is_profile_connected ? 'Connected' : 'Not Connected';
 		<h3><span class="rank-math-connection-status-wrap"><span class="<?php echo esc_attr( $console_status_classes ); ?>" title="<?php echo esc_attr( $console_status ); ?>"></span></span> <?php esc_html_e( 'Search Console', 'rank-math' ); ?></h3>
 	</header>
 	<div class="rank-math-accordion-content">
-
 		<?php
 		if ( ! Permissions::has_console() ) {
 			Permissions::print_warning();
@@ -161,6 +160,12 @@ $console_status = $is_profile_connected ? 'Connected' : 'Not Connected';
 				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option to show the Index Status tab in the Analytics module.', 'rank-math' ); ?> <a href="<?php echo KB::get( 'url-inspection-api', 'SW Analytics Index Status Option' ); // phpcs:ignore ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more.', 'rank-math' ); ?></a></div>
 			</div>
 		</div>
+
+		<?php if ( ! Console::is_valid_connection() ) : ?>
+			<div class="rank-math-notice rank-math-notice--error">
+				<p><?php esc_html_e( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ); ?></p>
+			</div>
+		<?php endif; ?>
 	</div>
 </div>
 
@@ -176,8 +181,8 @@ $analytic_classes        = Helper::classnames(
 $analytic_status_classes = Helper::classnames(
 	'rank-math-connection-status',
 	[
-		'rank-math-connection-status-success' => $is_analytics_connected,
-		'rank-math-connection-status-error'   => ! $is_analytics_connected,
+		'rank-math-connection-status-success' => Analytics::is_valid_connection(),
+		'rank-math-connection-status-error'   => ! Analytics::is_valid_connection(),
 	]
 );
 $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connected';
@@ -211,9 +216,9 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 				<select class="cmb2_select site-analytics-account notrack" name="site-analytics-account" id="site-analytics-account" data-selected="<?php echo esc_attr( $analytics['account_id'] ); ?>" disabled="disabled">
 					<?php
 					if ( $is_analytics_connected ) :
-						$analytic_account = $all_services['accounts'][ $analytics['account_id'] ];
+						$analytic_account = $all_services['accounts'][ $analytics['account_id'] ]['name'] ?? '';
 						?>
-					<option value="<?php echo esc_attr( $analytics['account_id'] ); ?>"><?php echo esc_attr( $analytic_account['name'] ); ?></option>
+					<option value="<?php echo esc_attr( $analytics['account_id'] ); ?>"><?php echo esc_attr( $analytic_account ); ?></option>
 					<?php endif; ?>
 				</select>
 			</div>
@@ -222,7 +227,7 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 				<select class="cmb2_select site-analytics-property notrack" name="site-analytics-property" id="site-analytics-property" data-selected="<?php echo esc_attr( $analytics['property_id'] ); ?>" disabled="disabled">
 					<?php
 					if ( $is_analytics_connected ) :
-						$analytic_property = $all_services['accounts'][ $analytics['account_id'] ]['properties'][ $analytics['property_id'] ]['name'];
+						$analytic_property = $all_services['accounts'][ $analytics['account_id'] ]['properties'][ $analytics['property_id'] ]['name'] ?? '';
 						?>
 					<option value="<?php echo esc_attr( $analytics['property_id'] ); ?>"><?php echo esc_html( $analytic_property ); ?></option>
 					<?php endif; ?>
@@ -327,6 +332,12 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 				</div>
 			</div>
 		</div>
+
+		<?php if ( ! Analytics::is_valid_connection() ) : ?>
+			<div class="rank-math-notice rank-math-notice--error">
+				<p><?php esc_html_e( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ); ?></p>
+			</div>
+		<?php endif; ?>
 	</div>
 </div>
 

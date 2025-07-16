@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.248
+Stable tag: 1.0.249
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,15 +339,13 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.248 [July 03, 2025] =
-- Added: [Filter](https://rankmath.com/kb/filters-hooks-api-developer/#remove-target-blank-attribute) to exclude certain domains from the [Open External Links in New Tab](https://rankmath.com/kb/open-links-in-new-window/) option
-- Added: [Filter](https://rankmath.com/kb/filters-hooks-api-developer/#html-sitemap-post-limit) to set a hard limit on the posts displayed in the HTML sitemap, defaults to 1000 posts
-- Improved: Changed the [Analytics](https://rankmath.com/kb/analytics/) data fetch frequency from 7 days to 3 days to show fresher data sooner in the Stats
-- Improved: Site getting automatically disconnected from Analytics will now attempt to reconnect in the background, and if that fails, a notice will prompt the user to reconnect manually
-- Improved: [Analytics URL Inspection](https://rankmath.com/kb/url-inspection-api-integration/) now prioritizes fetching high-traffic pages before other pages
-- Fixed: Incorrect [Post Analytics stats](https://rankmath.com/kb/analytics/#post-analytics) shown for secondary language posts when the sub-directory option is enabled in the WPML plugin
-- Fixed: PHP warning on the [Database Tools page](https://rankmath.com/kb/rank-math-status-and-tools/#database-tools) when WPML plugin is not active
-- Fixed: Deprecated PHP warning on the BuddyPress author page
-- Fixed: Deprecated warnings shown in the browser inspect on the [Setup Wizard page](https://rankmath.com/kb/how-to-setup/)
+= 1.0.249 [July 16, 2025] =
+- Improved: Updated the [Links modal](https://rankmath.com/kb/should-you-nofollow-external-links/) UI to align with WordPress styling
+- Improved: Optimized database queries in the [Analytics module](https://rankmath.com/kb/analytics) running in background processes
+- Improved: Added site notice for failed Analytics data fetch due to any reason
+- Fixed: [Focus Keyword in Image Alt attributes test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-image-alt-attributes-primary-focus-keyword-only) was failing when content had no spaces
+- Fixed: [Content Analysis tests](https://rankmath.com/kb/content-analysis-tests-for-product-pages/) were not updating in the Classic editor after switching from Text to Visual mode
+- Fixed: Attachment name and description were not updating on some sites with [Content AI module](https://rankmath.com/kb/how-to-use-content-ai/) active
+- Fixed: PHP error on BuddyPress Members page when BuddyBoss is active on the site
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

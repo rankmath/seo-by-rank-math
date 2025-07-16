@@ -13,6 +13,7 @@ namespace RankMath\Admin;
 use RankMath\Runner;
 use RankMath\Helper;
 use RankMath\Helpers\Str;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Helpers\Param;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Traits\Ajax;
@@ -196,7 +197,7 @@ class Admin implements Runner {
 		}
 
 		global $wpdb;
-		$pages = $wpdb->get_results( // phpcs:ignore
+		$pages = DB_Helper::get_results(
 			$wpdb->prepare(
 				"SELECT ID, post_title FROM {$wpdb->prefix}posts WHERE post_type = 'page' AND post_status = 'publish' AND post_title LIKE %s",
 				"%{$wpdb->esc_like( $term )}%"
@@ -251,7 +252,7 @@ class Admin implements Runner {
 		}
 		$query .= sprintf( '%1$s.meta_key = \'rank_math_focus_keyword\' and ( %1$s.meta_value = %2$s OR %1$s.meta_value like %3$s ) and %1$s.%4$s_id != %5$d', $meta, '%s', '%s', $object_type, $object_id );
 
-		$data = $wpdb->get_row( $wpdb->prepare( $query, $keyword, $wpdb->esc_like( $keyword ) . ',%' ) ); // phpcs:ignore
+		$data = DB_Helper::get_row( $wpdb->prepare( $query, $keyword, $wpdb->esc_like( $keyword ) . ',%' ) );
 
 		$result['isNew'] = empty( $data );
 

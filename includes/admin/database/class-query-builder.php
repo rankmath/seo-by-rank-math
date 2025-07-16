@@ -65,7 +65,7 @@ class Query_Builder {
 	 * @param string $table   The table name.
 	 * @param string $context Optional context passed to filters. Default empty string.
 	 */
-	public function __construct( $table, $context = '' ) {
+	public function __construct( $table = '', $context = '' ) {
 		$this->table   = $table;
 		$this->context = $context;
 		$this->reset();
@@ -79,12 +79,7 @@ class Query_Builder {
 	 * @return mixed
 	 */
 	public function get( $output = \OBJECT ) {
-		global $wpdb;
-
-		$this->last_query = $this->translateSelect();
-		$this->reset();
-
-		return $wpdb->get_results( $this->last_query, $output ); // phpcs:ignore
+		return $this->get_results( $this->translateSelect(), $output );
 	}
 
 	/**
@@ -95,13 +90,7 @@ class Query_Builder {
 	 * @return mixed
 	 */
 	public function one( $output = \OBJECT ) {
-		global $wpdb;
-
-		$this->limit( 1 );
-		$this->last_query = $this->translateSelect();
-		$this->reset();
-
-		return $wpdb->get_row( $this->last_query, $output ); // phpcs:ignore
+		return $this->get_row( $this->translateSelect(), $output );
 	}
 
 	/**
@@ -181,9 +170,21 @@ class Query_Builder {
 	 * @return int
 	 */
 	public function get_found_rows() {
-		global $wpdb;
+		return $this->get_var( 'SELECT FOUND_ROWS();' );
+	}
 
-		return $wpdb->get_var( 'SELECT FOUND_ROWS();' );
+	/**
+	 * Get a single variable from the database.
+	 *
+	 * @param string $query The SQL query to run.
+	 */
+	public function get_var( $query ) {
+		return $this->run(
+			[
+				'type'  => 'var',
+				'query' => $query,
+			]
+		);
 	}
 
 	/**
@@ -198,10 +199,12 @@ class Query_Builder {
 	 * @return int|false Number of rows affected|selected or false on error.
 	 */
 	public function query( $query ) {
-		global $wpdb;
-		$this->last_query = $query;
-
-		return $wpdb->query( $query ); // phpcs:ignore
+		return $this->run(
+			[
+				'type'  => 'query',
+				'query' => $query,
+			]
+		);
 	}
 
 	/**
@@ -284,5 +287,93 @@ class Query_Builder {
 		];
 
 		return $this;
+	}
+
+	/**
+	 * Get a single column from the database.
+	 *
+	 * @param string $query The SQL query to run.
+	 * @param int    $index The column index to retrieve.
+	 */
+	public function get_col( $query = '', $index = 0 ) {
+		return $this->run(
+			[
+				'type'  => 'col',
+				'query' => $query,
+				'index' => $index,
+			]
+		);
+	}
+
+	/**
+	 * Get a single row from the database.
+	 *
+	 * @param string $query  The SQL query to run.
+	 * @param string $output The output to retrieve.
+	 * @param int    $index  The row index to retrieve.
+	 */
+	public function get_row( $query = '', $output = OBJECT, $index = 0 ) {
+		return $this->run(
+			[
+				'type'   => 'row',
+				'query'  => $query,
+				'index'  => $index,
+				'output' => $output,
+			]
+		);
+	}
+
+	/**
+	 * Get results from the database.
+	 *
+	 * @param string $query  The SQL query to run.
+	 * @param string $output The output format.
+	 */
+	public function get_results( $query = '', $output = OBJECT ) {
+		return $this->run(
+			[
+				'query'  => $query,
+				'output' => $output,
+			]
+		);
+	}
+
+	/**
+	 * Run the query and return the results.
+	 *
+	 * @param array $args The query arguments.
+	 */
+	public function run( $args = [] ) {
+		global $wpdb;
+
+		$output = isset( $args['output'] ) && $args['output'] ? $args['output'] : OBJECT;
+		$type   = $args['type'] ?? '';
+		$query  = $args['query'] ?? '';
+		$index  = $args['index'] ?? '';
+
+		$start_time = microtime( true );
+
+		$this->last_query = $query;
+		$this->reset();
+
+		switch ( $type ) {
+			case 'row':
+				$results = $wpdb->get_row( $query, $output, $index );
+				break;
+			case 'col':
+				$results = $wpdb->get_col( $query, $index );
+				break;
+			case 'query':
+				$results = $wpdb->query( $query );
+				break;
+			case 'var':
+				$results = $wpdb->get_var( $query );
+				break;
+			default:
+				$results = $wpdb->get_results( $query, $output );
+				break;
+		}
+
+		return apply_filters( 'rank_math/database/query/results', $results, $args, $start_time );
 	}
 }

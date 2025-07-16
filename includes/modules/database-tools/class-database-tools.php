@@ -14,6 +14,7 @@ use RankMath\Helpers\Arr;
 use RankMath\Helpers\Schedule;
 use RankMath\Installer;
 use RankMath\Traits\Hooker;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Helpers\Sitepress;
 
 defined( 'ABSPATH' ) || exit;
@@ -69,7 +70,7 @@ class Database_Tools {
 	public function clear_transients() {
 		global $wpdb;
 
-		$transients = $wpdb->get_col(
+		$transients = DB_Helper::get_col(
 			"SELECT `option_name` AS `name`
 			FROM  $wpdb->options
 			WHERE `option_name` LIKE '%\\_transient\\_rank_math%'
@@ -117,7 +118,7 @@ class Database_Tools {
 	public function delete_links() {
 		global $wpdb;
 
-		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_internal_links )" );
+		$exists = DB_Helper::get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_internal_links )" );
 		if ( empty( $exists ) ) {
 			return [
 				'status'  => 'error',
@@ -125,8 +126,8 @@ class Database_Tools {
 			];
 		}
 
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_links" );
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_meta" );
+		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_links" );
+		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_meta" );
 
 		return __( 'Internal Links successfully deleted.', 'rank-math' );
 	}
@@ -137,7 +138,7 @@ class Database_Tools {
 	public function delete_log() {
 		global $wpdb;
 
-		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_404_logs )" );
+		$exists = DB_Helper::get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_404_logs )" );
 		if ( empty( $exists ) ) {
 			return [
 				'status'  => 'error',
@@ -145,7 +146,7 @@ class Database_Tools {
 			];
 		}
 
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_404_logs;" );
+		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_404_logs;" );
 
 		return __( '404 Log successfully deleted.', 'rank-math' );
 	}
@@ -156,7 +157,7 @@ class Database_Tools {
 	public function delete_redirections() {
 		global $wpdb;
 
-		$exists = $wpdb->get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_redirections )" );
+		$exists = DB_Helper::get_var( "SELECT EXISTS ( SELECT 1 FROM {$wpdb->prefix}rank_math_redirections )" );
 		if ( empty( $exists ) ) {
 			return [
 				'status'  => 'error',
@@ -164,8 +165,8 @@ class Database_Tools {
 			];
 		}
 
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections;" );
-		$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections_cache;" );
+		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections;" );
+		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections_cache;" );
 
 		return __( 'Redirection rules successfully deleted.', 'rank-math' );
 	}
@@ -219,7 +220,7 @@ class Database_Tools {
 			'actionscheduler_claims',
 		];
 
-		$found_tables = $wpdb->get_col( "SHOW TABLES LIKE '{$wpdb->prefix}actionscheduler%'" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$found_tables = DB_Helper::get_col( "SHOW TABLES LIKE '{$wpdb->prefix}actionscheduler%'" );
 		foreach ( $table_list as $table_name ) {
 			if ( ! in_array( $wpdb->prefix . $table_name, $found_tables, true ) ) {
 				$this->recreate_actionscheduler_tables();

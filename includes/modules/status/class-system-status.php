@@ -11,6 +11,7 @@
 namespace RankMath\Status;
 
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Google\Authentication;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Google\Permissions;
@@ -63,7 +64,7 @@ class System_Status {
 			],
 		];
 
-		$database_tables = $wpdb->get_results(
+		$database_tables = DB_Helper::get_results(
 			$wpdb->prepare(
 				"SELECT
 				table_name AS 'name'
@@ -169,7 +170,7 @@ class System_Status {
 	 */
 	public static function get_table_size( $table ) {
 		global $wpdb;
-		$size = (int) $wpdb->get_var( "SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema='" . $wpdb->dbname . "' AND (table_name='" . $wpdb->prefix . $table . "')" ); // phpcs:ignore
+		$size = (int) DB_Helper::get_var( "SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema='" . $wpdb->dbname . "' AND (table_name='" . $wpdb->prefix . $table . "')" );
 		return size_format( $size );
 	}
 }

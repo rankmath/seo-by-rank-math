@@ -23,6 +23,7 @@ use RankMath\Helpers\Content_AI;
 use RankMath\Helpers\HTML;
 use RankMath\Replace_Variables\Replacer;
 use RankMath\Helpers\Param;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -393,8 +394,7 @@ class Helper {
 			return;
 		}
 
-		global $wpdb;
-		$rank_math_enable_big_select = $wpdb->query( 'SET SESSION SQL_BIG_SELECTS=1' );
+		$rank_math_enable_big_select = DB_Helper::query( 'SET SESSION SQL_BIG_SELECTS=1' );
 	}
 
 	/**

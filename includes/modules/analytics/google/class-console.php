@@ -10,6 +10,7 @@
 
 namespace RankMath\Google;
 
+use RankMath\Google\Api;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Schedule;
 use RankMath\Analytics\Workflow\Base;
@@ -22,6 +23,11 @@ defined( 'ABSPATH' ) || exit;
  * Console class.
  */
 class Console extends Analytics {
+
+	/**
+	 * Connection status key.
+	 */
+	const CONNECTION_STATUS_KEY = 'rank_math_console_connection_error';
 
 	/**
 	 * Add site.
@@ -333,5 +339,19 @@ class Console extends Analytics {
 		);
 
 		return ! empty( $profile['profile'] );
+	}
+
+	/**
+	 * Is valid connection
+	 */
+	public static function is_valid_connection() {
+		return Api::get()->get_connection_status( self::CONNECTION_STATUS_KEY );
+	}
+
+	/**
+	 * Test connection
+	 */
+	public static function test_connection() {
+		return Api::get()->check_connection_status( self::CONNECTION_STATUS_KEY, [ Api::get(), 'get_search_analytics' ] );
 	}
 }

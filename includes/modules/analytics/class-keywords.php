@@ -11,6 +11,7 @@
 namespace RankMath\Analytics;
 
 use WP_REST_Request;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Analytics\Stats;
 
 defined( 'ABSPATH' ) || exit;
@@ -38,7 +39,7 @@ class Keywords extends Posts {
 			Stats::get()->start_date,
 			Stats::get()->end_date
 		);
-		$data = $wpdb->get_results( $query ); // phpcs:ignore
+		$data  = DB_Helper::get_results( $query );
 
 		return $data;
 	}
@@ -122,7 +123,7 @@ class Keywords extends Posts {
 			$this->start_date,
 			$this->end_date
 		);
-		$data  = $wpdb->get_results( $query ); // phpcs:ignore
+		$data  = DB_Helper::get_results( $query );
 
 		// Get compare keywords count filtered by position range.
 		$query   = $wpdb->prepare(
@@ -145,7 +146,7 @@ class Keywords extends Posts {
 			$this->compare_start_date,
 			$this->compare_end_date
 		);
-		$compare = $wpdb->get_results( $query ); // phpcs:ignore
+		$compare = DB_Helper::get_results( $query );
 
 		$positions = [
 			'top3'          => [
@@ -223,7 +224,7 @@ class Keywords extends Posts {
 			$this->start_date,
 			$this->end_date
 		);
-		$position_dates = $wpdb->get_results( $query, ARRAY_A );
+		$position_dates = DB_Helper::get_results( $query, ARRAY_A );
 		// phpcs:enable
 
 		if ( count( $position_dates ) === 0 ) {
@@ -256,7 +257,7 @@ class Keywords extends Posts {
 			$this->start_date,
 			$this->end_date
 		);
-		$position_data = $wpdb->get_results( $query );
+		$position_data = DB_Helper::get_results( $query );
 		// phpcs:enable
 
 		// Construct return data.

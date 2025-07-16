@@ -11,6 +11,7 @@
 namespace RankMath\Analytics;
 
 use RankMath\Traits\Cache;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -162,7 +163,7 @@ class Summary {
 		];
 
 		$object_type_sql = $post_type ? ' AND object_subtype = "' . $post_type . '"' : '';
-		$data            = $wpdb->get_results(
+		$data            = DB_Helper::get_results(
 			"SELECT COUNT(object_id) AS count,
 				CASE
 					WHEN seo_score BETWEEN 81 AND 100 THEN 'good'
@@ -264,8 +265,8 @@ class Summary {
 
 		$stats->position = [
 			'total'      => is_null( $stats->position ) ? 'n/a' : (float) \number_format( $stats->position, 2 ),
-			'previous'   => is_null( $stats->position ) ? 'n/a' : (float) \number_format( $old_stats->position, 2 ),
-			'difference' => is_null( $stats->position ) ? 'n/a' : (float) \number_format( $stats->position - $old_stats->position, 2 ),
+			'previous'   => is_null( $old_stats->position ) ? 'n/a' : (float) \number_format( $old_stats->position, 2 ),
+			'difference' => is_null( $old_stats->position ) || is_null( $old_stats->position ) ? 'n/a' : (float) \number_format( $stats->position - $old_stats->position, 2 ),
 		];
 		$stats->keywords = $this->get_keywords_summary();
 		$stats->graph    = $this->get_analytics_summary_graph();
@@ -327,7 +328,7 @@ class Summary {
 		global $wpdb;
 
 		// Get Total Keywords Counts.
-		$keywords_count = $wpdb->get_var(
+		$keywords_count = DB_Helper::get_var(
 			$wpdb->prepare(
 				"SELECT NULLIF(COUNT(DISTINCT(query)), 0)
 				FROM {$wpdb->prefix}rank_math_analytics_gsc
@@ -337,7 +338,7 @@ class Summary {
 			)
 		);
 
-		$old_keywords_count = $wpdb->get_var(
+		$old_keywords_count = DB_Helper::get_var(
 			$wpdb->prepare(
 				"SELECT NULLIF(COUNT(DISTINCT(query)), 0)
 				FROM {$wpdb->prefix}rank_math_analytics_gsc
@@ -380,8 +381,7 @@ class Summary {
 			$this->start_date,
 			$this->end_date
 		);
-
-		$analytics = $wpdb->get_results( $query );
+		$analytics = DB_Helper::get_results( $query );
 		$analytics = $this->set_dimension_as_key( $analytics, 'range_group' );
 		// phpcs:enable
 
@@ -397,7 +397,7 @@ class Summary {
 			$this->start_date,
 			$this->end_date
 		);
-		$keywords = $wpdb->get_results( $query );
+		$keywords = DB_Helper::get_results( $query );
 		// phpcs:enable
 
 		$keywords = $this->extract_data_from_mixed( $keywords, 'mixed', ':', [ 'keywords', 'date' ] );
