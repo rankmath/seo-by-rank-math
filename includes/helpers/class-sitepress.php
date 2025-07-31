@@ -155,10 +155,10 @@ class Sitepress {
 	/**
 	 * Get sitepress global variable.
 	 *
-	 * @return object
+	 * @return object|null
 	 */
 	public function get_var() {
-		return $GLOBALS['sitepress'];
+		return ! empty( $GLOBALS['sitepress'] ) ? $GLOBALS['sitepress'] : null;
 	}
 
 	/**

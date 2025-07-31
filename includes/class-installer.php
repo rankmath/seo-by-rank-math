@@ -376,6 +376,7 @@ class Installer {
 					'analytics_stats'                     => 'on',
 					'toc_block_title'                     => 'Table of Contents',
 					'toc_block_list_style'                => 'ul',
+					'llms_post_types'                     => array_keys( $post_types ),
 				]
 			)
 		);

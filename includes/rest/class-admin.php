@@ -397,7 +397,7 @@ class Admin extends WP_REST_Controller {
 	 * @return void
 	 */
 	private function maybe_delete_rewrite_rules( $module ) {
-		if ( 'sitemap' === $module ) {
+		if ( in_array( $module, [ 'sitemap', 'llms-txt' ], true ) ) {
 			delete_option( 'rewrite_rules' );
 		}
 	}

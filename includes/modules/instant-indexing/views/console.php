@@ -28,3 +28,17 @@ $cmb->add_field(
 		'after_field'     => '<a href="#" id="indexnow_submit" class="button button-primary large-button" style="margin-top: 20px;">' . esc_html__( 'Submit URLs', 'rank-math' ) . '</a> <span class="spinner" id="indexnow_spinner"></span>',
 	]
 );
+
+$cmb->add_field(
+	[
+		'id'         => 'educational_note',
+		'type'       => 'notice',
+		'what'       => 'info',
+		'save_field' => false,
+		'content'    => sprintf(
+			/* translators: Note text */
+			esc_html__( '%s The URLs will be submitted to Bing and Yandex only, and not to Google.', 'rank-math' ),
+			'<b>' . esc_html__( 'Note:', 'rank-math' ) . '</b>'
+		),
+	]
+);

@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.249
+Stable tag: 1.0.250
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,13 +339,12 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.249 [July 16, 2025] =
-- Improved: Updated the [Links modal](https://rankmath.com/kb/should-you-nofollow-external-links/) UI to align with WordPress styling
-- Improved: Optimized database queries in the [Analytics module](https://rankmath.com/kb/analytics) running in background processes
-- Improved: Added site notice for failed Analytics data fetch due to any reason
-- Fixed: [Focus Keyword in Image Alt attributes test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-image-alt-attributes-primary-focus-keyword-only) was failing when content had no spaces
-- Fixed: [Content Analysis tests](https://rankmath.com/kb/content-analysis-tests-for-product-pages/) were not updating in the Classic editor after switching from Text to Visual mode
-- Fixed: Attachment name and description were not updating on some sites with [Content AI module](https://rankmath.com/kb/how-to-use-content-ai/) active
-- Fixed: PHP error on BuddyPress Members page when BuddyBoss is active on the site
+= 1.0.250 [July 31, 2025] =
+- Added: Support for [LLMs.txt file](https://rankmath.com/kb/llms-txt/)
+- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#exclude-canonicals-from-sitemap) to exclude posts with canonical URLs in the sitemaps
+- Added: Link to [schedule post using SocialPilot in the Post Publish Panel](https://rankmath.com/kb/sharing-content-on-social-media/)
+- Fixed: [Incorrect slug](https://rankmath.com/kb/seo-meta-tags/#elementor) being added to posts when switched using the Elementor Top Bar feature
+- Fixed: Inconsistent SEO score when using the [Update SEO Score tool](https://rankmath.com/kb/rank-math-status-and-tools/#recalculate-seo-score-for-posts) due to unprocessed focus keywords
+- Fixed: Missing SEO score when the [filter to disable Rank Math Integration from Gutenberg sidebar](https://rankmath.com/kb/filters-hooks-api-developer/#disable-gutenberg-sidebar) is used
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

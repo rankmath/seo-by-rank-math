@@ -209,6 +209,14 @@ class Manager {
 			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'rank-math' ),
 		];
 
+		$modules['llms-txt'] = [
+			'title'    => esc_html__( 'LLMS Txt', 'rank-math' ),
+			'desc'     => esc_html__( 'Serve a custom llms.txt file to guide AI models with posts, terms, and most important content on your website.', 'rank-math' ),
+			'class'    => 'RankMath\\LLMS\\LLMS_Txt',
+			'icon'     => 'bot',
+			'settings' => Helper::get_admin_url( 'options-general' ) . '#setting-panel-llms',
+		];
+
 		return $modules;
 	}
 

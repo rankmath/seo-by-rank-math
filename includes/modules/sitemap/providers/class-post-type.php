@@ -239,6 +239,32 @@ class Post_Type implements Provider {
 	}
 
 	/**
+	 * Update the query to exclude canonical posts.
+	 *
+	 * @param string $join_filter  The join filter.
+	 * @param string $where_filter The where filter.
+	 * @param array  $post_types   The post types.
+	 *
+	 * @return void
+	 */
+	private function maybe_update_query_to_exclude_posts_with_canonical_urls( &$join_filter, &$where_filter, $post_types ) {
+		/**
+		 * Allows to decide if canonical urls should be excluded from the sitemap.
+		 *
+		 * @param bool $exlude_posts_with_canonical_urls
+		 * @param array|string $post_types The post types.
+		 */
+		$exlude_posts_with_canonical_urls = $this->do_filter( 'sitemap/exlude_posts_with_canonical_urls', false, $post_types );
+		if ( ! $exlude_posts_with_canonical_urls ) {
+			return;
+		}
+
+		global $wpdb;
+		$join_filter  .= " LEFT JOIN {$wpdb->postmeta} AS pm_canonical ON ( p.ID = pm_canonical.post_id AND pm_canonical.meta_key = 'rank_math_canonical_url' )";
+		$where_filter .= ' AND pm_canonical.meta_value IS NULL';
+	}
+
+	/**
 	 * Get count of posts for post type.
 	 *
 	 * @param string $post_types Post types to retrieve count for.
@@ -266,6 +292,8 @@ class Post_Type implements Provider {
 		 * @param array  $post_types Post types.
 		 */
 		$where_filter = $this->do_filter( 'sitemap/post_count/where', '', $post_types );
+
+		$this->maybe_update_query_to_exclude_posts_with_canonical_urls( $join_filter, $where_filter, $post_types );
 
 		$sql = "SELECT COUNT( DISTINCT p.ID ) as count FROM {$wpdb->posts} as p
 		{$join_filter}
@@ -374,6 +402,8 @@ class Post_Type implements Provider {
 		 * @param array  $post_types Post types.
 		 */
 		$where_filter = $this->do_filter( 'sitemap/get_posts/where', '', $post_types );
+
+		$this->maybe_update_query_to_exclude_posts_with_canonical_urls( $join_filter, $where_filter, [ $post_types ] );
 
 		$sql = "
 			SELECT l.ID, post_title, post_content, post_name, post_parent, post_author, post_modified_gmt, post_date, post_date_gmt, post_type
