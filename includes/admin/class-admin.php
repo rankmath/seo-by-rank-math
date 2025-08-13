@@ -42,7 +42,7 @@ class Admin implements Runner {
 		$this->action( 'save_post', 'canonical_check_notice' );
 		$this->action( 'cmb2_save_options-page_fields', 'update_is_configured_value', 10, 2 );
 		$this->filter( 'action_scheduler_pastdue_actions_check_pre', 'as_exclude_pastdue_actions' );
-		$this->action( 'rank_math/pro_badge', 'offer_icon' );
+		$this->filter( 'rank_math/pro_badge', 'offer_icon' );
 		$this->filter( 'load_script_translation_file', 'load_script_translation_file', 10, 3 );
 
 		// AJAX.
@@ -463,6 +463,7 @@ class Admin implements Runner {
 		$holiday_start_time     = gmmktime( 17, 00, 00, 12, 20, $current_year ); // 20 Dec.
 		$holiday_end_time       = gmmktime( 17, 00, 00, 01, 07, 2023 ); // 07 Jan.
 
+		ob_start();
 		if (
 			( $time > $anniversary_start_time && $time < $anniversary_end_time ) ||
 			( $time > $holiday_start_time && $time < $holiday_end_time )
@@ -473,6 +474,8 @@ class Admin implements Runner {
 			</a>
 			<?php
 		}
+
+		return ob_get_clean();
 	}
 
 	/**

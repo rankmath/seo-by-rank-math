@@ -19,7 +19,7 @@ if ( ! Helper::is_site_connected() ) {
 			'type'    => 'raw',
 			'content' => '<div id="setting-panel-content-ai" class="rank-math-tab rank-math-options-panel-content exclude">
 				<div class="wp-core-ui rank-math-ui connect-wrap">
-					<a href="' . Admin_Helper::get_activate_url( admin_url( 'admin.php??page=rank-math-options-general#setting-panel-content-ai' ) ) . '" class="button button-primary button-connect button-animated" name="rank_math_activate">'
+					<a href="' . Admin_Helper::get_activate_url( Helper::get_settings_url( 'general', 'content-ai' ) ) . '" class="button button-primary button-connect button-animated" name="rank_math_activate">'
 					. esc_html__( 'Connect Your Rank Math Account', 'rank-math' )
 					. '</a>
 				</div>

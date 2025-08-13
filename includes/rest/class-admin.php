@@ -111,11 +111,11 @@ class Admin extends WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
-			'/resetSettings',
+			'/searchPage',
 			[
-				'methods'             => WP_REST_Server::EDITABLE,
-				'callback'            => [ $this, 'reset_settings' ],
-				'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_settings' ],
+				'methods'             => WP_REST_Server::ALLMETHODS,
+				'callback'            => [ $this, 'search_page' ],
+				'permission_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'can_manage_options' ],
 			]
 		);
 	}
@@ -130,6 +130,12 @@ class Admin extends WP_REST_Controller {
 	public function save_module( WP_REST_Request $request ) {
 		$module = $request->get_param( 'module' );
 		$state  = $request->get_param( 'state' );
+
+		if ( $module === 'react-settings' ) {
+			update_option( 'rank_math_react_settings_ui', $state );
+			do_action( 'rank_math/module_changed', $module, $state );
+			return true;
+		}
 
 		Helper::update_modules( [ $module => $state ] );
 		$this->maybe_delete_rewrite_rules( $module );
@@ -239,10 +245,13 @@ class Admin extends WP_REST_Controller {
 	public function update_settings( WP_REST_Request $request ) {
 		$settings = $request->get_param( 'settings' );
 		$type     = $request->get_param( 'type' );
+		$is_reset = $request->get_param( 'isReset' );
 
 		if ( $type === 'roleCapabilities' ) {
-			Helper::set_capabilities( $settings );
-			return true;
+			$is_reset ? Capability_Manager::get()->reset_capabilities() : Helper::set_capabilities( $settings );
+			return [
+				'settings' => Helper::get_roles_capabilities(),
+			];
 		}
 
 		if ( $type === 'redirections' ) {
@@ -281,28 +290,71 @@ class Admin extends WP_REST_Controller {
 			return true;
 		}
 
-		Helper::update_all_settings( ...$settings );
-		rank_math()->settings->reset();
+		if ( $type === 'instant-indexing' ) {
+			$key          = 'rank-math-options-instant-indexing';
+			$org_settings = get_option( $key );
+			if ( $is_reset ) {
+				if ( isset( $org_settings['bing_post_types'] ) ) {
+					unset( $org_settings['bing_post_types'] );
+				}
+			}
 
-		return true;
+			$org_settings['bing_post_types'] = isset( $settings['bing_post_types'] ) ? array_map( 'sanitize_text_field', $settings['bing_post_types'] ) : [];
+
+			update_option( $key, $org_settings, false );
+			return [
+				'settings' => $org_settings,
+			];
+		}
+
+		if ( ! in_array( $type, [ 'general', 'titles', 'sitemap' ], true ) ) {
+			return __( 'Invalid type.', 'rank-math' );
+		}
+
+		return \RankMath\Admin\Option_Center::save_settings(
+			$type,
+			$settings,
+			$request->get_param( 'fieldTypes' ),
+			$request->get_param( 'updated' ),
+			$is_reset
+		);
 	}
 
 	/**
-	 * Reset settings.
+	 * Update Settings.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
-	public function reset_settings( WP_REST_Request $request ) {
-		$type = $request->get_param( 'type' );
-		if ( $type === 'roleCapabilities' ) {
-			Capability_Manager::get()->reset_capabilities();
-			return true;
+	public function search_page( WP_REST_Request $request ) {
+		$term = sanitize_text_field( $request->get_param( 'searchedTerm' ) );
+
+		if ( empty( $term ) ) {
+			return rest_ensure_response( [ 'results' => [] ] );
 		}
 
-		delete_option( "rank-math-options-$type" );
-		return true;
+		global $wpdb;
+		$pages = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT ID, post_title FROM {$wpdb->prefix}posts WHERE post_type = 'page' AND post_status = 'publish' AND post_title LIKE %s",
+				'%' . $wpdb->esc_like( $term ) . '%'
+			),
+			ARRAY_A
+		);
+
+		$data = array_map(
+			function ( $page ) {
+				return [
+					'id'   => (int) $page['ID'],
+					'text' => $page['post_title'],
+					'url'  => get_permalink( $page['ID'] ),
+				];
+			},
+			$pages
+		);
+
+		return rest_ensure_response( [ 'results' => $data ] );
 	}
 
 	/**

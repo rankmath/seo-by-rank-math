@@ -221,6 +221,9 @@ class Admin extends Base {
 					/* translators: Link to kb article */
 					'desc'  => sprintf( esc_html__( 'Easily create redirects without fiddling with tedious code. %s.', 'rank-math' ), '<a href="' . KB::get( 'redirections-settings', 'Options Panel Redirections Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
+					'json'  => [
+						'redirectionTypes' => Helper::choices_redirection_types(),
+					],
 				],
 			],
 			8
@@ -233,7 +236,7 @@ class Admin extends Base {
 	 * Initialize module actions.
 	 */
 	public function init() {
-		Helper::add_json( 'redirections', $this->get_default_redirection() );
+		Helper::add_json( 'data', $this->get_default_redirection() );
 		if ( ! empty( $_REQUEST['delete_all'] ) ) {
 			check_admin_referer( 'bulk-redirections' );
 			DB::clear_trashed();
@@ -312,7 +315,7 @@ class Admin extends Base {
 			],
 			'settings'      => [
 				'class' => 'page-title-action',
-				'href'  => Helper::get_admin_url( 'options-general#setting-panel-redirections' ),
+				'href'  => Helper::get_settings_url( 'general', 'redirections' ),
 				'label' => __( 'Settings', 'rank-math' ),
 			],
 		];

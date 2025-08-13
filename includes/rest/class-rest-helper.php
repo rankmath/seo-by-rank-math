@@ -257,6 +257,7 @@ class Rest_Helper {
 	 */
 	public static function can_manage_settings( $request ) {
 		$type = $request->get_param( 'type' );
+		$type = $type === 'instant-indexing' ? 'general' : $type;
 		return $type === 'roleCapabilities' ? current_user_can( 'rank_math_role_manager' ) : current_user_can( "rank_math_$type" );
 	}
 

@@ -66,7 +66,7 @@ class Rest extends WP_REST_Controller {
 			'/getLog',
 			[
 				[
-					'methods'             => WP_REST_Server::READABLE,
+					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => [ $this, 'get_log' ],
 					'permission_callback' => [ $this, 'has_permission' ],
 					'args'                => [

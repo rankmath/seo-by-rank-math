@@ -180,7 +180,7 @@ class Frontend {
 	public function add_amp_dev_mode_xpaths( $xpaths ) {
 		$xpaths[] = '//script[ contains( text(), "var rankMath" ) ]';
 		$xpaths[] = '//*[ @id = "rank-math-css" ]';
-		$xpaths[] = '//a[starts-with(@href, "tel://")]';
+		$xpaths[] = '//a[starts-with(@href, "tel:")]';
 		return $xpaths;
 	}
 

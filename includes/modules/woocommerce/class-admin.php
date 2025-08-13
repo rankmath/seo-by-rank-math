@@ -11,6 +11,7 @@
 namespace RankMath\WooCommerce;
 
 use RankMath\KB;
+use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Module\Base;
 use RankMath\Traits\Hooker;
@@ -75,6 +76,9 @@ class Admin extends Base {
 					/* translators: Link to kb article */
 					'desc'  => sprintf( esc_html__( 'Choose how you want Rank Math to handle your WooCommerce SEO. %s.', 'rank-math' ), '<a href="' . KB::get( 'woocommerce-settings', 'Options Panel WooCommerce Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options-general.php',
+					'json'  => [
+						'brandTaxonomies' => Helper::get_object_taxonomies( 'product', 'choices', false ),
+					],
 				],
 			],
 			7

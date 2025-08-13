@@ -31,7 +31,7 @@ class Your_Site implements Wizard_Step {
 			'businessTypesChoices'   => Helper::choices_business_types(),
 			'business_type'          => Helper::get_settings( 'titles.local_business_type' ),
 			'website_name'           => Helper::get_settings( 'titles.website_name', $displayname ),
-			'website_alternate_name' => Helper::get_settings( 'titles.website_alternate_name' ),
+			'website_alternate_name' => Helper::get_settings( 'titles.website_alternate_name', '' ),
 			'company_name'           => Helper::get_settings( 'titles.knowledgegraph_name', $displayname ),
 			'open_graph_image'       => Helper::get_settings( 'titles.open_graph_image' ),
 		];

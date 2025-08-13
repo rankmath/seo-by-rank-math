@@ -17,6 +17,10 @@ use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Param;
+use RankMath\Robots_Txt;
+use RankMath\Sitemap\Router;
+use RankMath\Sitemap\Sitemap;
+use RankMath\Admin\Page;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -89,110 +93,52 @@ class Options {
 	 * @param array $config Array of configuration.
 	 */
 	public function __construct( $config ) {
-
 		$this->config( $config );
 		$this->cmb_id = $this->key . '_options';
 
-		$this->action( 'cmb2_admin_init', 'register_option_page', $this->position );
 		$this->action( 'admin_post_' . $this->key, 'reset_options', 2 );
-
-		if ( true === empty( get_option( $this->key ) ) ) {
-			$this->action( 'cmb2_init_hookup_' . $this->cmb_id, 'set_defaults', 11 );
-		}
-
-		if ( ! $this->is_current_page() ) {
-			return;
-		}
-
-		$this->action( 'admin_enqueue_scripts', 'enqueue' );
-		$this->action( 'admin_body_class', 'body_class' );
-	}
-
-	/**
-	 * Create cmb2 box.
-	 *
-	 * @return CMB2
-	 */
-	private function create_cmb2() {
-		return new_cmb2_box(
-			[
-				'id'           => $this->cmb_id,
-				'title'        => $this->title,
-				'menu_title'   => $this->menu_title,
-				'capability'   => $this->capability,
-				'object_types' => [ 'options-page' ],
-				'option_key'   => $this->key,
-				'parent_slug'  => 'rank-math',
-				'cmb_styles'   => false,
-				'display_cb'   => [ $this, 'display' ],
-			]
-		);
 	}
 
 	/**
 	 * Create option object and add settings.
 	 */
 	public function register_option_page() {
-		$cmb  = $this->create_cmb2();
-		$tabs = $this->get_tabs();
+		$current_page = str_replace( 'rank-math-options-', '', $this->key );
 
-		$cmb->add_field(
+		new Page(
+			$this->key,
+			$this->title,
 			[
-				'id'      => 'setting-panel-container-' . $this->cmb_id,
-				'type'    => 'tab_container_open',
-				'classes' => 'before-header',
-				'tabs'    => $tabs,
+				'position'   => $this->position,
+				'priority'   => 9999,
+				'parent'     => 'rank-math',
+				'capability' => $this->capability,
+				'menu_title' => $this->menu_title,
+				'render'     => [ $this, 'display' ],
+				'classes'    => $this->get_body_class(),
+				'assets'     => [
+					'styles'  => [
+						'select2-rm'        => '',
+						'rank-math-common'  => '',
+						'rank-math-cmb2'    => '',
+						'wp-components'     => '',
+						'rank-math-options' => rank_math()->plugin_url() . 'assets/admin/css/option-panel.css',
+					],
+					'scripts' => [
+						'media-editor'         => '',
+						'underscore'           => '',
+						'select2-rm'           => '',
+						'lodash'               => '',
+						'rank-math-common'     => '',
+						'wp-api-fetch'         => '',
+						'wp-data'              => '',
+						'rank-math-components' => '',
+						'rank-math-options'    => rank_math()->plugin_url() . 'assets/admin/js/settings.js',
+					],
+					'json'    => $this->get_json_data( $current_page ),
+				],
 			]
 		);
-
-		foreach ( $tabs as $id => $tab ) {
-			$located = $this->locate_file( $id, $tab );
-			if ( false === $located ) {
-				continue;
-			}
-
-			$cmb->add_field(
-				[
-					'name'    => esc_html__( 'Panel', 'rank-math' ),
-					'id'      => 'setting-panel-' . $id,
-					'type'    => 'tab',
-					'open'    => true,
-					'classes' => isset( $tab['classes'] ) ? $tab['classes'] : '',
-				]
-			);
-
-			$cmb->add_field(
-				[
-					'id'        => $id . '_section_title',
-					'type'      => 'title',
-					'name'      => isset( $tab['page_title'] ) ? $tab['page_title'] : ( isset( $tab['title'] ) ? $tab['title'] : '' ),
-					'desc'      => isset( $tab['desc'] ) ? $tab['desc'] : '',
-					'after'     => isset( $tab['after'] ) ? $tab['after'] : '',
-					'classes'   => 'tab-header',
-					'after_row' => isset( $tab['after_row'] ) ? $tab['after_row'] : '',
-				]
-			);
-
-			include $located;
-
-			$this->do_action( "admin/settings/{$id}", $cmb, $tab );
-
-			$cmb->add_field(
-				[
-					'id'   => 'setting-panel-' . $id . '-close',
-					'type' => 'tab',
-				]
-			);
-		}
-
-		$cmb->add_field(
-			[
-				'id'   => 'setting-panel-container-close-' . $this->cmb_id,
-				'type' => 'tab_container_close',
-			]
-		);
-
-		CMB2::pre_init( $cmb );
 	}
 
 	/**
@@ -236,92 +182,25 @@ class Options {
 	}
 
 	/**
-	 * Enqueue styles and scripts.
-	 */
-	public function enqueue() {
-		$screen = get_current_screen();
-
-		if ( ! Str::contains( $this->key, $screen->id ) ) {
-			return;
-		}
-
-		\CMB2_Hookup::enqueue_cmb_css();
-		rank_math()->variables->setup_json();
-		wp_enqueue_style( 'rank-math-options', rank_math()->plugin_url() . 'assets/admin/css/option-panel.css', [ 'select2-rm', 'rank-math-common', 'rank-math-cmb2' ], rank_math()->version );
-		wp_enqueue_script( 'rank-math-options', rank_math()->plugin_url() . 'assets/admin/js/option-panel.js', [ 'underscore', 'select2-rm', 'lodash', 'rank-math-common', 'wp-api-fetch' ], rank_math()->version, true );
-
-		// Add thank you.
-		Helper::add_json( 'indexUrl', rank_math()->plugin_url() . 'assets/admin/js/search-index/' );
-		Helper::add_json( 'optionPage', str_replace( 'rank-math-options-', '', $this->key ) );
-	}
-
-	/**
 	 * Add classes to <body> of WordPress admin.
 	 *
-	 * @param string $classes List of CSS classes.
 	 * @return string
 	 */
-	public function body_class( $classes = '' ) {
+	public function get_body_class() {
 		$mode = Helper::is_advanced_mode() ? 'advanced' : 'basic';
-		return $classes . ' rank-math-page rank-math-mode-' . $mode;
+		return [
+			'rank-math-page ',
+			'rank-math-mode-' . $mode,
+		];
 	}
 
 	/**
 	 * Display Setting on a page.
-	 *
-	 * @param CMB2_Options $machine Current CMB2 box object.
 	 */
-	public function display( $machine ) {
-		$cmb = $machine->cmb;
-
-		// Header.
-		rank_math()->admin->display_admin_header();
+	public function display() {
 		?>
-
-		<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) : ?>
-			<div class="rank-math-unlock-pro-notice" id="rank-math-unlock-pro-notice">
-				<a href="<?php KB::the( 'pro', 'Unlock PRO Options Panel Notice' ); ?>" target="_blank" class="pro-link">
-					<p>
-						<?php esc_html_e( 'Take your SEO to the Next Level!', 'rank-math' ); ?>
-						<strong><?php esc_html_e( 'Get Rank Math PRO!', 'rank-math' ); ?></strong>
-						<span><?php esc_html_e( 'Click here to see all the exciting features.', 'rank-math' ); ?></span>
-					</p>
-					<div class="close-notice">
-						<span class="dashicons dashicons-dismiss"></span>
-					</div>
-				</a>
-			</div>
-		<?php endif; ?>
-
-		<div class="wrap rank-math-wrap rank-math-wrap-settings">
-
-			<span class="wp-header-end"></span>
-
-			<form class="cmb-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="POST" id="<?php echo esc_attr( $cmb->cmb_id ); ?>" enctype="multipart/form-data" encoding="multipart/form-data">
-
-				<input type="hidden" name="action" value="<?php echo esc_attr( $machine->option_key ); ?>">
-				<?php $machine->options_page_metabox(); ?>
-
-				<footer class="form-footer rank-math-ui settings-footer wp-clearfix">
-					<?php wp_nonce_field( 'rank-math-reset-options' ); ?>
-					<input type="submit" name="submit-cmb" id="submit-cmb" title="<?php echo esc_html__( 'Ctrl/Cmd + Enter', 'rank-math' ); ?>" class="button button-primary save-options" value="<?php esc_attr_e( 'Save Changes', 'rank-math' ); ?>">
-					<input type="submit" name="reset-cmb" id="rank-math-reset-cmb" value="<?php esc_attr_e( 'Reset Options', 'rank-math' ); ?>" class="button button-secondary reset-options alignleft">
-				</footer>
-
-			</form>
-
-		</div>
-
+			<div id="rank-math-options" class="<?php echo esc_attr( $this->cmb_id ); ?>"></div>
 		<?php
-	}
-
-	/**
-	 * Check if we are on the correct page.
-	 *
-	 * @return bool
-	 */
-	public function is_current_page() {
-		return Param::request( 'page' ) === $this->key || Param::request( 'action' ) === $this->key;
 	}
 
 	/**
@@ -343,19 +222,80 @@ class Options {
 	}
 
 	/**
-	 * Locate tab options file.
+	 * Get localized data for the current settings page.
 	 *
-	 * @param  string $id  Tab id.
-	 * @param  array  $tab Tab options.
-	 * @return string|boolean
+	 * @param string $current_page Current Settings page.
+	 *
+	 * @return array
 	 */
-	private function locate_file( $id, $tab ) {
-		if ( isset( $tab['type'] ) && 'seprator' === $tab['type'] ) {
-			return false;
+	private function get_json_data( $current_page ) {
+		if ( is_admin() ) {
+			rank_math()->variables->setup();
+			rank_math()->variables->setup_json();
 		}
 
-		$file = isset( $tab['file'] ) && ! empty( $tab['file'] ) ? $tab['file'] : rank_math()->includes_dir() . "settings/{$this->folder}/{$id}.php";
+		$tabs = $this->get_tabs();
+		$data = $this->do_filter(
+			"admin/options/{$current_page}_data",
+			[
+				'isPro'           => defined( 'RANK_MATH_PRO_FILE' ),
+				'tabs'            => array_keys( $tabs ),
+				'optionPage'      => $current_page,
+				'homeUrl'         => get_home_url(),
+				'data'            => $current_page === 'instant-indexing' ? get_option( 'rank-math-options-instant-indexing' ) : Helper::get_settings( $current_page ),
+				'isSiteConnected' => Helper::is_site_connected(),
+				'choices'         => [
+					'postTypes'            => Helper::choices_post_types(),
+					'accessiblePostTypes'  => Helper::get_accessible_post_types(),
+					'accessibleTaxonomies' => Helper::get_accessible_taxonomies(),
+					'choicesPostTypeIcons' => Helper::choices_post_type_icons(),
+					'choicesTaxonomyIcons' => Helper::choices_taxonomy_icons(),
+				],
+			]
+		);
+		foreach ( $tabs as $tab ) {
+			if ( empty( $tab['json'] ) ) {
+				continue;
+			}
 
-		return file_exists( $file ) ? $file : false;
+			$data = array_merge( $data, $tab['json'] );
+		}
+
+		$method = "get_{$current_page}_data";
+		if ( ! method_exists( $this, $method ) ) {
+			return $data;
+		}
+
+		return array_merge( $data, $this->$method() );
+	}
+
+	/**
+	 * Get General Settings page data.
+	 *
+	 * @return array
+	 */
+	private function get_general_data() {
+		return [
+			'activateUrl'          => Admin_Helper::get_activate_url( admin_url( 'admin.php??page=rank-math-options-general&tab=content-ai' ) ),
+			'hasBreadcrumbSupport' => current_theme_supports( 'rank-math-breadcrumbs' ),
+			'showBlogPage'         => 'page' === get_option( 'show_on_front' ) && get_option( 'page_for_posts' ) > 0,
+			'isEditAllowed'        => Helper::is_edit_allowed(),
+			'defaultLanguage'      => Helper::content_ai_default_language(),
+		];
+	}
+
+	/**
+	 * Get General Settings page data.
+	 *
+	 * @return array
+	 */
+	private function get_titles_data() {
+		$data = [
+			'choicesRobots'         => Helper::choices_robots(),
+			'supportsTitleTag'      => current_theme_supports( 'title-tag' ),
+			'schemaTypes'           => Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ) ),
+			'isRedirectAttachments' => Helper::get_settings( 'general.attachment_redirect_urls' ),
+		];
+		return $data;
 	}
 }

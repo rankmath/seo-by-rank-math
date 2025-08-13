@@ -109,7 +109,7 @@ class Manager {
 			'class'       => 'RankMath\Monitor\Monitor',
 			'icon'        => '404',
 			'upgradeable' => true,
-			'settings'    => Helper::get_admin_url( 'options-general' ) . '#setting-panel-404-monitor',
+			'settings'    => Helper::get_settings_url( 'general', '404-monitor' ),
 		];
 
 		$modules['local-seo'] = [
@@ -118,7 +118,7 @@ class Manager {
 			'class'       => 'RankMath\Local_Seo\Local_Seo',
 			'icon'        => 'local-seo',
 			'upgradeable' => true,
-			'settings'    => Helper::get_admin_url( 'options-titles' ) . '#setting-panel-local',
+			'settings'    => Helper::get_settings_url( 'titles', 'local' ),
 		];
 
 		$modules['redirections'] = [
@@ -127,7 +127,7 @@ class Manager {
 			'class'       => 'RankMath\Redirections\Redirections',
 			'icon'        => 'redirection',
 			'upgradeable' => true,
-			'settings'    => Helper::get_admin_url( 'options-general' ) . '#setting-panel-redirections',
+			'settings'    => Helper::get_settings_url( 'general', 'redirections' ),
 		];
 
 		$modules['rich-snippet'] = [
@@ -136,7 +136,7 @@ class Manager {
 			'class'       => 'RankMath\Schema\Schema',
 			'icon'        => 'schema',
 			'upgradeable' => true,
-			'settings'    => Helper::get_admin_url( 'options-titles' ) . '#setting-panel-post-type-post',
+			'settings'    => Helper::get_settings_url( 'titles', 'post-type-post' ),
 		];
 
 		$modules['sitemap'] = [
@@ -160,7 +160,7 @@ class Manager {
 			'class'       => 'RankMath\Image_Seo\Image_Seo',
 			'icon'        => 'images',
 			'upgradeable' => true,
-			'settings'    => Helper::get_admin_url( 'options-general' ) . '#setting-panel-images',
+			'settings'    => Helper::get_settings_url( 'general', 'images' ),
 		];
 
 		$modules['instant-indexing'] = [
@@ -178,8 +178,16 @@ class Manager {
 			'class'       => 'RankMath\ContentAI\Content_AI',
 			'icon'        => 'content-ai',
 			'upgradeable' => true,
-			'settings'    => Helper::get_admin_url( 'options-general' ) . '#setting-panel-content-ai',
+			'settings'    => Helper::get_settings_url( 'general', 'content-ai' ),
 			'betabadge'   => true,
+		];
+
+		$modules['llms-txt'] = [
+			'title'    => esc_html__( 'LLMS Txt', 'rank-math' ),
+			'desc'     => esc_html__( 'Serve a custom llms.txt file to guide AI models with posts, terms, and most important content on your website.', 'rank-math' ),
+			'class'    => 'RankMath\\LLMS\\LLMS_Txt',
+			'icon'     => 'bot',
+			'settings' => Helper::get_settings_url( 'general', 'llms' ),
 		];
 
 		$modules['news-sitemap'] = [
@@ -209,12 +217,10 @@ class Manager {
 			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'rank-math' ),
 		];
 
-		$modules['llms-txt'] = [
-			'title'    => esc_html__( 'LLMS Txt', 'rank-math' ),
-			'desc'     => esc_html__( 'Serve a custom llms.txt file to guide AI models with posts, terms, and most important content on your website.', 'rank-math' ),
-			'class'    => 'RankMath\\LLMS\\LLMS_Txt',
-			'icon'     => 'bot',
-			'settings' => Helper::get_admin_url( 'options-general' ) . '#setting-panel-llms',
+		$modules['react-settings'] = [
+			'title' => esc_html__( 'React Settings UI', 'rank-math' ),
+			'desc'  => esc_html__( 'Enable the new React-powered interface for the plugin settings. Disable to revert to the classic PHP-based settings page.', 'rank-math' ),
+			'icon'  => 'settings',
 		];
 
 		return $modules;
@@ -245,7 +251,7 @@ class Manager {
 			'icon'        => 'search-console',
 			'only'        => 'admin',
 			'upgradeable' => true,
-			'settings'    => Helper::get_admin_url( 'options-general' ) . '#setting-panel-analytics',
+			'settings'    => Helper::get_settings_url( 'general', 'analytics' ),
 		];
 
 		$modules['seo-analysis'] = [
@@ -344,7 +350,7 @@ class Manager {
 			'upgradeable'   => true,
 			'disabled'      => ( ! Helper::is_woocommerce_active() ),
 			'disabled_text' => esc_html__( 'Please activate WooCommerce plugin to use this module.', 'rank-math' ),
-			'settings'      => Helper::get_admin_url( 'options-general' ) . '#setting-panel-woocommerce',
+			'settings'      => Helper::get_settings_url( 'general', 'woocommerce' ),
 		];
 
 		$modules['acf'] = [

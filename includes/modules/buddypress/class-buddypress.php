@@ -79,10 +79,10 @@ class BuddyPress {
 		$user_id = bp_displayed_user_id();
 
 		$data['ProfilePage'] = [
-			'@type'    => 'ProfilePage',
-			'@id'      => get_author_posts_url( $user_id ),
-			'headline' => sprintf( 'About %s', get_the_author_meta( 'display_name', $user_id ) ),
-			'about'    => [
+			'@type'      => 'ProfilePage',
+			'@id'        => get_author_posts_url( $user_id ),
+			'headline'   => sprintf( 'About %s', get_the_author_meta( 'display_name', $user_id ) ),
+			'mainEntity' => [
 				'@type'       => 'Person',
 				'name'        => get_the_author_meta( 'display_name', $user_id ),
 				'url'         => function_exists( 'bp_members_get_user_url' ) ? esc_url( bp_members_get_user_url( $user_id ) ) : esc_url( bp_core_get_user_domain( $user_id ) ),

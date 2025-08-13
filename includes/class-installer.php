@@ -309,6 +309,7 @@ class Installer {
 		}
 
 		add_option( 'rank_math_modules', $modules );
+		add_option( 'rank_math_react_settings_ui', 'on', '', false );
 		self::create_tables( $modules );
 	}
 
@@ -355,8 +356,6 @@ class Installer {
 					'console_caching_control'             => '90',
 					'console_email_reports'               => 'on',
 					'console_email_frequency'             => 'monthly',
-					'link_builder_links_per_page'         => '7',
-					'link_builder_links_per_target'       => '1',
 					'wc_remove_product_base'              => 'off',
 					'wc_remove_category_base'             => 'off',
 					'wc_remove_category_parent_slugs'     => 'off',
@@ -510,7 +509,7 @@ class Installer {
 		];
 
 		$defaults = [
-			'robots'       => [],
+			'robots'       => [ 'index' ],
 			'is_custom'    => 'off',
 			'rich_snippet' => isset( $rich_snippets[ $post_type ] ) ? $rich_snippets[ $post_type ] : 'off',
 			'article_type' => 'post' === $post_type ? 'BlogPosting' : 'Article',
@@ -572,7 +571,7 @@ class Installer {
 	 */
 	private function get_taxonomy_defaults( $taxonomy ) {
 		$defaults = [
-			'robots'    => [],
+			'robots'    => [ 'index' ],
 			'is_custom' => 'off',
 			'metabox'   => 'category' === $taxonomy ? 'on' : 'off',
 		];

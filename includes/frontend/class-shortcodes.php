@@ -277,7 +277,7 @@ class Shortcodes {
 			?>
 			<div class="rank-math-phone-number type-<?php echo sanitize_html_class( $phone['type'] ); ?>">
 				<label><?php echo esc_html( $label ); ?>:</label>
-				<span><?php echo isset( $phone['number'] ) ? '<a href="tel://' . esc_attr( $number ) . '">' . esc_html( $number ) . '</a>' : ''; ?></span>
+				<span><?php echo isset( $phone['number'] ) ? '<a href="tel:' . esc_attr( $number ) . '">' . esc_html( $number ) . '</a>' : ''; ?></span>
 			</div>
 			<?php
 		endforeach;
@@ -292,9 +292,9 @@ class Shortcodes {
 			return;
 		}
 		?>
-			<div class="rank-math-phone-numberx">
+			<div class="rank-math-phone-numbers">
 				<label><?php echo esc_html__( 'Telephone', 'rank-math' ); ?>:</label>
-				<span><a href="tel://<?php echo esc_attr( $phone ); ?>"><?php echo esc_html( $phone ); ?></a></span>
+				<span><a href="tel:<?php echo esc_attr( $phone ); ?>"><?php echo esc_html( $phone ); ?></a></span>
 			</div>
 		<?php
 	}

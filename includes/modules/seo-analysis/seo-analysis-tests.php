@@ -115,12 +115,12 @@ function rank_math_register_seo_analysis_advanced_tests( $tests ) {
 		'description' => sprintf(
 			/* translators: link to plugin setting screen */
 			esc_html__( 'Register at Google Search Console and verificate your site by adding the code to <a href="%1$s">Settings &gt; Verificate Tools</a>, then navigate to <a href="%2$s">Settings &gt; Search Console</a> to authenticate and link your site.', 'rank-math' ),
-			Helper::get_admin_url( 'options-general#setting-panel-webmaster' ),
-			Helper::get_admin_url( 'options-general#setting-panel-analytics' )
+			Helper::get_settings_url( 'general', 'webmaster' ),
+			Helper::get_settings_url( 'general', 'analytics' )
 		),
 		'how_to_fix'  => '<p>' . esc_html__( 'Google\'s Search Console is a vital source of information concerning your rankings and click-through rates.  Rank Math can import this data, so you don\'t have to log into your Google account to get the data you need.', 'rank-math' ) . '</p>' .
 			/* translators: link to plugin search console setting screen */
-			'<p>' . sprintf( wp_kses_post( __( 'You can integrate the Google Search Console with Rank math in the <a href="%1$s" target="_blank">Search Console tab</a>. of Rank Math\'s General Settings menu.', 'rank-math' ) ), esc_url( Helper::get_admin_url( 'options-general#setting-panel-analytics' ) ) ) . '</p>' .
+			'<p>' . sprintf( wp_kses_post( __( 'You can integrate the Google Search Console with Rank math in the <a href="%1$s" target="_blank">Search Console tab</a>. of Rank Math\'s General Settings menu.', 'rank-math' ) ), esc_url( Helper::get_settings_url( 'general', 'analytics' ) ) ) . '</p>' .
 			/* translators: Link to Search Console KB article */
 			'<p>' . sprintf( wp_kses_post( __( 'Read <a href="%1$s" target="_blank">this article</a> for detailed instructions on setting up your Google Webmaster account and getting Rank Math to work with the Google Search Console.', 'rank-math' ) ), KB::get( 'help-analytics', 'SEO Analysis GSC Test' ) ) . '</p>',
 		'callback'    => 'rank_math_analyze_search_console',

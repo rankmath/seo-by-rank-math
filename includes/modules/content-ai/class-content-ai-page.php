@@ -46,7 +46,6 @@ class Content_AI_Page {
 			return;
 		}
 
-		$this->action( 'rank_math/before_help_link', 'add_credits_remaining' );
 		$this->action( 'admin_footer', 'content_editor_settings' );
 		add_filter( 'should_load_block_editor_scripts_and_styles', '__return_true' );
 	}
@@ -59,24 +58,6 @@ class Content_AI_Page {
 		$this->register_admin_page();
 		Block_Command::get();
 		Event_Scheduler::get();
-	}
-
-	/**
-	 * Add Credits remaining text before the help link in the admin header.
-	 */
-	public function add_credits_remaining() {
-		// Early bail if site is not connected or doesn't have a Content AI Plan.
-		if ( ! Helper::is_site_connected() || ! Helper::get_content_ai_plan() ) {
-			return;
-		}
-
-		$credits = Helper::get_credits();
-		?>
-		<div class="credits-remaining">
-			<?php echo esc_html__( 'Credits Remaining: ', 'rank-math' ); ?>
-			<strong><?php echo esc_html( $credits ); ?></strong>
-		</div>
-		<?php
 	}
 
 	/**
@@ -119,6 +100,7 @@ class Content_AI_Page {
 						'wp-blocks'            => '',
 						'wp-element'           => '',
 						'wp-editor'            => '',
+						'rank-math-components' => '',
 						'rank-math-analyzer'   => rank_math()->plugin_url() . 'assets/admin/js/analyzer.js',
 						'rank-math-content-ai' => rank_math()->plugin_url() . 'includes/modules/content-ai/assets/js/content-ai.js',
 					],

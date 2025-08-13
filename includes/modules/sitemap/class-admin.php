@@ -14,7 +14,7 @@ use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Module\Base;
-use RankMath\Admin\Options;
+use RankMath\Admin\Register_Options_Page;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Param;
 
@@ -85,8 +85,22 @@ class Admin extends Base {
 				'desc'      => esc_html__( 'This tab contains General settings related to the XML sitemaps.', 'rank-math' ) . ' <a href="' . KB::get( 'sitemap-general', 'Options Panel Sitemap General Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
 				/* translators: sitemap url */
 				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Your sitemap index can be found here: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . '</p></div>' . $this->get_nginx_notice(),
+				'json'      => [
+					'sitemapUrl'   => $sitemap_url,
+					'nginxNotice'  => $this->get_nginx_notice(),
+					'isWPMLActive' => class_exists( 'SitePress' ),
+				],
 			],
 		];
+
+		$rank_math_sitemap_page = Helper::get_settings( 'sitemap.html_sitemap_page' );
+		if ( $rank_math_sitemap_page ) {
+			$rank_math_sitemap_page = [
+				'id'   => $rank_math_sitemap_page,
+				'name' => get_the_title( $rank_math_sitemap_page ),
+				'url'  => get_permalink( $rank_math_sitemap_page ),
+			];
+		}
 
 		$tabs['html_sitemap'] = [
 			'icon'    => 'rm-icon rm-icon-sitemap',
@@ -94,28 +108,37 @@ class Admin extends Base {
 			'file'    => $this->directory . '/settings/html-sitemap.php',
 			'desc'    => esc_html__( 'This tab contains settings related to the HTML sitemap.', 'rank-math' ) . ' <a href="' . KB::get( 'sitemap-general', 'Options Panel Sitemap HTML Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
 			'classes' => 'html-sitemap',
+			'json'    => [
+				'htmlSitemapPage' => $rank_math_sitemap_page,
+			],
 		];
 
 		if ( Helper::is_author_archive_indexable() ) {
+			$roles   = Helper::get_roles();
+			$default = $roles;
+			unset( $default['administrator'], $default['editor'], $default['author'] );
 			$tabs['authors'] = [
 				'icon'  => 'rm-icon rm-icon-users',
 				'title' => esc_html__( 'Authors', 'rank-math' ),
 				/* translators: Learn more link. */
 				'desc'  => sprintf( esc_html__( 'Set the sitemap options for author archive pages. %s.', 'rank-math' ), '<a href="' . KB::get( 'configure-sitemaps', 'Options Panel Sitemap Authors Tab' ) . '#authors" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 				'file'  => $this->directory . '/settings/authors.php',
+				'json'  => [
+					'roles'        => $roles,
+					'defaultRoles' => array_keys( $default ),
+				],
 			];
 		}
 
 		$tabs = $this->do_filter( 'settings/sitemap', $tabs );
 
-		new Options(
+		new Register_Options_Page(
 			[
 				'key'        => 'rank-math-options-sitemap',
 				'title'      => esc_html__( 'Sitemap Settings', 'rank-math' ),
 				'menu_title' => esc_html__( 'Sitemap Settings', 'rank-math' ),
 				'capability' => 'rank_math_sitemap',
 				'folder'     => 'titles',
-				'position'   => 99,
 				'tabs'       => $tabs,
 			]
 		);
@@ -166,6 +189,12 @@ class Admin extends Base {
 				'file'      => $this->directory . '/settings/post-types.php',
 				/* translators: Post Type Sitemap Url */
 				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Sitemap URL: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . $notice_end,
+				'json'      => [
+					'isRedirectAttachment' => Helper::get_settings( 'general.attachment_redirect_urls', false ),
+					$object->name          => [
+						'sitemapUrl' => $sitemap_url,
+					],
+				],
 			];
 
 			if ( 'attachment' === $post_type ) {
@@ -232,6 +261,11 @@ class Admin extends Base {
 				'file'      => $this->directory . '/settings/taxonomies.php',
 				/* translators: Taxonomy Sitemap Url */
 				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Sitemap URL: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . $notice_end,
+				'json'      => [
+					$taxonomy->name => [
+						'sitemapUrl' => $sitemap_url,
+					],
+				],
 			];
 		}
 

@@ -137,7 +137,7 @@ class Email_Reports {
 		$this->variables = [
 			'site_url'                    => get_home_url(),
 			'site_url_simple'             => explode( '://', get_home_url() )[1],
-			'settings_url'                => Helper::get_admin_url( 'options-general#setting-panel-analytics' ),
+			'settings_url'                => Helper::get_settings_url( 'general', 'analytics' ),
 			'report_url'                  => Helper::get_admin_url( 'analytics' ),
 			'assets_url'                  => $this->assets_url,
 			'address'                     => '<br/> [rank_math_contact_info show="address"]',

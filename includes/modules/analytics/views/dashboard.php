@@ -11,11 +11,9 @@ use RankMath\Google\Authentication;
 
 defined( 'ABSPATH' ) || exit;
 
-// Header.
-rank_math()->admin->display_admin_header();
 $path = rank_math()->admin_dir() . 'wizard/views/'; // phpcs:ignore
 ?>
-<div class="wrap rank-math-wrap analytics">
+<div class="analytics">
 
 	<span class="wp-header-end"></span>
 
@@ -25,7 +23,7 @@ $path = rank_math()->admin_dir() . 'wizard/views/'; // phpcs:ignore
 	} elseif ( ! Authentication::is_authorized() ) {
 		require_once $path . 'google-connect.php';
 	} else {
-		echo '<div class="rank-math-analytics" id="rank-math-analytics"></div>';
+		echo '<div class="" id="rank-math-analytics"></div>';
 	}
 	?>
 

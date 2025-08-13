@@ -10,6 +10,7 @@
 
 namespace RankMath\Google;
 
+use RankMath\Helper;
 use RankMath\Helpers\Str;
 use RankMath\Data_Encryption;
 use RankMath\Helpers\Param;
@@ -142,6 +143,10 @@ class Authentication {
 					return 'rank-math-analytics';
 
 				default:
+					if ( Helper::is_react_enabled() ) {
+						return 'rank-math-options-general&view=analytics';
+					}
+
 					return 'rank-math-options-general#setting-panel-analytics';
 			}
 		}

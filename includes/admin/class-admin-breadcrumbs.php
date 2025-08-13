@@ -1,6 +1,6 @@
 <?php
 /**
- * Breadcrumbs for the Rank Math pages
+ * Breadcrumbs for the Rank Math pages.
  *
  * @since      1.0.44
  * @package    RankMath

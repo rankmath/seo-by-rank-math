@@ -80,10 +80,12 @@ class Admin_Header {
 		}
 		?>
 		<div class="rank-math-search-options">
-			<div class="search-field">
-				<i class="rm-icon rm-icon-search"></i>
-				<input type="text" value="" placeholder="<?php esc_attr_e( 'Search Options', 'rank-math' ); ?>">
-				<em class="clear-search dashicons dashicons-no-alt"></em>
+			<div class="components-input-control">
+				<div class="components-input-control__container">
+						<!-- <i class="rm-icon rm-icon-search"></i> -->
+						<input type="search" class="components-input-control__input" value="" placeholder="<?php esc_attr_e( 'Search Options', 'rank-math' ); ?>" style="width: 100%;">
+						<!-- <em class="clear-search dashicons dashicons-no-alt"></em> -->
+				</div>
 			</div>
 		</div>
 		<?php

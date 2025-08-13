@@ -37,6 +37,7 @@ class KML_File {
 		$this->filter( 'rank_math/sitemap/local/content', 'local_sitemap_content' );
 		$this->filter( 'rank_math/sitemap/locations/content', 'kml_file_content' );
 		$this->action( 'cmb2_save_options-page_fields_rank-math-options-titles_options', 'update_sitemap', 25, 2 );
+		$this->action( 'rank_math/settings/before_save', 'before_settings_save', 25, 2 );
 	}
 
 	/**
@@ -182,6 +183,38 @@ class KML_File {
 		$kml .= $this->newline( '</kml>' );
 
 		return $kml;
+	}
+
+	/**
+	 * Add/remove/change scheduled action when the report on/off or the frequency options are changed.
+	 *
+	 * @param string $type     Settings type.
+	 * @param array  $settings Settings data.
+	 */
+	public function before_settings_save( $type, $settings ) {
+		if ( $type !== 'titles' ) {
+			return;
+		}
+
+		$local_seo_fields = [
+			'knowledgegraph_name',
+			'url',
+			'email',
+			'local_address',
+			'local_business_type',
+			'opening_hours',
+			'phone_numbers',
+			'price_range',
+			'geo',
+		];
+
+		foreach ( $local_seo_fields as $field ) {
+			$value = Helper::get_settings( "titles.{$field}" );
+			if ( isset( $settings[ $field ] ) && $settings[ $field ] !== $value ) {
+				update_option( 'rank_math_local_seo_update', date( 'c' ) );
+				break;
+			}
+		}
 	}
 
 	/**

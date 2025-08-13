@@ -254,7 +254,7 @@ class CMB2_Fields implements Runner {
 			'max-image-preview' => __( 'Image Preview', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Specify a maximum size of image preview to be shown for images on this page.', 'rank-math' ) ),
 		];
 
-		echo '<ul class="cmb-advanced-robots-list no-select-all cmb2-list cmb-advanced-robots-field">';
+		echo '<ul class="cmb-advanced-robots-list no-select-all cmb2-list cmb-rank-math-advanced-robots-field">';
 		foreach ( $values as $id => $value ) :
 			$value = isset( $escaped_value[ $id ] ) ? $escaped_value[ $id ] : $value;
 

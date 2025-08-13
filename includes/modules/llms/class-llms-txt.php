@@ -13,6 +13,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Helpers\Arr;
 use RankMath\Sitemap\Sitemap;
 use RankMath\Sitemap\Router;
+use RankMath\Helpers\Url;
 use WP_Query;
 
 defined( 'ABSPATH' ) || exit;
@@ -32,6 +33,19 @@ class LLMS_Txt {
 		$this->action( 'init', 'add_rewrite_rule' );
 		$this->action( 'template_redirect', 'maybe_serve_llms_txt' );
 		$this->filter( 'rank_math/settings/general', 'add_settings' );
+		$this->action( 'wp_loaded', 'remove_canonical_redirect' );
+	}
+
+	/**
+	 * Remove the canonical redirect for the llms.txt file.
+	 *
+	 * @hook wp_loaded
+	 * @return void
+	 */
+	public function remove_canonical_redirect() {
+		if ( strpos( Url::get_current_url(), '/llms.txt' ) !== false ) {
+			remove_filter( 'template_redirect', 'redirect_canonical' );
+		}
 	}
 
 	/**
@@ -52,6 +66,9 @@ class LLMS_Txt {
 					'desc'    => esc_html__( 'Configure your llms.txt file for custom crawling/indexing rules.', 'rank-math' ),
 					'file'    => __DIR__ . '/options.php',
 					'classes' => 'rank-math-advanced-option',
+					'json'    => [
+						'llmsUrl' => esc_url( home_url( '/llms.txt' ) ),
+					],
 				],
 			],
 			5
@@ -79,6 +96,11 @@ class LLMS_Txt {
 	public function maybe_serve_llms_txt() {
 		if ( intval( get_query_var( 'llms_txt' ) ) !== 1 ) {
 			return;
+		}
+
+		if ( substr( Url::get_current_url(), -1 ) === '/' ) {
+			wp_safe_redirect( home_url( '/llms.txt' ) );
+			exit;
 		}
 
 		$this->output();

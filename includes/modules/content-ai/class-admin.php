@@ -88,6 +88,14 @@ class Admin {
 					/* translators: Link to kb article */
 					'desc'  => sprintf( esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. %s.', 'rank-math' ), '<a href="' . KB::get( 'content-ai-settings', 'Options Panel Content AI Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => __DIR__ . '/views/options.php',
+					'json'  => [
+						'countries'   => Helper::choices_contentai_countries(),
+						'credits'     => Helper::get_credits(),
+						'refreshDate' => Helper::get_content_ai_refresh_date(),
+						'tone'        => Helper::choices_contentai_tone(),
+						'audience'    => Helper::choices_contentai_audience(),
+						'language'    => Helper::choices_contentai_language(),
+					],
 				],
 			],
 			8

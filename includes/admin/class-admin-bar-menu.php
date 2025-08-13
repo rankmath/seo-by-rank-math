@@ -220,7 +220,7 @@ class Admin_Bar_Menu {
 			'home',
 			[
 				'title'    => esc_html__( 'Homepage SEO', 'rank-math' ),
-				'href'     => Helper::get_admin_url( 'options-titles#setting-panel-homepage' ),
+				'href'     => Helper::get_settings_url( 'titles', 'homepage' ),
 				'meta'     => [ 'title' => esc_html__( 'Edit Homepage SEO Settings', 'rank-math' ) ],
 				'priority' => 35,
 			]
@@ -248,7 +248,7 @@ class Admin_Bar_Menu {
 			[
 				/* translators: Post Type Singular Name */
 				'title'    => sprintf( esc_html__( 'SEO Settings for %s', 'rank-math' ), $name ),
-				'href'     => Helper::get_admin_url( 'options-titles#setting-panel-post-type-' . $post_type ),
+				'href'     => Helper::get_settings_url( 'titles', 'post-type-' . $post_type ),
 				'meta'     => [ 'title' => esc_html__( 'Edit default SEO settings for this post type', 'rank-math' ) ],
 				'priority' => 35,
 			]
@@ -271,7 +271,7 @@ class Admin_Bar_Menu {
 			[
 				/* translators: Taxonomy Singular Name */
 				'title'    => sprintf( esc_html__( 'SEO Settings for %s', 'rank-math' ), $labels->name ),
-				'href'     => Helper::get_admin_url( 'options-titles#setting-panel-taxonomy-' . $term->taxonomy ),
+				'href'     => Helper::get_settings_url( 'titles', 'taxonomy-' . $term->taxonomy ),
 				'meta'     => [ 'title' => esc_html__( 'Edit SEO settings for this archive page', 'rank-math' ) ],
 				'priority' => 35,
 			]
@@ -286,7 +286,7 @@ class Admin_Bar_Menu {
 			'date',
 			[
 				'title'    => esc_html__( 'SEO Settings for Date Archives', 'rank-math' ),
-				'href'     => Helper::get_admin_url( 'options-titles#setting-panel-global' ),
+				'href'     => Helper::get_settings_url( 'titles', 'global' ),
 				'meta'     => [ 'title' => esc_html__( 'Edit SEO settings for this archive page', 'rank-math' ) ],
 				'priority' => 35,
 			]
@@ -301,7 +301,7 @@ class Admin_Bar_Menu {
 			'search',
 			[
 				'title'    => esc_html__( 'SEO Settings for Search Page', 'rank-math' ),
-				'href'     => Helper::get_admin_url( 'options-titles#setting-panel-global' ),
+				'href'     => Helper::get_settings_url( 'titles', 'global' ),
 				'meta'     => [ 'title' => esc_html__( 'Edit SEO settings for the search results page', 'rank-math' ) ],
 				'priority' => 35,
 			]

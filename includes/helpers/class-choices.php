@@ -85,23 +85,16 @@ trait Choices {
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @param  string $current Currently saved separator if any.
 	 * @return array
 	 */
-	public static function choices_separator( $current = '' ) {
-		$defaults = [ '-', '&ndash;', '&mdash;', '&raquo;', '|', '&bull;' ];
-		if ( ! $current || in_array( $current, $defaults, true ) ) {
-			$current = '';
-		}
-
+	public static function choices_separator() {
 		return [
 			'-'       => '-',
-			'&ndash;' => '&ndash;',
-			'&mdash;' => '&mdash;',
-			'&raquo;' => '&raquo;',
+			'&ndash;' => '–',
+			'&mdash;' => '—',
+			'&raquo;' => '»',
 			'|'       => '|',
-			'&bull;'  => '&bull;',
-			$current  => '<span class="custom-sep" contenteditable>' . $current . '</span>',
+			'&bull;'  => '•',
 		];
 	}
 
@@ -110,12 +103,14 @@ trait Choices {
 	 *
 	 * @codeCoverageIgnore
 	 *
+	 * @param boolean $force_refresh Whether to force a fresh call to get_post_types() even if the value is cached. Default false.
+	 *
 	 * @return array
 	 */
-	public static function choices_post_types() {
+	public static function choices_post_types( $force_refresh = false ) {
 		static $choices_post_types;
 
-		if ( ! isset( $choices_post_types ) ) {
+		if ( ! isset( $choices_post_types ) || $force_refresh ) {
 			$choices_post_types = Helper::get_accessible_post_types();
 			$choices_post_types = \array_map(
 				function ( $post_type ) {

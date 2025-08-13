@@ -56,6 +56,31 @@ class Local_Seo {
 	 * @return array
 	 */
 	public function add_settings( $tabs ) {
+		$about_page = Helper::get_settings( 'titles.local_seo_about_page' );
+		if ( $about_page ) {
+			$about_page = [
+				'id'   => $about_page,
+				'name' => get_the_title( $about_page ),
+				'url'  => get_permalink( $about_page ),
+			];
+		}
+
+		$contact_page = Helper::get_settings( 'titles.local_seo_contact_page' );
+		if ( $contact_page ) {
+			$contact_page = [
+				'id'   => $contact_page,
+				'name' => get_the_title( $contact_page ),
+				'url'  => get_permalink( $contact_page ),
+			];
+		}
+		$tabs['local']['json'] = [
+			'businessTypes'    => Helper::choices_business_types( true ),
+			'phoneTypes'       => Helper::choices_phone_types(),
+			'organizationInfo' => Helper::choices_additional_organization_info(),
+			'aboutPage'        => $about_page,
+			'contactPage'      => $contact_page,
+		];
+
 		$tabs['local']['file'] = __DIR__ . '/views/titles-options.php';
 
 		return $tabs;

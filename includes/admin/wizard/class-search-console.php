@@ -74,7 +74,7 @@ class Search_Console implements Wizard_Step {
 			[
 				'profile'             => '',
 				'country'             => 'all',
-				'enable_index_status' => false,
+				'enable_index_status' => true,
 				'sites'               => $all_services['sites'],
 			]
 		);
@@ -105,42 +105,48 @@ class Search_Console implements Wizard_Step {
 	 * @return bool
 	 */
 	public static function save( $values ) {
-		$settings = rank_math()->settings->all_raw();
-
-		$settings['general']['console_email_reports'] = $values['console_email_reports'] ? 'on' : 'off';
-
-		Helper::update_all_settings( $settings['general'], null, null );
+		if ( isset( $values['console_email_reports'] ) ) {
+			$settings                                     = rank_math()->settings->all_raw();
+			$settings['general']['console_email_reports'] = $values['console_email_reports'] ? 'on' : 'off';
+			Helper::update_all_settings( $settings['general'], null, null );
+		}
 
 		// For Search console.
-		$search_console_data = $values['searchConsole'];
-
-		$value = [
-			'country'             => sanitize_text_field( $search_console_data['country'] ),
-			'profile'             => sanitize_text_field( $search_console_data['profile'] ),
-			'enable_index_status' => sanitize_text_field( $search_console_data['country'] ),
-		];
-		update_option( 'rank_math_google_analytic_profile', $value );
+		if ( isset( $values['searchConsole'] ) && ! empty( $values['searchConsole'] ) ) {
+			$search_console_data = $values['searchConsole'];
+			$value               = [
+				'country'             => sanitize_text_field( $search_console_data['country'] ),
+				'profile'             => sanitize_text_field( $search_console_data['profile'] ),
+				'enable_index_status' => sanitize_text_field( $search_console_data['enable_index_status'] ),
+			];
+			update_option( 'rank_math_google_analytic_profile', $value );
+		}
 
 		// For Analytics.
-		$analytics_data = $values['analyticsData'];
-		$analytic_value = [
-			'adsense_id'       => sanitize_text_field( $analytics_data['adsense_id'] ),
-			'account_id'       => sanitize_text_field( $analytics_data['account_id'] ),
-			'property_id'      => sanitize_text_field( $analytics_data['property_id'] ),
-			'view_id'          => sanitize_text_field( $analytics_data['view_id'] ),
-			'measurement_id'   => sanitize_text_field( $analytics_data['measurement_id'] ),
-			'stream_name'      => sanitize_text_field( $analytics_data['stream_name'] ),
-			'country'          => sanitize_text_field( $analytics_data['country'] ),
-			'install_code'     => sanitize_text_field( $analytics_data['install_code'] ),
-			'anonymize_ip'     => sanitize_text_field( $analytics_data['anonymize_ip'] ),
-			'local_ga_js'      => sanitize_text_field( $analytics_data['local_ga_js'] ),
-			'exclude_loggedin' => sanitize_text_field( $analytics_data['exclude_loggedin'] ),
-		];
-		update_option( 'rank_math_google_analytic_options', $analytic_value );
+		if ( isset( $values['analyticsData'] ) && ! empty( $values['analyticsData'] ) ) {
+			$analytics_data = $values['analyticsData'];
+			$analytic_value = [
+				'adsense_id'       => sanitize_text_field( $analytics_data['adsense_id'] ),
+				'account_id'       => sanitize_text_field( $analytics_data['account_id'] ),
+				'property_id'      => sanitize_text_field( $analytics_data['property_id'] ),
+				'view_id'          => sanitize_text_field( $analytics_data['view_id'] ),
+				'measurement_id'   => sanitize_text_field( $analytics_data['measurement_id'] ),
+				'stream_name'      => sanitize_text_field( $analytics_data['stream_name'] ),
+				'country'          => sanitize_text_field( $analytics_data['country'] ),
+				'install_code'     => sanitize_text_field( $analytics_data['install_code'] ),
+				'anonymize_ip'     => sanitize_text_field( $analytics_data['anonymize_ip'] ),
+				'local_ga_js'      => sanitize_text_field( $analytics_data['local_ga_js'] ),
+				'exclude_loggedin' => sanitize_text_field( $analytics_data['exclude_loggedin'] ),
+			];
+			update_option( 'rank_math_google_analytic_options', $analytic_value );
+		}
 
-		new Objects();
-		new Console();
-		new Inspections();
+		$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+		if ( 'rank-math-wizard' === $page ) {
+			new Objects();
+			new Console();
+			new Inspections();
+		}
 
 		return true;
 	}

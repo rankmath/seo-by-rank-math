@@ -198,6 +198,9 @@ class Admin extends Base {
 					/* translators: 1. Link to KB article 2. Link to redirection setting scree */
 					'desc'  => sprintf( esc_html__( 'Monitor broken pages that ruin user-experience and affect SEO. %s.', 'rank-math' ), '<a href="' . KB::get( '404-monitor-settings', 'Options Panel 404 Monitor Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
+					'json'  => [
+						'choicesComparisonTypes' => Helper::choices_comparison_types(),
+					],
 				],
 			],
 			7
@@ -215,7 +218,7 @@ class Admin extends Base {
 		$actions = [
 			'settings'   => [
 				'class' => 'page-title-action',
-				'href'  => Helper::get_admin_url( 'options-general#setting-panel-404-monitor' ),
+				'href'  => Helper::get_settings_url( 'general', '404-monitor' ),
 				'label' => __( 'Settings', 'rank-math' ),
 			],
 			'learn_more' => [

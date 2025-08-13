@@ -15,6 +15,7 @@ use RankMath\Module\Base;
 use RankMath\Traits\Hooker;
 use RankMath\Traits\Ajax;
 use RankMath\Admin\Options;
+use RankMath\Admin\Register_Options_Page;
 use RankMath\Helpers\Param;
 use RankMath\Helpers\Sitepress;
 
@@ -67,12 +68,11 @@ class Instant_Indexing extends Base {
 	public function __construct() {
 		parent::__construct();
 
-		$this->action( 'admin_enqueue_scripts', 'enqueue', 20 );
-
 		if ( ! $this->is_configured() ) {
 			Api::get()->reset_key();
 		}
 
+		$this->action( 'init', 'register_instant_indexing_settings', 125 );
 		$post_types = $this->get_auto_submit_post_types();
 		if ( ! empty( $post_types ) ) {
 			$this->filter( 'wp_insert_post_data', 'before_save_post', 10, 4 );
@@ -208,7 +208,7 @@ class Instant_Indexing extends Base {
 	/**
 	 * Register admin page.
 	 */
-	public function register_admin_page() {
+	public function register_instant_indexing_settings() {
 		$tabs = [
 			'url-submission' => [
 				'icon'    => 'rm-icon rm-icon-instant-indexing',
@@ -245,14 +245,14 @@ class Instant_Indexing extends Base {
 		 */
 		$tabs = $this->do_filter( 'settings/instant_indexing', $tabs );
 
-		new Options(
+		new Register_Options_Page(
 			[
 				'key'        => 'rank-math-options-instant-indexing',
 				'title'      => esc_html__( 'Instant Indexing', 'rank-math' ),
 				'menu_title' => esc_html__( 'Instant Indexing', 'rank-math' ),
 				'capability' => 'rank_math_general',
 				'tabs'       => $tabs,
-				'position'   => 100,
+				'position'   => 11,
 			]
 		);
 	}
@@ -349,34 +349,6 @@ class Instant_Indexing extends Base {
 	 */
 	private function is_configured() {
 		return (bool) Helper::get_settings( 'instant_indexing.indexnow_api_key' );
-	}
-
-	/**
-	 * Enqueue CSS & JS.
-	 *
-	 * @param string $hook Page hook name.
-	 * @return void
-	 */
-	public function enqueue( $hook ) {
-		if ( 'rank-math_page_rank-math-options-instant-indexing' !== $hook && 'rank-math_page_instant-indexing' !== $hook ) {
-			return;
-		}
-
-		$uri = untrailingslashit( plugin_dir_url( __FILE__ ) );
-		wp_enqueue_script( 'rank-math-instant-indexing', $uri . '/assets/js/instant-indexing.js', [ 'jquery' ], rank_math()->version, true );
-		Helper::add_json(
-			'indexNow',
-			[
-				'restUrl'                => rest_url( \RankMath\Rest\Rest_Helper::BASE . '/in' ),
-				'refreshHistoryInterval' => 30000,
-				'i18n'                   => [
-					'submitError'       => esc_html__( 'An error occurred while submitting the URL.', 'rank-math' ),
-					'clearHistoryError' => esc_html__( 'Error: could not clear history.', 'rank-math' ),
-					'getHistoryError'   => esc_html__( 'Error: could not get history.', 'rank-math' ),
-					'noHistory'         => esc_html__( 'No submissions yet.', 'rank-math' ),
-				],
-			]
-		);
 	}
 
 	/**

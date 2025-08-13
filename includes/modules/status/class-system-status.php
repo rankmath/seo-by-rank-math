@@ -30,9 +30,22 @@ class System_Status {
 		global $wpdb;
 		$info = [];
 
-		$plan    = Admin_Helper::get_registration_data();
-		$tokens  = Authentication::tokens();
-		$modules = Helper::get_active_modules();
+		$plan             = Admin_Helper::get_registration_data();
+		$tokens           = Authentication::tokens();
+		$modules          = Helper::get_active_modules();
+		$permissions      = Permissions::get_status();
+		$permissions_data = '';
+
+		if ( ! empty( $permissions ) ) {
+			$permissions_data = implode(
+				', ',
+				array_map(
+					fn( $k, $v ) => "$k: $v",
+					array_keys( $permissions ),
+					$permissions
+				)
+			);
+		}
 
 		$rankmath = [
 			'label'  => esc_html__( 'Rank Math', 'rank-math' ),
@@ -59,7 +72,7 @@ class System_Status {
 				],
 				'permissions'      => [
 					'label' => esc_html__( 'Google Permission', 'rank-math' ),
-					'value' => Permissions::get_status(),
+					'value' => $permissions_data,
 				],
 			],
 		];

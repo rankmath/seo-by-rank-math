@@ -18,6 +18,7 @@ use RankMath\Google\Console;
 use RankMath\Google\Analytics;
 use RankMath\Analytics\Url_Inspection;
 use RankMath\Admin\Admin_Helper;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -159,6 +160,18 @@ class Assets implements Runner {
 			wp_enqueue_script( self::PREFIX . 'dashboard' );
 		}
 
+		if ( in_array( $screen->id, [ 'toplevel_page_rank-math', 'rank-math_page_rank-math-content-ai-page', 'rank-math_page_rank-math-analytics', 'rank-math_page_rank-math-role-manager', 'rank-math_page_rank-math-seo-analysis', 'rank-math_page_rank-math-status' ], true ) ||
+			Str::starts_with( 'rank-math_page_rank-math-options-', $screen->id )
+		) {
+			Helper::add_json(
+				'dashboardHeader',
+				[
+					'dashboardUrl' => esc_url( Helper::get_admin_url() ),
+					'proBadge'     => $this->do_filter( 'pro_badge', '' ),
+				]
+			);
+		}
+
 		// Our screens only.
 		if ( ! in_array( $screen->taxonomy, Helper::get_allowed_taxonomies(), true ) && ! in_array( $screen->id, $this->get_admin_screen_ids(), true ) ) {
 			return;
@@ -278,5 +291,25 @@ class Assets implements Runner {
 			jQuery( '.available-structure-tags button' ).on( 'click', showNotice );
 			jQuery( 'input[type=text], input[type=radio]' ).on( 'focus change', showNotice );
 		} );";
+	}
+
+	/**
+	 * Check if there is an Anniversary offer.
+	 */
+	private function has_offer() {
+		if ( ! current_user_can( 'manage_options' ) || defined( 'RANK_MATH_PRO_FILE' ) ) {
+			return false;
+		}
+
+		// Holiday Season related variables.
+		$time                   = time();
+		$current_year           = 2022;
+		$anniversary_start_time = gmmktime( 17, 00, 00, 05, 05, $current_year ); // 30 Oct.
+		$anniversary_end_time   = gmmktime( 17, 00, 00, 11, 30, $current_year ); // 30 Nov.
+		$holiday_start_time     = gmmktime( 17, 00, 00, 12, 20, $current_year ); // 20 Dec.
+		$holiday_end_time       = gmmktime( 17, 00, 00, 01, 07, 2023 ); // 07 Jan.
+
+		return ( $time > $anniversary_start_time && $time < $anniversary_end_time ) ||
+			( $time > $holiday_start_time && $time < $holiday_end_time );
 	}
 }

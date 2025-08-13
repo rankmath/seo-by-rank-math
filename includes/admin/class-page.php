@@ -68,6 +68,13 @@ class Page {
 	public $position = -1;
 
 	/**
+	 * The init hook priority.
+	 *
+	 * @var int
+	 */
+	public $priority = 25;
+
+	/**
 	 * The function/file that displays the page content for the menu page.
 	 *
 	 * @var string|callable
@@ -144,7 +151,7 @@ class Page {
 			$this->menu_title = $title;
 		}
 
-		add_action( 'init', [ $this, 'init' ], 25 );
+		add_action( 'init', [ $this, 'init' ], $this->priority ?? 25 );
 	}
 
 	/**
@@ -308,6 +315,9 @@ class Page {
 		}
 
 		foreach ( $this->assets['scripts'] as $handle => $src ) {
+			if ( $handle === 'media-editor' ) {
+				wp_enqueue_media();
+			}
 			wp_enqueue_script( $handle, $src, null, rank_math()->version, true );
 		}
 	}
@@ -363,7 +373,6 @@ class Page {
 	 * Display settings.
 	 */
 	private function display_settings() {
-		rank_math()->admin->display_admin_header();
 		echo '<div id="rank-math-settings" class="' . esc_attr( $this->id ) . '"></div>';
 	}
 }

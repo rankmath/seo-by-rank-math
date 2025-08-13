@@ -21,7 +21,7 @@ if ( 'attachment' === $current_post_type && Helper::get_settings( 'general.attac
 			'type'    => 'notice',
 			'what'    => 'warning',
 			/* translators: The settings page link */
-			'content' => sprintf( __( 'To configure meta tags for your media attachment pages, you need to first %s to parent.', 'rank-math' ), '<a href="' . esc_url( Helper::get_admin_url( 'options-general#setting-panel-links' ) ) . '">' . esc_html__( 'disable redirect attachments', 'rank-math' ) . '</a>' ),
+			'content' => sprintf( __( 'To configure meta tags for your media attachment pages, you need to first %s to parent.', 'rank-math' ), '<a href="' . esc_url( Helper::get_settings_url( 'general', 'links' ) ) . '">' . esc_html__( 'disable redirect attachments', 'rank-math' ) . '</a>' ),
 		]
 	);
 	$attributes['disabled'] = 'disabled';

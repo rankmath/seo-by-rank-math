@@ -130,6 +130,10 @@ class DB {
 			return [];
 		}
 
+		if ( ! DB_Helper::check_table_exists( 'rank_math_analytics_gsc' ) ) {
+			return [];
+		}
+
 		$key  = 'rank_math_analytics_data_info';
 		$data = get_transient( $key );
 		if ( false !== $data ) {

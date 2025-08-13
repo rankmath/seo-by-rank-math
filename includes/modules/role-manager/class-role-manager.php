@@ -79,9 +79,9 @@ class Role_Manager extends Base {
 						'rank-math-role-manager' => $uri . '/assets/js/role-manager.js',
 					],
 					'json'    => [
-						'roles'            => Helper::get_roles(),
-						'roleCapabilities' => Helper::get_roles_capabilities(),
-						'capabilities'     => Capability_Manager::get()->get_capabilities(),
+						'roles'        => Helper::get_roles(),
+						'data'         => Helper::get_roles_capabilities(),
+						'capabilities' => Capability_Manager::get()->get_capabilities(),
 					],
 				],
 			]

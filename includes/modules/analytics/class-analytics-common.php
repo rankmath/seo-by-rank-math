@@ -52,6 +52,7 @@ class Analytics_Common {
 		$this->action( 'init', 'maybe_init_email_reports' );
 		$this->action( 'init', 'maybe_enable_email_reports', 20 );
 		$this->action( 'cmb2_save_options-page_fields_rank-math-options-general_options', 'maybe_update_report_schedule', 20, 3 );
+		$this->action( 'rank_math/settings/before_save', 'before_settings_save', 10, 2 );
 
 		Jobs::get();
 		Workflow::get();
@@ -252,6 +253,36 @@ class Analytics_Common {
 	/**
 	 * Add/remove/change scheduled action when the report on/off or the frequency options are changed.
 	 *
+	 * @param string $type     Settings type.
+	 * @param array  $settings Settings data.
+	 */
+	public function before_settings_save( $type, $settings ) {
+		if ( $type !== 'general' ) {
+			return;
+		}
+
+		$console_email_reports   = Helper::get_settings( 'general.console_email_reports' );
+		$console_email_frequency = Helper::get_settings( 'general.console_email_frequency' );
+		$updated_email_reports   = isset( $settings['console_email_reports'] ) ? $settings['console_email_reports'] : '';
+		$updated_email_frequency = isset( $settings['console_email_frequency'] ) ? $settings['console_email_frequency'] : '';
+
+		// Early bail if our options are not changed.
+		if ( $console_email_reports === $updated_email_reports && $console_email_frequency === $updated_email_frequency ) {
+			return;
+		}
+
+		as_unschedule_all_actions( 'rank_math/analytics/email_report_event', [], 'rank-math' );
+		if ( ! $console_email_reports ) {
+			return;
+		}
+
+		$frequency = $updated_email_frequency ? $updated_email_frequency : 'monthly';
+		$this->schedule_email_reporting( $frequency );
+	}
+
+	/**
+	 * Add/remove/change scheduled action when the report on/off or the frequency options are changed.
+	 *
 	 * @param int    $object_id The ID of the current object.
 	 * @param array  $updated   Array of field IDs that were updated.
 	 *                          Will only include field IDs that had values change.
@@ -281,7 +312,7 @@ class Analytics_Common {
 	 * @return string
 	 */
 	public function replace_notice_link( $output ) {
-		$url    = wp_nonce_url( Helper::get_admin_url( 'options-general&enable_email_reports=1#setting-panel-analytics' ), 'enable_email_reports' );
+		$url    = wp_nonce_url( Helper::get_settings_url( 'general', 'analytics' ) . '&enable_email_reports=1', 'enable_email_reports' );
 		$output = str_replace( '###ENABLE_EMAIL_REPORTS###', $url, $output );
 		return $output;
 	}

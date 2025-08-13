@@ -115,7 +115,7 @@ class Notices implements Runner {
 		}
 
 		$message = $this->do_filter( 'admin/notice/new_post_type', $message, $count );
-		$message = sprintf( wp_kses_post( $message ), $list, Helper::get_admin_url( 'options-titles#setting-panel-post-type-' . key( $new ) ), Helper::get_admin_url( 'options-sitemap#setting-panel-sitemap-post-type-' . key( $new ) ) );
+		$message = sprintf( wp_kses_post( $message ), $list, Helper::get_settings_url( 'titles', 'post-type-' . key( $new ) ), Helper::get_settings_url( 'sitemap', 'post-type-' . key( $new ) ) );
 		Helper::add_notification(
 			$message,
 			[

@@ -15,12 +15,10 @@ defined( 'ABSPATH' ) || exit;
 use RankMath\Rollback_Version;
 
 // Header.
-rank_math()->admin->display_admin_header( false );
-
 if ( Rollback_Version::should_rollback() ) {
 	$rollback = new Rollback_Version();
 	$rollback->rollback();
 	return;
 }
 ?>
-<div class="wrap rank-math-wrap rank-math-tools-wrap dashboard"></div>
+<div id="rank-math-tools-wrapper"></div>

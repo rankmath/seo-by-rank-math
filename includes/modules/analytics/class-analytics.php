@@ -13,6 +13,7 @@ namespace RankMath\Analytics;
 use RankMath\KB;
 use RankMath\Helper;
 use RankMath\Helpers\Arr;
+use RankMath\Helpers\Str;
 use RankMath\Helpers\Param;
 use RankMath\Google\Api;
 use RankMath\Module\Base;
@@ -389,6 +390,7 @@ class Analytics extends Base {
 				'wp-date',
 				'wp-api-fetch',
 				'wp-html-entities',
+				'rank-math-components',
 			],
 			rank_math()->version,
 			true
@@ -542,6 +544,28 @@ class Analytics extends Base {
 	 * @return array
 	 */
 	public function add_settings( $tabs ) {
+		$db_info = \RankMath\Analytics\DB::info();
+		$next_fetch = '';
+		$actions = as_get_scheduled_actions(
+			[
+				'order'  => 'DESC',
+				'hook'   => 'rank_math/analytics/data_fetch',
+				'status' => \ActionScheduler_Store::STATUS_PENDING,
+			]
+		);
+		if ( Authentication::is_authorized() && ! empty( $actions ) ) {
+			$action    = current( $actions );
+			$schedule  = $action->get_schedule();
+			$next_date = $schedule->get_date();
+			if ( $next_date ) {
+				$next_fetch = sprintf(
+					__( 'Next update on %s (in %s)', 'rank-math' ),
+					date_i18n( 'd M, Y H:m:i', $next_date->getTimestamp() ),
+					human_time_diff( $next_date->getTimestamp() )
+				);
+			}
+		}
+
 		Arr::insert(
 			$tabs,
 			[
@@ -551,12 +575,62 @@ class Analytics extends Base {
 					/* translators: Link to kb article */
 					'desc'  => sprintf( esc_html__( 'See your Google Search Console, Analytics and AdSense data without leaving your WP dashboard. %s.', 'rank-math' ), '<a href="' . KB::get( 'analytics-settings', 'Options Panel Analytics Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
+					'json'  => apply_filters(
+						'rank_math/analytics/options/data',
+						[
+							'analytics' => \RankMath\Wizard\Search_Console::get_localized_data(),
+							'isSettingsPage' => true,
+							'homeUrl' => home_url(),
+							'fields' => [
+								'console_caching_control' => [
+									'description' => $this->get_description( 'console_caching_control' ),
+								],
+							],
+							'dbInfo' => [
+								'days'    => $db_info['days'] ?? 0,
+								'rows'    => Str::human_number( $db_info['rows'] ?? 0 ),
+								'size'    => size_format( $db_info['size'] ?? 0 ),
+							],
+							'isFetching' => 'fetching' === get_option( 'rank_math_analytics_first_fetch' ),
+							'nextFetch'  => $next_fetch,
+							'isAuthorized' => Authentication::is_authorized(),
+						]
+					),
 				],
 			],
 			9
 		);
 
 		return $tabs;
+	}
+
+	/**
+	 * Get the description for a field.
+	 *
+	 * @param string $field_id The field ID.
+	 *
+	 * @return string
+	 */
+	public function get_description( $field_id ) {
+		if ( ! $field_id ) {
+			return '';
+		}
+
+		$description = '';
+
+		switch ( $field_id ) {
+			case 'console_caching_control':
+				// Translators: placeholder is a link to rankmath.com, with "free version" as the anchor text.
+				$description = sprintf( __( 'Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly.', 'rank-math' ), '<a href="' . KB::get( 'pro', 'Analytics DB Option' ) . '" target="_blank" rel="noopener noreferrer">' . __( 'free version', 'rank-math' ) . '</a>' );
+				$description = apply_filters_deprecated( 'rank_math/analytics/options/cahce_control/description', [ $description ], '1.0.61.1', 'rank_math/analytics/options/cache_control/description' );
+				$description = apply_filters( 'rank_math/analytics/options/cache_control/description', $description );
+				break;
+			default:
+				$description = apply_filters( 'rank_math/analytics/options/' . $field_id . '/description', '' );
+				break;
+		}
+
+		return $description;
 	}
 
 }

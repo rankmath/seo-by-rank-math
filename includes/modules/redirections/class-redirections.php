@@ -148,7 +148,7 @@ class Redirections {
 			'redirections-settings',
 			[
 				'title' => esc_html__( 'Redirection Settings', 'rank-math' ),
-				'href'  => Helper::get_admin_url( 'options-general' ) . '#setting-panel-redirections',
+				'href'  => Helper::get_settings_url( 'general', 'redirections' ),
 				'meta'  => [ 'title' => esc_html__( 'Redirection Settings', 'rank-math' ) ],
 			],
 			'redirections'

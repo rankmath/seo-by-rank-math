@@ -98,7 +98,7 @@ class Admin_Menu implements Runner {
 						'isSiteUrlValid'           => Admin_Helper::is_site_url_valid(),
 						'isAdvancedMode'           => Helper::is_advanced_mode(),
 						'contentAiPlan'            => Helper::get_content_ai_plan(),
-						'modulesList'              => $data,
+						'data'                     => $data,
 						'isPluginActiveForNetwork' => Helper::is_plugin_active_for_network(),
 						'isNetworkAdmin'           => is_network_admin(),
 						'canUser'                  => [

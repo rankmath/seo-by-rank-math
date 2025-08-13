@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) || exit;
 				<h2><?php esc_html_e( 'Uh-oh', 'rank-math' ); ?></h2>
 				<p><em><?php esc_html_e( 'It seems that there are no stats to show right now.', 'rank-math' ); ?></em></p>
 				<?php // Translators: placeholders are anchor opening and closing tags. ?>
-				<p><?php printf( esc_html__( 'If you can see the site data in your Search Console and Analytics accounts, but not here, then %1$s try reconnecting your account %2$s and make sure that the correct properties are selected in the %1$s Analytics Settings%2$s.', 'rank-math' ), '<a href="' . esc_url( Helper::get_admin_url( 'options-general#setting-panel-analytics' ) ) . '">', '</a>' ); ?></p>
+				<p><?php printf( esc_html__( 'If you can see the site data in your Search Console and Analytics accounts, but not here, then %1$s try reconnecting your account %2$s and make sure that the correct properties are selected in the %1$s Analytics Settings%2$s.', 'rank-math' ), '<a href="' . esc_url( Helper::get_settings_url( 'general', 'analytics' ) ) . '">', '</a>' ); ?></p>
 			</td>
 		</tr>
 	</table>

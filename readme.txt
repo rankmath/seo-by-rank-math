@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.250
+Stable tag: 1.0.251
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,12 +339,14 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.250 [July 31, 2025] =
-- Added: Support for [LLMs.txt file](https://rankmath.com/kb/llms-txt/)
-- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#exclude-canonicals-from-sitemap) to exclude posts with canonical URLs in the sitemaps
-- Added: Link to [schedule post using SocialPilot in the Post Publish Panel](https://rankmath.com/kb/sharing-content-on-social-media/)
-- Fixed: [Incorrect slug](https://rankmath.com/kb/seo-meta-tags/#elementor) being added to posts when switched using the Elementor Top Bar feature
-- Fixed: Inconsistent SEO score when using the [Update SEO Score tool](https://rankmath.com/kb/rank-math-status-and-tools/#recalculate-seo-score-for-posts) due to unprocessed focus keywords
-- Fixed: Missing SEO score when the [filter to disable Rank Math Integration from Gutenberg sidebar](https://rankmath.com/kb/filters-hooks-api-developer/#disable-gutenberg-sidebar) is used
+= 1.0.251 [Aug 13, 2025] =
+- Improved: Migrated plugin settings to React for blazing-fast load times. This marks the final phase of our [React migration](https://rankmath.com/kb/react-migration/)
+- Fixed: Trailing slash added to the [llms.txt file](https://rankmath.com/kb/llms-txt/)
+- Fixed: Missing `mainEntity` property error in the Schema on the BuddyPress Members page
+- Fixed: Localized data used on the Site Editor page was incorrectly included in REST requests
+- Fixed: Incorrect HTML link for phone numbers displayed in the [Local SEO contact info shortcode](https://rankmath.com/kb/local-seo/)
+- Fixed: Conflict with other plugins caused by the `.grid` class used in the Content AI CSS
+- Fixed: Missing file labels on the Theme Editor page
+- Fixed: UI issue in the Rank Math Overview Dashboard widget
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

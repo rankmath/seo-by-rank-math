@@ -255,6 +255,18 @@ trait Conditional {
 	}
 
 	/**
+	 * Is React Mode.
+	 *
+	 * @since 1.0.250
+	 *
+	 * @return boolean
+	 */
+	public static function is_react_enabled() {
+		$is_react_enabled = get_option( 'rank_math_react_settings_ui', 'on' );
+		return apply_filters( 'rank_math/is_react_enabled', $is_react_enabled === 'on' );
+	}
+
+	/**
 	 * Is Breadcrumbs Enabled.
 	 *
 	 * @since 1.0.64

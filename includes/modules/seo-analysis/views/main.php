@@ -11,8 +11,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// Header.
-rank_math()->admin->display_admin_header( false );
 ?>
 
-<div class="wrap rank-math-wrap rank-math-seo-analysis-wrap dashboard"></div>
+<div id="rank-math-seo-analysis-wrapper"></div>

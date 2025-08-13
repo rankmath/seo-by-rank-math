@@ -191,7 +191,7 @@ class Console extends Analytics {
 			[
 				'country'             => '',
 				'profile'             => '',
-				'enable_index_status' => '',
+				'enable_index_status' => true,
 			]
 		);
 		$country = isset( $args['country'] ) ? $args['country'] : $stored['country'];

@@ -70,6 +70,9 @@ class Robots_Txt {
 					'file'      => __DIR__ . '/options.php',
 					'classes'   => 'rank-math-advanced-option',
 					'after_row' => '<div class="rank-math-desc">' . __( 'Leave the field empty to let WordPress handle the contents dynamically. If an actual robots.txt file is present in the root folder of your site, this option won\'t take effect and you have to edit the file directly, or delete it and then edit from here.', 'rank-math' ) . '</div>',
+					'json'      => [
+						'robotsData' => self::get_robots_data(),
+					],
 				],
 			],
 			5
