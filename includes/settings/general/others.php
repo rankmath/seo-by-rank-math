@@ -93,6 +93,22 @@ $cmb->add_field(
 	]
 );
 
+if ( current_user_can( 'manage_options' ) ) {
+	$cmb->add_field(
+		[
+			'id'         => 'usage_tracking',
+			'type'       => 'toggle',
+			'name'       => esc_html__( 'Usage Tracking', 'rank-math' ),
+			'desc'       => esc_html__( 'Share anonymous usage data to help us improve Rank Math. No personal info is collected.', 'rank-math' ) . ' <a href="' . KB::get( 'usage-policy', 'Others Tab KB Link' ) . '" target="_blank">' . esc_html__( 'Learn more about what data is and isn\'t tracked.', 'rank-math' ) . '</a>',
+			'default'    => 'off',
+			'save_field' => false,
+			'escape_cb'  => function () {
+				return get_option( 'rank_math_mixpanel_optin', false ) ? 'on' : 'off';
+			},
+		]
+	);
+}
+
 $cmb->add_field(
 	[
 		'id'   => 'rss_before_content',

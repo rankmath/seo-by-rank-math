@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.251
+Stable tag: 1.0.252
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,14 +339,16 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.251 [Aug 13, 2025] =
-- Improved: Migrated plugin settings to React for blazing-fast load times. This marks the final phase of our [React migration](https://rankmath.com/kb/react-migration/)
-- Fixed: Trailing slash added to the [llms.txt file](https://rankmath.com/kb/llms-txt/)
-- Fixed: Missing `mainEntity` property error in the Schema on the BuddyPress Members page
-- Fixed: Localized data used on the Site Editor page was incorrectly included in REST requests
-- Fixed: Incorrect HTML link for phone numbers displayed in the [Local SEO contact info shortcode](https://rankmath.com/kb/local-seo/)
-- Fixed: Conflict with other plugins caused by the `.grid` class used in the Content AI CSS
-- Fixed: Missing file labels on the Theme Editor page
-- Fixed: UI issue in the Rank Math Overview Dashboard widget
+= 1.0.252 [Aug 28, 2025] =
+- Added: Option to enable/disable [Usage Tracking](https://rankmath.com/kb/usage-tracking/) (disabled by default). Enabling this option would help us prioritize development of features that matter the most to you and to identify & resolve issues quickly.
+- Improved: Updated the endpoint used for [Generating Image Alt Text with Content AI](https://rankmath.com/kb/generate-alt-text-with-content-ai/). Now, Content AI generates more accurate alt texts for your images.
+- Improved: Security of the plugin's Bulk Update SEO Data feature and the endpoint for retrieving the featured image ID to prevent potential exploitation by users with edit-page access, thanks to Abu Hurayra & Patchstack for responsibly disclosing the issue
+- Fixed: Extra space in [SERP Preview description](https://rankmath.com/kb/general-tab/#the-preview-section) when text ends with an HTML tag
+- Fixed: [Post Titles Missing Focus Keywords test in SEO Analysis](https://rankmath.com/kb/seo-analysis/#post-titles-missing-focus-keywords-test) was not working correctly when `&` is included in the Focus Keyword
+- Fixed: [Time to Read in Enhanced Slack Sharing](https://rankmath.com/kb/slack-enhanced-sharing/#enhanced-sharing) was not accounting for shortcodes in content
+- Fixed: Untranslated strings on the Scheduled Actions page when the WooCommerce plugin is active
+- Fixed: Localized data from the plugin was included in the REST output
+- Fixed: [Rewrite Titles](https://rankmath.com/kb/titles-and-meta/#rewrite-titles) option was always showing in Block themes even when not needed
+- Fixed: Incompatibility with LiteSpeed Cache plugin when Rewrite Titles option is enabled
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

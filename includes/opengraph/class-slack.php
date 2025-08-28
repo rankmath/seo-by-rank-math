@@ -295,7 +295,7 @@ class Slack extends OpenGraph {
 		/**
 		 * Filter: 'rank_math/frontend/time_to_read_content' - Change the text to calculate the time to read.
 		 */
-		$content = $this->do_filter( 'frontend/time_to_read_content', wp_strip_all_tags( $post->post_content ) );
+		$content = $this->do_filter( 'frontend/time_to_read_content', wp_strip_all_tags( apply_filters( 'the_content', $post->post_content ) ) );
 
 		/**
 		 * Filter: 'rank_math/frontend/time_to_read_wpm' - Change the words per minute to calculate the time to read.

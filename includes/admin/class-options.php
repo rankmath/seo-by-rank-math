@@ -292,7 +292,7 @@ class Options {
 	private function get_titles_data() {
 		$data = [
 			'choicesRobots'         => Helper::choices_robots(),
-			'supportsTitleTag'      => current_theme_supports( 'title-tag' ),
+			'supportsTitleTag'      => current_theme_supports( 'title-tag' ) || wp_is_block_theme(),
 			'schemaTypes'           => Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ) ),
 			'isRedirectAttachments' => Helper::get_settings( 'general.attachment_redirect_urls' ),
 		];

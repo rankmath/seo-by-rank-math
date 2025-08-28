@@ -245,9 +245,9 @@ class Rest extends WP_REST_Controller {
 				'callback'            => [ $this, 'update_credits' ],
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
-					'attachmentIds' => [
+					'credits' => [
 						'description' => esc_html__( 'Credit usage details returned by the API.', 'rank-math' ),
-						'type'        => 'object',
+						'type'        => 'integer',
 						'required'    => true,
 					],
 				],

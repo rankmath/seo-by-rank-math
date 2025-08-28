@@ -45,6 +45,10 @@ class Admin implements Runner {
 		$this->filter( 'rank_math/pro_badge', 'offer_icon' );
 		$this->filter( 'load_script_translation_file', 'load_script_translation_file', 10, 3 );
 
+		// Use woocommerce textdomain for the Actiion scheduler strings.
+		$this->filter( 'gettext', 'remap_action_scheduler_translation', 10, 3 );
+		$this->filter( 'gettext_with_context', 'remap_action_scheduler_translation_with_context', 10, 4 );
+
 		// AJAX.
 		$this->ajax( 'search_pages', 'search_pages' );
 		$this->ajax( 'is_keyword_new', 'is_keyword_new' );
@@ -321,6 +325,33 @@ class Admin implements Runner {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Remap Action Scheduler translation to use WooCommerce's text domain (no context).
+	 *
+	 * @param string $translated Translated text.
+	 * @param string $text       Original text.
+	 * @param string $domain     Text domain.
+	 * @return string Modified translated text.
+	 */
+	public function remap_action_scheduler_translation( $translated, $text, $domain ) {
+		// phpcs:ignore -- Use WooCommerce text domain for Action Scheduler strings.
+		return $domain === 'action-scheduler' && Helper::is_woocommerce_active() ? __( $text, 'woocommerce' ) : $translated;
+	}
+
+	/**
+	 * Remap Action Scheduler translation to use WooCommerce's text domain (with context).
+	 *
+	 * @param string $translated Translated text.
+	 * @param string $text       Original text.
+	 * @param string $context    Context information for translators.
+	 * @param string $domain     Text domain.
+	 * @return string Modified translated text.
+	 */
+	public function remap_action_scheduler_translation_with_context( $translated, $text, $context, $domain ) {
+		// phpcs:ignore -- Use WooCommerce text domain for Action Scheduler strings.
+		return $domain === 'action-scheduler' && Helper::is_woocommerce_active() ? _x( $text, $context, 'woocommerce' ) : $translated;
 	}
 
 	/**

@@ -55,7 +55,9 @@ class Front extends WP_REST_Controller {
 			[
 				'methods'             => WP_REST_Server::EDITABLE,
 				'callback'            => [ $this, 'get_featured_image_id' ],
-				'permission_callback' => 'is_user_logged_in',
+				'permission_callback' => function () {
+					return \RankMath\Helper::has_cap( 'onpage_general' );
+				},
 				'args'                => $this->get_featured_image_id_args(),
 			]
 		);
@@ -106,22 +108,41 @@ class Front extends WP_REST_Controller {
 			$resp->set_data(
 				[
 					'success'   => false,
-					'message'   => 'The current theme does not have "post-thumbnails" support.',
+					'message'   => esc_html__( 'The current theme does not have "post-thumbnails" support.', 'rank-math' ),
 					'featImgId' => 0,
 				]
 			);
 			return $resp;
 		}
 
-		$post_id     = $request->get_param( 'postId' );
-		$feat_img_id = get_post_thumbnail_id( $post_id ? $post_id : null );
+		$post_id = $request->get_param( 'postId' );
+		// Checks whether the current has permission to edit post.
+		$post_type_obj = get_post_type_object( get_post_type( $post_id ) );
+		if (
+			is_null( $post_type_obj ) ||
+			(
+				! current_user_can( $post_type_obj->cap->edit_post, $post_id ) &&
+				! current_user_can( $post_type_obj->cap->edit_others_posts )
+			)
+		) {
+			$resp->set_status( 401 );
+			$resp->set_data(
+				[
+					'success'   => false,
+					'message'   => esc_html__( 'Sorry, you don\'t have the required permissions to access this page.', 'rank-math' ),
+					'featImgId' => false,
+				]
+			);
+			return $resp->as_error();
+		}
 
+		$feat_img_id = get_post_thumbnail_id( $post_id ? $post_id : null );
 		if ( false === $feat_img_id ) {
 			$resp->set_status( 404 );
 			$resp->set_data(
 				[
 					'success'   => false,
-					'message'   => 'The post could not be found.',
+					'message'   => esc_html__( 'The post could not be found.', 'rank-math' ),
 					'featImgId' => false,
 				]
 			);

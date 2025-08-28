@@ -49,17 +49,19 @@ class Post extends WP_REST_Controller {
 			]
 		);
 
-		register_rest_field(
-			'page',
-			'rankMath',
-			[
-				'get_callback'        => [ $this, 'get_post_screen_meta' ],
-				'schema'              => null,
-				'permission_callback' => function () {
-					return current_user_can( 'read' );
-				},
-			]
-		);
+		if ( Helper::is_site_editor() ) {
+			register_rest_field(
+				'page',
+				'rankMath',
+				[
+					'get_callback'        => [ $this, 'get_post_screen_meta' ],
+					'schema'              => null,
+					'permission_callback' => function () {
+						return current_user_can( 'read' );
+					},
+				]
+			);
+		}
 	}
 
 	/**
@@ -80,6 +82,18 @@ class Post extends WP_REST_Controller {
 
 			$post_type = get_post_type( $post_id );
 			if ( ! Helper::is_post_type_accessible( $post_type ) && 'attachment' !== $post_type ) {
+				continue;
+			}
+
+			// Checks whether the current has permission to edit post.
+			$post_type_obj = get_post_type_object( $post_type );
+			if (
+				is_null( $post_type_obj ) ||
+				(
+					! current_user_can( $post_type_obj->cap->edit_post, $post_id ) &&
+					! current_user_can( $post_type_obj->cap->edit_others_posts )
+				)
+			) {
 				continue;
 			}
 

@@ -32,6 +32,15 @@ class Head {
 	use Hooker;
 
 	/**
+	 * Keeps the buffer level.
+	 *
+	 * @since 1.0.252
+	 *
+	 * @var int
+	 */
+	private $buffer_level = 0;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
@@ -428,12 +437,17 @@ class Head {
 	 */
 	public function start_ob() {
 		ob_start();
+		$this->buffer_level = ob_get_level();
 	}
 
 	/**
 	 * Use output buffering to force rewrite the title tag.
 	 */
 	public function rewrite_title() {
+		if ( ob_get_level() !== $this->buffer_level ) {
+			return;
+		}
+
 		global $wp_query;
 
 		// Check if we're in the main query.

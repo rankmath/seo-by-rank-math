@@ -38,6 +38,7 @@ class Option_Center implements Runner {
 		$this->filter( 'rank_math/settings/title', 'title_post_type_settings', 1 );
 		$this->filter( 'rank_math/settings/title', 'title_taxonomy_settings', 1 );
 		$this->filter( 'rank_math/settings/general', 'remove_unwanted_general_tabs', 1 );
+		$this->action( 'admin_enqueue_scripts', 'enqueue_settings_translations', 11 );
 	}
 
 	/**
@@ -383,6 +384,7 @@ class Option_Center implements Runner {
 			$notifications[] = $update_analytics;
 		}
 
+		do_action( 'rank_math/settings/before_save', $type, $settings );
 		foreach (
 			[
 				'htaccess_allow_editing',
@@ -390,14 +392,13 @@ class Option_Center implements Runner {
 				'searchConsole',
 				'analyticsData',
 				'analytics',
+				'usage_tracking',
 			] as $key
 		) {
 			if ( isset( $settings[ $key ] ) ) {
 				unset( $settings[ $key ] );
 			}
 		}
-
-		do_action( 'rank_math/settings/before_save', $type, $settings );
 
 		$settings = Sanitize_Settings::sanitize( $settings, $field_types );
 		self::check_updated_fields( $updated, $is_reset );
@@ -429,7 +430,7 @@ class Option_Center implements Runner {
 
 		return [
 			'notifications' => $notifications,
-			'settings'      => Helper::get_settings( $type ),
+			'settings'      => apply_filters( 'rank_math/settings/saved_data', Helper::get_settings( $type ), $type ),
 		];
 	}
 
@@ -471,6 +472,33 @@ class Option_Center implements Runner {
 				];
 			}
 		}
+	}
+
+	/**
+	 * Enqueue settings translations when React UI is enabled as the settings pages are loaded in chunks.
+	 */
+	public function enqueue_settings_translations() {
+		if ( ! Helper::is_react_enabled() ) {
+			return;
+		}
+
+		$page = str_replace( 'rank-math-options-', '', Param::get( 'page', '' ) );
+		$hash = [
+			'general'          => 'generalSettings',
+			'titles'           => 'titleSettings',
+			'sitemap'          => 'sitemapSettings',
+			'instant-indexing' => 'instantIndexingSettings',
+		];
+
+		if ( ! isset( $hash[ $page ] ) ) {
+			return;
+		}
+
+		$chunk = $hash[ $page ];
+		wp_enqueue_script( 'rank-math-settings-chunk', rank_math()->plugin_url() . "assets/admin/js/$chunk.js", [ 'rank-math-options' ], rank_math()->version, true );
+		wp_set_script_translations( 'rank-math-settings-chunk', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
+		wp_set_script_translations( 'rank-math-options', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
+		wp_set_script_translations( 'rank-math-components', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
 	}
 
 	/**
@@ -565,8 +593,8 @@ class Option_Center implements Runner {
 			];
 		}
 
-		// phpcs:ignore= WordPress.Security.ValidatedSanitizedInput, WordPress.Security.NonceVerification -- Writing to .htaccess file and escaping for HTML will break functionality & CMB2 package handles the nonce verification
-		$content = isset( $settings['htaccess_content'] ) ? wp_unslash( $settings['htaccess_content'] ) : '';
+		// phpcs:ignore= WordPress.Security.ValidatedSanitizedInput -- Writing to .htaccess file and escaping for HTML will break functionality.
+		$content = isset( $settings['htaccess_content'] ) ? $settings['htaccess_content'] : '';
 		if ( empty( $content ) ) {
 			return;
 		}
