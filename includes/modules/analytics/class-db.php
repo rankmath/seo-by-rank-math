@@ -327,11 +327,19 @@ class DB {
 			unset( $args['id'] );
 
 			$updated = self::objects()->set( $args )
-				->where( 'id', $old_id )
-				->where( 'object_id', absint( $args['object_id'] ) )
-				->update();
+			->where( 'id', $old_id )
+			->where( 'object_id', absint( $args['object_id'] ) )
+			->update();
 
 			if ( ! empty( $updated ) ) {
+				return $old_id;
+			}
+			$old_id = self::objects()
+			->select( 'id' )
+			->where( 'object_id', absint( $args['object_id'] ) )
+			->getVar();
+			if ( ! empty( $old_id ) ) {
+				// $updated may sometimes return 0 if there is no field that is changed, even if a row with $args['object_id'] exists.
 				return $old_id;
 			}
 		}

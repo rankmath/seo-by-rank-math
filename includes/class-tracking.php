@@ -207,7 +207,7 @@ class Tracking {
 		}
 
 		// Only track Rank Math admin/configuration pages.
-		if ( ! Str::starts_with( Param::get( 'page' ), 'rank-math' ) ) {
+		if ( ! Str::starts_with( 'rank-math', Param::get( 'page' ) ) ) {
 			return;
 		}
 

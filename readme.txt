@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.252
+Stable tag: 1.0.253
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,16 +339,10 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.252 [Aug 28, 2025] =
-- Added: Option to enable/disable [Usage Tracking](https://rankmath.com/kb/usage-tracking/) (disabled by default). Enabling this option would help us prioritize development of features that matter the most to you and to identify & resolve issues quickly.
-- Improved: Updated the endpoint used for [Generating Image Alt Text with Content AI](https://rankmath.com/kb/generate-alt-text-with-content-ai/). Now, Content AI generates more accurate alt texts for your images.
-- Improved: Security of the plugin's Bulk Update SEO Data feature and the endpoint for retrieving the featured image ID to prevent potential exploitation by users with edit-page access, thanks to Abu Hurayra & Patchstack for responsibly disclosing the issue
-- Fixed: Extra space in [SERP Preview description](https://rankmath.com/kb/general-tab/#the-preview-section) when text ends with an HTML tag
-- Fixed: [Post Titles Missing Focus Keywords test in SEO Analysis](https://rankmath.com/kb/seo-analysis/#post-titles-missing-focus-keywords-test) was not working correctly when `&` is included in the Focus Keyword
-- Fixed: [Time to Read in Enhanced Slack Sharing](https://rankmath.com/kb/slack-enhanced-sharing/#enhanced-sharing) was not accounting for shortcodes in content
-- Fixed: Untranslated strings on the Scheduled Actions page when the WooCommerce plugin is active
-- Fixed: Localized data from the plugin was included in the REST output
-- Fixed: [Rewrite Titles](https://rankmath.com/kb/titles-and-meta/#rewrite-titles) option was always showing in Block themes even when not needed
-- Fixed: Incompatibility with LiteSpeed Cache plugin when Rewrite Titles option is enabled
+= 1.0.253 [Sept 10, 2025] =
+- Fixed: Missing option to select [Primary term](https://rankmath.com/kb/how-to-choose-a-primary-category/#how-to-choose-a-primary-category) when [filter to disable Rank Math's Sidebar integration](https://rankmath.com/kb/filters-hooks-api-developer/#disable-gutenberg-sidebar) was used
+- Fixed: [Custom Field variable](https://rankmath.com/kb/variables-in-seo-title-description/#custom-field-advanced) was not working in the [SERP fields](https://rankmath.com/kb/general-tab/#seo-title-permalink-description)
+- Fixed: Duplicate entries were created in the Analytics objects table when updating a post after switching it from Elementor's Top Bar
+- Fixed: Incompatibility with the AffiliateWP plugin when [Remove Base option](https://rankmath.com/kb/general-settings/?#remove-base) was enabled
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

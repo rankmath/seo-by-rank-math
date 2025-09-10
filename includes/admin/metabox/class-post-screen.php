@@ -109,9 +109,6 @@ class Post_Screen implements IScreen {
 		// Classic.
 		if ( Helper::is_block_editor() ) {
 			wp_enqueue_script( 'rank-math-formats' );
-		}
-
-		if ( $is_block_editor ) {
 			wp_enqueue_script( 'rank-math-primary-term', rank_math()->plugin_url() . 'assets/admin/js/gutenberg-primary-term.js', [], rank_math()->version, true );
 		}
 	}

@@ -229,6 +229,10 @@ class Options {
 	 * @return array
 	 */
 	private function get_json_data( $current_page ) {
+		if ( Param::get( 'page' ) !== $this->key ) {
+			return [];
+		}
+
 		if ( is_admin() ) {
 			rank_math()->variables->setup();
 			rank_math()->variables->setup_json();
