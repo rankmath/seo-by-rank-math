@@ -42,7 +42,7 @@ defined( 'ABSPATH' ) || exit;
 			<div class="rank-math-tabs-content rank-math-custom">
 				<div id="help-panel-video" class="rank-math-tab">
 					<a href="<?php KB::the( 'how-to-setup-your-site', 'SW Your Site Setup KB' ); ?>" target="_blank" style="font-size: 15px; border-bottom: 1px dashed;">
-						<?php echo esc_html_e( 'Click here to learn how to setup Rank Math properly', 'rank-math' ); ?>
+						<?php esc_html_e( 'Click here to learn how to setup Rank Math properly', 'rank-math' ); ?>
 					</a>
 				</div>
 				<div id="help-panel-knowledge" class="rank-math-tab">
