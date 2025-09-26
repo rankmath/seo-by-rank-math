@@ -435,7 +435,14 @@ class Redirector {
 			return false;
 		}
 
-		if ( ! $this->uri && $this->query_string && Str::starts_with( 'p=', trim( $this->query_string ) ) ) {
+		if (
+			! $this->uri &&
+			$this->query_string &&
+			(
+				Str::starts_with( 'p=', trim( $this->query_string ) ) ||
+				Str::starts_with( 'page_id=', trim( $this->query_string ) )
+			)
+		) {
 			$this->query_string = '';
 			return true;
 		}

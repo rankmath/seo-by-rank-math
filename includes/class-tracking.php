@@ -178,7 +178,7 @@ class Tracking {
 	 * Enqueue Mixpanel script on Block Editor pages.
 	 */
 	public function enqueue_mixpanel(): void {
-		if ( ! $this->optin->is_enabled() ) {
+		if ( ! $this->optin->can_track() ) {
 			return;
 		}
 
@@ -202,7 +202,7 @@ class Tracking {
 	 * Track admin page views.
 	 */
 	public function track_admin_page_view() {
-		if ( ! $this->optin->is_enabled() ) {
+		if ( ! $this->optin->can_track() ) {
 			return;
 		}
 
@@ -232,7 +232,11 @@ class Tracking {
 		];
 
 		$this->mixpanel->identify( $this->user_email );
-		$this->mixpanel->track( 'Page Viewed', $properties );
+
+		// Determine capability based on current Rank Math page and pass it to Mixpanel.
+		$page             = (string) Param::get( 'page' );
+		$event_capability = $this->get_event_capability_for_page( $page );
+		$this->mixpanel->track( 'Page Viewed', $properties, $event_capability );
 	}
 
 	/**
@@ -247,7 +251,7 @@ class Tracking {
 		}
 
 		$json['canAddUsageTracking']    = current_user_can( 'manage_options' );
-		$json['data']['usage_tracking'] = $this->optin->is_enabled();
+		$json['data']['usage_tracking'] = $this->optin->can_track();
 
 		return $json;
 	}
@@ -283,7 +287,7 @@ class Tracking {
 			return $data;
 		}
 
-		$data['usage_tracking'] = $this->optin->is_enabled();
+		$data['usage_tracking'] = $this->optin->can_track();
 		return $data;
 	}
 
@@ -327,5 +331,30 @@ class Tracking {
 
 		$user = wp_get_current_user();
 		return isset( $user->user_email ) ? (string) $user->user_email : '';
+	}
+
+	/**
+	 * Get the capability required for tracking based on the current Rank Math page.
+	 *
+	 * @param string $page The `page` query arg, e.g., 'rank-math-options-general'.
+	 *
+	 * @return string Capability name or empty for default behavior.
+	 */
+	private function get_event_capability_for_page( string $page ): string {
+		// Map known Rank Math admin pages to their capabilities.
+		$map = [
+			'rank-math-options-general'          => 'rank_math_general',
+			'rank-math-options-titles'           => 'rank_math_titles',
+			'rank-math-options-sitemap'          => 'rank_math_sitemap',
+			'rank-math-options-instant-indexing' => 'rank_math_general',
+			'rank-math-404-monitor'              => 'rank_math_404_monitor',
+			'rank-math-redirections'             => 'rank_math_redirections',
+			'rank-math-role-manager'             => 'rank_math_role_manager',
+			'rank-math-analytics'                => 'rank_math_analytics',
+			'rank-math-seo-analysis'             => 'rank_math_site_analysis',
+			'rank-math-content-ai-page'          => 'rank_math_content_ai',
+		];
+
+		return isset( $map[ $page ] ) ? $map[ $page ] : '';
 	}
 }

@@ -576,15 +576,7 @@ class AJAX {
 
 		// Test Google Analytics (GA) connection request.
 		if ( ! empty( $value['view_id'] ) || ! empty( $value['country'] ) || ! empty( $value['property_id'] ) ) {
-			$request = Analytics::get_analytics(
-				[
-					'view_id'     => $value['view_id'],
-					'country'     => $value['country'],
-					'property_id' => $value['property_id'],
-				],
-				true
-			);
-
+			$request = Analytics::get_sample_response();
 			if ( is_wp_error( $request ) ) {
 				return new WP_Error(
 					'insufficient_permissions',

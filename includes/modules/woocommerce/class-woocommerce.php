@@ -66,6 +66,8 @@ class WooCommerce extends WC_Vars {
 		}
 
 		parent::__construct();
+
+		$this->filter( 'rank_math/recalculate_score/data', 'recalculate_score_data', 10, 2 );
 	}
 
 	/**
@@ -255,5 +257,21 @@ class WooCommerce extends WC_Vars {
 		}
 
 		return $product->post->post_content;
+	}
+
+	/**
+	 * Update the values used for recalculating SEO score for products.
+	 *
+	 * @param array $values The values to be sent to the analyzer.
+	 * @param int   $post_id The post ID.
+	 *
+	 * @return array
+	 */
+	public function recalculate_score_data( $values, $post_id ) {
+		if ( 'product' === get_post_type( $post_id ) ) {
+			$values['content'] = $values['content'] . ' ' . get_the_excerpt( $post_id );
+		}
+
+		return $values;
 	}
 }

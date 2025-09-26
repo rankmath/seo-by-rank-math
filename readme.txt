@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.253
+Stable tag: 1.0.254
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,10 +339,11 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.253 [Sept 10, 2025] =
-- Fixed: Missing option to select [Primary term](https://rankmath.com/kb/how-to-choose-a-primary-category/#how-to-choose-a-primary-category) when [filter to disable Rank Math's Sidebar integration](https://rankmath.com/kb/filters-hooks-api-developer/#disable-gutenberg-sidebar) was used
-- Fixed: [Custom Field variable](https://rankmath.com/kb/variables-in-seo-title-description/#custom-field-advanced) was not working in the [SERP fields](https://rankmath.com/kb/general-tab/#seo-title-permalink-description)
-- Fixed: Duplicate entries were created in the Analytics objects table when updating a post after switching it from Elementor's Top Bar
-- Fixed: Incompatibility with the AffiliateWP plugin when [Remove Base option](https://rankmath.com/kb/general-settings/?#remove-base) was enabled
+= 1.0.254 [Sept 26, 2025] =
+- Fixed: [Update SEO Score tool](https://rankmath.com/kb/seo-score-not-available/#update-seo-scores) was not considering the Product's short description when calculating the SEO score
+- Fixed: PHP warning when using [Focus Keyword variable](https://rankmath.com/kb/variables-in-seo-title-description/#focus-keyword) with keywords containing special characters
+- Fixed: Deprecated capability used in the plugin to access Rank Math Dashboard
+- Fixed: [Fallback behaviour](https://rankmath.com/kb/general-settings/#fallback-behaviour) was not working when URL contained query parameters of page IDs
+- Fixed: Updating the [Sitemap settings](https://rankmath.com/kb/configure-sitemaps/) was not clearing the Sitemap cache
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

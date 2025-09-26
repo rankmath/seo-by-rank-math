@@ -539,7 +539,7 @@ class Post_Variables extends Advanced_Variables {
 		if ( ! empty( $keywords ) ) {
 			$primary_keyword = explode( ',', $keywords );
 			$primary_keyword = trim( $primary_keyword[0] );
-			$regex           = '/<p>(.*' . str_replace( [ ',', ' ', '/' ], [ '|', '.', '\/' ], $primary_keyword ) . '.*)<\/p>/iu';
+			$regex           = '/<p>(.*' . str_replace( [ ',', ' ', '/', '(', ')', '[', ']', '{', '}', '?', '*', '+', '^', '$' ], [ '|', '.', '\/', '\(', '\)', '\[', '\]', '\{', '\}', '\?', '\*', '\+', '\^', '\$' ], $primary_keyword ) . '.*)<\/p>/iu';
 			\preg_match_all( $regex, $post_content, $matches );
 			if ( isset( $matches[1], $matches[1][0] ) ) {
 				return $matches[1][0];

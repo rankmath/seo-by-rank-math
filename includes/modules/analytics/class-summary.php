@@ -279,6 +279,7 @@ class Summary {
 
 		return $stats;
 	}
+
 	/**
 	 * Get posts summary.
 	 *

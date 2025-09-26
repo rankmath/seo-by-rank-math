@@ -39,7 +39,7 @@ trait Cache {
 			$value = wp_json_encode( $value );
 		}
 
-		$value = trim( $value );
+		$value = apply_filters( 'rank_math/cache/generate_hash', trim( $value ) );
 		$hash  = hash( 'sha256', $value );
 
 		return $hash;

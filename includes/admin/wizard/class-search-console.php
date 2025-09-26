@@ -116,7 +116,7 @@ class Search_Console implements Wizard_Step {
 			$search_console_data = $values['searchConsole'];
 			$value               = [
 				'country'             => sanitize_text_field( $search_console_data['country'] ),
-				'profile'             => sanitize_text_field( $search_console_data['profile'] ),
+				'profile'             => sanitize_text_field( $search_console_data['profile'] ?? '' ),
 				'enable_index_status' => sanitize_text_field( $search_console_data['enable_index_status'] ),
 			];
 			update_option( 'rank_math_google_analytic_profile', $value );

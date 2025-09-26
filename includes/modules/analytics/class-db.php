@@ -439,15 +439,19 @@ class DB {
 			return '';
 		}
 
-		$url  = urldecode( preg_replace( '/#.*$/', '', $url ) );
-		$host = wp_parse_url( $url, PHP_URL_HOST );
-		if ( ! $host ) {
-			return '';
-		}
+		$url = urldecode( preg_replace( '/#.*$/', '', $url ) );
 
 		$url = self::remove_hash( $url );
 
-		$url = str_replace( Helper::get_home_url(), '', $url );
+		// Parse the URL to get the path component.
+		$parsed_url = wp_parse_url( $url );
+		if ( isset( $parsed_url['path'] ) ) {
+			return $parsed_url['path'];
+		}
+
+		// Fallback: try to extract path by removing domain.
+		$host = Helper::get_home_url();
+		$url  = str_replace( $host, '', $url );
 
 		// Remove ASCII domain.
 		$host_ascii = idn_to_ascii( $host );

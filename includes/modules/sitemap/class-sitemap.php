@@ -62,6 +62,8 @@ class Sitemap {
 			$this->filter( 'rank_math/sitemap/build_type', 'rank_math_build_sitemap_filter' );
 			$this->filter( 'rank_math/sitemap/entry', 'exclude_hidden_language_posts', 10, 3 );
 		}
+
+		$this->action( 'rank_math/settings/after_save', 'clear_cache' );
 	}
 
 	/**
@@ -329,5 +331,12 @@ class Sitemap {
 		 * @return string
 		 */
 		return apply_filters( 'rank_math/sitemap/index/slug', 'sitemap_index' );
+	}
+
+	/**
+	 * Ensure sitemap cache is invalidated when settings change.
+	 */
+	public function clear_cache() {
+		Cache::invalidate_storage();
 	}
 }
