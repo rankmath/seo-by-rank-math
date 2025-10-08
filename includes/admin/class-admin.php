@@ -488,11 +488,11 @@ class Admin implements Runner {
 
 		// Holiday Season related variables.
 		$time                   = time();
-		$current_year           = 2022;
-		$anniversary_start_time = gmmktime( 17, 00, 00, 10, 30, $current_year ); // 30 Oct.
-		$anniversary_end_time   = gmmktime( 17, 00, 00, 11, 30, $current_year ); // 30 Nov.
-		$holiday_start_time     = gmmktime( 17, 00, 00, 12, 20, $current_year ); // 20 Dec.
-		$holiday_end_time       = gmmktime( 17, 00, 00, 01, 07, 2023 ); // 07 Jan.
+		$current_year           = 2025;
+		$anniversary_start_time = gmmktime( 17, 00, 00, 10, 29, $current_year ); // 29 Oct.
+		$anniversary_end_time   = gmmktime( 17, 00, 00, 12, 03, $current_year ); // 30 Nov.
+		$holiday_start_time     = gmmktime( 17, 00, 00, 12, 24, $current_year ); // 20 Dec.
+		$holiday_end_time       = gmmktime( 17, 00, 00, 01, 07, 2026 ); // 07 Jan.
 
 		ob_start();
 		if (

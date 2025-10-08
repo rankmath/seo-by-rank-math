@@ -292,24 +292,4 @@ class Assets implements Runner {
 			jQuery( 'input[type=text], input[type=radio]' ).on( 'focus change', showNotice );
 		} );";
 	}
-
-	/**
-	 * Check if there is an Anniversary offer.
-	 */
-	private function has_offer() {
-		if ( ! current_user_can( 'manage_options' ) || defined( 'RANK_MATH_PRO_FILE' ) ) {
-			return false;
-		}
-
-		// Holiday Season related variables.
-		$time                   = time();
-		$current_year           = 2022;
-		$anniversary_start_time = gmmktime( 17, 00, 00, 05, 05, $current_year ); // 30 Oct.
-		$anniversary_end_time   = gmmktime( 17, 00, 00, 11, 30, $current_year ); // 30 Nov.
-		$holiday_start_time     = gmmktime( 17, 00, 00, 12, 20, $current_year ); // 20 Dec.
-		$holiday_end_time       = gmmktime( 17, 00, 00, 01, 07, 2023 ); // 07 Jan.
-
-		return ( $time > $anniversary_start_time && $time < $anniversary_end_time ) ||
-			( $time > $holiday_start_time && $time < $holiday_end_time );
-	}
 }

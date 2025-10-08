@@ -240,7 +240,7 @@ class Local_Seo {
 			$numbers[] = [
 				'@type'       => 'ContactPoint',
 				'telephone'   => $number['number'],
-				'contactType' => $number['type'],
+				'contactType' => ! empty( $number['type'] ) ? esc_html( $number['type'] ) : 'customer support',
 			];
 		}
 
@@ -303,7 +303,7 @@ class Local_Seo {
 				continue;
 			}
 
-			$opening_hours[ $hour['time'] ][] = $hour['day'];
+			$opening_hours[ $hour['time'] ][] = ! empty( $hour['day'] ) ? esc_html( $hour['day'] ) : 'Monday';
 		}
 
 		return $opening_hours;
@@ -330,7 +330,7 @@ class Local_Seo {
 				continue;
 			}
 
-			$type = $property['type'];
+			$type = ! empty( $property['type'] ) ? esc_html( $property['type'] ) : 'legalName';
 			if ( 'numberOfEmployees' === $type ) {
 				$parts = explode( '-', $property['value'] );
 				if ( empty( $parts[1] ) ) {

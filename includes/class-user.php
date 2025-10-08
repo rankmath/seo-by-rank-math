@@ -36,9 +36,11 @@ class User extends Metadata {
 		if ( is_int( $user ) && 0 === absint( $user ) ) {
 			$user = $GLOBALS['wp_query']->get_queried_object();
 		}
-		if ( is_object( $user ) && isset( $user->ID ) ) {
-			$user = $user->ID;
+
+		if ( is_object( $user ) ) {
+			$user = $user->ID ?? '';
 		}
+
 		if ( empty( $user ) ) {
 			return null;
 		}

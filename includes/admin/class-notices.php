@@ -43,6 +43,47 @@ class Notices implements Runner {
 		$this->new_post_type();
 		$this->convert_wpml_settings();
 		$this->permalink_changes_warning();
+		$this->react_settings_ui_notice();
+	}
+
+	/**
+	 * Show a persistent admin notice when the React Settings UI is disabled.
+	 *
+	 * Adds a dismissible, persistent error when the temporary option to
+	 * disable the React-based Settings UI is turned off. The notice is removed
+	 * when the React Settings UI is enabled again.
+	 *
+	 * @since 1.0.255
+	 * @return void
+	 */
+	private function react_settings_ui_notice() {
+		// Only relevant for admins in the dashboard context.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$notice_id = 'rank_math_react_settings_ui_disabled';
+
+		if ( ! Helper::is_react_enabled() ) {
+			$message = sprintf(
+				// Translators: 1: opening anchor tag, 2: closing anchor tag.
+				__( 'The React Settings UI is currently disabled, and the classic settings interface is active. Note: The PHP-based settings interface will be removed in an upcoming release. %1$sEnable the React Settings UI%2$s to switch back.', 'rank-math' ),
+				'<a href="' . esc_url( Helper::get_dashboard_url() ) . '">',
+				'</a>'
+			);
+
+			Helper::add_notification(
+				$message,
+				[
+					'type' => 'error',
+					'id'   => $notice_id,
+				]
+			);
+			return;
+		}
+
+		// React UI is enabled; ensure any prior notice is removed.
+		Helper::remove_notification( $notice_id );
 	}
 
 	/**

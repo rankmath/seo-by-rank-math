@@ -50,10 +50,11 @@ class Post_Columns implements Runner {
 
 		$this->register_post_columns();
 		$this->register_media_columns();
+		$this->register_taxonomy_columns();
 
 		// Column Content.
-		$this->filter( 'rank_math_title', 'get_column_title', 5 );
-		$this->filter( 'rank_math_description', 'get_column_description', 5 );
+		$this->filter( 'rank_math_title', 'get_column_title', 5, 2 );
+		$this->filter( 'rank_math_description', 'get_column_description', 5, 2 );
 		$this->filter( 'rank_math_seo_details', 'get_column_seo_details', 5 );
 	}
 
@@ -95,6 +96,19 @@ class Post_Columns implements Runner {
 
 		$this->filter( 'manage_media_columns', 'add_media_columns', 11 );
 		$this->action( 'manage_media_custom_column', 'media_contents', 11, 2 );
+	}
+
+	/**
+	 * Register taxonomy columns hooks.
+	 *
+	 * @return void
+	 */
+	private function register_taxonomy_columns() {
+		$taxonomies = Helper::get_allowed_taxonomies();
+		foreach ( $taxonomies as $taxonomy ) {
+			$this->filter( "manage_edit-{$taxonomy}_columns", 'add_taxonomy_columns', 9 );
+			$this->filter( "manage_{$taxonomy}_custom_column", 'taxonomy_columns_contents', 10, 3 );
+		}
 	}
 
 	/**
@@ -149,6 +163,23 @@ class Post_Columns implements Runner {
 	}
 
 	/**
+	 * Adds custom columns to taxonomy list view.
+	 *
+	 * @param array $columns Columns belonging to current taxonomy.
+	 *
+	 * @return array
+	 */
+	public function add_taxonomy_columns( $columns ) {
+		$screen = get_current_screen();
+		if ( Helper::get_settings( 'titles.tax_' . $screen->taxonomy . '_bulk_editing', false ) ) {
+			$columns['rank_math_title']       = esc_html__( 'SEO Title', 'rank-math' );
+			$columns['rank_math_description'] = esc_html__( 'SEO Desc', 'rank-math' );
+		}
+
+		return $columns;
+	}
+
+	/**
 	 * Add content for custom column.
 	 *
 	 * @param string $column_name The name of the column to display.
@@ -161,15 +192,35 @@ class Post_Columns implements Runner {
 	}
 
 	/**
+	 * Generate content of custom columns.
+	 *
+	 * @param string $content     The content of the current column.
+	 * @param string $column_name The column name.
+	 * @param int    $term_id     The unique ID of the current term.
+	 *
+	 * @return void
+	 */
+	public function taxonomy_columns_contents( $content, $column_name, $term_id ) {
+		if ( Str::starts_with( 'rank_math_', $column_name ) ) {
+			do_action( $column_name, $term_id, 'term' );
+		}
+	}
+
+	/**
 	 * Add content for title column.
 	 *
-	 * @param int $post_id The current post ID.
+	 * @param int    $object_id   The current Object ID.
+	 * @param string $object_type The current Object type.
 	 */
-	public function get_column_title( $post_id ) {
-		$title = ! empty( $this->data[ $post_id ]['rank_math_title'] ) ? $this->data[ $post_id ]['rank_math_title'] : '';
+	public function get_column_title( $object_id, $object_type = 'post' ) {
+		if ( empty( $this->data ) ) {
+			$method = "get_{$object_type}_seo_data";
+			$this->$method( $object_type );
+		}
+
+		$title = ! empty( $this->data[ $object_id ]['rank_math_title'] ) ? $this->data[ $object_id ]['rank_math_title'] : '';
 		if ( ! $title ) {
-			$post_type = get_post_type( $post_id );
-			$title     = Helper::get_settings( "titles.pt_{$post_type}_title" );
+			$title = $this->get_default_title( $object_id, $object_type );
 		}
 		?>
 		<span class="rank-math-column-display"><?php echo esc_html( $title ); ?></span>
@@ -182,15 +233,15 @@ class Post_Columns implements Runner {
 	}
 
 	/**
-	 * Add content for title column.
+	 * Add content for description column.
 	 *
-	 * @param int $post_id The current post ID.
+	 * @param int    $object_id   The current Object ID.
+	 * @param string $object_type The current Object type.
 	 */
-	public function get_column_description( $post_id ) {
-		$description = ! empty( $this->data[ $post_id ]['rank_math_description'] ) ? $this->data[ $post_id ]['rank_math_description'] : '';
+	public function get_column_description( $object_id, $object_type = 'post' ) {
+		$description = ! empty( $this->data[ $object_id ]['rank_math_description'] ) ? $this->data[ $object_id ]['rank_math_description'] : '';
 		if ( ! $description ) {
-			$post_type   = get_post_type( $post_id );
-			$description = has_excerpt( $post_id ) ? '%excerpt%' : Helper::get_settings( "titles.pt_{$post_type}_description" );
+			$description = $this->get_default_description( $object_id, $object_type );
 		}
 		?>
 		<span class="rank-math-column-display"><?php echo esc_html( $description ); ?></span>
@@ -208,10 +259,6 @@ class Post_Columns implements Runner {
 	 * @param int $post_id The current post ID.
 	 */
 	public function get_column_seo_details( $post_id ) {
-		if ( empty( $this->data ) ) {
-			$this->get_seo_data();
-		}
-
 		$data = isset( $this->data[ $post_id ] ) ? $this->data[ $post_id ] : [];
 		if ( ! self::is_post_indexable( $post_id ) ) {
 			echo '<span class="rank-math-column-display seo-score no-score "><strong>N/A</strong></span>';
@@ -293,9 +340,71 @@ class Post_Columns implements Runner {
 	}
 
 	/**
-	 * Get SEO data.
+	 * Get Default title for the object type.
+	 *
+	 * @param int    $object_id   The current Object ID.
+	 * @param string $object_type The current Object type.
 	 */
-	private function get_seo_data() {
+	private function get_default_title( $object_id, $object_type ) {
+		if ( $object_type === 'term' ) {
+			$term = get_term( $object_id );
+			return Helper::get_settings( "titles.tax_{$term->taxonomy}_title" );
+		}
+
+		$post_type = get_post_type( $object_id );
+		return Helper::get_settings( "titles.pt_{$post_type}_title" );
+	}
+
+	/**
+	 * Get Default description for the object type.
+	 *
+	 * @param int    $object_id   The current Object ID.
+	 * @param string $object_type The current Object type.
+	 */
+	private function get_default_description( $object_id, $object_type ) {
+		if ( $object_type === 'term' ) {
+			$term = get_term( $object_id );
+			return Helper::get_settings( "titles.tax_{$term->taxonomy}_description" );
+		}
+
+		$post_type   = get_post_type( $object_id );
+		$description = has_excerpt( $object_id ) ? '%excerpt%' : Helper::get_settings( "titles.pt_{$post_type}_description" );
+	}
+
+	/**
+	 * Get Terms SEO data.
+	 */
+	private function get_term_seo_data() {
+		$wp_list_table = _get_list_table( 'WP_Terms_List_Table' );
+		$wp_list_table->prepare_items();
+		$items = $wp_list_table->items;
+		if ( empty( $items ) ) {
+			return false;
+		}
+
+		$term_ids = array_filter(
+			array_map(
+				function ( $item ) {
+					return isset( $item->term_id ) ? $item->term_id : '';
+				},
+				$items
+			)
+		);
+
+		$results = Database::table( 'termmeta' )->select( [ 'term_id', 'meta_key', 'meta_value' ] )->whereIn( 'term_id', $term_ids )->whereLike( 'meta_key', 'rank_math' )->get( ARRAY_A );
+		if ( empty( $results ) ) {
+			return false;
+		}
+
+		foreach ( $results as $result ) {
+			$this->data[ $result['term_id'] ][ $result['meta_key'] ] = $result['meta_value'];
+		}
+	}
+
+	/**
+	 * Get Post SEO data.
+	 */
+	private function get_post_seo_data() {
 		$post_ids = [];
 
 		$post_ids = array_filter( $this->get_post_ids() );

@@ -551,6 +551,7 @@ class Installer {
 			$titles[ 'tax_' . $taxonomy . '_custom_robots' ]          = $defaults['is_custom'];
 			$titles[ 'tax_' . $taxonomy . '_description' ]            = '%term_description%';
 			$titles[ 'tax_' . $taxonomy . '_slack_enhanced_sharing' ] = 'on';
+			$titles[ 'tax_' . $taxonomy . '_bulk_editing' ]           = 0;
 
 			$sitemap[ 'tax_' . $taxonomy . '_sitemap' ] = 'category' === $taxonomy ? 'on' : 'off';
 

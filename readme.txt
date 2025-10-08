@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.254
+Stable tag: 1.0.255
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,11 +339,11 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.254 [Sept 26, 2025] =
-- Fixed: [Update SEO Score tool](https://rankmath.com/kb/seo-score-not-available/#update-seo-scores) was not considering the Product's short description when calculating the SEO score
-- Fixed: PHP warning when using [Focus Keyword variable](https://rankmath.com/kb/variables-in-seo-title-description/#focus-keyword) with keywords containing special characters
-- Fixed: Deprecated capability used in the plugin to access Rank Math Dashboard
-- Fixed: [Fallback behaviour](https://rankmath.com/kb/general-settings/#fallback-behaviour) was not working when URL contained query parameters of page IDs
-- Fixed: Updating the [Sitemap settings](https://rankmath.com/kb/configure-sitemaps/) was not clearing the Sitemap cache
+= 1.0.255 [Oct 08, 2025] =
+- Added: Option to view and edit SEO Title & Description columns on [Taxonomy Terms lists](https://rankmath.com/kb/titles-and-meta/#bulk-editing-categories) page
+- Fixed: [Keyboard shortcut `//` for opening the Content AI command box](https://rankmath.com/kb/using-content-ai-in-block-editor/#shortcut) was not working
+- Fixed: [Removing the Open Graph Thumbnail from Titles & Meta settings](https://rankmath.com/kb/titles-and-meta/#open-graph-thumbnail) was not working
+- Fixed: PHP warning related to the missing [Phone number type](https://rankmath.com/kb/local-seo/#phone)
+- Fixed: Missing Preview in the [Content AI Prompts library modal](https://rankmath.com/kb/using-content-ai-in-block-editor/#shortcut)
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

@@ -292,6 +292,17 @@ class Admin_Helper {
 	}
 
 	/**
+	 * Check if current page is term create/term listing.
+	 *
+	 * @return bool
+	 */
+	public static function is_term_listing() {
+		global $pagenow;
+
+		return 'edit-tags.php' === $pagenow;
+	}
+
+	/**
 	 * Check if current page is user create/edit screen.
 	 *
 	 * @return bool

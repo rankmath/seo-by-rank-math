@@ -11,6 +11,7 @@ return [
 	'dependencies' => [
 		'wp-element',
 		'wp-block-editor',
+		'lodash',
 	],
 	'version'      => rank_math()->version,
 ];

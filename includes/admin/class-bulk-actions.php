@@ -151,7 +151,12 @@ class Bulk_Actions implements Runner {
 		$screen = get_current_screen();
 		wp_enqueue_style( 'rank-math-post-bulk-edit', rank_math()->plugin_url() . 'assets/admin/css/post-list.css', [ 'wp-components' ], rank_math()->version );
 
-		$allow_editing = Helper::get_settings( 'titles.pt_' . $screen->post_type . '_bulk_editing', true );
+		if ( Admin_Helper::is_term_listing() ) {
+			$allow_editing = Helper::get_settings( 'titles.tax_' . $screen->taxonomy . '_bulk_editing', false );
+		} else {
+			$allow_editing = Helper::get_settings( 'titles.pt_' . $screen->post_type . '_bulk_editing', true );
+		}
+
 		if ( ! $allow_editing || 'readonly' === $allow_editing ) {
 			return;
 		}

@@ -65,7 +65,7 @@ class Admin_Init {
 	private function load_post_columns_and_filters() {
 		$this->run( [ new Bulk_Actions() ] );
 
-		if ( Admin_Helper::is_post_list() || Admin_Helper::is_media_library() || wp_doing_ajax() ) {
+		if ( Admin_Helper::is_post_list() || Admin_Helper::is_media_library() || Admin_Helper::is_term_listing() || wp_doing_ajax() ) {
 			$this->run(
 				[
 					new Post_Columns(),

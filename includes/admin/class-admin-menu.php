@@ -260,30 +260,35 @@ class Admin_Menu implements Runner {
 		$timezone     = new \DateTimeZone( 'Asia/Kolkata' );
 		$current_date = new \DateTime( 'now', $timezone );
 		$dates        = [
-			'christmas'    => [
-				'start' => '2023-12-17',
-				'end'   => '2023-12-26',
-				'text'  => esc_html__( 'Christmas Sale', 'rank-math' ),
-			],
-			'new-year'     => [
-				'start' => '2023-12-31',
-				'end'   => '2024-01-05',
-				'text'  => esc_html__( 'New Year Sale', 'rank-math' ),
+			'halloween'    => [
+				'start' => '2025-10-29',
+				'end'   => '2025-11-05',
+				'text'  => esc_html__( 'Halloween Sale', 'rank-math' ),
 			],
 			'anniversary'  => [
-				'start' => '2024-11-06',
-				'end'   => '2024-11-13',
+				'start' => '2025-11-05',
+				'end'   => '2025-11-12',
 				'text'  => esc_html__( 'Anniversary Sale', 'rank-math' ),
 			],
 			'black-friday' => [
-				'start' => '2024-11-27',
-				'end'   => '2024-12-01',
+				'start' => '2025-11-12',
+				'end'   => '2025-11-29',
 				'text'  => esc_html__( 'Black Friday Sale', 'rank-math' ),
 			],
 			'cyber-monday' => [
-				'start' => '2024-12-02',
-				'end'   => '2024-12-04',
+				'start' => '2025-11-29',
+				'end'   => '2025-12-03',
 				'text'  => esc_html__( 'Cyber Monday Sale', 'rank-math' ),
+			],
+			'christmas'    => [
+				'start' => '2025-12-24',
+				'end'   => '2025-12-31',
+				'text'  => esc_html__( 'Christmas Sale', 'rank-math' ),
+			],
+			'new-year'     => [
+				'start' => '2025-12-31',
+				'end'   => '2026-01-07',
+				'text'  => esc_html__( 'New Year Sale', 'rank-math' ),
 			],
 		];
 
