@@ -62,11 +62,12 @@ class Blocks {
 	/**
 	 * Create a new (Rank Math) block category.
 	 *
-	 * @param array $categories Array of block categories.
+	 * @param array|null $categories Array of block categories.
 	 *
 	 * @return array
 	 */
 	public function block_categories( $categories ) {
+		$categories = empty( $categories ) ? [] : $categories;
 		return array_merge(
 			$categories,
 			[

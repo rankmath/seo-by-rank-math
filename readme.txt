@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.255
+Stable tag: 1.0.256
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,11 +339,17 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.255 [Oct 08, 2025] =
-- Added: Option to view and edit SEO Title & Description columns on [Taxonomy Terms lists](https://rankmath.com/kb/titles-and-meta/#bulk-editing-categories) page
-- Fixed: [Keyboard shortcut `//` for opening the Content AI command box](https://rankmath.com/kb/using-content-ai-in-block-editor/#shortcut) was not working
-- Fixed: [Removing the Open Graph Thumbnail from Titles & Meta settings](https://rankmath.com/kb/titles-and-meta/#open-graph-thumbnail) was not working
-- Fixed: PHP warning related to the missing [Phone number type](https://rankmath.com/kb/local-seo/#phone)
-- Fixed: Missing Preview in the [Content AI Prompts library modal](https://rankmath.com/kb/using-content-ai-in-block-editor/#shortcut)
+= 1.0.256 [Oct 22, 2025] =
+- Improved: A notice would now display if any [table](https://rankmath.com/kb/recreate-missing-database-tables/) creation fails
+- Fixed: Missing [SEO score and Schema data for the first posts on the Posts list page](https://rankmath.com/kb/bulk-editing-in-rank-math/#quick-editing) after the last update
+- Fixed: Missing Featured Image and drag options on the Product Category page after the last update when [Add SEO Controls option](https://rankmath.com/kb/titles-and-meta/#product-categories) is enabled
+- Fixed: [Content Analysis Focus Keyword tests](https://rankmath.com/kb/score-100-in-tests/) failed when an apostrophe was used in the keyword
+- Fixed: Option to [Remove Parent Slug](https://rankmath.com/kb/general-settings/#remove-parent-slugs) did not work unless the Remove Base or Remove Category Base option was enabled
+- Fixed: [Missing Permalink in the SERP Preview modal](https://rankmath.com/kb/general-tab/#seo-title-permalink-description) for draft posts on non-English sites
+- Fixed: Invalid characters added in the Post description on some setups in the [LLMs.txt file](https://rankmath.com/kb/llms-txt/)
+- Fixed: PHP error on some setups on [SEO Analyzer page](https://rankmath.com/kb/seo-analysis/) due to an incorrect URL value stored in the database
+- Fixed: Strings translated using the Loco Translate plugin were not working
+- Fixed: Reloading a post without making changes incorrectly showed the `Page contains unsaved changes` prompt
+- Fixed: Error occurring after updating posts on some setups when the Elementor plugin is active
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

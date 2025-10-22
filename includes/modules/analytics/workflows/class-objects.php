@@ -45,44 +45,28 @@ class Objects extends Base {
 	 * Create tables.
 	 */
 	public function create_tables() {
-		global $wpdb;
-
-		$collate = $wpdb->get_charset_collate();
-		$table   = 'rank_math_analytics_objects';
-
-		// Early Bail!!
-		if ( DB::check_table_exists( $table ) ) {
-			return;
-		}
-
-		$schema = "CREATE TABLE {$wpdb->prefix}{$table} (
-				id bigint(20) unsigned NOT NULL auto_increment,
-				created timestamp NOT NULL,
-				title text NOT NULL,
-				page varchar(500) NOT NULL,
-				object_type varchar(100) NOT NULL,
-				object_subtype varchar(100) NOT NULL,
-				object_id bigint(20) unsigned NOT NULL,
-				primary_key varchar(255) NOT NULL,
-				seo_score tinyint NOT NULL default 0,
-				page_score tinyint NOT NULL default 0,
-				is_indexable tinyint(1) NOT NULL default 1,
-				schemas_in_use varchar(500),
-				desktop_interactive double default 0,
-				desktop_pagescore double default 0,
-				mobile_interactive double default 0,
-				mobile_pagescore double default 0,
-				pagespeed_refreshed timestamp,
-				PRIMARY KEY  (id),
-				KEY analytics_object_page (page(190))
-			) $collate;";
-
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php'; // @phpstan-ignore-line
-		try {
-			dbDelta( $schema );
-		} catch ( Exception $e ) { // phpcs:ignore
-			// Will log.
-		}
+		DB::create_table(
+			'rank_math_analytics_objects',
+			'id bigint(20) unsigned NOT NULL auto_increment,
+			created timestamp NOT NULL,
+			title text NOT NULL,
+			page varchar(500) NOT NULL,
+			object_type varchar(100) NOT NULL,
+			object_subtype varchar(100) NOT NULL,
+			object_id bigint(20) unsigned NOT NULL,
+			primary_key varchar(255) NOT NULL,
+			seo_score tinyint NOT NULL default 0,
+			page_score tinyint NOT NULL default 0,
+			is_indexable tinyint(1) NOT NULL default 1,
+			schemas_in_use varchar(500),
+			desktop_interactive double default 0,
+			desktop_pagescore double default 0,
+			mobile_interactive double default 0,
+			mobile_pagescore double default 0,
+			pagespeed_refreshed timestamp,
+			PRIMARY KEY  (id),
+			KEY analytics_object_page (page(190))'
+		);
 	}
 
 	/**

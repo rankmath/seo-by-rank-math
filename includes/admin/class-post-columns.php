@@ -198,12 +198,14 @@ class Post_Columns implements Runner {
 	 * @param string $column_name The column name.
 	 * @param int    $term_id     The unique ID of the current term.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function taxonomy_columns_contents( $content, $column_name, $term_id ) {
 		if ( Str::starts_with( 'rank_math_', $column_name ) ) {
 			do_action( $column_name, $term_id, 'term' );
 		}
+
+		return $content;
 	}
 
 	/**
@@ -259,6 +261,10 @@ class Post_Columns implements Runner {
 	 * @param int $post_id The current post ID.
 	 */
 	public function get_column_seo_details( $post_id ) {
+		if ( empty( $this->data ) ) {
+			$this->get_post_seo_data();
+		}
+
 		$data = isset( $this->data[ $post_id ] ) ? $this->data[ $post_id ] : [];
 		if ( ! self::is_post_indexable( $post_id ) ) {
 			echo '<span class="rank-math-column-display seo-score no-score "><strong>N/A</strong></span>';

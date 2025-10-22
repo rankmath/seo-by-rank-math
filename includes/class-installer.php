@@ -188,76 +188,107 @@ class Installer {
 	public static function create_tables( $modules = [] ) {
 		global $wpdb;
 
-		$collate      = $wpdb->get_charset_collate();
-		$table_schema = [];
+		$tables = [];
 
 		if ( in_array( '404-monitor', $modules, true ) ) {
-			$table_schema[] = "CREATE TABLE {$wpdb->prefix}rank_math_404_logs (
-				id bigint(20) unsigned NOT NULL auto_increment,
-				uri varchar(255) NOT NULL,
-				accessed datetime NOT NULL default '0000-00-00 00:00:00',
-				times_accessed bigint(20) unsigned NOT NULL default 1,
-				referer varchar(255) NOT NULL default '',
-				user_agent varchar(255) NOT NULL default '',
-				PRIMARY KEY  (id),
-				KEY uri (uri(191))
-			) $collate;";
+			$tables['404-monitor'] = [
+				'rank_math_404_logs' => "id bigint(20) unsigned NOT NULL auto_increment,
+					uri varchar(255) NOT NULL,
+					accessed datetime NOT NULL default '0000-00-00 00:00:00',
+					times_accessed bigint(20) unsigned NOT NULL default 1,
+					referer varchar(255) NOT NULL default '',
+					user_agent varchar(255) NOT NULL default '',
+					PRIMARY KEY  (id),
+					KEY uri (uri(191))",
+			];
 		}
 
 		if ( in_array( 'redirections', $modules, true ) ) {
-			$table_schema[] = "CREATE TABLE {$wpdb->prefix}rank_math_redirections (
-				id bigint(20) unsigned NOT NULL auto_increment,
-				sources longtext CHARACTER SET {$wpdb->charset} COLLATE {$wpdb->charset}_bin NOT NULL,
-				url_to text NOT NULL,
-				header_code smallint(4) unsigned NOT NULL,
-				hits bigint(20) unsigned NOT NULL default '0',
-				status varchar(25) NOT NULL default 'active',
-				created datetime NOT NULL default '0000-00-00 00:00:00',
-				updated datetime NOT NULL default '0000-00-00 00:00:00',
-				last_accessed datetime NOT NULL default '0000-00-00 00:00:00',
-				PRIMARY KEY  (id),
-				KEY status (status)
-			) $collate;";
-
-			$table_schema[] = "CREATE TABLE {$wpdb->prefix}rank_math_redirections_cache (
-				id bigint(20) unsigned NOT NULL auto_increment,
-				from_url text CHARACTER SET {$wpdb->charset} COLLATE {$wpdb->charset}_bin NOT NULL,
-				redirection_id bigint(20) unsigned NOT NULL,
-				object_id bigint(20) unsigned NOT NULL default '0',
-				object_type varchar(10) NOT NULL default 'post',
-				is_redirected tinyint(1) NOT NULL default '0',
-				PRIMARY KEY  (id),
-				KEY redirection_id (redirection_id)
-			) $collate;";
+			$tables['redirections'] = [
+				'rank_math_redirections'       => "id bigint(20) unsigned NOT NULL auto_increment,
+					sources longtext CHARACTER SET {$wpdb->charset} COLLATE {$wpdb->charset}_bin NOT NULL,
+					url_to text NOT NULL,
+					header_code smallint(4) unsigned NOT NULL,
+					hits bigint(20) unsigned NOT NULL default '0',
+					status varchar(25) NOT NULL default 'active',
+					created datetime NOT NULL default '0000-00-00 00:00:00',
+					updated datetime NOT NULL default '0000-00-00 00:00:00',
+					last_accessed datetime NOT NULL default '0000-00-00 00:00:00',
+					PRIMARY KEY  (id),
+					KEY status (status)",
+				'rank_math_redirections_cache' => "id bigint(20) unsigned NOT NULL auto_increment,
+					from_url text CHARACTER SET {$wpdb->charset} COLLATE {$wpdb->charset}_bin NOT NULL,
+					redirection_id bigint(20) unsigned NOT NULL,
+					object_id bigint(20) unsigned NOT NULL default '0',
+					object_type varchar(10) NOT NULL default 'post',
+					is_redirected tinyint(1) NOT NULL default '0',
+					PRIMARY KEY  (id),
+					KEY redirection_id (redirection_id)",
+			];
 		}
 
 		if ( in_array( 'link-counter', $modules, true ) ) {
-			$table_schema[] = "CREATE TABLE {$wpdb->prefix}rank_math_internal_links (
-				id bigint(20) unsigned NOT NULL auto_increment,
-				url varchar(255) NOT NULL,
-				post_id bigint(20) unsigned NOT NULL,
-				target_post_id bigint(20) unsigned NOT NULL,
-				type varchar(8) NOT NULL,
-				PRIMARY KEY  (id),
-				KEY link_direction (post_id, type),
-				KEY target_post_id (target_post_id)
-			) $collate;";
-
-			$table_schema[] = "CREATE TABLE {$wpdb->prefix}rank_math_internal_meta (
-				object_id bigint(20) unsigned NOT NULL,
-				internal_link_count int(10) unsigned NULL default 0,
-				external_link_count int(10) unsigned NULL default 0,
-				incoming_link_count int(10) unsigned NULL default 0,
-				PRIMARY KEY  (object_id)
-			) $collate;";
+			$tables['link-counter'] = [
+				'rank_math_internal_links' => 'id bigint(20) unsigned NOT NULL auto_increment,
+					url varchar(255) NOT NULL,
+					post_id bigint(20) unsigned NOT NULL,
+					target_post_id bigint(20) unsigned NOT NULL,
+					type varchar(8) NOT NULL,
+					PRIMARY KEY  (id),
+					KEY link_direction (post_id, type),
+					KEY target_post_id (target_post_id)',
+				'rank_math_internal_meta'  => 'object_id bigint(20) unsigned NOT NULL,
+					internal_link_count int(10) unsigned NULL default 0,
+					external_link_count int(10) unsigned NULL default 0,
+					incoming_link_count int(10) unsigned NULL default 0,
+					PRIMARY KEY  (object_id)',
+			];
 		}
 
-		$table_schema = apply_filters( 'rank_math/admin/create_tables', $table_schema, $modules );
+		$tables     = apply_filters( 'rank_math/admin/create_tables', $tables, $modules );
+		$old_schema = self::is_old_schema( $tables );
 
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php'; // @phpstan-ignore-line
-		foreach ( $table_schema as $table ) {
-			dbDelta( $table );
+		if ( $old_schema ) {
+			_deprecated_hook(
+				'rank_math/admin/create_tables',
+				'1.0.253',
+				'rank_math/admin/create_tables',
+				esc_html__( 'The format of the tables array has changed. Please update your code accordingly.', 'rank-math' )
+			);
+			foreach ( $old_schema as $query ) {
+				if ( preg_match( '/CREATE TABLE\s+[`"]?([^`"\s]+)[`"]?/i', $query, $match ) ) {
+					$table_name = str_replace( $wpdb->prefix, '', $match[1] );
+					$schema     = preg_replace( '/^CREATE TABLE\s+[`"]?[^`"\s]+[`"]?\s*\((.*)\)\s*.+$/is', '$1', $query );
+
+					DB_Helper::create_table( $table_name, $schema );
+				}
+			}
 		}
+
+		foreach ( $tables as $module => $table_group ) {
+			foreach ( $table_group as $table_name => $schema ) {
+				DB_Helper::create_table( $table_name, $schema );
+			}
+		}
+	}
+
+	/**
+	 * Check if the schema is old style.
+	 *
+	 * @param array $arr Array of tables.
+	 */
+	public static function is_old_schema( &$arr ) {
+		$schema = [];
+
+		foreach ( array_keys( $arr ) as $key ) {
+			if ( is_int( $key ) ) {
+				$schema[] = $arr[ $key ];
+
+				unset( $arr[ $key ] );
+			}
+		}
+
+		return $schema;
 	}
 
 	/**

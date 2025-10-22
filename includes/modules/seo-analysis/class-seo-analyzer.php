@@ -203,7 +203,7 @@ class SEO_Analyzer {
 		$this->results_date = get_option( $option . '_date' );
 
 		$url = get_option( $option . '_url' );
-		if ( false !== $url ) {
+		if ( $url ) {
 			$this->analyse_url = $url;
 		}
 

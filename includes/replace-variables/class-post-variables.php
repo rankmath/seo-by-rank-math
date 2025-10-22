@@ -548,7 +548,7 @@ class Post_Variables extends Advanced_Variables {
 
 		// 5. The First paragraph of the content.
 		\preg_match_all( '/<p>(.*)<\/p>/iu', $post_content, $matches );
-		return isset( $matches[1], $matches[1][0] ) ? $matches[1][0] : $post_content;
+		return isset( $matches[1], $matches[1][0] ) ? $matches[1][0] : wp_strip_all_tags( $post->post_content );
 	}
 
 	/**

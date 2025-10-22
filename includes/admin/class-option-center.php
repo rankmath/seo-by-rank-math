@@ -499,6 +499,8 @@ class Option_Center implements Runner {
 		wp_set_script_translations( 'rank-math-settings-chunk', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
 		wp_set_script_translations( 'rank-math-options', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
 		wp_set_script_translations( 'rank-math-components', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
+
+		$this->do_action( 'admin/after_settings_scripts' );
 	}
 
 	/**

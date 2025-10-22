@@ -55,36 +55,23 @@ class Console extends Base {
 	public function create_tables() {
 		global $wpdb;
 
-		$collate = $wpdb->get_charset_collate();
-		$table   = 'rank_math_analytics_gsc';
-
-		// Early Bail!!
-		if ( DB::check_table_exists( $table ) ) {
-			return;
-		}
-
-		$schema = "CREATE TABLE {$wpdb->prefix}{$table} (
-				id bigint(20) unsigned NOT NULL auto_increment,
-				created timestamp NOT NULL,
-				query varchar(1000) NOT NULL,
-				page varchar(500) NOT NULL,
-				clicks mediumint(6) NOT NULL,
-				impressions mediumint(6) NOT NULL,
-				position double NOT NULL,
-				ctr double NOT NULL,
-				PRIMARY KEY  (id),
-				KEY analytics_query (query(190)),
-				KEY analytics_page (page(190)),
-				KEY clicks (clicks),
-				KEY rank_position (position)
-			) $collate;";
-
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php'; // @phpstan-ignore-line
-		try {
-			dbDelta( $schema );
-		} catch ( Exception $e ) { // phpcs:ignore
-			// Will log.
-		}
+		$table = 'rank_math_analytics_gsc';
+		DB::create_table(
+			$table,
+			'id bigint(20) unsigned NOT NULL auto_increment,
+			created timestamp NOT NULL,
+			query varchar(1000) NOT NULL,
+			page varchar(500) NOT NULL,
+			clicks mediumint(6) NOT NULL,
+			impressions mediumint(6) NOT NULL,
+			position double NOT NULL,
+			ctr double NOT NULL,
+			PRIMARY KEY  (id),
+			KEY analytics_query (query(190)),
+			KEY analytics_page (page(190)),
+			KEY clicks (clicks),
+			KEY rank_position (position)'
+		);
 
 		// Make sure that collations match the objects table.
 		$objects_coll = DB::get_table_collation( 'rank_math_analytics_objects' );

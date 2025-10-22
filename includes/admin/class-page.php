@@ -320,6 +320,8 @@ class Page {
 			}
 			wp_enqueue_script( $handle, $src, null, rank_math()->version, true );
 		}
+
+		do_action( 'rank-math/admin_enqueue_scripts' );
 	}
 
 	/**

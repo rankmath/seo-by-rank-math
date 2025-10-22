@@ -166,6 +166,13 @@ class Ask_Review {
 	 * @return void
 	 */
 	public function add_notice() {
+		$review_links = [
+			'https://www.trustpilot.com/review/www.rankmath.com',
+			'https://www.trustpilot.com/evaluate/www.rankmath.com',
+		];
+
+		$selected_link = $review_links[ array_rand( $review_links ) ];
+
 		$message = '<p>';
 
 		// Translators: placeholder is the plugin name.
@@ -175,7 +182,7 @@ class Ask_Review {
 		$message .= esc_html__( 'We would love to get your feedback! It\'s essential for our continued development. Please consider taking a moment to leave a review of your experience on Trustpilot.', 'rank-math' ) . '</p>
 			<p><strong>Bhanu Ahluwalia</strong><br>' . esc_html__( 'Co-founder of Rank Math', 'rank-math' ) . '</p>
 			<p>
-				<a href="https://trustpilot.com/evaluate/www.rankmath.com" class="rank-math-dismiss-review-notice rank-math-review-action rank-math-review-out" target="_blank" rel="noopener noreferrer"><strong>' . esc_html__( 'Yes, you deserve it', 'rank-math' ) . '</strong></a><br>
+				<a href="' . esc_url( $selected_link ) . '" class="rank-math-dismiss-review-notice rank-math-review-action rank-math-review-out" target="_blank" rel="noopener noreferrer"><strong>' . esc_html__( 'Yes, you deserve it', 'rank-math' ) . '</strong></a><br>
 				<a href="#" class="rank-math-dismiss-review-notice rank-math-maybe-later-action">' . esc_html__( 'No, maybe later', 'rank-math' ) . '</a><br>
 				<a href="#" class="rank-math-dismiss-review-notice rank-math-already-reviewed-action">' . esc_html__( 'I already did', 'rank-math' ) . '</a>
 			</p>';
