@@ -31,6 +31,7 @@ class KB {
 		'free-account'                    => 'https://rankmath.com/my-account/',
 		'support'                         => 'https://rankmath.com/support/',
 		'pro'                             => 'https://rankmath.com/pricing/',
+		'site-checkout'                   => 'https://rankmath.com/site-checkout/',
 		'changelog'                       => 'https://rankmath.com/changelog/',
 		'changelog-free'                  => 'https://rankmath.com/changelog/free/',
 		'help-affiliate'                  => 'https://rankmath.com/affiliates/',
@@ -195,6 +196,13 @@ class KB {
 	 * @return array
 	 */
 	public static function get_links() {
-		return self::$links;
+		$processed = [];
+		foreach ( self::$links as $key => $base_url ) {
+			// Allow third-parties to append query parameters based on the base URL.
+			$params            = (array) apply_filters( 'rank_math/link', [], $key, $base_url );
+			$processed[ $key ] = ! empty( $params ) ? add_query_arg( $params, $base_url ) : $base_url;
+		}
+
+		return $processed;
 	}
 }

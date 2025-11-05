@@ -539,7 +539,7 @@ class Manager {
 		?>
 			<div class="rank-math-box rank-math-unlock-pro-box">
 				<i class="rm-icon rm-icon-software"></i>
-				<a href="<?php KB::the( 'pro', 'Unlock PRO Module Box' ); ?>" target="_blank" class="pro-link" data-url="https://rankmath.com/site-checkout/">
+				<a href="<?php KB::the( 'pro', 'Unlock PRO Module Box' ); ?>" target="_blank" class="pro-link" data-url="<?php KB::the( 'site-checkout', 'Unlock PRO Module Box' ); ?>">
 					<header>
 						<h3><?php esc_html_e( 'Take SEO to the Next Level!', 'rank-math' ); ?></h3>
 						<ul>

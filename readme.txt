@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.256
+Stable tag: 1.0.257
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,17 +339,11 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.256 [Oct 22, 2025] =
-- Improved: A notice would now display if any [table](https://rankmath.com/kb/recreate-missing-database-tables/) creation fails
-- Fixed: Missing [SEO score and Schema data for the first posts on the Posts list page](https://rankmath.com/kb/bulk-editing-in-rank-math/#quick-editing) after the last update
-- Fixed: Missing Featured Image and drag options on the Product Category page after the last update when [Add SEO Controls option](https://rankmath.com/kb/titles-and-meta/#product-categories) is enabled
-- Fixed: [Content Analysis Focus Keyword tests](https://rankmath.com/kb/score-100-in-tests/) failed when an apostrophe was used in the keyword
-- Fixed: Option to [Remove Parent Slug](https://rankmath.com/kb/general-settings/#remove-parent-slugs) did not work unless the Remove Base or Remove Category Base option was enabled
-- Fixed: [Missing Permalink in the SERP Preview modal](https://rankmath.com/kb/general-tab/#seo-title-permalink-description) for draft posts on non-English sites
-- Fixed: Invalid characters added in the Post description on some setups in the [LLMs.txt file](https://rankmath.com/kb/llms-txt/)
-- Fixed: PHP error on some setups on [SEO Analyzer page](https://rankmath.com/kb/seo-analysis/) due to an incorrect URL value stored in the database
-- Fixed: Strings translated using the Loco Translate plugin were not working
-- Fixed: Reloading a post without making changes incorrectly showed the `Page contains unsaved changes` prompt
-- Fixed: Error occurring after updating posts on some setups when the Elementor plugin is active
+= 1.0.257 [Nov 05, 2025] =
+- Added: [Fix with AI tool](https://rankmath.com/kb/fix-seo-tests-with-content-ai/) for the content tests is now available in the Elementor editor
+- Fixed: Fix with AI tool was not working properly in the Classic editor when ACF plugin is active
+- Fixed: Incorrect URL was used in the [Setup Wizard](https://rankmath.com/kb/how-to-setup/#starting-the-setup-wizard) on sub-directory setups
+- Fixed: Missing option to remove the selected [About & Contact page in the Local SEO settings](https://rankmath.com/kb/local-seo/#about-page)
+- Fixed: PHP warning in the [Email reports](https://rankmath.com/kb/seo-email-reporting/) on some setups
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

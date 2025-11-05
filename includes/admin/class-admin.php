@@ -499,7 +499,7 @@ class Admin implements Runner {
 			( $time > $anniversary_start_time && $time < $anniversary_end_time ) ||
 			( $time > $holiday_start_time && $time < $holiday_end_time )
 		) { ?>
-			<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Header+Offer+Icon&utm_campaign=WP" target="_blank" class="rank-math-tooltip bottom" style="margin-left:5px;">
+			<a href="<?php echo esc_url( \RankMath\KB::get( 'pro', 'Header Offer Icon' ) ); ?>" target="_blank" class="rank-math-tooltip bottom" style="margin-left:5px;">
 				🎉
 				<span><?php esc_attr_e( 'Exclusive Offer!', 'rank-math' ); ?></span>
 			</a>

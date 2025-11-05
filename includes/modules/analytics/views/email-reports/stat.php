@@ -10,10 +10,10 @@ use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
-$diff_class = $diff > 0 ? 'positive' : 'negative';
+$diff_class = 'n/a' !== $diff ? ( $diff > 0 ? 'positive' : 'negative' ) : 'n/a';
 
 if ( ! empty( $invert ) ) {
-	$diff_class = $diff < 0 ? 'positive' : 'negative';
+	$diff_class = 'n/a' !== $diff ? ( $diff < 0 ? 'positive' : 'negative' ) : 'n/a';
 }
 
 $diff_sign = '<span class="diff-sign">' . ( 'positive' === $diff_class ? '&#9650;' : '&#9660;' ) . '</span>';
@@ -24,7 +24,7 @@ if ( 0.0 === floatval( $diff ) ) {
 }
 
 $stat_value = $value;
-$stat_diff  = abs( $diff );
+$stat_diff  = 'n/a' !== $diff ? abs( $diff ) : 'n/a';
 
 // Human number is 'true' by default.
 if ( ! isset( $human_number ) || $human_number ) {
