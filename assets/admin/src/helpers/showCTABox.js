@@ -22,16 +22,22 @@ import { Modal } from '@wordpress/components'
  */
 import ErrorCTA from '@components/ErrorCTA'
 
-export default ( { showProNotice = false, isBulkEdit = false, creditsRequired = 0 } ) => {
+export default ( { showProNotice = false, isBulkEdit = false, creditsRequired = 0, isKeywordIntent = false } ) => {
 	if ( isNull( document.getElementById( 'rank-math-content-ai-modal-wrapper' ) ) ) {
-		jQuery( '#wpwrap' ).append( '<div id="rank-math-content-ai-modal-wrapper"></div>' )
+		let selector
+		if ( rankMath.currentEditor === 'elementor' ) {
+			selector = '#elementor-editor-wrapper'
+		} else {
+			selector = '#wpwrap'
+		}
+		jQuery( selector ).append( '<div id="rank-math-content-ai-modal-wrapper"></div>' )
 	}
 
 	setTimeout( () => {
 		render(
 			<Modal
 				className="rank-math-contentai-modal rank-math-modal rank-math-error-modal"
-				shouldCloseOnClickOutside={ true }
+				shouldCloseOnClickOutside={ false }
 				onRequestClose={ ( e ) => {
 					if ( isUndefined( e ) ) {
 						return
@@ -42,7 +48,7 @@ export default ( { showProNotice = false, isBulkEdit = false, creditsRequired = 
 					document.body.classList.remove( 'modal-open' )
 				} }
 			>
-				<ErrorCTA width={ 100 } showProNotice={ showProNotice } isBulkEdit={ isBulkEdit } creditsRequired={ creditsRequired } />
+				<ErrorCTA width={ 100 } showProNotice={ showProNotice } isBulkEdit={ isBulkEdit } creditsRequired={ creditsRequired } isKeywordIntent={ isKeywordIntent } />
 			</Modal>,
 			document.getElementById( 'rank-math-content-ai-modal-wrapper' )
 		)

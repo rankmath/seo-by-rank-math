@@ -2,6 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
+import { isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -26,7 +27,13 @@ class AddAltTextGenerator {
 		getStore()
 		this.data = wp.data.select( 'rank-math-content-ai' ).getData()
 
-		this.addBulkGenerateButton( this.data )
+		// Initiate MediaHandler to add Generate button in Attachment Details modal.
+		new MediaHandler()
+
+		setTimeout( () => {
+			this.addBulkGenerateButton( this.data )
+		}, 1000 )
+
 		// If there is no #attachment_alt field, then we don't need to do anything.
 		this.altTextField = document.querySelector( '#attachment_alt' )
 		this.imageUrl = document.querySelector( '#attachment_url' )
@@ -43,9 +50,6 @@ class AddAltTextGenerator {
 		if ( mediaToolbar.length <= 0 ) {
 			return
 		}
-
-		// Initiate MediaHandler to add Generate button in Attachment Details modal.
-		new MediaHandler( true )
 
 		const buttonText = '<i class="rm-icon rm-icon-content-ai"></i> ' + __( 'Generate Alt with AI', 'rank-math' )
 		const customButton = jQuery( '<button class="button media-button button-primary button-large delete-selected-button rank-math-bulk-generate-button hidden" disabled="disabled">' + buttonText + '</button>' )
@@ -86,17 +90,19 @@ class AddAltTextGenerator {
 				} )
 		} )
 
-		const frame = wp.media.frame
-		frame.state( 'library' ).get( 'selection' ).on( 'selection:single', () => {
-			// Handle single selection
-			customButton[ 0 ].removeAttribute( 'disabled' )
-		} )
+		const frame = wp.media.frame.state( 'library' ).get( 'selection' )
+		if ( ! isUndefined( frame ) ) {
+			frame.on( 'selection:single', () => {
+				// Handle single selection
+				customButton[ 0 ].removeAttribute( 'disabled' )
+			} )
 
-		frame.state( 'library' ).get( 'selection' ).on( 'selection:unsingle', () => {
-			if ( ! jQuery( '.attachment.selected' ).length ) {
-				customButton[ 0 ].setAttribute( 'disabled', 'disabled' )
-			}
-		} )
+			frame.on( 'selection:unsingle', () => {
+				if ( ! jQuery( '.attachment.selected' ).length ) {
+					customButton[ 0 ].setAttribute( 'disabled', 'disabled' )
+				}
+			} )
+		}
 	}
 
 	// Add Generate with Alt Button on Attachment page.

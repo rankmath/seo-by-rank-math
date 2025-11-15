@@ -34,6 +34,25 @@ export default () => {
 	}
 
 	const buttons = []
+
+	// Remove Shorten with AI Button.
+	const removeShortenButtons = () => {
+		if ( ! isEmpty( buttons ) ) {
+			forEach( buttons, ( button ) => ( button.remove() ) )
+		}
+	}
+
+	// Remove Shorten with AI button when annotations are removed.
+	addAction( 'rank_math_annotations_removed', 'rank-math', () => ( removeShortenButtons() ) )
+
+	// Remove Shorten with AI Button when a post is updated.
+	addAction( 'rank_math_data_changed', 'rank-math', ( key, value ) => {
+		if ( key === 'dirtyMetadata' && isEmpty( value ) ) {
+			removeShortenButtons()
+		}
+	} )
+
+	// Add Shorten with AI Button.
 	addAction( 'rank_math_content_refresh', 'rank-math', () => {
 		if ( isUndefined( window.tinymce ) ) {
 			return
@@ -47,9 +66,7 @@ export default () => {
 
 			const annotations = editor.annotator.getAll( 'rank-math-annotations' )
 			if ( isEmpty( annotations ) ) {
-				if ( ! isEmpty( buttons ) ) {
-					forEach( buttons, ( button ) => ( button.remove() ) )
-				}
+				removeShortenButtons()
 				return
 			}
 

@@ -2,7 +2,6 @@
  * External dependencies
  */
 import classnames from 'classnames'
-import { Helpers } from '@rankMath/analyzer'
 
 /**
  * WordPress dependencies
@@ -16,7 +15,9 @@ import { safeDecodeURIComponent } from '@wordpress/url'
  */
 import PreviewDevices from './PreviewDevices'
 import AnalysisScore from '@components/AnalysisScore'
+import { sanitizeText } from '@helpers/cleanText'
 import highlight from '@helpers/highlight'
+import { capitalizeString } from '@helpers/textTransformer'
 import RatingPreview from './RatingPreview'
 
 const SerpPreview = ( {
@@ -36,9 +37,7 @@ const SerpPreview = ( {
 		'noindex-preview': isNoIndex,
 	} )
 
-	const titleClasses = classnames( 'serp-title', {
-		capitalize: rankMath.capitalizeTitle,
-	} )
+	const transformedTitle = rankMath.capitalizeTitle ? capitalizeString( title ) : title
 
 	const keywordPermalink = rankMathEditor.assessor.getResearch( 'slugify' )(
 		keyword
@@ -189,7 +188,7 @@ const SerpPreview = ( {
 							dangerouslySetInnerHTML={ {
 								__html: highlight(
 									keywordPermalink,
-									Helpers.sanitizeText(
+									sanitizeText(
 										safeDecodeURIComponent( permalink )
 									),
 									75,
@@ -200,11 +199,11 @@ const SerpPreview = ( {
 					</div>
 					<div className="group">
 						<h5
-							className={ titleClasses }
+							className="serp-title"
 							dangerouslySetInnerHTML={ {
 								__html: highlight(
 									keyword,
-									Helpers.sanitizeText( title ),
+									sanitizeText( transformedTitle ),
 									60
 								),
 							} }
@@ -219,7 +218,7 @@ const SerpPreview = ( {
 							dangerouslySetInnerHTML={ {
 								__html: highlight(
 									keyword,
-									Helpers.sanitizeText( description ),
+									sanitizeText( description ),
 									160
 								),
 							} }

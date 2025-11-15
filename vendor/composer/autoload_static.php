@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
+class ComposerStaticInitc2d08d1d0a9ed795f5edccaa05f54951
 {
     public static $files = array (
         'da5f6548f070d3d306f90eee42dd5de6' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgentParser.php',
@@ -18,6 +18,10 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         array (
             'donatj\\UserAgent\\' => 17,
         ),
+        'W' => 
+        array (
+            'WPMedia\\Mixpanel\\' => 17,
+        ),
         'M' => 
         array (
             'MyThemeShop\\Helpers\\' => 20,
@@ -28,6 +32,10 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'donatj\\UserAgent\\' => 
         array (
             0 => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent',
+        ),
+        'WPMedia\\Mixpanel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src',
         ),
         'MyThemeShop\\Helpers\\' => 
         array (
@@ -74,6 +82,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Admin\\Assets' => __DIR__ . '/../..' . '/includes/admin/class-assets.php',
         'RankMath\\Admin\\Bulk_Actions' => __DIR__ . '/../..' . '/includes/admin/class-bulk-actions.php',
         'RankMath\\Admin\\CMB2_Fields' => __DIR__ . '/../..' . '/includes/admin/class-cmb2-fields.php',
+        'RankMath\\Admin\\CMB2_Options' => __DIR__ . '/../..' . '/includes/admin/class-cmb2-options.php',
         'RankMath\\Admin\\Database\\Clauses' => __DIR__ . '/../..' . '/includes/admin/database/class-clauses.php',
         'RankMath\\Admin\\Database\\Database' => __DIR__ . '/../..' . '/includes/admin/database/class-database.php',
         'RankMath\\Admin\\Database\\Escape' => __DIR__ . '/../..' . '/includes/admin/database/class-escape.php',
@@ -88,7 +97,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Admin\\Importers\\AIOSEO' => __DIR__ . '/../..' . '/includes/admin/importers/class-aioseo.php',
         'RankMath\\Admin\\Importers\\AIO_Rich_Snippet' => __DIR__ . '/../..' . '/includes/admin/importers/class-aio-rich-snippet.php',
         'RankMath\\Admin\\Importers\\Detector' => __DIR__ . '/../..' . '/includes/admin/importers/class-detector.php',
-        'RankMath\\Admin\\Importers\\Plugin_Importer' => __DIR__ . '/../..' . '/includes/admin/importers/abstract-importer.php',
+        'RankMath\\Admin\\Importers\\Plugin_Importer' => __DIR__ . '/../..' . '/includes/admin/importers/class-plugin-importer.php',
         'RankMath\\Admin\\Importers\\Redirections' => __DIR__ . '/../..' . '/includes/admin/importers/class-redirections.php',
         'RankMath\\Admin\\Importers\\SEOPress' => __DIR__ . '/../..' . '/includes/admin/importers/class-seopress.php',
         'RankMath\\Admin\\Importers\\Status' => __DIR__ . '/../..' . '/includes/admin/importers/class-status.php',
@@ -111,7 +120,9 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Admin\\Post_Columns' => __DIR__ . '/../..' . '/includes/admin/class-post-columns.php',
         'RankMath\\Admin\\Post_Filters' => __DIR__ . '/../..' . '/includes/admin/class-post-filters.php',
         'RankMath\\Admin\\Pro_Notice' => __DIR__ . '/../..' . '/includes/admin/class-pro-notice.php',
+        'RankMath\\Admin\\Register_Options_Page' => __DIR__ . '/../..' . '/includes/admin/class-register-options-page.php',
         'RankMath\\Admin\\Registration' => __DIR__ . '/../..' . '/includes/admin/class-registration.php',
+        'RankMath\\Admin\\Sanitize_Settings' => __DIR__ . '/../..' . '/includes/admin/class-sanitize-settings.php',
         'RankMath\\Admin\\Setup_Wizard' => __DIR__ . '/../..' . '/includes/admin/class-setup-wizard.php',
         'RankMath\\Admin\\Watcher' => __DIR__ . '/../..' . '/includes/admin/watcher/class-watcher.php',
         'RankMath\\Admin_Bar_Menu' => __DIR__ . '/../..' . '/includes/admin/class-admin-bar-menu.php',
@@ -191,6 +202,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Helpers\\Options' => __DIR__ . '/../..' . '/includes/helpers/class-options.php',
         'RankMath\\Helpers\\Param' => __DIR__ . '/../..' . '/includes/helpers/class-param.php',
         'RankMath\\Helpers\\Post_Type' => __DIR__ . '/../..' . '/includes/helpers/class-post-type.php',
+        'RankMath\\Helpers\\Schedule' => __DIR__ . '/../..' . '/includes/helpers/class-schedule.php',
         'RankMath\\Helpers\\Schema' => __DIR__ . '/../..' . '/includes/helpers/class-schema.php',
         'RankMath\\Helpers\\Security' => __DIR__ . '/../..' . '/includes/helpers/class-security.php',
         'RankMath\\Helpers\\Sitepress' => __DIR__ . '/../..' . '/includes/helpers/class-sitepress.php',
@@ -207,6 +219,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Instant_Indexing\\Rest' => __DIR__ . '/../..' . '/includes/modules/instant-indexing/class-rest.php',
         'RankMath\\Json_Manager' => __DIR__ . '/../..' . '/includes/class-json-manager.php',
         'RankMath\\KB' => __DIR__ . '/../..' . '/includes/class-kb.php',
+        'RankMath\\LLMS\\LLMS_Txt' => __DIR__ . '/../..' . '/includes/modules/llms/class-llms-txt.php',
         'RankMath\\Links\\ContentProcessor' => __DIR__ . '/../..' . '/includes/modules/links/class-contentprocessor.php',
         'RankMath\\Links\\Link' => __DIR__ . '/../..' . '/includes/modules/links/class-link.php',
         'RankMath\\Links\\Links' => __DIR__ . '/../..' . '/includes/modules/links/class-links.php',
@@ -270,6 +283,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Rest\\Post' => __DIR__ . '/../..' . '/includes/rest/class-post.php',
         'RankMath\\Rest\\Rest_Helper' => __DIR__ . '/../..' . '/includes/rest/class-rest-helper.php',
         'RankMath\\Rest\\Sanitize' => __DIR__ . '/../..' . '/includes/rest/class-sanitize.php',
+        'RankMath\\Rest\\Setup_Wizard' => __DIR__ . '/../..' . '/includes/rest/class-setup-wizard.php',
         'RankMath\\Rest\\Shared' => __DIR__ . '/../..' . '/includes/rest/class-shared.php',
         'RankMath\\Rewrite' => __DIR__ . '/../..' . '/includes/class-rewrite.php',
         'RankMath\\Robots_Txt' => __DIR__ . '/../..' . '/includes/modules/robots-txt/class-robots-txt.php',
@@ -280,7 +294,6 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Rollback_Version' => __DIR__ . '/../..' . '/includes/modules/version-control/class-rollback-version.php',
         'RankMath\\Runner' => __DIR__ . '/../..' . '/includes/interface-runner.php',
         'RankMath\\SEO_Analysis\\Admin' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-admin.php',
-        'RankMath\\SEO_Analysis\\Admin_Tabs' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-admin-tabs.php',
         'RankMath\\SEO_Analysis\\Result' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-result.php',
         'RankMath\\SEO_Analysis\\SEO_Analysis' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-seo-analysis.php',
         'RankMath\\SEO_Analysis\\SEO_Analyzer' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-seo-analyzer.php',
@@ -336,10 +349,14 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Sitemap\\Stylesheet' => __DIR__ . '/../..' . '/includes/modules/sitemap/class-stylesheet.php',
         'RankMath\\Sitemap\\Timezone' => __DIR__ . '/../..' . '/includes/modules/sitemap/class-timezone.php',
         'RankMath\\Sitemap\\XML' => __DIR__ . '/../..' . '/includes/modules/sitemap/abstract-xml.php',
+        'RankMath\\Status\\Backup' => __DIR__ . '/../..' . '/includes/modules/status/class-backup.php',
         'RankMath\\Status\\Error_Log' => __DIR__ . '/../..' . '/includes/modules/status/class-error-log.php',
+        'RankMath\\Status\\Import_Export_Settings' => __DIR__ . '/../..' . '/includes/modules/status/class-import-export-settings.php',
+        'RankMath\\Status\\Rest' => __DIR__ . '/../..' . '/includes/modules/status/class-rest.php',
         'RankMath\\Status\\Status' => __DIR__ . '/../..' . '/includes/modules/status/class-status.php',
         'RankMath\\Status\\System_Status' => __DIR__ . '/../..' . '/includes/modules/status/class-system-status.php',
         'RankMath\\Term' => __DIR__ . '/../..' . '/includes/class-term.php',
+        'RankMath\\ThirdParty\\Loco\\Loco_I18n_Inline' => __DIR__ . '/../..' . '/includes/3rdparty/loco/class-loco-i18n-inline.php',
         'RankMath\\Thumbnail_Overlay' => __DIR__ . '/../..' . '/includes/class-thumbnail-overlay.php',
         'RankMath\\Tools\\AIOSEO_Blocks' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-aioseo-blocks.php',
         'RankMath\\Tools\\AIOSEO_TOC_Converter' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-aioseo-toc-converter.php',
@@ -350,6 +367,7 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Tools\\Yoast_HowTo_Converter' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-yoast-howto-converter.php',
         'RankMath\\Tools\\Yoast_Local_Converter' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-yoast-local-converter.php',
         'RankMath\\Tools\\Yoast_TOC_Converter' => __DIR__ . '/../..' . '/includes/modules/database-tools/class-yoast-toc-converter.php',
+        'RankMath\\Tracking' => __DIR__ . '/../..' . '/includes/class-tracking.php',
         'RankMath\\Traits\\Ajax' => __DIR__ . '/../..' . '/includes/traits/class-ajax.php',
         'RankMath\\Traits\\Cache' => __DIR__ . '/../..' . '/includes/traits/class-cache.php',
         'RankMath\\Traits\\Hooker' => __DIR__ . '/../..' . '/includes/traits/class-hooker.php',
@@ -373,12 +391,27 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
         'RankMath\\Wizard\\Wizard_Step' => __DIR__ . '/../..' . '/includes/admin/wizard/interface-wizard-step.php',
         'RankMath\\Wizard\\Your_Site' => __DIR__ . '/../..' . '/includes/admin/wizard/class-your-site.php',
         'RankMath\\WooCommerce\\Admin' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-admin.php',
+        'RankMath\\WooCommerce\\Base' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-base.php',
         'RankMath\\WooCommerce\\Opengraph' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-opengraph.php',
         'RankMath\\WooCommerce\\Permalink_Watcher' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-permalink-watcher.php',
         'RankMath\\WooCommerce\\Product_Redirection' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-product-redirection.php',
         'RankMath\\WooCommerce\\Sitemap' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-sitemap.php',
         'RankMath\\WooCommerce\\WC_Vars' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-wc-vars.php',
         'RankMath\\WooCommerce\\WooCommerce' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-woocommerce.php',
+        'WPMedia\\Mixpanel\\Optin' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Optin.php',
+        'WPMedia\\Mixpanel\\Tracking' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Tracking.php',
+        'WPMedia\\Mixpanel\\TrackingPlugin' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/TrackingPlugin.php',
+        'WPMedia\\Mixpanel\\WPConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/WPConsumer.php',
+        'WPMedia_Base_MixpanelBase' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Base/MixpanelBase.php',
+        'WPMedia_ConsumerStrategies_AbstractConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/ConsumerStrategies/AbstractConsumer.php',
+        'WPMedia_ConsumerStrategies_CurlConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/ConsumerStrategies/CurlConsumer.php',
+        'WPMedia_ConsumerStrategies_FileConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/ConsumerStrategies/FileConsumer.php',
+        'WPMedia_ConsumerStrategies_SocketConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/ConsumerStrategies/SocketConsumer.php',
+        'WPMedia_Mixpanel' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Mixpanel.php',
+        'WPMedia_Producers_MixpanelBaseProducer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Producers/MixpanelBaseProducer.php',
+        'WPMedia_Producers_MixpanelEvents' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Producers/MixpanelEvents.php',
+        'WPMedia_Producers_MixpanelGroups' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Producers/MixpanelGroups.php',
+        'WPMedia_Producers_MixpanelPeople' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Producers/MixpanelPeople.php',
         'WP_Async_Request' => __DIR__ . '/..' . '/a5hleyrich/wp-background-processing/classes/wp-async-request.php',
         'WP_Background_Process' => __DIR__ . '/..' . '/a5hleyrich/wp-background-processing/classes/wp-background-process.php',
         'donatj\\UserAgent\\Browsers' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent/Browsers.php',
@@ -391,9 +424,9 @@ class ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInite0bd047aa5058f04568aa38dfc5ac000::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc2d08d1d0a9ed795f5edccaa05f54951::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc2d08d1d0a9ed795f5edccaa05f54951::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitc2d08d1d0a9ed795f5edccaa05f54951::$classMap;
 
         }, null, ClassLoader::class);
     }

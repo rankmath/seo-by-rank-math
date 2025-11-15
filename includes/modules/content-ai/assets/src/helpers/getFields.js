@@ -7,10 +7,12 @@ import classnames from 'classnames'
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n'
 import {
 	TextControl,
 	TextareaControl,
 	ToolbarButton,
+	Button,
 	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalToggleGroupControl as ToggleGroupControl,
 } from '@wordpress/components'
@@ -22,6 +24,7 @@ import { createRef } from '@wordpress/element'
 import TagifyField from '@components/TagifyField'
 import getAttributes from '@helpers/getAttributes'
 import getParams from './getParams'
+import getData from './getData'
 import Label from '../components/Label'
 
 const getDefaultValue = ( param, defaultValue ) => {
@@ -35,8 +38,9 @@ const getDefaultValue = ( param, defaultValue ) => {
  * @param {Object}   attributes Data attributes.
  * @param {string}   endpoint   Current endpoint.
  * @param {Function} onChange   Function to run when field value is changed.
+ * @param {boolean}  isWizard   Whether the request is made by the Wizard endpoint.
  */
-export default ( params, attributes, endpoint, onChange ) => {
+export default ( params, attributes, endpoint, onChange, isWizard ) => {
 	const storedAttributes = wp.data.select( 'rank-math-content-ai' ).getContentAiAttributes()
 	return (
 		<form className="rank-math-ai-tools">
@@ -133,7 +137,7 @@ export default ( params, attributes, endpoint, onChange ) => {
 									dropdownItem: ( tagData ) => {
 										const tagIcon = ! isUndefined( tagData.icon ) ? tagData.icon : ''
 										try {
-											return `<div ${ getAttributes( tagData ) } class='tagify__dropdown__item' >
+											return `<div ${ getAttributes( tagData ) } class='tagify__dropdown__item'>
 														${ tagIcon }
 														<span>${ tagData.value }</span>
 													</div>`
@@ -175,8 +179,26 @@ export default ( params, attributes, endpoint, onChange ) => {
 										className={ isRequired ? 'is-required' : '' }
 										rows={ value.rows ? value.rows : '5' }
 										required={ isRequired ? 'required' : '' }
-										value={ defaultValue }
+										value={ ! isUndefined( defaultValue ) ? defaultValue : '' }
 									/>
+									{
+										isWizard && 'main_points' === key && ! isEmpty( attributes.topic ) &&
+										<Button
+											variant="link"
+											className="generate"
+											onClick={ () => {
+												attributes.title = attributes.topic
+												onChange( key, __( 'Generating…', 'rank-math' ) )
+												getData( 'Main_Points', attributes, ( results ) => {
+													onChange( key, results[ 0 ] )
+													onChange( 'topic', attributes.topic )
+													document.getElementById( 'main_points' ).value = results[ 0 ]
+												} )
+											} }
+										>
+											{ __( 'Generate with AI', 'rank-math' ) }
+										</Button>
+									}
 								</div>
 							)
 						}

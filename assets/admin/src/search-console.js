@@ -11,7 +11,7 @@ import { get, map, isUndefined } from 'lodash'
  */
 import ajax from '@helpers/ajax'
 import { __ } from '@wordpress/i18n'
-import { applyFilters } from '@wordpress/hooks'
+import { applyFilters, doAction } from '@wordpress/hooks'
 
 class SearchConsole {
 	/**
@@ -250,7 +250,10 @@ class SearchConsole {
 		tests.forEach( ( test ) => {
 			if ( test.canTest ) {
 				const parent = jQuery( test.class )
+				const content = parent.find( '.rank-math-accordion-content' )
 				const wrap = parent.find( '.rank-math-connection-status-wrap' )
+
+				content.find( '.rank-math-notice' ).remove()
 
 				wrap.html( '<svg class="rank-math-spinner" viewBox="0 0 100 100" width="16" height="16" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false"><circle cx="50" cy="50" r="50" vector-effect="non-scaling-stroke"></circle><path d="m 50 0 a 50 50 0 0 1 50 50" vector-effect="non-scaling-stroke"></path></svg>' )
 
@@ -259,6 +262,8 @@ class SearchConsole {
 						wrap.html( '<span class="rank-math-connection-status rank-math-connection-status-success" title="' + __( 'Connected', 'rank-math' ) + '"></span>' )
 					} else {
 						wrap.html( '<span class="rank-math-connection-status rank-math-connection-status-error" title="' + __( 'Some permissions are missing, please reconnect', 'rank-math' ) + '"></span>' )
+
+						content.append( '<div class="rank-math-notice rank-math-notice--error"><p>' + response.error + '</p></div>' )
 					}
 				} )
 			}
@@ -332,9 +337,7 @@ class SearchConsole {
 			}
 		}
 
-		return ajax( 'save_adsense_account', data, 'post' ).done( ( response ) => {
-			return response
-		} )
+		return applyFilters( 'rank_math_save_adsense_account', data )
 	}
 
 	fillSelect() {
@@ -342,7 +345,8 @@ class SearchConsole {
 
 		this.fillProfileSelect()
 		this.fillAccountSelect()
-		this.fillAdsenseSelect()
+
+		doAction( 'rank_math_fill_select', this )
 
 		if ( ! inSearchConsole ) {
 			ajax( 'add_site_console' ).done( ( response ) => {
@@ -355,27 +359,6 @@ class SearchConsole {
 			ajax( 'verify_site_console' )
 		}
 		this.saveChanges = false
-	}
-
-	fillAdsenseSelect() {
-		const { adsenseAccounts = false } = this.response
-
-		if ( false === adsenseAccounts ) {
-			return
-		}
-
-		map( adsenseAccounts, ( account, id ) => {
-			this.adsenseSelect.append(
-				'<option value="' + id + '">' + account.name + ' (' + id + ')</option>'
-			)
-		} )
-
-		if ( this.adsenseSelect.data( 'selected' ) ) {
-			this.adsenseSelect.val( this.adsenseSelect.data( 'selected' ) )
-		}
-
-		this.adsenseSelect.prop( 'disabled', false )
-		this.adsenseSelect.select2()
 	}
 
 	fillAccountSelect() {
@@ -402,26 +385,19 @@ class SearchConsole {
 	fillPropertySelect( account ) {
 		const { accounts, homeUrl } = this.response
 
-		const { properties } = accounts[ account ]
+		const { properties } = accounts?.[ account ] || {}
 		this.propertySelect.html( '<option value="0">Select Property</option>' )
 		this.propertySelect.append(
 			'<option value="create-ga4-property">' + __( 'Create new GA4 Property', 'rank-math' ) + '</option>'
 		)
 
 		map( properties, ( property ) => {
-			const selected =
-				property.url === homeUrl ? ' selected="selected"' : ''
-			this.propertySelect.append(
-				'<option' +
-				selected +
-				' value="' +
-				property.id +
-				'">' +
-				property.name +
-				' (' +
-				property.id +
-				')</option>'
-			)
+			const selected = property.url === homeUrl ? ' selected="selected"' : ''
+			if ( property.type === 'GA4' ) {
+				this.propertySelect.append(
+					`<option ${selected} value="${property.id}">${property.name} (${property.id})</option>`
+				)
+			}
 		} )
 
 		if ( this.propertySelect.data( 'selected' ) ) {

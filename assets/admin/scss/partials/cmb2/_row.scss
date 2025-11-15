@@ -5,7 +5,9 @@
 		margin: 0;
 		padding: 25px 0;
 
-		&:not(.rank-math-advanced-option):not(.tab-header):not(.cmb-type-notice) ~ .cmb-row:not(.rank-math-advanced-option):not(.rank-math-notice), &.rank-math-advanced-option ~ .rank-math-advanced-option {
+		&:not(.rank-math-advanced-option):not(.tab-header):not(.cmb-type-notice) ~ .cmb-row:not(.rank-math-advanced-option):not(.rank-math-notice),
+		&.rank-math-advanced-option ~ .rank-math-advanced-option,
+		&.cmb2-top-border {
 			border-top: 1px solid $light_gray;
 			border-bottom: 0;
 		}

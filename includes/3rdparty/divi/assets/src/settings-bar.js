@@ -9,12 +9,13 @@ import jQuery from 'jquery'
  * WordPress dependencies
  */
 import { dispatch, select } from '@wordpress/data'
-import { createElement, render } from '@wordpress/element'
+import { createRoot } from '@wordpress/element'
 
 /**
  * Internal dependencies
  */
 import SettingsBar from './components/SettingsBar'
+import LockModifiedDate from './components/LockModifiedDate'
 
 export default {
 	init() {
@@ -22,11 +23,13 @@ export default {
 		this.toggleBodyClasses()
 		this.initSettingsBar()
 		this.addEventListeners()
+		this.initLockModifiedDate()
 	},
 
 	cacheProps() {
 		this.$document = jQuery( document )
 		this.$body = jQuery( 'body' )
+		this.publishButton = jQuery( '.et-fb-button--publish' )
 
 		// RankMath
 		this.rmModalHiddingTimer = null
@@ -51,10 +54,19 @@ export default {
 	initSettingsBar() {
 		const position = this.getEtSettingsBarPosition()
 		this.onRmSettingsBarMediaQueryChange()
-		render( createElement( SettingsBar ), this.$rmSettingsBarRoot[ 0 ] )
+		createRoot( this.$rmSettingsBarRoot[ 0 ] ).render( <SettingsBar /> )
 		this.removePositionalClassNames( this.$body, 'rank-math-et-settings-bar-is' )
 		this.$body.addClass( `rank-math-et-settings-bar-is-${ position }` )
 		this.attachRmSettingsBar( position )
+	},
+
+	initLockModifiedDate() {
+		if ( ! rankMath.showLockModifiedDate ) {
+			return
+		}
+
+		this.publishButton.after( '<div id="rank-math-lock-modified-date-wrapper"></div>' )
+		createRoot( document.getElementById( 'rank-math-lock-modified-date-wrapper' ) ).render( <LockModifiedDate publishButton={ this.publishButton } /> )
 	},
 
 	addEventListeners() {

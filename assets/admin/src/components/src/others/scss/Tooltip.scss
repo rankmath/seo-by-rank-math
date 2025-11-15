@@ -1,4 +1,4 @@
-@import '../../../scss/variables';
+@import '../../../../../scss/variables';
 
 $initial-offset: 10px;
 
@@ -6,22 +6,21 @@ $initial-offset: 10px;
  * Tooltip component.
  */
 .rank-math-tooltip-container {
-	display: inline-block;
+	display: inline;
+	vertical-align: middle;
 
 	&.is-block {
 		display: block;
 	}
 
 	.dashicons-editor-help {
-		color: $gray-10;
+		color: $gray;
 		height: 20px;
 		line-height: 18px;
 	}
 
-	&:hover {
-		.dashicons-editor-help {
-			color: $primary;
-		}
+	&:hover .dashicons-editor-help {
+		color: $primary;
 	}
 }
 
@@ -32,43 +31,45 @@ $initial-offset: 10px;
 	pointer-events: none;
 
 	&.is-visible {
+		margin: 0 !important;
+
 		z-index: 1000000;
 		opacity: 1 !important;
-		margin: 0 !important;
 	}
 
-	&.bottom,
-	&.bottom-end
-	&.bottom-start,
 	&.top,
 	&.top-end,
-	&.top-start {
+	&.top-start,
+	&.bottom,
+	&.bottom-end
+	&.bottom-start {
 		margin-top: $initial-offset;
 	}
 
-	&.right,
-	&.right-end,
-	&.right-start,
 	&.left,
 	&.left-end,
-	&.left-start {
+	&.left-start,
+	&.right,
+	&.right-end,
+	&.right-start {
 		margin-left: $initial-offset;
 	}
 	
 	.components-popover {
 		&__content {
+			width: 200px;
+			padding: 8px 10px;
+			border-radius: 3px;
+			box-shadow: none;
+			outline: none;
+
+			color: $white;
+			background: $black-50;
 			font-size: 11px;
 			font-weight: 400;
 			line-height: 1.5;
-			white-space: normal;
-			width: 200px;
-			padding: 8px 10px;
-			box-shadow: none;
-			outline: none;
-			background-color: $black-50;
-			color: $white;
-			border-radius: 3px;
 			text-align: center;
+			white-space: normal;
 		}
 
 		&__arrow {

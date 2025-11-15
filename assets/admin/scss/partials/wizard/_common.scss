@@ -5,62 +5,42 @@
 		letter-spacing: 0.5px;
 
 		.dashicons {
-			font-size: 16px;
-			vertical-align: top;
-			display: inline-block;
-			width: 47px;
+			display: flex;
+			align-items: center;
 
-			&:before {
-				vertical-align: -1px;
-			}
+			width: 47px;
+			
+			font-size: 16px;
 
 			span {
 				font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;
 				font-size: 12px;
-				vertical-align: 3px;
 				color: rgba(#24292e,.65);
 			}
-		}
-
-		.dashicons-arrow-up-alt2 {
-			display: none;
-		}
-
-		&.open {
-			.dashicons-arrow-up-alt2 {
-				display: inline-block;
-			}
-
-			.dashicons-arrow-down-alt2 {
-				display: none;
-			}
-		}
-	}
-
-	&-content {
-		display: none;
-
-		&.open {
-			display: block;
 		}
 	}
 }
 
 .return-to-dashboard {
 	padding-bottom: 50px;
+
 	text-align: center;
 
 	a {
-		font-size: 14px;
 		display: inline-block;
-		text-align: center;
-		text-decoration: none;
-		color: $dark_gray;
+		
 		border-bottom: 1px dotted;
 
-		&:hover, &:focus {
-			color: $primary;
+		color: $dark_gray;
+		font-size: 14px;
+		text-align: center;
+		text-decoration: none;
+
+		&:hover, 
+		&:focus {
 			border-color: $primary;
+
+			color: $primary;
 		}
 	}
 	/* Applies styles when Reduced Motion is enabled */
@@ -69,16 +49,18 @@
 	}
 }
 
-.cmb2-wrap .cmb-row.features-child {
+.field-wrap .field-row.features-child {
 	margin-top: -5px;
-	padding: 25px 20px!important;
-	border-bottom-color: #f8f9fa;
-	background: #f8f9fa;
+	padding: 25px 20px !important;
+	border-bottom-color: $tertiary;
+
+	background: $tertiary;
 }
 
 .responsive-video {
 	position: relative;
 	overflow: hidden;
+
 	padding-top: 56.25%;
 
 	iframe {
@@ -88,39 +70,51 @@
 	}
 }
 
-.cmb-row.cmb-multicheck-inline {
-	&.with-description .cmb2-metabox-description,
-	.cmb2-checkbox-list,
-	.cmb2-checkbox-list li {
+.field-row.field-multicheck-inline {
+	&.with-description .field-description,
+	.rank-math-multicheck,
+	.rank-math-multicheck li {
 		display: inline-block;
+
 		width: 48%;
+
 		vertical-align: top;
 	}
 
-	.cmb2-checkbox-list {
+	.rank-math-multicheck {
 		width: 420px;
 		max-width: 100%;
+		margin: 0;
+
+		.rank-math-checkbox-control {
+			margin: 0;
+		}
+
+		.components-checkbox-control__label {
+			line-height: 20px;
+		}
 	}
 
 	&.with-description {
-		.cmb-td {
+		.field-td {
 			width: 100%;
 		}
 
-		.cmb2-checkbox-list {
+		.rank-math-multicheck {
 			padding-top: 20px;
 		}
 
-		.cmb2-metabox-description {
+		.field-description {
+			padding: 0;
+			
+			color: #21262c;
 			font-size: 15px;
 			line-height: 1.5;
-			padding: 0;
-			color: #21262c;
 		}
 	}
 }
 
-[id^='cmb2-metabox-rank'] select {
+[id^="field-metabox-rank"] select {
 	padding-top: 0;
 	padding-bottom: 0;
 }

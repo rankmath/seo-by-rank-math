@@ -55,7 +55,7 @@ button.rank-math-ca-force-update {
 	position: absolute;
 	z-index: 0;
 	right: 1px;
-	bottom: 27px;
+	bottom: 45px;
 
 	display: block;
 
@@ -128,4 +128,9 @@ div.rank-math-ca-keywords-wrapper {
 			opacity: .5!important;
 		}
 	}
+}
+
+// Align Force update button in Divi Editor.
+#rank-math-rm-app-root button.rank-math-ca-force-update {
+	bottom: 27px;
 }

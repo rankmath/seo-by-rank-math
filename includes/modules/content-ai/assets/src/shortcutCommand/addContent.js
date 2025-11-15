@@ -18,14 +18,63 @@ import getBlockContent from '../helpers/getBlockContent'
 
 /**
  * Fix cursor position at the end when the content is being appended to the editor.
+ * Handles wrapper being a selector, jQuery object, Element, or null, and targets the
+ * inner contenteditable element when available.
  *
- * @param {string} wrapper The wrapper where the content is being appended.
+ * @param {HTMLElement|Node|string|null} wrapper The wrapper where the content is being appended.
  */
 const changeCursorPosition = ( wrapper ) => {
-	const selection = getSelection()
+	// Normalize input to a real DOM Node
+	const toNode = ( target ) => {
+		if ( ! target ) {
+			return null
+		}
+		// Already a DOM Node
+		if ( target.nodeType ) {
+			return target
+		}
+		// jQuery object
+		if ( target.jquery ) {
+			return target[ 0 ] || null
+		}
+		// CSS selector string
+		if ( 'string' === typeof target ) {
+			return document.querySelector( target )
+		}
+		// Array-like (e.g., NodeList or jQuery collection)
+		if ( Array.isArray( target ) || target.length ) {
+			return target[ 0 ] || null
+		}
+		return null
+	}
+
+	const node = toNode( wrapper )
+	if ( ! node ) {
+		return
+	}
+
+	// Prefer the actual editable area inside the block wrapper
+	const editable = node.querySelector ? node.querySelector( '[contenteditable="true"]' ) || node : node
+
+	// Ensure we have a Node to operate on
+	if ( ! editable || ! editable.nodeType ) {
+		return
+	}
+
+	const selection = getSelection && getSelection()
+	if ( ! selection ) {
+		return
+	}
+
 	const range = document.createRange()
+
+	// Focus the editable element so the caret becomes visible
+	if ( editable.focus ) {
+		editable.focus()
+	}
+
 	selection.removeAllRanges()
-	range.selectNodeContents( wrapper )
+	range.selectNodeContents( editable )
 	range.collapse( false )
 	selection.addRange( range )
 }

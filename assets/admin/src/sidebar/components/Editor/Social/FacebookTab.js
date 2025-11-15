@@ -28,6 +28,7 @@ import SocialMediaUpload from './MediaUpload'
 import { getOverlayChoices } from '@helpers/overlayImages'
 import VariableInserter from '@components/VariableInserter'
 import Interpolate from '@components/Interpolate'
+import isSiteEditorHomepage from '@helpers/isSiteEditorHomepage'
 
 const FacebookTab = ( props ) => (
 	<Fragment>
@@ -108,48 +109,51 @@ const FacebookTab = ( props ) => (
 			</div>
 		</div>
 
-		<div className="field-group">
-			<ToggleControl
-				label={ __( 'Add icon overlay to thumbnail', 'rank-math' ) }
-				checked={ props.hasOverlay }
-				onChange={ props.toggleOverlay }
-			/>
-
-			<div
-				className={
-					props.hasOverlay ? 'components-base-control' : 'hidden'
-				}
-			>
-				<SelectControl
-					value={ props.imageOverlay }
-					label={ __( 'Icon overlay', 'rank-math' ) }
-					options={ getOverlayChoices() }
-					onChange={ props.updateImageOverlay }
+		{
+			! isSiteEditorHomepage() &&
+			<div className="field-group">
+				<ToggleControl
+					label={ __( 'Add icon overlay to thumbnail', 'rank-math' ) }
+					checked={ props.hasOverlay }
+					onChange={ props.toggleOverlay }
 				/>
 
-				{ ! rankMath.isPro && (
-					<div className="notice notice-alt notice-warning">
-						<p>
-							<Interpolate
-								components={ {
-									link: (
-										<a
-											href={ getLink( 'pro', 'Gutenberg Social Tab' ) }
-											target="_blank"
-											rel="noopener noreferrer"
-										/>
-									),
-								} }>
-								{ __(
-									'You can add custom thumbnail overlays with {{link}}Rank Math Pro{{/link}}.',
-									'rank-math'
-								) }
-							</Interpolate>
-						</p>
-					</div>
-				) }
+				<div
+					className={
+						props.hasOverlay ? 'components-base-control' : 'hidden'
+					}
+				>
+					<SelectControl
+						value={ props.imageOverlay }
+						label={ __( 'Icon overlay', 'rank-math' ) }
+						options={ getOverlayChoices() }
+						onChange={ props.updateImageOverlay }
+					/>
+
+					{ ! rankMath.isPro && (
+						<div className="notice notice-alt notice-warning">
+							<p>
+								<Interpolate
+									components={ {
+										link: (
+											<a
+												href={ getLink( 'pro', 'Gutenberg Social Tab' ) }
+												target="_blank"
+												rel="noopener noreferrer"
+											/>
+										),
+									} }>
+									{ __(
+										'You can add custom thumbnail overlays with {{link}}Rank Math Pro{{/link}}.',
+										'rank-math'
+									) }
+								</Interpolate>
+							</p>
+						</div>
+					) }
+				</div>
 			</div>
-		</div>
+		}
 	</Fragment>
 )
 

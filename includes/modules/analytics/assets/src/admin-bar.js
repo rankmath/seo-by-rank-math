@@ -10,7 +10,7 @@ import ContentLoader from 'react-content-loader'
  */
 import apiFetch from '@wordpress/api-fetch'
 import { doAction } from '@wordpress/hooks'
-import { createElement, render } from '@wordpress/element'
+import { createElement, createRoot } from '@wordpress/element'
 import { __, sprintf } from '@wordpress/i18n'
 
 /**
@@ -44,14 +44,14 @@ class AnalyticsAdminBar {
 				return
 			}
 
-			render(
-				createElement( () => (
-					<div className="rank-math-analytics-wrapper">
-						<Stats data={ response } />
-					</div>
-				) ),
-				document.getElementById( 'rank-math-analytics-stats' )
-			)
+			createRoot( document.getElementById( 'rank-math-analytics-stats' ) )
+				.render(
+					createElement( () => (
+						<div className="rank-math-analytics-wrapper">
+							<Stats data={ response } />
+						</div>
+					) )
+				)
 
 			doAction( 'rank-math-analytics-stats', response )
 		} ).catch( () => {
@@ -112,14 +112,14 @@ class AnalyticsAdminBar {
 			)
 		}
 
-		render(
-			createElement( () => (
-				<div className="rank-math-analytics-wrapper">
-					{ contentLoader }
-				</div>
-			) ),
-			document.getElementById( 'rank-math-analytics-stats' )
-		)
+		createRoot( document.getElementById( 'rank-math-analytics-stats' ) )
+			.render(
+				createElement( () => (
+					<div className="rank-math-analytics-wrapper">
+						{ contentLoader }
+					</div>
+				) )
+			)
 	}
 
 	/*

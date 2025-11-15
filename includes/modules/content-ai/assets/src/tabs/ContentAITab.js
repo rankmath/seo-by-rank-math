@@ -2,17 +2,15 @@
  * External dependencies
  */
 import { tail } from 'lodash'
-import classnames from 'classnames'
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { Fragment, createElement, useState } from '@wordpress/element'
+import { Fragment, createElement } from '@wordpress/element'
 import { compose } from '@wordpress/compose'
 import { withDispatch, withSelect } from '@wordpress/data'
-import { PanelBody, Button } from '@wordpress/components'
-import apiFetch from '@wordpress/api-fetch'
+import { PanelBody } from '@wordpress/components'
 
 /*
 * Internal dependencies
@@ -24,7 +22,7 @@ import Write from './Write'
 import AITool from './AITool'
 import Chat from './Chat'
 import TabPanel from '@components/TabPanel'
-// import hasError from '../page/helpers/hasError'
+import ContentAICredits from '@components/ContentAICredits'
 
 const getTabs = () => {
 	let tabs = [
@@ -110,43 +108,18 @@ const kFormatter = ( num ) => {
 }
 
 const ContentAITab = ( props ) => {
-	const [ loading, setLoading ] = useState( '' )
 	const { data } = props
-
-	const className = classnames( 'rank-math-tooltip update-credits', {
-		loading,
-	} )
 
 	return (
 		<PanelBody className="rank-math-content-ai-wrapper" initialOpen={ true }>
 			{
 				rankMath.contentAI.isUserRegistered &&
 				<div className="rank-math-ca-credits">
-					<Button
-						className={ className }
-						onClick={ () => {
-							setLoading( true )
-							apiFetch( {
-								method: 'POST',
-								path: '/rankmath/v1/ca/getCredits',
-							} )
-								.catch( ( error ) => {
-									setLoading( '' )
-									alert( error.message )
-								} )
-								.then( ( response ) => {
-									if ( response.error ) {
-										alert( response.error )
-									} else {
-										props.updateData( 'credits', response )
-									}
-									setLoading( '' )
-								} )
-						} }
-					>
-						<i className="dashicons dashicons-image-rotate"></i>
-						<span>{ __( 'Click to refresh the available credits.', 'rank-math' ) }</span>
-					</Button>
+					<ContentAICredits
+						callback={
+							( response ) => ( props.updateData( 'credits', response ) )
+						}
+					/>
 					<span>{ __( 'Credits', 'rank-math' ) }</span> <strong title={ data.credits }>{ kFormatter( data.credits ) }</strong>
 					<a
 						href={ getLink( 'content-ai-credits-usage', 'Sidebar Credits Tooltip Icon' ) }
@@ -184,7 +157,7 @@ export default compose(
 			hasError: ! data.isUserRegistered || ! data.plan || ! data.credits || data.isMigrating,
 		}
 	} ),
-	withDispatch( ( dispatch, props ) => {
+	withDispatch( ( dispatch ) => {
 		return {
 			updateData( key, value ) {
 				dispatch( 'rank-math-content-ai' ).updateData( key, value )

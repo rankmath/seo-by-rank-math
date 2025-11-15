@@ -1,0 +1,52 @@
+.rank-math-skeleton.rank-math-system-status {
+	.copy-button-wrapper {
+		&::after {
+			content: '';
+	
+			display: block;
+	
+			width: 220px;
+			height: 38px;
+			border-radius: 3px;
+		}
+	}
+
+	.components-panel__body {
+		display: flex;
+		justify-content: space-between;
+
+		padding: 1em 1.5em;
+
+		background: $tertiary;
+
+		&::before, 
+		&::after {
+			content: '';
+
+			display: block;
+
+			height: 15px;
+			border-radius: 16px;
+		}
+
+		&::after {
+			width: 20px;
+		}
+
+		&::before {
+			width: 100px;
+		}
+
+		&:nth-child(odd) {
+			&::before {
+				width: 120px;
+			}
+		}
+	}
+
+	.copy-button-wrapper::after,
+	.components-panel__body::before,
+	.components-panel__body::after {
+		@include skeleton-background-animation;
+	}
+}

@@ -1,0 +1,76 @@
+// Graphs Area.
+.rank-math-result-graphs {
+	padding: 2.5rem 1.875rem;
+
+	border-radius: 0 0 6px 6px;
+	background: $white;
+
+	label {
+		cursor: unset;
+	}
+
+	.rank-math-analysis-date {
+		margin-top: -1rem;
+		margin-bottom: .5rem;
+
+		text-align: right;
+	}
+
+	.three-col {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		gap: 37px;
+	}
+
+	.graphs-main,
+	.graphs-side {
+		padding: 1rem;
+		box-sizing: border-box;
+	}
+
+	.graphs-main {
+		flex: 0 0 20%;
+
+		padding: 0;
+
+		text-align: center;
+	}
+
+	.graphs-side {
+		flex: 0 0 25%;
+
+		padding: 1.5rem;
+		border-radius: 6px;
+
+		background-color: #f7f7f9;
+
+		li {
+			height: auto !important;
+		}
+	}
+
+	.serp-preview {
+		flex: 1;
+	}
+
+	.result-score {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+
+		margin-bottom: 10px;
+
+		strong {
+			font-weight: 700;
+		}
+
+		div {
+			display: block;
+			
+			color: $dark_gray;
+			
+			font-size: 15px;
+		}
+	}
+}

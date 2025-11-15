@@ -118,3 +118,14 @@ export function getRichSnippets( state ) {
 export function getShowScoreFrontend( state ) {
 	return state.appData.showScoreFrontend
 }
+
+/**
+ * Is app loaded.
+ *
+ * @param {Object} state The app state.
+ *
+ * @return {boolean} Return app loaded.
+ */
+export function isModifiedDateLocked( state ) {
+	return state.appData.lockModifiedDate
+}

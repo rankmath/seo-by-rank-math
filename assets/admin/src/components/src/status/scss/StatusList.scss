@@ -1,11 +1,7 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/styling';
-@import '../../../scss/mixins/typography';
+@import '../../../scss/main';
 
-/*
- * Mixin used to style the icon of the Status List.
- */
-@mixin status-icon-style($color, $background, $hover-background) {
+/* Styles the icon of the Status List */
+@mixin status-icon($color, $background, $hover-background) {
 	.rank-math-status-list__icon {		
 		color: $color;
 		background-color: $background;
@@ -15,14 +11,12 @@
 		}
 	}
 
-	&:hover {
-		.rank-math-status-list__icon {
-			color: $white;
-			background-color: $hover-background;
+	&:hover .rank-math-status-list__icon {
+		color: $white;
+		background-color: $hover-background;
 
-			svg path {
-				fill: $white;
-			}
+		svg path {
+			fill: $white;
 		}
 	}
 }
@@ -32,62 +26,64 @@
  */
 .rank-math-status-list {
 	display: flex;
-	width: 16.5rem;
+	flex-direction: column;
 	gap: 8px;
 
-	&:active {
-		.rank-math-status-list__description-icon {
-			color: $white;
-			background-color: $black-70;
-		}
+	width: 16.5rem;
+
+	&:active .rank-math-status-list__description-icon {
+		color: $white;
+		background-color: $black-70;
 	}
 
 	&__icon {
+		@include flex-center;
+
 		width: 14px;
 		height: 14px;
 		border-radius: 8px;
 		transform: translateY(5px);
-		@include flex-center;
 	}
 
 	&__description {
 		flex: 1 1 0;
-		@include body;
-		color: #2F2F2F;
+
+		color: #2f2f2f;
+		font-size: 13px;
+		font-weight: 400;
+		line-height: 20px;
 
 		a {
-			transform: translateY(1px);
- 		 	display: inline-block;
+			display: inline-block;
 			visibility: hidden;
 
-			&:hover {
-				svg {
-					background-color: $black-70;
-					border-radius: 6px;
+			transform: translateY(1px);
 
-					path:not(:last-of-type) {
-						fill: $white;
-					}
+			&:hover svg {
+				border-radius: 6px;
+
+				background-color: $black-70;
+
+				path:not(:last-of-type) {
+					fill: $white;
 				}
 			}
 		}
 	}
 
-	&:hover {
-		.rank-math-status-list__description a {
-			visibility: visible;
-		}
+	&:hover .rank-math-status-list__description a {
+		visibility: visible;
 	}
 
 	&.is-good {
-		@include status-icon-style($green-110, $green-a15, $green-90)
+		@include status-icon($green-110, $green-a15, $green-90)
 	}
 
 	&.is-neutral {
-		@include status-icon-style(#D18E08, $yellow-a15, $yellow-90)
+		@include status-icon(#d18e08, $yellow-a15, $status-ok)
 	}
 
 	&.is-bad {
-		@include status-icon-style($red-110, $red-a15, $red-90)
+		@include status-icon($red-110, $red-a15, $color-bad)
 	}
 }

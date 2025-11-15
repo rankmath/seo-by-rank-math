@@ -472,7 +472,7 @@ export default {
 					"isRecommended": false,
 					"field": {
 						"label": __( "Duration", "rank-math" ),
-						"help": __( "Total time to watch all videos and complete all assignments and exams for the course. Use the 8601 format", "rank-math" )
+						"help": __( "Suggested pacing in repeatFrequency units (8601 duration format). For example, PT5H monthly means 5 hours per month. Use courseWorkload for total length.", "rank-math" )
 					}
 				}
 			},
@@ -616,7 +616,7 @@ export default {
 						"isRecommended": false,
 						"field": {
 							"label": __( "Duration", "rank-math" ),
-							"help": __( "Total time to watch all videos and complete all assignments and exams for the course. Use the 8601 format", "rank-math" )
+							"help": __( "Suggested pacing in repeatFrequency units (8601 duration format). For example, PT5H monthly means 5 hours per month. Use courseWorkload for total length.", "rank-math" )
 						}
 					}
 				},
@@ -1560,7 +1560,7 @@ export default {
 				"isRequired": false,
 				"isRecommended": false,
 				"field": {
-					"label": __( "Geo Cordinates", "rank-math" )
+					"label": __( "Geo Coordinates", "rank-math" )
 				}
 			},
 			"@type": {
@@ -2393,7 +2393,7 @@ export default {
 							"isRecommended": false,
 							"field": {
 								"label": __( "Duration", "rank-math" ),
-								"help": __( "Total time to watch all videos and complete all assignments and exams for the course. Use the 8601 format", "rank-math" )
+								"help": __( "Suggested pacing in repeatFrequency units (8601 duration format). For example, PT5H monthly means 5 hours per month. Use courseWorkload for total length.", "rank-math" )
 							}
 						}
 					},
@@ -5413,7 +5413,7 @@ export default {
 					"isRequired": false,
 					"isRecommended": false,
 					"field": {
-						"label": __( "Geo Cordinates", "rank-math" )
+						"label": __( "Geo Coordinates", "rank-math" )
 					}
 				},
 				"@type": {

@@ -54,7 +54,7 @@ const AnalyticsOverview = ( { stats, navigate } ) => {
 		<div className="rank-math-box rank-math-analytics-overview">
 			<div className="rank-math-box-grid">
 				<AnalyticItem
-					title={ __( 'Search Impressions', 'rank-math' ) }
+					title={ __( 'Total Impressions', 'rank-math' ) }
 					tooltip={ __(
 						'How many times your site showed up in the search results.',
 						'rank-math'
@@ -65,18 +65,7 @@ const AnalyticsOverview = ( { stats, navigate } ) => {
 				/>
 
 				<AnalyticItem
-					title={ __( 'Total Keywords', 'rank-math' ) }
-					tooltip={ __(
-						'Total number of keywords your site ranking below 100 position.',
-						'rank-math'
-					) }
-					stats={ get( stats, 'keywords', defaultStat ) }
-					graph={ stats.graph.merged }
-					dataKey="keywords"
-				/>
-
-				<AnalyticItem
-					title={ __( 'Search Clicks', 'rank-math' ) }
+					title={ __( 'Total Clicks', 'rank-math' ) }
 					tooltip={ __(
 						'How many times your site was clicked on in the search results.',
 						'rank-math'
@@ -87,9 +76,20 @@ const AnalyticsOverview = ( { stats, navigate } ) => {
 				/>
 
 				<AnalyticItem
-					title={ __( 'Avg. CTR', 'rank-math' ) }
+					title={ __( 'Total Keywords', 'rank-math' ) }
 					tooltip={ __(
-						'Average click-through rate. Search clicks divided by search impressions.',
+						'Total number of keywords your site ranks for within top 100 positions.',
+						'rank-math'
+					) }
+					stats={ get( stats, 'keywords', defaultStat ) }
+					graph={ stats.graph.merged }
+					dataKey="keywords"
+				/>
+
+				<AnalyticItem
+					title={ __( 'CTR', 'rank-math' ) }
+					tooltip={ __(
+						'Average click-through rate. Total clicks divided by total impressions.',
 						'rank-math'
 					) }
 					stats={ get( stats, 'ctr', defaultStat ) }

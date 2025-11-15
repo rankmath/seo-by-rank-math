@@ -4,7 +4,6 @@
 import { __ } from '@wordpress/i18n'
 import { useState } from '@wordpress/element'
 import { serialize } from '@wordpress/blocks'
-import apiFetch from '@wordpress/api-fetch'
 import { Button } from '@wordpress/components'
 import { select, dispatch, useSelect } from '@wordpress/data'
 import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
@@ -15,6 +14,7 @@ import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
 import AITool from './AITool'
 import Write from './Write'
 import CopyButton from '../components/CopyButton'
+import createPost from '../helpers/createPost'
 import getBlockContent from '../helpers/getBlockContent'
 
 /**
@@ -69,19 +69,7 @@ const ContentEditorActions = () => {
 					} )
 					blocks.push( newBlock )
 
-					apiFetch( {
-						method: 'POST',
-						path: '/rankmath/v1/ca/createPost',
-						data: {
-							content: serialize( blocks ),
-						},
-					} )
-						.catch( ( error ) => {
-							console.log( error )
-						} )
-						.then( ( response ) => {
-							window.location.href = response
-						} )
+					createPost( serialize( blocks ) )
 				} }
 				className="button is-secondary is-small"
 			>

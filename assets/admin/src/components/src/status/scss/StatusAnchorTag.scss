@@ -1,112 +1,67 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/styling';
-@import '../../../scss/mixins/typography';
+@import '../../../scss/main';
 
-/*
- * Mixin function used to style status anchor tag variants.
- */
-@mixin anchor-tag-status-style(
-	$normal: (
-		$color,
-		$background
-	),
-	$hover-focus: (
-		$color,
-		$background,
-	),
-	$active: (
-		$background
-	)
+/* Styles the various status anchor tag variants */
+@mixin anchor-tag-variant(
+	$normal: ($color, $background),
+	$hover-focus: ($color, $background),
+	$active: ($background)
 ) {
-	background-color: nth($normal, 2);
 	color: nth($normal, 1);
+	background-color: nth($normal, 2);
 
 	&:active {
-		background-color: nth($active, 1);
 		color: $white;
+		background-color: nth($active, 1);
 	}
 
-	&:hover, &:focus {
-		background-color: nth($hover-focus, 2);
+	&:hover, 
+	&:focus {
 		color: nth($hover-focus, 1);
+		background-color: nth($hover-focus, 2);
 	}
 }
 
 /*
  * Status Anchor Tag component.
  */
-.rank-math-status-anchor-tag {
-	&.components-button {
-		&.is-secondary {
-			@include remove-box-shadow;
-			@include radius-xs;
-			@include body-xs;
-			padding: 4px 6px;
-			height: 22px;
+.rank-math-status-anchor-tag.components-button.is-secondary {
+	height: 22px;
+	padding: 4px 6px;
+	border-radius: 2px;
+	@include remove-box-shadow;
 
-			&.is-good {
-				@include anchor-tag-status-style(
-					$normal:(
-						$green-100, 
-						rgba($green-100, 0.1)
-					),
-					$hover-focus:(
-						$green-110, 
-						$green-a15
-					),
-					$active:(
-						$green-90
-					)
-				);
-			}
+	font-size: 11px;
+	line-height: 13px;
 
-			&.is-neutral {
-				@include anchor-tag-status-style(
-					$normal:(
-						$yellow-100,
-						rgba($yellow-100, 0.1)
-					),
-					$hover-focus:(
-						#D68915, 
-						$yellow-a15
-					),
-					$active:(
-						$yellow-90
-					)
-				);
-			}
-			
-			&.is-bad {
-				@include anchor-tag-status-style(
-					$normal: (
-						$red-100, 
-						$red-a10
-					),
-					$hover-focus:(
-						$red-110, 
-						$red-a15
-					),
-					$active:(
-						$red-90
-					)
-				);
-			}
+	&.is-good {
+		@include anchor-tag-variant(
+			$normal: ($green-100, rgba($green-100, 0.1)),
+			$hover-focus: ($green-110, $green-a15),
+			$active: ($green-90)
+		);
+	}
 
-			&.is-default {
-				@include anchor-tag-status-style(
-					$normal:(
-						$gray-90, 
-						$black-a5
-					),
-					$hover-focus:(
-						$black-70, 
-						$black-a10
-					),
-					$active:(
-						$black-70
-					)
-				);
-			}
-		}
+	&.is-neutral {
+		@include anchor-tag-variant(
+			$normal: ($yellow-100, rgba($yellow-100, 0.1)),
+			$hover-focus: (#d68915, $yellow-a15),
+			$active: ($status-ok)
+		);
+	}
+
+	&.is-bad {
+		@include anchor-tag-variant(
+			$normal: ($red-100, rgba($red-100, 0.1)),
+			$hover-focus: ($red-110, $red-a15),
+			$active: ($color-bad)
+		);
+	}
+
+	&.is-default {
+		@include anchor-tag-variant(
+			$normal: (#757575, $black-a5),
+			$hover-focus: ($black-70, $black-a10),
+			$active: ($black-70)
+		);
 	}
 }

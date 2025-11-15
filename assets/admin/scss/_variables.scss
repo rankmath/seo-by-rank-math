@@ -17,6 +17,7 @@ $white:     #fff;
 $error:     #ee6a5e;
 $success:   #58bb58;
 $warning:   #f7ca63;
+$black: #000;
 
 // Text color
 $muted: #999;
@@ -86,3 +87,51 @@ $top-3: #3e70b2;
 $top-10: #4e8cde;
 $top-50: #71a3e5;
 $top-100: #83afe8;
+
+// Grayscale
+$black-90: #1e1e1e;
+$black-70: #383838;
+$black-60: #2c3338;
+$black-50: #555d66;
+$black-45: #50575e;
+$black-40: #444;
+$black-30: rgba(44, 51, 56, 0.5);
+$black-a10: rgba($black, 0.1);
+$black-a4: rgba($black, 0.04);
+$black-a5: rgba($black, 0.05);
+$gray-30: #f0f0f1;
+$gray-20: #f0f2f4;
+$gray-10: #c3c4c7;
+
+$tertiary: #f8f9fa;
+$tertiary-light: #f6f7f7;
+$border-highlight: #8c8f94;
+
+$white-a50: rgba($white, 0.5);
+$white-a75: rgba($white, 0.75);
+
+// Blue
+$focus: #3582c4;
+$primary-light: #2271b1;
+$primary-darker: #0a4b78;
+
+// Red
+$danger: #d63638;
+$red-110: #d9655d;
+$red-100: #e37a73;
+$red-a15: rgba($red-100, 0.15);
+
+// Yellow
+$yellow-100: #df962c;
+$yellow-a15: rgba($yellow-100, 0.15);
+
+// Green
+$green-110: #3d993a;
+$green-100: #55a853;
+$green-90: #7ac979;
+$green-a15: rgba($green-100, 0.15);
+
+// Content AI
+$color-content-ai-how-to-fix-btn: #B34A91;
+$color-content-ai-approve: #017CBA;
+$color-content-ai-reject: #f24f65;

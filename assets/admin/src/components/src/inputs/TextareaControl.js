@@ -36,7 +36,7 @@ export default ( {
 	placeholder,
 	className,
 	onChange,
-	variant,
+	variant = 'metabox',
 	rows = 4,
 	cols = 30,
 	...additionalProps
@@ -54,6 +54,7 @@ export default ( {
 		disabled,
 		placeholder,
 		className,
+		__nextHasNoMarginBottom: true,
 	}
 
 	return <TextareaControl { ...props } />

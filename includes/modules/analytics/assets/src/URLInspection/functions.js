@@ -19,7 +19,7 @@ import { isPro } from '../functions'
 import { convertValue } from '../helpers'
 
 addFilter( 'rank_math_table_column_value', 'rank-math', ( data, display, value, column ) => {
-	if ( includes( [ 'index_verdict', 'indexing_state', 'mobile_usability_verdict', 'crawled_as', 'robots_txt_state' ], column ) ) {
+	if ( includes( [ 'index_verdict', 'indexing_state', 'crawled_as', 'robots_txt_state' ], column ) ) {
 		const newValue = kebabCase( value )
 		let className = column + ' verdict '
 		if ( 'index_verdict' !== column || isPro() ) {

@@ -50,7 +50,7 @@ class Questions extends Component {
 					}
 
 					const questions = []
-					forEach( this.props.caData.data.related_questions, ( data ) => {
+					forEach( this.props.researchedData.related_questions, ( data ) => {
 						questions.push(
 							{
 								id: uniqueId( 'faq-question-' ),
@@ -80,7 +80,7 @@ class Questions extends Component {
 	 */
 	render() {
 		const questionsData = []
-		if ( isEmpty( this.props.caData.data.related_questions ) ) {
+		if ( isEmpty( this.props.researchedData.related_questions ) ) {
 			return (
 				<h3 className="no-data">
 					{ __( 'There are no recommended Questions for this researched keyword.', 'rank-math' ) }
@@ -88,7 +88,7 @@ class Questions extends Component {
 			)
 		}
 
-		forEach( this.props.caData.data.related_questions, ( question, index ) => {
+		forEach( this.props.researchedData.related_questions, ( question, index ) => {
 			questionsData.push(
 				<div className="rank-math-questions-item" key={ index }>
 					<h3 className="rank-math-tooltip" data-key={ question } onClick={ () => ( this.setState( { selected: question } ) ) } role="presentation">

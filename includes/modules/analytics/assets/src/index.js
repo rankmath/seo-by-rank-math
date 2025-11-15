@@ -6,11 +6,13 @@ import jQuery from 'jquery'
 /**
  * WordPress dependencies
  */
-import { createElement, render } from '@wordpress/element'
+import { __ } from '@wordpress/i18n'
+import { createRoot } from '@wordpress/element'
 
 /**
  * Internal dependencies
  */
+import { DashboardHeader } from '@rank-math/components'
 import App from './App'
 import { getStore } from './store'
 import './defaultFilters'
@@ -19,9 +21,17 @@ import './helpers'
 class Analytics {
 	setup() {
 		getStore()
-		render(
-			createElement( App ),
+		createRoot(
 			document.getElementById( 'rank-math-analytics' )
+		).render(
+			<>
+				<DashboardHeader page="analytics" />
+				<div className="wrap rank-math-wrap">
+					<div className="rank-math-analytics">
+						<App />
+					</div>
+				</div>
+			</>
 		)
 	}
 }

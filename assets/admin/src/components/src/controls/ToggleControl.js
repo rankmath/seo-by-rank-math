@@ -33,7 +33,7 @@ export default ( {
 		disabled,
 		checked,
 		__nextHasNoMarginBottom: true,
-		className: `rank-math-toggle-control ${ className }`,
+		className: `rank-math-toggle-control ${ className } ${ ! label ? 'hide-label' : '' }`,
 	}
 
 	return <ToggleControl { ...props } />

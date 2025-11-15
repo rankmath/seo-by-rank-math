@@ -2,14 +2,14 @@
  * External dependencies
  */
 import classNames from 'classnames'
-import { filter, map, lowerCase, includes } from 'lodash'
+import { filter, map, lowerCase, includes, forEach } from 'lodash'
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
 import { SearchControl, Icon } from '@wordpress/components'
-import { useMemo, useState, ReactNode, Ref, RawHTML, forwardRef } from '@wordpress/element'
+import { useState, useMemo, RawHTML, forwardRef } from '@wordpress/element'
 
 /**
  * Internal dependencies
@@ -17,61 +17,104 @@ import { useMemo, useState, ReactNode, Ref, RawHTML, forwardRef } from '@wordpre
 import Button from '../buttons/Button'
 import TextControl from '../inputs/TextControl'
 import TextareaControl from '../inputs/TextareaControl'
-import useClickOutside from './hooks/useClickOutside'
+import useClickOutside from '../hooks/useClickOutside'
 import './scss/SelectVariable.scss'
+
+const replaceVariables = ( text ) => {
+	forEach( rankMath.variables, ( val, tag ) => {
+		if ( ! val.example ) {
+			return
+		}
+
+		const re = new RegExp( '\\([a-z]+\\)', 'g' )
+		tag = tag.replace( re, '\\(.*?\\)' )
+		text = text.replace(
+			new RegExp( '%+' + tag + '%+', 'g' ),
+			val.example
+		)
+	} )
+
+	return text
+}
+
+const variablePreview = ( value, fieldId ) => {
+	if ( ! value ) {
+		return
+	}
+
+	value = replaceVariables( value )
+
+	if (
+		60 < value.length &&
+		0 <= fieldId.indexOf( 'title' )
+	) {
+		value = value.substring( 0, 60 ) + '...'
+	} else if (
+		160 < value.length &&
+		0 <= fieldId.indexOf( 'description' )
+	) {
+		value = value.substring( 0, 160 ) + '...'
+	}
+
+	return (
+		<div className="rank-math-variables-preview" data-title="Example">{ value }</div>
+	)
+}
 
 /**
  * Select Variable component.
  *
- * @param {Object}    props           Component props.
- * @param {string}    props.value     The current value selected.
- * @param {ReactNode} props.label     The label associated with the control.
- * @param {Object}    props.style     Inline style object for additional styling.
- * @param {Array}     props.options   The dropdown options.
- * @param {Function}  props.onChange  Callback invoked when the selection changes.
- * @param {string}    props.width     Sets the width of the control.
- * @param {string}    props.className CSS class for additional styling.
- * @param {boolean}   props.disabled  Whether the control is disabled.
- * @param {string}    props.as        Whether to render the input or textarea variant. Accepted value: 'textarea'.
- * @param {Ref}       ref             Ref object for accessing an instance of the component.
+ * @param {Object}   props             Component props.
+ * @param {string}   props.value       The current value selected.
+ * @param {Node}     props.label       The label associated with the control.
+ * @param {Object}   props.style       Inline style object for additional styling.
+ * @param {Array}    props.options     The dropdown options.
+ * @param {Function} props.onChange    Callback invoked when the selection changes.
+ * @param {string}   props.width       Sets the width of the control.
+ * @param {string}   props.className   CSS class for additional styling.
+ * @param {boolean}  props.disabled    Whether the control is disabled.
+ * @param {boolean}  props.showPreview Whether to show the preview below the Search variable dropdown.
+ * @param {string}   props.as          Whether to render the input or textarea variant. Accepted value: 'textarea'.
+ * @param {Object}   props.inputProps  Custom props to be passed to the input element.
+ * @param {Object}   ref               Ref object for accessing an instance of the component.
  */
 const SelectVariable = ( {
 	as,
-	value,
+	value = '',
 	label,
 	style,
 	options,
 	onChange,
-	width = '100%',
+	inputProps,
 	className = '',
 	disabled = false,
+	showPreview = true,
 	...additionalProps
 }, ref ) => {
 	const [ searchValue, setSearchValue ] = useState( '' )
-	const [ isMenuOpen, setIsMenuOpen, containerRef ] = useClickOutside()
+	const [ showMenu, setShowMenu, containerRef ] = useClickOutside()
 	const selectRef = ref ?? containerRef
+	const excludeVariables = additionalProps.exclude ?? []
 
-	const menuClasses = classNames( 'select-menu', {
-		'is-textarea-menu': as === 'textarea',
-	} )
-
-	// Filter the options based on the search value
-	const filteredItems = useMemo( () => {
+	// Memoize selectMenu for performance
+	const selectMenu = useMemo( () => {
 		const matchValue = lowerCase( searchValue )
-
 		return filter(
-			options,
-			( { name, variable, description } ) =>
-				includes( lowerCase( name ), matchValue ) ||
-				includes( lowerCase( variable ), matchValue ) ||
-				includes( lowerCase( description ), matchValue )
+			rankMath.variables,
+			( { name, variable, description } ) => (
+				! includes( excludeVariables, variable ) &&
+				(
+					includes( lowerCase( name ), matchValue ) ||
+					includes( lowerCase( variable ), matchValue ) ||
+					includes( lowerCase( description ), matchValue )
+				)
+			)
 		)
-	}, [ searchValue, options ] )
+	}, [ searchValue, excludeVariables ] )
 
-	// Handle the selection of an option
-	const handleSelectedOption = ( selectedValue ) => {
-		onChange( `${ value } ${ selectedValue }` )
-		setIsMenuOpen( false )
+	const handleSelectedOption = ( newValue ) => {
+		onChange( `${ value } ${ newValue }` )
+		setShowMenu( false )
 		setSearchValue( '' )
 	}
 
@@ -79,19 +122,19 @@ const SelectVariable = ( {
 		value,
 		onChange,
 		disabled,
+		...inputProps,
 	}
 
 	const props = {
 		...additionalProps,
 		ref: selectRef,
-		style: { width, ...style },
 		'aria-disabled': disabled,
 		className: `rank-math-select-variable ${ className }`,
 	}
 
 	return (
 		<div { ...props }>
-			<div className="select-input" aria-expanded={ isMenuOpen }>
+			<div className="select-input" aria-expanded={ showMenu }>
 				{ as === 'textarea' ? (
 					<TextareaControl
 						rows={ 2 }
@@ -109,43 +152,46 @@ const SelectVariable = ( {
 					variant="secondary"
 					disabled={ disabled }
 					icon={ <Icon icon="arrow-down-alt2" /> }
-					onClick={ () => setIsMenuOpen( ( prev ) => ! prev ) }
+					onClick={ () => setShowMenu( ( prev ) => ! prev ) }
 				/>
 			</div>
 
-			{ isMenuOpen && (
-				<div className={ menuClasses }>
+			{ showMenu && (
+				<div
+					className={ classNames( 'select-menu', {
+						'is-textarea-menu': as === 'textarea',
+					} ) }
+				>
 					<SearchControl
 						value={ searchValue }
 						onChange={ setSearchValue }
 						placeholder={ __( 'Search …', 'rank-math' ) }
-						autoFocus
 					/>
 
-					{ filteredItems.length > 0 ? (
+					{ selectMenu.length > 0 ? (
 						<ul
 							tabIndex="-1"
 							role="listbox"
 							aria-hidden="false"
-							aria-expanded={ isMenuOpen }
+							aria-expanded={ showMenu }
 						>
 							{ map(
-								filteredItems,
+								selectMenu,
 								( { name, variable, description } ) => (
 									<li
 										role="option"
 										key={ variable }
-										aria-hidden="true"
 										data-value={ variable }
+										tabIndex={ 0 }
 										onClick={ () =>
-											handleSelectedOption( variable )
+											handleSelectedOption( `%${ variable }%` )
 										}
+										onKeyDown={ undefined }
 									>
 										<div>
-											<h1>{ name }</h1>
-											<p>{ variable }</p>
+											<strong>{ name }</strong>
+											<p>%{ variable }%</p>
 										</div>
-
 										<RawHTML className="description">
 											{ description }
 										</RawHTML>
@@ -158,6 +204,8 @@ const SelectVariable = ( {
 					) }
 				</div>
 			) }
+
+			{ showPreview && variablePreview( value, additionalProps.id ) }
 		</div>
 	)
 }

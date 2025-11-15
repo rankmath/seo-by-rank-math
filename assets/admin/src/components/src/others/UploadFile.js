@@ -7,7 +7,6 @@ import { isEmpty } from 'lodash'
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { useState } from '@wordpress/element'
 
 /**
  * Internal dependencies
@@ -18,52 +17,51 @@ import './scss/UploadFile.scss'
 /**
  * Upload File component.
  *
- * @param {Object} props      Component props.
- * @param {string} props.desc File description.
- * @param {string} props.name WP Media title.
+ * @param {Object}   props             Component props.
+ * @param {string}   props.name        WP Media title.
+ * @param {Object}   props.value       The selected file.
+ * @param {Function} props.onChange    Callback executed on file selection.
+ * @param {string}   props.description File description.
  */
-export default ( { desc, name } ) => {
-	const [ selectedImg, setSelectedImg ] = useState( {} )
-
-	// Create a media frame for file selection.
+export default ( { value, onChange, name, description, buttonText } ) => {
 	const mediaFrame = wp.media( {
 		title: name,
 		multiple: false,
 		library: { type: 'image' },
-		button: { text: 'Use this file' },
+		button: { text: __( 'Use this file', 'rank-math' ) },
 	} )
 
-	// Event listener for file selection.
 	mediaFrame.on( 'select', () => {
 		const attachment = mediaFrame.state().get( 'selection' ).first().toJSON()
-		setSelectedImg( attachment )
+		onChange( attachment )
 	} )
 
 	return (
 		<>
 			<Button variant="secondary" onClick={ () => mediaFrame.open() }>
-				{ __( 'Add or Upload File', 'rank-math' ) }
+				{ buttonText ?? __( 'Add or Upload File', 'rank-math' ) }
 			</Button>
 
-			<p
-				className="field-description"
-				dangerouslySetInnerHTML={ { __html: desc } }
-			/>
+			{ description && (
+				<p
+					className="field-description"
+					dangerouslySetInnerHTML={ { __html: description } }
+				/>
+			) }
 
-			{ ! isEmpty( selectedImg ) && (
+			{ ! isEmpty( value ) && (
 				<div className="media-status">
 					<div className="img-status media-item">
 						<img
 							width={ 350 }
 							height={ 196 }
-							src={ selectedImg.url }
-							alt={ selectedImg.alt }
-							title={ selectedImg.filename }
+							src={ value }
+							alt=""
 						/>
 
 						<Button
 							className="remove-file-button"
-							onClick={ () => setSelectedImg( {} ) }
+							onClick={ () => onChange( {} ) }
 						/>
 					</div>
 				</div>

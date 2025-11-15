@@ -1,11 +1,11 @@
 /* global Worker */
 
-const typingWorkerCode = () => {
+const typingWorkerCode = ( speed = 25 ) => {
 	return `
 	let words = [];
 	let currentWordIndex = 0;
 	let currentLetterIndex = 0;
-	let typingSpeed = 25; // Adjust the typing speed as needed
+	let typingSpeed = ${ speed }
 	
 	function typeWords() {
 		if ( currentWordIndex >= words.length ) {
@@ -33,6 +33,7 @@ const typingWorkerCode = () => {
 	`
 }
 
-export default () => {
-	return new Worker( URL.createObjectURL( new Blob( [ typingWorkerCode() ], { type: 'application/javascript' } ) ) )
+export default ( endpoint = '' ) => {
+	const typingSpeed = 'Blog_Post_Outline' !== endpoint ? 25 : 10
+	return new Worker( URL.createObjectURL( new Blob( [ typingWorkerCode( typingSpeed ) ], { type: 'application/javascript' } ) ) )
 }

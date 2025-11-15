@@ -11,6 +11,18 @@ import generateHelpLink from './generateHelpLink'
 export default () => {
 	return [
 		{
+			endpoint: 'Blog_Post_Wizard',
+			title: __( 'Blog Post Wizard', 'rank-math' ),
+			description: __( 'Create a complete blog post in one go. Just fill in some details and Content AI will create a complete blog post for you.', 'rank-math' ),
+			category: 'blog',
+			icon: 'rm-icon rm-icon-pencil',
+			helpLink: generateHelpLink( 'Blog_Post_Wizard' ),
+			output: {
+				default: 5,
+				max: 20,
+			},
+		},
+		{
 			endpoint: 'Blog_Post_Idea',
 			title: __( 'Blog Post Idea', 'rank-math' ),
 			description: __( 'Get fresh ideas for engaging blog posts that resonate with your niche and audience, ensuring captivating content.', 'rank-math' ),
@@ -538,6 +550,9 @@ export default () => {
 			params: {
 				topic: {
 					isRequired: true,
+				},
+				features_and_benefits: {
+					isRequired: false,
 				},
 				audience: {
 					isRequired: false,

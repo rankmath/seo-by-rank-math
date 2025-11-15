@@ -4,9 +4,14 @@
 import { __, sprintf } from '@wordpress/i18n'
 import { addFilter } from '@wordpress/hooks'
 
+/**
+ * Internal dependencies
+ */
+import isSiteEditorHomepage from '@helpers/isSiteEditorHomepage'
+
 class CommonFilters {
 	constructor() {
-		if ( ! rankMath.is_front_page ) {
+		if ( ! rankMath.is_front_page && ! isSiteEditorHomepage() ) {
 			return
 		}
 

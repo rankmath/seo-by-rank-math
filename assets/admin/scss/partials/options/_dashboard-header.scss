@@ -1,0 +1,174 @@
+.#{$namespace}-tab-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	position: absolute;
+	bottom: 100%;
+
+	width: calc(100% + 138px);
+	height: 90px;
+	margin-left: -200px;
+	border: 1px solid $gray;
+	padding: 1.875rem 1.875rem 0;
+	border-radius: 6px 6px 0 0;
+
+	text-align: center;
+	
+	background-color: $tertiary;
+
+	h2 {
+		font-size: 25px;
+		line-height: 1.5;
+		font-weight: 600;
+
+		margin: 0;
+	}
+
+	p {
+		font-size: 14px;
+
+		margin: 0 auto 2rem;
+		padding-top: 2px;
+
+		color: $dark_gray;
+		line-height: 1.5;
+		letter-spacing: 0.01em;
+	}
+}
+
+
+$modeButton: 'rank-math-button.components-button';
+
+// Mode Selector
+.rank-math-mode-selector {
+	.#{$modeButton},
+	.#{$modeButton}:active:not(:disabled),
+	.#{$modeButton}:focus:not(:disabled) {
+		color: $dark_gray;
+	}
+
+	.#{$modeButton} {
+		text-decoration: none;
+		padding: 5px 0 1px;
+		line-height: 1.4em;
+
+		&:first-child {
+			margin-right: 7px;
+		}
+
+		&.is-active,
+		&:hover:not(:disabled) {
+			border-bottom: 1px solid;
+			color: $text;
+		}
+
+		&:focus:not(:disabled) {
+			box-shadow: 0 0 0 2px $primary-light;
+			outline-width: 2px;
+			outline-color: transparent;
+			border: 0;
+			background: 0;
+		}
+	}
+}
+
+// Search Options
+.rank-math-search {
+	&-options {
+		position: relative;
+
+		margin-right: 5px;
+
+		.components-input-control .components-input-control__container {
+			width: 275px;
+
+			.components-input-control {
+				&__input {
+					height: 40px;
+					min-height: 30px;
+					line-height: 2;
+					padding: 10px 15px;
+					color: #858b90;
+					font-size: 14px;
+
+					@media screen and (max-width: 782px) {
+						font-size: 16px;
+					}
+				}
+			}
+
+			&:hover .components-input-control__backdrop {
+				border-color: $primary;
+			}
+
+			&:focus-within .components-input-control__backdrop {
+				box-shadow: 0 0 0 0.5px $primary !important;
+				border-color: $primary !important;
+			}
+		}
+	}
+
+	&-dropdown {
+		overflow: auto;
+
+		max-width: 450px;
+
+		border: 1px solid $gray;
+		border-radius: 3px;
+		background: #fff;
+
+		@include size(100%, 260px);
+		@include position(absolute, 48px 0 null null);
+
+		> .rank-math-button.components-button.button-secondary {
+			display: block !important;
+			
+			width: 100%;
+			padding: 10px;
+
+			border: 0;
+			border-radius: 0;
+			box-shadow: none;
+
+			background: $white;
+
+			text-align: left;
+			white-space: unset;
+			cursor: pointer;
+			text-decoration: none;
+
+			&:hover {
+				background: #f6f6f6;;
+			}
+
+			&:focus {
+				box-shadow: none;
+				outline: none;
+			}
+
+			&:not(:last-of-type) {
+				border-bottom: 1px solid $gray;
+			}
+
+			h1 {
+				font-size: 13px;
+				color: #3c434a;
+				line-height: 1.4em;
+				font-weight: 400;
+				margin: 0;
+			}
+
+			p {
+				font-size: 12px;
+			}
+		}
+
+		.empty {
+			font-size: 1.2em;
+			font-style: italic;
+			display: block;
+			padding: 20px;
+		}
+	}
+}

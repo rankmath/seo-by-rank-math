@@ -92,7 +92,7 @@ const PostsTable = ( props ) => {
 			},
 			{
 				key: 'ctr',
-				label: __( 'Avg. CTR', 'rank-math' ),
+				label: __( 'CTR', 'rank-math' ),
 				cellClassName: 'rank-math-col-ctr',
 			},
 			{
@@ -108,11 +108,11 @@ const PostsTable = ( props ) => {
 		[
 			{ label: __( 'Posts', 'rank-math' ), value: tableData.rowsFound },
 			{
-				label: __( 'Search Impressions', 'rank-math' ),
+				label: __( 'Total Impressions', 'rank-math' ),
 				value: humanNumber( summary.impressions ),
 			},
 			{
-				label: __( 'Search Clicks', 'rank-math' ),
+				label: __( 'Total Clicks', 'rank-math' ),
 				value: humanNumber( summary.clicks ),
 			},
 		],

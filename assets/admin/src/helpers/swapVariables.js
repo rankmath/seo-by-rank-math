@@ -35,9 +35,8 @@ class SwapVariables {
 
 		if ( [ 'term_description', 'user_description' ].includes( token ) ) {
 			return 'undefined' !== typeof tinymce &&
-				tinymce.activeEditor &&
-				'rank_math_description_editor' === tinymce.activeEditor.id
-				? tinymce.activeEditor.getContent()
+				'undefined' !== typeof tinymce.editors.rank_math_description_editor
+				? tinymce.editors.rank_math_description_editor.getContent()
 				: jQuery( '#description' ).val()
 		}
 

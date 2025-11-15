@@ -1,0 +1,16 @@
+#rank-math-lock-modified-date-wrapper {
+	margin-left: 1px;
+	button {
+		box-shadow: none;
+		outline: none;
+
+		height: 40px;
+		border-radius: 3px;
+
+		&.rank-math-lock-modified-date {
+			position: absolute;
+			right: 0;
+			top: -105%;
+		}
+	}
+}

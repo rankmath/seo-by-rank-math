@@ -1,4 +1,9 @@
 // main: ../../setup-wizard.scss
 
-.#{$namespace}-wizard-body--optimization {
+.wizard-content--optimization {
+	.field-wrap:first-of-type {
+		margin-bottom: 25px;
+		padding-bottom: 25px;
+		border-bottom: 1px solid $light_gray;
+	}
 }

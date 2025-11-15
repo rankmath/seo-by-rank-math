@@ -2,7 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { isEmpty, isUndefined } from 'lodash'
+import { isEmpty, isUndefined, last } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -32,18 +32,83 @@ const updateCredits = ( result ) => {
 		},
 	} )
 		.then( () => {
-			if ( ! isUndefined( rankMath.ca_credits ) ) {
-				rankMath.ca_credits = credits
-			}
-
-			if ( ! isUndefined( rankMath.contentAICredits ) ) {
-				rankMath.contentAICredits = credits
-			}
+			wp.data.dispatch( 'rank-math-content-ai' ).updateData( 'credits', credits )
 
 			if ( jQuery( '.credits-remaining' ).length ) {
 				jQuery( '.credits-remaining strong' ).text( credits )
 			}
 		} )
+}
+
+/**
+ * Convert image URL to base64 encoded data
+ *
+ * @param {string} imageUrl Image URL to convert.
+ * @return {Promise<string>} Base64 encoded image data.
+ */
+const convertImageToBase64 = ( imageUrl ) => {
+	return new Promise( ( resolve, reject ) => {
+		const img = new window.Image()
+		img.crossOrigin = 'anonymous'
+
+		img.onload = () => {
+			const canvas = document.createElement( 'canvas' )
+			const ctx = canvas.getContext( '2d' )
+			canvas.width = img.width
+			canvas.height = img.height
+			ctx.drawImage( img, 0, 0 )
+
+			try {
+				// Detect image format from URL
+				const urlParts = imageUrl.toLowerCase().split( '.' )
+				const extension = urlParts[ urlParts.length - 1 ]
+				let mimeType = 'image/jpeg' // default
+
+				// Map file extensions to MIME types
+				switch ( extension ) {
+					case 'png':
+						mimeType = 'image/png'
+						break
+					case 'gif':
+						mimeType = 'image/gif'
+						break
+					case 'webp':
+						mimeType = 'image/webp'
+						break
+					case 'svg':
+						mimeType = 'image/svg+xml'
+						break
+					case 'jpg':
+					case 'jpeg':
+					default:
+						mimeType = 'image/jpeg'
+						break
+				}
+
+				const dataURL = canvas.toDataURL( mimeType )
+				resolve( dataURL )
+			} catch ( error ) {
+				reject( error )
+			}
+		}
+
+		img.onerror = () => {
+			reject( new Error( 'Failed to load image' ) )
+		}
+
+		img.src = imageUrl
+	} )
+}
+
+/**
+ * Extract filename from image URL
+ *
+ * @param {string} imageUrl Image URL.
+ * @return {string} Filename.
+ */
+const getImageId = ( imageUrl ) => {
+	const urlParts = imageUrl.split( '/' )
+	return last( urlParts ) || 'image.jpg'
 }
 
 /**
@@ -53,30 +118,40 @@ const updateCredits = ( result ) => {
  */
 export default ( imageUrl ) => {
 	return new Promise( ( resolve, reject ) => {
-		const data = rankMath.connectData
+		const data = wp.data.select( 'rank-math-content-ai' ).getData()
 
-		fetch( rankMath.contentAiUrl + 'generate_image_alt', {
-			method: 'POST',
-			body: JSON.stringify(
-				{
-					images: [ imageUrl ],
-					username: data.username,
-					api_key: data.api_key,
-					site_url: data.site_url,
-					plugin_version: rankMath.version,
-				}
-			),
-			headers: { 'Content-Type': 'application/json' },
-		} )
-			.then( ( response ) => response.json() )
-			.then( ( response ) => {
-				if ( response.altTexts && response.altTexts[ imageUrl ] ) {
-					resolve( response.altTexts[ imageUrl ] )
-					updateCredits( response )
-					return
-				}
+		// Convert image to base64 and prepare the request
+		convertImageToBase64( imageUrl )
+			.then( ( base64Data ) => {
+				const imageId = getImageId( imageUrl )
 
-				reject( __( 'Failed to generate alt text.', 'rank-math' ) )
+				fetch( data.url + 'generate_image_alt_v2', {
+					method: 'POST',
+					body: JSON.stringify(
+						{
+							images: [ { id: imageId, image: base64Data } ],
+							username: data.connectData.username,
+							api_key: data.connectData.api_key,
+							site_url: data.connectData.site_url,
+							plugin_version: rankMath.version,
+							language: data.language,
+						}
+					),
+					headers: { 'Content-Type': 'application/json' },
+				} )
+					.then( ( response ) => response.json() )
+					.then( ( response ) => {
+						if ( response.altTexts && response.altTexts[ imageId ] ) {
+							resolve( response.altTexts[ imageId ] )
+							updateCredits( response )
+							return
+						}
+
+						reject( __( 'Failed to generate alt text.', 'rank-math' ) )
+					} )
+					.catch( ( error ) => {
+						reject( error )
+					} )
 			} )
 			.catch( ( error ) => {
 				reject( error )

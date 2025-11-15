@@ -7,7 +7,7 @@ import jQuery from 'jquery'
  * WordPress dependencies.
  */
 import { __ } from '@wordpress/i18n'
-import { render, createInterpolateElement } from '@wordpress/element'
+import { createInterpolateElement, createRoot } from '@wordpress/element'
 
 /**
  * Internal dependencies.
@@ -56,7 +56,7 @@ class diviAdmin {
 			.find( '.et-tab-content' )
 			.prepend( jQuery( `<div id="${ noticeContainerId }" />` ) )
 		document.querySelectorAll( '#' + noticeContainerId ).forEach( function( elem ) {
-			render( this.getAdminNotice(), elem )
+			createRoot( elem ).render( this.getAdminNotice() )
 		}, this )
 	}
 

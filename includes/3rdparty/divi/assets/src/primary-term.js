@@ -9,7 +9,7 @@ import jQuery from 'jquery'
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch'
-import { createElement, render } from '@wordpress/element'
+import { createElement, createRoot } from '@wordpress/element'
 import { addFilter } from '@wordpress/hooks'
 
 /**
@@ -109,10 +109,7 @@ export default class PrimaryTerm {
 			taxonomySlug: this.primaryTaxonomy.slug,
 			options: this.formatActiveTerms( terms ),
 		}
-		render(
-			createElement( PrimaryTermSelect, props ),
-			this.$PrimaryTermSelectContainer[ 0 ]
-		)
+		createRoot( this.$PrimaryTermSelectContainer[ 0 ] ).render( createElement( PrimaryTermSelect, props ) )
 	}
 	bindEvents() {
 		addFilter(

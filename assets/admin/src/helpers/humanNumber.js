@@ -14,6 +14,10 @@ const isFloat = ( number, fixTo = 2 ) => {
  * @return {string} Human reable number.
  */
 export default ( number ) => {
+	if ( 'n/a' === number ) {
+		return number
+	}
+
 	number = parseFloat( number )
 
 	let index = 0

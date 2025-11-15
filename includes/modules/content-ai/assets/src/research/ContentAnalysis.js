@@ -15,10 +15,13 @@ class ContentAnalysis {
 	 * Constructor.
 	 */
 	constructor() {
-		if ( ! rankMath.isUserRegistered ) {
+		if ( ! rankMath.contentAI.isUserRegistered ) {
 			return
 		}
 
+		const data = select( 'rank-math-content-ai' ).getData()
+		this.ca_keyword = data.keyword
+		this.data = data.researchedData
 		this.init = this.init.bind( this )
 		this.contentLength = this.contentLength.bind( this )
 		this.contentLengthBoundary = this.contentLengthBoundary.bind( this )
@@ -26,7 +29,7 @@ class ContentAnalysis {
 		this.removeTests = this.removeTests.bind( this )
 
 		this.researchesTests = rankMath.assessor.researchesTests
-		this.ca_keyword = rankMath.ca_keyword.keyword
+		this.ca_keyword = wp.data.select( 'rank-math-content-ai' ).getData().keyword
 		addAction( 'rank_math_loaded', 'rank-math', this.init )
 		addAction( 'rank_math_keyword_refresh', 'rank-math', this.init )
 		addAction( 'rank_math_content_ai_changed', 'rank-math', this.init )
@@ -38,7 +41,6 @@ class ContentAnalysis {
 		}
 
 		this.keyword = rankMathEditor.assessor.getPrimaryKeyword()
-		this.data = select( 'rank-math' ).getKeywordsData()
 		if ( isEmpty( this.data ) ) {
 			return
 		}

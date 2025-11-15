@@ -32,6 +32,8 @@ div.#{$namespace}-modal {
 
         border-bottom: 1px solid $light_gray;
 
+        z-index: 999;
+
         .components-modal__header-heading {
             font-size: 14px;
         }

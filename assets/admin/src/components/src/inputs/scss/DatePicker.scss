@@ -1,0 +1,179 @@
+@import "../../../scss/main";
+
+/**
+ * Date Picker component
+ *
+ * All non-human readable selectors are not added by Rank Math but dynamically
+ * added by the Date Picker component from WordPress.
+ */
+.rank-math-date-picker {
+	display: inline-block;
+
+	position: relative;
+
+	.rank-math-text-control.components-base-control.regular-text {
+		position: relative;
+		
+		width: 120px;
+	}
+
+	.components-datetime__date {
+		position: absolute;
+		left: 2px;
+
+		border: 1px solid #dfdfdf;
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.075);
+
+		background: $white;
+
+		opacity: 0;
+		z-index: -1;
+		transition: all 0.2s ease-in-out;
+
+		&:focus-within {
+			opacity: 1;
+			z-index: 1;
+		}
+
+		/* Current month header */
+		> .components-flex {
+			margin-bottom: 0;
+
+			background: $color-blue;
+
+			h3, 
+			button {
+				color: $white;
+			}
+
+			h3 {
+				font-size: 14px;
+			}
+
+			button {
+				box-shadow: none;
+				outline: none;
+
+				&:hover {
+					opacity: 0.7;
+				}
+			}
+		}
+
+		/* Calendar container */
+		> .css-1srrseb {
+			justify-items: inherit;
+			gap: 0;
+
+			position: relative;
+
+			/* Day of Week header selector */
+			> div {
+				padding: 10px;
+
+				color: $white;
+				background: #32373c;
+				line-height: 1.4em;
+
+				z-index: 20;
+			}
+
+			button {
+				width: 100%;
+				height: 100%;
+				border-radius: 0;
+				box-shadow: none;
+
+				padding: 5px 10px;
+				border-top: 1px solid #f4f4f4;
+				border-right: 1px solid #f4f4f4;
+
+				color: $black-40;
+				line-height: 1.4em;
+
+				z-index: 20;
+
+				&:hover,
+				&:focus,
+				&[aria-label*="Selected"] {
+					&:not(:disabled) {
+						color: $white;
+						background: #0073aa;
+					}
+				}
+
+				&:disabled,
+				&[aria-label*="Selected"]:disabled {
+					color: rgba($black-40, 0.5);
+
+					opacity: 1;
+				}
+
+				&[aria-label*="Selected"]:disabled {
+					background: #f0f0c0;
+				}
+
+				&:first-of-type {
+					border-left: 1px solid #f4f4f4;
+				}
+			}
+
+			&::after,
+			&::before {
+				content: '';
+				display: block;
+
+				position: absolute;
+				top: 38px;
+				bottom: 0;
+
+				background: #f4f4f4;
+
+				z-index: 10;
+			}
+
+			&::after {
+				left: 0;
+
+				width: 42px;
+			}
+
+			&::before {
+				right: 0;
+
+				width: 42px;
+			}
+		}
+
+		/* Add separator to the last row of the calendar */
+		&::after {
+			content: '';
+			display: block;
+
+			position: absolute;
+			bottom: 28px;
+			left: 0;
+			right: 0;
+
+			height: 1px;
+
+			background: #f4f4f4;
+		}
+	}
+
+	&.hide-date-picker .components-datetime__date {
+		opacity: 0;
+		z-index: -1;
+	}
+
+	&.show-date-picker .components-datetime__date {
+		opacity: 1;
+		z-index: 1;
+	}
+
+	+ .field-description {
+		display: inline-block;
+		
+		margin-left: 6px;
+	}
+}

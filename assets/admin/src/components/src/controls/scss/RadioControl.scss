@@ -1,61 +1,59 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/formcontrol';
-@import '../../../scss/mixins/layout';
+@import '../../../scss/main';
 
-/* 
+/** 
  * Radio Control component.
  */
 .rank-math-radio-control {
-	.components-radio-control__input[type=radio] {
+	.components-radio-control__input[type="radio"] {
 		@include checkbox-radio-style;
-		border-radius: 50%;
-		margin-right: 9px;
-		line-height: .71428571;
 
-		&:checked {
-			&::before {
-				float: left;
-				content: "";
-				border-radius: 50%;
-				width: .5rem;
-				height: .5rem;
-				margin: .1875rem;
-				background-color: $focus;
-				line-height: 1.14285714;
-				border: none;
-			}
+		margin-right: 9px;
+		border-radius: 50%;
+
+		line-height: 0.71428571;
+
+		&:checked::before {
+			position: unset;
+			transform: none;
+
+			width: 0.5rem;
+			height: 0.5rem;
+			margin: 0.1875rem;
+			border: none;
+
+			background-color: $focus;
 		}
 
 		&:disabled {
 			@include checkbox-radio-disabled;
 		}
-
-		@include tablet {
-			&:checked::before{
-				transform: none;
-			}
-		}
 	}
 
 	label {
-		@include control-label-style;
+		@include form-control-label;
 	}
 
 	&.metabox {
-		.components-radio-control__input[type=radio],
-		.components-radio-control__input[type=radio]:disabled {
+		.components-radio-control__input[type="radio"],
+		.components-radio-control__input[type="radio"]:disabled {
 			border-color: $dark_gray;
 			box-shadow: 0 0 0 1px $dark_gray;
 		}
 
-		.components-radio-control__input[type=radio] {
-			&:checked {
-				border-color: $primary;
-				box-shadow: 0 0 0 1px $primary;
+		.components-radio-control__input[type="radio"]:checked {
+			border-color: $primary;
+			box-shadow: 0 0 0 1px $primary;
 
-				&::before {
-					background: $primary;
-				}
+			&::before {
+				background: $primary;
+			}
+		}
+	}
+
+	@media screen and (max-width: 782px) {
+		.components-radio-control__input[type="radio"] {
+			&:checked::before {
+				transform: translate(5px, 5px);
 			}
 		}
 	}

@@ -33,7 +33,7 @@ const slackMarkdownVariantCorrector = ( text ) => {
 	return text.replace(
 		/((?:^|\n)```)([^\n`]+)(```(?:$|\n))/,
 		( match, p1, p2, p3 ) => `${ p1 }\n${ p2 }\n${ p3 }`
-	);
+	)
 }
 
 const bulletsToAsterisks = ( text ) => {

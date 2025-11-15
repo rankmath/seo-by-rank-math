@@ -1,9 +1,9 @@
 // main: ../../setup-wizard.scss
 
-.#{$namespace}-wizard-body--ready {
-    .cmb-form > header {
+.wizard-content--ready {
+    > header {
         h1 {
-            font-size: 20px;
+            font-size: 20px !important;
         }
         .dashicons-yes {
             @extend %header-icon;
@@ -16,8 +16,8 @@
         > div {
             float: left;
 
-            box-sizing: border-box;
             width: 50%;
+            box-sizing: border-box;
         }
 
         .learn-more {
@@ -28,10 +28,10 @@
             }
 
             li {
+                margin-bottom: 12px;
+
                 font-size: 18px;
                 line-height: 1.5;
-
-                margin-bottom: 12px;
             }
 
             a {
@@ -50,9 +50,9 @@
                     font-size: 19px;
 
                     padding: 2px;
+                    border-radius: 3px;
 
                     color: #f7d070;
-                    border-radius: 3px;
                     background: #253142;
                 }
             }
@@ -95,7 +95,7 @@
                 color: #434343;
             }
 
-            .cmb2-toggle {
+            .#{$namespace}-toggle-control {
                 margin-left: 10px;
             }
 
@@ -112,14 +112,44 @@
 
         margin-right: 0 !important;
 
-        color: #fff !important;
-        border-color: #069de3 !important;
-        background: #069de3 !important;
+        color: $white !important;
+        border-color: $primary !important;
+        background: $primary !important;
 
         &:hover,
         &:focus {
-            border-color: #08a7f1 !important;
-            background: #08a7f1 !important;
+            border-color: $primary-hover !important;
+            background: $primary-hover !important;
+        }
+    }
+}
+
+@media screen and (max-width: 775px) {
+    .wizard-content--ready {
+        .wizard-next-steps {
+            > div {
+                float: none;
+                width: 100%;
+            }
+
+            .score-100 {
+                text-align: center;
+            }
+
+            .learn-more {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                margin-top: 25px;
+            }
+        }
+
+        .form-footer:not(.rank-math-custom) .rank-math-button.button-primary {
+            float: none;
+
+            margin-top: 15px;
         }
     }
 }

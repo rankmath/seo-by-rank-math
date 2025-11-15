@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import jQuery from 'jquery'
 import { isArray, isNull, isEmpty, forEach } from 'lodash'
 
 /**
@@ -24,24 +23,18 @@ const generatingText = __( 'Generating…', 'rank-math' )
 
 const { updateBlockAttributes, removeBlock } = dispatch( blockEditorStore )
 
-const useButton = '<button class="button button-small rank-math-content-ai-use" tabindex="0"><span contenteditable="false">' + __( 'Use', 'rank-math' ) + '</span></button>'
-const regenerateButton = '<button class="button button-small rank-math-content-ai-regenerate" tabindex="0"><span contenteditable="false">' + __( 'Regenerate', 'rank-math' ) + '</span></button>'
-const writeMoreButton = '<button class="button button-small rank-math-content-ai-write-more" tabindex="0"><span contenteditable="false">' + __( 'Write More', 'rank-math' ) + '</span></button>'
-const buttons = '<div class="rank-math-content-ai-command-buttons">' + useButton + regenerateButton + writeMoreButton + '</div>'
-
-const runCommand = ( endpoint, params, clientId = null, existingContent = '' ) => {
+export const runCommand = ( endpoint, params, clientId = null, existingContent = '' ) => {
 	getData( endpoint, params, ( result ) => {
 		if ( result.error ) {
-			const dismissButton = '<div class="rank-math-content-ai-command-buttons"><button class="button button-small rank-math-content-ai-dismiss" contenteditable="false" contenteditable="true">' + __( 'Dismiss', 'rank-math' ) + '</button></div>'
 			updateBlockAttributes(
 				clientId,
 				{
-					content: result.error + dismissButton,
+					content: result.error,
 					className: 'rank-math-content-ai-command',
-					isAiGenerated: true,
+					isAiGenerated: false,
+					hasApiError: true, // This will now work because the attribute is registered.
 				}
 			)
-
 			return
 		}
 
@@ -55,17 +48,17 @@ const runCommand = ( endpoint, params, clientId = null, existingContent = '' ) =
 			clientId,
 			{
 				content: '',
-				className: 'rank-math-content-ai-command typing',
+				className: 'rank-math-content-ai-command',
 				isAiGenerated: true,
 			}
 		)
 
-		addContent( result, clientId, buttons, existingContent )
+		addContent( result, clientId, null, existingContent )
 	} )
 }
 
-const useBlock = () => {
-	const selectedBlock = select( 'core/block-editor' ).getSelectedBlock()
+export const useBlock = ( clientId, attributes ) => {
+	const selectedBlock = select( blockEditorStore ).getBlock( clientId )
 	const content = getBlockContent( selectedBlock ).replace( /<div .*<\/div>/g, '' ).replaceAll( '  ', '' )
 	const parsedBlocks = rawHandler( {
 		HTML: content,
@@ -75,25 +68,21 @@ const useBlock = () => {
 		createBlock( parsedBlock.name, parsedBlock.attributes, parsedBlock.innerBlocks )
 	)
 
-	if ( selectedBlock.attributes.replaceBlock ) {
-		dispatch( 'core/block-editor' ).replaceBlock( selectedBlock.attributes.selectedId, newBlock )
-		removeBlock( selectedBlock.clientId )
+	if ( attributes.replaceBlock ) {
+		dispatch( blockEditorStore ).replaceBlock( attributes.selectedId, newBlock )
+		removeBlock( clientId )
 		return
 	}
 
-	dispatch( 'core/block-editor' ).replaceBlock( selectedBlock.clientId, newBlock )
+	dispatch( blockEditorStore ).replaceBlock( clientId, newBlock )
 }
 
-const regenerateOutput = () => {
-	const selectedBlock = select( 'core/block-editor' ).getSelectedBlock()
-	const clientId = selectedBlock.clientId
-	const endpoint = selectedBlock.attributes.endpoint
-	const params = selectedBlock.attributes.params
-
+export const regenerateOutput = ( clientId, endpoint, params ) => {
 	updateBlockAttributes(
 		clientId,
 		{
 			content: generatingText,
+			isAiGenerated: true,
 		}
 	)
 
@@ -124,58 +113,19 @@ const trimContent = ( content ) => {
 	return getLastParagraph( content.length ) + '\n' + content
 }
 
-const writeMore = () => {
-	const selectedBlock = select( 'core/block-editor' ).getSelectedBlock()
-	const clientId = selectedBlock.clientId
+export const writeMore = ( clientId ) => {
+	const selectedBlock = select( blockEditorStore ).getBlock( clientId )
 	const content = getBlockContent( selectedBlock ).replace( /<div .*<\/div>/g, '' ).replace( '<br>', '' ).replaceAll( '  ', '' )
 	updateBlockAttributes(
 		clientId,
 		{
 			content: content + '' + generatingText,
+			isAiGenerated: true,
 		}
 	)
 
 	runCommand( 'Continue_Writing', { sentence: trimContent( content ), choices: 1 }, clientId, content )
 }
-
-const commandActions = () => {
-	jQuery( document ).on( 'click', '.rank-math-content-ai-dismiss', () => {
-		const selectedBlock = select( 'core/block-editor' ).getSelectedBlock()
-		removeBlock( selectedBlock.clientId )
-	} )
-
-	jQuery( document ).on( 'keydown', '.rank-math-content-ai-use', ( event ) => {
-		if ( event.code === 'Enter' ) {
-			useBlock()
-		}
-	} )
-
-	jQuery( document ).on( 'click', '.rank-math-content-ai-use', () => {
-		useBlock()
-	} )
-
-	jQuery( document ).on( 'keydown', '.rank-math-content-ai-regenerate', ( event ) => {
-		if ( event.code === 'Enter' ) {
-			regenerateOutput()
-		}
-	} )
-
-	jQuery( document ).on( 'click', '.rank-math-content-ai-regenerate', () => {
-		regenerateOutput()
-	} )
-
-	jQuery( document ).on( 'keydown', '.rank-math-content-ai-write-more', ( event ) => {
-		if ( event.code === 'Enter' ) {
-			writeMore()
-		}
-	} )
-
-	jQuery( document ).on( 'click', '.rank-math-content-ai-write-more', () => {
-		writeMore()
-	} )
-}
-
-commandActions()
 
 /**
  * Function to insert the API output in the content.

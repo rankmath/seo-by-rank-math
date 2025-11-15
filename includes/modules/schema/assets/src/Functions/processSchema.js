@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isEmpty, isBoolean, isUndefined, map, get } from 'lodash'
+import { isEmpty, isBoolean, isUndefined, map, get, isNumber } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -41,7 +41,7 @@ const processValues = ( property ) => {
  * @return {string} Processed value.
  */
 const getValue = ( property ) => {
-	if ( ! isEmpty( property.value ) || ( ! isUndefined( property.map.field ) && 'toggle' === property.map.field.type ) ) {
+	if ( isNumber( property.value ) || ! isEmpty( property.value ) || ( ! isUndefined( property.map.field ) && 'toggle' === property.map.field.type ) ) {
 		return property.value
 	}
 
@@ -130,7 +130,7 @@ const processData = ( data ) => {
 		}
 
 		const value = getValue( property )
-		if ( ( ! isBoolean( value ) && isEmpty( value ) ) || ! value ) {
+		if ( ( ! isNumber( value ) && ! isBoolean( value ) && isEmpty( value ) ) || ! value ) {
 			return
 		}
 

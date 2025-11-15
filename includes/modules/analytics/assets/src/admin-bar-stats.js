@@ -13,7 +13,6 @@ import { applyFilters } from '@wordpress/hooks'
 /**
  * Internal dependencies
  */
-import { isPro } from './functions'
 import ItemStat from '@scShared/ItemStat'
 
 /**
@@ -38,12 +37,11 @@ class AdminBarStats extends Component {
 			<>
 				{ this.getContentAiScore() }
 				{ this.getSeoScore() }
-				{ isPro() && <div id="rank-math-analytics-site-traffic" className="rank-math-item"></div> }
+				{ this.getSiteTraffic() }
 				{ this.getSiteImpression() }
 				{ this.getAveragePosition() }
 				{ this.getIndexVerdict() }
-				{ ! isPro() && this.getPageSpeed() }
-				{ isPro() && ( <div id="rank-math-analytics-stats-pagespeed" className="rank-math-single-tab rank-math-item"></div> ) }
+				{ this.getPageSpeed() }
 			</>
 		)
 	}
@@ -106,7 +104,7 @@ class AdminBarStats extends Component {
 		return (
 			<div className="rank-math-item">
 				<h3>
-					{ __( 'Search Impressions', 'rank-math' ) }
+					{ __( 'Total Impressions', 'rank-math' ) }
 					<span className="rank-math-tooltip">
 						<em className="dashicons-before dashicons-editor-help"></em>
 						<span>
@@ -144,6 +142,10 @@ class AdminBarStats extends Component {
 		)
 	}
 
+	getSiteTraffic() {
+		return applyFilters( 'rank-math-analytics-stats-site-traffic', '' )
+	}
+
 	getIndexVerdict() {
 		return applyFilters(
 			'rank-math-analytics-stats-index-verdict',
@@ -169,34 +171,37 @@ class AdminBarStats extends Component {
 	}
 
 	getPageSpeed() {
-		return (
-			<>
-				<div id="rank-math-analytics-stats-pagespeed" className="rank-math-single-tab rank-math-item blur">
-					<div className="rank-math-box rank-math-pagespeed-box">
-						<div className="rank-math-pagespeed-header">
-							<h3>
-								{ __( 'PageSpeed', 'rank-math' ) }
-								<span className="rank-math-tooltip">
-									<em className="dashicons-before dashicons-editor-help"></em>
-								</span>
-							</h3>
-							<span>April 2, 2022</span>
-						</div>
-						<div className="grid">
-							<div className="col pagespeed-desktop">
-								<i className="rm-icon rm-icon-desktop"></i>
-								<strong className="pagespeed interactive-good">0 s</strong>
-								<small className="pagescore score-bad">0</small>
+		return applyFilters(
+			'rank-math-analytics-stats-pagespeed',
+			(
+				<>
+					<div id="rank-math-analytics-stats-pagespeed" className="rank-math-single-tab rank-math-item blur">
+						<div className="rank-math-box rank-math-pagespeed-box">
+							<div className="rank-math-pagespeed-header">
+								<h3>
+									{ __( 'PageSpeed', 'rank-math' ) }
+									<span className="rank-math-tooltip">
+										<em className="dashicons-before dashicons-editor-help"></em>
+									</span>
+								</h3>
+								<span>April 2, 2022</span>
 							</div>
-							<div className="col pagespeed-mobile">
-								<i className="rm-icon rm-icon-mobile"></i>
-								<strong className="pagespeed interactive-good">0 s</strong>
-								<small className="pagescore score-bad">0</small>
+							<div className="grid">
+								<div className="col pagespeed-desktop">
+									<i className="rm-icon rm-icon-desktop"></i>
+									<strong className="pagespeed interactive-good">0 s</strong>
+									<small className="pagescore score-bad">0</small>
+								</div>
+								<div className="col pagespeed-mobile">
+									<i className="rm-icon rm-icon-mobile"></i>
+									<strong className="pagespeed interactive-good">0 s</strong>
+									<small className="pagescore score-bad">0</small>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</>
+				</>
+			)
 		)
 	}
 

@@ -7,7 +7,7 @@ import { debounce, isUndefined } from 'lodash'
 /**
  * WordPress dependencies
  */
-import { addAction } from '@wordpress/hooks'
+import { addAction, applyFilters } from '@wordpress/hooks'
 import { dispatch, select } from '@wordpress/data'
 
 /**
@@ -206,7 +206,8 @@ class DataCollector {
 	}
 
 	getData( field = '' ) {
-		return field ? this._data[ field ] : this._data
+		const data = field ? this._data[ field ] : this._data
+		return applyFilters( 'rank_math_dataCollector_data', data )
 	}
 
 	updateData( field, value ) {

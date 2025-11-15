@@ -1,5 +1,5 @@
-/*!
- * Rank Math
+/*
+ * Rank Math Options Panel file used for the CMB2 field integration. To be removed soon.
  *
  * @version 0.9.0
  * @author  RankMath
@@ -15,6 +15,7 @@ import { debounce } from 'lodash'
  * WordPress Dependencies
  */
 import apiFetch from '@wordpress/api-fetch'
+import { __ } from '@wordpress/i18n'
 
 /**
  * Internal Dependencies
@@ -455,6 +456,8 @@ import addNotice from '@helpers/addNotice'
 			misc() {
 				if ( 'undefined' !== typeof jQuery.fn.select2 ) {
 					$( '[data-s2-pages]' ).select2( {
+						allowClear: true,
+						placeholder: __( 'Select Page', 'rank-math' ),
 						ajax: {
 							url:
 								rankMath.ajaxurl +

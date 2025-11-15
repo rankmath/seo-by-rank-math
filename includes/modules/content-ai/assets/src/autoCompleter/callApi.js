@@ -9,7 +9,7 @@ import { isNull, find, startCase, isUndefined } from 'lodash'
  */
 import { __ } from '@wordpress/i18n'
 import { Modal } from '@wordpress/components'
-import { render } from '@wordpress/element'
+import { createRoot } from '@wordpress/element'
 import { select, dispatch } from '@wordpress/data'
 import { createBlock } from '@wordpress/blocks'
 
@@ -37,19 +37,19 @@ export default ( endpoint, data, selectedBlock, replaceBlock = false ) => {
 		}
 
 		setTimeout( () => {
-			render(
-				<Modal
-					className="rank-math-contentai-modal rank-math-modal rank-math-error-modal"
-					onRequestClose={ () => {
-						jQuery( '.components-modal__screen-overlay' ).remove()
-						document.getElementById( 'rank-math-content-ai-modal-wrapper' ).remove()
-					} }
-					shouldCloseOnClickOutside={ true }
-				>
-					<ErrorMessage width={ 100 } />
-				</Modal>,
-				document.getElementById( 'rank-math-content-ai-modal-wrapper' )
-			)
+			createRoot( document.getElementById( 'rank-math-content-ai-modal-wrapper' ) )
+				.render(
+					<Modal
+						className="rank-math-contentai-modal rank-math-modal rank-math-error-modal"
+						onRequestClose={ () => {
+							jQuery( '.components-modal__screen-overlay' ).remove()
+							document.getElementById( 'rank-math-content-ai-modal-wrapper' ).remove()
+						} }
+						shouldCloseOnClickOutside={ true }
+					>
+						<ErrorMessage width={ 100 } />
+					</Modal>
+				)
 		}, 100 )
 
 		return

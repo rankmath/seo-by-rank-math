@@ -110,3 +110,8 @@
 		background-size: 20% 50% ,20% 50% ,20% 50%;
 	}
 }
+
+@mixin skeleton-background-animation {
+	background: rgba(0, 0, 0, 0.11);
+	animation: pulse 2s ease-in-out 0.5s infinite;
+}

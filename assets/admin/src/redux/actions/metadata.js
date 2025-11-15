@@ -40,8 +40,8 @@ export function updateAppData( key, value, metaKey = false, metaValue = null ) {
 /**
  * Update the app ui data in redux.
  *
- * @param {string}         key   The key for data to update.
- * @param {Object|string}  value The value to update.
+ * @param {string}        key   The key for data to update.
+ * @param {Object|string} value The value to update.
  *
  * @return {Object} An action for redux.
  */

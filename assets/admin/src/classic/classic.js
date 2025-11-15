@@ -3,19 +3,20 @@
  */
 import jQuery from 'jquery'
 import { isUndefined } from 'lodash'
-import { ResultManager, Helpers } from '@rankMath/analyzer'
 
 /**
  * WordPress dependencies
  */
 import { addAction, doAction, applyFilters } from '@wordpress/hooks'
 import { dispatch } from '@wordpress/data'
-import { createElement, render } from '@wordpress/element'
+import { createElement, createRoot } from '@wordpress/element'
 
 /**
  * Internal dependencies
  */
+import { ResultManager } from '@rankMath/analyzer'
 import Assessor from '@classic/Assessor'
+import removeDiacritics from '@helpers/removeDiacritics'
 import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
 import CommonFilters from '../commonFilters'
 import RankMathApp from '../rankMathApp'
@@ -77,11 +78,8 @@ class ClassicEditor {
 
 		rankMathAdmin.variableInserter( false )
 		setTimeout( () => {
-			render(
-				/* Filter to include components from the common editor file */
-				createElement( applyFilters( 'rank_math_app', {} ) ),
-				document.getElementById( 'rank-math-metabox-wrapper' )
-			)
+			/* Filter to include components from the common editor file */
+			createRoot( document.getElementById( 'rank-math-metabox-wrapper' ) ).render( createElement( applyFilters( 'rank_math_app', {} ) ) )
 		}, 1000 )
 	}
 
@@ -100,7 +98,7 @@ class ClassicEditor {
 	}
 
 	getPrimaryKeyword() {
-		return Helpers.removeDiacritics(
+		return removeDiacritics(
 			this.assessor.getPrimaryKeyword()
 		)
 	}
@@ -111,9 +109,7 @@ class ClassicEditor {
 			return ''
 		}
 
-		return Helpers.removeDiacritics(
-			keyword
-		)
+		return removeDiacritics( keyword )
 	}
 
 	getCollector() {

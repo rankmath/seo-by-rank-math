@@ -22,7 +22,6 @@ import getLink from '@helpers/getLink'
 
 const researchKeyword = ( data, setLoading, updateData ) => {
 	data.objectID = rankMath.objectID
-	data.objectType = rankMath.objectType
 	setLoading( true )
 	apiFetch( {
 		method: 'POST',

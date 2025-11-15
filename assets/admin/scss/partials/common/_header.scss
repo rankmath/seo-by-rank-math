@@ -72,7 +72,15 @@
 
 				margin: 11px auto 0 0;
 
-				span {
+				a {
+					text-decoration: none;
+
+					&:focus {
+						box-shadow: none;
+					}
+				}
+
+				span.rank-math-pro-badge {
 					vertical-align: 4px;
 				}
 

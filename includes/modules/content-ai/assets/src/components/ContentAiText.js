@@ -17,9 +17,9 @@ import getTypingWorker from '../helpers/getTypingWorker'
  * @param {string}  props.value           Content to add in the editor with typing effect.
  * @param {boolean} props.showWordCount   Whether to show word count.
  * @param {boolean} props.addTypingEffect Whether to show typing effect.
+ * @param {boolean} props.endpoint        Current endpoint.
  */
-export default ( { value, showWordCount = true, addTypingEffect = true } ) => {
-	// value = markdownConverter( value )
+export default ( { value, showWordCount = true, addTypingEffect = true, endpoint = '' } ) => {
 	const words = value.split( ' ' )
 
 	const [ typingEffect, setTypingEffect ] = useState( addTypingEffect ? '' : value )
@@ -27,7 +27,7 @@ export default ( { value, showWordCount = true, addTypingEffect = true } ) => {
 
 	if ( addTypingEffect ) {
 		useEffect( () => {
-			const worker = getTypingWorker()
+			const worker = getTypingWorker( endpoint )
 			setTypingWorker( worker )
 
 			worker.onmessage = ( event ) => {

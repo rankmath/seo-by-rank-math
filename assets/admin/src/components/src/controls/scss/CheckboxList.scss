@@ -1,4 +1,4 @@
-@import '../../../scss/variables';
+@import '../../../../../scss/variables';
 
 /*
  * Checkbox List
@@ -14,10 +14,11 @@
 
 	li {
 		float: left;
-		box-sizing: border-box;
-		width: 50%;
-		margin: 0 0 15px;
+
 		padding: 0 8px;
+		margin: 0 0 15px;
+		width: 50%;
+		box-sizing: border-box;
 		
 		.rank-math-checkbox-control {
 			width: 100% !important;
@@ -28,12 +29,15 @@
 
 				.components-checkbox-control {
 					&__label {
+						display: block;
+
+						width: 100%;
 						padding: 10px 12px 10px 38px;
-						background: $tertiary;
 						border: 1px solid $gray-10;
 						border-radius: 3px;
-						width: 100%;
-						display: block;
+
+						background: $tertiary;
+
 						cursor: pointer;
 
 						&:hover {
@@ -48,19 +52,17 @@
 					&__input-container {
 						position: absolute;
 						top: 50%;
-						transform: translateY(-50%);
 						left: 13px;
-						line-height: 10px;
+						transform: translateY(-50%);
+
 						width: fit-content;
 						height: fit-content;
 					}
 				}
 			}
 
-			&.is-disabled {
-				.components-checkbox-control__label {
-					opacity: 0.7;
-				}
+			&.is-disabled .components-checkbox-control__label {
+				opacity: 0.7;
 			}
 		}
 	}

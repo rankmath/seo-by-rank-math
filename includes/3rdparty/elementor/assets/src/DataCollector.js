@@ -3,9 +3,9 @@
  */
 import jQuery from 'jquery'
 import {
-	get,
 	map,
 	debounce,
+	includes,
 	forEach,
 	isString,
 	isEmpty,
@@ -42,6 +42,8 @@ class DataCollector {
 	 * Class constructor
 	 */
 	constructor() {
+		// This variable is used to prevent the Update button from activating when the schema data is updated after receiving the response from the update endpoint.
+		this.dataUpdated = false
 		this._data = {
 			id: false,
 			slug: false,
@@ -56,7 +58,7 @@ class DataCollector {
 		this.saveRedirection = this.saveRedirection.bind( this )
 		this.saveSchemas = this.saveSchemas.bind( this )
 		this.subscribeToElementor()
-		addAction( 'rank_math_elementor_before_save', 'rank-math', this.beforeSave );
+		addAction( 'rank_math_elementor_before_save', 'rank-math', this.beforeSave )
 
 		setTimeout( this.elementorPreviewLoaded.bind( this ), 5000 )
 	}
@@ -67,8 +69,10 @@ class DataCollector {
 	 * @return {void}
 	 */
 	elementorPreviewLoaded() {
-		addAction( 'rank_math_data_changed', 'rank-math', () => {
-			this.activateSaveButton()
+		addAction( 'rank_math_data_changed', 'rank-math', ( key ) => {
+			if ( ! includes( [ 'dirtyMetadata', 'score', 'lockModifiedDate' ], key ) && ! this.dataUpdated ) {
+				this.activateSaveButton()
+			}
 		} )
 
 		addAction( 'rank_math_update_app_ui', 'rank-math', ( key ) => {
@@ -86,13 +90,7 @@ class DataCollector {
 	 * @return {void}
 	 */
 	activateSaveButton() {
-		const footerSaver = get( elementor, 'saver.footerSaver', false )
-		if ( false !== footerSaver ) {
-			footerSaver.activateSaveButtons( document, true )
-			return
-		}
-
-		elementor.channels.editor.trigger( 'status:change', true )
+		window.top.$e.internal( 'document/save/set-is-modified', { status: true } )
 	}
 
 	/**
@@ -138,9 +136,20 @@ class DataCollector {
 	getContent() {
 		const content = []
 		this.getContentArea()
-			.find( '.elementor-widget-container' )
+			.find( '[data-element_type="widget"]' )
 			.each( ( index, element ) => {
-				content.push( this.decodeEntities( jQuery( element ).html() ) )
+				let html = jQuery( element ).html()
+				html = html.trim()
+				if ( ! html ) {
+					return
+				}
+				
+				html = html.replace(
+					/<div[^>]*class=["'][^"']*elementor-element-overlay[^"']*["'][^>]*>.*?<\/div>/gis,
+					''
+				)
+
+				content.push( this.decodeEntities( html ) )
 			} )
 
 		return content.join( '' )
@@ -221,7 +230,7 @@ class DataCollector {
 	/**
 	 * Get featured image.
 	 *
-	 * @return {null|Object} null or image datta.
+	 * @return {undefined|Object} null or image datta.
 	 */
 	getFeaturedImage() {
 		const { model } = elementor.settings.page
@@ -270,12 +279,10 @@ class DataCollector {
 	}
 
 	/**
-	 * Before save hook
+	 * Before save hook.
 	 *
-	 * @param {object} args The hook arguments.
-	 * @return {object} The hook result.
 	 */
-	beforeSave( args, result ) {
+	beforeSave() {
 		window.rankMathDataCollector.savePost()
 		window.rankMathDataCollector.saveRedirection()
 		window.rankMathDataCollector.saveSchemas()
@@ -310,11 +317,14 @@ class DataCollector {
 				content: this.getContent(),
 			},
 		} ).then( ( response ) => {
+			this.dataUpdated = true
 			if ( isString( response.slug ) ) {
 				dispatch( 'rank-math' ).updatePermalink( response.slug )
 			}
 
 			doAction( 'rank_math_metadata_updated', response )
+
+			this.dataUpdated = false
 		} )
 
 		dispatch( 'rank-math' ).resetDirtyMetadata()
@@ -366,6 +376,7 @@ class DataCollector {
 				schemas,
 			},
 		} ).then( ( response ) => {
+			this.dataUpdated = true
 			if ( ! isEmpty( response ) ) {
 				const newSchemas = { ...schemas }
 				const newEditSchemas = { ...editSchemas }
@@ -382,6 +393,8 @@ class DataCollector {
 			} else {
 				dispatch( 'rank-math' ).updateSchemas( schemas )
 			}
+
+			this.dataUpdated = false
 		} )
 	}
 

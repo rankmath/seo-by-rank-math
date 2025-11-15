@@ -1,15 +1,12 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/base';
-@import '../../../scss/mixins/shared';
-@import '../../../scss/mixins/styling';
+@import '../../../scss/main';
 
 /*
  * Select With Searchbox component.
  */
 .rank-math-select-variable {
 	position: relative;
+
 	background-color: $white;
-	max-width: 25rem;
 
 	&[aria-disabled="true"] {
 		pointer-events: none;
@@ -23,53 +20,57 @@
 		}
 
 		.rank-math-text-control + .rank-math-button {
-			border-width: 0 0 0 1px;
-			border-radius: 0 3px 3px 0;
 			top: 1px;
 			right: 0;
 			bottom: 1px;
+
+			border-width: 0 0 0 1px;
+			border-radius: 0 3px 3px 0;
 		}
 
 		.rank-math-textarea-control + .rank-math-button {
 			top: auto;
 			right: 1px;
 			bottom: 1px;
+
+			min-height: 40px;
 			border-width: 1px 0 0 1px;
 			border-radius: 3px 0 3px 0;
-			min-height: 40px;
 		}
 		
 		.rank-math-button {
+			position: absolute;
+
 			height: auto;
 			padding: 0 10px;
-			line-height: 40px;
 			box-shadow: none;
-			position: absolute;
+			
 			color: #858b90;
+			line-height: 40px;
 		}
 	}
 
 	.select-menu {
-		z-index: 999;
-		overflow: auto;
-		max-width: 450px;
-		border: 1px solid $gray-10;
-		border-radius: 6px;
-		background: $white;
 		position: absolute;
 		top: 48px;
 		right: 0;
-		height: 220px;
+		z-index: 999;
+		overflow: auto;
+
 		width: 80%;
+		max-width: 450px;
+		height: 220px;
+		border: 1px solid $gray;
+		border-radius: 6px;
+
+		background: $white;
 
 		&.is-textarea-menu {
 			top: 70px;
 		}
 
-		.components-search-control {
-			.components-base-control__field {
-				@include select-menu(10px, calc(100% - 20px));
-			}
+		.components-search-control .components-base-control__field {
+			@include select-menu(10px, calc(100% - 20px));
 		}
 
 		ul {
@@ -77,47 +78,50 @@
 
 			li {
 				position: relative;
+
 				margin: 0;
 				padding: 10px;
+
 				cursor: pointer;
 
 				&:not(:last-child) {
-					border-bottom: 1px solid $gray-10;
+					border-bottom: 1px solid $gray;
 				}
 
 				div:first-of-type {
-					@include flex-align();
+					@include flex-align;
 					justify-content: space-between;
 
 					p,
-					h1 {
-						margin: 0px;
+					strong {
+						margin: 0;
 					}
 
-					p, h1 {
+					p, 
+					strong {
 						font-size: 12px;
 						line-height: 16px;
-					}
-
-					h1 {
-						font-weight: 600;
 					}
 
 					p {
+						display: inline-block;
+
+						padding: 0;
+						margin: 0;
+						border-radius: 0.25rem;
+
+						background-color: $gray-20;
 						font-size: 12px;
 						line-height: 16px;
-						display: inline-block;
-						margin-top: 3px;
-						padding: .25em .4em;
-						border-radius: .25rem;
-						background-color: $gray-20;
 					}
 				}
 
 				.description {
-					font-style: italic;
 					display: block;
+
 					color: $dark_gray;
+					
+					font-style: italic;
 				}
 				
 				&:hover {
@@ -125,5 +129,15 @@
 				}
 			}
 		}
+	}
+}
+
+body.rtl {
+	.rank-math-select-variable .select-input .rank-math-textarea-control + .rank-math-button {
+		left: 1px;
+		right: auto;
+
+		border-width: 1px 1px 0 0;
+		border-radius: 0 3px 0 3px;
 	}
 }

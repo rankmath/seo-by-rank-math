@@ -11,6 +11,27 @@
 @import 'variables';
 @import 'mixins';
 
+#rank-math-dashboard-page .rank-math-tab-panel {
+	margin-top: 0;
+}
+
+.components-tab-panel__tab-content {
+	margin-bottom: -1rem;
+}
+
+.rank-math-wrap {
+	margin-right: 0;
+}
+
+.rank-math-breadcrumbs-wrap + .rank-math-notice {
+	max-width: 994px;
+	margin-right: 20px;
+}
+
+.center {
+	text-align: center;
+}
+
 @import 'partials/dashboard/list-icon';
 @import "partials/dashboard/switch";
 @import "partials/dashboard/modules";

@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch'
-import { dispatch } from '@wordpress/data'
+import { dispatch, select } from '@wordpress/data'
 
 /**
  * Internal dependencies

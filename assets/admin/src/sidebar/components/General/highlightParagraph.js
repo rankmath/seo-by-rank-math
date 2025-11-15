@@ -8,25 +8,20 @@ import { forEach, includes, remove } from 'lodash'
  */
 import { select, dispatch } from '@wordpress/data'
 import { count } from '@wordpress/wordcount'
+import { doAction } from '@wordpress/hooks'
 import '@wordpress/annotations'
 
 const ANNOTATION_NS = 'core/annotations'
 const ANNOTATION_SOURCE = 'rank-math-annotations'
 
-const tinyMceAnnotator = ( highlight ) => {
-	const editor = window.tinymce.get( window.wpActiveEditor )
-	if ( ! editor ) {
-		return false
-	}
+// Annotate nodes in Classic Editor.
+const annotateNodes = ( nodes, editor ) => {
+	for ( const node of nodes ) {
+		if ( node.localName === 'div' && node.children ) {
+			annotateNodes( node.children, editor )
+		}
 
-	if ( ! highlight ) {
-		editor.annotator.remove( ANNOTATION_SOURCE )
-		return
-	}
-
-	const editorChildren = editor.getBody().children || []
-	for ( const node of editorChildren ) {
-		if ( 'p' !== node.localName ) {
+		if ( node.localName !== 'p' ) {
 			continue
 		}
 
@@ -48,6 +43,24 @@ const tinyMceAnnotator = ( highlight ) => {
 
 		selection.empty()
 	}
+}
+
+// Annotate Long paragraphs in Classic Editor.
+const tinyMceAnnotator = ( highlight ) => {
+	const editor = window.tinymce.get( window.wpActiveEditor )
+	if ( ! editor ) {
+		return false
+	}
+
+	if ( ! highlight ) {
+		editor.focus()
+		editor.annotator.remove( ANNOTATION_SOURCE )
+		doAction( 'rank_math_annotations_removed' )
+		return
+	}
+
+	const editorChildren = editor.getBody().children || []
+	annotateNodes( editorChildren, editor )
 }
 
 export default ( highlight = true, highlightedParagraphs, updateHighlightedParagraphs ) => {

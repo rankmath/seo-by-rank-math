@@ -1,0 +1,77 @@
+.rank-math-panel {
+    border-color: $gray-10;
+
+    .components-panel {
+        &__body {
+            border-color: $gray-10;
+
+            > .components-panel__body-title {
+                background: $tertiary;
+            }
+
+            &-toggle.components-button {
+                min-height: 46px;
+                padding: 1em 1.5em;
+
+                color: $black-60;
+                font-size: 15px;
+                font-weight: 600;
+
+                svg {
+                    width: 30px;
+                    height: 30px;
+                    fill: $black-45;
+                }
+                
+                &:focus {
+                    box-shadow: none;
+                    outline: 2px solid $primary-light;
+                    outline-offset: -1px;
+                    
+                    color: #1d2327;
+                }
+            }
+        }
+
+        &__row {
+            margin: 1em 8px 0;
+        }
+    }
+}
+
+.copy-button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    margin: 2rem 0;
+
+    .success {
+        color: #007017;
+    }
+}
+
+.error-log-info {
+    margin-top: 1rem;
+}
+
+.rank-math-ui.status p.description {
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 782px) {
+    .rank-math-system-status .rank-math-table td {
+        display: block;
+
+        box-sizing: border-box;
+        width: 100%;
+        
+        word-wrap: break-word;
+
+        &:first-child {
+            padding-bottom: 0;
+
+            font-weight: 600;
+        }
+    }
+}

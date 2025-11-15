@@ -43,23 +43,24 @@
 
         margin: 5px 10px 0 0;
 
-        a {
+       a, button.is-link {
             display: inline-block;
 
             padding: 5px 0 1px;
 
             text-decoration: none;
 
-            color: $dark_gray;
+            color: $dark_gray !important;
 
             &:hover,
-            &.active {
-                color: $text;
-                border-bottom: 1px solid;
+            &.active,
+            &.is-active, {
+                color: $text !important;
+                border-bottom: 1px solid !important;
             }
 
             &:first-child {
-                margin-right: 7px;
+                margin-right: 7px !important;
             }
         }
     }
@@ -305,6 +306,29 @@
     }
 }
 
+.wrap {
+    .rank-math-notice {
+        margin: 5px 0 15px;
+    }
+}
+
+.wrap .rank-math-accordion-content .rank-math-notice {
+    background: $white;
+    border: 1px solid $gray;
+    border-left-width: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    padding: 1px 12px;
+
+    p {
+        margin: .5em 0;
+        padding: 2px;
+    }
+
+    &--error {
+        border-left-color: $error;
+    }
+}
+
 // Structure
 .two-col {
     display: flex;
@@ -322,8 +346,11 @@
 }
 
 // Error Log
-#error-log-wrapper .rank-math-code-box {
-    color: #fff;
+#error-log-wrapper {
+    .rank-math-code-box,
+    .rank-math-textarea-control .components-textarea-control__input {
+        color: #fff;
+    }
 }
 
 @media screen and (min-width: 48rem) {

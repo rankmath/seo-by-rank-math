@@ -132,6 +132,11 @@
 
 		header {
 			h3 {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 4px;
+
 				font-size: 1.0625rem;
 
 				margin: 1.5rem 0 .75rem;
@@ -186,7 +191,6 @@
 			font-size: 14px;
 			line-height: 30px;
 
-			display: none;
 			float: left;
 
 			height: 32px;
@@ -210,78 +214,15 @@
 			border-radius: 0 0 6px 6px;
 			background: #f8f9fa;
 
-			label {
-				color: #77797c;
-
-				&.rank-math-tooltip span {
-					visibility: hidden;
-
-					text-indent: 0;
-
-					color: #fff;
-					visibility: hidden;
-				}
+			.toggle-container {
+				position: absolute;
+				top: 50%;
+				right: 20px;
+				transform: translateY(-50%);
 			}
 
-			.cmb2-toggle {
-				float: right;
-
-				margin-top: 3px;
-
-				.cmb2-slider {
-					z-index: 1;
-
-					text-indent: -9999px;
-				}
-
-				.rank-math-tooltip {
-					span {
-						top: 50%;
-						right: 58px;
-						bottom: auto;
-						left: auto;
-
-						width: 110px;
-
-						transform: translate3d(-70%, -50%, 0);
-
-						&:after {
-							top: 50%;
-							right: -8px;
-							left: auto;
-
-							width: 0;
-							height: 0;
-
-							content: '';
-							transform: translate3d(0, -50%, 0);
-
-							border-width: 7px 0 7px 8px;
-							border-style: solid;
-							border-color: transparent transparent transparent #555d66;
-						}
-					}
-
-					&:hover {
-						span {
-							bottom: auto;
-
-							transform: translate3d(0, -50%, 0);
-
-							opacity: 1;
-						}
-					}
-				}
-
-				.input-loading {
-					display: none;
-				}
-			}
-		}
-
-		&.active {
-			.module-settings {
-				display: inline-block;
+			&::after {
+				display: none;
 			}
 		}
 

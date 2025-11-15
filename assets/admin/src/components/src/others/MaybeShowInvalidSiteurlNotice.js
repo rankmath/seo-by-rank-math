@@ -9,22 +9,18 @@ import { __, sprintf } from '@wordpress/i18n'
 import Notice from '../notice/Notice'
 
 /**
- * Dummy value
- */
-const isSiteUrlValid = false // self::is_site_url_valid()
-
-/**
  * Maybe show invalid site url notice component.
+ *
+ * @param {Object}  props                Component props
+ * @param {boolean} props.isSiteUrlValid Determines if the site is a valid one.
  */
-export default () => {
-	const { homeUrl } = rankMath
-
+export default ( { isSiteUrlValid } ) => {
 	if ( isSiteUrlValid ) {
 		return
 	}
 
 	return (
-		<Notice status="warning" className="notice-connect-disabled">
+		<Notice status="warning" className="notice notice-warning notice-alt notice-connect-disabled">
 			<span
 				dangerouslySetInnerHTML={ {
 					__html: sprintf(
@@ -35,10 +31,7 @@ export default () => {
 						),
 						`<strong>${ __( 'WordPress Address (URL)', 'rank-math' ) }</strong>`,
 						`<strong>${ __( 'Site Address (URL)', 'rank-math' ) }</strong>`,
-						`<a href="${ homeUrl }/wp-admin/options-general.php">${ __(
-							'WordPress General Settings',
-							'rank-math'
-						) }</a>`
+						`<a href="${ rankMath.optionsPage }">${ __( 'WordPress General Settings', 'rank-math' ) }</a>`
 					),
 				} }
 			/>

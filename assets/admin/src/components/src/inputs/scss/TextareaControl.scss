@@ -1,43 +1,61 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/base';
+@import '../../../scss/main';
 
 /*
  * Textarea Control component.
  */
-.rank-math-textarea-control {
-	&.components-base-control {
-		.components-base-control__field {
-			margin: 0px;
-		}
+.rank-math-textarea-control.components-base-control {
+	.components-base-control__field {
+		margin: 0;
+	}
 
+	.components-textarea-control__input {
+		padding: 2px 6px;
+
+		font-size: 14px;
+		line-height: 1.42857143;
+
+		overflow: auto;
+		resize: vertical;
+		
+		&:read-only {
+			background-color: $gray-30;
+		}
+		
+		@include input-style;
+	}
+
+	&.metabox,
+	&.code-box {
 		.components-textarea-control__input {
-			@include base-textarea-style;
-		}
+			display: block;
+			
+			@include metabox;
+			height: auto;
 
-		&.code-box, 
-		&.metabox {
-			.components-textarea-control__input {
-				@include metabox;
-				height: auto;
-				display: block;
-				resize: none;
+			resize: none;
+		}
+	}
+
+	&.code-box {
+		.components-textarea-control__input, 
+		.components-textarea-control__input:focus:not(:disabled) {
+			display: block;
+
+			width: 100%;
+			border-color: #32344b;
+			
+			color: #bbbec5;
+			background: #32344b;
+
+			resize: none;
+
+			&::placeholder {
+				color: #63686f;
 			}
 		}
+	}
 
-		&.code-box {
-			.components-textarea-control__input, 
-			.components-textarea-control__input:focus {
-				display: block;
-				resize: none;
-				width: 100%;
-				color: #bbbec5 !important;
-				border-color: #32344b !important;
-				background: #32344b !important;
-
-				&::placeholder {
-					color: #63686F;
-				}
-			}
-		}
+	&.code .components-textarea-control__input {
+		font-family: 'Consolas', 'Monaco', monospace;
 	}
 }

@@ -12,7 +12,41 @@ import { __ } from '@wordpress/i18n'
 import apiFetch from '@wordpress/api-fetch'
 import { select, dispatch } from '@wordpress/data'
 
-const errorMessage = __( 'Sorry, the request has failed. If the issue persists, please contact our Support for assistance.', 'rank-math' )
+/**
+ * Internal dependencies
+ */
+import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
+import addNotice from '@helpers/addNotice'
+
+let errorMessage = __( 'Sorry, the request has failed. If the issue persists, please contact our Support for assistance.', 'rank-math' )
+
+/**
+ * Show Truncated content notice when API returns input_truncated.
+ *
+ * @param {Object} result API result.
+ */
+const maybeShowTruncatedNotice = ( result ) => {
+	if ( ! result.input_truncated ) {
+		return
+	}
+
+	const message = __( 'AI Fix was applied only considering the beginning of the content, as the full content is too large to be processed by the AI.', 'rank-math' )
+	if ( isGutenbergAvailable() ) {
+		const notices = dispatch( 'core/notices' )
+		notices.createWarningNotice( message, {
+			id: 'aiInputTruncated',
+		} )
+
+		return
+	}
+
+	const target = jQuery( '.wp-header-end' ).length ? jQuery( '.wp-header-end' ) : jQuery( '.rank-math-header' )
+	if ( ! target.length ) {
+		return
+	}
+
+	addNotice( message, 'warning', target )
+}
 
 // Update credits shown on the page.
 const updateCredits = ( result, setCredits ) => {
@@ -97,6 +131,11 @@ const callAPI = ( { endpoint, attributes, callback, isChat, setCredits, repeat =
 					return
 				}
 
+				if ( 'default_prompts' === endpoint ) {
+					callback( result )
+					return
+				}
+				maybeShowTruncatedNotice( result )
 				saveOutput( { result } )
 
 				const response = ! isEmpty( result.meta ) ? result.meta : result.results
@@ -109,42 +148,18 @@ const callAPI = ( { endpoint, attributes, callback, isChat, setCredits, repeat =
 				updateCredits( result, setCredits )
 			},
 			error: ( jqXHR ) => {
-				// Try to parse the response payload.
 				try {
 					const result = JSON.parse( jqXHR.responseText )
 					if ( ! isEmpty( result.err_key ) ) {
-						if ( 'not_found' === result.err_key && repeat < 2 ) {
-							apiFetch( {
-								method: 'GET',
-								path: '/rankmath/v1/ca/migrateUser',
-							} )
-								.then( ( response ) => {
-									if ( 'completed' === response ) {
-										callAPI(
-											{
-												endpoint,
-												attributes,
-												callback,
-												isChat,
-												setCredits,
-												repeat: repeat + 1,
-												data,
-											}
-										)
-									}
-								} )
-								.catch( ( error ) => {
-									// eslint-disable-next-line no-console
-									console.log( error )
-								} )
-							return
-						}
-
 						const errorMessages = data.errors
-						callback( { error: ! isUndefined( errorMessages[ result.err_key ] ) ? errorMessages[ result.err_key ] : errorMessage } )
+						const fallbackError = ! isUndefined( result.message ) ? result.message : errorMessage
+						callback( { error: ! isUndefined( errorMessages[ result.err_key ] ) ? errorMessages[ result.err_key ] : fallbackError } )
 						return
 					}
 				} catch ( error ) {
+					if ( jqXHR.status === 413 ) {
+						errorMessage = __( 'Error: The request payload is too large!', 'rank-math' )
+					}
 					// Fallback to a generic error message if try statement fails.
 					callback( { error: errorMessage } )
 				}
@@ -175,7 +190,6 @@ export default ( endpoint, attributes = {}, callback, isChat = false, setCredits
 			api_key: data.api_key,
 			site_url: data.site_url,
 			plugin_version: rankMath.version,
-			debug: '1',
 		}
 	)
 

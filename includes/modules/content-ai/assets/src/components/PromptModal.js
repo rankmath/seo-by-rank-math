@@ -1,8 +1,7 @@
 /**
  * External dependencies
  */
-import jQuery from 'jquery'
-import { map, lowerCase, isEmpty, isUndefined, find, compact, reverse } from 'lodash'
+import { map, isEmpty, isUndefined, find, compact, reverse } from 'lodash'
 import classnames from 'classnames'
 
 /**
@@ -17,6 +16,7 @@ import apiFetch from '@wordpress/api-fetch'
  * Internal dependencies
  */
 import SearchField from '../components/SearchField'
+import getData from '../helpers/getData'
 import ErrorCTA from '@components/ErrorCTA'
 
 // Create dummy constant with json data.
@@ -133,38 +133,24 @@ export default ( props ) => {
 						key="update-library"
 						onClick={ () => {
 							setUpdating( true )
-							jQuery.ajax(
-								{
-									url: data.url + 'default_prompts',
-									type: 'GET',
-									success: ( result ) => {
+							getData( 'default_prompts', {}, ( result ) => {
+								apiFetch( {
+									method: 'POST',
+									path: '/rankmath/v1/ca/savePrompts',
+									data: { prompts: result },
+								} )
+									.then( ( response ) => {
+										updateData( 'prompts', response )
+										setPrompts( response )
+										setPrompt( 0 )
 										setUpdating( false )
-										if ( isEmpty( result ) ) {
-											console.log( 'No data found' )
-											return
-										}
-
-										apiFetch( {
-											method: 'POST',
-											path: '/rankmath/v1/ca/savePrompts',
-											data: { prompts: result },
-										} )
-											.then( ( response ) => {
-												updateData( 'prompts', response )
-												setPrompts( response )
-												setPrompt( 0 )
-											} )
-											.catch( ( error ) => {
-												// eslint-disable-next-line no-console
-												console.log( error )
-											} )
-									},
-									error: () => {
-										console.error( 'Failed, please try again later' )
+									} )
+									.catch( ( error ) => {
+										// eslint-disable-next-line no-console
+										console.log( error )
 										setUpdating( false )
-									},
-								}
-							)
+									} )
+							} )
 						} }
 					>
 						{ updatingLibrary ? __( 'Updating…', 'rank-math' ) : __( 'Update Library', 'rank-math' ) }
@@ -192,7 +178,7 @@ export default ( props ) => {
 									{
 										// Map PromptArray
 										map( prompts, ( prompt, index ) => {
-											if ( isUndefined( prompt ) || isUndefined( prompt.Prompt ) || ( search && ! lowerCase( prompt.PromptName ).includes( lowerCase( search ) ) ) ) {
+											if ( isUndefined( prompt ) || isUndefined( prompt.Prompt ) || ( search && ! prompt.PromptName.toLowerCase().includes( search.toLowerCase() ) ) ) {
 												return
 											}
 
@@ -316,7 +302,7 @@ export default ( props ) => {
 													},
 												} )
 													.then( ( newPrompts ) => {
-														data.prompts.push( newPrompts[ newPrompts.length - 1 ] )
+														data.prompts = newPrompts
 														updateData( 'prompts', newPrompts )
 														setCategory( 'custom' )
 
@@ -345,9 +331,7 @@ export default ( props ) => {
 							<div className="prompt-details">
 								<div className="prompt-preview">
 									<h3>{ __( 'Preview', 'rank-math' ) }</h3>
-									<div
-										className="prompt-preview-content"
-									>
+									<div className="prompt-preview-content">
 										<p
 											dangerouslySetInnerHTML={ {
 												__html: isUndefined( prompts[ selectedPrompt ].Prompt ) ? '' : prompts[ selectedPrompt ].Prompt.replaceAll( '[', '<span>[' ).replaceAll( ']', ']</span>' ),

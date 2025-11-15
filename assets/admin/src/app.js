@@ -1,6 +1,12 @@
-import App from './sidebar/App'
-
+/**
+ * WordPress dependencies
+ */
 import { addAction, addFilter } from '@wordpress/hooks'
+
+/**
+ * Internal dependencies
+ */
+import App from './sidebar/App'
 
 addAction( 'rank_math_loaded', 'rank-math', () => {
 	addFilter(

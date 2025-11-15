@@ -6,7 +6,8 @@ import { map } from 'lodash'
 /**
  * Internal dependencies
  */
-import { Helpers } from '@rankMath/analyzer'
+import { sanitizeText } from '@helpers/cleanText'
+import removeDiacritics from '@helpers/removeDiacritics'
 
 /**
  * Sanitize the choices
@@ -31,10 +32,10 @@ export function sanitizePermalink( slug ) {
 	slug = slug.replace( /,/g, '' )
 
 	// Remove diacritics/remove accents
-	slug = Helpers.removeDiacritics( slug )
+	slug = removeDiacritics( slug )
 
 	// Sanitize text
-	slug = Helpers.sanitizeText( slug )
+	slug = sanitizeText( slug )
 
 	return slug
 }

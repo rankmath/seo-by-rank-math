@@ -29,6 +29,7 @@ const KeywordsTable = ( props ) => {
 	// Component state.
 	const [ rows, setRows ] = useState( false )
 	const [ summary, setSummary ] = useState( false )
+	const [ totalRows, setTotalRows ] = useState( 0 )
 	const intersectedState = useState( false )
 	const [ isIntersected ] = intersectedState
 
@@ -49,6 +50,14 @@ const KeywordsTable = ( props ) => {
 		const responseSummary = await select( 'rank-math' ).getKeywordsSummary()
 		if ( ! isEmpty( responseSummary ) && responseSummary !== summary ) {
 			setSummary( responseSummary )
+		}
+
+		const keywordsOverview = await select( 'rank-math' ).getKeywordsOverview()
+		if ( ! isEmpty( keywordsOverview ) ) {
+			const total = [ 'top3', 'top10', 'top50', 'top100' ].reduce((sum, key) => {
+				return sum + parseInt( get( keywordsOverview, [ 'topKeywords', key, 'total' ], 0 ) )
+			}, 0 )
+			setTotalRows(total)
 		}
 	}, [ isIntersected, paged, rows, summary ] )
 
@@ -91,7 +100,7 @@ const KeywordsTable = ( props ) => {
 			},
 			{
 				key: 'ctr',
-				label: __( 'Avg. CTR', 'rank-math' ),
+				label: __( 'CTR', 'rank-math' ),
 				cellClassName: 'rank-math-col-ctr',
 			},
 			{
@@ -108,15 +117,15 @@ const KeywordsTable = ( props ) => {
 			value: get( summary, [ 'keywords', 'total' ], 0 ),
 		},
 		{
-			label: __( 'Search Impressions', 'rank-math' ),
+			label: __( 'Total Impressions', 'rank-math' ),
 			value: humanNumber( get( summary, [ 'impressions', 'total' ], 0 ) ),
 		},
 		{
-			label: __( 'Avg. CTR', 'rank-math' ),
+			label: __( 'CTR', 'rank-math' ),
 			value: humanNumber( get( summary, [ 'ctr', 'total' ], 0 ) ),
 		},
 		{
-			label: __( 'Search Clicks', 'rank-math' ),
+			label: __( 'Total Clicks', 'rank-math' ),
 			value: humanNumber( get( summary, [ 'clicks', 'total' ], 0 ) ),
 		},
 	]
@@ -146,7 +155,7 @@ const KeywordsTable = ( props ) => {
 					downloadable={ true }
 					query={ query }
 					rowsPerPage={ rowsPerPage }
-					totalRows={ parseInt( get( summary, [ 'keywords', 'total' ], 0 ) ) }
+					totalRows={ totalRows }
 					summary={ tableSummary }
 					isLoading={ isEmpty( rows ) }
 					showPageArrowsLabel={ false }

@@ -1,8 +1,13 @@
 /**
  * External dependencies
  */
-import { map } from 'lodash'
+import { map, slice } from 'lodash'
 import classNames from 'classnames'
+
+/**
+ * WordPress dependencies
+ */
+import { isValidElement, RawHTML } from '@wordpress/element'
 
 /**
  * Internal dependencies
@@ -12,74 +17,65 @@ import './scss/Table.scss'
 /**
  * Table component.
  *
- * @param {Object}  props           Component props.
- * @param {Array}   props.data      Items to be rendered into the table.
- * @param {Array}   props.columns   The table heading.
- * @param {string}  props.className CSS class for addtional styling.
- * @param {boolean} props.variant   Specifies the table's style. Accepted value: "wizard".
+ * @param {Object}  props           Component props
+ * @param {string}  props.size      The size of the table. Accepted value is 'small'
+ * @param {string}  props.type      Table type. Eg: striped.
+ * @param {Object}  props.fields    The table fields in the format of {label: value}
+ * @param {string}  props.className CSS class for addtional styling
+ * @param {boolean} props.addHeader If true, renders the first table column as a table heading
+ * @param {boolean} props.useThOnly If true, th is used instead of td.
  */
-export default ( {
-	data,
-	columns,
-	variant,
-	className,
-	...additionalProps
-} ) => {
-	className = classNames( variant, className, 'rank-math-table' )
-
-	const tableProps = {
-		...additionalProps,
+export default ( { fields, size, type = 'striped', className, addHeader = true, useThOnly, ...additionalProps } ) => {
+	className = classNames(
+		'rank-math-table wp-list-table widefat',
 		className,
-	}
+		size,
+		{
+			striped: type === 'striped',
+		}
+	)
 
-	if ( variant === 'wizard' ) {
-		return (
-			<table { ...tableProps }>
-				<tbody>
-					{ map( data, ( { field, passed, warning, ...thProps }, index ) => (
-						<tr key={ index }>
-							<th
-								{ ...thProps }
-								className={ `
-									${ passed ? 'is-pass' : 'is-fail' } 
-									${ warning ? 'is-warning' : '' }
-								` }
-							>
-								{ field }
-							</th>
-						</tr>
-					) ) }
-				</tbody>
-			</table>
-		)
-	}
+	const header = addHeader ? fields[ 0 ] : null
+	const bodyRows = addHeader ? slice( fields, 1 ) : fields
+	const CellTag = useThOnly ? 'th' : 'td'
+	const columnCount = addHeader ? header.length : Math.max( ...fields.map( ( row ) => row.length ) )
 
 	return (
-		<table { ...tableProps }>
-			{ columns && (
-				<thead>
-					<tr>
-						{ map( columns, ( { field, ...thProps } ) => (
-							<th { ...thProps }>{ field }</th>
-						) ) }
-					</tr>
-				</thead>
-			) }
-
+		<table className={ className } { ...additionalProps }>
+			<thead>
+				<tr className="bg-gray-100">
+					{
+						map( header, ( cell, index ) => (
+							<th key={ index }>
+								{ cell }
+							</th>
+						) )
+					}
+				</tr>
+			</thead>
 			<tbody>
-				{ map( data, ( row, index ) => (
-					<tr key={ index }>
-						{ columns
-							? map( columns, ( { key } ) => (
-								<td key={ key }>{ row[ key ] }</td>
-							) )
-							: map( row, ( { field, ...tdProps }, tdIndex ) => (
-								<td { ...tdProps } key={ tdIndex }>
-									{ field }
-								</td>
-							) ) }
-					</tr>
-				) ) }
+				{
+					map( bodyRows, ( row, rowIndex ) => {
+						const rowLength = row.length
+						const lastIndex = rowLength - 1
+						const needsColspan = rowLength < columnCount
+						return (
+							<tr key={ rowIndex }>
+								{ map( row, ( cell, cellIndex ) => {
+									const isLastCell = cellIndex === lastIndex && needsColspan
+									return (
+										<CellTag
+											key={ cellIndex }
+											colSpan={ isLastCell ? columnCount - cellIndex : undefined }
+										>
+											{ isValidElement( cell ) ? cell : <RawHTML>{ cell }</RawHTML> }
+										</CellTag>
+									)
+								} ) }
+							</tr>
+						)
+					} )
+				}
 			</tbody>
 		</table>
 	)

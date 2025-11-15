@@ -1,0 +1,73 @@
+// Bar Chart.
+.chart {
+	width: 100%;
+	margin: 0;
+
+	li {
+		position: relative;
+
+		display: block;
+
+		margin-bottom: 1.25rem;
+
+		&:last-child{
+			margin-bottom: 0;
+		}
+	}
+
+	.chart-bar { 
+		position: relative;
+
+		&:before {
+			@include position( absolute, 0 null null 0 );
+
+			width: 100%;
+			height: 100%;
+
+			content: '';
+
+			border-radius: 6px;
+			background: $light-gray;
+		}
+
+		&-good span {
+			background: $color-1;
+		}
+
+		&-average span {
+			background: $color-4;
+		}
+
+		&-bad span {
+			background: $color-3;
+		}
+	}
+
+	span {
+		display: block;
+
+		position: relative;
+		z-index: 1;
+
+		height: 13px;
+		margin: 0;
+		border-radius: 6px;
+
+		background: rgba(209, 236, 250, .75);
+
+		-webkit-animation: drawchart 1s ease-in-out;
+		        animation: drawchart 1s ease-in-out;
+	}
+}
+
+@-webkit-keyframes drawchart {
+	0%{
+		width: 0;
+	}
+}
+
+@keyframes drawchart {
+	0%{
+		width: 0;
+	}
+}

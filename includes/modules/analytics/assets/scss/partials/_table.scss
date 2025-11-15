@@ -51,6 +51,11 @@
 	&-ellipsis-menu {
 		&__item {
 			padding: 5px 0;
+			cursor: pointer;
+
+			.components-form-toggle {
+				pointer-events: none;
+			}
 		}
 
 		&__title {

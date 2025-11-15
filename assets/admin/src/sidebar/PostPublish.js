@@ -1,3 +1,5 @@
+/* global mixpanel */
+
 /**
  * External dependencies
  */
@@ -58,6 +60,33 @@ const PostPublish = ( { title, permalink } ) => {
 						<Dashicon icon="email" />
 					</a>
 				</div>
+			</div>
+			<div style={ { marginTop: '1rem' } }>
+				<a
+					href="https://www.socialpilot.co/social-media-seo"
+					target="_blank"
+					rel="noopener noreferrer"
+					onClick={ () => {
+						if ( isEmpty( rankMath.tracking ) ) {
+							return
+						}
+
+						const { plugin, email, language, path } = rankMath.tracking
+
+						mixpanel.identify( email )
+						mixpanel.track( 'Button Clicked', {
+							button: 'Schedule this Post Using SocialPilot',
+							context: 'wp_plugin',
+							brand: 'rankmath',
+							application: 'rankmath',
+							plugin,
+							path,
+							language,
+						} )
+					} }
+				>
+					{ __( 'Schedule this Post Using SocialPilot', 'rank-math' ) }
+				</a>
 			</div>
 		</Fragment>
 	)

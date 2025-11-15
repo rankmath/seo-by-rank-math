@@ -3,6 +3,17 @@
  */
 import jQuery from 'jquery'
 
+/**
+ * WordPress Dependencies
+ */
+import { createRoot } from '@wordpress/element'
+
+/**
+ * Internal dependencies
+ */
+import Form from './Form'
+import { getStore } from '@rank-math-settings/redux/store'
+
 /*!
  * Rank Math - Redirections
  *
@@ -10,21 +21,45 @@ import jQuery from 'jquery'
  * @author  Rank Math
  */
 
+const redirectionsPage = `${ rankMath.adminurl }?page=rank-math-redirections`;
+
 ( function( $ ) {
 	'use strict'
 	// Document Ready
 	$( function() {
+		getStore()
 		const rankMathRedirections = {
 			init() {
 				this.wrap = $( '.rank-math-redirections-wrap' )
-
+				this.defaultRedirection = {
+					header_code: '301',
+					status: 'active',
+					url_to: '',
+					sources: [
+						{
+							comparison: 'exact',
+							pattern: '',
+						},
+					],
+				}
+				this.addForm()
 				this.addNew()
+				this.edit()
 				this.importExport()
 				this.showMore()
 				this.columnActions()
-				this.validateForm()
-				this.separateRedirectionTypes()
 				this.explodePastedContent()
+			},
+
+			/**
+			 * Add Redirection Form.
+			 */
+			addForm() {
+				createRoot(
+					document.getElementById( 'rank-math-redirections-form' )
+				).render(
+					<Form defaultRedirection={ this.defaultRedirection } />
+				)
 			},
 
 			/**
@@ -47,17 +82,14 @@ import jQuery from 'jquery'
 
 						if ( form.is( ':visible' ) ) {
 							form.hide()
+							window.history.pushState( null, {}, redirectionsPage )
 							return
 						}
 
-						// Reset data.
-						form.find(
-							'#sources_repeat > .cmb-repeatable-grouping:not(:eq(0))'
-						).remove()
-						form.find( '> form' )
-							.get( 0 )
-							.reset()
+						wp.data.dispatch( 'rank-math-settings' ).updateData( { ...self.defaultRedirection } )
+						// Show form.
 						form.show()
+						window.history.pushState( null, {}, event.currentTarget.href )
 
 						page.on(
 							'scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove',
@@ -78,22 +110,89 @@ import jQuery from 'jquery'
 					}
 				)
 
-				this.wrap.on( 'click', '.button-link-delete', function(
-					event
-				) {
-					event.preventDefault()
+				this.wrap.on(
+					'click',
+					'.rank-math-button.is-destructive',
+					function( event ) {
+						event.preventDefault()
 
-					const $this = $( this )
-					$this.closest( '.rank-math-editcreate-form' ).hide()
-				} )
+						const $this = $( this )
+						$this.closest( '.rank-math-editcreate-form' ).hide()
+
+						window.history.pushState( null, {}, redirectionsPage )
+					}
+				)
+			},
+
+			/**
+			 * Edit Existing Redirection Rule.
+			 */
+			edit() {
+				const self = this,
+					page = $( 'html, body' )
+
+				this.wrap.on(
+					'click',
+					'.value-url_from',
+					( event ) => {
+						event.preventDefault()
+
+						const $target = $( event.currentTarget )
+
+						// Check if the clicked element is inside .rank-math-more
+						if ( $target.closest( '.rank-math-more' ).length ) {
+							$target.closest( '.rank-math-more' ).parent().find( '.rank-math-redirection-edit' ).trigger( 'click' )
+						} else {
+							$target.parent().find( '.rank-math-redirection-edit' ).trigger( 'click' )
+						}
+
+						return false
+					}
+				)
+
+				this.wrap.on(
+					'click',
+					'.rank-math-redirection-edit',
+					function( event ) {
+						event.preventDefault()
+						const form = self.wrap.find(
+							'.rank-math-editcreate-form'
+						)
+
+						self.wrap.find( '.rank-math-importexport-form' ).hide()
+
+						const data = jQuery( this ).data( 'redirection' )
+						wp.data.dispatch( 'rank-math-settings' ).updateData( { ...data } )
+
+						// Show form.
+						form.show()
+						window.history.pushState( null, {}, event.currentTarget.href )
+
+						page.on(
+							'scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove',
+							function() {
+								page.stop()
+							}
+						)
+
+						page.animate(
+							{ scrollTop: form.position().top },
+							'slow',
+							function() {
+								page.off(
+									'scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove'
+								)
+							}
+						)
+					}
+				)
 			},
 
 			/**
 			 * Set up import/export panel.
 			 */
 			importExport() {
-				const self = this,
-					page = $( 'html, body' )
+				const self = this
 
 				this.wrap.on(
 					'click',
@@ -104,99 +203,19 @@ import jQuery from 'jquery'
 							'.rank-math-importexport-form'
 						)
 
+						if ( form.is( ':visible' ) ) {
+							form.hide()
+							window.history.pushState( null, {}, redirectionsPage )
+							return
+						}
+
 						self.wrap.find( '.rank-math-editcreate-form' ).hide()
 
 						form.slideToggle( 200 )
+
+						window.history.pushState( null, {}, event.currentTarget.href )
 					}
 				)
-			},
-
-			/**
-			 * Validate add/edit redirection form.
-			 */
-			validateForm() {
-				const buttonPrimary = $(
-					'.rank-math-editcreate-form .button-primary'
-				)
-				$( '.rank-math-editcreate-form > .cmb-form' ).on(
-					'submit',
-					function( event ) {
-						const form = $( this ),
-							errorElems = form.find( '.validation-message' )
-						let hasError = false
-
-						buttonPrimary.prop( 'disabled', true )
-
-						// Clear error.
-						form.find( '.invalid' ).removeClass( 'invalid' )
-						errorElems.each( function() {
-							$( this )
-								.prev( 'br' )
-								.remove()
-							$( this ).remove()
-						} )
-
-						// Handle error.
-						form.find( 'input[type="text"]:not(.exclude)' ).each(
-							function() {
-								const input = $( this )
-								if ( ! input.val() || ! input.val().trim() ) {
-									hasError = true
-									input
-										.addClass( 'invalid' )
-										.after(
-											$(
-												'<br><span class="validation-message">' +
-													rankMath.emptyError +
-													'</span>'
-											)
-										)
-								}
-							}
-						)
-
-						if ( hasError ) {
-							event.preventDefault()
-							buttonPrimary.prop( 'disabled', false )
-						}
-					}
-				)
-			},
-
-			/**
-			 * Visually separate 410 & 451 from the rest since these are different from the other redirections.
-			 */
-			separateRedirectionTypes() {
-				const row = this.wrap.find( '.cmb2-id-header-code' )
-
-				if ( ! row.length ) {
-					return
-				}
-
-				const clonedRow = row.clone()
-				clonedRow
-					.find( '.cmb-th label' )
-					.text( rankMath.maintenanceMode )
-				clonedRow.find( '.cmb2-radio-list li:lt(3)' ).remove()
-
-				row.after( clonedRow )
-				row.addClass( 'nob nopb' )
-				row.find( '.cmb2-radio-list li:gt(2)' ).remove()
-
-				const group = $( '.cmb2-id-url-to' ),
-					field = $( '#url_to' )
-
-				$( '[name=header_code]' ).on( 'change', function() {
-					const value = parseInt( $( this ).val() )
-					if ( 410 === value || 451 === value ) {
-						field.addClass( 'exclude' )
-						group.addClass( 'hidden' )
-					} else {
-						field.removeClass( 'exclude' )
-						group.removeClass( 'hidden' )
-					}
-				} )
-				$( '[name=header_code]:checked' ).trigger( 'change' )
 			},
 
 			/**
@@ -257,9 +276,7 @@ import jQuery from 'jquery'
 			 * Show more redirection sources.
 			 */
 			showMore() {
-				this.wrap.on( 'click', '.rank-math-showmore', function(
-					event
-				) {
+				this.wrap.on( 'click', '.rank-math-showmore', function( event ) {
 					event.preventDefault()
 
 					const $this = $( this )
@@ -267,9 +284,7 @@ import jQuery from 'jquery'
 					$this.next( '.rank-math-more' ).slideDown()
 				} )
 
-				this.wrap.on( 'click', '.rank-math-hidemore', function(
-					event
-				) {
+				this.wrap.on( 'click', '.rank-math-hidemore', function( event ) {
 					event.preventDefault()
 
 					const $this = $( this ).parent()

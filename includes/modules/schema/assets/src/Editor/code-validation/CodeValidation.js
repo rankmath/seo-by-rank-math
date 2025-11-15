@@ -8,6 +8,7 @@ import { Fragment } from '@wordpress/element'
  * Internal dependencies
  */
 import { prettyJSON } from '@schema/functions'
+import getLink from '@helpers/getLink'
 
 const exampleCodeValidation = {
 	'@context': 'https://schema.org/',
@@ -69,7 +70,14 @@ const CodeValidation = () => {
 							<li>{ __( 'Live testing with Google', 'rank-math' ) }</li>
 							<li>{ __( 'No other SEO plugin offers this feature', 'rank-math' ) }</li>
 						</ul>
-						<a className="button button-primary is-green" href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=Code+Validation&utm_campaign=WP" rel="noreferrer noopener" target="_blank">{ __( 'Upgrade', 'rank-math' ) }</a>
+						<a
+							className="button button-primary is-green"
+							href={ getLink( 'pro', 'Code Validation' ) }
+							rel="noreferrer noopener"
+							target="_blank"
+						>
+							{ __( 'Upgrade', 'rank-math' ) }
+						</a>
 					</div>
 				</div>
 			</div>

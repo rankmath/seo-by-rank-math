@@ -1,6 +1,7 @@
 // main: ../sidebar.scss
 
 @import 'tagify';
+@import './keyword-intent';
 
 .#{$namespace}-focus-keyword {
 	position: relative;

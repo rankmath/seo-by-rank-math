@@ -1,59 +1,91 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/base';
-@import '../../../scss/mixins/formcontrol';
-@import '../../../scss/mixins/shared';
+@import '../../../scss/main';
 
 /*
  * Select With Searchbox component.
  */
 .rank-math-select-with-searchbox {
 	position: relative;
-	background-color: $white;
+
 	max-width: 25rem;
-	
+
+	background-color: $white;
+
 	label {
-		@include control-label-style;
+		@include form-control-label;
 		line-height: 1.4em;
 	}
 	
 	.components-button.is-secondary {
-		box-sizing: border-box;
-		display: block;
-		border-radius: 4px;
-		background-color: $white;
-  		border: 1px solid $gray-70;
-		color: #444;
-		line-height: 18px;
-		box-shadow: none;
+		display: flex;
 		justify-content: space-between;
-  		display: flex;
+
 		@include metabox;
+		border-width: 1px;
+		border-style: solid;
+		border-radius: 4px;
+		box-sizing: border-box;
+		box-shadow: none;
+
+		color: $black-40;
+		background-color: $white;
+		line-height: 18px;
 
 		&::after {
 			content: "\f140";
-			font-size: 18px;
-			color: #888;
-			font-family: 'dashicons';
+
 			margin-left: auto;
+
+			color: #888;
+			font-size: 18px;
+			font-family: 'dashicons';
+		}
+
+		.select-label {
+			flex: 1;
+			margin-right: 6px;
+			text-align: left;
+		}
+
+		.clear-selection-icon {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+
+			width: 22px;
+			height: 22px;
+
+			color: $black-40;
+			background-color: transparent;
+			cursor: pointer;
+
+			&:hover {
+				color: #cc1818;
+			}
+
+			svg {
+				display: block;
+			}
 		}
 
 		&:hover,
 		&:active {
 			&:not(:focus):not(:disabled) {
 				box-shadow: none;
+
 				color: currentColor;
 				background-color: $white;
 			}
 		}
 
 		&:focus:not(:disabled) {
-			color: #444;
+			color: $black-40;
 			background-color: $white;
 		}
 		
 		&:disabled {
+			color: $black-30;
+
 			pointer-events: none;
-			color: rgba(44, 51, 56, 0.5);
 
 			&::after {
 				color: currentColor;
@@ -61,8 +93,8 @@
 		}
 
 		&[aria-expanded="true"] {
+			border-bottom-right-radius: 0;
 			border-bottom-left-radius: 0;
-  			border-bottom-right-radius: 0;
 
 			&::after {
 				transform: rotate(180deg);
@@ -71,50 +103,68 @@
 	}
 
 	.select-menu {
-		background-color: $white;
-  		border: 1px solid $gray-70;
-		border-radius: 4px;
-		box-sizing: border-box;
 		display: block;
+
 		position: absolute;
-		left: -100000px;
-		width: 100%;
-		z-index: 1051;
 		left: 0;
+		z-index: 1051;
+
+		width: 100%;
+		border: 1px solid $dark_gray;
 		border-top: none;
+		border-radius: 4px;
 		border-top-left-radius: 0;
   		border-top-right-radius: 0;
-		border-color: $dark_gray;
+		box-sizing: border-box;
 
-		.components-search-control {
-			.components-base-control__field {
-				@include select-menu(4px, calc(100% - 8px));
-			}
+		background-color: $white;
+
+		.components-search-control .components-base-control__field {
+			@include select-menu(4px, calc(100% - 8px));
 		}
 
 		ul {
-			max-height: 200px;
-  			overflow-y: auto;
 			margin: 0;
+			max-height: 200px;
+
+			overflow-y: auto;
 
 			li {
-				margin-bottom: 6px;
-				cursor: pointer;
 				padding: 6px;
+				margin-bottom: 6px;
+				
 				font-size: 13px;
 
+				cursor: pointer;
+
 				&:hover {
+					color: $white;
 					background-color: #5897fb;
-  					color: $white;
 				}
 			}
 		}
 
 		.no-results {
-			margin: 6px;
 			display: block;
+
+			margin: 6px;
+			
 			font-size: 13px;
-			margin-bottom: 6px
 		}
+	}
+}
+
+body.rtl {
+	.rank-math-select-variable .select-input .rank-math-text-control + .rank-math-button {
+		right: auto;
+		left: 0;
+
+		border-width: 0 1px 0 0;
+		border-radius: 3px 0 0 3px;
+	}
+
+	.rank-math-select-with-searchbox .components-button.is-secondary::after {
+		margin-right: auto;
+		margin-left: 0;
 	}
 }

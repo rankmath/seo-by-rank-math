@@ -39,6 +39,13 @@ const AnalyticItem = ( { title, tooltip, stats, graph, dataKey } ) => {
 							wrapperStyle={ { zIndex: 10, marginTop: 50 } }
 							wrapperClassName="rank-math-graph-tooltip"
 							formatter={ ( value, name ) => {
+								if ( 0 === value ) {
+									return [
+										'n/a',
+										name
+									]
+								}
+
 								if ( name === 'position' ) {
 									return [
 										-value,

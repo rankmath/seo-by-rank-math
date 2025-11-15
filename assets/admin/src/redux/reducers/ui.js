@@ -21,7 +21,7 @@ const DEFAULT_STATE = {
 	// Serp Preview.
 	serpTitle: '',
 	serpSlug: '',
-	serpDescription: '',
+	serpDescription: get( rankMath.assessor, 'serpData.description', '' ),
 	isSnippetEditorOpen: false,
 	snippetPreviewType: '',
 	refreshResults: '',
@@ -41,8 +41,6 @@ const DEFAULT_STATE = {
 	// Divi Frontend Builder.
 	isDiviRankMathModalActive: false,
 	isDiviPageSettingsBarActive: false,
-
-	keywordsData: get( rankMath, 'ca_data', [] ),
 }
 
 /**

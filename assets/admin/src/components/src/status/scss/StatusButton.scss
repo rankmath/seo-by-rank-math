@@ -1,60 +1,53 @@
-@import '../../../scss/variables';
+@import '../../../../../scss/variables';
 
-/*
- * Mixin function used to style Status Button's validation state.
- */
+/* Style the button's validation state */
 @mixin status-validation($color) {
 	border: 1px solid $color;
-	background-color: $color;
-	color: $white;
 
-	svg {
-		path {
-			fill: $white;
-		}
+	color: $white;
+	background-color: $color;
+
+	svg path {
+		fill: $white;
 	}
 }
 
 /*
  * Status Button component.
  */
-.rank-math-status-button {
-	&.components-button {
-		line-height: 2.30769231;
-		padding: 0px 12px;
-		min-height: 32px;
-		font-weight: 500;
-		border-radius: 4px;
-		font-size: 14px;
+.rank-math-status-button.components-button {
+	min-height: 32px;
+	padding: 0 12px;
+	border-radius: 4px;
 
-		&.has-icon.has-text {
-			svg {
-				width: 14px;
-				height: 14px;
-				margin-right: 5px;
-			}
-		}
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 2.30769231;
 
-		&.is-connected {
-			@include status-validation($status-good);
-		}
+	&.has-icon.has-text svg {
+		width: 14px;
+		height: 14px;
+		margin-right: 5px;
+	}
 
-		&.is-disconnected {
-			@include status-validation($error);
-		}
+	&.is-connected {
+		@include status-validation($status-good);
+	}
 
-		&.is-disconnect {
-			&:hover {
-				box-shadow: none;
-				border-color: $error;
-				color: $white;
-				background: $error;
-			}
-		}
+	&.is-disconnected {
+		@include status-validation($error);
+	}
 
-		&.is-connected,
-		&.is-disconnected {
-			pointer-events: none;
-		}
+	&.is-disconnect:hover {
+		border-color: $error;
+		box-shadow: none;
+
+		color: $white;
+		background: $error;
+	}
+
+	&.is-connected,
+	&.is-disconnected {
+		pointer-events: none;
 	}
 }
