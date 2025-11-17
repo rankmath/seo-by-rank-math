@@ -167,7 +167,7 @@ const KeywordsPositionOverview = ( {
 
 			<div className="rank-math-avg-ctr">
 				<KeywordsPositionStats
-					title={ __( 'Avg. CTR', 'rank-math' ) }
+					title={ __( 'CTR', 'rank-math' ) }
 					data={ {
 						total: ctr,
 						difference: ctrDifference,

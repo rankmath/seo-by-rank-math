@@ -8,7 +8,7 @@ import classnames from 'classnames'
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { Fragment, Component } from '@wordpress/element'
+import { Fragment, useState, useEffect } from '@wordpress/element'
 import { PanelBody, SelectControl, Button } from '@wordpress/components'
 import { compose } from '@wordpress/compose'
 import { withDispatch } from '@wordpress/data'
@@ -16,187 +16,27 @@ import { withDispatch } from '@wordpress/data'
 /**
  * Internal dependencies
  */
-import { Helpers } from '@rankMath/analyzer'
+import { cleanTagsOnly } from '@helpers/cleanText'
+import removeDiacritics from '@helpers/removeDiacritics'
 import getClassByScore from '@helpers/getClassByScore'
 import getLink from '@helpers/getLink'
 
-class Keywords extends Component {
-	/**
-	 * Constructor.
-	 */
-	constructor() {
-		super( ...arguments )
-		this.state = { type: 'content', selected: '' }
-		this.setState = this.setState.bind( this )
-		this.initializeClipboard( this.setState )
-	}
+const Keywords = ( props ) => {
+	const [ type, setType ] = useState( 'content' )
+	const [ selected, setSelected ] = useState( '' )
 
-	/**
-	 * Initialize the Clipboard when class is executed.
-	 *
-	 * @param {Component.setState} setState Updates the current component state.
-	 */
-	initializeClipboard( setState ) {
-		if ( 'function' !== typeof ClipboardJS || this.props.showError ) {
-			return
-		}
+	useEffect( () => {
+		initializeClipboard()
+	}, [] )
 
-		const clipboard = new ClipboardJS(
-			'.rank-math-tooltip strong',
-			{
-				text: ( trigger ) => {
-					return trigger.getAttribute( 'data-key' )
-				},
-			}
-		)
-
-		clipboard.on( 'success', function() {
-			setTimeout( () => {
-				setState( { selected: '' } )
-			}, 3000 )
-		} )
-	}
-
-	/**
-	 * Renders the component.
-	 *
-	 * @return {Component} Keywords.
-	 */
-	render() {
-		return (
-			<Fragment>
-				<PanelBody initialOpen={ true }>
-					<SelectControl
-						label={ __( 'Use Keyword in', 'rank-math' ) }
-						value={ this.state.type }
-						options={ [
-							{
-								value: 'content',
-								label: __( 'Content', 'rank-math' ),
-							},
-							{
-								value: 'heading',
-								label: __( 'Headings', 'rank-math' ),
-							},
-							{
-								value: 'title',
-								label: __( 'SEO Title', 'rank-math' ),
-							},
-							{
-								value: 'description',
-								label: __( 'SEO Description', 'rank-math' ),
-							},
-						] }
-						onChange={ ( type ) => {
-							this.setState( { type } )
-						} }
-					/>
-					<Button className="is-link" href={ getLink( 'content-ai-keywords', 'Sidebar Keywords KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Know more about Keywords.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
-					<>
-						<span className="components-form-token-field__help">{ __( 'Click on any keyword to copy it.', 'rank-math' ) }</span>
-						<br />
-						{
-							includes( [ 'title', 'description' ], this.state.type ) &&
-							<span className="components-form-token-field__help">{ __( 'Please use only one or two keywords from here.', 'rank-math' ) }</span>
-						}
-						<ul>
-							{ this.getKeywords() }
-						</ul>
-					</>
-
-					{ this.getRelatedKeywords() }
-
-				</PanelBody>
-			</Fragment>
-		)
-	}
-
-	getRelatedKeywords() {
-		if ( 'content' !== this.state.type || isEmpty( this.props.caData.data.related_keywords ) ) {
-			return false
-		}
-
-		const keywordData = []
-		forEach( this.props.caData.data.related_keywords, ( value ) => {
-			keywordData.push(
-				<li
-					className="rank-math-tooltip show"
-					onClick={ () => ( this.setState( { selected: value } ) ) }
-					role="presentation"
-				>
-					<strong data-key={ value }>
-						{ value }
-					</strong>
-					{ this.getTooltipContent( { keyword: value }, true ) }
-				</li>
-			)
-		} )
-
-		return (
-			<div className="rank-math-related-keywords">
-				<h3>{ __( 'Related Keywords', 'rank-math' ) }</h3>
-				<ul>{ keywordData }</ul>
-			</div>
-		)
-	}
-
-	getKeywords() {
-		if ( isEmpty( this.props.caData.data.keywords ) ) {
-			return (
-				<h3 className="no-data">
-					{ __( 'There are no recommended Keywords for this researched keyword.', 'rank-math' ) }
-				</h3>
-			)
-		}
-
-		const keywordData = []
-		this.contentAiScore = {}
-		forEach( this.props.caData.data.keywords, ( keywords, type ) => {
-			if ( isEmpty( keywords ) ) {
-				return
-			}
-
-			this.contentAiScore[ type ] = {}
-			forEach( keywords, ( data ) => {
-				if ( isEmpty( data.keyword ) ) {
-					return
-				}
-
-				const count = ! this.props.showError ? this.getCount( data.keyword, type ) : data.count
-				const scoreClass = getClassByScore( this.getScore( data.keyword, count, data.average, type ) )
-				const className = classnames( 'rank-math-tooltip', {
-					show: this.state.type === type,
-				} )
-
-				keywordData.push(
-					<li
-						className={ className + ' ' + scoreClass }
-						onClick={ () => ( this.setState( { selected: data.keyword } ) ) }
-						role="presentation"
-					>
-						<strong data-key={ data.keyword }>
-							{ data.keyword }
-							<span>{ count } / { data.average }</span>
-						</strong>
-						{ this.getTooltipContent( data ) }
-					</li>
-				)
-			} )
-		} )
-
-		this.updateContentAiScore()
-
-		return keywordData
-	}
-
-	updateContentAiScore() {
+	const updateContentAiScore = ( contentAiScore ) => {
 		let score = 0
 		let length = 0
-		forEach( this.contentAiScore, ( keywords, type ) => {
+		forEach( contentAiScore, ( keywords, keywordType ) => {
 			const data = Object.values( keywords )
 			let currentScore = sum( data )
 			if (
-				( 'title' === type || 'description' === type ) &&
+				( 'title' === keywordType || 'description' === keywordType ) &&
 				100 === max( data )
 			) {
 				currentScore = ( 100 * data.length )
@@ -208,27 +48,49 @@ class Keywords extends Component {
 
 		score = score / length
 		if ( ! isNaN( score ) ) {
-			this.props.updateAiScore( 'keywords', score )
+			props.updateAiScore( 'keywords', score )
 		}
 	}
 
-	getScore( keyword, value, recommended, type ) {
+	const getScore = ( keyword, value, recommended, keywordType, contentAiScore ) => {
 		const score = ( value / recommended ) * 100
 		if ( score > 100 ) {
-			this.contentAiScore[ type ][ keyword ] = 0
+			contentAiScore[ keywordType ][ keyword ] = 0
 		} else {
-			this.contentAiScore[ type ][ keyword ] = score > 80 ? 100 : score
+			contentAiScore[ keywordType ][ keyword ] = score > 80 ? 100 : score
 		}
 
 		return score
 	}
 
-	getTooltipContent( data, isRelatedKeyword = false ) {
-		if ( this.props.showError ) {
+	const getCount = ( keyword, keywordType ) => {
+		let content = props.content
+		keyword = isString( keyword ) ? removeDiacritics( keyword ).toLowerCase() : keyword
+
+		if ( 'heading' === keywordType ) {
+			keyword = keyword.replace( /[\\^$*+?.()|[\]{}]/g, '\\$&' )
+			const subheadingRegex = new RegExp( '<h[2-6][^>]*>.*?' + keyword + '.*?</h[2-6]>', 'g' )
+			const count = ( content.match( subheadingRegex ) )
+			return ! isNull( count ) ? count.length : 0
+		}
+
+		if ( 'title' === keywordType ) {
+			content = props.title
+		}
+
+		if ( 'description' === keywordType ) {
+			content = props.description
+		}
+
+		return cleanTagsOnly( content ).split( keyword ).length - 1
+	}
+
+	const getTooltipContent = ( data, isRelatedKeyword = false ) => {
+		if ( props.showError ) {
 			return
 		}
 
-		if ( this.state.selected === data.keyword ) {
+		if ( selected === data.keyword ) {
 			return (
 				<span className="rank-math-tooltip-data">{ __( 'Copied', 'rank-math' ) }</span>
 			)
@@ -259,27 +121,148 @@ class Keywords extends Component {
 		)
 	}
 
-	getCount( keyword, type ) {
-		let content = this.props.caData.content
-		keyword = isString( keyword ) ? Helpers.removeDiacritics( keyword ).toLowerCase() : keyword
-
-		if ( 'heading' === type ) {
-			keyword = keyword.replace( /[\\^$*+?.()|[\]{}]/g, '\\$&' )
-			const subheadingRegex = new RegExp( '<h[2-6][^>]*>.*?' + keyword + '.*?</h[2-6]>', 'g' )
-			const count = ( content.match( subheadingRegex ) )
-			return ! isNull( count ) ? count.length : 0
+	const getRelatedKeywords = () => {
+		if ( 'content' !== type || isEmpty( props.researchedData.related_keywords ) ) {
+			return false
 		}
 
-		if ( 'title' === type ) {
-			content = this.props.caData.title
-		}
+		const keywordData = []
+		forEach( props.researchedData.related_keywords, ( value ) => {
+			keywordData.push(
+				<li
+					className="rank-math-tooltip show"
+					onClick={ () => setSelected( value ) }
+					role="presentation"
+				>
+					<strong data-key={ value }>
+						{ value }
+					</strong>
+					{ getTooltipContent( { keyword: value }, true ) }
+				</li>
+			)
+		} )
 
-		if ( 'description' === type ) {
-			content = this.props.caData.description
-		}
-
-		return Helpers.cleanTagsOnly( content ).split( keyword ).length - 1
+		return (
+			<div className="rank-math-related-keywords">
+				<h3>{ __( 'Related Keywords', 'rank-math' ) }</h3>
+				<ul>{ keywordData }</ul>
+			</div>
+		)
 	}
+
+	const getKeywords = () => {
+		if ( isEmpty( props.researchedData.keywords ) ) {
+			return (
+				<h3 className="no-data">
+					{ __( 'There are no recommended Keywords for this researched keyword.', 'rank-math' ) }
+				</h3>
+			)
+		}
+
+		const keywordData = []
+		const contentAiScore = {}
+		forEach( props.researchedData.keywords, ( keywords, keywordType ) => {
+			if ( isEmpty( keywords ) ) {
+				return
+			}
+
+			contentAiScore[ keywordType ] = {}
+			forEach( keywords, ( data ) => {
+				if ( isEmpty( data.keyword ) ) {
+					return
+				}
+
+				const count = ! props.showError ? getCount( data.keyword, keywordType ) : data.count
+				const scoreClass = getClassByScore( getScore( data.keyword, count, data.average, keywordType, contentAiScore ) )
+				const className = classnames( 'rank-math-tooltip', {
+					show: keywordType === type,
+				} )
+
+				keywordData.push(
+					<li
+						className={ className + ' ' + scoreClass }
+						onClick={ () => setSelected( data.keyword ) }
+						role="presentation"
+					>
+						<strong data-key={ data.keyword }>
+							{ data.keyword }
+							<span>{ count } / { data.average }</span>
+						</strong>
+						{ getTooltipContent( data ) }
+					</li>
+				)
+			} )
+		} )
+
+		updateContentAiScore( contentAiScore )
+
+		return keywordData
+	}
+
+	const initializeClipboard = () => {
+		if ( 'function' !== typeof ClipboardJS || props.showError ) {
+			return
+		}
+
+		const clipboard = new ClipboardJS(
+			'.rank-math-tooltip strong',
+			{
+				text: ( trigger ) => {
+					return trigger.getAttribute( 'data-key' )
+				},
+			}
+		)
+
+		clipboard.on( 'success', function() {
+			setTimeout( () => {
+				setSelected( '' )
+			}, 3000 )
+		} )
+	}
+	return (
+		<Fragment>
+			<PanelBody initialOpen={ true }>
+				<SelectControl
+					label={ __( 'Use Keyword in', 'rank-math' ) }
+					value={ type }
+					options={ [
+						{
+							value: 'content',
+							label: __( 'Content', 'rank-math' ),
+						},
+						{
+							value: 'heading',
+							label: __( 'Headings', 'rank-math' ),
+						},
+						{
+							value: 'title',
+							label: __( 'SEO Title', 'rank-math' ),
+						},
+						{
+							value: 'description',
+							label: __( 'SEO Description', 'rank-math' ),
+						},
+					] }
+					onChange={ ( type ) => setType( type ) }
+				/>
+				<Button className="is-link" href={ getLink( 'content-ai-keywords', 'Sidebar Keywords KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Know more about Keywords.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
+				<>
+					<span className="components-form-token-field__help">{ __( 'Click on any keyword to copy it.', 'rank-math' ) }</span>
+					<br />
+					{
+						includes( [ 'title', 'description' ], type ) &&
+						<span className="components-form-token-field__help">{ __( 'Please use only one or two keywords from here.', 'rank-math' ) }</span>
+					}
+					<ul>
+						{ getKeywords() }
+					</ul>
+				</>
+
+				{ getRelatedKeywords() }
+
+			</PanelBody>
+		</Fragment>
+	)
 }
 
 export default compose(

@@ -33,4 +33,38 @@ body.rtl {
             border-left: 0;
         }
     }
+
+    .rank-math-tab-header {
+        margin-left: auto;
+        margin-right: -200px;
+    }
+
+    .rank-math-tab-panel>.components-tab-panel__tabs[aria-orientation=vertical] .components-tab-panel__tabs-item {
+        border-left: 0;
+        border-right: 1px solid;
+
+        &.is-active, &:hover:not(.is-active):not(.separator) {
+            border-right: 3px solid;
+            border-left: 0;
+
+            &:after {
+                right: unset;
+                left: -1px;
+            }
+        }
+
+        i {
+            margin-right: 0;
+            margin-left: 9px;
+        }
+    }
+
+    .field-th {
+        float: right;
+
+        label {
+            padding-right: 0;
+            padding-left: 15px;
+        }
+    }
 }

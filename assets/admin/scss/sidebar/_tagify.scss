@@ -1,5 +1,15 @@
 // main: ../sidebar.scss
 
+@mixin keyword-intent-background($color) {
+	.#{$namespace}-keyword-intent-container {
+		&:hover::before,
+		&:hover::after,
+		.rank-math-keyword-intent-wrapper.is-show-intent {
+			background: $color !important;
+		}
+	}
+}
+
 .#{$namespace}-focus-keyword {
 	.tagify {
 
@@ -17,6 +27,7 @@
 		$tag-hover               : #D3E2E2 !default;
 		$tag-remove              : #D39494 !default;
 		$tag-remove-btn-bg       : none !default;
+		$tag-remove-btn-bg--hover: darken($tag-remove, 8) !default;
 		$tag-remove-btn-bg--hover: darken($tag-remove, 8) !default;
 		$tag-inset-shadow-size   : 1.1em !default;
 	
@@ -135,7 +146,7 @@
 				}
 	
 				> * {
-					white-space    : nowrap;
+					white-space    : pre-wrap;
 					overflow       : hidden;
 					text-overflow  : ellipsis;
 					display        : inline-block;
@@ -197,10 +208,14 @@
 			&.bad-fk {
 				color: darken( $color-bad, 5% );
 				background: lighten( $color-bad, 18% );
+
+				@include keyword-intent-background(lighten( $color-bad, 18% ));
 	
 				&.selected {
 					color: lighten( $color-bad, 40% );
 					background: $color-bad;
+
+					@include keyword-intent-background($color-bad);
 	
 					.tagify__tag__removeBtn {
 						color: lighten( $color-bad, 50% );
@@ -225,10 +240,14 @@
 			&.ok-fk {
 				color: darken( $color-ok, 15% );
 				background: lighten( $color-ok, 22% );
+
+				@include keyword-intent-background(lighten( $color-ok, 22% ));
 	
 				&.selected {
 					color: lighten( $color-ok, 40% );
 					background: $color-ok;
+
+					@include keyword-intent-background($color-ok);
 	
 					.tagify__tag__removeBtn {
 						color: lighten( $color-ok, 50% );
@@ -253,10 +272,14 @@
 			&.good-fk {
 				color: darken( $color-good, 5% );
 				background: lighten( $color-good, 28% );
+
+				@include keyword-intent-background(lighten( $color-good, 28% ));
 	
 				&.selected {
 					color: lighten( $color-good, 40% );
 					background: $color-good;
+
+					@include keyword-intent-background($color-good);
 	
 					.tagify__tag__removeBtn {
 						color: lighten( $color-good, 50% );

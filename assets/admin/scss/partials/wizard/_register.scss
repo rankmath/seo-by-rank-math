@@ -1,9 +1,20 @@
-// main: ../../setup-wizard.scss
+.rank-math-tracking-optin {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-.#{$namespace}-wizard-body--register {
-	.wrapper {
-		.cmb-row input.invalid + label {
-			display: block !important;
-		}
+	max-width: 680px;
+	margin: 10px auto 45px;
+
+	label {
+		font-size: 17px;
+		font-weight: 500;
+		display: inline-block;
+		margin: 0;
+		color: #434343;
+	}
+
+	.rank-math-toggle-control .components-base-control__field .components-flex {
+		align-items: flex-start;
 	}
 }

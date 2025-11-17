@@ -10,11 +10,12 @@
 		display: grid;
 
 		margin-bottom: 4rem;
+		margin-top: 30px;
 
 		place-items: center;
 	}
 
-	.cmb2-metabox-description {
+	.field-description {
 		text-align: center;
 	}
 }
@@ -122,17 +123,22 @@
 		box-shadow: 0 0 0 1px $primary;
 	}
 
-	.cmb-row {
-		padding: 1rem 0;
+	.cmb-row,
+	.field-row,
+	.#{$namespace}-analytics-content .field-row,
+	.#{$namespace}-adsense-content .field-row {
+		padding: 1rem 0 !important;
 
 		border-top: 0!important;
 
-		.cmb-td {
+		.cmb-td,
+		.field-td {
 			width: 100%;
 		}
 	}
 
-	.cmb2-toggle {
+	.cmb2-toggle,
+	.field-toggle {
 		margin-right: 5px;
 	}
 
@@ -198,7 +204,8 @@
 	&-content {
 		padding: 1rem;
 
-		.cmb-type-select {
+		.cmb-type-select,
+		.field-type-select {
 			label {
 				display: block;
 
@@ -208,7 +215,8 @@
 			&:not(.no-flex) {
 				@extend %flex;
 
-				.cmb-row-col {
+				.cmb-row-col,
+				.field-row-col {
 					margin-right: 3%;
 
 					flex: 0 0 31.3333333%;
@@ -245,23 +253,33 @@
 			}
 		}
 
+		.field-type-select:not(.no-flex) {
+			column-gap: 3%;
+  			row-gap: 15px;
+
+			padding-bottom: 0 !important;
+
+			.field-row-col {
+				flex: auto;
+
+				width: 268px;
+				max-width: 268px;
+				margin: 0;
+			}
+		}
+
 		.warning {
 			font-size: 14px;
 
 			margin: 0 0 1rem;
 		}
 
-		&.rank-math-analytics-content {
-			.cmb-type-select .cmb-row-col {
-				margin-top: .5rem;
-				margin-bottom: .5rem;
-			}
-		}
-
-		.cmb-td {
+		.cmb-td,
+		.field-td {
 			width: 100%;
 		}
 
+		.field-description,
 		.cmb2-metabox-description {
 			text-align: left;
 		}

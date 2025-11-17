@@ -5,10 +5,32 @@
  * Name:	role-manager.css
  */
 
-.field-wrap .field-big-labels .rank-math-checkbox-list li {
-	@media (min-width: 1200px) {
-		width: 33.33%;
+.rank-math-tab-header {
+	padding: 1.875rem 1.875rem 0;
+	margin: -1.875rem -1.875rem 30px;
+	
+	border-radius: 6px 6px 0 0;
+	border-bottom: 1px solid #b5bfc9;
+	
+	background-color: #f8f9fa;
+	text-align: center;
+	
+	h2 {
+		font-size: 30px;
+		font-weight: 500;
+
+		margin: 0;
 	}
+	
+	p {
+		font-size: 1rem;
+
+		margin-bottom: 2rem;
+	}
+}
+
+.field-row:first-of-type {
+	padding-top: 0;
 }
 
 footer.form-footer .rank-math-button {
@@ -18,5 +40,25 @@ footer.form-footer .rank-math-button {
 
 	&:last-of-type {
 		width: 150px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.field-big-labels .rank-math-checkbox-list li {
+		width: 33.33%;
+	}
+}
+
+@media (min-width: 641px) {
+	.rank-math-button.toggle-all-capabilities {
+		position: absolute;
+		top: 56px;
+		left: 0;
+
+		font-weight: 600;
+	}
+
+	.field-wrap .field-row:first-of-type .rank-math-button.toggle-all-capabilities {
+		top: 32px;
 	}
 }

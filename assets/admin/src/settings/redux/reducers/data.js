@@ -1,14 +1,22 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable @wordpress/i18n-translator-comments */
 /**
  * External dependencies
  */
 import { get } from 'lodash'
 
 const DEFAULT_STATE = {
-	settings: get( rankMath, 'settings', {} ),
-	roleCapabilities: get( rankMath, 'roleCapabilities', {} ),
+	data: get( rankMath, 'data', {} ),
+	analytics: {
+		...rankMath,
+		...get( rankMath, 'data', {} ),
+		...get( rankMath, 'analytics', {} ),
+	},
 	// Misc.
 	dirtySettings: {},
 }
+
+const RESET_STATE = { ...DEFAULT_STATE }
 
 /**
  * Reduces the dispatched action for the app state.
@@ -40,6 +48,10 @@ export function appData( state = DEFAULT_STATE, action ) {
 			[ action.key ]: action.value,
 			dirtySettings,
 		}
+	}
+
+	if ( 'RESET_STORE' === action.type ) {
+		return RESET_STATE
 	}
 
 	return state

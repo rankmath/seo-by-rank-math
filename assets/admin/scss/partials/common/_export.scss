@@ -49,6 +49,10 @@
             }
         }
 
+        ul {
+            margin-top: 0;
+        }
+
         th, td {
             padding: 0
         }
@@ -59,8 +63,23 @@
     }
 
     .#{$namespace}-settings-backup-form {
-        .list-table {
-            background: #fff;
+        .list-table.with-action {
+            background: $white;
+
+            td,
+            th {
+                border: 0;
+            }
+
+            tr:not(:last-child) {
+                border-bottom: 1px solid $gray;
+            }
+
+            @media screen and (max-width: 782px) {
+                td {
+                    text-align: left;
+                }
+            }
         }
     }
 }

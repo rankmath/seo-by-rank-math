@@ -16,7 +16,7 @@ import { withSelect } from '@wordpress/data'
 import getClassByScore from '@helpers/getClassByScore'
 
 const ContentAIIcon = ( { isLoaded, score } ) => {
-	const isFree = rankMath.contentAIPlan === 'free'
+	const isFree = rankMath.contentAI.plan === 'free'
 	const classes = classnames( 'rank-math-toolbar-score content-ai-score', {
 		[ getClassByScore( score ) ]: true,
 		loading: ! isLoaded,
@@ -35,8 +35,8 @@ const ContentAIIcon = ( { isLoaded, score } ) => {
 export default withSelect( ( select ) => {
 	const repo = select( 'rank-math' )
 
-	let score = Object.values( repo.getContentAIScore() )
-	score = isEmpty( score ) || ! rankMath.isUserRegistered ? rankMath.contentAiScore : round( sum( score ) / score.length )
+	let score = Object.values( select( 'rank-math-content-ai' ).getContentAIScore() )
+	score = isEmpty( score ) || ! rankMath.contentAI.isUserRegistered ? rankMath.contentAI.score : round( sum( score ) / score.length )
 
 	return {
 		isLoaded: repo.isLoaded(),

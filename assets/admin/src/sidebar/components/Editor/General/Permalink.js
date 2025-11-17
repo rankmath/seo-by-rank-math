@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { Helpers } from '@rankMath/analyzer'
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
@@ -15,8 +10,10 @@ import { safeDecodeURIComponent } from '@wordpress/url'
 /**
  * Internal dependencies
  */
+import { sanitizeText } from '@helpers/cleanText'
 import LengthIndicator from '@components/LengthIndicator'
 import { sanitizePermalink } from '@helpers/sanitize'
+import isSiteEditorHomepage from '@helpers/isSiteEditorHomepage'
 
 const EditorPermalink = ( { permalink, serpPermalink, updatePermalink, updatePermalinkSanitize } ) => (
 	<div className="field-group">
@@ -33,13 +30,13 @@ const EditorPermalink = ( { permalink, serpPermalink, updatePermalink, updatePer
 		<TextControl
 			id="rank-math-editor-permalink"
 			value={
-				rankMath.is_front_page
+				rankMath.is_front_page || isSiteEditorHomepage()
 					? '/'
 					: safeDecodeURIComponent( permalink )
 			}
 			onChange={ updatePermalink }
 			help={
-				rankMath.is_front_page
+				rankMath.is_front_page || isSiteEditorHomepage()
 					? __(
 						'Editing Homepage permalink is not possible.',
 						'rank-math'
@@ -49,7 +46,7 @@ const EditorPermalink = ( { permalink, serpPermalink, updatePermalink, updatePer
 						'rank-math'
 					)
 			}
-			disabled={ rankMath.is_front_page ? 'disabled' : '' }
+			disabled={ rankMath.is_front_page || isSiteEditorHomepage() ? 'disabled' : '' }
 			onBlur={ ( event ) => {
 				updatePermalinkSanitize( event.target.value )
 			} }
@@ -69,7 +66,7 @@ export default compose(
 	withDispatch( () => {
 		return {
 			updatePermalink( slug ) {
-				rankMathEditor.updatePermalink( Helpers.sanitizeText( slug ), true )
+				rankMathEditor.updatePermalink( sanitizeText( slug ), true )
 			},
 			updatePermalinkSanitize( slug ) {
 				rankMathEditor.updatePermalinkSanitize( sanitizePermalink( slug ) )

@@ -6,7 +6,7 @@
  * @return {string} Return redirection id.
  */
 export function getRedirectionID( state ) {
-	return state.appData.redirectionID
+	return String( state.appData.redirectionID )
 }
 
 /**

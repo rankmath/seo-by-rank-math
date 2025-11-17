@@ -2,7 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { forEach, isArray, isObject, isString, isUndefined, map, get, has, find, isEmpty } from 'lodash'
+import { forEach, isArray, isObject, isString, isUndefined, map, get, has, find, isEmpty, includes } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -61,9 +61,10 @@ const registerDefaultHooks = () => {
 			map( schemas, ( schema, id ) => {
 				const type = get( schema, '@type' )
 				schema = applyFilters( 'rank_math_pre_schema_' + type, schema )
-				editSchemas[ id ] = generateValidSchema(
+				schema = generateValidSchema(
 					applyFilters( 'rank_math_pre_schema', schema )
 				)
+				editSchemas[ id ] = applyFilters( 'rank_math_pre_edited_schema', schema, id )
 			} )
 
 			dispatch( 'rank-math' ).updateEditSchemas( editSchemas )
@@ -355,6 +356,36 @@ const registerDefaultHooks = () => {
 				schema.VirtualLocation = schema.location
 				delete schema.location
 			}
+
+			return schema
+		}
+	)
+
+	/**
+	 * Filter to add default name/title & description to new schema.
+	 *
+	 * @param {Object} schema Schema data.
+	 */
+	addFilter(
+		'rank_math_pre_edited_schema',
+		'rank-math',
+		( schema, id ) => {
+			const { properties } = schema
+			if ( isEmpty( properties ) || id !== 'new-9999' ) {
+				return schema
+			}
+
+			schema.properties = map( properties, ( property ) => {
+				if ( includes( [ 'name', 'headline', 'title' ], property.property ) ) {
+					property.value = schema.metadata.name
+				}
+
+				if ( property.property === 'description' ) {
+					property.value = schema.metadata.description
+				}
+
+				return property
+			} )
 
 			return schema
 		}

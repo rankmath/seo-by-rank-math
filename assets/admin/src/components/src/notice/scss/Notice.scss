@@ -1,72 +1,80 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/styling';
+@import '../../../scss/main';
 
-/*
- * Mixin function used to style the Notice component.
- */
-@mixin notice-style($background, $color) {
-	background-color: $background;
+/* Styles the various variants of the notice component */
+@mixin notice-variant($background, $color) {
 	border-left-color: $color;
+
+	background-color: $background;
 
 	.rank-math-notice__icon {
 		color: $color;
 	}
 }
 
-/*
+/**
  * Notice component.
  */
-.rank-math-notice {
-	&.components-notice {
-		margin: 5px 15px 2px;
-		border-radius: 4px;
+ .rank-math-tab-panel {
+	.rank-math-notice {
 		width: fit-content;
-		background: $white;
-		border: 1px solid $silver-gray;
-		padding: 9px 12px;
+		padding: 3px 14px;
+		margin: 5px 15px 2px;
+		border: 1px solid $gray-10;
 		border-left-width: 4px;
+		border-radius: 4px;
+		box-shadow: 0 1px 1px $black-a4;
+
+		background: $white;
 		line-height: 1.5;
 
-		&.is-error {
-			@include notice-style(#fcf0f1, $danger);
+		&.is-error,
+		&.notice-error {
+			@include notice-variant(#fcf0f1, $danger);
 		}
 
-		&.is-warning {
-			@include notice-style(#fcf9e8, #dba617);
+		&.is-warning,
+		&.notice-warning {
+		@include notice-variant(#fcf9e8, #dba617);
 		}
 
-		&.is-success {
-			@include notice-style(#edfaef, #00a32a);
+		&.is-success,
+		&.notice-success {
+			@include notice-variant(#fff, #00a32a);
+			width: 100%;
 		}
 
-		&.is-info {
-			@include notice-style(#f0f6fc, #72aee6);
+		&.is-info,
+		&.notice-info {
+		@include notice-variant(#f0f6fc, #72aee6);
+		}
+
+		&__icon {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translateY(-50%);
+
+			color: $gray-10;
+			
+			@include icon-size(27px);
 		}
 
 		.components-notice__content {
 			position: relative;
-			margin: 0;
+
+			margin: 0.5em 0;
 			margin-right: 3px;
 		}
 
-		.rank-math-notice__icon {
-			@include center-float-vertically;
-			@include icon-size(27px);
-			color: $silver-gray;
-			left: 0;
-		}
-
-		&.has-icon {
-			.components-notice__content {
-				padding-left: 40px;
-			}
+		&.has-icon .components-notice__content {
+			padding-left: 40px;
 		}
 
 		.components-button {
-			@include remove-box-shadow;
 			height: fit-content;
-			padding: 0px;
+			padding: 0;
 			margin-top: 2px;
+			@include remove-box-shadow;
 			
 			&.components-notice__dismiss {
 				color: rgba($black, 0.5);
@@ -76,18 +84,25 @@
 				}
 
 				svg {
-					@include radius-xs;
-					padding: 4px;
-					height: 1rem;
 					width: 1rem;
+					height: 1rem;
+					padding: 4px;
+					border-radius: 2px;
 				}
 
-				&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover {
-					svg {
-						background-color: $black-a5;
-					}
+				&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):hover svg {
+					background-color: $black-a5;
 				}
 			}
 		}
+
+		&.is-alt {
+			box-shadow: none;
+		}
+
+		p {
+			margin: 0;
+		}
 	}
 }
+

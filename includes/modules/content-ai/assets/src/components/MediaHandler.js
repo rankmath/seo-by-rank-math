@@ -11,29 +11,30 @@ import { __ } from '@wordpress/i18n'
 /**
  * Internal dependencies
  */
-import altTextGenerator from './altTextGenerator'
-import hasError from '../page/helpers/hasError'
+import AltTextGenerator from './AltTextGenerator'
+import hasError from '../helpers/hasError'
 import showCTABox from '@helpers/showCTABox'
 
 // MediaHandler component to add Generate Button in Attachment modal.
 class MediaHandler {
 	/**
 	 * Constructor.
-	 *
-	 * @param {boolean} isTwoColumn Is Two Column Attachment modal.
 	 */
-	constructor( isTwoColumn = false ) {
-		this.injectGenerateAltTextButton( isTwoColumn )
+	constructor() {
+		this.injectGenerateAltTextButton()
+		jQuery( window ).on( 'elementor:init', () => {
+			this.injectGenerateAltTextButton()
+		} )
 	}
 
 	// Add Generate Alt button in Attachment Details modal.
-	injectGenerateAltTextButton( isTwoColumn ) {
+	injectGenerateAltTextButton() {
 		// Two Column Attchment Details modal. Add Generate Button in Media library Grid mode.
-		if ( isTwoColumn ) {
+		if ( wp.media !== undefined && wp.media.view.Attachment.Details.TwoColumn !== undefined ) {
 			wp.media.view.Attachment.Details.TwoColumn = wp.media.view.Attachment.Details.TwoColumn.extend(
 				{
 					template: ( view ) => {
-						return this.getTemplate( isTwoColumn ? 'attachment-details-two-column' : 'image-details', view, true )
+						return this.getTemplate( 'attachment-details-two-column', view, true )
 					},
 					events: {
 						...wp.media.view.Attachment.Details.TwoColumn.prototype.events,
@@ -41,8 +42,6 @@ class MediaHandler {
 					},
 				}
 			)
-
-			return
 		}
 
 		// Image Details modal. Add Generate Button in Classic Editor Image details modal.
@@ -61,17 +60,19 @@ class MediaHandler {
 		}
 
 		// Attachment Details modal. Add Generate Button in Block Editor Attachment details modal.
-		wp.media.view.Attachment.Details = wp.media.view.Attachment.Details.extend(
-			{
-				template: ( view ) => {
-					return this.getTemplate( 'attachment-details', view )
-				},
-				events: {
-					...wp.media.view.Attachment.Details.prototype.events,
-					'click .rank-math-generate-alt-button': this.generateAltTextForImage,
-				},
-			}
-		)
+		if ( wp.media !== undefined ) {
+			wp.media.view.Attachment.Details = wp.media.view.Attachment.Details.extend(
+				{
+					template: ( view ) => {
+						return this.getTemplate( 'attachment-details', view )
+					},
+					events: {
+						...wp.media.view.Attachment.Details.prototype.events,
+						'click .rank-math-generate-alt-button': this.generateAltTextForImage,
+					},
+				}
+			)
+		}
 	}
 
 	// Get Media modal template.
@@ -98,7 +99,7 @@ class MediaHandler {
 		e.preventDefault()
 		e.stopPropagation()
 
-		if ( hasError() || rankMath.contentAICredits < 50 ) {
+		if ( hasError() || wp.data.select( 'rank-math-content-ai' ).getData().credits < 50 ) {
 			jQuery( '.media-modal-close' ).trigger( 'click' )
 			showCTABox( { creditsRequired: 50 } )
 			return
@@ -116,7 +117,7 @@ class MediaHandler {
 		generateAltTextButton.innerHTML = __( 'Generating…', 'rank-math' )
 
 		const isTwoColumn = 'true' === generateAltTextButton.getAttribute( 'data-two-column' )
-		altTextGenerator( imageUrl )
+		AltTextGenerator( imageUrl )
 			.then( ( generatedAltText ) => {
 				// Successfully generated alt text, now update and save the alt text field
 				this.model.set( 'alt', generatedAltText )

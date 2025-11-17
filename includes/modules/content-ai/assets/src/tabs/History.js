@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { map, isEmpty, isObject, startCase } from 'lodash'
+import { map, isEmpty, isUndefined, isObject, startCase } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -65,6 +65,10 @@ export default ( props ) => {
 					! isEmpty( outputs ) &&
 						map( outputs, ( value, key ) => {
 							const content = getContent( value.output, value.key )
+							if ( isUndefined( content ) ) {
+								return
+							}
+
 							return (
 								<div className="output-item" key={ key }>
 									<div className="tool-name">{ value.key }</div>

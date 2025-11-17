@@ -9,7 +9,7 @@ import { get } from 'lodash'
  */
 import { dispatch } from '@wordpress/data'
 import { addAction, doAction } from '@wordpress/hooks'
-import { createElement, render, Fragment } from '@wordpress/element'
+import { createElement, createRoot, Fragment } from '@wordpress/element'
 
 /**
  * Internal dependencies
@@ -41,15 +41,15 @@ jQuery( () => {
 		'rank_math_loaded',
 		'rank-math',
 		() => {
-			render(
-				createElement( () => (
-					<Fragment>
-						<SelectionModal isOpen={ isOpen } />
-						<MetaboxModal />
-					</Fragment>
-				) ),
-				document.getElementById( 'rank-math-schema-template' )
-			)
+			createRoot( document.getElementById( 'rank-math-schema-template' ) )
+				.render(
+					createElement( () => (
+						<Fragment>
+							<SelectionModal isOpen={ isOpen } />
+							<MetaboxModal />
+						</Fragment>
+					) )
+				)
 		}
 	)
 

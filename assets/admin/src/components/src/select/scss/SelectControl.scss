@@ -1,130 +1,115 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/base';
-@import '../../../scss/mixins/formcontrol';
-@import '../../../scss/mixins/styling';
+@import '../../../scss/main';
 
-/*
+/**
  * Select Control component.
  */
-.rank-math-select-control {
-	&.components-custom-select-control {
-		max-width: 25rem;
+.components-base-control__field.css-1t5ousf {
+	margin-bottom: 0;
+}
 
-		&:not(.with-label) .components-custom-select-control__label {
-			display: none;
+.rank-math-select-control.rank-math-select-control.rank-math-select-control {
+	width: fit-content;
+	max-width: 25rem;
+	border-radius: 3px;
+	gap: 0;
+
+	.components-input-control-suffix-wrapper {
+		display: none;
+	}
+	
+	.components-input-control__label {
+		@include form-control-label;
+
+		font-weight: 400;
+		line-height: 1.4em;
+		text-transform: inherit;
+	}
+
+	.components-select-control__input {
+		min-height: 30px;
+		padding: 0 24px 0 8px;
+		border-color: $border-highlight;
+		border-radius: 3px;
+
+		color: $black-60;
+		background: $white url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat right 5px top 55%;
+    	background-size: 16px 16px;
+
+		font-size: 14px;
+		line-height: 2;
+		vertical-align: middle;
+
+		&:hover {
+			color: $primary-light;
 		}
 
+		&:focus {
+			border-color: $primary-light;
+			color: $primary-darker;
+		}
+	}
+
+	&:focus-within {
+		.components-select-control__input,
+		.components-input-control__backdrop {
+			border-color: $primary-light !important;
+		}
+
+		.components-input-control__backdrop {
+			box-shadow: 0 0 0 1px $primary-light !important;
+		}
+	}
+
+	&.is-disabled {
 		.components-input-control__container {
-			.components-custom-select-control__button {
-				@include base-select-style;
-				font-size: 14px;
-				line-height: 2;
-				border-color: $border-highlight;
-				border-radius: 3px;
-				padding: 0 24px 0 8px;
-				min-height: 30px;
-				vertical-align: middle;
-				@include metabox;
-				margin-top: 0;
-				padding-top: 0;
-				padding-bottom: 0;
-				vertical-align: baseline;
+			opacity: 0.7;
+		}
 
-				&:hover {
-					color: $primary-light;
-				}
+		.components-select-control__input {
+			color: #a7aaad;
+			border-color: #dcdcde;
+			background-color: $tertiary-light;
+			background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23a0a5aa%22%2F%3E%3C%2Fsvg%3E);
 
-				&:focus, &[aria-expanded="true"] {
-					color: $primary-darker;
-					box-shadow: 0 0 0 1px $primary !important;
-				}
+			text-shadow: 0 1px 0 $white;
+			cursor: default;
+		}
+	}
 
-				&[aria-expanded="true"] {
-					&.css-f0d2mi {
-						background-color: $white;
-						border-color: $primary;
-						outline: none;
-					}
+	&.is-metabox {
+		width: 100%;
 
-					+ .components-input-control__suffix {
-						svg {
-							transform: rotate(180deg);
-						}
-					}
-				}
+		.components-select-control__input {
+			min-height: 40px;
+			padding: 0px 22px 0px .6em;
+		}
+
+		&:hover,
+		&:focus-within {
+			.components-select-control__input {
+				color: $primary-light;
 			}
 
-			.components-input-control {
-				&__backdrop {
-					display: none;
-				}
-
-				&__suffix {
-					.components-input-control-suffix-wrapper {
-						padding-right: 0.6em;
-					}
-				}
+			.components-input-control__backdrop {
+				border-color: $primary !important;
 			}
 		}
 
-		.components-custom-select-control__menu {
-			box-shadow: 0px 4px 12px 0px $black-a10;
-			border-color: #BFBFBF;
-			min-width: inherit;
-			left: 0;
-			right: 0;
-			border-radius: 3px;
-			margin: 0;
-			padding: 4px;
-			
-			.components-custom-select-control__item {
-				padding: 7px 5px;
-				line-height: 16px;
-				color: #0C4B77;
-				border-radius: 2px;
-				font-size: 14px;
-				margin: 0px;
-
-				&-icon {
-					display: none;
-				}
-
-				&.is-highlighted {
-					background-color: #DFDFE5;
-					color: #141319;
-					cursor: pointer;
-				}
-			}
+		&:focus-within .components-input-control__backdrop {
+			box-shadow: 0 0 0 1px $primary !important;
 		}
+	}
 
-		&.with-label .components-custom-select-control__label  {
-			@include control-label-style;
-			text-transform: inherit;
-			line-height: 1.4em;
-			font-weight: 400;
-		}
+	@media screen and (max-width: 782px) {
+		width: 100%;
+		max-width: 100%;
+		
+		.components-select-control__input {
+			min-height: 40px;
+			padding: 5px 24px 5px 8px;
 
-		&.is-disabled {
-			.components-input-control__container {
-				.components-custom-select-control__button {
-					@include secondary-button-styles;
-					box-shadow: none;
-					text-shadow: 0 1px 0 $white;
-					cursor: default;
-					transform: none;
-
-					&:hover {
-						border-color: $primary;
-  						outline: none;
-					}
-				}
-			}
-
-			.components-input-control__suffix {
-				svg {
-					fill: #a0a5aa;
-				}
-			}
+			font-size: 16px;
+			line-height: 1.625;
 		}
 	}
 }

@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { ResultManager } from '@rankMath/analyzer'
-
-/**
  * WordPress dependencies
  */
 import { doAction } from '@wordpress/hooks'
@@ -11,6 +6,7 @@ import { doAction } from '@wordpress/hooks'
 /**
  * Internal dependencies
  */
+import { ResultManager } from '@rankMath/analyzer'
 import { getStore } from './redux/store'
 import Assessor from './sidebar/Assessor'
 import CommonFilters from './commonFilters'

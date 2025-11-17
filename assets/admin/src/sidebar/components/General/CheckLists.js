@@ -17,6 +17,7 @@ import { Fragment, Component } from '@wordpress/element'
  * Internal dependencies
  */
 import highlightParagraph from './highlightParagraph'
+import FixWithAI from './FixWithAI'
 import getPartialClass from '@helpers/getPartialClass'
 import getLink from '@helpers/getLink'
 
@@ -176,9 +177,34 @@ class CheckLists extends Component {
 
 			return (
 				<li key={ id } className={ classes }>
-					<span
-						dangerouslySetInnerHTML={ { __html: result.getText() } }
-					/>
+					<span>
+						<span
+							dangerouslySetInnerHTML={ { __html: result.getText() } }
+						/>
+						{
+							! result.hasScore() &&
+							'contentHasShortParagraphs' === id &&
+							! isEmpty( result.text ) &&
+							includes( [ 'classic', 'gutenberg' ], rankMath.currentEditor ) &&
+							<Button
+								className="rank-math-highlight-button"
+								onClick={ () => {
+									highlightParagraph(
+										this.state.highlightText,
+										this.props.highlightedParagraphs,
+										this.props.updateHighlightedParagraphs,
+									)
+									this.setState( {
+										highlightText: ! this.state.highlightText,
+									} )
+								} }
+							>
+								{ this.state.highlightText && <i className="dashicons dashicons-visibility"></i> }
+								{ ! this.state.highlightText && <i className="dashicons dashicons-hidden"></i> }
+							</Button>
+						}
+						<FixWithAI id={ id } result={ result } />
+					</span>
 					{
 						link &&
 						<a
@@ -188,28 +214,6 @@ class CheckLists extends Component {
 							className="dashicons-before dashicons-editor-help rank-math-help-icon"
 						>
 						</a>
-					}
-					{
-						! result.hasScore() &&
-						'contentHasShortParagraphs' === id &&
-						! isEmpty( result.text ) &&
-						includes( [ 'classic', 'gutenberg' ], rankMath.currentEditor ) &&
-						<Button
-							className="rank-math-highlight-button"
-							onClick={ () => {
-								highlightParagraph(
-									this.state.highlightText,
-									this.props.highlightedParagraphs,
-									this.props.updateHighlightedParagraphs,
-								)
-								this.setState( {
-									highlightText: ! this.state.highlightText,
-								} )
-							} }
-						>
-							{ this.state.highlightText && <i className="dashicons dashicons-visibility"></i> }
-							{ ! this.state.highlightText && <i className="dashicons dashicons-hidden"></i> }
-						</Button>
 					}
 				</li>
 			)

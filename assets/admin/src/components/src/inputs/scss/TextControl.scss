@@ -1,30 +1,65 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/base';
+@import '../../../scss/main';
 
 /*
  * Text Control component.
  */
-.rank-math-text-control {
-	&.components-base-control {
-		.components-base-control__field {
-			margin-bottom: 0px;
+.rank-math-text-control.components-base-control {
+	.components-base-control__field {
+		margin-bottom: 0;
 
-			.components-text-control__input {
-				@include base-input-style;
-				padding: 0 8px;
-				line-height: 2;
-				min-height: 30px;
+		.components-text-control__input {
+			min-height: 30px;
+			padding: 0 8px;
+			margin: 0 1px;
+
+			font-size: 14px;
+			line-height: 2;
+
+			&:read-only {
+				background-color: $gray-30;
 			}
+
+			&:focus {
+				background: $white;
+			}
+
+			@include input-style;
+		}
+	}
+
+	&.regular-text {
+		width: 100%;
+		
+		.components-base-control__field .components-text-control__input {
+			@include metabox;
+		}
+	}
+
+	&.no-value .invalid {
+		background: #ffc0cb;
+	}
+
+	&:not(.no-value) .invalid {
+		background-color: $white;
+		border-color: $border-highlight !important;
+
+		&:focus {
+			border-color: $primary-light !important;
 		}
 
-		&.regular-text {
-			width: 100%;
-			
-			.components-base-control__field {
-				.components-text-control__input {
-					@include metabox;
-				}
-			}
+		+ span {
+			display: none;
+		}
+	}
+}
+
+@media screen and (max-width: 782px) {
+	.rank-math-text-control.components-base-control {
+		.components-base-control__field .components-text-control__input {
+			min-height: 40px;
+			padding: 3px 10px;
+
+			font-size: 16px;
 		}
 	}
 }

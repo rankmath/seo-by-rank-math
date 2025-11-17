@@ -146,7 +146,7 @@ export default ( { value, index = 0, isPage = false, endpoint, typingEffect = tr
 					</Button>
 				}
 			</div>
-			{ <ContentAiText value={ aiText } addTypingEffect={ typingEffect } /> }
+			{ <ContentAiText value={ aiText } addTypingEffect={ typingEffect } endpoint={ endpoint } /> }
 		</div>
 	)
 }

@@ -1,0 +1,149 @@
+/* Variables */
+$gray-40: #cbd2d9;
+$gray-60: #5b6065;
+
+/* Styles the 'is-active' and 'is-done' states of the progress bar */
+@mixin progress-state($line-bg, $color, $indicator-color) {
+	&::after {
+		background: $line-bg;
+	}
+
+	&.components-tab-panel__tabs-item {
+		color: $color;
+
+		&:not(:first-of-type)::before {
+			border-color: $indicator-color;
+
+			background-color: $indicator-color;
+		}
+	}
+}
+
+/*
+ * Steps Progress component
+ */
+.rank-math-steps-progress {
+	display: grid;
+	gap: 13px;
+
+	> .components-tab-panel__tabs[role="tablist"] .components-tab-panel__tabs-item {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		flex: 1;
+
+		position: relative;
+
+		padding: 0;
+
+		color: $gray-60;
+		font-weight: 600;
+		line-height: 1.4em;
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+		text-align: center;
+
+		&:focus,
+		&.is-active,
+		&.is-active:focus {
+			box-shadow: none;
+		}
+
+		&:first-of-type {
+			display: flex;
+
+			color: $primary !important;
+
+			+ .components-tab-panel__tabs-item::after {
+				width: 150%;
+			}
+
+			&::after {
+				display: none;
+			}
+		}
+	
+		&:not(:first-of-type) {
+			align-items: center;
+
+			&::after {
+				content: "";
+
+				position: relative;
+				transform: translate(-50%, 21px);
+
+				height: 3px;
+				width: 100%;
+				outline: none;
+
+				background: $gray-40;
+
+				transition: none;
+			}
+
+			&::before {
+				content: "";
+				display: inline-block;
+				top: 30px;
+				left: 50%;
+				transform: translateX(-50%);
+
+				position: absolute;
+				z-index: 10;
+
+				width: 18px;
+				height: 18px;
+				border: 2px solid $gray-40;
+				border-radius: 50%;
+				box-shadow: inset 0 0 0 2px $white;
+
+				background: $gray-40;
+				line-height: 20px;
+			}
+		}
+
+		&.is-active {
+			@include progress-state (
+				linear-gradient(to right, $status-good 0%, $primary 100%),
+				$primary,
+				$primary
+			);
+		}
+
+		&.is-done {
+			@include progress-state($status-good, $gray-60, $status-good);
+		}
+
+		@media screen and (max-width: 782px) and (max-width: 595px) {
+			&:first-of-type {
+				z-index: 1;
+
+				padding-top: 5px;
+				padding-bottom: 10px;
+
+				background-color: $white;
+			}
+
+			&:not(:first-of-type) {
+				font-size: 0;
+				line-height: 1;
+
+				&::before {
+					top: 10px;
+				}
+
+				&::after {
+					transform: translate(-50%, 20px) !important;
+				}
+			}
+		}
+
+		@media screen and (max-width: 782px) {
+			font-size: 12px;
+
+			&:not(:first-of-type)::after {
+				transform: translate(-50%, 23px);
+			}
+		}
+	}
+}

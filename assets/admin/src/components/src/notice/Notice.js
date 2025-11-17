@@ -25,14 +25,16 @@ import './scss/Notice.scss'
  * @param {Array}    props.actions       An array of action objects.
  * @param {string}   props.politeness    A politeness level for the notice's spoken message.
  * @param {boolean}  props.isDismissible Whether the notice should be dismissible or not.
+ * @param {string}   props.variant       Specifies the style of the notice. Accepted values are 'default' or 'alt'.
  */
 export default ( {
 	icon,
 	children,
 	onRemove,
 	className,
-	status = 'info',
 	actions = [],
+	status = 'info',
+	variant = 'default',
 	politeness = 'polite',
 	isDismissible = false,
 	...additionalProps
@@ -42,6 +44,7 @@ export default ( {
 		'rank-math-notice',
 		{
 			'has-icon': icon,
+			'is-alt': variant === 'alt',
 		}
 	)
 
@@ -53,6 +56,10 @@ export default ( {
 		className,
 		politeness,
 		isDismissible,
+	}
+
+	if ( status === 'message' ) {
+		return children
 	}
 
 	return (

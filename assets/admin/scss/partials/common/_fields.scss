@@ -1,0 +1,404 @@
+p.field-description {
+	padding-top: 0.5em;
+	margin: 0;
+	
+	color: #666;
+	letter-spacing: 0.01em;
+}
+
+.form-table {
+	width: 100%;
+	margin-top: 0.5em;
+
+	border-collapse: collapse;
+
+	clear: both;
+}
+
+.form-table, 
+.form-table td, 
+.form-table td p, 
+.form-table th {
+	font-size: 14px;
+}
+
+.field-metabox {
+	margin: 0;
+
+	clear: both;
+
+	> .field-row,
+	&.field-list > .field-row {
+		&:first-of-type > .field {
+			&-td, 
+			&-th {
+				border: 0;
+			}
+		}
+	}
+
+	.note {
+		margin-right: 5px;
+		padding: 2px 6px;
+		border-radius: 3px;
+
+		color: #794800;
+		background: rgba(255, 190, 95, 0.5);
+	}
+}
+
+.field {
+	&-th {
+		float: left;
+
+		width: 200px;
+		padding: 20px 10px 20px 0;
+
+		color: #222;
+		font-weight: 600;
+		vertical-align: top;
+
+		label {
+			display: block;
+
+			padding: 5px 0;
+		}
+		
+		+ .field-td {
+			float: left;
+		}
+	}
+
+	&-td {
+		max-width: 100%;
+		padding: 15px 10px;
+
+		line-height: 1.3;
+		vertical-align: middle;
+	}
+}
+
+[id^="field-metabox-rank"] {
+	.field-row {
+		margin: 0;
+		padding: 25px 0;
+
+		&:not(.field-type-title) {
+			&:last-of-type {
+				padding-bottom: 0;
+			}
+		}
+
+		&.rank-math-advanced-option ~ .rank-math-advanced-option,
+		&:not(.rank-math-advanced-option):not(.tab-header):not(.field-type-notice) ~ .field-row:not(.rank-math-advanced-option):not(.rank-math-notice-field) {
+			border-top: 1px solid $light_gray;
+			border-bottom: 0;
+		}
+
+		.field {
+			&-td,
+			&-th {
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			&-th {
+				width: 25%;
+				max-width: 200px;
+
+				color: $text;
+
+				label {
+					padding: 0 15px 0 0;
+				}
+
+				+ .field-td {
+					float: left;
+	
+					width: 75%;
+				}
+			}
+		}
+
+		&.field-type-notice {
+			padding: 5px 0 15px;
+	
+			.rank-math-notice {
+				width: auto;
+				margin: 0;
+
+				font-size: 14px;
+				font-style: normal;
+				line-height: 1.5;
+			}
+		}
+
+		&.field-type-checkboxlist,
+		&.field-type-repeatableGroup {
+			.rank-math-button.field-multicheck-toggle {
+				margin-bottom: 1rem;
+			}
+
+			&:not(.field-big-labels) .rank-math-checkbox-list {
+				li {
+					display: inline-block;
+	
+					width: 49%;
+					margin: 1px 0 5px 0;
+				}
+			}
+		}
+
+		&.rank-math-advanced-robots-field {
+			.field-td {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 5px;
+
+				.components-checkbox-control {
+					margin-bottom: 5px;
+				}
+			}
+		}
+
+		&.field-id-console {
+			width: 75%;
+			padding-top: 0;
+
+			.rank-math-button {
+				margin-top: 20px;
+			}
+		}
+
+		&.field-id-indexnow_api_key {
+			#indexnow_api_key__help {
+				margin-bottom: 0;
+			}
+		}
+
+		&.field-id-indexnow_history {
+			.rank-math-button {
+				gap: 0;
+
+				margin: 20px 0;
+
+				text-decoration: none;
+
+				.dashicons {
+					width: auto !important;
+					height: auto !important;
+					padding: 0;
+				}
+			}
+		}
+
+		&.field-id-analytics {
+			padding-top: 0;
+
+			.notice-connect-disabled {
+				margin-top: 0 !important;
+			}
+
+			.field-wrap {
+				padding: 0;
+    			border: 0;
+			}
+		}
+
+		&.field-id-content_ai_credits {
+			.rank-math-button.update-credits {
+				min-height: fit-content;
+				margin: 2px 0 20px;
+				padding: 0;
+				border: 0;
+
+				color: $gray;
+				background: none;
+
+				&:hover {
+					color: $primary;
+				}
+			}
+		}
+	}
+
+	.field-description {
+		padding-top: 10px;
+
+		color: $dark_gray;
+		font-size: 14px;
+		font-style: normal;
+
+		code {
+			background: rgba(0, 0, 0, 0.05);
+		}
+	}
+
+	.rank-math-desc {
+		color: #7e8993;
+		margin-top: 0;
+	}
+
+	.media-status .img-status img {
+		box-shadow: 0 0 0 1px #e9e9e9;
+		outline: none;
+	}
+}
+
+.field-list > .field-row {
+	vertical-align: top;
+}
+
+.field-wrap {
+	margin: 0;
+
+	.field-row {
+		position: relative;
+
+		margin: 0;
+
+		&::after {
+			content:  '';
+			display: block;
+
+			width: 100%;
+
+			clear: both;
+		}
+
+		.buy-more-credits {
+			color: $dark_gray;
+
+			.update-credits {
+				float: left;
+
+				text-decoration: none;
+				box-shadow: none !important;
+
+				i {
+					display: flex;
+					justify-content: center;
+					font-size: 12px;
+					margin-top: 1px;
+					transform: scaleX(-1);
+					height: 12px;
+				}
+
+				&.loading i:before {
+					animation: spin 1s infinite linear;
+				}
+
+			}
+
+			strong {
+				color: $text;
+				opacity: 0.8;
+			}
+		}
+	}
+
+	+ footer.form-footer {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+
+		padding: 20px;
+		margin: 30px -1.875rem -1.875rem;
+		border: 0;
+		border-top: 1px solid $gray-10;
+		border-radius: 0 0 6px 6px;
+		box-sizing: border-box;
+
+		width: auto;
+		text-align: center;
+
+		overflow: hidden;
+
+		.rank-math-button {
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	ul {
+		margin: 0;
+	}
+
+	li {
+		margin: 1px 0 5px 0;
+
+		font-size: 14px;
+		line-height: 16px;
+	}
+}
+
+.field-disabled {
+	opacity: 0.4;
+	pointer-events: none;
+}
+
+@media screen and (max-width: 782px) {
+	.form-table label {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.field-td .rank-math-button.toggle-all-capabilities {
+		margin: 1em 0 1.7em;
+	}
+
+	[id^="field-metabox-rank"] {
+		.field-row .field {
+			&-td,
+			&-th label {
+				padding: 0 0 15px 2px;
+			}
+
+			&-td, 
+			&-th {
+				width: 100%;
+				padding: 0;
+			}
+		}
+	}
+
+	.field-wrap .field-row {
+		padding: 15px 0;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.field-th {
+		display: block;
+
+		float: none;
+
+		width: 100%;
+		padding-bottom: 1em;
+
+		font-size: 1.2em;
+		text-align: left;
+
+		label {
+			display: block;
+
+			margin-top: 0;
+			margin-bottom: 0.5em;
+		}
+	}
+
+	.field-td, 
+	.field-th + .field-td {
+		display: block;
+
+		float: none;
+
+		width: 100%;
+	}
+}
+
+.field-disabled {
+	opacity: 0.4;
+	pointer-events: none;
+}

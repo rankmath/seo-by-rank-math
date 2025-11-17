@@ -3,6 +3,11 @@
  */
 import $ from 'jquery'
 
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n'
+
 class PrimaryTerm {
 	/**
 	 * Class constructor
@@ -32,7 +37,7 @@ class PrimaryTerm {
 						checkbox.val() +
 						'" type="radio" name="rank_math_primary_' +
 						taxonomy +
-						'"><span>Make Term Primary</span></span>'
+						'"><span>' + __( 'Make Term Primary', 'rank-math' ) + '</span></span>'
 				)
 			} )
 
@@ -41,7 +46,7 @@ class PrimaryTerm {
 				const listItem = term.closest( 'li' )
 
 				listItem.addClass( 'term-checked' )
-				if ( taxonomy + '-' + selected === listItem.attr( 'id' ) ) {
+				if ( selected === term.attr( 'value' ) ) {
 					listItem.addClass( 'term-marked-primary' )
 					listItem
 						.find( '>label .rank-math-make-primary' )
@@ -99,7 +104,7 @@ class PrimaryTerm {
 								checkbox.val() +
 								'" type="radio" name="rank_math_primary_' +
 								taxonomy +
-								'"><span>Make Term Primary</span></span>'
+								'"><span>' + __( 'Make Term Primary', 'rank-math' ) + '</span></span>'
 						)
 					} )
 			} )

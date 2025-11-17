@@ -7,6 +7,7 @@ import classNames from 'classnames'
  * WordPress dependencies
  */
 import { Button } from '@wordpress/components'
+import { forwardRef } from '@wordpress/element'
 
 /**
  * Internal dependencies
@@ -24,8 +25,9 @@ import './scss/Button.scss'
  * @param {string}   props.className CSS class for additional styling.
  * @param {string}   props.size      The size of the button.
  * @param {string}   props.variant   Specifies the button's style. Accepted values: 'primary', 'secondary', 'primary-outline', 'remove-group', 'green' or 'start-new-chat'.
+ * @param {Object}   ref             Ref object for accessing an instance of the component.
  */
-export default ( {
+const RankMathButton = ( {
 	icon,
 	variant,
 	onClick,
@@ -34,7 +36,7 @@ export default ( {
 	className,
 	size = 'default',
 	...additionalProps
-} ) => {
+}, ref ) => {
 	className = classNames(
 		'button',
 		className,
@@ -50,6 +52,7 @@ export default ( {
 
 	const props = {
 		...additionalProps,
+		ref,
 		size,
 		icon,
 		variant,
@@ -62,3 +65,5 @@ export default ( {
 
 	return <Button { ...props } />
 }
+
+export default forwardRef( RankMathButton )

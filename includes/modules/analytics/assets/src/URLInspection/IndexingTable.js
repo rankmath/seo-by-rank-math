@@ -57,11 +57,6 @@ const IndexingTable = ( props ) => {
 				cellClassName: 'rank-math-col-indexing-allowed',
 			},
 			{
-				key: 'mobile_usability_verdict',
-				label: __( 'Mobile Usability', 'rank-math' ),
-				cellClassName: 'rank-math-col-mobile-usability',
-			},
-			{
 				key: 'rich_results_items',
 				label: __( 'Rich Results', 'rank-math' ),
 				cellClassName: 'rank-math-col-rich-results',

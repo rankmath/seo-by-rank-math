@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, map, debounce, forEach, isEmpty, isInteger, isUndefined } from 'lodash'
+import { get, map, debounce, forEach, isEmpty, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -9,14 +9,18 @@ import { get, map, debounce, forEach, isEmpty, isInteger, isUndefined } from 'lo
 import { __ } from '@wordpress/i18n'
 import { dispatch, select, subscribe } from '@wordpress/data'
 import apiFetch from '@wordpress/api-fetch'
+import { registerPlugin } from '@wordpress/plugins'
 import { safeDecodeURIComponent } from '@wordpress/url'
-import { doAction } from '@wordpress/hooks'
+import { doAction, applyFilters } from '@wordpress/hooks'
+import { PluginPostStatusInfo } from '@wordpress/edit-post'
 
 /**
  * Internal dependencies
  */
 import { swapVariables } from '@helpers/swapVariables'
 import isGutenbergAvailable from '@helpers/isGutenbergAvailable'
+import isSiteEditorHomepage from '@helpers/isSiteEditorHomepage'
+import LockModifiedDate from '@components/LockModifiedDate'
 
 /**
  * DataCollector class
@@ -70,6 +74,22 @@ class DataCollector {
 		this.isSavingPost = this.isSavingPost.bind( this )
 		this.getPostAttribute = this.getPostAttribute.bind( this )
 		this.subscribeToGutenberg()
+		this.lockModifiedDate()
+	}
+
+	// Add Toogle option to Lock the Modified date in the Post Status box.
+	lockModifiedDate() {
+		if ( ! rankMath.showLockModifiedDate ) {
+			return
+		}
+
+		registerPlugin( 'rank-math-lock-last-modified', {
+			render: () => {
+				return (
+					<PluginPostStatusInfo><LockModifiedDate /></PluginPostStatusInfo>
+				)
+			},
+		} )
 	}
 
 	/**
@@ -79,7 +99,7 @@ class DataCollector {
 	 */
 	collectGutenbergData() {
 		if ( ! isGutenbergAvailable() ) {
-			return
+			return {}
 		}
 
 		if ( ! this._coreEditorSelect ) {
@@ -116,6 +136,9 @@ class DataCollector {
 	 * @return {string} The post's permalink.
 	 */
 	getPermalink() {
+		if ( isSiteEditorHomepage() ) {
+			return rankMath.homeUrl
+		}
 		/**
 		 * Before the post has been saved for the first time, the generated_slug is "auto-draft".
 		 *
@@ -163,7 +186,7 @@ class DataCollector {
 		 *
 		 * https://github.com/WordPress/gutenberg/issues/8770
 		 */
-		if ( 'auto-draft' === generatedSlug || 'en' !== rankMath.locale ) {
+		if ( 'auto-draft' === generatedSlug ) {
 			generatedSlug = ''
 		}
 
@@ -264,7 +287,7 @@ class DataCollector {
 						objectID: rankMath.objectID,
 						objectType: rankMath.objectType,
 						meta,
-						content: this.getPostAttribute( 'content' ),
+						content: applyFilters( 'rank_math_content', this.getPostAttribute( 'content' ) ),
 					},
 				} ).then( ( response ) => {
 					doAction( 'rank_math_metadata_updated', response )
@@ -421,7 +444,7 @@ class DataCollector {
 			featuredImage: 'handleFeaturedImageChange',
 		}
 
-		if ( ! isInteger( oldData.id ) ) {
+		if ( ! oldData.id ) {
 			dispatch( 'rank-math' ).refreshResults()
 			return
 		}
@@ -444,8 +467,14 @@ class DataCollector {
 	}
 
 	handleIDChange( postID ) {
+		if ( isSiteEditorHomepage() ) {
+			postID = 0
+		}
+
 		dispatch( 'rank-math' ).updatePostID( postID )
 		dispatch( 'rank-math' ).toggleLoaded( true )
+
+		doAction( 'rank_math_id_changed' )
 	}
 
 	handleSlugChange() {
@@ -490,7 +519,7 @@ class DataCollector {
 	}
 
 	getData() {
-		return this._data
+		return applyFilters( 'rank_math_dataCollector_data', this._data )
 	}
 }
 

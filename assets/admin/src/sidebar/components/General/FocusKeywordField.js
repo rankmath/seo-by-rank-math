@@ -2,8 +2,7 @@
  * External dependencies
  */
 import jQuery from 'jquery'
-import { debounce, has, isUndefined } from 'lodash'
-import { Helpers } from '@rankMath/analyzer'
+import { debounce, has, isUndefined, toLower } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -18,8 +17,10 @@ import { applyFilters } from '@wordpress/hooks'
  * Internal dependencies
  */
 import TagifyField from '@components/TagifyField'
+import removeDiacritics from '@helpers/removeDiacritics'
 import getAttributes from '@helpers/getAttributes'
 import stripTags from '@helpers/stripTags'
+import showCTABox from '@helpers/showCTABox'
 import FocusKeywordCTA from './FocusKeywordCTA'
 
 class FocusKeywordField extends Component {
@@ -62,6 +63,7 @@ class FocusKeywordField extends Component {
 		super()
 		this.state = { showCTA: false }
 		this.tagifyField = createRef()
+		this.showKeywordIntent = rankMath.showKeywordIntent
 		this.keywords = keywords
 		this.hideDropdown = this.hideDropdown.bind( this )
 		this.callbacks = {
@@ -94,15 +96,35 @@ class FocusKeywordField extends Component {
 				},
 				templates: {
 					tag: ( tagData ) => {
-						const value = tagData.title || tagData.value
-						let classes = ''
+						let value = tagData.title || tagData.value
+						let classes = `tagify__tag ${ this.maybeAddIntentClass( value ) } `
 						if ( ! tagData.class ) {
 							const score = rankMathEditor.resultManager.getScore(
-								Helpers.removeDiacritics( value )
+								removeDiacritics( value )
 							)
 							classes += this.getScoreClass( score )
 						}
-						return "<tag draggable='true' title='".concat( stripTags( value ), "'\n tabIndex='0'\n contenteditable='false'\n spellcheck='false'\n class='tagify__tag " ).concat( tagData.class ? tagData.class : classes, "'\n " ).concat( getAttributes( tagData ), ">\n <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>\n <div>\n <span class='tagify__tag-text'>" ).concat( stripTags( value ), '</span>\n </div>\n </tag>' )
+
+						value = stripTags( value )
+
+						return `
+							<tag
+								draggable="true"
+								tabIndex="0"
+								contenteditable="false"
+								spellcheck="false"
+								class="${ classes }"
+								title="${ value }"
+								data-value="${ toLower( removeDiacritics( value ) ) }"
+								${ getAttributes( tagData ) }
+							>
+								<x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
+								<div>
+									<span class="tagify__tag-text">${ value }</span>
+								</div>
+								${ applyFilters( 'rank_math_after_focus_keyword', this.addKeywordIntent( removeDiacritics( value ) ), removeDiacritics( value ) ) }
+							</tag>
+						`
 					},
 				},
 				callbacks: this.callbacks,
@@ -174,12 +196,57 @@ class FocusKeywordField extends Component {
 				}
 
 				const score = rankMathEditor.resultManager.getScore(
-					Helpers.removeDiacritics( keyword.value )
+					removeDiacritics( keyword.value )
 				)
 				tags[ index ].classList.remove( 'ok-fk', 'good-fk', 'bad-fk' )
 				tags[ index ].classList.add( this.getScoreClass( score ) )
 			} )
 		}
+	}
+
+	maybeAddIntentClass( value ) {
+		if ( ! this.showKeywordIntent ) {
+			return ''
+		}
+
+		let classes = 'has-keyword-intent'
+		if ( value.length > 10 ) {
+			classes += ' float-keyword-intent'
+		}
+
+		return classes
+	}
+
+	addKeywordIntent( value ) {
+		if (
+			! this.showKeywordIntent ||
+			(
+				rankMathEditor.getPrimaryKeyword() &&
+				value !== rankMathEditor.getPrimaryKeyword()
+			)
+		) {
+			return ''
+		}
+
+		jQuery( document ).on( 'click', '#rank-math-get-keyword-intent', ( e ) => {
+			const { isPro, searchIntents } = rankMath
+			if ( isPro && ! isUndefined( searchIntents ) ) {
+				return
+			}
+
+			e.preventDefault()
+			showCTABox( { showProNotice: ! isPro, isKeywordIntent: isUndefined( searchIntents ) } )
+			return false
+		} )
+
+		return `
+			<span class="rank-math-keyword-intent-container">
+				<button id="rank-math-get-keyword-intent" class="rank-math-keyword-intent-wrapper is-show-intent">
+					<span class='icon rm-icon-bulb-1'></span>
+					<span class="intent">${ __( 'Show Intent', 'rank-math' ) }</span>
+				</button>
+			</span>
+		`
 	}
 
 	onSetup() {

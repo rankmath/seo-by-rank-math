@@ -11,7 +11,7 @@ import { isNull, find } from 'lodash'
 import { __ } from '@wordpress/i18n'
 import { addFilter } from '@wordpress/hooks'
 import { select } from '@wordpress/data'
-import { render } from '@wordpress/element'
+import { createRoot } from '@wordpress/element'
 import { Button } from '@wordpress/components'
 
 /**
@@ -82,10 +82,8 @@ export default () => {
 						params.focus_keyword.default = repo.getKeywords().split( ',' )
 						tool.output.default = 1
 						tool.params = params
-						render(
-							<MyModal tool={ tool } callApi={ true } />,
-							document.getElementById( 'rank-math-content-ai-modal-wrapper' )
-						)
+
+						createRoot( document.getElementById( 'rank-math-content-ai-modal-wrapper' ) ).render( <MyModal tool={ tool } callApi={ true } /> )
 					} }
 				>
 					<i className="rm-icon rm-icon-content-ai"></i>

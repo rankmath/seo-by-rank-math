@@ -53,7 +53,7 @@ export default ( {
 		onChange,
 		className,
 		indeterminate,
-		__nextHasNoMarginBottom: false,
+		__nextHasNoMarginBottom: true,
 	}
 
 	return <CheckboxControl { ...props } />

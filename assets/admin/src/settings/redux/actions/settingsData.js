@@ -45,7 +45,6 @@ export function updateSettingsData( key, value, settingsKey = false, settingsVal
  * @return {Object} An action for redux.
  */
 export function updateAppUi( key, value ) {
-	console.log( 'Update app ui...' )
 	doAction( 'rank_math_update_app_ui', key, value )
 	return {
 		type: 'RANK_MATH_APP_UI',

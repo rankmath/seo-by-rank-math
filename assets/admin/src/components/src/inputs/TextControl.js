@@ -31,7 +31,9 @@ export default ( {
 	variant = 'regular-text',
 	...additionalProps
 } ) => {
-	className = classNames( variant, className, 'rank-math-text-control' )
+	className = classNames( variant, className, 'rank-math-text-control', {
+		'no-value': ! value?.toString()?.trim(),
+	} )
 
 	const props = {
 		...additionalProps,
@@ -39,6 +41,8 @@ export default ( {
 		value,
 		onChange,
 		className,
+		__nextHasNoMarginBottom: true,
+		__next40pxDefaultSize: true,
 	}
 
 	return <TextControl { ...props } />

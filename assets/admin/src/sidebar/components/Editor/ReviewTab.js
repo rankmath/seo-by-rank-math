@@ -100,10 +100,7 @@ class ReviewTab extends Component {
 					label={
 						<Fragment>
 							<span>
-								{ __(
-									"I already did. Please don't show this message again.",
-									'rank-math'
-								) }
+								{ __( 'I already did. Please don\'t show this message again.', 'rank-math' ) }
 							</span>
 						</Fragment>
 					}
@@ -128,7 +125,6 @@ class ReviewTab extends Component {
 			)
 			buttons.first().click()
 			buttons.last().remove()
-			wrapper.remove()
 		} )
 	}
 }

@@ -1,5 +1,4 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/formcontrol';
+@import '../../../scss/main';
 
 /*
  * Checkbox Control component.
@@ -8,11 +7,27 @@
 	.components-base-control__field {
 		margin: 0;
 
+		.components-flex {
+			align-items: center;
+		}
+
 		.components-checkbox-control {
 			&__input-container {
+				width: auto;
+				height: auto;
 				margin-right: 4px;
 
+				aspect-ratio: auto;
+
 				.components-checkbox-control {
+					&__indeterminate {
+						display: none;
+					}
+
+					&__checked {
+						display: none;
+					}
+
 					&__input {
 						@include checkbox-radio-style;
 
@@ -20,7 +35,8 @@
 							@include checkbox-radio-disabled;
 						}
 
-						&:hover:not(:disabled), &:focus {
+						&:focus,
+						&:hover:not(:disabled) {
 							box-shadow: 0 0 0 1px $primary-light;
 						}
 
@@ -30,76 +46,77 @@
 						}
 
 						&:checked::before {
-							content: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%20fill%3D%27%233582c4%27%2F%3E%3C%2Fsvg%3E");
-							margin: -.1875rem 0 0 -.25rem;
-							height: 1.3125rem;
-							width: 1.3125rem;
 							float: left;
+							
+							content: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%20fill%3D%27%233582c4%27%2F%3E%3C%2Fsvg%3E");
+
+							width: 1.3125rem;
+							height: 1.3125rem;
+							margin: -0.1875rem 0 0 -0.25rem;
+
+							@media screen and (max-width: 782px) {
+								width: 1.875rem;
+    							height: 1.875rem;
+    							margin-left: -0.3125rem;
+								margin-right: -0.3125rem;
+							}
 						}
-					}
-
-					&__indeterminate {
-						display: none;
-					}
-
-					&__checked {
-						display: none;
 					}
 				}
 			}
 
 			&__label {
-				@include control-label-style;
-			}
-		}
-	}
-
-	&.metabox {
-		&.is-indeterminate {
-			display: inline-block;
-			width: 49%;
-			margin: 1px 0 5px 0;
-		}
-
-		.components-base-control__field .components-checkbox-control {
-			&__input {
-				&:hover:not(:focus) {
-					box-shadow: inset 0 1px 2px $black-a10;
-				}
-
-				&:checked {
-					border-color: $primary;
-					background: $primary;
-					box-shadow: none;
-
-					&::before {
-						font-family: 'dashicons';
-						font-size: 20px;
-						line-height: 20px;
-						content: '\f147';
-						color: $white;
-					}
-
-					&:hover {
-						box-shadow: none;
-					}
-				}
-
-				@media screen and (max-width: 782px) {
-					margin-top: -3px;
-
-					&:checked::before {
-						width: 1.875rem;
-						height: 1.875rem;
-						margin: 2px -.3125rem;
-						font-size: 30px;
-					}
-				}
+				@include form-control-label;
 			}
 		}
 	}
 
 	&.is-disabled .components-base-control__field label {
 		pointer-events: none;
+	}
+
+	&.metabox {
+		&.is-indeterminate {
+			display: inline-block;
+
+			width: 49%;
+			margin: 1px 0 5px 0;
+		}
+
+		.components-base-control__field .components-checkbox-control__input {
+			&:hover:not(:focus) {
+				box-shadow: inset 0 1px 2px $black-a10;
+			}
+
+			&:checked {
+				border-color: $primary;
+				box-shadow: none;
+
+				background: $primary;
+
+				&:hover {
+					box-shadow: none;
+				}
+
+				&::before {
+					content: "\f147";
+
+					color: $white;
+
+					font-family: "dashicons";
+					font-size: 20px;
+					line-height: 20px;
+
+					@media screen and (max-width: 782px) {
+						width: 1.875rem;
+						height: 1.875rem;
+						margin: 2px -0.3125rem;
+		
+						font-size: 30px;
+					}			
+				}
+			}
+
+		}
 	}
 }

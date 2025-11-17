@@ -1,6 +1,6 @@
 // main: ../../setup-wizard.scss
 
-.#{$namespace}-wizard-body--requirements {
+.wizard-content--requirements {
 	h2 {
 		> .dashicons {
 			font-size: 16px;
@@ -12,7 +12,7 @@
 
 			vertical-align: -2px;
 
-			opacity: .5;
+			opacity: 0.5;
 
 			@extend %header-icon;
 		}
@@ -28,7 +28,7 @@
 		margin: 0 auto;
 	}
 
-	.form-table {
+	.rank-math-table {
 		margin-top: 50px;
 
 		border-width: 1px 1px 0 1px;
@@ -36,6 +36,8 @@
 		border-color: $gray;
 
 		tr {
+			position: relative;
+
 			&:nth-child(odd) {
 				background: #f8f9fa;
 			}
@@ -52,6 +54,8 @@
 			width: auto;
 
 			color: $text;
+
+			text-transform: inherit;
 
 			.description {
 				font-size: 12px;
@@ -74,13 +78,21 @@
 			}
 		}
 
-		.check-no {
-			th {
-				border-left: 3px solid $error;
-			}
+		.dashicons-no {
+			color: $error;
 
-			td {
-				color: $error;
+			&::after {
+				content: '';
+				display: block;
+
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+
+				width: 3px;
+				
+				background: $error;
 			}
 		}
 	}
@@ -127,17 +139,19 @@
 		td {
 			padding: 8px 10px;
 
+			color: $text;
 			vertical-align: middle;
 
-			&:first-child {
-				width: 20px;
-				padding-right: 0;
+			.dashicons-warning {
+				margin-right: 5px;
 
 				color: $error;
 
-				.dashicons-yes {
-					color: $success;
-				}
+				transform: translateY(-1px);
+			}
+
+			.dashicons-yes {
+				color: $success;
 			}
 
 			a.disabled {
@@ -151,153 +165,172 @@
 	}
 
 	.#{$namespace}-collapsible-trigger {
-		margin-left: 10px;
+		&.#{$namespace}-button.components-button.button-link {
+			margin-left: 10px;
 
-		color: inherit;
+			color: rgba(#24292e, 0.65);
+			text-decoration: none;
 
-		&:hover {
-			background: #f8f9fa;
-		}
-	}
+			&:hover {
+				color: currentColor;
+				background: $tertiary;
+			}
 
-	// Mode
-	.rank-math-ui {
-		border: none;
+			&:focus {
+				box-shadow: none;
+				outline: none;
 
-		.rank-math-setup-mode {
-			width: 770px;
-			max-width: 100%;
-			margin: 0 auto;
-			margin-top: 3rem;
+				color: currentColor;
+				background: transparent;
 
-			.cmb-td {
-				display: block;
-
-				width: 100%;
-
-				ul {
-					display: block;
-
-					width: 100%;
-					padding: 0;
-
-					border: none;
-
-					li {
-						position: relative;
-
-						float: none;
-
-						width: 100%;
-
-						input {
-							position: absolute;
-							top: 20px;
-							left: 20px;
-
-							display: inline-block;
-
-							margin-top: 3px;
-							margin-right: 16px;
-
-							&:checked + label {
-								border-color: $primary;
-								box-shadow: 0 0 0 1px $primary;
-							}
-
-							&:focus + label {
-								border-color: $dark_gray;
-							}
-						}
-
-						&:hover label {
-							border-color: $dark_gray;
-						}
-
-						label {
-							font-size: 17px;
-							font-weight: 600;
-							line-height: 1;
-
-							display: block;
-
-							box-sizing: border-box;
-							width: 100%;
-							height: auto;
-							margin: 0 0 16px 0;
-							padding: 20px 20px 20px 50px;
-
-							transition: .25s all linear;
-							white-space: normal;
-
-							color: $text;
-							border: 1px solid $light_gray;
-							border-radius: 6px;
-							background: #f8f9fa;
-
-							p {
-								font-size: 14px;
-								font-weight: normal;
-								font-style: normal;
-								line-height: 1.5;
-
-								display: block;
-								clear: both;
-
-								margin: 0;
-								padding: 0;
-								padding-top: 10px;
-
-								color: $dark_gray;
-
-								strong {
-									font-weight: 500;
-								}
-							}
-						}
-
-						&:last-child {
-							input {
-								opacity: .5;
-							}
-
-							label {
-								margin-bottom: 0;
-							}
-
-							.#{$namespace}-mode-title {
-								color: rgba( $text, .5 );
-
-								&:after {
-									font-size: 11px;
-									font-weight: normal;
-
-									margin-left: 10px;
-									margin-left: 5px;
-									padding: 5px 10px;
-
-									content: 'Pro';
-									vertical-align: 2px;
-									text-transform: uppercase;
-
-									opacity: 1;
-									color: #fff;
-									border-radius: 3px;
-									background: #00af80;
-									background: linear-gradient(335deg, #00af80, #1cb076, #2db06c, #3cb061, #49b156, #56b04a, #63b03d, #6faf2e);
-								}
-							}
-						}
-					}
+				&:hover {
+					background: $tertiary;
 				}
 			}
 		}
 	}
 
-	&.#{$namespace}-mode-basic {
-		.wizard-navigation a {
-			cursor: default;
-			pointer-events: none;
+	// Mode
+	.rank-math-setup-mode {
+		width: 770px;
+		max-width: 100%;
+		margin: 0 auto;
+		margin-top: 3rem;
+
+		ul {
+			display: block;
+	
+			width: 100%;
+			padding: 0;
+			margin: 0;
+			border: none;
+	
+			li {
+				position: relative;
+	
+				margin: 0;
+	
+				input[type="radio"] {
+					position: absolute;
+					top: 20px;
+					left: 20px;
+
+					margin-top: 3px;
+				}
+	
+				label {
+					display: block;
+	
+					width: 100%;
+					height: auto;
+					padding: 20px 20px 20px 50px;
+					margin: 0 0 16px 0;
+					box-sizing: border-box;
+					border: 1px solid $light_gray;
+					border-radius: 6px;
+	
+					background: $tertiary;
+					white-space: normal;
+	
+					transition: 0.25s all linear;
+					cursor: pointer;
+	
+					&:hover {
+						border-color: $dark_gray;
+					}
+					
+					.rank-math-mode-title {
+						color: $text;
+						font-size: 17px;
+						font-weight: 600;
+						line-height: 1;
+						white-space: normal;
+					}
+	
+					p {
+						display: block;
+						clear: both;
+	
+						padding: 0;
+						padding-top: 10px;
+						margin: 0;
+	
+						color: $dark_gray;
+						font-size: 14px;
+						font-weight: 400;
+						font-style: normal;
+						line-height: 1.5;
+						
+						strong {
+							font-weight: 500;
+						}
+					}
+	
+					.children {
+						padding-top: 8px;
+						padding-bottom: 8px;
+					}
+	
+					&.is-checked {
+						border-color: $primary;
+						box-shadow: 0 0 0 1px $primary;
+					}
+	
+					&.is-disabled .rank-math-mode-title {
+						color: rgba(36, 38, 40, 0.5);
+					}
+				}
+	
+				&:last-child label {
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		p {
+			padding-top: 10px;
+			color: $dark_gray;
+			font-size: 14px;
+			font-style: normal;
+			margin: 0;
+		}
+
+		&.is-free {
+			ul li:last-child {
+				input {
+					opacity: 0.5;
+				}
+
+				.rank-math-mode-title {
+					color: rgba( $text, 0.5 );
+
+					&::after {
+						content: 'Pro';
+	
+						margin-left: 10px;
+						margin-left: 5px;
+						padding: 5px 10px;
+						border-radius: 3px;
+	
+						color: #fff;
+						background: #00af80;
+						background: linear-gradient(335deg, #00af80, #1cb076, #2db06c, #3cb061, #49b156, #56b04a, #63b03d, #6faf2e);
+					
+						font-size: 11px;
+						font-weight: normal;
+						vertical-align: 2px;
+						text-transform: uppercase;
+	
+						opacity: 1;
+					}
+				}
+			}
+		}
+
+		@media screen and (max-width: 782px) {
+			ul li label {
+				padding-left: 55px;
+			}
 		}
 	}
 }

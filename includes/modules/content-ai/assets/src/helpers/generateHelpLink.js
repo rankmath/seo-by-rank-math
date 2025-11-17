@@ -5,6 +5,7 @@ import { isUndefined, includes } from 'lodash'
 
 // KB URLs
 const KB_URLS = {
+	Blog_Post_Wizard: 'https://rankmath.com/kb/content-ai-blog-post-wizard-tool/',
 	Blog_Post_Idea: 'https://rankmath.com/kb/content-ai-blog-post-idea-tool/',
 	Blog_Post_Outline: 'https://rankmath.com/kb/content-ai-blog-post-outline-tool/',
 	Blog_Post_Introduction: 'https://rankmath.com/kb/content-ai-blog-post-introduction-tool/',
@@ -13,14 +14,14 @@ const KB_URLS = {
 	Topic_Research: 'https://rankmath.com/kb/content-ai-topic-research-tool/?play-video=jbl6YfxdDMA',
 	SEO_Title: 'https://rankmath.com/kb/content-ai-seo-title-tool/?play-video=IGzjfbZ0r8g',
 	SEO_Description: 'https://rankmath.com/kb/content-ai-seo-description-tool/?play-video=chKiMSDIN14',
-	Paragraph_Writing: 'https://rankmath.com/kb/content-ai-paragraph-writing-tool/',
+	Paragraph: 'https://rankmath.com/kb/content-ai-paragraph-writing-tool/',
 	Sentence_Expander: 'https://rankmath.com/kb/content-ai-sentence-expander-tool/',
-	Paragraph_Rewritter: 'https://rankmath.com/kb/content-ai-paragraph-rewritter-tool/',
+	Paragraph_Rewriter: 'https://rankmath.com/kb/content-ai-paragraph-rewriter-tool/',
 	Text_Summarizer: 'https://rankmath.com/kb/content-ai-text-summarizer-tool/',
 	Fix_Grammar: 'https://rankmath.com/kb/content-ai-fix-grammar-tool/',
 	Analogy: 'https://rankmath.com/kb/content-ai-analogy-tool/',
 	Product_Description: 'https://rankmath.com/kb/content-ai-product-description-tool/',
-	Product_Pros_and_Cons: 'https://rankmath.com/kb/content-ai-product-pros-and-cons-tool/',
+	Product_Pros_And_Cons: 'https://rankmath.com/kb/content-ai-product-pros-and-cons-tool/',
 	Product_Review: 'https://rankmath.com/kb/content-ai-product-review-tool/',
 	Frequently_Asked_Questions: 'https://rankmath.com/kb/content-ai-frequently-asked-questions-tool/',
 	Comment_Reply: 'https://rankmath.com/kb/content-ai-comment-reply-tool/',
@@ -48,7 +49,7 @@ const KB_URLS = {
 	Freeform_Writing: 'https://rankmath.com/kb/content-ai-freeform-writing-tool/',
 	AI_Command: 'https://rankmath.com/kb/content-ai-command-tool/',
 	SEO_Meta: 'https://rankmath.com/kb/content-ai-seo-meta-tool/?play-video=fqC81KMX5IY',
-	Open_Graph: 'https://rankmath.com/kb/content-ai-open-graph-tool/',
+	Opengraph: 'https://rankmath.com/kb/content-ai-open-graph-tool/',
 	Write: 'https://rankmath.com/kb/content-ai-editor/',
 }
 

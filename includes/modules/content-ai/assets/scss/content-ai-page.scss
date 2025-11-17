@@ -18,6 +18,19 @@
 @import '../../../../../assets/admin/scss/mixins';
 @import './image-alt';
 
+@import '../../../../../assets/admin/scss/font-icons';
+
+@font-face {
+	font-family: 'Rank-Math';
+	font-weight: normal;
+	font-style: normal;
+
+	font-display: block;
+	src: url('../../../../../assets/admin/fonts/Rank-Math.ttf?v1.0.76') format('truetype'),
+	url('../../../../../assets/admin/fonts/Rank-Math.woff?v1.0.76') format('woff'),
+	url('../../../../../assets/admin/fonts/Rank-Math.svg?v1.0.76#Rank-Math') format('svg');
+}
+
 %flex {
 	@include flex;
 }
@@ -201,7 +214,6 @@
 
 				height: auto;
 				margin-right: .5rem;
-				margin-bottom: 1rem;
 				padding: 5px 14px;
 
 				list-style-type: none;
@@ -247,6 +259,10 @@ div.form-field {
 
 	&:first-of-type {
 		padding-top: 0;
+	}
+
+	button.generate {
+		float: right;
 	}
 
 	.components-base-control {
@@ -440,11 +456,14 @@ div.form-field {
 }
 
 // AI Tool List.
-.grid {
-	flex-flow: row wrap;
+.rank-math-tab-content-ai-tools,
+.rank-math-prompt-modal {
+	.grid {
+		flex-flow: row wrap;
 
-	@extend %flex;
-	gap: .9375rem;
+		@extend %flex;
+		gap: .9375rem;
+	}
 }
 
 // Single AI Tool Item.
@@ -457,15 +476,46 @@ div.form-field {
 
 	transition: .2s all linear;
 
-	// align-items: flex-start;
-	// text-align: left;
-
 	&:hover,
 	&:focus {
 		cursor: pointer;
 
 		border-color: $primary;
 		box-shadow: 0 0 0 1px $primary;
+	}
+
+	.dot-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 30px;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			height: 2px;
+			margin-top: -1px;
+			background-color: $primary;
+		}
+
+		.dot {
+			width: 6px;
+			height: 6px;
+			background: #fff;
+			border: 1px solid $primary;
+			border-radius: 50%;
+			background: $primary;
+			-webkit-box-shadow: inset 0 0 0 1px #fff;
+			box-shadow: inset 0 0 0 1px #fff;
+			border-radius: 50%;
+			z-index: 1;
+		}
 	}
 
 	i {
@@ -647,6 +697,8 @@ div.form-field {
 				button {
 					cursor: pointer;
 
+					position: relative;
+
 					border: none;
 					outline: none;
 					background-color: transparent;
@@ -660,6 +712,46 @@ div.form-field {
 						margin-right: 5px;
 
 						vertical-align: -2px;
+					}
+				}
+
+				@import '../../../../../assets/admin/scss/partials/wizard/navigation.scss';
+				.wizard-navigation {
+					margin: 0;
+					text-align: left;
+					width: 30%;
+
+					position: absolute;
+					right: 20px;
+					top: 0;
+					bottom: 0;
+
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					font-weight: normal;
+
+					a {
+						cursor: default;
+						box-shadow: none;
+
+						&:before {
+							display: none;
+						}
+
+						&:after {
+							transform: translate(-100%, -7px);
+						}
+
+						&:first-of-type:after {
+							display: none;
+						}
+
+						span {
+						
+							display: block!important;
+						}
 					}
 				}
 			}
@@ -690,6 +782,7 @@ div.form-field {
 
 					margin-top: 0;
 					margin-bottom: 1.25rem;
+					line-height: 1;
 
 					span {
 						flex-grow: 1;
@@ -763,6 +856,10 @@ div.form-field {
 								opacity: 1;
 							}
 						}
+					}
+
+					.button-secondary {
+						background: #fff;
 					}
 
 					.output-label {
@@ -890,6 +987,8 @@ div.form-field {
 		flex-direction: column;
 
 		height: auto;
+
+		border: 1px solid $gray;
 	}
 }
 
@@ -987,7 +1086,7 @@ div.form-field {
 				}
 
 				div > button {
-					margin-bottom: .5rem;
+					margin-bottom: 0;
 				}
 
 				.search-field {
@@ -1048,6 +1147,10 @@ div.form-field {
 
 					-webkit-text-fill-color: unset;
 				}
+			}
+
+			.dot-container {
+				top: auto;
 			}
 
 			header {
@@ -1279,7 +1382,7 @@ div.rank-math-content-ai-command {
 
 	&:after,
 	&.has-block-overlay:not(.is-multi-selected):after {
-		font-family: 'rank-math';
+		font-family: "Rank-Math" !important;
 		font-size: 1.5rem;
 
 		position: absolute !important;
@@ -1287,7 +1390,7 @@ div.rank-math-content-ai-command {
 		right: auto !important;
 		left: .875rem !important;
 
-		content: '\e905' !important;
+		content: '\e909' !important;
 
 		outline: none !important;
 		background: linear-gradient(-135deg, #ff4492, #434e8f);
@@ -1754,6 +1857,10 @@ body.rank-math_page_rank-math-content-ai-page {
 			@include highlight;
 		}
 
+		a {
+			color: #fff;
+		}
+
 		.wp-block-code {
 			@extend %wp-block-code;
 		}
@@ -1980,8 +2087,10 @@ body.rank-math_page_rank-math-content-ai-page {
 
 	.grid {
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
+		flex-flow: row wrap;
+
+		@extend %flex;
+		gap: .9375rem;
 
 		> div {
 			font-size: 1rem;
@@ -2018,6 +2127,9 @@ body.rank-math_page_rank-math-content-ai-page {
 .rank-math-prompt-modal {
 	.content-ai-filter {
 		justify-content: space-between;
+		align-items: center;
+
+		box-sizing: border-box;
 
 		height: 60px;
 		padding: 1rem;
@@ -2031,6 +2143,10 @@ body.rank-math_page_rank-math-content-ai-page {
 
 		> div {
 			position: relative;
+
+			&:not(.components-modal__header) {
+				min-height: calc(100% - 30px);
+			}
 		}
 	}
 
@@ -2073,7 +2189,7 @@ body.rank-math_page_rank-math-content-ai-page {
 				}
 
 				&:after {
-					top: 8.5px;
+					top: 5.5px;
 					right: 8px;
 				}
 
@@ -2405,6 +2521,10 @@ body.rank-math_page_rank-math-content-ai-page {
 			// Editor.
 			&:first-child {
 				flex-basis: 66.66%;
+			}
+
+			#editor .editor-editor-interface {
+				height: 100%;
 			}
 
 			// Sidebar.

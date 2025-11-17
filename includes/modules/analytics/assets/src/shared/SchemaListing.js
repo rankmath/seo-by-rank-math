@@ -18,7 +18,7 @@ const SchemaListing = ( { schemas } ) => {
 		return null
 	}
 
-	schemas = schemas ? schemas : __( 'None', 'rank-math-pro' )
+	schemas = schemas ? schemas : __( 'None', 'rank-math' )
 	schemas = schemas.toString().split( ', ' )
 
 	return (

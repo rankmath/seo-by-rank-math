@@ -1,0 +1,26 @@
+// Progress Bar.
+.progress-bar,
+.progress {
+	height: 4px;
+
+	border-radius: 3px;
+	background: #e9e9ea;
+
+	.progress-text{
+		display: block;
+
+		padding-top: 6px;
+
+		color: rgba(#75797f,.6);
+	}
+}
+
+.progress {
+	width: 0;
+
+	background: linear-gradient(-135deg, #ff4492, #434e8f);
+}
+
+.progress-bar {
+	margin-bottom: 3rem;
+}

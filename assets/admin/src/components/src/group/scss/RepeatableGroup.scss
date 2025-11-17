@@ -1,0 +1,76 @@
+@import "../../../scss/main";
+
+/**
+ * Repeatable Group component.
+ */
+.field-repeatable-grouping {
+	display: flex;
+	flex-flow: row wrap;
+
+	margin-bottom: 10px;
+
+	line-height: 1.3;
+
+	> .group-item {
+		flex: 0 0 41%;
+		display: inline-block;
+
+		width: calc(43% - 10px);
+
+		~ .group-item:not(.group-item-checkbox) {
+			margin-left: 10px;
+		}
+
+		&.group-item-checkbox {
+			margin-left: 0;
+			margin-top: 10px;
+
+			order: 4;
+			-webkit-box-ordinal-group: 5;
+
+			.components-checkbox-control__label {
+				color: $dark_gray;
+				letter-spacing: 0.01em;
+				line-height: 1.3;
+			}
+		}
+	}
+
+	.button-remove-group {
+		height: fit-content;
+		margin-left: 10px;
+	}
+
+	&.three-columns {
+		display: block;
+
+    	padding-bottom: 3.2rem;
+		border-bottom: 1px solid #dadfe4;
+
+		> .group-item:nth-child(3) {
+			flex: 1;
+			clear: both;
+			margin: 10px 0;
+			width: 100%;
+		}
+
+		.button-remove-group {
+			float: right;
+		}
+	}
+
+	&.image-overlay {
+		display: block;
+
+    	padding: 20px;
+		border: 1px solid #dadfe4;
+
+		> .group-item {
+			width: calc(43% - 12px);
+		}
+	}
+}
+
+.rank-math-group-field {
+	margin-bottom: 5px;
+}

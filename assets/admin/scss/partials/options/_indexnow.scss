@@ -16,17 +16,29 @@
     padding: 15px 10px;
 }
 
-#indexnow_clear_history {
-    margin: 20px 0;
-}
+.indexnow-history-filter-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-#indexnow_history_filters {
-    float: left;
-    margin-top: 32px;
-}
+    #indexnow_history_filters {
+        float: left;
 
-#indexnow_history_filters a.current {
-    font-weight: bold;
+        button {
+            &:not(:last-child):after {
+                content: '|';
+
+                font-weight: normal;
+
+                margin-left: 3px;
+                margin-right: 3px;
+            }
+
+            &.current {
+                font-weight: bold;
+            }
+        }
+    }
 }
 
 #setting-panel-url-submission .cmb2-id-indexnow-urls {
@@ -41,9 +53,4 @@
 #indexnow_check_key {
     padding-left: 15px;
     margin-top: 20px;
-}
-
-#indexnow_reset_key .dashicons,
-#indexnow_check_key .dashicons {
-    line-height: 1.8;
 }

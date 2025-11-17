@@ -13,7 +13,6 @@
 
 @import "_font-icons";
 @import "partials/common/header";
-@import 'partials/common/search';
 @import "partials/common/page";
 @import "partials/common/box";
 .#{$namespace}-page {
@@ -29,3 +28,5 @@
 @import "partials/common/vars";
 @import "partials/common/table";
 @import "partials/common/responsive";
+@import "partials/common/skeleton";
+@import "partials/common/fields";

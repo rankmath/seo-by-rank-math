@@ -10,12 +10,15 @@ import { map, keys } from 'lodash'
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
+import { compose } from '@wordpress/compose'
+import { withSelect } from '@wordpress/data'
 
 /**
  * Internal dependencies
  */
 import getLink from '@helpers/getLink'
 import TabContent from '@rank-math-settings/components/TabContent'
+
 import './role-manager.scss'
 
 // Role Manager fields.
@@ -38,7 +41,7 @@ const getFields = () => {
 			id: role,
 			name: roles[ role ],
 			options: roleOptions,
-			type: 'multicheck_inline',
+			type: 'checkboxlist',
 			classes: 'field-big-labels',
 			toggleAll: {
 				size: 'small',
@@ -50,7 +53,7 @@ const getFields = () => {
 }
 
 // Role Manager page content.
-export default () => (
+const App = ( { settings } ) => (
 	<div className="wrap rank-math-wrap">
 		<div className="rank-math-box container">
 			<span className="wp-header-end"></span>
@@ -58,6 +61,7 @@ export default () => (
 			<TabContent
 				type="roleCapabilities"
 				fields={ getFields() }
+				settings={ settings }
 				header={ {
 					title: __( 'Role Manager', 'rank-math' ),
 					link: getLink( 'role-manager', 'Role Manager Page' ),
@@ -75,3 +79,11 @@ export default () => (
 		</div>
 	</div>
 )
+
+export default compose(
+	withSelect( ( select ) => {
+		return {
+			settings: select( 'rank-math-settings' ).getData(),
+		}
+	} ),
+)( App )

@@ -29,6 +29,7 @@ import { getOverlayChoices } from '@helpers/overlayImages'
 import SocialMediaUpload from './MediaUpload'
 import VariableInserter from '@components/VariableInserter'
 import Interpolate from '@components/Interpolate'
+import isSiteEditorHomepage from '@helpers/isSiteEditorHomepage'
 
 const TwitterTab = ( props ) => (
 	<Fragment>
@@ -172,7 +173,7 @@ const TwitterTab = ( props ) => (
 			</div>
 		) }
 
-		{ ! props.useFacebook && 'app' !== props.cardType && (
+		{ ! props.useFacebook && 'app' !== props.cardType && ! isSiteEditorHomepage() && (
 			<div className="field-group">
 				<ToggleControl
 					label={ __( 'Add icon overlay to thumbnail', 'rank-math' ) }
@@ -225,7 +226,7 @@ const TwitterTab = ( props ) => (
 export default compose(
 	withSelect( ( select ) => {
 		const repo = select( 'rank-math' ),
-			useFacebook = repo.getTwitterUseFacebook()
+			useFacebook = isSiteEditorHomepage() ? true : repo.getTwitterUseFacebook()
 
 		const image = ( () => {
 			if ( useFacebook && repo.getFacebookImage() ) {

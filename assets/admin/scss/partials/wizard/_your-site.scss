@@ -1,6 +1,6 @@
 // main: ../../setup-wizard.scss
 
-.#{$namespace}-wizard-body--yoursite {
+.wizard-content--yoursite {
 	.#{$namespace}-wizard-tutorial {
 		margin-bottom: 30px;
 
@@ -8,42 +8,75 @@
 			font-size: 14px;
 
 			padding: 12px 16px;
-
 			border-radius: 3px;
-			background: #f0f2f4;
 
-			a {
+			background: $gray-20;
+
+			.rank-math-button.is-link {
 				color: $primary;
+				
+				text-decoration: none;
+
+				&:active, 
+				&:hover, 
+				&:focus {
+					&:not(:disabled) {
+						color: $primary;
+						background-color: transparent;
+					}
+				}
+
+				&:focus:not(:disabled) {
+					box-shadow: none;
+					outline: none;
+				}
 			}
 		}
 	}
 
-	.#{$namespace}-tabs-navigation {
+	.components-tab-panel__tabs {
 		padding: 0 16px;
 
 		border-bottom: 1px solid $light_gray;
+
 		background: #e9ecef;
 
-		a {
+		.components-button {
+			display: inline-block;
+
+			height: fit-content;
+			padding: 22px 16px 16px;
+			box-shadow: none;
+			outline: none;
+
+			color: $dark_gray;
 			font-size: 16px;
 			font-weight: 600;
 
-			display: inline-block;
+			&:focus {
+				box-shadow: none;
+				outline: none;
+			}
 
-			padding: 22px 16px 16px;
+			&:active {
+				color: $dark_gray;
+			}
 
-			color: $dark_gray;
+			&::after, 
+			&::before {
+				display: none;
+			}
 
-			&.active {
-				color: $primary;
+			&.is-active {
 				border-bottom: 2px solid $primary;
+
+				color: $primary;
 			}
 
 			.rm-icon {
+				margin-right: 10px;				
+				
 				font-size: 18px;
-
-				margin-right: 10px;
-
 				vertical-align: -3px;
 			}
 		}
@@ -57,41 +90,55 @@
 		#help-panel-knowledge,
 		#help-panel-video {
 			border: 0;
+
 			background: transparent;
 		}
-	}
 
-	.search-form:not(.media-toolbar-primary) {
-		label {
-			font-size: 14px;
-
-			display: block;
-
-			opacity: .8;
+		#help-panel-video a {
+			border-bottom: 1px dashed;
 		}
 
-		input {
-			font-size: 1.3em;
-
-			margin-right: 15px;
-			padding: 0 2% 0 15px;
-
-			border-color: $gray;
-
-			@include size( 77%, 40px );
-
-			&:hover,
-			&:focus {
+		#help-panel-knowledge {
+			&:hover .rank-math-text-control input {
 				border-color: $primary;
 				box-shadow: 0 0 0 1px $primary;
 			}
-		}
 
-		a.button {
-			width: 20%;
+			label {
+				display: block;
+				
+				font-size: 14px;
 
-			text-align: center;
-			letter-spacing: .05em;
+				opacity: 0.8;
+			}
+
+			.rank-math-text-control {
+				float: left;
+				margin-right: 15px;
+				margin-bottom: 5px;
+
+				@include size( 77%, 40px );
+
+				input {
+					padding: 0 2% 0 15px;
+					border-color: $gray;
+
+					font-size: 1.5em;
+
+					&:hover, 
+					&:focus {
+						border-color: $primary;
+					}
+				}
+			}
+
+			.rank-math-button {
+				justify-content: center;
+
+				width: 20%;
+
+				letter-spacing: 0.05em;
+			}
 		}
 	}
 }

@@ -1,162 +1,4 @@
-// Mixin function used to style Score Bar range slider height.
-@mixin range-style {
-	width: 100%;
-	
-	.components-range-control {
-		&__slider {
-			cursor: default;
-		}
-
-		&__track { 
-			height: 8px;
-		}
-	}
-
-	.css-1tw038v {
-		height: 8px;
-	}
-}
-
-// Mixin function used to style Uploader component.
-@mixin uploader-style {
-	@include radius-xs;
-	border: 1px solid #C6C6C6;
-	background-color: #FCFCFC;
-	padding: 16px;
-
-	.uploader-content {
-		@include gap-lg;
-		@include body-sm;
-		@include radius-xs;
-		@include flex-center;
-		background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='2' ry='2' stroke='%23CCCCCCFF' stroke-width='2' stroke-dasharray='3%2c 6' stroke-dashoffset='5' stroke-linecap='square'/%3e%3c/svg%3e");
-		background-color: #F7F7F7;
-		color: #868686;
-
-		&__actions {
-			@include flex-align();
-			@include gap-lg;
-		}
-
-		.is-uploading {
-			display: flex;
-			flex-direction: column;
-			gap: 12px;
-			width: 100%;
-
-			&__description {
-				color: $black-70;
-			}
-		}
-
-		.components-range-control {
-			padding: 0 1rem;
-			width: 100%;
-
-			&__slider {
-				cursor: default;
-			}
-
-			&__thumb-wrapper {
-				display: none;
-			}
-
-			&__track {
-				color: $blue-100;
-				height: 4px;
-			}
-
-			.components-base-control__field {
-				margin-bottom: 0px;
-			}
-
-			.css-1tw038v {
-				color: $black-a10;
-				height: 4px;
-			}
-		}
-
-		b {
-			font-weight: 500;
-		}
-	}
-}
-
-// Mixin function used to style ListBoxField and FocusKeywordField component.
-@mixin tagify-style {
-	width: 100%;
-	border-radius: 2px;
-
-	.tagify {
-		&__tag {
-			&:hover,
-			&:focus,
-			&:hover:not([readonly]) {
-				div	{
-					&::before{
-						inset: 0px;
-						background-color: inherit;
-					}
-				}
-			}
-
-			&__removeBtn {
-				&::after {
-					display: none;
-				}
-
-				&:hover{
-					+ div{
-						> span { 
-							opacity: 1; 
-						}
-					}
-				}
-			}
-
-			> div {
-				display: flex;
-				gap: 8px;
-				height: 30px;
-				align-items: center;
-				padding: 6px 6px 6px 8px;
-				
-				.tagify__tag {
-					&-star-icon {
-						font-size: 11px;
-					}
-
-					&-text {
-						font-size: 13px;
-						font-weight: 400;
-						line-height: 14px;
-						transform: translateY(-1px);
-					}
-				}
-
-				> * {
-					overflow: visible;
-				}
-			}
-		}
-	}
-
-	&.tagify--focus {
-		border: 2px solid $blue-100;
-	}
-}
-
-// Mixin function for hiding the Cancel button of Dialog component.
-@mixin hide-cancel-btn {
-	.components-flex {
-		.components-button {
-			&.is-tertiary {
-				display: none;
-			}
-		}
-	}
-}
-
+/* Styles the menu of the SelectWithSearch and SelectVariable components */
 @mixin select-menu($margin, $width) {
 	margin-bottom: 0;
 	
@@ -165,21 +7,25 @@
 
 		.components-input-control {
 			&__input {
-				@include base-input-style;
-				padding: 0 8px;
-				line-height: 2;
-				min-height: 30px;
-				max-width: 100%;
-				border-color: $gray-10;
-				background: $white;
-				height: 34px;
-				margin: $margin;
+				@include input-style;
+
 				width: $width;
+				max-width: 100%;
+				height: 34px;
+				min-height: 30px;
+				padding: 0 8px;
+				margin: $margin;
+				border-color: $gray;
+
+				background: $white;
+				font-size: 14px;
+				line-height: 2;
 	
 				&:focus {
 					border-color: $primary;
 					box-shadow: 0 0 0 1px $primary !important;
 					outline: 2px solid transparent;
+
 					background-color: $white;
 				}
 			}
@@ -197,70 +43,180 @@
 	}
 }
 
-// Vertical menu style mixin
-@mixin vertical-menu-style {
-	@include border-lightgray;
-	padding: 24px 16px;
-	width: 13rem;
+/* Removes button box shadow in all pointer states */
+@mixin remove-box-shadow {
+	box-shadow: none;
+	outline: none;
 
-	.components-menu-group__label {
-		display: none;
-		margin-bottom: 16px;
-	}
-
-	div[role="group"]  {
-		@include flex-align(column, flex-start);
-		@include radius-xs;
-		gap: 2px;
-
-		.components-menu-item__button {
-			color: $black-70;
-
-			&.components-button {
-				background-color: $white;
-				height: fit-content;
-				padding: 0px;
-
-				.components-menu-item__item {
-					white-space: break-spaces;
-					min-width: fit-content;
-					line-height: 15.6px;
-					margin-right: 0px;
-					text-align: left;
-					gap: 10px;
-
-					i {
-						font-size: 14px;
-					}
-
-					svg {
-						width: 14px;
-						height: 14px;
-
-						path {
-							fill: currentColor;
-						}
-					}
-				}
-			}
+	&:hover,
+	&:focus,
+	&:active {
+		&:not(:disabled) {
+			box-shadow: none;
+			outline: none;
 		}
 	}
 }
 
-// Filter and Switch tab
-@mixin filter-switch-tab-style {
-	width: fit-content;
-	border: none;
+/* Centers a flexbox in the middle of its container */
+@mixin flex-center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	
-	&-item {
-		@include radius-xs;
-		@include remove-box-shadow;
-		font-weight: 400;
-		color: $gray;
+	text-align: center;
+}
 
-		&.is-active{
-			@include remove-box-shadow;
-			color: $white;
+/* Centers a flexbox horizontally */
+@mixin flex-align {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Styles the size of a font icon, dashicon and svg */
+@mixin icon-size($size) {
+	i, 
+	svg,
+	.dashicons {
+		margin: 0 !important;
+	}
+
+	i, 
+	.dashicons {
+		font-size: $size !important;
+	}
+
+	.dashicons {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+
+		width: $size !important;
+		height: $size !important;
+	}
+
+	svg {
+		width: $size;
+		height: $size;
+
+		path {
+			fill: currentColor;
+			fill-opacity: 1;
 		}
+	}
+}
+
+/* Styles the normal state of the secondary button variant */
+@mixin secondary-button-styles {
+	color: #a7aaad !important;
+	background-color: $tertiary-light !important;
+	border-color: #dcdcde !important;
+}
+
+/* Styles the checkbox and radio element */
+@mixin checkbox-radio-style {
+	display: inline-block;
+
+	width: 1rem;
+	min-width: 1rem;
+	height: 1rem;
+	padding: 0 !important;
+	margin: 0 5px 0 0;
+	border: 1px solid $border-highlight;
+	border-radius: 4px;
+	box-shadow: inset 0 1px 2px $black-a10;
+	outline: 0;
+
+	color: $black-45;
+	background: $white;
+	line-height: 0;
+	text-align: center;
+	vertical-align: -3px;
+
+	clear: none;
+	transition: 0.05s border-color ease-in-out;
+
+	@media screen and (max-width: 782px) {
+    	width: 1.5625rem;
+		height: 1.5625rem;
+		max-width: 1.5625rem;
+	}
+}
+
+/* Styles the checkbox and radio element in disabled state */
+@mixin checkbox-radio-disabled {
+	border-color: $white-a75;
+	box-shadow: inset 0 1px 2px $black-a4;
+
+	color: $black-30;
+	opacity: 0.7;
+	background: $white-a50;
+
+	pointer-events: none;
+
+	+ label {
+		pointer-events: none;
+	}
+}
+
+/* Styles all form control labels. */
+@mixin form-control-label {
+	color: $text;
+	font-size: 14px;
+	line-height: 16px;
+	vertical-align: middle;
+
+	cursor: pointer;
+}
+
+/* Styles the TextControl, TextareaControl and SelectControl component */
+@mixin input-style {
+	border-radius: 4px;
+	border: 1px solid $border-highlight;
+	box-shadow: 0 0 0 transparent;
+
+	color: $black-60;
+	background-color: $white;
+
+	&:focus {
+		border-color: $primary-light;
+		box-shadow: 0 0 0 1px $primary-light;
+		outline: 2px solid transparent;
+	}
+
+	&:disabled {
+		border-color: $white-a75;
+		box-shadow: inset 0 1px 2px $black-a4;
+
+		color: $black-30;
+		background: $white-a50;
+	}
+}
+
+/*
+ * Styles the metabox variant of the TextControl, TextareaControl,
+ * SelectControl and SelectWithSearch component 
+ */
+@mixin metabox {
+	width: 100%;
+	height: 40px;
+	padding: 0.75em 0.6em;
+	border-color: $dark_gray;
+
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+
+	&:hover:not(:disabled) {
+		border-color: $primary;
+		outline: none;
+	}
+
+	&:focus:not(:disabled) {
+		box-shadow: 0 0 0 1px $primary;
+		border-color: $primary;
+		outline: none;
+		
+		background-color: $white;
 	}
 }

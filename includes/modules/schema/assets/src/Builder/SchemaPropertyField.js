@@ -178,7 +178,7 @@ const SchemaPropertyField = ( {
 	)
 }
 
-SchemaPropertyField.defaultProps = {
+SchemaPropertyField.default = {
 	value: '',
 	type: 'text',
 	onChange: null,

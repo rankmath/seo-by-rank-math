@@ -109,7 +109,7 @@ $smiley-size: 40px;
 		border-radius: 100%;
 		background: #b57700;
 
-		@include size( $smiley-size / 5 );
+		@include size( calc( $smiley-size / 5 ) );
 
 		&:nth-of-type(2) {
 			float: right;
@@ -157,7 +157,7 @@ $smiley-size: 40px;
 	}
 
 	.eye {
-		height: $smiley-size / 5;
+		height: calc( $smiley-size / 5 );
 		margin-top: 0;
 
 		@include prefixer( animation-delay, .3s, $browser );
@@ -182,8 +182,8 @@ $smiley-size: 40px;
 		border-bottom: 0;
 		border-top-left-radius: 100%;
 		border-top-right-radius: 100%;
-		border-bottom-right-radius: $smiley-size / 5;
-		border-bottom-left-radius: $smiley-size / 5;
+		border-bottom-right-radius: calc( $smiley-size / 5 );
+		border-bottom-left-radius: calc( $smiley-size / 5 );
 
 		@include size( 40%, 20% );
 	}
@@ -226,7 +226,7 @@ $smiley-size: 40px;
 
 
 	.eye:nth-of-type(2) {
-		height: $smiley-size / 5;
+		height: calc( $smiley-size / 5 );
 		margin-top: 0;
 
 		@include prefixer( animation-delay, .3s, $browser );

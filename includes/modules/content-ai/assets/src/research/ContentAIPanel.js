@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n'
-import { dispatch } from '@wordpress/data'
 import { createElement, Fragment } from '@wordpress/element'
 
 /**
@@ -12,17 +11,6 @@ import TabPanel from '@components/TabPanel'
 import Keywords from './components/keywords'
 import Questions from './components/Questions'
 import Links from './components/Links'
-
-/**
- * @description Tab on select
- *
- * @param {string} tabName Tab name.
- */
-const TabonSelect = ( tabName ) => {
-	if ( 'social' === tabName ) {
-		dispatch( 'rank-math' ).toggleSnippetEditor( true )
-	}
-}
 
 /**
  * Content AI tabs.
@@ -62,13 +50,12 @@ const getTabs = () => {
 	]
 }
 
-const ContentAIPanel = ( props ) => {
+export default ( props ) => {
 	return (
 		<TabPanel
 			className="rank-math-contentai-tabs"
 			activeClass="is-active"
 			tabs={ getTabs() }
-			onSelect={ TabonSelect }
 			data={ props }
 		>
 			{ ( tab, index ) => (
@@ -79,5 +66,3 @@ const ContentAIPanel = ( props ) => {
 		</TabPanel>
 	)
 }
-
-export default ContentAIPanel

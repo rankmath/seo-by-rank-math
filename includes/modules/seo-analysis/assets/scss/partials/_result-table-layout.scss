@@ -1,0 +1,103 @@
+// Result table.
+.#{$namespace}-result-table {
+	padding: 1.5rem 0 0;
+
+	&:first-of-type {
+		padding-top: 0;
+	}
+
+	&:last-of-type {
+		padding-bottom: 30px;
+	}
+
+	.category-title {
+		padding: 11px 20px;
+		padding-left: 0;
+		border-bottom: 1px solid $light_gray;
+
+		color: $text;
+
+		font-size: 17px;
+		font-weight: 500;
+	}
+
+	.table-row {
+		display: table;
+		table-layout: fixed;
+
+		width: 100%;
+		border: 1px solid $light_gray;
+		border-top: 0;
+		box-sizing: border-box;
+
+		&.hidden {
+			display: none;
+		}
+	}
+
+	.row-title,
+	.row-description {
+		display: table-cell;
+		
+		position: relative;
+
+		padding: 18px 20px 12px;
+	}
+
+	.row-title {
+		width: 21%;
+
+		vertical-align: top;
+
+		h3 {
+			display: inline-block;
+
+			margin: 0 0 0 34px;
+
+			font-size: 15px;
+			font-weight: 500;
+		}
+	}
+
+	.row-content {
+		position: relative;
+		
+		padding-left: 40px;
+		
+		font-size: 14px;
+
+		code {
+			display: inline-block;
+
+			padding: 0 3px;
+
+			border-radius: 3px;
+
+			color: lighten( $text, 25% );
+			background: lighten( $light_gray, 9 );
+
+			&.full-width{
+				display: block;
+
+				margin-top: 10px;
+				padding: 10px;
+
+				border-radius: 4px;
+			}
+		}
+	}
+
+	.auto-update-disabled {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+
+		&.hidden {
+			display: none;
+		}
+	}
+
+	.enable-auto-update {
+		margin-top: -2px;
+	}
+}

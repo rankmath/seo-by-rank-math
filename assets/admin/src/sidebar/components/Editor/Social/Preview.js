@@ -13,6 +13,7 @@ import { Dashicon } from '@wordpress/components'
  * Internal dependencies
  */
 import { swapVariables } from '@helpers/swapVariables'
+import { capitalizeString } from '@helpers/textTransformer'
 
 const SocialPreview = ( props ) => {
 	const classes = classnames(
@@ -21,9 +22,8 @@ const SocialPreview = ( props ) => {
 		props.cardType
 	)
 
-	const titleClasses = classnames( 'rank-math-social-preview-title', {
-		capitalize: rankMath.capitalizeTitle,
-	} )
+	const title = props.title ? swapVariables.swap( props.title ) : props.serpTitle
+	const transformedTitle = rankMath.capitalizeTitle ? capitalizeString( title ) : title
 
 	return (
 		<div className={ classes }>
@@ -48,7 +48,7 @@ const SocialPreview = ( props ) => {
 								}
 								className={
 									'rank-math-social-preview-image-overlay'
-										+ ' overlay-position-' 
+										+ ' overlay-position-'
 										+ rankMath.overlayImages[ props.imageOverlay ].position
 								}
 								alt=""
@@ -62,10 +62,8 @@ const SocialPreview = ( props ) => {
 								{ props.siteurl }
 							</h4>
 						) }
-						<h3 className={ titleClasses }>
-							{ props.title
-								? swapVariables.swap( props.title )
-								: props.serpTitle }
+						<h3 className="rank-math-social-preview-title">
+							{ transformedTitle }
 						</h3>
 						<p className="rank-math-social-preview-description">
 							{ props.description

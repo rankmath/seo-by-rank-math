@@ -1,0 +1,79 @@
+.rank-math-import-export .components-tab-panel__tabs {
+    flex-wrap: wrap;
+
+    border-bottom: 1px solid $gray;
+    border-radius: 6px 6px 0 0;
+
+    background: $tertiary;
+
+    &-item {
+        height: 46px;
+        padding: 0 15px;
+        border-right: 1px solid $gray;
+
+        color: #5b6065;
+        font-size: 0.825rem;
+
+        .rm-icon {
+            margin-right: 6px;
+
+            font-size: 18px;
+            font-weight: 600;
+
+            vertical-align: -4px;
+        }
+
+        &:first-of-type {
+            border-top-left-radius: 6px;
+        }
+
+        &::after {
+            bottom: -1px;
+
+            background: $white;
+            
+            outline: none;
+        }
+        
+        &:hover,
+        &.is-active {
+            color: $primary;
+        }
+
+        &.is-active {
+            background: $white;
+        }
+    }
+}
+
+.import-plugins footer button:first-child {
+    margin-right: 4px;
+}
+
+.rank-math-export-form .rank-math-checkbox-list label {
+    margin-left: 4px;
+
+    cursor: pointer;
+}
+
+#rank-math-import-form {
+	.components-form-file-upload {
+		margin: 1em 0;
+	
+		input[type="file"] {
+			display: block !important;
+		}
+	
+		.components-button {
+			display: none;
+		}
+	}
+	
+	br {
+		display: none;
+	}
+	
+	label {
+		font-size: 14px;
+	}
+}

@@ -9,7 +9,7 @@ import { isNull, isUndefined, isEmpty, includes } from 'lodash'
  */
 import { __ } from '@wordpress/i18n'
 import { addFilter } from '@wordpress/hooks'
-import { render } from '@wordpress/element'
+import { createRoot } from '@wordpress/element'
 import { registerFormatType } from '@wordpress/rich-text'
 import { Popover, Button } from '@wordpress/components'
 import { select } from '@wordpress/data'
@@ -62,10 +62,7 @@ const getContentAICompleters = ( prefix ) => {
 			wp.data.dispatch( 'rank-math-content-ai' ).isAutoCompleterOpen( true )
 
 			setTimeout( () => {
-				render(
-					<Modal tool={ completer } />,
-					document.getElementById( 'rank-math-content-ai-modal-wrapper' )
-				)
+				createRoot( document.getElementById( 'rank-math-content-ai-modal-wrapper' ) ).render( <Modal tool={ completer } /> )
 			}, 100 )
 		},
 	}

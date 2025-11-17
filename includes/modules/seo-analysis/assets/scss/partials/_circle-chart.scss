@@ -1,0 +1,30 @@
+// Circle Chart.
+#rank-math-circle-progress {
+	position: relative;
+
+	strong {
+		transform: translateY(-50%);
+		
+		width: 100%;
+
+		font-size: 2em;
+		font-weight: 700;
+		text-align: center;
+	}
+
+	.result-main-score {
+		@include position( absolute, 40% null null 50% );
+
+		transform: translateX(-50%);
+
+		div {
+			display: block;
+
+			margin-top: 4px;
+
+			text-transform: uppercase;
+
+			color: $dark_gray;
+		}
+	}
+}

@@ -9,7 +9,7 @@ import { isObject, isUndefined, startCase, forEach, has, ceil } from 'lodash'
  */
 import { __ } from '@wordpress/i18n'
 import { compose } from '@wordpress/compose'
-import { Component } from '@wordpress/element'
+import { useState, useEffect } from '@wordpress/element'
 import { withSelect } from '@wordpress/data'
 
 /**
@@ -17,111 +17,33 @@ import { withSelect } from '@wordpress/data'
  */
 import getClassByScore from '@helpers/getClassByScore'
 
-class Recommendations extends Component {
-	/**
-	 * Constructor.
-	 */
-	constructor() {
-		super( ...arguments )
-		this.state = { activeTab: '' }
-		this.setState = this.setState.bind( this )
-	}
+const Recommendations = ( props ) => {
+	const [ activeTab, setActiveTab ] = useState( '' )
 
-	/**
-	 * Renders the component.
-	 *
-	 * @return {Component} Recommendations.
-	 */
-	render() {
-		return (
-			<div className="rank-math-ca-recommendations">
-				{ this.getRecommendations( this.props.recommendations ) }
-			</div>
-		)
-	}
-
-	/**
-	 * Function to get the recommendations data.
-	 *
-	 * @param {Array}   recommendations Recommendations data.
-	 * @param {boolean} isSubMenu       Whether to return the subMenu data.
-	 *
-	 * @return {Component} Recommendations.
-	 */
-	getRecommendations( recommendations, isSubMenu = false ) {
-		const data = []
-		forEach( recommendations, ( recommendation, key ) => {
+	// TODO refactor this code.
+	useEffect( () => {
+		forEach( props.recommendations, ( recommendation, key ) => {
 			if ( 'total' === key ) {
 				return
 			}
 
+			const value = getPostStats( key )
 			const recommended = ! isUndefined( recommendation.total ) ? recommendation.total : recommendation
-			const postStat = this.getPostStats( key )
-			const wrapperClasses = classnames( key, {
-				'has-children': ! isUndefined( recommendation.total ),
-				show: key === this.state.activeTab,
-			} )
-
-			const score = this.getScore( key, postStat, recommended, isSubMenu )
-			const max = ceil( ( recommended * 150 ) / 100 )
-
-			data.push(
-				<div
-					key={ key }
-					className={ wrapperClasses + ' ' + getClassByScore( score ) }
-					onClick={ () => this.setState( { activeTab: this.state.activeTab !== key ? key : '' } ) }
-					role="presentation"
-				>
-					<h4>{ ! isSubMenu ? startCase( key ) : key }</h4>
-					{
-						isSubMenu &&
-						<span>
-							{ postStat } / { recommended }
-						</span>
-					}
-					{
-						! isSubMenu &&
-						<>
-							<strong>{ postStat }</strong>
-							<span className="desc">{ __( 'Use', 'rank-math' ) } { recommended } { __( 'to', 'rank-math' ) } { max }</span>
-						</>
-					}
-					{ isObject( recommendation ) && this.getRecommendations( recommendation, true ) }
-				</div>
-			)
+			getScore( key, value, recommended, false, true )
 		} )
+	}, [ props.postStats ] )
 
-		return isSubMenu ? ( <div className="submenu">{ data }</div> ) : data
-	}
-
-	/**
-	 * Analyze the test with the content and return the score.
-	 *
-	 * @param {string} key Current item key.
-	 *
-	 * @return {number} Total of score.
-	 */
-	getPostStats( key ) {
-		if ( has( this.props.postStats, key ) ) {
-			return this.props.postStats[ key ]
+	const getPostStats = ( key ) => {
+		if ( has( props.postStats, key ) ) {
+			return props.postStats[ key ]
 		}
 
 		return 0
 	}
 
-	/**
-	 * Get the recommendations section score after comparing it with the recommended score.
-	 *
-	 * @param {string}  key         Current item key.
-	 * @param {number}  value       Current score.
-	 * @param {number}  recommended Recommended score.
-	 * @param {boolean} isSubMenu   Whether the current item is sub-menu.
-	 *
-	 * @return {number} Total of score.
-	 */
-	getScore( key, value, recommended, isSubMenu ) {
+	const getScore = ( key, value, recommended, isSubMenu, forceUpdate = false ) => {
 		// Early Bail if Research tab is disabled.
-		if ( this.props.showError ) {
+		if ( props.showError ) {
 			return 0
 		}
 
@@ -140,7 +62,9 @@ class Recommendations extends Component {
 			contentAiScore = 0
 		}
 
-		this.props.updateAiScore( key, contentAiScore )
+		if ( forceUpdate ) {
+			props.updateAiScore( key, contentAiScore )
+		}
 
 		if ( score > 100 && 'wordCount' === key ) {
 			return 100
@@ -148,6 +72,60 @@ class Recommendations extends Component {
 
 		return score > 100 && score <= 125 ? 100 : score
 	}
+
+	const getRecommendations = ( recommendations, parentKey = null ) => {
+		const data = []
+		const isSubMenu = parentKey !== null
+
+		forEach( recommendations, ( recommendation, key ) => {
+			if ( 'total' === key ) {
+				return
+			}
+
+			const recommended = ! isUndefined( recommendation.total ) ? recommendation.total : recommendation
+			const postStat = getPostStats( key )
+			const wrapperClasses = classnames( key, {
+				'has-children': ! isUndefined( recommendation.total ),
+				show: key === activeTab,
+			} )
+
+			const score = getScore( key, postStat, recommended, isSubMenu )
+			const max = ceil( ( recommended * 150 ) / 100 )
+
+			data.push(
+				<div
+					key={ key }
+					className={ wrapperClasses + ' ' + getClassByScore( score ) }
+					onClick={ () => setActiveTab( activeTab !== key ? key : '' ) }
+					role="presentation"
+				>
+					<h4>{ ! isSubMenu ? startCase( key ) : key }</h4>
+					{
+						isSubMenu &&
+						<span>
+							{ postStat } / { recommended }
+						</span>
+					}
+					{
+						! isSubMenu &&
+						<>
+							<strong>{ postStat }</strong>
+							<span className="desc">{ __( 'Use', 'rank-math' ) } { recommended } { __( 'to', 'rank-math' ) } { max }</span>
+						</>
+					}
+					{ isObject( recommendation ) && getRecommendations( recommendation, key ) }
+				</div>
+			)
+		} )
+
+		return isSubMenu ? ( <div className="submenu">{ data }</div> ) : data
+	}
+
+	return (
+		<div className="rank-math-ca-recommendations">
+			{ getRecommendations( props.recommendations ) }
+		</div>
+	)
 }
 
 export default compose(
@@ -181,6 +159,7 @@ export default compose(
 		}
 
 		return {
+			...props,
 			postStats: {
 				wordCount,
 				images,

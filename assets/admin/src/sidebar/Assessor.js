@@ -1,19 +1,21 @@
 /**
  * External dependencies
  */
-import { debounce, isEmpty, isUndefined, isObject, intersection, forEach } from 'lodash'
-import { Analyzer, Paper, Helpers } from '@rankMath/analyzer'
+import { debounce, isEmpty, isUndefined, isObject, intersection } from 'lodash'
 
 /**
  * WordPress dependencies
  */
 import * as i18n from '@wordpress/i18n'
-import { dispatch } from '@wordpress/data'
+import { select, dispatch } from '@wordpress/data'
 import { addAction, addFilter, doAction, applyFilters } from '@wordpress/hooks'
 
 /**
  * Internal dependencies
  */
+import { Analyzer, Paper } from '@rankMath/analyzer'
+import { sanitizeAppData } from '@helpers/cleanText'
+import removeDiacritics from '@helpers/removeDiacritics'
 import { getStore } from '../redux/store'
 import unescape from '@helpers/unescape'
 
@@ -61,7 +63,7 @@ class Assessor {
 			return value
 		}
 
-		return isEmpty( value ) ? value : Helpers.sanitizeAppData( value )
+		return isEmpty( value ) ? value : sanitizeAppData( value )
 	}
 
 	getPaper( keyword, keywords ) {
@@ -83,12 +85,15 @@ class Assessor {
 		if ( ! isUndefined( gutenbergData.featuredImage ) ) {
 			paper.setThumbnail( gutenbergData.featuredImage.source_url )
 			paper.setThumbnailAltText(
-				Helpers.removeDiacritics( gutenbergData.featuredImage.alt_text )
+				removeDiacritics( gutenbergData.featuredImage.alt_text )
 			)
 		}
 
-		if ( ! isEmpty( store.appData.contentAIScore ) || ! isEmpty( rankMath.ca_keyword ) ) {
-			paper.setContentAI( true )
+		const contentAIStore = select( 'rank-math-content-ai' )
+		if ( ! isEmpty( contentAIStore ) ) {
+			const contentAiData = contentAIStore.getData()
+			const contentAiScore = contentAIStore.getScore()
+			paper.setContentAI( contentAiScore || ! isEmpty( contentAiData.keyword ) )
 		}
 
 		return paper
@@ -110,10 +115,10 @@ class Assessor {
 			/*eslint array-callback-return: 0*/
 			keywords.map( ( keyword, index ) => {
 				const paper = this.getPaper(
-					Helpers.removeDiacritics( keyword ),
+					removeDiacritics( keyword ),
 					keywords
 				)
-				let totalScore = {}
+
 				const researches =
 					0 === index
 						? rankMath.assessor.researchesTests
@@ -172,7 +177,7 @@ class Assessor {
 	getPrimaryKeyword() {
 		const data = getStore().getState()
 		const keywords = data.appData.keywords
-		return Helpers.removeDiacritics( keywords.split( ',' )[ 0 ] )
+		return ! keywords ? '' : removeDiacritics( keywords.split( ',' )[ 0 ] )
 	}
 
 	/**
@@ -182,13 +187,12 @@ class Assessor {
 	 */
 	getSelectedKeyword() {
 		const data = getStore().getState()
-
 		const keyword =
 			'' !== data.appUi.selectedKeyword.data.value
 				? data.appUi.selectedKeyword.data.value
 				: data.appData.keywords.split( ',' )[ 0 ]
 
-		return Helpers.removeDiacritics( keyword )
+		return removeDiacritics( keyword )
 	}
 
 	/**

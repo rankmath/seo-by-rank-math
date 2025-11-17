@@ -21,23 +21,34 @@ export function getdirtySettings( state ) {
 }
 
 /**
- * Get settings.
+ * Get page data.
  *
  * @param {Object} state The app state.
  *
  * @return {Object} The app data.
  */
-export function getSettings( state ) {
-	return state.appData.settings
+export function getData( state ) {
+	return state.appData.data
 }
 
 /**
- * Get role capabilities.
+ * Get analytics data.
  *
  * @param {Object} state The app state.
  *
  * @return {Object} The app data.
  */
-export function getRoleCapabilities( state ) {
-	return state.appData.roleCapabilities
+export function getAnalytics( state ) {
+	return state.appData.analytics
+}
+
+/**
+ * Get modules.
+ *
+ * @param {Object} state The app state.
+ *
+ * @return {Object} The app data.
+ */
+export function getModules( state ) {
+	return state.appData.modules
 }

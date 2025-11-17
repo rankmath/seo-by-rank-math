@@ -9,7 +9,7 @@ import apiFetch from '@wordpress/api-fetch'
  * @param {boolean} isChat Whether the deleting output is a Chat message.
  * @param {index}   index  Chat/History array index to delete.
  */
-export default ( isChat = false, index = '' ) => {
+export default ( isChat = false, index = 0 ) => {
 	apiFetch( {
 		method: 'POST',
 		path: '/rankmath/v1/ca/deleteOutput',

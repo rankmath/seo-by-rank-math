@@ -93,9 +93,10 @@ class RankMathPostList {
 		]
 		selectBox.on( 'change', () => {
 			const value = selectBox.val()
+			const store = rankMath.contentAI
 			if (
 				value === 'rank_math_content_ai_fetch_image_alt' &&
-				( rankMath.contentAICredits < 50 || ! rankMath.isUserRegistered )
+				( store.credits < 50 || ! store.isUserRegistered )
 			) {
 				selectBox.val( '-1' ).change()
 				showCTABox( { isBulkEdit: true, creditsRequired: 50 } )
@@ -105,12 +106,17 @@ class RankMathPostList {
 			if (
 				includes( contentAiOptions, value ) &&
 				(
-					! rankMath.isUserRegistered ||
-					! rankMath.contentAICredits ||
-					! rankMath.contentAIPlan ||
-					'free' === rankMath.contentAIPlan
+					! store.isUserRegistered ||
+					! store.credits ||
+					! store.plan ||
+					'free' === store.plan
 				)
 			) {
+				selectBox.val( '-1' ).change()
+				showCTABox( { isBulkEdit: true } )
+			}
+
+			if ( value === 'rank_math_bulk_detect_keyword_intent' && ! store.isUserRegistered ) {
 				selectBox.val( '-1' ).change()
 				showCTABox( { isBulkEdit: true } )
 			}
@@ -189,7 +195,7 @@ class RankMathPostList {
 					column
 						.closest( 'tr' )
 						.attr( 'id' )
-						.replace( 'post-', '' )
+						.replace( /post-|tag-/, '' )
 				)
 				const valueField = column.find( '.rank-math-column-value' )
 
@@ -222,7 +228,7 @@ class RankMathPostList {
 				column
 					.closest( 'tr' )
 					.attr( 'id' )
-					.replace( 'post-', '' )
+					.replace( /post-|tag-/, '' )
 			)
 			const valueField = column.find( '.rank-math-column-value' )
 
@@ -261,6 +267,7 @@ class RankMathPostList {
 			},
 			data: {
 				rows: data,
+				objectType: window.adminpage === 'edit-tags-php' ? 'term' : 'post',
 			},
 		} )
 	}

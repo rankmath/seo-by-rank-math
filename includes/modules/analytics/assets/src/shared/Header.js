@@ -46,6 +46,8 @@ const Header = ( { heading, range, updateDaysRange, onChange, postID = 0, slug =
 
 			<Search />
 
+			{ applyFilters( 'rank_math_analytics_before_timeframe_test' ) }
+
 			<SelectControl
 				label={ __( 'Timeframe', 'rank-math' ) }
 				className="analytics-dropdown"

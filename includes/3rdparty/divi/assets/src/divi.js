@@ -1,10 +1,15 @@
 /**
+ * External dependencies
+ */
+import jQuery from 'jquery'
+
+/**
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch'
 import { dispatch } from '@wordpress/data'
 import { MediaUpload } from '@wordpress/media-utils'
-import { createElement, render } from '@wordpress/element'
+import { createElement, createRoot } from '@wordpress/element'
 import { addAction, addFilter } from '@wordpress/hooks'
 
 /**
@@ -63,21 +68,16 @@ class DiviEditor extends Editor {
 	}
 }
 
-// NOTE: For future reference, Divi has its own document ready event:
-// `document.addEventListener( 'ETDOMContentLoaded', function() {} )`
-
-// eslint-disable-next-line @wordpress/no-global-event-listener
 window.addEventListener( 'message', function( event ) {
 	if ( 'et_builder_api_ready' === event.data.etBuilderEvent ) {
+		wp.i18n.setLocaleData( wp.i18n.getLocaleData( 'seo-by-rank-math' ), 'rank-math' )
 		window.rankMathEditor = new DiviEditor()
 		window.rankMathGutenberg = window.rankMathEditor
 		window.rankMathEditor.setup( new DataCollector() )
 		rankMathSettingsBar.init()
 		new rankMathPrimaryTerm()
-		render(
-			createElement( App ),
-			document.getElementById( 'rank-math-rm-app-root' )
-		)
+		createRoot( document.getElementById( 'rank-math-rm-app-root' ) ).render( createElement( App ) )
 		dispatch( 'rank-math' ).refreshResults()
+		jQuery( '.rank-math-rm-modal' ).draggable()
 	}
 } )

@@ -3,13 +3,13 @@
  */
 import jQuery from 'jquery'
 import { debounce, isUndefined, intersection, isObject, isEmpty } from 'lodash'
-import { Analyzer, Paper, Helpers } from '@rankMath/analyzer'
 
 /**
  * WordPress dependencies
  */
 import * as i18n from '@wordpress/i18n'
 import { dispatch, select } from '@wordpress/data'
+import { createRoot } from '@wordpress/element'
 import { doAction, addAction, applyFilters, addFilter } from '@wordpress/hooks'
 import getClassByScore from '@helpers/getClassByScore'
 import apiFetch from '@wordpress/api-fetch'
@@ -17,7 +17,11 @@ import apiFetch from '@wordpress/api-fetch'
 /**
  * Internal dependencies
  */
+import { Analyzer, Paper } from '@rankMath/analyzer'
 import unescape from '@helpers/unescape'
+import { sanitizeAppData } from '@helpers/cleanText'
+import removeDiacritics from '@helpers/removeDiacritics'
+import LockModifiedDate from '@components/LockModifiedDate'
 
 class Assessor {
 	/**
@@ -42,6 +46,7 @@ class Assessor {
 		this.updateKeywordResult = this.updateKeywordResult.bind( this )
 		this.sanitizeData = this.sanitizeData.bind( this )
 		this.addScoreElem = this.addScoreElem.bind( this )
+		this.addLockModifiedDate = this.addLockModifiedDate.bind( this )
 
 		addAction(
 			'rankMath_analysis_keywordUsage_updated',
@@ -61,6 +66,7 @@ class Assessor {
 			this.sanitizeData
 		)
 
+		addAction( 'rank_math_loaded', 'rank-math', this.addLockModifiedDate, 11 )
 		addAction( 'rank_math_loaded', 'rank-math', this.addScoreElem, 11 )
 	}
 
@@ -74,11 +80,11 @@ class Assessor {
 		)
 		jQuery( '#misc-publishing-actions' ).append( this.scoreElem )
 		setTimeout( () => {
-			this.scoreText = '<span class="score-text"><span class="score-icon"><i class="rm-icon-rank-math"></i></span> SEO: <strong>Not available</strong></span>'
+			this.scoreText = '<span class="score-text"><span class="score-icon"><i class="rm-icon-rank-math"></i></span> SEO: <strong>' + i18n.__( 'Not available', 'rank-math' ) + '</strong></span>'
 			this.scoreElem.html( this.scoreText )
 			this.scoreText = this.scoreElem.find( 'strong' )
 
-			this.fkScoreText = '<span class="score-text">Not available</span>'
+			this.fkScoreText = '<span class="score-text">' + i18n.__( 'Not available', 'rank-math' ) + '</span>'
 			this.fkScoreElem = jQuery(
 				'<div class="rank-math-seo-score below-focus-keyword">' +
 					this.fkScoreText +
@@ -91,7 +97,18 @@ class Assessor {
 
 			this.updateScore()
 			addAction( 'rank_math_refresh_results', 'rank-math', this.updateScore )
-		}, 1500 )
+		}, 2000 )
+	}
+
+	addLockModifiedDate() {
+		const publishMetabox = jQuery( '#misc-publishing-actions' )
+		if ( ! publishMetabox.length || ! rankMath.showLockModifiedDate ) {
+			return
+		}
+
+		publishMetabox.append( '<div class="misc-pub-section rank-math-lock-modified-date" id="rank-math-lock-modified-date"></div>' )
+
+		createRoot( document.getElementById( 'rank-math-lock-modified-date' ) ).render( <LockModifiedDate /> )
 	}
 
 	updateScore() {
@@ -114,7 +131,7 @@ class Assessor {
 			return value
 		}
 
-		return isEmpty( value ) ? value : Helpers.sanitizeAppData( value )
+		return isEmpty( value ) ? value : sanitizeAppData( value )
 	}
 
 	getPaper( keyword, keywords ) {
@@ -135,12 +152,15 @@ class Assessor {
 		if ( ! isUndefined( gutenbergData.featuredImage ) ) {
 			paper.setThumbnail( gutenbergData.featuredImage.source_url )
 			paper.setThumbnailAltText(
-				Helpers.removeDiacritics( gutenbergData.featuredImage.alt_text )
+				removeDiacritics( gutenbergData.featuredImage.alt_text )
 			)
 		}
 
-		if ( ! isEmpty( select( 'rank-math' ).getContentAIScore() ) || ! isEmpty( rankMath.ca_keyword ) ) {
-			paper.setContentAI( true )
+		const contentAIStore = select( 'rank-math-content-ai' )
+		if ( ! isEmpty( contentAIStore ) ) {
+			const contentAiData = contentAIStore.getData()
+			const contentAiScore = contentAIStore.getScore()
+			paper.setContentAI( contentAiScore || ! isEmpty( contentAiData.keyword ) )
 		}
 
 		return paper
@@ -159,7 +179,7 @@ class Assessor {
 			/*eslint array-callback-return: 0*/
 			keywords.map( ( keyword, index ) => {
 				const paper = this.getPaper(
-					Helpers.removeDiacritics( keyword ),
+					removeDiacritics( keyword ),
 					keywords
 				)
 
@@ -228,7 +248,7 @@ class Assessor {
 	getPrimaryKeyword() {
 		const keywords = select( 'rank-math' ).getKeywords()
 
-		return Helpers.removeDiacritics( keywords.split( ',' )[ 0 ] )
+		return removeDiacritics( keywords.split( ',' )[ 0 ] )
 	}
 
 	getSelectedKeyword() {
@@ -239,7 +259,7 @@ class Assessor {
 				? selectedKeyword.data.value
 				: keywords.split( ',' )[ 0 ]
 
-		return Helpers.removeDiacritics( keyword )
+		return removeDiacritics( keyword )
 	}
 
 	/**

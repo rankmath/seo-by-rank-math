@@ -53,7 +53,7 @@ const PerformanceGraph = ( { stats, selected } ) => {
 	let counter = 0
 	const graph = stats.graph.merged
 	const topLabels = {
-		ctr: __( 'Avg. CTR', 'rank-math' ),
+		ctr: __( 'CTR', 'rank-math' ),
 		clicks: __( 'Clicks', 'rank-math' ),
 		earnings: __( 'Adsense', 'rank-math' ),
 		impressions: __( 'Impressions', 'rank-math' ),
@@ -83,6 +83,13 @@ const PerformanceGraph = ( { stats, selected } ) => {
 						wrapperStyle={ { zIndex: 10 } }
 						wrapperClassName="rank-math-graph-tooltip"
 						formatter={ ( value, name ) => {
+							if ( 0 === value ) {
+								return [
+									'n/a',
+									name
+								]
+							}
+
 							if ( name === 'position' ) {
 								return [
 									-value,

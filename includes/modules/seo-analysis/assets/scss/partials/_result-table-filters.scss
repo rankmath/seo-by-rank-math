@@ -1,0 +1,181 @@
+// Issue filter.
+.rank-math-result-filter {
+	display: inline-block;
+	
+	position: relative;
+
+	padding: 18px 16px;
+
+	text-decoration: none;
+
+	color: $text;
+
+	&s {
+		position: relative;
+		z-index: 1;
+
+		margin-top: 30px;
+		padding: 0 1.875rem;
+
+		border: 1px solid $gray;
+		border-bottom: 0;
+		border-radius: 6px 6px 0 0;
+
+		background: $white;
+	}
+
+	&:hover,
+	&.active{
+		color: $text;
+	}
+
+	&.active:after,
+	&:hover:after {		
+		display: block;
+		content: '';
+
+		@include position( absolute, null null -2px 0 );
+
+		width: 100%;
+		height: 3px;
+
+		background: $primary;
+	}
+
+	&-count {
+		display: inline-block;
+
+		margin-left: 9px;
+		padding: 3px 12px;
+		border-radius: 16px;
+
+		color: $primary;
+		background: rgba( $primary, .15 );
+
+		font-size: 12px;
+		font-weight: 600;
+
+		pointer-events: none;
+	}
+
+	&.active &-count {
+		color: $white;
+	}
+
+	&-all.active:after,
+	&-all.active &-count,
+	&-all:hover:after {
+		background: $primary;
+	}
+
+	&-passed.active:after,
+	&-passed.active &-count,
+	&-passed:hover:after {
+		background: $color-1;
+	}
+
+	&-warnings.active:after,
+	&-warnings.active &-count,
+	&-warnings:hover:after {
+		background: $color-4;
+	}
+
+	&-failed.active:after,
+	&-failed.active &-count,
+	&-failed:hover:after {
+		background: $color-3;
+	}
+
+	&-passed &-count {
+		color: $color-1;
+		background: rgba( $color-1, .15 );
+	}
+
+	&-warnings &-count {
+		color: darken( $color-4, 10 );
+		background: rgba( $color-4, .15 );
+	}
+
+	&-failed &-count {
+		color: $color-3;
+		background: rgba( $color-3, .15 );
+	}
+}
+
+// An untitled.
+.seo-analysis-results {
+	margin-top: 30px;
+
+	border: 1px solid $gray;
+	border-radius: 6px;
+
+	background: $white;
+
+	> .components-tab-panel {
+		&__tabs,
+		&__tab-content {
+			padding: 0 1.875rem;
+		}
+
+		&__tabs {
+			flex-wrap: wrap;
+			gap: 4px;
+
+			.components-tab-panel__tabs-item {
+				height: auto;
+
+				font-size: 15px;
+				font-weight: 400;
+				color: $text;
+
+				&.is-active {
+					.rank-math-result-filter-count {
+						color: $white;
+					}
+
+					&::after {
+						height: 3px;
+						bottom: -2px;
+						outline: none;
+					}
+
+					&.rank-math-result-filter- {
+						&all,
+						&info {
+							&::after,
+							.rank-math-result-filter-count {
+								background: $primary;
+							}
+						}
+
+						&passed {
+							&::after,
+							.rank-math-result-filter-count {
+								background: $color-1;
+							}
+						}
+
+						&warnings {
+							&::after,
+							.rank-math-result-filter-count {
+								background: $color-4;
+							}
+						}
+
+						&failed {
+							&::after,
+							.rank-math-result-filter-count {
+								background: $color-3;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		&__tab-content {
+			padding: 1.875rem;
+			border-top: 1px solid $gray;
+		}
+	}
+}

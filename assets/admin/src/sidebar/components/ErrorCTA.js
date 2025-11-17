@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { includes } from 'lodash'
+import { includes, isUndefined } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -19,6 +19,7 @@ const getMessageList = ( width, isBulkEdit, isFree ) => {
 	if ( isBulkEdit ) {
 		return (
 			<ul>
+				<li>{ __( '1-Click Article Generation', 'rank-math' ) }</li>
 				<li>{ __( 'Bulk Update Your SEO Meta using AI', 'rank-math' ) }</li>
 				<li>{ __( 'Get Access to 40+ AI SEO Tools', 'rank-math' ) }</li>
 				<li>{ __( '125+ Expert-Written Prompts', 'rank-math' ) }</li>
@@ -31,6 +32,7 @@ const getMessageList = ( width, isBulkEdit, isFree ) => {
 	if ( isFree ) {
 		return (
 			<ul>
+				<li>{ __( '1-Click Article Generation', 'rank-math' ) }</li>
 				<li>{ __( '1-Click Competitor Research', 'rank-math' ) }</li>
 				<li>{ __( 'On-Page SEO Suggestions', 'rank-math' ) }</li>
 				<li>{ __( '1-Click Bulk SEO Meta', 'rank-math' ) }</li>
@@ -43,6 +45,7 @@ const getMessageList = ( width, isBulkEdit, isFree ) => {
 	if ( width === 40 ) {
 		return (
 			<ul>
+				<li>{ __( '1-Click Article Generation', 'rank-math' ) }</li>
 				<li>{ __( '1-Click SEO Content', 'rank-math' ) }</li>
 				<li>{ __( '1-Click SEO Meta', 'rank-math' ) }</li>
 				<li>{ __( '40+ Specialized AI Tools', 'rank-math' ) }</li>
@@ -88,8 +91,27 @@ const getProNotice = ( width ) => {
 	)
 }
 
-const getCreditsExhaustedMessage = () => {
-	const resetDate = rankMath.contentAIRefreshDate ? rankMath.contentAIRefreshDate : ''
+const getKeywordIntentNotice = ( width ) => {
+	return (
+		<div id="rank-math-pro-cta" className="center rank-math-content-ai-warning-wrapper">
+			<div className={ 'rank-math-cta-box blue-ticks top-20 less-padding ' + width }>
+				<h3>{ __( '⛔️ Update Required', 'rank-math' ) }</h3>
+				<p>
+					{ __( 'Your current plugin version does not support this feature. Please update Rank Math PRO to version 3.0.83 or later to unlock full functionality.', 'rank-math' ) }
+				</p>
+				<Button
+					href={ rankMath.links.pro }
+					target="_blank"
+					className="button button-primary is-green"
+				>
+					{ __( 'Update Now', 'rank-math' ) }
+				</Button>
+			</div>
+		</div>
+	)
+}
+
+const getCreditsExhaustedMessage = ( resetDate ) => {
 	if ( ! resetDate ) {
 		return __( 'Your monthly Content AI credits have been fully utilized. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and access more credits.', 'rank-math' )
 	}
@@ -111,8 +133,8 @@ const getCreditsExhaustedMessage = () => {
 }
 
 // Get Link with UTM parameters.
-const getLink = ( link, medium ) => {
-	if ( 'free' === rankMath.contentAIPlan ) {
+const getLink = ( link, medium, isFree = false ) => {
+	if ( isFree ) {
 		medium = medium + '+Free+Plan'
 	}
 
@@ -129,18 +151,23 @@ const getLink = ( link, medium ) => {
 	return link + tags.toString()
 }
 
-export default ( { width = 40, showProNotice = false, isBulkEdit = false, isResearch = false, creditsRequired = 0 } ) => {
+export default ( { width = 40, showProNotice = false, isBulkEdit = false, isResearch = false, creditsRequired = 0, isKeywordIntent = false } ) => {
 	if ( showProNotice ) {
 		return getProNotice( width )
 	}
 
-	const isRegistered = rankMath.isUserRegistered
-	const hasContentAIPlan = rankMath.contentAIPlan
-	const isFree = hasContentAIPlan === 'free'
-	let hasCredits = rankMath.contentAICredits > creditsRequired
-	const isMigrating = rankMath.contentAiMigrating
+	if ( isKeywordIntent ) {
+		return getKeywordIntentNotice( width )
+	}
 
-	if ( hasCredits && isResearch && ! isFree && rankMath.contentAICredits < 500 ) {
+	const store = ! isUndefined( wp.data.select( 'rank-math-content-ai' ) ) ? wp.data.select( 'rank-math-content-ai' ).getData() : rankMath.contentAI
+	const isRegistered = store.isUserRegistered
+	const hasContentAIPlan = store.plan
+	const isFree = hasContentAIPlan === 'free'
+	let hasCredits = store.credits > creditsRequired
+	const isMigrating = store.isMigrating
+
+	if ( hasCredits && isResearch && ! isFree && store.credits < 500 ) {
 		hasCredits = false
 	}
 
@@ -164,7 +191,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 					{
 						! isRegistered &&
 						<Button
-							href={ rankMath.connectSiteUrl }
+							href={ rankMath.contentAI.connectSiteUrl }
 							className="button button-primary is-green"
 						>
 							{ __( 'Connect Now', 'rank-math' ) }
@@ -174,7 +201,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 					{
 						isRegistered && ( ! hasContentAIPlan || isFree ) &&
 						<Button
-							href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&', 'Buy+Plan+Button' ) }
+							href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&', 'Buy+Plan+Button', isFree ) }
 							className="button button-primary is-green"
 							target="_blank"
 						>
@@ -208,10 +235,10 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 			<div className={ 'rank-math-cta-box less-padding top-20 ' + widthClass }>
 				<h3>{ __( '⛔️ Content AI Credit Alert!', 'rank-math' ) }</h3>
 				<p>
-					{ getCreditsExhaustedMessage() }
+					{ getCreditsExhaustedMessage( store.resetDate ) }
 				</p>
 				<Button
-					href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&', 'Buy+Credits+Button' ) }
+					href={ getLink( rankMath.links[ 'content-ai' ] + '?play-video=ioPeVIntJWw&', 'Buy+Credits+Button', isFree ) }
 					className="button button-primary is-green"
 					target="_blank"
 				>
@@ -219,7 +246,7 @@ export default ( { width = 40, showProNotice = false, isBulkEdit = false, isRese
 				</Button>
 				<Button
 					variant="link"
-					href={ getLink( rankMath.links[ 'content-ai-restore-credits' ], 'Buy+Credits+Button' ) }
+					href={ getLink( rankMath.links[ 'content-ai-restore-credits' ], 'Buy+Credits+Button', isFree ) }
 					className="button button-secondary"
 					target="_blank"
 				>

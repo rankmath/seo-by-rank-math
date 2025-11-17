@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isEmpty, isString, isUndefined, round } from 'lodash'
+import { isEmpty, isString, isUndefined, round, pick } from 'lodash'
 import classnames from 'classnames'
 
 /**
@@ -33,7 +33,7 @@ const getLoaderText = () => {
 }
 
 const ResearchContent = ( props ) => {
-	const researchedData = props.data.researchedData
+	const researchedData = props.researchedData || {}
 
 	const wrapperClass = classnames(
 		'rank-math-content-ai-data',
@@ -42,6 +42,8 @@ const ResearchContent = ( props ) => {
 			blurred: props.showError,
 		}
 	)
+
+	const recommendations = researchedData.recommendations ? pick( researchedData.recommendations, props.data.enabledTests ) : {}
 
 	return (
 		<div className={ wrapperClass }>
@@ -55,7 +57,7 @@ const ResearchContent = ( props ) => {
 					<Button className="is-link" href={ getLink( 'content-ai-settings', 'Sidebar KB Icon' ) } rel="noreferrer" target="_blank" id="rank-math-help-icon" label={ __( 'Content AI Knowledge Base.', 'rank-math' ) } showTooltip={ true }>﹖</Button>
 				</h3>
 				<ContentAIScore score={ props.score } />
-				<Recommendations { ...props } recommendations={ researchedData.recommendations } />
+				<Recommendations { ...props } recommendations={ recommendations } />
 				<ContentAIPanel { ...props } researchedData={ researchedData } />
 			</div>
 			}

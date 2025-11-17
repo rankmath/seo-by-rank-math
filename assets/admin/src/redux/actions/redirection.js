@@ -6,8 +6,8 @@ import { updateAppData, updateAppUi } from './metadata'
 /**
  * Update redirection data.
  *
- * @param {string} id          Unique id of data.
- * @param {string} value       Updated meta value.
+ * @param {string} id    Unique id of data.
+ * @param {string} value Updated meta value.
  *
  * @return {Object} An action for redux.
  */

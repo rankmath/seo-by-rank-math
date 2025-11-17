@@ -23,13 +23,17 @@
 
 @import 'rtl';
 
+@import 'snackbar';
+
+@import '3rdparty-editors';
+
 // Editor.
 div.rank-math-content-ai-wrapper {
 	.rank-math-ca-credits {
 		position: absolute;
 		top: 15px;
 		z-index: 99;
-		right: 85px;
+		right: 75px;
 
 		.update-credits {
 			position: absolute;
@@ -44,7 +48,7 @@ div.rank-math-content-ai-wrapper {
 			box-shadow: none;
 
 			i {
-				font-size: 12px;
+				font-size: 11px;
 
 				display: flex;
 
@@ -54,7 +58,7 @@ div.rank-math-content-ai-wrapper {
 
 				&:before {
 					margin-bottom: 2px;
-					margin-left: 3px;
+					margin-left: 1px;
 				}
 			}
 

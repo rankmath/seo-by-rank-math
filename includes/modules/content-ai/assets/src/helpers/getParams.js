@@ -432,6 +432,10 @@
 					"icon": "🇬🇧"
 				},
 				{
+					"value": "Arabic",
+					"icon": "🇦🇪"
+				},
+				{
 					"value": "Bulgarian",
 					"icon": "🇧🇬"
 				},

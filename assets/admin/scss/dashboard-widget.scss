@@ -141,6 +141,10 @@
             &-dashboard-block {
                 @extend %flex;
 
+                @media only screen and ( max-width: 782px ) {
+                    flex-direction: column;
+                }
+
                 > div {
                     box-sizing: border-box;
                     padding: .825rem 1rem;
@@ -187,6 +191,16 @@
                         &:last-of-type {
                             border-width: 1px 1px 1px 0;
                             border-radius: 0 0 6px 0;
+                        }
+
+                        @media only screen and ( max-width: 782px ) {
+                            &:nth-of-type(n) {
+                                border-width: 1px 1px 0 1px;
+                                border-radius: 0;
+                                &:last-of-type {
+                                    border-bottom-width: 1px;
+                                }
+                            }
                         }
                     }
                 }

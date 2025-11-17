@@ -114,6 +114,17 @@ export function updateBreadcrumbTitle( title ) {
 }
 
 /**
+ * Update the lock modified date state.
+ *
+ * @param {boolean} lock The new url.
+ *
+ * @return {Object} An action for redux.
+ */
+export function lockModifiedDate( lock ) {
+	return updateAppData( 'lockModifiedDate', lock, 'rank_math_lock_modified_date' )
+}
+
+/**
  * Reset dirty meta to null
  *
  * @return {Object} An action for redux.
@@ -121,3 +132,13 @@ export function updateBreadcrumbTitle( title ) {
 export function resetDirtyMetadata() {
 	return updateAppData( 'dirtyMetadata', {} )
 }
+
+/**
+ * Action creator for resetting the store
+ *
+ * @return {Object} An action for redux.
+ */
+export function resetStore( value ) {
+	return { type: 'RESET_STORE', value }
+}
+

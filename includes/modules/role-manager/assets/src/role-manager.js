@@ -8,25 +8,27 @@
 /**
  * External Dependencies
  */
-import JQuery from 'jquery'
+import jQuery from 'jquery'
+import { isNull } from 'lodash'
 
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n'
+import { createRoot } from '@wordpress/element'
 
-JQuery( function() {
-	JQuery( '.reset-options' ).on( 'click', function() {
-		if (
-			// eslint-disable-next-line no-alert
-			window.confirm(
-				__( 'Are you sure? You want to reset settings.', 'rank-math' )
-			)
-		) {
-			JQuery( window ).off( 'beforeunload' )
-			return true
-		}
+/**
+ * Internal dependencies
+ */
+import { getStore } from '@rank-math-settings/redux/store'
+import App from './App'
 
-		return false
-	} )
+jQuery( () => {
+	const generalSettings = document.getElementById( 'rank-math-settings' )
+	if ( isNull( generalSettings ) ) {
+		return
+	}
+
+	getStore()
+
+	createRoot( generalSettings ).render( <App /> )
 } )

@@ -11,6 +11,10 @@
 	}
 
 	li {
+		display: flex;
+		justify-content: space-between;
+		gap: 8px;
+
 		position: relative;
 
 		padding-left: 24px;
@@ -61,6 +65,28 @@
 			color: adjust-hue($color-ok, -10);
 			box-shadow: inset 0 0 0 2px adjust-hue($color-ok, -10);
 		}
+
+		.rank-math-help-icon {
+			margin: 0 !important;
+		}
+
+		.rank-math-ai-button.is-link {
+			gap: 3px;
+
+			padding: 4px 5px;
+			margin-left: 4px;
+			border-radius: 3px;
+
+			color: $color-content-ai-how-to-fix-btn;
+			background: rgba($color-content-ai-how-to-fix-btn, 0.10);
+			font-size: 12px;
+
+			transition: 0.2s all ease-in-out;
+
+			&:hover {
+				background: rgba($color-content-ai-how-to-fix-btn, 0.17);
+			}
+		}
 	}
 
 	li.seo-check-fleschReading {
@@ -84,7 +110,7 @@
 	font-weight: normal;
 	line-height: 21px;
 
-	padding: 0 10px 0 7px;
+	padding: 0 7px;
 
 	letter-spacing: .05em;
 
@@ -92,7 +118,7 @@
 	border-radius: 20em;
 	background: $color-bad;
 
-	@include margin( -2px null null 10px );
+	@include margin( -2px null null 5px );
 
 	&:before {
 		font-family: dashicons;

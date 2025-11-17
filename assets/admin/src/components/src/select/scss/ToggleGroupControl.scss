@@ -1,70 +1,90 @@
-@import '../../../scss/variables';
+@import '../../../../../scss/variables';
 
 /*
  * Toggle Group Control component.
  */
-.components-base-control {
-	.components-base-control__field {
-		.rank-math-toggle-group-control {
-			&.components-toggle-group-control {
-				padding: 5px;
-				border: 1px solid $gray-10;
-				border-radius: 4px;
-				background: $white;
-				margin: 0;
-				gap: 5px;
-				width: fit-content;
+.components-base-control .components-base-control__field {
+	.rank-math-toggle-group-control.components-toggle-group-control {
+		display: inline-block;
 
-				&:focus-within {
-					box-shadow: none;
-					outline: none;
-				}
+		width: fit-content;
+		padding: 5px 0 0 5px;
+		margin: 0;
+		border: 1px solid $gray;
+		border-radius: 4px;
 
-				.css-1abtnze {	
-					flex: auto;
-					
-					.components-toggle-group-control-option-base {
-						box-sizing: border-box;
-						height: 36px;
-						padding: 0 15px;
-						white-space: nowrap;
-						border: 1px solid $light_gray;
-						border-radius: 4px;
-						color: #666d73;
-						transition: none;
+		background: $white;
 
-						.css-1v0f2i8 {
-							line-height: 34px;
-							font-weight: 500;
-							font-size: 14px;
-						}
+		&:before {
+			display: none;
+		}
 
-						&:hover {
-							color: $primary;
-							border-color: $primary;
-						}
-						
-						&[aria-checked="true"],
-						&[aria-checked="true"]:hover {
-							color: $white;
-							border-color: $primary;
-							background-color: $primary;
-						}
+		&:focus-within {
+			box-shadow: none;
+			outline: none;
+		}
 
-						+ .css-k1frqi {
-							background-color: $primary;
-						}
-					}
-				}
+		.components-toggle-group-control-option-base {
+			min-height: 36px;
+			margin-right: 5px;
+			margin-bottom: 5px;
+			padding: 0 15px;
+			border: 1px solid $light_gray;
+			border-radius: 4px;
+			box-sizing: border-box;
 
-				&[aria-disabled="true"] {
-					opacity: 0.4;
-				}
+			color: #666d73;
+			white-space: wrap;
+
+			transition: none;
+
+			&:hover {
+				border-color: $primary;
+
+				color: $primary;
+			}
+			
+			&[aria-checked="true"],
+			&[aria-checked="true"]:hover {
+				border-color: $primary;
+				
+				color: $white;
+				background-color: $primary;
+			}
+
+			> div {
+				font-size: 14px;
+				font-weight: 500;
+			}
+
+			+ div {
+				display: none;
 			}
 		}
 
-		.css-zjik7 {
-			display: none;
+		.rank-math-custom-toggle-group-control-option {
+			padding-left: 9px;
+			padding-right: 9px;
+			
+			.components-text-control__input {
+				width: 40px;
+				height: 24px;
+				min-height: 24px;
+				padding: 0 8px;
+				border: 0;
+				box-sizing: border-box;
+
+				color: #32373c;
+				box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+			}
 		}
+
+		&[aria-disabled="true"] {
+			opacity: 0.4;
+		}
+	}
+
+	.css-zjik7 {
+		display: none;
 	}
 }

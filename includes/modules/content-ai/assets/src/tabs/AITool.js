@@ -105,6 +105,14 @@ export default ( props ) => {
 									} }
 								>
 									<i className={ value.endpoint + ' ai-icon ' + value.icon }></i>
+									{
+										'Blog_Post_Wizard' === value.endpoint &&
+										<div className="dot-container" title={ __( 'Multistep Wizard', 'rank-math' ) }>
+											<div className="dot"></div>
+											<div className="dot"></div>
+											<div className="dot"></div>
+										</div>
+									}
 									<header>
 										<h3>{ value.title }</h3>
 										{ ! showMinimal && <p>{ value.description }</p> }
@@ -118,7 +126,7 @@ export default ( props ) => {
 					tool && <Modal { ...props } tool={ tool } setTool={ setTool } />
 				}
 			</div>
-			{ props.hasError && <ErrorCTA /> }
+			{ props.hasError && ! isContentAIPage && <ErrorCTA /> }
 		</>
 	)
 }

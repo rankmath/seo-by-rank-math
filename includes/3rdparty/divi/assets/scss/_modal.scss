@@ -107,6 +107,8 @@ body.#{$namespace}-et-settings-bar-is {
 
 		align-items: center;
 		justify-content: space-between;
+
+		cursor: move;
 		&-title {
 			font-family: 'Open Sans', Helvetica, Roboto, Arial, sans-serif;
 			font-size: 18px;

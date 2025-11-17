@@ -71,7 +71,7 @@ class PostCollector extends DataCollector {
 			}, 500 )
 		).trigger( 'change' )
 
-		jQuery( window ).on( 'load', () => {
+		const addEventHandlersForContentChange = () => {
 			if ( ! this.isTinymce() ) {
 				return
 			}
@@ -97,7 +97,12 @@ class PostCollector extends DataCollector {
 					}, 500 )
 				)
 			}
-		} )
+		}
+
+		if ( typeof tinymce !== 'undefined' ) {
+			tinymce.on( 'AddEditor', addEventHandlersForContentChange )
+		}
+		jQuery( window ).on( 'load', addEventHandlersForContentChange )
 
 		// Update Permalink.
 		jQuery( document ).on( 'ajaxComplete', ( event, response, ajaxOptions ) => {

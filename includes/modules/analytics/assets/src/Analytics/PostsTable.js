@@ -27,11 +27,11 @@ const PostsTable = ( props ) => {
 	const tableSummary = [
 		{ label: __( 'Posts', 'rank-math' ), value: seoScores.total },
 		{
-			label: __( 'Search Impressions', 'rank-math' ),
+			label: __( 'Total Impressions', 'rank-math' ),
 			value: humanNumber( summary.impressions ),
 		},
 		{
-			label: __( 'Search Clicks', 'rank-math' ),
+			label: __( 'Total Clicks', 'rank-math' ),
 			value: humanNumber( summary.clicks ),
 		},
 	]

@@ -1,0 +1,109 @@
+.steps-progress-skeleton {
+	header {
+		.title,
+		.sub-title {
+			display: block;
+
+			margin: 0 auto;
+
+			border-radius: 16px;
+		}
+
+		.title {
+			height: 30px;
+			width: 200px;
+			margin-bottom: 14px;
+		}
+
+		.sub-title {
+			height: 14px;
+			width: 160px;
+		}
+	}
+
+	.field-row {
+		.top {
+			display: flex;
+
+			&::after,
+			&::before {
+				content: '';
+				display: block;
+
+				border-radius: 4px;
+			}
+
+			&::before {
+				flex: 0 0 20%;
+
+				height: 14px;
+
+				margin-right: 90px;
+			}
+
+			&::after {
+				flex: 1;
+
+				height: 40px;
+				
+				border: 1px solid rgba(0, 0, 0, 0.11);
+			}
+		}
+
+		.bottom {
+			&::after,
+			&::before {
+				content: '';
+				display: block;
+
+				width: 70%;
+				height: 14px;
+				margin-top: 10px;
+				margin-left: auto;
+				border-radius: 4px;
+			}
+		}
+
+		&:first-of-type {
+			.top::after {
+				flex: 0 0 40%;
+			}
+
+			.bottom {
+				display: none;
+			}
+		}
+
+		&:nth-of-type(2) {
+			.top::after {
+				flex: none;
+
+				width: 160px;
+			}
+
+			.bottom {
+				&::after,
+				&::before {
+					margin-left: 30%;
+				}
+
+				&::before {
+					width: 120px;
+				}
+
+				&::after {
+					width: 400px;
+				}
+			}
+		}
+	}
+
+	header .title,
+	header .sub-title,
+	.field-row .top::before,
+	.field-row .bottom::after,
+	.field-row .bottom::before,
+	.field-row:nth-of-type(2) .top::after {
+		@include skeleton-background-animation;
+	}
+}

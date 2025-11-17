@@ -2,6 +2,8 @@ const DEFAULT_STATE = {
 	// Content AI Page.
 	isAutoCompleterOpen: false,
 	contentAiAttributes: {},
+	data: rankMath.contentAI,
+	previousResults: [],
 }
 
 /**

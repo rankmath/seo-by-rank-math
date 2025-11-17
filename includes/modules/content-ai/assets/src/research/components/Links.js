@@ -17,7 +17,7 @@ import getLink from '@helpers/getLink'
 
 const Links = ( props ) => {
 	const links = []
-	if ( isEmpty( props.caData.data.links ) ) {
+	if ( isEmpty( props.researchedData.links ) ) {
 		return (
 			<h3 className="no-data">
 				{ __( 'There are no recommended Links for this researched keyword.', 'rank-math' ) }
@@ -25,7 +25,7 @@ const Links = ( props ) => {
 		)
 	}
 
-	forEach( props.caData.data.links, ( value, index ) => (
+	forEach( props.researchedData.links, ( value, index ) => (
 		links.push(
 			<li key={ index }>
 				<a href={ value } rel="noreferrer" target="_blank">{ value }</a>

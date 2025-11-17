@@ -48,7 +48,6 @@
 
 		.rank-math-col-status,
 		.rank-math-col-indexing-allowed,
-		.rank-math-col-mobile-usability,
 		.rank-math-col-crawled-as,
 		.rank-math-col-robots-state {
 			text-align: center;
@@ -152,7 +151,6 @@
 		// Secondary Column Verdict Icons.
 		.rank-math-col {
 			&-indexing-allowed,
-			&-mobile-usability,
 			&-robots-state {
 				.verdict {
 					&:before {

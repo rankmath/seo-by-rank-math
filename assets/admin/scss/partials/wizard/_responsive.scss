@@ -50,7 +50,7 @@
 				max-width: 100%;
 			}
 
-			.form-footer:not(.rank-math-custom) {
+			.wizard-content--ready .form-footer:not(.rank-math-custom) {
 				text-align: center;
 			}
 		}
@@ -70,7 +70,7 @@
 
 					margin-top: -7px;
 
-					background: #fff;
+					background: $white;
 				}
 
 				a:after {

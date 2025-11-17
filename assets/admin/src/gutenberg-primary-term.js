@@ -29,5 +29,5 @@ class RankMathGutenberg {
 }
 
 jQuery( document ).ready( function() {
-	window.rankMathEditor = new RankMathGutenberg()
+	new RankMathGutenberg()
 } )

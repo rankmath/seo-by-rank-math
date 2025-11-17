@@ -4,37 +4,42 @@
 
 	@media screen and (max-width: 782px) {
 		.button {
-			font-size: 15px;
-
 			padding: 0 20px;
+			
+			font-size: 15px;
 		}
 	}
 
-	.cmb-type-multicheck {
-		.cmb-td p:first-of-type {
-			margin: 0;
-		}
+	.field-type-multicheck .field-td button:first-of-type {
+		margin: -1em 0 0;
 	}
 
-	.cmb-multicheck-toggle {
+	.field-multicheck-toggle {
+		display: block;
+
 		padding: 0;
-
+		margin-bottom: 1em;
+		
+		border: 0;
+		box-shadow: none !important;
+		
+		color: $primary;
+		background: transparent;
+		
 		cursor: pointer;
 
-		color: $primary;
-		border: 0;
-		background: transparent;
-		box-shadow: none;
-
-		&:active {
+		&:focus,
+		&:active { 
 			transform: none;
 			box-shadow: none;
+			outline: none;
+			
+			color: $primary;
 		}
 	}
 }
 
 .form-footer:not(.rank-math-custom) {
-
 	width: calc(100% + 80px);
 	margin: 75px -40px -50px;
 
@@ -45,14 +50,20 @@
 	overflow: hidden;
 
 	.button {
-		font-size: 16px;
-		line-height: 48px;
-
 		height: 48px;
 		padding: 0 30px;
 
+		font-size: 16px;
+		line-height: 48px;
+
 		&-secondary {
 			margin-right: 10px;
+		}
+	}
+
+	@media screen and (max-width: 375px) {
+		.button.button-primary {
+			float: none;
 		}
 	}
 }

@@ -1,14 +1,14 @@
-@import '../../../scss/variables';
-@import '../../../scss/mixins/styling';
+@import '../../../scss/main';
 
 /*
  * Table component.
  */
 .rank-math-table {
 	width: 100%;
+	border: 1px solid $gray-10;
 	border-collapse: collapse;
-	border: 1px solid $silver-gray;
 	box-shadow: 0 1px 1px $black-a4;
+
 	font-size: 14px;
 
 	* {
@@ -16,87 +16,55 @@
 	}
 
 	thead {
-		background-color: $white;
-		border-bottom: 1px solid $silver-gray;
+		border-bottom: 1px solid $gray-10;
+
+		background: $white;
 	}
 
-	tbody {
-		tr:nth-child(2n+1) { 
-			background-color: $tertiary-light;
-		}
+	tbody tr:nth-child(2n+1) { 
+		background: $tertiary-light;
 	}
 
 	td,
 	th {
+		padding: 15px 10px;
+
 		text-align: left;
 		vertical-align: top;
-		padding: 15px 10px;
 	}
 
 	th {
-		text-transform: capitalize;
-		color: $charcoal-gray;
+		color: $black-60;
 		line-height: 1.4em;
 		font-weight: 600;
 		vertical-align: top;
+		text-transform: capitalize;
 	}
 
 	td {
-		color: $graphite-gray;
+		color: $black-45;
 		line-height: 1.3;
 		vertical-align: middle;
 	}
 
-	&.wizard {
-		tr {
-			&:nth-child(2n+1) { 
-				background-color: $tertiary;
-			}
-
-			&:last-child {
-				th {
-					border-bottom: none;
-				}
-			}
-		}
-
+	&.small {
+		td,
 		th {
-			@include flex-align();
-			justify-content: space-between;
-			gap: 20px;
-			padding: 10px 20px;
-			color: $charcoal-gray-10;
-			border-bottom: 1px solid $gray-10;
-			text-transform: none;
+			padding: 8px 10px;
 
-			&::after {
-				content: "";
-				font-family: "dashicons";
-				line-height: 1;
-				font-weight: 400;
-				font-size: 24px;
-			}
+			font-size: 13px;
+			line-height: 1.5em;
+		}
+	}
+}
 
-			&.is-pass {
-				&::after {
-					content: "\f147";
-				}
-			}
-
-			&.is-fail {
-				border-left: 3px solid $error;
-				
-				&::after {
-					color: $error;
-					content: '\f158';
-				}
-			}
-
-			&.is-warning {
-				&::after {
-					content: "\f534";
-				}
-			}
+@media screen and (max-width: 782px) {
+	.rank-math-table {
+		th,
+		td {
+			display: block;
+			
+			width: auto;
 		}
 	}
 }

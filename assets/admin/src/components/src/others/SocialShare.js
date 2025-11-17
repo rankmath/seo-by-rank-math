@@ -9,10 +9,7 @@ import { addQueryArgs } from '@wordpress/url'
  */
 import getLink from '@helpers/getLink'
 
-// Dummy values
-const isWhitelabel = false // Helper::is_whitelabel()
-
-export default () => {
+export default ( { isWhitelabel } ) => {
 	if ( isWhitelabel ) {
 		return
 	}

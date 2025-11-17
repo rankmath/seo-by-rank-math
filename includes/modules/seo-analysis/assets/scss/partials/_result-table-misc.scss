@@ -1,0 +1,154 @@
+// Status Icon
+.status-icon {
+	@include position(absolute, 18px null null null);
+
+	border: 1px solid transparent;
+	border-radius: 50em;
+
+	color: $primary;
+	background: rgba( $primary, 0.15 );
+
+	&.status-info::before {
+		content: 'i';
+		vertical-align: 5px;
+
+		font-family: sans-serif;
+		font-size: 15px;
+		font-weight: bold;
+	}
+
+	&.status-ok {
+		color: $color-1;
+		background: rgba( $color-1, .15 );
+	}
+
+	&.status-warning {
+		color: darken( $color-4, 10 );
+		background: rgba( $color-4, .15 );
+
+		&:before {
+			content: '!';
+
+			font-family: sans-serif;
+			font-size: 15px;
+			font-weight: bold;
+			vertical-align: 5px;
+		}
+	}
+
+	&.status-fail {
+		color: $color-3;
+		background: rgba( $color-3, .15 );
+	}
+}
+
+// List Scanned items.
+.info-list {
+	max-height: 500px;
+	padding: 4px;
+	
+	color: lighten( $text, 25% );
+	
+	border-radius: 6px;
+	background: lighten( $light_gray, 9 );
+
+	overflow: scroll;
+
+	li {
+		font-family: Consolas, Monaco, monospace;
+		font-size: 13px;
+
+		margin: 0 1px;
+		padding: 3px 6px 2px;
+
+		direction: ltr;
+		overflow-wrap: break-word;
+		unicode-bidi: embed;
+	}
+}
+
+// How to Fix.
+.analysis-test-how-to-fix,
+.how-to-fix-wrapper{
+	transition: all 200ms linear;
+
+	.result-action{
+		display: none;
+	}
+}
+
+// Result Action.
+.rank-math-button.components-button.button-secondary.result-action{
+	margin: -5px 0 0 10px;
+	
+	border-color: $dark-gray;
+
+	color: $white;
+	background: $dark_gray;
+
+	float: right;
+	
+	@at-root .expanded &,
+	&:hover, &:focus {
+		color: $white !important;
+		background: $primary !important;
+
+		border-color: $primary !important;
+	}
+}
+
+// How to Fix Toggle Text.
+.analysis-test-how-to-fix {
+	line-height: 1.5;
+
+	margin: 22px auto 0;
+	padding: 15px;
+
+	border: 1px solid $color-1;
+	border-radius: 6px;
+
+	color: darken( $color-1, 25% );
+	background: rgba( $color-1, 0.08 );
+
+	ul {
+		clear: both;
+
+		margin-top: 0;
+		margin-bottom: 0;
+		margin-left: 15px;
+
+		list-style-type: disc;
+	}
+
+	pre {
+		margin: 0;
+		padding: 0;
+
+		color: inherit;
+		background: transparent;
+	}
+
+	p {
+		&:first-of-type {
+			margin-top: 0;
+		}
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	// Expanded
+	@at-root .expanded & {
+		display: block;
+	}
+}
+
+// Keyword Cloud.
+.keyword-cloud-item {
+	display: inline-block;
+
+	padding: 4px;
+
+	vertical-align: middle;
+}
