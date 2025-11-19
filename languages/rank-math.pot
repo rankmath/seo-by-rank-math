@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.257\n"
+"Project-Id-Version: Rank Math SEO 1.0.258\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-05T04:25:56+00:00\n"
+"POT-Creation-Date: 2025-11-19T03:47:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rank-math\n"
@@ -251,6 +251,9 @@ msgstr ""
 #. Translators: placeholder is the plugin name.
 msgctxt "plugin name inside the review notice"
 msgid "Rank Math SEO"
+msgstr ""
+
+msgid "We would love to get your feedback! It's essential for our continued development. Please consider taking a moment to leave us a review."
 msgstr ""
 
 msgid "We would love to get your feedback! It's essential for our continued development. Please consider taking a moment to leave a review of your experience on Trustpilot."
@@ -6994,9 +6997,6 @@ msgstr ""
 msgid "feel free to recommend it to your friends or colleagues."
 msgstr ""
 
-msgid "OnSite Checkout"
-msgstr ""
-
 msgid "You can't access this page."
 msgstr ""
 
@@ -9889,6 +9889,9 @@ msgstr ""
 msgid "Make more informed decisions & strategy"
 msgstr ""
 
+msgid "Calculating SEO score for posts %1$s - %2$s out of %3$s"
+msgstr ""
+
 msgid "Starting SEO score recalculation"
 msgstr ""
 
@@ -9899,9 +9902,6 @@ msgid "Something went wrong. Please try again later."
 msgstr ""
 
 msgid "Include posts/pages where the score is already set"
-msgstr ""
-
-msgid "Calculating SEO score for posts %1$s - %2$s out of %3$s"
 msgstr ""
 
 msgid "Titles & Metas"

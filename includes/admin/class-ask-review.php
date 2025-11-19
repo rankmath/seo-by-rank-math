@@ -166,12 +166,19 @@ class Ask_Review {
 	 * @return void
 	 */
 	public function add_notice() {
-		$review_links = [
-			'https://www.trustpilot.com/review/www.rankmath.com',
-			'https://www.trustpilot.com/evaluate/www.rankmath.com',
-		];
+		// 50-50 split between WordPress.org and Trustpilot.
+		$show_wordpress = (bool) wp_rand( 0, 1 );
 
-		$selected_link = $review_links[ array_rand( $review_links ) ];
+		if ( $show_wordpress ) {
+			$selected_link = 'https://wordpress.org/support/plugin/seo-by-rank-math/reviews/?filter=5#new-post';
+		} else {
+			// If Trustpilot, pick one of the two links (50-50).
+			$review_links  = [
+				'https://www.trustpilot.com/review/www.rankmath.com',
+				'https://www.trustpilot.com/evaluate/www.rankmath.com',
+			];
+			$selected_link = $review_links[ array_rand( $review_links ) ];
+		}
 
 		$message = '<p>';
 
@@ -179,7 +186,13 @@ class Ask_Review {
 		$message .= sprintf( esc_html__( 'Hey, we noticed you\'ve been using %s for more than a week now – that\'s awesome!', 'rank-math' ), '<strong>' . _x( 'Rank Math SEO', 'plugin name inside the review notice', 'rank-math' ) . '</strong>' );
 		$message .= '<br>';
 
-		$message .= esc_html__( 'We would love to get your feedback! It\'s essential for our continued development. Please consider taking a moment to leave a review of your experience on Trustpilot.', 'rank-math' ) . '</p>
+		if ( $show_wordpress ) {
+			$message .= esc_html__( 'We would love to get your feedback! It\'s essential for our continued development. Please consider taking a moment to leave us a review.', 'rank-math' );
+		} else {
+			$message .= esc_html__( 'We would love to get your feedback! It\'s essential for our continued development. Please consider taking a moment to leave a review of your experience on Trustpilot.', 'rank-math' );
+		}
+
+		$message .= '</p>
 			<p><strong>Bhanu Ahluwalia</strong><br>' . esc_html__( 'Co-founder of Rank Math', 'rank-math' ) . '</p>
 			<p>
 				<a href="' . esc_url( $selected_link ) . '" class="rank-math-dismiss-review-notice rank-math-review-action rank-math-review-out" target="_blank" rel="noopener noreferrer"><strong>' . esc_html__( 'Yes, you deserve it', 'rank-math' ) . '</strong></a><br>

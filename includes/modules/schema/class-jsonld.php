@@ -368,8 +368,9 @@ class JsonLD {
 	 */
 	public function can_add_global_entities( $data = [], $is_product_archive = false ) {
 		if ( ! $is_product_archive && ( is_category() || is_tag() || is_tax() ) ) {
-			$object = get_queried_object();
-			return $object && ! Helper::get_settings( 'titles.remove_' . $object->taxonomy . '_snippet_data' ) && ! $this->do_filter( 'snippet/remove_taxonomy_data', false, $object->taxonomy );
+			$object              = get_queried_object();
+			$add_global_entities = $object && ! Helper::get_settings( 'titles.remove_' . $object->taxonomy . '_snippet_data' ) && ! $this->do_filter( 'snippet/remove_taxonomy_data', false, $object->taxonomy );
+			return $this->do_filter( 'schema/add_global_entities', $add_global_entities, $this );
 		}
 
 		if ( is_front_page() || ! is_singular() || ! Helper::can_use_default_schema( $this->post_id ) || ! empty( $data ) ) {

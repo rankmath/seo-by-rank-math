@@ -46,7 +46,7 @@ class Update_Score {
 	public function __construct() {
 		$this->batch_size = absint( apply_filters( 'rank_math/recalculate_scores_batch_size', 25 ) );
 
-		$this->filter( 'rank_math/tools/update_seo_score', 'update_seo_score' );
+		$this->filter( 'rank_math/tools/update_seo_score', 'update_seo_score', 10, 2 );
 
 		$this->screen = new Screen();
 		$this->screen->load_screen( 'post' );
@@ -99,9 +99,21 @@ class Update_Score {
 
 	/**
 	 * Function to Update the SEO score.
+	 *
+	 * @param string               $message The message to return.
+	 * @param WP_REST_Request|null $request The request object.
+	 *
+	 * @return array|string The message to return.
 	 */
-	public function update_seo_score() {
-		$args   = Param::post( 'args', [], FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+	public function update_seo_score( $message = '', $request = null ) {
+		if ( ! $request ) {
+			// For backward compatibility where $request is not passed.
+			$args = Param::post( 'args', [], FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		} else {
+			$params = $request->get_params();
+			$args   = $params['args'] ?? [];
+		}
+
 		$offset = isset( $args['offset'] ) ? absint( $args['offset'] ) : 0;
 
 		// We get "paged" when running from the importer.
@@ -179,6 +191,7 @@ class Update_Score {
 				'content'      => wpautop( $post->post_content ),
 				'url'          => urldecode( get_the_permalink( $post_id ) ),
 				'hasContentAi' => ! empty( Helper::get_post_meta( 'contentai_score', $post_id ) ),
+				'post_type'    => $post_type,
 			];
 
 			if ( has_post_thumbnail( $post_id ) ) {

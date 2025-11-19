@@ -161,7 +161,7 @@ class Admin extends WP_REST_Controller {
 	 */
 	public function tools_actions( WP_REST_Request $request ) {
 		$action = $request->get_param( 'action' );
-		return apply_filters( 'rank_math/tools/' . $action, 'Something went wrong.' );
+		return apply_filters( 'rank_math/tools/' . $action, 'Something went wrong.', $request );
 	}
 
 	/**

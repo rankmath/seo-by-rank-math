@@ -88,6 +88,15 @@ class Post extends WP_REST_Controller {
 	}
 
 	/**
+	 * Retrieves the Post screen metadata to be utilized when a Page is changed from the Full Site Editor.
+	 */
+	public function get_post_screen_meta() {
+		$screen = new \RankMath\Admin\Metabox\Screen();
+		$screen->load_screen( 'post' );
+		return $screen->get_values();
+	}
+
+	/**
 	 * Whether to process current object.
 	 *
 	 * @param int    $object_id   Object ID.
