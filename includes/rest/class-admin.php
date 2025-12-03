@@ -131,12 +131,6 @@ class Admin extends WP_REST_Controller {
 		$module = $request->get_param( 'module' );
 		$state  = $request->get_param( 'state' );
 
-		if ( $module === 'react-settings' ) {
-			update_option( 'rank_math_react_settings_ui', $state );
-			do_action( 'rank_math/module_changed', $module, $state );
-			return true;
-		}
-
 		Helper::update_modules( [ $module => $state ] );
 		$this->maybe_delete_rewrite_rules( $module );
 		do_action( 'rank_math/module_changed', $module, $state );

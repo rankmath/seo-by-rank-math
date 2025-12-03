@@ -217,12 +217,6 @@ class Manager {
 			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'rank-math' ),
 		];
 
-		$modules['react-settings'] = [
-			'title' => esc_html__( 'React Settings UI', 'rank-math' ),
-			'desc'  => esc_html__( 'Enable the new React-powered interface for the plugin settings. Disable to revert to the classic PHP-based settings page.', 'rank-math' ),
-			'icon'  => 'settings',
-		];
-
 		return $modules;
 	}
 

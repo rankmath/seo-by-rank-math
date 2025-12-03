@@ -50,7 +50,7 @@ class Admin extends Base {
 		);
 		parent::__construct();
 
-		$this->action( 'cmb2_admin_init', 'add_kb_links', 50 );
+		$this->action( 'admin_init', 'add_kb_links', 50 );
 		$this->action( 'rank_math/admin/editor_scripts', 'enqueue' );
 		$this->action( 'rank_math/post/column/seo_details', 'display_schema_type', 10, 2 );
 	}
@@ -81,13 +81,12 @@ class Admin extends Base {
 			return;
 		}
 
-		$values = [];
-		$cmb    = $this->get_metabox();
-		if ( false === $cmb ) {
+		$object_id = $this->get_object_id();
+		if ( false === $object_id ) {
 			return;
 		}
 
-		Helper::add_json( 'schemas', $this->get_schema_data( $cmb->object_id() ) );
+		Helper::add_json( 'schemas', $this->get_schema_data( $object_id ) );
 		Helper::add_json( 'customSchemaImage', esc_url( rank_math()->plugin_url() . 'includes/modules/schema/assets/img/custom-schema-builder.jpg' ) );
 
 		wp_enqueue_style( 'rank-math-schema', rank_math()->plugin_url() . 'includes/modules/schema/assets/css/schema.css', [ 'wp-components', 'rank-math-editor' ], rank_math()->version );
@@ -266,16 +265,25 @@ class Admin extends Base {
 	}
 
 	/**
-	 * Get a CMB2 instance by the metabox ID.
+	 * Get the current object ID (post or term).
 	 *
-	 * @return bool|CMB2
+	 * @return int|false Object ID or false if not available.
 	 */
-	private function get_metabox() {
+	private function get_object_id() {
+		global $post;
+
+		// For term edit pages.
 		if ( Admin_Helper::is_term_profile_page() ) {
 			return false;
 		}
 
-		return cmb2_get_metabox( 'rank_math_metabox' );
+		// For post edit pages.
+		if ( isset( $post->ID ) ) {
+			return $post->ID;
+		}
+
+		// Try to get from query string.
+		return isset( $_GET['post'] ) ? absint( $_GET['post'] ) : false;
 	}
 
 	/**

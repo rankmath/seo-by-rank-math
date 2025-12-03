@@ -340,7 +340,6 @@ class Installer {
 		}
 
 		add_option( 'rank_math_modules', $modules );
-		add_option( 'rank_math_react_settings_ui', 'on', '', false );
 		self::create_tables( $modules );
 	}
 

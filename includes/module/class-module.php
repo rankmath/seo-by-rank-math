@@ -210,10 +210,6 @@ class Module {
 			return false;
 		}
 
-		if ( $this->get_id() === 'react-settings' ) {
-			return Helper::is_react_enabled();
-		}
-
 		$active_modules = get_option( 'rank_math_modules', [] );
 		return is_array( $active_modules ) && in_array( $this->get_id(), $active_modules, true );
 	}
