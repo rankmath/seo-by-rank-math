@@ -55,7 +55,7 @@ class Notification_Center {
 	 *
 	 * @param string $storage_key Option name to store notification in.
 	 */
-	public function __construct( $storage_key = 'mythemeshop_notifications' ) {
+	public function __construct( $storage_key = 'rank_math_notifications' ) {
 		$this->storage_key = $storage_key;
 		add_action( 'plugins_loaded', [ $this, 'get_from_storage' ], 5 );
 		add_action( 'all_admin_notices', [ $this, 'display' ] );

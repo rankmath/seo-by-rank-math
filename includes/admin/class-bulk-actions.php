@@ -97,6 +97,10 @@ class Bulk_Actions implements Runner {
 			$post_type                                 = Param::get( 'post_type', get_post_type() );
 			$post_type_default                         = Helper::get_settings( 'titles.pt_' . $post_type . '_default_rich_snippet' );
 
+			if ( ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) || ( class_exists( 'Easy_Digital_Downloads' ) && 'download' === $post_type ) ) {
+				$post_type_default = 'download' === $post_type ? esc_html__( 'EDD Product', 'rank-math' ) : esc_html__( 'WC Product', 'rank-math' );
+			}
+
 			if ( $post_type_default ) {
 				// Translators: placeholder is the default Schema type setting.
 				$new_actions['rank_math_bulk_schema_default'] = sprintf( __( 'Set Schema: Default (%s)', 'rank-math' ), $post_type_default );

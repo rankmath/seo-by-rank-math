@@ -123,7 +123,7 @@ class Attachment {
 	 * @return int The Post ID belonging to the attachment, 0 if not found.
 	 */
 	private static function url_to_postid( $url ) {
-		$cache_key = sprintf( 'mythemeshop_attachment_url_post_id_%s', md5( $url ) );
+		$cache_key = sprintf( 'rank_math_attachment_url_post_id_%s', md5( $url ) );
 
 		// Set the ID based on the hashed url in the cache.
 		$id = wp_cache_get( $cache_key );

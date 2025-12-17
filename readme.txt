@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.9
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.259
+Stable tag: 1.0.260
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,15 +339,17 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.259 [Dec 03, 2025] =
-- Added: Compatibility with WordPress 6.9
-- Improved: Converted the CMB2 metabox code of [Link Suggestions](https://rankmath.com/kb/pillar-content-internal-linking/#link-suggestions-for-posts) to the core WP metabox
-- Fixed: [Time to Read in Enhanced Slack Sharing](https://rankmath.com/kb/slack-enhanced-sharing/#enhanced-sharing) was not accounting for shortcodes in the content
-- Fixed: [Focus keyword tests](https://rankmath.com/kb/score-100-in-tests/#understanding-the-tests-from-a-keyword-perspective) were failing when a comma or other special characters were used in keywords added in the title, content, or description
-- Fixed: Console error in the [Content AI module](https://rankmath.com/kb/how-to-use-content-ai/) related to `undefined cleanForSlug` on some setups
-- Fixed: Blank page was shown when [Chat with AI](https://rankmath.com/kb/how-to-use-content-ai/#chat-with-ai) returned an error
-- Fixed: Compatibility issue with Colibri Page Builder PRO was causing the Rank Math SEO metabox to not display
-- Fixed: Invalid [Renew Content AI credits date](https://rankmath.com/kb/general-settings/#credits-left) was being shown on some setups
-- Removed: [React Settings UI](https://rankmath.com/kb/react-migration/#what-to-expect) from the modules page
+= 1.0.260 [Dec 17, 2025] =
+- Improved: Multiple [Focus keywords](https://rankmath.com/kb/what-is-a-focus-keyword/) are now allowed on taxonomy pages
+- Fixed: Missing TinyMCE editor on taxonomy pages after the last update
+- Fixed: [Keyword Density test](https://rankmath.com/kb/score-100-in-tests/#keyword-density-primary-and-secondary-focus-keywords) was not working properly on non-English sites
+- Fixed: [Selecting Primary category](https://rankmath.com/kb/how-to-choose-a-primary-category/#how-to-choose-a-primary-category) was not working in Classic Editor after the last update
+- Fixed: Missing SEO metabox on the User Profile page
+- Fixed: Word limit added to the [Schema headline & description preview shown in the Titles & Meta settings](https://rankmath.com/kb/titles-and-meta/#headline)
+- Fixed: Untranslated strings on the [Setup Wizard page](https://rankmath.com/kb/how-to-setup/)
+- Fixed: [Power word in SEO Title test](https://rankmath.com/kb/fix-seo-tests-with-content-ai/#power-word) was not working properly when the plural form of the word was used in the title
+- Fixed: UI issue in the [FAQ block](https://rankmath.com/kb/faq-schema-block/) action buttons on responsive devices
+- Fixed: Compatibility issue with Colibri Page Builder PRO, causing the Rank Math SEO metabox to not display
+- Removed: `mythemeshop/wordpress-helpers` package as it's no longer used in the plugin
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

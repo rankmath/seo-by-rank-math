@@ -448,8 +448,9 @@ trait Choices {
 			$types['review'] = esc_html__( 'Review (Unsupported)', 'rank-math' );
 		}
 
-		if ( is_string( $none ) ) {
-			$types = [ 'off' => $none ] + $types;
+		if ( $none ) {
+			$label = is_string( $none ) ? $none : esc_html__( 'None', 'rank-math' );
+			$types = [ 'off' => $label ] + $types;
 		}
 
 		/**
