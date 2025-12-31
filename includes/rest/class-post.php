@@ -185,7 +185,7 @@ class Post extends WP_REST_Controller {
 	}
 
 	/**
-	 * Get update metadta endpoint arguments.
+	 * Get update metadata endpoint arguments.
 	 *
 	 * @return array
 	 */

@@ -210,11 +210,11 @@ class Keywords extends Posts {
 			return $cache;
 		}
 
-		// Step1. Get splitted date intervals for graph within selected date range.
+		// Step1. Get split date intervals for graph within selected date range.
 		$intervals     = $this->get_intervals();
 		$sql_daterange = $this->get_sql_date_intervals( $intervals );
 
-		// Step2. Get most recent days for each splitted date intervals.
+		// Step2. Get most recent days for each split date intervals.
 		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT MAX(DATE(created)) as date, {$sql_daterange}

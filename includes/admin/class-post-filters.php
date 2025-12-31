@@ -35,7 +35,7 @@ class Post_Filters implements Runner {
 	}
 
 	/**
-	 * Intialize.
+	 * Initialize.
 	 */
 	public function init() {
 		if ( ! Helper::has_cap( 'general' ) ) {

@@ -137,7 +137,7 @@ class Local_Seo {
 	 */
 	private function add_place_entity( &$data, $jsonld ) {
 		$properties = [];
-		$this->add_geo_cordinates( $properties );
+		$this->add_geo_coordinates( $properties );
 		$jsonld->add_prop( 'address', $properties );
 		if ( empty( $properties ) ) {
 			return;
@@ -254,7 +254,7 @@ class Local_Seo {
 	 *
 	 * @param array $entity Array of JSON-LD entity.
 	 */
-	private function add_geo_cordinates( &$entity ) {
+	private function add_geo_coordinates( &$entity ) {
 		$geo = Str::to_arr( Helper::get_settings( 'titles.geo' ) );
 		if ( ! isset( $geo[0], $geo[1] ) ) {
 			return;
@@ -365,7 +365,7 @@ class Local_Seo {
 	 */
 	private function sanitize_organization_schema( $entity, $type ) {
 		$types = [
-			'op'   => [ 'Organization', 'Corporation', 'EducationalOrganization', 'CollegeOrUniversity', 'ElementarySchool', 'HighSchool', 'MiddleSchool', 'Preschool', 'School', 'SportsTeam', 'MedicalOrganization', 'DiagnosticLab', 'Pharmacy', 'VeterinaryCare', 'PerformingGroup', 'DanceGroup', 'MusicGroup', 'TheaterGroup', 'GovernmentOrganization', 'NGO', 'Airline', 'Consortium', 'Funding Scheme', 'FundingAgency', 'LibrarySystem', 'NewsMediaOrganization', 'Project', 'SportsOrganization', 'WorkersUnion' ],
+			'op'   => [ 'Organization', 'Corporation', 'EducationalOrganization', 'CollegeOrUniversity', 'ElementarySchool', 'HighSchool', 'MiddleSchool', 'Preschool', 'School', 'SportsTeam', 'MedicalOrganization', 'DiagnosticLab', 'Pharmacy', 'VeterinaryCare', 'PerformingGroup', 'DanceGroup', 'MusicGroup', 'TheaterGroup', 'GovernmentOrganization', 'NGO', 'Airline', 'Consortium', 'Funding Scheme', 'FundingAgency', 'LibrarySystem', 'NewsMediaOrganization', 'Project', 'SportsOrganization', 'WorkersUnion', 'OnlineStore', 'OnlineBusiness' ],
 			'logo' => [ 'AnimalShelter', 'AutomotiveBusiness', 'Campground', 'ChildCare', 'DryCleaningOrLaundry', 'Dentist', 'EmergencyService', 'FireStation', 'PoliceStation', 'EntertainmentBusiness', 'AdultEntertainment', 'AmusementPark', 'ArtGallery', 'Casino', 'ComedyClub', 'MovieTheater', 'NightClub', 'EmploymentAgency', 'TravelAgency', 'Store', 'AutoPartsStore', 'BikeStore', 'BookStore', 'ClothingStore', 'ComputerStore', 'ConvenienceStore', 'DepartmentStore', 'ElectronicsStore', 'Florist', 'FurnitureStore', 'GardenStore', 'GroceryStore', 'HardwareStore', 'HobbyShop', 'HomeGoodsStore', 'JewelryStore', 'LiquorStore', 'MensClothingStore', 'MobilePhoneStore', 'MovieRentalStore', 'MusicStore', 'OfficeEquipmentStore', 'OutletStore', 'PawnShop', 'PetStore', 'ShoeStore', 'SportingGoodsStore', 'TireShop', 'ToyStore', 'WholesaleStore', 'FinancialService', 'Hospital', 'MovieTheater', 'HomeAndConstructionBusiness', 'Electrician', 'GeneralContractor', 'Plumber', 'InternetCafe', 'Library', 'LocalBusiness', 'LodgingBusiness', 'Hostel', 'Hotel', 'Motel', 'BedAndBreakfast', 'Campground', 'RadioStation', 'RealEstateAgent', 'RecyclingCenter', 'SelfStorage', 'ShoppingCenter', 'SportsActivityLocation', 'BowlingAlley', 'ExerciseGym', 'GolfCourse', 'HealthClub', 'PublicSwimmingPool', 'Resort', 'SkiResort', 'SportsClub', 'TennisComplex', 'StadiumOrArena', 'TelevisionStation', 'TouristInformationCenter', 'MovingCompany', 'InsuranceAgency', 'ProfessionalService', 'HVACBusiness', 'AutoBodyShop', 'AutoDealer', 'AutoPartsStore', 'AutoRental', 'AutoRepair', 'AutoWash', 'GasStation', 'MotorcycleDealer', 'MotorcycleRepair', 'AccountingService', 'AutomatedTeller', 'FoodEstablishment', 'Bakery', 'BarOrPub', 'Brewery', 'CafeOrCoffeeShop', 'FastFoodRestaurant', 'IceCreamShop', 'Restaurant', 'Winery', 'GovernmentOffice', 'PostOffice', 'HealthAndBeautyBusiness', 'BeautySalon', 'DaySpa', 'HairSalon', 'HealthClub', 'NailSalon', 'TattooParlor', 'HousePainter', 'Locksmith', 'Notary', 'RoofingContractor', 'LegalService', 'Physician', 'Optician', 'MedicalBusiness', 'MedicalClinic', 'BankOrCreditUnion', 'CovidTestingFacility', 'ArchiveOrganization', 'Optician', 'DietNutrition' ],
 		];
 

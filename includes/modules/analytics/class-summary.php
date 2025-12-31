@@ -368,11 +368,11 @@ class Summary {
 
 		$data = new \stdClass();
 
-		// Step1. Get splitted date intervals for graph within selected date range.
+		// Step1. Get split date intervals for graph within selected date range.
 		$intervals     = $this->get_intervals();
 		$sql_daterange = $this->get_sql_date_intervals( $intervals );
 
-		// Step2. Get current analytics data by splitted date intervals.
+		// Step2. Get current analytics data by split date intervals.
 		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT DATE_FORMAT( created, '%%Y-%%m-%%d') as date, SUM(clicks) as clicks, SUM(impressions) as impressions, AVG(position) as position, AVG(ctr) as ctr, {$sql_daterange}
@@ -386,7 +386,7 @@ class Summary {
 		$analytics = $this->set_dimension_as_key( $analytics, 'range_group' );
 		// phpcs:enable
 
-		// Step2. Get current keyword data by splitted date intervals. Keyword count should be calculated as total count of most recent date for each splitted date intervals.
+		// Step2. Get current keyword data by split date intervals. Keyword count should be calculated as total count of most recent date for each split date intervals.
 		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT t.range_group, MAX(CONCAT(t.range_group, ':', t.date, ':', t.keywords )) as mixed FROM

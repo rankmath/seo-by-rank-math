@@ -374,6 +374,12 @@ trait Choices {
 							],
 						],
 						[ 'label' => 'NGO' ],
+						[
+							'label' => 'Online Business',
+							'child' => [
+								[ 'label' => 'Online Store' ],
+							],
+						],
 						[ 'label' => 'News Media Organization' ],
 						[
 							'label' => 'Performing Group',

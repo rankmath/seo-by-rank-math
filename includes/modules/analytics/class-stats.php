@@ -271,7 +271,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Remove uncessary graph rows.
+	 * Remove unnecessary graph rows.
 	 *
 	 * @param  array $rows Rows to filter.
 	 * @return array

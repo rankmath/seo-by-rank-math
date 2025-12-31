@@ -247,7 +247,7 @@ class Your_Site implements Wizard_Step {
 	}
 
 	/**
-	 * Get type dependecy.
+	 * Get type dependency.
 	 *
 	 * @return array
 	 */

@@ -281,7 +281,7 @@ class Page {
 	}
 
 	/**
-	 * Is the page is currrent page.
+	 * Is the page is current page.
 	 *
 	 * @return bool
 	 */

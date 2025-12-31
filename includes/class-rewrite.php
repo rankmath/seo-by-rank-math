@@ -254,7 +254,7 @@ class Rewrite {
 	 *
 	 * @param string $name The encoded category URI string.
 	 *
-	 * @return string The convered URI string.
+	 * @return string The converted URI string.
 	 */
 	private function convert_encoded_to_upper( $name ) {
 		// Checks if name has any encoding in it.

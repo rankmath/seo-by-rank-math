@@ -272,7 +272,7 @@ class Breadcrumbs {
 	 * Search results trail.
 	 */
 	private function add_crumbs_search() {
-		$this->add_crumb( sprintf( $this->strings['search_format'], get_search_query() ), Security::remove_query_arg_raw( 'paged' ) );
+		$this->add_crumb( $this->replace_placeholder( $this->strings['search_format'], get_search_query() ), Security::remove_query_arg_raw( 'paged' ) );
 	}
 
 	/**
@@ -431,13 +431,13 @@ class Breadcrumbs {
 	 */
 	private function add_crumbs_date() {
 		if ( is_year() || is_month() || is_day() ) {
-			$this->add_crumb( sprintf( $this->strings['archive_format'], get_the_time( 'Y' ) ), get_year_link( get_the_time( 'Y' ) ) );
+			$this->add_crumb( $this->replace_placeholder( $this->strings['archive_format'], get_the_time( 'Y' ) ), get_year_link( get_the_time( 'Y' ) ) );
 		}
 		if ( is_month() || is_day() ) {
-			$this->add_crumb( sprintf( $this->strings['archive_format'], get_the_time( 'F' ) ), get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) );
+			$this->add_crumb( $this->replace_placeholder( $this->strings['archive_format'], get_the_time( 'F' ) ), get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) );
 		}
 		if ( is_day() ) {
-			$this->add_crumb( sprintf( $this->strings['archive_format'], get_the_time( 'd' ) ) );
+			$this->add_crumb( $this->replace_placeholder( $this->strings['archive_format'], get_the_time( 'd' ) ) );
 		}
 	}
 
@@ -452,7 +452,7 @@ class Breadcrumbs {
 			return;
 		}
 
-		$this->add_crumb( sprintf( $this->strings['archive_format'], $this->get_breadcrumb_title( 'user', $userdata->ID, $userdata->display_name ) ) );
+		$this->add_crumb( $this->replace_placeholder( $this->strings['archive_format'], $this->get_breadcrumb_title( 'user', $userdata->ID, $userdata->display_name ) ) );
 	}
 
 	/**
@@ -535,7 +535,7 @@ class Breadcrumbs {
 	}
 
 	/**
-	 * Add ancestor taxonomy crumbs to the hierachical taxonomy trails.
+	 * Add ancestor taxonomy crumbs to the hierarchical taxonomy trails.
 	 *
 	 * @param object $term Term data object.
 	 */
@@ -557,7 +557,7 @@ class Breadcrumbs {
 	}
 
 	/**
-	 * Can add ancestor taxonomy crumbs to the hierachical taxonomy trails.
+	 * Can add ancestor taxonomy crumbs to the hierarchical taxonomy trails.
 	 *
 	 * @param object $term Term data object.
 	 *
@@ -652,5 +652,16 @@ class Breadcrumbs {
 		}
 
 		return $title ? $title : $default_value;
+	}
+
+	/**
+	 * Replace placeholder in breadcrumb string.
+	 *
+	 * @param string $text  Text with placeholder.
+	 * @param string $query Query to replace.
+	 * @return string
+	 */
+	private function replace_placeholder( $text, $query ) {
+		return preg_replace( '/%s(?=\s|%|$)/', $query, $text );
 	}
 }

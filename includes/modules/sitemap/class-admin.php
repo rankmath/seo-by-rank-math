@@ -164,10 +164,10 @@ class Admin extends Base {
 			'product'    => KB::get( 'sitemap-product', 'Options Panel Sitemap Product Tab' ),
 		];
 
-		// Post type label seprator.
+		// Post type label separator.
 		$tabs['p_types'] = [
 			'title' => esc_html__( 'Post Types:', 'rank-math' ),
-			'type'  => 'seprator',
+			'type'  => 'separator',
 		];
 
 		foreach ( Helper::get_accessible_post_types() as $post_type ) {
@@ -216,10 +216,10 @@ class Admin extends Base {
 	public function taxonomy_settings( $tabs ) {
 		$icons = Helper::choices_taxonomy_icons();
 
-		// Taxonomy label seprator.
+		// Taxonomy label separator.
 		$tabs['t_types'] = [
 			'title' => esc_html__( 'Taxonomies:', 'rank-math' ),
-			'type'  => 'seprator',
+			'type'  => 'separator',
 		];
 
 		foreach ( Helper::get_accessible_taxonomies() as $taxonomy ) {

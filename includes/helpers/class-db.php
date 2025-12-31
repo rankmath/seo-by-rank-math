@@ -155,7 +155,7 @@ class DB {
 	/**
 	 * Check if table exists in db or not.
 	 *
-	 * @param string $table_name Table name to check for existance.
+	 * @param string $table_name Table name to check for existence.
 	 *
 	 * @return bool
 	 */

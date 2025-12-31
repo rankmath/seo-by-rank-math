@@ -44,7 +44,7 @@ class Instant_Indexing extends Base {
 	private $submitted = [];
 
 	/**
-	 * Store previous post status that we can check agains in save_post.
+	 * Store previous post status that we can check against in save_post.
 	 *
 	 * @var array
 	 */

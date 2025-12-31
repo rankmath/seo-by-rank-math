@@ -485,7 +485,7 @@ class CMB2_Options {
 	 * @return string|boolean
 	 */
 	private function locate_file( $id, $tab ) {
-		if ( isset( $tab['type'] ) && 'seprator' === $tab['type'] ) {
+		if ( isset( $tab['type'] ) && 'separator' === $tab['type'] ) {
 			return false;
 		}
 

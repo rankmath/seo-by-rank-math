@@ -264,7 +264,7 @@ class Query_Builder {
 	}
 
 	/**
-	 * Reset all vaiables.
+	 * Reset all variables.
 	 *
 	 * @return self The current query builder.
 	 */

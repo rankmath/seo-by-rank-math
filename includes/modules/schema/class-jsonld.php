@@ -785,9 +785,9 @@ class JsonLD {
 			$profiles[] = "https://twitter.com/$twitter";
 		}
 
-		$addional_profiles = Helper::get_settings( 'titles.social_additional_profiles' );
-		if ( ! empty( $addional_profiles ) ) {
-			$profiles = array_merge( $profiles, Arr::from_string( $addional_profiles, "\n" ) );
+		$additional_profiles = Helper::get_settings( 'titles.social_additional_profiles' );
+		if ( ! empty( $additional_profiles ) ) {
+			$profiles = array_merge( $profiles, Arr::from_string( $additional_profiles, "\n" ) );
 		}
 
 		return array_values( array_filter( $profiles ) );

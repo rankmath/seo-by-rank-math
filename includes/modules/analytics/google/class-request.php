@@ -244,7 +244,7 @@ class Request {
 	 * @param string         $url                URL to do request.
 	 * @param array          $args               Assoc array of parameters to be passed.
 	 * @param array|WP_Error $response           make_request response.
-	 * @param string         $formatted_response Formated response.
+	 * @param string         $formatted_response Formatted response.
 	 * @param array          $params             Parameters.
 	 * @param string         $text               Text to append at the end of the response.
 	 */

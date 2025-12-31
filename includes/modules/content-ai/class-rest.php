@@ -542,7 +542,7 @@ class Rest extends WP_REST_Controller {
 	}
 
 	/**
-	 * Endpoing to update the AI plan and credits.
+	 * Endpoint to update the AI plan and credits.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *

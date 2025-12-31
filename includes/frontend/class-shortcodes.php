@@ -74,7 +74,7 @@ class Shortcodes {
 	}
 
 	/**
-	 * Contact info shortcode, displays nicely formatted contact informations.
+	 * Contact info shortcode, displays nicely formatted contact information.
 	 *
 	 * @param  array $args Optional. Shortcode arguments - currently only 'show'
 	 *                     parameter, which is a comma-separated list of elements to show.

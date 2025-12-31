@@ -326,7 +326,7 @@ class Product_WooCommerce {
 			'price'           => $product->get_price() ? wc_format_decimal( $product->get_price(), wc_get_price_decimals() ) : '0',
 			'priceCurrency'   => get_woocommerce_currency(),
 			'priceValidUntil' => $sale_price_valid_until ?? $price_valid_until,
-			'availability'    => $product->is_in_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+			'availability'    => $this->get_availability( $product ),
 			'itemCondition'   => 'NewCondition',
 			'url'             => $product->get_permalink(),
 			'seller'          => $seller,
@@ -339,6 +339,23 @@ class Product_WooCommerce {
 		}
 
 		return $offer;
+	}
+
+	/**
+	 * Get product availability.
+	 *
+	 * @param object $product Product instance.
+	 *
+	 * @return string Product availability schema.
+	 */
+	public function get_availability( $product ) {
+		if ( $product->is_in_stock() ) {
+			$stock_status_schema = ( \Automattic\WooCommerce\Enums\ProductStockStatus::ON_BACKORDER === $product->get_stock_status() ) ? 'BackOrder' : 'InStock';
+		} else {
+			$stock_status_schema = 'OutOfStock';
+		}
+
+		return 'http://schema.org/' . $stock_status_schema;
 	}
 
 	/**

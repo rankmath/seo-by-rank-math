@@ -41,7 +41,7 @@ class Post_Columns implements Runner {
 	}
 
 	/**
-	 * Intialize.
+	 * Initialize.
 	 */
 	public function init() {
 		if ( ! Helper::has_cap( 'onpage_general' ) ) {
@@ -434,7 +434,7 @@ class Post_Columns implements Runner {
 	}
 
 	/**
-	 * Get Post IDs dispalyed on the Post lists page.
+	 * Get Post IDs displayed on the Post lists page.
 	 */
 	private function get_post_ids() {
 		global $wp_query, $per_page;

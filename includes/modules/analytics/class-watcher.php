@@ -113,7 +113,7 @@ class Watcher {
 				DB::add_object( $object_args );
 			}
 
-			// Here we don't need to add `rank_math_analytic_object_id` post meta, because we always remove old translated objects info and add new one, in case of multi-lanauge.
+			// Here we don't need to add `rank_math_analytic_object_id` post meta, because we always remove old translated objects info and add new one, in case of multi-language.
 			return;
 		}
 

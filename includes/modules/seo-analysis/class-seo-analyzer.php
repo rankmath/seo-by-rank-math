@@ -122,11 +122,11 @@ class SEO_Analyzer {
 	}
 
 	/**
-	 * Get graph metrices.
+	 * Get graph metrics.
 	 *
 	 * @return array
 	 */
-	private function get_graph_metrices() {
+	private function get_graph_metrics() {
 		$total       = 0;
 		$percent     = 0;
 		$total_score = 0;
@@ -496,7 +496,7 @@ class SEO_Analyzer {
 	private function get_results() {
 		return [
 			'results'  => $this->sort_results_by_category(),
-			'metrices' => $this->get_graph_metrices(),
+			'metrices' => $this->get_graph_metrics(),
 			'date'     => $this->get_last_checked_date(),
 			'serpData' => $this->get_serp_data(),
 		];

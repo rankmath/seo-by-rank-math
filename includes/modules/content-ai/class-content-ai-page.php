@@ -193,7 +193,7 @@ class Content_AI_Page {
 	}
 
 	/**
-	 * Remove unsed content generated from the Toolbar option of the Content AI.
+	 * Remove unused content generated from the Toolbar option of the Content AI.
 	 *
 	 * @param array $data An array of slashed, sanitized, and processed post data.
 	 */

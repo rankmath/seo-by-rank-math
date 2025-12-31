@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.260\n"
+"Project-Id-Version: Rank Math SEO 1.0.261\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-17T05:54:33+00:00\n"
+"POT-Creation-Date: 2025-12-31T02:04:08+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rank-math\n"
@@ -953,15 +953,16 @@ msgstr ""
 msgid "You are not allowed to deactivate this plugin: %s."
 msgstr ""
 
-#. translators: deactivation link
-msgid "Please keep only one SEO plugin active, otherwise, you might lose your rankings and traffic. %s."
+msgid "Please keep only one SEO plugin active, otherwise, you might lose your rankings and traffic."
+msgstr ""
+
+msgid "Please keep only one Sitemap plugin active, otherwise, you might lose your rankings and traffic."
+msgstr ""
+
+msgid "Please keep only one Redirection plugin active to avoid redirect conflicts or unexpected behavior."
 msgstr ""
 
 msgid "Click here to Deactivate"
-msgstr ""
-
-#. translators: deactivation link
-msgid "Please keep only one Sitemap plugin active, otherwise, you might lose your rankings and traffic. %s."
 msgstr ""
 
 #. translators: %1$s: general reading settings URL.
@@ -1742,7 +1743,7 @@ msgstr ""
 msgid "Records the URLs on which visitors & search engines run into 404 Errors. You can also turn on Redirections to redirect the error causing URLs to other URLs."
 msgstr ""
 
-msgid "Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to aquire the Knowledge Graph."
+msgid "Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to acquire the Knowledge Graph."
 msgstr ""
 
 msgid "Redirections"

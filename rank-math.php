@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.260
+ * Version:           1.0.261
  * Plugin URI:        https://rankmath.com/
  * Description:       Rank Math SEO is the Best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic.
  * Author:            Rank Math SEO
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.260';
+	public $version = '1.0.261';
 
 	/**
 	 * Rank Math database version.
@@ -396,6 +396,11 @@ final class RankMath {
 		// Loco Translate: initialize inline i18n injector for settings React UI.
 		if ( is_plugin_active( 'loco-translate/loco.php' ) ) {
 			new \RankMath\ThirdParty\Loco\Loco_I18n_Inline();
+		}
+
+		// WPML.
+		if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+			new \RankMath\ThirdParty\WPML();
 		}
 
 		// Divi theme.

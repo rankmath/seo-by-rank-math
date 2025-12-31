@@ -38,7 +38,7 @@ class Admin {
 	public function add_title_settings( $tabs ) {
 		$tabs['buddypress'] = [
 			'title' => esc_html__( 'BuddyPress:', 'rank-math' ),
-			'type'  => 'seprator',
+			'type'  => 'separator',
 		];
 
 		$tabs['buddypress-groups'] = [
