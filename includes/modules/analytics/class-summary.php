@@ -121,9 +121,9 @@ class Summary {
 		];
 
 		$stats->position = [
-			'total'      => (float) \number_format( $stats->position, 2 ),
-			'previous'   => (float) \number_format( $old_stats->position, 2 ),
-			'difference' => (float) \number_format( $stats->position - $old_stats->position, 2 ),
+			'total'      => (float) \number_format( $stats->position ?? 0, 2 ),
+			'previous'   => (float) \number_format( $old_stats->position ?? 0, 2 ),
+			'difference' => (float) \number_format( ($stats->position ?? 0) - ($old_stats->position ?? 0), 2 ),
 		];
 
 		$stats->keywords = $this->get_keywords_summary();
