@@ -1,15 +1,15 @@
-# Copyright (C) 2025 Rank Math SEO
+# Copyright (C) 2026 Rank Math SEO
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.261\n"
+"Project-Id-Version: Rank Math SEO 1.0.262\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-31T02:04:08+00:00\n"
+"POT-Creation-Date: 2026-01-14T03:17:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rank-math\n"
@@ -161,23 +161,6 @@ msgid "Seems like your site URL has changed since you connected to Rank Math."
 msgstr ""
 
 msgid "Click here to reconnect."
-msgstr ""
-
-#. translators: sitename
-msgid "I just installed @RankMathSEO #WordPress Plugin. It looks great! %s"
-msgstr ""
-
-#. translators: sitename
-msgid "I just installed Rank Math SEO WordPress Plugin. It looks promising!"
-msgstr ""
-
-msgid "SEO by Rank Math"
-msgstr ""
-
-msgid "Tweet"
-msgstr ""
-
-msgid "Share"
 msgstr ""
 
 #. Translators: 1 is "WordPress Address (URL)", 2 is "Site Address (URL)", 3 is a link to the General Settings, with "WordPress General Settings" as anchor text.
@@ -875,77 +858,6 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-msgid "Next steps&hellip;"
-msgstr ""
-
-msgid "Upgrade to PRO"
-msgstr ""
-
-msgid "Advanced Schema, Analytics and much more..."
-msgstr ""
-
-msgid "Setup Rank Math"
-msgstr ""
-
-msgid "How to Properly Setup Rank Math"
-msgstr ""
-
-msgid "Import Data"
-msgstr ""
-
-msgid "How to Import Data from Your Previous SEO Plugin"
-msgstr ""
-
-msgid "Improve SEO Score"
-msgstr ""
-
-msgid "How to Make Your Posts Pass All the Tests"
-msgstr ""
-
-msgid "Product Support"
-msgstr ""
-
-msgid "Online Documentation"
-msgstr ""
-
-msgid "Understand all the capabilities of Rank Math"
-msgstr ""
-
-msgid "Ticket Support"
-msgstr ""
-
-msgid "Direct help from our qualified support team"
-msgstr ""
-
-msgid "Affiliate Program"
-msgstr ""
-
-msgid "Earn flat 30% on every sale!"
-msgstr ""
-
-msgid "Account"
-msgstr ""
-
-msgid "Connected"
-msgstr ""
-
-msgid "Not Connected"
-msgstr ""
-
-#. translators: variables used to wrap the text in the strong tag.
-msgid "The plugin is currently not connected with your Rank Math account. Click on the button below to login or register for FREE using your %1$sGoogle account, Facebook account%2$s or %1$syour email account%2$s."
-msgstr ""
-
-msgid "Connect Now"
-msgstr ""
-
-#. translators: variables used to wrap the text in the strong tag.
-msgid "You have successfully activated Rank Math. If you find the plugin useful, %1$s feel free to recommend it to your friends or colleagues %2$s."
-msgstr ""
-
-msgid "Disconnect Account"
-msgstr ""
-
 msgid "Sorry, you are not allowed to deactivate plugins for this site."
 msgstr ""
 
@@ -1010,6 +922,9 @@ msgid "Setup Wizard - Rank Math"
 msgstr ""
 
 msgid "Connect Google Services"
+msgstr ""
+
+msgid "Disconnect Account"
 msgstr ""
 
 msgid "Benefits of Connecting Google Account"
@@ -1087,6 +1002,9 @@ msgid "Ready to switch to Google Analytics 4? %s"
 msgstr ""
 
 msgid "Click here to know how"
+msgstr ""
+
+msgid "Account"
 msgstr ""
 
 msgid "Property"
@@ -6725,6 +6643,9 @@ msgstr ""
 msgid "Saving…"
 msgstr ""
 
+msgid "Connected"
+msgstr ""
+
 msgid "Some permissions are missing, please reconnect"
 msgstr ""
 
@@ -6822,6 +6743,21 @@ msgid "Nothing found."
 msgstr ""
 
 msgid "Select / Deselect All"
+msgstr ""
+
+msgid "I just installed @RankMathSEO #WordPress Plugin. It looks great! %s"
+msgstr ""
+
+msgid "I just installed Rank Math SEO WordPress Plugin. It looks promising!"
+msgstr ""
+
+msgid "SEO by Rank Math"
+msgstr ""
+
+msgid "Tweet"
+msgstr ""
+
+msgid "Share"
 msgstr ""
 
 msgid "Use this file"
@@ -6929,6 +6865,9 @@ msgstr ""
 msgid "Warning: "
 msgstr ""
 
+msgid "Not Connected"
+msgstr ""
+
 msgid "Receive periodic SEO Performance reports via email. Once enabled and options are saved, you can see"
 msgstr ""
 
@@ -6986,7 +6925,49 @@ msgstr ""
 msgid "Next steps…"
 msgstr ""
 
+msgid "Setup Rank Math"
+msgstr ""
+
+msgid "Upgrade to PRO"
+msgstr ""
+
+msgid "How to Properly Setup Rank Math"
+msgstr ""
+
 msgid "Advanced Schema, Analytics and much more…"
+msgstr ""
+
+msgid "Import Data"
+msgstr ""
+
+msgid "How to Import Data from Your Previous SEO Plugin"
+msgstr ""
+
+msgid "Improve SEO Score"
+msgstr ""
+
+msgid "How to Make Your Posts Pass All the Tests"
+msgstr ""
+
+msgid "Product Support"
+msgstr ""
+
+msgid "Online Documentation"
+msgstr ""
+
+msgid "Understand all the capabilities of Rank Math"
+msgstr ""
+
+msgid "Ticket Support"
+msgstr ""
+
+msgid "Direct help from our qualified support team"
+msgstr ""
+
+msgid "Affiliate Program"
+msgstr ""
+
+msgid "Earn flat 30% on every sale!"
 msgstr ""
 
 msgid "The plugin is currently not connected with your Rank Math account. Click on the button below to login or register for FREE using your "
@@ -6999,6 +6980,9 @@ msgid " or "
 msgstr ""
 
 msgid "your email account."
+msgstr ""
+
+msgid "Connect Now"
 msgstr ""
 
 msgid "You have successfully activated Rank Math. If you find the plugin useful, "

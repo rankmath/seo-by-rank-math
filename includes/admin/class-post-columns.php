@@ -373,8 +373,8 @@ class Post_Columns implements Runner {
 			return Helper::get_settings( "titles.tax_{$term->taxonomy}_description" );
 		}
 
-		$post_type   = get_post_type( $object_id );
-		$description = has_excerpt( $object_id ) ? '%excerpt%' : Helper::get_settings( "titles.pt_{$post_type}_description" );
+		$post_type = get_post_type( $object_id );
+		return has_excerpt( $object_id ) ? '%excerpt%' : Helper::get_settings( "titles.pt_{$post_type}_description" );
 	}
 
 	/**

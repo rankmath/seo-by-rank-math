@@ -122,7 +122,7 @@ class Update_Score {
 			$offset = ( $paged - 1 ) * $this->batch_size;
 		}
 
-		$update_all = ! isset( $args['update_all_scores'] ) || ! empty( $args['update_all_scores'] );
+		$update_all = ! empty( $args['update_all_scores'] );
 		$query_args = [
 			'post_type'      => $this->get_post_types(),
 			'posts_per_page' => $this->batch_size,

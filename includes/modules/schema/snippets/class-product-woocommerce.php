@@ -350,7 +350,7 @@ class Product_WooCommerce {
 	 */
 	public function get_availability( $product ) {
 		if ( $product->is_in_stock() ) {
-			$stock_status_schema = ( \Automattic\WooCommerce\Enums\ProductStockStatus::ON_BACKORDER === $product->get_stock_status() ) ? 'BackOrder' : 'InStock';
+			$stock_status_schema = ( 'onbackorder' === $product->get_stock_status() ) ? 'BackOrder' : 'InStock';
 		} else {
 			$stock_status_schema = 'OutOfStock';
 		}

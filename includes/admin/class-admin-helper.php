@@ -325,51 +325,6 @@ class Admin_Helper {
 	}
 
 	/**
-	 * Get Social Share buttons.
-	 *
-	 * @codeCoverageIgnore
-	 */
-	public static function get_social_share() {
-		if ( Helper::is_whitelabel() ) {
-			return;
-		}
-
-		$tw_link = KB::get( 'logo', 'Setup Wizard Tweet Button' );
-		$fb_link = rawurlencode( KB::get( 'logo', 'Facebook' ) );
-		/* translators: sitename */
-		$tw_message = rawurlencode( sprintf( esc_html__( 'I just installed @RankMathSEO #WordPress Plugin. It looks great! %s', 'rank-math' ), $tw_link ) );
-		/* translators: sitename */
-		$fb_message = rawurlencode( esc_html__( 'I just installed Rank Math SEO WordPress Plugin. It looks promising!', 'rank-math' ) );
-
-		$tweet_url = Security::add_query_arg(
-			[
-				'text'     => $tw_message,
-				'hashtags' => 'SEO',
-			],
-			'https://twitter.com/intent/tweet'
-		);
-
-		$fb_share_url = Security::add_query_arg(
-			[
-				'u'       => $fb_link,
-				'quote'   => $fb_message,
-				'caption' => esc_html__( 'SEO by Rank Math', 'rank-math' ),
-			],
-			'https://www.facebook.com/sharer/sharer.php'
-		);
-		?>
-		<span class="wizard-share">
-			<a href="#" onclick="window.open('<?php echo esc_url( $tweet_url ); ?>', 'sharewindow', 'resizable,width=600,height=300'); return false;" class="share-twitter">
-				<span class="dashicons dashicons-twitter"></span> <?php esc_html_e( 'Tweet', 'rank-math' ); ?>
-			</a>
-			<a href="#" onclick="window.open('<?php echo esc_url( $fb_share_url ); ?>', 'sharewindow', 'resizable,width=600,height=300'); return false;" class="share-facebook">
-				<span class="dashicons dashicons-facebook-alt"></span> <?php esc_html_e( 'Share', 'rank-math' ); ?>
-			</a>
-		</span>
-		<?php
-	}
-
-	/**
 	 * Get product activation URL.
 	 *
 	 * @param string $redirect_to Redirecto url.
