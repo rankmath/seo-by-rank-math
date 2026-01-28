@@ -27,7 +27,7 @@ class Taxonomy_Screen implements IScreen {
 	 * Class construct
 	 */
 	public function __construct() {
-		add_action( 'init', [ $this, 'allow_tags' ], 15 );
+		add_action( 'init', [ $this, 'allow_tags' ], 999 );
 	}
 
 	/**

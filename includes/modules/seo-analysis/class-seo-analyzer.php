@@ -73,7 +73,7 @@ class SEO_Analyzer {
 	 *
 	 * @var array
 	 */
-	private $api_error = '';
+	public $api_error = '';
 
 	/**
 	 * Hold local test data.
