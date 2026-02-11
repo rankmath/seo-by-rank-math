@@ -161,7 +161,7 @@ class Content_AI_Page {
 	 */
 	public function content_editor_settings() {
 		$post                 = $this->get_content_editor_post();
-		$block_editor_context = new WP_Block_Editor_Context( [ 'post' => [] ] );
+		$block_editor_context = new WP_Block_Editor_Context( [ 'post' => $post ] );
 
 		// Flag that we're loading the block editor.
 		$current_screen = get_current_screen();

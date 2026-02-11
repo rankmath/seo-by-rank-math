@@ -12,6 +12,7 @@ namespace RankMath\ContentAI;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -36,6 +37,7 @@ class Assets {
 	public function __construct( $content_ai ) {
 		$this->content_ai = $content_ai;
 		$this->action( 'rank_math/admin/editor_scripts', 'editor_scripts', 20 );
+		$this->action( 'enqueue_block_assets', 'enqueue_block_assets', 20 );
 		$this->filter( 'rank_math/elementor/dark_styles', 'add_dark_style' );
 		$this->action( 'admin_enqueue_scripts', 'media_scripts', 20 );
 	}
@@ -80,15 +82,25 @@ class Assets {
 			true
 		);
 
+		wp_set_script_translations( 'rank-math-content-ai', 'rank-math' );
+
+		$this->content_ai->localized_data( $this->get_post_localized_data( $screen ) );
+	}
+
+	/**
+	 * Enqueue block assets.
+	 */
+	public function enqueue_block_assets() {
+		if ( ! $this->content_ai->can_add_tab() || ! Helper::get_current_editor() ) {
+			return;
+		}
+
 		wp_enqueue_style(
 			'rank-math-content-ai-page',
 			rank_math()->plugin_url() . 'includes/modules/content-ai/assets/css/content-ai-page.css',
 			[ 'rank-math-common' ],
 			rank_math()->version
 		);
-		wp_set_script_translations( 'rank-math-content-ai', 'rank-math' );
-
-		$this->content_ai->localized_data( $this->get_post_localized_data( $screen ) );
 	}
 
 	/**

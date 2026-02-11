@@ -34,6 +34,8 @@ export default ( { attributes, setAttributes, excludeHeadings, setExcludeHeading
 					onChange={ ( titleWrapper ) => {
 						setAttributes( { titleWrapper } )
 					} }
+					__next40pxDefaultSize={ true }
+					__nextHasNoMarginBottom={ true }
 				/>
 
 				<br />
@@ -47,6 +49,7 @@ export default ( { attributes, setAttributes, excludeHeadings, setExcludeHeading
 									label={ __( 'Heading ', 'rank-math' ) + toUpper( value ) }
 									checked={ includes( excludeHeadings, value ) }
 									onChange={ ( newVlaue ) => setExcludeHeadings( value, newVlaue ) }
+									__nextHasNoMarginBottom={ true }
 								/>
 							)
 						} )

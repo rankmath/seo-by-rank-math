@@ -94,12 +94,12 @@ class Backup {
 	 * @param string $key Backup key to be restored.
 	 */
 	public static function delete_backup( $key ) {
-		$backups = self::get_backups();
+		$backups = self::get_backups( true );
 		if ( ! isset( $backups[ $key ] ) ) {
 			return [
 				'type'    => 'error',
 				'message' => esc_html__( 'No backup key found to delete.', 'rank-math' ),
-				'backups' => self::get_backups(),
+				'backups' => self::get_backups( true ),
 			];
 		}
 
@@ -109,7 +109,7 @@ class Backup {
 		return [
 			'type'    => 'success',
 			'message' => esc_html__( 'Backup successfully deleted.', 'rank-math' ),
-			'backups' => self::get_backups(),
+			'backups' => self::get_backups( true ),
 		];
 	}
 }

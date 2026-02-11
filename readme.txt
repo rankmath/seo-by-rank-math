@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.9
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.263
+Stable tag: 1.0.264
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,10 +339,11 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.263 [Jan 28, 2026] =
-- Fixed: Incorrect SEO description was shown in the [SERP Preview](https://rankmath.com/kb/general-tab/#the-preview-section) on taxonomy pages
-- Fixed: Missing Rank Math SEO metabox on some taxonomies that use a higher priority to register the metabox
-- Fixed: [Focus keyword in the URL test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-the-url-primary-focus-keyword-only) was failing when Cyrillic letters were used in the URL
-- Fixed: Console errors on some setups related to the Content analysis
+= 1.0.264 [Feb 11, 2026] =
+- Improved: Added an index to the `rank_math_redirections` `status` and `updated` columns to improve query execution performance
+- Fixed: Deleting a [Settings Backup](https://rankmath.com/kb/import-export-settings/#performing-and-restoring-backups) was breaking other backups created on the site
+- Fixed: Increased the Rank Math SEO metabox priority on taxonomy pages so it appears after custom fields
+- Fixed: Browser console warnings when the `SCRIPT_DEBUG` constant was set to `true`
+- Fixed: The `lastmod` value was missing in the [Sitemap](https://rankmath.com/kb/configure-sitemaps/) for the Posts Page selected in the Reading settings
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

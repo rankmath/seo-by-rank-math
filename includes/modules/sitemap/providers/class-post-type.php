@@ -329,7 +329,11 @@ class Post_Type implements Provider {
 			];
 		} elseif ( $this->get_page_on_front_id() && 'post' === $post_type && $this->get_page_for_posts_id() ) {
 			$needs_archive = false;
-			$links[]       = Sitemap::is_object_indexable( $this->get_page_for_posts_id() ) ? [ 'loc' => get_permalink( $this->get_page_for_posts_id() ) ] : '';
+			$post_id       = $this->get_page_for_posts_id();
+
+			if ( Sitemap::is_object_indexable( $post_id ) ) {
+				$links[] = $this->get_single_post_row_data( get_post( $post_id ) );
+			}
 		}
 
 		if ( ! $needs_archive ) {
@@ -474,8 +478,6 @@ class Post_Type implements Provider {
 	 * @return array|boolean
 	 */
 	protected function get_url( $post ) {
-		$url = [];
-
 		/**
 		 * Filter the post object before it gets added to the sitemap.
 		 * This allows you to add custom properties to the post object, or replace it entirely.
@@ -488,6 +490,17 @@ class Post_Type implements Provider {
 			return false;
 		}
 
+		return $this->get_single_post_row_data( $post );
+	}
+
+	/**
+	 * Get the url parts for a single post.
+	 *
+	 * @param object $post Post object.
+	 *
+	 * @return array|false
+	 */
+	private function get_single_post_row_data( $post ) {
 		/**
 		 * Filter the URL Rank Math SEO uses in the XML sitemap.
 		 *
@@ -496,7 +509,7 @@ class Post_Type implements Provider {
 		 * @param string $url  URL to use in the XML sitemap
 		 * @param object $post Post object for the URL.
 		 */
-		$url['loc'] = $this->do_filter( 'sitemap/xml_post_url', get_permalink( $post ), $post );
+		$url = [ 'loc' => $this->do_filter( 'sitemap/xml_post_url', get_permalink( $post ), $post ) ];
 
 		/**
 		 * Do not include external URLs.
@@ -506,13 +519,8 @@ class Post_Type implements Provider {
 		if ( 'external' === $this->get_classifier()->classify( $url['loc'] ) ) {
 			return false;
 		}
-
-		$modified = max( $post->post_modified_gmt, $post->post_date_gmt );
-		if ( '0000-00-00 00:00:00' !== $modified ) {
-			$url['mod'] = $modified;
-		}
-
 		$canonical = Helper::get_post_meta( 'canonical_url', $post->ID );
+
 		if ( '' !== $canonical && $canonical !== $url['loc'] ) {
 			/*
 			 * Let's assume that if a canonical is set for this page and it's different from
@@ -520,6 +528,11 @@ class Post_Type implements Provider {
 			 * an external site, either way, we shouldn't include it here.
 			 */
 			return false;
+		}
+
+		$modified = max( $post->post_modified_gmt, $post->post_date_gmt );
+		if ( '0000-00-00 00:00:00' !== $modified ) {
+			$url['mod'] = $modified;
 		}
 
 		$url['images'] = ! is_null( $this->get_image_parser() ) ? $this->get_image_parser()->get_images( $post ) : [];

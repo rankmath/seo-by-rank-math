@@ -371,7 +371,7 @@ class Metabox implements Runner {
 		// Add metabox for taxonomies.
 		foreach ( $taxonomies as $taxonomy ) {
 			// For editing existing terms - renders after the table.
-			add_action( "{$taxonomy}_edit_form", [ $this, 'render_taxonomy_metabox' ], 10, 2 );
+			add_action( "{$taxonomy}_edit_form", [ $this, 'render_taxonomy_metabox' ], 11, 2 );
 		}
 	}
 

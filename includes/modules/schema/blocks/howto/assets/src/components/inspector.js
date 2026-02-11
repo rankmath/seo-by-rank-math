@@ -55,6 +55,8 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 					onChange={ ( listStyle ) => {
 						setAttributes( { listStyle } )
 					} }
+					__next40pxDefaultSize={ true }
+					__nextHasNoMarginBottom={ true }
 				/>
 
 				<SelectControl
@@ -72,6 +74,8 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 					onChange={ ( titleWrapper ) => {
 						setAttributes( { titleWrapper } )
 					} }
+					__next40pxDefaultSize={ true }
+					__nextHasNoMarginBottom={ true }
 				/>
 
 				<SelectControl
@@ -81,6 +85,8 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 					onChange={ ( mainSizeSlug ) => {
 						setAttributes( { mainSizeSlug } )
 					} }
+					__next40pxDefaultSize={ true }
+					__nextHasNoMarginBottom={ true }
 				/>
 
 				<SelectControl
@@ -90,6 +96,8 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 					onChange={ ( sizeSlug ) => {
 						setAttributes( { sizeSlug } )
 					} }
+					__next40pxDefaultSize={ true }
+					__nextHasNoMarginBottom={ true }
 				/>
 			</PanelBody>
 
@@ -103,6 +111,8 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 					onChange={ ( titleCssClasses ) => {
 						setAttributes( { titleCssClasses } )
 					} }
+					__next40pxDefaultSize={ true }
+					__nextHasNoMarginBottom={ true }
 				/>
 
 				<TextControl
@@ -114,6 +124,8 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 					onChange={ ( contentCssClasses ) => {
 						setAttributes( { contentCssClasses } )
 					} }
+					__next40pxDefaultSize={ true }
+					__nextHasNoMarginBottom={ true }
 				/>
 
 				<TextControl
@@ -122,6 +134,8 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 					onChange={ ( listCssClasses ) => {
 						setAttributes( { listCssClasses } )
 					} }
+					__next40pxDefaultSize={ true }
+					__nextHasNoMarginBottom={ true }
 				/>
 			</PanelBody>
 		</InspectorControls>

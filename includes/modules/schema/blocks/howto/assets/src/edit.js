@@ -204,6 +204,7 @@ export default ( props ) => {
 							onChange={ () => {
 								toggleDuration( props )
 							} }
+							__nextHasNoMarginBottom={ true }
 						/>
 					</div>
 
@@ -219,6 +220,8 @@ export default ( props ) => {
 							onChange={ ( timeLabel ) => {
 								setAttributes( { timeLabel } )
 							} }
+							__next40pxDefaultSize={ true }
+							__nextHasNoMarginBottom={ true }
 						/>
 
 						<TextControl
@@ -228,6 +231,8 @@ export default ( props ) => {
 							onChange={ ( days ) => {
 								setAttributes( { days } )
 							} }
+							__next40pxDefaultSize={ true }
+							__nextHasNoMarginBottom={ true }
 						/>
 
 						<TextControl
@@ -237,6 +242,8 @@ export default ( props ) => {
 							onChange={ ( hours ) => {
 								setAttributes( { hours } )
 							} }
+							__next40pxDefaultSize={ true }
+							__nextHasNoMarginBottom={ true }
 						/>
 
 						<TextControl
@@ -246,6 +253,8 @@ export default ( props ) => {
 							onChange={ ( minutes ) => {
 								setAttributes( { minutes } )
 							} }
+							__next40pxDefaultSize={ true }
+							__nextHasNoMarginBottom={ true }
 						/>
 					</div>
 
