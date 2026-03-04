@@ -37,7 +37,7 @@ class Assets {
 	public function __construct( $content_ai ) {
 		$this->content_ai = $content_ai;
 		$this->action( 'rank_math/admin/editor_scripts', 'editor_scripts', 20 );
-		$this->action( 'enqueue_block_assets', 'enqueue_block_assets', 20 );
+		$this->action( 'rank_math/admin/editor_scripts', 'enqueue_block_assets', 20 );
 		$this->filter( 'rank_math/elementor/dark_styles', 'add_dark_style' );
 		$this->action( 'admin_enqueue_scripts', 'media_scripts', 20 );
 	}

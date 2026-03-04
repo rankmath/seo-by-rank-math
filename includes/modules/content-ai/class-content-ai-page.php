@@ -66,8 +66,6 @@ class Content_AI_Page {
 	public function register_admin_page() {
 		$uri = untrailingslashit( plugin_dir_url( __FILE__ ) );
 
-		$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . esc_html__( 'New!', 'rank-math' ) . '</span>';
-
 		if ( 'rank-math-content-ai-page' === Param::get( 'page' ) ) {
 			$this->content_ai->localized_data( [ 'isContentAIPage' => true ] );
 		}
@@ -78,8 +76,7 @@ class Content_AI_Page {
 			[
 				'position'   => 4,
 				'parent'     => 'rank-math',
-				// Translators: placeholder is the new label.
-				'menu_title' => sprintf( esc_html__( 'Content AI %s', 'rank-math' ), $new_label ),
+				'menu_title' => esc_html__( 'Content AI', 'rank-math' ),
 				'capability' => 'rank_math_content_ai',
 				'render'     => __DIR__ . '/views/main.php',
 				'classes'    => [ 'rank-math-page' ],

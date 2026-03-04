@@ -407,6 +407,7 @@ class Tracking {
 			'rank-math-analytics'                => 'rank_math_analytics',
 			'rank-math-seo-analysis'             => 'rank_math_site_analysis',
 			'rank-math-content-ai-page'          => 'rank_math_content_ai',
+			'rank-math-links-page'               => 'rank_math_general',
 		];
 
 		return isset( $map[ $page ] ) ? $map[ $page ] : '';

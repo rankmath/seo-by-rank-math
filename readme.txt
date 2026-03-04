@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.9
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.264
+Stable tag: 1.0.265
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,11 +339,11 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.264 [Feb 11, 2026] =
-- Improved: Added an index to the `rank_math_redirections` `status` and `updated` columns to improve query execution performance
-- Fixed: Deleting a [Settings Backup](https://rankmath.com/kb/import-export-settings/#performing-and-restoring-backups) was breaking other backups created on the site
-- Fixed: Increased the Rank Math SEO metabox priority on taxonomy pages so it appears after custom fields
-- Fixed: Browser console warnings when the `SCRIPT_DEBUG` constant was set to `true`
-- Fixed: The `lastmod` value was missing in the [Sitemap](https://rankmath.com/kb/configure-sitemaps/) for the Posts Page selected in the Reading settings
+= 1.0.265 [Mar 04, 2026] =
+- Fixed: [Fix with AI tool](https://rankmath.com/kb/fix-seo-tests-with-content-ai/) breaks the Gallery block on certain setups
+- Fixed: Setup Wizard steps did not update immediately after selecting Easy or Advanced mode in the [Getting Started step](https://rankmath.com/kb/how-to-setup/#starting-the-setup-wizard)
+- Fixed: Rank Math Dashboard page shows a blank page on Network setup
+- Fixed: UI issues in the [Generate with AI modal](https://rankmath.com/kb/content-ai-seo-meta-tool/) in the Classic editor
+
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

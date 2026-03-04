@@ -160,7 +160,20 @@ class Assets implements Runner {
 			wp_enqueue_script( self::PREFIX . 'dashboard' );
 		}
 
-		if ( in_array( $screen->id, [ 'toplevel_page_rank-math', 'rank-math_page_rank-math-content-ai-page', 'rank-math_page_rank-math-analytics', 'rank-math_page_rank-math-role-manager', 'rank-math_page_rank-math-seo-analysis', 'rank-math_page_rank-math-status' ], true ) ||
+		$rank_math_pages = $this->do_filter(
+			'admin_pages',
+			[
+				'toplevel_page_rank-math',
+				'toplevel_page_rank-math-network',
+				'rank-math_page_rank-math-content-ai-page',
+				'rank-math_page_rank-math-analytics',
+				'rank-math_page_rank-math-role-manager',
+				'rank-math_page_rank-math-seo-analysis',
+				'rank-math_page_rank-math-status',
+			]
+		);
+		if (
+			in_array( $screen->id, $rank_math_pages, true ) ||
 			Str::starts_with( 'rank-math_page_rank-math-options-', $screen->id )
 		) {
 			Helper::add_json(

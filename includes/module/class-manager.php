@@ -154,6 +154,15 @@ class Manager {
 			'icon'  => 'link',
 		];
 
+		$modules['link-genius'] = [
+			'title'         => esc_html__( 'Link Genius', 'rank-math' ),
+			'desc'          => esc_html__( 'An advanced internal linking tool that analyzes your posts, tracks link data, highlights opportunities, and offers detailed report.', 'rank-math' ),
+			'icon'          => 'link',
+			'probadge'      => true,
+			'disabled'      => true,
+			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'rank-math' ),
+		];
+
 		$modules['image-seo'] = [
 			'title'       => esc_html__( 'Image SEO', 'rank-math' ),
 			'desc'        => esc_html__( 'Advanced Image SEO options to supercharge your website. Automate the task of adding the ALT and Title tags to your images on the fly.', 'rank-math' ),

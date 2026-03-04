@@ -56,6 +56,13 @@ class Links {
 			return;
 		}
 
+		// Skip processing during meta-box-loader requests to avoid duplicate processing.
+		// The actual save happens in the subsequent request.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['meta-box-loader'] ) ) {
+			return;
+		}
+
 		$this->process( $post_id, $post->post_content );
 	}
 
@@ -69,7 +76,7 @@ class Links {
 			return;
 		}
 
-		$processor = new ContentProcessor();
+		$processor = ContentProcessor::get();
 
 		// Get links to update linked objects.
 		$links = $processor->get_stored_internal_links( $post_id );
@@ -102,25 +109,119 @@ class Links {
 			'external_link_count' => 0,
 			'incoming_link_count' => 0,
 		];
+
+		/**
+		 * Filter to customize link count display in post list.
+		 *
+		 * Allows other plugins (like Rank Math PRO) to make link counts clickable.
+		 *
+		 * @param string $html    The HTML output for link counts.
+		 * @param int    $post_id Post ID.
+		 * @param object $counts  Link counts object with internal_link_count, external_link_count, incoming_link_count.
+		 */
+		$output = $this->do_filter(
+			'links/post_column_display',
+			$this->get_default_link_count_html( $post_id, $counts ),
+			$post_id,
+			$counts
+		);
+
+		echo wp_kses_post( $output );
+	}
+
+	/**
+	 * Get default HTML for link counts display.
+	 *
+	 * @param int    $post_id Post ID.
+	 * @param object $counts  Link counts object.
+	 *
+	 * @return string HTML output.
+	 */
+	private function get_default_link_count_html( $post_id, $counts ) {
+		ob_start();
 		?>
 		<span class="rank-math-column-display rank-math-link-count">
 			<strong><?php esc_html_e( 'Links: ', 'rank-math' ); ?></strong>
-			<span title="<?php esc_attr_e( 'Internal Links', 'rank-math' ); ?>">
-				<span class="dashicons dashicons-admin-links"></span>
-				<span><?php echo isset( $counts->internal_link_count ) ? esc_html( $counts->internal_link_count ) : ''; ?></span>
-			</span>
+			<?php
+			/**
+			 * Filter to customize individual link count item display.
+			 *
+			 * @param string $html      The HTML for this count item.
+			 * @param string $type      Link type: 'internal', 'external', or 'incoming'.
+			 * @param int    $count     The count value.
+			 * @param int    $post_id   Post ID.
+			 * @param object $counts    All link counts object.
+			 */
+			echo wp_kses_post(
+				$this->do_filter(
+					'links/post_column_count_item',
+					$this->get_link_count_item_html( 'internal', $counts->internal_link_count ),
+					'internal',
+					$counts->internal_link_count,
+					$post_id,
+					$counts
+				)
+			);
+			?>
 			<span class="divider"></span>
-			<span title="<?php esc_attr_e( 'External Links', 'rank-math' ); ?>">
-				<span class="dashicons dashicons-external"></span>
-				<span><?php echo isset( $counts->external_link_count ) ? esc_html( $counts->external_link_count ) : ''; ?></span>
-			</span>
+			<?php
+			echo wp_kses_post(
+				$this->do_filter(
+					'links/post_column_count_item',
+					$this->get_link_count_item_html( 'external', $counts->external_link_count ),
+					'external',
+					$counts->external_link_count,
+					$post_id,
+					$counts
+				)
+			);
+			?>
 			<span class="divider"></span>
-			<span title="<?php esc_attr_e( 'Incoming Links', 'rank-math' ); ?>">
-				<span class="dashicons dashicons-external internal"></span>
-				<span><?php echo isset( $counts->incoming_link_count ) ? esc_html( $counts->incoming_link_count ) : ''; ?></span>
-			</span>
+			<?php
+			echo wp_kses_post(
+				$this->do_filter(
+					'links/post_column_count_item',
+					$this->get_link_count_item_html( 'incoming', $counts->incoming_link_count ),
+					'incoming',
+					$counts->incoming_link_count,
+					$post_id,
+					$counts
+				)
+			);
+			?>
 		</span>
 		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Get HTML for a single link count item.
+	 *
+	 * @param string $type  Link type: 'internal', 'external', or 'incoming'.
+	 * @param int    $count The count value.
+	 *
+	 * @return string HTML output.
+	 */
+	private function get_link_count_item_html( $type, $count ) {
+		$icons = [
+			'internal' => 'dashicons-admin-links',
+			'external' => 'dashicons-external',
+			'incoming' => 'dashicons-external internal',
+		];
+
+		$titles = [
+			'internal' => __( 'Internal Links', 'rank-math' ),
+			'external' => __( 'External Links', 'rank-math' ),
+			'incoming' => __( 'Incoming Links', 'rank-math' ),
+		];
+
+		return sprintf(
+			'<span class="rank-math-link-count-item" data-link-type="%1$s" title="%2$s"><span class="dashicons %3$s"></span><span>%4$s</span></span>',
+			esc_attr( $type ),
+			esc_attr( $titles[ $type ] ),
+			esc_attr( $icons[ $type ] ),
+			esc_html( $count )
+		);
 	}
 
 	/**
@@ -156,24 +257,63 @@ class Links {
 	}
 
 	/**
+	 * Process a post (static method for use by PRO plugin).
+	 *
+	 * @param int     $post_id The post ID.
+	 * @param WP_Post $post    The post object.
+	 */
+	public static function process_post_links( $post_id, $post ) {
+		if ( ! $post instanceof \WP_Post || ! self::is_post_processable( $post ) ) {
+			return;
+		}
+
+		self::process( $post_id, $post->post_content );
+	}
+
+	/**
+	 * Check if the post is processable (static method for use by PRO plugin).
+	 *
+	 * @param WP_Post $post The post object.
+	 * @return bool True if processable.
+	 */
+	public static function is_post_processable( $post ) {
+		/**
+		 * Filter to prevent processing the post.
+		 *
+		 * @param boolean $value Whether to process the post.
+		 * @param WP_POST $post  The Post object.
+		 */
+		if ( wp_is_post_revision( $post->ID ) || ! apply_filters( 'rank_math/links/process_post', true, $post ) ) {
+			return false;
+		}
+
+		if ( in_array( $post->post_status, [ 'auto-draft', 'trash' ], true ) ) {
+			return false;
+		}
+
+		$post_types = Helper::get_accessible_post_types();
+		unset( $post_types['attachment'] );
+
+		return isset( $post_types[ $post->post_type ] );
+	}
+
+	/**
 	 * Process the content for a given post.
 	 *
 	 * @param int    $post_id The post ID.
 	 * @param string $content The content.
 	 */
-	private function process( $post_id, $content ) {
-		$content = apply_filters( 'the_content', $content );
-
+	private static function process( $post_id, $content ) {
 		/**
 		 * Filter to change the content passed to the Link processor.
 		 *
 		 * @param string $content Post content.
 		 * @param int    $post_id Post ID.
 		 */
-		$content = $this->do_filter( 'links/content', $content, $post_id );
+		$content = apply_filters( 'rank_math/links/content', $content, $post_id );
 		$content = str_replace( ']]>', ']]&gt;', $content );
 
-		$processor = new ContentProcessor();
+		$processor = ContentProcessor::get();
 		$processor->process( $post_id, $content );
 		update_post_meta( $post_id, 'rank_math_internal_links_processed', true );
 	}

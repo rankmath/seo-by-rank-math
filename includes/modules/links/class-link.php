@@ -42,6 +42,13 @@ class Link {
 	protected $type;
 
 	/**
+	 * Extra properties for PRO features.
+	 *
+	 * @var array
+	 */
+	private $extra_properties = [];
+
+	/**
 	 * Sets the properties for the object.
 	 *
 	 * @param string $url            The URL.
@@ -52,6 +59,36 @@ class Link {
 		$this->url            = $url;
 		$this->target_post_id = $target_post_id;
 		$this->type           = $type;
+	}
+
+	/**
+	 * Magic setter for dynamic properties (PRO features).
+	 *
+	 * @param string $name  Property name.
+	 * @param mixed  $value Property value.
+	 */
+	public function __set( $name, $value ) {
+		$this->extra_properties[ $name ] = $value;
+	}
+
+	/**
+	 * Magic getter for dynamic properties (PRO features).
+	 *
+	 * @param string $name Property name.
+	 * @return mixed Property value or null.
+	 */
+	public function __get( $name ) {
+		return isset( $this->extra_properties[ $name ] ) ? $this->extra_properties[ $name ] : null;
+	}
+
+	/**
+	 * Magic isset for dynamic properties (PRO features).
+	 *
+	 * @param string $name Property name.
+	 * @return bool True if property exists.
+	 */
+	public function __isset( $name ) {
+		return isset( $this->extra_properties[ $name ] );
 	}
 
 	/**

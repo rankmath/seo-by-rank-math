@@ -271,6 +271,16 @@ class Installer {
 				DB_Helper::create_table( $table_name, $schema );
 			}
 		}
+
+		/**
+		 * Fires after database tables have been created.
+		 *
+		 * Allows extensions to modify or extend the created tables.
+		 *
+		 * @param array $tables  The tables that were created.
+		 * @param array $modules The modules for which tables were created.
+		 */
+		do_action( 'rank_math/admin/after_create_tables', $tables, $modules );
 	}
 
 	/**
