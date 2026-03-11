@@ -44,6 +44,7 @@ class Admin implements Runner {
 		$this->filter( 'action_scheduler_pastdue_actions_check_pre', 'as_exclude_pastdue_actions' );
 		$this->filter( 'rank_math/pro_badge', 'offer_icon' );
 		$this->filter( 'load_script_translation_file', 'load_script_translation_file', 10, 3 );
+		$this->filter( 'cmb2_localized_data', 'remap_cmb2_localized_data' );
 
 		// Use woocommerce textdomain for the Actiion scheduler strings.
 		$this->filter( 'gettext', 'remap_action_scheduler_translation', 10, 3 );
@@ -352,6 +353,28 @@ class Admin implements Runner {
 	public function remap_action_scheduler_translation_with_context( $translated, $text, $context, $domain ) {
 		// phpcs:ignore -- Use WooCommerce text domain for Action Scheduler strings.
 		return $domain === 'action-scheduler' && Helper::is_woocommerce_active() ? _x( $text, $context, 'woocommerce' ) : $translated;
+	}
+
+	/**
+	 * Remap CMB2 localized string text domain to Rank Math.
+	 *
+	 * @param array $localized_data Localized CMB2 data.
+	 * @return array
+	 */
+	public function remap_cmb2_localized_data( $localized_data ) {
+		if ( empty( $localized_data['strings'] ) || ! is_array( $localized_data['strings'] ) ) {
+			return $localized_data;
+		}
+
+		$localized_data['strings']['upload_file']  = esc_html__( 'Use this file', 'rank-math' );
+		$localized_data['strings']['upload_files'] = esc_html__( 'Use these files', 'rank-math' );
+		$localized_data['strings']['remove_image'] = esc_html__( 'Remove Image', 'rank-math' );
+		$localized_data['strings']['remove_file']  = esc_html__( 'Remove', 'rank-math' );
+		$localized_data['strings']['file']         = esc_html__( 'File:', 'rank-math' );
+		$localized_data['strings']['download']     = esc_html__( 'Download', 'rank-math' );
+		$localized_data['strings']['check_toggle'] = esc_html__( 'Select / Deselect All', 'rank-math' );
+
+		return $localized_data;
 	}
 
 	/**
