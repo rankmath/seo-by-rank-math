@@ -116,7 +116,7 @@ class Post_Variables extends Advanced_Variables {
 				'name'        => esc_html__( 'Post Thumbnail', 'rank-math' ),
 				'description' => esc_html__( 'Current Post Thumbnail', 'rank-math' ),
 				'variable'    => 'post_thumbnail',
-				'example'     => $this->get_post_thumbnail(),
+				'example'     => $this->is_post_edit ? $this->get_post_thumbnail() : '',
 				'nocache'     => true,
 			],
 			[ $this, 'get_post_thumbnail' ]
