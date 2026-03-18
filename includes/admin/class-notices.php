@@ -41,7 +41,10 @@ class Notices implements Runner {
 	public function notices() {
 		$this->is_plugin_configured();
 		$this->new_post_type();
-		$this->convert_wpml_settings();
+		if ( Sitepress::get()->is_active() ) {
+			$this->convert_wpml_settings();
+			$this->display_wpml_notice();
+		}
 		$this->permalink_changes_warning();
 		$this->react_settings_ui_notice();
 	}
@@ -102,7 +105,7 @@ class Notices implements Runner {
 			return;
 		}
 
-		if ( 'convert_wpml_settings' === $notification_id ) {
+		if ( 'display_wpml_notice' === $notification_id ) {
 			update_option( 'rank_math_wpml_notice_dismissed', true );
 		}
 
@@ -170,20 +173,7 @@ class Notices implements Runner {
 	 * Function to show Show String Translation plugin notice and convert the settings.
 	 */
 	private function convert_wpml_settings() {
-		if ( ! Sitepress::get()->is_active() || get_option( 'rank_math_wpml_data_converted' ) ) {
-			return;
-		}
-
-		if ( ! function_exists( 'icl_add_string_translation' ) ) {
-			if ( ! get_option( 'rank_math_wpml_notice_dismissed' ) ) {
-				Helper::add_notification(
-					__( 'Please activate the WPML String Translation plugin to convert Rank Math Setting values in different languages.', 'rank-math' ),
-					[
-						'type' => 'error',
-						'id'   => 'convert_wpml_settings',
-					]
-				);
-			}
+		if ( ! function_exists( 'icl_get_languages' ) || get_option( 'rank_math_wpml_data_converted' ) ) {
 			return;
 		}
 
@@ -209,6 +199,32 @@ class Notices implements Runner {
 		}
 
 		update_option( 'rank_math_wpml_data_converted', true );
+	}
+
+	/**
+	 * Display WPML notice.
+	 *
+	 * @return void
+	 */
+	private function display_wpml_notice() {
+		if ( ! function_exists( 'icl_add_string_translation' ) || get_option( 'rank_math_wpml_notice_dismissed' ) ) {
+			return;
+		}
+
+		$sitepress      = Sitepress::get()->get_var();
+		$setup_complete = $sitepress->get_setting( 'setup_complete', false );
+
+		if ( ! $setup_complete ) {
+			return;
+		}
+
+		Helper::add_notification(
+			__( 'Please activate the WPML String Translation plugin to convert Rank Math Setting values in different languages.', 'rank-math' ),
+			[
+				'type' => 'error',
+				'id'   => 'display_wpml_notice',
+			]
+		);
 	}
 
 	/**

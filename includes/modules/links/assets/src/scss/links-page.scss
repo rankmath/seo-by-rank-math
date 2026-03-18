@@ -1,0 +1,269 @@
+/**
+ * Links Page Styles (Free)
+ *
+ * Matches the PRO Link Genius UI design system.
+ */
+
+@import 'variables';
+
+// ============================================
+// PRO CTA variables & imports (required by _pro-cta.scss)
+// ============================================
+$namespace:  'rank-math';
+$rm_brand:   #6666c3;
+$primary:    #069de3;
+$text:       #242628;
+$dark_gray:  #7f868d;
+$dark-gray:  #7f868d;
+$color-1:    #10AC84;
+$color-3:    #ed5e5e;
+$light_gray: #dadfe4;
+
+@import '../../../../../../assets/admin/scss/_mixins';
+@import '../../../../../../assets/admin/scss/partials/common/_pro-cta';
+@import '../../../../../../assets/admin/scss/sidebar/_modal';
+
+// ============================================
+// TabPanel wrapper reset
+// ============================================
+#rank-math-links-page-container {
+	.rank-math-links-page.rank-math-wrap {
+		margin-right: 0;
+	}
+
+	.rank-math-tab-panel {
+		width: 100%;
+
+		.components-tab-panel__tab-content {
+			padding: 0;
+			background: transparent;
+			border-bottom: none;
+		}
+	}
+}
+
+// ============================================
+// Tab content wrapper
+// ============================================
+.rank-math-tab-content {
+	position: relative;
+	margin-top: 16px;
+	margin-left: 20px;
+	margin-right: 40px;
+}
+
+// ============================================
+// Section card
+// ============================================
+.rank-math-section-card {
+	position: relative;
+	background: $color-bg-white;
+	border: 1px solid $color-border;
+	border-radius: $radius-md;
+	margin-bottom: 16px;
+	overflow: hidden;
+}
+
+// ============================================
+// PRO column blurring (Links tab)
+// ============================================
+.rank-math-pro-col-header {
+	position: relative;
+
+	.rank-math-pro-badge {
+		display: inline-block;
+		margin-left: $spacing-xs;
+		padding: 1px 5px;
+		border-radius: $radius-sm;
+		background: $color-warning-bg;
+		color: $color-warning-text;
+		font-size: $font-size-xs;
+		font-weight: $font-weight-semibold;
+		vertical-align: middle;
+		line-height: 1.4;
+		letter-spacing: 0.3px;
+	}
+}
+
+.rank-math-pro-cell {
+	position: relative;
+	overflow: hidden;
+
+	.rank-math-pro-blur-text {
+		filter: blur(4px);
+		user-select: none;
+		color: $color-text-secondary;
+		pointer-events: none;
+	}
+
+	.rank-math-pro-upgrade-overlay {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		a {
+			font-size: $font-size-xs;
+			color: $color-primary;
+			font-weight: $font-weight-medium;
+			white-space: nowrap;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+// ============================================
+// Upgrade PRO Modal
+// ============================================
+.rank-math-upgrade-pro-modal {
+	.rank-math-upgrade-pro-modal-body {
+		text-align: center;
+		padding: $spacing-lg 0;
+
+		.rank-math-upgrade-pro-icon {
+			display: block;
+			font-size: 36px;
+			color: $color-warning;
+			margin-bottom: $spacing-md;
+		}
+
+		p {
+			font-size: $font-size-md;
+			color: $color-text-secondary;
+			margin: 0 0 $spacing-lg;
+			line-height: $line-height-relaxed;
+		}
+
+		.rank-math-upgrade-pro-features {
+			list-style: none;
+			margin: 0 0 $spacing-xl;
+			padding: 0;
+			text-align: left;
+
+			li {
+				display: flex;
+				align-items: center;
+				gap: $spacing-sm;
+				padding: $spacing-xs 0;
+				font-size: $font-size-base;
+				color: $color-text-secondary;
+
+				&::before {
+					content: '✓';
+					color: $color-success;
+					font-weight: $font-weight-bold;
+					flex-shrink: 0;
+				}
+			}
+		}
+
+		.rank-math-upgrade-pro-actions {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: $spacing-md;
+			flex-wrap: wrap;
+
+			.rank-math-upgrade-pro-btn {
+				min-width: 160px;
+			}
+		}
+	}
+}
+
+// ============================================
+// PRO tab preview (image + CTA overlay)
+// ============================================
+.rank-math-pro-tab-preview {
+	position: relative;
+
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	#rank-math-pro-cta {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+// ============================================
+// Toggle filters layout (Links / Posts tabs)
+// ============================================
+.rank-math-table-header.has-toggle-filters {
+	flex-direction: column;
+	align-items: stretch;
+	gap: 0;
+	padding: 0;
+}
+
+.rank-math-table-toggle-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+	padding: 0 $spacing-2xl 0 0;
+	gap: $spacing-lg;
+	flex-wrap: wrap;
+	border-bottom: 1px solid $color-border;
+	min-height: 52px;
+}
+
+.rank-math-table-toggle-left {
+	display: flex;
+	align-items: stretch;
+	gap: 0;
+
+	.rank-math-toggle-button-group.is-tab-style {
+		align-items: stretch;
+
+		.rank-math-toggle-button {
+			display: flex;
+			align-items: center;
+			padding-bottom: 0;
+			border-bottom-width: 2px;
+			margin-bottom: -1px;
+			outline: none;
+		}
+	}
+}
+
+.rank-math-table-toggle-right {
+	display: flex;
+	align-items: center;
+	gap: $spacing-md;
+}
+
+// ============================================
+// Link type badge (Internal / External)
+// ============================================
+.rank-math-link-type-badge {
+	display: inline-block;
+	padding: 3px 10px;
+	border-radius: 4px;
+	font-size: 12px;
+	font-weight: 500;
+
+	&.internal {
+		background-color: #d4edda;
+		color: #155724;
+	}
+
+	&.external {
+		background-color: #d1ecf1;
+		color: #0c5460;
+	}
+}

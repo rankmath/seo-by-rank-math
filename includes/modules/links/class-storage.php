@@ -202,8 +202,12 @@ class Storage {
 		$table = $wpdb->prefix . 'rank_math_internal_meta';
 
 		// Build field assignments for ON DUPLICATE KEY UPDATE.
+		$allowed_keys = [ 'incoming_link_count', 'internal_link_count', 'external_link_count' ];
 		$update_parts = [];
 		foreach ( $meta_data as $key => $value ) {
+			if ( ! in_array( $key, $allowed_keys, true ) ) {
+				continue;
+			}
 			$update_parts[] = $wpdb->prepare( "{$key} = %d", $value );
 		}
 

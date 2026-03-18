@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.265\n"
+"Project-Id-Version: Rank Math SEO 1.0.266\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-04T05:00:15+00:00\n"
+"POT-Creation-Date: 2026-03-18T06:19:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rank-math\n"
@@ -3324,6 +3324,49 @@ msgstr ""
 
 #. Translators: %s is the words "Check Key".
 msgid "Use the %1$s button to verify that the key is accessible for search engines. Clicking on it should open the key file in your browser and show the API key."
+msgstr ""
+
+msgid "New!"
+msgstr ""
+
+#. Translators: placeholder is the new label.
+msgid "Links %s"
+msgstr ""
+
+msgid "You do not have permission to access this resource."
+msgstr ""
+
+msgid "Items per page."
+msgstr ""
+
+msgid "Search in post title."
+msgstr ""
+
+msgid "Filter by post type. Supports multiple values."
+msgstr ""
+
+msgid "Filter by orphan status (orphan, linked)."
+msgstr ""
+
+msgid "Filter by SEO score range (great, good, bad, no-score)."
+msgstr ""
+
+msgid "Order by field."
+msgstr ""
+
+msgid "Order direction (ASC, DESC)."
+msgstr ""
+
+msgid "Search in URL."
+msgstr ""
+
+msgid "Filter by source post ID."
+msgstr ""
+
+msgid "Filter by target post ID."
+msgstr ""
+
+msgid "Filter by link type (1 = internal, 0 = external)."
 msgstr ""
 
 msgid "Links: "
@@ -6741,6 +6784,228 @@ msgstr ""
 msgid "Nothing found."
 msgstr ""
 
+msgid "Select options"
+msgstr ""
+
+msgid "other"
+msgstr ""
+
+msgid "others"
+msgstr ""
+
+msgid "Table filters"
+msgstr ""
+
+msgid "Apply selected filters"
+msgstr ""
+
+msgid "Apply Filters"
+msgstr ""
+
+msgid "Clear all filters"
+msgstr ""
+
+msgid "Clear All"
+msgstr ""
+
+msgid "Select row"
+msgstr ""
+
+msgid "Hide row details"
+msgstr ""
+
+msgid "View row details"
+msgstr ""
+
+msgid "Hide Details"
+msgstr ""
+
+msgid "View Details"
+msgstr ""
+
+msgid "for row"
+msgstr ""
+
+msgid "Processing…"
+msgstr ""
+
+msgid "Previous page"
+msgstr ""
+
+msgid "Next page"
+msgstr ""
+
+msgid "of"
+msgstr ""
+
+msgid "Go to Page"
+msgstr ""
+
+msgid "Page number"
+msgstr ""
+
+msgid "🔒 This is a PRO-Only Feature"
+msgstr ""
+
+msgid "We are sorry, but this feature is only available to Rank Math PRO/Business/Agency users. Upgrade to a Rank Math plan to unlock this feature and many more powerful SEO tools, including:"
+msgstr ""
+
+msgid "Automatic Link Audit to Identify SEO Issues"
+msgstr ""
+
+msgid "AI-Powered Keyword Mapping"
+msgstr ""
+
+msgid "Free Content AI Trial"
+msgstr ""
+
+msgid "Built-in Keyword Rank Tracker"
+msgstr ""
+
+msgid "SEO Performance Email Reports"
+msgstr ""
+
+msgid "Get PRO Now →"
+msgstr ""
+
+msgid "⛔️ Update Required"
+msgstr ""
+
+msgid "Update Now"
+msgstr ""
+
+msgid "🚀 Supercharge Your Content With AI"
+msgstr ""
+
+msgid "Start using Content AI by connecting your RankMath.com Account"
+msgstr ""
+
+msgid "To access this Content AI feature, you need to have an active subscription plan."
+msgstr ""
+
+msgid "To access this Content AI feature, you have to purchase a Content AI Subscription."
+msgstr ""
+
+msgid "You are one step away from unlocking this premium feature along with many more."
+msgstr ""
+
+msgid "1-Click Article Generation"
+msgstr ""
+
+msgid "Bulk Update Your SEO Meta using AI"
+msgstr ""
+
+msgid "Get Access to 40+ AI SEO Tools"
+msgstr ""
+
+msgid "125+ Expert-Written Prompts"
+msgstr ""
+
+msgid "1-Click Competitor Content Research"
+msgstr ""
+
+msgid "1-Click WooCommerce Product Descriptions"
+msgstr ""
+
+msgid "1-Click Competitor Research"
+msgstr ""
+
+msgid "On-Page SEO Suggestions"
+msgstr ""
+
+msgid "1-Click Bulk SEO Meta"
+msgstr ""
+
+msgid "125+ Pre-Built Prompts"
+msgstr ""
+
+msgid "Multiple RankBot Sessions"
+msgstr ""
+
+msgid "1-Click SEO Content"
+msgstr ""
+
+msgid "1-Click SEO Meta"
+msgstr ""
+
+msgid "40+ Specialized AI Tools"
+msgstr ""
+
+msgid "Gain access to 40+ advanced AI tools, empowering your content strategy."
+msgstr ""
+
+msgid "Experience the revolutionary AI-powered Content Editor for unparalleled efficiency."
+msgstr ""
+
+msgid "Engage with RankBot, your personal AI Chat Assistant, for real-time assistance."
+msgstr ""
+
+msgid "Connect Now"
+msgstr ""
+
+msgid "Server Maintenance Underway"
+msgstr ""
+
+msgid "We are working on improving your Content AI experience. Please wait for 5 minutes and then refresh to start using the optimized Content AI. If you see this for more than 5 minutes, please "
+msgstr ""
+
+msgid "reach out to the support team."
+msgstr ""
+
+msgid " We are sorry for the inconvenience."
+msgstr ""
+
+msgid "⛔️ Content AI Credit Alert!"
+msgstr ""
+
+msgid "Your monthly Content AI credits have been fully utilized. You can wait till %s for your credits to refresh or upgrade to continue enjoying seamless content creation"
+msgstr ""
+
+msgid "Your monthly Content AI credits have been fully utilized. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and access more credits."
+msgstr ""
+
+msgid "Missing Credits?"
+msgstr ""
+
+msgid "Export table data"
+msgstr ""
+
+msgid "item"
+msgstr ""
+
+msgid "items"
+msgstr ""
+
+msgid "selected"
+msgstr ""
+
+msgid "Recheck"
+msgstr ""
+
+msgid "Mark as Not Broken"
+msgstr ""
+
+msgid "Bulk actions"
+msgstr ""
+
+msgid "Select all %d matching items"
+msgstr ""
+
+msgid "Select all"
+msgstr ""
+
+msgid "matching items"
+msgstr ""
+
+msgid "Select bulk action"
+msgstr ""
+
+msgid "Select all on page"
+msgstr ""
+
+msgid "No data available"
+msgstr ""
+
 msgid "Select / Deselect All"
 msgstr ""
 
@@ -6981,9 +7246,6 @@ msgstr ""
 msgid "your email account."
 msgstr ""
 
-msgid "Connect Now"
-msgstr ""
-
 msgid "You have successfully activated Rank Math. If you find the plugin useful, "
 msgstr ""
 
@@ -7062,9 +7324,6 @@ msgstr ""
 msgid "Latest Stable Version"
 msgstr ""
 
-msgid "Update Now"
-msgstr ""
-
 msgid "This is the latest version of the plugin."
 msgstr ""
 
@@ -7081,117 +7340,6 @@ msgid "Reinstalling, please wait…"
 msgstr ""
 
 msgid "Are you sure? You want to reset settings."
-msgstr ""
-
-msgid "🔒 This is a PRO-Only Feature"
-msgstr ""
-
-msgid "We are sorry but this feature is only available to Rank Math PRO/Business/Agency Users. Unlock this feature and many more by getting a Rank Math plan."
-msgstr ""
-
-msgid "Bulk Edit SEO Tags"
-msgstr ""
-
-msgid "Advanced Google Analytics 4 Integration"
-msgstr ""
-
-msgid "Free Content AI Trial"
-msgstr ""
-
-msgid "SEO Performance Email Reports"
-msgstr ""
-
-msgid "⛔️ Update Required"
-msgstr ""
-
-msgid "🚀 Supercharge Your Content With AI"
-msgstr ""
-
-msgid "Start using Content AI by connecting your RankMath.com Account"
-msgstr ""
-
-msgid "To access this Content AI feature, you need to have an active subscription plan."
-msgstr ""
-
-msgid "To access this Content AI feature, you have to purchase a Content AI Subscription."
-msgstr ""
-
-msgid "You are one step away from unlocking this premium feature along with many more."
-msgstr ""
-
-msgid "1-Click Article Generation"
-msgstr ""
-
-msgid "Bulk Update Your SEO Meta using AI"
-msgstr ""
-
-msgid "Get Access to 40+ AI SEO Tools"
-msgstr ""
-
-msgid "125+ Expert-Written Prompts"
-msgstr ""
-
-msgid "1-Click Competitor Content Research"
-msgstr ""
-
-msgid "1-Click WooCommerce Product Descriptions"
-msgstr ""
-
-msgid "1-Click Competitor Research"
-msgstr ""
-
-msgid "On-Page SEO Suggestions"
-msgstr ""
-
-msgid "1-Click Bulk SEO Meta"
-msgstr ""
-
-msgid "125+ Pre-Built Prompts"
-msgstr ""
-
-msgid "Multiple RankBot Sessions"
-msgstr ""
-
-msgid "1-Click SEO Content"
-msgstr ""
-
-msgid "1-Click SEO Meta"
-msgstr ""
-
-msgid "40+ Specialized AI Tools"
-msgstr ""
-
-msgid "Gain access to 40+ advanced AI tools, empowering your content strategy."
-msgstr ""
-
-msgid "Experience the revolutionary AI-powered Content Editor for unparalleled efficiency."
-msgstr ""
-
-msgid "Engage with RankBot, your personal AI Chat Assistant, for real-time assistance."
-msgstr ""
-
-msgid "Server Maintenance Underway"
-msgstr ""
-
-msgid "We are working on improving your Content AI experience. Please wait for 5 minutes and then refresh to start using the optimized Content AI. If you see this for more than 5 minutes, please "
-msgstr ""
-
-msgid "reach out to the support team."
-msgstr ""
-
-msgid " We are sorry for the inconvenience."
-msgstr ""
-
-msgid "⛔️ Content AI Credit Alert!"
-msgstr ""
-
-msgid "Your monthly Content AI credits have been fully utilized. You can wait till %s for your credits to refresh or upgrade to continue enjoying seamless content creation"
-msgstr ""
-
-msgid "Your monthly Content AI credits have been fully utilized. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and access more credits."
-msgstr ""
-
-msgid "Missing Credits?"
 msgstr ""
 
 msgid "Bulk Edit This Field"
@@ -8193,9 +8341,6 @@ msgstr ""
 msgid "Keep an eye on losing keywords"
 msgstr ""
 
-msgid "Built-in Keyword Rank Tracker"
-msgstr ""
-
 msgid "All Keywords"
 msgstr ""
 
@@ -8904,6 +9049,15 @@ msgstr ""
 msgid "1 Word Output = 1 Credit"
 msgstr ""
 
+msgid "We are sorry but this feature is only available to Rank Math PRO/Business/Agency Users. Unlock this feature and many more by getting a Rank Math plan."
+msgstr ""
+
+msgid "Bulk Edit SEO Tags"
+msgstr ""
+
+msgid "Advanced Google Analytics 4 Integration"
+msgstr ""
+
 msgid "Required fields."
 msgstr ""
 
@@ -9144,9 +9298,6 @@ msgstr ""
 msgid "Click to copy keyword"
 msgstr ""
 
-msgid "No data available"
-msgstr ""
-
 msgid "Use Keyword in"
 msgstr ""
 
@@ -9214,9 +9365,6 @@ msgid "Cooking a Personalized SEO Plan"
 msgstr ""
 
 msgid "Final Touches to the SEO Recommendations"
-msgstr ""
-
-msgid "New!"
 msgstr ""
 
 msgid "Content AI Knowledge Base."
@@ -9325,6 +9473,90 @@ msgid "Choose your plan"
 msgstr ""
 
 msgid "Start using Content AI by connecting your RankMath account."
+msgstr ""
+
+msgid "View internal links from this post"
+msgstr ""
+
+msgid "View external links from this post"
+msgstr ""
+
+msgid "Orphan post — no incoming links"
+msgstr ""
+
+msgid "This post has no internal links. We recommend that you add links to this URL in other posts of your website."
+msgstr ""
+
+msgid "View incoming links to this post"
+msgstr ""
+
+msgid "All Posts"
+msgstr ""
+
+msgid "Orphan Posts"
+msgstr ""
+
+msgid "With Incoming Links"
+msgstr ""
+
+msgid "All Scores"
+msgstr ""
+
+msgid "Great"
+msgstr ""
+
+msgid "Bad"
+msgstr ""
+
+msgid "Post Type"
+msgstr ""
+
+msgid "All Types"
+msgstr ""
+
+msgid "Total Posts"
+msgstr ""
+
+msgid "Internal"
+msgstr ""
+
+msgid "External"
+msgstr ""
+
+msgid "Source Post"
+msgstr ""
+
+msgid "Destination"
+msgstr ""
+
+msgid "Link Type"
+msgstr ""
+
+msgid "Success"
+msgstr ""
+
+msgid "Broken"
+msgstr ""
+
+msgid "Redirects"
+msgstr ""
+
+msgid "Robots Blocked"
+msgstr ""
+
+msgid "Marked Safe"
+msgstr ""
+
+msgid "Unchecked"
+msgstr ""
+
+msgid "Total Links"
+msgstr ""
+
+msgid "Bulk Update"
+msgstr ""
+
+msgid "Keyword Maps"
 msgstr ""
 
 msgid "This field must not be empty."

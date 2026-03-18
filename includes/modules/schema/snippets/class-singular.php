@@ -43,7 +43,7 @@ class Singular implements Snippet {
 		 */
 		$pre = $this->do_filter( $hook, false, $jsonld->parts, $data );
 		if ( false !== $pre ) {
-			$data['richSnippet'] = $this->do_filter( $hook . '_entity', $pre );
+			$data['richSnippet'] = $this->do_filter( $hook . '_custom_entity', [] );
 			return $data;
 		}
 

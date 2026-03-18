@@ -18,6 +18,8 @@ use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Database\Database;
 use RankMath\Admin\Post_Columns;
+use RankMath\Links\Admin\Admin;
+use RankMath\Links\Api\Controller;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -43,6 +45,19 @@ class Links {
 		$this->action( 'delete_post', 'delete_post' );
 		$this->action( 'rank_math/post/column/seo_details', 'post_column_content', 11, 3 );
 		$this->action( 'rank_math/links/internal_links', 'cron_job' );
+		$this->action( 'rest_api_init', 'register_rest_routes' );
+
+		if ( is_admin() ) {
+			new Admin();
+		}
+	}
+
+	/**
+	 * Register REST API routes.
+	 */
+	public function register_rest_routes() {
+		$controller = new Controller();
+		$controller->register_routes();
 	}
 
 	/**
@@ -152,42 +167,15 @@ class Links {
 			 * @param int    $post_id   Post ID.
 			 * @param object $counts    All link counts object.
 			 */
-			echo wp_kses_post(
-				$this->do_filter(
-					'links/post_column_count_item',
-					$this->get_link_count_item_html( 'internal', $counts->internal_link_count ),
-					'internal',
-					$counts->internal_link_count,
-					$post_id,
-					$counts
-				)
-			);
+			echo wp_kses_post( $this->get_link_count_item_html( 'internal', $counts->internal_link_count, $post_id ) );
 			?>
 			<span class="divider"></span>
 			<?php
-			echo wp_kses_post(
-				$this->do_filter(
-					'links/post_column_count_item',
-					$this->get_link_count_item_html( 'external', $counts->external_link_count ),
-					'external',
-					$counts->external_link_count,
-					$post_id,
-					$counts
-				)
-			);
+			echo wp_kses_post( $this->get_link_count_item_html( 'external', $counts->external_link_count, $post_id ) );
 			?>
 			<span class="divider"></span>
 			<?php
-			echo wp_kses_post(
-				$this->do_filter(
-					'links/post_column_count_item',
-					$this->get_link_count_item_html( 'incoming', $counts->incoming_link_count ),
-					'incoming',
-					$counts->incoming_link_count,
-					$post_id,
-					$counts
-				)
-			);
+			echo wp_kses_post( $this->get_link_count_item_html( 'incoming', $counts->incoming_link_count, $post_id ) );
 			?>
 		</span>
 		<?php
@@ -197,12 +185,15 @@ class Links {
 	/**
 	 * Get HTML for a single link count item.
 	 *
-	 * @param string $type  Link type: 'internal', 'external', or 'incoming'.
-	 * @param int    $count The count value.
+	 * Renders as a clickable link when count > 0, plain span otherwise.
+	 *
+	 * @param string $type    Link type: 'internal', 'external', or 'incoming'.
+	 * @param int    $count   The count value.
+	 * @param int    $post_id Post ID (used to build the Links page URL).
 	 *
 	 * @return string HTML output.
 	 */
-	private function get_link_count_item_html( $type, $count ) {
+	private function get_link_count_item_html( $type, $count, $post_id ) {
 		$icons = [
 			'internal' => 'dashicons-admin-links',
 			'external' => 'dashicons-external',
@@ -215,12 +206,39 @@ class Links {
 			'incoming' => __( 'Incoming Links', 'rank-math' ),
 		];
 
-		return sprintf(
-			'<span class="rank-math-link-count-item" data-link-type="%1$s" title="%2$s"><span class="dashicons %3$s"></span><span>%4$s</span></span>',
-			esc_attr( $type ),
-			esc_attr( $titles[ $type ] ),
+		$inner = sprintf(
+			'<span class="dashicons %1$s"></span><span>%2$s</span>',
 			esc_attr( $icons[ $type ] ),
 			esc_html( $count )
+		);
+
+		if ( empty( $count ) ) {
+			return sprintf(
+				'<span class="rank-math-link-count-item" data-link-type="%1$s" title="%2$s">%3$s</span>',
+				esc_attr( $type ),
+				esc_attr( $titles[ $type ] ),
+				$inner
+			);
+		}
+
+		$params = 'incoming' === $type
+			? [
+				'target_post_id' => absint( $post_id ),
+				'link_type'      => 'internal',
+			]
+			: [
+				'source_id' => absint( $post_id ),
+				'link_type' => $type,
+			];
+
+		$url = Helper::get_admin_url( 'links-page' ) . '#links?' . http_build_query( $params );
+
+		return sprintf(
+			'<a href="%1$s" class="rank-math-link-count-item rank-math-link-count-clickable" data-link-type="%2$s" title="%3$s">%4$s</a>',
+			esc_url( $url ),
+			esc_attr( $type ),
+			esc_attr( $titles[ $type ] ),
+			$inner
 		);
 	}
 
