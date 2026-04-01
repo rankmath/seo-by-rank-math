@@ -80,7 +80,7 @@ trait Content_AI {
 			'api_key'        => rawurlencode( $registered['api_key'] ),
 			'site_url'       => rawurlencode( self::get_home_url() ),
 			'embedWallet'    => 'false',
-			'plugin_version' => rawurlencode( rank_math()->version ),
+			'plugin_version' => rank_math()->version,
 		];
 
 		$url = add_query_arg(

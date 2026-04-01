@@ -32,7 +32,12 @@ trait Meta {
 	public function get_meta( $object_type, $object_id, $key = '', $single = true ) {
 		$func = "get_{$object_type}_meta";
 
-		return $func( $object_id, $key, $single );
+		$value = $func( $object_id, $key, $single );
+		if ( $key === 'rank_math_focus_keyword' && ! is_string( $value ) ) {
+			return '';
+		}
+
+		return $value;
 	}
 
 	/**

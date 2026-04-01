@@ -165,6 +165,10 @@ class Advanced_Variables extends Author_Variables {
 			$keywords = get_term_meta( $this->args->term_id, 'rank_math_focus_keyword', true );
 		}
 
+		if ( ! is_string( $keywords ) ) {
+			return null;
+		}
+
 		$keywords = explode( ',', $keywords );
 		if ( '' !== $keywords[0] ) {
 			return $keywords[0];

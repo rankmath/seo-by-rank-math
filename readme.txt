@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, WordPress SEO, google search console, schema, redirection, 
-Tested up to: 6.9
+Tested up to: 7.0
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.266
+Stable tag: 1.0.267
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,13 +339,10 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.266 [Mar 18, 2026] =
-- Added: [Dedicated Links page](https://rankmath.com/blog/ai-link-genius/#dashboard) to show the Links data
-- Fixed: [Filter to remove the Schema data](https://rankmath.com/kb/filters-hooks-api-developer/#remove-schema-data-from-posts) was not working
-- Fixed: [Inserting the links from the Link Suggestions](https://rankmath.com/kb/pillar-content-internal-linking/#link-suggestions-for-posts) was not working properly
-- Fixed: [Focus Keyword in the URL test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-the-url-primary-focus-keyword-only) was failing when umlauts were used in the Focus keyword
-- Fixed: Clicking on the Sitemap link in the [New Post type notice](https://rankmath.com/kb/new-post-type-detected/) was showing a blank page
-- Fixed: False error when updating the stock quantity of WooCommerce variations
-
+= 1.0.267 [Apr 01, 2026] =
+- Fixed: PHP error when [Focus keyword](https://rankmath.com/kb/what-is-a-focus-keyword/) is stored in array format
+- Fixed: PHP warnings related to [Analytics](https://rankmath.com/kb/analytics/) when connecting the site from the Analytics page
+- Fixed: `plugin_version` parameter is now always sent to the [Content AI](https://rankmath.com/content-ai/) as part of the payload
+- Fixed: WPML notice to activate the String Translation plugin was shown even when it was already active
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

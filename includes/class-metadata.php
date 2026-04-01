@@ -134,7 +134,7 @@ abstract class Metadata {
 			return $this->$meta_key;
 		}
 
-		if ( ! $value ) {
+		if ( ! $value || ( $key === 'focus_keyword' && ! is_string( $value ) ) ) {
 			return $default_value;
 		}
 

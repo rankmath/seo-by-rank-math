@@ -604,12 +604,13 @@ class Rest extends WP_REST_Controller {
 	 */
 	private function get_researched_data( $keyword, $post_type, $country, $force_update = false ) {
 		$args = [
-			'username'  => rawurlencode( $this->registered['username'] ),
-			'api_key'   => rawurlencode( $this->registered['api_key'] ),
-			'keyword'   => rawurlencode( $keyword ),
-			'post_type' => rawurlencode( $post_type ),
-			'site_url'  => rawurlencode( Helper::get_home_url() ),
-			'new_api'   => 1,
+			'username'       => rawurlencode( $this->registered['username'] ),
+			'api_key'        => rawurlencode( $this->registered['api_key'] ),
+			'keyword'        => rawurlencode( $keyword ),
+			'post_type'      => rawurlencode( $post_type ),
+			'site_url'       => rawurlencode( Helper::get_home_url() ),
+			'new_api'        => 1,
+			'plugin_version' => rank_math()->version,
 		];
 
 		if ( 'all' !== $country ) {

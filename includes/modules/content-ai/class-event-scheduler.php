@@ -88,9 +88,10 @@ class Event_Scheduler {
 				],
 				'body'    => wp_json_encode(
 					[
-						'username' => $registered['username'],
-						'api_key'  => $registered['api_key'],
-						'site_url' => $registered['site_url'],
+						'username'       => $registered['username'],
+						'api_key'        => $registered['api_key'],
+						'site_url'       => $registered['site_url'],
+						'plugin_version' => rank_math()->version,
 					]
 				),
 			]

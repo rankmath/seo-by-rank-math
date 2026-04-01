@@ -11,6 +11,7 @@
 namespace RankMath\Analytics;
 
 use RankMath\Traits\Cache;
+use RankMath\Google\Console;
 use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
@@ -82,6 +83,31 @@ class Summary {
 			return $cache;
 		}
 
+		if ( ! Console::is_console_connected() ) {
+			return (object) [
+				'clicks'      => [
+					'total'      => 'n/a',
+					'previous'   => 'n/a',
+					'difference' => 'n/a',
+				],
+				'impressions' => [
+					'total'      => 'n/a',
+					'previous'   => 'n/a',
+					'difference' => 'n/a',
+				],
+				'position'    => [
+					'total'      => 'n/a',
+					'previous'   => 'n/a',
+					'difference' => 'n/a',
+				],
+				'keywords'    => [
+					'total'      => 'n/a',
+					'previous'   => 'n/a',
+					'difference' => 'n/a',
+				],
+			];
+		}
+
 		$stats = DB::analytics()
 			->selectSum( 'impressions', 'impressions' )
 			->selectSum( 'clicks', 'clicks' )
@@ -121,9 +147,9 @@ class Summary {
 		];
 
 		$stats->position = [
-			'total'      => (float) \number_format( $stats->position, 2 ),
-			'previous'   => (float) \number_format( $old_stats->position, 2 ),
-			'difference' => (float) \number_format( $stats->position - $old_stats->position, 2 ),
+			'total'      => $stats->position ? (float) \number_format( $stats->position, 2 ) : 0,
+			'previous'   => $stats->position ? (float) \number_format( $old_stats->position, 2 ) : 0,
+			'difference' => $stats->position ? (float) \number_format( $stats->position - $old_stats->position, 2 ) : 0,
 		];
 
 		$stats->keywords = $this->get_keywords_summary();
@@ -226,6 +252,23 @@ class Summary {
 			return $cache;
 		}
 
+		if ( ! Console::is_console_connected() ) {
+			return (object) [
+				'posts'       => 'n/a',
+				'impressions' => 'n/a',
+				'pageviews'   => 'n/a',
+				'clicks'      => 'n/a',
+				'ctr'         => 'n/a',
+				'position'    => 'n/a',
+				'keywords'    => 'n/a',
+				'graph'       => [
+					'merged' => [],
+					'dates'  => [],
+					'map'    => [],
+				],
+			];
+		}
+
 		$stats = DB::analytics()
 			->selectCount( 'DISTINCT(page)', 'posts' )
 			->selectSum( 'impressions', 'impressions' )
@@ -288,6 +331,16 @@ class Summary {
 	 * @return object
 	 */
 	public function get_posts_summary( $post_type = '' ) {
+		if ( ! Console::is_console_connected() ) {
+			return (object) [
+				'ctr'         => 'n/a',
+				'posts'       => 'n/a',
+				'clicks'      => 'n/a',
+				'pageviews'   => 'n/a',
+				'impressions' => 'n/a',
+			];
+		}
+
 		$cache_key = $this->get_cache_key( 'posts_summary', $this->days . 'days' );
 		$cache     = ! $post_type ? get_transient( $cache_key ) : false;
 

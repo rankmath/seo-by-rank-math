@@ -75,7 +75,7 @@ class Watcher implements Runner {
 		}
 
 		if ( in_array( 'wpml-string-translation/plugin.php', $plugins, true ) ) {
-			GlobalHelper::remove_notification( 'convert_wpml_settings' );
+			GlobalHelper::remove_notification( 'display_wpml_notice' );
 		}
 	}
 

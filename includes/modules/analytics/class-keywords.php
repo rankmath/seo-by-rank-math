@@ -12,6 +12,7 @@ namespace RankMath\Analytics;
 
 use WP_REST_Request;
 use RankMath\Helpers\DB as DB_Helper;
+use RankMath\Google\Console;
 use RankMath\Analytics\Stats;
 
 defined( 'ABSPATH' ) || exit;
@@ -29,6 +30,10 @@ class Keywords extends Posts {
 	 * @return array
 	 */
 	public function get_recent_keywords() {
+		if ( ! Console::is_console_connected() ) {
+			return [];
+		}
+
 		global $wpdb;
 
 		$query = $wpdb->prepare(
@@ -93,6 +98,29 @@ class Keywords extends Posts {
 	 * @return object
 	 */
 	public function get_top_keywords() {
+		if ( ! Console::is_console_connected() ) {
+			return [
+				'top3'          => [
+					'total'      => 0,
+					'difference' => 0,
+				],
+				'top10'         => [
+					'total'      => 0,
+					'difference' => 0,
+				],
+				'top50'         => [
+					'total'      => 0,
+					'difference' => 0,
+				],
+				'top100'        => [
+					'total'      => 0,
+					'difference' => 0,
+				],
+				'ctr'           => 0,
+				'ctrDifference' => 0,
+			];
+		}
+
 		global $wpdb;
 
 		$cache_key = $this->get_cache_key( 'top_keywords', $this->days . 'days' );
@@ -207,6 +235,10 @@ class Keywords extends Posts {
 		$cache     = get_transient( $cache_key );
 
 		if ( false !== $cache ) {
+			return $cache;
+		}
+
+		if ( ! Console::is_console_connected() ) {
 			return $cache;
 		}
 

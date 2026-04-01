@@ -16,7 +16,7 @@ use RankMath\Helpers\Param;
 use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Google\Analytics;
 use RankMathPro\Analytics\Pageviews;
-use RankMath\Google\Console as Google_Analytics;
+use RankMath\Google\Console;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -631,6 +631,10 @@ class Stats extends Keywords {
 	 * @return array
 	 */
 	public function get_position_data_by_dimension( $args = [] ) {
+		if ( ! Console::is_console_connected() ) {
+			return [];
+		}
+
 		global $wpdb;
 
 		$args = wp_parse_args(
@@ -777,6 +781,10 @@ class Stats extends Keywords {
 	 * @return array
 	 */
 	public function get_metrics_data_by_dimension( $args = [] ) {
+		if ( ! Console::is_console_connected() ) {
+			return [];
+		}
+
 		global $wpdb;
 		Helper::enable_big_selects_for_queries();
 		$args = wp_parse_args(
@@ -979,7 +987,7 @@ class Stats extends Keywords {
 	 * @return string
 	 */
 	public static function get_relative_url( $url ) {
-		$home_url = Google_Analytics::get_site_url();
+		$home_url = Console::get_site_url();
 
 		// On multisite and sub-directory setup replace the home url.
 		if ( is_multisite() && ! is_subdomain_install() ) {

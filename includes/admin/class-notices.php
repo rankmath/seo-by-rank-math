@@ -207,7 +207,7 @@ class Notices implements Runner {
 	 * @return void
 	 */
 	private function display_wpml_notice() {
-		if ( ! function_exists( 'icl_add_string_translation' ) || get_option( 'rank_math_wpml_notice_dismissed' ) ) {
+		if ( function_exists( 'icl_add_string_translation' ) || get_option( 'rank_math_wpml_notice_dismissed' ) ) {
 			return;
 		}
 
