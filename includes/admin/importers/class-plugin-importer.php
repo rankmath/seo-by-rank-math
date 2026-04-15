@@ -248,7 +248,7 @@ abstract class Plugin_Importer {
 		}
 
 		if ( 'termmeta' === $action || 'redirections' === $action ) {
-			return sprintf( $message, $result['count'] );
+			return is_array( $result ) ? sprintf( $message, $result['count'] ) : $message;
 		}
 
 		return $message;

@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 7.0
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.267
+Stable tag: 1.0.268
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,10 +339,12 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.267 [Apr 01, 2026] =
-- Fixed: PHP error when [Focus keyword](https://rankmath.com/kb/what-is-a-focus-keyword/) is stored in array format
-- Fixed: PHP warnings related to [Analytics](https://rankmath.com/kb/analytics/) when connecting the site from the Analytics page
-- Fixed: `plugin_version` parameter is now always sent to the [Content AI](https://rankmath.com/content-ai/) as part of the payload
-- Fixed: WPML notice to activate the String Translation plugin was shown even when it was already active
+= 1.0.268 [Apr 15, 2026] =
+- Fixed: JS error when updating the User profile with [Author archives](https://rankmath.com/kb/titles-and-meta/#author-archives) enabled
+- Fixed: Missing option to [import data from AIO SEO plugin](https://rankmath.com/kb/import-all-in-one-schema-data/#import-data-from-all-in-one-schema-plugin) in the Setup wizard page
+- Fixed: [Importing Data from SEOPress](https://rankmath.com/kb/seopress-migration/) was breaking some settings when Author archives and Sitemap are enabled
+- Fixed: SEO Details was showing `N/A` instead of SEO score for posts [excluded from Sitemap](https://rankmath.com/kb/configure-sitemaps/#exclude-posts)
+- Fixed: UX issue in the [Focus keyword field](https://rankmath.com/kb/what-is-a-focus-keyword/)
+- Fixed: [Description in the SERP Preview](https://rankmath.com/kb/general-tab/#the-preview-section) was showing `undefined` on taxonomy pages when Code view is enabled in the Description field
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

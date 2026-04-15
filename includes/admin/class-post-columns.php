@@ -566,6 +566,6 @@ class Post_Columns implements Runner {
 			return in_array( 'index', $robots, true ) ? true : false;
 		}
 
-		return Helper::is_post_indexable( $post_id );
+		return Helper::is_post_indexable( $post_id, false );
 	}
 }

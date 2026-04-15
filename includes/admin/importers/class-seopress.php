@@ -562,7 +562,9 @@ class SEOPress extends Plugin_Importer {
 			'seopress_404_redirect_status_code' => 'redirections_header_code',
 		];
 		$this->replace( $hash, $seopress_local, $this->settings );
-		$this->settings['redirections_fallback'] = 'none' === $seopress_local['seopress_404_redirect_home'] ? 'default' : ( 'home' === $seopress_local['seopress_404_redirect_home'] ? 'homepage' : 'custom' );
+		if ( isset( $seopress_local['seopress_404_redirect_home'] ) ) {
+			$this->settings['redirections_fallback'] = 'none' === $seopress_local['seopress_404_redirect_home'] ? 'default' : ( 'home' === $seopress_local['seopress_404_redirect_home'] ? 'homepage' : 'custom' );
+		}
 	}
 
 	/**
@@ -571,6 +573,10 @@ class SEOPress extends Plugin_Importer {
 	 * @param array $seopress_local SEOPress Pro Settings.
 	 */
 	private function seopress_set_opening_hours( $seopress_local ) {
+		if ( empty( $seopress_local['seopress_local_business_opening_hours'] ) ) {
+			return;
+		}
+
 		$hash = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
 		$data = [];
 		foreach ( $seopress_local['seopress_local_business_opening_hours'] as $key => $opening_hour ) {

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.267\n"
+"Project-Id-Version: Rank Math SEO 1.0.268\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-01T06:10:38+00:00\n"
+"POT-Creation-Date: 2026-04-15T04:03:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rank-math\n"
@@ -3330,7 +3330,7 @@ msgid "New!"
 msgstr ""
 
 #. Translators: placeholder is the new label.
-msgid "Links %s"
+msgid "Link Genius %s"
 msgstr ""
 
 msgid "You do not have permission to access this resource."
@@ -6700,6 +6700,30 @@ msgstr ""
 msgid "Search &hellip;"
 msgstr ""
 
+msgid "Select / Deselect All"
+msgstr ""
+
+msgid "I just installed @RankMathSEO #WordPress Plugin. It looks great! %s"
+msgstr ""
+
+msgid "I just installed Rank Math SEO WordPress Plugin. It looks promising!"
+msgstr ""
+
+msgid "SEO by Rank Math"
+msgstr ""
+
+msgid "Tweet"
+msgstr ""
+
+msgid "Share"
+msgstr ""
+
+msgid "Use this file"
+msgstr ""
+
+msgid "Add or Upload File"
+msgstr ""
+
 msgid "Search …"
 msgstr ""
 
@@ -6764,6 +6788,9 @@ msgid "Performance"
 msgstr ""
 
 msgid "Security"
+msgstr ""
+
+msgid "Complete"
 msgstr ""
 
 msgid "SEO Titles & Meta"
@@ -7006,33 +7033,6 @@ msgstr ""
 msgid "No data available"
 msgstr ""
 
-msgid "Select / Deselect All"
-msgstr ""
-
-msgid "I just installed @RankMathSEO #WordPress Plugin. It looks great! %s"
-msgstr ""
-
-msgid "I just installed Rank Math SEO WordPress Plugin. It looks promising!"
-msgstr ""
-
-msgid "SEO by Rank Math"
-msgstr ""
-
-msgid "Tweet"
-msgstr ""
-
-msgid "Share"
-msgstr ""
-
-msgid "Use this file"
-msgstr ""
-
-msgid "Add or Upload File"
-msgstr ""
-
-msgid "Complete"
-msgstr ""
-
 msgid "Please enable Redirections module"
 msgstr ""
 
@@ -7069,9 +7069,6 @@ msgstr ""
 msgid "Edit your robots.txt file to control what bots see."
 msgstr ""
 
-msgid "Share anonymous usage data to help us improve Rank Math. No personal info is collected. %s"
-msgstr ""
-
 msgid "%AUTHORLINK%"
 msgstr ""
 
@@ -7085,6 +7082,9 @@ msgid "%BLOGDESCLINK%"
 msgstr ""
 
 msgid "%FEATUREDIMAGE%"
+msgstr ""
+
+msgid "Share anonymous usage data to help us improve Rank Math. No personal info is collected. %s"
 msgstr ""
 
 msgid "Change some uncommon but essential settings here."
@@ -7822,6 +7822,33 @@ msgstr ""
 msgid "The following active plugins on your site may cause conflict issues when used alongside this plugin: "
 msgstr ""
 
+msgid "Your PHP Version: %s | Recommended version: 7.4 | Minimal required: 7.2"
+msgstr ""
+
+msgid "Your PHP Version: %s"
+msgstr ""
+
+msgid "Rank Math is compatible with your PHP version but we recommend updating to PHP 7.4 for increased speed and security. "
+msgstr ""
+
+msgid "More information"
+msgstr ""
+
+msgid "This plugin is compatible with your PHP version but we recommend updating to PHP 7.4 for increased speed and security."
+msgstr ""
+
+msgid " | Recommended: PHP 7.4 or later"
+msgstr ""
+
+msgid "available"
+msgstr ""
+
+msgid "installed"
+msgstr ""
+
+msgid "missing"
+msgstr ""
+
 msgid "You are using the recommended WordPress version."
 msgstr ""
 
@@ -7843,33 +7870,6 @@ msgstr ""
 msgid "Base64 encode & decode functions"
 msgstr ""
 
-msgid "available"
-msgstr ""
-
-msgid "installed"
-msgstr ""
-
-msgid "missing"
-msgstr ""
-
-msgid "Your PHP Version: %s | Recommended version: 7.4 | Minimal required: 7.2"
-msgstr ""
-
-msgid "Your PHP Version: %s"
-msgstr ""
-
-msgid "Rank Math is compatible with your PHP version but we recommend updating to PHP 7.4 for increased speed and security. "
-msgstr ""
-
-msgid "More information"
-msgstr ""
-
-msgid "This plugin is compatible with your PHP version but we recommend updating to PHP 7.4 for increased speed and security."
-msgstr ""
-
-msgid " | Recommended: PHP 7.4 or later"
-msgstr ""
-
 msgid "Your website is compatible to run Rank Math SEO"
 msgstr ""
 
@@ -7882,9 +7882,6 @@ msgstr ""
 msgid "Recalculate SEO Scores"
 msgstr ""
 
-msgid "SEO Scores updated"
-msgstr ""
-
 msgid "Deactivating %1$s"
 msgstr ""
 
@@ -7892,6 +7889,9 @@ msgid "Importing %1$s from %2$s"
 msgstr ""
 
 msgid "Starting SEO score recalculation"
+msgstr ""
+
+msgid "SEO Scores updated"
 msgstr ""
 
 msgid "No posts found without SEO score."
@@ -8050,13 +8050,13 @@ msgstr ""
 msgid "Set up temporary or permanent redirections. Combined with the 404 monitor, you can easily redirect faulty URLs on your site, or add custom redirections."
 msgstr ""
 
-msgid "Use automatic structured data to mark up content, to help Google better understand your content's context for display in Search. You can set different defaults for your posts here."
-msgstr ""
-
 msgid "Schema Type for %s"
 msgstr ""
 
 msgid "Default rich snippet selected when creating a new post of this type."
+msgstr ""
+
+msgid "Use automatic structured data to mark up content, to help Google better understand your content's context for display in Search. You can set different defaults for your posts here."
 msgstr ""
 
 msgid "Import"
@@ -9562,6 +9562,12 @@ msgstr ""
 msgid "Keyword Maps"
 msgstr ""
 
+msgid "Source URLs"
+msgstr ""
+
+msgid "Ignore Case"
+msgstr ""
+
 msgid "This field must not be empty."
 msgstr ""
 
@@ -9572,12 +9578,6 @@ msgid "Update Redirection"
 msgstr ""
 
 msgid "Add Redirection"
-msgstr ""
-
-msgid "Source URLs"
-msgstr ""
-
-msgid "Ignore Case"
 msgstr ""
 
 msgid "Toggle All"
@@ -10150,12 +10150,6 @@ msgstr ""
 msgid "Calculating SEO score for posts %1$s - %2$s out of %3$s"
 msgstr ""
 
-msgid "Titles & Metas"
-msgstr ""
-
-msgid "Role Manager Settings"
-msgstr ""
-
 msgid "Settings File"
 msgstr ""
 
@@ -10171,10 +10165,16 @@ msgstr ""
 msgid "Are you sure you want to import settings into Rank Math? Don't worry, your current configuration will be saved as a backup."
 msgstr ""
 
-msgid "Export Settings"
+msgid "Titles & Metas"
+msgstr ""
+
+msgid "Role Manager Settings"
 msgstr ""
 
 msgid "Choose the panels to export."
+msgstr ""
+
+msgid "Export Settings"
 msgstr ""
 
 msgid "Plugin Settings"

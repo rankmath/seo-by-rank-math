@@ -25,12 +25,13 @@ trait Post_Type {
 	/**
 	 * Check if post is indexable.
 	 *
-	 * @param int $post_id Post ID to check.
+	 * @param int  $post_id                    Post ID to check.
+	 * @param bool $should_check_excluded_list Whether to check if the post is excluded from the sitemap.
 	 *
 	 * @return boolean
 	 */
-	public static function is_post_indexable( $post_id ) {
-		if ( true === self::is_post_excluded( $post_id ) ) {
+	public static function is_post_indexable( $post_id, $should_check_excluded_list = true ) {
+		if ( $should_check_excluded_list && true === self::is_post_excluded( $post_id ) ) {
 			return false;
 		}
 
