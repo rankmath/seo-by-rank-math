@@ -292,9 +292,7 @@ class AJAX {
 
 		$days = Param::get( 'days', 90, FILTER_VALIDATE_INT );
 		$days = $days * 2;
-		$rows = DB::objects()
-			->selectCount( 'id' )
-			->getVar();
+		$rows = DB::get_objects_count();
 
 		if ( empty( $rows ) ) {
 			delete_option( 'rank_math_analytics_installed' );

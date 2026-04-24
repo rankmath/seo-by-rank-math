@@ -188,7 +188,7 @@ class Analytics extends Base {
 			$next_timestamp = $schedule->get_date()->getTimestamp();
 
 			// Calculate extra time needed for the inspections.
-			$objects_count   = DB::objects()->selectCount( 'id' )->getVar();
+			$objects_count   = DB::get_objects_count();
 			$daily_api_limit = \RankMath\Analytics\Workflow\Inspections::API_LIMIT;
 			$time_gap        = \RankMath\Analytics\Workflow\Inspections::REQUEST_GAP_SECONDS;
 			$extra_time      = $objects_count * $time_gap;
