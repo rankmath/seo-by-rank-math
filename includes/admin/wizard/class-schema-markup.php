@@ -72,8 +72,13 @@ class Schema_Markup implements Wizard_Step {
 			$id           = 'pt_' . $post_type . '_default_rich_snippet';
 			$article_type = 'pt_' . $post_type . '_default_article_type';
 
-			$settings['titles'][ $id ]           = sanitize_text_field( $values[ $id ] );
-			$settings['titles'][ $article_type ] = sanitize_text_field( $values[ $article_type ] );
+			if ( isset( $values[ $id ] ) ) {
+				$settings['titles'][ $id ] = sanitize_text_field( $values[ $id ] );
+			}
+
+			if ( isset( $values[ $article_type ] ) ) {
+				$settings['titles'][ $article_type ] = sanitize_text_field( $values[ $article_type ] );
+			}
 		}
 	}
 

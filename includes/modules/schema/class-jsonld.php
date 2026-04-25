@@ -161,8 +161,27 @@ class JsonLD {
 
 			$options = defined( 'RANKMATH_DEBUG' ) && RANKMATH_DEBUG ? JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES : JSON_UNESCAPED_SLASHES;
 
-			echo '<script type="application/ld+json" class="rank-math-' . esc_attr( $class ) . '">' . wp_json_encode( wp_kses_post_deep( $json ), $options ) . '</script>' . "\n";
+			echo '<script type="application/ld+json" class="rank-math-' . esc_attr( $class ) . '">' . wp_json_encode( $this->sanitize_schema_data( $json ), $options ) . '</script>' . "\n";
 		}
+	}
+
+	/**
+	 * Sanitize schema data without changing non-string scalar types.
+	 *
+	 * @param mixed $data Schema data.
+	 *
+	 * @return mixed
+	 */
+	private function sanitize_schema_data( $data ) {
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => $value ) {
+				$data[ $key ] = $this->sanitize_schema_data( $value );
+			}
+
+			return $data;
+		}
+
+		return is_string( $data ) ? wp_kses_post( $data ) : $data;
 	}
 
 	/**

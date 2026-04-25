@@ -105,9 +105,7 @@ class OAuth {
 			return;
 		}
 
-		$rows = DB::objects()
-			->selectCount( 'id' )
-			->getVar();
+		$rows = DB::get_objects_count();
 
 		if ( empty( $rows ) ) {
 			delete_option( 'rank_math_analytics_installed' );
