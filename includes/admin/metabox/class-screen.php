@@ -340,7 +340,14 @@ class Screen implements IScreen {
 		}
 
 		$words = $words ? $words : include $file;
-		return $this->do_filter( 'metabox/power_words', array_map( 'strtolower', $words ), $locale );
+		$words = array_map(
+			static function ( $word ) {
+				return function_exists( 'mb_strtolower' ) ? mb_strtolower( $word, 'UTF-8' ) : strtolower( $word );
+			},
+			$words
+		);
+
+		return $this->do_filter( 'metabox/power_words', $words, $locale );
 	}
 
 	/**

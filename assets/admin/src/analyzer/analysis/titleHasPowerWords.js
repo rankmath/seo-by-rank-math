@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { indexOf, isEmpty } from 'lodash'
+import { indexOf, isEmpty, toLower } from 'lodash'
 
 /**
  * WordPress dependencies
@@ -46,7 +46,7 @@ class TitleHasPowerWords extends Analysis {
 	getResult( paper, researcher ) {
 		const analysisResult = this.newResult()
 		const title = paper.getLower( 'title' ).split( ' ' )
-		const powerWordsInText = rankMath.assessor.powerWords.filter( ( word ) => indexOf( title, removeDiacritics( word ) ) >= 0 )
+		const powerWordsInText = rankMath.assessor.powerWords.filter( ( word ) => indexOf( title, toLower( removeDiacritics( word ) ) ) >= 0 )
 		const hasPowerWords = 0 < powerWordsInText.length
 
 		analysisResult
