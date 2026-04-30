@@ -54,6 +54,19 @@ class DB {
 	}
 
 	/**
+	 * Get objects table rows count.
+	 *
+	 * @return int
+	 */
+	public static function get_objects_count() {
+		if ( ! DB_Helper::check_table_exists( 'rank_math_analytics_objects' ) ) {
+			return 0;
+		}
+
+		return absint( self::objects()->selectCount( 'id' )->getVar() );
+	}
+
+	/**
 	 * Get inspections table.
 	 *
 	 * @return \RankMath\Admin\Database\Query_Builder
