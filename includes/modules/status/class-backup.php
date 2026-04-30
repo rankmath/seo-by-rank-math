@@ -99,7 +99,7 @@ class Backup {
 			return [
 				'type'    => 'error',
 				'message' => esc_html__( 'No backup key found to delete.', 'rank-math' ),
-				'backups' => self::get_backups( true ),
+				'backups' => self::get_backups(),
 			];
 		}
 
@@ -109,7 +109,7 @@ class Backup {
 		return [
 			'type'    => 'success',
 			'message' => esc_html__( 'Backup successfully deleted.', 'rank-math' ),
-			'backups' => self::get_backups( true ),
+			'backups' => self::get_backups(),
 		];
 	}
 }

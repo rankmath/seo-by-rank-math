@@ -160,27 +160,26 @@ class Bulk_Image_Alt extends \WP_Background_Process {
 
 			$this->update_content_ai_posts_count();
 
-			$credits = ! empty( $api_output['credits'] ) ? $api_output['credits'] : [];
-			if ( isset( $credits['available'] ) ) {
-				$credits = $credits['available'] - $credits['taken'];
-				Helper::update_credits( $credits );
+			if ( ! empty( $api_output['usage']['feature'] ) ) {
+				$usage = $api_output['usage'];
+				Helper::update_feature_usage( $usage['feature'], $usage['used'] ?? 0, $usage['remaining'] ?? null );
+			}
 
-				if ( $credits <= 0 ) {
-					$posts_processed = get_option( 'rank_math_content_ai_posts_processed' );
-					delete_option( 'rank_math_content_ai_posts' );
-					delete_option( 'rank_math_content_ai_posts_processed' );
-					Helper::add_notification(
-						// Translators: placeholder is the number of modified posts.
-						sprintf( esc_html__( 'Image alt attributes successfully updated in %d posts. The process was stopped as you have used all the credits on your site.', 'rank-math' ), $posts_processed ),
-						[
-							'type'    => 'success',
-							'id'      => 'rank_math_content_ai_posts',
-							'classes' => 'rank-math-notice',
-						]
-					);
+			if ( Helper::is_feature_quota_exhausted( 'generate_image_alt_v2' ) ) {
+				$posts_processed = get_option( 'rank_math_content_ai_posts_processed' );
+				delete_option( 'rank_math_content_ai_posts' );
+				delete_option( 'rank_math_content_ai_posts_processed' );
+				Helper::add_notification(
+					// Translators: placeholder is the number of modified posts.
+					sprintf( esc_html__( 'Image alt attributes successfully updated in %d posts. The process was stopped as you have reached the monthly limit for this feature.', 'rank-math' ), (int) $posts_processed ),
+					[
+						'type'    => 'success',
+						'id'      => 'rank_math_content_ai_posts',
+						'classes' => 'rank-math-notice',
+					]
+				);
 
-					wp_clear_scheduled_hook( 'wp_bulk_image_alt_cron' );
-				}
+				wp_clear_scheduled_hook( 'wp_bulk_image_alt_cron' );
 			}
 
 			return false;

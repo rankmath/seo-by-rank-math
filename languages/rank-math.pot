@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.268\n"
+"Project-Id-Version: Rank Math SEO 1.0.269\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-15T04:03:49+00:00\n"
+"POT-Creation-Date: 2026-04-30T07:51:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rank-math\n"
@@ -1594,10 +1594,10 @@ msgstr ""
 msgid "Oops! Too many requests in a short time. Please try again after some time."
 msgstr ""
 
-msgid "You've used up all available credits for this domain."
+msgid "You've reached the monthly usage limit for this feature on your domain."
 msgstr ""
 
-msgid "You've used up all available credits from the connected account."
+msgid "You've reached the monthly usage limit for this feature."
 msgstr ""
 
 msgid "Please revise the entered values in the fields as they are not secure. Make the required adjustments and try again."
@@ -2469,7 +2469,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: placeholder is the number of modified posts.
-msgid "SEO meta successfully updated in %d posts. The process was stopped as you have used all the credits on your site."
+msgid "SEO meta successfully updated in %d posts. The process was stopped as you have reached the monthly limit for this feature."
 msgstr ""
 
 msgid "Bulk image alt generation started. It might take few minutes to complete the process."
@@ -2485,7 +2485,7 @@ msgid "Bulk image alt generation failed."
 msgstr ""
 
 #. Translators: placeholder is the number of modified posts.
-msgid "Image alt attributes successfully updated in %d posts. The process was stopped as you have used all the credits on your site."
+msgid "Image alt attributes successfully updated in %d posts. The process was stopped as you have reached the monthly limit for this feature."
 msgstr ""
 
 msgid "AI Tools"
@@ -2531,6 +2531,9 @@ msgid "The parameters used to generate the AI output."
 msgstr ""
 
 msgid "Credit usage details returned by the API."
+msgstr ""
+
+msgid "Per-tool usage data returned by the API."
 msgstr ""
 
 msgid "Indicates if the request to delete the output was for the Chat endpoint."
@@ -7105,13 +7108,16 @@ msgstr ""
 msgid "Easily create redirects without fiddling with tedious code."
 msgstr ""
 
-msgid "%s credits left this month. "
+msgid "Get more credits "
 msgstr ""
 
-msgid "Get more credits %s"
+msgid "Credits will renew on"
 msgstr ""
 
-msgid "Credits will renew on %1$s or you can upgrade to get more credits %2$s."
+msgid "check usage"
+msgstr ""
+
+msgid "or you can upgrade to get more credits"
 msgstr ""
 
 msgid "Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area."
@@ -9247,7 +9253,19 @@ msgstr ""
 msgid "Type / to choose a block or // to use Content AI"
 msgstr ""
 
+msgid "1 request will be used (%d remaining)"
+msgstr ""
+
+msgid "1 request will be used"
+msgstr ""
+
 msgid "Back"
+msgstr ""
+
+msgid "Not available in your plan. "
+msgstr ""
+
+msgid "You've used %1$d of %2$d research requests this month."
 msgstr ""
 
 msgid "Upgrade to buy more credits from "
@@ -9263,12 +9281,6 @@ msgid "Suggested length 2-3 Words"
 msgstr ""
 
 msgid "To learn how to use it"
-msgstr ""
-
-msgid "Refresh will use 500 Credit."
-msgstr ""
-
-msgid "500 credits will be used."
 msgstr ""
 
 msgid "Research"
@@ -9382,6 +9394,24 @@ msgstr ""
 msgid "%1$sNote:%2$s Your input is processed using AI. Please review and edit before publishing."
 msgstr ""
 
+msgid "Not available in your plan."
+msgstr ""
+
+msgid "uses"
+msgstr ""
+
+msgid "You've sent %d messages this month. Your plan includes Unlimited usage."
+msgstr ""
+
+msgid "You've used %d requests this month. Your plan includes Unlimited usage."
+msgstr ""
+
+msgid "You've used %1$d of %2$d %3$s this month."
+msgstr ""
+
+msgid "write requests"
+msgstr ""
+
 msgid "Blog Post Wizard"
 msgstr ""
 
@@ -9403,16 +9433,58 @@ msgstr ""
 msgid "Steps"
 msgstr ""
 
+msgid "%s requests"
+msgstr ""
+
 msgid "Multistep Wizard"
 msgstr ""
 
 msgid "Prompt with this name already exists"
 msgstr ""
 
-msgid "Credits"
+msgid "messages"
 msgstr ""
 
-msgid "Know more about credits."
+msgid "Keyword Research"
+msgstr ""
+
+msgid "Image Alt Text"
+msgstr ""
+
+msgid "Chat (RankBot)"
+msgstr ""
+
+msgid "Bulk SEO Meta"
+msgstr ""
+
+msgid "Fix with AI"
+msgstr ""
+
+msgid "Could not fetch usage data. Please try again."
+msgstr ""
+
+msgid "AI Usage"
+msgstr ""
+
+msgid "Refreshing…"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "If you don't see the latest usage data, click Refresh to sync it from your account."
+msgstr ""
+
+msgid "Features"
+msgstr ""
+
+msgid "Usage this Month"
+msgstr ""
+
+msgid "Unlimited"
+msgstr ""
+
+msgid "Usage"
 msgstr ""
 
 msgid "Content is %1$s words long. Consider using at least %2$s words."
@@ -9454,7 +9526,10 @@ msgstr ""
 msgid "Undo"
 msgstr ""
 
-msgid "Fix with AI"
+msgid "⛔️ Monthly Limit Reached!"
+msgstr ""
+
+msgid "You've reached the monthly limit for this feature. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and get more usage."
 msgstr ""
 
 msgid "Improve your content with a personal Content AI."

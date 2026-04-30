@@ -78,6 +78,7 @@ class Content_AI {
 					'connectSiteUrl'        => Admin_Helper::get_activate_url( Url::get_current_url() ),
 					'credits'               => Helper::get_content_ai_credits(),
 					'plan'                  => Helper::get_content_ai_plan(),
+					'usageDetails'          => Helper::get_usage_details(),
 					'errors'                => Helper::get_content_ai_errors(),
 					'registerWriteShortcut' => version_compare( get_bloginfo( 'version' ), '6.2', '>=' ),
 					'isMigrating'           => get_site_transient( 'rank_math_content_ai_migrating_user' ),

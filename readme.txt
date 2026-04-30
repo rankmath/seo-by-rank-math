@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 7.0
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.268
+Stable tag: 1.0.269
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,12 +339,10 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.268 [Apr 15, 2026] =
-- Fixed: JS error when updating the User profile with [Author archives](https://rankmath.com/kb/titles-and-meta/#author-archives) enabled
-- Fixed: Missing option to [import data from AIO SEO plugin](https://rankmath.com/kb/import-all-in-one-schema-data/#import-data-from-all-in-one-schema-plugin) in the Setup wizard page
-- Fixed: [Importing Data from SEOPress](https://rankmath.com/kb/seopress-migration/) was breaking some settings when Author archives and Sitemap are enabled
-- Fixed: SEO Details was showing `N/A` instead of SEO score for posts [excluded from Sitemap](https://rankmath.com/kb/configure-sitemaps/#exclude-posts)
-- Fixed: UX issue in the [Focus keyword field](https://rankmath.com/kb/what-is-a-focus-keyword/)
-- Fixed: [Description in the SERP Preview](https://rankmath.com/kb/general-tab/#the-preview-section) was showing `undefined` on taxonomy pages when Code view is enabled in the Description field
+= 1.0.269 [Apr 30, 2026] =
+- Improved: [HUGE!] [Content AI now uses a feature-based usage system](https://rankmath.com/kb/content-ai-credits-migration/?play-video=DKMXI71fboM) with monthly limits per feature. This replaces the previous AI credits system and provides a higher overall usage limit
+- Fixed: Deleting the [backup from the Import & Export tab](https://rankmath.com/kb/import-export-settings/#performing-and-restoring-backups), changes the names of other backups to `[object Object]`
+- Fixed: JS warnings related to the [Schema](https://rankmath.com/kb/rich-snippets/) shown in the browser's console
+- Fixed: [Redirect option in the Advanced tab](https://rankmath.com/kb/advanced-tab/#redirect) was shown to users who do not have access to Redirections
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

@@ -219,6 +219,23 @@ class Str {
 	}
 
 	/**
+	 * Returns the portion of string specified by the offset and length parameters.
+	 *
+	 * @param string   $str    The input string.
+	 * @param int      $start  The offset position.
+	 * @param int|null $length The length of the substring returned.
+	 *
+	 * @return string
+	 */
+	public static function substr( $str, $start, $length = null ) {
+		if ( function_exists( 'mb_substr' ) ) {
+			return mb_substr( $str, $start, $length );
+		}
+
+		return substr( $str, $start, $length );
+	}
+
+	/**
 	 * Multibyte ucwords.
 	 *
 	 * @param string $value String to convert.

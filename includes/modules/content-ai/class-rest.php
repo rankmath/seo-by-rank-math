@@ -99,12 +99,12 @@ class Rest extends WP_REST_Controller {
 					'outputs'    => [
 						'description' => esc_html__( 'An array of AI-generated and existing outputs to be saved.', 'rank-math' ),
 						'type'        => 'array',
-						'required'    => true,
+						'required'    => false,
 					],
 					'endpoint'   => [
 						'description' => esc_html__( 'The API endpoint for which the output was generated.', 'rank-math' ),
 						'type'        => 'string',
-						'required'    => true,
+						'required'    => false,
 					],
 					'isChat'     => [
 						'description' => esc_html__( 'Indicates if the request was for the Chat endpoint.', 'rank-math' ),
@@ -118,6 +118,11 @@ class Rest extends WP_REST_Controller {
 					],
 					'credits'    => [
 						'description' => esc_html__( 'Credit usage details returned by the API.', 'rank-math' ),
+						'type'        => 'object',
+						'required'    => false,
+					],
+					'usage'      => [
+						'description' => esc_html__( 'Per-tool usage data returned by the API.', 'rank-math' ),
 						'type'        => 'object',
 						'required'    => false,
 					],
@@ -290,20 +295,23 @@ class Rest extends WP_REST_Controller {
 	/**
 	 * Get Content AI Credits.
 	 *
-	 * @return int Credits.
+	 * @return array Credits and usage details.
 	 */
 	public function get_credits() {
-		$credits = Helper::get_content_ai_credits( true, true );
-		if ( ! empty( $credits['error'] ) ) {
-			$error       = $credits['error'];
+		$data = Helper::get_content_ai_credits( true, true );
+		if ( ! empty( $data['error'] ) ) {
 			$error_texts = Helper::get_content_ai_errors();
 			return [
-				'error'   => ! empty( $error_texts[ $error ] ) ? wp_specialchars_decode( $error_texts[ $error ], ENT_QUOTES ) : $error,
-				'credits' => isset( $credits['credits'] ) ? $credits['credits'] : '',
+				'error'        => ! empty( $error_texts[ $data['error'] ] ) ? wp_specialchars_decode( $error_texts[ $data['error'] ], ENT_QUOTES ) : $data['error'],
+				'credits'      => isset( $data['credits'] ) ? $data['credits'] : '',
+				'usageDetails' => Helper::get_usage_details(),
 			];
 		}
 
-		return $credits;
+		return [
+			'credits'      => $data['credits'],
+			'usageDetails' => $data['usage_details'] ?? null,
+		];
 	}
 
 	/**
@@ -359,9 +367,11 @@ class Rest extends WP_REST_Controller {
 			return $this->get_errored_data( $data['error'] );
 		}
 
-		$credits = ! empty( $data['credits'] ) ? $data['credits'] : 0;
-		if ( ! empty( $credits ) ) {
-			$credits = $credits['available'] - $credits['taken'];
+		$usage = ! empty( $data['usage'] ) ? $data['usage'] : null;
+
+		if ( ! empty( $usage['feature'] ) ) {
+			$remaining = isset( $usage['remaining'] ) ? (int) $usage['remaining'] : null;
+			Helper::update_feature_usage( sanitize_key( $usage['feature'] ), $usage['used'] ?? 0, $remaining );
 		}
 
 		$data = $data['data']['details'];
@@ -377,12 +387,11 @@ class Rest extends WP_REST_Controller {
 		);
 		$keyword_data[ $country ][ $keyword ] = $data;
 		update_option( 'rank_math_ca_data', $keyword_data, false );
-		Helper::update_credits( $credits );
 
 		return [
-			'data'    => $keyword_data[ $country ][ $keyword ],
-			'credits' => $credits,
-			'keyword' => $keyword,
+			'data'         => $keyword_data[ $country ][ $keyword ],
+			'keyword'      => $keyword,
+			'usageDetails' => Helper::get_usage_details(),
 		];
 	}
 
@@ -455,21 +464,20 @@ class Rest extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function save_output( WP_REST_Request $request ) {
-		$outputs      = $request->get_param( 'outputs' );
-		$endpoint     = $request->get_param( 'endpoint' );
-		$is_chat      = $request->get_param( 'isChat' );
-		$attributes   = $request->get_param( 'attributes' );
-		$credits_data = $request->get_param( 'credits' );
+		$outputs    = $request->get_param( 'outputs' );
+		$endpoint   = $request->get_param( 'endpoint' );
+		$is_chat    = $request->get_param( 'isChat' );
+		$attributes = $request->get_param( 'attributes' );
+		$usage      = $request->get_param( 'usage' );
 
-		if ( ! empty( $credits_data ) ) {
-			$credits = ! empty( $credits_data['credits'] ) ? $credits_data['credits'] : [];
-			$data    = [
-				'credits'      => ! empty( $credits['available'] ) ? $credits['available'] - $credits['taken'] : 0,
-				'plan'         => ! empty( $credits_data['plan'] ) ? $credits_data['plan'] : '',
-				'refresh_date' => ! empty( $credits_data['refreshDate'] ) ? $credits_data['refreshDate'] : '',
-			];
+		// Persist per-tool usage returned by the API alongside the tool result.
+		if ( ! empty( $usage['feature'] ) ) {
+			$remaining = isset( $usage['remaining'] ) ? (int) $usage['remaining'] : null;
+			Helper::update_feature_usage( sanitize_key( $usage['feature'] ), $usage['used'] ?? 0, $remaining );
+		}
 
-			Helper::update_credits( $data );
+		if ( empty( $outputs ) || empty( $endpoint ) ) {
+			return true;
 		}
 
 		if ( $is_chat ) {
@@ -549,11 +557,13 @@ class Rest extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function ping_content_ai( WP_REST_Request $request ) {
-		$credits = ! empty( $request->get_param( 'credits' ) ) ? json_decode( $request->get_param( 'credits' ), true ) : [];
-		$data    = [
-			'credits'      => ! empty( $credits['available'] ) ? $credits['available'] - $credits['taken'] : 0,
-			'plan'         => $request->get_param( 'plan' ),
-			'refresh_date' => $request->get_param( 'refreshDate' ),
+		$credits       = ! empty( $request->get_param( 'credits' ) ) ? json_decode( $request->get_param( 'credits' ), true ) : [];
+		$usage_details = $request->get_param( 'usageDetails' );
+		$data          = [
+			'credits'       => ! empty( $credits['available'] ) ? $credits['available'] - $credits['taken'] : 0,
+			'plan'          => $request->get_param( 'plan' ),
+			'refresh_date'  => $request->get_param( 'refreshDate' ),
+			'usage_details' => ! empty( $usage_details ) ? $usage_details : null,
 		];
 
 		Helper::update_credits( $data );

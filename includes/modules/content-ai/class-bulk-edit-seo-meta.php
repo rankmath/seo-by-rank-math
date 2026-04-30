@@ -147,27 +147,26 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 
 			$this->update_content_ai_posts_count( count( $posts['meta'] ) );
 
-			$credits = ! empty( $posts['credits'] ) ? $posts['credits'] : [];
-			if ( ! empty( $credits['available'] ) ) {
-				$credits = $credits['available'] - $credits['taken'];
-				Helper::update_credits( $credits );
+			if ( ! empty( $posts['usage']['feature'] ) ) {
+				$usage = $posts['usage'];
+				Helper::update_feature_usage( $usage['feature'], $usage['used'] ?? 0, $usage['remaining'] ?? null );
+			}
 
-				if ( $credits <= 0 ) {
-					$posts_processed = get_option( 'rank_math_content_ai_posts_processed' );
-					delete_option( 'rank_math_content_ai_posts' );
-					delete_option( 'rank_math_content_ai_posts_processed' );
-					Helper::add_notification(
-						// Translators: placeholder is the number of modified posts.
-						sprintf( esc_html__( 'SEO meta successfully updated in %d posts. The process was stopped as you have used all the credits on your site.', 'rank-math' ), $posts_processed ),
-						[
-							'type'    => 'success',
-							'id'      => 'rank_math_content_ai_posts',
-							'classes' => 'rank-math-notice',
-						]
-					);
+			if ( Helper::is_feature_quota_exhausted( 'bulk_seo_meta' ) ) {
+				$posts_processed = get_option( 'rank_math_content_ai_posts_processed' );
+				delete_option( 'rank_math_content_ai_posts' );
+				delete_option( 'rank_math_content_ai_posts_processed' );
+				Helper::add_notification(
+					// Translators: placeholder is the number of modified posts.
+					sprintf( esc_html__( 'SEO meta successfully updated in %d posts. The process was stopped as you have reached the monthly limit for this feature.', 'rank-math' ), (int) $posts_processed ),
+					[
+						'type'    => 'success',
+						'id'      => 'rank_math_content_ai_posts',
+						'classes' => 'rank-math-notice',
+					]
+				);
 
-					wp_clear_scheduled_hook( 'wp_bulk_edit_seo_meta_cron' );
-				}
+				wp_clear_scheduled_hook( 'wp_bulk_edit_seo_meta_cron' );
 			}
 
 			return false;

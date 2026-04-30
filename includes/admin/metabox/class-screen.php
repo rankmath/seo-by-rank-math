@@ -162,7 +162,7 @@ class Screen implements IScreen {
 					'powerWords'      => $this->power_words(),
 					'diacritics'      => $this->diacritics(),
 					'researchesTests' => $this->get_analysis(),
-					'hasRedirection'  => Helper::is_module_active( 'redirections' ),
+					'hasRedirection'  => Helper::has_cap( 'redirections' ) && Helper::is_module_active( 'redirections' ),
 					'hasBreadcrumb'   => Helper::is_breadcrumbs_enabled(),
 				],
 				'isPro'               => defined( 'RANK_MATH_PRO_FILE' ),
