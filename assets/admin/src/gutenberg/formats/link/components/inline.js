@@ -232,7 +232,8 @@ function InlineLinkUI( {
 		<Popover
 			anchor={ popoverAnchor }
 			focusOnMount={ focusOnMount.current }
-			onClose={ stopAddingLink }
+			onClose={ () => stopAddingLink( false ) }
+			onFocusOutside={ () => stopAddingLink( false ) }
 			position="bottom"
 			offset={ 8 }
 			shift
