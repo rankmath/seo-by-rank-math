@@ -70,7 +70,7 @@ class Frontend {
 		$schemas = array_filter(
 			DB::get_schemas( $post->ID ),
 			function ( $schema ) {
-				return ! in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
+				return is_array( $schema ) && isset( $schema['@type'] ) && ! in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
 			}
 		);
 
@@ -92,6 +92,10 @@ class Frontend {
 	 * @return array
 	 */
 	public function connect_schema_entities( $schemas, $jsonld ) {
+		if ( ! is_array( $schemas ) ) {
+			return [];
+		}
+
 		if ( empty( $schemas ) ) {
 			return $schemas;
 		}
@@ -100,7 +104,12 @@ class Frontend {
 
 		$schema_types = [];
 		foreach ( $schemas as $id => $schema ) {
-			if ( ( ! Str::starts_with( 'schema-', $id ) && 'richSnippet' !== $id ) || ! $schema ) {
+			if ( ! is_array( $schema ) || ! isset( $schema['@type'] ) ) {
+				continue;
+			}
+
+			$id = (string) $id;
+			if ( ! Str::starts_with( 'schema-', $id ) && 'richSnippet' !== $id ) {
 				continue;
 			}
 
