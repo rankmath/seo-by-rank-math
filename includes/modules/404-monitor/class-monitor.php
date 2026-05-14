@@ -64,21 +64,21 @@ class Monitor {
 		$data = DB::get_stats();
 		?>
 		<h3>
-			<?php esc_html_e( '404 Monitor', 'rank-math' ); ?>
-			<a href="<?php echo esc_url( Helper::get_admin_url( '404-monitor' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'rank-math' ); ?>"><i class="dashicons dashicons-chart-bar"></i></a>
+			<?php esc_html_e( '404 Monitor', 'seo-by-rank-math' ); ?>
+			<a href="<?php echo esc_url( Helper::get_admin_url( '404-monitor' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'seo-by-rank-math' ); ?>"><i class="dashicons dashicons-chart-bar"></i></a>
 		</h3>
 		<div class="rank-math-dashboard-block">
 			<div>
 				<h4>
-					<?php esc_html_e( 'Log Count', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of 404 pages opened by the users.', 'rank-math' ); ?></span></span>
+					<?php esc_html_e( 'Log Count', 'seo-by-rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of 404 pages opened by the users.', 'seo-by-rank-math' ); ?></span></span>
 				</h4>
 				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->total ) ); ?></strong>
 			</div>
 			<div>
 				<h4>
-					<?php esc_html_e( 'URL Hits', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number visits received on all the 404 pages.', 'rank-math' ); ?></span></span>
+					<?php esc_html_e( 'URL Hits', 'seo-by-rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number visits received on all the 404 pages.', 'seo-by-rank-math' ); ?></span></span>
 				</h4>
 				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->hits ) ); ?></strong>
 			</div>
@@ -95,9 +95,9 @@ class Monitor {
 		$menu->add_sub_menu(
 			'404-monitor',
 			[
-				'title'    => esc_html__( '404 Monitor', 'rank-math' ),
+				'title'    => esc_html__( '404 Monitor', 'seo-by-rank-math' ),
 				'href'     => Helper::get_admin_url( '404-monitor' ),
-				'meta'     => [ 'title' => esc_html__( 'Review 404 errors on your site', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Review 404 errors on your site', 'seo-by-rank-math' ) ],
 				'priority' => 50,
 			]
 		);
@@ -114,11 +114,11 @@ class Monitor {
 
 		$id = Param::request( 'log' );
 		if ( ! $id ) {
-			$this->error( esc_html__( 'No valid id found.', 'rank-math' ) );
+			$this->error( esc_html__( 'No valid id found.', 'seo-by-rank-math' ) );
 		}
 
 		DB::delete_log( $id );
-		$this->success( esc_html__( 'Log item successfully deleted.', 'rank-math' ) );
+		$this->success( esc_html__( 'Log item successfully deleted.', 'seo-by-rank-math' ) );
 	}
 
 	/**

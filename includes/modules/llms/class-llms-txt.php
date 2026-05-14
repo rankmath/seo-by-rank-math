@@ -62,8 +62,8 @@ class LLMS_Txt {
 			[
 				'llms' => [
 					'icon'    => 'rm-icon rm-icon-bot',
-					'title'   => esc_html__( 'Edit llms.txt', 'rank-math' ),
-					'desc'    => esc_html__( 'Configure your llms.txt file for custom crawling/indexing rules.', 'rank-math' ),
+					'title'   => esc_html__( 'Edit llms.txt', 'seo-by-rank-math' ),
+					'desc'    => esc_html__( 'Configure your llms.txt file for custom crawling/indexing rules.', 'seo-by-rank-math' ),
 					'file'    => __DIR__ . '/options.php',
 					'classes' => 'rank-math-advanced-option',
 					'json'    => [

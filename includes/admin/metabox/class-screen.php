@@ -168,7 +168,7 @@ class Screen implements IScreen {
 				'isPro'               => defined( 'RANK_MATH_PRO_FILE' ),
 				'is_front_page'       => Admin_Helper::is_home_page(),
 				'trendsUpgradeLink'   => esc_url_raw( $trends_link ),
-				'trendsUpgradeLabel'  => esc_html__( 'Upgrade', 'rank-math' ),
+				'trendsUpgradeLabel'  => esc_html__( 'Upgrade', 'seo-by-rank-math' ),
 				'trendsPreviewImage'  => esc_url( rank_math()->plugin_url() . 'assets/admin/img/trends-preview.jpg' ),
 				'currentEditor'       => $editor,
 				'homepageData'        => [
@@ -277,7 +277,7 @@ class Screen implements IScreen {
 
 		// Username, avatar & Name.
 		$twitter_username           = Helper::get_settings( 'titles.twitter_author_names' );
-		$data['twitterAuthor']      = $twitter_username ? $twitter_username : esc_html__( 'username', 'rank-math' );
+		$data['twitterAuthor']      = $twitter_username ? $twitter_username : esc_html__( 'username', 'seo-by-rank-math' );
 		$data['twitterUseFacebook'] = 'off' === $data['twitterUseFacebook'] ? false : true;
 		$data['facebookHasOverlay'] = empty( $data['facebookHasOverlay'] ) || 'off' === $data['facebookHasOverlay'] ? false : true;
 		$data['twitterHasOverlay']  = empty( $data['twitterHasOverlay'] ) || 'off' === $data['twitterHasOverlay'] ? false : true;

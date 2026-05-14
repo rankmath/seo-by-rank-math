@@ -73,7 +73,7 @@ class Blocks {
 			[
 				[
 					'slug'  => 'rank-math-blocks',
-					'title' => __( 'Rank Math', 'rank-math' ),
+					'title' => __( 'Rank Math', 'seo-by-rank-math' ),
 					'icon'  => 'wordpress',
 				],
 			]

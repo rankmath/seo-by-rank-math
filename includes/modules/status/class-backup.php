@@ -51,7 +51,7 @@ class Backup {
 		if ( is_null( $key ) ) {
 			return [
 				'type'    => 'error',
-				'message' => esc_html__( 'Unable to create backup this time.', 'rank-math' ),
+				'message' => esc_html__( 'Unable to create backup this time.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -61,7 +61,7 @@ class Backup {
 
 		return [
 			'type'    => 'success',
-			'message' => esc_html__( 'Backup created successfully.', 'rank-math' ),
+			'message' => esc_html__( 'Backup created successfully.', 'seo-by-rank-math' ),
 			'backups' => self::get_backups(),
 		];
 	}
@@ -76,7 +76,7 @@ class Backup {
 		if ( ! array_key_exists( $key, $backups ) ) {
 			return [
 				'type'    => 'error',
-				'message' => esc_html__( 'Backup does not exist.', 'rank-math' ),
+				'message' => esc_html__( 'Backup does not exist.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -84,7 +84,7 @@ class Backup {
 
 		return [
 			'type'    => 'success',
-			'message' => esc_html__( 'Backup restored successfully.', 'rank-math' ),
+			'message' => esc_html__( 'Backup restored successfully.', 'seo-by-rank-math' ),
 		];
 	}
 
@@ -98,7 +98,7 @@ class Backup {
 		if ( ! isset( $backups[ $key ] ) ) {
 			return [
 				'type'    => 'error',
-				'message' => esc_html__( 'No backup key found to delete.', 'rank-math' ),
+				'message' => esc_html__( 'No backup key found to delete.', 'seo-by-rank-math' ),
 				'backups' => self::get_backups(),
 			];
 		}
@@ -108,7 +108,7 @@ class Backup {
 
 		return [
 			'type'    => 'success',
-			'message' => esc_html__( 'Backup successfully deleted.', 'rank-math' ),
+			'message' => esc_html__( 'Backup successfully deleted.', 'seo-by-rank-math' ),
 			'backups' => self::get_backups(),
 		];
 	}

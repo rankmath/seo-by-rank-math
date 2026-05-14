@@ -64,21 +64,21 @@ class AIOSEO extends Plugin_Importer {
 	 */
 	public function get_choices() {
 		$choices = [
-			'settings' => esc_html__( 'Import Settings', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import AIO SEO plugin settings, global meta, sitemap settings, etc.', 'rank-math' ) ),
-			'postmeta' => esc_html__( 'Import Post Meta', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import meta information of your posts/pages like the titles, descriptions, robots meta, OpenGraph info, etc.', 'rank-math' ) ),
-			'usermeta' => esc_html__( 'Import Author Meta', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import Social URLs of your author archive pages.', 'rank-math' ) ),
+			'settings' => esc_html__( 'Import Settings', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import AIO SEO plugin settings, global meta, sitemap settings, etc.', 'seo-by-rank-math' ) ),
+			'postmeta' => esc_html__( 'Import Post Meta', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import meta information of your posts/pages like the titles, descriptions, robots meta, OpenGraph info, etc.', 'seo-by-rank-math' ) ),
+			'usermeta' => esc_html__( 'Import Author Meta', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import Social URLs of your author archive pages.', 'seo-by-rank-math' ) ),
 		];
 
 		if ( DB::check_table_exists( 'aioseo_terms' ) ) {
-			$choices['termmeta'] = esc_html__( 'Import Term Meta', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import meta information of your terms like the titles, descriptions, robots meta, OpenGraph info, etc.', 'rank-math' ) );
+			$choices['termmeta'] = esc_html__( 'Import Term Meta', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import meta information of your terms like the titles, descriptions, robots meta, OpenGraph info, etc.', 'seo-by-rank-math' ) );
 		}
 
 		if ( DB::check_table_exists( 'aioseo_redirects' ) ) {
-			$choices['redirections'] = esc_html__( 'Import Redirections', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import all the redirections you have already set up in AIO SEO Premium.', 'rank-math' ) );
+			$choices['redirections'] = esc_html__( 'Import Redirections', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import all the redirections you have already set up in AIO SEO Premium.', 'seo-by-rank-math' ) );
 		}
 
 		if ( ! empty( $this->get_location_ids( true ) ) ) {
-			$choices['locations'] = esc_html__( 'Import Locations', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import Locations Settings.', 'rank-math' ) );
+			$choices['locations'] = esc_html__( 'Import Locations', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import Locations Settings.', 'seo-by-rank-math' ) );
 		}
 
 		return $choices;
@@ -473,7 +473,7 @@ class AIOSEO extends Plugin_Importer {
 				// Create a new page with the sitemap page url.
 				$this->sitemap['html_sitemap_page'] = wp_insert_post(
 					[
-						'post_title'   => __( 'HTML Sitemap', 'rank-math' ),
+						'post_title'   => __( 'HTML Sitemap', 'seo-by-rank-math' ),
 						'post_content' => '',
 						'post_status'  => 'publish',
 						'post_type'    => 'page',

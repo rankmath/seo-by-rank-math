@@ -150,8 +150,8 @@ class CMB2_Fields implements Runner {
 
 		if ( empty( $field->args['options'] ) ) {
 			$field->args['options'] = [
-				'off' => esc_html( $field->get_string( 'off', __( 'Off', 'rank-math' ) ) ),
-				'on'  => esc_html( $field->get_string( 'on', __( 'On', 'rank-math' ) ) ),
+				'off' => esc_html( $field->get_string( 'off', __( 'Off', 'seo-by-rank-math' ) ) ),
+				'on'  => esc_html( $field->get_string( 'on', __( 'On', 'seo-by-rank-math' ) ) ),
 			];
 		}
 		$field->set_options();
@@ -249,9 +249,9 @@ class CMB2_Fields implements Runner {
 		);
 
 		$strings = [
-			'max-snippet'       => __( 'Snippet', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Specify a maximum text-length, in characters, of a snippet for your page.', 'rank-math' ) ),
-			'max-video-preview' => __( 'Video Preview', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Specify a maximum duration in seconds of an animated video preview.', 'rank-math' ) ),
-			'max-image-preview' => __( 'Image Preview', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Specify a maximum size of image preview to be shown for images on this page.', 'rank-math' ) ),
+			'max-snippet'       => __( 'Snippet', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Specify a maximum text-length, in characters, of a snippet for your page.', 'seo-by-rank-math' ) ),
+			'max-video-preview' => __( 'Video Preview', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Specify a maximum duration in seconds of an animated video preview.', 'seo-by-rank-math' ) ),
+			'max-image-preview' => __( 'Image Preview', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Specify a maximum size of image preview to be shown for images on this page.', 'seo-by-rank-math' ) ),
 		];
 
 		echo '<ul class="cmb-advanced-robots-list no-select-all cmb2-list cmb-rank-math-advanced-robots-field">';
@@ -320,9 +320,9 @@ class CMB2_Fields implements Runner {
 	 */
 	private function get_image_sizes( $size = 'large' ) {
 		$values  = [
-			'large'    => __( 'Large', 'rank-math' ),
-			'standard' => __( 'Standard', 'rank-math' ),
-			'none'     => __( 'None', 'rank-math' ),
+			'large'    => __( 'Large', 'seo-by-rank-math' ),
+			'standard' => __( 'Standard', 'seo-by-rank-math' ),
+			'none'     => __( 'None', 'seo-by-rank-math' ),
 		];
 		$options = '';
 		foreach ( $values as $data => $label ) {

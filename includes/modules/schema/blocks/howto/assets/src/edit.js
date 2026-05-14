@@ -164,7 +164,7 @@ export default ( props ) => {
 								open={ open }
 								addButtonLabel={ __(
 									'Add Final Image',
-									'rank-math'
+									'seo-by-rank-math'
 								) }
 								removeImage={ () => {
 									removeImage( props )
@@ -187,7 +187,7 @@ export default ( props ) => {
 					} }
 					placeholder={ __(
 						'Enter a main description',
-						'rank-math'
+						'seo-by-rank-math'
 					) }
 				/>
 
@@ -197,7 +197,7 @@ export default ( props ) => {
 							'components-base-control rank-math-howto-duration-label'
 						}
 					>
-						<span>{ __( 'Duration', 'rank-math' ) }</span>
+						<span>{ __( 'Duration', 'seo-by-rank-math' ) }</span>
 
 						<ToggleControl
 							checked={ attributes.hasDuration }
@@ -216,7 +216,7 @@ export default ( props ) => {
 					>
 						<TextControl
 							value={ attributes.timeLabel }
-							placeholder={ __( 'Total time:', 'rank-math' ) }
+							placeholder={ __( 'Total time:', 'seo-by-rank-math' ) }
 							onChange={ ( timeLabel ) => {
 								setAttributes( { timeLabel } )
 							} }
@@ -227,7 +227,7 @@ export default ( props ) => {
 						<TextControl
 							type="number"
 							value={ attributes.days }
-							placeholder={ __( 'DD', 'rank-math' ) }
+							placeholder={ __( 'DD', 'seo-by-rank-math' ) }
 							onChange={ ( days ) => {
 								setAttributes( { days } )
 							} }
@@ -238,7 +238,7 @@ export default ( props ) => {
 						<TextControl
 							type="number"
 							value={ attributes.hours }
-							placeholder={ __( 'HH', 'rank-math' ) }
+							placeholder={ __( 'HH', 'seo-by-rank-math' ) }
 							onChange={ ( hours ) => {
 								setAttributes( { hours } )
 							} }
@@ -249,7 +249,7 @@ export default ( props ) => {
 						<TextControl
 							type="number"
 							value={ attributes.minutes }
-							placeholder={ __( 'MM', 'rank-math' ) }
+							placeholder={ __( 'MM', 'seo-by-rank-math' ) }
 							onChange={ ( minutes ) => {
 								setAttributes( { minutes } )
 							} }
@@ -266,7 +266,7 @@ export default ( props ) => {
 					>
 						{ __(
 							'Optional, use first field to describe the duration.',
-							'rank-math'
+							'seo-by-rank-math'
 						) }
 					</div>
 				</div>
@@ -281,12 +281,12 @@ export default ( props ) => {
 						addNew( props )
 					} }
 				>
-					{ __( 'Add New Step', 'rank-math' ) }
+					{ __( 'Add New Step', 'seo-by-rank-math' ) }
 				</Button>
 
 				<a
 					href="http://rankmath.com/blog/howto-schema/"
-					title={ __( 'More Info', 'rank-math' ) }
+					title={ __( 'More Info', 'seo-by-rank-math' ) }
 					target="_blank"
 					rel="noopener noreferrer"
 					className={ 'rank-math-block-info' }

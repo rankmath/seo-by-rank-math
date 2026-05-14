@@ -73,11 +73,11 @@ class Metabox {
 			// Delete.
 			if ( ! empty( $cmb->data_to_save['redirection_id'] ) ) {
 				DB::delete( $cmb->data_to_save['redirection_id'] );
-				Helper::add_notification( esc_html__( 'Redirection successfully deleted.', 'rank-math' ), [ 'type' => 'info' ] );
+				Helper::add_notification( esc_html__( 'Redirection successfully deleted.', 'seo-by-rank-math' ), [ 'type' => 'info' ] );
 			}
 			return [
 				'action'  => 'delete',
-				'message' => esc_html__( 'Redirection successfully deleted.', 'rank-math' ),
+				'message' => esc_html__( 'Redirection successfully deleted.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -85,7 +85,7 @@ class Metabox {
 		if ( ! $this->can_update( $cmb->data_to_save ) ) {
 			return [
 				'action'  => 'cant_update',
-				'message' => esc_html__( 'Can\'t update redirection.', 'rank-math' ),
+				'message' => esc_html__( 'Can\'t update redirection.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -107,15 +107,15 @@ class Metabox {
 
 		$response = [
 			'action'  => 'update',
-			'message' => esc_html__( 'Redirection updated successfully.', 'rank-math' ),
+			'message' => esc_html__( 'Redirection updated successfully.', 'seo-by-rank-math' ),
 		];
 
 		if ( $redirection->is_new() ) {
-			Helper::add_notification( esc_html__( 'New redirection created.', 'rank-math' ) );
+			Helper::add_notification( esc_html__( 'New redirection created.', 'seo-by-rank-math' ) );
 			$response = [
 				'id'      => $redirection->get_id(),
 				'action'  => 'new',
-				'message' => esc_html__( 'New redirection created.', 'rank-math' ),
+				'message' => esc_html__( 'New redirection created.', 'seo-by-rank-math' ),
 			];
 		}
 

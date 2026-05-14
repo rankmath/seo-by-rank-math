@@ -352,13 +352,13 @@ class Api {
 			return;
 		}
 
-		$message     = __( 'Unknown error.', 'rank-math' );
+		$message     = __( 'Unknown error.', 'seo-by-rank-math' );
 		$message_map = [
-			400 => __( 'Invalid request.', 'rank-math' ),
-			403 => __( 'Invalid API key.', 'rank-math' ),
-			422 => __( 'Invalid URL.', 'rank-math' ),
-			429 => __( 'Too many requests.', 'rank-math' ),
-			500 => __( 'Internal server error.', 'rank-math' ),
+			400 => __( 'Invalid request.', 'seo-by-rank-math' ),
+			403 => __( 'Invalid API key.', 'seo-by-rank-math' ),
+			422 => __( 'Invalid URL.', 'seo-by-rank-math' ),
+			429 => __( 'Too many requests.', 'seo-by-rank-math' ),
+			500 => __( 'Internal server error.', 'seo-by-rank-math' ),
 		];
 
 		if ( isset( $message_map[ $this->last_code ] ) ) {

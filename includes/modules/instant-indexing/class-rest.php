@@ -52,7 +52,7 @@ class Rest extends WP_REST_Controller {
 					'permission_callback' => [ $this, 'has_permission' ],
 					'args'                => [
 						'urls' => [
-							'description' => __( 'The list of urls to submit to the Instant Indexing API.', 'rank-math' ),
+							'description' => __( 'The list of urls to submit to the Instant Indexing API.', 'seo-by-rank-math' ),
 							'type'        => 'string',
 							'required'    => true,
 						],
@@ -71,7 +71,7 @@ class Rest extends WP_REST_Controller {
 					'permission_callback' => [ $this, 'has_permission' ],
 					'args'                => [
 						'filter' => [
-							'description' => __( 'Filter log by type.', 'rank-math' ),
+							'description' => __( 'Filter log by type.', 'seo-by-rank-math' ),
 							'type'        => 'string',
 							'enum'        => [ 'all', 'manual', 'auto' ],
 							'default'     => 'all',
@@ -91,7 +91,7 @@ class Rest extends WP_REST_Controller {
 					'permission_callback' => [ $this, 'has_permission' ],
 					'args'                => [
 						'filter' => [
-							'description' => __( 'Clear log by type.', 'rank-math' ),
+							'description' => __( 'Clear log by type.', 'seo-by-rank-math' ),
 							'type'        => 'string',
 							'enum'        => [ 'all', 'manual', 'auto' ],
 							'default'     => 'all',
@@ -124,19 +124,19 @@ class Rest extends WP_REST_Controller {
 	public function submit_urls( WP_REST_Request $request ) {
 		$urls = $request->get_param( 'urls' );
 		if ( empty( $urls ) ) {
-			return new WP_Error( 'empty_urls', __( 'No URLs provided.', 'rank-math' ) );
+			return new WP_Error( 'empty_urls', __( 'No URLs provided.', 'seo-by-rank-math' ) );
 		}
 
 		$urls = Arr::from_string( $urls, "\n" );
 		$urls = array_values( array_unique( array_filter( $urls, 'wp_http_validate_url' ) ) );
 
 		if ( ! $urls ) {
-			return new WP_Error( 'invalid_urls', __( 'Invalid URLs provided.', 'rank-math' ) );
+			return new WP_Error( 'invalid_urls', __( 'Invalid URLs provided.', 'seo-by-rank-math' ) );
 		}
 
 		$result = Api::get()->submit( $urls );
 		if ( ! $result ) {
-			return new WP_Error( 'submit_failed', __( 'Failed to submit URLs. See details in the History tab.', 'rank-math' ) );
+			return new WP_Error( 'submit_failed', __( 'Failed to submit URLs. See details in the History tab.', 'seo-by-rank-math' ) );
 		}
 
 		$urls_number = count( $urls );
@@ -149,7 +149,7 @@ class Rest extends WP_REST_Controller {
 						'Successfully submitted %s URL.',
 						'Successfully submitted %s URLs.',
 						$urls_number,
-						'rank-math'
+						'seo-by-rank-math'
 					),
 					$urls_number
 				),
@@ -171,7 +171,7 @@ class Rest extends WP_REST_Controller {
 		foreach ( $result as $key => $value ) {
 			$result[ $key ]['timeFormatted'] = wp_date( 'Y-m-d H:i:s', $value['time'] );
 			// Translators: placeholder is human-readable time, e.g. "1 hour".
-			$result[ $key ]['timeHumanReadable'] = sprintf( __( '%s ago', 'rank-math' ), human_time_diff( $value['time'] ) );
+			$result[ $key ]['timeHumanReadable'] = sprintf( __( '%s ago', 'seo-by-rank-math' ), human_time_diff( $value['time'] ) );
 
 			if ( 'manual' === $filter && empty( $result[ $key ]['manual_submission'] ) ) {
 				unset( $result[ $key ] );

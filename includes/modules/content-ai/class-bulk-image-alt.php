@@ -51,7 +51,7 @@ class Bulk_Image_Alt extends \WP_Background_Process {
 	 */
 	public function start( $data ) {
 		Helper::add_notification(
-			esc_html__( 'Bulk image alt generation started. It might take few minutes to complete the process.', 'rank-math' ),
+			esc_html__( 'Bulk image alt generation started. It might take few minutes to complete the process.', 'seo-by-rank-math' ),
 			[
 				'type'    => 'success',
 				'id'      => 'rank_math_content_ai_posts_started',
@@ -106,7 +106,7 @@ class Bulk_Image_Alt extends \WP_Background_Process {
 		delete_option( 'rank_math_content_ai_posts_processed' );
 		Helper::add_notification(
 			// Translators: placeholder is the number of modified posts.
-			sprintf( _n( 'Image alt attributes successfully updated in %d post.', 'Image alt attributes successfully updated in %d posts.', count( $posts ), 'rank-math' ), count( $posts ) ),
+			sprintf( _n( 'Image alt attributes successfully updated in %d post.', 'Image alt attributes successfully updated in %d posts.', count( $posts ), 'seo-by-rank-math' ), count( $posts ) ),
 			[
 				'type'    => 'success',
 				'id'      => 'rank_math_content_ai_posts',
@@ -136,7 +136,7 @@ class Bulk_Image_Alt extends \WP_Background_Process {
 
 			// Early bail if API returns and error.
 			if ( ! empty( $api_output['error'] ) ) {
-				$notice = ! empty( $api_output['message'] ) ? $api_output['message'] : esc_html__( 'Bulk image alt generation failed.', 'rank-math' );
+				$notice = ! empty( $api_output['message'] ) ? $api_output['message'] : esc_html__( 'Bulk image alt generation failed.', 'seo-by-rank-math' );
 				Helper::add_notification(
 					$notice,
 					[
@@ -171,7 +171,7 @@ class Bulk_Image_Alt extends \WP_Background_Process {
 				delete_option( 'rank_math_content_ai_posts_processed' );
 				Helper::add_notification(
 					// Translators: placeholder is the number of modified posts.
-					sprintf( esc_html__( 'Image alt attributes successfully updated in %d posts. The process was stopped as you have reached the monthly limit for this feature.', 'rank-math' ), (int) $posts_processed ),
+					sprintf( esc_html__( 'Image alt attributes successfully updated in %d posts. The process was stopped as you have reached the monthly limit for this feature.', 'seo-by-rank-math' ), (int) $posts_processed ),
 					[
 						'type'    => 'success',
 						'id'      => 'rank_math_content_ai_posts',

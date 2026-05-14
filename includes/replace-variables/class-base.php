@@ -158,7 +158,7 @@ class Base {
 			$this->post = new \WP_Post(
 				(object) [
 					'ID'         => 0,
-					'post_title' => __( 'Example Post title', 'rank-math' ),
+					'post_title' => __( 'Example Post title', 'seo-by-rank-math' ),
 				]
 			);
 		}
@@ -316,12 +316,12 @@ class Base {
 	 */
 	private function is_unique_id( $id ) {
 		if ( false === preg_match( '`^[A-Z0-9_-]+$`i', $id ) ) {
-			trigger_error( esc_html__( 'Variable names can only contain alphanumeric characters, underscores and dashes.', 'rank-math' ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+			trigger_error( esc_html__( 'Variable names can only contain alphanumeric characters, underscores and dashes.', 'seo-by-rank-math' ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 			return false;
 		}
 
 		if ( isset( $this->replacements[ $id ] ) ) {
-			trigger_error( esc_html__( 'The variable has already been registered.', 'rank-math' ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+			trigger_error( esc_html__( 'The variable has already been registered.', 'seo-by-rank-math' ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 			return false;
 		}
 

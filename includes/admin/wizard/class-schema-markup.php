@@ -31,7 +31,7 @@ class Schema_Markup implements Wizard_Step {
 				'rich_snippet'        => Helper::is_module_active( 'rich-snippet' ),
 				'accessiblePostTypes' => Helper::get_accessible_post_types(),
 				'knowledgegraph_type' => Helper::get_settings( 'titles.knowledgegraph_type' ),
-				'schemaTypes'         => Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ) ),
+				'schemaTypes'         => Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'seo-by-rank-math' ) ),
 				'reviewPosts'         => Helper::get_review_posts(),
 			]
 		);

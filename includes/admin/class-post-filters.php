@@ -166,12 +166,12 @@ class Post_Filters implements Runner {
 		}
 
 		$options = [
-			''          => esc_html__( 'Rank Math', 'rank-math' ),
-			'great-seo' => esc_html__( 'SEO Score: Good', 'rank-math' ),
-			'good-seo'  => esc_html__( 'SEO Score: Ok', 'rank-math' ),
-			'bad-seo'   => esc_html__( 'SEO Score: Bad', 'rank-math' ),
-			'empty-fk'  => esc_html__( 'Focus Keyword Not Set', 'rank-math' ),
-			'noindexed' => esc_html__( 'Articles noindexed', 'rank-math' ),
+			''          => esc_html__( 'Rank Math', 'seo-by-rank-math' ),
+			'great-seo' => esc_html__( 'SEO Score: Good', 'seo-by-rank-math' ),
+			'good-seo'  => esc_html__( 'SEO Score: Ok', 'seo-by-rank-math' ),
+			'bad-seo'   => esc_html__( 'SEO Score: Bad', 'seo-by-rank-math' ),
+			'empty-fk'  => esc_html__( 'Focus Keyword Not Set', 'seo-by-rank-math' ),
+			'noindexed' => esc_html__( 'Articles noindexed', 'seo-by-rank-math' ),
 		];
 
 		$options = $this->do_filter( 'manage_posts/seo_filter_options', $options, $post_type );
@@ -217,7 +217,7 @@ class Post_Filters implements Runner {
 				]
 			),
 			$current,
-			esc_html__( 'Pillar Content', 'rank-math' ),
+			esc_html__( 'Pillar Content', 'seo-by-rank-math' ),
 			number_format_i18n( count( $pillars ) )
 		);
 

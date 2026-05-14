@@ -17,21 +17,21 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Service Type', 'rank-math' ),
+		esc_html__( 'Service Type', 'seo-by-rank-math' ),
 		'serviceType'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Price', 'rank-math' ),
+		esc_html__( 'Price', 'seo-by-rank-math' ),
 		'offers.price'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Currency', 'rank-math' ),
+		esc_html__( 'Currency', 'seo-by-rank-math' ),
 		'offers.priceCurrency'
 	);
 	?>

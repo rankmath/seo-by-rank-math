@@ -83,31 +83,31 @@ trait Schema {
 	 */
 	public static function sanitize_schema_title( $schema, $translate = true ) {
 		if ( in_array( $schema, [ 'BlogPosting', 'NewsArticle' ], true ) ) {
-			return $translate ? esc_html__( 'Article', 'rank-math' ) : esc_html( 'Article' );
+			return $translate ? esc_html__( 'Article', 'seo-by-rank-math' ) : esc_html( 'Article' );
 		}
 
 		if ( 'WooCommerceProduct' === $schema ) {
-			return $translate ? esc_html__( 'WooCommerce Product', 'rank-math' ) : esc_html( 'WooCommerce Product' );
+			return $translate ? esc_html__( 'WooCommerce Product', 'seo-by-rank-math' ) : esc_html( 'WooCommerce Product' );
 		}
 
 		if ( 'EDDProduct' === $schema ) {
-			return $translate ? esc_html__( 'EDD Product', 'rank-math' ) : esc_html( 'EDD Product' );
+			return $translate ? esc_html__( 'EDD Product', 'seo-by-rank-math' ) : esc_html( 'EDD Product' );
 		}
 
 		if ( 'VideoObject' === $schema ) {
-			return $translate ? esc_html__( 'Video', 'rank-math' ) : esc_html( 'Video' );
+			return $translate ? esc_html__( 'Video', 'seo-by-rank-math' ) : esc_html( 'Video' );
 		}
 
 		if ( 'JobPosting' === $schema ) {
-			return $translate ? esc_html__( 'Job Posting', 'rank-math' ) : esc_html( 'Job Posting' );
+			return $translate ? esc_html__( 'Job Posting', 'seo-by-rank-math' ) : esc_html( 'Job Posting' );
 		}
 
 		if ( 'SoftwareApplication' === $schema ) {
-			return $translate ? esc_html__( 'Software Application', 'rank-math' ) : esc_html( 'Software Application' );
+			return $translate ? esc_html__( 'Software Application', 'seo-by-rank-math' ) : esc_html( 'Software Application' );
 		}
 
 		if ( 'MusicGroup' === $schema || 'MusicAlbum' === $schema ) {
-			return $translate ? esc_html__( 'Music', 'rank-math' ) : esc_html( 'Music' );
+			return $translate ? esc_html__( 'Music', 'seo-by-rank-math' ) : esc_html( 'Music' );
 		}
 
 		return $schema;

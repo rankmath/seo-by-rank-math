@@ -51,7 +51,7 @@ class Dashboard_Widget {
 
 		wp_add_dashboard_widget(
 			'rank_math_dashboard_widget',
-			$icon . esc_html__( 'Rank Math Overview', 'rank-math' ),
+			$icon . esc_html__( 'Rank Math Overview', 'seo-by-rank-math' ),
 			[ $this, 'render_dashboard_widget' ],
 			null,
 			null,
@@ -73,9 +73,9 @@ class Dashboard_Widget {
 	public function dashboard_widget_feed() {
 		$posts = $this->get_feed();
 		?>
-		<h3 class="rank-math-blog-title"><?php esc_html_e( 'Latest Blog Posts from Rank Math', 'rank-math' ); ?></h3>
+		<h3 class="rank-math-blog-title"><?php esc_html_e( 'Latest Blog Posts from Rank Math', 'seo-by-rank-math' ); ?></h3>
 		<?php if ( empty( $posts ) ) : ?>
-			<p><?php esc_html_e( 'Error: the Rank Math blog feed could not be downloaded.', 'rank-math' ); ?></p>
+			<p><?php esc_html_e( 'Error: the Rank Math blog feed could not be downloaded.', 'seo-by-rank-math' ); ?></p>
 			<?php
 			return;
 		endif;
@@ -117,7 +117,7 @@ class Dashboard_Widget {
 
 		$is_new = time() - strtotime( $posts[0]['date'] ) < 15 * DAY_IN_SECONDS;
 		if ( $is_new && empty( $label ) ) {
-			$label = esc_html__( 'NEW', 'rank-math' );
+			$label = esc_html__( 'NEW', 'seo-by-rank-math' );
 		}
 
 		return $label;
@@ -171,19 +171,19 @@ class Dashboard_Widget {
 		?>
 		<div class="rank-math-widget-footer">
 			<a target="_blank" href="<?php KB::the( 'blog', 'Dashboard Widget Blog' ); ?>">
-				<?php esc_html_e( 'Blog', 'rank-math' ); ?>
-				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
+				<?php esc_html_e( 'Blog', 'seo-by-rank-math' ); ?>
+				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'seo-by-rank-math' ); ?></span>
 				<span aria-hidden="true" class="dashicons dashicons-external"></span>
 			</a>
 			<a target="_blank" href="<?php KB::the( 'knowledgebase', 'Dashboard Widget Help' ); ?>">
-				<?php esc_html_e( 'Help', 'rank-math' ); ?>
-				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
+				<?php esc_html_e( 'Help', 'seo-by-rank-math' ); ?>
+				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'seo-by-rank-math' ); ?></span>
 				<span aria-hidden="true" class="dashicons dashicons-external"></span>
 			</a>
 			<?php if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) { ?>
 				<a target="_blank" href="<?php KB::the( 'pro', 'Dashboard Widget PRO' ); ?>" class="rank-math-widget-go-pro">
-					<?php esc_html_e( 'Go Pro', 'rank-math' ); ?>
-					<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'rank-math' ); ?></span>
+					<?php esc_html_e( 'Go Pro', 'seo-by-rank-math' ); ?>
+					<span class="screen-reader-text"><?php esc_html_e( '(opens in a new window)', 'seo-by-rank-math' ); ?></span>
 					<span aria-hidden="true" class="dashicons dashicons-external"></span>
 				</a>
 			<?php } ?>

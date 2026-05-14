@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 	<tbody>
 		<tr class="top">
 			<td align="left">
-				<a href="<?php KB::the( 'seo-email-reporting', 'Email Report CTA' ); ?>"><?php $this->image( 'rank-math-pro.jpg', 540, 422, __( 'Rank Math PRO', 'rank-math' ) ); ?></a>
+				<a href="<?php KB::the( 'seo-email-reporting', 'Email Report CTA' ); ?>"><?php $this->image( 'rank-math-pro.jpg', 540, 422, __( 'Rank Math PRO', 'seo-by-rank-math' ) ); ?></a>
 			</td>
 		</tr>
 	</tbody>

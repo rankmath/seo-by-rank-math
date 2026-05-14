@@ -122,14 +122,14 @@ export default ( props ) => {
 						addNew( props )
 					} }
 				>
-					{ __( 'Add New FAQ', 'rank-math' ) }
+					{ __( 'Add New FAQ', 'seo-by-rank-math' ) }
 				</Button>
 
 				<a
 					href={ getLink( 'faq-schema-block', 'Add New FAQ' ) }
 					rel="noopener noreferrer"
 					target="_blank"
-					title={ __( 'More Info', 'rank-math' ) }
+					title={ __( 'More Info', 'seo-by-rank-math' ) }
 					className={ 'rank-math-block-info' }
 				>
 					<Dashicon icon="info" />

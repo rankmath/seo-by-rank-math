@@ -34,22 +34,22 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 
 	return (
 		<InspectorControls key={ 'inspector' }>
-			<PanelBody title={ __( 'FAQ Options', 'rank-math' ) }>
+			<PanelBody title={ __( 'FAQ Options', 'seo-by-rank-math' ) }>
 				<SelectControl
-					label={ __( 'List Style', 'rank-math' ) }
+					label={ __( 'List Style', 'seo-by-rank-math' ) }
 					value={ attributes.listStyle }
 					options={ [
 						{
 							value: '',
-							label: __( 'None', 'rank-math' ),
+							label: __( 'None', 'seo-by-rank-math' ),
 						},
 						{
 							value: 'numbered',
-							label: __( 'Numbered', 'rank-math' ),
+							label: __( 'Numbered', 'seo-by-rank-math' ),
 						},
 						{
 							value: 'unordered',
-							label: __( 'Unordered', 'rank-math' ),
+							label: __( 'Unordered', 'seo-by-rank-math' ),
 						},
 					] }
 					onChange={ ( listStyle ) => {
@@ -60,16 +60,16 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 				/>
 
 				<SelectControl
-					label={ __( 'Title Wrapper', 'rank-math' ) }
+					label={ __( 'Title Wrapper', 'seo-by-rank-math' ) }
 					value={ attributes.titleWrapper }
 					options={ [
-						{ value: 'h2', label: __( 'H2', 'rank-math' ) },
-						{ value: 'h3', label: __( 'H3', 'rank-math' ) },
-						{ value: 'h4', label: __( 'H4', 'rank-math' ) },
-						{ value: 'h5', label: __( 'H5', 'rank-math' ) },
-						{ value: 'h6', label: __( 'H6', 'rank-math' ) },
-						{ value: 'p', label: __( 'P', 'rank-math' ) },
-						{ value: 'div', label: __( 'DIV', 'rank-math' ) },
+						{ value: 'h2', label: __( 'H2', 'seo-by-rank-math' ) },
+						{ value: 'h3', label: __( 'H3', 'seo-by-rank-math' ) },
+						{ value: 'h4', label: __( 'H4', 'seo-by-rank-math' ) },
+						{ value: 'h5', label: __( 'H5', 'seo-by-rank-math' ) },
+						{ value: 'h6', label: __( 'H6', 'seo-by-rank-math' ) },
+						{ value: 'p', label: __( 'P', 'seo-by-rank-math' ) },
+						{ value: 'div', label: __( 'DIV', 'seo-by-rank-math' ) },
 					] }
 					onChange={ ( titleWrapper ) => {
 						setAttributes( { titleWrapper } )
@@ -79,7 +79,7 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 				/>
 
 				<SelectControl
-					label={ __( 'Image Size', 'rank-math' ) }
+					label={ __( 'Image Size', 'seo-by-rank-math' ) }
 					value={ attributes.sizeSlug }
 					options={ imageSizeOptions }
 					onChange={ ( sizeSlug ) => {
@@ -90,9 +90,9 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 				/>
 			</PanelBody>
 
-			<PanelBody title={ __( 'Styling Options', 'rank-math' ) }>
+			<PanelBody title={ __( 'Styling Options', 'seo-by-rank-math' ) }>
 				<TextControl
-					label={ __( 'Title Wrapper CSS Class(es)', 'rank-math' ) }
+					label={ __( 'Title Wrapper CSS Class(es)', 'seo-by-rank-math' ) }
 					value={ attributes.titleCssClasses }
 					onChange={ ( titleCssClasses ) => {
 						setAttributes( { titleCssClasses } )
@@ -102,7 +102,7 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 				/>
 
 				<TextControl
-					label={ __( 'Content Wrapper CSS Class(es)', 'rank-math' ) }
+					label={ __( 'Content Wrapper CSS Class(es)', 'seo-by-rank-math' ) }
 					value={ attributes.contentCssClasses }
 					onChange={ ( contentCssClasses ) => {
 						setAttributes( { contentCssClasses } )
@@ -112,7 +112,7 @@ const Inspector = ( { imageSizes, attributes, setAttributes } ) => {
 				/>
 
 				<TextControl
-					label={ __( 'List CSS Class(es)', 'rank-math' ) }
+					label={ __( 'List CSS Class(es)', 'seo-by-rank-math' ) }
 					value={ attributes.listCssClasses }
 					onChange={ ( listCssClasses ) => {
 						setAttributes( { listCssClasses } )

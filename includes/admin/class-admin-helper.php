@@ -93,7 +93,7 @@ class Admin_Helper {
 		$args       = wp_parse_args( $args, [ 'public' => true ] );
 		$taxonomies = wp_filter_object_list( $wp_taxonomies, $args, 'and', 'label' );
 
-		return empty( $taxonomies ) ? false : [ 'off' => esc_html__( 'None', 'rank-math' ) ] + $taxonomies;
+		return empty( $taxonomies ) ? false : [ 'off' => esc_html__( 'None', 'seo-by-rank-math' ) ] + $taxonomies;
 	}
 
 	/**
@@ -151,12 +151,12 @@ class Admin_Helper {
 
 			// Ask the user to reconnect.
 			Helper::add_notification(
-				__( 'Unable to validate Rank Math SEO registration data.', 'rank-math' ) .
-				' <a href="' . esc_url( self::get_activate_url() ) . '">' . __( 'Please try reconnecting.', 'rank-math' ) . '</a> ' .
+				__( 'Unable to validate Rank Math SEO registration data.', 'seo-by-rank-math' ) .
+				' <a href="' . esc_url( self::get_activate_url() ) . '">' . __( 'Please try reconnecting.', 'seo-by-rank-math' ) . '</a> ' .
 				sprintf(
 					/* translators: KB Link */
-					__( 'If the issue persists, please try the solution described in our Knowledge Base article: %s', 'rank-math' ),
-					'<a href="' . KB::get( 'unable-to-encrypt', 'Registration Data' ) . '" target="_blank">' . __( '[3. Unable to Encrypt]', 'rank-math' ) . '</a>'
+					__( 'If the issue persists, please try the solution described in our Knowledge Base article: %s', 'seo-by-rank-math' ),
+					'<a href="' . KB::get( 'unable-to-encrypt', 'Registration Data' ) . '" target="_blank">' . __( '[3. Unable to Encrypt]', 'seo-by-rank-math' ) . '</a>'
 				),
 				[ 'type' => 'error' ]
 			);
@@ -169,7 +169,7 @@ class Admin_Helper {
 		 */
 		$do_url_check = apply_filters( 'rank_math/registration/do_url_check', ! get_option( 'rank_math_siteurl_mismatch_notice_dismissed' ) );
 		if ( $do_url_check && isset( $options['site_url'] ) && Helper::get_home_url() !== $options['site_url'] ) {
-			$message = esc_html__( 'Seems like your site URL has changed since you connected to Rank Math.', 'rank-math' ) . ' <a href="' . self::get_activate_url() . '">' . esc_html__( 'Click here to reconnect.', 'rank-math' ) . '</a>';
+			$message = esc_html__( 'Seems like your site URL has changed since you connected to Rank Math.', 'seo-by-rank-math' ) . ' <a href="' . self::get_activate_url() . '">' . esc_html__( 'Click here to reconnect.', 'seo-by-rank-math' ) . '</a>';
 			Helper::add_notification(
 				$message,
 				[
@@ -421,10 +421,10 @@ class Admin_Helper {
 				<?php
 				printf(
 					// Translators: 1 is "WordPress Address (URL)", 2 is "Site Address (URL)", 3 is a link to the General Settings, with "WordPress General Settings" as anchor text.
-					esc_html__( 'Rank Math cannot be connected because your site URL doesn\'t appear to be a valid URL. If the domain name contains special characters, please make sure to use the encoded version in the %1$s &amp; %2$s fields on the %3$s page.', 'rank-math' ),
-					'<strong>' . esc_html__( 'WordPress Address (URL)', 'rank-math' ) . '</strong>',
-					'<strong>' . esc_html__( 'Site Address (URL)', 'rank-math' ) . '</strong>',
-					'<a href="' . esc_url( admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'WordPress General Settings', 'rank-math' ) . '</a>'
+					esc_html__( 'Rank Math cannot be connected because your site URL doesn\'t appear to be a valid URL. If the domain name contains special characters, please make sure to use the encoded version in the %1$s &amp; %2$s fields on the %3$s page.', 'seo-by-rank-math' ),
+					'<strong>' . esc_html__( 'WordPress Address (URL)', 'seo-by-rank-math' ) . '</strong>',
+					'<strong>' . esc_html__( 'Site Address (URL)', 'seo-by-rank-math' ) . '</strong>',
+					'<a href="' . esc_url( admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'WordPress General Settings', 'seo-by-rank-math' ) . '</a>'
 				);
 				?>
 			</p>

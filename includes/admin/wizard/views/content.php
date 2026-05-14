@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 	<head>
 		<meta name="viewport" content="width=device-width"/>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<title><?php esc_html_e( 'Setup Wizard - Rank Math', 'rank-math' ); ?></title>
+		<title><?php esc_html_e( 'Setup Wizard - Rank Math', 'seo-by-rank-math' ); ?></title>
 		<?php wp_print_head_scripts(); ?>
 		<?php wp_print_styles( 'rank-math-wizard' ); ?>
 	</head>

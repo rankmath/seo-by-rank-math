@@ -46,7 +46,7 @@ class Watcher implements Runner {
 		}
 
 		if ( ! current_user_can( 'deactivate_plugins' ) ) {
-			wp_die( esc_html__( 'Sorry, you are not allowed to deactivate plugins for this site.', 'rank-math' ) );
+			wp_die( esc_html__( 'Sorry, you are not allowed to deactivate plugins for this site.', 'seo-by-rank-math' ) );
 		}
 
 		check_admin_referer( 'rank_math_deactivate_plugins' );
@@ -122,7 +122,7 @@ class Watcher implements Runner {
 				if ( ! current_user_can( 'deactivate_plugin', $plugin ) ) {
 					$message = sprintf(
 						/* translators: plugin name */
-						esc_html__( 'You are not allowed to deactivate this plugin: %s.', 'rank-math' ),
+						esc_html__( 'You are not allowed to deactivate this plugin: %s.', 'seo-by-rank-math' ),
 						esc_html( $plugin )
 					);
 					GlobalHelper::add_notification(
@@ -147,17 +147,17 @@ class Watcher implements Runner {
 	 * @param string $group Plugin group.
 	 */
 	private static function set_notification( $group ) {
-		$message = esc_html__( 'Please keep only one SEO plugin active, otherwise, you might lose your rankings and traffic.', 'rank-math' );
+		$message = esc_html__( 'Please keep only one SEO plugin active, otherwise, you might lose your rankings and traffic.', 'seo-by-rank-math' );
 
 		if ( 'sitemap' === $group ) {
-			$message = esc_html__( 'Please keep only one Sitemap plugin active, otherwise, you might lose your rankings and traffic.', 'rank-math' );
+			$message = esc_html__( 'Please keep only one Sitemap plugin active, otherwise, you might lose your rankings and traffic.', 'seo-by-rank-math' );
 		}
 
 		if ( 'redirections' === $group ) {
-			$message = esc_html__( 'Please keep only one Redirection plugin active to avoid redirect conflicts or unexpected behavior.', 'rank-math' );
+			$message = esc_html__( 'Please keep only one Redirection plugin active to avoid redirect conflicts or unexpected behavior.', 'seo-by-rank-math' );
 		}
 
-		$message .= ' <a href="###DEACTIVATE_PLUGINS###">' . __( 'Click here to Deactivate', 'rank-math' ) . '</a>';
+		$message .= ' <a href="###DEACTIVATE_PLUGINS###">' . __( 'Click here to Deactivate', 'seo-by-rank-math' ) . '</a>';
 
 		GlobalHelper::add_notification(
 			$message,
@@ -261,7 +261,7 @@ class Watcher implements Runner {
 		GlobalHelper::add_notification(
 			sprintf(
 				// translators: %1$s: general reading settings URL.
-				__( '<strong>SEO Notice</strong>: Your site is set to No Index and will not appear in search engines. You can change the Search engine visibility <a href="%1$s">from here</a>.', 'rank-math' ),
+				__( '<strong>SEO Notice</strong>: Your site is set to No Index and will not appear in search engines. You can change the Search engine visibility <a href="%1$s">from here</a>.', 'seo-by-rank-math' ),
 				admin_url( 'options-reading.php' )
 			),
 			[

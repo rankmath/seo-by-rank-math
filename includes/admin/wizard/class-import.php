@@ -81,14 +81,14 @@ class Import implements Wizard_Step {
 	 */
 	private function get_choice_description( $slug, $plugin, $is_active ) {
 		/* translators: 1 is plugin name */
-		$desc = 'aio-rich-snippet' === $slug ? esc_html__( 'Import meta data from the %1$s plugin.', 'rank-math' ) : esc_html__( 'Import settings and meta data from the %1$s plugin.', 'rank-math' );
+		$desc = 'aio-rich-snippet' === $slug ? esc_html__( 'Import meta data from the %1$s plugin.', 'seo-by-rank-math' ) : esc_html__( 'Import settings and meta data from the %1$s plugin.', 'seo-by-rank-math' );
 
 		/* translators: 2 is link to Knowledge Base article */
-		$desc .= ' ' . __( 'The process may take a few minutes if you have a large number of posts or pages <a href="%2$s" target="_blank">Learn more about the import process here.</a>', 'rank-math' );
+		$desc .= ' ' . __( 'The process may take a few minutes if you have a large number of posts or pages <a href="%2$s" target="_blank">Learn more about the import process here.</a>', 'seo-by-rank-math' );
 
 		if ( $is_active ) {
 			/* translators: 1 is plugin name */
-			$desc .= '<br>' . __( ' %1$s plugin will be disabled automatically moving forward to avoid conflicts. <strong>It is thus recommended to import the data you need now.</strong>', 'rank-math' );
+			$desc .= '<br>' . __( ' %1$s plugin will be disabled automatically moving forward to avoid conflicts. <strong>It is thus recommended to import the data you need now.</strong>', 'seo-by-rank-math' );
 		}
 
 		return sprintf( wp_kses_post( $desc ), $plugin['name'], KB::get( 'seo-import', 'SW Import Step' ) );

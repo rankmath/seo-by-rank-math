@@ -9,14 +9,14 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.269
+ * Version:           1.0.270
  * Plugin URI:        https://rankmath.com/
  * Description:       Rank Math SEO is the Best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic.
  * Author:            Rank Math SEO
  * Author URI:        https://rankmath.com/?utm_source=Plugin&utm_medium=Readme%20Author%20URI&utm_campaign=WP
  * License:           GPL-3.0+
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt
- * Text Domain:       rank-math
+ * Text Domain:       seo-by-rank-math
  * Domain Path:       /languages
  */
 
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.269';
+	public $version = '1.0.270';
 
 	/**
 	 * Rank Math database version.
@@ -198,13 +198,13 @@ final class RankMath {
 		// Check WordPress version.
 		if ( version_compare( get_bloginfo( 'version' ), $this->wordpress_version, '<' ) ) {
 			/* translators: WordPress Version */
-			$this->messages[] = sprintf( esc_html__( 'You are using the outdated WordPress, please update it to version %s or higher.', 'rank-math' ), $this->wordpress_version );
+			$this->messages[] = sprintf( esc_html__( 'You are using the outdated WordPress, please update it to version %s or higher.', 'seo-by-rank-math' ), $this->wordpress_version );
 		}
 
 		// Check PHP version.
 		if ( version_compare( phpversion(), $this->php_version, '<' ) ) {
 			/* translators: PHP Version */
-			$this->messages[] = sprintf( esc_html__( 'Rank Math requires PHP version %s or above. Please update PHP to run this plugin.', 'rank-math' ), $this->php_version );
+			$this->messages[] = sprintf( esc_html__( 'Rank Math requires PHP version %s or above. Please update PHP to run this plugin.', 'seo-by-rank-math' ), $this->php_version );
 		}
 
 		if ( empty( $this->messages ) ) {
@@ -311,8 +311,6 @@ final class RankMath {
 	 * Initialize WordPress action and filter hooks.
 	 */
 	private function init_actions() {
-		// Make sure it is loaded before setup_modules and load_modules.
-		add_action( 'after_setup_theme', [ $this, 'localization_setup' ], 1 );
 		add_action( 'init', [ $this, 'pass_admin_content' ] );
 
 		// Add plugin action links.
@@ -438,13 +436,13 @@ final class RankMath {
 	 */
 	public function plugin_action_links( $links ) {
 		$options = [
-			'options-general' => __( 'Settings', 'rank-math' ),
-			'wizard'          => __( 'Setup Wizard', 'rank-math' ),
+			'options-general' => __( 'Settings', 'seo-by-rank-math' ),
+			'wizard'          => __( 'Setup Wizard', 'seo-by-rank-math' ),
 		];
 
 		if ( $this->container['registration']->invalid ) {
 			$options = [
-				'registration' => __( 'Setup Wizard', 'rank-math' ),
+				'registration' => __( 'Setup Wizard', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -475,9 +473,9 @@ final class RankMath {
 		echo '<tr class="plugin-update-tr active rank-math-deactivate-notice-row" data-slug="" data-plugin="' . esc_attr( $file ) . '" style="position: relative; top: -1px;"><td colspan="' . esc_attr( $wp_list_table->get_column_count() ) . '" class="plugin-update colspanchange"><div class="notice inline notice-error notice-alt"><p>';
 		printf(
 		/* translators: 1. Bold text 2. Bold text */
-			esc_html__( '%1$s A filter to remove the Rank Math data from the database is present. Deactivating & Deleting this plugin will remove everything related to the Rank Math plugin. %2$s', 'rank-math' ),
-			'<strong>' . esc_html__( 'CAUTION:', 'rank-math' ) . '</strong>',
-			'<br /><strong>' . esc_html__( 'This action is IRREVERSIBLE.', 'rank-math' ) . '</strong>'
+			esc_html__( '%1$s A filter to remove the Rank Math data from the database is present. Deactivating & Deleting this plugin will remove everything related to the Rank Math plugin. %2$s', 'seo-by-rank-math' ),
+			'<strong>' . esc_html__( 'CAUTION:', 'seo-by-rank-math' ) . '</strong>',
+			'<br /><strong>' . esc_html__( 'This action is IRREVERSIBLE.', 'seo-by-rank-math' ) . '</strong>'
 		);
 		echo '</p></div></td></tr>';
 	}
@@ -495,31 +493,11 @@ final class RankMath {
 		}
 
 		$more = [
-			'<a href="' . admin_url( '?page=rank-math&view=help' ) . '">' . esc_html__( 'Getting Started', 'rank-math' ) . '</a>',
-			'<a href="' . \RankMath\KB::get( 'knowledgebase', 'Plugin Page KB Link' ) . '" target="_blank">' . esc_html__( 'Documentation', 'rank-math' ) . '</a>',
+			'<a href="' . admin_url( '?page=rank-math&view=help' ) . '">' . esc_html__( 'Getting Started', 'seo-by-rank-math' ) . '</a>',
+			'<a href="' . \RankMath\KB::get( 'knowledgebase', 'Plugin Page KB Link' ) . '" target="_blank">' . esc_html__( 'Documentation', 'seo-by-rank-math' ) . '</a>',
 		];
 
 		return array_merge( $links, $more );
-	}
-
-	/**
-	 * Initialize plugin for localization.
-	 *
-	 * Note: the first-loaded translation file overrides any following ones if the same translation is present.
-	 *
-	 * Locales found in:
-	 *     - WP_LANG_DIR/rank-math/rank-math-LOCALE.mo
-	 *     - WP_LANG_DIR/plugins/rank-math-LOCALE.mo
-	 */
-	public function localization_setup() {
-		$locale = get_user_locale();
-		$locale = apply_filters( 'plugin_locale', $locale, 'rank-math' ); // phpcs:ignore
-
-		unload_textdomain( 'rank-math' );
-		if ( false === load_textdomain( 'rank-math', WP_LANG_DIR . '/plugins/seo-by-rank-math-' . $locale . '.mo' ) ) {
-			load_textdomain( 'rank-math', WP_LANG_DIR . '/seo-by-rank-math/seo-by-rank-math-' . $locale . '.mo' );
-		}
-		load_plugin_textdomain( 'rank-math', false, rank_math()->plugin_dir() . 'languages/' );
 	}
 
 	/**

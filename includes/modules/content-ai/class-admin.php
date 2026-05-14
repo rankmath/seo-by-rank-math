@@ -84,9 +84,9 @@ class Admin {
 			[
 				'content-ai' => [
 					'icon'  => 'rm-icon rm-icon-content-ai',
-					'title' => esc_html__( 'Content AI', 'rank-math' ),
+					'title' => esc_html__( 'Content AI', 'seo-by-rank-math' ),
 					/* translators: Link to kb article */
-					'desc'  => sprintf( esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. %s.', 'rank-math' ), '<a href="' . KB::get( 'content-ai-settings', 'Options Panel Content AI Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+					'desc'  => sprintf( esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'content-ai-settings', 'Options Panel Content AI Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 					'file'  => __DIR__ . '/views/options.php',
 					'json'  => [
 						'countries'   => Helper::choices_contentai_countries(),
@@ -116,7 +116,7 @@ class Admin {
 		$cmb = new_cmb2_box(
 			[
 				'id'               => $id,
-				'title'            => esc_html__( 'Content AI', 'rank-math' ),
+				'title'            => esc_html__( 'Content AI', 'seo-by-rank-math' ),
 				'object_types'     => array_keys( Helper::get_accessible_post_types() ),
 				'context'          => 'side',
 				'priority'         => 'high',
@@ -139,15 +139,15 @@ class Admin {
 		$refresh_date = Helper::get_content_ai_refresh_date();
 		$content_ai   = [
 			'ca_plan'         => [
-				'label' => esc_html__( 'Content AI Plan', 'rank-math' ),
+				'label' => esc_html__( 'Content AI Plan', 'seo-by-rank-math' ),
 				'value' => \ucwords( Helper::get_content_ai_plan() ),
 			],
 			'ca_credits'      => [
-				'label' => esc_html__( 'Content AI Credits', 'rank-math' ),
+				'label' => esc_html__( 'Content AI Credits', 'seo-by-rank-math' ),
 				'value' => Helper::get_content_ai_credits(),
 			],
 			'ca_refresh_date' => [
-				'label' => esc_html__( 'Content AI Refresh Date', 'rank-math' ),
+				'label' => esc_html__( 'Content AI Refresh Date', 'seo-by-rank-math' ),
 				'value' => $refresh_date ? wp_date( 'Y-m-d g:i a', $refresh_date ) : '',
 			],
 		];

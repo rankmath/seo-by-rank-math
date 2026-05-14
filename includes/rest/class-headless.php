@@ -59,7 +59,7 @@ class Headless extends WP_REST_Controller {
 					'url' => [
 						'type'              => 'string',
 						'required'          => true,
-						'description'       => esc_html__( 'URL to get HTML tags for.', 'rank-math' ),
+						'description'       => esc_html__( 'URL to get HTML tags for.', 'seo-by-rank-math' ),
 						'validate_callback' => [ $this, 'is_valid_url' ],
 					],
 				],

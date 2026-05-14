@@ -54,7 +54,7 @@ class Question extends Component {
 						onChange={ ( newTitle ) => {
 							this.setQuestionProp( 'title', newTitle )
 						} }
-						placeholder={ __( 'Question…', 'rank-math' ) }
+						placeholder={ __( 'Question…', 'seo-by-rank-math' ) }
 					/>
 
 					<div className="rank-math-block-actions">
@@ -64,7 +64,7 @@ class Question extends Component {
 							className="rank-math-item-visbility"
 							icon={ visible ? 'visibility' : 'hidden' }
 							onClick={ this.toggleVisibility }
-							label={ __( 'Hide Question', 'rank-math' ) }
+							label={ __( 'Hide Question', 'seo-by-rank-math' ) }
 							showTooltip={ true }
 						/>
 
@@ -72,7 +72,7 @@ class Question extends Component {
 							icon="trash"
 							className="rank-math-item-delete"
 							onClick={ this.deleteQuestion }
-							label={ __( 'Delete Question', 'rank-math' ) }
+							label={ __( 'Delete Question', 'seo-by-rank-math' ) }
 							showTooltip={ true }
 						/>
 					</div>
@@ -88,7 +88,7 @@ class Question extends Component {
 						} }
 						placeholder={ __(
 							'Enter the answer to the question',
-							'rank-math'
+							'seo-by-rank-math'
 						) }
 					/>
 

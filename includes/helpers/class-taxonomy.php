@@ -148,7 +148,7 @@ trait Taxonomy {
 			return $taxonomies;
 		}
 
-		return empty( $taxonomies ) ? false : [ 'off' => esc_html__( 'None', 'rank-math' ) ] + wp_list_pluck( $taxonomies, 'label', 'name' );
+		return empty( $taxonomies ) ? false : [ 'off' => esc_html__( 'None', 'seo-by-rank-math' ) ] + wp_list_pluck( $taxonomies, 'label', 'name' );
 	}
 
 	/**

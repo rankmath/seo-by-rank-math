@@ -19,7 +19,7 @@ const MediaUploader = ( {
 	sizeSlug,
 	open,
 	removeImage,
-	addButtonLabel = __( 'Add Image', 'rank-math' ),
+	addButtonLabel = __( 'Add Image', 'seo-by-rank-math' ),
 } ) => {
 	return (
 		<div className="rank-math-media-placeholder">

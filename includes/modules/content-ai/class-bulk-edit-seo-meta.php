@@ -51,7 +51,7 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 	 */
 	public function start( $data ) {
 		Helper::add_notification(
-			esc_html__( 'Bulk editing SEO meta started. It might take few minutes to complete the process.', 'rank-math' ),
+			esc_html__( 'Bulk editing SEO meta started. It might take few minutes to complete the process.', 'seo-by-rank-math' ),
 			[
 				'type'    => 'success',
 				'id'      => 'rank_math_content_ai_posts_started',
@@ -109,7 +109,7 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 		delete_option( 'rank_math_content_ai_posts_processed' );
 		Helper::add_notification(
 			// Translators: placeholder is the number of modified items.
-			sprintf( _n( 'SEO meta successfully updated in %d item.', 'SEO meta successfully updated in %d items.', count( $posts ), 'rank-math' ), count( $posts ) ),
+			sprintf( _n( 'SEO meta successfully updated in %d item.', 'SEO meta successfully updated in %d items.', count( $posts ), 'seo-by-rank-math' ), count( $posts ) ),
 			[
 				'type'    => 'success',
 				'id'      => 'rank_math_content_ai_posts',
@@ -158,7 +158,7 @@ class Bulk_Edit_SEO_Meta extends \WP_Background_Process {
 				delete_option( 'rank_math_content_ai_posts_processed' );
 				Helper::add_notification(
 					// Translators: placeholder is the number of modified posts.
-					sprintf( esc_html__( 'SEO meta successfully updated in %d posts. The process was stopped as you have reached the monthly limit for this feature.', 'rank-math' ), (int) $posts_processed ),
+					sprintf( esc_html__( 'SEO meta successfully updated in %d posts. The process was stopped as you have reached the monthly limit for this feature.', 'seo-by-rank-math' ), (int) $posts_processed ),
 					[
 						'type'    => 'success',
 						'id'      => 'rank_math_content_ai_posts',

@@ -89,13 +89,13 @@ class Error_Log {
 			! $wp_filesystem->exists( $log_file ) ||
 			! $wp_filesystem->is_readable( $log_file )
 		) {
-			return esc_html__( 'The error log cannot be retrieved.', 'rank-math' );
+			return esc_html__( 'The error log cannot be retrieved.', 'seo-by-rank-math' );
 		}
 
 		// Error log must be smaller than 100 MB.
 		$size = $wp_filesystem->size( $log_file );
 		if ( $size > 100000000 ) {
-			return esc_html__( 'The error log cannot be retrieved: Error log file is too large.', 'rank-math' );
+			return esc_html__( 'The error log cannot be retrieved: Error log file is too large.', 'seo-by-rank-math' );
 		}
 
 		return false;

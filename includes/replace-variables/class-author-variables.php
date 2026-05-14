@@ -43,8 +43,8 @@ class Author_Variables extends Term_Variables {
 		$this->register_replacement(
 			'userid',
 			[
-				'name'        => esc_html__( 'Author ID', 'rank-math' ),
-				'description' => esc_html__( 'Author\'s user ID of the current post, page or author archive.', 'rank-math' ),
+				'name'        => esc_html__( 'Author ID', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Author\'s user ID of the current post, page or author archive.', 'seo-by-rank-math' ),
 				'variable'    => 'userid',
 				'example'     => $this->is_post_edit ? $post->post_author : $user_id,
 			],
@@ -54,8 +54,8 @@ class Author_Variables extends Term_Variables {
 		$this->register_replacement(
 			'name',
 			[
-				'name'        => esc_html__( 'Post Author', 'rank-math' ),
-				'description' => esc_html__( 'Display author\'s nicename of the current post, page or author archive.', 'rank-math' ),
+				'name'        => esc_html__( 'Post Author', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Display author\'s nicename of the current post, page or author archive.', 'seo-by-rank-math' ),
 				'variable'    => 'name',
 				'example'     => $this->is_post_edit && $author ? $author->display_name : get_the_author_meta( 'display_name', $user_id ),
 			],
@@ -65,8 +65,8 @@ class Author_Variables extends Term_Variables {
 		$this->register_replacement(
 			'post_author',
 			[
-				'name'        => esc_html__( 'Post Author', 'rank-math' ),
-				'description' => esc_html__( 'Display author\'s nicename of the current post, page or author archive.', 'rank-math' ),
+				'name'        => esc_html__( 'Post Author', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Display author\'s nicename of the current post, page or author archive.', 'seo-by-rank-math' ),
 				'variable'    => 'post_author',
 				'example'     => $this->is_post_edit && $author ? $author->display_name : get_the_author_meta( 'display_name', $user_id ),
 			],
@@ -76,8 +76,8 @@ class Author_Variables extends Term_Variables {
 		$this->register_replacement(
 			'user_description',
 			[
-				'name'        => esc_html__( 'Author Description', 'rank-math' ),
-				'description' => esc_html__( 'Author\'s biographical info of the current post, page or author archive.', 'rank-math' ),
+				'name'        => esc_html__( 'Author Description', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Author\'s biographical info of the current post, page or author archive.', 'seo-by-rank-math' ),
 				'variable'    => 'user_description',
 				'example'     => get_the_author_meta( 'description', $user_id ),
 			],

@@ -18,8 +18,8 @@ $cmb->add_field(
 	[
 		'id'      => $prefix . 'sitemap',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Include in Sitemap', 'rank-math' ),
-		'desc'    => esc_html__( 'Include archive pages for terms of this taxonomy in the XML sitemap.', 'rank-math' ),
+		'name'    => esc_html__( 'Include in Sitemap', 'seo-by-rank-math' ),
+		'desc'    => esc_html__( 'Include archive pages for terms of this taxonomy in the XML sitemap.', 'seo-by-rank-math' ),
 		'default' => $is_enabled,
 	]
 );
@@ -28,8 +28,8 @@ $cmb->add_field(
 	[
 		'id'      => $prefix . 'html_sitemap',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Include in HTML Sitemap', 'rank-math' ),
-		'desc'    => esc_html__( 'Include archive pages for terms of this taxonomy in the HTML sitemap.', 'rank-math' ),
+		'name'    => esc_html__( 'Include in HTML Sitemap', 'seo-by-rank-math' ),
+		'desc'    => esc_html__( 'Include archive pages for terms of this taxonomy in the HTML sitemap.', 'seo-by-rank-math' ),
 		'default' => $is_enabled,
 		'classes' => [
 			'rank-math-html-sitemap',
@@ -42,8 +42,8 @@ $cmb->add_field(
 	[
 		'id'      => $prefix . 'include_empty',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Include Empty Terms', 'rank-math' ),
-		'desc'    => esc_html__( 'Include archive pages of terms that have no posts associated.', 'rank-math' ),
+		'name'    => esc_html__( 'Include Empty Terms', 'seo-by-rank-math' ),
+		'desc'    => esc_html__( 'Include archive pages of terms that have no posts associated.', 'seo-by-rank-math' ),
 		'default' => 'off',
 		'dep'     => [ [ $prefix . 'sitemap', 'on' ] ],
 		'classes' => 'rank-math-advanced-option',

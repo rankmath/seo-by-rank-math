@@ -228,15 +228,15 @@ class Manager extends Post_Variables {
 
 			$name = ucwords( str_replace( [ '_', '-' ], ' ', $taxonomy ) );
 			/* translators: Taxonomy name. */
-			$title = sprintf( __( '%s Title', 'rank-math' ), $name );
+			$title = sprintf( __( '%s Title', 'seo-by-rank-math' ), $name );
 			/* translators: Taxonomy name. */
-			$desc = sprintf( __( '%s Description', 'rank-math' ), $name );
+			$desc = sprintf( __( '%s Description', 'seo-by-rank-math' ), $name );
 
 			$this->register_replacement(
 				"term_{$taxonomy}",
 				[
 					'name'        => $title,
-					'description' => esc_html__( 'Custom Term title.', 'rank-math' ),
+					'description' => esc_html__( 'Custom Term title.', 'seo-by-rank-math' ),
 					'variable'    => "customterm({$taxonomy})",
 					'example'     => $title,
 				],
@@ -247,7 +247,7 @@ class Manager extends Post_Variables {
 				"term_{$taxonomy}_desc",
 				[
 					'name'        => $desc,
-					'description' => esc_html__( 'Custom Term description.', 'rank-math' ),
+					'description' => esc_html__( 'Custom Term description.', 'seo-by-rank-math' ),
 					'variable'    => "customterm_desc({$taxonomy})",
 					'example'     => $desc,
 				],

@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="stats">
 	<tr>
 		<td class="col-1">
-			<h3><?php esc_html_e( 'Total Impressions', 'rank-math' ); ?></h3>
+			<h3><?php esc_html_e( 'Total Impressions', 'seo-by-rank-math' ); ?></h3>
 			<?php
 			$this->template_part(
 				'stat',
@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
 			?>
 		</td>
 		<td class="col-2">
-			<h3><?php esc_html_e( 'Total Clicks', 'rank-math' ); ?></h3>
+			<h3><?php esc_html_e( 'Total Clicks', 'seo-by-rank-math' ); ?></h3>
 			<?php
 			$this->template_part(
 				'stat',
@@ -47,7 +47,7 @@ defined( 'ABSPATH' ) || exit;
 	</tr>
 	<tr>
 		<td class="col-1">
-			<h3><?php esc_html_e( 'Total Keywords', 'rank-math' ); ?></h3>
+			<h3><?php esc_html_e( 'Total Keywords', 'seo-by-rank-math' ); ?></h3>
 			<?php
 			$this->template_part(
 				'stat',
@@ -61,7 +61,7 @@ defined( 'ABSPATH' ) || exit;
 			?>
 		</td>
 		<td class="col-2">
-			<h3><?php esc_html_e( 'Average Position', 'rank-math' ); ?></h3>
+			<h3><?php esc_html_e( 'Average Position', 'seo-by-rank-math' ); ?></h3>
 			<?php
 			$this->template_part(
 				'stat',

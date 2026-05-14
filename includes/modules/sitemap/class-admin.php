@@ -80,11 +80,11 @@ class Admin extends Base {
 		$tabs = [
 			'general' => [
 				'icon'      => 'rm-icon rm-icon-settings',
-				'title'     => esc_html__( 'General', 'rank-math' ),
+				'title'     => esc_html__( 'General', 'seo-by-rank-math' ),
 				'file'      => $this->directory . '/settings/general.php',
-				'desc'      => esc_html__( 'This tab contains General settings related to the XML sitemaps.', 'rank-math' ) . ' <a href="' . KB::get( 'sitemap-general', 'Options Panel Sitemap General Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
+				'desc'      => esc_html__( 'This tab contains General settings related to the XML sitemaps.', 'seo-by-rank-math' ) . ' <a href="' . KB::get( 'sitemap-general', 'Options Panel Sitemap General Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>',
 				/* translators: sitemap url */
-				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Your sitemap index can be found here: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . '</p></div>' . $this->get_nginx_notice(),
+				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Your sitemap index can be found here: %s', 'seo-by-rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . '</p></div>' . $this->get_nginx_notice(),
 				'json'      => [
 					'sitemapUrl'   => $sitemap_url,
 					'nginxNotice'  => $this->get_nginx_notice(),
@@ -104,9 +104,9 @@ class Admin extends Base {
 
 		$tabs['html_sitemap'] = [
 			'icon'    => 'rm-icon rm-icon-sitemap',
-			'title'   => esc_html__( 'HTML Sitemap', 'rank-math' ),
+			'title'   => esc_html__( 'HTML Sitemap', 'seo-by-rank-math' ),
 			'file'    => $this->directory . '/settings/html-sitemap.php',
-			'desc'    => esc_html__( 'This tab contains settings related to the HTML sitemap.', 'rank-math' ) . ' <a href="' . KB::get( 'sitemap-general', 'Options Panel Sitemap HTML Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
+			'desc'    => esc_html__( 'This tab contains settings related to the HTML sitemap.', 'seo-by-rank-math' ) . ' <a href="' . KB::get( 'sitemap-general', 'Options Panel Sitemap HTML Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>',
 			'classes' => 'html-sitemap',
 			'json'    => [
 				'htmlSitemapPage' => $rank_math_sitemap_page,
@@ -119,9 +119,9 @@ class Admin extends Base {
 			unset( $default['administrator'], $default['editor'], $default['author'] );
 			$tabs['authors'] = [
 				'icon'  => 'rm-icon rm-icon-users',
-				'title' => esc_html__( 'Authors', 'rank-math' ),
+				'title' => esc_html__( 'Authors', 'seo-by-rank-math' ),
 				/* translators: Learn more link. */
-				'desc'  => sprintf( esc_html__( 'Set the sitemap options for author archive pages. %s.', 'rank-math' ), '<a href="' . KB::get( 'configure-sitemaps', 'Options Panel Sitemap Authors Tab' ) . '#authors" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+				'desc'  => sprintf( esc_html__( 'Set the sitemap options for author archive pages. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'configure-sitemaps', 'Options Panel Sitemap Authors Tab' ) . '#authors" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 				'file'  => $this->directory . '/settings/authors.php',
 				'json'  => [
 					'roles'        => $roles,
@@ -135,8 +135,8 @@ class Admin extends Base {
 		new Register_Options_Page(
 			[
 				'key'        => 'rank-math-options-sitemap',
-				'title'      => esc_html__( 'Sitemap Settings', 'rank-math' ),
-				'menu_title' => esc_html__( 'Sitemap Settings', 'rank-math' ),
+				'title'      => esc_html__( 'Sitemap Settings', 'seo-by-rank-math' ),
+				'menu_title' => esc_html__( 'Sitemap Settings', 'seo-by-rank-math' ),
 				'capability' => 'rank_math_sitemap',
 				'folder'     => 'titles',
 				'tabs'       => $tabs,
@@ -154,8 +154,8 @@ class Admin extends Base {
 	public function post_type_settings( $tabs ) {
 		$icons  = Helper::choices_post_type_icons();
 		$things = [
-			'attachment' => esc_html__( 'attachments', 'rank-math' ),
-			'product'    => esc_html__( 'your product pages', 'rank-math' ),
+			'attachment' => esc_html__( 'attachments', 'seo-by-rank-math' ),
+			'product'    => esc_html__( 'your product pages', 'seo-by-rank-math' ),
 		];
 		$urls   = [
 			'post'       => KB::get( 'sitemap-post', 'Options Panel Sitemap Posts Tab' ),
@@ -166,7 +166,7 @@ class Admin extends Base {
 
 		// Post type label separator.
 		$tabs['p_types'] = [
-			'title' => esc_html__( 'Post Types:', 'rank-math' ),
+			'title' => esc_html__( 'Post Types:', 'seo-by-rank-math' ),
 			'type'  => 'separator',
 		];
 
@@ -177,18 +177,18 @@ class Admin extends Base {
 			$name        = strtolower( $object->label );
 
 			/* translators: Post Type label */
-			$thing = isset( $things[ $post_type ] ) ? $things[ $post_type ] : sprintf( __( 'single %s', 'rank-math' ), $name );
+			$thing = isset( $things[ $post_type ] ) ? $things[ $post_type ] : sprintf( __( 'single %s', 'seo-by-rank-math' ), $name );
 			$url   = isset( $urls[ $post_type ] ) ? $urls[ $post_type ] : KB::get( 'configure-sitemaps' );
 
 			$tabs[ 'sitemap-post-type-' . $object->name ] = [
-				'title'     => 'attachment' === $post_type ? esc_html__( 'Attachments', 'rank-math' ) : $object->label,
+				'title'     => 'attachment' === $post_type ? esc_html__( 'Attachments', 'seo-by-rank-math' ) : $object->label,
 				'icon'      => isset( $icons[ $object->name ] ) ? $icons[ $object->name ] : $icons['default'],
 				/* translators: %1$s: thing, %2$s: Learn more link. */
-				'desc'      => sprintf( esc_html__( 'Change Sitemap settings of %1$s. %2$s.', 'rank-math' ), $thing, '<a href="' . $url . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+				'desc'      => sprintf( esc_html__( 'Change Sitemap settings of %1$s. %2$s.', 'seo-by-rank-math' ), $thing, '<a href="' . $url . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 				'post_type' => $object->name,
 				'file'      => $this->directory . '/settings/post-types.php',
 				/* translators: Post Type Sitemap Url */
-				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Sitemap URL: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . $notice_end,
+				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Sitemap URL: %s', 'seo-by-rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . $notice_end,
 				'json'      => [
 					'isRedirectAttachment' => Helper::get_settings( 'general.attachment_redirect_urls', false ),
 					$object->name          => [
@@ -198,7 +198,7 @@ class Admin extends Base {
 			];
 
 			if ( 'attachment' === $post_type ) {
-				$tabs[ 'sitemap-post-type-' . $object->name ]['after_row'] = $this->get_notice_start() . esc_html__( 'Please note that this will add the attachment page URLs to the sitemap, not direct image URLs.', 'rank-math' ) . $notice_end;
+				$tabs[ 'sitemap-post-type-' . $object->name ]['after_row'] = $this->get_notice_start() . esc_html__( 'Please note that this will add the attachment page URLs to the sitemap, not direct image URLs.', 'seo-by-rank-math' ) . $notice_end;
 				$tabs[ 'sitemap-post-type-' . $object->name ]['classes']   = 'rank-math-advanced-option';
 			}
 		}
@@ -218,7 +218,7 @@ class Admin extends Base {
 
 		// Taxonomy label separator.
 		$tabs['t_types'] = [
-			'title' => esc_html__( 'Taxonomies:', 'rank-math' ),
+			'title' => esc_html__( 'Taxonomies:', 'seo-by-rank-math' ),
 			'type'  => 'separator',
 		];
 
@@ -243,12 +243,12 @@ class Admin extends Base {
 				case 'product_cat':
 				case 'product_tag':
 					/* translators: Taxonomy singular label */
-					$thing = sprintf( __( 'your product %s pages', 'rank-math' ), strtolower( $taxonomy->labels->singular_name ) );
+					$thing = sprintf( __( 'your product %s pages', 'seo-by-rank-math' ), strtolower( $taxonomy->labels->singular_name ) );
 					break;
 
 				default:
 					/* translators: Taxonomy singular label */
-					$thing = sprintf( __( '%s archives', 'rank-math' ), strtolower( $taxonomy->labels->singular_name ) );
+					$thing = sprintf( __( '%s archives', 'seo-by-rank-math' ), strtolower( $taxonomy->labels->singular_name ) );
 					$name  = strtolower( $taxonomy->labels->name );
 			}
 
@@ -256,11 +256,11 @@ class Admin extends Base {
 				'icon'      => isset( $icons[ $taxonomy->name ] ) ? $icons[ $taxonomy->name ] : $icons['default'],
 				'title'     => $taxonomy->label,
 				/* translators: %1$s: thing, %2$s: Learn more link. */
-				'desc'      => sprintf( esc_html__( 'Change Sitemap settings of %1$s. %2$s.', 'rank-math' ), $thing, '<a href="' . $url . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+				'desc'      => sprintf( esc_html__( 'Change Sitemap settings of %1$s. %2$s.', 'seo-by-rank-math' ), $thing, '<a href="' . $url . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 				'taxonomy'  => $taxonomy->name,
 				'file'      => $this->directory . '/settings/taxonomies.php',
 				/* translators: Taxonomy Sitemap Url */
-				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Sitemap URL: %s', 'rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . $notice_end,
+				'after_row' => $this->get_notice_start() . sprintf( esc_html__( 'Sitemap URL: %s', 'seo-by-rank-math' ), '<a href="' . $sitemap_url . '" target="_blank">' . $sitemap_url . '</a>' ) . $notice_end,
 				'json'      => [
 					$taxonomy->name => [
 						'sitemapUrl' => $sitemap_url,
@@ -283,7 +283,7 @@ class Admin extends Base {
 	public function media_popup_fields( $form_fields, $post ) {
 		$exclude   = get_post_meta( $post->ID, 'rank_math_exclude_sitemap', true );
 		$checkbox  = '<label><input type="checkbox" name="attachments[' . $post->ID . '][rank_math_media_exclude_sitemap]" ' . checked( $exclude, true, 0 ) . ' /> ';
-		$checkbox .= esc_html__( 'Exclude this attachment from sitemap', 'rank-math' ) . '</label>';
+		$checkbox .= esc_html__( 'Exclude this attachment from sitemap', 'seo-by-rank-math' ) . '</label>';
 
 		$form_fields['rank_math_exclude_sitemap'] = [ 'tr' => "\t\t<tr><td></td><td>$checkbox</td></tr>\n" ];
 
@@ -370,14 +370,14 @@ class Admin extends Base {
 
 		$message = sprintf(
 			/* Translators: the placeholder is for the sitemap base url. */
-			__( 'Since you are using an NGINX server, you may need to add the following code to your %s <strong>if your Sitemap pages are not loading</strong>. If you are unsure how to do it, please contact your hosting provider.', 'rank-math' ),
-			'<a href="https://help.dreamhost.com/hc/en-us/articles/216455077-Nginx-configuration-file-locations/?utm_campaign=Rank+Math" target="_blank">' . __( 'configuration file', 'rank-math' ) . '</a>'
+			__( 'Since you are using an NGINX server, you may need to add the following code to your %s <strong>if your Sitemap pages are not loading</strong>. If you are unsure how to do it, please contact your hosting provider.', 'seo-by-rank-math' ),
+			'<a href="https://help.dreamhost.com/hc/en-us/articles/216455077-Nginx-configuration-file-locations/?utm_campaign=Rank+Math" target="_blank">' . __( 'configuration file', 'seo-by-rank-math' ) . '</a>'
 		);
 
 		return '<div class="sitemap-nginx-notice notice notice-alt notice-warning rank-math-notice">' .
 		'<p>' . $message .
-			' <a href="#"><span class="show">' . __( 'Click here to see the code.', 'rank-math' ) . '</span><span class="hide">' . __( 'Hide', 'rank-math' ) . '</span></a>
-			<a href="#" class="sitemap-close-notice">' . __( 'I already added', 'rank-math' ) . '</a>
+			' <a href="#"><span class="show">' . __( 'Click here to see the code.', 'seo-by-rank-math' ) . '</span><span class="hide">' . __( 'Hide', 'seo-by-rank-math' ) . '</span></a>
+			<a href="#" class="sitemap-close-notice">' . __( 'I already added', 'seo-by-rank-math' ) . '</a>
 		</p>
  <pre>
  # START Nginx Rewrites for Rank Math Sitemaps
