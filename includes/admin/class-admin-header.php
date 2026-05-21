@@ -51,7 +51,7 @@ class Admin_Header {
 			<?php $this->get_mode_selector(); ?>
 
 			<?php do_action( 'rank_math/before_help_link' ); ?>
-			<a href="<?php echo esc_url( $this->get_help_link() ); ?>" title="<?php esc_attr_e( 'Rank Math Knowledge Base', 'rank-math' ); ?>" target="_blank" class="button rank-math-help"><i class="dashicons dashicons-editor-help"></i></a>
+			<a href="<?php echo esc_url( $this->get_help_link() ); ?>" title="<?php esc_attr_e( 'Rank Math Knowledge Base', 'seo-by-rank-math' ); ?>" target="_blank" class="button rank-math-help"><i class="dashicons dashicons-editor-help"></i></a>
 		</div>
 		<?php
 
@@ -83,7 +83,7 @@ class Admin_Header {
 			<div class="components-input-control">
 				<div class="components-input-control__container">
 						<!-- <i class="rm-icon rm-icon-search"></i> -->
-						<input type="search" class="components-input-control__input" value="" placeholder="<?php esc_attr_e( 'Search Options', 'rank-math' ); ?>" style="width: 100%;">
+						<input type="search" class="components-input-control__input" value="" placeholder="<?php esc_attr_e( 'Search Options', 'seo-by-rank-math' ); ?>" style="width: 100%;">
 						<!-- <em class="clear-search dashicons dashicons-no-alt"></em> -->
 				</div>
 			</div>
@@ -111,8 +111,8 @@ class Admin_Header {
 		$is_advanced_mode = Helper::is_advanced_mode();
 		?>
 		<div class="rank-math-mode-selector">
-			<a href="#" class="<?php echo ! $is_advanced_mode ? 'active' : ''; ?>" data-mode="easy"><?php esc_attr_e( 'Easy Mode', 'rank-math' ); ?></a>
-			<a href="#" class="<?php echo $is_advanced_mode ? 'active' : ''; ?>" data-mode="advanced"><?php esc_attr_e( 'Advanced Mode', 'rank-math' ); ?></a>
+			<a href="#" class="<?php echo ! $is_advanced_mode ? 'active' : ''; ?>" data-mode="easy"><?php esc_attr_e( 'Easy Mode', 'seo-by-rank-math' ); ?></a>
+			<a href="#" class="<?php echo $is_advanced_mode ? 'active' : ''; ?>" data-mode="advanced"><?php esc_attr_e( 'Advanced Mode', 'seo-by-rank-math' ); ?></a>
 		</div>
 		<?php
 	}

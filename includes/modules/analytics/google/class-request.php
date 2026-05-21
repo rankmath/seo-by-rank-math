@@ -181,7 +181,7 @@ class Request {
 				$this->is_success      = false;
 				$this->last_error      = sprintf(
 					/* translators: reconnect link */
-					wp_kses_post( __( 'There is a problem with the Google auth token. Please <a href="%1$s" class="button button-link rank-math-reconnect-google">reconnect your app</a>', 'rank-math' ) ),
+					wp_kses_post( __( 'There is a problem with the Google auth token. Please <a href="%1$s" class="button button-link rank-math-reconnect-google">reconnect your app</a>', 'seo-by-rank-math' ) ),
 					wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' )
 				);
 				$this->log_response( $http_verb, $url, $args, '', '', '', date( 'Y-m-d H:i:s' ) . ': Google auth token has been expired or is invalid' );
@@ -287,7 +287,7 @@ class Request {
 		} elseif ( isset( $formatted_response['error_description'] ) ) {
 			$message .= '<span class="fail">FAIL</span>' . PHP_EOL;
 			$message .= 'Bad Request' === $formatted_response['error_description'] ?
-			esc_html__( 'Bad request. Please check the code.', 'rank-math' ) : $formatted_response['error_description'];
+			esc_html__( 'Bad request. Please check the code.', 'seo-by-rank-math' ) : $formatted_response['error_description'];
 		} else {
 			$message .= '<span class="pass">PASS</span>' . PHP_EOL;
 		}
@@ -345,11 +345,11 @@ class Request {
 
 		if ( isset( $formatted_response['error_description'] ) ) {
 			$this->last_error = 'Bad Request' === $formatted_response['error_description'] ?
-				esc_html__( 'Bad request. Please check the code.', 'rank-math' ) : $formatted_response['error_description'];
+				esc_html__( 'Bad request. Please check the code.', 'seo-by-rank-math' ) : $formatted_response['error_description'];
 			return;
 		}
 
-		$message = esc_html__( 'Unknown error, call get_response() to find out what happened.', 'rank-math' );
+		$message = esc_html__( 'Unknown error, call get_response() to find out what happened.', 'seo-by-rank-math' );
 		$body    = wp_remote_retrieve_body( $response );
 		if ( ! empty( $body ) ) {
 			$body = json_decode( $body, true );

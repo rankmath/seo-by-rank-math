@@ -157,7 +157,7 @@ class CMB2_Options {
 
 			$cmb->add_field(
 				[
-					'name'    => esc_html__( 'Panel', 'rank-math' ),
+					'name'    => esc_html__( 'Panel', 'seo-by-rank-math' ),
 					'id'      => 'setting-panel-' . $id,
 					'type'    => 'tab',
 					'open'    => true,
@@ -286,9 +286,9 @@ class CMB2_Options {
 			<div class="rank-math-unlock-pro-notice" id="rank-math-unlock-pro-notice">
 				<a href="<?php KB::the( 'pro', 'Unlock PRO Options Panel Notice' ); ?>" target="_blank" class="pro-link">
 					<p>
-						<?php esc_html_e( 'Take your SEO to the Next Level!', 'rank-math' ); ?>
-						<strong><?php esc_html_e( 'Get Rank Math PRO!', 'rank-math' ); ?></strong>
-						<span><?php esc_html_e( 'Click here to see all the exciting features.', 'rank-math' ); ?></span>
+						<?php esc_html_e( 'Take your SEO to the Next Level!', 'seo-by-rank-math' ); ?>
+						<strong><?php esc_html_e( 'Get Rank Math PRO!', 'seo-by-rank-math' ); ?></strong>
+						<span><?php esc_html_e( 'Click here to see all the exciting features.', 'seo-by-rank-math' ); ?></span>
 					</p>
 					<div class="close-notice">
 						<span class="dashicons dashicons-dismiss"></span>
@@ -308,8 +308,8 @@ class CMB2_Options {
 
 				<footer class="form-footer rank-math-ui settings-footer wp-clearfix">
 					<?php wp_nonce_field( 'rank-math-reset-options' ); ?>
-					<input type="submit" name="submit-cmb" id="submit-cmb" title="<?php echo esc_html__( 'Ctrl/Cmd + Enter', 'rank-math' ); ?>" class="button button-primary save-options" value="<?php esc_attr_e( 'Save Changes', 'rank-math' ); ?>">
-					<input type="submit" name="reset-cmb" id="rank-math-reset-cmb" value="<?php esc_attr_e( 'Reset Options', 'rank-math' ); ?>" class="button button-secondary reset-options alignleft">
+					<input type="submit" name="submit-cmb" id="submit-cmb" title="<?php echo esc_html__( 'Ctrl/Cmd + Enter', 'seo-by-rank-math' ); ?>" class="button button-primary save-options" value="<?php esc_attr_e( 'Save Changes', 'seo-by-rank-math' ); ?>">
+					<input type="submit" name="reset-cmb" id="rank-math-reset-cmb" value="<?php esc_attr_e( 'Reset Options', 'seo-by-rank-math' ); ?>" class="button button-secondary reset-options alignleft">
 				</footer>
 
 			</form>
@@ -381,7 +381,7 @@ class CMB2_Options {
 
 		if ( ! is_super_admin() || ! Helper::has_cap( 'general' ) || ! Helper::has_cap( 'edit_htaccess' ) ) {
 			Helper::add_notification(
-				esc_html__( 'You do not have permission to edit the .htaccess file.', 'rank-math' ),
+				esc_html__( 'You do not have permission to edit the .htaccess file.', 'seo-by-rank-math' ),
 				[ 'type' => 'error' ]
 			);
 			return;
@@ -389,7 +389,7 @@ class CMB2_Options {
 
 		if ( ! Helper::is_edit_allowed() ) {
 			Helper::add_notification(
-				esc_html__( 'You do not have permission to edit the .htaccess file.', 'rank-math' ),
+				esc_html__( 'You do not have permission to edit the .htaccess file.', 'seo-by-rank-math' ),
 				[ 'type' => 'error' ]
 			);
 			return;
@@ -403,20 +403,20 @@ class CMB2_Options {
 
 		if ( ! $this->do_htaccess_backup() ) {
 			Helper::add_notification(
-				esc_html__( 'Failed to backup .htaccess file. Please check file permissions.', 'rank-math' ),
+				esc_html__( 'Failed to backup .htaccess file. Please check file permissions.', 'seo-by-rank-math' ),
 				[ 'type' => 'error' ]
 			);
 			return;
 		}
 		if ( ! $this->do_htaccess_update( $content ) ) {
 			Helper::add_notification(
-				esc_html__( 'Failed to update .htaccess file. Please check file permissions.', 'rank-math' ),
+				esc_html__( 'Failed to update .htaccess file. Please check file permissions.', 'seo-by-rank-math' ),
 				[ 'type' => 'error' ]
 			);
 			return;
 		}
 
-		Helper::add_notification( esc_html__( '.htaccess file updated successfully.', 'rank-math' ) );
+		Helper::add_notification( esc_html__( '.htaccess file updated successfully.', 'seo-by-rank-math' ) );
 	}
 
 	/**

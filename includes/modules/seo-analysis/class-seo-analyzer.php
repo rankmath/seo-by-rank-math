@@ -298,7 +298,7 @@ class SEO_Analyzer {
 				'<div class="notice notice-error is-dismissible notice-seo-analysis-error rank-math-notice">
 					<p>' .
 						/* translators: API error */
-						sprintf( __( '<strong>API Error:</strong> %s', 'rank-math' ), $this->api_error ) .
+						sprintf( __( '<strong>API Error:</strong> %s', 'seo-by-rank-math' ), $this->api_error ) .
 					'</p>
 				</div>'
 			);
@@ -345,7 +345,7 @@ class SEO_Analyzer {
 		}
 
 		$results['auto_update']['status']  = 'ok';
-		$results['auto_update']['message'] = __( 'Rank Math auto-update option is enabled on your site.', 'rank-math' );
+		$results['auto_update']['message'] = __( 'Rank Math auto-update option is enabled on your site.', 'seo-by-rank-math' );
 		update_option( 'rank_math_seo_analysis_results', $results, false );
 	}
 
@@ -410,14 +410,14 @@ class SEO_Analyzer {
 		$status = absint( wp_remote_retrieve_response_code( $request ) );
 		if ( 200 !== $status ) {
 			// Translators: placeholder is a HTTP error code.
-			$this->api_error = sprintf( __( 'HTTP %d error.', 'rank-math' ), $status );
+			$this->api_error = sprintf( __( 'HTTP %d error.', 'seo-by-rank-math' ), $status );
 			return false;
 		}
 
 		$response = wp_remote_retrieve_body( $request );
 		$response = json_decode( $response, true );
 		if ( ! is_array( $response ) ) {
-			$this->api_error = __( 'Unexpected API response.', 'rank-math' );
+			$this->api_error = __( 'Unexpected API response.', 'seo-by-rank-math' );
 			return false;
 		}
 
@@ -508,8 +508,7 @@ class SEO_Analyzer {
 	 * @return array
 	 */
 	private function get_serp_data() {
-		$src_format = 'https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=%%SITEURL%%&size=128';
-		$favicon    = str_replace( '%%SITEURL%%', rawurlencode( $this->analyse_url ), $src_format );
+		$favicon = get_site_icon_url( 128 );
 		if ( is_array( $this->results ) ) {
 			if ( isset( $this->results['title_length'] ) ) {
 				$title_data = $this->results['title_length']->get_result();
@@ -523,7 +522,7 @@ class SEO_Analyzer {
 		}
 
 		if ( empty( $title ) ) {
-			$title = __( '(No Title)', 'rank-math' );
+			$title = __( '(No Title)', 'seo-by-rank-math' );
 		}
 		// Cut title to 60 characters.
 		if ( strlen( $title ) > 60 ) {
@@ -531,7 +530,7 @@ class SEO_Analyzer {
 		}
 
 		if ( empty( $description ) ) {
-			$description = __( '(No Description)', 'rank-math' );
+			$description = __( '(No Description)', 'seo-by-rank-math' );
 		}
 		// Cut description to 160 characters.
 		if ( strlen( $description ) > 160 ) {

@@ -23,7 +23,7 @@ class Error_404 implements IPaper {
 	 * @return string
 	 */
 	public function title() {
-		return Paper::get_from_options( '404_title', [], esc_html__( 'Page not found', 'rank-math' ) );
+		return Paper::get_from_options( '404_title', [], esc_html__( 'Page not found', 'seo-by-rank-math' ) );
 	}
 
 	/**

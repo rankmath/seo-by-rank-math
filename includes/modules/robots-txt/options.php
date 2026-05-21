@@ -18,14 +18,14 @@ $desc       = '';
 if ( $data['exists'] ) {
 	$attributes['readonly'] = 'readonly';
 	$attributes['value']    = $data['default'];
-	$desc                   = esc_html__( 'Contents are locked because a robots.txt file is present in the root folder.', 'rank-math' );
+	$desc                   = esc_html__( 'Contents are locked because a robots.txt file is present in the root folder.', 'seo-by-rank-math' );
 } else {
 	$attributes['placeholder'] = $data['default'];
 }
 
 if ( isset( $data['writable'] ) && false === $data['writable'] ) {
 	$attributes['placeholder'] = $data['default'];
-	$desc                      = esc_html__( 'Rank Math could not detect if a robots.txt file exists or not because of a filesystem issue. The file contents entered here may not be applied.', 'rank-math' );
+	$desc                      = esc_html__( 'Rank Math could not detect if a robots.txt file exists or not because of a filesystem issue. The file contents entered here may not be applied.', 'seo-by-rank-math' );
 
 	unset( $attributes['readonly'], $attributes['value'] );
 }
@@ -40,7 +40,7 @@ if ( ! Helper::is_edit_allowed() ) {
 			'id'      => 'edit_disabled',
 			'type'    => 'notice',
 			'what'    => 'error',
-			'content' => __( 'robots.txt file is not writable.', 'rank-math' ),
+			'content' => __( 'robots.txt file is not writable.', 'seo-by-rank-math' ),
 		]
 	);
 	$attributes['disabled'] = 'disabled';
@@ -76,7 +76,7 @@ if ( $desc ) {
 			'content' => wp_kses_post(
 				sprintf(
 					// Translators: placeholder is the Settings page URL.
-					__( '<strong>Warning:</strong> your site\'s search engine visibility is set to Hidden in <a href="%1$s" target="_blank">Settings &gt; Reading</a>. This means that the changes you make here will not take effect. Set the search engine visibility to Public to be able to change the robots.txt content.', 'rank-math' ),
+					__( '<strong>Warning:</strong> your site\'s search engine visibility is set to Hidden in <a href="%1$s" target="_blank">Settings &gt; Reading</a>. This means that the changes you make here will not take effect. Set the search engine visibility to Public to be able to change the robots.txt content.', 'seo-by-rank-math' ),
 					admin_url( 'options-reading.php' )
 				)
 			),
@@ -93,7 +93,7 @@ $cmb->add_field(
 		'content' => wp_kses_post(
 			sprintf(
 				// Translators: placeholder is the URL to the robots.txt tester tool.
-				__( 'Test and edit your live robots.txt file with our <a href="%1$s" target="_blank">Robots.txt Tester</a>.', 'rank-math' ),
+				__( 'Test and edit your live robots.txt file with our <a href="%1$s" target="_blank">Robots.txt Tester</a>.', 'seo-by-rank-math' ),
 				KB::get( 'robotstxt-tool', 'Options Panel Robots.txt Tester' ) . '&url=' . rawurlencode( home_url( '/' ) )
 			)
 		),

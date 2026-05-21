@@ -48,30 +48,30 @@ class System_Status {
 		}
 
 		$rankmath = [
-			'label'  => esc_html__( 'Rank Math', 'rank-math' ),
+			'label'  => esc_html__( 'Rank Math', 'seo-by-rank-math' ),
 			'fields' => [
 				'version'          => [
-					'label' => esc_html__( 'Version', 'rank-math' ),
+					'label' => esc_html__( 'Version', 'seo-by-rank-math' ),
 					'value' => get_option( 'rank_math_version' ),
 				],
 				'database_version' => [
-					'label' => esc_html__( 'Database version', 'rank-math' ),
+					'label' => esc_html__( 'Database version', 'seo-by-rank-math' ),
 					'value' => get_option( 'rank_math_db_version' ),
 				],
 				'plugin_plan'      => [
-					'label' => esc_html__( 'Plugin subscription plan', 'rank-math' ),
-					'value' => isset( $plan['plan'] ) ? \ucwords( $plan['plan'] ) : esc_html__( 'Free', 'rank-math' ),
+					'label' => esc_html__( 'Plugin subscription plan', 'seo-by-rank-math' ),
+					'value' => isset( $plan['plan'] ) ? \ucwords( $plan['plan'] ) : esc_html__( 'Free', 'seo-by-rank-math' ),
 				],
 				'active_modules'   => [
-					'label' => esc_html__( 'Active modules', 'rank-math' ),
-					'value' => empty( $modules ) ? esc_html__( '(none)', 'rank-math' ) : join( ', ', $modules ),
+					'label' => esc_html__( 'Active modules', 'seo-by-rank-math' ),
+					'value' => empty( $modules ) ? esc_html__( '(none)', 'seo-by-rank-math' ) : join( ', ', $modules ),
 				],
 				'refresh_token'    => [
-					'label' => esc_html__( 'Google Refresh token', 'rank-math' ),
-					'value' => empty( $tokens['refresh_token'] ) ? esc_html__( 'No token', 'rank-math' ) : esc_html__( 'Token exists', 'rank-math' ),
+					'label' => esc_html__( 'Google Refresh token', 'seo-by-rank-math' ),
+					'value' => empty( $tokens['refresh_token'] ) ? esc_html__( 'No token', 'seo-by-rank-math' ) : esc_html__( 'Token exists', 'seo-by-rank-math' ),
 				],
 				'permissions'      => [
-					'label' => esc_html__( 'Google Permission', 'rank-math' ),
+					'label' => esc_html__( 'Google Permission', 'seo-by-rank-math' ),
 					'value' => $permissions_data,
 				],
 			],
@@ -97,17 +97,17 @@ class System_Status {
 		}
 
 		$should_exist = [
-			'rank_math_404_logs'                  => esc_html__( 'Database Table: 404 Log', 'rank-math' ),
-			'rank_math_redirections'              => esc_html__( 'Database Table: Redirection', 'rank-math' ),
-			'rank_math_redirections_cache'        => esc_html__( 'Database Table: Redirection Cache', 'rank-math' ),
-			'rank_math_internal_links'            => esc_html__( 'Database Table: Internal Link', 'rank-math' ),
-			'rank_math_internal_meta'             => esc_html__( 'Database Table: Internal Link Meta', 'rank-math' ),
-			'rank_math_analytics_gsc'             => esc_html__( 'Database Table: Google Search Console', 'rank-math' ),
-			'rank_math_analytics_objects'         => esc_html__( 'Database Table: Flat Posts', 'rank-math' ),
-			'rank_math_analytics_ga'              => esc_html__( 'Database Table: Google Analytics', 'rank-math' ),
-			'rank_math_analytics_adsense'         => esc_html__( 'Database Table: Google AdSense', 'rank-math' ),
-			'rank_math_analytics_keyword_manager' => esc_html__( 'Database Table: Keyword Manager', 'rank-math' ),
-			'rank_math_analytics_inspections'     => esc_html__( 'Database Table: Inspections', 'rank-math' ),
+			'rank_math_404_logs'                  => esc_html__( 'Database Table: 404 Log', 'seo-by-rank-math' ),
+			'rank_math_redirections'              => esc_html__( 'Database Table: Redirection', 'seo-by-rank-math' ),
+			'rank_math_redirections_cache'        => esc_html__( 'Database Table: Redirection Cache', 'seo-by-rank-math' ),
+			'rank_math_internal_links'            => esc_html__( 'Database Table: Internal Link', 'seo-by-rank-math' ),
+			'rank_math_internal_meta'             => esc_html__( 'Database Table: Internal Link Meta', 'seo-by-rank-math' ),
+			'rank_math_analytics_gsc'             => esc_html__( 'Database Table: Google Search Console', 'seo-by-rank-math' ),
+			'rank_math_analytics_objects'         => esc_html__( 'Database Table: Flat Posts', 'seo-by-rank-math' ),
+			'rank_math_analytics_ga'              => esc_html__( 'Database Table: Google Analytics', 'seo-by-rank-math' ),
+			'rank_math_analytics_adsense'         => esc_html__( 'Database Table: Google AdSense', 'seo-by-rank-math' ),
+			'rank_math_analytics_keyword_manager' => esc_html__( 'Database Table: Keyword Manager', 'seo-by-rank-math' ),
+			'rank_math_analytics_inspections'     => esc_html__( 'Database Table: Inspections', 'seo-by-rank-math' ),
 		];
 
 		if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) {
@@ -121,7 +121,7 @@ class System_Status {
 		foreach ( $should_exist as $name => $label ) {
 			$rankmath['fields'][ $name ] = [
 				'label' => $label,
-				'value' => isset( $tables[ $name ] ) ? self::get_table_size( $name ) : esc_html__( 'Not found', 'rank-math' ),
+				'value' => isset( $tables[ $name ] ) ? self::get_table_size( $name ) : esc_html__( 'Not found', 'seo-by-rank-math' ),
 			];
 		}
 

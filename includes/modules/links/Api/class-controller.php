@@ -110,7 +110,7 @@ class Controller {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return new \WP_Error(
 				'rest_forbidden',
-				esc_html__( 'You do not have permission to access this resource.', 'rank-math' ),
+				esc_html__( 'You do not have permission to access this resource.', 'seo-by-rank-math' ),
 				[ 'status' => rest_authorization_required_code() ]
 			);
 		}
@@ -634,24 +634,24 @@ class Controller {
 	private function get_posts_args() {
 		return [
 			'page'            => [
-				'description' => esc_html__( 'Page number.', 'rank-math' ),
+				'description' => esc_html__( 'Page number.', 'seo-by-rank-math' ),
 				'type'        => 'integer',
 				'default'     => 1,
 			],
 			'per_page'        => [
-				'description' => esc_html__( 'Items per page.', 'rank-math' ),
+				'description' => esc_html__( 'Items per page.', 'seo-by-rank-math' ),
 				'type'        => 'integer',
 				'default'     => 50,
 				'maximum'     => 100,
 			],
 			'search'          => [
-				'description'       => esc_html__( 'Search in post title.', 'rank-math' ),
+				'description'       => esc_html__( 'Search in post title.', 'seo-by-rank-math' ),
 				'type'              => 'string',
 				'default'           => '',
 				'sanitize_callback' => 'sanitize_text_field',
 			],
 			'post_type'       => [
-				'description'       => esc_html__( 'Filter by post type. Supports multiple values.', 'rank-math' ),
+				'description'       => esc_html__( 'Filter by post type. Supports multiple values.', 'seo-by-rank-math' ),
 				'type'              => 'array',
 				'items'             => [ 'type' => 'string' ],
 				'default'           => [],
@@ -660,25 +660,25 @@ class Controller {
 				},
 			],
 			'is_orphan'       => [
-				'description'       => esc_html__( 'Filter by orphan status (orphan, linked).', 'rank-math' ),
+				'description'       => esc_html__( 'Filter by orphan status (orphan, linked).', 'seo-by-rank-math' ),
 				'type'              => 'string',
 				'default'           => '',
 				'sanitize_callback' => 'sanitize_text_field',
 			],
 			'seo_score_range' => [
-				'description'       => esc_html__( 'Filter by SEO score range (great, good, bad, no-score).', 'rank-math' ),
+				'description'       => esc_html__( 'Filter by SEO score range (great, good, bad, no-score).', 'seo-by-rank-math' ),
 				'type'              => 'string',
 				'default'           => '',
 				'sanitize_callback' => 'sanitize_text_field',
 			],
 			'orderby'         => [
-				'description'       => esc_html__( 'Order by field.', 'rank-math' ),
+				'description'       => esc_html__( 'Order by field.', 'seo-by-rank-math' ),
 				'type'              => 'string',
 				'default'           => 'post_title',
 				'sanitize_callback' => 'sanitize_text_field',
 			],
 			'order'           => [
-				'description'       => esc_html__( 'Order direction (ASC, DESC).', 'rank-math' ),
+				'description'       => esc_html__( 'Order direction (ASC, DESC).', 'seo-by-rank-math' ),
 				'type'              => 'string',
 				'default'           => 'ASC',
 				'sanitize_callback' => 'sanitize_text_field',
@@ -694,46 +694,46 @@ class Controller {
 	private function get_links_args() {
 		return [
 			'page'           => [
-				'description' => esc_html__( 'Page number.', 'rank-math' ),
+				'description' => esc_html__( 'Page number.', 'seo-by-rank-math' ),
 				'type'        => 'integer',
 				'default'     => 1,
 			],
 			'per_page'       => [
-				'description' => esc_html__( 'Items per page.', 'rank-math' ),
+				'description' => esc_html__( 'Items per page.', 'seo-by-rank-math' ),
 				'type'        => 'integer',
 				'default'     => 50,
 				'maximum'     => 100,
 			],
 			'search'         => [
-				'description'       => esc_html__( 'Search in URL.', 'rank-math' ),
+				'description'       => esc_html__( 'Search in URL.', 'seo-by-rank-math' ),
 				'type'              => 'string',
 				'default'           => '',
 				'sanitize_callback' => 'sanitize_text_field',
 			],
 			'source_id'      => [
-				'description' => esc_html__( 'Filter by source post ID.', 'rank-math' ),
+				'description' => esc_html__( 'Filter by source post ID.', 'seo-by-rank-math' ),
 				'type'        => 'integer',
 				'default'     => 0,
 			],
 			'target_post_id' => [
-				'description' => esc_html__( 'Filter by target post ID.', 'rank-math' ),
+				'description' => esc_html__( 'Filter by target post ID.', 'seo-by-rank-math' ),
 				'type'        => 'integer',
 				'default'     => 0,
 			],
 			'is_internal'    => [
-				'description'       => esc_html__( 'Filter by link type (1 = internal, 0 = external).', 'rank-math' ),
+				'description'       => esc_html__( 'Filter by link type (1 = internal, 0 = external).', 'seo-by-rank-math' ),
 				'type'              => 'string',
 				'default'           => '',
 				'sanitize_callback' => 'sanitize_text_field',
 			],
 			'orderby'        => [
-				'description'       => esc_html__( 'Order by field.', 'rank-math' ),
+				'description'       => esc_html__( 'Order by field.', 'seo-by-rank-math' ),
 				'type'              => 'string',
 				'default'           => 'id',
 				'sanitize_callback' => 'sanitize_text_field',
 			],
 			'order'          => [
-				'description'       => esc_html__( 'Order direction (ASC, DESC).', 'rank-math' ),
+				'description'       => esc_html__( 'Order direction (ASC, DESC).', 'seo-by-rank-math' ),
 				'type'              => 'string',
 				'default'           => 'DESC',
 				'sanitize_callback' => 'sanitize_text_field',

@@ -1269,7 +1269,7 @@ class Yoast extends Plugin_Importer {
 	protected function blocks() {
 		$posts = Yoast_Blocks::get()->find_posts();
 		if ( empty( $posts['posts'] ) ) {
-			return __( 'No post found.', 'rank-math' );
+			return __( 'No post found.', 'seo-by-rank-math' );
 		}
 
 		$this->set_pagination( $posts['count'] );

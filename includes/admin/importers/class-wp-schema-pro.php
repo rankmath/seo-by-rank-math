@@ -600,8 +600,8 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 */
 	public function get_choices() {
 		return [
-			'settings' => esc_html__( 'Import Settings', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Plugin settings and site-wide meta data.', 'rank-math' ) ),
-			'postmeta' => esc_html__( 'Import Schemas', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import all Schema data for Posts, Pages, and custom post types.', 'rank-math' ) ),
+			'settings' => esc_html__( 'Import Settings', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Plugin settings and site-wide meta data.', 'seo-by-rank-math' ) ),
+			'postmeta' => esc_html__( 'Import Schemas', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import all Schema data for Posts, Pages, and custom post types.', 'seo-by-rank-math' ) ),
 		];
 	}
 

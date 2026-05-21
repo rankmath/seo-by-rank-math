@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="stats-2">
 	<tr>
 		<td class="col-1">
-			<h3><?php esc_html_e( 'Top 3 Positions', 'rank-math' ); ?></h3>
+			<h3><?php esc_html_e( 'Top 3 Positions', 'seo-by-rank-math' ); ?></h3>
 			<?php
 			$this->template_part(
 				'stat',
@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
 			?>
 		</td>
 		<td class="col-2">
-			<h3><?php esc_html_e( '4-10 Positions', 'rank-math' ); ?></h3>
+			<h3><?php esc_html_e( '4-10 Positions', 'seo-by-rank-math' ); ?></h3>
 			<?php
 			$this->template_part(
 				'stat',
@@ -41,7 +41,7 @@ defined( 'ABSPATH' ) || exit;
 			?>
 		</td>
 		<td class="col-3">
-			<h3><?php esc_html_e( '11-50 Positions', 'rank-math' ); ?></h3>
+			<h3><?php esc_html_e( '11-50 Positions', 'seo-by-rank-math' ); ?></h3>
 			<?php
 			$this->template_part(
 				'stat',

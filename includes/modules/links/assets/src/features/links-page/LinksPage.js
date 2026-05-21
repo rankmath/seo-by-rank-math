@@ -38,28 +38,28 @@ const getTabs = () => [
 	{
 		id: 'posts',
 		name: 'posts',
-		title: __( 'Posts', 'rank-math' ),
+		title: __( 'Posts', 'seo-by-rank-math' ),
 		view: Posts,
 		className: 'rank-math-posts-tab rank-math-tab',
 	},
 	{
 		id: 'links',
 		name: 'links',
-		title: __( 'Links', 'rank-math' ),
+		title: __( 'Links', 'seo-by-rank-math' ),
 		view: Links,
 		className: 'rank-math-links-tab rank-math-tab',
 	},
 	{
 		id: 'bulk-update',
 		name: 'bulk-update',
-		title: __( 'Bulk Update', 'rank-math' ),
+		title: __( 'Bulk Update', 'seo-by-rank-math' ),
 		view: BulkUpdate,
 		className: 'rank-math-bulk-update-tab rank-math-tab',
 	},
 	{
 		id: 'keyword-maps',
 		name: 'keyword-maps',
-		title: __( 'Keyword Maps', 'rank-math' ),
+		title: __( 'Keyword Maps', 'seo-by-rank-math' ),
 		view: KeywordMaps,
 		className: 'rank-math-keyword-maps-tab rank-math-tab',
 	},
@@ -83,7 +83,7 @@ const LinksPage = () => {
 
 	return (
 		<>
-			<DashboardHeader page={ __( 'Link Genius', 'rank-math' ) } />
+			<DashboardHeader page={ __( 'Link Genius', 'seo-by-rank-math' ) } />
 			<div className="wrap rank-math-wrap rank-math-links-page">
 				<TabPanel
 					key={ activeTab }

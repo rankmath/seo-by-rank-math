@@ -263,21 +263,21 @@ class Admin extends WP_REST_Controller {
 					$redirection->set_status( 'inactive' );
 					return rest_ensure_response(
 						[
-							'error' => __( 'The redirection you are trying to create may cause an infinite loop. Please check the source and destination URLs. The redirection has been deactivated.', 'rank-math' ),
+							'error' => __( 'The redirection you are trying to create may cause an infinite loop. Please check the source and destination URLs. The redirection has been deactivated.', 'seo-by-rank-math' ),
 						]
 					);
 				}
 
 				return rest_ensure_response(
 					[
-						'error' => __( 'The redirection you are trying to update may cause an infinite loop. Please check the source and destination URLs.', 'rank-math' ),
+						'error' => __( 'The redirection you are trying to update may cause an infinite loop. Please check the source and destination URLs.', 'seo-by-rank-math' ),
 					]
 				);
 
 			}
 
 			if ( false === $redirection->save() ) {
-				return __( 'Please add at least one valid source URL.', 'rank-math' );
+				return __( 'Please add at least one valid source URL.', 'seo-by-rank-math' );
 			}
 
 			$this->do_action( 'redirection/saved', $redirection, $settings );
@@ -302,7 +302,7 @@ class Admin extends WP_REST_Controller {
 		}
 
 		if ( ! in_array( $type, [ 'general', 'titles', 'sitemap' ], true ) ) {
-			return __( 'Invalid type.', 'rank-math' );
+			return __( 'Invalid type.', 'seo-by-rank-math' );
 		}
 
 		return \RankMath\Admin\Option_Center::save_settings(
@@ -361,12 +361,12 @@ class Admin extends WP_REST_Controller {
 			'module' => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Module slug', 'rank-math' ),
+				'description'       => esc_html__( 'Module slug', 'seo-by-rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => function ( $param, $request, $key ) {
 					$modules = array_keys( rank_math()->manager->modules );
 					if ( ! in_array( $param, $modules, true ) ) {
-						return new WP_Error( 'invalid_module', esc_html__( 'Invalid module', 'rank-math' ), [ 'status' => 400 ] );
+						return new WP_Error( 'invalid_module', esc_html__( 'Invalid module', 'seo-by-rank-math' ), [ 'status' => 400 ] );
 					}
 
 					return rest_validate_request_arg( $param, $request, $key );
@@ -375,7 +375,7 @@ class Admin extends WP_REST_Controller {
 			'state'  => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Module state either on or off', 'rank-math' ),
+				'description'       => esc_html__( 'Module state either on or off', 'seo-by-rank-math' ),
 				'enum'              => [ 'on', 'off' ],
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => 'rest_validate_request_arg',
@@ -393,7 +393,7 @@ class Admin extends WP_REST_Controller {
 			'postScores' => [
 				'type'              => 'object',
 				'required'          => true,
-				'description'       => esc_html__( 'Post scores', 'rank-math' ),
+				'description'       => esc_html__( 'Post scores', 'seo-by-rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => 'rest_validate_request_arg',
 			],
@@ -410,7 +410,7 @@ class Admin extends WP_REST_Controller {
 			'action' => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Action to perform', 'rank-math' ),
+				'description'       => esc_html__( 'Action to perform', 'seo-by-rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => 'rest_validate_request_arg',
 			],
@@ -427,7 +427,7 @@ class Admin extends WP_REST_Controller {
 			'mode' => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Mode to set', 'rank-math' ),
+				'description'       => esc_html__( 'Mode to set', 'seo-by-rank-math' ),
 				'enum'              => [ 'easy', 'advanced', 'custom' ],
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => 'rest_validate_request_arg',

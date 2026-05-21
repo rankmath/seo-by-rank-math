@@ -78,7 +78,7 @@ class Snippet_Shortcode {
 
 		$data = $this->get_schema_data( $atts['id'], $atts['post_id'] );
 		if ( empty( $data ) || empty( $data['schema'] ) ) {
-			return esc_html__( 'No schema found.', 'rank-math' );
+			return esc_html__( 'No schema found.', 'seo-by-rank-math' );
 		}
 
 		$post    = get_post( $data['post_id'] );
@@ -225,7 +225,7 @@ class Snippet_Shortcode {
 		}
 
 		echo '<div>';
-		echo '<strong>' . esc_html__( 'Opening Hours', 'rank-math' ) . '</strong><br />';
+		echo '<strong>' . esc_html__( 'Opening Hours', 'seo-by-rank-math' ) . '</strong><br />';
 		foreach ( $opening_hours as $opening_hour ) {
 			$this->get_opening_hour( $opening_hour );
 		}
@@ -239,9 +239,9 @@ class Snippet_Shortcode {
 	 */
 	public function get_opening_hour( $opening_hour ) {
 		$labels = [
-			'dayOfWeek' => esc_html__( 'Days', 'rank-math' ),
-			'opens'     => esc_html__( 'Opening Time', 'rank-math' ),
-			'closes'    => esc_html__( 'Closing Time', 'rank-math' ),
+			'dayOfWeek' => esc_html__( 'Days', 'seo-by-rank-math' ),
+			'opens'     => esc_html__( 'Opening Time', 'seo-by-rank-math' ),
+			'closes'    => esc_html__( 'Closing Time', 'seo-by-rank-math' ),
 		];
 		foreach ( $labels as $key => $label ) {
 			if ( empty( $opening_hour[ $key ] ) ) {
@@ -332,7 +332,7 @@ class Snippet_Shortcode {
 		?>
 		<div class="rank-math-total-wrapper">
 
-			<strong><?php echo $this->do_filter( 'review/text', esc_html__( 'Editor\'s Rating:', 'rank-math' ) ); // phpcs:ignore ?></strong><br />
+			<strong><?php echo $this->do_filter( 'review/text', esc_html__( 'Editor\'s Rating:', 'seo-by-rank-math' ) ); // phpcs:ignore ?></strong><br />
 
 			<span class="rank-math-total"><?php echo $rating; // phpcs:ignore ?></span>
 

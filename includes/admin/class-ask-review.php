@@ -183,21 +183,21 @@ class Ask_Review {
 		$message = '<p>';
 
 		// Translators: placeholder is the plugin name.
-		$message .= sprintf( esc_html__( 'Hey, we noticed you\'ve been using %s for more than a week now – that\'s awesome!', 'rank-math' ), '<strong>' . _x( 'Rank Math SEO', 'plugin name inside the review notice', 'rank-math' ) . '</strong>' );
+		$message .= sprintf( esc_html__( 'Hey, we noticed you\'ve been using %s for more than a week now – that\'s awesome!', 'seo-by-rank-math' ), '<strong>' . _x( 'Rank Math SEO', 'plugin name inside the review notice', 'seo-by-rank-math' ) . '</strong>' );
 		$message .= '<br>';
 
 		if ( $show_wordpress ) {
-			$message .= esc_html__( 'We would love to get your feedback! It\'s essential for our continued development. Please consider taking a moment to leave us a review.', 'rank-math' );
+			$message .= esc_html__( 'We would love to get your feedback! It\'s essential for our continued development. Please consider taking a moment to leave us a review.', 'seo-by-rank-math' );
 		} else {
-			$message .= esc_html__( 'We would love to get your feedback! It\'s essential for our continued development. Please consider taking a moment to leave a review of your experience on Trustpilot.', 'rank-math' );
+			$message .= esc_html__( 'We would love to get your feedback! It\'s essential for our continued development. Please consider taking a moment to leave a review of your experience on Trustpilot.', 'seo-by-rank-math' );
 		}
 
 		$message .= '</p>
-			<p><strong>Bhanu Ahluwalia</strong><br>' . esc_html__( 'Co-founder of Rank Math', 'rank-math' ) . '</p>
+			<p><strong>Bhanu Ahluwalia</strong><br>' . esc_html__( 'Co-founder of Rank Math', 'seo-by-rank-math' ) . '</p>
 			<p>
-				<a href="' . esc_url( $selected_link ) . '" class="rank-math-dismiss-review-notice rank-math-review-action rank-math-review-out" target="_blank" rel="noopener noreferrer"><strong>' . esc_html__( 'Yes, you deserve it', 'rank-math' ) . '</strong></a><br>
-				<a href="#" class="rank-math-dismiss-review-notice rank-math-maybe-later-action">' . esc_html__( 'No, maybe later', 'rank-math' ) . '</a><br>
-				<a href="#" class="rank-math-dismiss-review-notice rank-math-already-reviewed-action">' . esc_html__( 'I already did', 'rank-math' ) . '</a>
+				<a href="' . esc_url( $selected_link ) . '" class="rank-math-dismiss-review-notice rank-math-review-action rank-math-review-out" target="_blank" rel="noopener noreferrer"><strong>' . esc_html__( 'Yes, you deserve it', 'seo-by-rank-math' ) . '</strong></a><br>
+				<a href="#" class="rank-math-dismiss-review-notice rank-math-maybe-later-action">' . esc_html__( 'No, maybe later', 'seo-by-rank-math' ) . '</a><br>
+				<a href="#" class="rank-math-dismiss-review-notice rank-math-already-reviewed-action">' . esc_html__( 'I already did', 'seo-by-rank-math' ) . '</a>
 			</p>';
 
 		Helper::add_notification(

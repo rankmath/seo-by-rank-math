@@ -17,28 +17,28 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Email', 'rank-math' ),
+		esc_html__( 'Email', 'seo-by-rank-math' ),
 		'email'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Address', 'rank-math' ),
+		esc_html__( 'Address', 'seo-by-rank-math' ),
 		'address'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Gender', 'rank-math' ),
+		esc_html__( 'Gender', 'seo-by-rank-math' ),
 		'gender'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Job Title', 'rank-math' ),
+		esc_html__( 'Job Title', 'seo-by-rank-math' ),
 		'jobTitle'
 	);
 	?>

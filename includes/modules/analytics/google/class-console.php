@@ -225,7 +225,7 @@ class Console extends Analytics {
 		$this->log_failed_request( $response, $workflow, $start_date, func_get_args() );
 
 		if ( ! $this->is_success() ) {
-			return new WP_Error( 'request_failed', __( 'The Google Search Console request failed.', 'rank-math' ) );
+			return new WP_Error( 'request_failed', __( 'The Google Search Console request failed.', 'seo-by-rank-math' ) );
 		}
 
 		if ( ! isset( $response['rows'] ) ) {

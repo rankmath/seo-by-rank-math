@@ -91,7 +91,7 @@ class Rest extends WP_REST_Controller {
 		if ( ! Helper::has_cap( 'general' ) ) {
 			return new WP_Error(
 				'rest_cannot_access',
-				__( 'Sorry, you are not authorized to Import/Export the settings.', 'rank-math' ),
+				__( 'Sorry, you are not authorized to Import/Export the settings.', 'seo-by-rank-math' ),
 				[ 'status' => rest_authorization_required_code() ]
 			);
 		}
@@ -112,7 +112,7 @@ class Rest extends WP_REST_Controller {
 			return new WP_REST_Response(
 				[
 					'type'    => 'error',
-					'message' => esc_html__( 'Invalid action selected.', 'rank-math' ),
+					'message' => esc_html__( 'Invalid action selected.', 'seo-by-rank-math' ),
 				]
 			);
 		}

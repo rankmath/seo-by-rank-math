@@ -153,10 +153,10 @@ class Divi {
 		Helper::add_json(
 			'validationl10n',
 			[
-				'regexErrorDefault'    => __( 'Please use the correct format.', 'rank-math' ),
-				'requiredErrorDefault' => __( 'This field is required.', 'rank-math' ),
-				'emailErrorDefault'    => __( 'Please enter a valid email address.', 'rank-math' ),
-				'urlErrorDefault'      => __( 'Please enter a valid URL.', 'rank-math' ),
+				'regexErrorDefault'    => __( 'Please use the correct format.', 'seo-by-rank-math' ),
+				'requiredErrorDefault' => __( 'This field is required.', 'seo-by-rank-math' ),
+				'emailErrorDefault'    => __( 'Please enter a valid email address.', 'seo-by-rank-math' ),
+				'urlErrorDefault'      => __( 'Please enter a valid URL.', 'seo-by-rank-math' ),
 			]
 		);
 

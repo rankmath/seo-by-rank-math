@@ -17,28 +17,28 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Address', 'rank-math' ),
+		esc_html__( 'Address', 'seo-by-rank-math' ),
 		'address'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Geo Coordinates', 'rank-math' ),
+		esc_html__( 'Geo Coordinates', 'seo-by-rank-math' ),
 		'geo'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Phone Number', 'rank-math' ),
+		esc_html__( 'Phone Number', 'seo-by-rank-math' ),
 		'telephone'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Price Range', 'rank-math' ),
+		esc_html__( 'Price Range', 'seo-by-rank-math' ),
 		'priceRange'
 	);
 	?>
@@ -47,14 +47,14 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Serves Cuisine', 'rank-math' ),
+		esc_html__( 'Serves Cuisine', 'seo-by-rank-math' ),
 		'servesCuisine'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Menu URL', 'rank-math' ),
+		esc_html__( 'Menu URL', 'seo-by-rank-math' ),
 		'hasMenu'
 	);
 	?>

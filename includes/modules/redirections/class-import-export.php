@@ -83,7 +83,7 @@ class Import_Export {
 				<p>
 					<?php
 					// Translators: Placeholder expands to number of redirections.
-					printf( esc_html__( 'Warning: you have more than %d active redirections. Exporting them to your .htaccess file may cause performance issues.', 'rank-math' ), absint( $this->limit ) );
+					printf( esc_html__( 'Warning: you have more than %d active redirections. Exporting them to your .htaccess file may cause performance issues.', 'seo-by-rank-math' ), absint( $this->limit ) );
 					?>
 				</p>
 			</div>
@@ -92,8 +92,8 @@ class Import_Export {
 
 		?>
 		<div class="rank-math-redirections-export-options">
-			<a class="button button-primary" href="<?php echo esc_url( wp_nonce_url( Helper::get_admin_url( 'redirections', 'export=apache' ), 'rank-math-export-redirections' ) ); ?>"><?php esc_html_e( 'Export to .htaccess', 'rank-math' ); ?></a>
-			<a class="button button-primary" href="<?php echo esc_url( wp_nonce_url( Helper::get_admin_url( 'redirections', 'export=nginx' ), 'rank-math-export-redirections' ) ); ?>"><?php esc_html_e( 'Export to Nginx config file', 'rank-math' ); ?></a>
+			<a class="button button-primary" href="<?php echo esc_url( wp_nonce_url( Helper::get_admin_url( 'redirections', 'export=apache' ), 'rank-math-export-redirections' ) ); ?>"><?php esc_html_e( 'Export to .htaccess', 'seo-by-rank-math' ); ?></a>
+			<a class="button button-primary" href="<?php echo esc_url( wp_nonce_url( Helper::get_admin_url( 'redirections', 'export=nginx' ), 'rank-math-export-redirections' ) ); ?>"><?php esc_html_e( 'Export to Nginx config file', 'seo-by-rank-math' ); ?></a>
 		</div>
 		<?php
 	}
@@ -106,7 +106,7 @@ class Import_Export {
 			'redirections/export_tabs',
 			[
 				'export' => [
-					'name'  => __( 'Export', 'rank-math' ),
+					'name'  => __( 'Export', 'seo-by-rank-math' ),
 					'icon'  => 'rm-icon-export',
 					'class' => 'active-tab',
 				],

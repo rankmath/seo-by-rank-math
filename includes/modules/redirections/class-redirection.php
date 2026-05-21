@@ -390,7 +390,7 @@ class Redirection {
 		// Check if it's a valid pattern.
 		if ( @preg_match( '@' . $pattern . '@', '' ) === false ) { // phpcs:ignore
 			/* translators: source pattern */
-			Helper::add_notification( sprintf( __( 'Invalid regex pattern: %s', 'rank-math' ), $pattern ), [ 'type' => 'error' ] );
+			Helper::add_notification( sprintf( __( 'Invalid regex pattern: %s', 'seo-by-rank-math' ), $pattern ), [ 'type' => 'error' ] );
 			return false;
 		}
 

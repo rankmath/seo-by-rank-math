@@ -73,7 +73,7 @@ class Rollback_Version {
 	 * @return boolean Whether the installation was successful.
 	 */
 	public function rollback() {
-		$title        = __( 'Rollback Plugin', 'rank-math' );
+		$title        = __( 'Rollback Plugin', 'seo-by-rank-math' );
 		$parent_file  = 'plugins.php';
 		$submenu_file = 'plugins.php';
 		$new_version  = Param::post( 'rm_rollback_version' );
@@ -134,11 +134,11 @@ class Rollback_Version {
 	 */
 	public function change_updater_strings( $translation, $text ) {
 		if ( 'Plugin updated successfully.' === $text ) {
-			return __( 'Plugin rollback successful.', 'rank-math' );
+			return __( 'Plugin rollback successful.', 'seo-by-rank-math' );
 		}
 
 		if ( 'Installing the latest version&#8230;' === $text ) {
-			return __( 'Installing the rollback version&#8230;', 'rank-math' );
+			return __( 'Installing the rollback version&#8230;', 'seo-by-rank-math' );
 		}
 
 		return $translation;

@@ -82,7 +82,7 @@ class Status extends Base {
 
 		$this->page = new Page(
 			'rank-math-status',
-			esc_html__( 'Status & Tools', 'rank-math' ),
+			esc_html__( 'Status & Tools', 'seo-by-rank-math' ),
 			[
 				'position' => 70,
 				'parent'   => 'rank-math',

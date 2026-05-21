@@ -102,7 +102,7 @@ class Module {
 			return;
 		}
 		?>
-		<a href="<?php echo esc_url( $this->args['settings'] ); ?>" class="module-settings button button-secondary"><?php esc_html_e( 'Settings', 'rank-math' ); ?></a>
+		<a href="<?php echo esc_url( $this->args['settings'] ); ?>" class="module-settings button button-secondary"><?php esc_html_e( 'Settings', 'seo-by-rank-math' ); ?></a>
 		<?php
 	}
 

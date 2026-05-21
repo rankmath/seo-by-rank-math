@@ -267,13 +267,13 @@ class Your_Site implements Wizard_Step {
 	 */
 	private function get_type_choices() {
 		return [
-			'blog'          => esc_html__( 'Personal Blog', 'rank-math' ),
-			'news'          => esc_html__( 'Community Blog/News Site', 'rank-math' ),
-			'portfolio'     => esc_html__( 'Personal Portfolio', 'rank-math' ),
-			'business'      => esc_html__( 'Small Business Site', 'rank-math' ),
-			'webshop'       => esc_html__( 'Webshop', 'rank-math' ),
-			'otherpersonal' => esc_html__( 'Other Personal Website', 'rank-math' ),
-			'otherbusiness' => esc_html__( 'Other Business Website', 'rank-math' ),
+			'blog'          => esc_html__( 'Personal Blog', 'seo-by-rank-math' ),
+			'news'          => esc_html__( 'Community Blog/News Site', 'seo-by-rank-math' ),
+			'portfolio'     => esc_html__( 'Personal Portfolio', 'seo-by-rank-math' ),
+			'business'      => esc_html__( 'Small Business Site', 'seo-by-rank-math' ),
+			'webshop'       => esc_html__( 'Webshop', 'seo-by-rank-math' ),
+			'otherpersonal' => esc_html__( 'Other Personal Website', 'seo-by-rank-math' ),
+			'otherbusiness' => esc_html__( 'Other Business Website', 'seo-by-rank-math' ),
 		];
 	}
 }

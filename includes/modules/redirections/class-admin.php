@@ -152,7 +152,7 @@ class Admin extends Base {
 
 		$this->page = new Page(
 			'rank-math-redirections',
-			esc_html__( 'Redirections', 'rank-math' ),
+			esc_html__( 'Redirections', 'seo-by-rank-math' ),
 			[
 				'position'   => 40,
 				'parent'     => 'rank-math',
@@ -160,19 +160,19 @@ class Admin extends Base {
 				'render'     => $dir . 'main.php',
 				'help'       => [
 					'redirections-overview'       => [
-						'title' => esc_html__( 'Overview', 'rank-math' ),
+						'title' => esc_html__( 'Overview', 'seo-by-rank-math' ),
 						'view'  => $dir . 'help-tab-overview.php',
 					],
 					'redirections-screen-content' => [
-						'title' => esc_html__( 'Screen Content', 'rank-math' ),
+						'title' => esc_html__( 'Screen Content', 'seo-by-rank-math' ),
 						'view'  => $dir . 'help-tab-screen-content.php',
 					],
 					'redirections-actions'        => [
-						'title' => esc_html__( 'Available Actions', 'rank-math' ),
+						'title' => esc_html__( 'Available Actions', 'seo-by-rank-math' ),
 						'view'  => $dir . 'help-tab-actions.php',
 					],
 					'redirections-bulk'           => [
-						'title' => esc_html__( 'Bulk Actions', 'rank-math' ),
+						'title' => esc_html__( 'Bulk Actions', 'seo-by-rank-math' ),
 						'view'  => $dir . 'help-tab-bulk.php',
 					],
 				],
@@ -217,9 +217,9 @@ class Admin extends Base {
 			[
 				'redirections' => [
 					'icon'  => 'rm-icon rm-icon-redirection',
-					'title' => esc_html__( 'Redirections', 'rank-math' ),
+					'title' => esc_html__( 'Redirections', 'seo-by-rank-math' ),
 					/* translators: Link to kb article */
-					'desc'  => sprintf( esc_html__( 'Easily create redirects without fiddling with tedious code. %s.', 'rank-math' ), '<a href="' . KB::get( 'redirections-settings', 'Options Panel Redirections Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+					'desc'  => sprintf( esc_html__( 'Easily create redirects without fiddling with tedious code. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'redirections-settings', 'Options Panel Redirections Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
 					'json'  => [
 						'redirectionTypes' => Helper::choices_redirection_types(),
@@ -252,7 +252,7 @@ class Admin extends Base {
 
 		$ids = (array) wp_parse_id_list( $_REQUEST['redirection'] );
 		if ( empty( $ids ) ) {
-			Helper::add_notification( __( 'No valid ID found.', 'rank-math' ) );
+			Helper::add_notification( __( 'No valid ID found.', 'seo-by-rank-math' ) );
 			return;
 		}
 
@@ -279,7 +279,7 @@ class Admin extends Base {
 		$action = str_replace( 'rank_math_redirection_', '', $action );
 
 		if ( ! $id ) {
-			$this->error( esc_html__( 'No valid ID found.', 'rank-math' ) );
+			$this->error( esc_html__( 'No valid ID found.', 'seo-by-rank-math' ) );
 		}
 
 		$notice = $this->perform_action( $action, $id );
@@ -287,7 +287,7 @@ class Admin extends Base {
 			$this->success( $notice );
 		}
 
-		$this->error( esc_html__( 'No valid action found.', 'rank-math' ) );
+		$this->error( esc_html__( 'No valid action found.', 'seo-by-rank-math' ) );
 	}
 
 	/**
@@ -301,22 +301,22 @@ class Admin extends Base {
 			'add'           => [
 				'class' => 'page-title-action rank-math-add-new-redirection' . ( $is_editing ? '-refresh' : '' ),
 				'href'  => Helper::get_admin_url( 'redirections', 'new=1' ),
-				'label' => __( 'Add New', 'rank-math' ),
+				'label' => __( 'Add New', 'seo-by-rank-math' ),
 			],
 			'import_export' => [
 				'class' => 'page-title-action',
 				'href'  => Helper::get_admin_url( 'redirections', 'importexport=1' ),
-				'label' => __( 'Export Options', 'rank-math' ),
+				'label' => __( 'Export Options', 'seo-by-rank-math' ),
 			],
 			'learn_more'    => [
 				'class' => 'page-title-action',
 				'href'  => KB::get( 'redirections', 'SW Redirection Step' ),
-				'label' => __( 'Learn More', 'rank-math' ),
+				'label' => __( 'Learn More', 'seo-by-rank-math' ),
 			],
 			'settings'      => [
 				'class' => 'page-title-action',
 				'href'  => Helper::get_settings_url( 'general', 'redirections' ),
-				'label' => __( 'Settings', 'rank-math' ),
+				'label' => __( 'Settings', 'seo-by-rank-math' ),
 			],
 		];
 
@@ -428,10 +428,10 @@ class Admin extends Base {
 			'restore'    => 'active',
 		];
 		$message = [
-			'activate'   => esc_html__( 'Redirection successfully activated.', 'rank-math' ),
-			'deactivate' => esc_html__( 'Redirection successfully deactivated.', 'rank-math' ),
-			'trash'      => esc_html__( 'Redirection successfully moved to Trash.', 'rank-math' ),
-			'restore'    => esc_html__( 'Redirection successfully restored.', 'rank-math' ),
+			'activate'   => esc_html__( 'Redirection successfully activated.', 'seo-by-rank-math' ),
+			'deactivate' => esc_html__( 'Redirection successfully deactivated.', 'seo-by-rank-math' ),
+			'trash'      => esc_html__( 'Redirection successfully moved to Trash.', 'seo-by-rank-math' ),
+			'restore'    => esc_html__( 'Redirection successfully restored.', 'seo-by-rank-math' ),
 		];
 
 		if ( isset( $status[ $action ] ) ) {
@@ -443,7 +443,7 @@ class Admin extends Base {
 			$count = DB::delete( $ids );
 			if ( $count > 0 ) {
 				/* translators: delete counter */
-				return sprintf( esc_html__( '%d redirection(s) successfully deleted.', 'rank-math' ), $count );
+				return sprintf( esc_html__( '%d redirection(s) successfully deleted.', 'seo-by-rank-math' ), $count );
 			}
 		}
 

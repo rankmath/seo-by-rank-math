@@ -72,9 +72,9 @@ class Analytics_Common {
 	public function dashboard_widget() {
 		?>
 		<h3>
-			<?php esc_html_e( 'Analytics', 'rank-math' ); ?>
-			<span><?php esc_html_e( 'Last 30 Days', 'rank-math' ); ?></span>
-			<a href="<?php echo esc_url( Helper::get_admin_url( 'analytics' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'rank-math' ); ?>">
+			<?php esc_html_e( 'Analytics', 'seo-by-rank-math' ); ?>
+			<span><?php esc_html_e( 'Last 30 Days', 'seo-by-rank-math' ); ?></span>
+			<a href="<?php echo esc_url( Helper::get_admin_url( 'analytics' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'seo-by-rank-math' ); ?>">
 				<i class="dashicons dashicons-chart-bar"></i>
 			</a>
 		</h3>
@@ -143,9 +143,9 @@ class Analytics_Common {
 		$menu->add_sub_menu(
 			'analytics',
 			[
-				'title'    => esc_html__( 'Analytics', 'rank-math' ) . '<span class="rm-menu-new update-plugins" style="background: ' . $dot_color . ';margin-left: 5px;min-width: 10px;height: 10px;margin-bottom: -1px;display: inline-block;border-radius: 5px;"><span class="plugin-count"></span></span>',
+				'title'    => esc_html__( 'Analytics', 'seo-by-rank-math' ) . '<span class="rm-menu-new update-plugins" style="background: ' . $dot_color . ';margin-left: 5px;min-width: 10px;height: 10px;margin-bottom: -1px;display: inline-block;border-radius: 5px;"><span class="plugin-count"></span></span>',
 				'href'     => Helper::get_admin_url( 'analytics' ),
-				'meta'     => [ 'title' => esc_html__( 'Review analytics and sitemaps', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Review analytics and sitemaps', 'seo-by-rank-math' ) ],
 				'priority' => 20,
 			]
 		);
@@ -158,7 +158,7 @@ class Analytics_Common {
 	 */
 	public function analytics_clear_caches() {
 		DB::purge_cache();
-		return __( 'Analytics cache cleared.', 'rank-math' );
+		return __( 'Analytics cache cleared.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -179,7 +179,7 @@ class Analytics_Common {
 		// Start reindexing posts.
 		( new \RankMath\Analytics\Workflow\Objects() )->flat_posts();
 
-		return __( 'Post re-index in progress.', 'rank-math' );
+		return __( 'Post re-index in progress.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -203,10 +203,10 @@ class Analytics_Common {
 
 		return $changed ? sprintf(
 			/* translators: %1$d: number of changes, %2$s: new collation. */
-			_n( '%1$d collation changed to %2$s.', '%1$d collations changed to %2$s.', $changed, 'rank-math' ),
+			_n( '%1$d collation changed to %2$s.', '%1$d collations changed to %2$s.', $changed, 'seo-by-rank-math' ),
 			$changed,
 			'`' . $objects_coll . '`'
-		) : __( 'No collation mismatch to fix.', 'rank-math' );
+		) : __( 'No collation mismatch to fix.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -328,32 +328,32 @@ class Analytics_Common {
 		$is_connected = ! empty( $analytics ) && ! empty( $analytics['view_id'] );
 		return [
 			'search-traffic'    => [
-				'label' => __( 'Search Traffic', 'rank-math' ),
-				'desc'  => __( 'This is the number of pageviews carried out by visitors from Search Engines.', 'rank-math' ),
+				'label' => __( 'Search Traffic', 'seo-by-rank-math' ),
+				'desc'  => __( 'This is the number of pageviews carried out by visitors from Search Engines.', 'seo-by-rank-math' ),
 				'value' => $is_connected && defined( 'RANK_MATH_PRO_FILE' ),
 				'data'  => isset( $data->pageviews ) ? $data->pageviews : '',
 			],
 			'total-impressions' => [
-				'label' => __( 'Total Impressions', 'rank-math' ),
-				'desc'  => __( 'How many times your site showed up in the search results.', 'rank-math' ),
+				'label' => __( 'Total Impressions', 'seo-by-rank-math' ),
+				'desc'  => __( 'How many times your site showed up in the search results.', 'seo-by-rank-math' ),
 				'value' => true,
 				'data'  => $data->impressions,
 			],
 			'total-clicks'      => [
-				'label' => __( 'Total Clicks', 'rank-math' ),
-				'desc'  => __( 'How many times your site was clicked on in the search results.', 'rank-math' ),
+				'label' => __( 'Total Clicks', 'seo-by-rank-math' ),
+				'desc'  => __( 'How many times your site was clicked on in the search results.', 'seo-by-rank-math' ),
 				'value' => ! $is_connected || ( $is_connected && ! defined( 'RANK_MATH_PRO_FILE' ) ),
 				'data'  => $data->clicks,
 			],
 			'total-keywords'    => [
-				'label' => __( 'Total Keywords', 'rank-math' ),
-				'desc'  => __( 'Total number of keywords your site ranks for within top 100 positions.', 'rank-math' ),
+				'label' => __( 'Total Keywords', 'seo-by-rank-math' ),
+				'desc'  => __( 'Total number of keywords your site ranks for within top 100 positions.', 'seo-by-rank-math' ),
 				'value' => true,
 				'data'  => $data->keywords,
 			],
 			'average-position'  => [
-				'label'  => __( 'Average Position', 'rank-math' ),
-				'desc'   => __( 'Average position of all the keywords ranking within top 100 positions.', 'rank-math' ),
+				'label'  => __( 'Average Position', 'seo-by-rank-math' ),
+				'desc'   => __( 'Average position of all the keywords ranking within top 100 positions.', 'seo-by-rank-math' ),
 				'value'  => true,
 				'revert' => true,
 				'data'   => $data->position,

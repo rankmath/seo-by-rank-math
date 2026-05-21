@@ -33,10 +33,10 @@ class Term_Variables extends Basic_Variables {
 		$this->register_replacement(
 			'term',
 			[
-				'name'        => esc_html__( 'Current Term', 'rank-math' ),
-				'description' => esc_html__( 'Current term name', 'rank-math' ),
+				'name'        => esc_html__( 'Current Term', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current term name', 'seo-by-rank-math' ),
 				'variable'    => 'term',
-				'example'     => $this->is_term_edit ? $term->name : esc_html__( 'Example Term', 'rank-math' ),
+				'example'     => $this->is_term_edit ? $term->name : esc_html__( 'Example Term', 'seo-by-rank-math' ),
 				'nocache'     => true,
 			],
 			[ $this, 'get_term' ]
@@ -45,10 +45,10 @@ class Term_Variables extends Basic_Variables {
 		$this->register_replacement(
 			'term_description',
 			[
-				'name'        => esc_html__( 'Term Description', 'rank-math' ),
-				'description' => esc_html__( 'Current term description', 'rank-math' ),
+				'name'        => esc_html__( 'Term Description', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current term description', 'seo-by-rank-math' ),
 				'variable'    => 'term_description',
-				'example'     => $this->is_term_edit ? wp_strip_all_tags( term_description( $term ), true ) : esc_html__( 'Example Term Description', 'rank-math' ),
+				'example'     => $this->is_term_edit ? wp_strip_all_tags( term_description( $term ), true ) : esc_html__( 'Example Term Description', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_term_description' ]
 		);
@@ -56,10 +56,10 @@ class Term_Variables extends Basic_Variables {
 		$this->register_replacement(
 			'customterm',
 			[
-				'name'        => esc_html__( 'Custom Term (advanced)', 'rank-math' ),
-				'description' => esc_html__( 'Custom term value.', 'rank-math' ),
+				'name'        => esc_html__( 'Custom Term (advanced)', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Custom term value.', 'seo-by-rank-math' ),
 				'variable'    => 'customterm(taxonomy-name)',
-				'example'     => esc_html__( 'Custom term value', 'rank-math' ),
+				'example'     => esc_html__( 'Custom term value', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_custom_term' ]
 		);
@@ -67,10 +67,10 @@ class Term_Variables extends Basic_Variables {
 		$this->register_replacement(
 			'customterm_desc',
 			[
-				'name'        => esc_html__( 'Custom Term description', 'rank-math' ),
-				'description' => esc_html__( 'Custom Term description.', 'rank-math' ),
+				'name'        => esc_html__( 'Custom Term description', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Custom Term description.', 'seo-by-rank-math' ),
 				'variable'    => 'customterm_desc(taxonomy-name)',
-				'example'     => esc_html__( 'Custom Term description.', 'rank-math' ),
+				'example'     => esc_html__( 'Custom Term description.', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_custom_term_desc' ]
 		);

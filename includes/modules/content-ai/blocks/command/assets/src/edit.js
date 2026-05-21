@@ -26,8 +26,8 @@ const getErrorMessage = () => {
 	if ( ! rankMath.contentAI.isUserRegistered ) {
 		return (
 			<>
-				{ __( 'Start using Content AI by connecting your RankMath account.', 'rank-math' ) }
-				<a href={ rankMath.connectSiteUrl }>{ __( 'Connect Now', 'rank-math' ) }</a>
+				{ __( 'Start using Content AI by connecting your RankMath account.', 'seo-by-rank-math' ) }
+				<a href={ rankMath.connectSiteUrl }>{ __( 'Connect Now', 'seo-by-rank-math' ) }</a>
 			</>
 		)
 	}
@@ -35,9 +35,9 @@ const getErrorMessage = () => {
 	if ( ! rankMath.contentAI.plan ) {
 		return (
 			<>
-				{ __( 'You do not have a Content AI plan.', 'rank-math' ) }
+				{ __( 'You do not have a Content AI plan.', 'seo-by-rank-math' ) }
 				<a href="https://rankmath.com/kb/how-to-use-content-ai/?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Plan+Button&utm_campaign=WP">
-					{ __( 'Choose your plan', 'rank-math' ) }
+					{ __( 'Choose your plan', 'seo-by-rank-math' ) }
 				</a>
 			</>
 		)
@@ -45,9 +45,9 @@ const getErrorMessage = () => {
 
 	return (
 		<>
-			{ __( 'You have exhausted your Content AI Credits.', 'rank-math' ) }
+			{ __( 'You have exhausted your Content AI Credits.', 'seo-by-rank-math' ) }
 			<a href="https://rankmath.com/kb/how-to-use-content-ai/?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Credits+Button&utm_campaign=WP" target="_blank" rel="noreferrer">
-				{ __( 'Get more', 'rank-math' ) }
+				{ __( 'Get more', 'seo-by-rank-math' ) }
 			</a>
 		</>
 	)
@@ -132,11 +132,11 @@ export default ( {
 			return (
 				<button
 					className="button button-small rank-math-content-ai-dismiss"
-					title={ __( 'Dismiss', 'rank-math' ) }
+					title={ __( 'Dismiss', 'seo-by-rank-math' ) }
 					onClick={ handleDismissCommand }
 					contentEditable={ false }
 				>
-					{ __( 'Dismiss', 'rank-math' ) }
+					{ __( 'Dismiss', 'seo-by-rank-math' ) }
 				</button>
 			)
 		}
@@ -148,19 +148,19 @@ export default ( {
 						className="button button-small rank-math-content-ai-use"
 						onClick={ handleUseBlock }
 					>
-						<span>{ __( 'Use', 'rank-math' ) }</span>
+						<span>{ __( 'Use', 'seo-by-rank-math' ) }</span>
 					</button>
 					<button
 						className="button button-small rank-math-content-ai-regenerate"
 						onClick={ handleRegenerateOutput }
 					>
-						<span>{ __( 'Regenerate', 'rank-math' ) }</span>
+						<span>{ __( 'Regenerate', 'seo-by-rank-math' ) }</span>
 					</button>
 					<button
 						className="button button-small rank-math-content-ai-write-more"
 						onClick={ handleWriteMore }
 					>
-						<span>{ __( 'Write More', 'rank-math' ) }</span>
+						<span>{ __( 'Write More', 'seo-by-rank-math' ) }</span>
 					</button>
 				</div>
 			)
@@ -172,7 +172,7 @@ export default ( {
 				<>
 					<button
 						className="rank-math-content-ai-command-button"
-						title={ __( 'Click or Press Enter', 'rank-math' ) }
+						title={ __( 'Click or Press Enter', 'seo-by-rank-math' ) }
 						onClick={ handleRunCommand }
 						contentEditable={ false }
 					>
@@ -180,11 +180,11 @@ export default ( {
 					</button>
 					<button
 						className="rank-math-command-dismiss-button"
-						title={ __( 'Dismiss', 'rank-math' ) }
+						title={ __( 'Dismiss', 'seo-by-rank-math' ) }
 						onClick={ handleDismissCommand }
 						contentEditable={ false }
 					>
-						{ __( 'Close', 'rank-math' ) }
+						{ __( 'Close', 'seo-by-rank-math' ) }
 					</button>
 				</>
 			)

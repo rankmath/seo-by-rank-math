@@ -101,8 +101,8 @@ export default ( {
 		return (
 			<div { ...blockProps }>
 				<Placeholder
-					label={ __( 'Table of Contents', 'rank-math' ) }
-					instructions={ __( 'Add Heading blocks to this page to generate the Table of Contents.', 'rank-math' ) }
+					label={ __( 'Table of Contents', 'seo-by-rank-math' ) }
+					instructions={ __( 'Add Heading blocks to this page to generate the Table of Contents.', 'seo-by-rank-math' ) }
 				/>
 				<InspectControls attributes={ attributes } setAttributes={ setAttributes } excludeHeadings={ excludeHeadings } setExcludeHeadings={ setExcludeHeadings } />
 			</div>
@@ -117,7 +117,7 @@ export default ( {
 				onChange={ ( newTitle ) => {
 					setAttributes( { title: newTitle } )
 				} }
-				placeholder={ __( 'Enter a title', 'rank-math' ) }
+				placeholder={ __( 'Enter a title', 'seo-by-rank-math' ) }
 			/>
 			<nav>
 				<ListStyle>

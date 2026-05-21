@@ -37,7 +37,7 @@ class Schedule {
 
 		if ( ! $id ) {
 			self::notify(
-				esc_html__( 'There was an issue scheduling the async action required for Analytics; if the problem persists, please contact our support team.', 'rank-math' ),
+				esc_html__( 'There was an issue scheduling the async action required for Analytics; if the problem persists, please contact our support team.', 'seo-by-rank-math' ),
 				'recurring'
 			);
 		}
@@ -62,7 +62,7 @@ class Schedule {
 
 		if ( ! $id ) {
 			self::notify(
-				esc_html__( 'There was an issue scheduling a single action required for Analytics; if the problem persists, please contact our support team.', 'rank-math' ),
+				esc_html__( 'There was an issue scheduling a single action required for Analytics; if the problem persists, please contact our support team.', 'seo-by-rank-math' ),
 				'schedule'
 			);
 		}
@@ -91,7 +91,7 @@ class Schedule {
 
 		if ( ! $id ) {
 			self::notify(
-				esc_html__( 'There was an issue scheduling the recurring action required for Analytics; if the problem persists, please contact our support team.', 'rank-math' ),
+				esc_html__( 'There was an issue scheduling the recurring action required for Analytics; if the problem persists, please contact our support team.', 'seo-by-rank-math' ),
 				'unschedule'
 			);
 		}
@@ -115,7 +115,7 @@ class Schedule {
 
 		if ( ! $id ) {
 			self::notify(
-				esc_html__( 'There was an issue unscheduling a background action related to Analytics; if the problem persists, please contact our support team.', 'rank-math' ),
+				esc_html__( 'There was an issue unscheduling a background action related to Analytics; if the problem persists, please contact our support team.', 'seo-by-rank-math' ),
 				'async'
 			);
 		}

@@ -77,38 +77,38 @@ class Bulk_Actions implements Runner {
 	 * @return array             New actions.
 	 */
 	public function post_bulk_actions( $actions ) {
-		$new_actions = [ 'rank_math_options' => __( '&#8595; Rank Math', 'rank-math' ) ];
+		$new_actions = [ 'rank_math_options' => __( '&#8595; Rank Math', 'seo-by-rank-math' ) ];
 
 		if ( Helper::has_cap( 'onpage_advanced' ) ) {
-			$new_actions['rank_math_bulk_robots_noindex']   = __( 'Set to noindex', 'rank-math' );
-			$new_actions['rank_math_bulk_robots_index']     = __( 'Set to index', 'rank-math' );
-			$new_actions['rank_math_bulk_robots_nofollow']  = __( 'Set to nofollow', 'rank-math' );
-			$new_actions['rank_math_bulk_robots_follow']    = __( 'Set to follow', 'rank-math' );
-			$new_actions['rank_math_bulk_remove_canonical'] = __( 'Remove custom canonical URL', 'rank-math' );
+			$new_actions['rank_math_bulk_robots_noindex']   = __( 'Set to noindex', 'seo-by-rank-math' );
+			$new_actions['rank_math_bulk_robots_index']     = __( 'Set to index', 'seo-by-rank-math' );
+			$new_actions['rank_math_bulk_robots_nofollow']  = __( 'Set to nofollow', 'seo-by-rank-math' );
+			$new_actions['rank_math_bulk_robots_follow']    = __( 'Set to follow', 'seo-by-rank-math' );
+			$new_actions['rank_math_bulk_remove_canonical'] = __( 'Remove custom canonical URL', 'seo-by-rank-math' );
 
 			if ( Helper::is_module_active( 'redirections' ) && Helper::has_cap( 'redirections' ) ) {
-				$new_actions['rank_math_bulk_redirect']      = __( 'Redirect', 'rank-math' );
-				$new_actions['rank_math_bulk_stop_redirect'] = __( 'Remove redirection', 'rank-math' );
+				$new_actions['rank_math_bulk_redirect']      = __( 'Redirect', 'seo-by-rank-math' );
+				$new_actions['rank_math_bulk_stop_redirect'] = __( 'Remove redirection', 'seo-by-rank-math' );
 			}
 		}
 
 		if ( Helper::is_module_active( 'rich-snippet' ) && Helper::has_cap( 'onpage_snippet' ) ) {
-			$new_actions['rank_math_bulk_schema_none'] = __( 'Set Schema: None', 'rank-math' );
+			$new_actions['rank_math_bulk_schema_none'] = __( 'Set Schema: None', 'seo-by-rank-math' );
 			$post_type                                 = Param::get( 'post_type', get_post_type() );
 			$post_type_default                         = Helper::get_settings( 'titles.pt_' . $post_type . '_default_rich_snippet' );
 
 			if ( ( class_exists( 'WooCommerce' ) && 'product' === $post_type ) || ( class_exists( 'Easy_Digital_Downloads' ) && 'download' === $post_type ) ) {
-				$post_type_default = 'download' === $post_type ? esc_html__( 'EDD Product', 'rank-math' ) : esc_html__( 'WC Product', 'rank-math' );
+				$post_type_default = 'download' === $post_type ? esc_html__( 'EDD Product', 'seo-by-rank-math' ) : esc_html__( 'WC Product', 'seo-by-rank-math' );
 			}
 
 			if ( $post_type_default ) {
 				// Translators: placeholder is the default Schema type setting.
-				$new_actions['rank_math_bulk_schema_default'] = sprintf( __( 'Set Schema: Default (%s)', 'rank-math' ), $post_type_default );
+				$new_actions['rank_math_bulk_schema_default'] = sprintf( __( 'Set Schema: Default (%s)', 'seo-by-rank-math' ), $post_type_default );
 			}
 		}
 
 		if ( Helper::has_cap( 'onpage_general' ) && Helper::should_determine_search_intent() ) {
-			$new_actions['rank_math_bulk_determine_search_intent'] = __( 'Determine Search Intent', 'rank-math' );
+			$new_actions['rank_math_bulk_determine_search_intent'] = __( 'Determine Search Intent', 'seo-by-rank-math' );
 		}
 
 		if ( is_array( $actions ) && count( $new_actions ) > 1 ) {
@@ -136,7 +136,7 @@ class Bulk_Actions implements Runner {
 			)
 		) {
 			Helper::add_notification(
-				esc_html__( 'Your current plugin version does not support this feature. Please update Rank Math PRO to version 3.0.83 or later to unlock full functionality.', 'rank-math' ),
+				esc_html__( 'Your current plugin version does not support this feature. Please update Rank Math PRO to version 3.0.83 or later to unlock full functionality.', 'seo-by-rank-math' ),
 				[
 					'type'    => 'error',
 					'id'      => 'rank_math_search_intent_error',

@@ -49,27 +49,27 @@ class Update_Email {
 		$to = get_site_option( 'admin_email' );
 
 		// Translators: placeholder is the site title.
-		$subject = __( '[%s] An update is available for Rank Math', 'rank-math' );
+		$subject = __( '[%s] An update is available for Rank Math', 'seo-by-rank-math' );
 		$subject = sprintf( $subject, wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ) );
 
 		$body   = [];
-		$body[] = __( 'Hello,', 'rank-math' ) . "\n";
+		$body[] = __( 'Hello,', 'seo-by-rank-math' ) . "\n";
 
 		// Translators: placeholder is the site URL.
-		$body[] = sprintf( __( 'This is an automated email to let you know that there is an update available for the Rank Math SEO plugin installed on: %s', 'rank-math' ), get_home_url() ) . "\n";
+		$body[] = sprintf( __( 'This is an automated email to let you know that there is an update available for the Rank Math SEO plugin installed on: %s', 'seo-by-rank-math' ), get_home_url() ) . "\n";
 
 		$products = $this->do_filter( 'admin/update_notification_products', $this->get_updatable_products( $transient ), $transient );
 		$list     = $this->get_products_list( $products );
 		$body[]   = $list;
 
 		// Translators: placeholder is the new admin page URL.
-		$body[] = sprintf( __( 'To ensure your site is always on the latest, most up-to-date version of Rank Math - we recommend logging into the admin area to update the plugin as soon as possible: %s', 'rank-math' ), admin_url( 'update-core.php' ) ) . "\n";
+		$body[] = sprintf( __( 'To ensure your site is always on the latest, most up-to-date version of Rank Math - we recommend logging into the admin area to update the plugin as soon as possible: %s', 'seo-by-rank-math' ), admin_url( 'update-core.php' ) ) . "\n";
 
 		// Add a note about the support forums.
-		$body[] = __( 'If you have any questions or experience any issues – our support team is at your disposal:', 'rank-math' );
-		$body[] = __( 'https://support.rankmath.com/', 'rank-math' );
+		$body[] = __( 'If you have any questions or experience any issues – our support team is at your disposal:', 'seo-by-rank-math' );
+		$body[] = __( 'https://support.rankmath.com/', 'seo-by-rank-math' );
 		$body[] = "\n" . '-';
-		$body[] = __( 'Rank Math Team', 'rank-math' );
+		$body[] = __( 'Rank Math Team', 'seo-by-rank-math' );
 
 		$body = implode( "\n", $body );
 
@@ -140,7 +140,7 @@ class Update_Email {
 
 		$products = [
 			'free' => [
-				'name'        => __( 'Rank Math Free', 'rank-math' ),
+				'name'        => __( 'Rank Math Free', 'seo-by-rank-math' ),
 				'old_version' => $old_version,
 				'new_version' => $new_version,
 				'changelog'   => KB::get( 'changelog-free', 'Changelog Update notification mail' ),
@@ -161,7 +161,7 @@ class Update_Email {
 
 		foreach ( $products_array as $product_data ) {
 			// Translators: placeholders are the old and new version numbers.
-			$list .= sprintf( __( '%1$s: Old %2$s -> New %3$s | Changelog: %4$s', 'rank-math' ), $product_data['name'], $product_data['old_version'], $product_data['new_version'], $product_data['changelog'] ) . "\n";
+			$list .= sprintf( __( '%1$s: Old %2$s -> New %3$s | Changelog: %4$s', 'seo-by-rank-math' ), $product_data['name'], $product_data['old_version'], $product_data['new_version'], $product_data['changelog'] ) . "\n";
 		}
 
 		return $list;

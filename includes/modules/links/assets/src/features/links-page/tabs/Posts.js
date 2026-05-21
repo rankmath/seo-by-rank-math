@@ -52,7 +52,7 @@ const SeoScoreBadge = ( { score } ) => {
 	if ( ! score ) {
 		return (
 			<span className="rank-math-seo-score na">
-				<strong>{ __( 'Not Set', 'rank-math' ) }</strong>
+				<strong>{ __( 'Not Set', 'seo-by-rank-math' ) }</strong>
 			</span>
 		)
 	}
@@ -129,17 +129,17 @@ const Posts = () => {
 	const headers = useMemo( () => [
 		{
 			key: 'post_title',
-			label: __( 'Post Title', 'rank-math' ),
+			label: __( 'Post Title', 'seo-by-rank-math' ),
 			isSortable: true,
 			isHideable: false,
 			render: ( value, row ) => (
 				<>
 					{ row.edit_url ? (
 						<a href={ row.edit_url } target="_blank" rel="noopener noreferrer">
-							{ value || __( '(no title)', 'rank-math' ) }
+							{ value || __( '(no title)', 'seo-by-rank-math' ) }
 						</a>
 					) : (
-						value || __( '(no title)', 'rank-math' )
+						value || __( '(no title)', 'seo-by-rank-math' )
 					) }
 					{ row.post_url && (
 						<div className="rank-math-post-url">{ row.post_url }</div>
@@ -149,7 +149,7 @@ const Posts = () => {
 		},
 		{
 			key: 'internal_link_count',
-			label: __( 'Internal Links', 'rank-math' ),
+			label: __( 'Internal Links', 'seo-by-rank-math' ),
 			isSortable: true,
 			render: ( value, row ) => {
 				const count = parseInt( value, 10 ) || 0
@@ -163,14 +163,14 @@ const Posts = () => {
 						onClick={ () => handleNavigateToLinks( row.post_id, 'internal' ) }
 					>
 						{ count }
-						<span>{ __( 'View internal links from this post', 'rank-math' ) }</span>
+						<span>{ __( 'View internal links from this post', 'seo-by-rank-math' ) }</span>
 					</button>
 				)
 			},
 		},
 		{
 			key: 'external_link_count',
-			label: __( 'External Links', 'rank-math' ),
+			label: __( 'External Links', 'seo-by-rank-math' ),
 			isSortable: true,
 			render: ( value, row ) => {
 				const count = parseInt( value, 10 ) || 0
@@ -184,22 +184,22 @@ const Posts = () => {
 						onClick={ () => handleNavigateToLinks( row.post_id, 'external' ) }
 					>
 						{ count }
-						<span>{ __( 'View external links from this post', 'rank-math' ) }</span>
+						<span>{ __( 'View external links from this post', 'seo-by-rank-math' ) }</span>
 					</button>
 				)
 			},
 		},
 		{
 			key: 'incoming_link_count',
-			label: __( 'Incoming Links', 'rank-math' ),
+			label: __( 'Incoming Links', 'seo-by-rank-math' ),
 			isSortable: true,
 			render: ( value, row ) => {
 				const count = parseInt( value, 10 ) || 0
 				if ( count === 0 ) {
 					return (
-						<span className="rank-math-orphan-warning rank-math-tooltip" title={ __( 'Orphan post — no incoming links', 'rank-math' ) }>
+						<span className="rank-math-orphan-warning rank-math-tooltip" title={ __( 'Orphan post — no incoming links', 'seo-by-rank-math' ) }>
 							<i className="dashicons dashicons-warning" />
-							<span>{ __( 'This post has no internal links. We recommend that you add links to this URL in other posts of your website.', 'rank-math' ) }</span>
+							<span>{ __( 'This post has no internal links. We recommend that you add links to this URL in other posts of your website.', 'seo-by-rank-math' ) }</span>
 						</span>
 					)
 				}
@@ -210,20 +210,20 @@ const Posts = () => {
 						onClick={ () => handleNavigateToLinks( row.post_id, 'incoming' ) }
 					>
 						{ count }
-						<span>{ __( 'View incoming links to this post', 'rank-math' ) }</span>
+						<span>{ __( 'View incoming links to this post', 'seo-by-rank-math' ) }</span>
 					</button>
 				)
 			},
 		},
 		{
 			key: 'seo_score',
-			label: __( 'SEO Score', 'rank-math' ),
+			label: __( 'SEO Score', 'seo-by-rank-math' ),
 			isSortable: true,
 			render: ( value ) => <SeoScoreBadge score={ value } />,
 		},
 		{
 			key: 'post_type_label',
-			label: __( 'Type', 'rank-math' ),
+			label: __( 'Type', 'seo-by-rank-math' ),
 			isSortable: false,
 			render: ( value, row ) => value || row.post_type,
 		},
@@ -231,27 +231,27 @@ const Posts = () => {
 
 	// Orphan filter toggle options — statusType drives active/hover color
 	const orphanOptions = [
-		{ label: __( 'All Posts', 'rank-math' ), value: '', statusType: 'all' },
-		{ label: __( 'Orphan Posts', 'rank-math' ), value: 'orphan', statusType: 'orphan' },
-		{ label: __( 'With Incoming Links', 'rank-math' ), value: 'linked', statusType: 'linked' },
+		{ label: __( 'All Posts', 'seo-by-rank-math' ), value: '', statusType: 'all' },
+		{ label: __( 'Orphan Posts', 'seo-by-rank-math' ), value: 'orphan', statusType: 'orphan' },
+		{ label: __( 'With Incoming Links', 'seo-by-rank-math' ), value: 'linked', statusType: 'linked' },
 	]
 
 	// SEO score range filter toggle options — statusType drives colored pill colors
 	const seoScoreOptions = [
-		{ label: __( 'All Scores', 'rank-math' ), value: '', statusType: 'all' },
-		{ label: __( 'Great', 'rank-math' ), value: 'great', statusType: 'great' },
-		{ label: __( 'Good', 'rank-math' ), value: 'good', statusType: 'good' },
-		{ label: __( 'Bad', 'rank-math' ), value: 'bad', statusType: 'bad' },
-		{ label: __( 'Not Set', 'rank-math' ), value: 'no-score', statusType: 'no-score' },
+		{ label: __( 'All Scores', 'seo-by-rank-math' ), value: '', statusType: 'all' },
+		{ label: __( 'Great', 'seo-by-rank-math' ), value: 'great', statusType: 'great' },
+		{ label: __( 'Good', 'seo-by-rank-math' ), value: 'good', statusType: 'good' },
+		{ label: __( 'Bad', 'seo-by-rank-math' ), value: 'bad', statusType: 'bad' },
+		{ label: __( 'Not Set', 'seo-by-rank-math' ), value: 'no-score', statusType: 'no-score' },
 	]
 
 	// Post type filter via FilterStaging (multi-select)
 	const filterStagingFilters = useMemo( () => [
 		{
 			key: 'post_type',
-			label: __( 'Post Type', 'rank-math' ),
+			label: __( 'Post Type', 'seo-by-rank-math' ),
 			multiSelect: true,
-			allLabel: __( 'All Types', 'rank-math' ),
+			allLabel: __( 'All Types', 'seo-by-rank-math' ),
 			options: getPostTypeOptions(),
 		},
 	], [] )
@@ -298,8 +298,8 @@ const Posts = () => {
 		}
 
 		return [
-			{ label: __( 'Total Posts', 'rank-math' ), value: ( stats.total_posts || 0 ).toLocaleString() },
-			{ label: __( 'Orphan Posts', 'rank-math' ), value: ( stats.orphan_posts || 0 ).toLocaleString() },
+			{ label: __( 'Total Posts', 'seo-by-rank-math' ), value: ( stats.total_posts || 0 ).toLocaleString() },
+			{ label: __( 'Orphan Posts', 'seo-by-rank-math' ), value: ( stats.orphan_posts || 0 ).toLocaleString() },
 		]
 	}, [ stats ] )
 

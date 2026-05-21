@@ -109,7 +109,7 @@ class Admin extends Base {
 		if ( $count > 0 ) {
 			Helper::add_notification(
 				/* translators: delete counter */
-				sprintf( esc_html__( '%d log(s) deleted.', 'rank-math' ), $count ),
+				sprintf( esc_html__( '%d log(s) deleted.', 'seo-by-rank-math' ), $count ),
 				[ 'type' => 'success' ]
 			);
 		}
@@ -125,7 +125,7 @@ class Admin extends Base {
 
 		Helper::add_notification(
 			/* translators: delete counter */
-			sprintf( esc_html__( 'Log cleared - %d items deleted.', 'rank-math' ), $count ),
+			sprintf( esc_html__( 'Log cleared - %d items deleted.', 'seo-by-rank-math' ), $count ),
 			[ 'type' => 'success' ]
 		);
 	}
@@ -140,7 +140,7 @@ class Admin extends Base {
 
 		$this->page = new Page(
 			'rank-math-404-monitor',
-			esc_html__( '404 Monitor', 'rank-math' ),
+			esc_html__( '404 Monitor', 'seo-by-rank-math' ),
 			[
 				'position'   => 30,
 				'parent'     => 'rank-math',
@@ -148,19 +148,19 @@ class Admin extends Base {
 				'render'     => $dir . 'main.php',
 				'help'       => [
 					'404-overview'       => [
-						'title' => esc_html__( 'Overview', 'rank-math' ),
+						'title' => esc_html__( 'Overview', 'seo-by-rank-math' ),
 						'view'  => $dir . 'help-tab-overview.php',
 					],
 					'404-screen-content' => [
-						'title' => esc_html__( 'Screen Content', 'rank-math' ),
+						'title' => esc_html__( 'Screen Content', 'seo-by-rank-math' ),
 						'view'  => $dir . 'help-tab-screen-content.php',
 					],
 					'404-actions'        => [
-						'title' => esc_html__( 'Available Actions', 'rank-math' ),
+						'title' => esc_html__( 'Available Actions', 'seo-by-rank-math' ),
 						'view'  => $dir . 'help-tab-actions.php',
 					],
 					'404-bulk'           => [
-						'title' => esc_html__( 'Bulk Actions', 'rank-math' ),
+						'title' => esc_html__( 'Bulk Actions', 'seo-by-rank-math' ),
 						'view'  => $dir . 'help-tab-bulk.php',
 					],
 				],
@@ -175,7 +175,7 @@ class Admin extends Base {
 		);
 
 		if ( $this->page->is_current_page() ) {
-			Helper::add_json( 'logConfirmClear', esc_html__( 'Are you sure you wish to delete all 404 error logs?', 'rank-math' ) );
+			Helper::add_json( 'logConfirmClear', esc_html__( 'Are you sure you wish to delete all 404 error logs?', 'seo-by-rank-math' ) );
 			Helper::add_json( 'redirectionsUri', Helper::get_admin_url( 'redirections' ) );
 		}
 	}
@@ -194,9 +194,9 @@ class Admin extends Base {
 			[
 				'404-monitor' => [
 					'icon'  => 'rm-icon rm-icon-404',
-					'title' => esc_html__( '404 Monitor', 'rank-math' ),
+					'title' => esc_html__( '404 Monitor', 'seo-by-rank-math' ),
 					/* translators: 1. Link to KB article 2. Link to redirection setting scree */
-					'desc'  => sprintf( esc_html__( 'Monitor broken pages that ruin user-experience and affect SEO. %s.', 'rank-math' ), '<a href="' . KB::get( '404-monitor-settings', 'Options Panel 404 Monitor Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+					'desc'  => sprintf( esc_html__( 'Monitor broken pages that ruin user-experience and affect SEO. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( '404-monitor-settings', 'Options Panel 404 Monitor Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
 					'json'  => [
 						'choicesComparisonTypes' => Helper::choices_comparison_types(),
@@ -219,12 +219,12 @@ class Admin extends Base {
 			'settings'   => [
 				'class' => 'page-title-action',
 				'href'  => Helper::get_settings_url( 'general', '404-monitor' ),
-				'label' => __( 'Settings', 'rank-math' ),
+				'label' => __( 'Settings', 'seo-by-rank-math' ),
 			],
 			'learn_more' => [
 				'class' => 'page-title-action',
 				'href'  => KB::get( '404-monitor', '404 Page Learn More Button' ),
-				'label' => __( 'Learn More', 'rank-math' ),
+				'label' => __( 'Learn More', 'seo-by-rank-math' ),
 			],
 		];
 

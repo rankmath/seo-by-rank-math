@@ -259,7 +259,7 @@ class Sanitize_Settings {
 			if ( empty( $overlay['image'] ) ) {
 				unset( $value[ $key ] );
 			} elseif ( empty( $overlay['name'] ) ) {
-				Helper::add_notification( esc_html__( 'A Custom Watermark item could not be saved because the name field is empty.', 'rank-math' ), [ 'type' => 'error' ] );
+				Helper::add_notification( esc_html__( 'A Custom Watermark item could not be saved because the name field is empty.', 'seo-by-rank-math' ), [ 'type' => 'error' ] );
 				unset( $value[ $key ] );
 			}
 		}

@@ -137,7 +137,7 @@ class Taxonomy_Screen implements IScreen {
 	public function category_description_editor( $term ) {
 		?>
 		<tr class="form-field term-description-wrap rank-math-term-description-wrap">
-			<th scope="row"><label for="description"><?php esc_html_e( 'Description', 'rank-math' ); ?></label></th>
+			<th scope="row"><label for="description"><?php esc_html_e( 'Description', 'seo-by-rank-math' ); ?></label></th>
 			<td>
 				<?php
 				wp_editor(

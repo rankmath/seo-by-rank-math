@@ -41,7 +41,7 @@ trait Ajax {
 	 */
 	public function verify_nonce( $action ) {
 		if ( ! isset( $_REQUEST['security'] ) || ! \wp_verify_nonce( sanitize_key( $_REQUEST['security'] ), $action ) ) {
-			$this->error( __( 'Error: Nonce verification failed', 'rank-math' ) );
+			$this->error( __( 'Error: Nonce verification failed', 'seo-by-rank-math' ) );
 		}
 	}
 
@@ -56,7 +56,7 @@ trait Ajax {
 	public function has_cap_ajax( $capability ) {
 
 		if ( ! Helper::has_cap( $capability ) ) {
-			$this->error( esc_html__( 'You are not authorized to perform this action.', 'rank-math' ) );
+			$this->error( esc_html__( 'You are not authorized to perform this action.', 'seo-by-rank-math' ) );
 		}
 
 		return true;

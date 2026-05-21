@@ -27,11 +27,11 @@ $disable        = ( ! Authentication::is_authorized() || ! $is_queue_empty ) ? t
 if ( ! empty( $db_info ) ) {
 	$db_info = [
 		/* translators: number of days */
-		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-calendar"></i> ' . sprintf( esc_html__( 'Storage Days: %s', 'rank-math' ), '<strong>' . $db_info['days'] . '</strong>' ) . '</div>',
+		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-calendar"></i> ' . sprintf( esc_html__( 'Storage Days: %s', 'seo-by-rank-math' ), '<strong>' . $db_info['days'] . '</strong>' ) . '</div>',
 		/* translators: number of rows */
-		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-faq"></i> ' . sprintf( esc_html__( 'Data Rows: %s', 'rank-math' ), '<strong>' . Str::human_number( $db_info['rows'] ) . '</strong>' ) . '</div>',
+		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-faq"></i> ' . sprintf( esc_html__( 'Data Rows: %s', 'seo-by-rank-math' ), '<strong>' . Str::human_number( $db_info['rows'] ) . '</strong>' ) . '</div>',
 		/* translators: database size */
-		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-database"></i> ' . sprintf( esc_html__( 'Size: %s', 'rank-math' ), '<strong>' . size_format( $db_info['size'] ) . '</strong>' ) . '</div>',
+		'<div class="rank-math-console-db-info"><i class="rm-icon rm-icon-database"></i> ' . sprintf( esc_html__( 'Size: %s', 'seo-by-rank-math' ), '<strong>' . size_format( $db_info['size'] ) . '</strong>' ) . '</div>',
 	];
 }
 
@@ -53,7 +53,7 @@ if ( Authentication::is_authorized() && ! empty( $actions ) ) {
 				'type'    => 'raw',
 				/* translators: date */
 				'content' => sprintf(
-					'<span class="next-fetch">' . __( 'Next data fetch on %s', 'rank-math' ),
+					'<span class="next-fetch">' . __( 'Next data fetch on %s', 'seo-by-rank-math' ),
 					date_i18n( 'd M, Y H:m:i', $next_date->getTimestamp() ) . '</span>'
 				),
 			]
@@ -76,14 +76,14 @@ if ( ! Authentication::is_authorized() ) {
 
 $is_fetching = 'fetching' === get_option( 'rank_math_analytics_first_fetch' );
 $buttons     = '<br>' .
-	'<button class="button button-small console-cache-delete" data-days="-1">' . esc_html__( 'Delete data', 'rank-math' ) . '</button>' .
-	'&nbsp;&nbsp;<button class="button button-small console-cache-update-manually"' . ( $disable ? ' disabled="disabled"' : '' ) . '>' . ( $is_queue_empty ? esc_html__( 'Update data manually', 'rank-math' ) : esc_html__( 'Fetching in Progress', 'rank-math' ) ) . '</button>' .
-	'&nbsp;&nbsp;<button class="button button-link-delete button-small cancel-fetch"' . disabled( $is_fetching, false, false ) . '>' . esc_html__( 'Cancel Fetching', 'rank-math' ) . '</button>';
+	'<button class="button button-small console-cache-delete" data-days="-1">' . esc_html__( 'Delete data', 'seo-by-rank-math' ) . '</button>' .
+	'&nbsp;&nbsp;<button class="button button-small console-cache-update-manually"' . ( $disable ? ' disabled="disabled"' : '' ) . '>' . ( $is_queue_empty ? esc_html__( 'Update data manually', 'seo-by-rank-math' ) : esc_html__( 'Fetching in Progress', 'seo-by-rank-math' ) ) . '</button>' .
+	'&nbsp;&nbsp;<button class="button button-link-delete button-small cancel-fetch"' . disabled( $is_fetching, false, false ) . '>' . esc_html__( 'Cancel Fetching', 'seo-by-rank-math' ) . '</button>';
 
 $buttons .= '<br>' . join( '', $db_info );
 
 // Translators: placeholder is a link to rankmath.com, with "free version" as the anchor text.
-$description = sprintf( __( 'Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly.', 'rank-math' ), '<a href="' . KB::get( 'pro', 'Analytics DB Option' ) . '" target="_blank" rel="noopener noreferrer">' . __( 'free version', 'rank-math' ) . '</a>' );
+$description = sprintf( __( 'Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'pro', 'Analytics DB Option' ) . '" target="_blank" rel="noopener noreferrer">' . __( 'free version', 'seo-by-rank-math' ) . '</a>' );
 $description = apply_filters_deprecated( 'rank_math/analytics/options/cahce_control/description', [ $description ], '1.0.61.1', 'rank_math/analytics/options/cache_control/description' );
 $description = apply_filters( 'rank_math/analytics/options/cache_control/description', $description );
 
@@ -91,7 +91,7 @@ $cmb->add_field(
 	[
 		'id'              => 'console_caching_control',
 		'type'            => 'text',
-		'name'            => __( 'Analytics Database', 'rank-math' ),
+		'name'            => __( 'Analytics Database', 'seo-by-rank-math' ),
 		// translators: Anchor text 'free version', linking to pricing page.
 		'description'     => $description,
 		'default'         => 90,
@@ -112,8 +112,8 @@ $cmb->add_field(
 	[
 		'id'          => 'analytics_stats',
 		'type'        => 'toggle',
-		'name'        => __( 'Frontend Stats Bar', 'rank-math' ),
-		'description' => esc_html__( 'Enable this option to show Analytics Stats on the front just after the admin bar.', 'rank-math' ),
+		'name'        => __( 'Frontend Stats Bar', 'seo-by-rank-math' ),
+		'description' => esc_html__( 'Enable this option to show Analytics Stats on the front just after the admin bar.', 'seo-by-rank-math' ),
 		'default'     => 'on',
 	]
 );
@@ -123,9 +123,9 @@ if ( RankMath\Analytics\Email_Reports::are_fields_hidden() ) {
 }
 
 $preview_url  = home_url( '?rank_math_analytics_report_preview=1' );
-$report_title = esc_html__( 'Email Reports', 'rank-math' );
+$report_title = esc_html__( 'Email Reports', 'seo-by-rank-math' );
 // Translators: Placeholders are the opening and closing tag for the link.
-$description = sprintf( esc_html__( 'Receive periodic SEO Performance reports via email. Once enabled and options are saved, you can see %1$s the preview here%2$s.', 'rank-math' ), '<a href="' . esc_url_raw( $preview_url ) . '" target="_blank">', '</a>' );
+$description = sprintf( esc_html__( 'Receive periodic SEO Performance reports via email. Once enabled and options are saved, you can see %1$s the preview here%2$s.', 'seo-by-rank-math' ), '<a href="' . esc_url_raw( $preview_url ) . '" target="_blank">', '</a>' );
 $cmb->add_field(
 	[
 		'id'      => 'email_reports_title',
@@ -138,23 +138,23 @@ $cmb->add_field(
 	[
 		'id'          => 'console_email_reports',
 		'type'        => 'toggle',
-		'name'        => __( 'Email Reports', 'rank-math' ),
-		'description' => __( 'Turn on email reports.', 'rank-math' ),
+		'name'        => __( 'Email Reports', 'seo-by-rank-math' ),
+		'description' => __( 'Turn on email reports.', 'seo-by-rank-math' ),
 		'default'     => Helper::get_settings( 'general.console_email_reports' ) ? 'on' : 'off',
 		'classes'     => 'nob',
 	]
 );
 
 $is_pro_active = defined( 'RANK_MATH_PRO_FILE' );
-$pro_badge     = '<span class="rank-math-pro-badge"><a href="' . KB::get( 'seo-email-reporting', 'Email Frequency Toggle' ) . '" target="_blank" rel="noopener noreferrer">' . __( 'PRO', 'rank-math' ) . '</a></span>';
+$pro_badge     = '<span class="rank-math-pro-badge"><a href="' . KB::get( 'seo-email-reporting', 'Email Frequency Toggle' ) . '" target="_blank" rel="noopener noreferrer">' . __( 'PRO', 'seo-by-rank-math' ) . '</a></span>';
 $args          = [
 	'id'         => 'console_email_frequency',
 	'type'       => 'select',
-	'name'       => esc_html__( 'Email Frequency', 'rank-math' ) . ( ! $is_pro_active ? $pro_badge : '' ),
-	'desc'       => wp_kses_post( __( 'Email report frequency.', 'rank-math' ) ),
+	'name'       => esc_html__( 'Email Frequency', 'seo-by-rank-math' ) . ( ! $is_pro_active ? $pro_badge : '' ),
+	'desc'       => wp_kses_post( __( 'Email report frequency.', 'seo-by-rank-math' ) ),
 	'default'    => 'monthly',
 	'options'    => [
-		'monthly' => esc_html__( 'Every 30 days', 'rank-math' ),
+		'monthly' => esc_html__( 'Every 30 days', 'seo-by-rank-math' ),
 	],
 	'dep'        => [ [ 'console_email_reports', 'on' ] ],
 	'attributes' => ! $is_pro_active ? [ 'disabled' => 'disabled' ] : [],

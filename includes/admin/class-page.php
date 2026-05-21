@@ -134,11 +134,11 @@ class Page {
 
 		// Early bail!
 		if ( ! $id ) {
-			wp_die( esc_html__( '$id variable required', 'rank-math' ), esc_html__( 'Variable Required', 'rank-math' ) );
+			wp_die( esc_html__( '$id variable required', 'seo-by-rank-math' ), esc_html__( 'Variable Required', 'seo-by-rank-math' ) );
 		}
 
 		if ( ! $title ) {
-			wp_die( esc_html__( '$title variable required', 'rank-math' ), esc_html__( 'Variable Required', 'rank-math' ) );
+			wp_die( esc_html__( '$title variable required', 'seo-by-rank-math' ), esc_html__( 'Variable Required', 'seo-by-rank-math' ) );
 		}
 
 		$this->id    = $id;

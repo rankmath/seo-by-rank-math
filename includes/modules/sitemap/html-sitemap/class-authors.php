@@ -112,7 +112,7 @@ class Authors extends Author {
 		}
 
 		$output[] = '<div class="rank-math-html-sitemap__section rank-math-html-sitemap__section--authors">';
-		$output[] = '<h2 class="rank-math-html-sitemap__title">' . esc_html__( 'Authors', 'rank-math' ) . '</h2>';
+		$output[] = '<h2 class="rank-math-html-sitemap__title">' . esc_html__( 'Authors', 'seo-by-rank-math' ) . '</h2>';
 		$output[] = '<ul class="rank-math-html-sitemap__list">';
 		$output[] = $this->generate_authors_list( $users );
 		$output[] = '</ul>';

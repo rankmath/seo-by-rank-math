@@ -53,7 +53,7 @@ class Rest extends WP_REST_Controller {
 				'callback' => [ $this, 'get_post' ],
 				'args'     => [
 					'id' => [
-						'description' => esc_html__( 'Post ID.', 'rank-math' ),
+						'description' => esc_html__( 'Post ID.', 'seo-by-rank-math' ),
 						'type'        => 'integer',
 						'required'    => true,
 					],
@@ -66,7 +66,7 @@ class Rest extends WP_REST_Controller {
 				'callback' => [ $this, 'get_analytics_summary' ],
 				'args'     => [
 					'postType' => [
-						'description' => esc_html__( 'Post Type.', 'rank-math' ),
+						'description' => esc_html__( 'Post Type.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 					],
 				],
@@ -75,27 +75,27 @@ class Rest extends WP_REST_Controller {
 				'callback' => [ Stats::get(), 'get_keywords_rows' ],
 				'args'     => [
 					'page'    => [
-						'description' => esc_html__( 'Page number.', 'rank-math' ),
+						'description' => esc_html__( 'Page number.', 'seo-by-rank-math' ),
 						'type'        => 'integer',
 						'required'    => false,
 					],
 					'perPage' => [
-						'description' => esc_html__( 'Results per page.', 'rank-math' ),
+						'description' => esc_html__( 'Results per page.', 'seo-by-rank-math' ),
 						'type'        => 'integer',
 						'required'    => false,
 					],
 					'orderBy' => [
-						'description' => esc_html__( 'Order by.', 'rank-math' ),
+						'description' => esc_html__( 'Order by.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => false,
 					],
 					'order'   => [
-						'description' => esc_html__( 'Order.', 'rank-math' ),
+						'description' => esc_html__( 'Order.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => false,
 					],
 					'search'  => [
-						'description' => esc_html__( 'Search.', 'rank-math' ),
+						'description' => esc_html__( 'Search.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => false,
 					],
@@ -106,7 +106,7 @@ class Rest extends WP_REST_Controller {
 				'methods'  => WP_REST_Server::CREATABLE,
 				'args'     => [
 					'preferences' => [
-						'description' => esc_html__( 'User preferences.', 'rank-math' ),
+						'description' => esc_html__( 'User preferences.', 'seo-by-rank-math' ),
 						'type'        => 'object',
 						'required'    => true,
 					],
@@ -116,37 +116,37 @@ class Rest extends WP_REST_Controller {
 				'callback' => [ $this, 'get_inspection_results' ],
 				'args'     => [
 					'page'       => [
-						'description' => esc_html__( 'Page number.', 'rank-math' ),
+						'description' => esc_html__( 'Page number.', 'seo-by-rank-math' ),
 						'type'        => 'integer',
 						'required'    => false,
 					],
 					'perPage'    => [
-						'description' => esc_html__( 'Results per page.', 'rank-math' ),
+						'description' => esc_html__( 'Results per page.', 'seo-by-rank-math' ),
 						'type'        => 'integer',
 						'required'    => false,
 					],
 					'orderBy'    => [
-						'description' => esc_html__( 'Order by.', 'rank-math' ),
+						'description' => esc_html__( 'Order by.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => false,
 					],
 					'order'      => [
-						'description' => esc_html__( 'Order.', 'rank-math' ),
+						'description' => esc_html__( 'Order.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => false,
 					],
 					'search'     => [
-						'description' => esc_html__( 'Search.', 'rank-math' ),
+						'description' => esc_html__( 'Search.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => false,
 					],
 					'filter'     => [
-						'description' => esc_html__( 'Filter.', 'rank-math' ),
+						'description' => esc_html__( 'Filter.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => false,
 					],
 					'filterType' => [
-						'description' => esc_html__( 'Filter type.', 'rank-math' ),
+						'description' => esc_html__( 'Filter type.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => false,
 					],
@@ -157,12 +157,12 @@ class Rest extends WP_REST_Controller {
 				'methods'  => WP_REST_Server::CREATABLE,
 				'args'     => [
 					'toggleBar' => [
-						'description' => esc_html__( 'Toggle bar.', 'rank-math' ),
+						'description' => esc_html__( 'Toggle bar.', 'seo-by-rank-math' ),
 						'type'        => 'boolean',
 						'required'    => false,
 					],
 					'hide'      => [
-						'description' => esc_html__( 'Hide.', 'rank-math' ),
+						'description' => esc_html__( 'Hide.', 'seo-by-rank-math' ),
 						'type'        => 'boolean',
 						'required'    => false,
 					],
@@ -213,7 +213,7 @@ class Rest extends WP_REST_Controller {
 		if ( empty( $pref ) ) {
 			return new WP_Error(
 				'param_value_empty',
-				esc_html__( 'Sorry, no preference found.', 'rank-math' )
+				esc_html__( 'Sorry, no preference found.', 'seo-by-rank-math' )
 			);
 		}
 
@@ -238,7 +238,7 @@ class Rest extends WP_REST_Controller {
 		if ( empty( $id ) ) {
 			return new WP_Error(
 				'param_value_empty',
-				esc_html__( 'Sorry, no post id found.', 'rank-math' )
+				esc_html__( 'Sorry, no post id found.', 'seo-by-rank-math' )
 			);
 		}
 

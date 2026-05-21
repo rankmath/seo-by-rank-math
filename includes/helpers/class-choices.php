@@ -42,12 +42,12 @@ trait Choices {
 			'rank_math/social/overlay_images',
 			[
 				'play' => [
-					'name' => esc_html__( 'Play icon', 'rank-math' ),
+					'name' => esc_html__( 'Play icon', 'seo-by-rank-math' ),
 					'url'  => $uri . 'icon-play.png',
 					'path' => $dir . 'icon-play.png',
 				],
 				'gif'  => [
-					'name' => esc_html__( 'GIF icon', 'rank-math' ),
+					'name' => esc_html__( 'GIF icon', 'seo-by-rank-math' ),
 					'url'  => $uri . 'icon-gif.png',
 					'path' => $dir . 'icon-gif.png',
 				],
@@ -71,12 +71,12 @@ trait Choices {
 	 */
 	public static function choices_robots() {
 		return [
-			'index'        => esc_html__( 'Index', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Instructs search engines to index and show these pages in the search results.', 'rank-math' ) ),
-			'noindex'      => esc_html__( 'No Index', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents pages from being indexed and displayed in search engine result pages', 'rank-math' ) ),
-			'nofollow'     => esc_html__( 'No Follow', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents search engines from following links on the pages', 'rank-math' ) ),
-			'noarchive'    => esc_html__( 'No Archive', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents search engines from showing Cached links for pages', 'rank-math' ) ),
-			'noimageindex' => esc_html__( 'No Image Index', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents images on a page from being indexed by Google and other search engines', 'rank-math' ) ),
-			'nosnippet'    => esc_html__( 'No Snippet', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents a snippet from being shown in the search results', 'rank-math' ) ),
+			'index'        => esc_html__( 'Index', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Instructs search engines to index and show these pages in the search results.', 'seo-by-rank-math' ) ),
+			'noindex'      => esc_html__( 'No Index', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents pages from being indexed and displayed in search engine result pages', 'seo-by-rank-math' ) ),
+			'nofollow'     => esc_html__( 'No Follow', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents search engines from following links on the pages', 'seo-by-rank-math' ) ),
+			'noarchive'    => esc_html__( 'No Archive', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents search engines from showing Cached links for pages', 'seo-by-rank-math' ) ),
+			'noimageindex' => esc_html__( 'No Image Index', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents images on a page from being indexed by Google and other search engines', 'seo-by-rank-math' ) ),
+			'nosnippet'    => esc_html__( 'No Snippet', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents a snippet from being shown in the search results', 'seo-by-rank-math' ) ),
 		];
 	}
 
@@ -136,7 +136,7 @@ trait Choices {
 		$post_types = self::choices_post_types();
 		unset( $post_types['attachment'] );
 
-		return [ 'any' => esc_html__( 'Any', 'rank-math' ) ] + $post_types + [ 'comments' => esc_html( translate( 'Comments' ) ) ]; // phpcs:ignore
+		return [ 'any' => esc_html__( 'Any', 'seo-by-rank-math' ) ] + $post_types + [ 'comments' => esc_html( translate( 'Comments' ) ) ]; // phpcs:ignore
 	}
 
 	/**
@@ -435,27 +435,27 @@ trait Choices {
 	 */
 	public static function choices_rich_snippet_types( $none = false, $post_type = '' ) {
 		$types = [
-			'article'    => esc_html__( 'Article', 'rank-math' ),
-			'book'       => esc_html__( 'Book', 'rank-math' ),
-			'course'     => esc_html__( 'Course', 'rank-math' ),
-			'event'      => esc_html__( 'Event', 'rank-math' ),
-			'jobposting' => esc_html__( 'Job Posting', 'rank-math' ),
-			'music'      => esc_html__( 'Music', 'rank-math' ),
-			'product'    => esc_html__( 'Product', 'rank-math' ),
-			'recipe'     => esc_html__( 'Recipe', 'rank-math' ),
-			'restaurant' => esc_html__( 'Restaurant', 'rank-math' ),
-			'video'      => esc_html__( 'Video', 'rank-math' ),
-			'person'     => esc_html__( 'Person', 'rank-math' ),
-			'service'    => esc_html__( 'Service', 'rank-math' ),
-			'software'   => esc_html__( 'Software Application', 'rank-math' ),
+			'article'    => esc_html__( 'Article', 'seo-by-rank-math' ),
+			'book'       => esc_html__( 'Book', 'seo-by-rank-math' ),
+			'course'     => esc_html__( 'Course', 'seo-by-rank-math' ),
+			'event'      => esc_html__( 'Event', 'seo-by-rank-math' ),
+			'jobposting' => esc_html__( 'Job Posting', 'seo-by-rank-math' ),
+			'music'      => esc_html__( 'Music', 'seo-by-rank-math' ),
+			'product'    => esc_html__( 'Product', 'seo-by-rank-math' ),
+			'recipe'     => esc_html__( 'Recipe', 'seo-by-rank-math' ),
+			'restaurant' => esc_html__( 'Restaurant', 'seo-by-rank-math' ),
+			'video'      => esc_html__( 'Video', 'seo-by-rank-math' ),
+			'person'     => esc_html__( 'Person', 'seo-by-rank-math' ),
+			'service'    => esc_html__( 'Service', 'seo-by-rank-math' ),
+			'software'   => esc_html__( 'Software Application', 'seo-by-rank-math' ),
 		];
 
 		if ( ! empty( self::get_review_posts() ) ) {
-			$types['review'] = esc_html__( 'Review (Unsupported)', 'rank-math' );
+			$types['review'] = esc_html__( 'Review (Unsupported)', 'seo-by-rank-math' );
 		}
 
 		if ( $none ) {
-			$label = is_string( $none ) ? $none : esc_html__( 'None', 'rank-math' );
+			$label = is_string( $none ) ? $none : esc_html__( 'None', 'seo-by-rank-math' );
 			$types = [ 'off' => $label ] + $types;
 		}
 
@@ -477,11 +477,11 @@ trait Choices {
 	 */
 	public static function choices_redirection_types() {
 		return [
-			'301' => esc_html__( '301 Permanent Move', 'rank-math' ),
-			'302' => esc_html__( '302 Temporary Move', 'rank-math' ),
-			'307' => esc_html__( '307 Temporary Redirect', 'rank-math' ),
-			'410' => esc_html__( '410 Content Deleted', 'rank-math' ),
-			'451' => esc_html__( '451 Content Unavailable for Legal Reasons', 'rank-math' ),
+			'301' => esc_html__( '301 Permanent Move', 'seo-by-rank-math' ),
+			'302' => esc_html__( '302 Temporary Move', 'seo-by-rank-math' ),
+			'307' => esc_html__( '307 Temporary Redirect', 'seo-by-rank-math' ),
+			'410' => esc_html__( '410 Content Deleted', 'seo-by-rank-math' ),
+			'451' => esc_html__( '451 Content Unavailable for Legal Reasons', 'seo-by-rank-math' ),
 		];
 	}
 
@@ -494,11 +494,11 @@ trait Choices {
 	 */
 	public static function choices_comparison_types() {
 		return [
-			'exact'    => esc_html__( 'Exact', 'rank-math' ),
-			'contains' => esc_html__( 'Contains', 'rank-math' ),
-			'start'    => esc_html__( 'Starts With', 'rank-math' ),
-			'end'      => esc_html__( 'End With', 'rank-math' ),
-			'regex'    => esc_html__( 'Regex', 'rank-math' ),
+			'exact'    => esc_html__( 'Exact', 'seo-by-rank-math' ),
+			'contains' => esc_html__( 'Contains', 'seo-by-rank-math' ),
+			'start'    => esc_html__( 'Starts With', 'seo-by-rank-math' ),
+			'end'      => esc_html__( 'End With', 'seo-by-rank-math' ),
+			'regex'    => esc_html__( 'Regex', 'seo-by-rank-math' ),
 		];
 	}
 
@@ -605,17 +605,17 @@ trait Choices {
 	 */
 	public static function choices_phone_types() {
 		return [
-			'customer support'    => esc_html__( 'Customer Service', 'rank-math' ),
-			'technical support'   => esc_html__( 'Technical Support', 'rank-math' ),
-			'billing support'     => esc_html__( 'Billing Support', 'rank-math' ),
-			'bill payment'        => esc_html__( 'Bill Payment', 'rank-math' ),
-			'sales'               => esc_html__( 'Sales', 'rank-math' ),
-			'reservations'        => esc_html__( 'Reservations', 'rank-math' ),
-			'credit card support' => esc_html__( 'Credit Card Support', 'rank-math' ),
-			'emergency'           => esc_html__( 'Emergency', 'rank-math' ),
-			'baggage tracking'    => esc_html__( 'Baggage Tracking', 'rank-math' ),
-			'roadside assistance' => esc_html__( 'Roadside Assistance', 'rank-math' ),
-			'package tracking'    => esc_html__( 'Package Tracking', 'rank-math' ),
+			'customer support'    => esc_html__( 'Customer Service', 'seo-by-rank-math' ),
+			'technical support'   => esc_html__( 'Technical Support', 'seo-by-rank-math' ),
+			'billing support'     => esc_html__( 'Billing Support', 'seo-by-rank-math' ),
+			'bill payment'        => esc_html__( 'Bill Payment', 'seo-by-rank-math' ),
+			'sales'               => esc_html__( 'Sales', 'seo-by-rank-math' ),
+			'reservations'        => esc_html__( 'Reservations', 'seo-by-rank-math' ),
+			'credit card support' => esc_html__( 'Credit Card Support', 'seo-by-rank-math' ),
+			'emergency'           => esc_html__( 'Emergency', 'seo-by-rank-math' ),
+			'baggage tracking'    => esc_html__( 'Baggage Tracking', 'seo-by-rank-math' ),
+			'roadside assistance' => esc_html__( 'Roadside Assistance', 'seo-by-rank-math' ),
+			'package tracking'    => esc_html__( 'Package Tracking', 'seo-by-rank-math' ),
 		];
 	}
 
@@ -626,16 +626,16 @@ trait Choices {
 	 */
 	public static function choices_additional_organization_info() {
 		return [
-			'legalName'            => esc_html__( 'Legal Name', 'rank-math' ),
-			'foundingDate'         => esc_html__( 'Founding Date', 'rank-math' ),
-			'iso6523Code'          => esc_html__( 'ISO 6523 Code', 'rank-math' ),
-			'duns'                 => esc_html__( 'DUNS', 'rank-math' ),
-			'leiCode'              => esc_html__( 'LEI Code', 'rank-math' ),
-			'naics'                => esc_html__( 'NAICS Code', 'rank-math' ),
-			'globalLocationNumber' => esc_html__( 'Global Location Number', 'rank-math' ),
-			'vatID'                => esc_html__( 'VAT ID', 'rank-math' ),
-			'taxID'                => esc_html__( 'Tax ID', 'rank-math' ),
-			'numberOfEmployees'    => esc_html__( 'Number of Employees', 'rank-math' ),
+			'legalName'            => esc_html__( 'Legal Name', 'seo-by-rank-math' ),
+			'foundingDate'         => esc_html__( 'Founding Date', 'seo-by-rank-math' ),
+			'iso6523Code'          => esc_html__( 'ISO 6523 Code', 'seo-by-rank-math' ),
+			'duns'                 => esc_html__( 'DUNS', 'seo-by-rank-math' ),
+			'leiCode'              => esc_html__( 'LEI Code', 'seo-by-rank-math' ),
+			'naics'                => esc_html__( 'NAICS Code', 'seo-by-rank-math' ),
+			'globalLocationNumber' => esc_html__( 'Global Location Number', 'seo-by-rank-math' ),
+			'vatID'                => esc_html__( 'VAT ID', 'seo-by-rank-math' ),
+			'taxID'                => esc_html__( 'Tax ID', 'seo-by-rank-math' ),
+			'numberOfEmployees'    => esc_html__( 'Number of Employees', 'seo-by-rank-math' ),
 		];
 	}
 
@@ -663,94 +663,94 @@ trait Choices {
 	 */
 	public static function choices_contentai_countries() {
 		return [
-			'all'      => esc_html__( 'Worldwide', 'rank-math' ),
-			'ar_DZ'    => esc_html__( 'Algeria', 'rank-math' ),
-			'es_AR'    => esc_html__( 'Argentina', 'rank-math' ),
-			'hy_AM'    => esc_html__( 'Armenia', 'rank-math' ),
-			'en_AU'    => esc_html__( 'Australia', 'rank-math' ),
-			'de_AT'    => esc_html__( 'Austria', 'rank-math' ),
-			'tr_AZ'    => esc_html__( 'Azerbaijan', 'rank-math' ),
-			'ar_BH'    => esc_html__( 'Bahrain', 'rank-math' ),
-			'en_BD'    => esc_html__( 'Bangladesh', 'rank-math' ),
-			'ru_BY'    => esc_html__( 'Belarus', 'rank-math' ),
-			'de_BE'    => esc_html__( 'Belgium', 'rank-math' ),
-			'es_BO'    => esc_html__( 'Bolivia, Plurinational State Of', 'rank-math' ),
-			'pt_BR'    => esc_html__( 'Brazil', 'rank-math' ),
-			'bg_BG'    => esc_html__( 'Bulgaria', 'rank-math' ),
-			'vi_KH'    => esc_html__( 'Cambodia', 'rank-math' ),
-			'en_CA'    => esc_html__( 'Canada', 'rank-math' ),
-			'es_CL'    => esc_html__( 'Chile', 'rank-math' ),
-			'es_CO'    => esc_html__( 'Colombia', 'rank-math' ),
-			'es_CR'    => esc_html__( 'Costa Rica', 'rank-math' ),
-			'hr_HR'    => esc_html__( 'Croatia', 'rank-math' ),
-			'el_CY'    => esc_html__( 'Cyprus', 'rank-math' ),
-			'cs_CZ'    => esc_html__( 'Czechia', 'rank-math' ),
-			'da_DK'    => esc_html__( 'Denmark', 'rank-math' ),
-			'es_EC'    => esc_html__( 'Ecuador', 'rank-math' ),
-			'ar_EG'    => esc_html__( 'Egypt', 'rank-math' ),
-			'es_SV'    => esc_html__( 'El Salvador', 'rank-math' ),
-			'et_EE'    => esc_html__( 'Estonia', 'rank-math' ),
-			'fi_FI'    => esc_html__( 'Finland', 'rank-math' ),
-			'fr_FR'    => esc_html__( 'France', 'rank-math' ),
-			'de_DE'    => esc_html__( 'Germany', 'rank-math' ),
-			'en_GH'    => esc_html__( 'Ghana', 'rank-math' ),
-			'el_GR'    => esc_html__( 'Greece', 'rank-math' ),
-			'es_GT'    => esc_html__( 'Guatemala', 'rank-math' ),
-			'en_HK'    => esc_html__( 'Hong Kong', 'rank-math' ),
-			'hu_HU'    => esc_html__( 'Hungary', 'rank-math' ),
-			'hi_IN'    => esc_html__( 'India', 'rank-math' ),
-			'id_ID'    => esc_html__( 'Indonesia', 'rank-math' ),
-			'en_IE'    => esc_html__( 'Ireland', 'rank-math' ),
-			'iw_IL'    => esc_html__( 'Israel', 'rank-math' ),
-			'it_IT'    => esc_html__( 'Italy', 'rank-math' ),
-			'ja_JP'    => esc_html__( 'Japan', 'rank-math' ),
-			'ar_JO'    => esc_html__( 'Jordan', 'rank-math' ),
-			'ru_KZ'    => esc_html__( 'Kazakhstan', 'rank-math' ),
-			'en_KE'    => esc_html__( 'Kenya', 'rank-math' ),
-			'ko_KR'    => esc_html__( 'Korea, Republic Of', 'rank-math' ),
-			'lv_LV'    => esc_html__( 'Latvia', 'rank-math' ),
-			'lt_LT'    => esc_html__( 'Lithuania', 'rank-math' ),
-			'tr_MK'    => esc_html__( 'Macedonia, The Former Yugoslav Republic Of', 'rank-math' ),
-			'en_MY'    => esc_html__( 'Malaysia', 'rank-math' ),
-			'en_MT'    => esc_html__( 'Malta', 'rank-math' ),
-			'es_MX'    => esc_html__( 'Mexico', 'rank-math' ),
-			'ar_MA'    => esc_html__( 'Morocco', 'rank-math' ),
-			'mnw_MM'   => esc_html__( 'Myanmar', 'rank-math' ),
-			'nl_NL'    => esc_html__( 'Netherlands', 'rank-math' ),
-			'en_NZ'    => esc_html__( 'New Zealand', 'rank-math' ),
-			'es_NI'    => esc_html__( 'Nicaragua', 'rank-math' ),
-			'en_NG'    => esc_html__( 'Nigeria', 'rank-math' ),
-			'no_NO'    => esc_html__( 'Norway', 'rank-math' ),
-			'en_PK'    => esc_html__( 'Pakistan', 'rank-math' ),
-			'es_PY'    => esc_html__( 'Paraguay', 'rank-math' ),
-			'es_PE'    => esc_html__( 'Peru', 'rank-math' ),
-			'en_PH'    => esc_html__( 'Philippines', 'rank-math' ),
-			'pl_PL'    => esc_html__( 'Poland', 'rank-math' ),
-			'pt_PT'    => esc_html__( 'Portugal', 'rank-math' ),
-			'ro_RO'    => esc_html__( 'Romania', 'rank-math' ),
-			'ru_RU'    => esc_html__( 'Russian Federation', 'rank-math' ),
-			'ar_SA'    => esc_html__( 'Saudi Arabia', 'rank-math' ),
-			'fr_SN'    => esc_html__( 'Senegal', 'rank-math' ),
-			'hr_RS'    => esc_html__( 'Serbia', 'rank-math' ),
-			'en_SG'    => esc_html__( 'Singapore', 'rank-math' ),
-			'sk_SK'    => esc_html__( 'Slovakia', 'rank-math' ),
-			'sl_SI'    => esc_html__( 'Slovenia', 'rank-math' ),
-			'en_ZA'    => esc_html__( 'South Africa', 'rank-math' ),
-			'es_ES'    => esc_html__( 'Spain', 'rank-math' ),
-			'en_LK'    => esc_html__( 'Sri Lanka', 'rank-math' ),
-			'sv_SE'    => esc_html__( 'Sweden', 'rank-math' ),
-			'de_CH'    => esc_html__( 'Switzerland', 'rank-math' ),
-			'zh-TW_TW' => esc_html__( 'Taiwan', 'rank-math' ),
-			'th_TH'    => esc_html__( 'Thailand', 'rank-math' ),
-			'ar_TN'    => esc_html__( 'Tunisia', 'rank-math' ),
-			'tr_TR'    => esc_html__( 'Turkey', 'rank-math' ),
-			'ru_UA'    => esc_html__( 'Ukraine', 'rank-math' ),
-			'ar_AE'    => esc_html__( 'United Arab Emirates', 'rank-math' ),
-			'en_GB'    => esc_html__( 'United Kingdom', 'rank-math' ),
-			'en_US'    => esc_html__( 'United States Of America', 'rank-math' ),
-			'es_UY'    => esc_html__( 'Uruguay', 'rank-math' ),
-			'es_VE'    => esc_html__( 'Venezuela, Bolivarian Republic Of', 'rank-math' ),
-			'vi_VN'    => esc_html__( 'Viet Nam', 'rank-math' ),
+			'all'      => esc_html__( 'Worldwide', 'seo-by-rank-math' ),
+			'ar_DZ'    => esc_html__( 'Algeria', 'seo-by-rank-math' ),
+			'es_AR'    => esc_html__( 'Argentina', 'seo-by-rank-math' ),
+			'hy_AM'    => esc_html__( 'Armenia', 'seo-by-rank-math' ),
+			'en_AU'    => esc_html__( 'Australia', 'seo-by-rank-math' ),
+			'de_AT'    => esc_html__( 'Austria', 'seo-by-rank-math' ),
+			'tr_AZ'    => esc_html__( 'Azerbaijan', 'seo-by-rank-math' ),
+			'ar_BH'    => esc_html__( 'Bahrain', 'seo-by-rank-math' ),
+			'en_BD'    => esc_html__( 'Bangladesh', 'seo-by-rank-math' ),
+			'ru_BY'    => esc_html__( 'Belarus', 'seo-by-rank-math' ),
+			'de_BE'    => esc_html__( 'Belgium', 'seo-by-rank-math' ),
+			'es_BO'    => esc_html__( 'Bolivia, Plurinational State Of', 'seo-by-rank-math' ),
+			'pt_BR'    => esc_html__( 'Brazil', 'seo-by-rank-math' ),
+			'bg_BG'    => esc_html__( 'Bulgaria', 'seo-by-rank-math' ),
+			'vi_KH'    => esc_html__( 'Cambodia', 'seo-by-rank-math' ),
+			'en_CA'    => esc_html__( 'Canada', 'seo-by-rank-math' ),
+			'es_CL'    => esc_html__( 'Chile', 'seo-by-rank-math' ),
+			'es_CO'    => esc_html__( 'Colombia', 'seo-by-rank-math' ),
+			'es_CR'    => esc_html__( 'Costa Rica', 'seo-by-rank-math' ),
+			'hr_HR'    => esc_html__( 'Croatia', 'seo-by-rank-math' ),
+			'el_CY'    => esc_html__( 'Cyprus', 'seo-by-rank-math' ),
+			'cs_CZ'    => esc_html__( 'Czechia', 'seo-by-rank-math' ),
+			'da_DK'    => esc_html__( 'Denmark', 'seo-by-rank-math' ),
+			'es_EC'    => esc_html__( 'Ecuador', 'seo-by-rank-math' ),
+			'ar_EG'    => esc_html__( 'Egypt', 'seo-by-rank-math' ),
+			'es_SV'    => esc_html__( 'El Salvador', 'seo-by-rank-math' ),
+			'et_EE'    => esc_html__( 'Estonia', 'seo-by-rank-math' ),
+			'fi_FI'    => esc_html__( 'Finland', 'seo-by-rank-math' ),
+			'fr_FR'    => esc_html__( 'France', 'seo-by-rank-math' ),
+			'de_DE'    => esc_html__( 'Germany', 'seo-by-rank-math' ),
+			'en_GH'    => esc_html__( 'Ghana', 'seo-by-rank-math' ),
+			'el_GR'    => esc_html__( 'Greece', 'seo-by-rank-math' ),
+			'es_GT'    => esc_html__( 'Guatemala', 'seo-by-rank-math' ),
+			'en_HK'    => esc_html__( 'Hong Kong', 'seo-by-rank-math' ),
+			'hu_HU'    => esc_html__( 'Hungary', 'seo-by-rank-math' ),
+			'hi_IN'    => esc_html__( 'India', 'seo-by-rank-math' ),
+			'id_ID'    => esc_html__( 'Indonesia', 'seo-by-rank-math' ),
+			'en_IE'    => esc_html__( 'Ireland', 'seo-by-rank-math' ),
+			'iw_IL'    => esc_html__( 'Israel', 'seo-by-rank-math' ),
+			'it_IT'    => esc_html__( 'Italy', 'seo-by-rank-math' ),
+			'ja_JP'    => esc_html__( 'Japan', 'seo-by-rank-math' ),
+			'ar_JO'    => esc_html__( 'Jordan', 'seo-by-rank-math' ),
+			'ru_KZ'    => esc_html__( 'Kazakhstan', 'seo-by-rank-math' ),
+			'en_KE'    => esc_html__( 'Kenya', 'seo-by-rank-math' ),
+			'ko_KR'    => esc_html__( 'Korea, Republic Of', 'seo-by-rank-math' ),
+			'lv_LV'    => esc_html__( 'Latvia', 'seo-by-rank-math' ),
+			'lt_LT'    => esc_html__( 'Lithuania', 'seo-by-rank-math' ),
+			'tr_MK'    => esc_html__( 'Macedonia, The Former Yugoslav Republic Of', 'seo-by-rank-math' ),
+			'en_MY'    => esc_html__( 'Malaysia', 'seo-by-rank-math' ),
+			'en_MT'    => esc_html__( 'Malta', 'seo-by-rank-math' ),
+			'es_MX'    => esc_html__( 'Mexico', 'seo-by-rank-math' ),
+			'ar_MA'    => esc_html__( 'Morocco', 'seo-by-rank-math' ),
+			'mnw_MM'   => esc_html__( 'Myanmar', 'seo-by-rank-math' ),
+			'nl_NL'    => esc_html__( 'Netherlands', 'seo-by-rank-math' ),
+			'en_NZ'    => esc_html__( 'New Zealand', 'seo-by-rank-math' ),
+			'es_NI'    => esc_html__( 'Nicaragua', 'seo-by-rank-math' ),
+			'en_NG'    => esc_html__( 'Nigeria', 'seo-by-rank-math' ),
+			'no_NO'    => esc_html__( 'Norway', 'seo-by-rank-math' ),
+			'en_PK'    => esc_html__( 'Pakistan', 'seo-by-rank-math' ),
+			'es_PY'    => esc_html__( 'Paraguay', 'seo-by-rank-math' ),
+			'es_PE'    => esc_html__( 'Peru', 'seo-by-rank-math' ),
+			'en_PH'    => esc_html__( 'Philippines', 'seo-by-rank-math' ),
+			'pl_PL'    => esc_html__( 'Poland', 'seo-by-rank-math' ),
+			'pt_PT'    => esc_html__( 'Portugal', 'seo-by-rank-math' ),
+			'ro_RO'    => esc_html__( 'Romania', 'seo-by-rank-math' ),
+			'ru_RU'    => esc_html__( 'Russian Federation', 'seo-by-rank-math' ),
+			'ar_SA'    => esc_html__( 'Saudi Arabia', 'seo-by-rank-math' ),
+			'fr_SN'    => esc_html__( 'Senegal', 'seo-by-rank-math' ),
+			'hr_RS'    => esc_html__( 'Serbia', 'seo-by-rank-math' ),
+			'en_SG'    => esc_html__( 'Singapore', 'seo-by-rank-math' ),
+			'sk_SK'    => esc_html__( 'Slovakia', 'seo-by-rank-math' ),
+			'sl_SI'    => esc_html__( 'Slovenia', 'seo-by-rank-math' ),
+			'en_ZA'    => esc_html__( 'South Africa', 'seo-by-rank-math' ),
+			'es_ES'    => esc_html__( 'Spain', 'seo-by-rank-math' ),
+			'en_LK'    => esc_html__( 'Sri Lanka', 'seo-by-rank-math' ),
+			'sv_SE'    => esc_html__( 'Sweden', 'seo-by-rank-math' ),
+			'de_CH'    => esc_html__( 'Switzerland', 'seo-by-rank-math' ),
+			'zh-TW_TW' => esc_html__( 'Taiwan', 'seo-by-rank-math' ),
+			'th_TH'    => esc_html__( 'Thailand', 'seo-by-rank-math' ),
+			'ar_TN'    => esc_html__( 'Tunisia', 'seo-by-rank-math' ),
+			'tr_TR'    => esc_html__( 'Turkey', 'seo-by-rank-math' ),
+			'ru_UA'    => esc_html__( 'Ukraine', 'seo-by-rank-math' ),
+			'ar_AE'    => esc_html__( 'United Arab Emirates', 'seo-by-rank-math' ),
+			'en_GB'    => esc_html__( 'United Kingdom', 'seo-by-rank-math' ),
+			'en_US'    => esc_html__( 'United States Of America', 'seo-by-rank-math' ),
+			'es_UY'    => esc_html__( 'Uruguay', 'seo-by-rank-math' ),
+			'es_VE'    => esc_html__( 'Venezuela, Bolivarian Republic Of', 'seo-by-rank-math' ),
+			'vi_VN'    => esc_html__( 'Viet Nam', 'seo-by-rank-math' ),
 		];
 	}
 }

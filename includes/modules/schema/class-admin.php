@@ -64,10 +64,10 @@ class Admin extends Base {
 	public function display_schema_type( $post_id, $data ) {
 		$schema = absint( get_option( 'page_for_posts' ) ) !== $post_id ? $this->get_schema_types( $data, $post_id ) : 'CollectionPage';
 		$schema = ! empty( $schema ) ? $schema : $this->get_schema_name( Helper::get_default_schema_type( $post_id, true ) );
-		$schema = $schema ? $schema : esc_html__( 'Off', 'rank-math' );
+		$schema = $schema ? $schema : esc_html__( 'Off', 'seo-by-rank-math' );
 		?>
 			<span class="rank-math-column-display schema-type">
-				<strong><?php esc_html_e( 'Schema', 'rank-math' ); ?>:</strong>
+				<strong><?php esc_html_e( 'Schema', 'seo-by-rank-math' ); ?>:</strong>
 				<?php echo esc_html( Helper::sanitize_schema_title( $schema ) ); ?>
 			</span>
 		<?php
@@ -95,7 +95,7 @@ class Admin extends Base {
 		$screen = get_current_screen();
 		if ( 'rank_math_schema' !== $screen->post_type ) {
 			wp_enqueue_script( 'rank-math-schema', rank_math()->plugin_url() . 'includes/modules/schema/assets/js/schema-gutenberg.js', [ 'rank-math-editor' ], rank_math()->version, true );
-			wp_set_script_translations( 'rank-math-schema', 'rank-math' );
+			wp_set_script_translations( 'rank-math-schema', 'seo-by-rank-math' );
 		}
 	}
 
@@ -193,7 +193,7 @@ class Admin extends Base {
 	 */
 	private function enqueue_translation() {
 		if ( function_exists( 'wp_set_script_translations' ) ) {
-			wp_set_script_translations( 'rank-math-schema', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
+			wp_set_script_translations( 'rank-math-schema', 'seo-by-rank-math', rank_math()->plugin_dir() . 'languages/' );
 		}
 	}
 

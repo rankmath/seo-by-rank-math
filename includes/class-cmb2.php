@@ -174,7 +174,7 @@ class CMB2 {
 		echo '<div id="' . esc_attr( $field->prop( 'id' ) ) . '" class="rank-math-sidebar-panel rank-math-tabs">';
 		if ( Admin_Helper::is_term_profile_page() ) :
 			?>
-			<h2 class="rank-math-metabox-frame-title"><?php esc_html_e( 'Rank Math', 'rank-math' ); ?></h2>
+			<h2 class="rank-math-metabox-frame-title"><?php esc_html_e( 'Rank Math', 'seo-by-rank-math' ); ?></h2>
 		<?php endif; ?>
 		<div class="rank-math-tabs-navigation rank-math-custom wp-clearfix">
 
