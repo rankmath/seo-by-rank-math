@@ -54,9 +54,11 @@ function Edit( {
 		}
 	}
 
-	function stopAddingLink() {
+	function stopAddingLink( focusEditor = true ) {
 		setAddingLink( false )
-		onFocus()
+		if ( focusEditor ) {
+			onFocus()
+		}
 	}
 
 	function onRemoveFormat() {
