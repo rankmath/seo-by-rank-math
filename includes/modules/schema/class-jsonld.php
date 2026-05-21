@@ -173,7 +173,11 @@ class JsonLD {
 	 * @return array
 	 */
 	private function validate_schema( $data ) {
-		if ( ! is_array( $data ) || empty( $data ) ) {
+		if ( ! is_array( $data ) ) {
+			return [];
+		}
+
+		if ( empty( $data ) ) {
 			return $data;
 		}
 
