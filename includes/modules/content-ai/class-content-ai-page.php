@@ -72,11 +72,11 @@ class Content_AI_Page {
 
 		new Page(
 			'rank-math-content-ai-page',
-			esc_html__( 'Content AI', 'rank-math' ),
+			esc_html__( 'Content AI', 'seo-by-rank-math' ),
 			[
 				'position'   => 4,
 				'parent'     => 'rank-math',
-				'menu_title' => esc_html__( 'Content AI', 'rank-math' ),
+				'menu_title' => esc_html__( 'Content AI', 'seo-by-rank-math' ),
 				'capability' => 'rank_math_content_ai',
 				'render'     => __DIR__ . '/views/main.php',
 				'classes'    => [ 'rank-math-page' ],
@@ -116,7 +116,7 @@ class Content_AI_Page {
 		$menu->add_sub_menu(
 			'content-ai-page',
 			[
-				'title'    => esc_html__( 'Content AI', 'rank-math' ),
+				'title'    => esc_html__( 'Content AI', 'seo-by-rank-math' ),
 				'href'     => $url,
 				'priority' => 50,
 			]
@@ -124,27 +124,27 @@ class Content_AI_Page {
 
 		$items = [
 			'content-ai-tools'   => [
-				'title' => esc_html__( 'AI Tools', 'rank-math' ),
+				'title' => esc_html__( 'AI Tools', 'seo-by-rank-math' ),
 				'href'  => $url . '#ai-tools',
-				'meta'  => [ 'title' => esc_html__( 'Content AI Tools', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Content AI Tools', 'seo-by-rank-math' ) ],
 			],
 
 			'content-ai-editor'  => [
-				'title' => esc_html__( 'Content Editor', 'rank-math' ),
+				'title' => esc_html__( 'Content Editor', 'seo-by-rank-math' ),
 				'href'  => $url . '#content-editor',
-				'meta'  => [ 'title' => esc_html__( 'Content AI Editor', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Content AI Editor', 'seo-by-rank-math' ) ],
 			],
 
 			'content-ai-chat'    => [
-				'title' => esc_html__( 'Chat', 'rank-math' ),
+				'title' => esc_html__( 'Chat', 'seo-by-rank-math' ),
 				'href'  => $url . '#chat',
-				'meta'  => [ 'title' => esc_html__( 'Content AI Chat', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Content AI Chat', 'seo-by-rank-math' ) ],
 			],
 
 			'content-ai-history' => [
-				'title' => esc_html__( 'History', 'rank-math' ),
+				'title' => esc_html__( 'History', 'seo-by-rank-math' ),
 				'href'  => $url . '#history',
-				'meta'  => [ 'title' => esc_html__( 'Content AI History', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Content AI History', 'seo-by-rank-math' ) ],
 			],
 		];
 
@@ -185,8 +185,8 @@ class Content_AI_Page {
 		<div id="editor2" data-settings='<?php echo esc_attr( wp_json_encode( $editor_settings ) ); ?>' data-post-id="<?php echo esc_attr( $post->ID ); ?>"></div>
 		<?php
 
-		wp_set_script_translations( 'rank-math-content-ai', 'rank-math' );
-		wp_set_script_translations( 'rank-math-content-ai-page', 'rank-math' );
+		wp_set_script_translations( 'rank-math-content-ai', 'seo-by-rank-math' );
+		wp_set_script_translations( 'rank-math-content-ai-page', 'seo-by-rank-math' );
 	}
 
 	/**

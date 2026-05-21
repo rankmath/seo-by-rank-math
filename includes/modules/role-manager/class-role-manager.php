@@ -57,7 +57,7 @@ class Role_Manager extends Base {
 
 		$this->page = new Page(
 			'rank-math-role-manager',
-			esc_html__( 'Role Manager', 'rank-math' ),
+			esc_html__( 'Role Manager', 'seo-by-rank-math' ),
 			[
 				'position'   => 20,
 				'parent'     => 'rank-math',

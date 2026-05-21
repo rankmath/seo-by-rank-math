@@ -176,7 +176,7 @@ class Shortcodes {
 		$format = nl2br( Helper::get_settings( 'titles.local_address_format' ) );
 		$data   = self::get_address( $hash, $address, $format );
 		?>
-		<label><?php esc_html_e( 'Address:', 'rank-math' ); ?></label>
+		<label><?php esc_html_e( 'Address:', 'seo-by-rank-math' ); ?></label>
 		<address><?php echo wp_kses_post( $data ); ?></address>
 		<?php
 	}
@@ -193,7 +193,7 @@ class Shortcodes {
 		$combined = $this->get_hours_combined( $hours );
 		$format   = Helper::get_settings( 'titles.opening_hours_format' );
 		?>
-		<label><?php esc_html_e( 'Hours:', 'rank-math' ); ?></label>
+		<label><?php esc_html_e( 'Hours:', 'seo-by-rank-math' ); ?></label>
 		<div class="rank-math-contact-hours-details">
 			<?php
 			foreach ( $combined as $time => $days ) {
@@ -294,7 +294,7 @@ class Shortcodes {
 		}
 		?>
 			<div class="rank-math-phone-numbers">
-				<label><?php echo esc_html__( 'Telephone', 'rank-math' ); ?>:</label>
+				<label><?php echo esc_html__( 'Telephone', 'seo-by-rank-math' ); ?>:</label>
 				<span><a href="tel:<?php echo esc_attr( $phone ); ?>"><?php echo esc_html( $phone ); ?></a></span>
 			</div>
 		<?php
@@ -353,7 +353,7 @@ class Shortcodes {
 		}
 		?>
 		<div class="rank-math-email">
-			<label><?php esc_html_e( 'Email:', 'rank-math' ); ?></label>
+			<label><?php esc_html_e( 'Email:', 'seo-by-rank-math' ); ?></label>
 			<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
 		</div>
 		<?php
@@ -369,7 +369,7 @@ class Shortcodes {
 		}
 		?>
 		<div class="rank-math-organization-description">
-			<label><?php esc_html_e( 'Description:', 'rank-math' ); ?></label>
+			<label><?php esc_html_e( 'Description:', 'seo-by-rank-math' ); ?></label>
 			<p><?php echo esc_html( $description ); ?></p>
 		</div>
 		<?php

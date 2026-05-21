@@ -17,14 +17,14 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'URL', 'rank-math' ),
+		esc_html__( 'URL', 'seo-by-rank-math' ),
 		'url'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Type', 'rank-math' ),
+		esc_html__( 'Type', 'seo-by-rank-math' ),
 		'@type'
 	);
 	?>

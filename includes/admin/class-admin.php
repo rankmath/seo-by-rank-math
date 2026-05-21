@@ -111,9 +111,9 @@ class Admin implements Runner {
 	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
 	 */
 	public function update_user_contactmethods( $contactmethods ) {
-		$contactmethods['twitter']                 = esc_html__( 'Twitter username (without @)', 'rank-math' );
-		$contactmethods['facebook']                = esc_html__( 'Facebook profile URL', 'rank-math' );
-		$contactmethods['additional_profile_urls'] = esc_html__( 'Additional profile URLs', 'rank-math' );
+		$contactmethods['twitter']                 = esc_html__( 'Twitter username (without @)', 'seo-by-rank-math' );
+		$contactmethods['facebook']                = esc_html__( 'Facebook profile URL', 'seo-by-rank-math' );
+		$contactmethods['additional_profile_urls'] = esc_html__( 'Additional profile URLs', 'seo-by-rank-math' );
 
 		return $contactmethods;
 	}
@@ -158,7 +158,7 @@ class Admin implements Runner {
 		}
 
 		if ( ! empty( $_POST['rank_math_canonical_url'] ) && false === Param::post( 'rank_math_canonical_url', false, FILTER_VALIDATE_URL ) ) { // phpcs:ignore
-			$message = esc_html__( 'The canonical URL you entered does not seem to be a valid URL. Please double check it in the SEO meta box &raquo; Advanced tab.', 'rank-math' );
+			$message = esc_html__( 'The canonical URL you entered does not seem to be a valid URL. Please double check it in the SEO meta box &raquo; Advanced tab.', 'seo-by-rank-math' );
 			Helper::add_notification( $message, [ 'type' => 'error' ] );
 		}
 	}
@@ -336,8 +336,13 @@ class Admin implements Runner {
 	 * @return string Modified translated text.
 	 */
 	public function remap_action_scheduler_translation( $translated, $text, $domain ) {
-		// phpcs:ignore -- Use WooCommerce text domain for Action Scheduler strings.
-		return $domain === 'action-scheduler' && Helper::is_woocommerce_active() ? __( $text, 'woocommerce' ) : $translated;
+		if ( 'action-scheduler' !== $domain || ! Helper::is_woocommerce_active() ) {
+			return $translated;
+		}
+
+		$translations = get_translations_for_domain( 'woocommerce' );
+		$translation  = $translations->translate( $text );
+		return $translation !== $text ? $translation : $translated;
 	}
 
 	/**
@@ -350,8 +355,13 @@ class Admin implements Runner {
 	 * @return string Modified translated text.
 	 */
 	public function remap_action_scheduler_translation_with_context( $translated, $text, $context, $domain ) {
-		// phpcs:ignore -- Use WooCommerce text domain for Action Scheduler strings.
-		return $domain === 'action-scheduler' && Helper::is_woocommerce_active() ? _x( $text, $context, 'woocommerce' ) : $translated;
+		if ( 'action-scheduler' !== $domain || ! Helper::is_woocommerce_active() ) {
+			return $translated;
+		}
+
+		$translations = get_translations_for_domain( 'woocommerce' );
+		$translation  = $translations->translate( $text, $context );
+		return $translation !== $text ? $translation : $translated;
 	}
 
 	/**
@@ -402,8 +412,8 @@ class Admin implements Runner {
 				$suggestion['url'],
 				$suggestion['title'],
 				$label,
-				esc_attr__( 'Copy Link URL to Clipboard', 'rank-math' ),
-				esc_attr__( 'Insert Link in Content', 'rank-math' ),
+				esc_attr__( 'Copy Link URL to Clipboard', 'seo-by-rank-math' ),
+				esc_attr__( 'Insert Link in Content', 'seo-by-rank-math' ),
 				esc_attr( $label )
 			);
 		}
@@ -433,7 +443,7 @@ class Admin implements Runner {
 	public function deactivate_plugins() {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
 		if ( ! current_user_can( 'activate_plugins' ) ) {
-			$this->error( esc_html__( 'You are not authorized to perform this action.', 'rank-math' ) );
+			$this->error( esc_html__( 'You are not authorized to perform this action.', 'seo-by-rank-math' ) );
 		}
 		$plugin = Param::post( 'plugin', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 		if ( 'all' !== $plugin ) {
@@ -501,7 +511,7 @@ class Admin implements Runner {
 		) { ?>
 			<a href="<?php echo esc_url( \RankMath\KB::get( 'pro', 'Header Offer Icon' ) ); ?>" target="_blank" class="rank-math-tooltip bottom" style="margin-left:5px;">
 				🎉
-				<span><?php esc_attr_e( 'Exclusive Offer!', 'rank-math' ); ?></span>
+				<span><?php esc_attr_e( 'Exclusive Offer!', 'seo-by-rank-math' ); ?></span>
 			</a>
 			<?php
 		}
@@ -517,7 +527,7 @@ class Admin implements Runner {
 			return;
 		}
 
-		$field_description = __( 'Additional Profiles to add in the <code>sameAs</code> Schema property.', 'rank-math' );
+		$field_description = __( 'Additional Profiles to add in the <code>sameAs</code> Schema property.', 'seo-by-rank-math' );
 		?>
 		<script type="text/javascript">
 			( function( $ ) {

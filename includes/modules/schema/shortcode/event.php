@@ -18,7 +18,7 @@ $is_offline = 'Offline' === $value;
 if ( 'MixedEventAttendanceMode' === $value ) {
 	$is_online  = true;
 	$is_offline = true;
-	$value      = esc_html__( 'Online + Offline', 'rank-math' );
+	$value      = esc_html__( 'Online + Offline', 'seo-by-rank-math' );
 }
 ?>
 <div class="rank-math-review-data">
@@ -27,21 +27,21 @@ if ( 'MixedEventAttendanceMode' === $value ) {
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Event Type', 'rank-math' ),
+		esc_html__( 'Event Type', 'seo-by-rank-math' ),
 		'@type'
 	);
 	?>
 
 	<?php
 	$this->output_field(
-		esc_html__( 'Event Attendance Mode', 'rank-math' ),
+		esc_html__( 'Event Attendance Mode', 'seo-by-rank-math' ),
 		$value
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Event Status', 'rank-math' ),
+		esc_html__( 'Event Status', 'seo-by-rank-math' ),
 		'eventStatus'
 	);
 	?>
@@ -49,17 +49,17 @@ if ( 'MixedEventAttendanceMode' === $value ) {
 	<?php
 	if ( $is_offline ) {
 		$this->get_field(
-			esc_html__( 'Venue Name', 'rank-math' ),
+			esc_html__( 'Venue Name', 'seo-by-rank-math' ),
 			'location.name'
 		);
 
 		$this->get_field(
-			esc_html__( 'Venue URL', 'rank-math' ),
+			esc_html__( 'Venue URL', 'seo-by-rank-math' ),
 			'location.url'
 		);
 
 		$this->get_field(
-			esc_html__( 'Address', 'rank-math' ),
+			esc_html__( 'Address', 'seo-by-rank-math' ),
 			'location.address'
 		);
 	}
@@ -68,7 +68,7 @@ if ( 'MixedEventAttendanceMode' === $value ) {
 	<?php
 	if ( $is_online ) {
 		$this->get_field(
-			esc_html__( 'Online Event URL', 'rank-math' ),
+			esc_html__( 'Online Event URL', 'seo-by-rank-math' ),
 			'VirtualLocation.url'
 		);
 	}
@@ -76,28 +76,28 @@ if ( 'MixedEventAttendanceMode' === $value ) {
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Performer', 'rank-math' ),
+		esc_html__( 'Performer', 'seo-by-rank-math' ),
 		'performer.@type'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Performer Name', 'rank-math' ),
+		esc_html__( 'Performer Name', 'seo-by-rank-math' ),
 		'performer.name'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Performer URL', 'rank-math' ),
+		esc_html__( 'Performer URL', 'seo-by-rank-math' ),
 		'performer.sameAs'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Start Date', 'rank-math' ),
+		esc_html__( 'Start Date', 'seo-by-rank-math' ),
 		'startDate',
 		true
 	);
@@ -105,7 +105,7 @@ if ( 'MixedEventAttendanceMode' === $value ) {
 
 	<?php
 	$this->get_field(
-		esc_html__( 'End Date', 'rank-math' ),
+		esc_html__( 'End Date', 'seo-by-rank-math' ),
 		'endDate',
 		true
 	);
@@ -113,42 +113,42 @@ if ( 'MixedEventAttendanceMode' === $value ) {
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Ticket URL', 'rank-math' ),
+		esc_html__( 'Ticket URL', 'seo-by-rank-math' ),
 		'offers.url'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Entry Price', 'rank-math' ),
+		esc_html__( 'Entry Price', 'seo-by-rank-math' ),
 		'offers.price'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Currency', 'rank-math' ),
+		esc_html__( 'Currency', 'seo-by-rank-math' ),
 		'offers.priceCurrency'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Availability', 'rank-math' ),
+		esc_html__( 'Availability', 'seo-by-rank-math' ),
 		'offers.availability'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Availability Starts', 'rank-math' ),
+		esc_html__( 'Availability Starts', 'seo-by-rank-math' ),
 		'startDate'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Stock Inventory', 'rank-math' ),
+		esc_html__( 'Stock Inventory', 'seo-by-rank-math' ),
 		'offers.inventoryLevel'
 	);
 	?>

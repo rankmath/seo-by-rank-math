@@ -17,77 +17,77 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Salary', 'rank-math' ),
+		esc_html__( 'Salary', 'seo-by-rank-math' ),
 		'baseSalary.value.value'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Salary Currency', 'rank-math' ),
+		esc_html__( 'Salary Currency', 'seo-by-rank-math' ),
 		'baseSalary.currency'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Payroll', 'rank-math' ),
+		esc_html__( 'Payroll', 'seo-by-rank-math' ),
 		'baseSalary.value.unitText'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Date Posted', 'rank-math' ),
+		esc_html__( 'Date Posted', 'seo-by-rank-math' ),
 		'datePosted'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Expiry Posted', 'rank-math' ),
+		esc_html__( 'Expiry Posted', 'seo-by-rank-math' ),
 		'validThrough'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Unpublish when expired', 'rank-math' ),
+		esc_html__( 'Unpublish when expired', 'seo-by-rank-math' ),
 		'unpublish'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Employment Type ', 'rank-math' ),
+		esc_html__( 'Employment Type ', 'seo-by-rank-math' ),
 		'employmentType'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Hiring Organization ', 'rank-math' ),
+		esc_html__( 'Hiring Organization ', 'seo-by-rank-math' ),
 		'hiringOrganization.name'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Organization URL', 'rank-math' ),
+		esc_html__( 'Organization URL', 'seo-by-rank-math' ),
 		'hiringOrganization.sameAs'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Organization Logo', 'rank-math' ),
+		esc_html__( 'Organization Logo', 'seo-by-rank-math' ),
 		'hiringOrganization.logo'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Location', 'rank-math' ),
+		esc_html__( 'Location', 'seo-by-rank-math' ),
 		'jobLocation.address'
 	);
 	?>

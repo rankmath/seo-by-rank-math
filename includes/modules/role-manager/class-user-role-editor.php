@@ -55,7 +55,7 @@ class User_Role_Editor {
 		$groups = (array) $groups;
 
 		$groups[ self::GROUP ] = [
-			'caption' => esc_html__( 'Rank Math', 'rank-math' ),
+			'caption' => esc_html__( 'Rank Math', 'seo-by-rank-math' ),
 			'parent'  => 'custom',
 			'level'   => 3,
 		];

@@ -54,7 +54,7 @@ class Step extends Component {
 						onChange={ ( newTitle ) => {
 							this.setStepProp( 'title', newTitle )
 						} }
-						placeholder={ __( 'Enter a step title', 'rank-math' ) }
+						placeholder={ __( 'Enter a step title', 'seo-by-rank-math' ) }
 					/>
 
 					<div className="rank-math-block-actions">
@@ -64,14 +64,14 @@ class Step extends Component {
 							className="rank-math-item-visbility"
 							icon={ visible ? 'visibility' : 'hidden' }
 							onClick={ this.toggleVisibility }
-							title={ __( 'Hide Step', 'rank-math' ) }
+							title={ __( 'Hide Step', 'seo-by-rank-math' ) }
 						/>
 
 						<Button
 							icon="trash"
 							className="rank-math-item-delete"
 							onClick={ this.deleteStep }
-							title={ __( 'Delete Step', 'rank-math' ) }
+							title={ __( 'Delete Step', 'seo-by-rank-math' ) }
 						/>
 					</div>
 				</div>
@@ -87,7 +87,7 @@ class Step extends Component {
 							open={ open }
 							addButtonLabel={ __(
 								'Add Step Image',
-								'rank-math'
+								'seo-by-rank-math'
 							) }
 							removeImage={ () => {
 								this.setStepProp( 'imageID', 0 )
@@ -110,7 +110,7 @@ class Step extends Component {
 					} }
 					placeholder={ __(
 						'Enter a step description',
-						'rank-math'
+						'seo-by-rank-math'
 					) }
 				/>
 			</div>

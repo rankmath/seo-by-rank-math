@@ -31,8 +31,8 @@ class WC_Vars extends Opengraph {
 		rank_math_register_var_replacement(
 			'wc_price',
 			[
-				'name'        => esc_html__( 'Product\'s price.', 'rank-math' ),
-				'description' => esc_html__( 'Product\'s price of the current product', 'rank-math' ),
+				'name'        => esc_html__( 'Product\'s price.', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Product\'s price of the current product', 'seo-by-rank-math' ),
 				'variable'    => 'wc_price',
 				'example'     => $this->get_product_price(),
 			],
@@ -42,8 +42,8 @@ class WC_Vars extends Opengraph {
 		rank_math_register_var_replacement(
 			'wc_sku',
 			[
-				'name'        => esc_html__( 'Product\'s SKU.', 'rank-math' ),
-				'description' => esc_html__( 'Product\'s SKU of the current product', 'rank-math' ),
+				'name'        => esc_html__( 'Product\'s SKU.', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Product\'s SKU of the current product', 'seo-by-rank-math' ),
 				'variable'    => 'wc_sku',
 				'example'     => $this->get_product_sku(),
 			],
@@ -53,8 +53,8 @@ class WC_Vars extends Opengraph {
 		rank_math_register_var_replacement(
 			'wc_shortdesc',
 			[
-				'name'        => esc_html__( 'Product\'s short description.', 'rank-math' ),
-				'description' => esc_html__( 'Product\'s short description of the current product', 'rank-math' ),
+				'name'        => esc_html__( 'Product\'s short description.', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Product\'s short description of the current product', 'seo-by-rank-math' ),
 				'variable'    => 'wc_shortdesc',
 				'example'     => $this->get_short_description(),
 			],
@@ -64,8 +64,8 @@ class WC_Vars extends Opengraph {
 		rank_math_register_var_replacement(
 			'wc_brand',
 			[
-				'name'        => esc_html__( 'Product\'s brand.', 'rank-math' ),
-				'description' => esc_html__( 'Product\'s brand of the current product', 'rank-math' ),
+				'name'        => esc_html__( 'Product\'s brand.', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Product\'s brand of the current product', 'seo-by-rank-math' ),
 				'variable'    => 'wc_brand',
 				'example'     => $this->get_product_brand(),
 			],

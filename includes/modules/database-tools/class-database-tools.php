@@ -80,7 +80,7 @@ class Database_Tools {
 		if ( empty( $transients ) ) {
 			return [
 				'status'  => 'error',
-				'message' => __( 'No Rank Math transients found.', 'rank-math' ),
+				'message' => __( 'No Rank Math transients found.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -91,7 +91,7 @@ class Database_Tools {
 		}
 
 		// Translators: placeholder is the number of transients deleted.
-		return sprintf( _n( '%d Rank Math transient cleared.', '%d Rank Math transients cleared.', $count, 'rank-math' ), $count );
+		return sprintf( _n( '%d Rank Math transient cleared.', '%d Rank Math transients cleared.', $count, 'seo-by-rank-math' ), $count );
 	}
 
 	/**
@@ -102,14 +102,14 @@ class Database_Tools {
 		if ( empty( $stored ) ) {
 			return [
 				'status'  => 'error',
-				'message' => __( 'SEO Analyzer data has already been cleared.', 'rank-math' ),
+				'message' => __( 'SEO Analyzer data has already been cleared.', 'seo-by-rank-math' ),
 			];
 		}
 
 		delete_option( 'rank_math_seo_analysis_results' );
 		delete_option( 'rank_math_seo_analysis_date' );
 
-		return __( 'SEO Analyzer data successfully deleted.', 'rank-math' );
+		return __( 'SEO Analyzer data successfully deleted.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -122,14 +122,14 @@ class Database_Tools {
 		if ( empty( $exists ) ) {
 			return [
 				'status'  => 'error',
-				'message' => __( 'No Internal Links data found.', 'rank-math' ),
+				'message' => __( 'No Internal Links data found.', 'seo-by-rank-math' ),
 			];
 		}
 
 		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_links" );
 		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_internal_meta" );
 
-		return __( 'Internal Links successfully deleted.', 'rank-math' );
+		return __( 'Internal Links successfully deleted.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -142,13 +142,13 @@ class Database_Tools {
 		if ( empty( $exists ) ) {
 			return [
 				'status'  => 'error',
-				'message' => __( 'No 404 log data found.', 'rank-math' ),
+				'message' => __( 'No 404 log data found.', 'seo-by-rank-math' ),
 			];
 		}
 
 		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_404_logs;" );
 
-		return __( '404 Log successfully deleted.', 'rank-math' );
+		return __( '404 Log successfully deleted.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -161,14 +161,14 @@ class Database_Tools {
 		if ( empty( $exists ) ) {
 			return [
 				'status'  => 'error',
-				'message' => __( 'No Redirections found.', 'rank-math' ),
+				'message' => __( 'No Redirections found.', 'seo-by-rank-math' ),
 			];
 		}
 
 		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections;" );
 		DB_Helper::query( "TRUNCATE TABLE {$wpdb->prefix}rank_math_redirections_cache;" );
 
-		return __( 'Redirection rules successfully deleted.', 'rank-math' );
+		return __( 'Redirection rules successfully deleted.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -192,7 +192,7 @@ class Database_Tools {
 			);
 		}
 
-		return __( 'Table re-creation started. It might take a couple of minutes.', 'rank-math' );
+		return __( 'Table re-creation started. It might take a couple of minutes.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -254,13 +254,13 @@ class Database_Tools {
 		if ( empty( $posts['posts'] ) ) {
 			return [
 				'status'  => 'error',
-				'message' => __( 'No posts found to convert.', 'rank-math' ),
+				'message' => __( 'No posts found to convert.', 'seo-by-rank-math' ),
 			];
 		}
 
 		Yoast_Blocks::get()->start( $posts['posts'] );
 
-		return __( 'Conversion started. A success message will be shown here once the process completes. You can close this page.', 'rank-math' );
+		return __( 'Conversion started. A success message will be shown here once the process completes. You can close this page.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -273,13 +273,13 @@ class Database_Tools {
 		if ( empty( $posts['posts'] ) ) {
 			return [
 				'status'  => 'error',
-				'message' => __( 'No posts found to convert.', 'rank-math' ),
+				'message' => __( 'No posts found to convert.', 'seo-by-rank-math' ),
 			];
 		}
 
 		AIOSEO_Blocks::get()->start( $posts['posts'] );
 
-		return __( 'Conversion started. A success message will be shown here once the process completes. You can close this page.', 'rank-math' );
+		return __( 'Conversion started. A success message will be shown here once the process completes. You can close this page.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -292,84 +292,84 @@ class Database_Tools {
 
 		if ( Helper::is_module_active( 'seo-analysis' ) ) {
 			$tools['clear_seo_analysis'] = [
-				'title'       => __( 'Flush SEO Analyzer Data', 'rank-math' ),
-				'description' => __( "Need a clean slate or not able to run the SEO Analyzer tool? Flushing the analysis data might fix the issue. Flushing SEO Analyzer data is entirely safe and doesn't remove any critical data from your website.", 'rank-math' ),
-				'button_text' => __( 'Clear SEO Analyzer', 'rank-math' ),
+				'title'       => __( 'Flush SEO Analyzer Data', 'seo-by-rank-math' ),
+				'description' => __( "Need a clean slate or not able to run the SEO Analyzer tool? Flushing the analysis data might fix the issue. Flushing SEO Analyzer data is entirely safe and doesn't remove any critical data from your website.", 'seo-by-rank-math' ),
+				'button_text' => __( 'Clear SEO Analyzer', 'seo-by-rank-math' ),
 			];
 		}
 
 		$tools['clear_transients'] = [
-			'title'       => __( 'Remove Rank Math Transients', 'rank-math' ),
-			'description' => __( 'If you see any issue while using Rank Math or one of its options - clearing the Rank Math transients fixes the problem in most cases. Deleting transients does not delete ANY data added using Rank Math.', 'rank-math' ),
-			'button_text' => __( 'Remove transients', 'rank-math' ),
+			'title'       => __( 'Remove Rank Math Transients', 'seo-by-rank-math' ),
+			'description' => __( 'If you see any issue while using Rank Math or one of its options - clearing the Rank Math transients fixes the problem in most cases. Deleting transients does not delete ANY data added using Rank Math.', 'seo-by-rank-math' ),
+			'button_text' => __( 'Remove transients', 'seo-by-rank-math' ),
 		];
 
 		if ( Helper::is_module_active( '404-monitor' ) ) {
 			$tools['delete_log'] = [
-				'title'        => __( 'Clear 404 Log', 'rank-math' ),
-				'description'  => __( 'Is the 404 error log getting out of hand? Use this option to clear ALL 404 logs generated by your website in the Rank Math 404 Monitor.', 'rank-math' ),
-				'confirm_text' => __( 'Are you sure you want to delete the 404 log? This action is irreversible.', 'rank-math' ),
-				'button_text'  => __( 'Clear 404 Log', 'rank-math' ),
+				'title'        => __( 'Clear 404 Log', 'seo-by-rank-math' ),
+				'description'  => __( 'Is the 404 error log getting out of hand? Use this option to clear ALL 404 logs generated by your website in the Rank Math 404 Monitor.', 'seo-by-rank-math' ),
+				'confirm_text' => __( 'Are you sure you want to delete the 404 log? This action is irreversible.', 'seo-by-rank-math' ),
+				'button_text'  => __( 'Clear 404 Log', 'seo-by-rank-math' ),
 			];
 		}
 
 		$tools['recreate_tables'] = [
-			'title'       => __( 'Re-create Missing Database Tables', 'rank-math' ),
-			'description' => __( 'Check if required tables exist and create them if not.', 'rank-math' ),
-			'button_text' => __( 'Re-create Tables', 'rank-math' ),
+			'title'       => __( 'Re-create Missing Database Tables', 'seo-by-rank-math' ),
+			'description' => __( 'Check if required tables exist and create them if not.', 'seo-by-rank-math' ),
+			'button_text' => __( 'Re-create Tables', 'seo-by-rank-math' ),
 		];
 
 		if ( Helper::is_module_active( 'analytics' ) ) {
 			$tools['analytics_fix_collations'] = [
-				'title'       => __( 'Fix Analytics table collations', 'rank-math' ),
-				'description' => __( 'In some cases, the Analytics database tables or columns don\'t match with each other, which can cause database errors. This tool can fix that issue.', 'rank-math' ),
-				'button_text' => __( 'Fix Collations', 'rank-math' ),
+				'title'       => __( 'Fix Analytics table collations', 'seo-by-rank-math' ),
+				'description' => __( 'In some cases, the Analytics database tables or columns don\'t match with each other, which can cause database errors. This tool can fix that issue.', 'seo-by-rank-math' ),
+				'button_text' => __( 'Fix Collations', 'seo-by-rank-math' ),
 			];
 		}
 
 		$block_posts = Yoast_Blocks::get()->find_posts();
 		if ( is_array( $block_posts ) && ! empty( $block_posts['count'] ) ) {
 			$tools['yoast_blocks'] = [
-				'title'        => __( 'Yoast Block Converter', 'rank-math' ),
-				'description'  => __( 'Convert FAQ, HowTo, & Table of Contents Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
-				'confirm_text' => __( 'Are you sure you want to convert Yoast blocks into Rank Math blocks? This action is irreversible.', 'rank-math' ),
-				'button_text'  => __( 'Convert Blocks', 'rank-math' ),
+				'title'        => __( 'Yoast Block Converter', 'seo-by-rank-math' ),
+				'description'  => __( 'Convert FAQ, HowTo, & Table of Contents Blocks created using Yoast. Use this option to easily move your previous blocks into Rank Math.', 'seo-by-rank-math' ),
+				'confirm_text' => __( 'Are you sure you want to convert Yoast blocks into Rank Math blocks? This action is irreversible.', 'seo-by-rank-math' ),
+				'button_text'  => __( 'Convert Blocks', 'seo-by-rank-math' ),
 			];
 		}
 
 		$aio_block_posts = AIOSEO_Blocks::get()->find_posts();
 		if ( is_array( $aio_block_posts ) && ! empty( $aio_block_posts['count'] ) ) {
 			$tools['aioseo_blocks'] = [
-				'title'        => __( 'AIOSEO Block Converter', 'rank-math' ),
-				'description'  => __( 'Convert TOC block created using AIOSEO. Use this option to easily move your previous blocks into Rank Math.', 'rank-math' ),
-				'confirm_text' => __( 'Are you sure you want to convert AIOSEO blocks into Rank Math blocks? This action is irreversible.', 'rank-math' ),
-				'button_text'  => __( 'Convert Blocks', 'rank-math' ),
+				'title'        => __( 'AIOSEO Block Converter', 'seo-by-rank-math' ),
+				'description'  => __( 'Convert TOC block created using AIOSEO. Use this option to easily move your previous blocks into Rank Math.', 'seo-by-rank-math' ),
+				'confirm_text' => __( 'Are you sure you want to convert AIOSEO blocks into Rank Math blocks? This action is irreversible.', 'seo-by-rank-math' ),
+				'button_text'  => __( 'Convert Blocks', 'seo-by-rank-math' ),
 			];
 		}
 
 		if ( Helper::is_module_active( 'link-counter' ) ) {
 			$tools['delete_links'] = [
-				'title'        => __( 'Delete Internal Links Data', 'rank-math' ),
-				'description'  => __( 'In some instances, the internal links data might show an inflated number or no number at all. Deleting the internal links data might fix the issue.', 'rank-math' ),
-				'confirm_text' => __( 'Are you sure you want to delete Internal Links Data? This action is irreversible.', 'rank-math' ),
-				'button_text'  => __( 'Delete Internal Links', 'rank-math' ),
+				'title'        => __( 'Delete Internal Links Data', 'seo-by-rank-math' ),
+				'description'  => __( 'In some instances, the internal links data might show an inflated number or no number at all. Deleting the internal links data might fix the issue.', 'seo-by-rank-math' ),
+				'confirm_text' => __( 'Are you sure you want to delete Internal Links Data? This action is irreversible.', 'seo-by-rank-math' ),
+				'button_text'  => __( 'Delete Internal Links', 'seo-by-rank-math' ),
 			];
 		}
 
 		if ( Helper::is_module_active( 'redirections' ) ) {
 			$tools['delete_redirections'] = [
-				'title'        => __( 'Delete Redirections Rules', 'rank-math' ),
-				'description'  => __( 'Getting a redirection loop or need a fresh start? Delete all the redirections using this tool. Note: This process is irreversible and will delete ALL your redirection rules.', 'rank-math' ),
-				'confirm_text' => __( 'Are you sure you want to delete all the Redirection Rules? This action is irreversible.', 'rank-math' ),
-				'button_text'  => __( 'Delete Redirections', 'rank-math' ),
+				'title'        => __( 'Delete Redirections Rules', 'seo-by-rank-math' ),
+				'description'  => __( 'Getting a redirection loop or need a fresh start? Delete all the redirections using this tool. Note: This process is irreversible and will delete ALL your redirection rules.', 'seo-by-rank-math' ),
+				'confirm_text' => __( 'Are you sure you want to delete all the Redirection Rules? This action is irreversible.', 'seo-by-rank-math' ),
+				'button_text'  => __( 'Delete Redirections', 'seo-by-rank-math' ),
 			];
 		}
 
 		if ( ! empty( Update_Score::get()->find() ) ) {
 			$tools['update_seo_score'] = [
-				'title'       => __( 'Update SEO Scores', 'rank-math' ),
-				'description' => __( 'This tool will calculate the SEO score for the posts/pages that have a Focus Keyword set. Note: This process may take some time and the browser tab must be kept open while it is running.', 'rank-math' ),
-				'button_text' => __( 'Recalculate Scores', 'rank-math' ),
+				'title'       => __( 'Update SEO Scores', 'seo-by-rank-math' ),
+				'description' => __( 'This tool will calculate the SEO score for the posts/pages that have a Focus Keyword set. Note: This process may take some time and the browser tab must be kept open while it is running.', 'seo-by-rank-math' ),
+				'button_text' => __( 'Recalculate Scores', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -379,22 +379,22 @@ class Database_Tools {
 				$tools,
 				[
 					'analytics_clear_caches' => [
-						'title'       => __( 'Purge Analytics Cache', 'rank-math' ),
-						'description' => __( 'Clear analytics cache to re-calculate all the stats again.', 'rank-math' ),
-						'button_text' => __( 'Clear Cache', 'rank-math' ),
+						'title'       => __( 'Purge Analytics Cache', 'seo-by-rank-math' ),
+						'description' => __( 'Clear analytics cache to re-calculate all the stats again.', 'seo-by-rank-math' ),
+						'button_text' => __( 'Clear Cache', 'seo-by-rank-math' ),
 					],
 				],
 				3
 			);
 
-			$description = __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'rank-math' );
+			$description = __( 'Missing some posts/pages in the Analytics data? Clear the index and build a new one for more accurate stats.', 'seo-by-rank-math' );
 
 			$sitepress = Sitepress::get()->is_active() ? Sitepress::get()->get_var() : false;
 			if ( Sitepress::get()->is_per_domain() && ! empty( $sitepress->get_setting( 'auto_adjust_ids', null ) ) ) {
 				$description .= '<br /><br /><i>' . sprintf(
 					/* translators: 1: settings URL, 2: settings text */
-					__( 'To properly rebuild Analytics posts in secondary languages, please disable the %1$s when using a different domain per language.', 'rank-math' ),
-					'<a href="' . esc_url( admin_url( 'admin.php?page=sitepress-multilingual-cms/menu/languages.php#lang-sec-8' ) ) . '">' . __( 'Make themes work multilingual option in WPML settings', 'rank-math' ) . '</a>'
+					__( 'To properly rebuild Analytics posts in secondary languages, please disable the %1$s when using a different domain per language.', 'seo-by-rank-math' ),
+					'<a href="' . esc_url( admin_url( 'admin.php?page=sitepress-multilingual-cms/menu/languages.php#lang-sec-8' ) ) . '">' . __( 'Make themes work multilingual option in WPML settings', 'seo-by-rank-math' ) . '</a>'
 				) . '</i>';
 			}
 
@@ -402,9 +402,9 @@ class Database_Tools {
 				$tools,
 				[
 					'analytics_reindex_posts' => [
-						'title'       => __( 'Rebuild Index for Analytics', 'rank-math' ),
+						'title'       => __( 'Rebuild Index for Analytics', 'seo-by-rank-math' ),
 						'description' => $description,
-						'button_text' => __( 'Rebuild Index', 'rank-math' ),
+						'button_text' => __( 'Rebuild Index', 'seo-by-rank-math' ),
 					],
 				],
 				3

@@ -65,5 +65,5 @@ if ( ! empty( $graph ) && ! empty( $graph_data ) ) {
 	$width  = 64;
 	$height = 34;
 
-	$this->image( $this->charts_api_url( $graph_data, $width * 3, $height * 3 ), $width, $height, __( 'Data Chart', 'rank-math' ), [ 'style' => 'float: right;margin-top: -7px;' ] );
+	$this->image( $this->charts_api_url( $graph_data, $width * 3, $height * 3 ), $width, $height, __( 'Data Chart', 'seo-by-rank-math' ), [ 'style' => 'float: right;margin-top: -7px;' ] );
 } ?>

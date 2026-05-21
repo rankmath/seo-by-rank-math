@@ -48,29 +48,29 @@ class Option_Center implements Runner {
 		$tabs = [
 			'links'       => [
 				'icon'  => 'rm-icon rm-icon-link',
-				'title' => esc_html__( 'Links', 'rank-math' ),
+				'title' => esc_html__( 'Links', 'seo-by-rank-math' ),
 				/* translators: Link to kb article */
-				'desc'  => sprintf( esc_html__( 'Change how some of the links open and operate on your website. %s.', 'rank-math' ), '<a href="' . KB::get( 'link-settings', 'Options Panel Links Tab' ) . '" target="_blank">' . esc_html__( 'Learn More', 'rank-math' ) . '</a>' ),
+				'desc'  => sprintf( esc_html__( 'Change how some of the links open and operate on your website. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'link-settings', 'Options Panel Links Tab' ) . '" target="_blank">' . esc_html__( 'Learn More', 'seo-by-rank-math' ) . '</a>' ),
 			],
 			'breadcrumbs' => [
 				'icon'      => 'rm-icon rm-icon-direction',
-				'title'     => esc_html__( 'Breadcrumbs', 'rank-math' ),
+				'title'     => esc_html__( 'Breadcrumbs', 'seo-by-rank-math' ),
 				'classes'   => 'rank-math-advanced-option',
 				/* translators: Link to kb article */
-				'desc'      => sprintf( esc_html__( 'Here you can set up the breadcrumbs function. %s', 'rank-math' ), '<a href="' . KB::get( 'breadcrumbs', 'Options Panel Breadcrumbs Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>. <br/>' ),
-				'after_row' => current_theme_supports( 'rank-math-breadcrumbs' ) ? '' : '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>' . esc_html__( 'Use the following code in your theme template files to display breadcrumbs.', 'rank-math' ) . ' <a href="' . KB::get( 'breadcrumbs-install', 'Options Panel Breadcrumbs Tab' ) . '" target="_blank">' . esc_html__( 'Learn More', 'rank-math' ) . '</a><br /><code>&lt;?php if (function_exists(\'rank_math_the_breadcrumbs\')) rank_math_the_breadcrumbs(); ?&gt;</code> OR <code>[rank_math_breadcrumb]</code></p></div>',
+				'desc'      => sprintf( esc_html__( 'Here you can set up the breadcrumbs function. %s', 'seo-by-rank-math' ), '<a href="' . KB::get( 'breadcrumbs', 'Options Panel Breadcrumbs Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>. <br/>' ),
+				'after_row' => current_theme_supports( 'rank-math-breadcrumbs' ) ? '' : '<div class="notice notice-alt notice-warning warning inline rank-math-notice"><p>' . esc_html__( 'Use the following code in your theme template files to display breadcrumbs.', 'seo-by-rank-math' ) . ' <a href="' . KB::get( 'breadcrumbs-install', 'Options Panel Breadcrumbs Tab' ) . '" target="_blank">' . esc_html__( 'Learn More', 'seo-by-rank-math' ) . '</a><br /><code>&lt;?php if (function_exists(\'rank_math_the_breadcrumbs\')) rank_math_the_breadcrumbs(); ?&gt;</code> OR <code>[rank_math_breadcrumb]</code></p></div>',
 			],
 			'webmaster'   => [
 				'icon'  => 'rm-icon rm-icon-toolbox',
-				'title' => esc_html__( 'Webmaster Tools', 'rank-math' ),
+				'title' => esc_html__( 'Webmaster Tools', 'seo-by-rank-math' ),
 				/* translators: Link to kb article */
-				'desc'  => sprintf( esc_html__( 'Enter verification codes for third-party webmaster tools. %s', 'rank-math' ), '<a href="' . KB::get( 'webmaster-tools', 'Options Panel Webmaster Tools Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.<br />' ),
+				'desc'  => sprintf( esc_html__( 'Enter verification codes for third-party webmaster tools. %s', 'seo-by-rank-math' ), '<a href="' . KB::get( 'webmaster-tools', 'Options Panel Webmaster Tools Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>.<br />' ),
 			],
 			'others'      => [
 				'icon'    => 'rm-icon rm-icon-misc',
-				'title'   => esc_html__( 'Others', 'rank-math' ),
+				'title'   => esc_html__( 'Others', 'seo-by-rank-math' ),
 				/* translators: Link to kb article */
-				'desc'    => sprintf( esc_html__( 'Change some uncommon but essential settings here. %s.', 'rank-math' ), '<a href="' . KB::get( 'other-settings', 'Options Panel Others Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+				'desc'    => sprintf( esc_html__( 'Change some uncommon but essential settings here. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'other-settings', 'Options Panel Others Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 				'classes' => 'rank-math-advanced-option',
 			],
 		];
@@ -81,9 +81,9 @@ class Option_Center implements Runner {
 				[
 					'htaccess' => [
 						'icon'    => 'rm-icon rm-icon-htaccess',
-						'title'   => esc_html__( 'Edit .htaccess', 'rank-math' ),
+						'title'   => esc_html__( 'Edit .htaccess', 'seo-by-rank-math' ),
 						/* translators: Link to kb article */
-						'desc'    => sprintf( esc_html__( 'Edit the contents of your .htaccess file easily. %s.', 'rank-math' ), '<a href="' . KB::get( 'edit-htaccess', 'Options Panel htaccess Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+						'desc'    => sprintf( esc_html__( 'Edit the contents of your .htaccess file easily. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'edit-htaccess', 'Options Panel htaccess Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 						'classes' => 'rank-math-advanced-option',
 						'json'    => [
 							'htaccessData' => Admin_Helper::get_htaccess_data(),
@@ -104,8 +104,8 @@ class Option_Center implements Runner {
 		new Register_Options_Page(
 			[
 				'key'        => 'rank-math-options-general',
-				'title'      => esc_html__( 'SEO Settings', 'rank-math' ),
-				'menu_title' => esc_html__( 'General Settings', 'rank-math' ),
+				'title'      => esc_html__( 'SEO Settings', 'seo-by-rank-math' ),
+				'menu_title' => esc_html__( 'General Settings', 'seo-by-rank-math' ),
 				'capability' => 'rank_math_general',
 				'folder'     => 'general',
 				'tabs'       => $tabs,
@@ -142,38 +142,38 @@ class Option_Center implements Runner {
 				$home_page_id = get_option( 'page_for_posts' );
 			}
 
-			$homepage_notice = '<a href="' . admin_url( 'post.php?post=' . $home_page_id . '&action=edit' ) . '">' . esc_html__( 'Edit Page: ', 'rank-math' ) . get_the_title( $home_page_id ) . '</a>';
+			$homepage_notice = '<a href="' . admin_url( 'post.php?post=' . $home_page_id . '&action=edit' ) . '">' . esc_html__( 'Edit Page: ', 'seo-by-rank-math' ) . get_the_title( $home_page_id ) . '</a>';
 		}
 		$tabs = [
 			'global'   => [
 				'icon'  => 'rm-icon rm-icon-settings',
-				'title' => esc_html__( 'Global Meta', 'rank-math' ),
+				'title' => esc_html__( 'Global Meta', 'seo-by-rank-math' ),
 				/* translators: Link to KB article */
-				'desc'  => sprintf( esc_html__( 'Change Global meta settings that take effect across your website. %s.', 'rank-math' ), '<a href="' . KB::get( 'titles-meta', 'Options Panel Meta Global Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+				'desc'  => sprintf( esc_html__( 'Change Global meta settings that take effect across your website. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'titles-meta', 'Options Panel Meta Global Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 				'json'  => [
-					'overlayImages' => array_merge( [ '' => __( 'Off', 'rank-math' ) ], Helper::choices_overlay_images( 'names' ) ),
+					'overlayImages' => array_merge( [ '' => __( 'Off', 'seo-by-rank-math' ) ], Helper::choices_overlay_images( 'names' ) ),
 				],
 			],
 			'local'    => [
 				'icon'      => 'rm-icon rm-icon-local-seo',
-				'title'     => esc_html__( 'Local SEO', 'rank-math' ),
+				'title'     => esc_html__( 'Local SEO', 'seo-by-rank-math' ),
 				/* translators: Redirection page url */
-				'desc'      => sprintf( wp_kses_post( __( 'Optimize for local searches and Knowledge Graph using these settings. %s.', 'rank-math' ) ), '<a href="' . KB::get( 'local-seo-settings', 'Options Panel Meta Local Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
-				'after_row' => '<div class="notice notice-alt notice-info info inline rank-math-notice"><p>' . __( 'Use the <code>[rank_math_contact_info]</code> shortcode to display contact information in a nicely formatted way. You should also claim your business on Google if you have not already.', 'rank-math' ) . '</p></div>',
+				'desc'      => sprintf( wp_kses_post( __( 'Optimize for local searches and Knowledge Graph using these settings. %s.', 'seo-by-rank-math' ) ), '<a href="' . KB::get( 'local-seo-settings', 'Options Panel Meta Local Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
+				'after_row' => '<div class="notice notice-alt notice-info info inline rank-math-notice"><p>' . __( 'Use the <code>[rank_math_contact_info]</code> shortcode to display contact information in a nicely formatted way. You should also claim your business on Google if you have not already.', 'seo-by-rank-math' ) . '</p></div>',
 			],
 			'social'   => [
 				'icon'  => 'rm-icon rm-icon-social',
-				'title' => esc_html__( 'Social Meta', 'rank-math' ),
+				'title' => esc_html__( 'Social Meta', 'seo-by-rank-math' ),
 				/* translators: Link to social setting KB article */
-				'desc'  => sprintf( esc_html__( "Add social account information to your website's Schema and Open Graph. %s.", 'rank-math' ), '<a href="' . KB::get( 'social-meta-settings', 'Options Panel Meta Social Tab' ) . '" target="_blank">' . esc_html__( 'Learn More', 'rank-math' ) . '</a>' ),
+				'desc'  => sprintf( esc_html__( "Add social account information to your website's Schema and Open Graph. %s.", 'seo-by-rank-math' ), '<a href="' . KB::get( 'social-meta-settings', 'Options Panel Meta Social Tab' ) . '" target="_blank">' . esc_html__( 'Learn More', 'seo-by-rank-math' ) . '</a>' ),
 			],
 			'homepage' => [
 				'icon'  => 'rm-icon rm-icon-home',
-				'title' => esc_html__( 'Homepage', 'rank-math' ),
+				'title' => esc_html__( 'Homepage', 'seo-by-rank-math' ),
 				'desc'  => sprintf(
 					/* translators: Link to KB article */
-					esc_html__( 'Add SEO meta and OpenGraph details to your homepage. %s.', 'rank-math' ),
-					'<a href="' . KB::get( 'homepage-settings', 'Options Panel Meta Home Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>'
+					esc_html__( 'Add SEO meta and OpenGraph details to your homepage. %s.', 'seo-by-rank-math' ),
+					'<a href="' . KB::get( 'homepage-settings', 'Options Panel Meta Home Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>'
 				),
 				'json'  => [
 					'staticHomePageNotice' => $homepage_notice,
@@ -181,18 +181,18 @@ class Option_Center implements Runner {
 			],
 			'author'   => [
 				'icon'  => 'rm-icon rm-icon-users',
-				'title' => esc_html__( 'Authors', 'rank-math' ),
+				'title' => esc_html__( 'Authors', 'seo-by-rank-math' ),
 				/* translators: Link to KB article */
-				'desc'  => sprintf( esc_html__( 'Change SEO options related to the author archives. %s.', 'rank-math' ), '<a href="' . KB::get( 'author-settings', 'Options Panel Meta Author Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+				'desc'  => sprintf( esc_html__( 'Change SEO options related to the author archives. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'author-settings', 'Options Panel Meta Author Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 				'json'  => [
 					'disableAutorArchive' => $this->do_filter( 'settings/titles/disable_author_archives', 'off' ),
 				],
 			],
 			'misc'     => [
 				'icon'  => 'rm-icon rm-icon-misc',
-				'title' => esc_html__( 'Misc Pages', 'rank-math' ),
+				'title' => esc_html__( 'Misc Pages', 'seo-by-rank-math' ),
 				/* translators: Link to KB article */
-				'desc'  => sprintf( esc_html__( 'Customize SEO meta settings of pages like search results, 404s, etc. %s.', 'rank-math' ), '<a href="' . KB::get( 'misc-settings', 'Options Panel Meta Misc Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+				'desc'  => sprintf( esc_html__( 'Customize SEO meta settings of pages like search results, 404s, etc. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'misc-settings', 'Options Panel Meta Misc Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 			],
 		];
 
@@ -206,8 +206,8 @@ class Option_Center implements Runner {
 		new Register_Options_Page(
 			[
 				'key'        => 'rank-math-options-titles',
-				'title'      => esc_html__( 'SEO Titles &amp; Meta', 'rank-math' ),
-				'menu_title' => esc_html__( 'Titles &amp; Meta', 'rank-math' ),
+				'title'      => esc_html__( 'SEO Titles &amp; Meta', 'seo-by-rank-math' ),
+				'menu_title' => esc_html__( 'Titles &amp; Meta', 'seo-by-rank-math' ),
 				'capability' => 'rank_math_titles',
 				'folder'     => 'titles',
 				'tabs'       => $tabs,
@@ -230,10 +230,10 @@ class Option_Center implements Runner {
 	public function title_post_type_settings( $tabs ) {
 		$icons = Helper::choices_post_type_icons();
 		$links = [
-			'post'       => '<a href="' . KB::get( 'post-settings', 'Options Panel Meta Posts Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.',
-			'page'       => '<a href="' . KB::get( 'page-settings', 'Options Panel Meta Pages Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.',
-			'product'    => '<a href="' . KB::get( 'product-settings', 'Options Panel Meta Products Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.',
-			'attachment' => '<a href="' . KB::get( 'media-settings', 'Options Panel Meta Attachments Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.',
+			'post'       => '<a href="' . KB::get( 'post-settings', 'Options Panel Meta Posts Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>.',
+			'page'       => '<a href="' . KB::get( 'page-settings', 'Options Panel Meta Pages Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>.',
+			'product'    => '<a href="' . KB::get( 'product-settings', 'Options Panel Meta Products Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>.',
+			'attachment' => '<a href="' . KB::get( 'media-settings', 'Options Panel Meta Attachments Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>.',
 		];
 
 		$names = [
@@ -244,7 +244,7 @@ class Option_Center implements Runner {
 		];
 
 		$tabs['p_types'] = [
-			'title' => esc_html__( 'Post Types:', 'rank-math' ),
+			'title' => esc_html__( 'Post Types:', 'seo-by-rank-math' ),
 			'type'  => 'separator',
 			'name'  => 'p_types_separator',
 		];
@@ -268,10 +268,10 @@ class Option_Center implements Runner {
 			];
 
 			$tabs[ 'post-type-' . $obj->name ] = [
-				'title'     => $is_attachment ? esc_html__( 'Attachments', 'rank-math' ) : $obj->label,
+				'title'     => $is_attachment ? esc_html__( 'Attachments', 'seo-by-rank-math' ) : $obj->label,
 				'icon'      => isset( $icons[ $obj->name ] ) ? $icons[ $obj->name ] : $icons['default'],
 				/* translators: 1. post type name 2. link */
-				'desc'      => sprintf( esc_html__( 'Change Global SEO, Schema, and other settings for %1$s. %2$s', 'rank-math' ), $obj_name, $link ),
+				'desc'      => sprintf( esc_html__( 'Change Global SEO, Schema, and other settings for %1$s. %2$s', 'seo-by-rank-math' ), $obj_name, $link ),
 				'post_type' => $obj->name,
 				'file'      => rank_math()->includes_dir() . 'settings/titles/post-types.php',
 				'classes'   => 'attachment' === $post_type ? 'rank-math-advanced-option' : '',
@@ -280,9 +280,9 @@ class Option_Center implements Runner {
 					'isEddActive'         => class_exists( 'Easy_Digital_Downloads' ),
 					'isWebStoriesActive'  => defined( 'WEBSTORIES_VERSION' ),
 					$post_type            => [
-						'title'                => $is_attachment ? esc_html__( 'Attachments', 'rank-math' ) : $obj->label,
-						'name'                 => $is_attachment ? esc_html__( 'Media', 'rank-math' ) : $obj->labels->singular_name,
-						'schemaTypes'          => Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'rank-math' ), $post_type ),
+						'title'                => $is_attachment ? esc_html__( 'Attachments', 'seo-by-rank-math' ) : $obj->label,
+						'name'                 => $is_attachment ? esc_html__( 'Media', 'seo-by-rank-math' ) : $obj->labels->singular_name,
+						'schemaTypes'          => Helper::choices_rich_snippet_types( esc_html__( 'None (Click here to set one)', 'seo-by-rank-math' ), $post_type ),
 						'taxonomies'           => Helper::get_object_taxonomies( $post_type ),
 						'hasArchive'           => $obj->has_archive,
 						'customRobots'         => false,
@@ -314,10 +314,10 @@ class Option_Center implements Runner {
 		];
 
 		$hash_link = [
-			'category'    => '<a href="' . KB::get( 'category-settings', 'Options Panel Meta Categories Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.',
-			'post_tag'    => '<a href="' . KB::get( 'tag-settings', 'Options Panel Meta Tags Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.',
-			'product_cat' => '<a href="' . KB::get( 'product-categories-settings', 'Options Panel Meta Product Categories Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.',
-			'product_tag' => '<a href="' . KB::get( 'product-tags-settings', 'Options Panel Meta Product Tags Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.',
+			'category'    => '<a href="' . KB::get( 'category-settings', 'Options Panel Meta Categories Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>.',
+			'post_tag'    => '<a href="' . KB::get( 'tag-settings', 'Options Panel Meta Tags Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>.',
+			'product_cat' => '<a href="' . KB::get( 'product-categories-settings', 'Options Panel Meta Product Categories Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>.',
+			'product_tag' => '<a href="' . KB::get( 'product-tags-settings', 'Options Panel Meta Product Tags Tab' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>.',
 		];
 
 		$taxonomies_data = [];
@@ -343,7 +343,7 @@ class Option_Center implements Runner {
 					'icon'     => isset( $icons[ $taxonomy->name ] ) ? $icons[ $taxonomy->name ] : $icons['default'],
 					'title'    => $taxonomy->label,
 					/* translators: 1. taxonomy name 2. link */
-					'desc'     => sprintf( esc_html__( 'Change Global SEO, Schema, and other settings for %1$s. %2$s', 'rank-math' ), $taxonomy_name, $link ),
+					'desc'     => sprintf( esc_html__( 'Change Global SEO, Schema, and other settings for %1$s. %2$s', 'seo-by-rank-math' ), $taxonomy_name, $link ),
 					'taxonomy' => $taxonomy->name,
 					'file'     => rank_math()->includes_dir() . 'settings/titles/taxonomies.php',
 				];
@@ -353,8 +353,8 @@ class Option_Center implements Runner {
 		if ( isset( $tabs['taxonomy-post_format'] ) ) {
 			$tab = $tabs['taxonomy-post_format'];
 			unset( $tabs['taxonomy-post_format'] );
-			$tab['title']      = esc_html__( 'Post Formats', 'rank-math' );
-			$tab['page_title'] = esc_html__( 'Post Formats Archive', 'rank-math' );
+			$tab['title']      = esc_html__( 'Post Formats', 'seo-by-rank-math' );
+			$tab['page_title'] = esc_html__( 'Post Formats Archive', 'seo-by-rank-math' );
 			Arr::insert( $tabs, [ 'taxonomy-post_format' => $tab ], 5 );
 		}
 
@@ -496,9 +496,9 @@ class Option_Center implements Runner {
 
 		$chunk = $hash[ $page ];
 		wp_enqueue_script( 'rank-math-settings-chunk', rank_math()->plugin_url() . "assets/admin/js/$chunk.js", [ 'rank-math-options' ], rank_math()->version, true );
-		wp_set_script_translations( 'rank-math-settings-chunk', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
-		wp_set_script_translations( 'rank-math-options', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
-		wp_set_script_translations( 'rank-math-components', 'rank-math', rank_math()->plugin_dir() . 'languages/' );
+		wp_set_script_translations( 'rank-math-settings-chunk', 'seo-by-rank-math', rank_math()->plugin_dir() . 'languages/' );
+		wp_set_script_translations( 'rank-math-options', 'seo-by-rank-math', rank_math()->plugin_dir() . 'languages/' );
+		wp_set_script_translations( 'rank-math-components', 'seo-by-rank-math', rank_math()->plugin_dir() . 'languages/' );
 
 		$this->do_action( 'admin/after_settings_scripts' );
 	}
@@ -585,13 +585,13 @@ class Option_Center implements Runner {
 
 		if ( ! is_super_admin() || ! Helper::has_cap( 'general' ) || ! Helper::has_cap( 'edit_htaccess' ) ) {
 			return [
-				'error' => esc_html__( 'You do not have permission to edit the .htaccess file.', 'rank-math' ),
+				'error' => esc_html__( 'You do not have permission to edit the .htaccess file.', 'seo-by-rank-math' ),
 			];
 		}
 
 		if ( ! Helper::is_edit_allowed() ) {
 			return [
-				'error' => esc_html__( 'You do not have permission to edit the .htaccess file.', 'rank-math' ),
+				'error' => esc_html__( 'You do not have permission to edit the .htaccess file.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -603,17 +603,17 @@ class Option_Center implements Runner {
 
 		if ( ! self::do_htaccess_backup() ) {
 			return [
-				'error' => esc_html__( 'Failed to backup .htaccess file. Please check file permissions.', 'rank-math' ),
+				'error' => esc_html__( 'Failed to backup .htaccess file. Please check file permissions.', 'seo-by-rank-math' ),
 			];
 		}
 		if ( ! self::do_htaccess_update( $content ) ) {
 			return [
-				'error' => esc_html__( 'Failed to update .htaccess file. Please check file permissions.', 'rank-math' ),
+				'error' => esc_html__( 'Failed to update .htaccess file. Please check file permissions.', 'seo-by-rank-math' ),
 			];
 		}
 
 		return [
-			'success' => esc_html__( '.htaccess file updated successfully.', 'rank-math' ),
+			'success' => esc_html__( '.htaccess file updated successfully.', 'seo-by-rank-math' ),
 		];
 	}
 

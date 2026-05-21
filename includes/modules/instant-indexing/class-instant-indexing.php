@@ -107,7 +107,7 @@ class Instant_Indexing extends Base {
 	 * @return array          New actions.
 	 */
 	public function post_bulk_actions( $actions ) {
-		$actions['rank_math_indexnow'] = esc_html__( 'Instant Indexing: Submit Pages', 'rank-math' );
+		$actions['rank_math_indexnow'] = esc_html__( 'Instant Indexing: Submit Pages', 'seo-by-rank-math' );
 		return $actions;
 	}
 
@@ -143,7 +143,7 @@ class Instant_Indexing extends Base {
 			'rank_math_instant_index_post'
 		);
 
-		$actions['indexnow_submit'] = '<a href="' . esc_url( $link ) . '" class="rm-instant-indexing-action rm-indexnow-submit">' . __( 'Instant Indexing: Submit Page', 'rank-math' ) . '</a>';
+		$actions['indexnow_submit'] = '<a href="' . esc_url( $link ) . '" class="rm-instant-indexing-action rm-indexnow-submit">' . __( 'Instant Indexing: Submit Page', 'seo-by-rank-math' ) . '</a>';
 
 		return $actions;
 	}
@@ -212,22 +212,22 @@ class Instant_Indexing extends Base {
 		$tabs = [
 			'url-submission' => [
 				'icon'    => 'rm-icon rm-icon-instant-indexing',
-				'title'   => esc_html__( 'Submit URLs', 'rank-math' ),
-				'desc'    => esc_html__( 'Send URLs directly to the IndexNow API.', 'rank-math' ) . ' <a href="' . KB::get( 'instant-indexing', 'Indexing Submit URLs' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>',
+				'title'   => esc_html__( 'Submit URLs', 'seo-by-rank-math' ),
+				'desc'    => esc_html__( 'Send URLs directly to the IndexNow API.', 'seo-by-rank-math' ) . ' <a href="' . KB::get( 'instant-indexing', 'Indexing Submit URLs' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>',
 				'classes' => 'rank-math-advanced-option',
 				'file'    => __DIR__ . '/views/console.php',
 			],
 			'settings'       => [
 				'icon'  => 'rm-icon rm-icon-settings',
-				'title' => esc_html__( 'Settings', 'rank-math' ),
+				'title' => esc_html__( 'Settings', 'seo-by-rank-math' ),
 				/* translators: Link to kb article */
-				'desc'  => sprintf( esc_html__( 'Instant Indexing module settings. %s.', 'rank-math' ), '<a href="' . KB::get( 'instant-indexing', 'Indexing Settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+				'desc'  => sprintf( esc_html__( 'Instant Indexing module settings. %s.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'instant-indexing', 'Indexing Settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'seo-by-rank-math' ) . '</a>' ),
 				'file'  => __DIR__ . '/views/options.php',
 			],
 			'history'        => [
 				'icon'    => 'rm-icon rm-icon-htaccess',
-				'title'   => esc_html__( 'History', 'rank-math' ),
-				'desc'    => esc_html__( 'The last 100 IndexNow API requests.', 'rank-math' ),
+				'title'   => esc_html__( 'History', 'seo-by-rank-math' ),
+				'desc'    => esc_html__( 'The last 100 IndexNow API requests.', 'seo-by-rank-math' ),
 				'classes' => 'rank-math-advanced-option',
 				'file'    => __DIR__ . '/views/history.php',
 			],
@@ -248,8 +248,8 @@ class Instant_Indexing extends Base {
 		new Register_Options_Page(
 			[
 				'key'        => 'rank-math-options-instant-indexing',
-				'title'      => esc_html__( 'Instant Indexing', 'rank-math' ),
-				'menu_title' => esc_html__( 'Instant Indexing', 'rank-math' ),
+				'title'      => esc_html__( 'Instant Indexing', 'seo-by-rank-math' ),
+				'menu_title' => esc_html__( 'Instant Indexing', 'seo-by-rank-math' ),
 				'capability' => 'rank_math_general',
 				'tabs'       => $tabs,
 				'position'   => 11,
@@ -440,13 +440,13 @@ class Instant_Indexing extends Base {
 	 */
 	private function add_submit_message_notice( $success, $count ) {
 		$notification_type    = 'error';
-		$notification_message = __( 'Error submitting page to IndexNow.', 'rank-math' );
+		$notification_message = __( 'Error submitting page to IndexNow.', 'seo-by-rank-math' );
 
 		if ( $success ) {
 			$notification_type    = 'success';
 			$notification_message = sprintf(
 				/* translators: %s: Number of pages submitted. */
-				_n( '%s page submitted to IndexNow.', '%s pages submitted to IndexNow.', $count, 'rank-math' ),
+				_n( '%s page submitted to IndexNow.', '%s pages submitted to IndexNow.', $count, 'seo-by-rank-math' ),
 				$count
 			);
 		}

@@ -61,11 +61,11 @@ class Import_Export implements Runner {
 
 		if ( $result['status'] ) {
 			/* translators: Plugin name */
-			$this->success( sprintf( esc_html__( 'Cleanup of %s data successfully done.', 'rank-math' ), $result['importer']->get_plugin_name() ) );
+			$this->success( sprintf( esc_html__( 'Cleanup of %s data successfully done.', 'seo-by-rank-math' ), $result['importer']->get_plugin_name() ) );
 		}
 
 		/* translators: Plugin name */
-		$this->error( sprintf( esc_html__( 'Cleanup of %s data failed.', 'rank-math' ), $result['importer']->get_plugin_name() ) );
+		$this->error( sprintf( esc_html__( 'Cleanup of %s data failed.', 'seo-by-rank-math' ), $result['importer']->get_plugin_name() ) );
 	}
 
 	/**
@@ -77,7 +77,7 @@ class Import_Export implements Runner {
 
 		$perform = Param::post( 'perform', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 		if ( ! $this->is_action_allowed( $perform ) ) {
-			$this->error( esc_html__( 'Action not allowed.', 'rank-math' ) );
+			$this->error( esc_html__( 'Action not allowed.', 'seo-by-rank-math' ) );
 		}
 
 		try {

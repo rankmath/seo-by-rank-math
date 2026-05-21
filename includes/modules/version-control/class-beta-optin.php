@@ -243,7 +243,7 @@ class Beta_Optin {
 		}
 
 		$value->response['seo-by-rank-math/rank-math.php']->is_beta        = true;
-		$value->response['seo-by-rank-math/rank-math.php']->upgrade_notice = self::NOTICE_START_MARKER . ' ' . __( 'This update will install a beta version of Rank Math.', 'rank-math' ) . ' ' . self::NOTICE_END_MARKER;
+		$value->response['seo-by-rank-math/rank-math.php']->upgrade_notice = self::NOTICE_START_MARKER . ' ' . __( 'This update will install a beta version of Rank Math.', 'seo-by-rank-math' ) . ' ' . self::NOTICE_END_MARKER;
 
 		if ( empty( $value->no_update ) ) {
 			$value->no_update = [];
@@ -267,7 +267,7 @@ class Beta_Optin {
 
 		printf(
 			'</p><p class="rank-math-beta-update-notice">%s',
-			esc_html__( 'This update will install a beta version of Rank Math.', 'rank-math' )
+			esc_html__( 'This update will install a beta version of Rank Math.', 'seo-by-rank-math' )
 		);
 	}
 

@@ -103,32 +103,32 @@ class Status {
 	 */
 	private function get_default_message() {
 		$hash = [
-			'settings'     => esc_html__( 'Settings imported successfully.', 'rank-math' ),
-			'news'         => esc_html__( 'News Settings imported successfully.', 'rank-math' ),
-			'video'        => esc_html__( 'Video Settings imported successfully.', 'rank-math' ),
-			'deactivate'   => esc_html__( 'Plugin deactivated successfully.', 'rank-math' ),
+			'settings'     => esc_html__( 'Settings imported successfully.', 'seo-by-rank-math' ),
+			'news'         => esc_html__( 'News Settings imported successfully.', 'seo-by-rank-math' ),
+			'video'        => esc_html__( 'Video Settings imported successfully.', 'seo-by-rank-math' ),
+			'deactivate'   => esc_html__( 'Plugin deactivated successfully.', 'seo-by-rank-math' ),
 			/* translators: start, end, total */
-			'postmeta'     => esc_html__( 'Imported post meta for posts %1$s - %2$s out of %3$s ', 'rank-math' ),
+			'postmeta'     => esc_html__( 'Imported post meta for posts %1$s - %2$s out of %3$s ', 'seo-by-rank-math' ),
 			/* translators: total */
-			'termmeta'     => esc_html__( 'Imported term meta for %s terms.', 'rank-math' ),
+			'termmeta'     => esc_html__( 'Imported term meta for %s terms.', 'seo-by-rank-math' ),
 			/* translators: start, end, total */
-			'usermeta'     => esc_html__( 'Imported user meta for users %1$s - %2$s out of %3$s ', 'rank-math' ),
+			'usermeta'     => esc_html__( 'Imported user meta for users %1$s - %2$s out of %3$s ', 'seo-by-rank-math' ),
 			/* translators: total */
-			'redirections' => esc_html__( 'Imported %s redirections.', 'rank-math' ),
+			'redirections' => esc_html__( 'Imported %s redirections.', 'seo-by-rank-math' ),
 			/* translators: start, end, total */
-			'blocks'       => esc_html__( 'Imported blocks from posts %1$s - %2$s out of %3$s ', 'rank-math' ),
+			'blocks'       => esc_html__( 'Imported blocks from posts %1$s - %2$s out of %3$s ', 'seo-by-rank-math' ),
 			/* translators: start, end, total */
-			'recalculate'  => esc_html__( 'Recalculating scores for posts %1$s - %2$s... ', 'rank-math' ),
+			'recalculate'  => esc_html__( 'Recalculating scores for posts %1$s - %2$s... ', 'seo-by-rank-math' ),
 		];
 
 		if ( false === $this->is_success() ) {
 			$hash = [
-				'settings'     => esc_html__( 'Settings import failed.', 'rank-math' ),
-				'postmeta'     => esc_html__( 'Posts meta import failed.', 'rank-math' ),
-				'termmeta'     => esc_html__( 'Term meta import failed.', 'rank-math' ),
-				'usermeta'     => esc_html__( 'User meta import failed.', 'rank-math' ),
-				'redirections' => esc_html__( 'There are no redirection to import.', 'rank-math' ),
-				'blocks'       => esc_html__( 'Blocks import failed.', 'rank-math' ),
+				'settings'     => esc_html__( 'Settings import failed.', 'seo-by-rank-math' ),
+				'postmeta'     => esc_html__( 'Posts meta import failed.', 'seo-by-rank-math' ),
+				'termmeta'     => esc_html__( 'Term meta import failed.', 'seo-by-rank-math' ),
+				'usermeta'     => esc_html__( 'User meta import failed.', 'seo-by-rank-math' ),
+				'redirections' => esc_html__( 'There are no redirection to import.', 'seo-by-rank-math' ),
+				'blocks'       => esc_html__( 'Blocks import failed.', 'seo-by-rank-math' ),
 			];
 		}
 

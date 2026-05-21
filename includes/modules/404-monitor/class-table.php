@@ -35,7 +35,7 @@ class Table extends List_Table {
 				'screen'   => Admin::get_screen(),
 				'singular' => 'event',
 				'plural'   => 'events',
-				'no_items' => esc_html__( 'The 404 error log is empty.', 'rank-math' ),
+				'no_items' => esc_html__( 'The 404 error log is empty.', 'seo-by-rank-math' ),
 			]
 		);
 	}
@@ -82,7 +82,7 @@ class Table extends List_Table {
 		}
 		?>
 		<div class="alignleft actions">
-			<input type="button" class="button button-link-delete action rank-math-clear-logs" value="<?php esc_attr_e( 'Clear Log', 'rank-math' ); ?>">
+			<input type="button" class="button button-link-delete action rank-math-clear-logs" value="<?php esc_attr_e( 'Clear Log', 'seo-by-rank-math' ); ?>">
 		</div>
 		<?php
 	}
@@ -103,7 +103,7 @@ class Table extends List_Table {
 	 * @param object $item The current item.
 	 */
 	protected function column_uri( $item ) {
-		$link = '<a href="' . esc_url( home_url( $item['uri'] ) ) . '" target="_blank" title="' . esc_attr__( 'View', 'rank-math' ) . '">' . esc_html( $item['uri_decoded'] ) . '</a>';
+		$link = '<a href="' . esc_url( home_url( $item['uri'] ) ) . '" target="_blank" title="' . esc_attr__( 'View', 'seo-by-rank-math' ) . '">' . esc_html( $item['uri_decoded'] ) . '</a>';
 		$out  = $link . $this->column_actions( $item );
 		return $this->do_filter( '404_monitor/list_table_column', $out, $item, 'uri' );
 	}
@@ -142,7 +142,7 @@ class Table extends List_Table {
 		$actions = [];
 
 		$actions['view'] = sprintf(
-			'<a href="%s" target="_blank">' . esc_html__( 'View', 'rank-math' ) . '</a>',
+			'<a href="%s" target="_blank">' . esc_html__( 'View', 'seo-by-rank-math' ) . '</a>',
 			esc_url( home_url( $item['uri'] ) )
 		);
 
@@ -151,7 +151,7 @@ class Table extends List_Table {
 		}
 
 		$actions['delete'] = sprintf(
-			'<a href="%s" class="rank-math-404-delete">' . esc_html__( 'Delete', 'rank-math' ) . '</a>',
+			'<a href="%s" class="rank-math-404-delete">' . esc_html__( 'Delete', 'seo-by-rank-math' ) . '</a>',
 			Helper::get_admin_url(
 				'404-monitor',
 				[
@@ -191,7 +191,7 @@ class Table extends List_Table {
 				)
 			);
 
-			$actions['view_redirection'] = sprintf( '<a href="%s" target="_blank">' . esc_html__( 'View Redirection', 'rank-math' ) . '</a>', $url );
+			$actions['view_redirection'] = sprintf( '<a href="%s" target="_blank">' . esc_html__( 'View Redirection', 'seo-by-rank-math' ) . '</a>', $url );
 			return;
 		}
 
@@ -207,7 +207,7 @@ class Table extends List_Table {
 		$actions['redirect'] = sprintf(
 			'<a href="%1$s" class="rank-math-404-redirect-btn">%2$s</a>',
 			$url,
-			esc_html__( 'Redirect', 'rank-math' )
+			esc_html__( 'Redirect', 'seo-by-rank-math' )
 		);
 	}
 
@@ -219,11 +219,11 @@ class Table extends List_Table {
 	public function get_columns() {
 		$columns = [
 			'cb'             => '<input type="checkbox" />',
-			'uri'            => esc_html__( 'URI', 'rank-math' ),
-			'referer'        => esc_html__( 'Referer', 'rank-math' ),
-			'user_agent'     => esc_html__( 'User-Agent', 'rank-math' ),
-			'times_accessed' => esc_html__( 'Hits', 'rank-math' ),
-			'accessed'       => esc_html__( 'Access Time', 'rank-math' ),
+			'uri'            => esc_html__( 'URI', 'seo-by-rank-math' ),
+			'referer'        => esc_html__( 'Referer', 'seo-by-rank-math' ),
+			'user_agent'     => esc_html__( 'User-Agent', 'seo-by-rank-math' ),
+			'times_accessed' => esc_html__( 'Hits', 'seo-by-rank-math' ),
+			'accessed'       => esc_html__( 'Access Time', 'seo-by-rank-math' ),
 		];
 
 		$columns = $this->filter_columns( $columns );
@@ -270,8 +270,8 @@ class Table extends List_Table {
 	 */
 	public function get_bulk_actions() {
 		$actions = [
-			'redirect' => esc_html__( 'Redirect', 'rank-math' ),
-			'delete'   => esc_html__( 'Delete', 'rank-math' ),
+			'redirect' => esc_html__( 'Redirect', 'seo-by-rank-math' ),
+			'delete'   => esc_html__( 'Delete', 'seo-by-rank-math' ),
 		];
 
 		if ( ! Helper::get_module( 'redirections' ) ) {

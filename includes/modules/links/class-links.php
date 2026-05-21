@@ -156,7 +156,7 @@ class Links {
 		ob_start();
 		?>
 		<span class="rank-math-column-display rank-math-link-count">
-			<strong><?php esc_html_e( 'Links: ', 'rank-math' ); ?></strong>
+			<strong><?php esc_html_e( 'Links: ', 'seo-by-rank-math' ); ?></strong>
 			<?php
 			/**
 			 * Filter to customize individual link count item display.
@@ -201,9 +201,9 @@ class Links {
 		];
 
 		$titles = [
-			'internal' => __( 'Internal Links', 'rank-math' ),
-			'external' => __( 'External Links', 'rank-math' ),
-			'incoming' => __( 'Incoming Links', 'rank-math' ),
+			'internal' => __( 'Internal Links', 'seo-by-rank-math' ),
+			'external' => __( 'External Links', 'seo-by-rank-math' ),
+			'incoming' => __( 'Incoming Links', 'seo-by-rank-math' ),
 		];
 
 		$inner = sprintf(

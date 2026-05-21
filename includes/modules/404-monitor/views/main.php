@@ -24,7 +24,7 @@ $monitor->table->prepare_items();
 
 	<form method="get">
 		<input type="hidden" name="page" value="rank-math-404-monitor">
-		<?php $monitor->table->search_box( esc_html__( 'Search', 'rank-math' ), 's' ); ?>
+		<?php $monitor->table->search_box( esc_html__( 'Search', 'seo-by-rank-math' ), 's' ); ?>
 	</form>
 	<form method="post">
 		<?php $monitor->table->display(); ?>

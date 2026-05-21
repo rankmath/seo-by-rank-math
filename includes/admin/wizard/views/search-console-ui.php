@@ -79,12 +79,12 @@ $connections = [
 	'reconnect'  => [
 		'link'  => wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ),
 		'class' => 'rank-math-reconnect-google',
-		'text'  => esc_html__( 'Reconnect', 'rank-math' ),
+		'text'  => esc_html__( 'Reconnect', 'seo-by-rank-math' ),
 	],
 	'disconnect' => [
 		'link'  => '#',
 		'class' => 'rank-math-disconnect-google',
-		'text'  => esc_html__( 'Disconnect', 'rank-math' ),
+		'text'  => esc_html__( 'Disconnect', 'seo-by-rank-math' ),
 	],
 ];
 
@@ -92,7 +92,7 @@ if ( Helper::is_advanced_mode() && ( $is_profile_connected || $is_adsense_connec
 	$connections['test-connections'] = [
 		'link'  => '#',
 		'class' => 'rank-math-test-connection-google',
-		'text'  => esc_html__( 'Test Connections', 'rank-math' ),
+		'text'  => esc_html__( 'Test Connections', 'seo-by-rank-math' ),
 	];
 }
 
@@ -126,7 +126,7 @@ $console_status = $is_profile_connected ? 'Connected' : 'Not Connected';
 ?>
 <div class="<?php echo esc_attr( $console_classes ); ?>" tabindex="0">
 	<header>
-		<h3><span class="rank-math-connection-status-wrap"><span class="<?php echo esc_attr( $console_status_classes ); ?>" title="<?php echo esc_attr( $console_status ); ?>"></span></span> <?php esc_html_e( 'Search Console', 'rank-math' ); ?></h3>
+		<h3><span class="rank-math-connection-status-wrap"><span class="<?php echo esc_attr( $console_status_classes ); ?>" title="<?php echo esc_attr( $console_status ); ?>"></span></span> <?php esc_html_e( 'Search Console', 'seo-by-rank-math' ); ?></h3>
 	</header>
 	<div class="rank-math-accordion-content">
 		<?php
@@ -137,7 +137,7 @@ $console_status = $is_profile_connected ? 'Connected' : 'Not Connected';
 
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">
-				<label for="site-console-profile"><?php esc_html_e( 'Site', 'rank-math' ); ?></label>
+				<label for="site-console-profile"><?php esc_html_e( 'Site', 'seo-by-rank-math' ); ?></label>
 				<select class="cmb2_select site-console-profile notrack" name="site-console-profile" id="site-console-profile" data-selected="<?php echo esc_attr( $profile['profile'] ); ?>" disabled="disabled">
 					<?php if ( $is_profile_connected ) : ?>
 					<option value="<?php echo esc_attr( $profile['profile'] ); ?>"><?php echo esc_attr( $profile['profile'] ); ?></option>
@@ -156,14 +156,14 @@ $console_status = $is_profile_connected ? 'Connected' : 'Not Connected';
 						<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg>
 					</span>
 				</label>
-				<label for="enable-index-status"><?php esc_html_e( 'Enable the Index Status tab', 'rank-math' ); ?></label>
-				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option to show the Index Status tab in the Analytics module.', 'rank-math' ); ?> <a href="<?php echo KB::get( 'url-inspection-api', 'SW Analytics Index Status Option' ); // phpcs:ignore ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more.', 'rank-math' ); ?></a></div>
+				<label for="enable-index-status"><?php esc_html_e( 'Enable the Index Status tab', 'seo-by-rank-math' ); ?></label>
+				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option to show the Index Status tab in the Analytics module.', 'seo-by-rank-math' ); ?> <a href="<?php echo KB::get( 'url-inspection-api', 'SW Analytics Index Status Option' ); // phpcs:ignore ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more.', 'seo-by-rank-math' ); ?></a></div>
 			</div>
 		</div>
 
 		<?php if ( ! Console::is_valid_connection() ) : ?>
 			<div class="rank-math-notice rank-math-notice--error">
-				<p><?php esc_html_e( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ); ?></p>
+				<p><?php esc_html_e( 'Data import will not work for this service as sufficient permissions are not given.', 'seo-by-rank-math' ); ?></p>
 			</div>
 		<?php endif; ?>
 	</div>
@@ -189,7 +189,7 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 ?>
 <div class="<?php echo esc_attr( $analytic_classes ); ?>" tabindex="0">
 	<header>
-		<h3><span class="rank-math-connection-status-wrap"><span class="<?php echo esc_attr( $analytic_status_classes ); ?>" title="<?php echo esc_attr( $analytic_status ); ?>"></span></span><?php esc_html_e( 'Analytics', 'rank-math' ); ?></h3>
+		<h3><span class="rank-math-connection-status-wrap"><span class="<?php echo esc_attr( $analytic_status_classes ); ?>" title="<?php echo esc_attr( $analytic_status ); ?>"></span></span><?php esc_html_e( 'Analytics', 'seo-by-rank-math' ); ?></h3>
 	</header>
 	<div class="rank-math-accordion-content rank-math-analytics-content">
 
@@ -200,19 +200,19 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 		?>
 
 		<p class="warning yellow">
-			<strong class="note"><?php echo esc_html__( 'Note', 'rank-math' ); ?></strong>
+			<strong class="note"><?php echo esc_html__( 'Note', 'seo-by-rank-math' ); ?></strong>
 			<?php
 			printf(
 				/* translators: %s: Link to KB article */
-				esc_html__( 'Ready to switch to Google Analytics 4? %s', 'rank-math' ),
-				'<a href="' . KB::get( 'using-ga4', 'Analytics GA4 KB' ) . '" target="_blank">' . esc_html__( 'Click here to know how', 'rank-math' ) . '</a>.' // phpcs:ignore
+				esc_html__( 'Ready to switch to Google Analytics 4? %s', 'seo-by-rank-math' ),
+				'<a href="' . KB::get( 'using-ga4', 'Analytics GA4 KB' ) . '" target="_blank">' . esc_html__( 'Click here to know how', 'seo-by-rank-math' ) . '</a>.' // phpcs:ignore
 			);
 			?>
 		</p>
 
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">
-				<label for="site-analytics-account"><?php esc_html_e( 'Account', 'rank-math' ); ?></label>
+				<label for="site-analytics-account"><?php esc_html_e( 'Account', 'seo-by-rank-math' ); ?></label>
 				<select class="cmb2_select site-analytics-account notrack" name="site-analytics-account" id="site-analytics-account" data-selected="<?php echo esc_attr( $analytics['account_id'] ); ?>" disabled="disabled">
 					<?php
 					if ( $is_analytics_connected ) :
@@ -223,7 +223,7 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 				</select>
 			</div>
 			<div class="cmb-row-col">
-				<label for="site-analytics-property"><?php esc_html_e( 'Property', 'rank-math' ); ?></label>
+				<label for="site-analytics-property"><?php esc_html_e( 'Property', 'seo-by-rank-math' ); ?></label>
 				<select class="cmb2_select site-analytics-property notrack" name="site-analytics-property" id="site-analytics-property" data-selected="<?php echo esc_attr( $analytics['property_id'] ); ?>" disabled="disabled">
 					<?php
 					if ( $is_analytics_connected ) :
@@ -235,7 +235,7 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 			</div>
 			<div class="cmb-row-col">
 				<label for="site-analytics-view">
-				<?php echo esc_html__( 'Data Stream', 'rank-math' ); ?>
+				<?php echo esc_html__( 'Data Stream', 'seo-by-rank-math' ); ?>
 				</label>
 				<select class="cmb2_select site-analytics-view notrack" name="site-analytics-view" id="site-analytics-view" data-selected="<?php echo esc_attr( $analytics['view_id'] ); ?>" disabled="disabled">
 					<?php
@@ -262,8 +262,8 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 						<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg>
 					</span>
 				</label>
-				<label for="install-code"><?php esc_html_e( 'Install analytics code', 'rank-math' ); ?></label>
-				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option only if you are not using any other plugin/theme to install Google Analytics code.', 'rank-math' ); ?></div>
+				<label for="install-code"><?php esc_html_e( 'Install analytics code', 'seo-by-rank-math' ); ?></label>
+				<div class="cmb2-metabox-description"><?php esc_html_e( 'Enable this option only if you are not using any other plugin/theme to install Google Analytics code.', 'seo-by-rank-math' ); ?></div>
 			</div>
 		</div>
 
@@ -277,11 +277,11 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 					</span>
 				</label>
 				<label for="anonymize-ip">
-					<?php esc_html_e( 'Anonymize IP addresses', 'rank-math' ); ?>
+					<?php esc_html_e( 'Anonymize IP addresses', 'seo-by-rank-math' ); ?>
 					<?php if ( ! $is_pro_active ) : ?>
 					<span class="rank-math-pro-badge">
 						<a href="<?php KB::the( 'pro', 'Anonymize IP' ); ?>" target="_blank" rel="noopener noreferrer">
-							<?php esc_html_e( 'PRO', 'rank-math' ); ?>
+							<?php esc_html_e( 'PRO', 'seo-by-rank-math' ); ?>
 						</a>
 					</span>
 					<?php endif; ?>
@@ -302,11 +302,11 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 					</span>
 				</label>
 				<label for="local-ga-js">
-					<?php esc_html_e( 'Self-Hosted Analytics JS File', 'rank-math' ); ?>
+					<?php esc_html_e( 'Self-Hosted Analytics JS File', 'seo-by-rank-math' ); ?>
 					<?php if ( ! $is_pro_active ) : ?>
 					<span class="rank-math-pro-badge">
 						<a href="<?php KB::the( 'pro', 'Localjs IP' ); ?>" target="_blank" rel="noopener noreferrer">
-							<?php esc_html_e( 'PRO', 'rank-math' ); ?>
+							<?php esc_html_e( 'PRO', 'seo-by-rank-math' ); ?>
 						</a>
 					</span>
 					<?php endif; ?>
@@ -326,7 +326,7 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 						<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg>
 					</span>
 				</label>
-				<label for="exclude-loggedin"><?php esc_html_e( 'Exclude Logged-in users', 'rank-math' ); ?></label>
+				<label for="exclude-loggedin"><?php esc_html_e( 'Exclude Logged-in users', 'seo-by-rank-math' ); ?></label>
 				<div class="rank-math-cmb-dependency hidden" data-relation="or">
 					<span class="hidden" data-field="install-code" data-comparison="=" data-value="on"></span>
 				</div>
@@ -335,7 +335,7 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 
 		<?php if ( ! Analytics::is_valid_connection() ) : ?>
 			<div class="rank-math-notice rank-math-notice--error">
-				<p><?php esc_html_e( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ); ?></p>
+				<p><?php esc_html_e( 'Data import will not work for this service as sufficient permissions are not given.', 'seo-by-rank-math' ); ?></p>
 			</div>
 		<?php endif; ?>
 	</div>
@@ -347,22 +347,22 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 		<h3>
 			<span class="rank-math-connection-status-wrap">
 				<span class="rank-math-connection-status rank-math-connection-status-error" title="Not Connected"></span>
-			</span><?php esc_html_e( 'AdSense', 'rank-math' ); ?>
+			</span><?php esc_html_e( 'AdSense', 'seo-by-rank-math' ); ?>
 		</h3>
 	</header>
 	<div class="rank-math-accordion-content">
 		<div class="cmb-row cmb-type-select">
 			<div class="cmb-row-col">
-				<label for="site-adsense-account"><?php esc_html_e( 'Account', 'rank-math' ); ?></label>
+				<label for="site-adsense-account"><?php esc_html_e( 'Account', 'seo-by-rank-math' ); ?></label>
 				<select class="cmb2_select site-adsense-account notrack" name="site-adsense-account" id="site-adsense-account" data-selected="" disabled="disabled">
-					<option value=""><?php esc_html_e( 'Select Account', 'rank-math' ); ?></option>
+					<option value=""><?php esc_html_e( 'Select Account', 'seo-by-rank-math' ); ?></option>
 				</select>
 			</div>
 		</div>
 		<div id="rank-math-pro-cta" class="no-margin">
 			<div class="rank-math-cta-text">
 				<span class="rank-math-pro-badge">
-					<a href="<?php KB::the( 'pro', 'AdSense Toggle' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'PRO', 'rank-math' ); ?></a></span> <?php esc_html_e( "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module.", 'rank-math' ); ?>
+					<a href="<?php KB::the( 'pro', 'AdSense Toggle' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'PRO', 'seo-by-rank-math' ); ?></a></span> <?php esc_html_e( "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module.", 'seo-by-rank-math' ); ?>
 			</div>
 		</div>
 	</div>
@@ -376,7 +376,7 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 			<p>
 			<?php
 			/* translators: %s: Link to KB article */
-			printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'rank-math' ), '<a href="' . KB::get( 'usage-policy', 'Analytics Privacy Notice' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'rank-math' ) . '</a>' ); // phpcs:ignore
+			printf( esc_html__( 'We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s', 'seo-by-rank-math' ), '<a href="' . KB::get( 'usage-policy', 'Analytics Privacy Notice' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more.', 'seo-by-rank-math' ) . '</a>' ); // phpcs:ignore
 			?>
 			</p>
 		</div>
@@ -388,12 +388,12 @@ $analytic_status         = $is_analytics_connected ? 'Connected' : 'Not Connecte
 if ( Helper::is_wizard() && ! RankMath\Analytics\Email_Reports::are_fields_hidden() ) {
 	?>
 	<div class="cmb-row email-reports-header text-center" style="border-top:0;">
-		<h1><?php esc_html_e( 'Email Reports', 'rank-math' ); ?></h1>
-		<div class="email-reports-desc text-center"><?php esc_html_e( 'Receive Analytics reports periodically in email.', 'rank-math' ); ?> <a href="#" target="_blank"><?php esc_html_e( 'Learn more about Email Reports.', 'rank-math' ); ?></a></div>
+		<h1><?php esc_html_e( 'Email Reports', 'seo-by-rank-math' ); ?></h1>
+		<div class="email-reports-desc text-center"><?php esc_html_e( 'Receive Analytics reports periodically in email.', 'seo-by-rank-math' ); ?> <a href="#" target="_blank"><?php esc_html_e( 'Learn more about Email Reports.', 'seo-by-rank-math' ); ?></a></div>
 	</div>
 	<div class="cmb-row cmb-type-toggle cmb2-id-console-email-reports" data-fieldtype="toggle">
 		<div class="cmb-th">
-			<label for="console_email_reports"><?php esc_html_e( 'Email Reports', 'rank-math' ); ?></label>
+			<label for="console_email_reports"><?php esc_html_e( 'Email Reports', 'seo-by-rank-math' ); ?></label>
 		</div>
 		<div class="cmb-td">
 			<label class="cmb2-toggle"><input type="checkbox" class="regular-text" name="console_email_reports" id="console_email_reports" value="on" <?php checked( Helper::get_settings( 'general.console_email_reports' ) ); ?> data-hash="7e0rimtbvig0"><span class="cmb2-slider"><svg width="3" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 6" class="toggle_on" role="img" aria-hidden="true" focusable="false"><path d="M0 0h2v6H0z"></path></svg><svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" class="toggle_off" role="img" aria-hidden="true" focusable="false"><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path></svg></span></label>

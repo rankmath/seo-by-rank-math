@@ -53,22 +53,22 @@ class Capability_Manager {
 	 * @codeCoverageIgnore
 	 */
 	public function set_capabilities() {
-		$this->register( 'rank_math_titles', esc_html__( 'Titles & Meta Settings', 'rank-math' ) );
-		$this->register( 'rank_math_general', esc_html__( 'General Settings', 'rank-math' ) );
-		$this->register( 'rank_math_sitemap', esc_html__( 'Sitemap Settings', 'rank-math' ) );
-		$this->register( 'rank_math_404_monitor', esc_html__( '404 Monitor Log', 'rank-math' ) );
-		$this->register( 'rank_math_link_builder', esc_html__( 'Link Builder', 'rank-math' ) );
-		$this->register( 'rank_math_redirections', esc_html__( 'Redirections', 'rank-math' ) );
-		$this->register( 'rank_math_role_manager', esc_html__( 'Role Manager', 'rank-math' ) );
-		$this->register( 'rank_math_analytics', esc_html__( 'Analytics', 'rank-math' ) );
-		$this->register( 'rank_math_site_analysis', esc_html__( 'Site-Wide Analysis', 'rank-math' ) );
-		$this->register( 'rank_math_onpage_analysis', esc_html__( 'On-Page Analysis', 'rank-math' ) );
-		$this->register( 'rank_math_onpage_general', esc_html__( 'On-Page General Settings', 'rank-math' ) );
-		$this->register( 'rank_math_onpage_advanced', esc_html__( 'On-Page Advanced Settings', 'rank-math' ) );
-		$this->register( 'rank_math_onpage_snippet', esc_html__( 'On-Page Schema Settings', 'rank-math' ) );
-		$this->register( 'rank_math_onpage_social', esc_html__( 'On-Page Social Settings', 'rank-math' ) );
-		$this->register( 'rank_math_content_ai', esc_html__( 'Content AI', 'rank-math' ) );
-		$this->register( 'rank_math_admin_bar', esc_html__( 'Top Admin Bar', 'rank-math' ) );
+		$this->register( 'rank_math_titles', esc_html__( 'Titles & Meta Settings', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_general', esc_html__( 'General Settings', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_sitemap', esc_html__( 'Sitemap Settings', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_404_monitor', esc_html__( '404 Monitor Log', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_link_builder', esc_html__( 'Link Builder', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_redirections', esc_html__( 'Redirections', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_role_manager', esc_html__( 'Role Manager', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_analytics', esc_html__( 'Analytics', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_site_analysis', esc_html__( 'Site-Wide Analysis', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_onpage_analysis', esc_html__( 'On-Page Analysis', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_onpage_general', esc_html__( 'On-Page General Settings', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_onpage_advanced', esc_html__( 'On-Page Advanced Settings', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_onpage_snippet', esc_html__( 'On-Page Schema Settings', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_onpage_social', esc_html__( 'On-Page Social Settings', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_content_ai', esc_html__( 'Content AI', 'seo-by-rank-math' ) );
+		$this->register( 'rank_math_admin_bar', esc_html__( 'Top Admin Bar', 'seo-by-rank-math' ) );
 	}
 
 	/**

@@ -78,35 +78,6 @@ class Assets implements Runner {
 		wp_register_script( self::PREFIX . 'core-permalink-settings', '' ); // phpcs:ignore
 		wp_add_inline_script( self::PREFIX . 'core-permalink-settings', $this->get_permalinks_inline_script() );
 
-		if ( ! wp_script_is( 'wp-hooks', 'registered' ) ) {
-			wp_register_script( 'wp-hooks', rank_math()->plugin_url() . 'assets/vendor/hooks.js', [], rank_math()->version, true );
-		}
-
-		if ( ! wp_script_is( 'wp-wordcount', 'registered' ) ) {
-			wp_register_script( 'wp-wordcount', rank_math()->plugin_url() . 'assets/vendor/wordcount.js', [], rank_math()->version, true );
-		}
-
-		if ( ! wp_script_is( 'wp-autop', 'registered' ) ) {
-			wp_register_script( 'wp-autop', rank_math()->plugin_url() . 'assets/vendor/autop.js', [], rank_math()->version, true );
-		}
-
-		if ( ! wp_script_is( 'wp-url', 'registered' ) ) {
-			wp_register_script( 'wp-url', rank_math()->plugin_url() . 'assets/vendor/url.js', [], rank_math()->version, true );
-		}
-
-		if ( ! wp_script_is( 'wp-i18n', 'registered' ) ) {
-			wp_register_script( 'wp-i18n', rank_math()->plugin_url() . 'assets/vendor/i18n.js', [], rank_math()->version, true );
-		}
-
-		if ( ! wp_script_is( 'clipboard', 'registered' ) ) {
-			wp_register_script( 'clipboard', rank_math()->plugin_url() . 'assets/vendor/clipboard.min.js', [], rank_math()->version, true );
-		}
-
-		if ( ! wp_script_is( 'lodash', 'registered' ) ) {
-			wp_register_script( 'lodash', rank_math()->plugin_url() . 'assets/vendor/lodash.js', [], rank_math()->version, [] );
-			wp_add_inline_script( 'lodash', 'window.lodash = _.noConflict();' );
-		}
-
 		Helper::add_json(
 			'api',
 			[
@@ -130,10 +101,10 @@ class Assets implements Runner {
 		Helper::add_json(
 			'validationl10n',
 			[
-				'regexErrorDefault'    => __( 'Please use the correct format.', 'rank-math' ),
-				'requiredErrorDefault' => __( 'This field is required.', 'rank-math' ),
-				'emailErrorDefault'    => __( 'Please enter a valid email address.', 'rank-math' ),
-				'urlErrorDefault'      => __( 'Please enter a valid URL.', 'rank-math' ),
+				'regexErrorDefault'    => __( 'Please use the correct format.', 'seo-by-rank-math' ),
+				'requiredErrorDefault' => __( 'This field is required.', 'seo-by-rank-math' ),
+				'emailErrorDefault'    => __( 'Please enter a valid email address.', 'seo-by-rank-math' ),
+				'urlErrorDefault'      => __( 'Please enter a valid URL.', 'seo-by-rank-math' ),
 			]
 		);
 
@@ -207,7 +178,7 @@ class Assets implements Runner {
 	 */
 	public function admin_footer_text( $text ) {
 		/* translators: plugin url */
-		return Helper::is_whitelabel() ? $text : sprintf( wp_kses_post( __( 'Thank you for using <a href="%s" target="_blank">Rank Math</a>', 'rank-math' ) ), KB::get( 'seo-suite', 'Admin Footer Text' ) );
+		return Helper::is_whitelabel() ? $text : sprintf( wp_kses_post( __( 'Thank you for using <a href="%s" target="_blank">Rank Math</a>', 'seo-by-rank-math' ) ), KB::get( 'seo-suite', 'Admin Footer Text' ) );
 	}
 
 	/**
@@ -223,16 +194,16 @@ class Assets implements Runner {
 			'wplink',
 			'wpLinkL10n',
 			[
-				'title'             => esc_html__( 'Insert/edit link', 'rank-math' ),
-				'update'            => esc_html__( 'Update', 'rank-math' ),
-				'save'              => esc_html__( 'Add Link', 'rank-math' ),
-				'noTitle'           => esc_html__( '(no title)', 'rank-math' ),
-				'noMatchesFound'    => esc_html__( 'No matches found.', 'rank-math' ),
-				'linkSelected'      => esc_html__( 'Link selected.', 'rank-math' ),
-				'linkInserted'      => esc_html__( 'Link inserted.', 'rank-math' ),
-				'relCheckbox'       => __( 'Add <code>rel="nofollow"</code>', 'rank-math' ),
-				'sponsoredCheckbox' => __( 'Add <code>rel="sponsored"</code>', 'rank-math' ),
-				'linkTitle'         => esc_html__( 'Link Title', 'rank-math' ),
+				'title'             => esc_html__( 'Insert/edit link', 'seo-by-rank-math' ),
+				'update'            => esc_html__( 'Update', 'seo-by-rank-math' ),
+				'save'              => esc_html__( 'Add Link', 'seo-by-rank-math' ),
+				'noTitle'           => esc_html__( '(no title)', 'seo-by-rank-math' ),
+				'noMatchesFound'    => esc_html__( 'No matches found.', 'seo-by-rank-math' ),
+				'linkSelected'      => esc_html__( 'Link selected.', 'seo-by-rank-math' ),
+				'linkInserted'      => esc_html__( 'Link inserted.', 'seo-by-rank-math' ),
+				'relCheckbox'       => __( 'Add <code>rel="nofollow"</code>', 'seo-by-rank-math' ),
+				'sponsoredCheckbox' => __( 'Add <code>rel="sponsored"</code>', 'seo-by-rank-math' ),
+				'linkTitle'         => esc_html__( 'Link Title', 'seo-by-rank-math' ),
 			]
 		);
 	}

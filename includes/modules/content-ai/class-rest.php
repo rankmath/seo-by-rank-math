@@ -75,12 +75,12 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
 					'content' => [
-						'description' => esc_html__( 'The content of the new post.', 'rank-math' ),
+						'description' => esc_html__( 'The content of the new post.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => true,
 					],
 					'title'   => [
-						'description' => esc_html__( 'The title of the new post.', 'rank-math' ),
+						'description' => esc_html__( 'The title of the new post.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => false,
 					],
@@ -97,27 +97,32 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
 					'outputs'    => [
-						'description' => esc_html__( 'An array of AI-generated and existing outputs to be saved.', 'rank-math' ),
+						'description' => esc_html__( 'An array of AI-generated and existing outputs to be saved.', 'seo-by-rank-math' ),
 						'type'        => 'array',
-						'required'    => true,
+						'required'    => false,
 					],
 					'endpoint'   => [
-						'description' => esc_html__( 'The API endpoint for which the output was generated.', 'rank-math' ),
+						'description' => esc_html__( 'The API endpoint for which the output was generated.', 'seo-by-rank-math' ),
 						'type'        => 'string',
-						'required'    => true,
+						'required'    => false,
 					],
 					'isChat'     => [
-						'description' => esc_html__( 'Indicates if the request was for the Chat endpoint.', 'rank-math' ),
+						'description' => esc_html__( 'Indicates if the request was for the Chat endpoint.', 'seo-by-rank-math' ),
 						'type'        => 'boolean',
 						'required'    => false,
 					],
 					'attributes' => [
-						'description' => esc_html__( 'The parameters used to generate the AI output.', 'rank-math' ),
+						'description' => esc_html__( 'The parameters used to generate the AI output.', 'seo-by-rank-math' ),
 						'type'        => 'object',
 						'required'    => false,
 					],
 					'credits'    => [
-						'description' => esc_html__( 'Credit usage details returned by the API.', 'rank-math' ),
+						'description' => esc_html__( 'Credit usage details returned by the API.', 'seo-by-rank-math' ),
+						'type'        => 'object',
+						'required'    => false,
+					],
+					'usage'      => [
+						'description' => esc_html__( 'Per-tool usage data returned by the API.', 'seo-by-rank-math' ),
 						'type'        => 'object',
 						'required'    => false,
 					],
@@ -134,12 +139,12 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
 					'isChat' => [
-						'description' => esc_html__( 'Indicates if the request to delete the output was for the Chat endpoint.', 'rank-math' ),
+						'description' => esc_html__( 'Indicates if the request to delete the output was for the Chat endpoint.', 'seo-by-rank-math' ),
 						'type'        => 'boolean',
 						'required'    => false,
 					],
 					'index'  => [
-						'description' => esc_html__( 'The output index to delete, applicable only to the Chat endpoint.', 'rank-math' ),
+						'description' => esc_html__( 'The output index to delete, applicable only to the Chat endpoint.', 'seo-by-rank-math' ),
 						'type'        => 'integer',
 						'required'    => false,
 					],
@@ -156,7 +161,7 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
 					'prompt' => [
-						'description' => esc_html__( 'The selected prompt to be updated in the recent prompts.', 'rank-math' ),
+						'description' => esc_html__( 'The selected prompt to be updated in the recent prompts.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => true,
 					],
@@ -173,7 +178,7 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
 					'prompt' => [
-						'description'       => esc_html__( 'The prompt data to be saved in the database.', 'rank-math' ),
+						'description'       => esc_html__( 'The prompt data to be saved in the database.', 'seo-by-rank-math' ),
 						'required'          => true,
 						'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 					],
@@ -190,7 +195,7 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
 					'prompts' => [
-						'description' => esc_html__( 'A list of prompts received from the API to be saved in the database.', 'rank-math' ),
+						'description' => esc_html__( 'A list of prompts received from the API to be saved in the database.', 'seo-by-rank-math' ),
 						'type'        => 'array',
 						'required'    => true,
 					],
@@ -207,12 +212,12 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_ping_permission' ],
 				'args'                => [
 					'plan'        => [
-						'description' => esc_html__( 'Content AI plan to update in the Database.', 'rank-math' ),
+						'description' => esc_html__( 'Content AI plan to update in the Database.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => true,
 					],
 					'refreshDate' => [
-						'description' => esc_html__( 'Content AI reset date to update in the Database', 'rank-math' ),
+						'description' => esc_html__( 'Content AI reset date to update in the Database', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => true,
 					],
@@ -229,7 +234,7 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
 					'attachmentIds' => [
-						'description' => esc_html__( 'List of attachment IDs for which to generate alt text.', 'rank-math' ),
+						'description' => esc_html__( 'List of attachment IDs for which to generate alt text.', 'seo-by-rank-math' ),
 						'type'        => 'array',
 						'required'    => true,
 					],
@@ -246,7 +251,7 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_permission' ],
 				'args'                => [
 					'credits' => [
-						'description' => esc_html__( 'Credit usage details returned by the API.', 'rank-math' ),
+						'description' => esc_html__( 'Credit usage details returned by the API.', 'seo-by-rank-math' ),
 						'type'        => 'integer',
 						'required'    => true,
 					],
@@ -279,7 +284,7 @@ class Rest extends WP_REST_Controller {
 		if ( ! Helper::has_cap( 'content_ai' ) || empty( $this->registered ) ) {
 			return new WP_Error(
 				'rest_cannot_access',
-				__( 'Sorry, only authenticated users can research the keyword.', 'rank-math' ),
+				__( 'Sorry, only authenticated users can research the keyword.', 'seo-by-rank-math' ),
 				[ 'status' => rest_authorization_required_code() ]
 			);
 		}
@@ -290,20 +295,23 @@ class Rest extends WP_REST_Controller {
 	/**
 	 * Get Content AI Credits.
 	 *
-	 * @return int Credits.
+	 * @return array Credits and usage details.
 	 */
 	public function get_credits() {
-		$credits = Helper::get_content_ai_credits( true, true );
-		if ( ! empty( $credits['error'] ) ) {
-			$error       = $credits['error'];
+		$data = Helper::get_content_ai_credits( true, true );
+		if ( ! empty( $data['error'] ) ) {
 			$error_texts = Helper::get_content_ai_errors();
 			return [
-				'error'   => ! empty( $error_texts[ $error ] ) ? wp_specialchars_decode( $error_texts[ $error ], ENT_QUOTES ) : $error,
-				'credits' => isset( $credits['credits'] ) ? $credits['credits'] : '',
+				'error'        => ! empty( $error_texts[ $data['error'] ] ) ? wp_specialchars_decode( $error_texts[ $data['error'] ], ENT_QUOTES ) : $data['error'],
+				'credits'      => isset( $data['credits'] ) ? $data['credits'] : '',
+				'usageDetails' => Helper::get_usage_details(),
 			];
 		}
 
-		return $credits;
+		return [
+			'credits'      => $data['credits'],
+			'usageDetails' => $data['usage_details'] ?? null,
+		];
 	}
 
 	/**
@@ -323,7 +331,7 @@ class Rest extends WP_REST_Controller {
 
 		if ( ! in_array( $post_type, (array) Helper::get_settings( 'general.content_ai_post_types' ), true ) ) {
 			return [
-				'data' => esc_html__( 'Content AI is not enabled on this Post type.', 'rank-math' ),
+				'data' => esc_html__( 'Content AI is not enabled on this Post type.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -359,9 +367,11 @@ class Rest extends WP_REST_Controller {
 			return $this->get_errored_data( $data['error'] );
 		}
 
-		$credits = ! empty( $data['credits'] ) ? $data['credits'] : 0;
-		if ( ! empty( $credits ) ) {
-			$credits = $credits['available'] - $credits['taken'];
+		$usage = ! empty( $data['usage'] ) ? $data['usage'] : null;
+
+		if ( ! empty( $usage['feature'] ) ) {
+			$remaining = isset( $usage['remaining'] ) ? (int) $usage['remaining'] : null;
+			Helper::update_feature_usage( sanitize_key( $usage['feature'] ), $usage['used'] ?? 0, $remaining );
 		}
 
 		$data = $data['data']['details'];
@@ -377,12 +387,11 @@ class Rest extends WP_REST_Controller {
 		);
 		$keyword_data[ $country ][ $keyword ] = $data;
 		update_option( 'rank_math_ca_data', $keyword_data, false );
-		Helper::update_credits( $credits );
 
 		return [
-			'data'    => $keyword_data[ $country ][ $keyword ],
-			'credits' => $credits,
-			'keyword' => $keyword,
+			'data'         => $keyword_data[ $country ][ $keyword ],
+			'keyword'      => $keyword,
+			'usageDetails' => Helper::get_usage_details(),
 		];
 	}
 
@@ -394,22 +403,22 @@ class Rest extends WP_REST_Controller {
 	public function get_research_keyword_args() {
 		return [
 			'keyword'      => [
-				'description' => esc_html__( 'The keyword to be researched.', 'rank-math' ),
+				'description' => esc_html__( 'The keyword to be researched.', 'seo-by-rank-math' ),
 				'type'        => 'string',
 				'required'    => true,
 			],
 			'country'      => [
-				'description' => esc_html__( 'The country for which the keyword should be researched.', 'rank-math' ),
+				'description' => esc_html__( 'The country for which the keyword should be researched.', 'seo-by-rank-math' ),
 				'type'        => 'string',
 				'required'    => true,
 			],
 			'objectID'     => [
-				'description' => esc_html__( 'The ID of the post initiating the keyword research request.', 'rank-math' ),
+				'description' => esc_html__( 'The ID of the post initiating the keyword research request.', 'seo-by-rank-math' ),
 				'type'        => 'integer',
 				'required'    => true,
 			],
 			'force_update' => [
-				'description' => esc_html__( 'If true, forces a fresh research request.', 'rank-math' ),
+				'description' => esc_html__( 'If true, forces a fresh research request.', 'seo-by-rank-math' ),
 				'type'        => 'boolean',
 				'required'    => false,
 			],
@@ -455,21 +464,20 @@ class Rest extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function save_output( WP_REST_Request $request ) {
-		$outputs      = $request->get_param( 'outputs' );
-		$endpoint     = $request->get_param( 'endpoint' );
-		$is_chat      = $request->get_param( 'isChat' );
-		$attributes   = $request->get_param( 'attributes' );
-		$credits_data = $request->get_param( 'credits' );
+		$outputs    = $request->get_param( 'outputs' );
+		$endpoint   = $request->get_param( 'endpoint' );
+		$is_chat    = $request->get_param( 'isChat' );
+		$attributes = $request->get_param( 'attributes' );
+		$usage      = $request->get_param( 'usage' );
 
-		if ( ! empty( $credits_data ) ) {
-			$credits = ! empty( $credits_data['credits'] ) ? $credits_data['credits'] : [];
-			$data    = [
-				'credits'      => ! empty( $credits['available'] ) ? $credits['available'] - $credits['taken'] : 0,
-				'plan'         => ! empty( $credits_data['plan'] ) ? $credits_data['plan'] : '',
-				'refresh_date' => ! empty( $credits_data['refreshDate'] ) ? $credits_data['refreshDate'] : '',
-			];
+		// Persist per-tool usage returned by the API alongside the tool result.
+		if ( ! empty( $usage['feature'] ) ) {
+			$remaining = isset( $usage['remaining'] ) ? (int) $usage['remaining'] : null;
+			Helper::update_feature_usage( sanitize_key( $usage['feature'] ), $usage['used'] ?? 0, $remaining );
+		}
 
-			Helper::update_credits( $data );
+		if ( empty( $outputs ) || empty( $endpoint ) ) {
+			return true;
 		}
 
 		if ( $is_chat ) {
@@ -549,11 +557,13 @@ class Rest extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function ping_content_ai( WP_REST_Request $request ) {
-		$credits = ! empty( $request->get_param( 'credits' ) ) ? json_decode( $request->get_param( 'credits' ), true ) : [];
-		$data    = [
-			'credits'      => ! empty( $credits['available'] ) ? $credits['available'] - $credits['taken'] : 0,
-			'plan'         => $request->get_param( 'plan' ),
-			'refresh_date' => $request->get_param( 'refreshDate' ),
+		$credits       = ! empty( $request->get_param( 'credits' ) ) ? json_decode( $request->get_param( 'credits' ), true ) : [];
+		$usage_details = $request->get_param( 'usageDetails' );
+		$data          = [
+			'credits'       => ! empty( $credits['available'] ) ? $credits['available'] - $credits['taken'] : 0,
+			'plan'          => $request->get_param( 'plan' ),
+			'refresh_date'  => $request->get_param( 'refreshDate' ),
+			'usage_details' => ! empty( $usage_details ) ? $usage_details : null,
 		];
 
 		Helper::update_credits( $data );
@@ -645,7 +655,7 @@ class Rest extends WP_REST_Controller {
 
 		if ( empty( $data['error'] ) && empty( $data['data']['details'] ) ) {
 			return [
-				'error' => esc_html__( 'No data found for the researched keyword.', 'rank-math' ),
+				'error' => esc_html__( 'No data found for the researched keyword.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -665,8 +675,8 @@ class Rest extends WP_REST_Controller {
 			return wp_kses_post(
 				sprintf(
 					// Translators: link to the update page.
-					__( 'There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature.', 'rank-math' ),
-					'<a href="' . esc_url( self_admin_url( 'update-core.php' ) ) . '">' . __( 'Please update', 'rank-math' ) . '</a>'
+					__( 'There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature.', 'seo-by-rank-math' ),
+					'<a href="' . esc_url( self_admin_url( 'update-core.php' ) ) . '">' . __( 'Please update', 'seo-by-rank-math' ) . '</a>'
 				)
 			);
 		}
@@ -694,13 +704,13 @@ class Rest extends WP_REST_Controller {
 
 		if ( 'invalid_domain' === $error['code'] ) {
 			return [
-				'data' => esc_html__( 'This feature is not available on the localhost.', 'rank-math' ),
+				'data' => esc_html__( 'This feature is not available on the localhost.', 'seo-by-rank-math' ),
 			];
 		}
 
 		if ( 'domain_limit_reached' === $error['code'] ) {
 			return [
-				'data' => esc_html__( 'You have used all the free credits which are allowed to this domain.', 'rank-math' ),
+				'data' => esc_html__( 'You have used all the free credits which are allowed to this domain.', 'seo-by-rank-math' ),
 			];
 		}
 

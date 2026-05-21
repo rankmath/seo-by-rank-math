@@ -144,7 +144,7 @@ class Base {
 			[
 				'option'  => $this->screen_options['id'],
 				'default' => $this->screen_options['default'],
-				'label'   => esc_html__( 'Items per page', 'rank-math' ),
+				'label'   => esc_html__( 'Items per page', 'seo-by-rank-math' ),
 			]
 		);
 	}

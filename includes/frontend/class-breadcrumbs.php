@@ -349,7 +349,7 @@ class Breadcrumbs {
 		$term = $GLOBALS['wp_query']->get_queried_object();
 		$this->prepend_shop_page();
 		/* translators: %s: product tag */
-		$this->add_crumb( sprintf( __( 'Products tagged &ldquo;%s&rdquo;', 'rank-math' ), $this->get_breadcrumb_title( 'term', $term, $term->name ) ), get_term_link( $term ) );
+		$this->add_crumb( sprintf( __( 'Products tagged &ldquo;%s&rdquo;', 'seo-by-rank-math' ), $this->get_breadcrumb_title( 'term', $term, $term->name ) ), get_term_link( $term ) );
 	}
 
 	/**
@@ -587,7 +587,7 @@ class Breadcrumbs {
 		}
 
 		/* translators: %s expands to the current page number */
-		$this->add_crumb( sprintf( esc_html__( 'Page %s', 'rank-math' ), $current_page ), '', true );
+		$this->add_crumb( sprintf( esc_html__( 'Page %s', 'seo-by-rank-math' ), $current_page ), '', true );
 	}
 
 	/**

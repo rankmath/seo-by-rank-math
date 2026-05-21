@@ -411,32 +411,32 @@ class Block_HowTo extends Block {
 		$elements = [];
 		if ( $days > 0 ) {
 			/* translators: %d is the number of days. */
-			$elements[] = sprintf( _n( '%d day', '%d days', $days, 'rank-math' ), $days );
+			$elements[] = sprintf( _n( '%d day', '%d days', $days, 'seo-by-rank-math' ), $days );
 		}
 
 		if ( $hours > 0 ) {
 			/* translators: %d is the number of hours. */
-			$elements[] = sprintf( _n( '%d hour', '%d hours', $hours, 'rank-math' ), $hours );
+			$elements[] = sprintf( _n( '%d hour', '%d hours', $hours, 'seo-by-rank-math' ), $hours );
 		}
 
 		if ( $minutes > 0 ) {
 			/* translators: %d is the number of minutes. */
-			$elements[] = sprintf( _n( '%d minute', '%d minutes', $minutes, 'rank-math' ), $minutes );
+			$elements[] = sprintf( _n( '%d minute', '%d minutes', $minutes, 'seo-by-rank-math' ), $minutes );
 		}
 
 		$count   = count( $elements );
 		$formats = [
 			1 => '%1$s',
 			/* translators: placeholders are units of time, e.g. '1 hour and 30 minutes' */
-			2 => __( '%1$s and %2$s', 'rank-math' ),
+			2 => __( '%1$s and %2$s', 'seo-by-rank-math' ),
 			/* translators: placeholders are units of time, e.g. '1 day, 8 hours and 30 minutes' */
-			3 => __( '%1$s, %2$s and %3$s', 'rank-math' ),
+			3 => __( '%1$s, %2$s and %3$s', 'seo-by-rank-math' ),
 		];
 
 		return sprintf(
 			'<p class="rank-math-howto-duration"><strong>%2$s</strong> <span>%1$s</span></p>',
 			isset( $formats[ $count ] ) ? vsprintf( $formats[ $count ], $elements ) : '',
-			empty( $attrs['timeLabel'] ) ? __( 'Total Time:', 'rank-math' ) : esc_html( $attrs['timeLabel'] )
+			empty( $attrs['timeLabel'] ) ? __( 'Total Time:', 'seo-by-rank-math' ) : esc_html( $attrs['timeLabel'] )
 		);
 	}
 

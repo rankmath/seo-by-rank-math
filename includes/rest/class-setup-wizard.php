@@ -120,7 +120,7 @@ class Setup_Wizard extends WP_REST_Controller {
 			'step' => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Current Step', 'rank-math' ),
+				'description'       => esc_html__( 'Current Step', 'seo-by-rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => 'rest_validate_request_arg',
 			],
@@ -137,14 +137,14 @@ class Setup_Wizard extends WP_REST_Controller {
 			'step'  => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Current Step', 'rank-math' ),
+				'description'       => esc_html__( 'Current Step', 'seo-by-rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => 'rest_validate_request_arg',
 			],
 			'value' => [
 				'type'              => 'object',
 				'required'          => true,
-				'description'       => esc_html__( 'Current Step Data', 'rank-math' ),
+				'description'       => esc_html__( 'Current Step Data', 'seo-by-rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => 'rest_validate_request_arg',
 			],
@@ -161,7 +161,7 @@ class Setup_Wizard extends WP_REST_Controller {
 			'enable_tracking' => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Enable Tracking', 'rank-math' ),
+				'description'       => esc_html__( 'Enable Tracking', 'seo-by-rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => 'rest_validate_request_arg',
 			],

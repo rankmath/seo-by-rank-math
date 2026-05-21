@@ -43,8 +43,8 @@ class Admin {
 			[
 				'blocks' => [
 					'icon'  => 'rm-icon rm-icon-stories',
-					'title' => esc_html__( 'Blocks', 'rank-math' ),
-					'desc'  => esc_html__( 'Take control over the default settings available for Rank Math Blocks.', 'rank-math' ),
+					'title' => esc_html__( 'Blocks', 'seo-by-rank-math' ),
+					'desc'  => esc_html__( 'Take control over the default settings available for Rank Math Blocks.', 'seo-by-rank-math' ),
 					'file'  => __DIR__ . '/views/options-general.php',
 				],
 			],

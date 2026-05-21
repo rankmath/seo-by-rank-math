@@ -82,7 +82,7 @@ class Assets {
 			true
 		);
 
-		wp_set_script_translations( 'rank-math-content-ai', 'rank-math' );
+		wp_set_script_translations( 'rank-math-content-ai', 'seo-by-rank-math' );
 
 		$this->content_ai->localized_data( $this->get_post_localized_data( $screen ) );
 	}
