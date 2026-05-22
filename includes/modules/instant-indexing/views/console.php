@@ -12,7 +12,7 @@ $cmb->add_field(
 	[
 		'id'      => 'indexnow_description',
 		'type'    => 'raw',
-		'content' => '<div class="bing-api-description description"><p>' . esc_html__( 'Insert URLs to send to the IndexNow API (one per line, up to 10,000):', 'rank-math' ) . '</p></div>',
+		'content' => '<div class="bing-api-description description"><p>' . esc_html__( 'Insert URLs to send to the IndexNow API (one per line, up to 10,000):', 'seo-by-rank-math' ) . '</p></div>',
 	]
 );
 
@@ -23,9 +23,9 @@ $cmb->add_field(
 		'sanitization_cb' => '__return_false',
 		'attributes'      => [
 			'class'       => 'instant-indexing-urls',
-			'placeholder' => trailingslashit( home_url() ) . _x( 'hello-world', 'URL slug placeholder', 'rank-math' ),
+			'placeholder' => trailingslashit( home_url() ) . _x( 'hello-world', 'URL slug placeholder', 'seo-by-rank-math' ),
 		],
-		'after_field'     => '<a href="#" id="indexnow_submit" class="button button-primary large-button" style="margin-top: 20px;">' . esc_html__( 'Submit URLs', 'rank-math' ) . '</a> <span class="spinner" id="indexnow_spinner"></span>',
+		'after_field'     => '<a href="#" id="indexnow_submit" class="button button-primary large-button" style="margin-top: 20px;">' . esc_html__( 'Submit URLs', 'seo-by-rank-math' ) . '</a> <span class="spinner" id="indexnow_spinner"></span>',
 	]
 );
 
@@ -37,8 +37,8 @@ $cmb->add_field(
 		'save_field' => false,
 		'content'    => sprintf(
 			/* translators: Note text */
-			esc_html__( '%s The URLs will be submitted to Bing and Yandex only, and not to Google.', 'rank-math' ),
-			'<b>' . esc_html__( 'Note:', 'rank-math' ) . '</b>'
+			esc_html__( '%s The URLs will be submitted to Bing and Yandex only, and not to Google.', 'seo-by-rank-math' ),
+			'<b>' . esc_html__( 'Note:', 'seo-by-rank-math' ) . '</b>'
 		),
 	]
 );

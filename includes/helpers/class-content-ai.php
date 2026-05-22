@@ -118,14 +118,15 @@ trait Content_AI {
 
 		$data = json_decode( $data, true );
 		$data = [
-			'credits'      => intval( $data['availableCredits'] ?? 0 ),
-			'plan'         => $data['plan'] ?? '',
-			'refresh_date' => $data['nextResetDate'] ?? '',
+			'credits'       => intval( $data['availableCredits'] ?? 0 ),
+			'plan'          => $data['plan'] ?? '',
+			'refresh_date'  => $data['nextResetDate'] ?? '',
+			'usage_details' => $data['usageDetails'] ?? null,
 		];
 
 		self::update_credits( $data );
 
-		return $data['credits'];
+		return $return_error ? $data : $data['credits'];
 	}
 
 	/**
@@ -149,6 +150,62 @@ trait Content_AI {
 	}
 
 	/**
+	 * Function to get Content AI usage details.
+	 *
+	 * @return array|null Per-feature usage details, or null if not available.
+	 */
+	public static function get_usage_details() {
+		$credits_data = get_option( self::$credits_key, [] );
+		return $credits_data['usage_details'] ?? null;
+	}
+
+	/**
+	 * Check if a feature's quota is exhausted.
+	 *
+	 * Returns false (allow) when usage_details is absent or the feature key is missing,
+	 * matching the JS isFeatureQuotaExhausted fallback-allow behaviour.
+	 *
+	 * @param string $feature Feature key (e.g. 'generate_image_alt_v2').
+	 *
+	 * @return bool True when remaining quota is zero or less.
+	 */
+	public static function is_feature_quota_exhausted( $feature ) {
+		$usage_details = self::get_usage_details();
+		if ( empty( $usage_details ) || ! isset( $usage_details[ $feature ] ) ) {
+			return false;
+		}
+
+		$detail = $usage_details[ $feature ];
+
+		if ( ! isset( $detail['remaining'] ) ) {
+			return false;
+		}
+
+		return (int) $detail['remaining'] <= 0;
+	}
+
+	/**
+	 * Merge a single per-tool usage entry into the stored usage_details.
+	 *
+	 * @param string   $feature   Sanitized feature key (e.g. 'blog_post_idea').
+	 * @param int      $used      Number of uses recorded by the API.
+	 * @param int|null $remaining Remaining uses as reported by the API, or null if not provided.
+	 */
+	public static function update_feature_usage( $feature, $used, $remaining = null ) {
+		$credits_data  = get_option( self::$credits_key, [] );
+		$usage_details = isset( $credits_data['usage_details'] ) ? (array) $credits_data['usage_details'] : [];
+		$existing      = isset( $usage_details[ $feature ] ) ? $usage_details[ $feature ] : [];
+
+		$usage_details[ $feature ] = [
+			'used'      => absint( $used ),
+			'remaining' => ! is_null( $remaining ) ? (int) $remaining : ( $existing['remaining'] ?? null ),
+		];
+
+		$credits_data['usage_details'] = $usage_details;
+		update_option( self::$credits_key, $credits_data );
+	}
+
+	/**
 	 * Function to get Content AI Refresh date.
 	 *
 	 * @return int Content AI Refresh date.
@@ -161,7 +218,7 @@ trait Content_AI {
 	/**
 	 * Function to update Content AI Credits.
 	 *
-	 * @param int $credits Credits data.
+	 * @param int|array $credits Credits data.
 	 */
 	public static function update_credits( $credits ) {
 		if ( is_array( $credits ) ) {
@@ -437,22 +494,22 @@ trait Content_AI {
 	 */
 	public static function get_content_ai_errors() {
 		return [
-			'not_connected'           => esc_html__( 'Please connect your account to use the Content AI.', 'rank-math' ),
-			'plugin_update_required'  => esc_html__( 'Please update the Rank Math SEO plugin to the latest version to use this feature.', 'rank-math' ),
-			'upgrade_required'        => esc_html__( 'This feature is only available for Content AI subscribers.', 'rank-math' ),
-			'rate_limit_exceeded'     => esc_html__( 'Oops! Too many requests in a short time. Please try again after some time.', 'rank-math' ),
-			'domain_limit_reached'    => esc_html__( 'You\'ve used up all available credits for this domain.', 'rank-math' ),
-			'account_limit_reached'   => esc_html__( 'You\'ve used up all available credits from the connected account.', 'rank-math' ),
-			'content_filter'          => esc_html__( 'Please revise the entered values in the fields as they are not secure. Make the required adjustments and try again.', 'rank-math' ),
-			'api_content_filter'      => esc_html__( 'The output was stopped as it was identified as potentially unsafe by the content filter.', 'rank-math' ),
-			'could_not_generate'      => esc_html__( 'Could not generate. Please try again later.', 'rank-math' ),
-			'invalid_key'             => esc_html__( 'Invalid API key. Please check your API key or reconnect the site and try again.', 'rank-math' ),
-			'invalid_input'           => esc_html__( 'The input provided is invalid. Please check the format and try again.', 'rank-math' ),
-			'temporarily_unavailable' => esc_html__( 'The service is temporarily unavailable. Please try again later.', 'rank-math' ),
-			'invalid_client'          => esc_html__( 'Unauthorized request. The client credentials are invalid.', 'rank-math' ),
-			'no_results'              => esc_html__( 'No results found for the given query. Please modify your request and try again', 'rank-math' ),
-			'not_enough_results'      => esc_html__( 'Insufficient results to complete the request. Please refine your query or reduce the requirements.', 'rank-math' ),
-			'not_found'               => esc_html__( 'User wallet not found.', 'rank-math' ),
+			'not_connected'           => esc_html__( 'Please connect your account to use the Content AI.', 'seo-by-rank-math' ),
+			'plugin_update_required'  => esc_html__( 'Please update the Rank Math SEO plugin to the latest version to use this feature.', 'seo-by-rank-math' ),
+			'upgrade_required'        => esc_html__( 'This feature is only available for Content AI subscribers.', 'seo-by-rank-math' ),
+			'rate_limit_exceeded'     => esc_html__( 'Oops! Too many requests in a short time. Please try again after some time.', 'seo-by-rank-math' ),
+			'domain_limit_reached'    => esc_html__( 'You\'ve reached the monthly usage limit for this feature on your domain.', 'seo-by-rank-math' ),
+			'account_limit_reached'   => esc_html__( 'You\'ve reached the monthly usage limit for this feature.', 'seo-by-rank-math' ),
+			'content_filter'          => esc_html__( 'Please revise the entered values in the fields as they are not secure. Make the required adjustments and try again.', 'seo-by-rank-math' ),
+			'api_content_filter'      => esc_html__( 'The output was stopped as it was identified as potentially unsafe by the content filter.', 'seo-by-rank-math' ),
+			'could_not_generate'      => esc_html__( 'Could not generate. Please try again later.', 'seo-by-rank-math' ),
+			'invalid_key'             => esc_html__( 'Invalid API key. Please check your API key or reconnect the site and try again.', 'seo-by-rank-math' ),
+			'invalid_input'           => esc_html__( 'The input provided is invalid. Please check the format and try again.', 'seo-by-rank-math' ),
+			'temporarily_unavailable' => esc_html__( 'The service is temporarily unavailable. Please try again later.', 'seo-by-rank-math' ),
+			'invalid_client'          => esc_html__( 'Unauthorized request. The client credentials are invalid.', 'seo-by-rank-math' ),
+			'no_results'              => esc_html__( 'No results found for the given query. Please modify your request and try again', 'seo-by-rank-math' ),
+			'not_enough_results'      => esc_html__( 'Insufficient results to complete the request. Please refine your query or reduce the requirements.', 'seo-by-rank-math' ),
+			'not_found'               => esc_html__( 'User wallet not found.', 'seo-by-rank-math' ),
 		];
 	}
 

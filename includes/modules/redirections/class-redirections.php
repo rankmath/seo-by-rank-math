@@ -64,21 +64,21 @@ class Redirections {
 		$data = DB::get_stats();
 		?>
 		<h3>
-			<?php esc_html_e( 'Redirections', 'rank-math' ); ?>
-			<a href="<?php echo esc_url( Helper::get_admin_url( 'redirections' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'rank-math' ); ?>"><i class="dashicons dashicons-chart-bar"></i></a>
+			<?php esc_html_e( 'Redirections', 'seo-by-rank-math' ); ?>
+			<a href="<?php echo esc_url( Helper::get_admin_url( 'redirections' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'seo-by-rank-math' ); ?>"><i class="dashicons dashicons-chart-bar"></i></a>
 		</h3>
 		<div class="rank-math-dashboard-block">
 			<div>
 				<h4>
-					<?php esc_html_e( 'Redirection Count', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of Redirections created in the Rank Math.', 'rank-math' ); ?></span></span>
+					<?php esc_html_e( 'Redirection Count', 'seo-by-rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of Redirections created in the Rank Math.', 'seo-by-rank-math' ); ?></span></span>
 				</h4>
 				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->total ) ); ?></strong>
 			</div>
 			<div>
 				<h4>
-					<?php esc_html_e( 'Redirection Hits', 'rank-math' ); ?>
-					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of hits received by all the Redirections.', 'rank-math' ); ?></span></span>
+					<?php esc_html_e( 'Redirection Hits', 'seo-by-rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of hits received by all the Redirections.', 'seo-by-rank-math' ); ?></span></span>
 				</h4>
 				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->hits ) ); ?></strong>
 			</div>
@@ -127,9 +127,9 @@ class Redirections {
 		$menu->add_sub_menu(
 			'redirections',
 			[
-				'title'    => esc_html__( 'Redirections', 'rank-math' ),
+				'title'    => esc_html__( 'Redirections', 'seo-by-rank-math' ),
 				'href'     => Helper::get_admin_url( 'redirections' ),
-				'meta'     => [ 'title' => esc_html__( 'Create and edit redirections', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Create and edit redirections', 'seo-by-rank-math' ) ],
 				'priority' => 50,
 			]
 		);
@@ -137,9 +137,9 @@ class Redirections {
 		$menu->add_sub_menu(
 			'redirections-edit',
 			[
-				'title' => esc_html__( 'Manage Redirections', 'rank-math' ),
+				'title' => esc_html__( 'Manage Redirections', 'seo-by-rank-math' ),
 				'href'  => Helper::get_admin_url( 'redirections' ),
-				'meta'  => [ 'title' => esc_html__( 'Create and edit redirections', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Create and edit redirections', 'seo-by-rank-math' ) ],
 			],
 			'redirections'
 		);
@@ -147,9 +147,9 @@ class Redirections {
 		$menu->add_sub_menu(
 			'redirections-settings',
 			[
-				'title' => esc_html__( 'Redirection Settings', 'rank-math' ),
+				'title' => esc_html__( 'Redirection Settings', 'seo-by-rank-math' ),
 				'href'  => Helper::get_settings_url( 'general', 'redirections' ),
-				'meta'  => [ 'title' => esc_html__( 'Redirection Settings', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Redirection Settings', 'seo-by-rank-math' ) ],
 			],
 			'redirections'
 		);
@@ -158,9 +158,9 @@ class Redirections {
 			$menu->add_sub_menu(
 				'redirections-redirect-me',
 				[
-					'title' => esc_html__( '&raquo; Redirect this page', 'rank-math' ),
+					'title' => esc_html__( '&raquo; Redirect this page', 'seo-by-rank-math' ),
 					'href'  => Security::add_query_arg_raw( 'url', rawurlencode( ltrim( Param::server( 'REQUEST_URI' ), '/' ) ), Helper::get_admin_url( 'redirections' ) ),
-					'meta'  => [ 'title' => esc_html__( 'Redirect the current URL', 'rank-math' ) ],
+					'meta'  => [ 'title' => esc_html__( 'Redirect the current URL', 'seo-by-rank-math' ) ],
 				],
 				'redirections'
 			);

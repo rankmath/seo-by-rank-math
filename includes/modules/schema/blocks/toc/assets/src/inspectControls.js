@@ -17,19 +17,19 @@ import {
 export default ( { attributes, setAttributes, excludeHeadings, setExcludeHeadings } ) => {
 	return (
 		<InspectorControls>
-			<PanelBody title={ __( 'Settings', 'rank-math' ) }>
+			<PanelBody title={ __( 'Settings', 'seo-by-rank-math' ) }>
 
 				<SelectControl
-					label={ __( 'Title Wrapper', 'rank-math' ) }
+					label={ __( 'Title Wrapper', 'seo-by-rank-math' ) }
 					value={ attributes.titleWrapper }
 					options={ [
-						{ value: 'h2', label: __( 'H2', 'rank-math' ) },
-						{ value: 'h3', label: __( 'H3', 'rank-math' ) },
-						{ value: 'h4', label: __( 'H4', 'rank-math' ) },
-						{ value: 'h5', label: __( 'H5', 'rank-math' ) },
-						{ value: 'h6', label: __( 'H6', 'rank-math' ) },
-						{ value: 'p', label: __( 'P', 'rank-math' ) },
-						{ value: 'div', label: __( 'DIV', 'rank-math' ) },
+						{ value: 'h2', label: __( 'H2', 'seo-by-rank-math' ) },
+						{ value: 'h3', label: __( 'H3', 'seo-by-rank-math' ) },
+						{ value: 'h4', label: __( 'H4', 'seo-by-rank-math' ) },
+						{ value: 'h5', label: __( 'H5', 'seo-by-rank-math' ) },
+						{ value: 'h6', label: __( 'H6', 'seo-by-rank-math' ) },
+						{ value: 'p', label: __( 'P', 'seo-by-rank-math' ) },
+						{ value: 'div', label: __( 'DIV', 'seo-by-rank-math' ) },
 					] }
 					onChange={ ( titleWrapper ) => {
 						setAttributes( { titleWrapper } )
@@ -39,14 +39,14 @@ export default ( { attributes, setAttributes, excludeHeadings, setExcludeHeading
 				/>
 
 				<br />
-				<h3>{ __( 'Exclude Headings', 'rank-math' ) }</h3>
+				<h3>{ __( 'Exclude Headings', 'seo-by-rank-math' ) }</h3>
 				<div className="rank-math-toc-exclude-headings">
 					{
 						map( [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], ( value ) => {
 							return (
 								<CheckboxControl
 									key={ value }
-									label={ __( 'Heading ', 'rank-math' ) + toUpper( value ) }
+									label={ __( 'Heading ', 'seo-by-rank-math' ) + toUpper( value ) }
 									checked={ includes( excludeHeadings, value ) }
 									onChange={ ( newVlaue ) => setExcludeHeadings( value, newVlaue ) }
 									__nextHasNoMarginBottom={ true }

@@ -75,7 +75,7 @@ class AIOSEO_Blocks extends \WP_Background_Process {
 		delete_option( 'rank_math_aioseo_block_posts' );
 		Helper::add_notification(
 			// Translators: placeholder is the number of modified posts.
-			sprintf( _n( 'Blocks successfully converted in %d post.', 'Blocks successfully converted in %d posts.', $posts['count'], 'rank-math' ), $posts['count'] ),
+			sprintf( _n( 'Blocks successfully converted in %d post.', 'Blocks successfully converted in %d posts.', $posts['count'], 'seo-by-rank-math' ), $posts['count'] ),
 			[
 				'type'    => 'success',
 				'id'      => 'rank_math_aioseo_block_posts',

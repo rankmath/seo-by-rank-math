@@ -193,7 +193,7 @@ class Post extends WP_REST_Controller {
 		return [
 			'rows' => [
 				'required'          => true,
-				'description'       => esc_html__( 'Selected posts to update the data for.', 'rank-math' ),
+				'description'       => esc_html__( 'Selected posts to update the data for.', 'seo-by-rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 		];

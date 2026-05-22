@@ -37,13 +37,13 @@ class Import_Export_Settings {
 		$file = Helper::handle_file_upload();
 		if ( isset( $file['error'] ) ) {
 			return [
-				'error' => esc_html__( 'Settings could not be imported:', 'rank-math' ) . ' ' . $file['error'],
+				'error' => esc_html__( 'Settings could not be imported:', 'seo-by-rank-math' ) . ' ' . $file['error'],
 			];
 		}
 
 		if ( ! isset( $file['file'] ) ) {
 			return [
-				'error' => esc_html__( 'Settings could not be imported: Upload failed.', 'rank-math' ),
+				'error' => esc_html__( 'Settings could not be imported: Upload failed.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -51,7 +51,7 @@ class Import_Export_Settings {
 		$wp_filesystem = Helper::get_filesystem();
 		if ( is_null( $wp_filesystem ) || ! Helper::is_filesystem_direct() ) {
 			return [
-				'error' => esc_html__( 'Uploaded file could not be read.', 'rank-math' ),
+				'error' => esc_html__( 'Uploaded file could not be read.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -62,12 +62,12 @@ class Import_Export_Settings {
 
 		if ( is_array( $settings ) && self::do_import_data( $settings ) ) {
 			return [
-				'success' => esc_html__( 'Settings successfully imported. Your old configuration has been saved as a backup.', 'rank-math' ),
+				'success' => esc_html__( 'Settings successfully imported. Your old configuration has been saved as a backup.', 'seo-by-rank-math' ),
 			];
 		}
 
 		return [
-			'error' => esc_html__( 'No settings found to be imported.', 'rank-math' ),
+			'error' => esc_html__( 'No settings found to be imported.', 'seo-by-rank-math' ),
 		];
 	}
 

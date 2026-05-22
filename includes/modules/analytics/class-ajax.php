@@ -172,7 +172,7 @@ class AJAX {
 
 		$success = Google_Analytics::test_connection();
 		if ( false === $success ) {
-			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ) );
+			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'seo-by-rank-math' ) );
 		}
 
 		$this->success();
@@ -187,7 +187,7 @@ class AJAX {
 
 		$success = Analytics::test_connection();
 		if ( false === $success ) {
-			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ) );
+			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'seo-by-rank-math' ) );
 		}
 
 		$this->success();
@@ -210,7 +210,7 @@ class AJAX {
 		);
 
 		if ( is_wp_error( $response ) ) {
-			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ) );
+			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'seo-by-rank-math' ) );
 		}
 
 		$this->success();
@@ -240,7 +240,7 @@ class AJAX {
 		);
 
 		if ( is_wp_error( $request ) ) {
-			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ) );
+			$this->error( esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'seo-by-rank-math' ) );
 		}
 
 		$this->success();
@@ -276,7 +276,7 @@ class AJAX {
 		$this->has_cap_ajax( 'analytics' );
 		Workflow\Workflow::kill_workflows();
 
-		$this->success( esc_html__( 'Data fetching cancelled.', 'rank-math' ) );
+		$this->success( esc_html__( 'Data fetching cancelled.', 'seo-by-rank-math' ) );
 	}
 
 	/**
@@ -287,7 +287,7 @@ class AJAX {
 		$this->has_cap_ajax( 'analytics' );
 
 		if ( ! Authentication::is_authorized() ) {
-			$this->error( esc_html__( 'Google oAuth is not authorized.', 'rank-math' ) );
+			$this->error( esc_html__( 'Google oAuth is not authorized.', 'seo-by-rank-math' ) );
 		}
 
 		$days = Param::get( 'days', 90, FILTER_VALIDATE_INT );
@@ -308,7 +308,7 @@ class AJAX {
 			);
 		}
 
-		$this->success( esc_html__( 'Data fetching started in the background.', 'rank-math' ) );
+		$this->success( esc_html__( 'Data fetching started in the background.', 'seo-by-rank-math' ) );
 	}
 
 	/**
@@ -320,7 +320,7 @@ class AJAX {
 
 		$days = Param::get( 'days', false, FILTER_VALIDATE_INT );
 		if ( ! $days ) {
-			$this->error( esc_html__( 'Not a valid settings founds to delete cache.', 'rank-math' ) );
+			$this->error( esc_html__( 'Not a valid settings founds to delete cache.', 'seo-by-rank-math' ) );
 		}
 
 		// Delete fetched console data within specified date range.
@@ -578,7 +578,7 @@ class AJAX {
 			if ( is_wp_error( $request ) ) {
 				return new WP_Error(
 					'insufficient_permissions',
-					esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' )
+					esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'seo-by-rank-math' )
 				);
 			}
 		}
@@ -613,7 +613,7 @@ class AJAX {
 		);
 
 		if ( is_wp_error( $success ) ) {
-			return new WP_Error( 'insufficient_permissions', esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'rank-math' ) );
+			return new WP_Error( 'insufficient_permissions', esc_html__( 'Data import will not work for this service as sufficient permissions are not given.', 'seo-by-rank-math' ) );
 		}
 
 		$prev  = get_option( 'rank_math_google_analytic_profile', [] );

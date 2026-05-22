@@ -70,7 +70,7 @@ const getLinksFiltersFromURL = () => {
  */
 const LinkTypeBadge = ( { type } ) => (
 	<span className={ `rank-math-link-type-badge ${ type }` }>
-		{ type === 'internal' ? __( 'Internal', 'rank-math' ) : __( 'External', 'rank-math' ) }
+		{ type === 'internal' ? __( 'Internal', 'seo-by-rank-math' ) : __( 'External', 'seo-by-rank-math' ) }
 	</span>
 )
 
@@ -113,17 +113,17 @@ const Links = () => {
 	const headers = useMemo( () => [
 		{
 			key: 'source_title',
-			label: __( 'Source Post', 'rank-math' ),
+			label: __( 'Source Post', 'seo-by-rank-math' ),
 			isSortable: true,
 			isHideable: false,
 			render: ( value, row ) => (
 				<>
 					{ row.source_edit_url ? (
 						<a href={ row.source_edit_url } target="_blank" rel="noopener noreferrer">
-							{ value || __( '(no title)', 'rank-math' ) }
+							{ value || __( '(no title)', 'seo-by-rank-math' ) }
 						</a>
 					) : (
-						value || __( '(no title)', 'rank-math' )
+						value || __( '(no title)', 'seo-by-rank-math' )
 					) }
 					{ row.source_url && (
 						<div className="rank-math-post-url">{ row.source_url }</div>
@@ -133,7 +133,7 @@ const Links = () => {
 		},
 		{
 			key: 'url',
-			label: __( 'Destination', 'rank-math' ),
+			label: __( 'Destination', 'seo-by-rank-math' ),
 			isSortable: true,
 			isHideable: false,
 			render: ( value, row ) => (
@@ -149,7 +149,7 @@ const Links = () => {
 		},
 		{
 			key: 'type',
-			label: __( 'Link Type', 'rank-math' ),
+			label: __( 'Link Type', 'seo-by-rank-math' ),
 			isSortable: true,
 			render: ( value ) => <LinkTypeBadge type={ value } />,
 		},
@@ -157,20 +157,20 @@ const Links = () => {
 
 	// Link type toggle options
 	const linkTypeOptions = [
-		{ label: __( 'All', 'rank-math' ), value: '' },
-		{ label: __( 'Internal', 'rank-math' ), value: '1', statusType: 'internal' },
-		{ label: __( 'External', 'rank-math' ), value: '0', statusType: 'external' },
+		{ label: __( 'All', 'seo-by-rank-math' ), value: '' },
+		{ label: __( 'Internal', 'seo-by-rank-math' ), value: '1', statusType: 'internal' },
+		{ label: __( 'External', 'seo-by-rank-math' ), value: '0', statusType: 'external' },
 	]
 
 	// Link status toggle options (PRO-only — clicking any non-All value opens upgrade modal)
 	const linkStatusOptions = [
-		{ label: __( 'All', 'rank-math' ), value: '', statusType: 'all' },
-		{ label: __( 'Success', 'rank-math' ), value: '2xx', statusType: 'success' },
-		{ label: __( 'Broken', 'rank-math' ), value: 'broken', statusType: 'error' },
-		{ label: __( 'Redirects', 'rank-math' ), value: '3xx', statusType: 'warning' },
-		{ label: __( 'Robots Blocked', 'rank-math' ), value: 'robots_blocked', statusType: 'blocked' },
-		{ label: __( 'Marked Safe', 'rank-math' ), value: 'marked_safe', statusType: 'markedSafe' },
-		{ label: __( 'Unchecked', 'rank-math' ), value: 'unchecked', statusType: 'unchecked' },
+		{ label: __( 'All', 'seo-by-rank-math' ), value: '', statusType: 'all' },
+		{ label: __( 'Success', 'seo-by-rank-math' ), value: '2xx', statusType: 'success' },
+		{ label: __( 'Broken', 'seo-by-rank-math' ), value: 'broken', statusType: 'error' },
+		{ label: __( 'Redirects', 'seo-by-rank-math' ), value: '3xx', statusType: 'warning' },
+		{ label: __( 'Robots Blocked', 'seo-by-rank-math' ), value: 'robots_blocked', statusType: 'blocked' },
+		{ label: __( 'Marked Safe', 'seo-by-rank-math' ), value: 'marked_safe', statusType: 'markedSafe' },
+		{ label: __( 'Unchecked', 'seo-by-rank-math' ), value: 'unchecked', statusType: 'unchecked' },
 	]
 
 	const handleStatusToggle = useCallback( ( value ) => {
@@ -192,15 +192,15 @@ const Links = () => {
 
 		return [
 			{
-				label: __( 'Total Links', 'rank-math' ),
+				label: __( 'Total Links', 'seo-by-rank-math' ),
 				value: get( stats, 'total', 0 ),
 			},
 			{
-				label: __( 'Internal Links', 'rank-math' ),
+				label: __( 'Internal Links', 'seo-by-rank-math' ),
 				value: get( stats, 'internal', 0 ),
 			},
 			{
-				label: __( 'External Links', 'rank-math' ),
+				label: __( 'External Links', 'seo-by-rank-math' ),
 				value: get( stats, 'external', 0 ),
 			},
 		]

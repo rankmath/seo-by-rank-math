@@ -82,7 +82,7 @@ class Admin extends Base {
 		$this->page = new Page(
 			'rank-math-seo-analysis',
 			// Translators: placeholder is the new Rank Math label.
-			esc_html__( 'SEO Analyzer', 'rank-math' ),
+			esc_html__( 'SEO Analyzer', 'seo-by-rank-math' ),
 			[
 				'position'   => 60,
 				'parent'     => 'rank-math',

@@ -17,28 +17,28 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Price', 'rank-math' ),
+		esc_html__( 'Price', 'seo-by-rank-math' ),
 		'offers.price'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Price Currency', 'rank-math' ),
+		esc_html__( 'Price Currency', 'seo-by-rank-math' ),
 		'offers.priceCurrency'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Operating System', 'rank-math' ),
+		esc_html__( 'Operating System', 'seo-by-rank-math' ),
 		'operatingSystem'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Application Category', 'rank-math' ),
+		esc_html__( 'Application Category', 'seo-by-rank-math' ),
 		'applicationCategory'
 	);
 	?>

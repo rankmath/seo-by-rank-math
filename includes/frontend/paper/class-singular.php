@@ -125,7 +125,7 @@ class Singular implements IPaper {
 	 */
 	protected function get_post_title( $post = null ) {
 		if ( ! is_object( $post ) ) {
-			return Paper::get_from_options( '404_title', [], esc_html__( 'Page not found', 'rank-math' ) );
+			return Paper::get_from_options( '404_title', [], esc_html__( 'Page not found', 'seo-by-rank-math' ) );
 		}
 
 		$title = Post::get_meta( 'title', $post->ID );

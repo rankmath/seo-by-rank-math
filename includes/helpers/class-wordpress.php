@@ -789,7 +789,7 @@ trait WordPress {
 			}
 			$file = wp_handle_upload( $_FILES['import-me'], [ 'test_form' => false ] );
 		} else {
-			$file = new WP_Error( 'missing_file', __( 'No file selected for upload.', 'rank-math' ) );
+			$file = new WP_Error( 'missing_file', __( 'No file selected for upload.', 'seo-by-rank-math' ) );
 		}
 
 		// Remove upload hooks.

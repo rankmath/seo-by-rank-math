@@ -418,15 +418,15 @@ class Head {
 
 		if ( false === $closing ) {
 			if ( ! Helper::is_whitelabel() && ! defined( 'RANK_MATH_PRO_FILE' ) ) {
-				echo "\n<!-- " . esc_html__( 'Search Engine Optimization by Rank Math - https://rankmath.com/', 'rank-math' ) . " -->\n";
+				echo "\n<!-- " . esc_html__( 'Search Engine Optimization by Rank Math - https://rankmath.com/', 'seo-by-rank-math' ) . " -->\n";
 			} elseif ( defined( 'RANK_MATH_PRO_FILE' ) ) {
-				echo "\n<!-- " . esc_html__( 'Search Engine Optimization by Rank Math PRO - https://rankmath.com/', 'rank-math' ) . " -->\n";
+				echo "\n<!-- " . esc_html__( 'Search Engine Optimization by Rank Math PRO - https://rankmath.com/', 'seo-by-rank-math' ) . " -->\n";
 			}
 			return;
 		}
 
 		if ( ! Helper::is_whitelabel() ) {
-			echo '<!-- /' . esc_html__( 'Rank Math WordPress SEO plugin', 'rank-math' ) . " -->\n\n";
+			echo '<!-- /' . esc_html__( 'Rank Math WordPress SEO plugin', 'seo-by-rank-math' ) . " -->\n\n";
 		}
 	}
 

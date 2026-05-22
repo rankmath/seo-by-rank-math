@@ -24,8 +24,8 @@ $cmb->add_field(
 	[
 		'id'      => 'authors_sitemap',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Include in Sitemap', 'rank-math' ),
-		'desc'    => esc_html__( 'Include author archives in the XML sitemap.', 'rank-math' ),
+		'name'    => esc_html__( 'Include in Sitemap', 'seo-by-rank-math' ),
+		'desc'    => esc_html__( 'Include author archives in the XML sitemap.', 'seo-by-rank-math' ),
 		'default' => 'on',
 	]
 );
@@ -34,8 +34,8 @@ $cmb->add_field(
 	[
 		'id'      => 'authors_html_sitemap',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Include in HTML Sitemap', 'rank-math' ),
-		'desc'    => esc_html__( 'Include author archives in the HTML sitemap if it\'s enabled.', 'rank-math' ),
+		'name'    => esc_html__( 'Include in HTML Sitemap', 'seo-by-rank-math' ),
+		'desc'    => esc_html__( 'Include author archives in the HTML sitemap if it\'s enabled.', 'seo-by-rank-math' ),
 		'default' => 'on',
 		'classes' => [
 			'rank-math-html-sitemap',
@@ -48,8 +48,8 @@ $cmb->add_field(
 	[
 		'id'      => 'include_authors_without_posts',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Include Authors Without Posts', 'rank-math' ),
-		'desc'    => esc_html__( 'Enable this option to include authors in the sitemap even if they have not created any posts. This ensures all author archives are listed, regardless of content availability.', 'rank-math' ),
+		'name'    => esc_html__( 'Include Authors Without Posts', 'seo-by-rank-math' ),
+		'desc'    => esc_html__( 'Enable this option to include authors in the sitemap even if they have not created any posts. This ensures all author archives are listed, regardless of content availability.', 'seo-by-rank-math' ),
 		'default' => 'off',
 		'classes' => 'rank-math-advanced-option cmb2-top-border',
 		'dep'     => $dep,
@@ -60,8 +60,8 @@ $cmb->add_field(
 	[
 		'id'                => 'exclude_roles',
 		'type'              => 'multicheck',
-		'name'              => esc_html__( 'Exclude User Roles', 'rank-math' ),
-		'desc'              => esc_html__( 'Selected roles will be excluded from the XML &amp; HTML sitemaps.', 'rank-math' ),
+		'name'              => esc_html__( 'Exclude User Roles', 'seo-by-rank-math' ),
+		'desc'              => esc_html__( 'Selected roles will be excluded from the XML &amp; HTML sitemaps.', 'seo-by-rank-math' ),
 		'options'           => $roles,
 		'default'           => $default,
 		'select_all_button' => false,
@@ -73,8 +73,8 @@ $cmb->add_field(
 	[
 		'id'   => 'exclude_users',
 		'type' => 'text',
-		'name' => esc_html__( 'Exclude Users', 'rank-math' ),
-		'desc' => esc_html__( 'Add user IDs, separated by commas, to exclude them from the sitemap.', 'rank-math' ),
+		'name' => esc_html__( 'Exclude Users', 'seo-by-rank-math' ),
+		'desc' => esc_html__( 'Add user IDs, separated by commas, to exclude them from the sitemap.', 'seo-by-rank-math' ),
 		'dep'  => $dep,
 	]
 );

@@ -104,7 +104,7 @@ class Permissions {
 	 */
 	public static function get_status() {
 		return [
-			esc_html__( 'Search Console', 'rank-math' ) => self::get_status_text( self::has_console() ),
+			esc_html__( 'Search Console', 'seo-by-rank-math' ) => self::get_status_text( self::has_console() ),
 		];
 	}
 
@@ -115,7 +115,7 @@ class Permissions {
 	 * @return string
 	 */
 	public static function get_status_text( $check ) {
-		return $check ? esc_html__( 'Given', 'rank-math' ) : esc_html__( 'Not Given', 'rank-math' );
+		return $check ? esc_html__( 'Given', 'seo-by-rank-math' ) : esc_html__( 'Not Given', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -125,11 +125,11 @@ class Permissions {
 		?>
 		<p class="warning">
 			<strong class="warning">
-				<?php esc_html_e( 'Warning:', 'rank-math' ); ?>
+				<?php esc_html_e( 'Warning:', 'seo-by-rank-math' ); ?>
 			</strong>
 			<?php
 				/* translators: %s is the reconnect link. */
-				printf( wp_kses_post( __( 'You have not given the permission to fetch this data. Please <a href="%s">reconnect</a> with all required permissions.', 'rank-math' ) ), esc_url( wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ) ) );
+				printf( wp_kses_post( __( 'You have not given the permission to fetch this data. Please <a href="%s">reconnect</a> with all required permissions.', 'seo-by-rank-math' ) ), esc_url( wp_nonce_url( admin_url( 'admin.php?reconnect=google' ), 'rank_math_reconnect_google' ) ) );
 			?>
 		</p>
 		<?php

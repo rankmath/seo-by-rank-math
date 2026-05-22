@@ -88,7 +88,7 @@ class Front extends WP_REST_Controller {
 
 		return [
 			'code'    => 'site_disconnected',
-			'message' => esc_html__( 'Site disconnected successfully.', 'rank-math' ),
+			'message' => esc_html__( 'Site disconnected successfully.', 'seo-by-rank-math' ),
 		];
 	}
 
@@ -108,7 +108,7 @@ class Front extends WP_REST_Controller {
 			$resp->set_data(
 				[
 					'success'   => false,
-					'message'   => esc_html__( 'The current theme does not have "post-thumbnails" support.', 'rank-math' ),
+					'message'   => esc_html__( 'The current theme does not have "post-thumbnails" support.', 'seo-by-rank-math' ),
 					'featImgId' => 0,
 				]
 			);
@@ -129,7 +129,7 @@ class Front extends WP_REST_Controller {
 			$resp->set_data(
 				[
 					'success'   => false,
-					'message'   => esc_html__( 'Sorry, you don\'t have the required permissions to access this page.', 'rank-math' ),
+					'message'   => esc_html__( 'Sorry, you don\'t have the required permissions to access this page.', 'seo-by-rank-math' ),
 					'featImgId' => false,
 				]
 			);
@@ -142,7 +142,7 @@ class Front extends WP_REST_Controller {
 			$resp->set_data(
 				[
 					'success'   => false,
-					'message'   => esc_html__( 'The post could not be found.', 'rank-math' ),
+					'message'   => esc_html__( 'The post could not be found.', 'seo-by-rank-math' ),
 					'featImgId' => false,
 				]
 			);
@@ -169,7 +169,7 @@ class Front extends WP_REST_Controller {
 			'postId' => [
 				'type'              => 'integer',
 				'required'          => true,
-				'description'       => esc_html__( 'Post ID', 'rank-math' ),
+				'description'       => esc_html__( 'Post ID', 'seo-by-rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 		];
@@ -185,7 +185,7 @@ class Front extends WP_REST_Controller {
 			'token' => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Site token', 'rank-math' ),
+				'description'       => esc_html__( 'Site token', 'seo-by-rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 		];

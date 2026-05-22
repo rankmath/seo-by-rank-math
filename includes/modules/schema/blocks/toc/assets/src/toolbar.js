@@ -12,20 +12,20 @@ import { formatListBullets, formatListNumbered, alignLeft } from '@wordpress/ico
 export default ( { setAttributes } ) => {
 	return (
 		<BlockControls>
-			<Toolbar label={ __( 'Table of Content Options', 'rank-math' ) }>
+			<Toolbar label={ __( 'Table of Content Options', 'seo-by-rank-math' ) }>
 				<ToolbarButton
 					icon={ formatListBullets }
-					label={ __( 'Unordered List', 'rank-math' ) }
+					label={ __( 'Unordered List', 'seo-by-rank-math' ) }
 					onClick={ () => setAttributes( { listStyle: 'ul' } ) }
 				/>
 				<ToolbarButton
 					icon={ formatListNumbered }
-					label={ __( 'Ordered List', 'rank-math' ) }
+					label={ __( 'Ordered List', 'seo-by-rank-math' ) }
 					onClick={ () => setAttributes( { listStyle: 'ol' } ) }
 				/>
 				<ToolbarButton
 					icon={ alignLeft }
-					label={ __( 'None', 'rank-math' ) }
+					label={ __( 'None', 'seo-by-rank-math' ) }
 					onClick={ () => setAttributes( { listStyle: 'div' } ) }
 				/>
 			</Toolbar>

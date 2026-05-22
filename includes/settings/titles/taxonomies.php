@@ -33,9 +33,9 @@ $cmb->add_field(
 		'id'              => 'tax_' . $taxonomy_name . '_title',
 		'type'            => 'text',
 		/* translators: taxonomy name */
-		'name'            => sprintf( esc_html__( '%s Archive Titles', 'rank-math' ), $name ),
+		'name'            => sprintf( esc_html__( '%s Archive Titles', 'seo-by-rank-math' ), $name ),
 		/* translators: taxonomy name */
-		'desc'            => sprintf( esc_html__( 'Title tag for %s archives', 'rank-math' ), $name ),
+		'desc'            => sprintf( esc_html__( 'Title tag for %s archives', 'seo-by-rank-math' ), $name ),
 		'classes'         => 'rank-math-supports-variables rank-math-title',
 		'default'         => '%term% Archives %page% %sep% %sitename%',
 		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
@@ -48,9 +48,9 @@ $cmb->add_field(
 		'id'         => 'tax_' . $taxonomy_name . '_description',
 		'type'       => 'textarea_small',
 		/* translators: taxonomy name */
-		'name'       => sprintf( esc_html__( '%s Archive Descriptions', 'rank-math' ), $name ),
+		'name'       => sprintf( esc_html__( '%s Archive Descriptions', 'seo-by-rank-math' ), $name ),
 		/* translators: taxonomy name */
-		'desc'       => sprintf( esc_html__( 'Description for %s archives', 'rank-math' ), $name ),
+		'desc'       => sprintf( esc_html__( 'Description for %s archives', 'seo-by-rank-math' ), $name ),
 		'classes'    => 'rank-math-supports-variables rank-math-description',
 		'attributes' => [
 			'class'                  => 'cmb2-textarea-small wp-exclude-emoji',
@@ -67,12 +67,12 @@ $cmb->add_field(
 		'id'      => 'tax_' . $taxonomy_name . '_custom_robots',
 		'type'    => 'toggle',
 		/* translators: taxonomy name */
-		'name'    => sprintf( esc_html__( '%s Archives Robots Meta', 'rank-math' ), $name ),
+		'name'    => sprintf( esc_html__( '%s Archives Robots Meta', 'seo-by-rank-math' ), $name ),
 		/* translators: taxonomy name */
-		'desc'    => sprintf( wp_kses_post( __( 'Select custom robots meta, such as <code>nofollow</code>, <code>noarchive</code>, etc. for %s archive pages. Otherwise the default meta will be used, as set in the Global Meta tab.', 'rank-math' ) ), strtolower( $name ) ),
+		'desc'    => sprintf( wp_kses_post( __( 'Select custom robots meta, such as <code>nofollow</code>, <code>noarchive</code>, etc. for %s archive pages. Otherwise the default meta will be used, as set in the Global Meta tab.', 'seo-by-rank-math' ) ), strtolower( $name ) ),
 		'options' => [
-			'off' => esc_html__( 'Default', 'rank-math' ),
-			'on'  => esc_html__( 'Custom', 'rank-math' ),
+			'off' => esc_html__( 'Default', 'seo-by-rank-math' ),
+			'on'  => esc_html__( 'Custom', 'seo-by-rank-math' ),
 		],
 		'default' => $custom_default,
 		'classes' => 'rank-math-advanced-option',
@@ -84,9 +84,9 @@ $cmb->add_field(
 		'id'                => 'tax_' . $taxonomy_name . '_robots',
 		'type'              => 'multicheck',
 		/* translators: taxonomy name */
-		'name'              => sprintf( esc_html__( '%s Archives Robots Meta', 'rank-math' ), $name ),
+		'name'              => sprintf( esc_html__( '%s Archives Robots Meta', 'seo-by-rank-math' ), $name ),
 		/* translators: taxonomy name */
-		'desc'              => sprintf( esc_html__( 'Custom values for robots meta tag on %s archives.', 'rank-math' ), $name ),
+		'desc'              => sprintf( esc_html__( 'Custom values for robots meta tag on %s archives.', 'seo-by-rank-math' ), $name ),
 		'options'           => Helper::choices_robots(),
 		'select_all_button' => false,
 		'dep'               => [ [ 'tax_' . $taxonomy_name . '_custom_robots', 'on' ] ],
@@ -100,7 +100,7 @@ $cmb->add_field(
 		'id'              => 'tax_' . $taxonomy_name . '_advanced_robots',
 		'type'            => 'advanced_robots',
 		/* translators: taxonomy name */
-		'name'            => sprintf( esc_html__( '%s Archives Advanced Robots Meta', 'rank-math' ), $name ),
+		'name'            => sprintf( esc_html__( '%s Archives Advanced Robots Meta', 'seo-by-rank-math' ), $name ),
 		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_advanced_robots' ],
 		'dep'             => [ [ 'tax_' . $taxonomy_name . '_custom_robots', 'on' ] ],
 		'classes'         => 'rank-math-advanced-option',
@@ -111,8 +111,8 @@ $cmb->add_field(
 	[
 		'id'      => 'tax_' . $taxonomy_name . '_slack_enhanced_sharing',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Slack Enhanced Sharing', 'rank-math' ),
-		'desc'    => esc_html__( 'When the option is enabled and a term from this taxonomy is shared on Slack, additional information will be shown (the total number of items with this term).', 'rank-math' ),
+		'name'    => esc_html__( 'Slack Enhanced Sharing', 'seo-by-rank-math' ),
+		'desc'    => esc_html__( 'When the option is enabled and a term from this taxonomy is shared on Slack, additional information will be shown (the total number of items with this term).', 'seo-by-rank-math' ),
 		'default' => 'on',
 		'classes' => 'rank-math-advanced-option',
 	]
@@ -122,8 +122,8 @@ $cmb->add_field(
 	[
 		'id'      => 'tax_' . $taxonomy_name . '_add_meta_box',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Add SEO Controls', 'rank-math' ),
-		'desc'    => esc_html__( 'Add the SEO Controls for the term editor screen to customize SEO options for individual terms in this taxonomy.', 'rank-math' ),
+		'name'    => esc_html__( 'Add SEO Controls', 'seo-by-rank-math' ),
+		'desc'    => esc_html__( 'Add the SEO Controls for the term editor screen to customize SEO options for individual terms in this taxonomy.', 'seo-by-rank-math' ),
 		'default' => $metabox_default,
 		'classes' => 'rank-math-advanced-option',
 	]
@@ -133,9 +133,9 @@ $cmb->add_field(
 	[
 		'id'      => 'remove_' . $taxonomy_name . '_snippet_data',
 		'type'    => 'toggle',
-		'name'    => esc_html__( 'Remove Snippet Data', 'rank-math' ),
+		'name'    => esc_html__( 'Remove Snippet Data', 'seo-by-rank-math' ),
 		/* translators: taxonomy name */
-		'desc'    => sprintf( esc_html__( 'Remove schema data from %s.', 'rank-math' ), $name ),
+		'desc'    => sprintf( esc_html__( 'Remove schema data from %s.', 'seo-by-rank-math' ), $name ),
 		'default' => $remove_snippet_default,
 		'classes' => 'rank-math-advanced-option',
 	]

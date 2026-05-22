@@ -74,7 +74,7 @@ class Admin_Menu implements Runner {
 		// Dashboard / Welcome / About.
 		new Page(
 			'rank-math',
-			esc_html__( 'Rank Math', 'rank-math' ),
+			esc_html__( 'Rank Math', 'seo-by-rank-math' ),
 			[
 				'position'   => 50,
 				'menu_title' => 'Rank Math',
@@ -122,7 +122,7 @@ class Admin_Menu implements Runner {
 		global $menu;
 		foreach ( $menu as $key => $item ) {
 			if ( 'Rank Math' === $item[0] ) {
-				$menu[ $key ][0] = esc_html__( 'Rank Math SEO', 'rank-math' ); // phpcs:ignore -- This is required to change the menu name without changing its slug `rank-math`
+				$menu[ $key ][0] = esc_html__( 'Rank Math SEO', 'seo-by-rank-math' ); // phpcs:ignore -- This is required to change the menu name without changing its slug `rank-math`
 				break;
 			}
 		}
@@ -138,7 +138,7 @@ class Admin_Menu implements Runner {
 				$plan         = Helper::get_content_ai_plan();
 				$notification = ( empty( $plan ) || 'free' === $plan ) && get_option( 'rank_math_view_modules' ) ? ' <span class="awaiting-mod count-1"><span class="pending-count" aria-hidden="true">1</span></span>' : '';
 
-				$submenu['rank-math'][0][0] = esc_html__( 'Dashboard', 'rank-math' ) . $notification; // phpcs:ignore -- This is required to change the menu name when the plugin is not configured.
+				$submenu['rank-math'][0][0] = esc_html__( 'Dashboard', 'seo-by-rank-math' ) . $notification; // phpcs:ignore -- This is required to change the menu name when the plugin is not configured.
 			} else {
 				unset( $submenu['rank-math'][0] );
 			}
@@ -148,7 +148,7 @@ class Admin_Menu implements Runner {
 			return;
 		}
 
-		$submenu['rank-math'][] = [ esc_html__( 'Help &amp; Support', 'rank-math' ) . '<i class="dashicons dashicons-external" style="font-size:12px;vertical-align:-2px;height:10px;"></i>', 'manage_options', KB::get( 'knowledgebase', 'Sidebar Help Link' ) ]; // phpcs:ignore -- A custom link to our KB article.
+		$submenu['rank-math'][] = [ esc_html__( 'Help &amp; Support', 'seo-by-rank-math' ) . '<i class="dashicons dashicons-external" style="font-size:12px;vertical-align:-2px;height:10px;"></i>', 'manage_options', KB::get( 'knowledgebase', 'Sidebar Help Link' ) ]; // phpcs:ignore -- A custom link to our KB article.
 		$this->add_offer_link( $submenu );
 
 		// Store ID of first_menu item so we can use it in the Admin menu item.
@@ -263,32 +263,32 @@ class Admin_Menu implements Runner {
 			'halloween'    => [
 				'start' => '2025-10-29',
 				'end'   => '2025-11-05',
-				'text'  => esc_html__( 'Halloween Sale', 'rank-math' ),
+				'text'  => esc_html__( 'Halloween Sale', 'seo-by-rank-math' ),
 			],
 			'anniversary'  => [
 				'start' => '2025-11-05',
 				'end'   => '2025-11-12',
-				'text'  => esc_html__( 'Anniversary Sale', 'rank-math' ),
+				'text'  => esc_html__( 'Anniversary Sale', 'seo-by-rank-math' ),
 			],
 			'black-friday' => [
 				'start' => '2025-11-12',
 				'end'   => '2025-11-29',
-				'text'  => esc_html__( 'Black Friday Sale', 'rank-math' ),
+				'text'  => esc_html__( 'Black Friday Sale', 'seo-by-rank-math' ),
 			],
 			'cyber-monday' => [
 				'start' => '2025-11-29',
 				'end'   => '2025-12-03',
-				'text'  => esc_html__( 'Cyber Monday Sale', 'rank-math' ),
+				'text'  => esc_html__( 'Cyber Monday Sale', 'seo-by-rank-math' ),
 			],
 			'christmas'    => [
 				'start' => '2025-12-24',
 				'end'   => '2025-12-31',
-				'text'  => esc_html__( 'Christmas Sale', 'rank-math' ),
+				'text'  => esc_html__( 'Christmas Sale', 'seo-by-rank-math' ),
 			],
 			'new-year'     => [
 				'start' => '2025-12-31',
 				'end'   => '2026-01-07',
-				'text'  => esc_html__( 'New Year Sale', 'rank-math' ),
+				'text'  => esc_html__( 'New Year Sale', 'seo-by-rank-math' ),
 			],
 		];
 

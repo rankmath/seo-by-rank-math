@@ -119,13 +119,13 @@ class Registration {
 	private function get_registration_url( $status ) {
 		if ( 'cancel' === $status ) {
 			// User canceled activation.
-			Helper::add_notification( __( 'Rank Math plugin could not be connected.', 'rank-math' ), [ 'type' => 'error' ] );
+			Helper::add_notification( __( 'Rank Math plugin could not be connected.', 'seo-by-rank-math' ), [ 'type' => 'error' ] );
 			return Security::remove_query_arg_raw( [ 'rankmath_connect', 'rankmath_auth' ] );
 		}
 
 		if ( 'banned' === $status ) {
 			// User or site banned.
-			Helper::add_notification( __( 'Unable to connect Rank Math.', 'rank-math' ), [ 'type' => 'error' ] );
+			Helper::add_notification( __( 'Unable to connect Rank Math.', 'seo-by-rank-math' ), [ 'type' => 'error' ] );
 			return Security::remove_query_arg_raw( [ 'rankmath_connect', 'rankmath_auth' ] );
 		}
 
@@ -208,8 +208,8 @@ class Registration {
 	 */
 	public function admin_menu() {
 		add_menu_page(
-			esc_html__( 'Rank Math', 'rank-math' ),
-			esc_html__( 'Rank Math SEO', 'rank-math' ),
+			esc_html__( 'Rank Math', 'seo-by-rank-math' ),
+			esc_html__( 'Rank Math SEO', 'seo-by-rank-math' ),
 			'manage_options',
 			$this->slug,
 			[ $this, 'render_page' ]

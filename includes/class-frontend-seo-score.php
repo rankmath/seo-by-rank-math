@@ -161,7 +161,7 @@ class Frontend_SEO_Score {
 							echo wp_kses_post(
 								sprintf(
 									/* translators: %s is a Rank Math link. */
-									__( 'Powered by %s', 'rank-math' ),
+									__( 'Powered by %s', 'seo-by-rank-math' ),
 									$this->do_filter( 'frontend/seo_score/backlink', $backlink )
 								)
 							);
@@ -171,7 +171,7 @@ class Frontend_SEO_Score {
 				<?php endif; ?>
 
 				<span class="label">
-					<?php echo esc_html__( 'SEO Score', 'rank-math' ); ?>
+					<?php echo esc_html__( 'SEO Score', 'seo-by-rank-math' ); ?>
 				</span>
 
 			</div>

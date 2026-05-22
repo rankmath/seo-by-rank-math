@@ -27,7 +27,7 @@ export default ( {
 			controllers.push(
 				<TextControl
 					key={ slug }
-					label={ __( startCase( slug ), 'rank-math' ) }
+					label={ __( startCase( slug ), 'seo-by-rank-math' ) }
 					value={ attributes[ slug ] }
 					type="number"
 					min={ 1 }
@@ -48,7 +48,7 @@ export default ( {
 			controllers.push(
 				<TextControl
 					key={ slug }
-					label={ __( startCase( slug ), 'rank-math' ) }
+					label={ __( startCase( slug ), 'seo-by-rank-math' ) }
 					value={ attributes[ slug ] }
 					type="string"
 					onChange={ ( nextID ) => {
@@ -66,7 +66,7 @@ export default ( {
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
-				<PanelBody title={ __( 'Settings', 'rank-math' ) }>
+				<PanelBody title={ __( 'Settings', 'seo-by-rank-math' ) }>
 					{ controllers }
 				</PanelBody>
 			</InspectorControls>

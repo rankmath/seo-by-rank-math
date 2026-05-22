@@ -249,31 +249,31 @@ class Shared extends WP_REST_Controller {
 			'objectID'        => [
 				'type'              => 'integer',
 				'required'          => true,
-				'description'       => esc_html__( 'Object unique id', 'rank-math' ),
+				'description'       => esc_html__( 'Object unique id', 'seo-by-rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 			'objectType'      => [
 				'type'              => 'string',
 				'default'           => 'post',
 				'required'          => true,
-				'description'       => esc_html__( 'Object Type i.e. post, term, user', 'rank-math' ),
+				'description'       => esc_html__( 'Object Type i.e. post, term, user', 'seo-by-rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_valid_string' ],
 			],
 			'hasRedirect'     => [
 				'type'        => 'boolean',
 				'required'    => true,
-				'description' => esc_html__( 'Whether the object has a redirect or not', 'rank-math' ),
+				'description' => esc_html__( 'Whether the object has a redirect or not', 'seo-by-rank-math' ),
 			],
 			'redirectionID'   => [
 				'type'        => 'string',
 				'required'    => false,
-				'description' => esc_html__( 'Redirection ID', 'rank-math' ),
+				'description' => esc_html__( 'Redirection ID', 'seo-by-rank-math' ),
 			],
 			'redirectionUrl'  => [
 				'type'              => 'string',
 				'required'          => false,
-				'description'       => esc_html__( 'Redirection URL', 'rank-math' ),
+				'description'       => esc_html__( 'Redirection URL', 'seo-by-rank-math' ),
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => function ( $param, $request ) {
 					$redirection_type = $request->get_param( 'redirectionType' );
@@ -288,7 +288,7 @@ class Shared extends WP_REST_Controller {
 				'type'              => 'string',
 				'default'           => '301',
 				'required'          => true,
-				'description'       => esc_html__( 'Redirection Type', 'rank-math' ),
+				'description'       => esc_html__( 'Redirection Type', 'seo-by-rank-math' ),
 				'enum'              => [ '301', '302', '307', '410', '451' ],
 				'sanitize_callback' => 'rest_sanitize_request_arg',
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_valid_string' ],
@@ -306,18 +306,18 @@ class Shared extends WP_REST_Controller {
 			'objectType' => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Object Type i.e. post, term, user', 'rank-math' ),
+				'description'       => esc_html__( 'Object Type i.e. post, term, user', 'seo-by-rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 			'objectID'   => [
 				'type'              => 'integer',
 				'required'          => true,
-				'description'       => esc_html__( 'Object unique id', 'rank-math' ),
+				'description'       => esc_html__( 'Object unique id', 'seo-by-rank-math' ),
 				'validate_callback' => function ( $param ) {
 					if ( empty( $param ) && 0 !== $param ) {
 						return new WP_Error(
 							'param_value_empty',
-							esc_html__( 'Sorry, field is empty which is not allowed.', 'rank-math' )
+							esc_html__( 'Sorry, field is empty which is not allowed.', 'seo-by-rank-math' )
 						);
 					}
 
@@ -326,7 +326,7 @@ class Shared extends WP_REST_Controller {
 			],
 			'meta'       => [
 				'required'          => true,
-				'description'       => esc_html__( 'Meta to add or update data.', 'rank-math' ),
+				'description'       => esc_html__( 'Meta to add or update data.', 'seo-by-rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 		];
@@ -398,18 +398,18 @@ class Shared extends WP_REST_Controller {
 			'objectType' => [
 				'type'              => 'string',
 				'required'          => true,
-				'description'       => esc_html__( 'Object Type i.e. post, term, user', 'rank-math' ),
+				'description'       => esc_html__( 'Object Type i.e. post, term, user', 'seo-by-rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 			'objectID'   => [
 				'type'              => 'integer',
 				'required'          => true,
-				'description'       => esc_html__( 'Object unique id', 'rank-math' ),
+				'description'       => esc_html__( 'Object unique id', 'seo-by-rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 			'schemas'    => [
 				'required'          => true,
-				'description'       => esc_html__( 'schemas to add or update data.', 'rank-math' ),
+				'description'       => esc_html__( 'schemas to add or update data.', 'seo-by-rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 		];

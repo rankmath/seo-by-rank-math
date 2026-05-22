@@ -21,7 +21,7 @@ if ( 'attachment' === $current_post_type && Helper::get_settings( 'general.attac
 			'type'    => 'notice',
 			'what'    => 'warning',
 			/* translators: The settings page link */
-			'content' => sprintf( __( 'To configure meta tags for your media attachment pages, you need to first %s to parent.', 'rank-math' ), '<a href="' . esc_url( Helper::get_settings_url( 'general', 'links' ) ) . '">' . esc_html__( 'disable redirect attachments', 'rank-math' ) . '</a>' ),
+			'content' => sprintf( __( 'To configure meta tags for your media attachment pages, you need to first %s to parent.', 'seo-by-rank-math' ), '<a href="' . esc_url( Helper::get_settings_url( 'general', 'links' ) ) . '">' . esc_html__( 'disable redirect attachments', 'seo-by-rank-math' ) . '</a>' ),
 		]
 	);
 	$attributes['disabled'] = 'disabled';
@@ -31,8 +31,8 @@ $cmb->add_field(
 	[
 		'id'         => $prefix . 'sitemap',
 		'type'       => 'toggle',
-		'name'       => esc_html__( 'Include in Sitemap', 'rank-math' ),
-		'desc'       => esc_html__( 'Include this post type in the XML sitemap.', 'rank-math' ),
+		'name'       => esc_html__( 'Include in Sitemap', 'seo-by-rank-math' ),
+		'desc'       => esc_html__( 'Include this post type in the XML sitemap.', 'seo-by-rank-math' ),
 		'default'    => 'attachment' === $current_post_type ? 'off' : 'on',
 		'attributes' => $attributes,
 	]
@@ -42,8 +42,8 @@ $cmb->add_field(
 	[
 		'id'         => $prefix . 'html_sitemap',
 		'type'       => 'toggle',
-		'name'       => esc_html__( 'Include in HTML Sitemap', 'rank-math' ),
-		'desc'       => esc_html__( 'Include this post type in the HTML sitemap if it\'s enabled.', 'rank-math' ),
+		'name'       => esc_html__( 'Include in HTML Sitemap', 'seo-by-rank-math' ),
+		'desc'       => esc_html__( 'Include this post type in the HTML sitemap if it\'s enabled.', 'seo-by-rank-math' ),
 		'default'    => 'attachment' === $current_post_type ? 'off' : 'on',
 		'attributes' => $attributes,
 		'classes'    => [
@@ -58,8 +58,8 @@ if ( 'attachment' !== $current_post_type ) {
 		[
 			'id'      => $prefix . 'image_customfields',
 			'type'    => 'textarea_small',
-			'name'    => esc_html__( 'Image Custom Fields', 'rank-math' ),
-			'desc'    => esc_html__( 'Insert custom field (post meta) names which contain image URLs to include them in the sitemaps. Add one per line.', 'rank-math' ),
+			'name'    => esc_html__( 'Image Custom Fields', 'seo-by-rank-math' ),
+			'desc'    => esc_html__( 'Insert custom field (post meta) names which contain image URLs to include them in the sitemaps. Add one per line.', 'seo-by-rank-math' ),
 			'dep'     => [ [ $prefix . 'sitemap', 'on' ] ],
 			'classes' => 'rank-math-advanced-option',
 		]

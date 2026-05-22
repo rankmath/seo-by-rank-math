@@ -105,8 +105,8 @@ class BuddyPress {
 		rank_math_register_var_replacement(
 			'group_name',
 			[
-				'name'        => esc_html__( 'Group name.', 'rank-math' ),
-				'description' => esc_html__( 'Group name of the current group', 'rank-math' ),
+				'name'        => esc_html__( 'Group name.', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Group name of the current group', 'seo-by-rank-math' ),
 				'variable'    => 'group_name',
 				'example'     => $this->get_group_name(),
 			],
@@ -116,8 +116,8 @@ class BuddyPress {
 		rank_math_register_var_replacement(
 			'group_desc',
 			[
-				'name'        => esc_html__( 'Group Description.', 'rank-math' ),
-				'description' => esc_html__( 'Group description of the current group', 'rank-math' ),
+				'name'        => esc_html__( 'Group Description.', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Group description of the current group', 'seo-by-rank-math' ),
 				'variable'    => 'group_desc',
 				'example'     => $this->get_group_desc(),
 			],

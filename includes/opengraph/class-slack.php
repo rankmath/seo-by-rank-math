@@ -191,8 +191,8 @@ class Slack extends OpenGraph {
 		$data    = [];
 		$product = \wc_get_product( $post );
 
-		$data[ __( 'Price', 'rank-math' ) ]        = $this->get_product_price( $product );
-		$data[ __( 'Availability', 'rank-math' ) ] = $this->get_product_availability( $product );
+		$data[ __( 'Price', 'seo-by-rank-math' ) ]        = $this->get_product_price( $product );
+		$data[ __( 'Availability', 'seo-by-rank-math' ) ] = $this->get_product_availability( $product );
 
 		return $data;
 	}
@@ -205,8 +205,8 @@ class Slack extends OpenGraph {
 	private function get_edd_product_data() {
 		global $post;
 
-		$data                               = [];
-		$data[ __( 'Price', 'rank-math' ) ] = wp_strip_all_tags( \edd_price( $post->ID, false ) );
+		$data                                      = [];
+		$data[ __( 'Price', 'seo-by-rank-math' ) ] = wp_strip_all_tags( \edd_price( $post->ID, false ) );
 
 		return $data;
 	}
@@ -224,7 +224,7 @@ class Slack extends OpenGraph {
 		$availability_text = isset( $product_availability['availability'] ) ? $product_availability['availability'] : '';
 
 		if ( ! $availability_text ) {
-			return __( 'In stock', 'rank-math' );
+			return __( 'In stock', 'seo-by-rank-math' );
 		}
 
 		return $availability_text;
@@ -263,8 +263,8 @@ class Slack extends OpenGraph {
 
 		$data = [];
 
-		$data[ __( 'Written by', 'rank-math' ) ]   = get_the_author();
-		$data[ __( 'Time to read', 'rank-math' ) ] = $this->calculate_time_to_read( $post );
+		$data[ __( 'Written by', 'seo-by-rank-math' ) ]   = get_the_author();
+		$data[ __( 'Time to read', 'seo-by-rank-math' ) ] = $this->calculate_time_to_read( $post );
 
 		return $data;
 	}
@@ -277,8 +277,8 @@ class Slack extends OpenGraph {
 	private function get_page_data() {
 		global $post;
 
-		$data                                      = [];
-		$data[ __( 'Time to read', 'rank-math' ) ] = $this->calculate_time_to_read( $post );
+		$data = [];
+		$data[ __( 'Time to read', 'seo-by-rank-math' ) ] = $this->calculate_time_to_read( $post );
 
 		return $data;
 	}
@@ -312,12 +312,12 @@ class Slack extends OpenGraph {
 		if ( $minutes > 0 ) {
 			return sprintf(
 				/* translators: %d: minutes */
-				_n( '%d minute', '%d minutes', $minutes, 'rank-math' ),
+				_n( '%d minute', '%d minutes', $minutes, 'seo-by-rank-math' ),
 				$minutes
 			);
 		}
 
-		return __( 'Less than a minute', 'rank-math' );
+		return __( 'Less than a minute', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -335,7 +335,7 @@ class Slack extends OpenGraph {
 			return $data;
 		}
 
-		$label            = __( 'Items', 'rank-math' );
+		$label            = __( 'Items', 'seo-by-rank-math' );
 		$post_type_object = get_post_type_object( get_post_type() );
 		if ( is_object( $post_type_object ) && isset( $post_type_object->labels->name ) ) {
 			$label = $post_type_object->labels->name;
@@ -367,8 +367,8 @@ class Slack extends OpenGraph {
 			return $data;
 		}
 
-		$data[ __( 'Name', 'rank-math' ) ]  = $author->display_name;
-		$data[ __( 'Posts', 'rank-math' ) ] = count_user_posts( $author->ID );
+		$data[ __( 'Name', 'seo-by-rank-math' ) ]  = $author->display_name;
+		$data[ __( 'Posts', 'seo-by-rank-math' ) ] = count_user_posts( $author->ID );
 
 		return $data;
 	}

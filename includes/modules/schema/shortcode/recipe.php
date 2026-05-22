@@ -17,77 +17,77 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Type', 'rank-math' ),
+		esc_html__( 'Type', 'seo-by-rank-math' ),
 		'recipeCategory'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Cuisine', 'rank-math' ),
+		esc_html__( 'Cuisine', 'seo-by-rank-math' ),
 		'recipeCuisine'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Keywords', 'rank-math' ),
+		esc_html__( 'Keywords', 'seo-by-rank-math' ),
 		'keywords'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Recipe Yield', 'rank-math' ),
+		esc_html__( 'Recipe Yield', 'seo-by-rank-math' ),
 		'recipeYield'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Calories', 'rank-math' ),
+		esc_html__( 'Calories', 'seo-by-rank-math' ),
 		'nutrition.calories'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Preparation Time', 'rank-math' ),
+		esc_html__( 'Preparation Time', 'seo-by-rank-math' ),
 		'prepTime'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Cooking Time', 'rank-math' ),
+		esc_html__( 'Cooking Time', 'seo-by-rank-math' ),
 		'cookTime'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Total Time', 'rank-math' ),
+		esc_html__( 'Total Time', 'seo-by-rank-math' ),
 		'totalTime'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Recipe Video Name', 'rank-math' ),
+		esc_html__( 'Recipe Video Name', 'seo-by-rank-math' ),
 		'video.name'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Recipe Video Description', 'rank-math' ),
+		esc_html__( 'Recipe Video Description', 'seo-by-rank-math' ),
 		'video.description'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Recipe Video Thumbnail', 'rank-math' ),
+		esc_html__( 'Recipe Video Thumbnail', 'seo-by-rank-math' ),
 		'video.thumbnailUrl'
 	);
 	?>
@@ -106,7 +106,7 @@ $this->get_image();
 	<?php
 	$ingredient = $this->get_field_value( 'recipeIngredient' );
 	$this->output_field(
-		esc_html__( 'Recipe Ingredients', 'rank-math' ),
+		esc_html__( 'Recipe Ingredients', 'seo-by-rank-math' ),
 		'<ul><li>' . join( '</li><li>', $ingredient ) . '</li></ul>'
 	);
 	?>
@@ -115,7 +115,7 @@ $this->get_image();
 	$instructions = $this->get_field_value( 'recipeInstructions' );
 	if ( is_string( $instructions ) ) {
 		$this->get_field(
-			esc_html__( 'Recipe Instructions', 'rank-math' ),
+			esc_html__( 'Recipe Instructions', 'seo-by-rank-math' ),
 			'recipeInstructions'
 		);
 	} else {
@@ -123,7 +123,7 @@ $this->get_image();
 		if ( isset( $instructions[0]['@type'] ) && 'HowtoStep' === $instructions[0]['@type'] ) {
 			$instructions = wp_list_pluck( $instructions, 'text' );
 			$this->output_field(
-				esc_html__( 'Recipe Instructions', 'rank-math' ),
+				esc_html__( 'Recipe Instructions', 'seo-by-rank-math' ),
 				'<ul><li>' . join( '</li><li>', $instructions ) . '</li></ul>'
 			);
 		}
@@ -131,7 +131,7 @@ $this->get_image();
 		// Single HowToSection data.
 		if ( ! empty( $instructions['itemListElement'] ) ) {
 			$this->output_field(
-				esc_html__( 'Recipe Instructions', 'rank-math' ),
+				esc_html__( 'Recipe Instructions', 'seo-by-rank-math' ),
 				''
 			);
 
@@ -144,7 +144,7 @@ $this->get_image();
 		// Multiple HowToSection data.
 		if ( isset( $instructions[0]['@type'] ) && 'HowToSection' === $instructions[0]['@type'] ) {
 			$this->output_field(
-				esc_html__( 'Recipe Instructions', 'rank-math' ),
+				esc_html__( 'Recipe Instructions', 'seo-by-rank-math' ),
 				''
 			);
 

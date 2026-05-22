@@ -221,7 +221,7 @@ class DB {
 			Helper::add_notification(
 				sprintf(
 					// translators: %1$s is the error message, %2$s is the table name.
-					__( 'Rank Math SEO: Getting error "%1$s" while creating table <code>%2$s</code>. Please contact your server administrator to fix this issue.', 'rank-math' ),
+					__( 'Rank Math SEO: Getting error "%1$s" while creating table <code>%2$s</code>. Please contact your server administrator to fix this issue.', 'seo-by-rank-math' ),
 					$wpdb->last_error,
 					$table
 				),

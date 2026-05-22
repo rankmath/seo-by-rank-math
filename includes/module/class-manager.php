@@ -104,8 +104,8 @@ class Manager {
 	 */
 	public function setup_core( $modules ) {
 		$modules['404-monitor'] = [
-			'title'       => esc_html__( '404 Monitor', 'rank-math' ),
-			'desc'        => esc_html__( 'Records the URLs on which visitors & search engines run into 404 Errors. You can also turn on Redirections to redirect the error causing URLs to other URLs.', 'rank-math' ),
+			'title'       => esc_html__( '404 Monitor', 'seo-by-rank-math' ),
+			'desc'        => esc_html__( 'Records the URLs on which visitors & search engines run into 404 Errors. You can also turn on Redirections to redirect the error causing URLs to other URLs.', 'seo-by-rank-math' ),
 			'class'       => 'RankMath\Monitor\Monitor',
 			'icon'        => '404',
 			'upgradeable' => true,
@@ -113,8 +113,8 @@ class Manager {
 		];
 
 		$modules['local-seo'] = [
-			'title'       => esc_html__( 'Local SEO', 'rank-math' ),
-			'desc'        => esc_html__( 'Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to acquire the Knowledge Graph.', 'rank-math' ),
+			'title'       => esc_html__( 'Local SEO', 'seo-by-rank-math' ),
+			'desc'        => esc_html__( 'Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to acquire the Knowledge Graph.', 'seo-by-rank-math' ),
 			'class'       => 'RankMath\Local_Seo\Local_Seo',
 			'icon'        => 'local-seo',
 			'upgradeable' => true,
@@ -122,8 +122,8 @@ class Manager {
 		];
 
 		$modules['redirections'] = [
-			'title'       => esc_html__( 'Redirections', 'rank-math' ),
-			'desc'        => esc_html__( 'Redirect non-existent content easily with 301 and 302 status code. This can help improve your site ranking. Also supports many other response codes.', 'rank-math' ),
+			'title'       => esc_html__( 'Redirections', 'seo-by-rank-math' ),
+			'desc'        => esc_html__( 'Redirect non-existent content easily with 301 and 302 status code. This can help improve your site ranking. Also supports many other response codes.', 'seo-by-rank-math' ),
 			'class'       => 'RankMath\Redirections\Redirections',
 			'icon'        => 'redirection',
 			'upgradeable' => true,
@@ -131,8 +131,8 @@ class Manager {
 		];
 
 		$modules['rich-snippet'] = [
-			'title'       => esc_html__( 'Schema (Structured Data)', 'rank-math' ),
-			'desc'        => esc_html__( 'Enable support for the structured data, which adds Schema code in your website, resulting in rich search results, better CTR and more traffic.', 'rank-math' ),
+			'title'       => esc_html__( 'Schema (Structured Data)', 'seo-by-rank-math' ),
+			'desc'        => esc_html__( 'Enable support for the structured data, which adds Schema code in your website, resulting in rich search results, better CTR and more traffic.', 'seo-by-rank-math' ),
 			'class'       => 'RankMath\Schema\Schema',
 			'icon'        => 'schema',
 			'upgradeable' => true,
@@ -140,32 +140,32 @@ class Manager {
 		];
 
 		$modules['sitemap'] = [
-			'title'    => esc_html__( 'Sitemap', 'rank-math' ),
-			'desc'     => esc_html__( 'Enable Rank Math\'s sitemap feature, which helps search engines intelligently crawl your website\'s content. It also supports hreflang tag.', 'rank-math' ),
+			'title'    => esc_html__( 'Sitemap', 'seo-by-rank-math' ),
+			'desc'     => esc_html__( 'Enable Rank Math\'s sitemap feature, which helps search engines intelligently crawl your website\'s content. It also supports hreflang tag.', 'seo-by-rank-math' ),
 			'class'    => 'RankMath\Sitemap\Sitemap',
 			'icon'     => 'sitemap',
 			'settings' => Helper::get_admin_url( 'options-sitemap' ),
 		];
 
 		$modules['link-counter'] = [
-			'title' => esc_html__( 'Link Counter', 'rank-math' ),
-			'desc'  => esc_html__( 'Counts the total number of internal, external links, to and from links inside your posts. You can also see the same count in the Posts List Page.', 'rank-math' ),
+			'title' => esc_html__( 'Link Counter', 'seo-by-rank-math' ),
+			'desc'  => esc_html__( 'Counts the total number of internal, external links, to and from links inside your posts. You can also see the same count in the Posts List Page.', 'seo-by-rank-math' ),
 			'class' => 'RankMath\Links\Links',
 			'icon'  => 'link',
 		];
 
 		$modules['link-genius'] = [
-			'title'         => esc_html__( 'Link Genius', 'rank-math' ),
-			'desc'          => esc_html__( 'An advanced internal linking tool that analyzes your posts, tracks link data, highlights opportunities, and offers detailed report.', 'rank-math' ),
+			'title'         => esc_html__( 'Link Genius', 'seo-by-rank-math' ),
+			'desc'          => esc_html__( 'An advanced internal linking tool that analyzes your posts, tracks link data, highlights opportunities, and offers detailed report.', 'seo-by-rank-math' ),
 			'icon'          => 'link',
 			'probadge'      => true,
 			'disabled'      => true,
-			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'rank-math' ),
+			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'seo-by-rank-math' ),
 		];
 
 		$modules['image-seo'] = [
-			'title'       => esc_html__( 'Image SEO', 'rank-math' ),
-			'desc'        => esc_html__( 'Advanced Image SEO options to supercharge your website. Automate the task of adding the ALT and Title tags to your images on the fly.', 'rank-math' ),
+			'title'       => esc_html__( 'Image SEO', 'seo-by-rank-math' ),
+			'desc'        => esc_html__( 'Advanced Image SEO options to supercharge your website. Automate the task of adding the ALT and Title tags to your images on the fly.', 'seo-by-rank-math' ),
 			'class'       => 'RankMath\Image_Seo\Image_Seo',
 			'icon'        => 'images',
 			'upgradeable' => true,
@@ -173,17 +173,17 @@ class Manager {
 		];
 
 		$modules['instant-indexing'] = [
-			'title'    => esc_html__( 'Instant Indexing', 'rank-math' ),
+			'title'    => esc_html__( 'Instant Indexing', 'seo-by-rank-math' ),
 			// Translators: placeholder is "IndexNow API".
-			'desc'     => sprintf( esc_html__( 'Directly notify search engines like Bing & Yandex using the %s when pages are added, updated and removed, or submit URLs manually.', 'rank-math' ), '<a href="' . KB::get( 'instant-indexing', 'Instant Indexing Module Description' ) . '" target="_blank">' . __( 'IndexNow API', 'rank-math' ) . '</a>' ),
+			'desc'     => sprintf( esc_html__( 'Directly notify search engines like Bing & Yandex using the %s when pages are added, updated and removed, or submit URLs manually.', 'seo-by-rank-math' ), '<a href="' . KB::get( 'instant-indexing', 'Instant Indexing Module Description' ) . '" target="_blank">' . __( 'IndexNow API', 'seo-by-rank-math' ) . '</a>' ),
 			'class'    => 'RankMath\Instant_Indexing\Instant_Indexing',
 			'icon'     => 'instant-indexing',
 			'settings' => Helper::get_admin_url( 'options-instant-indexing' ),
 		];
 
 		$modules['content-ai'] = [
-			'title'       => esc_html__( 'Content AI', 'rank-math' ),
-			'desc'        => esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. Supports 80+ Countries.', 'rank-math' ),
+			'title'       => esc_html__( 'Content AI', 'seo-by-rank-math' ),
+			'desc'        => esc_html__( 'Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. Supports 80+ Countries.', 'seo-by-rank-math' ),
 			'class'       => 'RankMath\ContentAI\Content_AI',
 			'icon'        => 'content-ai',
 			'upgradeable' => true,
@@ -192,38 +192,38 @@ class Manager {
 		];
 
 		$modules['llms-txt'] = [
-			'title'    => esc_html__( 'LLMS Txt', 'rank-math' ),
-			'desc'     => esc_html__( 'Serve a custom llms.txt file to guide AI models with posts, terms, and most important content on your website.', 'rank-math' ),
+			'title'    => esc_html__( 'LLMS Txt', 'seo-by-rank-math' ),
+			'desc'     => esc_html__( 'Serve a custom llms.txt file to guide AI models with posts, terms, and most important content on your website.', 'seo-by-rank-math' ),
 			'class'    => 'RankMath\\LLMS\\LLMS_Txt',
 			'icon'     => 'bot',
 			'settings' => Helper::get_settings_url( 'general', 'llms' ),
 		];
 
 		$modules['news-sitemap'] = [
-			'title'         => esc_html__( 'News Sitemap', 'rank-math' ),
-			'desc'          => esc_html__( 'Create a News Sitemap for your news-related content. You only need a News sitemap if you plan on posting news-related content on your website.', 'rank-math' ),
+			'title'         => esc_html__( 'News Sitemap', 'seo-by-rank-math' ),
+			'desc'          => esc_html__( 'Create a News Sitemap for your news-related content. You only need a News sitemap if you plan on posting news-related content on your website.', 'seo-by-rank-math' ),
 			'icon'          => 'post',
 			'probadge'      => true,
 			'disabled'      => true,
-			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'rank-math' ),
+			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'seo-by-rank-math' ),
 		];
 
 		$modules['video-sitemap'] = [
-			'title'         => esc_html__( 'Video Sitemap', 'rank-math' ),
-			'desc'          => esc_html__( 'For your video content, a Video Sitemap is a recommended step for better rankings and inclusion in the Video search.', 'rank-math' ),
+			'title'         => esc_html__( 'Video Sitemap', 'seo-by-rank-math' ),
+			'desc'          => esc_html__( 'For your video content, a Video Sitemap is a recommended step for better rankings and inclusion in the Video search.', 'seo-by-rank-math' ),
 			'icon'          => 'video',
 			'probadge'      => true,
 			'disabled'      => true,
-			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'rank-math' ),
+			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'seo-by-rank-math' ),
 		];
 
 		$modules['podcast'] = [
-			'title'         => esc_html__( 'Podcast', 'rank-math' ),
-			'desc'          => esc_html__( 'Make your podcasts discoverable via Google Podcasts, Apple Podcasts, and similar services with Podcast RSS feed and Schema Markup generated by Rank Math.', 'rank-math' ),
+			'title'         => esc_html__( 'Podcast', 'seo-by-rank-math' ),
+			'desc'          => esc_html__( 'Make your podcasts discoverable via Google Podcasts, Apple Podcasts, and similar services with Podcast RSS feed and Schema Markup generated by Rank Math.', 'seo-by-rank-math' ),
 			'icon'          => 'podcast',
 			'probadge'      => true,
 			'disabled'      => true,
-			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'rank-math' ),
+			'disabled_text' => esc_html__( 'This module is available in the PRO version.', 'seo-by-rank-math' ),
 		];
 
 		return $modules;
@@ -239,8 +239,8 @@ class Manager {
 	public function setup_admin_only( $modules ) {
 
 		$modules['role-manager'] = [
-			'title'    => esc_html__( 'Role Manager', 'rank-math' ),
-			'desc'     => esc_html__( 'The Role Manager allows you to use WordPress roles to control which of your site users can have edit or view access to Rank Math\'s settings.', 'rank-math' ),
+			'title'    => esc_html__( 'Role Manager', 'seo-by-rank-math' ),
+			'desc'     => esc_html__( 'The Role Manager allows you to use WordPress roles to control which of your site users can have edit or view access to Rank Math\'s settings.', 'seo-by-rank-math' ),
 			'class'    => 'RankMath\Role_Manager\Role_Manager',
 			'icon'     => 'role-manager',
 			'only'     => 'admin',
@@ -248,8 +248,8 @@ class Manager {
 		];
 
 		$modules['analytics'] = [
-			'title'       => esc_html__( 'Analytics', 'rank-math' ),
-			'desc'        => esc_html__( 'Connect Rank Math with Google Search Console to see the most important information from Google directly in your WordPress dashboard.', 'rank-math' ),
+			'title'       => esc_html__( 'Analytics', 'seo-by-rank-math' ),
+			'desc'        => esc_html__( 'Connect Rank Math with Google Search Console to see the most important information from Google directly in your WordPress dashboard.', 'seo-by-rank-math' ),
 			'class'       => 'RankMath\Analytics\Analytics',
 			'icon'        => 'search-console',
 			'only'        => 'admin',
@@ -258,8 +258,8 @@ class Manager {
 		];
 
 		$modules['seo-analysis'] = [
-			'title'       => esc_html__( 'SEO Analyzer', 'rank-math' ),
-			'desc'        => esc_html__( 'Let Rank Math analyze your website and your website\'s content using 28+ different tests to provide tailor-made SEO Analysis to you.', 'rank-math' ),
+			'title'       => esc_html__( 'SEO Analyzer', 'seo-by-rank-math' ),
+			'desc'        => esc_html__( 'Let Rank Math analyze your website and your website\'s content using 28+ different tests to provide tailor-made SEO Analysis to you.', 'seo-by-rank-math' ),
 			'class'       => 'RankMath\SEO_Analysis\SEO_Analysis',
 			'icon'        => 'analyzer',
 			'only'        => 'admin',
@@ -280,25 +280,25 @@ class Manager {
 	public function setup_internals( $modules ) {
 
 		$modules['robots-txt'] = [
-			'title' => esc_html__( 'Robots Txt', 'rank-math' ),
+			'title' => esc_html__( 'Robots Txt', 'seo-by-rank-math' ),
 			'only'  => 'internal',
 			'class' => 'RankMath\Robots_Txt',
 		];
 
 		$modules['version-control'] = [
-			'title' => esc_html__( 'Version Control', 'rank-math' ),
+			'title' => esc_html__( 'Version Control', 'seo-by-rank-math' ),
 			'only'  => 'internal',
 			'class' => 'RankMath\Version_Control',
 		];
 
 		$modules['database-tools'] = [
-			'title' => esc_html__( 'Database Tools', 'rank-math' ),
+			'title' => esc_html__( 'Database Tools', 'seo-by-rank-math' ),
 			'only'  => 'internal',
 			'class' => 'RankMath\Tools\Database_Tools',
 		];
 
 		$modules['status'] = [
-			'title' => esc_html__( 'Status', 'rank-math' ),
+			'title' => esc_html__( 'Status', 'seo-by-rank-math' ),
 			'only'  => 'internal',
 			'class' => 'RankMath\Status\Status',
 		];
@@ -316,62 +316,62 @@ class Manager {
 	public function setup_3rd_party( $modules ) {
 
 		$modules['amp'] = [
-			'title' => esc_html__( 'AMP', 'rank-math' ),
+			'title' => esc_html__( 'AMP', 'seo-by-rank-math' ),
 			'desc'  => sprintf(
 				/* translators: Link to AMP plugin */
-				esc_html__( 'Install %s to make Rank Math work with Accelerated Mobile Pages. Rank Math automatically adds required meta tags in all the AMP pages.', 'rank-math' ),
-				'<a href="https://wordpress.org/plugins/amp/" target="_blank">' . esc_html__( 'AMP plugin', 'rank-math' ) . '</a>'
+				esc_html__( 'Install %s to make Rank Math work with Accelerated Mobile Pages. Rank Math automatically adds required meta tags in all the AMP pages.', 'seo-by-rank-math' ),
+				'<a href="https://wordpress.org/plugins/amp/" target="_blank">' . esc_html__( 'AMP plugin', 'seo-by-rank-math' ) . '</a>'
 			),
 			'icon'  => 'mobile',
 			'only'  => 'skip',
 		];
 
 		$modules['bbpress'] = [
-			'title'         => esc_html__( 'bbPress', 'rank-math' ),
-			'desc'          => esc_html__( 'Add proper Meta tags to your bbPress forum posts, categories, profiles, etc. Get more options to take control of what search engines see and how they see it.', 'rank-math' ),
+			'title'         => esc_html__( 'bbPress', 'seo-by-rank-math' ),
+			'desc'          => esc_html__( 'Add proper Meta tags to your bbPress forum posts, categories, profiles, etc. Get more options to take control of what search engines see and how they see it.', 'seo-by-rank-math' ),
 			'icon'          => 'users',
 			'probadge'      => defined( 'RANK_MATH_PRO_FILE' ),
 			'disabled'      => ( ! function_exists( 'is_bbpress' ) ),
-			'disabled_text' => esc_html__( 'Please activate bbPress plugin to use this module.', 'rank-math' ),
+			'disabled_text' => esc_html__( 'Please activate bbPress plugin to use this module.', 'seo-by-rank-math' ),
 			'only'          => 'skip',
 		];
 
 		$modules['buddypress'] = [
-			'title'         => esc_html__( 'BuddyPress', 'rank-math' ),
-			'desc'          => esc_html__( 'Enable the BuddyPress module for Rank Math SEO to make your BuddyPress forum SEO friendly by adding proper meta tags to all forum pages.', 'rank-math' ),
+			'title'         => esc_html__( 'BuddyPress', 'seo-by-rank-math' ),
+			'desc'          => esc_html__( 'Enable the BuddyPress module for Rank Math SEO to make your BuddyPress forum SEO friendly by adding proper meta tags to all forum pages.', 'seo-by-rank-math' ),
 			'icon'          => 'comments',
 			'class'         => 'RankMath\BuddyPress\BuddyPress',
 			'disabled'      => ! class_exists( 'BuddyPress' ),
-			'disabled_text' => esc_html__( 'Please activate BuddyPress plugin to use this module.', 'rank-math' ),
+			'disabled_text' => esc_html__( 'Please activate BuddyPress plugin to use this module.', 'seo-by-rank-math' ),
 		];
 
 		$modules['woocommerce'] = [
-			'title'         => esc_html__( 'WooCommerce', 'rank-math' ),
-			'desc'          => esc_html__( 'Optimize WooCommerce Pages for Search Engines by adding required metadata and Product Schema which will make your site stand out in the SERPs.', 'rank-math' ),
+			'title'         => esc_html__( 'WooCommerce', 'seo-by-rank-math' ),
+			'desc'          => esc_html__( 'Optimize WooCommerce Pages for Search Engines by adding required metadata and Product Schema which will make your site stand out in the SERPs.', 'seo-by-rank-math' ),
 			'class'         => 'RankMath\WooCommerce\WooCommerce',
 			'icon'          => 'cart',
 			'upgradeable'   => true,
 			'disabled'      => ( ! Helper::is_woocommerce_active() ),
-			'disabled_text' => esc_html__( 'Please activate WooCommerce plugin to use this module.', 'rank-math' ),
+			'disabled_text' => esc_html__( 'Please activate WooCommerce plugin to use this module.', 'seo-by-rank-math' ),
 			'settings'      => Helper::get_settings_url( 'general', 'woocommerce' ),
 		];
 
 		$modules['acf'] = [
-			'title'         => esc_html__( 'ACF', 'rank-math' ),
-			'desc'          => esc_html__( 'ACF support helps Rank Math SEO read and analyze content written in the Advanced Custom Fields. If your theme uses ACF, you should enable this option.', 'rank-math' ),
+			'title'         => esc_html__( 'ACF', 'seo-by-rank-math' ),
+			'desc'          => esc_html__( 'ACF support helps Rank Math SEO read and analyze content written in the Advanced Custom Fields. If your theme uses ACF, you should enable this option.', 'seo-by-rank-math' ),
 			'class'         => 'RankMath\ACF\ACF',
 			'icon'          => 'acf',
 			'disabled'      => ( ! function_exists( 'acf' ) ),
-			'disabled_text' => esc_html__( 'Please activate ACF plugin to use this module.', 'rank-math' ),
+			'disabled_text' => esc_html__( 'Please activate ACF plugin to use this module.', 'seo-by-rank-math' ),
 		];
 
 		$modules['web-stories'] = [
-			'title'         => esc_html__( 'Google Web Stories', 'rank-math' ),
-			'desc'          => esc_html__( 'Make any Story created with the Web Stories WordPress plugin SEO-Ready with automatic support for Schema and Meta tags.', 'rank-math' ),
+			'title'         => esc_html__( 'Google Web Stories', 'seo-by-rank-math' ),
+			'desc'          => esc_html__( 'Make any Story created with the Web Stories WordPress plugin SEO-Ready with automatic support for Schema and Meta tags.', 'seo-by-rank-math' ),
 			'class'         => 'RankMath\Web_Stories\Web_Stories',
 			'icon'          => 'stories',
 			'disabled'      => ( ! defined( 'WEBSTORIES_VERSION' ) ),
-			'disabled_text' => esc_html__( 'Please activate Web Stories plugin to use this module.', 'rank-math' ),
+			'disabled_text' => esc_html__( 'Please activate Web Stories plugin to use this module.', 'seo-by-rank-math' ),
 		];
 
 		return $modules;
@@ -394,7 +394,7 @@ class Manager {
 	 */
 	public function display_form() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			echo esc_html__( 'You cant access this page.', 'rank-math' );
+			echo esc_html__( 'You cant access this page.', 'seo-by-rank-math' );
 			return;
 		}
 
@@ -426,27 +426,27 @@ class Manager {
 					<div class="rank-math-box <?php echo $is_active ? 'active' : ''; ?> <?php echo $is_hidden ? 'hidden' : ''; ?> <?php echo $is_pro ? 'is-pro' : ''; ?>">
 						<i class="rm-icon rm-icon-<?php echo esc_attr( $module->get_icon() ); ?>"></i>
 						<?php if ( 'content-ai' === $key && 'free' === Helper::get_content_ai_plan() ) { ?>
-							<div class="rank-math-free-badge"><?php echo esc_html__( 'Free', 'rank-math' ); ?></div>
+							<div class="rank-math-free-badge"><?php echo esc_html__( 'Free', 'seo-by-rank-math' ); ?></div>
 						<?php } ?>
 						<header>
 							<h3>
 								<?php echo esc_html( $module->get( 'title' ) ); ?>
 								<?php if ( $is_betabadge ) { ?>
-									<span class="rank-math-pro-badge beta"><?php echo esc_html__( 'NEW!', 'rank-math' ); ?></span>
+									<span class="rank-math-pro-badge beta"><?php echo esc_html__( 'NEW!', 'seo-by-rank-math' ); ?></span>
 								<?php } elseif ( $is_probadge && ! $is_pro_active ) { ?>
-									<span class="rank-math-pro-badge"><?php echo esc_html__( 'PRO', 'rank-math' ); ?></span>
+									<span class="rank-math-pro-badge"><?php echo esc_html__( 'PRO', 'seo-by-rank-math' ); ?></span>
 								<?php } ?>
 								<?php if ( $is_upgradeable && ! $is_pro_active ) { ?>
 									<span class="is-upgradeable rank-math-tooltip">
 										<a href="<?php KB::the( 'pro', esc_html( $module->get( 'title' ) ) . ' Module Upgradable Icon' ); ?>">
 											<div>&#171;</div>
 										</a>
-										<span><?php echo esc_html__( 'More powerful options are available in the PRO version.', 'rank-math' ); ?></span>
+										<span><?php echo esc_html__( 'More powerful options are available in the PRO version.', 'seo-by-rank-math' ); ?></span>
 									</span>
 								<?php } elseif ( $is_upgradeable || ( $is_probadge && $is_pro_active ) ) { ?>
 									<span class="is-upgradeable rank-math-tooltip">
 										<div class="upgraded">&#171;</div>
-										<span><?php echo esc_html__( 'PRO options are enabled.', 'rank-math' ); ?></span>
+										<span><?php echo esc_html__( 'PRO options are enabled.', 'seo-by-rank-math' ); ?></span>
 									</span>
 								<?php } ?>
 							</h3>
@@ -544,17 +544,17 @@ class Manager {
 				<i class="rm-icon rm-icon-software"></i>
 				<a href="<?php KB::the( 'pro', 'Unlock PRO Module Box' ); ?>" target="_blank" class="pro-link" data-url="<?php KB::the( 'site-checkout', 'Unlock PRO Module Box' ); ?>">
 					<header>
-						<h3><?php esc_html_e( 'Take SEO to the Next Level!', 'rank-math' ); ?></h3>
+						<h3><?php esc_html_e( 'Take SEO to the Next Level!', 'seo-by-rank-math' ); ?></h3>
 						<ul>
-							<li><?php esc_html_e( 'Unlimited personal websites', 'rank-math' ); ?></li>
-							<li><?php esc_html_e( 'Free 15 Content AI Credits', 'rank-math' ); ?></li>
-							<li><?php esc_html_e( 'Track 500 Keywords', 'rank-math' ); ?></li>
-							<li><?php esc_html_e( 'Powerful Schema Generator', 'rank-math' ); ?></li>
-							<li><?php esc_html_e( '24/7 Support', 'rank-math' ); ?></li>
+							<li><?php esc_html_e( 'Unlimited personal websites', 'seo-by-rank-math' ); ?></li>
+							<li><?php esc_html_e( 'Free 15 Content AI Credits', 'seo-by-rank-math' ); ?></li>
+							<li><?php esc_html_e( 'Track 500 Keywords', 'seo-by-rank-math' ); ?></li>
+							<li><?php esc_html_e( 'Powerful Schema Generator', 'seo-by-rank-math' ); ?></li>
+							<li><?php esc_html_e( '24/7 Support', 'seo-by-rank-math' ); ?></li>
 						</ul>
 					</header>
 					<div class="status wp-clearfix">
-						<button class="button button-secondary"><?php esc_html_e( 'Buy', 'rank-math' ); ?></button>
+						<button class="button button-secondary"><?php esc_html_e( 'Buy', 'seo-by-rank-math' ); ?></button>
 					</div>
 				</a>
 			</div>

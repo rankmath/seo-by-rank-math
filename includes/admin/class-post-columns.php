@@ -125,11 +125,11 @@ class Post_Columns implements Runner {
 			$post_id    = Param::post( 'post_ID', 0, FILTER_VALIDATE_INT );
 			$current_pt = get_post_type( $post_id );
 		}
-		$columns['rank_math_seo_details'] = esc_html__( 'SEO Details', 'rank-math' );
+		$columns['rank_math_seo_details'] = esc_html__( 'SEO Details', 'seo-by-rank-math' );
 
 		if ( Helper::get_settings( 'titles.pt_' . $current_pt . '_bulk_editing', true ) ) {
-			$columns['rank_math_title']       = esc_html__( 'SEO Title', 'rank-math' );
-			$columns['rank_math_description'] = esc_html__( 'SEO Desc', 'rank-math' );
+			$columns['rank_math_title']       = esc_html__( 'SEO Title', 'seo-by-rank-math' );
+			$columns['rank_math_description'] = esc_html__( 'SEO Desc', 'seo-by-rank-math' );
 		}
 
 		return $columns;
@@ -156,8 +156,8 @@ class Post_Columns implements Runner {
 	 * @return array
 	 */
 	public function add_media_columns( $columns ) {
-		$columns['rank_math_image_title'] = esc_html__( 'Title', 'rank-math' );
-		$columns['rank_math_image_alt']   = esc_html__( 'Alternative Text', 'rank-math' );
+		$columns['rank_math_image_title'] = esc_html__( 'Title', 'seo-by-rank-math' );
+		$columns['rank_math_image_alt']   = esc_html__( 'Alternative Text', 'seo-by-rank-math' );
 
 		return $columns;
 	}
@@ -172,8 +172,8 @@ class Post_Columns implements Runner {
 	public function add_taxonomy_columns( $columns ) {
 		$screen = get_current_screen();
 		if ( Helper::get_settings( 'titles.tax_' . $screen->taxonomy . '_bulk_editing', false ) ) {
-			$columns['rank_math_title']       = esc_html__( 'SEO Title', 'rank-math' );
-			$columns['rank_math_description'] = esc_html__( 'SEO Desc', 'rank-math' );
+			$columns['rank_math_title']       = esc_html__( 'SEO Title', 'seo-by-rank-math' );
+			$columns['rank_math_description'] = esc_html__( 'SEO Desc', 'seo-by-rank-math' );
 		}
 
 		return $columns;
@@ -228,8 +228,8 @@ class Post_Columns implements Runner {
 		<span class="rank-math-column-display"><?php echo esc_html( $title ); ?></span>
 		<textarea class="rank-math-column-value" data-field="title" tabindex="11"><?php echo esc_attr( $title ); ?></textarea>
 		<div class="rank-math-column-edit">
-			<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
-			<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
+			<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'seo-by-rank-math' ); ?></a>
+			<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'seo-by-rank-math' ); ?></a>
 		</div>
 		<?php
 	}
@@ -249,8 +249,8 @@ class Post_Columns implements Runner {
 		<span class="rank-math-column-display"><?php echo esc_html( $description ); ?></span>
 		<textarea class="rank-math-column-value" data-field="description" tabindex="11"><?php echo esc_attr( $description ); ?></textarea>
 		<div class="rank-math-column-edit">
-			<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
-			<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
+			<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'seo-by-rank-math' ); ?></a>
+			<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'seo-by-rank-math' ); ?></a>
 		</div>
 		<?php
 	}
@@ -268,7 +268,7 @@ class Post_Columns implements Runner {
 		$data = isset( $this->data[ $post_id ] ) ? $this->data[ $post_id ] : [];
 		if ( ! self::is_post_indexable( $post_id ) ) {
 			echo '<span class="rank-math-column-display seo-score no-score "><strong>N/A</strong></span>';
-			echo '<strong>' . esc_html__( 'No Index', 'rank-math' ) . '</strong>';
+			echo '<strong>' . esc_html__( 'No Index', 'seo-by-rank-math' ) . '</strong>';
 			$this->do_action( 'post/column/seo_details', $post_id, $data, $this->data );
 			return;
 		}
@@ -285,16 +285,16 @@ class Post_Columns implements Runner {
 		<span class="rank-math-column-display seo-score <?php echo esc_attr( $class ); ?> <?php echo ! $score ? 'disabled' : ''; ?>">
 			<strong><?php echo esc_html( $score ); ?></strong>
 			<?php if ( $is_pillar ) { ?>
-				<img class="is-pillar" src="<?php echo esc_url( rank_math()->plugin_url() . 'assets/admin/img/pillar.svg' ); ?>" alt="<?php esc_html_e( 'Is Pillar', 'rank-math' ); ?>" title="<?php esc_html_e( 'Is Pillar', 'rank-math' ); ?>" width="25" />
+				<img class="is-pillar" src="<?php echo esc_url( rank_math()->plugin_url() . 'assets/admin/img/pillar.svg' ); ?>" alt="<?php esc_html_e( 'Is Pillar', 'seo-by-rank-math' ); ?>" title="<?php esc_html_e( 'Is Pillar', 'seo-by-rank-math' ); ?>" width="25" />
 			<?php } ?>
 		</span>
 
-			<label><?php esc_html_e( 'Focus Keyword', 'rank-math' ); ?>:</label>
+			<label><?php esc_html_e( 'Focus Keyword', 'seo-by-rank-math' ); ?>:</label>
 			<span class="rank-math-column-display">
-				<strong title="Focus Keyword"><?php esc_html_e( 'Keyword', 'rank-math' ); ?>:</strong>
+				<strong title="Focus Keyword"><?php esc_html_e( 'Keyword', 'seo-by-rank-math' ); ?>:</strong>
 				<span>
 					<?php
-						echo $keyword ? wp_kses_post( $this->do_filter( 'post/column/seo_details/focus_keyword', $keyword ) ) : esc_html__( 'Not Set', 'rank-math' );
+						echo $keyword ? wp_kses_post( $this->do_filter( 'post/column/seo_details/focus_keyword', $keyword ) ) : esc_html__( 'Not Set', 'seo-by-rank-math' );
 					?>
 				</span>
 			</span>
@@ -304,8 +304,8 @@ class Post_Columns implements Runner {
 			<?php $this->do_action( 'post/column/seo_details', $post_id, $data, $this->data ); ?>
 
 			<div class="rank-math-column-edit">
-				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
-				<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
+				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'seo-by-rank-math' ); ?></a>
+				<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'seo-by-rank-math' ); ?></a>
 			</div>
 
 		<?php
@@ -324,8 +324,8 @@ class Post_Columns implements Runner {
 			<span class="rank-math-column-display"><?php echo esc_html( $title ); ?></span>
 			<input class="rank-math-column-value" data-field="image_title" tabindex="11" value="<?php echo esc_attr( $title ); ?>" />
 			<div class="rank-math-column-edit">
-				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
-				<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
+				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'seo-by-rank-math' ); ?></a>
+				<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'seo-by-rank-math' ); ?></a>
 			</div>
 			<?php
 			return;
@@ -337,8 +337,8 @@ class Post_Columns implements Runner {
 			<span class="rank-math-column-display"><?php echo esc_html( $alt ); ?></span>
 			<input class="rank-math-column-value" data-field="image_alt" tabindex="11" value="<?php echo esc_attr( $alt ); ?>" />
 			<div class="rank-math-column-edit">
-				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'rank-math' ); ?></a>
-				<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'rank-math' ); ?></a>
+				<a href="#" class="rank-math-column-save"><?php esc_html_e( 'Save', 'seo-by-rank-math' ); ?></a>
+				<a href="#" class="button-link-delete rank-math-column-cancel"><?php esc_html_e( 'Cancel', 'seo-by-rank-math' ); ?></a>
 			</div>
 			<?php
 			return;

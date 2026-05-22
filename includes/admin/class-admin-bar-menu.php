@@ -172,9 +172,9 @@ class Admin_Bar_Menu {
 
 		$this->items['main'] = [
 			'id'       => self::MENU_IDENTIFIER,
-			'title'    => '<span class="rank-math-icon">' . $this->get_icon() . '</span><span class="rank-math-text">' . esc_html__( 'Rank Math SEO', 'rank-math' ) . '</span>',
+			'title'    => '<span class="rank-math-icon">' . $this->get_icon() . '</span><span class="rank-math-text">' . esc_html__( 'Rank Math SEO', 'seo-by-rank-math' ) . '</span>',
 			'href'     => Helper::get_admin_url( $first_menu ),
-			'meta'     => [ 'title' => esc_html__( 'Rank Math Dashboard', 'rank-math' ) ],
+			'meta'     => [ 'title' => esc_html__( 'Rank Math Dashboard', 'seo-by-rank-math' ) ],
 			'priority' => 10,
 		];
 
@@ -182,9 +182,9 @@ class Admin_Bar_Menu {
 			$this->add_sub_menu(
 				'dashboard',
 				[
-					'title'    => esc_html__( 'Dashboard', 'rank-math' ),
+					'title'    => esc_html__( 'Dashboard', 'seo-by-rank-math' ),
 					'href'     => $this->items['main']['href'],
-					'meta'     => [ 'title' => esc_html__( 'Dashboard', 'rank-math' ) ],
+					'meta'     => [ 'title' => esc_html__( 'Dashboard', 'seo-by-rank-math' ) ],
 					'priority' => 20,
 				]
 			);
@@ -219,9 +219,9 @@ class Admin_Bar_Menu {
 		$this->add_sub_menu(
 			'home',
 			[
-				'title'    => esc_html__( 'Homepage SEO', 'rank-math' ),
+				'title'    => esc_html__( 'Homepage SEO', 'seo-by-rank-math' ),
 				'href'     => Helper::get_settings_url( 'titles', 'homepage' ),
-				'meta'     => [ 'title' => esc_html__( 'Edit Homepage SEO Settings', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Edit Homepage SEO Settings', 'seo-by-rank-math' ) ],
 				'priority' => 35,
 			]
 		);
@@ -240,16 +240,16 @@ class Admin_Bar_Menu {
 
 		if ( is_home() ) {
 			$post_type = 'page';
-			$name      = esc_html__( 'Pages', 'rank-math' );
+			$name      = esc_html__( 'Pages', 'seo-by-rank-math' );
 		}
 
 		$this->add_sub_menu(
 			'posttype',
 			[
 				/* translators: Post Type Singular Name */
-				'title'    => sprintf( esc_html__( 'SEO Settings for %s', 'rank-math' ), $name ),
+				'title'    => sprintf( esc_html__( 'SEO Settings for %s', 'seo-by-rank-math' ), $name ),
 				'href'     => Helper::get_settings_url( 'titles', 'post-type-' . $post_type ),
-				'meta'     => [ 'title' => esc_html__( 'Edit default SEO settings for this post type', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Edit default SEO settings for this post type', 'seo-by-rank-math' ) ],
 				'priority' => 35,
 			]
 		);
@@ -270,9 +270,9 @@ class Admin_Bar_Menu {
 			'tax',
 			[
 				/* translators: Taxonomy Singular Name */
-				'title'    => sprintf( esc_html__( 'SEO Settings for %s', 'rank-math' ), $labels->name ),
+				'title'    => sprintf( esc_html__( 'SEO Settings for %s', 'seo-by-rank-math' ), $labels->name ),
 				'href'     => Helper::get_settings_url( 'titles', 'taxonomy-' . $term->taxonomy ),
-				'meta'     => [ 'title' => esc_html__( 'Edit SEO settings for this archive page', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Edit SEO settings for this archive page', 'seo-by-rank-math' ) ],
 				'priority' => 35,
 			]
 		);
@@ -285,9 +285,9 @@ class Admin_Bar_Menu {
 		$this->add_sub_menu(
 			'date',
 			[
-				'title'    => esc_html__( 'SEO Settings for Date Archives', 'rank-math' ),
+				'title'    => esc_html__( 'SEO Settings for Date Archives', 'seo-by-rank-math' ),
 				'href'     => Helper::get_settings_url( 'titles', 'global' ),
-				'meta'     => [ 'title' => esc_html__( 'Edit SEO settings for this archive page', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Edit SEO settings for this archive page', 'seo-by-rank-math' ) ],
 				'priority' => 35,
 			]
 		);
@@ -300,9 +300,9 @@ class Admin_Bar_Menu {
 		$this->add_sub_menu(
 			'search',
 			[
-				'title'    => esc_html__( 'SEO Settings for Search Page', 'rank-math' ),
+				'title'    => esc_html__( 'SEO Settings for Search Page', 'seo-by-rank-math' ),
 				'href'     => Helper::get_settings_url( 'titles', 'global' ),
-				'meta'     => [ 'title' => esc_html__( 'Edit SEO settings for the search results page', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Edit SEO settings for the search results page', 'seo-by-rank-math' ) ],
 				'priority' => 35,
 			]
 		);
@@ -315,7 +315,7 @@ class Admin_Bar_Menu {
 		$this->add_sub_menu(
 			'mark-me',
 			[
-				'title'    => esc_html__( 'Mark this page', 'rank-math' ),
+				'title'    => esc_html__( 'Mark this page', 'seo-by-rank-math' ),
 				'href'     => '#',
 				'priority' => 100,
 			]
@@ -332,7 +332,7 @@ class Admin_Bar_Menu {
 			$this->add_sub_menu(
 				'pillar-content',
 				[
-					'title' => $is_pillar_content . esc_html__( 'As Pillar Content', 'rank-math' ),
+					'title' => $is_pillar_content . esc_html__( 'As Pillar Content', 'seo-by-rank-math' ),
 					'href'  => '#pillar_content',
 					'meta'  => [ 'class' => 'mark-page-as' ],
 				],
@@ -346,7 +346,7 @@ class Admin_Bar_Menu {
 			$this->add_sub_menu(
 				'no-index',
 				[
-					'title' => $noindex_check . esc_html__( 'As NoIndex', 'rank-math' ),
+					'title' => $noindex_check . esc_html__( 'As NoIndex', 'seo-by-rank-math' ),
 					'href'  => '#noindex',
 					'meta'  => [ 'class' => 'mark-page-as' ],
 				],
@@ -357,7 +357,7 @@ class Admin_Bar_Menu {
 			$this->add_sub_menu(
 				'no-follow',
 				[
-					'title' => $nofollow_check . esc_html__( 'As NoFollow', 'rank-math' ),
+					'title' => $nofollow_check . esc_html__( 'As NoFollow', 'seo-by-rank-math' ),
 					'href'  => '#nofollow',
 					'meta'  => [ 'class' => 'mark-page-as' ],
 				],
@@ -373,7 +373,7 @@ class Admin_Bar_Menu {
 		$this->add_sub_menu(
 			'third-party',
 			[
-				'title'    => esc_html__( 'External Tools', 'rank-math' ),
+				'title'    => esc_html__( 'External Tools', 'seo-by-rank-math' ),
 				'href'     => '#',
 				'priority' => 200,
 			]
@@ -382,27 +382,27 @@ class Admin_Bar_Menu {
 		$url   = rawurlencode( Url::get_current_url() );
 		$items = [
 			'google-pagespeed'           => [
-				'title' => esc_html__( 'Google PageSpeed', 'rank-math' ),
+				'title' => esc_html__( 'Google PageSpeed', 'seo-by-rank-math' ),
 				'href'  => 'https://developers.google.com/speed/pagespeed/insights/?url=' . $url,
-				'meta'  => [ 'title' => esc_html__( 'Google PageSpeed Insights', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Google PageSpeed Insights', 'seo-by-rank-math' ) ],
 			],
 
 			'google-richresults-mobile'  => [
-				'title' => esc_html__( 'Google Rich Results (Mobile)', 'rank-math' ),
+				'title' => esc_html__( 'Google Rich Results (Mobile)', 'seo-by-rank-math' ),
 				'href'  => 'https://search.google.com/test/rich-results?url=' . $url . '&user_agent=1',
-				'meta'  => [ 'title' => esc_html__( 'Google Rich Results Test - Googlebot Smartphone', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Google Rich Results Test - Googlebot Smartphone', 'seo-by-rank-math' ) ],
 			],
 
 			'google-richresults-desktop' => [
-				'title' => esc_html__( 'Google Rich Results (Desktop)', 'rank-math' ),
+				'title' => esc_html__( 'Google Rich Results (Desktop)', 'seo-by-rank-math' ),
 				'href'  => 'https://search.google.com/test/rich-results?url=' . $url . '&user_agent=2',
-				'meta'  => [ 'title' => esc_html__( 'Google Rich Results Test - Googlebot Desktop', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Google Rich Results Test - Googlebot Desktop', 'seo-by-rank-math' ) ],
 			],
 
 			'fb-debugger'                => [
-				'title' => esc_html__( 'Facebook Debugger', 'rank-math' ),
+				'title' => esc_html__( 'Facebook Debugger', 'seo-by-rank-math' ),
 				'href'  => 'https://developers.facebook.com/tools/debug/sharing/?q=' . $url,
-				'meta'  => [ 'title' => esc_html__( 'Facebook Sharing Debugger', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Facebook Sharing Debugger', 'seo-by-rank-math' ) ],
 			],
 		];
 

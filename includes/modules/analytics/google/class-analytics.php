@@ -188,15 +188,6 @@ class Analytics extends Request {
 								],
 							],
 						],
-						[
-							'filter' => [
-								'fieldName'    => 'sessionMedium',
-								'stringFilter' => [
-									'matchType' => 'EXACT',
-									'value'     => 'organic',
-								],
-							],
-						],
 					],
 				],
 			],
@@ -246,7 +237,7 @@ class Analytics extends Request {
 		Api::get()->log_failed_request( $response, $workflow, $start_date, func_get_args() );
 
 		if ( ! Api::get()->is_success() ) {
-			return new WP_Error( 'request_failed', __( 'The Google Analytics Console request failed.', 'rank-math' ) );
+			return new WP_Error( 'request_failed', __( 'The Google Analytics Console request failed.', 'seo-by-rank-math' ) );
 		}
 
 		if ( ! isset( $response['rows'] ) ) {

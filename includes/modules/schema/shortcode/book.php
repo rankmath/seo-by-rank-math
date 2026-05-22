@@ -17,14 +17,14 @@ $this->get_image();
 
 	<?php
 	$this->get_field(
-		esc_html__( 'URL', 'rank-math' ),
+		esc_html__( 'URL', 'seo-by-rank-math' ),
 		'url'
 	);
 	?>
 
 	<?php
 	$this->get_field(
-		esc_html__( 'Author', 'rank-math' ),
+		esc_html__( 'Author', 'seo-by-rank-math' ),
 		'author.name'
 	);
 	?>
@@ -32,13 +32,13 @@ $this->get_image();
 	<?php
 	if ( ! empty( $schema['hasPart'] ) ) {
 		$hash = [
-			'edition'       => __( 'Edition', 'rank-math' ),
-			'name'          => __( 'Name', 'rank-math' ),
-			'url'           => __( 'Url', 'rank-math' ),
-			'author'        => __( 'Author', 'rank-math' ),
-			'isbn'          => __( 'ISBN', 'rank-math' ),
-			'datePublished' => __( 'Date Published', 'rank-math' ),
-			'bookFormat'    => __( 'Format', 'rank-math' ),
+			'edition'       => __( 'Edition', 'seo-by-rank-math' ),
+			'name'          => __( 'Name', 'seo-by-rank-math' ),
+			'url'           => __( 'Url', 'seo-by-rank-math' ),
+			'author'        => __( 'Author', 'seo-by-rank-math' ),
+			'isbn'          => __( 'ISBN', 'seo-by-rank-math' ),
+			'datePublished' => __( 'Date Published', 'seo-by-rank-math' ),
+			'bookFormat'    => __( 'Format', 'seo-by-rank-math' ),
 		];
 		foreach ( $schema['hasPart'] as $edition ) {
 			$this->schema = $edition;

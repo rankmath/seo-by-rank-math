@@ -84,11 +84,11 @@ class Bulk_Actions {
 			return $actions;
 		}
 
-		$actions['rank_math_ai_options']                             = __( '&#8595; Rank Math Content AI', 'rank-math' );
-		$actions['rank_math_content_ai_fetch_seo_title']             = esc_html__( 'Write SEO Title with AI', 'rank-math' );
-		$actions['rank_math_content_ai_fetch_seo_description']       = esc_html__( 'Write SEO Description with AI', 'rank-math' );
-		$actions['rank_math_content_ai_fetch_seo_title_description'] = esc_html__( 'Write SEO Title & Description with AI', 'rank-math' );
-		$actions['rank_math_content_ai_fetch_image_alt']             = esc_html__( 'Write Image Alt Text with AI', 'rank-math' );
+		$actions['rank_math_ai_options']                             = __( '&#8595; Rank Math Content AI', 'seo-by-rank-math' );
+		$actions['rank_math_content_ai_fetch_seo_title']             = esc_html__( 'Write SEO Title with AI', 'seo-by-rank-math' );
+		$actions['rank_math_content_ai_fetch_seo_description']       = esc_html__( 'Write SEO Description with AI', 'seo-by-rank-math' );
+		$actions['rank_math_content_ai_fetch_seo_title_description'] = esc_html__( 'Write SEO Title & Description with AI', 'seo-by-rank-math' );
+		$actions['rank_math_content_ai_fetch_image_alt']             = esc_html__( 'Write Image Alt Text with AI', 'seo-by-rank-math' );
 
 		return $actions;
 	}
@@ -104,8 +104,8 @@ class Bulk_Actions {
 			return $actions;
 		}
 
-		$actions['rank_math_ai_options']                 = __( '&#8595; Rank Math Content AI', 'rank-math' );
-		$actions['rank_math_content_ai_fetch_image_alt'] = esc_html__( 'Write Image Alt Text with AI', 'rank-math' );
+		$actions['rank_math_ai_options']                 = __( '&#8595; Rank Math Content AI', 'seo-by-rank-math' );
+		$actions['rank_math_content_ai_fetch_image_alt'] = esc_html__( 'Write Image Alt Text with AI', 'seo-by-rank-math' );
 
 		return $actions;
 	}
@@ -126,7 +126,7 @@ class Bulk_Actions {
 
 		if ( ! empty( get_option( 'rank_math_content_ai_posts' ) ) ) {
 			Helper::add_notification(
-				esc_html__( 'Another bulk editing process is already running. Please try again later after the existing process is complete.', 'rank-math' ),
+				esc_html__( 'Another bulk editing process is already running. Please try again later after the existing process is complete.', 'seo-by-rank-math' ),
 				[
 					'type'    => 'warning',
 					'id'      => 'rank_math_content_ai_posts_error',
@@ -239,14 +239,14 @@ class Bulk_Actions {
 		$processed = get_option( 'rank_math_content_ai_posts_processed' );
 
 		$tools['content_ai_cancel_bulk_edit_process'] = [
-			'title'       => esc_html__( 'Cancel Content AI Bulk Editing Process', 'rank-math' ),
+			'title'       => esc_html__( 'Cancel Content AI Bulk Editing Process', 'seo-by-rank-math' ),
 			'description' => sprintf(
 				// Translators: placeholders are the number of posts that were processed.
-				esc_html__( 'Terminate the ongoing Content AI Bulk Editing Process to halt any pending modifications and revert to the previous state. The bulk metadata has been generated for %1$d out of %1$d posts so far.', 'rank-math' ),
+				esc_html__( 'Terminate the ongoing Content AI Bulk Editing Process to halt any pending modifications and revert to the previous state. The bulk metadata has been generated for %1$d out of %1$d posts so far.', 'seo-by-rank-math' ),
 				$processed,
 				count( $posts )
 			),
-			'button_text' => esc_html__( 'Terminate', 'rank-math' ),
+			'button_text' => esc_html__( 'Terminate', 'seo-by-rank-math' ),
 		];
 
 		return $tools;
@@ -258,7 +258,7 @@ class Bulk_Actions {
 	public function cancel_bulk_edit_process() {
 		Bulk_Edit_SEO_Meta::get()->cancel();
 		Helper::remove_notification( 'rank_math_content_ai_posts_started' );
-		return __( 'Bulk Editing Process Successfully Cancelled', 'rank-math' );
+		return __( 'Bulk Editing Process Successfully Cancelled', 'seo-by-rank-math' );
 	}
 
 	/**

@@ -39,7 +39,7 @@ export default function List( { headings = {}, onHeadingUpdate = {}, edit = {}, 
 								value={ content }
 								allowedFormats={ [] }
 								onChange={ ( newContent ) => onHeadingUpdate( newContent, key, true ) }
-								placeholder={ __( 'Heading text', 'rank-math' ) }
+								placeholder={ __( 'Heading text', 'seo-by-rank-math' ) }
 							/>
 						}
 						{
@@ -59,7 +59,7 @@ export default function List( { headings = {}, onHeadingUpdate = {}, edit = {}, 
 						{
 							key === edit &&
 							<TextControl
-								placeholder={ __( 'Heading Link', 'rank-math' ) }
+								placeholder={ __( 'Heading Link', 'seo-by-rank-math' ) }
 								value={ link }
 								onChange={ ( newLink ) => onHeadingUpdate( newLink, key ) }
 								__next40pxDefaultSize={ true }
@@ -73,14 +73,14 @@ export default function List( { headings = {}, onHeadingUpdate = {}, edit = {}, 
 									icon={ edit === key ? 'saved' : 'admin-links' }
 									className="rank-math-item-visbility"
 									onClick={ () => toggleEdit( edit === key ? false : key ) }
-									title={ __( 'Edit Link', 'rank-math' ) }
+									title={ __( 'Edit Link', 'seo-by-rank-math' ) }
 								/>
 
 								<Button
 									className="rank-math-item-delete"
 									icon={ ! disable ? 'visibility' : 'hidden' }
 									onClick={ () => hideHeading( ! disable, key ) }
-									title={ __( 'Hide', 'rank-math' ) }
+									title={ __( 'Hide', 'seo-by-rank-math' ) }
 								/>
 							</span>
 						}

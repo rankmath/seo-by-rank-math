@@ -11,16 +11,52 @@
 			"email": "support@rankmath.com"
 		}
 	],
+	"config": {
+		"allow-plugins": {
+			"phpstan/extension-installer": true,
+			"composer/installers": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"repositories":[
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
+        }
+    ],
 	"require": {
 		"cmb2/cmb2": "^2.7",
 		"donatj/phpuseragentparser": "^1.6.1",
 		"woocommerce/action-scheduler": "^3.4.2",
 		"a5hleyrich/wp-background-processing": "^1.0.2",
-		"mythemeshop/wordpress-helpers": "^1.1"
+		"wp-media/wp-mixpanel": "^1.0"
+	},
+	"require-dev": {
+		"micheh/phpcs-gitlab": "^2.0",
+		"phpcompatibility/phpcompatibility-wp": "*",
+		"php-stubs/wordpress-tests-stubs": "^6.5",
+		"phpstan/extension-installer": "^1.3",
+		"phpstan/phpstan-mockery": "^1.1",
+		"phpstan/phpstan-phpunit": "^1.4",
+		"szepeviktor/phpstan-wordpress": "^1.3",
+		"wp-coding-standards/wpcs": "^3.0",
+		"wp-media/phpunit": "^3.0",
+		"wpackagist-plugin/amp":"^2",
+		"wpackagist-plugin/buddypress":"^14",
+		"wpackagist-plugin/easy-digital-downloads":"^3",
+		"wpackagist-plugin/elementor":"^3",
+		"wpackagist-plugin/web-stories":"^1",
+		"wpackagist-plugin/woocommerce": "^9",
+		"php-stubs/wp-cli-stubs": "^2.11"
 	},
 	"extra": {
         "installer-paths": {
-            "vendor/cmb2/cmb2": ["cmb2/cmb2"]
+            "vendor/cmb2/cmb2": ["cmb2/cmb2"],
+			"vendor/{$vendor}/{$name}/": ["type:wordpress-plugin"]
         }
     },
 	"autoload" : {
@@ -31,7 +67,19 @@
 			"vendor/woocommerce/action-scheduler/action-scheduler.php"
 		]
 	},
-	"config": {
-		"optimize-autoloader": true
+	"autoload-dev": {
+		"psr-4": {
+			"RankMath\\Tests\\": "tests/"
+		}
+	},
+	"scripts": {
+		"install-codestandards": [
+            "PHPCSStandards\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+        ],
+		"phpcs": "vendor/bin/phpcs",
+		"phpstan": "vendor/bin/phpstan analyze --memory-limit=4G --no-progress",
+		"test-unit": "\"vendor/bin/phpunit\" --testsuite unit --colors=always --configuration tests/Unit/phpunit.xml.dist",
+		"test-integration": "\"vendor/bin/phpunit\" --testsuite integration --colors=always --configuration tests/Integration/phpunit.xml.dist",
+		"test-unit-cover": "\"vendor/bin/phpunit\" --testsuite unit --colors=always --configuration tests/Unit/phpunit.xml.dist --coverage-html coverage-report --coverage-clover tests/Unit/coverage-unit.xml"
 	}
 }

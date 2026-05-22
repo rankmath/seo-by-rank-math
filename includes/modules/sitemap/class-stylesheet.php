@@ -50,10 +50,10 @@ class Stylesheet extends XML {
 		);
 
 		/* translators: 1. separator, 2. blogname */
-		$title = sprintf( __( 'XML Sitemap %1$s %2$s', 'rank-math' ), '-', get_bloginfo( 'name', 'display' ) );
+		$title = sprintf( __( 'XML Sitemap %1$s %2$s', 'seo-by-rank-math' ), '-', get_bloginfo( 'name', 'display' ) );
 
 		/* translators: 1. separator, 2. blogname */
-		$kml_title = sprintf( __( 'Locations Sitemap %1$s %2$s', 'rank-math' ), '-', get_bloginfo( 'name', 'display' ) );
+		$kml_title = sprintf( __( 'Locations Sitemap %1$s %2$s', 'seo-by-rank-math' ), '-', get_bloginfo( 'name', 'display' ) );
 
 		if ( 'main' !== $type ) {
 			/**
