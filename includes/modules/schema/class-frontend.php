@@ -208,7 +208,7 @@ class Frontend {
 				],
 			];
 
-			if ( isset( $schema['image'] ) && 'product' === $type && is_array( $schema['image'] ) ) {
+			if ( isset( $schema['image'] ) && in_array( $type, [ 'product', 'productgroup' ], true ) && is_array( $schema['image'] ) ) {
 				$props['thumbnail']['value'] = false;
 			}
 

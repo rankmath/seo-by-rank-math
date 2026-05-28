@@ -35,6 +35,17 @@ class Monitor {
 	public $admin;
 
 	/**
+	 * Whether the current request was a 404 at the time the `wp` action fired.
+	 *
+	 * Captured before `template_redirect` fires, because some themes replace
+	 * $wp_query at that point to serve a custom error page, which causes
+	 * is_404() to return false by the time capture_404() runs.
+	 *
+	 * @var bool
+	 */
+	private $is_404 = false;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
@@ -50,11 +61,24 @@ class Monitor {
 			$this->action( 'rank_math/dashboard/widget', 'dashboard_widget', 11 );
 		}
 
+		$this->action( 'wp', 'save_404_flag' );
 		$this->action( $this->get_hook(), 'capture_404' );
 
 		if ( Helper::has_cap( '404_monitor' ) ) {
 			$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
 		}
+	}
+
+	/**
+	 * Save the 404 status before any theme or plugin can replace $wp_query.
+	 *
+	 * Hooked to `wp`, which fires before `template_redirect`. Some themes
+	 * replace the global query on `template_redirect` to render a custom error
+	 * page, which causes is_404() to return false afterwards. Capturing the
+	 * flag here ensures the original 404 state is preserved for capture_404().
+	 */
+	public function save_404_flag() {
+		$this->is_404 = is_404();
 	}
 
 	/**
@@ -122,10 +146,16 @@ class Monitor {
 	}
 
 	/**
-	 * Log the request details when is_404() is true and WP's response code is *not* 410 or 451.
+	 * Log the request details when a 404 is detected, unless WP's response code is 410 or 451.
+	 *
+	 * Prefers the flag set by save_404_flag() (hooked to `wp`) over a live
+	 * is_404() call, because some themes replace $wp_query on `template_redirect`
+	 * before this hook fires, making is_404() return false at that point.
+	 * Falls back to a live is_404() check when save_404_flag() has not run
+	 * (e.g. in unit tests that call capture_404() directly).
 	 */
 	public function capture_404() {
-		if ( ! is_404() || in_array( http_response_code(), [ 410, 451 ], true ) ) {
+		if ( ( ! $this->is_404 && ! is_404() ) || in_array( http_response_code(), [ 410, 451 ], true ) ) {
 			return;
 		}
 

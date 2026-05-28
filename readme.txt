@@ -5,7 +5,7 @@ Tags: seo, google search console, schema, redirection, xml sitemap
 Tested up to: 7.0
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.270
+Stable tag: 1.0.271
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -371,11 +371,12 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
-= 1.0.270 [May 14, 2026] =
-- Improved [AI Link Genius module](https://rankmath.com/blog/ai-link-genius/) so users with the [Link Builder capability](https://rankmath.com/kb/role-manager/) can now access it.
-- Improved plugin code to better align with WordPress plugin guidelines
-- Fixed Compatibility issue with the [ACF plugin](https://rankmath.com/kb/advanced-custom-fields/) where the global expand/collapse state of the ACF fields was not preserved after updating a post.
-- Fixed the [Content AI History tab](https://rankmath.com/kb/content-ai-history/) so it no longer displays a blank page after reloading.
-- Fixed the [Open Graph meta tag generation via Content AI](https://rankmath.com/kb/content-ai-open-graph-tool/) so it works correctly following the last update.
+= 1.0.271 [May 28, 2026] =
+- Added [Rank Math MCP Tools](https://rankmath.com/kb/mcp-tools/) to let AI assistants audit your site and automatically fix SEO issues.
+- Fixed [404 Monitor](https://rankmath.com/kb/monitor-404-errors/) issue with custom 404 pages created using Themify Ultra theme.
+- Fixed missing default description in the [SERP Preview](https://rankmath.com/kb/general-tab/#write-title-permalink-description) when editing a static homepage from Full Site Editor.
+- Fixed UI issues in the [Schema Generator modal](https://rankmath.com/kb/schema-generator/).
+- Fixed accessibility issue in the [FAQ Schema block](https://rankmath.com/kb/faq-schema-block/) on some setups.
+- Fixed incorrect redirect issue with [Reconnect option in Analytics settings](https://rankmath.com/kb/general-settings/#test-connections).
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

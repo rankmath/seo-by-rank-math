@@ -311,6 +311,30 @@ class Tracking {
 	}
 
 	/**
+	 * Track a WordPress Abilities API execution event.
+	 *
+	 * MCP and direct calls share the same event name; the context property
+	 * differentiates them ('wp_plugin' vs 'wp_plugin_mcp').
+	 *
+	 * @param string $event_name       Mixpanel event name (e.g. 'SEO Audit Run').
+	 * @param array  $properties       Additional event properties (e.g. score, test_id).
+	 * @param string $event_capability WordPress capability required to execute the ability.
+	 */
+	public function track_ability_executed( string $event_name, array $properties = [], string $event_capability = '' ): void {
+		if ( ! $this->is_opted_in() ) {
+			return;
+		}
+
+		$context = ! empty( $_SERVER['HTTP_MCP_SESSION_ID'] ) ? 'wp_plugin_mcp' : 'wp_plugin'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
+		$this->track_event(
+			$event_name,
+			array_merge( [ 'context' => $context ], $properties ),
+			$event_capability
+		);
+	}
+
+	/**
 	 * Track a custom event for Rank Math.
 	 *
 	 * @param string $event            Event name.
@@ -324,7 +348,7 @@ class Tracking {
 		];
 
 		$this->identify_user();
-		$this->mixpanel->track( $event, array_merge( $properties, $defaults ), $event_capability );
+		$this->mixpanel->track( $event, array_merge( $defaults, $properties ), $event_capability );
 	}
 
 	/**
