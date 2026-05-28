@@ -14,13 +14,49 @@ import MediaUploader from '@blocks/shared/MediaUploader'
 import { __ } from '@wordpress/i18n'
 import { applyFilters } from '@wordpress/hooks'
 import { Button } from '@wordpress/components'
-import { Component } from '@wordpress/element'
+import { Component, createRef } from '@wordpress/element'
 import { RichText, MediaUpload } from '@wordpress/block-editor'
 
 /**
  * A Question and answer pair within FAQ block.
  */
 class Question extends Component {
+	contentRef = createRef()
+
+	addImageRef = createRef()
+
+	/**
+	 * Move focus to the answer input when tabbing forward from the delete button.
+	 *
+	 * @param {KeyboardEvent} event Keyboard event.
+	 */
+	handleDeleteKeyDown = ( event ) => {
+		if ( event.key === 'Tab' && ! event.shiftKey ) {
+			event.preventDefault()
+			const contentArea = this.contentRef.current
+			if ( contentArea ) {
+				const focusable = contentArea.querySelector( '[contenteditable]' )
+				if ( focusable ) {
+					focusable.focus()
+				}
+			}
+		}
+	}
+
+	/**
+	 * Move focus to the Add Image button when tabbing forward from the answer input.
+	 *
+	 * @param {KeyboardEvent} event Keyboard event.
+	 */
+	handleAnswerKeyDown = ( event ) => {
+		if ( event.key === 'Tab' && ! event.shiftKey ) {
+			event.preventDefault()
+			if ( this.addImageRef.current ) {
+				this.addImageRef.current.focus()
+			}
+		}
+	}
+
 	/**
 	 * Renders the component.
 	 *
@@ -72,13 +108,14 @@ class Question extends Component {
 							icon="trash"
 							className="rank-math-item-delete"
 							onClick={ this.deleteQuestion }
+							onKeyDown={ this.handleDeleteKeyDown }
 							label={ __( 'Delete Question', 'seo-by-rank-math' ) }
 							showTooltip={ true }
 						/>
 					</div>
 				</div>
 
-				<div className="rank-math-item-content">
+				<div className="rank-math-item-content" ref={ this.contentRef }>
 					<RichText
 						tagName="div"
 						className={ 'rank-math-faq-answer ' + contentCssClasses }
@@ -86,6 +123,7 @@ class Question extends Component {
 						onChange={ ( newContent ) => {
 							this.setQuestionProp( 'content', newContent )
 						} }
+						onKeyDown={ this.handleAnswerKeyDown }
 						placeholder={ __(
 							'Enter the answer to the question',
 							'seo-by-rank-math'
@@ -101,6 +139,7 @@ class Question extends Component {
 								imageID={ imageID }
 								sizeSlug={ sizeSlug }
 								open={ open }
+								addImageRef={ this.addImageRef }
 								removeImage={ () => {
 									this.setQuestionProp( 'imageID', 0 )
 								} }

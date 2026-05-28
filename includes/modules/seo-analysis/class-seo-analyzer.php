@@ -277,34 +277,23 @@ class SEO_Analyzer {
 	}
 
 	/**
-	 * Analyze page.
+	 * Run all SEO analysis tests against the configured URL.
+	 *
+	 * Extracted from analyze_me() so the analyzer can be invoked outside
+	 * the AJAX request lifecycle (e.g. by Rank Math abilities).
+	 *
+	 * @param bool $clear_cache Whether to clear cached results before running.
+	 * @return bool True on success, false if the remote API failed AND no local tests ran.
 	 */
-	public function analyze_me() {
-		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
-		$this->has_cap_ajax( 'site_analysis' );
-
+	public function run_tests( $clear_cache = true ) {
 		$this->results = null;
-		$success       = true;
-		$directory     = __DIR__;
 
-		$this->set_url();
-		if ( ! $this->analyse_subpage ) {
+		if ( ! $this->analyse_subpage && $clear_cache ) {
 			delete_option( 'rank_math_seo_analysis_results' );
 			delete_option( 'rank_math_seo_analysis_date' );
 		}
 
-		if ( ! $this->run_api_tests() ) {
-			$this->error(
-				'<div class="notice notice-error is-dismissible notice-seo-analysis-error rank-math-notice">
-					<p>' .
-						/* translators: API error */
-						sprintf( __( '<strong>API Error:</strong> %s', 'seo-by-rank-math' ), $this->api_error ) .
-					'</p>
-				</div>'
-			);
-			$success = false;
-			die;
-		}
+		$remote_ok = $this->run_api_tests();
 
 		if ( ! $this->analyse_subpage ) {
 			$this->run_local_tests();
@@ -313,11 +302,34 @@ class SEO_Analyzer {
 		}
 
 		/**
-		 * Action: 'rank_math/seo_analysis/after_analyze' - Fires after the SEO analysis is done.
+		 * Fires after the SEO analysis has completed.
+		 *
+		 * @see action: rank_math/seo_analysis/after_analyze
 		 */
 		$this->do_action( 'seo_analysis/after_analyze', $this );
 		$this->build_results();
 
+		return $remote_ok || ! empty( $this->results );
+	}
+
+	/**
+	 * Whether the most recent run_tests() call reached the remote API.
+	 *
+	 * @return bool
+	 */
+	public function remote_api_succeeded() {
+		return empty( $this->api_error );
+	}
+
+	/**
+	 * AJAX handler — runs the site SEO audit and returns results to the admin UI.
+	 */
+	public function analyze_me() {
+		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
+		$this->has_cap_ajax( 'site_analysis' );
+
+		$this->set_url();
+		$this->run_tests( true );
 		$this->success( $this->get_results() );
 	}
 

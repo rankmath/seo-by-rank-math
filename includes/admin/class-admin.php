@@ -336,13 +336,11 @@ class Admin implements Runner {
 	 * @return string Modified translated text.
 	 */
 	public function remap_action_scheduler_translation( $translated, $text, $domain ) {
-		if ( 'action-scheduler' !== $domain || ! Helper::is_woocommerce_active() ) {
+		if ( ! self::should_remap_action_scheduler_translation( $domain ) ) {
 			return $translated;
 		}
 
-		$translations = get_translations_for_domain( 'woocommerce' );
-		$translation  = $translations->translate( $text );
-		return $translation !== $text ? $translation : $translated;
+		return self::get_translated_string( $translated, $text );
 	}
 
 	/**
@@ -355,10 +353,33 @@ class Admin implements Runner {
 	 * @return string Modified translated text.
 	 */
 	public function remap_action_scheduler_translation_with_context( $translated, $text, $context, $domain ) {
-		if ( 'action-scheduler' !== $domain || ! Helper::is_woocommerce_active() ) {
+		if ( ! self::should_remap_action_scheduler_translation( $domain ) ) {
 			return $translated;
 		}
 
+		return self::get_translated_string( $translated, $text, $context );
+	}
+
+	/**
+	 * Determine whether to remap Action Scheduler translations to WooCommerce's text domain.
+	 *
+	 * @param string $domain Text domain.
+	 * @return bool True if the translation should be remapped, false otherwise.
+	 */
+	private static function should_remap_action_scheduler_translation( $domain ) {
+		return 'action-scheduler' === $domain && Helper::is_woocommerce_active();
+	}
+
+	/**
+	 * Get the translated string from WooCommerce's text domain if the original string matches an Action Scheduler string.
+	 *
+	 * @param string      $translated Translated text.
+	 * @param string      $text       Original text.
+	 * @param string|null $context    Context information for translators.
+	 *
+	 * @return string Modified translated text.
+	 */
+	private static function get_translated_string( $translated, $text, $context = null ) {
 		$translations = get_translations_for_domain( 'woocommerce' );
 		$translation  = $translations->translate( $text, $context );
 		return $translation !== $text ? $translation : $translated;
