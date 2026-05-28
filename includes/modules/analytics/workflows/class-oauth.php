@@ -66,6 +66,8 @@ class OAuth {
 			$redirect = $this->get_tokens_from_url();
 		}
 
+		$redirect .= '&view=analytics';
+
 		// Remove possible admin notice if we have new access token.
 		// Also remove the connection errors.
 		foreach (

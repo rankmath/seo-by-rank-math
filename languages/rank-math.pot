@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.270\n"
+"Project-Id-Version: Rank Math SEO 1.0.271\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-14T05:39:36+00:00\n"
+"POT-Creation-Date: 2026-05-28T04:12:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: seo-by-rank-math\n"
@@ -41,6 +41,108 @@ msgid "Please enter a valid email address."
 msgstr ""
 
 msgid "Please enter a valid URL."
+msgstr ""
+
+msgid "The provided URL is not valid."
+msgstr ""
+
+#. translators: %s: URL to the Rank Math PRO upgrade page
+msgid "Competitor URL analysis requires Rank Math PRO. Upgrade at %s"
+msgstr ""
+
+msgid "Audit site SEO"
+msgstr ""
+
+msgid "Runs Rank Math's site-wide SEO audit and returns a structured score plus per-test findings with fix hints. Combines local checks with the remote rankmath.com API tests."
+msgstr ""
+
+msgid "Re-run the audit. Defaults to true (always fresh when called by an AI host)."
+msgstr ""
+
+msgid "Optional URL to audit. Defaults to this site's home URL. When provided, only remote API tests run (local checks are site-wide)."
+msgstr ""
+
+#. translators: %s: test ID
+msgid "No automatic fix is available for test \"%s\". Use the fix_text guidance to resolve it manually."
+msgstr ""
+
+msgid "Site visibility set to public. Search engines can now index your site."
+msgstr ""
+
+msgid "Permalink structure is already set to /%postname%/."
+msgstr ""
+
+msgid "Permalink structure set to /%postname%/ and rewrite rules flushed."
+msgstr ""
+
+msgid "A \"value\" input is required to set the site tagline. Provide a short, unique description of your site."
+msgstr ""
+
+msgid "The provided tagline is the default WordPress value. Please supply a unique tagline."
+msgstr ""
+
+#. translators: %s: tagline value
+msgid "Site tagline updated to: \"%s\"."
+msgstr ""
+
+msgid "Sitemap module enabled. Your XML sitemap is now active."
+msgstr ""
+
+msgid "Schema / rich snippet module enabled."
+msgstr ""
+
+msgid "Global robots setting updated to allow indexing. Run a fresh audit to confirm the remote API test passes."
+msgstr ""
+
+msgid "OpenGraph output is always enabled in Rank Math. If this test is failing, the remote audit API may need a fallback Open Graph image. Set one at Rank Math → Titles & Meta → Global Meta → Open Graph Thumbnail."
+msgstr ""
+
+msgid "Robots.txt content is already configured in Rank Math settings."
+msgstr ""
+
+msgid "Default robots.txt content written to Rank Math settings."
+msgstr ""
+
+msgid "No indexable post types are configured in Rank Math."
+msgstr ""
+
+msgid "All published posts already have a focus keyword set."
+msgstr ""
+
+#. translators: 1: count updated, 2: total found
+msgid "Set focus keywords on %1$d posts (derived from post titles)."
+msgstr ""
+
+#. translators: %d: post_limit
+msgid "Results were limited to %d posts — run again to continue."
+msgstr ""
+
+msgid "All posts with focus keywords already include them in their titles."
+msgstr ""
+
+#. translators: %d: count updated
+msgid "Updated focus keywords on %d posts to match their titles."
+msgstr ""
+
+msgid "Fix site SEO"
+msgstr ""
+
+msgid "Applies an automatic fix for a single failing Rank Math SEO test. Pass the test_id from an audit-site-seo finding. Some fixes require additional input (e.g. value for site_description). Bulk fixes accept an optional post_limit."
+msgstr ""
+
+msgid "The SEO test identifier to fix (from audit-site-seo findings)."
+msgstr ""
+
+msgid "Required for site_description: the new tagline to set."
+msgstr ""
+
+msgid "For bulk post fixes (focus_keywords, post_titles): max posts to update in one call. Default 100."
+msgstr ""
+
+msgid "SEO Analysis"
+msgstr ""
+
+msgid "Abilities to audit and fix site-wide SEO issues."
 msgstr ""
 
 msgid "Rank Math Dashboard"
@@ -4216,10 +4318,6 @@ msgid "Analyze this Page"
 msgstr ""
 
 msgid "SEO Analysis for this page"
-msgstr ""
-
-#. translators: API error
-msgid "<strong>API Error:</strong> %s"
 msgstr ""
 
 msgid "Rank Math auto-update option is enabled on your site."

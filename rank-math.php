@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.270
+ * Version:           1.0.271
  * Plugin URI:        https://rankmath.com/
  * Description:       Rank Math SEO is the Best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic.
  * Author:            Rank Math SEO
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.270';
+	public $version = '1.0.271';
 
 	/**
 	 * Rank Math database version.
@@ -261,6 +261,10 @@ final class RankMath {
 	private function includes() {
 		include __DIR__ . '/vendor/autoload.php';
 
+		if ( class_exists( 'WP\MCP\Core\McpAdapter' ) ) {
+			\WP\MCP\Core\McpAdapter::instance();
+		}
+
 		// For Theme Developers:
 		// theme-folder/rankmath.php will be loaded automatically.
 		$file = get_stylesheet_directory() . '/rank-math.php';
@@ -322,6 +326,9 @@ final class RankMath {
 		add_action( 'plugins_loaded', [ $this, 'init' ], 14 );
 		add_action( 'rest_api_init', [ $this, 'init_rest_api' ] );
 
+		// WordPress Abilities API integration (priority 0 = before wp_abilities_api_init fires).
+		add_action( 'init', [ $this, 'init_abilities' ], 0 );
+
 		// Load admin-related functionality.
 		if ( is_admin() ) {
 			add_action( 'plugins_loaded', [ $this, 'init_admin' ], 15 );
@@ -336,6 +343,13 @@ final class RankMath {
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			add_action( 'plugins_loaded', [ $this, 'init_wp_cli' ], 20 );
 		}
+	}
+
+	/**
+	 * Bootstrap the WordPress Abilities API integration.
+	 */
+	public function init_abilities() {
+		\RankMath\Abilities\Abilities::get();
 	}
 
 	/**
