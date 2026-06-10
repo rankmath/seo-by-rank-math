@@ -224,9 +224,10 @@ class LLMS_Txt {
 					continue;
 				}
 
-				$title = get_the_title( $object );
-				$link  = get_permalink( $object );
-				$desc  = wp_strip_all_tags( Helper::replace_vars( '%excerpt%', $object ) );
+				$title                = get_the_title( $object );
+				$link                 = get_permalink( $object );
+				$object->post_content = do_shortcode( $object->post_content );
+				$desc                 = wp_strip_all_tags( Helper::replace_vars( '%excerpt%', $object ) );
 
 				$this->output_line(
 					$desc

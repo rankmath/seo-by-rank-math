@@ -5,7 +5,7 @@
 	"name": "rank-math/howto-block",
 	"category": "rank-math-blocks",
 	"icon": "editor-ol",
-	"textdomain": "rank-math",
+	"textdomain": "seo-by-rank-math",
  	"keywords": [ "HowTo", "Schema", "SEO", "Structured Data", "Yoast", "Rank Math", "Block", "Markup", "Rich Snippet" ],
 	"editorScript": [
 		"lodash",

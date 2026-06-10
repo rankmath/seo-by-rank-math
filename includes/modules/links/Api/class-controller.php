@@ -124,17 +124,58 @@ class Controller {
 	 * @return WP_REST_Response
 	 */
 	public function get_posts( $request ) {
-		$page     = max( 1, (int) $request->get_param( 'page' ) );
-		$per_page = min( 100, max( 1, (int) $request->get_param( 'per_page' ) ) );
+		$data = $this->get_posts_data(
+			[
+				'page'            => $request->get_param( 'page' ),
+				'per_page'        => $request->get_param( 'per_page' ),
+				'search'          => $request->get_param( 'search' ),
+				'post_type'       => $request->get_param( 'post_type' ),
+				'is_orphan'       => $request->get_param( 'is_orphan' ),
+				'seo_score_range' => $request->get_param( 'seo_score_range' ),
+				'post_id'         => $request->get_param( 'post_id' ),
+				'orderby'         => $request->get_param( 'orderby' ),
+				'order'           => $request->get_param( 'order' ),
+			]
+		);
+
+		return rest_ensure_response( $data );
+	}
+
+	/**
+	 * Query post link stats and return the data array.
+	 *
+	 * Shared by the REST endpoint and the Abilities API so neither needs to
+	 * construct a WP_REST_Request. The REST endpoint wraps the return value
+	 * in rest_ensure_response(); abilities call this method directly.
+	 *
+	 * @param array $args {
+	 *     Raw or pre-sanitized query arguments.
+	 *
+	 *     @type int    $page            1-based page number. Default 1.
+	 *     @type int    $per_page        Rows per page (max 100). Default 50.
+	 *     @type string $search          Partial post-title search. Default ''.
+	 *     @type array  $post_type       Allowed post types. Default [].
+	 *     @type string $is_orphan       Orphan filter: 'orphan', 'linked', or ''. Default ''.
+	 *     @type string $seo_score_range SEO score filter: great, good, bad, no-score, or ''. Default ''.
+	 *     @type int    $post_id         Filter to a single post by ID. Default 0.
+	 *     @type string $orderby         Order-by field. Default 'post_title'.
+	 *     @type string $order           Sort direction: ASC or DESC. Default 'ASC'.
+	 * }
+	 * @return array { posts: array, total: int, pages: int }
+	 */
+	public function get_posts_data( array $args ): array {
+		$page     = max( 1, (int) ( $args['page'] ?? 1 ) );
+		$per_page = min( 100, max( 1, (int) ( $args['per_page'] ?? 50 ) ) );
 		$offset   = ( $page - 1 ) * $per_page;
 
-		$args = [
-			'search'          => sanitize_text_field( (string) $request->get_param( 'search' ) ),
-			'post_type'       => (array) $request->get_param( 'post_type' ),
-			'is_orphan'       => sanitize_text_field( (string) $request->get_param( 'is_orphan' ) ),
-			'seo_score_range' => sanitize_text_field( (string) $request->get_param( 'seo_score_range' ) ),
-			'orderby'         => sanitize_text_field( (string) $request->get_param( 'orderby' ) ),
-			'order'           => sanitize_text_field( (string) $request->get_param( 'order' ) ),
+		$normalized = [
+			'search'          => sanitize_text_field( (string) ( $args['search'] ?? '' ) ),
+			'post_type'       => (array) ( $args['post_type'] ?? [] ),
+			'is_orphan'       => sanitize_text_field( (string) ( $args['is_orphan'] ?? '' ) ),
+			'seo_score_range' => sanitize_text_field( (string) ( $args['seo_score_range'] ?? '' ) ),
+			'post_id'         => absint( $args['post_id'] ?? 0 ),
+			'orderby'         => sanitize_text_field( (string) ( $args['orderby'] ?? 'post_title' ) ),
+			'order'           => sanitize_text_field( (string) ( $args['order'] ?? 'ASC' ) ),
 			'offset'          => $offset,
 			'per_page'        => $per_page,
 		];
@@ -148,23 +189,21 @@ class Controller {
 		 * @since 1.0.266
 		 *
 		 * @param null|array $override Return override data or null to use Free's query.
-		 * @param array      $args     Normalized query arguments.
+		 * @param array      $normalized Normalized query arguments.
 		 */
-		$override = apply_filters( 'rank_math/links/rest_posts_response', null, $args );
+		$override = apply_filters( 'rank_math/links/rest_posts_response', null, $normalized );
 		if ( null !== $override ) {
-			return rest_ensure_response( $override );
+			return (array) $override;
 		}
 
-		$results = $this->query_posts( $args );
-		$total   = $this->query_posts_count( $args );
+		$results = $this->query_posts( $normalized );
+		$total   = $this->query_posts_count( $normalized );
 
-		return rest_ensure_response(
-			[
-				'posts' => $results,
-				'total' => (int) $total,
-				'pages' => (int) ceil( $total / $per_page ),
-			]
-		);
+		return [
+			'posts' => $results,
+			'total' => (int) $total,
+			'pages' => (int) ceil( $total / $per_page ),
+		];
 	}
 
 	/**
@@ -223,17 +262,54 @@ class Controller {
 	 * @return WP_REST_Response
 	 */
 	public function get_links( $request ) {
-		$page     = max( 1, (int) $request->get_param( 'page' ) );
-		$per_page = min( 100, max( 1, (int) $request->get_param( 'per_page' ) ) );
+		return rest_ensure_response(
+			$this->get_links_data(
+				[
+					'page'           => $request->get_param( 'page' ),
+					'per_page'       => $request->get_param( 'per_page' ),
+					'search'         => $request->get_param( 'search' ),
+					'source_id'      => $request->get_param( 'source_id' ),
+					'target_post_id' => $request->get_param( 'target_post_id' ),
+					'is_internal'    => $request->get_param( 'is_internal' ),
+					'orderby'        => $request->get_param( 'orderby' ),
+					'order'          => $request->get_param( 'order' ),
+				]
+			)
+		);
+	}
+
+	/**
+	 * Fetch and normalize link rows without REST plumbing.
+	 *
+	 * Shared by the REST endpoint and the Abilities API runner so neither
+	 * needs to construct a WP_REST_Request object.
+	 *
+	 * @param array $args {
+	 *     Query arguments (all optional).
+	 *
+	 *     @type int    $page           1-based page number (default 1).
+	 *     @type int    $per_page       Rows per page, capped at 100 (default 50).
+	 *     @type string $search         URL search string.
+	 *     @type int    $source_id      Source post ID.
+	 *     @type int    $target_post_id Target post ID.
+	 *     @type string $is_internal    '1' = internal only, '0' = external only, '' = all.
+	 *     @type string $orderby        Column to sort by.
+	 *     @type string $order          Sort direction.
+	 * }
+	 * @return array { links: array, total: int, pages: int }
+	 */
+	public function get_links_data( array $args ): array {
+		$page     = max( 1, (int) ( $args['page'] ?? 1 ) );
+		$per_page = min( 100, max( 1, (int) ( $args['per_page'] ?? 50 ) ) );
 		$offset   = ( $page - 1 ) * $per_page;
 
-		$args = [
-			'search'         => sanitize_text_field( (string) $request->get_param( 'search' ) ),
-			'source_id'      => absint( $request->get_param( 'source_id' ) ),
-			'target_post_id' => absint( $request->get_param( 'target_post_id' ) ),
-			'is_internal'    => sanitize_text_field( (string) $request->get_param( 'is_internal' ) ),
-			'orderby'        => sanitize_text_field( (string) $request->get_param( 'orderby' ) ),
-			'order'          => sanitize_text_field( (string) $request->get_param( 'order' ) ),
+		$normalized = [
+			'search'         => sanitize_text_field( (string) ( $args['search'] ?? '' ) ),
+			'source_id'      => absint( $args['source_id'] ?? 0 ),
+			'target_post_id' => absint( $args['target_post_id'] ?? 0 ),
+			'is_internal'    => sanitize_text_field( (string) ( $args['is_internal'] ?? '' ) ),
+			'orderby'        => sanitize_text_field( (string) ( $args['orderby'] ?? '' ) ),
+			'order'          => sanitize_text_field( (string) ( $args['order'] ?? '' ) ),
 			'offset'         => $offset,
 			'per_page'       => $per_page,
 		];
@@ -246,24 +322,22 @@ class Controller {
 		 *
 		 * @since 1.0.266
 		 *
-		 * @param null|array $override Return override data or null to use Free's query.
-		 * @param array      $args     Normalized query arguments.
+		 * @param null|array $override   Return override data or null to use Free's query.
+		 * @param array      $normalized Normalized query arguments.
 		 */
-		$override = apply_filters( 'rank_math/links/rest_links_response', null, $args );
+		$override = apply_filters( 'rank_math/links/rest_links_response', null, $normalized );
 		if ( null !== $override ) {
-			return rest_ensure_response( $override );
+			return (array) $override;
 		}
 
-		$results = $this->query_links( $args );
-		$total   = $this->query_links_count( $args );
+		$results = $this->query_links( $normalized );
+		$total   = $this->query_links_count( $normalized );
 
-		return rest_ensure_response(
-			[
-				'links' => $results,
-				'total' => (int) $total,
-				'pages' => (int) ceil( $total / $per_page ),
-			]
-		);
+		return [
+			'links' => $results,
+			'total' => (int) $total,
+			'pages' => (int) ceil( $total / $per_page ),
+		];
 	}
 
 	/**
@@ -518,6 +592,11 @@ class Controller {
 			}
 		}
 
+		// Post ID filter.
+		if ( ! empty( $args['post_id'] ) ) {
+			$where[] = $wpdb->prepare( 'p.ID = %d', $args['post_id'] );
+		}
+
 		// Search filter.
 		if ( ! empty( $args['search'] ) ) {
 			$where[] = $wpdb->prepare(
@@ -670,6 +749,12 @@ class Controller {
 				'type'              => 'string',
 				'default'           => '',
 				'sanitize_callback' => 'sanitize_text_field',
+			],
+			'post_id'         => [
+				'description'       => esc_html__( 'Filter by post ID.', 'seo-by-rank-math' ),
+				'type'              => 'integer',
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
 			],
 			'orderby'         => [
 				'description'       => esc_html__( 'Order by field.', 'seo-by-rank-math' ),
