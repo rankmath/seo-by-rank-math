@@ -375,6 +375,9 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
+= 1.0.273 [June 12, 2026] =
+- Fixed Action Scheduler fatal error that occurred at WP shutdown when WooCommerce was active. Rank Math now defers to WooCommerce's bundled Action Scheduler instead of loading its own copy eagerly, preventing the "mysqli_get_server_info() must be of type mysqli, null given" fatal on sites with stale failed actions in the queue.
+
 = 1.0.272 [June 10, 2026] =
 - Added `rank-math/get-link-report` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve site-wide link statistics, including internal, external, and broken link counts.
 - Added `rank-math/get-post-seo-meta` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve a post's SEO title, description, focus keyword, robots meta settings, and SEO score.

@@ -486,6 +486,12 @@ class Admin implements Runner {
 	 * @param null $value Null value.
 	 */
 	public function as_exclude_pastdue_actions( $value ) {
+		// Issue #337: if AS is not loaded (e.g. another plugin replaced it),
+		// fall back to the default behavior.
+		if ( ! Helper::is_action_scheduler_available() || ! class_exists( '\ActionScheduler_Store' ) ) {
+			return $value;
+		}
+
 		$query_args = [
 			'date'     => as_get_datetime_object( time() - DAY_IN_SECONDS ),
 			'status'   => \ActionScheduler_Store::STATUS_PENDING,

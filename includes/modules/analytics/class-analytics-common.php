@@ -271,7 +271,10 @@ class Analytics_Common {
 			return;
 		}
 
-		as_unschedule_all_actions( 'rank_math/analytics/email_report_event', [], 'rank-math' );
+		// Issue #337: bail when AS is missing rather than fatal.
+		if ( Helper::is_action_scheduler_available() ) {
+			as_unschedule_all_actions( 'rank_math/analytics/email_report_event', [], 'rank-math' );
+		}
 		if ( ! $console_email_reports ) {
 			return;
 		}
@@ -294,7 +297,10 @@ class Analytics_Common {
 			return;
 		}
 
-		as_unschedule_all_actions( 'rank_math/analytics/email_report_event', [], 'rank-math' );
+		// Issue #337: bail when AS is missing rather than fatal.
+		if ( Helper::is_action_scheduler_available() ) {
+			as_unschedule_all_actions( 'rank_math/analytics/email_report_event', [], 'rank-math' );
+		}
 		$values = $cmb->get_sanitized_values( $_POST ); // phpcs:ignore
 		if ( 'off' === $values['console_email_reports'] ) {
 			return;

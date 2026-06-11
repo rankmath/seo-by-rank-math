@@ -33,6 +33,11 @@ class Schedule {
 	 * @return int The action ID. Zero if there was an error scheduling the action.
 	 */
 	public static function recurring_action( $timestamp, $interval_in_seconds, $hook, $args = [], $group = '', $unique = false, $priority = 10 ) {
+		// Issue #337: bail when AS is missing rather than fatal. See Helper::is_action_scheduler_available().
+		if ( ! Helper::is_action_scheduler_available() ) {
+			return 0;
+		}
+
 		$id = as_schedule_recurring_action( $timestamp, $interval_in_seconds, $hook, $args, $group, $unique, $priority );
 
 		if ( ! $id ) {
@@ -58,6 +63,11 @@ class Schedule {
 	 * @return int The action ID. Zero if there was an error scheduling the action.
 	 */
 	public static function single_action( $timestamp, $hook, $args = [], $group = '', $unique = false, $priority = 10 ) {
+		// Issue #337: bail when AS is missing rather than fatal.
+		if ( ! Helper::is_action_scheduler_available() ) {
+			return 0;
+		}
+
 		$id = as_schedule_single_action( $timestamp, $hook, $args, $group, $unique, $priority );
 
 		if ( ! $id ) {
@@ -87,6 +97,11 @@ class Schedule {
 	 * @return int|null The scheduled action ID if a scheduled action was found, or null if no matching action found.
 	 */
 	public static function unschedule_action( $hook, $args = [], $group = '' ) {
+		// Issue #337: bail when AS is missing rather than fatal.
+		if ( ! Helper::is_action_scheduler_available() ) {
+			return null;
+		}
+
 		$id = as_unschedule_action( $hook, $args, $group );
 
 		if ( ! $id ) {
@@ -111,6 +126,11 @@ class Schedule {
 	 * @return int The action ID. Zero if there was an error scheduling the action.
 	 */
 	public static function async_action( $hook, $args = [], $group = '', $unique = false, $priority = 10 ) {
+		// Issue #337: bail when AS is missing rather than fatal.
+		if ( ! Helper::is_action_scheduler_available() ) {
+			return 0;
+		}
+
 		$id = as_enqueue_async_action( $hook, $args, $group, $unique, $priority );
 
 		if ( ! $id ) {

@@ -49,7 +49,10 @@ class Url_Inspection {
 		$delay = absint( $delay );
 		if ( $reschedule ) {
 			Schedule::unschedule_action( 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' );
-		} elseif ( as_has_scheduled_action( 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' ) ) {
+		} elseif (
+			\RankMath\Helper::is_action_scheduler_available()
+			&& as_has_scheduled_action( 'rank_math/analytics/get_inspections_data', [ $page ], 'rank-math' )
+		) {
 			// Already scheduled and reschedule = false.
 			return;
 		}

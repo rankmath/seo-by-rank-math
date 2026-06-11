@@ -448,4 +448,24 @@ trait Conditional {
 	public static function is_edd_active() {
 		return class_exists( 'Easy_Digital_Downloads' );
 	}
+
+	/**
+	 * Is Action Scheduler available (loaded and callable)?
+	 *
+	 * Used to gate call sites that schedule or query actions so they no-op
+	 * gracefully when AS has been removed, replaced, or never loaded. See
+	 * https://github.com/rankmath/seo-by-rank-math/issues/337
+	 *
+	 * @since 1.0.273
+	 *
+	 * @return bool
+	 */
+	public static function is_action_scheduler_available() {
+		return function_exists( 'as_schedule_single_action' )
+			&& function_exists( 'as_schedule_recurring_action' )
+			&& function_exists( 'as_unschedule_action' )
+			&& function_exists( 'as_unschedule_all_actions' )
+			&& function_exists( 'as_has_scheduled_action' )
+			&& function_exists( 'as_enqueue_async_action' );
+	}
 }
