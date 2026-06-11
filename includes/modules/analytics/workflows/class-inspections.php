@@ -19,8 +19,6 @@ use RankMath\Analytics\Url_Inspection;
 use RankMath\Google\Console;
 use RankMath\Helpers\Schedule;
 
-use function as_unschedule_all_actions;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -65,6 +63,10 @@ class Inspections {
 	 * Stop processing queue items, clear cronjob and delete all batches.
 	 */
 	public static function kill_jobs() {
+		// Issue #337: bail when AS is missing rather than fatal.
+		if ( ! \RankMath\Helper::is_action_scheduler_available() ) {
+			return;
+		}
 		as_unschedule_all_actions( 'rank_math/analytics/get_inspections_data' );
 	}
 
@@ -112,6 +114,11 @@ class Inspections {
 	 * Create jobs to fetch data.
 	 */
 	public function create_data_jobs() {
+		// Issue #337: bail when AS is missing rather than fatal.
+		if ( ! \RankMath\Helper::is_action_scheduler_available() ) {
+			return;
+		}
+
 		// If there are jobs left from the previous queue, don't create new jobs.
 		if ( as_has_scheduled_action( 'rank_math/analytics/get_inspections_data' ) ) {
 			return;

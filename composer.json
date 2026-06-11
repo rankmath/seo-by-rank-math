@@ -64,8 +64,7 @@
 		"classmap" : [ "includes/" ],
 		"files": [
 			"vendor/cmb2/cmb2/init.php",
-			"includes/template-tags.php",
-			"vendor/woocommerce/action-scheduler/action-scheduler.php"
+			"includes/template-tags.php"
 		]
 	},
 	"autoload-dev": {

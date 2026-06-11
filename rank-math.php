@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Rank Math SEO
- * Version:           1.0.272
+ * Version:           1.0.273
  * Plugin URI:        https://rankmath.com/
  * Description:       Rank Math SEO is the Best WordPress SEO plugin with the features of many SEO and AI SEO tools in a single package to help multiply your SEO traffic.
  * Author:            Rank Math SEO
@@ -34,7 +34,7 @@ final class RankMath {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.272';
+	public $version = '1.0.273';
 
 	/**
 	 * Rank Math database version.
@@ -261,6 +261,10 @@ final class RankMath {
 	private function includes() {
 		include __DIR__ . '/vendor/autoload.php';
 
+		// Issue #337: load the vendored Action Scheduler only as a fallback
+		// when no other plugin (WooCommerce, UpdraftPlus, etc.) has provided one.
+		$this->maybe_load_action_scheduler();
+
 		if ( class_exists( 'WP\MCP\Core\McpAdapter' ) && function_exists( 'wp_get_abilities' ) ) {
 			\WP\MCP\Core\McpAdapter::instance();
 		}
@@ -271,6 +275,49 @@ final class RankMath {
 		if ( file_exists( $file ) ) {
 			require_once $file;
 		}
+	}
+
+	/**
+	 * Load the vendored Action Scheduler as a fallback when no other plugin
+	 * (WooCommerce, UpdraftPlus, etc.) supplies one.
+	 *
+	 * The package is no longer autoloaded via `composer.json` `autoload.files`
+	 * because eagerly registering our copy on `plugins_loaded` priority 0/1
+	 * caused a first-loader-wins race against WooCommerce's bundled copy.
+	 * That race made the vendored DBStore the active implementation when
+	 * WooCommerce's BatchProcessingController invoked as_has_scheduled_action
+	 * on the WP shutdown hook, and the vendored store fataled on a null
+	 * $wpdb->dbh. See https://github.com/rankmath/seo-by-rank-math/issues/337
+	 *
+	 * @since 1.0.273
+	 *
+	 * @return void
+	 */
+	public function maybe_load_action_scheduler() {
+		// AS already loaded (via WC, mu-plugin, or a prior include on this request).
+		if ( function_exists( 'action_scheduler_register_3_dot_9_dot_3' )
+			|| class_exists( 'ActionScheduler', false ) ) {
+			return;
+		}
+
+		$as_path = __DIR__ . '/vendor/woocommerce/action-scheduler/action-scheduler.php';
+		if ( ! file_exists( $as_path ) ) {
+			return;
+		}
+
+		// Defer until plugins_loaded so is_plugin_active() is reliable and any
+		// AS-vendoring plugin (WC, UpdraftPlus) has had a chance to register
+		// first on the same hook.
+		if ( ! did_action( 'plugins_loaded' ) && ! doing_action( 'plugins_loaded' ) ) {
+			add_action( 'plugins_loaded', [ $this, 'maybe_load_action_scheduler' ], 20 );
+			return;
+		}
+
+		if ( \RankMath\Helper::is_woocommerce_active() ) {
+			return;
+		}
+
+		require_once $as_path;
 	}
 
 	/**
