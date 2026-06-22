@@ -14,6 +14,7 @@ use RankMath\Post;
 use RankMath\Helper;
 use RankMath\Helpers\Security;
 use RankMath\Helpers\Str;
+use RankMath\OpenGraph\OpenGraph;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -114,6 +115,73 @@ class Singular implements IPaper {
 	 */
 	public function set_object( $post ) {
 		$this->object = $post;
+	}
+
+	/**
+	 * Get all SEO metadata for a post as a structured array.
+	 *
+	 * Uses existing Singular and Opengraph methods to ensure frontend fallback logic is applied consistently.
+	 *
+	 * @since 1.0.272
+	 *
+	 * @param int $post_id Post ID.
+	 * @return array
+	 */
+	public function get_seo_meta( int $post_id ): array {
+		$post = get_post( $post_id );
+		if ( ! $post ) {
+			return [ 'error' => esc_html__( 'Post not found.', 'seo-by-rank-math' ) ];
+		}
+
+		$this->set_object( $post );
+
+		// Set post context so template variables and query-dependent functions resolve correctly.
+		$prev_post       = isset( $GLOBALS['post'] ) ? $GLOBALS['post'] : null;
+		$GLOBALS['post'] = $post; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+		setup_postdata( $post );
+
+		rank_math()->variables->setup();
+
+		$seo_title       = $this->title();
+		$seo_description = $this->description();
+
+		// Derive canonical from $post_id directly — canonical() depends on the active WP query
+		// and may return get_permalink(0) outside a real frontend request.
+		$canonical_override = Post::get_meta( 'canonical_url', $post_id );
+		$canonical          = ! empty( $canonical_override ) ? $canonical_override : get_permalink( $post_id );
+
+		// Use OpenGraph directly to avoid extra hooks registered by Facebook/Twitter constructors.
+		$facebook          = new OpenGraph();
+		$facebook->network = 'facebook';
+		$facebook->prefix  = 'facebook';
+
+		$twitter          = new OpenGraph();
+		$twitter->network = 'twitter';
+		$twitter->prefix  = Helper::get_post_meta( 'twitter_use_facebook', $post_id, true ) ? 'facebook' : 'twitter';
+
+		$og_title       = $facebook->get_title( $post_id );
+		$og_description = $facebook->get_description( $post_id );
+		$tw_title       = $twitter->get_title( $post_id );
+		$tw_description = $twitter->get_description( $post_id );
+
+		$result = [
+			'post_id'             => $post_id,
+			'title'               => $seo_title,
+			'description'         => $seo_description,
+			'focus_keyword'       => $this->keywords(),
+			'robots'              => array_values( $this->get_effective_robots() ),
+			'canonical'           => (string) $canonical,
+			'og_title'            => $og_title ? $og_title : $seo_title,
+			'og_description'      => $og_description ? $og_description : $seo_description,
+			'twitter_title'       => $tw_title ? $tw_title : $seo_title,
+			'twitter_description' => $tw_description ? $tw_description : $seo_description,
+			'seo_score'           => (int) Post::get_meta( 'seo_score', $post_id ),
+		];
+
+		wp_reset_postdata();
+		$GLOBALS['post'] = $prev_post; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+
+		return $result;
 	}
 
 	/**
@@ -222,5 +290,49 @@ class Singular implements IPaper {
 		}
 
 		return $robots;
+	}
+
+	/**
+	 * Resolve the effective robots directives for the current post.
+	 *
+	 * Applies the same fallback and validation logic as Paper::get_robots().
+	 *
+	 * @return array
+	 */
+	private function get_effective_robots(): array {
+		$robots = $this->robots();
+
+		if ( empty( $robots ) ) {
+			$robots = Paper::robots_combine( Helper::get_settings( 'titles.robots_global' ) );
+		}
+
+		if ( empty( $robots ) || ! is_array( $robots ) ) {
+			return [
+				'index'  => 'index',
+				'follow' => 'follow',
+			];
+		}
+
+		if ( ! isset( $robots['index'] ) ) {
+			$robots = [ 'index' => 'index' ] + $robots;
+		}
+		if ( ! isset( $robots['follow'] ) ) {
+			$robots = [ 'follow' => 'follow' ] + $robots;
+		}
+
+		// Force noindex if the blog is not public.
+		if ( 0 === absint( get_option( 'blog_public' ) ) ) {
+			$robots['index']  = 'noindex';
+			$robots['follow'] = 'nofollow';
+		}
+
+		$allowed = [
+			'index'        => '',
+			'follow'       => '',
+			'noarchive'    => '',
+			'noimageindex' => '',
+			'nosnippet'    => '',
+		];
+		return array_unique( array_intersect_key( $robots, $allowed ) );
 	}
 }

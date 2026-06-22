@@ -77,10 +77,13 @@ class OpenGraph {
 	/**
 	 * Get title
 	 *
+	 * @since 1.0.272 Added `$post_id` parameter.
+	 *
+	 * @param int $post_id Optional post ID. When provided, reads meta for that post directly.
 	 * @return bool|string
 	 */
-	public function get_title() {
-		$title = $this->title();
+	public function get_title( int $post_id = 0 ) {
+		$title = $this->title( $post_id );
 		if ( $title && Helper::get_settings( 'titles.capitalize_titles' ) ) {
 			$title = Str::mb_ucwords( $title );
 		}
@@ -91,13 +94,16 @@ class OpenGraph {
 	/**
 	 * Get title.
 	 *
+	 * @since 1.0.272 Added `$post_id` parameter.
+	 *
+	 * @param int $post_id Optional post ID. When provided, reads meta for that post directly.
 	 * @return string
 	 */
-	private function title() {
+	private function title( int $post_id = 0 ) {
 		$key = $this->prefix . '_title';
 
-		if ( Post::is_simple_page() ) {
-			return Post::get_meta( $key, Post::get_page_id() );
+		if ( $post_id || Post::is_simple_page() ) {
+			return Post::get_meta( $key, $post_id ? $post_id : Post::get_page_id() );
 		}
 
 		if ( is_front_page() ) {
@@ -114,14 +120,17 @@ class OpenGraph {
 	/**
 	 * Get description.
 	 *
+	 * @since 1.0.272 Added `$post_id` parameter.
+	 *
+	 * @param int $post_id Optional post ID. When provided, reads meta for that post directly.
 	 * @return bool|string
 	 */
-	public function get_description() {
+	public function get_description( int $post_id = 0 ) {
 		$desc = false;
 		$key  = $this->prefix . '_description';
 
-		if ( Post::is_simple_page() ) {
-			$desc = Post::get_meta( $key, Post::get_page_id() );
+		if ( $post_id || Post::is_simple_page() ) {
+			$desc = Post::get_meta( $key, $post_id ? $post_id : Post::get_page_id() );
 			$desc = '' !== $desc ? $desc : $this->fallback_description( 'get_the_excerpt' );
 		} elseif ( is_front_page() ) {
 			$desc = Helper::replace_vars( Helper::get_settings( 'titles.homepage_facebook_description' ) );

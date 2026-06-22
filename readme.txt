@@ -5,7 +5,7 @@ Tags: seo, google search console, schema, redirection, xml sitemap
 Tested up to: 7.0
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.271
+Stable tag: 1.0.272
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -262,6 +262,10 @@ No, you won't. When you install Rank Math, it will seamlessly import your settin
 
 If you set up Rank Math from scratch, your search engine rankings will depend on how you configure it. But please be advised that Google and other search engines prefer good, helpful content over anything else.
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Rank Math SEO plugin through the Patchstack Vulnerability Disclosure  Program. The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 = Can I use Rank Math on a WordPress.com website? =
 Yes, as the plugin is provided through WordPress.org, it is available on WordPress.com as well. However, you might be required to opt for the business plan on WordPress.com.
 
@@ -371,12 +375,15 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
-= 1.0.271 [May 28, 2026] =
-- Added [Rank Math MCP Tools](https://rankmath.com/kb/mcp-tools/) to let AI assistants audit your site and automatically fix SEO issues.
-- Fixed [404 Monitor](https://rankmath.com/kb/monitor-404-errors/) issue with custom 404 pages created using Themify Ultra theme.
-- Fixed missing default description in the [SERP Preview](https://rankmath.com/kb/general-tab/#write-title-permalink-description) when editing a static homepage from Full Site Editor.
-- Fixed UI issues in the [Schema Generator modal](https://rankmath.com/kb/schema-generator/).
-- Fixed accessibility issue in the [FAQ Schema block](https://rankmath.com/kb/faq-schema-block/) on some setups.
-- Fixed incorrect redirect issue with [Reconnect option in Analytics settings](https://rankmath.com/kb/general-settings/#test-connections).
+= 1.0.272 [June 10, 2026] =
+- Added `rank-math/get-link-report` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve site-wide link statistics, including internal, external, and broken link counts.
+- Added `rank-math/get-post-seo-meta` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve a post's SEO title, description, focus keyword, robots meta settings, and SEO score.
+- Added `rank-math/get-post-links` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve all internal and external links stored for a post.
+- Added `rank-math/get-post-schema` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve all Schema markup attached to a post.
+- Fixed [Table of Contents Block](https://rankmath.com/kb/table-of-contents-block/) translation that was not working in the latest version.
+- Fixed [Content AI](https://rankmath.com/kb/content-ai-credits-migration/) dashboard that was incorrectly showing the 750 monthly credits notice for users without a Content AI plan.
+- Fixed [llms.txt](https://rankmath.com/kb/llms-txt/) output that was not including content rendered by shortcodes.
+- Fixed Block Editor crashing in WordPress 7.0 due to a deprecated `isAutosavingPost` selector.
+
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

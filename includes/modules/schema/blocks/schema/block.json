@@ -5,7 +5,7 @@
 	"name": "rank-math/rich-snippet",
 	"category": "rank-math-blocks",
 	"icon": "editor-ul",
-	"textdomain": "rank-math",
+	"textdomain": "seo-by-rank-math",
 	"keywords": [ "Schema", "Markup", "Structured Data", "Rich Snippet", "SEO", "Rank Math", "Yoast" ],
 	"editorScript": "file:./assets/js/index.js",
 	"editorStyle": "file:./assets/css/schema.css",

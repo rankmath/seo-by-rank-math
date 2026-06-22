@@ -5,7 +5,7 @@
 	"name": "rank-math/faq-block",
 	"category": "rank-math-blocks",
 	"icon": "editor-ul",
-	"textdomain": "rank-math",
+	"textdomain": "seo-by-rank-math",
  	"keywords": [ "FAQ", "Frequently Asked Questions", "Schema", "SEO", "Structured Data", "Yoast", "Rank Math", "Block", "Markup", "Rich Snippet" ],
 	"editorScript": [
 		"lodash",

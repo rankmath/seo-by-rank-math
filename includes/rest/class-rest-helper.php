@@ -102,6 +102,13 @@ class Rest_Helper {
 	public static function get_post_permissions_check( $request ) {
 		$object_id = $request->get_param( 'objectID' );
 		if ( $object_id === 0 ) {
+			if ( ! Helper::has_cap( 'titles' ) ) {
+				return new WP_Error(
+					'rest_cannot_edit',
+					__( 'Sorry, you are not allowed to edit homepage SEO settings.', 'seo-by-rank-math' ),
+					[ 'status' => rest_authorization_required_code() ]
+				);
+			}
 			return true;
 		}
 

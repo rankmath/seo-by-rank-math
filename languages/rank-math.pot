@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.271\n"
+"Project-Id-Version: Rank Math SEO 1.0.272\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-28T04:12:42+00:00\n"
+"POT-Creation-Date: 2026-06-10T04:50:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: seo-by-rank-math\n"
@@ -41,6 +41,69 @@ msgid "Please enter a valid email address."
 msgstr ""
 
 msgid "Please enter a valid URL."
+msgstr ""
+
+msgid "Get link report"
+msgstr ""
+
+msgid "Returns a site-wide link health report: total internal and external links, post counts with no internal or external links, and — on Rank Math PRO — broken links, redirects, nofollow counts, and HTTP status distribution from the Link Genius audit."
+msgstr ""
+
+msgid "Get post links"
+msgstr ""
+
+msgid "Returns a paginated list of internal and external links stored for a given post, including the URL, link type, and target post details for internal links."
+msgstr ""
+
+msgid "ID of the post whose links to retrieve."
+msgstr ""
+
+msgid "Upgrade to Rank Math PRO to unlock broken link detection, redirect chain analysis, and HTTP status distribution from the Link Genius audit."
+msgstr ""
+
+msgid "Link Genius"
+msgstr ""
+
+msgid "Abilities to retrieve and analyse internal and external link data for posts."
+msgstr ""
+
+msgid "Get post SEO metadata"
+msgstr ""
+
+msgid "Returns the full SEO metadata for a post: title, description, focus keyword, robots settings, canonical URL, Open Graph and Twitter overrides, and the current SEO score."
+msgstr ""
+
+msgid "The ID of the post to retrieve SEO metadata for."
+msgstr ""
+
+msgid "Post SEO"
+msgstr ""
+
+msgid "Abilities to read and manage per-post SEO metadata."
+msgstr ""
+
+msgid "Get post schema"
+msgstr ""
+
+msgid "Returns the schema markup attached to a post and the schema types available on this install. Use this after rank-math/get-post-seo-meta to check what schema is already set and what types are supported before making a recommendation. If the schema type you want to recommend is not in available_types.types and upgrade_message is present, show upgrade_message verbatim to the user and do not suggest adding the schema type directly."
+msgstr ""
+
+msgid "The ID of the post to retrieve schema markup for."
+msgstr ""
+
+msgid "When true (default), includes the schema types available on this install. Always pass true when evaluating which schema to add."
+msgstr ""
+
+msgid "Invalid post ID."
+msgstr ""
+
+msgid "This schema type requires Rank Math PRO. Upgrade at rankmath.com/pro to unlock Movie, Dataset, Fact Check, and custom schema types."
+msgstr ""
+
+msgid "Schema"
+msgstr ""
+
+msgid "Abilities to read and manage schema markup attached to posts."
 msgstr ""
 
 msgid "The provided URL is not valid."
@@ -1243,6 +1306,9 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
+msgid "Post not found."
+msgstr ""
+
 msgid "Play icon"
 msgstr ""
 
@@ -1788,9 +1854,6 @@ msgid "Link Counter"
 msgstr ""
 
 msgid "Counts the total number of internal, external links, to and from links inside your posts. You can also see the same count in the Posts List Page."
-msgstr ""
-
-msgid "Link Genius"
 msgstr ""
 
 msgid "An advanced internal linking tool that analyzes your posts, tracks link data, highlights opportunities, and offers detailed report."
@@ -3456,6 +3519,9 @@ msgstr ""
 msgid "Filter by SEO score range (great, good, bad, no-score)."
 msgstr ""
 
+msgid "Filter by post ID."
+msgstr ""
+
 msgid "Order by field."
 msgstr ""
 
@@ -4069,9 +4135,6 @@ msgid "Heading H5"
 msgstr ""
 
 msgid "Heading H6"
-msgstr ""
-
-msgid "Schema"
 msgstr ""
 
 msgid "No schema found."
@@ -5456,13 +5519,13 @@ msgstr ""
 msgid "Sorry, you are not allowed to create/update schema."
 msgstr ""
 
+msgid "Sorry, you are not allowed to edit homepage SEO settings."
+msgstr ""
+
 msgid "Sorry, you are not allowed to edit this post type."
 msgstr ""
 
 msgid "Sorry, you are not allowed to edit this post."
-msgstr ""
-
-msgid "Invalid post ID."
 msgstr ""
 
 msgid "Sorry, you are not allowed to edit this term."
@@ -8847,9 +8910,6 @@ msgstr ""
 msgid "Generate with AI"
 msgstr ""
 
-msgid "Thank you for choosing Rank Math! {{strong}}Enjoy 750 Credits monthly for life{{/strong}} as a token of our appreciation! 🎁"
-msgstr ""
-
 msgid "%1$sNote:%2$s Your input is processed using AI. Please review and edit before publishing."
 msgstr ""
 
@@ -10048,4 +10108,80 @@ msgid "System Info"
 msgstr ""
 
 msgid "Copy System Info to Clipboard"
+msgstr ""
+
+msgctxt "block title"
+msgid "FAQ by Rank Math"
+msgstr ""
+
+msgctxt "block description"
+msgid "Easily add Schema-ready, SEO-friendly, Frequently Asked Questions to your content."
+msgstr ""
+
+msgctxt "block keyword"
+msgid "FAQ"
+msgstr ""
+
+msgctxt "block keyword"
+msgid "Frequently Asked Questions"
+msgstr ""
+
+msgctxt "block keyword"
+msgid "Schema"
+msgstr ""
+
+msgctxt "block keyword"
+msgid "SEO"
+msgstr ""
+
+msgctxt "block keyword"
+msgid "Structured Data"
+msgstr ""
+
+msgctxt "block keyword"
+msgid "Yoast"
+msgstr ""
+
+msgctxt "block keyword"
+msgid "Rank Math"
+msgstr ""
+
+msgctxt "block keyword"
+msgid "Block"
+msgstr ""
+
+msgctxt "block keyword"
+msgid "Markup"
+msgstr ""
+
+msgctxt "block keyword"
+msgid "Rich Snippet"
+msgstr ""
+
+msgctxt "block title"
+msgid "HowTo by Rank Math"
+msgstr ""
+
+msgctxt "block description"
+msgid "Easily add Schema-ready, SEO-friendly, HowTo block to your content."
+msgstr ""
+
+msgctxt "block keyword"
+msgid "HowTo"
+msgstr ""
+
+msgctxt "block title"
+msgid "Schema by Rank Math"
+msgstr ""
+
+msgctxt "block description"
+msgid "Add the Schema generated by Rank Math anywhere on your page using this Block."
+msgstr ""
+
+msgctxt "block title"
+msgid "Table of Contents by Rank Math"
+msgstr ""
+
+msgctxt "block description"
+msgid "Automatically generate the Table of Contents from the Headings added to this page."
 msgstr ""

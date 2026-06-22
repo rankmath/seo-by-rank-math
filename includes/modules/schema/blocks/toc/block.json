@@ -5,7 +5,7 @@
 	"name": "rank-math/toc-block",
     "category": "rank-math-blocks",
 	"icon": "rm-icon rm-icon-stories",
-	"textdomain": "rank-math",
+	"textdomain": "seo-by-rank-math",
 	"editorScript": "file:./assets/js/index.js",
 	"editorStyle": [
 		"file:./assets/css/toc.css",

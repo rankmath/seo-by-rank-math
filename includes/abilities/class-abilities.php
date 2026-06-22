@@ -11,6 +11,9 @@
 namespace RankMath\Abilities;
 
 use RankMath\Abilities\SEO_Analysis\Subscriber as SEO_Analysis_Subscriber;
+use RankMath\Abilities\Link_Genius\Subscriber as Link_Genius_Subscriber;
+use RankMath\Abilities\Post_SEO\Subscriber as Post_SEO_Subscriber;
+use RankMath\Abilities\Schema\Subscriber as Schema_Subscriber;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -59,6 +62,9 @@ class Abilities {
 
 		$subscribers = [
 			new SEO_Analysis_Subscriber( $shared_meta ),
+			new Link_Genius_Subscriber( $shared_meta ),
+			new Post_SEO_Subscriber( $shared_meta ),
+			new Schema_Subscriber( $shared_meta ),
 		];
 
 		foreach ( $subscribers as $subscriber ) {
