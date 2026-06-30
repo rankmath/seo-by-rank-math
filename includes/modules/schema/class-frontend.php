@@ -70,7 +70,8 @@ class Frontend {
 		$schemas = array_filter(
 			DB::get_schemas( $post->ID ),
 			function ( $schema ) {
-				return ! in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
+				return is_array( $schema ) && ! empty( $schema['@type'] )
+					&& ! in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
 			}
 		);
 
@@ -104,7 +105,9 @@ class Frontend {
 				continue;
 			}
 
-			$schema_types[] = $schema['@type'];
+			if ( ! empty( $schema['@type'] ) ) {
+				$schema_types[] = $schema['@type'];
+			}
 			$this->connect_properties( $schema, $id, $jsonld, $schemas );
 			$this->add_main_entity_of_page( $schema, $jsonld );
 			$schemas[ $id ] = $schema;
