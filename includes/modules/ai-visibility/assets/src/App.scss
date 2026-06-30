@@ -1,0 +1,85 @@
+/**
+ * AI Visibility — root app styles.
+ */
+
+@import './scss/variables';
+
+.rank-math-ai-visibility {
+	margin: 0;
+
+	.rank-math-tabs {
+		margin-top: $space-md;
+	}
+
+	.rank-math-table tbody .rank-math-table-row:focus {
+		outline: none;
+	}
+
+	.components-checkbox-control__input[type=checkbox] {
+		&:checked,
+		&:indeterminate {
+			background: #017CBA;
+			border-color: #017CBA;
+		}
+	}
+
+	.components-input-control {
+		&__suffix svg,
+		&__suffix,
+		&__prefix {
+			color: #757575;
+		}
+	}
+
+	.rank-math-table-pagination-buttons {
+		display: inline-flex;
+
+		.rank-math-pagination-btn {
+			color: #757575;
+			border-radius: 2px;
+
+			&:first-child {
+				border-top-right-radius: 0;
+				margin-right: -1px;
+				border-bottom-right-radius: 0;
+			}
+
+			&:last-child {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+		}
+
+		.rank-math-pagination-input {
+			width: auto;
+			padding: 0;
+		}
+	}
+
+	.rank-math-pagination-jump {
+		.rank-math-pagination-input {
+			width: auto;
+			min-height: 28px;
+			background: transparent;
+		}
+
+		span {
+			color: #666666;
+		}
+	}
+
+	.rank-math-pagination-page-info {
+		color: #666666;
+	}
+
+	.rank-math-table-footer {
+    	padding: 20px 20px;
+	}
+
+	@media (min-width: 960px) {
+		.components-modal__frame {
+			max-height: 80%;
+		}
+	}
+
+}

@@ -1,0 +1,285 @@
+/**
+ * Button — module-scoped button styles.
+ */
+
+@import '../../scss/variables';
+
+// ---------------------------------------------------------------------------
+// Base — shared across all variants
+// ---------------------------------------------------------------------------
+
+.rank-math-ai-visibility-btn {
+	&.components-button {
+		padding:      10px 12px;
+		gap:          8px;
+		border-radius: $radius-btn;
+		font-size:    13px;
+		font-weight:  400;
+		line-height:  1;
+		white-space:  nowrap;
+		cursor:       pointer;
+		height:       auto;
+	}
+
+	// ---------------------------------------------------------------------------
+	// Primary — solid blue fill (#017CBA)
+	// ---------------------------------------------------------------------------
+
+	&--primary.components-button {
+		background: $color-btn-primary;
+		color:      $color-btn-primary-text;
+		border:     none;
+		box-shadow: none;
+
+		&:hover:not( :disabled ) {
+			background: darken( $color-btn-primary, 8% );
+			color:      $color-btn-primary-text !important; // beats WP admin theme-color override
+			box-shadow: none;
+		}
+
+		&:focus-visible {
+			background: $color-btn-primary;
+			color:      $color-btn-primary-text !important;
+			box-shadow: 0 0 0 2px #fff, 0 0 0 4px $color-btn-primary;
+			outline:    none;
+		}
+
+		// WP .components-button:focus (non-visible) — reset to match non-focused state
+		&:focus:not( :focus-visible ):not( :disabled ) {
+			background: $color-btn-primary;
+			color:      $color-btn-primary-text !important;
+			box-shadow: none;
+			outline:    none;
+		}
+
+		&:active:not( :disabled ) {
+			background: darken( $color-btn-primary, 12% );
+			color:      $color-btn-primary-text !important;
+			box-shadow: none;
+		}
+
+		&:disabled,
+		&[aria-disabled='true'] {
+			opacity: 0.6;
+			cursor:  not-allowed;
+		}
+	}
+
+	// ---------------------------------------------------------------------------
+	// Secondary — outline (#949494 border, #4E4E4E text)
+	// ---------------------------------------------------------------------------
+
+	&--secondary.components-button {
+		background:    transparent;
+		color:         #4E4E4E;
+		border:        1px solid $color-input-border;
+		border-radius: $radius-btn;
+		box-shadow:    none;
+
+		&:hover:not( :disabled ) {
+			background:   transparent;
+			color:        #4E4E4E !important; // beats WP admin theme-color override on hover
+			border-color: #4E4E4E;
+			box-shadow:   none;
+		}
+
+		&:focus-visible {
+			color:      #4E4E4E !important;
+			box-shadow: none;
+			outline:    2px solid $color-btn-primary;
+			outline-offset: 2px;
+		}
+
+		// WP .components-button:focus (non-visible) — reset ugly inset box-shadow
+		&:focus:not( :focus-visible ):not( :disabled ) {
+			color:      #4E4E4E !important;
+			box-shadow: none;
+			outline:    none;
+		}
+
+		&:disabled,
+		&[aria-disabled='true'] {
+			opacity: 0.6;
+			cursor:  not-allowed;
+		}
+	}
+
+	// ---------------------------------------------------------------------------
+	// Icon — square 28×28 icon-only button
+	// ---------------------------------------------------------------------------
+
+	&--icon.components-button {
+		width:           28px;
+		height:          28px;
+		min-width:       0;
+		padding:         0;
+		border:          1px solid $color-border;
+		border-radius:   $radius-sm;
+		background:      transparent;
+		color:           $color-text-muted;
+		box-shadow:      none;
+		transition:      background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+		display:         inline-flex;
+		align-items:     center;
+		justify-content: center;
+
+		svg {
+			display:     block;
+			flex-shrink: 0;
+		}
+
+		&:hover:not( :disabled ) {
+			background: rgba( 0, 0, 0, 0.05 );
+			color:      $color-text-muted;
+		}
+
+		&:focus-visible {
+			outline:        2px solid $color-btn-primary;
+			outline-offset: 2px;
+			box-shadow:     none;
+		}
+
+		&:disabled,
+		&[aria-disabled='true'] {
+			opacity: 0.6;
+			cursor:  not-allowed;
+		}
+	}
+
+	// ---------------------------------------------------------------------------
+	// Destructive — red primary for irreversible actions
+	// ---------------------------------------------------------------------------
+
+	&--primary.components-button.is-destructive {
+		background: $color-trend-down;
+		color:      #fff;
+		border:     none;
+
+		&:hover:not( :disabled ) {
+			background: darken( $color-trend-down, 8% );
+			color:      #fff !important;
+		}
+	}
+
+	// ---------------------------------------------------------------------------
+	// Icon colour sub-variants (--danger, --active) via `iconVariant` prop
+	// ---------------------------------------------------------------------------
+
+	&--icon-danger.components-button {
+		color:        $color-trend-down;
+		border-color: $color-trend-down;
+		background:   rgba( 246, 98, 118, 0.08 );
+
+		svg { fill: $color-trend-down; }
+
+		&:hover:not( :disabled ) {
+			background: rgba( 246, 98, 118, 0.14 );
+			color:      $color-trend-down;
+		}
+	}
+
+	&--icon-active.components-button {
+		color:        $color-btn-primary;
+		border-color: $color-btn-primary;
+		background:   rgba( 1, 124, 186, 0.08 );
+
+		svg { fill: $color-btn-primary; }
+
+		&:hover:not( :disabled ) {
+			background: rgba( 1, 124, 186, 0.14 );
+			color:      $color-btn-primary;
+		}
+	}
+
+	// ---------------------------------------------------------------------------
+	// Icon slot wrappers — for iconLeft / iconRight props
+	// ---------------------------------------------------------------------------
+
+	&__icon-left,
+	&__icon-right {
+		display:     inline-flex;
+		align-items: center;
+		flex-shrink: 0;
+		line-height: 0;
+
+		svg {
+			display: block;
+			width:   16px;
+			height:  16px;
+		}
+	}
+
+	// ---------------------------------------------------------------------------
+	// View Transcript — compact pill variant used in the run-detail query table
+	// ---------------------------------------------------------------------------
+
+	&.rank-math-ai-visibility-view-transcript {
+		padding:      7px 8px;
+		gap:          6px;
+		background:   transparent !important;
+		border:       1px solid #42B268 !important;
+		border-radius: $radius-btn;
+		font-size:    12px;
+		color:        #42B268 !important;
+		box-shadow:   none !important;
+
+		&:hover:not( :disabled ) {
+			background:   #F0F9F3 !important;
+			color:        #198B3F !important;
+			border-color: #198B3F !important;
+			box-shadow:   none !important;
+		}
+
+		&:focus-visible {
+			outline:    none !important;
+			box-shadow: none !important;
+			color:      #42B268 !important;
+		}
+
+		&:focus:not( :focus-visible ) {
+			box-shadow: none !important;
+			outline:    none !important;
+			color:      #42B268 !important;
+		}
+
+		.dashicons {
+			color:     #42B268;
+			height:    13px;
+			width:     13px;
+			font-size: 14px;
+		}
+	}
+}
+
+// ---------------------------------------------------------------------------
+// WP Modal close button — override WP admin blue hover inside our modals
+// ---------------------------------------------------------------------------
+
+.components-modal__header {
+	button.components-button {
+		color:      $color-text-muted;
+		background: transparent;
+		box-shadow: none;
+
+		&:hover:not( :disabled ) {
+			background: rgba( 0, 0, 0, 0.06 );
+			color:      $color-text-primary !important;
+			box-shadow: none;
+		}
+
+		&:focus-visible {
+			outline:    2px solid $color-btn-primary;
+			outline-offset: 2px;
+			box-shadow: none;
+			color:      $color-text-primary !important;
+		}
+
+		&:focus:not( :focus-visible ) {
+			box-shadow: none;
+		}
+
+		svg {
+			fill: currentColor;
+		}
+	}
+}

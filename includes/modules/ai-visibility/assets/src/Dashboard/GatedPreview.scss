@@ -1,0 +1,9 @@
+/**
+ * GatedPreview — blurred decorative dashboard behind the access-gate modals.
+ */
+
+.rank-math-ai-visibility-gated-preview {
+	filter:         blur( 4px );
+	pointer-events: none;
+	user-select:    none;
+}

@@ -1,0 +1,112 @@
+/**
+ * Analyses tab.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-analyses {
+	display:        flex;
+	flex-direction: column;
+	gap:            24px;
+
+	// Error notice — same pattern as Dashboard.
+	&__error {
+		padding:       $space-sm $space-md;
+		background:    #fef0f0;
+		border:        1px solid $color-trend-down;
+		border-radius: $radius-sm;
+		color:         $color-trend-down;
+		font-size:     14px;
+	}
+
+	&__card {
+		border-radius: 4px;
+		border: 1px solid #E0E0E0;
+		overflow: hidden;
+	}
+
+
+	// Override the table styling
+	.rank-math-table {
+		font-size: 13px;
+
+		&-card {
+			border-top: 1px solid #E0E0E0;
+		}
+
+		thead {
+			background: #FCFCFC;
+			border-color: #E0E0E0;
+
+			th {
+				padding: 13px 16px;
+
+				&:first-child {
+					padding: 13px 26px;
+				}
+
+				.rank-math-table-header-cell {
+					color: #1E1E1E;
+					font-size: 14px;
+				}
+			}
+		}
+
+
+		tbody {
+			tr {
+				td {
+					padding: 16px;
+
+					&:first-child {
+						padding: 16px 26px;
+					}
+				}
+			}
+
+			.rank-math-table-row {
+				&,
+				&:hover,
+				&:nth-child(odd) {
+					background: transparent;
+				}
+			}
+		}
+
+		&-footer {
+			justify-content: center;
+			padding: 20px 0;
+
+			&-nav {
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+
+	.rank-math-pagination {
+		&-page-info {
+			color: #666666;
+		}
+
+		&-separator {
+			color: #B2B2B2;
+		}
+
+		&-jump {
+			span {
+				color: #666666;
+			}
+
+			.rank-math-pagination-input {
+				width: 31px;
+				height: 28px;
+				border-radius: 2px;
+				min-height: 28px;
+				border-color: #C6C6C6;
+				color: #757575;
+			}
+		}
+	}
+	
+}

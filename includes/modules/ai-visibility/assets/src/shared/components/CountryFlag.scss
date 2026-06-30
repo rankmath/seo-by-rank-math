@@ -1,0 +1,34 @@
+/**
+ * CountryFlag — styles.
+ */
+
+@import '../../scss/variables';
+
+$country-flag-bg:     #6D7A8717;
+$country-flag-border: #CECECE;
+
+.rank-math-ai-visibility-country-flag {
+	display:         inline-flex;
+	align-items:     center;
+	gap:             2px;
+	height:          16px;
+	padding:         0 6px;
+	border-radius: 	 2px;
+	border:          1px solid $country-flag-border;
+	background:      $country-flag-bg;
+	font-size:       11px;
+	font-weight:     400;
+	line-height:     1;
+	white-space:     nowrap;
+	color:           $color-text-muted;
+
+	&__emoji {
+		font-size: 11px;
+		line-height: 1;
+	}
+
+	&__code {
+		font-size:   11px;
+		line-height: 1;
+	}
+}

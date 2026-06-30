@@ -1,0 +1,48 @@
+/**
+ * CompetitorsTable — Brand detail Competitors sub-tab styles.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-competitors-table {
+	max-width: 1146px;
+    margin: 0 auto;
+
+	&--loading {
+		display:         flex;
+		justify-content: center;
+		padding:         $space-lg;
+	}
+
+	&--error {
+		p {
+			@include error-state;
+		}
+	}
+
+	.rank-math-ai-visibility-data-table__td:first-child {
+		display:     flex;
+		align-items: center;
+		gap:         10px;
+	}
+
+	&__avatar {
+		display:         inline-flex;
+		align-items:     center;
+		justify-content: center;
+		width:           28px;
+		height:          28px;
+		border-radius:   4px;
+		font-size:       12px;
+		font-weight:     600;
+		color:           $color-btn-primary-text;
+		flex-shrink:     0;
+		line-height:     1;
+	}
+
+	&__name {
+		font-size:   13px;
+		color:       $color-text-primary;
+		font-weight: 400;
+	}
+}

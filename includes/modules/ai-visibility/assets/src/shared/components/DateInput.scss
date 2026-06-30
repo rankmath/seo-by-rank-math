@@ -1,0 +1,44 @@
+/**
+ * DateInput component styles.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-date-input {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	height: 34px;
+	padding: 0 8px;
+	border: 1px solid $color-input-border;
+	border-radius: 2px;
+
+	&:focus-within {
+		@include input-focus-ring-secondary;
+	}
+
+	input {
+		border: none;
+		color: #383838;
+		padding: 0;
+		min-width: auto;
+		width: auto;
+		min-height: auto;
+
+		&:focus {
+			border:     none !important;
+			box-shadow: none !important;
+			outline:    none !important;
+		}
+
+		&::-webkit-datetime-edit {
+			max-width: max-content;
+		}
+
+		&::-webkit-calendar-picker-indicator {
+			opacity: .5;
+			background-size: 14px;
+			padding-left: 4px;
+		}
+	}
+}

@@ -1,0 +1,30 @@
+/**
+ * PageTopbar — shared top-bar layout used on Brand/Analysis Detail pages.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-page-topbar {
+	display:         flex;
+	align-items:     center;
+	justify-content: space-between;
+
+	&__left {
+		display:     flex;
+		align-items: center;
+		gap:         16px;
+		font-size:   14px;
+	}
+
+	&__title {
+		font-size:   16px;
+		font-weight: 500;
+		color:       $color-text-primary;
+	}
+
+	&__actions {
+		display:     flex;
+		align-items: center;
+		gap:         $space-sm;
+	}
+}

@@ -1,0 +1,151 @@
+/**
+ * AccessGateModal — gradient-header shell styles + shared "gate" elements
+ * (intro, notice, error box, green CTA, footnote).
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-access-gate-modal {
+
+	&.components-modal__frame {
+		width:     600px;
+		max-width: 95vw;
+		max-height: 95%;
+	}
+
+	// Custom gradient header + body handle all spacing.
+	.components-modal__content {
+		padding: 0;
+	}
+
+	// -------------------------------------------------------------------------
+	// Gradient header — icon + title on the purple → blue gradient.
+	// -------------------------------------------------------------------------
+
+	&__header {
+		display:     flex;
+		align-items: center;
+		gap:         14px;
+		padding:     26px 56px;
+		background:  $gate-gradient;
+	}
+
+	&__header-icon {
+		flex-shrink: 0;
+		color:       $color-text-light;
+
+		&.dashicons,
+		&.rm-icon {
+			width:       26px;
+			height:      26px;
+			font-size:   26px;
+			line-height: 1;
+		}
+	}
+
+	&__title {
+		margin:      0;
+		font-size:   20px;
+		font-weight: 500;
+		line-height: 1.3;
+		color:       $color-text-light !important;
+	}
+
+	// -------------------------------------------------------------------------
+	// Body — vertical stack supplied by each modal.
+	// -------------------------------------------------------------------------
+
+	&__body {
+		display:        flex;
+		flex-direction: column;
+		gap:            $space-lg;
+		padding:        $space-xl 56px 28px;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Shared gate elements — used inside UpgradeToUnlockModal & ActivateTrialModal.
+// ---------------------------------------------------------------------------
+
+.rank-math-ai-visibility-gate {
+
+	&__intro {
+		margin:      0;
+		font-size:   14px;
+		line-height: 1.65;
+		color:       $color-text-body;
+
+		strong {
+			color:       $color-text-primary;
+			font-weight: 600;
+		}
+	}
+
+	// Trial auto-renew notice (Paid Users modal).
+	&__notice {
+		margin:      0;
+		padding:     12px 16px;
+		font-size:   13px;
+		line-height: 1.55;
+		color:       $color-text-primary;
+		background:  $trial-notice-bg;
+		border-left: 3px solid $trial-notice-border;
+		border-radius: 0 $radius-sm $radius-sm 0;
+	}
+
+	// API error — mirrors AddBrandModal's error box styling.
+	&__error {
+		margin:           0;
+		padding:          10px 14px;
+		background-color: #fff3f3;
+		border:           1px solid #f0b8b8;
+		border-radius:    $radius-sm;
+		color:            #c0392b;
+		font-size:        13px;
+		line-height:      1.5;
+	}
+
+	&__actions {
+		display: flex;
+	}
+
+	&__footnote {
+		margin:     -12px 0 0;
+		font-size:  12px;
+		color:      $gate-footnote-color;
+	}
+}
+
+// Green CTA — overrides the module primary button colour.
+// Triple selector beats `&--primary.components-button` in Button.scss.
+.rank-math-ai-visibility-btn.rank-math-ai-visibility-gate__cta.components-button {
+	background:  $color-cta;
+	color:       $color-cta-text;
+	font-size:   14px;
+	padding:     12px 16px;
+
+	svg {
+		fill: $color-cta-text;
+	}
+
+	&:hover:not( :disabled ) {
+		background: darken( $color-cta, 6% );
+		color:      $color-cta-text !important;
+	}
+
+	&:focus-visible {
+		background: $color-cta;
+		color:      $color-cta-text !important;
+		box-shadow: 0 0 0 2px #fff, 0 0 0 4px $color-cta;
+	}
+
+	&:focus:not( :focus-visible ):not( :disabled ) {
+		background: $color-cta;
+		color:      $color-cta-text !important;
+	}
+
+	&:active:not( :disabled ) {
+		background: darken( $color-cta, 10% );
+		color:      $color-cta-text !important;
+	}
+}

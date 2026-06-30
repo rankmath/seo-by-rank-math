@@ -1,0 +1,21 @@
+/**
+ * DataTable — shared data table styles.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-data-table {
+	@include table-base;
+
+	&__th {
+		@include table-header-cell;
+	}
+
+	&__row {
+		@include table-row-base;
+	}
+
+	&__td {
+		@include table-body-cell;
+	}
+}

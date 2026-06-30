@@ -3,13 +3,13 @@ Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, google search console, schema, redirection, xml sitemap
 Tested up to: 7.0
-Requires at least: 6.3
+Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.272
+Stable tag: 1.0.273
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
-Grow your organic traffic and AI visibility with powerful SEO tools, Schema automation, actionable insights, and built-in AI SEO, all in one place.
+Grow your organic traffic and AI visibility with powerful SEO tools, XML sitemaps, Schema automation, and built-in AI SEO, all in one place.
 
 == Description ==
 
@@ -264,7 +264,7 @@ If you set up Rank Math from scratch, your search engine rankings will depend on
 
 = Where do I report security bugs found in this plugin? =
 
-Please report security bugs found in the source code of the Rank Math SEO plugin through the Patchstack Vulnerability Disclosure  Program. The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+Please report security bugs found in the source code of the Rank Math SEO plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fb4c0-23d7-4a55-9a5c-256a4c6daf1e). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 = Can I use Rank Math on a WordPress.com website? =
 Yes, as the plugin is provided through WordPress.org, it is available on WordPress.com as well. However, you might be required to opt for the business plan on WordPress.com.
@@ -375,15 +375,15 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
-= 1.0.272 [June 10, 2026] =
-- Added `rank-math/get-link-report` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve site-wide link statistics, including internal, external, and broken link counts.
-- Added `rank-math/get-post-seo-meta` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve a post's SEO title, description, focus keyword, robots meta settings, and SEO score.
-- Added `rank-math/get-post-links` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve all internal and external links stored for a post.
-- Added `rank-math/get-post-schema` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve all Schema markup attached to a post.
-- Fixed [Table of Contents Block](https://rankmath.com/kb/table-of-contents-block/) translation that was not working in the latest version.
-- Fixed [Content AI](https://rankmath.com/kb/content-ai-credits-migration/) dashboard that was incorrectly showing the 750 monthly credits notice for users without a Content AI plan.
-- Fixed [llms.txt](https://rankmath.com/kb/llms-txt/) output that was not including content rendered by shortcodes.
-- Fixed Block Editor crashing in WordPress 7.0 due to a deprecated `isAutosavingPost` selector.
+= 1.0.273 [June 30, 2026] =
+- [HUGE!] Added **[AI Visibility](https://rankmath.com/ai-visibility/?play-video=gS5-DFQrSxs)** to monitor your brand presence across major AI platforms.
+- Added `rank-math/get-ai-visibility-overview` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve the complete AI Visibility dashboard, including brand scores, ranks, sentiment, mentions, citations, and analysis status
+- Added `rank-math/get-ai-visibility-brand-insights` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve detailed AI Visibility insights for a specific brand, including score, rank, sentiment, competitors, and query transcripts
+- Added `rank-math/get-ai-visibility-brand-queries` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve monitored queries for a brand, including query status and baseline settings
+- Added `rank-math/create-ai-visibility-brand` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants create new AI Visibility brands with details like name, URL, description, and locale, and trigger initial analysis
+- Updated the [Minimum required WordPress version](https://wordpress.org/about/requirements/) to 6.7.
+- Fixed the [Content Analysis](https://rankmath.com/kb/score-100-in-tests/) that was not correctly counting Swedish special characters toward keyword density.
+- Fixed compatibility issue with the Phoenix Media Rename plugin, where Rank Math was affecting the fields layout.
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

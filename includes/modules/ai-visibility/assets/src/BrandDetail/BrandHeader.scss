@@ -1,0 +1,171 @@
+/**
+ * BrandHeader
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-brand-header {
+	display:        flex;
+	flex-direction: column;
+	gap:            0;
+	padding: 32px;
+	border-bottom: 1px solid $color-border;
+
+	// -------------------------------------------------------------------------
+	// Two-column content area.
+	// -------------------------------------------------------------------------
+
+	&__content {
+		display:         flex;
+		align-items:     flex-start;
+		justify-content: space-between;
+	}
+
+	&__identity {
+		display:        flex;
+		flex-direction: column;
+		flex:           1;
+	}
+
+	// Brand name + inline Edit Brand button.
+	&__name-row {
+		display:     flex;
+		align-items: center;
+		gap:         16px;
+	}
+
+	&__name {
+		margin:      0;
+		font-size:   26px;
+		font-weight: 600;
+		line-height: 1.2;
+		color:       $color-text-primary;
+	}
+
+	&__edit-btn.rank-math-ai-visibility-btn.components-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 12px;
+		height: 24px;
+		padding: 0 8px;
+		border-color: #C6C6C6;
+		color: #757575;
+		background: #FCFCFC;
+		min-height: 24px;
+
+		.dashicons {
+			height: 12px;
+			width: 12px;
+			font-size: 12px;
+			margin: 0;
+		}
+	}
+
+	// URL + flag + external link row.
+	&__url-row {
+		display:     flex;
+		align-items: center;
+		gap:         8px;
+	}
+
+	&__url {
+		text-decoration: none;
+		font-weight: 300;
+		font-size: 20px;
+		line-height: 28px;
+		color: #017CBA;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&__external {
+		color:           #757575;
+		display:         inline-flex;
+		align-items:     center;
+		text-decoration: none;
+
+		&:hover {
+			color: $color-btn-primary;
+		}
+
+		// WP external icon uses fill
+		svg path {
+			fill: currentColor;
+		}
+	}
+
+	// Status badge + last analysis row.
+	&__meta-row {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-size: 13px;
+		margin: 12px 0 0 0;
+	}
+
+	&__status {
+		display: inline-flex;
+		align-items: center;
+		padding: 0 10px;
+		border-radius: 20px;
+		font-size: 11px;
+		font-weight: 400;
+		border: 1px solid #e0e0e0;
+
+		&--active {
+			color:        #2e7d32;
+			border-color: #a5d6a7;
+			background:   rgba( 46, 125, 50, 0.06 );
+		}
+
+		&--inactive {
+			color:        $color-text-muted;
+			border-color: $color-border;
+			background:   transparent;
+		}
+	}
+
+	&__last-analysis {
+		display:     inline-flex;
+		align-items: center;
+		gap:         4px;
+		color:       $color-text-muted;
+		font-size:   12px;
+
+		.dashicons {
+			height: 14px;
+			width: 14px;
+			font-size: 14px;
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Description panel — right column.
+	// -------------------------------------------------------------------------
+
+	&__description-panel {
+		flex:          0 0 320px;
+		padding:       16px;
+		border:        1px solid $color-border;
+		border-radius: $radius-sm;
+		background:    $color-surface;
+	}
+
+	&__description-label {
+		display:     block;
+		font-size:   13px;
+		font-weight: 600;
+		color:       $color-text-primary;
+		margin-bottom: 8px;
+	}
+
+	&__description-text {
+		margin:      0;
+		font-size:   13px;
+		line-height: 1.6;
+		color:       $color-text-muted;
+	}
+}

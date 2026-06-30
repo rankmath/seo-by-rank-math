@@ -1,0 +1,36 @@
+/**
+ * AnalysesTable — analyses runs table overrides.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-analyses {
+
+	// Suppress the ListTable's own toolbar row — we use AnalysesFilterBar instead.
+	.rank-math-table-header {
+		display: none !important;
+	}
+
+	// Explicit column widths — prevents table-layout:auto from giving
+	// Last Analyzed a disproportionately large share due to nowrap content.
+	table {
+		th:nth-child(1) { width: 45%; } // Brand
+		th:nth-child(2) { width: 35%; } // Last Analyzed
+		th:nth-child(3) { width: 20%; } // Action
+	}
+}
+
+// -------------------------------------------------------------------------
+// Last analyzed cell — time + optional status icon.
+// Mirrors the BrandsTable status icon pattern.
+// -------------------------------------------------------------------------
+
+.rank-math-ai-visibility-analyses-table {
+
+	&__time-cell {
+		display:     flex;
+		align-items: center;
+		gap:         6px;
+		white-space: nowrap;
+	}
+}

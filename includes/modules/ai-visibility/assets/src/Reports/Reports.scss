@@ -1,0 +1,288 @@
+/**
+ * Reports — Reports & Export tab styles.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-reports {
+	display: flex;
+	flex-direction: column;
+	gap: $space-lg;
+
+	&-total-citations .rank-math-ai-visibility-reports__stat-value,
+	&-total-mentions .rank-math-ai-visibility-reports__stat-value {
+		font-size: 26px;
+	}
+
+	&__layout {
+		display: grid;
+		grid-template-columns: 1fr 3fr;
+		gap: 16px;
+	}
+
+	&__filters {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		padding: 0;
+		background: $color-surface;
+		border: 1px solid $color-border;
+		border-radius: 4px;
+		align-self: baseline;
+		min-width: 0;
+	}
+
+	&__filters-header {
+		display: flex;
+		align-items: center;
+		min-height: 68px;
+		gap: 9px;
+		padding: 0 18px 0 24px;
+		border-bottom: 1px solid $color-border;
+
+		.dashicons {
+			font-size: 18px;
+			width: 18px;
+			height: 18px;
+			color: $color-text-muted;
+			flex-shrink: 0;
+		}
+	}
+
+	// Panel body — wraps Brand + Date Range + button below the header
+	&__filters-body {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		padding: 20px 24px 24px;
+	}
+
+	// Nested under __filters-header to raise specificity to (0,2,0) and beat WP admin `p` rules
+	&__filters-header &__filters-title {
+		font-size: 13px;
+		font-weight: 500;
+		line-height: 16px;
+		color: $color-text-primary;
+		margin: 0 0 2px;
+	}
+
+	&__filters-header &__filters-subtitle {
+		font-size: 12px;
+		line-height: 20px;
+		color: $color-text-secondary;
+		margin: 0;
+	}
+
+	&__filter-field {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+
+		// Override WP SelectControl label
+		.components-base-control__label {
+			font-size: 11px;
+			font-weight: 600;
+			color: $color-text-primary;
+			letter-spacing: 0.1px;
+			text-transform: uppercase;
+		}
+	}
+
+	// Generate preview button — layout only (appearance comes from shared Button component)
+	&__generate-btn {
+		align-self: flex-start;
+		margin-top: 24px;
+	}
+
+	// ── Right: preview panel ───────────────────────────────────────────────────
+
+	&__preview {
+		display: flex;
+		flex-direction: column;
+		gap: $space-lg;
+		min-width: 0;  // critical: lets the grid item shrink; without this the wide table overflows
+	}
+
+	&__empty {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 100%;
+		background: $color-surface;
+		border: 1px dashed $color-border;
+		border-radius: 4px;
+
+		p {
+			font-size: 14px;
+			color: $color-text-muted;
+			margin: 0;
+			text-align: center;
+		}
+	}
+
+	// Card container — wraps header + body when report data is loaded
+	&__report-card {
+		@include card-base;
+		overflow: hidden;
+	}
+
+	// Preview header: chart icon + title/subtitle + action buttons (card top bar)
+	&__preview-header {
+		display:         flex;
+		align-items:     center;
+		justify-content: space-between;
+		min-height:      68px;
+		padding:         0 18px 0 24px;
+		gap:             $space-md;
+		border-bottom:   1px solid $color-border;
+	}
+
+	&__preview-title-row {
+		display:     flex;
+		align-items: center;
+		gap:         12px;
+
+		.dashicons {
+			font-size:  18px;
+			width:      18px;
+			height:     18px;
+			color:      $color-text-muted;
+			flex-shrink: 0;
+		}
+	}
+
+	// Nested under __preview-header to raise specificity to (0,2,0) and beat WP admin `p` rules
+	&__preview-header &__preview-title {
+		font-size:   13px;
+		font-weight: 500;
+		line-height: 16px;
+		color:       $color-text-primary;
+		margin:      0 0 2px;
+	}
+
+	&__preview-header &__preview-subtitle {
+		font-size:   12px;
+		font-weight: 300;
+		line-height: 20px;
+		color:       $color-text-secondary;
+		margin:      0;
+	}
+
+	&__preview-actions {
+		display:    flex;
+		gap:        $space-sm;
+		flex-shrink: 0;
+		align-items: center;
+	}
+
+	// Card body — wraps stat cards + table with consistent padding
+	&__report-card-body {
+		padding: 30px 20px 20px 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 26px;
+		min-width: 0;       // inherit grid shrink behaviour
+		overflow-x: auto;   // scroll horizontally when table is wider than the panel
+	}
+
+	// 4 stat cards row
+	&__stat-cards {
+		display: grid;
+		grid-template-columns: repeat( 4, 1fr );
+		gap: 12px;
+	}
+
+	&__stat-card {
+		@include card-base;
+		display:     flex;
+		gap:         $space-md;
+		padding:     34px 17px;
+	}
+
+	// Colored circular icon
+	&__stat-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 44px;
+		flex-shrink: 0;
+		width: 45.5px;
+		height: 38.52px;
+		border-radius: 7.16667px;
+
+		.dashicons {
+			font-size: 20px;
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	&__stat-body {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		min-width: 0;
+	}
+
+	&__stat-label {
+		font-size: 12px;
+		white-space: nowrap;
+		gap: 8px;
+    	display: inline-flex;
+	}
+
+	&__stat-value {
+		font-size: 30px;
+		font-weight: 500;
+		color: #1e1e1e;
+		line-height: 1;
+
+		// "N/A" — muted appearance when no real value
+		&--na {
+			color:       $color-text-secondary;
+			font-weight: 400;
+		}
+	}
+
+	// Per-run data table replaced by shared <DataTable> component (DataTable.scss).
+	// Reports uses 14px header font and 10px/24px cell padding — override via wrapper.
+	&__report-card-body .rank-math-ai-visibility-data-table {
+		&__th {
+			padding:   15px 18px;
+			font-size: 14px;
+			color:     $color-text-primary;
+		}
+
+		&__td {
+			padding: 10px 16px;
+
+			&--date {
+				color: #868686;
+			}
+		}
+	}
+
+	// Top competitors — inline pill tags
+	&__competitors {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 7px;
+	}
+
+	&__competitor-tag {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 4px 8px;
+		gap: 6px;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-radius: 2px;
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 13px;
+		color: rgba(0, 0, 0, 0.5);
+	}
+
+}

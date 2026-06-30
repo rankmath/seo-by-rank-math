@@ -46,15 +46,13 @@ class Admin {
 	 * Register admin page.
 	 */
 	public function register_admin_page() {
-		$new_label = '<span class="rank-math-new-label" style="color:#ed5e5e;font-size:10px;font-weight:normal;">' . esc_html__( 'New!', 'seo-by-rank-math' ) . '</span>';
 		new Page(
 			'rank-math-links-page',
 			esc_html__( 'Link Genius', 'seo-by-rank-math' ),
 			[
 				'position'   => 4,
 				'parent'     => 'rank-math',
-				// Translators: placeholder is the new label.
-				'menu_title' => sprintf( esc_html__( 'Link Genius %s', 'seo-by-rank-math' ), $new_label ),
+				'menu_title' => esc_html__( 'Link Genius', 'seo-by-rank-math' ),
 				'capability' => 'rank_math_link_builder',
 				'render'     => function () {
 					echo '<div id="rank-math-links-page-container"></div>';

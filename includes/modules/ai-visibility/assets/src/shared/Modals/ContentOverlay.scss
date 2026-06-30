@@ -1,0 +1,60 @@
+/**
+ * ContentOverlay — confines the WP Modal overlay to the wp-admin content
+ * area so the admin bar, sidebar menu, and footer stay clickable.
+ * Applied via the Modal `overlayClassName` prop; offsets mirror wp-admin's
+ * own layout rules.
+ */
+
+.rank-math-ai-visibility-content-overlay.components-modal__screen-overlay {
+	top:  32px;   // #wpadminbar
+	left: 160px;  // #adminmenuwrap
+	z-index: 999999;
+
+	// Collapsed admin menu ("Collapse menu" toggle).
+	body.folded & {
+		left: 36px;
+	}
+
+	// RTL admin — menu sits on the right.
+	body.rtl & {
+		left:  0;
+		right: 160px;
+	}
+
+	body.rtl.folded & {
+		right: 36px;
+	}
+
+	// Auto-folded menu between 783–960px.
+	@media ( max-width: 960px ) {
+		body.auto-fold & {
+			left: 36px;
+		}
+
+		body.rtl.auto-fold & {
+			left:  0;
+			right: 36px;
+		}
+	}
+
+	// Mobile — admin bar grows to 46px and the menu goes off-canvas.
+	@media ( max-width: 782px ) {
+		top: 46px;
+
+		&,
+		body.folded &,
+		body.auto-fold &,
+		body.rtl & {
+			left:  0;
+			right: 0;
+		}
+	}
+}
+
+// The footer (#wpfooter) lives in the page flow, so a fixed overlay can't be
+// excluded from it geometrically — lift it above the overlay (z-index 100000)
+// while one of our content-area modals is open.
+body:has( .rank-math-ai-visibility-content-overlay ) #wpfooter {
+	position: relative;
+	z-index:  100001;
+}

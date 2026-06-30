@@ -1,0 +1,243 @@
+/**
+ * ActionButtons — colour overrides for Run and Disable icon buttons.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-action-buttons {
+	display:               grid;
+	grid-template-columns: repeat( 3, 28px );
+	gap:                   8px;
+	align-items:           center;
+	flex-shrink:           0;
+
+	// Icon sizing — dashicons + SVG
+	.dashicons {
+		height:      16px;
+		width:       16px;
+		font-size:   16px;
+		line-height: 1;
+		flex-shrink: 0;
+	}
+
+	svg {
+		@extend .dashicons;
+
+		path,
+		circle {
+			fill: currentColor;
+		}
+	}
+
+	.rank-math-ai-visibility-btn--icon.components-button {
+		width:      28px;
+		height:     28px;
+		min-width:  unset;
+		padding:    0;
+		gap:        0;
+		border:     none;
+		background: transparent;
+		box-shadow: none;
+		position:   relative;
+		overflow:   visible;
+		z-index:    1;
+
+		&:hover:not( :disabled ),
+		&:focus:not( :disabled ) {
+			background: transparent;
+			box-shadow: none;
+		}
+
+		&:hover:not( :disabled ) {
+			z-index: 10;  // Rise above adjacent buttons when expanded
+		}
+
+		// Suppress WP focus ring (focus visually shifts to __inner)
+		&:focus-visible {
+			outline:    none;
+			box-shadow: none;
+		}
+	}
+
+	&__inner {
+		box-sizing:     border-box;    // min-width counts total width incl. padding (fixes 40px→28px bug)
+		position:       absolute;
+		left:           0;
+		top:            0;
+		height:         28px;
+		display:        flex;
+		align-items:    center;
+		padding:        0 6px;
+		border-radius:  2px;
+		white-space:    nowrap;
+		min-width:      28px;          // total = 28px (border-box), so content = 16px, icon centred by padding
+		box-shadow:     0 0 0 1px #C6C6C6;
+		background:     transparent;
+		color:          #757575;
+		pointer-events: none;          // Clicks pass through to the <button> below
+		transition:     min-width   0.2s ease,
+		                box-shadow  0.15s ease,
+		                background  0.15s ease,
+		                color       0.15s ease;
+
+		// Icon spans — fixed 16×16 so centering maths hold regardless of icon font-size
+		> span:not( .rank-math-ai-visibility-action-buttons__label ) {
+			flex-shrink:     0;
+			width:           16px;
+			height:          16px;
+			display:         inline-flex;
+			align-items:     center;
+			justify-content: center;
+			line-height:     1;
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Label — hidden, slides in on hover
+	// -------------------------------------------------------------------------
+
+	&__label {
+		max-width:   0;
+		overflow:    hidden;
+		opacity:     0;
+		white-space: nowrap;
+		font-size:   12px;
+		line-height: 1;
+		// margin properties are set per-direction below
+		transition:  max-width   0.2s ease,
+		             opacity     0.15s ease,
+		             margin-left 0.15s ease;
+	}
+
+	// -------------------------------------------------------------------------
+	// View — default green, hover green, expands RIGHT
+	// -------------------------------------------------------------------------
+
+	&__view.rank-math-ai-visibility-btn--icon.components-button {
+		.rank-math-ai-visibility-action-buttons__inner {
+			box-shadow: 0 0 0 1px #42B268;
+			color:      #42B268;
+		}
+
+		&:hover:not( :disabled ) {
+			.rank-math-ai-visibility-action-buttons__inner {
+				min-width:  64px;
+				box-shadow: 0 0 0 1px #198B3F;
+				background: #F0F9F3;
+				color:      #198B3F;
+			}
+
+			.rank-math-ai-visibility-action-buttons__label {
+				max-width:   50px;
+				opacity:     1;
+				margin-left: 4px;
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Edit — default grey, hover grey, expands RIGHT
+	// -------------------------------------------------------------------------
+
+	&__edit.rank-math-ai-visibility-btn--icon.components-button {
+		&:hover:not( :disabled ) {
+			.rank-math-ai-visibility-action-buttons__inner {
+				min-width:  64px;
+				box-shadow: 0 0 0 1px #9B9B9B;
+				background: #F8F8F8;
+				color:      #383838;
+			}
+
+			.rank-math-ai-visibility-action-buttons__label {
+				max-width:   40px;
+				opacity:     1;
+				margin-left: 4px;
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Run / Activate — blue pill, expands LEFT
+	// right:0 anchors the pill to the button's right edge.
+	// row-reverse keeps the icon on the right as the label grows leftward.
+	// -------------------------------------------------------------------------
+
+	&__inactive.rank-math-ai-visibility-btn--icon.components-button {
+		// Default pill: blue border
+		.rank-math-ai-visibility-action-buttons__inner {
+			right:          0;
+			left:           auto;
+			flex-direction: row-reverse;
+			box-shadow:     0 0 0 1px $color-btn-primary;
+			color:          $color-btn-primary;
+		}
+
+		// Label uses margin-right so the gap is between label and icon (icon is on right)
+		.rank-math-ai-visibility-action-buttons__label {
+			transition: max-width    0.2s ease,
+			            opacity      0.15s ease,
+			            margin-right 0.15s ease;
+		}
+
+		&:hover:not( :disabled ) {
+			.rank-math-ai-visibility-action-buttons__inner {
+				min-width:  64px;
+				box-shadow: 0 0 0 1px #006BA1;
+				background: #EBF5FA;
+				color:      #006BA1;
+			}
+
+			.rank-math-ai-visibility-action-buttons__label {
+				max-width:    36px;
+				opacity:      1;
+				margin-right: 4px;
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Activate/Deactivate — red/pink pill, expands LEFT
+	// -------------------------------------------------------------------------
+	&__active.rank-math-ai-visibility-btn--icon.components-button {
+		.rank-math-ai-visibility-action-buttons__inner {
+			box-shadow:     0 0 0 1px $color-trend-down;
+			color:          $color-trend-down;
+		}
+
+		&:hover:not( :disabled ) {
+			.rank-math-ai-visibility-action-buttons__inner {
+				box-shadow: 0 0 0 1px $color-trend-down;
+				background: #FFF9FA;
+				color:      #F24F65;
+			}
+		}
+	}
+
+	&__inactive.rank-math-ai-visibility-btn--icon.components-button,
+	&__active.rank-math-ai-visibility-btn--icon.components-button {
+		// Default pill: red border
+		.rank-math-ai-visibility-action-buttons__inner {
+			right:          0;
+			left:           auto;
+			flex-direction: row-reverse;
+		}
+
+		.rank-math-ai-visibility-action-buttons__label {
+			transition: max-width    0.2s ease,
+			            opacity      0.15s ease,
+			            margin-right 0.15s ease;
+		}
+
+		&:hover:not( :disabled ) {
+			.rank-math-ai-visibility-action-buttons__inner {
+				min-width:  64px;
+			}
+
+			.rank-math-ai-visibility-action-buttons__label {
+				max-width:    80px;
+				opacity:      1;
+				margin-right: 4px;
+			}
+		}
+	}
+}

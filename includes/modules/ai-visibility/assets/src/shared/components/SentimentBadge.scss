@@ -1,0 +1,56 @@
+/**
+ * SentimentBadge — styles.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-sentiment-badge {
+	display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 18px;
+    padding: 0 6px;
+    border-radius: 20px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+    min-width: 40px;
+    justify-content: center;
+
+	&--positive {
+		color:            $color-trend-up;
+		background-color: $color-trend-up-bg;
+		border-color:     $color-trend-up
+	}
+
+	&--warning {
+		color:            $color-rank-2;
+		background-color: #{$color-rank-2}14;
+		border-color:     $color-rank-2
+	}
+
+	&--negative {
+		color:            $color-trend-down;
+		background-color: $color-trend-down-bg;
+		border-color:     $color-trend-down
+	}
+
+	&--neutral {
+		color:            $color-trend-neutral;
+		background-color: #{$color-trend-neutral}14;
+		border-color:     $color-trend-neutral;
+	}
+
+	&__icon {
+		flex-shrink: 0;
+		display: inline-flex;
+	}
+
+	&__label {
+		font-size: 11px;
+		font-weight: bold;
+	}
+}

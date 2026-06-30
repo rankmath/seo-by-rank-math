@@ -1,0 +1,152 @@
+/**
+ * BrandsTable — brands list table column overrides.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-brands-table {
+	&__last-analyzed {
+		color: #868686;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	tbody .rank-math-table-row .rank-math-table-primary-column a {
+		color: #017CBA;
+		font-weight: 400;
+	}
+
+	&__brand-cell {
+		display:        flex;
+		flex-direction: column;
+		align-items:    flex-start;
+		gap:            5px;
+	}
+
+	tbody .rank-math-table-row .rank-math-table-primary-column .rank-math-ai-visibility-brands-table__brand-name {
+		font-size:   13px;
+		font-weight: 600;
+		color:       $color-text-primary;
+		line-height: 1.4;
+
+		&:hover {
+			color: $color-text-primary;
+			text-decoration: none;
+		}
+	}
+
+	&__brand-url {
+		font-size:   12px;
+		color:       $color-btn-primary;
+		line-height: 1.4;
+		word-break:  break-all;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&__brand-link {
+		display: inline-flex;
+		gap: 4px;
+	}
+
+	.rank-math-table {
+		&-cell-content {
+			font-size: 13px;
+		}
+
+		&-header-cell {
+			font-size: 14px;
+		}
+
+		thead {
+			background-color: #FCFCFC;
+			
+			th {
+				color: #1E1E1E;
+    			font-size: 14px;
+
+				&:first-child {
+					padding-left: 25px;
+				}
+			}
+		}
+
+		tbody {
+			tr td:first-child {
+				padding-left: 25px;
+			}
+
+			.rank-math-table-row {
+				&:hover,
+				&:nth-child(odd) {
+					background: transparent;
+				}
+
+				// Disabled (inactive) brand — replace all colors with flat gray.
+				&.is-disabled {
+					// All plain text cells (mentions, citations, date).
+					td {
+						color: #c4c4c4;
+					}
+
+					// Brand name, URL, last-analyzed.
+					.rank-math-ai-visibility-brands-table {
+						&__brand-name {
+							color: #c4c4c4;
+						}
+
+						&__brand-url {
+							color: #c4c4c4;
+
+							&:hover {
+								text-decoration: none;
+							}
+						}
+
+						&__last-analyzed {
+							color: #c4c4c4;
+						}
+					}
+
+					// Country flag locale code.
+					.rank-math-ai-visibility-country-flag__code {
+						color: #c4c4c4;
+					}
+
+					// Score badge — strip variant color, replace with gray.
+					.rank-math-ai-visibility-score-badge {
+						color: #c4c4c4 !important;
+						border-color: #c4c4c4 !important;
+						background-color: rgba(196, 196, 196, 0.1) !important;
+					}
+
+					// Rank badge — strip variant color, replace with gray.
+					.rank-math-ai-visibility-rank-badge {
+						color: #c4c4c4 !important;
+						border-color: #c4c4c4 !important;
+						background-color: rgba(196, 196, 196, 0.2) !important;
+					}
+
+					// Sentiment badge — strip variant color, replace with gray.
+					// Also covers the SVG smiley icon via currentColor.
+					.rank-math-ai-visibility-sentiment-badge {
+						color: #c4c4c4 !important;
+						border-color: #c4c4c4 !important;
+						background-color: rgba(196, 196, 196, 0.08) !important;
+
+						svg {
+							color: #c4c4c4;
+
+							path {
+								fill: #c4c4c4 !important;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

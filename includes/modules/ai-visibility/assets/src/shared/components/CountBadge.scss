@@ -1,0 +1,27 @@
+/**
+ * CountBadge — 28×28 circular count pill.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-count-badge {
+	display:         inline-flex;
+	align-items:     center;
+	justify-content: center;
+	width:           28px;
+	height:          28px;
+	border-radius:   50%;
+	font-size:       12px;
+	font-weight:     400;
+	color:           $color-text-primary;
+	line-height:     1;
+	background:      rgba( 0, 0, 0, 0.05 );
+
+	&--citations {
+		background: rgba( 66, 178, 104, 0.08 );
+	}
+
+	&--mentions {
+		background: rgba( 223, 150, 44, 0.08 );
+	}
+}

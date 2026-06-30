@@ -197,6 +197,27 @@ class Tracking {
 	}
 
 	/**
+	 * Enqueue Mixpanel script and inject tracking data for non-block-editor admin pages.
+	 * Called by individual module admin classes that need JS-side event tracking.
+	 */
+	public function enqueue_mixpanel_for_page(): void {
+		if ( ! $this->optin->can_track() ) {
+			return;
+		}
+
+		$this->mixpanel->add_script();
+		Helper::add_json(
+			'tracking',
+			[
+				'plugin'   => $this->plugin,
+				'path'     => isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '',
+				'email'    => $this->user_email,
+				'language' => $this->user_language,
+			],
+		);
+	}
+
+	/**
 	 * Track admin page views.
 	 */
 	public function track_admin_page_view() {

@@ -1,0 +1,38 @@
+/**
+ * BrandsTableToolbar — search + add-brand bar above the brands table.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-brands-toolbar {
+	display:     flex;
+	align-items: center;
+	gap:         $space-md;
+
+	&__search.components-base-control {
+		flex:      0 0 auto;
+		margin:    0;
+		width:     200px;
+
+		input[type='text'],
+		input[type='search'] {
+			height:        36px;
+			border-radius: 2px;
+			border-color:  #949494;
+			font-size:     13px;
+
+			&:focus {
+				border-color: $color-btn-primary;
+				box-shadow:   0 0 0 1px $color-btn-primary;
+			}
+		}
+
+		input[type='text'] {
+			padding: 0 12px;
+		}
+
+		input[type='search'] {
+			padding: 0 5px;
+		}
+	}
+}

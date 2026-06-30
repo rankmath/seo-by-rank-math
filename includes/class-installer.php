@@ -332,6 +332,7 @@ class Installer {
 			'web-stories',
 			'content-ai',
 			'instant-indexing',
+			'ai-visibility',
 		];
 
 		// Role Manager.

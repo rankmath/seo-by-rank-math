@@ -1,0 +1,75 @@
+/**
+ * AnalysisRunDetail — full-page run detail view styles.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-analysis-run-detail {
+
+	// ── Stat cards ────────────────────────────────────────────────────────────
+
+	&__stat-cards {
+		display: flex;
+		gap: 28px;
+		margin-bottom: 26px;
+		margin-top: 24px;
+	}
+
+	// ── Query table ───────────────────────────────────────────────────────────
+
+	&__table {
+		background: $color-surface;
+		border: 1px solid $color-border;
+		border-radius: $radius-md;
+		overflow: hidden;
+	}
+
+	&__table-row {
+		display: grid;
+		grid-template-columns: 1fr 140px 160px;
+		align-items: center;
+		padding: 20px 35px;
+		border-bottom: 1px solid $color-border;
+		gap: 16px;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		&--header {
+			background: #FCFCFC;
+			font-size: 12px;
+			font-weight: 600;
+			color: #1E1E1E;
+			text-transform: uppercase;
+			letter-spacing: 0.03em;
+			padding: 13px 35px;
+		}
+	}
+
+	&__col {
+		min-width: 0;
+
+		&--query {
+			font-size: 13px;
+			color: $color-text-primary;
+			line-height: 1.5;
+		}
+
+		&--sentiment {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	&__content {
+		background: #FFFFFF;
+		border-width: 0px 1px 1px 1px;
+		border-style: solid;
+		border-color: #E0E0E0;
+		border-radius: 0px 0px 4px 4px;
+		padding: 24px 34px 34px 34px;
+		margin: 24px 0 0 0;
+	}
+}
+

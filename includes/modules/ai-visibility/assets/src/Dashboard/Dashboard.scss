@@ -1,0 +1,83 @@
+/**
+ * Dashboard tab — layout styles.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-dashboard {
+	display:        flex;
+	flex-direction: column;
+	gap:            26px;
+
+	&__error {
+		padding:       $space-sm $space-md;
+		background:    #fef0f0;
+		border:        1px solid $color-trend-down;
+		border-radius: $radius-sm;
+		color:         $color-trend-down;
+		font-size:     14px;
+	}
+
+	&__stats {
+		display: flex;
+		gap:     $card-row-gap;
+		margin-top: 16px;
+
+		// On narrow viewports stack cards vertically.
+		@media ( max-width: 782px ) {
+			flex-direction: column;
+		}
+	}
+
+	&__empty {
+		background:    $color-surface;
+		border:        $border-width solid $border-color;
+		border-radius: $radius-sm;
+	}
+
+	&__table-card {
+		background:    #fff;
+		border:        1px solid $color-border;
+		border-radius: $radius-sm;
+		overflow:      hidden;
+		position: relative;
+
+		// Toolbar padding inside the card.
+		.rank-math-ai-visibility-brands-toolbar {
+			padding: 14px 25px;
+			border-bottom: 1px solid $color-border;
+			gap: 8px;
+
+			&__search.components-base-control {
+				width: 260px;
+			}
+		}
+
+		.rank-math-table-header {
+			display: none;
+		}
+
+		.rank-math-table-card {
+			border:        none;
+			border-radius: 0;
+			background:    transparent;
+			box-shadow:    none;
+		}
+
+		// Center the table pagination row.
+		.rank-math-table-footer,
+		.rank-math-table__pagination {
+			display:         flex;
+			justify-content: center;
+		}
+
+		> svg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 999;
+			opacity: .5;
+		}
+	}
+
+}

@@ -1,0 +1,121 @@
+/**
+ * AnalysesFilterBar — single-row filter bar.
+ *
+ * [All Brands ▼] [All Statuses ▼] [Search 🔍 ........] [📅 dd/mm/yy] - [📅 dd/mm/yy]
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-analyses-filter-bar {
+	display:     flex;
+	align-items: center;
+	gap:         $space-sm;
+	flex-wrap:   nowrap;
+	padding: 15px 25px;
+	background-color: $color-surface;
+
+	// Remove WP base-control bottom margin.
+	.components-base-control {
+		margin-bottom: 0;
+	}
+
+	// Brand — fixed width, same style as Status
+	&__brand {
+		min-width: 150px;
+		flex-shrink: 0;
+	}
+
+	// Status — fixed width
+	&__status {
+		min-width: 140px;
+		flex-shrink: 0;
+	}
+
+	// Search — grows to fill available space between dropdowns and date range.
+	// Styled to match the Dashboard BrandsTableToolbar search:
+	// icon LEFT (default WP), 36px tall, border-radius 2px, border #949494.
+	&__search {
+		flex: 1;
+		min-width: 120px;
+		max-width: 260px;
+
+		// WP InputControl renders the visible border on .components-input-control__backdrop
+		// (a positioned <div>), NOT on the <input> element. The .is-focused class is
+		// toggled on the wrapper by WP on focus. WP admin also injects
+		// var(--wp-admin-theme-color) here, so !important is required to win.
+		.components-input-control.is-focused .components-input-control__backdrop {
+			@include input-focus-ring;
+		}
+
+		input[type='text'],
+		input[type='search'] {
+			height:        36px;
+			border-radius: 2px;
+			font-size:     13px;
+
+			// The visible ring lives on the backdrop — suppress any residual
+			// browser outline or box-shadow on the raw input element itself.
+			&:focus {
+				outline:    none !important;
+				box-shadow: none !important;
+			}
+		}
+
+		input[type='text'] {
+			padding: 0 12px;
+		}
+
+		input[type='search'] {
+			padding: 0 5px;
+		}
+	}
+
+	// Date range wrapper: [📅 input] - [📅 input]
+	&__dates {
+		display:     flex;
+		align-items: center;
+		gap:         6px;
+		flex-shrink: 0;
+		margin-left: auto;
+	}
+
+	&__date-sep {
+		font-size:  13px;
+		color:      $color-text-muted;
+		flex-shrink: 0;
+	}
+
+	&__date-input {
+		border:      none;
+		outline:     none;
+		font-size:   12px;
+		color:       $color-text-primary;
+		background:  transparent;
+		width:       100px;
+		padding:     0;
+	}
+
+	// "Clear filters" link — appears only when filters are active.
+	&__clear {
+		flex-shrink: 0;
+		white-space: nowrap;
+		font-size: 12px;
+	}
+
+	@at-root #rank-math-ai-visibility-container {
+		.components-input-control__input,
+		.components-select-control__input {
+			height: 36px;
+			min-height: 36px;
+		}
+
+		.components-select-control__input {
+			color: #757575;
+			padding: 0 16px;
+		}
+
+		.components-input-control__backdrop {
+			border-color: $color-input-border;
+		}
+	}
+}

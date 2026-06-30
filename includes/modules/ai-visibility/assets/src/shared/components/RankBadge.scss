@@ -1,0 +1,50 @@
+/**
+ * RankBadge — styles.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-rank-badge {
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+	flex-shrink:     0;
+
+	// -------------------------------------------------------------------------
+	// Colour variants
+	// -------------------------------------------------------------------------
+
+	&--rank-1 {
+		color:            #42B268;
+		background-color: #42B2681A;
+		border-color:     #42B268
+	}
+
+	&--rank-3 {
+		color:            #F66276;
+		background-color: #F662761A;
+		border-color:     #F66276
+	}
+
+	&--rank-2 {
+		color:            #F2B02D;
+		background-color: #F2B02D1A;
+		border-color:     #F2B02D
+	}
+
+	&--neutral {
+		color:            #B7B7B7;
+		background-color: #B7B7B71A;
+		border-color:     #B7B7B7;
+	}
+}

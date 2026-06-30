@@ -1,0 +1,287 @@
+/**
+ * AddBrandModal — add / edit brand form styles.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-add-brand-modal {
+
+	&.components-modal__frame {
+		width:     585px;
+		max-width: 95vw;
+		max-height: 85%;
+	}
+
+	// Remove default padding — our custom header + body handle all spacing.
+	.components-modal__content {
+		padding: 0;
+	}
+
+	// -------------------------------------------------------------------------
+	// Custom header — title + subtitle on the left, close × on the right.
+	// -------------------------------------------------------------------------
+
+	&__header {
+		display:         flex;
+		align-items:     flex-start;
+		justify-content: space-between;
+		padding:         30px 32px 32px 54px;
+	}
+
+	&__header-text {
+		display:        flex;
+		flex-direction: column;
+		gap:            6px;
+	}
+
+	&__title {
+		margin:      0;
+		font-size:   18px;
+		font-weight: 400;
+		line-height: 1.3;
+		color:       $color-text-primary;
+	}
+
+	&__subtitle {
+		margin:      0;
+		font-size:   13px;
+		line-height: 1.5;
+		color:       $color-text-muted;
+
+		a {
+			margin-left: 2px;
+		}
+	}
+
+	&__close {
+		display:          flex;
+		align-items:      center;
+		justify-content:  center;
+		width:            32px;
+		height:           32px;
+		padding:          0;
+		background:       transparent;
+		border:           none;
+		border-radius:    $radius-sm;
+		color:            $color-text-muted;
+		cursor:           pointer;
+		flex-shrink:      0;
+		margin-top:       -4px;
+
+		&:hover {
+			background: rgba( 0, 0, 0, 0.06 );
+			color:      $color-text-primary;
+		}
+
+		&:focus-visible {
+			outline:        2px solid $color-text-secondary;
+			outline-offset: 2px;
+		}
+
+		&[aria-expanded="true"],
+		&:hover:not(:disabled, [aria-disabled="true"]) {
+			background: transparent;
+			color: inherit;
+		}
+
+		&:focus:not(:active) {
+			box-shadow: none;
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Divider between header and body.
+	// -------------------------------------------------------------------------
+
+	&__divider {
+		margin:     0;
+		border:     none;
+		border-top: 1px solid $color-border;
+	}
+
+	// -------------------------------------------------------------------------
+	// Body — vertical stack of field wrappers.
+	// -------------------------------------------------------------------------
+
+	&__body {
+		display:        flex;
+		flex-direction: column;
+		gap:            22px;
+		padding:        36px 56px;;
+	}
+
+	&__field {
+		display:        flex;
+		flex-direction: column;
+		gap:            6px;
+	}
+
+	&__label {
+		display:        flex;
+		align-items:    center;
+		gap:            6px;
+		font-size:      11px;
+		font-weight:    500;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		color:          $color-text-primary;
+	}
+
+	&__info-icon {
+		color:       $color-text-muted;
+		flex-shrink: 0;
+	}
+
+	.components-base-control__label,
+	.components-input-control__label {
+		font-size:      11px;
+		font-weight:    500;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		color:          $color-text-primary;
+	}
+
+	.rank-math-select-with-searchbox  {
+		max-width: 100%;
+
+		.components-button {
+			font-weight: normal;
+			font-size: inherit;
+			font-family: inherit;
+			line-height: inherit;
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Inline validation error state.
+	// -------------------------------------------------------------------------
+
+	&__field--error {
+		.components-text-control__input, .components-textarea-control__input {
+			border-color: $color-trend-down;
+
+			&:focus {
+				box-shadow: 0 0 0 1px $color-trend-down;
+				border-color: $color-trend-down;
+			}
+		}
+
+		.components-base-control__help {
+			color: $color-trend-down;
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Collapse WP default bottom margins on form controls.
+	// -------------------------------------------------------------------------
+
+	.components-base-control {
+		margin-bottom: 0;
+	}
+
+	// -------------------------------------------------------------------------
+	// AI Platforms — 2-column checkbox grid.
+	// -------------------------------------------------------------------------
+
+	&__platforms {
+		display:               grid;
+		grid-template-columns: 1fr 1fr;
+		gap:                   10px 16px;
+		margin-top:            4px;
+	}
+
+	&__platforms-col {
+		display:        flex;
+		flex-direction: column;
+		gap:            10px;
+	}
+
+	&__platform-row {
+		display:     flex;
+		align-items: center;
+		gap:         8px;
+
+		.components-checkbox-control {
+			margin-bottom: 0;
+		}
+
+		.components-checkbox-control__input-container,
+		.components-checkbox-control__label {
+			cursor: pointer;
+		}
+
+		&--disabled {
+			opacity: 0.65;
+
+			.components-checkbox-control__input-container,
+			.components-checkbox-control__label {
+				cursor: not-allowed;
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// "Coming Soon" pill badge.
+	// -------------------------------------------------------------------------
+
+	&__coming-soon {
+		display: inline-flex;
+		align-items: center;
+		padding: 0px 4px;
+		background-color: #B7B7B724;
+		color: #9D9D9D;
+		font-size: 10px;
+		font-weight: 500;
+		white-space: nowrap;
+		flex-shrink: 0;
+		border: 1px solid #B7B7B721;
+		border-radius: 2px;
+	}
+
+	// -------------------------------------------------------------------------
+	// API error — shown above the footer when a backend error occurs.
+	// -------------------------------------------------------------------------
+
+	&__api-error {
+		margin:           0 54px 0 54px;
+		padding:          10px 14px;
+		background-color: #fff3f3;
+		border:           1px solid #f0b8b8;
+		border-radius:    4px;
+		color:            #c0392b;
+		font-size:        13px;
+		line-height:      1.5;
+	}
+
+	// -------------------------------------------------------------------------
+	// Footer — right-aligned Cancel + primary action button.
+	// -------------------------------------------------------------------------
+
+	&__footer {
+		display:         flex;
+		justify-content: flex-end;
+		align-items:     center;
+		gap:             12px;
+		padding: 		 20px 54px 24px 24px;
+
+		.components-button {
+			&.is-primary {
+				min-height: 40px;
+				padding: 12px 16px;
+				font-weight: 300;
+			}
+
+			&.is-secondary {
+				min-height: 40px;
+				padding: 12px 16px;
+				color: #757575;
+				border-color: #949494;
+			}
+		}
+	}
+
+	.rank-math-ai-visibility-add-brand-modal__close {
+		padding: 0px;
+		color: #9b9b9b;
+	}
+}

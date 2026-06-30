@@ -146,6 +146,13 @@ class KB {
 		'analysis-sitemaps'               => 'https://rankmath.com/kb/seo-analysis/?#sitemaps-test',
 		'analysis-auto-update'            => 'https://rankmath.com/kb/seo-analysis/?#priority',
 
+		// Link Genius.
+		'link-genius'                     => 'https://rankmath.com/kb/wordpress/ai-link-genius/',
+
+		// AI Visibility.
+		'ai-visibility'                   => 'https://rankmath.com/kb/track-ai-visibility/',
+		'ai-visibility-connect'           => 'https://rankmath.com/kb/how-to-connect-or-disconnect-rank-math/',
+
 		// Social Media.
 		'yt-link'                         => 'http://youtube.com/rankmath',
 		'fb-group'                        => 'https://www.facebook.com/groups/rankmathseopluginwordpress/',

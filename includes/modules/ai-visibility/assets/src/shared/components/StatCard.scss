@@ -1,0 +1,186 @@
+/**
+ * StatCard — styles.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-stat-card {
+	background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 40px 24px;
+
+	display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+
+	flex: 1 1 0;
+    min-width: 0;
+
+	&__icon-wrap {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 48px;
+		height: 42px;
+		background: var( --stat-icon-bg, #f0f0f0 );
+		border-radius: 6px;
+	}
+
+	&.rank-math-ai-visibility-brand-overview__stat-card {
+		&--score {
+			.rank-math-ai-visibility-stat-card__icon-wrap {
+				background: #017CBA1F;
+
+				.dashicons {
+					color: #017CBA;
+				}
+			}
+		}
+
+		&--mentions {
+			.rank-math-ai-visibility-stat-card__icon-wrap {
+				background: #DF962C1F;
+
+				svg {
+					fill: #DF962C;
+				}
+
+				.dashicons {
+					color: #DF962C;
+				}
+			}
+		}
+
+		&--sentiment {
+			.rank-math-ai-visibility-stat-card__icon-wrap {
+				background: #5260B91F;
+
+				.dashicons {
+					color: #5260B9;
+				}
+			}
+		}
+
+		&--competitor {
+			.rank-math-ai-visibility-stat-card__icon-wrap {
+				background: #F662761F;
+
+				.dashicons {
+					color: #F66276;
+				}
+			}
+		}
+	}
+
+	&__icon {
+		width:       24px;
+		height:      24px;
+		flex-shrink: 0;
+		// Default: muted grey. Override per card via --stat-icon-color on the root element.
+		// SVG icons (fill) and dashicons (color) — both controlled by the same variable.
+		fill:  var( --stat-icon-color, #{$color-text-muted} );
+		color: var( --stat-icon-color, #{$color-text-muted} );
+
+		// Dashicon sizing when used as the icon element.
+		&.dashicons {
+			width:     20px;
+			height:    20px;
+			font-size: 20px;
+			line-height: 1;
+		}
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: 11px;
+		min-width: 0;
+	}
+
+	&__label-row {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	&__label {
+		font-size: 16px;
+		line-height: normal;
+		font-weight: 400;
+		color: #9b9b9b;
+	}
+
+	&--has-data {
+		.rank-math-ai-visibility-stat-card__label,
+		.rank-math-ai-visibility-stat-card__value {
+			color: inherit;
+		}
+	}
+
+	// Data block — wraps value + trend chip.
+	&__data {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		min-width: 0;
+	}
+
+	&__value {
+		font-size:   $stat-value-size;
+		font-weight: $stat-value-weight;
+		line-height: $stat-value-line-height;
+		color:       $stat-value-color;
+	}
+
+	// Active brands / Rank Score — blue
+	&--active-brands {
+		--stat-icon-bg:    #017CBA1F;
+		--stat-icon-color: #017CBA;
+	}
+
+	// Analyses in last 24h — indigo
+	&--analyses {
+		--stat-icon-bg:    #5260B91F;
+		--stat-icon-color: #5260B9;
+	}
+
+	// Avg mentions per brand — amber
+	&--mentions {
+		--stat-icon-bg:    #E8A6231F;
+		--stat-icon-color: #E8A623;
+	}
+
+	// -------------------------------------------------------------------------
+	// Compact modifier — reduced padding for dense contexts (e.g. AnalysisRunDetail)
+	// -------------------------------------------------------------------------
+
+	&--target-brand .rank-math-ai-visibility-stat-card__icon-wrap {
+		background: #017CBA1F;
+
+		.dashicons {
+			color: #017CBA;
+		}
+	}
+
+	&--duration-timing .rank-math-ai-visibility-stat-card__icon-wrap {
+		background: #5260B91F;
+
+		.dashicons {
+			color: #5260B9;
+		}
+	}
+
+	&--compact {
+		padding: 20px;
+	}
+
+	// Sub-label — rendered below the value (e.g. a date string).
+	&__sub {
+		font-size:  12px;
+		color:      $color-text-muted;
+		margin-top: 2px;
+	}
+}

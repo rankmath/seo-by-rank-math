@@ -1,0 +1,211 @@
+/**
+ * ActivateTrialModal — activating + success state styles.
+ *
+ * The idle/error pitch reuses the shared gate styles in GradientModal.scss.
+ */
+
+@import '../../scss/variables';
+
+// ---------------------------------------------------------------------------
+// Activating state — compact centered modal with spinner + steps.
+// ---------------------------------------------------------------------------
+
+.rank-math-ai-visibility-activating-modal {
+
+	&.components-modal__frame {
+		width:     440px;
+		max-width: 95vw;
+	}
+
+	.components-modal__content {
+		display:        flex;
+		flex-direction: column;
+		align-items:    center;
+		gap:            12px;
+		padding:        40px 40px $space-xl;
+		text-align:     center;
+	}
+
+	&__spinner {
+		margin-bottom: 4px;
+
+		.components-spinner {
+			width:  44px;
+			height: 44px;
+			margin: 0;
+			color:  $color-btn-primary;
+		}
+	}
+
+	&__title {
+		margin:      0;
+		font-size:   18px;
+		font-weight: 500;
+		line-height: 1.35;
+		color:       $color-btn-primary;
+	}
+
+	&__subtitle {
+		margin:      0;
+		font-size:   13px;
+		line-height: 1.55;
+		color:       $gate-footnote-color;
+	}
+
+	// ── Provisioning steps ──
+	&__steps {
+		display:        flex;
+		flex-direction: column;
+		align-items:    flex-start;
+		gap:            $space-sm;
+		margin:         12px 0 0;
+		padding:        0;
+		list-style:     none;
+		text-align:     left;
+	}
+
+	&__step {
+		display:     flex;
+		align-items: center;
+		gap:         8px;
+		margin:      0;
+		font-size:   12px;
+		line-height: 1.4;
+		color:       $color-text-muted;
+		transition:  color 0.2s ease, opacity 0.2s ease;
+
+		&--done,
+		&--active {
+			color: $color-btn-primary;
+		}
+
+		&--pending {
+			opacity: 0.6;
+		}
+	}
+
+	&__step-icon {
+		display:         inline-flex;
+		align-items:     center;
+		justify-content: center;
+		flex-shrink:     0;
+		width:           14px;
+		height:          14px;
+		color:           currentColor;
+
+		.rm-icon {
+			font-size:   13px;
+			line-height: 1;
+		}
+	}
+
+	// Hollow circle for active/pending steps; active one spins a dash.
+	&__step-circle {
+		display:       block;
+		width:         12px;
+		height:        12px;
+		border:        1.4px solid currentColor;
+		border-radius: 50%;
+	}
+
+	&__step--active &__step-circle {
+		border-top-color: transparent;
+		animation:        rank-math-aiv-step-spin 0.9s linear infinite;
+	}
+}
+
+@keyframes rank-math-aiv-step-spin {
+	to {
+		transform: rotate( 360deg );
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Success state — Quick Start Guide placeholder + help links.
+// ---------------------------------------------------------------------------
+
+.rank-math-ai-visibility-trial-success {
+
+	&__video {
+		display:         flex;
+		flex-direction:  column;
+		align-items:     center;
+		justify-content: center;
+		gap:             $space-lg;
+		min-height:      280px;
+		padding:         $space-xl $space-lg;
+		background:      $gate-video-bg;
+		border-radius:   $radius-md;
+		color:           $color-text-light;
+	}
+
+	&__video--idle {
+		cursor: pointer;
+
+		&:hover,
+		&:focus-visible {
+			outline: none;
+
+			.rank-math-ai-visibility-trial-success__video-play {
+				opacity: .75;
+				transform: scale( 1.1 );
+			}
+		}
+	}
+
+	&__video--playing {
+		padding: 0;
+		overflow: hidden;
+	}
+
+	&__video-iframe {
+		display:      block;
+		width:        100%;
+		height:       280px;
+		border:       0;
+		border-radius: $radius-md;
+	}
+
+	&__video-play.dashicons {
+		width:       48px;
+		height:      48px;
+		font-size:   48px;
+		line-height: 1;
+		transition:  opacity .2s ease, transform .2s ease;
+	}
+
+	&__video-caption {
+		font-size:      12px;
+		font-weight:    500;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+	}
+
+	&__links {
+		display:     flex;
+		align-items: center;
+		gap:         28px;
+	}
+
+	&__link {
+		display:         inline-flex;
+		align-items:     center;
+		gap:             7px;
+		font-size:       14px;
+		color:           $color-btn-primary;
+		text-decoration: none;
+
+		.rm-icon {
+			flex-shrink: 0;
+			font-size:   16px;
+			line-height: 1;
+		}
+
+		&:hover,
+		&:focus {
+			color:           darken( $color-btn-primary, 8% );
+			text-decoration: underline;
+			box-shadow:      none;
+		}
+	}
+}

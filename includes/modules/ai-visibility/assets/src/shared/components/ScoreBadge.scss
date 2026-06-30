@@ -1,0 +1,41 @@
+/**
+ * ScoreBadge — AI Visibility Score pill (X/100).
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-score-badge {
+	display: inline-flex;
+    align-items: center;
+    padding: 3px 6px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid #B7B7B7;
+    background: rgba(183, 183, 183, 0.1);
+    color: #B7B7B7;
+    min-width: 44px;
+    justify-content: center;
+
+	// Score ≥ 70 — green
+	&--good {
+		background:   rgba( 66, 178, 104, 0.1 );
+		border-color: #42B268;
+		color:        #198B3F;
+	}
+
+	// Score 40–69 — amber
+	&--average {
+		background:   rgba( 232, 166, 35, 0.1 );
+		border-color: #E8A623;
+		color:        #D18E08;
+	}
+
+	// Score < 40 — red
+	&--poor {
+		background:   rgba( 246, 98, 118, 0.1 );
+		border-color: #F66276;
+		color:        #F66276;
+	}
+}

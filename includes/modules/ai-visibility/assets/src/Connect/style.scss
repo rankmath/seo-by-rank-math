@@ -1,0 +1,70 @@
+.rank-math-ai-visibility-account {
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+
+    h3 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 26px;
+        color: #C64539;
+        margin: 0;
+    }
+
+    header {
+        padding: 19px 28px;
+        border-bottom: 1px solid #E0E0E0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .rank-math-status-button.components-button.is-disconnected {
+        background: #C64539;
+        font-size: 13px;
+        font-weight: 300;
+        border-radius: 2px;
+
+        svg {
+            width: 10px;
+        }
+    }
+
+    &-content {
+        display: flex;
+        padding: 80px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: #1E1E1E;
+
+        a {
+            color: #017CBA;
+        }
+        
+        p {
+            margin: 0;
+            line-height: 23px;
+
+            &.rank-math-ai-visibility-account-not-registered-note {
+                margin-top: 30px;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 16px;
+                color: #757575;
+            }
+        }
+        
+        .rank-math-button.components-button.button-animate {
+            margin-top: 32px;
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 80px;
+            padding: 0 42px;
+        }
+    }
+
+}

@@ -1,0 +1,27 @@
+/**
+ * RunDetail — transcript viewer wrapper styles.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-run-detail {
+	&--loading {
+		display:         flex;
+		justify-content: center;
+		padding:         $space-xl;
+	}
+
+	&--error {
+		p {
+			@include error-state;
+		}
+	}
+
+	&--empty {
+		p {
+			font-size: 13px;
+			color:     $color-text-muted;
+			margin:    0;
+		}
+	}
+}

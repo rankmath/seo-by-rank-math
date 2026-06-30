@@ -1,0 +1,155 @@
+/**
+ * UpgradePlanModal — brand-limit upgrade prompt shell styles.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-upgrade-plan-modal {
+
+	&.components-modal__frame {
+		width:      1060px;
+		max-width:  95vw;
+		max-height: 92vh;
+	}
+
+	.components-modal__content {
+		padding: 0;
+	}
+
+	// -------------------------------------------------------------------------
+	// Header — icon + title/subtitle on the left, close × on the right.
+	// -------------------------------------------------------------------------
+
+	&__header {
+		display:     flex;
+		align-items: flex-start;
+		gap:         14px;
+		padding:     $space-lg $space-xl;
+	}
+
+	&__header-icon.dashicons {
+		flex-shrink: 0;
+		margin-top:  2px;
+		width:       24px;
+		height:      24px;
+		font-size:   24px;
+		line-height: 1;
+		color:       $color-text-primary;
+	}
+
+	&__header-text {
+		display:        flex;
+		flex-direction: column;
+		gap:            4px;
+		flex:           1;
+	}
+
+	&__title {
+		margin:      0;
+		font-size:   18px;
+		font-weight: 600;
+		line-height: 1.3;
+		color:       $color-text-primary;
+	}
+
+	&__subtitle {
+		margin:      0;
+		font-size:   13px;
+		line-height: 1.5;
+		color:       $gate-footnote-color;
+	}
+
+	&__close.components-button {
+		display:         flex;
+		align-items:     center;
+		justify-content: center;
+		width:           30px;
+		height:          30px;
+		padding:         0;
+		flex-shrink:     0;
+		background:      transparent;
+		border:          1px solid $color-border;
+		border-radius:   $radius-sm;
+		color:           $color-text-muted;
+		cursor:          pointer;
+
+		&:hover:not( :disabled ) {
+			background: rgba( 0, 0, 0, 0.04 );
+			color:      $color-text-primary !important;
+		}
+
+		&:focus-visible {
+			outline:        2px solid $color-btn-primary;
+			outline-offset: 2px;
+			box-shadow:     none;
+		}
+
+		&:focus:not( :active ) {
+			box-shadow: none;
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Body — gradient backdrop; hosts the pricing iframe once available.
+	// -------------------------------------------------------------------------
+
+	&__body {
+		background: $gate-gradient;
+
+		// Definite, viewport-based height so the full pricing page shows and
+		// scrolls internally — the iframe content has no height of its own.
+		iframe {
+			display: block;
+			width:   100%;
+			height:  72vh;
+			border:  0;
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Footer — guarantee note (left) + "I'll do this later" (right).
+	// -------------------------------------------------------------------------
+
+	&__footer {
+		display:         flex;
+		align-items:     center;
+		justify-content: space-between;
+		gap:             $space-md;
+		padding:         $space-md $space-xl;
+		background:      $color-surface;
+	}
+
+	&__guarantee {
+		margin:    0;
+		font-size: 13px;
+		color:     $color-text-body;
+	}
+
+	&__later.components-button {
+		padding:         0;
+		height:          auto;
+		font-size:       14px;
+		font-weight:     500;
+		color:           $color-btn-primary;
+		background:      transparent;
+		border:          none;
+		box-shadow:      none;
+		text-decoration: none;
+
+		&:hover:not( :disabled ) {
+			color:           darken( $color-btn-primary, 8% ) !important;
+			text-decoration: underline;
+			background:      transparent;
+		}
+
+		&:focus-visible {
+			outline:        2px solid $color-btn-primary;
+			outline-offset: 2px;
+			box-shadow:     none;
+		}
+
+		&:focus:not( :focus-visible ) {
+			box-shadow: none;
+		}
+	}
+}

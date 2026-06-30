@@ -1,0 +1,311 @@
+/**
+ * AI Visibility — SCSS design tokens.
+ *
+ * All values sourced directly from the Figma file:
+ * https://www.figma.com/design/Ro0jblj6zP93S52TzqGfBU/AI-Visibility
+ *
+ * Module-scoped variables. The Rank Math codebase has no centralised tokens
+ * file, so each module defines its own here.
+ *
+ * Usage:
+ *   @import '../scss/variables';
+ *   .foo { color: $color-text-muted; }
+ */
+
+// ---------------------------------------------------------------------------
+// Colors — surfaces & borders
+// ---------------------------------------------------------------------------
+
+// Card / panel background.
+$color-surface:           #fff;
+
+// Border on cards and separators (Figma token: Color/Layout/borders).
+$color-border:            #e0e0e0;
+
+// Input field border — slightly darker than card borders (used on date pickers,
+// select control backdrop, etc.).
+$color-input-border:      #949494;
+
+// ---------------------------------------------------------------------------
+// Colors — text
+// ---------------------------------------------------------------------------
+
+// Primary text — empty state heading, strong labels.
+$color-text-primary:      #1e1e1e;
+
+// Secondary text — section subtitles
+$color-text-secondary:    #868686;
+
+// Muted / secondary text — stat labels, stat values (zero state), body copy.
+$color-text-muted:        #9b9b9b;
+
+// Body copy on light surfaces — modal intro text, footer notes
+// (matches the secondary button text colour used in Button.scss).
+$color-text-body:         #4e4e4e;
+
+// Text / icons on dark or gradient backgrounds — gate modal headers,
+// video placeholder.
+$color-text-light:        #fff;
+
+// ---------------------------------------------------------------------------
+// Colors — trend indicators
+// (applied to the "Changes, Period" chip on stat cards)
+// ---------------------------------------------------------------------------
+
+// Positive trend (direction: up).
+$color-trend-up:          #42B268;
+$color-trend-up-bg:       #42B26814;  // for up badge background (not in Figma, but added for better accessibility)
+
+// Negative trend (direction: down).
+$color-trend-down:        #F66276;
+$color-trend-down-bg:     #F6627614;  // for down badge background (not in Figma, but added for better accessibility)
+
+// Neutral / flat trend (delta: 0 or no data).
+$color-trend-neutral:        #B7B7B7;
+$color-trend-neutral-bg:     #B1B1B114;
+
+// ---------------------------------------------------------------------------
+// Colors — rank badge
+// (Status-Anchor-Tag component, Figma node 3-1043)
+// All backgrounds use the badge colour at 30 % opacity (hex suffix 4D).
+// ---------------------------------------------------------------------------
+
+// Rank 1 — green (reuses $color-trend-up).
+// Rank 2 — amber (unique to rank badges; not shared with trend indicators).
+$color-rank-2:            #F2B02D;
+// Rank 3 — pink/red (reuses $color-trend-down).
+// Rank − — grey    (reuses $color-trend-neutral).
+
+// Shared badge padding (Figma: 6 px each side — distinct from the 4 px
+// trend-chip padding in $stat-trend-badge-padding-x).
+$rank-badge-padding-x:    6px;
+
+// ---------------------------------------------------------------------------
+// Colors — interactive
+// ---------------------------------------------------------------------------
+
+// Primary CTA button background (Figma token: Button/button-primary-default).
+$color-btn-primary:       #017cba;
+
+// Primary button text.
+$color-btn-primary-text:  #fff;
+
+// ---------------------------------------------------------------------------
+// Typography — font family
+// ---------------------------------------------------------------------------
+
+// SF Pro Text is used throughout the design. In a browser context this
+// resolves to the OS system-ui font, which WordPress admin already sets.
+// Declare it here so components can reference it explicitly if needed.
+$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+	Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+// ---------------------------------------------------------------------------
+// Typography — stat card
+// ---------------------------------------------------------------------------
+
+// Stat card label (e.g. "Active brands", "Analyses in last 24h").
+$stat-label-size:         16px;   // Figma: SF Pro Text 16px
+$stat-label-weight:       500;    // Figma: Medium
+$stat-label-line-height:  26px;   // Figma: 26px
+$stat-label-color:        $color-text-muted;
+
+// Stat card value (the large number e.g. "0", "5", "3.4").
+$stat-value-size:         30px;
+$stat-value-weight:       600;
+$stat-value-line-height:  32px;
+$stat-value-color:        $color-text-muted;
+
+// Trend / delta chip text.
+// The delta ("-0%") renders as a pill-badge; the label ("this month") is plain text.
+$stat-trend-delta-size:       14px;   // Figma: badge font size
+$stat-trend-badge-bg:         #B1B1B114; // Figma: neutral badge background (translucent grey)
+$stat-trend-badge-radius:     30px;
+$stat-trend-badge-padding-x:  4px;
+$stat-trend-badge-padding-y:  4px;
+$stat-trend-label-size:       12px;   // Figma: plain trailing-label font size
+$stat-trend-label-lh:         16px;   // Figma: 16px
+$stat-trend-gap:              6px;    // gap between badge and plain label
+
+// StatCard content column gaps (Figma "Frame 45" / "Data" containers).
+$stat-label-data-gap:     4px;  // gap between label row and value+trend block (~11–13 px in Figma)
+$stat-value-trend-gap:    16px;  // gap between value and trend chip inside data block
+
+// ---------------------------------------------------------------------------
+// Typography — empty state
+// ---------------------------------------------------------------------------
+
+// "No brands or products tracked yet" heading.
+$empty-heading-size:      28px;   // Figma: 28px
+$empty-heading-weight:    400;    // Figma: Medium
+$empty-heading-line-height: 34px; // Figma: 34px
+$empty-heading-color:     $color-text-primary;
+
+// Supporting body copy beneath the heading.
+$empty-body-size:         16px;
+$empty-body-weight:       400;
+$empty-body-line-height:  23px;
+$empty-body-color:        $color-text-muted;
+
+// ---------------------------------------------------------------------------
+// Spacing
+// ---------------------------------------------------------------------------
+
+$space-xs:                4px;
+$space-sm:                8px;
+$space-md:                16px;
+$space-lg:                24px;
+$space-xl:                32px;
+
+// Card content padding (top/left/right differ from bottom per Figma).
+$card-padding-top:        16px;
+$card-padding-x:          16px;
+$card-padding-bottom:     16px;
+
+// Gap between the two stacked groups inside a card (label row → value row).
+$card-inner-gap:          11px;
+
+// Gap between the three stat cards in the row.
+$card-row-gap:            16px;
+
+// ---------------------------------------------------------------------------
+// Borders & radii
+// ---------------------------------------------------------------------------
+
+$radius-sm:               4px;
+$radius-md:               8px;
+$radius-btn:              2px;   // Button corner radius — Figma token Number/Radius/radius-xs
+
+$border-width:            1px;
+$border-color:            $color-border;
+
+// ---------------------------------------------------------------------------
+// Components — button
+// ---------------------------------------------------------------------------
+
+$btn-height:              36px;
+$btn-radius:              $radius-btn;  // 6px
+$btn-padding-x:           $space-md;
+$btn-gap:                 $space-sm;
+
+// ---------------------------------------------------------------------------
+// Components — empty state
+// ---------------------------------------------------------------------------
+
+// Vertical gap between icon → heading → body → button.
+$empty-state-gap:         16px;
+
+// Icon container — Figma "Tool Icon Container" (64 × 64, radius 40px, padding 10px).
+$empty-state-icon-size:    64px;                       // container width & height
+$empty-state-icon-radius:  40px;                       // rounded rect (not full circle)
+$empty-state-icon-padding: 10px;                       // inner padding around SVG
+$empty-state-icon-bg:      rgba(57, 116, 198, 0.10);   // #3974C6 @ 10% opacity
+$empty-state-icon-svg:     28px;                       // inner SVG / Frame size
+
+// ---------------------------------------------------------------------------
+// Colors — access & upgrade modals
+// (Figma: Free Users / Paid Users / Upgrade Plan flows)
+// ---------------------------------------------------------------------------
+
+// Gradient header (purple → blue) used on the access-gate modal headers and
+// the Upgrade Plan modal body backdrop.
+$gate-gradient-start:     #7053c9;
+$gate-gradient-end:       #59abf7;
+$gate-gradient:           linear-gradient( 96deg, $gate-gradient-start 0%, $gate-gradient-end 100% );
+
+// Green CTA ("Start 15-Day Free Trial", "Go to Dashboard") + feature checkmarks.
+$color-cta:               #16a571;
+$color-cta-text:          #fff;
+
+// Trial auto-renew notice (Paid Users modal).
+$trial-notice-bg:         #ebf3fa;
+$trial-notice-border:     #017cba;   // reuses the primary blue as the left accent
+
+// Footnote under the CTA ("30-Day Money-Back Guarantee").
+$gate-footnote-color:     #757575;
+
+// Quick Start Guide video placeholder (success modal).
+$gate-video-bg:           #131a2a;
+
+// ---------------------------------------------------------------------------
+// Mixins — card & table base patterns
+// (reused across CompetitorsTable, QueriesTable, Reports, etc.)
+// ---------------------------------------------------------------------------
+
+/// Card-like surface: white bg, 1px border, 4px radius.
+@mixin card-base {
+	background:    $color-surface;
+	border:        1px solid $color-border;
+	border-radius: $radius-sm;
+}
+
+/// Standard data table wrapper: full-width, collapsed borders, 13px font.
+@mixin table-base {
+	width:           100%;
+	border-collapse: collapse;
+	font-size:       13px;
+	border:          1px solid $color-border;
+	background:      $color-surface;
+}
+
+/// Standard header cell: left-aligned, grey header bg, border-bottom.
+@mixin table-header-cell {
+	padding:       14px 22px;
+	text-align:    left;
+	font-size:     12px;
+	font-weight:   500;
+	color:         #3c434a;
+	border-bottom: 1px solid $color-border;
+	background:    #f9f9f9;
+	white-space:   nowrap;
+}
+
+/// Standard body cell: left-aligned, 14px 22px padding, primary text.
+@mixin table-body-cell {
+	padding:        14px 22px;
+	vertical-align: middle;
+	color:          $color-text-primary;
+	line-height:    1.5;
+}
+
+/// Standard table row: bottom border, hover highlight, no border on last row.
+@mixin table-row-base {
+	border-bottom: 1px solid $color-border;
+
+	&:last-child {
+		border-bottom: none;
+	}
+
+	&:hover {
+		background: rgba( 0, 0, 0, 0.01 );
+	}
+}
+
+/// Error state: 13px red text, no margin.
+/// Apply inside an `--error` modifier block, targeting the inner `p`.
+/// Usage: &--error { p { @include error-state; } }
+@mixin error-state {
+	font-size: 13px;
+	color:     $color-trend-down;
+	margin:    0;
+}
+
+/// Consistent focus ring for text/date inputs and WP InputControl backdrops.
+/// Uses !important on border-color and box-shadow to beat WP admin's
+/// `var(--wp-admin-theme-color)` injection which wins on specificity alone.
+/// Usage: input:focus { @include input-focus-ring; outline: none; }
+@mixin input-focus-ring {
+	border-color: $color-btn-primary !important;
+	box-shadow:   0 0 0 2px rgba( 1, 124, 186, 0.15 ) !important;
+}
+
+// Secondary focus ring for focused elements inside a focused wrapper (e.g. search input
+@mixin input-focus-ring-secondary {
+	border-color: $color-input-border !important;
+	box-shadow:   0 0 0 2px rgba( 148, 148, 148, 0.15 ) !important;
+}
+
+@keyframes spin {
+	from { transform: rotate( 0deg ); }
+	to   { transform: rotate( 360deg ); }
+}

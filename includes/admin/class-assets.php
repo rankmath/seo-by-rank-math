@@ -236,6 +236,8 @@ class Assets implements Runner {
 			'toplevel_page_rank-math',
 			'rank-math_page_rank-math-role-manager',
 			'rank-math_page_rank-math-seo-analysis',
+			'rank-math_page_rank-math-links-page',
+			'rank-math_page_rank-math-ai-visibility',
 			'rank-math_page_rank-math-404-monitor',
 			'rank-math_page_rank-math-redirections',
 			'rank-math_page_rank-math-link-builder',

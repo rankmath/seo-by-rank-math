@@ -1,0 +1,74 @@
+/**
+ * BrandDetail — brand detail page layout.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-brand-detail {
+	display:        flex;
+	flex-direction: column;
+	gap:            20px;
+
+	&__content {
+		background:    $color-surface;
+		border:        1px solid $color-border;
+		border-radius: $radius-sm;
+	}
+
+	&--loading {
+		display:         flex;
+		justify-content: center;
+		padding:         $space-lg;
+	}
+
+	&--error {
+		padding:  $space-md;
+		text-align: center;
+		color:    $color-trend-down;
+	}
+
+	&__tabs {
+		margin-top: $space-sm;
+	}
+
+	&__tab {
+		padding: 32px;
+	}
+
+	.rank-math-ai-visibility-brand-header__name {
+		font-weight: 400;
+		font-size: 30px;
+		line-height: 34px;
+		color: #1E1E1E;
+		margin: 0;
+	}
+
+	.rank-math-ai-visibility-brand-detail__tabs.rank-math-tabs {
+		margin: 0;
+
+		.components-tab-panel__tabs {
+			padding:       0 16px;
+			border-bottom: 1px solid $color-border;
+		}
+
+		.components-tab-panel__tabs-item {
+			height: 52px !important;
+			font-weight: 500;
+    		color: #383838;
+
+			&.is-active {
+				color: $color-btn-primary;
+
+				&:after {
+					background: $color-btn-primary;
+					height: 2px;
+				}
+			}
+		}
+
+		.components-button:hover:not(:disabled,[aria-disabled=true]),
+		.components-button[aria-expanded=true] {
+			color: $color-btn-primary;
+		}
+	}
+}

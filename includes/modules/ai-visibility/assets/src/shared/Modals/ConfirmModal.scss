@@ -1,0 +1,74 @@
+/**
+ * ConfirmModal — styles for the generic confirmation dialog.
+ *
+ * All colour tokens come from `_variables.scss`.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-confirm-modal {
+
+	// Give the content area uniform padding — bottom space so buttons
+	// don't sit flush against the modal edge.
+	.components-modal__content {
+		padding-bottom: 0;
+	}
+
+	// -------------------------------------------------------------------------
+	// Message body
+	// -------------------------------------------------------------------------
+
+	&__message {
+		margin:      0 0 24px;
+		font-size:   14px;
+		line-height: 1.6;
+		color:       $color-text-primary;
+	}
+
+	// -------------------------------------------------------------------------
+	// Footer — Cancel + Confirm buttons, right-aligned.
+	// Both buttons use the same height (40 px) and padding for visual harmony.
+	// -------------------------------------------------------------------------
+
+	&__footer {
+		display:         flex;
+		justify-content: flex-end;
+		align-items:     center;
+		gap:             12px;
+		padding:         20px 0 28px;
+		border-top:      1px solid $color-border;
+		margin-top:      4px;
+
+		// Uniform button sizing so both sit in the same visual family.
+		.components-button {
+			min-height: 36px;
+			padding:    8px 16px;
+			font-size:  13px;
+			font-weight: 500;
+
+			// Cancel — neutral grey outline (not WP's default blue secondary).
+			&.is-secondary {
+				color:        #5c5f62;
+				border-color: #8c9196;
+
+				&:hover:not( :disabled ) {
+					color:        #1d2327;
+					border-color: #5c5f62;
+					background:   rgba( 0, 0, 0, 0.04 );
+				}
+			}
+
+			// Disable / destructive — red fill, consistent with danger action.
+			&.is-primary.is-destructive {
+				background:   $color-trend-down;
+				border-color: $color-trend-down;
+				color:        #fff;
+
+				&:hover:not( :disabled ) {
+					background:   darken( $color-trend-down, 8% );
+					border-color: darken( $color-trend-down, 8% );
+				}
+			}
+		}
+	}
+}

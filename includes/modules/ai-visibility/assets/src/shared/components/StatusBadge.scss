@@ -1,0 +1,46 @@
+/**
+ * StatusBadge — run status pill (success / error / partial).
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-status-badge {
+	display:      inline-flex;
+	align-items:  center;
+	gap:          4px;
+	font-size:    11px;
+	font-weight:  400;
+	padding:      2px 6px 2px 3px;
+	border-radius: 20px;
+	flex-shrink:  0;
+	white-space:  nowrap;
+	line-height:  1;
+
+	svg {
+		flex-shrink: 0;
+	}
+
+	.dashicons {
+		height: 14px;
+		width: 14px;
+		font-size: 14px;
+	}
+
+	&--success {
+		color:      $color-trend-up;
+		background: rgba( 66, 178, 104, 0.1 );
+		border:     1px solid rgba( 66, 178, 104, 0.35 );
+	}
+
+	&--error {
+		color:      $color-trend-down;
+		background: rgba( 246, 98, 118, 0.1 );
+		border:     1px solid rgba( 246, 98, 118, 0.35 );
+	}
+
+	&--partial {
+		color:      $color-rank-2;
+		background: rgba( 242, 176, 45, 0.1 );
+		border:     1px solid rgba( 242, 176, 45, 0.35 );
+	}
+}

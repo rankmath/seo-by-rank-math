@@ -285,7 +285,7 @@ class Admin extends Base {
 		$checkbox  = '<label><input type="checkbox" name="attachments[' . $post->ID . '][rank_math_media_exclude_sitemap]" ' . checked( $exclude, true, 0 ) . ' /> ';
 		$checkbox .= esc_html__( 'Exclude this attachment from sitemap', 'seo-by-rank-math' ) . '</label>';
 
-		$form_fields['rank_math_exclude_sitemap'] = [ 'tr' => "\t\t<tr><td></td><td>$checkbox</td></tr>\n" ];
+		$form_fields['rank_math_exclude_sitemap'] = [ 'tr' => "\t\t<tr><td>$checkbox</td></tr>\n" ];
 
 		return $form_fields;
 	}

@@ -1,0 +1,86 @@
+/**
+ * StatusIcon — shared inline status indicator.
+ *
+ * The root is a fixed 26x26 anchor; the pill is an absolute overlay that
+ * expands on hover without affecting surrounding layout (no jump).
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-status-icon {
+	position:       relative;
+	display:        inline-flex;
+	width:          26px;
+	height:         26px;
+	flex-shrink:    0;
+	vertical-align: middle;
+
+	&__pill {
+		position:        absolute;
+		top:             50%;
+		left:            0;
+		transform:       translateY( -50% );
+		display:         inline-flex;
+		align-items:     center;
+		border-radius:   100px;
+		border:          1px solid transparent;
+		padding:         4px;
+		background:      #fff;
+		cursor:          default;
+		white-space:     nowrap;
+		transition:      background 0.18s ease;
+	}
+
+	.dashicons {
+		width:     16px;
+		height:    16px;
+		font-size: 16px;
+
+		&.dashicons-update {
+			font-weight: 100;
+			animation: spin 2s linear infinite; 
+		}
+	}
+
+	&:hover {
+		z-index: 10;
+	}
+
+	&--error &__pill {
+		color:        #E05252;
+		border-color: #E05252;
+	}
+
+	&--error:hover &__pill {
+		background: #FCEEEE;
+	}
+
+	&--running &__pill,
+	&--pending &__pill {
+		color:        #E08C1A;
+		border-color: #E08C1A;
+	}
+
+	&--running:hover &__pill,
+	&--pending:hover &__pill {
+		background: #FCF3E8;
+	}
+
+	&__label {
+		font-size:   12px;
+		font-weight: 500;
+		line-height: 1;
+		max-width:   0;
+		overflow:    hidden;
+		opacity:     0;
+		transition:  max-width 0.18s ease, opacity 0.15s ease,
+		             margin-left 0.15s ease;
+	}
+
+	&:hover &__label {
+		max-width:   60px;
+		opacity:     1;
+		margin-left: 4px;
+	}
+}
+

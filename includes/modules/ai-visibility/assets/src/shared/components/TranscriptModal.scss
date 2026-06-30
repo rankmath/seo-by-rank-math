@@ -1,0 +1,259 @@
+/**
+ * TranscriptModal — two-panel transcript modal styles.
+ */
+
+@import '../../scss/variables';
+
+.rank-math-ai-visibility-transcript-modal {
+	display: grid;
+	grid-template-columns: 56fr 44fr;
+	flex:       1 1 0;
+	min-height: 0;
+	overflow: hidden;
+	height: 100%;
+    max-height: 50vh;
+
+	&__modal-title {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+	}
+
+	// Override WP Modal
+	&__wrapper {
+		.components-modal__frame {
+			max-width:      1130px;
+			width:          92vw;
+			max-height:     90vh;
+			display:        flex !important;
+			flex-direction: column !important;
+		}
+
+		.components-modal__header {
+			flex-shrink: 0;
+    		padding: 22px 28px;
+			border-bottom: 1px solid #E0E0E0;
+
+			.components-modal__header-heading {
+				font-size: 13px;
+			}
+		}
+
+		.components-modal__content {
+			padding:  0 !important;
+			overflow: hidden;
+			flex:     1 1 0;
+			min-height: 0;
+			display:  flex;
+			flex-direction: column;
+		}
+	}
+
+	&__section-right {
+		flex: 1;
+	}
+
+	&__left,
+	&__right {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	&__sections,
+	&__json-viewer {
+		flex: 1;
+		overflow-y: auto;
+		min-height: 0;
+	}
+
+	&__left {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 25px;
+		background: $color-surface;
+		border-right: 1px solid $color-border;
+		overflow-y: auto;
+	}
+
+	&__left-header {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	// "Copy Raw Text" — small pill button in left header
+	&__copy-btn {
+		&.rank-math-ai-visibility-btn.components-button {
+			font-size:  12px;
+			padding:    4px 10px;
+			min-height: 28px;
+			height:     28px;
+			color:      $color-text-muted;
+			border-color: $color-border;
+			background: transparent;
+
+			&:hover {
+				color:        $color-btn-primary;
+				border-color: $color-btn-primary;
+				background:   transparent;
+			}
+
+			.dashicons {
+				font-size: 13px;
+				width:     13px;
+				height:    13px;
+			}
+		}
+	}
+
+	&__right {
+		.rank-math-ai-visibility-transcript-modal__copy-json-btn.rank-math-ai-visibility-btn.components-button {
+			color: #C6C6C6;
+			border-color: #C6C6C6;
+		}
+	}
+
+	&__sections {
+		gap: 40px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__section {
+		display: flex;
+		gap: 10px;
+	}
+
+	&__section-label {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-size: 12px;
+		color: #868686;
+		font-weight: 500;
+		margin-bottom: 8px;
+	}
+
+	&__section-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 34px;
+		height: 34px;
+		min-width: 30px;
+		border-radius: 50%;
+		background: #fff;
+		border: 1px solid #E3E3E3;
+		color: #1E1E1E;
+
+		.dashicons {
+			font-size: 16px;
+			width: 16px;
+			height: 16px;
+		}
+	}
+
+	&__content-box {
+		padding: 20px 24px;
+		border: 1px solid $color-border;
+		border-radius: 0 11px 11px 11px;
+		font-size: 12px;
+		color: $color-text-primary;
+		line-height: 1.6;
+		background: $color-surface;
+		white-space: pre-wrap;
+
+		&--response {
+			max-height: 280px;
+			overflow-y: auto;
+		}
+	}
+
+	&__right {
+		display: flex;
+		flex-direction: column;
+		background: #1c1c1c;
+		overflow: hidden;
+	}
+
+	&__right-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 20px 40px;
+		flex-shrink: 0;
+	}
+
+	&__right-title {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-size: 13px;
+		font-weight: 500;
+		color: #C6C6C6;
+	}
+
+	&__json-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 34px;
+		height: 34px;
+		border-radius: 50%;
+		background: #fff;
+		font-size: 11px;
+		font-weight: 400;
+		color: #1E1E1E;
+		font-family: monospace;
+	}
+
+	// "Copy JSON" — small pill button on dark header
+	&__copy-json-btn {
+		&.rank-math-ai-visibility-btn.components-button {
+			font-size:   12px;
+			padding:     4px 10px;
+			min-height:  28px;
+			height:      28px;
+			color:       #9ca3af;
+			background:  rgba( 255, 255, 255, 0.06 );
+			border:      1px solid rgba( 255, 255, 255, 0.12 );
+
+			&:hover {
+				color:       #e5e7eb;
+				background:  rgba( 255, 255, 255, 0.12 );
+				border-color: rgba( 255, 255, 255, 0.25 );
+			}
+
+			.dashicons {
+				font-size: 13px;
+				width:     13px;
+				height:    13px;
+			}
+		}
+	}
+
+	&__json-viewer {
+		flex: 1;
+		overflow-y: auto;
+		padding: 0 40px;
+	}
+
+	&__json-pre {
+		margin: 0;
+		font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+		font-size: 12px;
+		line-height: 1.7;
+		color: #d1d5db;
+		white-space: pre;
+		overflow-x: auto;
+
+		.json-key     { color: #F2B02D; margin-left: 8px; }   // amber  — object keys
+		.json-string  { color: #5DBEC4; }   // teal   — string values
+		.json-number  { color: #e5e7eb; }   // white  — numbers
+		.json-boolean { color: #5DBEC4; }   // teal   — true / false
+		.json-null    { color: #9ca3af; }   // grey   — null
+	}
+}

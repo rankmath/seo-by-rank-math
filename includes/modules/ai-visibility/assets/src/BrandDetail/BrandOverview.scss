@@ -1,0 +1,56 @@
+/**
+ * BrandOverview — stat cards row for the Overview sub-tab.
+ */
+
+@import '../scss/variables';
+
+.rank-math-ai-visibility-brand-overview {
+	display:        flex;
+	flex-direction: column;
+	gap:            $space-md;
+
+	&__stats {
+		display: flex;
+		gap:     $card-row-gap;
+
+		// Stack vertically on narrow viewports.
+		@media ( max-width: 782px ) {
+			flex-direction: column;
+		}
+
+		// Each card grows equally.
+		.rank-math-ai-visibility-stat-card {
+			flex: 1;
+		}
+	}
+}
+
+// -------------------------------------------------------------------------
+// Per-card icon colour variants for the Overview sub-tab.
+// -------------------------------------------------------------------------
+
+.rank-math-ai-visibility-stat-card--overview {
+	// AI Visibility Score — blue
+	&-score {
+		--stat-icon-bg:    rgba( 1, 124, 186, 0.12 );
+		--stat-icon-color: #{$color-btn-primary};
+	}
+
+	// Recent Mentions — amber
+	&-mentions {
+		--stat-icon-bg:    rgba( 232, 166, 35, 0.12 );
+		--stat-icon-color: #E8A623;
+	}
+
+	// Avg Sentiments — purple/blue
+	&-sentiment {
+		--stat-icon-bg:    rgba( 82, 96, 185, 0.12 );
+		--stat-icon-color: #5260B9;
+	}
+
+	// Top Competitor — red/pink
+	&-competitor {
+		--stat-icon-bg:    rgba( 246, 98, 118, 0.12 );
+		--stat-icon-color: #F66276;
+	}
+}
