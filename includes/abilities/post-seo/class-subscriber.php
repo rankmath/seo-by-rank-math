@@ -51,6 +51,7 @@ class Subscriber implements Subscriber_Interface {
 	public function register(): void {
 		$this->action( 'wp_abilities_api_categories_init', 'register_category' );
 		$this->action( 'wp_abilities_api_init', 'register_get_post_seo_meta' );
+		$this->action( 'wp_abilities_api_init', 'register_update_post_seo_meta' );
 	}
 
 	/**
@@ -75,5 +76,14 @@ class Subscriber implements Subscriber_Interface {
 	 */
 	public function register_get_post_seo_meta(): void {
 		( new Get_Post_SEO_Meta( self::CATEGORY_SLUG, $this->shared_meta ) )->register();
+	}
+
+	/**
+	 * Register the rank-math/update-post-seo-meta ability.
+	 *
+	 * @return void
+	 */
+	public function register_update_post_seo_meta(): void {
+		( new Update_Post_SEO_Meta( self::CATEGORY_SLUG, $this->shared_meta ) )->register();
 	}
 }
