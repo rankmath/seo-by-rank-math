@@ -408,40 +408,14 @@ class Admin implements Runner {
 	/**
 	 * Output link suggestions.
 	 *
+	 * @deprecated 1.0.273 Link suggestions are now rendered by the React component.
+	 *
 	 * @param  array $suggestions Link items.
 	 * @return string
 	 */
 	public function get_link_suggestions_html( $suggestions ) {
-		$output = '<div class="rank-math-link-suggestions-content" data-count="' . count( $suggestions ) . '">';
-
-		$is_use_fk = 'focus_keywords' === Helper::get_settings( 'titles.pt_' . get_post_type() . '_ls_use_fk' );
-		foreach ( $suggestions as $suggestion ) {
-			$label = $suggestion['title'];
-			if ( $is_use_fk && ! empty( $suggestion['focus_keywords'] ) ) {
-				$label = $suggestion['focus_keywords'][0];
-			}
-
-			$output .= sprintf(
-				'<div class="suggestion-item">
-					<div class="suggestion-actions">
-						<button class="dashicons dashicons-clipboard suggestion-copy" title="%5$s" data-clipboard-text="%2$s"></button>
-						<button class="dashicons dashicons-admin-links suggestion-insert" title="%6$s" data-url="%2$s" data-text="%7$s"></button>
-					</div>
-					<span class="suggestion-title" data-fk=\'%1$s\'><a target="_blank" href="%2$s" title="%3$s">%4$s</a></span>
-				</div>',
-				esc_attr( wp_json_encode( $suggestion['focus_keywords'] ) ),
-				$suggestion['url'],
-				$suggestion['title'],
-				$label,
-				esc_attr__( 'Copy Link URL to Clipboard', 'seo-by-rank-math' ),
-				esc_attr__( 'Insert Link in Content', 'seo-by-rank-math' ),
-				esc_attr( $label )
-			);
-		}
-
-		$output .= '</div>';
-
-		return $output;
+		_deprecated_function( __METHOD__, '1.0.273' );
+		return '';
 	}
 
 	/**

@@ -417,7 +417,7 @@ class Brands_Controller extends Base_Controller {
 			Cache::set_queries( $uuid, $this->map_queries( $result['queries'] ) );
 		}
 
-		rank_math()->tracking->track_event(
+		rank_math()->tracking->track_ability_executed(
 			'AI Visibility Brand Created',
 			[
 				'locale'    => $brand['locale'] ?? null,

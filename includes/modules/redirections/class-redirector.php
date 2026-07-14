@@ -136,7 +136,8 @@ class Redirector {
 		$this->do_debugging();
 
 		if ( true === $this->do_filter( 'redirection/add_query_string', true, $this->matched ) && Str::is_non_empty( $this->query_string ) ) {
-			$this->redirect_to .= '?' . $this->query_string;
+			$separator          = Str::contains( '?', $this->redirect_to ) ? '&' : '?';
+			$this->redirect_to .= $separator . $this->query_string;
 		}
 
 		if ( wp_redirect( esc_url_raw( $this->redirect_to ), $header_code, $this->get_redirect_header() ) ) { // phpcs:ignore

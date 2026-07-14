@@ -145,12 +145,6 @@ class Create_AI_Visibility_Brand implements Ability_Interface {
 		$data  = $response->get_data();
 		$brand = $data['data']['brand'] ?? [];
 
-		rank_math()->tracking->track_ability_executed(
-			'AI Visibility Brand Created',
-			[ 'locale' => ! empty( $input['locale'] ) ? $input['locale'] : null ],
-			'manage_options'
-		);
-
 		return [
 			'id'              => $brand['id'] ?? '',
 			'name'            => $brand['name'] ?? '',

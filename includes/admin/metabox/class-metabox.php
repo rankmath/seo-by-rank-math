@@ -211,6 +211,10 @@ class Metabox implements Runner {
 	 * Add link suggestion metabox.
 	 */
 	public function add_link_suggestion_metabox() {
+		if ( 'classic' !== Helper::get_current_editor() ) {
+			return;
+		}
+
 		$allowed_post_types = [];
 		foreach ( Helper::get_accessible_post_types() as $post_type ) {
 			if ( false === Helper::get_settings( 'titles.pt_' . $post_type . '_link_suggestions' ) ) {
@@ -241,17 +245,7 @@ class Metabox implements Runner {
 	 * @param WP_Post $post Current post object.
 	 */
 	public function render_link_suggestion_metabox( $post ) {
-		echo '<div id="rank-math-link-suggestions-tooltip" class="hidden">';
-		echo wp_kses_post( Admin_Helper::get_tooltip( esc_html__( 'Click on the button to copy URL or insert link in content. You can also drag and drop links in the post content.', 'seo-by-rank-math' ) ) );
-		echo '</div>';
-
-		$suggestions = rank_math()->admin->get_link_suggestions( $post );
-		if ( empty( $suggestions ) ) {
-			echo '<em><small>' . esc_html__( 'We can\'t show any link suggestions for this post. Try selecting categories and tags for this post, and mark other posts as Pillar Content to make them show up here.', 'seo-by-rank-math' ) . '</small></em>';
-			return;
-		}
-
-		echo wp_kses_post( rank_math()->admin->get_link_suggestions_html( $suggestions ) );
+		echo '<div id="rank-math-link-suggestions-wrapper"></div>';
 	}
 
 	/**

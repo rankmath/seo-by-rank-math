@@ -120,7 +120,10 @@ class Admin {
 				'object_types'     => array_keys( Helper::get_accessible_post_types() ),
 				'context'          => 'side',
 				'priority'         => 'high',
-				'mb_callback_args' => [ '__block_editor_compatible_meta_box' => false ],
+				'mb_callback_args' => [
+					'__block_editor_compatible_meta_box' => false,
+					'__back_compat_meta_box'             => \rank_math_is_gutenberg(),
+				],
 			]
 		);
 

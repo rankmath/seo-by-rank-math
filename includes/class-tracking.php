@@ -107,10 +107,6 @@ class Tracking {
 	 * @param string $state     The new state (on/off).
 	 */
 	public function track_module_option_change( $module_id, $state ): void {
-		if ( ! $this->is_opted_in() ) {
-			return;
-		}
-
 		$enable_module = $state === 'on';
 		$properties    = [
 			'context'        => 'wp_plugin',
@@ -358,11 +354,18 @@ class Tracking {
 	/**
 	 * Track a custom event for Rank Math.
 	 *
+	 * Always enforces the usage-tracking opt-in — no-ops when the site
+	 * hasn't consented, regardless of caller.
+	 *
 	 * @param string $event            Event name.
 	 * @param array  $properties       Additional properties to merge.
 	 * @param string $event_capability The capability required to track the event.
 	 */
 	public function track_event( string $event, array $properties = [], string $event_capability = '' ): void {
+		if ( ! $this->is_opted_in() ) {
+			return;
+		}
+
 		$defaults = [
 			'context'  => 'wp_plugin',
 			'language' => $this->user_language,

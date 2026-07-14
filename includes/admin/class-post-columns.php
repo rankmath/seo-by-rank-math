@@ -171,6 +171,9 @@ class Post_Columns implements Runner {
 	 */
 	public function add_taxonomy_columns( $columns ) {
 		$screen = get_current_screen();
+		if ( ! $screen || empty( $screen->taxonomy ) ) {
+			return $columns;
+		}
 		if ( Helper::get_settings( 'titles.tax_' . $screen->taxonomy . '_bulk_editing', false ) ) {
 			$columns['rank_math_title']       = esc_html__( 'SEO Title', 'seo-by-rank-math' );
 			$columns['rank_math_description'] = esc_html__( 'SEO Desc', 'seo-by-rank-math' );

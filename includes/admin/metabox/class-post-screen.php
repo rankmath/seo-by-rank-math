@@ -119,7 +119,8 @@ class Post_Screen implements IScreen {
 	 * @return array
 	 */
 	public function get_values() {
-		$post_type = $this->get_current_post_type();
+		$post_type        = $this->get_current_post_type();
+		$link_suggestions = Helper::get_settings( 'titles.pt_' . $post_type . '_link_suggestions' );
 
 		return [
 			'parentDomain'           => Url::get_domain( home_url() ),
@@ -129,8 +130,12 @@ class Post_Screen implements IScreen {
 			'featuredImageNotice'    => esc_html__( 'The featured image should be at least 200 by 200 pixels to be picked up by Facebook and other social media sites.', 'seo-by-rank-math' ),
 			'pluginReviewed'         => $this->plugin_reviewed(),
 			'postSettings'           => [
-				'linkSuggestions' => Helper::get_settings( 'titles.pt_' . $post_type . '_link_suggestions' ),
-				'useFocusKeyword' => 'focus_keywords' === Helper::get_settings( 'titles.pt_' . $post_type . '_ls_use_fk' ),
+				'linkSuggestions'     => $link_suggestions,
+				'useFocusKeyword'     => 'focus_keywords' === Helper::get_settings( 'titles.pt_' . $post_type . '_ls_use_fk' ),
+				'linkSuggestionsData' => (
+					Helper::has_cap( 'link_builder' ) &&
+					false !== $link_suggestions
+				) ? ( rank_math()->admin->get_link_suggestions( get_post() ) ?? [] ) : false,
 			],
 			'frontEndScore'          => Frontend_SEO_Score::show_on(),
 			'postName'               => get_post_field( 'post_name', get_post() ),

@@ -89,7 +89,14 @@ class Manager {
 		$modules = $this->do_filter( 'modules', [] );
 
 		ksort( $modules );
-		$modules = array_merge( [ 'content-ai' => $modules['content-ai'] ], $modules ); // Move Content AI to first position.
+		// Move AI Visibility to first position, followed by Content AI.
+		$modules = array_merge(
+			[
+				'ai-visibility' => $modules['ai-visibility'],
+				'content-ai'    => $modules['content-ai'],
+			],
+			$modules
+		);
 		foreach ( $modules as $id => $module ) {
 			$this->add_module( $id, $module );
 		}
@@ -188,7 +195,6 @@ class Manager {
 			'icon'        => 'content-ai',
 			'upgradeable' => true,
 			'settings'    => Helper::get_settings_url( 'general', 'content-ai' ),
-			'betabadge'   => true,
 		];
 
 		$modules['llms-txt'] = [
@@ -227,11 +233,12 @@ class Manager {
 		];
 
 		$modules['ai-visibility'] = [
-			'title'    => esc_html__( 'AI Visibility', 'seo-by-rank-math' ),
-			'desc'     => esc_html__( 'Track your brand\'s AI search visibility. Monitor brand mentions, citations, & sentiment, and discover opportunities to grow your AI visibility.', 'seo-by-rank-math' ),
-			'icon'     => 'ai-visibility',
-			'class'    => 'RankMath\AI_Visibility\AI_Visibility',
-			'settings' => Helper::get_admin_url( 'ai-visibility' ),
+			'title'     => esc_html__( 'AI Visibility', 'seo-by-rank-math' ),
+			'desc'      => esc_html__( 'Track your brand\'s AI search visibility. Monitor brand mentions, citations, & sentiment, and discover opportunities to grow your AI visibility.', 'seo-by-rank-math' ),
+			'icon'      => 'ai-visibility',
+			'class'     => 'RankMath\AI_Visibility\AI_Visibility',
+			'settings'  => Helper::get_admin_url( 'ai-visibility' ),
+			'betabadge' => true,
 		];
 
 		return $modules;

@@ -134,6 +134,10 @@ class System_Status {
 			require_once ABSPATH . 'wp-admin/includes/misc.php'; // @phpstan-ignore-line
 		}
 
+		if ( ! function_exists( 'get_home_path' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php'; // @phpstan-ignore-line
+		}
+
 		if ( false === function_exists( 'get_core_updates' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/update.php'; // @phpstan-ignore-line
 		}

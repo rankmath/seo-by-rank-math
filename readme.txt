@@ -5,7 +5,7 @@ Tags: seo, google search console, schema, redirection, xml sitemap
 Tested up to: 7.0
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.273
+Stable tag: 1.0.274
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -375,15 +375,18 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
-= 1.0.273 [June 30, 2026] =
-- [HUGE!] Added **[AI Visibility](https://rankmath.com/ai-visibility/?play-video=gS5-DFQrSxs)** to monitor your brand presence across major AI platforms.
-- Added `rank-math/get-ai-visibility-overview` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve the complete AI Visibility dashboard, including brand scores, ranks, sentiment, mentions, citations, and analysis status
-- Added `rank-math/get-ai-visibility-brand-insights` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve detailed AI Visibility insights for a specific brand, including score, rank, sentiment, competitors, and query transcripts
-- Added `rank-math/get-ai-visibility-brand-queries` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants retrieve monitored queries for a brand, including query status and baseline settings
-- Added `rank-math/create-ai-visibility-brand` [MCP Tool](https://rankmath.com/kb/mcp-tools/) to let AI assistants create new AI Visibility brands with details like name, URL, description, and locale, and trigger initial analysis
-- Updated the [Minimum required WordPress version](https://wordpress.org/about/requirements/) to 6.7.
-- Fixed the [Content Analysis](https://rankmath.com/kb/score-100-in-tests/) that was not correctly counting Swedish special characters toward keyword density.
-- Fixed compatibility issue with the Phoenix Media Rename plugin, where Rank Math was affecting the fields layout.
+= 1.0.274 [Jul 14, 2026] =
+- Added `rank-math/get-top-keywords` [MCP Tool](https://rankmath.com/kb/mcp-tools) to let AI assistants retrieve top-performing keywords from Google Search Console with impressions, CTR, and average position.
+- Added `rank-math/analyze-post-content` [MCP Tool](https://rankmath.com/kb/mcp-tools) to let AI assistants run Rank Math's full on-page SEO analysis for a post and see which tests passed or failed.
+- Added `rank-math/get-seo-scores` [MCP Tool](https://rankmath.com/kb/mcp-tools) to let AI assistants retrieve SEO scores and grades for posts, with filtering by score range or missing focus keyword.
+- Fixed [AI Visibility](https://rankmath.com/ai-visibility/) "Add Your First Brand" modal that was not displaying on WordPress 6.7.5–6.8.5.
+- Fixed an issue with MixPanel usage events
+- Fixed fatal error on [Status & Tools → System Status](https://rankmath.com/kb/rank-math-status-and-tools/) caused by an undefined function on some hosts.
+- Fixed the [Setup Wizard](https://rankmath.com/kb/how-to-access-setup-wizard/) help search that was linking to the general KB page instead of the searched query.
+- Fixed PHP warning that was logged when creating a new taxonomy term with SEO controls enabled for tags.
+- Fixed Classic revisions editor that was appearing inside the Block Editor when Rank Math was active.
+- Fixed [Content AI](https://rankmath.com/kb/how-to-use-content-ai/) media file suggestions that were incorrect on top-level pages.
+- Fixed [Redirections](https://rankmath.com/kb/setting-up-redirections/) query parameters that were not merging correctly when appended to the destination URL.
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

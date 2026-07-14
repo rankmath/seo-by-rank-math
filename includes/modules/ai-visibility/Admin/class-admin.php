@@ -71,6 +71,7 @@ class Admin {
 				'classes'    => [ 'rank-math-page' ],
 				'assets'     => [
 					'styles'  => [
+						'wp-components'    => '',
 						'rank-math-common' => '',
 					],
 					'scripts' => [
