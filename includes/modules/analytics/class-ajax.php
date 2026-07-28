@@ -276,6 +276,9 @@ class AJAX {
 		$this->has_cap_ajax( 'analytics' );
 		Workflow\Workflow::kill_workflows();
 
+		// Clear fetching state immediately so the UI reflects the cancellation on reload.
+		update_option( 'rank_math_analytics_first_fetch', 'hidden' );
+
 		$this->success( esc_html__( 'Data fetching cancelled.', 'seo-by-rank-math' ) );
 	}
 
@@ -300,6 +303,10 @@ class AJAX {
 			delete_option( 'rank_math_analytics_installed' );
 		}
 		delete_option( 'rank_math_analytics_last_single_action_schedule_time' );
+
+		// Set fetching state synchronously so a reload doesn't race the async workflow.
+		update_option( 'rank_math_analytics_first_fetch', 'fetching' );
+
 		// Start fetching data.
 		foreach ( [ 'console', 'analytics', 'adsense' ] as $action ) {
 			Workflow\Workflow::do_workflow(

@@ -63,7 +63,7 @@ class Subscriber implements Subscriber_Interface {
 		\wp_register_ability_category(
 			self::CATEGORY_SLUG,
 			[
-				'label'       => esc_html__( 'Link Genius', 'seo-by-rank-math' ),
+				'label'       => esc_html__( 'AI Link Genius', 'seo-by-rank-math' ),
 				'description' => esc_html__( 'Abilities to retrieve and analyse internal and external link data for posts.', 'seo-by-rank-math' ),
 			]
 		);

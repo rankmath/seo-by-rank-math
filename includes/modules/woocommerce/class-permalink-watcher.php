@@ -61,6 +61,13 @@ class Permalink_Watcher {
 	private $remove_parent_slugs;
 
 	/**
+	 * Whether a rewrite rules flush has already been scheduled for shutdown.
+	 *
+	 * @var bool
+	 */
+	private $flush_scheduled = false;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
@@ -83,12 +90,27 @@ class Permalink_Watcher {
 	}
 
 	/**
-	 * Flush rewrite rules (soft flush).
+	 * Schedule a soft rewrite rules flush at shutdown.
+	 *
+	 * Deferred to avoid WPML's temporary get_terms filter limiting rewrite rules
+	 * to the current language, which can cause 404s for other languages.
+	 *
+	 * A class property prevents duplicate closure callbacks.
 	 *
 	 * @return void
 	 */
 	public function flush_rules() {
-		flush_rewrite_rules( false );
+		if ( $this->flush_scheduled ) {
+			return;
+		}
+
+		$this->flush_scheduled = true;
+		add_action(
+			'shutdown',
+			function () {
+				flush_rewrite_rules( false );
+			}
+		);
 	}
 
 	/**

@@ -125,7 +125,7 @@ class Debugger {
 					setTimeout( updateTimer, 1000 );
 				} else {
 					document.getElementById( 'redirection-timer-counter' ).textContent = redirectTimer;
-					window.location.href = '<?php echo esc_url_raw( $this->args['redirect_to'] ); ?>';
+					window.location.href = <?php echo wp_json_encode( esc_url_raw( $this->args['redirect_to'] ) ); ?>;
 				}
 			}
 

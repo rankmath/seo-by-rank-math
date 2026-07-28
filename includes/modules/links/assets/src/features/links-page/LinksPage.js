@@ -83,7 +83,7 @@ const LinksPage = () => {
 
 	return (
 		<>
-			<DashboardHeader page={ __( 'Link Genius', 'seo-by-rank-math' ) } />
+			<DashboardHeader page={ __( 'AI Link Genius', 'seo-by-rank-math' ) } />
 			<div className="wrap rank-math-wrap rank-math-links-page">
 				<TabPanel
 					key={ activeTab }

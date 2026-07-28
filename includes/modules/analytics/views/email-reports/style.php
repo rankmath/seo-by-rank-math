@@ -200,7 +200,7 @@ defined( 'ABSPATH' ) || exit;
 	}
 
 	h2.report-date {
-		margin: 25px 0 4px;
+		margin: 0;
 		font-size: 18px;
 	}
 
@@ -210,10 +210,26 @@ defined( 'ABSPATH' ) || exit;
 		font-size: 15px;
 	}
 
+	.report-info {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.report-info-row {
+		width: 100%;
+	}
+
+	.report-meta-row {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		margin: 25px 0 4px;
+	}
+
 	.full-report-link {
-		vertical-align: bottom;
 		text-align: right;
-		width: 110px;
 	}
 
 	.full-report-link a {

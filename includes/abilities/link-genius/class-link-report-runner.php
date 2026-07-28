@@ -81,7 +81,7 @@ class Link_Report_Runner {
 
 		if ( ! isset( $result['audit'] ) ) {
 			$result['upgrade'] = [
-				'message' => \esc_html__( 'Upgrade to Rank Math PRO to unlock broken link detection, redirect chain analysis, and HTTP status distribution from the Link Genius audit.', 'seo-by-rank-math' ),
+				'message' => \esc_html__( 'Upgrade to Rank Math PRO to unlock broken link detection, redirect chain analysis, and HTTP status distribution from the AI Link Genius audit.', 'seo-by-rank-math' ),
 				'url'     => 'https://rankmath.com/pricing/',
 			];
 		}

@@ -48,11 +48,11 @@ class Admin {
 	public function register_admin_page() {
 		new Page(
 			'rank-math-links-page',
-			esc_html__( 'Link Genius', 'seo-by-rank-math' ),
+			esc_html__( 'AI Link Genius', 'seo-by-rank-math' ),
 			[
 				'position'   => 4,
 				'parent'     => 'rank-math',
-				'menu_title' => esc_html__( 'Link Genius', 'seo-by-rank-math' ),
+				'menu_title' => esc_html__( 'AI Link Genius', 'seo-by-rank-math' ),
 				'capability' => 'rank_math_link_builder',
 				'render'     => function () {
 					echo '<div id="rank-math-links-page-container"></div>';

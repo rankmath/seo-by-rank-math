@@ -134,7 +134,8 @@ class Post_Screen implements IScreen {
 				'useFocusKeyword'     => 'focus_keywords' === Helper::get_settings( 'titles.pt_' . $post_type . '_ls_use_fk' ),
 				'linkSuggestionsData' => (
 					Helper::has_cap( 'link_builder' ) &&
-					false !== $link_suggestions
+					false !== $link_suggestions &&
+					! empty( rank_math()->admin )
 				) ? ( rank_math()->admin->get_link_suggestions( get_post() ) ?? [] ) : false,
 			],
 			'frontEndScore'          => Frontend_SEO_Score::show_on(),

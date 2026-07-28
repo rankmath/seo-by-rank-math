@@ -162,7 +162,7 @@ class Manager {
 		];
 
 		$modules['link-genius'] = [
-			'title'         => esc_html__( 'Link Genius', 'seo-by-rank-math' ),
+			'title'         => esc_html__( 'AI Link Genius', 'seo-by-rank-math' ),
 			'desc'          => esc_html__( 'An advanced internal linking tool that analyzes your posts, tracks link data, highlights opportunities, and offers detailed report.', 'seo-by-rank-math' ),
 			'icon'          => 'link',
 			'probadge'      => true,
@@ -569,7 +569,7 @@ class Manager {
 						</ul>
 					</header>
 					<div class="status wp-clearfix">
-						<button class="button button-secondary"><?php esc_html_e( 'Buy', 'seo-by-rank-math' ); ?></button>
+						<button class="button button-secondary"><?php esc_html_e( 'Buy Now', 'seo-by-rank-math' ); ?></button>
 					</div>
 				</a>
 			</div>

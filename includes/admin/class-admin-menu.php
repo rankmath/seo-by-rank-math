@@ -15,7 +15,6 @@ use RankMath\Helper;
 use RankMath\Helpers\Param;
 use RankMath\Runner;
 use RankMath\Traits\Hooker;
-use RankMath\Traits\Ajax;
 use RankMath\Admin\Page;
 
 defined( 'ABSPATH' ) || exit;
@@ -28,7 +27,6 @@ defined( 'ABSPATH' ) || exit;
 class Admin_Menu implements Runner {
 
 	use Hooker;
-	use Ajax;
 
 	/**
 	 * Register hooks.
@@ -37,7 +35,6 @@ class Admin_Menu implements Runner {
 		$this->action( 'init', 'register_pages' );
 		$this->action( 'admin_menu', 'fix_admin_menu', 999 );
 		$this->action( 'admin_head', 'icon_css' );
-		$this->ajax( 'remove_offer_page', 'remove_offer_page' );
 	}
 
 	/**
@@ -163,18 +160,8 @@ class Admin_Menu implements Runner {
 		<script type="text/javascript">
 			// Open RM KB menu link in the new tab.
 			jQuery( document ).ready( function( $ ) {
-				$( "ul#adminmenu a[href$='<?php KB::the( 'knowledgebase', 'Sidebar Help Link' ); ?>']" ).attr( 'target', '_blank' );
-				$( "ul#adminmenu a[href$='<?php KB::the( 'offer', 'Offer Menu Item' ); ?>']" ).attr( 'target', '_blank' ).on( 'click', function() {
-					$( this ).remove()
-					$.ajax( {
-						url: window.ajaxurl,
-						type: 'POST',
-						data: {
-							action: 'rank_math_remove_offer_page',
-							security: rankMath.security,
-						},
-					} )
-				} );
+				$( "ul#adminmenu a[href$='<?php KB::the( 'knowledgebase', 'Sidebar Help Link' ); ?>']" ).attr( 'target', '_blank' )
+				$( "ul#adminmenu a[href$='<?php echo esc_url_raw( $this->get_offer_link() ); ?>']" ).attr( 'target', '_blank' )
 			} );
 		</script>
 		<style>
@@ -193,15 +180,15 @@ class Admin_Menu implements Runner {
 				fill-rule: evenodd;
 				fill: #00b9eb;
 			}
-			#toplevel_page_rank-math:not(.wp-has-submenu) {
+			#adminmenu #toplevel_page_rank-math:not(.wp-has-submenu) {
 				display: none;
 			}
 			.multisite.network-admin #toplevel_page_rank-math {
 				display: block;
 			}
-			#toplevel_page_rank-math a[href$='<?php KB::the( 'offer', 'Offer Menu Item' ); ?>'],
-			#toplevel_page_rank-math a[href$='<?php KB::the( 'offer', 'Offer Menu Item' ); ?>']:hover,
-			#toplevel_page_rank-math a[href$='<?php KB::the( 'offer', 'Offer Menu Item' ); ?>']:focus {
+			#adminmenu #toplevel_page_rank-math a[href$='<?php echo esc_url_raw( $this->get_offer_link() ); ?>'],
+			#adminmenu #toplevel_page_rank-math a[href$='<?php echo esc_url_raw( $this->get_offer_link() ); ?>']:hover,
+			#adminmenu #toplevel_page_rank-math a[href$='<?php echo esc_url_raw( $this->get_offer_link() ); ?>']:focus {
 				background-color: #10AC84;
 				color: #fff;
 			}
@@ -236,16 +223,14 @@ class Admin_Menu implements Runner {
 			return;
 		}
 
-		$submenu['rank-math'][] = [ current( $offer ) . '&nbsp;', 'manage_options', KB::get( 'offer', 'Offer Menu Item' ) ];
+		$submenu['rank-math'][] = [ current( $offer ) . '&nbsp;', 'manage_options', $this->get_offer_link() ];
 	}
 
 	/**
-	 * Ajax handler callback to store active offer so it doesn't show up again on the site.
+	 * Get the offer link.
 	 */
-	public function remove_offer_page() {
-		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
-		$offer = $this->get_active_offer();
-		set_site_transient( 'rank_math_active_offer', key( $offer ) );
+	private function get_offer_link() {
+		return KB::get( 'pro', 'upgrade-dashboard-notifications-menu' );
 	}
 
 	/**
@@ -261,44 +246,45 @@ class Admin_Menu implements Runner {
 		$current_date = new \DateTime( 'now', $timezone );
 		$dates        = [
 			'halloween'    => [
-				'start' => '2025-10-29',
-				'end'   => '2025-11-05',
+				'start' => '2026-10-28',
+				'end'   => '2026-11-03',
 				'text'  => esc_html__( 'Halloween Sale', 'seo-by-rank-math' ),
 			],
 			'anniversary'  => [
-				'start' => '2025-11-05',
-				'end'   => '2025-11-12',
+				'start' => '2026-11-04',
+				'end'   => '2026-11-10',
 				'text'  => esc_html__( 'Anniversary Sale', 'seo-by-rank-math' ),
 			],
 			'black-friday' => [
-				'start' => '2025-11-12',
-				'end'   => '2025-11-29',
+				'start' => '2026-11-11',
+				'end'   => '2026-11-27',
 				'text'  => esc_html__( 'Black Friday Sale', 'seo-by-rank-math' ),
 			],
 			'cyber-monday' => [
-				'start' => '2025-11-29',
-				'end'   => '2025-12-03',
+				'start' => '2026-11-28',
+				'end'   => '2026-12-02',
 				'text'  => esc_html__( 'Cyber Monday Sale', 'seo-by-rank-math' ),
 			],
 			'christmas'    => [
-				'start' => '2025-12-24',
-				'end'   => '2025-12-31',
+				'start' => '2026-12-24',
+				'end'   => '2026-12-31',
 				'text'  => esc_html__( 'Christmas Sale', 'seo-by-rank-math' ),
 			],
 			'new-year'     => [
-				'start' => '2025-12-31',
-				'end'   => '2026-01-07',
+				'start' => '2027-01-01',
+				'end'   => '2027-01-07',
 				'text'  => esc_html__( 'New Year Sale', 'seo-by-rank-math' ),
 			],
 		];
 
-		$stored_offer = get_site_transient( 'rank_math_active_offer' );
-		$active_offer = '';
+		$active_offer = [
+			'unlock-pro' => esc_html__( 'Unlock PRO', 'seo-by-rank-math' ),
+		];
 		foreach ( $dates as $key => $date ) {
 			$start_date = new \DateTime( $date['start'] . ' 16:00:00', $timezone );
 			$end_date   = new \DateTime( $date['end'] . ' 16:00:00', $timezone );
 
-			if ( $stored_offer !== $key && $current_date >= $start_date && $current_date <= $end_date ) {
+			if ( $current_date >= $start_date && $current_date <= $end_date ) {
 				$active_offer = [ $key => $date['text'] ];
 				break;
 			}

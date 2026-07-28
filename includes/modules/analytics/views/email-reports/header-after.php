@@ -11,21 +11,21 @@ use RankMath\Helper;
 defined( 'ABSPATH' ) || exit;
 
 ?>
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="report-info">
-	<tr>
-		<td>
-			<h1><?php esc_html_e( 'SEO Report of Your Website', 'seo-by-rank-math' ); ?></h1>
-			<h2 class="report-date">###START_DATE### - ###END_DATE###</h2>
-			<a href="###SITE_URL###" target="_blank" class="site-url">###SITE_URL_SIMPLE###</a>
-		</td>
-		<td class="full-report-link">
-			<a href="###REPORT_URL###" target="_blank" class="full-report-link">
+<div class="report-info">
+	<div class="report-info-row">
+		<h1><?php esc_html_e( 'SEO Report of Your Website', 'seo-by-rank-math' ); ?></h1>
+		<a href="###SITE_URL###" target="_blank" class="site-url">###SITE_URL_SIMPLE###</a>
+	</div>
+	<div class="report-info-row report-meta-row">
+		<h2 class="report-date">###START_DATE### - ###END_DATE###</h2>
+		<div class="full-report-link">
+			<a href="###REPORT_URL###" target="_blank">
 				<?php esc_html_e( 'FULL REPORT', 'seo-by-rank-math' ); ?>
 				<?php $this->image( 'report-icon-external.png', 12, 12, __( 'External Link Icon', 'seo-by-rank-math' ) ); ?>
 			</a>
-		</td>
-	</tr>
-</table>
+		</div>
+	</div>
+</div>
 
 <?php if ( $this->get_variable( 'stats_invalid_data' ) ) { ?>
 	<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="report-error">
