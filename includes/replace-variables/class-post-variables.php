@@ -389,7 +389,8 @@ class Post_Variables extends Advanced_Variables {
 
 		if ( '' !== $this->args->post_date ) {
 			$format = $format ? $format : get_option( 'date_format' );
-			return mysql2date( $format, $this->args->post_date, true );
+			$published = strtotime( $this->args->post_date );
+			return date( 'Y-m-d\TH:i:sP', $published );
 		}
 
 		if ( ! empty( get_query_var( 'day' ) ) ) {
@@ -413,8 +414,8 @@ class Post_Variables extends Advanced_Variables {
 	public function get_modified( $format = '' ) {
 		if ( ! empty( $this->args->post_modified ) && ! empty( $this->args->post_date ) ) {
 			$modified = strtotime( $this->args->post_date ) > strtotime( $this->args->post_modified ) ? $this->args->post_date : $this->args->post_modified;
-			$format   = $format ? $format : get_option( 'date_format' );
-			return mysql2date( $format, $modified, true );
+			$modified = strtotime( $modified );
+			return date( 'Y-m-d\TH:i:sP', $modified );
 		}
 
 		return null;
