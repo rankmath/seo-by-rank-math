@@ -51,6 +51,7 @@
 		"wpackagist-plugin/easy-digital-downloads":"^3",
 		"wpackagist-plugin/elementor":"^3",
 		"wpackagist-plugin/web-stories":"^1",
+		"wpackagist-plugin/polylang": "^3",
 		"wpackagist-plugin/woocommerce": "^9",
 		"php-stubs/wp-cli-stubs": "^2.11"
 	},
@@ -81,6 +82,7 @@
 		"phpstan": "vendor/bin/phpstan analyze --memory-limit=4G --no-progress",
 		"test-unit": "php -d memory_limit=1G \"vendor/bin/phpunit\" --testsuite unit --colors=always --configuration tests/Unit/phpunit.xml.dist",
 		"test-integration": "php -d memory_limit=1G \"vendor/bin/phpunit\" --testsuite integration --colors=always --configuration tests/Integration/phpunit.xml.dist",
+		"test-integration-abilities-catalog": "php -d memory_limit=1G \"vendor/bin/phpunit\" --testsuite integration --colors=always --configuration tests/Integration/phpunit.xml.dist --group AbilitiesCatalog",
 		"test-unit-cover": "php -d memory_limit=1G \"vendor/bin/phpunit\" --testsuite unit --colors=always --configuration tests/Unit/phpunit.xml.dist --coverage-html coverage-report --coverage-clover tests/Unit/coverage-unit.xml"
 	}
 }

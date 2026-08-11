@@ -275,6 +275,7 @@ class Divi {
 			'wp-color-picker-alpha',
 			'wp-embed',
 			'wp-hooks',
+			'wp-element',
 		];
 
 		if ( in_array( $handle, $exclude_handles, true ) ) {

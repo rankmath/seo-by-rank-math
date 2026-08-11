@@ -73,7 +73,7 @@ class Url_Inspection extends Request {
 
 		$args = [
 			'inspectionUrl' => untrailingslashit( Helper::get_home_url() ) . $page,
-			'siteUrl'       => Console::get_site_url(),
+			'siteUrl'       => Console::get_site_url( true ),
 			'languageCode'  => $lang_code,
 		];
 

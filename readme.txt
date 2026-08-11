@@ -5,7 +5,7 @@ Tags: seo, google search console, schema, redirection, xml sitemap
 Tested up to: 7.0
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.275
+Stable tag: 1.0.276
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -407,15 +407,12 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
-= 1.0.275 [Jul 28, 2026] =
-- Added Filter to remove the Rank Math credits from the generated [llms.txt](https://rankmath.com/kb/llms-txt/) file.
-- Improved [Email SEO Reports](https://rankmath.com/kb/seo-email-reporting/) table header so content in both rows now takes the full width.
-- Fixed [WordPress Category Base removal](https://rankmath.com/kb/remove-wordpress-category-base/) leading to a 404 error for other product categories when WPML auto-creates a translated product category.
-- Fixed [Content AI](https://rankmath.com/kb/how-to-use-content-ai/) button triggering JS warnings when clicked.
-- Fixed [Content AI](https://rankmath.com/kb/using-content-ai-in-elementor/) insert functionality was not working in the Elementor editor when the Flexbox Container feature is disabled.
-- Fixed [Analytics](https://rankmath.com/kb/analytics/) data was being removed once the data fetch completed.
-- Fixed [Analytics](https://rankmath.com/kb/delete-old-analytics-data/) status was changing back after clicking Update Data Manually and reloading the page.
-- Strengthened the security of the [Debug redirections feature](https://rankmath.com/kb/general-settings/#debug-redirections) of the plugin
+= 1.0.276 [Aug 11, 2026] =
+- Added [Polylang Compatibility](https://rankmath.com/kb/polylang-compatibility/) to natively support the Polylang translation plugin without manual configuration.
+- Improved the free "Account Connection" CTA copy in AI Visibility to mention the connection is free.
+- Fixed permission error for domain properties in [Google URL Inspection API Integration](https://rankmath.com/kb/url-inspection-api-integration/).
+- Fixed compatibility issue with the Divi Carousel module throwing an error in the visual builder.
+- Fixed alignment issue in the ToggleGroup field used across the settings UI.
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
