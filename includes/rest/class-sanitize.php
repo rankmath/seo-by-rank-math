@@ -57,6 +57,7 @@ class Sanitize {
 			case 'rank_math_facebook_description':
 			case 'rank_math_twitter_title':
 			case 'rank_math_twitter_description':
+			case 'rank_math_twitter_image_alt':
 				$sanitized_value = wp_filter_nohtml_kses( $value );
 				break;
 			case 'rank_math_snippet_recipe_ingredients':
