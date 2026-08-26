@@ -73,6 +73,16 @@
 				}
 			}
 		}
+
+		&--citations, &--rank {
+			.rank-math-ai-visibility-stat-card__icon-wrap {
+				background: rgba(66,178,104,.08);
+
+				.dashicons {
+					color: #42B268;
+				}
+			}
+		}
 	}
 
 	&__icon {

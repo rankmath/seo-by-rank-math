@@ -17,6 +17,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Helpers\Arr;
 use RankMath\Helpers\Url;
 use RankMath\Helpers\Param;
+use RankMath\Rest\Rest_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -63,6 +64,10 @@ class Admin_Bar_Menu {
 		$object_type = Param::post( 'objectType', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 
 		if ( ! $what || ! $object_id || ! $object_type ) {
+			return 0;
+		}
+
+		if ( ! in_array( $object_type, [ 'post', 'term', 'user' ], true ) || ! Rest_Helper::can_edit_object( $object_type, $object_id ) ) {
 			return 0;
 		}
 

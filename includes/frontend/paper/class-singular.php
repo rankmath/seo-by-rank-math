@@ -231,7 +231,7 @@ class Singular implements IPaper {
 		}
 
 		// 2. Excerpt
-		if ( ! empty( $post->post_excerpt ) ) {
+		if ( ! empty( $post->post_excerpt ) && ! empty( $post->ID ) && ! post_password_required( $post->ID ) ) {
 			return $post->post_excerpt;
 		}
 

@@ -194,6 +194,7 @@ class LLMS_Txt {
 				'post_status'    => 'publish',
 				'posts_per_page' => $limit,
 				'no_found_rows'  => true,
+				'has_password'   => false,
 			];
 
 			/**
@@ -230,7 +231,17 @@ class LLMS_Txt {
 				$title                = get_the_title( $object );
 				$link                 = get_permalink( $object );
 				$object->post_content = do_shortcode( $object->post_content );
-				$desc                 = wp_strip_all_tags( Helper::replace_vars( '%excerpt%', $object ) );
+				$desc                 = Helper::replace_vars( '%excerpt%', $object );
+
+				/**
+				 * Filter the description used for a post entry in llms.txt. Defaults to the post excerpt.
+				 *
+				 * @since 1.0.276
+				 * @param string   $desc   The default description (post excerpt).
+				 * @param \WP_Post $object The post object.
+				 * @return string Modified description.
+				 */
+				$desc = wp_strip_all_tags( $this->do_filter( 'llms_txt/post_description', $desc, $object ) );
 
 				$this->output_line(
 					$desc

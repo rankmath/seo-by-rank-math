@@ -12,6 +12,7 @@ namespace RankMath\Abilities\Post_SEO;
 
 use RankMath\Abilities\Ability_Interface;
 use RankMath\Paper\Singular;
+use RankMath\Rest\Rest_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -103,7 +104,17 @@ class Get_Post_SEO_Meta implements Ability_Interface {
 	 */
 	public function execute( array $input = [] ): array {
 		$post_id = absint( $input['post_id'] );
-		$result  = ( new Singular() )->get_seo_meta( $post_id );
+		$post    = get_post( $post_id );
+
+		if ( ! $post || ! in_array( get_post_status( $post ), [ 'publish', 'draft', 'private', 'pending', 'future' ], true ) ) {
+			return [ 'error' => esc_html__( 'No post found with the given ID, or the post status is not supported.', 'seo-by-rank-math' ) ];
+		}
+
+		if ( ! Rest_Helper::can_edit_post( $post ) ) {
+			return [ 'error' => esc_html__( 'Sorry, you are not allowed to edit this post.', 'seo-by-rank-math' ) ];
+		}
+
+		$result = ( new Singular() )->get_seo_meta( $post_id );
 
 		if ( empty( $result['error'] ) ) {
 			rank_math()->tracking->track_ability_executed(

@@ -34,11 +34,11 @@ class Polylang {
 	 * Initialize Polylang integration.
 	 */
 	public function init() {
-		// Register option keys with Polylang so get_option() returns per-language values.
-		$this->register_option_translations();
-
 		// Reset Rank Math's settings cache so translated option values are used.
 		$this->action( 'wp_loaded', 'maybe_reset_settings_cache' );
+
+		// Register option keys with Polylang so get_option() returns per-language values.
+		$this->action( 'wp_loaded', 'register_option_translations' );
 
 		if ( \PLL() instanceof \PLL_Frontend ) {
 			$this->register_frontend_hooks();
@@ -91,7 +91,7 @@ class Polylang {
 	/**
 	 * Register Rank Math option keys with Polylang for per-language values.
 	 */
-	private function register_option_translations() {
+	public function register_option_translations() {
 		$general_keys = [
 			'breadcrumbs_separator',
 			'breadcrumbs_prefix',
@@ -136,7 +136,7 @@ class Polylang {
 	/**
 	 * Reset Rank Math's settings cache so translated option values are used.
 	 */
-	public static function maybe_reset_settings_cache() {
+	public function maybe_reset_settings_cache() {
 		if ( function_exists( 'pll_current_language' ) ) {
 			rank_math()->settings->reset();
 		}

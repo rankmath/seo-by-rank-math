@@ -400,11 +400,16 @@ class Snippet_Shortcode {
 	 */
 	private function get_schema_data( $shortcode_id, $post_id = false ) {
 		if ( ! empty( $shortcode_id ) && is_string( $shortcode_id ) ) {
-			return DB::get_schema_by_shortcode_id( $shortcode_id );
+			$data = DB::get_schema_by_shortcode_id( $shortcode_id );
+			return $data && $this->can_view_schema_post( $data['post_id'] ) ? $data : false;
 		}
 
 		if ( ! $post_id ) {
 			$post_id = Param::get( 'post_id' ) ? Param::get( 'post_id' ) : get_the_ID();
+		}
+
+		if ( ! $this->can_view_schema_post( $post_id ) ) {
+			return false;
 		}
 
 		$data = DB::get_schemas( $post_id );
@@ -412,6 +417,25 @@ class Snippet_Shortcode {
 			'post_id' => $post_id,
 			'schema'  => $data,
 		];
+	}
+
+	/**
+	 * Check whether the current requester is allowed to see the given post's schema.
+	 *
+	 * Prevents schema (and any excerpt/content derived from it) from being disclosed
+	 * for posts that are not publicly viewable, e.g. draft, pending, private, scheduled,
+	 * or password protected — while still allowing a post's own author/editor to see
+	 * the schema while previewing or editing that same draft.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return bool
+	 */
+	private function can_view_schema_post( $post_id ) {
+		if ( ! $post_id || post_password_required( $post_id ) ) {
+			return false;
+		}
+
+		return is_post_publicly_viewable( $post_id ) || current_user_can( 'read_post', $post_id );
 	}
 
 	/**

@@ -117,20 +117,7 @@ class Rest_Helper {
 			return $post;
 		}
 
-		if ( ! Helper::is_post_type_accessible( $post->post_type ) && 'rank_math_schema' !== $post->post_type ) {
-			return new WP_Error(
-				'rest_cannot_edit',
-				__( 'Sorry, you are not allowed to edit this post type.', 'seo-by-rank-math' ),
-				[ 'status' => rest_authorization_required_code() ]
-			);
-		}
-
-		$post_type = get_post_type_object( $post->post_type );
-
-		if (
-			current_user_can( $post_type->cap->edit_post, $post->ID ) ||
-			current_user_can( $post_type->cap->edit_others_posts )
-		) {
+		if ( self::can_edit_post( $post ) ) {
 			return true;
 		}
 
@@ -138,6 +125,65 @@ class Rest_Helper {
 			'rest_cannot_edit',
 			__( 'Sorry, you are not allowed to edit this post.', 'seo-by-rank-math' ),
 			[ 'status' => rest_authorization_required_code() ]
+		);
+	}
+
+	/**
+	 * Checks whether the current user may edit a specific object, by type and ID.
+	 *
+	 * ID-based counterpart to get_object_permissions_check() for callers (e.g. AJAX
+	 * handlers) that only have a raw object type/ID pair, not a WP_REST_Request.
+	 * Restricted to the same object types the updateMeta REST route supports.
+	 *
+	 * @param string $object_type Object type: 'post', 'term', or 'user'.
+	 * @param int    $object_id   Object ID.
+	 *
+	 * @return bool
+	 */
+	public static function can_edit_object( $object_type, $object_id ) {
+		switch ( $object_type ) {
+			case 'post':
+				return self::can_edit_post( $object_id );
+
+			case 'term':
+				return self::can_edit_term( $object_id );
+
+			case 'user':
+				return current_user_can( 'edit_user', $object_id );
+
+			default:
+				return false;
+		}
+	}
+
+	/**
+	 * Checks whether the current user may read/edit a specific post.
+	 *
+	 * Shared per-object capability check reused by REST routes and by
+	 * WordPress Abilities API classes that return data for a single post.
+	 *
+	 * @param int|\WP_Post $post Post ID or post object.
+	 *
+	 * @return bool
+	 */
+	public static function can_edit_post( $post ) {
+		$post = get_post( $post );
+		if ( ! $post ) {
+			return false;
+		}
+
+		if ( ! Helper::is_post_type_accessible( $post->post_type ) && 'rank_math_schema' !== $post->post_type ) {
+			return false;
+		}
+
+		$post_type = get_post_type_object( $post->post_type );
+
+		return (
+			! is_null( $post_type ) &&
+			(
+				current_user_can( $post_type->cap->edit_post, $post->ID ) ||
+				current_user_can( $post_type->cap->edit_others_posts )
+			)
 		);
 	}
 
@@ -168,6 +214,25 @@ class Rest_Helper {
 	}
 
 	/**
+	 * Checks whether the current user may edit a specific term.
+	 *
+	 * @param int $term_id Term ID.
+	 *
+	 * @return bool
+	 */
+	public static function can_edit_term( $term_id ) {
+		$term = self::get_term( $term_id );
+		if ( is_wp_error( $term ) ) {
+			return false;
+		}
+
+		return (
+			in_array( $term->taxonomy, array_keys( Helper::get_accessible_taxonomies() ), true ) &&
+			current_user_can( get_taxonomy( $term->taxonomy )->cap->edit_terms, $term_id )
+		);
+	}
+
+	/**
 	 * Checks whether a given request has permission to read term.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
@@ -176,23 +241,16 @@ class Rest_Helper {
 	 */
 	public static function get_term_permissions_check( $request ) {
 		$term_id = $request->get_param( 'objectID' );
-		$term    = self::get_term( $term_id );
-		if ( is_wp_error( $term ) ) {
-			return $term;
+
+		if ( self::can_edit_term( $term_id ) ) {
+			return true;
 		}
 
-		if (
-			! in_array( $term->taxonomy, array_keys( Helper::get_accessible_taxonomies() ), true ) ||
-			! current_user_can( get_taxonomy( $term->taxonomy )->cap->edit_terms, $term_id )
-		) {
-			return new WP_Error(
-				'rest_cannot_edit',
-				__( 'Sorry, you are not allowed to edit this term.', 'seo-by-rank-math' ),
-				[ 'status' => rest_authorization_required_code() ]
-			);
-		}
-
-		return true;
+		return new WP_Error(
+			'rest_cannot_edit',
+			__( 'Sorry, you are not allowed to edit this term.', 'seo-by-rank-math' ),
+			[ 'status' => rest_authorization_required_code() ]
+		);
 	}
 
 	/**

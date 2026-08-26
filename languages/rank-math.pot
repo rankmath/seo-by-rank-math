@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.276\n"
+"Project-Id-Version: Rank Math SEO 1.0.277\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-11T03:27:10+00:00\n"
+"POT-Creation-Date: 2026-08-26T10:16:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: seo-by-rank-math\n"
@@ -164,6 +164,12 @@ msgid "Optional focus keyword to analyze against, overriding the post's saved fo
 msgstr ""
 
 msgid "No post found with the given ID, or the post status is not supported."
+msgstr ""
+
+msgid "Sorry, you are not allowed to edit this post."
+msgstr ""
+
+msgid "This post is password protected."
 msgstr ""
 
 msgid "Evaluate each test ID in tests_to_run against the fields in content, using kb_link as the scoring rubric for how each test is scored. Return a per-test breakdown with score, max_score, status (pass/fail), and a message with a specific fix. For the contentHasTOC test, when suggesting a fix or drafting content, tell the user to insert the Rank Math Table of Contents block (block name rank-math/toc-block, available in the block inserter as \"Table of Contents\") right after the intro, instead of a manual list of links — it auto-generates from the post headings."
@@ -367,6 +373,410 @@ msgstr ""
 msgid "Abilities to audit and fix site-wide SEO issues."
 msgstr ""
 
+msgid "Get settings"
+msgstr ""
+
+msgid "Returns the full normalized Rank Math settings snapshot: all four sections (general, titles, sitemap, instant_indexing), active module status, and auto-update state. Call this first in any AI configuration flow to understand what is already configured before making changes."
+msgstr ""
+
+msgid "Return only these top-level sections. Omit to return the full snapshot."
+msgstr ""
+
+msgid "Get system status"
+msgstr ""
+
+msgid "Returns a structured system health snapshot identical to Status & Tools → System Status in the admin: Rank Math version, plan, DB table health, Google token status, WordPress core info, server environment, and active plugins. Call this alongside get-settings at the start of any AI configuration flow to detect environment issues before making changes."
+msgstr ""
+
+msgid "Set breadcrumb settings"
+msgstr ""
+
+msgid "Updates breadcrumb display settings: enabling breadcrumbs, the separator, home link visibility/label/URL, a prefix before the trail, archive/search/404 label formats, ancestor category display, hiding the taxonomy name, removing the current post title, and showing the blog page. All fields are optional — omitted fields keep their current stored value."
+msgstr ""
+
+msgid "Enable Breadcrumbs"
+msgstr ""
+
+msgid "Enable the Breadcrumbs feature."
+msgstr ""
+
+msgid "Separator Character"
+msgstr ""
+
+msgid "Character to display between breadcrumb links."
+msgstr ""
+
+msgid "Show Home Link"
+msgstr ""
+
+msgid "Show a link to the homepage at the start of the breadcrumb trail."
+msgstr ""
+
+msgid "Home Label"
+msgstr ""
+
+msgid "Label used for the homepage link in the breadcrumb trail."
+msgstr ""
+
+msgid "Home Link"
+msgstr ""
+
+msgid "URL used for the homepage link in the breadcrumb trail."
+msgstr ""
+
+msgid "Prefix Breadcrumb"
+msgstr ""
+
+msgid "Text to show before the breadcrumb trail."
+msgstr ""
+
+msgid "Archive Format"
+msgstr ""
+
+msgid "Label format used for archive pages in the breadcrumb trail. Include a placeholder token for the archive title."
+msgstr ""
+
+msgid "Search Results Format"
+msgstr ""
+
+msgid "Label format used for search results pages in the breadcrumb trail. Include a placeholder token for the search query."
+msgstr ""
+
+msgid "404 Label"
+msgstr ""
+
+msgid "Label used for the 404 error item in the breadcrumb trail."
+msgstr ""
+
+msgid "Hide Post Title"
+msgstr ""
+
+msgid "Hide the current post/page title from the breadcrumb trail."
+msgstr ""
+
+msgid "Show Category(s)"
+msgstr ""
+
+msgid "If the category is a child category, show all ancestor categories in the breadcrumb trail."
+msgstr ""
+
+msgid "Hide Taxonomy Name"
+msgstr ""
+
+msgid "Hide the current taxonomy term name from the breadcrumb trail."
+msgstr ""
+
+msgid "Show Blog Page"
+msgstr ""
+
+msgid "Show the blog page in the breadcrumb trail. Only applies when a static homepage is set."
+msgstr ""
+
+msgid "Set global SEO settings"
+msgstr ""
+
+msgid "Updates site-wide SEO defaults: global robots meta directives, whether to noindex empty taxonomy archives, the title separator character, title capitalization, and the default Twitter card type. All fields are optional — omitted fields keep their current stored value."
+msgstr ""
+
+msgid "Global robots meta directives applied site-wide (e.g. [\"index\"], [\"noindex\",\"nofollow\"])."
+msgstr ""
+
+msgid "Whether to noindex taxonomy archives that have no posts assigned."
+msgstr ""
+
+msgid "Character used to separate parts of the SEO title (e.g. \"-\", \"|\", \"&mdash;\"). A custom string is also accepted."
+msgstr ""
+
+msgid "Whether to capitalize the first letter of every word in SEO titles."
+msgstr ""
+
+msgid "Default Twitter card type used when sharing content."
+msgstr ""
+
+msgid "robots_global may only contain: index, noindex, nofollow, noarchive, noimageindex, nosnippet."
+msgstr ""
+
+msgid "twitter_card_type must be either \"summary_large_image\" or \"summary_card\"."
+msgstr ""
+
+msgid "Set homepage SEO"
+msgstr ""
+
+msgid "Updates the SEO title, meta description, and focus keyword for the site homepage. Automatically detects whether the homepage is a static page or a latest-posts feed and writes to the correct storage in each case. Call get-settings first to see current homepage values. All fields are optional — omitted fields keep their current stored value."
+msgstr ""
+
+msgid "SEO Title"
+msgstr ""
+
+msgid "SEO title for the homepage. Supports Rank Math title variables (e.g. %sitename%, %sep%, %sitedesc%). For static-page homepages, stored as post meta; for latest-posts homepages, stored in Titles & Meta settings."
+msgstr ""
+
+msgid "Meta Description"
+msgstr ""
+
+msgid "Meta description for the homepage. For static-page homepages, stored as post meta; for latest-posts homepages, stored in Titles & Meta settings."
+msgstr ""
+
+msgid "Focus Keyword"
+msgstr ""
+
+msgid "Primary focus keyword for the homepage. Only applicable when the homepage is a static page — ignored for latest-posts homepages."
+msgstr ""
+
+msgid "No fields provided. Pass at least one of: title, description, focus_keyword."
+msgstr ""
+
+msgid "show_on_front is set to \"page\" but no front page is assigned (page_on_front is empty). Assign a static front page under WP Dashboard > Settings > Reading."
+msgstr ""
+
+msgid "Set link settings"
+msgstr ""
+
+msgid "Updates site-wide link behavior: nofollow for external and image links, opening external links in a new tab, nofollow domain allow/exclude lists, category base stripping, and attachment page redirects. All fields are optional — omitted fields keep their current stored value."
+msgstr ""
+
+msgid "Nofollow External Links"
+msgstr ""
+
+msgid "Automatically add rel=\"nofollow\" to external links in content."
+msgstr ""
+
+msgid "Open External Links in New Tab/Window"
+msgstr ""
+
+msgid "Automatically add target=\"_blank\" to external links in content."
+msgstr ""
+
+msgid "Nofollow Image File Links"
+msgstr ""
+
+msgid "Automatically add rel=\"nofollow\" to links pointing to external image files."
+msgstr ""
+
+msgid "Nofollow Domains"
+msgstr ""
+
+msgid "Newline-separated list of domains to nofollow. If empty, nofollow applies to all external domains (when enabled). Only takes effect when nofollow_external_links or nofollow_image_links is also enabled — hidden in the UI otherwise."
+msgstr ""
+
+msgid "Nofollow Exclude Domains"
+msgstr ""
+
+msgid "Newline-separated list of domains to exclude from nofollow. Only takes effect when nofollow_external_links or nofollow_image_links is also enabled — hidden in the UI otherwise."
+msgstr ""
+
+msgid "Strip Category Base"
+msgstr ""
+
+msgid "Remove /category/ from category archive URLs."
+msgstr ""
+
+msgid "Redirect Attachments"
+msgstr ""
+
+msgid "Redirect attachment page URLs to the post they appear in."
+msgstr ""
+
+msgid "Set module status"
+msgstr ""
+
+msgid "Enables or disables Rank Math modules (e.g. sitemap, redirections, 404-monitor, rich-snippet). Only provided module slugs are changed; omitted modules keep their current state. Modules with unmet dependencies (e.g. Video Sitemap requires Sitemap and Schema) cannot be enabled until their dependencies are active or enabled in the same call. Modules whose external requirements are not met (e.g. WooCommerce module without the WooCommerce plugin active) cannot be enabled at all."
+msgstr ""
+
+msgid "Modules"
+msgstr ""
+
+msgid "Map of module slug to desired active state. Call get-settings first to see the full list of registered module slugs and their current status."
+msgstr ""
+
+msgid "modules must be a non-empty map of module slug to boolean."
+msgstr ""
+
+#. translators: module slug
+msgid "Unknown module: %s"
+msgstr ""
+
+#. translators: module slug
+msgid "Cannot enable \"%s\" — its requirements are not met."
+msgstr ""
+
+#. translators: 1: module slug, 2: required module slug
+msgid "Cannot enable \"%1$s\" — it requires the \"%2$s\" module to be active or enabled in the same call."
+msgstr ""
+
+msgid "Set plugin preferences"
+msgstr ""
+
+msgid "Updates Rank Math plugin-level preferences that are not part of a settings section. Currently supports toggling automatic plugin updates."
+msgstr ""
+
+msgid "Enable Automatic Updates"
+msgstr ""
+
+msgid "Whether WordPress should automatically install new Rank Math plugin updates."
+msgstr ""
+
+msgid "Set post type SEO settings"
+msgstr ""
+
+msgid "Updates per-post-type SEO defaults: default title/description templates, default Schema type, default article type, custom robots meta, and whether to show SEO controls on the editor screen. Accepts a map keyed by post type slug; only provided post types and fields are changed."
+msgstr ""
+
+msgid "Post Types"
+msgstr ""
+
+msgid "Map of post type slug to its SEO settings. Call get-settings first to see registered post type slugs."
+msgstr ""
+
+msgid "Single Title"
+msgstr ""
+
+msgid "Default title tag for single pages of this post type. Supports Rank Math title variables."
+msgstr ""
+
+msgid "Single Description"
+msgstr ""
+
+msgid "Default meta description for single pages of this post type. Supports Rank Math variables."
+msgstr ""
+
+msgid "Schema Type"
+msgstr ""
+
+msgid "Default Schema type slug for new posts of this type (e.g. \"off\", \"article\", \"product\", \"event\"). Call get-settings first or see the Schema Type list in WP Admin for valid values — the list varies per post type and active modules."
+msgstr ""
+
+msgid "Article Type"
+msgstr ""
+
+msgid "Default article schema sub-type. Only used when default_rich_snippet is \"article\"."
+msgstr ""
+
+msgid "Custom Robots Meta"
+msgstr ""
+
+msgid "Whether to use custom robots meta values for this post type instead of the Global Meta default."
+msgstr ""
+
+msgid "Robots Meta"
+msgstr ""
+
+msgid "Custom robots meta values for this post type. Only takes effect when custom_robots is enabled."
+msgstr ""
+
+msgid "Add SEO Controls"
+msgstr ""
+
+msgid "Whether to add SEO controls to the editor screen for posts of this type."
+msgstr ""
+
+msgid "post_types must be a non-empty map of post type slug to settings."
+msgstr ""
+
+#. translators: post type slug
+msgid "Unknown or inaccessible post type: %s"
+msgstr ""
+
+msgid "robots may only contain: index, noindex, nofollow, noarchive, noimageindex, nosnippet."
+msgstr ""
+
+msgid "default_article_type must be one of: Article, BlogPosting, NewsArticle."
+msgstr ""
+
+msgid "Set sitemap settings"
+msgstr ""
+
+msgid "Updates XML sitemap settings: links per sitemap page, image inclusion, excluded post/term IDs, author archive inclusion, and per-post-type/per-taxonomy sitemap inclusion. All fields are optional — omitted fields keep their current stored value. Requires the sitemap module to be active; enable it first with set-module-status if needed."
+msgstr ""
+
+msgid "Links Per Sitemap"
+msgstr ""
+
+msgid "Max number of links on each sitemap page."
+msgstr ""
+
+msgid "Images in Sitemaps"
+msgstr ""
+
+msgid "Include reference to images from the post content in sitemaps."
+msgstr ""
+
+msgid "Include Featured Images"
+msgstr ""
+
+msgid "Include the Featured Image too, even if it does not appear directly in the post content. Only takes effect when include_images is also enabled."
+msgstr ""
+
+msgid "Exclude Posts"
+msgstr ""
+
+msgid "Comma-separated post IDs to exclude from the sitemap. Applies to all post types."
+msgstr ""
+
+msgid "Exclude Terms"
+msgstr ""
+
+msgid "Comma-separated term IDs to exclude from the sitemap. Applies to all taxonomies."
+msgstr ""
+
+msgid "Include Authors in Sitemap"
+msgstr ""
+
+msgid "Include author archives in the XML sitemap."
+msgstr ""
+
+msgid "Map of post type slug to whether it should be included in the XML sitemap. Call get-settings first to see registered post type sitemap status."
+msgstr ""
+
+msgid "Taxonomies"
+msgstr ""
+
+msgid "Map of taxonomy slug to whether it should be included in the XML sitemap."
+msgstr ""
+
+#. translators: taxonomy slug
+msgid "Unknown or inaccessible taxonomy: %s"
+msgstr ""
+
+msgid "Set website identity"
+msgstr ""
+
+msgid "Updates the site's Knowledge Graph identity used by Rank Math for schema and social markup: knowledge graph type (person/company), website name, alternate name, knowledge graph name, organization description, business type, and site URL override. All fields are optional — omitted fields keep their current stored value."
+msgstr ""
+
+msgid "Whether the site represents a person or a company/organization."
+msgstr ""
+
+msgid "The website name used in schema and social markup."
+msgstr ""
+
+msgid "An alternate name for the website."
+msgstr ""
+
+msgid "The person or organization name used in the Knowledge Graph."
+msgstr ""
+
+msgid "Description of the organization. Only used when knowledgegraph_type is \"company\"."
+msgstr ""
+
+msgid "Schema.org business type slug (e.g. \"Restaurant\", \"LegalService\", \"Organization\"), spaces removed. Only used when knowledgegraph_type is \"company\". Call get-settings first or see the Local SEO business type list in WP Admin for valid values."
+msgstr ""
+
+msgid "Site URL override used in Knowledge Graph markup."
+msgstr ""
+
+msgid "knowledgegraph_type must be either \"person\" or \"company\"."
+msgstr ""
+
+msgid "local_business_type is not a recognized Schema.org business type slug."
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Abilities to read and configure Rank Math plugin settings."
+msgstr ""
+
 msgid "Rank Math Dashboard"
 msgstr ""
 
@@ -441,9 +851,6 @@ msgstr ""
 msgid "Facebook Sharing Debugger"
 msgstr ""
 
-msgid "Modules"
-msgstr ""
-
 msgid "Help"
 msgstr ""
 
@@ -501,9 +908,6 @@ msgid "WordPress General Settings"
 msgstr ""
 
 msgid "Rank Math"
-msgstr ""
-
-msgid "Help &amp; Support"
 msgstr ""
 
 msgid "Halloween Sale"
@@ -915,9 +1319,6 @@ msgstr ""
 msgid "SEO Details"
 msgstr ""
 
-msgid "SEO Title"
-msgstr ""
-
 msgid "SEO Desc"
 msgstr ""
 
@@ -937,9 +1338,6 @@ msgid "No Index"
 msgstr ""
 
 msgid "Is Pillar"
-msgstr ""
-
-msgid "Focus Keyword"
 msgstr ""
 
 msgid "Keyword"
@@ -2078,6 +2476,9 @@ msgstr ""
 msgid "Robots Txt"
 msgstr ""
 
+msgid "Agent"
+msgstr ""
+
 msgid "Version Control"
 msgstr ""
 
@@ -2173,9 +2574,6 @@ msgid "24/7 Support"
 msgstr ""
 
 msgid "Buy Now"
-msgstr ""
-
-msgid "Settings"
 msgstr ""
 
 #. translators: delete counter
@@ -2341,6 +2739,34 @@ msgid "Ignore Query Parameters"
 msgstr ""
 
 msgid "Turn ON to ignore all query parameters (the part after a question mark in a URL) when logging 404 errors."
+msgstr ""
+
+msgid "Help & Support"
+msgstr ""
+
+msgid "Connect your Rank Math account for free to start using the Help & Support assistant."
+msgstr ""
+
+msgid "Account Connection Required"
+msgstr ""
+
+msgid "Not Connected"
+msgstr ""
+
+msgid "Connect Now"
+msgstr ""
+
+msgid "Takes less than 30 seconds to get started"
+msgstr ""
+
+msgid "No authenticated WordPress user."
+msgstr ""
+
+msgid "Connect your Rank Math account before using the AI assistant."
+msgstr ""
+
+#. translators: %d: HTTP status code
+msgid "GRND exchange with the Rank Math issuer failed (HTTP %d)."
 msgstr ""
 
 msgid "New!"
@@ -4885,9 +5311,6 @@ msgstr ""
 msgid "Include in Sitemap"
 msgstr ""
 
-msgid "Include author archives in the XML sitemap."
-msgstr ""
-
 msgid "Include in HTML Sitemap"
 msgstr ""
 
@@ -4919,31 +5342,13 @@ msgstr ""
 msgid "read here"
 msgstr ""
 
-msgid "Links Per Sitemap"
-msgstr ""
-
-msgid "Max number of links on each sitemap page."
-msgstr ""
-
-msgid "Images in Sitemaps"
-msgstr ""
-
 msgid "Include reference to images from the post content in sitemaps. This helps search engines index the important images on your pages."
-msgstr ""
-
-msgid "Include Featured Images"
 msgstr ""
 
 msgid "Include the Featured Image too, even if it does not appear directly in the post content."
 msgstr ""
 
-msgid "Exclude Posts"
-msgstr ""
-
 msgid "Enter post IDs of posts you want to exclude from the sitemap, separated by commas. This option **applies** to all posts types including posts, pages, and custom post types."
-msgstr ""
-
-msgid "Exclude Terms"
 msgstr ""
 
 msgid "Add term IDs, separated by comma. This option is applied for all taxonomies."
@@ -5388,9 +5793,6 @@ msgstr ""
 msgid "The variable has already been registered."
 msgstr ""
 
-msgid "Separator Character"
-msgstr ""
-
 msgid "Separator character, as set in the Title Settings"
 msgstr ""
 
@@ -5712,12 +6114,6 @@ msgstr ""
 msgid "Sorry, you are not allowed to edit homepage SEO settings."
 msgstr ""
 
-msgid "Sorry, you are not allowed to edit this post type."
-msgstr ""
-
-msgid "Sorry, you are not allowed to edit this post."
-msgstr ""
-
 msgid "Sorry, you are not allowed to edit this term."
 msgstr ""
 
@@ -5791,19 +6187,10 @@ msgstr ""
 msgid "Link to use for homepage (first item) in breadcrumbs."
 msgstr ""
 
-msgid "Prefix Breadcrumb"
-msgstr ""
-
 msgid "Prefix for the breadcrumb path."
 msgstr ""
 
-msgid "Archive Format"
-msgstr ""
-
 msgid "Format the label used for archive pages."
-msgstr ""
-
-msgid "Search Results Format"
 msgstr ""
 
 msgid "Format the label used for search results pages."
@@ -5815,25 +6202,13 @@ msgstr ""
 msgid "Label used for 404 error item in breadcrumbs."
 msgstr ""
 
-msgid "Hide Post Title"
-msgstr ""
-
 msgid "Hide Post title from Breadcrumb."
-msgstr ""
-
-msgid "Show Category(s)"
 msgstr ""
 
 msgid "If category is a child category, show all ancestor categories."
 msgstr ""
 
-msgid "Hide Taxonomy Name"
-msgstr ""
-
 msgid "Hide Taxonomy Name from Breadcrumb."
-msgstr ""
-
-msgid "Show Blog Page"
 msgstr ""
 
 msgid "Show Blog Page in Breadcrumb."
@@ -5849,9 +6224,6 @@ msgid "I understand the risks and I want to edit the file"
 msgstr ""
 
 msgid "Be careful when editing the htaccess file, it is easy to make mistakes and break your site. If that happens, you can restore the file to its state <strong>before the last edit</strong> by replacing the htaccess file with the backup copy created by Rank Math in the same directory (<em>.htaccess_back_xxxxxx</em>) using an FTP client."
-msgstr ""
-
-msgid "Strip Category Base"
 msgstr ""
 
 #. translators: Link to kb article
@@ -5872,9 +6244,6 @@ msgstr ""
 msgid "Please enable Redirections module."
 msgstr ""
 
-msgid "Redirect Attachments"
-msgstr ""
-
 #. translators: Link to kb article
 msgid "Redirect all attachment page URLs to the post they appear in. For more advanced redirection control, use the built-in %s."
 msgstr ""
@@ -5885,31 +6254,16 @@ msgstr ""
 msgid "Redirect attachments without a parent post to this URL. Leave empty for no redirection."
 msgstr ""
 
-msgid "Nofollow External Links"
-msgstr ""
-
 msgid "Automatically add <code>rel=\"nofollow\"</code> attribute for external links appearing in your posts, pages, and other post types. The attribute is dynamically applied when the content is displayed, and the stored content is not changed."
-msgstr ""
-
-msgid "Nofollow Image File Links"
 msgstr ""
 
 msgid "Automatically add <code>rel=\"nofollow\"</code> attribute for links pointing to external image files. The attribute is dynamically applied when the content is displayed, and the stored content is not changed."
 msgstr ""
 
-msgid "Nofollow Domains"
-msgstr ""
-
 msgid "Only add <code>nofollow</code> attribute for the link if target domain is in this list. Add one per line. Leave empty to apply nofollow for <strong>ALL</strong> external domains."
 msgstr ""
 
-msgid "Nofollow Exclude Domains"
-msgstr ""
-
 msgid "The <code>nofollow</code> attribute <strong>will not be added</strong> for the link if target domain is in this list. Add one per line."
-msgstr ""
-
-msgid "Open External Links in New Tab/Window"
 msgstr ""
 
 msgid "Automatically add <code>target=\"_blank\"</code> attribute for external links appearing in your posts, pages, and other post types to make them open in a new browser tab or window. The attribute is dynamically applied when the content is displayed, and the stored content is not changed."
@@ -6138,13 +6492,7 @@ msgstr ""
 msgid "When the option is enabled and an author archive is shared on Slack, additional information will be shown (name & total number of posts)."
 msgstr ""
 
-msgid "Add SEO Controls"
-msgstr ""
-
 msgid "Add SEO Controls for user profile pages. Access to the Meta Box can be fine tuned with code, using a special filter hook."
-msgstr ""
-
-msgid "Robots Meta"
 msgstr ""
 
 msgid "Default values for robots meta tag. These can be changed for individual posts, taxonomies, etc."
@@ -6351,9 +6699,6 @@ msgstr ""
 msgid "Description for %s archive pages."
 msgstr ""
 
-msgid "Schema Type"
-msgstr ""
-
 #. translators: link to title setting screen
 msgid "Default rich snippet selected when creating a new product."
 msgstr ""
@@ -6371,9 +6716,6 @@ msgstr ""
 
 #. translators: Google article snippet doc link
 msgid "Google does not allow Person as the Publisher for articles. Organization will be used instead. You can read more about this <a href=\"%s\" target=\"_blank\">here</a>."
-msgstr ""
-
-msgid "Article Type"
 msgstr ""
 
 msgid "Blog Post"
@@ -6904,6 +7246,9 @@ msgstr ""
 msgid "Select / Deselect All"
 msgstr ""
 
+msgid "Need help? View tutorial →"
+msgstr ""
+
 msgid "I just installed @RankMathSEO #WordPress Plugin. It looks great! %s"
 msgstr ""
 
@@ -7165,9 +7510,6 @@ msgstr ""
 msgid "Engage with RankBot, your personal AI Chat Assistant, for real-time assistance."
 msgstr ""
 
-msgid "Connect Now"
-msgstr ""
-
 msgid "Server Maintenance Underway"
 msgstr ""
 
@@ -7325,9 +7667,6 @@ msgid "Select"
 msgstr ""
 
 msgid "Warning: "
-msgstr ""
-
-msgid "Not Connected"
 msgstr ""
 
 msgid "Receive periodic SEO Performance reports via email. Once enabled and options are saved, you can see"
@@ -8629,16 +8968,22 @@ msgstr ""
 msgid "AI Visibility Score for this brand across AI platforms."
 msgstr ""
 
-msgid "Recent Mentions"
-msgstr ""
-
-msgid "Total brand mentions across AI-generated content."
+msgid "Average rank of this brand across AI-generated mentions."
 msgstr ""
 
 msgid "Avg Sentiments"
 msgstr ""
 
 msgid "Average sentiment score across all AI mentions of this brand."
+msgstr ""
+
+msgid "Recent Mentions"
+msgstr ""
+
+msgid "Total brand mentions across AI-generated content."
+msgstr ""
+
+msgid "Total citations of this brand across AI-generated content."
 msgstr ""
 
 msgid "Top Competitor"
@@ -8887,16 +9232,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-msgid "Connect your account to start tracking your brand's AI visibility."
-msgstr ""
-
-msgid "Need help? View tutorial →"
-msgstr ""
-
-msgid "Connect your account for free, it takes less than 30 seconds to get started"
-msgstr ""
-
-msgid "Account Connection Required"
+msgid "Connect your account for free to start tracking your brand's AI visibility."
 msgstr ""
 
 msgid "Content AI score"

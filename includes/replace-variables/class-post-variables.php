@@ -362,6 +362,10 @@ class Post_Variables extends Advanced_Variables {
 			return '';
 		}
 
+		if ( ! empty( $object->ID ) && post_password_required( $object->ID ) ) {
+			return '';
+		}
+
 		return ! empty( $object->post_excerpt ) ? wp_strip_all_tags( $object->post_excerpt ) : $this->get_post_content( $object );
 	}
 

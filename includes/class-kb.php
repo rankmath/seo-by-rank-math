@@ -44,6 +44,7 @@ class KB {
 		'usage-policy'                    => 'https://rankmath.com/usage-tracking/',
 		'logo'                            => 'https://rankmath.com/wordpress/plugin/seo-suite/',
 		'offer'                           => 'https://rankmath.com/offer/',
+		'terms-and-conditions'            => 'https://rankmath.com/terms-and-conditions/',
 
 		// Knowledgebase.
 		'knowledgebase'                   => 'https://rankmath.com/kb/',

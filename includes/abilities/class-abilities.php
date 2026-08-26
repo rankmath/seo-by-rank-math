@@ -16,6 +16,7 @@ use RankMath\Abilities\Post_SEO\Subscriber as Post_SEO_Subscriber;
 use RankMath\Abilities\Schema\Subscriber as Schema_Subscriber;
 use RankMath\Abilities\Analytics\Subscriber as Analytics_Subscriber;
 use RankMath\Abilities\AI_Visibility\Subscriber as AI_Visibility_Subscriber;
+use RankMath\Abilities\Settings\Subscriber as Settings_Subscriber;
 use RankMath\Abilities\Content_Analysis\Subscriber as Content_Analysis_Subscriber;
 
 defined( 'ABSPATH' ) || exit;
@@ -70,6 +71,7 @@ class Abilities {
 			new Schema_Subscriber( $shared_meta ),
 			new Analytics_Subscriber( $shared_meta ),
 			new AI_Visibility_Subscriber( $shared_meta ),
+			new Settings_Subscriber( $shared_meta ),
 			new Content_Analysis_Subscriber( $shared_meta ),
 		];
 

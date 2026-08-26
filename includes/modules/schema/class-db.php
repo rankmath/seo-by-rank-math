@@ -53,8 +53,12 @@ class DB {
 			return $schema_cache[ $table . '_' . $object_id ];
 		}
 
-		$key  = 'termmeta' === $table ? 'term_id' : 'post_id';
-		$data = self::table( $table )
+		$keys_by_table = [
+			'termmeta' => 'term_id',
+			'usermeta' => 'user_id',
+		];
+		$key           = isset( $keys_by_table[ $table ] ) ? $keys_by_table[ $table ] : 'post_id';
+		$data          = self::table( $table )
 			->select( 'meta_id' )
 			->select( 'meta_value' )
 			->where( $key, $object_id )
