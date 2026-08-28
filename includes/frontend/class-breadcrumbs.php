@@ -80,31 +80,34 @@ class Breadcrumbs {
 	 * @codeCoverageIgnore
 	 */
 	public function __construct() {
+		$settings = [
+			'home'            => Helper::get_settings( 'general.breadcrumbs_home' ),
+			'separator'       => Helper::get_settings( 'general.breadcrumbs_separator' ),
+			'remove_title'    => Helper::get_settings( 'general.breadcrumbs_remove_post_title' ),
+			'hide_tax_name'   => Helper::get_settings( 'general.breadcrumbs_hide_taxonomy_name' ),
+			'show_ancestors'  => Helper::get_settings( 'general.breadcrumbs_ancestor_categories' ),
+			'show_blog'       => Helper::get_settings( 'general.breadcrumbs_blog_page' ),
+			'show_pagination' => true,
+		];
+
 		$this->settings = wp_parse_args(
-			$this->do_filter( 'frontend/breadcrumb/settings', [] ),
-			[
-				'home'            => Helper::get_settings( 'general.breadcrumbs_home' ),
-				'separator'       => Helper::get_settings( 'general.breadcrumbs_separator' ),
-				'remove_title'    => Helper::get_settings( 'general.breadcrumbs_remove_post_title' ),
-				'hide_tax_name'   => Helper::get_settings( 'general.breadcrumbs_hide_taxonomy_name' ),
-				'show_ancestors'  => Helper::get_settings( 'general.breadcrumbs_ancestor_categories' ),
-				'show_blog'       => Helper::get_settings( 'general.breadcrumbs_blog_page' ),
-				'show_pagination' => true,
-			]
+			$this->do_filter( 'frontend/breadcrumb/settings', $settings ),
+			$settings
 		);
 
+		$strings = [
+			'prefix'         => Helper::get_settings( 'general.breadcrumbs_prefix' ),
+			'home'           => Helper::get_settings( 'general.breadcrumbs_home_label' ),
+			'home_link'      => Helper::get_settings( 'general.breadcrumbs_home_link', home_url() ),
+			'error404'       => Helper::get_settings( 'general.breadcrumbs_404_label' ),
+			/* translators: search query */
+			'search_format'  => Helper::get_settings( 'general.breadcrumbs_search_format' ),
+			/* translators: archive title */
+			'archive_format' => Helper::get_settings( 'general.breadcrumbs_archive_format' ),
+		];
 		$this->strings = wp_parse_args(
-			$this->do_filter( 'frontend/breadcrumb/strings', [] ),
-			[
-				'prefix'         => Helper::get_settings( 'general.breadcrumbs_prefix' ),
-				'home'           => Helper::get_settings( 'general.breadcrumbs_home_label' ),
-				'home_link'      => Helper::get_settings( 'general.breadcrumbs_home_link', home_url() ),
-				'error404'       => Helper::get_settings( 'general.breadcrumbs_404_label' ),
-				/* translators: search query */
-				'search_format'  => Helper::get_settings( 'general.breadcrumbs_search_format' ),
-				/* translators: archive title */
-				'archive_format' => Helper::get_settings( 'general.breadcrumbs_archive_format' ),
-			]
+			$this->do_filter( 'frontend/breadcrumb/strings', $strings ),
+			$strings
 		);
 	}
 
