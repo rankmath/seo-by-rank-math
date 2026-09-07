@@ -211,7 +211,14 @@ class Shared extends WP_REST_Controller {
 			}
 
 			// Update old.
-			$db_id      = absint( str_replace( 'schema-', '', $meta_id ) );
+			$db_id = absint( str_replace( 'schema-', '', $meta_id ) );
+
+			// Bail if the meta id doesn't belong to the authorized object.
+			$owned_schemas = DB::get_schemas( $object_id, "{$object_type}meta" );
+			if ( empty( $owned_schemas ) || ! in_array( "schema-{$db_id}", array_keys( $owned_schemas ), true ) ) {
+				continue;
+			}
+
 			$prev_value = update_metadata_by_mid( $object_type, $db_id, $schema, $meta_key );
 
 			// Update or delete the "shortcut" to the new schema.
@@ -442,8 +449,7 @@ class Shared extends WP_REST_Controller {
 		// First, delete the "shortcut" to the new schema.
 		$schema = \get_metadata_by_mid( $object_type, $meta_id );
 		if ( ! empty( $schema->meta_value ) ) {
-			// Maybe unserialize the schema.
-			$schema = \maybe_unserialize( $schema->meta_value );
+			$schema = $schema->meta_value;
 			if ( ! empty( $schema['metadata']['shortcode'] ) ) {
 				\delete_metadata( $object_type, $object_id, 'rank_math_shortcode_schema_' . $schema['metadata']['shortcode'] );
 			}

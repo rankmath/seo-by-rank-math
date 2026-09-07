@@ -130,7 +130,7 @@ class Fix_Site_SEO implements Ability_Interface {
 	 * @return bool
 	 */
 	public function check_permissions(): bool {
-		return current_user_can( 'rank_math_site_analysis' );
+		return current_user_can( 'rank_math_site_analysis' ) && current_user_can( 'manage_options' );
 	}
 
 	/**

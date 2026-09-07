@@ -54,11 +54,11 @@ const BrandOverview = ( { brand, insights = null, loading = false } ) => {
 				/>
 
 				<StatCard
-					className={ `${ ns }__stat-card ${ ns }__stat-card--mentions` }
-					icon=" rm-icon-comments"
-					label={ __( 'Recent Mentions', 'seo-by-rank-math' ) }
-					value={ insights?.mentions ?? placeholder }
-					tooltip={ __( 'Total brand mentions across AI-generated content.', 'seo-by-rank-math' ) }
+					className={ `${ ns }__stat-card ${ ns }__stat-card--rank` }
+					icon="chart-line"
+					label={ __( 'Avg Rank', 'seo-by-rank-math' ) }
+					value={ insights?.rank ?? placeholder }
+					tooltip={ __( 'Average rank of this brand across AI-generated mentions.', 'seo-by-rank-math' ) }
 					analysis={ insights?.analysis }
 				/>
 
@@ -71,6 +71,24 @@ const BrandOverview = ( { brand, insights = null, loading = false } ) => {
 						: placeholder
 					}
 					tooltip={ __( 'Average sentiment score across all AI mentions of this brand.', 'seo-by-rank-math' ) }
+					analysis={ insights?.analysis }
+				/>
+
+				<StatCard
+					className={ `${ ns }__stat-card ${ ns }__stat-card--mentions` }
+					icon=" rm-icon-comments"
+					label={ __( 'Recent Mentions', 'seo-by-rank-math' ) }
+					value={ insights?.mentions ?? placeholder }
+					tooltip={ __( 'Total brand mentions across AI-generated content.', 'seo-by-rank-math' ) }
+					analysis={ insights?.analysis }
+				/>
+
+				<StatCard
+					className={ `${ ns }__stat-card ${ ns }__stat-card--citations` }
+					icon=" rm-icon-misc"
+					label={ __( 'Citations', 'seo-by-rank-math' ) }
+					value={ insights?.citations ?? placeholder }
+					tooltip={ __( 'Total citations of this brand across AI-generated content.', 'seo-by-rank-math' ) }
 					analysis={ insights?.analysis }
 				/>
 

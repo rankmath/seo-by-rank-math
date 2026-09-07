@@ -11,6 +11,7 @@
 
 	&__stats {
 		display: flex;
+		flex-wrap: wrap;
 		gap:     $card-row-gap;
 
 		// Stack vertically on narrow viewports.
@@ -20,7 +21,7 @@
 
 		// Each card grows equally.
 		.rank-math-ai-visibility-stat-card {
-			flex: 1;
+			flex: 0 1 calc(25% - 62px);
 		}
 	}
 }
@@ -36,6 +37,12 @@
 		--stat-icon-color: #{$color-btn-primary};
 	}
 
+	// Avg Rank — green
+	&-rank {
+		--stat-icon-bg:    rgba( 45, 168, 116, 0.12 );
+		--stat-icon-color: #2DA874;
+	}
+
 	// Recent Mentions — amber
 	&-mentions {
 		--stat-icon-bg:    rgba( 232, 166, 35, 0.12 );
@@ -46,6 +53,12 @@
 	&-sentiment {
 		--stat-icon-bg:    rgba( 82, 96, 185, 0.12 );
 		--stat-icon-color: #5260B9;
+	}
+
+	// Citations — teal
+	&-citations {
+		--stat-icon-bg:    rgba( 26, 155, 172, 0.12 );
+		--stat-icon-color: #1A9BAC;
 	}
 
 	// Top Competitor — red/pink

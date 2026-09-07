@@ -453,7 +453,9 @@ class DB {
 		$host = Helper::get_home_url();
 		$url  = str_replace( $host, '', $url );
 
-		// Remove ASCII domain, guarded since ext-intl may be unavailable.
+		// Remove ASCII domain. idn_to_ascii() needs ext-intl, which isn't
+		// guaranteed to be installed on every host — fall back to the
+		// unconverted host rather than fatal-erroring when it's missing.
 		$host_ascii = function_exists( 'idn_to_ascii' ) ? idn_to_ascii( $host ) : $host;
 		$url        = str_replace( $host_ascii, '', $url );
 

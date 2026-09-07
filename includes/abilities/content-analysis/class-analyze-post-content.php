@@ -11,6 +11,7 @@
 namespace RankMath\Abilities\Content_Analysis;
 
 use RankMath\Abilities\Ability_Interface;
+use RankMath\Rest\Rest_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -129,6 +130,24 @@ class Analyze_Post_Content implements Ability_Interface {
 				'error' => [
 					'code'    => 'invalid_post',
 					'message' => esc_html__( 'No post found with the given ID, or the post status is not supported.', 'seo-by-rank-math' ),
+				],
+			];
+		}
+
+		if ( ! Rest_Helper::can_edit_post( $post ) ) {
+			return [
+				'error' => [
+					'code'    => 'rest_cannot_edit',
+					'message' => esc_html__( 'Sorry, you are not allowed to edit this post.', 'seo-by-rank-math' ),
+				],
+			];
+		}
+
+		if ( post_password_required( $post ) ) {
+			return [
+				'error' => [
+					'code'    => 'post_password_required',
+					'message' => esc_html__( 'This post is password protected.', 'seo-by-rank-math' ),
 				],
 			];
 		}

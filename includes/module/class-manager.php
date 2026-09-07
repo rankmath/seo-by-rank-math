@@ -300,6 +300,12 @@ class Manager {
 			'class' => 'RankMath\Robots_Txt',
 		];
 
+		$modules['agent'] = [
+			'title' => esc_html__( 'Agent', 'seo-by-rank-math' ),
+			'only'  => 'internal',
+			'class' => 'RankMath\Agent\Agent',
+		];
+
 		$modules['version-control'] = [
 			'title' => esc_html__( 'Version Control', 'seo-by-rank-math' ),
 			'only'  => 'internal',

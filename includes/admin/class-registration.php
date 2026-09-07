@@ -146,7 +146,7 @@ class Registration {
 				exit;
 			}
 
-			// Redirect to the wizard is registration successful.
+			// Redirect to the wizard if registration successful.
 			if ( Param::get( 'page' ) === 'rank-math-registration' ) {
 				return Helper::get_admin_url( 'wizard' );
 			}

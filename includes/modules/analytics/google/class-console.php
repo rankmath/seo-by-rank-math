@@ -305,23 +305,26 @@ class Console extends Analytics {
 	/**
 	 * Get site url.
 	 *
+	 * @param boolean $raw Return raw url.
 	 * @return string
 	 */
-	public static function get_site_url() {
-		static $rank_math_site_url;
+	public static function get_site_url( $raw = false ) {
+		static $rank_math_site_url = [];
 
-		if ( is_null( $rank_math_site_url ) ) {
-			$default            = trailingslashit( strtolower( home_url() ) );
-			$rank_math_site_url = get_option( 'rank_math_google_analytic_profile', [ 'profile' => $default ] );
-			$rank_math_site_url = empty( $rank_math_site_url['profile'] ) ? $default : $rank_math_site_url['profile'];
+		if ( ! isset( $rank_math_site_url[ $raw ] ) ) {
+			$default  = trailingslashit( strtolower( home_url() ) );
+			$site_url = get_option( 'rank_math_google_analytic_profile', [ 'profile' => $default ] );
+			$site_url = empty( $site_url['profile'] ) ? $default : $site_url['profile'];
 
-			if ( Str::contains( 'sc-domain:', $rank_math_site_url ) ) {
-				$rank_math_site_url = str_replace( 'sc-domain:', '', $rank_math_site_url );
-				$rank_math_site_url = ( is_ssl() ? 'https://' : 'http://' ) . $rank_math_site_url;
+			if ( ! $raw && Str::contains( 'sc-domain:', $site_url ) ) {
+				$site_url = str_replace( 'sc-domain:', '', $site_url );
+				$site_url = ( is_ssl() ? 'https://' : 'http://' ) . $site_url;
 			}
+
+			$rank_math_site_url[ $raw ] = $site_url;
 		}
 
-		return $rank_math_site_url;
+		return $rank_math_site_url[ $raw ];
 	}
 
 	/**

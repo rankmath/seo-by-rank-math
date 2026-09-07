@@ -7,8 +7,8 @@ import { __ } from '@wordpress/i18n'
  * Internal dependencies
  */
 import './style.scss'
-import { StatusButton, TextControl } from '@rank-math/components'
-import NotRegistered from './NotRegistered'
+import { StatusButton, TextControl, ConnectAccountBody } from '@rank-math/components'
+import getLink from '@helpers/getLink'
 
 export default ( { config = {} } ) => {
 	const { isSiteConnected, registerProductNonce } = config
@@ -47,7 +47,17 @@ export default ( { config = {} } ) => {
 						value={ registerProductNonce }
 					/>
 
-					<NotRegistered activateUrl={ activateUrl } isSiteUrlValid={ isSiteUrlValid } />
+					<ConnectAccountBody
+						description={ __(
+							'Connect your account for free to start tracking your brand\'s AI visibility.',
+							'seo-by-rank-math'
+						) }
+						helpLink={ getLink( 'ai-visibility-connect', 'AI Visibility Connect' ) }
+						activateUrl={ activateUrl }
+						isSiteUrlValid={ isSiteUrlValid }
+						note={ __( 'Takes less than 30 seconds to get started', 'seo-by-rank-math' ) }
+						noteClassName={ `${ ns }-not-registered-note` }
+					/>
 				</form>
 			</div>
 		</div>

@@ -12,6 +12,7 @@ namespace RankMath\Abilities\Schema;
 
 use RankMath\Abilities\Ability_Interface;
 use RankMath\Helper;
+use RankMath\Rest\Rest_Helper;
 use RankMath\Schema\DB;
 
 defined( 'ABSPATH' ) || exit;
@@ -113,9 +114,14 @@ class Get_Post_Schema implements Ability_Interface {
 	public function execute( array $input = [] ): array {
 		$post_id = absint( $input['post_id'] );
 		$include = (bool) ( $input['include_available_types'] ?? true );
+		$post    = $post_id ? get_post( $post_id ) : null;
 
-		if ( 0 === $post_id ) {
+		if ( ! $post ) {
 			return [ 'error' => esc_html__( 'Invalid post ID.', 'seo-by-rank-math' ) ];
+		}
+
+		if ( ! Rest_Helper::can_edit_post( $post ) ) {
+			return [ 'error' => esc_html__( 'Sorry, you are not allowed to edit this post.', 'seo-by-rank-math' ) ];
 		}
 
 		$schemas      = DB::get_schemas( $post_id );

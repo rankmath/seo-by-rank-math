@@ -37,7 +37,7 @@ export default ( { activateUrl = '', isSiteUrlValid = true } ) => {
 				</Button>
 			</div>
 
-			<p className={ `${ ns }-note` }>{ __( 'Takes less than 30 seconds to get started', 'seo-by-rank-math' ) }</p>
+			<p className={ `${ ns }-note` }>{ __( 'Connect your account for free, it takes less than 30 seconds to get started', 'seo-by-rank-math' ) }</p>
 		</>
 	)
 }

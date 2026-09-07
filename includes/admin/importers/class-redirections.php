@@ -11,6 +11,7 @@
 namespace RankMath\Admin\Importers;
 
 use RankMath\Helper;
+use RankMath\Installer;
 use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Redirections\Redirection;
@@ -57,6 +58,9 @@ class Redirections extends Plugin_Importer {
 		if ( empty( $rows ) ) {
 			return false;
 		}
+
+		// Ensure the redirections tables exist before saving, since the module may not be active yet.
+		Installer::create_tables( [ 'redirections' ] );
 
 		foreach ( (array) $rows as $row ) {
 			$item = Redirection::from(

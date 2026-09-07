@@ -1,0 +1,1 @@
+!function(){"use strict";const e=wp.element,t=window.rankMathComponents;document.addEventListener("DOMContentLoaded",function(){var n=document.getElementById("rank-math-support-agent-header");n&&(0,e.createRoot)(n).render(wp.element.createElement(t.DashboardHeader,{page:"support"}))})}();

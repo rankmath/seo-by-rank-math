@@ -297,13 +297,24 @@ class Local_Seo {
 			return false;
 		}
 
+		$days = [
+			'Monday'    => 'Mo',
+			'Tuesday'   => 'Tu',
+			'Wednesday' => 'We',
+			'Thursday'  => 'Th',
+			'Friday'    => 'Fr',
+			'Saturday'  => 'Sa',
+			'Sunday'    => 'Su',
+		];
+
 		$opening_hours = [];
 		foreach ( $hours as $hour ) {
 			if ( empty( $hour['time'] ) ) {
 				continue;
 			}
 
-			$opening_hours[ $hour['time'] ][] = ! empty( $hour['day'] ) ? esc_html( $hour['day'] ) : 'Monday';
+			$day                              = ! empty( $hour['day'] ) ? $hour['day'] : 'Monday';
+			$opening_hours[ $hour['time'] ][] = isset( $days[ $day ] ) ? $days[ $day ] : esc_html( $day );
 		}
 
 		return $opening_hours;
