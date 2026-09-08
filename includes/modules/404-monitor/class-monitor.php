@@ -201,7 +201,8 @@ class Monitor {
 		}
 
 		foreach ( $excludes as $rule ) {
-			$rule['exclude'] = empty( $rule['exclude'] ) ? '' : $this->sanitize_exclude_pattern( $rule['exclude'], $rule['comparison'] );
+			$rule['comparison'] = empty( $rule['comparison'] ) ? 'exact' : $rule['comparison'];
+			$rule['exclude']    = empty( $rule['exclude'] ) ? '' : $this->sanitize_exclude_pattern( $rule['exclude'], $rule['comparison'] );
 
 			if ( ! empty( $rule['exclude'] ) && Str::comparison( $rule['exclude'], $uri, $rule['comparison'] ) ) {
 				return true;

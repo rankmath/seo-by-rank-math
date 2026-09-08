@@ -137,6 +137,7 @@ class KB {
 		'yandex-verification-kb'          => 'https://rankmath.com/kb/verifying-your-domain-with-yandex/',
 		'norton-verification-kb'          => 'https://rankmath.com/kb/verify-site-with-norton-safe-web/',
 		'pinterest-verification-kb'       => 'https://rankmath.com/kb/pinterest-site-verification/',
+		'mcp-tools-kb'                    => 'https://rankmath.com/kb/mcp-tools/',
 
 		// SEO Analysis.
 		'analysis-site-tagline'           => 'https://rankmath.com/kb/seo-analysis/?#site-tagline-test',

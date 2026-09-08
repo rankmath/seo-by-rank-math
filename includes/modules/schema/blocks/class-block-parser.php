@@ -45,7 +45,7 @@ class Block_Parser {
 	 * @return array
 	 */
 	public function parse( $data ) {
-		if ( ! function_exists( 'parse_blocks' ) || ! is_singular() ) {
+		if ( ! function_exists( 'parse_blocks' ) || ! is_singular() || post_password_required() ) {
 			return $data;
 		}
 

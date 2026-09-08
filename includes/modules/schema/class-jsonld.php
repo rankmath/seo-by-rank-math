@@ -710,6 +710,10 @@ class JsonLD {
 			return $description;
 		}
 
+		if ( post_password_required( $product->get_id() ) ) {
+			return '';
+		}
+
 		$product_object = get_post( $product->get_id() );
 		$description    = Paper::get_from_options( 'pt_product_description', $product_object, '%excerpt%' );
 

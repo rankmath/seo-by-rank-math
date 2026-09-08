@@ -263,8 +263,11 @@ class Slack extends OpenGraph {
 
 		$data = [];
 
-		$data[ __( 'Written by', 'seo-by-rank-math' ) ]   = get_the_author();
-		$data[ __( 'Time to read', 'seo-by-rank-math' ) ] = $this->calculate_time_to_read( $post );
+		$data[ __( 'Written by', 'seo-by-rank-math' ) ] = get_the_author();
+
+		if ( ! post_password_required( $post ) ) {
+			$data[ __( 'Time to read', 'seo-by-rank-math' ) ] = $this->calculate_time_to_read( $post );
+		}
 
 		return $data;
 	}
@@ -278,7 +281,10 @@ class Slack extends OpenGraph {
 		global $post;
 
 		$data = [];
-		$data[ __( 'Time to read', 'seo-by-rank-math' ) ] = $this->calculate_time_to_read( $post );
+
+		if ( ! post_password_required( $post ) ) {
+			$data[ __( 'Time to read', 'seo-by-rank-math' ) ] = $this->calculate_time_to_read( $post );
+		}
 
 		return $data;
 	}

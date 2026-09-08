@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.277\n"
+"Project-Id-Version: Rank Math SEO 1.0.278\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-26T10:16:16+00:00\n"
+"POT-Creation-Date: 2026-09-08T05:37:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: seo-by-rank-math\n"
@@ -247,6 +247,42 @@ msgstr ""
 msgid "Abilities to read and manage per-post SEO metadata."
 msgstr ""
 
+msgid "Get redirections"
+msgstr ""
+
+msgid "Returns the redirections for a site."
+msgstr ""
+
+msgid "Filter redirections by status."
+msgstr ""
+
+msgid "The number of redirections to return per page."
+msgstr ""
+
+msgid "The page number to return."
+msgstr ""
+
+msgid "Search redirections by source or target URL."
+msgstr ""
+
+msgid "Redirection counts across all statuses, independent of the status filter applied to items."
+msgstr ""
+
+msgid "Non-trashed redirection counts grouped by HTTP redirect type (header code), e.g. { \"301\": 12, \"302\": 4 }."
+msgstr ""
+
+msgid "Number of redirections included in this response (the size of items)."
+msgstr ""
+
+msgid "The redirections for the requested page."
+msgstr ""
+
+msgid "Redirections"
+msgstr ""
+
+msgid "Abilities to read and manage redirections for a site."
+msgstr ""
+
 msgid "Get post schema"
 msgstr ""
 
@@ -371,6 +407,36 @@ msgid "SEO Analysis"
 msgstr ""
 
 msgid "Abilities to audit and fix site-wide SEO issues."
+msgstr ""
+
+msgid "Get llms.txt"
+msgstr ""
+
+msgid "Returns whether the llms.txt file is enabled, its URL, and the current generated Markdown content."
+msgstr ""
+
+msgid "Whether the llms.txt module is active."
+msgstr ""
+
+msgid "The URL of the llms.txt file."
+msgstr ""
+
+msgid "The generated llms.txt Markdown content. Empty when the module is disabled."
+msgstr ""
+
+msgid "Get robots.txt"
+msgstr ""
+
+msgid "Returns the current robots.txt content managed by Rank Math."
+msgstr ""
+
+msgid "The current robots.txt content: the real file contents when a physical robots.txt exists, otherwise the content Rank Math generates (custom override or computed default)."
+msgstr ""
+
+msgid "Whether a physical robots.txt file exists in the site root."
+msgstr ""
+
+msgid "Whether the site is set to be visible to search engines (Settings > Reading > Search engine visibility)."
 msgstr ""
 
 msgid "Get settings"
@@ -910,6 +976,9 @@ msgstr ""
 msgid "Rank Math"
 msgstr ""
 
+msgid "Help &amp; Support"
+msgstr ""
+
 msgid "Halloween Sale"
 msgstr ""
 
@@ -1436,6 +1505,12 @@ msgstr ""
 msgid "Import Social URLs of your author archive pages."
 msgstr ""
 
+msgid "Import Blocks"
+msgstr ""
+
+msgid "Import and convert all compatible blocks in post contents."
+msgstr ""
+
 msgid "Import Term Meta"
 msgstr ""
 
@@ -1457,6 +1532,9 @@ msgstr ""
 msgid "HTML Sitemap"
 msgstr ""
 
+msgid "No post found."
+msgstr ""
+
 msgid "Import plugin settings, global meta, sitemap settings, etc."
 msgstr ""
 
@@ -1470,12 +1548,6 @@ msgid "Import meta information like titles, descriptions, focus keyword, robots 
 msgstr ""
 
 msgid "Import all the redirections you have already set up in Yoast Premium."
-msgstr ""
-
-msgid "Import Blocks"
-msgstr ""
-
-msgid "Import and convert all compatible blocks in post contents."
 msgstr ""
 
 msgid "Import Locations Settings from Yoast plugin."
@@ -1551,9 +1623,6 @@ msgid "Blocks import failed."
 msgstr ""
 
 msgid "Plugin settings and site-wide meta data."
-msgstr ""
-
-msgid "No post found."
 msgstr ""
 
 msgid "Link Suggestions"
@@ -2377,9 +2446,6 @@ msgstr ""
 msgid "Dominate the search results for the local audiences by optimizing your website for Local SEO and it also helps you to acquire the Knowledge Graph."
 msgstr ""
 
-msgid "Redirections"
-msgstr ""
-
 msgid "Redirect non-existent content easily with 301 and 302 status code. This can help improve your site ranking. Also supports many other response codes."
 msgstr ""
 
@@ -2474,9 +2540,6 @@ msgid "Let Rank Math analyze your website and your website's content using 28+ d
 msgstr ""
 
 msgid "Robots Txt"
-msgstr ""
-
-msgid "Agent"
 msgstr ""
 
 msgid "Version Control"
@@ -2739,34 +2802,6 @@ msgid "Ignore Query Parameters"
 msgstr ""
 
 msgid "Turn ON to ignore all query parameters (the part after a question mark in a URL) when logging 404 errors."
-msgstr ""
-
-msgid "Help & Support"
-msgstr ""
-
-msgid "Connect your Rank Math account for free to start using the Help & Support assistant."
-msgstr ""
-
-msgid "Account Connection Required"
-msgstr ""
-
-msgid "Not Connected"
-msgstr ""
-
-msgid "Connect Now"
-msgstr ""
-
-msgid "Takes less than 30 seconds to get started"
-msgstr ""
-
-msgid "No authenticated WordPress user."
-msgstr ""
-
-msgid "Connect your Rank Math account before using the AI assistant."
-msgstr ""
-
-#. translators: %d: HTTP status code
-msgid "GRND exchange with the Rank Math issuer failed (HTTP %d)."
 msgstr ""
 
 msgid "New!"
@@ -7249,6 +7284,12 @@ msgstr ""
 msgid "Need help? View tutorial →"
 msgstr ""
 
+msgid "Connect Now"
+msgstr ""
+
+msgid "Not Connected"
+msgstr ""
+
 msgid "I just installed @RankMathSEO #WordPress Plugin. It looks great! %s"
 msgstr ""
 
@@ -7877,6 +7918,9 @@ msgid "Install Version "
 msgstr ""
 
 msgid "Reinstalling, please wait…"
+msgstr ""
+
+msgid "MCP Setup"
 msgstr ""
 
 msgid "Are you sure? You want to reset settings."
@@ -9232,7 +9276,13 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
+msgid "Account Connection Required"
+msgstr ""
+
 msgid "Connect your account for free to start tracking your brand's AI visibility."
+msgstr ""
+
+msgid "Takes less than 30 seconds to get started"
 msgstr ""
 
 msgid "Content AI score"

@@ -120,12 +120,11 @@ class LLMS_Txt {
 	 * @return void
 	 */
 	public function output() {
-		if ( headers_sent() ) {
-			return;
+		if ( ! headers_sent() ) {
+			header( 'Content-Type: text/plain; charset=utf-8' );
+			header( 'X-Robots-Tag: noindex, nofollow', true );
 		}
 
-		header( 'Content-Type: text/plain; charset=utf-8' );
-		header( 'X-Robots-Tag: noindex, nofollow', true );
 		/**
 		 * Fires before the llms.txt output is sent to the browser.
 		 *

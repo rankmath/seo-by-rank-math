@@ -77,6 +77,8 @@ class Subscriber implements Subscriber_Interface {
 		$classes = [
 			Get_Settings::class,
 			Get_System_Status::class,
+			Get_Llms_Txt::class,
+			Get_Robots_Txt::class,
 			Set_Website_Identity::class,
 			Set_Global_Seo_Settings::class,
 			Set_Homepage_Seo::class,
