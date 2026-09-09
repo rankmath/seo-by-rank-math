@@ -26,6 +26,21 @@ class Url {
 	 *
 	 * @return bool
 	 */
+    public static function urlEncode($url) {
+        $parsedUrl = parse_url($url);
+
+        $encodedScheme = urlencode($parsedUrl['scheme']);
+        $encodedHost = urlencode($parsedUrl['host']);
+
+        $encodedPath = implode('/', array_map('urlencode', explode('/', $parsedUrl['path'])));
+        if (isset($parsedUrl['query'])) {
+            $encodedQuery = '?' . urlencode($parsedUrl['query']);
+        } else {
+            $encodedQuery = '';
+        }
+
+        return "{$encodedScheme}://{$encodedHost}{$encodedPath}{$encodedQuery}";
+    }
 	public static function is_url( $url ) {
 		if ( ! is_string( $url ) ) {
 			return false;
@@ -40,9 +55,8 @@ class Url {
 		if ( 0 === strpos( $url, '//' ) ) {
 			$url = 'http:' . $url;
 		}
-
 		// Must pass validation.
-		return false !== filter_var( trailingslashit( $url ), FILTER_VALIDATE_URL ) ? true : false;
+		return false !== filter_var( trailingslashit( self::urlEncode($url) ), FILTER_VALIDATE_URL ) ? true : false;
 	}
 
 	/**
