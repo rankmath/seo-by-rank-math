@@ -476,8 +476,8 @@ class JsonLD {
 			return;
 		}
 
-		$entity['logo']['width']  = $attachment['width'];
-		$entity['logo']['height'] = $attachment['height'];
+		$entity['logo']['width']  = $attachment['width'] ?: 0;
+		$entity['logo']['height'] = $attachment['height'] ?: 0;
 	}
 
 	/**
