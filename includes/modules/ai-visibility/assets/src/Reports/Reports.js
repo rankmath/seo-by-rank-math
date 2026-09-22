@@ -136,7 +136,11 @@ const Reports = () => {
 					rows[ 0 ].competitors = ( data?.insights?.competitors ?? [] ).map( ( c ) => c.name )
 					rows[ 0 ].queries = ( data?.insights?.query_results ?? [] ).map( ( q ) => ( {
 						query: q.query_text ?? '',
+						platform: q.platform ?? null,
 						response: q.response ?? '',
+						found: q.found ?? null,
+						sentiment_score: q.sentiment ?? null,
+						citations_count: q.citations ?? null,
 					} ) )
 				} catch {
 					// Competitors and queries are nice-to-have in the report — ignore.

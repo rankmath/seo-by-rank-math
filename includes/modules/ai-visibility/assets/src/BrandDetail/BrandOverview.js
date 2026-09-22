@@ -50,7 +50,7 @@ const BrandOverview = ( { brand, insights = null, loading = false } ) => {
 						: placeholder
 					}
 					tooltip={ __( 'AI Visibility Score for this brand across AI platforms.', 'seo-by-rank-math' ) }
-					analysis={ insights?.analysis }
+					analysis={ insights?.analyses?.[ 0 ] }
 				/>
 
 				<StatCard
@@ -71,7 +71,7 @@ const BrandOverview = ( { brand, insights = null, loading = false } ) => {
 						: placeholder
 					}
 					tooltip={ __( 'Average sentiment score across all AI mentions of this brand.', 'seo-by-rank-math' ) }
-					analysis={ insights?.analysis }
+					analysis={ insights?.analyses?.[ 0 ] }
 				/>
 
 				<StatCard
@@ -98,7 +98,7 @@ const BrandOverview = ( { brand, insights = null, loading = false } ) => {
 					label={ __( 'Top Competitor', 'seo-by-rank-math' ) }
 					value={ topCompetitor || placeholder }
 					tooltip={ __( 'The competitor brand with the highest share of voice in AI mentions.', 'seo-by-rank-math' ) }
-					analysis={ insights?.analysis }
+					analysis={ insights?.analyses?.[ 0 ] }
 				/>
 			</div>
 

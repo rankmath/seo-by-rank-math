@@ -34,7 +34,7 @@ import './StatCard.scss'
  * @return {JSX.Element} Stat card with icon, label, value, and optional trend.
  */
 const StatCard = ( { icon, label, value, tooltip, sub, compact = false, className = '', analysis = null } ) => {
-	const hasData = ( analysis?.status && analysis?.status === 'done' ) ?? ( value !== null && value !== undefined && value !== '' && value !== '—' )
+	const hasData = ( analysis?.status && ( analysis?.status === 'done' || analysis?.status === 'partial' ) ) ?? ( value !== null && value !== undefined && value !== '' && value !== '—' )
 
 	const ns = 'rank-math-ai-visibility-stat-card'
 

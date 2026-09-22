@@ -271,7 +271,7 @@ class Post_Type implements Provider {
 	 *
 	 * @return int
 	 */
-	protected function get_post_type_count( $post_types ) {
+	public function get_post_type_count( $post_types ) {
 		global $wpdb;
 
 		$posts_to_exclude = 'page' === $post_types ? $this->get_blog_page_id() : '';

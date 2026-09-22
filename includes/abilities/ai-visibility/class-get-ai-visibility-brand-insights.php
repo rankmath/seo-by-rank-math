@@ -109,7 +109,6 @@ class Get_AI_Visibility_Brand_Insights implements Ability_Interface {
 
 		$cached = Cache::get_analysis( $brand_id );
 
-		// Cache miss or stale — signal the caller to trigger a fetch via the REST endpoint.
 		if ( false === $cached || Cache::is_brand_stale( $brand_id ) ) {
 			rank_math()->tracking->track_ability_executed(
 				'AI Visibility Brand Insights Fetched',
@@ -175,31 +174,38 @@ class Get_AI_Visibility_Brand_Insights implements Ability_Interface {
 					'type'        => [ 'number', 'null' ],
 					'description' => 'Total number of AI citations.',
 				],
-				'analysis'      => [
-					'type'        => [ 'object', 'null' ],
-					'description' => 'Metadata about the latest analysis run.',
-					'properties'  => [
-						'id'               => [
-							'type'        => [ 'string', 'null' ],
-							'description' => 'Analysis UUID.',
-						],
-						'status'           => [
-							'type'        => [ 'string', 'null' ],
-							'description' => 'Analysis status (e.g. done, processing, error).',
-						],
-						'started_at'       => [
-							'type'        => [ 'string', 'null' ],
-							'format'      => 'date-time',
-							'description' => 'ISO 8601 datetime when the analysis started.',
-						],
-						'finished_at'      => [
-							'type'        => [ 'string', 'null' ],
-							'format'      => 'date-time',
-							'description' => 'ISO 8601 datetime when the analysis completed.',
-						],
-						'duration_seconds' => [
-							'type'        => [ 'number', 'null' ],
-							'description' => 'How long the analysis took in seconds.',
+				'analyses'      => [
+					'type'        => 'array',
+					'description' => 'The latest completed analysis for each tracked AI platform (one entry per platform).',
+					'items'       => [
+						'type'       => 'object',
+						'properties' => [
+							'id'               => [
+								'type'        => [ 'string', 'null' ],
+								'description' => 'Analysis UUID.',
+							],
+							'platform'         => [
+								'type'        => [ 'string', 'null' ],
+								'description' => 'AI platform this analysis ran on (e.g. chatgpt, gemini).',
+							],
+							'status'           => [
+								'type'        => [ 'string', 'null' ],
+								'description' => 'Analysis status (e.g. done, processing, error).',
+							],
+							'started_at'       => [
+								'type'        => [ 'string', 'null' ],
+								'format'      => 'date-time',
+								'description' => 'ISO 8601 datetime when the analysis started.',
+							],
+							'finished_at'      => [
+								'type'        => [ 'string', 'null' ],
+								'format'      => 'date-time',
+								'description' => 'ISO 8601 datetime when the analysis completed.',
+							],
+							'duration_seconds' => [
+								'type'        => [ 'number', 'null' ],
+								'description' => 'How long the analysis took in seconds.',
+							],
 						],
 					],
 				],
@@ -242,6 +248,10 @@ class Get_AI_Visibility_Brand_Insights implements Ability_Interface {
 							'query_text'      => [
 								'type'        => 'string',
 								'description' => 'The query that was submitted to the AI model.',
+							],
+							'platform'        => [
+								'type'        => [ 'string', 'null' ],
+								'description' => 'AI platform that produced this result (e.g. chatgpt, gemini).',
 							],
 							'found'           => [
 								'type'        => 'boolean',

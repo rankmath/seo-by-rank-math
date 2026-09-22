@@ -18,6 +18,8 @@ use RankMath\Abilities\Analytics\Subscriber as Analytics_Subscriber;
 use RankMath\Abilities\AI_Visibility\Subscriber as AI_Visibility_Subscriber;
 use RankMath\Abilities\Settings\Subscriber as Settings_Subscriber;
 use RankMath\Abilities\Content_Analysis\Subscriber as Content_Analysis_Subscriber;
+use RankMath\Abilities\Sitemap\Subscriber as Sitemap_Subscriber;
+use RankMath\Abilities\Monitor_404\Subscriber as Monitor_404_Subscriber;
 use RankMath\Abilities\Redirections\Subscriber as Redirections_Subscriber;
 
 defined( 'ABSPATH' ) || exit;
@@ -74,6 +76,8 @@ class Abilities {
 			new AI_Visibility_Subscriber( $shared_meta ),
 			new Settings_Subscriber( $shared_meta ),
 			new Content_Analysis_Subscriber( $shared_meta ),
+			new Sitemap_Subscriber( $shared_meta ),
+			new Monitor_404_Subscriber( $shared_meta ),
 			new Redirections_Subscriber( $shared_meta ),
 		];
 

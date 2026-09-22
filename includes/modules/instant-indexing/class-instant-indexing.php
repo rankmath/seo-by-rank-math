@@ -326,14 +326,13 @@ class Instant_Indexing extends Base {
 		}
 
 		if ( Sitepress::get()->is_active() ) {
-			$details = apply_filters( 'wpml_post_language_details', null, $post_id );
-			$code    = $details['language_code'] ?? '';
-			$url     = apply_filters( 'wpml_permalink', get_the_permalink( $post_id ), $code );
+			$url = Sitepress::get()->get_permalink( $post_id );
 
 			$sitepress = Sitepress::get()->get_var();
 			$urls      = $sitepress->get_setting( 'urls' );
 			if ( isset( $urls['directory_for_default_language'] ) && $urls['directory_for_default_language'] ) {
-				$lang = $sitepress->get_current_language();
+				$details = apply_filters( 'wpml_post_language_details', null, $post_id );
+				$lang    = $details['language_code'] ?? $sitepress->get_current_language();
 				if ( 0 !== strpos( $url, '/' . $lang ) ) {
 					$url = get_home_url() . $post->post_name;
 				}

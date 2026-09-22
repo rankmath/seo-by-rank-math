@@ -11,6 +11,7 @@
 namespace RankMath\Abilities\Link_Genius;
 
 use RankMath\Abilities\Ability_Interface;
+use RankMath\Rest\Rest_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -117,6 +118,15 @@ class Get_Post_Links implements Ability_Interface {
 	 */
 	public function execute( array $input = [] ): array {
 		$post_id = absint( $input['post_id'] ?? 0 );
+		$post    = $post_id ? get_post( $post_id ) : null;
+
+		if ( ! $post ) {
+			return [ 'error' => esc_html__( 'Invalid post ID.', 'seo-by-rank-math' ) ];
+		}
+
+		if ( ! Rest_Helper::can_edit_post( $post ) ) {
+			return [ 'error' => esc_html__( 'Sorry, you are not allowed to edit this post.', 'seo-by-rank-math' ) ];
+		}
 
 		$result = $this->runner->run(
 			[
@@ -225,6 +235,9 @@ class Get_Post_Links implements Ability_Interface {
 							'description' => 'Number of external links returned.',
 						],
 					],
+				],
+				'error'    => [
+					'type' => 'string',
 				],
 			],
 		];

@@ -15,6 +15,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Admin\Page;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Helpers\Param;
+use RankMath\AI_Visibility\Api\Brands_Controller;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -90,6 +91,10 @@ class Admin {
 							'isSiteUrlValid'  => Admin_Helper::is_site_url_valid(),
 							'isPro'           => defined( 'RANK_MATH_PRO_FILE' ),
 							'plan'            => Helper::get_content_ai_plan(),
+							'languages'       => Helper::get_content_ai_languages(),
+							'defaultLanguage' => Helper::content_ai_default_language(),
+							'platforms'       => Platforms::all(),
+							'maxPlatforms'    => Platforms::max_selectable(),
 							'locales'         => array_values(
 								array_filter(
 									array_map(
@@ -111,11 +116,43 @@ class Admin {
 									)
 								)
 							),
+							'intervals'       => $this->get_intervals(),
 						],
 					],
 				],
 			]
 		);
+	}
+
+	/**
+	 * Get the available intervals for AI Visibility.
+	 *
+	 * @return array
+	 */
+	private function get_intervals() {
+		$allowed = Brands_Controller::get_allowed_intervals();
+
+		$intervals = [
+			[
+				'label' => esc_html__( 'Daily', 'seo-by-rank-math' ),
+				'value' => 'daily',
+			],
+			[
+				'label' => esc_html__( 'Weekly', 'seo-by-rank-math' ),
+				'value' => 'weekly',
+			],
+			[
+				'label' => esc_html__( 'Monthly', 'seo-by-rank-math' ),
+				'value' => 'monthly',
+			],
+		];
+
+		foreach ( $intervals as &$interval ) {
+			$interval['disabled'] = ! in_array( $interval['value'], $allowed, true );
+		}
+		unset( $interval );
+
+		return $intervals;
 	}
 
 	/**

@@ -173,6 +173,10 @@ const TranscriptViewer = ( {
 			if ( e.query ) {
 				label = e.query.length > 60 ? e.query.slice( 0, 60 ) + '…' : e.query
 			}
+			// Append platform — multiple platforms can share the same query text.
+			if ( e.platform ) {
+				label += ` — ${ e.platform }`
+			}
 			return { label, value: String( e.id ) }
 		} ),
 	], [ entries ] )

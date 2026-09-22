@@ -35,8 +35,8 @@ const getErrorMessage = () => {
 	if ( ! rankMath.contentAI.plan ) {
 		return (
 			<>
-				{ __( 'You do not have a Content AI plan.', 'seo-by-rank-math' ) }
-				<a href="https://rankmath.com/kb/how-to-use-content-ai/?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Plan+Button&utm_campaign=WP">
+				{ __( 'You do not have a Rank Math AI plan.', 'seo-by-rank-math' ) }
+				<a href="https://rankmath.com/ai/pricing/?utm_source=Plugin&utm_medium=Buy+Plan+Button&utm_campaign=WP">
 					{ __( 'Choose your plan', 'seo-by-rank-math' ) }
 				</a>
 			</>
@@ -45,8 +45,8 @@ const getErrorMessage = () => {
 
 	return (
 		<>
-			{ __( 'You have exhausted your Content AI Credits.', 'seo-by-rank-math' ) }
-			<a href="https://rankmath.com/kb/how-to-use-content-ai/?play-video=ioPeVIntJWw&utm_source=Plugin&utm_medium=Buy+Credits+Button&utm_campaign=WP" target="_blank" rel="noreferrer">
+			{ __( 'You have exhausted your Rank Math AI Usage.', 'seo-by-rank-math' ) }
+			<a href="https://rankmath.com/ai/pricing/?utm_source=Plugin&utm_medium=Buy+Credits+Button&utm_campaign=WP" target="_blank" rel="noreferrer">
 				{ __( 'Get more', 'seo-by-rank-math' ) }
 			</a>
 		</>

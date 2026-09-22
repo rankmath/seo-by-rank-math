@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.278\n"
+"Project-Id-Version: Rank Math SEO 1.0.279\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-08T05:37:53+00:00\n"
+"POT-Creation-Date: 2026-09-22T04:13:08+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: seo-by-rank-math\n"
@@ -46,7 +46,8 @@ msgstr ""
 msgid "Create AI Visibility brand"
 msgstr ""
 
-msgid "Creates a new brand for AI Visibility monitoring, triggering an initial analysis automatically."
+#. translators: %s: supported platform IDs.
+msgid "Creates a new brand for AI Visibility monitoring, triggering an initial analysis automatically. Ask which AI platforms to track. Supported platforms: %s. Selecting more than one requires the Expert plan; other plans may choose only one."
 msgstr ""
 
 msgid "Brand name."
@@ -59,6 +60,16 @@ msgid "Short description of the brand or product."
 msgstr ""
 
 msgid "ISO 3166-1 alpha-2 country code (e.g. \"US\", \"HU\"). Defaults to no country filter."
+msgstr ""
+
+msgid "Language the brand should be analyzed in (e.g. \"US English\", \"French\"). Required; immutable after creation — ask the user which language to use."
+msgstr ""
+
+msgid "Analysis refresh cadence. Defaults to the account plan's default when omitted."
+msgstr ""
+
+#. translators: %s: supported platform IDs.
+msgid "AI platforms to track. Supported: %s. Selecting more than one requires the Expert plan; otherwise choose exactly one. Do not assume a default — ask the user which platform(s) to use."
 msgstr ""
 
 msgid "Get AI Visibility brand insights"
@@ -223,6 +234,9 @@ msgstr ""
 msgid "ID of the post whose links to retrieve."
 msgstr ""
 
+msgid "Invalid post ID."
+msgstr ""
+
 msgid "Upgrade to Rank Math PRO to unlock broken link detection, redirect chain analysis, and HTTP status distribution from the AI Link Genius audit."
 msgstr ""
 
@@ -230,6 +244,39 @@ msgid "AI Link Genius"
 msgstr ""
 
 msgid "Abilities to retrieve and analyse internal and external link data for posts."
+msgstr ""
+
+msgid "Get 404 logs"
+msgstr ""
+
+msgid "Returns the 404 error monitor log entries, with hit counts and referer/user-agent data."
+msgstr ""
+
+msgid "The number of log entries to return per page."
+msgstr ""
+
+msgid "The page number to return."
+msgstr ""
+
+msgid "Field to order results by."
+msgstr ""
+
+msgid "Sort direction."
+msgstr ""
+
+msgid "Log counts across the entire table, independent of pagination."
+msgstr ""
+
+msgid "Number of log entries included in this response (the size of items)."
+msgstr ""
+
+msgid "The 404 log entries for the requested page."
+msgstr ""
+
+msgid "404 Monitor"
+msgstr ""
+
+msgid "Abilities to inspect the 404 error monitor log."
 msgstr ""
 
 msgid "Get post SEO metadata"
@@ -257,9 +304,6 @@ msgid "Filter redirections by status."
 msgstr ""
 
 msgid "The number of redirections to return per page."
-msgstr ""
-
-msgid "The page number to return."
 msgstr ""
 
 msgid "Search redirections by source or target URL."
@@ -293,9 +337,6 @@ msgid "The ID of the post to retrieve schema markup for."
 msgstr ""
 
 msgid "When true (default), includes the schema types available on this install. Always pass true when evaluating which schema to add."
-msgstr ""
-
-msgid "Invalid post ID."
 msgstr ""
 
 msgid "This schema type requires Rank Math PRO. Upgrade at rankmath.com/pro to unlock Movie, Dataset, Fact Check, and custom schema types."
@@ -841,6 +882,27 @@ msgid "Settings"
 msgstr ""
 
 msgid "Abilities to read and configure Rank Math plugin settings."
+msgstr ""
+
+msgid "Get sitemap status"
+msgstr ""
+
+msgid "Returns whether the XML sitemap is enabled, the sitemap index URL, and the active sitemap types (post types, taxonomies, and the Local SEO sitemap, when active) with their URLs and estimated entry counts."
+msgstr ""
+
+msgid "Whether the XML sitemap module is active."
+msgstr ""
+
+msgid "The URL of the sitemap index file."
+msgstr ""
+
+msgid "The active sitemap types, e.g. post types, taxonomies, and the Local SEO sitemap (PRO adds news/video when active)."
+msgstr ""
+
+msgid "Sitemap"
+msgstr ""
+
+msgid "Abilities to inspect the XML sitemap status."
 msgstr ""
 
 msgid "Rank Math Dashboard"
@@ -2370,7 +2432,7 @@ msgstr ""
 msgid "Please update the Rank Math SEO plugin to the latest version to use this feature."
 msgstr ""
 
-msgid "This feature is only available for Content AI subscribers."
+msgid "This feature is only available for Rank Math AI subscribers."
 msgstr ""
 
 msgid "Oops! Too many requests in a short time. Please try again after some time."
@@ -2437,9 +2499,6 @@ msgstr ""
 msgid "Items per page"
 msgstr ""
 
-msgid "404 Monitor"
-msgstr ""
-
 msgid "Records the URLs on which visitors & search engines run into 404 Errors. You can also turn on Redirections to redirect the error causing URLs to other URLs."
 msgstr ""
 
@@ -2453,9 +2512,6 @@ msgid "Schema (Structured Data)"
 msgstr ""
 
 msgid "Enable support for the structured data, which adds Schema code in your website, resulting in rich search results, better CTR and more traffic."
-msgstr ""
-
-msgid "Sitemap"
 msgstr ""
 
 msgid "Enable Rank Math's sitemap feature, which helps search engines intelligently crawl your website's content. It also supports hreflang tag."
@@ -2627,7 +2683,7 @@ msgstr ""
 msgid "Unlimited personal websites"
 msgstr ""
 
-msgid "Free 15-Day Content AI Trial"
+msgid "Free 15-day Rank Math AI Trial"
 msgstr ""
 
 msgid "Track 500 Keywords"
@@ -2811,6 +2867,15 @@ msgstr ""
 msgid "AI Visibility %s"
 msgstr ""
 
+msgid "Daily"
+msgstr ""
+
+msgid "Weekly"
+msgstr ""
+
+msgid "Monthly"
+msgstr ""
+
 msgid "Rank Math account not connected. Please connect your account and try again."
 msgstr ""
 
@@ -2819,6 +2884,10 @@ msgid "AI Visibility API returned an unexpected status: %d"
 msgstr ""
 
 msgid "AI Visibility API returned an invalid response."
+msgstr ""
+
+#. translators: %s: comma-separated list of allowed cadences.
+msgid "The selected analysis frequency is not available on your plan. Allowed frequencies: %s. Upgrade your plan to unlock more frequency options."
 msgstr ""
 
 msgid "Brand UUID."
@@ -2836,10 +2905,19 @@ msgstr ""
 msgid "ISO 3166-1 alpha-2 country code (e.g. \"US\", \"HU\")."
 msgstr ""
 
+msgid "Output language to use when analyzing/generating content for this brand. Independent of `locale` (target country). Required; immutable after creation."
+msgstr ""
+
+msgid "Analysis refresh cadence. Omitted → backend applies the account plan's default."
+msgstr ""
+
 msgid "Query UUID."
 msgstr ""
 
 msgid "Whether the query is enabled for analysis."
+msgstr ""
+
+msgid "Please select a language for this brand."
 msgstr ""
 
 msgid "No fields to update."
@@ -2852,6 +2930,22 @@ msgid "Your AI Visibility trial has been activated."
 msgstr ""
 
 msgid "We could not activate your trial. Please try again."
+msgstr ""
+
+#. translators: %s: supported platform IDs.
+msgid "AI platforms to track for this brand. Supported values: %s. Tracking more than one platform per brand requires the Expert plan."
+msgstr ""
+
+#. translators: %s: supported platform IDs.
+msgid "Please specify which AI platforms to track. Supported values: %s."
+msgstr ""
+
+#. translators: %s: supported platform IDs.
+msgid "No valid AI platforms were provided. Supported values: %s."
+msgstr ""
+
+#. translators: 1: platforms allowed on the current plan, 2: supported platform IDs.
+msgid "Your plan allows tracking %1$d AI platform(s) per brand — upgrade to the Expert plan to track more. Supported values: %2$s."
 msgstr ""
 
 msgid "Data fetching cancelled."
@@ -3245,7 +3339,7 @@ msgstr ""
 msgid "Get sophisticated AI suggestions for related Keywords, Questions & Links to include in the SEO meta & Content Area. %s."
 msgstr ""
 
-msgid "Content AI Plan"
+msgid "Rank Math AI Plan"
 msgstr ""
 
 msgid "Content AI Credits"
@@ -3377,7 +3471,7 @@ msgstr ""
 msgid "A list of prompts received from the API to be saved in the database."
 msgstr ""
 
-msgid "Content AI plan to update in the Database."
+msgid "Rank Math AI plan to update in the Database."
 msgstr ""
 
 msgid "Content AI reset date to update in the Database"
@@ -3408,7 +3502,7 @@ msgid "No data found for the researched keyword."
 msgstr ""
 
 #. Translators: link to the update page.
-msgid "There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature."
+msgid "There is a new version of Rank Math AI available! %s the Rank Math SEO plugin to use this feature."
 msgstr ""
 
 msgid "Please update"
@@ -7491,10 +7585,10 @@ msgstr ""
 msgid "Start using Content AI by connecting your RankMath.com Account"
 msgstr ""
 
-msgid "To access this Content AI feature, you need to have an active subscription plan."
+msgid "To access this Content AI feature, you need to have an active Rank Math AI subscription."
 msgstr ""
 
-msgid "To access this Content AI feature, you have to purchase a Content AI Subscription."
+msgid "To access this Content AI feature, you have to purchase a Rank Math AI subscription."
 msgstr ""
 
 msgid "You are one step away from unlocking this premium feature along with many more."
@@ -7563,13 +7657,13 @@ msgstr ""
 msgid " We are sorry for the inconvenience."
 msgstr ""
 
-msgid "⛔️ Content AI Credit Alert!"
+msgid "⛔️ Rank Math AI Usage Alert!"
 msgstr ""
 
-msgid "Your monthly Content AI credits have been fully utilized. You can wait till %s for your credits to refresh or upgrade to continue enjoying seamless content creation"
+msgid "Your monthly Rank Math AI usage has been exhausted. You can wait till %s for your limit to refresh or upgrade to continue enjoying seamless content creation"
 msgstr ""
 
-msgid "Your monthly Content AI credits have been fully utilized. To continue enjoying seamless content creation, simply click the button below to upgrade your plan and access more credits."
+msgid "Your monthly Rank Math AI usage limit has been exhausted. To continue enjoying seamless content creation, simply click the button below to upgrade your plan for higher limits."
 msgstr ""
 
 msgid "Missing Credits?"
@@ -7729,6 +7823,12 @@ msgid "See your Google Search Console, Analytics and AdSense data without leavin
 msgstr ""
 
 msgid "Your llms.txt file is available at: "
+msgstr ""
+
+msgid "Summary"
+msgstr ""
+
+msgid "A short summary of your site, shown as a quote block right below the title in your llms.txt file."
 msgstr ""
 
 msgid "%s (opens in a new tab)"
@@ -8805,15 +8905,6 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
-msgid "Weekly"
-msgstr ""
-
-msgid "Monthly (Coming Soon)"
-msgstr ""
-
-msgid "Daily (Coming Soon)"
-msgstr ""
-
 msgid "Coming Soon"
 msgstr ""
 
@@ -8847,10 +8938,24 @@ msgstr ""
 msgid "Target Country (Optional)"
 msgstr ""
 
+msgid "Output Language"
+msgstr ""
+
+msgid "Language can't be changed after a brand is created."
+msgstr ""
+
 msgid "Frequency of analyses"
 msgstr ""
 
 msgid "AI Platforms"
+msgstr ""
+
+msgid "Your plan lets you track %d platform per brand. Upgrade to Expert to track them all at once."
+msgid_plural "Your plan lets you track %d platforms per brand. Upgrade to Expert to track them all at once."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Select at least one AI platform."
 msgstr ""
 
 msgid "Brand name is required."
@@ -8863,6 +8968,9 @@ msgid "Website URL is required."
 msgstr ""
 
 msgid "Description is required."
+msgstr ""
+
+msgid "Language is required."
 msgstr ""
 
 msgid "Adding…"
@@ -9129,7 +9237,7 @@ msgstr ""
 msgid "Average rank score across all tracked brands."
 msgstr ""
 
-msgid "Analyses in last 24h"
+msgid "Analyses in the last 7 days"
 msgstr ""
 
 msgid "Total analysis runs completed in the past 24 hours."
@@ -9648,7 +9756,7 @@ msgstr ""
 msgid "Upgrade to buy more credits from "
 msgstr ""
 
-msgid "Content AI Pricing."
+msgid "Rank Math AI Pricing."
 msgstr ""
 
 msgid "here."
@@ -9799,9 +9907,6 @@ msgid "Style"
 msgstr ""
 
 msgid "The style of the content."
-msgstr ""
-
-msgid "Output Language"
 msgstr ""
 
 msgid "Topic"
@@ -10635,9 +10740,6 @@ msgstr ""
 msgid "Image URL is missing."
 msgstr ""
 
-msgid "50 Content AI credits will be used to generate the Alt"
-msgstr ""
-
 msgid "Generate With AI"
 msgstr ""
 
@@ -10653,13 +10755,13 @@ msgstr ""
 msgid "Improve Now"
 msgstr ""
 
-msgid "You have exhausted your Content AI Credits."
+msgid "You have exhausted your Rank Math AI Usage."
 msgstr ""
 
 msgid "Get more"
 msgstr ""
 
-msgid "You do not have a Content AI plan."
+msgid "You do not have a Rank Math AI plan."
 msgstr ""
 
 msgid "Choose your plan"
@@ -10786,12 +10888,6 @@ msgid "Update Capabilities"
 msgstr ""
 
 msgid "Select Repeat Frequency"
-msgstr ""
-
-msgid "Daily"
-msgstr ""
-
-msgid "Monthly"
 msgstr ""
 
 msgid "Yearly"

@@ -133,26 +133,6 @@ class Watcher {
 	 * @return string
 	 */
 	public function get_permalink( $post_id ) {
-		$permalink = get_permalink( $post_id );
-
-		if ( ! Sitepress::get()->is_active() ) {
-			return $permalink;
-		}
-
-		$sitepress = Sitepress::get()->get_var();
-
-		$language_domains = $sitepress->get_setting( 'language_domains', [] );
-		if ( ! $language_domains ) {
-			return $permalink;
-		}
-
-		$details   = apply_filters( 'wpml_post_language_details', null, $post_id );
-		$code      = $details['language_code'] ?? '';
-		$permalink = apply_filters( 'wpml_permalink', get_the_permalink( $post_id ), $code );
-		foreach ( $language_domains as $key => $domain ) {
-			$permalink = preg_replace( "#https?://{$domain}#i", '', $permalink );
-		}
-
-		return $permalink;
+		return Sitepress::get()->get_permalink( $post_id );
 	}
 }

@@ -14,7 +14,9 @@ namespace RankMath\AI_Visibility\Api;
 
 use WP_REST_Server;
 use WP_REST_Request;
+use RankMath\Helper;
 use RankMath\AI_Visibility\Cache;
+use RankMath\AI_Visibility\Platforms;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,6 +29,66 @@ class Brands_Controller extends Base_Controller {
 	 * Regex segment that matches a brand UUID.
 	 */
 	const BRAND_ID_PATTERN = '(?P<id>[a-zA-Z0-9\-]+)';
+
+	/**
+	 * Allowed values for the `language` request param.
+	 *
+	 * @param bool $allow_empty Whether '' (no value) is a valid choice.
+	 *
+	 * @return array
+	 */
+	public static function get_language_choices( bool $allow_empty = true ): array {
+		$names = wp_list_pluck( Helper::get_content_ai_languages(), 'name' );
+		return $allow_empty ? array_merge( [ '' ], $names ) : $names;
+	}
+
+	/**
+	 * Allowed values for the `interval` request param.
+	 *
+	 * @return array
+	 */
+	public static function get_interval_choices(): array {
+		return [ 'daily', 'weekly', 'monthly' ];
+	}
+
+	/**
+	 * Cadences allowed for a given AI Visibility plan.
+	 *
+	 * @param string|null $plan Plan slug. Defaults to the current account's plan.
+	 *
+	 * @return array
+	 */
+	public static function get_allowed_intervals( ?string $plan = null ): array {
+		$plan = $plan ?? Helper::get_content_ai_plan();
+
+		return 'expert' === $plan
+			? [ 'daily', 'weekly', 'monthly' ]
+			: [ 'weekly', 'monthly' ];
+	}
+
+	/**
+	 * Reject an `interval` value the caller's plan does not allow.
+	 *
+	 * @param string $interval Requested cadence value.
+	 *
+	 * @return \WP_Error|true
+	 */
+	private function check_interval_allowed( string $interval ) {
+		$allowed = self::get_allowed_intervals();
+		if ( in_array( $interval, $allowed, true ) ) {
+			return true;
+		}
+
+		return $this->error(
+			'aiv_frequency_not_allowed',
+			sprintf(
+				/* translators: %s: comma-separated list of allowed cadences. */
+				__( 'The selected analysis frequency is not available on your plan. Allowed frequencies: %s. Upgrade your plan to unlock more frequency options.', 'seo-by-rank-math' ),
+				implode( ', ', $allowed )
+			),
+			403
+		);
+	}
 
 	/**
 	 * Register routes.
@@ -114,6 +176,23 @@ class Brands_Controller extends Base_Controller {
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 					],
+					'language'    => [
+						'description'       => esc_html__( 'Output language to use when analyzing/generating content for this brand. Independent of `locale` (target country). Required; immutable after creation.', 'seo-by-rank-math' ),
+						'type'              => 'string',
+						'required'          => true,
+						'enum'              => self::get_language_choices( false ),
+						'sanitize_callback' => 'sanitize_text_field',
+						'validate_callback' => 'rest_validate_request_arg',
+					],
+					'interval'    => [
+						'description'       => esc_html__( 'Analysis refresh cadence. Omitted → backend applies the account plan\'s default.', 'seo-by-rank-math' ),
+						'type'              => 'string',
+						'required'          => false,
+						'enum'              => self::get_interval_choices(),
+						'sanitize_callback' => 'sanitize_text_field',
+						'validate_callback' => 'rest_validate_request_arg',
+					],
+					'platforms'   => Platforms::rest_arg( true ),
 				],
 			]
 		);
@@ -149,20 +228,33 @@ class Brands_Controller extends Base_Controller {
 							'required'          => false,
 							'sanitize_callback' => 'sanitize_text_field',
 						],
+						'language'    => [
+							'type'              => 'string',
+							'required'          => false,
+							'enum'              => self::get_language_choices(),
+							'sanitize_callback' => 'sanitize_text_field',
+							'validate_callback' => 'rest_validate_request_arg',
+						],
 						'status'      => [
 							'type'              => 'string',
 							'required'          => false,
 							'enum'              => [ 'active', 'inactive' ],
 							'sanitize_callback' => 'sanitize_text_field',
 						],
+						'interval'    => [
+							'type'              => 'string',
+							'required'          => false,
+							'enum'              => self::get_interval_choices(),
+							'sanitize_callback' => 'sanitize_text_field',
+							'validate_callback' => 'rest_validate_request_arg',
+						],
+						'platforms'   => Platforms::rest_arg( false ),
 					]
 				),
 			]
 		);
 
-		// GET /brands/{id}/insights — full latest-analysis payload
-		// (competitors + transcripts). Cache-first; the only proxy route that
-		// may call the upstream analyses/results endpoint.
+		// GET /brands/{id}/insights — full latest-analysis payload (competitors + transcripts).
 		register_rest_route(
 			$this->namespace,
 			'/brands/' . self::BRAND_ID_PATTERN . '/insights',
@@ -244,15 +336,12 @@ class Brands_Controller extends Base_Controller {
 				return $this->overview_response( $cached, false, $search );
 			}
 
-			// Stale-while-revalidate: serve stale immediately; the client
-			// fires a background `refresh=1` request on seeing `is_stale`.
 			return $this->overview_response( $cached, true, $search );
 		}
 
 		$result = $this->remote_request( 'GET', '/api/v1/overview' );
 
 		if ( is_wp_error( $result ) ) {
-			// Serve stale cache on upstream failure rather than erroring out.
 			if ( null !== $cached ) {
 				return $this->overview_response( $cached, true, $search );
 			}
@@ -276,9 +365,6 @@ class Brands_Controller extends Base_Controller {
 	/**
 	 * Map an /overview brand item (API shape) to the UI row shape.
 	 *
-	 * Note: `description` is not returned by /overview — it is fetched
-	 * lazily and cached per brand via `get_brand()`.
-	 *
 	 * @param array $brand Raw brand item.
 	 *
 	 * @return array
@@ -289,7 +375,10 @@ class Brands_Controller extends Base_Controller {
 			'name'            => $brand['name'] ?? '',
 			'url'             => $brand['url'] ?? '',
 			'locale'          => $brand['country_code'] ?? null,
+			'language'        => $brand['language'] ?? null,
 			'status'          => ! empty( $brand['active'] ) ? 'active' : 'inactive',
+			'interval'        => $brand['analysis_frequency'] ?? null,
+			'platforms'       => Platforms::sanitize( $brand['platforms'] ?? [] ),
 			'score'           => $brand['ai_visibility_score'] ?? null,
 			'rank'            => $brand['rank'] ?? null,
 			'avg_sentiment'   => $brand['avg_sentiment'] ?? null,
@@ -303,9 +392,7 @@ class Brands_Controller extends Base_Controller {
 	}
 
 	/**
-	 * Build the dashboard response envelope, applying the optional search
-	 * filter (name/URL) against the stored rows. The filter never affects
-	 * what is cached — only what is returned.
+	 * Build the dashboard response envelope, applying the optional search filter.
 	 *
 	 * @param array  $data     Cached dashboard payload.
 	 * @param bool   $is_stale Whether the payload is past its TTL.
@@ -352,8 +439,7 @@ class Brands_Controller extends Base_Controller {
 			return $this->success( [ 'brand' => $cached ] );
 		}
 
-		// /overview omits `description`, so the single-brand endpoint is the
-		// canonical source for full identity. Fetched once, then cached.
+		// /overview omits `description`; fetch full identity once and cache it.
 		$result = $this->remote_request( 'GET', '/api/v1/brands/' . $uuid );
 
 		if ( is_wp_error( $result ) ) {
@@ -375,17 +461,48 @@ class Brands_Controller extends Base_Controller {
 	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function create_brand( $request ) {
-		$locale = $request->get_param( 'locale' );
-		$result = $this->remote_request(
-			'POST',
-			'/api/v1/brands',
-			[
-				'name'         => sanitize_text_field( (string) $request->get_param( 'name' ) ),
-				'url'          => esc_url_raw( (string) $request->get_param( 'url' ) ),
-				'description'  => sanitize_textarea_field( (string) $request->get_param( 'description' ) ),
-				'country_code' => $locale ? strtoupper( (string) $locale ) : '',
-			]
-		);
+		$locale    = $request->get_param( 'locale' );
+		$language  = $request->get_param( 'language' );
+		$interval  = $request->get_param( 'interval' );
+		$platforms = $request->get_param( 'platforms' );
+
+		// Re-validate: the create-brand ability bypasses the REST arg constraints.
+		$valid = Platforms::validate( $platforms );
+		if ( is_wp_error( $valid ) ) {
+			return $valid;
+		}
+
+		$platforms = Platforms::sanitize( $platforms );
+
+		if ( ! $language ) {
+			return $this->error(
+				'aiv_bad_request',
+				__( 'Please select a language for this brand.', 'seo-by-rank-math' ),
+				400
+			);
+		}
+
+		$body = [
+			'name'        => sanitize_text_field( (string) $request->get_param( 'name' ) ),
+			'url'         => esc_url_raw( (string) $request->get_param( 'url' ) ),
+			'description' => sanitize_textarea_field( (string) $request->get_param( 'description' ) ),
+			'language'    => (string) $language,
+			'platforms'   => $platforms,
+		];
+
+		// Omit rather than send '' — the backend rejects an explicit empty string.
+		if ( $locale ) {
+			$body['country_code'] = strtoupper( (string) $locale );
+		}
+		if ( $interval ) {
+			$allowed = $this->check_interval_allowed( $interval );
+			if ( is_wp_error( $allowed ) ) {
+				return $allowed;
+			}
+			$body['analysis_frequency'] = (string) $interval;
+		}
+
+		$result = $this->remote_request( 'POST', '/api/v1/brands', $body );
 
 		if ( is_wp_error( $result ) ) {
 			return $result;
@@ -394,9 +511,7 @@ class Brands_Controller extends Base_Controller {
 		$brand = $this->map_brand( $result );
 		$uuid  = $brand['id'];
 
-		// Prime caches from the create response. Creation atomically seeds a
-		// pending analysis, so the row starts as `pending` (no last_analyzed) —
-		// this is what makes it eligible for the first-analysis poller.
+		// Row starts as `pending` — creation atomically seeds the first analysis.
 		Cache::append_brand_row(
 			array_merge(
 				$brand,
@@ -421,8 +536,9 @@ class Brands_Controller extends Base_Controller {
 			'AI Visibility Brand Created',
 			[
 				'locale'    => $brand['locale'] ?? null,
-				'interval'  => 'weekly',
-				'platforms' => [ 'chatgpt' ],
+				'language'  => $brand['language'] ?? null,
+				'interval'  => $brand['interval'] ?? null,
+				'platforms' => $platforms,
 			]
 		);
 
@@ -460,6 +576,31 @@ class Brands_Controller extends Base_Controller {
 			$body['country_code'] = strtoupper( sanitize_text_field( $locale ) );
 		}
 
+		// Omit blank values — the backend rejects an explicit empty string.
+		$language = $request->get_param( 'language' );
+		if ( $language ) {
+			$body['language'] = sanitize_text_field( $language );
+		}
+
+		$interval = $request->get_param( 'interval' );
+		if ( null !== $interval ) {
+			$allowed = $this->check_interval_allowed( $interval );
+			if ( is_wp_error( $allowed ) ) {
+				return $allowed;
+			}
+			$body['analysis_frequency'] = sanitize_text_field( $interval );
+		}
+
+		$platforms = $request->get_param( 'platforms' );
+		if ( null !== $platforms ) {
+			$valid = Platforms::validate( $platforms );
+			if ( is_wp_error( $valid ) ) {
+				return $valid;
+			}
+
+			$body['platforms'] = Platforms::sanitize( $platforms );
+		}
+
 		if ( empty( $body ) ) {
 			return $this->error( 'aiv_bad_request', __( 'No fields to update.', 'seo-by-rank-math' ), 400 );
 		}
@@ -472,7 +613,6 @@ class Brands_Controller extends Base_Controller {
 
 		$brand = $this->map_brand( isset( $result['data'] ) ? $result['data'] : $result );
 
-		// Write-through: patch the dashboard row, replace the identity transient.
 		Cache::patch_brand_row(
 			$uuid,
 			[
@@ -480,7 +620,10 @@ class Brands_Controller extends Base_Controller {
 				'url'         => $brand['url'],
 				'description' => $brand['description'],
 				'locale'      => $brand['locale'],
+				'language'    => $brand['language'],
 				'status'      => $brand['status'],
+				'interval'    => $brand['interval'],
+				'platforms'   => $brand['platforms'],
 			]
 		);
 		Cache::set_brand( $uuid, $brand );
@@ -492,6 +635,8 @@ class Brands_Controller extends Base_Controller {
 				'fields_changed' => array_keys( $body ),
 				'status_changed' => $status_changed,
 				'new_status'     => $status_changed ? $brand['status'] : null,
+				'platforms'      => $brand['platforms'],
+				'language'       => $brand['language'] ?? null,
 			]
 		);
 
@@ -512,9 +657,12 @@ class Brands_Controller extends Base_Controller {
 			'url'           => $brand['url'] ?? '',
 			'description'   => $brand['description'] ?? '',
 			'locale'        => $brand['country_code'] ?? null,
+			'language'      => $brand['language'] ?? null,
 			'status'        => $brand['status'] ?? 'active',
+			'interval'      => $brand['analysis_frequency'] ?? null,
 			'last_analyzed' => $brand['last_analyzed_at'] ?? null,
 			'created_at'    => $brand['created_at'] ?? null,
+			'platforms'     => Platforms::sanitize( $brand['platforms'] ?? [] ),
 		];
 	}
 
@@ -568,15 +716,22 @@ class Brands_Controller extends Base_Controller {
 		);
 
 		// Keep the dashboard row's summary in sync (poller success path).
+		$finished_ats = array_filter( array_column( $insights['analyses'], 'finished_at' ) );
+
+		// Resolve status here rather than relying on /overview, which can lag.
+		$analysis_statuses = array_column( $insights['analyses'], 'status' );
+		$analysis_status   = in_array( 'error', $analysis_statuses, true ) ? 'error' : 'success';
+
 		Cache::patch_brand_row(
 			$uuid,
 			[
-				'score'         => $insights['score'],
-				'rank'          => $insights['rank'],
-				'avg_sentiment' => $insights['avg_sentiment'],
-				'mentions'      => $insights['mentions'],
-				'citations'     => $insights['citations'],
-				'last_analyzed' => $insights['analysis']['finished_at'],
+				'score'           => $insights['score'],
+				'rank'            => $insights['rank'],
+				'avg_sentiment'   => $insights['avg_sentiment'],
+				'mentions'        => $insights['mentions'],
+				'citations'       => $insights['citations'],
+				'last_analyzed'   => $finished_ats ? max( $finished_ats ) : null,
+				'analysis_status' => $analysis_status,
 			]
 		);
 
@@ -591,7 +746,7 @@ class Brands_Controller extends Base_Controller {
 	 * @return array
 	 */
 	private function map_insights( $result ) {
-		$analysis = isset( $result['analysis'] ) ? (array) $result['analysis'] : [];
+		$analyses = isset( $result['analyses'] ) ? (array) $result['analyses'] : [];
 
 		return [
 			'score'         => $result['ai_visibility_score'] ?? null,
@@ -599,14 +754,19 @@ class Brands_Controller extends Base_Controller {
 			'avg_sentiment' => $result['avg_sentiment'] ?? null,
 			'mentions'      => $result['mentions'] ?? null,
 			'citations'     => $result['citations'] ?? null,
-			'analysis'      => [
-				'id'               => $analysis['uuid'] ?? null,
-				// Map the API status vocabulary to the UI one (`success` → `done`).
-				'status'           => isset( $analysis['status'] ) && 'success' === $analysis['status'] ? 'done' : ( $analysis['status'] ?? null ),
-				'started_at'       => $analysis['started_at'] ?? null,
-				'finished_at'      => $analysis['finished_at'] ?? null,
-				'duration_seconds' => $analysis['duration_seconds'] ?? null,
-			],
+			'analyses'      => array_map(
+				function ( $analysis ) {
+					return [
+						'id'               => $analysis['uuid'] ?? null,
+						'platform'         => $analysis['platform'] ?? null,
+						'status'           => isset( $analysis['status'] ) && 'success' === $analysis['status'] ? 'done' : ( $analysis['status'] ?? null ),
+						'started_at'       => $analysis['started_at'] ?? null,
+						'finished_at'      => $analysis['finished_at'] ?? null,
+						'duration_seconds' => $analysis['duration_seconds'] ?? null,
+					];
+				},
+				$analyses
+			),
 			'competitors'   => array_map(
 				function ( $competitor ) {
 					return [
@@ -623,6 +783,7 @@ class Brands_Controller extends Base_Controller {
 					return [
 						'query_id'        => $query_result['query_uuid'] ?? null,
 						'query_text'      => $query_result['query_text'] ?? '',
+						'platform'        => $query_result['platform'] ?? null,
 						'found'           => ! empty( $query_result['found'] ),
 						'rank'            => $query_result['rank_among_competitors'] ?? null,
 						'sentiment'       => $query_result['sentiment_score'] ?? null,
