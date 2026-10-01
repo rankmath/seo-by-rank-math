@@ -540,6 +540,7 @@ class Polylang {
 			'rank_math_facebook_description',
 			'rank_math_twitter_title',
 			'rank_math_twitter_description',
+			'rank_math_twitter_image_alt',
 			'rank_math_focus_keyword',
 		];
 	}

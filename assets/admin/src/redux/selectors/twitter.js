@@ -76,6 +76,17 @@ export function getTwitterImage( state ) {
 }
 
 /**
+ * Get twitter image alt text.
+ *
+ * @param {Object} state The app state.
+ *
+ * @return {string} Return twitter image alt text.
+ */
+export function getTwitterImageAlt( state ) {
+	return state.appData.twitterImageAlt
+}
+
+/**
  * Get twitter has overlay.
  *
  * @param {Object} state The app state.

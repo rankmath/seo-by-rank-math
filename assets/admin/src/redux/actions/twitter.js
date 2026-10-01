@@ -98,6 +98,21 @@ export function updateTwitterImage( image ) {
 }
 
 /**
+ * Update twitter image alt text.
+ *
+ * @param {string} imageAlt The new image alt text.
+ *
+ * @return {Object} An action for redux.
+ */
+export function updateTwitterImageAlt( imageAlt ) {
+	return updateAppData(
+		'twitterImageAlt',
+		imageAlt,
+		'rank_math_twitter_image_alt'
+	)
+}
+
+/**
  * Update twitter image overlay.
  *
  * @param {boolean} hasOverlay The has overlay.

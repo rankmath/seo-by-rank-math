@@ -266,6 +266,7 @@ class Screen implements IScreen {
 				'twitterDescription'       => 'twitter_description',
 				'twitterImage'             => 'twitter_image',
 				'twitterImageID'           => 'twitter_image_id',
+				'twitterImageAlt'          => 'twitter_image_alt',
 				'twitterHasOverlay'        => 'twitter_enable_image_overlay',
 				'twitterImageOverlay'      => 'twitter_image_overlay',
 
