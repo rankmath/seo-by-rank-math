@@ -44,8 +44,11 @@ class Sitemap {
 			new Admin();
 		}
 
-		if ( is_admin() || wp_doing_cron() ) {
+		if ( is_admin() || wp_doing_cron() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 			new Cache_Watcher();
+		} else {
+			// Posts can also be published or updated through the REST API (integrations, headless publishing, apps).
+			$this->action( 'rest_api_init', 'load_cache_watcher', 1 );
 		}
 
 		new Router();
@@ -151,6 +154,20 @@ class Sitemap {
 		}
 
 		return $notice;
+	}
+
+	/**
+	 * Load the cache watcher during REST API requests, so posts created or updated
+	 * through the REST API also invalidate the sitemap cache.
+	 */
+	public function load_cache_watcher() {
+		static $loaded = false;
+		if ( $loaded ) {
+			return;
+		}
+
+		$loaded = true;
+		new Cache_Watcher();
 	}
 
 	/**
