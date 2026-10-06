@@ -61,8 +61,9 @@ class Objects extends Summary {
 			'noData' => $request->get_param( 'noData' ),
 		];
 		$field_name = 'seo_score';
-		$per_page   = $request->get_param( 'per_page' ) ? sanitize_text_field( $request->get_param( 'per_page' ) ) : 25;
-		$offset     = ( sanitize_text_field( $request->get_param( 'page' ) ) - 1 ) * $per_page;
+		$per_page   = absint( $request->get_param( 'per_page' ) );
+		$per_page   = $per_page ? min( $per_page, 100 ) : 25;
+		$offset     = ( max( 1, absint( $request->get_param( 'page' ) ) ) - 1 ) * $per_page;
 
 		// Construct SQL condition based on filter parameters.
 		$conditions = [];

@@ -13,8 +13,6 @@ namespace RankMath\CLI;
 use WP_CLI;
 use WP_CLI_Command;
 use RankMath\Helper;
-use RankMath\Sitemap\Cache;
-use RankMath\Sitemap\Sitemap_XML;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -35,10 +33,6 @@ class Commands extends WP_CLI_Command {
 			return;
 		}
 
-		Cache::invalidate_storage();
-		$generator = new Sitemap_XML( '1' );
-		$generator->get_output();
-
-		WP_CLI::success( 'Sitemap generated.' );
+		( new Sitemap_WPCLI() )->cache_sitemaps();
 	}
 }

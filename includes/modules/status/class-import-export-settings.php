@@ -50,6 +50,7 @@ class Import_Export_Settings {
 		// Parse Options.
 		$wp_filesystem = Helper::get_filesystem();
 		if ( is_null( $wp_filesystem ) || ! Helper::is_filesystem_direct() ) {
+			\wp_delete_file( $file['file'] );
 			return [
 				'error' => esc_html__( 'Uploaded file could not be read.', 'seo-by-rank-math' ),
 			];

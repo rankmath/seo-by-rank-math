@@ -5,7 +5,7 @@ Tags: seo, google search console, schema, redirection, xml sitemap
 Tested up to: 7.1
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.279
+Stable tag: 1.0.280
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -428,14 +428,12 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
-= 1.0.279 [Sep 22, 2026] =
-- [HUGE!] Added  Gemini Tracking, Multi-Language Support, and Daily/Weekly/Monthly refresh options to [AI Visibility] (https://rankmath.com/ai-visibility/?play-video=gS5-DFQrSxs).
-- Added `rank-math/get-404-logs` and `rank-math/get-sitemap-status` MCP tools to expose [404 Monitor](https://rankmath.com/kb/monitor-404-errors/) log data and sitemap status/sub-type data to AI assistants.
-- Improved [llms.txt](https://rankmath.com/kb/llms-txt/) output to conform to the latest llms.txt specification.
-- Fixed AI Visibility Brand detail page was missing data shown on the dashboard, and the "Analyses in last 24h" label was misleading.
-- Fixed `rank-math/get-post-links` MCP tool to correctly enforce per-post capability checks.
-- Fixed Link Suggestions was building link HTML by unescaped string concatenation, allowing unsafe URL and link text values into block content.
-- Fixed Analytics Objects table `page` column was not showing accurate values for WPML translated pages.
+= 1.0.280 [Oct 06, 2026] =
+- Improved [Sitemaps](https://rankmath.com/kb/configure-sitemaps/) can now be fully pre-generated with the `wp rankmath sitemap generate` WP-CLI command, so large sites serve cached sitemap files instead of building them on every visit.
+- Improved plugin security with additional input validation and output escaping hardening.
+- Fixed [Analytics](https://rankmath.com/kb/analytics/) dashboard sections showing `N/A` after data fetching was completed.
+- Fixed [Polylang](https://rankmath.com/kb/polylang-compatibility/) meta translations that were not showing for secondary languages when Polylang PRO was active.
+- Fixed a database error being logged when saving user profiles with SEO Controls enabled for [Author Archives](https://rankmath.com/kb/titles-and-meta/#author-archives).
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

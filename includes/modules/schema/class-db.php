@@ -58,8 +58,11 @@ class DB {
 			'usermeta' => 'user_id',
 		];
 		$key           = isset( $keys_by_table[ $table ] ) ? $keys_by_table[ $table ] : 'post_id';
-		$data          = self::table( $table )
-			->select( 'meta_id' )
+
+		// The wp_usermeta table's primary key column is umeta_id, unlike post/term/comment meta tables which use meta_id.
+		$id_column = 'usermeta' === $table ? 'umeta_id' : 'meta_id';
+		$data      = self::table( $table )
+			->select( [ $id_column => 'meta_id' ] )
 			->select( 'meta_value' )
 			->where( $key, $object_id )
 			->whereLike( 'meta_key', 'rank_math_schema', '' )

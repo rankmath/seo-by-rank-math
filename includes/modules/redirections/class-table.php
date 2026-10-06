@@ -250,7 +250,7 @@ class Table extends List_Table {
 				'deactivate' => '<a href="' . $url . '" data-action="deactivate" class="rank-math-redirection-action">' . esc_html__( 'Deactivate', 'seo-by-rank-math' ) . '</a>',
 				'activate'   => '<a href="' . $url . '" data-action="activate" class="rank-math-redirection-action">' . esc_html__( 'Activate', 'seo-by-rank-math' ) . '</a>',
 				'trash'      => '<a href="' . $url . '" data-action="trash" class="rank-math-redirection-action">' . esc_html__( 'Trash', 'seo-by-rank-math' ) . '</a>',
-				'view'       => '<a href="' . $view_url . '" rel="bookmark">' . esc_html__( 'View', 'seo-by-rank-math' ) . '</a>',
+				'view'       => '<a href="' . esc_url( $view_url ) . '" rel="bookmark">' . esc_html__( 'View', 'seo-by-rank-math' ) . '</a>',
 			]
 		);
 	}

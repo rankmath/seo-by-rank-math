@@ -439,6 +439,9 @@ class DB {
 			return '';
 		}
 
+		$host = Helper::get_home_url();
+		$url  = str_replace( $host, '', $url );
+
 		$url = urldecode( preg_replace( '/#.*$/', '', $url ) );
 
 		$url = self::remove_hash( $url );
@@ -446,22 +449,18 @@ class DB {
 		// Parse the URL to get the path component.
 		$parsed_url = wp_parse_url( $url );
 		if ( isset( $parsed_url['path'] ) ) {
-			return $parsed_url['path'];
+			$page = $parsed_url['path'];
+		} else {
+			// Remove ASCII domain. idn_to_ascii() needs ext-intl, which isn't
+			// guaranteed to be installed on every host — fall back to the
+			// unconverted host rather than fatal-erroring when it's missing.
+			$host_ascii = function_exists( 'idn_to_ascii' ) ? idn_to_ascii( $host ) : $host;
+			$url        = str_replace( $host_ascii, '', $url );
+
+			$page = preg_replace( '#^https?://(www\.)?#i', '', $url );
 		}
 
-		// Fallback: try to extract path by removing domain.
-		$host = Helper::get_home_url();
-		$url  = str_replace( $host, '', $url );
-
-		// Remove ASCII domain. idn_to_ascii() needs ext-intl, which isn't
-		// guaranteed to be installed on every host — fall back to the
-		// unconverted host rather than fatal-erroring when it's missing.
-		$host_ascii = function_exists( 'idn_to_ascii' ) ? idn_to_ascii( $host ) : $host;
-		$url        = str_replace( $host_ascii, '', $url );
-
-		$url = preg_replace( '#^https?://(www\.)?#i', '', $url );
-
-		return apply_filters( 'rank_math/analytics/get_page', $url );
+		return apply_filters( 'rank_math/analytics/get_page', $page );
 	}
 
 	/**
