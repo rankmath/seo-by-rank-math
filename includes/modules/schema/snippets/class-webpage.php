@@ -11,6 +11,7 @@
 namespace RankMath\Schema;
 
 use RankMath\Helper;
+use RankMath\Helpers\Sitepress;
 use RankMath\Paper\Paper;
 
 defined( 'ABSPATH' ) || exit;
@@ -66,8 +67,8 @@ class Webpage implements Snippet {
 	 * @return string
 	 */
 	private function get_type() {
-		$about_page   = Helper::get_settings( 'titles.local_seo_about_page' );
-		$contact_page = Helper::get_settings( 'titles.local_seo_contact_page' );
+		$about_page   = $this->translate_page_id( Helper::get_settings( 'titles.local_seo_about_page' ) );
+		$contact_page = $this->translate_page_id( Helper::get_settings( 'titles.local_seo_contact_page' ) );
 		$hash         = [
 			'SearchResultsPage' => is_search(),
 			'ProfilePage'       => is_author(),
@@ -77,5 +78,21 @@ class Webpage implements Snippet {
 		];
 
 		return ! empty( array_filter( $hash ) ) ? key( array_filter( $hash ) ) : 'WebPage';
+	}
+
+	/**
+	 * Resolve a page ID stored in the settings to its translated counterpart
+	 * for the current language, e.g. under WPML.
+	 *
+	 * @param int $page_id Page ID as stored in the settings.
+	 *
+	 * @return int
+	 */
+	private function translate_page_id( $page_id ) {
+		if ( ! $page_id || ! Sitepress::get()->is_active() ) {
+			return $page_id;
+		}
+
+		return apply_filters( 'wpml_object_id', $page_id, 'page', true );
 	}
 }

@@ -20,21 +20,29 @@ import './RunDetail.scss'
 /**
  * Map an insights query result to the shape TranscriptViewer expects.
  *
+ * The id is qualified by platform — the backend reuses the same query_id
+ * across platforms, so an unqualified id would collide.
+ *
  * @param {Object} result   Query result from the insights payload.
  * @param {number} index    Fallback index.
- * @param {Object} analysis Parent analysis meta.
+ * @param {Object} analysis Analysis run (matched by platform) this result belongs to.
  * @return {Object} Normalised entry.
  */
-const toEntry = ( result, index, analysis ) => ( {
-	...result,
-	id: result.query_id ?? index,
-	query: result.query_text ?? '',
-	response: result.response ?? '',
-	created_at: analysis?.finished_at ?? null,
-	duration_seconds: analysis?.duration_seconds ?? null,
-	status: result.found ? 'success' : 'partial',
-	model: null,
-} )
+const toEntry = ( result, index, analysis ) => {
+	const baseId = result.query_id ?? index
+	const platform = result.platform ?? 'default'
+
+	return {
+		...result,
+		id: `${ baseId }-${ platform }`,
+		query: result.query_text ?? '',
+		response: result.response ?? '',
+		created_at: analysis?.finished_at ?? null,
+		duration_seconds: analysis?.duration_seconds ?? null,
+		status: result.found ? 'success' : 'partial',
+		model: null,
+	}
+}
 
 /**
  * @param {Object}      props
@@ -44,7 +52,12 @@ const toEntry = ( result, index, analysis ) => ( {
  */
 const RunDetail = ( { insights = null, loading = false } ) => {
 	const entries = useMemo(
-		() => ( insights?.query_results ?? [] ).map( ( result, i ) => toEntry( result, i, insights?.analysis ) ),
+		() => {
+			const analyses = insights?.analyses ?? []
+			const findAnalysis = ( platform ) => analyses.find( ( analysis ) => analysis.platform === platform ) ?? analyses[ 0 ] ?? null
+
+			return ( insights?.query_results ?? [] ).map( ( result, i ) => toEntry( result, i, findAnalysis( result.platform ) ) )
+		},
 		[ insights ]
 	)
 

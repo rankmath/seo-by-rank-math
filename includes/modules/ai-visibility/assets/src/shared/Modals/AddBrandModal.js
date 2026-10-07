@@ -7,7 +7,7 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n'
+import { __, _n, sprintf } from '@wordpress/i18n'
 import { useState, useEffect, useMemo, useRef } from '@wordpress/element'
 import { Modal, TextControl, TextareaControl, SelectControl, CheckboxControl, Icon } from '@wordpress/components'
 import { close } from '@wordpress/icons'
@@ -19,54 +19,31 @@ import { SelectWithSearch } from '@rank-math/components'
 import Button from '../components/Button'
 import LoadingButton from '../components/LoadingButton'
 import getLink from '@helpers/getLink'
+import { toPlatformList, getDefaultPlatforms, getEnabledPlatformIds } from '../services/platforms'
 import './AddBrandModal.scss'
 
-// ---------------------------------------------------------------------------
-// Constants
-// ---------------------------------------------------------------------------
-
-const EMPTY_FORM = {
+/**
+ * Blank form state.
+ *
+ * @param {Array}  platformList         Available platforms.
+ * @param {string} [defaultLanguage=''] Default language for a new brand (site language).
+ * @return {Object} Empty form values.
+ */
+const emptyForm = ( platformList, defaultLanguage = '' ) => ( {
 	name: '',
 	url: '',
 	description: '',
 	locale: '',
-	interval: 'weekly',
-	platforms: [ 'chatgpt' ],
-}
+	language: defaultLanguage,
+	interval: 'monthly',
+	platforms: getDefaultPlatforms( platformList ),
+} )
 
 /**
  * Order in which fields are validated / scrolled to.
  * Used to focus the first errored field on a failed save.
  */
-const FIELD_ORDER = [ 'name', 'url', 'description' ]
-
-/**
- * Analysis interval options.
- */
-const INTERVAL_OPTIONS = [
-	{ label: __( 'Weekly', 'seo-by-rank-math' ), value: 'weekly', disabled: false },
-	{ label: __( 'Monthly (Coming Soon)', 'seo-by-rank-math' ), value: 'monthly', disabled: true },
-	{ label: __( 'Daily (Coming Soon)', 'seo-by-rank-math' ), value: 'daily', disabled: true },
-]
-
-/**
- * AI Platform definitions.
- *
- * `enabled` — whether the platform is available for selection.
- * Disabled platforms show a "Coming Soon" badge.
- *
- * Layout: left column = index 0–2, right column = index 3–4.
- */
-const AI_PLATFORMS = [
-	{ id: 'chatgpt', label: 'ChatGPT', enabled: true },
-	{ id: 'perplexity', label: 'Perplexity', enabled: false },
-	{ id: 'google_ai_overview', label: 'Google AI Overview', enabled: false },
-	{ id: 'gemini', label: 'Gemini', enabled: false },
-	{ id: 'claude', label: 'Claude', enabled: false },
-]
-
-const LEFT_PLATFORMS = AI_PLATFORMS.slice( 0, 3 )
-const RIGHT_PLATFORMS = AI_PLATFORMS.slice( 3 )
+const FIELD_ORDER = [ 'name', 'url', 'description', 'language' ]
 
 // ---------------------------------------------------------------------------
 // Sub-components
@@ -114,12 +91,17 @@ const PlatformRow = ( { platform, checked, onChange, disabled } ) => {
  * AddBrandModal component.
  *
  * @param {Object}        props
- * @param {Object|null}   [props.brand=null]     null = add mode, object = edit (pre-fills form).
- * @param {Function}      props.onSave           Called with the validated form payload.
- * @param {Function}      props.onClose          Called when the modal should close.
- * @param {boolean}       [props.isSaving=false] Shows spinner + disables all fields.
- * @param {string | null} props.apiError         API error message to display.
- * @param {Array}         [props.locales=[]]     Locale options injected from PHP via wp_localize_script.
+ * @param {Object|null}   [props.brand=null]         null = add mode, object = edit (pre-fills form).
+ * @param {Function}      props.onSave               Called with the validated form payload.
+ * @param {Function}      props.onClose              Called when the modal should close.
+ * @param {boolean}       [props.isSaving=false]     Shows spinner + disables all fields.
+ * @param {string | null} props.apiError             API error message to display.
+ * @param {Array}         [props.locales=[]]         Locale options injected from PHP via wp_localize_script.
+ * @param {Array}         [props.languages=[]]       Output language options injected from PHP via wp_localize_script.
+ * @param {string}        [props.defaultLanguage=''] Default language for a new brand (site language), injected from PHP.
+ * @param {Array}         [props.intervals=[]]       { label, value, disabled } options injected from PHP via wp_localize_script.
+ * @param {Object}        [props.platforms={}]       AI platform registry injected from PHP.
+ * @param {number}        [props.maxPlatforms=1]     Platforms selectable on the current plan.
  * @return {JSX.Element} Brand add/edit dialog.
  */
 const AddBrandModal = ( {
@@ -129,8 +111,16 @@ const AddBrandModal = ( {
 	isSaving = false,
 	apiError = null,
 	locales = [],
+	languages = [],
+	defaultLanguage = '',
+	intervals = [],
+	platforms = {},
+	maxPlatforms = 1,
 } ) => {
-	const [ form, setForm ] = useState( EMPTY_FORM )
+	const platformList = useMemo( () => toPlatformList( platforms ), [ platforms ] )
+	const enabledPlatformCount = useMemo( () => getEnabledPlatformIds( platformList ).length, [ platformList ] )
+
+	const [ form, setForm ] = useState( () => emptyForm( platformList, defaultLanguage ) )
 	const [ errors, setErrors ] = useState( {} )
 
 	const ns = 'rank-math-ai-visibility-add-brand-modal'
@@ -140,6 +130,7 @@ const AddBrandModal = ( {
 		name: useRef( null ),
 		url: useRef( null ),
 		description: useRef( null ),
+		language: useRef( null ),
 	}
 
 	// Locale options — object map expected by SelectWithSearch: { value: label, … }
@@ -152,6 +143,14 @@ const AddBrandModal = ( {
 		[ locales ]
 	)
 
+	const languageOptions = useMemo(
+		() => languages.reduce( ( acc, { name, icon } ) => {
+			acc[ name ] = icon ? `${ icon } ${ name }` : name
+			return acc
+		}, {} ),
+		[ languages ]
+	)
+
 	// Pre-fill when editing.
 	useEffect( () => {
 		if ( brand ) {
@@ -161,12 +160,17 @@ const AddBrandModal = ( {
 				url: brand.url ?? '',
 				description: brand.description ?? '',
 				locale: brand.locale ?? '',
-				interval: brand.interval ?? 'weekly',
-				platforms: brand.platforms ?? [ 'chatgpt' ],
+				// Legacy brands predate the language field.
+				language: brand.language ?? 'US English',
+				interval: brand.interval ?? 'monthly',
+				platforms: brand.platforms?.length
+					? brand.platforms.slice( 0, maxPlatforms )
+					: getDefaultPlatforms( platformList ),
 			} )
 		} else {
-			setForm( EMPTY_FORM )
+			setForm( emptyForm( platformList, defaultLanguage ) )
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ brand ] )
 
 	// ── Field helpers ────────────────────────────────────────────────────────
@@ -184,18 +188,24 @@ const AddBrandModal = ( {
 	}
 
 	/**
-	 * Toggle a platform ID in the platforms array.
+	 * Toggle a platform. Selecting past the plan cap evicts the oldest pick.
 	 *
 	 * @param {string} id Platform id to toggle.
 	 */
 	const togglePlatform = ( id ) => {
 		setForm( ( prev ) => {
-			const exists = prev.platforms.includes( id )
+			if ( prev.platforms.includes( id ) ) {
+				return {
+					...prev,
+					platforms: prev.platforms.filter( ( p ) => p !== id ),
+				}
+			}
+
+			const next = [ ...prev.platforms, id ]
+
 			return {
 				...prev,
-				platforms: exists
-					? prev.platforms.filter( ( p ) => p !== id )
-					: [ ...prev.platforms, id ],
+				platforms: next.slice( Math.max( 0, next.length - maxPlatforms ) ),
 			}
 		} )
 	}
@@ -228,6 +238,9 @@ const AddBrandModal = ( {
 		}
 		if ( ! form.description.trim() ) {
 			newErrors.description = __( 'Description is required.', 'seo-by-rank-math' )
+		}
+		if ( ! form.language ) {
+			newErrors.language = __( 'Language is required.', 'seo-by-rank-math' )
 		}
 
 		setErrors( newErrors )
@@ -266,13 +279,14 @@ const AddBrandModal = ( {
 			url: form.url.trim(),
 			description: form.description.trim(),
 			locale: form.locale,
+			language: form.language,
 			interval: form.interval,
 			platforms: form.platforms,
 		} )
 	}
 
 	const isEditMode = Boolean( brand )
-	const isActionDisabled = isSaving || form?.platforms?.length === 0 || Object.keys( errors ).length > 0
+	const isActionDisabled = isSaving || form?.platforms?.length === 0 || ! form?.language || Object.keys( errors ).length > 0
 
 	return (
 		<Modal
@@ -370,12 +384,35 @@ const AddBrandModal = ( {
 					/>
 				</div>
 
+				<div className={ `${ ns }__field` } ref={ fieldRefs.language }>
+					<span className={ `${ ns }__label` }>
+						{ __( 'Output Language', 'seo-by-rank-math' ) }
+					</span>
+					<SelectWithSearch
+						value={ form.language }
+						options={ languageOptions }
+						onChange={ set( 'language' ) }
+						disabled={ isSaving || isEditMode }
+						className={ errors.language ? `${ ns }__field--error` : '' }
+					/>
+					{ errors.language && (
+						<p className={ `${ ns }__field-note ${ ns }__field-note--error` }>
+							{ errors.language }
+						</p>
+					) }
+					{ isEditMode && (
+						<p className={ `${ ns }__field-note` }>
+							{ __( 'Language can\'t be changed after a brand is created.', 'seo-by-rank-math' ) }
+						</p>
+					) }
+				</div>
+
 				{ /* Interval */ }
 				<div className={ `${ ns }__field` }>
 					<SelectControl
 						label={ __( 'Frequency of analyses', 'seo-by-rank-math' ) }
 						value={ form.interval }
-						options={ INTERVAL_OPTIONS }
+						options={ intervals }
 						onChange={ set( 'interval' ) }
 						disabled={ isSaving }
 						__next40pxDefaultSize={ true }
@@ -388,29 +425,35 @@ const AddBrandModal = ( {
 					<span className={ `${ ns }__label` }>
 						{ __( 'AI Platforms', 'seo-by-rank-math' ) }
 					</span>
+					{ maxPlatforms < enabledPlatformCount && (
+						<p className={ `${ ns }__field-note` }>
+							{ sprintf(
+								/* translators: %d: number of AI platforms selectable on the current plan. */
+								_n(
+									'Your plan lets you track %d platform per brand. Upgrade to Expert to track them all at once.',
+									'Your plan lets you track %d platforms per brand. Upgrade to Expert to track them all at once.',
+									maxPlatforms,
+									'seo-by-rank-math'
+								),
+								maxPlatforms
+							) }
+						</p>
+					) }
+					{ form.platforms.length === 0 && (
+						<p className={ `${ ns }__field-note ${ ns }__field-note--error` }>
+							{ __( 'Select at least one AI platform.', 'seo-by-rank-math' ) }
+						</p>
+					) }
 					<div className={ `${ ns }__platforms` }>
-						<div className={ `${ ns }__platforms-col` }>
-							{ LEFT_PLATFORMS.map( ( platform ) => (
-								<PlatformRow
-									key={ platform.id }
-									platform={ platform }
-									checked={ form.platforms.includes( platform.id ) }
-									onChange={ () => togglePlatform( platform.id ) }
-									disabled={ isSaving }
-								/>
-							) ) }
-						</div>
-						<div className={ `${ ns }__platforms-col` }>
-							{ RIGHT_PLATFORMS.map( ( platform ) => (
-								<PlatformRow
-									key={ platform.id }
-									platform={ platform }
-									checked={ form.platforms.includes( platform.id ) }
-									onChange={ () => togglePlatform( platform.id ) }
-									disabled={ isSaving }
-								/>
-							) ) }
-						</div>
+						{ platformList.map( ( platform ) => (
+							<PlatformRow
+								key={ platform.id }
+								platform={ platform }
+								checked={ form.platforms.includes( platform.id ) }
+								onChange={ () => togglePlatform( platform.id ) }
+								disabled={ isSaving }
+							/>
+						) ) }
 					</div>
 				</div>
 

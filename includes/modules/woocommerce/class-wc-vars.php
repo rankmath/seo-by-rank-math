@@ -122,7 +122,7 @@ class WC_Vars extends Opengraph {
 			$product = $this->get_product();
 		}
 
-		if ( ! is_object( $product ) ) {
+		if ( ! is_object( $product ) || post_password_required( $product->get_id() ) ) {
 			return '';
 		}
 

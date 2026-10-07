@@ -830,10 +830,12 @@ trait WordPress {
 	 * @return array
 	 */
 	public static function filetype_and_ext( $types, $file, $filename ) {
-		if ( false !== strpos( $filename, '.json' ) ) {
+		// Validate the real trailing extension so names like `file.json.php` are rejected.
+		$extension = strtolower( pathinfo( $filename, PATHINFO_EXTENSION ) );
+		if ( 'json' === $extension ) {
 			$types['ext']  = 'json';
 			$types['type'] = 'application/json';
-		} elseif ( false !== strpos( $filename, '.txt' ) ) {
+		} elseif ( 'txt' === $extension ) {
 			$types['ext']  = 'txt';
 			$types['type'] = 'text/plain';
 		}

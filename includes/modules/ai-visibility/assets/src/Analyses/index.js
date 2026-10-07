@@ -20,6 +20,7 @@ import { addQueryArgs } from '@wordpress/url'
  * Internal dependencies
  */
 import useDashboard from '../shared/hooks/useDashboard'
+import usePagination from '../shared/hooks/usePagination'
 import { getAnalysisState } from '../utils/analysisState'
 import { SectionHeader } from '../shared/components'
 import AnalysesFilterBar from './AnalysesFilterBar'
@@ -36,20 +37,15 @@ const DEFAULT_FILTERS = {
 }
 
 /**
- * Sync filters + pagination into the URL without reloading.
- *
- * @param {Object} filters    Active filter bag.
- * @param {Object} pagination Active pagination.
+ * @param {Object} filters Active filter bag.
  */
-const writeToUrl = ( filters, pagination ) => {
+const writeFiltersToUrl = ( filters ) => {
 	const params = {
 		aiv_brands: filters.brandIds.length ? filters.brandIds.join( ',' ) : undefined,
 		aiv_status: filters.status || undefined,
 		aiv_search: filters.search || undefined,
 		aiv_from: filters.dateFrom || undefined,
 		aiv_to: filters.dateTo || undefined,
-		aiv_page: pagination.page > 1 ? pagination.page : undefined,
-		aiv_per: pagination.perPage !== 10 ? pagination.perPage : undefined,
 	}
 
 	const url = addQueryArgs( window.location.href, params )
@@ -70,8 +66,7 @@ const toRunRow = ( brand ) => {
 		brand_id: brand.id,
 		brand_name: brand.name,
 		started_at: brand.last_analyzed,
-		// Display/filter bucket: running | error | done | none. Same icon
-		// derivation as the Dashboard column, so the two tabs never disagree.
+		// Matches the Dashboard column's derivation, so both tabs agree.
 		status: state ?? ( brand.last_analyzed ? 'done' : 'none' ),
 	}
 }
@@ -85,7 +80,6 @@ const Analyses = () => {
 	const { brands, loading, error } = useDashboard()
 
 	const [ filters, setFilters ] = useState( DEFAULT_FILTERS )
-	const [ pagination, setPagination ] = useState( { page: 1, perPage: 10 } )
 	const [ selectedRow, setSelectedRow ] = useState( null )
 
 	const brandOptions = useMemo(
@@ -93,7 +87,6 @@ const Analyses = () => {
 		[ brands ]
 	)
 
-	// Derive + filter rows client-side.
 	const filteredItems = useMemo( () => {
 		return brands.map( toRunRow ).filter( ( item ) => {
 			if ( filters.search && ! item.brand_name.toLowerCase().includes( filters.search.toLowerCase() ) ) {
@@ -118,26 +111,22 @@ const Analyses = () => {
 		} )
 	}, [ brands, filters ] )
 
-	const total = filteredItems.length
-	const pages = Math.max( 1, Math.ceil( total / pagination.perPage ) )
-	const pageItems = useMemo( () => {
-		const offset = ( pagination.page - 1 ) * pagination.perPage
-		return filteredItems.slice( offset, offset + pagination.perPage )
-	}, [ filteredItems, pagination ] )
+	const { pagination, pageItems, total, pages, onPageChange, onPerPageChange, resetPage } =
+		usePagination( filteredItems, { perPage: 10, syncUrl: true } )
 
 	const handleFilterChange = useCallback( ( patch ) => {
 		setFilters( ( prev ) => ( { ...prev, ...patch } ) )
-		setPagination( ( prev ) => ( { ...prev, page: 1 } ) )
-	}, [] )
+		resetPage()
+	}, [ resetPage ] )
 
 	const handleClearFilters = useCallback( () => {
 		setFilters( DEFAULT_FILTERS )
-		setPagination( ( prev ) => ( { ...prev, page: 1 } ) )
-	}, [] )
+		resetPage()
+	}, [ resetPage ] )
 
 	useEffect( () => {
-		writeToUrl( filters, pagination )
-	}, [ filters, pagination ] )
+		writeFiltersToUrl( filters )
+	}, [ filters ] )
 
 	if ( selectedRow ) {
 		return (
@@ -177,8 +166,8 @@ const Analyses = () => {
 					loading={ loading }
 					pagination={ { ...pagination, total, pages } }
 					onViewDetail={ ( row ) => setSelectedRow( row ) }
-					onPageChange={ ( page ) => setPagination( ( prev ) => ( { ...prev, page: Math.max( 1, page ) } ) ) }
-					onPerPageChange={ ( perPage ) => setPagination( { page: 1, perPage: Math.max( 1, perPage ) } ) }
+					onPageChange={ onPageChange }
+					onPerPageChange={ onPerPageChange }
 				/>
 			</div>
 

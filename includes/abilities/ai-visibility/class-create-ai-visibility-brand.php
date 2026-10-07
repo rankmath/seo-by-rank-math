@@ -12,6 +12,7 @@ namespace RankMath\Abilities\AI_Visibility;
 
 use WP_REST_Request;
 use RankMath\Abilities\Ability_Interface;
+use RankMath\AI_Visibility\Platforms;
 use RankMath\AI_Visibility\Api\Brands_Controller;
 
 defined( 'ABSPATH' ) || exit;
@@ -66,14 +67,18 @@ class Create_AI_Visibility_Brand implements Ability_Interface {
 			[
 				'category'            => $this->category,
 				'label'               => esc_html__( 'Create AI Visibility brand', 'seo-by-rank-math' ),
-				'description'         => esc_html__(
-					'Creates a new brand for AI Visibility monitoring, triggering an initial analysis automatically.',
-					'seo-by-rank-math'
+				'description'         => sprintf(
+					/* translators: %s: supported platform IDs. */
+					esc_html__(
+						'Creates a new brand for AI Visibility monitoring, triggering an initial analysis automatically. Ask which AI platforms to track. Supported platforms: %s. Selecting more than one requires the Expert plan; other plans may choose only one.',
+						'seo-by-rank-math'
+					),
+					Platforms::supported_as_string()
 				),
 				'input_schema'        => [
 					'type'                 => 'object',
 					'default'              => [],
-					'required'             => [ 'name', 'url' ],
+					'required'             => [ 'name', 'url', 'language', 'platforms' ],
 					'properties'           => [
 						'name'        => [
 							'type'        => 'string',
@@ -93,6 +98,30 @@ class Create_AI_Visibility_Brand implements Ability_Interface {
 							'type'        => 'string',
 							'description' => esc_html__( 'ISO 3166-1 alpha-2 country code (e.g. "US", "HU"). Defaults to no country filter.', 'seo-by-rank-math' ),
 							'default'     => '',
+						],
+						'language'    => [
+							'type'        => 'string',
+							'description' => esc_html__( 'Language the brand should be analyzed in (e.g. "US English", "French"). Required; immutable after creation — ask the user which language to use.', 'seo-by-rank-math' ),
+							'enum'        => Brands_Controller::get_language_choices( false ),
+						],
+						'interval'    => [
+							'type'        => 'string',
+							'description' => esc_html__( 'Analysis refresh cadence. Defaults to the account plan\'s default when omitted.', 'seo-by-rank-math' ),
+							'enum'        => array_merge( [ '' ], Brands_Controller::get_interval_choices() ),
+							'default'     => '',
+						],
+						'platforms'   => [
+							'type'        => 'array',
+							'minItems'    => 1,
+							'description' => sprintf(
+								/* translators: %s: supported platform IDs. */
+								esc_html__( 'AI platforms to track. Supported: %s. Selecting more than one requires the Expert plan; otherwise choose exactly one. Do not assume a default — ask the user which platform(s) to use.', 'seo-by-rank-math' ),
+								Platforms::supported_as_string()
+							),
+							'items'       => [
+								'type' => 'string',
+								'enum' => Platforms::supported(),
+							],
 						],
 					],
 					'additionalProperties' => false,
@@ -130,11 +159,19 @@ class Create_AI_Visibility_Brand implements Ability_Interface {
 	 * @return array
 	 */
 	public function execute( array $input = [] ): array {
+		$platforms = $this->validate_platforms( $input['platforms'] ?? null );
+		if ( isset( $platforms['error'] ) ) {
+			return $platforms;
+		}
+
 		$request = new WP_REST_Request( 'POST' );
 		$request->set_param( 'name', sanitize_text_field( (string) ( $input['name'] ?? '' ) ) );
 		$request->set_param( 'url', esc_url_raw( (string) ( $input['url'] ?? '' ) ) );
 		$request->set_param( 'description', sanitize_textarea_field( (string) ( $input['description'] ?? '' ) ) );
 		$request->set_param( 'locale', sanitize_text_field( (string) ( $input['locale'] ?? '' ) ) );
+		$request->set_param( 'language', sanitize_text_field( (string) ( $input['language'] ?? '' ) ) );
+		$request->set_param( 'interval', sanitize_text_field( (string) ( $input['interval'] ?? '' ) ) );
+		$request->set_param( 'platforms', $platforms );
 
 		$response = $this->controller->create_brand( $request );
 
@@ -149,9 +186,26 @@ class Create_AI_Visibility_Brand implements Ability_Interface {
 			'id'              => $brand['id'] ?? '',
 			'name'            => $brand['name'] ?? '',
 			'url'             => $brand['url'] ?? '',
+			'interval'        => $brand['interval'] ?? null,
+			'platforms'       => $brand['platforms'] ?? [],
 			'analysis_status' => 'pending',
 			'created_at'      => $brand['created_at'] ?? null,
 		];
+	}
+
+	/**
+	 * Sanitize and validate platforms. No silent defaults.
+	 *
+	 * @param mixed $platforms Raw platforms value.
+	 * @return string[]|array{error: string}
+	 */
+	private function validate_platforms( $platforms ) {
+		$valid = Platforms::validate( $platforms );
+		if ( is_wp_error( $valid ) ) {
+			return [ 'error' => $valid->get_error_message() ];
+		}
+
+		return Platforms::sanitize( $platforms );
 	}
 
 	/**
@@ -176,6 +230,19 @@ class Create_AI_Visibility_Brand implements Ability_Interface {
 					'format'      => 'uri',
 					'description' => 'Brand website URL.',
 				],
+				'interval'        => [
+					'type'        => [ 'string', 'null' ],
+					'enum'        => array_merge( [ null ], Brands_Controller::get_interval_choices() ),
+					'description' => 'Resolved analysis cadence for this brand.',
+				],
+				'platforms'       => [
+					'type'        => 'array',
+					'description' => 'AI platforms selected for this brand.',
+					'items'       => [
+						'type' => 'string',
+						'enum' => Platforms::supported(),
+					],
+				],
 				'analysis_status' => [
 					'type'        => 'string',
 					'enum'        => [ 'pending' ],
@@ -188,7 +255,7 @@ class Create_AI_Visibility_Brand implements Ability_Interface {
 				],
 				'error'           => [
 					'type'        => 'string',
-					'description' => 'Present only on failure — human-readable error from the upstream API.',
+					'description' => 'Present only on failure — human-readable error from validation or the upstream API.',
 				],
 			],
 		];

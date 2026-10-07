@@ -52,7 +52,7 @@ const GatedPreview = () => {
 				<StatCard
 					className="rank-math-ai-visibility-stat-card--analyses"
 					icon={ trendingUp }
-					label={ __( 'Analyses in last 24h', 'seo-by-rank-math' ) }
+					label={ __( 'Analyses in the last 7 days', 'seo-by-rank-math' ) }
 					value={ 0 }
 				/>
 				<StatCard

@@ -142,7 +142,7 @@ class Admin {
 		$refresh_date = Helper::get_content_ai_refresh_date();
 		$content_ai   = [
 			'ca_plan'         => [
-				'label' => esc_html__( 'Content AI Plan', 'seo-by-rank-math' ),
+				'label' => esc_html__( 'Rank Math AI Plan', 'seo-by-rank-math' ),
 				'value' => \ucwords( Helper::get_content_ai_plan() ),
 			],
 			'ca_credits'      => [

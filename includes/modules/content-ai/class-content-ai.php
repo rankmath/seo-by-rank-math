@@ -69,6 +69,7 @@ class Content_AI {
 					'audience'              => (array) Helper::get_settings( 'general.content_ai_audience', 'General Audience' ),
 					'tone'                  => (array) Helper::get_settings( 'general.content_ai_tone', 'Formal' ),
 					'language'              => Helper::get_settings( 'general.content_ai_language', Helper::content_ai_default_language() ),
+					'languages'             => Helper::get_content_ai_languages(),
 					'history'               => Helper::get_outputs(),
 					'chats'                 => Helper::get_chats(),
 					'recentPrompts'         => Helper::get_recent_prompts(),

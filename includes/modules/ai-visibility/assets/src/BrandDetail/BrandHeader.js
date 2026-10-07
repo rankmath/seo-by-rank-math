@@ -72,6 +72,11 @@ const BrandHeader = ( {
 								{ brand.url }
 							</a>
 							{ brand.locale && <CountryFlag locale={ brand.locale } /> }
+							{ brand.language && (
+								<span className={ `${ ns }__language` }>
+									{ brand.language }
+								</span>
+							) }
 							<a
 								className={ `${ ns }__external` }
 								href={ getBrandUrl( brand.url ) }

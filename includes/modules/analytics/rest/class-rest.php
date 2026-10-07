@@ -48,6 +48,20 @@ class Rest extends WP_REST_Controller {
 			],
 			'postsRowsByObjects'  => [
 				'callback' => [ Stats::get(), 'get_posts_rows_by_objects' ],
+				'args'     => [
+					'page'     => [
+						'description'       => esc_html__( 'Page number.', 'seo-by-rank-math' ),
+						'type'              => 'integer',
+						'required'          => false,
+						'sanitize_callback' => 'absint',
+					],
+					'per_page' => [
+						'description'       => esc_html__( 'Results per page.', 'seo-by-rank-math' ),
+						'type'              => 'integer',
+						'required'          => false,
+						'sanitize_callback' => 'absint',
+					],
+				],
 			],
 			'post/(?P<id>\d+)'    => [
 				'callback' => [ $this, 'get_post' ],

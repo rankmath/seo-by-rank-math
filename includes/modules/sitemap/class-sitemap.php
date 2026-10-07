@@ -307,6 +307,9 @@ class Sitemap {
 	 * @param int $max_entries Entries per sitemap.
 	 */
 	public static function maybe_redirect( $count, $max_entries ) {
+		if ( ! apply_filters( 'rank_math/sitemap/maybe_redirect', true ) ) {
+			return;
+		}
 		$current_page = (int) get_query_var( 'sitemap_n' );
 		if ( ! $current_page && $count > $max_entries ) {
 			Helper::redirect( preg_replace( '/\.xml$/', '1.xml', Helper::get_current_page_url() ) );

@@ -124,7 +124,7 @@ abstract class Base_Controller extends WP_REST_Controller {
 			$args['body'] = wp_json_encode( $body );
 		}
 
-		$url      = 'https://ai-visibility.rankmath.com/' . ltrim( $path, '/' );
+		$url      = RANK_MATH_AIV_URL . '/' . ltrim( $path, '/' );
 		$response = wp_remote_request( $url, $args );
 
 		if ( is_wp_error( $response ) ) {

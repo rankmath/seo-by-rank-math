@@ -206,7 +206,7 @@ class WooCommerce extends WC_Vars {
 	 * @return string The meta description.
 	 */
 	public function metadesc( $metadesc ) {
-		if ( '' !== $metadesc || ! is_singular( 'product' ) ) {
+		if ( '' !== $metadesc || ! is_singular( 'product' ) || post_password_required() ) {
 			return $metadesc;
 		}
 
@@ -252,6 +252,10 @@ class WooCommerce extends WC_Vars {
 	 * @return string
 	 */
 	protected function get_long_description( $product ) {
+		if ( post_password_required( $product->get_id() ) ) {
+			return '';
+		}
+
 		if ( method_exists( $product, 'get_description' ) ) {
 			return $product->get_description();
 		}

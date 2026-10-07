@@ -89,7 +89,7 @@ class SEO_Analyzer {
 		$this->analyse_url = home_url();
 
 		$this->action( 'init', 'set_url' );
-		$this->maybe_clear_storage();
+		$this->action( 'admin_init', 'maybe_clear_storage' );
 
 		$this->ajax( 'analyze', 'analyze_me' );
 		$this->ajax( 'enable_auto_update', 'enable_auto_update' );
@@ -235,13 +235,22 @@ class SEO_Analyzer {
 	/**
 	 * Clear stored results if needed.
 	 */
-	private function maybe_clear_storage() {
-		if ( '1' === Param::request( 'clear_results' ) ) {
-			delete_option( 'rank_math_seo_analysis_results' );
-			delete_option( 'rank_math_seo_analysis_date' );
-			Helper::redirect( Security::remove_query_arg_raw( 'clear_results' ) );
-			exit;
+	public function maybe_clear_storage() {
+		if ( '1' !== Param::request( 'clear_results' ) ) {
+			return;
 		}
+
+		if (
+			! Helper::has_cap( 'site_analysis' ) ||
+			! wp_verify_nonce( Param::request( 'security' ), 'rank-math-ajax-nonce' )
+		) {
+			return;
+		}
+
+		delete_option( 'rank_math_seo_analysis_results' );
+		delete_option( 'rank_math_seo_analysis_date' );
+		Helper::redirect( Security::remove_query_arg_raw( [ 'clear_results', 'security' ] ) );
+		exit;
 	}
 
 	/**

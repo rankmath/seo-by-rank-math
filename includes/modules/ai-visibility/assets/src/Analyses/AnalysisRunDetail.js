@@ -26,20 +26,28 @@ import './AnalysisRunDetail.scss'
 /**
  * Map an insights query result to the shape TranscriptModal expects.
  *
+ * The id is qualified by platform — the backend reuses the same query_id
+ * across platforms, so an unqualified id would collide.
+ *
  * @param {Object} result   Query result from the insights payload.
  * @param {number} index    Fallback index.
- * @param {Object} analysis Parent analysis meta.
+ * @param {Object} analysis Analysis run (matched by platform) this result belongs to.
  * @return {Object} Normalised entry.
  */
-const normalise = ( result, index, analysis ) => ( {
-	...result,
-	id: result.query_id ?? index,
-	query: result.query_text ?? '',
-	response: result.response ?? '',
-	created_at: analysis?.finished_at ?? null,
-	duration_seconds: analysis?.duration_seconds ?? null,
-	model: null,
-} )
+const normalise = ( result, index, analysis ) => {
+	const baseId = result.query_id ?? index
+	const platform = result.platform ?? 'default'
+
+	return {
+		...result,
+		id: `${ baseId }-${ platform }`,
+		query: result.query_text ?? '',
+		response: result.response ?? '',
+		created_at: analysis?.finished_at ?? null,
+		duration_seconds: analysis?.duration_seconds ?? null,
+		model: null,
+	}
+}
 
 /**
  * AnalysisRunDetail component.
@@ -60,10 +68,14 @@ const AnalysisRunDetail = ( { row, onBack } ) => {
 	const insights = insightsData?.insights ?? null
 	const [ modalEntry, setModalEntry ] = useState( null )
 
-	const transcripts = ( insights?.query_results ?? [] ).map( ( result, i ) => normalise( result, i, insights?.analysis ) )
-	const totalDuration = insights?.analysis?.duration_seconds ?? 0
+	const analyses = insights?.analyses ?? []
+	const findAnalysis = ( platform ) => analyses.find( ( analysis ) => analysis.platform === platform ) ?? analyses[ 0 ] ?? null
+
+	const transcripts = ( insights?.query_results ?? [] ).map( ( result, i ) => normalise( result, i, findAnalysis( result.platform ) ) )
+	const totalDuration = analyses.reduce( ( sum, analysis ) => sum + ( analysis.duration_seconds ?? 0 ), 0 )
 	const durationLabel = totalDuration ? `${ totalDuration }s` : '—'
-	const startedAt = row?.started_at ?? insights?.analysis?.started_at
+	const startedAts = analyses.map( ( analysis ) => analysis.started_at ).filter( Boolean ).sort()
+	const startedAt = row?.started_at ?? startedAts[ 0 ]
 
 	const handleExportReport = () => navigateToReportsTab( row.id )
 
@@ -94,7 +106,7 @@ const AnalysisRunDetail = ( { row, onBack } ) => {
 						value={ row?.brand_name || '—' }
 						className="rank-math-ai-visibility-stat-card--target-brand"
 						tooltip={ __( 'The brand this analysis run is for.', 'seo-by-rank-math' ) }
-						analysis={ insights?.analysis }
+						analysis={ analyses[ 0 ] ?? null }
 					/>
 
 					<StatCard
@@ -105,7 +117,7 @@ const AnalysisRunDetail = ( { row, onBack } ) => {
 						sub={ formatShortDate( startedAt ) }
 						className="rank-math-ai-visibility-stat-card--duration-timing"
 						tooltip={ __( 'Total duration of all queries in this run, and the date it was started.', 'seo-by-rank-math' ) }
-						analysis={ insights?.analysis }
+						analysis={ analyses[ 0 ] ?? null }
 					/>
 
 				</div>

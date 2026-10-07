@@ -13,6 +13,7 @@ namespace RankMath\Admin\Importers;
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Redirections\Redirection;
+use RankMath\Tools\AIOSEO_Blocks;
 use RankMath\Helpers\DB;
 
 defined( 'ABSPATH' ) || exit;
@@ -48,7 +49,7 @@ class AIOSEO extends Plugin_Importer {
 	 *
 	 * @var array
 	 */
-	protected $choices = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'locations' ];
+	protected $choices = [ 'settings', 'postmeta', 'termmeta', 'usermeta', 'redirections', 'blocks', 'locations' ];
 
 	/**
 	 * AIOSEO settings.
@@ -67,6 +68,7 @@ class AIOSEO extends Plugin_Importer {
 			'settings' => esc_html__( 'Import Settings', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import AIO SEO plugin settings, global meta, sitemap settings, etc.', 'seo-by-rank-math' ) ),
 			'postmeta' => esc_html__( 'Import Post Meta', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import meta information of your posts/pages like the titles, descriptions, robots meta, OpenGraph info, etc.', 'seo-by-rank-math' ) ),
 			'usermeta' => esc_html__( 'Import Author Meta', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import Social URLs of your author archive pages.', 'seo-by-rank-math' ) ),
+			'blocks'   => esc_html__( 'Import Blocks', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import and convert all compatible blocks in post contents.', 'seo-by-rank-math' ) ),
 		];
 
 		if ( DB::check_table_exists( 'aioseo_terms' ) ) {
@@ -616,6 +618,10 @@ class AIOSEO extends Plugin_Importer {
 	 * Post Types settings.
 	 */
 	private function post_types_settings() {
+		if ( ! isset( $this->aio_settings['searchAppearance']['dynamic']['postTypes'] ) ) {
+			return;
+		}
+
 		$settings = $this->aio_settings['searchAppearance']['dynamic']['postTypes'];
 		foreach ( Helper::get_accessible_post_types() as $post_type ) {
 			if ( empty( $settings[ $post_type ] ) ) {
@@ -815,6 +821,24 @@ class AIOSEO extends Plugin_Importer {
 				update_user_meta( $userid, 'additional_profile_urls', implode( ' ', array_filter( $social_urls ) ) );
 			}
 		}
+
+		return $this->get_pagination_arg();
+	}
+
+	/**
+	 * Import/convert blocks of plugin.
+	 *
+	 * @return array
+	 */
+	protected function blocks() {
+		$posts = AIOSEO_Blocks::get()->find_posts();
+		if ( empty( $posts['posts'] ) ) {
+			return __( 'No post found.', 'seo-by-rank-math' );
+		}
+
+		$this->set_pagination( $posts['count'] );
+
+		AIOSEO_Blocks::get()->wizard( array_slice( $posts['posts'], ( $this->items_per_page * ( $this->get_pagination_arg( 'page' ) - 1 ) ), $this->items_per_page ) );
 
 		return $this->get_pagination_arg();
 	}
@@ -1049,6 +1073,10 @@ class AIOSEO extends Plugin_Importer {
 	 * @param string $object_type Current Object type.
 	 */
 	private function set_keywords( $object_id, $data, $object_type ) {
+		if ( empty( $data['keyphrases'] ) ) {
+			return;
+		}
+
 		$keywords   = [];
 		$keyphrases = json_decode( $data['keyphrases'], true );
 

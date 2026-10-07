@@ -55,9 +55,14 @@ const SUB_TABS = [
  * @param {number}   props.brandId
  * @param {Function} [props.onBack]
  * @param {Array}    [props.locales]
+ * @param {Array}    [props.languages]
+ * @param {string}   [props.defaultLanguage] Default language for new brands (site language).
+ * @param {Array}    [props.intervals]
+ * @param {Object}   [props.platforms]       AI platform registry from PHP.
+ * @param {number}   [props.maxPlatforms]    Platforms selectable on the current plan.
  * @return {JSX.Element} Rendered component.
  */
-const BrandDetail = ( { brandId, onBack, locales = [] } ) => {
+const BrandDetail = ( { brandId, onBack, locales = [], languages = [], defaultLanguage = '', intervals = [], platforms = {}, maxPlatforms = 1 } ) => {
 	const handleBack = onBack || navigateBackToDashboard
 	const { data: brandData, loading, error, setData: setBrandData } = useFetch(
 		() => getBrand( brandId ),
@@ -165,6 +170,11 @@ const BrandDetail = ( { brandId, onBack, locales = [] } ) => {
 					isSaving={ isSaving }
 					apiError={ saveError }
 					locales={ locales }
+					languages={ languages }
+					defaultLanguage={ defaultLanguage }
+					intervals={ intervals }
+					platforms={ platforms }
+					maxPlatforms={ maxPlatforms }
 				/>
 			) }
 

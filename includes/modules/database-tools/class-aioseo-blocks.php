@@ -1,6 +1,6 @@
 <?php
 /**
- * The AIOSEO Block Converter imports editor blocks (TOC) from AIOSEO to Rank Math.
+ * The AIOSEO Block Converter imports editor blocks (TOC, FAQ) from AIOSEO to Rank Math.
  *
  * @since      1.0.104
  * @package    RankMath
@@ -25,6 +25,13 @@ class AIOSEO_Blocks extends \WP_Background_Process {
 	 * @var AIOSEO_TOC_Converter
 	 */
 	private $toc_converter;
+
+	/**
+	 * FAQ Converter.
+	 *
+	 * @var AIOSEO_FAQ_Converter
+	 */
+	private $faq_converter;
 
 	/**
 	 * Action.
@@ -106,6 +113,7 @@ class AIOSEO_Blocks extends \WP_Background_Process {
 		try {
 			remove_filter( 'pre_kses', 'wp_pre_kses_block_attributes', 10 );
 			$this->toc_converter = new AIOSEO_TOC_Converter();
+			$this->faq_converter = new AIOSEO_FAQ_Converter();
 			foreach ( $posts as $post_id ) {
 				$post = get_post( $post_id );
 				$this->convert( $post );
@@ -124,11 +132,16 @@ class AIOSEO_Blocks extends \WP_Background_Process {
 	public function convert( $post ) {
 		$dirty   = false;
 		$blocks  = $this->parse_blocks( $post->post_content );
-		$content = '';
+		$content = $post->post_content;
 
 		if ( isset( $blocks['aioseo/table-of-contents'] ) && ! empty( $blocks['aioseo/table-of-contents'] ) ) {
 			$dirty   = true;
-			$content = $this->toc_converter->replace( $post->post_content, $blocks['aioseo/table-of-contents'] );
+			$content = $this->toc_converter->replace( $content, $blocks['aioseo/table-of-contents'] );
+		}
+
+		if ( isset( $blocks['aioseo/faq'] ) && ! empty( $blocks['aioseo/faq'] ) ) {
+			$dirty   = true;
+			$content = $this->faq_converter->replace( $content, $blocks['aioseo/faq'] );
 		}
 
 		if ( $dirty ) {
@@ -144,7 +157,7 @@ class AIOSEO_Blocks extends \WP_Background_Process {
 	 */
 	public function find_posts() {
 		$posts = get_option( 'rank_math_aioseo_block_posts' );
-		if ( false !== $posts ) {
+		if ( ! empty( $posts['posts'] ) ) {
 			return $posts;
 		}
 
@@ -158,10 +171,16 @@ class AIOSEO_Blocks extends \WP_Background_Process {
 			'post_type'     => 'any',
 		];
 
-		$toc_posts  = get_posts( $args );
+		$toc_posts = get_posts( $args );
+
+		// FAQ Posts.
+		$args['s'] = 'wp:aioseo/faq ';
+		$faq_posts = get_posts( $args );
+
+		$posts      = array_unique( array_merge( $toc_posts, $faq_posts ) );
 		$posts_data = [
-			'posts' => $toc_posts,
-			'count' => count( $toc_posts ),
+			'posts' => $posts,
+			'count' => count( $posts ),
 		];
 		update_option( 'rank_math_aioseo_block_posts', $posts_data, false );
 
@@ -178,7 +197,8 @@ class AIOSEO_Blocks extends \WP_Background_Process {
 	private function parse_blocks( $content ) {
 		$parsed_blocks = parse_blocks( $content );
 
-		$blocks = [];
+		$blocks    = [];
+		$faq_items = [];
 		foreach ( $parsed_blocks as $block ) {
 			if ( empty( $block['blockName'] ) ) {
 				continue;
@@ -197,6 +217,15 @@ class AIOSEO_Blocks extends \WP_Background_Process {
 				$block             = $this->toc_converter->convert( $block );
 				$blocks[ $name ][] = \serialize_block( $block );
 			}
+
+			if ( 'aioseo/faq' === $name ) {
+				$faq_items[] = $block;
+			}
+		}
+
+		// AIOSEO stores every FAQ item as its own block, so they are merged into a single Rank Math FAQ block.
+		if ( ! empty( $faq_items ) ) {
+			$blocks['aioseo/faq'][] = \serialize_block( $this->faq_converter->convert( $faq_items ) );
 		}
 
 		return $blocks;

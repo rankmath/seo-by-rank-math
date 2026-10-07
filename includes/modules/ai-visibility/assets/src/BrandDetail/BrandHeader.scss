@@ -81,6 +81,16 @@
 		}
 	}
 
+	&__language {
+		display:       inline-flex;
+		align-items:   center;
+		padding:       2px 8px;
+		border-radius: 20px;
+		font-size:     11px;
+		color:         $color-text-muted;
+		border:        1px solid $color-border;
+	}
+
 	&__external {
 		color:           #757575;
 		display:         inline-flex;

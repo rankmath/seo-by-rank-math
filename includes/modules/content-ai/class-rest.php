@@ -212,7 +212,7 @@ class Rest extends WP_REST_Controller {
 				'permission_callback' => [ $this, 'has_ping_permission' ],
 				'args'                => [
 					'plan'        => [
-						'description' => esc_html__( 'Content AI plan to update in the Database.', 'seo-by-rank-math' ),
+						'description' => esc_html__( 'Rank Math AI plan to update in the Database.', 'seo-by-rank-math' ),
 						'type'        => 'string',
 						'required'    => true,
 					],
@@ -675,7 +675,7 @@ class Rest extends WP_REST_Controller {
 			return wp_kses_post(
 				sprintf(
 					// Translators: link to the update page.
-					__( 'There is a new version of Content AI available! %s the Rank Math SEO plugin to use this feature.', 'seo-by-rank-math' ),
+					__( 'There is a new version of Rank Math AI available! %s the Rank Math SEO plugin to use this feature.', 'seo-by-rank-math' ),
 					'<a href="' . esc_url( self_admin_url( 'update-core.php' ) ) . '">' . __( 'Please update', 'seo-by-rank-math' ) . '</a>'
 				)
 			);

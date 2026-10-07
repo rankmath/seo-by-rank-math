@@ -145,7 +145,7 @@ class Admin_Menu implements Runner {
 			return;
 		}
 
-		$this->reorder_support_page( $submenu );
+		$submenu['rank-math'][] = [ esc_html__( 'Help &amp; Support', 'seo-by-rank-math' ) . '<i class="dashicons dashicons-external" style="font-size:12px;vertical-align:-2px;height:10px;"></i>', 'manage_options', KB::get( 'knowledgebase', 'Sidebar Help Link' ) ]; // phpcs:ignore -- A custom link to our KB article.
 		$this->add_offer_link( $submenu );
 
 		// Store ID of first_menu item so we can use it in the Admin menu item.
@@ -210,42 +210,6 @@ class Admin_Menu implements Runner {
 		}
 
 		Admin_Helper::deregister_user();
-	}
-
-	/**
-	 * Move "Help & Support" to the back of the Rank Math submenu.
-	 *
-	 * @param array $submenu Submenu items, by reference.
-	 */
-	private function reorder_support_page( &$submenu ) {
-		$items = $submenu['rank-math'];
-
-		$support_key = $this->find_submenu_key( $items, \RankMath\Agent\Support_Agent::PAGE_SLUG );
-		if ( $support_key !== null ) {
-			$support_item = $items[ $support_key ];
-			unset( $items[ $support_key ] );
-			$items[ $support_key ] = $support_item;
-		}
-
-		$submenu['rank-math'] = $items;
-	}
-
-	/**
-	 * Find a submenu row's array key by its menu_slug.
-	 *
-	 * @param array  $items Submenu items (menu_title, capability, slug, page_title tuples).
-	 * @param string $slug  The menu_slug to find.
-	 *
-	 * @return int|string|null
-	 */
-	private function find_submenu_key( $items, $slug ) {
-		foreach ( $items as $key => $item ) {
-			if ( $slug === $item[2] ) {
-				return $key;
-			}
-		}
-
-		return null;
 	}
 
 	/**

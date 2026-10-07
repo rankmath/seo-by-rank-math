@@ -140,9 +140,9 @@ trait Content_AI {
 	}
 
 	/**
-	 * Function to get Content AI Plan.
+	 * Function to get Rank Math AI Plan.
 	 *
-	 * @return string Content AI Plan.
+	 * @return string Rank Math AI Plan.
 	 */
 	public static function get_content_ai_plan() {
 		$credits_data = get_option( self::$credits_key, [] );
@@ -488,6 +488,140 @@ trait Content_AI {
 	}
 
 	/**
+	 * Function to get the list of supported languages.
+	 *
+	 * @return array Supported languages.
+	 */
+	public static function get_content_ai_languages() {
+		return [
+			[
+				'name' => 'US English',
+				'icon' => '🇺🇸',
+			],
+			[
+				'name' => 'UK English',
+				'icon' => '🇬🇧',
+			],
+			[
+				'name' => 'Arabic',
+				'icon' => '🇦🇪',
+			],
+			[
+				'name' => 'Bulgarian',
+				'icon' => '🇧🇬',
+			],
+			[
+				'name' => 'Chinese',
+				'icon' => '🇨🇳',
+			],
+			[
+				'name' => 'Czech',
+				'icon' => '🇨🇿',
+			],
+			[
+				'name' => 'Danish',
+				'icon' => '🇩🇰',
+			],
+			[
+				'name' => 'Dutch',
+				'icon' => '🇳🇱',
+			],
+			[
+				'name' => 'Estonian',
+				'icon' => '🇪🇪',
+			],
+			[
+				'name' => 'Finnish',
+				'icon' => '🇫🇮',
+			],
+			[
+				'name' => 'French',
+				'icon' => '🇫🇷',
+			],
+			[
+				'name' => 'German',
+				'icon' => '🇩🇪',
+			],
+			[
+				'name' => 'Greek',
+				'icon' => '🇬🇷',
+			],
+			[
+				'name' => 'Hebrew',
+				'icon' => '🇮🇱',
+			],
+			[
+				'name' => 'Hungarian',
+				'icon' => '🇭🇺',
+			],
+			[
+				'name' => 'Indonesian',
+				'icon' => '🇮🇩',
+			],
+			[
+				'name' => 'Italian',
+				'icon' => '🇮🇹',
+			],
+			[
+				'name' => 'Japanese',
+				'icon' => '🇯🇵',
+			],
+			[
+				'name' => 'Korean',
+				'icon' => '🇰🇷',
+			],
+			[
+				'name' => 'Latvian',
+				'icon' => '🇱🇻',
+			],
+			[
+				'name' => 'Lithuanian',
+				'icon' => '🇱🇹',
+			],
+			[
+				'name' => 'Norwegian',
+				'icon' => '🇳🇴',
+			],
+			[
+				'name' => 'Polish',
+				'icon' => '🇵🇱',
+			],
+			[
+				'name' => 'Portuguese',
+				'icon' => '🇵🇹',
+			],
+			[
+				'name' => 'Romanian',
+				'icon' => '🇷🇴',
+			],
+			[
+				'name' => 'Russian',
+				'icon' => '🇷🇺',
+			],
+			[
+				'name' => 'Slovak',
+				'icon' => '🇸🇰',
+			],
+			[
+				'name' => 'Slovenian',
+				'icon' => '🇸🇮',
+			],
+			[
+				'name' => 'Spanish',
+				'icon' => '🇪🇸',
+			],
+			[
+				'name' => 'Swedish',
+				'icon' => '🇸🇪',
+			],
+			[
+				'name' => 'Turkish',
+				'icon' => '🇹🇷',
+			],
+		];
+	}
+
+	/**
 	 * Function to get different error codes we get from the API
 	 *
 	 * @return array Array of error codes with messages.
@@ -496,7 +630,7 @@ trait Content_AI {
 		return [
 			'not_connected'           => esc_html__( 'Please connect your account to use the Content AI.', 'seo-by-rank-math' ),
 			'plugin_update_required'  => esc_html__( 'Please update the Rank Math SEO plugin to the latest version to use this feature.', 'seo-by-rank-math' ),
-			'upgrade_required'        => esc_html__( 'This feature is only available for Content AI subscribers.', 'seo-by-rank-math' ),
+			'upgrade_required'        => esc_html__( 'This feature is only available for Rank Math AI subscribers.', 'seo-by-rank-math' ),
 			'rate_limit_exceeded'     => esc_html__( 'Oops! Too many requests in a short time. Please try again after some time.', 'seo-by-rank-math' ),
 			'domain_limit_reached'    => esc_html__( 'You\'ve reached the monthly usage limit for this feature on your domain.', 'seo-by-rank-math' ),
 			'account_limit_reached'   => esc_html__( 'You\'ve reached the monthly usage limit for this feature.', 'seo-by-rank-math' ),

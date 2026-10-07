@@ -59,6 +59,28 @@ class DB {
 	}
 
 	/**
+	 * Get redirection counts grouped by header code (redirect type), e.g. [ 301 => 12, 302 => 4 ].
+	 * Excludes trashed redirections, matching the 'all' count in get_counts() above.
+	 *
+	 * @return array
+	 */
+	public static function get_counts_by_type() {
+		$rows = self::table()
+			->select( [ 'header_code' ] )
+			->selectCount( '*', 'count' )
+			->where( 'status', '!=', 'trashed' )
+			->groupBy( 'header_code' )
+			->get( ARRAY_A );
+
+		$by_type = [];
+		foreach ( $rows as $row ) {
+			$by_type[ (int) $row['header_code'] ] = (int) $row['count'];
+		}
+
+		return $by_type;
+	}
+
+	/**
 	 * Get redirections.
 	 *
 	 * @param array $args Array of filters apply to query.

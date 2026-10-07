@@ -21,6 +21,7 @@ import { trendingUp, store } from '@wordpress/icons'
  * Internal dependencies
  */
 import useDashboard from '../shared/hooks/useDashboard'
+import usePagination from '../shared/hooks/usePagination'
 import { getBrand } from '../shared/services/api/aiVisibilityApi'
 import { StatCard, EmptyState } from '../shared/components'
 import { ConfirmModal, AddBrandModal, UpgradePlanModal } from '../shared/Modals'
@@ -67,11 +68,11 @@ const getConfirmMessage = ( confirmBrand, confirmAction ) => {
 /**
  * Resolve the display value for a summary StatCard.
  *
- * @param {Object}    options
- * @param {boolean}   options.loading   Whether the dashboard is still loading.
- * @param {boolean}   options.hasBrands Whether any brands are tracked.
- * @param {*}         options.raw       Raw summary value (may be null/undefined).
- * @param {Function} [options.format]   Optional formatter for a present value.
+ * @param {Object}   options
+ * @param {boolean}  options.loading   Whether the dashboard is still loading.
+ * @param {boolean}  options.hasBrands Whether any brands are tracked.
+ * @param {*}        options.raw       Raw summary value (may be null/undefined).
+ * @param {Function} [options.format]  Optional formatter for a present value.
  * @return {string|number|null} Placeholder, null (empty), 0 (missing) or formatted value.
  */
 const getStatValue = ( { loading, hasBrands, raw, format } ) => {
@@ -89,11 +90,16 @@ const getStatValue = ( { loading, hasBrands, raw, format } ) => {
 
 /**
  * @param {Object}   props
- * @param {Array}    [props.locales]        Locale options for the brand modals.
- * @param {Function} [props.onBrandCreated] Callback when a new brand is successfully created.
+ * @param {Array}    [props.locales]         Locale options for the brand modals.
+ * @param {Array}    [props.languages]       Output language options for the brand modals.
+ * @param {string}   [props.defaultLanguage] Default language for new brands (site language).
+ * @param {Object}   [props.platforms]       AI platform registry from PHP.
+ * @param {number}   [props.maxPlatforms]    Platforms selectable on the current plan.
+ * @param {Function} [props.onBrandCreated]  Callback when a new brand is successfully created.
+ * @param {Array}    [props.intervals]       Interval options for the brand modals.
  * @return {JSX.Element} Rendered component.
  */
-const Dashboard = ( { locales = [], onBrandCreated = () => {} } ) => {
+const Dashboard = ( { locales = [], languages = [], defaultLanguage = '', platforms = {}, maxPlatforms = 1, onBrandCreated = () => {}, intervals = [] } ) => {
 	const [ activeBrandId, setActiveBrandId ] = useState( getActiveBrandId )
 
 	useEffect( () => {
@@ -114,13 +120,11 @@ const Dashboard = ( { locales = [], onBrandCreated = () => {} } ) => {
 		handleEnableBrand,
 	} = useDashboard()
 
-	// Modal state
 	const [ isAddModalOpen, setAddModalOpen ] = useState( false )
 	const [ editBrand, setEditBrand ] = useState( null )
 	const [ isSaving, setIsSaving ] = useState( false )
 	const [ saveError, setSaveError ] = useState( null )
 
-	// ConfirmModal state
 	const [ confirmBrand, setConfirmBrand ] = useState( null )
 	const [ confirmAction, setConfirmAction ] = useState( 'delete' )
 	const [ isProcessing, setIsProcessing ] = useState( false )
@@ -128,9 +132,12 @@ const Dashboard = ( { locales = [], onBrandCreated = () => {} } ) => {
 
 	const [ isUpgradeModalOpen, setUpgradeModalOpen ] = useState( false )
 
-	// Search: debounced 300 ms, proxy filters cached rows server-side.
+	// Search is debounced 300ms.
 	const [ searchQuery, setSearchQuery ] = useState( '' )
 	const isFirstSearchRender = useRef( true )
+
+	const { pagination, pageItems, total, pages, onPageChange, onPerPageChange, resetPage } =
+		usePagination( brands, { perPage: 10, syncUrl: true } )
 
 	useEffect( () => {
 		if ( isFirstSearchRender.current ) {
@@ -140,9 +147,10 @@ const Dashboard = ( { locales = [], onBrandCreated = () => {} } ) => {
 
 		const timer = setTimeout( () => {
 			handleSearch( searchQuery.trim() )
+			resetPage()
 		}, 300 )
 		return () => clearTimeout( timer )
-	}, [ searchQuery, handleSearch ] )
+	}, [ searchQuery, handleSearch, resetPage ] )
 
 	const hasActiveSearch = !! searchQuery.trim()
 	const isEmpty = ! loading && brands.length === 0 && ! hasActiveSearch
@@ -234,6 +242,11 @@ const Dashboard = ( { locales = [], onBrandCreated = () => {} } ) => {
 				brandId={ activeBrandId }
 				onBack={ handleBackToDashboard }
 				locales={ locales }
+				languages={ languages }
+				defaultLanguage={ defaultLanguage }
+				intervals={ intervals }
+				platforms={ platforms }
+				maxPlatforms={ maxPlatforms }
 			/>
 		)
 	}
@@ -260,8 +273,8 @@ const Dashboard = ( { locales = [], onBrandCreated = () => {} } ) => {
 				<StatCard
 					className="rank-math-ai-visibility-stat-card--analyses"
 					icon={ trendingUp }
-					label={ __( 'Analyses in last 24h', 'seo-by-rank-math' ) }
-					value={ getStatValue( { loading, hasBrands: brands.length > 0, raw: summary?.analyses_last_24h } ) }
+					label={ __( 'Analyses in the last 7 days', 'seo-by-rank-math' ) }
+					value={ getStatValue( { loading, hasBrands: brands.length > 0, raw: summary?.analyses_last_7d } ) }
 					tooltip={ __( 'Total analysis runs completed in the past 24 hours.', 'seo-by-rank-math' ) }
 				/>
 				<StatCard
@@ -297,8 +310,9 @@ const Dashboard = ( { locales = [], onBrandCreated = () => {} } ) => {
 					/>
 
 					<BrandsTable
-						brands={ brands }
+						brands={ pageItems }
 						loading={ loading }
+						pagination={ { ...pagination, total, pages } }
 						onView={ handleViewBrand }
 						onEdit={ async ( brand ) => {
 							setEditBrand( brand )
@@ -313,6 +327,8 @@ const Dashboard = ( { locales = [], onBrandCreated = () => {} } ) => {
 							}
 						} }
 						onDisable={ ( brand ) => openDisableConfirm( brand ) }
+						onPageChange={ onPageChange }
+						onPerPageChange={ onPerPageChange }
 					/>
 				</div>
 			) }
@@ -325,6 +341,11 @@ const Dashboard = ( { locales = [], onBrandCreated = () => {} } ) => {
 					isSaving={ isSaving }
 					apiError={ saveError }
 					locales={ locales }
+					languages={ languages }
+					defaultLanguage={ defaultLanguage }
+					intervals={ intervals }
+					platforms={ platforms }
+					maxPlatforms={ maxPlatforms }
 				/>
 			) }
 

@@ -237,7 +237,7 @@ class Taxonomy implements Provider {
 	 * @param  int    $current_page Current page of the sitemap.
 	 * @return false|array
 	 */
-	private function get_terms( $taxonomy, $max_entries, $current_page ) {
+	public function get_terms( $taxonomy, $max_entries, $current_page ) {
 		$offset     = $current_page > 1 ? ( ( $current_page - 1 ) * $max_entries ) : 0;
 		$hide_empty = ! Helper::get_settings( 'sitemap.tax_' . $taxonomy->name . '_include_empty' );
 

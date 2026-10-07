@@ -76,7 +76,7 @@ const App = ( { config = {} } ) => {
 		setActiveTab( tabName )
 	}
 
-	const { isSiteConnected, isPro, plan, locales = [] } = rankMath.aiVisibility
+	const { isSiteConnected, isPro, plan, locales = [], languages = [], defaultLanguage = '', intervals = [], platforms = {}, maxPlatforms = 1 } = rankMath.aiVisibility
 
 	// Access gate — Free Content AI plan: PRO users get the trial flow,
 	// free plugin users get the upgrade modal.
@@ -100,7 +100,7 @@ const App = ( { config = {} } ) => {
 						<div className={ 'rank-math-ai-visibility__tab rank-math-ai-visibility__tab--' + tab.name }>
 							{ ! isSiteConnected && <Connect config={ config } /> }
 							{ isSiteConnected && (
-								isPlanGated ? <GatedPreview /> : createElement( tab.view, { locales, onBrandCreated: showSnackbar } )
+								isPlanGated ? <GatedPreview /> : createElement( tab.view, { locales, languages, defaultLanguage, intervals, platforms, maxPlatforms, onBrandCreated: showSnackbar } )
 							) }
 						</div>
 					) }

@@ -2,7 +2,7 @@
  * Derive a brand's display analysis state from its `analysis_status`.
  *
  * API status semantics:
- *   success → ran successfully (a future weekly run is masked as success)
+ *   success → ran successfully (a future monthly run is masked as success)
  *   partial → last run completed partially
  *   pending → awaiting first run, or an overdue run is due
  *   running → a run is currently in progress

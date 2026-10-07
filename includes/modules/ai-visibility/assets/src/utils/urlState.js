@@ -110,3 +110,33 @@ export const navigateToReportsTab = ( brandId ) => {
 	window.history.pushState( {}, '', url )
 	window.dispatchEvent( new window.PopStateEvent( 'popstate' ) )
 }
+
+/**
+ * @param {number} [fallback=1] Fallback when `aiv_page` is absent/invalid.
+ * @return {number} Page number from the URL.
+ */
+export const getPageFromUrl = ( fallback = 1 ) => {
+	const raw = parseInt( getQueryArg( window.location.href, 'aiv_page' ), 10 )
+	return raw > 0 ? raw : fallback
+}
+
+/**
+ * @param {number} [fallback=10] Fallback when `aiv_per` is absent/invalid.
+ * @return {number} Page size from the URL.
+ */
+export const getPerPageFromUrl = ( fallback = 10 ) => {
+	const raw = parseInt( getQueryArg( window.location.href, 'aiv_per' ), 10 )
+	return raw > 0 ? raw : fallback
+}
+
+/**
+ * @param {Object} pagination          `{ page, perPage }`.
+ * @param {number} [defaultPerPage=10] Omitted from the URL when matched.
+ */
+export const writePaginationToUrl = ( pagination, defaultPerPage = 10 ) => {
+	const url = addQueryArgs( window.location.href, {
+		aiv_page: pagination.page > 1 ? pagination.page : undefined,
+		aiv_per: pagination.perPage !== defaultPerPage ? pagination.perPage : undefined,
+	} )
+	window.history.replaceState( {}, '', url )
+}

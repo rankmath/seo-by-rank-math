@@ -7,7 +7,7 @@
 /**
  * WordPress dependencies
  */
-import { useMemo, useState, useEffect } from '@wordpress/element'
+import { useMemo, useState, useEffect, useRef } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import { SelectControl, SearchControl, Button } from '@wordpress/components'
 
@@ -43,28 +43,31 @@ const AnalysesFilterBar = ( {
 } ) => {
 	const ns = 'rank-math-ai-visibility-analyses-filter-bar'
 
-	// Prepend "All Brands" option to the brand list.
 	const brandSelectOptions = useMemo( () => [
 		{ label: __( 'All Brands', 'seo-by-rank-math' ), value: '' },
 		...brandOptions,
 	], [ brandOptions ] )
 
-	// The hook stores brandIds as an array. For the single-select UI we store
-	// the first item (or '') and convert back on change.
+	// brandIds is an array; the single-select UI only needs the first item.
 	const activeBrandId = ( filters.brandIds && filters.brandIds[ 0 ] )
 		? String( filters.brandIds[ 0 ] )
 		: ''
 
-	// Local search state — debounced 300 ms before propagating to the hook.
-	// This prevents a new API request on every keystroke.
 	const [ localSearch, setLocalSearch ] = useState( filters.search || '' )
+	const isFirstSearchRender = useRef( true )
 
-	// Sync local state if the parent resets filters externally (e.g. "clear all").
+	// Sync when the parent resets filters externally (e.g. "clear all").
 	useEffect( () => {
 		setLocalSearch( filters.search || '' )
 	}, [ filters.search ] )
 
+	// Skip on mount — avoids a no-op filter change resetting pagination.
 	useEffect( () => {
+		if ( isFirstSearchRender.current ) {
+			isFirstSearchRender.current = false
+			return
+		}
+
 		const timer = setTimeout( () => {
 			onFilterChange( { search: localSearch } )
 		}, 300 )
@@ -82,7 +85,6 @@ const AnalysesFilterBar = ( {
 	return (
 		<div className={ ns }>
 
-			{ /* Brand — standard SelectControl, matches Status style */ }
 			<SelectControl
 				className={ `${ ns }__brand` }
 				value={ activeBrandId }
@@ -102,7 +104,6 @@ const AnalysesFilterBar = ( {
 				__nextHasNoMarginBottom={ true }
 			/>
 
-			{ /* Search — value bound to local state; propagation is debounced 300 ms */ }
 			<SearchControl
 				className={ `${ ns }__search` }
 				placeholder={ __( 'Search', 'seo-by-rank-math' ) }
@@ -123,7 +124,6 @@ const AnalysesFilterBar = ( {
 				</Button>
 			) }
 
-			{ /* Date range: [📅 From] - [📅 To] */ }
 			<div className={ `${ ns }__dates` }>
 				<div className={ `${ ns }__date-wrap` }>
 					<DateInput

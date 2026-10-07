@@ -180,6 +180,55 @@ class Sitepress {
 	}
 
 	/**
+	 * Get permalink for a post, resolved in the post's own language.
+	 *
+	 * Temporarily switches WPML's active language to the post's language before
+	 * calling get_permalink(), then restores it. This avoids returning the wrong
+	 * language's URL when the active request language differs from the post's
+	 * language, e.g. in background/async jobs or REST/MCP requests. For
+	 * separate-domain installs, the scheme+host is also stripped so the caller
+	 * can rebuild the URL against the correct language domain.
+	 *
+	 * @param int $post_id Post ID.
+	 *
+	 * @return string
+	 */
+	public function get_permalink( $post_id ) {
+		if ( ! $this->is_active() ) {
+			return get_permalink( $post_id );
+		}
+
+		$sitepress = $this->get_var();
+
+		$details  = apply_filters( 'wpml_post_language_details', null, $post_id );
+		$code     = $details['language_code'] ?? '';
+		$current  = $sitepress->get_current_language();
+		$switched = $code && $code !== $current;
+
+		if ( $switched ) {
+			$sitepress->switch_lang( $code, true );
+		}
+
+		try {
+			$permalink = get_permalink( $post_id );
+		} finally {
+			if ( $switched ) {
+				$sitepress->switch_lang( $current, true );
+			}
+		}
+
+		$language_domains = $sitepress->get_setting( 'language_domains', [] );
+		if ( $language_domains ) {
+			$permalink = apply_filters( 'wpml_permalink', $permalink, $code );
+			foreach ( $language_domains as $domain ) {
+				$permalink = preg_replace( "#https?://{$domain}#i", '', $permalink );
+			}
+		}
+
+		return $permalink;
+	}
+
+	/**
 	 * Is per domain negotiation type.
 	 *
 	 * @return string
