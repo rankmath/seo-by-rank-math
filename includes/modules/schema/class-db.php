@@ -71,12 +71,12 @@ class DB {
 		$schemas = [];
 		foreach ( $data as $schema ) {
 			$value = maybe_unserialize( $schema->meta_value );
-			if ( empty( $value ) ) {
+			if ( empty( $value ) || ! is_array( $value ) ) {
 				continue;
 			}
 
 			$id             = 'schema-' . $schema->meta_id;
-			$schemas[ $id ] = maybe_unserialize( $schema->meta_value );
+			$schemas[ $id ] = $value;
 		}
 
 		// Add to cache.
