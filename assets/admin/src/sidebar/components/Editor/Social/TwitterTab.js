@@ -125,6 +125,21 @@ const TwitterTab = ( props ) => (
 			<SocialMediaUpload { ...props } />
 		) }
 
+		{ 'app' !== props.cardType && (
+			<div className="field-group">
+				<TextareaControl
+					id="rank-math-twitter-image-alt"
+					label={ __( 'Image Alt Text', 'rank-math' ) }
+					value={ props.imageAlt }
+					help={ __(
+						'Describe the image for people who cannot see it. Leave blank to use the selected image Media Library alt text.',
+						'rank-math'
+					) }
+					onChange={ props.updateImageAlt }
+				/>
+			</div>
+		) }
+
 		{ ! props.useFacebook && applyFilters( 'rank_math_before_serp_devices', '', 'Opengraph' ) }
 
 		{ ! props.useFacebook && 'app' !== props.cardType && (
@@ -259,6 +274,7 @@ export default compose(
 			imageID: useFacebook
 				? repo.getFacebookImageID()
 				: repo.getTwitterImageID(),
+			imageAlt: repo.getTwitterImageAlt(),
 			hasOverlay: useFacebook
 				? repo.getFacebookHasOverlay()
 				: repo.getTwitterHasOverlay(),
@@ -278,6 +294,10 @@ export default compose(
 			updateImage( attachment ) {
 				dispatch( 'rank-math' ).updateTwitterImage( attachment.url )
 				dispatch( 'rank-math' ).updateTwitterImageID( attachment.id )
+			},
+
+			updateImageAlt( imageAlt ) {
+				dispatch( 'rank-math' ).updateTwitterImageAlt( imageAlt )
 			},
 
 			updateTitle( title ) {
