@@ -5,7 +5,7 @@ Tags: seo, google search console, schema, redirection, xml sitemap
 Tested up to: 7.1
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.280
+Stable tag: 1.0.281
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -377,6 +377,19 @@ Service provider: Rank Math (ONE.COM INDIA PRIVATE LIMITED)
 Privacy policy: https://rankmath.com/privacy-policy/
 Terms of service: https://rankmath.com/terms-of-service/
 
+= Rank Math AI Visibility (ai-visibility.rankmath.com) =
+
+Used to track how your brand appears in responses from AI platforms. Only active when the AI Visibility module is enabled and you have a connected Rank Math account.
+
+* **Authentication:** Every request includes your Rank Math username, API key, and site URL to verify your account.
+* **Brand tracking setup:** Sends your brand's name, website URL, description, language, and country, along with the AI platforms you selected and the analysis frequency you chose. This is used to set up and run AI visibility analyses for your brand.
+* **Trial activation:** Sends your Rank Math username and API key to `rankmath.com/site-checkout-cai` to activate your AI Visibility trial.
+* **Upgrade checkout:** When you choose to upgrade from within the plugin, your Rank Math username and API key are sent to rankmath.com/site-checkout-cai to get a one-time checkout token.
+
+Service provider: Rank Math (ONE.COM INDIA PRIVATE LIMITED)
+Privacy policy: https://rankmath.com/privacy-policy/
+Terms of service: https://rankmath.com/terms-of-service/
+
 = Google APIs (googleapis.com, google.com) =
 
 Used by the Analytics module to retrieve website performance data. Only active when you have connected Google Analytics via the Rank Math Analytics module.
@@ -428,12 +441,13 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
-= 1.0.280 [Oct 06, 2026] =
-- Improved [Sitemaps](https://rankmath.com/kb/configure-sitemaps/) can now be fully pre-generated with the `wp rankmath sitemap generate` WP-CLI command, so large sites serve cached sitemap files instead of building them on every visit.
-- Improved plugin security with additional input validation and output escaping hardening.
-- Fixed [Analytics](https://rankmath.com/kb/analytics/) dashboard sections showing `N/A` after data fetching was completed.
-- Fixed [Polylang](https://rankmath.com/kb/polylang-compatibility/) meta translations that were not showing for secondary languages when Polylang PRO was active.
-- Fixed a database error being logged when saving user profiles with SEO Controls enabled for [Author Archives](https://rankmath.com/kb/titles-and-meta/#author-archives).
+= 1.0.281 [Nov 03, 2026] =
+- Added support for third-party heading blocks (e.g. GenerateBlocks Headline) in the [Table of Contents Block](https://rankmath.com/kb/table-of-contents-block/) via the new `rank_math/schema/toc/heading_blocks` [filter](https://rankmath.com/kb/filters-hooks-api-developer/#headings-block-toc).
+- Fixed [Sitemaps](https://rankmath.com/kb/configure-sitemaps/) and [llms.txt](https://rankmath.com/kb/llms-txt/) URLs returning 404 errors when rewrite rules were flushed during a WordPress Heartbeat request.
+- Fixed [Schema](https://rankmath.com/kb/rich-snippets/) `ImageObject` showing a hardcoded width and height of `200` when the primary image was taken from the post content.
+- Fixed translated WooCommerce product category pages returning 404 errors with [Polylang](https://rankmath.com/kb/polylang-compatibility/) when the Remove category base option was enabled.
+- Fixed the SEO meta save routine so that clearing a field only removes Rank Math's own metadata.
+- Removed the bundled WordPress MCP Adapter package to avoid conflicts with other plugins. [MCP Tools](https://rankmath.com/kb/mcp-tools/) now require the official [MCP Adapter plugin](https://wordpress.org/plugins/mcp-adapter/).
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

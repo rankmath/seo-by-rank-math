@@ -87,6 +87,7 @@ class Block_TOC extends Block {
 		$values['tocTitle']           = Helper::get_settings( 'general.toc_block_title' );
 		$values['tocExcludeHeadings'] = Helper::get_settings( 'general.toc_block_exclude_headings', [] );
 		$values['listStyle']          = Helper::get_settings( 'general.toc_block_list_style', 'ul' );
+		$values['tocHeadingBlocks']   = $this->get_heading_blocks();
 
 		return $values;
 	}
@@ -104,6 +105,27 @@ class Block_TOC extends Block {
 		Helper::add_json( 'tocTitle', Helper::get_settings( 'general.toc_block_title' ) );
 		Helper::add_json( 'tocExcludeHeadings', Helper::get_settings( 'general.toc_block_exclude_headings', [] ) );
 		Helper::add_json( 'listStyle', Helper::get_settings( 'general.toc_block_list_style', 'ul' ) );
+		Helper::add_json( 'tocHeadingBlocks', $this->get_heading_blocks() );
+	}
+
+	/**
+	 * Get third-party blocks that should be treated as headings by the TOC block.
+	 *
+	 * @return array
+	 */
+	private function get_heading_blocks() {
+		/**
+		 * Filter: 'rank_math/schema/toc/heading_blocks' - Register third-party blocks to detect as headings.
+		 *
+		 * Keyed by block name, each holding the attributes to read the heading level and text from:
+		 * `levelAttr`, `levelType` ('tag' for 'h2', 'number' for 2), `contentAttr` and `contentType`
+		 * ('string' or 'richText'). The optional `anchorAttr` must point at an id the block already
+		 * renders itself; without it the heading is listed with no jump link, as there is nowhere to
+		 * persist a generated one.
+		 *
+		 * @param array $heading_blocks Blocks to treat as headings.
+		 */
+		return $this->do_filter( 'schema/toc/heading_blocks', [] );
 	}
 
 	/**

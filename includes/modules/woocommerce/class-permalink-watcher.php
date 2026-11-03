@@ -13,6 +13,7 @@ namespace RankMath\WooCommerce;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Sitepress;
+use RankMath\Helpers\Polylang;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Param;
 
@@ -172,9 +173,10 @@ class Permalink_Watcher {
 		wp_cache_flush();
 
 		/**
-		 * Remove WPML filters while getting terms, to get all languages
+		 * Remove WPML and Polylang filters while getting terms, to get all languages
 		 */
 		Sitepress::get()->remove_term_filters();
+		Polylang::remove_term_filters();
 
 		$feed = '(' . trim( implode( '|', $wp_rewrite->feeds ) ) . ')';
 
@@ -182,9 +184,14 @@ class Permalink_Watcher {
 		$category_base       = $this->remove_category_base ? '' : $permalink_structure['category_rewrite_slug'];
 		$use_parent_slug     = Str::contains( '%product_cat%', $permalink_structure['product_rewrite_slug'] );
 
+		$categories = $this->get_categories();
+
+		// Prime the term-language cache so the lookup below doesn't run a query per category.
+		Polylang::prime_term_language_cache( array_keys( $categories ) );
+
 		$product_rules  = [];
 		$category_rules = [];
-		foreach ( $this->get_categories() as $category ) {
+		foreach ( $categories as $term_id => $category ) {
 			$cat_path = $this->get_category_fullpath( $category );
 			$cat_slug = $category_base . ( $this->remove_parent_slugs ? $category['slug'] : $cat_path );
 			$cat_slug = urldecode( $cat_slug );
@@ -195,6 +202,10 @@ class Permalink_Watcher {
 			$category_rules[ "{$cat_slug}/{$feed}/?\$" ]                          = 'index.php?product_cat=' . $category['slug'] . '&feed=$matches[1]';
 			$category_rules[ "{$cat_slug}/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?\$" ] = 'index.php?product_cat=' . $category['slug'] . '&paged=$matches[1]';
 
+			// Polylang can't prefix rules added on rewrite_rules_array, so add the /{lang}/ variants here.
+			// array_merge(), not +=, so a colliding key resolves as the bare rules above do: last category wins.
+			$category_rules = array_merge( $category_rules, Polylang::get_category_rewrite_rules( $term_id, $cat_slug, $category['slug'], $wp_rewrite, $feed ) );
+
 			if ( $this->remove_product_base && $use_parent_slug ) {
 				$cat_path                                   = urldecode( $cat_path );
 				$product_rules[ $cat_path . '/([^/]+)/?$' ] = 'index.php?product=$matches[1]';
@@ -203,9 +214,10 @@ class Permalink_Watcher {
 		}
 
 		/**
-		 * Register WPML filters back
+		 * Register WPML and Polylang filters back
 		 */
 		Sitepress::get()->restore_term_filters();
+		Polylang::restore_term_filters();
 
 		$rules = empty( $rules ) ? [] : $rules;
 		return $category_rules + $product_rules + $rules;

@@ -267,6 +267,7 @@ trait WordPress {
 	 * @param  int|WP_Post  $post_id Post ID or WP_Post object.
 	 * @param  string|array $size    Image size. Accepts any valid image size, or an array of width and height values in pixels.
 	 * @return false|array Returns an array (url, width, height, is_intermediate), or false, if no image is available.
+	 *                     Width and height are 0 for a content image whose dimensions are unknown (e.g. an external image).
 	 */
 	public static function get_thumbnail_with_fallback( $post_id, $size = 'thumbnail' ) {
 		if ( has_post_thumbnail( $post_id ) ) {
@@ -279,10 +280,11 @@ trait WordPress {
 			return self::validate_image_data( $image );
 		}
 
-		preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches );
-		$matches = array_filter( $matches );
-		if ( ! empty( $matches ) ) {
-			return [ $matches[1][0], 200, 200 ];
+		if ( preg_match( '/<img\s(?:[^>]*\s)?src=[\'"]([^\'"]+)[\'"][^>]*>/i', get_the_content(), $matches ) ) {
+			$image_url  = $matches[1];
+			$dimensions = self::get_content_image_dimensions( $matches[0], $image_url );
+
+			return [ $image_url, $dimensions[0], $dimensions[1] ];
 		}
 
 		$fb_image = Helper::get_post_meta( 'facebook_image_id', $post_id );
@@ -477,6 +479,30 @@ trait WordPress {
 		global $pagenow;
 
 		return $pagenow === 'site-editor.php';
+	}
+
+	/**
+	 * Get the dimensions of an image found in the post content.
+	 *
+	 * Only Media Library images are measured, using their attachment metadata.
+	 * External images are never fetched, so their dimensions are returned as 0.
+	 *
+	 * @param  string $img_tag   The <img> tag.
+	 * @param  string $image_url The image URL.
+	 * @return array Width and height, or [ 0, 0 ] if unknown.
+	 */
+	private static function get_content_image_dimensions( $img_tag, $image_url ) {
+		if ( preg_match( '/\bwp-image-(\d+)\b/', $img_tag, $id_match ) ) {
+			$attachment_id = absint( $id_match[1] );
+		} else {
+			// Skip the attachment lookup query for external images, they can't be in the Media Library.
+			$attachment_id = Url::is_external( $image_url ) ? 0 : attachment_url_to_postid( $image_url );
+		}
+
+		$image_meta = $attachment_id ? wp_get_attachment_metadata( $attachment_id ) : false;
+		$dimensions = is_array( $image_meta ) ? wp_image_src_get_dimensions( $image_url, $image_meta, $attachment_id ) : false;
+
+		return ! empty( $dimensions[0] ) && ! empty( $dimensions[1] ) ? $dimensions : [ 0, 0 ];
 	}
 
 	/**

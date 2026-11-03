@@ -42,6 +42,7 @@ class Manager {
 	 */
 	public function __construct() {
 		if ( Helper::is_heartbeat() ) {
+			$this->load_rewrite_modules();
 			return;
 		}
 
@@ -54,6 +55,29 @@ class Manager {
 		$this->action( 'after_setup_theme', 'load_modules', 2 );
 		add_action( 'rank_math/module_changed', [ '\RankMath\Admin\Watcher', 'module_changed' ], 10, 2 );
 		$this->action( 'rank_math/module_changed', 'watch_for_analytics', 10, 2 );
+	}
+
+	/**
+	 * Register the rewrite rules that must survive a heartbeat request.
+	 *
+	 * The full module system is skipped on heartbeat requests for performance,
+	 * but that also skips constructing Router and LLMS_Txt, so their `init`
+	 * callbacks (Router::init(), LLMS_Txt::add_rewrite_rule()) never call
+	 * add_rewrite_rule(). If something flushes rewrite rules while handling
+	 * that same request (e.g. a 3rd-party `heartbeat_send` callback calling
+	 * flush_rewrite_rules()), WordPress persists a rules option missing ours,
+	 * 404ing the sitemap and llms.txt until the next full flush. Loading just
+	 * these two lean classes keeps the rules registered without loading the
+	 * rest of the plugin.
+	 */
+	private function load_rewrite_modules() {
+		if ( Helper::is_module_active( 'sitemap', false ) ) {
+			new \RankMath\Sitemap\Router();
+		}
+
+		if ( Helper::is_module_active( 'llms-txt', false ) ) {
+			new \RankMath\LLMS\LLMS_Txt();
+		}
 	}
 
 	/**

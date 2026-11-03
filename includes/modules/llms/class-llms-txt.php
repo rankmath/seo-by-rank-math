@@ -28,6 +28,13 @@ class LLMS_Txt {
 	 * Class constructor.
 	 *
 	 * Registers hooks and filters for the llms.txt module.
+	 *
+	 * Note: Module\Manager also constructs this class directly on every
+	 * heartbeat request (bypassing the rest of the module system) to keep
+	 * the llms.txt rewrite rule registered — see Module\Manager::load_rewrite_modules().
+	 * Keep this constructor limited to hook registration; anything heavier
+	 * (DB queries, option writes, remote calls) would then run on every
+	 * heartbeat tick for every open admin tab.
 	 */
 	public function __construct() {
 		$this->action( 'init', 'add_rewrite_rule' );

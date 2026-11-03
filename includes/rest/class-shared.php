@@ -163,7 +163,9 @@ class Shared extends WP_REST_Controller {
 			}
 
 			if ( empty( $meta_value ) ) {
-				delete_metadata( $object_type, $object_id, $meta_key );
+				if ( Str::starts_with( 'rank_math_', $meta_key ) ) {
+					delete_metadata( $object_type, $object_id, $meta_key );
+				}
 				continue;
 			}
 

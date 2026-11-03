@@ -33,14 +33,17 @@ class PrimaryImage implements Snippet {
 			return $data;
 		}
 
-		$data['primaryImage'] = [
-			'@type'   => 'ImageObject',
-			'@id'     => $image[0],
-			'url'     => $image[0],
-			'width'   => $image[1],
-			'height'  => $image[2],
-			'caption' => isset( $image['caption'] ) ? $image['caption'] : '',
-		];
+		// Omit width and height when unknown (e.g. external content images).
+		$data['primaryImage'] = array_filter(
+			[
+				'@type'   => 'ImageObject',
+				'@id'     => $image[0],
+				'url'     => $image[0],
+				'width'   => $image[1],
+				'height'  => $image[2],
+				'caption' => isset( $image['caption'] ) ? $image['caption'] : '',
+			]
+		);
 
 		$jsonld->add_prop( 'language', $data['primaryImage'] );
 

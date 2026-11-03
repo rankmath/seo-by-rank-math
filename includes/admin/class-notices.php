@@ -16,6 +16,7 @@ use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Sitepress;
 use RankMath\Helpers\Param;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,6 +48,108 @@ class Notices implements Runner {
 		}
 		$this->permalink_changes_warning();
 		$this->react_settings_ui_notice();
+		$this->mcp_adapter_notice();
+	}
+
+	/**
+	 * Recommend the MCP Adapter plugin to existing MCP users on Rank Math admin pages when it is not active.
+	 *
+	 * @return void
+	 */
+	private function mcp_adapter_notice() {
+		$notice_id = 'rank_math_mcp_adapter_notice';
+
+		if (
+			class_exists( '\WP\MCP\Core\McpAdapter' ) ||
+			! function_exists( 'wp_get_abilities' ) ||
+			! function_exists( 'get_plugins' ) ||
+			! Str::starts_with( 'rank-math', Param::get( 'page' ) ) ||
+			! current_user_can( 'install_plugins' ) ||
+			get_option( 'rank_math_mcp_adapter_notice_dismissed' ) ||
+			! $this->is_mcp_user( get_current_user_id() )
+		) {
+			Helper::remove_notification( $notice_id );
+			return;
+		}
+
+		$message = sprintf(
+			// Translators: 1: opening anchor tag, 2: closing anchor tag.
+			__( 'For MCP features, please install and activate the %1$sWordPress MCP Adapter%2$s plugin.', 'seo-by-rank-math' ),
+			'<a href="' . esc_url( $this->get_mcp_adapter_install_url() ) . '">',
+			'</a>'
+		);
+
+		// Replace any stored copy so the link's nonce is fresh and belongs to the current user.
+		Helper::remove_notification( $notice_id );
+
+		Helper::add_notification(
+			$message,
+			[
+				'type'       => 'info',
+				'id'         => $notice_id,
+				'capability' => 'install_plugins',
+			]
+		);
+	}
+
+	/**
+	 * Get the URL that installs the MCP Adapter plugin, or activates it when it is already installed.
+	 *
+	 * @return string
+	 */
+	private function get_mcp_adapter_install_url() {
+		$plugin = 'mcp-adapter/mcp-adapter.php';
+
+		if ( ! array_key_exists( $plugin, get_plugins() ) ) {
+			// Core's installer screen links to activation once the install finishes.
+			return wp_nonce_url(
+				network_admin_url( 'update.php?action=install-plugin&plugin=mcp-adapter' ),
+				'install-plugin_mcp-adapter'
+			);
+		}
+
+		// Activate the same way Rank Math itself is active: network-wide or on this site only.
+		$admin_url = is_plugin_active_for_network( plugin_basename( RANK_MATH_FILE ) ) ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
+
+		return wp_nonce_url(
+			add_query_arg(
+				[
+					'action' => 'activate',
+					'plugin' => rawurlencode( $plugin ),
+				],
+				$admin_url
+			),
+			'activate-plugin_' . $plugin
+		);
+	}
+
+	/**
+	 * Check if the user has used MCP: MCP Adapter sessions or an MCP OAuth connection.
+	 *
+	 * @param int $user_id User ID.
+	 *
+	 * @return bool
+	 */
+	private function is_mcp_user( $user_id ) {
+		$meta = get_user_meta( $user_id );
+		if ( ! is_array( $meta ) ) {
+			return false;
+		}
+
+		$session_keys = [ 'mcp_adapter_sessions', 'mcp_adapter_sessions_' . get_current_blog_id() ];
+		foreach ( $meta as $key => $values ) {
+			$key = (string) $key;
+
+			if ( Str::starts_with( 'mcp_refresh_jti_', $key ) ) {
+				return true;
+			}
+
+			if ( in_array( $key, $session_keys, true ) && ! empty( maybe_unserialize( $values[0] ?? '' ) ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -111,6 +214,10 @@ class Notices implements Runner {
 
 		if ( 'rank-math-site-url-mismatch' === $notification_id ) {
 			update_option( 'rank_math_siteurl_mismatch_notice_dismissed', true );
+		}
+
+		if ( 'rank_math_mcp_adapter_notice' === $notification_id ) {
+			update_option( 'rank_math_mcp_adapter_notice_dismissed', true, false );
 		}
 	}
 
