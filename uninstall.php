@@ -34,7 +34,17 @@ if ( class_exists( 'ActionScheduler_DBStore' ) ) {
 }
 
 // Set rank_math_clear_data_on_uninstall to TRUE to delete all data on uninstall.
-if ( true === apply_filters( 'rank_math_clear_data_on_uninstall', false ) ) {
+$rank_math_clear_data = true === apply_filters( 'rank_math_clear_data_on_uninstall', false );
+
+// Always remove the Assistant's Application Passwords: without Rank Math active, nothing limits them.
+// The cleanup uses the WAP library's helper; skip our copy if another plugin already loaded one.
+if ( ! class_exists( 'WapClient', false ) && file_exists( __DIR__ . '/vendor/groupone/wap-client/wap-client.php' ) ) {
+	require_once __DIR__ . '/vendor/groupone/wap-client/wap-client.php';
+}
+require_once __DIR__ . '/includes/modules/agent/class-app-password-cleanup.php';
+\RankMath\Agent\App_Password_Cleanup::uninstall( $rank_math_clear_data );
+
+if ( $rank_math_clear_data ) {
 
 	if ( ! is_multisite() ) {
 		rank_math_remove_data();

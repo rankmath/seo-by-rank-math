@@ -5,7 +5,7 @@ Tags: seo, google search console, schema, redirection, xml sitemap
 Tested up to: 7.1
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.281
+Stable tag: 1.0.282
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -441,13 +441,10 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
-= 1.0.281 [Nov 03, 2026] =
-- Added support for third-party heading blocks (e.g. GenerateBlocks Headline) in the [Table of Contents Block](https://rankmath.com/kb/table-of-contents-block/) via the new `rank_math/schema/toc/heading_blocks` [filter](https://rankmath.com/kb/filters-hooks-api-developer/#headings-block-toc).
-- Fixed [Sitemaps](https://rankmath.com/kb/configure-sitemaps/) and [llms.txt](https://rankmath.com/kb/llms-txt/) URLs returning 404 errors when rewrite rules were flushed during a WordPress Heartbeat request.
-- Fixed [Schema](https://rankmath.com/kb/rich-snippets/) `ImageObject` showing a hardcoded width and height of `200` when the primary image was taken from the post content.
-- Fixed translated WooCommerce product category pages returning 404 errors with [Polylang](https://rankmath.com/kb/polylang-compatibility/) when the Remove category base option was enabled.
-- Fixed the SEO meta save routine so that clearing a field only removes Rank Math's own metadata.
-- Removed the bundled WordPress MCP Adapter package to avoid conflicts with other plugins. [MCP Tools](https://rankmath.com/kb/mcp-tools/) now require the official [MCP Adapter plugin](https://wordpress.org/plugins/mcp-adapter/).
+= 1.0.282 [Nov 10, 2026] =
+- Added [HUGE!] [Rank Math Assistant](https://rankmath.com/kb/support-agent/) to the Help & Support page with [improved safeguards](https://rankmath.com/kb/assistant-site-access/). The assistant helps connected users get instant answers to support questions directly from the plugin.
+- Improved internal code for better performance and stability.
+- Fixed Reject and Undo options in the [Fix with AI tool](https://rankmath.com/kb/fix-seo-tests-with-content-ai/), as they were not restoring the original content or the selected suggestion correctly.
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

@@ -1,8 +1,8 @@
 <?php
 /**
- * Registers the "Agent (Beta)" chat page via the WAP client library.
+ * Bootstraps the WAP agent personas and their shared configuration.
  *
- * @since      1.0.277
+ * @since      1.0.282
  * @package    RankMath
  * @subpackage RankMath
  * @author     Rank Math <support@rankmath.com>
@@ -10,10 +10,7 @@
 
 namespace RankMath\Agent;
 
-use RankMath\KB;
-use RankMath\Helpers\Param;
 use RankMath\Traits\Hooker;
-use RankMath\Traits\Grnd_Provider;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,7 +20,6 @@ defined( 'ABSPATH' ) || exit;
 class Agent {
 
 	use Hooker;
-	use Grnd_Provider;
 
 	/**
 	 * Product slug. Must match a role mapped on the WAP backend.
@@ -31,7 +27,7 @@ class Agent {
 	const PRODUCT = 'rankmath';
 
 	/**
-	 * WAP backend base URL.
+	 * WAP backend base URL (wrap-key + chat host).
 	 */
 	const SERVER_URL = 'https://wordpress-agentic-platform-production.public-default.k8spod4-cph3.ingress.k8s.g1i.one';
 
@@ -39,27 +35,42 @@ class Agent {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		$this->filter( 'wap_client_capability', 'filter_capability' );
-
 		// Support Agent.
 		new Support_Agent();
 	}
 
 	/**
-	 * Gate the WAP widget on manage_options instead of the library's own wap_use_ai.
+	 * WAP backend base URL, overridable for staging via a wp-config.php constant.
+	 *
+	 * SERVER_URL is a raw cluster hostname, so without an override there is no way
+	 * to point a site at a non-production backend short of editing this file.
 	 *
 	 * @return string
 	 */
-	public function filter_capability() {
-		return 'manage_options';
+	public static function get_server_url() {
+		return defined( 'RANK_MATH_WAP_SERVER_URL' ) ? RANK_MATH_WAP_SERVER_URL : self::SERVER_URL;
 	}
 
 	/**
-	 * GRND provider callback: mints, seals, and exchanges the credential for a GRND.
+	 * Widget string overrides shared by every Rank Math surface.
 	 *
-	 * @return array{grnd:string,expires_at:int}|\WP_Error
+	 * The library's defaults say a neutral "assistant"; these swap in the product
+	 * name where it reads as one (header, consent, alerts). Short labels whose
+	 * context is clear keep the library's plain "assistant".
+	 *
+	 * Public so PRO's Content AI embed names the assistant the same way.
+	 *
+	 * @return array<string, string>
 	 */
-	public function acquire_grnd() {
-		return $this->acquire_grnd_for( self::PRODUCT, 'Rank Math AI Assistant' );
+	public static function get_i18n() {
+		return [
+			'headerTitle'       => __( 'Rank Math Assistant', 'seo-by-rank-math' ),
+			'consentText'       => __( 'Please review and accept the {terms} for the Rank Math Assistant.', 'seo-by-rank-math' ),
+			'consentAccessText' => __( 'The Assistant uses a safe {link}WordPress Application Password{/link} with limited permissions, which you can remove at any time.', 'seo-by-rank-math' ),
+			'consentRequired'   => __( 'You need to accept the Terms & Conditions to use Rank Math Assistant.', 'seo-by-rank-math' ),
+			'errorAuthFailed'   => __( 'Could not connect to Rank Math Assistant. Please reload the page, or contact support if this continues.', 'seo-by-rank-math' ),
+			// Only Rank Math abilities can run while "Manage your WordPress site" is locked to deny.
+			'applying'          => __( 'Interacting with Rank Math…', 'seo-by-rank-math' ),
+		];
 	}
 }

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.281\n"
+"Project-Id-Version: Rank Math SEO 1.0.282\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-03T05:45:56+00:00\n"
+"POT-Creation-Date: 2026-11-10T08:59:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: seo-by-rank-math\n"
@@ -1036,9 +1036,6 @@ msgid "WordPress General Settings"
 msgstr ""
 
 msgid "Rank Math"
-msgstr ""
-
-msgid "Help &amp; Support"
 msgstr ""
 
 msgid "Halloween Sale"
@@ -2611,6 +2608,9 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
+msgid "Agent"
+msgstr ""
+
 msgid "AMP"
 msgstr ""
 
@@ -2862,6 +2862,95 @@ msgid "Ignore Query Parameters"
 msgstr ""
 
 msgid "Turn ON to ignore all query parameters (the part after a question mark in a URL) when logging 404 errors."
+msgstr ""
+
+msgid "Rank Math Assistant"
+msgstr ""
+
+msgid "Please review and accept the {terms} for the Rank Math Assistant."
+msgstr ""
+
+msgid "The Assistant uses a safe {link}WordPress Application Password{/link} with limited permissions, which you can remove at any time."
+msgstr ""
+
+msgid "You need to accept the Terms & Conditions to use Rank Math Assistant."
+msgstr ""
+
+msgid "Could not connect to Rank Math Assistant. Please reload the page, or contact support if this continues."
+msgstr ""
+
+msgid "Interacting with Rank Math…"
+msgstr ""
+
+msgid "Help & Support"
+msgstr ""
+
+msgid "Manage your Rank Math plugin"
+msgstr ""
+
+msgid "Let the agent view and update your Rank Math settings."
+msgstr ""
+
+msgid "Allow"
+msgstr ""
+
+msgid "Ask permission"
+msgstr ""
+
+msgid "Deny"
+msgstr ""
+
+msgid "Manage your WordPress site"
+msgstr ""
+
+msgid "Let the agent make changes directly on your WordPress site."
+msgstr ""
+
+msgid "Coming soon"
+msgstr ""
+
+msgid "Connect your Rank Math account for free to start using the Help & Support assistant."
+msgstr ""
+
+msgid "Account Connection Required"
+msgstr ""
+
+msgid "Not Connected"
+msgstr ""
+
+msgid "Connect Now"
+msgstr ""
+
+msgid "Takes less than 30 seconds to get started"
+msgstr ""
+
+msgid "Browse help articles"
+msgstr ""
+
+msgid "Rank Math Assistant requires HTTPS to use WordPress Application Passwords. It will be available once this site is served over HTTPS."
+msgstr ""
+
+msgid "Rank Math Assistant is unavailable because WordPress Application Passwords have been disabled on this site — for example, by a security plugin. Enable Application Passwords to use the assistant."
+msgstr ""
+
+msgid "Rank Math Assistant Unavailable"
+msgstr ""
+
+msgid "Unavailable"
+msgstr ""
+
+#. translators: %s: Rank Math Knowledge Base URL
+msgid "Need help? Visit our <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Knowledge Base</a> for support."
+msgstr ""
+
+msgid "No authenticated WordPress user."
+msgstr ""
+
+msgid "Connect your Rank Math account before using Rank Math Assistant."
+msgstr ""
+
+#. translators: %d: HTTP status code
+msgid "GRND exchange with the Rank Math issuer failed (HTTP %d)."
 msgstr ""
 
 msgid "New!"
@@ -7382,12 +7471,6 @@ msgstr ""
 msgid "Need help? View tutorial →"
 msgstr ""
 
-msgid "Connect Now"
-msgstr ""
-
-msgid "Not Connected"
-msgstr ""
-
 msgid "I just installed @RankMathSEO #WordPress Plugin. It looks great! %s"
 msgstr ""
 
@@ -9388,13 +9471,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-msgid "Account Connection Required"
-msgstr ""
-
 msgid "Connect your account for free to start tracking your brand's AI visibility."
-msgstr ""
-
-msgid "Takes less than 30 seconds to get started"
 msgstr ""
 
 msgid "Content AI score"

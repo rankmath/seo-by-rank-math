@@ -343,6 +343,12 @@ class Manager {
 			'class' => 'RankMath\Status\Status',
 		];
 
+		$modules['agent'] = [
+			'title' => esc_html__( 'Agent', 'seo-by-rank-math' ),
+			'only'  => 'internal',
+			'class' => 'RankMath\Agent\Agent',
+		];
+
 		return $modules;
 	}
 

@@ -17,6 +17,7 @@ use RankMath\Admin\Watcher;
 use RankMath\Helper;
 use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Admin\Admin_Helper;
+use RankMath\Agent\App_Password_Cleanup;
 use RankMath\Role_Manager\Capability_Manager;
 
 defined( 'ABSPATH' ) || exit;
@@ -60,6 +61,9 @@ class Installer {
 	 * @param bool $network_wide Whether the plugin is being activated network-wide.
 	 */
 	public function deactivation( $network_wide = false ) {
+		// Application Passwords are network-wide, so revoke them once rather than per site.
+		App_Password_Cleanup::deactivate();
+
 		if ( ! is_multisite() || ! $network_wide ) {
 			$this->deactivate();
 			return;

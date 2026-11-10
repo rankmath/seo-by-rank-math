@@ -46,6 +46,7 @@ class KB {
 		'logo'                            => 'https://rankmath.com/wordpress/plugin/seo-suite/',
 		'offer'                           => 'https://rankmath.com/offer/',
 		'terms-and-conditions'            => 'https://rankmath.com/terms-and-conditions/',
+		'privacy-policy'                  => 'https://rankmath.com/privacy-policy/',
 
 		// Knowledgebase.
 		'knowledgebase'                   => 'https://rankmath.com/kb/',
@@ -157,6 +158,9 @@ class KB {
 		// AI Visibility.
 		'ai-visibility'                   => 'https://rankmath.com/kb/track-ai-visibility/',
 		'ai-visibility-connect'           => 'https://rankmath.com/kb/how-to-connect-or-disconnect-rank-math/',
+
+		// AI Assistant.
+		'assistant-site-access'           => 'https://rankmath.com/kb/assistant-site-access/',
 
 		// Social Media.
 		'yt-link'                         => 'http://youtube.com/rankmath',
