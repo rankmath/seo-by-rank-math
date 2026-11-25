@@ -425,6 +425,7 @@ class Post_Type implements Provider {
 				ORDER BY p.post_modified DESC LIMIT %d OFFSET %d
 			)
 			o JOIN {$wpdb->posts} l ON l.ID = o.ID
+			ORDER BY l.post_modified DESC
 		";
 
 		$posts = DB_Helper::get_results( $wpdb->prepare( $sql, $count, $offset ) );
