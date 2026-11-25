@@ -332,12 +332,12 @@ class Api {
 	 */
 	private function get_payload( $urls ) {
 		return wp_json_encode(
-			[
+			$this->do_filter( 'instant_indexing/indexnow_payload', [
 				'host'        => $this->get_host(),
 				'key'         => $this->get_key(),
 				'keyLocation' => $this->get_key_location( 'request_payload' ),
 				'urlList'     => (array) $urls,
-			]
+			])
 		);
 	}
 
