@@ -15,6 +15,7 @@ namespace RankMath\OpenGraph;
 
 use RankMath\Helper;
 use RankMath\Post;
+use RankMath\Helpers\Attachment;
 use RankMath\Helpers\Str;
 use RankMath\Helpers\Arr;
 
@@ -200,7 +201,8 @@ class Twitter extends OpenGraph {
 	 * Only used when OpenGraph is inactive or Summary Large Image card is chosen.
 	 */
 	public function image() {
-		$images = new Image( false, $this );
+		$images           = new Image( false, $this );
+		$custom_image_alt = $this->get_image_alt();
 		foreach ( $images->get_images() as $image_url => $image_meta ) {
 			$overlay = $this->get_overlay_image( $this->prefix );
 			if ( $overlay && ! empty( $image_meta['id'] ) ) {
@@ -208,8 +210,32 @@ class Twitter extends OpenGraph {
 				$image_url = admin_url( "admin-ajax.php?action=rank_math_overlay_thumb&id={$image_meta['id']}&type={$overlay}&hash={$secret}" );
 			}
 
+			$image_alt = $custom_image_alt;
+			if ( ! Str::is_non_empty( $image_alt ) && ! empty( $image_meta['id'] ) ) {
+				$image_alt = Attachment::get_alt_tag( $image_meta['id'] );
+			}
+
 			$this->tag( 'twitter:image', esc_url_raw( $image_url ) );
+			$this->tag( 'twitter:image:alt', $image_alt );
 		}
+	}
+
+	/**
+	 * Get Twitter image alt text for the current object.
+	 *
+	 * @return string
+	 */
+	private function get_image_alt() {
+		if ( is_category() || is_tag() || is_tax() ) {
+			return Helper::get_term_meta( 'twitter_image_alt' );
+		}
+
+		if ( is_author() ) {
+			return Helper::get_user_meta( 'twitter_image_alt' );
+		}
+
+		$post_id = Post::get_page_id();
+		return $post_id ? Helper::get_post_meta( 'twitter_image_alt', $post_id ) : '';
 	}
 
 	/**

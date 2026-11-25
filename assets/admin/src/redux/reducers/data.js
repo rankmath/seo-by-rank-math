@@ -50,6 +50,7 @@ const getDefaultState = ( rankMath ) => {
 		twitterImage: serpData.twitterImage,
 		twitterAuthor: serpData.twitterAuthor,
 		twitterImageID: serpData.twitterImageID,
+		twitterImageAlt: serpData.twitterImageAlt,
 		twitterCardType: serpData.twitterCardType,
 		twitterUseFacebook: serpData.twitterUseFacebook,
 		twitterDescription: serpData.twitterDescription,
