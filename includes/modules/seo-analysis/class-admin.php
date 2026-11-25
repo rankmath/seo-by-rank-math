@@ -64,7 +64,7 @@ class Admin extends Base {
 		);
 		parent::__construct();
 
-		if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || $this->page->is_current_page() ) {
+		if ( Helper::is_ajax() || $this->page->is_current_page() ) {
 			include_once 'seo-analysis-tests.php';
 			$this->analyzer = new SEO_Analyzer();
 			Helper::add_json( 'results', $this->analyzer->get_results_from_storage() );

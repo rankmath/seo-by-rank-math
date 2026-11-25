@@ -66,7 +66,7 @@ class Content_AI_Page {
 	public function register_admin_page() {
 		$uri = untrailingslashit( plugin_dir_url( __FILE__ ) );
 
-		if ( 'rank-math-content-ai-page' === Param::get( 'page' ) ) {
+		if ( $this->should_localize_page_data() ) {
 			$this->content_ai->localized_data( [ 'isContentAIPage' => true ] );
 		}
 
@@ -104,6 +104,20 @@ class Content_AI_Page {
 				],
 			]
 		);
+	}
+
+	/**
+	 * Whether the Content AI page data should be localized for the current request.
+	 *
+	 * This runs on `init`, which also fires on the front end, so the `page` query
+	 * arg alone is not enough: the data contains the site's connection credentials.
+	 *
+	 * @return bool
+	 */
+	private function should_localize_page_data() {
+		return is_admin()
+			&& 'rank-math-content-ai-page' === Param::get( 'page' )
+			&& Helper::has_cap( 'content_ai' );
 	}
 
 	/**

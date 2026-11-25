@@ -51,6 +51,13 @@ class Divi {
 			return;
 		}
 
+		$this->action( 'divi_visual_builder_assets_before_enqueue_scripts', 'register_rankmath_seo_modal_builder_bar_button' );
+
+		// The editor runs in Divi 5's top window; its app window only needs the SEO modal's scripts.
+		if ( self::is_divi_5_app_window() ) {
+			return;
+		}
+
 		$this->screen = new Screen();
 		$this->screen->load_screen( 'post' );
 
@@ -108,6 +115,9 @@ class Divi {
 	 * same version as the one RankMath requires.
 	 */
 	public function register_rankmath_react() {
+		if ( $this->is_divi_5_or_later() ) {
+			return;
+		}
 		$path   = site_url( '/wp-includes/js/dist/vendor/' );
 		$suffix = wp_scripts_get_suffix();
 		wp_register_script( 'rm-react', "{$path}react{$suffix}.js", [ 'wp-polyfill', 'react' ], '16.13.1', true );
@@ -170,6 +180,90 @@ class Divi {
 	}
 
 	/**
+	 * Register RankMath SEO Modal Builder Bar Button.
+	 *
+	 * @return void
+	 */
+	public static function register_rankmath_seo_modal_builder_bar_button() {
+		// @phpstan-ignore-next-line
+		if ( et_core_is_fb_enabled() && et_builder_d5_enabled() ) {
+			// @phpstan-ignore-next-line
+			\ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
+				[
+					'name'    => 'rm-seo-modal-builder-bar-button',
+					'version' => '1.0.0',
+					'script'  => [
+						'src'                => rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/js/add-builder-bar-button.js',
+						'deps'               => [
+							'divi-app-ui',
+							'divi-data',
+							'wp-i18n',
+						],
+						'enqueue_top_window' => false,
+						'enqueue_app_window' => true,
+						'args'               => [
+							'in_footer' => true,
+						],
+					],
+				]
+			);
+
+			// @phpstan-ignore-next-line
+			\ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
+				[
+					'name'    => 'rm-seo-modal',
+					'version' => '1.0.0',
+					'script'  => [
+						'src'                => rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/js/bundle.js',
+						'deps'               => [
+							'divi-modal',
+							'divi-error-boundary',
+							'divi-keyboard-shortcuts',
+							'divi-vendor-wp-hooks',
+							'wp-i18n',
+						],
+						'enqueue_top_window' => false,
+						'enqueue_app_window' => true,
+						// Before Divi's modal library applies the modalMapping filter.
+						'args'               => [
+							'in_footer' => false,
+						],
+					],
+				]
+			);
+		}
+	}
+
+	/**
+	 * Returns true if the Divi version is 5 or later.
+	 *
+	 * @return bool
+	 */
+	public static function is_divi_5_or_later() {
+		return defined( 'ET_CORE_VERSION' ) && version_compare( ET_CORE_VERSION, '5.0.0', '>=' );
+	}
+
+	/**
+	 * Returns true if Divi 5's builder is enabled.
+	 *
+	 * @return bool
+	 */
+	public static function is_divi_5_builder() {
+		// @phpstan-ignore-next-line
+		return function_exists( 'et_builder_d5_enabled' ) && et_builder_d5_enabled();
+	}
+
+	/**
+	 * Returns true if the current request is Divi 5's app window ( the builder iframe ).
+	 *
+	 * @return bool
+	 */
+	public static function is_divi_5_app_window() {
+		// @phpstan-ignore-next-line
+		return class_exists( '\ET\Builder\Framework\Utility\Conditions' ) && \ET\Builder\Framework\Utility\Conditions::is_vb_app_window();
+	}
+
+	/**
 	 * Enqueue scripts.
 	 */
 	public function footer_enqueue_scripts() {
@@ -181,10 +275,7 @@ class Divi {
 		$divi_deps = [
 			'jquery',
 			'lodash',
-			'rm-react',
-			'rm-react-dom',
 			'rm-set-window-lodash',
-			'et-dynamic-asset-helpers',
 			'wp-api-fetch',
 			'wp-block-editor',
 			'wp-components',
@@ -199,6 +290,11 @@ class Divi {
 			'rank-math-app',
 		];
 
+		if ( ! $this->is_divi_5_or_later() ) {
+			// React shims first, so wp.element uses them - see register_rankmath_react().
+			$divi_deps = array_merge( [ 'rm-react', 'rm-react-dom' ], $divi_deps, [ 'et-dynamic-asset-helpers' ] );
+		}
+
 		if ( is_admin_bar_showing() && Helper::has_cap( 'admin_bar' ) ) {
 			wp_enqueue_style( 'rank-math', rank_math()->assets() . 'css/rank-math.css', null, rank_math()->version );
 			wp_enqueue_script( 'rank-math', rank_math()->assets() . 'js/rank-math.js', [ 'jquery' ], rank_math()->version, true );
@@ -210,10 +306,14 @@ class Divi {
 
 		wp_register_script( 'rank-math-analyzer', rank_math()->plugin_url() . 'assets/admin/js/analyzer.js', null, rank_math()->version, true );
 		wp_enqueue_script( 'rank-math-editor', rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/js/divi.js', $divi_deps, rank_math()->version, true );
-		wp_enqueue_script( 'rank-math-divi-iframe', rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/js/divi-iframe.js', [ 'jquery', 'lodash' ], rank_math()->version, true );
+
+		// Divi 4 only: relays builder events from its iframe.
+		if ( ! self::is_divi_5_builder() ) {
+			wp_enqueue_script( 'rank-math-divi-iframe', rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/js/divi-iframe.js', [ 'jquery', 'lodash' ], rank_math()->version, true );
+			wp_set_script_translations( 'rank-math-divi-iframe', 'seo-by-rank-math', rank_math()->plugin_dir() . 'languages/' );
+		}
 
 		wp_set_script_translations( 'rank-math-app', 'seo-by-rank-math', rank_math()->plugin_dir() . 'languages/' );
-		wp_set_script_translations( 'rank-math-divi-iframe', 'seo-by-rank-math', rank_math()->plugin_dir() . 'languages/' );
 		wp_set_script_translations( 'rank-math-editor', 'seo-by-rank-math', rank_math()->plugin_dir() . 'languages/' );
 		wp_set_script_translations( 'rank-math-analyzer', 'seo-by-rank-math', rank_math()->plugin_dir() . 'languages/' );
 
@@ -298,6 +398,11 @@ class Divi {
 	 * Print React containers onto the screen.
 	 */
 	public function print_react_containers() {
+		// Divi 5 needs neither: its native SEO modal renders the app root, and there's no settings bar.
+		if ( self::is_divi_5_builder() ) {
+			return;
+		}
+
 		echo '<div id="rank-math-rm-app-root" class="et_fb_ignore_iframe"></div>';
 		echo '<div id="rank-math-rm-settings-bar-root" class="et_fb_ignore_iframe"></div>';
 	}

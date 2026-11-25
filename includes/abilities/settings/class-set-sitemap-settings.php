@@ -50,6 +50,7 @@ class Set_Sitemap_Settings extends Abstract_Ability {
 					'properties'           => [
 						'items_per_page'         => [
 							'type'        => 'integer',
+							'minimum'     => 1,
 							'title'       => esc_html__( 'Links Per Sitemap', 'seo-by-rank-math' ),
 							'description' => esc_html__( 'Max number of links on each sitemap page.', 'seo-by-rank-math' ),
 						],
@@ -147,7 +148,7 @@ class Set_Sitemap_Settings extends Abstract_Ability {
 		$sitemap = $this->get_sitemap_option();
 
 		if ( isset( $input['items_per_page'] ) ) {
-			$sitemap['items_per_page'] = (string) absint( $input['items_per_page'] );
+			$sitemap['items_per_page'] = (string) max( 1, absint( $input['items_per_page'] ) );
 		}
 
 		$this->apply_toggle_fields(

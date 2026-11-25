@@ -18,6 +18,7 @@ use WP_REST_Request;
 use WP_REST_Controller;
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
+use RankMath\Rest\Rest_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -267,12 +268,15 @@ class Rest extends WP_REST_Controller {
 	 * @return bool                     Whether the API key matches or not.
 	 */
 	public function has_ping_permission( WP_REST_Request $request ) {
-		if ( empty( $this->registered ) ) {
+		if ( empty( $this->registered ) || ! is_array( $this->registered ) ) {
 			return false;
 		}
 
-		return $request->get_param( 'apiKey' ) === $this->registered['api_key'] &&
-			$request->get_param( 'username' ) === $this->registered['username'];
+		// Evaluate both comparisons so the response time doesn't reveal which value was wrong.
+		$api_key_matches  = Rest_Helper::secrets_match( $this->registered['api_key'] ?? null, $request->get_param( 'apiKey' ) );
+		$username_matches = Rest_Helper::secrets_match( $this->registered['username'] ?? null, $request->get_param( 'username' ) );
+
+		return $api_key_matches && $username_matches;
 	}
 
 	/**

@@ -60,6 +60,11 @@ class Content_AI {
 	 * @param array $data Localized data for posts.
 	 */
 	public function localized_data( $data = [] ) {
+		// The connection data holds the site's API key. Never expose it to users who cannot use Content AI.
+		if ( ! Helper::has_cap( 'content_ai' ) ) {
+			return;
+		}
+
 		$refresh_date = Helper::get_content_ai_refresh_date();
 		Helper::add_json(
 			'contentAI',

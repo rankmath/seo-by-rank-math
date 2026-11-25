@@ -380,7 +380,7 @@ class Helper {
 	public static function is_plugin_update_disabled() {
 		return ! apply_filters_ref_array( 'auto_update_plugin', [ true, (object) [] ] )
 			|| apply_filters_ref_array( 'automatic_updater_disabled', [ false ] )
-			|| ( defined( 'DISALLOW_FILE_MODS' ) && DISALLOW_FILE_MODS )
+			|| ! wp_is_file_mod_allowed( 'automatic_updater' )
 			|| ( defined( 'AUTOMATIC_UPDATER_DISABLED' ) && AUTOMATIC_UPDATER_DISABLED );
 	}
 

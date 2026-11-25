@@ -30,7 +30,10 @@ $cmb->add_field(
 		'name'       => esc_html__( 'Links Per Sitemap', 'seo-by-rank-math' ),
 		'desc'       => esc_html__( 'Max number of links on each sitemap page.', 'seo-by-rank-math' ),
 		'default'    => '200',
-		'attributes' => [ 'type' => 'number' ],
+		'attributes' => [
+			'type' => 'number',
+			'min'  => 1,
+		],
 		'classes'    => 'rank-math-advanced-option',
 	]
 );

@@ -356,4 +356,23 @@ class Rest_Helper {
 		}
 		return true;
 	}
+
+	/**
+	 * Compare a secret sent in a request with the stored one, in constant time.
+	 *
+	 * Fails closed: both values must be non-empty strings. Use this for every
+	 * route that accepts the site API key (or other registration data) as its credential.
+	 *
+	 * @param mixed $known    The stored value.
+	 * @param mixed $provided The value sent in the request.
+	 *
+	 * @return bool
+	 */
+	public static function secrets_match( $known, $provided ) {
+		if ( ! is_string( $known ) || ! is_string( $provided ) || '' === $known || '' === $provided ) {
+			return false;
+		}
+
+		return hash_equals( $known, $provided );
+	}
 }

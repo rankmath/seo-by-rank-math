@@ -1,11 +1,11 @@
-=== Rank Math SEO – AI SEO Tools to Dominate SEO Rankings ===
+=== Rank Math SEO – Advanced Schema & AI SEO Tools to Dominate SEO Rankings ===
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, google search console, schema, redirection, xml sitemap
 Tested up to: 7.1
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.282
+Stable tag: 1.0.283
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -441,10 +441,12 @@ Terms of service: https://developers.facebook.com/terms/
 
 == Changelog ==
 
-= 1.0.282 [Nov 10, 2026] =
-- Added [HUGE!] [Rank Math Assistant](https://rankmath.com/kb/support-agent/) to the Help & Support page with [improved safeguards](https://rankmath.com/kb/assistant-site-access/). The assistant helps connected users get instant answers to support questions directly from the plugin.
-- Improved internal code for better performance and stability.
-- Fixed Reject and Undo options in the [Fix with AI tool](https://rankmath.com/kb/fix-seo-tests-with-content-ai/), as they were not restoring the original content or the selected suggestion correctly.
+= 1.0.283 [Nov 25, 2026] =
+- Added Compatibility with the [Divi 5 editor](https://rankmath.com/blog/divi-seo/), so the SEO meta box now works in both Divi 4 and Divi 5.
+- Improved the handling of [Content AI](https://rankmath.com/kb/content-ai-overview/) connection data and permissions.
+- Fixed the post Save button, which was not activated after changing the Redirect settings in the [Advanced Tab](https://rankmath.com/kb/advanced-tab/#redirect) of the Rank Math meta box.
+- Fixed the Links Per Sitemap option in the [Sitemap settings](https://rankmath.com/kb/configure-sitemaps/), which could be set below 1 previously.
+- Fixed a UI issue with the SEO test category score badge.
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

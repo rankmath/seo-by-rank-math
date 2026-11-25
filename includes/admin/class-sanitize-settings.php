@@ -126,6 +126,9 @@ class Sanitize_Settings {
 
 			case 'console_caching_control':
 				return self::sanitize_cache_control( $value );
+
+			case 'items_per_page':
+				return self::sanitize_items_per_page( $value );
 		}
 
 		// Returning null means no special handling; fall back to type-based logic.
@@ -242,6 +245,17 @@ class Sanitize_Settings {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Handles sanitization for the Sitemap Links Per Sitemap option. Must be at least 1.
+	 *
+	 * @param mixed $value The unsanitized value from the form.
+	 *
+	 * @return string Sanitized value to be stored.
+	 */
+	private static function sanitize_items_per_page( $value ) {
+		return (string) max( 1, absint( $value ) );
 	}
 
 	/**

@@ -21,6 +21,13 @@ defined( 'ABSPATH' ) || exit;
 class Bulk_Image_Alt extends \WP_Background_Process {
 
 	/**
+	 * Largest image, in bytes, downloaded for alt text generation (4 MB).
+	 *
+	 * @var int
+	 */
+	const MAX_IMAGE_SIZE = 4 * 1024 * 1024;
+
+	/**
 	 * Action.
 	 *
 	 * @var string
@@ -270,7 +277,15 @@ class Bulk_Image_Alt extends \WP_Background_Process {
 		}
 
 		// Get image content.
-		$response = wp_remote_get( $image_url, [ 'timeout' => 30 ] );
+		// Use the safe variant so URLs pointing at internal hosts are rejected.
+		// Cap the download so a large file can't exhaust the worker's memory.
+		$response = wp_safe_remote_get(
+			$image_url,
+			[
+				'timeout'             => 30,
+				'limit_response_size' => self::MAX_IMAGE_SIZE,
+			]
+		);
 		if ( is_wp_error( $response ) ) {
 			return '';
 		}
@@ -281,7 +296,8 @@ class Bulk_Image_Alt extends \WP_Background_Process {
 		}
 
 		$image_content = wp_remote_retrieve_body( $response );
-		if ( empty( $image_content ) ) {
+		// A body that reached the cap was truncated, so it isn't a usable image.
+		if ( empty( $image_content ) || strlen( $image_content ) >= self::MAX_IMAGE_SIZE ) {
 			return '';
 		}
 

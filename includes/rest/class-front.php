@@ -73,7 +73,7 @@ class Front extends WP_REST_Controller {
 		$token = $request->get_param( 'token' );
 		$data  = Admin_Helper::get_registration_data();
 
-		return isset( $data['api_key'] ) && $token === $data['api_key'];
+		return is_array( $data ) && Rest_Helper::secrets_match( $data['api_key'] ?? null, $token );
 	}
 
 	/**
@@ -183,10 +183,10 @@ class Front extends WP_REST_Controller {
 	private function get_disconnect_site_args() {
 		return [
 			'token' => [
-				'type'              => 'string',
-				'required'          => true,
-				'description'       => esc_html__( 'Site token', 'seo-by-rank-math' ),
-				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
+				'type'        => 'string',
+				'required'    => true,
+				'description' => esc_html__( 'Site token', 'seo-by-rank-math' ),
+				// No validate_callback: an empty token must reach check_api_key() and be rejected with 401/403.
 			],
 		];
 	}

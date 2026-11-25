@@ -92,6 +92,24 @@ class Lock_Modified_Date {
 			return false;
 		}
 
+		if ( \RankMath\Divi\Divi::is_divi_5_or_later() ) {
+			global $wp_rest_server;
+
+			$divi_data = $wp_rest_server ? json_decode( $wp_rest_server->get_raw_data(), true ) : null;
+
+			// Only treat this as a Divi 5 save when the request actually carries Divi's own
+			// save payload shape. is_divi_5_or_later() only tells us the theme is Divi 5, not
+			// that this particular save came from it - falling through here lets Block Editor,
+			// Classic Editor, Quick Edit, etc. keep using the generic check below.
+			if ( isset( $divi_data['options']['conditional_tags'] ) ) {
+				if ( ! current_user_can( 'edit_post', $post_id ) ) {
+					return false;
+				}
+
+				return ! empty( $divi_data['options']['conditional_tags']['lock_modified_date'] );
+			}
+		}
+
 		if ( Param::request( 'action' ) === 'et_fb_ajax_save' ) {
 			if (
 				empty( $_REQUEST['et_fb_save_nonce'] ) ||

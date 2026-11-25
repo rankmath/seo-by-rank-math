@@ -159,7 +159,7 @@ trait Conditional {
 		return apply_filters(
 			'rank_math/can_edit_file',
 			( ! defined( 'DISALLOW_FILE_EDIT' ) || ! DISALLOW_FILE_EDIT ) &&
-			( ! defined( 'DISALLOW_FILE_MODS' ) || ! DISALLOW_FILE_MODS )
+			wp_is_file_mod_allowed( 'rank_math_can_edit_file' )
 		);
 	}
 
@@ -308,7 +308,7 @@ trait Conditional {
 	 * @return bool Returns true when the page is loaded via ajax.
 	 */
 	public static function is_ajax() {
-		return function_exists( 'wp_doing_ajax' ) ? wp_doing_ajax() : defined( 'DOING_AJAX' ) && DOING_AJAX;
+		return wp_doing_ajax();
 	}
 
 	/**
@@ -317,7 +317,7 @@ trait Conditional {
 	 * @return bool Returns true when the page is loaded via cron.
 	 */
 	public static function is_cron() {
-		return function_exists( 'wp_doing_cron' ) ? wp_doing_cron() : defined( 'DOING_CRON' ) && DOING_CRON;
+		return wp_doing_cron();
 	}
 
 	/**

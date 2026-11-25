@@ -124,6 +124,17 @@ class Bulk_Actions {
 			return $redirect;
 		}
 
+		if ( ! Helper::has_cap( 'content_ai' ) ) {
+			return $redirect;
+		}
+
+		// Decide the object type once so the capability check matches how the IDs are processed below.
+		$is_taxonomy = Admin_Helper::is_term_listing();
+		$object_ids  = $this->get_editable_object_ids( $object_ids, $is_taxonomy ? 'edit_term' : 'edit_post' );
+		if ( empty( $object_ids ) ) {
+			return $redirect;
+		}
+
 		if ( ! empty( get_option( 'rank_math_content_ai_posts' ) ) ) {
 			Helper::add_notification(
 				esc_html__( 'Another bulk editing process is already running. Please try again later after the existing process is complete.', 'seo-by-rank-math' ),
@@ -151,15 +162,14 @@ class Bulk_Actions {
 			$action = 'description';
 		}
 
-		$is_post_list = Admin_Helper::is_post_list();
-		$data         = [
+		$data = [
 			'action'      => $action,
 			'language'    => Helper::get_settings( 'general.content_ai_language', Helper::content_ai_default_language() ),
 			'posts'       => [],
-			'is_taxonomy' => ! $is_post_list,
+			'is_taxonomy' => $is_taxonomy,
 		];
 
-		$method = $is_post_list ? 'get_post_data' : 'get_term_data';
+		$method = $is_taxonomy ? 'get_term_data' : 'get_post_data';
 		foreach ( $object_ids as $object_id ) {
 			$data['posts'][] = $this->$method( $object_id, $action );
 		}
@@ -175,6 +185,11 @@ class Bulk_Actions {
 	 * @param array $object_ids Attachment Ids.
 	 */
 	public function generate_image_alt( $object_ids ) {
+		$object_ids = $this->get_editable_object_ids( (array) $object_ids, 'edit_post' );
+		if ( empty( $object_ids ) ) {
+			return;
+		}
+
 		$data = [
 			'action' => 'image_alt',
 			'posts'  => [],
@@ -201,7 +216,6 @@ class Bulk_Actions {
 				continue;
 			}
 
-			$object                      = get_post( $object_id );
 			$data['posts'][ $object_id ] = array_filter( array_values( $images ) );
 		}
 
@@ -259,6 +273,25 @@ class Bulk_Actions {
 		Bulk_Edit_SEO_Meta::get()->cancel();
 		Helper::remove_notification( 'rank_math_content_ai_posts_started' );
 		return __( 'Bulk Editing Process Successfully Cancelled', 'seo-by-rank-math' );
+	}
+
+	/**
+	 * Keep only the objects the current user is allowed to edit.
+	 *
+	 * @param array  $object_ids Post, attachment or term IDs.
+	 * @param string $capability Meta capability to check against each ID.
+	 *
+	 * @return array Editable object IDs.
+	 */
+	private function get_editable_object_ids( $object_ids, $capability ) {
+		return array_values(
+			array_filter(
+				array_map( 'absint', $object_ids ),
+				function ( $object_id ) use ( $capability ) {
+					return $object_id && current_user_can( $capability, $object_id );
+				}
+			)
+		);
 	}
 
 	/**

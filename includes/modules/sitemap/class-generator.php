@@ -149,7 +149,8 @@ class Generator extends XML {
 	 * @return string
 	 */
 	public function build_sitemap( $type, $page ) {
-		$this->max_entries = absint( Helper::get_settings( 'sitemap.items_per_page', 100 ) );
+		// Never allow less than 1 entry per sitemap, it is used as a divisor by the providers.
+		$this->max_entries = max( 1, absint( Helper::get_settings( 'sitemap.items_per_page', 100 ) ) );
 
 		/**
 		 * Filter the type of sitemap to build.

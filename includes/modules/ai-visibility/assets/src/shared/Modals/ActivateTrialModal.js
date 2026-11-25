@@ -180,14 +180,14 @@ const ActivatingState = () => {
 	)
 }
 
+/** Quick Start Guide video shown in the trial success modal. */
+const QUICK_START_VIDEO_URL = 'https://www.youtube.com/embed/oB82NRtkrkg?autoplay=1'
+
 /**
  * Success state — "Welcome to AI Visibility" with the Go to Dashboard CTA.
  *
  * @return {JSX.Element} Trial success modal.
  */
-// Placeholder - swap this URL for the real quick-start guide video when ready.
-const QUICK_START_VIDEO_URL = 'https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1'
-
 const SuccessState = () => {
 	const ns = 'rank-math-ai-visibility-trial-success'
 	const [ isPlaying, setIsPlaying ] = useState( false )
