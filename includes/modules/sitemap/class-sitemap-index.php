@@ -27,7 +27,7 @@ class Sitemap_Index implements Runner {
 	 * The hooks.
 	 */
 	public function hooks() {
-		$this->filter( 'robots_txt', 'add_sitemap_directive', 0, 2 );
+		$this->filter( 'robots_txt', 'add_sitemap_directive', 10, 2 );
 		$this->filter( 'redirect_canonical', 'redirect_canonical' );
 	}
 
